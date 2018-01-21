@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -401,8 +400,7 @@ namespace FTAnalyzer
         public string GetStandardisedName(bool IsMale, string name)
         {
             StandardisedName gIn = new StandardisedName(IsMale, name);
-            StandardisedName gOut;
-            names.TryGetValue(gIn, out gOut);
+            names.TryGetValue(gIn, out StandardisedName gOut);
             if (gOut == null)
                 return name;
             return gOut.Name;
@@ -562,8 +560,7 @@ namespace FTAnalyzer
             {
                 if (!jobs.Contains(f.Comment))
                 {
-                    List<Individual> workers;
-                    if (!occupations.TryGetValue(f.Comment, out workers))
+                    if (!occupations.TryGetValue(f.Comment, out List<Individual> workers))
                     {
                         workers = new List<Individual>();
                         occupations.Add(f.Comment, workers);
@@ -740,8 +737,7 @@ namespace FTAnalyzer
 //            return individuals.FirstOrDefault(i => i.IndividualID == individualID);
             if (string.IsNullOrEmpty(individualID))
                 return null;
-            Individual person;
-            individualLookup.TryGetValue(individualID, out person);
+            individualLookup.TryGetValue(individualID, out Individual person);
             return person;
         }
 
@@ -2985,8 +2981,7 @@ namespace FTAnalyzer
         public HashSet<string> UnrecognisedCensusReferencesNotes()
         {
             HashSet<string> result = new HashSet<string>();
-            Predicate<Individual> predicate = i => i.UnrecognisedCensusNotes.Length > 0;
-            IEnumerable<Individual> unrecognised = AllIndividuals.Filter(predicate);
+            IEnumerable<Individual> unrecognised = AllIndividuals.Filter(i => i.UnrecognisedCensusNotes.Length > 0);
             foreach (Individual i in unrecognised)
                 result.Add(i.UnrecognisedCensusNotes + "\n--------------------------------------------------------------------------------\n");
             return result;

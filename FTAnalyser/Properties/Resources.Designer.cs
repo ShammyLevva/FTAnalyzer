@@ -82,26 +82,6 @@ namespace FTAnalyzer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap High_Res_Logo_100x100 {
-            get {
-                object obj = ResourceManager.GetObject("High Res Logo 100x100", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap High_Res_Logo_400x400 {
-            get {
-                object obj = ResourceManager.GetObject("High Res Logo 400x400", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Restart {
             get {
                 object obj = ResourceManager.GetObject("Restart", resourceCulture);

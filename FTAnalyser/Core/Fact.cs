@@ -313,8 +313,7 @@ namespace FTAnalyzer
                     if (FactType.Equals(CUSTOM_EVENT) || FactType.Equals(CUSTOM_FACT))
                     {
                         string tag = FamilyTree.GetText(node, "TYPE", false).ToUpper();
-                        string factType;
-                        if (CUSTOM_TAGS.TryGetValue(tag, out factType))
+                        if (CUSTOM_TAGS.TryGetValue(tag, out string factType))
                         {
                             FactType = factType;
                             CheckCensusDate(tag);
@@ -681,8 +680,7 @@ namespace FTAnalyzer
             {
                 // if not a census overlay then set date to year and try that instead
                 string year = FactDate.DateString.Substring(FactDate.DateString.Length - 4);
-                int result = 0;
-                if (Int32.TryParse(year, out result))
+                if (Int32.TryParse(year, out int result))
                 {
                     yearAdjusted = new FactDate(year);
                     if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)

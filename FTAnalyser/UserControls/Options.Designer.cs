@@ -85,7 +85,7 @@
             this.treeView1.ShowRootLines = false;
             this.treeView1.Size = new System.Drawing.Size(136, 421);
             this.treeView1.TabIndex = 4;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView1_AfterSelect);
             // 
             // OptionsMenuImageList
             // 

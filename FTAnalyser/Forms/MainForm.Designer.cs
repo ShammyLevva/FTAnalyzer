@@ -236,8 +236,8 @@
             this.tabIndividuals = new System.Windows.Forms.TabPage();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
-            this.label19 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.pbRelationships = new System.Windows.Forms.ProgressBar();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
@@ -411,7 +411,7 @@
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.openToolStripMenuItem.Text = "Open GEDCOM file...";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
             // mnuReload
             // 
@@ -419,7 +419,7 @@
             this.mnuReload.Name = "mnuReload";
             this.mnuReload.Size = new System.Drawing.Size(184, 22);
             this.mnuReload.Text = "Reload";
-            this.mnuReload.Click += new System.EventHandler(this.reloadToolStripMenuItem_Click);
+            this.mnuReload.Click += new System.EventHandler(this.ReloadToolStripMenuItem_Click);
             // 
             // mnuPrint
             // 
@@ -427,7 +427,7 @@
             this.mnuPrint.Name = "mnuPrint";
             this.mnuPrint.Size = new System.Drawing.Size(184, 22);
             this.mnuPrint.Text = "Print";
-            this.mnuPrint.Click += new System.EventHandler(this.mnuPrint_Click);
+            this.mnuPrint.Click += new System.EventHandler(this.MnuPrint_Click);
             // 
             // toolStripSeparator6
             // 
@@ -447,7 +447,7 @@
             this.mnuRecent.Name = "mnuRecent";
             this.mnuRecent.Size = new System.Drawing.Size(184, 22);
             this.mnuRecent.Text = "Recent Files";
-            this.mnuRecent.DropDownOpening += new System.EventHandler(this.mnuRecent_DropDownOpening);
+            this.mnuRecent.DropDownOpening += new System.EventHandler(this.MnuRecent_DropDownOpening);
             // 
             // mnuRecent1
             // 
@@ -495,7 +495,7 @@
             this.clearRecentFileListToolStripMenuItem.Name = "clearRecentFileListToolStripMenuItem";
             this.clearRecentFileListToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.clearRecentFileListToolStripMenuItem.Text = "Clear Recent File List";
-            this.clearRecentFileListToolStripMenuItem.Click += new System.EventHandler(this.clearRecentFileListToolStripMenuItem_Click);
+            this.clearRecentFileListToolStripMenuItem.Click += new System.EventHandler(this.ClearRecentFileListToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -519,7 +519,7 @@
             this.backupToolStripMenuItem.Name = "backupToolStripMenuItem";
             this.backupToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
             this.backupToolStripMenuItem.Text = "Backup";
-            this.backupToolStripMenuItem.Click += new System.EventHandler(this.backupToolStripMenuItem_Click);
+            this.backupToolStripMenuItem.Click += new System.EventHandler(this.BackupToolStripMenuItem_Click);
             // 
             // mnuRestore
             // 
@@ -527,7 +527,7 @@
             this.mnuRestore.Size = new System.Drawing.Size(238, 22);
             this.mnuRestore.Text = "Restore";
             this.mnuRestore.ToolTipText = "Restore is only available prior to loading GEDCOM";
-            this.mnuRestore.Click += new System.EventHandler(this.restoreToolStripMenuItem_Click);
+            this.mnuRestore.Click += new System.EventHandler(this.RestoreToolStripMenuItem_Click);
             // 
             // toolStripSeparator11
             // 
@@ -539,14 +539,14 @@
             this.mnuLoadLocationsCSV.Name = "mnuLoadLocationsCSV";
             this.mnuLoadLocationsCSV.Size = new System.Drawing.Size(238, 22);
             this.mnuLoadLocationsCSV.Text = "Load Geocoded Locations CSV";
-            this.mnuLoadLocationsCSV.Click += new System.EventHandler(this.mnuLoadLocationsCSV_Click);
+            this.mnuLoadLocationsCSV.Click += new System.EventHandler(this.MnuLoadLocationsCSV_Click);
             // 
             // mnuLoadLocationsTNG
             // 
             this.mnuLoadLocationsTNG.Name = "mnuLoadLocationsTNG";
             this.mnuLoadLocationsTNG.Size = new System.Drawing.Size(238, 22);
             this.mnuLoadLocationsTNG.Text = "Load Geocoded Locations TNG";
-            this.mnuLoadLocationsTNG.Click += new System.EventHandler(this.mnuLoadLocationsTNG_Click);
+            this.mnuLoadLocationsTNG.Click += new System.EventHandler(this.MnuLoadLocationsTNG_Click);
             // 
             // toolStripSeparator5
             // 
@@ -558,14 +558,14 @@
             this.mnuCloseGEDCOM.Name = "mnuCloseGEDCOM";
             this.mnuCloseGEDCOM.Size = new System.Drawing.Size(184, 22);
             this.mnuCloseGEDCOM.Text = "Close GEDCOM file";
-            this.mnuCloseGEDCOM.Click += new System.EventHandler(this.mnuCloseGEDCOM_Click);
+            this.mnuCloseGEDCOM.Click += new System.EventHandler(this.MnuCloseGEDCOM_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // mnuReports
             // 
@@ -583,14 +583,14 @@
             this.mnuChildAgeProfiles.Name = "mnuChildAgeProfiles";
             this.mnuChildAgeProfiles.Size = new System.Drawing.Size(190, 22);
             this.mnuChildAgeProfiles.Text = "Parent Age Report";
-            this.mnuChildAgeProfiles.Click += new System.EventHandler(this.childAgeProfilesToolStripMenuItem_Click);
+            this.mnuChildAgeProfiles.Click += new System.EventHandler(this.ChildAgeProfilesToolStripMenuItem_Click);
             // 
             // mnuOlderParents
             // 
             this.mnuOlderParents.Name = "mnuOlderParents";
             this.mnuOlderParents.Size = new System.Drawing.Size(190, 22);
             this.mnuOlderParents.Text = "Older Parents";
-            this.mnuOlderParents.Click += new System.EventHandler(this.olderParentsToolStripMenuItem_Click);
+            this.mnuOlderParents.Click += new System.EventHandler(this.OlderParentsToolStripMenuItem_Click);
             // 
             // mnuPossibleCensusFacts
             // 
@@ -599,7 +599,7 @@
             this.mnuPossibleCensusFacts.Text = "Possible Census Facts";
             this.mnuPossibleCensusFacts.ToolTipText = "This report aims to find census facts that have been incorrectly recorded as note" +
     "s";
-            this.mnuPossibleCensusFacts.Click += new System.EventHandler(this.possibleCensusFactsToolStripMenuItem_Click);
+            this.mnuPossibleCensusFacts.Click += new System.EventHandler(this.PossibleCensusFactsToolStripMenuItem_Click);
             // 
             // mnuCousinsCountReport
             // 
@@ -630,28 +630,28 @@
             this.mnuIndividualsToExcel.Name = "mnuIndividualsToExcel";
             this.mnuIndividualsToExcel.Size = new System.Drawing.Size(221, 22);
             this.mnuIndividualsToExcel.Text = "Individuals to Excel";
-            this.mnuIndividualsToExcel.Click += new System.EventHandler(this.individualsToExcelToolStripMenuItem_Click);
+            this.mnuIndividualsToExcel.Click += new System.EventHandler(this.IndividualsToExcelToolStripMenuItem_Click);
             // 
             // mnuFamiliesToExcel
             // 
             this.mnuFamiliesToExcel.Name = "mnuFamiliesToExcel";
             this.mnuFamiliesToExcel.Size = new System.Drawing.Size(221, 22);
             this.mnuFamiliesToExcel.Text = "Families to Excel";
-            this.mnuFamiliesToExcel.Click += new System.EventHandler(this.familiesToExcelToolStripMenuItem_Click);
+            this.mnuFamiliesToExcel.Click += new System.EventHandler(this.FamiliesToExcelToolStripMenuItem_Click);
             // 
             // mnuFactsToExcel
             // 
             this.mnuFactsToExcel.Name = "mnuFactsToExcel";
             this.mnuFactsToExcel.Size = new System.Drawing.Size(221, 22);
             this.mnuFactsToExcel.Text = "Facts to Excel";
-            this.mnuFactsToExcel.Click += new System.EventHandler(this.factsToExcelToolStripMenuItem_Click);
+            this.mnuFactsToExcel.Click += new System.EventHandler(this.FactsToExcelToolStripMenuItem_Click);
             // 
             // mnuSourcesToExcel
             // 
             this.mnuSourcesToExcel.Name = "mnuSourcesToExcel";
             this.mnuSourcesToExcel.Size = new System.Drawing.Size(221, 22);
             this.mnuSourcesToExcel.Text = "Sources to Excel";
-            this.mnuSourcesToExcel.Click += new System.EventHandler(this.mnuSourcesToExcel_Click);
+            this.mnuSourcesToExcel.Click += new System.EventHandler(this.MnuSourcesToExcel_Click);
             // 
             // toolStripSeparator8
             // 
@@ -663,14 +663,14 @@
             this.mnuLooseBirthsToExcel.Name = "mnuLooseBirthsToExcel";
             this.mnuLooseBirthsToExcel.Size = new System.Drawing.Size(221, 22);
             this.mnuLooseBirthsToExcel.Text = "Loose Births to Excel";
-            this.mnuLooseBirthsToExcel.Click += new System.EventHandler(this.looseBirthsToExcelToolStripMenuItem_Click);
+            this.mnuLooseBirthsToExcel.Click += new System.EventHandler(this.LooseBirthsToExcelToolStripMenuItem_Click);
             // 
             // mnuLooseDeathsToExcel
             // 
             this.mnuLooseDeathsToExcel.Name = "mnuLooseDeathsToExcel";
             this.mnuLooseDeathsToExcel.Size = new System.Drawing.Size(221, 22);
             this.mnuLooseDeathsToExcel.Text = "Loose Deaths to Excel";
-            this.mnuLooseDeathsToExcel.Click += new System.EventHandler(this.looseDeathsToExcelToolStripMenuItem_Click);
+            this.mnuLooseDeathsToExcel.Click += new System.EventHandler(this.LooseDeathsToExcelToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 
@@ -682,14 +682,14 @@
             this.mnuTreetopsToExcel.Name = "mnuTreetopsToExcel";
             this.mnuTreetopsToExcel.Size = new System.Drawing.Size(221, 22);
             this.mnuTreetopsToExcel.Text = "Current Treetops to Excel";
-            this.mnuTreetopsToExcel.Click += new System.EventHandler(this.mnuTreetopsToExcel_Click);
+            this.mnuTreetopsToExcel.Click += new System.EventHandler(this.MnuTreetopsToExcel_Click);
             // 
             // mnuWorldWarsToExcel
             // 
             this.mnuWorldWarsToExcel.Name = "mnuWorldWarsToExcel";
             this.mnuWorldWarsToExcel.Size = new System.Drawing.Size(221, 22);
             this.mnuWorldWarsToExcel.Text = "Current World Wars to Excel";
-            this.mnuWorldWarsToExcel.Click += new System.EventHandler(this.mnuWorldWarsToExcel_Click);
+            this.mnuWorldWarsToExcel.Click += new System.EventHandler(this.MnuWorldWarsToExcel_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -707,7 +707,7 @@
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.optionsToolStripMenuItem.Text = "Options";
-            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.OptionsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -720,14 +720,14 @@
             this.displayOptionsOnLoadToolStripMenuItem.Name = "displayOptionsOnLoadToolStripMenuItem";
             this.displayOptionsOnLoadToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.displayOptionsOnLoadToolStripMenuItem.Text = "Display Options on Load";
-            this.displayOptionsOnLoadToolStripMenuItem.Click += new System.EventHandler(this.displayOptionsOnLoadToolStripMenuItem_Click);
+            this.displayOptionsOnLoadToolStripMenuItem.Click += new System.EventHandler(this.DisplayOptionsOnLoadToolStripMenuItem_Click);
             // 
             // resetToDefaultFormSizeToolStripMenuItem
             // 
             this.resetToDefaultFormSizeToolStripMenuItem.Name = "resetToDefaultFormSizeToolStripMenuItem";
             this.resetToDefaultFormSizeToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.resetToDefaultFormSizeToolStripMenuItem.Text = "Reset to Default form size";
-            this.resetToDefaultFormSizeToolStripMenuItem.Click += new System.EventHandler(this.resetToDefaultFormSizeToolStripMenuItem_Click);
+            this.resetToDefaultFormSizeToolStripMenuItem.Click += new System.EventHandler(this.ResetToDefaultFormSizeToolStripMenuItem_Click);
             // 
             // mnuMaps
             // 
@@ -750,21 +750,21 @@
             this.mnuShowTimeline.Name = "mnuShowTimeline";
             this.mnuShowTimeline.Size = new System.Drawing.Size(284, 22);
             this.mnuShowTimeline.Text = "Show Timeline";
-            this.mnuShowTimeline.Click += new System.EventHandler(this.mnuShowTimeline_Click);
+            this.mnuShowTimeline.Click += new System.EventHandler(this.MnuShowTimeline_Click);
             // 
             // mnuLifelines
             // 
             this.mnuLifelines.Name = "mnuLifelines";
             this.mnuLifelines.Size = new System.Drawing.Size(284, 22);
             this.mnuLifelines.Text = "Show Lifelines";
-            this.mnuLifelines.Click += new System.EventHandler(this.mnuLifelines_Click);
+            this.mnuLifelines.Click += new System.EventHandler(this.MnuLifelines_Click);
             // 
             // mnuPlaces
             // 
             this.mnuPlaces.Name = "mnuPlaces";
             this.mnuPlaces.Size = new System.Drawing.Size(284, 22);
             this.mnuPlaces.Text = "Show Places";
-            this.mnuPlaces.Click += new System.EventHandler(this.mnuPlaces_Click);
+            this.mnuPlaces.Click += new System.EventHandler(this.MnuPlaces_Click);
             // 
             // toolStripSeparator4
             // 
@@ -776,7 +776,7 @@
             this.mnuLocationsGeocodeReport.Name = "mnuLocationsGeocodeReport";
             this.mnuLocationsGeocodeReport.Size = new System.Drawing.Size(284, 22);
             this.mnuLocationsGeocodeReport.Text = "Display Geocoded Locations";
-            this.mnuLocationsGeocodeReport.Click += new System.EventHandler(this.locationsGeocodeReportToolStripMenuItem_Click);
+            this.mnuLocationsGeocodeReport.Click += new System.EventHandler(this.LocationsGeocodeReportToolStripMenuItem_Click);
             // 
             // toolStripSeparator10
             // 
@@ -788,21 +788,21 @@
             this.mnuGeocodeLocations.Name = "mnuGeocodeLocations";
             this.mnuGeocodeLocations.Size = new System.Drawing.Size(284, 22);
             this.mnuGeocodeLocations.Text = "Run Google Geocoder to Find Locations";
-            this.mnuGeocodeLocations.Click += new System.EventHandler(this.mnuGeocodeLocations_Click);
+            this.mnuGeocodeLocations.Click += new System.EventHandler(this.MnuGeocodeLocations_Click);
             // 
             // mnuOSGeocoder
             // 
             this.mnuOSGeocoder.Name = "mnuOSGeocoder";
             this.mnuOSGeocoder.Size = new System.Drawing.Size(284, 22);
             this.mnuOSGeocoder.Text = "Run OS Geocoder to Find Locations";
-            this.mnuOSGeocoder.Click += new System.EventHandler(this.mnuOSGeocoder_Click);
+            this.mnuOSGeocoder.Click += new System.EventHandler(this.MnuOSGeocoder_Click);
             // 
             // mnuLookupBlankFoundLocations
             // 
             this.mnuLookupBlankFoundLocations.Name = "mnuLookupBlankFoundLocations";
             this.mnuLookupBlankFoundLocations.Size = new System.Drawing.Size(284, 22);
             this.mnuLookupBlankFoundLocations.Text = "Lookup Blank Google Locations";
-            this.mnuLookupBlankFoundLocations.Click += new System.EventHandler(this.mnuLookupBlankFoundLocations_Click);
+            this.mnuLookupBlankFoundLocations.Click += new System.EventHandler(this.MnuLookupBlankFoundLocations_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -822,21 +822,21 @@
             this.viewOnlineManualToolStripMenuItem.Name = "viewOnlineManualToolStripMenuItem";
             this.viewOnlineManualToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.viewOnlineManualToolStripMenuItem.Text = "View Online Manual";
-            this.viewOnlineManualToolStripMenuItem.Click += new System.EventHandler(this.viewOnlineManualToolStripMenuItem_Click);
+            this.viewOnlineManualToolStripMenuItem.Click += new System.EventHandler(this.ViewOnlineManualToolStripMenuItem_Click);
             // 
             // onlineGuidesToUsingFTAnalyzerToolStripMenuItem
             // 
             this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Name = "onlineGuidesToUsingFTAnalyzerToolStripMenuItem";
             this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Text = "Online Guides to Using FTAnalyzer";
-            this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Click += new System.EventHandler(this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem_Click);
+            this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Click += new System.EventHandler(this.OnlineGuidesToUsingFTAnalyzerToolStripMenuItem_Click);
             // 
             // reportAnIssueToolStripMenuItem
             // 
             this.reportAnIssueToolStripMenuItem.Name = "reportAnIssueToolStripMenuItem";
             this.reportAnIssueToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.reportAnIssueToolStripMenuItem.Text = "Report an Issue";
-            this.reportAnIssueToolStripMenuItem.Click += new System.EventHandler(this.reportAnIssueToolStripMenuItem_Click);
+            this.reportAnIssueToolStripMenuItem.Click += new System.EventHandler(this.ReportAnIssueToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -848,14 +848,14 @@
             this.whatsNewToolStripMenuItem.Name = "whatsNewToolStripMenuItem";
             this.whatsNewToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.whatsNewToolStripMenuItem.Text = "What\'s New";
-            this.whatsNewToolStripMenuItem.Click += new System.EventHandler(this.whatsNewToolStripMenuItem_Click);
+            this.whatsNewToolStripMenuItem.Click += new System.EventHandler(this.WhatsNewToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // mnuSetRoot
             // 
@@ -864,21 +864,21 @@
             this.viewNotesToolStripMenuItem});
             this.mnuSetRoot.Name = "mnuSetRoot";
             this.mnuSetRoot.Size = new System.Drawing.Size(174, 48);
-            this.mnuSetRoot.Opened += new System.EventHandler(this.mnuSetRoot_Opened);
+            this.mnuSetRoot.Opened += new System.EventHandler(this.MnuSetRoot_Opened);
             // 
             // setAsRootToolStripMenuItem
             // 
             this.setAsRootToolStripMenuItem.Name = "setAsRootToolStripMenuItem";
             this.setAsRootToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.setAsRootToolStripMenuItem.Text = "Set As Root Person";
-            this.setAsRootToolStripMenuItem.Click += new System.EventHandler(this.setAsRootToolStripMenuItem_Click);
+            this.setAsRootToolStripMenuItem.Click += new System.EventHandler(this.SetAsRootToolStripMenuItem_Click);
             // 
             // viewNotesToolStripMenuItem
             // 
             this.viewNotesToolStripMenuItem.Name = "viewNotesToolStripMenuItem";
             this.viewNotesToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.viewNotesToolStripMenuItem.Text = "View Notes";
-            this.viewNotesToolStripMenuItem.Click += new System.EventHandler(this.viewNotesToolStripMenuItem_Click);
+            this.viewNotesToolStripMenuItem.Click += new System.EventHandler(this.ViewNotesToolStripMenuItem_Click);
             // 
             // tsCount
             // 
@@ -946,7 +946,7 @@
             this.dgDataErrors.Size = new System.Drawing.Size(1085, 291);
             this.dgDataErrors.TabIndex = 3;
             this.toolTips.SetToolTip(this.dgDataErrors, "Double click to see list of facts for that individual");
-            this.dgDataErrors.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgDataErrors_CellDoubleClick);
+            this.dgDataErrors.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgDataErrors_CellDoubleClick);
             // 
             // dgRegions
             // 
@@ -964,8 +964,8 @@
             this.dgRegions.Size = new System.Drawing.Size(1065, 407);
             this.dgRegions.TabIndex = 1;
             this.toolTips.SetToolTip(this.dgRegions, "Double click on Region name to see list of individuals with that Region.");
-            this.dgRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgRegions_CellDoubleClick);
-            this.dgRegions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgRegions_CellFormatting);
+            this.dgRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgRegions_CellDoubleClick);
+            this.dgRegions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgRegions_CellFormatting);
             // 
             // dgCountries
             // 
@@ -983,8 +983,8 @@
             this.dgCountries.Size = new System.Drawing.Size(1065, 407);
             this.dgCountries.TabIndex = 0;
             this.toolTips.SetToolTip(this.dgCountries, "Double click on Country name to see list of individuals with that Country.");
-            this.dgCountries.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCountries_CellDoubleClick);
-            this.dgCountries.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgCountries_CellFormatting);
+            this.dgCountries.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgCountries_CellDoubleClick);
+            this.dgCountries.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgCountries_CellFormatting);
             // 
             // tbDuplicateScore
             // 
@@ -999,7 +999,7 @@
             this.tbDuplicateScore.TickFrequency = 5;
             this.toolTips.SetToolTip(this.tbDuplicateScore, "Adjust Slider to right to limit results to more likely matches");
             this.tbDuplicateScore.Value = 1;
-            this.tbDuplicateScore.Scroll += new System.EventHandler(this.tbDuplicateScore_Scroll);
+            this.tbDuplicateScore.Scroll += new System.EventHandler(this.TbDuplicateScore_Scroll);
             // 
             // cmbColourFamily
             // 
@@ -1011,7 +1011,7 @@
             this.cmbColourFamily.Size = new System.Drawing.Size(509, 21);
             this.cmbColourFamily.TabIndex = 60;
             this.toolTips.SetToolTip(this.cmbColourFamily, "Select a family to limit the reports to just that family");
-            this.cmbColourFamily.Click += new System.EventHandler(this.cmbColourFamily_Click);
+            this.cmbColourFamily.Click += new System.EventHandler(this.CmbColourFamily_Click);
             // 
             // btnRandomSurnameColour
             // 
@@ -1023,7 +1023,7 @@
             this.toolTips.SetToolTip(this.btnRandomSurnameColour, "Once selected click the appropriate report button to view the report. eg: UK Colo" +
         "ur Census Report.");
             this.btnRandomSurnameColour.UseVisualStyleBackColor = true;
-            this.btnRandomSurnameColour.Click += new System.EventHandler(this.btnRandomSurnameColour_Click);
+            this.btnRandomSurnameColour.Click += new System.EventHandler(this.BtnRandomSurnameColour_Click);
             // 
             // ckbFactExclude
             // 
@@ -1039,7 +1039,7 @@
             this.toolTips.SetToolTip(this.ckbFactExclude, "Any fact types selected in this box excludes people who have this fact type from " +
         "report");
             this.ckbFactExclude.Visible = false;
-            this.ckbFactExclude.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ckbFactExclude_MouseClick);
+            this.ckbFactExclude.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CkbFactExclude_MouseClick);
             // 
             // btnShowExclusions
             // 
@@ -1050,7 +1050,7 @@
             this.btnShowExclusions.Text = "=>";
             this.toolTips.SetToolTip(this.btnShowExclusions, "Show Exclusions");
             this.btnShowExclusions.UseVisualStyleBackColor = true;
-            this.btnShowExclusions.Click += new System.EventHandler(this.btnShowExclusions_Click);
+            this.btnShowExclusions.Click += new System.EventHandler(this.BtnShowExclusions_Click);
             // 
             // printPreviewDialog
             // 
@@ -1108,7 +1108,7 @@
             this.ckbWDIgnoreLocations.TabIndex = 32;
             this.ckbWDIgnoreLocations.Text = "Include Unknown Countries in World Wars Filter";
             this.ckbWDIgnoreLocations.UseVisualStyleBackColor = true;
-            this.ckbWDIgnoreLocations.CheckedChanged += new System.EventHandler(this.ckbWDIgnoreLocations_CheckedChanged);
+            this.ckbWDIgnoreLocations.CheckedChanged += new System.EventHandler(this.CkbWDIgnoreLocations_CheckedChanged);
             // 
             // btnWWII
             // 
@@ -1118,7 +1118,7 @@
             this.btnWWII.TabIndex = 31;
             this.btnWWII.Text = "World War II";
             this.btnWWII.UseVisualStyleBackColor = true;
-            this.btnWWII.Click += new System.EventHandler(this.btnWWII_Click);
+            this.btnWWII.Click += new System.EventHandler(this.BtnWWII_Click);
             // 
             // btnWWI
             // 
@@ -1128,7 +1128,7 @@
             this.btnWWI.TabIndex = 30;
             this.btnWWI.Text = "World War I";
             this.btnWWI.UseVisualStyleBackColor = true;
-            this.btnWWI.Click += new System.EventHandler(this.btnWWI_Click);
+            this.btnWWI.Click += new System.EventHandler(this.BtnWWI_Click);
             // 
             // dgWorldWars
             // 
@@ -1146,8 +1146,8 @@
             this.dgWorldWars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgWorldWars.Size = new System.Drawing.Size(1035, 332);
             this.dgWorldWars.TabIndex = 29;
-            this.dgWorldWars.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgWorldWars_CellDoubleClick);
-            this.dgWorldWars.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgWorldWars_MouseDown);
+            this.dgWorldWars.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgWorldWars_CellDoubleClick);
+            this.dgWorldWars.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgWorldWars_MouseDown);
             // 
             // label9
             // 
@@ -1188,14 +1188,14 @@
             this.mnuViewNotes});
             this.ctxViewNotes.Name = "contextMenuStrip1";
             this.ctxViewNotes.Size = new System.Drawing.Size(134, 26);
-            this.ctxViewNotes.Opening += new System.ComponentModel.CancelEventHandler(this.ctxViewNotes_Opening);
+            this.ctxViewNotes.Opening += new System.ComponentModel.CancelEventHandler(this.CtxViewNotes_Opening);
             // 
             // mnuViewNotes
             // 
             this.mnuViewNotes.Name = "mnuViewNotes";
             this.mnuViewNotes.Size = new System.Drawing.Size(133, 22);
             this.mnuViewNotes.Text = "View Notes";
-            this.mnuViewNotes.Click += new System.EventHandler(this.mnuViewNotes_Click);
+            this.mnuViewNotes.Click += new System.EventHandler(this.MnuViewNotes_Click);
             // 
             // tabTreetops
             // 
@@ -1229,8 +1229,8 @@
             this.dgTreeTops.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgTreeTops.Size = new System.Drawing.Size(1035, 332);
             this.dgTreeTops.TabIndex = 28;
-            this.dgTreeTops.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTreeTops_CellDoubleClick);
-            this.dgTreeTops.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgTreeTops_MouseDown);
+            this.dgTreeTops.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgTreeTops_CellDoubleClick);
+            this.dgTreeTops.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgTreeTops_MouseDown);
             // 
             // ckbTTIgnoreLocations
             // 
@@ -1243,7 +1243,7 @@
             this.ckbTTIgnoreLocations.TabIndex = 27;
             this.ckbTTIgnoreLocations.Text = "Include Unknown Countries in Treetops Filter";
             this.ckbTTIgnoreLocations.UseVisualStyleBackColor = true;
-            this.ckbTTIgnoreLocations.CheckedChanged += new System.EventHandler(this.ckbTTIgnoreLocations_CheckedChanged);
+            this.ckbTTIgnoreLocations.CheckedChanged += new System.EventHandler(this.CkbTTIgnoreLocations_CheckedChanged);
             // 
             // btnTreeTops
             // 
@@ -1253,7 +1253,7 @@
             this.btnTreeTops.TabIndex = 25;
             this.btnTreeTops.Text = "Show People at top of tree";
             this.btnTreeTops.UseVisualStyleBackColor = true;
-            this.btnTreeTops.Click += new System.EventHandler(this.btnTreeTops_Click);
+            this.btnTreeTops.Click += new System.EventHandler(this.BtnTreeTops_Click);
             // 
             // label8
             // 
@@ -1325,7 +1325,7 @@
             this.btnAdvancedMissingData.TabIndex = 40;
             this.btnAdvancedMissingData.Text = "Advanced Missing Data Report";
             this.btnAdvancedMissingData.UseVisualStyleBackColor = true;
-            this.btnAdvancedMissingData.Click += new System.EventHandler(this.btnAdvancedMissingData_Click);
+            this.btnAdvancedMissingData.Click += new System.EventHandler(this.BtnAdvancedMissingData_Click);
             // 
             // btnStandardMissingData
             // 
@@ -1335,7 +1335,7 @@
             this.btnStandardMissingData.TabIndex = 39;
             this.btnStandardMissingData.Text = "Standard Missing Data Report";
             this.btnStandardMissingData.UseVisualStyleBackColor = true;
-            this.btnStandardMissingData.Click += new System.EventHandler(this.btnStandardMissingData_Click);
+            this.btnStandardMissingData.Click += new System.EventHandler(this.BtnStandardMissingData_Click);
             // 
             // label14
             // 
@@ -1367,7 +1367,7 @@
             this.btnIrishColourCensus.TabIndex = 39;
             this.btnIrishColourCensus.Text = "View Irish Colour Census Report";
             this.btnIrishColourCensus.UseVisualStyleBackColor = true;
-            this.btnIrishColourCensus.Click += new System.EventHandler(this.btnIrishColourCensus_Click);
+            this.btnIrishColourCensus.Click += new System.EventHandler(this.BtnIrishColourCensus_Click);
             // 
             // btnCanadianColourCensus
             // 
@@ -1377,7 +1377,7 @@
             this.btnCanadianColourCensus.TabIndex = 41;
             this.btnCanadianColourCensus.Text = "View Canadian Colour Census Report";
             this.btnCanadianColourCensus.UseVisualStyleBackColor = true;
-            this.btnCanadianColourCensus.Click += new System.EventHandler(this.btnCanadianColourCensus_Click);
+            this.btnCanadianColourCensus.Click += new System.EventHandler(this.BtnCanadianColourCensus_Click);
             // 
             // btnUKColourCensus
             // 
@@ -1387,7 +1387,7 @@
             this.btnUKColourCensus.TabIndex = 38;
             this.btnUKColourCensus.Text = "View UK Colour Census Report";
             this.btnUKColourCensus.UseVisualStyleBackColor = true;
-            this.btnUKColourCensus.Click += new System.EventHandler(this.btnUKColourCensus_Click);
+            this.btnUKColourCensus.Click += new System.EventHandler(this.BtnUKColourCensus_Click);
             // 
             // btnUSColourCensus
             // 
@@ -1397,7 +1397,7 @@
             this.btnUSColourCensus.TabIndex = 40;
             this.btnUSColourCensus.Text = "View US Colour Census Report";
             this.btnUSColourCensus.UseVisualStyleBackColor = true;
-            this.btnUSColourCensus.Click += new System.EventHandler(this.btnUSColourCensus_Click);
+            this.btnUSColourCensus.Click += new System.EventHandler(this.BtnUSColourCensus_Click);
             // 
             // btnColourBMD
             // 
@@ -1407,7 +1407,7 @@
             this.btnColourBMD.TabIndex = 42;
             this.btnColourBMD.Text = "View Colour Birth/Marriage/Death Report";
             this.btnColourBMD.UseVisualStyleBackColor = true;
-            this.btnColourBMD.Click += new System.EventHandler(this.btnColourBMD_Click);
+            this.btnColourBMD.Click += new System.EventHandler(this.BtnColourBMD_Click);
             // 
             // label10
             // 
@@ -1424,7 +1424,7 @@
             this.txtColouredSurname.Name = "txtColouredSurname";
             this.txtColouredSurname.Size = new System.Drawing.Size(201, 20);
             this.txtColouredSurname.TabIndex = 30;
-            this.txtColouredSurname.TextChanged += new System.EventHandler(this.txtColouredSurname_TextChanged);
+            this.txtColouredSurname.TextChanged += new System.EventHandler(this.TxtColouredSurname_TextChanged);
             // 
             // relTypesColoured
             // 
@@ -1433,7 +1433,7 @@
             this.relTypesColoured.Name = "relTypesColoured";
             this.relTypesColoured.Size = new System.Drawing.Size(325, 78);
             this.relTypesColoured.TabIndex = 26;
-            this.relTypesColoured.RelationTypesChanged += new System.EventHandler(this.relTypesColoured_RelationTypesChanged);
+            this.relTypesColoured.RelationTypesChanged += new System.EventHandler(this.RelTypesColoured_RelationTypesChanged);
             // 
             // tabLostCousins
             // 
@@ -1493,7 +1493,7 @@
             this.btnReferrals.TabIndex = 2;
             this.btnReferrals.Text = "Generate Referral Report for this Individual";
             this.btnReferrals.UseVisualStyleBackColor = true;
-            this.btnReferrals.Click += new System.EventHandler(this.btnReferrals_Click);
+            this.btnReferrals.Click += new System.EventHandler(this.BtnReferrals_Click);
             // 
             // cmbReferrals
             // 
@@ -1502,7 +1502,7 @@
             this.cmbReferrals.Name = "cmbReferrals";
             this.cmbReferrals.Size = new System.Drawing.Size(395, 21);
             this.cmbReferrals.TabIndex = 1;
-            this.cmbReferrals.Click += new System.EventHandler(this.cmbReferrals_Click);
+            this.cmbReferrals.Click += new System.EventHandler(this.CmbReferrals_Click);
             // 
             // label11
             // 
@@ -1521,7 +1521,7 @@
             this.btnLCnoCensus.TabIndex = 22;
             this.btnLCnoCensus.Text = "Lost Cousins w/bad Census";
             this.btnLCnoCensus.UseVisualStyleBackColor = true;
-            this.btnLCnoCensus.Click += new System.EventHandler(this.btnLCnoCensus_Click);
+            this.btnLCnoCensus.Click += new System.EventHandler(this.BtnLCnoCensus_Click);
             // 
             // btnLCDuplicates
             // 
@@ -1531,7 +1531,7 @@
             this.btnLCDuplicates.TabIndex = 21;
             this.btnLCDuplicates.Text = "Lost Cousins Duplicate Facts";
             this.btnLCDuplicates.UseVisualStyleBackColor = true;
-            this.btnLCDuplicates.Click += new System.EventHandler(this.btnLCDuplicates_Click);
+            this.btnLCDuplicates.Click += new System.EventHandler(this.BtnLCDuplicates_Click);
             // 
             // btnLCMissingCountry
             // 
@@ -1541,7 +1541,7 @@
             this.btnLCMissingCountry.TabIndex = 20;
             this.btnLCMissingCountry.Text = "Lost Cousins with no Country";
             this.btnLCMissingCountry.UseVisualStyleBackColor = true;
-            this.btnLCMissingCountry.Click += new System.EventHandler(this.btnLCMissingCountry_Click);
+            this.btnLCMissingCountry.Click += new System.EventHandler(this.BtnLCMissingCountry_Click);
             // 
             // btnLC1940USA
             // 
@@ -1551,7 +1551,7 @@
             this.btnLC1940USA.TabIndex = 18;
             this.btnLC1940USA.Text = "1940 US Census";
             this.btnLC1940USA.UseVisualStyleBackColor = true;
-            this.btnLC1940USA.Click += new System.EventHandler(this.btnLC1940USA_Click);
+            this.btnLC1940USA.Click += new System.EventHandler(this.BtnLC1940USA_Click);
             // 
             // rtbLostCousins
             // 
@@ -1576,7 +1576,7 @@
             this.linkLabel2.TabIndex = 15;
             this.linkLabel2.TabStop = true;
             this.linkLabel2.Text = "Visit the Lost Cousins Forum";
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel2_LinkClicked);
             // 
             // btnLC1911EW
             // 
@@ -1586,7 +1586,7 @@
             this.btnLC1911EW.TabIndex = 14;
             this.btnLC1911EW.Text = "1911 England && Wales Census";
             this.btnLC1911EW.UseVisualStyleBackColor = true;
-            this.btnLC1911EW.Click += new System.EventHandler(this.btnLC1911EW_Click);
+            this.btnLC1911EW.Click += new System.EventHandler(this.BtnLC1911EW_Click);
             // 
             // linkLabel1
             // 
@@ -1598,7 +1598,7 @@
             this.linkLabel1.TabIndex = 12;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Visit the Lost Cousins Website";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
             // 
             // ckbShowLCEntered
             // 
@@ -1619,7 +1619,7 @@
             this.btnLC1841EW.TabIndex = 8;
             this.btnLC1841EW.Text = "1841 England && Wales Census";
             this.btnLC1841EW.UseVisualStyleBackColor = true;
-            this.btnLC1841EW.Click += new System.EventHandler(this.btnLC1841EW_Click);
+            this.btnLC1841EW.Click += new System.EventHandler(this.BtnLC1841EW_Click);
             // 
             // btnLC1911Ireland
             // 
@@ -1629,7 +1629,7 @@
             this.btnLC1911Ireland.TabIndex = 7;
             this.btnLC1911Ireland.Text = "1911 Ireland Census";
             this.btnLC1911Ireland.UseVisualStyleBackColor = true;
-            this.btnLC1911Ireland.Click += new System.EventHandler(this.btnLC1911Ireland_Click);
+            this.btnLC1911Ireland.Click += new System.EventHandler(this.BtnLC1911Ireland_Click);
             // 
             // btnLC1880USA
             // 
@@ -1639,7 +1639,7 @@
             this.btnLC1880USA.TabIndex = 6;
             this.btnLC1880USA.Text = "1880 US Census";
             this.btnLC1880USA.UseVisualStyleBackColor = true;
-            this.btnLC1880USA.Click += new System.EventHandler(this.btnLC1880USA_Click);
+            this.btnLC1880USA.Click += new System.EventHandler(this.BtnLC1880USA_Click);
             // 
             // btnLC1881EW
             // 
@@ -1649,7 +1649,7 @@
             this.btnLC1881EW.TabIndex = 5;
             this.btnLC1881EW.Text = "1881 England && Wales Census";
             this.btnLC1881EW.UseVisualStyleBackColor = true;
-            this.btnLC1881EW.Click += new System.EventHandler(this.btnLC1881EW_Click);
+            this.btnLC1881EW.Click += new System.EventHandler(this.BtnLC1881EW_Click);
             // 
             // btnLC1881Canada
             // 
@@ -1659,7 +1659,7 @@
             this.btnLC1881Canada.TabIndex = 4;
             this.btnLC1881Canada.Text = "1881 Canada Census";
             this.btnLC1881Canada.UseVisualStyleBackColor = true;
-            this.btnLC1881Canada.Click += new System.EventHandler(this.btnLC1881Canada_Click);
+            this.btnLC1881Canada.Click += new System.EventHandler(this.BtnLC1881Canada_Click);
             // 
             // btnLC1881Scot
             // 
@@ -1669,7 +1669,7 @@
             this.btnLC1881Scot.TabIndex = 0;
             this.btnLC1881Scot.Text = "1881 Scotland Census";
             this.btnLC1881Scot.UseVisualStyleBackColor = true;
-            this.btnLC1881Scot.Click += new System.EventHandler(this.btnLC1881Scot_Click);
+            this.btnLC1881Scot.Click += new System.EventHandler(this.BtnLC1881Scot_Click);
             // 
             // relTypesLC
             // 
@@ -1678,7 +1678,7 @@
             this.relTypesLC.Name = "relTypesLC";
             this.relTypesLC.Size = new System.Drawing.Size(325, 78);
             this.relTypesLC.TabIndex = 19;
-            this.relTypesLC.RelationTypesChanged += new System.EventHandler(this.relTypesLC_RelationTypesChanged);
+            this.relTypesLC.RelationTypesChanged += new System.EventHandler(this.RelTypesLC_RelationTypesChanged);
             // 
             // tabCensus
             // 
@@ -1716,7 +1716,7 @@
             this.btnExportMissingCensusRefs.TabIndex = 31;
             this.btnExportMissingCensusRefs.Text = "Missing Census Refs";
             this.btnExportMissingCensusRefs.UseVisualStyleBackColor = true;
-            this.btnExportMissingCensusRefs.Click += new System.EventHandler(this.btnExportMissingCensusRefs_Click);
+            this.btnExportMissingCensusRefs.Click += new System.EventHandler(this.BtnExportMissingCensusRefs_Click);
             // 
             // btnReportUnrecognised
             // 
@@ -1727,7 +1727,7 @@
             this.btnReportUnrecognised.TabIndex = 30;
             this.btnReportUnrecognised.Text = "Unrecognised Census Refs";
             this.btnReportUnrecognised.UseVisualStyleBackColor = true;
-            this.btnReportUnrecognised.Click += new System.EventHandler(this.btnReportUnrecognised_Click);
+            this.btnReportUnrecognised.Click += new System.EventHandler(this.BtnReportUnrecognised_Click);
             // 
             // btnReportUnrecognisedNotes
             // 
@@ -1738,7 +1738,7 @@
             this.btnReportUnrecognisedNotes.TabIndex = 29;
             this.btnReportUnrecognisedNotes.Text = "Notes with no Recognised Census Reference formats";
             this.btnReportUnrecognisedNotes.UseVisualStyleBackColor = true;
-            this.btnReportUnrecognisedNotes.Click += new System.EventHandler(this.btnReportUnrecognisedNotes_Click);
+            this.btnReportUnrecognisedNotes.Click += new System.EventHandler(this.BtnReportUnrecognisedNotes_Click);
             // 
             // groupBox5
             // 
@@ -1759,7 +1759,7 @@
             this.btnMismatchedChildrenStatus.TabIndex = 7;
             this.btnMismatchedChildrenStatus.Text = "Mismatched Children Status";
             this.btnMismatchedChildrenStatus.UseVisualStyleBackColor = true;
-            this.btnMismatchedChildrenStatus.Click += new System.EventHandler(this.btnMismatchedChildrenStatus_Click);
+            this.btnMismatchedChildrenStatus.Click += new System.EventHandler(this.BtnMismatchedChildrenStatus_Click);
             // 
             // btnNoChildrenStatus
             // 
@@ -1769,7 +1769,7 @@
             this.btnNoChildrenStatus.TabIndex = 6;
             this.btnNoChildrenStatus.Text = "Missing Children Status";
             this.btnNoChildrenStatus.UseVisualStyleBackColor = true;
-            this.btnNoChildrenStatus.Click += new System.EventHandler(this.btnNoChildrenStatus_Click);
+            this.btnNoChildrenStatus.Click += new System.EventHandler(this.BtnNoChildrenStatus_Click);
             // 
             // groupBox4
             // 
@@ -1794,7 +1794,7 @@
             this.btnInconsistentLocations.TabIndex = 29;
             this.btnInconsistentLocations.Text = "Inconsistent census locations for families with same census ref";
             this.btnInconsistentLocations.UseVisualStyleBackColor = true;
-            this.btnInconsistentLocations.Click += new System.EventHandler(this.btnInconsistentLocations_Click);
+            this.btnInconsistentLocations.Click += new System.EventHandler(this.BtnInconsistentLocations_Click);
             // 
             // btnUnrecognisedCensusRef
             // 
@@ -1804,7 +1804,7 @@
             this.btnUnrecognisedCensusRef.TabIndex = 8;
             this.btnUnrecognisedCensusRef.Text = "Unrecognised Census Refs";
             this.btnUnrecognisedCensusRef.UseVisualStyleBackColor = true;
-            this.btnUnrecognisedCensusRef.Click += new System.EventHandler(this.btnUnrecognisedCensusRef_Click);
+            this.btnUnrecognisedCensusRef.Click += new System.EventHandler(this.BtnUnrecognisedCensusRef_Click);
             // 
             // btnIncompleteCensusRef
             // 
@@ -1814,7 +1814,7 @@
             this.btnIncompleteCensusRef.TabIndex = 7;
             this.btnIncompleteCensusRef.Text = "Incomplete Census Refs";
             this.btnIncompleteCensusRef.UseVisualStyleBackColor = true;
-            this.btnIncompleteCensusRef.Click += new System.EventHandler(this.btnIncompleteCensusRef_Click);
+            this.btnIncompleteCensusRef.Click += new System.EventHandler(this.BtnIncompleteCensusRef_Click);
             // 
             // btnMissingCensusRefs
             // 
@@ -1824,7 +1824,7 @@
             this.btnMissingCensusRefs.TabIndex = 6;
             this.btnMissingCensusRefs.Text = "Missing Census Refs";
             this.btnMissingCensusRefs.UseVisualStyleBackColor = true;
-            this.btnMissingCensusRefs.Click += new System.EventHandler(this.btnMissingCensusRefs_Click);
+            this.btnMissingCensusRefs.Click += new System.EventHandler(this.BtnMissingCensusRefs_Click);
             // 
             // btnCensusRefs
             // 
@@ -1834,7 +1834,7 @@
             this.btnCensusRefs.TabIndex = 5;
             this.btnCensusRefs.Text = "Facts with Census Refs";
             this.btnCensusRefs.UseVisualStyleBackColor = true;
-            this.btnCensusRefs.Click += new System.EventHandler(this.btnCensusRefs_Click);
+            this.btnCensusRefs.Click += new System.EventHandler(this.BtnCensusRefs_Click);
             // 
             // groupBox2
             // 
@@ -1864,7 +1864,7 @@
             this.btnRandomSurnameEntered.TabIndex = 33;
             this.btnRandomSurnameEntered.Text = "Show Entered Random Surname from Direct Ancestors";
             this.btnRandomSurnameEntered.UseVisualStyleBackColor = true;
-            this.btnRandomSurnameEntered.Click += new System.EventHandler(this.btnRandomSurname_Click);
+            this.btnRandomSurnameEntered.Click += new System.EventHandler(this.BtnRandomSurname_Click);
             // 
             // btnRandomSurnameMissing
             // 
@@ -1874,7 +1874,7 @@
             this.btnRandomSurnameMissing.TabIndex = 32;
             this.btnRandomSurnameMissing.Text = "Show Missing Random Surname from Direct Ancestors";
             this.btnRandomSurnameMissing.UseVisualStyleBackColor = true;
-            this.btnRandomSurnameMissing.Click += new System.EventHandler(this.btnRandomSurname_Click);
+            this.btnRandomSurnameMissing.Click += new System.EventHandler(this.BtnRandomSurname_Click);
             // 
             // chkExcludeUnknownBirths
             // 
@@ -1959,7 +1959,7 @@
             this.btnShowCensusEntered.TabIndex = 22;
             this.btnShowCensusEntered.Text = "Show Entered on Census";
             this.btnShowCensusEntered.UseVisualStyleBackColor = true;
-            this.btnShowCensusEntered.Click += new System.EventHandler(this.btnShowCensus_Click);
+            this.btnShowCensusEntered.Click += new System.EventHandler(this.BtnShowCensus_Click);
             // 
             // btnShowCensusMissing
             // 
@@ -1969,7 +1969,7 @@
             this.btnShowCensusMissing.TabIndex = 5;
             this.btnShowCensusMissing.Text = "Show Missing from Census";
             this.btnShowCensusMissing.UseVisualStyleBackColor = true;
-            this.btnShowCensusMissing.Click += new System.EventHandler(this.btnShowCensus_Click);
+            this.btnShowCensusMissing.Click += new System.EventHandler(this.BtnShowCensus_Click);
             // 
             // groupBox1
             // 
@@ -1990,7 +1990,7 @@
             this.btnDuplicateCensus.TabIndex = 6;
             this.btnDuplicateCensus.Text = "Duplicate Census Facts";
             this.btnDuplicateCensus.UseVisualStyleBackColor = true;
-            this.btnDuplicateCensus.Click += new System.EventHandler(this.btnDuplicateCensus_Click);
+            this.btnDuplicateCensus.Click += new System.EventHandler(this.BtnDuplicateCensus_Click);
             // 
             // btnMissingCensusLocation
             // 
@@ -2000,7 +2000,7 @@
             this.btnMissingCensusLocation.TabIndex = 5;
             this.btnMissingCensusLocation.Text = "Missing Census Locations";
             this.btnMissingCensusLocation.UseVisualStyleBackColor = true;
-            this.btnMissingCensusLocation.Click += new System.EventHandler(this.btnMissingCensusLocation_Click);
+            this.btnMissingCensusLocation.Click += new System.EventHandler(this.BtnMissingCensusLocation_Click);
             // 
             // tabLooseBirthDeaths
             // 
@@ -2023,7 +2023,7 @@
             this.tabCtrlLooseBDs.SelectedIndex = 0;
             this.tabCtrlLooseBDs.Size = new System.Drawing.Size(1079, 439);
             this.tabCtrlLooseBDs.TabIndex = 1;
-            this.tabCtrlLooseBDs.SelectedIndexChanged += new System.EventHandler(this.tabCtrlLooseBDs_SelectedIndexChanged);
+            this.tabCtrlLooseBDs.SelectedIndexChanged += new System.EventHandler(this.TabCtrlLooseBDs_SelectedIndexChanged);
             // 
             // tabLooseBirths
             // 
@@ -2050,7 +2050,7 @@
             this.dgLooseBirths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgLooseBirths.Size = new System.Drawing.Size(1065, 407);
             this.dgLooseBirths.TabIndex = 2;
-            this.dgLooseBirths.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgLooseBirths_CellDoubleClick);
+            this.dgLooseBirths.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLooseBirths_CellDoubleClick);
             // 
             // tabLooseDeaths
             // 
@@ -2077,7 +2077,7 @@
             this.dgLooseDeaths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgLooseDeaths.Size = new System.Drawing.Size(1065, 407);
             this.dgLooseDeaths.TabIndex = 1;
-            this.dgLooseDeaths.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgLooseDeaths_CellDoubleClick);
+            this.dgLooseDeaths.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLooseDeaths_CellDoubleClick);
             // 
             // tabDataErrors
             // 
@@ -2111,7 +2111,7 @@
             this.btnSelectAll.TabIndex = 7;
             this.btnSelectAll.Text = "Select All";
             this.btnSelectAll.UseVisualStyleBackColor = true;
-            this.btnSelectAll.Click += new System.EventHandler(this.btnSelectAll_Click);
+            this.btnSelectAll.Click += new System.EventHandler(this.BtnSelectAll_Click);
             // 
             // btnClearAll
             // 
@@ -2121,7 +2121,7 @@
             this.btnClearAll.TabIndex = 6;
             this.btnClearAll.Text = "Clear All";
             this.btnClearAll.UseVisualStyleBackColor = true;
-            this.btnClearAll.Click += new System.EventHandler(this.btnClearAll_Click);
+            this.btnClearAll.Click += new System.EventHandler(this.BtnClearAll_Click);
             // 
             // ckbDataErrors
             // 
@@ -2133,7 +2133,7 @@
             this.ckbDataErrors.Name = "ckbDataErrors";
             this.ckbDataErrors.Size = new System.Drawing.Size(915, 94);
             this.ckbDataErrors.TabIndex = 0;
-            this.ckbDataErrors.SelectedIndexChanged += new System.EventHandler(this.ckbDataErrors_SelectedIndexChanged);
+            this.ckbDataErrors.SelectedIndexChanged += new System.EventHandler(this.CkbDataErrors_SelectedIndexChanged);
             // 
             // tabOccupations
             // 
@@ -2158,7 +2158,7 @@
             this.dgOccupations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgOccupations.Size = new System.Drawing.Size(1085, 445);
             this.dgOccupations.TabIndex = 2;
-            this.dgOccupations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgOccupations_CellDoubleClick);
+            this.dgOccupations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgOccupations_CellDoubleClick);
             // 
             // tabLocations
             // 
@@ -2182,7 +2182,7 @@
             this.btnBingOSMap.TabIndex = 3;
             this.btnBingOSMap.Text = "Show OS Map";
             this.btnBingOSMap.UseVisualStyleBackColor = true;
-            this.btnBingOSMap.Click += new System.EventHandler(this.btnBingOSMap_Click);
+            this.btnBingOSMap.Click += new System.EventHandler(this.BtnBingOSMap_Click);
             // 
             // btnShowMap
             // 
@@ -2193,7 +2193,7 @@
             this.btnShowMap.TabIndex = 2;
             this.btnShowMap.Text = "Show Google Map";
             this.btnShowMap.UseVisualStyleBackColor = true;
-            this.btnShowMap.Click += new System.EventHandler(this.btnShowMap_Click);
+            this.btnShowMap.Click += new System.EventHandler(this.BtnShowMap_Click);
             // 
             // tabCtrlLocations
             // 
@@ -2209,8 +2209,8 @@
             this.tabCtrlLocations.SelectedIndex = 0;
             this.tabCtrlLocations.Size = new System.Drawing.Size(1079, 439);
             this.tabCtrlLocations.TabIndex = 0;
-            this.tabCtrlLocations.SelectedIndexChanged += new System.EventHandler(this.tabCtrlLocations_SelectedIndexChanged);
-            this.tabCtrlLocations.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabCtrlLocations_Selecting);
+            this.tabCtrlLocations.SelectedIndexChanged += new System.EventHandler(this.TabCtrlLocations_SelectedIndexChanged);
+            this.tabCtrlLocations.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabCtrlLocations_Selecting);
             // 
             // tabTreeView
             // 
@@ -2236,12 +2236,12 @@
             this.treeViewLocations.ShowNodeToolTips = true;
             this.treeViewLocations.Size = new System.Drawing.Size(1065, 407);
             this.treeViewLocations.TabIndex = 0;
-            this.treeViewLocations.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewLocations_BeforeCollapse);
-            this.treeViewLocations.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewLocations_BeforeExpand);
-            this.treeViewLocations.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewLocations_AfterSelect);
-            this.treeViewLocations.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewLocations_NodeMouseClick);
-            this.treeViewLocations.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewLocations_NodeMouseDoubleClick);
-            this.treeViewLocations.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeViewLocations_MouseDown);
+            this.treeViewLocations.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewLocations_BeforeCollapse);
+            this.treeViewLocations.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewLocations_BeforeExpand);
+            this.treeViewLocations.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewLocations_AfterSelect);
+            this.treeViewLocations.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeViewLocations_NodeMouseClick);
+            this.treeViewLocations.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeViewLocations_NodeMouseDoubleClick);
+            this.treeViewLocations.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TreeViewLocations_MouseDown);
             // 
             // imageList
             // 
@@ -2307,8 +2307,8 @@
             this.dgSubRegions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgSubRegions.Size = new System.Drawing.Size(1065, 407);
             this.dgSubRegions.TabIndex = 1;
-            this.dgSubRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSubRegions_CellDoubleClick);
-            this.dgSubRegions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgSubRegions_CellFormatting);
+            this.dgSubRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSubRegions_CellDoubleClick);
+            this.dgSubRegions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgSubRegions_CellFormatting);
             // 
             // tabAddresses
             // 
@@ -2337,8 +2337,8 @@
             this.dgAddresses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgAddresses.Size = new System.Drawing.Size(1065, 407);
             this.dgAddresses.TabIndex = 1;
-            this.dgAddresses.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAddresses_CellDoubleClick);
-            this.dgAddresses.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgAddresses_CellFormatting);
+            this.dgAddresses.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgAddresses_CellDoubleClick);
+            this.dgAddresses.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgAddresses_CellFormatting);
             // 
             // tabPlaces
             // 
@@ -2367,8 +2367,8 @@
             this.dgPlaces.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgPlaces.Size = new System.Drawing.Size(1065, 407);
             this.dgPlaces.TabIndex = 2;
-            this.dgPlaces.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgPlaces_CellDoubleClick);
-            this.dgPlaces.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgPlaces_CellFormatting);
+            this.dgPlaces.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgPlaces_CellDoubleClick);
+            this.dgPlaces.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgPlaces_CellFormatting);
             // 
             // tabFamilies
             // 
@@ -2392,7 +2392,7 @@
             this.dgFamilies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgFamilies.Size = new System.Drawing.Size(1085, 445);
             this.dgFamilies.TabIndex = 1;
-            this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFamilies_CellDoubleClick);
+            this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgFamilies_CellDoubleClick);
             // 
             // tabIndividuals
             // 
@@ -2418,13 +2418,12 @@
             this.dgIndividuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgIndividuals.Size = new System.Drawing.Size(1079, 439);
             this.dgIndividuals.TabIndex = 0;
-            this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgIndividuals_CellDoubleClick);
-            this.dgIndividuals.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgIndividuals_MouseDown);
+            this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgIndividuals_CellDoubleClick);
+            this.dgIndividuals.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgIndividuals_MouseDown);
             // 
             // tabDisplayProgress
             // 
             this.tabDisplayProgress.Controls.Add(this.pictureBox1);
-            this.tabDisplayProgress.Controls.Add(this.label19);
             this.tabDisplayProgress.Controls.Add(this.label7);
             this.tabDisplayProgress.Controls.Add(this.pbRelationships);
             this.tabDisplayProgress.Controls.Add(this.rtbOutput);
@@ -2434,6 +2433,7 @@
             this.tabDisplayProgress.Controls.Add(this.pbIndividuals);
             this.tabDisplayProgress.Controls.Add(this.label4);
             this.tabDisplayProgress.Controls.Add(this.pbSources);
+            this.tabDisplayProgress.Controls.Add(this.label19);
             this.tabDisplayProgress.Location = new System.Drawing.Point(4, 22);
             this.tabDisplayProgress.Name = "tabDisplayProgress";
             this.tabDisplayProgress.Padding = new System.Windows.Forms.Padding(3);
@@ -2441,6 +2441,16 @@
             this.tabDisplayProgress.TabIndex = 1;
             this.tabDisplayProgress.Text = "Gedcom Stats";
             this.tabDisplayProgress.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(977, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
             // 
             // label19
             // 
@@ -2452,17 +2462,6 @@
             this.label19.Size = new System.Drawing.Size(511, 74);
             this.label19.TabIndex = 10;
             this.label19.Text = "Family Tree Analyzer";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = global::FTAnalyzer.Properties.Resources.High_Res_Logo_100x100;
-            this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(977, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox1.TabIndex = 9;
-            this.pictureBox1.TabStop = false;
             // 
             // label7
             // 
@@ -2492,7 +2491,7 @@
             this.rtbOutput.Size = new System.Drawing.Size(1079, 327);
             this.rtbOutput.TabIndex = 6;
             this.rtbOutput.Text = "";
-            this.rtbOutput.TextChanged += new System.EventHandler(this.rtbOutput_TextChanged);
+            this.rtbOutput.TextChanged += new System.EventHandler(this.RtbOutput_TextChanged);
             // 
             // label6
             // 
@@ -2569,7 +2568,7 @@
             this.tabSelector.SelectedIndex = 0;
             this.tabSelector.Size = new System.Drawing.Size(1093, 471);
             this.tabSelector.TabIndex = 9;
-            this.tabSelector.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
+            this.tabSelector.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             // 
             // tabSurnames
             // 
@@ -2592,7 +2591,7 @@
             this.btnShowSurnames.TabIndex = 23;
             this.btnShowSurnames.Text = "Show Surnames";
             this.btnShowSurnames.UseVisualStyleBackColor = true;
-            this.btnShowSurnames.Click += new System.EventHandler(this.btnShowSurnames_Click);
+            this.btnShowSurnames.Click += new System.EventHandler(this.BtnShowSurnames_Click);
             // 
             // dgSurnames
             // 
@@ -2616,9 +2615,9 @@
             this.dgSurnames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgSurnames.Size = new System.Drawing.Size(1079, 352);
             this.dgSurnames.TabIndex = 1;
-            this.dgSurnames.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSurnames_CellContentClick);
-            this.dgSurnames.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSurnames_CellDoubleClick);
-            this.dgSurnames.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgSurnames_DataBindingComplete);
+            this.dgSurnames.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSurnames_CellContentClick);
+            this.dgSurnames.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSurnames_CellDoubleClick);
+            this.dgSurnames.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DgSurnames_DataBindingComplete);
             // 
             // Surname
             // 
@@ -2699,7 +2698,7 @@
             this.btnDuplicateFacts.TabIndex = 34;
             this.btnDuplicateFacts.Text = "Show Duplicate Facts of Selected Fact Type";
             this.btnDuplicateFacts.UseVisualStyleBackColor = true;
-            this.btnDuplicateFacts.Click += new System.EventHandler(this.btnDuplicateFacts_Click);
+            this.btnDuplicateFacts.Click += new System.EventHandler(this.BtnDuplicateFacts_Click);
             // 
             // lblExclude
             // 
@@ -2731,7 +2730,7 @@
             this.btnDeselectExcludeAllFactTypes.Text = "De-select all Fact Types";
             this.btnDeselectExcludeAllFactTypes.UseVisualStyleBackColor = true;
             this.btnDeselectExcludeAllFactTypes.Visible = false;
-            this.btnDeselectExcludeAllFactTypes.Click += new System.EventHandler(this.btnDeselectExcludeAllFactTypes_Click);
+            this.btnDeselectExcludeAllFactTypes.Click += new System.EventHandler(this.BtnDeselectExcludeAllFactTypes_Click);
             // 
             // btnExcludeAllFactTypes
             // 
@@ -2742,7 +2741,7 @@
             this.btnExcludeAllFactTypes.Text = "Select all Fact Types";
             this.btnExcludeAllFactTypes.UseVisualStyleBackColor = true;
             this.btnExcludeAllFactTypes.Visible = false;
-            this.btnExcludeAllFactTypes.Click += new System.EventHandler(this.btnExcludeAllFactTypes_Click);
+            this.btnExcludeAllFactTypes.Click += new System.EventHandler(this.BtnExcludeAllFactTypes_Click);
             // 
             // btnDeselectAllFactTypes
             // 
@@ -2752,7 +2751,7 @@
             this.btnDeselectAllFactTypes.TabIndex = 27;
             this.btnDeselectAllFactTypes.Text = "De-select all Fact Types";
             this.btnDeselectAllFactTypes.UseVisualStyleBackColor = true;
-            this.btnDeselectAllFactTypes.Click += new System.EventHandler(this.btnDeselectAllFactTypes_Click);
+            this.btnDeselectAllFactTypes.Click += new System.EventHandler(this.BtnDeselectAllFactTypes_Click);
             // 
             // btnSelectAllFactTypes
             // 
@@ -2762,7 +2761,7 @@
             this.btnSelectAllFactTypes.TabIndex = 26;
             this.btnSelectAllFactTypes.Text = "Select all Fact Types";
             this.btnSelectAllFactTypes.UseVisualStyleBackColor = true;
-            this.btnSelectAllFactTypes.Click += new System.EventHandler(this.btnSelectAllFactTypes_Click);
+            this.btnSelectAllFactTypes.Click += new System.EventHandler(this.BtnSelectAllFactTypes_Click);
             // 
             // ckbFactSelect
             // 
@@ -2775,7 +2774,7 @@
             this.ckbFactSelect.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.ckbFactSelect.Size = new System.Drawing.Size(313, 304);
             this.ckbFactSelect.TabIndex = 25;
-            this.ckbFactSelect.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ckbFactSelect_MouseClick);
+            this.ckbFactSelect.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CkbFactSelect_MouseClick);
             // 
             // btnShowFacts
             // 
@@ -2785,7 +2784,7 @@
             this.btnShowFacts.TabIndex = 24;
             this.btnShowFacts.Text = "Show Facts for Individuals with Selected Fact Types";
             this.btnShowFacts.UseVisualStyleBackColor = true;
-            this.btnShowFacts.Click += new System.EventHandler(this.btnShowFacts_Click);
+            this.btnShowFacts.Click += new System.EventHandler(this.BtnShowFacts_Click);
             // 
             // label3
             // 
@@ -2802,7 +2801,7 @@
             this.txtFactsSurname.Name = "txtFactsSurname";
             this.txtFactsSurname.Size = new System.Drawing.Size(256, 20);
             this.txtFactsSurname.TabIndex = 22;
-            this.txtFactsSurname.TextChanged += new System.EventHandler(this.txtFactsSurname_TextChanged);
+            this.txtFactsSurname.TextChanged += new System.EventHandler(this.TxtFactsSurname_TextChanged);
             // 
             // relTypesFacts
             // 
@@ -2811,7 +2810,7 @@
             this.relTypesFacts.Name = "relTypesFacts";
             this.relTypesFacts.Size = new System.Drawing.Size(325, 78);
             this.relTypesFacts.TabIndex = 21;
-            this.relTypesFacts.RelationTypesChanged += new System.EventHandler(this.relTypesFacts_RelationTypesChanged);
+            this.relTypesFacts.RelationTypesChanged += new System.EventHandler(this.RelTypesFacts_RelationTypesChanged);
             // 
             // tabSources
             // 
@@ -2838,7 +2837,7 @@
             this.dgSources.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgSources.Size = new System.Drawing.Size(1079, 439);
             this.dgSources.TabIndex = 1;
-            this.dgSources.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSources_CellDoubleClick);
+            this.dgSources.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSources_CellDoubleClick);
             // 
             // tabDuplicates
             // 
@@ -2871,7 +2870,7 @@
             this.ckbHideIgnoredDuplicates.TabIndex = 19;
             this.ckbHideIgnoredDuplicates.Text = "Hide Possible Duplicates marked as Ignore";
             this.ckbHideIgnoredDuplicates.UseVisualStyleBackColor = true;
-            this.ckbHideIgnoredDuplicates.CheckedChanged += new System.EventHandler(this.ckbHideIgnoredDuplicates_CheckedChanged);
+            this.ckbHideIgnoredDuplicates.CheckedChanged += new System.EventHandler(this.CkbHideIgnoredDuplicates_CheckedChanged);
             // 
             // dgDuplicates
             // 
@@ -2898,8 +2897,8 @@
             this.dgDuplicates.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgDuplicates.Size = new System.Drawing.Size(1032, 375);
             this.dgDuplicates.TabIndex = 18;
-            this.dgDuplicates.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgDuplicates_CellContentClick);
-            this.dgDuplicates.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgDuplicates_CellDoubleClick);
+            this.dgDuplicates.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgDuplicates_CellContentClick);
+            this.dgDuplicates.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgDuplicates_CellDoubleClick);
             // 
             // NonDuplicate
             // 
@@ -2995,7 +2994,6 @@
             // 
             // btnCancelDuplicates
             // 
-            this.btnCancelDuplicates.Image = global::FTAnalyzer.Properties.Resources.CriticalError;
             this.btnCancelDuplicates.Location = new System.Drawing.Point(411, 6);
             this.btnCancelDuplicates.Name = "btnCancelDuplicates";
             this.btnCancelDuplicates.Size = new System.Drawing.Size(26, 26);
@@ -3003,7 +3001,7 @@
             this.btnCancelDuplicates.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancelDuplicates.UseVisualStyleBackColor = true;
             this.btnCancelDuplicates.Visible = false;
-            this.btnCancelDuplicates.Click += new System.EventHandler(this.btnCancelDuplicates_Click);
+            this.btnCancelDuplicates.Click += new System.EventHandler(this.BtnCancelDuplicates_Click);
             // 
             // label16
             // 
@@ -3113,7 +3111,7 @@
             0,
             0,
             0});
-            this.nudToday.ValueChanged += new System.EventHandler(this.nudToday_ValueChanged);
+            this.nudToday.ValueChanged += new System.EventHandler(this.NudToday_ValueChanged);
             // 
             // btnUpdateTodaysEvents
             // 
@@ -3123,7 +3121,7 @@
             this.btnUpdateTodaysEvents.TabIndex = 14;
             this.btnUpdateTodaysEvents.Text = "Update list of Events";
             this.btnUpdateTodaysEvents.UseVisualStyleBackColor = true;
-            this.btnUpdateTodaysEvents.Click += new System.EventHandler(this.btnUpdateTodaysEvents_Click);
+            this.btnUpdateTodaysEvents.Click += new System.EventHandler(this.BtnUpdateTodaysEvents_Click);
             // 
             // labToday
             // 
@@ -3150,7 +3148,7 @@
             this.rbTodayMonth.TabIndex = 11;
             this.rbTodayMonth.Text = "Whole Month";
             this.rbTodayMonth.UseVisualStyleBackColor = true;
-            this.rbTodayMonth.CheckedChanged += new System.EventHandler(this.rbTodayMonth_CheckedChanged);
+            this.rbTodayMonth.CheckedChanged += new System.EventHandler(this.RbTodayMonth_CheckedChanged);
             // 
             // rbTodaySingle
             // 
@@ -3163,7 +3161,7 @@
             this.rbTodaySingle.TabStop = true;
             this.rbTodaySingle.Text = "Single Day";
             this.rbTodaySingle.UseVisualStyleBackColor = true;
-            this.rbTodaySingle.CheckedChanged += new System.EventHandler(this.rbTodaySingle_CheckedChanged);
+            this.rbTodaySingle.CheckedChanged += new System.EventHandler(this.RbTodaySingle_CheckedChanged);
             // 
             // label17
             // 
@@ -3220,8 +3218,8 @@
             this.Text = "Family Tree Analyzer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.mainForm_DragDrop);
-            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.mainForm_DragEnter);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainForm_DragEnter);
             this.Move += new System.EventHandler(this.MainForm_Move);
             this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.menuStrip1.ResumeLayout(false);
