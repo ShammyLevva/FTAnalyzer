@@ -10,7 +10,7 @@ If you have any problems, issues or suggestions please add them to the [Issues S
 **[Program's Purpose](Program%27s%20Purpose)**  
 **[Changing the Root Person](The%20Individuals%20Tab)**
 
-**[What's New in this Release](What%27s%20New%20in%20this%20Release%3f)?**
+**[What's New in this Release](Whats%20New%20in%20this%20Release)?**
 
 **The Menu[](#the-menu)**
 
