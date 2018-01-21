@@ -15,7 +15,7 @@ If you have any problems, issues or suggestions please add them to the [Issues S
 **The Menu[](#the-menu)**
 
 *   **[File](File)**
-*   **[Reports](reports)**
+*   **[Reports](Reports)**
 *   **[Export](Export)**
 *   **[Tools](Tools)**
 *   **[Maps](Maps)**
