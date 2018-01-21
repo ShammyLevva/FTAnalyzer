@@ -1276,8 +1276,7 @@ namespace FTAnalyzer
             }
             if (ckbMilitaryOnly.Checked)
             {
-                Predicate<Individual> militaryFilter = x => x.HasMilitaryFacts;
-                filter = FilterUtils.AndFilter<Individual>(filter, militaryFilter);
+                filter = FilterUtils.AndFilter<Individual>(filter, x => x.HasMilitaryFacts);
             }
 
             return filter;
@@ -1923,9 +1922,11 @@ namespace FTAnalyzer
             }
             else
             {
-                List<Individual> dupInd = new List<Individual>();
-                dupInd.Add(ft.GetIndividual(indA_ID));
-                dupInd.Add(ft.GetIndividual(indB_ID));
+                List<Individual> dupInd = new List<Individual>
+                {
+                    ft.GetIndividual(indA_ID),
+                    ft.GetIndividual(indB_ID)
+                };
                 Facts f = new Facts(dupInd, null, null);
                 DisposeDuplicateForms(f);
                 f.Show();
@@ -2284,8 +2285,7 @@ namespace FTAnalyzer
 
         private string GetRandomSurname()
         {
-            Predicate<Individual> direct = x => x.RelationType == Individual.DIRECT;
-            IEnumerable<Individual> directs = ft.AllIndividuals.Filter(direct);
+            IEnumerable<Individual> directs = ft.AllIndividuals.Filter(x => x.RelationType == Individual.DIRECT);
             List<string> surnames = directs.Select(x => x.Surname).Distinct<string>().ToList<string>();
             Random rnd = new Random();
             string surname;
@@ -2394,7 +2394,6 @@ namespace FTAnalyzer
                     "\n\nPlease check the file and remove any private notes information before posting");
             else
                 MessageBox.Show("No notes with unrecognised census references found.", "FTAnalyzer");
-
         }
 
         private void SaveUnrecognisedDataFile(IEnumerable<string> results, string unrecognisedFilename, string privateWarning)
@@ -2403,7 +2402,7 @@ namespace FTAnalyzer
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 string initialDir = (string)Application.UserAppDataRegistry.GetValue("Report Unrecognised Census References Path");
-                saveFileDialog.InitialDirectory = initialDir == null ? Environment.SpecialFolder.MyDocuments.ToString() : initialDir;
+                saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
                 saveFileDialog.FileName = unrecognisedFilename;
                 saveFileDialog.Filter = "Report File (*.txt)|*.txt";
                 saveFileDialog.FilterIndex = 1;
@@ -2446,8 +2445,7 @@ namespace FTAnalyzer
             tspbTabProgress.Visible = true;
             foreach (string censusref in distinctRefs)
             {
-                Predicate<DisplayFact> match = x => censusref == x.FactDate.StartDate.Year + x.CensusReference.ToString();
-                IEnumerable<DisplayFact> result = censusRefs.Filter(match);
+                IEnumerable<DisplayFact> result = censusRefs.Filter(x => censusref == x.FactDate.StartDate.Year + x.CensusReference.ToString());
                 int count = result.Select(x => x.Location).Distinct().Count();
                 if (count > 1)
                     results.AddRange(result);
@@ -2562,10 +2560,9 @@ namespace FTAnalyzer
             {
                 HourGlass(true);
                 IEnumerable<Family> candidates = ft.AllFamilies;
-                Predicate<Family> surnameFilter = x => x.ContainsSurname(txtColouredSurname.Text);
                 Predicate<Family> relationFilter = relTypesColoured.BuildFamilyFilter<Family>(x => x.RelationTypes);
                 if (txtColouredSurname.Text.Length > 0)
-                    candidates = candidates.Filter(surnameFilter);
+                    candidates = candidates.Filter(x => x.ContainsSurname(txtColouredSurname.Text));
                 List<Family> list = candidates.Filter(relationFilter).ToList<Family>();
                 list.Sort(new DefaultFamilyComparer());
                 foreach (Family family in list)

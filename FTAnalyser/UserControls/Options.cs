@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Reflection;
@@ -37,9 +34,7 @@ namespace FTAnalyzer.UserControls
 					IOptions optionCast = userControl as IOptions;
 					if (userControl != null && optionCast != null)
 					{
-						userControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-									| System.Windows.Forms.AnchorStyles.Left)
-									| System.Windows.Forms.AnchorStyles.Right)));
+						userControl.Anchor = ((AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right)));
 						userControl.Location = new System.Drawing.Point(3, 3);
 						userControl.Name = optionCast.TreePosition;
 						userControl.Size = new System.Drawing.Size(243, 356);
@@ -89,11 +84,13 @@ namespace FTAnalyzer.UserControls
 				}
 				if (tempNode == null)
 				{
-					tempNode = new TreeNode(splitPosition[startPositon]);
-					tempNode.Tag = key;
-					tempNode.ImageKey = key;
-					tempNode.SelectedImageKey = key;
-					nodes.Add(tempNode);
+                    tempNode = new TreeNode(splitPosition[startPositon])
+                    {
+                        Tag = key,
+                        ImageKey = key,
+                        SelectedImageKey = key
+                    };
+                    nodes.Add(tempNode);
 				}
 				SearchAndAddToSubTree(splitPosition, startPositon + 1, tempNode.Nodes, key);
 			}
@@ -104,15 +101,10 @@ namespace FTAnalyzer.UserControls
 			List<string> controlErrors = new List<string>();
 			foreach (Control control in panel1.Controls)
 			{
-				IOptions options = control as IOptions;
-				if (options != null)
-				{
-					if (options.HasValidationErrors())
-					{
-						controlErrors.Add(options.DisplayName);
-					}
-				}
-			}
+                if (control is IOptions options)
+                    if (options.HasValidationErrors())
+                        controlErrors.Add(options.DisplayName);
+            }
 			if (controlErrors.Count > 0)
 			{
 				StringBuilder sb = new StringBuilder();
@@ -128,13 +120,8 @@ namespace FTAnalyzer.UserControls
 			else
 			{
 				foreach (Control control in panel1.Controls)
-				{
-					IOptions options = control as IOptions;
-					if (options != null)
-					{
-						options.Save();
-					}
-				}
+                    if (control is IOptions options)
+                        options.Save();
 				DialogResult = DialogResult.OK;
 			}
 		}
@@ -143,16 +130,15 @@ namespace FTAnalyzer.UserControls
 		{
 			foreach (Control control in panel1.Controls)
 			{
-				IOptions options = control as IOptions;
-				if (options != null)
-				{
-					options.Cancel();
-				}
-			}
+                if (control is IOptions options)
+                {
+                    options.Cancel();
+                }
+            }
 			DialogResult = DialogResult.Cancel;
 		}
 
-		private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+		private void TreeView1_AfterSelect(object sender, TreeViewEventArgs e)
 		{
 			if (treeView1.SelectedNode != null)
 			{

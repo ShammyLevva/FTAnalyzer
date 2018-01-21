@@ -71,7 +71,7 @@
             resources.ApplyResources(this.chkAllowEmptyLocations, "chkAllowEmptyLocations");
             this.chkAllowEmptyLocations.Name = "chkAllowEmptyLocations";
             this.chkAllowEmptyLocations.UseVisualStyleBackColor = true;
-            this.chkAllowEmptyLocations.CheckedChanged += new System.EventHandler(this.chkAllowEmptyLocations_CheckedChanged);
+            this.chkAllowEmptyLocations.CheckedChanged += new System.EventHandler(this.ChkAllowEmptyLocations_CheckedChanged);
             // 
             // chkCensusResidence
             // 
@@ -80,7 +80,7 @@
             this.chkCensusResidence.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkCensusResidence.Name = "chkCensusResidence";
             this.chkCensusResidence.UseVisualStyleBackColor = true;
-            this.chkCensusResidence.CheckedChanged += new System.EventHandler(this.chkCensusResidence_CheckedChanged);
+            this.chkCensusResidence.CheckedChanged += new System.EventHandler(this.ChkCensusResidence_CheckedChanged);
             // 
             // chkTolerateInaccurateCensus
             // 
@@ -89,7 +89,7 @@
             this.chkTolerateInaccurateCensus.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkTolerateInaccurateCensus.Name = "chkTolerateInaccurateCensus";
             this.chkTolerateInaccurateCensus.UseVisualStyleBackColor = true;
-            this.chkTolerateInaccurateCensus.CheckedChanged += new System.EventHandler(this.chkTolerateInaccurateCensus_CheckedChanged);
+            this.chkTolerateInaccurateCensus.CheckedChanged += new System.EventHandler(this.ChkTolerateInaccurateCensus_CheckedChanged);
             // 
             // label1
             // 
@@ -101,7 +101,7 @@
             resources.ApplyResources(this.chkFamilyCensus, "chkFamilyCensus");
             this.chkFamilyCensus.Name = "chkFamilyCensus";
             this.chkFamilyCensus.UseVisualStyleBackColor = true;
-            this.chkFamilyCensus.CheckedChanged += new System.EventHandler(this.chkFamilyCensus_CheckedChanged);
+            this.chkFamilyCensus.CheckedChanged += new System.EventHandler(this.ChkFamilyCensus_CheckedChanged);
             // 
             // upDownAge
             // 
@@ -167,7 +167,7 @@
             resources.ApplyResources(this.chkReverseLocations, "chkReverseLocations");
             this.chkReverseLocations.Name = "chkReverseLocations";
             this.chkReverseLocations.UseVisualStyleBackColor = true;
-            this.chkReverseLocations.CheckedChanged += new System.EventHandler(this.chkReverseLocations_CheckedChanged);
+            this.chkReverseLocations.CheckedChanged += new System.EventHandler(this.ChkReverseLocations_CheckedChanged);
             // 
             // chkAutoCreateCensus
             // 
@@ -176,7 +176,7 @@
             this.chkAutoCreateCensus.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkAutoCreateCensus.Name = "chkAutoCreateCensus";
             this.chkAutoCreateCensus.UseVisualStyleBackColor = true;
-            this.chkAutoCreateCensus.CheckedChanged += new System.EventHandler(this.chkAutoCreateCensus_CheckedChanged);
+            this.chkAutoCreateCensus.CheckedChanged += new System.EventHandler(this.ChkAutoCreateCensus_CheckedChanged);
             // 
             // chkShowWorldEvents
             // 
@@ -193,7 +193,7 @@
             this.chkAddCreatedLocations.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkAddCreatedLocations.Name = "chkAddCreatedLocations";
             this.chkAddCreatedLocations.UseVisualStyleBackColor = true;
-            this.chkAddCreatedLocations.CheckedChanged += new System.EventHandler(this.chkAddCreatedLocations_CheckedChanged);
+            this.chkAddCreatedLocations.CheckedChanged += new System.EventHandler(this.ChkAddCreatedLocations_CheckedChanged);
             // 
             // chkIgnoreFactTypeWarnings
             // 
@@ -208,7 +208,7 @@
             this.chkTreatFemaleAsUnknown.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkTreatFemaleAsUnknown.Name = "chkTreatFemaleAsUnknown";
             this.chkTreatFemaleAsUnknown.UseVisualStyleBackColor = true;
-            this.chkTreatFemaleAsUnknown.CheckedChanged += new System.EventHandler(this.chkTreatFemaleAsUnknown_CheckedChanged);
+            this.chkTreatFemaleAsUnknown.CheckedChanged += new System.EventHandler(this.ChkTreatFemaleAsUnknown_CheckedChanged);
             // 
             // GeneralSettings
             // 

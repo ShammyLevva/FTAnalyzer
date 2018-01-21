@@ -2424,7 +2424,6 @@
             // tabDisplayProgress
             // 
             this.tabDisplayProgress.Controls.Add(this.pictureBox1);
-            this.tabDisplayProgress.Controls.Add(this.label19);
             this.tabDisplayProgress.Controls.Add(this.label7);
             this.tabDisplayProgress.Controls.Add(this.pbRelationships);
             this.tabDisplayProgress.Controls.Add(this.rtbOutput);
@@ -2434,6 +2433,7 @@
             this.tabDisplayProgress.Controls.Add(this.pbIndividuals);
             this.tabDisplayProgress.Controls.Add(this.label4);
             this.tabDisplayProgress.Controls.Add(this.pbSources);
+            this.tabDisplayProgress.Controls.Add(this.label19);
             this.tabDisplayProgress.Location = new System.Drawing.Point(4, 22);
             this.tabDisplayProgress.Name = "tabDisplayProgress";
             this.tabDisplayProgress.Padding = new System.Windows.Forms.Padding(3);
