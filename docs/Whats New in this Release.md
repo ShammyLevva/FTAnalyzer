@@ -1,9 +1,11 @@
 #### Updated Release Version 6.0.3.0 
 
 **Updates**
+
 Imported the suggested patches from fire-eggs these add:
 * Loading time improvements for processing of individuals
 * Colour reporting exports filter columns & retain colours  
+
 US census overhauled now uses date ranges to cope with times where enumerators ignored rule about the state of the house on census day
 
 #### Updated Release Version 6.0.2.0 
