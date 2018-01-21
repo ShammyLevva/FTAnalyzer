@@ -451,7 +451,7 @@ namespace FTAnalyzer
             get
             {
                 Fact f = GetPreferredFact(Fact.BURIAL);
-                return (f == null) ? null : f.FactDate;
+                return f?.FactDate;
             }
         }
 

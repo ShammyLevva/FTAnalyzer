@@ -256,7 +256,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(Properties.Settings.Default.LoadLocation))
                 openGedcom.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -275,7 +275,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void mnuCloseGEDCOM_Click(object sender, EventArgs e)
+        private void MnuCloseGEDCOM_Click(object sender, EventArgs e)
         {
             CleanUp();
         }
@@ -326,7 +326,7 @@ namespace FTAnalyzer
             Application.DoEvents();
         }
 
-        private void dgSurnames_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgSurnames_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -340,7 +340,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void dgCountries_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgCountries_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -354,7 +354,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void dgRegions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgRegions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -368,7 +368,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void dgSubRegions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgSubRegions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -382,7 +382,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void dgAddresses_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgAddresses_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -396,7 +396,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void dgPlaces_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgPlaces_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -410,7 +410,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void rtbOutput_TextChanged(object sender, EventArgs e)
+        private void RtbOutput_TextChanged(object sender, EventArgs e)
         {
             rtbOutput.ScrollToBottom();
         }
@@ -421,7 +421,7 @@ namespace FTAnalyzer
             stopProcessing = true;
         }
 
-        private void btnTreeTops_Click(object sender, EventArgs e)
+        private void BtnTreeTops_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             Predicate<Individual> filter = CreateTreeTopsIndividualFilter();
@@ -438,7 +438,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void btnWWI_Click(object sender, EventArgs e)
+        private void BtnWWI_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             WWI = true;
@@ -456,7 +456,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void btnWWII_Click(object sender, EventArgs e)
+        private void BtnWWII_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             WWI = false;
@@ -474,12 +474,12 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             HttpUtility.VisitWebsite("http://forums.lc");
         }
 
-        private void dgOccupations_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgOccupations_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -493,7 +493,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void setAsRootToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SetAsRootToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
@@ -506,14 +506,14 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void mnuSetRoot_Opened(object sender, EventArgs e)
+        private void MnuSetRoot_Opened(object sender, EventArgs e)
         {
             Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
             if (ind != null)
                 viewNotesToolStripMenuItem.Enabled = ind.HasNotes;
         }
 
-        private void viewNotesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ViewNotesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
@@ -525,11 +525,10 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void btnShowMap_Click(object sender, EventArgs e)
+        private void BtnShowMap_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            FactLocation loc = null;
-            int locType = GetMapLocationType(out loc);
+            int locType = GetMapLocationType(out FactLocation loc);
             if (loc != null)
             {   // Do geo coding stuff
                 GoogleMap frmGoogleMap = new GoogleMap();
@@ -547,11 +546,10 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void btnBingOSMap_Click(object sender, EventArgs e)
+        private void BtnBingOSMap_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            FactLocation loc = null;
-            int locType = GetMapLocationType(out loc);
+            int locType = GetMapLocationType(out FactLocation loc);
             if (loc != null)
             {   // Do geo coding stuff
                 BingOSMap frmBingMap = new BingOSMap();
@@ -614,7 +612,7 @@ namespace FTAnalyzer
                 return locType;
         }
 
-        private void ckbDataErrors_SelectedIndexChanged(object sender, EventArgs e)
+        private void CkbDataErrors_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateDataErrorsDisplay();
         }
@@ -635,23 +633,23 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void childAgeProfilesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ChildAgeProfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Statistics s = Statistics.Instance;
             MessageBox.Show(s.ChildrenBirthProfiles(), "Birth Profile Information");
         }
 
-        private void viewOnlineManualToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ViewOnlineManualToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HttpUtility.VisitWebsite("http://www.ftanalyzer.com");
         }
 
-        private void onlineGuidesToUsingFTAnalyzerToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OnlineGuidesToUsingFTAnalyzerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HttpUtility.VisitWebsite("http://www.ftanalyzer.com/guides");
         }
 
-        private void olderParentsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OlderParentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             Forms.People frmInd = new Forms.People();
@@ -684,7 +682,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void ckbTTIgnoreLocations_CheckedChanged(object sender, EventArgs e)
+        private void CkbTTIgnoreLocations_CheckedChanged(object sender, EventArgs e)
         {
             if (ckbTTIgnoreLocations.Checked)
                 treetopsCountry.Enabled = false;
@@ -692,7 +690,7 @@ namespace FTAnalyzer
                 treetopsCountry.Enabled = true;
         }
 
-        private void ckbWDIgnoreLocations_CheckedChanged(object sender, EventArgs e)
+        private void CkbWDIgnoreLocations_CheckedChanged(object sender, EventArgs e)
         {
             if (ckbWDIgnoreLocations.Checked)
                 wardeadCountry.Enabled = false;
@@ -700,18 +698,18 @@ namespace FTAnalyzer
                 wardeadCountry.Enabled = true;
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
             Application.Exit();
         }
 
-        private void tabCtrlLocations_Selecting(object sender, TabControlCancelEventArgs e)
+        private void TabCtrlLocations_Selecting(object sender, TabControlCancelEventArgs e)
         {
             HourGlass(true); // turn on when tab selected so all the formatting gets hourglass
         }
 
-        private void tabCtrlLocations_SelectedIndexChanged(object sender, EventArgs e)
+        private void TabCtrlLocations_SelectedIndexChanged(object sender, EventArgs e)
         {
             HourGlass(true);
             Application.DoEvents();
@@ -760,31 +758,31 @@ namespace FTAnalyzer
             }
         }
 
-        private void dgCountries_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void DgCountries_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.ColumnIndex == 0 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
                 FormatCellLocations(dgCountries, e);
         }
 
-        private void dgRegions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void DgRegions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
                 FormatCellLocations(dgRegions, e);
         }
 
-        private void dgSubRegions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void DgSubRegions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
                 FormatCellLocations(dgSubRegions, e);
         }
 
-        private void dgAddresses_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void DgAddresses_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
                 FormatCellLocations(dgAddresses, e);
         }
 
-        private void dgPlaces_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void DgPlaces_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
                 FormatCellLocations(dgPlaces, e);
@@ -825,7 +823,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ReloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Properties.GeneralSettings.Default.ReloadRequired = false;
             Properties.GeneralSettings.Default.Save();
@@ -835,7 +833,7 @@ namespace FTAnalyzer
 
         private bool preventExpand;
 
-        private void treeViewLocations_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void TreeViewLocations_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             HourGlass(true);
             FactLocation location = e.Node.Tag as FactLocation;
@@ -849,22 +847,22 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void treeViewLocations_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
+        private void TreeViewLocations_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
         {
             e.Cancel = (preventExpand && e.Action == TreeViewAction.Collapse);
         }
 
-        private void treeViewLocations_BeforeExpand(object sender, TreeViewCancelEventArgs e)
+        private void TreeViewLocations_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
             e.Cancel = (preventExpand && e.Action == TreeViewAction.Expand);
         }
 
-        private void treeViewLocations_MouseDown(object sender, MouseEventArgs e)
+        private void TreeViewLocations_MouseDown(object sender, MouseEventArgs e)
         {
             preventExpand = e.Clicks > 1;
         }
 
-        private void btnSelectAll_Click(object sender, EventArgs e)
+        private void BtnSelectAll_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < ckbDataErrors.Items.Count; i++)
             {
@@ -873,7 +871,7 @@ namespace FTAnalyzer
             UpdateDataErrorsDisplay();
         }
 
-        private void btnClearAll_Click(object sender, EventArgs e)
+        private void BtnClearAll_Click(object sender, EventArgs e)
         {
             foreach (int indexChecked in ckbDataErrors.CheckedIndices)
             {
@@ -882,23 +880,23 @@ namespace FTAnalyzer
             UpdateDataErrorsDisplay();
         }
 
-        private void displayOptionsOnLoadToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DisplayOptionsOnLoadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Properties.GeneralSettings.Default.ReportOptions = displayOptionsOnLoadToolStripMenuItem.Checked;
             Properties.GeneralSettings.Default.Save();
         }
 
-        private void reportAnIssueToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ReportAnIssueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HttpUtility.VisitWebsite("https://github.com/ShammyLevva/FTAnalyzer/issues");
         }
 
-        private void whatsNewToolStripMenuItem_Click(object sender, EventArgs e)
+        private void WhatsNewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HttpUtility.VisitWebsite("http://ftanalyzer.com/Whats%20New%20in%20this%20Release");
         }
 
-        private void mnuShowTimeline_Click(object sender, EventArgs e)
+        private void MnuShowTimeline_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             TimeLine tl = new TimeLine();
@@ -909,17 +907,17 @@ namespace FTAnalyzer
 
         private enum GecodingType { Google = 1, OS = 2, Reverse = 3 }
 
-        private void mnuGeocodeLocations_Click(object sender, EventArgs e)
+        private void MnuGeocodeLocations_Click(object sender, EventArgs e)
         {
             StartGeocoding(GecodingType.Google);
         }
 
-        private void mnuOSGeocoder_Click(object sender, EventArgs e)
+        private void MnuOSGeocoder_Click(object sender, EventArgs e)
         {
             StartGeocoding(GecodingType.OS);
         }
 
-        private void mnuLookupBlankFoundLocations_Click(object sender, EventArgs e)
+        private void MnuLookupBlankFoundLocations_Click(object sender, EventArgs e)
         {
             StartGeocoding(GecodingType.Reverse);
         }
@@ -959,7 +957,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void locationsGeocodeReportToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LocationsGeocodeReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             GeocodeLocations geo = new GeocodeLocations();
@@ -968,18 +966,18 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void treeViewLocations_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void TreeViewLocations_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (treeViewLocations.SelectedNode != e.Node && e.Button.Equals(MouseButtons.Right))
                 treeViewLocations.SelectedNode = e.Node;
         }
 
-        private void treeViewLocations_AfterSelect(object sender, TreeViewEventArgs e)
+        private void TreeViewLocations_AfterSelect(object sender, TreeViewEventArgs e)
         {
             treeViewLocations.SelectedImageIndex = e.Node.ImageIndex;
         }
 
-        private void mnuLifelines_Click(object sender, EventArgs e)
+        private void MnuLifelines_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             LifeLine l = new LifeLine();
@@ -988,7 +986,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void mnuPlaces_Click(object sender, EventArgs e)
+        private void MnuPlaces_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             Places p = new Places();
@@ -997,7 +995,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void dgSurnames_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void DgSurnames_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0)
             {
@@ -1010,7 +1008,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void dgSurnames_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        private void DgSurnames_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             foreach (DataGridViewRow r in dgSurnames.Rows)
             {
@@ -1024,7 +1022,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void possibleCensusFactsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PossibleCensusFactsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             Predicate<Individual> predicate = new Predicate<Individual>(x => x.Notes.ToLower().Contains("census"));
@@ -1037,7 +1035,7 @@ namespace FTAnalyzer
         }
 
         #region Tab Control
-        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             mnuPrint.Enabled = false;
             tsCountLabel.Text = string.Empty;
@@ -1287,7 +1285,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Lost Cousins
-        private void ckbRestrictions_CheckedChanged(object sender, EventArgs e)
+        private void CkbRestrictions_CheckedChanged(object sender, EventArgs e)
         {
             UpdateLostCousinsReport();
         }
@@ -1395,7 +1393,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void btnLCMissingCountry_Click(object sender, EventArgs e)
+        private void BtnLCMissingCountry_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
@@ -1406,12 +1404,12 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void relTypesLC_RelationTypesChanged(object sender, EventArgs e)
+        private void RelTypesLC_RelationTypesChanged(object sender, EventArgs e)
         {
             UpdateLostCousinsReport();
         }
 
-        private void btnLCDuplicates_Click(object sender, EventArgs e)
+        private void BtnLCDuplicates_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
@@ -1422,7 +1420,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void btnLCnoCensus_Click(object sender, EventArgs e)
+        private void BtnLCnoCensus_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
@@ -1433,84 +1431,84 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void btnLC1881EW_Click(object sender, EventArgs e)
+        private void BtnLC1881EW_Click(object sender, EventArgs e)
         {
             string reportTitle = "1881 England & Wales Census Records on file";
             LostCousinsCensus(CensusDate.EWCENSUS1881, reportTitle);
         }
 
-        private void btnLC1881Scot_Click(object sender, EventArgs e)
+        private void BtnLC1881Scot_Click(object sender, EventArgs e)
         {
             string reportTitle = "1881 Scotland Census Records on file";
             LostCousinsCensus(CensusDate.SCOTCENSUS1881, reportTitle);
         }
 
-        private void btnLC1881Canada_Click(object sender, EventArgs e)
+        private void BtnLC1881Canada_Click(object sender, EventArgs e)
         {
             string reportTitle = "1881 Canada Census Records on file";
             LostCousinsCensus(CensusDate.CANADACENSUS1881, reportTitle);
         }
 
-        private void btnLC1841EW_Click(object sender, EventArgs e)
+        private void BtnLC1841EW_Click(object sender, EventArgs e)
         {
             string reportTitle = "1841 England & Wales Census Records on file";
             LostCousinsCensus(CensusDate.EWCENSUS1841, reportTitle);
         }
 
 
-        private void btnLC1911EW_Click(object sender, EventArgs e)
+        private void BtnLC1911EW_Click(object sender, EventArgs e)
         {
             string reportTitle = "1911 England & Wales Census Records on file";
             LostCousinsCensus(CensusDate.EWCENSUS1911, reportTitle);
         }
 
-        private void btnLC1880USA_Click(object sender, EventArgs e)
+        private void BtnLC1880USA_Click(object sender, EventArgs e)
         {
             string reportTitle = "1880 US Census Records on file";
             LostCousinsCensus(CensusDate.USCENSUS1880, reportTitle);
         }
 
-        private void btnLC1911Ireland_Click(object sender, EventArgs e)
+        private void BtnLC1911Ireland_Click(object sender, EventArgs e)
         {
             string reportTitle = "1911 Ireland Census Records on file";
             LostCousinsCensus(CensusDate.IRELANDCENSUS1911, reportTitle);
         }
 
-        private void btnLC1940USA_Click(object sender, EventArgs e)
+        private void BtnLC1940USA_Click(object sender, EventArgs e)
         {
             string reportTitle = "1940 US Census Records on file";
             LostCousinsCensus(CensusDate.USCENSUS1940, reportTitle);
         }
 
-        private void labLostCousinsWeb_Click(object sender, EventArgs e)
+        private void LabLostCousinsWeb_Click(object sender, EventArgs e)
         {
             HttpUtility.VisitWebsite("http://www.lostcousins.com/?ref=LC585149");
         }
 
-        private void labLostCousinsWeb_MouseEnter(object sender, EventArgs e)
+        private void LabLostCousinsWeb_MouseEnter(object sender, EventArgs e)
         {
             storedCursor = this.Cursor;
             this.Cursor = Cursors.Hand;
         }
 
-        private void labLostCousinsWeb_MouseLeave(object sender, EventArgs e)
+        private void LabLostCousinsWeb_MouseLeave(object sender, EventArgs e)
         {
             this.Cursor = storedCursor;
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             HttpUtility.VisitWebsite("http://www.lostcousins.com/?ref=LC585149");
         }
         #endregion
 
         #region ToolStrip Clicks
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This is Family Tree Analyzer version " + VERSION, "FTAnalyzer");
         }
 
-        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UserControls.Options options = new UserControls.Options();
             options.ShowDialog(this);
@@ -1520,7 +1518,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Print Routines
-        private void mnuPrint_Click(object sender, EventArgs e)
+        private void MnuPrint_Click(object sender, EventArgs e)
         {
             printDocument = new PrintDocument();
             printDocument.DefaultPageSettings.Margins =
@@ -1658,7 +1656,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Backup/Restore Database
-        private void backupToolStripMenuItem_Click(object sender, EventArgs e)
+        private void BackupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ft.Geocoding)
                 MessageBox.Show("You need to stop Geocoding before you can export the database", "FTAnalyzer");
@@ -1668,7 +1666,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void restoreToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RestoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ft.Geocoding)
                 MessageBox.Show("You need to stop Geocoding before you can import the database", "FTAnalyzer");
@@ -1715,7 +1713,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Recent File List
-        private void clearRecentFileListToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ClearRecentFileListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ClearRecentList();
             BuildRecentList();
@@ -1792,13 +1790,13 @@ namespace FTAnalyzer
             LoadFile(filename);
         }
 
-        private void mnuRecent_DropDownOpening(object sender, EventArgs e)
+        private void MnuRecent_DropDownOpening(object sender, EventArgs e)
         {
             BuildRecentList();
         }
         #endregion
 
-        private void dgFamilies_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgFamilies_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -1813,7 +1811,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void dgDataErrors_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgDataErrors_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -1825,25 +1823,25 @@ namespace FTAnalyzer
             }
         }
 
-        private void dgLooseDeaths_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgLooseDeaths_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 ShowFacts((string)dgLooseDeaths.CurrentRow.Cells["IndividualID"].Value);
         }
 
-        private void dgLooseBirths_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgLooseBirths_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 ShowFacts((string)dgLooseBirths.CurrentRow.Cells["IndividualID"].Value);
         }
 
-        private void dgTreeTops_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgTreeTops_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 ShowFacts((string)dgTreeTops.CurrentRow.Cells["IndividualID"].Value);
         }
 
-        private void dgWorldWars_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgWorldWars_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -1864,7 +1862,7 @@ namespace FTAnalyzer
             HttpUtility.VisitWebsite("https://www.livesofthefirstworldwar.org/search#FreeSearch=" + searchtext + "&PageIndex=1&PageSize=20");
         }
 
-        private void dgIndividuals_MouseDown(object sender, MouseEventArgs e)
+        private void DgIndividuals_MouseDown(object sender, MouseEventArgs e)
         {
             DataGridView.HitTestInfo hti = dgIndividuals.HitTest(e.Location.X, e.Location.Y);
             if (e.Button == MouseButtons.Right)
@@ -1892,7 +1890,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void dgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -1901,7 +1899,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void dgSources_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgSources_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -1912,7 +1910,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void dgDuplicates_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgDuplicates_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (pbDuplicates.Visible || e.RowIndex < 0 || e.ColumnIndex < 0)
                 return; // do nothing if progress bar still visible
@@ -1942,12 +1940,12 @@ namespace FTAnalyzer
             SetShowFactsButton();
         }
 
-        private void relTypesFacts_RelationTypesChanged(object sender, EventArgs e)
+        private void RelTypesFacts_RelationTypesChanged(object sender, EventArgs e)
         {
             SetupFactsCheckboxes();
         }
 
-        private void txtFactsSurname_TextChanged(object sender, EventArgs e)
+        private void TxtFactsSurname_TextChanged(object sender, EventArgs e)
         {
             SetupFactsCheckboxes();
         }
@@ -1978,7 +1976,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void btnShowFacts_Click(object sender, EventArgs e)
+        private void BtnShowFacts_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             Predicate<Individual> filter = relTypesFacts.BuildFilter<Individual>(x => x.RelationType);
@@ -2012,12 +2010,12 @@ namespace FTAnalyzer
             return result;
         }
 
-        private void btnSelectAllFactTypes_Click(object sender, EventArgs e)
+        private void BtnSelectAllFactTypes_Click(object sender, EventArgs e)
         {
             SetFactTypes(ckbFactSelect, true, "Fact: ");
         }
 
-        private void btnDeselectAllFactTypes_Click(object sender, EventArgs e)
+        private void BtnDeselectAllFactTypes_Click(object sender, EventArgs e)
         {
             SetFactTypes(ckbFactSelect, false, "Fact: ");
         }
@@ -2033,7 +2031,7 @@ namespace FTAnalyzer
             SetShowFactsButton();
         }
 
-        private void ckbFactSelect_MouseClick(object sender, MouseEventArgs e)
+        private void CkbFactSelect_MouseClick(object sender, MouseEventArgs e)
         {
             int index = ckbFactSelect.IndexFromPoint(e.Location);
             if (index > 0)
@@ -2055,17 +2053,17 @@ namespace FTAnalyzer
             btnShowFacts.Enabled = ckbFactSelect.CheckedItems.Count > 0 || (ckbFactExclude.Visible && ckbFactExclude.CheckedItems.Count > 0);
         }
 
-        private void btnExcludeAllFactTypes_Click(object sender, EventArgs e)
+        private void BtnExcludeAllFactTypes_Click(object sender, EventArgs e)
         {
             SetFactTypes(ckbFactExclude, true, "Exclude Fact: ");
         }
 
-        private void btnDeselectExcludeAllFactTypes_Click(object sender, EventArgs e)
+        private void BtnDeselectExcludeAllFactTypes_Click(object sender, EventArgs e)
         {
             SetFactTypes(ckbFactExclude, false, "Exclude Fact: ");
         }
 
-        private void btnShowExclusions_Click(object sender, EventArgs e)
+        private void BtnShowExclusions_Click(object sender, EventArgs e)
         {
             bool visible = !ckbFactExclude.Visible;
             ckbFactExclude.Visible = visible;
@@ -2075,7 +2073,7 @@ namespace FTAnalyzer
             SetShowFactsButton();
         }
 
-        private void ckbFactExclude_MouseClick(object sender, MouseEventArgs e)
+        private void CkbFactExclude_MouseClick(object sender, MouseEventArgs e)
         {
             int index = ckbFactExclude.IndexFromPoint(e.Location);
             string factType = ckbFactExclude.Items[index].ToString();
@@ -2085,7 +2083,7 @@ namespace FTAnalyzer
             SetShowFactsButton();
         }
 
-        private void btnDuplicateFacts_Click(object sender, EventArgs e)
+        private void BtnDuplicateFacts_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             Predicate<Individual> filter = relTypesFacts.BuildFilter<Individual>(x => x.RelationType);
@@ -2101,7 +2099,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Form Drag Drop
-        private void mainForm_DragDrop(object sender, DragEventArgs e)
+        private void MainForm_DragDrop(object sender, DragEventArgs e)
         {
             bool fileLoaded = false;
             string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
@@ -2121,7 +2119,7 @@ namespace FTAnalyzer
                     MessageBox.Show("Unable to load File. The file dragged and dropped wasn't a *.ged file", "FTAnalyzer");
         }
 
-        private void mainForm_DragEnter(object sender, DragEventArgs e)
+        private void MainForm_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 e.Effect = DragDropEffects.Copy;
@@ -2129,7 +2127,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Manage Form Position
-        private void resetToDefaultFormSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ResetToDefaultFormSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadDefaultPosition();
             SavePosition();
@@ -2205,19 +2203,19 @@ namespace FTAnalyzer
             }
         }
 
-        private void tbDuplicateScore_Scroll(object sender, EventArgs e)
+        private void TbDuplicateScore_Scroll(object sender, EventArgs e)
         {
             // do nothing if progress bar still visible
             if (!pbDuplicates.Visible)
                 SetPossibleDuplicates();
         }
 
-        private void btnCancelDuplicates_Click(object sender, EventArgs e)
+        private void BtnCancelDuplicates_Click(object sender, EventArgs e)
         {
             ft.CancelDuplicateProcessing();
         }
 
-        private void dgDuplicates_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void DgDuplicates_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == 0 && !pbDuplicates.Visible) // don't do anything if progressbar still loading duplicates
             {
@@ -2235,7 +2233,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void ckbHideIgnoredDuplicates_CheckedChanged(object sender, EventArgs e)
+        private void CkbHideIgnoredDuplicates_CheckedChanged(object sender, EventArgs e)
         {
             if (pbDuplicates.Visible)
                 return; // do nothing if progress bar still visible
@@ -2246,7 +2244,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Census Tab
-        private void btnShowCensus_Click(object sender, EventArgs e)
+        private void BtnShowCensus_Click(object sender, EventArgs e)
         {
             bool censusDone = sender == btnShowCensusEntered;
             ShowCensus(censusDone, txtCensusSurname.Text, false);
@@ -2277,7 +2275,7 @@ namespace FTAnalyzer
             census.Show();
         }
 
-        private void btnRandomSurname_Click(object sender, EventArgs e)
+        private void BtnRandomSurname_Click(object sender, EventArgs e)
         {
             string surname = GetRandomSurname();
             bool censusDone = sender == btnRandomSurnameEntered;
@@ -2299,7 +2297,7 @@ namespace FTAnalyzer
             return surname;
         }
 
-        private void btnMissingCensusLocation_Click(object sender, EventArgs e)
+        private void BtnMissingCensusLocation_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             People people = new People();
@@ -2309,7 +2307,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void btnDuplicateCensus_Click(object sender, EventArgs e)
+        private void BtnDuplicateCensus_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             People people = new People();
@@ -2319,7 +2317,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void btnNoChildrenStatus_Click(object sender, EventArgs e)
+        private void BtnNoChildrenStatus_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             People people = new People();
@@ -2329,7 +2327,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void btnMismatchedChildrenStatus_Click(object sender, EventArgs e)
+        private void BtnMismatchedChildrenStatus_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             People people = new People();
@@ -2347,27 +2345,27 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void btnCensusRefs_Click(object sender, EventArgs e)
+        private void BtnCensusRefs_Click(object sender, EventArgs e)
         {
             ShowCensusRefFacts(CensusReference.ReferenceStatus.GOOD);
         }
 
-        private void btnMissingCensusRefs_Click(object sender, EventArgs e)
+        private void BtnMissingCensusRefs_Click(object sender, EventArgs e)
         {
             ShowCensusRefFacts(CensusReference.ReferenceStatus.BLANK);
         }
 
-        private void btnIncompleteCensusRef_Click(object sender, EventArgs e)
+        private void BtnIncompleteCensusRef_Click(object sender, EventArgs e)
         {
             ShowCensusRefFacts(CensusReference.ReferenceStatus.INCOMPLETE);
         }
 
-        private void btnUnrecognisedCensusRef_Click(object sender, EventArgs e)
+        private void BtnUnrecognisedCensusRef_Click(object sender, EventArgs e)
         {
             ShowCensusRefFacts(CensusReference.ReferenceStatus.UNRECOGNISED);
         }
 
-        private void btnReportUnrecognised_Click(object sender, EventArgs e)
+        private void BtnReportUnrecognised_Click(object sender, EventArgs e)
         {
             IEnumerable<string> results = ft.UnrecognisedCensusReferences();
             results = results.OrderBy(x => x.ToString());
@@ -2377,7 +2375,7 @@ namespace FTAnalyzer
                 MessageBox.Show("No unrecognised census references found.", "FTAnalyzer");
         }
 
-        private void btnExportMissingCensusRefs_Click(object sender, EventArgs e)
+        private void BtnExportMissingCensusRefs_Click(object sender, EventArgs e)
         {
             IEnumerable<string> results = ft.MissingCensusReferences();
             results = results.OrderBy(x => x.ToString());
@@ -2387,7 +2385,7 @@ namespace FTAnalyzer
                 MessageBox.Show("No missing census references found.", "FTAnalyzer");
         }
 
-        private void btnReportUnrecognisedNotes_Click(object sender, EventArgs e)
+        private void BtnReportUnrecognisedNotes_Click(object sender, EventArgs e)
         {
             IEnumerable<string> results = ft.UnrecognisedCensusReferencesNotes();
             results = results.OrderBy(x => x.ToString());
@@ -2433,7 +2431,7 @@ namespace FTAnalyzer
             output.Close();
         }
 
-        private void btnInconsistentLocations_Click(object sender, EventArgs e)
+        private void BtnInconsistentLocations_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             List<DisplayFact> results = new List<DisplayFact>();
@@ -2466,7 +2464,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Colour Reports Tab
-        private void btnColourBMD_Click(object sender, EventArgs e)
+        private void BtnColourBMD_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             List<IDisplayColourBMD> list = ft.ColourBMD(relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily);
@@ -2488,33 +2486,33 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void btnUKColourCensus_Click(object sender, EventArgs e)
+        private void BtnUKColourCensus_Click(object sender, EventArgs e)
         {
             DisplayColourCensus(Countries.UNITED_KINGDOM);
         }
 
-        private void btnIrishColourCensus_Click(object sender, EventArgs e)
+        private void BtnIrishColourCensus_Click(object sender, EventArgs e)
         {
             DisplayColourCensus(Countries.IRELAND);
         }
 
-        private void btnUSColourCensus_Click(object sender, EventArgs e)
+        private void BtnUSColourCensus_Click(object sender, EventArgs e)
         {
             DisplayColourCensus(Countries.UNITED_STATES);
         }
 
-        private void btnCanadianColourCensus_Click(object sender, EventArgs e)
+        private void BtnCanadianColourCensus_Click(object sender, EventArgs e)
         {
             DisplayColourCensus(Countries.CANADA);
         }
 
 
-        private void btnStandardMissingData_Click(object sender, EventArgs e)
+        private void BtnStandardMissingData_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Not Implemented Yet", "FTAnalyzer");
         }
 
-        private void btnAdvancedMissingData_Click(object sender, EventArgs e)
+        private void BtnAdvancedMissingData_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             List<IDisplayMissingData> list = ft.MissingData(relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily);
@@ -2525,17 +2523,17 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void cmbColourFamily_Click(object sender, EventArgs e)
+        private void CmbColourFamily_Click(object sender, EventArgs e)
         {
             UpdateColourFamilyComboBox(null);
         }
 
-        private void relTypesColoured_RelationTypesChanged(object sender, EventArgs e)
+        private void RelTypesColoured_RelationTypesChanged(object sender, EventArgs e)
         {
             RefreshColourFamilyComboBox();
         }
 
-        private void txtColouredSurname_TextChanged(object sender, EventArgs e)
+        private void TxtColouredSurname_TextChanged(object sender, EventArgs e)
         {
             RefreshColourFamilyComboBox();
         }
@@ -2583,7 +2581,7 @@ namespace FTAnalyzer
             return stillThere;
         }
 
-        private void btnRandomSurnameColour_Click(object sender, EventArgs e)
+        private void BtnRandomSurnameColour_Click(object sender, EventArgs e)
         {
             txtColouredSurname.Text = GetRandomSurname();
         }
@@ -2606,7 +2604,7 @@ namespace FTAnalyzer
             tsHintsLabel.Text = Properties.Messages.Hints_Loose_Births + Properties.Messages.Hints_Individual;
         }
 
-        private void tabCtrlLooseBDs_SelectedIndexChanged(object sender, EventArgs e)
+        private void TabCtrlLooseBDs_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabCtrlLooseBDs.SelectedTab == tabLooseBirths)
             {
@@ -2625,7 +2623,7 @@ namespace FTAnalyzer
         #endregion
 
         #region View Notes
-        private void ctxViewNotes_Opening(object sender, CancelEventArgs e)
+        private void CtxViewNotes_Opening(object sender, CancelEventArgs e)
         {
             Individual ind = GetContextIndividual(sender);
             if (ind != null)
@@ -2640,17 +2638,14 @@ namespace FTAnalyzer
             ContextMenuStrip cms = null;
             if (sender is ContextMenuStrip)
                 cms = (ContextMenuStrip)sender;
-            if (sender is ToolStripMenuItem)
-            {
-                ToolStripMenuItem tsmi = (ToolStripMenuItem)sender;
+            if (sender is ToolStripMenuItem tsmi)
                 cms = (ContextMenuStrip)tsmi.Owner;
-            }
             if (cms != null && cms.Tag != null)
                 ind = (Individual)cms.Tag;
             return ind;
         }
 
-        private void mnuViewNotes_Click(object sender, EventArgs e)
+        private void MnuViewNotes_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             Individual ind = GetContextIndividual(sender);
@@ -2662,12 +2657,12 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void dgTreeTops_MouseDown(object sender, MouseEventArgs e)
+        private void DgTreeTops_MouseDown(object sender, MouseEventArgs e)
         {
             ShowViewNotesMenu(dgTreeTops, e);
         }
 
-        private void dgWorldWars_MouseDown(object sender, MouseEventArgs e)
+        private void DgWorldWars_MouseDown(object sender, MouseEventArgs e)
         {
             ShowViewNotesMenu(dgWorldWars, e);
         }
@@ -2695,7 +2690,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Referrals
-        private void cmbReferrals_Click(object sender, EventArgs e)
+        private void CmbReferrals_Click(object sender, EventArgs e)
         {
             if (cmbReferrals.Items.Count == 0)
             {
@@ -2709,10 +2704,9 @@ namespace FTAnalyzer
             }
         }
 
-        private void btnReferrals_Click(object sender, EventArgs e)
+        private void BtnReferrals_Click(object sender, EventArgs e)
         {
-            Individual selected = cmbReferrals.SelectedItem as Individual;
-            if (selected != null)
+            if (cmbReferrals.SelectedItem is Individual selected)
             {
                 HourGlass(true);
                 Individual root = ft.RootPerson;
@@ -2727,7 +2721,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Export To Excel
-        private void individualsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        private void IndividualsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
@@ -2736,7 +2730,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void familiesToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FamiliesToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
@@ -2745,7 +2739,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void factsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FactsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
@@ -2754,7 +2748,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void looseBirthsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LooseBirthsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
@@ -2765,7 +2759,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void looseDeathsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LooseDeathsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
@@ -2776,7 +2770,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void mnuSourcesToExcel_Click(object sender, EventArgs e)
+        private void MnuSourcesToExcel_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
@@ -2785,7 +2779,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void mnuTreetopsToExcel_Click(object sender, EventArgs e)
+        private void MnuTreetopsToExcel_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
@@ -2795,7 +2789,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void mnuWorldWarsToExcel_Click(object sender, EventArgs e)
+        private void MnuWorldWarsToExcel_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
@@ -2818,33 +2812,33 @@ namespace FTAnalyzer
             pbToday.Visible = false;
         }
 
-        private void rbTodayMonth_CheckedChanged(object sender, EventArgs e)
+        private void RbTodayMonth_CheckedChanged(object sender, EventArgs e)
         {
             Application.UserAppDataRegistry.SetValue("Todays Events Month", rbTodayMonth.Checked);
         }
 
-        private void rbTodaySingle_CheckedChanged(object sender, EventArgs e)
+        private void RbTodaySingle_CheckedChanged(object sender, EventArgs e)
         {
             Application.UserAppDataRegistry.SetValue("Todays Events Month", !rbTodaySingle.Checked);
         }
 
-        private void btnUpdateTodaysEvents_Click(object sender, EventArgs e)
+        private void BtnUpdateTodaysEvents_Click(object sender, EventArgs e)
         {
             ShowTodaysEvents();
         }
 
-        private void nudToday_ValueChanged(object sender, EventArgs e)
+        private void NudToday_ValueChanged(object sender, EventArgs e)
         {
             Application.UserAppDataRegistry.SetValue("Todays Events Step", nudToday.Value);
         }
         #endregion
 
-        private void mnuLoadLocationsCSV_Click(object sender, EventArgs e)
+        private void MnuLoadLocationsCSV_Click(object sender, EventArgs e)
         {
             LoadLocations(tspbTabProgress, tsStatusLabel, 1);
         }
 
-        private void mnuLoadLocationsTNG_Click(object sender, EventArgs e)
+        private void MnuLoadLocationsTNG_Click(object sender, EventArgs e)
         {
             LoadLocations(tspbTabProgress, tsStatusLabel, 2);
         }
@@ -2858,7 +2852,7 @@ namespace FTAnalyzer
                 ft.LoadLocationData(pb, label, defaultIndex);
         }
 
-        private void btnShowSurnames_Click(object sender, EventArgs e)
+        private void BtnShowSurnames_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             tsCountLabel.Text = string.Empty;

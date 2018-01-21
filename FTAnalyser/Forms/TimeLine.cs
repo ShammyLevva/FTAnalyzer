@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using FTAnalyzer.Mapping;
 using GeoAPI.Geometries;
 using SharpMap.Data;
-using SharpMap.Rendering.Decoration.ScaleBar;
 using System.Web;
 
 namespace FTAnalyzer.Forms
@@ -31,14 +29,14 @@ namespace FTAnalyzer.Forms
             mnuMapStyle.Setup(linkLabel1, mapBox1);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
             //mapZoomToolStrip.Renderer = new CustomToolStripRenderer();
-            tbYears.MouseWheel += new MouseEventHandler(tbYears_MouseWheel);
+            tbYears.MouseWheel += new MouseEventHandler(TbYears_MouseWheel);
             mnuHideScaleBar.Checked = Properties.MappingSettings.Default.HideScaleBar;
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             mapZoomToolStrip.Items[4].ToolTipText = "Draw rectangle by dragging mouse to specify zoom area";
             for (int i = 7; i <= 10; i++)
                 mapZoomToolStrip.Items[i].Visible = false;
             backgroundColour = mapZoomToolStrip.Items[0].BackColor;
-            mapBox1.Map.MapViewOnChange += new SharpMap.Map.MapViewChangedHandler(mapBox1_MapViewOnChange);
+            mapBox1.Map.MapViewOnChange += new SharpMap.Map.MapViewChangedHandler(MapBox1_MapViewOnChange);
             cbLimitFactDates.Text = "No Limit";
         }
 
@@ -91,7 +89,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void geocodeLocationsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GeocodeLocationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
             mh.StartGeocoding();
@@ -100,8 +98,7 @@ namespace FTAnalyzer.Forms
 
         public void DisplayLocationsForYear(string year)
         {
-            int result = 0;
-            int.TryParse(year, out result);
+            int.TryParse(year, out int result);
             if (year.Length == 4 && result != 0)
             {
                 List<MapLocation> locations;
@@ -158,7 +155,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void tbYears_Scroll(object sender, EventArgs e)
+        private void TbYears_Scroll(object sender, EventArgs e)
         {
             UpdateMap();
         }
@@ -174,7 +171,7 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
         }
 
-        private void tbYears_MouseWheel(object sender, EventArgs e)
+        private void TbYears_MouseWheel(object sender, EventArgs e)
         {
             // do nothing if using mousewheel this prevents year scrolling when map should scroll
         }
@@ -185,7 +182,7 @@ namespace FTAnalyzer.Forms
             DisplayLocationsForYear(labValue.Text);
         }
 
-        private void mapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void MapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             bool zoomed = false;
             if (e.Button == MouseButtons.Left && mapBox1.Map.Zoom > mapBox1.Map.MinimumZoom)
@@ -225,7 +222,7 @@ namespace FTAnalyzer.Forms
             loading = false;
         }
 
-        private void mapBox1_MapQueried(FeatureDataTable data)
+        private void MapBox1_MapQueried(FeatureDataTable data)
         {
             this.Cursor = Cursors.WaitCursor;
             List<MapLocation> locations = new List<MapLocation>();
@@ -242,12 +239,12 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
         }
 
-        private void mapBox1_MapViewOnChange()
+        private void MapBox1_MapViewOnChange()
         {
             clusters.Refresh();
         }
 
-        private void mapBox1_MapZoomChanged(double zoom)
+        private void MapBox1_MapZoomChanged(double zoom)
         {
             RefreshClusters();
         }
@@ -258,12 +255,12 @@ namespace FTAnalyzer.Forms
             mapBox1.Refresh();
         }
 
-        private void mapBox1_MapCenterChanged(Coordinate center)
+        private void MapBox1_MapCenterChanged(Coordinate center)
         {
             RefreshClusters();
         }
 
-        private void btnPlay_Click(object sender, EventArgs e)
+        private void BtnPlay_Click(object sender, EventArgs e)
         {
             btnPlay.Visible = false;
             btnStop.Visible = true;
@@ -271,7 +268,7 @@ namespace FTAnalyzer.Forms
             txtTimeInterval.Enabled = false;
         }
 
-        private void btnStop_Click(object sender, EventArgs e)
+        private void BtnStop_Click(object sender, EventArgs e)
         {
             StopTimer();
         }
@@ -284,7 +281,7 @@ namespace FTAnalyzer.Forms
             txtTimeInterval.Enabled = true;
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
             if (tbYears.Value < tbYears.Maximum)
             {
@@ -295,7 +292,7 @@ namespace FTAnalyzer.Forms
                 StopTimer();
         }
 
-        private void txtTimeInterval_KeyPress(object sender, KeyPressEventArgs e)
+        private void TxtTimeInterval_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (Char.IsDigit(e.KeyChar) || e.KeyChar == '\b')
                 e.Handled = false;
@@ -303,28 +300,27 @@ namespace FTAnalyzer.Forms
                 e.Handled = true;
         }
 
-        private void txtTimeInterval_Validated(object sender, EventArgs e)
+        private void TxtTimeInterval_Validated(object sender, EventArgs e)
         {
-            int result;
-            if (Int32.TryParse(txtTimeInterval.Text, out result))
+            if (Int32.TryParse(txtTimeInterval.Text, out int result))
             {
                 timer.Interval = result;
             }
         }
 
-        private void btnSelect_Click(object sender, EventArgs e)
+        private void BtnSelect_Click(object sender, EventArgs e)
         {
             btnSelect.Checked = true;
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.QueryPoint;
         }
 
-        private void mapBox1_ActiveToolChanged(SharpMap.Forms.MapBox.Tools tool)
+        private void MapBox1_ActiveToolChanged(SharpMap.Forms.MapBox.Tools tool)
         {
             if (mapBox1.ActiveTool != SharpMap.Forms.MapBox.Tools.QueryPoint)
                 btnSelect.Checked = false;
         }
 
-        private void btnBack10_Click(object sender, EventArgs e)
+        private void BtnBack10_Click(object sender, EventArgs e)
         {
             int step = 10;
             if (geocodedRange <= 150)
@@ -336,21 +332,21 @@ namespace FTAnalyzer.Forms
             UpdateMap();
         }
 
-        private void btnBack1_Click(object sender, EventArgs e)
+        private void BtnBack1_Click(object sender, EventArgs e)
         {
             if (tbYears.Value != tbYears.Minimum)
                 tbYears.Value -= 1;
             UpdateMap();
         }
 
-        private void btnForward1_Click(object sender, EventArgs e)
+        private void BtnForward1_Click(object sender, EventArgs e)
         {
             if (tbYears.Value != tbYears.Maximum)
                 tbYears.Value += 1;
             UpdateMap();
         }
 
-        private void btnForward10_Click(object sender, EventArgs e)
+        private void BtnForward10_Click(object sender, EventArgs e)
         {
             int step = 10;
             if (geocodedRange <= 150)
@@ -362,7 +358,7 @@ namespace FTAnalyzer.Forms
             UpdateMap();
         }
 
-        private void mnuDisableTimeline_Click(object sender, EventArgs e)
+        private void MnuDisableTimeline_Click(object sender, EventArgs e)
         {
             tbYears.Visible = !mnuDisableTimeline.Checked;
             btnBack1.Visible = !mnuDisableTimeline.Checked;
@@ -388,7 +384,7 @@ namespace FTAnalyzer.Forms
             UpdateMap();
         }
 
-        private void cbLimitFactDates_SelectedIndexChanged(object sender, EventArgs e)
+        private void CbLimitFactDates_SelectedIndexChanged(object sender, EventArgs e)
         {
             yearLimit = GetYearLimit();
             UpdateMap();
@@ -421,12 +417,12 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void mnuHideScaleBar_Click(object sender, EventArgs e)
+        private void MnuHideScaleBar_Click(object sender, EventArgs e)
         {
             mh.mnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             HttpUtility.VisitWebsite(e.Link.LinkData as string);
         }
@@ -457,7 +453,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void resetFormToDefaultPostiionAndSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ResetFormToDefaultPostiionAndSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             loading = true;
             this.Height = 622;
