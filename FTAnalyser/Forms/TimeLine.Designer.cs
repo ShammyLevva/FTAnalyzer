@@ -118,7 +118,7 @@ namespace FTAnalyzer.Forms
             this.geocodeLocationsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.geocodeLocationsToolStripMenuItem.Text = "Geocode Locations";
             this.geocodeLocationsToolStripMenuItem.ToolTipText = "Looks up map co-ordinates for locations in your file";
-            this.geocodeLocationsToolStripMenuItem.Click += new System.EventHandler(this.geocodeLocationsToolStripMenuItem_Click);
+            this.geocodeLocationsToolStripMenuItem.Click += new System.EventHandler(this.GeocodeLocationsToolStripMenuItem_Click);
             // 
             // relationsToolStripMenuItem
             // 
@@ -196,7 +196,7 @@ namespace FTAnalyzer.Forms
             this.mnuDisableTimeline.Name = "mnuDisableTimeline";
             this.mnuDisableTimeline.Size = new System.Drawing.Size(272, 22);
             this.mnuDisableTimeline.Text = "Disable Timeline: Shows All Locations";
-            this.mnuDisableTimeline.Click += new System.EventHandler(this.mnuDisableTimeline_Click);
+            this.mnuDisableTimeline.Click += new System.EventHandler(this.MnuDisableTimeline_Click);
             // 
             // mnuHideScaleBar
             // 
@@ -204,7 +204,7 @@ namespace FTAnalyzer.Forms
             this.mnuHideScaleBar.Name = "mnuHideScaleBar";
             this.mnuHideScaleBar.Size = new System.Drawing.Size(272, 22);
             this.mnuHideScaleBar.Text = "Hide Scale Bar";
-            this.mnuHideScaleBar.Click += new System.EventHandler(this.mnuHideScaleBar_Click);
+            this.mnuHideScaleBar.Click += new System.EventHandler(this.MnuHideScaleBar_Click);
             // 
             // mnuKeepZoom
             // 
@@ -236,7 +236,7 @@ namespace FTAnalyzer.Forms
             "+/-100 years"});
             this.cbLimitFactDates.Name = "cbLimitFactDates";
             this.cbLimitFactDates.Size = new System.Drawing.Size(121, 23);
-            this.cbLimitFactDates.SelectedIndexChanged += new System.EventHandler(this.cbLimitFactDates_SelectedIndexChanged);
+            this.cbLimitFactDates.SelectedIndexChanged += new System.EventHandler(this.CbLimitFactDates_SelectedIndexChanged);
             // 
             // tbYears
             // 
@@ -246,7 +246,7 @@ namespace FTAnalyzer.Forms
             this.tbYears.Size = new System.Drawing.Size(921, 45);
             this.tbYears.TabIndex = 3;
             this.tbYears.TickFrequency = 5;
-            this.tbYears.Scroll += new System.EventHandler(this.tbYears_Scroll);
+            this.tbYears.Scroll += new System.EventHandler(this.TbYears_Scroll);
             // 
             // labMin
             // 
@@ -301,11 +301,11 @@ namespace FTAnalyzer.Forms
             this.mapBox1.TabIndex = 7;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
-            this.mapBox1.MapZoomChanged += new SharpMap.Forms.MapBox.MapZoomHandler(this.mapBox1_MapZoomChanged);
-            this.mapBox1.MapQueried += new SharpMap.Forms.MapBox.MapQueryHandler(this.mapBox1_MapQueried);
-            this.mapBox1.MapCenterChanged += new SharpMap.Forms.MapBox.MapCenterChangedHandler(this.mapBox1_MapCenterChanged);
-            this.mapBox1.ActiveToolChanged += new SharpMap.Forms.MapBox.ActiveToolChangedHandler(this.mapBox1_ActiveToolChanged);
-            this.mapBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mapBox1_MouseDoubleClick);
+            this.mapBox1.MapZoomChanged += new SharpMap.Forms.MapBox.MapZoomHandler(this.MapBox1_MapZoomChanged);
+            this.mapBox1.MapQueried += new SharpMap.Forms.MapBox.MapQueryHandler(this.MapBox1_MapQueried);
+            this.mapBox1.MapCenterChanged += new SharpMap.Forms.MapBox.MapCenterChangedHandler(this.MapBox1_MapCenterChanged);
+            this.mapBox1.ActiveToolChanged += new SharpMap.Forms.MapBox.ActiveToolChangedHandler(this.MapBox1_ActiveToolChanged);
+            this.mapBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MapBox1_MouseDoubleClick);
             // 
             // mapZoomToolStrip
             // 
@@ -335,7 +335,7 @@ namespace FTAnalyzer.Forms
             this.btnSelect.Size = new System.Drawing.Size(23, 22);
             this.btnSelect.Text = "Location Selection ";
             this.btnSelect.ToolTipText = "Location Selection ";
-            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+            this.btnSelect.Click += new System.EventHandler(this.BtnSelect_Click);
             // 
             // toolStripSeparator2
             // 
@@ -353,8 +353,8 @@ namespace FTAnalyzer.Forms
             this.txtTimeInterval.Name = "txtTimeInterval";
             this.txtTimeInterval.Size = new System.Drawing.Size(35, 25);
             this.txtTimeInterval.Text = "2000";
-            this.txtTimeInterval.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimeInterval_KeyPress);
-            this.txtTimeInterval.Validated += new System.EventHandler(this.txtTimeInterval_Validated);
+            this.txtTimeInterval.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtTimeInterval_KeyPress);
+            this.txtTimeInterval.Validated += new System.EventHandler(this.TxtTimeInterval_Validated);
             // 
             // toolStripLabel2
             // 
@@ -376,7 +376,7 @@ namespace FTAnalyzer.Forms
             this.btnPlay.Size = new System.Drawing.Size(23, 22);
             this.btnPlay.Text = "toolStripButton2";
             this.btnPlay.ToolTipText = "Play Timeline from current year";
-            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
+            this.btnPlay.Click += new System.EventHandler(this.BtnPlay_Click);
             // 
             // btnStop
             // 
@@ -388,7 +388,7 @@ namespace FTAnalyzer.Forms
             this.btnStop.Text = "toolStripButton3";
             this.btnStop.ToolTipText = "Stop Timeline Playback";
             this.btnStop.Visible = false;
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            this.btnStop.Click += new System.EventHandler(this.BtnStop_Click);
             // 
             // linkLabel1
             // 
@@ -401,12 +401,12 @@ namespace FTAnalyzer.Forms
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "© Google - Terms of Use";
             this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
             // 
             // timer
             // 
             this.timer.Interval = 2000;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            this.timer.Tick += new System.EventHandler(this.Timer_Tick);
             // 
             // btnBack1
             // 
@@ -418,7 +418,7 @@ namespace FTAnalyzer.Forms
             this.btnBack1.TabIndex = 10;
             this.btnBack1.Text = "<";
             this.btnBack1.UseVisualStyleBackColor = true;
-            this.btnBack1.Click += new System.EventHandler(this.btnBack1_Click);
+            this.btnBack1.Click += new System.EventHandler(this.BtnBack1_Click);
             // 
             // btnForward1
             // 
@@ -430,7 +430,7 @@ namespace FTAnalyzer.Forms
             this.btnForward1.TabIndex = 11;
             this.btnForward1.Text = ">";
             this.btnForward1.UseVisualStyleBackColor = true;
-            this.btnForward1.Click += new System.EventHandler(this.btnForward1_Click);
+            this.btnForward1.Click += new System.EventHandler(this.BtnForward1_Click);
             // 
             // btnBack10
             // 
@@ -442,7 +442,7 @@ namespace FTAnalyzer.Forms
             this.btnBack10.TabIndex = 12;
             this.btnBack10.Text = "<<";
             this.btnBack10.UseVisualStyleBackColor = true;
-            this.btnBack10.Click += new System.EventHandler(this.btnBack10_Click);
+            this.btnBack10.Click += new System.EventHandler(this.BtnBack10_Click);
             // 
             // btnForward10
             // 
@@ -454,14 +454,14 @@ namespace FTAnalyzer.Forms
             this.btnForward10.TabIndex = 13;
             this.btnForward10.Text = ">>";
             this.btnForward10.UseVisualStyleBackColor = true;
-            this.btnForward10.Click += new System.EventHandler(this.btnForward10_Click);
+            this.btnForward10.Click += new System.EventHandler(this.BtnForward10_Click);
             // 
             // resetFormToDefaultPostiionAndSizeToolStripMenuItem
             // 
             this.resetFormToDefaultPostiionAndSizeToolStripMenuItem.Name = "resetFormToDefaultPostiionAndSizeToolStripMenuItem";
             this.resetFormToDefaultPostiionAndSizeToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.resetFormToDefaultPostiionAndSizeToolStripMenuItem.Text = "Reset form to default position and size";
-            this.resetFormToDefaultPostiionAndSizeToolStripMenuItem.Click += new System.EventHandler(this.resetFormToDefaultPostiionAndSizeToolStripMenuItem_Click);
+            this.resetFormToDefaultPostiionAndSizeToolStripMenuItem.Click += new System.EventHandler(this.ResetFormToDefaultPostiionAndSizeToolStripMenuItem_Click);
             // 
             // TimeLine
             // 

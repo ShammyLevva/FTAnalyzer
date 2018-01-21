@@ -127,137 +127,123 @@ namespace FTAnalyzer.UserControls
 		public static event EventHandler UseBaptismDatesChanged;
 		protected static void OnUseBaptismDatesChanged()
 		{
-			if (UseBaptismDatesChanged != null)
-				UseBaptismDatesChanged(null, EventArgs.Empty);
-		}
+            UseBaptismDatesChanged?.Invoke(null, EventArgs.Empty);
+        }
 
         public static event EventHandler UseBurialDatesChanged;
         protected static void OnUseBurialDatesChanged()
         {
-            if (UseBurialDatesChanged != null)
-                UseBurialDatesChanged(null, EventArgs.Empty);
+            UseBurialDatesChanged?.Invoke(null, EventArgs.Empty);
         }
 
         public static event EventHandler AllowEmptyLocationsChanged;
 		protected static void OnAllowEmptyLocationsChanged()
 		{
-			if (AllowEmptyLocationsChanged != null)
-				AllowEmptyLocationsChanged(null, EventArgs.Empty);
-		}
+            AllowEmptyLocationsChanged?.Invoke(null, EventArgs.Empty);
+        }
 
 		public static event EventHandler UseResidenceAsCensusChanged;
 		protected static void OnUseResidenceAsCensusChanged()
 		{
-			if (UseResidenceAsCensusChanged != null)
-				UseResidenceAsCensusChanged(null, EventArgs.Empty);
-		}
+            UseResidenceAsCensusChanged?.Invoke(null, EventArgs.Empty);
+        }
 
 		public static event EventHandler TolerateInaccurateCensusChanged;
 		protected static void OnTolerateInaccurateCensusChanged()
 		{
-			if (TolerateInaccurateCensusChanged != null)
-				TolerateInaccurateCensusChanged(null, EventArgs.Empty);
-		}
+            TolerateInaccurateCensusChanged?.Invoke(null, EventArgs.Empty);
+        }
 
         public static event EventHandler IncludePartialGeocodedChanged;
         protected static void OnIncludePartialGeocodedChanged()
         {
-            if (IncludePartialGeocodedChanged != null)
-                IncludePartialGeocodedChanged(null, EventArgs.Empty);
+            IncludePartialGeocodedChanged?.Invoke(null, EventArgs.Empty);
         }
 
         public static event EventHandler OnlyCensusParentsChanged;
         protected static void OnOnlyCensusParentsChanged()
         {
-            if (OnlyCensusParentsChanged != null)
-                OnlyCensusParentsChanged(null, EventArgs.Empty);
+            OnlyCensusParentsChanged?.Invoke(null, EventArgs.Empty);
         }
 
         public static event EventHandler MinParentalAgeChanged;
                 protected static void OnMinParentalAgeChanged()
         {
-            if (MinParentalAgeChanged != null)
-                MinParentalAgeChanged(null, EventArgs.Empty);
+            MinParentalAgeChanged?.Invoke(null, EventArgs.Empty);
         }
 
         public static event EventHandler CompactCensusRefChanged;
         protected static void OnCompactCensusRefChanged()
         {
-            if (CompactCensusRefChanged != null)
-                CompactCensusRefChanged(null, EventArgs.Empty);
+            CompactCensusRefChanged?.Invoke(null, EventArgs.Empty);
         }
 
         public static event EventHandler ReverseCountriesChanged;
         protected static void OnReverseCountriesChanged()
         {
-            if (ReverseCountriesChanged != null)
-                ReverseCountriesChanged(null, EventArgs.Empty);
+            ReverseCountriesChanged?.Invoke(null, EventArgs.Empty);
         }
 
         public static event EventHandler AutoCreateCensusFactsChanged;
         protected static void OnAutoCreateCensusFactsChanged()
         {
-            if (AutoCreateCensusFactsChanged != null)
-                AutoCreateCensusFactsChanged(null, EventArgs.Empty);
+            AutoCreateCensusFactsChanged?.Invoke(null, EventArgs.Empty);
         }
 
         public static event EventHandler AddCreatedLocationsChanged;
         protected static void OnAddCreatedLocationsChanged()
         {
-            if (AddCreatedLocationsChanged != null)
-                AddCreatedLocationsChanged(null, EventArgs.Empty);
+            AddCreatedLocationsChanged?.Invoke(null, EventArgs.Empty);
         }
 
         public static event EventHandler ShowWorldEventsChanged;
         protected static void OnShowWorldEventsChanged()
         {
-            if (ShowWorldEventsChanged != null)
-                ShowWorldEventsChanged(null, EventArgs.Empty);
+            ShowWorldEventsChanged?.Invoke(null, EventArgs.Empty);
         }
 
         public static event EventHandler TreatFemaleUnknownChanged;
         protected static void OnTreatFemaleUnknownChanged()
         {
-            if (TreatFemaleUnknownChanged != null)
-                TreatFemaleUnknownChanged(null, EventArgs.Empty);
+            TreatFemaleUnknownChanged?.Invoke(null, EventArgs.Empty);
         }
 
-        private void chkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e)
+        private void ChkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e)
 		{
 			Properties.GeneralSettings.Default.ReloadRequired = true;
 		}
 
-		private void chkTolerateInaccurateCensus_CheckedChanged(object sender, EventArgs e)
+		private void ChkTolerateInaccurateCensus_CheckedChanged(object sender, EventArgs e)
 		{
 			Properties.GeneralSettings.Default.ReloadRequired = true;
 		}
 
-		private void chkCensusResidence_CheckedChanged(object sender, EventArgs e)
+		private void ChkCensusResidence_CheckedChanged(object sender, EventArgs e)
 		{
 			Properties.GeneralSettings.Default.ReloadRequired = true;
 		}
 
-        private void chkFamilyCensus_CheckedChanged(object sender, EventArgs e)
+        private void ChkFamilyCensus_CheckedChanged(object sender, EventArgs e)
         {
             Properties.GeneralSettings.Default.ReloadRequired = true;
         }
 
-        private void chkReverseLocations_CheckedChanged(object sender, EventArgs e)
+        private void ChkReverseLocations_CheckedChanged(object sender, EventArgs e)
         {
             Properties.GeneralSettings.Default.ReloadRequired = true;
         }
 
-        private void chkAutoCreateCensus_CheckedChanged(object sender, EventArgs e)
+        private void ChkAutoCreateCensus_CheckedChanged(object sender, EventArgs e)
         {
             Properties.GeneralSettings.Default.ReloadRequired = true;
         }
 
-        private void chkAddCreatedLocations_CheckedChanged(object sender, EventArgs e)
+        private void ChkAddCreatedLocations_CheckedChanged(object sender, EventArgs e)
         {
             Properties.GeneralSettings.Default.ReloadRequired = true;
         }
 
-        private void chkTreatFemaleAsUnknown_CheckedChanged(object sender, EventArgs e)
+        private void ChkTreatFemaleAsUnknown_CheckedChanged(object sender, EventArgs e)
         {
             Properties.GeneralSettings.Default.ReloadRequired = true;
         }

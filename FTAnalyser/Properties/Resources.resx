@@ -130,10 +130,4 @@
   <data name="Restart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Restart.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="High Res Logo 400x400" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\High Res Logo 400x400.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="High Res Logo 100x100" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\High Res Logo 100x100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
 </root>
