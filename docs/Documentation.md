@@ -1,18 +1,18 @@
 FTAnalyzer Documentation
 ========================
 
-#### PLEASE NOTE you MUST uninstall the old Codeplex version before the version 6.0.1.0 or above can be updated. The latest version can be downloaded from the downloads link at the top of the page.
+#### PLEASE NOTE you MUST uninstall the old Codeplex version before the version 6.0.1.0 or above can be updated. The latest version can be installed from the [installs](http://www.ftanalyzer.com/install) page.
 
 If you have any problems, issues or suggestions please add them to the [Issues Section](https://github.com/ShammyLevva/FTAnalyzer/issues). Thank you.
 
-**[Install Instructions](Install_Instructions)**  
-**[Getting Started](Getting_Started)**  
-**[Program's Purpose](Program%27s_Purpose)**  
-**[Changing the Root Person](https://ftanalyzer.codeplex.comThe_Individuals_Tab)**
+**[Install Instructions](Install%20Instructions)**  
+**[Getting Started](Getting%20Started)**  
+**[Program's Purpose](Program%27s%20Purpose)**  
+**[Changing the Root Person](https://ftanalyzer.codeplex.comThe%20Individuals%20Tab)**
 
-**[What's New in this Release](http://ftanalyzer.codeplex.comWhat%27s_New_in_this_Release%3f)?**
+**[What's New in this Release](http://ftanalyzer.codeplex.comWhat%27s%20New%20in%20this%20Release%3f)?**
 
-**The Menu**
+**The Menu[](#the-menu)**
 
 *   **[File](http://ftanalyzer.codeplex.comFile)**
 *   **[Reports](http://ftanalyzer.codeplex.comreports)**
@@ -21,43 +21,43 @@ If you have any problems, issues or suggestions please add them to the [Issues S
 *   **[Maps](http://ftanalyzer.codeplex.comMaps)**
 *   **Help**
 
-**The Tabs**
+**The Tabs[](#the-tabs)**
 
-*   **[The Individuals Tab](The_Individuals_Tab)**
-*   **[The Families Tab](The_Families_Tab)**
+*   **[The Individuals Tab](The%20Individuals%20Tab)**
+*   **[The Families Tab](The%20Families%20Tab)**
 *   **[The Surnames Tab](wikipage?title=Surnames)**
-*   **[The Locations Tab](The_Locations_Tab)**
-*   **[The Occupations Tab](The_Occupations_Tab)**
-*   **[The Facts Tab](wikipage?title=The_Facts_Tab)**
-*   **The Sources Tab**
-*   **[The Data Errors Tab](The_Data_Errors_Tab)**
-*   **[The Births/Deaths Tab](The_Loose_Deaths_Tab)**
-*   **[The Census Tab](The_Census_Tab)**
-*   **[The Lost Cousins Tab](The_Lost_Cousins_Tab)**
-*   **[The Colour Reports Tab](wikipage?title=Search_Summaries_Tab)**
-*   **[The Tree Tops Tab](The_Tree_Tops_Tab)**
-*   **[The World Wars Tab](The_War_Dead_Tab)**
+*   **[The Locations Tab](The%20Locations%20Tab)**
+*   **[The Occupations Tab](The%20Occupations%20Tab)**
+*   **[The Facts Tab](The%20Facts%20Tab)**
+*   **[The Sources Tab](The%20Sources%20Tab)**
+*   **[The Data Errors Tab](The%20Data%20Errors%20Tab)**
+*   **[The Births/Deaths Tab](The%20Loose%20Deaths%20Tab)**
+*   **[The Census Tab](The%20Census%20Tab)**
+*   **[The Lost Cousins Tab](The%20Lost%20Cousins%20Tab)**
+*   **[The Colour Reports Tab](Search%20Summaries%20Tab)**
+*   **[The Tree Tops Tab](The%20Tree%20Tops%20Tab)**
+*   **[The World Wars Tab](The%20War%20Dead%20Tab)**
 
-**Hints and Tips**
+**Hints and Tips[](#hints-and-tips)**
 
-*   **[Creating Custom Facts](Creating_Custom_Facts)**
-*   **[Guide for Lost Cousins Members](Guide_for_Lost_Cousins_Members)**
-*   **[Acceptable Date Entry Formats](wikipage?title=Acceptable_Date_Entry_Formats)**
+*   **[Creating Custom Facts](Creating%20Custom%20Facts)**
+*   **[Guide for Lost Cousins Members](Guide%20for%20Lost%20Cousins%20Members)**
+*   **[Acceptable Date Entry Formats](wikipage?title=Acceptable%20Date%20Entry%20Formats)**
 
-**Using FTAnalyzer with popular Family History Programs**
+**Using FTAnalyzer with popular Family History Programs[](#using-ftnalyzer-with-popular-family-history-programs)**
 
-*   **[Family Tree Maker](Family_Tree_Maker)**
+*   **[Family Tree Maker](Family%20Tree%20Maker)**
 *   **[GenoPro](GenoPro)**
-*   **[Family Historian](Family_Historian)**
-*   **[Legacy Family Tree](Legacy_Family_Tree)**
-*   **[Roots Magic](Roots_Magic)**
-*   **[Ancestral Quest](Ancestral_Quest)**
-*   **[My Heritage Family Tree Builder](My_Heritage_Family_Tree_Builder)**
-*   **[The Master Genealogist](The_Master_Genealogist)**
+*   **[Family Historian](Family%20Historian)**
+*   **[Legacy Family Tree](Legacy%20Family%20Tree)**
+*   **[Roots Magic](Roots%20Magic)**
+*   **[Ancestral Quest](Ancestral%20Quest)**
+*   **[My Heritage Family Tree Builder](My%20Heritage%20Family%20Tree%20Builder)**
+*   **[The Master Genealogist](The%20Master%20Genealogist)**
 *   **[Webtrees](webtrees)**
-*   **[Family Tree Legends](Family_Tree_Legends)**
+*   **[Family Tree Legends](Family%20Tree%20Legends)**
 
-**Mapping**
+**(#Mapping)**
 
-*   [**Displaying British Parish Boundaries**](Displaying_England_and_Wales_Parish_Boundaries)
-*   [**Adding a Custom Map to FTAnalyzer**](Adding_Custom_Maps)
+*   [**Displaying British Parish Boundaries**](Displaying%20England%20and%20Wales%20Parish%20Boundaries)
+*   [**Adding a Custom Map to FTAnalyzer**](Adding%20Custom%20Maps)

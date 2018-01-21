@@ -1,3 +1,5 @@
+<head><link rel="shortcut icon" type="image/x-icon" href="favicon.ico"></head>
+
 #### To install the latest version click [here.](http://ftanalyzer.com/install/)
 
 Family Tree Analyzer
