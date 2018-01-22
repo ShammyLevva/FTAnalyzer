@@ -3,9 +3,14 @@ theme: jekyll-theme-time-machine
 plugins:
   - jekyll-seo-tag
   
-og:image: FacebookLogo.png
-
-og:author: Alexander Bisset
+defaults:
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      image: /FacebookLogo.png
+      author: Alexander Bisset
 
 social:
   name: Family Tree Analyzer
