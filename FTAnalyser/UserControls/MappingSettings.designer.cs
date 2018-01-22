@@ -60,7 +60,7 @@
             resources.ApplyResources(this.btnBrowseFolder, "btnBrowseFolder");
             this.btnBrowseFolder.Name = "btnBrowseFolder";
             this.btnBrowseFolder.UseVisualStyleBackColor = true;
-            this.btnBrowseFolder.Click += new System.EventHandler(this.btnBrowseFolder_Click);
+            this.btnBrowseFolder.Click += new System.EventHandler(this.BtnBrowseFolder_Click);
             // 
             // ckbUseParishBoundaries
             // 

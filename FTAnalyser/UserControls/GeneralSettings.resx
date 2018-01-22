@@ -472,13 +472,13 @@
     <value>44, 143</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 13</value>
+    <value>181, 13</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Loose Birth Minimum Parental Age</value>
+    <value>Loose Birth Minimum Parental Age (*)</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>

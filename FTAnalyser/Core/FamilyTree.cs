@@ -1413,28 +1413,28 @@ namespace FTAnalyzer
 
         public SortableBindingList<IDisplayLocation> AllDisplayCountries
         {
-            get { return displayLocations[FactLocation.COUNTRY] == null ? GetDisplayLocations(FactLocation.COUNTRY) : displayLocations[FactLocation.COUNTRY]; }
+            get { return displayLocations[FactLocation.COUNTRY] ?? GetDisplayLocations(FactLocation.COUNTRY); }
         }
 
         public SortableBindingList<IDisplayLocation> AllDisplayRegions
         {
-            get { return displayLocations[FactLocation.REGION] == null ? GetDisplayLocations(FactLocation.REGION) : displayLocations[FactLocation.REGION]; }
+            get { return displayLocations[FactLocation.REGION] ?? GetDisplayLocations(FactLocation.REGION); }
         }
 
         public SortableBindingList<IDisplayLocation> AllDisplaySubRegions
         {
-            get { return displayLocations[FactLocation.SUBREGION] == null ? GetDisplayLocations(FactLocation.SUBREGION) : displayLocations[FactLocation.SUBREGION]; }
+            get { return displayLocations[FactLocation.SUBREGION] ?? GetDisplayLocations(FactLocation.SUBREGION); }
 
         }
 
         public SortableBindingList<IDisplayLocation> AllDisplayAddresses
         {
-            get { return displayLocations[FactLocation.ADDRESS] == null ? GetDisplayLocations(FactLocation.ADDRESS) : displayLocations[FactLocation.ADDRESS]; }
+            get { return displayLocations[FactLocation.ADDRESS] ?? GetDisplayLocations(FactLocation.ADDRESS); }
         }
 
         public SortableBindingList<IDisplayLocation> AllDisplayPlaces
         {
-            get { return displayLocations[FactLocation.PLACE] == null ? GetDisplayLocations(FactLocation.PLACE) : displayLocations[FactLocation.PLACE]; }
+            get { return displayLocations[FactLocation.PLACE] ?? GetDisplayLocations(FactLocation.PLACE); }
         }
 
         public List<IDisplayGeocodedLocation> AllGeocodingLocations
@@ -1552,8 +1552,7 @@ namespace FTAnalyzer
                 else
                     dateFilter = i => ((i.BirthDate.StartsBefore(CensusDate.UKCENSUS1911) || !i.BirthDate.IsKnown) &&
                                                          (i.DeathDate.EndsAfter(CensusDate.UKCENSUS1841) || !i.DeathDate.IsKnown));
-                Predicate<Individual> aliveOnAnyCensus = x => x.AliveOnAnyCensus(country) && !x.OutOfCountryOnAllCensus(country);
-                filter = FilterUtils.AndFilter<Individual>(filter, dateFilter, aliveOnAnyCensus);
+                filter = FilterUtils.AndFilter<Individual>(filter, dateFilter, x => x.AliveOnAnyCensus(country) && !x.OutOfCountryOnAllCensus(country));
             }
             else
                 filter = x => family.Members.Contains<Individual>(x);

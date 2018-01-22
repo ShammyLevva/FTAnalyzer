@@ -18,7 +18,6 @@ namespace FTAnalyzer.UserControls
 			//if this happens, then the users settings will be cleared.
             chkLoadWithFilters.Checked = false; // Properties.FileHandling.Default.LoadWithFilters;
             chkRetryFailedLines.Checked = false; // Properties.FileHandling.Default.RetryFailedLines;
-            Properties.GeneralSettings.Default.ReloadRequired = false;
 		}
 
 		#region IOptions Members
@@ -28,8 +27,6 @@ namespace FTAnalyzer.UserControls
             Properties.FileHandling.Default.LoadWithFilters = chkLoadWithFilters.Checked;
             Properties.FileHandling.Default.RetryFailedLines = chkRetryFailedLines.Checked;
             Properties.FileHandling.Default.Save();
-            OnLoadWithFiltersChanged();
-            OnRetryFailedLinesChanged();
 		}
 
 		public void Cancel()
@@ -81,22 +78,7 @@ namespace FTAnalyzer.UserControls
 			get { return null; }
 		}
 
-		#endregion
-
-        public static event EventHandler LoadWithFiltersChanged;
-        protected static void OnLoadWithFiltersChanged()
-        {
-            if (LoadWithFiltersChanged != null)
-                LoadWithFiltersChanged(null, EventArgs.Empty);
-        }
-
-        public static event EventHandler RetryFailedLinesChanged;
-        protected static void OnRetryFailedLinesChanged()
-        {
-            if (RetryFailedLinesChanged != null)
-                RetryFailedLinesChanged(null, EventArgs.Empty);
-        }
-
+        #endregion
         private void chkLoadWithFilters_CheckedChanged(object sender, EventArgs e)
         {
             Properties.GeneralSettings.Default.ReloadRequired = true;
@@ -106,5 +88,6 @@ namespace FTAnalyzer.UserControls
         {
             Properties.GeneralSettings.Default.ReloadRequired = true;
         }
+
     }
 }

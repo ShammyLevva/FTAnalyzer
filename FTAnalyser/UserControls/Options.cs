@@ -19,7 +19,8 @@ namespace FTAnalyzer.UserControls
 		public Options()
 		{
 			InitializeComponent();
-			_lookupTable = new Dictionary<string, UserControl>();
+            Properties.GeneralSettings.Default.ReloadRequired = false;
+            _lookupTable = new Dictionary<string, UserControl>();
 		}
 
 		private void Options_Load(object sender, EventArgs e)
@@ -122,11 +123,18 @@ namespace FTAnalyzer.UserControls
 				foreach (Control control in panel1.Controls)
                     if (control is IOptions options)
                         options.Save();
+                OnReloadRequired();
 				DialogResult = DialogResult.OK;
 			}
 		}
 
-		private void Cancel_Click(object sender, EventArgs e)
+        public static event EventHandler ReloadRequired;
+        protected static void OnReloadRequired()
+        {
+            ReloadRequired?.Invoke(null, EventArgs.Empty);
+        }
+
+        private void Cancel_Click(object sender, EventArgs e)
 		{
 			foreach (Control control in panel1.Controls)
 			{

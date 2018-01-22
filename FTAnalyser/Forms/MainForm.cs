@@ -21,7 +21,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "6.0.3.0";
+        public static string VERSION = "6.0.4.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Cursor storedCursor = Cursors.Default;
@@ -68,16 +68,8 @@ namespace FTAnalyzer
 
         private void RegisterEventHandlers()
         {
-            GeneralSettings.AllowEmptyLocationsChanged += new EventHandler(Options_ReloadData);
-            GeneralSettings.TolerateInaccurateCensusChanged += new EventHandler(Options_ReloadData);
-            GeneralSettings.UseResidenceAsCensusChanged += new EventHandler(Options_ReloadData);
-            GeneralSettings.OnlyCensusParentsChanged += new EventHandler(Options_ReloadData);
-            GeneralSettings.ReverseCountriesChanged += new EventHandler(Options_ReloadData);
-            GeneralSettings.AutoCreateCensusFactsChanged += new EventHandler(Options_ReloadData);
-            GeneralSettings.AddCreatedLocationsChanged += new EventHandler(Options_ReloadData);
+            Options.ReloadRequired += new EventHandler(Options_ReloadData);
             GeneralSettings.MinParentalAgeChanged += new EventHandler(Options_MinimumParentalAgeChanged);
-            FileHandlingSettings.LoadWithFiltersChanged += new EventHandler(Options_ReloadData);
-            FileHandlingSettings.RetryFailedLinesChanged += new EventHandler(Options_ReloadData);
         }
 
         private void SetHeightWidth()

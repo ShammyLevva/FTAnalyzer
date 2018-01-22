@@ -33,7 +33,6 @@ namespace FTAnalyzer.UserControls
             chkShowWorldEvents.Checked = Properties.GeneralSettings.Default.ShowWorldEvents;
             chkIgnoreFactTypeWarnings.Checked = Properties.GeneralSettings.Default.IgnoreFactTypeWarnings;
             chkTreatFemaleAsUnknown.Checked = Properties.GeneralSettings.Default.TreatFemaleSurnamesAsUnknown;
-			Properties.GeneralSettings.Default.ReloadRequired = false;
 		}
 
 		#region IOptions Members
@@ -58,22 +57,11 @@ namespace FTAnalyzer.UserControls
             Properties.GeneralSettings.Default.IgnoreFactTypeWarnings = chkIgnoreFactTypeWarnings.Checked;
             Properties.GeneralSettings.Default.TreatFemaleSurnamesAsUnknown = chkTreatFemaleAsUnknown.Checked;
             Properties.GeneralSettings.Default.Save();
-			OnUseBaptismDatesChanged();
-			OnAllowEmptyLocationsChanged();
-			OnUseResidenceAsCensusChanged();
-			OnTolerateInaccurateCensusChanged();
-            OnIncludePartialGeocodedChanged();
-            OnOnlyCensusParentsChanged();
             OnMinParentalAgeChanged();
             OnCompactCensusRefChanged();
-            OnReverseCountriesChanged();
-            OnAutoCreateCensusFactsChanged();
-            OnAddCreatedLocationsChanged();
-            OnShowWorldEventsChanged();
-            OnTreatFemaleUnknownChanged();
-		}
+        }
 
-		public void Cancel()
+        public void Cancel()
 		{
 			//NOOP;
 		}
@@ -122,52 +110,10 @@ namespace FTAnalyzer.UserControls
 			get { return null; }
 		}
 
-		#endregion
-
-		public static event EventHandler UseBaptismDatesChanged;
-		protected static void OnUseBaptismDatesChanged()
-		{
-            UseBaptismDatesChanged?.Invoke(null, EventArgs.Empty);
-        }
-
-        public static event EventHandler UseBurialDatesChanged;
-        protected static void OnUseBurialDatesChanged()
-        {
-            UseBurialDatesChanged?.Invoke(null, EventArgs.Empty);
-        }
-
-        public static event EventHandler AllowEmptyLocationsChanged;
-		protected static void OnAllowEmptyLocationsChanged()
-		{
-            AllowEmptyLocationsChanged?.Invoke(null, EventArgs.Empty);
-        }
-
-		public static event EventHandler UseResidenceAsCensusChanged;
-		protected static void OnUseResidenceAsCensusChanged()
-		{
-            UseResidenceAsCensusChanged?.Invoke(null, EventArgs.Empty);
-        }
-
-		public static event EventHandler TolerateInaccurateCensusChanged;
-		protected static void OnTolerateInaccurateCensusChanged()
-		{
-            TolerateInaccurateCensusChanged?.Invoke(null, EventArgs.Empty);
-        }
-
-        public static event EventHandler IncludePartialGeocodedChanged;
-        protected static void OnIncludePartialGeocodedChanged()
-        {
-            IncludePartialGeocodedChanged?.Invoke(null, EventArgs.Empty);
-        }
-
-        public static event EventHandler OnlyCensusParentsChanged;
-        protected static void OnOnlyCensusParentsChanged()
-        {
-            OnlyCensusParentsChanged?.Invoke(null, EventArgs.Empty);
-        }
+        #endregion
 
         public static event EventHandler MinParentalAgeChanged;
-                protected static void OnMinParentalAgeChanged()
+        protected static void OnMinParentalAgeChanged()
         {
             MinParentalAgeChanged?.Invoke(null, EventArgs.Empty);
         }
@@ -176,36 +122,6 @@ namespace FTAnalyzer.UserControls
         protected static void OnCompactCensusRefChanged()
         {
             CompactCensusRefChanged?.Invoke(null, EventArgs.Empty);
-        }
-
-        public static event EventHandler ReverseCountriesChanged;
-        protected static void OnReverseCountriesChanged()
-        {
-            ReverseCountriesChanged?.Invoke(null, EventArgs.Empty);
-        }
-
-        public static event EventHandler AutoCreateCensusFactsChanged;
-        protected static void OnAutoCreateCensusFactsChanged()
-        {
-            AutoCreateCensusFactsChanged?.Invoke(null, EventArgs.Empty);
-        }
-
-        public static event EventHandler AddCreatedLocationsChanged;
-        protected static void OnAddCreatedLocationsChanged()
-        {
-            AddCreatedLocationsChanged?.Invoke(null, EventArgs.Empty);
-        }
-
-        public static event EventHandler ShowWorldEventsChanged;
-        protected static void OnShowWorldEventsChanged()
-        {
-            ShowWorldEventsChanged?.Invoke(null, EventArgs.Empty);
-        }
-
-        public static event EventHandler TreatFemaleUnknownChanged;
-        protected static void OnTreatFemaleUnknownChanged()
-        {
-            TreatFemaleUnknownChanged?.Invoke(null, EventArgs.Empty);
         }
 
         private void ChkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e)

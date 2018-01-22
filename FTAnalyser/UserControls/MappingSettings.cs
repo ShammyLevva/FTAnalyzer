@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using System.IO;
 
 namespace FTAnalyzer.UserControls
 {
@@ -84,7 +79,7 @@ namespace FTAnalyzer.UserControls
 
 		#endregion
 
-        private void btnBrowseFolder_Click(object sender, EventArgs e)
+        private void BtnBrowseFolder_Click(object sender, EventArgs e)
         {
             DialogResult result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK)
