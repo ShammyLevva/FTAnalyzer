@@ -3,11 +3,9 @@ theme: jekyll-theme-time-machine
 plugins:
   - jekyll-seo-tag
   
-image: https://github.com/ShammyLevva/FTAnalyzer/blob/master/docs/FacebookLogo.png?raw=true
+og:image: FacebookLogo.png
 
-logo: https://github.com/ShammyLevva/FTAnalyzer/blob/master/docs/FacebookLogo.png?raw=true
-
-author: Alexander Bisset
+og:author: Alexander Bisset
 
 social:
   name: Family Tree Analyzer
