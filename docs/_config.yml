@@ -2,3 +2,5 @@ theme: jekyll-theme-time-machine
 plugins:
   - jekyll-seo-tag
   
+description: "testing testing"
+image: https://avatars3.githubusercontent.com/u/29687786?s=460&v=4
