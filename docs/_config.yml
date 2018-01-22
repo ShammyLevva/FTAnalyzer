@@ -7,7 +7,6 @@ defaults:
   -
     scope:
       path: ""
-      type: "pages"
     values:
       image: /FacebookLogo.png
       author: Alexander Bisset
