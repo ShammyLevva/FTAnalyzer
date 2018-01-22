@@ -1,11 +1,7 @@
-<head><link rel="shortcut icon" type="image/x-icon" href="favicon.ico"></head>
-
-#### To install the latest version click [here.](http://ftanalyzer.com/install/)
-
 Family Tree Analyzer
 ====================
 
-Use FTAnalyzer to investigate your family tree in new and interesting ways, see where your ancestors lived and moved over time on the new maps feature. Find errors in your tree eg: childrens birthdates before parent was born. See lists of who is missing from census searches then click their name to automatically search on Ancestry, Find My Past, Familysearch etc. And lots more.
+#### To install the latest version click [here.](http://ftanalyzer.com/install/)
 
 Windows 10 & 8.1 installs may require you to click More Info and accept the certificate the first time you run the app.
 
