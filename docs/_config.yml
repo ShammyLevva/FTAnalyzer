@@ -1,5 +1,8 @@
 theme: jekyll-theme-time-machine
+
 plugins:
   - jekyll-seo-tag
+  
 image: "/FacebookLogo.png"
-description:"Use FTAnalyzer to investigate your family tree in new and interesting ways, see where your ancestors lived and moved over time on the new maps feature. Find errors in your tree eg: childrens birthdates before parent was born. See lists of who is missing from census searches then click their name to automatically search on Ancestry, Find My Past, Familysearch etc. And lots more."
+
+description: "Use FTAnalyzer to investigate your family tree in new and interesting ways, see where your ancestors lived and moved over time on the new maps feature. Find errors in your tree eg: childrens birthdates before parent was born. See lists of who is missing from census searches then click their name to automatically search on Ancestry, Find My Past, Familysearch etc. And lots more."
