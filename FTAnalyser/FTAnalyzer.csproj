@@ -493,6 +493,9 @@
     <Content Include="x64\SQLite.Interop.dll" />
     <Content Include="x86\gdal_wrap.dll" />
     <Content Include="x86\SQLite.Interop.dll" />
+    <EmbeddedResource Include="Resources\KUNSTLER.TTF">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Resource Include="Resources\Lib\SharpMap.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

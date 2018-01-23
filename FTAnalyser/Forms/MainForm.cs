@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -24,10 +25,15 @@ namespace FTAnalyzer
         public static string VERSION = "6.0.4.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
+        
         private Cursor storedCursor = Cursors.Default;
         private FamilyTree ft = FamilyTree.Instance;
         private bool stopProcessing = false;
         private string filename;
+        private PrivateFontCollection fonts = new PrivateFontCollection();
+        private Font handwritingFont;
         private Font boldFont;
         private Font normalFont;
         private bool loading;
@@ -55,15 +61,29 @@ namespace FTAnalyzer
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            boldFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Bold);
-            normalFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Regular);
+            SetupFonts();
             RegisterEventHandlers();
             this.Text = "Family Tree Analyzer v" + VERSION;
             SetHeightWidth();
+            label19.Font = handwritingFont;
             dgSurnames.AutoGenerateColumns = false;
             dgDuplicates.AutoGenerateColumns = false;
             rfhDuplicates = new ReportFormHelper(this, "Duplicates", dgDuplicates, ResetDuplicatesTable, "Duplicates", false);
             loading = false;
+        }
+
+        private void SetupFonts()
+        {
+            boldFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Bold);
+            normalFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Regular);
+            byte[] fontData = Properties.Resources.KUNSTLER;
+            IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
+            System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
+            uint dummy = 0;
+            fonts.AddMemoryFont(fontPtr, Properties.Resources.KUNSTLER.Length);
+            AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.KUNSTLER.Length, IntPtr.Zero, ref dummy);
+            System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
+            handwritingFont = new Font(fonts.Families[0], 52.0F, FontStyle.Bold);        
         }
 
         private void RegisterEventHandlers()

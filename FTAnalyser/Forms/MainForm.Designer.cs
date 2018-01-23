@@ -33,7 +33,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -126,8 +126,6 @@
             this.dgWorldWars = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
             this.txtWorldWarsSurname = new System.Windows.Forms.TextBox();
-            this.wardeadRelation = new Controls.RelationTypes();
-            this.wardeadCountry = new Controls.CensusCountry();
             this.ctxViewNotes = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuViewNotes = new System.Windows.Forms.ToolStripMenuItem();
             this.tabTreetops = new System.Windows.Forms.TabPage();
@@ -136,8 +134,6 @@
             this.btnTreeTops = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.txtTreetopsSurname = new System.Windows.Forms.TextBox();
-            this.treetopsRelation = new Controls.RelationTypes();
-            this.treetopsCountry = new Controls.CensusCountry();
             this.tabColourReports = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.btnAdvancedMissingData = new System.Windows.Forms.Button();
@@ -151,7 +147,6 @@
             this.btnColourBMD = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.txtColouredSurname = new System.Windows.Forms.TextBox();
-            this.relTypesColoured = new Controls.RelationTypes();
             this.tabLostCousins = new System.Windows.Forms.TabPage();
             this.Referrals = new System.Windows.Forms.GroupBox();
             this.ckbReferralInCommon = new System.Windows.Forms.CheckBox();
@@ -173,7 +168,6 @@
             this.btnLC1881EW = new System.Windows.Forms.Button();
             this.btnLC1881Canada = new System.Windows.Forms.Button();
             this.btnLC1881Scot = new System.Windows.Forms.Button();
-            this.relTypesLC = new Controls.RelationTypes();
             this.tabCensus = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnExportMissingCensusRefs = new System.Windows.Forms.Button();
@@ -196,8 +190,6 @@
             this.txtCensusSurname = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
-            this.cenDate = new Controls.CensusDateSelector();
-            this.relTypesCensus = new Controls.RelationTypes();
             this.btnShowCensusEntered = new System.Windows.Forms.Button();
             this.btnShowCensusMissing = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -236,11 +228,8 @@
             this.tabIndividuals = new System.Windows.Forms.TabPage();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label19 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.pbRelationships = new System.Windows.Forms.ProgressBar();
-            this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.pbFamilies = new System.Windows.Forms.ProgressBar();
             this.label5 = new System.Windows.Forms.Label();
@@ -256,7 +245,6 @@
             this.Individuals = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Families = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Marriages = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.reltypesSurnames = new Controls.RelationTypes();
             this.tabFacts = new System.Windows.Forms.TabPage();
             this.btnDuplicateFacts = new System.Windows.Forms.Button();
             this.lblExclude = new System.Windows.Forms.Label();
@@ -269,7 +257,6 @@
             this.btnShowFacts = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtFactsSurname = new System.Windows.Forms.TextBox();
-            this.relTypesFacts = new Controls.RelationTypes();
             this.tabSources = new System.Windows.Forms.TabPage();
             this.dgSources = new System.Windows.Forms.DataGridView();
             this.tabDuplicates = new System.Windows.Forms.TabPage();
@@ -304,9 +291,23 @@
             this.rbTodaySingle = new System.Windows.Forms.RadioButton();
             this.label17 = new System.Windows.Forms.Label();
             this.dpToday = new System.Windows.Forms.DateTimePicker();
-            this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
+            this.reltypesSurnames = new Controls.RelationTypes();
+            this.relTypesFacts = new Controls.RelationTypes();
+            this.cenDate = new Controls.CensusDateSelector();
+            this.relTypesCensus = new Controls.RelationTypes();
+            this.relTypesLC = new Controls.RelationTypes();
+            this.relTypesColoured = new Controls.RelationTypes();
+            this.treetopsRelation = new Controls.RelationTypes();
+            this.treetopsCountry = new Controls.CensusCountry();
+            this.wardeadRelation = new Controls.RelationTypes();
+            this.wardeadCountry = new Controls.CensusCountry();
+            this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label19 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -357,7 +358,6 @@
             this.tabIndividuals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.tabDisplayProgress.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabSelector.SuspendLayout();
             this.tabSurnames.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSurnames)).BeginInit();
@@ -368,6 +368,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgDuplicates)).BeginInit();
             this.tabToday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -893,7 +895,7 @@
             this.tsHintsLabel,
             this.tspbTabProgress,
             this.tsStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 501);
+            this.statusStrip.Location = new System.Drawing.Point(0, 499);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(1093, 22);
             this.statusStrip.TabIndex = 10;
@@ -929,21 +931,21 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 154);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
             this.dgDataErrors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgDataErrors.ShowCellToolTips = false;
             this.dgDataErrors.ShowEditingIcon = false;
-            this.dgDataErrors.Size = new System.Drawing.Size(1085, 291);
+            this.dgDataErrors.Size = new System.Drawing.Size(1085, 289);
             this.dgDataErrors.TabIndex = 3;
             this.toolTips.SetToolTip(this.dgDataErrors, "Double click to see list of facts for that individual");
             this.dgDataErrors.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgDataErrors_CellDoubleClick);
@@ -961,7 +963,7 @@
             this.dgRegions.Name = "dgRegions";
             this.dgRegions.RowHeadersVisible = false;
             this.dgRegions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgRegions.Size = new System.Drawing.Size(1065, 407);
+            this.dgRegions.Size = new System.Drawing.Size(1065, 405);
             this.dgRegions.TabIndex = 1;
             this.toolTips.SetToolTip(this.dgRegions, "Double click on Region name to see list of individuals with that Region.");
             this.dgRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgRegions_CellDoubleClick);
@@ -980,7 +982,7 @@
             this.dgCountries.Name = "dgCountries";
             this.dgCountries.RowHeadersVisible = false;
             this.dgCountries.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgCountries.Size = new System.Drawing.Size(1065, 407);
+            this.dgCountries.Size = new System.Drawing.Size(1065, 405);
             this.dgCountries.TabIndex = 0;
             this.toolTips.SetToolTip(this.dgCountries, "Double click on Country name to see list of individuals with that Country.");
             this.dgCountries.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgCountries_CellDoubleClick);
@@ -1034,7 +1036,7 @@
             this.ckbFactExclude.Name = "ckbFactExclude";
             this.ckbFactExclude.ScrollAlwaysVisible = true;
             this.ckbFactExclude.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.ckbFactExclude.Size = new System.Drawing.Size(313, 304);
+            this.ckbFactExclude.Size = new System.Drawing.Size(313, 289);
             this.ckbFactExclude.TabIndex = 28;
             this.toolTips.SetToolTip(this.ckbFactExclude, "Any fact types selected in this box excludes people who have this fact type from " +
         "report");
@@ -1081,7 +1083,7 @@
             this.tabWorldWars.Controls.Add(this.wardeadCountry);
             this.tabWorldWars.Location = new System.Drawing.Point(4, 22);
             this.tabWorldWars.Name = "tabWorldWars";
-            this.tabWorldWars.Size = new System.Drawing.Size(1085, 445);
+            this.tabWorldWars.Size = new System.Drawing.Size(1085, 443);
             this.tabWorldWars.TabIndex = 8;
             this.tabWorldWars.Text = "World Wars";
             this.tabWorldWars.ToolTipText = "Find men of fighting age during WWI & WWII";
@@ -1144,7 +1146,7 @@
             this.dgWorldWars.Name = "dgWorldWars";
             this.dgWorldWars.ReadOnly = true;
             this.dgWorldWars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgWorldWars.Size = new System.Drawing.Size(1035, 332);
+            this.dgWorldWars.Size = new System.Drawing.Size(1035, 330);
             this.dgWorldWars.TabIndex = 29;
             this.dgWorldWars.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgWorldWars_CellDoubleClick);
             this.dgWorldWars.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgWorldWars_MouseDown);
@@ -1164,23 +1166,6 @@
             this.txtWorldWarsSurname.Name = "txtWorldWarsSurname";
             this.txtWorldWarsSurname.Size = new System.Drawing.Size(201, 20);
             this.txtWorldWarsSurname.TabIndex = 27;
-            // 
-            // wardeadRelation
-            // 
-            this.wardeadRelation.Location = new System.Drawing.Point(270, 12);
-            this.wardeadRelation.MarriedToDB = true;
-            this.wardeadRelation.Name = "wardeadRelation";
-            this.wardeadRelation.Size = new System.Drawing.Size(322, 74);
-            this.wardeadRelation.TabIndex = 26;
-            // 
-            // wardeadCountry
-            // 
-            this.wardeadCountry.Location = new System.Drawing.Point(8, 12);
-            this.wardeadCountry.Name = "wardeadCountry";
-            this.wardeadCountry.Size = new System.Drawing.Size(256, 74);
-            this.wardeadCountry.TabIndex = 25;
-            this.wardeadCountry.Title = "Default Country";
-            this.wardeadCountry.UKEnabled = true;
             // 
             // ctxViewNotes
             // 
@@ -1208,7 +1193,7 @@
             this.tabTreetops.Controls.Add(this.treetopsCountry);
             this.tabTreetops.Location = new System.Drawing.Point(4, 22);
             this.tabTreetops.Name = "tabTreetops";
-            this.tabTreetops.Size = new System.Drawing.Size(1085, 445);
+            this.tabTreetops.Size = new System.Drawing.Size(1085, 443);
             this.tabTreetops.TabIndex = 7;
             this.tabTreetops.Text = "Treetops";
             this.tabTreetops.UseVisualStyleBackColor = true;
@@ -1227,7 +1212,7 @@
             this.dgTreeTops.Name = "dgTreeTops";
             this.dgTreeTops.ReadOnly = true;
             this.dgTreeTops.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgTreeTops.Size = new System.Drawing.Size(1035, 332);
+            this.dgTreeTops.Size = new System.Drawing.Size(1035, 330);
             this.dgTreeTops.TabIndex = 28;
             this.dgTreeTops.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgTreeTops_CellDoubleClick);
             this.dgTreeTops.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgTreeTops_MouseDown);
@@ -1271,23 +1256,6 @@
             this.txtTreetopsSurname.Size = new System.Drawing.Size(201, 20);
             this.txtTreetopsSurname.TabIndex = 23;
             // 
-            // treetopsRelation
-            // 
-            this.treetopsRelation.Location = new System.Drawing.Point(270, 12);
-            this.treetopsRelation.MarriedToDB = true;
-            this.treetopsRelation.Name = "treetopsRelation";
-            this.treetopsRelation.Size = new System.Drawing.Size(322, 74);
-            this.treetopsRelation.TabIndex = 12;
-            // 
-            // treetopsCountry
-            // 
-            this.treetopsCountry.Location = new System.Drawing.Point(8, 12);
-            this.treetopsCountry.Name = "treetopsCountry";
-            this.treetopsCountry.Size = new System.Drawing.Size(256, 74);
-            this.treetopsCountry.TabIndex = 11;
-            this.treetopsCountry.Title = "Default Country";
-            this.treetopsCountry.UKEnabled = true;
-            // 
             // tabColourReports
             // 
             this.tabColourReports.Controls.Add(this.groupBox7);
@@ -1301,7 +1269,7 @@
             this.tabColourReports.Controls.Add(this.relTypesColoured);
             this.tabColourReports.Location = new System.Drawing.Point(4, 22);
             this.tabColourReports.Name = "tabColourReports";
-            this.tabColourReports.Size = new System.Drawing.Size(1085, 445);
+            this.tabColourReports.Size = new System.Drawing.Size(1085, 443);
             this.tabColourReports.TabIndex = 12;
             this.tabColourReports.Text = "Colour Reports";
             this.tabColourReports.UseVisualStyleBackColor = true;
@@ -1426,15 +1394,6 @@
             this.txtColouredSurname.TabIndex = 30;
             this.txtColouredSurname.TextChanged += new System.EventHandler(this.TxtColouredSurname_TextChanged);
             // 
-            // relTypesColoured
-            // 
-            this.relTypesColoured.Location = new System.Drawing.Point(8, 8);
-            this.relTypesColoured.MarriedToDB = true;
-            this.relTypesColoured.Name = "relTypesColoured";
-            this.relTypesColoured.Size = new System.Drawing.Size(325, 78);
-            this.relTypesColoured.TabIndex = 26;
-            this.relTypesColoured.RelationTypesChanged += new System.EventHandler(this.RelTypesColoured_RelationTypesChanged);
-            // 
             // tabLostCousins
             // 
             this.tabLostCousins.Controls.Add(this.Referrals);
@@ -1457,7 +1416,7 @@
             this.tabLostCousins.Location = new System.Drawing.Point(4, 22);
             this.tabLostCousins.Name = "tabLostCousins";
             this.tabLostCousins.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLostCousins.Size = new System.Drawing.Size(1085, 445);
+            this.tabLostCousins.Size = new System.Drawing.Size(1085, 443);
             this.tabLostCousins.TabIndex = 5;
             this.tabLostCousins.Text = "Lost Cousins";
             this.tabLostCousins.UseVisualStyleBackColor = true;
@@ -1671,15 +1630,6 @@
             this.btnLC1881Scot.UseVisualStyleBackColor = true;
             this.btnLC1881Scot.Click += new System.EventHandler(this.BtnLC1881Scot_Click);
             // 
-            // relTypesLC
-            // 
-            this.relTypesLC.Location = new System.Drawing.Point(8, 8);
-            this.relTypesLC.MarriedToDB = true;
-            this.relTypesLC.Name = "relTypesLC";
-            this.relTypesLC.Size = new System.Drawing.Size(325, 78);
-            this.relTypesLC.TabIndex = 19;
-            this.relTypesLC.RelationTypesChanged += new System.EventHandler(this.RelTypesLC_RelationTypesChanged);
-            // 
             // tabCensus
             // 
             this.tabCensus.Controls.Add(this.groupBox6);
@@ -1690,7 +1640,7 @@
             this.tabCensus.Location = new System.Drawing.Point(4, 22);
             this.tabCensus.Name = "tabCensus";
             this.tabCensus.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCensus.Size = new System.Drawing.Size(1085, 445);
+            this.tabCensus.Size = new System.Drawing.Size(1085, 443);
             this.tabCensus.TabIndex = 0;
             this.tabCensus.Text = "Census";
             this.tabCensus.UseVisualStyleBackColor = true;
@@ -1933,24 +1883,6 @@
             0,
             0});
             // 
-            // cenDate
-            // 
-            this.cenDate.AutoSize = true;
-            this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.cenDate.Country = "";
-            this.cenDate.Location = new System.Drawing.Point(15, 103);
-            this.cenDate.Name = "cenDate";
-            this.cenDate.Size = new System.Drawing.Size(234, 27);
-            this.cenDate.TabIndex = 28;
-            // 
-            // relTypesCensus
-            // 
-            this.relTypesCensus.Location = new System.Drawing.Point(9, 19);
-            this.relTypesCensus.MarriedToDB = true;
-            this.relTypesCensus.Name = "relTypesCensus";
-            this.relTypesCensus.Size = new System.Drawing.Size(325, 78);
-            this.relTypesCensus.TabIndex = 27;
-            // 
             // btnShowCensusEntered
             // 
             this.btnShowCensusEntered.Location = new System.Drawing.Point(165, 136);
@@ -2008,7 +1940,7 @@
             this.tabLooseBirthDeaths.Location = new System.Drawing.Point(4, 22);
             this.tabLooseBirthDeaths.Name = "tabLooseBirthDeaths";
             this.tabLooseBirthDeaths.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLooseBirthDeaths.Size = new System.Drawing.Size(1085, 445);
+            this.tabLooseBirthDeaths.Size = new System.Drawing.Size(1085, 443);
             this.tabLooseBirthDeaths.TabIndex = 3;
             this.tabLooseBirthDeaths.Text = "Births/Deaths";
             this.tabLooseBirthDeaths.UseVisualStyleBackColor = true;
@@ -2021,7 +1953,7 @@
             this.tabCtrlLooseBDs.Location = new System.Drawing.Point(3, 3);
             this.tabCtrlLooseBDs.Name = "tabCtrlLooseBDs";
             this.tabCtrlLooseBDs.SelectedIndex = 0;
-            this.tabCtrlLooseBDs.Size = new System.Drawing.Size(1079, 439);
+            this.tabCtrlLooseBDs.Size = new System.Drawing.Size(1079, 437);
             this.tabCtrlLooseBDs.TabIndex = 1;
             this.tabCtrlLooseBDs.SelectedIndexChanged += new System.EventHandler(this.TabCtrlLooseBDs_SelectedIndexChanged);
             // 
@@ -2031,7 +1963,7 @@
             this.tabLooseBirths.Location = new System.Drawing.Point(4, 22);
             this.tabLooseBirths.Name = "tabLooseBirths";
             this.tabLooseBirths.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLooseBirths.Size = new System.Drawing.Size(1071, 413);
+            this.tabLooseBirths.Size = new System.Drawing.Size(1071, 411);
             this.tabLooseBirths.TabIndex = 1;
             this.tabLooseBirths.Text = "Loose Births";
             this.tabLooseBirths.UseVisualStyleBackColor = true;
@@ -2048,7 +1980,7 @@
             this.dgLooseBirths.MultiSelect = false;
             this.dgLooseBirths.Name = "dgLooseBirths";
             this.dgLooseBirths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgLooseBirths.Size = new System.Drawing.Size(1065, 407);
+            this.dgLooseBirths.Size = new System.Drawing.Size(1065, 405);
             this.dgLooseBirths.TabIndex = 2;
             this.dgLooseBirths.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLooseBirths_CellDoubleClick);
             // 
@@ -2058,7 +1990,7 @@
             this.tabLooseDeaths.Location = new System.Drawing.Point(4, 22);
             this.tabLooseDeaths.Name = "tabLooseDeaths";
             this.tabLooseDeaths.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLooseDeaths.Size = new System.Drawing.Size(1071, 413);
+            this.tabLooseDeaths.Size = new System.Drawing.Size(1071, 411);
             this.tabLooseDeaths.TabIndex = 0;
             this.tabLooseDeaths.Text = "Loose Deaths";
             this.tabLooseDeaths.UseVisualStyleBackColor = true;
@@ -2075,7 +2007,7 @@
             this.dgLooseDeaths.MultiSelect = false;
             this.dgLooseDeaths.Name = "dgLooseDeaths";
             this.dgLooseDeaths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgLooseDeaths.Size = new System.Drawing.Size(1065, 407);
+            this.dgLooseDeaths.Size = new System.Drawing.Size(1065, 405);
             this.dgLooseDeaths.TabIndex = 1;
             this.dgLooseDeaths.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLooseDeaths_CellDoubleClick);
             // 
@@ -2085,7 +2017,7 @@
             this.tabDataErrors.Controls.Add(this.gbDataErrorTypes);
             this.tabDataErrors.Location = new System.Drawing.Point(4, 22);
             this.tabDataErrors.Name = "tabDataErrors";
-            this.tabDataErrors.Size = new System.Drawing.Size(1085, 445);
+            this.tabDataErrors.Size = new System.Drawing.Size(1085, 443);
             this.tabDataErrors.TabIndex = 11;
             this.tabDataErrors.Text = "Data Errors";
             this.tabDataErrors.UseVisualStyleBackColor = true;
@@ -2140,7 +2072,7 @@
             this.tabOccupations.Controls.Add(this.dgOccupations);
             this.tabOccupations.Location = new System.Drawing.Point(4, 22);
             this.tabOccupations.Name = "tabOccupations";
-            this.tabOccupations.Size = new System.Drawing.Size(1085, 445);
+            this.tabOccupations.Size = new System.Drawing.Size(1085, 443);
             this.tabOccupations.TabIndex = 10;
             this.tabOccupations.Text = "Occupations";
             this.tabOccupations.UseVisualStyleBackColor = true;
@@ -2156,7 +2088,7 @@
             this.dgOccupations.MultiSelect = false;
             this.dgOccupations.Name = "dgOccupations";
             this.dgOccupations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgOccupations.Size = new System.Drawing.Size(1085, 445);
+            this.dgOccupations.Size = new System.Drawing.Size(1085, 443);
             this.dgOccupations.TabIndex = 2;
             this.dgOccupations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgOccupations_CellDoubleClick);
             // 
@@ -2168,7 +2100,7 @@
             this.tabLocations.Location = new System.Drawing.Point(4, 22);
             this.tabLocations.Name = "tabLocations";
             this.tabLocations.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLocations.Size = new System.Drawing.Size(1085, 445);
+            this.tabLocations.Size = new System.Drawing.Size(1085, 443);
             this.tabLocations.TabIndex = 4;
             this.tabLocations.Text = "Locations";
             this.tabLocations.UseVisualStyleBackColor = true;
@@ -2207,7 +2139,7 @@
             this.tabCtrlLocations.Location = new System.Drawing.Point(3, 3);
             this.tabCtrlLocations.Name = "tabCtrlLocations";
             this.tabCtrlLocations.SelectedIndex = 0;
-            this.tabCtrlLocations.Size = new System.Drawing.Size(1079, 439);
+            this.tabCtrlLocations.Size = new System.Drawing.Size(1079, 437);
             this.tabCtrlLocations.TabIndex = 0;
             this.tabCtrlLocations.SelectedIndexChanged += new System.EventHandler(this.TabCtrlLocations_SelectedIndexChanged);
             this.tabCtrlLocations.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabCtrlLocations_Selecting);
@@ -2218,7 +2150,7 @@
             this.tabTreeView.Location = new System.Drawing.Point(4, 22);
             this.tabTreeView.Name = "tabTreeView";
             this.tabTreeView.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTreeView.Size = new System.Drawing.Size(1071, 413);
+            this.tabTreeView.Size = new System.Drawing.Size(1071, 411);
             this.tabTreeView.TabIndex = 5;
             this.tabTreeView.Text = "Tree View";
             this.tabTreeView.UseVisualStyleBackColor = true;
@@ -2234,7 +2166,7 @@
             this.treeViewLocations.Name = "treeViewLocations";
             this.treeViewLocations.SelectedImageIndex = 0;
             this.treeViewLocations.ShowNodeToolTips = true;
-            this.treeViewLocations.Size = new System.Drawing.Size(1065, 407);
+            this.treeViewLocations.Size = new System.Drawing.Size(1065, 405);
             this.treeViewLocations.TabIndex = 0;
             this.treeViewLocations.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewLocations_BeforeCollapse);
             this.treeViewLocations.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewLocations_BeforeExpand);
@@ -2262,7 +2194,7 @@
             this.tabCountries.Location = new System.Drawing.Point(4, 22);
             this.tabCountries.Name = "tabCountries";
             this.tabCountries.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCountries.Size = new System.Drawing.Size(1071, 413);
+            this.tabCountries.Size = new System.Drawing.Size(1071, 411);
             this.tabCountries.TabIndex = 0;
             this.tabCountries.Text = "Countries";
             this.tabCountries.ToolTipText = "Double click on Country name to see list of individuals with that Country.";
@@ -2274,7 +2206,7 @@
             this.tabRegions.Location = new System.Drawing.Point(4, 22);
             this.tabRegions.Name = "tabRegions";
             this.tabRegions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRegions.Size = new System.Drawing.Size(1071, 413);
+            this.tabRegions.Size = new System.Drawing.Size(1071, 411);
             this.tabRegions.TabIndex = 1;
             this.tabRegions.Text = "Regions";
             this.tabRegions.ToolTipText = "Double click on Region name to see list of individuals with that Region.";
@@ -2286,7 +2218,7 @@
             this.tabSubRegions.Location = new System.Drawing.Point(4, 22);
             this.tabSubRegions.Name = "tabSubRegions";
             this.tabSubRegions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSubRegions.Size = new System.Drawing.Size(1071, 413);
+            this.tabSubRegions.Size = new System.Drawing.Size(1071, 411);
             this.tabSubRegions.TabIndex = 2;
             this.tabSubRegions.Text = "SubRegions";
             this.tabSubRegions.ToolTipText = "Double click on \'Parish\' name to see list of individuals with that parish/area.";
@@ -2305,7 +2237,7 @@
             this.dgSubRegions.Name = "dgSubRegions";
             this.dgSubRegions.RowHeadersVisible = false;
             this.dgSubRegions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgSubRegions.Size = new System.Drawing.Size(1065, 407);
+            this.dgSubRegions.Size = new System.Drawing.Size(1065, 405);
             this.dgSubRegions.TabIndex = 1;
             this.dgSubRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSubRegions_CellDoubleClick);
             this.dgSubRegions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgSubRegions_CellFormatting);
@@ -2316,7 +2248,7 @@
             this.tabAddresses.Location = new System.Drawing.Point(4, 22);
             this.tabAddresses.Name = "tabAddresses";
             this.tabAddresses.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAddresses.Size = new System.Drawing.Size(1071, 413);
+            this.tabAddresses.Size = new System.Drawing.Size(1071, 411);
             this.tabAddresses.TabIndex = 3;
             this.tabAddresses.Text = "Addresses";
             this.tabAddresses.ToolTipText = "Double click on Address name to see list of individuals with that Address.";
@@ -2335,7 +2267,7 @@
             this.dgAddresses.Name = "dgAddresses";
             this.dgAddresses.RowHeadersVisible = false;
             this.dgAddresses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgAddresses.Size = new System.Drawing.Size(1065, 407);
+            this.dgAddresses.Size = new System.Drawing.Size(1065, 405);
             this.dgAddresses.TabIndex = 1;
             this.dgAddresses.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgAddresses_CellDoubleClick);
             this.dgAddresses.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgAddresses_CellFormatting);
@@ -2346,7 +2278,7 @@
             this.tabPlaces.Location = new System.Drawing.Point(4, 22);
             this.tabPlaces.Name = "tabPlaces";
             this.tabPlaces.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPlaces.Size = new System.Drawing.Size(1071, 413);
+            this.tabPlaces.Size = new System.Drawing.Size(1071, 411);
             this.tabPlaces.TabIndex = 4;
             this.tabPlaces.Text = "Places";
             this.tabPlaces.ToolTipText = "Double click on Address name to see list of individuals with that Place";
@@ -2365,7 +2297,7 @@
             this.dgPlaces.Name = "dgPlaces";
             this.dgPlaces.RowHeadersVisible = false;
             this.dgPlaces.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgPlaces.Size = new System.Drawing.Size(1065, 407);
+            this.dgPlaces.Size = new System.Drawing.Size(1065, 405);
             this.dgPlaces.TabIndex = 2;
             this.dgPlaces.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgPlaces_CellDoubleClick);
             this.dgPlaces.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgPlaces_CellFormatting);
@@ -2375,7 +2307,7 @@
             this.tabFamilies.Controls.Add(this.dgFamilies);
             this.tabFamilies.Location = new System.Drawing.Point(4, 22);
             this.tabFamilies.Name = "tabFamilies";
-            this.tabFamilies.Size = new System.Drawing.Size(1085, 445);
+            this.tabFamilies.Size = new System.Drawing.Size(1085, 443);
             this.tabFamilies.TabIndex = 9;
             this.tabFamilies.Text = "Families";
             this.tabFamilies.UseVisualStyleBackColor = true;
@@ -2390,7 +2322,7 @@
             this.dgFamilies.MultiSelect = false;
             this.dgFamilies.Name = "dgFamilies";
             this.dgFamilies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgFamilies.Size = new System.Drawing.Size(1085, 445);
+            this.dgFamilies.Size = new System.Drawing.Size(1085, 443);
             this.dgFamilies.TabIndex = 1;
             this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgFamilies_CellDoubleClick);
             // 
@@ -2400,7 +2332,7 @@
             this.tabIndividuals.Location = new System.Drawing.Point(4, 22);
             this.tabIndividuals.Name = "tabIndividuals";
             this.tabIndividuals.Padding = new System.Windows.Forms.Padding(3);
-            this.tabIndividuals.Size = new System.Drawing.Size(1085, 445);
+            this.tabIndividuals.Size = new System.Drawing.Size(1085, 443);
             this.tabIndividuals.TabIndex = 2;
             this.tabIndividuals.Text = "Individuals";
             this.tabIndividuals.UseVisualStyleBackColor = true;
@@ -2416,14 +2348,14 @@
             this.dgIndividuals.Name = "dgIndividuals";
             this.dgIndividuals.ReadOnly = true;
             this.dgIndividuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgIndividuals.Size = new System.Drawing.Size(1079, 439);
+            this.dgIndividuals.Size = new System.Drawing.Size(1079, 437);
             this.dgIndividuals.TabIndex = 0;
             this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgIndividuals_CellDoubleClick);
             this.dgIndividuals.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgIndividuals_MouseDown);
             // 
             // tabDisplayProgress
             // 
-            this.tabDisplayProgress.Controls.Add(this.pictureBox1);
+            this.tabDisplayProgress.Controls.Add(this.panel1);
             this.tabDisplayProgress.Controls.Add(this.label7);
             this.tabDisplayProgress.Controls.Add(this.pbRelationships);
             this.tabDisplayProgress.Controls.Add(this.rtbOutput);
@@ -2433,35 +2365,13 @@
             this.tabDisplayProgress.Controls.Add(this.pbIndividuals);
             this.tabDisplayProgress.Controls.Add(this.label4);
             this.tabDisplayProgress.Controls.Add(this.pbSources);
-            this.tabDisplayProgress.Controls.Add(this.label19);
             this.tabDisplayProgress.Location = new System.Drawing.Point(4, 22);
             this.tabDisplayProgress.Name = "tabDisplayProgress";
             this.tabDisplayProgress.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDisplayProgress.Size = new System.Drawing.Size(1085, 445);
+            this.tabDisplayProgress.Size = new System.Drawing.Size(1085, 443);
             this.tabDisplayProgress.TabIndex = 1;
             this.tabDisplayProgress.Text = "Gedcom Stats";
             this.tabDisplayProgress.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(977, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox1.TabIndex = 9;
-            this.pictureBox1.TabStop = false;
-            // 
-            // label19
-            // 
-            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Kunstler Script", 51.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(461, 18);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(511, 74);
-            this.label19.TabIndex = 10;
-            this.label19.Text = "Family Tree Analyzer";
             // 
             // label7
             // 
@@ -2478,20 +2388,6 @@
             this.pbRelationships.Name = "pbRelationships";
             this.pbRelationships.Size = new System.Drawing.Size(316, 16);
             this.pbRelationships.TabIndex = 7;
-            // 
-            // rtbOutput
-            // 
-            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbOutput.Location = new System.Drawing.Point(3, 112);
-            this.rtbOutput.Name = "rtbOutput";
-            this.rtbOutput.ReadOnly = true;
-            this.rtbOutput.Size = new System.Drawing.Size(1079, 327);
-            this.rtbOutput.TabIndex = 6;
-            this.rtbOutput.Text = "";
-            this.rtbOutput.TextChanged += new System.EventHandler(this.RtbOutput_TextChanged);
             // 
             // label6
             // 
@@ -2566,7 +2462,7 @@
             this.tabSelector.Location = new System.Drawing.Point(0, 27);
             this.tabSelector.Name = "tabSelector";
             this.tabSelector.SelectedIndex = 0;
-            this.tabSelector.Size = new System.Drawing.Size(1093, 471);
+            this.tabSelector.Size = new System.Drawing.Size(1093, 469);
             this.tabSelector.TabIndex = 9;
             this.tabSelector.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             // 
@@ -2578,7 +2474,7 @@
             this.tabSurnames.Location = new System.Drawing.Point(4, 22);
             this.tabSurnames.Name = "tabSurnames";
             this.tabSurnames.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSurnames.Size = new System.Drawing.Size(1085, 445);
+            this.tabSurnames.Size = new System.Drawing.Size(1085, 443);
             this.tabSurnames.TabIndex = 14;
             this.tabSurnames.Text = "Surnames";
             this.tabSurnames.UseVisualStyleBackColor = true;
@@ -2613,7 +2509,7 @@
             this.dgSurnames.ReadOnly = true;
             this.dgSurnames.RowHeadersWidth = 20;
             this.dgSurnames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgSurnames.Size = new System.Drawing.Size(1079, 352);
+            this.dgSurnames.Size = new System.Drawing.Size(1079, 350);
             this.dgSurnames.TabIndex = 1;
             this.dgSurnames.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSurnames_CellContentClick);
             this.dgSurnames.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSurnames_CellDoubleClick);
@@ -2659,14 +2555,6 @@
             this.Marriages.Name = "Marriages";
             this.Marriages.ReadOnly = true;
             // 
-            // reltypesSurnames
-            // 
-            this.reltypesSurnames.Location = new System.Drawing.Point(6, 6);
-            this.reltypesSurnames.MarriedToDB = true;
-            this.reltypesSurnames.Name = "reltypesSurnames";
-            this.reltypesSurnames.Size = new System.Drawing.Size(325, 78);
-            this.reltypesSurnames.TabIndex = 22;
-            // 
             // tabFacts
             // 
             this.tabFacts.Controls.Add(this.btnDuplicateFacts);
@@ -2685,7 +2573,7 @@
             this.tabFacts.Controls.Add(this.relTypesFacts);
             this.tabFacts.Location = new System.Drawing.Point(4, 22);
             this.tabFacts.Name = "tabFacts";
-            this.tabFacts.Size = new System.Drawing.Size(1085, 445);
+            this.tabFacts.Size = new System.Drawing.Size(1085, 443);
             this.tabFacts.TabIndex = 13;
             this.tabFacts.Text = "Facts";
             this.tabFacts.UseVisualStyleBackColor = true;
@@ -2703,7 +2591,7 @@
             // lblExclude
             // 
             this.lblExclude.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblExclude.Location = new System.Drawing.Point(358, 429);
+            this.lblExclude.Location = new System.Drawing.Point(358, 427);
             this.lblExclude.Name = "lblExclude";
             this.lblExclude.Size = new System.Drawing.Size(293, 13);
             this.lblExclude.TabIndex = 32;
@@ -2714,7 +2602,7 @@
             // label15
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label15.Location = new System.Drawing.Point(8, 429);
+            this.label15.Location = new System.Drawing.Point(8, 427);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(293, 13);
             this.label15.TabIndex = 31;
@@ -2772,7 +2660,7 @@
             this.ckbFactSelect.Name = "ckbFactSelect";
             this.ckbFactSelect.ScrollAlwaysVisible = true;
             this.ckbFactSelect.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.ckbFactSelect.Size = new System.Drawing.Size(313, 304);
+            this.ckbFactSelect.Size = new System.Drawing.Size(313, 289);
             this.ckbFactSelect.TabIndex = 25;
             this.ckbFactSelect.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CkbFactSelect_MouseClick);
             // 
@@ -2803,22 +2691,13 @@
             this.txtFactsSurname.TabIndex = 22;
             this.txtFactsSurname.TextChanged += new System.EventHandler(this.TxtFactsSurname_TextChanged);
             // 
-            // relTypesFacts
-            // 
-            this.relTypesFacts.Location = new System.Drawing.Point(8, 8);
-            this.relTypesFacts.MarriedToDB = true;
-            this.relTypesFacts.Name = "relTypesFacts";
-            this.relTypesFacts.Size = new System.Drawing.Size(325, 78);
-            this.relTypesFacts.TabIndex = 21;
-            this.relTypesFacts.RelationTypesChanged += new System.EventHandler(this.RelTypesFacts_RelationTypesChanged);
-            // 
             // tabSources
             // 
             this.tabSources.Controls.Add(this.dgSources);
             this.tabSources.Location = new System.Drawing.Point(4, 22);
             this.tabSources.Name = "tabSources";
             this.tabSources.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSources.Size = new System.Drawing.Size(1085, 445);
+            this.tabSources.Size = new System.Drawing.Size(1085, 443);
             this.tabSources.TabIndex = 16;
             this.tabSources.Text = "Sources";
             this.tabSources.UseVisualStyleBackColor = true;
@@ -2835,7 +2714,7 @@
             this.dgSources.Name = "dgSources";
             this.dgSources.ReadOnly = true;
             this.dgSources.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgSources.Size = new System.Drawing.Size(1079, 439);
+            this.dgSources.Size = new System.Drawing.Size(1079, 437);
             this.dgSources.TabIndex = 1;
             this.dgSources.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSources_CellDoubleClick);
             // 
@@ -2854,7 +2733,7 @@
             this.tabDuplicates.Location = new System.Drawing.Point(4, 22);
             this.tabDuplicates.Name = "tabDuplicates";
             this.tabDuplicates.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDuplicates.Size = new System.Drawing.Size(1085, 445);
+            this.tabDuplicates.Size = new System.Drawing.Size(1085, 443);
             this.tabDuplicates.TabIndex = 15;
             this.tabDuplicates.Text = "Duplicates?";
             this.tabDuplicates.UseVisualStyleBackColor = true;
@@ -2895,7 +2774,7 @@
             this.dgDuplicates.Name = "dgDuplicates";
             this.dgDuplicates.RowHeadersWidth = 15;
             this.dgDuplicates.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgDuplicates.Size = new System.Drawing.Size(1032, 375);
+            this.dgDuplicates.Size = new System.Drawing.Size(1032, 373);
             this.dgDuplicates.TabIndex = 18;
             this.dgDuplicates.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgDuplicates_CellContentClick);
             this.dgDuplicates.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgDuplicates_CellDoubleClick);
@@ -3076,7 +2955,7 @@
             this.tabToday.Location = new System.Drawing.Point(4, 22);
             this.tabToday.Name = "tabToday";
             this.tabToday.Padding = new System.Windows.Forms.Padding(3);
-            this.tabToday.Size = new System.Drawing.Size(1085, 445);
+            this.tabToday.Size = new System.Drawing.Size(1085, 443);
             this.tabToday.TabIndex = 17;
             this.tabToday.Text = "On This Day";
             this.tabToday.UseVisualStyleBackColor = true;
@@ -3179,19 +3058,6 @@
             this.dpToday.Size = new System.Drawing.Size(171, 20);
             this.dpToday.TabIndex = 8;
             // 
-            // rtbToday
-            // 
-            this.rtbToday.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbToday.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbToday.Location = new System.Drawing.Point(0, 59);
-            this.rtbToday.Name = "rtbToday";
-            this.rtbToday.ReadOnly = true;
-            this.rtbToday.Size = new System.Drawing.Size(1079, 390);
-            this.rtbToday.TabIndex = 7;
-            this.rtbToday.Text = "";
-            // 
             // saveDatabase
             // 
             this.saveDatabase.DefaultExt = "zip";
@@ -3202,18 +3068,161 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
+            // rtbOutput
+            // 
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbOutput.Location = new System.Drawing.Point(3, 112);
+            this.rtbOutput.Name = "rtbOutput";
+            this.rtbOutput.ReadOnly = true;
+            this.rtbOutput.Size = new System.Drawing.Size(1079, 325);
+            this.rtbOutput.TabIndex = 6;
+            this.rtbOutput.Text = "";
+            this.rtbOutput.TextChanged += new System.EventHandler(this.RtbOutput_TextChanged);
+            // 
+            // reltypesSurnames
+            // 
+            this.reltypesSurnames.Location = new System.Drawing.Point(6, 6);
+            this.reltypesSurnames.MarriedToDB = true;
+            this.reltypesSurnames.Name = "reltypesSurnames";
+            this.reltypesSurnames.Size = new System.Drawing.Size(325, 78);
+            this.reltypesSurnames.TabIndex = 22;
+            // 
+            // relTypesFacts
+            // 
+            this.relTypesFacts.Location = new System.Drawing.Point(8, 8);
+            this.relTypesFacts.MarriedToDB = true;
+            this.relTypesFacts.Name = "relTypesFacts";
+            this.relTypesFacts.Size = new System.Drawing.Size(325, 78);
+            this.relTypesFacts.TabIndex = 21;
+            this.relTypesFacts.RelationTypesChanged += new System.EventHandler(this.RelTypesFacts_RelationTypesChanged);
+            // 
+            // cenDate
+            // 
+            this.cenDate.AutoSize = true;
+            this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cenDate.Country = "";
+            this.cenDate.Location = new System.Drawing.Point(15, 103);
+            this.cenDate.Name = "cenDate";
+            this.cenDate.Size = new System.Drawing.Size(234, 27);
+            this.cenDate.TabIndex = 28;
+            // 
+            // relTypesCensus
+            // 
+            this.relTypesCensus.Location = new System.Drawing.Point(9, 19);
+            this.relTypesCensus.MarriedToDB = true;
+            this.relTypesCensus.Name = "relTypesCensus";
+            this.relTypesCensus.Size = new System.Drawing.Size(325, 78);
+            this.relTypesCensus.TabIndex = 27;
+            // 
+            // relTypesLC
+            // 
+            this.relTypesLC.Location = new System.Drawing.Point(8, 8);
+            this.relTypesLC.MarriedToDB = true;
+            this.relTypesLC.Name = "relTypesLC";
+            this.relTypesLC.Size = new System.Drawing.Size(325, 78);
+            this.relTypesLC.TabIndex = 19;
+            this.relTypesLC.RelationTypesChanged += new System.EventHandler(this.RelTypesLC_RelationTypesChanged);
+            // 
+            // relTypesColoured
+            // 
+            this.relTypesColoured.Location = new System.Drawing.Point(8, 8);
+            this.relTypesColoured.MarriedToDB = true;
+            this.relTypesColoured.Name = "relTypesColoured";
+            this.relTypesColoured.Size = new System.Drawing.Size(325, 78);
+            this.relTypesColoured.TabIndex = 26;
+            this.relTypesColoured.RelationTypesChanged += new System.EventHandler(this.RelTypesColoured_RelationTypesChanged);
+            // 
+            // treetopsRelation
+            // 
+            this.treetopsRelation.Location = new System.Drawing.Point(270, 12);
+            this.treetopsRelation.MarriedToDB = true;
+            this.treetopsRelation.Name = "treetopsRelation";
+            this.treetopsRelation.Size = new System.Drawing.Size(322, 74);
+            this.treetopsRelation.TabIndex = 12;
+            // 
+            // treetopsCountry
+            // 
+            this.treetopsCountry.Location = new System.Drawing.Point(8, 12);
+            this.treetopsCountry.Name = "treetopsCountry";
+            this.treetopsCountry.Size = new System.Drawing.Size(256, 74);
+            this.treetopsCountry.TabIndex = 11;
+            this.treetopsCountry.Title = "Default Country";
+            this.treetopsCountry.UKEnabled = true;
+            // 
+            // wardeadRelation
+            // 
+            this.wardeadRelation.Location = new System.Drawing.Point(270, 12);
+            this.wardeadRelation.MarriedToDB = true;
+            this.wardeadRelation.Name = "wardeadRelation";
+            this.wardeadRelation.Size = new System.Drawing.Size(322, 74);
+            this.wardeadRelation.TabIndex = 26;
+            // 
+            // wardeadCountry
+            // 
+            this.wardeadCountry.Location = new System.Drawing.Point(8, 12);
+            this.wardeadCountry.Name = "wardeadCountry";
+            this.wardeadCountry.Size = new System.Drawing.Size(256, 74);
+            this.wardeadCountry.TabIndex = 25;
+            this.wardeadCountry.Title = "Default Country";
+            this.wardeadCountry.UKEnabled = true;
+            // 
+            // rtbToday
+            // 
+            this.rtbToday.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbToday.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbToday.Location = new System.Drawing.Point(0, 59);
+            this.rtbToday.Name = "rtbToday";
+            this.rtbToday.ReadOnly = true;
+            this.rtbToday.Size = new System.Drawing.Size(1079, 388);
+            this.rtbToday.TabIndex = 7;
+            this.rtbToday.Text = "";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.label19);
+            this.panel1.Location = new System.Drawing.Point(458, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(627, 106);
+            this.panel1.TabIndex = 11;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Kunstler Script", 52F, System.Drawing.FontStyle.Bold);
+            this.label19.Location = new System.Drawing.Point(3, 18);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(522, 76);
+            this.label19.TabIndex = 11;
+            this.label19.Text = "Family Tree Analyzer";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(519, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1093, 523);
+            this.ClientSize = new System.Drawing.Size(1093, 521);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tabSelector);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(600, 400);
+            this.MinimumSize = new System.Drawing.Size(600, 560);
             this.Name = "MainForm";
             this.Text = "Family Tree Analyzer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
@@ -3281,7 +3290,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
             this.tabDisplayProgress.ResumeLayout(false);
             this.tabDisplayProgress.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabSelector.ResumeLayout(false);
             this.tabSurnames.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgSurnames)).EndInit();
@@ -3295,6 +3303,9 @@
             this.tabToday.ResumeLayout(false);
             this.tabToday.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3574,6 +3585,7 @@
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Button btnAdvancedMissingData;
         private System.Windows.Forms.Button btnStandardMissingData;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label19;
     }
