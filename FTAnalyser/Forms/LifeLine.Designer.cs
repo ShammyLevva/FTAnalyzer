@@ -110,7 +110,7 @@ namespace FTAnalyzer.Forms
             this.splitContainerFacts.Size = new System.Drawing.Size(1123, 620);
             this.splitContainerFacts.SplitterDistance = 450;
             this.splitContainerFacts.TabIndex = 18;
-            this.splitContainerFacts.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainerFacts_SplitterMoved);
+            this.splitContainerFacts.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.SplitContainerFacts_SplitterMoved);
             // 
             // splitContainerMap
             // 
@@ -131,7 +131,7 @@ namespace FTAnalyzer.Forms
             this.splitContainerMap.Size = new System.Drawing.Size(1123, 450);
             this.splitContainerMap.SplitterDistance = 330;
             this.splitContainerMap.TabIndex = 2;
-            this.splitContainerMap.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainerMap_SplitterMoved);
+            this.splitContainerMap.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.SplitContainerMap_SplitterMoved);
             // 
             // dgIndividuals
             // 
@@ -154,8 +154,8 @@ namespace FTAnalyzer.Forms
             this.dgIndividuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgIndividuals.Size = new System.Drawing.Size(330, 450);
             this.dgIndividuals.TabIndex = 0;
-            this.dgIndividuals.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgIndividuals_CellToolTipTextNeeded);
-            this.dgIndividuals.SelectionChanged += new System.EventHandler(this.dgIndividuals_SelectionChanged);
+            this.dgIndividuals.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.DgIndividuals_CellToolTipTextNeeded);
+            this.dgIndividuals.SelectionChanged += new System.EventHandler(this.DgIndividuals_SelectionChanged);
             // 
             // IndividualID
             // 
@@ -208,28 +208,28 @@ namespace FTAnalyzer.Forms
             this.addAllFamilyMembersToolStripMenuItem.Name = "addAllFamilyMembersToolStripMenuItem";
             this.addAllFamilyMembersToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
             this.addAllFamilyMembersToolStripMenuItem.Text = "Select all Family Members";
-            this.addAllFamilyMembersToolStripMenuItem.Click += new System.EventHandler(this.addAllFamilyMembersToolStripMenuItem_Click);
+            this.addAllFamilyMembersToolStripMenuItem.Click += new System.EventHandler(this.AddAllFamilyMembersToolStripMenuItem_Click);
             // 
             // selectAllAncestorsToolStripMenuItem
             // 
             this.selectAllAncestorsToolStripMenuItem.Name = "selectAllAncestorsToolStripMenuItem";
             this.selectAllAncestorsToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
             this.selectAllAncestorsToolStripMenuItem.Text = "Select all Ancestors";
-            this.selectAllAncestorsToolStripMenuItem.Click += new System.EventHandler(this.selectAllAncestorsToolStripMenuItem_Click);
+            this.selectAllAncestorsToolStripMenuItem.Click += new System.EventHandler(this.SelectAllAncestorsToolStripMenuItem_Click);
             // 
             // selectAllDescendantsToolStripMenuItem
             // 
             this.selectAllDescendantsToolStripMenuItem.Name = "selectAllDescendantsToolStripMenuItem";
             this.selectAllDescendantsToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
             this.selectAllDescendantsToolStripMenuItem.Text = "Select all Descendants";
-            this.selectAllDescendantsToolStripMenuItem.Click += new System.EventHandler(this.selectAllDescendantsToolStripMenuItem_Click);
+            this.selectAllDescendantsToolStripMenuItem.Click += new System.EventHandler(this.SelectAllDescendantsToolStripMenuItem_Click);
             // 
             // selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem
             // 
             this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem.Name = "selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem";
             this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
             this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem.Text = "Select all Relations (all of above)";
-            this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem.Click += new System.EventHandler(this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem_Click);
+            this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem.Click += new System.EventHandler(this.SelectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem_Click);
             // 
             // mapBox1
             // 
@@ -249,9 +249,9 @@ namespace FTAnalyzer.Forms
             this.mapBox1.TabIndex = 2;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
-            this.mapBox1.MouseMove += new SharpMap.Forms.MapBox.MouseEventHandler(this.mapBox1_MouseMove);
-            this.mapBox1.MapQueried += new SharpMap.Forms.MapBox.MapQueryHandler(this.mapBox1_MapQueried);
-            this.mapBox1.ActiveToolChanged += new SharpMap.Forms.MapBox.ActiveToolChangedHandler(this.mapBox1_ActiveToolChanged);
+            this.mapBox1.MouseMove += new SharpMap.Forms.MapBox.MouseEventHandler(this.MapBox1_MouseMove);
+            this.mapBox1.MapQueried += new SharpMap.Forms.MapBox.MapQueryHandler(this.MapBox1_MapQueried);
+            this.mapBox1.ActiveToolChanged += new SharpMap.Forms.MapBox.ActiveToolChangedHandler(this.MapBox1_ActiveToolChanged);
             // 
             // mapZoomToolStrip
             // 
@@ -273,7 +273,7 @@ namespace FTAnalyzer.Forms
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(23, 22);
             this.btnSelect.Text = "Point Selection ";
-            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+            this.btnSelect.Click += new System.EventHandler(this.BtnSelect_Click);
             // 
             // linkLabel1
             // 
@@ -286,7 +286,7 @@ namespace FTAnalyzer.Forms
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "© Google - Terms of Use";
             this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
             // 
             // dgFacts
             // 
@@ -325,9 +325,9 @@ namespace FTAnalyzer.Forms
             this.dgFacts.ShowEditingIcon = false;
             this.dgFacts.Size = new System.Drawing.Size(1123, 144);
             this.dgFacts.TabIndex = 3;
-            this.dgFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFacts_CellDoubleClick);
-            this.dgFacts.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgFacts_CellToolTipTextNeeded);
-            this.dgFacts.SelectionChanged += new System.EventHandler(this.dgFacts_SelectionChanged);
+            this.dgFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgFacts_CellDoubleClick);
+            this.dgFacts.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.DgFacts_CellToolTipTextNeeded);
+            this.dgFacts.SelectionChanged += new System.EventHandler(this.DgFacts_SelectionChanged);
             // 
             // FactIcon
             // 
@@ -497,7 +497,7 @@ namespace FTAnalyzer.Forms
             this.hideLabelsToolStripMenuItem.Name = "hideLabelsToolStripMenuItem";
             this.hideLabelsToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.hideLabelsToolStripMenuItem.Text = "Hide Labels";
-            this.hideLabelsToolStripMenuItem.Click += new System.EventHandler(this.hideLabelsToolStripMenuItem_Click);
+            this.hideLabelsToolStripMenuItem.Click += new System.EventHandler(this.HideLabelsToolStripMenuItem_Click);
             // 
             // mnuHideScaleBar
             // 
@@ -505,7 +505,7 @@ namespace FTAnalyzer.Forms
             this.mnuHideScaleBar.Name = "mnuHideScaleBar";
             this.mnuHideScaleBar.Size = new System.Drawing.Size(149, 22);
             this.mnuHideScaleBar.Text = "Hide Scale Bar";
-            this.mnuHideScaleBar.Click += new System.EventHandler(this.mnuHideScaleBar_Click);
+            this.mnuHideScaleBar.Click += new System.EventHandler(this.MnuHideScaleBar_Click);
             // 
             // mapTooltip
             // 
@@ -518,7 +518,7 @@ namespace FTAnalyzer.Forms
             this.resetFormToDefaultSizeAndPositionToolStripMenuItem.Name = "resetFormToDefaultSizeAndPositionToolStripMenuItem";
             this.resetFormToDefaultSizeAndPositionToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.resetFormToDefaultSizeAndPositionToolStripMenuItem.Text = "Reset form to default size and position";
-            this.resetFormToDefaultSizeAndPositionToolStripMenuItem.Click += new System.EventHandler(this.resetFormToDefaultSizeAndPositionToolStripMenuItem_Click);
+            this.resetFormToDefaultSizeAndPositionToolStripMenuItem.Click += new System.EventHandler(this.ResetFormToDefaultSizeAndPositionToolStripMenuItem_Click);
             // 
             // LifeLine
             // 

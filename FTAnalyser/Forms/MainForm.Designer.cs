@@ -20,6 +20,8 @@
             base.Dispose(disposing);
             normalFont.Dispose();
             boldFont.Dispose();
+            handwritingFont.Dispose();
+            fonts.Dispose();
             rfhDuplicates.Dispose();
         }
 

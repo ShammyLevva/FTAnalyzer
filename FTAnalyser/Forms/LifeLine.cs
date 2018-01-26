@@ -82,51 +82,64 @@ namespace FTAnalyzer.Forms
 
             GeometryFeatureProvider lifelinesGFP = new GeometryFeatureProvider(lifelines);
 
-            linesLayer = new VectorLayer("LifeLines");
-            linesLayer.DataSource = lifelinesGFP;
-            
-            VectorStyle linestyle = new VectorStyle();
-            linestyle.Line = new Pen(Color.Green, 2f);
+            VectorStyle linestyle = new VectorStyle
+            {
+                Line = new Pen(Color.Green, 2f)
+            };
             linestyle.Line.MiterLimit = 0;
-            linesLayer.Style = linestyle;
+            linesLayer = new VectorLayer("LifeLines")
+            {
+                DataSource = lifelinesGFP,
+                Style = linestyle
+            };
 
             Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
-            VectorStyle line = new VectorStyle();
-            line.PointColor = new SolidBrush(Color.Green);
-            line.PointSize = 2;
+            VectorStyle line = new VectorStyle
+            {
+                PointColor = new SolidBrush(Color.Green),
+                PointSize = 2
+            };
             styles.Add(MapLifeLine.LINE, line);
-            
-            VectorStyle startPoint = new VectorStyle();
-            startPoint.PointColor = new SolidBrush(Color.Green);
-            startPoint.PointSize = 2;
-            startPoint.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\arrow-right.png"));
+
+            VectorStyle startPoint = new VectorStyle
+            {
+                PointColor = new SolidBrush(Color.Green),
+                PointSize = 2,
+                Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\arrow-right.png"))
+            };
             styles.Add(MapLifeLine.START, startPoint);
 
-            VectorStyle endPoint = new VectorStyle();
-            endPoint.PointColor = new SolidBrush(Color.Green);
-            endPoint.PointSize = 2;
-            endPoint.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\arrow-left.png"));
+            VectorStyle endPoint = new VectorStyle
+            {
+                PointColor = new SolidBrush(Color.Green),
+                PointSize = 2,
+                Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\arrow-left.png"))
+            };
             styles.Add(MapLifeLine.END, endPoint);
 
             linesLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<string>("LineCap", styles, line);
 
             mapBox1.Map.Layers.Add(linesLayer);
 
-            labelLayer = new LabelLayer("Label");
-            labelLayer.DataSource = lifelinesGFP;
-            labelLayer.Enabled = true;
-            //Specifiy field that contains the label string.
-            labelLayer.LabelColumn = "Label";
-            labelLayer.TextRenderingHint = TextRenderingHint.AntiAlias;
-            labelLayer.SmoothingMode = SmoothingMode.AntiAlias;
-            LabelStyle style = new LabelStyle();
-            style.ForeColor = Color.Black;
-            style.Font = new Font(FontFamily.GenericSerif, 14, FontStyle.Bold);
-            style.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center;
-            style.VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom;
-            style.CollisionDetection = true;
-            style.Offset = new PointF(0, 25);
-            style.Halo = new Pen(Color.Yellow, 3);
+            labelLayer = new LabelLayer("Label")
+            {
+                DataSource = lifelinesGFP,
+                Enabled = true,
+                //Specifiy field that contains the label string.
+                LabelColumn = "Label",
+                TextRenderingHint = TextRenderingHint.AntiAlias,
+                SmoothingMode = SmoothingMode.AntiAlias
+            };
+            LabelStyle style = new LabelStyle
+            {
+                ForeColor = Color.Black,
+                Font = new Font(FontFamily.GenericSerif, 14, FontStyle.Bold),
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+                VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom,
+                CollisionDetection = true,
+                Offset = new PointF(0, 25),
+                Halo = new Pen(Color.Yellow, 3)
+            };
             labelLayer.Style = style;
             mapBox1.Map.Layers.Add(labelLayer);
 
@@ -144,7 +157,7 @@ namespace FTAnalyzer.Forms
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
         }
 
-        private void dgIndividuals_SelectionChanged(object sender, EventArgs e)
+        private void DgIndividuals_SelectionChanged(object sender, EventArgs e)
         {
             if (!isLoading)
                 BuildMap();
@@ -182,12 +195,12 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             HttpUtility.VisitWebsite(e.Link.LinkData as string);
         }
 
-        private void dgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -198,7 +211,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void addAllFamilyMembersToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AddAllFamilyMembersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Individual ind = dgIndividuals.CurrentRow.DataBoundItem as Individual;
             isLoading = true;
@@ -227,17 +240,17 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
         }
 
-        private void selectAllAncestorsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SelectAllAncestorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SelectIndividuals(ft.GetAncestors);
         }
 
-        private void selectAllDescendantsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SelectAllDescendantsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SelectIndividuals(ft.GetDescendants);
         }
 
-        private void selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SelectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SelectIndividuals(ft.GetAllRelations);
         }
@@ -248,7 +261,7 @@ namespace FTAnalyzer.Forms
             this.Dispose();
         }
 
-        private void dgIndividuals_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        private void DgIndividuals_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
@@ -260,7 +273,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void dgFacts_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        private void DgFacts_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
@@ -286,7 +299,7 @@ namespace FTAnalyzer.Forms
             mh.CheckIfGeocodingNeeded(this);
         }
 
-        private void hideLabelsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void HideLabelsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (hideLabelsToolStripMenuItem.Checked)
                 mapBox1.Map.Layers.Remove(labelLayer);
@@ -295,24 +308,24 @@ namespace FTAnalyzer.Forms
             mapBox1.Refresh();
         }
 
-        private void mnuHideScaleBar_Click(object sender, EventArgs e)
+        private void MnuHideScaleBar_Click(object sender, EventArgs e)
         {
             mh.mnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
         }
 
-        private void splitContainerFacts_SplitterMoved(object sender, SplitterEventArgs e)
+        private void SplitContainerFacts_SplitterMoved(object sender, SplitterEventArgs e)
         {
             SplitContainer splitter = (SplitContainer)sender;
             Application.UserAppDataRegistry.SetValue("Lifeline Facts Splitter Distance", this.Height - splitter.SplitterDistance);
         }
 
-        private void splitContainerMap_SplitterMoved(object sender, SplitterEventArgs e)
+        private void SplitContainerMap_SplitterMoved(object sender, SplitterEventArgs e)
         {
             SplitContainer splitter = (SplitContainer)sender;
             Application.UserAppDataRegistry.SetValue("Lifeline Map Splitter Distance", splitter.SplitterDistance);
         }
 
-        private void dgFacts_SelectionChanged(object sender, EventArgs e)
+        private void DgFacts_SelectionChanged(object sender, EventArgs e)
         {
             if (!isQuerying)
                 UpdateSelection();
@@ -324,19 +337,19 @@ namespace FTAnalyzer.Forms
             mapBox1.Refresh();
         }
 
-        private void btnSelect_Click(object sender, EventArgs e)
+        private void BtnSelect_Click(object sender, EventArgs e)
         {
             btnSelect.Checked = true;
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.QueryPoint;
         }
 
-        private void mapBox1_ActiveToolChanged(SharpMap.Forms.MapBox.Tools tool)
+        private void MapBox1_ActiveToolChanged(SharpMap.Forms.MapBox.Tools tool)
         {
             if (mapBox1.ActiveTool != SharpMap.Forms.MapBox.Tools.QueryPoint)
                 btnSelect.Checked = false;
         }
 
-        private void mapBox1_MapQueried(FeatureDataTable data)
+        private void MapBox1_MapQueried(FeatureDataTable data)
         {
             this.Cursor = Cursors.WaitCursor;
             isQuerying = true;
@@ -363,16 +376,15 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void mapBox1_MouseMove(Coordinate worldPos, MouseEventArgs imagePos)
+        private void MapBox1_MouseMove(Coordinate worldPos, MouseEventArgs imagePos)
         {
             string tooltip = string.Empty;
             Envelope infoPoint = new Envelope(worldPos.CoordinateValue);
             infoPoint.ExpandBy(mapBox1.Map.PixelSize * 30);
             foreach (Layer layer in mapBox1.Map.Layers)
             {
-                if (layer is TearDropLayer)
+                if (layer is TearDropLayer tdl)
                 {
-                    TearDropLayer tdl = (TearDropLayer)layer;
                     FeatureDataSet ds = new FeatureDataSet();
                     if (!tdl.DataSource.IsOpen)
                         tdl.DataSource.Open();
@@ -382,7 +394,7 @@ namespace FTAnalyzer.Forms
                     {
                         MapLocation line = (MapLocation)row["MapLocation"];
                         string colour = (string)row["Colour"];
-                        if(colour == TearDropLayer.GREY)
+                        if (colour == TearDropLayer.GREY)
                             tooltip += line.ToString() + "\n";
                     }
                 }
@@ -412,7 +424,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void resetFormToDefaultSizeAndPositionToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ResetFormToDefaultSizeAndPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             isLoading = true;
             this.Height = 682;
@@ -421,7 +433,6 @@ namespace FTAnalyzer.Forms
             this.Left = 50;
             isLoading = false;
             SavePosition();
-
         }
     }
 }
