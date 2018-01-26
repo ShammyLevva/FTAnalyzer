@@ -35,7 +35,7 @@ namespace FTAnalyzer.Forms
             for (int i = 7; i <= 10; i++)
                 mapZoomToolStrip.Items[i].Visible = false;
             backgroundColour = mapZoomToolStrip.Items[0].BackColor;
-            mapBox1.Map.MapViewOnChange += new SharpMap.Map.MapViewChangedHandler(mapBox1_MapViewOnChange);
+            mapBox1.Map.MapViewOnChange += new SharpMap.Map.MapViewChangedHandler(MapBox1_MapViewOnChange);
             mnuHideScaleBar.Checked = Properties.MappingSettings.Default.HideScaleBar;
             SetupMap();
             dgFacts.AutoGenerateColumns = false;
@@ -124,12 +124,12 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             HttpUtility.VisitWebsite(e.Link.LinkData as string);
         }
 
-        private void dgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
@@ -147,7 +147,7 @@ namespace FTAnalyzer.Forms
             this.Dispose();
         }
 
-        private void dgFacts_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        private void DgFacts_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
@@ -176,12 +176,12 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
         }
 
-        private void tvPlaces_AfterSelect(object sender, TreeViewEventArgs e)
+        private void TvPlaces_AfterSelect(object sender, TreeViewEventArgs e)
         {
             BuildMap();
         }
 
-        private void tvPlaces_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void TvPlaces_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             Cursor = Cursors.WaitCursor; ;
             FactLocation location = e.Node.Tag as FactLocation;
@@ -195,12 +195,12 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.Default;
         }
 
-        private void mapBox1_MapViewOnChange()
+        private void MapBox1_MapViewOnChange()
         {
             clusters.Refresh();
         }
 
-        private void mapBox1_MapZoomChanged(double zoom)
+        private void MapBox1_MapZoomChanged(double zoom)
         {
             RefreshClusters();
         }
@@ -218,12 +218,12 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
         }
 
-        private void mapBox1_MapCenterChanged(Coordinate center)
+        private void MapBox1_MapCenterChanged(Coordinate center)
         {
             RefreshClusters();
         }
 
-        private void mapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void MapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             bool zoomed = false;
             if (e.Button == MouseButtons.Left && mapBox1.Map.Zoom > mapBox1.Map.MinimumZoom)
@@ -245,24 +245,24 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void mnuHideScaleBar_Click(object sender, EventArgs e)
+        private void MnuHideScaleBar_Click(object sender, EventArgs e)
         {
             mh.mnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);    
         }
 
-        private void btnSelect_Click(object sender, EventArgs e)
+        private void BtnSelect_Click(object sender, EventArgs e)
         {
             btnSelect.Checked = true;
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.QueryPoint;
         }
 
-        private void mapBox1_ActiveToolChanged(SharpMap.Forms.MapBox.Tools tool)
+        private void MapBox1_ActiveToolChanged(SharpMap.Forms.MapBox.Tools tool)
         {
             if (mapBox1.ActiveTool != SharpMap.Forms.MapBox.Tools.QueryPoint)
                 btnSelect.Checked = false;
         }
 
-        private void mapBox1_MapQueried(FeatureDataTable data)
+        private void MapBox1_MapQueried(FeatureDataTable data)
         {
             this.Cursor = Cursors.WaitCursor;
             List<MapLocation> locations = new List<MapLocation>();
@@ -278,19 +278,19 @@ namespace FTAnalyzer.Forms
 
         }
 
-        private void splitContainerFacts_SplitterMoved(object sender, SplitterEventArgs e)
+        private void SplitContainerFacts_SplitterMoved(object sender, SplitterEventArgs e)
         {
             SplitContainer splitter = (SplitContainer)sender;
             Application.UserAppDataRegistry.SetValue("Places Facts Splitter Distance", this.Height - splitter.SplitterDistance);
         }
 
-        private void splitContainerMap_SplitterMoved(object sender, SplitterEventArgs e)
+        private void SplitContainerMap_SplitterMoved(object sender, SplitterEventArgs e)
         {
             SplitContainer splitter = (SplitContainer)sender;
             Application.UserAppDataRegistry.SetValue("Places Map Splitter Distance", splitter.SplitterDistance);
         }
 
-        private void resetFormDefaultSizeAndPositionToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ResetFormDefaultSizeAndPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             isloading = true;
             this.Height = 628;

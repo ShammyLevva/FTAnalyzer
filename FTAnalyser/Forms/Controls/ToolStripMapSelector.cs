@@ -13,15 +13,11 @@ namespace FTAnalyzer.Forms.Controls
     {
         private LinkLabel copyrightLabel;
         private MapBox mapbox;
-        private ToolStripMenuItem mnuGoogleMap;
-        private ToolStripMenuItem mnuGoogleSatellite;
-        private ToolStripMenuItem mnuOpenStreetMap;
-        private ToolStripMenuItem mnuBingMapAerial;
-        private ToolStripMenuItem mnuBingMapRoads;
-        private ToolStripMenuItem mnuBingMapHybrid;
-        private ToolStripMenuItem mnuBingMapOS;
-        private ToolStripMenuItem mnuNLSOSHistoric;
-
+        private MapToolStripMenuItem mnuOpenStreetMap;
+        private MapToolStripMenuItem mnuBingMapAerial;
+        private MapToolStripMenuItem mnuBingMapRoads;
+        private MapToolStripMenuItem mnuBingMapHybrid;
+        
         public ToolStripMapSelector()
             : base("Map style")
         {
@@ -54,52 +50,28 @@ namespace FTAnalyzer.Forms.Controls
 
         private void SetupDropdown()
         {
-            mnuGoogleMap = new ToolStripMenuItem();
-            mnuGoogleSatellite = new ToolStripMenuItem();
-            mnuOpenStreetMap = new MapToolStripMenuItem(KnownTileSources.Create(KnownTileSource.OpenStreetMap), "mnuOpenStreetMap", "Open Street Map", LinkLabelType.OSM, new EventHandler(_Click));
-            mnuBingMapAerial = new MapToolStripMenuItem(KnownTileSources.Create(KnownTileSource.BingAerial), "mnuBingMapAerial", "Aerial Bing Map", LinkLabelType.BING, new EventHandler(_Click));
-            mnuBingMapRoads = new MapToolStripMenuItem(KnownTileSources.Create(KnownTileSource.BingRoads), "mnuBingMapRoads", "Roads Bing Map", LinkLabelType.BING, new EventHandler(_Click));
-            mnuBingMapHybrid = new MapToolStripMenuItem(KnownTileSources.Create(KnownTileSource.BingHybrid), "mnuBingMapHybrid", "Hybrid Bing Map", LinkLabelType.BING, new EventHandler(_Click));
-            mnuBingMapOS = new ToolStripMenuItem();
-            mnuNLSOSHistoric = new ToolStripMenuItem();
+            mnuOpenStreetMap = new MapToolStripMenuItem(KnownTileSources.Create(KnownTileSource.OpenStreetMap), LinkLabelType.OSM);
+            mnuBingMapAerial = new MapToolStripMenuItem(KnownTileSources.Create(KnownTileSource.BingAerial), LinkLabelType.BING);
+            mnuBingMapRoads = new MapToolStripMenuItem(KnownTileSources.Create(KnownTileSource.BingRoads), LinkLabelType.BING);
+            mnuBingMapHybrid = new MapToolStripMenuItem(KnownTileSources.Create(KnownTileSource.BingHybrid),  LinkLabelType.BING);
+
+            mnuOpenStreetMap.SetupMapToolStripMenuItem("mnuOpenStreetMap", "Open Street Map", new EventHandler(_Click));
+            mnuBingMapAerial.SetupMapToolStripMenuItem("mnuBingMapAerial", "Aerial Bing Map", new EventHandler(_Click));
+            mnuBingMapRoads.SetupMapToolStripMenuItem("mnuBingMapRoads", "Roads Bing Map", new EventHandler(_Click));
+            mnuBingMapHybrid.SetupMapToolStripMenuItem("mnuBingMapHybrid", "Hybrid Bing Map", new EventHandler(_Click));
 
             // Setup map selector menu
             DisplayStyle = ToolStripItemDisplayStyle.Text;
             DropDownItems.AddRange(new ToolStripItem[] {
-            //mnuGoogleMap,
-            //mnuGoogleSatellite,
             mnuOpenStreetMap,
             mnuBingMapAerial,
             mnuBingMapRoads,
             mnuBingMapHybrid,
-            //mnuBingMapOS,
-            //mnuNLSOSHistoric
             });
             ImageTransparentColor = Color.Magenta;
             Name = "mnuMapStyle";
             Size = new Size(71, 22);
             Text = "Map style";
-            // 
-            // mnuGoogleMap
-            // 
-            mnuGoogleMap.Name = "mnuGoogleMap";
-            mnuGoogleMap.Text = "Google Map";
-            // 
-            // mnuGoogleSatellite
-            // 
-            mnuGoogleSatellite.Name = "mnuGoogleSatellite";
-            mnuGoogleSatellite.Text = "Google Satellite";
-            // 
-            // 
-            // mnuBingMapOS
-            // 
-            mnuBingMapOS.Name = "mnuBingMapOS";
-            mnuBingMapOS.Text = "OS Bing Map (UK)";
-            // 
-            // mnuNLSOSHistoric
-            // 
-            mnuNLSOSHistoric.Name = "mnuNLSOSHistoric";
-            mnuNLSOSHistoric.Text = "NLS OS 1920-1947 (UK)";
         }
 
         public enum LinkLabelType { GOOGLE, BING, OSM, NLS }

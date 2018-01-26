@@ -101,7 +101,7 @@ namespace FTAnalyzer.Forms
             this.splitContainerFacts.Size = new System.Drawing.Size(1113, 566);
             this.splitContainerFacts.SplitterDistance = 435;
             this.splitContainerFacts.TabIndex = 18;
-            this.splitContainerFacts.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainerFacts_SplitterMoved);
+            this.splitContainerFacts.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.SplitContainerFacts_SplitterMoved);
             // 
             // splitContainerMap
             // 
@@ -122,7 +122,7 @@ namespace FTAnalyzer.Forms
             this.splitContainerMap.Size = new System.Drawing.Size(1113, 435);
             this.splitContainerMap.SplitterDistance = 200;
             this.splitContainerMap.TabIndex = 2;
-            this.splitContainerMap.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainerMap_SplitterMoved);
+            this.splitContainerMap.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.SplitContainerMap_SplitterMoved);
             // 
             // tvPlaces
             // 
@@ -136,8 +136,8 @@ namespace FTAnalyzer.Forms
             this.tvPlaces.TabIndex = 0;
             //this.tvPlaces.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvPlaces_BeforeCollapse);
             //this.tvPlaces.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvPlaces_BeforeExpand);
-            this.tvPlaces.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvPlaces_AfterSelect);
-            this.tvPlaces.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvPlaces_NodeMouseDoubleClick);
+            this.tvPlaces.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvPlaces_AfterSelect);
+            this.tvPlaces.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TvPlaces_NodeMouseDoubleClick);
             //this.tvPlaces.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvPlaces_MouseDown);
             // 
             // mapBox1
@@ -158,11 +158,11 @@ namespace FTAnalyzer.Forms
             this.mapBox1.TabIndex = 2;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
-            this.mapBox1.MapZoomChanged += new SharpMap.Forms.MapBox.MapZoomHandler(this.mapBox1_MapZoomChanged);
-            this.mapBox1.MapQueried += new SharpMap.Forms.MapBox.MapQueryHandler(this.mapBox1_MapQueried);
-            this.mapBox1.MapCenterChanged += new SharpMap.Forms.MapBox.MapCenterChangedHandler(this.mapBox1_MapCenterChanged);
-            this.mapBox1.ActiveToolChanged += new SharpMap.Forms.MapBox.ActiveToolChangedHandler(this.mapBox1_ActiveToolChanged);
-            this.mapBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mapBox1_MouseDoubleClick);
+            this.mapBox1.MapZoomChanged += new SharpMap.Forms.MapBox.MapZoomHandler(this.MapBox1_MapZoomChanged);
+            this.mapBox1.MapQueried += new SharpMap.Forms.MapBox.MapQueryHandler(this.MapBox1_MapQueried);
+            this.mapBox1.MapCenterChanged += new SharpMap.Forms.MapBox.MapCenterChangedHandler(this.MapBox1_MapCenterChanged);
+            this.mapBox1.ActiveToolChanged += new SharpMap.Forms.MapBox.ActiveToolChangedHandler(this.MapBox1_ActiveToolChanged);
+            this.mapBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MapBox1_MouseDoubleClick);
             // 
             // mapZoomToolStrip
             // 
@@ -184,7 +184,7 @@ namespace FTAnalyzer.Forms
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(23, 22);
             this.btnSelect.Text = "Location Selection ";
-            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+            this.btnSelect.Click += new System.EventHandler(this.BtnSelect_Click);
             // 
             // linkLabel1
             // 
@@ -197,7 +197,7 @@ namespace FTAnalyzer.Forms
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "© Google - Terms of Use";
             this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
             // 
             // dgFacts
             // 
@@ -239,8 +239,8 @@ namespace FTAnalyzer.Forms
             this.dgFacts.ShowEditingIcon = false;
             this.dgFacts.Size = new System.Drawing.Size(1113, 105);
             this.dgFacts.TabIndex = 3;
-            this.dgFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFacts_CellDoubleClick);
-            this.dgFacts.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgFacts_CellToolTipTextNeeded);
+            this.dgFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgFacts_CellDoubleClick);
+            this.dgFacts.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.DgFacts_CellToolTipTextNeeded);
             // 
             // FactIcon
             // 
@@ -438,14 +438,14 @@ namespace FTAnalyzer.Forms
             this.mnuHideScaleBar.Name = "mnuHideScaleBar";
             this.mnuHideScaleBar.Size = new System.Drawing.Size(262, 22);
             this.mnuHideScaleBar.Text = "Hide Scale Bar";
-            this.mnuHideScaleBar.Click += new System.EventHandler(this.mnuHideScaleBar_Click);
+            this.mnuHideScaleBar.Click += new System.EventHandler(this.MnuHideScaleBar_Click);
             // 
             // resetFormDefaultSizeAndPositionToolStripMenuItem
             // 
             this.resetFormDefaultSizeAndPositionToolStripMenuItem.Name = "resetFormDefaultSizeAndPositionToolStripMenuItem";
             this.resetFormDefaultSizeAndPositionToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.resetFormDefaultSizeAndPositionToolStripMenuItem.Text = "Reset form default size and position";
-            this.resetFormDefaultSizeAndPositionToolStripMenuItem.Click += new System.EventHandler(this.resetFormDefaultSizeAndPositionToolStripMenuItem_Click);
+            this.resetFormDefaultSizeAndPositionToolStripMenuItem.Click += new System.EventHandler(this.ResetFormDefaultSizeAndPositionToolStripMenuItem_Click);
             // 
             // Places
             // 

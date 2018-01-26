@@ -11,15 +11,19 @@ namespace FTAnalyzer.Mapping
         private HttpTileSource tileSource;
         private LinkLabelType linkLabelType;
 
-        public MapToolStripMenuItem(HttpTileSource tileSource, string name, string text, LinkLabelType linkLabelType, EventHandler eventHandler) 
+        public MapToolStripMenuItem(HttpTileSource tileSource, LinkLabelType linkLabelType) 
         {
             TileSource = tileSource;
+            LinkLabelType = linkLabelType;
+            Tag = linkLabelType;
+        }
+
+        public void SetupMapToolStripMenuItem(string name, string text, EventHandler eventHandler)
+        {
             Name = name;
             Text = text;
-            LinkLabelType = linkLabelType;
             CheckOnClick = true;
             Size = new Size(164, 22);
-            Tag = linkLabelType;
             Click += eventHandler;
         }
 
