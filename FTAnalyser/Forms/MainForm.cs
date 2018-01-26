@@ -22,7 +22,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "6.0.4.0";
+        public static string VERSION = "6.0.5.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]

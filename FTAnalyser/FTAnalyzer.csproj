@@ -343,6 +343,9 @@
     <Compile Include="Mapping\ClusterLayer.cs" />
     <Compile Include="Mapping\MapLifeLine.cs" />
     <Compile Include="Mapping\MapHelper.cs" />
+    <Compile Include="Mapping\MapToolStripMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Mapping\OS50kGazetteer.cs" />
     <Compile Include="Mapping\TearDropLayer.cs" />
     <Compile Include="Properties\FileHandling.cs" />
@@ -482,9 +485,18 @@
     <Content Include="Resources\Icons\OS50kMatch.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Lib\SharpMap.dll" />
-    <Content Include="Resources\Lib\SharpMap.Extensions.dll" />
-    <Content Include="Resources\Lib\SharpMap.UI.dll" />
+    <AdditionalFiles Include="Resources\Lib\SharpMap.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Resources\Lib\SharpMap.Extensions.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Resources\Lib\SharpMap.UI.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Resources\Lib\SharpMap.Layers.BruTile.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
     <Content Include="Resources\OS50kGazetteer.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
