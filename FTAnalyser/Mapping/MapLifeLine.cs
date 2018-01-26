@@ -12,7 +12,7 @@ namespace FTAnalyzer.Mapping
         private Geometry StartPoint { get; set; }
         private Geometry EndPoint { get; set; }
         private int Count { get; set; }
-        private Envelope viewport { get; set; }
+        private Envelope Viewport { get; set; }
 
         public static readonly string LINE = "Line", START = "Start", END = "End";
 
@@ -21,15 +21,15 @@ namespace FTAnalyzer.Mapping
             this.ind = ind;
             int index = 1;
             List<Coordinate> points = new List<Coordinate>();
-            this.viewport = new Envelope();
+            this.Viewport = new Envelope();
             Coordinate previousPoint = null;
             foreach (IDisplayFact f in ind.AllGeocodedFacts)
             {
                 Coordinate point = new Coordinate(f.Location.LongitudeM, f.Location.LatitudeM);
                 if (index == 1)
-                    StartPoint = new NetTopologySuite.Geometries.Point(point);
+                    StartPoint = new Point(point);
                 if (index == ind.AllGeocodedFacts.Count)
-                    EndPoint = new NetTopologySuite.Geometries.Point(point);
+                    EndPoint = new Point(point);
                 index++;
                 if (points.Count == 0 || (points.Count > 0 && !point.Equals2D(previousPoint)))
                 {
@@ -38,8 +38,8 @@ namespace FTAnalyzer.Mapping
                 }
                 GeoResponse.CResult.CGeometry.CViewPort vp = f.Location.ViewPort;
                 Envelope env = new Envelope(vp.NorthEast.Long, vp.SouthWest.Long, vp.NorthEast.Lat, vp.SouthWest.Lat);
-                if (!viewport.Contains(env))
-                    viewport.ExpandToInclude(env);
+                if (!Viewport.Contains(env))
+                    Viewport.ExpandToInclude(env);
             }
             if (points.Count > 1)
                 this.Geometry = new NetTopologySuite.Geometries.LineString(points.ToArray());
@@ -54,14 +54,14 @@ namespace FTAnalyzer.Mapping
             r["MapLifeLine"] = this;
             r["LineCap"] = LINE;
             r["Label"] = ind.Name;
-            r["ViewPort"] = viewport;
+            r["ViewPort"] = Viewport;
             r.Geometry = Geometry;
             table.AddRow(r);
 
             r = table.NewRow();
             r["MapLifeLine"] = this;
             r["LineCap"] = Count > 1 ? START : LINE;
-            r["ViewPort"] = viewport;
+            r["ViewPort"] = Viewport;
             if(Count == 1)
                 r["Label"] = ind.Name;
             r.Geometry = StartPoint;
@@ -72,7 +72,7 @@ namespace FTAnalyzer.Mapping
                 r = table.NewRow();
                 r["MapLifeLine"] = this;
                 r["LineCap"] = END;
-                r["ViewPort"] = viewport;
+                r["ViewPort"] = Viewport;
                 r.Geometry = EndPoint;
                 table.AddRow(r);
             }

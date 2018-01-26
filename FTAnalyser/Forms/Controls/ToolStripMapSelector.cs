@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Diagnostics;
 using SharpMap.Layers;
-using FTAnalyzer.Mapping;
-using BruTile.Web;
 using SharpMap.Forms;
 using System.Drawing;
 using System.IO;

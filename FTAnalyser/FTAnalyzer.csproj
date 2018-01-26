@@ -190,14 +190,18 @@
     <Reference Include="ProjNet, Version=1.3.0.3, Culture=neutral, PublicKeyToken=a1f5bdcd9c6f5740, processorArchitecture=MSIL">
       <HintPath>packages\ProjNET4GeoAPI.1.3.0.4\lib\net45-client\ProjNet.dll</HintPath>
     </Reference>
-    <Reference Include="SharpMap, Version=1.0.4.3, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SharpMap, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Resources\Lib\SharpMap.dll</HintPath>
     </Reference>
-    <Reference Include="SharpMap.Extensions">
+    <Reference Include="SharpMap.Extensions, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>Resources\Lib\SharpMap.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="SharpMap.UI, Version=1.0.4.3, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SharpMap.Layers.BruTile">
+      <HintPath>Resources\Lib\SharpMap.Layers.BruTile.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpMap.UI, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Resources\Lib\SharpMap.UI.dll</HintPath>
     </Reference>
@@ -478,6 +482,9 @@
     <Content Include="Resources\Icons\OS50kMatch.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Lib\SharpMap.dll" />
+    <Content Include="Resources\Lib\SharpMap.Extensions.dll" />
+    <Content Include="Resources\Lib\SharpMap.UI.dll" />
     <Content Include="Resources\OS50kGazetteer.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -496,12 +503,6 @@
     <EmbeddedResource Include="Resources\KUNSTLER.TTF">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <Resource Include="Resources\Lib\SharpMap.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Lib\SharpMap.UI.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <Content Include="Resources\Icons\arrow-left.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -514,9 +515,6 @@
     <Content Include="Resources\Icons\Scroll_NoText.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Resources\Lib\SharpMap.Extensions.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <Content Include="Resources\Icons\teardrop_black.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
