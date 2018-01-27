@@ -1,4 +1,23 @@
-#### Updated Release Version 6.0.3.0 
+#### Updated Release Version 6.0.5.0, 26th Jan 2018
+
+**Bugfixes**
+
+Added font to distribution so the app name shows correctly
+Updated SharpMap & BruTile to latest versions and fixed background maps
+Fix for Timeline report year ranges being too broad
+
+#### Updated Release Version 6.0.4.0, 23th Jan 2018
+
+**Updates**
+
+Added new Logo and text on main page of app
+
+**Bugfixes**
+ 
+Fixed issue of some options not sticking when changed 
+Various minor code optimisations for c#7
+
+#### Updated Release Version 6.0.3.0, 20th Jan 2018
 
 **Updates**
 
@@ -8,14 +27,17 @@ Imported the suggested patches from fire-eggs these add:
 
 US census overhauled now uses date ranges to cope with times where enumerators ignored rule about the state of the house on census day
 
-#### Updated Release Version 6.0.2.0 
+#### Updated Release Version 6.0.2.0, 19th Jan 2018
 
 **Updates**
+
 Fixed most links to old codeplex documentation
 Amended range of dates for US census as enumerators didn't always adhere to guidelines that the census be recorded on a specific date.
 
-Release Version 6.0.1.0, 8th Jun 2017
+#### Release Version 6.0.1.0, 8th Jun 2017
+
 **Updates**
+
 Rebuilt for deployment on GitHub
 Upgraded to .Net 4.6 dropping XP support 
 
