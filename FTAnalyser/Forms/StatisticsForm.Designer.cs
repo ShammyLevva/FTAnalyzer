@@ -44,7 +44,7 @@
             this.dgStatistics.Name = "dgStatistics";
             this.dgStatistics.Size = new System.Drawing.Size(401, 325);
             this.dgStatistics.TabIndex = 0;
-            this.dgStatistics.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgStatistics_CellDoubleClick);
+            this.dgStatistics.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgStatistics_CellDoubleClick);
             // 
             // statusStrip1
             // 

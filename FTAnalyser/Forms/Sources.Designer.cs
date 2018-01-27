@@ -78,7 +78,7 @@
             this.mnuSaveColumnLayout.Name = "mnuSaveColumnLayout";
             this.mnuSaveColumnLayout.Size = new System.Drawing.Size(23, 22);
             this.mnuSaveColumnLayout.Text = "Save Column Sort Order, layout, width etc";
-            this.mnuSaveColumnLayout.Click += new System.EventHandler(this.mnuSaveColumnLayout_Click);
+            this.mnuSaveColumnLayout.Click += new System.EventHandler(this.MnuSaveColumnLayout_Click);
             // 
             // mnuResetColumns
             // 
@@ -88,7 +88,7 @@
             this.mnuResetColumns.Name = "mnuResetColumns";
             this.mnuResetColumns.Size = new System.Drawing.Size(23, 22);
             this.mnuResetColumns.Text = "Reset Column Sort Order to Default";
-            this.mnuResetColumns.Click += new System.EventHandler(this.mnuResetColumns_Click);
+            this.mnuResetColumns.Click += new System.EventHandler(this.MnuResetColumns_Click);
             // 
             // toolStripSeparator2
             // 
@@ -103,7 +103,7 @@
             this.printToolStripButton.Name = "printToolStripButton";
             this.printToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.printToolStripButton.Text = "&Print";
-            this.printToolStripButton.Click += new System.EventHandler(this.printToolStripButton_Click);
+            this.printToolStripButton.Click += new System.EventHandler(this.PrintToolStripButton_Click);
             // 
             // printPreviewToolStripButton
             // 
@@ -113,7 +113,7 @@
             this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
             this.printPreviewToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.printPreviewToolStripButton.Text = "Print Preview...";
-            this.printPreviewToolStripButton.Click += new System.EventHandler(this.printPreviewToolStripButton_Click);
+            this.printPreviewToolStripButton.Click += new System.EventHandler(this.PrintPreviewToolStripButton_Click);
             // 
             // toolStripSeparator
             // 
@@ -128,7 +128,7 @@
             this.mnuExportToExcel.Name = "mnuExportToExcel";
             this.mnuExportToExcel.Size = new System.Drawing.Size(23, 22);
             this.mnuExportToExcel.Text = "Export to Excel";
-            this.mnuExportToExcel.Click += new System.EventHandler(this.mnuExportToExcel_Click);
+            this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
             // 
             // dgSources
             // 
@@ -163,7 +163,7 @@
             this.dgSources.ShowEditingIcon = false;
             this.dgSources.Size = new System.Drawing.Size(857, 337);
             this.dgSources.TabIndex = 2;
-            this.dgSources.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSources_CellDoubleClick);
+            this.dgSources.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSources_CellDoubleClick);
             // 
             // statusStrip
             // 

@@ -35,7 +35,7 @@ namespace FTAnalyzer.Forms
             tsStatusLabel.Visible = true;
         }
 
-        private void dgStatistics_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgStatistics_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {

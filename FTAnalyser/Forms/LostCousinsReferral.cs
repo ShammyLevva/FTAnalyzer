@@ -66,28 +66,28 @@ namespace FTAnalyzer.Forms
             dgLCReferrals.Refresh();
         }
 
-        private void mnuSaveColumnLayout_Click(object sender, EventArgs e)
+        private void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("LCReferralsColumns.xml");
             MessageBox.Show("Form Settings Saved", "Lost Cousins Referrals");
         }
 
-        private void mnuResetColumns_Click(object sender, EventArgs e)
+        private void MnuResetColumns_Click(object sender, EventArgs e)
         {
             reportFormHelper.ResetColumnLayout("LCReferralsColumns.xml");
         }
 
-        private void printToolStripButton_Click(object sender, EventArgs e)
+        private void PrintToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintReport("Lost Cousins Referral Report");
         }
 
-        private void printPreviewToolStripButton_Click(object sender, EventArgs e)
+        private void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintPreviewReport();
         }
 
-        private void mnuExportToExcel_Click(object sender, EventArgs e)
+        private void MnuExportToExcel_Click(object sender, EventArgs e)
         {
             reportFormHelper.DoExportToExcel(referrals.ToList<IExportReferrals>());
         }

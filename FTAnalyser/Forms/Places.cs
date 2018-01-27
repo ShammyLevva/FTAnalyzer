@@ -247,7 +247,7 @@ namespace FTAnalyzer.Forms
 
         private void MnuHideScaleBar_Click(object sender, EventArgs e)
         {
-            mh.mnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);    
+            mh.MnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);    
         }
 
         private void BtnSelect_Click(object sender, EventArgs e)

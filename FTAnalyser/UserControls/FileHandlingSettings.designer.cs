@@ -48,7 +48,7 @@
             resources.ApplyResources(this.chkLoadWithFilters, "chkLoadWithFilters");
             this.chkLoadWithFilters.Name = "chkLoadWithFilters";
             this.chkLoadWithFilters.UseVisualStyleBackColor = true;
-            this.chkLoadWithFilters.CheckedChanged += new System.EventHandler(this.chkLoadWithFilters_CheckedChanged);
+            this.chkLoadWithFilters.CheckedChanged += new System.EventHandler(this.ChkLoadWithFilters_CheckedChanged);
             // 
             // label1
             // 
@@ -60,7 +60,7 @@
             resources.ApplyResources(this.chkRetryFailedLines, "chkRetryFailedLines");
             this.chkRetryFailedLines.Name = "chkRetryFailedLines";
             this.chkRetryFailedLines.UseVisualStyleBackColor = true;
-            this.chkRetryFailedLines.CheckedChanged += new System.EventHandler(this.chkRetryFailedLines_CheckedChanged);
+            this.chkRetryFailedLines.CheckedChanged += new System.EventHandler(this.ChkRetryFailedLines_CheckedChanged);
             // 
             // label2
             // 

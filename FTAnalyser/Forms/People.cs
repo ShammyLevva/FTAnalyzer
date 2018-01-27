@@ -94,14 +94,14 @@ namespace FTAnalyzer.Forms
         {
             this.Text = "Individuals & Families whose surame is " + stat.Surname;
             SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
-            Predicate<Individual> indSurnames = x => x.Surname.Equals(stat.Surname);
+            bool indSurnames(Individual x) => x.Surname.Equals(stat.Surname);
             foreach (Individual i in ft.AllIndividuals.Filter(indSurnames))
                 dsInd.Add(i);
             dgIndividuals.DataSource = dsInd;
             SortIndividuals();
             dgIndividuals.Dock = DockStyle.Fill;
 
-            Predicate<Family> famSurnames = x => x.ContainsSurname(stat.Surname);
+            bool famSurnames(Family x) => x.ContainsSurname(stat.Surname);
             SortableBindingList<IDisplayFamily> dsFam = new SortableBindingList<IDisplayFamily>();
             foreach (Family f in ft.AllFamilies.Filter(famSurnames))
                 dsFam.Add(f);
@@ -113,7 +113,7 @@ namespace FTAnalyzer.Forms
 
         public void SetupLCDuplicates(Predicate<Individual> relationFilter)
         {
-            Predicate<Individual> lcFacts = i => i.DuplicateLCFacts > 0;
+            bool lcFacts(Individual i) => i.DuplicateLCFacts > 0;
             Predicate<Individual> filter = FilterUtils.AndFilter<Individual>(relationFilter, lcFacts);
             List<Individual> individuals = ft.AllIndividuals.Filter(filter).ToList();
             SetIndividuals(individuals, "Lost Cousins with Duplicate Facts");
@@ -132,25 +132,25 @@ namespace FTAnalyzer.Forms
 
         public void SetupLCNoCountry(Predicate<Individual> relationFilter)
         {
-            Predicate<Individual> lcFacts = x => x.LostCousinsFacts > 0;
+            bool lcFacts(Individual x) => x.LostCousinsFacts > 0;
             Predicate<Individual> filter = FilterUtils.AndFilter<Individual>(relationFilter, lcFacts);
             IEnumerable<Individual> listToCheck = ft.AllIndividuals.Filter(filter).ToList();
 
-            Predicate<Individual> missing = x => !x.IsLostCousinsEntered(CensusDate.EWCENSUS1841, false)
-                                              && !x.IsLostCousinsEntered(CensusDate.EWCENSUS1881, false)
-                                              && !x.IsLostCousinsEntered(CensusDate.SCOTCENSUS1881, false)
-                                              && !x.IsLostCousinsEntered(CensusDate.CANADACENSUS1881, false)
-                                              && !x.IsLostCousinsEntered(CensusDate.EWCENSUS1911, false)
-                                              && !x.IsLostCousinsEntered(CensusDate.IRELANDCENSUS1911, false)
-                                              && !x.IsLostCousinsEntered(CensusDate.USCENSUS1880, false)
-                                              && !x.IsLostCousinsEntered(CensusDate.USCENSUS1940, false);
+            bool missing(Individual x) => !x.IsLostCousinsEntered(CensusDate.EWCENSUS1841, false)
+                                       && !x.IsLostCousinsEntered(CensusDate.EWCENSUS1881, false)
+                                       && !x.IsLostCousinsEntered(CensusDate.SCOTCENSUS1881, false)
+                                       && !x.IsLostCousinsEntered(CensusDate.CANADACENSUS1881, false)
+                                       && !x.IsLostCousinsEntered(CensusDate.EWCENSUS1911, false)
+                                       && !x.IsLostCousinsEntered(CensusDate.IRELANDCENSUS1911, false)
+                                       && !x.IsLostCousinsEntered(CensusDate.USCENSUS1880, false)
+                                       && !x.IsLostCousinsEntered(CensusDate.USCENSUS1940, false);
             List<Individual> individuals = listToCheck.Filter(missing).ToList<Individual>();
             SetIndividuals(individuals, "Lost Cousins facts with no facts found to identify Country");
         }
 
         public void ListRelationToRoot(string relationtoRoot)
         {
-            Predicate<Individual> filter = x => x.RelationToRoot.Equals(relationtoRoot);
+            bool filter(Individual x) => x.RelationToRoot.Equals(relationtoRoot);
             List<Individual> individuals = ft.AllIndividuals.Filter(filter).ToList();
             SetIndividuals(individuals, "Individuals who are a " + relationtoRoot + " of root person");
         }
@@ -235,13 +235,12 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void dgIndividuals_SelectionChanged(object sender, EventArgs e)
+        private void DgIndividuals_SelectionChanged(object sender, EventArgs e)
         {
             if (selectRow && dgIndividuals.CurrentRow != null)
             {
-                IDisplayFamily f;
                 IDisplayIndividual ind = (IDisplayIndividual)dgIndividuals.CurrentRow.DataBoundItem;
-                families.TryGetValue(ind, out f);
+                families.TryGetValue(ind, out IDisplayFamily f);
                 if (f != null)
                 {
                     foreach (DataGridViewRow r in dgFamilies.Rows)
@@ -256,7 +255,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void dgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -268,7 +267,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void dgFamilies_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgFamilies_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -325,7 +324,7 @@ namespace FTAnalyzer.Forms
             this.Dispose();
         }
 
-        private void contextMenuStrip1_Opened(object sender, EventArgs e)
+        private void ContextMenuStrip1_Opened(object sender, EventArgs e)
         {
             string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
             Individual ind = ft.GetIndividual(indID);
@@ -333,7 +332,7 @@ namespace FTAnalyzer.Forms
                 viewNotesToolStripMenuItem.Enabled = ind.HasNotes;
         }
 
-        private void viewNotesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ViewNotesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
             Individual ind = ft.GetIndividual(indID);
@@ -373,7 +372,7 @@ namespace FTAnalyzer.Forms
                 SortFamilies();
         }
 
-        private void mnuSaveColumnLayout_Click(object sender, EventArgs e)
+        private void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
             if (reportType == ReportType.MismatchedChildrenStatus || reportType == ReportType.MissingChildrenStatus)
             {
@@ -385,7 +384,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void mnuResetColumns_Click(object sender, EventArgs e)
+        private void MnuResetColumns_Click(object sender, EventArgs e)
         {
             if (reportType == ReportType.MismatchedChildrenStatus || reportType == ReportType.MissingChildrenStatus)
             {
@@ -396,28 +395,28 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void printToolStripButton_Click(object sender, EventArgs e)
+        private void PrintToolStripButton_Click(object sender, EventArgs e)
         {
             indReportFormHelper.PrintReport(this.Text);
             if (!splitContainer.Panel2Collapsed)
                 famReportFormHelper.PrintReport(this.Text + " - Families");
         }
 
-        private void printPreviewToolStripButton_Click(object sender, EventArgs e)
+        private void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
         {
             indReportFormHelper.PrintPreviewReport();
             if (!splitContainer.Panel2Collapsed)
                 famReportFormHelper.PrintPreviewReport();
         }
 
-        private void mnuExportToExcel_Click(object sender, EventArgs e)
+        private void MnuExportToExcel_Click(object sender, EventArgs e)
         {
             indReportFormHelper.DoExportToExcel<IDisplayIndividual>();
             if (!splitContainer.Panel2Collapsed)
                 famReportFormHelper.DoExportToExcel<IDisplayFamily>();
         }
 
-        private void dgIndividuals_MouseDown(object sender, MouseEventArgs e)
+        private void DgIndividuals_MouseDown(object sender, MouseEventArgs e)
         {
             ShowViewNotesMenu(dgIndividuals, e);
         }
@@ -461,7 +460,7 @@ namespace FTAnalyzer.Forms
             UpdateStatusCount();
         }
 
-        private void dgFamilies_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void DgFamilies_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (reportType == ReportType.MissingChildrenStatus)
                 e.CellStyle.BackColor = Color.BlanchedAlmond;

@@ -43,12 +43,12 @@ namespace FTAnalyzer.Forms
             dgSources.Sort(dgSources.Columns["SourceTitle"], ListSortDirection.Ascending);
         }
 
-        private void printToolStripButton_Click(object sender, EventArgs e)
+        private void PrintToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintReport("Sources Report");
         }
 
-        private void printPreviewToolStripButton_Click(object sender, EventArgs e)
+        private void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintPreviewReport();
         }
@@ -58,17 +58,17 @@ namespace FTAnalyzer.Forms
             reportFormHelper.PrintTitle = this.Text;
         }
 
-        private void mnuExportToExcel_Click(object sender, EventArgs e)
+        private void MnuExportToExcel_Click(object sender, EventArgs e)
         {
             reportFormHelper.DoExportToExcel<IDisplaySource>();
         }
 
-        private void mnuResetColumns_Click(object sender, EventArgs e)
+        private void MnuResetColumns_Click(object sender, EventArgs e)
         {
             reportFormHelper.ResetColumnLayout("SourcesColumns.xml");
         }
 
-        private void mnuSaveColumnLayout_Click(object sender, EventArgs e)
+        private void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("SourcesColumns.xml");
             MessageBox.Show("Form Settings Saved", "Sources");
@@ -79,7 +79,7 @@ namespace FTAnalyzer.Forms
             this.Dispose();
         }
 
-        private void dgSources_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgSources_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if(e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {

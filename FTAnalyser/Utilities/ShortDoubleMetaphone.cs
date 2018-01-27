@@ -84,9 +84,9 @@ namespace FTAnalyzer
         /// <param name="word">Word for which to compute metaphone keys</param>
 		public ShortDoubleMetaphone(String word) : base(word)
 		{
-			m_primaryShortKey = ShortDoubleMetaphone.metaphoneKeyToShort(this.PrimaryKey);
+			m_primaryShortKey = ShortDoubleMetaphone.MetaphoneKeyToShort(this.PrimaryKey);
 			if (this.AlternateKey != null) {
-				m_alternateShortKey = ShortDoubleMetaphone.metaphoneKeyToShort(this.AlternateKey);
+				m_alternateShortKey = ShortDoubleMetaphone.MetaphoneKeyToShort(this.AlternateKey);
 			} else {
 				m_alternateShortKey = METAPHONE_INVALID_KEY;
 			}
@@ -104,12 +104,12 @@ namespace FTAnalyzer
         ///     methods is quite valuable.</summary>
         /// 
         /// <param name="word">New current word for which to compute metaphone keys</param>
-		new public void computeKeys(String word) {
-			base.computeKeys(word);
+		new public void ComputeKeys(String word) {
+			base.ComputeKeys(word);
 			
-			m_primaryShortKey = ShortDoubleMetaphone.metaphoneKeyToShort(this.PrimaryKey);
+			m_primaryShortKey = ShortDoubleMetaphone.MetaphoneKeyToShort(this.PrimaryKey);
 			if (this.AlternateKey != null) {
-				m_alternateShortKey = ShortDoubleMetaphone.metaphoneKeyToShort(this.AlternateKey);
+				m_alternateShortKey = ShortDoubleMetaphone.MetaphoneKeyToShort(this.AlternateKey);
 			} else {
 				m_alternateShortKey = METAPHONE_INVALID_KEY;
 			}
@@ -137,7 +137,7 @@ namespace FTAnalyzer
         ///     tests are not performed, for performance reasons.</param>
         /// 
         /// <returns>ushort representation of the given metahphone key</returns>
-		static private ushort metaphoneKeyToShort(String metaphoneKey) {
+		static private ushort MetaphoneKeyToShort(String metaphoneKey) {
 			ushort result, charResult;
 			Char currentChar;
 			

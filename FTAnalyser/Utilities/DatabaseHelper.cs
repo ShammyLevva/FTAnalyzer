@@ -452,24 +452,25 @@ namespace FTAnalyzer.Utilities
                 {
                     if (reader.Read())
                     {
-                        double latitude, longitude, latm, longm, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw;
-                        double.TryParse(reader["latitude"].ToString(), out latitude);
-                        double.TryParse(reader["longitude"].ToString(), out longitude);
-                        double.TryParse(reader["latm"].ToString(), out latm);
-                        double.TryParse(reader["longm"].ToString(), out longm);
-                        double.TryParse(reader["viewport_x_ne"].ToString(), out viewport_x_ne);
-                        double.TryParse(reader["viewport_y_ne"].ToString(), out viewport_y_ne);
-                        double.TryParse(reader["viewport_x_sw"].ToString(), out viewport_x_sw);
-                        double.TryParse(reader["viewport_y_sw"].ToString(), out viewport_y_sw);
+                        double.TryParse(reader["latitude"].ToString(), out double latitude);
+                        double.TryParse(reader["longitude"].ToString(), out double longitude);
+                        double.TryParse(reader["latm"].ToString(), out double latm);
+                        double.TryParse(reader["longm"].ToString(), out double longm);
+                        double.TryParse(reader["viewport_x_ne"].ToString(), out double viewport_x_ne);
+                        double.TryParse(reader["viewport_y_ne"].ToString(), out double viewport_y_ne);
+                        double.TryParse(reader["viewport_x_sw"].ToString(), out double viewport_x_sw);
+                        double.TryParse(reader["viewport_y_sw"].ToString(), out double viewport_y_sw);
                         location.Latitude = latitude;
                         location.Longitude = longitude;
                         location.LatitudeM = latm;
                         location.LongitudeM = longm;
                         if (location.ViewPort == null)
                         {
-                            location.ViewPort = new Mapping.GeoResponse.CResult.CGeometry.CViewPort();
-                            location.ViewPort.NorthEast = new Mapping.GeoResponse.CResult.CGeometry.CLocation();
-                            location.ViewPort.SouthWest = new Mapping.GeoResponse.CResult.CGeometry.CLocation();
+                            location.ViewPort = new GeoResponse.CResult.CGeometry.CViewPort
+                            {
+                                NorthEast = new GeoResponse.CResult.CGeometry.CLocation(),
+                                SouthWest = new GeoResponse.CResult.CGeometry.CLocation()
+                            };
                         }
                         location.ViewPort.NorthEast.Lat = viewport_y_ne;
                         location.ViewPort.NorthEast.Long = viewport_x_ne;
@@ -478,8 +479,7 @@ namespace FTAnalyzer.Utilities
                         location.GeocodeStatus = (FactLocation.Geocode)Enum.Parse(typeof(FactLocation.Geocode), reader["geocodestatus"].ToString());
                         location.FoundLocation = reader["foundlocation"].ToString();
                         location.FoundResultType = reader["foundresulttype"].ToString();
-                        int foundlevel = 0;
-                        int.TryParse(reader["foundlevel"].ToString(), out foundlevel);
+                        int.TryParse(reader["foundlevel"].ToString(), out int foundlevel);
                         location.FoundLevel = foundlevel;
                     }
                 }
@@ -730,8 +730,7 @@ namespace FTAnalyzer.Utilities
         public static event EventHandler GeoLocationUpdated;
         protected static void OnGeoLocationUpdated(FactLocation loc)
         {
-            if (GeoLocationUpdated != null)
-                GeoLocationUpdated(loc, EventArgs.Empty);
+            GeoLocationUpdated?.Invoke(loc, EventArgs.Empty);
         }
         #endregion
     }

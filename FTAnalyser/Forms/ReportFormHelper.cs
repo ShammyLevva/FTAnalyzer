@@ -49,17 +49,21 @@ namespace FTAnalyzer
                 printDocument, ReportGrid, true, true, true,
                 new TitlePrintBlock(PrintTitle), null, null);
 
-            printDialog = new PrintDialog();
-            printDialog.AllowSelection = true;
-            printDialog.AllowSomePages = true;
-            printDialog.Document = printDocument;
-            printDialog.UseEXDialog = true;
+            printDialog = new PrintDialog
+            {
+                AllowSelection = true,
+                AllowSomePages = true,
+                Document = printDocument,
+                UseEXDialog = true
+            };
 
-            printPreviewDialog = new PrintPreviewDialog();
-            printPreviewDialog.AutoScrollMargin = new Size(0, 0);
-            printPreviewDialog.AutoScrollMinSize = new Size(0, 0);
-            printPreviewDialog.ClientSize = new Size(400, 300);
-            printPreviewDialog.Document = printDocument;
+            printPreviewDialog = new PrintPreviewDialog
+            {
+                AutoScrollMargin = new Size(0, 0),
+                AutoScrollMinSize = new Size(0, 0),
+                ClientSize = new Size(400, 300),
+                Document = printDocument
+            };
         }
 
         public void PrintReport(string reportname)
@@ -156,8 +160,7 @@ namespace FTAnalyzer
                         ReportGrid.Columns[col.ColumnName].DisplayIndex = i;
                         if (col.ExtendedProperties.Contains("Width"))
                         {
-                            int width = 0;
-                            if (int.TryParse((string)col.ExtendedProperties["Width"], out width))
+                            if (int.TryParse((string)col.ExtendedProperties["Width"], out int width))
                                 ReportGrid.Columns[col.ColumnName].Width = width;
                         }
                         if (col.ExtendedProperties.Contains("Sort"))

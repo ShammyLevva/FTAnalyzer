@@ -18,8 +18,7 @@ namespace FTAnalyzer.Utilities
         public static void Show(string errorNum, Exception ex, MessageBoxIcon icon)
         {
             string message = ErrorMessages.ResourceManager.GetString(errorNum);
-            int eventId = 0;
-            int.TryParse(errorNum.Substring(4), out eventId);
+            int.TryParse(errorNum.Substring(4), out int eventId);
             MessageBox.Show(message + "\n" + ex.Message,
                         "Error: " + errorNum,
                         MessageBoxButtons.OK,

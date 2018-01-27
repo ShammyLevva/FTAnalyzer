@@ -28,16 +28,14 @@ namespace FTAnalyzer.Mapping
         {
             line = EnhancedTextInfo.RemoveDiacritics(line); // remove any special characters for Gazatteer processing
             string[] values = line.Split(':');
-            int intval;
-            Int32.TryParse(values[0], out intval);
+            Int32.TryParse(values[0], out int intval);
             SequenceNumber = intval;
             DefinitiveName = values[2];
-            double latitude, longitude;
             Int32.TryParse(values[4], out intval);
-            Double.TryParse(values[5], out latitude);
+            Double.TryParse(values[5], out double latitude);
             Latitude = intval + latitude / 60;
             Int32.TryParse(values[6], out intval);
-            Double.TryParse(values[7], out longitude);
+            Double.TryParse(values[7], out double longitude);
             Longitude = intval + longitude / 60;
             if (values[10] == "W")
                 Longitude = -1 * Longitude; // West Longitudes are negative

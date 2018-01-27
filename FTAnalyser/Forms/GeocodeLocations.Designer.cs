@@ -120,9 +120,9 @@
             this.dgLocations.ShowEditingIcon = false;
             this.dgLocations.Size = new System.Drawing.Size(894, 300);
             this.dgLocations.TabIndex = 5;
-            this.dgLocations.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dgLocations_CellContextMenuStripNeeded);
-            this.dgLocations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgLocations_CellDoubleClick);
-            this.dgLocations.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgLocations_CellToolTipTextNeeded_1);
+            this.dgLocations.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.DgLocations_CellContextMenuStripNeeded);
+            this.dgLocations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLocations_CellDoubleClick);
+            this.dgLocations.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.DgLocations_CellToolTipTextNeeded_1);
             // 
             // LocationIcon
             // 
@@ -220,7 +220,7 @@
             this.mnuVerified.Name = "mnuVerified";
             this.mnuVerified.Size = new System.Drawing.Size(239, 22);
             this.mnuVerified.Text = "Mark Location as Verified";
-            this.mnuVerified.Click += new System.EventHandler(this.mnuVerified_Click);
+            this.mnuVerified.Click += new System.EventHandler(this.MnuVerified_Click);
             // 
             // mnuIncorrect
             // 
@@ -228,7 +228,7 @@
             this.mnuIncorrect.Name = "mnuIncorrect";
             this.mnuIncorrect.Size = new System.Drawing.Size(239, 22);
             this.mnuIncorrect.Text = "Mark Location as Incorrect";
-            this.mnuIncorrect.Click += new System.EventHandler(this.mnuIncorrect_Click);
+            this.mnuIncorrect.Click += new System.EventHandler(this.MnuIncorrect_Click);
             // 
             // mnuNotSearched
             // 
@@ -236,7 +236,7 @@
             this.mnuNotSearched.Name = "mnuNotSearched";
             this.mnuNotSearched.Size = new System.Drawing.Size(239, 22);
             this.mnuNotSearched.Text = "Reset Location to Not Searched";
-            this.mnuNotSearched.Click += new System.EventHandler(this.mnuNotSearched_Click);
+            this.mnuNotSearched.Click += new System.EventHandler(this.MnuNotSearched_Click);
             // 
             // toolStripSeparator1
             // 
@@ -248,14 +248,14 @@
             this.mnuEditLocation.Name = "mnuEditLocation";
             this.mnuEditLocation.Size = new System.Drawing.Size(239, 22);
             this.mnuEditLocation.Text = "Edit Location";
-            this.mnuEditLocation.Click += new System.EventHandler(this.mnuEditLocation_Click);
+            this.mnuEditLocation.Click += new System.EventHandler(this.MnuEditLocation_Click);
             // 
             // mnuCopyLocation
             // 
             this.mnuCopyLocation.Name = "mnuCopyLocation";
             this.mnuCopyLocation.Size = new System.Drawing.Size(239, 22);
             this.mnuCopyLocation.Text = "Copy Location";
-            this.mnuCopyLocation.Click += new System.EventHandler(this.mnuCopyLocation_Click);
+            this.mnuCopyLocation.Click += new System.EventHandler(this.MnuCopyLocation_Click);
             // 
             // mnuPasteLocation
             // 
@@ -263,7 +263,7 @@
             this.mnuPasteLocation.Name = "mnuPasteLocation";
             this.mnuPasteLocation.Size = new System.Drawing.Size(239, 22);
             this.mnuPasteLocation.Text = "Paste Location";
-            this.mnuPasteLocation.Click += new System.EventHandler(this.mnuPasteLocation_Click);
+            this.mnuPasteLocation.Click += new System.EventHandler(this.MnuPasteLocation_Click);
             // 
             // statusStrip
             // 
@@ -302,7 +302,7 @@
             this.mnuSaveColumnLayout.Name = "mnuSaveColumnLayout";
             this.mnuSaveColumnLayout.Size = new System.Drawing.Size(23, 22);
             this.mnuSaveColumnLayout.Text = "Save Column Sort Order, layout, width etc";
-            this.mnuSaveColumnLayout.Click += new System.EventHandler(this.mnuSaveColumnLayout_Click);
+            this.mnuSaveColumnLayout.Click += new System.EventHandler(this.MnuSaveColumnLayout_Click);
             // 
             // mnuExportToExcel
             // 
@@ -312,7 +312,7 @@
             this.mnuExportToExcel.Name = "mnuExportToExcel";
             this.mnuExportToExcel.Size = new System.Drawing.Size(23, 22);
             this.mnuExportToExcel.Text = "Export to Excel";
-            this.mnuExportToExcel.Click += new System.EventHandler(this.mnuExportToExcel_Click);
+            this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
             // 
             // mnuResetColumns
             // 
@@ -322,7 +322,7 @@
             this.mnuResetColumns.Name = "mnuResetColumns";
             this.mnuResetColumns.Size = new System.Drawing.Size(23, 22);
             this.mnuResetColumns.Text = "Reset Column Sort Order to Default";
-            this.mnuResetColumns.Click += new System.EventHandler(this.mnuResetColumns_Click);
+            this.mnuResetColumns.Click += new System.EventHandler(this.MnuResetColumns_Click);
             // 
             // toolStrip1
             // 
@@ -353,7 +353,7 @@
             this.printToolStripButton.Name = "printToolStripButton";
             this.printToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.printToolStripButton.Text = "&Print";
-            this.printToolStripButton.Click += new System.EventHandler(this.printToolStripButton_Click);
+            this.printToolStripButton.Click += new System.EventHandler(this.PrintToolStripButton_Click);
             // 
             // printPreviewToolStripButton
             // 
@@ -363,7 +363,7 @@
             this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
             this.printPreviewToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.printPreviewToolStripButton.Text = "Print Preview...";
-            this.printPreviewToolStripButton.Click += new System.EventHandler(this.printPreviewToolStripButton_Click);
+            this.printPreviewToolStripButton.Click += new System.EventHandler(this.PrintPreviewToolStripButton_Click);
             // 
             // toolStripSeparator
             // 
@@ -374,9 +374,9 @@
             // 
             this.googleGeocodeBackgroundWorker.WorkerReportsProgress = true;
             this.googleGeocodeBackgroundWorker.WorkerSupportsCancellation = true;
-            this.googleGeocodeBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.googleGeocodingBackgroundWorker_DoWork);
-            this.googleGeocodeBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.googleGeocodingBackgroundWorker_ProgressChanged);
-            this.googleGeocodeBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.googleGeocodingBackgroundWorker_RunWorkerCompleted);
+            this.googleGeocodeBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.GoogleGeocodingBackgroundWorker_DoWork);
+            this.googleGeocodeBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.GoogleGeocodingBackgroundWorker_ProgressChanged);
+            this.googleGeocodeBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.GoogleGeocodingBackgroundWorker_RunWorkerCompleted);
             // 
             // menuStrip1
             // 
@@ -407,28 +407,28 @@
             this.mnuGoogleGeocodeLocations.Size = new System.Drawing.Size(282, 22);
             this.mnuGoogleGeocodeLocations.Text = "Run Google Geocoder to find Locations";
             this.mnuGoogleGeocodeLocations.ToolTipText = "Looks up map co-ordinates for locations in your file";
-            this.mnuGoogleGeocodeLocations.Click += new System.EventHandler(this.mnuGeocodeLocations_Click);
+            this.mnuGoogleGeocodeLocations.Click += new System.EventHandler(this.MnuGeocodeLocations_Click);
             // 
             // mnuRetryPartial
             // 
             this.mnuRetryPartial.Name = "mnuRetryPartial";
             this.mnuRetryPartial.Size = new System.Drawing.Size(282, 22);
             this.mnuRetryPartial.Text = "Run Google Geocoder retrying Partials";
-            this.mnuRetryPartial.Click += new System.EventHandler(this.mnuRetryPartial_Click);
+            this.mnuRetryPartial.Click += new System.EventHandler(this.MnuRetryPartial_Click);
             // 
             // mnuOSGeocodeLocations
             // 
             this.mnuOSGeocodeLocations.Name = "mnuOSGeocodeLocations";
             this.mnuOSGeocodeLocations.Size = new System.Drawing.Size(282, 22);
             this.mnuOSGeocodeLocations.Text = "Run OS Geocoder to find Locations";
-            this.mnuOSGeocodeLocations.Click += new System.EventHandler(this.mnuOSGeocodeLocations_Click);
+            this.mnuOSGeocodeLocations.Click += new System.EventHandler(this.MnuOSGeocodeLocations_Click);
             // 
             // mnuReverseGeocode
             // 
             this.mnuReverseGeocode.Name = "mnuReverseGeocode";
             this.mnuReverseGeocode.Size = new System.Drawing.Size(282, 22);
             this.mnuReverseGeocode.Text = "Lookup Blank Google Locations";
-            this.mnuReverseGeocode.Click += new System.EventHandler(this.mnuReverseGeocde_Click);
+            this.mnuReverseGeocode.Click += new System.EventHandler(this.MnuReverseGeocde_Click);
             // 
             // mnuOptions
             // 
@@ -446,14 +446,14 @@
             this.updateChangesWithoutAskingToolStripMenuItem.Size = new System.Drawing.Size(286, 22);
             this.updateChangesWithoutAskingToolStripMenuItem.Text = "Update Changes without asking";
             this.updateChangesWithoutAskingToolStripMenuItem.ToolTipText = "No longer asks if you want to save changes to locations";
-            this.updateChangesWithoutAskingToolStripMenuItem.Click += new System.EventHandler(this.updateChangesWithoutAskingToolStripMenuItem_Click);
+            this.updateChangesWithoutAskingToolStripMenuItem.Click += new System.EventHandler(this.UpdateChangesWithoutAskingToolStripMenuItem_Click);
             // 
             // resetAllPartialMatchesToNotSearchedToolStripMenuItem
             // 
             this.resetAllPartialMatchesToNotSearchedToolStripMenuItem.Name = "resetAllPartialMatchesToNotSearchedToolStripMenuItem";
             this.resetAllPartialMatchesToNotSearchedToolStripMenuItem.Size = new System.Drawing.Size(286, 22);
             this.resetAllPartialMatchesToNotSearchedToolStripMenuItem.Text = "Reset all partial matches to not searched";
-            this.resetAllPartialMatchesToNotSearchedToolStripMenuItem.Click += new System.EventHandler(this.resetAllPartialMatchesToNotSearchedToolStripMenuItem_Click);
+            this.resetAllPartialMatchesToNotSearchedToolStripMenuItem.Click += new System.EventHandler(this.ResetAllPartialMatchesToNotSearchedToolStripMenuItem_Click);
             // 
             // filtersToolStripMenuItem
             // 
@@ -477,7 +477,7 @@
             this.mnuStatusSelectAll.Name = "mnuStatusSelectAll";
             this.mnuStatusSelectAll.Size = new System.Drawing.Size(122, 22);
             this.mnuStatusSelectAll.Text = "Select All";
-            this.mnuStatusSelectAll.Click += new System.EventHandler(this.mnuStatusSelectAll_Click);
+            this.mnuStatusSelectAll.Click += new System.EventHandler(this.MnuStatusSelectAll_Click);
             // 
             // mnuFoundResultType
             // 
@@ -492,15 +492,15 @@
             this.mnuSelectClear.Name = "mnuSelectClear";
             this.mnuSelectClear.Size = new System.Drawing.Size(122, 22);
             this.mnuSelectClear.Text = "Select All";
-            this.mnuSelectClear.Click += new System.EventHandler(this.mnuSelectClear_Click);
+            this.mnuSelectClear.Click += new System.EventHandler(this.MnuSelectClear_Click);
             // 
             // reverseGeocodeBackgroundWorker
             // 
             this.reverseGeocodeBackgroundWorker.WorkerReportsProgress = true;
             this.reverseGeocodeBackgroundWorker.WorkerSupportsCancellation = true;
-            this.reverseGeocodeBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.reverseGeocodeBackgroundWorker_DoWork);
-            this.reverseGeocodeBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.googleGeocodingBackgroundWorker_ProgressChanged);
-            this.reverseGeocodeBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.googleGeocodingBackgroundWorker_RunWorkerCompleted);
+            this.reverseGeocodeBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.ReverseGeocodeBackgroundWorker_DoWork);
+            this.reverseGeocodeBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.GoogleGeocodingBackgroundWorker_ProgressChanged);
+            this.reverseGeocodeBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.GoogleGeocodingBackgroundWorker_RunWorkerCompleted);
             // 
             // OSGeocodeBackgroundWorker
             // 

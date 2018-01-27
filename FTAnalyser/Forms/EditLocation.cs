@@ -80,7 +80,7 @@ namespace FTAnalyzer.Forms
             return pointFeature;
         }
 
-        private void mapBox1_MouseClick(object sender, MouseEventArgs e)
+        private void MapBox1_MouseClick(object sender, MouseEventArgs e)
         {
             Coordinate c1 = mapBox1.Map.ImageToWorld(new PointF(e.X - 21.0f, e.Y - 34.0f));
             Coordinate c2 = mapBox1.Map.ImageToWorld(new PointF(e.X + 21.0f, e.Y + 34.0f));
@@ -153,7 +153,7 @@ namespace FTAnalyzer.Forms
             dataUpdated = true;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void BtnSave_Click(object sender, EventArgs e)
         {
             UpdateDatabase();
             UserSavedPoint = true;
@@ -161,7 +161,7 @@ namespace FTAnalyzer.Forms
             MessageBox.Show("Data for " + location.ToString() + " updated.", "Save new location");
         }
 
-        private void btnSaveExit_Click(object sender, EventArgs e)
+        private void BtnSaveExit_Click(object sender, EventArgs e)
         {
             UpdateDatabase();
             UserSavedPoint = true;
@@ -169,7 +169,7 @@ namespace FTAnalyzer.Forms
             this.Close();
         }
 
-        private void btnReload_Click(object sender, EventArgs e)
+        private void BtnReload_Click(object sender, EventArgs e)
         {
             ResetMap();
             if (dataUpdated)
@@ -179,12 +179,12 @@ namespace FTAnalyzer.Forms
             UserSavedPoint = false;
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             HttpUtility.VisitWebsite(e.Link.LinkData as string);
         }
 
-        private void mapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void MapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             bool zoomed = false;
             if (e.Button == MouseButtons.Left && mapBox1.Map.Zoom > mapBox1.Map.MinimumZoom)
@@ -206,7 +206,7 @@ namespace FTAnalyzer.Forms
             //Console.WriteLine("Pixel : " + mapBox1.Map.PixelSize);
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void BtnSearch_Click(object sender, EventArgs e)
         {
             GoogleLocationSearch();
         }
@@ -270,19 +270,19 @@ namespace FTAnalyzer.Forms
             mapBox1.Refresh();
         }
 
-        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        private void TxtSearch_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
                 GoogleLocationSearch();
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void BtnEdit_Click(object sender, EventArgs e)
         {
             mapBox1.Cursor = new Cursor(Path.Combine(Application.StartupPath, @"Resources\Icons\teardrop_blue.cur"));
             iconSelected = true;
         }
 
-        private void btnCustomMap_Click(object sender, EventArgs e)
+        private void BtnCustomMap_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
             RemoveCustomMapLayers();

@@ -48,12 +48,12 @@ namespace FTAnalyzer
             dgIndividuals.AutoResizeColumns();
         }
 
-        private void printToolStripButton_Click(object sender, EventArgs e)
+        private void PrintToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintReport("Map Individuals");
         }
 
-        private void printPreviewToolStripButton_Click(object sender, EventArgs e)
+        private void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintPreviewReport();
         }
@@ -63,23 +63,23 @@ namespace FTAnalyzer
             reportFormHelper.PrintTitle = this.Text;
         }
 
-        private void mnuExportToExcel_Click(object sender, EventArgs e)
+        private void MnuExportToExcel_Click(object sender, EventArgs e)
         {
             reportFormHelper.DoExportToExcel<MapLocation>();
         }
 
-        private void mnuResetColumns_Click(object sender, EventArgs e)
+        private void MnuResetColumns_Click(object sender, EventArgs e)
         {
             reportFormHelper.ResetColumnLayout("MapIndividualColumns.xml");
         }
 
-        private void mnuSaveColumnLayout_Click(object sender, EventArgs e)
+        private void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("MapIndividualColumns.xml");
             MessageBox.Show("Form Settings Saved", "Map Individuals");
         }
 
-        private void dgIndividuals_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        private void DgIndividuals_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -88,7 +88,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void dgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -100,7 +100,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void mnuEditLocation_Click(object sender, EventArgs e)
+        private void MnuEditLocation_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
             MapLocation loc = dgIndividuals.SelectedRows[0].DataBoundItem as MapLocation;
@@ -128,7 +128,7 @@ namespace FTAnalyzer
             dgIndividuals.Refresh();
         }
 
-        private void editLocationToolStripMenuItem_Click(object sender, EventArgs e)
+        private void EditLocationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!ft.Geocoding)
             {
@@ -148,7 +148,7 @@ namespace FTAnalyzer
             dgIndividuals.Refresh();
         }
 
-        private void dgIndividuals_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        private void DgIndividuals_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 dgIndividuals.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;

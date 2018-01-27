@@ -54,8 +54,7 @@ namespace FTAnalyzer.Utilities
             List<T> itemsList = (List<T>)this.Items;
 
             Type propertyType = property.PropertyType;
-            PropertyComparer<T> comparer;
-            if (!this.comparers.TryGetValue(propertyType, out comparer))
+            if (!this.comparers.TryGetValue(propertyType, out PropertyComparer<T> comparer))
             {
                 comparer = new PropertyComparer<T>(property, direction);
                 this.comparers.Add(propertyType, comparer);
@@ -156,15 +155,13 @@ namespace FTAnalyzer.Utilities
         public event EventHandler SortStarted;
         public void OnSortStarted()
         {
-            if (SortStarted != null)
-                SortStarted(null, EventArgs.Empty);
+            SortStarted?.Invoke(null, EventArgs.Empty);
         }
 
         public event EventHandler SortFinished;
         public void OnSortFinished()
         {
-            if (SortFinished != null)
-                SortFinished(null, EventArgs.Empty);
+            SortFinished?.Invoke(null, EventArgs.Empty);
         }
         #endregion
 

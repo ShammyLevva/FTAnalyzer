@@ -20,10 +20,12 @@ namespace FTAnalyzer.Utilities
 
         public override void Draw(System.Drawing.Graphics g, Dictionary<CodeEnum, string> codes)
         {
-            StringFormat format = new StringFormat();
-            format.Trimming = StringTrimming.Word;
-            format.FormatFlags = StringFormatFlags.NoWrap;
-            format.Alignment = StringAlignment.Far;
+            StringFormat format = new StringFormat
+            {
+                Trimming = StringTrimming.Word,
+                FormatFlags = StringFormatFlags.NoWrap,
+                Alignment = StringAlignment.Far
+            };
 
             // as you can see below, we are using the codes param to know on which page we are for instance.
             g.DrawString(

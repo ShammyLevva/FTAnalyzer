@@ -107,8 +107,8 @@
             this.dgIndividuals.Name = "dgIndividuals";
             this.dgIndividuals.Size = new System.Drawing.Size(1038, 273);
             this.dgIndividuals.TabIndex = 2;
-            this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgIndividuals_CellDoubleClick);
-            this.dgIndividuals.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgIndividuals_MouseDown);
+            this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgIndividuals_CellDoubleClick);
+            this.dgIndividuals.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgIndividuals_MouseDown);
             // 
             // ctxViewNotes
             // 
@@ -116,14 +116,14 @@
             this.viewNotesToolStripMenuItem});
             this.ctxViewNotes.Name = "contextMenuStrip1";
             this.ctxViewNotes.Size = new System.Drawing.Size(134, 26);
-            this.ctxViewNotes.Opened += new System.EventHandler(this.contextMenuStrip1_Opened);
+            this.ctxViewNotes.Opened += new System.EventHandler(this.ContextMenuStrip1_Opened);
             // 
             // viewNotesToolStripMenuItem
             // 
             this.viewNotesToolStripMenuItem.Name = "viewNotesToolStripMenuItem";
             this.viewNotesToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.viewNotesToolStripMenuItem.Text = "View Notes";
-            this.viewNotesToolStripMenuItem.Click += new System.EventHandler(this.viewNotesToolStripMenuItem_Click);
+            this.viewNotesToolStripMenuItem.Click += new System.EventHandler(this.ViewNotesToolStripMenuItem_Click);
             // 
             // dgFamilies
             // 
@@ -138,8 +138,8 @@
             this.dgFamilies.Name = "dgFamilies";
             this.dgFamilies.Size = new System.Drawing.Size(1038, 259);
             this.dgFamilies.TabIndex = 5;
-            this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgFamilies_CellDoubleClick);
-            this.dgFamilies.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgFamilies_CellFormatting);
+            this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgFamilies_CellDoubleClick);
+            this.dgFamilies.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgFamilies_CellFormatting);
             // 
             // toolStrip1
             // 
@@ -166,7 +166,7 @@
             this.mnuSaveColumnLayout.Size = new System.Drawing.Size(23, 22);
             this.mnuSaveColumnLayout.Text = "Save Column Sort Order, layout, width etc";
             this.mnuSaveColumnLayout.Visible = false;
-            this.mnuSaveColumnLayout.Click += new System.EventHandler(this.mnuSaveColumnLayout_Click);
+            this.mnuSaveColumnLayout.Click += new System.EventHandler(this.MnuSaveColumnLayout_Click);
             // 
             // mnuResetColumns
             // 
@@ -177,7 +177,7 @@
             this.mnuResetColumns.Size = new System.Drawing.Size(23, 22);
             this.mnuResetColumns.Text = "Reset Column Sort Order to Default";
             this.mnuResetColumns.Visible = false;
-            this.mnuResetColumns.Click += new System.EventHandler(this.mnuResetColumns_Click);
+            this.mnuResetColumns.Click += new System.EventHandler(this.MnuResetColumns_Click);
             // 
             // tssSaveButtons
             // 
@@ -193,7 +193,7 @@
             this.printToolStripButton.Name = "printToolStripButton";
             this.printToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.printToolStripButton.Text = "&Print";
-            this.printToolStripButton.Click += new System.EventHandler(this.printToolStripButton_Click);
+            this.printToolStripButton.Click += new System.EventHandler(this.PrintToolStripButton_Click);
             // 
             // printPreviewToolStripButton
             // 
@@ -203,7 +203,7 @@
             this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
             this.printPreviewToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.printPreviewToolStripButton.Text = "Print Preview...";
-            this.printPreviewToolStripButton.Click += new System.EventHandler(this.printPreviewToolStripButton_Click);
+            this.printPreviewToolStripButton.Click += new System.EventHandler(this.PrintPreviewToolStripButton_Click);
             // 
             // toolStripSeparator
             // 
@@ -218,7 +218,7 @@
             this.mnuExportToExcel.Name = "mnuExportToExcel";
             this.mnuExportToExcel.Size = new System.Drawing.Size(23, 22);
             this.mnuExportToExcel.Text = "Export to Excel";
-            this.mnuExportToExcel.Click += new System.EventHandler(this.mnuExportToExcel_Click);
+            this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
             // 
             // People
             // 

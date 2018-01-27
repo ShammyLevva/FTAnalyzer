@@ -35,30 +35,38 @@ namespace FTAnalyzer.Mapping
             this.DataSource = TearDropLocationGFP;
 
             Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
-            VectorStyle birth = new VectorStyle();
-            birth.PointColor = new SolidBrush(Color.Red);
-            birth.PointSize = 8;
-            birth.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\", RED));
-            birth.SymbolOffset = new PointF(0.0f, -17.0f);
+            VectorStyle birth = new VectorStyle
+            {
+                PointColor = new SolidBrush(Color.Red),
+                PointSize = 8,
+                Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\", RED)),
+                SymbolOffset = new PointF(0.0f, -17.0f)
+            };
             styles.Add(RED, birth);
 
-            VectorStyle death = new VectorStyle();
-            death.PointColor = new SolidBrush(Color.Black);
-            death.PointSize = 8;
-            death.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\", BLACK));
-            death.SymbolOffset = new PointF(0.0f, -17.0f);
+            VectorStyle death = new VectorStyle
+            {
+                PointColor = new SolidBrush(Color.Black),
+                PointSize = 8,
+                Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\", BLACK)),
+                SymbolOffset = new PointF(0.0f, -17.0f)
+            };
             styles.Add(BLACK, death);
 
-            VectorStyle selected = new VectorStyle();
-            selected.PointColor = new SolidBrush(Color.LightGreen);
-            selected.PointSize = 8;
-            selected.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\", LIGHT_GREEN));
-            selected.SymbolOffset = new PointF(0.0f, -17.0f);
+            VectorStyle selected = new VectorStyle
+            {
+                PointColor = new SolidBrush(Color.LightGreen),
+                PointSize = 8,
+                Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\", LIGHT_GREEN)),
+                SymbolOffset = new PointF(0.0f, -17.0f)
+            };
             styles.Add(LIGHT_GREEN, selected);
 
-            VectorStyle point = new VectorStyle();
-            point.PointColor = new SolidBrush(Color.DarkGray);
-            point.PointSize = 6;
+            VectorStyle point = new VectorStyle
+            {
+                PointColor = new SolidBrush(Color.DarkGray),
+                PointSize = 6
+            };
             styles.Add(GREY, point);
 
             this.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<string>("Colour", styles, point);

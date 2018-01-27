@@ -50,15 +50,17 @@ namespace FTAnalyzer.Mapping
             }
             else
             {
-                ScaleBar scalebar = new ScaleBar();
-                scalebar.BackgroundColor = Color.White;
-                scalebar.RoundedEdges = true;
+                ScaleBar scalebar = new ScaleBar
+                {
+                    BackgroundColor = Color.White,
+                    RoundedEdges = true
+                };
                 mapBox1.Map.Decorations.Add(scalebar);
             }
             mapBox1.Refresh();
         }
 
-        public void mnuHideScaleBar_Click(ToolStripMenuItem mnuHideScaleBar, MapBox mapBox1)
+        public void MnuHideScaleBar_Click(ToolStripMenuItem mnuHideScaleBar, MapBox mapBox1)
         {
             Properties.MappingSettings.Default.HideScaleBar = mnuHideScaleBar.Checked;
             Properties.MappingSettings.Default.Save();
@@ -113,8 +115,10 @@ namespace FTAnalyzer.Mapping
             {
                 if (File.Exists(filename))
                 {
-                    VectorLayer parishLayer = new VectorLayer(prefix + "ParishBoundaries");
-                    parishLayer.DataSource = new ShapeFile(filename, true);
+                    VectorLayer parishLayer = new VectorLayer(prefix + "ParishBoundaries")
+                    {
+                        DataSource = new ShapeFile(filename, true)
+                    };
                     parishLayer.Style.Fill = null;
                     parishLayer.Style.Outline = new Pen(Color.Black, 2.0f);
                     parishLayer.Style.EnableOutline = true;
@@ -122,19 +126,23 @@ namespace FTAnalyzer.Mapping
                     parishLayer.MaxVisible = 300000;
                     map.VariableLayers.Add(parishLayer);
 
-                    LabelLayer parishLabelLayer = new LabelLayer(prefix + "ParishNames");
-                    parishLabelLayer.DataSource = new ShapeFile(filename, true);
-                    parishLabelLayer.LabelColumn = labelField;
-                    parishLabelLayer.TextRenderingHint = TextRenderingHint.AntiAlias;
-                    parishLabelLayer.SmoothingMode = SmoothingMode.AntiAlias;
+                    LabelLayer parishLabelLayer = new LabelLayer(prefix + "ParishNames")
+                    {
+                        DataSource = new ShapeFile(filename, true),
+                        LabelColumn = labelField,
+                        TextRenderingHint = TextRenderingHint.AntiAlias,
+                        SmoothingMode = SmoothingMode.AntiAlias
+                    };
 
-                    LabelStyle style = new LabelStyle();
-                    style.ForeColor = Color.DarkRed;
-                    style.Font = new Font(FontFamily.GenericSerif, 14, FontStyle.Bold);
-                    style.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center;
-                    style.VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Middle;
-                    style.CollisionDetection = true;
-                    style.CollisionBuffer = new SizeF(4f, 4f);
+                    LabelStyle style = new LabelStyle
+                    {
+                        ForeColor = Color.DarkRed,
+                        Font = new Font(FontFamily.GenericSerif, 14, FontStyle.Bold),
+                        HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+                        VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Middle,
+                        CollisionDetection = true,
+                        CollisionBuffer = new SizeF(4f, 4f)
+                    };
 
                     parishLabelLayer.Style = style;
                     parishLabelLayer.LabelFilter = LabelCollisionDetection.ThoroughCollisionDetection;

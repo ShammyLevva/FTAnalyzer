@@ -204,7 +204,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void dgFacts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void DgFacts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == 1)
             {
@@ -227,7 +227,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void btnShowHideFacts_Click(object sender, EventArgs e)
+        private void BtnShowHideFacts_Click(object sender, EventArgs e)
         {
             ShowHideFactRows();
         }
@@ -318,12 +318,12 @@ namespace FTAnalyzer.Forms
             SetBackColour();
         }
 
-        private void printToolStripButton_Click(object sender, EventArgs e)
+        private void PrintToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintReport("Facts Report");
         }
 
-        private void printPreviewToolStripButton_Click(object sender, EventArgs e)
+        private void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintPreviewReport();
         }
@@ -333,23 +333,23 @@ namespace FTAnalyzer.Forms
             reportFormHelper.PrintTitle = this.Text;
         }
 
-        private void mnuExportToExcel_Click(object sender, EventArgs e)
+        private void MnuExportToExcel_Click(object sender, EventArgs e)
         {
             reportFormHelper.DoExportToExcel<IDisplayFact>();
         }
 
-        private void mnuResetColumns_Click(object sender, EventArgs e)
+        private void MnuResetColumns_Click(object sender, EventArgs e)
         {
             reportFormHelper.ResetColumnLayout("FactsColumns.xml");
         }
 
-        private void mnuSaveColumnLayout_Click(object sender, EventArgs e)
+        private void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("FactsColumns.xml");
             MessageBox.Show("Form Settings Saved", "Facts");
         }
 
-        private void dgFacts_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        private void DgFacts_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == 0)
             {
@@ -358,7 +358,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void dgFacts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void DgFacts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex > 0)
             {
@@ -389,7 +389,7 @@ namespace FTAnalyzer.Forms
             this.Dispose();
         }
 
-        private void dgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {

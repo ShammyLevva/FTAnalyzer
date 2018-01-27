@@ -70,8 +70,8 @@ namespace FTAnalyzer.Forms
             this.mapBox1.TabIndex = 9;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
-            this.mapBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.mapBox1_MouseClick);
-            this.mapBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mapBox1_MouseDoubleClick);
+            this.mapBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MapBox1_MouseClick);
+            this.mapBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MapBox1_MouseDoubleClick);
             // 
             // mapZoomToolStrip
             // 
@@ -101,7 +101,7 @@ namespace FTAnalyzer.Forms
             this.btnEdit.Size = new System.Drawing.Size(23, 22);
             this.btnEdit.Text = "toolStripButton1";
             this.btnEdit.ToolTipText = "Pickup point to edit location";
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.btnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
             // btnSave
             // 
@@ -112,7 +112,7 @@ namespace FTAnalyzer.Forms
             this.btnSave.Size = new System.Drawing.Size(23, 22);
             this.btnSave.Text = "toolStripButton1";
             this.btnSave.ToolTipText = "Save location to database";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // btnSaveExit
             // 
@@ -123,7 +123,7 @@ namespace FTAnalyzer.Forms
             this.btnSaveExit.Size = new System.Drawing.Size(23, 22);
             this.btnSaveExit.Text = "Save & Exit";
             this.btnSaveExit.ToolTipText = "Save & Exit";
-            this.btnSaveExit.Click += new System.EventHandler(this.btnSaveExit_Click);
+            this.btnSaveExit.Click += new System.EventHandler(this.BtnSaveExit_Click);
             // 
             // btnReload
             // 
@@ -134,7 +134,7 @@ namespace FTAnalyzer.Forms
             this.btnReload.Size = new System.Drawing.Size(23, 22);
             this.btnReload.Text = "toolStripButton2";
             this.btnReload.ToolTipText = "Reset Point to original position";
-            this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
+            this.btnReload.Click += new System.EventHandler(this.BtnReload_Click);
             // 
             // labSearch
             // 
@@ -149,7 +149,7 @@ namespace FTAnalyzer.Forms
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(250, 25);
             this.txtSearch.ToolTipText = "Enter text to move pin to location found by Google";
-            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
+            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtSearch_KeyDown);
             // 
             // btnSearch
             // 
@@ -160,7 +160,7 @@ namespace FTAnalyzer.Forms
             this.btnSearch.Size = new System.Drawing.Size(23, 22);
             this.btnSearch.Text = "toolStripButton1";
             this.btnSearch.ToolTipText = "Search Google for Location Text";
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
             // btnCustomMap
             // 
@@ -171,7 +171,7 @@ namespace FTAnalyzer.Forms
             this.btnCustomMap.Name = "btnCustomMap";
             this.btnCustomMap.Size = new System.Drawing.Size(23, 22);
             this.btnCustomMap.Text = "Enable Custom Map Overlay";
-            this.btnCustomMap.Click += new System.EventHandler(this.btnCustomMap_Click);
+            this.btnCustomMap.Click += new System.EventHandler(this.BtnCustomMap_Click);
             // 
             // linkLabel1
             // 
@@ -184,7 +184,7 @@ namespace FTAnalyzer.Forms
             this.linkLabel1.TabIndex = 15;
             this.linkLabel1.Text = "© Google - Terms of Use";
             this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
             // 
             // statusStrip1
             // 

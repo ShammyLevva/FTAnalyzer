@@ -38,7 +38,7 @@ namespace FTAnalyzer.Utilities
 
         public void Filter(Predicate<T> filter)
         {
-            if (ReferenceEquals(filter, null))
+            if (filter is null)
             {
                 throw new ArgumentNullException("filter");
             }
