@@ -60,7 +60,7 @@
             this.ckbUnknown.TabIndex = 4;
             this.ckbUnknown.Text = "Unknown";
             this.ckbUnknown.UseVisualStyleBackColor = true;
-            this.ckbUnknown.CheckedChanged += new System.EventHandler(this.tickbox_CheckedChanged);
+            this.ckbUnknown.CheckedChanged += new System.EventHandler(this.Tickbox_CheckedChanged);
             // 
             // ckbMarriageDB
             // 
@@ -73,7 +73,7 @@
             this.ckbMarriageDB.TabIndex = 3;
             this.ckbMarriageDB.Text = "Married to Blood or Direct";
             this.ckbMarriageDB.UseVisualStyleBackColor = true;
-            this.ckbMarriageDB.CheckedChanged += new System.EventHandler(this.tickbox_CheckedChanged);
+            this.ckbMarriageDB.CheckedChanged += new System.EventHandler(this.Tickbox_CheckedChanged);
             // 
             // ckbMarriage
             // 
@@ -84,7 +84,7 @@
             this.ckbMarriage.TabIndex = 2;
             this.ckbMarriage.Text = "Related by Marriage";
             this.ckbMarriage.UseVisualStyleBackColor = true;
-            this.ckbMarriage.CheckedChanged += new System.EventHandler(this.tickbox_CheckedChanged);
+            this.ckbMarriage.CheckedChanged += new System.EventHandler(this.Tickbox_CheckedChanged);
             // 
             // ckbBlood
             // 
@@ -97,7 +97,7 @@
             this.ckbBlood.TabIndex = 1;
             this.ckbBlood.Text = "Blood Relations";
             this.ckbBlood.UseVisualStyleBackColor = true;
-            this.ckbBlood.CheckedChanged += new System.EventHandler(this.tickbox_CheckedChanged);
+            this.ckbBlood.CheckedChanged += new System.EventHandler(this.Tickbox_CheckedChanged);
             // 
             // ckbDirects
             // 
@@ -110,7 +110,7 @@
             this.ckbDirects.TabIndex = 0;
             this.ckbDirects.Text = "Direct Ancestors";
             this.ckbDirects.UseVisualStyleBackColor = true;
-            this.ckbDirects.CheckedChanged += new System.EventHandler(this.tickbox_CheckedChanged);
+            this.ckbDirects.CheckedChanged += new System.EventHandler(this.Tickbox_CheckedChanged);
             // 
             // RelationTypes
             // 

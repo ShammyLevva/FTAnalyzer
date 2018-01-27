@@ -193,7 +193,7 @@ namespace Controls
             }
         }
 
-        private void cbCensusDate_SelectedIndexChanged(object sender, EventArgs e)
+        private void CbCensusDate_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!_loading)
                 OnCensusChanged(e);

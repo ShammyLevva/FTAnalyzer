@@ -1960,9 +1960,11 @@ namespace FTAnalyzer
 
         private string BuildAncestryQuery(string censusCountry, int censusYear, Individual person)
         {
-            UriBuilder uri = new UriBuilder();
-            uri.Host = "search.ancestry.co.uk";
-            uri.Path = "cgi-bin/sse.dll";
+            UriBuilder uri = new UriBuilder
+            {
+                Host = "search.ancestry.co.uk",
+                Path = "cgi-bin/sse.dll"
+            };
             StringBuilder query = new StringBuilder();
             if (censusCountry.Equals(Countries.UNITED_KINGDOM))
             {
@@ -2045,9 +2047,11 @@ namespace FTAnalyzer
                 return null;
             }
             FactDate censusFactDate = new FactDate(censusYear.ToString());
-            UriBuilder uri = new UriBuilder();
-            uri.Host = "www.freecen.org.uk";
-            uri.Path = "/cgi/search.pl";
+            UriBuilder uri = new UriBuilder
+            {
+                Host = "www.freecen.org.uk",
+                Path = "/cgi/search.pl"
+            };
             StringBuilder query = new StringBuilder();
             query.Append("y=" + censusYear + "&");
             if (person.Forenames != "?" && person.Forenames.ToUpper() != Individual.UNKNOWN_NAME)
@@ -2110,8 +2114,10 @@ namespace FTAnalyzer
         {
             // new http://search.findmypast.co.uk/results/united-kingdom-records-in-census-land-and-surveys?firstname=peter&firstname_variants=true&lastname=moir&lastname_variants=true&eventyear=1881&eventyear_offset=2&yearofbirth=1825&yearofbirth_offset=2
             FactDate censusFactDate = new FactDate(censusYear.ToString());
-            UriBuilder uri = new UriBuilder();
-            uri.Host = "search.findmypast.co.uk";
+            UriBuilder uri = new UriBuilder
+            {
+                Host = "search.findmypast.co.uk"
+            };
             if (censusCountry.Equals(Countries.UNITED_STATES))
                 uri.Path = "/results/united-states-records-in-census-land-and-surveys";
             else if (Countries.IsUnitedKingdom(censusCountry))
@@ -2189,9 +2195,11 @@ namespace FTAnalyzer
         {
             // new http://search.findmypast.co.uk/results/world-records/1939-register?firstname=frederick&firstname_variants=true&lastname=deakin&lastname_variants=true&yearofbirth=1879
             FactDate censusFactDate = CensusDate.UKCENSUS1939;
-            UriBuilder uri = new UriBuilder();
-            uri.Host = "search.findmypast.co.uk";
-            uri.Path = "/results/world-records/1939-register";
+            UriBuilder uri = new UriBuilder
+            {
+                Host = "search.findmypast.co.uk",
+                Path = "/results/world-records/1939-register"
+            };
             StringBuilder query = new StringBuilder();
 
             if (person.Forenames != "?" && person.Forenames.ToUpper() != Individual.UNKNOWN_NAME)
@@ -2281,9 +2289,11 @@ namespace FTAnalyzer
         private string BuildFamilySearchQuery(SearchType st, Individual individual, FactDate factdate)
         {
             // https://familysearch.org/search/record/results?count=20&query=%2Bgivenname%3AElizabeth~%20%2Bsurname%3AAckers~%20%2Bbirth_place%3A%22walton%20le%20dale%2C%20lancashire%2C%20england%22~%20%2Bbirth_year%3A1879-1881~%20%2Brecord_country%3AEngland
-            UriBuilder uri = new UriBuilder();
-            uri.Host = "familysearch.org";
-            uri.Path = "search/record/results";
+            UriBuilder uri = new UriBuilder
+            {
+                Host = "familysearch.org",
+                Path = "search/record/results"
+            };
             StringBuilder query = new StringBuilder();
             query.Append("count=20&query=");
 
@@ -2335,8 +2345,10 @@ namespace FTAnalyzer
 
         private string BuildFindMyPastQuery(SearchType st, Individual individual, FactDate factdate)
         {
-            UriBuilder uri = new UriBuilder();
-            uri.Host = "search.findmypast.co.uk";
+            UriBuilder uri = new UriBuilder
+            {
+                Host = "search.findmypast.co.uk"
+            };
             string record_country = RecordCountry(st, individual, factdate);
             if (Countries.IsUnitedKingdom(record_country))
                 uri.Path = "results/united-kingdom-records-in-birth-marriage-death-and-parish-records";
@@ -2381,9 +2393,11 @@ namespace FTAnalyzer
 
         private string BuildAncestryQuery(SearchType st, Individual individual, FactDate factdate)
         {
-            UriBuilder uri = new UriBuilder();
-            uri.Host = "search.ancestry.co.uk";
-            uri.Path = "cgi-bin/sse.dll";
+            UriBuilder uri = new UriBuilder
+            {
+                Host = "search.ancestry.co.uk",
+                Path = "cgi-bin/sse.dll"
+            };
             //gsln_x=NP&
             StringBuilder query = new StringBuilder();
             if (st.Equals(SearchType.BIRTH))
@@ -2484,10 +2498,12 @@ namespace FTAnalyzer
                     TreeNode childP = currentP.Nodes.Find(part, false).FirstOrDefault();
                     if (childM == null)
                     {
-                        TreeNode child = new TreeNode((part.Length == 0 ? "<blank>" : part));
-                        child.Name = part;
-                        child.Tag = location;
-                        child.ToolTipText = "Geocoding Status : " + location.Geocoded;
+                        TreeNode child = new TreeNode((part.Length == 0 ? "<blank>" : part))
+                        {
+                            Name = part,
+                            Tag = location,
+                            ToolTipText = "Geocoding Status : " + location.Geocoded
+                        };
                         SetTreeNodeImage(location, child);
                         // Set everything other than known countries and known regions to regular
                         if ((currentM.Level == 0 && Countries.IsKnownCountry(part)) ||
@@ -3147,7 +3163,7 @@ namespace FTAnalyzer
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 string initialDir = (string)Application.UserAppDataRegistry.GetValue("Excel Export Individual Path");
-                openFileDialog.InitialDirectory = initialDir == null ? Environment.SpecialFolder.MyDocuments.ToString() : initialDir;
+                openFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
                 openFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv|TNG format (*.tng)|*.tng";
                 openFileDialog.FilterIndex = defaultIndex;
 

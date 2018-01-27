@@ -78,11 +78,10 @@ namespace Controls
         public event EventHandler RelationTypesChanged;
         protected void OnRelationTypesChanged()
         {
-            if (RelationTypesChanged != null)
-                RelationTypesChanged(this, EventArgs.Empty);
+            RelationTypesChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        private void tickbox_CheckedChanged(object sender, EventArgs e)
+        private void Tickbox_CheckedChanged(object sender, EventArgs e)
         {
             OnRelationTypesChanged();
         }

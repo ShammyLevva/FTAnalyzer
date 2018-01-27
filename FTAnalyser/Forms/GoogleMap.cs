@@ -194,10 +194,7 @@ namespace FTAnalyzer.Forms
 
         public static void OnWaitingForGoogle(string message)
         {
-            if (WaitingForGoogle != null)
-            {
-                WaitingForGoogle(null, new GoogleWaitingEventArgs(message));
-            }
+            WaitingForGoogle?.Invoke(null, new GoogleWaitingEventArgs(message));
         }
 
         public static GeoResponse CallGoogleGeocode(string address)
@@ -232,8 +229,10 @@ namespace FTAnalyzer.Forms
                 {
                     string proxyuri = proxy.GetProxy(request.RequestUri).ToString();
                     request.UseDefaultCredentials = true;
-                    request.Proxy = new WebProxy(proxyuri, false);
-                    request.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                    request.Proxy = new WebProxy(proxyuri, false)
+                    {
+                        Credentials = CredentialCache.DefaultCredentials
+                    };
                 }
                 Stream stream = request.GetResponse().GetResponseStream();
                 res = (GeoResponse)serializer.ReadObject(stream);
@@ -256,8 +255,10 @@ namespace FTAnalyzer.Forms
             if (sleepinterval >= 20000)
             {
                 OnWaitingForGoogle("Max Google GeoLocations exceeded for today.");
-                GeoResponse response = new GeoResponse();
-                response.Status = "Maxed";
+                GeoResponse response = new GeoResponse
+                {
+                    Status = "Maxed"
+                };
                 return response;
             }
             for (int interval = 0; interval < sleepinterval; interval += 1000)
@@ -302,8 +303,10 @@ namespace FTAnalyzer.Forms
             if (sleepinterval >= 20000)
             {
                 OnWaitingForGoogle("Max Google GeoLocations exceeded for today.");
-                GeoResponse response = new GeoResponse();
-                response.Status = "Maxed";
+                GeoResponse response = new GeoResponse
+                {
+                    Status = "Maxed"
+                };
                 return response;
             }
             for (int interval = 0; interval < sleepinterval; interval += 1000)
@@ -339,7 +342,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        private void WebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             loaded = true;
             System.Diagnostics.Debug.Print("DocumentCompleted called");

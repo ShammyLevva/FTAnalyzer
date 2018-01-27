@@ -809,10 +809,10 @@ namespace FTAnalyzer
         {
             return Sources.Any(fs =>
             {
-                return (FactType.Equals(Fact.BIRTH) && fs.isBirthCert()) ||
-                    (FactType.Equals(Fact.DEATH) && fs.isDeathCert()) ||
-                    (FactType.Equals(Fact.MARRIAGE) && fs.isMarriageCert()) ||
-                    (FactType.Equals(Fact.CENSUS) && fs.isCensusCert());
+                return (FactType.Equals(Fact.BIRTH) && fs.IsBirthCert()) ||
+                    (FactType.Equals(Fact.DEATH) && fs.IsDeathCert()) ||
+                    (FactType.Equals(Fact.MARRIAGE) && fs.IsMarriageCert()) ||
+                    (FactType.Equals(Fact.CENSUS) && fs.IsCensusCert());
             });
         }
 

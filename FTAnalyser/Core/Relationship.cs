@@ -12,20 +12,20 @@ namespace FTAnalyzer
             if (rootPerson.Equals(toFind))
                 return "root person";
             CommonAncestor commonAncestor = toFind.CommonAncestor;
-            Int64 rootDistance = (Int64)(Math.Log(commonAncestor.ind.Ahnentafel) / Math.Log(2.0));
-            Int64 toFindDistance = commonAncestor.distance;
+            Int64 rootDistance = (Int64)(Math.Log(commonAncestor.Ind.Ahnentafel) / Math.Log(2.0));
+            Int64 toFindDistance = commonAncestor.Distance;
 
             // DIRECT DESCENDANT - PARENT
             if (toFindDistance == 0)
             {
                 string relation = toFind.IsMale ? "father" : "mother";
-                return (commonAncestor.step ? "step " : string.Empty) + AggrandiseRelationship(relation, rootDistance, 0);
+                return (commonAncestor.Step ? "step " : string.Empty) + AggrandiseRelationship(relation, rootDistance, 0);
             }
             // DIRECT DESCENDANT - CHILD
             if (rootDistance == 0)
             {
                 string relation = toFind.IsMale ? "son" : "daughter";
-                return (commonAncestor.step ? "step " : string.Empty) + AggrandiseRelationship(relation, toFindDistance, 0);
+                return (commonAncestor.Step ? "step " : string.Empty) + AggrandiseRelationship(relation, toFindDistance, 0);
             }
             // EQUAL DISTANCE - SIBLINGS / PERFECT COUSINS
             if (rootDistance == toFindDistance)
@@ -33,7 +33,7 @@ namespace FTAnalyzer
                 switch (toFindDistance)
                 {
                     case 1:
-                        return (commonAncestor.step ? "half " : string.Empty) + (toFind.IsMale ? "brother" : "sister");
+                        return (commonAncestor.Step ? "half " : string.Empty) + (toFind.IsMale ? "brother" : "sister");
                     case 2:
                         return "cousin";
                     default:

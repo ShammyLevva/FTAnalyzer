@@ -61,25 +61,25 @@ namespace FTAnalyzer
             }
         }
 
-        public bool isBirthCert()
+        public bool IsBirthCert()
         {
             return SourceMedium.Contains("Official Document") &&
                    SourceTitle.ToUpper().IndexOf(BIRTHCERT) >= 0;
         }
 
-        public bool isDeathCert()
+        public bool IsDeathCert()
         {
             return SourceMedium.Contains("Official Document") &&
                    SourceTitle.ToUpper().IndexOf(DEATHCERT) >= 0;
         }
 
-        public bool isMarriageCert()
+        public bool IsMarriageCert()
         {
             return SourceMedium.Contains("Official Document") &&
                    SourceTitle.ToUpper().IndexOf(MARRIAGECERT) >= 0;
         }
 
-        public bool isCensusCert()
+        public bool IsCensusCert()
         {
             return SourceMedium.Equals("Official Document") &&
                    SourceTitle.ToUpper().IndexOf(CENSUSCERT) >= 0;

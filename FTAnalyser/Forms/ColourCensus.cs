@@ -119,7 +119,7 @@ namespace FTAnalyzer.Forms
             dgReportSheet.Sort(dgReportSheet.Columns["Surname"], ListSortDirection.Ascending);
         }
 
-        private void dgReportSheet_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void DgReportSheet_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex == -1 || e.ColumnIndex == -1)
             {
@@ -188,18 +188,18 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void printToolStripButton_Click(object sender, EventArgs e)
+        private void PrintToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintTitle = "Colour Census Report";
             reportFormHelper.PrintReport("Missing from Census Report");
         }
 
-        private void printPreviewToolStripButton_Click(object sender, EventArgs e)
+        private void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintPreviewReport();
         }
 
-        private void dgReportSheet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgReportSheet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
@@ -245,7 +245,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void cbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
+        private void CbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
             Application.UserAppDataRegistry.SetValue("Default Search Provider", cbCensusSearchProvider.SelectedItem.ToString());
             dgReportSheet.Refresh(); // forces update of tooltips
@@ -291,7 +291,7 @@ namespace FTAnalyzer.Forms
             return result;
         }
 
-        private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)
+        private void CbFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
             List<IDisplayColourCensus> list;
@@ -341,23 +341,23 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
         }
 
-        private void mnuExportToExcel_Click(object sender, EventArgs e)
+        private void MnuExportToExcel_Click(object sender, EventArgs e)
         {
             reportFormHelper.DoExportToExcel<IDisplayColourCensus>(dgReportSheet.Columns);
         }
 
-        private void mnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
+        private void MnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("ColourCensusLayout.xml");
             MessageBox.Show("Form Settings Saved", "Colour Census");
         }
 
-        private void mnuResetCensusColumns_Click(object sender, EventArgs e)
+        private void MnuResetCensusColumns_Click(object sender, EventArgs e)
         {
             reportFormHelper.ResetColumnLayout("ColourCensusLayout.xml");
         }
 
-        private void mnuViewFacts_Click(object sender, EventArgs e)
+        private void MnuViewFacts_Click(object sender, EventArgs e)
         {
             if (dgReportSheet.CurrentRow != null)
             {
@@ -369,7 +369,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void dgReportSheet_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        private void DgReportSheet_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;

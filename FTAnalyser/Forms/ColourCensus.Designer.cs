@@ -174,9 +174,9 @@
             this.dgReportSheet.RowHeadersWidth = 20;
             this.dgReportSheet.Size = new System.Drawing.Size(1038, 530);
             this.dgReportSheet.TabIndex = 1;
-            this.dgReportSheet.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dgReportSheet_CellContextMenuStripNeeded);
-            this.dgReportSheet.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportSheet_CellDoubleClick);
-            this.dgReportSheet.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgReportSheet_CellFormatting);
+            this.dgReportSheet.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.DgReportSheet_CellContextMenuStripNeeded);
+            this.dgReportSheet.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgReportSheet_CellDoubleClick);
+            this.dgReportSheet.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgReportSheet_CellFormatting);
             // 
             // contextMenuStrip
             // 
@@ -190,7 +190,7 @@
             this.mnuViewFacts.Name = "mnuViewFacts";
             this.mnuViewFacts.Size = new System.Drawing.Size(189, 22);
             this.mnuViewFacts.Text = "View Individuals Facts";
-            this.mnuViewFacts.Click += new System.EventHandler(this.mnuViewFacts_Click);
+            this.mnuViewFacts.Click += new System.EventHandler(this.MnuViewFacts_Click);
             // 
             // statusStrip
             // 
@@ -238,7 +238,7 @@
             this.mnuSaveCensusColumnLayout.Name = "mnuSaveCensusColumnLayout";
             this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(23, 22);
             this.mnuSaveCensusColumnLayout.Text = "Save Census Column Sort Order";
-            this.mnuSaveCensusColumnLayout.Click += new System.EventHandler(this.mnuSaveCensusColumnLayout_Click);
+            this.mnuSaveCensusColumnLayout.Click += new System.EventHandler(this.MnuSaveCensusColumnLayout_Click);
             // 
             // mnuResetCensusColumns
             // 
@@ -248,7 +248,7 @@
             this.mnuResetCensusColumns.Name = "mnuResetCensusColumns";
             this.mnuResetCensusColumns.Size = new System.Drawing.Size(23, 22);
             this.mnuResetCensusColumns.Text = "Reset Census Column Sort Order to Default";
-            this.mnuResetCensusColumns.Click += new System.EventHandler(this.mnuResetCensusColumns_Click);
+            this.mnuResetCensusColumns.Click += new System.EventHandler(this.MnuResetCensusColumns_Click);
             // 
             // toolStripSeparator3
             // 
@@ -263,7 +263,7 @@
             this.printToolStripButton.Name = "printToolStripButton";
             this.printToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.printToolStripButton.Text = "&Print";
-            this.printToolStripButton.Click += new System.EventHandler(this.printToolStripButton_Click);
+            this.printToolStripButton.Click += new System.EventHandler(this.PrintToolStripButton_Click);
             // 
             // printPreviewToolStripButton
             // 
@@ -273,7 +273,7 @@
             this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
             this.printPreviewToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.printPreviewToolStripButton.Text = "Print Preview...";
-            this.printPreviewToolStripButton.Click += new System.EventHandler(this.printPreviewToolStripButton_Click);
+            this.printPreviewToolStripButton.Click += new System.EventHandler(this.PrintPreviewToolStripButton_Click);
             // 
             // toolStripSeparator1
             // 
@@ -288,7 +288,7 @@
             this.mnuExportToExcel.Name = "mnuExportToExcel";
             this.mnuExportToExcel.Size = new System.Drawing.Size(23, 22);
             this.mnuExportToExcel.Text = "Export to Excel";
-            this.mnuExportToExcel.Click += new System.EventHandler(this.mnuExportToExcel_Click);
+            this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
             // 
             // toolStripSeparator2
             // 
@@ -311,7 +311,7 @@
             "FamilySearch"});
             this.cbCensusSearchProvider.Name = "cbCensusSearchProvider";
             this.cbCensusSearchProvider.Size = new System.Drawing.Size(121, 25);
-            this.cbCensusSearchProvider.SelectedIndexChanged += new System.EventHandler(this.cbCensusSearchProvider_SelectedIndexChanged);
+            this.cbCensusSearchProvider.SelectedIndexChanged += new System.EventHandler(this.CbCensusSearchProvider_SelectedIndexChanged);
             // 
             // toolStripLabel2
             // 
@@ -335,7 +335,7 @@
             "Known Missing (Mid Green)"});
             this.cbFilter.Name = "cbFilter";
             this.cbFilter.Size = new System.Drawing.Size(185, 25);
-            this.cbFilter.SelectedIndexChanged += new System.EventHandler(this.cbFilter_SelectedIndexChanged);
+            this.cbFilter.SelectedIndexChanged += new System.EventHandler(this.CbFilter_SelectedIndexChanged);
             // 
             // printDialog
             // 

@@ -121,10 +121,12 @@ namespace FTAnalyzer.Forms
                     currentRowText = row.Cells[sortColumn].Value.ToString();
                     highlighted = !highlighted;
                 }
-                DataGridViewCellStyle style = new DataGridViewCellStyle(dgCensus.DefaultCellStyle);
-                style.BackColor = highlighted ? Color.LightGray : Color.White;
-                style.ForeColor = cr.RelationType == Individual.DIRECT ? Color.Red : Color.Black;
-                style.Font = (cr.IsCensusDone(CensusDate) || (cr.IsAlive(CensusDate) && !cr.DeathDate.StartsBefore(CensusDate))) ? boldFont : regularFont;
+                DataGridViewCellStyle style = new DataGridViewCellStyle(dgCensus.DefaultCellStyle)
+                {
+                    BackColor = highlighted ? Color.LightGray : Color.White,
+                    ForeColor = cr.RelationType == Individual.DIRECT ? Color.Red : Color.Black,
+                    Font = (cr.IsCensusDone(CensusDate) || (cr.IsAlive(CensusDate) && !cr.DeathDate.StartsBefore(CensusDate))) ? boldFont : regularFont
+                };
                 cr.CellStyle = style;
             }
         }
@@ -150,7 +152,7 @@ namespace FTAnalyzer.Forms
             return "Double click to search " + cbCensusSearchProvider.Text + " for this person's census record. Shift Double click to display their facts.";
         }
 
-        private void dgCensus_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void DgCensus_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -179,12 +181,12 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void printToolStripButton_Click(object sender, EventArgs e)
+        private void PrintToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintReport("Census Report");
         }
 
-        private void printPreviewToolStripButton_Click(object sender, EventArgs e)
+        private void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintPreviewReport();
         }
@@ -194,11 +196,11 @@ namespace FTAnalyzer.Forms
             reportFormHelper.PrintTitle = this.Text;
         }
 
-        private void tsBtnMapLocation_Click(object sender, EventArgs e)
+        private void TsBtnMapLocation_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
             CensusIndividual ds = dgCensus.CurrentRow == null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
-            FactLocation loc = ds == null ? null : ds.CensusLocation;
+            FactLocation loc = ds?.CensusLocation;
             if (loc != null)
             {   // Do geo coding stuff
                 GoogleMap frmGoogleMap = new GoogleMap();
@@ -210,11 +212,11 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
         }
 
-        private void tsBtnMapOSLocation_Click(object sender, EventArgs e)
+        private void TsBtnMapOSLocation_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
             CensusIndividual ds = dgCensus.CurrentRow == null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
-            FactLocation loc = ds == null ? null : ds.CensusLocation;
+            FactLocation loc = ds?.CensusLocation;
             if (loc != null)
             {   // Do geo coding stuff
                 BingOSMap frmBingMap = new BingOSMap();
@@ -226,7 +228,7 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
         }
 
-        private void dgCensus_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgCensus_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && dgCensus.CurrentRow != null && !CensusDate.VALUATIONROLLS.Contains(CensusDate))
             {
@@ -243,40 +245,40 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void cbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
+        private void CbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
             Application.UserAppDataRegistry.SetValue("Default Search Provider", cbCensusSearchProvider.SelectedItem.ToString());
             dgCensus.Refresh(); // force update of tooltips
             dgCensus.Focus();
         }
 
-        private void mnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
+        private void MnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("CensusColumns.xml");
             MessageBox.Show("Form Settings Saved", "Census");
         }
 
-        private void mnuResetCensusColumns_Click(object sender, EventArgs e)
+        private void MnuResetCensusColumns_Click(object sender, EventArgs e)
         {
             reportFormHelper.ResetColumnLayout("CensusColumns.xml");
         }
 
-        private void mnuExportToExcel_Click(object sender, EventArgs e)
+        private void MnuExportToExcel_Click(object sender, EventArgs e)
         {
             reportFormHelper.DoExportToExcel<IDisplayCensus>();
         }
 
-        private void dgCensus_ColumnSortModeChanged(object sender, DataGridViewColumnEventArgs e)
+        private void DgCensus_ColumnSortModeChanged(object sender, DataGridViewColumnEventArgs e)
         {
             StyleRows();
         }
 
-        private void dgCensus_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void DgCensus_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             StyleRows();
         }
 
-        private void mnuViewFacts_Click(object sender, EventArgs e)
+        private void MnuViewFacts_Click(object sender, EventArgs e)
         {
             if (dgCensus.CurrentRow != null)
             {
@@ -287,7 +289,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void dgCensus_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        private void DgCensus_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 dgCensus.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
@@ -303,7 +305,7 @@ namespace FTAnalyzer.Forms
             this.Dispose();
         }
 
-        private void btnHelp_Click(object sender, EventArgs e)
+        private void BtnHelp_Click(object sender, EventArgs e)
         {
             HttpUtility.VisitWebsite("http://ftanalyzer.com/The%20Census%20Tab");
         }

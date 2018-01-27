@@ -12,7 +12,7 @@ namespace FTAnalyzer
         {
             if (i1.CensusStatus.Equals(i2.CensusStatus))
                 // same status so sort by date
-                return sortBirthdate(i1, i2);
+                return SortBirthdate(i1, i2);
             if (i1.CensusStatus.Equals(CensusIndividual.HUSBAND))
                 return -1;
             if (i2.CensusStatus.Equals(CensusIndividual.HUSBAND))
@@ -30,7 +30,7 @@ namespace FTAnalyzer
             return 0;
         }
 
-        private int sortBirthdate(Individual i1, Individual i2)
+        private int SortBirthdate(Individual i1, Individual i2)
         {
             Fact b1 = i1.BirthFact;
             Fact b2 = i2.BirthFact;

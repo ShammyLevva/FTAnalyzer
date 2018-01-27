@@ -12,6 +12,7 @@ namespace FTAnalyzer.Mapping
         private LinkLabelType linkLabelType;
 
         public MapToolStripMenuItem(HttpTileSource tileSource, LinkLabelType linkLabelType) 
+            : base()
         {
             TileSource = tileSource;
             LinkLabelType = linkLabelType;

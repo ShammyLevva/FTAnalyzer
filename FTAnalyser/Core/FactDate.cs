@@ -50,20 +50,22 @@ namespace FTAnalyzer
 
         static FactDate()
         {
-            datePatterns = new Dictionary<string, Regex>();
-            datePatterns["DATE_PATTERN"] = new Regex(DATE_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns["INTERPRETED_DATE_PATTERN"] = new Regex(INTERPRETED_DATE_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns["EARLY_DATE_PATTERN"] = new Regex(EARLY_DATE_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns["DOUBLE_DATE_PATTERN"] = new Regex(DOUBLE_DATE_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns["DOUBLE_DATE_PATTERN2"] = new Regex(DOUBLE_DATE_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns["POSTFIX"] = new Regex(POSTFIX, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns["BETWEENFIX"] = new Regex(BETWEENFIX, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns["BETWEENFIX2"] = new Regex(BETWEENFIX2, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns["BETWEENFIX3"] = new Regex(BETWEENFIX3, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns["BETWEENFIX4"] = new Regex(BETWEENFIX4, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns["BETWEENFIX5"] = new Regex(BETWEENFIX5, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns["USDATEFIX"] = new Regex(USDATEFIX, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            datePatterns["SPACEFIX"] = new Regex(SPACEFIX, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            datePatterns = new Dictionary<string, Regex>
+            {
+                ["DATE_PATTERN"] = new Regex(DATE_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["INTERPRETED_DATE_PATTERN"] = new Regex(INTERPRETED_DATE_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EARLY_DATE_PATTERN"] = new Regex(EARLY_DATE_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["DOUBLE_DATE_PATTERN"] = new Regex(DOUBLE_DATE_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["DOUBLE_DATE_PATTERN2"] = new Regex(DOUBLE_DATE_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["POSTFIX"] = new Regex(POSTFIX, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["BETWEENFIX"] = new Regex(BETWEENFIX, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["BETWEENFIX2"] = new Regex(BETWEENFIX2, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["BETWEENFIX3"] = new Regex(BETWEENFIX3, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["BETWEENFIX4"] = new Regex(BETWEENFIX4, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["BETWEENFIX5"] = new Regex(BETWEENFIX5, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["USDATEFIX"] = new Regex(USDATEFIX, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["SPACEFIX"] = new Regex(SPACEFIX, RegexOptions.Compiled | RegexOptions.IgnoreCase)
+            };
             UNKNOWN_DATE = new FactDate("UNKNOWN");
             MARRIAGE_LESS_THAN_13 = new FactDate("1600");
     }

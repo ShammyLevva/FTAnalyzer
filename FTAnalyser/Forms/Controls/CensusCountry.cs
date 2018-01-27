@@ -51,7 +51,7 @@ namespace Controls
         public Predicate<T> BuildFilter<T>(FactDate when, Func<FactDate, T, FactLocation> location)
         {
             Predicate<T> locationFilter = FilterUtils.TrueFilter<T>();
-            Func<FactLocation, string> country = x => x.Country;
+            string country(FactLocation x) => x.Country;
             if (Scotland)
                 locationFilter = FilterUtils.LocationFilter<T>(when, location, country, Countries.SCOTLAND);
             else if (England)
@@ -94,36 +94,35 @@ namespace Controls
 
         protected void OnCountryChanged(EventArgs e)
         {
-            if (CountryChanged != null)
-                CountryChanged(this, e);
+            CountryChanged?.Invoke(this, e);
         }
 
-        private void rbScotland_CheckedChanged(object sender, EventArgs e)
+        private void RbScotland_CheckedChanged(object sender, EventArgs e)
         {
             OnCountryChanged(e);
         }
 
-        private void rbEngland_CheckedChanged(object sender, EventArgs e)
+        private void RbEngland_CheckedChanged(object sender, EventArgs e)
         {
             OnCountryChanged(e);
         }
 
-        private void rbWales_CheckedChanged(object sender, EventArgs e)
+        private void RbWales_CheckedChanged(object sender, EventArgs e)
         {
             OnCountryChanged(e);
         }
 
-        private void rbUK_CheckedChanged(object sender, EventArgs e)
+        private void RbUK_CheckedChanged(object sender, EventArgs e)
         {
             OnCountryChanged(e);
         }
 
-        private void rbCanada_CheckedChanged(object sender, EventArgs e)
+        private void RbCanada_CheckedChanged(object sender, EventArgs e)
         {
             OnCountryChanged(e);
         }
 
-        private void rbUSA_CheckedChanged(object sender, EventArgs e)
+        private void RbUSA_CheckedChanged(object sender, EventArgs e)
         {
             OnCountryChanged(e);
         }

@@ -71,22 +71,21 @@ namespace FTAnalyzer
                 string month = matcher.Groups["month"].ToString().TrimEnd('m');
                 string day = matcher.Groups["day"].ToString().TrimEnd('d');
 
-                int yearno, monthno, dayno;
                 DateTime startDate = when.StartDate;
                 DateTime endDate = when.EndDate;
-                if (int.TryParse(year, out yearno))
+                if (int.TryParse(year, out int yearno))
                 {
                     if(startDate != FactDate.MINDATE && startDate.Year > yearno + 1)
                         startDate = startDate.TryAddYears(-yearno);
                     endDate = endDate.TryAddYears(-yearno);
                 }
-                if (int.TryParse(month, out monthno))
+                if (int.TryParse(month, out int monthno))
                 {
                     if (startDate != FactDate.MINDATE && startDate.Year > 1)
                         startDate = startDate.AddMonths(-monthno);
                     endDate = endDate.AddMonths(-monthno);
                 }
-                if (int.TryParse(day, out dayno))
+                if (int.TryParse(day, out int dayno))
                 {  // -dayno + 1 as date will be at time 00:00 and subtraction is one day too much.
                     if (startDate != FactDate.MINDATE &&  startDate.Year > 1)
                         startDate = startDate.AddDays(-dayno);

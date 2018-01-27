@@ -42,7 +42,7 @@
             this.webBrowser.ScrollBarsEnabled = false;
             this.webBrowser.Size = new System.Drawing.Size(886, 506);
             this.webBrowser.TabIndex = 0;
-            this.webBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser_DocumentCompleted);
+            this.webBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.WebBrowser_DocumentCompleted);
             // 
             // labMapLevel
             // 

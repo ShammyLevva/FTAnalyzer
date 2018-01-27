@@ -119,9 +119,9 @@
             this.dgBMDReportSheet.RowHeadersWidth = 20;
             this.dgBMDReportSheet.Size = new System.Drawing.Size(1038, 530);
             this.dgBMDReportSheet.TabIndex = 1;
-            this.dgBMDReportSheet.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dgBMDReportSheet_CellContextMenuStripNeeded);
-            this.dgBMDReportSheet.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportSheet_CellDoubleClick);
-            this.dgBMDReportSheet.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgReportSheet_CellFormatting);
+            this.dgBMDReportSheet.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.DgBMDReportSheet_CellContextMenuStripNeeded);
+            this.dgBMDReportSheet.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgReportSheet_CellDoubleClick);
+            this.dgBMDReportSheet.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgReportSheet_CellFormatting);
             // 
             // IndividualID
             // 
@@ -381,7 +381,7 @@
             this.mnuSaveCensusColumnLayout.Name = "mnuSaveCensusColumnLayout";
             this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(23, 22);
             this.mnuSaveCensusColumnLayout.Text = "Save Census Column Sort Order";
-            this.mnuSaveCensusColumnLayout.Click += new System.EventHandler(this.mnuSaveCensusColumnLayout_Click);
+            this.mnuSaveCensusColumnLayout.Click += new System.EventHandler(this.MnuSaveCensusColumnLayout_Click);
             // 
             // mnuResetCensusColumns
             // 
@@ -391,7 +391,7 @@
             this.mnuResetCensusColumns.Name = "mnuResetCensusColumns";
             this.mnuResetCensusColumns.Size = new System.Drawing.Size(23, 22);
             this.mnuResetCensusColumns.Text = "Reset Census Column Sort Order to Default";
-            this.mnuResetCensusColumns.Click += new System.EventHandler(this.mnuResetCensusColumns_Click);
+            this.mnuResetCensusColumns.Click += new System.EventHandler(this.MnuResetCensusColumns_Click);
             // 
             // toolStripSeparator3
             // 
@@ -406,7 +406,7 @@
             this.printToolStripButton.Name = "printToolStripButton";
             this.printToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.printToolStripButton.Text = "&Print";
-            this.printToolStripButton.Click += new System.EventHandler(this.printToolStripButton_Click);
+            this.printToolStripButton.Click += new System.EventHandler(this.PrintToolStripButton_Click);
             // 
             // printPreviewToolStripButton
             // 
@@ -416,7 +416,7 @@
             this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
             this.printPreviewToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.printPreviewToolStripButton.Text = "Print Preview...";
-            this.printPreviewToolStripButton.Click += new System.EventHandler(this.printPreviewToolStripButton_Click);
+            this.printPreviewToolStripButton.Click += new System.EventHandler(this.PrintPreviewToolStripButton_Click);
             // 
             // toolStripSeparator1
             // 
@@ -431,7 +431,7 @@
             this.mnuExportToExcel.Name = "mnuExportToExcel";
             this.mnuExportToExcel.Size = new System.Drawing.Size(23, 22);
             this.mnuExportToExcel.Text = "Export to Excel";
-            this.mnuExportToExcel.Click += new System.EventHandler(this.mnuExportToExcel_Click);
+            this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
             // 
             // toolStripSeparator2
             // 
@@ -454,7 +454,7 @@
             "FamilySearch"});
             this.cbBMDSearchProvider.Name = "cbBMDSearchProvider";
             this.cbBMDSearchProvider.Size = new System.Drawing.Size(121, 25);
-            this.cbBMDSearchProvider.SelectedIndexChanged += new System.EventHandler(this.cbCensusSearchProvider_SelectedIndexChanged);
+            this.cbBMDSearchProvider.SelectedIndexChanged += new System.EventHandler(this.CbCensusSearchProvider_SelectedIndexChanged);
             // 
             // toolStripLabel2
             // 
@@ -487,7 +487,7 @@
             "Partner but no marriage (Red Brown)"});
             this.cbFilter.Name = "cbFilter";
             this.cbFilter.Size = new System.Drawing.Size(235, 25);
-            this.cbFilter.SelectedIndexChanged += new System.EventHandler(this.cbFilter_SelectedIndexChanged);
+            this.cbFilter.SelectedIndexChanged += new System.EventHandler(this.CbFilter_SelectedIndexChanged);
             // 
             // printDialog
             // 
@@ -519,7 +519,7 @@
             this.mnuViewFacts.Name = "mnuViewFacts";
             this.mnuViewFacts.Size = new System.Drawing.Size(189, 22);
             this.mnuViewFacts.Text = "View Individuals Facts";
-            this.mnuViewFacts.Click += new System.EventHandler(this.mnuViewFacts_Click);
+            this.mnuViewFacts.Click += new System.EventHandler(this.MnuViewFacts_Click);
             // 
             // ColourBMD
             // 

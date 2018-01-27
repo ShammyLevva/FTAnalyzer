@@ -124,12 +124,11 @@ namespace FTAnalyzer
 
         private void SetChildrenStatusCounts(Match matcher, int totalGroup, int aliveGroup, int deadGroup)
         {
-            int resultT, resultA, resultD;
-            int.TryParse(matcher.Groups[totalGroup].Value, out resultT);
+            int.TryParse(matcher.Groups[totalGroup].Value, out int resultT);
             ExpectedTotal += resultT;
-            int.TryParse(matcher.Groups[aliveGroup].Value, out resultA);
+            int.TryParse(matcher.Groups[aliveGroup].Value, out int resultA);
             ExpectedAlive += resultA;
-            int.TryParse(matcher.Groups[deadGroup].Value, out resultD);
+            int.TryParse(matcher.Groups[deadGroup].Value, out int resultD);
             ExpectedDead += resultD;
         }
 
@@ -464,8 +463,8 @@ namespace FTAnalyzer
         public void SetChildrenCommonRelation(Individual parent, CommonAncestor commonAncestor)
         {
             foreach (Individual child in Children)
-                if (child.CommonAncestor == null || child.CommonAncestor.distance > commonAncestor.distance + 1)
-                    child.CommonAncestor = new CommonAncestor(commonAncestor.ind, commonAncestor.distance + 1, !child.IsNaturalChildOf(parent) || commonAncestor.step);
+                if (child.CommonAncestor == null || child.CommonAncestor.Distance > commonAncestor.Distance + 1)
+                    child.CommonAncestor = new CommonAncestor(commonAncestor.Ind, commonAncestor.Distance + 1, !child.IsNaturalChildOf(parent) || commonAncestor.Step);
         }
 
         #region IDisplayFamily Members
@@ -571,9 +570,11 @@ namespace FTAnalyzer
         {
             get
             {
-                List<IList<Fact>> results = new List<IList<Fact>>();
-                // add the family facts then the facts from each individual
-                results.Add(Facts);
+                List<IList<Fact>> results = new List<IList<Fact>>
+                {
+                    // add the family facts then the facts from each individual
+                    Facts
+                };
                 if (Husband != null)
                     results.Add(Husband.PersonalFacts);
                 if (Wife != null)

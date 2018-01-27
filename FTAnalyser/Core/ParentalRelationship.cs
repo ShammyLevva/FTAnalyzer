@@ -43,8 +43,8 @@ namespace FTAnalyzer
             }
         }
 
-        public Individual Father { get { return Family == null ? null : Family.Husband; } }
-        public Individual Mother { get { return Family == null ? null : Family.Wife; } }
+        public Individual Father { get { return Family?.Husband; } }
+        public Individual Mother { get { return Family?.Wife; } }
 
         public static ParentalRelationshipType GetRelationshipType(XmlNode node)
         {

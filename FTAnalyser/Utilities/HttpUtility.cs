@@ -543,14 +543,16 @@ namespace System.Web
 
         public static void SetDefaultProxy()
         {
-            HttpWebRequest request = HttpWebRequest.Create("http://www.google.com") as HttpWebRequest;
+            HttpWebRequest request = HttpWebRequest.Create(new Uri("http://www.google.com")) as HttpWebRequest;
             IWebProxy proxy = request.Proxy;
             if (proxy != null)
             {
                 string proxyuri = proxy.GetProxy(request.RequestUri).ToString();
                 request.UseDefaultCredentials = true;
-                proxy = new WebProxy(proxyuri, false);
-                proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                proxy = new WebProxy(proxyuri, false)
+                {
+                    Credentials = CredentialCache.DefaultCredentials
+                };
                 WebRequest.DefaultWebProxy = proxy;
             }
         }

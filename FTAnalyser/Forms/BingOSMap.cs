@@ -76,13 +76,13 @@ namespace FTAnalyzer.Forms
             return true;
         }
 
-        private void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        private void WebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             loaded = true;
             System.Diagnostics.Debug.Print("DocumentCompleted called");
         }
 
-        private void labTOU_Click(object sender, EventArgs e)
+        private void LabTOU_Click(object sender, EventArgs e)
         {
             webBrowser.Navigate("http://www.microsoft.com/Maps/product/terms.html");
         }

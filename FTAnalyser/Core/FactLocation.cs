@@ -275,19 +275,21 @@ namespace FTAnalyzer
 
         private static void SetupGeocodes()
         {
-            Geocodes = new Dictionary<Geocode, string>();
-            Geocodes.Add(Geocode.UNKNOWN, "Unknown");
-            Geocodes.Add(Geocode.NOT_SEARCHED, "Not Searched");
-            Geocodes.Add(Geocode.GEDCOM_USER, "GEDCOM/User Data");
-            Geocodes.Add(Geocode.PARTIAL_MATCH, "Partial Match (Google)");
-            Geocodes.Add(Geocode.MATCHED, "Google Matched");
-            Geocodes.Add(Geocode.NO_MATCH, "No Match");
-            Geocodes.Add(Geocode.INCORRECT, "Incorrect (User Marked)");
-            Geocodes.Add(Geocode.OUT_OF_BOUNDS, "Outside Country Area");
-            Geocodes.Add(Geocode.LEVEL_MISMATCH, "Partial Match (Levels)");
-            Geocodes.Add(Geocode.OS_50KMATCH, "OS Gazetteer Match");
-            Geocodes.Add(Geocode.OS_50KPARTIAL, "Partial Match (Ord Surv)");
-            Geocodes.Add(Geocode.OS_50KFUZZY, "Fuzzy Match (Ord Surv)");
+            Geocodes = new Dictionary<Geocode, string>
+            {
+                { Geocode.UNKNOWN, "Unknown" },
+                { Geocode.NOT_SEARCHED, "Not Searched" },
+                { Geocode.GEDCOM_USER, "GEDCOM/User Data" },
+                { Geocode.PARTIAL_MATCH, "Partial Match (Google)" },
+                { Geocode.MATCHED, "Google Matched" },
+                { Geocode.NO_MATCH, "No Match" },
+                { Geocode.INCORRECT, "Incorrect (User Marked)" },
+                { Geocode.OUT_OF_BOUNDS, "Outside Country Area" },
+                { Geocode.LEVEL_MISMATCH, "Partial Match (Levels)" },
+                { Geocode.OS_50KMATCH, "OS Gazetteer Match" },
+                { Geocode.OS_50KPARTIAL, "Partial Match (Ord Surv)" },
+                { Geocode.OS_50KFUZZY, "Fuzzy Match (Ord Surv)" }
+            };
         }
         #endregion
 
@@ -320,8 +322,7 @@ namespace FTAnalyzer
         private FactLocation(string location, string latitude, string longitude, Geocode status)
             : this(location)
         {
-            double temp;
-            this.Latitude = double.TryParse(latitude, out temp) ? temp : 0;
+            this.Latitude = double.TryParse(latitude, out double temp) ? temp : 0;
             this.Longitude = double.TryParse(longitude, out temp) ? temp : 0;
             Coordinate point = new Coordinate(Longitude, Latitude);
             Coordinate mpoint = MapTransforms.TransformCoordinate(point);
@@ -415,12 +416,11 @@ namespace FTAnalyzer
 
         public static FactLocation GetLocation(string place, string latitude, string longitude, Geocode status, bool addLocation = true, bool updateLatLong = false)
         {
-            FactLocation result;
             FactLocation temp;
             // GEDCOM lat/long will be prefixed with NS and EW which needs to be +/- to work.
             latitude = latitude.Replace("N", "").Replace("S", "-");
             longitude = longitude.Replace("W", "-").Replace("E", "");
-            if (locations.TryGetValue(place, out result))
+            if (locations.TryGetValue(place, out FactLocation result))
             {  // found location now check if we need to update its geocoding
                 if(updateLatLong && !result.IsGeoCoded(true))
                 {  // we are updating and old value isn't geocoded
@@ -487,8 +487,7 @@ namespace FTAnalyzer
 
         public static FactLocation LookupLocation(string place)
         {
-            FactLocation result = null;
-            locations.TryGetValue(place, out result);
+            locations.TryGetValue(place, out FactLocation result);
             if (result == null)
                 result = new FactLocation(place);
             return result;
@@ -892,8 +891,7 @@ namespace FTAnalyzer
         {
             get
             {
-                string result;
-                if (Geocodes.TryGetValue(GeocodeStatus, out result))
+                if (Geocodes.TryGetValue(GeocodeStatus, out string result))
                     return result;
                 else
                     return "Unknown";
@@ -930,8 +928,7 @@ namespace FTAnalyzer
         {
             get
             {
-                string result;
-                FREECEN_LOOKUP.TryGetValue(Region, out result);
+                FREECEN_LOOKUP.TryGetValue(Region, out string result);
                 if (result == null)
                     result = "all";
                 return result;
@@ -942,8 +939,7 @@ namespace FTAnalyzer
         {
             get
             {
-                Tuple<string, string> result;
-                FINDMYPAST_LOOKUP.TryGetValue(Region, out result);
+                FINDMYPAST_LOOKUP.TryGetValue(Region, out Tuple<string, string> result);
                 return result;
             }
         }

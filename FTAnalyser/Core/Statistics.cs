@@ -46,12 +46,12 @@ namespace FTAnalyzer
                         if (f.Husband != null && f.Husband.BirthDate.IsKnown)
                         {
                             Age age = f.Husband.GetAge(child.BirthDate);
-                            addAgeData(0, stats, age, child.Gender);
+                            AddAgeData(0, stats, age, child.Gender);
                         }
                         if (f.Wife != null && f.Wife.BirthDate.IsKnown)
                         {
                             Age age = f.Wife.GetAge(child.BirthDate);
-                            addAgeData(1, stats, age, child.Gender);
+                            AddAgeData(1, stats, age, child.Gender);
                         }
                     }
                 }
@@ -60,9 +60,9 @@ namespace FTAnalyzer
             chart.BuildChildBirthProfile(stats);
             MainForm.DisposeDuplicateForms(chart);
             chart.Show();
-            return buildOutput(stats);
+            return BuildOutput(stats);
         }
-        private void addAgeData(int parent, int[, ,] stats, Age age, string gender)
+        private void AddAgeData(int parent, int[, ,] stats, Age age, string gender)
         {
             int child = gender == "M" ? 0 : (gender == "F" ? 1 : 2);
             int fiveyear = age.MinAge / 5;
@@ -70,7 +70,7 @@ namespace FTAnalyzer
                 stats[parent, fiveyear, child]++;
         }
 
-        private string buildOutput(int[, ,] minAge)
+        private string BuildOutput(int[, ,] minAge)
         {
             StringBuilder output = new StringBuilder();
             output.AppendLine("Fathers Age When Child Born");

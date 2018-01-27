@@ -76,66 +76,68 @@ namespace FTAnalyzer
 
         static CensusReference()
         {
-            censusRegexs = new Dictionary<string, Regex>();
-            censusRegexs["EW_CENSUS_PATTERN"] = new Regex(EW_CENSUS_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_PATTERN1"] = new Regex(EW_CENSUS_PATTERN1, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_PATTERN2"] = new Regex(EW_CENSUS_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_PATTERN3"] = new Regex(EW_CENSUS_PATTERN3, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_PATTERN4"] = new Regex(EW_CENSUS_PATTERN4, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_PATTERN5"] = new Regex(EW_CENSUS_PATTERN5, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_PATTERN6"] = new Regex(EW_CENSUS_PATTERN6, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_PATTERN7"] = new Regex(EW_CENSUS_PATTERN7, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_PATTERN8"] = new Regex(EW_CENSUS_PATTERN8, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            censusRegexs = new Dictionary<string, Regex>
+            {
+                ["EW_CENSUS_PATTERN"] = new Regex(EW_CENSUS_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_PATTERN1"] = new Regex(EW_CENSUS_PATTERN1, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_PATTERN2"] = new Regex(EW_CENSUS_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_PATTERN3"] = new Regex(EW_CENSUS_PATTERN3, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_PATTERN4"] = new Regex(EW_CENSUS_PATTERN4, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_PATTERN5"] = new Regex(EW_CENSUS_PATTERN5, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_PATTERN6"] = new Regex(EW_CENSUS_PATTERN6, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_PATTERN7"] = new Regex(EW_CENSUS_PATTERN7, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_PATTERN8"] = new Regex(EW_CENSUS_PATTERN8, RegexOptions.Compiled | RegexOptions.IgnoreCase),
 
-            censusRegexs["EW_CENSUS_PATTERN_FH"] = new Regex(EW_CENSUS_PATTERN_FH, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_PATTERN_FH2"] = new Regex(EW_CENSUS_PATTERN_FH2, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                ["EW_CENSUS_PATTERN_FH"] = new Regex(EW_CENSUS_PATTERN_FH, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_PATTERN_FH2"] = new Regex(EW_CENSUS_PATTERN_FH2, RegexOptions.Compiled | RegexOptions.IgnoreCase),
 
-            censusRegexs["EW_MISSINGCLASS_PATTERN"] = new Regex(EW_MISSINGCLASS_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_MISSINGCLASS_PATTERN2"] = new Regex(EW_MISSINGCLASS_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                ["EW_MISSINGCLASS_PATTERN"] = new Regex(EW_MISSINGCLASS_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_MISSINGCLASS_PATTERN2"] = new Regex(EW_MISSINGCLASS_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase),
 
-            censusRegexs["EW_CENSUS_1841_51_PATTERN"] = new Regex(EW_CENSUS_1841_51_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_1841_51_PATTERN2"] = new Regex(EW_CENSUS_1841_51_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_1841_51_PATTERN3"] = new Regex(EW_CENSUS_1841_51_PATTERN3, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_1841_51_PATTERN4"] = new Regex(EW_CENSUS_1841_51_PATTERN4, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_1841_51_PATTERN5"] = new Regex(EW_CENSUS_1841_51_PATTERN5, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_1841_51_PATTERN_FH"] = new Regex(EW_CENSUS_1841_51_PATTERN_FH, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_1841_51_PATTERN_FH2"] = new Regex(EW_CENSUS_1841_51_PATTERN_FH2, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_1841_51_PATTERN_FH3"] = new Regex(EW_CENSUS_1841_51_PATTERN_FH3, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_1841_51_PATTERN_FH4"] = new Regex(EW_CENSUS_1841_51_PATTERN_FH4, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                ["EW_CENSUS_1841_51_PATTERN"] = new Regex(EW_CENSUS_1841_51_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_1841_51_PATTERN2"] = new Regex(EW_CENSUS_1841_51_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_1841_51_PATTERN3"] = new Regex(EW_CENSUS_1841_51_PATTERN3, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_1841_51_PATTERN4"] = new Regex(EW_CENSUS_1841_51_PATTERN4, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_1841_51_PATTERN5"] = new Regex(EW_CENSUS_1841_51_PATTERN5, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_1841_51_PATTERN_FH"] = new Regex(EW_CENSUS_1841_51_PATTERN_FH, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_1841_51_PATTERN_FH2"] = new Regex(EW_CENSUS_1841_51_PATTERN_FH2, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_1841_51_PATTERN_FH3"] = new Regex(EW_CENSUS_1841_51_PATTERN_FH3, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_1841_51_PATTERN_FH4"] = new Regex(EW_CENSUS_1841_51_PATTERN_FH4, RegexOptions.Compiled | RegexOptions.IgnoreCase),
 
-            censusRegexs["EW_CENSUS_1911_PATTERN"] = new Regex(EW_CENSUS_1911_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_1911_PATTERN78"] = new Regex(EW_CENSUS_1911_PATTERN78, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_1911_PATTERN2"] = new Regex(EW_CENSUS_1911_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_1911_PATTERN3"] = new Regex(EW_CENSUS_1911_PATTERN3, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_1911_PATTERN4"] = new Regex(EW_CENSUS_1911_PATTERN4, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_1911_PATTERN5"] = new Regex(EW_CENSUS_1911_PATTERN5, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["EW_CENSUS_1911_PATTERN6"] = new Regex(EW_CENSUS_1911_PATTERN6, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                ["EW_CENSUS_1911_PATTERN"] = new Regex(EW_CENSUS_1911_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_1911_PATTERN78"] = new Regex(EW_CENSUS_1911_PATTERN78, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_1911_PATTERN2"] = new Regex(EW_CENSUS_1911_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_1911_PATTERN3"] = new Regex(EW_CENSUS_1911_PATTERN3, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_1911_PATTERN4"] = new Regex(EW_CENSUS_1911_PATTERN4, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_1911_PATTERN5"] = new Regex(EW_CENSUS_1911_PATTERN5, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_CENSUS_1911_PATTERN6"] = new Regex(EW_CENSUS_1911_PATTERN6, RegexOptions.Compiled | RegexOptions.IgnoreCase),
 
-            censusRegexs["SCOT_CENSUSYEAR_PATTERN"] = new Regex(SCOT_CENSUSYEAR_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["SCOT_CENSUSYEAR_PATTERN2"] = new Regex(SCOT_CENSUSYEAR_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["SCOT_CENSUSYEAR_PATTERN3"] = new Regex(SCOT_CENSUSYEAR_PATTERN3, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["SCOT_CENSUSYEAR_PATTERN4"] = new Regex(SCOT_CENSUSYEAR_PATTERN4, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["SCOT_CENSUS_PATTERN"] = new Regex(SCOT_CENSUS_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["SCOT_CENSUS_PATTERN2"] = new Regex(SCOT_CENSUS_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["SCOT_CENSUS_PATTERN3"] = new Regex(SCOT_CENSUS_PATTERN3, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                ["SCOT_CENSUSYEAR_PATTERN"] = new Regex(SCOT_CENSUSYEAR_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["SCOT_CENSUSYEAR_PATTERN2"] = new Regex(SCOT_CENSUSYEAR_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["SCOT_CENSUSYEAR_PATTERN3"] = new Regex(SCOT_CENSUSYEAR_PATTERN3, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["SCOT_CENSUSYEAR_PATTERN4"] = new Regex(SCOT_CENSUSYEAR_PATTERN4, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["SCOT_CENSUS_PATTERN"] = new Regex(SCOT_CENSUS_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["SCOT_CENSUS_PATTERN2"] = new Regex(SCOT_CENSUS_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["SCOT_CENSUS_PATTERN3"] = new Regex(SCOT_CENSUS_PATTERN3, RegexOptions.Compiled | RegexOptions.IgnoreCase),
 
-            censusRegexs["US_CENSUS_PATTERN"] = new Regex(US_CENSUS_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["US_CENSUS_PATTERN1A"] = new Regex(US_CENSUS_PATTERN1A, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["US_CENSUS_PATTERN2"] = new Regex(US_CENSUS_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["US_CENSUS_PATTERN3"] = new Regex(US_CENSUS_PATTERN3, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["US_CENSUS_PATTERN4"] = new Regex(US_CENSUS_PATTERN4, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["US_CENSUS_1940_PATTERN"] = new Regex(US_CENSUS_1940_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["US_CENSUS_1940_PATTERN2"] = new Regex(US_CENSUS_1940_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["US_CENSUS_1940_PATTERN3"] = new Regex(US_CENSUS_1940_PATTERN3, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                ["US_CENSUS_PATTERN"] = new Regex(US_CENSUS_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["US_CENSUS_PATTERN1A"] = new Regex(US_CENSUS_PATTERN1A, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["US_CENSUS_PATTERN2"] = new Regex(US_CENSUS_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["US_CENSUS_PATTERN3"] = new Regex(US_CENSUS_PATTERN3, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["US_CENSUS_PATTERN4"] = new Regex(US_CENSUS_PATTERN4, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["US_CENSUS_1940_PATTERN"] = new Regex(US_CENSUS_1940_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["US_CENSUS_1940_PATTERN2"] = new Regex(US_CENSUS_1940_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["US_CENSUS_1940_PATTERN3"] = new Regex(US_CENSUS_1940_PATTERN3, RegexOptions.Compiled | RegexOptions.IgnoreCase),
 
-            censusRegexs["CANADA_CENSUS_PATTERN"] = new Regex(CANADA_CENSUS_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["CANADA_CENSUS_PATTERN2"] = new Regex(CANADA_CENSUS_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                ["CANADA_CENSUS_PATTERN"] = new Regex(CANADA_CENSUS_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["CANADA_CENSUS_PATTERN2"] = new Regex(CANADA_CENSUS_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase),
 
-            censusRegexs["LC_CENSUS_PATTERN_EW"] = new Regex(LC_CENSUS_PATTERN_EW, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["LC_CENSUS_PATTERN_1911_EW"] = new Regex(LC_CENSUS_PATTERN_1911_EW, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["LC_CENSUS_PATTERN_SCOT"] = new Regex(LC_CENSUS_PATTERN_SCOT, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["LC_CENSUS_PATTERN_1940US"] = new Regex(LC_CENSUS_PATTERN_1940US, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            censusRegexs["LC_CENSUS_PATTERN_1881CANADA"] = new Regex(LC_CENSUS_PATTERN_1881CANADA, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                ["LC_CENSUS_PATTERN_EW"] = new Regex(LC_CENSUS_PATTERN_EW, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["LC_CENSUS_PATTERN_1911_EW"] = new Regex(LC_CENSUS_PATTERN_1911_EW, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["LC_CENSUS_PATTERN_SCOT"] = new Regex(LC_CENSUS_PATTERN_SCOT, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["LC_CENSUS_PATTERN_1940US"] = new Regex(LC_CENSUS_PATTERN_1940US, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["LC_CENSUS_PATTERN_1881CANADA"] = new Regex(LC_CENSUS_PATTERN_1881CANADA, RegexOptions.Compiled | RegexOptions.IgnoreCase)
+            };
         }
 
         public enum ReferenceStatus { BLANK = 0, UNRECOGNISED = 1, INCOMPLETE = 2, GOOD = 3 };
@@ -934,8 +936,7 @@ namespace FTAnalyzer
                 return FactDate.UNKNOWN_DATE;
             if (this.Class.Equals("HO107"))
             {
-                int piecenumber = 0;
-                Int32.TryParse(this.Piece, out piecenumber);
+                Int32.TryParse(this.Piece, out int piecenumber);
                 if (piecenumber > 1465) // piece numbers go 1-1465 for 1841 and 1466+ for 1851.
                     return CensusDate.UKCENSUS1851;
                 else
@@ -995,8 +996,7 @@ namespace FTAnalyzer
 
         private string GetCensusReferenceCountry(string censusClass, string censusPiece)
         {
-            int piece;
-            Int32.TryParse(censusPiece, out piece);
+            Int32.TryParse(censusPiece, out int piece);
             if (censusClass.Length > 0 && censusPiece.Length > 0 && piece > 0)
             {
                 if (censusClass.Equals("HO107")) //1841 & 1851

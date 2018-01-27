@@ -72,10 +72,9 @@ namespace FTAnalyzer
 
         public static CensusLocation GetCensusLocation(string year, string piece)
         {
-            CensusLocation result;
-            Tuple<string,string> key = new Tuple<string,string>(year, piece);
-            CENSUSLOCATIONS.TryGetValue(key, out result);
-            return result == null ? CensusLocation.UNKNOWN : result;
+            Tuple<string, string> key = new Tuple<string, string>(year, piece);
+            CENSUSLOCATIONS.TryGetValue(key, out CensusLocation result);
+            return result ?? CensusLocation.UNKNOWN;
         }
 
         public override string ToString()

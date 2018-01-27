@@ -99,24 +99,26 @@ namespace FTAnalyzer
 
         static Countries()
         {   // generate position at http://imeasuremap.com/?e=57.4552937099324,-4.98779296874996:0::rectangle:0
-            BOUNDING_BOXES = new Dictionary<string, Envelope>();
-            BOUNDING_BOXES.Add(SCOTLAND, new Envelope(-7.974074, -0.463426, 54.571547, 60.970872));
-            BOUNDING_BOXES.Add(ENGLAND, new Envelope(-6.523879, 1.879409, 49.814376, 55.865022));
-            BOUNDING_BOXES.Add(WALES, new Envelope(-5.561202, -2.596147, 51.296580, 53.450153));
-            BOUNDING_BOXES.Add(IRELAND, new Envelope(-10.746749, -5.298783, 51.296580, 55.467681));
-            BOUNDING_BOXES.Add(NORTHERN_IRELAND, new Envelope(-8.329757, -5.298783, 53.872250, 55.467681));
-            BOUNDING_BOXES.Add(CANADA, new Envelope(-141, -52, 41.129387, 83.232810));
-            BOUNDING_BOXES.Add(UNITED_STATES, new Envelope(-169.136641, -66.086137, 17.665423, 71.626319));
-            BOUNDING_BOXES.Add(AUSTRALIA, new Envelope(112.728595, 154.343553, -44.134565, -9.219173));
-            BOUNDING_BOXES.Add(NEW_ZEALAND, new Envelope(166.199058, 178.689262, -47.405457, -34.187216));
-            BOUNDING_BOXES.Add(FRANCE, new Envelope(-5.231600, 8.357236, 42.237011, 51.173873));
-            BOUNDING_BOXES.Add(BELGIUM, new Envelope(2.436859, 6.533508, 49.389841, 51.530658));
-            BOUNDING_BOXES.Add(NETHERLANDS, new Envelope(3.205904, 7.324528, 50.886015, 53.756544));
-            BOUNDING_BOXES.Add(GERMANY, new Envelope(5.732761, 15.212713, 47.126544, 55.048204));
-            BOUNDING_BOXES.Add(SPAIN, new Envelope(-9.428367, 4.709787, 35.867189, 43.875768));
-            BOUNDING_BOXES.Add(PORTUGAL, new Envelope(-17.360492, -6.100757, 32.487006, 42.254591));
-            BOUNDING_BOXES.Add(ITALY, new Envelope(6.523787, 18.662428, 36.523271, 47.168847));
-            BOUNDING_BOXES.Add(MEXICO, new Envelope(-117.314102, -86.630537, 14.216935, 32.927605));
+            BOUNDING_BOXES = new Dictionary<string, Envelope>
+            {
+                { SCOTLAND, new Envelope(-7.974074, -0.463426, 54.571547, 60.970872) },
+                { ENGLAND, new Envelope(-6.523879, 1.879409, 49.814376, 55.865022) },
+                { WALES, new Envelope(-5.561202, -2.596147, 51.296580, 53.450153) },
+                { IRELAND, new Envelope(-10.746749, -5.298783, 51.296580, 55.467681) },
+                { NORTHERN_IRELAND, new Envelope(-8.329757, -5.298783, 53.872250, 55.467681) },
+                { CANADA, new Envelope(-141, -52, 41.129387, 83.232810) },
+                { UNITED_STATES, new Envelope(-169.136641, -66.086137, 17.665423, 71.626319) },
+                { AUSTRALIA, new Envelope(112.728595, 154.343553, -44.134565, -9.219173) },
+                { NEW_ZEALAND, new Envelope(166.199058, 178.689262, -47.405457, -34.187216) },
+                { FRANCE, new Envelope(-5.231600, 8.357236, 42.237011, 51.173873) },
+                { BELGIUM, new Envelope(2.436859, 6.533508, 49.389841, 51.530658) },
+                { NETHERLANDS, new Envelope(3.205904, 7.324528, 50.886015, 53.756544) },
+                { GERMANY, new Envelope(5.732761, 15.212713, 47.126544, 55.048204) },
+                { SPAIN, new Envelope(-9.428367, 4.709787, 35.867189, 43.875768) },
+                { PORTUGAL, new Envelope(-17.360492, -6.100757, 32.487006, 42.254591) },
+                { ITALY, new Envelope(6.523787, 18.662428, 36.523271, 47.168847) },
+                { MEXICO, new Envelope(-117.314102, -86.630537, 14.216935, 32.927605) }
+            };
         }
 
         public static bool IsUnitedKingdom(string country)
