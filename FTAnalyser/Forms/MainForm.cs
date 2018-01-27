@@ -25,8 +25,6 @@ namespace FTAnalyzer
         public static string VERSION = "6.0.5.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
-        private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
         
         private Cursor storedCursor = Cursors.Default;
         private FamilyTree ft = FamilyTree.Instance;
@@ -81,7 +79,7 @@ namespace FTAnalyzer
             System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
             uint dummy = 0;
             fonts.AddMemoryFont(fontPtr, Properties.Resources.KUNSTLER.Length);
-            AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.KUNSTLER.Length, IntPtr.Zero, ref dummy);
+            NativeMethods.AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.KUNSTLER.Length, IntPtr.Zero, ref dummy);
             System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
             handwritingFont = new Font(fonts.Families[0], 52.0F, FontStyle.Bold);        
         }
@@ -2890,5 +2888,11 @@ namespace FTAnalyzer
             f.Show();
             HourGlass(false);
         }
+    }
+
+    internal static class NativeMethods
+    {
+        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        internal static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
     }
 }
