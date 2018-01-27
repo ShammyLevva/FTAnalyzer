@@ -8,6 +8,7 @@ Fix for Timeline report year ranges being too broad
 #### Updated Release Version 6.0.4.0
 
 **Updates**
+
 Added new Logo and text on main page of app
 
 **Bugfixes**
