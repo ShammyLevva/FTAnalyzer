@@ -17,6 +17,7 @@ namespace FTAnalyzer.Forms.Controls
         private MapToolStripMenuItem mnuBingMapAerial;
         private MapToolStripMenuItem mnuBingMapRoads;
         private MapToolStripMenuItem mnuBingMapHybrid;
+        private MapToolStripMenuItem mnuNLS1885_1900;
         
         public ToolStripMapSelector()
             : base("Map style")
@@ -50,15 +51,18 @@ namespace FTAnalyzer.Forms.Controls
 
         private void SetupDropdown()
         {
-            mnuOpenStreetMap = new MapToolStripMenuItem(KnownTileSources.Create(KnownTileSource.OpenStreetMap), LinkLabelType.OSM);
-            mnuBingMapAerial = new MapToolStripMenuItem(KnownTileSources.Create(KnownTileSource.BingAerial), LinkLabelType.BING);
-            mnuBingMapRoads = new MapToolStripMenuItem(KnownTileSources.Create(KnownTileSource.BingRoads), LinkLabelType.BING);
-            mnuBingMapHybrid = new MapToolStripMenuItem(KnownTileSources.Create(KnownTileSource.BingHybrid),  LinkLabelType.BING);
+            TileSourceFactory factory = new TileSourceFactory();
+            mnuOpenStreetMap = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.OpenStreetMap), LinkLabelType.OSM);
+            mnuBingMapAerial = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.BingAerial), LinkLabelType.BING);
+            mnuBingMapRoads = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.BingRoads), LinkLabelType.BING);
+            mnuBingMapHybrid = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.BingHybrid),  LinkLabelType.BING);
+            mnuNLS1885_1900 = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.NLS_1885_1900_OS_1in), LinkLabelType.NLS);
 
             mnuOpenStreetMap.SetupMapToolStripMenuItem("mnuOpenStreetMap", "Open Street Map", new EventHandler(_Click));
             mnuBingMapAerial.SetupMapToolStripMenuItem("mnuBingMapAerial", "Aerial Bing Map", new EventHandler(_Click));
             mnuBingMapRoads.SetupMapToolStripMenuItem("mnuBingMapRoads", "Roads Bing Map", new EventHandler(_Click));
             mnuBingMapHybrid.SetupMapToolStripMenuItem("mnuBingMapHybrid", "Hybrid Bing Map", new EventHandler(_Click));
+            mnuNLS1885_1900.SetupMapToolStripMenuItem("mnuNLS1885_1900", "NLS 1885-1900 OS 1in Map", new EventHandler(_Click));
 
             // Setup map selector menu
             DisplayStyle = ToolStripItemDisplayStyle.Text;
@@ -67,6 +71,7 @@ namespace FTAnalyzer.Forms.Controls
             mnuBingMapAerial,
             mnuBingMapRoads,
             mnuBingMapHybrid,
+            mnuNLS1885_1900,
             });
             ImageTransparentColor = Color.Magenta;
             Name = "mnuMapStyle";

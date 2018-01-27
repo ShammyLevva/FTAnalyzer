@@ -349,6 +349,7 @@
     </Compile>
     <Compile Include="Mapping\OS50kGazetteer.cs" />
     <Compile Include="Mapping\TearDropLayer.cs" />
+    <Compile Include="Mapping\TileSourceFactory.cs" />
     <Compile Include="Properties\FileHandling.cs" />
     <Compile Include="Properties\FileHandling.Designer.cs">
       <DependentUpon>FileHandling.settings</DependentUpon>

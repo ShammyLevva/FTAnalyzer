@@ -23,8 +23,6 @@ namespace FTAnalyzer.Mapping
         {
             Name = name;
             Text = text;
-            CheckOnClick = true;
-            Size = new Size(164, 22);
             Click += eventHandler;
         }
 
