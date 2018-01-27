@@ -1,3 +1,20 @@
+#### Updated Release Version 6.0.5.0
+
+**Bugfixes**
+Added font to distribution so the app name shows correctly
+Updated SharpMap & BruTile to latest versions and fixed background maps
+Fix for Timeline report year ranges being too broad
+
+#### Updated Release Version 6.0.4.0
+
+**Updates**
+Added new Logo and text on main page of app
+
+**Bugfixes**
+ 
+Fixed issue of some options not sticking when changed 
+Various minor code optimisations for c#7
+
 #### Updated Release Version 6.0.3.0 
 
 **Updates**
