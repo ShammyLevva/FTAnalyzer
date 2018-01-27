@@ -62,9 +62,9 @@ namespace FTAnalyzer.Forms
             {
                 if (ml.Location.IsGeoCoded(false) && ml.FactDate.IsKnown)
                 {
-                    if (ml.FactDate.StartDate != FactDate.MINDATE && ml.FactDate.StartDate.Year < minGeoCodedYear)
+                    if (ml.FactDate.StartDate.Year != FactDate.MINDATE.Year && ml.FactDate.StartDate.Year < minGeoCodedYear)
                         minGeoCodedYear = ml.FactDate.StartDate.Year;
-                    if (ml.FactDate.EndDate != FactDate.MAXDATE && ml.FactDate.EndDate.Year > maxGeoCodedYear)
+                    if (ml.FactDate.EndDate.Year != FactDate.MAXDATE.Year && ml.FactDate.EndDate.Year > maxGeoCodedYear)
                         maxGeoCodedYear = ml.FactDate.EndDate.Year;
                 }
             }
