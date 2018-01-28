@@ -1,3 +1,10 @@
+#### New Release Version 6.1.0.0, 28th Jan 2018
+
+**Updates**
+
+Added a variety of old Maps (mostly UK/Scotland) so you can view places in your tree as they were at the time your ancestors lived there.
+Added recognition of the 1939 National Register (UK) references
+
 #### Updated Release Version 6.0.5.0, 26th Jan 2018
 
 **Bugfixes**
