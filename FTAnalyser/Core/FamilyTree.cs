@@ -51,6 +51,8 @@ namespace FTAnalyzer
         private Int64 maxAhnentafel = 0;
         private Dictionary<string, Individual> individualLookup;
 
+        private int SoloFamilies { get; set; }
+        private int PreMarriageFamilies { get; set; }
         public bool Geocoding { get; set; }
         public List<NonDuplicate> NonDuplicates { get; private set; }
         #endregion
@@ -197,6 +199,8 @@ namespace FTAnalyzer
             unknownFactTypes = new HashSet<string>();
             dataErrorTypes = new List<DataErrorGroup>();
             displayLocations = new SortableBindingList<IDisplayLocation>[5];
+            SoloFamilies = 0;
+            PreMarriageFamilies = 0;
             ResetLooseFacts();
             duplicates = null;
             ClearLocations();
@@ -590,17 +594,13 @@ namespace FTAnalyzer
                         c.HasParents = true;
                 }
             }
-            int added = 0;
             foreach (Individual ind in individuals)
             {
                 if (!ind.IsInFamily)
-                {
-                    families.Add(new Family(ind, Family.SOLOINDIVIDUAL));
-                    added++;
-                }
+                   families.Add(new Family(ind, NextSoloFamily));
             }
-            if (added > 0)
-                xmlErrorbox.AppendText("Added " + added + " lone individuals as single families.\n");
+            if (SoloFamilies > 0)
+                xmlErrorbox.AppendText("Added " + SoloFamilies + " lone individuals as single families.\n");
         }
         #endregion
 
@@ -702,6 +702,9 @@ namespace FTAnalyzer
 
         public List<Individual> DeadOrAlive { get { return individuals.Filter(x => x.DeathDate.IsKnown && x.IsFlaggedAsLiving).ToList<Individual>(); } }
 
+        public string NextSoloFamily { get { return "SF" + ++SoloFamilies; } }
+
+        public string NextPreMarriageFamily { get { return "PM" + ++PreMarriageFamilies; } }
         #endregion
 
         #region Property Functions
@@ -1375,7 +1378,7 @@ namespace FTAnalyzer
                 {
                     //if (ind.IndividualID == "I0282")
                     //    Console.WriteLine("found it");
-                    CensusFamily cf = new CensusFamily(new Family(ind, Family.PRE_MARRIAGE), censusDate);
+                    CensusFamily cf = new CensusFamily(new Family(ind, FamilyTree.Instance.NextPreMarriageFamily), censusDate);
                     if (!individualIDs.Contains(ind.IndividualID) && cf.Process(censusDate, censusDone, checkCensus))
                     {
                         individualIDs.Add(ind.IndividualID);

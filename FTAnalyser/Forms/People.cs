@@ -427,7 +427,7 @@ namespace FTAnalyzer.Forms
             IEnumerable<CensusFamily> toSearch = ft.GetAllCensusFamilies(CensusDate.UKCENSUS1911, true, true);
             foreach (Family fam in toSearch)
             {
-                if (fam.On1911Census && !fam.HasAnyChildrenStatus && fam.BothParentsAlive(CensusDate.UKCENSUS1911) && fam.FamilyID != Family.PRE_MARRIAGE)
+                if (fam.On1911Census && !fam.HasAnyChildrenStatus && fam.BothParentsAlive(CensusDate.UKCENSUS1911) && !fam.FamilyType.Equals(Family.PRE_MARRIAGE))
                     results.Add(fam);
             }
             reportType = ReportType.MissingChildrenStatus;
@@ -446,7 +446,7 @@ namespace FTAnalyzer.Forms
             IEnumerable<CensusFamily> toSearch = ft.GetAllCensusFamilies(CensusDate.UKCENSUS1911, true, true);
             foreach (CensusFamily fam in toSearch)
             {
-                if (fam.On1911Census && fam.HasGoodChildrenStatus && fam.FamilyID != Family.SOLOINDIVIDUAL && fam.FamilyID != Family.PRE_MARRIAGE &&
+                if (fam.On1911Census && fam.HasGoodChildrenStatus && !fam.FamilyType.Equals(Family.SOLOINDIVIDUAL) && !fam.FamilyType.Equals(Family.PRE_MARRIAGE) &&
                     (fam.ExpectedTotal != fam.ChildrenTotal || fam.ExpectedAlive != fam.ChildrenAlive || fam.ExpectedDead != fam.ChildrenDead))
                     results.Add(fam);
             }

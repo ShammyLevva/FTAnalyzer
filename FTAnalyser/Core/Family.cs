@@ -13,7 +13,8 @@ namespace FTAnalyzer
 {
     public class Family : IDisplayFamily
     {
-        public static readonly string SINGLE = "Single", MARRIED = "Married", SOLOINDIVIDUAL = "Solo", PRE_MARRIAGE = "Pre-Marriage", UNMARRIED = "Unmarried";
+        public static readonly string UNKNOWN = "Unknown", SOLOINDIVIDUAL = "Solo", PRE_MARRIAGE = "Pre-Marriage";
+        public static readonly string SINGLE = "Single", MARRIED = "Married", UNMARRIED = "Unmarried";
 
         public string FamilyID { get; private set; }
         public IList<Fact> Facts { get; private set; }
@@ -23,6 +24,7 @@ namespace FTAnalyzer
         public int ExpectedTotal { get; internal set; }
         public int ExpectedAlive { get; internal set; }
         public int ExpectedDead { get; internal set; }
+        public string FamilyType { get; internal set; }
 
         private Dictionary<string, Fact> preferredFacts;
 
@@ -35,6 +37,14 @@ namespace FTAnalyzer
             this.ExpectedTotal = 0;
             this.ExpectedAlive = 0;
             this.ExpectedDead = 0;
+            this.FamilyType = UNKNOWN;
+            if (familyID.Length>2)
+            {
+                if (familyID.Substring(0, 2).Equals("SF"))
+                    this.FamilyType = SOLOINDIVIDUAL;
+                else if (familyID.Substring(0, 2).Equals("PM"))
+                    this.FamilyType = PRE_MARRIAGE;
+            }
         }
 
         public Family() : this(string.Empty) { }
@@ -216,8 +226,13 @@ namespace FTAnalyzer
         {
             try
             {
-                if (FamilyID == null || FamilyID == string.Empty || FamilyID == SOLOINDIVIDUAL)
-                    FamilyID = SOLOINDIVIDUAL;
+                if (FamilyID == null || FamilyID == string.Empty)
+                {
+                    FamilyType = SOLOINDIVIDUAL;
+                    FamilyID = FamilyTree.Instance.NextSoloFamily;
+                }
+                else if(FamilyType.Equals(SOLOINDIVIDUAL) || FamilyType.Equals(PRE_MARRIAGE))
+                    FamilyID = FamilyID.Substring(0, 2) + FamilyID.Substring(2).PadLeft(length, '0');
                 else
                     FamilyID = FamilyID.Substring(0, 1) + FamilyID.Substring(1).PadLeft(length, '0');
             }
@@ -355,7 +370,10 @@ namespace FTAnalyzer
         {
             get
             {
-                return FamilyID + ": " + FamilyName;
+                if (FamilyType.Equals(SOLOINDIVIDUAL))
+                    return "Solo Family " + FamilyID + ": " + (Husband == null ? string.Empty : Husband.Name) + (Wife == null ? string.Empty : Wife.Name);
+                else 
+                    return FamilyID + ": " + FamilyName;
             }
         }
 
@@ -561,7 +579,7 @@ namespace FTAnalyzer
  
         public bool BothParentsAlive(FactDate when)
         {
-            if (Husband == null || Wife == null || FamilyID == SOLOINDIVIDUAL)
+            if (Husband == null || Wife == null || FamilyType.Equals(SOLOINDIVIDUAL))
                 return false;
             return Husband.IsAlive(when) && Wife.IsAlive(when) && Husband.GetAge(when).MinAge > 13 && Wife.GetAge(when).MinAge > 13;
         }
