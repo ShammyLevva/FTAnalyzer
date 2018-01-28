@@ -46,8 +46,7 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_1911_PATTERN5 = @"RG *14\/? *Piece *(\d{1,6}) *Page *(\d{1,3})";
         private static readonly string EW_CENSUS_1911_PATTERN6 = @"RG *14\/? *RD *(\d{1,4}) *ED *(\d{1,3}) (\d{1,5})";
 
-        private static readonly string EW_1939_REGISTER_PATTERN1 = @"RG *101\/?\\? *(\d{1,6}[A-Z]?) *.\/?\\? *(\d{1,3}).+([A-Z]{4})$";
-        private static readonly string EW_1939_REGISTER_PATTERN2 = @"RG *101\/?\\? *Piece *(\d{1,6}[A-Z]?) *.\/?\\? *Page *(\d{1,3}).+([A-Z]{4})$";
+        private static readonly string EW_1939_REGISTER_PATTERN1 = @"RG *101\/?\\? *(\d{1,6}[A-Z]?) *.\/?\\? *(\d{1,3}) *.\/?\\? *(\d{1,3}).+([A-Z]{4})$";
         
         private static readonly string SCOT_CENSUSYEAR_PATTERN = @"(1[89]\d[15]).{1,10}(\(?GROS *\)?)?Parish *([A-Z .'-]+) *ED *(\d{1,3}[AB]?) *Page *(\d{1,4}) *Line *(\d{1,2})";
         private static readonly string SCOT_CENSUSYEAR_PATTERN2 = @"(1[89]\d[15]).{1,10}(\(?GROS *\)?)?(\d{3}\/\d{1,2}[AB]?) (\d{3}\/\d{2}) (\d{3,4})";
@@ -116,7 +115,6 @@ namespace FTAnalyzer
                 ["EW_CENSUS_1911_PATTERN6"] = new Regex(EW_CENSUS_1911_PATTERN6, RegexOptions.Compiled | RegexOptions.IgnoreCase),
 
                 ["EW_1939_REGISTER_PATTERN1"] = new Regex(EW_1939_REGISTER_PATTERN1, RegexOptions.Compiled | RegexOptions.IgnoreCase),
-                ["EW_1939_REGISTER_PATTERN2"] = new Regex(EW_1939_REGISTER_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase),
 
                 ["SCOT_CENSUSYEAR_PATTERN"] = new Regex(SCOT_CENSUSYEAR_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase),
                 ["SCOT_CENSUSYEAR_PATTERN2"] = new Regex(SCOT_CENSUSYEAR_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase),
@@ -637,18 +635,8 @@ namespace FTAnalyzer
                 this.Class = "RG101";
                 this.Piece = matcher.Groups[1].ToString();
                 this.Page = matcher.Groups[2].ToString();
-                string letterCode = matcher.Groups[3].ToString();
-                this.ED = CheckLetterCode(letterCode);
-                SetFlagsandCountry(true, false, Countries.ENG_WALES, ReferenceStatus.GOOD, matcher.Value);
-                return true;
-            }
-            matcher = censusRegexs["EW_1939_REGISTER_PATTERN2"].Match(text);
-            if (matcher.Success)
-            {
-                this.Class = "RG101";
-                this.Piece = matcher.Groups[1].ToString();
-                this.Page = matcher.Groups[2].ToString();
-                string letterCode = matcher.Groups[3].ToString();
+                this.Schedule = matcher.Groups[3].ToString();
+                string letterCode = matcher.Groups[4].ToString();
                 this.ED = CheckLetterCode(letterCode);
                 SetFlagsandCountry(true, false, Countries.ENG_WALES, ReferenceStatus.GOOD, matcher.Value);
                 return true;
@@ -1012,6 +1000,11 @@ namespace FTAnalyzer
                 string baseURL = @"http://www.awin1.com/cread.php?awinmid=2114&awinaffid=88963&clickref=FTA";
                 if (year.Equals("1911") && Countries.IsEnglandWales(this.Country) && this.Piece.Length > 0 && this.Schedule.Length > 0)
                     return baseURL + @"1911&p=http://search.findmypast.co.uk/results/world-records/1911-census-for-england-and-wales?pieceno=" + this.Piece + @"&schedule=" + this.Schedule;
+                if (year.Equals("1939") && Countries.IsEnglandWales(this.Country) && this.Piece.Length > 0 && !this.ED.Equals("UNKNOWN"))
+                {
+                    string dir = this.Piece.Length > 1 ? this.Piece.Substring(0, this.Piece.Length - 1) : this.Piece; //strip last letter from piece
+                    return baseURL + @"1939&p=https://search.findmypast.co.uk/record?id=tna%2fr39%2f" + dir + "%2f" + this.Piece.ToLower() + "%2f" + this.Page + "%2f" + this.Schedule;
+                }
                 if (Countries.IsUnitedKingdom(Country))
                 {
                     string querystring = string.Empty;
@@ -1216,9 +1209,9 @@ namespace FTAnalyzer
                         if (Fact.FactDate.Overlaps(CensusDate.UKCENSUS1939))
                         {
                             if (Properties.GeneralSettings.Default.UseCompactCensusRef)
-                                return Piece + "/" + Page + "/" + ED;
+                                return "RG101/" + Piece + "/" + Page + "/" + Schedule + " (" + ED + ")";
                             else
-                                return "Piece: " + Piece + ", Page: " + Page + ", ED: " + ED;
+                                return "Piece: " + Piece + ", Page: " + Page + ", Schedule " + Schedule + ", ED: " + ED;
 
                         }
                     }
