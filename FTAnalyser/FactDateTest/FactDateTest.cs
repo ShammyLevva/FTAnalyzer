@@ -312,12 +312,20 @@ namespace FactDateTest
         {
             FactDate first = new FactDate("1 January 1721/2");
             FactDate second = new FactDate("31 December 1721");
+            FactDate third = new FactDate("31 December 1722");
+            FactDate fourth = new FactDate("1722");
 
             Assert.IsTrue(second.IsBefore(first));
             Assert.IsTrue(second.StartsBefore(first));
             Assert.IsTrue(first.IsAfter(second));
             Assert.IsTrue(first.EndsAfter(second));
             Assert.IsFalse(first.Overlaps(second));
+            Assert.IsTrue(first.IsBefore(third));
+            Assert.IsTrue(third.IsAfter(first));
+            Assert.IsFalse(first.IsBefore(fourth));
+            Assert.IsTrue(first.Overlaps(fourth));
+            Assert.IsFalse(fourth.IsBefore(first));
+            Assert.IsFalse(fourth.IsAfter(first));
 
             FactDate census = new FactDate("BET 31 DEC 1910 AND 2 APR 1911");
             Assert.IsTrue(census.Overlaps(CensusDate.UKCENSUS1911));
