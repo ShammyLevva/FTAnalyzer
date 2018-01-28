@@ -46,6 +46,9 @@ namespace FTAnalyzer
         private static readonly string EW_CENSUS_1911_PATTERN5 = @"RG *14\/? *Piece *(\d{1,6}) *Page *(\d{1,3})";
         private static readonly string EW_CENSUS_1911_PATTERN6 = @"RG *14\/? *RD *(\d{1,4}) *ED *(\d{1,3}) (\d{1,5})";
 
+        private static readonly string EW_1939_REGISTER_PATTERN1 = @"RG *101\/?\\? *(\d{1,6}[A-Z]?) *.\/?\\? *(\d{1,3}).+([A-Z]{4})$";
+        private static readonly string EW_1939_REGISTER_PATTERN2 = @"RG *101\/?\\? *Piece *(\d{1,6}[A-Z]?) *.\/?\\? *Page *(\d{1,3}).+([A-Z]{4})$";
+        
         private static readonly string SCOT_CENSUSYEAR_PATTERN = @"(1[89]\d[15]).{1,10}(\(?GROS *\)?)?Parish *([A-Z .'-]+) *ED *(\d{1,3}[AB]?) *Page *(\d{1,4}) *Line *(\d{1,2})";
         private static readonly string SCOT_CENSUSYEAR_PATTERN2 = @"(1[89]\d[15]).{1,10}(\(?GROS *\)?)?(\d{3}\/\d{1,2}[AB]?) (\d{3}\/\d{2}) (\d{3,4})";
         private static readonly string SCOT_CENSUSYEAR_PATTERN3 = @"(1[89]\d[15]).{1,10}(\(?GROS *\)?)?(\d{3}[AB]?)\/(\d{2}[AB]?) Page *(\d{1,4})";
@@ -111,6 +114,9 @@ namespace FTAnalyzer
                 ["EW_CENSUS_1911_PATTERN4"] = new Regex(EW_CENSUS_1911_PATTERN4, RegexOptions.Compiled | RegexOptions.IgnoreCase),
                 ["EW_CENSUS_1911_PATTERN5"] = new Regex(EW_CENSUS_1911_PATTERN5, RegexOptions.Compiled | RegexOptions.IgnoreCase),
                 ["EW_CENSUS_1911_PATTERN6"] = new Regex(EW_CENSUS_1911_PATTERN6, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+                ["EW_1939_REGISTER_PATTERN1"] = new Regex(EW_1939_REGISTER_PATTERN1, RegexOptions.Compiled | RegexOptions.IgnoreCase),
+                ["EW_1939_REGISTER_PATTERN2"] = new Regex(EW_1939_REGISTER_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase),
 
                 ["SCOT_CENSUSYEAR_PATTERN"] = new Regex(SCOT_CENSUSYEAR_PATTERN, RegexOptions.Compiled | RegexOptions.IgnoreCase),
                 ["SCOT_CENSUSYEAR_PATTERN2"] = new Regex(SCOT_CENSUSYEAR_PATTERN2, RegexOptions.Compiled | RegexOptions.IgnoreCase),
@@ -202,6 +208,11 @@ namespace FTAnalyzer
             this.Fact = fact;
             if (GetCensusReference(node))
                 SetCensusReferenceDetails();
+            else
+            {
+                if (GetCensusReference(Fact.Comment))
+                    SetCensusReferenceDetails();
+            }
             if (fact.FactDate.IsKnown)
             {
                 if (this.CensusYear.IsKnown && !fact.FactDate.Overlaps(this.CensusYear))
@@ -620,6 +631,28 @@ namespace FTAnalyzer
                 SetFlagsandCountry(true, false, GetCensusReferenceCountry(Class, Piece), ReferenceStatus.INCOMPLETE, matcher.Value);
                 return true;
             }
+            matcher = censusRegexs["EW_1939_REGISTER_PATTERN1"].Match(text);
+            if (matcher.Success)
+            {
+                this.Class = "RG101";
+                this.Piece = matcher.Groups[1].ToString();
+                this.Page = matcher.Groups[2].ToString();
+                string letterCode = matcher.Groups[3].ToString();
+                this.ED = CheckLetterCode(letterCode);
+                SetFlagsandCountry(true, false, Countries.ENG_WALES, ReferenceStatus.GOOD, matcher.Value);
+                return true;
+            }
+            matcher = censusRegexs["EW_1939_REGISTER_PATTERN2"].Match(text);
+            if (matcher.Success)
+            {
+                this.Class = "RG101";
+                this.Piece = matcher.Groups[1].ToString();
+                this.Page = matcher.Groups[2].ToString();
+                string letterCode = matcher.Groups[3].ToString();
+                this.ED = CheckLetterCode(letterCode);
+                SetFlagsandCountry(true, false, Countries.ENG_WALES, ReferenceStatus.GOOD, matcher.Value);
+                return true;
+            }
             matcher = censusRegexs["SCOT_CENSUSYEAR_PATTERN"].Match(text);
             if (matcher.Success)
             {
@@ -888,6 +921,14 @@ namespace FTAnalyzer
             return false;
         }
 
+        private string CheckLetterCode(string letterCode)
+        {
+            if (letterCode.Equals("CODE"))
+                return "UNKNOWN";
+            //TODO: Check that the code is one of the valid codes 
+            return letterCode;
+        }
+
         private void SetFlagsandCountry(bool ukCensus, bool LCcensuFact, string country, ReferenceStatus status, string matchstring)
         {
             this.IsUKCensus = ukCensus;
@@ -954,6 +995,8 @@ namespace FTAnalyzer
                 return CensusDate.UKCENSUS1901;
             if (this.Class.Equals("RG14"))
                 return CensusDate.UKCENSUS1911;
+            if (this.Class.Equals("RG101"))
+                return CensusDate.UKCENSUS1939;
             if (this.Class.StartsWith("US"))
                 return CensusDate.GetUSCensusDateFromReference(this.Class);
             if (this.Class.StartsWith("CAN"))
@@ -1169,6 +1212,14 @@ namespace FTAnalyzer
                                     return Piece + "/" + Page;
                                 else
                                     return "Piece: " + Piece + ", Page: " + Page;
+                        }
+                        if (Fact.FactDate.Overlaps(CensusDate.UKCENSUS1939))
+                        {
+                            if (Properties.GeneralSettings.Default.UseCompactCensusRef)
+                                return Piece + "/" + Page + "/" + ED;
+                            else
+                                return "Piece: " + Piece + ", Page: " + Page + ", ED: " + ED;
+
                         }
                     }
                 }

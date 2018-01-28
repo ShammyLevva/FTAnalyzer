@@ -14,19 +14,17 @@ namespace FTAnalyzer.Forms.Controls
         private LinkLabel copyrightLabel;
         private MapBox mapbox;
         private MapToolStripMenuItem mnuOpenStreetMap;
+        private MapToolStripMenuItem mnuOpenHistoricMap;
         private MapToolStripMenuItem mnuBingMapAerial;
         private MapToolStripMenuItem mnuBingMapRoads;
         private MapToolStripMenuItem mnuBingMapHybrid;
+        private MapToolStripMenuItem mnuNLS1843_1882;
         private MapToolStripMenuItem mnuNLS1885_1900;
+        private MapToolStripMenuItem mnuNLS1921_1930;
         
         public ToolStripMapSelector()
             : base("Map style")
-        {
-            //this.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            //this.ImageTransparentColor = Color.Magenta;
-            //this.Name = "mnuMapStyle";
-            //this.Size = new System.Drawing.Size(71, 22);
-        }
+        { }
 
         public void Setup(LinkLabel label, MapBox mapbox)
         {
@@ -53,25 +51,34 @@ namespace FTAnalyzer.Forms.Controls
         {
             TileSourceFactory factory = new TileSourceFactory();
             mnuOpenStreetMap = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.OpenStreetMap), LinkLabelType.OSM);
+            mnuOpenHistoricMap = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.OpenHistoricMap), LinkLabelType.OSM);
             mnuBingMapAerial = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.BingAerial), LinkLabelType.BING);
             mnuBingMapRoads = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.BingRoads), LinkLabelType.BING);
             mnuBingMapHybrid = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.BingHybrid),  LinkLabelType.BING);
+            mnuNLS1843_1882 = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.NLS_1843_1882_OS_6in), LinkLabelType.NLS);
             mnuNLS1885_1900 = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.NLS_1885_1900_OS_1in), LinkLabelType.NLS);
+            mnuNLS1921_1930 = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.NLS_1921_1930_OS_6in), LinkLabelType.NLS);
 
             mnuOpenStreetMap.SetupMapToolStripMenuItem("mnuOpenStreetMap", "Open Street Map", new EventHandler(_Click));
+            mnuOpenHistoricMap.SetupMapToolStripMenuItem("mnuOpenHistoricMap", "Open Historical Map 1920-1940 UK", new EventHandler(_Click));
             mnuBingMapAerial.SetupMapToolStripMenuItem("mnuBingMapAerial", "Aerial Bing Map", new EventHandler(_Click));
             mnuBingMapRoads.SetupMapToolStripMenuItem("mnuBingMapRoads", "Roads Bing Map", new EventHandler(_Click));
             mnuBingMapHybrid.SetupMapToolStripMenuItem("mnuBingMapHybrid", "Hybrid Bing Map", new EventHandler(_Click));
-            mnuNLS1885_1900.SetupMapToolStripMenuItem("mnuNLS1885_1900", "NLS 1885-1900 OS 1in Map", new EventHandler(_Click));
-
+            mnuNLS1843_1882.SetupMapToolStripMenuItem("mnuNLS1843_1882", "NLS 1843-1882 OS 6in UK Map", new EventHandler(_Click));
+            mnuNLS1885_1900.SetupMapToolStripMenuItem("mnuNLS1885_1900", "NLS 1885-1900 OS 1in UK Map", new EventHandler(_Click));
+            mnuNLS1921_1930.SetupMapToolStripMenuItem("mnuNLS1921_1930", "NLS 1921-1930 OS 6in Scotland Map", new EventHandler(_Click));
+            
             // Setup map selector menu
             DisplayStyle = ToolStripItemDisplayStyle.Text;
             DropDownItems.AddRange(new ToolStripItem[] {
             mnuOpenStreetMap,
+            mnuOpenHistoricMap,
             mnuBingMapAerial,
             mnuBingMapRoads,
             mnuBingMapHybrid,
+            mnuNLS1843_1882,
             mnuNLS1885_1900,
+            mnuNLS1921_1930,
             });
             ImageTransparentColor = Color.Magenta;
             Name = "mnuMapStyle";

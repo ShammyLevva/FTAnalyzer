@@ -99,10 +99,7 @@ namespace FTAnalyzer
 
         public static XmlNode GetChildNode(XmlNode node, String tag)
         {
-            if (node == null)
-                return null;
-            else
-                return node.SelectSingleNode(tag);
+            return node?.SelectSingleNode(tag);
         }
 
         public static string GetNotes(XmlNode node)

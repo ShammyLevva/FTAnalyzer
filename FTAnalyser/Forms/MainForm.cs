@@ -22,7 +22,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "6.0.5.0";
+        public static string VERSION = "6.1.0.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         
@@ -167,7 +167,7 @@ namespace FTAnalyzer
             }
             catch (Exception ex2)
             {
-                string message = ex2.Message + (ex2.InnerException != null ? ex2.InnerException.Message : string.Empty);
+                string message = ex2.Message + "\n" + (ex2.InnerException != null ? ex2.InnerException.Message : string.Empty);
                 MessageBox.Show("Error: Problem processing your file. Please try again.\n" +
                     "If this problem persists please report this at http://www.ftanalyzer.com/issues. Error was: " + ex2.Message + "\n" + ex2.InnerException, "FTAnalyzer");
                 CleanUp();
