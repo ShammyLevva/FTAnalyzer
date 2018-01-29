@@ -186,6 +186,7 @@ namespace FTAnalyzer
             this.ExpectedTotal = f.ExpectedTotal;
             this.ExpectedAlive = f.ExpectedAlive;
             this.ExpectedDead = f.ExpectedDead;
+            this.FamilyType = UNKNOWN;
         }
 
         private void AddFacts(XmlNode node, string factType)
