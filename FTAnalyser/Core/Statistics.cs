@@ -8,6 +8,8 @@ using System.Net;
 using System.IO;
 using System.Windows.Forms;
 using FTAnalyzer.Filters;
+using System.Collections.Specialized;
+using System.Diagnostics;
 
 namespace FTAnalyzer
 {
@@ -36,7 +38,7 @@ namespace FTAnalyzer
 
         public string ChildrenBirthProfiles()
         {
-            int[, ,] stats = new int[2, 20, 3];
+            int[,,] stats = new int[2, 20, 3];
             foreach (Family f in ft.AllFamilies)
             {
                 foreach (Individual child in f.Children)
@@ -62,7 +64,7 @@ namespace FTAnalyzer
             chart.Show();
             return BuildOutput(stats);
         }
-        private void AddAgeData(int parent, int[, ,] stats, Age age, string gender)
+        private void AddAgeData(int parent, int[,,] stats, Age age, string gender)
         {
             int child = gender == "M" ? 0 : (gender == "F" ? 1 : 2);
             int fiveyear = age.MinAge / 5;
@@ -70,7 +72,7 @@ namespace FTAnalyzer
                 stats[parent, fiveyear, child]++;
         }
 
-        private string BuildOutput(int[, ,] minAge)
+        private string BuildOutput(int[,,] minAge)
         {
             StringBuilder output = new StringBuilder();
             output.AppendLine("Fathers Age When Child Born");
@@ -104,8 +106,7 @@ namespace FTAnalyzer
             surnames = list.Select(x => new SurnameStats(x.Surname)).ToList();
             pb.Value = 0;
             pb.Minimum = 0;
-            pb.Maximum = list.Count() + 260;
-            LoadGOONS(pb);
+            pb.Maximum = list.Count();
             foreach (SurnameStats stat in surnames)
             {
                 stat.Individuals = ft.AllIndividuals.Filter(indFilter).Where(x => x.Surname.Equals(stat.Surname, StringComparison.InvariantCultureIgnoreCase)).Count();
@@ -118,45 +119,28 @@ namespace FTAnalyzer
             return surnames;
         }
 
-        public void LoadGOONS(ToolStripProgressBar pb)
+        public static void DisplayGOONSpage(string surname)
         {
             try
             {
                 using (WebClient client = new WebClient())
                 {
-                    for (char c = 'A'; c <= 'Z'; c++)
+                    string website = "http://one-name.org/Results";
+                    NameValueCollection reqparm = new NameValueCollection
                     {
-                        string filename = Path.GetTempFileName();
-                        string website = "http://www.one-name.org/index_" + c.ToString() + ".html";
-                        client.DownloadFile(website, filename);
-
-                        HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-                        doc.Load(filename);
-                        HtmlNode table = doc.DocumentNode.SelectSingleNode("//table");
-
-                        List<HtmlNode> nodes = table.Descendants("a").ToList();
-                        foreach (HtmlNode node in nodes)
-                        {
-                            string surname = node.InnerText.Trim();
-                            SurnameStats stat = surnames.Find(x => x.Surname.Equals(surname));
-                            if(stat != null)
-                                stat.URI = new Uri("http://www.one-name.org" + node.GetAttributeValue("href", ""));
-                        }
-                        // now add links for those that are on GOONS but as a default page
-                        nodes = table.Descendants("td").ToList();
-                        foreach (HtmlNode node in nodes)
-                        {
-                            string surname = node.InnerText.Trim();
-                            SurnameStats stat = surnames.Find(x => x.Surname.Equals(surname));
-                            if (stat != null && stat.URI == null)
-                                stat.URI = new Uri(website);
-                        }
-                        pb.Value+=10;
-                        Application.DoEvents();
-                    }
+                        { "surname", surname },
+                        { "_wpnonce", "4cc97f97c8" },
+                        { "_wp_http_referer", "/Results" },
+                        { "submit", "Search" }
+                    };
+                    byte[] responsebytes = client.UploadValues(website, "POST", reqparm);
+                    string responsebody = Encoding.UTF8.GetString(responsebytes);
+                    string filename = Path.Combine(Path.GetTempPath(), "FTA-GOONS.html");
+                    File.WriteAllText(filename, responsebody);
+                    Process.Start(filename);
                 }
             }
-            catch(Exception)
+            catch (Exception)
             { // silently fail
             }
         }

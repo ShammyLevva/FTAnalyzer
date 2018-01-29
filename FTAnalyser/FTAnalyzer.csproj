@@ -281,7 +281,7 @@
     <Compile Include="Core\ParentalRelationship.cs" />
     <Compile Include="Core\ScottishParish.cs" />
     <Compile Include="Core\Relationship.cs" />
-    <Compile Include="Core\Surname.cs" />
+    <Compile Include="Core\SurnameStats.cs" />
     <Compile Include="Exceptions\InvalidLocationCSVFileException.cs" />
     <Compile Include="Forms\Controls\DateSliders.cs">
       <SubType>UserControl</SubType>

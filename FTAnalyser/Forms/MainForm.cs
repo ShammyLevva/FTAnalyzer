@@ -17,6 +17,7 @@ using Ionic.Zip;
 using Printing.DataGridViewPrint.Tools;
 using System.Text;
 using System.Web;
+using System.Diagnostics;
 
 namespace FTAnalyzer
 {
@@ -334,20 +335,6 @@ namespace FTAnalyzer
             else
                 this.Cursor = Cursors.Default;
             Application.DoEvents();
-        }
-
-        private void DgSurnames_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                HourGlass(true);
-                SurnameStats stat = (SurnameStats)dgSurnames.CurrentRow.DataBoundItem;
-                Forms.People frmInd = new Forms.People();
-                frmInd.SetSurnameStats(stat);
-                DisposeDuplicateForms(frmInd);
-                frmInd.Show();
-                HourGlass(false);
-            }
         }
 
         private void DgCountries_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -1005,15 +992,28 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
+        private void DgSurnames_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                HourGlass(true);
+                SurnameStats stat = (SurnameStats)dgSurnames.CurrentRow.DataBoundItem;
+                Forms.People frmInd = new Forms.People();
+                frmInd.SetSurnameStats(stat);
+                DisposeDuplicateForms(frmInd);
+                frmInd.Show();
+                HourGlass(false);
+            }
+        }
+
         private void DgSurnames_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0)
             {
-                DataGridViewCell cell = dgSurnames.Rows[e.RowIndex].Cells["URI"];
+                DataGridViewCell cell = dgSurnames.Rows[e.RowIndex].Cells["Surname"];
                 if (cell.Value != null)
                 {
-                    string url = cell.Value.ToString();
-                    HttpUtility.VisitWebsite(url);
+                    Statistics.DisplayGOONSpage(cell.Value.ToString());
                 }
             }
         }
@@ -1022,13 +1022,11 @@ namespace FTAnalyzer
         {
             foreach (DataGridViewRow r in dgSurnames.Rows)
             {
-                if (r.Cells["URI"].Value != null)
-                {
-                    r.Cells["Surname"] = new DataGridViewLinkCell();
-                    DataGridViewLinkCell c = (DataGridViewLinkCell)r.Cells["Surname"];
-                    c.UseColumnTextForLinkValue = true;
-                    c.Value = r.Cells["URI"].Value;
-                }
+                string surname = r.Cells["Surname"].Value.ToString();
+                r.Cells["Surname"] = new DataGridViewLinkCell();
+                DataGridViewLinkCell c = (DataGridViewLinkCell)r.Cells["Surname"];
+                c.UseColumnTextForLinkValue = true;
+                c.Value = surname;
             }
         }
 
