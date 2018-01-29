@@ -1,33 +1,35 @@
-#### New Release Version 6.1.0.0, 28th Jan 2018
+#### New Release Version 6.1.0.0, 29th Jan 2018
 
 **Updates**
 
-Added a variety of old Maps (mostly UK/Scotland) so you can view places in your tree as they were at the time your ancestors lived there.
-Added recognition of the 1939 National Register (UK) references
+Added a variety of old Maps (mostly UK/Scotland) so you can view places in your tree as they were at the time your ancestors lived there.  
+Added recognition of the 1939 National Register (UK) references  
+Added 1939 National Register references link to Find My Past  
+
+**Bugfixes**  
+Fixed issue with solo familes using same ID thus preventing facts result working  
+Surname tab links to Guild of One Name Studies wasn't working  
+Julian Calendar dates were incorrectly working out before and after if compared with a whole year  
 
 #### Updated Release Version 6.0.5.0, 26th Jan 2018
 
-**Bugfixes**
-
-Added font to distribution so the app name shows correctly
-Updated SharpMap & BruTile to latest versions and fixed background maps
+**Bugfixes**  
+Added font to distribution so the app name shows correctly  
+Updated SharpMap & BruTile to latest versions and fixed background maps  
 Fix for Timeline report year ranges being too broad
 
 #### Updated Release Version 6.0.4.0, 23th Jan 2018
 
-**Updates**
-
+**Updates**  
 Added new Logo and text on main page of app
 
-**Bugfixes**
- 
-Fixed issue of some options not sticking when changed 
+**Bugfixes**  
+Fixed issue of some options not sticking when changed  
 Various minor code optimisations for c#7
 
 #### Updated Release Version 6.0.3.0, 20th Jan 2018
 
-**Updates**
-
+**Updates**  
 Imported the suggested patches from fire-eggs these add:
 * Loading time improvements for processing of individuals
 * Colour reporting exports filter columns & retain colours  
@@ -36,16 +38,14 @@ US census overhauled now uses date ranges to cope with times where enumerators i
 
 #### Updated Release Version 6.0.2.0, 19th Jan 2018
 
-**Updates**
-
-Fixed most links to old codeplex documentation
+**Updates**  
+Fixed most links to old codeplex documentation  
 Amended range of dates for US census as enumerators didn't always adhere to guidelines that the census be recorded on a specific date.
 
 #### Release Version 6.0.1.0, 8th Jun 2017
 
-**Updates**
-
-Rebuilt for deployment on GitHub
+**Updates**  
+Rebuilt for deployment on GitHub  
 Upgraded to .Net 4.6 dropping XP support 
 
 #### Updated Release Version 5.2.0.7 of FTAnalyzer, 31th Jan 2017
