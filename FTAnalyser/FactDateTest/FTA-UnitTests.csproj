@@ -94,9 +94,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FTAnalyzer.csproj">
+    <ProjectReference Include="..\FTAnalyzer.Windows.csproj">
       <Project>{799ECA65-6748-4B7C-BBD5-429C19E02161}</Project>
-      <Name>FTAnalyzer</Name>
+      <Name>FTAnalyzer.Windows</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

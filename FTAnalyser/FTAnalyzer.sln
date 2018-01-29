@@ -1,8 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2024
+VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTAnalyzer", "FTAnalyzer.csproj", "{799ECA65-6748-4B7C-BBD5-429C19E02161}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTAnalyzer.Windows", "FTAnalyzer.Windows.csproj", "{799ECA65-6748-4B7C-BBD5-429C19E02161}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTA-UnitTests", "FactDateTest\FTA-UnitTests.csproj", "{B1B5657E-4843-42BC-B859-FFEE313A1680}"
 EndProject
@@ -31,7 +31,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSGazetteerProcessor", "..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaSlider", "..\MediaSlider\MediaSlider.csproj", "{3BFF2D79-9BC6-4F1A-A0AB-DE3F9A7B5B57}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "FTAnalyzer.Shared", "..\FTAnalyzer.Shared\FTAnalyzer.Shared.shproj", "{89621EBE-2416-4E13-BF69-F1C145908518}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\FTAnalyzer.Shared\FTAnalyzer.Shared.projitems*{799eca65-6748-4b7c-bbd5-429c19e02161}*SharedItemsImports = 4
+		..\FTAnalyzer.Shared\FTAnalyzer.Shared.projitems*{89621ebe-2416-4e13-bf69-f1c145908518}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
 		CD_ROM|x86 = CD_ROM|x86

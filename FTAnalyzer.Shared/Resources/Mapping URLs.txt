@@ -1,0 +1,9 @@
+﻿Boundary Data URLS
+
+Scotland:
+Data - http://www.gro-scotland.gov.uk/geography/geo-prods/geog-datasets.html
+Licensing - http://www.gro-scotland.gov.uk/geography/about-our-geography/licensing.html
+
+England & Wales
+Data - https://www.ordnancesurvey.co.uk/opendatadownload/products.html
+Licensing - http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf
