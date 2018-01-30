@@ -413,7 +413,6 @@
     <Content Include="Resources\Icons\Save.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Version Change History.txt" />
     <Content Include="x64\gdal_wrap.dll" />
     <Content Include="x64\SQLite.Interop.dll" />
     <Content Include="x86\gdal_wrap.dll" />
