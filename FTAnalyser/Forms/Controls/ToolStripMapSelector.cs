@@ -36,7 +36,7 @@ namespace FTAnalyzer.Forms.Controls
 
         public void GetCurrentMapPreference()
         {
-            string mapPreference = Application.UserAppDataRegistry.GetValue("Default Map Background", "mnuBingMapRoads").ToString();
+            string mapPreference = Application.UserAppDataRegistry.GetValue("Default Map Background", "mnuOpenStreetMap").ToString();
             foreach (ToolStripMenuItem menu in this.DropDownItems)
             {
                 if (mapPreference.Equals(menu.Name))
@@ -118,9 +118,10 @@ namespace FTAnalyzer.Forms.Controls
         {
             foreach (ToolStripMenuItem menu in DropDownItems)
                 menu.Checked = false;
-            if(mapbox.Map.BackgroundLayer.Count > 0)
+            while(mapbox.Map.BackgroundLayer.Count > 0)
                 mapbox.Map.BackgroundLayer.RemoveAt(0);
             MapToolStripMenuItem selectedOption = (MapToolStripMenuItem)sender;
+            mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(mnuOpenStreetMap.TileSource, mnuOpenStreetMap.Name));
             mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(selectedOption.TileSource, selectedOption.Name));
             selectedOption.Checked = true;
             UpdateLinkLabel(selectedOption.LinkLabelType);
