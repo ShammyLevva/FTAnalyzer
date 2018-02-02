@@ -19,7 +19,7 @@ namespace FTAnalyzer.Mapping
             BingHybrid,
             NLS_1843_1882_OS_6in,
             NLS_1885_1900_OS_1in,
-            NLS_1921_1930_OS_6in,
+            NLS_1921_1930_OS_6in
         }
 
         public virtual HttpTileSource CreateTileSource(TileType type)
