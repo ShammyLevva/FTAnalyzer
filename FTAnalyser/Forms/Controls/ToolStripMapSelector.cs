@@ -13,7 +13,6 @@ namespace FTAnalyzer.Forms.Controls
         private MapBox mapbox;
         private TrackBar opacitySlider;
         private string defaultMap = "mnuOpenStreetMap";
-        private bool defaultMapSelected = true;
         private MapToolStripMenuItem mnuOpenStreetMap;
         private MapToolStripMenuItem mnuOpenHistoricMap;
         private MapToolStripMenuItem mnuBingMapAerial;
@@ -130,7 +129,7 @@ namespace FTAnalyzer.Forms.Controls
             };
             mapbox.Map.BackgroundLayer.Add(mapLayer);
             selectedOption.Checked = true;
-            opacitySlider.Visible = selectedOption.Name.Equals(mnuOpenStreetMap.Name);
+            opacitySlider.Visible = !selectedOption.Name.Equals(mnuOpenStreetMap.Name);
             UpdateLinkLabel(selectedOption.LinkLabelType);
             Application.UserAppDataRegistry.SetValue("Default Map Background", selectedOption.Name);
             mapbox.Refresh();

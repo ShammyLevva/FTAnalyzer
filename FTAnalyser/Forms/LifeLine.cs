@@ -38,7 +38,7 @@ namespace FTAnalyzer.Forms
             InitializeComponent();
             isLoading = true;
             isQuerying = false;
-            mnuMapStyle.Setup(linkLabel1, mapBox1);
+            mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
             foreach (ToolStripItem item in mapZoomToolStrip.Items)
                 item.Enabled = true;

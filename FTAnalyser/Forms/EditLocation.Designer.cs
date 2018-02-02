@@ -47,7 +47,6 @@ namespace FTAnalyzer.Forms
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tbOpacity = new System.Windows.Forms.TrackBar();
             this.mapZoomToolStrip.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbOpacity)).BeginInit();
             this.SuspendLayout();
             // 
@@ -217,6 +216,7 @@ namespace FTAnalyzer.Forms
             this.tbOpacity.TickFrequency = 10;
             this.tbOpacity.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.tbOpacity.Value = 100;
+            this.tbOpacity.Scroll += new System.EventHandler(this.TbOpacity_Scroll);
             // 
             // EditLocation
             // 
@@ -235,8 +235,6 @@ namespace FTAnalyzer.Forms
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EditLocation_FormClosed);
             this.mapZoomToolStrip.ResumeLayout(false);
             this.mapZoomToolStrip.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbOpacity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

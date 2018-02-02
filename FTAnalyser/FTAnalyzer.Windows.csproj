@@ -408,7 +408,6 @@
     <AdditionalFiles Include="Resources\Lib\SharpMap.Layers.BruTile.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AdditionalFiles>
-    <None Include="Resources\Icon1.ico" />
     <Content Include="Resources\Icons\CriticalError.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

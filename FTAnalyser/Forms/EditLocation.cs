@@ -30,7 +30,7 @@ namespace FTAnalyzer.Forms
         {
             InitializeComponent();
             customMapLayers = new List<GdalRasterLayer>();
-            mnuMapStyle.Setup(linkLabel1, mapBox1, tbo);
+            mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             mapZoomToolStrip.Items[10].Visible = false;
@@ -316,6 +316,29 @@ namespace FTAnalyzer.Forms
         private void EditLocation_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Dispose();
+        }
+
+        private void TbOpacity_Scroll(object sender, EventArgs e)
+        {
+            RefreshMap();
+        }
+
+        private void SetOpacity()
+        {
+            float opacity = tbOpacity.Value / 100.0f;
+            TileAsyncLayer layer = (TileAsyncLayer)mapBox1.Map.BackgroundLayer[1];
+            layer.SetOpacity(opacity);
+        }
+
+        private void RefreshMap()
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => RefreshMap()));
+                return;
+            }
+            SetOpacity();
+            mapBox1.Refresh();
         }
     }
 }

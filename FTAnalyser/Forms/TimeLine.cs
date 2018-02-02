@@ -27,10 +27,8 @@ namespace FTAnalyzer.Forms
         {
             InitializeComponent();
             loading = true;
-            mnuMapStyle.Setup(linkLabel1, mapBox1);
-            mnuMapStyle.Click += new EventHandler(SetOpacitySlider);
+            mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
-            //mapZoomToolStrip.Renderer = new CustomToolStripRenderer();
             tbYears.MouseWheel += new MouseEventHandler(TbYears_MouseWheel);
             mnuHideScaleBar.Checked = Properties.MappingSettings.Default.HideScaleBar;
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
@@ -40,11 +38,6 @@ namespace FTAnalyzer.Forms
             backgroundColour = mapZoomToolStrip.Items[0].BackColor;
             mapBox1.Map.MapViewOnChange += new SharpMap.Map.MapViewChangedHandler(MapBox1_MapViewOnChange);
             cbLimitFactDates.Text = "No Limit";
-        }
-
-        private void SetOpacitySlider(object sender, EventArgs e)
-        {
-            tbOpacity.Visible = !mnuMapStyle.DefaultMapSelected;
         }
 
         private void SetupMap()
