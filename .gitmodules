@@ -1,0 +1,3 @@
+[submodule "SharpMap"]
+	path = SharpMap
+	url = https://github.com/ShammyLevva/SharpMap
