@@ -1,7 +1,15 @@
+#### Updated Release Version 6.1.1.0, 2nd Feb 2018
+
+**Updates**  
+Added a background Open Street Map even when using other maps so that where there is no coverage you can still see a map.
+
+***Preparations***  
+Started splitting out code for future MAC version into a shared code project. 
+The aim is to have all the functionality in the shared code and just the user interface in the Windows/Mac specific versions.  
+
 #### New Release Version 6.1.0.0, 29th Jan 2018
 
-**Updates**
-
+**Updates**  
 Added a variety of old Maps (mostly UK/Scotland) so you can view places in your tree as they were at the time your ancestors lived there.  
 Added recognition of the 1939 National Register (UK) references  
 Added 1939 National Register references link to Find My Past  
