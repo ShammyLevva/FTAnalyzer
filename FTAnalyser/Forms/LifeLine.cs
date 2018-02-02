@@ -190,7 +190,7 @@ namespace FTAnalyzer.Forms
                 expand.ExpandBy(mapBox1.Map.PixelSize * 40);
                 mapBox1.Map.ZoomToBox(expand);
             }
-            mapBox1.Refresh();
+            RefreshMap();
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
             this.Cursor = Cursors.Default;
         }
@@ -305,7 +305,7 @@ namespace FTAnalyzer.Forms
                 mapBox1.Map.Layers.Remove(labelLayer);
             else
                 mapBox1.Map.Layers.Add(labelLayer);
-            mapBox1.Refresh();
+            RefreshMap();
         }
 
         private void MnuHideScaleBar_Click(object sender, EventArgs e)
@@ -334,7 +334,7 @@ namespace FTAnalyzer.Forms
         private void UpdateSelection()
         {
             selections.AddSelections(dgFacts.SelectedRows);
-            mapBox1.Refresh();
+            RefreshMap();
         }
 
         private void BtnSelect_Click(object sender, EventArgs e)
@@ -433,6 +433,29 @@ namespace FTAnalyzer.Forms
             this.Left = 50;
             isLoading = false;
             SavePosition();
+        }
+
+        private void TbOpacity_Scroll(object sender, EventArgs e)
+        {
+            RefreshMap();
+        }
+
+        private void SetOpacity()
+        {
+            float opacity = tbOpacity.Value / 100.0f;
+            TileAsyncLayer layer = (TileAsyncLayer)mapBox1.Map.BackgroundLayer[1];
+            layer.SetOpacity(opacity);
+        }
+
+        private void RefreshMap()
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => RefreshMap()));
+                return;
+            }
+            SetOpacity();
+            mapBox1.Refresh();
         }
     }
 }

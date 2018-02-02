@@ -49,6 +49,7 @@ namespace FTAnalyzer.Forms
             this.mnuKeepZoom = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuLimitFactDates = new System.Windows.Forms.ToolStripMenuItem();
             this.cbLimitFactDates = new System.Windows.Forms.ToolStripComboBox();
+            this.resetFormToDefaultPostiionAndSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbYears = new System.Windows.Forms.TrackBar();
             this.labMin = new System.Windows.Forms.Label();
             this.labMax = new System.Windows.Forms.Label();
@@ -69,11 +70,12 @@ namespace FTAnalyzer.Forms
             this.btnForward1 = new System.Windows.Forms.Button();
             this.btnBack10 = new System.Windows.Forms.Button();
             this.btnForward10 = new System.Windows.Forms.Button();
-            this.resetFormToDefaultPostiionAndSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbOpacity = new System.Windows.Forms.TrackBar();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
             this.mapZoomToolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbOpacity)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -194,7 +196,7 @@ namespace FTAnalyzer.Forms
             // 
             this.mnuDisableTimeline.CheckOnClick = true;
             this.mnuDisableTimeline.Name = "mnuDisableTimeline";
-            this.mnuDisableTimeline.Size = new System.Drawing.Size(272, 22);
+            this.mnuDisableTimeline.Size = new System.Drawing.Size(276, 22);
             this.mnuDisableTimeline.Text = "Disable Timeline: Shows All Locations";
             this.mnuDisableTimeline.Click += new System.EventHandler(this.MnuDisableTimeline_Click);
             // 
@@ -202,7 +204,7 @@ namespace FTAnalyzer.Forms
             // 
             this.mnuHideScaleBar.CheckOnClick = true;
             this.mnuHideScaleBar.Name = "mnuHideScaleBar";
-            this.mnuHideScaleBar.Size = new System.Drawing.Size(272, 22);
+            this.mnuHideScaleBar.Size = new System.Drawing.Size(276, 22);
             this.mnuHideScaleBar.Text = "Hide Scale Bar";
             this.mnuHideScaleBar.Click += new System.EventHandler(this.MnuHideScaleBar_Click);
             // 
@@ -210,7 +212,7 @@ namespace FTAnalyzer.Forms
             // 
             this.mnuKeepZoom.CheckOnClick = true;
             this.mnuKeepZoom.Name = "mnuKeepZoom";
-            this.mnuKeepZoom.Size = new System.Drawing.Size(272, 22);
+            this.mnuKeepZoom.Size = new System.Drawing.Size(276, 22);
             this.mnuKeepZoom.Text = "Keep Zoom on changing Year";
             // 
             // mnuLimitFactDates
@@ -218,7 +220,7 @@ namespace FTAnalyzer.Forms
             this.mnuLimitFactDates.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cbLimitFactDates});
             this.mnuLimitFactDates.Name = "mnuLimitFactDates";
-            this.mnuLimitFactDates.Size = new System.Drawing.Size(272, 22);
+            this.mnuLimitFactDates.Size = new System.Drawing.Size(276, 22);
             this.mnuLimitFactDates.Text = "Limit Fact Dates";
             // 
             // cbLimitFactDates
@@ -237,6 +239,13 @@ namespace FTAnalyzer.Forms
             this.cbLimitFactDates.Name = "cbLimitFactDates";
             this.cbLimitFactDates.Size = new System.Drawing.Size(121, 23);
             this.cbLimitFactDates.SelectedIndexChanged += new System.EventHandler(this.CbLimitFactDates_SelectedIndexChanged);
+            // 
+            // resetFormToDefaultPostiionAndSizeToolStripMenuItem
+            // 
+            this.resetFormToDefaultPostiionAndSizeToolStripMenuItem.Name = "resetFormToDefaultPostiionAndSizeToolStripMenuItem";
+            this.resetFormToDefaultPostiionAndSizeToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
+            this.resetFormToDefaultPostiionAndSizeToolStripMenuItem.Text = "Reset form to default position and size";
+            this.resetFormToDefaultPostiionAndSizeToolStripMenuItem.Click += new System.EventHandler(this.ResetFormToDefaultPostiionAndSizeToolStripMenuItem_Click);
             // 
             // tbYears
             // 
@@ -285,6 +294,7 @@ namespace FTAnalyzer.Forms
             // 
             this.mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
             this.mapBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.mapBox1.CustomTool = null;
             this.mapBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mapBox1.FineZoomFactor = 10D;
             this.mapBox1.Location = new System.Drawing.Point(0, 94);
@@ -456,18 +466,27 @@ namespace FTAnalyzer.Forms
             this.btnForward10.UseVisualStyleBackColor = true;
             this.btnForward10.Click += new System.EventHandler(this.BtnForward10_Click);
             // 
-            // resetFormToDefaultPostiionAndSizeToolStripMenuItem
+            // tbOpacity
             // 
-            this.resetFormToDefaultPostiionAndSizeToolStripMenuItem.Name = "resetFormToDefaultPostiionAndSizeToolStripMenuItem";
-            this.resetFormToDefaultPostiionAndSizeToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
-            this.resetFormToDefaultPostiionAndSizeToolStripMenuItem.Text = "Reset form to default position and size";
-            this.resetFormToDefaultPostiionAndSizeToolStripMenuItem.Click += new System.EventHandler(this.ResetFormToDefaultPostiionAndSizeToolStripMenuItem_Click);
+            this.tbOpacity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbOpacity.LargeChange = 20;
+            this.tbOpacity.Location = new System.Drawing.Point(6, 514);
+            this.tbOpacity.Maximum = 100;
+            this.tbOpacity.Name = "tbOpacity";
+            this.tbOpacity.Size = new System.Drawing.Size(250, 45);
+            this.tbOpacity.SmallChange = 5;
+            this.tbOpacity.TabIndex = 18;
+            this.tbOpacity.TickFrequency = 10;
+            this.tbOpacity.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.tbOpacity.Value = 100;
+            this.tbOpacity.Scroll += new System.EventHandler(this.TbOpacity_Scroll);
             // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 584);
+            this.Controls.Add(this.tbOpacity);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.btnForward10);
             this.Controls.Add(this.btnBack10);
@@ -496,6 +515,7 @@ namespace FTAnalyzer.Forms
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).EndInit();
             this.mapZoomToolStrip.ResumeLayout(false);
             this.mapZoomToolStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbOpacity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -542,5 +562,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.LinkLabel linkLabel1;
         private ToolStripMapSelector mnuMapStyle = new ToolStripMapSelector();
         private System.Windows.Forms.ToolStripMenuItem resetFormToDefaultPostiionAndSizeToolStripMenuItem;
+        private System.Windows.Forms.TrackBar tbOpacity;
     }
 }

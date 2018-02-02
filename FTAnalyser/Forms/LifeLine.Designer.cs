@@ -34,9 +34,9 @@ namespace FTAnalyzer.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LifeLine));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LifeLine));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainerFacts = new System.Windows.Forms.SplitContainer();
             this.splitContainerMap = new System.Windows.Forms.SplitContainer();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
@@ -73,8 +73,9 @@ namespace FTAnalyzer.Forms
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hideLabelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHideScaleBar = new System.Windows.Forms.ToolStripMenuItem();
-            this.mapTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.resetFormToDefaultSizeAndPositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mapTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.tbOpacity = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFacts)).BeginInit();
             this.splitContainerFacts.Panel1.SuspendLayout();
             this.splitContainerFacts.Panel2.SuspendLayout();
@@ -89,6 +90,7 @@ namespace FTAnalyzer.Forms
             ((System.ComponentModel.ISupportInitialize)(this.dgFacts)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbOpacity)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainerFacts
@@ -125,6 +127,7 @@ namespace FTAnalyzer.Forms
             // 
             // splitContainerMap.Panel2
             // 
+            this.splitContainerMap.Panel2.Controls.Add(this.tbOpacity);
             this.splitContainerMap.Panel2.Controls.Add(this.mapBox1);
             this.splitContainerMap.Panel2.Controls.Add(this.mapZoomToolStrip);
             this.splitContainerMap.Panel2.Controls.Add(this.linkLabel1);
@@ -137,8 +140,8 @@ namespace FTAnalyzer.Forms
             // 
             this.dgIndividuals.AllowUserToAddRows = false;
             this.dgIndividuals.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgIndividuals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgIndividuals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgIndividuals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IndividualID,
@@ -235,6 +238,7 @@ namespace FTAnalyzer.Forms
             // 
             this.mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.None;
             this.mapBox1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.mapBox1.CustomTool = null;
             this.mapBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mapBox1.FineZoomFactor = 10D;
             this.mapBox1.Location = new System.Drawing.Point(0, 25);
@@ -308,14 +312,14 @@ namespace FTAnalyzer.Forms
             this.FoundResultType,
             this.Comment,
             this.SourceList});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgFacts.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgFacts.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgFacts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgFacts.Location = new System.Drawing.Point(0, 0);
             this.dgFacts.Name = "dgFacts";
@@ -495,7 +499,7 @@ namespace FTAnalyzer.Forms
             // 
             this.hideLabelsToolStripMenuItem.CheckOnClick = true;
             this.hideLabelsToolStripMenuItem.Name = "hideLabelsToolStripMenuItem";
-            this.hideLabelsToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.hideLabelsToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.hideLabelsToolStripMenuItem.Text = "Hide Labels";
             this.hideLabelsToolStripMenuItem.Click += new System.EventHandler(this.HideLabelsToolStripMenuItem_Click);
             // 
@@ -503,15 +507,9 @@ namespace FTAnalyzer.Forms
             // 
             this.mnuHideScaleBar.CheckOnClick = true;
             this.mnuHideScaleBar.Name = "mnuHideScaleBar";
-            this.mnuHideScaleBar.Size = new System.Drawing.Size(149, 22);
+            this.mnuHideScaleBar.Size = new System.Drawing.Size(276, 22);
             this.mnuHideScaleBar.Text = "Hide Scale Bar";
             this.mnuHideScaleBar.Click += new System.EventHandler(this.MnuHideScaleBar_Click);
-            // 
-            // mapTooltip
-            // 
-            this.mapTooltip.AutoPopDelay = 5000;
-            this.mapTooltip.InitialDelay = 500;
-            this.mapTooltip.ReshowDelay = 100;
             // 
             // resetFormToDefaultSizeAndPositionToolStripMenuItem
             // 
@@ -519,6 +517,27 @@ namespace FTAnalyzer.Forms
             this.resetFormToDefaultSizeAndPositionToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.resetFormToDefaultSizeAndPositionToolStripMenuItem.Text = "Reset form to default size and position";
             this.resetFormToDefaultSizeAndPositionToolStripMenuItem.Click += new System.EventHandler(this.ResetFormToDefaultSizeAndPositionToolStripMenuItem_Click);
+            // 
+            // mapTooltip
+            // 
+            this.mapTooltip.AutoPopDelay = 5000;
+            this.mapTooltip.InitialDelay = 500;
+            this.mapTooltip.ReshowDelay = 100;
+            // 
+            // tbOpacity
+            // 
+            this.tbOpacity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbOpacity.LargeChange = 20;
+            this.tbOpacity.Location = new System.Drawing.Point(3, 402);
+            this.tbOpacity.Maximum = 100;
+            this.tbOpacity.Name = "tbOpacity";
+            this.tbOpacity.Size = new System.Drawing.Size(250, 45);
+            this.tbOpacity.SmallChange = 5;
+            this.tbOpacity.TabIndex = 18;
+            this.tbOpacity.TickFrequency = 10;
+            this.tbOpacity.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.tbOpacity.Value = 100;
+            this.tbOpacity.Scroll += new System.EventHandler(this.TbOpacity_Scroll);
             // 
             // LifeLine
             // 
@@ -554,6 +573,7 @@ namespace FTAnalyzer.Forms
             this.statusStrip.PerformLayout();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbOpacity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -600,5 +620,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceList;
         private System.Windows.Forms.ToolStripMenuItem resetFormToDefaultSizeAndPositionToolStripMenuItem;
+        private System.Windows.Forms.TrackBar tbOpacity;
     }
 }

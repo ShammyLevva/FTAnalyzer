@@ -7,6 +7,7 @@ using FTAnalyzer.Mapping;
 using GeoAPI.Geometries;
 using SharpMap.Data;
 using System.Web;
+using SharpMap.Layers;
 
 namespace FTAnalyzer.Forms
 {
@@ -218,7 +219,7 @@ namespace FTAnalyzer.Forms
             this.Height = Height;
             this.Top = Top;
             this.Left = Left;
-            mapBox1.Refresh();
+            RefreshMap();
             loading = false;
         }
 
@@ -252,7 +253,7 @@ namespace FTAnalyzer.Forms
         public void RefreshClusters()
         {
             clusters.Refresh();
-            mapBox1.Refresh();
+            RefreshMap();
         }
 
         private void MapBox1_MapCenterChanged(Coordinate center)
@@ -462,6 +463,29 @@ namespace FTAnalyzer.Forms
             this.Left = 50;
             loading = false;
             SavePosition();
+        }
+
+        private void TbOpacity_Scroll(object sender, EventArgs e)
+        {
+            RefreshMap();
+        }
+
+        private void SetOpacity()
+        {
+            float opacity = tbOpacity.Value / 100.0f;
+            TileAsyncLayer layer = (TileAsyncLayer)mapBox1.Map.BackgroundLayer[1];
+            layer.SetOpacity(opacity);
+        }
+
+        private void RefreshMap()
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => RefreshMap()));
+                return;
+            }
+            SetOpacity();
+            mapBox1.Refresh();
         }
     }
 }

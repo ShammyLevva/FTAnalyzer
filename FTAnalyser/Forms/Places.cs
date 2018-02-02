@@ -343,10 +343,5 @@ namespace FTAnalyzer.Forms
             TileAsyncLayer layer = (TileAsyncLayer)mapBox1.Map.BackgroundLayer[1];
             layer.SetOpacity(opacity);
         }
-
-        private void mapBox1_MapRefreshed(object sender, EventArgs e)
-        {
-
-        }
     }
 }
