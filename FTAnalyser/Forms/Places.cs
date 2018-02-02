@@ -24,8 +24,8 @@ namespace FTAnalyzer.Forms
         {
             InitializeComponent();
             isloading = true;
-            // OLD Control - tvPlaces.Clear();
             mnuMapStyle.Setup(linkLabel1, mapBox1);
+            mnuMapStyle.Click += new EventHandler(SetOpacitySlider);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
             foreach (ToolStripItem item in mapZoomToolStrip.Items)
                 item.Enabled = true;
@@ -43,6 +43,11 @@ namespace FTAnalyzer.Forms
             if (splitheight != -1)
                 splitContainerFacts.SplitterDistance = this.Height - splitheight;
             splitContainerMap.SplitterDistance = (int)Application.UserAppDataRegistry.GetValue("Places Map Splitter Distance", splitContainerMap.SplitterDistance);
+        }
+
+        private void SetOpacitySlider(object sender, EventArgs e)
+        {
+            tbOpacity.Visible = !mnuMapStyle.DefaultMapSelected;
         }
 
         private void DatabaseHelper_GeoLocationUpdated(object location, EventArgs e)

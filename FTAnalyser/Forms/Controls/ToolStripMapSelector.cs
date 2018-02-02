@@ -3,8 +3,6 @@ using System.Windows.Forms;
 using SharpMap.Layers;
 using SharpMap.Forms;
 using System.Drawing;
-using System.IO;
-using BruTile.Predefined;
 using FTAnalyzer.Mapping;
 
 namespace FTAnalyzer.Forms.Controls
@@ -13,6 +11,9 @@ namespace FTAnalyzer.Forms.Controls
     {
         private LinkLabel copyrightLabel;
         private MapBox mapbox;
+        private TrackBar opacitySlider;
+        private string defaultMap = "mnuOpenStreetMap";
+        private bool defaultMapSelected = true;
         private MapToolStripMenuItem mnuOpenStreetMap;
         private MapToolStripMenuItem mnuOpenHistoricMap;
         private MapToolStripMenuItem mnuBingMapAerial;
@@ -26,17 +27,18 @@ namespace FTAnalyzer.Forms.Controls
             : base("Map style")
         { }
 
-        public void Setup(LinkLabel label, MapBox mapbox)
+        public void Setup(LinkLabel label, MapBox mapbox, TrackBar opacitySlider)
         {
             this.copyrightLabel = label;
             this.mapbox = mapbox;
+            this.opacitySlider = opacitySlider;
             SetupDropdown();
             GetCurrentMapPreference();
         }
 
         public void GetCurrentMapPreference()
         {
-            string mapPreference = Application.UserAppDataRegistry.GetValue("Default Map Background", "mnuOpenStreetMap").ToString();
+            string mapPreference = Application.UserAppDataRegistry.GetValue("Default Map Background", defaultMap).ToString();
             foreach (ToolStripMenuItem menu in this.DropDownItems)
             {
                 if (mapPreference.Equals(menu.Name))
@@ -128,6 +130,7 @@ namespace FTAnalyzer.Forms.Controls
             };
             mapbox.Map.BackgroundLayer.Add(mapLayer);
             selectedOption.Checked = true;
+            opacitySlider.Visible = selectedOption.Name.Equals(mnuOpenStreetMap.Name);
             UpdateLinkLabel(selectedOption.LinkLabelType);
             Application.UserAppDataRegistry.SetValue("Default Map Background", selectedOption.Name);
             mapbox.Refresh();

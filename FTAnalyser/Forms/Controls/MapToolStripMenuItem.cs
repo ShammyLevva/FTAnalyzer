@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Drawing;
 using BruTile.Web;
 using static FTAnalyzer.Forms.Controls.ToolStripMapSelector;
 

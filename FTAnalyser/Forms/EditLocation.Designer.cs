@@ -45,8 +45,10 @@ namespace FTAnalyzer.Forms
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tbOpacity = new System.Windows.Forms.TrackBar();
             this.mapZoomToolStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbOpacity)).BeginInit();
             this.SuspendLayout();
             // 
             // mapBox1
@@ -54,6 +56,7 @@ namespace FTAnalyzer.Forms
             this.mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
             this.mapBox1.AllowDrop = true;
             this.mapBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.mapBox1.CustomTool = null;
             this.mapBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mapBox1.FineZoomFactor = 10D;
             this.mapBox1.Location = new System.Drawing.Point(0, 25);
@@ -188,8 +191,6 @@ namespace FTAnalyzer.Forms
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 560);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(859, 22);
@@ -203,11 +204,26 @@ namespace FTAnalyzer.Forms
             this.toolStripStatusLabel1.Text = "Left click to select pointer, move to the correct place (using zoom/pan) then rig" +
     "ht click to place pointer in new location";
             // 
+            // tbOpacity
+            // 
+            this.tbOpacity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbOpacity.LargeChange = 20;
+            this.tbOpacity.Location = new System.Drawing.Point(12, 512);
+            this.tbOpacity.Maximum = 100;
+            this.tbOpacity.Name = "tbOpacity";
+            this.tbOpacity.Size = new System.Drawing.Size(250, 45);
+            this.tbOpacity.SmallChange = 5;
+            this.tbOpacity.TabIndex = 19;
+            this.tbOpacity.TickFrequency = 10;
+            this.tbOpacity.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.tbOpacity.Value = 100;
+            // 
             // EditLocation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(859, 582);
+            this.Controls.Add(this.tbOpacity);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.mapBox1);
@@ -221,6 +237,7 @@ namespace FTAnalyzer.Forms
             this.mapZoomToolStrip.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbOpacity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -242,5 +259,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnCustomMap;
         private System.Windows.Forms.ToolStripButton btnSaveExit;
+        private System.Windows.Forms.TrackBar tbOpacity;
     }
 }

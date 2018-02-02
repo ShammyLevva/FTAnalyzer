@@ -28,6 +28,7 @@ namespace FTAnalyzer.Forms
             InitializeComponent();
             loading = true;
             mnuMapStyle.Setup(linkLabel1, mapBox1);
+            mnuMapStyle.Click += new EventHandler(SetOpacitySlider);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
             //mapZoomToolStrip.Renderer = new CustomToolStripRenderer();
             tbYears.MouseWheel += new MouseEventHandler(TbYears_MouseWheel);
@@ -41,6 +42,10 @@ namespace FTAnalyzer.Forms
             cbLimitFactDates.Text = "No Limit";
         }
 
+        private void SetOpacitySlider(object sender, EventArgs e)
+        {
+            tbOpacity.Visible = !mnuMapStyle.DefaultMapSelected;
+        }
 
         private void SetupMap()
         {
@@ -51,6 +56,7 @@ namespace FTAnalyzer.Forms
             mapBox1.QueryGrowFactor = 30;
             mapBox1.Map.ZoomToExtents();
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
+            SetOpacity();
             mh.SetScaleBar(mapBox1);
         }
 

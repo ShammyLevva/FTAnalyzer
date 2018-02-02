@@ -30,7 +30,7 @@ namespace FTAnalyzer.Forms
         {
             InitializeComponent();
             customMapLayers = new List<GdalRasterLayer>();
-            mnuMapStyle.Setup(linkLabel1, mapBox1);
+            mnuMapStyle.Setup(linkLabel1, mapBox1, tbo);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             mapZoomToolStrip.Items[10].Visible = false;
