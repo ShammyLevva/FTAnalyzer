@@ -7,7 +7,6 @@ using FTAnalyzer.Utilities;
 using GeoAPI.Geometries;
 using SharpMap.Data;
 using System.Web;
-using BruTile.Wms;
 using SharpMap.Layers;
 
 namespace FTAnalyzer.Forms
