@@ -21,7 +21,7 @@ namespace FTAnalyzer.Forms.Controls
         private MapToolStripMenuItem mnuNLS1843_1882;
         private MapToolStripMenuItem mnuNLS1885_1900;
         private MapToolStripMenuItem mnuNLS1921_1930;
-        
+
         public ToolStripMapSelector()
             : base("Map style")
         { }
@@ -78,7 +78,7 @@ namespace FTAnalyzer.Forms.Controls
             mnuBingMapHybrid,
             mnuNLS1843_1882,
             mnuNLS1885_1900,
-            mnuNLS1921_1930,
+            mnuNLS1921_1930
             });
             ImageTransparentColor = Color.Magenta;
             Name = "mnuMapStyle";
@@ -122,7 +122,11 @@ namespace FTAnalyzer.Forms.Controls
                 mapbox.Map.BackgroundLayer.RemoveAt(0);
             MapToolStripMenuItem selectedOption = (MapToolStripMenuItem)sender;
             mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(mnuOpenStreetMap.TileSource, mnuOpenStreetMap.Name));
-            mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(selectedOption.TileSource, selectedOption.Name));
+            TileAsyncLayer mapLayer = new TileAsyncLayer(selectedOption.TileSource, selectedOption.Name)
+            {
+                OnlyRedrawWhenComplete = true,
+            };
+            mapbox.Map.BackgroundLayer.Add(mapLayer);
             selectedOption.Checked = true;
             UpdateLinkLabel(selectedOption.LinkLabelType);
             Application.UserAppDataRegistry.SetValue("Default Map Background", selectedOption.Name);

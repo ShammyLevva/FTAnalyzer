@@ -40,6 +40,7 @@ namespace FTAnalyzer.Forms
             this.splitContainerFacts = new System.Windows.Forms.SplitContainer();
             this.splitContainerMap = new System.Windows.Forms.SplitContainer();
             this.tvPlaces = new FTAnalyzer.Utilities.MultiSelectTreeview();
+            this.tbOpacity = new System.Windows.Forms.TrackBar();
             this.mapBox1 = new SharpMap.Forms.MapBox();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
             this.btnSelect = new System.Windows.Forms.ToolStripButton();
@@ -76,6 +77,7 @@ namespace FTAnalyzer.Forms
             this.splitContainerMap.Panel1.SuspendLayout();
             this.splitContainerMap.Panel2.SuspendLayout();
             this.splitContainerMap.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbOpacity)).BeginInit();
             this.mapZoomToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFacts)).BeginInit();
             this.statusStrip.SuspendLayout();
@@ -116,6 +118,7 @@ namespace FTAnalyzer.Forms
             // 
             // splitContainerMap.Panel2
             // 
+            this.splitContainerMap.Panel2.Controls.Add(this.tbOpacity);
             this.splitContainerMap.Panel2.Controls.Add(this.mapBox1);
             this.splitContainerMap.Panel2.Controls.Add(this.mapZoomToolStrip);
             this.splitContainerMap.Panel2.Controls.Add(this.linkLabel1);
@@ -131,19 +134,32 @@ namespace FTAnalyzer.Forms
             this.tvPlaces.HideSelection = false;
             this.tvPlaces.Location = new System.Drawing.Point(0, 0);
             this.tvPlaces.Name = "tvPlaces";
-            // this.tvPlaces.SelectedNodes = (ArrayList)resources.GetObject("tvPlaces.SelectedNodes");
+            this.tvPlaces.SelectedNodes = ((System.Collections.Generic.List<System.Windows.Forms.TreeNode>)(resources.GetObject("tvPlaces.SelectedNodes")));
             this.tvPlaces.Size = new System.Drawing.Size(200, 435);
             this.tvPlaces.TabIndex = 0;
-            //this.tvPlaces.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvPlaces_BeforeCollapse);
-            //this.tvPlaces.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvPlaces_BeforeExpand);
             this.tvPlaces.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvPlaces_AfterSelect);
             this.tvPlaces.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TvPlaces_NodeMouseDoubleClick);
-            //this.tvPlaces.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvPlaces_MouseDown);
+            // 
+            // tbOpacity
+            // 
+            this.tbOpacity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbOpacity.LargeChange = 20;
+            this.tbOpacity.Location = new System.Drawing.Point(0, 387);
+            this.tbOpacity.Maximum = 100;
+            this.tbOpacity.Name = "tbOpacity";
+            this.tbOpacity.Size = new System.Drawing.Size(250, 45);
+            this.tbOpacity.SmallChange = 5;
+            this.tbOpacity.TabIndex = 17;
+            this.tbOpacity.TickFrequency = 10;
+            this.tbOpacity.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.tbOpacity.Value = 100;
+            this.tbOpacity.Scroll += new System.EventHandler(this.TbOpacity_Scroll);
             // 
             // mapBox1
             // 
             this.mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.None;
             this.mapBox1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.mapBox1.CustomTool = null;
             this.mapBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mapBox1.FineZoomFactor = 10D;
             this.mapBox1.Location = new System.Drawing.Point(0, 25);
@@ -472,6 +488,7 @@ namespace FTAnalyzer.Forms
             this.splitContainerMap.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMap)).EndInit();
             this.splitContainerMap.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tbOpacity)).EndInit();
             this.mapZoomToolStrip.ResumeLayout(false);
             this.mapZoomToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFacts)).EndInit();
@@ -518,5 +535,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripButton btnSelect;
         private MultiSelectTreeview tvPlaces;
         private System.Windows.Forms.ToolStripMenuItem resetFormDefaultSizeAndPositionToolStripMenuItem;
+        private TrackBar tbOpacity;
     }
 }

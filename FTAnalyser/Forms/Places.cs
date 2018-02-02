@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
 using GeoAPI.Geometries;
 using SharpMap.Data;
-using SharpMap.Rendering.Decoration.ScaleBar;
 using System.Web;
+using BruTile.Wms;
+using SharpMap.Layers;
 
 namespace FTAnalyzer.Forms
 {
@@ -213,8 +213,19 @@ namespace FTAnalyzer.Forms
             }
             this.Cursor = Cursors.WaitCursor;
             clusters.Refresh();
-            mapBox1.Refresh();
+            RefreshMap();
             this.Cursor = Cursors.Default;
+        }
+
+        private void RefreshMap()
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => RefreshMap()));
+                return;
+            }
+            SetOpacity();
+            mapBox1.Refresh();
         }
 
         private void MapBox1_MapCenterChanged(Coordinate center)
@@ -319,6 +330,23 @@ namespace FTAnalyzer.Forms
                 Application.UserAppDataRegistry.SetValue("Places position - top", this.Top);
                 Application.UserAppDataRegistry.SetValue("Places position - left", this.Left);
             }
+        }
+
+        private void TbOpacity_Scroll(object sender, EventArgs e)
+        {
+            RefreshMap();
+        }
+
+        private void SetOpacity()
+        {
+            float opacity = tbOpacity.Value / 100.0f;
+            TileAsyncLayer layer = (TileAsyncLayer)mapBox1.Map.BackgroundLayer[1];
+            layer.SetOpacity(opacity);
+        }
+
+        private void mapBox1_MapRefreshed(object sender, EventArgs e)
+        {
+
         }
     }
 }
