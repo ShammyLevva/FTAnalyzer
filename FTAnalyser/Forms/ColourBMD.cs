@@ -11,6 +11,7 @@ using FTAnalyzer.Utilities;
 using System.Web;
 using System.Diagnostics;
 using System.IO;
+using static FTAnalyzer.ColourValues;
 
 namespace FTAnalyzer.Forms
 {
@@ -34,46 +35,49 @@ namespace FTAnalyzer.Forms
             ExtensionMethods.DoubleBuffered(dgBMDReportSheet, true);
             
             boldFont = new Font(dgBMDReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
-            styles = new Dictionary<ColourValues.BMDColour, DataGridViewCellStyle>();
+            styles = new Dictionary<BMDColour, DataGridViewCellStyle>();
             DataGridViewCellStyle notRequired = new DataGridViewCellStyle();
             notRequired.BackColor = notRequired.ForeColor = Color.DarkGray;
-            styles.Add(ColourValues.BMDColour.EMPTY, notRequired);
+            styles.Add(BMDColour.EMPTY, notRequired);
             DataGridViewCellStyle missingData = new DataGridViewCellStyle();
             missingData.BackColor = missingData.ForeColor = Color.Red;
-            styles.Add(ColourValues.BMDColour.UNKNOWN_DATE, missingData);
+            styles.Add(BMDColour.UNKNOWN_DATE, missingData);
+            DataGridViewCellStyle openEndedDateRange = new DataGridViewCellStyle();
+            openEndedDateRange.BackColor = openEndedDateRange.ForeColor = Color.OrangeRed;
+            styles.Add(BMDColour.OPEN_ENDED_DATE, openEndedDateRange);
             DataGridViewCellStyle verywideDateRange = new DataGridViewCellStyle();
-            verywideDateRange.BackColor = verywideDateRange.ForeColor = Color.OrangeRed;
-            styles.Add(ColourValues.BMDColour.VERY_WIDE_DATE, verywideDateRange);
+            verywideDateRange.BackColor = verywideDateRange.ForeColor = Color.Tomato;
+            styles.Add(BMDColour.VERY_WIDE_DATE, verywideDateRange);
             DataGridViewCellStyle wideDateRange = new DataGridViewCellStyle();
             wideDateRange.BackColor = wideDateRange.ForeColor = Color.Orange;
-            styles.Add(ColourValues.BMDColour.WIDE_DATE, wideDateRange);
+            styles.Add(BMDColour.WIDE_DATE, wideDateRange);
             DataGridViewCellStyle narrowDateRange = new DataGridViewCellStyle();
             narrowDateRange.BackColor = narrowDateRange.ForeColor = Color.Yellow;
-            styles.Add(ColourValues.BMDColour.NARROW_DATE, narrowDateRange);
+            styles.Add(BMDColour.NARROW_DATE, narrowDateRange);
             DataGridViewCellStyle justYearDateRange = new DataGridViewCellStyle();
             justYearDateRange.BackColor = justYearDateRange.ForeColor = Color.YellowGreen;
-            styles.Add(ColourValues.BMDColour.JUST_YEAR_DATE, justYearDateRange);
+            styles.Add(BMDColour.JUST_YEAR_DATE, justYearDateRange);
             DataGridViewCellStyle approxDate = new DataGridViewCellStyle();
             approxDate.BackColor = approxDate.ForeColor = Color.PaleGreen;
-            styles.Add(ColourValues.BMDColour.APPROX_DATE, approxDate);
+            styles.Add(BMDColour.APPROX_DATE, approxDate);
             DataGridViewCellStyle exactDate = new DataGridViewCellStyle();
             exactDate.BackColor = exactDate.ForeColor = Color.LawnGreen;
-            styles.Add(ColourValues.BMDColour.EXACT_DATE, exactDate);
+            styles.Add(BMDColour.EXACT_DATE, exactDate);
             DataGridViewCellStyle noSpouse = new DataGridViewCellStyle();
             noSpouse.BackColor = noSpouse.ForeColor = Color.LightPink;
-            styles.Add(ColourValues.BMDColour.NO_SPOUSE, noSpouse);
+            styles.Add(BMDColour.NO_SPOUSE, noSpouse);
             DataGridViewCellStyle hasChildren = new DataGridViewCellStyle();
             hasChildren.BackColor = hasChildren.ForeColor = Color.LightCoral;
-            styles.Add(ColourValues.BMDColour.NO_PARTNER, hasChildren);
+            styles.Add(BMDColour.NO_PARTNER, hasChildren);
             DataGridViewCellStyle noMarriage = new DataGridViewCellStyle();
             noMarriage.BackColor = noMarriage.ForeColor = Color.Firebrick;
-            styles.Add(ColourValues.BMDColour.NO_MARRIAGE, noMarriage);
+            styles.Add(BMDColour.NO_MARRIAGE, noMarriage);
             DataGridViewCellStyle isLiving = new DataGridViewCellStyle();
             isLiving.BackColor = isLiving.ForeColor = Color.WhiteSmoke;
-            styles.Add(ColourValues.BMDColour.ISLIVING, isLiving);
+            styles.Add(BMDColour.ISLIVING, isLiving);
             DataGridViewCellStyle over90 = new DataGridViewCellStyle();
             over90.BackColor = over90.ForeColor = Color.DarkGray;
-            styles.Add(ColourValues.BMDColour.OVER90, over90);
+            styles.Add(BMDColour.OVER90, over90);
 
             birthColumnIndex = dgBMDReportSheet.Columns["Birth"].Index;
             burialColumnIndex = dgBMDReportSheet.Columns["CremBuri"].Index;
@@ -155,7 +159,10 @@ namespace FTAnalyzer.Forms
                         case ColourValues.BMDColour.UNKNOWN_DATE: // Red
                             cell.ToolTipText = "Unknown date.";
                             break;
-                        case ColourValues.BMDColour.VERY_WIDE_DATE: // Orange Red
+                        case ColourValues.BMDColour.OPEN_ENDED_DATE: // Orange Red
+                            cell.ToolTipText = "Date is open ended, BEFore or AFTer a date.";
+                            break;
+                        case ColourValues.BMDColour.VERY_WIDE_DATE: // Tomato Red
                             cell.ToolTipText = "Date only accurate to more than ten year date range.";
                             break;
                         case ColourValues.BMDColour.WIDE_DATE: // Orange
@@ -258,17 +265,17 @@ namespace FTAnalyzer.Forms
             dgBMDReportSheet.Focus();
         }
 
-        private List<IDisplayColourBMD> BuildFilter(ColourValues.BMDColour toFind, bool all)
+        private List<IDisplayColourBMD> BuildFilter(BMDColour toFind, bool all)
         {
             List<IDisplayColourBMD> result = new List<IDisplayColourBMD>();
             foreach (IDisplayColourBMD row in this.reportList)
             {
                 if (all)
                 {
-                    if ((row.Birth == toFind || row.Birth == 0) && (row.BaptChri == toFind || row.BaptChri == 0) &&
-                        (row.Marriage1 == toFind || row.Marriage1 == 0) && (row.Marriage2 == toFind || row.Marriage2 == 0) &&
-                        (row.Marriage3 == toFind || row.Marriage3 == 0) && (row.Death == toFind || row.Death == 0) &&
-                        (row.CremBuri == toFind || row.CremBuri == 0))
+                    if ((row.Birth == toFind || row.Birth == BMDColour.EMPTY) && (row.BaptChri == toFind || row.BaptChri == BMDColour.EMPTY) &&
+                        (row.Marriage1 == toFind || row.Marriage1 == BMDColour.EMPTY) && (row.Marriage2 == toFind || row.Marriage2 == BMDColour.EMPTY) &&
+                        (row.Marriage3 == toFind || row.Marriage3 == BMDColour.EMPTY) && (row.Death == toFind || row.Death == BMDColour.EMPTY) &&
+                        (row.CremBuri == toFind || row.CremBuri == BMDColour.EMPTY))
                         result.Add(row);
                 }
                 else
@@ -296,49 +303,55 @@ namespace FTAnalyzer.Forms
                 case 2: // All Found (All Green)
                     dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.EXACT_DATE, true));
                     break;
-                case 3: // All Wide date ranges (Orange Red)
+                case 3: // All Open Ended ranges (Orange Red)
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.OPEN_ENDED_DATE, true));
+                    break;
+                case 4: // All Wide date ranges (Tomato)
                     dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.VERY_WIDE_DATE, true));
                     break;
-                case 4: // All Wide date ranges (Orange)
+                case 5: // All Wide date ranges (Orange)
                     dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.WIDE_DATE, true));
                     break;
-                case 5: // All Narrow date ranges (Yellow)
+                case 6: // All Narrow date ranges (Yellow)
                     dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.NARROW_DATE, true));
                     break;
-                case 6: // All Just year date ranges (Yellow)
+                case 7: // All Just year date ranges (Yellow)
                     dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.JUST_YEAR_DATE, true));
                     break;
-                case 7: // All Approx date ranges (Light Green)
+                case 8: // All Approx date ranges (Light Green)
                     dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.APPROX_DATE, true));
                     break;
-                case 8: // Some Missing (Some Red)
+                case 9: // Some Missing (Some Red)
                     dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.UNKNOWN_DATE, false));
                     break;
-                case 9: // Some found (Some Green)
+                case 10: // Some found (Some Green)
                     dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.EXACT_DATE, false));
                     break;
-                case 10: // Some Very Wide date ranges (Orange Red)
+                case 11: // Some Open Ended date ranges (Orange Red)
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.OPEN_ENDED_DATE, false));
+                    break;
+                case 12: // Some Very Wide date ranges (Tomato)
                     dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.VERY_WIDE_DATE, false));
                     break;
-                case 11: // Some Wide date ranges (Orange)
+                case 13: // Some Wide date ranges (Orange)
                     dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.WIDE_DATE, false));
                     break;
-                case 12: // Some Narrow date ranges (Yellow)
+                case 14: // Some Narrow date ranges (Yellow)
                     dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.NARROW_DATE, false));
                     break;
-                case 13: // Some Approx date ranges (Light Green)
+                case 15: // Some Approx date ranges (Light Green)
                     dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.JUST_YEAR_DATE, false));
                     break;
-                case 14: // Some Approx date ranges (Light Green)
+                case 16: // Some Approx date ranges (Light Green)
                     dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.APPROX_DATE, false));
                     break;
-                case 15: // Of Marrying age (Peach)
+                case 17: // Of Marrying age (Peach)
                     dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.NO_SPOUSE, false));
                     break;
-                case 16: // No Partner shared fact/children (Light Blue)
+                case 18: // No Partner shared fact/children (Light Blue)
                     dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.NO_PARTNER, false));
                     break;
-                case 17: // Partner but no marriage (Dark Blue)
+                case 19: // Partner but no marriage (Dark Blue)
                     dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.NO_MARRIAGE, false));
                     break;
             }

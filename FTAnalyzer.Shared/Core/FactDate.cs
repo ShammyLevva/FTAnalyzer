@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using FTAnalyzer.Utilities;
+using static FTAnalyzer.ColourValues;
 
 namespace FTAnalyzer
 {
@@ -782,24 +783,27 @@ namespace FTAnalyzer
             return difference;
         }
 
-        public ColourValues.BMDColour DateStatus(bool ignoreUnknown)
+        public BMDColour DateStatus(bool ignoreUnknown)
         {
-            // 0 = grey, 1 = red, 2 = dark orange, 3 = light orange, 4 = yellow, 5 = light green, 6 = dark green
+            // EMPTY = dark grey, UNKNOWN_DATE = red, OPEN_ENDED_DATE = ??, VERY_WIDE_DATE = orange_red, WIDE_DATE = orange, 
+            // NARROW_DATE = yellow, JUST_YEAR_DATE = yellow_green, APPROX_DATE = pale green, EXACT_DATE = lawn_green
             if (DateType == FactDateType.UNK)
-                return ignoreUnknown ? ColourValues.BMDColour.EMPTY : ColourValues.BMDColour.UNKNOWN_DATE;
+                return ignoreUnknown ? BMDColour.EMPTY : BMDColour.UNKNOWN_DATE;
+            if (DateType == FactDateType.BEF || DateType == FactDateType.AFT)
+                return BMDColour.OPEN_ENDED_DATE;
             TimeSpan ts = EndDate - StartDate;
             if (ts.Days > 365.25 * 10)
-                return ColourValues.BMDColour.VERY_WIDE_DATE; // more than 10 years
+                return BMDColour.VERY_WIDE_DATE; // more than 10 years
             if (ts.Days > 365.25 * 2)
-                return ColourValues.BMDColour.WIDE_DATE; // over 2 years less than 10 years
+                return BMDColour.WIDE_DATE; // over 2 years less than 10 years
             if (ts.Days > 365.25)
-                return ColourValues.BMDColour.NARROW_DATE; // over 1 year less than 2 years
+                return BMDColour.NARROW_DATE; // over 1 year less than 2 years
             else if (ts.Days > 125)
-                return ColourValues.BMDColour.JUST_YEAR_DATE; // more than 4 months less than 1 year
+                return BMDColour.JUST_YEAR_DATE; // more than 4 months less than 1 year
             else if (ts.Days > 0)
-                return ColourValues.BMDColour.APPROX_DATE; // less than 4 months not exact
+                return BMDColour.APPROX_DATE; // less than 4 months not exact
             else
-                return ColourValues.BMDColour.EXACT_DATE; // exact date
+                return BMDColour.EXACT_DATE; // exact date
         }
 
         #endregion
