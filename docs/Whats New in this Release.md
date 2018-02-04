@@ -1,3 +1,12 @@
+#### Updated Release Version 6.1.2.0, 4th Feb 2018  
+
+**Updates**  
+Added an open ended date range category for colour BMD reports
+Refactored Colour Census reports to use colour enumeration rather than integers
+
+**Bugfixes**  
+Fixed issue where transparency slider was still showing when using same OSM base map
+
 #### Updated Release Version 6.1.1.0, 2nd Feb 2018
 
 **Updates**  
