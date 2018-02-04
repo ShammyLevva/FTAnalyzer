@@ -10,6 +10,7 @@ using Printing.DataGridViewPrint.Tools;
 using FTAnalyzer.Utilities;
 using System.Web;
 using System.Diagnostics;
+using static FTAnalyzer.ColourValues;
 
 namespace FTAnalyzer.Forms
 {
@@ -252,32 +253,38 @@ namespace FTAnalyzer.Forms
             dgReportSheet.Focus();
         }
 
-        private List<IDisplayColourCensus> BuildFilter(int toFind, bool all)
+        private List<IDisplayColourCensus> BuildFilter(CensusColour toFind, bool all)
         {
             List<IDisplayColourCensus> result = new List<IDisplayColourCensus>();
             foreach(IDisplayColourCensus row in this.reportList)
             {
                 if (all)
                 {
-                    if (toFind == 3)
+                    if (toFind == CensusColour.CENSUS_PRESENT_NOT_LC_YEAR)
                     {  // also check for value of 4 which is also green
-                        if ((row.C1841 == 3 || row.C1841 == 4 || row.C1841 == 0) && (row.C1851 == toFind || row.C1851 == 0) &&
-                            (row.C1861 == toFind || row.C1861 == 0) && (row.C1871 == toFind || row.C1871 == 0) &&
-                            (row.C1881 == toFind || row.C1881 == 4 || row.C1881 == 0) && (row.C1891 == toFind || row.C1891 == 0) &&
-                            (row.C1901 == toFind || row.C1901 == 0) && (row.C1911 == toFind || row.C1911 == 4 || row.C1911 == 0) &&
-                            (row.C1939 == toFind || row.C1939 == 4 || row.C1939 == 0) &&
-                            !(row.C1841 == 0 && row.C1851 == 0 && row.C1861 == 0 && row.C1871 == 0 &&
-                              row.C1881 == 0 && row.C1891 == 0 && row.C1901 == 0 && row.C1911 == 0 && row.C1939 == 0 && toFind != 0)) // exclude all greys
+                        if ((row.C1841 == CensusColour.CENSUS_PRESENT_NOT_LC_YEAR || row.C1841 == CensusColour.CENSUS_PRESENT_LC_PRESENT || row.C1841 == CensusColour.NOT_ALIVE) && 
+                            (row.C1851 == toFind || row.C1851 == CensusColour.NOT_ALIVE) &&
+                            (row.C1861 == toFind || row.C1861 == CensusColour.NOT_ALIVE) && 
+                            (row.C1871 == toFind || row.C1871 == CensusColour.NOT_ALIVE) &&
+                            (row.C1881 == toFind || row.C1881 == CensusColour.CENSUS_PRESENT_LC_PRESENT || row.C1881 == CensusColour.NOT_ALIVE) && 
+                            (row.C1891 == toFind || row.C1891 == CensusColour.NOT_ALIVE) &&
+                            (row.C1901 == toFind || row.C1901 == CensusColour.NOT_ALIVE) && 
+                            (row.C1911 == toFind || row.C1911 == CensusColour.CENSUS_PRESENT_LC_PRESENT || row.C1911 == CensusColour.NOT_ALIVE) &&
+                            (row.C1939 == toFind || row.C1939 == CensusColour.CENSUS_PRESENT_LC_PRESENT || row.C1939 == CensusColour.NOT_ALIVE) &&
+                            !(row.C1841 == CensusColour.NOT_ALIVE && row.C1851 == CensusColour.NOT_ALIVE && row.C1861 == CensusColour.NOT_ALIVE && row.C1871 == CensusColour.NOT_ALIVE &&
+                              row.C1881 == CensusColour.NOT_ALIVE && row.C1891 == CensusColour.NOT_ALIVE && row.C1901 == CensusColour.NOT_ALIVE && row.C1911 == CensusColour.NOT_ALIVE && row.C1939 == CensusColour.NOT_ALIVE && toFind != 0)) // exclude all greys
                             result.Add(row);
                     }
                     else
-                        if ((row.C1841 == toFind || row.C1841 == 0) && (row.C1851 == toFind || row.C1851 == 0) &&
-                            (row.C1861 == toFind || row.C1861 == 0) && (row.C1871 == toFind || row.C1871 == 0) &&
-                            (row.C1881 == toFind || row.C1881 == 0) && (row.C1891 == toFind || row.C1891 == 0) &&
-                            (row.C1901 == toFind || row.C1901 == 0) && (row.C1911 == toFind || row.C1911 == 0) &&
-                            (row.C1939 == toFind || row.C1939 == 0) &&
-                            !(row.C1841 == 0 && row.C1851 == 0 && row.C1861 == 0 && row.C1871 == 0 && 
-                              row.C1881 == 0 && row.C1891 == 0 && row.C1901 == 0 && row.C1911 == 0 && row.C1939 == 0 && toFind != 0)) // exclude all greys
+                        if ((row.C1841 == toFind || row.C1841 == CensusColour.NOT_ALIVE) && (row.C1851 == toFind || row.C1851 == CensusColour.NOT_ALIVE) &&
+                            (row.C1861 == toFind || row.C1861 == CensusColour.NOT_ALIVE) && (row.C1871 == toFind || row.C1871 == CensusColour.NOT_ALIVE) &&
+                            (row.C1881 == toFind || row.C1881 == CensusColour.NOT_ALIVE) && (row.C1891 == toFind || row.C1891 == CensusColour.NOT_ALIVE) &&
+                            (row.C1901 == toFind || row.C1901 == CensusColour.NOT_ALIVE) && (row.C1911 == toFind || row.C1911 == CensusColour.NOT_ALIVE) &&
+                            (row.C1939 == toFind || row.C1939 == CensusColour.NOT_ALIVE) &&
+                            !(row.C1841 == CensusColour.NOT_ALIVE && row.C1851 == CensusColour.NOT_ALIVE && row.C1861 == CensusColour.NOT_ALIVE && 
+                              row.C1871 == CensusColour.NOT_ALIVE && row.C1881 == CensusColour.NOT_ALIVE && row.C1891 == CensusColour.NOT_ALIVE && 
+                              row.C1901 == CensusColour.NOT_ALIVE && row.C1911 == CensusColour.NOT_ALIVE && row.C1939 == CensusColour.NOT_ALIVE && 
+                              toFind != CensusColour.NOT_ALIVE)) // exclude all greys
                             result.Add(row);
                 }
                 else
@@ -302,37 +309,37 @@ namespace FTAnalyzer.Forms
                     dgReportSheet.DataSource = this.reportList;
                     break;
                 case 1: // None Found (All Red)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(1, true));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(CensusColour.NO_CENSUS, true));
                     break;
                 case 2: // All Found (All Green)
                     list = new List<IDisplayColourCensus>();
-                    list.AddRange(BuildFilter(3, true));
-                    list.AddRange(BuildFilter(4, true));
+                    list.AddRange(BuildFilter(CensusColour.CENSUS_PRESENT_NOT_LC_YEAR, true));
+                    list.AddRange(BuildFilter(CensusColour.CENSUS_PRESENT_LC_PRESENT, true));
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list.Distinct().ToList<IDisplayColourCensus>());
                     break;
                 case 3: // Lost Cousins Missing (Yellows)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(2, false));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(CensusColour.CENSUS_PRESENT_LC_MISSING, false));
                     break;
                 case 4: // Lost Cousins Present (Orange)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(5, false));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(CensusColour.LC_PRESENT_NO_CENSUS, false));
                     break;
                 case 5: // Some Outside UK (Some Dark Grey)
                     list = new List<IDisplayColourCensus>();
-                    list.AddRange(BuildFilter(6, false));
-                    list.AddRange(BuildFilter(7, false));
+                    list.AddRange(BuildFilter(CensusColour.OVERSEAS_CENSUS, false));
+                    list.AddRange(BuildFilter(CensusColour.OUT_OF_COUNTRY, false));
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list.Distinct().ToList<IDisplayColourCensus>());
                     break;
                 case 6: // Some Missing (Some Red)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(1, false));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(CensusColour.NO_CENSUS, false));
                     break;
                 case 7: // Some Found (Some Green)
                     list = new List<IDisplayColourCensus>();
-                    list.AddRange(BuildFilter(3, false));
-                    list.AddRange(BuildFilter(4, false));
+                    list.AddRange(BuildFilter(CensusColour.CENSUS_PRESENT_NOT_LC_YEAR, false));
+                    list.AddRange(BuildFilter(CensusColour.CENSUS_PRESENT_LC_PRESENT, false));
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list.Distinct().ToList<IDisplayColourCensus>());
                     break;
                 case 8: // Known Missing (Mid Green)
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(8, false));
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(CensusColour.KNOWN_MISSING, false));
                     break;
             }
             dgReportSheet.Focus();
