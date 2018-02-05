@@ -52,7 +52,6 @@ namespace FTAnalyzer
         /// <summary>
         /// Construction of Gdal/Ogr
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
         static GdalConfiguration()
         {
             var executingAssemblyFile = new Uri(Assembly.GetExecutingAssembly().GetName().CodeBase).LocalPath;
