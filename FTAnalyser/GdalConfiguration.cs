@@ -57,34 +57,33 @@ namespace FTAnalyzer
             var executingAssemblyFile = new Uri(Assembly.GetExecutingAssembly().GetName().CodeBase).LocalPath;
             var executingDirectory = Path.GetDirectoryName(executingAssemblyFile);
 
-            if (string.IsNullOrEmpty(executingDirectory))
-                throw new InvalidOperationException("cannot get executing directory");
+            if (!string.IsNullOrEmpty(executingDirectory))
+            {
+                var gdalPath = Path.Combine(executingDirectory, "gdal");
+                var nativePath = Path.Combine(gdalPath, GetPlatform());
 
+                // Prepend native path to environment path, to ensure the
+                // right libs are being used.
+                var path = Environment.GetEnvironmentVariable("PATH");
+                path = nativePath + ";" + Path.Combine(nativePath, "plugins") + ";" + path;
+                Environment.SetEnvironmentVariable("PATH", path);
 
-            var gdalPath = Path.Combine(executingDirectory, "gdal");
-            var nativePath = Path.Combine(gdalPath, GetPlatform());
+                // Set the additional GDAL environment variables.
+                var gdalData = Path.Combine(gdalPath, "data");
+                Environment.SetEnvironmentVariable("GDAL_DATA", gdalData);
+                Gdal.SetConfigOption("GDAL_DATA", gdalData);
 
-            // Prepend native path to environment path, to ensure the
-            // right libs are being used.
-            var path = Environment.GetEnvironmentVariable("PATH");
-            path = nativePath + ";" + Path.Combine(nativePath, "plugins") + ";" + path;
-            Environment.SetEnvironmentVariable("PATH", path);
+                var driverPath = Path.Combine(nativePath, "plugins");
+                Environment.SetEnvironmentVariable("GDAL_DRIVER_PATH", driverPath);
+                Gdal.SetConfigOption("GDAL_DRIVER_PATH", driverPath);
 
-            // Set the additional GDAL environment variables.
-            var gdalData = Path.Combine(gdalPath, "data");
-            Environment.SetEnvironmentVariable("GDAL_DATA", gdalData);
-            Gdal.SetConfigOption("GDAL_DATA", gdalData);
+                Environment.SetEnvironmentVariable("GEOTIFF_CSV", gdalData);
+                Gdal.SetConfigOption("GEOTIFF_CSV", gdalData);
 
-            var driverPath = Path.Combine(nativePath, "plugins");
-            Environment.SetEnvironmentVariable("GDAL_DRIVER_PATH", driverPath);
-            Gdal.SetConfigOption("GDAL_DRIVER_PATH", driverPath);
-
-            Environment.SetEnvironmentVariable("GEOTIFF_CSV", gdalData);
-            Gdal.SetConfigOption("GEOTIFF_CSV", gdalData);
-
-            var projSharePath = Path.Combine(gdalPath, "share");
-            Environment.SetEnvironmentVariable("PROJ_LIB", projSharePath);
-            Gdal.SetConfigOption("PROJ_LIB", projSharePath);
+                var projSharePath = Path.Combine(gdalPath, "share");
+                Environment.SetEnvironmentVariable("PROJ_LIB", projSharePath);
+                Gdal.SetConfigOption("PROJ_LIB", projSharePath);
+            }
         }
 
         /// <summary>
