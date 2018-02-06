@@ -8,7 +8,9 @@ namespace FTAnalyzer
 {
     public interface IDisplayFact
     {
+#if !__MAC__
         Image Icon { get; }
+#endif
         string IndividualID { get; }
         string Surname { get; }
         string Forenames { get; }
@@ -20,7 +22,9 @@ namespace FTAnalyzer
         string RelationToRoot { get; }
         FactLocation Location { get; }
         Age AgeAtFact { get; }
+#if !__MAC__
         Image LocationIcon { get; }
+#endif
         string GeocodeStatus { get; }
         string FoundLocation { get; }
         string FoundResultType { get; }

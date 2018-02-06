@@ -1,20 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+#if !__MAC__
 using System.Drawing;
+#endif
 
 namespace FTAnalyzer
 {
     public class DisplayFact : IDisplayFact, IComparable
     {
+#if __MAC__
         public Image Icon { get; private set; }
+#else
+        public Image Icon { get; private set; }
+#endif
         public string Surname { get; private set; }
         public string Forenames { get; private set; }
         public Individual Ind { get; private set; }
         public Fact Fact { get; set; }
+#if __MAC__
         public Color BackColour { get; set; }
-
+#else
+        public Color BackColour { get; set; }
+#endif
         public DisplayFact(Individual ind, Fact fact) : this(ind, ind.Surname, ind.Forenames, fact) { }
         public DisplayFact(Individual ind, string surname, string forenames, Fact fact)
         {
