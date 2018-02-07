@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -20,11 +18,11 @@ namespace FTAnalyzer
         static ScottishParish()
         {
             // load Scottish Parishes from XML file
-            string startPath;
-            if (Application.StartupPath.Contains("COMMON7\\IDE")) // running unit tests
-                startPath = Path.Combine(Environment.CurrentDirectory, "..\\..\\..");
-            else
-                startPath = Application.StartupPath;
+#if __UNIT_TEST__
+            string startPath = Path.Combine(Environment.CurrentDirectory, "..\\..\\..");
+#else
+            string startPath = Application.StartupPath;
+#endif
             string filename = Path.Combine(startPath, @"Resources\ScottishParishes.xml");
             if (File.Exists(filename))
             {

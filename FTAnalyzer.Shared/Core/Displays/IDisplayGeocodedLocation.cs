@@ -1,7 +1,4 @@
-﻿#if !__MAC__
-using System.Drawing;
-using FTAnalyzer.Mapping;
-#endif
+﻿using FTAnalyzer.Mapping;
 
 namespace FTAnalyzer
 {
@@ -11,13 +8,11 @@ namespace FTAnalyzer
         double Latitude { get; }
         double Longitude { get; }
 #if !__MAC__
-        Image Icon { get; }
+        System.Drawing.Image Icon { get; }
 #endif
         string Geocoded { get; }
         string FoundLocation { get; }
         string FoundResultType { get; }
-#if !__MAC__
         GeoResponse.CResult.CGeometry.CViewPort ViewPort { get; }
-#endif
     }
 }

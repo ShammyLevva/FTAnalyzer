@@ -1,7 +1,4 @@
 ﻿using System.Linq;
-#if !__MAC__
-using System.Windows.Forms;
-#endif
 
 namespace FTAnalyzer
 {
@@ -74,7 +71,7 @@ namespace FTAnalyzer
         }
 
 #if !__MAC__
-        public DataGridViewCellStyle CellStyle { get; set; }
+        public System.Windows.Forms.DataGridViewCellStyle CellStyle { get; set; }
 #endif
 
         public bool IsValidLocation(string location)

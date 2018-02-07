@@ -1,11 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using System.Windows.Forms;
-using System.IO;
 using FTAnalyzer.Utilities;
 using System.Text.RegularExpressions;
 

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using System.Windows.Forms;
-using System.Globalization;
 using FTAnalyzer.Utilities;
 using System.Text.RegularExpressions;
 

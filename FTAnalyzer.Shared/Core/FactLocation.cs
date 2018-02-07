@@ -80,11 +80,11 @@ namespace FTAnalyzer
             SetupGeocodes();
             ResetLocations();
             // load conversions from XML file
-            string startPath;
-            if (Application.StartupPath.ToUpper().Contains("COMMON7\\IDE")) // running unit tests
-                startPath = Path.Combine(Environment.CurrentDirectory, "..\\..\\..");
-            else
-                startPath = Application.StartupPath;
+#if __UNIT_TEST_
+            string startPath = Path.Combine(Environment.CurrentDirectory, "..\\..\\..");
+#else
+            string startPath = Application.StartupPath;
+#endif
             #region Fact Location Fixes
             string filename = Path.Combine(startPath, @"Resources\FactLocationFixes.xml");
             if (File.Exists(filename))

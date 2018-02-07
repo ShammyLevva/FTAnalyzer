@@ -27,7 +27,6 @@
  * Copyright (c) 1998, 1999 by Lawrence Philips.
  */
 using System;
-using System.Text;
 
 namespace FTAnalyzer
 {

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Specialized;
-
-namespace FTAnalyzer
+﻿namespace FTAnalyzer
 {
     public class SurnameStats
     {

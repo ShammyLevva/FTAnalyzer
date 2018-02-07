@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
 
 // http://www.timvw.be/2009/11/06/presenting-filterlist/
@@ -13,7 +11,7 @@ using System.ComponentModel;
 // var filterChars = this.textBoxFilter.Text.ToLower();
 // this.Filter(filterChars);
 //}
- 
+
 //void Filter(string filterChars)
 //{
 // var persons = (FilterList<person>)this.dataGridView1.DataSource;

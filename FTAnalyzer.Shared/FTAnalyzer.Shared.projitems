@@ -94,7 +94,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)GedcomParser\AnselInputStreamReader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GedcomParser\AnselOutputStreamWriter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GedcomParser\GedcomToXml.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utilities\CustomToolStripRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mapping\GeoResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mapping\MapTransforms.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\DatabaseHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\DoubleMetaphone.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\EnhancedTextInfo.cs" />
@@ -105,16 +106,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\FilterUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\FooterPrintBlock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\HttpUtility.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utilities\ListtoDataTableConvertor.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utilities\MultiSelectTreeview.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Utilities\Printing.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\PropertyComparer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\ReadWriteCSV.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utilities\ScrollingRichTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\ShortDoubleMetaphone.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\SortableBindingList.cs" />
   </ItemGroup>
