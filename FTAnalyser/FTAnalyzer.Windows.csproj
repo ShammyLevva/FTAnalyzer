@@ -399,15 +399,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Resources\Lib\DgvFilterPopup.dll">
+    <EmbeddedResource Include="Resources\Lib\DgvFilterPopup.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Lib\MediaSlider.dll">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Lib\MediaSlider.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Lib\Printing.DataGridViewPrint.dll">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Lib\Printing.DataGridViewPrint.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
     <Content Include="x64\gdal_wrap.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
