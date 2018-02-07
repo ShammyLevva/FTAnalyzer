@@ -287,6 +287,8 @@
     <Compile Include="Forms\Controls\MapToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Graphics\FactImage.cs" />
+    <Compile Include="Graphics\FactLocationImage.cs" />
     <Compile Include="Mapping\ClusterLayer.cs" />
     <Compile Include="Mapping\MapCluster.cs" />
     <Compile Include="Mapping\MapHelper.cs" />

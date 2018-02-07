@@ -65,9 +65,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\Exports\NonDuplicate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\Fact.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\FactDate.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Core\FactImage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\FactLocation.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Core\FactLocationImage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\FactSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\Family.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\FamilySearch.cs" />
