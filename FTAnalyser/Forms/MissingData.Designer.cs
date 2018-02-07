@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MissingData));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.dsBirth = new FTAnalyzer.Forms.Controls.DateSliders();
             this.SuspendLayout();
@@ -55,6 +56,7 @@
             this.ClientSize = new System.Drawing.Size(688, 457);
             this.Controls.Add(this.dsBirth);
             this.Controls.Add(this.statusStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MissingData";
             this.Text = "Missing Data Configuration";
             this.ResumeLayout(false);

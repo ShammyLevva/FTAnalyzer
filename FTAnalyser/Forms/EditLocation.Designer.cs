@@ -108,7 +108,7 @@ namespace FTAnalyzer.Forms
             // btnSave
             // 
             this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSave.Image = global::FTAnalyzer.Properties.Resources.Save;
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(23, 22);
@@ -130,7 +130,7 @@ namespace FTAnalyzer.Forms
             // btnReload
             // 
             this.btnReload.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnReload.Image = global::FTAnalyzer.Properties.Resources.Restart;
+            this.btnReload.Image = ((System.Drawing.Image)(resources.GetObject("btnReload.Image")));
             this.btnReload.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(23, 22);
@@ -171,7 +171,7 @@ namespace FTAnalyzer.Forms
             this.btnCustomMap.Image = ((System.Drawing.Image)(resources.GetObject("btnCustomMap.Image")));
             this.btnCustomMap.ImageTransparentColor = System.Drawing.Color.White;
             this.btnCustomMap.Name = "btnCustomMap";
-            this.btnCustomMap.Size = new System.Drawing.Size(23, 22);
+            this.btnCustomMap.Size = new System.Drawing.Size(23, 20);
             this.btnCustomMap.Text = "Enable Custom Map Overlay";
             this.btnCustomMap.Click += new System.EventHandler(this.BtnCustomMap_Click);
             // 
