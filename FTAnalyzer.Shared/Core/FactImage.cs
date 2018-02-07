@@ -1,7 +1,8 @@
-﻿using System.Drawing;
-using System.IO;
+﻿using System.IO;
+#if !__MACOS__
+using System.Drawing;
 using System.Windows.Forms;
-
+#endif
 namespace FTAnalyzer
 {
     public class FactImage
@@ -22,8 +23,8 @@ namespace FTAnalyzer
 
         public FactImage(Fact.FactError errorLevel, Image img)
         {
-            this.ErrorLevel = errorLevel;
-            this.Icon = img as Bitmap;
+            ErrorLevel = errorLevel;
+            Icon = img as Bitmap;
         }
 
         public static FactImage ErrorIcon(Fact.FactError errorLevel)

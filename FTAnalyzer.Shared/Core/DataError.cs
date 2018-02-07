@@ -23,7 +23,7 @@
         private Individual individual;
         private Family family;
 
-#if !__MAC__
+#if !__MACOS__
         public System.Drawing.Image Icon { get; private set; }
 #endif
         public string ErrorType { get; private set; }

@@ -7,7 +7,7 @@ namespace FTAnalyzer
         string SortableLocation { get; }
         double Latitude { get; }
         double Longitude { get; }
-#if !__MAC__
+#if !__MACOS__
         System.Drawing.Image Icon { get; }
 #endif
         string Geocoded { get; }

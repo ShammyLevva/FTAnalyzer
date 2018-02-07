@@ -1,4 +1,4 @@
-﻿#if !__MAC__
+﻿#if !__MACOS__
 using System.Drawing;
 #endif
 
@@ -13,7 +13,7 @@ namespace FTAnalyzer
         string Place { get; }
         double Latitude { get; }
         double Longitude { get; }
-#if !__MAC__
+#if !__MACOS__
         Image Icon { get; }
 #endif
         string Geocoded { get; }

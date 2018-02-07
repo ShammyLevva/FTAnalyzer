@@ -1,4 +1,4 @@
-﻿#if !__MAC__
+﻿#if !__MACOS__
 using System.Drawing;
 #endif
 
@@ -6,7 +6,7 @@ namespace FTAnalyzer
 {
     public interface IDisplayFact
     {
-#if !__MAC__
+#if !__MACOS__
         Image Icon { get; }
 #endif
         string IndividualID { get; }
@@ -20,7 +20,7 @@ namespace FTAnalyzer
         string RelationToRoot { get; }
         FactLocation Location { get; }
         Age AgeAtFact { get; }
-#if !__MAC__
+#if !__MACOS__
         Image LocationIcon { get; }
 #endif
         string GeocodeStatus { get; }
