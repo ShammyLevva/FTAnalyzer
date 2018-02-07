@@ -42,7 +42,7 @@
     <DocumentationFile>bin\Release\SharpMap.XML</DocumentationFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
-    <NoWarn>CS1591</NoWarn>
+    <NoWarn>CS1591;CS0649</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">

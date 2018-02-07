@@ -8,18 +8,14 @@ namespace FTAnalyzer
 {
     public class DisplayFact : IDisplayFact, IComparable
     {
-#if __MAC__
-        public Image Icon { get; private set; }
-#else
+#if !__MAC__
         public Image Icon { get; private set; }
 #endif
         public string Surname { get; private set; }
         public string Forenames { get; private set; }
         public Individual Ind { get; private set; }
         public Fact Fact { get; set; }
-#if __MAC__
-        public Color BackColour { get; set; }
-#else
+#if !__MAC__
         public Color BackColour { get; set; }
 #endif
         public DisplayFact(Individual ind, Fact fact) : this(ind, ind.Surname, ind.Forenames, fact) { }
@@ -30,7 +26,9 @@ namespace FTAnalyzer
             this.Forenames = forenames;
             this.Fact = fact;
             this.IgnoreFact = false;
+#if !__MAC__
             this.Icon = FactImage.ErrorIcon(fact.FactErrorLevel).Icon;
+#endif
         }
         public FactDate DateofBirth { get { return Ind == null ? FactDate.UNKNOWN_DATE : Ind.BirthDate; } }
         public string TypeOfFact { get { return Fact.FactTypeDescription; } }
@@ -48,7 +46,9 @@ namespace FTAnalyzer
         public string FoundLocation { get { return Fact.Location.FoundLocation; } }
         public string FoundResultType { get { return Fact.Location.FoundResultType; } }
         public string GeocodeStatus { get { return Fact.Location.Geocoded; } }
+#if !__MAC__
         public Image LocationIcon { get { return FactLocationImage.ErrorIcon(Fact.Location.GeocodeStatus).Icon; } }
+#endif
         public string Relation { get { return Ind == null ? string.Empty : Ind.Relation; } }
         public string RelationToRoot { get { return Ind == null ? string.Empty : Ind.RelationToRoot; } }
         public string SurnameAtDate { get { return Ind == null ? string.Empty : Ind.SurnameAtDate(FactDate); } }

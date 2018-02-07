@@ -300,7 +300,9 @@ namespace FTAnalyzer.Forms
                 if (previous != null)
                     if ((CensusRefReport && previous.CensusReference != fact.CensusReference) || (!CensusRefReport && previous.IndividualID != fact.IndividualID))
                         backColourGrey = !backColourGrey;
+#if !__MAC__
                 fact.BackColour = backColourGrey ? Color.LightGray : Color.White;
+#endif
                 previous = fact;
             }
         }

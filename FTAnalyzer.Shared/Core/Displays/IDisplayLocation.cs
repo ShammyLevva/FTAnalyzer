@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿#if !__MAC__
 using System.Drawing;
+#endif
 
 namespace FTAnalyzer
 {
@@ -15,7 +13,9 @@ namespace FTAnalyzer
         string Place { get; }
         double Latitude { get; }
         double Longitude { get; }
+#if !__MAC__
         Image Icon { get; }
+#endif
         string Geocoded { get; }
         string FoundLocation { get; }
 
