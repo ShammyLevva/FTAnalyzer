@@ -94,17 +94,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)GedcomParser\AnselInputStreamReader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GedcomParser\AnselOutputStreamWriter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GedcomParser\GedcomToXml.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Mapping\ClusterLayer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Mapping\GeoResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Mapping\MapCluster.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Mapping\MapHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Mapping\MapLifeLine.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Mapping\MapLocation.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Mapping\MapTransforms.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Mapping\MarkerClusterer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Mapping\OS50kGazetteer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Mapping\TearDropLayer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Mapping\TileSourceFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\CustomToolStripRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\DatabaseHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\DoubleMetaphone.cs" />
