@@ -1,3 +1,9 @@
+#### Updated Release Version 6.1.3.0, 9th Feb 2018  
+**Updates**  
+The files that standarise countries/regions wasn't getting published so countries weren't correctly recognised for census facts  
+Special character processing and spurious line end fixes re-enabled and tweaked to be considerably faster
+Several library updates and code splits to ready code for initial Mac development
+
 #### Updated Release Version 6.1.2.0, 4th Feb 2018  
 
 **Updates**  
