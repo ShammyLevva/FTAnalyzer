@@ -33,7 +33,7 @@ namespace FTAnalyzer
         private static MemoryStream CheckInvalidLineEnds(string path)
         {
             FileStream infs = new FileStream(path, FileMode.Open, FileAccess.Read);
-            return CheckSpuriousOD(CheckInvalidCR(infs));
+            return CheckInvalidCR(infs);
         }
 
         private static MemoryStream CheckInvalidCR(FileStream infs)
@@ -51,7 +51,10 @@ namespace FTAnalyzer
                         outfs.WriteByte(0x0d);
                     }
                 }
-                outfs.WriteByte(b);
+                else
+                {
+                    outfs.WriteByte(b);
+                }
                 b = (byte)infs.ReadByte();
             }
             outfs.Position = 0;
@@ -65,7 +68,7 @@ namespace FTAnalyzer
             long streamLength = infs.Length;
             while (infs.Position < streamLength)
             {
-                while (b == 0x0d && infs.Position < infs.Length)
+                while (b == 0x0d && infs.Position < streamLength)
                 {
                     b = (byte)infs.ReadByte();
                     if (b == 0x0a)
@@ -105,8 +108,16 @@ namespace FTAnalyzer
                 {
                     lineNr++;
                     nextline = reader.ReadLine();
-                    //need to check if nextline is valid if not line=line+nextline and nextline=reader.ReadLine();
-
+                    if (Properties.FileHandling.Default.RetryFailedLines)
+                    {
+                        //need to check if nextline is valid if not line=line+nextline and nextline=reader.ReadLine();
+                        while (nextline?.Length > 0 && !Char.IsNumber(nextline[0]))
+                        {
+                            line = line + nextline;
+                            lineNr++;
+                            nextline = reader.ReadLine();
+                        }
+                    }
                     // parse the GEDCOM line into five fields: level, iden, tag, xref, valu
                     line = line.Trim();
                     if (line.Length > 0)
