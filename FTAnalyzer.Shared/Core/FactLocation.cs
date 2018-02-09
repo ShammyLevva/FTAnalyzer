@@ -189,6 +189,9 @@ namespace FTAnalyzer
                 ValidateTypoFixes();
                 ValidateCounties();
                 COUNTRY_SHIFTS = COUNTRY_SHIFTS.Concat(CITY_ADD_COUNTRY).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            } else
+            {
+                Console.WriteLine("Failed to find FactLocationFixes.xml File");
             }
             #endregion
         }

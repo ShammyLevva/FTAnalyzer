@@ -120,7 +120,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="$(MSBuildThisFileDirectory)Resources\FactLocationFixes.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="$(MSBuildThisFileDirectory)Resources\FactLocationFixesSchema.xsd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
