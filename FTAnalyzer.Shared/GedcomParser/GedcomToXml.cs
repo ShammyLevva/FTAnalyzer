@@ -15,22 +15,33 @@ namespace FTAnalyzer
         public static XmlDocument Load(string path) { return Load(path, isoWesternEuropean); }
         public static XmlDocument Load(string path, Encoding encoding)
         {
-            //StreamReader reader = new AnselInputStreamReader(checkInvalidCR(path));
-            //StreamReader reader = new AnselInputStreamReader(new FileStream(path, FileMode.Open, FileAccess.Read));
             StreamReader reader;
             if (Properties.FileHandling.Default.LoadWithFilters)
-                reader = new StreamReader(CheckSpuriousOD(path), encoding);
+            {
+                if (Properties.FileHandling.Default.RetryFailedLines)
+                    reader = new AnselInputStreamReader(CheckInvalidLineEnds(path));
+                else
+                    reader = new AnselInputStreamReader(new FileStream(path, FileMode.Open, FileAccess.Read));
+            }
+            if (Properties.FileHandling.Default.RetryFailedLines)
+                reader = new StreamReader(CheckInvalidLineEnds(path), encoding);
             else
                 reader = new StreamReader(new FileStream(path, FileMode.Open, FileAccess.Read), encoding);
             return Parse(reader);
         }
 
-        private static MemoryStream CheckInvalidCR(string path)
+        private static MemoryStream CheckInvalidLineEnds(string path)
         {
             FileStream infs = new FileStream(path, FileMode.Open, FileAccess.Read);
+            return CheckSpuriousOD(CheckInvalidCR(infs));
+        }
+
+        private static MemoryStream CheckInvalidCR(FileStream infs)
+        {
             MemoryStream outfs = new MemoryStream();
+            long streamLength = infs.Length;
             byte b = (byte)infs.ReadByte();
-            while (infs.Position < infs.Length)
+            while (infs.Position < streamLength)
             {
                 if (b == 0x0d)
                 {
@@ -47,12 +58,12 @@ namespace FTAnalyzer
             return outfs;
         }
 
-        private static MemoryStream CheckSpuriousOD(string path)
+        private static MemoryStream CheckSpuriousOD(MemoryStream infs)
         {
-            FileStream infs = new FileStream(path, FileMode.Open, FileAccess.Read);
             MemoryStream outfs = new MemoryStream();
             byte b = (byte)infs.ReadByte();
-            while (infs.Position < infs.Length)
+            long streamLength = infs.Length;
+            while (infs.Position < streamLength)
             {
                 while (b == 0x0d && infs.Position < infs.Length)
                 {
