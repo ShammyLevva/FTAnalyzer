@@ -94,6 +94,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)GedcomParser\GedcomToXml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mapping\GeoResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mapping\MapTransforms.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\AsyncEvent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\DatabaseHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\DoubleMetaphone.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\EnhancedTextInfo.cs" />

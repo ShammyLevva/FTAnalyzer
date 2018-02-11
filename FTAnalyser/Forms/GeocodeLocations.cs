@@ -970,7 +970,7 @@ namespace FTAnalyzer.Forms
             if (result == DialogResult.Yes)
             {
                 DatabaseHelper.Instance.ResetPartials();
-                ft.LoadGeoLocationsFromDataBase(null);
+                ft.LoadGeoLocationsFromDataBase();
                 ft.WriteGeocodeStatstoRTB("Geocoding status after reset partials:");
                 MessageBox.Show("Partials have been reset", "FTAnalyzer");
             }

@@ -411,7 +411,7 @@ namespace FTAnalyzer.Utilities
             }
         }
 
-        public void LoadGeoLocations(ProgressBar pb)
+        public void LoadGeoLocations()
         {
             using (SQLiteConnection conn = new SQLiteConnection(connectionString))
             {
@@ -419,12 +419,6 @@ namespace FTAnalyzer.Utilities
                 foreach (FactLocation loc in FactLocation.AllLocations)
                 {
                     ReadLocationIntoFact(loc, conn);
-                    if (pb != null)
-                    {
-                        pb.Value++;
-                        if (pb.Value % 20 == 0)
-                            Application.DoEvents();
-                    }
                 }
             }
         }
@@ -716,7 +710,7 @@ namespace FTAnalyzer.Utilities
                 restoring = false;
                 FamilyTree ft = FamilyTree.Instance;
                 if (ft.DataLoaded)
-                    ft.LoadGeoLocationsFromDataBase(null);
+                    ft.LoadGeoLocationsFromDataBase();
             }
             catch (Exception)
             {

@@ -18,6 +18,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using GeoAPI.Geometries;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace FTAnalyzer
 {
@@ -225,7 +226,7 @@ namespace FTAnalyzer
                 unknownFactTypes.Add(factType);
         }
 
-        public bool LoadTree(string filename, ProgressBar pbS, ProgressBar pbI, ProgressBar pbF, ProgressBar pbR)
+        public Task<bool> LoadTree(string filename, IProgress<KeyValuePair<string, int>> progress)
         {
             _loading = true;
             ResetData();
@@ -237,7 +238,7 @@ namespace FTAnalyzer
             {
                 doc = GedcomToXml.Load(filename);
                 if(doc == null)
-                    return false;
+                    return Task.FromResult(false);
             }
             // doc.Save(@"c:\temp\FHcensusref.xml");
             // First check if file has a valid header record ie: it is actually a GEDCOM file
@@ -245,7 +246,7 @@ namespace FTAnalyzer
             if (header == null)
             {
                 xmlErrorbox.AppendText("\n\nUnable to find GEDCOM 'HEAD' record in first line of file aborting load.\nIs " + filename + " really a GEDCOM file");
-                return false;
+                return Task.FromResult(false);
             }
             XmlNode charset = doc.SelectSingleNode("GED/HEAD/CHAR");
             if (charset != null && charset.InnerText.Equals("ANSEL"))
@@ -255,7 +256,7 @@ namespace FTAnalyzer
             if (charset != null && charset.InnerText.Equals("ASCII"))
                 doc = GedcomToXml.Load(filename, Encoding.ASCII);
             if (doc == null)
-                return false;
+                return Task.FromResult(false);
             ReportOptions();
             XmlNode root = doc.SelectSingleNode("GED/HEAD/_ROOT");
             if (root != null)
@@ -270,23 +271,22 @@ namespace FTAnalyzer
             }
             // First iterate through attributes of root finding all sources
             XmlNodeList list = doc.SelectNodes("GED/SOUR");
-            pbS.Maximum = list.Count == 0 ? 1 : list.Count;
+            int sourceMax = list.Count == 0 ? 1 : list.Count;
             int counter = 0;
             foreach (XmlNode n in list)
             {
                 FactSource fs = new FactSource(n);
                 sources.Add(fs);
-                pbS.Value = counter++;
-                Application.DoEvents(); // allows windows to process events and prevents application from appearing to have crashed.
+                progress.Report(new KeyValuePair<string, int>("Source", counter++ / sourceMax));
             }
             xmlErrorbox.AppendText("Loaded " + counter + " sources.\n");
-            pbS.Value = pbS.Maximum;
+            progress.Report(new KeyValuePair<string, int>("Source", sourceMax));
             // now get a list of all notes
             noteNodes = doc.SelectNodes("GED/NOTE");
             // now iterate through child elements of root
             // finding all individuals
             list = doc.SelectNodes("GED/INDI");
-            pbI.Maximum = list.Count;
+            int individualMax = list.Count;
             counter = 0;
             foreach (XmlNode n in list)
             {
@@ -299,8 +299,7 @@ namespace FTAnalyzer
                     else
                         individualLookup.Add(individual.IndividualID, individual);
                     AddOccupations(individual);
-                    pbI.Value = counter++;
-                    Application.DoEvents();
+                    progress.Report(new KeyValuePair<string, int>("Individual", counter++ / individualMax));
                 }
                 catch (NullReferenceException)
                 {
@@ -308,43 +307,74 @@ namespace FTAnalyzer
                 }
             }
             xmlErrorbox.AppendText("Loaded " + counter + " individuals.\n");
-            pbI.Value = pbI.Maximum;
+            progress.Report(new KeyValuePair<string, int>("Individual", individualMax));
             // now iterate through child elements of root
             // finding all families
             list = doc.SelectNodes("GED/FAM");
-            pbF.Maximum = list.Count == 0 ? 1 : list.Count;
+            int familyMax = list.Count == 0 ? 1 : list.Count;
             counter = 0;
             foreach (XmlNode n in list)
             {
                 Family family = new Family(n);
                 families.Add(family);
-                pbF.Value = counter++;
-                Application.DoEvents();
+                progress.Report(new KeyValuePair<string, int>("Family", counter++ / familyMax));
             }
             xmlErrorbox.AppendText("Loaded " + counter + " families.\n");
             CheckAllIndividualsAreInAFamily();
             RemoveFamiliesWithNoIndividuals();
-            pbF.Value = pbF.Maximum;
-            Application.DoEvents();
+            progress.Report(new KeyValuePair<string, int>("Family", familyMax));
             if (rootIndividualID == string.Empty)
                 rootIndividualID = individuals[0].IndividualID;
-            UpdateRootIndividual(rootIndividualID, pbR, true);
-            Application.DoEvents();
+            UpdateRootIndividual(rootIndividualID, progress, true);
             CreateSharedFacts();
             CountCensusFacts();
             FixIDs();
             SetDataErrorTypes();
             CountUnknownFactTypes();
             FactLocation.LoadGoogleFixesXMLFile(xmlErrorbox);
-            Application.DoEvents();
-            LoadLegacyLocations(doc.SelectNodes("GED/_PLAC_DEFN/PLAC"), pbR);
-            LoadGeoLocationsFromDataBase(pbR);
+            LoadLegacyLocations(doc.SelectNodes("GED/_PLAC_DEFN/PLAC"), progress);
+            LoadGeoLocationsFromDataBase();
             _loading = false;
             _dataloaded = true;
-            return true;
+            return Task.FromResult(true);
         }
 
-        public void UpdateRootIndividual(string rootIndividualID, ProgressBar pb, bool locationsToFollow=false)
+        private void LoadLegacyLocations(XmlNodeList list, IProgress<KeyValuePair<string, int>> progress)
+        {
+            int max = list.Count / 2; // /2 to make locations load account for 50% of bar
+            int counter = 0;
+            int beforeCount = FactLocation.AllLocations.Count();
+            foreach (XmlNode node in list)
+            {
+                string place = GetText(node, false);
+                XmlNode lat_node = node.SelectSingleNode("MAP/LATI");
+                XmlNode long_node = node.SelectSingleNode("MAP/LONG");
+                if (place.Length > 0 && lat_node != null && long_node != null)
+                {
+                    string lat = lat_node.InnerText;
+                    string lng = long_node.InnerText;
+                    FactLocation loc = FactLocation.GetLocation(place, lat, lng, FactLocation.Geocode.GEDCOM_USER, true, true);
+                }
+                progress.Report(new KeyValuePair<string, int>("Relationships", 50 + counter++ / max));
+            }
+            int afterCount = FactLocation.AllLocations.Count();
+            progress.Report(new KeyValuePair<string, int>("Relationships", 100));
+        }
+
+        public void LoadGeoLocationsFromDataBase()
+        {
+            try
+            {
+                DatabaseHelper.Instance.LoadGeoLocations();
+                WriteGeocodeStatstoRTB(string.Empty);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading previously geocoded data. " + ex.Message, "FTAnalyzer");
+            }
+        }
+
+        public void UpdateRootIndividual(string rootIndividualID, IProgress<KeyValuePair<string, int>> progress, bool locationsToFollow= false)
         {
             int start = xmlErrorbox.TextLength;
             xmlErrorbox.AppendText("\nCalculating Relationships using " + rootIndividualID + ": " +
@@ -357,13 +387,11 @@ namespace FTAnalyzer
 
             // When the user changes the root individual, no location processing is taking place
             int locationCount = locationsToFollow ? FactLocation.AllLocations.Count() : 0;
-            pb.Maximum = (individuals.Count * 2) + locationCount;
-            pb.Value = 0;
-            Application.DoEvents();
-            SetRelations(rootIndividualID, pb);
-            SetRelationDescriptions(rootIndividualID, pb, locationCount);
+            SetRelations(rootIndividualID);
+            progress?.Report(new KeyValuePair<string, int>("Relationships", 25));
+            SetRelationDescriptions(rootIndividualID);
             xmlErrorbox.AppendText(PrintRelationCount());
-            Application.DoEvents();
+            progress?.Report(new KeyValuePair<string, int>("Relationships", 50));
         }
 
         private void LoadStandardisedNames()
@@ -1217,7 +1245,7 @@ namespace FTAnalyzer
 
         public Individual RootPerson { get; set; }
 
-        public void SetRelations(string startID, ProgressBar pb)
+        public void SetRelations(string startID)
         {
             ClearRelations();
             RootPerson = GetIndividual(startID);
@@ -1225,7 +1253,6 @@ namespace FTAnalyzer
             ind.RelationType = Individual.DIRECT;
             ind.Ahnentafel = 1;
             maxAhnentafel = 1;
-            pb.Value = 0;
             Queue<Individual> queue = new Queue<Individual>();
             queue.Enqueue(ind);
             while (queue.Count > 0)
@@ -1263,7 +1290,6 @@ namespace FTAnalyzer
                     family.SetChildrenCommonRelation(ind, ind.CommonAncestor);
                     family.SetBudgieCode(ind, lenAhnentafel);
                 }
-                UpdateProgressBar(pb);
             }
             // we have now set all direct ancestors and all blood relations
             // all that remains is to loop through the marriage relations
@@ -1292,31 +1318,26 @@ namespace FTAnalyzer
                         // identified are also relatives by marriage
                         family.SetChildRelation(queue, Individual.MARRIAGE);
                     }
-                    UpdateProgressBar(pb);
                 }
                 else
                     ignored++;
             }
-            Application.DoEvents();
         }
 
-        private void SetRelationDescriptions(string startID, ProgressBar pb, int locationCount)
+        private void SetRelationDescriptions(string startID)
         {
             IEnumerable<Individual> directs = GetAllRelationsOfType(Individual.DIRECT);
             IEnumerable<Individual> blood = GetAllRelationsOfType(Individual.BLOOD);
             IEnumerable<Individual> married = GetAllRelationsOfType(Individual.MARRIEDTODB);
-            pb.Maximum = pb.Value + directs.Count() + blood.Count() + married.Count() + locationCount;
             Application.DoEvents();
             Individual rootPerson = GetIndividual(startID);
             foreach (Individual i in directs)
             {
                 i.RelationToRoot = Relationship.CalculateRelationship(rootPerson, i);
-                UpdateProgressBar(pb);
             }
             foreach (Individual i in blood)
             {
                 i.RelationToRoot = Relationship.CalculateRelationship(rootPerson, i);
-                UpdateProgressBar(pb);
             }
             foreach (Individual i in married)
             {
@@ -1331,16 +1352,7 @@ namespace FTAnalyzer
                         break;
                     }
                 }
-                UpdateProgressBar(pb);
             }
-            Application.DoEvents();
-        }
-
-        private static void UpdateProgressBar(ProgressBar pb)
-        {
-            pb.Value++;
-            if (pb.Value % 20 == 0)
-                Application.DoEvents();
         }
 
         public string PrintRelationCount()
@@ -2633,41 +2645,6 @@ namespace FTAnalyzer
         #endregion
 
         #region Geocoding
-
-        private void LoadLegacyLocations(XmlNodeList list, ProgressBar pb)
-        {
-            pb.Maximum += list.Count;
-            int beforeCount = FactLocation.AllLocations.Count();
-            foreach (XmlNode node in list)
-            {
-                string place = GetText(node, false);
-                XmlNode lat_node = node.SelectSingleNode("MAP/LATI");
-                XmlNode long_node = node.SelectSingleNode("MAP/LONG");
-                if (place.Length > 0 && lat_node != null && long_node != null)
-                {
-                    string lat = lat_node.InnerText;
-                    string lng = long_node.InnerText;
-                    FactLocation loc = FactLocation.GetLocation(place, lat, lng, FactLocation.Geocode.GEDCOM_USER, true, true);
-                }
-                pb.Value++;
-                Application.DoEvents();
-            }
-            int afterCount = FactLocation.AllLocations.Count();
-            pb.Maximum += afterCount - beforeCount;
-        }
-
-        public void LoadGeoLocationsFromDataBase(ProgressBar pb)
-        {
-            try
-            {
-                DatabaseHelper.Instance.LoadGeoLocations(pb);
-                WriteGeocodeStatstoRTB(string.Empty);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error loading previously geocoded data. " + ex.Message, "FTAnalyzer");
-            }
-        }
 
         public void WriteGeocodeStatstoRTB(string title)
         {

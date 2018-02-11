@@ -17,6 +17,8 @@ using Ionic.Zip;
 using Printing.DataGridViewPrint.Tools;
 using System.Text;
 using System.Web;
+using FTAnalyzer.Forms.Controls;
+using System.Threading.Tasks;
 
 namespace FTAnalyzer
 {
@@ -86,7 +88,7 @@ namespace FTAnalyzer
 
         private void RegisterEventHandlers()
         {
-            Options.ReloadRequired += new EventHandler(Options_ReloadData);
+            Options.ReloadRequired += new EventHandler(Options_ReloadDataAsync);
             GeneralSettings.MinParentalAgeChanged += new EventHandler(Options_MinimumParentalAgeChanged);
         }
 
@@ -134,7 +136,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Load File
-        private void LoadFile(string filename)
+        private async Task LoadFileAsync(string filename)
         {
             try
             {
@@ -144,7 +146,12 @@ namespace FTAnalyzer
                 if (!stopProcessing)
                 {
                     //document.Save("GedcomOutput.xml");
-                    if (ft.LoadTree(filename, pbSources, pbIndividuals, pbFamilies, pbRelationships))
+                    MultiProgressBar bars = 
+                        new MultiProgressBar(new Dictionary<string, ProgressBar> {
+                            { "Source", pbSources }, { "Individual", pbIndividuals }, { "Family", pbFamilies }, { "Relationship", pbRelationships } });
+                    Progress<KeyValuePair<string, int>> progress = new Progress<KeyValuePair<string, int>>(bar => { bars.SetValue(bar.Key, bar.Value); });
+                    bool loaded = await ft.LoadTree(filename, progress);
+                    if (loaded)
                     {
                         ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
                         SetupFactsCheckboxes();
@@ -266,7 +273,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void OpenToolStripMenuItem_ClickAsync(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(Properties.Settings.Default.LoadLocation))
                 openGedcom.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -279,7 +286,7 @@ namespace FTAnalyzer
 
             if (openGedcom.ShowDialog() == DialogResult.OK)
             {
-                LoadFile(openGedcom.FileName);
+                await LoadFileAsync(openGedcom.FileName);
                 Properties.Settings.Default.LoadLocation = Path.GetFullPath(openGedcom.FileName);
                 Properties.Settings.Default.Save();
             }
@@ -495,7 +502,7 @@ namespace FTAnalyzer
             Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
             if (ind != null)
             {
-                ft.UpdateRootIndividual(ind.IndividualID, pbRelationships);
+                ft.UpdateRootIndividual(ind.IndividualID, null);
                 dgIndividuals.Refresh();
                 MessageBox.Show("Root person set as " + ind.Name + "\n\n" + ft.PrintRelationCount(), "FTAnalyzer");
             }
@@ -791,9 +798,9 @@ namespace FTAnalyzer
             // do anything that needs doing when option changes
         }
 
-        private void Options_ReloadData(object sender, EventArgs e)
+        private async void Options_ReloadDataAsync(object sender, EventArgs e)
         {
-            QueryReloadData();
+            await QueryReloadDataAsync();
         }
 
         private void Options_MinimumParentalAgeChanged(object sender, EventArgs e)
@@ -805,7 +812,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Reload Data
-        private void QueryReloadData()
+        private async Task QueryReloadDataAsync()
         {
             if (Properties.GeneralSettings.Default.ReloadRequired && ft.DataLoaded)
             {
@@ -814,16 +821,16 @@ namespace FTAnalyzer
                 Properties.GeneralSettings.Default.Save();
                 if (dr == DialogResult.Yes)
                 {
-                    LoadFile(filename);
+                    await LoadFileAsync(filename);
                 }
             }
         }
 
-        private void ReloadToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void ReloadToolStripMenuItem_ClickAsync(object sender, EventArgs e)
         {
             Properties.GeneralSettings.Default.ReloadRequired = false;
             Properties.GeneralSettings.Default.Save();
-            LoadFile(filename);
+            await LoadFileAsync(filename);
         }
         #endregion
 
@@ -1790,10 +1797,10 @@ namespace FTAnalyzer
             BuildRecentList();
         }
 
-        private void OpenRecentFile_Click(object sender, EventArgs e)
+        private async void OpenRecentFile_ClickAsync(object sender, EventArgs e)
         {
             string filename = (string)(sender as ToolStripMenuItem).Tag;
-            LoadFile(filename);
+            await LoadFileAsync(filename);
         }
 
         private void MnuRecent_DropDownOpening(object sender, EventArgs e)
@@ -2107,7 +2114,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Form Drag Drop
-        private void MainForm_DragDrop(object sender, DragEventArgs e)
+        private async void MainForm_DragDropAsync(object sender, DragEventArgs e)
         {
             bool fileLoaded = false;
             string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
@@ -2116,7 +2123,7 @@ namespace FTAnalyzer
                 if (Path.GetExtension(filename.ToLower()) == ".ged")
                 {
                     fileLoaded = true;
-                    LoadFile(filename);
+                    await LoadFileAsync(filename);
                     break;
                 }
             }
@@ -2714,11 +2721,11 @@ namespace FTAnalyzer
             {
                 HourGlass(true);
                 Individual root = ft.RootPerson;
-                ft.SetRelations(selected.IndividualID, pbRelationships);
+                ft.SetRelations(selected.IndividualID);
                 LostCousinsReferral lcr = new LostCousinsReferral(selected, ckbReferralInCommon.Checked);
                 DisposeDuplicateForms(lcr);
                 lcr.Show();
-                ft.SetRelations(root.IndividualID, pbRelationships);
+                ft.SetRelations(root.IndividualID);
                 HourGlass(false);
             }
         }
