@@ -280,7 +280,7 @@ namespace FTAnalyzer
                 progress.Report(new KeyValuePair<string, int>("Source", counter++ / sourceMax));
             }
             xmlErrorbox.AppendText("Loaded " + counter + " sources.\n");
-            progress.Report(new KeyValuePair<string, int>("Source", sourceMax));
+            progress.Report(new KeyValuePair<string, int>("Source", 100));
             // now get a list of all notes
             noteNodes = doc.SelectNodes("GED/NOTE");
             // now iterate through child elements of root
@@ -307,7 +307,7 @@ namespace FTAnalyzer
                 }
             }
             xmlErrorbox.AppendText("Loaded " + counter + " individuals.\n");
-            progress.Report(new KeyValuePair<string, int>("Individual", individualMax));
+            progress.Report(new KeyValuePair<string, int>("Individual", 100));
             // now iterate through child elements of root
             // finding all families
             list = doc.SelectNodes("GED/FAM");
@@ -322,7 +322,7 @@ namespace FTAnalyzer
             xmlErrorbox.AppendText("Loaded " + counter + " families.\n");
             CheckAllIndividualsAreInAFamily();
             RemoveFamiliesWithNoIndividuals();
-            progress.Report(new KeyValuePair<string, int>("Family", familyMax));
+            progress.Report(new KeyValuePair<string, int>("Family", 100));
             if (rootIndividualID == string.Empty)
                 rootIndividualID = individuals[0].IndividualID;
             UpdateRootIndividual(rootIndividualID, progress, true);
@@ -355,10 +355,10 @@ namespace FTAnalyzer
                     string lng = long_node.InnerText;
                     FactLocation loc = FactLocation.GetLocation(place, lat, lng, FactLocation.Geocode.GEDCOM_USER, true, true);
                 }
-                progress.Report(new KeyValuePair<string, int>("Relationships", 50 + counter++ / max));
+                progress.Report(new KeyValuePair<string, int>("Relationship", 50 + counter++ / max));
             }
             int afterCount = FactLocation.AllLocations.Count();
-            progress.Report(new KeyValuePair<string, int>("Relationships", 100));
+            progress.Report(new KeyValuePair<string, int>("Relationship", 100));
         }
 
         public void LoadGeoLocationsFromDataBase()
@@ -388,10 +388,10 @@ namespace FTAnalyzer
             // When the user changes the root individual, no location processing is taking place
             int locationCount = locationsToFollow ? FactLocation.AllLocations.Count() : 0;
             SetRelations(rootIndividualID);
-            progress?.Report(new KeyValuePair<string, int>("Relationships", 25));
+            progress?.Report(new KeyValuePair<string, int>("Relationship", 25));
             SetRelationDescriptions(rootIndividualID);
             xmlErrorbox.AppendText(PrintRelationCount());
-            progress?.Report(new KeyValuePair<string, int>("Relationships", 50));
+            progress?.Report(new KeyValuePair<string, int>("Relationship", 50));
         }
 
         private void LoadStandardisedNames()
