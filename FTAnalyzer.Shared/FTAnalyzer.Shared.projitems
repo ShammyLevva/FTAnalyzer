@@ -81,6 +81,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\SurnameStats.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Events\GoogleWaitingEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\BadFamilySearchDataException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\FactDateException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\DuplicateException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\InvalidDoubleDateException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\InvalidLocationCSVFileException.cs" />

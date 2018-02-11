@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
@@ -13,7 +12,6 @@ using GeoAPI.Geometries;
 using SharpMap.Data;
 using SharpMap.Data.Providers;
 using SharpMap.Layers;
-using SharpMap.Rendering.Decoration.ScaleBar;
 using SharpMap.Styles;
 using System.IO;
 using System.Web;
@@ -32,12 +30,14 @@ namespace FTAnalyzer.Forms
         private TearDropLayer selections;
         private bool isLoading;
         private bool isQuerying;
+        private IProgress<string> outputText;
 
-        public LifeLine()
+        public LifeLine(IProgress<string> outputText)
         {
             InitializeComponent();
             isLoading = true;
             isQuerying = false;
+            this.outputText = outputText;
             mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
             foreach (ToolStripItem item in mapZoomToolStrip.Items)
@@ -206,7 +206,7 @@ namespace FTAnalyzer.Forms
             {
                 this.Cursor = Cursors.WaitCursor;
                 IDisplayFact fact = (IDisplayFact)dgFacts.CurrentRow.DataBoundItem;
-                ft.OpenGeoLocations(fact.Location);
+                mh.OpenGeoLocations(fact.Location, outputText);
                 this.Cursor = Cursors.Default;
             }
         }
@@ -296,7 +296,7 @@ namespace FTAnalyzer.Forms
             {   // update map using first row as selected row
                 BuildMap();
             }
-            mh.CheckIfGeocodingNeeded(this);
+            mh.CheckIfGeocodingNeeded(this, outputText);
         }
 
         private void HideLabelsToolStripMenuItem_Click(object sender, EventArgs e)

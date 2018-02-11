@@ -18,11 +18,13 @@ namespace FTAnalyzer.Forms
         private Color backgroundColour;
         private ClusterLayer clusters;
         private bool isloading;
+        private IProgress<string> outputText;
 
-        public Places()
+        public Places(IProgress<string> outputText)
         {
             InitializeComponent();
             isloading = true;
+            this.outputText = outputText;
             mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
             foreach (ToolStripItem item in mapZoomToolStrip.Items)
@@ -132,7 +134,7 @@ namespace FTAnalyzer.Forms
             {
                 this.Cursor = Cursors.WaitCursor;
                 IDisplayFact fact = (IDisplayFact)dgFacts.CurrentRow.DataBoundItem;
-                ft.OpenGeoLocations(fact.Location);
+                mh.OpenGeoLocations(fact.Location, outputText);
                 this.Cursor = Cursors.Default;
             }
         }
@@ -169,7 +171,7 @@ namespace FTAnalyzer.Forms
             {   // update map using first node as selected node
                 tvPlaces.SelectedNode = tvPlaces.Nodes[0];
             }
-            mh.CheckIfGeocodingNeeded(this);
+            mh.CheckIfGeocodingNeeded(this, outputText);
             this.Cursor = Cursors.Default;
         }
 

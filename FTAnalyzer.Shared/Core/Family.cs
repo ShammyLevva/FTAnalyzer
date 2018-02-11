@@ -46,7 +46,7 @@ namespace FTAnalyzer
 
         public Family() : this(string.Empty) { }
 
-        public Family(XmlNode node)
+        public Family(XmlNode node, IProgress<string> outputText)
             : this(string.Empty)
         {
             if (node != null)
@@ -86,27 +86,27 @@ namespace FTAnalyzer
                             AddParentAndChildrenFacts(child, Wife, mother);
                         }
                         else
-                            ft.XmlErrorBox.AppendText("Child not found in family :" + FamilyRef + "\n");
+                            outputText.Report("Child not found in family :" + FamilyRef + "\n");
                     }
                     else
-                        ft.XmlErrorBox.AppendText("Child without a reference found in family : " + FamilyRef + "\n");
+                        outputText.Report("Child without a reference found in family : " + FamilyRef + "\n");
                 }
 
-                AddFacts(node, Fact.ANNULMENT);
-                AddFacts(node, Fact.DIVORCE);
-                AddFacts(node, Fact.DIVORCE_FILED);
-                AddFacts(node, Fact.ENGAGEMENT);
-                AddFacts(node, Fact.MARRIAGE);
-                AddFacts(node, Fact.MARRIAGE_BANN);
-                AddFacts(node, Fact.MARR_CONTRACT);
-                AddFacts(node, Fact.MARR_LICENSE);
-                AddFacts(node, Fact.MARR_SETTLEMENT);
-                AddFacts(node, Fact.SEPARATION);
-                AddFacts(node, Fact.CENSUS);
-                AddFacts(node, Fact.CUSTOM_EVENT);
-                AddFacts(node, Fact.CUSTOM_FACT);
-                AddFacts(node, Fact.REFERENCE);
-                AddFacts(node, Fact.UNKNOWN);
+                AddFacts(node, Fact.ANNULMENT, outputText);
+                AddFacts(node, Fact.DIVORCE, outputText);
+                AddFacts(node, Fact.DIVORCE_FILED, outputText);
+                AddFacts(node, Fact.ENGAGEMENT, outputText);
+                AddFacts(node, Fact.MARRIAGE, outputText);
+                AddFacts(node, Fact.MARRIAGE_BANN, outputText);
+                AddFacts(node, Fact.MARR_CONTRACT, outputText);
+                AddFacts(node, Fact.MARR_LICENSE, outputText);
+                AddFacts(node, Fact.MARR_SETTLEMENT, outputText);
+                AddFacts(node, Fact.SEPARATION, outputText);
+                AddFacts(node, Fact.CENSUS, outputText);
+                AddFacts(node, Fact.CUSTOM_EVENT, outputText);
+                AddFacts(node, Fact.CUSTOM_FACT, outputText);
+                AddFacts(node, Fact.REFERENCE, outputText);
+                AddFacts(node, Fact.UNKNOWN, outputText);
                 //TODO: need to think about family facts having AGE tags in GEDCOM
                 if (HasGoodChildrenStatus)
                     CheckChildrenStatusCounts();
@@ -186,13 +186,13 @@ namespace FTAnalyzer
             this.FamilyType = UNKNOWN;
         }
 
-        private void AddFacts(XmlNode node, string factType)
+        private void AddFacts(XmlNode node, string factType, IProgress<string> outputText)
         {
             XmlNodeList list = node.SelectNodes(factType);
             bool preferredFact = true;
             foreach (XmlNode n in list)
             {
-                Fact f = new Fact(n, this, preferredFact);
+                Fact f = new Fact(n, this, preferredFact,outputText);
                 if (f.FactType != Fact.CENSUS)
                 {
                     Facts.Add(f);

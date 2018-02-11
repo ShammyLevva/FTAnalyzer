@@ -699,7 +699,7 @@ namespace FTAnalyzer.Utilities
             }
         }
 
-        public bool RestoreDatabase()
+        public bool RestoreDatabase(IProgress<string> outputText)
         {
             bool result = true;
             try
@@ -710,7 +710,7 @@ namespace FTAnalyzer.Utilities
                 restoring = false;
                 FamilyTree ft = FamilyTree.Instance;
                 if (ft.DataLoaded)
-                    ft.LoadGeoLocationsFromDataBase();
+                    ft.LoadGeoLocationsFromDataBase(outputText);
             }
             catch (Exception)
             {

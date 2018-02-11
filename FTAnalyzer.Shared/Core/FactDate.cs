@@ -453,7 +453,7 @@ namespace FTAnalyzer
             }
             catch (Exception e)
             {
-                FamilyTree.Instance.XmlErrorBox.AppendText("Error parsing date '" + OriginalString + "' for " + factRef + "' error message was : " + e.Message + "\n");
+                throw new FactDateException("Error parsing date '" + OriginalString + "' for " + factRef + "' error message was : " + e.Message + "\n");
             }
         }
 

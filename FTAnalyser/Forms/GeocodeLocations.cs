@@ -3,8 +3,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -13,11 +11,6 @@ using FTAnalyzer.Filters;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
 using GeoAPI.Geometries;
-using SharpMap;
-using SharpMap.Data.Providers;
-using SharpMap.Layers;
-using SharpMap.Rendering;
-using SharpMap.Styles;
 using System.Text;
 using SharpMap.Utilities;
 
@@ -38,10 +31,11 @@ namespace FTAnalyzer.Forms
         private ConcurrentQueue<FactLocation> queue;
         private IDictionary<string, IList<OS50kGazetteer>> OS50kDictionary;
         private IList<OS50kGazetteer> OS50k;
+        private IProgress<string> outputText;
 
         private FactLocation CopyLocation;
 
-        public GeocodeLocations()
+        public GeocodeLocations(IProgress<string> outputText)
         {
             InitializeComponent();
             ft = FamilyTree.Instance;
@@ -49,6 +43,7 @@ namespace FTAnalyzer.Forms
             this.locations = ft.AllGeocodingLocations;
             this.queue = new ConcurrentQueue<FactLocation>();
             this.CopyLocation = FactLocation.UNKNOWN_LOCATION;
+            this.outputText = outputText;
             mnuPasteLocation.Enabled = false;
             dgLocations.AutoGenerateColumns = false;
             reportFormHelper = new ReportFormHelper(this, this.Text, dgLocations, this.ResetTable, "Geocode Locations");
@@ -476,7 +471,7 @@ namespace FTAnalyzer.Forms
             mnuReverseGeocode.Enabled = true;
             mnuOSGeocodeLocations.Enabled = true;
             string title = sender == OSGeocodeBackgroundWorker ? "OS Geocoding Results:" : "Google Geocoding Results:";
-            ft.WriteGeocodeStatstoRTB(title);
+            ft.WriteGeocodeStatstoRTB(title, outputText);
             ft.Geocoding = false;
             if (formClosing)
                 this.Close();
@@ -970,8 +965,8 @@ namespace FTAnalyzer.Forms
             if (result == DialogResult.Yes)
             {
                 DatabaseHelper.Instance.ResetPartials();
-                ft.LoadGeoLocationsFromDataBase();
-                ft.WriteGeocodeStatstoRTB("Geocoding status after reset partials:");
+                ft.LoadGeoLocationsFromDataBase(outputText);
+                ft.WriteGeocodeStatstoRTB("Geocoding status after reset partials:",outputText);
                 MessageBox.Show("Partials have been reset", "FTAnalyzer");
             }
         }

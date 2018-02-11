@@ -67,7 +67,7 @@ namespace FTAnalyzer.Mapping
             SetScaleBar(mapBox1);
         }
 
-        public void CheckIfGeocodingNeeded(Form form)
+        public void CheckIfGeocodingNeeded(Form form, IProgress<string> outputText)
         {
             int notsearched = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)));
             if (notsearched > 0 && !ft.Geocoding)
@@ -77,17 +77,39 @@ namespace FTAnalyzer.Mapping
                 if (res == DialogResult.Yes)
                 {
                     form.Cursor = Cursors.WaitCursor;
-                    StartGeocoding();
+                    StartGeocoding(outputText);
                     form.Cursor = Cursors.Default;
                 }
             }
         }
 
-        public void StartGeocoding()
+        public void OpenGeoLocations(FactLocation location, IProgress<string> outputText)
+        {
+            GeocodeLocations geoLocations = null;
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f is GeocodeLocations)
+                {
+                    f.BringToFront();
+                    f.Focus();
+                    geoLocations = (GeocodeLocations)f;
+                    break;
+                }
+            }
+            if (geoLocations == null)
+            {
+                geoLocations = new GeocodeLocations(outputText);
+                geoLocations.Show();
+            }
+            // we now have opened form
+            geoLocations.SelectLocation(location);
+        }
+
+        public void StartGeocoding(IProgress<string> outputText)
         {
             if (!ft.Geocoding) // don't geocode if another geocode session in progress
             {
-                GeocodeLocations geo = new GeocodeLocations();
+                GeocodeLocations geo = new GeocodeLocations(outputText);
                 MainForm.DisposeDuplicateForms(geo);
                 geo.Show();
                 geo.StartGoogleGeoCoding(false);

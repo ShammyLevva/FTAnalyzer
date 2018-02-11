@@ -35,7 +35,6 @@ namespace FTAnalyzer
         private IDictionary<string, List<Individual>> occupations;
         private IDictionary<StandardisedName, StandardisedName> names;
         private ISet<string> unknownFactTypes;
-        private RichTextBox xmlErrorbox = new RichTextBox();
         private RichTextBox todaysText = new RichTextBox();
         private IList<DataErrorGroup> dataErrorTypes;
         private SortableBindingList<IDisplayLocation>[] displayLocations;
@@ -51,6 +50,7 @@ namespace FTAnalyzer
         private bool _cancelDuplicates = false;
         private Int64 maxAhnentafel = 0;
         private Dictionary<string, Individual> individualLookup;
+        private string rootIndividualID = string.Empty;
 
         private int SoloFamilies { get; set; }
         private int PreMarriageFamilies { get; set; }
@@ -200,6 +200,7 @@ namespace FTAnalyzer
             unknownFactTypes = new HashSet<string>();
             dataErrorTypes = new List<DataErrorGroup>();
             displayLocations = new SortableBindingList<IDisplayLocation>[5];
+            rootIndividualID = string.Empty;
             SoloFamilies = 0;
             PreMarriageFamilies = 0;
             ResetLooseFacts();
@@ -226,38 +227,37 @@ namespace FTAnalyzer
                 unknownFactTypes.Add(factType);
         }
 
-        public Task<bool> LoadTree(string filename, IProgress<KeyValuePair<string, int>> progress)
+        public XmlDocument LoadTreeHeader(string filename, IProgress<string> outputText)
         {
             _loading = true;
             ResetData();
-            string rootIndividualID = string.Empty;
-            xmlErrorbox.AppendText("Loading file " + filename + "\n");
-            Application.DoEvents();
-            XmlDocument doc = GedcomToXml.Load(filename, Encoding.UTF8);
+            rootIndividualID = string.Empty;
+            outputText.Report("Loading file " + filename + "\n");
+            XmlDocument doc = GedcomToXml.Load(filename, Encoding.UTF8, outputText);
             if (doc == null)
             {
-                doc = GedcomToXml.Load(filename);
-                if(doc == null)
-                    return Task.FromResult(false);
+                doc = GedcomToXml.Load(filename, outputText);
+                if (doc == null)
+                    return null;
             }
             // doc.Save(@"c:\temp\FHcensusref.xml");
             // First check if file has a valid header record ie: it is actually a GEDCOM file
             XmlNode header = doc.SelectSingleNode("GED/HEAD");
             if (header == null)
             {
-                xmlErrorbox.AppendText("\n\nUnable to find GEDCOM 'HEAD' record in first line of file aborting load.\nIs " + filename + " really a GEDCOM file");
-                return Task.FromResult(false);
+                outputText.Report("\n\nUnable to find GEDCOM 'HEAD' record in first line of file aborting load.\nIs " + filename + " really a GEDCOM file");
+                return null;
             }
             XmlNode charset = doc.SelectSingleNode("GED/HEAD/CHAR");
             if (charset != null && charset.InnerText.Equals("ANSEL"))
-                doc = GedcomToXml.Load(filename);
+                doc = GedcomToXml.Load(filename, outputText);
             if (charset != null && charset.InnerText.Equals("UNICODE"))
-                doc = GedcomToXml.Load(filename, Encoding.Unicode);
+                doc = GedcomToXml.Load(filename, Encoding.Unicode, outputText);
             if (charset != null && charset.InnerText.Equals("ASCII"))
-                doc = GedcomToXml.Load(filename, Encoding.ASCII);
+                doc = GedcomToXml.Load(filename, Encoding.ASCII, outputText);
             if (doc == null)
-                return Task.FromResult(false);
-            ReportOptions();
+                return null;
+            ReportOptions(outputText);
             XmlNode root = doc.SelectSingleNode("GED/HEAD/_ROOT");
             if (root != null)
             {
@@ -269,6 +269,11 @@ namespace FTAnalyzer
                 catch (Exception)
                 { } // don't crash if can't set root individual
             }
+            return doc;
+        }
+
+        public void LoadTreeSources(XmlDocument doc, IProgress<int> progress, IProgress<string> outputText)
+        {
             // First iterate through attributes of root finding all sources
             XmlNodeList list = doc.SelectNodes("GED/SOUR");
             int sourceMax = list.Count == 0 ? 1 : list.Count;
@@ -277,69 +282,80 @@ namespace FTAnalyzer
             {
                 FactSource fs = new FactSource(n);
                 sources.Add(fs);
-                progress.Report(new KeyValuePair<string, int>("Source", counter++ / sourceMax));
+                progress.Report(counter++ / sourceMax);
             }
-            xmlErrorbox.AppendText("Loaded " + counter + " sources.\n");
-            progress.Report(new KeyValuePair<string, int>("Source", 100));
+            //TODO xmlErrorbox            xmlErrorbox.AppendText("Loaded " + counter + " sources.\n");
+            progress.Report(100);
             // now get a list of all notes
             noteNodes = doc.SelectNodes("GED/NOTE");
+        }
+
+        public void LoadTreeIndividuals(XmlDocument doc, IProgress<int> progress, IProgress<string> outputText)
+        {
             // now iterate through child elements of root
             // finding all individuals
-            list = doc.SelectNodes("GED/INDI");
+            XmlNodeList list = doc.SelectNodes("GED/INDI");
             int individualMax = list.Count;
-            counter = 0;
+            int counter = 0;
             foreach (XmlNode n in list)
             {
                 try
                 {
-                    Individual individual = new Individual(n);
+                    Individual individual = new Individual(n, outputText);
                     individuals.Add(individual);
                     if (individualLookup.ContainsKey(individual.IndividualID))
-                        xmlErrorbox.AppendText("More than one INDI record found with ID value " + individual.IndividualID + "\n");
+                        outputText.Report("More than one INDI record found with ID value " + individual.IndividualID + "\n");
                     else
                         individualLookup.Add(individual.IndividualID, individual);
                     AddOccupations(individual);
-                    progress.Report(new KeyValuePair<string, int>("Individual", counter++ / individualMax));
+                    progress.Report(counter++ / individualMax);
                 }
                 catch (NullReferenceException)
                 {
-                    xmlErrorbox.AppendText("File has invalid GEDCOM data. Individual found with no ID. Search file for 0 @@ INDI\n");
+                    outputText.Report("File has invalid GEDCOM data. Individual found with no ID. Search file for 0 @@ INDI\n");
                 }
             }
-            xmlErrorbox.AppendText("Loaded " + counter + " individuals.\n");
-            progress.Report(new KeyValuePair<string, int>("Individual", 100));
-            // now iterate through child elements of root
-            // finding all families
-            list = doc.SelectNodes("GED/FAM");
-            int familyMax = list.Count == 0 ? 1 : list.Count;
-            counter = 0;
-            foreach (XmlNode n in list)
-            {
-                Family family = new Family(n);
-                families.Add(family);
-                progress.Report(new KeyValuePair<string, int>("Family", counter++ / familyMax));
-            }
-            xmlErrorbox.AppendText("Loaded " + counter + " families.\n");
-            CheckAllIndividualsAreInAFamily();
-            RemoveFamiliesWithNoIndividuals();
-            progress.Report(new KeyValuePair<string, int>("Family", 100));
-            if (rootIndividualID == string.Empty)
-                rootIndividualID = individuals[0].IndividualID;
-            UpdateRootIndividual(rootIndividualID, progress, true);
-            CreateSharedFacts();
-            CountCensusFacts();
-            FixIDs();
-            SetDataErrorTypes();
-            CountUnknownFactTypes();
-            FactLocation.LoadGoogleFixesXMLFile(xmlErrorbox);
-            LoadLegacyLocations(doc.SelectNodes("GED/_PLAC_DEFN/PLAC"), progress);
-            LoadGeoLocationsFromDataBase();
-            _loading = false;
-            _dataloaded = true;
-            return Task.FromResult(true);
+            outputText.Report("Loaded " + counter + " individuals.\n");
+            progress.Report(100);
         }
 
-        private void LoadLegacyLocations(XmlNodeList list, IProgress<KeyValuePair<string, int>> progress)
+        public void LoadTreeFamilies(XmlDocument doc, IProgress<int> progress, IProgress<string> outputText)
+        {
+            // now iterate through child elements of root
+            // finding all families
+            XmlNodeList list = doc.SelectNodes("GED/FAM");
+            int familyMax = list.Count == 0 ? 1 : list.Count;
+            int counter = 0;
+            foreach (XmlNode n in list)
+            {
+                Family family = new Family(n, outputText);
+                families.Add(family);
+                progress.Report(counter++ / familyMax);
+            }
+            outputText.Report("Loaded " + counter + " families.\n");
+            CheckAllIndividualsAreInAFamily(outputText);
+            RemoveFamiliesWithNoIndividuals();
+            progress.Report(100);
+        }
+
+        public void LoadTreeRelationships(XmlDocument doc, IProgress<int> progress, IProgress<string> outputText)
+        {
+            if (rootIndividualID == string.Empty)
+                rootIndividualID = individuals[0].IndividualID;
+            UpdateRootIndividual(rootIndividualID, progress, outputText, true);
+            CreateSharedFacts();
+            CountCensusFacts(outputText);
+            FixIDs();
+            SetDataErrorTypes();
+            CountUnknownFactTypes(outputText);
+            FactLocation.LoadGoogleFixesXMLFile(outputText);
+            LoadLegacyLocations(doc.SelectNodes("GED/_PLAC_DEFN/PLAC"), progress);
+            LoadGeoLocationsFromDataBase(outputText);
+            _loading = false;
+            _dataloaded = true;
+        }
+
+        private void LoadLegacyLocations(XmlNodeList list, IProgress<int> progress)
         {
             int max = list.Count / 2; // /2 to make locations load account for 50% of bar
             int counter = 0;
@@ -355,18 +371,18 @@ namespace FTAnalyzer
                     string lng = long_node.InnerText;
                     FactLocation loc = FactLocation.GetLocation(place, lat, lng, FactLocation.Geocode.GEDCOM_USER, true, true);
                 }
-                progress.Report(new KeyValuePair<string, int>("Relationship", 50 + counter++ / max));
+                progress.Report(50 + counter++ / max);
             }
             int afterCount = FactLocation.AllLocations.Count();
-            progress.Report(new KeyValuePair<string, int>("Relationship", 100));
+            progress.Report(100);
         }
 
-        public void LoadGeoLocationsFromDataBase()
+        public void LoadGeoLocationsFromDataBase(IProgress<string> outputText)
         {
             try
             {
                 DatabaseHelper.Instance.LoadGeoLocations();
-                WriteGeocodeStatstoRTB(string.Empty);
+                WriteGeocodeStatstoRTB(string.Empty, outputText);
             }
             catch (Exception ex)
             {
@@ -374,24 +390,26 @@ namespace FTAnalyzer
             }
         }
 
-        public void UpdateRootIndividual(string rootIndividualID, IProgress<KeyValuePair<string, int>> progress, bool locationsToFollow= false)
+        public void UpdateRootIndividual(string rootIndividualID, IProgress<int> progress, IProgress<string> outputText, bool locationsToFollow= false)
         {
-            int start = xmlErrorbox.TextLength;
-            xmlErrorbox.AppendText("\nCalculating Relationships using " + rootIndividualID + ": " +
-                GetIndividual(rootIndividualID).Name + " as root person. Please wait\n\n");
-            int end = xmlErrorbox.TextLength;
-            xmlErrorbox.SelectionStart = start;
-            xmlErrorbox.SelectionLength = end - start;
-            xmlErrorbox.SelectionFont = new Font(xmlErrorbox.Font, FontStyle.Bold);
-            xmlErrorbox.SelectionLength = 0;
+            //int start = xmlErrorbox.TextLength;
+            //xmlErrorbox.AppendText("\nCalculating Relationships using " + rootIndividualID + ": " +
+            //    GetIndividual(rootIndividualID).Name + " as root person. Please wait\n\n");
+            //int end = xmlErrorbox.TextLength;
+            //xmlErrorbox.SelectionStart = start;
+            //xmlErrorbox.SelectionLength = end - start;
+            //xmlErrorbox.SelectionFont = new Font(xmlErrorbox.Font, FontStyle.Bold);
+            //xmlErrorbox.SelectionLength = 0;
+
+            outputText.Report("\nCalculating Relationships using " + rootIndividualID + ": " + GetIndividual(rootIndividualID).Name + " as root person. Please wait\n\n");
 
             // When the user changes the root individual, no location processing is taking place
             int locationCount = locationsToFollow ? FactLocation.AllLocations.Count() : 0;
             SetRelations(rootIndividualID);
-            progress?.Report(new KeyValuePair<string, int>("Relationship", 25));
+            progress?.Report(25);
             SetRelationDescriptions(rootIndividualID);
-            xmlErrorbox.AppendText(PrintRelationCount());
-            progress?.Report(new KeyValuePair<string, int>("Relationship", 50));
+            outputText.Report(PrintRelationCount());
+            progress?.Report(50);
         }
 
         private void LoadStandardisedNames()
@@ -441,38 +459,38 @@ namespace FTAnalyzer
             return gOut.Name;
         }
 
-        private void ReportOptions()
+        private void ReportOptions(IProgress<string> outputText)
         {
             if (Properties.GeneralSettings.Default.ReportOptions)
             {
-                xmlErrorbox.AppendText("\nThe current file handling options are set :");
-                xmlErrorbox.AppendText("\n    Use Special Character Filters When Loading : " + Properties.FileHandling.Default.LoadWithFilters);
-                xmlErrorbox.AppendText("\n    Retry failed lines by looking for bad line breaks : " + Properties.FileHandling.Default.RetryFailedLines);
+                outputText.Report("\nThe current file handling options are set :");
+                outputText.Report("\n    Use Special Character Filters When Loading : " + Properties.FileHandling.Default.LoadWithFilters);
+                outputText.Report("\n    Retry failed lines by looking for bad line breaks : " + Properties.FileHandling.Default.RetryFailedLines);
 
-                xmlErrorbox.AppendText("\nThe current general options are set :");
-                xmlErrorbox.AppendText("\n    Use Baptism/Christening Date If No Birth Date : " + Properties.GeneralSettings.Default.UseBaptismDates);
-                xmlErrorbox.AppendText("\n    Use Burial/Cremation Date If No Death Date : " + Properties.GeneralSettings.Default.UseBurialDates);
-                xmlErrorbox.AppendText("\n    Allow Empty Values In Locations : " + Properties.GeneralSettings.Default.AllowEmptyLocations);
-                xmlErrorbox.AppendText("\n    Treat Residence Facts As Census Facts : " + Properties.GeneralSettings.Default.UseResidenceAsCensus);
-                xmlErrorbox.AppendText("\n    Tolerate Slightly Inaccurate Census Dates : " + Properties.GeneralSettings.Default.TolerateInaccurateCensusDate);
-                xmlErrorbox.AppendText("\n    Family Census Facts Apply To Only Parents : " + Properties.GeneralSettings.Default.OnlyCensusParents);
-                xmlErrorbox.AppendText("\n    Loose Birth Minimum Parental Age : " + Properties.GeneralSettings.Default.MinParentalAge);
-                xmlErrorbox.AppendText("\n    Show Multiple Fact Forms When Viewing Duplicates : " + Properties.GeneralSettings.Default.MultipleFactForms);
-                xmlErrorbox.AppendText("\n    Use Compact Census References : " + Properties.GeneralSettings.Default.UseCompactCensusRef);
-                xmlErrorbox.AppendText("\n    Show Alias In Name Displays : " + Properties.GeneralSettings.Default.ShowAliasInName);
-                xmlErrorbox.AppendText("\n    Hide People Tagged As Missing From Census : " + Properties.GeneralSettings.Default.HidePeopleWithMissingTag);
-                xmlErrorbox.AppendText("\n    Files use Country First Locations : " + Properties.GeneralSettings.Default.ReverseLocations);
-                xmlErrorbox.AppendText("\n    Show World Events on the 'On This Day' tab : " + Properties.GeneralSettings.Default.ShowWorldEvents);
-                xmlErrorbox.AppendText("\n    Auto Create Census Events from Notes & Sources : " + Properties.GeneralSettings.Default.AutoCreateCensusFacts);
-                xmlErrorbox.AppendText("\n    Add Auto Created Census Locations to Locations List : " + Properties.GeneralSettings.Default.AddCreatedLocations);
-                xmlErrorbox.AppendText("\n    Ignore Unknown Fact Type Warnings : " + Properties.GeneralSettings.Default.IgnoreFactTypeWarnings);
+                outputText.Report("\nThe current general options are set :");
+                outputText.Report("\n    Use Baptism/Christening Date If No Birth Date : " + Properties.GeneralSettings.Default.UseBaptismDates);
+                outputText.Report("\n    Use Burial/Cremation Date If No Death Date : " + Properties.GeneralSettings.Default.UseBurialDates);
+                outputText.Report("\n    Allow Empty Values In Locations : " + Properties.GeneralSettings.Default.AllowEmptyLocations);
+                outputText.Report("\n    Treat Residence Facts As Census Facts : " + Properties.GeneralSettings.Default.UseResidenceAsCensus);
+                outputText.Report("\n    Tolerate Slightly Inaccurate Census Dates : " + Properties.GeneralSettings.Default.TolerateInaccurateCensusDate);
+                outputText.Report("\n    Family Census Facts Apply To Only Parents : " + Properties.GeneralSettings.Default.OnlyCensusParents);
+                outputText.Report("\n    Loose Birth Minimum Parental Age : " + Properties.GeneralSettings.Default.MinParentalAge);
+                outputText.Report("\n    Show Multiple Fact Forms When Viewing Duplicates : " + Properties.GeneralSettings.Default.MultipleFactForms);
+                outputText.Report("\n    Use Compact Census References : " + Properties.GeneralSettings.Default.UseCompactCensusRef);
+                outputText.Report("\n    Show Alias In Name Displays : " + Properties.GeneralSettings.Default.ShowAliasInName);
+                outputText.Report("\n    Hide People Tagged As Missing From Census : " + Properties.GeneralSettings.Default.HidePeopleWithMissingTag);
+                outputText.Report("\n    Files use Country First Locations : " + Properties.GeneralSettings.Default.ReverseLocations);
+                outputText.Report("\n    Show World Events on the 'On This Day' tab : " + Properties.GeneralSettings.Default.ShowWorldEvents);
+                outputText.Report("\n    Auto Create Census Events from Notes & Sources : " + Properties.GeneralSettings.Default.AutoCreateCensusFacts);
+                outputText.Report("\n    Add Auto Created Census Locations to Locations List : " + Properties.GeneralSettings.Default.AddCreatedLocations);
+                outputText.Report("\n    Ignore Unknown Fact Type Warnings : " + Properties.GeneralSettings.Default.IgnoreFactTypeWarnings);
 
-                xmlErrorbox.AppendText("\nThe current mapping options are set :");
-                xmlErrorbox.AppendText("\n    Custom Maps Location : " + Properties.MappingSettings.Default.CustomMapPath);
-                xmlErrorbox.AppendText("\n    Display British Parish Boundaries : " + Properties.MappingSettings.Default.UseParishBoundaries);
-                xmlErrorbox.AppendText("\n    Hide Scale Bar : " + Properties.MappingSettings.Default.HideScaleBar);
-                xmlErrorbox.AppendText("\n    Include Locations with Partial Match Status : " + Properties.MappingSettings.Default.IncludePartials);
-                xmlErrorbox.AppendText("\n\n");
+                outputText.Report("\nThe current mapping options are set :");
+                outputText.Report("\n    Custom Maps Location : " + Properties.MappingSettings.Default.CustomMapPath);
+                outputText.Report("\n    Display British Parish Boundaries : " + Properties.MappingSettings.Default.UseParishBoundaries);
+                outputText.Report("\n    Hide Scale Bar : " + Properties.MappingSettings.Default.HideScaleBar);
+                outputText.Report("\n    Include Locations with Partial Match Status : " + Properties.MappingSettings.Default.IncludePartials);
+                outputText.Report("\n\n");
             }
         }
 
@@ -481,16 +499,16 @@ namespace FTAnalyzer
             (families as List<Family>).RemoveAll(x => x.FamilySize == 0);
         }
 
-        private void CountUnknownFactTypes()
+        private void CountUnknownFactTypes(IProgress<string> outputText)
         {
             if (unknownFactTypes.Count > 0 && !Properties.GeneralSettings.Default.IgnoreFactTypeWarnings)
             {
                 foreach (string tag in unknownFactTypes)
                 {
                     int count = AllExportFacts.Count(f => f.FactType == tag);
-                    xmlErrorbox.AppendText("\nFound " + count + " facts of unknown fact type " + tag);
+                    outputText.Report("\nFound " + count + " facts of unknown fact type " + tag);
                 }
-                xmlErrorbox.AppendText("\n");
+                outputText.Report("\n");
             }
         }
 
@@ -505,7 +523,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void CountCensusFacts()
+        private void CountCensusFacts(IProgress<string> outputText)
         {
             int censusFacts = 0;
             int censusFTAFacts = 0;
@@ -546,45 +564,45 @@ namespace FTAnalyzer
             int resiTotal = resiFacts + resiWarnAllow;
             int lostCousinsTotal = lostCousinsFacts + lostCousinsWarnAllow + lostCousinsWarnIgnore + lostCousinsErrors;
 
-            xmlErrorbox.AppendText("\nFound " + censusTotal + " census facts in GEDCOM File (" + censusFacts + " good, ");
+            outputText.Report("\nFound " + censusTotal + " census facts in GEDCOM File (" + censusFacts + " good, ");
             if (censusWarnAllow > 0)
-                xmlErrorbox.AppendText(censusWarnAllow + " warnings (data tolerated), ");
+                outputText.Report(censusWarnAllow + " warnings (data tolerated), ");
             if (censusWarnIgnore > 0)
-                xmlErrorbox.AppendText(censusWarnIgnore + " warnings (data ignored in strict mode), ");
+                outputText.Report(censusWarnIgnore + " warnings (data ignored in strict mode), ");
             if (censusErrors > 0)
-                xmlErrorbox.AppendText(censusErrors + " errors (data discarded), ");
-            xmlErrorbox.AppendText((censusFacts + censusWarnAllow) + " usable facts loaded)");
+                outputText.Report(censusErrors + " errors (data discarded), ");
+            outputText.Report((censusFacts + censusWarnAllow) + " usable facts loaded)");
 
-            xmlErrorbox.AppendText("\nCreated " + censusFTAFacts + " census facts from individuals notes and source references in GEDCOM File");
-            xmlErrorbox.AppendText("\nFound " + resiTotal + " residence facts in GEDCOM File (" + resiCensus + " treated as census facts) ");
+            outputText.Report("\nCreated " + censusFTAFacts + " census facts from individuals notes and source references in GEDCOM File");
+            outputText.Report("\nFound " + resiTotal + " residence facts in GEDCOM File (" + resiCensus + " treated as census facts) ");
             if (resiWarnAllow > 0)
             {
                 if (Properties.GeneralSettings.Default.TolerateInaccurateCensusDate)
-                    xmlErrorbox.AppendText(resiWarnAllow + " warnings (data tolerated), ");
+                    outputText.Report(resiWarnAllow + " warnings (data tolerated), ");
                 else
-                    xmlErrorbox.AppendText(resiWarnAllow + " warnings (data ignored in strict mode), ");
+                    outputText.Report(resiWarnAllow + " warnings (data ignored in strict mode), ");
             }
-            xmlErrorbox.AppendText("\nFound " + censusReferences + " census references in file and " + blankCensusRefs + " facts missing a census reference");
+            outputText.Report("\nFound " + censusReferences + " census references in file and " + blankCensusRefs + " facts missing a census reference");
             if (partialCensusRefs > 0)
-                xmlErrorbox.AppendText(", with " + partialCensusRefs + " references with partial details");
+                outputText.Report(", with " + partialCensusRefs + " references with partial details");
             if (unrecognisedCensusRefs > 0)
-                xmlErrorbox.AppendText(" and " + unrecognisedCensusRefs + " references that were unrecognised");
-            xmlErrorbox.AppendText("\nFound " + lostCousinsTotal + " Lost Cousins facts in GEDCOM File (" + lostCousinsFacts + " good, ");
+                outputText.Report(" and " + unrecognisedCensusRefs + " references that were unrecognised");
+            outputText.Report("\nFound " + lostCousinsTotal + " Lost Cousins facts in GEDCOM File (" + lostCousinsFacts + " good, ");
             if (lostCousinsWarnAllow > 0)
-                xmlErrorbox.AppendText(lostCousinsWarnAllow + " warnings (data tolerated), ");
+                outputText.Report(lostCousinsWarnAllow + " warnings (data tolerated), ");
             if (lostCousinsWarnIgnore > 0)
-                xmlErrorbox.AppendText(lostCousinsWarnIgnore + " warnings (data ignored in strict mode), ");
+                outputText.Report(lostCousinsWarnIgnore + " warnings (data ignored in strict mode), ");
             if (lostCousinsErrors > 0)
-                xmlErrorbox.AppendText(lostCousinsErrors + " errors (data discarded), ");
-            xmlErrorbox.AppendText((lostCousinsFacts + lostCousinsWarnAllow) + " usable facts loaded)");
+                outputText.Report(lostCousinsErrors + " errors (data discarded), ");
+            outputText.Report((lostCousinsFacts + lostCousinsWarnAllow) + " usable facts loaded)");
             if (censusFacts == 0 && resiCensus == 0 && censusWarnAllow == 0 && censusFTAFacts == 0)
             {
-                xmlErrorbox.AppendText("\nFound no census or suitable residence facts in GEDCOM File and no recognisable\n");
-                xmlErrorbox.AppendText("census references in notes or in source records stored against an individual.\n\n");
-                xmlErrorbox.AppendText("The most likely reason is that you have recorded census facts as notes and have\n");
-                xmlErrorbox.AppendText("not recorded any census references. This will mean that the census report will\n");
-                xmlErrorbox.AppendText("show everyone as not yet found on census and the Lost Cousins report will show\n");
-                xmlErrorbox.AppendText("no-one with a census needing to be entered onto your Lost Cousins My Ancestors page.");
+                outputText.Report("\nFound no census or suitable residence facts in GEDCOM File and no recognisable\n");
+                outputText.Report("census references in notes or in source records stored against an individual.\n\n");
+                outputText.Report("The most likely reason is that you have recorded census facts as notes and have\n");
+                outputText.Report("not recorded any census references. This will mean that the census report will\n");
+                outputText.Report("show everyone as not yet found on census and the Lost Cousins report will show\n");
+                outputText.Report("no-one with a census needing to be entered onto your Lost Cousins My Ancestors page.");
             }
         }
 
@@ -606,7 +624,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void CheckAllIndividualsAreInAFamily()
+        private void CheckAllIndividualsAreInAFamily(IProgress<string> outputText)
         {
             foreach (Family f in families)
             {
@@ -634,7 +652,7 @@ namespace FTAnalyzer
                    families.Add(new Family(ind, NextSoloFamily));
             }
             if (SoloFamilies > 0)
-                xmlErrorbox.AppendText("Added " + SoloFamilies + " lone individuals as single families.\n");
+                outputText.Report("Added " + SoloFamilies + " lone individuals as single families.\n");
         }
         #endregion
 
@@ -643,12 +661,6 @@ namespace FTAnalyzer
         public bool Loading { get { return _loading; } }
 
         public bool DataLoaded { get { return _dataloaded; } }
-
-        public RichTextBox XmlErrorBox
-        {
-            get { return xmlErrorbox; }
-            set { xmlErrorbox = value; }
-        }
 
         public RichTextBox TodaysText
         {
@@ -2646,58 +2658,34 @@ namespace FTAnalyzer
 
         #region Geocoding
 
-        public void WriteGeocodeStatstoRTB(string title)
+        public void WriteGeocodeStatstoRTB(string title, IProgress<string> outputText)
         {
-            xmlErrorbox.AppendText("\n" + title);
+            outputText.Report("\n" + title);
             // write geocode results - ignore UNKNOWN entry
             int notsearched = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED));
             int needsReverse = FactLocation.AllLocations.Count(x => x.NeedsReverseGeocoding);
             //Predicate<FactLocation> predicate = x => x.NeedsReverseGeocoding;
             //List<FactLocation> needRev = FactLocation.AllLocations.Where(predicate).ToList();
-            xmlErrorbox.AppendText("\nFound " + FactLocation.LocationsCount + " locations in file.\n");
-            xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER) && x.FoundLocation.Length > 0) + " are GEDCOM/User Entered and have been geocoded.\n");
-            xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER) && x.FoundLocation.Length == 0) + " are GEDCOM/User Entered but lack a Google Location.\n");
-            xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.MATCHED)) + " have a geocoding match from Google.\n");
-            xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OS_50KMATCH)) + " have a geocoding match from Ordnance Survey.\n");
-            xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OS_50KFUZZY)) + " have a fuzzy geocoding match from Ordnance Survey.\n");
-            xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH)) + " have partial geocoding match from Google.\n");
-            xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.LEVEL_MISMATCH)) + " have partial geocoding match at lower level of detail.\n");
-            xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OS_50KPARTIAL)) + " have partial geocoding match from Ordnance Survey.\n");
-            xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OUT_OF_BOUNDS)) + " found by Google but outside country boundary.\n");
-            xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.INCORRECT)) + " marked as incorrect by user.\n");
-            xmlErrorbox.AppendText("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NO_MATCH)) + " could not be found on Google.\n");
-            xmlErrorbox.AppendText("    " + notsearched + " haven't been searched.");
+            outputText.Report("\nFound " + FactLocation.LocationsCount + " locations in file.\n");
+            outputText.Report("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER) && x.FoundLocation.Length > 0) + " are GEDCOM/User Entered and have been geocoded.\n");
+            outputText.Report("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER) && x.FoundLocation.Length == 0) + " are GEDCOM/User Entered but lack a Google Location.\n");
+            outputText.Report("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.MATCHED)) + " have a geocoding match from Google.\n");
+            outputText.Report("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OS_50KMATCH)) + " have a geocoding match from Ordnance Survey.\n");
+            outputText.Report("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OS_50KFUZZY)) + " have a fuzzy geocoding match from Ordnance Survey.\n");
+            outputText.Report("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.PARTIAL_MATCH)) + " have partial geocoding match from Google.\n");
+            outputText.Report("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.LEVEL_MISMATCH)) + " have partial geocoding match at lower level of detail.\n");
+            outputText.Report("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OS_50KPARTIAL)) + " have partial geocoding match from Ordnance Survey.\n");
+            outputText.Report("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.OUT_OF_BOUNDS)) + " found by Google but outside country boundary.\n");
+            outputText.Report("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.INCORRECT)) + " marked as incorrect by user.\n");
+            outputText.Report("    " + FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NO_MATCH)) + " could not be found on Google.\n");
+            outputText.Report("    " + notsearched + " haven't been searched.");
             if (notsearched > 0)
-                xmlErrorbox.AppendText(" Use the 'Run Google/OS Geocoder' option (under Maps menu) to find them.\n");
+                outputText.Report(" Use the 'Run Google/OS Geocoder' option (under Maps menu) to find them.\n");
             if (needsReverse > 0)
             {
-                xmlErrorbox.AppendText("\nNote " + needsReverse + " of the searched locations are missing a Google location.");
-                xmlErrorbox.AppendText(" Use the 'Lookup Blank Google Locations' option (under Maps menu) to find them.\n");
+                outputText.Report("\nNote " + needsReverse + " of the searched locations are missing a Google location.");
+                outputText.Report(" Use the 'Lookup Blank Google Locations' option (under Maps menu) to find them.\n");
             }
-
-            xmlErrorbox.BringToFront(); // force the rich text box to the front
-        }
-
-        public void OpenGeoLocations(FactLocation location)
-        {
-            GeocodeLocations geoLocations = null;
-            foreach (Form f in Application.OpenForms)
-            {
-                if (f is GeocodeLocations)
-                {
-                    f.BringToFront();
-                    f.Focus();
-                    geoLocations = (GeocodeLocations)f;
-                    break;
-                }
-            }
-            if (geoLocations == null)
-            {
-                geoLocations = new GeocodeLocations();
-                geoLocations.Show();
-            }
-            // we now have opened form
-            geoLocations.SelectLocation(location);
         }
 
         #endregion
@@ -3235,7 +3223,6 @@ namespace FTAnalyzer
         #region Dispose
         public void Dispose()
         {
-            xmlErrorbox.Dispose();
             todaysText.Dispose();
         }
         #endregion

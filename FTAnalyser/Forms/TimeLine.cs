@@ -22,11 +22,13 @@ namespace FTAnalyzer.Forms
         private Color backgroundColour;
         private ClusterLayer clusters;
         private bool loading;
+        private IProgress<string> outputText;
 
-        public TimeLine()
+        public TimeLine(IProgress<string> outputText)
         {
             InitializeComponent();
             loading = true;
+            this.outputText = outputText;
             mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
             tbYears.MouseWheel += new MouseEventHandler(TbYears_MouseWheel);
@@ -92,7 +94,7 @@ namespace FTAnalyzer.Forms
         private void GeocodeLocationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            mh.StartGeocoding();
+            mh.StartGeocoding(outputText);
             this.Cursor = Cursors.Default;
         }
 
@@ -209,7 +211,7 @@ namespace FTAnalyzer.Forms
             SetGeoCodedYearRange();
             SetupMap();
             DisplayLocationsForYear(labValue.Text);
-            mh.CheckIfGeocodingNeeded(this);
+            mh.CheckIfGeocodingNeeded(this, outputText);
             int Width = (int)Application.UserAppDataRegistry.GetValue("Timeline size - width", this.Width);
             int Height = (int)Application.UserAppDataRegistry.GetValue("Timeline size - height", this.Height);
             int Top = (int)Application.UserAppDataRegistry.GetValue("Timeline position - top", this.Top);

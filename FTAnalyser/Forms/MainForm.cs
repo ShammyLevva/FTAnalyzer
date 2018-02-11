@@ -19,6 +19,7 @@ using System.Text;
 using System.Web;
 using FTAnalyzer.Forms.Controls;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace FTAnalyzer
 {
@@ -45,7 +46,6 @@ namespace FTAnalyzer
             InitializeComponent();
             loading = true;
             displayOptionsOnLoadToolStripMenuItem.Checked = Properties.GeneralSettings.Default.ReportOptions;
-            ft.XmlErrorBox = rtbOutput;
             ft.TodaysText = rtbToday;
             treetopsRelation.MarriedToDB = false;
             ShowMenus(false);
@@ -146,12 +146,7 @@ namespace FTAnalyzer
                 if (!stopProcessing)
                 {
                     //document.Save("GedcomOutput.xml");
-                    MultiProgressBar bars = 
-                        new MultiProgressBar(new Dictionary<string, ProgressBar> {
-                            { "Source", pbSources }, { "Individual", pbIndividuals }, { "Family", pbFamilies }, { "Relationship", pbRelationships } });
-                    Progress<KeyValuePair<string, int>> progress = new Progress<KeyValuePair<string, int>>(bar => { bars.SetValue(bar.Key, bar.Value); });
-                    bool loaded = await ft.LoadTree(filename, progress);
-                    if (loaded)
+                    if (await LoadTreeAsync(filename))
                     {
                         ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
                         SetupFactsCheckboxes();
@@ -183,6 +178,22 @@ namespace FTAnalyzer
             {
                 HourGlass(false);
             }
+        }
+
+        private async Task<bool> LoadTreeAsync(string filename)
+        {
+            Progress<string> outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
+            XmlDocument doc = ft.LoadTreeHeader(filename, outputText);
+            if (doc == null) return false;
+            Progress<int> progress = new Progress<int>(value => { pbSources.Value = value; });
+            ft.LoadTreeSources(doc, progress, outputText);
+            progress = new Progress<int>(value => { pbIndividuals.Value = value; });
+            ft.LoadTreeIndividuals(doc, progress, outputText);
+            progress = new Progress<int>(value => { pbFamilies.Value = value; });
+            ft.LoadTreeFamilies(doc, progress, outputText);
+            progress = new Progress<int>(value => { pbRelationships.Value = value; });
+            ft.LoadTreeRelationships(doc, progress, outputText);
+            return true;
         }
 
         private void EnableLoadMenus()
@@ -286,7 +297,7 @@ namespace FTAnalyzer
 
             if (openGedcom.ShowDialog() == DialogResult.OK)
             {
-                await LoadFileAsync(openGedcom.FileName);
+                await Task.Run(() => LoadFileAsync(openGedcom.FileName));
                 Properties.Settings.Default.LoadLocation = Path.GetFullPath(openGedcom.FileName);
                 Properties.Settings.Default.Save();
             }
@@ -502,7 +513,8 @@ namespace FTAnalyzer
             Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
             if (ind != null)
             {
-                ft.UpdateRootIndividual(ind.IndividualID, null);
+                Progress<string> outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
+                ft.UpdateRootIndividual(ind.IndividualID, null, outputText);
                 dgIndividuals.Refresh();
                 MessageBox.Show("Root person set as " + ind.Name + "\n\n" + ft.PrintRelationCount(), "FTAnalyzer");
             }
@@ -902,7 +914,7 @@ namespace FTAnalyzer
         private void MnuShowTimeline_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            TimeLine tl = new TimeLine();
+            TimeLine tl = new TimeLine(new Progress<string>(value => { rtbOutput.AppendText(value); }));
             DisposeDuplicateForms(tl);
             tl.Show();
             HourGlass(false);
@@ -940,7 +952,7 @@ namespace FTAnalyzer
                     }
                 }
                 if (geo == null)
-                    geo = new GeocodeLocations();
+                    geo = new GeocodeLocations(new Progress<string>(value => { rtbOutput.AppendText(value); }));
                 geo.Show();
                 geo.Focus();
                 Application.DoEvents();
@@ -963,7 +975,7 @@ namespace FTAnalyzer
         private void LocationsGeocodeReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            GeocodeLocations geo = new GeocodeLocations();
+            GeocodeLocations geo = new GeocodeLocations(new Progress<string>(value => { rtbOutput.AppendText(value); }));
             DisposeDuplicateForms(geo);
             geo.Show();
             HourGlass(false);
@@ -983,7 +995,7 @@ namespace FTAnalyzer
         private void MnuLifelines_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            LifeLine l = new LifeLine();
+            LifeLine l = new LifeLine(new Progress<string> (value => { rtbOutput.AppendText(value); }));
             DisposeDuplicateForms(l);
             l.Show();
             HourGlass(false);
@@ -992,7 +1004,7 @@ namespace FTAnalyzer
         private void MnuPlaces_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Places p = new Places();
+            Places p = new Places(new Progress<string>(value => { rtbOutput.AppendText(value); }));
             DisposeDuplicateForms(p);
             p.Show();
             HourGlass(false);
@@ -1701,12 +1713,12 @@ namespace FTAnalyzer
                         {
                             File.Copy(dbh.Filename, dbh.CurrentFilename, true); // copy exisiting file to safety
                             zip.ExtractAll(dbh.DatabasePath, ExtractExistingFileAction.OverwriteSilently);
-                            if (dbh.RestoreDatabase())
+                            if (dbh.RestoreDatabase(new Progress<string>(value => { rtbOutput.AppendText(value); })))
                                 MessageBox.Show("Database restored from " + restoreDatabase.FileName, "FTAnalyzer Database Restore Complete");
                             else
                             {
                                 File.Copy(dbh.CurrentFilename, dbh.Filename, true);
-                                dbh.RestoreDatabase(); // restore original database
+                                dbh.RestoreDatabase(new Progress<string>(value => { rtbOutput.AppendText(value); })); // restore original database
                                 failed = true;
                             }
                         }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 using System.IO;
-using System.Windows.Forms;
 using FTAnalyzer.Utilities;
 
 namespace FTAnalyzer
@@ -12,8 +11,8 @@ namespace FTAnalyzer
     {
         private static readonly Encoding isoWesternEuropean = Encoding.GetEncoding(28591);
 
-        public static XmlDocument Load(string path) { return Load(path, isoWesternEuropean); }
-        public static XmlDocument Load(string path, Encoding encoding)
+        public static XmlDocument Load(string path, IProgress<string> outputText) { return Load(path, isoWesternEuropean, outputText); }
+        public static XmlDocument Load(string path, Encoding encoding, IProgress<string> outputText)
         {
             StreamReader reader;
             if (Properties.FileHandling.Default.LoadWithFilters)
@@ -27,7 +26,7 @@ namespace FTAnalyzer
                 reader = new StreamReader(CheckInvalidLineEnds(path), encoding);
             else
                 reader = new StreamReader(new FileStream(path, FileMode.Open, FileAccess.Read), encoding);
-            return Parse(reader);
+            return Parse(reader, outputText);
         }
 
         private static MemoryStream CheckInvalidLineEnds(string path)
@@ -83,11 +82,11 @@ namespace FTAnalyzer
             return outfs;
         }
 
-        private static XmlDocument Parse(StreamReader reader)
+        private static XmlDocument Parse(StreamReader reader, IProgress<string> outputText)
         {
             long lineNr = 0;
             int badLineCount = 0;
-            int badLineMax = 30;
+//            int badLineMax = 30;
 
             string line, nextline, token1, token2;
             string level;
@@ -189,7 +188,7 @@ namespace FTAnalyzer
                             if (tag.Equals("CHAR") &&
                                 !(valtrim.Equals("ANSEL") || valtrim.Equals("ASCII") || valtrim.Equals("ANSI") || valtrim.Equals("UTF-8") || valtrim.Equals("UNICODE")))
                             {
-                                FamilyTree.Instance.XmlErrorBox.AppendText("WARNING: Character set is " + value + ": should be ANSEL, ANSI, ASCII, UTF-8 or UNICODE\n");
+                                outputText.Report("WARNING: Character set is " + value + ": should be ANSEL, ANSI, ASCII, UTF-8 or UNICODE\n");
                             }
 
                             // insert any necessary closing tags
@@ -230,31 +229,29 @@ namespace FTAnalyzer
                         }
                         catch (Exception e)
                         {
-                            FamilyTree.Instance.XmlErrorBox.AppendText("Found bad line " + lineNr + ": '" + line + "'. " +
-                                "Error was : " + e.Message + "\n");
+                            outputText.Report("Found bad line " + lineNr + ": '" + line + "'. " + "Error was : " + e.Message + "\n");
                             badLineCount++;
                         }
                     }
                     line = nextline;
-                    System.Windows.Forms.Application.DoEvents();
-                    if (badLineCount > badLineMax)
-                    {
-                        string message = "Found more than " + badLineMax + " consecutive errors in the GEDCOM file.";
-                        if (!Properties.FileHandling.Default.LoadWithFilters)
-                            message += "\n\nNB. You might get less errors if you turn on the option to 'Use Special Character Filters When Loading' from the Tools Options menu.";
-                        message += "\n\nContinue Loading?";
-                        DialogResult result = MessageBox.Show(message, "Continue Loading?", MessageBoxButtons.YesNo);
-                        if (result == DialogResult.Yes)
-                        {
-                            badLineCount = 0;
-                            badLineMax *= 2; // double count of errors before next act
-                        }
-                        else
-                        {
-                            document = null;
-                            break;
-                        }
-                    }
+                    //if (badLineCount > badLineMax)
+                    //{
+                    //    string message = "Found more than " + badLineMax + " consecutive errors in the GEDCOM file.";
+                    //    if (!Properties.FileHandling.Default.LoadWithFilters)
+                    //        message += "\n\nNB. You might get less errors if you turn on the option to 'Use Special Character Filters When Loading' from the Tools Options menu.";
+                    //    message += "\n\nContinue Loading?";
+                    //    DialogResult result = MessageBox.Show(message, "Continue Loading?", MessageBoxButtons.YesNo);
+                    //    if (result == DialogResult.Yes)
+                    //    {
+                    //        badLineCount = 0;
+                    //        badLineMax *= 2; // double count of errors before next act
+                    //    }
+                    //    else
+                    //    {
+                    //        document = null;
+                    //        break;
+                    //    }
+                    //}
 
                 } // end while
 

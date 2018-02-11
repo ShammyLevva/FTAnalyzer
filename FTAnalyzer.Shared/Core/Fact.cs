@@ -281,23 +281,23 @@ namespace FTAnalyzer
             this.Preferred = preferred;
         }
 
-        public Fact(XmlNode node, Family family, bool preferred)
+        public Fact(XmlNode node, Family family, bool preferred, IProgress<string> outputText)
             : this(family.FamilyRef, preferred)
         {
             Individual = null;
             Family = family;
-            CreateFact(node, family.FamilyRef, preferred);
+            CreateFact(node, family.FamilyRef, preferred, outputText);
         }
 
-        public Fact(XmlNode node, Individual ind, bool preferred)
+        public Fact(XmlNode node, Individual ind, bool preferred, IProgress<string> outputText)
             : this(ind.IndividualID, preferred)
         {
             Individual = ind;
             Family = null;
-            CreateFact(node, ind.IndividualRef, preferred);
+            CreateFact(node, ind.IndividualRef, preferred, outputText);
         }
 
-        private void CreateFact(XmlNode node, string reference, bool preferred)
+        private void CreateFact(XmlNode node, string reference, bool preferred, IProgress<string> outputText)
         {
             if (node != null)
             {
@@ -306,7 +306,14 @@ namespace FTAnalyzer
                 {
                     FactType = FixFactTypes(node.Name);
                     string factDate = FamilyTree.GetText(node, "DATE", false);
-                    this.FactDate = new FactDate(factDate, reference);
+                    try
+                    {
+                        this.FactDate = new FactDate(factDate, reference);
+                    } 
+                    catch(FactDateException e)
+                    {
+                        outputText.Report(e.Message);
+                    }
                     this.Preferred = preferred;
                     if (FactType.Equals(CUSTOM_EVENT) || FactType.Equals(CUSTOM_FACT))
                     {
@@ -354,7 +361,7 @@ namespace FTAnalyzer
                                 source.AddFact(this);
                             }
                             else
-                                ft.XmlErrorBox.AppendText("Source " + srcref + " not found." + "\n");
+                                outputText.Report("Source " + srcref + " not found." + "\n");
                         }
                         if (IsCensusFact)
                             this.CensusReference = new CensusReference(this, n);

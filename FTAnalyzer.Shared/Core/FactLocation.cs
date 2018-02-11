@@ -219,7 +219,7 @@ namespace FTAnalyzer
             }
         }
 
-        public static void LoadGoogleFixesXMLFile(RichTextBox xmlErrorDocument)
+        public static void LoadGoogleFixesXMLFile(IProgress<string> progress)
         {
             LOCAL_GOOGLE_FIXES = new Dictionary<Tuple<int, string>, string>();
             try
@@ -237,7 +237,7 @@ namespace FTAnalyzer
                         AddGoogleFixes(LOCAL_GOOGLE_FIXES, n, SUBREGION);
                     foreach (XmlNode n in xmlDoc.SelectNodes("GoogleGeocodes/MultiLevelFixes/MultiLevelFix"))
                         AddGoogleFixes(LOCAL_GOOGLE_FIXES, n, UNKNOWN);
-                    xmlErrorDocument.AppendText("\nLoaded " + LOCAL_GOOGLE_FIXES.Count() + " Google Fixes.");
+                    progress.Report("\nLoaded " + LOCAL_GOOGLE_FIXES.Count() + " Google Fixes.");
                 }
             }
             catch (Exception e)

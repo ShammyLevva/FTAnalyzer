@@ -232,7 +232,6 @@
     <Compile Include="Forms\Controls\DateSliders.Designer.cs">
       <DependentUpon>DateSliders.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Controls\MultiProgressBar.cs" />
     <Compile Include="Forms\Controls\ToolStripMapSelector.cs">
       <SubType>Component</SubType>
     </Compile>

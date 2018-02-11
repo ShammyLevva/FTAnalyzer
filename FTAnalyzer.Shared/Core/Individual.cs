@@ -74,7 +74,7 @@ namespace FTAnalyzer
             preferredFacts = new Dictionary<string, Fact>();
         }
 
-        public Individual(XmlNode node)
+        public Individual(XmlNode node, IProgress<string> outputText)
             : this()
         {
             IndividualID = node.Attributes["ID"].Value;
@@ -88,54 +88,54 @@ namespace FTAnalyzer
             StandardisedName = FamilyTree.Instance.GetStandardisedName(IsMale, Forename);
 
             // Individual attributes
-            AddFacts(node, Fact.NAME);
-            AddFacts(node, Fact.ALIAS);
-            AddFacts(node, Fact.PHYSICAL_DESC);
-            AddFacts(node, Fact.EDUCATION);
-            AddFacts(node, Fact.DEGREE);
-            AddFacts(node, Fact.NAT_ID_NO);
-            AddFacts(node, Fact.NATIONAL_TRIBAL);
-            AddFacts(node, Fact.NUM_CHILDREN);
-            AddFacts(node, Fact.NUM_MARRIAGE);
-            AddFacts(node, Fact.OCCUPATION);
-            AddFacts(node, Fact.PROPERTY);
-            AddFacts(node, Fact.MEDICAL_CONDITION);
-            AddFacts(node, Fact.REFERENCE);
+            AddFacts(node, Fact.NAME, outputText);
+            AddFacts(node, Fact.ALIAS, outputText);
+            AddFacts(node, Fact.PHYSICAL_DESC, outputText);
+            AddFacts(node, Fact.EDUCATION, outputText);
+            AddFacts(node, Fact.DEGREE, outputText);
+            AddFacts(node, Fact.NAT_ID_NO, outputText);
+            AddFacts(node, Fact.NATIONAL_TRIBAL, outputText);
+            AddFacts(node, Fact.NUM_CHILDREN, outputText);
+            AddFacts(node, Fact.NUM_MARRIAGE, outputText);
+            AddFacts(node, Fact.OCCUPATION, outputText);
+            AddFacts(node, Fact.PROPERTY, outputText);
+            AddFacts(node, Fact.MEDICAL_CONDITION, outputText);
+            AddFacts(node, Fact.REFERENCE, outputText);
 
             // Individual events
-            AddFacts(node, Fact.BIRTH);
-            AddFacts(node, Fact.CHRISTENING);
-            AddFacts(node, Fact.DEATH);
-            AddFacts(node, Fact.BURIAL);
-            AddFacts(node, Fact.CREMATION);
-            AddFacts(node, Fact.ADOPTION);
-            AddFacts(node, Fact.BAPTISM);
-            AddFacts(node, Fact.BAR_MITZVAH);
-            AddFacts(node, Fact.BAS_MITZVAH);
-            AddFacts(node, Fact.BLESSING);
-            AddFacts(node, Fact.ADULT_CHRISTENING);
-            AddFacts(node, Fact.CONFIRMATION);
-            AddFacts(node, Fact.FIRST_COMMUNION);
-            AddFacts(node, Fact.ORDINATION);
-            AddFacts(node, Fact.NATURALIZATION);
-            AddFacts(node, Fact.EMIGRATION);
-            AddFacts(node, Fact.IMMIGRATION);
-            AddFacts(node, Fact.CENSUS);
-            AddFacts(node, Fact.RESIDENCE);
-            AddFacts(node, Fact.PROBATE);
-            AddFacts(node, Fact.WILL);
-            AddFacts(node, Fact.LEGATEE);
-            AddFacts(node, Fact.GRADUATION);
-            AddFacts(node, Fact.RETIREMENT);
-            AddFacts(node, Fact.MILITARY);
-            AddFacts(node, Fact.SERVICE_NUMBER);
-            AddFacts(node, Fact.ELECTION);
-            AddFacts(node, Fact.EMPLOYMENT);
+            AddFacts(node, Fact.BIRTH, outputText);
+            AddFacts(node, Fact.CHRISTENING, outputText);
+            AddFacts(node, Fact.DEATH, outputText);
+            AddFacts(node, Fact.BURIAL, outputText);
+            AddFacts(node, Fact.CREMATION, outputText);
+            AddFacts(node, Fact.ADOPTION, outputText);
+            AddFacts(node, Fact.BAPTISM, outputText);
+            AddFacts(node, Fact.BAR_MITZVAH, outputText);
+            AddFacts(node, Fact.BAS_MITZVAH, outputText);
+            AddFacts(node, Fact.BLESSING, outputText);
+            AddFacts(node, Fact.ADULT_CHRISTENING, outputText);
+            AddFacts(node, Fact.CONFIRMATION, outputText);
+            AddFacts(node, Fact.FIRST_COMMUNION, outputText);
+            AddFacts(node, Fact.ORDINATION, outputText);
+            AddFacts(node, Fact.NATURALIZATION, outputText);
+            AddFacts(node, Fact.EMIGRATION, outputText);
+            AddFacts(node, Fact.IMMIGRATION, outputText);
+            AddFacts(node, Fact.CENSUS, outputText);
+            AddFacts(node, Fact.RESIDENCE, outputText);
+            AddFacts(node, Fact.PROBATE, outputText);
+            AddFacts(node, Fact.WILL, outputText);
+            AddFacts(node, Fact.LEGATEE, outputText);
+            AddFacts(node, Fact.GRADUATION, outputText);
+            AddFacts(node, Fact.RETIREMENT, outputText);
+            AddFacts(node, Fact.MILITARY, outputText);
+            AddFacts(node, Fact.SERVICE_NUMBER, outputText);
+            AddFacts(node, Fact.ELECTION, outputText);
+            AddFacts(node, Fact.EMPLOYMENT, outputText);
 
             // Custom facts
-            AddFacts(node, Fact.CUSTOM_EVENT);
-            AddFacts(node, Fact.CUSTOM_FACT);
-            AddFacts(node, Fact.UNKNOWN);
+            AddFacts(node, Fact.CUSTOM_EVENT, outputText);
+            AddFacts(node, Fact.CUSTOM_FACT, outputText);
+            AddFacts(node, Fact.UNKNOWN, outputText);
 
             if (Properties.GeneralSettings.Default.AutoCreateCensusFacts)
             {
@@ -146,9 +146,7 @@ namespace FTAnalyzer
 
         internal Individual(Individual i)
         {
-            if (i == null)
-                FamilyTree.Instance.XmlErrorBox.AppendText("ERROR: Individual copy constructor called with null individual");
-            else
+            if (i != null)
             {
                 this.IndividualID = i.IndividualID;
                 this.forenames = i.forenames;
@@ -802,7 +800,7 @@ namespace FTAnalyzer
 
         #region Fact Functions
 
-        private void AddFacts(XmlNode node, string factType)
+        private void AddFacts(XmlNode node, string factType, IProgress<string> outputText)
         {
             XmlNodeList list = node.SelectNodes(factType);
             bool preferredFact = true;
@@ -812,7 +810,7 @@ namespace FTAnalyzer
                 {
                     if (factType != Fact.NAME || !preferredFact)
                     {  // don't add first name in file as a fact 
-                        Fact f = new Fact(n, this, preferredFact);
+                        Fact f = new Fact(n, this, preferredFact, outputText);
                         AddFact(f);
                         if (f.GedcomAge != null && f.GedcomAge.CalculatedBirthDate != FactDate.UNKNOWN_DATE)
                         {
@@ -825,8 +823,7 @@ namespace FTAnalyzer
                 catch (InvalidXMLFactException ex)
                 {
                     FamilyTree ft = FamilyTree.Instance;
-                    ft.XmlErrorBox.AppendText("Error with Individual : " + IndividualRef + "\n" +
-                        "       Invalid fact : " + ex.Message);
+                    outputText.Report("Error with Individual : " + IndividualRef + "\n" + "       Invalid fact : " + ex.Message);
                 }
                 preferredFact = false;
             }
