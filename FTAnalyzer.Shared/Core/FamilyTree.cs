@@ -227,147 +227,132 @@ namespace FTAnalyzer
                 unknownFactTypes.Add(factType);
         }
 
-        public Task<XmlDocument> LoadTreeHeader(string filename, IProgress<string> outputText)
+        public XmlDocument LoadTreeHeader(string filename, IProgress<string> outputText)
         {
-            return Task.Run(() =>
+            _loading = true;
+            ResetData();
+            rootIndividualID = string.Empty;
+            outputText.Report("Loading file " + filename + "\n");
+            XmlDocument doc = GedcomToXml.Load(filename, Encoding.UTF8, outputText);
+            if (doc == null)
             {
-                _loading = true;
-                ResetData();
-                rootIndividualID = string.Empty;
-                outputText.Report("Loading file " + filename + "\n");
-                XmlDocument doc = GedcomToXml.Load(filename, Encoding.UTF8, outputText);
+                doc = GedcomToXml.Load(filename, outputText);
                 if (doc == null)
-                {
-                    doc = GedcomToXml.Load(filename, outputText);
-                    if (doc == null)
-                        return null;
-                }
+                    return null;
+            }
                 // doc.Save(@"c:\temp\FHcensusref.xml");
                 // First check if file has a valid header record ie: it is actually a GEDCOM file
                 XmlNode header = doc.SelectSingleNode("GED/HEAD");
-                if (header == null)
+            if (header == null)
+            {
+                outputText.Report("\n\nUnable to find GEDCOM 'HEAD' record in first line of file aborting load.\nIs " + filename + " really a GEDCOM file");
+                return null;
+            }
+            XmlNode charset = doc.SelectSingleNode("GED/HEAD/CHAR");
+            if (charset != null && charset.InnerText.Equals("ANSEL"))
+                doc = GedcomToXml.Load(filename, outputText);
+            if (charset != null && charset.InnerText.Equals("UNICODE"))
+                doc = GedcomToXml.Load(filename, Encoding.Unicode, outputText);
+            if (charset != null && charset.InnerText.Equals("ASCII"))
+                doc = GedcomToXml.Load(filename, Encoding.ASCII, outputText);
+            if (doc == null)
+                return null;
+            ReportOptions(outputText);
+            XmlNode root = doc.SelectSingleNode("GED/HEAD/_ROOT");
+            if (root != null)
+            {
+                // file has a root individual
+                try
                 {
-                    outputText.Report("\n\nUnable to find GEDCOM 'HEAD' record in first line of file aborting load.\nIs " + filename + " really a GEDCOM file");
-                    return null;
+                    rootIndividualID = root.Attributes["REF"].Value;
                 }
-                XmlNode charset = doc.SelectSingleNode("GED/HEAD/CHAR");
-                if (charset != null && charset.InnerText.Equals("ANSEL"))
-                    doc = GedcomToXml.Load(filename, outputText);
-                if (charset != null && charset.InnerText.Equals("UNICODE"))
-                    doc = GedcomToXml.Load(filename, Encoding.Unicode, outputText);
-                if (charset != null && charset.InnerText.Equals("ASCII"))
-                    doc = GedcomToXml.Load(filename, Encoding.ASCII, outputText);
-                if (doc == null)
-                    return null;
-                ReportOptions(outputText);
-                XmlNode root = doc.SelectSingleNode("GED/HEAD/_ROOT");
-                if (root != null)
-                {
-                    // file has a root individual
-                    try
-                    {
-                        rootIndividualID = root.Attributes["REF"].Value;
-                    }
-                    catch (Exception)
-                    { } // don't crash if can't set root individual
-                }
-                return doc;
-            });
+                catch (Exception)
+                { } // don't crash if can't set root individual
+            }
+            return doc;
         }
 
-        public Task LoadTreeSources(XmlDocument doc, IProgress<int> progress, IProgress<string> outputText)
+        public void LoadTreeSources(XmlDocument doc, IProgress<int> progress, IProgress<string> outputText)
         {
-            return Task.Run(() =>
+            // First iterate through attributes of root finding all sources
+            XmlNodeList list = doc.SelectNodes("GED/SOUR");
+            int sourceMax = list.Count == 0 ? 1 : list.Count;
+            int counter = 0;
+            foreach (XmlNode n in list)
             {
-                // First iterate through attributes of root finding all sources
-                XmlNodeList list = doc.SelectNodes("GED/SOUR");
-                int sourceMax = list.Count == 0 ? 1 : list.Count;
-                int counter = 0;
-                foreach (XmlNode n in list)
-                {
-                    FactSource fs = new FactSource(n);
-                    sources.Add(fs);
-                    progress.Report(counter++ / sourceMax);
-                }
-                outputText.Report("Loaded " + counter + " sources.\n");
-                progress.Report(100);
-                // now get a list of all notes
-                noteNodes = doc.SelectNodes("GED/NOTE");
-            });
+                FactSource fs = new FactSource(n);
+                sources.Add(fs);
+                progress.Report(counter++ / sourceMax);
+            }
+            outputText.Report("Loaded " + counter + " sources.\n");
+            progress.Report(100);
+            // now get a list of all notes
+            noteNodes = doc.SelectNodes("GED/NOTE");
         }
 
-        public Task LoadTreeIndividuals(XmlDocument doc, IProgress<int> progress, IProgress<string> outputText)
+        public void LoadTreeIndividuals(XmlDocument doc, IProgress<int> progress, IProgress<string> outputText)
         {
-            return Task.Run(() =>
+            // now iterate through child elements of root
+            // finding all individuals
+            XmlNodeList list = doc.SelectNodes("GED/INDI");
+            int individualMax = list.Count;
+            int counter = 0;
+            foreach (XmlNode n in list)
             {
-                // now iterate through child elements of root
-                // finding all individuals
-                XmlNodeList list = doc.SelectNodes("GED/INDI");
-                int individualMax = list.Count;
-                int counter = 0;
-                foreach (XmlNode n in list)
+                try
                 {
-                    try
-                    {
-                        Individual individual = new Individual(n, outputText);
-                        individuals.Add(individual);
-                        if (individualLookup.ContainsKey(individual.IndividualID))
-                            outputText.Report("More than one INDI record found with ID value " + individual.IndividualID + "\n");
-                        else
-                            individualLookup.Add(individual.IndividualID, individual);
-                        AddOccupations(individual);
-                        progress.Report(counter++ / individualMax);
-                    }
-                    catch (NullReferenceException)
-                    {
-                        outputText.Report("File has invalid GEDCOM data. Individual found with no ID. Search file for 0 @@ INDI\n");
-                    }
+                    Individual individual = new Individual(n, outputText);
+                    individuals.Add(individual);
+                    if (individualLookup.ContainsKey(individual.IndividualID))
+                        outputText.Report("More than one INDI record found with ID value " + individual.IndividualID + "\n");
+                    else
+                        individualLookup.Add(individual.IndividualID, individual);
+                    AddOccupations(individual);
+                    progress.Report(counter++ / individualMax);
                 }
-                outputText.Report("Loaded " + counter + " individuals.\n");
-                progress.Report(100);
-            });
+                catch (NullReferenceException)
+                {
+                    outputText.Report("File has invalid GEDCOM data. Individual found with no ID. Search file for 0 @@ INDI\n");
+                }
+            }
+            outputText.Report("Loaded " + counter + " individuals.\n");
+            progress.Report(100);
         }
 
-        public Task LoadTreeFamilies(XmlDocument doc, IProgress<int> progress, IProgress<string> outputText)
+        public void LoadTreeFamilies(XmlDocument doc, IProgress<int> progress, IProgress<string> outputText)
         {
-            return Task.Run(() =>
+            // now iterate through child elements of root
+            // finding all families
+            XmlNodeList list = doc.SelectNodes("GED/FAM");
+            int familyMax = list.Count == 0 ? 1 : list.Count;
+            int counter = 0;
+            foreach (XmlNode n in list)
             {
-                // now iterate through child elements of root
-                // finding all families
-                XmlNodeList list = doc.SelectNodes("GED/FAM");
-                int familyMax = list.Count == 0 ? 1 : list.Count;
-                int counter = 0;
-                foreach (XmlNode n in list)
-                {
-                    Family family = new Family(n, outputText);
-                    families.Add(family);
-                    progress.Report(counter++ / familyMax);
-                }
-                outputText.Report("Loaded " + counter + " families.\n");
-                CheckAllIndividualsAreInAFamily(outputText);
-                RemoveFamiliesWithNoIndividuals();
-                progress.Report(100);
-            });
+                Family family = new Family(n, outputText);
+                families.Add(family);
+                progress.Report(counter++ / familyMax);
+            }
+            outputText.Report("Loaded " + counter + " families.\n");
+            CheckAllIndividualsAreInAFamily(outputText);
+            RemoveFamiliesWithNoIndividuals();
+            progress.Report(100);
         }
 
-        public Task LoadTreeRelationships(XmlDocument doc, IProgress<int> progress, IProgress<string> outputText)
+        public void LoadTreeRelationships(XmlDocument doc, IProgress<int> progress, IProgress<string> outputText)
         {
-            return Task.Run(() =>
-            {
-                if (rootIndividualID == string.Empty)
-                    rootIndividualID = individuals[0].IndividualID;
-                UpdateRootIndividual(rootIndividualID, progress, outputText, true);
-                CreateSharedFacts();
-                CountCensusFacts(outputText);
-                FixIDs();
-                SetDataErrorTypes();
-                CountUnknownFactTypes(outputText);
-                FactLocation.LoadGoogleFixesXMLFile(outputText);
-                LoadLegacyLocations(doc.SelectNodes("GED/_PLAC_DEFN/PLAC"), progress);
-                LoadGeoLocationsFromDataBase(outputText);
-                _loading = false;
-                _dataloaded = true;
-            });
+            if (rootIndividualID == string.Empty)
+                rootIndividualID = individuals[0].IndividualID;
+            UpdateRootIndividual(rootIndividualID, progress, outputText, true);
+            CreateSharedFacts();
+            CountCensusFacts(outputText);
+            FixIDs();
+            SetDataErrorTypes();
+            CountUnknownFactTypes(outputText);
+            FactLocation.LoadGoogleFixesXMLFile(outputText);
+            LoadLegacyLocations(doc.SelectNodes("GED/_PLAC_DEFN/PLAC"), progress);
+            LoadGeoLocationsFromDataBase(outputText);
+            _loading = false;
+            _dataloaded = true;
         }
 
         private void LoadLegacyLocations(XmlNodeList list, IProgress<int> progress)

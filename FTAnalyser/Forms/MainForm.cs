@@ -183,16 +183,16 @@ namespace FTAnalyzer
         private async Task<bool> LoadTreeAsync(string filename)
         {
             Progress<string> outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
-            XmlDocument doc = await ft.LoadTreeHeader(filename, outputText);
+            XmlDocument doc = await Task.Run(() => ft.LoadTreeHeader(filename, outputText));
             if (doc == null) return false;
             Progress<int> progress = new Progress<int>(value => { pbSources.Value = value; });
-            await ft.LoadTreeSources(doc, progress, outputText);
+            await Task.Run(() => ft.LoadTreeSources(doc, progress, outputText));
             progress = new Progress<int>(value => { pbIndividuals.Value = value; });
-            await ft.LoadTreeIndividuals(doc, progress, outputText);
+            await Task.Run(() => ft.LoadTreeIndividuals(doc, progress, outputText));
             progress = new Progress<int>(value => { pbFamilies.Value = value; });
-            await ft.LoadTreeFamilies(doc, progress, outputText);
+            await Task.Run(() => ft.LoadTreeFamilies(doc, progress, outputText));
             progress = new Progress<int>(value => { pbRelationships.Value = value; });
-            await ft.LoadTreeRelationships(doc, progress, outputText);
+            await Task.Run(() => ft.LoadTreeRelationships(doc, progress, outputText));
             return true;
         }
 
