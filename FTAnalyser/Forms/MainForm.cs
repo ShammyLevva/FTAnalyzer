@@ -25,7 +25,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "6.1.3.2";
+        public static string VERSION = "6.2.0.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         
@@ -183,16 +183,16 @@ namespace FTAnalyzer
         private async Task<bool> LoadTreeAsync(string filename)
         {
             Progress<string> outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
-            XmlDocument doc = ft.LoadTreeHeader(filename, outputText);
+            XmlDocument doc = await ft.LoadTreeHeader(filename, outputText);
             if (doc == null) return false;
             Progress<int> progress = new Progress<int>(value => { pbSources.Value = value; });
-            ft.LoadTreeSources(doc, progress, outputText);
+            await ft.LoadTreeSources(doc, progress, outputText);
             progress = new Progress<int>(value => { pbIndividuals.Value = value; });
-            ft.LoadTreeIndividuals(doc, progress, outputText);
+            await ft.LoadTreeIndividuals(doc, progress, outputText);
             progress = new Progress<int>(value => { pbFamilies.Value = value; });
-            ft.LoadTreeFamilies(doc, progress, outputText);
+            await ft.LoadTreeFamilies(doc, progress, outputText);
             progress = new Progress<int>(value => { pbRelationships.Value = value; });
-            ft.LoadTreeRelationships(doc, progress, outputText);
+            await ft.LoadTreeRelationships(doc, progress, outputText);
             return true;
         }
 
