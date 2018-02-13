@@ -6,10 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
-using System.Windows.Forms;
 using System.Xml;
 using FTAnalyzer.Filters;
-using FTAnalyzer.Forms;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
 using Ionic.Zip;
@@ -18,11 +16,10 @@ using System.Runtime.Serialization.Formatters.Binary;
 using GeoAPI.Geometries;
 using System.Net;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace FTAnalyzer
 {
-    class FamilyTree : IDisposable
+    class FamilyTree
     {
         #region Variables
         private static FamilyTree instance;
@@ -35,7 +32,6 @@ namespace FTAnalyzer
         private IDictionary<string, List<Individual>> occupations;
         private IDictionary<StandardisedName, StandardisedName> names;
         private ISet<string> unknownFactTypes;
-        private RichTextBox todaysText = new RichTextBox();
         private IList<DataErrorGroup> dataErrorTypes;
         private SortableBindingList<IDisplayLocation>[] displayLocations;
         private SortableBindingList<IDisplayLooseDeath> looseDeaths;
@@ -661,12 +657,6 @@ namespace FTAnalyzer
         public bool Loading { get { return _loading; } }
 
         public bool DataLoaded { get { return _dataloaded; } }
-
-        public RichTextBox TodaysText
-        {
-            get { return todaysText; }
-            set { todaysText = value; }
-        }
 
         public List<MapLocation> AllMapLocations
         {
@@ -1341,7 +1331,6 @@ namespace FTAnalyzer
             IEnumerable<Individual> directs = GetAllRelationsOfType(Individual.DIRECT);
             IEnumerable<Individual> blood = GetAllRelationsOfType(Individual.BLOOD);
             IEnumerable<Individual> married = GetAllRelationsOfType(Individual.MARRIEDTODB);
-            Application.DoEvents();
             Individual rootPerson = GetIndividual(startID);
             foreach (Individual i in directs)
             {
@@ -1837,6 +1826,8 @@ namespace FTAnalyzer
                 dataErrorTypes.Add(new DataErrorGroup(i, errors[i]));
         }
 
+        public IList<DataErrorGroup> DataErrorTypes { get { return dataErrorTypes; } }
+
         public bool FactBeforeBirth(Individual ind, Fact f)
         {
             if (f.FactType != Fact.BIRTH & f.FactType != Fact.BIRTH_CALC && Fact.LOOSE_BIRTH_FACTS.Contains(f.FactType) && f.FactDate.IsBefore(ind.BirthDate))
@@ -1867,50 +1858,6 @@ namespace FTAnalyzer
             UNKNOWN_FACT_TYPE = 20, LIVING_WITH_DEATH_DATE = 21, CHILDRENSTATUS_TOTAL_MISMATCH = 22
         };
 
-        public void SetDataErrorsCheckedDefaults(CheckedListBox list)
-        {
-            list.Items.Clear();
-            foreach (DataErrorGroup dataError in dataErrorTypes)
-            {
-                int index = list.Items.Add(dataError);
-                bool itemChecked = Application.UserAppDataRegistry.GetValue(dataError.ToString(), "True").Equals("True");
-                list.SetItemChecked(index, itemChecked);
-            }
-        }
-
-        public void SetFactTypeList(CheckedListBox ckbFactSelect, CheckedListBox ckbFactExclude, Predicate<ExportFact> filter)
-        {
-            List<string> factTypes = AllExportFacts.Filter(filter).Select(x => x.FactType).Distinct().ToList<string>();
-            factTypes.Sort();
-            ckbFactSelect.Items.Clear();
-            ckbFactExclude.Items.Clear();
-            foreach (string factType in factTypes)
-            {
-                if (!ckbFactSelect.Items.Contains(factType))
-                {
-                    int index = ckbFactSelect.Items.Add(factType);
-                    bool itemChecked = Application.UserAppDataRegistry.GetValue("Fact: " + factType, "True").Equals("True");
-                    ckbFactSelect.SetItemChecked(index, itemChecked);
-                }
-                if (!ckbFactExclude.Items.Contains(factType))
-                {
-                    int index = ckbFactExclude.Items.Add(factType);
-                    bool itemChecked = Application.UserAppDataRegistry.GetValue("Exlude Fact: " + factType, "False").Equals("True");
-                    ckbFactExclude.SetItemChecked(index, itemChecked);
-                }
-            }
-        }
-
-        public SortableBindingList<DataError> DataErrors(CheckedListBox list)
-        {
-            List<DataError> errors = new List<DataError>();
-            foreach (int indexChecked in list.CheckedIndices)
-            {
-                DataErrorGroup item = (DataErrorGroup)list.Items[indexChecked];
-                errors.AddRange(item.Errors);
-            }
-            return new SortableBindingList<DataError>(errors);
-        }
         #endregion
 
         #region Census Searching
@@ -2772,34 +2719,8 @@ namespace FTAnalyzer
         }
         #endregion
 
-        #region Database Functions
-        public bool BackupDatabase(SaveFileDialog saveDatabase, string comment)
-        {
-            string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString();
-            saveDatabase.FileName = "FTAnalyzer-Geocodes-" + DateTime.Now.ToString("yyyy-MM-dd") + "-v" + MainForm.VERSION + ".zip";
-            saveDatabase.InitialDirectory = directory;
-            DialogResult result = saveDatabase.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                DatabaseHelper dbh = DatabaseHelper.Instance;
-                dbh.StartBackupRestoreDatabase();
-                if (File.Exists(saveDatabase.FileName))
-                    File.Delete(saveDatabase.FileName);
-                ZipFile zip = new ZipFile(saveDatabase.FileName);
-                zip.AddFile(dbh.Filename, string.Empty);
-                zip.Comment = comment + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm");
-                zip.Save();
-                //dbh.EndBackupDatabase();
-                Application.UserAppDataRegistry.SetValue("Geocode Backup Directory", Path.GetDirectoryName(saveDatabase.FileName));
-                MessageBox.Show("Database exported to " + saveDatabase.FileName, "FTAnalyzer Database Export Complete");
-                return true;
-            }
-            return false;
-        }
-        #endregion
-
         #region Duplicates Processing
-        public SortableBindingList<IDisplayDuplicateIndividual> GenerateDuplicatesList(ProgressBar pb, TrackBar tb)
+        public SortableBindingList<IDisplayDuplicateIndividual> GenerateDuplicatesList(IProgress<int> progress, TrackBar tb)
         {
             log.Debug("FamilyTree.GenerateDuplicatesList");
             if (duplicates != null && !_cancelDuplicates)
@@ -2809,13 +2730,13 @@ namespace FTAnalyzer
             duplicates = new SortableBindingList<DuplicateIndividual>();
             IEnumerable<Individual> males = individuals.Filter<Individual>(x => (x.Gender == "M" || x.Gender == "U"));
             IEnumerable<Individual> females = individuals.Filter<Individual>(x => (x.Gender == "F" || x.Gender == "U"));
-            pb.Maximum = (males.Count() * males.Count() + females.Count() * females.Count()) / 2;
-            pb.Value = 0;
-            IdentifyDuplicates(pb, males);
-            IdentifyDuplicates(pb, females);
+            int progressMaximum = (males.Count() * males.Count() + females.Count() * females.Count()) / 2;
+            progress.Report(0);
+            IdentifyDuplicates(progress, males);
+            IdentifyDuplicates(progress, females);
             if (_cancelDuplicates)
             {
-                pb.Value = 0;
+                progress.Report(0);
                 MessageBox.Show("Possible Duplicate Search Cancelled", "FTAnalyzer");
                 tb.Minimum = 1;
                 tb.Maximum = 10;
@@ -2975,20 +2896,20 @@ namespace FTAnalyzer
         #endregion
 
         #region Today
-        public void AddTodaysFacts(DateTime chosenDate, bool wholeMonth, int stepSize, ProgressBar bar)
+        public void AddTodaysFacts(DateTime chosenDate, bool wholeMonth, int stepSize, IProgress<int> progress, IProgress<string> outputText)
         {
             string dateDesc;
+            StringBuilder sb = new StringBuilder();
             if (wholeMonth)
             {
                 dateDesc = chosenDate.ToString("MMMM");
-                TodaysText.Rtf = @"{\rtf1\ansi \b GEDCOM and World Events in " + dateDesc + @"\b0.}";
+                sb.Append(@"{\rtf1\ansi \b GEDCOM and World Events in " + dateDesc + @"\b0.}\n\n");
             }
             else
             {
                 dateDesc = chosenDate.ToString("d MMMM");
-                TodaysText.Rtf = @"{\rtf1\ansi \b GEDCOM and World Events on " + dateDesc + @"\b0.}";
+                sb.Append(@"{\rtf1\ansi \b GEDCOM and World Events on " + dateDesc + @"\b0.}\n\n");
             }
-            TodaysText.AppendText("\n\n");
             List<DisplayFact> todaysFacts = new List<DisplayFact>();
             foreach (Individual i in individuals)
             {
@@ -3001,23 +2922,24 @@ namespace FTAnalyzer
             if (Properties.GeneralSettings.Default.ShowWorldEvents)
             {
                 int earliestYear = todaysFacts.Count > 0 ? todaysFacts[0].FactDate.StartDate.Year : 1752; // if no facts show world events for Gregorian calendar to today
-                List<DisplayFact> worldEvents = AddWorldEvents(earliestYear, chosenDate, wholeMonth, stepSize, bar);
+                List<DisplayFact> worldEvents = AddWorldEvents(earliestYear, chosenDate, wholeMonth, stepSize, progress);
                 todaysFacts.AddRange(worldEvents);
                 todaysFacts.Sort();
             }
             foreach (DisplayFact f in todaysFacts)
-                TodaysText.AppendText(f.ToString() + "\n");
+                sb.Append(f.ToString() + "\n");
+            outputText.Report(sb.ToString());
         }
 
-        public List<DisplayFact> AddWorldEvents(int earliestYear, DateTime chosenDate, bool wholeMonth, int stepSize, ProgressBar bar)
+        public List<DisplayFact> AddWorldEvents(int earliestYear, DateTime chosenDate, bool wholeMonth, int stepSize, IProgress<int> progress)
         {
             // use Wikipedia API at vizgr.org/historical-events/ to find what happened on that date in the past
             List<DisplayFact> events = new List<DisplayFact>();
             string URL;
             FactDate eventDate;
-            bar.Minimum = earliestYear;
-            bar.Maximum = chosenDate.Year;
-            bar.Value = earliestYear;
+            int barMinimum = earliestYear;
+            int barRange = chosenDate.Year - earliestYear;
+            progress.Report(0);
             for (int year = earliestYear; year <= chosenDate.Year; year++)
             {
                 int diff = chosenDate.Year - year;
@@ -3050,8 +2972,7 @@ namespace FTAnalyzer
                         }
                     }
                 }
-                bar.Value = year;
-                Application.DoEvents();
+                progress.Report((year-barMinimum)/barRange);
             }
             return events;
         }
@@ -3122,109 +3043,6 @@ namespace FTAnalyzer
             return doc;
         }
 
-        #endregion
-
-        #region Load CSV Location Data
-
-        public void LoadLocationData(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
-        {
-            string csvFilename = string.Empty;
-            pb.Visible = true;
-            try
-            {
-                OpenFileDialog openFileDialog = new OpenFileDialog();
-                string initialDir = (string)Application.UserAppDataRegistry.GetValue("Excel Export Individual Path");
-                openFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
-                openFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv|TNG format (*.tng)|*.tng";
-                openFileDialog.FilterIndex = defaultIndex;
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    csvFilename = openFileDialog.FileName;
-                    label.Text = "Loading " + csvFilename;
-                    string path = Path.GetDirectoryName(csvFilename);
-                    Application.UserAppDataRegistry.SetValue("Excel Export Individual Path", path);
-                    if (csvFilename.EndsWith("TNG", StringComparison.InvariantCultureIgnoreCase))
-                        ReadTNGdata(pb, csvFilename);
-                    else
-                        ReadCSVdata(pb, csvFilename);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error loading CSV location data from " + csvFilename + "\nError was " + ex.Message, "FTAnalyzer");
-            }
-            pb.Visible = false;
-            label.Text = string.Empty;
-        }
-
-        public void ReadTNGdata(ToolStripProgressBar pb, string tngFilename)
-        {
-            int rowCount = 0;
-            int lineCount = File.ReadLines(tngFilename).Count();
-            pb.Maximum = lineCount;
-            pb.Minimum = 0;
-            pb.Value = rowCount;
-            using (CsvFileReader reader = new CsvFileReader(tngFilename, ';'))
-            {
-                CsvRow row = new CsvRow();
-                while (reader.ReadRow(row))
-                {
-                    if (row.Count == 4)
-                    {
-                        FactLocation loc = FactLocation.GetLocation(row[1], row[3], row[2], FactLocation.Geocode.NOT_SEARCHED, true, true);
-                        rowCount++;
-                    }
-                    pb.Value++;
-                    if (pb.Value % 10 == 0)
-                        Application.DoEvents();
-                }
-                MessageBox.Show("Loaded " + rowCount + " locations from TNG file " + tngFilename, "FTAnalyzer");
-            }
-        }
-
-        public void ReadCSVdata(ToolStripProgressBar pb, string csvFilename)
-        {
-            int rowCount = 0;
-            int lineCount = File.ReadLines(csvFilename).Count();
-            pb.Maximum = lineCount;
-            pb.Minimum = 0;
-            pb.Value = rowCount;
-            using (CsvFileReader reader = new CsvFileReader(csvFilename))
-            {
-                CsvRow headerRow = new CsvRow();
-                CsvRow row = new CsvRow();
-
-                reader.ReadRow(headerRow);
-                if (headerRow.Count != 3)
-                    throw new InvalidLocationCSVFileException("Location file should have 3 values per line.");
-                if (!headerRow[0].Trim().ToUpper().Equals("LOCATION"))
-                    throw new InvalidLocationCSVFileException("No Location header record. Header should be Location, Latitude, Longitude");
-                if (!headerRow[1].Trim().ToUpper().Equals("LATITUDE"))
-                    throw new InvalidLocationCSVFileException("No Latitude header record. Header should be Location, Latitude, Longitude");
-                if (!headerRow[2].Trim().ToUpper().Equals("LONGITUDE"))
-                    throw new InvalidLocationCSVFileException("No Longitude header record. Header should be Location, Latitude, Longitude");
-                while (reader.ReadRow(row))
-                {
-                    if (row.Count == 3)
-                    {
-                        FactLocation loc = FactLocation.GetLocation(row[0], row[1], row[2], FactLocation.Geocode.NOT_SEARCHED, true, true);
-                        rowCount++;
-                    }
-                    pb.Value++;
-                    if (pb.Value % 10 == 0)
-                        Application.DoEvents();
-                }
-            }
-            MessageBox.Show("Loaded " + rowCount + " locations from file " + csvFilename, "FTAnalyzer");
-        }
-        #endregion
-
-        #region Dispose
-        public void Dispose()
-        {
-            todaysText.Dispose();
-        }
         #endregion
     }
 }

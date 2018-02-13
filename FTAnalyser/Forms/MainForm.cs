@@ -46,7 +46,6 @@ namespace FTAnalyzer
             InitializeComponent();
             loading = true;
             displayOptionsOnLoadToolStripMenuItem.Checked = Properties.GeneralSettings.Default.ReportOptions;
-            ft.TodaysText = rtbToday;
             treetopsRelation.MarriedToDB = false;
             ShowMenus(false);
             WarnXPVersion();
@@ -148,7 +147,7 @@ namespace FTAnalyzer
                     //document.Save("GedcomOutput.xml");
                     if (await LoadTreeAsync(filename))
                     {
-                        ft.SetDataErrorsCheckedDefaults(ckbDataErrors);
+                        SetDataErrorsCheckedDefaults(ckbDataErrors);
                         SetupFactsCheckboxes();
                         Application.UseWaitCursor = false;
                         mnuCloseGEDCOM.Enabled = true;
@@ -185,14 +184,14 @@ namespace FTAnalyzer
             Progress<string> outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
             XmlDocument doc = await Task.Run(() => ft.LoadTreeHeader(filename, outputText));
             if (doc == null) return false;
-            Progress<int> progress = new Progress<int>(value => { pbSources.Value = value; });
-            await Task.Run(() => ft.LoadTreeSources(doc, progress, outputText));
-            progress = new Progress<int>(value => { pbIndividuals.Value = value; });
-            await Task.Run(() => ft.LoadTreeIndividuals(doc, progress, outputText));
-            progress = new Progress<int>(value => { pbFamilies.Value = value; });
-            await Task.Run(() => ft.LoadTreeFamilies(doc, progress, outputText));
-            progress = new Progress<int>(value => { pbRelationships.Value = value; });
-            await Task.Run(() => ft.LoadTreeRelationships(doc, progress, outputText));
+            Progress<int> sourceProgress = new Progress<int>(value => { pbSources.Value = value; });
+            Progress<int> individualProgress = new Progress<int>(value => { pbIndividuals.Value = value; });
+            Progress<int> familyProgress = new Progress<int>(value => { pbFamilies.Value = value; });
+            Progress<int> RelationshipProgress = new Progress<int>(value => { pbRelationships.Value = value; });
+            await Task.Run(() => ft.LoadTreeSources(doc, sourceProgress, outputText));
+            await Task.Run(() => ft.LoadTreeIndividuals(doc, individualProgress, outputText));
+            await Task.Run(() => ft.LoadTreeFamilies(doc, familyProgress, outputText));
+            await Task.Run(() => ft.LoadTreeRelationships(doc, RelationshipProgress, outputText));
             return true;
         }
 
@@ -297,7 +296,7 @@ namespace FTAnalyzer
 
             if (openGedcom.ShowDialog() == DialogResult.OK)
             {
-                await Task.Run(() => LoadFileAsync(openGedcom.FileName));
+                await LoadFileAsync(openGedcom.FileName);
                 Properties.Settings.Default.LoadLocation = Path.GetFullPath(openGedcom.FileName);
                 Properties.Settings.Default.Save();
             }
@@ -2199,7 +2198,8 @@ namespace FTAnalyzer
         {
             SetDuplicateControlsVisibility(true);
             rfhDuplicates.SaveColumnLayout("DuplicatesColumns.xml");
-            SortableBindingList<IDisplayDuplicateIndividual> data = ft.GenerateDuplicatesList(pbDuplicates, tbDuplicateScore);
+            Progress<int> progress = new Progress<int>(value => { pbDuplicates.Value = value; });
+            SortableBindingList<IDisplayDuplicateIndividual> data = ft.GenerateDuplicatesList(progress, tbDuplicateScore);
             if (data != null)
             {
                 dgDuplicates.DataSource = data;
@@ -2829,8 +2829,10 @@ namespace FTAnalyzer
         {
             pbToday.Visible = true;
             labToday.Visible = true;
-            ft.TodaysText.ResetText();
-            ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, (int)nudToday.Value, pbToday);
+            rtbToday.ResetText();
+            Progress<int> progress = new Progress<int>(value => { pbToday.Value = value; });
+            Progress<string> outputText = new Progress<string>(text => { rtbToday.Rtf = text; });
+            ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, (int)nudToday.Value, progress, outputText);
             labToday.Visible = false;
             pbToday.Visible = false;
         }
@@ -2856,6 +2858,51 @@ namespace FTAnalyzer
         }
         #endregion
 
+        public void SetDataErrorsCheckedDefaults(CheckedListBox list)
+        {
+            list.Items.Clear();
+            foreach (DataErrorGroup dataError in ft.DataErrorTypes)
+            {
+                int index = list.Items.Add(dataError);
+                bool itemChecked = Application.UserAppDataRegistry.GetValue(dataError.ToString(), "True").Equals("True");
+                list.SetItemChecked(index, itemChecked);
+            }
+        }
+
+        public void SetFactTypeList(CheckedListBox ckbFactSelect, CheckedListBox ckbFactExclude, Predicate<ExportFact> filter)
+        {
+            List<string> factTypes = ft.AllExportFacts.Filter(filter).Select(x => x.FactType).Distinct().ToList<string>();
+            factTypes.Sort();
+            ckbFactSelect.Items.Clear();
+            ckbFactExclude.Items.Clear();
+            foreach (string factType in factTypes)
+            {
+                if (!ckbFactSelect.Items.Contains(factType))
+                {
+                    int index = ckbFactSelect.Items.Add(factType);
+                    bool itemChecked = Application.UserAppDataRegistry.GetValue("Fact: " + factType, "True").Equals("True");
+                    ckbFactSelect.SetItemChecked(index, itemChecked);
+                }
+                if (!ckbFactExclude.Items.Contains(factType))
+                {
+                    int index = ckbFactExclude.Items.Add(factType);
+                    bool itemChecked = Application.UserAppDataRegistry.GetValue("Exlude Fact: " + factType, "False").Equals("True");
+                    ckbFactExclude.SetItemChecked(index, itemChecked);
+                }
+            }
+        }
+
+        public SortableBindingList<DataError> DataErrors(CheckedListBox list)
+        {
+            List<DataError> errors = new List<DataError>();
+            foreach (int indexChecked in list.CheckedIndices)
+            {
+                DataErrorGroup item = (DataErrorGroup)list.Items[indexChecked];
+                errors.AddRange(item.Errors);
+            }
+            return new SortableBindingList<DataError>(errors);
+        }
+
         private void MnuLoadLocationsCSV_Click(object sender, EventArgs e)
         {
             LoadLocations(tspbTabProgress, tsStatusLabel, 1);
@@ -2866,13 +2913,135 @@ namespace FTAnalyzer
             LoadLocations(tspbTabProgress, tsStatusLabel, 2);
         }
 
+        #region Database Functions
+        public bool BackupDatabase(SaveFileDialog saveDatabase, string comment)
+        {
+            string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString();
+            saveDatabase.FileName = "FTAnalyzer-Geocodes-" + DateTime.Now.ToString("yyyy-MM-dd") + "-v" + MainForm.VERSION + ".zip";
+            saveDatabase.InitialDirectory = directory;
+            DialogResult result = saveDatabase.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                DatabaseHelper dbh = DatabaseHelper.Instance;
+                dbh.StartBackupRestoreDatabase();
+                if (File.Exists(saveDatabase.FileName))
+                    File.Delete(saveDatabase.FileName);
+                ZipFile zip = new ZipFile(saveDatabase.FileName);
+                zip.AddFile(dbh.Filename, string.Empty);
+                zip.Comment = comment + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm");
+                zip.Save();
+                //dbh.EndBackupDatabase();
+                Application.UserAppDataRegistry.SetValue("Geocode Backup Directory", Path.GetDirectoryName(saveDatabase.FileName));
+                MessageBox.Show("Database exported to " + saveDatabase.FileName, "FTAnalyzer Database Export Complete");
+                return true;
+            }
+            return false;
+        }
+        #endregion
+
+        #region Load CSV Location Data
+
+        public void LoadLocationData(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
+        {
+            string csvFilename = string.Empty;
+            pb.Visible = true;
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                string initialDir = (string)Application.UserAppDataRegistry.GetValue("Excel Export Individual Path");
+                openFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
+                openFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv|TNG format (*.tng)|*.tng";
+                openFileDialog.FilterIndex = defaultIndex;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    csvFilename = openFileDialog.FileName;
+                    label.Text = "Loading " + csvFilename;
+                    string path = Path.GetDirectoryName(csvFilename);
+                    Application.UserAppDataRegistry.SetValue("Excel Export Individual Path", path);
+                    if (csvFilename.EndsWith("TNG", StringComparison.InvariantCultureIgnoreCase))
+                        ReadTNGdata(pb, csvFilename);
+                    else
+                        ReadCSVdata(pb, csvFilename);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading CSV location data from " + csvFilename + "\nError was " + ex.Message, "FTAnalyzer");
+            }
+            pb.Visible = false;
+            label.Text = string.Empty;
+        }
+
+        public void ReadTNGdata(ToolStripProgressBar pb, string tngFilename)
+        {
+            int rowCount = 0;
+            int lineCount = File.ReadLines(tngFilename).Count();
+            pb.Maximum = lineCount;
+            pb.Minimum = 0;
+            pb.Value = rowCount;
+            using (CsvFileReader reader = new CsvFileReader(tngFilename, ';'))
+            {
+                CsvRow row = new CsvRow();
+                while (reader.ReadRow(row))
+                {
+                    if (row.Count == 4)
+                    {
+                        FactLocation loc = FactLocation.GetLocation(row[1], row[3], row[2], FactLocation.Geocode.NOT_SEARCHED, true, true);
+                        rowCount++;
+                    }
+                    pb.Value++;
+                    if (pb.Value % 10 == 0)
+                        Application.DoEvents();
+                }
+                MessageBox.Show("Loaded " + rowCount + " locations from TNG file " + tngFilename, "FTAnalyzer");
+            }
+        }
+
+        public void ReadCSVdata(ToolStripProgressBar pb, string csvFilename)
+        {
+            int rowCount = 0;
+            int lineCount = File.ReadLines(csvFilename).Count();
+            pb.Maximum = lineCount;
+            pb.Minimum = 0;
+            pb.Value = rowCount;
+            using (CsvFileReader reader = new CsvFileReader(csvFilename))
+            {
+                CsvRow headerRow = new CsvRow();
+                CsvRow row = new CsvRow();
+
+                reader.ReadRow(headerRow);
+                if (headerRow.Count != 3)
+                    throw new InvalidLocationCSVFileException("Location file should have 3 values per line.");
+                if (!headerRow[0].Trim().ToUpper().Equals("LOCATION"))
+                    throw new InvalidLocationCSVFileException("No Location header record. Header should be Location, Latitude, Longitude");
+                if (!headerRow[1].Trim().ToUpper().Equals("LATITUDE"))
+                    throw new InvalidLocationCSVFileException("No Latitude header record. Header should be Location, Latitude, Longitude");
+                if (!headerRow[2].Trim().ToUpper().Equals("LONGITUDE"))
+                    throw new InvalidLocationCSVFileException("No Longitude header record. Header should be Location, Latitude, Longitude");
+                while (reader.ReadRow(row))
+                {
+                    if (row.Count == 3)
+                    {
+                        FactLocation loc = FactLocation.GetLocation(row[0], row[1], row[2], FactLocation.Geocode.NOT_SEARCHED, true, true);
+                        rowCount++;
+                    }
+                    pb.Value++;
+                    if (pb.Value % 10 == 0)
+                        Application.DoEvents();
+                }
+            }
+            MessageBox.Show("Loaded " + rowCount + " locations from file " + csvFilename, "FTAnalyzer");
+        }
+        #endregion
+
         private void LoadLocations(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
         {
             DialogResult result = MessageBox.Show("It is recommended you backup your Geocoding database first.\nDo you want to backup now?", "FTAnalyzer", MessageBoxButtons.YesNoCancel);
-            if (result == System.Windows.Forms.DialogResult.Yes)
-                ft.BackupDatabase(saveDatabase, "FTAnalyzer zip file created by v" + VERSION);
-            if (result != System.Windows.Forms.DialogResult.Cancel)
-                ft.LoadLocationData(pb, label, defaultIndex);
+            if (result == DialogResult.Yes)
+                BackupDatabase(saveDatabase, "FTAnalyzer zip file created by v" + VERSION);
+            if (result != DialogResult.Cancel)
+                LoadLocationData(pb, label, defaultIndex);
         }
 
         private void BtnShowSurnames_Click(object sender, EventArgs e)
