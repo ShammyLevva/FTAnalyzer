@@ -2737,6 +2737,7 @@ namespace FTAnalyzer
             if (_cancelDuplicates)
             {
                 progress.Report(0);
+                //TODO handle cancel as a Task cancel event
                 MessageBox.Show("Possible Duplicate Search Cancelled", "FTAnalyzer");
                 tb.Minimum = 1;
                 tb.Maximum = 10;

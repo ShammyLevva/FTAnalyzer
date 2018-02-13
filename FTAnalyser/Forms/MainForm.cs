@@ -135,7 +135,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Load File
-        private async void LoadFileAsync(string filename)
+        private async Task LoadFileAsync(string filename)
         {
             try
             {
@@ -283,7 +283,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void OpenToolStripMenuItem_ClickAsync(object sender, EventArgs e)
+        private async void OpenToolStripMenuItem_ClickAsync(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(Properties.Settings.Default.LoadLocation))
                 openGedcom.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -296,7 +296,7 @@ namespace FTAnalyzer
 
             if (openGedcom.ShowDialog() == DialogResult.OK)
             {
-                LoadFileAsync(openGedcom.FileName);
+                await LoadFileAsync(openGedcom.FileName);
                 Properties.Settings.Default.LoadLocation = Path.GetFullPath(openGedcom.FileName);
                 Properties.Settings.Default.Save();
             }
@@ -823,7 +823,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Reload Data
-        private void QueryReloadData()
+        private async void QueryReloadData()
         {
             if (Properties.GeneralSettings.Default.ReloadRequired && ft.DataLoaded)
             {
@@ -832,16 +832,16 @@ namespace FTAnalyzer
                 Properties.GeneralSettings.Default.Save();
                 if (dr == DialogResult.Yes)
                 {
-                    LoadFileAsync(filename);
+                    await LoadFileAsync(filename);
                 }
             }
         }
 
-        private void ReloadToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void ReloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Properties.GeneralSettings.Default.ReloadRequired = false;
             Properties.GeneralSettings.Default.Save();
-            LoadFileAsync(filename);
+            await LoadFileAsync(filename);
         }
         #endregion
 
@@ -1808,10 +1808,10 @@ namespace FTAnalyzer
             BuildRecentList();
         }
 
-        private void OpenRecentFile_Click(object sender, EventArgs e)
+        private async void OpenRecentFile_Click(object sender, EventArgs e)
         {
             string filename = (string)(sender as ToolStripMenuItem).Tag;
-            LoadFileAsync(filename);
+            await LoadFileAsync(filename);
         }
 
         private void MnuRecent_DropDownOpening(object sender, EventArgs e)
@@ -2125,7 +2125,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Form Drag Drop
-        private void MainForm_DragDrop(object sender, DragEventArgs e)
+        private async void MainForm_DragDrop(object sender, DragEventArgs e)
         {
             bool fileLoaded = false;
             string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
@@ -2134,7 +2134,7 @@ namespace FTAnalyzer
                 if (Path.GetExtension(filename.ToLower()) == ".ged")
                 {
                     fileLoaded = true;
-                    LoadFileAsync(filename);
+                    await LoadFileAsync(filename);
                     break;
                 }
             }
