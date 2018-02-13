@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Xml;
+using System.Windows.Forms;
 using FTAnalyzer.Filters;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
-using Ionic.Zip;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using GeoAPI.Geometries;
@@ -2732,8 +2732,8 @@ namespace FTAnalyzer
             IEnumerable<Individual> females = individuals.Filter<Individual>(x => (x.Gender == "F" || x.Gender == "U"));
             int progressMaximum = (males.Count() * males.Count() + females.Count() * females.Count()) / 2;
             progress.Report(0);
-            IdentifyDuplicates(progress, males);
-            IdentifyDuplicates(progress, females);
+            IdentifyDuplicates(progress, 0, progressMaximum, males);
+            IdentifyDuplicates(progress, (males.Count() * males.Count())/2, progressMaximum, females);
             if (_cancelDuplicates)
             {
                 progress.Report(0);
@@ -2767,7 +2767,7 @@ namespace FTAnalyzer
             return score;
         }
 
-        private void IdentifyDuplicates(ProgressBar pb, IEnumerable<Individual> enumerable)
+        private void IdentifyDuplicates(IProgress<int> progress, int progressSoFar, int progressMaximum, IEnumerable<Individual> enumerable)
         {
             log.Debug("FamilyTree.IndentifyDuplicates");
             List<Individual> list = enumerable.ToList<Individual>();
@@ -2792,9 +2792,9 @@ namespace FTAnalyzer
                                     duplicates.Add(test);
                             }
                         }
-                        pb.Value++;
-                        if (pb.Value % 1000 == 0)
-                            Application.DoEvents();
+                        progressSoFar++;
+                        if (progressSoFar % 1000 == 0)
+                            progress.Report(progressSoFar/progressMaximum) ;
                     }
                 }
             }

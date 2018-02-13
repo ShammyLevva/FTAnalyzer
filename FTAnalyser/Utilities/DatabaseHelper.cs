@@ -1,6 +1,7 @@
 ﻿using FTAnalyzer.Forms;
 using FTAnalyzer.Mapping;
 using GeoAPI.Geometries;
+using Ionic.Zip;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -123,6 +124,29 @@ namespace FTAnalyzer.Utilities
             return dbVersion;
         }
 
+        public bool BackupDatabase(SaveFileDialog saveDatabase, string comment)
+        {
+            string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString();
+            saveDatabase.FileName = "FTAnalyzer-Geocodes-" + DateTime.Now.ToString("yyyy-MM-dd") + "-v" + MainForm.VERSION + ".zip";
+            saveDatabase.InitialDirectory = directory;
+            DialogResult result = saveDatabase.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                StartBackupRestoreDatabase();
+                if (File.Exists(saveDatabase.FileName))
+                    File.Delete(saveDatabase.FileName);
+                ZipFile zip = new ZipFile(saveDatabase.FileName);
+                zip.AddFile(Filename, string.Empty);
+                zip.Comment = comment + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm");
+                zip.Save();
+                //EndBackupDatabase();
+                Application.UserAppDataRegistry.SetValue("Geocode Backup Directory", Path.GetDirectoryName(saveDatabase.FileName));
+                MessageBox.Show("Database exported to " + saveDatabase.FileName, "FTAnalyzer Database Export Complete");
+                return true;
+            }
+            return false;
+        }
+
         private void UpgradeDatabase(Version dbVersion)
         {
             try
@@ -173,7 +197,7 @@ namespace FTAnalyzer.Utilities
                             DialogResult result = MessageBox.Show("In order to improve speed of the maps a database upgrade is needed.\nThis may take several minutes and must be allowed to complete.\nYou must backup your database first. Ok to proceed?", "Database upgrading", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                             Application.UseWaitCursor = true;
                             if (result == DialogResult.Yes)
-                                proceed = FamilyTree.Instance.BackupDatabase(new SaveFileDialog(), "FTAnalyzer zip file created by Database upgrade for v3.2.1.0");
+                                proceed = BackupDatabase(new SaveFileDialog(), "FTAnalyzer zip file created by Database upgrade for v3.2.1.0");
                             Application.UseWaitCursor = false;
                         }
                         if (proceed)

@@ -423,7 +423,7 @@
             this.mnuReload.Name = "mnuReload";
             this.mnuReload.Size = new System.Drawing.Size(184, 22);
             this.mnuReload.Text = "Reload";
-            this.mnuReload.Click += new System.EventHandler(this.ReloadToolStripMenuItem_ClickAsync);
+            this.mnuReload.Click += new System.EventHandler(this.ReloadToolStripMenuItem_Click);
             // 
             // mnuPrint
             // 
@@ -458,35 +458,35 @@
             this.mnuRecent1.Name = "mnuRecent1";
             this.mnuRecent1.Size = new System.Drawing.Size(182, 22);
             this.mnuRecent1.Text = "1.";
-            this.mnuRecent1.Click += new System.EventHandler(this.OpenRecentFile_ClickAsync);
+            this.mnuRecent1.Click += new System.EventHandler(this.OpenRecentFile_Click);
             // 
             // mnuRecent2
             // 
             this.mnuRecent2.Name = "mnuRecent2";
             this.mnuRecent2.Size = new System.Drawing.Size(182, 22);
             this.mnuRecent2.Text = "2.";
-            this.mnuRecent2.Click += new System.EventHandler(this.OpenRecentFile_ClickAsync);
+            this.mnuRecent2.Click += new System.EventHandler(this.OpenRecentFile_Click);
             // 
             // mnuRecent3
             // 
             this.mnuRecent3.Name = "mnuRecent3";
             this.mnuRecent3.Size = new System.Drawing.Size(182, 22);
             this.mnuRecent3.Text = "3.";
-            this.mnuRecent3.Click += new System.EventHandler(this.OpenRecentFile_ClickAsync);
+            this.mnuRecent3.Click += new System.EventHandler(this.OpenRecentFile_Click);
             // 
             // mnuRecent4
             // 
             this.mnuRecent4.Name = "mnuRecent4";
             this.mnuRecent4.Size = new System.Drawing.Size(182, 22);
             this.mnuRecent4.Text = "4.";
-            this.mnuRecent4.Click += new System.EventHandler(this.OpenRecentFile_ClickAsync);
+            this.mnuRecent4.Click += new System.EventHandler(this.OpenRecentFile_Click);
             // 
             // mnuRecent5
             // 
             this.mnuRecent5.Name = "mnuRecent5";
             this.mnuRecent5.Size = new System.Drawing.Size(182, 22);
             this.mnuRecent5.Text = "5.";
-            this.mnuRecent5.Click += new System.EventHandler(this.OpenRecentFile_ClickAsync);
+            this.mnuRecent5.Click += new System.EventHandler(this.OpenRecentFile_Click);
             // 
             // toolStripSeparator7
             // 
@@ -3230,7 +3230,7 @@
             this.Text = "Family Tree Analyzer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDropAsync);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainForm_DragEnter);
             this.Move += new System.EventHandler(this.MainForm_Move);
             this.Resize += new System.EventHandler(this.MainForm_Resize);

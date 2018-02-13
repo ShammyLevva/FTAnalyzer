@@ -350,6 +350,7 @@
     <Compile Include="Forms\Facts.Designer.cs">
       <DependentUpon>Facts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\DatabaseHelper.cs" />
     <Compile Include="Utilities\ReportFormHelper.cs" />
     <Compile Include="Forms\TimeLine.cs">
       <SubType>Form</SubType>

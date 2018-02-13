@@ -87,7 +87,7 @@ namespace FTAnalyzer
 
         private void RegisterEventHandlers()
         {
-            Options.ReloadRequired += new EventHandler(Options_ReloadDataAsync);
+            Options.ReloadRequired += new EventHandler(Options_ReloadData);
             GeneralSettings.MinParentalAgeChanged += new EventHandler(Options_MinimumParentalAgeChanged);
         }
 
@@ -135,7 +135,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Load File
-        private async Task LoadFileAsync(string filename)
+        private async void LoadFileAsync(string filename)
         {
             try
             {
@@ -283,7 +283,7 @@ namespace FTAnalyzer
             }
         }
 
-        private async void OpenToolStripMenuItem_ClickAsync(object sender, EventArgs e)
+        private void OpenToolStripMenuItem_ClickAsync(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(Properties.Settings.Default.LoadLocation))
                 openGedcom.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -296,7 +296,7 @@ namespace FTAnalyzer
 
             if (openGedcom.ShowDialog() == DialogResult.OK)
             {
-                await LoadFileAsync(openGedcom.FileName);
+                LoadFileAsync(openGedcom.FileName);
                 Properties.Settings.Default.LoadLocation = Path.GetFullPath(openGedcom.FileName);
                 Properties.Settings.Default.Save();
             }
@@ -634,7 +634,7 @@ namespace FTAnalyzer
         private void UpdateDataErrorsDisplay()
         {
             HourGlass(true);
-            SortableBindingList<DataError> errors = ft.DataErrors(ckbDataErrors);
+            SortableBindingList<DataError> errors = DataErrors(ckbDataErrors);
             dgDataErrors.DataSource = errors;
             tsCountLabel.Text = Properties.Messages.Count + errors.Count;
             tsHintsLabel.Text = Properties.Messages.Hints_Individual;
@@ -809,9 +809,9 @@ namespace FTAnalyzer
             // do anything that needs doing when option changes
         }
 
-        private async void Options_ReloadDataAsync(object sender, EventArgs e)
+        private void Options_ReloadData(object sender, EventArgs e)
         {
-            await QueryReloadDataAsync();
+            QueryReloadData();
         }
 
         private void Options_MinimumParentalAgeChanged(object sender, EventArgs e)
@@ -823,7 +823,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Reload Data
-        private async Task QueryReloadDataAsync()
+        private void QueryReloadData()
         {
             if (Properties.GeneralSettings.Default.ReloadRequired && ft.DataLoaded)
             {
@@ -832,16 +832,16 @@ namespace FTAnalyzer
                 Properties.GeneralSettings.Default.Save();
                 if (dr == DialogResult.Yes)
                 {
-                    await LoadFileAsync(filename);
+                    LoadFileAsync(filename);
                 }
             }
         }
 
-        private async void ReloadToolStripMenuItem_ClickAsync(object sender, EventArgs e)
+        private void ReloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Properties.GeneralSettings.Default.ReloadRequired = false;
             Properties.GeneralSettings.Default.Save();
-            await LoadFileAsync(filename);
+            LoadFileAsync(filename);
         }
         #endregion
 
@@ -1181,7 +1181,7 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabDataErrors)
                 {
-                    SortableBindingList<DataError> errors = ft.DataErrors(ckbDataErrors);
+                    SortableBindingList<DataError> errors = DataErrors(ckbDataErrors);
                     dgDataErrors.DataSource = errors;
                     dgDataErrors.AllowUserToResizeColumns = true;
                     dgDataErrors.Focus();
@@ -1686,7 +1686,7 @@ namespace FTAnalyzer
                 MessageBox.Show("You need to stop Geocoding before you can export the database", "FTAnalyzer");
             else
             {
-                ft.BackupDatabase(saveDatabase, "FTAnalyzer zip file created by v" + VERSION);
+                DatabaseHelper.Instance.BackupDatabase(saveDatabase, "FTAnalyzer zip file created by v" + VERSION);
             }
         }
 
@@ -1808,10 +1808,10 @@ namespace FTAnalyzer
             BuildRecentList();
         }
 
-        private async void OpenRecentFile_ClickAsync(object sender, EventArgs e)
+        private void OpenRecentFile_Click(object sender, EventArgs e)
         {
             string filename = (string)(sender as ToolStripMenuItem).Tag;
-            await LoadFileAsync(filename);
+            LoadFileAsync(filename);
         }
 
         private void MnuRecent_DropDownOpening(object sender, EventArgs e)
@@ -1962,7 +1962,7 @@ namespace FTAnalyzer
         private void SetupFactsCheckboxes()
         {
             Predicate<ExportFact> filter = CreateFactsFilter();
-            ft.SetFactTypeList(ckbFactSelect, ckbFactExclude, filter);
+            SetFactTypeList(ckbFactSelect, ckbFactExclude, filter);
             SetShowFactsButton();
         }
 
@@ -2125,7 +2125,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Form Drag Drop
-        private async void MainForm_DragDropAsync(object sender, DragEventArgs e)
+        private void MainForm_DragDrop(object sender, DragEventArgs e)
         {
             bool fileLoaded = false;
             string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
@@ -2134,7 +2134,7 @@ namespace FTAnalyzer
                 if (Path.GetExtension(filename.ToLower()) == ".ged")
                 {
                     fileLoaded = true;
-                    await LoadFileAsync(filename);
+                    LoadFileAsync(filename);
                     break;
                 }
             }
@@ -2194,12 +2194,12 @@ namespace FTAnalyzer
         #endregion
 
         #region Duplicates Tab
-        private void SetPossibleDuplicates()
+        private async void SetPossibleDuplicates()
         {
             SetDuplicateControlsVisibility(true);
             rfhDuplicates.SaveColumnLayout("DuplicatesColumns.xml");
             Progress<int> progress = new Progress<int>(value => { pbDuplicates.Value = value; });
-            SortableBindingList<IDisplayDuplicateIndividual> data = ft.GenerateDuplicatesList(progress, tbDuplicateScore);
+            SortableBindingList<IDisplayDuplicateIndividual> data = await Task.Run(() => ft.GenerateDuplicatesList(progress, tbDuplicateScore));
             if (data != null)
             {
                 dgDuplicates.DataSource = data;
@@ -2913,32 +2913,6 @@ namespace FTAnalyzer
             LoadLocations(tspbTabProgress, tsStatusLabel, 2);
         }
 
-        #region Database Functions
-        public bool BackupDatabase(SaveFileDialog saveDatabase, string comment)
-        {
-            string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString();
-            saveDatabase.FileName = "FTAnalyzer-Geocodes-" + DateTime.Now.ToString("yyyy-MM-dd") + "-v" + MainForm.VERSION + ".zip";
-            saveDatabase.InitialDirectory = directory;
-            DialogResult result = saveDatabase.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                DatabaseHelper dbh = DatabaseHelper.Instance;
-                dbh.StartBackupRestoreDatabase();
-                if (File.Exists(saveDatabase.FileName))
-                    File.Delete(saveDatabase.FileName);
-                ZipFile zip = new ZipFile(saveDatabase.FileName);
-                zip.AddFile(dbh.Filename, string.Empty);
-                zip.Comment = comment + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm");
-                zip.Save();
-                //dbh.EndBackupDatabase();
-                Application.UserAppDataRegistry.SetValue("Geocode Backup Directory", Path.GetDirectoryName(saveDatabase.FileName));
-                MessageBox.Show("Database exported to " + saveDatabase.FileName, "FTAnalyzer Database Export Complete");
-                return true;
-            }
-            return false;
-        }
-        #endregion
-
         #region Load CSV Location Data
 
         public void LoadLocationData(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
@@ -3039,7 +3013,7 @@ namespace FTAnalyzer
         {
             DialogResult result = MessageBox.Show("It is recommended you backup your Geocoding database first.\nDo you want to backup now?", "FTAnalyzer", MessageBoxButtons.YesNoCancel);
             if (result == DialogResult.Yes)
-                BackupDatabase(saveDatabase, "FTAnalyzer zip file created by v" + VERSION);
+                DatabaseHelper.Instance.BackupDatabase(saveDatabase, "FTAnalyzer zip file created by v" + VERSION);
             if (result != DialogResult.Cancel)
                 LoadLocationData(pb, label, defaultIndex);
         }
