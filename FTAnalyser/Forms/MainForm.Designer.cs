@@ -415,7 +415,7 @@
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.openToolStripMenuItem.Text = "Open GEDCOM file...";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_ClickAsync);
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
             // mnuReload
             // 

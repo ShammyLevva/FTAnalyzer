@@ -17,7 +17,6 @@ using Ionic.Zip;
 using Printing.DataGridViewPrint.Tools;
 using System.Text;
 using System.Web;
-using FTAnalyzer.Forms.Controls;
 using System.Threading.Tasks;
 using System.Xml;
 
@@ -48,7 +47,6 @@ namespace FTAnalyzer
             displayOptionsOnLoadToolStripMenuItem.Checked = Properties.GeneralSettings.Default.ReportOptions;
             treetopsRelation.MarriedToDB = false;
             ShowMenus(false);
-            WarnXPVersion();
             VERSION = PublishVersion();
             log.Info("Started FTAnalyzer version " + VERSION);
             int pos = VERSION.IndexOf('-');
@@ -117,21 +115,6 @@ namespace FTAnalyzer
             else
                 return VERSION;
         }
-
-        private void WarnXPVersion()
-        {
-            OperatingSystem os = Environment.OSVersion;
-            if (os.Version.Major <= 5)
-            {
-                DateTime lastWarning = Properties.GeneralSettings.Default.LastXPWarning;
-                if (lastWarning.AddDays(14.0) < DateTime.Now)
-                {
-                    MessageBox.Show("You are running an antique version of Windows that is no longer supported as of 8th April 2014.\nPlease be aware that FTAnalyzer has ceased to work on such an ancient version of Windows.", "FTAnalyzer");
-                    Properties.GeneralSettings.Default.LastXPWarning = DateTime.Now;
-                    Properties.GeneralSettings.Default.Save();
-                }
-            }
-        }
         #endregion
 
         #region Load File
@@ -144,7 +127,7 @@ namespace FTAnalyzer
                 CloseGEDCOM(false);
                 if (!stopProcessing)
                 {
-                    //document.Save("GedcomOutput.xml");
+                    // document.Save("GedcomOutput.xml");
                     if (await LoadTreeAsync(filename))
                     {
                         SetDataErrorsCheckedDefaults(ckbDataErrors);
@@ -283,7 +266,7 @@ namespace FTAnalyzer
             }
         }
 
-        private async void OpenToolStripMenuItem_ClickAsync(object sender, EventArgs e)
+        private async void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(Properties.Settings.Default.LoadLocation))
                 openGedcom.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -809,9 +792,9 @@ namespace FTAnalyzer
             // do anything that needs doing when option changes
         }
 
-        private void Options_ReloadData(object sender, EventArgs e)
+        private async void Options_ReloadData(object sender, EventArgs e)
         {
-            QueryReloadData();
+            await QueryReloadData();
         }
 
         private void Options_MinimumParentalAgeChanged(object sender, EventArgs e)
@@ -823,7 +806,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Reload Data
-        private async void QueryReloadData()
+        private async Task QueryReloadData()
         {
             if (Properties.GeneralSettings.Default.ReloadRequired && ft.DataLoaded)
             {
@@ -2194,7 +2177,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Duplicates Tab
-        private async void SetPossibleDuplicates()
+        private async Task SetPossibleDuplicates()
         {
             SetDuplicateControlsVisibility(true);
             rfhDuplicates.SaveColumnLayout("DuplicatesColumns.xml");
