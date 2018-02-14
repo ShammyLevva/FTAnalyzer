@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FTAnalyzer;
+using System.IO;
 
 namespace FactDateTest
 {
@@ -15,9 +16,6 @@ namespace FactDateTest
     {
         public FactLocationTest()
         {
-            //
-            // TODO: Add constructor logic here
-            //
         }
 
         private TestContext testContextInstance;
@@ -64,11 +62,12 @@ namespace FactDateTest
         public void FactLocationConstructorTest()
         {
             FactLocation factLocation;
+            FamilyTree.Instance.LoadStandardisedNames(Path.Combine(Environment.CurrentDirectory, "..\\..\\.."));
 //            factLocation = FactLocation.GetLocation("Aberdeen, Scotland");
 //            Assert.IsTrue(factLocation.ToString().Equals("Aberdeen, Aberdeenshire, Scotland"));
 
-//            factLocation = FactLocation.GetLocation("America");
-//            Assert.IsTrue(factLocation.ToString().Equals("United States"));
+            factLocation = FactLocation.GetLocation("America");
+            Assert.IsTrue(factLocation.ToString().Equals("United States"));
 
             // check for default strip empty locations
             FTAnalyzer.Properties.GeneralSettings.Default.AllowEmptyLocations = false;

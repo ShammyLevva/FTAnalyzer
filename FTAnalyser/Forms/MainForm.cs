@@ -27,7 +27,7 @@ namespace FTAnalyzer
         public static string VERSION = "6.2.0.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        
+
         private Cursor storedCursor = Cursors.Default;
         private FamilyTree ft = FamilyTree.Instance;
         private bool stopProcessing = false;
@@ -80,7 +80,7 @@ namespace FTAnalyzer
             fonts.AddMemoryFont(fontPtr, Properties.Resources.KUNSTLER.Length);
             NativeMethods.AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.KUNSTLER.Length, IntPtr.Zero, ref dummy);
             System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
-            handwritingFont = new Font(fonts.Families[0], 52.0F, FontStyle.Bold);        
+            handwritingFont = new Font(fonts.Families[0], 52.0F, FontStyle.Bold);
         }
 
         private void RegisterEventHandlers()
@@ -977,7 +977,7 @@ namespace FTAnalyzer
         private void MnuLifelines_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            LifeLine l = new LifeLine(new Progress<string> (value => { rtbOutput.AppendText(value); }));
+            LifeLine l = new LifeLine(new Progress<string>(value => { rtbOutput.AppendText(value); }));
             DisposeDuplicateForms(l);
             l.Show();
             HourGlass(false);
@@ -2013,7 +2013,7 @@ namespace FTAnalyzer
                         result.Add(factType);
                     else
                         if (factType != Fact.GetFactTypeDescription(Fact.PARENT) && factType != Fact.GetFactTypeDescription(Fact.CHILDREN))
-                            result.Add(factType);
+                        result.Add(factType);
                 }
             }
             return result;
@@ -2598,8 +2598,8 @@ namespace FTAnalyzer
         {
             try
             {
-                SortableBindingList<IDisplayLooseBirth> looseBirthList = ft.LooseBirths;
-                SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.LooseDeaths;
+                SortableBindingList<IDisplayLooseBirth> looseBirthList = ft.LooseBirths();
+                SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.LooseDeaths();
                 dgLooseDeaths.DataSource = looseDeathList;
                 dgLooseDeaths.Sort(dgLooseDeaths.Columns["Forenames"], ListSortDirection.Ascending);
                 dgLooseDeaths.Sort(dgLooseDeaths.Columns["Surname"], ListSortDirection.Ascending);
@@ -2610,7 +2610,8 @@ namespace FTAnalyzer
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Properties.Messages.Count + looseBirthList.Count;
                 tsHintsLabel.Text = Properties.Messages.Hints_Loose_Births + Properties.Messages.Hints_Individual;
-            } catch (LooseDataException ex)
+            }
+            catch (LooseDataException ex)
             {
                 MessageBox.Show(ex.Message, "FTAnalyzer");
             }
@@ -2766,7 +2767,7 @@ namespace FTAnalyzer
             try
             {
                 ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-                List<IDisplayLooseBirth> list = ft.LooseBirths.ToList<IDisplayLooseBirth>();
+                List<IDisplayLooseBirth> list = ft.LooseBirths().ToList<IDisplayLooseBirth>();
                 list.Sort(new LooseBirthComparer());
                 DataTable dt = convertor.ToDataTable(list);
                 ExportToExcel.Export(dt);
@@ -2784,7 +2785,7 @@ namespace FTAnalyzer
             try
             {
                 ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-                List<IDisplayLooseDeath> list = ft.LooseDeaths.ToList<IDisplayLooseDeath>();
+                List<IDisplayLooseDeath> list = ft.LooseDeaths().ToList<IDisplayLooseDeath>();
                 list.Sort(new LooseDeathComparer());
                 DataTable dt = convertor.ToDataTable(list);
                 ExportToExcel.Export(dt);
@@ -2793,7 +2794,7 @@ namespace FTAnalyzer
             {
                 MessageBox.Show(ex.Message, "FTAnalyzer");
             }
-    HourGlass(false);
+            HourGlass(false);
         }
 
         private void MnuSourcesToExcel_Click(object sender, EventArgs e)
@@ -3029,7 +3030,7 @@ namespace FTAnalyzer
             tspbTabProgress.Visible = true;
             Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => x.RelationType);
             Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
-            
+
             SortableBindingList<SurnameStats> list = new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(indFilter, famFilter, tspbTabProgress));
             dgSurnames.DataSource = list;
             dgSurnames.Sort(dgSurnames.Columns["Surname"], ListSortDirection.Ascending);

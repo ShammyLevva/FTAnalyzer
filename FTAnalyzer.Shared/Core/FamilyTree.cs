@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -20,7 +19,7 @@ using System.Reflection;
 
 namespace FTAnalyzer
 {
-    class FamilyTree
+    public class FamilyTree
     {
         #region Variables
         private static FamilyTree instance;
@@ -276,7 +275,7 @@ namespace FTAnalyzer
             {
                 FactSource fs = new FactSource(n);
                 sources.Add(fs);
-                progress.Report(counter++ / sourceMax);
+                progress.Report((100 * counter++) / sourceMax);
             }
             outputText.Report("Loaded " + counter + " sources.\n");
             progress.Report(100);
@@ -302,7 +301,7 @@ namespace FTAnalyzer
                     else
                         individualLookup.Add(individual.IndividualID, individual);
                     AddOccupations(individual);
-                    progress.Report(counter++ / individualMax);
+                    progress.Report((100 * counter++) / individualMax);
                 }
                 catch (NullReferenceException)
                 {
@@ -324,7 +323,7 @@ namespace FTAnalyzer
             {
                 Family family = new Family(n, outputText);
                 families.Add(family);
-                progress.Report(counter++ / familyMax);
+                progress.Report((100 * counter++) / familyMax);
             }
             outputText.Report("Loaded " + counter + " families.\n");
             CheckAllIndividualsAreInAFamily(outputText);
@@ -365,7 +364,7 @@ namespace FTAnalyzer
                     string lng = long_node.InnerText;
                     FactLocation loc = FactLocation.GetLocation(place, lat, lng, FactLocation.Geocode.GEDCOM_USER, true, true);
                 }
-                progress.Report(50 + counter++ / max);
+                progress.Report(30 + (70 * counter++) / max);
             }
             int afterCount = FactLocation.AllLocations.Count();
             progress.Report(100);
@@ -402,13 +401,13 @@ namespace FTAnalyzer
             // When the user changes the root individual, no location processing is taking place
             int locationCount = locationsToFollow ? FactLocation.AllLocations.Count() : 0;
             SetRelations(rootIndividualID);
-            progress?.Report(25);
+            progress?.Report(10);
             SetRelationDescriptions(rootIndividualID);
             outputText.Report(PrintRelationCount());
-            progress?.Report(50);
+            progress?.Report(30);
         }
 
-        private void LoadStandardisedNames(string startPath)
+        public void LoadStandardisedNames(string startPath)
         {
             try
             {
@@ -829,25 +828,22 @@ namespace FTAnalyzer
 
         #region Loose Births
 
-        public SortableBindingList<IDisplayLooseBirth> LooseBirths
+        public SortableBindingList<IDisplayLooseBirth> LooseBirths()
         {
-            get
+            if (looseBirths != null)
+                return looseBirths;
+            SortableBindingList<IDisplayLooseBirth> result = new SortableBindingList<IDisplayLooseBirth>();
+            try
             {
-                if (looseBirths != null)
-                    return looseBirths;
-                SortableBindingList<IDisplayLooseBirth> result = new SortableBindingList<IDisplayLooseBirth>();
-                try
-                {
-                    foreach (Individual ind in individuals)
-                        CheckLooseBirth(ind, result);
-                }
-                catch (Exception ex)
-                {
-                    throw new LooseDataException("Problem calculating Loose Births. Error was " + ex.Message);
-                }
-                looseBirths = result;
-                return result;
+                foreach (Individual ind in individuals)
+                    CheckLooseBirth(ind, result);
             }
+            catch (Exception ex)
+            {
+                throw new LooseDataException("Problem calculating Loose Births. Error was " + ex.Message);
+            }
+            looseBirths = result;
+            return result;
         }
 
         private void CheckLooseBirth(Individual indiv, SortableBindingList<IDisplayLooseBirth> result = null)
@@ -1004,25 +1000,22 @@ namespace FTAnalyzer
 
         #region Loose Deaths
 
-        public SortableBindingList<IDisplayLooseDeath> LooseDeaths
+        public SortableBindingList<IDisplayLooseDeath> LooseDeaths()
         {
-            get
+            if (looseDeaths != null)
+                return looseDeaths;
+            SortableBindingList<IDisplayLooseDeath> result = new SortableBindingList<IDisplayLooseDeath>();
+            try
             {
-                if (looseDeaths != null)
-                    return looseDeaths;
-                SortableBindingList<IDisplayLooseDeath> result = new SortableBindingList<IDisplayLooseDeath>();
-                try
-                {
-                    foreach (Individual ind in individuals)
-                        CheckLooseDeath(ind, result);
-                }
-                catch (Exception ex)
-                {
-                    throw new LooseDataException("Problem calculating Loose Deaths. Error was " + ex.Message);
-                }
-                looseDeaths = result;
-                return result;
+                foreach (Individual ind in individuals)
+                    CheckLooseDeath(ind, result);
             }
+            catch (Exception ex)
+            {
+                throw new LooseDataException("Problem calculating Loose Deaths. Error was " + ex.Message);
+            }
+            looseDeaths = result;
+            return result;
         }
 
         private void CheckLooseDeath(Individual indiv, SortableBindingList<IDisplayLooseDeath> result = null)
