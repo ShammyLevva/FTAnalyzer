@@ -1043,7 +1043,7 @@ namespace FTAnalyzer
         }
 
         #region Tab Control
-        private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
+        private async void TabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             mnuPrint.Enabled = false;
             tsCountLabel.Text = string.Empty;
@@ -1134,7 +1134,7 @@ namespace FTAnalyzer
                 {
                     rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
                     ckbHideIgnoredDuplicates.Checked = Properties.Settings.Default.HideIgnoredDuplicates;
-                    SetPossibleDuplicates();
+                    await SetPossibleDuplicates();
                     ResetDuplicatesTable(); // force a reset on intial load
                     dgDuplicates.Focus();
                     mnuPrint.Enabled = true;
@@ -1191,7 +1191,7 @@ namespace FTAnalyzer
                     tsHintsLabel.Text = Properties.Messages.Hints_Location;
                     treeViewLocations.Nodes.Clear();
                     Application.DoEvents();
-                    treeViewLocations.Nodes.AddRange(ft.GetAllLocationsTreeNodes(treeViewLocations.Font, true));
+                    treeViewLocations.Nodes.AddRange(TreeViewHandler.Instance.GetAllLocationsTreeNodes(treeViewLocations.Font, true));
                     mnuPrint.Enabled = false;
                     dgCountries.DataSource = ft.AllDisplayCountries;
                     dgRegions.DataSource = ft.AllDisplayRegions;
@@ -2213,11 +2213,11 @@ namespace FTAnalyzer
             }
         }
 
-        private void TbDuplicateScore_Scroll(object sender, EventArgs e)
+        private async void TbDuplicateScore_Scroll(object sender, EventArgs e)
         {
             // do nothing if progress bar still visible
             if (!pbDuplicates.Visible)
-                SetPossibleDuplicates();
+                await SetPossibleDuplicates();
         }
 
         private void BtnCancelDuplicates_Click(object sender, EventArgs e)
@@ -2243,13 +2243,13 @@ namespace FTAnalyzer
             }
         }
 
-        private void CkbHideIgnoredDuplicates_CheckedChanged(object sender, EventArgs e)
+        private async void CkbHideIgnoredDuplicates_CheckedChanged(object sender, EventArgs e)
         {
             if (pbDuplicates.Visible)
                 return; // do nothing if progress bar still visible
             Properties.Settings.Default.HideIgnoredDuplicates = ckbHideIgnoredDuplicates.Checked;
             Properties.Settings.Default.Save();
-            SetPossibleDuplicates();
+            await SetPossibleDuplicates();
         }
         #endregion
 
@@ -2596,18 +2596,24 @@ namespace FTAnalyzer
         #region Loose Birth/Death Tab
         private void UpdateLooseBirthDeaths()
         {
-            SortableBindingList<IDisplayLooseBirth> looseBirthList = ft.LooseBirths;
-            SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.LooseDeaths;
-            dgLooseDeaths.DataSource = looseDeathList;
-            dgLooseDeaths.Sort(dgLooseDeaths.Columns["Forenames"], ListSortDirection.Ascending);
-            dgLooseDeaths.Sort(dgLooseDeaths.Columns["Surname"], ListSortDirection.Ascending);
-            dgLooseBirths.DataSource = looseBirthList;
-            dgLooseBirths.Sort(dgLooseBirths.Columns["Forenames"], ListSortDirection.Ascending);
-            dgLooseBirths.Sort(dgLooseBirths.Columns["Surname"], ListSortDirection.Ascending);
-            dgLooseBirths.Focus();
-            mnuPrint.Enabled = true;
-            tsCountLabel.Text = Properties.Messages.Count + looseBirthList.Count;
-            tsHintsLabel.Text = Properties.Messages.Hints_Loose_Births + Properties.Messages.Hints_Individual;
+            try
+            {
+                SortableBindingList<IDisplayLooseBirth> looseBirthList = ft.LooseBirths;
+                SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.LooseDeaths;
+                dgLooseDeaths.DataSource = looseDeathList;
+                dgLooseDeaths.Sort(dgLooseDeaths.Columns["Forenames"], ListSortDirection.Ascending);
+                dgLooseDeaths.Sort(dgLooseDeaths.Columns["Surname"], ListSortDirection.Ascending);
+                dgLooseBirths.DataSource = looseBirthList;
+                dgLooseBirths.Sort(dgLooseBirths.Columns["Forenames"], ListSortDirection.Ascending);
+                dgLooseBirths.Sort(dgLooseBirths.Columns["Surname"], ListSortDirection.Ascending);
+                dgLooseBirths.Focus();
+                mnuPrint.Enabled = true;
+                tsCountLabel.Text = Properties.Messages.Count + looseBirthList.Count;
+                tsHintsLabel.Text = Properties.Messages.Hints_Loose_Births + Properties.Messages.Hints_Individual;
+            } catch (LooseDataException ex)
+            {
+                MessageBox.Show(ex.Message, "FTAnalyzer");
+            }
         }
 
         private void TabCtrlLooseBDs_SelectedIndexChanged(object sender, EventArgs e)
@@ -2757,23 +2763,37 @@ namespace FTAnalyzer
         private void LooseBirthsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            List<IDisplayLooseBirth> list = ft.LooseBirths.ToList<IDisplayLooseBirth>();
-            list.Sort(new LooseBirthComparer());
-            DataTable dt = convertor.ToDataTable(list);
-            ExportToExcel.Export(dt);
+            try
+            {
+                ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+                List<IDisplayLooseBirth> list = ft.LooseBirths.ToList<IDisplayLooseBirth>();
+                list.Sort(new LooseBirthComparer());
+                DataTable dt = convertor.ToDataTable(list);
+                ExportToExcel.Export(dt);
+            }
+            catch (LooseDataException ex)
+            {
+                MessageBox.Show(ex.Message, "FTAnalyzer");
+            }
             HourGlass(false);
         }
 
         private void LooseDeathsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            List<IDisplayLooseDeath> list = ft.LooseDeaths.ToList<IDisplayLooseDeath>();
-            list.Sort(new LooseDeathComparer());
-            DataTable dt = convertor.ToDataTable(list);
-            ExportToExcel.Export(dt);
-            HourGlass(false);
+            try
+            {
+                ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+                List<IDisplayLooseDeath> list = ft.LooseDeaths.ToList<IDisplayLooseDeath>();
+                list.Sort(new LooseDeathComparer());
+                DataTable dt = convertor.ToDataTable(list);
+                ExportToExcel.Export(dt);
+            }
+            catch (LooseDataException ex)
+            {
+                MessageBox.Show(ex.Message, "FTAnalyzer");
+            }
+    HourGlass(false);
         }
 
         private void MnuSourcesToExcel_Click(object sender, EventArgs e)

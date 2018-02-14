@@ -734,7 +734,7 @@ namespace FTAnalyzer.Utilities
                 restoring = false;
                 FamilyTree ft = FamilyTree.Instance;
                 if (ft.DataLoaded)
-                    ft.LoadGeoLocationsFromDataBase(outputText);
+                    return ft.LoadGeoLocationsFromDataBase(outputText);
             }
             catch (Exception)
             {

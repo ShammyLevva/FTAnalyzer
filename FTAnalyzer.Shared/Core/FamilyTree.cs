@@ -16,6 +16,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using GeoAPI.Geometries;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Reflection;
 
 namespace FTAnalyzer
 {
@@ -37,8 +38,6 @@ namespace FTAnalyzer
         private SortableBindingList<IDisplayLooseDeath> looseDeaths;
         private SortableBindingList<IDisplayLooseBirth> looseBirths;
         private SortableBindingList<DuplicateIndividual> duplicates;
-        private TreeNode mainformTreeRootNode;
-        private TreeNode placesTreeRootNode;
         private static int DATA_ERROR_GROUPS = 23;
         private static XmlNodeList noteNodes = null;
         private bool _loading = false;
@@ -202,12 +201,11 @@ namespace FTAnalyzer
             ResetLooseFacts();
             duplicates = null;
             ClearLocations();
-            mainformTreeRootNode = null;
-            placesTreeRootNode = null;
+            TreeViewHandler.Instance.ResetData();
             noteNodes = null;
             maxAhnentafel = 0;
             FactLocation.ResetLocations();
-            LoadStandardisedNames();
+            LoadStandardisedNames(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
             individualLookup = new Dictionary<string, Individual>();
         }
 
@@ -373,7 +371,7 @@ namespace FTAnalyzer
             progress.Report(100);
         }
 
-        public void LoadGeoLocationsFromDataBase(IProgress<string> outputText)
+        public bool LoadGeoLocationsFromDataBase(IProgress<string> outputText)
         {
             try
             {
@@ -382,8 +380,10 @@ namespace FTAnalyzer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading previously geocoded data. " + ex.Message, "FTAnalyzer");
+                outputText.Report("Error loading previously geocoded data. " + ex.Message);
+                return false;
             }
+            return true;
         }
 
         public void UpdateRootIndividual(string rootIndividualID, IProgress<int> progress, IProgress<string> outputText, bool locationsToFollow= false)
@@ -408,15 +408,10 @@ namespace FTAnalyzer
             progress?.Report(50);
         }
 
-        private void LoadStandardisedNames()
+        private void LoadStandardisedNames(string startPath)
         {
             try
             {
-                string startPath;
-                if (Application.StartupPath.Contains("Common7\\IDE")) // running unit tests
-                    startPath = Path.Combine(Environment.CurrentDirectory, "..\\..\\..");
-                else
-                    startPath = Application.StartupPath;
                 string filename = Path.Combine(startPath, @"Resources\GINAP.txt");
                 if (File.Exists(filename))
                 {
@@ -848,7 +843,7 @@ namespace FTAnalyzer
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Problem calculating Loose Births. Error was " + ex.Message, "FTAnalyzer");
+                    throw new LooseDataException("Problem calculating Loose Births. Error was " + ex.Message);
                 }
                 looseBirths = result;
                 return result;
@@ -1023,7 +1018,7 @@ namespace FTAnalyzer
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Problem calculating Loose Deaths. Error was " + ex.Message, "FTAnalyzer");
+                    throw new LooseDataException("Problem calculating Loose Deaths. Error was " + ex.Message);
                 }
                 looseDeaths = result;
                 return result;
@@ -2451,156 +2446,6 @@ namespace FTAnalyzer
             }
         }
 
-        #endregion
-
-        #region Location Tree Building
-        public TreeNode[] GetAllLocationsTreeNodes(Font defaultFont, bool mainform)
-        {
-            if (mainformTreeRootNode != null)
-                return BuildTreeNodeArray(mainform);
-
-            mainformTreeRootNode = new TreeNode();
-            placesTreeRootNode = new TreeNode();
-            Font regularFont = new Font(defaultFont, FontStyle.Regular);
-            Font boldFont = new Font(defaultFont, FontStyle.Bold);
-            foreach (FactLocation location in AllDisplayPlaces)
-            {
-                string[] parts = location.Parts;
-                TreeNode currentM = mainformTreeRootNode;
-                TreeNode currentP = placesTreeRootNode;
-                foreach (string part in parts)
-                {
-                    if (part.Length == 0 && !Properties.GeneralSettings.Default.AllowEmptyLocations) break;
-                    TreeNode childM = currentM.Nodes.Find(part, false).FirstOrDefault();
-                    TreeNode childP = currentP.Nodes.Find(part, false).FirstOrDefault();
-                    if (childM == null)
-                    {
-                        TreeNode child = new TreeNode((part.Length == 0 ? "<blank>" : part))
-                        {
-                            Name = part,
-                            Tag = location,
-                            ToolTipText = "Geocoding Status : " + location.Geocoded
-                        };
-                        SetTreeNodeImage(location, child);
-                        // Set everything other than known countries and known regions to regular
-                        if ((currentM.Level == 0 && Countries.IsKnownCountry(part)) ||
-                            (currentM.Level == 1 && Regions.IsKnownRegion(part)))
-                            child.NodeFont = boldFont;
-                        else
-                            child.NodeFont = regularFont;
-                        childM = child;
-                        childP = (TreeNode)child.Clone();
-                        currentM.Nodes.Add(childM);
-                        currentP.Nodes.Add(childP);
-                    }
-                    currentM = childM;
-                    currentP = childP;
-                }
-            }
-            if (Properties.GeneralSettings.Default.AllowEmptyLocations)
-            { // trim empty end nodes
-                bool recheck = true;
-                while (recheck)
-                {
-                    TreeNode[] emptyNodes = mainformTreeRootNode.Nodes.Find(string.Empty, true);
-                    recheck = false;
-                    foreach (TreeNode node in emptyNodes)
-                    {
-                        if (node.FirstNode == null)
-                        {
-                            node.Remove();
-                            recheck = true;
-                        }
-                    }
-                }
-            }
-            foreach (TreeNode node in mainformTreeRootNode.Nodes)
-                node.Text += "         "; // force text to be longer to fix bold bug
-            foreach (TreeNode node in placesTreeRootNode.Nodes)
-                node.Text += "         "; // force text to be longer to fix bold bug
-            return BuildTreeNodeArray(mainform);
-        }
-
-        private static void SetTreeNodeImage(FactLocation location, TreeNode child)
-        {
-            if (child == null)
-                return;
-            switch (location.GeocodeStatus)
-            {
-                case FactLocation.Geocode.NOT_SEARCHED:
-                    child.ImageIndex = 0;
-                    child.ToolTipText += "\nUse 'Run Google Geocoder' option under Maps menu to search Google for location.";
-                    break;
-                case FactLocation.Geocode.MATCHED:
-                    child.ImageIndex = 1;
-                    break;
-                case FactLocation.Geocode.PARTIAL_MATCH:
-                    child.ImageIndex = 2;
-                    break;
-                case FactLocation.Geocode.GEDCOM_USER:
-                    child.ImageIndex = 3;
-                    break;
-                case FactLocation.Geocode.NO_MATCH:
-                    child.ImageIndex = 4;
-                    break;
-                case FactLocation.Geocode.INCORRECT:
-                    child.ImageIndex = 5;
-                    break;
-                case FactLocation.Geocode.OUT_OF_BOUNDS:
-                    child.ImageIndex = 6;
-                    break;
-                case FactLocation.Geocode.LEVEL_MISMATCH:
-                    child.ImageIndex = 7;
-                    break;
-                case FactLocation.Geocode.OS_50KMATCH:
-                    child.ImageIndex = 8;
-                    break;
-                case FactLocation.Geocode.OS_50KPARTIAL:
-                    child.ImageIndex = 9;
-                    break;
-                case FactLocation.Geocode.OS_50KFUZZY:
-                    child.ImageIndex = 10;
-                    break;
-            }
-        }
-
-        private TreeNode[] BuildTreeNodeArray(bool mainForm)
-        {
-            TreeNodeCollection nodes;
-            if (mainForm)
-                nodes = mainformTreeRootNode.Nodes;
-            else
-                nodes = placesTreeRootNode.Nodes;
-            TreeNode[] result = new TreeNode[nodes.Count];
-            nodes.CopyTo(result, 0);
-            return result;
-        }
-
-        public void RefreshTreeNodeIcon(FactLocation location)
-        {
-            string[] parts = location.Parts;
-            TreeNode currentM = mainformTreeRootNode;
-            TreeNode currentP = placesTreeRootNode;
-            foreach (string part in parts)
-            {
-                if (part.Length == 0 && !Properties.GeneralSettings.Default.AllowEmptyLocations) break;
-                if (mainformTreeRootNode != null && currentM != null)
-                {
-                    TreeNode childM = currentM.Nodes.Find(part, false).FirstOrDefault();
-                    currentM = childM;
-                }
-                if (placesTreeRootNode != null && currentP != null)
-                {
-                    TreeNode childP = currentP.Nodes.Find(part, false).FirstOrDefault();
-                    currentP = childP;
-                }
-            }
-            // we should now have nodes to update   
-            if (mainformTreeRootNode != null && currentM != null)
-                SetTreeNodeImage(location, currentM);
-            if (placesTreeRootNode != null && currentP != null)
-                SetTreeNodeImage(location, currentP);
-        }
         #endregion
 
         #region Geocoding

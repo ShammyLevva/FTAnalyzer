@@ -156,7 +156,7 @@ namespace FTAnalyzer.Forms
 
         private void Places_Load(object sender, EventArgs e)
         {
-            TreeNode[] nodes = ft.GetAllLocationsTreeNodes(tvPlaces.Font, false);
+            TreeNode[] nodes = TreeViewHandler.Instance.GetAllLocationsTreeNodes(tvPlaces.Font, false);
             tvPlaces.Nodes.AddRange(nodes);
             int Width = (int)Application.UserAppDataRegistry.GetValue("Places size - width", this.Width);
             int Height = (int)Application.UserAppDataRegistry.GetValue("Places size - height", this.Height);

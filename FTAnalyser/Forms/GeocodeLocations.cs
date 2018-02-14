@@ -722,14 +722,13 @@ namespace FTAnalyzer.Forms
                 this.Invoke(new Action(() => RefreshTreeNode(loc)));
                 return;
             }
-            FamilyTree.Instance.RefreshTreeNodeIcon(loc);
+            TreeViewHandler.Instance.RefreshTreeNodeIcon(loc);
         }
 
         private void MnuGeocodeLocations_Click(object sender, EventArgs e)
         {
             StartGoogleGeoCoding(false);
         }
-
         #endregion
 
         private void UpdateChangesWithoutAskingToolStripMenuItem_Click(object sender, EventArgs e)
@@ -965,9 +964,15 @@ namespace FTAnalyzer.Forms
             if (result == DialogResult.Yes)
             {
                 DatabaseHelper.Instance.ResetPartials();
-                ft.LoadGeoLocationsFromDataBase(outputText);
-                ft.WriteGeocodeStatstoRTB("Geocoding status after reset partials:",outputText);
-                MessageBox.Show("Partials have been reset", "FTAnalyzer");
+                if (ft.LoadGeoLocationsFromDataBase(outputText))
+                {
+                    ft.WriteGeocodeStatstoRTB("Geocoding status after reset partials:", outputText);
+                    MessageBox.Show("Partials have been reset", "FTAnalyzer");
+                }
+                else
+                {
+                    MessageBox.Show("Problem loading Geocoded Locations from Database.", "FTAnalyzer");
+                }
             }
         }
 

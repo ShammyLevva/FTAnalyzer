@@ -157,7 +157,7 @@ namespace FTAnalyzer.Forms
         {
             UpdateDatabase();
             UserSavedPoint = true;
-            FamilyTree.Instance.RefreshTreeNodeIcon(location);
+            TreeViewHandler.Instance.RefreshTreeNodeIcon(location);
             MessageBox.Show("Data for " + location.ToString() + " updated.", "Save new location");
         }
 
@@ -165,7 +165,7 @@ namespace FTAnalyzer.Forms
         {
             UpdateDatabase();
             UserSavedPoint = true;
-            FamilyTree.Instance.RefreshTreeNodeIcon(location);
+            TreeViewHandler.Instance.RefreshTreeNodeIcon(location);
             this.Close();
         }
 
