@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Reflection;
-using System.Windows.Forms;
 
 namespace FTAnalyzer.Utilities
 {
     public static class ExtensionMethods
     {
-        public static void DoubleBuffered(this DataGridView dgv, bool setting)
+#if !__MACOS__
+        public static void DoubleBuffered(this System.Windows.Forms.DataGridView dgv, bool setting)
         {
             Type dgvType = dgv.GetType();
-            PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
-                BindingFlags.Instance | BindingFlags.NonPublic);
+            PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
             pi.SetValue(dgv, setting, null);
         }
+#endif
 
         public static DateTime TryAddYears(this DateTime date, int years)
         {

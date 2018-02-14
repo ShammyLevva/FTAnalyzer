@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Xml;
 
 namespace FTAnalyzer
@@ -21,13 +22,20 @@ namespace FTAnalyzer
 
         static CensusLocation()
         {
-#region Census Locations
+            LoadCensusLocationFile(Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location));
+#region Test CensusLocation.xml file
+            //foreach(KeyValuePair<Tuple<string, string>, CensusLocation> kvp in CENSUSLOCATIONS)
+            //{
+            //    FactLocation.GetLocation(kvp.Value.Location); // force creation of location facts
+            //}
+#endregion
+        }
+
+        public static void LoadCensusLocationFile(string startPath)
+        {
+            #region Census Locations
             // load Census Locations from XML file
-#if __UNIT_TEST__
-            string startPath = Path.Combine(Environment.CurrentDirectory, "..\\..\\..");
-#else
-            string startPath = System.Windows.Forms.Application.StartupPath;
-#endif
+            if (startPath == null) return;
             string filename = Path.Combine(startPath, @"Resources\CensusLocations.xml");
             if (File.Exists(filename))
             {
@@ -46,13 +54,7 @@ namespace FTAnalyzer
                     CENSUSLOCATIONS.Add(new Tuple<string, string>(year, piece), cl);
                 }
             }
-#endregion
-#region Test CensusLocation.xml file
-            //foreach(KeyValuePair<Tuple<string, string>, CensusLocation> kvp in CENSUSLOCATIONS)
-            //{
-            //    FactLocation.GetLocation(kvp.Value.Location); // force creation of location facts
-            //}
-#endregion
+            #endregion
         }
 
         public CensusLocation(string location) : this(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, location) { }

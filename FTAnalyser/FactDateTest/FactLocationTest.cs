@@ -61,8 +61,8 @@ namespace FactDateTest
         [TestMethod]
         public void FactLocationConstructorTest()
         {
+            FactLocation.LoadConversions(Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\FTAnalyzer.Shared"));
             FactLocation factLocation;
-            FamilyTree.Instance.LoadStandardisedNames(Path.Combine(Environment.CurrentDirectory, "..\\..\\.."));
 //            factLocation = FactLocation.GetLocation("Aberdeen, Scotland");
 //            Assert.IsTrue(factLocation.ToString().Equals("Aberdeen, Aberdeenshire, Scotland"));
 

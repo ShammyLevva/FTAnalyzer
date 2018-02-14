@@ -98,8 +98,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Mapping\MapTransforms.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\DoubleMetaphone.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\EnhancedTextInfo.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utilities\ErrorHandler.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utilities\ExportToExcel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\ExtensionMethods.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\FilterList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\FilterUtils.cs" />

@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using System.Xml;
 
 namespace FTAnalyzer
@@ -79,19 +79,19 @@ namespace FTAnalyzer
         {
             SetupGeocodes();
             ResetLocations();
+            LoadConversions(Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location));
+        }
+        
+        public static void LoadConversions(string startPath)
+        {
             // load conversions from XML file
-#if __UNIT_TEST_
-            string startPath = Path.Combine(Environment.CurrentDirectory, "..\\..\\..");
-#else
-            string startPath = Application.StartupPath;
-#endif
             #region Fact Location Fixes
+            if (startPath == null) return;
             string filename = Path.Combine(startPath, @"Resources\FactLocationFixes.xml");
             if (File.Exists(filename))
             {
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(filename);
-                //xmlDoc.Validate(something);
                 foreach (XmlNode n in xmlDoc.SelectNodes("Data/Fixes/CountryTypos/CountryTypo"))
                 {
                     string from = n.Attributes["from"].Value;
@@ -189,7 +189,8 @@ namespace FTAnalyzer
                 ValidateTypoFixes();
                 ValidateCounties();
                 COUNTRY_SHIFTS = COUNTRY_SHIFTS.Concat(CITY_ADD_COUNTRY).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-            } else
+            }
+            else
             {
                 Console.WriteLine("Failed to find FactLocationFixes.xml File");
             }
@@ -243,7 +244,7 @@ namespace FTAnalyzer
             catch (Exception e)
             {
                 LOCAL_GOOGLE_FIXES = new Dictionary<Tuple<int, string>, string>();
-                MessageBox.Show("Error processing user defined GoogleFixes.xml file. File will be ignored.\n\nError was : " + e.Message, "FTAnalyzer");
+                progress.Report("Error processing user defined GoogleFixes.xml file. File will be ignored.\n\nError was : " + e.Message);
             }
         }
 

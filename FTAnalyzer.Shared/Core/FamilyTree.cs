@@ -15,7 +15,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using GeoAPI.Geometries;
 using System.Net;
 using System.Text.RegularExpressions;
-using System.Reflection;
 
 namespace FTAnalyzer
 {
@@ -104,7 +103,7 @@ namespace FTAnalyzer
             if (node == null) return string.Empty;
             XmlNodeList notes = node.SelectNodes("NOTE");
             if (notes.Count == 0) return string.Empty;
-            StringBuilder result = new StringBuilder();
+            var result = new StringBuilder();
             try
             {
                 foreach (XmlNode note in notes)
@@ -129,7 +128,7 @@ namespace FTAnalyzer
         {
             if (noteNodes == null || reference == null)
                 return string.Empty;
-            StringBuilder result = new StringBuilder();
+            var result = new StringBuilder();
             foreach (XmlNode node in noteNodes)
             {
                 if (node.Attributes["ID"] != null && node.Attributes["ID"].Value == reference.Value)
@@ -143,7 +142,7 @@ namespace FTAnalyzer
 
         private static string GetContinuationText(XmlNodeList nodeList)
         {
-            StringBuilder result = new StringBuilder();
+            var result = new StringBuilder();
             foreach (XmlNode child in nodeList)
             {
                 if (child.Name.Equals("#text") || child.Name.Equals("CONT"))
@@ -160,7 +159,7 @@ namespace FTAnalyzer
             int pos = filename.IndexOfAny(Path.GetInvalidFileNameChars());
             if (pos == -1)
                 return filename;
-            StringBuilder result = new StringBuilder();
+            var result = new StringBuilder();
             string remainder = filename;
             while (pos != -1)
             {
@@ -204,7 +203,6 @@ namespace FTAnalyzer
             noteNodes = null;
             maxAhnentafel = 0;
             FactLocation.ResetLocations();
-            LoadStandardisedNames(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
             individualLookup = new Dictionary<string, Individual>();
         }
 
@@ -233,9 +231,9 @@ namespace FTAnalyzer
                 if (doc == null)
                     return null;
             }
-                // doc.Save(@"c:\temp\FHcensusref.xml");
-                // First check if file has a valid header record ie: it is actually a GEDCOM file
-                XmlNode header = doc.SelectSingleNode("GED/HEAD");
+            // doc.Save(@"c:\temp\FHcensusref.xml");
+            // First check if file has a valid header record ie: it is actually a GEDCOM file
+            XmlNode header = doc.SelectSingleNode("GED/HEAD");
             if (header == null)
             {
                 outputText.Report("\n\nUnable to find GEDCOM 'HEAD' record in first line of file aborting load.\nIs " + filename + " really a GEDCOM file");
@@ -273,7 +271,7 @@ namespace FTAnalyzer
             int counter = 0;
             foreach (XmlNode n in list)
             {
-                FactSource fs = new FactSource(n);
+                var fs = new FactSource(n);
                 sources.Add(fs);
                 progress.Report((100 * counter++) / sourceMax);
             }
@@ -292,9 +290,13 @@ namespace FTAnalyzer
             int counter = 0;
             foreach (XmlNode n in list)
             {
-                try
+                var individual = new Individual(n, outputText);
+                if (individual.IndividualID == null)
                 {
-                    Individual individual = new Individual(n, outputText);
+                    outputText.Report("File has invalid GEDCOM data. Individual found with no ID. Search file for 0 @@ INDI\n");
+                }
+                else
+                {
                     individuals.Add(individual);
                     if (individualLookup.ContainsKey(individual.IndividualID))
                         outputText.Report("More than one INDI record found with ID value " + individual.IndividualID + "\n");
@@ -302,10 +304,6 @@ namespace FTAnalyzer
                         individualLookup.Add(individual.IndividualID, individual);
                     AddOccupations(individual);
                     progress.Report((100 * counter++) / individualMax);
-                }
-                catch (NullReferenceException)
-                {
-                    outputText.Report("File has invalid GEDCOM data. Individual found with no ID. Search file for 0 @@ INDI\n");
                 }
             }
             outputText.Report("Loaded " + counter + " individuals.\n");
@@ -385,7 +383,7 @@ namespace FTAnalyzer
             return true;
         }
 
-        public void UpdateRootIndividual(string rootIndividualID, IProgress<int> progress, IProgress<string> outputText, bool locationsToFollow= false)
+        public void UpdateRootIndividual(string rootIndividualID, IProgress<int> progress, IProgress<string> outputText, bool locationsToFollow = false)
         {
             //int start = xmlErrorbox.TextLength;
             //xmlErrorbox.AppendText("\nCalculating Relationships using " + rootIndividualID + ": " +
@@ -639,7 +637,7 @@ namespace FTAnalyzer
             foreach (Individual ind in individuals)
             {
                 if (!ind.IsInFamily)
-                   families.Add(new Family(ind, NextSoloFamily));
+                    families.Add(new Family(ind, NextSoloFamily));
             }
             if (SoloFamilies > 0)
                 outputText.Report("Added " + SoloFamilies + " lone individuals as single families.\n");
@@ -764,7 +762,7 @@ namespace FTAnalyzer
 
         public Individual GetIndividual(string individualID)
         {
-//            return individuals.FirstOrDefault(i => i.IndividualID == individualID);
+            //            return individuals.FirstOrDefault(i => i.IndividualID == individualID);
             if (string.IsNullOrEmpty(individualID))
                 return null;
             individualLookup.TryGetValue(individualID, out Individual person);
@@ -1858,7 +1856,7 @@ namespace FTAnalyzer
             {
                 case 0: uri = BuildAncestryQuery(censusCountry, censusYear, person); break;
                 case 1:
-                    if(censusYear == 1939)
+                    if (censusYear == 1939)
                         uri = BuildFindMyPast1939Query(censusCountry, person);
                     else
                         uri = BuildFindMyPastQuery(censusCountry, censusYear, person);
@@ -2382,7 +2380,7 @@ namespace FTAnalyzer
             string surname = GetSurname(st, individual, true);
             query.Append("gsln=" + HttpUtility.UrlEncode(surname) + "&");
             AppendYearandRange(individual.BirthDate, query, "msbdy=", "msbdp=", false);
-            if(individual.BirthDate.IsKnown)
+            if (individual.BirthDate.IsKnown)
                 query.Append("&msbdy_x=1");
             if (individual.BirthLocation != FactLocation.UNKNOWN_LOCATION)
             {
@@ -2571,7 +2569,7 @@ namespace FTAnalyzer
             int progressMaximum = (males.Count() * males.Count() + females.Count() * females.Count()) / 2;
             progress.Report(0);
             IdentifyDuplicates(progress, 0, progressMaximum, males);
-            IdentifyDuplicates(progress, (males.Count() * males.Count())/2, progressMaximum, females);
+            IdentifyDuplicates(progress, (males.Count() * males.Count()) / 2, progressMaximum, females);
             if (_cancelDuplicates)
             {
                 progress.Report(0);
@@ -2608,32 +2606,31 @@ namespace FTAnalyzer
 
         private void IdentifyDuplicates(IProgress<int> progress, int progressSoFar, int progressMaximum, IEnumerable<Individual> enumerable)
         {
-            log.Debug("FamilyTree.IndentifyDuplicates");
-            List<Individual> list = enumerable.ToList<Individual>();
-            for (int i = 0; i < list.Count; i++)
+            log.Debug("FamilyTree.IdentifyDuplicates");
+            var index = 0;
+            foreach (var indA in enumerable)
             {
+                index++;
                 if (!_cancelDuplicates)
                 {
-                    Individual indA = list[i];
-                    for (int j = i + 1; j < list.Count; j++)
+                    foreach (var indB in enumerable.Skip(index))
                     {
                         if (_cancelDuplicates)
                             break;
-                        Individual indB = list[j];
                         if (indA.GenderMatches(indB) && indA.Name != Individual.UNKNOWN_NAME && indB.Name != Individual.UNKNOWN_NAME)
                         {
                             if (indA.SurnameMetaphone.Equals(indB.SurnameMetaphone) &&
                                 (indA.ForenameMetaphone.Equals(indB.ForenameMetaphone) || indA.StandardisedName.Equals(indB.StandardisedName)) &&
                                 indA.BirthDate.Distance(indB.BirthDate) < 5)
                             {
-                                DuplicateIndividual test = new DuplicateIndividual(indA, indB);
+                                var test = new DuplicateIndividual(indA, indB);
                                 if (test.Score > 0)
                                     duplicates.Add(test);
                             }
                         }
                         progressSoFar++;
                         if (progressSoFar % 1000 == 0)
-                            progress.Report(progressSoFar/progressMaximum) ;
+                            progress.Report((100 * progressSoFar) / progressMaximum);
                     }
                 }
             }
@@ -2645,15 +2642,15 @@ namespace FTAnalyzer
             if (duplicates == null)
                 log.Error("BuildDuplicateList called with null duplicates");
 
-            SortableBindingList<IDisplayDuplicateIndividual> select = new SortableBindingList<IDisplayDuplicateIndividual>();
+            var select = new SortableBindingList<IDisplayDuplicateIndividual>();
             if (NonDuplicates == null)
                 DeserializeNonDuplicates();
             foreach (DuplicateIndividual dup in duplicates)
             {
                 if (dup.Score >= minScore)
                 {
-                    DisplayDuplicateIndividual dispDup = new DisplayDuplicateIndividual(dup);
-                    NonDuplicate toCheck = new NonDuplicate(dispDup);
+                    var dispDup = new DisplayDuplicateIndividual(dup);
+                    var toCheck = new NonDuplicate(dispDup);
                     dispDup.IgnoreNonDuplicate = NonDuplicates.Contains(toCheck);
                     if (!select.Contains(dispDup) && !(dispDup.IgnoreNonDuplicate && Properties.Settings.Default.HideIgnoredDuplicates))
                         select.Add(dispDup);
@@ -2708,7 +2705,7 @@ namespace FTAnalyzer
         #region Report Issues
         public HashSet<string> UnrecognisedCensusReferences()
         {
-            HashSet<string> result = new HashSet<string>();
+            var result = new HashSet<string>();
             IEnumerable<Fact> unrecognised = AllIndividuals.SelectMany(x => x.PersonalFacts.Filter(f => f.IsCensusFact && f.CensusReference != null && f.CensusReference.Status.Equals(CensusReference.ReferenceStatus.UNRECOGNISED)));
             foreach (Fact f in unrecognised)
                 result.Add(CensusReference.ClearCommonPhrases(f.CensusReference.Reference));
@@ -2717,7 +2714,7 @@ namespace FTAnalyzer
 
         public HashSet<string> MissingCensusReferences()
         {
-            HashSet<string> result = new HashSet<string>();
+            var result = new HashSet<string>();
             IEnumerable<Fact> missing = AllIndividuals.SelectMany(x => x.PersonalFacts.Filter(f => f.IsCensusFact && f.CensusReference != null && f.CensusReference.Status.Equals(CensusReference.ReferenceStatus.BLANK)));
             foreach (Fact f in missing)
                 result.Add(CensusReference.ClearCommonPhrases(f.SourceList)); // for missing census references show sources for census fact
@@ -2726,7 +2723,7 @@ namespace FTAnalyzer
 
         public HashSet<string> UnrecognisedCensusReferencesNotes()
         {
-            HashSet<string> result = new HashSet<string>();
+            var result = new HashSet<string>();
             IEnumerable<Individual> unrecognised = AllIndividuals.Filter(i => i.UnrecognisedCensusNotes.Length > 0);
             foreach (Individual i in unrecognised)
                 result.Add(i.UnrecognisedCensusNotes + "\n--------------------------------------------------------------------------------\n");
@@ -2738,7 +2735,7 @@ namespace FTAnalyzer
         public void AddTodaysFacts(DateTime chosenDate, bool wholeMonth, int stepSize, IProgress<int> progress, IProgress<string> outputText)
         {
             string dateDesc;
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             if (wholeMonth)
             {
                 dateDesc = chosenDate.ToString("MMMM");
@@ -2749,7 +2746,7 @@ namespace FTAnalyzer
                 dateDesc = chosenDate.ToString("d MMMM");
                 sb.Append(@"{\rtf1\ansi \b GEDCOM and World Events on " + dateDesc + @"\b0.}\n\n");
             }
-            List<DisplayFact> todaysFacts = new List<DisplayFact>();
+            var todaysFacts = new List<DisplayFact>();
             foreach (Individual i in individuals)
             {
                 foreach (Fact f in i.AllFacts)
@@ -2773,7 +2770,7 @@ namespace FTAnalyzer
         public List<DisplayFact> AddWorldEvents(int earliestYear, DateTime chosenDate, bool wholeMonth, int stepSize, IProgress<int> progress)
         {
             // use Wikipedia API at vizgr.org/historical-events/ to find what happened on that date in the past
-            List<DisplayFact> events = new List<DisplayFact>();
+            var events = new List<DisplayFact>();
             string URL;
             FactDate eventDate;
             int barMinimum = earliestYear;
@@ -2805,20 +2802,20 @@ namespace FTAnalyzer
                             string desc = FixWikiFormatting(descNode.InnerText);
                             XmlNode dateNode = worldEvent.SelectSingleNode("date");
                             fd = GetWikiDate(dateNode, eventDate);
-                            Fact f = new Fact("Wikipedia", Fact.WORLD_EVENT, fd, FactLocation.UNKNOWN_LOCATION, desc, true, true);
-                            DisplayFact df = new DisplayFact(null, string.Empty, string.Empty, f);
+                            var f = new Fact("Wikipedia", Fact.WORLD_EVENT, fd, FactLocation.UNKNOWN_LOCATION, desc, true, true);
+                            var df = new DisplayFact(null, string.Empty, string.Empty, f);
                             events.Add(df);
                         }
                     }
                 }
-                progress.Report((year-barMinimum)/barRange);
+                progress.Report((year - barMinimum) / barRange);
             }
             return events;
         }
 
-        static Regex brackets = new Regex("{{.*}}", RegexOptions.Compiled);
-        static Regex links = new Regex("<a href=.*</a>", RegexOptions.Compiled);
-        static Regex quotes = new Regex("(.*)quot(.*)quot(.*)", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        private static Regex brackets = new Regex("{{.*}}", RegexOptions.Compiled);
+        private static Regex links = new Regex("<a href=.*</a>", RegexOptions.Compiled);
+        private static Regex quotes = new Regex("(.*)quot(.*)quot(.*)", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         private string FixWikiFormatting(string input)
         {
@@ -2855,17 +2852,17 @@ namespace FTAnalyzer
         private XmlDocument GetWikipediaData(string URL)
         {
             string result = string.Empty;
-            XmlDocument doc = new XmlDocument();
+            var doc = new XmlDocument();
             try
             {
                 //doc.Load(URL); // using doc.load throws XmlException slowing down loading of data
                 HttpWebRequest request = WebRequest.Create(URL) as HttpWebRequest;
                 request.ContentType = "application/xml";
                 request.Accept = "application/xml";
-                Encoding encode = System.Text.Encoding.GetEncoding("utf-8");
+                Encoding encode = Encoding.GetEncoding("utf-8");
                 using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
                 {
-                    StreamReader reader = new StreamReader(response.GetResponseStream(), encode);
+                    var reader = new StreamReader(response.GetResponseStream(), encode);
                     result = reader.ReadToEnd();
                 }
                 if (!result.Contains("No events found for this query"))

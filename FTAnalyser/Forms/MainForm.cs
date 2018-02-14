@@ -19,6 +19,7 @@ using System.Text;
 using System.Web;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Reflection;
 
 namespace FTAnalyzer
 {
@@ -60,12 +61,13 @@ namespace FTAnalyzer
         {
             SetupFonts();
             RegisterEventHandlers();
-            this.Text = "Family Tree Analyzer v" + VERSION;
+            Text = "Family Tree Analyzer v" + VERSION;
             SetHeightWidth();
             label19.Font = handwritingFont;
             dgSurnames.AutoGenerateColumns = false;
             dgDuplicates.AutoGenerateColumns = false;
             rfhDuplicates = new ReportFormHelper(this, "Duplicates", dgDuplicates, ResetDuplicatesTable, "Duplicates", false);
+            ft.LoadStandardisedNames(Application.StartupPath);
             loading = false;
         }
 
@@ -3022,7 +3024,7 @@ namespace FTAnalyzer
                 LoadLocationData(pb, label, defaultIndex);
         }
 
-        private void BtnShowSurnames_Click(object sender, EventArgs e)
+        private async void BtnShowSurnames_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             tsCountLabel.Text = string.Empty;
@@ -3030,8 +3032,8 @@ namespace FTAnalyzer
             tspbTabProgress.Visible = true;
             Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => x.RelationType);
             Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
-
-            SortableBindingList<SurnameStats> list = new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(indFilter, famFilter, tspbTabProgress));
+            var progress = new Progress<int>(value => { tspbTabProgress.Value = value; });
+            var list = await Task<SortableBindingList<SurnameStats>>.Run(() => new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(indFilter, famFilter, progress)));
             dgSurnames.DataSource = list;
             dgSurnames.Sort(dgSurnames.Columns["Surname"], ListSortDirection.Ascending);
             dgSurnames.AllowUserToResizeColumns = true;
