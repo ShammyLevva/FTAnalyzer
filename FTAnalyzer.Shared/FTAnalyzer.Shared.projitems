@@ -59,6 +59,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Displays\IDisplaySource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\DuplicateIndividual.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\InvalidDoubleDateException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\CensusSearchException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exports\ExportFact.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exports\ExportReferrals.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exports\IExportIndividual.cs" />

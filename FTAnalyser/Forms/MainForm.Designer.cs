@@ -35,7 +35,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -128,6 +128,8 @@
             this.dgWorldWars = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
             this.txtWorldWarsSurname = new System.Windows.Forms.TextBox();
+            this.wardeadRelation = new Controls.RelationTypes();
+            this.wardeadCountry = new Controls.CensusCountry();
             this.ctxViewNotes = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuViewNotes = new System.Windows.Forms.ToolStripMenuItem();
             this.tabTreetops = new System.Windows.Forms.TabPage();
@@ -136,6 +138,8 @@
             this.btnTreeTops = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.txtTreetopsSurname = new System.Windows.Forms.TextBox();
+            this.treetopsRelation = new Controls.RelationTypes();
+            this.treetopsCountry = new Controls.CensusCountry();
             this.tabColourReports = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.btnAdvancedMissingData = new System.Windows.Forms.Button();
@@ -149,6 +153,7 @@
             this.btnColourBMD = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.txtColouredSurname = new System.Windows.Forms.TextBox();
+            this.relTypesColoured = new Controls.RelationTypes();
             this.tabLostCousins = new System.Windows.Forms.TabPage();
             this.Referrals = new System.Windows.Forms.GroupBox();
             this.ckbReferralInCommon = new System.Windows.Forms.CheckBox();
@@ -170,6 +175,7 @@
             this.btnLC1881EW = new System.Windows.Forms.Button();
             this.btnLC1881Canada = new System.Windows.Forms.Button();
             this.btnLC1881Scot = new System.Windows.Forms.Button();
+            this.relTypesLC = new Controls.RelationTypes();
             this.tabCensus = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnExportMissingCensusRefs = new System.Windows.Forms.Button();
@@ -192,6 +198,8 @@
             this.txtCensusSurname = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
+            this.cenDate = new Controls.CensusDateSelector();
+            this.relTypesCensus = new Controls.RelationTypes();
             this.btnShowCensusEntered = new System.Windows.Forms.Button();
             this.btnShowCensusMissing = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -235,6 +243,7 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.pbRelationships = new System.Windows.Forms.ProgressBar();
+            this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.pbFamilies = new System.Windows.Forms.ProgressBar();
             this.label5 = new System.Windows.Forms.Label();
@@ -250,6 +259,7 @@
             this.Individuals = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Families = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Marriages = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.reltypesSurnames = new Controls.RelationTypes();
             this.tabFacts = new System.Windows.Forms.TabPage();
             this.btnDuplicateFacts = new System.Windows.Forms.Button();
             this.lblExclude = new System.Windows.Forms.Label();
@@ -262,6 +272,7 @@
             this.btnShowFacts = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtFactsSurname = new System.Windows.Forms.TextBox();
+            this.relTypesFacts = new Controls.RelationTypes();
             this.tabSources = new System.Windows.Forms.TabPage();
             this.dgSources = new System.Windows.Forms.DataGridView();
             this.tabDuplicates = new System.Windows.Forms.TabPage();
@@ -296,20 +307,9 @@
             this.rbTodaySingle = new System.Windows.Forms.RadioButton();
             this.label17 = new System.Windows.Forms.Label();
             this.dpToday = new System.Windows.Forms.DateTimePicker();
+            this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
-            this.reltypesSurnames = new Controls.RelationTypes();
-            this.relTypesFacts = new Controls.RelationTypes();
-            this.cenDate = new Controls.CensusDateSelector();
-            this.relTypesCensus = new Controls.RelationTypes();
-            this.relTypesLC = new Controls.RelationTypes();
-            this.relTypesColoured = new Controls.RelationTypes();
-            this.treetopsRelation = new Controls.RelationTypes();
-            this.treetopsCountry = new Controls.CensusCountry();
-            this.wardeadRelation = new Controls.RelationTypes();
-            this.wardeadCountry = new Controls.CensusCountry();
-            this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -933,14 +933,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 172);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1169,6 +1169,23 @@
             this.txtWorldWarsSurname.Size = new System.Drawing.Size(201, 20);
             this.txtWorldWarsSurname.TabIndex = 27;
             // 
+            // wardeadRelation
+            // 
+            this.wardeadRelation.Location = new System.Drawing.Point(270, 12);
+            this.wardeadRelation.MarriedToDB = true;
+            this.wardeadRelation.Name = "wardeadRelation";
+            this.wardeadRelation.Size = new System.Drawing.Size(322, 74);
+            this.wardeadRelation.TabIndex = 26;
+            // 
+            // wardeadCountry
+            // 
+            this.wardeadCountry.Location = new System.Drawing.Point(8, 12);
+            this.wardeadCountry.Name = "wardeadCountry";
+            this.wardeadCountry.Size = new System.Drawing.Size(256, 74);
+            this.wardeadCountry.TabIndex = 25;
+            this.wardeadCountry.Title = "Default Country";
+            this.wardeadCountry.UKEnabled = true;
+            // 
             // ctxViewNotes
             // 
             this.ctxViewNotes.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1257,6 +1274,23 @@
             this.txtTreetopsSurname.Name = "txtTreetopsSurname";
             this.txtTreetopsSurname.Size = new System.Drawing.Size(201, 20);
             this.txtTreetopsSurname.TabIndex = 23;
+            // 
+            // treetopsRelation
+            // 
+            this.treetopsRelation.Location = new System.Drawing.Point(270, 12);
+            this.treetopsRelation.MarriedToDB = true;
+            this.treetopsRelation.Name = "treetopsRelation";
+            this.treetopsRelation.Size = new System.Drawing.Size(322, 74);
+            this.treetopsRelation.TabIndex = 12;
+            // 
+            // treetopsCountry
+            // 
+            this.treetopsCountry.Location = new System.Drawing.Point(8, 12);
+            this.treetopsCountry.Name = "treetopsCountry";
+            this.treetopsCountry.Size = new System.Drawing.Size(256, 74);
+            this.treetopsCountry.TabIndex = 11;
+            this.treetopsCountry.Title = "Default Country";
+            this.treetopsCountry.UKEnabled = true;
             // 
             // tabColourReports
             // 
@@ -1395,6 +1429,15 @@
             this.txtColouredSurname.Size = new System.Drawing.Size(201, 20);
             this.txtColouredSurname.TabIndex = 30;
             this.txtColouredSurname.TextChanged += new System.EventHandler(this.TxtColouredSurname_TextChanged);
+            // 
+            // relTypesColoured
+            // 
+            this.relTypesColoured.Location = new System.Drawing.Point(8, 8);
+            this.relTypesColoured.MarriedToDB = true;
+            this.relTypesColoured.Name = "relTypesColoured";
+            this.relTypesColoured.Size = new System.Drawing.Size(325, 78);
+            this.relTypesColoured.TabIndex = 26;
+            this.relTypesColoured.RelationTypesChanged += new System.EventHandler(this.RelTypesColoured_RelationTypesChanged);
             // 
             // tabLostCousins
             // 
@@ -1631,6 +1674,15 @@
             this.btnLC1881Scot.Text = "1881 Scotland Census";
             this.btnLC1881Scot.UseVisualStyleBackColor = true;
             this.btnLC1881Scot.Click += new System.EventHandler(this.BtnLC1881Scot_Click);
+            // 
+            // relTypesLC
+            // 
+            this.relTypesLC.Location = new System.Drawing.Point(8, 8);
+            this.relTypesLC.MarriedToDB = true;
+            this.relTypesLC.Name = "relTypesLC";
+            this.relTypesLC.Size = new System.Drawing.Size(325, 78);
+            this.relTypesLC.TabIndex = 19;
+            this.relTypesLC.RelationTypesChanged += new System.EventHandler(this.RelTypesLC_RelationTypesChanged);
             // 
             // tabCensus
             // 
@@ -1884,6 +1936,24 @@
             0,
             0,
             0});
+            // 
+            // cenDate
+            // 
+            this.cenDate.AutoSize = true;
+            this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cenDate.Country = "";
+            this.cenDate.Location = new System.Drawing.Point(15, 103);
+            this.cenDate.Name = "cenDate";
+            this.cenDate.Size = new System.Drawing.Size(234, 27);
+            this.cenDate.TabIndex = 28;
+            // 
+            // relTypesCensus
+            // 
+            this.relTypesCensus.Location = new System.Drawing.Point(9, 19);
+            this.relTypesCensus.MarriedToDB = true;
+            this.relTypesCensus.Name = "relTypesCensus";
+            this.relTypesCensus.Size = new System.Drawing.Size(325, 78);
+            this.relTypesCensus.TabIndex = 27;
             // 
             // btnShowCensusEntered
             // 
@@ -2421,6 +2491,20 @@
             this.pbRelationships.Size = new System.Drawing.Size(316, 16);
             this.pbRelationships.TabIndex = 7;
             // 
+            // rtbOutput
+            // 
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbOutput.Location = new System.Drawing.Point(3, 112);
+            this.rtbOutput.Name = "rtbOutput";
+            this.rtbOutput.ReadOnly = true;
+            this.rtbOutput.Size = new System.Drawing.Size(1079, 325);
+            this.rtbOutput.TabIndex = 6;
+            this.rtbOutput.Text = "";
+            this.rtbOutput.TextChanged += new System.EventHandler(this.RtbOutput_TextChanged);
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -2587,6 +2671,14 @@
             this.Marriages.Name = "Marriages";
             this.Marriages.ReadOnly = true;
             // 
+            // reltypesSurnames
+            // 
+            this.reltypesSurnames.Location = new System.Drawing.Point(6, 6);
+            this.reltypesSurnames.MarriedToDB = true;
+            this.reltypesSurnames.Name = "reltypesSurnames";
+            this.reltypesSurnames.Size = new System.Drawing.Size(325, 78);
+            this.reltypesSurnames.TabIndex = 22;
+            // 
             // tabFacts
             // 
             this.tabFacts.Controls.Add(this.btnDuplicateFacts);
@@ -2722,6 +2814,15 @@
             this.txtFactsSurname.Size = new System.Drawing.Size(256, 20);
             this.txtFactsSurname.TabIndex = 22;
             this.txtFactsSurname.TextChanged += new System.EventHandler(this.TxtFactsSurname_TextChanged);
+            // 
+            // relTypesFacts
+            // 
+            this.relTypesFacts.Location = new System.Drawing.Point(8, 8);
+            this.relTypesFacts.MarriedToDB = true;
+            this.relTypesFacts.Name = "relTypesFacts";
+            this.relTypesFacts.Size = new System.Drawing.Size(325, 78);
+            this.relTypesFacts.TabIndex = 21;
+            this.relTypesFacts.RelationTypesChanged += new System.EventHandler(this.RelTypesFacts_RelationTypesChanged);
             // 
             // tabSources
             // 
@@ -2905,9 +3006,10 @@
             // 
             // btnCancelDuplicates
             // 
-            this.btnCancelDuplicates.Location = new System.Drawing.Point(411, 6);
+            this.btnCancelDuplicates.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelDuplicates.Image")));
+            this.btnCancelDuplicates.Location = new System.Drawing.Point(410, 9);
             this.btnCancelDuplicates.Name = "btnCancelDuplicates";
-            this.btnCancelDuplicates.Size = new System.Drawing.Size(26, 26);
+            this.btnCancelDuplicates.Size = new System.Drawing.Size(23, 23);
             this.btnCancelDuplicates.TabIndex = 17;
             this.btnCancelDuplicates.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancelDuplicates.UseVisualStyleBackColor = true;
@@ -3090,117 +3192,6 @@
             this.dpToday.Size = new System.Drawing.Size(171, 20);
             this.dpToday.TabIndex = 8;
             // 
-            // saveDatabase
-            // 
-            this.saveDatabase.DefaultExt = "zip";
-            this.saveDatabase.Filter = "Zip Files | *.zip";
-            // 
-            // restoreDatabase
-            // 
-            this.restoreDatabase.FileName = "*.zip";
-            this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
-            // 
-            // rtbOutput
-            // 
-            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbOutput.Location = new System.Drawing.Point(3, 112);
-            this.rtbOutput.Name = "rtbOutput";
-            this.rtbOutput.ReadOnly = true;
-            this.rtbOutput.Size = new System.Drawing.Size(1079, 325);
-            this.rtbOutput.TabIndex = 6;
-            this.rtbOutput.Text = "";
-            this.rtbOutput.TextChanged += new System.EventHandler(this.RtbOutput_TextChanged);
-            // 
-            // reltypesSurnames
-            // 
-            this.reltypesSurnames.Location = new System.Drawing.Point(6, 6);
-            this.reltypesSurnames.MarriedToDB = true;
-            this.reltypesSurnames.Name = "reltypesSurnames";
-            this.reltypesSurnames.Size = new System.Drawing.Size(325, 78);
-            this.reltypesSurnames.TabIndex = 22;
-            // 
-            // relTypesFacts
-            // 
-            this.relTypesFacts.Location = new System.Drawing.Point(8, 8);
-            this.relTypesFacts.MarriedToDB = true;
-            this.relTypesFacts.Name = "relTypesFacts";
-            this.relTypesFacts.Size = new System.Drawing.Size(325, 78);
-            this.relTypesFacts.TabIndex = 21;
-            this.relTypesFacts.RelationTypesChanged += new System.EventHandler(this.RelTypesFacts_RelationTypesChanged);
-            // 
-            // cenDate
-            // 
-            this.cenDate.AutoSize = true;
-            this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.cenDate.Country = "";
-            this.cenDate.Location = new System.Drawing.Point(15, 103);
-            this.cenDate.Name = "cenDate";
-            this.cenDate.Size = new System.Drawing.Size(234, 27);
-            this.cenDate.TabIndex = 28;
-            // 
-            // relTypesCensus
-            // 
-            this.relTypesCensus.Location = new System.Drawing.Point(9, 19);
-            this.relTypesCensus.MarriedToDB = true;
-            this.relTypesCensus.Name = "relTypesCensus";
-            this.relTypesCensus.Size = new System.Drawing.Size(325, 78);
-            this.relTypesCensus.TabIndex = 27;
-            // 
-            // relTypesLC
-            // 
-            this.relTypesLC.Location = new System.Drawing.Point(8, 8);
-            this.relTypesLC.MarriedToDB = true;
-            this.relTypesLC.Name = "relTypesLC";
-            this.relTypesLC.Size = new System.Drawing.Size(325, 78);
-            this.relTypesLC.TabIndex = 19;
-            this.relTypesLC.RelationTypesChanged += new System.EventHandler(this.RelTypesLC_RelationTypesChanged);
-            // 
-            // relTypesColoured
-            // 
-            this.relTypesColoured.Location = new System.Drawing.Point(8, 8);
-            this.relTypesColoured.MarriedToDB = true;
-            this.relTypesColoured.Name = "relTypesColoured";
-            this.relTypesColoured.Size = new System.Drawing.Size(325, 78);
-            this.relTypesColoured.TabIndex = 26;
-            this.relTypesColoured.RelationTypesChanged += new System.EventHandler(this.RelTypesColoured_RelationTypesChanged);
-            // 
-            // treetopsRelation
-            // 
-            this.treetopsRelation.Location = new System.Drawing.Point(270, 12);
-            this.treetopsRelation.MarriedToDB = true;
-            this.treetopsRelation.Name = "treetopsRelation";
-            this.treetopsRelation.Size = new System.Drawing.Size(322, 74);
-            this.treetopsRelation.TabIndex = 12;
-            // 
-            // treetopsCountry
-            // 
-            this.treetopsCountry.Location = new System.Drawing.Point(8, 12);
-            this.treetopsCountry.Name = "treetopsCountry";
-            this.treetopsCountry.Size = new System.Drawing.Size(256, 74);
-            this.treetopsCountry.TabIndex = 11;
-            this.treetopsCountry.Title = "Default Country";
-            this.treetopsCountry.UKEnabled = true;
-            // 
-            // wardeadRelation
-            // 
-            this.wardeadRelation.Location = new System.Drawing.Point(270, 12);
-            this.wardeadRelation.MarriedToDB = true;
-            this.wardeadRelation.Name = "wardeadRelation";
-            this.wardeadRelation.Size = new System.Drawing.Size(322, 74);
-            this.wardeadRelation.TabIndex = 26;
-            // 
-            // wardeadCountry
-            // 
-            this.wardeadCountry.Location = new System.Drawing.Point(8, 12);
-            this.wardeadCountry.Name = "wardeadCountry";
-            this.wardeadCountry.Size = new System.Drawing.Size(256, 74);
-            this.wardeadCountry.TabIndex = 25;
-            this.wardeadCountry.Title = "Default Country";
-            this.wardeadCountry.UKEnabled = true;
-            // 
             // rtbToday
             // 
             this.rtbToday.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -3213,6 +3204,16 @@
             this.rtbToday.Size = new System.Drawing.Size(1079, 388);
             this.rtbToday.TabIndex = 7;
             this.rtbToday.Text = "";
+            // 
+            // saveDatabase
+            // 
+            this.saveDatabase.DefaultExt = "zip";
+            this.saveDatabase.Filter = "Zip Files | *.zip";
+            // 
+            // restoreDatabase
+            // 
+            this.restoreDatabase.FileName = "*.zip";
+            this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
             // MainForm
             // 

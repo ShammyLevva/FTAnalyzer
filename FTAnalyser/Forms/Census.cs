@@ -241,7 +241,16 @@ namespace FTAnalyzer.Forms
                     factForm.Show();
                 }
                 else
-                    ft.SearchCensus(censusCountry, CensusDate.StartDate.Year, ds, cbCensusSearchProvider.SelectedIndex);
+                {
+                    try
+                    {
+                        ft.SearchCensus(censusCountry, CensusDate.StartDate.Year, ds, cbCensusSearchProvider.SelectedIndex);
+                    }
+                    catch (CensusSearchException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
             }
         }
 

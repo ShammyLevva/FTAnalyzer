@@ -20,6 +20,7 @@ using System.Web;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Reflection;
+using System.Threading;
 
 namespace FTAnalyzer
 {
@@ -2179,12 +2180,22 @@ namespace FTAnalyzer
         #endregion
 
         #region Duplicates Tab
+        CancellationTokenSource cts;
+
         private async Task SetPossibleDuplicates()
         {
             SetDuplicateControlsVisibility(true);
             rfhDuplicates.SaveColumnLayout("DuplicatesColumns.xml");
-            Progress<int> progress = new Progress<int>(value => { pbDuplicates.Value = value; });
-            SortableBindingList<IDisplayDuplicateIndividual> data = await Task.Run(() => ft.GenerateDuplicatesList(progress, tbDuplicateScore));
+            var progress = new Progress<int>(value => { pbDuplicates.Value = value; });
+            var maxScore = new Progress<int>(value =>
+            {
+                tbDuplicateScore.TickFrequency = value / 20;
+                tbDuplicateScore.SetRange(1, value);
+            });
+            cts = new CancellationTokenSource();
+            int score = tbDuplicateScore.Value;
+            SortableBindingList<IDisplayDuplicateIndividual> data = await Task.Run(() => ft.GenerateDuplicatesList(score, progress, maxScore, cts.Token));
+            cts = null;
             if (data != null)
             {
                 dgDuplicates.DataSource = data;
@@ -2224,7 +2235,11 @@ namespace FTAnalyzer
 
         private void BtnCancelDuplicates_Click(object sender, EventArgs e)
         {
-            ft.CancelDuplicateProcessing();
+            if (cts != null)
+            {
+                cts.Cancel();
+                MessageBox.Show("Possible Duplicate Search Cancelled", "FTAnalyzer");
+            }
         }
 
         private void DgDuplicates_CellContentClick(object sender, DataGridViewCellEventArgs e)

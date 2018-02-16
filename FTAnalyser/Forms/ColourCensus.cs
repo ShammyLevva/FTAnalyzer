@@ -233,7 +233,15 @@ namespace FTAnalyzer.Forms
                         if (censusYear == 1939 && !cbCensusSearchProvider.SelectedItem.Equals("Find My Past"))
                             MessageBox.Show("Unable to search the 1939 National Register on " + cbCensusSearchProvider.SelectedItem + ".", "FTAnalyzer");
                         else
-                            ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
+                        {
+                            try
+                            {
+                                ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
+                            } catch (CensusSearchException ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                        }
                     }
                 }
                 else if (e.ColumnIndex >= 0)

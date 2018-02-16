@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Xml;
-using System.Windows.Forms;
 using FTAnalyzer.Filters;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
@@ -15,6 +14,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using GeoAPI.Geometries;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace FTAnalyzer
 {
@@ -40,7 +40,6 @@ namespace FTAnalyzer
         private static XmlNodeList noteNodes = null;
         private bool _loading = false;
         private bool _dataloaded = false;
-        private bool _cancelDuplicates = false;
         private Int64 maxAhnentafel = 0;
         private Dictionary<string, Individual> individualLookup;
         private string rootIndividualID = string.Empty;
@@ -1914,8 +1913,7 @@ namespace FTAnalyzer
                 }
                 else if (Countries.IsKnownCountry(country))
                 {
-                    MessageBox.Show("Sorry searching the " + country + " census on FamilySearch for " + censusYear + " is not supported by FTAnalyzer at this time", "FTAnalyzer");
-                    return null;
+                    throw new CensusSearchException("Sorry searching the " + country + " census on FamilySearch for " + censusYear + " is not supported by FTAnalyzer at this time");
                 }
             }
             return path.Replace("+", "%20").ToString();
@@ -2006,8 +2004,7 @@ namespace FTAnalyzer
         {
             if (!censusCountry.Equals(Countries.UNITED_KINGDOM) && !censusCountry.Equals("Unknown"))
             {
-                MessageBox.Show("Sorry only UK searches can be done on FreeCEN.", "FTAnalyzer");
-                return null;
+                throw new CensusSearchException("Sorry only UK searches can be done on FreeCEN.");
             }
             FactDate censusFactDate = new FactDate(censusYear.ToString());
             UriBuilder uri = new UriBuilder
@@ -2302,8 +2299,7 @@ namespace FTAnalyzer
 
         private string BuildFreeBMDQuery(SearchType st, Individual individual, FactDate factdate)
         {
-            MessageBox.Show(Properties.Messages.NotYet, "FTAnalyzer");
-            return null;
+            throw new CensusSearchException(Properties.Messages.NotYet);
         }
 
         private string BuildFindMyPastQuery(SearchType st, Individual individual, FactDate factdate)
@@ -2556,41 +2552,34 @@ namespace FTAnalyzer
         #endregion
 
         #region Duplicates Processing
-        public SortableBindingList<IDisplayDuplicateIndividual> GenerateDuplicatesList(IProgress<int> progress, TrackBar tb)
+        public SortableBindingList<IDisplayDuplicateIndividual> GenerateDuplicatesList(int value, IProgress<int> progress, IProgress<int> maximum, CancellationToken ct)
         {
             log.Debug("FamilyTree.GenerateDuplicatesList");
-            if (duplicates != null && !_cancelDuplicates)
-                return BuildDuplicateList(tb.Value); // we have already processed the duplicates since the file was loaded
-            tb.Enabled = false;
-            _cancelDuplicates = false;
+            if (duplicates != null)
+            {
+                maximum.Report(MaxDuplicateScore());
+                return BuildDuplicateList(value); // we have already processed the duplicates since the file was loaded
+            }
             duplicates = new SortableBindingList<DuplicateIndividual>();
             IEnumerable<Individual> males = individuals.Filter<Individual>(x => (x.Gender == "M" || x.Gender == "U"));
             IEnumerable<Individual> females = individuals.Filter<Individual>(x => (x.Gender == "F" || x.Gender == "U"));
             int progressMaximum = (males.Count() * males.Count() + females.Count() * females.Count()) / 2;
             progress.Report(0);
-            IdentifyDuplicates(progress, 0, progressMaximum, males);
-            IdentifyDuplicates(progress, (males.Count() * males.Count()) / 2, progressMaximum, females);
-            if (_cancelDuplicates)
+            try
+            {
+                IdentifyDuplicates(ct, progress, 0, progressMaximum, males);
+                IdentifyDuplicates(ct, progress, (males.Count() * males.Count()) / 2, progressMaximum, females);
+            }
+            catch (OperationCanceledException)
             {
                 progress.Report(0);
-                //TODO handle cancel as a Task cancel event
-                MessageBox.Show("Possible Duplicate Search Cancelled", "FTAnalyzer");
-                tb.Minimum = 1;
-                tb.Maximum = 10;
-                tb.Enabled = true;
+                maximum.Report(10);
+                duplicates = null;
                 return null;
             }
-            int maxScore = MaxDuplicateScore();
-            tb.TickFrequency = maxScore / 20;
-            tb.SetRange(1, maxScore);
-            tb.Enabled = true;
+            maximum.Report(MaxDuplicateScore());
             DeserializeNonDuplicates();
-            return BuildDuplicateList(tb.Value);
-        }
-
-        public void CancelDuplicateProcessing()
-        {
-            _cancelDuplicates = true;
+            return BuildDuplicateList(value);
         }
 
         private int MaxDuplicateScore()
@@ -2604,34 +2593,30 @@ namespace FTAnalyzer
             return score;
         }
 
-        private void IdentifyDuplicates(IProgress<int> progress, int progressSoFar, int progressMaximum, IEnumerable<Individual> enumerable)
+        private void IdentifyDuplicates(CancellationToken ct, IProgress<int> progress, int progressSoFar, int progressMaximum, IEnumerable<Individual> enumerable)
         {
             log.Debug("FamilyTree.IdentifyDuplicates");
             var index = 0;
             foreach (var indA in enumerable)
             {
                 index++;
-                if (!_cancelDuplicates)
+                foreach (var indB in enumerable.Skip(index))
                 {
-                    foreach (var indB in enumerable.Skip(index))
+                    if (indA.GenderMatches(indB) && indA.Name != Individual.UNKNOWN_NAME && indB.Name != Individual.UNKNOWN_NAME)
                     {
-                        if (_cancelDuplicates)
-                            break;
-                        if (indA.GenderMatches(indB) && indA.Name != Individual.UNKNOWN_NAME && indB.Name != Individual.UNKNOWN_NAME)
+                        if (indA.SurnameMetaphone.Equals(indB.SurnameMetaphone) &&
+                            (indA.ForenameMetaphone.Equals(indB.ForenameMetaphone) || indA.StandardisedName.Equals(indB.StandardisedName)) &&
+                            indA.BirthDate.Distance(indB.BirthDate) < 5)
                         {
-                            if (indA.SurnameMetaphone.Equals(indB.SurnameMetaphone) &&
-                                (indA.ForenameMetaphone.Equals(indB.ForenameMetaphone) || indA.StandardisedName.Equals(indB.StandardisedName)) &&
-                                indA.BirthDate.Distance(indB.BirthDate) < 5)
-                            {
-                                var test = new DuplicateIndividual(indA, indB);
-                                if (test.Score > 0)
-                                    duplicates.Add(test);
-                            }
+                            var test = new DuplicateIndividual(indA, indB);
+                            if (test.Score > 0)
+                                duplicates.Add(test);
                         }
-                        progressSoFar++;
-                        if (progressSoFar % 1000 == 0)
-                            progress.Report((100 * progressSoFar) / progressMaximum);
                     }
+                    ct.ThrowIfCancellationRequested();
+                    progressSoFar++;
+                    if (progressSoFar % 1000 == 0)
+                        progress.Report((100 * progressSoFar) / progressMaximum);
                 }
             }
         }
@@ -2843,7 +2828,6 @@ namespace FTAnalyzer
             catch (Exception)
             {
                 log.Error("Error processing wiki date for " + dateNode);
-                MessageBox.Show("Error processing wiki date for " + dateNode, "FTAnalyzer");
                 fd = defaultDate;
             }
             return fd;
