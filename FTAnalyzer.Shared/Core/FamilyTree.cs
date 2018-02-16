@@ -15,6 +15,7 @@ using GeoAPI.Geometries;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace FTAnalyzer
 {
@@ -821,11 +822,18 @@ namespace FTAnalyzer
                 s.FixSourceID(sourceLen);
         }
 
+        public void SetFullNames()
+        {
+            foreach (Individual ind in individuals)
+            {
+                ind.SetFullName();
+            }
+        }
         #endregion
 
-        #region Loose Births
+            #region Loose Births
 
-        public SortableBindingList<IDisplayLooseBirth> LooseBirths()
+            public SortableBindingList<IDisplayLooseBirth> LooseBirths()
         {
             if (looseBirths != null)
                 return looseBirths;
@@ -2552,7 +2560,10 @@ namespace FTAnalyzer
         #endregion
 
         #region Duplicates Processing
-        public SortableBindingList<IDisplayDuplicateIndividual> GenerateDuplicatesList(int value, IProgress<int> progress, IProgress<int> maximum, CancellationToken ct)
+        int duplicateProgress = 0;
+        int progressMaximum = 0;
+
+        public async Task<SortableBindingList<IDisplayDuplicateIndividual>> GenerateDuplicatesList(int value, IProgress<int> progress, IProgress<int> maximum, CancellationToken ct)
         {
             log.Debug("FamilyTree.GenerateDuplicatesList");
             if (duplicates != null)
@@ -2563,12 +2574,17 @@ namespace FTAnalyzer
             duplicates = new SortableBindingList<DuplicateIndividual>();
             IEnumerable<Individual> males = individuals.Filter<Individual>(x => (x.Gender == "M" || x.Gender == "U"));
             IEnumerable<Individual> females = individuals.Filter<Individual>(x => (x.Gender == "F" || x.Gender == "U"));
-            int progressMaximum = (males.Count() * males.Count() + females.Count() * females.Count()) / 2;
-            progress.Report(0);
+            duplicateProgress = 0;
+            progressMaximum = (males.Count() * males.Count() + females.Count() * females.Count()) / 2;
+            progress.Report(duplicateProgress);
             try
             {
-                IdentifyDuplicates(ct, progress, 0, progressMaximum, males);
-                IdentifyDuplicates(ct, progress, (males.Count() * males.Count()) / 2, progressMaximum, females);
+                var tasks = new List<Task>
+                {
+                    Task.Run(() => IdentifyDuplicates(ct, progress, males)),
+                    Task.Run(() => IdentifyDuplicates(ct, progress, females))
+                };
+                await Task.WhenAll(tasks);
             }
             catch (OperationCanceledException)
             {
@@ -2593,7 +2609,7 @@ namespace FTAnalyzer
             return score;
         }
 
-        private void IdentifyDuplicates(CancellationToken ct, IProgress<int> progress, int progressSoFar, int progressMaximum, IEnumerable<Individual> enumerable)
+        private void IdentifyDuplicates(CancellationToken ct, IProgress<int> progress, IEnumerable<Individual> enumerable)
         {
             log.Debug("FamilyTree.IdentifyDuplicates");
             var index = 0;
@@ -2614,9 +2630,9 @@ namespace FTAnalyzer
                         }
                     }
                     ct.ThrowIfCancellationRequested();
-                    progressSoFar++;
-                    if (progressSoFar % 1000 == 0)
-                        progress.Report((100 * progressSoFar) / progressMaximum);
+                    duplicateProgress++;
+                    if (duplicateProgress % 1000 == 0)
+                        progress.Report((100 * duplicateProgress) / progressMaximum);
                 }
             }
         }

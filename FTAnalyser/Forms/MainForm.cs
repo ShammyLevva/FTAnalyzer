@@ -90,6 +90,7 @@ namespace FTAnalyzer
         {
             Options.ReloadRequired += new EventHandler(Options_ReloadData);
             GeneralSettings.MinParentalAgeChanged += new EventHandler(Options_MinimumParentalAgeChanged);
+            GeneralSettings.AliasInNameChanged += new EventHandler(Options_AliasInNameChanged);
         }
 
         private void SetHeightWidth()
@@ -805,6 +806,11 @@ namespace FTAnalyzer
             ft.ResetLooseFacts();
             if (tabSelector.SelectedTab == tabLooseBirthDeaths)
                 UpdateLooseBirthDeaths();
+        }
+
+        private void Options_AliasInNameChanged(object sender, EventArgs e)
+        {
+            ft.SetFullNames();
         }
         #endregion
 

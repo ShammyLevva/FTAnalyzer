@@ -59,6 +59,7 @@ namespace FTAnalyzer.UserControls
             Properties.GeneralSettings.Default.Save();
             OnMinParentalAgeChanged();
             OnCompactCensusRefChanged();
+            OnAliasInNameChanged();
         }
 
         public void Cancel()
@@ -116,6 +117,12 @@ namespace FTAnalyzer.UserControls
         protected static void OnMinParentalAgeChanged()
         {
             MinParentalAgeChanged?.Invoke(null, EventArgs.Empty);
+        }
+
+        public static event EventHandler AliasInNameChanged;
+        protected static void OnAliasInNameChanged()
+        {
+            AliasInNameChanged?.Invoke(null, EventArgs.Empty);
         }
 
         public static event EventHandler CompactCensusRefChanged;

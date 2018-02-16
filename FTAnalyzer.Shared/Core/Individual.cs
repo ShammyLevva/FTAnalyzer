@@ -20,6 +20,8 @@ namespace FTAnalyzer
         private string forenames;
         private string surname;
         private string marriedName;
+        private string fullname;
+        private string sortedname;
         private string gender;
         private string alias;
         private int relationType;
@@ -154,6 +156,8 @@ namespace FTAnalyzer
                 this.forenameMetaphone = i.forenameMetaphone;
                 this.surnameMetaphone = i.surnameMetaphone;
                 this.marriedName = i.marriedName;
+                this.fullname = i.fullname;
+                this.sortedname = i.sortedname;
                 this.StandardisedName = i.StandardisedName;
                 this.IsFlaggedAsLiving = i.IsFlaggedAsLiving;
                 this.gender = i.gender;
@@ -298,17 +302,14 @@ namespace FTAnalyzer
 
         public string SortedName
         {
-            get { return (surname + ", " + forenames).Trim(); }
+            get { return sortedname; }
         }
 
         public string Name
         {
             get
             {
-                if (Properties.GeneralSettings.Default.ShowAliasInName && Alias.Length > 0)
-                    return (forenames + (" '" + Alias + "' ") + surname).Trim();
-                else
-                    return (forenames + " " + surname).Trim();
+                return fullname;
             }
             private set
             {
@@ -329,7 +330,17 @@ namespace FTAnalyzer
                 if (Properties.GeneralSettings.Default.TreatFemaleSurnamesAsUnknown && !IsMale && surname.StartsWith("(") && surname.EndsWith(")"))
                     surname = Individual.UNKNOWN_NAME;
                 marriedName = surname;
+                fullname = SetFullName();
+                sortedname = (forenames + " " + surname).Trim();
             }
+        }
+
+        public string SetFullName()
+        {
+            if (Properties.GeneralSettings.Default.ShowAliasInName && Alias.Length > 0)
+                return (forenames + (" '" + Alias + "' ") + surname).Trim();
+            else
+                return (forenames + " " + surname).Trim();
         }
 
         public string Forename
