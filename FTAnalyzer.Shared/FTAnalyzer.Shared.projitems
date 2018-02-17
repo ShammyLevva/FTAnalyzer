@@ -102,7 +102,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\ExtensionMethods.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\FilterList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\FilterUtils.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utilities\FooterPrintBlock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\HttpUtility.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\PropertyComparer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\ReadWriteCSV.cs" />
