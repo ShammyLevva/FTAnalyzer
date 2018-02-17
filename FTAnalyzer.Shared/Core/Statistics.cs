@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FTAnalyzer.Forms;
 using System.Net;
 using System.IO;
 using FTAnalyzer.Filters;
@@ -34,7 +33,7 @@ namespace FTAnalyzer
             }
         }
 
-        public string ChildrenBirthProfiles()
+        public int[,,] ChildrenBirthProfiles()
         {
             int[,,] stats = new int[2, 20, 3];
             foreach (Family f in ft.AllFamilies)
@@ -56,12 +55,9 @@ namespace FTAnalyzer
                     }
                 }
             }
-            Chart chart = new Chart();
-            chart.BuildChildBirthProfile(stats);
-            MainForm.DisposeDuplicateForms(chart);
-            chart.Show();
-            return BuildOutput(stats);
+            return stats;
         }
+
         private void AddAgeData(int parent, int[,,] stats, Age age, string gender)
         {
             int child = gender == "M" ? 0 : (gender == "F" ? 1 : 2);
@@ -70,7 +66,7 @@ namespace FTAnalyzer
                 stats[parent, fiveyear, child]++;
         }
 
-        private string BuildOutput(int[,,] minAge)
+        public string BuildOutput(int[,,] minAge)
         {
             StringBuilder output = new StringBuilder();
             output.AppendLine("Fathers Age When Child Born");

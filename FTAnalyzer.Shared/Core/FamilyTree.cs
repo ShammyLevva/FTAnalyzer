@@ -831,7 +831,7 @@ namespace FTAnalyzer
         }
         #endregion
 
-            #region Loose Births
+        #region Loose Births
 
             public SortableBindingList<IDisplayLooseBirth> LooseBirths()
         {

@@ -637,7 +637,12 @@ namespace FTAnalyzer
         private void ChildAgeProfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Statistics s = Statistics.Instance;
-            MessageBox.Show(s.ChildrenBirthProfiles(), "Birth Profile Information");
+            Chart chart = new Chart();
+            int[,,] stats = s.ChildrenBirthProfiles();
+            chart.BuildChildBirthProfile(stats);
+            MainForm.DisposeDuplicateForms(chart);
+            chart.Show();
+            MessageBox.Show(s.BuildOutput(stats), "Birth Profile Information");
         }
 
         private void ViewOnlineManualToolStripMenuItem_Click(object sender, EventArgs e)
