@@ -1,3 +1,6 @@
 [submodule "SharpMap"]
 	path = SharpMap
 	url = https://github.com/ShammyLevva/SharpMap
+[submodule "FTAnalyzer.Shared"]
+	path = FTAnalyzer.Shared
+	url = https://github.com/ShammyLevva/FTAnalyzer.Shared
