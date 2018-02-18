@@ -301,6 +301,11 @@
     <Compile Include="Mapping\TearDropLayer.cs" />
     <Compile Include="Mapping\TileSourceFactory.cs" />
     <Compile Include="Properties\FileHandling.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <DependentUpon>Settings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
     <Compile Include="UserControls\FileHandlingSettings.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -547,6 +552,10 @@
     <EmbeddedResource Include="Resources\KUNSTLER.TTF">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Forms\AboutBox.cs">
