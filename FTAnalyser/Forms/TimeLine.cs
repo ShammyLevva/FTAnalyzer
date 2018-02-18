@@ -59,7 +59,7 @@ namespace FTAnalyzer.Forms
         {
             minGeoCodedYear = FactDate.MAXDATE.Year;
             maxGeoCodedYear = FactDate.MINDATE.Year;
-            List<MapLocation> yearRange = FilterToRelationsIncluded(ft.AllMapLocations);
+            List<MapLocation> yearRange = FilterToRelationsIncluded(MapHelper.Instance.AllMapLocations);
             foreach (MapLocation ml in yearRange)
             {
                 if (ml.Location.IsGeoCoded(false) && ml.FactDate.IsKnown)
@@ -104,19 +104,20 @@ namespace FTAnalyzer.Forms
             if (year.Length == 4 && result != 0)
             {
                 List<MapLocation> locations;
+                var mh = MapHelper.Instance;
                 if (result == 9999)
                 {
-                    locations = FilterToRelationsIncluded(ft.AllMapLocations);
+                    locations = FilterToRelationsIncluded(mh.AllMapLocations);
                     txtLocations.Text = locations.Count() + " Locations in total";
                 }
                 else
                 {
-                    locations = FilterToRelationsIncluded(ft.YearMapLocations(new FactDate(year), yearLimit));
+                    locations = FilterToRelationsIncluded(mh.YearMapLocations(new FactDate(year), yearLimit));
                     txtLocations.Text = locations.Count() + " Locations in total for year " + year;
                 }
                 txtLocations.Text += " (you may need to zoom out to see them all). Use arrow tool then select icon to view ancestors at location";
                 clusters.Clear();
-                Envelope bbox = new Envelope();
+                var bbox = new Envelope();
                 foreach (MapLocation loc in locations)
                 {
                     FeatureDataRow row = loc.AddFeatureDataRow(clusters.FactLocations);

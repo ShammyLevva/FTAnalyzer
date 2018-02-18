@@ -205,5 +205,49 @@ namespace FTAnalyzer.Mapping
             }
             return expand;
         }
+
+        public List<MapLocation> AllMapLocations
+        {
+            get
+            {
+                List<MapLocation> result = new List<MapLocation>();
+                foreach (Individual ind in FamilyTree.Instance.AllIndividuals)
+                {
+                    foreach (Fact f in ind.AllFacts)
+                        if (f.Location.IsGeoCoded(false))
+                            result.Add(new MapLocation(ind, f, f.FactDate));
+                }
+                return result;
+            }
+        }
+
+        public List<MapLocation> YearMapLocations(FactDate when, int limit)
+        {
+            List<MapLocation> result = new List<MapLocation>();
+            foreach (Individual ind in FamilyTree.Instance.AllIndividuals)
+            {
+                if (ind.IsAlive(when) && ind.GetMaxAge(when) < FactDate.MAXYEARS)
+                {
+                    Fact fact = ind.BestLocationFact(when, limit);
+                    FactLocation loc = fact.Location;
+                    if (loc.IsGeoCoded(false))
+                        result.Add(new MapLocation(ind, fact, when));
+                    else
+                    {
+                        int startlevel = loc.Level - 1;
+                        for (int level = startlevel; level > FactLocation.UNKNOWN; level--)
+                        {
+                            loc = loc.GetLocation(level);
+                            if (loc.IsGeoCoded(false))
+                            {
+                                result.Add(new MapLocation(ind, fact, loc, when));
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
+        }
     }
 }
