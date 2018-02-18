@@ -13,6 +13,7 @@ using FTAnalyzer.Filters;
 using FTAnalyzer.Forms;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
+using FTAnalyzer.Properties;
 using Ionic.Zip;
 using Printing.DataGridViewPrint.Tools;
 using System.Text;
@@ -88,8 +89,8 @@ namespace FTAnalyzer
         private void RegisterEventHandlers()
         {
             Options.ReloadRequired += new EventHandler(Options_ReloadData);
-            GeneralSettings.MinParentalAgeChanged += new EventHandler(Options_MinimumParentalAgeChanged);
-            GeneralSettings.AliasInNameChanged += new EventHandler(Options_AliasInNameChanged);
+            UserControls.GeneralSettings.MinParentalAgeChanged += new EventHandler(Options_MinimumParentalAgeChanged);
+            UserControls.GeneralSettings.AliasInNameChanged += new EventHandler(Options_AliasInNameChanged);
         }
 
         private void SetHeightWidth()
