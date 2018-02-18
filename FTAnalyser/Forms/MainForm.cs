@@ -89,8 +89,8 @@ namespace FTAnalyzer
         private void RegisterEventHandlers()
         {
             Options.ReloadRequired += new EventHandler(Options_ReloadData);
-            UserControls.GeneralSettings.MinParentalAgeChanged += new EventHandler(Options_MinimumParentalAgeChanged);
-            UserControls.GeneralSettings.AliasInNameChanged += new EventHandler(Options_AliasInNameChanged);
+            UserControls.GeneralSettingsUI.MinParentalAgeChanged += new EventHandler(Options_MinimumParentalAgeChanged);
+            UserControls.GeneralSettingsUI.AliasInNameChanged += new EventHandler(Options_AliasInNameChanged);
         }
 
         private void SetHeightWidth()
@@ -1147,7 +1147,7 @@ namespace FTAnalyzer
                 else if (tabSelector.SelectedTab == tabDuplicates)
                 {
                     rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
-                    ckbHideIgnoredDuplicates.Checked = Properties.Settings.Default.HideIgnoredDuplicates;
+                    ckbHideIgnoredDuplicates.Checked = GeneralSettings.Default.HideIgnoredDuplicates;
                     await SetPossibleDuplicates();
                     ResetDuplicatesTable(); // force a reset on intial load
                     dgDuplicates.Focus();
@@ -2275,8 +2275,8 @@ namespace FTAnalyzer
         {
             if (pbDuplicates.Visible)
                 return; // do nothing if progress bar still visible
-            Properties.Settings.Default.HideIgnoredDuplicates = ckbHideIgnoredDuplicates.Checked;
-            Properties.Settings.Default.Save();
+            GeneralSettings.Default.HideIgnoredDuplicates = ckbHideIgnoredDuplicates.Checked;
+            GeneralSettings.Default.Save();
             await SetPossibleDuplicates();
         }
         #endregion
