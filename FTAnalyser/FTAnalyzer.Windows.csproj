@@ -295,6 +295,7 @@
     <Compile Include="Mapping\MapHelper.cs" />
     <Compile Include="Mapping\MapLifeLine.cs" />
     <Compile Include="Mapping\MapLocation.cs" />
+    <Compile Include="Mapping\MapTransforms.cs" />
     <Compile Include="Mapping\MarkerClusterer.cs" />
     <Compile Include="Mapping\OS50kGazetteer.cs" />
     <Compile Include="Mapping\TearDropLayer.cs" />
