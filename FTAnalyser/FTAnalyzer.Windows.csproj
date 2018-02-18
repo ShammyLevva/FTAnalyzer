@@ -301,16 +301,6 @@
     <Compile Include="Mapping\TearDropLayer.cs" />
     <Compile Include="Mapping\TileSourceFactory.cs" />
     <Compile Include="Properties\FileHandling.cs" />
-    <Compile Include="Properties\FileHandling.Designer.cs">
-      <DependentUpon>FileHandling.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Properties\MappingSettings.Designer.cs">
-      <DependentUpon>MappingSettings.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <Compile Include="UserControls\FileHandlingSettings.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -554,27 +544,6 @@
     </None>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
-    <None Include="Properties\FileHandling.settings">
-      <Generator>PublicSettingsSingleFileGenerator</Generator>
-      <LastGenOutput>FileHandling.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Properties\MappingSettings.settings">
-      <Generator>PublicSettingsSingleFileGenerator</Generator>
-      <LastGenOutput>MappingSettings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Properties\GeneralSettings.settings">
-      <Generator>PublicSettingsSingleFileGenerator</Generator>
-      <LastGenOutput>GeneralSettings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <EmbeddedResource Include="Resources\KUNSTLER.TTF">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -603,11 +572,6 @@
     </Compile>
     <Compile Include="Forms\People.Designer.cs">
       <DependentUpon>People.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\GeneralSettings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>GeneralSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="Forms\Controls\CensusCountry.cs">
       <SubType>UserControl</SubType>
