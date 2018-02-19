@@ -1,3 +1,11 @@
+#### New Release Version 6.2.0.0, 19th Feb 2018  
+**Updates**  
+Major refactoring to move shared code into a new project to allow for developement of a Mac version
+Duplicates processing should now be 8-10 times faster than before
+
+**Bugfixes**  
+Loose Births weren't showing now fixed
+
 #### Updated Release Version 6.1.3.0, 9th Feb 2018  
 **Updates**  
 The files that standarise countries/regions wasn't getting published so countries weren't correctly recognised for census facts  
