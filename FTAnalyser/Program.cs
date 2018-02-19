@@ -14,11 +14,8 @@ namespace FTAnalyzer
         [STAThread]
         static void Main()
         {
-            log.Debug("Reached Main");
             Application.EnableVisualStyles();
-            log.Debug("--Set Visual Styles");
             Application.SetCompatibleTextRenderingDefault(false);
-            log.Debug("--Set Compatible Text Rendering");
             Application.Run(new MainForm());
         }
     }
