@@ -44,10 +44,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuEditLocation = new System.Windows.Forms.ToolStripButton();
             this.dgIndividuals = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.editLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.FactLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,6 +56,10 @@
             this.AgeAtFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SortDistance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
@@ -204,35 +204,6 @@
             this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgIndividuals_CellDoubleClick);
             this.dgIndividuals.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.DgIndividuals_CellToolTipTextNeeded);
             // 
-            // contextMenuStrip
-            // 
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editLocationToolStripMenuItem});
-            this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(144, 26);
-            // 
-            // editLocationToolStripMenuItem
-            // 
-            this.editLocationToolStripMenuItem.Name = "editLocationToolStripMenuItem";
-            this.editLocationToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.editLocationToolStripMenuItem.Text = "Edit Location";
-            this.editLocationToolStripMenuItem.Click += new System.EventHandler(this.EditLocationToolStripMenuItem_Click);
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsRecords});
-            this.statusStrip.Location = new System.Drawing.Point(0, 365);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(993, 22);
-            this.statusStrip.TabIndex = 3;
-            this.statusStrip.Text = "statusStrip1";
-            // 
-            // tsRecords
-            // 
-            this.tsRecords.Name = "tsRecords";
-            this.tsRecords.Size = new System.Drawing.Size(0, 17);
-            // 
             // FactIcon
             // 
             this.FactIcon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -347,6 +318,35 @@
             this.SortDistance.Name = "SortDistance";
             this.SortDistance.ReadOnly = true;
             this.SortDistance.Visible = false;
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editLocationToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(144, 26);
+            // 
+            // editLocationToolStripMenuItem
+            // 
+            this.editLocationToolStripMenuItem.Name = "editLocationToolStripMenuItem";
+            this.editLocationToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.editLocationToolStripMenuItem.Text = "Edit Location";
+            this.editLocationToolStripMenuItem.Click += new System.EventHandler(this.EditLocationToolStripMenuItem_Click);
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsRecords});
+            this.statusStrip.Location = new System.Drawing.Point(0, 365);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(993, 22);
+            this.statusStrip.TabIndex = 3;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // tsRecords
+            // 
+            this.tsRecords.Name = "tsRecords";
+            this.tsRecords.Size = new System.Drawing.Size(0, 17);
             // 
             // MapIndividuals
             // 

@@ -171,7 +171,7 @@ namespace FTAnalyzer.Forms
             this.btnCustomMap.Image = ((System.Drawing.Image)(resources.GetObject("btnCustomMap.Image")));
             this.btnCustomMap.ImageTransparentColor = System.Drawing.Color.White;
             this.btnCustomMap.Name = "btnCustomMap";
-            this.btnCustomMap.Size = new System.Drawing.Size(23, 20);
+            this.btnCustomMap.Size = new System.Drawing.Size(23, 22);
             this.btnCustomMap.Text = "Enable Custom Map Overlay";
             this.btnCustomMap.Click += new System.EventHandler(this.BtnCustomMap_Click);
             // 
