@@ -1,3 +1,7 @@
+#### Updated Release Version 6.2.1.0, 23rd Feb 2018  
+**Updates**  
+Fixed issue with On this day not showing any data
+
 #### New Release Version 6.2.0.0, 19th Feb 2018  
 **Updates**  
 Major refactoring to move shared code into a new project to allow for developement of a Mac version
