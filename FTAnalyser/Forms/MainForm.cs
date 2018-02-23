@@ -2857,14 +2857,14 @@ namespace FTAnalyzer
 
         #region Today
 
-        private void ShowTodaysEvents()
+        private async Task ShowTodaysEvents()
         {
             pbToday.Visible = true;
             labToday.Visible = true;
             rtbToday.ResetText();
             Progress<int> progress = new Progress<int>(value => { pbToday.Value = value; });
             Progress<string> outputText = new Progress<string>(text => { rtbToday.Rtf = text; });
-            ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, (int)nudToday.Value, progress, outputText);
+            await Task.Run(() => ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, (int)nudToday.Value, progress, outputText));
             labToday.Visible = false;
             pbToday.Visible = false;
         }
@@ -2879,9 +2879,9 @@ namespace FTAnalyzer
             Application.UserAppDataRegistry.SetValue("Todays Events Month", !rbTodaySingle.Checked);
         }
 
-        private void BtnUpdateTodaysEvents_Click(object sender, EventArgs e)
+        private async void BtnUpdateTodaysEvents_Click(object sender, EventArgs e)
         {
-            ShowTodaysEvents();
+            await ShowTodaysEvents();
         }
 
         private void NudToday_ValueChanged(object sender, EventArgs e)
