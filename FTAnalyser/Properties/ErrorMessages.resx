@@ -124,6 +124,7 @@ Error was:</value>
   </data>
   <data name="FTA_0002" xml:space="preserve">
     <value>You need to load your GEDCOM file before the program can display results.
-Click File | Open.</value>
+
+Click File | Open GEDCOM File.</value>
   </data>
 </root>

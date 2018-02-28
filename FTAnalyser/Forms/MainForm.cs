@@ -26,7 +26,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "6.2.1.0";
+        public static string VERSION = "6.3.0.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -214,7 +214,7 @@ namespace FTAnalyzer
             openToolStripMenuItem.Enabled = false;
             databaseToolStripMenuItem.Enabled = false;
             mnuRecent.Enabled = false;
-            tabCtrlLooseBDs.SelectedTab = tabLooseBirths; // force back to first tab
+            tabMainListsSelector.SelectedTab = tabIndividuals; // force back to first tab
             tabCtrlLocations.SelectedTab = tabTreeView; // otherwise totals etc look wrong
             treeViewLocations.Nodes.Clear();
             this.Text = "Family Tree Analyzer v" + VERSION;
@@ -809,8 +809,10 @@ namespace FTAnalyzer
         private void Options_MinimumParentalAgeChanged(object sender, EventArgs e)
         {
             ft.ResetLooseFacts();
-            if (tabSelector.SelectedTab == tabLooseBirthDeaths)
-                UpdateLooseBirthDeaths();
+            if (tabSelector.SelectedTab == tabErrorsFixes && tabErrorFixSelector.SelectedTab.Equals(tabLooseBirths))
+                SetupLooseBirths();
+            if (tabSelector.SelectedTab == tabErrorsFixes && tabErrorFixSelector.SelectedTab.Equals(tabLooseDeaths))
+                SetupLooseDeaths();
         }
 
         private void Options_AliasInNameChanged(object sender, EventArgs e)
@@ -1047,9 +1049,9 @@ namespace FTAnalyzer
         private void PossibleCensusFactsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Predicate<Individual> predicate = new Predicate<Individual>(x => x.Notes.ToLower().Contains("census"));
-            List<Individual> censusNotes = ft.AllIndividuals.Filter(predicate).ToList<Individual>();
-            People people = new People();
+            var predicate = new Predicate<Individual>(x => x.Notes.ToLower().Contains("census"));
+            var censusNotes = ft.AllIndividuals.Filter(predicate).ToList<Individual>();
+            var people = new People();
             people.SetIndividuals(censusNotes, "List of Possible Census records incorrectly recorded as notes");
             DisposeDuplicateForms(people);
             people.Show();
@@ -1057,7 +1059,7 @@ namespace FTAnalyzer
         }
 
         #region Tab Control
-        private async void TabControl_SelectedIndexChanged(object sender, EventArgs e)
+        private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             mnuPrint.Enabled = false;
             tsCountLabel.Text = string.Empty;
@@ -1077,7 +1079,7 @@ namespace FTAnalyzer
                         tabSelector.SelectedTab = tabDisplayProgress;
                         mnuRestore.Enabled = true;
                         mnuLoadLocationsCSV.Enabled = true;
-                        MessageBox.Show(Properties.ErrorMessages.FTA_0002, "FTAnalyzer Error : FTA_0002");
+                        MessageBox.Show(ErrorMessages.FTA_0002, "FTAnalyzer Error : FTA_0002");
                     }
                     return;
                 }
@@ -1086,53 +1088,19 @@ namespace FTAnalyzer
                 {
                     mnuPrint.Enabled = true;
                 }
-                else if (tabSelector.SelectedTab == tabIndividuals)
+                if (tabSelector.SelectedTab == tabMainLists)
                 {
-                    SortableBindingList<IDisplayIndividual> list = ft.AllDisplayIndividuals;
-                    dgIndividuals.DataSource = list;
-                    dgIndividuals.Sort(dgIndividuals.Columns["IndividualID"], ListSortDirection.Ascending);
-                    dgIndividuals.AllowUserToResizeColumns = true;
-                    dgIndividuals.Focus();
-                    mnuPrint.Enabled = true;
-                    tsCountLabel.Text = Properties.Messages.Count + list.Count;
-                    tsHintsLabel.Text = Properties.Messages.Hints_Individual;
+                    if (dgIndividuals.DataSource == null)
+                        SetupIndividualsTab(); // select individuals tab if first time opening main lists tab
                 }
-                else if (tabSelector.SelectedTab == tabFamilies)
+                if (tabSelector.SelectedTab == tabErrorsFixes)
                 {
-                    SortableBindingList<IDisplayFamily> list = ft.AllDisplayFamilies;
-                    dgFamilies.DataSource = list;
-                    dgFamilies.Sort(dgFamilies.Columns["FamilyID"], ListSortDirection.Ascending);
-                    dgFamilies.AllowUserToResizeColumns = true;
-                    dgFamilies.Focus();
-                    mnuPrint.Enabled = true;
-                    tsCountLabel.Text = Properties.Messages.Count + list.Count;
-                    tsHintsLabel.Text = Properties.Messages.Hints_Family;
-                }
-                else if (tabSelector.SelectedTab == tabOccupations)
-                {
-                    SortableBindingList<IDisplayOccupation> list = ft.AllDisplayOccupations;
-                    dgOccupations.DataSource = list;
-                    dgOccupations.Sort(dgOccupations.Columns["Occupation"], ListSortDirection.Ascending);
-                    dgOccupations.AllowUserToResizeColumns = true;
-                    dgOccupations.Focus();
-                    mnuPrint.Enabled = true;
-                    tsCountLabel.Text = Properties.Messages.Count + list.Count;
-                    tsHintsLabel.Text = Properties.Messages.Hints_Occupation;
+                    if (dgDataErrors.DataSource == null)
+                        SetupDataErrors(); // select data errors tab if first time opening errors fixes tab
                 }
                 else if (tabSelector.SelectedTab == tabFacts)
                 {
                     // already cleared text don't need to do anything else
-                }
-                else if (tabSelector.SelectedTab == tabSources)
-                {
-                    SortableBindingList<IDisplaySource> list = ft.AllDisplaySources;
-                    dgSources.DataSource = list;
-                    dgSources.Sort(dgSources.Columns["SourceTitle"], ListSortDirection.Ascending);
-                    dgSources.AllowUserToResizeColumns = true;
-                    dgSources.Focus();
-                    mnuPrint.Enabled = true;
-                    tsCountLabel.Text = Properties.Messages.Count + list.Count;
-                    tsHintsLabel.Text = Properties.Messages.Hints_Sources;
                 }
                 else if (tabSelector.SelectedTab == tabSurnames)
                 {
@@ -1143,15 +1111,6 @@ namespace FTAnalyzer
                     cenDate.RevertToDefaultDate();
                     btnShowCensusMissing.Enabled = ft.IndividualCount > 0;
                     cenDate.AddAllCensusItems();
-                }
-                else if (tabSelector.SelectedTab == tabDuplicates)
-                {
-                    rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
-                    ckbHideIgnoredDuplicates.Checked = GeneralSettings.Default.HideIgnoredDuplicates;
-                    await SetPossibleDuplicates();
-                    ResetDuplicatesTable(); // force a reset on intial load
-                    dgDuplicates.Focus();
-                    mnuPrint.Enabled = true;
                 }
                 else if (tabSelector.SelectedTab == tabTreetops)
                 {
@@ -1176,20 +1135,6 @@ namespace FTAnalyzer
                         btnLC1911EW.Enabled = ft.IndividualCount > 0;
                     UpdateLostCousinsReport();
                 }
-                else if (tabSelector.SelectedTab == tabDataErrors)
-                {
-                    SortableBindingList<DataError> errors = DataErrors(ckbDataErrors);
-                    dgDataErrors.DataSource = errors;
-                    dgDataErrors.AllowUserToResizeColumns = true;
-                    dgDataErrors.Focus();
-                    mnuPrint.Enabled = true;
-                    tsCountLabel.Text = Properties.Messages.Count + errors.Count;
-                    tsHintsLabel.Text = Properties.Messages.Hints_Individual;
-                }
-                else if (tabSelector.SelectedTab == tabLooseBirthDeaths)
-                {
-                    UpdateLooseBirthDeaths();
-                }
                 else if (tabSelector.SelectedTab == tabToday)
                 {
                     bool todaysMonth = Application.UserAppDataRegistry.GetValue("Todays Events Month", "False").Equals("True");
@@ -1202,7 +1147,7 @@ namespace FTAnalyzer
                     HourGlass(true);
                     tabCtrlLocations.SelectedIndex = 0;
                     tsCountLabel.Text = string.Empty;
-                    tsHintsLabel.Text = Properties.Messages.Hints_Location;
+                    tsHintsLabel.Text = Messages.Hints_Location;
                     treeViewLocations.Nodes.Clear();
                     Application.DoEvents();
                     treeViewLocations.Nodes.AddRange(TreeViewHandler.Instance.GetAllLocationsTreeNodes(treeViewLocations.Font, true));
@@ -1218,15 +1163,106 @@ namespace FTAnalyzer
             }
         }
 
+        private void TabMainListSelector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabMainListsSelector.SelectedTab == tabIndividuals)
+            {
+                SetupIndividualsTab();
+            }
+            else if (tabMainListsSelector.SelectedTab == tabFamilies)
+            {
+                SortableBindingList<IDisplayFamily> list = ft.AllDisplayFamilies;
+                dgFamilies.DataSource = list;
+                dgFamilies.Sort(dgFamilies.Columns["FamilyID"], ListSortDirection.Ascending);
+                dgFamilies.AllowUserToResizeColumns = true;
+                dgFamilies.Focus();
+                mnuPrint.Enabled = true;
+                tsCountLabel.Text = Messages.Count + list.Count;
+                tsHintsLabel.Text = Messages.Hints_Family;
+            }
+            else if (tabMainListsSelector.SelectedTab == tabSources)
+            {
+                SortableBindingList<IDisplaySource> list = ft.AllDisplaySources;
+                dgSources.DataSource = list;
+                dgSources.Sort(dgSources.Columns["SourceTitle"], ListSortDirection.Ascending);
+                dgSources.AllowUserToResizeColumns = true;
+                dgSources.Focus();
+                mnuPrint.Enabled = true;
+                tsCountLabel.Text = Messages.Count + list.Count;
+                tsHintsLabel.Text = Messages.Hints_Sources;
+            }
+            else if (tabMainListsSelector.SelectedTab == tabOccupations)
+            {
+                SortableBindingList<IDisplayOccupation> list = ft.AllDisplayOccupations;
+                dgOccupations.DataSource = list;
+                dgOccupations.Sort(dgOccupations.Columns["Occupation"], ListSortDirection.Ascending);
+                dgOccupations.AllowUserToResizeColumns = true;
+                dgOccupations.Focus();
+                mnuPrint.Enabled = true;
+                tsCountLabel.Text = Messages.Count + list.Count;
+                tsHintsLabel.Text = Messages.Hints_Occupation;
+            }
+        }
+
+        private void SetupIndividualsTab()
+        {
+            SortableBindingList<IDisplayIndividual> list = ft.AllDisplayIndividuals;
+            dgIndividuals.DataSource = list;
+            dgIndividuals.Sort(dgIndividuals.Columns["IndividualID"], ListSortDirection.Ascending);
+            dgIndividuals.AllowUserToResizeColumns = true;
+            dgIndividuals.Focus();
+            mnuPrint.Enabled = true;
+            tsCountLabel.Text = Messages.Count + list.Count;
+            tsHintsLabel.Text = Messages.Hints_Individual;
+        }
+
+        private async void TabErrorFixSelector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabErrorFixSelector.SelectedTab == tabDataErrors)
+            {
+                SetupDataErrors();
+            }
+            else if (tabErrorFixSelector.SelectedTab == tabDuplicates)
+            {
+                rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
+                ckbHideIgnoredDuplicates.Checked = GeneralSettings.Default.HideIgnoredDuplicates;
+                await SetPossibleDuplicates();
+                ResetDuplicatesTable(); // force a reset on intial load
+                dgDuplicates.Focus();
+                mnuPrint.Enabled = true;
+            }
+            if (tabErrorFixSelector.SelectedTab == tabLooseBirths)
+            {
+                if (dgLooseBirths.DataSource == null)
+                    SetupLooseBirths();
+            }
+            else if (tabErrorFixSelector.SelectedTab == tabLooseDeaths)
+            {
+                if (dgLooseDeaths.DataSource == null)
+                    SetupLooseDeaths();
+            }
+        }
+
+        private void SetupDataErrors()
+        {
+            SortableBindingList<DataError> errors = DataErrors(ckbDataErrors);
+            dgDataErrors.DataSource = errors;
+            dgDataErrors.AllowUserToResizeColumns = true;
+            dgDataErrors.Focus();
+            mnuPrint.Enabled = true;
+            tsCountLabel.Text = Messages.Count + errors.Count;
+            tsHintsLabel.Text = Messages.Hints_Individual;
+        }
+
         #endregion
 
         #region Filters
         private Predicate<ExportFact> CreateFactsFilter()
         {
-            Predicate<ExportFact> filter = relTypesFacts.BuildFilter<ExportFact>(x => x.RelationType);
+            var filter = relTypesFacts.BuildFilter<ExportFact>(x => x.RelationType);
             if (txtFactsSurname.Text.Length > 0)
             {
-                Predicate<ExportFact> surnameFilter = FilterUtils.StringFilter<ExportFact>(x => x.Surname, txtFactsSurname.Text.Trim());
+                var surnameFilter = FilterUtils.StringFilter<ExportFact>(x => x.Surname, txtFactsSurname.Text.Trim());
                 filter = FilterUtils.AndFilter<ExportFact>(filter, surnameFilter);
             }
             return filter;
@@ -1234,8 +1270,8 @@ namespace FTAnalyzer
 
         private Predicate<CensusIndividual> CreateCensusIndividualFilter(bool censusDone, string surname)
         {
-            Predicate<CensusIndividual> relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => x.RelationType);
-            Predicate<CensusIndividual> dateFilter = censusDone ?
+            var relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => x.RelationType);
+            var dateFilter = censusDone ?
                 new Predicate<CensusIndividual>(x => x.IsCensusDone(cenDate.SelectedDate) && !x.OutOfCountry(cenDate.SelectedDate)) :
                 new Predicate<CensusIndividual>(x => !x.IsCensusDone(cenDate.SelectedDate) && !x.OutOfCountry(cenDate.SelectedDate));
             Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter, dateFilter);
@@ -1543,7 +1579,7 @@ namespace FTAnalyzer
         {
             printDocument = new PrintDocument();
             printDocument.DefaultPageSettings.Margins =
-               new System.Drawing.Printing.Margins(15, 15, 15, 15);
+               new Margins(15, 15, 15, 15);
             printDocument.DefaultPageSettings.Landscape = true;
             printDialog.PrinterSettings.DefaultPageSettings.Landscape = true;
 
@@ -1558,66 +1594,59 @@ namespace FTAnalyzer
                     printDocument.Print();
                 }
             }
-            if (tabSelector.SelectedTab == tabIndividuals)
+            if (tabSelector.SelectedTab == tabMainLists)
             {
-                PrintDataGrid(true, dgIndividuals, "List of Individuals");
+                if (tabMainListsSelector.SelectedTab == tabIndividuals)
+                    PrintDataGrid(Orientation.Landscape, dgIndividuals, "List of Individuals");
+                else if (tabMainListsSelector.SelectedTab == tabFamilies)
+                    PrintDataGrid(Orientation.Landscape, dgFamilies, "List of Families");
+                else if (tabMainListsSelector.SelectedTab == tabSources)
+                    PrintDataGrid(Orientation.Landscape, dgSources, "List of Sources");
+                else if (tabMainListsSelector.SelectedTab == tabOccupations)
+                    PrintDataGrid(Orientation.Portrait, dgOccupations, "List of Occupations");
             }
-            if (tabSelector.SelectedTab == tabFamilies)
+            else if (tabSelector.SelectedTab == tabErrorsFixes)
             {
-                PrintDataGrid(true, dgFamilies, "List of Families");
+                if (tabErrorFixSelector.SelectedTab == tabDuplicates)
+                    PrintDataGrid(Orientation.Landscape, dgDuplicates, "List of Potential Duplicates");
+                else if (tabErrorFixSelector.SelectedTab == tabDataErrors)
+                    PrintDataGrid(Orientation.Portrait, dgDataErrors, "List of Data Errors");
+                else if (tabErrorFixSelector.SelectedTab == tabLooseBirths)
+                    PrintDataGrid(Orientation.Landscape, dgLooseBirths, "List of Loose Births");
+                else if (tabErrorFixSelector.SelectedTab == tabLooseDeaths)
+                    PrintDataGrid(Orientation.Landscape, dgLooseDeaths, "List of Loose Deaths");
             }
-            if (tabSelector.SelectedTab == tabOccupations)
-            {
-                PrintDataGrid(false, dgOccupations, "List of Occupations");
-            }
-            if (tabSelector.SelectedTab == tabSources)
-            {
-                PrintDataGrid(true, dgSources, "List of Sources");
-            }
-            if (tabSelector.SelectedTab == tabDuplicates)
-            {
-                PrintDataGrid(true, dgDuplicates, "List of Potential Duplicates");
-            }
-            if (tabSelector.SelectedTab == tabLocations)
+            else if (tabSelector.SelectedTab == tabLocations)
             {
                 if (tabCtrlLocations.SelectedTab == tabCountries)
-                    PrintDataGrid(false, dgCountries, "List of Countries");
+                    PrintDataGrid(Orientation.Portrait, dgCountries, "List of Countries");
                 if (tabCtrlLocations.SelectedTab == tabRegions)
-                    PrintDataGrid(false, dgRegions, "List of Regions");
+                    PrintDataGrid(Orientation.Portrait, dgRegions, "List of Regions");
                 if (tabCtrlLocations.SelectedTab == tabSubRegions)
-                    PrintDataGrid(false, dgSubRegions, "List of Sub Regions");
+                    PrintDataGrid(Orientation.Portrait, dgSubRegions, "List of Sub Regions");
                 if (tabCtrlLocations.SelectedTab == tabAddresses)
-                    PrintDataGrid(false, dgAddresses, "List of Addresses");
+                    PrintDataGrid(Orientation.Portrait, dgAddresses, "List of Addresses");
                 if (tabCtrlLocations.SelectedTab == tabPlaces)
-                    PrintDataGrid(false, dgPlaces, "List of Places");
-            }
-            if (tabSelector.SelectedTab == tabDataErrors)
-            {
-                PrintDataGrid(false, dgDataErrors, "List of Data Errors");
-            }
-            else if (tabSelector.SelectedTab == tabLooseBirthDeaths)
-            {
-                if (tabCtrlLooseBDs.SelectedTab == tabLooseBirths)
-                    PrintDataGrid(true, dgLooseBirths, "List of Loose Births");
-                else if (tabCtrlLooseBDs.SelectedTab == tabLooseDeaths)
-                    PrintDataGrid(true, dgLooseDeaths, "List of Loose Deaths");
+                    PrintDataGrid(Orientation.Portrait, dgPlaces, "List of Places");
             }
             else if (tabSelector.SelectedTab == tabTreetops)
             {
-                PrintDataGrid(true, dgTreeTops, "List of People at Top of Tree");
+                PrintDataGrid(Orientation.Landscape, dgTreeTops, "List of People at Top of Tree");
             }
             else if (tabSelector.SelectedTab == tabWorldWars)
             {
-                PrintDataGrid(true, dgWorldWars, "List of Individuals who may have served in the World Wars");
+                PrintDataGrid(Orientation.Landscape, dgWorldWars, "List of Individuals who may have served in the World Wars");
             }
         }
 
-        private void PrintDataGrid(bool landscape, DataGridView dg, string title)
+        enum Orientation { Landscape, Portrait }
+
+        private void PrintDataGrid(Orientation orientation, DataGridView dg, string title)
         {
             PrintingDataGridViewProvider printProvider = PrintingDataGridViewProvider.Create(
                 printDocument, dg, true, true, true,
                 new TitlePrintBlock(title), null, null);
-            printDialog.PrinterSettings.DefaultPageSettings.Landscape = landscape;
+            printDialog.PrinterSettings.DefaultPageSettings.Landscape = (orientation == Orientation.Landscape);
             if (printDialog.ShowDialog(this) == DialogResult.OK)
             {
                 printDocument.DocumentName = title;
@@ -2621,23 +2650,20 @@ namespace FTAnalyzer
         }
         #endregion
 
-        #region Loose Birth/Death Tab
-        private void UpdateLooseBirthDeaths()
+        #region Loose Birth/Death Tabs
+        private void SetupLooseBirths()
         {
             try
             {
                 SortableBindingList<IDisplayLooseBirth> looseBirthList = ft.LooseBirths();
-                SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.LooseDeaths();
-                dgLooseDeaths.DataSource = looseDeathList;
-                dgLooseDeaths.Sort(dgLooseDeaths.Columns["Forenames"], ListSortDirection.Ascending);
-                dgLooseDeaths.Sort(dgLooseDeaths.Columns["Surname"], ListSortDirection.Ascending);
                 dgLooseBirths.DataSource = looseBirthList;
                 dgLooseBirths.Sort(dgLooseBirths.Columns["Forenames"], ListSortDirection.Ascending);
                 dgLooseBirths.Sort(dgLooseBirths.Columns["Surname"], ListSortDirection.Ascending);
                 dgLooseBirths.Focus();
                 mnuPrint.Enabled = true;
-                tsCountLabel.Text = Properties.Messages.Count + looseBirthList.Count;
-                tsHintsLabel.Text = Properties.Messages.Hints_Loose_Births + Properties.Messages.Hints_Individual;
+                tsCountLabel.Text = Messages.Count + looseBirthList.Count;
+                tsHintsLabel.Text = Messages.Hints_Loose_Births + Messages.Hints_Individual;
+
             }
             catch (LooseDataException ex)
             {
@@ -2645,22 +2671,25 @@ namespace FTAnalyzer
             }
         }
 
-        private void TabCtrlLooseBDs_SelectedIndexChanged(object sender, EventArgs e)
+        private void SetupLooseDeaths()
         {
-            if (tabCtrlLooseBDs.SelectedTab == tabLooseBirths)
+            try
             {
-                dgLooseBirths.Focus();
-                tsCountLabel.Text = Properties.Messages.Count + dgLooseBirths.RowCount;
-                tsHintsLabel.Text = Properties.Messages.Hints_Loose_Births + Properties.Messages.Hints_Individual;
-            }
-            else if (tabCtrlLooseBDs.SelectedTab == tabLooseDeaths)
-            {
+                SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.LooseDeaths();
+                dgLooseDeaths.DataSource = looseDeathList;
+                dgLooseDeaths.Sort(dgLooseDeaths.Columns["Forenames"], ListSortDirection.Ascending);
+                dgLooseDeaths.Sort(dgLooseDeaths.Columns["Surname"], ListSortDirection.Ascending);
                 dgLooseDeaths.Focus();
-                tsCountLabel.Text = Properties.Messages.Count + dgLooseDeaths.RowCount;
-                tsHintsLabel.Text = Properties.Messages.Hints_Loose_Deaths + Properties.Messages.Hints_Individual;
+                mnuPrint.Enabled = true;
+                tsCountLabel.Text = Messages.Count + looseDeathList.Count;
+                tsHintsLabel.Text = Messages.Hints_Loose_Deaths + Messages.Hints_Individual;
             }
-
+            catch (LooseDataException ex)
+            {
+                MessageBox.Show(ex.Message, "FTAnalyzer");
+            }
         }
+
         #endregion
 
         #region View Notes
