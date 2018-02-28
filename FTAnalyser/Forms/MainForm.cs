@@ -89,8 +89,8 @@ namespace FTAnalyzer
         private void RegisterEventHandlers()
         {
             Options.ReloadRequired += new EventHandler(Options_ReloadData);
-            UserControls.GeneralSettingsUI.MinParentalAgeChanged += new EventHandler(Options_MinimumParentalAgeChanged);
-            UserControls.GeneralSettingsUI.AliasInNameChanged += new EventHandler(Options_AliasInNameChanged);
+            GeneralSettingsUI.MinParentalAgeChanged += new EventHandler(Options_MinimumParentalAgeChanged);
+            GeneralSettingsUI.AliasInNameChanged += new EventHandler(Options_AliasInNameChanged);
         }
 
         private void SetHeightWidth()
@@ -168,13 +168,13 @@ namespace FTAnalyzer
 
         private async Task<bool> LoadTreeAsync(string filename)
         {
-            Progress<string> outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
+            var outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
             XmlDocument doc = await Task.Run(() => ft.LoadTreeHeader(filename, outputText));
             if (doc == null) return false;
-            Progress<int> sourceProgress = new Progress<int>(value => { pbSources.Value = value; });
-            Progress<int> individualProgress = new Progress<int>(value => { pbIndividuals.Value = value; });
-            Progress<int> familyProgress = new Progress<int>(value => { pbFamilies.Value = value; });
-            Progress<int> RelationshipProgress = new Progress<int>(value => { pbRelationships.Value = value; });
+            var sourceProgress = new Progress<int>(value => { pbSources.Value = value; });
+            var individualProgress = new Progress<int>(value => { pbIndividuals.Value = value; });
+            var familyProgress = new Progress<int>(value => { pbFamilies.Value = value; });
+            var RelationshipProgress = new Progress<int>(value => { pbRelationships.Value = value; });
             await Task.Run(() => ft.LoadTreeSources(doc, sourceProgress, outputText));
             await Task.Run(() => ft.LoadTreeIndividuals(doc, individualProgress, outputText));
             await Task.Run(() => ft.LoadTreeFamilies(doc, familyProgress, outputText));
@@ -272,10 +272,10 @@ namespace FTAnalyzer
 
         private async void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(Properties.Settings.Default.LoadLocation))
+            if (string.IsNullOrEmpty(Settings.Default.LoadLocation))
                 openGedcom.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             else
-                openGedcom.InitialDirectory = Properties.Settings.Default.LoadLocation;
+                openGedcom.InitialDirectory = Settings.Default.LoadLocation;
             openGedcom.FileName = "*.ged";
             openGedcom.Filter = "GED files (*.ged)|*.ged|All files (*.*)|*.*";
             openGedcom.FilterIndex = 1;
@@ -284,8 +284,8 @@ namespace FTAnalyzer
             if (openGedcom.ShowDialog() == DialogResult.OK)
             {
                 await LoadFileAsync(openGedcom.FileName);
-                Properties.Settings.Default.LoadLocation = Path.GetFullPath(openGedcom.FileName);
-                Properties.Settings.Default.Save();
+                Settings.Default.LoadLocation = Path.GetFullPath(openGedcom.FileName);
+                Settings.Default.Save();
             }
         }
 
@@ -345,8 +345,8 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(true);
-                FactLocation loc = (FactLocation)dgCountries.CurrentRow.DataBoundItem;
-                Forms.People frmInd = new Forms.People();
+                var loc = (FactLocation)dgCountries.CurrentRow.DataBoundItem;
+                var frmInd = new People();
                 frmInd.SetLocation(loc, FactLocation.COUNTRY);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
@@ -359,8 +359,8 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(true);
-                FactLocation loc = dgRegions.CurrentRow == null ? FactLocation.UNKNOWN_LOCATION : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
-                Forms.People frmInd = new Forms.People();
+                var loc = dgRegions.CurrentRow == null ? FactLocation.UNKNOWN_LOCATION : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
+                var frmInd = new People();
                 frmInd.SetLocation(loc, FactLocation.REGION);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
@@ -373,8 +373,8 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(true);
-                FactLocation loc = (FactLocation)dgSubRegions.CurrentRow.DataBoundItem;
-                Forms.People frmInd = new Forms.People();
+                var loc = (FactLocation)dgSubRegions.CurrentRow.DataBoundItem;
+                var frmInd = new People();
                 frmInd.SetLocation(loc, FactLocation.SUBREGION);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
@@ -387,8 +387,8 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(true);
-                FactLocation loc = (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
-                Forms.People frmInd = new Forms.People();
+                var loc = (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
+                var frmInd = new People();
                 frmInd.SetLocation(loc, FactLocation.ADDRESS);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
@@ -401,8 +401,8 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(true);
-                FactLocation loc = (FactLocation)dgPlaces.CurrentRow.DataBoundItem;
-                Forms.People frmInd = new Forms.People();
+                var loc = (FactLocation)dgPlaces.CurrentRow.DataBoundItem;
+                var frmInd = new People();
                 frmInd.SetLocation(loc, FactLocation.PLACE);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
@@ -484,8 +484,8 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(true);
-                DisplayOccupation occ = (DisplayOccupation)dgOccupations.CurrentRow.DataBoundItem;
-                Forms.People frmInd = new Forms.People();
+                var occ = (DisplayOccupation)dgOccupations.CurrentRow.DataBoundItem;
+                var frmInd = new People();
                 frmInd.SetWorkers(occ.Occupation, ft.AllWorkers(occ.Occupation));
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
@@ -496,10 +496,10 @@ namespace FTAnalyzer
         private void SetAsRootToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
+            var ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
             if (ind != null)
             {
-                Progress<string> outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
+                var outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
                 ft.UpdateRootIndividual(ind.IndividualID, null, outputText);
                 dgIndividuals.Refresh();
                 MessageBox.Show("Root person set as " + ind.Name + "\n\n" + ft.PrintRelationCount(), "FTAnalyzer");
@@ -509,7 +509,7 @@ namespace FTAnalyzer
 
         private void MnuSetRoot_Opened(object sender, EventArgs e)
         {
-            Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
+            var ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
             if (ind != null)
                 viewNotesToolStripMenuItem.Enabled = ind.HasNotes;
         }
@@ -658,7 +658,7 @@ namespace FTAnalyzer
         private void OlderParentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Forms.People frmInd = new Forms.People();
+            People frmInd = new People();
             string inputAge = "50";
             DialogResult result = DialogResult.Cancel;
             int age = 0;
@@ -1012,7 +1012,7 @@ namespace FTAnalyzer
             {
                 HourGlass(true);
                 SurnameStats stat = (SurnameStats)dgSurnames.CurrentRow.DataBoundItem;
-                Forms.People frmInd = new Forms.People();
+                People frmInd = new People();
                 frmInd.SetSurnameStats(stat);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
