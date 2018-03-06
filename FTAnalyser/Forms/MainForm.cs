@@ -623,8 +623,8 @@ namespace FTAnalyzer
             HourGlass(true);
             SortableBindingList<DataError> errors = DataErrors(ckbDataErrors);
             dgDataErrors.DataSource = errors;
-            tsCountLabel.Text = Properties.Messages.Count + errors.Count;
-            tsHintsLabel.Text = Properties.Messages.Hints_Individual;
+            tsCountLabel.Text = Messages.Count + errors.Count;
+            tsHintsLabel.Text = Messages.Hints_Individual;
             int index = 0;
             foreach (DataErrorGroup dataError in ckbDataErrors.Items)
             {
@@ -849,10 +849,10 @@ namespace FTAnalyzer
         private void TreeViewLocations_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             HourGlass(true);
-            FactLocation location = e.Node.Tag as FactLocation;
+            var location = e.Node.Tag as FactLocation;
             if (location != null)
             {
-                People frmInd = new People();
+                var frmInd = new People();
                 frmInd.SetLocation(location, e.Node.Level);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
@@ -895,8 +895,8 @@ namespace FTAnalyzer
 
         private void DisplayOptionsOnLoadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Properties.GeneralSettings.Default.ReportOptions = displayOptionsOnLoadToolStripMenuItem.Checked;
-            Properties.GeneralSettings.Default.Save();
+            GeneralSettings.Default.ReportOptions = displayOptionsOnLoadToolStripMenuItem.Checked;
+            GeneralSettings.Default.Save();
         }
 
         private void ReportAnIssueToolStripMenuItem_Click(object sender, EventArgs e)
