@@ -73,7 +73,8 @@ namespace FTAnalyzer.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to You need to load your GEDCOM file before the program can display results.
-        ///Click File | Open..
+        ///
+        ///Click File | Open GEDCOM File..
         /// </summary>
         internal static string FTA_0002 {
             get {
