@@ -1,8 +1,12 @@
-#### New Release Version 6.3.0.1, 13th March 2018
+#### New Release Version 6.3.0.2, 13th March 2018
 **Updates**  
 Updated to new high res application icon  
 Moved individuals, families, sources and occupations tabs into a Main Lists tab  
-Moved Data Errors, Duplications, Loose Births and Loose Deaths into a Errors & Fixes tab  
+Moved Data Errors, Duplications, Loose Births and Loose Deaths into a Errors & Fixes tab 
+
+**Bugfixes**  
+1939 entries were eroneously limited to only people born before 1911.  
+The moved tabs weren't reacting to all mouse clicks
 
 #### Updated Release Version 6.2.1.0, 23rd Feb 2018  
 **Updates**  
