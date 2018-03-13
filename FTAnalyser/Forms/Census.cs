@@ -78,7 +78,7 @@ namespace FTAnalyzer.Forms
             else
                 predicate = x => x.MissingLostCousins(CensusDate, false);
             IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, true, false);
-            Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter, predicate);
+            Predicate<CensusIndividual> filter = FilterUtils.AndFilter(relationFilter, predicate);
             List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Filter(filter).ToList();
             RecordCount = individuals.Count;
             SetupDataGridView(true, individuals);
