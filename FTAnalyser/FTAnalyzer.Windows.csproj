@@ -39,7 +39,7 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>http://ftanalyzer.com/install/</InstallUrl>
-    <SupportUrl>http://ftanalyzer.com/docs/</SupportUrl>
+    <SupportUrl>http://ftanalyzer.com</SupportUrl>
     <ErrorReportUrl>https://github.com/ShammyLevva/FTAnalyzer/issues</ErrorReportUrl>
     <TargetCulture>en</TargetCulture>
     <ProductName>FT Analyzer</ProductName>
@@ -60,7 +60,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;__PC__</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>false</RunCodeAnalysis>
