@@ -613,6 +613,7 @@ namespace FTAnalyzer
                 return locType;
         }
 
+        #region DataErrors
         private void CkbDataErrors_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateDataErrorsDisplay();
@@ -633,6 +634,70 @@ namespace FTAnalyzer
             }
             HourGlass(false);
         }
+
+        public void SetDataErrorsCheckedDefaults(CheckedListBox list)
+        {
+            list.Items.Clear();
+            foreach (DataErrorGroup dataError in ft.DataErrorTypes)
+            {
+                int index = list.Items.Add(dataError);
+                bool itemChecked = Application.UserAppDataRegistry.GetValue(dataError.ToString(), "True").Equals("True");
+                list.SetItemChecked(index, itemChecked);
+            }
+        }
+
+        private void BtnSelectAll_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < ckbDataErrors.Items.Count; i++)
+            {
+                ckbDataErrors.SetItemChecked(i, true);
+            }
+            UpdateDataErrorsDisplay();
+        }
+
+        private void BtnClearAll_Click(object sender, EventArgs e)
+        {
+            foreach (int indexChecked in ckbDataErrors.CheckedIndices)
+            {
+                ckbDataErrors.SetItemChecked(indexChecked, false);
+            }
+            UpdateDataErrorsDisplay();
+        }
+
+        private void DgDataErrors_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                DataError error = (DataError)dgDataErrors.CurrentRow.DataBoundItem;
+                if (error.IsFamily())
+                    ShowFamilyFacts((string)dgDataErrors.CurrentRow.Cells["Reference"].Value);
+                else
+                    ShowFacts((string)dgDataErrors.CurrentRow.Cells["Reference"].Value);
+            }
+        }
+
+        private void SetupDataErrors()
+        {
+            SortableBindingList<DataError> errors = DataErrors(ckbDataErrors);
+            dgDataErrors.DataSource = errors;
+            dgDataErrors.AllowUserToResizeColumns = true;
+            dgDataErrors.Focus();
+            mnuPrint.Enabled = true;
+            tsCountLabel.Text = Messages.Count + errors.Count;
+            tsHintsLabel.Text = Messages.Hints_Individual;
+        }
+
+        public SortableBindingList<DataError> DataErrors(CheckedListBox list)
+        {
+            var errors = new List<DataError>();
+            foreach (int indexChecked in list.CheckedIndices)
+            {
+                DataErrorGroup item = (DataErrorGroup)list.Items[indexChecked];
+                errors.AddRange(item.Errors);
+            }
+            return new SortableBindingList<DataError>(errors);
+        }
+        #endregion
 
         private void ChildAgeProfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -873,24 +938,6 @@ namespace FTAnalyzer
         private void TreeViewLocations_MouseDown(object sender, MouseEventArgs e)
         {
             preventExpand = e.Clicks > 1;
-        }
-
-        private void BtnSelectAll_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < ckbDataErrors.Items.Count; i++)
-            {
-                ckbDataErrors.SetItemChecked(i, true);
-            }
-            UpdateDataErrorsDisplay();
-        }
-
-        private void BtnClearAll_Click(object sender, EventArgs e)
-        {
-            foreach (int indexChecked in ckbDataErrors.CheckedIndices)
-            {
-                ckbDataErrors.SetItemChecked(indexChecked, false);
-            }
-            UpdateDataErrorsDisplay();
         }
 
         private void DisplayOptionsOnLoadToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1241,17 +1288,6 @@ namespace FTAnalyzer
                 if (dgLooseDeaths.DataSource == null)
                     SetupLooseDeaths();
             }
-        }
-
-        private void SetupDataErrors()
-        {
-            SortableBindingList<DataError> errors = DataErrors(ckbDataErrors);
-            dgDataErrors.DataSource = errors;
-            dgDataErrors.AllowUserToResizeColumns = true;
-            dgDataErrors.Focus();
-            mnuPrint.Enabled = true;
-            tsCountLabel.Text = Messages.Count + errors.Count;
-            tsHintsLabel.Text = Messages.Hints_Individual;
         }
 
         #endregion
@@ -1858,18 +1894,6 @@ namespace FTAnalyzer
                     DisposeDuplicateForms(factForm);
                     factForm.Show();
                 }
-            }
-        }
-
-        private void DgDataErrors_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                DataError error = (DataError)dgDataErrors.CurrentRow.DataBoundItem;
-                if (error.IsFamily())
-                    ShowFamilyFacts((string)dgDataErrors.CurrentRow.Cells["Reference"].Value);
-                else
-                    ShowFacts((string)dgDataErrors.CurrentRow.Cells["Reference"].Value);
             }
         }
 
@@ -2919,17 +2943,6 @@ namespace FTAnalyzer
         }
         #endregion
 
-        public void SetDataErrorsCheckedDefaults(CheckedListBox list)
-        {
-            list.Items.Clear();
-            foreach (DataErrorGroup dataError in ft.DataErrorTypes)
-            {
-                int index = list.Items.Add(dataError);
-                bool itemChecked = Application.UserAppDataRegistry.GetValue(dataError.ToString(), "True").Equals("True");
-                list.SetItemChecked(index, itemChecked);
-            }
-        }
-
         public void SetFactTypeList(CheckedListBox ckbFactSelect, CheckedListBox ckbFactExclude, Predicate<ExportFact> filter)
         {
             List<string> factTypes = ft.AllExportFacts.Filter(filter).Select(x => x.FactType).Distinct().ToList<string>();
@@ -2951,17 +2964,6 @@ namespace FTAnalyzer
                     ckbFactExclude.SetItemChecked(index, itemChecked);
                 }
             }
-        }
-
-        public SortableBindingList<DataError> DataErrors(CheckedListBox list)
-        {
-            List<DataError> errors = new List<DataError>();
-            foreach (int indexChecked in list.CheckedIndices)
-            {
-                DataErrorGroup item = (DataErrorGroup)list.Items[indexChecked];
-                errors.AddRange(item.Errors);
-            }
-            return new SortableBindingList<DataError>(errors);
         }
 
         private void MnuLoadLocationsCSV_Click(object sender, EventArgs e)
