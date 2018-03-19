@@ -1,3 +1,15 @@
+#### New Release Version 6.4.0.0, 19th March 2018  
+**Updates**  
+Added five new data error checks
+* Duplicate Fact check - checks if two identical facts for a person exists  
+* Possible Duplicate Fact check - checks if two facts have same type and date but different data  
+* National Register 1939 birth date check - checks to see if someone is recorded on the 1939 register then they should have an exact birth date  
+* Couples have same surname check - a common error where wife is recorded with married name instead of the correct birth name  
+* Female husbands and male wives - checks if the right gender is assigned to the individuals tagged as husband and wife  
+
+**Bugfixes**
+Minor tweaks and code improvements
+
 #### New Release Version 6.3.0.2, 13th March 2018
 **Updates**  
 Updated to new high res application icon  
