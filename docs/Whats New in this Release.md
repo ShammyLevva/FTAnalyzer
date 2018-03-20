@@ -1,6 +1,7 @@
 #### Updated Release Version 6.4.0.1, 19th March 2018  
 **BugFixes**  
 Fixed issue with links to FindMyPast
+Checks unknown gender individuals appearing as a husband or wife
 
 #### New Release Version 6.4.0.0, 19th March 2018  
 **Updates**  
