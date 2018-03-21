@@ -257,3 +257,5 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+FTAnalyser/BuildTools/MSBuild.Community.Tasks.dll
+FTAnalyser/BuildTools/NuGet.exe
