@@ -94,6 +94,7 @@
     </Compile>
     <Compile Include="MapTransforms.cs" />
     <Compile Include="OS50kGazetteer.cs" />
+    <Compile Include="OSOpenNames.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

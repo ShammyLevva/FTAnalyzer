@@ -258,3 +258,4 @@ paket-files/
 __pycache__/
 *.pyc
 /FTAnalyser/BuildTools
+/OSGazetteerProcessor/Resources

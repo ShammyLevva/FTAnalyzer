@@ -1,9 +1,7 @@
 ﻿using GeoAPI.Geometries;
 using NetTopologySuite.Geometries;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Text;
 
 namespace OSGazetteerProcessor
@@ -19,19 +17,19 @@ namespace OSGazetteerProcessor
         public IPoint Point { get; private set; }
         public IGeometry BufferedPoint { get; private set; }
 
+        // 1:TQ6004:1066 Country Walk:TQ60:50:49:0:16.7:104500:560500:E:ES:E Susx:East Sussex:X:20-SEP-2011:I:199:0:0:Westham
+
         public OS50kGazetteer(string line)
         {
             Line = RemoveDiacritics(line);
             string[] values = line.Split(':');
             CountyCode = values[11];
             CountyName = values[13];
-            int intval;
-            double latitude, longitude;
-            Int32.TryParse(values[4], out intval);
-            Double.TryParse(values[5], out latitude);
+            Int32.TryParse(values[4], out int intval);
+            Double.TryParse(values[5], out double latitude);
             Latitude = intval + latitude / 60;
             Int32.TryParse(values[6], out intval);
-            Double.TryParse(values[7], out longitude);
+            Double.TryParse(values[7], out double longitude);
             Longitude = intval + longitude / 60;
             if (values[10] == "W")
                 Longitude = -1 * Longitude; // West Longitudes are negative

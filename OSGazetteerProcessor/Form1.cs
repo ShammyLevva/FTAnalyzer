@@ -4,12 +4,10 @@ using NetTopologySuite.Geometries;
 using NetTopologySuite.Geometries.Prepared;
 using NetTopologySuite.IO;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace OSGazetteerProcessor
@@ -196,12 +194,12 @@ namespace OSGazetteerProcessor
         //    }
         //}
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void generateOutputFileToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GenerateOutputFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadOS50kGazetteer();
 
@@ -219,7 +217,7 @@ namespace OSGazetteerProcessor
             MessageBox.Show("Finished");
         }
 
-        private void getCountiesFromGazetteerToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GetCountiesFromGazetteerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadOS50kGazetteer();
             ProcessGazetteerCounties();
@@ -229,7 +227,7 @@ namespace OSGazetteerProcessor
 
         private void ProcessGazetteerCounties()
         {
-            List<string> results = OS50k.Select(x => ("'" + x.CountyCode + "','" + x.CountyName + "'")).Distinct().ToList<string>();
+            var results = OS50k.Select(x => ("'" + x.CountyCode + "','" + x.CountyName + "'")).Distinct().ToList<string>();
             results.Sort();
             modernCounties = results;
         }

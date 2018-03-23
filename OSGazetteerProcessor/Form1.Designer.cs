@@ -62,7 +62,7 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // processToolStripMenuItem
             // 
@@ -78,7 +78,7 @@
             this.generateOutputFileToolStripMenuItem.Name = "generateOutputFileToolStripMenuItem";
             this.generateOutputFileToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
             this.generateOutputFileToolStripMenuItem.Text = "Generate Output File";
-            this.generateOutputFileToolStripMenuItem.Click += new System.EventHandler(this.generateOutputFileToolStripMenuItem_Click);
+            this.generateOutputFileToolStripMenuItem.Click += new System.EventHandler(this.GenerateOutputFileToolStripMenuItem_Click);
             // 
             // textBox1
             // 
@@ -94,7 +94,7 @@
             this.getCountiesFromGazetteerToolStripMenuItem.Name = "getCountiesFromGazetteerToolStripMenuItem";
             this.getCountiesFromGazetteerToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
             this.getCountiesFromGazetteerToolStripMenuItem.Text = "Get Counties from Gazetteer";
-            this.getCountiesFromGazetteerToolStripMenuItem.Click += new System.EventHandler(this.getCountiesFromGazetteerToolStripMenuItem_Click);
+            this.getCountiesFromGazetteerToolStripMenuItem.Click += new System.EventHandler(this.GetCountiesFromGazetteerToolStripMenuItem_Click);
             // 
             // Form1
             // 
