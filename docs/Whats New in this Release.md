@@ -1,3 +1,10 @@
+#### New Release Version 6.4.1.0, 13th April 2018  
+**Updates**  
+Added support for French month names and prefixes  
+
+**BugFixes**  
+Fixed issue with application crash checking duplicates on large files 
+
 #### Updated Release Version 6.4.0.1, 19th March 2018  
 **BugFixes**  
 Fixed issue with links to FindMyPast
