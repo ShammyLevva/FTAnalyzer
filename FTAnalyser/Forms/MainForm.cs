@@ -26,7 +26,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "6.4.0.1";
+        public static string VERSION = "6.4.1.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -2250,7 +2250,12 @@ namespace FTAnalyzer
         {
             SetDuplicateControlsVisibility(true);
             rfhDuplicates.SaveColumnLayout("DuplicatesColumns.xml");
-            var progress = new Progress<int>(value => { pbDuplicates.Value = value; });
+            var progress = new Progress<int>(value => {
+                if (value < 0)
+                    Console.WriteLine("Hmm ok a problem.");
+                else
+                    pbDuplicates.Value = value;
+            });
             var maxScore = new Progress<int>(value =>
             {
                 tbDuplicateScore.TickFrequency = value / 20;
