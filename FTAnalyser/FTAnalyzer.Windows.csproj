@@ -44,12 +44,12 @@
     <TargetCulture>en</TargetCulture>
     <ProductName>FT Analyzer</ProductName>
     <PublisherName>FT Analyzer</PublisherName>
-    <MinimumRequiredVersion>6.4.1.0</MinimumRequiredVersion>
+    <MinimumRequiredVersion>6.4.2.0</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>6.4.1.%2a</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>6.4.2.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -139,8 +139,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Resources\Lib\DgvFilterPopup.dll</HintPath>
     </Reference>
-    <Reference Include="DotNetZip, Version=1.10.1.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
-      <HintPath>packages\DotNetZip.1.10.1\lib\net20\DotNetZip.dll</HintPath>
+    <Reference Include="DotNetZip, Version=1.11.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetZip.1.11.0\lib\net20\DotNetZip.dll</HintPath>
     </Reference>
     <Reference Include="gdalconst_csharp, Version=1.0.5387.28601, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
       <HintPath>packages\GDAL.1.11.1\lib\net40\gdalconst_csharp.dll</HintPath>
@@ -151,8 +151,8 @@
     <Reference Include="GeoAPI, Version=1.7.4.0, Culture=neutral, PublicKeyToken=a1a0da7def465678, processorArchitecture=MSIL">
       <HintPath>packages\GeoAPI.1.7.4\lib\net45\GeoAPI.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.7.4.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>packages\HtmlAgilityPack.1.7.4\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack, Version=1.8.1.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>packages\HtmlAgilityPack.1.8.1\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
@@ -652,32 +652,32 @@
   <ItemGroup>
     <PublishFile Include="Resources\CensusLocations.xml">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="Resources\FactLocationFixes.xml">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="Resources\ScottishParishes.xml">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>

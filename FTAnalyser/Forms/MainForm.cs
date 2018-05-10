@@ -26,7 +26,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "6.4.1.0";
+        public static string VERSION = "6.4.2.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1646,7 +1646,7 @@ namespace FTAnalyzer
                 if (tabErrorFixSelector.SelectedTab == tabDuplicates)
                     PrintDataGrid(Orientation.Landscape, dgDuplicates, "List of Potential Duplicates");
                 else if (tabErrorFixSelector.SelectedTab == tabDataErrors)
-                    PrintDataGrid(Orientation.Portrait, dgDataErrors, "List of Data Errors");
+                    PrintDataGrid(Orientation.Landscape, dgDataErrors, "List of Data Errors");
                 else if (tabErrorFixSelector.SelectedTab == tabLooseBirths)
                     PrintDataGrid(Orientation.Landscape, dgLooseBirths, "List of Loose Births");
                 else if (tabErrorFixSelector.SelectedTab == tabLooseDeaths)
@@ -1683,6 +1683,10 @@ namespace FTAnalyzer
                 printDocument, dg, true, true, true,
                 new TitlePrintBlock(title), null, null);
             printDialog.PrinterSettings.DefaultPageSettings.Landscape = (orientation == Orientation.Landscape);
+            printDialog.PrinterSettings.DefaultPageSettings.Margins.Left = 50;
+            printDialog.PrinterSettings.DefaultPageSettings.Margins.Right = 50;
+            printDialog.PrinterSettings.DefaultPageSettings.Margins.Top = 50;
+            printDialog.PrinterSettings.DefaultPageSettings.Margins.Bottom = 50;
             if (printDialog.ShowDialog(this) == DialogResult.OK)
             {
                 printDocument.DocumentName = title;
