@@ -1,3 +1,8 @@
+#### New Release Version 6.4.2.0, 10th May 2018  
+**Updates**  
+Tweaked grid printing options to adjust margins and stop icons making grid huge  
+Updated to latest NuGet Packages
+
 #### New Release Version 6.4.1.0, 13th April 2018  
 **Updates**  
 Added support for French month names and prefixes  
