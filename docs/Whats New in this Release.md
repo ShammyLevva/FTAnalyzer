@@ -1,3 +1,7 @@
+### Updated Release Version 6.4.2.1, 8th June 2018  
+**BugFixes**  
+Fixed issue with Children Status report not correctly filtering patterns where numbers followed words
+
 #### New Release Version 6.4.2.0, 10th May 2018  
 **Updates**  
 Tweaked grid printing options to adjust margins and stop icons making grid huge  
