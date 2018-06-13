@@ -198,10 +198,10 @@ namespace FTAnalyzer.Forms
         }
 
         public static GeoResponse CallGoogleGeocode(string address)
-        {
+        { 
             string url = string.Format(
-                    "http://maps.googleapis.com/maps/api/geocode/json?address={0}&region=uk&sensor=false",
-                    HttpUtility.UrlEncode(address)
+                    "https://maps.googleapis.com/maps/api/geocode/json?address={0}&region=uk&sensor=false&key={1}",
+                    HttpUtility.UrlEncode(address), GoogleAPIKey.KeyValue
                     );
             return GetGeoResponse(url);
         }
@@ -209,8 +209,8 @@ namespace FTAnalyzer.Forms
         public static GeoResponse CallGoogleReverseGeocode(double latitude, double longitude)
         {
             string url = string.Format(
-                    "http://maps.googleapis.com/maps/api/geocode/json?latlng={0},{1}&region=uk&sensor=false",
-                    HttpUtility.UrlEncode(latitude.ToString()), HttpUtility.UrlEncode(longitude.ToString())
+                    "https://maps.googleapis.com/maps/api/geocode/json?latlng={0},{1}&region=uk&sensor=false&key={2}",
+                    HttpUtility.UrlEncode(latitude.ToString()), HttpUtility.UrlEncode(longitude.ToString()), GoogleAPIKey.KeyValue
                     );
             return GetGeoResponse(url);
         }
@@ -220,11 +220,11 @@ namespace FTAnalyzer.Forms
             GeoResponse res = null;
             try
             {
-                HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
+                HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
                 request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
                 request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
                 DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(GeoResponse));
-                IWebProxy proxy = request.Proxy;
+                WebProxy proxy = request.Proxy as WebProxy;
                 if (proxy != null)
                 {
                     string proxyuri = proxy.GetProxy(request.RequestUri).ToString();
@@ -239,7 +239,7 @@ namespace FTAnalyzer.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to contact http://maps.googleapis.com error was : " + ex.Message, "FTAnalyzer");
+                MessageBox.Show("Unable to contact https://maps.googleapis.com error was : " + ex.Message, "FTAnalyzer");
             }
             return res;
         }

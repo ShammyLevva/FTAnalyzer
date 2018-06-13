@@ -16,7 +16,7 @@ namespace FTAnalyzer.Mapping
         private FactDate year;
         public string FoundLocation { get; private set; }
 
-        private static GeoAPI.Geometries.IPoint centre = new NetTopologySuite.Geometries.Point(0, 0);
+        private static IPoint centre = new NetTopologySuite.Geometries.Point(0, 0);
 
         public MapLocation(Individual ind, Fact fact, FactDate year) : this(ind, fact, fact.Location, year) { }
 

@@ -259,3 +259,4 @@ __pycache__/
 *.pyc
 /FTAnalyser/BuildTools
 /OSGazetteerProcessor/Resources
+/FTAnalyser/Mapping/GoogleAPIKey.cs

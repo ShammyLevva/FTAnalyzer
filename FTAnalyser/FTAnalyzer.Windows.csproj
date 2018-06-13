@@ -292,6 +292,7 @@
     <Compile Include="Graphics\FactLocationImage.cs" />
     <Compile Include="Mapping\ClusterLayer.cs" />
     <Compile Include="Mapping\GeoResponse.cs" />
+    <Compile Include="Mapping\GoogleAPIKey.cs" />
     <Compile Include="Mapping\MapCluster.cs" />
     <Compile Include="Mapping\MapHelper.cs" />
     <Compile Include="Mapping\MapLifeLine.cs" />
