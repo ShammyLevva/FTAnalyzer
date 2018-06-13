@@ -1,3 +1,9 @@
+#### New Release Version 6.4.3.0, 13th June 2018  
+**Updates**  
+Changed Google API Geocoding to use new Google pricing plan
+**BugFixes**  
+Fixed null pointer exception on generated facts
+
 ### Updated Release Version 6.4.2.1, 8th June 2018  
 **BugFixes**  
 Fixed issue with Children Status report not correctly filtering patterns where numbers followed words
