@@ -1,3 +1,7 @@
+### Updated Release Version 6.4.3.1, 15th June 2018  
+**BugFixes**  
+Fix issue with Diacritics in locations causing loading to get stuck forever.
+
 #### New Release Version 6.4.3.0, 13th June 2018  
 **Updates**  
 Changed Google API Geocoding to use new Google pricing plan
