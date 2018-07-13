@@ -22,5 +22,41 @@ namespace FTAnalyzer.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseNonGedcomDates {
+            get {
+                return ((bool)(this["UseNonGedcomDates"]));
+            }
+            set {
+                this["UseNonGedcomDates"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("dd/mm/yyyy")]
+        public string NonGedcomDateFormat {
+            get {
+                return ((string)(this["NonGedcomDateFormat"]));
+            }
+            set {
+                this["NonGedcomDateFormat"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")]
+        public string NonGedcomDateRegex {
+            get {
+                return ((string)(this["NonGedcomDateRegex"]));
+            }
+            set {
+                this["NonGedcomDateRegex"] = value;
+            }
+        }
     }
 }

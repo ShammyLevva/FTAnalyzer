@@ -1,6 +1,15 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FTAnalyzer.Properties" GeneratedClassName="NonGedcomDate">
+  <Profiles />
+  <Settings>
+    <Setting Name="UseNonGedcomDates" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NonGedcomDateFormat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dd/mm/yyyy</Value>
+    </Setting>
+    <Setting Name="NonGedcomDateRegex" Type="System.String" Scope="User">
+      <Value Profile="(Default)">^\d{1,2}\/\d{1,2}\/\d{4}$</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
