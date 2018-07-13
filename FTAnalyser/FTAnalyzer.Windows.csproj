@@ -308,12 +308,6 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="UserControls\InvalidDateHandlngUI.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\InvalidDateHandlngUI.designer.cs">
-      <DependentUpon>InvalidDateHandlngUI.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\FileHandlingUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -530,9 +524,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Controls\CensusCountry.resx">
       <DependentUpon>CensusCountry.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\InvalidDateHandlngUI.resx">
-      <DependentUpon>InvalidDateHandlngUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\FileHandlingUI.resx">
       <DependentUpon>FileHandlingUI.cs</DependentUpon>
