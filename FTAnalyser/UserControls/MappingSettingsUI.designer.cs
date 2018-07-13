@@ -86,7 +86,7 @@
             this.chkIncludePartialGeocoded.Name = "chkIncludePartialGeocoded";
             this.chkIncludePartialGeocoded.UseVisualStyleBackColor = true;
             // 
-            // MappingSettings
+            // MappingSettingsUI
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -96,7 +96,7 @@
             this.Controls.Add(this.btnBrowseFolder);
             this.Controls.Add(this.txtMapPath);
             this.Controls.Add(this.label1);
-            this.Name = "MappingSettings";
+            this.Name = "MappingSettingsUI";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -61,14 +61,14 @@
             this.chkRetryFailedLines.UseVisualStyleBackColor = true;
             this.chkRetryFailedLines.CheckedChanged += new System.EventHandler(this.ChkRetryFailedLines_CheckedChanged);
             // 
-            // FileHandlingSettings
+            // FileHandlingUI
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.chkRetryFailedLines);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.chkLoadWithFilters);
-            this.Name = "FileHandlingSettings";
+            this.Name = "FileHandlingUI";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

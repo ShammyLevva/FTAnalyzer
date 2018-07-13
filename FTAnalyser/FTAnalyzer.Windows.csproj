@@ -303,10 +303,30 @@
     <Compile Include="Mapping\TearDropLayer.cs" />
     <Compile Include="Mapping\TileSourceFactory.cs" />
     <Compile Include="Properties\FileHandling.cs" />
+    <Compile Include="Properties\FileHandling.Designer.cs">
+      <DependentUpon>FileHandling.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\GeneralSettings.Designer.cs">
+      <DependentUpon>GeneralSettings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\MappingSettings.Designer.cs">
+      <DependentUpon>MappingSettings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <DependentUpon>Settings.settings</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\NonGedcomDate.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>NonGedcomDate.settings</DependentUpon>
     </Compile>
     <Compile Include="UserControls\FileHandlingUI.cs">
       <SubType>UserControl</SubType>
@@ -349,6 +369,12 @@
     </Compile>
     <Compile Include="Forms\Facts.Designer.cs">
       <DependentUpon>Facts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\NonGedcomDateSettingsUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\NonGedcomDateSettingsUI.Designer.cs">
+      <DependentUpon>NonGedcomDateSettingsUI.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities\DatabaseHelper.cs" />
     <Compile Include="Utilities\ErrorHandler.cs" />
@@ -534,6 +560,9 @@
     <EmbeddedResource Include="UserControls\GeneralSettingsUI.resx">
       <DependentUpon>GeneralSettingsUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\NonGedcomDateSettingsUI.resx">
+      <DependentUpon>NonGedcomDateSettingsUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Options.resx">
       <DependentUpon>Options.cs</DependentUpon>
     </EmbeddedResource>
@@ -553,9 +582,25 @@
     <EmbeddedResource Include="Resources\KUNSTLER.TTF">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Include="Properties\FileHandling.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>FileHandling.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\GeneralSettings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>GeneralSettings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\MappingSettings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>MappingSettings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\NonGedcomDate.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>NonGedcomDate.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -701,7 +746,9 @@
       <Name>SharpMap</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Shared\" />
+  </ItemGroup>
   <Import Project="..\..\FTAnalyzer.Shared\FTAnalyzer.Shared\FTAnalyzer.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
