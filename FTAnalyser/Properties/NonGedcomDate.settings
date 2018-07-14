@@ -5,11 +5,17 @@
     <Setting Name="UseNonGedcomDates" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="NonGedcomDateFormat" Type="System.String" Scope="User">
-      <Value Profile="(Default)">dd/mm/yyyy</Value>
+    <Setting Name="DateFormat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dd/MM/yyyy</Value>
     </Setting>
-    <Setting Name="NonGedcomDateRegex" Type="System.String" Scope="User">
+    <Setting Name="Regex" Type="System.String" Scope="User">
       <Value Profile="(Default)">^\d{1,2}\/\d{1,2}\/\d{4}$</Value>
+    </Setting>
+    <Setting Name="Separator" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/</Value>
+    </Setting>
+    <Setting Name="FormatSelected" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dd/mm/yyyy</Value>
     </Setting>
   </Settings>
 </SettingsFile>

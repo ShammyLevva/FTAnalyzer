@@ -37,25 +37,49 @@ namespace FTAnalyzer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("dd/mm/yyyy")]
-        public string NonGedcomDateFormat {
+        [global::System.Configuration.DefaultSettingValueAttribute("dd/MM/yyyy")]
+        public string DateFormat {
             get {
-                return ((string)(this["NonGedcomDateFormat"]));
+                return ((string)(this["DateFormat"]));
             }
             set {
-                this["NonGedcomDateFormat"] = value;
+                this["DateFormat"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")]
-        public string NonGedcomDateRegex {
+        public string Regex {
             get {
-                return ((string)(this["NonGedcomDateRegex"]));
+                return ((string)(this["Regex"]));
             }
             set {
-                this["NonGedcomDateRegex"] = value;
+                this["Regex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/")]
+        public string Separator {
+            get {
+                return ((string)(this["Separator"]));
+            }
+            set {
+                this["Separator"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("dd/mm/yyyy")]
+        public string FormatSelected {
+            get {
+                return ((string)(this["FormatSelected"]));
+            }
+            set {
+                this["FormatSelected"] = value;
             }
         }
     }

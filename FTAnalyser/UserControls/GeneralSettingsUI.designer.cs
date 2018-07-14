@@ -210,7 +210,7 @@
             this.chkTreatFemaleAsUnknown.UseVisualStyleBackColor = true;
             this.chkTreatFemaleAsUnknown.CheckedChanged += new System.EventHandler(this.ChkTreatFemaleAsUnknown_CheckedChanged);
             // 
-            // GeneralSettings
+            // GeneralSettingsUI
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -233,7 +233,7 @@
             this.Controls.Add(this.chkCensusResidence);
             this.Controls.Add(this.chkAllowEmptyLocations);
             this.Controls.Add(this.chkUseBaptisms);
-            this.Name = "GeneralSettings";
+            this.Name = "GeneralSettingsUI";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownAge)).EndInit();
             this.ResumeLayout(false);

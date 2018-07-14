@@ -43,15 +43,15 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
-            this.panel1.Location = new System.Drawing.Point(154, 12);
+            this.panel1.Location = new System.Drawing.Point(202, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(309, 421);
+            this.panel1.Size = new System.Drawing.Size(325, 421);
             this.panel1.TabIndex = 1;
             // 
             // OK
             // 
             this.OK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.OK.Location = new System.Drawing.Point(306, 446);
+            this.OK.Location = new System.Drawing.Point(370, 446);
             this.OK.Name = "OK";
             this.OK.Size = new System.Drawing.Size(75, 23);
             this.OK.TabIndex = 2;
@@ -62,7 +62,7 @@
             // Cancel
             // 
             this.Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cancel.Location = new System.Drawing.Point(388, 446);
+            this.Cancel.Location = new System.Drawing.Point(452, 446);
             this.Cancel.Name = "Cancel";
             this.Cancel.Size = new System.Drawing.Size(75, 23);
             this.Cancel.TabIndex = 3;
@@ -83,7 +83,7 @@
             this.treeView1.ShowNodeToolTips = true;
             this.treeView1.ShowPlusMinus = false;
             this.treeView1.ShowRootLines = false;
-            this.treeView1.Size = new System.Drawing.Size(136, 421);
+            this.treeView1.Size = new System.Drawing.Size(184, 421);
             this.treeView1.TabIndex = 4;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView1_AfterSelect);
             // 
@@ -98,7 +98,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(475, 481);
+            this.ClientSize = new System.Drawing.Size(539, 481);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.Cancel);
             this.Controls.Add(this.OK);
