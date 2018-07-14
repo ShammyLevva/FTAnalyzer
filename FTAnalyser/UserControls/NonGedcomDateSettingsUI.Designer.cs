@@ -57,7 +57,7 @@
             this.chkUseNonGedcomDates.TabIndex = 1;
             this.chkUseNonGedcomDates.Text = "Allow Non GEDCOM date formats";
             this.chkUseNonGedcomDates.UseVisualStyleBackColor = true;
-            this.chkUseNonGedcomDates.CheckedChanged += new System.EventHandler(this.chkUseNonGedcomDates_CheckedChanged);
+            this.chkUseNonGedcomDates.CheckedChanged += new System.EventHandler(this.ChkUseNonGedcomDates_CheckedChanged);
             // 
             // gbDateFormat
             // 
@@ -138,6 +138,7 @@
             this.rbSpace.TabIndex = 5;
             this.rbSpace.Text = "  Space";
             this.rbSpace.UseVisualStyleBackColor = true;
+            this.rbSpace.CheckedChanged += new System.EventHandler(this.RbSpace_CheckedChanged);
             // 
             // rbDot
             // 
@@ -148,7 +149,7 @@
             this.rbDot.TabIndex = 3;
             this.rbDot.Text = ". Dot";
             this.rbDot.UseVisualStyleBackColor = true;
-            this.rbDot.CheckedChanged += new System.EventHandler(this.rbDate_CheckedChanged);
+            this.rbDot.CheckedChanged += new System.EventHandler(this.RbDot_CheckedChanged);
             // 
             // rbDash
             // 
@@ -159,6 +160,7 @@
             this.rbDash.TabIndex = 4;
             this.rbDash.Text = "- Dash";
             this.rbDash.UseVisualStyleBackColor = true;
+            this.rbDash.CheckedChanged += new System.EventHandler(this.RbDash_CheckedChanged);
             // 
             // rbSlash
             // 
@@ -172,6 +174,7 @@
             this.rbSlash.Tag = "";
             this.rbSlash.Text = "/ Slash";
             this.rbSlash.UseVisualStyleBackColor = true;
+            this.rbSlash.CheckedChanged += new System.EventHandler(this.RbSlash_CheckedChanged);
             // 
             // label1
             // 

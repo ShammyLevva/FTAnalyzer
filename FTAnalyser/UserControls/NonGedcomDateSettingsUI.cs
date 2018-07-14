@@ -77,7 +77,8 @@ namespace FTAnalyzer.UserControls
         }
 
         #endregion
-        private void chkUseNonGedcomDates_CheckedChanged(object sender, EventArgs e)
+
+        private void ChkUseNonGedcomDates_CheckedChanged(object sender, EventArgs e)
         {
             Properties.NonGedcomDate.Default.UseNonGedcomDates = chkUseNonGedcomDates.Checked;
             gbDateFormat.Enabled = chkUseNonGedcomDates.Checked;
@@ -126,8 +127,50 @@ namespace FTAnalyzer.UserControls
             Properties.GeneralSettings.Default.ReloadRequired = true;
         }
 
-        private void rbDate_CheckedChanged(object sender, EventArgs e)
+        private void RbSlash_CheckedChanged(object sender, EventArgs e)
         {
+            if (rbSlash.Checked)
+            {
+                rbddmmyyyy.Text = "dd/mm/yyyy";
+                rbmmddyyyy.Text = "mm/dd/yyyy";
+                rbyyyymmdd.Text = "yyyy/mm/dd";
+                rbyyyyddmm.Text = "yyyy/dd/mm";
+            }
+        }
+
+        private void RbDot_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbDot.Checked)
+            {
+                rbddmmyyyy.Text = "dd.mm.yyyy";
+                rbmmddyyyy.Text = "mm.dd.yyyy";
+                rbyyyymmdd.Text = "yyyy.mm.dd";
+                rbyyyyddmm.Text = "yyyy.dd.mm";
+            }
+
+        }
+
+        private void RbDash_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbDash.Checked)
+            {
+                rbddmmyyyy.Text = "dd-mm-yyyy";
+                rbmmddyyyy.Text = "mm-dd-yyyy";
+                rbyyyymmdd.Text = "yyyy-mm-dd";
+                rbyyyyddmm.Text = "yyyy-dd-mm";
+            }
+
+        }
+
+        private void RbSpace_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbSpace.Checked)
+            {
+                rbddmmyyyy.Text = "dd mm yyyy";
+                rbmmddyyyy.Text = "mm dd yyyy";
+                rbyyyymmdd.Text = "yyyy mm dd";
+                rbyyyyddmm.Text = "yyyy dd mm";
+            }
 
         }
     }
