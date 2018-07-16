@@ -305,6 +305,11 @@ namespace FactDateTest
             target = new FactDate("INT 4 OCT 1723 4DA 8MNTH 1723");
             Assert.AreEqual(new DateTime(1723, 10, 4), target.StartDate);
             Assert.AreEqual(new DateTime(1723, 10, 4), target.EndDate);
+
+            // invalid GEDCOM format dates
+            //target = new FactDate("5/6/2018");
+            //Assert.AreEqual(new DateTime(2018, 6, 5), target.StartDate);
+            //Assert.AreEqual(new DateTime(2018, 6, 5), target.EndDate);
         }
 
         [TestMethod()]
