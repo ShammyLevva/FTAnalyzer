@@ -65,19 +65,19 @@ namespace CensusReferenceTest
         {
             CensusReference censusRef;
 
-//            USCensusTest("District: 1-2 , Family Number: 251 , Sheet Number and Letter: 10B , Line Number: 78 , Affiliate Publication Number: T627 , Affiliate Film Number: 544 , Digital Folder Number: 005449024 , Image Number: 00057", CensusDate.USCENSUS1940, "T627_544", "1-2", "10B");
-//            USCensusTest("enumeration district (ED) 1-2, sheet 10B, family 251, NARA digital publication T627 (Washington, D.C.: National Archives and Records Administration, 2012), roll 544.", CensusDate.USCENSUS1940, "T627_544", "1-2", "10B");
-            //USCensusTest("Year: 1940; Census Place: Smyrna, Kent, Delaware; Roll: T627_544; Page: 10B; Enumeration District: 1-2", CensusDate.USCENSUS1940, "T627_544", "1-2", "10B");
-            //USCensusTest("Year: 1930; Census Place: Sea Cliff, Nassau, New York; Roll: 1462; Page: 14B; Enumeration District: 193;", CensusDate.USCENSUS1930, "1462", "193", "14B");
-            //USCensusTest("Year: 1900; Census Place: South Prairie, Pierce,Washington; Roll: T623_1748; Page: 4B; Enumeration District: 160.", CensusDate.USCENSUS1900, "T623_1748", "160", "4B");
-            //USCensusTest("Census 1910 Springfield MO USA Ward 8 ED44 p9A", CensusDate.USCENSUS1910, "8", "44", "9A");
-            //USCensusTest("Census 1940 Minneapolis MN USA Ward 7 ED89-190 p3B", CensusDate.USCENSUS1940, "7", "89-190", "3B");
-            //USCensusTest("Census 1940 Lebanon NH USA T627_2286 Page 12B ED 5-33", CensusDate.USCENSUS1940, "T627_2286", "5-33", "12B");
-            //USCensusTest("Year 1940 Lebanon NH USA; Roll: T627_2286 Page 12B ED 5-33", CensusDate.USCENSUS1940, "T627_2286", "5-33", "12B");
-            //USCensusTest("Year: 1880; Census Place: Chicago, Cook, Illinois; Roll: 195; FamilyHistory Film: 1254195; Page: 71D; Enumeration District: 136; Image:0337", CensusDate.USCENSUS1880, "195", "136", "71D");
-            //USCensusTest("Year: 1880; Census Place: New York City, New York, New York; Roll: 885; Family History Film: 1254885; Page: 29C; Enumeration District: 376; Image: 0060", CensusDate.USCENSUS1880, "885", "376", "29C");
-            // USCensusTest("Census 1930 Salt Lake City UT USA ED50 p6B", CensusDate.USCENSUS1930, string.Empty, "50", "6B");
-            // USCensusTest("Year: 1860; Census Place: Boston Ward 12, Suffolk, Massachusetts; Roll: M653_525; Page: 515; Image: 519; Family History Library Film: 803525", CensusDate.USCENSUS1860, "M653_525", "12", "515");
+            //USCensusTest("District: 1-2 , Family Number: 251 , Sheet Number and Letter: 10B , Line Number: 78 , Affiliate Publication Number: T627 , Affiliate Film Number: 544 , Digital Folder Number: 005449024 , Image Number: 00057", CensusDate.USCENSUS1940, "T627_544", "1-2", "10B");
+            //USCensusTest("enumeration district (ED) 1-2, sheet 10B, family 251, NARA digital publication T627 (Washington, D.C.: National Archives and Records Administration, 2012), roll 544.", CensusDate.USCENSUS1940, "T627_544", "1-2", "10B");
+            USCensusTest("Year: 1940; Census Place: Smyrna, Kent, Delaware; Roll: T627_544; Page: 10B; Enumeration District: 1-2", CensusDate.USCENSUS1940, "T627_544", "1-2", "10B");
+            USCensusTest("Year: 1930; Census Place: Sea Cliff, Nassau, New York; Roll: 1462; Page: 14B; Enumeration District: 193;", CensusDate.USCENSUS1930, "1462", "193", "14B");
+            USCensusTest("Year: 1900; Census Place: South Prairie, Pierce,Washington; Roll: T623_1748; Page: 4B; Enumeration District: 160.", CensusDate.USCENSUS1900, "T623_1748", "160", "4B");
+            USCensusTest("Census 1910 Springfield MO USA Ward 8 ED44 p9A", CensusDate.USCENSUS1910, "8", "44", "9A");
+            USCensusTest("Census 1940 Minneapolis MN USA Ward 7 ED89-190 p3B", CensusDate.USCENSUS1940, "7", "89-190", "3B");
+            USCensusTest("Census 1940 Lebanon NH USA T627_2286 Page 12B ED 5-33", CensusDate.USCENSUS1940, "T627_2286", "5-33", "12B");
+            USCensusTest("Year 1940 Lebanon NH USA; Roll: T627_2286 Page 12B ED 5-33", CensusDate.USCENSUS1940, "T627_2286", "5-33", "12B");
+            USCensusTest("Year: 1880; Census Place: Chicago, Cook, Illinois; Roll: 195; FamilyHistory Film: 1254195; Page: 71D; Enumeration District: 136; Image:0337", CensusDate.USCENSUS1880, "195", "136", "71D");
+            USCensusTest("Year: 1880; Census Place: New York City, New York, New York; Roll: 885; Family History Film: 1254885; Page: 29C; Enumeration District: 376; Image: 0060", CensusDate.USCENSUS1880, "885", "376", "29C");
+            USCensusTest("Census 1930 Salt Lake City UT USA ED50 p6B", CensusDate.USCENSUS1930, string.Empty, "50", "6B");
+            //USCensusTest("Year: 1860; Census Place: Boston Ward 12, Suffolk, Massachusetts; Roll: M653_525; Page: 515; Image: 519; Family History Library Film: 803525", CensusDate.USCENSUS1860, "M653_525", "12", "515");
 
             ScottishCensusTest("GROS 692/01 019/00 008", FactDate.UNKNOWN_DATE, "692-1", "19", "8");
             ScottishCensusTest("in the 1851 census, GROS 343/00 001/00 011.", CensusDate.UKCENSUS1851, "343", "1", "11");
@@ -101,8 +101,8 @@ namespace CensusReferenceTest
             Census1911Test("Census 1911 Wortley Leeds YKS ENG RG14/Piece26892 RG78Piece1545 RD499 SD3 ED22 SN150", "26892", "150");
             Census1911Test("1911 census - Piece 23919, SN 32 - living at 114 Princess Road, Moss Side, Manchester, Lancashire", "23919", "32");
 
-            //UKCensusTest("Database online. Class: RG9; Piece: 1105; Folio: 90; Page: 21; GSU", CensusDate.UKCENSUS1861, "1105", "90", "21");
-            //UKCensusTest("            RG11 piece 870 folio 49 page 10", CensusDate.UKCENSUS1881, "870", "49", "10");
+            UKCensusTest("Database online. Class: RG9; Piece: 1105; Folio: 90; Page: 21; GSU", CensusDate.UKCENSUS1861, "1105", "90", "21");
+            UKCensusTest("            RG11 piece 870 folio 49 page 10", CensusDate.UKCENSUS1881, "870", "49", "10");
             //UKCensusTest("Archive reference	RG11\nPiece number	870\nFolio	49\nPage	10", CensusDate.UKCENSUS1881, "870", "49", "10");
             UKCensusTest("RG11 Piece/Folio  4738 / 103 Page Number  16", CensusDate.UKCENSUS1881, "4738", "103", "16");
             UKCensusTest("RG11 Piece 2529 Folio 68 Page 1", CensusDate.UKCENSUS1881, "2529", "68", "1");
@@ -112,8 +112,6 @@ namespace CensusReferenceTest
             CanadianCensus("Year: 1881; Census Place: Richibucto, Kent, New Brunswick; Roll: C_13184; Page: 32; Family No: 144", CensusDate.CANADACENSUS1881, "C_13184", "32", "144");
             Canadian1881Census("1881 census - District 146/B, Page 59, Family 273 - living at Rainham, Haldimand, Ontario, Canada.", "146", "B", "59", "273");
             //CanadianCensus("Event Place: Dumfries South, Brant North, Ontario, Canada\nDistrict Number: 160\nSub-District: C\nDivision: 2\nPage Number: 1\nFamily Number: 3\nAffiliate Film Number: C-13264", , CensusDate.CANADACENSUS1881, "C_13184", "1", "3");
-
-
 
             censusRef = new CensusReference("I1", "826/134/7 England & Wales 1881", false);
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1881));
