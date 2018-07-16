@@ -73,13 +73,25 @@ namespace FTAnalyzer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("dd/mm/yyyy")]
-        public string FormatSelected {
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int FormatSelected {
             get {
-                return ((string)(this["FormatSelected"]));
+                return ((int)(this["FormatSelected"]));
             }
             set {
                 this["FormatSelected"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Setting {
+            get {
+                return ((string)(this["Setting"]));
+            }
+            set {
+                this["Setting"] = value;
             }
         }
     }
