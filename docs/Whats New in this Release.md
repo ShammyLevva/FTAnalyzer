@@ -1,3 +1,9 @@
+#### New Release Version 6.5.0.0, 17th July 2018  
+**Updates**  
+Significant addition to FactDate measurements now cater for non GEDCOM date formats such as dd/mm/yyyy  
+See Tools/Options panel for settings. By default this is off.  
+Note this should not be taken as an encouragement to use non GEDCOM dates.  
+
 ### Updated Release Version 6.4.3.1, 15th June 2018  
 **BugFixes**  
 Fix issue with Diacritics in locations causing loading to get stuck forever.
