@@ -1,3 +1,8 @@
+### Updated Release Version 6.5.0.1, 15th June 2018  
+**BugFixes**  
+Fix bug with French spelling of May
+
+
 #### New Release Version 6.5.0.0, 17th July 2018  
 **Updates**  
 Significant addition to FactDate measurements now cater for non GEDCOM date formats such as dd/mm/yyyy  

@@ -232,7 +232,15 @@ namespace FactDateTest
             Assert.AreEqual(new DateTime(1966, 3, 31), target.EndDate);
 
             target = new FactDate("BET JAN-MAR 1966");
-            Assert.AreEqual(new DateTime(1966, 1, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1965, 12, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1966, 3, 31), target.EndDate);
+
+            target = new FactDate("JAN-MAR 1966");
+            Assert.AreEqual(new DateTime(1965, 12, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1966, 3, 31), target.EndDate);
+
+            target = new FactDate("Q1 1966");
+            Assert.AreEqual(new DateTime(1965, 12, 1), target.StartDate);
             Assert.AreEqual(new DateTime(1966, 3, 31), target.EndDate);
 
             target = new FactDate("BTW 1914-1918");
@@ -302,6 +310,17 @@ namespace FactDateTest
             target = new FactDate("966");
             Assert.AreEqual(new DateTime(966, 1, 1), target.StartDate);
             Assert.AreEqual(new DateTime(966, 12, 31), target.EndDate);
+
+
+
+            // French Dates
+            target = new FactDate("4 janvier 1880");
+            Assert.AreEqual(new DateTime(1880, 1, 4), target.StartDate);
+            Assert.AreEqual(new DateTime(1880, 1, 4), target.EndDate);
+
+            target = new FactDate("4 MAI 1880");
+            Assert.AreEqual(new DateTime(1880, 5, 4), target.StartDate);
+            Assert.AreEqual(new DateTime(1880, 5, 4), target.EndDate);
 
             // interpreted dates
             target = new FactDate("INT 4 OCT 1723 4DA 8MNTH 1723");
