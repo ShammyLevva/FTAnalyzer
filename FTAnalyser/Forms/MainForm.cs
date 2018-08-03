@@ -26,7 +26,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "6.5.0.0";
+        public static string VERSION = "6.5.1.0";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -2813,11 +2813,11 @@ namespace FTAnalyzer
             {
                 HourGlass(true);
                 Individual root = ft.RootPerson;
-                ft.SetRelations(selected.IndividualID);
+                ft.SetRelations(selected.IndividualID, null);
                 LostCousinsReferral lcr = new LostCousinsReferral(selected, ckbReferralInCommon.Checked);
                 DisposeDuplicateForms(lcr);
                 lcr.Show();
-                ft.SetRelations(root.IndividualID);
+                ft.SetRelations(root.IndividualID, null);
                 HourGlass(false);
             }
         }

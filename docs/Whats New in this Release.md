@@ -1,7 +1,10 @@
-### Updated Release Version 6.5.0.1, 15th June 2018  
+### Updated Release Version 6.5.1.0, 3rd August 2018  
+**Updates**  
+Added relationship check when someone is a direct ancestor more than once
+
 **BugFixes**  
 Fix bug with French spelling of May
-
+Fix bug introduced in 6.5.0.0 with dates with dashes  
 
 #### New Release Version 6.5.0.0, 17th July 2018  
 **Updates**  
