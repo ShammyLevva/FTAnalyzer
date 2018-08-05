@@ -23,6 +23,16 @@ namespace FTAnalyzer.Utilities
             Save();
         }
 
+        public void ClearNonGEDCOMDateSettings()
+        {
+            _NonGEDCOMDateSettings.UseNonGedcomDates = false;
+            _NonGEDCOMDateSettings.FormatSelected = (int)FormatSelected.DD_MM_YYYY;
+            _NonGEDCOMDateSettings.DateFormat = "dd/mm/yyyy";
+            _NonGEDCOMDateSettings.Regex = SetRegex(FormatSelected.DD_MM_YYYY, "/");
+            _NonGEDCOMDateSettings.Separator = "/";
+            Save();
+        }
+
         public void Save() { _Settings.Save(); _NonGEDCOMDateSettings.Save(); }
 
         private string SetRegex(FormatSelected formatSelected, string regexSeparator)
