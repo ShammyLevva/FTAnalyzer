@@ -12,7 +12,12 @@ namespace FTAnalyzer.UserControls
 
         public static Regex NonGEDCOMDateFormatRegex
         {
-            get { return _regex ?? new Regex(Properties.NonGedcomDate.Default.Regex, RegexOptions.Compiled | RegexOptions.IgnoreCase); }
+            get
+            {
+                if (_regex == null)
+                    _regex = new Regex(Properties.NonGedcomDate.Default.Regex, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                return _regex;
+            }
         }
 
         public NonGedcomDateSettingsUI()
@@ -113,7 +118,7 @@ namespace FTAnalyzer.UserControls
                 regex = @"(\d{1,2})" + regexSeparator + @"(\d{1,2})" + regexSeparator + @"(\d{4})";
                 Properties.NonGedcomDate.Default.FormatSelected = (int)FormatSelected.DD_MM_YYYY;
             }
-            if(rbmmddyyyy.Checked)
+            if (rbmmddyyyy.Checked)
             {
                 dateformat = "MM" + separator + "dd" + separator + "yyyy";
                 regex = @"(\d{1,2})" + regexSeparator + @"(\d{1,2})" + regexSeparator + @"(\d{4})";
