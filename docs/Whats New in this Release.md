@@ -1,3 +1,7 @@
+### Updated Release Version 6.5.1.2, 5th August 2018  
+**BugFixes**  
+Fix Bug with dashes causing failed test classes
+
 ### Updated Release Version 6.5.1.1, 5th August 2018  
 **BugFixes**  
 Fix slow loading of individuals introduced in v6.5.0.0
