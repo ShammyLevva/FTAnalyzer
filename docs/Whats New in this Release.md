@@ -1,3 +1,7 @@
+### Updated Release Version 6.5.1.1, 5th August 2018  
+**BugFixes**  
+Fix slow loading of individuals introduced in v6.5.0.0
+
 ### Updated Release Version 6.5.1.0, 3rd August 2018  
 **Updates**  
 Added relationship check when someone is a direct ancestor more than once
