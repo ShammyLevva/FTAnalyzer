@@ -19,12 +19,12 @@ namespace FTAnalyzer
         private PrintDocument printDocument;
         private PrintDialog printDialog;
         private PrintPreviewDialog printPreviewDialog;
-        private Action resetTable;
+        private Action _resetTable;
         private Form parent;
         private Tuple<int, int> defaultLocation;
         private Tuple<int, int> defaultSize;
-        private string registry;
-        private bool saveForm;
+        private string _registry;
+        private bool _saveForm;
 
         public DataGridView ReportGrid { get; private set; }
         public String PrintTitle { get; set; }
@@ -32,18 +32,18 @@ namespace FTAnalyzer
         public ReportFormHelper(Form parent, string title, DataGridView report, Action resetTable, string registry, bool saveForm = true)
         {
             this.parent = parent;
-            this.defaultLocation = new Tuple<int, int>(parent.Top, parent.Left);
-            this.defaultSize = new Tuple<int, int>(parent.Height, parent.Width);
-            this.PrintTitle = title;
-            this.ReportGrid = report;
-            this.resetTable = resetTable;
-            this.registry = registry;
-            this.saveForm = saveForm;
+            defaultLocation = new Tuple<int, int>(parent.Top, parent.Left);
+            defaultSize = new Tuple<int, int>(parent.Height, parent.Width);
+            PrintTitle = title;
+            ReportGrid = report;
+            _resetTable = resetTable;
+            _registry = registry;
+            _saveForm = saveForm;
 
             printDocument = new PrintDocument();
             printDocument.DefaultPageSettings.Landscape = true;
             printDocument.DefaultPageSettings.Margins =
-                new System.Drawing.Printing.Margins(15, 15, 15, 15);
+                new Margins(15, 15, 15, 15);
 
             printProvider = PrintingDataGridViewProvider.Create(
                 printDocument, ReportGrid, true, true, true,
@@ -143,7 +143,7 @@ namespace FTAnalyzer
         {
             try
             {
-                this.resetTable();
+                _resetTable();
                 DataTable dt = new DataTable();
                 string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, filename);
                 dt.ReadXmlSchema(path);
@@ -185,7 +185,7 @@ namespace FTAnalyzer
 
         public void ResetColumnLayout(string filename)
         {
-            resetTable();
+            _resetTable();
             for (int i = 0; i < ReportGrid.Columns.Count; i++)
             {
                 ReportGrid.Columns[i].DisplayIndex = i;
@@ -197,34 +197,34 @@ namespace FTAnalyzer
 
         public void LoadFormLayout()
         {
-            if (saveForm)
+            if (_saveForm)
             {
                 parent.WindowState = FormWindowState.Normal;
                 parent.StartPosition = FormStartPosition.Manual;
-                int top = (int)Application.UserAppDataRegistry.GetValue(registry + " position - top", defaultLocation.Item1);
-                int left = (int)Application.UserAppDataRegistry.GetValue(registry + " position - left", defaultLocation.Item2);
+                int top = (int)Application.UserAppDataRegistry.GetValue(_registry + " position - top", defaultLocation.Item1);
+                int left = (int)Application.UserAppDataRegistry.GetValue(_registry + " position - left", defaultLocation.Item2);
                 Point topLeft = CheckIsOnScreen(top, left);
                 parent.Top = topLeft.Y;
                 parent.Left = topLeft.X;
-                parent.Height = (int)Application.UserAppDataRegistry.GetValue(registry + " size - height", defaultSize.Item1);
-                parent.Width = (int)Application.UserAppDataRegistry.GetValue(registry + " size - width", defaultSize.Item2);
+                parent.Height = (int)Application.UserAppDataRegistry.GetValue(_registry + " size - height", defaultSize.Item1);
+                parent.Width = (int)Application.UserAppDataRegistry.GetValue(_registry + " size - width", defaultSize.Item2);
             }
         }
 
         public void SaveFormLayout()
         {
-            if (saveForm && parent.WindowState == FormWindowState.Normal)
+            if (_saveForm && parent.WindowState == FormWindowState.Normal)
             {  //only save window size if not maximised or minimised
-                Application.UserAppDataRegistry.SetValue(registry + " position - top", parent.Top);
-                Application.UserAppDataRegistry.SetValue(registry + " position - left", parent.Left);
-                Application.UserAppDataRegistry.SetValue(registry + " size - height", parent.Height);
-                Application.UserAppDataRegistry.SetValue(registry + " size - width", parent.Width);
+                Application.UserAppDataRegistry.SetValue(_registry + " position - top", parent.Top);
+                Application.UserAppDataRegistry.SetValue(_registry + " position - left", parent.Left);
+                Application.UserAppDataRegistry.SetValue(_registry + " size - height", parent.Height);
+                Application.UserAppDataRegistry.SetValue(_registry + " size - width", parent.Width);
             }
         }
 
         private void ResetFormLayout()
         {
-            if (saveForm)
+            if (_saveForm)
             {
                 parent.Top = defaultLocation.Item1;
                 parent.Left = defaultLocation.Item2;

@@ -27,8 +27,8 @@ namespace FTAnalyzer.Forms
         public People()
         {
             InitializeComponent();
-            indReportFormHelper = new ReportFormHelper(this, this.Text, dgIndividuals, this.ResetTable, "People");
-            famReportFormHelper = new ReportFormHelper(this, this.Text, dgFamilies, this.ResetTable, "People");
+            indReportFormHelper = new ReportFormHelper(this, Text, dgIndividuals, ResetTable, "People");
+            famReportFormHelper = new ReportFormHelper(this, Text, dgFamilies, ResetTable, "People");
             ExtensionMethods.DoubleBuffered(dgIndividuals, true);
             ExtensionMethods.DoubleBuffered(dgFamilies, true);
             boldFont = new Font(dgFamilies.DefaultCellStyle.Font, FontStyle.Bold);
