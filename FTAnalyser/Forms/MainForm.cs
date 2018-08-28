@@ -1603,7 +1603,7 @@ namespace FTAnalyzer
 
         private void OptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UserControls.Options options = new UserControls.Options();
+            Options options = new Options();
             options.ShowDialog(this);
             options.Dispose();
         }
