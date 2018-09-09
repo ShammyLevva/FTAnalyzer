@@ -308,6 +308,11 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Properties\FontSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>FontSettings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Properties\GeneralSettings.Designer.cs">
       <DependentUpon>GeneralSettings.settings</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -339,6 +344,12 @@
     </Compile>
     <Compile Include="UserControls\FileHandlingUI.designer.cs">
       <DependentUpon>FileHandlingUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\FontSettingsUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\FontSettingsUI.Designer.cs">
+      <DependentUpon>FontSettingsUI.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\MappingSettingsUI.cs">
       <SubType>UserControl</SubType>
@@ -564,6 +575,9 @@
     <EmbeddedResource Include="UserControls\FileHandlingUI.resx">
       <DependentUpon>FileHandlingUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\FontSettingsUI.resx">
+      <DependentUpon>FontSettingsUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\MappingSettingsUI.resx">
       <DependentUpon>MappingSettingsUI.cs</DependentUpon>
     </EmbeddedResource>
@@ -595,6 +609,10 @@
     <None Include="Properties\FileHandling.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>FileHandling.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\FontSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>FontSettings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Properties\GeneralSettings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
