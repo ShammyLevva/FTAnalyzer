@@ -47,7 +47,7 @@
             this.chkAddCreatedLocations.Checked = true;
             this.chkAddCreatedLocations.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkAddCreatedLocations.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chkAddCreatedLocations.Location = new System.Drawing.Point(17, 118);
+            this.chkAddCreatedLocations.Location = new System.Drawing.Point(3, 118);
             this.chkAddCreatedLocations.Name = "chkAddCreatedLocations";
             this.chkAddCreatedLocations.Size = new System.Drawing.Size(290, 17);
             this.chkAddCreatedLocations.TabIndex = 36;
@@ -60,7 +60,7 @@
             this.chkAutoCreateCensus.Checked = true;
             this.chkAutoCreateCensus.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkAutoCreateCensus.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chkAutoCreateCensus.Location = new System.Drawing.Point(17, 95);
+            this.chkAutoCreateCensus.Location = new System.Drawing.Point(3, 95);
             this.chkAutoCreateCensus.Name = "chkAutoCreateCensus";
             this.chkAutoCreateCensus.Size = new System.Drawing.Size(274, 17);
             this.chkAutoCreateCensus.TabIndex = 35;
@@ -71,7 +71,7 @@
             // 
             this.chkCompactCensusRef.AutoSize = true;
             this.chkCompactCensusRef.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chkCompactCensusRef.Location = new System.Drawing.Point(17, 72);
+            this.chkCompactCensusRef.Location = new System.Drawing.Point(3, 72);
             this.chkCompactCensusRef.Name = "chkCompactCensusRef";
             this.chkCompactCensusRef.Size = new System.Drawing.Size(186, 17);
             this.chkCompactCensusRef.TabIndex = 34;
@@ -82,7 +82,7 @@
             // 
             this.chkFamilyCensus.AutoSize = true;
             this.chkFamilyCensus.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chkFamilyCensus.Location = new System.Drawing.Point(17, 49);
+            this.chkFamilyCensus.Location = new System.Drawing.Point(3, 49);
             this.chkFamilyCensus.Name = "chkFamilyCensus";
             this.chkFamilyCensus.Size = new System.Drawing.Size(243, 17);
             this.chkFamilyCensus.TabIndex = 33;
@@ -95,7 +95,7 @@
             this.chkTolerateInaccurateCensus.Checked = true;
             this.chkTolerateInaccurateCensus.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkTolerateInaccurateCensus.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chkTolerateInaccurateCensus.Location = new System.Drawing.Point(17, 26);
+            this.chkTolerateInaccurateCensus.Location = new System.Drawing.Point(3, 26);
             this.chkTolerateInaccurateCensus.Name = "chkTolerateInaccurateCensus";
             this.chkTolerateInaccurateCensus.Size = new System.Drawing.Size(237, 17);
             this.chkTolerateInaccurateCensus.TabIndex = 32;
@@ -108,7 +108,7 @@
             this.chkCensusResidence.Checked = true;
             this.chkCensusResidence.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkCensusResidence.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chkCensusResidence.Location = new System.Drawing.Point(17, 3);
+            this.chkCensusResidence.Location = new System.Drawing.Point(3, 3);
             this.chkCensusResidence.Name = "chkCensusResidence";
             this.chkCensusResidence.Size = new System.Drawing.Size(229, 17);
             this.chkCensusResidence.TabIndex = 31;
@@ -119,7 +119,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(14, 408);
+            this.label1.Location = new System.Drawing.Point(0, 408);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(203, 13);
             this.label1.TabIndex = 37;
@@ -131,7 +131,7 @@
             this.chkHideMissingTagged.Checked = true;
             this.chkHideMissingTagged.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkHideMissingTagged.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chkHideMissingTagged.Location = new System.Drawing.Point(17, 141);
+            this.chkHideMissingTagged.Location = new System.Drawing.Point(3, 141);
             this.chkHideMissingTagged.Name = "chkHideMissingTagged";
             this.chkHideMissingTagged.Size = new System.Drawing.Size(241, 17);
             this.chkHideMissingTagged.TabIndex = 38;

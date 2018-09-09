@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FTAnalyzer.UserControls
 {
-    public partial class CensusSettingsUI : UserControl
+    public partial class CensusSettingsUI : UserControl, IOptions
     {
         public CensusSettingsUI()
         {
@@ -77,7 +71,7 @@ namespace FTAnalyzer.UserControls
 
         public string DisplayName
         {
-            get { return "General Settings"; }
+            get { return "Census Settings"; }
         }
 
         public string TreePosition

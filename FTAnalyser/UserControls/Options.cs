@@ -25,7 +25,7 @@ namespace FTAnalyzer.UserControls
 
 		private void Options_Load(object sender, EventArgs e)
 		{
-			this.SuspendLayout();
+			SuspendLayout();
 			Type[] types = Assembly.GetExecutingAssembly().GetTypes();
 			for (int i = 0; i < types.Length; i++)
 			{
@@ -35,7 +35,7 @@ namespace FTAnalyzer.UserControls
 					IOptions optionCast = userControl as IOptions;
 					if (userControl != null && optionCast != null)
 					{
-						userControl.Anchor = ((AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right)));
+						userControl.Anchor = (((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right);
 						userControl.Location = new System.Drawing.Point(3, 3);
 						userControl.Name = optionCast.TreePosition;
 						userControl.Size = new System.Drawing.Size(243, 356);
@@ -156,7 +156,7 @@ namespace FTAnalyzer.UserControls
 					panel1.Controls[i].Visible = false;
 				}
 				_lookupTable[treeView1.SelectedNode.Tag.ToString()].Visible = true;
-				this.ResumeLayout();
+				ResumeLayout();
 			}
 		}
 	}
