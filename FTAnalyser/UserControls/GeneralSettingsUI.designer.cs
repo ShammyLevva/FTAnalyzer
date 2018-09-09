@@ -33,21 +33,14 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.chkUseBaptisms = new System.Windows.Forms.CheckBox();
             this.chkAllowEmptyLocations = new System.Windows.Forms.CheckBox();
-            this.chkCensusResidence = new System.Windows.Forms.CheckBox();
-            this.chkTolerateInaccurateCensus = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.chkFamilyCensus = new System.Windows.Forms.CheckBox();
             this.upDownAge = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.chkUseBurials = new System.Windows.Forms.CheckBox();
             this.chkMultipleFactForms = new System.Windows.Forms.CheckBox();
-            this.chkCompactCensusRef = new System.Windows.Forms.CheckBox();
             this.chkUseAlias = new System.Windows.Forms.CheckBox();
-            this.chkHideMissingTagged = new System.Windows.Forms.CheckBox();
             this.chkReverseLocations = new System.Windows.Forms.CheckBox();
-            this.chkAutoCreateCensus = new System.Windows.Forms.CheckBox();
             this.chkShowWorldEvents = new System.Windows.Forms.CheckBox();
-            this.chkAddCreatedLocations = new System.Windows.Forms.CheckBox();
             this.chkIgnoreFactTypeWarnings = new System.Windows.Forms.CheckBox();
             this.chkTreatFemaleAsUnknown = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -73,35 +66,10 @@
             this.chkAllowEmptyLocations.UseVisualStyleBackColor = true;
             this.chkAllowEmptyLocations.CheckedChanged += new System.EventHandler(this.ChkAllowEmptyLocations_CheckedChanged);
             // 
-            // chkCensusResidence
-            // 
-            resources.ApplyResources(this.chkCensusResidence, "chkCensusResidence");
-            this.chkCensusResidence.Checked = true;
-            this.chkCensusResidence.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkCensusResidence.Name = "chkCensusResidence";
-            this.chkCensusResidence.UseVisualStyleBackColor = true;
-            this.chkCensusResidence.CheckedChanged += new System.EventHandler(this.ChkCensusResidence_CheckedChanged);
-            // 
-            // chkTolerateInaccurateCensus
-            // 
-            resources.ApplyResources(this.chkTolerateInaccurateCensus, "chkTolerateInaccurateCensus");
-            this.chkTolerateInaccurateCensus.Checked = true;
-            this.chkTolerateInaccurateCensus.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkTolerateInaccurateCensus.Name = "chkTolerateInaccurateCensus";
-            this.chkTolerateInaccurateCensus.UseVisualStyleBackColor = true;
-            this.chkTolerateInaccurateCensus.CheckedChanged += new System.EventHandler(this.ChkTolerateInaccurateCensus_CheckedChanged);
-            // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            // 
-            // chkFamilyCensus
-            // 
-            resources.ApplyResources(this.chkFamilyCensus, "chkFamilyCensus");
-            this.chkFamilyCensus.Name = "chkFamilyCensus";
-            this.chkFamilyCensus.UseVisualStyleBackColor = true;
-            this.chkFamilyCensus.CheckedChanged += new System.EventHandler(this.ChkFamilyCensus_CheckedChanged);
             // 
             // upDownAge
             // 
@@ -142,25 +110,11 @@
             this.chkMultipleFactForms.Name = "chkMultipleFactForms";
             this.chkMultipleFactForms.UseVisualStyleBackColor = true;
             // 
-            // chkCompactCensusRef
-            // 
-            resources.ApplyResources(this.chkCompactCensusRef, "chkCompactCensusRef");
-            this.chkCompactCensusRef.Name = "chkCompactCensusRef";
-            this.chkCompactCensusRef.UseVisualStyleBackColor = true;
-            // 
             // chkUseAlias
             // 
             resources.ApplyResources(this.chkUseAlias, "chkUseAlias");
             this.chkUseAlias.Name = "chkUseAlias";
             this.chkUseAlias.UseVisualStyleBackColor = true;
-            // 
-            // chkHideMissingTagged
-            // 
-            resources.ApplyResources(this.chkHideMissingTagged, "chkHideMissingTagged");
-            this.chkHideMissingTagged.Checked = true;
-            this.chkHideMissingTagged.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkHideMissingTagged.Name = "chkHideMissingTagged";
-            this.chkHideMissingTagged.UseVisualStyleBackColor = true;
             // 
             // chkReverseLocations
             // 
@@ -169,15 +123,6 @@
             this.chkReverseLocations.UseVisualStyleBackColor = true;
             this.chkReverseLocations.CheckedChanged += new System.EventHandler(this.ChkReverseLocations_CheckedChanged);
             // 
-            // chkAutoCreateCensus
-            // 
-            resources.ApplyResources(this.chkAutoCreateCensus, "chkAutoCreateCensus");
-            this.chkAutoCreateCensus.Checked = true;
-            this.chkAutoCreateCensus.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAutoCreateCensus.Name = "chkAutoCreateCensus";
-            this.chkAutoCreateCensus.UseVisualStyleBackColor = true;
-            this.chkAutoCreateCensus.CheckedChanged += new System.EventHandler(this.ChkAutoCreateCensus_CheckedChanged);
-            // 
             // chkShowWorldEvents
             // 
             resources.ApplyResources(this.chkShowWorldEvents, "chkShowWorldEvents");
@@ -185,15 +130,6 @@
             this.chkShowWorldEvents.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkShowWorldEvents.Name = "chkShowWorldEvents";
             this.chkShowWorldEvents.UseVisualStyleBackColor = true;
-            // 
-            // chkAddCreatedLocations
-            // 
-            resources.ApplyResources(this.chkAddCreatedLocations, "chkAddCreatedLocations");
-            this.chkAddCreatedLocations.Checked = true;
-            this.chkAddCreatedLocations.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAddCreatedLocations.Name = "chkAddCreatedLocations";
-            this.chkAddCreatedLocations.UseVisualStyleBackColor = true;
-            this.chkAddCreatedLocations.CheckedChanged += new System.EventHandler(this.ChkAddCreatedLocations_CheckedChanged);
             // 
             // chkIgnoreFactTypeWarnings
             // 
@@ -216,21 +152,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.chkTreatFemaleAsUnknown);
             this.Controls.Add(this.chkIgnoreFactTypeWarnings);
-            this.Controls.Add(this.chkAddCreatedLocations);
             this.Controls.Add(this.chkShowWorldEvents);
-            this.Controls.Add(this.chkAutoCreateCensus);
             this.Controls.Add(this.chkReverseLocations);
-            this.Controls.Add(this.chkHideMissingTagged);
             this.Controls.Add(this.chkUseAlias);
-            this.Controls.Add(this.chkCompactCensusRef);
             this.Controls.Add(this.chkMultipleFactForms);
             this.Controls.Add(this.chkUseBurials);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.upDownAge);
-            this.Controls.Add(this.chkFamilyCensus);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.chkTolerateInaccurateCensus);
-            this.Controls.Add(this.chkCensusResidence);
             this.Controls.Add(this.chkAllowEmptyLocations);
             this.Controls.Add(this.chkUseBaptisms);
             this.Name = "GeneralSettingsUI";
@@ -246,21 +175,14 @@
 		private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.CheckBox chkUseBaptisms;
         private System.Windows.Forms.CheckBox chkAllowEmptyLocations;
-        private System.Windows.Forms.CheckBox chkCensusResidence;
-        private System.Windows.Forms.CheckBox chkTolerateInaccurateCensus;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox chkFamilyCensus;
         private System.Windows.Forms.NumericUpDown upDownAge;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkUseBurials;
         private System.Windows.Forms.CheckBox chkMultipleFactForms;
-        private System.Windows.Forms.CheckBox chkCompactCensusRef;
         private System.Windows.Forms.CheckBox chkUseAlias;
-        private System.Windows.Forms.CheckBox chkHideMissingTagged;
         private System.Windows.Forms.CheckBox chkReverseLocations;
         private System.Windows.Forms.CheckBox chkShowWorldEvents;
-        private System.Windows.Forms.CheckBox chkAutoCreateCensus;
-        private System.Windows.Forms.CheckBox chkAddCreatedLocations;
         private System.Windows.Forms.CheckBox chkIgnoreFactTypeWarnings;
         private System.Windows.Forms.CheckBox chkTreatFemaleAsUnknown;
 

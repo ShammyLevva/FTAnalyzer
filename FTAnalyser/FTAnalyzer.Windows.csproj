@@ -328,6 +328,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>NonGedcomDate.settings</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\CensusSettingsUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\CensusSettingsUI.Designer.cs">
+      <DependentUpon>CensusSettingsUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\FileHandlingUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -551,6 +557,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Controls\CensusCountry.resx">
       <DependentUpon>CensusCountry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\CensusSettingsUI.resx">
+      <DependentUpon>CensusSettingsUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\FileHandlingUI.resx">
       <DependentUpon>FileHandlingUI.cs</DependentUpon>

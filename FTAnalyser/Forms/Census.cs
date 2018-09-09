@@ -44,7 +44,7 @@ namespace FTAnalyzer.Forms
             if (defaultProvider == null)
                 defaultProvider = "FamilySearch";
             cbCensusSearchProvider.Text = defaultProvider;
-            GeneralSettingsUI.CompactCensusRefChanged += new EventHandler(RefreshCensusReferences);
+            CensusSettingsUI.CompactCensusRefChanged += new EventHandler(RefreshCensusReferences);
         }
 
         public void SetupCensus(Predicate<CensusIndividual> filter)

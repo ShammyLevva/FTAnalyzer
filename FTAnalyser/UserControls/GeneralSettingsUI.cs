@@ -14,17 +14,10 @@ namespace FTAnalyzer.UserControls
 			chkUseBaptisms.Checked = Properties.GeneralSettings.Default.UseBaptismDates;
             chkUseBurials.Checked = Properties.GeneralSettings.Default.UseBurialDates;
 			chkAllowEmptyLocations.Checked = Properties.GeneralSettings.Default.AllowEmptyLocations;
-			chkCensusResidence.Checked = Properties.GeneralSettings.Default.UseResidenceAsCensus;
-			chkTolerateInaccurateCensus.Checked = Properties.GeneralSettings.Default.TolerateInaccurateCensusDate;
-            chkFamilyCensus.Checked = Properties.GeneralSettings.Default.OnlyCensusParents;
             chkMultipleFactForms.Checked = Properties.GeneralSettings.Default.MultipleFactForms;
-            chkCompactCensusRef.Checked = Properties.GeneralSettings.Default.UseCompactCensusRef;
             upDownAge.Value = Properties.GeneralSettings.Default.MinParentalAge;
             chkUseAlias.Checked = Properties.GeneralSettings.Default.ShowAliasInName;
-            chkHideMissingTagged.Checked = Properties.GeneralSettings.Default.HidePeopleWithMissingTag;
             chkReverseLocations.Checked = Properties.GeneralSettings.Default.ReverseLocations;
-            chkAutoCreateCensus.Checked = Properties.GeneralSettings.Default.AutoCreateCensusFacts;
-            chkAddCreatedLocations.Checked = Properties.GeneralSettings.Default.AddCreatedLocations;
             chkShowWorldEvents.Checked = Properties.GeneralSettings.Default.ShowWorldEvents;
             chkIgnoreFactTypeWarnings.Checked = Properties.GeneralSettings.Default.IgnoreFactTypeWarnings;
             chkTreatFemaleAsUnknown.Checked = Properties.GeneralSettings.Default.TreatFemaleSurnamesAsUnknown;
@@ -37,23 +30,15 @@ namespace FTAnalyzer.UserControls
 			Properties.GeneralSettings.Default.UseBaptismDates = chkUseBaptisms.Checked;
             Properties.GeneralSettings.Default.UseBurialDates = chkUseBurials.Checked;
             Properties.GeneralSettings.Default.AllowEmptyLocations = chkAllowEmptyLocations.Checked;
-			Properties.GeneralSettings.Default.UseResidenceAsCensus = chkCensusResidence.Checked;
-			Properties.GeneralSettings.Default.TolerateInaccurateCensusDate = chkTolerateInaccurateCensus.Checked;
-            Properties.GeneralSettings.Default.OnlyCensusParents = chkFamilyCensus.Checked;
             Properties.GeneralSettings.Default.MinParentalAge = (int)upDownAge.Value;
             Properties.GeneralSettings.Default.MultipleFactForms = chkMultipleFactForms.Checked;
-            Properties.GeneralSettings.Default.UseCompactCensusRef = chkCompactCensusRef.Checked;
             Properties.GeneralSettings.Default.ShowAliasInName = chkUseAlias.Checked;
-            Properties.GeneralSettings.Default.HidePeopleWithMissingTag = chkHideMissingTagged.Checked;
             Properties.GeneralSettings.Default.ReverseLocations = chkReverseLocations.Checked;
-            Properties.GeneralSettings.Default.AutoCreateCensusFacts = chkAutoCreateCensus.Checked;
-            Properties.GeneralSettings.Default.AddCreatedLocations = chkAddCreatedLocations.Checked;
             Properties.GeneralSettings.Default.ShowWorldEvents = chkShowWorldEvents.Checked;
             Properties.GeneralSettings.Default.IgnoreFactTypeWarnings = chkIgnoreFactTypeWarnings.Checked;
             Properties.GeneralSettings.Default.TreatFemaleSurnamesAsUnknown = chkTreatFemaleAsUnknown.Checked;
             Properties.GeneralSettings.Default.Save();
             OnMinParentalAgeChanged();
-            OnCompactCensusRefChanged();
             OnAliasInNameChanged();
         }
 
@@ -120,38 +105,12 @@ namespace FTAnalyzer.UserControls
             AliasInNameChanged?.Invoke(null, EventArgs.Empty);
         }
 
-        public static event EventHandler CompactCensusRefChanged;
-        protected static void OnCompactCensusRefChanged()
-        {
-            CompactCensusRefChanged?.Invoke(null, EventArgs.Empty);
-        }
-
         private void ChkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e)
 		{
 			Properties.GeneralSettings.Default.ReloadRequired = true;
 		}
 
-		private void ChkTolerateInaccurateCensus_CheckedChanged(object sender, EventArgs e)
-		{
-			Properties.GeneralSettings.Default.ReloadRequired = true;
-		}
-
-		private void ChkCensusResidence_CheckedChanged(object sender, EventArgs e)
-		{
-			Properties.GeneralSettings.Default.ReloadRequired = true;
-		}
-
-        private void ChkFamilyCensus_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.GeneralSettings.Default.ReloadRequired = true;
-        }
-
         private void ChkReverseLocations_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.GeneralSettings.Default.ReloadRequired = true;
-        }
-
-        private void ChkAutoCreateCensus_CheckedChanged(object sender, EventArgs e)
         {
             Properties.GeneralSettings.Default.ReloadRequired = true;
         }
