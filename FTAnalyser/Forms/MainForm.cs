@@ -64,7 +64,6 @@ namespace FTAnalyzer
             RegisterEventHandlers();
             Text = "Family Tree Analyzer v" + VERSION;
             SetHeightWidth();
-            LbProgramName.Font = handwritingFont;
             dgSurnames.AutoGenerateColumns = false;
             dgDuplicates.AutoGenerateColumns = false;
             rfhDuplicates = new ReportFormHelper(this, "Duplicates", dgDuplicates, ResetDuplicatesTable, "Duplicates", false);
@@ -83,8 +82,24 @@ namespace FTAnalyzer
             fonts.AddMemoryFont(fontPtr, Resources.KUNSTLER.Length);
             NativeMethods.AddFontMemResourceEx(fontPtr, (uint)Resources.KUNSTLER.Length, IntPtr.Zero, ref dummy);
             System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
-            handwritingFont = new Font(fonts.Families[0], 52.0F, FontStyle.Bold);
+            switch(FontSettings.Default.FontNumber)
+            {
+                case 1:
+                    handwritingFont = new Font(fonts.Families[0], 52.0F, FontStyle.Bold);
+                    break;
+                case 2:
+                    handwritingFont = new Font(fonts.Families[0], 72.0F, FontStyle.Bold);
+                    break;
+                case 3:
+                    handwritingFont = new Font(fonts.Families[0], 82.0F, FontStyle.Bold);
+                    break;
+                case 4:
+                    handwritingFont = new Font(fonts.Families[0], 100.0F, FontStyle.Bold);
+                    break;
+            }
+            LbProgramName.Font = handwritingFont;
             SpecialMethods.SetFonts(this);
+            UpdateDataErrorsDisplay();
         }
 
         private void RegisterEventHandlers()
@@ -629,11 +644,15 @@ namespace FTAnalyzer
             tsCountLabel.Text = Messages.Count + errors.Count;
             tsHintsLabel.Text = Messages.Hints_Individual;
             int index = 0;
+            int maxwidth = 0;
             foreach (DataErrorGroup dataError in ckbDataErrors.Items)
             {
+                if (dataError.ToString().Length > maxwidth)
+                    maxwidth = dataError.ToString().Length;
                 bool itemChecked = ckbDataErrors.GetItemChecked(index++);
                 Application.UserAppDataRegistry.SetValue(dataError.ToString(), itemChecked);
             }
+            ckbDataErrors.ColumnWidth = (int)(maxwidth * FontSettings.Default.FontWidth);
             HourGlass(false);
         }
 
@@ -685,8 +704,7 @@ namespace FTAnalyzer
             dgDataErrors.AllowUserToResizeColumns = true;
             dgDataErrors.Focus();
             mnuPrint.Enabled = true;
-            tsCountLabel.Text = Messages.Count + errors.Count;
-            tsHintsLabel.Text = Messages.Hints_Individual;
+            UpdateDataErrorsDisplay();
         }
 
         public SortableBindingList<DataError> DataErrors(CheckedListBox list)
@@ -889,7 +907,7 @@ namespace FTAnalyzer
 
         private void Options_GlobalFontChanged(object sender, EventArgs e)
         {
-            SpecialMethods.SetFonts(this);
+            SetupFonts();
         }
         #endregion
 

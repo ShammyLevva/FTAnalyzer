@@ -119,7 +119,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(0, 408);
+            this.label1.Location = new System.Drawing.Point(0, 395);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(203, 13);
             this.label1.TabIndex = 37;

@@ -46,5 +46,17 @@ namespace FTAnalyzer.Properties {
                 this["FontNumber"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5.8")]
+        public float FontWidth {
+            get {
+                return ((float)(this["FontWidth"]));
+            }
+            set {
+                this["FontWidth"] = value;
+            }
+        }
     }
 }

@@ -35,7 +35,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -221,6 +221,17 @@
             this.tabPlaces = new System.Windows.Forms.TabPage();
             this.dgPlaces = new System.Windows.Forms.DataGridView();
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.LbProgramName = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.pbRelationships = new System.Windows.Forms.ProgressBar();
+            this.label6 = new System.Windows.Forms.Label();
+            this.pbFamilies = new System.Windows.Forms.ProgressBar();
+            this.label5 = new System.Windows.Forms.Label();
+            this.pbIndividuals = new System.Windows.Forms.ProgressBar();
+            this.label4 = new System.Windows.Forms.Label();
+            this.pbSources = new System.Windows.Forms.ProgressBar();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.tabSelector = new System.Windows.Forms.TabControl();
             this.tabMainLists = new System.Windows.Forms.TabPage();
@@ -301,17 +312,6 @@
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.pbRelationships = new System.Windows.Forms.ProgressBar();
-            this.label6 = new System.Windows.Forms.Label();
-            this.pbFamilies = new System.Windows.Forms.ProgressBar();
-            this.label5 = new System.Windows.Forms.Label();
-            this.pbIndividuals = new System.Windows.Forms.ProgressBar();
-            this.label4 = new System.Windows.Forms.Label();
-            this.pbSources = new System.Windows.Forms.ProgressBar();
-            this.LbProgramName = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -348,6 +348,8 @@
             this.tabPlaces.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgPlaces)).BeginInit();
             this.tabDisplayProgress.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabSelector.SuspendLayout();
             this.tabMainLists.SuspendLayout();
             this.tabMainListsSelector.SuspendLayout();
@@ -374,8 +376,6 @@
             this.tabFacts.SuspendLayout();
             this.tabToday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).BeginInit();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -1026,14 +1026,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 166);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -2232,6 +2232,107 @@
             this.tabDisplayProgress.Text = "Gedcom Stats";
             this.tabDisplayProgress.UseVisualStyleBackColor = true;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Controls.Add(this.LbProgramName);
+            this.panel2.Controls.Add(this.label7);
+            this.panel2.Controls.Add(this.pbRelationships);
+            this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.pbFamilies);
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.pbIndividuals);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.pbSources);
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1074, 109);
+            this.panel2.TabIndex = 12;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(971, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 18;
+            this.pictureBox1.TabStop = false;
+            // 
+            // LbProgramName
+            // 
+            this.LbProgramName.AutoSize = true;
+            this.LbProgramName.Font = new System.Drawing.Font("Kunstler Script", 52F, System.Drawing.FontStyle.Bold);
+            this.LbProgramName.Location = new System.Drawing.Point(456, 10);
+            this.LbProgramName.Name = "LbProgramName";
+            this.LbProgramName.Size = new System.Drawing.Size(522, 76);
+            this.LbProgramName.TabIndex = 17;
+            this.LbProgramName.Text = "Family Tree Analyzer";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 79);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(128, 13);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Relationships && Locations";
+            // 
+            // pbRelationships
+            // 
+            this.pbRelationships.Location = new System.Drawing.Point(134, 76);
+            this.pbRelationships.Name = "pbRelationships";
+            this.pbRelationships.Size = new System.Drawing.Size(316, 16);
+            this.pbRelationships.TabIndex = 15;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 57);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(85, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Loading Families";
+            // 
+            // pbFamilies
+            // 
+            this.pbFamilies.Location = new System.Drawing.Point(134, 54);
+            this.pbFamilies.Name = "pbFamilies";
+            this.pbFamilies.Size = new System.Drawing.Size(316, 16);
+            this.pbFamilies.TabIndex = 13;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 35);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(98, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Loading Individuals";
+            // 
+            // pbIndividuals
+            // 
+            this.pbIndividuals.Location = new System.Drawing.Point(134, 32);
+            this.pbIndividuals.Name = "pbIndividuals";
+            this.pbIndividuals.Size = new System.Drawing.Size(316, 16);
+            this.pbIndividuals.TabIndex = 11;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 13);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(87, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Loading Sources";
+            // 
+            // pbSources
+            // 
+            this.pbSources.Location = new System.Drawing.Point(134, 10);
+            this.pbSources.Name = "pbSources";
+            this.pbSources.Size = new System.Drawing.Size(316, 16);
+            this.pbSources.TabIndex = 9;
+            // 
             // rtbOutput
             // 
             this.rtbOutput.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -2479,6 +2580,7 @@
             this.ckbDataErrors.ScrollAlwaysVisible = true;
             this.ckbDataErrors.Size = new System.Drawing.Size(1069, 109);
             this.ckbDataErrors.TabIndex = 0;
+            this.ckbDataErrors.UseCompatibleTextRendering = true;
             this.ckbDataErrors.SelectedIndexChanged += new System.EventHandler(this.CkbDataErrors_SelectedIndexChanged);
             // 
             // tabDuplicates
@@ -3139,106 +3241,6 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Controls.Add(this.LbProgramName);
-            this.panel2.Controls.Add(this.label7);
-            this.panel2.Controls.Add(this.pbRelationships);
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.pbFamilies);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.pbIndividuals);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.pbSources);
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1074, 109);
-            this.panel2.TabIndex = 12;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 79);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(128, 13);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "Relationships && Locations";
-            // 
-            // pbRelationships
-            // 
-            this.pbRelationships.Location = new System.Drawing.Point(134, 76);
-            this.pbRelationships.Name = "pbRelationships";
-            this.pbRelationships.Size = new System.Drawing.Size(316, 16);
-            this.pbRelationships.TabIndex = 15;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 57);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(85, 13);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Loading Families";
-            // 
-            // pbFamilies
-            // 
-            this.pbFamilies.Location = new System.Drawing.Point(134, 54);
-            this.pbFamilies.Name = "pbFamilies";
-            this.pbFamilies.Size = new System.Drawing.Size(316, 16);
-            this.pbFamilies.TabIndex = 13;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 35);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(98, 13);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Loading Individuals";
-            // 
-            // pbIndividuals
-            // 
-            this.pbIndividuals.Location = new System.Drawing.Point(134, 32);
-            this.pbIndividuals.Name = "pbIndividuals";
-            this.pbIndividuals.Size = new System.Drawing.Size(316, 16);
-            this.pbIndividuals.TabIndex = 11;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 13);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Loading Sources";
-            // 
-            // pbSources
-            // 
-            this.pbSources.Location = new System.Drawing.Point(134, 10);
-            this.pbSources.Name = "pbSources";
-            this.pbSources.Size = new System.Drawing.Size(316, 16);
-            this.pbSources.TabIndex = 9;
-            // 
-            // LbProgramName
-            // 
-            this.LbProgramName.AutoSize = true;
-            this.LbProgramName.Font = new System.Drawing.Font("Kunstler Script", 52F, System.Drawing.FontStyle.Bold);
-            this.LbProgramName.Location = new System.Drawing.Point(456, 10);
-            this.LbProgramName.Name = "LbProgramName";
-            this.LbProgramName.Size = new System.Drawing.Size(522, 76);
-            this.LbProgramName.TabIndex = 17;
-            this.LbProgramName.Text = "Family Tree Analyzer";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(971, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox1.TabIndex = 18;
-            this.pictureBox1.TabStop = false;
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -3303,6 +3305,9 @@
             this.tabPlaces.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgPlaces)).EndInit();
             this.tabDisplayProgress.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabSelector.ResumeLayout(false);
             this.tabMainLists.ResumeLayout(false);
             this.tabMainListsSelector.ResumeLayout(false);
@@ -3332,9 +3337,6 @@
             this.tabToday.ResumeLayout(false);
             this.tabToday.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
