@@ -1,3 +1,7 @@
+#### New Release Version 6.6.0.0, 9th September 2018  
+**Updates**  
+New Font setting feature - allows you to change default font used
+
 ### Updated Release Version 6.5.1.2, 5th August 2018  
 **BugFixes**  
 Fix Bug with dashes causing failed test classes
