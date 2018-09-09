@@ -352,5 +352,10 @@ namespace FTAnalyzer.Forms
         {
             this.Dispose();
         }
+
+        private void GoogleMap_Load(object sender, EventArgs e)
+        {
+            SpecialMethods.SetFonts(this);
+        }
     }
 }

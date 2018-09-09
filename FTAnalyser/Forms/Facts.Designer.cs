@@ -415,6 +415,7 @@
             this.Name = "Facts";
             this.Text = "Facts";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Facts_FormClosed);
+            this.Load += new System.EventHandler(this.Facts_Load);
             this.TextChanged += new System.EventHandler(this.Facts_TextChanged);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

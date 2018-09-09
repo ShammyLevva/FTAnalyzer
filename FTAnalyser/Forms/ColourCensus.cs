@@ -1,15 +1,10 @@
-﻿using System;
+﻿using FTAnalyzer.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using Printing.DataGridViewPrint.Tools;
-using FTAnalyzer.Utilities;
-using System.Web;
-using System.Diagnostics;
 using static FTAnalyzer.ColourValues;
 
 namespace FTAnalyzer.Forms
@@ -33,8 +28,8 @@ namespace FTAnalyzer.Forms
             ExtensionMethods.DoubleBuffered(dgReportSheet, true);
             this.country = country;
             this.reportList = new SortableBindingList<IDisplayColourCensus>(reportList);
-            reportFormHelper = new ReportFormHelper(this, "Colour Census Report", dgReportSheet, this.ResetTable, "Colour Census");
-            
+            reportFormHelper = new ReportFormHelper(this, "Colour Census Report", dgReportSheet, ResetTable, "Colour Census");
+
             boldFont = new Font(dgReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
             styles = new Dictionary<int, DataGridViewCellStyle>();
             DataGridViewCellStyle notAlive = new DataGridViewCellStyle();
@@ -237,7 +232,8 @@ namespace FTAnalyzer.Forms
                             try
                             {
                                 ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
-                            } catch (CensusSearchException ex)
+                            }
+                            catch (CensusSearchException ex)
                             {
                                 MessageBox.Show(ex.Message);
                             }
@@ -264,19 +260,19 @@ namespace FTAnalyzer.Forms
         private List<IDisplayColourCensus> BuildFilter(CensusColour toFind, bool all)
         {
             List<IDisplayColourCensus> result = new List<IDisplayColourCensus>();
-            foreach(IDisplayColourCensus row in this.reportList)
+            foreach (IDisplayColourCensus row in reportList)
             {
                 if (all)
                 {
                     if (toFind == CensusColour.CENSUS_PRESENT_NOT_LC_YEAR)
                     {  // also check for value of 4 which is also green
-                        if ((row.C1841 == CensusColour.CENSUS_PRESENT_NOT_LC_YEAR || row.C1841 == CensusColour.CENSUS_PRESENT_LC_PRESENT || row.C1841 == CensusColour.NOT_ALIVE) && 
+                        if ((row.C1841 == CensusColour.CENSUS_PRESENT_NOT_LC_YEAR || row.C1841 == CensusColour.CENSUS_PRESENT_LC_PRESENT || row.C1841 == CensusColour.NOT_ALIVE) &&
                             (row.C1851 == toFind || row.C1851 == CensusColour.NOT_ALIVE) &&
-                            (row.C1861 == toFind || row.C1861 == CensusColour.NOT_ALIVE) && 
+                            (row.C1861 == toFind || row.C1861 == CensusColour.NOT_ALIVE) &&
                             (row.C1871 == toFind || row.C1871 == CensusColour.NOT_ALIVE) &&
-                            (row.C1881 == toFind || row.C1881 == CensusColour.CENSUS_PRESENT_LC_PRESENT || row.C1881 == CensusColour.NOT_ALIVE) && 
+                            (row.C1881 == toFind || row.C1881 == CensusColour.CENSUS_PRESENT_LC_PRESENT || row.C1881 == CensusColour.NOT_ALIVE) &&
                             (row.C1891 == toFind || row.C1891 == CensusColour.NOT_ALIVE) &&
-                            (row.C1901 == toFind || row.C1901 == CensusColour.NOT_ALIVE) && 
+                            (row.C1901 == toFind || row.C1901 == CensusColour.NOT_ALIVE) &&
                             (row.C1911 == toFind || row.C1911 == CensusColour.CENSUS_PRESENT_LC_PRESENT || row.C1911 == CensusColour.NOT_ALIVE) &&
                             (row.C1939 == toFind || row.C1939 == CensusColour.CENSUS_PRESENT_LC_PRESENT || row.C1939 == CensusColour.NOT_ALIVE) &&
                             !(row.C1841 == CensusColour.NOT_ALIVE && row.C1851 == CensusColour.NOT_ALIVE && row.C1861 == CensusColour.NOT_ALIVE && row.C1871 == CensusColour.NOT_ALIVE &&
@@ -289,11 +285,11 @@ namespace FTAnalyzer.Forms
                             (row.C1881 == toFind || row.C1881 == CensusColour.NOT_ALIVE) && (row.C1891 == toFind || row.C1891 == CensusColour.NOT_ALIVE) &&
                             (row.C1901 == toFind || row.C1901 == CensusColour.NOT_ALIVE) && (row.C1911 == toFind || row.C1911 == CensusColour.NOT_ALIVE) &&
                             (row.C1939 == toFind || row.C1939 == CensusColour.NOT_ALIVE) &&
-                            !(row.C1841 == CensusColour.NOT_ALIVE && row.C1851 == CensusColour.NOT_ALIVE && row.C1861 == CensusColour.NOT_ALIVE && 
-                              row.C1871 == CensusColour.NOT_ALIVE && row.C1881 == CensusColour.NOT_ALIVE && row.C1891 == CensusColour.NOT_ALIVE && 
-                              row.C1901 == CensusColour.NOT_ALIVE && row.C1911 == CensusColour.NOT_ALIVE && row.C1939 == CensusColour.NOT_ALIVE && 
+                            !(row.C1841 == CensusColour.NOT_ALIVE && row.C1851 == CensusColour.NOT_ALIVE && row.C1861 == CensusColour.NOT_ALIVE &&
+                              row.C1871 == CensusColour.NOT_ALIVE && row.C1881 == CensusColour.NOT_ALIVE && row.C1891 == CensusColour.NOT_ALIVE &&
+                              row.C1901 == CensusColour.NOT_ALIVE && row.C1911 == CensusColour.NOT_ALIVE && row.C1939 == CensusColour.NOT_ALIVE &&
                               toFind != CensusColour.NOT_ALIVE)) // exclude all greys
-                            result.Add(row);
+                        result.Add(row);
                 }
                 else
                 {
@@ -302,19 +298,19 @@ namespace FTAnalyzer.Forms
                         result.Add(row);
                 }
 
-            }   
+            }
             return result;
         }
 
         private void CbFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
             List<IDisplayColourCensus> list;
             switch (cbFilter.SelectedIndex)
             {
                 case -1: // nothing selected
                 case 0: // All Individuals
-                    dgReportSheet.DataSource = this.reportList;
+                    dgReportSheet.DataSource = reportList;
                     break;
                 case 1: // None Found (All Red)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(CensusColour.NO_CENSUS, true));
@@ -353,7 +349,7 @@ namespace FTAnalyzer.Forms
             dgReportSheet.Focus();
             ApplyDefaultSort();
             tsRecords.Text = Properties.Messages.Count + dgReportSheet.RowCount + " records listed.";
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         private void MnuExportToExcel_Click(object sender, EventArgs e)
@@ -392,7 +388,12 @@ namespace FTAnalyzer.Forms
 
         private void ColourCensus_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.Dispose();
+            Dispose();
+        }
+
+        private void ColourCensus_Load(object sender, EventArgs e)
+        {
+            SpecialMethods.SetFonts(this);
         }
     }
 }

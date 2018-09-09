@@ -360,6 +360,7 @@
             this.Name = "MapIndividuals";
             this.Text = "Individuals";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MapIndividuals_FormClosed);
+            this.Load += new System.EventHandler(this.MapIndividuals_Load);
             this.TextChanged += new System.EventHandler(this.Facts_TextChanged);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

@@ -169,5 +169,10 @@ namespace FTAnalyzer
             DatabaseHelper.GeoLocationUpdated -= DatabaseHelper_GeoLocationUpdated;
             this.Dispose();
         }
+
+        private void MapIndividuals_Load(object sender, EventArgs e)
+        {
+            SpecialMethods.SetFonts(this);
+        }
     }
 }

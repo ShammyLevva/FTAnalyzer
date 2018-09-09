@@ -72,6 +72,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "StatisticsForm";
             this.Text = "Statistics";
+            this.Load += new System.EventHandler(this.StatisticsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgStatistics)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

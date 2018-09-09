@@ -233,6 +233,7 @@ namespace FTAnalyzer.Forms
             this.Text = "EditLocation";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditLocation_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EditLocation_FormClosed);
+            this.Load += new System.EventHandler(this.EditLocation_Load);
             this.mapZoomToolStrip.ResumeLayout(false);
             this.mapZoomToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbOpacity)).EndInit();

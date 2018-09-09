@@ -881,6 +881,7 @@
             this.Name = "ColourCensus";
             this.Text = "Colour Census Report Result";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ColourCensus_FormClosed);
+            this.Load += new System.EventHandler(this.ColourCensus_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgReportSheet)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
             this.statusStrip.ResumeLayout(false);

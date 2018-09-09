@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using FTAnalyzer.Utilities;
+using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -20,10 +21,10 @@ namespace FTAnalyzer.Forms
             for (int i = 3; i < 20; i++)
             {
                 string range = (i * 5) + " to " + (i * 5 + 4);
-                serFatherSon.Points.Add(new DataPoint(i*5, chartData[0, i, 0]));
-                serFatherDaughter.Points.Add(new DataPoint(i*5, chartData[0, i, 1]));
-                serMotherSon.Points.Add(new DataPoint(i*5, chartData[1, i, 0]));
-                serMotherDaughter.Points.Add(new DataPoint(i*5, chartData[1, i, 1]));
+                serFatherSon.Points.Add(new DataPoint(i * 5, chartData[0, i, 0]));
+                serFatherDaughter.Points.Add(new DataPoint(i * 5, chartData[0, i, 1]));
+                serMotherSon.Points.Add(new DataPoint(i * 5, chartData[1, i, 0]));
+                serMotherDaughter.Points.Add(new DataPoint(i * 5, chartData[1, i, 1]));
             }
             chartDisplay.Series.Add(serFatherSon);
             chartDisplay.Series.Add(serFatherDaughter);
@@ -39,7 +40,12 @@ namespace FTAnalyzer.Forms
 
         private void Chart_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.Dispose();
+            Dispose();
+        }
+
+        private void Chart_Load(object sender, System.EventArgs e)
+        {
+            SpecialMethods.SetFonts(this);
         }
     }
 }

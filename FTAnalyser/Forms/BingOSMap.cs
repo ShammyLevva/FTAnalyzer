@@ -1,4 +1,5 @@
 ﻿using FTAnalyzer.Mapping;
+using FTAnalyzer.Utilities;
 using System;
 using System.IO;
 using System.Windows.Forms;
@@ -90,6 +91,11 @@ namespace FTAnalyzer.Forms
         private void BingOSMap_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Dispose();
+        }
+
+        private void BingOSMap_Load(object sender, EventArgs e)
+        {
+            SpecialMethods.SetFonts(this);
         }
     }
 }

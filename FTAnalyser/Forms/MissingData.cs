@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using FTAnalyzer.Utilities;
+using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms
 {
@@ -20,6 +21,11 @@ namespace FTAnalyzer.Forms
             dsBirth.Scores.JustYearDate = 25;
             dsBirth.Scores.ApproxDate = 10;
             dsBirth.Scores.ExactDate = 0;
+        }
+
+        private void MissingData_Load(object sender, System.EventArgs e)
+        {
+            SpecialMethods.SetFonts(this);
         }
     }
 }

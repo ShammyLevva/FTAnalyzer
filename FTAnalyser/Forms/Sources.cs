@@ -88,6 +88,11 @@ namespace FTAnalyzer.Forms
                 MainForm.DisposeDuplicateForms(factForm);
                 factForm.Show();
             }
-        }   
+        }
+
+        private void Sources_Load(object sender, EventArgs e)
+        {
+            SpecialMethods.SetFonts(this);
+        }
     }
 }

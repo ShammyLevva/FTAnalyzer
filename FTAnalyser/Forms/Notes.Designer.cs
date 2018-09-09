@@ -50,6 +50,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Notes";
             this.Text = "Notes";
+            this.Load += new System.EventHandler(this.Notes_Load);
             this.ResumeLayout(false);
 
         }

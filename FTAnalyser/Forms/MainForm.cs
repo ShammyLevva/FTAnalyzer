@@ -1,4 +1,11 @@
-﻿using System;
+﻿using FTAnalyzer.Filters;
+using FTAnalyzer.Forms;
+using FTAnalyzer.Properties;
+using FTAnalyzer.UserControls;
+using FTAnalyzer.Utilities;
+using Ionic.Zip;
+using Printing.DataGridViewPrint.Tools;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -8,19 +15,12 @@ using System.Drawing.Printing;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
-using FTAnalyzer.Filters;
-using FTAnalyzer.Forms;
-using FTAnalyzer.UserControls;
-using FTAnalyzer.Utilities;
-using FTAnalyzer.Properties;
-using Ionic.Zip;
-using Printing.DataGridViewPrint.Tools;
 using System.Text;
-using System.Web;
-using System.Threading.Tasks;
-using System.Xml;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Web;
+using System.Windows.Forms;
+using System.Xml;
 
 namespace FTAnalyzer
 {
@@ -64,7 +64,7 @@ namespace FTAnalyzer
             RegisterEventHandlers();
             Text = "Family Tree Analyzer v" + VERSION;
             SetHeightWidth();
-            label19.Font = handwritingFont;
+            LbProgramName.Font = handwritingFont;
             dgSurnames.AutoGenerateColumns = false;
             dgDuplicates.AutoGenerateColumns = false;
             rfhDuplicates = new ReportFormHelper(this, "Duplicates", dgDuplicates, ResetDuplicatesTable, "Duplicates", false);
@@ -76,14 +76,15 @@ namespace FTAnalyzer
         {
             boldFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Bold);
             normalFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Regular);
-            byte[] fontData = Properties.Resources.KUNSTLER;
+            byte[] fontData = Resources.KUNSTLER;
             IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
             System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
             uint dummy = 0;
-            fonts.AddMemoryFont(fontPtr, Properties.Resources.KUNSTLER.Length);
-            NativeMethods.AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.KUNSTLER.Length, IntPtr.Zero, ref dummy);
+            fonts.AddMemoryFont(fontPtr, Resources.KUNSTLER.Length);
+            NativeMethods.AddFontMemResourceEx(fontPtr, (uint)Resources.KUNSTLER.Length, IntPtr.Zero, ref dummy);
             System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
             handwritingFont = new Font(fonts.Families[0], 52.0F, FontStyle.Bold);
+            SpecialMethods.SetFonts(this);
         }
 
         private void RegisterEventHandlers()
@@ -91,6 +92,7 @@ namespace FTAnalyzer
             Options.ReloadRequired += new EventHandler(Options_ReloadData);
             GeneralSettingsUI.MinParentalAgeChanged += new EventHandler(Options_MinimumParentalAgeChanged);
             GeneralSettingsUI.AliasInNameChanged += new EventHandler(Options_AliasInNameChanged);
+            FontSettingsUI.GlobalFontChanged += new EventHandler(Options_GlobalFontChanged);
         }
 
         private void SetHeightWidth()
@@ -142,7 +144,7 @@ namespace FTAnalyzer
                         ShowMenus(true);
                         HourGlass(false);
                         AddFileToRecentList(filename);
-                        this.Text = "Family Tree Analyzer v" + VERSION + ". Analysing: " + filename;
+                        Text = "Family Tree Analyzer v" + VERSION + ". Analysing: " + filename;
                         MessageBox.Show("Gedcom File " + filename + " Loaded", "FTAnalyzer");
                     }
                     else
@@ -217,7 +219,7 @@ namespace FTAnalyzer
             tabMainListsSelector.SelectedTab = tabIndividuals; // force back to first tab
             tabCtrlLocations.SelectedTab = tabTreeView; // otherwise totals etc look wrong
             treeViewLocations.Nodes.Clear();
-            this.Text = "Family Tree Analyzer v" + VERSION;
+            Text = "Family Tree Analyzer v" + VERSION;
             Application.DoEvents();
         }
 
@@ -334,9 +336,9 @@ namespace FTAnalyzer
         private void HourGlass(bool on)
         {
             if (on)
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
             else
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             Application.DoEvents();
         }
 
@@ -549,7 +551,7 @@ namespace FTAnalyzer
 
         private void BtnBingOSMap_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
             int locType = GetMapLocationType(out FactLocation loc);
             if (loc != null)
             {   // Do geo coding stuff
@@ -565,7 +567,7 @@ namespace FTAnalyzer
                     MessageBox.Show("Unable to find location : " + loc.GetLocation(locType), "FTAnalyzer");
                 }
             }
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         private int GetMapLocationType(out FactLocation loc)
@@ -771,7 +773,7 @@ namespace FTAnalyzer
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
             Application.Exit();
         }
 
@@ -883,6 +885,11 @@ namespace FTAnalyzer
         private void Options_AliasInNameChanged(object sender, EventArgs e)
         {
             ft.SetFullNames();
+        }
+
+        private void Options_GlobalFontChanged(object sender, EventArgs e)
+        {
+            SpecialMethods.SetFonts(this);
         }
         #endregion
 
@@ -1580,13 +1587,13 @@ namespace FTAnalyzer
 
         private void LabLostCousinsWeb_MouseEnter(object sender, EventArgs e)
         {
-            storedCursor = this.Cursor;
-            this.Cursor = Cursors.Hand;
+            storedCursor = Cursor;
+            Cursor = Cursors.Hand;
         }
 
         private void LabLostCousinsWeb_MouseLeave(object sender, EventArgs e)
         {
-            this.Cursor = storedCursor;
+            Cursor = storedCursor;
         }
 
         private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -2216,10 +2223,10 @@ namespace FTAnalyzer
         private void LoadDefaultPosition()
         {
             loading = true;
-            this.Height = 561;
-            this.Width = 1059;
-            this.Top = 50;
-            this.Left = 50;
+            Height = 561;
+            Width = 1059;
+            Top = 50;
+            Left = 50;
             loading = false;
         }
 
@@ -2237,12 +2244,12 @@ namespace FTAnalyzer
 
         private void SavePosition()
         {
-            if (!loading && this.WindowState == FormWindowState.Normal)
+            if (!loading && WindowState == FormWindowState.Normal)
             {  //only save window size if not maximised or minimised
-                Application.UserAppDataRegistry.SetValue("Mainform size - width", this.Width);
-                Application.UserAppDataRegistry.SetValue("Mainform size - height", this.Height);
-                Application.UserAppDataRegistry.SetValue("Mainform position - top", this.Top);
-                Application.UserAppDataRegistry.SetValue("Mainform position - left", this.Left);
+                Application.UserAppDataRegistry.SetValue("Mainform size - width", Width);
+                Application.UserAppDataRegistry.SetValue("Mainform size - height", Height);
+                Application.UserAppDataRegistry.SetValue("Mainform position - top", Top);
+                Application.UserAppDataRegistry.SetValue("Mainform position - left", Left);
             }
         }
         #endregion
@@ -2254,7 +2261,8 @@ namespace FTAnalyzer
         {
             SetDuplicateControlsVisibility(true);
             rfhDuplicates.SaveColumnLayout("DuplicatesColumns.xml");
-            var progress = new Progress<int>(value => {
+            var progress = new Progress<int>(value =>
+            {
                 if (value < 0)
                     Console.WriteLine("Hmm ok a problem.");
                 else

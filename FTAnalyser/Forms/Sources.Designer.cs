@@ -261,6 +261,7 @@
             this.Name = "Sources";
             this.Text = "Sources";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Sources_FormClosed);
+            this.Load += new System.EventHandler(this.Sources_Load);
             this.TextChanged += new System.EventHandler(this.Sources_TextChanged);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

@@ -1,17 +1,14 @@
-﻿using System;
+﻿using FTAnalyzer.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using FTAnalyzer.Utilities;
-using Printing.DataGridViewPrint.Tools;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Web;
+using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms
 {
@@ -32,13 +29,13 @@ namespace FTAnalyzer.Forms
         private Facts()
         {
             InitializeComponent();
-            this.facts = new SortableBindingList<IDisplayFact>();
-            this.facts.SortFinished += new EventHandler(Grid_SortFinished);
-            this.allFacts = false;
-            this.CensusRefReport = false;
+            facts = new SortableBindingList<IDisplayFact>();
+            facts.SortFinished += new EventHandler(Grid_SortFinished);
+            allFacts = false;
+            CensusRefReport = false;
             dgFacts.AutoGenerateColumns = false;
             ExtensionMethods.DoubleBuffered(dgFacts, true);
-            reportFormHelper = new ReportFormHelper(this, this.Text, dgFacts, this.ResetTable, "Facts");
+            reportFormHelper = new ReportFormHelper(this, Text, dgFacts, ResetTable, "Facts");
             italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
             linkFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Underline);
             dgFacts.Columns["IndividualID"].Visible = true;
@@ -57,9 +54,9 @@ namespace FTAnalyzer.Forms
         public Facts(Individual individual)
             : this()
         {
-            this.Individual = individual;
+            Individual = individual;
             AddIndividualsFacts(individual);
-            this.Text = "Facts Report for " + individual.IndividualID + ": " + individual.Name;
+            Text = "Facts Report for " + individual.IndividualID + ": " + individual.Name;
             SetupFacts();
             dgFacts.Columns["IndividualID"].Visible = false; // all same individual so hide ID
         }
@@ -67,17 +64,17 @@ namespace FTAnalyzer.Forms
         public Facts(Family family)
             : this()
         {
-            this.Family = family;
+            Family = family;
             foreach (DisplayFact f in family.AllDisplayFacts)
                 facts.Add(f);
-            this.Text = "Facts Report for " + family.FamilyRef;
+            Text = "Facts Report for " + family.FamilyRef;
             SetupFacts();
         }
 
         public Facts(IEnumerable<Individual> individuals, List<string> factTypes, List<string> excludedTypes)
             : this()
         {
-            this.allFacts = true;
+            allFacts = true;
             int distinctIndividuals = 0;
             foreach (Individual ind in individuals)
             {
@@ -91,14 +88,14 @@ namespace FTAnalyzer.Forms
                     distinctIndividuals++;
             }
             string text = distinctIndividuals + " individuals.";
-            this.Text = "Facts Report for all " + text + " Facts count: " + facts.Count;
+            Text = "Facts Report for all " + text + " Facts count: " + facts.Count;
             SetupFacts(text);
         }
 
         public Facts(IEnumerable<Individual> individuals, List<string> duplicateTypes)
             : this()
         {
-            this.allFacts = true;
+            allFacts = true;
             int distinctIndividuals = 0;
             foreach (Individual ind in individuals)
             {
@@ -109,26 +106,26 @@ namespace FTAnalyzer.Forms
                     distinctIndividuals++;
             }
             string text = distinctIndividuals + " individuals.";
-            this.Text = "Duplicates Facts Report for all " + text + " Facts count: " + facts.Count;
+            Text = "Duplicates Facts Report for all " + text + " Facts count: " + facts.Count;
             SetupFacts(text);
         }
 
         public Facts(CensusReference.ReferenceStatus status)
             : this()
         {
-            this.allFacts = true;
+            allFacts = true;
             foreach (Individual ind in ft.AllIndividuals)
                 foreach (Fact f in ind.AllFacts)
                     if (f.IsCensusFact && f.CensusReference != null && f.CensusReference.Status == status)
                         facts.Add(new DisplayFact(ind, f));
             if (status == FTAnalyzer.CensusReference.ReferenceStatus.GOOD)
-                this.Text = "Census Reference Report. Facts count: " + facts.Count;
+                Text = "Census Reference Report. Facts count: " + facts.Count;
             else if (status == FTAnalyzer.CensusReference.ReferenceStatus.INCOMPLETE)
-                this.Text = "Incomplete Census Reference Report. Facts count: " + facts.Count;
+                Text = "Incomplete Census Reference Report. Facts count: " + facts.Count;
             else if (status == FTAnalyzer.CensusReference.ReferenceStatus.UNRECOGNISED)
-                this.Text = "Unrecognised Census Reference Report. Facts count: " + facts.Count;
+                Text = "Unrecognised Census Reference Report. Facts count: " + facts.Count;
             else if (status == FTAnalyzer.CensusReference.ReferenceStatus.BLANK)
-                this.Text = "Blank Census Reference Report. Facts count: " + facts.Count;
+                Text = "Blank Census Reference Report. Facts count: " + facts.Count;
             SetupFacts();
             //dgFacts.Columns["CensusReference"].Visible = true;
         }
@@ -136,9 +133,9 @@ namespace FTAnalyzer.Forms
         public Facts(FactSource source)
             : this()
         {
-            this.allFacts = true;
-            this.facts = ft.GetSourceDisplayFacts(source);
-            this.Text = "Facts Report for source: " + source.ToString() + ". Facts count: " + facts.Count;
+            allFacts = true;
+            facts = ft.GetSourceDisplayFacts(source);
+            Text = "Facts Report for source: " + source.ToString() + ". Facts count: " + facts.Count;
             SetupFacts();
             //dgFacts.Columns["CensusReference"].Visible = true;
         }
@@ -153,7 +150,7 @@ namespace FTAnalyzer.Forms
                 facts.Add(fact);
             }
             CensusRefReport = true;
-            this.Text = "Families with the same census ref but different locations.";
+            Text = "Families with the same census ref but different locations.";
             SetupFacts();
             //dgFacts.Columns["CensusReference"].Visible = true;
             dgFacts.Columns["IgnoreFact"].Visible = true;
@@ -219,10 +216,10 @@ namespace FTAnalyzer.Forms
                     IgnoreList.Remove(ignoreFact.FactHash); // no longer ignoring so remove from list
                 SerializeIgnoreList();
             }
-            if (e.RowIndex >=0 && e.ColumnIndex == dgFacts.Columns["CensusReference"].Index)
+            if (e.RowIndex >= 0 && e.ColumnIndex == dgFacts.Columns["CensusReference"].Index)
             {
                 DisplayFact df = (DisplayFact)dgFacts.Rows[e.RowIndex].DataBoundItem;
-                if(df.CensusReference.URL.Length > 0)
+                if (df.CensusReference.URL.Length > 0)
                     HttpUtility.VisitWebsite(df.CensusReference.URL);
             }
         }
@@ -332,7 +329,7 @@ namespace FTAnalyzer.Forms
 
         private void Facts_TextChanged(object sender, EventArgs e)
         {
-            reportFormHelper.PrintTitle = this.Text;
+            reportFormHelper.PrintTitle = Text;
         }
 
         private void MnuExportToExcel_Click(object sender, EventArgs e)
@@ -377,7 +374,7 @@ namespace FTAnalyzer.Forms
                     }
                 }
                 cell.Style.BackColor = f.BackColour;
-                if(e.ColumnIndex == dgFacts.Columns["CensusReference"].Index && f.CensusReference != null && f.CensusReference.URL.Length > 0)
+                if (e.ColumnIndex == dgFacts.Columns["CensusReference"].Index && f.CensusReference != null && f.CensusReference.URL.Length > 0)
                 {
                     cell.Style.ForeColor = Color.Blue;
                     cell.Style.Font = linkFont;
@@ -388,7 +385,7 @@ namespace FTAnalyzer.Forms
 
         private void Facts_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.Dispose();
+            Dispose();
         }
 
         private void DgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -407,6 +404,11 @@ namespace FTAnalyzer.Forms
                     sourceForm.Show();
                 }
             }
+        }
+
+        private void Facts_Load(object sender, EventArgs e)
+        {
+            SpecialMethods.SetFonts(this);
         }
     }
 }

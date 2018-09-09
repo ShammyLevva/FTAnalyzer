@@ -318,5 +318,10 @@ namespace FTAnalyzer.Forms
         {
             HttpUtility.VisitWebsite("http://ftanalyzer.com/The%20Census%20Tab");
         }
+
+        private void Census_Load(object sender, EventArgs e)
+        {
+            SpecialMethods.SetFonts(this);
+        }
     }
 }

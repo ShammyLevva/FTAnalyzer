@@ -263,6 +263,7 @@
             this.Name = "LostCousinsReferral";
             this.Text = "LostCousinsReferral";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LostCousinsReferral_FormClosed);
+            this.Load += new System.EventHandler(this.LostCousinsReferral_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLCReferrals)).EndInit();

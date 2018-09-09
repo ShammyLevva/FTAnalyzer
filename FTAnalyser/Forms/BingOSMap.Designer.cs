@@ -80,6 +80,7 @@
             this.Name = "BingOSMap";
             this.Text = "Bing OS Map";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BingOSMap_FormClosed);
+            this.Load += new System.EventHandler(this.BingOSMap_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

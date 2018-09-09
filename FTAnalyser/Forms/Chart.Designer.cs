@@ -55,6 +55,7 @@
             this.Name = "Chart";
             this.Text = "Chart";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Chart_FormClosed);
+            this.Load += new System.EventHandler(this.Chart_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chartDisplay)).EndInit();
             this.ResumeLayout(false);
 

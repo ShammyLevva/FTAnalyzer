@@ -8,6 +8,7 @@ using GeoAPI.Geometries;
 using SharpMap.Data;
 using System.Web;
 using SharpMap.Layers;
+using FTAnalyzer.Utilities;
 
 namespace FTAnalyzer.Forms
 {
@@ -221,6 +222,7 @@ namespace FTAnalyzer.Forms
             this.Height = Height;
             this.Top = Top;
             this.Left = Left;
+            SpecialMethods.SetFonts(this);
             RefreshMap();
             loading = false;
         }

@@ -59,6 +59,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MissingData";
             this.Text = "Missing Data Configuration";
+            this.Load += new System.EventHandler(this.MissingData_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

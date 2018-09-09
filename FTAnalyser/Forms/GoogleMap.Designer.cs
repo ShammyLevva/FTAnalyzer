@@ -66,6 +66,7 @@
             this.Name = "GoogleMap";
             this.Text = "Google Map";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GoogleMap_FormClosed);
+            this.Load += new System.EventHandler(this.GoogleMap_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

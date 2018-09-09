@@ -23,6 +23,7 @@ namespace FTAnalyzer.UserControls
         {
             Properties.FontSettings.Default.SelectedFont = selectedFont;
             Properties.FontSettings.Default.FontNumber = tbFontScale.Value;
+            Properties.FontSettings.Default.Save();
             OnFontChanged();
         }
 
@@ -42,7 +43,7 @@ namespace FTAnalyzer.UserControls
 
             for (int i = 0; i < control.Controls.Count; i++)
             {
-                if (!String.IsNullOrEmpty(errorProvider1.GetError(control.Controls[i])))
+                if (!string.IsNullOrEmpty(errorProvider1.GetError(control.Controls[i])))
                 {
                     invalid = true;
                     break;
@@ -81,6 +82,7 @@ namespace FTAnalyzer.UserControls
         protected static void OnFontChanged()
         {
             //Update Fonts on all forms
+            GlobalFontChanged?.Invoke(null, EventArgs.Empty);
         }
 
         private void SetSelectedFont(int value)
@@ -103,12 +105,12 @@ namespace FTAnalyzer.UserControls
                     selectedFont = new Font(lbSample.Font.Name, 8.25f);
                     break;
             }
+            lbSample.Font = selectedFont;
         }
 
         private void tbFontScale_Scroll(object sender, EventArgs e)
         {
             SetSelectedFont(tbFontScale.Value);
-            lbSample.Font = selectedFont;
         }
     }
 }

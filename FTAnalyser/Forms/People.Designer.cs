@@ -232,6 +232,7 @@
             this.Name = "People";
             this.Text = "Individuals & Families";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.People_FormClosed);
+            this.Load += new System.EventHandler(this.People_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);

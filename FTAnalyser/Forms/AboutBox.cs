@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
+﻿using FTAnalyzer.Utilities;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -13,12 +9,12 @@ namespace FTAnalyzer.Core.Displays
         public AboutBox1()
         {
             InitializeComponent();
-            this.Text = String.Format("About {0} {0}", AssemblyTitle);
-            this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("Version {0} {0}", AssemblyVersion);
-            this.labelCopyright.Text = AssemblyCopyright;
-            this.labelCompanyName.Text = AssemblyCompany;
-            this.textBoxDescription.Text = AssemblyDescription;
+            Text = string.Format("About {0} {0}", AssemblyTitle);
+            labelProductName.Text = AssemblyProduct;
+            labelVersion.Text = string.Format("Version {0} {0}", AssemblyVersion);
+            labelCopyright.Text = AssemblyCopyright;
+            labelCompanyName.Text = AssemblyCompany;
+            textBoxDescription.Text = AssemblyDescription;
         }
 
         #region Assembly Attribute Accessors
@@ -103,7 +99,12 @@ namespace FTAnalyzer.Core.Displays
 
         private void AboutBox1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.Dispose();
+            Dispose();
+        }
+
+        private void AboutBox1_Load(object sender, System.EventArgs e)
+        {
+            SpecialMethods.SetFonts(this);
         }
     }
 }

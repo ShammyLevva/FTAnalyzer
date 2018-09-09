@@ -45,5 +45,10 @@ namespace FTAnalyzer.Forms
                 form.Show();
             }
         }
+
+        private void StatisticsForm_Load(object sender, EventArgs e)
+        {
+            SpecialMethods.SetFonts(this);
+        }
     }
 }

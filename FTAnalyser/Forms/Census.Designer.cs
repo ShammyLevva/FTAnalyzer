@@ -436,6 +436,7 @@
             this.Name = "Census";
             this.Text = "Census Records to search for";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Census_FormClosed);
+            this.Load += new System.EventHandler(this.Census_Load);
             this.TextChanged += new System.EventHandler(this.Census_TextChanged);
             ((System.ComponentModel.ISupportInitialize)(this.dgCensus)).EndInit();
             this.statusStrip.ResumeLayout(false);

@@ -1354,5 +1354,10 @@ namespace FTAnalyzer.Forms
             WorkFinished(sender);
         }
         #endregion
+
+        private void GeocodeLocations_Load(object sender, EventArgs e)
+        {
+            SpecialMethods.SetFonts(this);
+        }
     }
 }

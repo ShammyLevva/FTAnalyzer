@@ -535,6 +535,7 @@
             this.Name = "ColourBMD";
             this.Text = "Colour BMD Report Result";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ColourBMD_FormClosed);
+            this.Load += new System.EventHandler(this.ColourBMD_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgBMDReportSheet)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();

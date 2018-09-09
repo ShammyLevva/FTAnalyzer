@@ -35,10 +35,10 @@ namespace FTAnalyzer.Forms
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             mapZoomToolStrip.Items[10].Visible = false;
             this.location = location;
-            this.originalLocation = FactLocation.TEMP;
+            originalLocation = FactLocation.TEMP;
             btnCustomMap.Visible = (Properties.MappingSettings.Default.CustomMapPath.Length > 0);
             FactLocation.CopyLocationDetails(location, originalLocation);
-            this.Text = "Editing : " + location.ToString();
+            Text = "Editing : " + location.ToString();
             iconSelected = false;
             pointUpdated = false;
             dataUpdated = false;
@@ -120,7 +120,7 @@ namespace FTAnalyzer.Forms
                     FactLocation.CopyLocationDetails(originalLocation, location);
                 }
                 else if (result == DialogResult.No)
-                { 
+                {
                     FactLocation.CopyLocationDetails(originalLocation, location);
                     pointUpdated = false;
                 }
@@ -166,7 +166,7 @@ namespace FTAnalyzer.Forms
             UpdateDatabase();
             UserSavedPoint = true;
             TreeViewHandler.Instance.RefreshTreeNodeIcon(location);
-            this.Close();
+            Close();
         }
 
         private void BtnReload_Click(object sender, EventArgs e)
@@ -284,11 +284,11 @@ namespace FTAnalyzer.Forms
 
         private void BtnCustomMap_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
             RemoveCustomMapLayers();
             customMapLayers = btnCustomMap.Checked ? LoadGeoReferencedImages() : new List<GdalRasterLayer>();
             mapBox1.Refresh();
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         private void RemoveCustomMapLayers()
@@ -315,7 +315,7 @@ namespace FTAnalyzer.Forms
 
         private void EditLocation_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.Dispose();
+            Dispose();
         }
 
         private void TbOpacity_Scroll(object sender, EventArgs e)
@@ -332,13 +332,18 @@ namespace FTAnalyzer.Forms
 
         private void RefreshMap()
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                this.Invoke(new Action(() => RefreshMap()));
+                Invoke(new Action(() => RefreshMap()));
                 return;
             }
             SetOpacity();
             mapBox1.Refresh();
+        }
+
+        private void EditLocation_Load(object sender, EventArgs e)
+        {
+            SpecialMethods.SetFonts(this);
         }
     }
 }

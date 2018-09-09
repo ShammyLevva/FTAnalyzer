@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Windows.Forms;
-using FTAnalyzer.Mapping;
+﻿using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
 using GeoAPI.Geometries;
 using SharpMap.Data;
-using System.Web;
 using SharpMap.Layers;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Web;
+using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms
 {
@@ -41,15 +41,15 @@ namespace FTAnalyzer.Forms
             DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
             int splitheight = (int)Application.UserAppDataRegistry.GetValue("Places Facts Splitter Distance", -1);
             if (splitheight != -1)
-                splitContainerFacts.SplitterDistance = this.Height - splitheight;
+                splitContainerFacts.SplitterDistance = Height - splitheight;
             splitContainerMap.SplitterDistance = (int)Application.UserAppDataRegistry.GetValue("Places Map Splitter Distance", splitContainerMap.SplitterDistance);
         }
 
         private void DatabaseHelper_GeoLocationUpdated(object location, EventArgs e)
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                this.Invoke(new Action(() => DatabaseHelper_GeoLocationUpdated(location, e)));
+                Invoke(new Action(() => DatabaseHelper_GeoLocationUpdated(location, e)));
                 return;
             }
             BuildMap();
@@ -66,11 +66,11 @@ namespace FTAnalyzer.Forms
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
             mh.SetScaleBar(mapBox1);
         }
-        
+
         private void BuildMap()
         {
             if (isloading) return;
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
             clusters.Clear();
             dgFacts.DataSource = null;
             List<IDisplayFact> displayFacts = new List<IDisplayFact>();
@@ -84,7 +84,7 @@ namespace FTAnalyzer.Forms
             }
             if (list.Count == 0)
             {
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
                 RefreshClusters();
                 return;
             }
@@ -114,13 +114,13 @@ namespace FTAnalyzer.Forms
             txtCount.Text = "Downloading map tiles and computing clusters for " + displayFacts.Count + " facts. Please wait";
             Application.DoEvents();
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
-            
+
             Envelope expand = mh.GetExtents(clusters.FactLocations);
             mapBox1.Map.ZoomToBox(expand);
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
             RefreshClusters();
             txtCount.Text = dgFacts.RowCount + " Geolocated fact(s) displayed";
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -132,10 +132,10 @@ namespace FTAnalyzer.Forms
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
                 IDisplayFact fact = (IDisplayFact)dgFacts.CurrentRow.DataBoundItem;
                 mh.OpenGeoLocations(fact.Location, outputText);
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
         }
 
@@ -143,7 +143,7 @@ namespace FTAnalyzer.Forms
         {
             DatabaseHelper.GeoLocationUpdated -= DatabaseHelper_GeoLocationUpdated;
             tvPlaces.Nodes.Clear();
-            this.Dispose();
+            Dispose();
         }
 
         private void DgFacts_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
@@ -172,7 +172,8 @@ namespace FTAnalyzer.Forms
                 tvPlaces.SelectedNode = tvPlaces.Nodes[0];
             }
             mh.CheckIfGeocodingNeeded(this, outputText);
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
+            SpecialMethods.SetFonts(this);
         }
 
         private void TvPlaces_AfterSelect(object sender, TreeViewEventArgs e)
@@ -206,22 +207,22 @@ namespace FTAnalyzer.Forms
 
         public void RefreshClusters()
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                this.Invoke(new Action(() => RefreshClusters()));
+                Invoke(new Action(() => RefreshClusters()));
                 return;
             }
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
             clusters.Refresh();
             RefreshMap();
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         private void RefreshMap()
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                this.Invoke(new Action(() => RefreshMap()));
+                Invoke(new Action(() => RefreshMap()));
                 return;
             }
             SetOpacity();
@@ -257,7 +258,7 @@ namespace FTAnalyzer.Forms
 
         private void MnuHideScaleBar_Click(object sender, EventArgs e)
         {
-            mh.MnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);    
+            mh.MnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
         }
 
         private void BtnSelect_Click(object sender, EventArgs e)
@@ -274,7 +275,7 @@ namespace FTAnalyzer.Forms
 
         private void MapBox1_MapQueried(FeatureDataTable data)
         {
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
             List<MapLocation> locations = new List<MapLocation>();
             foreach (FeatureDataRow row in data)
             {
@@ -284,14 +285,14 @@ namespace FTAnalyzer.Forms
             }
             MapIndividuals ind = new MapIndividuals(locations, null, this);
             ind.Show();
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
 
         }
 
         private void SplitContainerFacts_SplitterMoved(object sender, SplitterEventArgs e)
         {
             SplitContainer splitter = (SplitContainer)sender;
-            Application.UserAppDataRegistry.SetValue("Places Facts Splitter Distance", this.Height - splitter.SplitterDistance);
+            Application.UserAppDataRegistry.SetValue("Places Facts Splitter Distance", Height - splitter.SplitterDistance);
         }
 
         private void SplitContainerMap_SplitterMoved(object sender, SplitterEventArgs e)
@@ -303,10 +304,10 @@ namespace FTAnalyzer.Forms
         private void ResetFormDefaultSizeAndPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             isloading = true;
-            this.Height = 628;
-            this.Width = 1129;
-            this.Top = 50;
-            this.Left = 50;
+            Height = 628;
+            Width = 1129;
+            Top = 50;
+            Left = 50;
             isloading = false;
             SavePosition();
         }
@@ -323,12 +324,12 @@ namespace FTAnalyzer.Forms
 
         private void SavePosition()
         {
-            if (!isloading && this.WindowState == FormWindowState.Normal)
+            if (!isloading && WindowState == FormWindowState.Normal)
             {  //only save window size if not maximised or minimised
-                Application.UserAppDataRegistry.SetValue("Places size - width", this.Width);
-                Application.UserAppDataRegistry.SetValue("Places size - height", this.Height);
-                Application.UserAppDataRegistry.SetValue("Places position - top", this.Top);
-                Application.UserAppDataRegistry.SetValue("Places position - left", this.Left);
+                Application.UserAppDataRegistry.SetValue("Places size - width", Width);
+                Application.UserAppDataRegistry.SetValue("Places size - height", Height);
+                Application.UserAppDataRegistry.SetValue("Places position - top", Top);
+                Application.UserAppDataRegistry.SetValue("Places position - left", Left);
             }
         }
 

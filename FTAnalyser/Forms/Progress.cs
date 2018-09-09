@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using FTAnalyzer.Utilities;
+using System;
 using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms
@@ -31,7 +26,12 @@ namespace FTAnalyzer.Forms
 
         private void Progress_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.Dispose();
+            Dispose();
+        }
+
+        private void Progress_Load(object sender, EventArgs e)
+        {
+            SpecialMethods.SetFonts(this);
         }
     }
 }

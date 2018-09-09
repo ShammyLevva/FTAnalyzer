@@ -524,6 +524,7 @@
             this.Text = "Locations Geocoding  Status Report";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GeocodeLocations_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GeocodeLocations_FormClosed);
+            this.Load += new System.EventHandler(this.GeocodeLocations_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgLocations)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
             this.statusStrip.ResumeLayout(false);

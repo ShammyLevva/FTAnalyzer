@@ -62,6 +62,7 @@
             this.Name = "Progress";
             this.Text = "Database Updating";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Progress_FormClosed);
+            this.Load += new System.EventHandler(this.Progress_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

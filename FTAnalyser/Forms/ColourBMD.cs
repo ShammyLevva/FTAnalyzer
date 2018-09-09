@@ -398,5 +398,10 @@ namespace FTAnalyzer.Forms
         {
             this.Dispose();
         }
+
+        private void ColourBMD_Load(object sender, EventArgs e)
+        {
+            SpecialMethods.SetFonts(this);
+        }
     }
 }
