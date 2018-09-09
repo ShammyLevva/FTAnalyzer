@@ -73,6 +73,7 @@ namespace FTAnalyzer
 
         private void SetupFonts()
         {
+            SpecialMethods.SetFonts(this);
             boldFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Bold);
             normalFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Regular);
             byte[] fontData = Resources.KUNSTLER;
@@ -98,7 +99,6 @@ namespace FTAnalyzer
                     break;
             }
             LbProgramName.Font = handwritingFont;
-            SpecialMethods.SetFonts(this);
             UpdateDataErrorsDisplay();
         }
 
@@ -907,7 +907,9 @@ namespace FTAnalyzer
 
         private void Options_GlobalFontChanged(object sender, EventArgs e)
         {
+            HourGlass(true);
             SetupFonts();
+            HourGlass(false);
         }
         #endregion
 

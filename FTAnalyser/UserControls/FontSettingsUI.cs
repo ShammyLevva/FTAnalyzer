@@ -9,6 +9,7 @@ namespace FTAnalyzer.UserControls
         private Font selectedFont;
         private int fontNumber;
         private float fontWidth;
+        private float fontSize;
 
         public FontSettingsUI()
         {
@@ -25,6 +26,7 @@ namespace FTAnalyzer.UserControls
             Properties.FontSettings.Default.SelectedFont = selectedFont;
             Properties.FontSettings.Default.FontNumber = tbFontScale.Value;
             Properties.FontSettings.Default.FontWidth = fontWidth;
+            Properties.FontSettings.Default.FontSize = fontSize;
             Properties.FontSettings.Default.Save();
             OnFontChanged();
         }
@@ -94,22 +96,27 @@ namespace FTAnalyzer.UserControls
                 case 1:
                     selectedFont = new Font(lbSample.Font.Name, 8.25f);
                     fontWidth = 5.8f;
+                    fontSize = 8.25f;
                     break;
                 case 2:
                     selectedFont = new Font(lbSample.Font.Name, 10f);
                     fontWidth = 6.6f;
+                    fontSize = 10f;
                     break;
                 case 3:
                     selectedFont = new Font(lbSample.Font.Name, 12f);
                     fontWidth = 8.0f;
+                    fontSize = 12f;
                     break;
                 case 4:
                     selectedFont = new Font(lbSample.Font.Name, 14f);
                     fontWidth = 9.6f;
+                    fontSize = 14f;
                     break;
                 default:
                     selectedFont = new Font(lbSample.Font.Name, 8.25f);
                     fontWidth = 5.8f;
+                    fontSize = 8.25f;
                     break;
             }
             lbSample.Font = selectedFont;

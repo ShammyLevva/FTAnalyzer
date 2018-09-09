@@ -11,5 +11,8 @@
     <Setting Name="FontWidth" Type="System.Single" Scope="User">
       <Value Profile="(Default)">5.8</Value>
     </Setting>
+    <Setting Name="FontSize" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">8.25</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
