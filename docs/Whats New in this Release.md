@@ -1,3 +1,7 @@
+### Updated Release Version 6.6.0.1, 14th September 2018  
+**BugFixes**  
+Locations with LAT/LONG in GEDCOM weren't updating as previously Geocoded locations  
+
 #### New Release Version 6.6.0.0, 9th September 2018  
 **Updates**  
 New Font setting feature - allows you to change default font used
