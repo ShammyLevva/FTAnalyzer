@@ -2,7 +2,7 @@
 using FTAnalyzer.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using static FTAnalyzer.UserControls.NonGedcomDateSettingsUI;
+using static FTAnalyzer.FactDate;
 
 namespace FactDateTest
 {
@@ -111,47 +111,47 @@ namespace FactDateTest
         {
             FactDate target;
             // invalid GEDCOM format dates
-            test.SetNonGEDCOMDateSettings(FormatSelected.DD_MM_YYYY, "dd/mm/yyyy", "/");
+            test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.DD_MM_YYYY, "dd/mm/yyyy", "/");
             target = new FactDate("5/6/2018");
             Assert.AreEqual(new DateTime(2018, 6, 5), target.StartDate);
             Assert.AreEqual(new DateTime(2018, 6, 5), target.EndDate);
 
-            test.SetNonGEDCOMDateSettings(FormatSelected.MM_DD_YYYY, "mm/dd/yyyy", "/");
+            test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.MM_DD_YYYY, "mm/dd/yyyy", "/");
             target = new FactDate("5/6/2018");
             Assert.AreEqual(new DateTime(2018, 5, 6), target.StartDate);
             Assert.AreEqual(new DateTime(2018, 5, 6), target.EndDate);
 
-            test.SetNonGEDCOMDateSettings(FormatSelected.DD_MM_YYYY, "dd/mm/yyyy", ".");
+            test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.DD_MM_YYYY, "dd/mm/yyyy", ".");
             target = new FactDate("5.6.2018");
             Assert.AreEqual(new DateTime(2018, 6, 5), target.StartDate);
             Assert.AreEqual(new DateTime(2018, 6, 5), target.EndDate);
 
-            test.SetNonGEDCOMDateSettings(FormatSelected.MM_DD_YYYY, "mm/dd/yyyy", ".");
+            test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.MM_DD_YYYY, "mm/dd/yyyy", ".");
             target = new FactDate("5.6.2018");
             Assert.AreEqual(new DateTime(2018, 5, 6), target.StartDate);
             Assert.AreEqual(new DateTime(2018, 5, 6), target.EndDate);
 
-            test.SetNonGEDCOMDateSettings(FormatSelected.DD_MM_YYYY, "dd/mm/yyyy", "-");
+            test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.DD_MM_YYYY, "dd/mm/yyyy", "-");
             target = new FactDate("5-6-2018");
             Assert.AreEqual(new DateTime(2018, 6, 5), target.StartDate);
             Assert.AreEqual(new DateTime(2018, 6, 5), target.EndDate);
 
-            test.SetNonGEDCOMDateSettings(FormatSelected.MM_DD_YYYY, "mm/dd/yyyy", "-");
+            test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.MM_DD_YYYY, "mm/dd/yyyy", "-");
             target = new FactDate("5-6-2018");
             Assert.AreEqual(new DateTime(2018, 5, 6), target.StartDate);
             Assert.AreEqual(new DateTime(2018, 5, 6), target.EndDate);
 
-            test.SetNonGEDCOMDateSettings(FormatSelected.DD_MM_YYYY, "dd/mm/yyyy", " ");
+            test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.DD_MM_YYYY, "dd/mm/yyyy", " ");
             target = new FactDate("5 6 2018");
             Assert.AreEqual(new DateTime(2018, 6, 5), target.StartDate);
             Assert.AreEqual(new DateTime(2018, 6, 5), target.EndDate);
 
-            test.SetNonGEDCOMDateSettings(FormatSelected.MM_DD_YYYY, "mm/dd/yyyy", " ");
+            test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.MM_DD_YYYY, "mm/dd/yyyy", " ");
             target = new FactDate("5 6 2018");
             Assert.AreEqual(new DateTime(2018, 5, 6), target.StartDate);
             Assert.AreEqual(new DateTime(2018, 5, 6), target.EndDate);
 
-            test.SetNonGEDCOMDateSettings(FormatSelected.DD_MM_YYYY, "dd/mm/yyyy", "/");
+            test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.DD_MM_YYYY, "dd/mm/yyyy", "/");
             target = new FactDate("AFT 4/6/2018");
             Assert.AreEqual(new DateTime(2018, 6, 5), target.StartDate);
             Assert.AreEqual(FactDate.MAXDATE, target.EndDate);
