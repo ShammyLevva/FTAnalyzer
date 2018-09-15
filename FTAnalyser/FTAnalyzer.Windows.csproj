@@ -303,35 +303,10 @@
     <Compile Include="Mapping\TearDropLayer.cs" />
     <Compile Include="Mapping\TileSourceFactory.cs" />
     <Compile Include="Properties\FileHandling.cs" />
-    <Compile Include="Properties\FileHandling.Designer.cs">
-      <DependentUpon>FileHandling.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Properties\FontSettings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>FontSettings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\GeneralSettings.Designer.cs">
-      <DependentUpon>GeneralSettings.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Properties\MappingSettings.Designer.cs">
-      <DependentUpon>MappingSettings.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <DependentUpon>Settings.settings</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Properties\NonGedcomDate.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>NonGedcomDate.settings</DependentUpon>
     </Compile>
     <Compile Include="UserControls\CensusSettingsUI.cs">
       <SubType>UserControl</SubType>
@@ -607,29 +582,9 @@
     <EmbeddedResource Include="Resources\KUNSTLER.TTF">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <None Include="Properties\FileHandling.settings">
-      <Generator>PublicSettingsSingleFileGenerator</Generator>
-      <LastGenOutput>FileHandling.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Properties\FontSettings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>FontSettings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Properties\GeneralSettings.settings">
-      <Generator>PublicSettingsSingleFileGenerator</Generator>
-      <LastGenOutput>GeneralSettings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Properties\MappingSettings.settings">
-      <Generator>PublicSettingsSingleFileGenerator</Generator>
-      <LastGenOutput>MappingSettings.Designer.cs</LastGenOutput>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Properties\NonGedcomDate.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>NonGedcomDate.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
