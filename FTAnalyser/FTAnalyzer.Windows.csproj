@@ -308,11 +308,6 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Properties\MappingSettings.Designer.cs">
-      <DependentUpon>MappingSettings.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <DependentUpon>Settings.settings</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -595,10 +590,6 @@
     <None Include="Properties\FontSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>FontSettings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Properties\MappingSettings.settings">
-      <Generator>PublicSettingsSingleFileGenerator</Generator>
-      <LastGenOutput>MappingSettings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
