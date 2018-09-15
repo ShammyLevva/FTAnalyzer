@@ -39,12 +39,12 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>http://ftanalyzer.com/install/</InstallUrl>
-    <SupportUrl>http://ftanalyzer.com</SupportUrl>
+    <SupportUrl>https://www.facebook.com/ftanalyzer/</SupportUrl>
     <ErrorReportUrl>https://github.com/ShammyLevva/FTAnalyzer/issues</ErrorReportUrl>
     <TargetCulture>en</TargetCulture>
     <ProductName>FT Analyzer</ProductName>
     <PublisherName>FT Analyzer</PublisherName>
-    <MinimumRequiredVersion>6.6.0.1</MinimumRequiredVersion>
+    <MinimumRequiredVersion>6.6.0.2</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
