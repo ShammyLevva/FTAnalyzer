@@ -46,7 +46,7 @@ namespace FTAnalyzer
         {
             InitializeComponent();
             loading = true;
-            displayOptionsOnLoadToolStripMenuItem.Checked = Properties.GeneralSettings.Default.ReportOptions;
+            displayOptionsOnLoadToolStripMenuItem.Checked = GeneralSettings.Default.ReportOptions;
             treetopsRelation.MarriedToDB = false;
             ShowMenus(false);
             VERSION = PublishVersion();
@@ -277,9 +277,9 @@ namespace FTAnalyzer
         {
             try
             {
-                Properties.GeneralSettings.Default.SavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Family Tree Analyzer");
-                if (!Directory.Exists(Properties.GeneralSettings.Default.SavePath))
-                    Directory.CreateDirectory(Properties.GeneralSettings.Default.SavePath);
+                GeneralSettings.Default.SavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Family Tree Analyzer");
+                if (!Directory.Exists(GeneralSettings.Default.SavePath))
+                    Directory.CreateDirectory(GeneralSettings.Default.SavePath);
             }
             catch (Exception ex)
             {
@@ -916,11 +916,11 @@ namespace FTAnalyzer
         #region Reload Data
         private async Task QueryReloadData()
         {
-            if (Properties.GeneralSettings.Default.ReloadRequired && ft.DataLoaded)
+            if (GeneralSettings.Default.ReloadRequired && ft.DataLoaded)
             {
                 DialogResult dr = MessageBox.Show("This option requires the data to be refreshed.\n\nDo you want to reload now?\n\nClicking no will keep the data with the old option.", "Reload GEDCOM File", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                Properties.GeneralSettings.Default.ReloadRequired = false;
-                Properties.GeneralSettings.Default.Save();
+                GeneralSettings.Default.ReloadRequired = false;
+                GeneralSettings.Default.Save();
                 if (dr == DialogResult.Yes)
                 {
                     await LoadFileAsync(filename);
@@ -930,8 +930,8 @@ namespace FTAnalyzer
 
         private async void ReloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Properties.GeneralSettings.Default.ReloadRequired = false;
-            Properties.GeneralSettings.Default.Save();
+            GeneralSettings.Default.ReloadRequired = false;
+            GeneralSettings.Default.Save();
             await LoadFileAsync(filename);
         }
         #endregion
@@ -1326,7 +1326,7 @@ namespace FTAnalyzer
             if (txtFactsSurname.Text.Length > 0)
             {
                 var surnameFilter = FilterUtils.StringFilter<ExportFact>(x => x.Surname, txtFactsSurname.Text.Trim());
-                filter = FilterUtils.AndFilter<ExportFact>(filter, surnameFilter);
+                filter = FilterUtils.AndFilter(filter, surnameFilter);
             }
             return filter;
         }
@@ -1337,20 +1337,20 @@ namespace FTAnalyzer
             var dateFilter = censusDone ?
                 new Predicate<CensusIndividual>(x => x.IsCensusDone(cenDate.SelectedDate) && !x.OutOfCountry(cenDate.SelectedDate)) :
                 new Predicate<CensusIndividual>(x => !x.IsCensusDone(cenDate.SelectedDate) && !x.OutOfCountry(cenDate.SelectedDate));
-            Predicate<CensusIndividual> filter = FilterUtils.AndFilter<CensusIndividual>(relationFilter, dateFilter);
-            if (!censusDone && Properties.GeneralSettings.Default.HidePeopleWithMissingTag)
+            Predicate<CensusIndividual> filter = FilterUtils.AndFilter(relationFilter, dateFilter);
+            if (!censusDone && GeneralSettings.Default.HidePeopleWithMissingTag)
             {  //if we are reporting missing from census and we are hiding people who have a missing tag then only select those who are not tagged missing
                 Predicate<CensusIndividual> missingTag = new Predicate<CensusIndividual>(x => !x.IsTaggedMissingCensus(cenDate.SelectedDate));
-                filter = FilterUtils.AndFilter<CensusIndividual>(filter, missingTag);
+                filter = FilterUtils.AndFilter(filter, missingTag);
             }
             if (surname.Length > 0)
             {
                 Predicate<CensusIndividual> surnameFilter = FilterUtils.StringFilter<CensusIndividual>(x => x.Surname, surname);
-                filter = FilterUtils.AndFilter<CensusIndividual>(filter, surnameFilter);
+                filter = FilterUtils.AndFilter(filter, surnameFilter);
             }
             if (chkExcludeUnknownBirths.Checked)
-                filter = FilterUtils.AndFilter<CensusIndividual>(x => x.BirthDate.IsKnown, filter);
-            filter = FilterUtils.AndFilter<CensusIndividual>(x => x.Age.MinAge < (int)udAgeFilter.Value, filter);
+                filter = FilterUtils.AndFilter(x => x.BirthDate.IsKnown, filter);
+            filter = FilterUtils.AndFilter(x => x.Age.MinAge < (int)udAgeFilter.Value, filter);
             return filter;
         }
 
@@ -1358,7 +1358,7 @@ namespace FTAnalyzer
         {
             Predicate<Individual> locationFilter = treetopsCountry.BuildFilter<Individual>(FactDate.UNKNOWN_DATE, (d, x) => x.BestLocation(d));
             Predicate<Individual> relationFilter = treetopsRelation.BuildFilter<Individual>(x => x.RelationType);
-            Predicate<Individual> filter = FilterUtils.AndFilter<Individual>(locationFilter, relationFilter);
+            Predicate<Individual> filter = FilterUtils.AndFilter(locationFilter, relationFilter);
 
             if (ckbTTIgnoreLocations.Checked)
                 filter = relationFilter;
@@ -2021,7 +2021,7 @@ namespace FTAnalyzer
                 return; // do nothing if progress bar still visible
             string indA_ID = (string)dgDuplicates.CurrentRow.Cells["DuplicateIndividualID"].Value;
             string indB_ID = (string)dgDuplicates.CurrentRow.Cells["MatchIndividualID"].Value;
-            if (Properties.GeneralSettings.Default.MultipleFactForms)
+            if (GeneralSettings.Default.MultipleFactForms)
             {
                 ShowFacts(indA_ID);
                 ShowFacts(indB_ID, true);

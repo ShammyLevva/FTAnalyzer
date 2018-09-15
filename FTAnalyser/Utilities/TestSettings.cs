@@ -1,4 +1,4 @@
-﻿using static FTAnalyzer.UserControls.NonGedcomDateSettingsUI;
+﻿using static FTAnalyzer.FactDate;
 
 namespace FTAnalyzer.Utilities
 {
@@ -13,7 +13,7 @@ namespace FTAnalyzer.Utilities
             _NonGEDCOMDateSettings = Properties.NonGedcomDate.Default;
         }
 
-        public void SetNonGEDCOMDateSettings(FormatSelected formatSelected, string dateformat, string separator)
+        public void SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected formatSelected, string dateformat, string separator)
         {
             _NonGEDCOMDateSettings.UseNonGedcomDates = true;
             _NonGEDCOMDateSettings.FormatSelected = (int)formatSelected;
@@ -26,26 +26,26 @@ namespace FTAnalyzer.Utilities
         public void ClearNonGEDCOMDateSettings()
         {
             _NonGEDCOMDateSettings.UseNonGedcomDates = false;
-            _NonGEDCOMDateSettings.FormatSelected = (int)FormatSelected.DD_MM_YYYY;
+            _NonGEDCOMDateSettings.FormatSelected = (int)NonGEDCOMFormatSelected.DD_MM_YYYY;
             _NonGEDCOMDateSettings.DateFormat = "dd/mm/yyyy";
-            _NonGEDCOMDateSettings.Regex = SetRegex(FormatSelected.DD_MM_YYYY, "/");
+            _NonGEDCOMDateSettings.Regex = SetRegex(NonGEDCOMFormatSelected.DD_MM_YYYY, "/");
             _NonGEDCOMDateSettings.Separator = "/";
             Save();
         }
 
         public void Save() { _Settings.Save(); _NonGEDCOMDateSettings.Save(); }
 
-        private string SetRegex(FormatSelected formatSelected, string regexSeparator)
+        private string SetRegex(NonGEDCOMFormatSelected formatSelected, string regexSeparator)
         {
             switch(formatSelected)
             {
-                case FormatSelected.DD_MM_YYYY:
+                case NonGEDCOMFormatSelected.DD_MM_YYYY:
                     return @"(\d{1,2})" + regexSeparator + @"(\d{1,2})" + regexSeparator + @"(\d{4})";
-                case FormatSelected.MM_DD_YYYY:
+                case NonGEDCOMFormatSelected.MM_DD_YYYY:
                     return @"(\d{1,2})" + regexSeparator + @"(\d{1,2})" + regexSeparator + @"(\d{4})";
-                case FormatSelected.YYYY_DD_MM:
+                case NonGEDCOMFormatSelected.YYYY_DD_MM:
                     return @"(\d{4})" + regexSeparator + @"(\d{1,2})" + regexSeparator + @"(\d{1,2})";
-                case FormatSelected.YYYY_MM_DD:
+                case NonGEDCOMFormatSelected.YYYY_MM_DD:
                     return @"(\d{4})" + regexSeparator + @"(\d{1,2})" + regexSeparator + @"(\d{1,2})";
             }
             return string.Empty;
