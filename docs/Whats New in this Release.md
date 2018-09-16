@@ -1,3 +1,7 @@
+### Updated Release Version 6.6.0.2, 16th September 2018  
+**BugFixes**  
+Small tweak to bad lines check to better cope with the invalid screwed up nonsense that isn't valid GEDCOM that Ancestry produces with notes fields.
+
 ### Updated Release Version 6.6.0.1, 14th September 2018  
 **BugFixes**  
 Locations with LAT/LONG in GEDCOM weren't updating as previously Geocoded locations
