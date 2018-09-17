@@ -22,7 +22,7 @@ namespace FTAnalyzer.Utilities
         public string DatabasePath { get; private set; }
         private Version ProgramVersion { get; set; }
         private bool restoring;
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         #region Constructor/Destructor
         private DatabaseHelper()

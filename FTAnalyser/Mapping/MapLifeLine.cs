@@ -14,7 +14,7 @@ namespace FTAnalyzer.Mapping
         private int Count { get; set; }
         private Envelope Viewport { get; set; }
 
-        public static readonly string LINE = "Line", START = "Start", END = "End";
+        public static string LINE = "Line", START = "Start", END = "End";
 
         public MapLifeLine(Individual ind)
         {

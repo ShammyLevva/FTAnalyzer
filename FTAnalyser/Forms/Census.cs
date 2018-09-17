@@ -311,7 +311,7 @@ namespace FTAnalyzer.Forms
 
         private void Census_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.Dispose();
+            Dispose();
         }
 
         private void BtnHelp_Click(object sender, EventArgs e)

@@ -18,6 +18,7 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
+            selectedFont.Dispose();
         }
 
         #region Component Designer generated code

@@ -18,7 +18,7 @@ namespace FTAnalyzer.Forms
 {
     public partial class GeocodeLocations : Form
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private FamilyTree ft;
         private Font italicFont;
         private ReportFormHelper reportFormHelper;

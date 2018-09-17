@@ -1,85 +1,79 @@
-﻿using System;
+﻿using FTAnalyzer.Events;
+using FTAnalyzer.Mapping;
+using FTAnalyzer.Utilities;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Net;
-using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
+using System.Threading;
 using System.Web;
 using System.Windows.Forms;
-using System.IO;
-using System.Threading;
-using FTAnalyzer.Events;
-using FTAnalyzer.Utilities;
-using FTAnalyzer.Mapping;
 
 namespace FTAnalyzer.Forms
 {
     public partial class GoogleMap : Form
     {
-        public static readonly string ADMIN1 = "administrative_area_level_1";
-        public static readonly string ADMIN2 = "administrative_area_level_2";
-        public static readonly string ADMIN3 = "administrative_area_level_3";
-        public static readonly string AIRPORT = "airport";
-        public static readonly string AMUSEMENT_PARK = "amusement_park";
-        public static readonly string AQUARIUM = "aquarium";
-        public static readonly string BUS_STATION = "bus_station";
-        public static readonly string CAMPGROUND = "campground";
-        public static readonly string CEMETERY = "cemetery";
-        public static readonly string CHURCH = "church";
-        public static readonly string COLLOQUIAL_AREA = "colloquial_area";
-        public static readonly string COUNTRY = "country";
-        public static readonly string COURTHOUSE = "courthouse";
-        public static readonly string ESTABLISHMENT = "establishment";
-        public static readonly string FINANCE = "finance";
-        public static readonly string FIRE_STATION = "fire_station";
-        public static readonly string HOSPITAL = "hospital";
-        public static readonly string INTERSECTION = "intersection";
-        public static readonly string LIBRARY = "library";
-        public static readonly string LOCALITY = "locality";
-        public static readonly string LODGING = "lodging";
-        public static readonly string MUSEUM = "museum";
-        public static readonly string NATURALFEATURE = "natural_feature";
-        public static readonly string NEIGHBOURHOOD = "neighborhood";
-        public static readonly string OS_FEATURE = "OS Feature";
-        public static readonly string PARK = "park";
-        public static readonly string PLACE_OF_WORSHIP = "place_of_worship";
-        public static readonly string POINT_OF_INTEREST = "point_of_interest";
-        public static readonly string POLICE = "police";
-        public static readonly string POLITICAL = "political";
-        public static readonly string POSTALCODE = "postal_code";
-        public static readonly string POSTALCODEPREFIX = "postal_code_prefix";
-        public static readonly string POSTALTOWN = "postal_town";
-        public static readonly string POST_OFFICE = "post_office";
-        public static readonly string PREMISE = "premise";
-        public static readonly string ROUTE = "route";
-        public static readonly string STREET_ADDRESS = "street_address";
-        public static readonly string STREET_NUMBER = "street_number";
-        public static readonly string SUBLOCALITY = "sublocality";
-        public static readonly string SUBPREMISE = "subpremise";
-        public static readonly string SUBWAY_STATION = "subway_station";
-        public static readonly string TRAIN_STATION = "train_station";
-        public static readonly string TRANSIT_STATION = "transit_station";
-        public static readonly string UNIVERSITY = "university";
-        public static readonly string VETERINARY_CARE = "veterinary_care";
-        
-        public static readonly ISet<string> RESULT_TYPES = new HashSet<string>(new string[] {
+        public static string ADMIN1 = "administrative_area_level_1";
+        public static string ADMIN2 = "administrative_area_level_2";
+        public static string ADMIN3 = "administrative_area_level_3";
+        public static string AIRPORT = "airport";
+        public static string AMUSEMENT_PARK = "amusement_park";
+        public static string AQUARIUM = "aquarium";
+        public static string BUS_STATION = "bus_station";
+        public static string CAMPGROUND = "campground";
+        public static string CEMETERY = "cemetery";
+        public static string CHURCH = "church";
+        public static string COLLOQUIAL_AREA = "colloquial_area";
+        public static string COUNTRY = "country";
+        public static string COURTHOUSE = "courthouse";
+        public static string ESTABLISHMENT = "establishment";
+        public static string FINANCE = "finance";
+        public static string FIRE_STATION = "fire_station";
+        public static string HOSPITAL = "hospital";
+        public static string INTERSECTION = "intersection";
+        public static string LIBRARY = "library";
+        public static string LOCALITY = "locality";
+        public static string LODGING = "lodging";
+        public static string MUSEUM = "museum";
+        public static string NATURALFEATURE = "natural_feature";
+        public static string NEIGHBOURHOOD = "neighborhood";
+        public static string OS_FEATURE = "OS Feature";
+        public static string PARK = "park";
+        public static string PLACE_OF_WORSHIP = "place_of_worship";
+        public static string POINT_OF_INTEREST = "point_of_interest";
+        public static string POLICE = "police";
+        public static string POLITICAL = "political";
+        public static string POSTALCODE = "postal_code";
+        public static string POSTALCODEPREFIX = "postal_code_prefix";
+        public static string POSTALTOWN = "postal_town";
+        public static string POST_OFFICE = "post_office";
+        public static string PREMISE = "premise";
+        public static string ROUTE = "route";
+        public static string STREET_ADDRESS = "street_address";
+        public static string STREET_NUMBER = "street_number";
+        public static string SUBLOCALITY = "sublocality";
+        public static string SUBPREMISE = "subpremise";
+        public static string SUBWAY_STATION = "subway_station";
+        public static string TRAIN_STATION = "train_station";
+        public static string TRANSIT_STATION = "transit_station";
+        public static string UNIVERSITY = "university";
+        public static string VETERINARY_CARE = "veterinary_care";
+
+        public static ISet<string> RESULT_TYPES = new HashSet<string>(new string[] {
             STREET_ADDRESS, ROUTE, COUNTRY, ESTABLISHMENT, ADMIN1, ADMIN2, ADMIN3, LOCALITY,
             SUBLOCALITY, NEIGHBOURHOOD, PREMISE, SUBPREMISE, CEMETERY, HOSPITAL, PLACE_OF_WORSHIP,
-            INTERSECTION, POLITICAL, POSTALCODE, POSTALTOWN, POSTALCODEPREFIX, NATURALFEATURE, 
-            AIRPORT, PARK, POINT_OF_INTEREST, STREET_NUMBER, BUS_STATION, TRANSIT_STATION, 
-            CHURCH, SUBWAY_STATION, TRAIN_STATION, UNIVERSITY, POLICE, MUSEUM, POST_OFFICE, 
+            INTERSECTION, POLITICAL, POSTALCODE, POSTALTOWN, POSTALCODEPREFIX, NATURALFEATURE,
+            AIRPORT, PARK, POINT_OF_INTEREST, STREET_NUMBER, BUS_STATION, TRANSIT_STATION,
+            CHURCH, SUBWAY_STATION, TRAIN_STATION, UNIVERSITY, POLICE, MUSEUM, POST_OFFICE,
             COURTHOUSE, FINANCE, COLLOQUIAL_AREA, LIBRARY, AQUARIUM, FIRE_STATION,
             CAMPGROUND, LODGING, VETERINARY_CARE, AMUSEMENT_PARK, OS_FEATURE
         });
 
-        public static readonly ISet<string> PLACES = new HashSet<string>(new string[] {
-            PREMISE, STREET_ADDRESS, CEMETERY, HOSPITAL, PLACE_OF_WORSHIP, ROUTE, 
+        public static ISet<string> PLACES = new HashSet<string>(new string[] {
+            PREMISE, STREET_ADDRESS, CEMETERY, HOSPITAL, PLACE_OF_WORSHIP, ROUTE,
             INTERSECTION, ESTABLISHMENT, SUBPREMISE, NATURALFEATURE,PARK, AIRPORT,
-            POINT_OF_INTEREST, STREET_NUMBER, BUS_STATION, CHURCH, TRANSIT_STATION, 
+            POINT_OF_INTEREST, STREET_NUMBER, BUS_STATION, CHURCH, TRANSIT_STATION,
             SUBWAY_STATION, TRAIN_STATION, UNIVERSITY, POLICE, MUSEUM, POST_OFFICE,
             COURTHOUSE, FINANCE, LIBRARY, AQUARIUM, FIRE_STATION, CAMPGROUND, LODGING,
             VETERINARY_CARE, AMUSEMENT_PARK
@@ -136,7 +130,7 @@ namespace FTAnalyzer.Forms
                     viewport.NorthEast.Long = loc.Longitude + 2;
                     viewport.SouthWest.Lat = loc.Latitude - 2;
                     viewport.SouthWest.Long = loc.Longitude - 2;
-                    args= new Object[] { loc.Latitude, loc.Longitude };
+                    args = new Object[] { loc.Latitude, loc.Longitude };
                 }
                 else
                 {
@@ -174,7 +168,7 @@ namespace FTAnalyzer.Forms
         {
             bool UK = loc.IsUnitedKingdom;
             HashSet<string> types = new HashSet<string>(locationTypes);
-            foreach(string type in types)
+            foreach (string type in types)
                 if (PLACES.Contains(type))
                     return FactLocation.PLACE;
             if (types.Contains(SUBLOCALITY) || types.Contains(POSTALCODE) || types.Contains(NEIGHBOURHOOD))
@@ -198,7 +192,7 @@ namespace FTAnalyzer.Forms
         }
 
         public static GeoResponse CallGoogleGeocode(string address)
-        { 
+        {
             string url = string.Format(
                     "https://maps.googleapis.com/maps/api/geocode/json?address={0}&region=uk&sensor=false&key={1}",
                     HttpUtility.UrlEncode(address), GoogleAPIKey.KeyValue
@@ -350,7 +344,7 @@ namespace FTAnalyzer.Forms
 
         private void GoogleMap_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.Dispose();
+            Dispose();
         }
 
         private void GoogleMap_Load(object sender, EventArgs e)
