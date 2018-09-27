@@ -141,6 +141,8 @@
             this.treetopsRelation = new Controls.RelationTypes();
             this.treetopsCountry = new Controls.CensusCountry();
             this.tabColourReports = new System.Windows.Forms.TabPage();
+            this.ckbIgnoreNoDeathDate = new System.Windows.Forms.CheckBox();
+            this.ckbIgnoreNoBirthDate = new System.Windows.Forms.CheckBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.btnAdvancedMissingData = new System.Windows.Forms.Button();
             this.btnStandardMissingData = new System.Windows.Forms.Button();
@@ -221,6 +223,17 @@
             this.tabPlaces = new System.Windows.Forms.TabPage();
             this.dgPlaces = new System.Windows.Forms.DataGridView();
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.LbProgramName = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.pbRelationships = new System.Windows.Forms.ProgressBar();
+            this.label6 = new System.Windows.Forms.Label();
+            this.pbFamilies = new System.Windows.Forms.ProgressBar();
+            this.label5 = new System.Windows.Forms.Label();
+            this.pbIndividuals = new System.Windows.Forms.ProgressBar();
+            this.label4 = new System.Windows.Forms.Label();
+            this.pbSources = new System.Windows.Forms.ProgressBar();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.tabSelector = new System.Windows.Forms.TabControl();
             this.tabMainLists = new System.Windows.Forms.TabPage();
@@ -301,17 +314,6 @@
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.pbRelationships = new System.Windows.Forms.ProgressBar();
-            this.label6 = new System.Windows.Forms.Label();
-            this.pbFamilies = new System.Windows.Forms.ProgressBar();
-            this.label5 = new System.Windows.Forms.Label();
-            this.pbIndividuals = new System.Windows.Forms.ProgressBar();
-            this.label4 = new System.Windows.Forms.Label();
-            this.pbSources = new System.Windows.Forms.ProgressBar();
-            this.LbProgramName = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -348,6 +350,8 @@
             this.tabPlaces.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgPlaces)).BeginInit();
             this.tabDisplayProgress.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabSelector.SuspendLayout();
             this.tabMainLists.SuspendLayout();
             this.tabMainListsSelector.SuspendLayout();
@@ -374,8 +378,6 @@
             this.tabFacts.SuspendLayout();
             this.tabToday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).BeginInit();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -1298,6 +1300,8 @@
             // 
             // tabColourReports
             // 
+            this.tabColourReports.Controls.Add(this.ckbIgnoreNoDeathDate);
+            this.tabColourReports.Controls.Add(this.ckbIgnoreNoBirthDate);
             this.tabColourReports.Controls.Add(this.groupBox7);
             this.tabColourReports.Controls.Add(this.btnRandomSurnameColour);
             this.tabColourReports.Controls.Add(this.label14);
@@ -1314,11 +1318,31 @@
             this.tabColourReports.Text = "Research Suggestions";
             this.tabColourReports.UseVisualStyleBackColor = true;
             // 
+            // ckbIgnoreNoDeathDate
+            // 
+            this.ckbIgnoreNoDeathDate.AutoSize = true;
+            this.ckbIgnoreNoDeathDate.Location = new System.Drawing.Point(210, 92);
+            this.ckbIgnoreNoDeathDate.Name = "ckbIgnoreNoDeathDate";
+            this.ckbIgnoreNoDeathDate.Size = new System.Drawing.Size(200, 17);
+            this.ckbIgnoreNoDeathDate.TabIndex = 65;
+            this.ckbIgnoreNoDeathDate.Text = "Ignore Individuals with no death date";
+            this.ckbIgnoreNoDeathDate.UseVisualStyleBackColor = true;
+            // 
+            // ckbIgnoreNoBirthDate
+            // 
+            this.ckbIgnoreNoBirthDate.AutoSize = true;
+            this.ckbIgnoreNoBirthDate.Location = new System.Drawing.Point(8, 92);
+            this.ckbIgnoreNoBirthDate.Name = "ckbIgnoreNoBirthDate";
+            this.ckbIgnoreNoBirthDate.Size = new System.Drawing.Size(193, 17);
+            this.ckbIgnoreNoBirthDate.TabIndex = 64;
+            this.ckbIgnoreNoBirthDate.Text = "Ignore Individuals with no birth date";
+            this.ckbIgnoreNoBirthDate.UseVisualStyleBackColor = true;
+            // 
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.btnAdvancedMissingData);
             this.groupBox7.Controls.Add(this.btnStandardMissingData);
-            this.groupBox7.Location = new System.Drawing.Point(431, 92);
+            this.groupBox7.Location = new System.Drawing.Point(423, 115);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(409, 86);
             this.groupBox7.TabIndex = 63;
@@ -1360,12 +1384,12 @@
             this.groupBox3.Controls.Add(this.btnCanadianColourCensus);
             this.groupBox3.Controls.Add(this.btnUKColourCensus);
             this.groupBox3.Controls.Add(this.btnUSColourCensus);
-            this.groupBox3.Location = new System.Drawing.Point(8, 92);
+            this.groupBox3.Location = new System.Drawing.Point(8, 115);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(409, 86);
             this.groupBox3.TabIndex = 36;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Colour Census Reports";
+            this.groupBox3.Text = "Census Suggestions Reports";
             // 
             // btnIrishColourCensus
             // 
@@ -1409,7 +1433,7 @@
             // 
             // btnColourBMD
             // 
-            this.btnColourBMD.Location = new System.Drawing.Point(14, 184);
+            this.btnColourBMD.Location = new System.Drawing.Point(58, 207);
             this.btnColourBMD.Name = "btnColourBMD";
             this.btnColourBMD.Size = new System.Drawing.Size(307, 23);
             this.btnColourBMD.TabIndex = 42;
@@ -2231,6 +2255,106 @@
             this.tabDisplayProgress.TabIndex = 1;
             this.tabDisplayProgress.Text = "Gedcom Stats";
             this.tabDisplayProgress.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Controls.Add(this.LbProgramName);
+            this.panel2.Controls.Add(this.label7);
+            this.panel2.Controls.Add(this.pbRelationships);
+            this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.pbFamilies);
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.pbIndividuals);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.pbSources);
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1074, 109);
+            this.panel2.TabIndex = 12;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(971, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 18;
+            this.pictureBox1.TabStop = false;
+            // 
+            // LbProgramName
+            // 
+            this.LbProgramName.AutoSize = true;
+            this.LbProgramName.Font = new System.Drawing.Font("Kunstler Script", 52F, System.Drawing.FontStyle.Bold);
+            this.LbProgramName.Location = new System.Drawing.Point(456, 10);
+            this.LbProgramName.Name = "LbProgramName";
+            this.LbProgramName.Size = new System.Drawing.Size(522, 76);
+            this.LbProgramName.TabIndex = 17;
+            this.LbProgramName.Text = "Family Tree Analyzer";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 79);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(128, 13);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Relationships && Locations";
+            // 
+            // pbRelationships
+            // 
+            this.pbRelationships.Location = new System.Drawing.Point(134, 76);
+            this.pbRelationships.Name = "pbRelationships";
+            this.pbRelationships.Size = new System.Drawing.Size(316, 16);
+            this.pbRelationships.TabIndex = 15;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 57);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(85, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Loading Families";
+            // 
+            // pbFamilies
+            // 
+            this.pbFamilies.Location = new System.Drawing.Point(134, 54);
+            this.pbFamilies.Name = "pbFamilies";
+            this.pbFamilies.Size = new System.Drawing.Size(316, 16);
+            this.pbFamilies.TabIndex = 13;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 35);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(98, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Loading Individuals";
+            // 
+            // pbIndividuals
+            // 
+            this.pbIndividuals.Location = new System.Drawing.Point(134, 32);
+            this.pbIndividuals.Name = "pbIndividuals";
+            this.pbIndividuals.Size = new System.Drawing.Size(316, 16);
+            this.pbIndividuals.TabIndex = 11;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 13);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(87, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Loading Sources";
+            // 
+            // pbSources
+            // 
+            this.pbSources.Location = new System.Drawing.Point(134, 10);
+            this.pbSources.Name = "pbSources";
+            this.pbSources.Size = new System.Drawing.Size(316, 16);
+            this.pbSources.TabIndex = 9;
             // 
             // rtbOutput
             // 
@@ -3139,106 +3263,6 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Controls.Add(this.LbProgramName);
-            this.panel2.Controls.Add(this.label7);
-            this.panel2.Controls.Add(this.pbRelationships);
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.pbFamilies);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.pbIndividuals);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.pbSources);
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1074, 109);
-            this.panel2.TabIndex = 12;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 79);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(128, 13);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "Relationships && Locations";
-            // 
-            // pbRelationships
-            // 
-            this.pbRelationships.Location = new System.Drawing.Point(134, 76);
-            this.pbRelationships.Name = "pbRelationships";
-            this.pbRelationships.Size = new System.Drawing.Size(316, 16);
-            this.pbRelationships.TabIndex = 15;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 57);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(85, 13);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Loading Families";
-            // 
-            // pbFamilies
-            // 
-            this.pbFamilies.Location = new System.Drawing.Point(134, 54);
-            this.pbFamilies.Name = "pbFamilies";
-            this.pbFamilies.Size = new System.Drawing.Size(316, 16);
-            this.pbFamilies.TabIndex = 13;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 35);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(98, 13);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Loading Individuals";
-            // 
-            // pbIndividuals
-            // 
-            this.pbIndividuals.Location = new System.Drawing.Point(134, 32);
-            this.pbIndividuals.Name = "pbIndividuals";
-            this.pbIndividuals.Size = new System.Drawing.Size(316, 16);
-            this.pbIndividuals.TabIndex = 11;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 13);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Loading Sources";
-            // 
-            // pbSources
-            // 
-            this.pbSources.Location = new System.Drawing.Point(134, 10);
-            this.pbSources.Name = "pbSources";
-            this.pbSources.Size = new System.Drawing.Size(316, 16);
-            this.pbSources.TabIndex = 9;
-            // 
-            // LbProgramName
-            // 
-            this.LbProgramName.AutoSize = true;
-            this.LbProgramName.Font = new System.Drawing.Font("Kunstler Script", 52F, System.Drawing.FontStyle.Bold);
-            this.LbProgramName.Location = new System.Drawing.Point(456, 10);
-            this.LbProgramName.Name = "LbProgramName";
-            this.LbProgramName.Size = new System.Drawing.Size(522, 76);
-            this.LbProgramName.TabIndex = 17;
-            this.LbProgramName.Text = "Family Tree Analyzer";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(971, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox1.TabIndex = 18;
-            this.pictureBox1.TabStop = false;
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -3303,6 +3327,9 @@
             this.tabPlaces.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgPlaces)).EndInit();
             this.tabDisplayProgress.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabSelector.ResumeLayout(false);
             this.tabMainLists.ResumeLayout(false);
             this.tabMainListsSelector.ResumeLayout(false);
@@ -3332,9 +3359,6 @@
             this.tabToday.ResumeLayout(false);
             this.tabToday.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3395,7 +3419,6 @@
         private Controls.RelationTypes treetopsRelation;
         private Controls.CensusCountry treetopsCountry;
         private System.Windows.Forms.TabPage tabColourReports;
-        private System.Windows.Forms.Button btnColourBMD;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtColouredSurname;
         private Controls.RelationTypes relTypesColoured;
@@ -3498,11 +3521,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem mnuTreetopsToExcel;
         private System.Windows.Forms.ToolStripMenuItem mnuWorldWarsToExcel;
-        private System.Windows.Forms.Button btnCanadianColourCensus;
-        private System.Windows.Forms.Button btnUSColourCensus;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button btnIrishColourCensus;
-        private System.Windows.Forms.Button btnUKColourCensus;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button btnMissingCensusRefs;
         private System.Windows.Forms.Button btnCensusRefs;
@@ -3560,9 +3578,6 @@
         private System.Windows.Forms.Button btnShowSurnames;
         private Controls.RelationTypes reltypesSurnames;
         private System.Windows.Forms.ToolStripMenuItem mnuCousinsCountReport;
-        private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.Button btnAdvancedMissingData;
-        private System.Windows.Forms.Button btnStandardMissingData;
         private System.Windows.Forms.TabPage tabMainLists;
         private System.Windows.Forms.TabControl tabMainListsSelector;
         private System.Windows.Forms.TabPage tabIndividuals;
@@ -3619,6 +3634,17 @@
         private System.Windows.Forms.ProgressBar pbIndividuals;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ProgressBar pbSources;
+        private System.Windows.Forms.CheckBox ckbIgnoreNoBirthDate;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Button btnAdvancedMissingData;
+        private System.Windows.Forms.Button btnStandardMissingData;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button btnIrishColourCensus;
+        private System.Windows.Forms.Button btnCanadianColourCensus;
+        private System.Windows.Forms.Button btnUKColourCensus;
+        private System.Windows.Forms.Button btnUSColourCensus;
+        private System.Windows.Forms.Button btnColourBMD;
+        private System.Windows.Forms.CheckBox ckbIgnoreNoDeathDate;
     }
 }
 

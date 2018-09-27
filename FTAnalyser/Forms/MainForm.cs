@@ -26,7 +26,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "6.6.0.2";
+        public static string VERSION = "6.6.1.0";
 
         private static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -2603,7 +2603,8 @@ namespace FTAnalyzer
         private void DisplayColourCensus(string country)
         {
             HourGlass(true);
-            List<IDisplayColourCensus> list = ft.ColourCensus(country, relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily);
+            List<IDisplayColourCensus> list = 
+                ft.ColourCensus(country, relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily, ckbIgnoreNoBirthDate.Checked, ckbIgnoreNoDeathDate.Checked);
             ColourCensus rs = new ColourCensus(country, list);
             DisposeDuplicateForms(rs);
             rs.Show();
