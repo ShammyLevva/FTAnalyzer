@@ -1,3 +1,8 @@
+#### New Release Version 6.6.1.0, 28th September 2018  
+**Updates**  
+Added options to filter unknown births and unknown deaths from colour census reports.
+
+
 ### Updated Release Version 6.6.0.2, 16th September 2018  
 **BugFixes**  
 Small tweak to bad lines check to better cope with the invalid screwed up nonsense that isn't valid GEDCOM that Ancestry produces with notes fields.
