@@ -26,7 +26,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "6.6.1.0";
+        public static string VERSION = "6.6.1.1";
 
         private static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -3133,8 +3133,8 @@ namespace FTAnalyzer
             dgSurnames.Sort(dgSurnames.Columns["Surname"], ListSortDirection.Ascending);
             dgSurnames.AllowUserToResizeColumns = true;
             dgSurnames.Focus();
-            tsCountLabel.Text = Properties.Messages.Count + list.Count + " Surnames.";
-            tsHintsLabel.Text = Properties.Messages.Hints_Surname;
+            tsCountLabel.Text = Messages.Count + list.Count + " Surnames.";
+            tsHintsLabel.Text = Messages.Hints_Surname;
             tspbTabProgress.Visible = false;
             HourGlass(false);
         }

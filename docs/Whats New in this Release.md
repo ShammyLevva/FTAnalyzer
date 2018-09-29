@@ -1,3 +1,7 @@
+### Updated Release Version 6.6.1.1, 29th September 2018  
+**BugFixes**  
+Fix to fact dates for loose births/deaths and some other reports
+
 #### New Release Version 6.6.1.0, 28th September 2018  
 **Updates**  
 Added options to filter unknown births and unknown deaths from colour census reports.
