@@ -45,7 +45,7 @@ namespace FTAnalyzer
             Font boldFont = new Font(defaultFont, FontStyle.Bold);
             foreach (FactLocation location in FamilyTree.Instance.AllDisplayPlaces)
             {
-                string[] parts = location.Parts;
+                string[] parts = location.GetParts();
                 TreeNode currentM = mainformTreeRootNode;
                 TreeNode currentP = placesTreeRootNode;
                 foreach (string part in parts)
@@ -158,7 +158,7 @@ namespace FTAnalyzer
 
         public void RefreshTreeNodeIcon(FactLocation location)
         {
-            string[] parts = location.Parts;
+            string[] parts = location.GetParts();
             TreeNode currentM = mainformTreeRootNode;
             TreeNode currentP = placesTreeRootNode;
             foreach (string part in parts)

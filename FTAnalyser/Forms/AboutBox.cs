@@ -9,9 +9,9 @@ namespace FTAnalyzer.Core.Displays
         public AboutBox1()
         {
             InitializeComponent();
-            Text = string.Format("About {0} {0}", AssemblyTitle);
+            Text = $"About {AssemblyTitle} {AssemblyTitle}";
             labelProductName.Text = AssemblyProduct;
-            labelVersion.Text = string.Format("Version {0} {0}", AssemblyVersion);
+            labelVersion.Text = $"Version {AssemblyVersion} {AssemblyVersion}";
             labelCopyright.Text = AssemblyCopyright;
             labelCompanyName.Text = AssemblyCompany;
             textBoxDescription.Text = AssemblyDescription;
@@ -27,10 +27,8 @@ namespace FTAnalyzer.Core.Displays
                 if (attributes.Length > 0)
                 {
                     AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
-                    if (titleAttribute.Title != string.Empty)
-                    {
+                    if (!string.IsNullOrEmpty(titleAttribute.Title))
                         return titleAttribute.Title;
-                    }
                 }
                 return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
             }
