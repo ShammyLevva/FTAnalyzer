@@ -80,21 +80,25 @@ namespace FTAnalyzer.Forms
             {
                 startColumnIndex = dgReportSheet.Columns["US1790"].Index;
                 endColumnIndex = dgReportSheet.Columns["US1940"].Index;
+                cbFilter.Items[5] = "Outside USA (Dark Grey)";
             }
             else if (country.Equals(Countries.CANADA))
             {
                 startColumnIndex = dgReportSheet.Columns["Can1851"].Index;
                 endColumnIndex = dgReportSheet.Columns["Can1921"].Index;
+                cbFilter.Items[5] = "Outside Canada (Dark Grey)";
             }
             else if (country.Equals(Countries.IRELAND))
             {
                 startColumnIndex = dgReportSheet.Columns["Ire1901"].Index;
                 endColumnIndex = dgReportSheet.Columns["Ire1911"].Index;
+                cbFilter.Items[5] = "Outside Ireland (Dark Grey)";
             }
             else
             {
                 startColumnIndex = dgReportSheet.Columns["C1841"].Index;
                 endColumnIndex = dgReportSheet.Columns["C1939"].Index;
+                cbFilter.Items[5] = "Outside UK (Dark Grey)";
             }
             // show those columns that should be visible for the country in use
             for (int index = startColumnIndex; index <= endColumnIndex; index++)
