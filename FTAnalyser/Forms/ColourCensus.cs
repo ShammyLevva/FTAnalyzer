@@ -156,11 +156,11 @@ namespace FTAnalyzer.Forms
                         case 1:
                             if (e.ColumnIndex == C1939.Index)
                                 if (cbCensusSearchProvider.SelectedItem.Equals("Find My Past"))
-                                    cell.ToolTipText = "No census information entered. Double click to search " + cbCensusSearchProvider.SelectedItem + ".";
+                                    cell.ToolTipText = $"No census information entered. Double click to search {cbCensusSearchProvider.SelectedItem}.";
                                 else
-                                    cell.ToolTipText = "No census information entered. No search on " + cbCensusSearchProvider.SelectedItem + " available.";
+                                    cell.ToolTipText = $"No census information entered. No search on {cbCensusSearchProvider.SelectedItem} available.";
                             else
-                                cell.ToolTipText = "No census information entered. Double click to search " + cbCensusSearchProvider.SelectedItem + ".";
+                                cell.ToolTipText = $"No census information entered. Double click to search {cbCensusSearchProvider.SelectedItem}.";
                             break;
                         case 2:
                             cell.ToolTipText = "Census entered but no Lost Cousins flag set.";
@@ -175,10 +175,10 @@ namespace FTAnalyzer.Forms
                             cell.ToolTipText = "Lost Cousins flagged but no Census entered.";
                             break;
                         case 6:
-                            cell.ToolTipText = "On Census outside " + country;
+                            cell.ToolTipText = $"On Census outside {country}";
                             break;
                         case 7:
-                            cell.ToolTipText = "Likely outside " + country + " on census date";
+                            cell.ToolTipText = $"Likely outside {country} on census date";
                             break;
                         case 8:
                             cell.ToolTipText = "Known to be missing from the census";
@@ -230,7 +230,7 @@ namespace FTAnalyzer.Forms
                         }
                         string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
                         if (censusYear == 1939 && !cbCensusSearchProvider.SelectedItem.Equals("Find My Past"))
-                            MessageBox.Show("Unable to search the 1939 National Register on " + cbCensusSearchProvider.SelectedItem + ".", "FTAnalyzer");
+                            MessageBox.Show($"Unable to search the 1939 National Register on {cbCensusSearchProvider.SelectedItem}.", "FTAnalyzer");
                         else
                         {
                             try
