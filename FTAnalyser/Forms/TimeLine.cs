@@ -94,9 +94,9 @@ namespace FTAnalyzer.Forms
 
         private void GeocodeLocationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
             mh.StartGeocoding(outputText);
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         public void DisplayLocationsForYear(string year)
@@ -118,7 +118,6 @@ namespace FTAnalyzer.Forms
                 }
                 txtLocations.Text += " (you may need to zoom out to see them all). Use arrow tool then select icon to view ancestors at location";
                 clusters.Clear();
-                var bbox = new Envelope();
                 foreach (MapLocation loc in locations)
                 {
                     FeatureDataRow row = loc.AddFeatureDataRow(clusters.FactLocations);

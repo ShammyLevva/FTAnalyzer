@@ -229,7 +229,9 @@ namespace FTAnalyzer.Forms
                                 censusYear = (1841 + (e.ColumnIndex - startColumnIndex) * 10);
                         }
                         string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
-                        if (censusYear == 1939 && !cbCensusSearchProvider.SelectedItem.Equals("Find My Past"))
+                        if (censusYear == 1939 && 
+                            !cbCensusSearchProvider.SelectedItem.Equals("Find My Past") && 
+                            !cbCensusSearchProvider.SelectedItem.Equals("Ancestry"))
                             MessageBox.Show($"Unable to search the 1939 National Register on {cbCensusSearchProvider.SelectedItem}.", "FTAnalyzer");
                         else
                         {

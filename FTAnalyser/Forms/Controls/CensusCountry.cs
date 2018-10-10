@@ -43,7 +43,7 @@ namespace Controls
         public string Title {
             get { return groupBox1.Text; }
             set { 
-                if(value != string.Empty)
+                if(!string.IsNullOrEmpty(value))
                     groupBox1.Text = value; 
             } 
         }

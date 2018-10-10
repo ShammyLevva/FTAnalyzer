@@ -4,7 +4,6 @@
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <Rule Id="CA1008" Action="Warning" />
     <Rule Id="CA1013" Action="Warning" />
-    <Rule Id="CA1303" Action="Hidden" />
     <Rule Id="CA1308" Action="Warning" />
     <Rule Id="CA1806" Action="Warning" />
     <Rule Id="CA1816" Action="Warning" />

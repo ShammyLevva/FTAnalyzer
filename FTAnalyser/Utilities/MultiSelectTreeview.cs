@@ -13,10 +13,7 @@ namespace FTAnalyzer.Utilities
         private List<TreeNode> m_SelectedNodes = null;
         public List<TreeNode> SelectedNodes
         {
-            get
-            {
-                return m_SelectedNodes;
-            }
+            get => m_SelectedNodes;
             set
             {
                 ClearSelectedNodes();
@@ -34,7 +31,7 @@ namespace FTAnalyzer.Utilities
         private TreeNode m_SelectedNode;
         public new TreeNode SelectedNode
         {
-            get { return m_SelectedNode; }
+            get => m_SelectedNode;
             set
             {
                 ClearSelectedNodes();

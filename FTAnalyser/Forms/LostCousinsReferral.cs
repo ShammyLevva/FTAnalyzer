@@ -46,9 +46,8 @@ namespace FTAnalyzer.Forms
             int direct = referrals.Count(x => x.RelationType.Equals(Properties.Messages.Referral_Direct));
             int blood = referrals.Count(x => x.RelationType.Equals(Properties.Messages.Referral_Blood));
             int marriage = referrals.Count(x => x.RelationType.Equals(Properties.Messages.Referral_Marriage));
-            int others = referrals.Count(x => x.RelationType.Equals(string.Empty));
-            return total + " Lost Cousins Records listed made up of " + direct + " Direct Ancestors, " + blood + " Blood Relatives, "
-                + marriage + " Marriage and " + others + " Others.";
+            int others = referrals.Count(x => string.IsNullOrEmpty(x.RelationType));
+            return total + $" Lost Cousins Records listed made up of {direct} Direct Ancestors, {blood} Blood Relatives, {marriage} Marriage and {others} Others.";
         }
 
         private void ResetTable()

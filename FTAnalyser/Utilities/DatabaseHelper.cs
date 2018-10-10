@@ -154,7 +154,6 @@ namespace FTAnalyzer.Utilities
                 Version v3_0_0_0 = new Version("3.0.0.0");
                 Version v3_0_2_0 = new Version("3.0.2.0");
                 Version v3_1_2_0 = new Version("3.1.2.0");
-                Version v3_2_1_0 = new Version("3.2.1.0");
                 Version v3_3_2_5 = new Version("3.3.2.5");
                 if (dbVersion < v3_0_0_0)
                 {

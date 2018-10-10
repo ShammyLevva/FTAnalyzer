@@ -20,7 +20,6 @@ namespace FTAnalyzer.Forms
             Series serMotherDaughter = new Series() { Color = Color.Pink, LegendText = @"Mother's Female Children" };
             for (int i = 3; i < 20; i++)
             {
-                string range = (i * 5) + " to " + (i * 5 + 4);
                 serFatherSon.Points.Add(new DataPoint(i * 5, chartData[0, i, 0]));
                 serFatherDaughter.Points.Add(new DataPoint(i * 5, chartData[0, i, 1]));
                 serMotherSon.Points.Add(new DataPoint(i * 5, chartData[1, i, 0]));

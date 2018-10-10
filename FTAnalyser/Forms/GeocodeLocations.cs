@@ -897,7 +897,7 @@ namespace FTAnalyzer.Forms
         public static void ProcessReverseResult(FactLocation loc, GeoResponse res)
         {
             int foundLevel = -1;
-            GeoResponse.CResult.CGeometry.CViewPort viewport = new GeoResponse.CResult.CGeometry.CViewPort();
+            GeoResponse.CResult.CGeometry.CViewPort viewport;
             if (res.Status == "OK")
             {
                 LogResults(loc, res);
@@ -1238,7 +1238,6 @@ namespace FTAnalyzer.Forms
             int foundLevel = loc.FoundLevel >= 0 ? loc.FoundLevel : loc.Level;
             foreach(OS50kGazetteer gaz in results)
             {
-                Coordinate c = new Coordinate(loc.Longitude,loc.Latitude);
                 double distance = GeoSpatialMath.GreatCircleDistance(loc.Longitude, loc.Latitude, gaz.Longitude, gaz.Latitude);
                 if (distance < minDistance &&
                    (distance < 2500 ||
