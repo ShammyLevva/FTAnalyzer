@@ -15,25 +15,11 @@ namespace FactDateTest
     [TestClass()]
     public class FactDateTest
     {
-
-
-        private TestContext testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         // 
@@ -70,15 +56,10 @@ namespace FactDateTest
         ///A test for FactDate Constructor
         ///</summary>
         [TestMethod()]
-        public void FactDateConstructorTest()
+        public void FactDateBasicTest()
         {
-            TestSettings test = new TestSettings();
-            test.ClearNonGEDCOMDateSettings();
-
             FactDate target = BasicDates();
-            target = Betweens();
             target = AlternateDateFormats();
-            target = MoreBetweens();
 
             target = new FactDate("C1914");
             Assert.AreEqual(new DateTime(1913, 1, 1), target.StartDate);
@@ -92,23 +73,51 @@ namespace FactDateTest
             Assert.AreEqual(new DateTime(966, 1, 1), target.StartDate);
             Assert.AreEqual(new DateTime(966, 12, 31), target.EndDate);
 
-            target = FrenchDates();
-
             // interpreted dates
             target = new FactDate("INT 4 OCT 1723 4DA 8MNTH 1723");
             Assert.AreEqual(new DateTime(1723, 10, 4), target.StartDate);
             Assert.AreEqual(new DateTime(1723, 10, 4), target.EndDate);
-
-            target = InvalidGEDCOMFormats
-                (test);
 
             target = new FactDate("BET 5/6/2018 AND 7/6/2018");
             Assert.AreEqual(new DateTime(2018, 6, 5), target.StartDate);
             Assert.AreEqual(new DateTime(2018, 6, 7), target.EndDate);
         }
 
-        private static FactDate InvalidGEDCOMFormats(TestSettings test)
+        /// <summary>
+        ///A test for FactDate Constructor
+        ///</summary>
+        [TestMethod()]
+        public void FactDateBetweensTest()
         {
+            FactDate target = Betweens();
+            target = MoreBetweens();
+        }
+
+        /// <summary>
+        ///A test for FactDate Constructor
+        ///</summary>
+        [TestMethod()]
+        public void FactDateLanguageTest()
+        {
+            // French Dates
+            FactDate target = new FactDate("4 janvier 1880");
+            Assert.AreEqual(new DateTime(1880, 1, 4), target.StartDate);
+            Assert.AreEqual(new DateTime(1880, 1, 4), target.EndDate);
+
+            target = new FactDate("4 MAI 1880");
+            Assert.AreEqual(new DateTime(1880, 5, 4), target.StartDate);
+            Assert.AreEqual(new DateTime(1880, 5, 4), target.EndDate);
+
+        }
+
+        /// <summary>
+        ///A test for FactDate Constructor
+        ///</summary>
+        [TestMethod()]
+        public void InvalidGEDCOMFormats()
+        {
+            TestSettings test = new TestSettings();
+            test.ClearNonGEDCOMDateSettings();
             FactDate target;
             // invalid GEDCOM format dates
             test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.DD_MM_YYYY, "dd/mm/yyyy", "/");
@@ -154,21 +163,7 @@ namespace FactDateTest
             test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.DD_MM_YYYY, "dd/mm/yyyy", "/");
             target = new FactDate("AFT 4/6/2018");
             Assert.AreEqual(new DateTime(2018, 6, 5), target.StartDate);
-            Assert.AreEqual(FactDate.MAXDATE, target.EndDate);
-            return target;
-        }
-
-        private static FactDate FrenchDates()
-        {
-            // French Dates
-            FactDate target = new FactDate("4 janvier 1880");
-            Assert.AreEqual(new DateTime(1880, 1, 4), target.StartDate);
-            Assert.AreEqual(new DateTime(1880, 1, 4), target.EndDate);
-
-            target = new FactDate("4 MAI 1880");
-            Assert.AreEqual(new DateTime(1880, 5, 4), target.StartDate);
-            Assert.AreEqual(new DateTime(1880, 5, 4), target.EndDate);
-            return target;
+            Assert.AreEqual(MAXDATE, target.EndDate);
         }
 
         private static FactDate MoreBetweens()

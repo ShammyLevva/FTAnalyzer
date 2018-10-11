@@ -1,3 +1,8 @@
+#### New Release Version 6.7.0.0, 11th October 2018  
+**Updates**  
+Ancestry 1939 UK National Register searching added
+Marriage comments now show names of both parties for easier reading in an individuals facts report
+
 ### Updated Release Version 6.6.1.1, 29th September 2018  
 **BugFixes**  
 Fix to fact dates for loose births/deaths and some other reports
