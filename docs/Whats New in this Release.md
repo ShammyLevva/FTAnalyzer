@@ -1,3 +1,8 @@
+### Updated Release Version 6.7.1.0, 14th October 2018  
+**Updates**  
+Added support for DEAD, DECEASED, STILLBORN, INFANT, CHILD, YOUNG in death date.  
+Added support for multiple default fact types from Family Tree Maker.  
+
 #### New Release Version 6.7.0.0, 11th October 2018  
 **Updates**  
 Ancestry 1939 UK National Register searching added
