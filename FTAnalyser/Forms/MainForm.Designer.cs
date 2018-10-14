@@ -35,7 +35,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -146,6 +146,8 @@
             this.btnStandardMissingData = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.ckbIgnoreNoDeathDate = new System.Windows.Forms.CheckBox();
+            this.ckbIgnoreNoBirthDate = new System.Windows.Forms.CheckBox();
             this.btnIrishColourCensus = new System.Windows.Forms.Button();
             this.btnCanadianColourCensus = new System.Windows.Forms.Button();
             this.btnUKColourCensus = new System.Windows.Forms.Button();
@@ -232,7 +234,6 @@
             this.pbIndividuals = new System.Windows.Forms.ProgressBar();
             this.label4 = new System.Windows.Forms.Label();
             this.pbSources = new System.Windows.Forms.ProgressBar();
-            this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.tabSelector = new System.Windows.Forms.TabControl();
             this.tabMainLists = new System.Windows.Forms.TabPage();
             this.tabMainListsSelector = new System.Windows.Forms.TabControl();
@@ -312,8 +313,7 @@
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.ckbIgnoreNoDeathDate = new System.Windows.Forms.CheckBox();
-            this.ckbIgnoreNoBirthDate = new System.Windows.Forms.CheckBox();
+            this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -1028,14 +1028,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 166);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1371,6 +1371,26 @@
             this.groupBox3.TabIndex = 36;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Census Suggestions Reports";
+            // 
+            // ckbIgnoreNoDeathDate
+            // 
+            this.ckbIgnoreNoDeathDate.AutoSize = true;
+            this.ckbIgnoreNoDeathDate.Location = new System.Drawing.Point(208, 77);
+            this.ckbIgnoreNoDeathDate.Name = "ckbIgnoreNoDeathDate";
+            this.ckbIgnoreNoDeathDate.Size = new System.Drawing.Size(200, 17);
+            this.ckbIgnoreNoDeathDate.TabIndex = 67;
+            this.ckbIgnoreNoDeathDate.Text = "Ignore Individuals with no death date";
+            this.ckbIgnoreNoDeathDate.UseVisualStyleBackColor = true;
+            // 
+            // ckbIgnoreNoBirthDate
+            // 
+            this.ckbIgnoreNoBirthDate.AutoSize = true;
+            this.ckbIgnoreNoBirthDate.Location = new System.Drawing.Point(6, 77);
+            this.ckbIgnoreNoBirthDate.Name = "ckbIgnoreNoBirthDate";
+            this.ckbIgnoreNoBirthDate.Size = new System.Drawing.Size(193, 17);
+            this.ckbIgnoreNoBirthDate.TabIndex = 66;
+            this.ckbIgnoreNoBirthDate.Text = "Ignore Individuals with no birth date";
+            this.ckbIgnoreNoBirthDate.UseVisualStyleBackColor = true;
             // 
             // btnIrishColourCensus
             // 
@@ -2227,8 +2247,8 @@
             // 
             // tabDisplayProgress
             // 
-            this.tabDisplayProgress.Controls.Add(this.panel2);
             this.tabDisplayProgress.Controls.Add(this.rtbOutput);
+            this.tabDisplayProgress.Controls.Add(this.panel2);
             this.tabDisplayProgress.Location = new System.Drawing.Point(4, 22);
             this.tabDisplayProgress.Name = "tabDisplayProgress";
             this.tabDisplayProgress.Padding = new System.Windows.Forms.Padding(3);
@@ -2336,18 +2356,6 @@
             this.pbSources.Name = "pbSources";
             this.pbSources.Size = new System.Drawing.Size(316, 16);
             this.pbSources.TabIndex = 9;
-            // 
-            // rtbOutput
-            // 
-            this.rtbOutput.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbOutput.Location = new System.Drawing.Point(3, 115);
-            this.rtbOutput.Name = "rtbOutput";
-            this.rtbOutput.ReadOnly = true;
-            this.rtbOutput.Size = new System.Drawing.Size(1079, 325);
-            this.rtbOutput.TabIndex = 6;
-            this.rtbOutput.Text = "";
-            this.rtbOutput.TextChanged += new System.EventHandler(this.RtbOutput_TextChanged);
             // 
             // tabSelector
             // 
@@ -3244,25 +3252,18 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // ckbIgnoreNoDeathDate
+            // rtbOutput
             // 
-            this.ckbIgnoreNoDeathDate.AutoSize = true;
-            this.ckbIgnoreNoDeathDate.Location = new System.Drawing.Point(208, 77);
-            this.ckbIgnoreNoDeathDate.Name = "ckbIgnoreNoDeathDate";
-            this.ckbIgnoreNoDeathDate.Size = new System.Drawing.Size(200, 17);
-            this.ckbIgnoreNoDeathDate.TabIndex = 67;
-            this.ckbIgnoreNoDeathDate.Text = "Ignore Individuals with no death date";
-            this.ckbIgnoreNoDeathDate.UseVisualStyleBackColor = true;
-            // 
-            // ckbIgnoreNoBirthDate
-            // 
-            this.ckbIgnoreNoBirthDate.AutoSize = true;
-            this.ckbIgnoreNoBirthDate.Location = new System.Drawing.Point(6, 77);
-            this.ckbIgnoreNoBirthDate.Name = "ckbIgnoreNoBirthDate";
-            this.ckbIgnoreNoBirthDate.Size = new System.Drawing.Size(193, 17);
-            this.ckbIgnoreNoBirthDate.TabIndex = 66;
-            this.ckbIgnoreNoBirthDate.Text = "Ignore Individuals with no birth date";
-            this.ckbIgnoreNoBirthDate.UseVisualStyleBackColor = true;
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbOutput.Location = new System.Drawing.Point(0, 112);
+            this.rtbOutput.Name = "rtbOutput";
+            this.rtbOutput.ReadOnly = true;
+            this.rtbOutput.Size = new System.Drawing.Size(1079, 325);
+            this.rtbOutput.TabIndex = 13;
+            this.rtbOutput.Text = "";
             // 
             // MainForm
             // 
@@ -3452,7 +3453,6 @@
         private System.Windows.Forms.TabPage tabPlaces;
         private System.Windows.Forms.DataGridView dgPlaces;
         private System.Windows.Forms.TabPage tabDisplayProgress;
-        private Utilities.ScrollingRichTextBox rtbOutput;
         private System.Windows.Forms.TabControl tabSelector;
         private System.Windows.Forms.ToolStripMenuItem mnuMaps;
         private System.Windows.Forms.Button btnBingOSMap;
@@ -3647,6 +3647,7 @@
         private System.Windows.Forms.Button btnColourBMD;
         private System.Windows.Forms.CheckBox ckbIgnoreNoDeathDate;
         private System.Windows.Forms.CheckBox ckbIgnoreNoBirthDate;
+        private Utilities.ScrollingRichTextBox rtbOutput;
     }
 }
 
