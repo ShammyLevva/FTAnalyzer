@@ -3,10 +3,16 @@ FTAnalyzer Documentation
 
 Delve deep into your Family Tree and find out where you have gaps, errors, and untapped sources and find new ways of viewing your tree.
 
-#### PLEASE NOTE you MUST uninstall the old Codeplex version before the version 6.0.1.0 or above can be updated. The latest version can be installed from the [install](http://www.ftanalyzer.com/install) page. The current version works on Windows Vista SP2 through to Windows 10. A MAC version is under active consideration and an initial version is hoped to be available later in 2018.
+##### PLEASE NOTE you MUST uninstall the old Codeplex version before the version 6.0.1.0 or above can be updated. 
+The latest version can be installed from the [install](http://www.ftanalyzer.com/install) page. The current version works on Windows Vista SP2 through to Windows 10. 
 
-If you have any problems, issues or suggestions please add them to the [Issues Section](https://github.com/ShammyLevva/FTAnalyzer/issues). Thank you.
+A MAC version is under development and an initial early test version is [available here](http://mac.ftanalyzer.com).
 
+If you have any problems, issues or suggestions please add them to the [Issues Section](https://github.com/ShammyLevva/FTAnalyzer/issues).  
+
+Thank you.
+
+#### Documentation ####  
 **[Install Instructions](Install%20Instructions)**  
 **[Getting Started](Getting%20Started)**  
 **[Program's Purpose](Program%27s%20Purpose)**  
@@ -26,14 +32,14 @@ If you have any problems, issues or suggestions please add them to the [Issues S
 **The Tabs[](#the-tabs)**
 
 *   **The Main Lists Tab**
-  *   **[The Individuals Tab](The%20Individuals%20Tab)**
-  *   **[The Families Tab](The%20Families%20Tab)**
-  *   **[The Sources Tab](The%20Sources%20Tab)**
-  *   **[The Occupations Tab](The%20Occupations%20Tab)**
+    * **[The Individuals Tab](The%20Individuals%20Tab)**
+    * **[The Families Tab](The%20Families%20Tab)**
+    * **[The Sources Tab](The%20Sources%20Tab)**
+    * **[The Occupations Tab](The%20Occupations%20Tab)**
 *   **The Errors/Fixes Tab**
-  *   **[The Data Errors Tab](The%20Data%20Errors%20Tab)**
-  *   **The Duplicates Tab
-  *   **[The Loose Births/Deaths Tabs](The%20Loose%20Deaths%20Tab)**
+    * **[The Data Errors Tab](The%20Data%20Errors%20Tab)**
+    * **The Duplicates Tab**
+    * **[The Loose Births/Deaths Tabs](The%20Loose%20Deaths%20Tab)**
 *   **[The Surnames Tab](Surnames)**
 *   **[The Locations Tab](The%20Locations%20Tab)**
 *   **[The Facts Tab](The%20Facts%20Tab)**
