@@ -4,7 +4,7 @@ In GRAMPS select the required person record.
 Add a new 'EVENT' record for this person. 
 In EVENT there is an 'Event Type' field with predefined types accessed using a drop-down button. You can override the predefined items by simply typing a new type into the field. 
 
-To use  
+**To use**   
 Type 'Lost Cousins' (without the quotes) into this field ignoring the audible warnings when you type. 
 Then enter the relevant census year into the date field for this new Event. 
 Click OK, and then OK again to update the person record with this new 'Lost Cousins entry. 

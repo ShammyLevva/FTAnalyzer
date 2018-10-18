@@ -21,24 +21,28 @@ If you have any problems, issues or suggestions please add them to the [Issues S
 *   **[Export](Export)**
 *   **[Tools](Tools)**
 *   **[Maps](Maps)**
-*   **Help**
+*   **[Help](facebook.com/FTAnalyzer)**
 
 **The Tabs[](#the-tabs)**
 
-*   **[The Individuals Tab](The%20Individuals%20Tab)**
-*   **[The Families Tab](The%20Families%20Tab)**
+*   **The Main Lists Tab**
+..*   **[The Individuals Tab](The%20Individuals%20Tab)**
+..*   **[The Families Tab](The%20Families%20Tab)**
+..*   **[The Sources Tab](The%20Sources%20Tab)**
+..*   **[The Occupations Tab](The%20Occupations%20Tab)**
+*   **The Errors/Fixes Tab**
+..*   **[The Data Errors Tab](The%20Data%20Errors%20Tab)**
+..*   **The Duplicates Tab
+..*   **[The Loose Births/Deaths Tabs](The%20Loose%20Deaths%20Tab)**
 *   **[The Surnames Tab](Surnames)**
 *   **[The Locations Tab](The%20Locations%20Tab)**
-*   **[The Occupations Tab](The%20Occupations%20Tab)**
 *   **[The Facts Tab](The%20Facts%20Tab)**
-*   **[The Sources Tab](The%20Sources%20Tab)**
-*   **[The Data Errors Tab](The%20Data%20Errors%20Tab)**
-*   **[The Births/Deaths Tab](The%20Loose%20Deaths%20Tab)**
 *   **[The Census Tab](The%20Census%20Tab)**
 *   **[The Lost Cousins Tab](The%20Lost%20Cousins%20Tab)**
-*   **[The Colour Reports Tab](Search%20Summaries%20Tab)**
+*   **[The Research Suggestions Tab](Search%20Summaries%20Tab)**
 *   **[The Tree Tops Tab](The%20Tree%20Tops%20Tab)**
 *   **[The World Wars Tab](The%20War%20Dead%20Tab)**
+*   **The On This Day Tab**
 
 **Hints and Tips[](#hints-and-tips)**
 
