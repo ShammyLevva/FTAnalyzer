@@ -15,19 +15,19 @@ namespace FTAnalyzer
 {
     public class ReportFormHelper : IDisposable
     {
-        private PrintingDataGridViewProvider printProvider;
-        private PrintDocument printDocument;
-        private PrintDialog printDialog;
-        private PrintPreviewDialog printPreviewDialog;
-        private Action _resetTable;
-        private Form parent;
-        private Tuple<int, int> defaultLocation;
-        private Tuple<int, int> defaultSize;
-        private string _registry;
-        private bool _saveForm;
+        PrintingDataGridViewProvider printProvider;
+        PrintDocument printDocument;
+        PrintDialog printDialog;
+        PrintPreviewDialog printPreviewDialog;
+        Form parent;
+        Tuple<int, int> defaultLocation;
+        Tuple<int, int> defaultSize;
+        readonly Action _resetTable;
+        readonly string _registry;
+        readonly bool _saveForm;
 
         public DataGridView ReportGrid { get; private set; }
-        public String PrintTitle { get; set; }
+        public string PrintTitle { get; set; }
 
         public ReportFormHelper(Form parent, string title, DataGridView report, Action resetTable, string registry, bool saveForm = true)
         {
@@ -42,12 +42,9 @@ namespace FTAnalyzer
 
             printDocument = new PrintDocument();
             printDocument.DefaultPageSettings.Landscape = true;
-            printDocument.DefaultPageSettings.Margins =
-                new Margins(15, 15, 15, 15);
+            printDocument.DefaultPageSettings.Margins = new Margins(15, 15, 15, 15);
 
-            printProvider = PrintingDataGridViewProvider.Create(
-                printDocument, ReportGrid, true, true, true,
-                new TitlePrintBlock(PrintTitle), null, null);
+            printProvider = PrintingDataGridViewProvider.Create(printDocument, ReportGrid, true, true, true, new TitlePrintBlock(PrintTitle), null, null);
 
             printDialog = new PrintDialog
             {
