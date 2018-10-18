@@ -26,14 +26,14 @@ If you have any problems, issues or suggestions please add them to the [Issues S
 **The Tabs[](#the-tabs)**
 
 *   **The Main Lists Tab**
-..*   **[The Individuals Tab](The%20Individuals%20Tab)**
-..*   **[The Families Tab](The%20Families%20Tab)**
-..*   **[The Sources Tab](The%20Sources%20Tab)**
-..*   **[The Occupations Tab](The%20Occupations%20Tab)**
+ ..*   **[The Individuals Tab](The%20Individuals%20Tab)**
+ ..*   **[The Families Tab](The%20Families%20Tab)**
+ ..*   **[The Sources Tab](The%20Sources%20Tab)**
+ ..*   **[The Occupations Tab](The%20Occupations%20Tab)**
 *   **The Errors/Fixes Tab**
-..*   **[The Data Errors Tab](The%20Data%20Errors%20Tab)**
-..*   **The Duplicates Tab
-..*   **[The Loose Births/Deaths Tabs](The%20Loose%20Deaths%20Tab)**
+ ..*   **[The Data Errors Tab](The%20Data%20Errors%20Tab)**
+ ..*   **The Duplicates Tab
+ ..*   **[The Loose Births/Deaths Tabs](The%20Loose%20Deaths%20Tab)**
 *   **[The Surnames Tab](Surnames)**
 *   **[The Locations Tab](The%20Locations%20Tab)**
 *   **[The Facts Tab](The%20Facts%20Tab)**
