@@ -1,6 +1,7 @@
 ### Updated Release Version 6.7.3.0, 18th October 2018  
 **Updates**  
 Added support include treetop individuals with one parent
+temporariliy reverted high res monitor manifest fix as it broke windows 7 install
 
 ### Updated Release Version 6.7.2.0, 18th October 2018  
 **Updates**  
