@@ -58,8 +58,9 @@ If you have any problems, issues or suggestions please add them to the [Issues S
 *   **[The Master Genealogist](The%20Master%20Genealogist)**
 *   **[Webtrees](webtrees)**
 *   **[Family Tree Legends](Family%20Tree%20Legends)**
+*   **[GRAMPS](Gramps)**
 
-**(#Mapping)**
+**Mapping**
 
 *   [**Displaying British Parish Boundaries**](Displaying%20England%20and%20Wales%20Parish%20Boundaries)
 *   [**Adding a Custom Map to FTAnalyzer**](Adding%20Custom%20Maps)
