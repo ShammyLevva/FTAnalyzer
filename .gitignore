@@ -260,3 +260,4 @@ __pycache__/
 /FTAnalyser/BuildTools
 /OSGazetteerProcessor/Resources
 /FTAnalyser/Mapping/GoogleAPIKey.cs
+!/docs/releases
