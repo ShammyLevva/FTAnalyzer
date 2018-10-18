@@ -1,7 +1,17 @@
+### Updated Release Version 6.7.3.0, 18th October 2018  
+**Updates**  
+Added support include treetop individuals with one parent
+
+### Updated Release Version 6.7.2.0, 18th October 2018  
+**Updates**  
+Added support for high resolution monitors
+Added support custom facts for occupation and naturalisation
+Added child ids to family export to Excel
+
 ### Updated Release Version 6.7.1.0, 14th October 2018  
 **Updates**  
-Added support for DEAD, DECEASED, STILLBORN, INFANT, CHILD, YOUNG in death date.  
-Added support for multiple default fact types from Family Tree Maker.  
+Added support for DEAD, DECEASED, STILLBORN, INFANT, CHILD, YOUNG in death date.
+Added support for multiple default fact types from Family Tree Maker.
 
 #### New Release Version 6.7.0.0, 11th October 2018  
 **Updates**  

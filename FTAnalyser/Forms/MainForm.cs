@@ -449,8 +449,8 @@ namespace FTAnalyzer
             dgTreeTops.Focus();
             foreach (DataGridViewColumn c in dgTreeTops.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
-            tsCountLabel.Text = Properties.Messages.Count + treeTopsList.Count;
-            tsHintsLabel.Text = Properties.Messages.Hints_Individual;
+            tsCountLabel.Text = Messages.Count + treeTopsList.Count;
+            tsHintsLabel.Text = Messages.Hints_Individual;
             mnuPrint.Enabled = true;
             ShowMenus(true);
             HourGlass(false);
@@ -467,8 +467,8 @@ namespace FTAnalyzer
             dgWorldWars.Focus();
             foreach (DataGridViewColumn c in dgWorldWars.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
-            tsCountLabel.Text = Properties.Messages.Count + warDeadList.Count;
-            tsHintsLabel.Text = Properties.Messages.Hints_Individual + "  " + Properties.Messages.Hints_LivesOfFirstWorldWar;
+            tsCountLabel.Text = Messages.Count + warDeadList.Count;
+            tsHintsLabel.Text = $"{Messages.Hints_Individual}  {Messages.Hints_LivesOfFirstWorldWar}";
             mnuPrint.Enabled = true;
             ShowMenus(true);
             HourGlass(false);
@@ -774,21 +774,9 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private void CkbTTIgnoreLocations_CheckedChanged(object sender, EventArgs e)
-        {
-            if (ckbTTIgnoreLocations.Checked)
-                treetopsCountry.Enabled = false;
-            else
-                treetopsCountry.Enabled = true;
-        }
+        private void CkbTTIgnoreLocations_CheckedChanged(object sender, EventArgs e) => treetopsCountry.Enabled = !ckbTTIgnoreLocations.Checked;
 
-        private void CkbWDIgnoreLocations_CheckedChanged(object sender, EventArgs e)
-        {
-            if (ckbWDIgnoreLocations.Checked)
-                wardeadCountry.Enabled = false;
-            else
-                wardeadCountry.Enabled = true;
-        }
+        private void CkbWDIgnoreLocations_CheckedChanged(object sender, EventArgs e) => wardeadCountry.Enabled = !ckbWDIgnoreLocations.Checked;
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -796,10 +784,7 @@ namespace FTAnalyzer
             Application.Exit();
         }
 
-        private void TabCtrlLocations_Selecting(object sender, TabControlCancelEventArgs e)
-        {
-            HourGlass(true); // turn on when tab selected so all the formatting gets hourglass
-        }
+        private void TabCtrlLocations_Selecting(object sender, TabControlCancelEventArgs e) => HourGlass(true); // turn on when tab selected so all the formatting gets hourglass
 
         private void TabCtrlLocations_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1190,18 +1175,12 @@ namespace FTAnalyzer
                 else if (tabSelector.SelectedTab == tabTreetops)
                 {
                     dgTreeTops.DataSource = null;
-                    if (ckbTTIgnoreLocations.Checked)
-                        treetopsCountry.Enabled = false;
-                    else
-                        treetopsCountry.Enabled = true;
+                    treetopsCountry.Enabled = !ckbTTIgnoreLocations.Checked;
                 }
                 else if (tabSelector.SelectedTab == tabWorldWars)
                 {
                     dgWorldWars.DataSource = null;
-                    if (ckbWDIgnoreLocations.Checked)
-                        wardeadCountry.Enabled = false;
-                    else
-                        wardeadCountry.Enabled = true;
+                    wardeadCountry.Enabled = !ckbWDIgnoreLocations.Checked;
                 }
                 else if (tabSelector.SelectedTab == tabLostCousins)
                 {
@@ -1213,7 +1192,7 @@ namespace FTAnalyzer
                 else if (tabSelector.SelectedTab == tabToday)
                 {
                     bool todaysMonth = Application.UserAppDataRegistry.GetValue("Todays Events Month", "False").Equals("True");
-                    int todaysStep = Int32.Parse(Application.UserAppDataRegistry.GetValue("Todays Events Step", "5").ToString());
+                    int todaysStep = int.Parse(Application.UserAppDataRegistry.GetValue("Todays Events Step", "5").ToString());
                     rbTodayMonth.Checked = todaysMonth;
                     nudToday.Value = todaysStep;
                 }
@@ -1241,9 +1220,7 @@ namespace FTAnalyzer
         private void TabMainListSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabMainListsSelector.SelectedTab == tabIndividuals)
-            {
                 SetupIndividualsTab();
-            }
             else if (tabMainListsSelector.SelectedTab == tabFamilies)
             {
                 SortableBindingList<IDisplayFamily> list = ft.AllDisplayFamilies;
@@ -1294,9 +1271,7 @@ namespace FTAnalyzer
         private async void TabErrorFixSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabErrorFixSelector.SelectedTab == tabDataErrors)
-            {
                 SetupDataErrors();
-            }
             else if (tabErrorFixSelector.SelectedTab == tabDuplicates)
             {
                 rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
@@ -1357,21 +1332,19 @@ namespace FTAnalyzer
 
         private Predicate<Individual> CreateTreeTopsIndividualFilter()
         {
+            Predicate<Individual> treetopFilter = ckbTTIncludeOnlyOneParent.Checked ? 
+                new Predicate<Individual>(ind => ind.HasOnlyOneParent || !ind.HasParents) : new Predicate<Individual>(ind => !ind.HasParents);
             Predicate<Individual> locationFilter = treetopsCountry.BuildFilter<Individual>(FactDate.UNKNOWN_DATE, (d, x) => x.BestLocation(d));
             Predicate<Individual> relationFilter = treetopsRelation.BuildFilter<Individual>(x => x.RelationType);
             Predicate<Individual> filter = FilterUtils.AndFilter(locationFilter, relationFilter);
-
-            if (ckbTTIgnoreLocations.Checked)
-                filter = relationFilter;
-            else
-                filter = FilterUtils.AndFilter<Individual>(locationFilter, relationFilter);
+            filter = ckbTTIgnoreLocations.Checked ? relationFilter : FilterUtils.AndFilter(locationFilter, relationFilter);
 
             if (txtTreetopsSurname.Text.Length > 0)
             {
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtTreetopsSurname.Text);
-                filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
+                filter = FilterUtils.AndFilter(filter, surnameFilter);
             }
-
+            filter = FilterUtils.AndFilter(filter, treetopFilter);
             return filter;
         }
 
@@ -1384,22 +1357,17 @@ namespace FTAnalyzer
             Predicate<Individual> deathFilter = FilterUtils.DateFilter<Individual>(x => x.DeathDate, deathRange);
 
             if (ckbWDIgnoreLocations.Checked)
-                filter = FilterUtils.AndFilter<Individual>(
-                        FilterUtils.AndFilter<Individual>(birthFilter, deathFilter), relationFilter);
+                filter = FilterUtils.AndFilter(FilterUtils.AndFilter(birthFilter, deathFilter), relationFilter);
             else
-                filter = FilterUtils.AndFilter<Individual>(
-                        FilterUtils.AndFilter<Individual>(birthFilter, deathFilter),
-                        FilterUtils.AndFilter<Individual>(locationFilter, relationFilter));
+                filter = FilterUtils.AndFilter(FilterUtils.AndFilter(birthFilter, deathFilter), FilterUtils.AndFilter(locationFilter, relationFilter));
 
             if (txtWorldWarsSurname.Text.Length > 0)
             {
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtWorldWarsSurname.Text);
-                filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
+                filter = FilterUtils.AndFilter(filter, surnameFilter);
             }
             if (ckbMilitaryOnly.Checked)
-            {
-                filter = FilterUtils.AndFilter<Individual>(filter, x => x.HasMilitaryFacts);
-            }
+                filter = FilterUtils.AndFilter(filter, x => x.HasMilitaryFacts);
 
             return filter;
         }
