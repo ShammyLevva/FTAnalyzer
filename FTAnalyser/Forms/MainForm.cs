@@ -27,21 +27,21 @@ namespace FTAnalyzer
     public partial class MainForm : Form
 
     {
-        public static string VERSION = "6.7.2.0";
+        public static string VERSION = "6.7.3.0-beta1";
 
-        private static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private Cursor storedCursor = Cursors.Default;
-        private FamilyTree ft = FamilyTree.Instance;
-        private bool stopProcessing = false;
-        private string filename;
-        private PrivateFontCollection fonts = new PrivateFontCollection();
-        private Font handwritingFont;
-        private Font boldFont;
-        private Font normalFont;
-        private bool loading;
-        private bool WWI = false;
-        private ReportFormHelper rfhDuplicates;
+        Cursor storedCursor = Cursors.Default;
+        FamilyTree ft = FamilyTree.Instance;
+        bool stopProcessing = false;
+        string filename;
+        PrivateFontCollection fonts = new PrivateFontCollection();
+        Font handwritingFont;
+        Font boldFont;
+        Font normalFont;
+        bool loading;
+        bool WWI = false;
+        ReportFormHelper rfhDuplicates;
 
         public MainForm()
         {
