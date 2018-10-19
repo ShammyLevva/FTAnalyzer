@@ -3,6 +3,7 @@ using FTAnalyzer.Forms;
 using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
+using HtmlAgilityPack;
 using Ionic.Zip;
 using Printing.DataGridViewPrint.Tools;
 using System;
@@ -15,6 +16,7 @@ using System.Drawing.Printing;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,7 +29,7 @@ namespace FTAnalyzer
     public partial class MainForm : Form
 
     {
-        public static string VERSION = "6.7.3.0";
+        public static string VERSION = "7.0.0.0";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -55,11 +57,12 @@ namespace FTAnalyzer
             int pos = VERSION.IndexOf('-');
             string ver = pos > 0 ? VERSION.Substring(0, VERSION.IndexOf('-')) : VERSION;
             DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
+            CheckWebVersion();
             SetSavePath();
             BuildRecentList();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        void MainForm_Load(object sender, EventArgs e)
         {
             SetupFonts();
             RegisterEventHandlers();
@@ -72,7 +75,28 @@ namespace FTAnalyzer
             loading = false;
         }
 
-        private void SetupFonts()
+        void CheckWebVersion()
+        {
+            try
+            {
+                WebClient wc = new WebClient();
+                string webData = wc.DownloadString("http://www.ftanalyzer.com/install");
+                HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                doc.LoadHtml(webData);
+                HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//table/tr[2]/td/table/tr/td/table/tr[4]/td[3]");
+                string webVersion = versionNode.InnerText;
+                if (webVersion != VERSION)
+                {
+                    string text = $"Version installed: {VERSION}, Web version available: {webVersion}\nDo you want to go to website to download the latest version?";
+                    DialogResult download = MessageBox.Show(text, "FTAnalyzer", MessageBoxButtons.YesNo);
+                    if (download == DialogResult.Yes)
+                        HttpUtility.VisitWebsite("https://github.com/ShammyLevva/FTAnalyzer/releases");
+                }
+            }
+            catch(Exception) {  }
+        }
+
+        void SetupFonts()
         {
             SpecialMethods.SetFonts(this);
             boldFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Bold);
