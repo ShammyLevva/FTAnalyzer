@@ -77,23 +77,27 @@ namespace FTAnalyzer
 
         void CheckWebVersion()
         {
-            try
+            string appPath = Application.ExecutablePath;
+            if (!appPath.StartsWith(@"D:\Programming\GitRepo\FTAnalyzer\FTAnalyser\bin"))
             {
-                WebClient wc = new WebClient();
-                string webData = wc.DownloadString("http://www.ftanalyzer.com/install");
-                HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-                doc.LoadHtml(webData);
-                HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//table/tr[2]/td/table/tr/td/table/tr[4]/td[3]");
-                string webVersion = versionNode.InnerText;
-                if (webVersion != VERSION)
+                try
                 {
-                    string text = $"Version installed: {VERSION}, Web version available: {webVersion}\nDo you want to go to website to download the latest version?";
-                    DialogResult download = MessageBox.Show(text, "FTAnalyzer", MessageBoxButtons.YesNo);
-                    if (download == DialogResult.Yes)
-                        HttpUtility.VisitWebsite("https://github.com/ShammyLevva/FTAnalyzer/releases");
+                    WebClient wc = new WebClient();
+                    string webData = wc.DownloadString("http://www.ftanalyzer.com/install");
+                    HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                    doc.LoadHtml(webData);
+                    HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//table/tr[2]/td/table/tr/td/table/tr[4]/td[3]");
+                    string webVersion = versionNode.InnerText;
+                    if (webVersion != VERSION)
+                    {
+                        string text = $"Version installed: {VERSION}, Web version available: {webVersion}\nDo you want to go to website to download the latest version?";
+                        DialogResult download = MessageBox.Show(text, "FTAnalyzer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (download == DialogResult.Yes)
+                            HttpUtility.VisitWebsite("https://github.com/ShammyLevva/FTAnalyzer/releases");
+                    }
                 }
+                catch (Exception) { }
             }
-            catch(Exception) {  }
         }
 
         void SetupFonts()
