@@ -1,25 +1,32 @@
-### Updated Release Version 6.7.3.0, 18th October 2018  
+#### New Release Version 7.0.0.0, 21st October 2018
 **Updates**  
-Added support include treetop individuals with one parent
-temporariliy reverted high res monitor manifest fix as it broke windows 7 install
+Updated the .Net Framework to the latest .Net 4.7.2 this means v6.7.3 is the last Vista version  
+Updating to .Net 4.7.2 means new features in Windows can be properly supported  
+Added a version check on startup so that zip installed versions will also warn if outdated  
+Added an OS version check to see how many users of soon to be discontinued Windows 7 there still are
 
-### Updated Release Version 6.7.2.0, 18th October 2018  
+#### Updated Release Version 6.7.3.0, 18th October 2018  
 **Updates**  
-Added support for high resolution monitors
-Added support custom facts for occupation and naturalisation
-Added child ids to family export to Excel
+Added support include treetop individuals with one parent  
+Temporarily reverted high res monitor manifest fix as it broke windows 7 install
 
-### Updated Release Version 6.7.1.0, 14th October 2018  
+#### Updated Release Version 6.7.2.0, 18th October 2018  
 **Updates**  
-Added support for DEAD, DECEASED, STILLBORN, INFANT, CHILD, YOUNG in death date.
+Added support for high resolution monitors  
+Added support custom facts for occupation and naturalisation  
+Added child ids to family export to Excel  
+
+#### Updated Release Version 6.7.1.0, 14th October 2018  
+**Updates**  
+Added support for DEAD, DECEASED, STILLBORN, INFANT, CHILD, YOUNG in death date.  
 Added support for multiple default fact types from Family Tree Maker.
 
 #### New Release Version 6.7.0.0, 11th October 2018  
 **Updates**  
-Ancestry 1939 UK National Register searching added
+Ancestry 1939 UK National Register searching added  
 Marriage comments now show names of both parties for easier reading in an individuals facts report
 
-### Updated Release Version 6.6.1.1, 29th September 2018  
+#### Updated Release Version 6.6.1.1, 29th September 2018  
 **BugFixes**  
 Fix to fact dates for loose births/deaths and some other reports
 
@@ -27,28 +34,28 @@ Fix to fact dates for loose births/deaths and some other reports
 **Updates**  
 Added options to filter unknown births and unknown deaths from colour census reports.
 
-### Updated Release Version 6.6.0.2, 16th September 2018  
+#### Updated Release Version 6.6.0.2, 16th September 2018  
 **BugFixes**  
 Small tweak to bad lines check to better cope with the invalid screwed up nonsense that isn't valid GEDCOM that Ancestry produces with notes fields.
 
-### Updated Release Version 6.6.0.1, 14th September 2018  
+#### Updated Release Version 6.6.0.1, 14th September 2018  
 **BugFixes**  
-Locations with LAT/LONG in GEDCOM weren't updating as previously Geocoded locations
-Fix issue with unusual characters eg: © ® ¿ » « appearing in locations
+Locations with LAT/LONG in GEDCOM weren't updating as previously Geocoded locations  
+Fix issue with unusual characters eg: © ® ¿ » « appearing in locations  
 
 #### New Release Version 6.6.0.0, 9th September 2018  
 **Updates**  
 New Font setting feature - allows you to change default font used
 
-### Updated Release Version 6.5.1.2, 5th August 2018  
+#### Updated Release Version 6.5.1.2, 5th August 2018  
 **BugFixes**  
 Fix Bug with dashes causing failed test classes
 
-### Updated Release Version 6.5.1.1, 5th August 2018  
+#### Updated Release Version 6.5.1.1, 5th August 2018  
 **BugFixes**  
 Fix slow loading of individuals introduced in v6.5.0.0
 
-### Updated Release Version 6.5.1.0, 3rd August 2018  
+#### Updated Release Version 6.5.1.0, 3rd August 2018  
 **Updates**  
 Added relationship check when someone is a direct ancestor more than once
 
@@ -62,7 +69,7 @@ Significant addition to FactDate measurements now cater for non GEDCOM date form
 See Tools/Options panel for settings. By default this is off.  
 Note this should not be taken as an encouragement to use non GEDCOM dates.  
 
-### Updated Release Version 6.4.3.1, 15th June 2018  
+#### Updated Release Version 6.4.3.1, 15th June 2018  
 **BugFixes**  
 Fix issue with Diacritics in locations causing loading to get stuck forever.
 
