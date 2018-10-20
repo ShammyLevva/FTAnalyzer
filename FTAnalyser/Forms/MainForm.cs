@@ -110,7 +110,7 @@ namespace FTAnalyzer
                 OperatingSystem os = Environment.OSVersion;
                 SimpleTrackerEnvironment ste = new SimpleTrackerEnvironment(os.Platform.ToString(), os.Version.ToString(), os.VersionString);
                 SimpleTracker st = new SimpleTracker("UA-125850339-2", ste);
-                TrackingResult x = await st.TrackPageViewAsync("FTAnalyzer Vists", $"http://www.ftanalyzer.com/releases/visits.html?version={VERSION}", null);
+                TrackingResult x = await st.TrackPageViewAsync("FTAnalyzer Vists", $"http://www.ftanalyzer.com/releases/visits.html?version={VERSION}&os={os.VersionString}", null);
             }
             catch (Exception) { }
         }
