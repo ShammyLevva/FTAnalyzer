@@ -155,6 +155,7 @@ namespace FTAnalyzer.Utilities
                 Version v3_0_2_0 = new Version("3.0.2.0");
                 Version v3_1_2_0 = new Version("3.1.2.0");
                 Version v3_3_2_5 = new Version("3.3.2.5");
+                Version v7_0_0_0 = new Version("7.0.0.0");
                 if (dbVersion < v3_0_0_0)
                 {
                     // Version is less than 3.0.0.0 or none existent so copy latest database from empty database
@@ -255,6 +256,17 @@ namespace FTAnalyzer.Utilities
                             cmd.ExecuteNonQuery();
                         }
                         using (SQLiteCommand cmd = new SQLiteCommand("update versions set Database = '3.3.2.5'", conn))
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    if (dbVersion < v7_0_0_0)
+                    {
+                        using (SQLiteCommand cmd = new SQLiteCommand("update Geocode set geocodestatus = 0 where latitude=0 and longitude=0 and geocodestatus=3", conn))
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
+                        using (SQLiteCommand cmd = new SQLiteCommand("update versions set Database = '7.0.0.0'", conn))
                         {
                             cmd.ExecuteNonQuery();
                         }
