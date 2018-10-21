@@ -315,7 +315,6 @@
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.webBrowserVersion = new System.Windows.Forms.WebBrowser();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -2264,7 +2263,6 @@
             // 
             this.tabDisplayProgress.Controls.Add(this.rtbOutput);
             this.tabDisplayProgress.Controls.Add(this.panel2);
-            this.tabDisplayProgress.Controls.Add(this.webBrowserVersion);
             this.tabDisplayProgress.Location = new System.Drawing.Point(4, 22);
             this.tabDisplayProgress.Name = "tabDisplayProgress";
             this.tabDisplayProgress.Padding = new System.Windows.Forms.Padding(3);
@@ -3281,14 +3279,6 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // webBrowserVersion
-            // 
-            this.webBrowserVersion.Location = new System.Drawing.Point(287, 142);
-            this.webBrowserVersion.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowserVersion.Name = "webBrowserVersion";
-            this.webBrowserVersion.Size = new System.Drawing.Size(250, 250);
-            this.webBrowserVersion.TabIndex = 14;
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -3673,7 +3663,6 @@
         private System.Windows.Forms.CheckBox ckbIgnoreNoBirthDate;
         private Utilities.ScrollingRichTextBox rtbOutput;
         private System.Windows.Forms.CheckBox ckbTTIncludeOnlyOneParent;
-        private System.Windows.Forms.WebBrowser webBrowserVersion;
     }
 }
 

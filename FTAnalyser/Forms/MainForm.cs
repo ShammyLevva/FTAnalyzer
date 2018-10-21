@@ -111,7 +111,7 @@ namespace FTAnalyzer
                     Settings.Default.Save();
                 }
                 OperatingSystem os = Environment.OSVersion;
-                webBrowserVersion.Navigate($"http://www.ftanalyzer.com/releases/visits.html?version={VERSION}&os={os.VersionString}");
+                //webBrowserVersion.Navigate($"http://www.ftanalyzer.com/releases/visits.html?version={VERSION}&os={os.VersionString}");
             }
             catch (Exception e) { }
         }
