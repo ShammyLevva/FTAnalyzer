@@ -3,6 +3,9 @@ using FTAnalyzer.Forms;
 using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
+using GoogleAnalyticsTracker.Core;
+using GoogleAnalyticsTracker.Core.TrackerParameters;
+using GoogleAnalyticsTracker.Simple;
 using HtmlAgilityPack;
 using Ionic.Zip;
 using Printing.DataGridViewPrint.Tools;
@@ -58,9 +61,9 @@ namespace FTAnalyzer
             string ver = pos > 0 ? VERSION.Substring(0, VERSION.IndexOf('-')) : VERSION;
             DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
             CheckWebVersion();
-            CheckProgramUsage();
             SetSavePath();
             BuildRecentList();
+            Analytics.CheckProgramUsage();
         }
 
         void MainForm_Load(object sender, EventArgs e)
@@ -99,21 +102,6 @@ namespace FTAnalyzer
                 }
                 catch (Exception) { }
             }
-        }
-
-        void CheckProgramUsage() // pre demise of Windows 7 add tracker to check how many machines still use old versions
-        {
-            try
-            {
-                if (Settings.Default.GUID.ToString() == "00000000-0000-0000-0000-000000000000")
-                {
-                    Settings.Default.GUID = Guid.NewGuid();
-                    Settings.Default.Save();
-                }
-                OperatingSystem os = Environment.OSVersion;
-                //webBrowserVersion.Navigate($"http://www.ftanalyzer.com/releases/visits.html?version={VERSION}&os={os.VersionString}");
-            }
-            catch (Exception e) { }
         }
 
         void SetupFonts()

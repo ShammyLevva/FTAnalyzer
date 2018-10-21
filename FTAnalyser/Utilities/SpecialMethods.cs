@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using GoogleAnalyticsTracker.Core;
+using GoogleAnalyticsTracker.Core.TrackerParameters;
+using GoogleAnalyticsTracker.Simple;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FTAnalyzer.Utilities
@@ -30,6 +34,22 @@ namespace FTAnalyzer.Utilities
             foreach (Control theControl in GetAllControls(form))
                 if (theControl.Font.Name.Equals(Properties.FontSettings.Default.SelectedFont.Name))
                     theControl.Font = Properties.FontSettings.Default.SelectedFont;
+        }
+
+        public static async Task<TrackingResult> TrackEventAsync(this SimpleTracker tracker, string category, string action, string label, long value = 1)
+        {
+            var eventTrackingParameters = new EventTracking
+            {
+                UserId = Properties.Settings.Default.GUID.ToString(),
+                ApplicationName = "FTAnalyzer",
+                ApplicationVersion = MainForm.VERSION,
+                Category = category,
+                Action = action,
+                Label = label,
+                Value = value,
+                CacheBuster = tracker.AnalyticsSession.GenerateCacheBuster()
+            };
+            return await tracker.TrackAsync(eventTrackingParameters);
         }
     }
 }
