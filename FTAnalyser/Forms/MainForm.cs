@@ -394,10 +394,7 @@ namespace FTAnalyzer
 
         void HourGlass(bool on)
         {
-            if (on)
-                Cursor = Cursors.WaitCursor;
-            else
-                Cursor = Cursors.Default;
+            Cursor = on ? Cursors.WaitCursor : Cursors.Default;
             Application.DoEvents();
         }
 
@@ -1850,17 +1847,17 @@ namespace FTAnalyzer
 
         private static void ClearRecentList()
         {
-            Properties.Settings.Default.RecentFiles.Clear();
+            Settings.Default.RecentFiles.Clear();
             for (int i = 0; i < 5; i++)
             {
-                Properties.Settings.Default.RecentFiles.Add(string.Empty);
+                Settings.Default.RecentFiles.Add(string.Empty);
             }
-            Properties.Settings.Default.Save();
+            Settings.Default.Save();
         }
 
         void BuildRecentList()
         {
-            if (Properties.Settings.Default.RecentFiles == null || Properties.Settings.Default.RecentFiles.Count != 5)
+            if (Settings.Default.RecentFiles == null || Settings.Default.RecentFiles.Count != 5)
             {
                 ClearRecentList();
             }
@@ -1869,7 +1866,7 @@ namespace FTAnalyzer
             int count = 0;
             for (int i = 0; i < 5; i++)
             {
-                string name = Properties.Settings.Default.RecentFiles[i];
+                string name = Settings.Default.RecentFiles[i];
                 if (name != null && name.Length > 0 && File.Exists(name))
                 {
                     added = true;
@@ -1892,14 +1889,14 @@ namespace FTAnalyzer
         {
             string[] recent = new string[5];
 
-            if (Properties.Settings.Default.RecentFiles != null)
+            if (Settings.Default.RecentFiles != null)
             {
                 int j = 1;
-                for (int i = 0; i < Properties.Settings.Default.RecentFiles.Count; i++)
+                for (int i = 0; i < Settings.Default.RecentFiles.Count; i++)
                 {
-                    if (Properties.Settings.Default.RecentFiles[i] != filename && File.Exists(Properties.Settings.Default.RecentFiles[i]))
+                    if (Settings.Default.RecentFiles[i] != filename && File.Exists(Settings.Default.RecentFiles[i]))
                     {
-                        recent[j++] = Properties.Settings.Default.RecentFiles[i];
+                        recent[j++] = Settings.Default.RecentFiles[i];
                         if (j == 5) break;
                     }
                 }
