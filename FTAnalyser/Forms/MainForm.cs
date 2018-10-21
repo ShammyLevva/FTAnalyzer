@@ -3,8 +3,6 @@ using FTAnalyzer.Forms;
 using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
-using GoogleAnalyticsTracker.Core;
-using GoogleAnalyticsTracker.Simple;
 using HtmlAgilityPack;
 using Ionic.Zip;
 using Printing.DataGridViewPrint.Tools;
@@ -103,16 +101,19 @@ namespace FTAnalyzer
             }
         }
 
-        async void CheckProgramUsage() // pre demise of Windows 7 add tracker to check how many machines still use old versions
+        void CheckProgramUsage() // pre demise of Windows 7 add tracker to check how many machines still use old versions
         {
             try
             {
+                if (Settings.Default.GUID.ToString() == "00000000-0000-0000-0000-000000000000")
+                {
+                    Settings.Default.GUID = Guid.NewGuid();
+                    Settings.Default.Save();
+                }
                 OperatingSystem os = Environment.OSVersion;
-                SimpleTrackerEnvironment ste = new SimpleTrackerEnvironment(os.Platform.ToString(), os.Version.ToString(), os.VersionString);
-                SimpleTracker st = new SimpleTracker("UA-125850339-2", ste);
-                TrackingResult x = await st.TrackPageViewAsync("FTAnalyzer Vists", $"http://www.ftanalyzer.com/releases/visits.html?version={VERSION}&os={os.VersionString}", null);
+                webBrowserVersion.Navigate($"http://www.ftanalyzer.com/releases/visits.html?version={VERSION}&os={os.VersionString}");
             }
-            catch (Exception) { }
+            catch (Exception e) { }
         }
 
         void SetupFonts()
