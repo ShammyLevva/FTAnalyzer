@@ -3,9 +3,6 @@ using FTAnalyzer.Forms;
 using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
-using GoogleAnalyticsTracker.Core;
-using GoogleAnalyticsTracker.Core.TrackerParameters;
-using GoogleAnalyticsTracker.Simple;
 using HtmlAgilityPack;
 using Ionic.Zip;
 using Printing.DataGridViewPrint.Tools;
@@ -63,7 +60,6 @@ namespace FTAnalyzer
             CheckWebVersion();
             SetSavePath();
             BuildRecentList();
-            Analytics.CheckProgramUsage();
         }
 
         void MainForm_Load(object sender, EventArgs e)
@@ -82,26 +78,24 @@ namespace FTAnalyzer
         void CheckWebVersion()
         {
             string appPath = Application.ExecutablePath;
-            if (!appPath.StartsWith(@"D:\Programming\GitRepo\FTAnalyzer\FTAnalyser\bin"))
+            try
             {
-                try
+                WebClient wc = new WebClient();
+                HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                string webData = wc.DownloadString("http://www.ftanalyzer.com/install");
+                doc.LoadHtml(webData);
+                HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//table/tr[2]/td/table/tr/td/table/tr[4]/td[3]");
+                string webVersion = versionNode.InnerText;
+                if (webVersion != VERSION && !appPath.StartsWith(@"D:\Programming\GitRepo\FTAnalyzer\FTAnalyser\bin")) // skip showing messagebox if on my development PC
                 {
-                    WebClient wc = new WebClient();
-                    HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-                    string webData = wc.DownloadString("http://www.ftanalyzer.com/install");
-                    doc.LoadHtml(webData);
-                    HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//table/tr[2]/td/table/tr/td/table/tr[4]/td[3]");
-                    string webVersion = versionNode.InnerText;
-                    if (webVersion != VERSION)
-                    {
-                        string text = $"Version installed: {VERSION}, Web version available: {webVersion}\nDo you want to go to website to download the latest version?";
-                        DialogResult download = MessageBox.Show(text, "FTAnalyzer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        if (download == DialogResult.Yes)
-                            HttpUtility.VisitWebsite("https://github.com/ShammyLevva/FTAnalyzer/releases");
-                    }
+                    string text = $"Version installed: {VERSION}, Web version available: {webVersion}\nDo you want to go to website to download the latest version?";
+                    DialogResult download = MessageBox.Show(text, "FTAnalyzer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (download == DialogResult.Yes)
+                        HttpUtility.VisitWebsite("https://github.com/ShammyLevva/FTAnalyzer/releases");
                 }
-                catch (Exception) { }
+                Analytics.CheckProgramUsage();
             }
+            catch (Exception) { }
         }
 
         void SetupFonts()
@@ -116,7 +110,7 @@ namespace FTAnalyzer
             fonts.AddMemoryFont(fontPtr, Resources.KUNSTLER.Length);
             NativeMethods.AddFontMemResourceEx(fontPtr, (uint)Resources.KUNSTLER.Length, IntPtr.Zero, ref dummy);
             System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
-            switch(FontSettings.Default.FontNumber)
+            switch (FontSettings.Default.FontNumber)
             {
                 case 1:
                     handwritingFont = new Font(fonts.Families[0], 52.0F, FontStyle.Bold);
@@ -1361,7 +1355,7 @@ namespace FTAnalyzer
 
         private Predicate<Individual> CreateTreeTopsIndividualFilter()
         {
-            Predicate<Individual> treetopFilter = ckbTTIncludeOnlyOneParent.Checked ? 
+            Predicate<Individual> treetopFilter = ckbTTIncludeOnlyOneParent.Checked ?
                 new Predicate<Individual>(ind => ind.HasOnlyOneParent || !ind.HasParents) : new Predicate<Individual>(ind => !ind.HasParents);
             Predicate<Individual> locationFilter = treetopsCountry.BuildFilter<Individual>(FactDate.UNKNOWN_DATE, (d, x) => x.BestLocation(d));
             Predicate<Individual> relationFilter = treetopsRelation.BuildFilter<Individual>(x => x.RelationType);
@@ -2601,7 +2595,7 @@ namespace FTAnalyzer
         void DisplayColourCensus(string country)
         {
             HourGlass(true);
-            List<IDisplayColourCensus> list = 
+            List<IDisplayColourCensus> list =
                 ft.ColourCensus(country, relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily, ckbIgnoreNoBirthDate.Checked, ckbIgnoreNoDeathDate.Checked);
             ColourCensus rs = new ColourCensus(country, list);
             DisposeDuplicateForms(rs);

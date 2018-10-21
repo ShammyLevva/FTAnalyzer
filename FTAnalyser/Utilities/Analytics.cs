@@ -9,6 +9,9 @@ namespace FTAnalyzer.Utilities
 {
     class Analytics 
     {
+        static readonly SimpleTrackerEnvironment trackerEnvironment;
+        static readonly SimpleTracker tracker;
+
         static Analytics()
         {
             if (Settings.Default.GUID.ToString() == "00000000-0000-0000-0000-000000000000")
@@ -16,20 +19,28 @@ namespace FTAnalyzer.Utilities
                 Settings.Default.GUID = Guid.NewGuid();
                 Settings.Default.Save();
             }
+            OperatingSystem os = Environment.OSVersion;
+            trackerEnvironment = new SimpleTrackerEnvironment(os.Platform.ToString(), os.Version.ToString(), os.VersionString);
+            tracker = new SimpleTracker("UA-125850339-2", trackerEnvironment);
         }
 
         public static async void CheckProgramUsage() // pre demise of Windows 7 add tracker to check how many machines still use old versions
         {
             try
             {
-                OperatingSystem os = Environment.OSVersion;
-                SimpleTrackerEnvironment ste = new SimpleTrackerEnvironment(os.Platform.ToString(), os.Version.ToString(), os.VersionString);
-                SimpleTracker st = new SimpleTracker("UA-125850339-2", ste);
-                await SpecialMethods.TrackEventAsync(st, "FTAnalyzer Startup", "LoadProgram", MainForm.VERSION).ConfigureAwait(false);
+                await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Startup", "LoadProgram", MainForm.VERSION).ConfigureAwait(false);
+                await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Startup", "RecordOSVersion", trackerEnvironment.OsVersion).ConfigureAwait(false);
             }
             catch (Exception e) { Console.WriteLine(e.Message); }
         }
 
-
+        public static async void MainFormAction(string action, string value)
+        {
+            try
+            {
+                await SpecialMethods.TrackEventAsync(tracker, "Main Form Action", action, value).ConfigureAwait(false);
+            }
+            catch (Exception e) { Console.WriteLine(e.Message); }
+        }
     }
 }

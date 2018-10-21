@@ -40,13 +40,16 @@ namespace FTAnalyzer.Utilities
         {
             var eventTrackingParameters = new EventTracking
             {
+                ClientId = Properties.Settings.Default.GUID.ToString(),
                 UserId = Properties.Settings.Default.GUID.ToString(),
+                
                 ApplicationName = "FTAnalyzer",
                 ApplicationVersion = MainForm.VERSION,
                 Category = category,
                 Action = action,
                 Label = label,
                 Value = value,
+                ScreenResolution = Screen.PrimaryScreen.Bounds.ToString(),
                 CacheBuster = tracker.AnalyticsSession.GenerateCacheBuster()
             };
             return await tracker.TrackAsync(eventTrackingParameters);
