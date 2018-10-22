@@ -97,6 +97,7 @@
             this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportAnIssueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.privacyPolicyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.whatsNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSetRoot = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -822,6 +823,7 @@
             this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem,
             this.reportAnIssueToolStripMenuItem,
             this.toolStripSeparator1,
+            this.privacyPolicyToolStripMenuItem,
             this.whatsNewToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
@@ -853,6 +855,13 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(252, 6);
+            // 
+            // privacyPolicyToolStripMenuItem
+            // 
+            this.privacyPolicyToolStripMenuItem.Name = "privacyPolicyToolStripMenuItem";
+            this.privacyPolicyToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.privacyPolicyToolStripMenuItem.Text = "Privacy Policy";
+            this.privacyPolicyToolStripMenuItem.Click += new System.EventHandler(this.PrivacyPolicyToolStripMenuItem_Click);
             // 
             // whatsNewToolStripMenuItem
             // 
@@ -3663,6 +3672,7 @@
         private System.Windows.Forms.CheckBox ckbIgnoreNoBirthDate;
         private Utilities.ScrollingRichTextBox rtbOutput;
         private System.Windows.Forms.CheckBox ckbTTIncludeOnlyOneParent;
+        private System.Windows.Forms.ToolStripMenuItem privacyPolicyToolStripMenuItem;
     }
 }
 

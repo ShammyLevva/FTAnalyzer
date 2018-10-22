@@ -764,6 +764,11 @@ namespace FTAnalyzer
             HttpUtility.VisitWebsite("http://www.ftanalyzer.com/guides");
         }
 
+        private void PrivacyPolicyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HttpUtility.VisitWebsite("http://www.ftanalyzer.com/privacy");
+        }
+
         void OlderParentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
@@ -819,7 +824,7 @@ namespace FTAnalyzer
             if (control is DataGridView)
             {
                 DataGridView dg = control as DataGridView;
-                tsCountLabel.Text = Properties.Messages.Count + dg.RowCount + " " + dg.Name.Substring(2);
+                tsCountLabel.Text = Messages.Count + dg.RowCount + " " + dg.Name.Substring(2);
                 mnuPrint.Enabled = true;
             }
             else
@@ -827,7 +832,7 @@ namespace FTAnalyzer
                 tsCountLabel.Text = string.Empty;
                 mnuPrint.Enabled = false;
             }
-            tsHintsLabel.Text = Properties.Messages.Hints_Location;
+            tsHintsLabel.Text = Messages.Hints_Location;
             HourGlass(false);
         }
 
