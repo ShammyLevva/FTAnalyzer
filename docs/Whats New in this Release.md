@@ -1,4 +1,4 @@
-#### Major New Release Version 7.0.0.0, 23rd October 2018
+#### Major New Release Version 7.0.0.0, 24th October 2018
 **Updates**  
 Updated the .Net Framework to the latest .Net 4.7.2 this means v6.7.3 is the last Vista version  
 Updating to .Net 4.7.2 means new features in Windows can be properly supported  
