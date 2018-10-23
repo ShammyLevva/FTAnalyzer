@@ -330,6 +330,7 @@ namespace FTAnalyzer
                 await LoadFileAsync(openGedcom.FileName);
                 Settings.Default.LoadLocation = Path.GetFullPath(openGedcom.FileName);
                 Settings.Default.Save();
+                Analytics.TrackAction(Analytics.MainFormAction, "Load GEDCOM", FamilyTree.Instance.IndividualCount.ToString());
             }
         }
 
@@ -477,6 +478,7 @@ namespace FTAnalyzer
             mnuPrint.Enabled = true;
             ShowMenus(true);
             HourGlass(false);
+            Analytics.TrackAction(Analytics.MainFormAction, "Treetops Report Clicked");
         }
 
         void BtnWWI_Click(object sender, EventArgs e)
@@ -495,6 +497,7 @@ namespace FTAnalyzer
             mnuPrint.Enabled = true;
             ShowMenus(true);
             HourGlass(false);
+            Analytics.TrackAction(Analytics.MainFormAction, "WWI Report Clicked");
         }
 
         void BtnWWII_Click(object sender, EventArgs e)
@@ -508,11 +511,12 @@ namespace FTAnalyzer
             dgWorldWars.Focus();
             foreach (DataGridViewColumn c in dgWorldWars.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
-            tsCountLabel.Text = Properties.Messages.Count + warDeadList.Count;
-            tsHintsLabel.Text = Properties.Messages.Hints_Individual;
+            tsCountLabel.Text = Messages.Count + warDeadList.Count;
+            tsHintsLabel.Text = Messages.Hints_Individual;
             mnuPrint.Enabled = true;
             ShowMenus(true);
             HourGlass(false);
+            Analytics.TrackAction(Analytics.MainFormAction, "WWII Report Clicked");
         }
 
         void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -749,23 +753,27 @@ namespace FTAnalyzer
             Chart chart = new Chart();
             int[,,] stats = s.ChildrenBirthProfiles();
             chart.BuildChildBirthProfile(stats);
-            MainForm.DisposeDuplicateForms(chart);
+            DisposeDuplicateForms(chart);
             chart.Show();
+            Analytics.TrackAction(Analytics.MainFormAction, "Birth Profiles Viewed");
             MessageBox.Show(s.BuildOutput(stats), "Birth Profile Information");
         }
 
         void ViewOnlineManualToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Analytics.TrackAction(Analytics.MainFormAction, "Online Manual Viewed");
             HttpUtility.VisitWebsite("http://www.ftanalyzer.com");
         }
 
         void OnlineGuidesToUsingFTAnalyzerToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Analytics.TrackAction(Analytics.MainFormAction, "Online Guides Viewed");
             HttpUtility.VisitWebsite("http://www.ftanalyzer.com/guides");
         }
 
         private void PrivacyPolicyToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Analytics.TrackAction(Analytics.MainFormAction, "Privacy Policy Viewed");
             HttpUtility.VisitWebsite("http://www.ftanalyzer.com/privacy");
         }
 
@@ -781,7 +789,7 @@ namespace FTAnalyzer
                 try
                 {
                     result = InputBox.Show("Enter age between 13 and 90", "Please select minimum age to report on", ref inputAge);
-                    age = Int32.Parse(inputAge);
+                    age = int.Parse(inputAge);
                 }
                 catch (Exception)
                 {
@@ -797,6 +805,7 @@ namespace FTAnalyzer
                 {
                     DisposeDuplicateForms(frmInd);
                     frmInd.Show();
+                    Analytics.TrackAction(Analytics.MainFormAction, "Older Parents Viewed");
                 }
             }
             HourGlass(false);
@@ -966,20 +975,11 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        void TreeViewLocations_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
-        {
-            e.Cancel = (preventExpand && e.Action == TreeViewAction.Collapse);
-        }
+        void TreeViewLocations_BeforeCollapse(object sender, TreeViewCancelEventArgs e) => e.Cancel = (preventExpand && e.Action == TreeViewAction.Collapse);
 
-        void TreeViewLocations_BeforeExpand(object sender, TreeViewCancelEventArgs e)
-        {
-            e.Cancel = (preventExpand && e.Action == TreeViewAction.Expand);
-        }
+        void TreeViewLocations_BeforeExpand(object sender, TreeViewCancelEventArgs e) => e.Cancel = (preventExpand && e.Action == TreeViewAction.Expand);
 
-        void TreeViewLocations_MouseDown(object sender, MouseEventArgs e)
-        {
-            preventExpand = e.Clicks > 1;
-        }
+        void TreeViewLocations_MouseDown(object sender, MouseEventArgs e) => preventExpand = e.Clicks > 1;
 
         void DisplayOptionsOnLoadToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -989,11 +989,13 @@ namespace FTAnalyzer
 
         void ReportAnIssueToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Analytics.TrackAction(Analytics.MainFormAction, "Report Issue Visited");
             HttpUtility.VisitWebsite("https://github.com/ShammyLevva/FTAnalyzer/issues");
         }
 
         void WhatsNewToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Analytics.TrackAction(Analytics.MainFormAction, "Whats New Viewed");
             HttpUtility.VisitWebsite("http://ftanalyzer.com/Whats%20New%20in%20this%20Release");
         }
 
@@ -1004,6 +1006,7 @@ namespace FTAnalyzer
             DisposeDuplicateForms(tl);
             tl.Show();
             HourGlass(false);
+            Analytics.TrackAction(Analytics.MapsAction, "Show Timelines Viewed");
         }
 
         private enum GecodingType { Google = 1, OS = 2, Reverse = 3 }
@@ -1011,16 +1014,19 @@ namespace FTAnalyzer
         void MnuGeocodeLocations_Click(object sender, EventArgs e)
         {
             StartGeocoding(GecodingType.Google);
+            Analytics.TrackAction(Analytics.GeocodingAction, "Google Geocoding Clicked");
         }
 
         void MnuOSGeocoder_Click(object sender, EventArgs e)
         {
             StartGeocoding(GecodingType.OS);
+            Analytics.TrackAction(Analytics.GeocodingAction, "OS Geocoding Clicked");
         }
 
         void MnuLookupBlankFoundLocations_Click(object sender, EventArgs e)
         {
             StartGeocoding(GecodingType.Reverse);
+            Analytics.TrackAction(Analytics.GeocodingAction, "Reverse Geocoding Clicked");
         }
 
         void StartGeocoding(GecodingType type)
@@ -1065,6 +1071,7 @@ namespace FTAnalyzer
             DisposeDuplicateForms(geo);
             geo.Show();
             HourGlass(false);
+            Analytics.TrackAction(Analytics.MapsAction, "Geocodes Viewed");
         }
 
         void TreeViewLocations_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -1085,6 +1092,7 @@ namespace FTAnalyzer
             DisposeDuplicateForms(l);
             l.Show();
             HourGlass(false);
+            Analytics.TrackAction(Analytics.MapsAction, "Show Lifelines Viewed");
         }
 
         void MnuPlaces_Click(object sender, EventArgs e)
@@ -1094,6 +1102,7 @@ namespace FTAnalyzer
             DisposeDuplicateForms(p);
             p.Show();
             HourGlass(false);
+            Analytics.TrackAction(Analytics.MapsAction, "Show Places Viewed");
         }
 
         void DgSurnames_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -1107,6 +1116,7 @@ namespace FTAnalyzer
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
                 HourGlass(false);
+                Analytics.TrackAction(Analytics.MainFormAction, "View all with Surname Clicked");
             }
         }
 
@@ -1118,6 +1128,7 @@ namespace FTAnalyzer
                 if (cell.Value != null)
                 {
                     Statistics.DisplayGOONSpage(cell.Value.ToString());
+                    Analytics.TrackAction(Analytics.MainFormAction, "Show Guild of One Name Studies");
                 }
             }
         }
@@ -1144,6 +1155,7 @@ namespace FTAnalyzer
             DisposeDuplicateForms(people);
             people.Show();
             HourGlass(false);
+            Analytics.TrackAction(Analytics.MainFormAction, "Possible Census Facts Viewed");
         }
 
         #region Tab Control
@@ -1180,35 +1192,42 @@ namespace FTAnalyzer
                 {
                     if (dgIndividuals.DataSource == null)
                         SetupIndividualsTab(); // select individuals tab if first time opening main lists tab
+                    Analytics.TrackAction(Analytics.MainFormAction, "Main Lists Tab Viewed");
                 }
                 if (tabSelector.SelectedTab == tabErrorsFixes)
                 {
                     if (dgDataErrors.DataSource == null)
                         SetupDataErrors(); // select data errors tab if first time opening errors fixes tab
+                    Analytics.TrackAction(Analytics.MainFormAction, "Errors Fixes Tab Viewed");
                 }
                 else if (tabSelector.SelectedTab == tabFacts)
                 {
                     // already cleared text don't need to do anything else
+                    Analytics.TrackAction(Analytics.MainFormAction, "Facts Tab Viewed");
                 }
                 else if (tabSelector.SelectedTab == tabSurnames)
                 {
                     // show empty form click button to load
+                    Analytics.TrackAction(Analytics.MainFormAction, "Surnames Tab Viewed");
                 }
                 else if (tabSelector.SelectedTab == tabCensus)
                 {
                     cenDate.RevertToDefaultDate();
                     btnShowCensusMissing.Enabled = ft.IndividualCount > 0;
                     cenDate.AddAllCensusItems();
+                    Analytics.TrackAction(Analytics.MainFormAction, "Census Tab Viewed");
                 }
                 else if (tabSelector.SelectedTab == tabTreetops)
                 {
                     dgTreeTops.DataSource = null;
                     treetopsCountry.Enabled = !ckbTTIgnoreLocations.Checked;
+                    Analytics.TrackAction(Analytics.MainFormAction, "Treetops Tab Viewed");
                 }
                 else if (tabSelector.SelectedTab == tabWorldWars)
                 {
                     dgWorldWars.DataSource = null;
                     wardeadCountry.Enabled = !ckbWDIgnoreLocations.Checked;
+                    Analytics.TrackAction(Analytics.MainFormAction, "World Wars Tab Viewed");
                 }
                 else if (tabSelector.SelectedTab == tabLostCousins)
                 {
@@ -1216,6 +1235,7 @@ namespace FTAnalyzer
                         btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled =
                         btnLC1911EW.Enabled = ft.IndividualCount > 0;
                     UpdateLostCousinsReport();
+                    Analytics.TrackAction(Analytics.MainFormAction, "Lost Cousins Tab Viewed");
                 }
                 else if (tabSelector.SelectedTab == tabToday)
                 {
@@ -1223,6 +1243,7 @@ namespace FTAnalyzer
                     int todaysStep = int.Parse(Application.UserAppDataRegistry.GetValue("Todays Events Step", "5").ToString());
                     rbTodayMonth.Checked = todaysMonth;
                     nudToday.Value = todaysStep;
+                    Analytics.TrackAction(Analytics.MainFormAction, "Today Tab Viewed");
                 }
                 else if (tabSelector.SelectedTab == tabLocations)
                 {
@@ -1239,7 +1260,7 @@ namespace FTAnalyzer
                     dgSubRegions.DataSource = ft.AllDisplaySubRegions;
                     dgAddresses.DataSource = ft.AllDisplayAddresses;
                     dgPlaces.DataSource = ft.AllDisplayPlaces;
-                    HourGlass(false);
+                    Analytics.TrackAction(Analytics.MainFormAction, "Locations Tab Viewed");
                 }
                 HourGlass(false);
             }
@@ -1248,7 +1269,10 @@ namespace FTAnalyzer
         void TabMainListSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabMainListsSelector.SelectedTab == tabIndividuals)
+            {
                 SetupIndividualsTab();
+                Analytics.TrackAction(Analytics.MainFormAction, "Individuals Tab Viewed");
+            }
             else if (tabMainListsSelector.SelectedTab == tabFamilies)
             {
                 SortableBindingList<IDisplayFamily> list = ft.AllDisplayFamilies;
@@ -1259,6 +1283,7 @@ namespace FTAnalyzer
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + list.Count;
                 tsHintsLabel.Text = Messages.Hints_Family;
+                Analytics.TrackAction(Analytics.MainFormAction, "Families Tab Viewed");
             }
             else if (tabMainListsSelector.SelectedTab == tabSources)
             {
@@ -1270,6 +1295,7 @@ namespace FTAnalyzer
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + list.Count;
                 tsHintsLabel.Text = Messages.Hints_Sources;
+                Analytics.TrackAction(Analytics.MainFormAction, "Sources Tab Viewed");
             }
             else if (tabMainListsSelector.SelectedTab == tabOccupations)
             {
@@ -1281,6 +1307,7 @@ namespace FTAnalyzer
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + list.Count;
                 tsHintsLabel.Text = Messages.Hints_Occupation;
+                Analytics.TrackAction(Analytics.MainFormAction, "Occupations Tab Viewed");
             }
         }
 
@@ -1308,16 +1335,19 @@ namespace FTAnalyzer
                 ResetDuplicatesTable(); // force a reset on intial load
                 dgDuplicates.Focus();
                 mnuPrint.Enabled = true;
+                Analytics.TrackAction(Analytics.MainFormAction, "Duplicates Tab Viewed");
             }
             if (tabErrorFixSelector.SelectedTab == tabLooseBirths)
             {
                 if (dgLooseBirths.DataSource == null)
                     SetupLooseBirths();
+                Analytics.TrackAction(Analytics.MainFormAction, "Loose Births Tab Viewed");
             }
             else if (tabErrorFixSelector.SelectedTab == tabLooseDeaths)
             {
                 if (dgLooseDeaths.DataSource == null)
                     SetupLooseDeaths();
+                Analytics.TrackAction(Analytics.MainFormAction, "Loose Deaths Tab Viewed");
             }
         }
 
@@ -1507,6 +1537,7 @@ namespace FTAnalyzer
 
             DisposeDuplicateForms(census);
             census.Show();
+            Analytics.TrackAction(Analytics.LostCousinsAction, "LC Year Report Run", censusDate.BestYear.ToString());
             HourGlass(false);
         }
 
@@ -1518,6 +1549,7 @@ namespace FTAnalyzer
             people.SetupLCNoCountry(relationFilter);
             DisposeDuplicateForms(people);
             people.Show();
+            Analytics.TrackAction(Analytics.LostCousinsAction, "No LC Country Clicked");
             HourGlass(false);
         }
 
@@ -1534,6 +1566,7 @@ namespace FTAnalyzer
             people.SetupLCDuplicates(relationFilter);
             DisposeDuplicateForms(people);
             people.Show();
+            Analytics.TrackAction(Analytics.LostCousinsAction, "LC Duplicates Clicked");
             HourGlass(false);
         }
 
@@ -1545,6 +1578,7 @@ namespace FTAnalyzer
             people.SetupLCnoCensus(relationFilter);
             DisposeDuplicateForms(people);
             people.Show();
+            Analytics.TrackAction(Analytics.LostCousinsAction, "No LC Census Clicked");
             HourGlass(false);
         }
 
@@ -1600,6 +1634,7 @@ namespace FTAnalyzer
         void LabLostCousinsWeb_Click(object sender, EventArgs e)
         {
             HttpUtility.VisitWebsite("http://www.lostcousins.com/?ref=LC585149");
+            Analytics.TrackAction(Analytics.LostCousinsAction, "Weblink Clicked");
         }
 
         void LabLostCousinsWeb_MouseEnter(object sender, EventArgs e)
@@ -1616,6 +1651,7 @@ namespace FTAnalyzer
         void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             HttpUtility.VisitWebsite("http://www.lostcousins.com/?ref=LC585149");
+            Analytics.TrackAction(Analytics.LostCousinsAction, "Weblink Clicked");
         }
         #endregion
 
@@ -1630,6 +1666,7 @@ namespace FTAnalyzer
             Options options = new Options();
             options.ShowDialog(this);
             options.Dispose();
+            Analytics.TrackAction(Analytics.MainFormAction, "Options Viewed");
         }
 
         #endregion
@@ -1777,6 +1814,7 @@ namespace FTAnalyzer
             else
             {
                 DatabaseHelper.Instance.BackupDatabase(saveDatabase, "FTAnalyzer zip file created by v" + VERSION);
+                Analytics.TrackAction(Analytics.MainFormAction, "Database Backedup");
             }
         }
 
@@ -1820,6 +1858,8 @@ namespace FTAnalyzer
                     }
                     if (failed)
                         MessageBox.Show(restoreDatabase.FileName + " doesn't appear to be an FTAnalyzer database", "FTAnalyzer Database Restore Error");
+                    else
+                        Analytics.TrackAction(Analytics.MainFormAction, "Database Restored");
                     HourGlass(false);
                 }
             }
@@ -2373,6 +2413,7 @@ namespace FTAnalyzer
         {
             bool censusDone = sender == btnShowCensusEntered;
             ShowCensus(censusDone, txtCensusSurname.Text, false);
+            Analytics.TrackAction(Analytics.CensusTabAction, censusDone ? "Show on Census" : "Shom Missing from Census");
         }
 
         void ShowCensus(bool censusDone, string surname, bool random)
@@ -2428,6 +2469,7 @@ namespace FTAnalyzer
             people.SetupMissingCensusLocation();
             DisposeDuplicateForms(people);
             people.Show();
+            Analytics.TrackAction(Analytics.CensusTabAction, "Missing Census Location Clicked");
             HourGlass(false);
         }
 
@@ -2438,6 +2480,7 @@ namespace FTAnalyzer
             people.SetupDuplicateCensus();
             DisposeDuplicateForms(people);
             people.Show();
+            Analytics.TrackAction(Analytics.CensusTabAction, "Duplicate Census Clicked");
             HourGlass(false);
         }
 
@@ -2448,6 +2491,7 @@ namespace FTAnalyzer
             people.SetupNoChildrenStatus();
             DisposeDuplicateForms(people);
             people.Show();
+            Analytics.TrackAction(Analytics.CensusTabAction, "No Children Status Clicked");
             HourGlass(false);
         }
 
@@ -2458,6 +2502,7 @@ namespace FTAnalyzer
             people.SetupChildrenStatusReport();
             DisposeDuplicateForms(people);
             people.Show();
+            Analytics.TrackAction(Analytics.CensusTabAction, "Mismatched Children Clicked");
             HourGlass(false);
         }
 
@@ -2536,6 +2581,7 @@ namespace FTAnalyzer
                     string path = Path.GetDirectoryName(saveFileDialog.FileName);
                     Application.UserAppDataRegistry.SetValue("Report Unrecognised Census References Path", path);
                     WriteFile(results, saveFileDialog.FileName);
+                    Analytics.TrackAction(Analytics.ReportsAction, "Unrecognised Census Ref");
                     MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease create an issue at http://www.ftanalyzer.com/issues in issues section and upload your file, if you feel you have standard census references that should be recognised." + privateWarning, "FTAnalyzer");
                 }
             }
@@ -2594,6 +2640,7 @@ namespace FTAnalyzer
             DisposeDuplicateForms(rs);
             rs.Show();
             rs.Focus();
+            Analytics.TrackAction(Analytics.MainFormAction, "Colour BMD Report Clicked");
             HourGlass(false);
         }
 
@@ -2606,6 +2653,7 @@ namespace FTAnalyzer
             DisposeDuplicateForms(rs);
             rs.Show();
             rs.Focus();
+            Analytics.TrackAction(Analytics.MainFormAction, "Colour Census Report Clicked", country);
             HourGlass(false);
         }
 
@@ -2856,6 +2904,7 @@ namespace FTAnalyzer
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
             DataTable dt = convertor.ToDataTable(new List<IExportIndividual>(ft.AllIndividuals));
             ExportToExcel.Export(dt);
+            Analytics.TrackAction(Analytics.ExportAction, "Individuals Exported");
             HourGlass(false);
         }
 
@@ -2865,6 +2914,7 @@ namespace FTAnalyzer
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
             DataTable dt = convertor.ToDataTable(new List<IDisplayFamily>(ft.AllFamilies));
             ExportToExcel.Export(dt);
+            Analytics.TrackAction(Analytics.ExportAction, "Families Exported");
             HourGlass(false);
         }
 
@@ -2874,6 +2924,7 @@ namespace FTAnalyzer
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
             DataTable dt = convertor.ToDataTable(new List<ExportFact>(ft.AllExportFacts));
             ExportToExcel.Export(dt);
+            Analytics.TrackAction(Analytics.ExportAction, "Facts Exported");
             HourGlass(false);
         }
 
@@ -2887,6 +2938,7 @@ namespace FTAnalyzer
                 list.Sort(new LooseBirthComparer());
                 DataTable dt = convertor.ToDataTable(list);
                 ExportToExcel.Export(dt);
+                Analytics.TrackAction(Analytics.ExportAction, "Loose Births Exported");
             }
             catch (LooseDataException ex)
             {
@@ -2905,6 +2957,7 @@ namespace FTAnalyzer
                 list.Sort(new LooseDeathComparer());
                 DataTable dt = convertor.ToDataTable(list);
                 ExportToExcel.Export(dt);
+                Analytics.TrackAction(Analytics.ExportAction, "Loose Deaths Exported");
             }
             catch (LooseDataException ex)
             {
@@ -2919,6 +2972,7 @@ namespace FTAnalyzer
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
             DataTable dt = convertor.ToDataTable(new List<IDisplaySource>(ft.AllSources));
             ExportToExcel.Export(dt);
+            Analytics.TrackAction(Analytics.ExportAction, "Sources Exported");
             HourGlass(false);
         }
 
@@ -2927,8 +2981,9 @@ namespace FTAnalyzer
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
             SortableBindingList<IDisplayIndividual> list = dgTreeTops.DataSource as SortableBindingList<IDisplayIndividual>;
-            DataTable dt = convertor.ToDataTable(list.ToList<IDisplayIndividual>());
+            DataTable dt = convertor.ToDataTable(list.ToList());
             ExportToExcel.Export(dt);
+            Analytics.TrackAction(Analytics.ExportAction, "Treetops Exported");
             HourGlass(false);
         }
 
@@ -2937,8 +2992,9 @@ namespace FTAnalyzer
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
             SortableBindingList<IDisplayIndividual> list = dgWorldWars.DataSource as SortableBindingList<IDisplayIndividual>;
-            DataTable dt = convertor.ToDataTable(list.ToList<IDisplayIndividual>());
+            DataTable dt = convertor.ToDataTable(list.ToList());
             ExportToExcel.Export(dt);
+            Analytics.TrackAction(Analytics.ExportAction, "World Wars Exported");
             HourGlass(false);
         }
         #endregion
@@ -2955,6 +3011,7 @@ namespace FTAnalyzer
             await Task.Run(() => ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, (int)nudToday.Value, progress, outputText));
             labToday.Visible = false;
             pbToday.Visible = false;
+            Analytics.TrackAction(Analytics.MainFormAction, "Todays Events Clicked");
         }
 
         void RbTodayMonth_CheckedChanged(object sender, EventArgs e)
@@ -3116,7 +3173,7 @@ namespace FTAnalyzer
                 LoadLocationData(pb, label, defaultIndex);
         }
 
-        private async void BtnShowSurnames_Click(object sender, EventArgs e)
+        async void BtnShowSurnames_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             tsCountLabel.Text = string.Empty;
@@ -3125,7 +3182,7 @@ namespace FTAnalyzer
             Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => x.RelationType);
             Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
             var progress = new Progress<int>(value => { tspbTabProgress.Value = value; });
-            var list = await Task<SortableBindingList<SurnameStats>>.Run(() => new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(indFilter, famFilter, progress)));
+            var list = await Task.Run(() => new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(indFilter, famFilter, progress)));
             dgSurnames.DataSource = list;
             dgSurnames.Sort(dgSurnames.Columns["Surname"], ListSortDirection.Ascending);
             dgSurnames.AllowUserToResizeColumns = true;
@@ -3134,6 +3191,7 @@ namespace FTAnalyzer
             tsHintsLabel.Text = Messages.Hints_Surname;
             tspbTabProgress.Visible = false;
             HourGlass(false);
+            Analytics.TrackAction(Analytics.MainFormAction, "Show Surnames Clicked");
         }
 
         void CousinsCountReportToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3144,6 +3202,7 @@ namespace FTAnalyzer
             DisposeDuplicateForms(f);
             f.Show();
             HourGlass(false);
+            Analytics.TrackAction(Analytics.MainFormAction, "Cousins Count Viewed");
         }
     }
 

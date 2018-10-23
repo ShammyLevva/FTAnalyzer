@@ -12,6 +12,10 @@ namespace FTAnalyzer.Utilities
         static readonly SimpleTrackerEnvironment trackerEnvironment;
         static readonly SimpleTracker tracker;
 
+        public const string MainFormAction = "Main Form Action", FactsFormAction = "Facts Form Action", CensusTabAction = "Census Tab Action", 
+                            ReportsAction = "Reports Action", LostCousinsAction = "Lost Cousins Action", GeocodingAction = "Geocoding Action",
+                            ExportAction = "Export Action", MapsAction = "Maps Action";
+
         static Analytics()
         {
             if (Settings.Default.GUID.ToString() == "00000000-0000-0000-0000-000000000000")
@@ -34,11 +38,12 @@ namespace FTAnalyzer.Utilities
             catch (Exception e) { Console.WriteLine(e.Message); }
         }
 
-        public static async void MainFormAction(string action, string value)
+        public static void TrackAction(string category, string action) => TrackAction(category, action, "default");
+        public static async void TrackAction(string category, string action, string value)
         {
             try
             {
-                await SpecialMethods.TrackEventAsync(tracker, "Main Form Action", action, value).ConfigureAwait(false);
+                await SpecialMethods.TrackEventAsync(tracker, category, action, value).ConfigureAwait(false);
             }
             catch (Exception e) { Console.WriteLine(e.Message); }
         }
