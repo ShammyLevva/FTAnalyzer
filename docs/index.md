@@ -3,15 +3,25 @@ Family Tree Analyzer
 
 #### To install the latest version click [here.](http://ftanalyzer.com/install/)
 
-Windows 10 & 8.1 installs may require you to click More Info and accept the certificate the first time you run the app.
+Windows 10 & 8.1 installs may require you to click More Info and accept the certificate the first time you run the app. 
+
+Installation is simple with the click once installer. Click the download button and run the application. This will then ask you to allow it to run once allowed it downloads and installs the application for you.  
+  
+**NB. This program will require the Microsoft .Net 4.7.2 to have been installed.** This is usually present on most windows machines from Windows 7 onwards assuming that your machine is patched with the all the Microsoft updates. If not it can be downloaded free from Microsoft at [https://support.microsoft.com/en-gb/help/4054531/microsoft-net-framework-4-7-2-web-installer-for-windows](https://support.microsoft.com/en-gb/help/4054531/microsoft-net-framework-4-7-2-web-installer-for-windows) and clicking the download link for your machine. Once downloaded simply run the file to install.
+
+NB. There have been known problems with Windows Defender blocking the app due to insufficient downloads per month so it is marked as insufficiently trusted. You can solve this by downloading the latest [manual install version](https://github.com/ShammyLevva/FTAnalyzer/releases) or by using a proper Anti Virus solution. DO NOT simply disable your AV/Firewall to install that's the usual bad advice given by app vendors that don't know how to setup their apps properly.
 
 ### Helpful Guides to Using FTAnalyzer
 
-There is now a series of helpful guides to downloading, installing and using FTAnalyzer. You can get them from [here](/guides "FTAnalyzer Guides").
+There is now a series of helpful guides to downloading, installing and using FTAnalyzer. You can get them from [here](/guides "FTAnalyzer Guides") note these guides were created a while ago so the screen shots are a bit dated.
 
 ### Documentation Website
 
-The [documentation](./Documentation) has been brought across from Codeplex and needs a lot of tweaking to bring it up to date. 
+The [documentation](./Documentation) is similarly in need of some updating. It's a work in progress and I tend to focus on new features rather than documnetation. If anyone would like to assist updating the documentation I'd be happy to accept their assistance. 
+
+### Facebook, Support Site & Twitter
+
+The [Support website](facebook.com/FTAnalyzer) is hosted as a group on Facebook. The Twitter account is @FTAnalyzer note I don't check twitter very often so easiest is to raise an issue on the [issues site](www.ftanalyzer.com/issues)
 
 ### Initial Features
 
@@ -30,7 +40,7 @@ Once you load your GEDCOM file you can start analysing your tree and displaying 
 *   Census Lists - form that permits listing everyone in your file that should be alive on a census at a particular date and for whom you have not yet found a census entry
 *   Loose Death list - shows all details where you have death date info for an individual but you haven't updated the death record for that individual.
 *   Lost Cousins Report - shows you everyone you have already found on a census so you can check if you have entered them at [Lost Cousins](http://www.lostcousins.com/ "Lost Cousins") 
-*   Colour Reports 
+*   Research Suggestions 
     *   The BMD report shows you BMD facts for everyone you select from filter colour coded by how accurate the date is from Green = exact date through to Red = unknown date. Marriage facts also show if person of marriage age but no partner; partner but no marriage fact; no partner but has children.
     *   The census report shows colour coded census to see which census you have still to find people on and whether you have entered those people to [Lost Cousins](http://www.lostcousins.com "Lost Cousins") . Clicking on a missing census entry searches for that person online.
 *   Treetops Report - lists all people in your tree at the top of the tree ie: those people with no parents, these are the people who are the furthest back on that line.
@@ -40,9 +50,9 @@ Once you load your GEDCOM file you can start analysing your tree and displaying 
 
 With the new features in v3.0 you can now view your Ancestors on a modern map, see how they moved during their lives and lots more to come. With version 3.1 you can now view your ancestors on a Modern OS Map, Aerial Maps, and even Historic OS Maps. Version 4.0 adds support for finding locations using a build in OS Gazetteer. 
 
-**Contains Ordnance Survey data © Crown copyright and database right 2014**
+**Contains Ordnance Survey data © Crown copyright and database right 2018**
 
-### Colour Census and Census Searching
+### Census Research Suggestions and Census Searching
 
 You can view the colour census report via the colour reports tab it lists everyone you choose to filter and shows the various UK census years. This list is then colour coded to show :
 
@@ -59,13 +69,3 @@ Similarly on the regular census reports clicking on the name of a person to find
 ### Notes
 
 All feedback welcome. Please note this is very much a work in progress, it works for my own Gedcom file however there is no guarantee that other ways of recording data will be consistently handled. If you wish to post error logs and log issues please include a sample gedcom file that demonstrates the problem you are having. I'd like to ensure that it works consistently for every user. Please also note that there is a bias in the program for UK searching as that is where my Ancestors are from. So some defaults may need to be tweaked or turned into user configurable options in later versions. Again let me know what works and what causes you problems.
-
-### Installing the software
-
-Installation is simple with the click once installer. Click the download button and run the application. This will then ask you to allow it to run once allowed it downloads and installs the application for you.  
-  
-**NB. This program will require the Microsoft .Net 4.6 to have been installed.** This is usually present on most windows machines assuming that your machine is patched with the latest security updates. If not it can be downloaded free from Microsoft at [https://www.microsoft.com/en-gb/download/details.aspx?id=48130](https://www.microsoft.com/en-gb/download/details.aspx?id=48130) and clicking the download link. Once downloaded simply run the file to install.
-
-#### NOTE This documentation has been moved from Codeplex largely unchanged and requires a LOT of revision, in particular a lot of links will be broken or still refer back to Codeplex
-
-
