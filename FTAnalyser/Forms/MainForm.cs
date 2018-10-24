@@ -2949,7 +2949,7 @@ namespace FTAnalyzer
             try
             {
                 ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-                List<IDisplayLooseBirth> list = ft.LooseBirths().ToList<IDisplayLooseBirth>();
+                List<IDisplayLooseBirth> list = ft.LooseBirths().ToList();
                 list.Sort(new LooseBirthComparer());
                 DataTable dt = convertor.ToDataTable(list);
                 ExportToExcel.Export(dt);
@@ -2968,7 +2968,7 @@ namespace FTAnalyzer
             try
             {
                 ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-                List<IDisplayLooseDeath> list = ft.LooseDeaths().ToList<IDisplayLooseDeath>();
+                List<IDisplayLooseDeath> list = ft.LooseDeaths().ToList();
                 list.Sort(new LooseDeathComparer());
                 DataTable dt = convertor.ToDataTable(list);
                 ExportToExcel.Export(dt);
@@ -2995,7 +2995,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            SortableBindingList<IDisplayIndividual> list = dgTreeTops.DataSource as SortableBindingList<IDisplayIndividual>;
+            SortableBindingList<IExportIndividual> list = dgTreeTops.DataSource as SortableBindingList<IExportIndividual>;
             DataTable dt = convertor.ToDataTable(list.ToList());
             ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, "Treetops Exported");
@@ -3006,7 +3006,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            SortableBindingList<IDisplayIndividual> list = dgWorldWars.DataSource as SortableBindingList<IDisplayIndividual>;
+            SortableBindingList<IExportIndividual> list = dgWorldWars.DataSource as SortableBindingList<IExportIndividual>;
             DataTable dt = convertor.ToDataTable(list.ToList());
             ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, "World Wars Exported");
