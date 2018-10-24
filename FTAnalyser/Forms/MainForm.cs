@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
+using System.Deployment.Application;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Drawing.Text;
@@ -78,22 +79,27 @@ namespace FTAnalyzer
         void CheckWebVersion()
         {
             string appPath = Application.ExecutablePath;
+            Settings.Default.StartTime = DateTime.Now;
+            Settings.Default.Save();
             try
             {
-                WebClient wc = new WebClient();
-                HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-                string webData = wc.DownloadString("http://www.ftanalyzer.com/install");
-                doc.LoadHtml(webData);
-                HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//table/tr[2]/td/table/tr/td/table/tr[4]/td[3]");
-                string webVersion = versionNode.InnerText;
-                if (webVersion != VERSION && !appPath.StartsWith(@"D:\Programming\GitRepo\FTAnalyzer\FTAnalyser\bin")) // skip showing messagebox if on my development PC
+                if (!ApplicationDeployment.IsNetworkDeployed) // only check for new version if not click once
                 {
-                    string text = $"Version installed: {VERSION}, Web version available: {webVersion}\nDo you want to go to website to download the latest version?";
-                    DialogResult download = MessageBox.Show(text, "FTAnalyzer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (download == DialogResult.Yes)
-                        HttpUtility.VisitWebsite("https://github.com/ShammyLevva/FTAnalyzer/releases");
+                    WebClient wc = new WebClient();
+                    HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                    string webData = wc.DownloadString("http://www.ftanalyzer.com/install");
+                    doc.LoadHtml(webData);
+                    HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//table/tr[2]/td/table/tr/td/table/tr[4]/td[3]");
+                    string webVersion = versionNode.InnerText;
+                    if (webVersion != VERSION && !appPath.StartsWith(@"D:\Programming\GitRepo\FTAnalyzer\FTAnalyser\bin")) // skip showing messagebox if on my development PC
+                    {
+                        string text = $"Version installed: {VERSION}, Web version available: {webVersion}\nDo you want to go to website to download the latest version?";
+                        DialogResult download = MessageBox.Show(text, "FTAnalyzer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (download == DialogResult.Yes)
+                            HttpUtility.VisitWebsite("https://github.com/ShammyLevva/FTAnalyzer/releases");
+                    }
                 }
-                Analytics.CheckProgramUsage();
+                Analytics.CheckProgramUsageAsync();
             }
             catch (Exception) { }
         }
@@ -330,7 +336,7 @@ namespace FTAnalyzer
                 await LoadFileAsync(openGedcom.FileName);
                 Settings.Default.LoadLocation = Path.GetFullPath(openGedcom.FileName);
                 Settings.Default.Save();
-                Analytics.TrackAction(Analytics.MainFormAction, "Load GEDCOM", FamilyTree.Instance.IndividualCount.ToString());
+                Analytics.TrackActionAsync(Analytics.MainFormAction, "Load GEDCOM", FamilyTree.Instance.IndividualCount.ToString());
             }
         }
 
@@ -457,8 +463,17 @@ namespace FTAnalyzer
             rtbOutput.ScrollToBottom();
         }
 
-        void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        bool shutdown = false;
+
+        async void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (!shutdown)
+            {
+                shutdown = true;
+                e.Cancel = true;
+                await Analytics.EndProgramAsync();
+                Close();
+            }
             DatabaseHelper.Instance.Dispose();
             stopProcessing = true;
         }
@@ -1537,7 +1552,7 @@ namespace FTAnalyzer
 
             DisposeDuplicateForms(census);
             census.Show();
-            Analytics.TrackAction(Analytics.LostCousinsAction, "LC Year Report Run", censusDate.BestYear.ToString());
+            Analytics.TrackActionAsync(Analytics.LostCousinsAction, "LC Year Report Run", censusDate.BestYear.ToString());
             HourGlass(false);
         }
 
@@ -2653,7 +2668,7 @@ namespace FTAnalyzer
             DisposeDuplicateForms(rs);
             rs.Show();
             rs.Focus();
-            Analytics.TrackAction(Analytics.MainFormAction, "Colour Census Report Clicked", country);
+            Analytics.TrackActionAsync(Analytics.MainFormAction, "Colour Census Report Clicked", country);
             HourGlass(false);
         }
 

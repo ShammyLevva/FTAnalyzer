@@ -47,12 +47,9 @@ namespace FTAnalyzer.UserControls
 			//NOOP;
 		}
 
-		public bool HasValidationErrors()
-		{
-			return CheckChildrenValidation(this);
-		}
+        public bool HasValidationErrors() => CheckChildrenValidation(this);
 
-		private bool CheckChildrenValidation(Control control)
+        private bool CheckChildrenValidation(Control control)
 		{
 			bool invalid = false;
 
@@ -76,53 +73,26 @@ namespace FTAnalyzer.UserControls
 			return invalid;
 		}
 
-		public string DisplayName
-		{
-			get { return "General Settings"; }
-		}
+        public string DisplayName => "General Settings";
 
-		public string TreePosition
-		{
-			get { return DisplayName; }
-		}
+        public string TreePosition => DisplayName;
 
-		public Image MenuIcon
-		{
-			get { return null; }
-		}
+        public Image MenuIcon => null;
 
         #endregion
 
         public static event EventHandler MinParentalAgeChanged;
-        protected static void OnMinParentalAgeChanged()
-        {
-            MinParentalAgeChanged?.Invoke(null, EventArgs.Empty);
-        }
+        protected static void OnMinParentalAgeChanged() => MinParentalAgeChanged?.Invoke(null, EventArgs.Empty);
 
         public static event EventHandler AliasInNameChanged;
-        protected static void OnAliasInNameChanged()
-        {
-            AliasInNameChanged?.Invoke(null, EventArgs.Empty);
-        }
+        protected static void OnAliasInNameChanged() => AliasInNameChanged?.Invoke(null, EventArgs.Empty);
 
-        private void ChkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e)
-		{
-			Properties.GeneralSettings.Default.ReloadRequired = true;
-		}
+        private void ChkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
 
-        private void ChkReverseLocations_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.GeneralSettings.Default.ReloadRequired = true;
-        }
+        private void ChkReverseLocations_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
 
-        private void ChkAddCreatedLocations_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.GeneralSettings.Default.ReloadRequired = true;
-        }
+        private void ChkAddCreatedLocations_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
 
-        private void ChkTreatFemaleAsUnknown_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.GeneralSettings.Default.ReloadRequired = true;
-        }
+        private void ChkTreatFemaleAsUnknown_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
     }
 }

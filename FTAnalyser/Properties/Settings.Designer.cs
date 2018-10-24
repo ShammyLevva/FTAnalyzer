@@ -61,5 +61,16 @@ namespace FTAnalyzer.Properties {
                 this["GUID"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime StartTime {
+            get {
+                return ((global::System.DateTime)(this["StartTime"]));
+            }
+            set {
+                this["StartTime"] = value;
+            }
+        }
     }
 }

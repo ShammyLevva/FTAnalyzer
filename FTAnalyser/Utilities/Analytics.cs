@@ -1,9 +1,9 @@
 ﻿using FTAnalyzer.Properties;
-using GoogleAnalyticsTracker.Core;
-using GoogleAnalyticsTracker.Core.TrackerParameters;
 using GoogleAnalyticsTracker.Simple;
 using System;
-using System.Collections.Generic;
+using System.Deployment.Application;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace FTAnalyzer.Utilities
 {
@@ -28,18 +28,30 @@ namespace FTAnalyzer.Utilities
             tracker = new SimpleTracker("UA-125850339-2", trackerEnvironment);
         }
 
-        public static async void CheckProgramUsage() // pre demise of Windows 7 add tracker to check how many machines still use old versions
+        public static async Task CheckProgramUsageAsync() // pre demise of Windows 7 add tracker to check how many machines still use old versions
         {
             try
             {
-                await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Startup", "LoadProgram", MainForm.VERSION).ConfigureAwait(false);
-                await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Startup", "RecordOSVersion", trackerEnvironment.OsVersion).ConfigureAwait(false);
+                string deploymentType = ApplicationDeployment.IsNetworkDeployed ? "ClickOnce" : "Zip File";
+                await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Startup", "Load Program", MainForm.VERSION).ConfigureAwait(false);
+                await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Startup", "Record OS Version", trackerEnvironment.OsVersion).ConfigureAwait(false);
+                await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Startup", "Deployment Type", deploymentType).ConfigureAwait(false);
             }
             catch (Exception e) { Console.WriteLine(e.Message); }
         }
 
-        public static void TrackAction(string category, string action) => TrackAction(category, action, "default");
-        public static async void TrackAction(string category, string action, string value)
+        public static async Task EndProgramAsync()
+        {
+            try
+            {
+                TimeSpan duration = DateTime.Now - Settings.Default.StartTime;
+                await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Shutdown", "Usage Time", duration.ToString("c"));
+            }
+            catch (Exception e) { Console.WriteLine(e.Message); }
+        }
+
+        public static Task TrackAction(string category, string action) => TrackActionAsync(category, action, "default");
+        public static async Task TrackActionAsync(string category, string action, string value)
         {
             try
             {
