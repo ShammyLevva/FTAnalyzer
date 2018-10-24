@@ -92,7 +92,7 @@ namespace FTAnalyzer.Forms
             string text = distinctIndividuals + " individuals.";
             Text = "Facts Report for all " + text + " Facts count: " + facts.Count;
             SetupFacts(text);
-            Analytics.TrackActionAsync(Analytics.FactsFormAction, "List of Individuals Facts Viewed", distinctIndividuals.ToString());
+            Analytics.TrackAction(Analytics.FactsFormAction, "Various Individuals Facts Viewed");
         }
 
         public Facts(IEnumerable<Individual> individuals, List<string> duplicateTypes)

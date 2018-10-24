@@ -76,7 +76,7 @@ namespace FTAnalyzer
             loading = false;
         }
 
-        void CheckWebVersion()
+        async void CheckWebVersion()
         {
             string appPath = Application.ExecutablePath;
             Settings.Default.StartTime = DateTime.Now;
@@ -99,7 +99,7 @@ namespace FTAnalyzer
                             HttpUtility.VisitWebsite("https://github.com/ShammyLevva/FTAnalyzer/releases");
                     }
                 }
-                Analytics.CheckProgramUsageAsync();
+                await Analytics.CheckProgramUsageAsync();
             }
             catch (Exception) { }
         }
@@ -336,7 +336,7 @@ namespace FTAnalyzer
                 await LoadFileAsync(openGedcom.FileName);
                 Settings.Default.LoadLocation = Path.GetFullPath(openGedcom.FileName);
                 Settings.Default.Save();
-                Analytics.TrackActionAsync(Analytics.MainFormAction, "Load GEDCOM", FamilyTree.Instance.IndividualCount.ToString());
+                await Analytics.TrackActionAsync(Analytics.MainFormAction, "Load GEDCOM", FamilyTree.Instance.IndividualCount.ToString());
             }
         }
 
@@ -496,12 +496,14 @@ namespace FTAnalyzer
             Analytics.TrackAction(Analytics.MainFormAction, "Treetops Report Clicked");
         }
 
+        Predicate<Individual> warDeadFilter;
+
         void BtnWWI_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             WWI = true;
-            Predicate<Individual> filter = CreateWardeadIndividualFilter(new FactDate("BET 1869 AND 1904"), new FactDate("FROM 28 JUL 1914"));
-            List<IDisplayIndividual> warDeadList = ft.GetWorldWars(filter).ToList();
+            warDeadFilter = CreateWardeadIndividualFilter(new FactDate("BET 1869 AND 1904"), new FactDate("FROM 28 JUL 1914"));
+            List<IDisplayIndividual> warDeadList = ft.GetWorldWars(warDeadFilter).ToList();
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
             dgWorldWars.DataSource = new SortableBindingList<IDisplayIndividual>(warDeadList);
             dgWorldWars.Focus();
@@ -519,8 +521,8 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             WWI = false;
-            Predicate<Individual> filter = CreateWardeadIndividualFilter(new FactDate("BET 1894 AND 1931"), new FactDate("FROM 1 SEP 1939"));
-            List<IDisplayIndividual> warDeadList = ft.GetWorldWars(filter).ToList();
+            warDeadFilter = CreateWardeadIndividualFilter(new FactDate("BET 1894 AND 1931"), new FactDate("FROM 1 SEP 1939"));
+            List<IDisplayIndividual> warDeadList = ft.GetWorldWars(warDeadFilter).ToList();
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
             dgWorldWars.DataSource = new SortableBindingList<IDisplayIndividual>(warDeadList);
             dgWorldWars.Focus();
@@ -1350,19 +1352,19 @@ namespace FTAnalyzer
                 ResetDuplicatesTable(); // force a reset on intial load
                 dgDuplicates.Focus();
                 mnuPrint.Enabled = true;
-                Analytics.TrackAction(Analytics.MainFormAction, "Duplicates Tab Viewed");
+                await Analytics.TrackAction(Analytics.MainFormAction, "Duplicates Tab Viewed");
             }
             if (tabErrorFixSelector.SelectedTab == tabLooseBirths)
             {
                 if (dgLooseBirths.DataSource == null)
                     SetupLooseBirths();
-                Analytics.TrackAction(Analytics.MainFormAction, "Loose Births Tab Viewed");
+                await Analytics.TrackAction(Analytics.MainFormAction, "Loose Births Tab Viewed");
             }
             else if (tabErrorFixSelector.SelectedTab == tabLooseDeaths)
             {
                 if (dgLooseDeaths.DataSource == null)
                     SetupLooseDeaths();
-                Analytics.TrackAction(Analytics.MainFormAction, "Loose Deaths Tab Viewed");
+                await Analytics.TrackAction(Analytics.MainFormAction, "Loose Deaths Tab Viewed");
             }
         }
 
@@ -1539,7 +1541,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        void LostCousinsCensus(CensusDate censusDate, string reportTitle)
+        async void LostCousinsCensus(CensusDate censusDate, string reportTitle)
         {
             HourGlass(true);
             Census census = new Census(censusDate, true);
@@ -1552,7 +1554,7 @@ namespace FTAnalyzer
 
             DisposeDuplicateForms(census);
             census.Show();
-            Analytics.TrackActionAsync(Analytics.LostCousinsAction, "LC Year Report Run", censusDate.BestYear.ToString());
+            await Analytics.TrackActionAsync(Analytics.LostCousinsAction, "LC Year Report Run", censusDate.BestYear.ToString());
             HourGlass(false);
         }
 
@@ -2659,7 +2661,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        void DisplayColourCensus(string country)
+        async void DisplayColourCensus(string country)
         {
             HourGlass(true);
             List<IDisplayColourCensus> list =
@@ -2668,29 +2670,17 @@ namespace FTAnalyzer
             DisposeDuplicateForms(rs);
             rs.Show();
             rs.Focus();
-            Analytics.TrackActionAsync(Analytics.MainFormAction, "Colour Census Report Clicked", country);
+            await Analytics.TrackActionAsync(Analytics.MainFormAction, "Colour Census Report Clicked", country);
             HourGlass(false);
         }
 
-        void BtnUKColourCensus_Click(object sender, EventArgs e)
-        {
-            DisplayColourCensus(Countries.UNITED_KINGDOM);
-        }
+        void BtnUKColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.UNITED_KINGDOM);
 
-        void BtnIrishColourCensus_Click(object sender, EventArgs e)
-        {
-            DisplayColourCensus(Countries.IRELAND);
-        }
+        void BtnIrishColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.IRELAND);
 
-        void BtnUSColourCensus_Click(object sender, EventArgs e)
-        {
-            DisplayColourCensus(Countries.UNITED_STATES);
-        }
+        void BtnUSColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.UNITED_STATES);
 
-        void BtnCanadianColourCensus_Click(object sender, EventArgs e)
-        {
-            DisplayColourCensus(Countries.CANADA);
-        }
+        void BtnCanadianColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.CANADA);
 
 
         void BtnStandardMissingData_Click(object sender, EventArgs e)
@@ -2709,20 +2699,11 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        void CmbColourFamily_Click(object sender, EventArgs e)
-        {
-            UpdateColourFamilyComboBox(null);
-        }
+        void CmbColourFamily_Click(object sender, EventArgs e) => UpdateColourFamilyComboBox(null);
 
-        void RelTypesColoured_RelationTypesChanged(object sender, EventArgs e)
-        {
-            RefreshColourFamilyComboBox();
-        }
+        void RelTypesColoured_RelationTypesChanged(object sender, EventArgs e) => RefreshColourFamilyComboBox();
 
-        void TxtColouredSurname_TextChanged(object sender, EventArgs e)
-        {
-            RefreshColourFamilyComboBox();
-        }
+        void TxtColouredSurname_TextChanged(object sender, EventArgs e) => RefreshColourFamilyComboBox();
 
         void RefreshColourFamilyComboBox()
         {
@@ -2995,7 +2976,10 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            SortableBindingList<IExportIndividual> list = dgTreeTops.DataSource as SortableBindingList<IExportIndividual>;
+            Predicate<Individual> filter = CreateTreeTopsIndividualFilter();
+            List<IExportIndividual> treeTopsList = ft.GetExportTreeTops(filter).ToList();
+            treeTopsList.Sort(new BirthDateComparer());
+            SortableBindingList<IExportIndividual> list = new SortableBindingList<IExportIndividual>(treeTopsList);
             DataTable dt = convertor.ToDataTable(list.ToList());
             ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, "Treetops Exported");
@@ -3005,11 +2989,16 @@ namespace FTAnalyzer
         void MnuWorldWarsToExcel_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            SortableBindingList<IExportIndividual> list = dgWorldWars.DataSource as SortableBindingList<IExportIndividual>;
-            DataTable dt = convertor.ToDataTable(list.ToList());
-            ExportToExcel.Export(dt);
-            Analytics.TrackAction(Analytics.ExportAction, "World Wars Exported");
+            if (warDeadFilter != null)
+            {
+                ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+                List<IExportIndividual> warDeadList = ft.GetExportWorldWars(warDeadFilter).ToList();
+                warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
+                SortableBindingList<IExportIndividual> list = new SortableBindingList<IExportIndividual>(warDeadList);
+                DataTable dt = convertor.ToDataTable(list.ToList());
+                ExportToExcel.Export(dt);
+                Analytics.TrackAction(Analytics.ExportAction, "World Wars Exported");
+            }
             HourGlass(false);
         }
         #endregion
@@ -3026,7 +3015,7 @@ namespace FTAnalyzer
             await Task.Run(() => ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, (int)nudToday.Value, progress, outputText));
             labToday.Visible = false;
             pbToday.Visible = false;
-            Analytics.TrackAction(Analytics.MainFormAction, "Todays Events Clicked");
+            await Analytics.TrackAction(Analytics.MainFormAction, "Todays Events Clicked");
         }
 
         void RbTodayMonth_CheckedChanged(object sender, EventArgs e)
@@ -3206,7 +3195,7 @@ namespace FTAnalyzer
             tsHintsLabel.Text = Messages.Hints_Surname;
             tspbTabProgress.Visible = false;
             HourGlass(false);
-            Analytics.TrackAction(Analytics.MainFormAction, "Show Surnames Clicked");
+            await Analytics.TrackAction(Analytics.MainFormAction, "Show Surnames Clicked");
         }
 
         void CousinsCountReportToolStripMenuItem_Click(object sender, EventArgs e)

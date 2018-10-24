@@ -3,13 +3,14 @@
 Updated the .Net Framework to the latest .Net 4.7.2 this means v6.7.3 is the last Vista version  
 Updating to .Net 4.7.2 means new features in Windows can be properly supported  
 Added a version check on startup so that zip installed versions will also warn if outdated  
-Added an OS version check to see how many users of soon to be discontinued Windows 7 there still are
-Update database to v7.0.0.0 to fix issue with geocoded locations at 0,0
-Add privacy policy page and link in main menu
-Add support for Unmarried/Never married death date
-Added various analytics logging actions
-Add support for start and end dates for births and deaths in export routines
-Added region fix for US habit of adding supurflous word "county" to end of English Shire counties
+Added an OS version check to see how many users of soon to be discontinued Windows 7 there still are  
+Update database to v7.0.0.0 to fix issue with geocoded locations at 0,0  
+Add privacy policy page and link in main menu  
+Add support for Unmarried/Never married death date  
+Added various analytics logging actions  
+Add support for start and end dates for births and deaths in export routines  
+Added region fix for US habit of adding supurflous word "county" to end of English Shire counties  
+Children of families are now default sorted by age  
 
 #### Updated Release Version 6.7.3.0, 18th October 2018  
 **Updates**  
