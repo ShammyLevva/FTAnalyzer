@@ -1,20 +1,24 @@
 ﻿using FTAnalyzer.Properties;
 using GoogleAnalyticsTracker.Simple;
 using System;
+using System.Collections.Generic;
 using System.Deployment.Application;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace FTAnalyzer.Utilities
 {
-    class Analytics 
+    class Analytics
     {
         static readonly SimpleTrackerEnvironment trackerEnvironment;
         static readonly SimpleTracker tracker;
 
-        public const string MainFormAction = "Main Form Action", FactsFormAction = "Facts Form Action", CensusTabAction = "Census Tab Action", 
+        public const string MainFormAction = "Main Form Action", FactsFormAction = "Facts Form Action", CensusTabAction = "Census Tab Action",
                             ReportsAction = "Reports Action", LostCousinsAction = "Lost Cousins Action", GeocodingAction = "Geocoding Action",
-                            ExportAction = "Export Action", MapsAction = "Maps Action";
+                            ExportAction = "Export Action", MapsAction = "Maps Action", CensusSearchAction = "Census Search Action",
+                            BMDSearchAction = "BMD Search Action";
+
+        static string AppVersion { get; }
+        static Dictionary<int,string> CustomDimensions { get; }
 
         static Analytics()
         {
@@ -26,6 +30,11 @@ namespace FTAnalyzer.Utilities
             OperatingSystem os = Environment.OSVersion;
             trackerEnvironment = new SimpleTrackerEnvironment(os.Platform.ToString(), os.Version.ToString(), os.VersionString);
             tracker = new SimpleTracker("UA-125850339-2", trackerEnvironment);
+            CustomDimensions = new Dictionary<int, string>
+            {
+
+            };
+            AppVersion = MainForm.VERSION;
         }
 
         public static async Task CheckProgramUsageAsync() // pre demise of Windows 7 add tracker to check how many machines still use old versions
@@ -36,8 +45,10 @@ namespace FTAnalyzer.Utilities
                 await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Startup", "Load Program", MainForm.VERSION).ConfigureAwait(false);
                 await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Startup", "Record OS Version", trackerEnvironment.OsVersion).ConfigureAwait(false);
                 await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Startup", "Deployment Type", deploymentType).ConfigureAwait(false);
+                await SpecialMethods.TrackScreenviewAsync(tracker, "FTAnalyzer Startup");
             }
-            catch (Exception e) { Console.WriteLine(e.Message); }
+            catch (Exception e)
+                { Console.WriteLine(e.Message); }
         }
 
         public static async Task EndProgramAsync()
@@ -47,7 +58,8 @@ namespace FTAnalyzer.Utilities
                 TimeSpan duration = DateTime.Now - Settings.Default.StartTime;
                 await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Shutdown", "Usage Time", duration.ToString("c"));
             }
-            catch (Exception e) { Console.WriteLine(e.Message); }
+            catch (Exception e)
+                { Console.WriteLine(e.Message); }
         }
 
         public static Task TrackAction(string category, string action) => TrackActionAsync(category, action, "default");
@@ -56,8 +68,10 @@ namespace FTAnalyzer.Utilities
             try
             {
                 await SpecialMethods.TrackEventAsync(tracker, category, action, value).ConfigureAwait(false);
+                await SpecialMethods.TrackScreenviewAsync(tracker, category);
             }
-            catch (Exception e) { Console.WriteLine(e.Message); }
+            catch (Exception e)
+                { Console.WriteLine(e.Message); }
         }
     }
 }

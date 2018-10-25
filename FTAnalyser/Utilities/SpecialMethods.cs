@@ -49,10 +49,27 @@ namespace FTAnalyzer.Utilities
                 Action = action,
                 Label = label,
                 Value = value,
+                ScreenName = category,
                 ScreenResolution = Screen.PrimaryScreen.Bounds.ToString(),
                 CacheBuster = tracker.AnalyticsSession.GenerateCacheBuster()
             };
             return await tracker.TrackAsync(eventTrackingParameters);
+        }
+
+        public static async Task<TrackingResult> TrackScreenviewAsync(this SimpleTracker tracker, string screen)
+        {
+            var screenViewTrackingParameters = new ScreenviewTracking
+            {
+                ClientId = Properties.Settings.Default.GUID.ToString(),
+                UserId = Properties.Settings.Default.GUID.ToString(),
+
+                ApplicationName = "FTAnalyzer",
+                ApplicationVersion = MainForm.VERSION,
+                ScreenName = screen,
+                ScreenResolution = Screen.PrimaryScreen.Bounds.ToString(),
+                CacheBuster = tracker.AnalyticsSession.GenerateCacheBuster()
+            };
+            return await tracker.TrackAsync(screenViewTrackingParameters);
         }
     }
 }

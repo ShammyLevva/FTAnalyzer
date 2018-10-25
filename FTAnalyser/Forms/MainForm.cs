@@ -30,7 +30,7 @@ namespace FTAnalyzer
     public partial class MainForm : Form
 
     {
-        public static string VERSION = "7.0.0.0";
+        public static string VERSION = "7.0.0.1";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -2430,7 +2430,7 @@ namespace FTAnalyzer
         {
             bool censusDone = sender == btnShowCensusEntered;
             ShowCensus(censusDone, txtCensusSurname.Text, false);
-            Analytics.TrackAction(Analytics.CensusTabAction, censusDone ? "Show on Census" : "Shom Missing from Census");
+            Analytics.TrackAction(Analytics.CensusTabAction, censusDone ? "Show on Census" : "Show Missing from Census");
         }
 
         void ShowCensus(bool censusDone, string surname, bool random)

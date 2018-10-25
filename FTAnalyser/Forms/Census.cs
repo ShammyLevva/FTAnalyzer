@@ -225,7 +225,7 @@ namespace FTAnalyzer.Forms
                 else
                     MessageBox.Show("Unable to find location : " + loc.ToString(), "FTAnalyzer");
             }
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         private void DgCensus_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -234,7 +234,7 @@ namespace FTAnalyzer.Forms
             {
                 CensusIndividual ds = (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
                 FamilyTree ft = FamilyTree.Instance;
-                if (Control.ModifierKeys.Equals(Keys.Shift))
+                if (ModifierKeys.Equals(Keys.Shift))
                 {
                     Facts factForm = new Facts(ds);
                     MainForm.DisposeDuplicateForms(factForm);

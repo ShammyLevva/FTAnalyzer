@@ -1,3 +1,7 @@
+#### Updated Release Version 7.0.0.1, 25th October 2018  
+**Bugfixes**  
+Code tidyups and fixed minor analytics issue 
+
 #### Major New Release Version 7.0.0.0, 24th October 2018
 **Updates**  
 Updated the .Net Framework to the latest .Net 4.7.2 this means v6.7.3 is the last Vista version  
@@ -9,7 +13,7 @@ Add privacy policy page and link in main menu
 Add support for Unmarried/Never married death date  
 Added various analytics logging actions  
 Add support for start and end dates for births and deaths in export routines  
-Added region fix for US habit of adding supurflous word "county" to end of English Shire counties  
+Added region fix for US habit of adding superfluous word "county" to end of English Shire counties  
 Children of families are now default sorted by age  
 
 #### Updated Release Version 6.7.3.0, 18th October 2018  
