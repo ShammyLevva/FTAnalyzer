@@ -1,6 +1,7 @@
 ﻿using GoogleAnalyticsTracker.Core;
 using GoogleAnalyticsTracker.Core.TrackerParameters;
 using GoogleAnalyticsTracker.Simple;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -69,6 +70,7 @@ namespace FTAnalyzer.Utilities
                 ScreenResolution = Screen.PrimaryScreen.Bounds.ToString(),
                 CacheBuster = tracker.AnalyticsSession.GenerateCacheBuster()
             };
+            Console.WriteLine(Properties.Settings.Default.GUID.ToString());
             return await tracker.TrackAsync(screenViewTrackingParameters);
         }
     }
