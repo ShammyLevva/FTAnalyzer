@@ -323,11 +323,6 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <DependentUpon>Settings.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <Compile Include="UserControls\CensusSettingsUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -607,10 +602,6 @@
     <None Include="Properties\FontSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>FontSettings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
