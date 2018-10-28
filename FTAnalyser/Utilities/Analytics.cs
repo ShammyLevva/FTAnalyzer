@@ -22,9 +22,9 @@ namespace FTAnalyzer.Utilities
 
         static Analytics()
         {
-            if (Settings.Default.GUID.ToString() == "00000000-0000-0000-0000-000000000000")
+            if (Settings.Default.GUID == "00000000-0000-0000-0000-000000000000")
             {
-                Settings.Default.GUID = Guid.NewGuid();
+                Settings.Default.GUID = Guid.NewGuid().ToString();
                 Settings.Default.Save();
             }
             OperatingSystem os = Environment.OSVersion;
