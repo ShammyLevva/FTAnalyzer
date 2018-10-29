@@ -48,7 +48,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>7.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -78,7 +78,7 @@
     <Prefer32Bit>false</Prefer32Bit>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>FTAnalyzer.Windows.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>FTAnalyzer.Windows2.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -91,7 +91,7 @@
     <ErrorReport>prompt</ErrorReport>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>FTAnalyzer.Windows.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>FTAnalyzer.Windows2.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -103,7 +103,7 @@
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>FTAnalyzer.Windows.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>FTAnalyzer.Windows2.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>544B2C041CECDDF973974E4355A5496DE4EA94F0</ManifestCertificateThumbprint>
@@ -600,6 +600,8 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="FTAnalyzer.Windows.ruleset" />
+    <None Include="FTAnalyzer.Windows1.ruleset" />
+    <None Include="FTAnalyzer.Windows2.ruleset" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <EmbeddedResource Include="Resources\KUNSTLER.TTF">

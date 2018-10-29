@@ -1,3 +1,10 @@
+#### Updated Release Version 7.0.0.2, 29th October 2018  
+**Updates**  
+Added back in support for high dpi screens  
+
+**Bugfixes**  
+Fix issue with birth, death dates not being given priority over baptism/burial facts  
+
 #### Updated Release Version 7.0.0.1, 25th October 2018  
 **Bugfixes**  
 Code tidyups and fixed minor analytics issue 

@@ -371,10 +371,7 @@ namespace FTAnalyzer.Utilities
             }
         }
 
-        public string LatLongHashKey(double latitude, double longitude)
-        {
-            return latitude.ToString("F6") + longitude.ToString("F6");
-        }
+        public string LatLongHashKey(double latitude, double longitude) => latitude.ToString("F6") + longitude.ToString("F6");
 
         public Dictionary<string, Tuple<string, string>> GetLatLongIndex()
         {
