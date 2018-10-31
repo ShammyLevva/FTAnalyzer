@@ -46,7 +46,10 @@ namespace FTAnalyzer.Utilities
                 Value = value,
                 ScreenName = category,
                 ScreenResolution = Screen.PrimaryScreen.Bounds.ToString(),
-                CacheBuster = tracker.AnalyticsSession.GenerateCacheBuster()
+                CacheBuster = tracker.AnalyticsSession.GenerateCacheBuster(),
+                CustomDimension1 = Analytics.DeploymentType,
+                CustomDimension2 = Analytics.OSVersion,
+                GoogleAdWordsId = "201-455-7333"
             };
             return await tracker.TrackAsync(eventTrackingParameters);
         }
@@ -59,10 +62,13 @@ namespace FTAnalyzer.Utilities
                 UserId = Properties.Settings.Default.GUID.ToString(),
 
                 ApplicationName = "FTAnalyzer",
-                ApplicationVersion = MainForm.VERSION,
+                ApplicationVersion = Analytics.AppVersion,
                 ScreenName = screen,
                 ScreenResolution = Screen.PrimaryScreen.Bounds.ToString(),
-                CacheBuster = tracker.AnalyticsSession.GenerateCacheBuster()
+                CacheBuster = tracker.AnalyticsSession.GenerateCacheBuster(),
+                CustomDimension1 = Analytics.DeploymentType,
+                CustomDimension2 = Analytics.OSVersion,
+                GoogleAdWordsId = "201-455-7333"
             };
             Console.WriteLine(Properties.Settings.Default.GUID.ToString());
             return await tracker.TrackAsync(screenViewTrackingParameters);

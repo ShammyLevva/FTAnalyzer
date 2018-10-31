@@ -1,7 +1,7 @@
 ﻿using FTAnalyzer.Properties;
+using GoogleAnalyticsTracker.Core;
 using GoogleAnalyticsTracker.Simple;
 using System;
-using System.Collections.Generic;
 using System.Deployment.Application;
 using System.Threading.Tasks;
 
@@ -11,14 +11,16 @@ namespace FTAnalyzer.Utilities
     {
         static readonly SimpleTrackerEnvironment trackerEnvironment;
         static readonly SimpleTracker tracker;
+        static readonly AnalyticsSession analyticsSession;
 
         public const string MainFormAction = "Main Form Action", FactsFormAction = "Facts Form Action", CensusTabAction = "Census Tab Action",
                             ReportsAction = "Reports Action", LostCousinsAction = "Lost Cousins Action", GeocodingAction = "Geocoding Action",
                             ExportAction = "Export Action", MapsAction = "Maps Action", CensusSearchAction = "Census Search Action",
                             BMDSearchAction = "BMD Search Action";
 
-        static string AppVersion { get; }
-        static Dictionary<int,string> CustomDimensions { get; }
+        static public string AppVersion { get; }
+        static public string OSVersion { get; }
+        static public string DeploymentType { get; }
 
         static Analytics()
         {
@@ -29,22 +31,20 @@ namespace FTAnalyzer.Utilities
             }
             OperatingSystem os = Environment.OSVersion;
             trackerEnvironment = new SimpleTrackerEnvironment(os.Platform.ToString(), os.Version.ToString(), os.VersionString);
-            tracker = new SimpleTracker("UA-125850339-2", trackerEnvironment);
-            CustomDimensions = new Dictionary<int, string>
-            {
-
-            };
+            analyticsSession = new AnalyticsSession();
+            tracker = new SimpleTracker("UA-125850339-2", analyticsSession, trackerEnvironment);
             AppVersion = MainForm.VERSION;
+            OSVersion = os.Version.ToString();
+            DeploymentType = ApplicationDeployment.IsNetworkDeployed ? "ClickOnce" : "Zip File";
         }
 
         public static async Task CheckProgramUsageAsync() // pre demise of Windows 7 add tracker to check how many machines still use old versions
         {
             try
             {
-                string deploymentType = ApplicationDeployment.IsNetworkDeployed ? "ClickOnce" : "Zip File";
-                await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Startup", "Load Program", MainForm.VERSION).ConfigureAwait(false);
-                await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Startup", "Record OS Version", trackerEnvironment.OsVersion).ConfigureAwait(false);
-                await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Startup", "Deployment Type", deploymentType).ConfigureAwait(false);
+                await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Startup", "Load Program", AppVersion).ConfigureAwait(false);
+             //   await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Startup", "Record OS Version", OSVersion).ConfigureAwait(false);
+              //  await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Startup", "Deployment Type", DeploymentType).ConfigureAwait(false);
                 await SpecialMethods.TrackScreenviewAsync(tracker, "FTAnalyzer Startup");
             }
             catch (Exception e)
