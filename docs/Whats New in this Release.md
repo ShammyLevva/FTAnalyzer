@@ -1,3 +1,7 @@
+#### Updated Release Version 7.0.0.3, 31st October 2018  
+**Bugfixes**  
+Minor tweak to version control  
+
 #### Updated Release Version 7.0.0.2, 29th October 2018  
 **Updates**  
 Added back in support for high dpi screens  

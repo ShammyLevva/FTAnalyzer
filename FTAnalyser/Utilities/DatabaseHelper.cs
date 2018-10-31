@@ -373,37 +373,40 @@ namespace FTAnalyzer.Utilities
 
         public string LatLongHashKey(double latitude, double longitude) => latitude.ToString("F6") + longitude.ToString("F6");
 
-        public Dictionary<string, Tuple<string, string>> GetLatLongIndex()
+        public Dictionary<string, Tuple<string, string>> LatLongIndex
         {
-            Dictionary<string, Tuple<string, string>> results = new Dictionary<string, Tuple<string, string>>();
-
-            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            get
             {
-                conn.Open();
-                double latitude = 0;
-                double longitude = 0;
-                string hashkey;
-                string foundlocation;
-                string foundresulttype;
-                using (SQLiteCommand cmd = new SQLiteCommand(
-                    "select distinct latitude, longitude, foundlocation, foundresulttype from geocode where latitude <> 0 and longitude <> 0 and foundlocation<>''", conn))
+                Dictionary<string, Tuple<string, string>> results = new Dictionary<string, Tuple<string, string>>();
+
+                using (SQLiteConnection conn = new SQLiteConnection(connectionString))
                 {
-                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    conn.Open();
+                    double latitude = 0;
+                    double longitude = 0;
+                    string hashkey;
+                    string foundlocation;
+                    string foundresulttype;
+                    using (SQLiteCommand cmd = new SQLiteCommand(
+                        "select distinct latitude, longitude, foundlocation, foundresulttype from geocode where latitude <> 0 and longitude <> 0 and foundlocation<>''", conn))
                     {
-                        while (reader.Read())
+                        using (SQLiteDataReader reader = cmd.ExecuteReader())
                         {
-                            double.TryParse(reader[0].ToString(), out latitude);
-                            double.TryParse(reader[1].ToString(), out longitude);
-                            hashkey = LatLongHashKey(latitude, longitude);
-                            foundlocation = reader[2].ToString();
-                            foundresulttype = reader[3].ToString();
-                            if (!results.ContainsKey(hashkey))
-                                results.Add(hashkey, new Tuple<string, string>(foundlocation, foundresulttype));
+                            while (reader.Read())
+                            {
+                                double.TryParse(reader[0].ToString(), out latitude);
+                                double.TryParse(reader[1].ToString(), out longitude);
+                                hashkey = LatLongHashKey(latitude, longitude);
+                                foundlocation = reader[2].ToString();
+                                foundresulttype = reader[3].ToString();
+                                if (!results.ContainsKey(hashkey))
+                                    results.Add(hashkey, new Tuple<string, string>(foundlocation, foundresulttype));
+                            }
                         }
                     }
                 }
+                return results;
             }
-            return results;
         }
         #endregion
 

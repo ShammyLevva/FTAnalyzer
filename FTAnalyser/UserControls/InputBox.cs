@@ -57,7 +57,7 @@ namespace FTAnalyzer
 
     public class InputBoxResult
     {
-        public DialogResult ReturnCode;
-        public string Text;
+        public DialogResult ReturnCode { get; set; }
+        public string Text { get; set; }
     }
 }
