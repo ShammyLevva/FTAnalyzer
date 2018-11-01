@@ -34,7 +34,7 @@ namespace FTAnalyzer.Utilities
             analyticsSession = new AnalyticsSession();
             tracker = new SimpleTracker("UA-125850339-2", analyticsSession, trackerEnvironment);
             AppVersion = MainForm.VERSION;
-            OSVersion = os.Version.ToString();
+            OSVersion = SetWindowsVersion(os.Version.ToString());
             DeploymentType = ApplicationDeployment.IsNetworkDeployed ? "ClickOnce" : "Zip File";
         }
 
@@ -72,6 +72,23 @@ namespace FTAnalyzer.Utilities
             }
             catch (Exception e)
                 { Console.WriteLine(e.Message); }
+        }
+
+        static string SetWindowsVersion(string version)
+        {
+            if (version.StartsWith("6.1.7600")) return "Windows 7";
+            if (version.StartsWith("6.1.7601")) return "Windows 7 SP1";
+            if (version.StartsWith("6.2.9200")) return "Windows 8";
+            if (version.StartsWith("6.3.9200")) return "Windows 8.1";
+            if (version.StartsWith("6.3.9600")) return "Windows 8.1 Update 1";
+            if (version.StartsWith("10.0.10240")) return "Windows 10";
+            if (version.StartsWith("10.0.10586")) return "Windows 10 (1511)";
+            if (version.StartsWith("10.0.14393")) return "Windows 10 (1607)";
+            if (version.StartsWith("10.0.15063")) return "Windows 10 (1703)";
+            if (version.StartsWith("10.0.16299")) return "Windows 10 (1709)";
+            if (version.StartsWith("10.0.17134")) return "Windows 10 (1803)";
+            if (version.StartsWith("10.0.17763")) return "Windows 10 (1809)";
+            return version;
         }
     }
 }
