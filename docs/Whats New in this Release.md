@@ -2,9 +2,11 @@
 **Updates**  
 Added extra relation categeory for descendants  
 Added report to show how many direct ancestors/descendants you've got  
+Added link to Facebook support site in Help menu.
+Added link to Facebook User Group site in Help menu 
 
 **Bugfixes**  
- 
+Updated LAT/LONG coordinates in GEDCOM weren't updating internal database if there was a change
 
 #### Updated Release Version 7.0.0.3, 31st October 2018  
 **Bugfixes**  

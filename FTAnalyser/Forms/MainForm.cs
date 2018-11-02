@@ -3220,5 +3220,15 @@ namespace FTAnalyzer
             HourGlass(false);
             Analytics.TrackAction(Analytics.MainFormAction, "How Many Directs Viewed");
         }
+
+        private void facebookSupportGroupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HttpUtility.VisitWebsite("https://www.facebook.com/ftanalyzer");
+        }
+
+        private void facebookUserGroupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HttpUtility.VisitWebsite("https://www.facebook.com/groups/ftanalyzer");
+        }
     }
 }
