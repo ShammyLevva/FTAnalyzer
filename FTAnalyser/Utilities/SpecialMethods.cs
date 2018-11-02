@@ -3,6 +3,7 @@ using GoogleAnalyticsTracker.Core.TrackerParameters;
 using GoogleAnalyticsTracker.Simple;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -33,29 +34,32 @@ namespace FTAnalyzer.Utilities
 
         public static async Task<TrackingResult> TrackEventAsync(this SimpleTracker tracker, string category, string action, string label, long value = 1)
         {
+            string resolution = Screen.PrimaryScreen.Bounds.ToString();
             var eventTrackingParameters = new EventTracking
             {
                 ClientId = Properties.Settings.Default.GUID.ToString(),
                 UserId = Properties.Settings.Default.GUID.ToString(),
-                
+
                 ApplicationName = "FTAnalyzer",
-                ApplicationVersion = MainForm.VERSION,
+                ApplicationVersion = Analytics.AppVersion,
                 Category = category,
                 Action = action,
                 Label = label,
                 Value = value,
                 ScreenName = category,
-                ScreenResolution = Screen.PrimaryScreen.Bounds.ToString(),
+                ScreenResolution = resolution.Length > 11 ? resolution.Substring(9, resolution.Length - 10) : resolution,
                 CacheBuster = tracker.AnalyticsSession.GenerateCacheBuster(),
                 CustomDimension1 = Analytics.DeploymentType,
                 CustomDimension2 = Analytics.OSVersion,
-                GoogleAdWordsId = "201-455-7333"
+                GoogleAdWordsId = "201-455-7333",
+                UserLanguage = CultureInfo.CurrentUICulture.EnglishName
             };
             return await tracker.TrackAsync(eventTrackingParameters);
         }
 
         public static async Task<TrackingResult> TrackScreenviewAsync(this SimpleTracker tracker, string screen)
         {
+            string resolution = Screen.PrimaryScreen.Bounds.ToString();
             var screenViewTrackingParameters = new ScreenviewTracking
             {
                 ClientId = Properties.Settings.Default.GUID.ToString(),
@@ -64,13 +68,13 @@ namespace FTAnalyzer.Utilities
                 ApplicationName = "FTAnalyzer",
                 ApplicationVersion = Analytics.AppVersion,
                 ScreenName = screen,
-                ScreenResolution = Screen.PrimaryScreen.Bounds.ToString(),
+                ScreenResolution = resolution.Length > 11 ? resolution.Substring(9, resolution.Length - 10) : resolution,
                 CacheBuster = tracker.AnalyticsSession.GenerateCacheBuster(),
                 CustomDimension1 = Analytics.DeploymentType,
                 CustomDimension2 = Analytics.OSVersion,
-                GoogleAdWordsId = "201-455-7333"
+                GoogleAdWordsId = "201-455-7333",
+                UserLanguage = CultureInfo.CurrentUICulture.EnglishName
             };
-            Console.WriteLine(Properties.Settings.Default.GUID.ToString());
             return await tracker.TrackAsync(screenViewTrackingParameters);
         }
     }
