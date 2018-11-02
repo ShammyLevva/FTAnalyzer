@@ -3224,11 +3224,13 @@ namespace FTAnalyzer
         private void facebookSupportGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HttpUtility.VisitWebsite("https://www.facebook.com/ftanalyzer");
+            Analytics.TrackAction(Analytics.MainFormAction, "Visited Facebook Support");
         }
 
         private void facebookUserGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HttpUtility.VisitWebsite("https://www.facebook.com/groups/ftanalyzer");
+            Analytics.TrackAction(Analytics.MainFormAction, "Visited Facebook Usergroup");
         }
     }
 }
