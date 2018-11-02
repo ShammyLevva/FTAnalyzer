@@ -1,12 +1,9 @@
-﻿using System;
+﻿using FTAnalyzer.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using FTAnalyzer.Utilities;
 
 namespace FTAnalyzer.Forms
 {
@@ -22,7 +19,7 @@ namespace FTAnalyzer.Forms
         {
             IEnumerable<Tuple<string,int>> relations = FamilyTree.Instance.AllIndividuals.Where(x => x.RelationToRoot.Length > 0).GroupBy(i => i.RelationToRoot)
                 .Select(r => new Tuple<string, int>(r.Key, r.Count()));
-            dgStatistics.DataSource = new SortableBindingList<Tuple<string, int>>(relations.ToList<Tuple<string,int>>());
+            dgStatistics.DataSource = new SortableBindingList<Tuple<string, int>>(relations.ToList());
             dgStatistics.Columns[0].Width = 180;
             dgStatistics.Columns[0].SortMode = DataGridViewColumnSortMode.Automatic;
             dgStatistics.Columns[0].HeaderText = "Relation to Root";
@@ -31,6 +28,28 @@ namespace FTAnalyzer.Forms
             dgStatistics.Columns[1].SortMode = DataGridViewColumnSortMode.Automatic;
             dgStatistics.Columns[1].HeaderText = "Count";
             dgStatistics.Sort(dgStatistics.Columns[0], ListSortDirection.Ascending);
+            tsStatusLabel.Text = "Double click to show all individuals with that relationship to root person.";
+            tsStatusLabel.Visible = true;
+        }
+
+        public void HowManyDirectsReport()
+        {
+            IEnumerable<DisplayGreatStats> relations = FamilyTree.Instance.AllIndividuals.Where(x => x.RelationToRoot.Length > 0 && (x.RelationType == Individual.DIRECT || x.RelationType == Individual.DESCENDANT))
+                .GroupBy(i => (i.RelationToRoot, i.RelationSort))
+                .Select(r => new DisplayGreatStats(r.Key.RelationToRoot, r.Key.RelationSort ,r.Count()));
+            dgStatistics.DataSource = new SortableBindingList<DisplayGreatStats>(relations.ToList());
+            dgStatistics.Columns[0].Width = 180;
+            dgStatistics.Columns[0].SortMode = DataGridViewColumnSortMode.Automatic;
+            dgStatistics.Columns[0].HeaderText = "Relation to Root";
+            dgStatistics.Columns[1].Visible = false;
+            dgStatistics.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgStatistics.Columns[1].SortMode = DataGridViewColumnSortMode.Automatic;
+            dgStatistics.Columns[1].HeaderText = "Relation Sort";
+            dgStatistics.Columns[2].Width = 60;
+            dgStatistics.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgStatistics.Columns[2].SortMode = DataGridViewColumnSortMode.Automatic;
+            dgStatistics.Columns[2].HeaderText = "Count";
+            dgStatistics.Sort(dgStatistics.Columns[1], ListSortDirection.Descending);
             tsStatusLabel.Text = "Double click to show all individuals with that relationship to root person.";
             tsStatusLabel.Visible = true;
         }

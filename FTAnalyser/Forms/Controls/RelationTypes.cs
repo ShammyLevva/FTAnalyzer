@@ -18,11 +18,12 @@ namespace Controls
             InitializeComponent();
         }
 
-        public bool Directs { get { return ckbDirects.Checked; } }
-        public bool Blood { get { return ckbBlood.Checked; } }
-        public bool Marriage { get { return ckbMarriage.Checked; } }
-        public bool MarriedToDB { get { return ckbMarriageDB.Checked; } set { ckbMarriageDB.Checked = value; } }
-        public bool Unknown { get { return ckbUnknown.Checked; } }
+        public bool Directs => ckbDirects.Checked;
+        public bool Blood => ckbBlood.Checked;
+        public bool Marriage => ckbMarriage.Checked;
+        public bool MarriedToDB { get => ckbMarriageDB.Checked; set => ckbMarriageDB.Checked = value; }
+        public bool Unknown => ckbUnknown.Checked;
+        public bool Descendant => ckbDescendants.Checked;
 
         public int Status
         {
@@ -39,6 +40,8 @@ namespace Controls
                     result += Individual.MARRIAGE;
                 if (ckbMarriageDB.Checked)
                     result += Individual.MARRIEDTODB;
+                if (ckbDescendants.Checked)
+                    result += Individual.DESCENDANT;
                 return result;
             }
         }
@@ -47,43 +50,41 @@ namespace Controls
         {
             List<Predicate<T>> relationFilters = new List<Predicate<T>>();
             if (Blood)
-                relationFilters.Add(FilterUtils.IntFilter<T>(relationType, Individual.BLOOD));
+                relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.BLOOD));
             if (Directs)
-                relationFilters.Add(FilterUtils.IntFilter<T>(relationType, Individual.DIRECT));
+                relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.DIRECT));
             if (Marriage)
-                relationFilters.Add(FilterUtils.IntFilter<T>(relationType, Individual.MARRIAGE));
+                relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.MARRIAGE));
             if (MarriedToDB)
-                relationFilters.Add(FilterUtils.IntFilter<T>(relationType, Individual.MARRIEDTODB));
+                relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.MARRIEDTODB));
+            if (Descendant)
+                relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.DESCENDANT));
             if (Unknown)
-                relationFilters.Add(FilterUtils.IntFilter<T>(relationType, Individual.UNKNOWN));
-            return FilterUtils.OrFilter<T>(relationFilters);
+                relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.UNKNOWN));
+            return FilterUtils.OrFilter(relationFilters);
         }
 
         public Predicate<Family> BuildFamilyFilter<Family>(Func<Family, IEnumerable<int>> relationTypes)
         {
             List<Predicate<Family>> relationFilters = new List<Predicate<Family>>();
             if (Blood)
-                relationFilters.Add(FilterUtils.FamilyRelationFilter<Family>(relationTypes, Individual.BLOOD));
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, Individual.BLOOD));
             if (Directs)
-                relationFilters.Add(FilterUtils.FamilyRelationFilter<Family>(relationTypes, Individual.DIRECT));
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, Individual.DIRECT));
             if (Marriage)
-                relationFilters.Add(FilterUtils.FamilyRelationFilter<Family>(relationTypes, Individual.MARRIAGE));
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, Individual.MARRIAGE));
             if (MarriedToDB)
-                relationFilters.Add(FilterUtils.FamilyRelationFilter<Family>(relationTypes, Individual.MARRIEDTODB));
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, Individual.MARRIEDTODB));
+            if (Descendant)
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, Individual.DESCENDANT));
             if (Unknown)
-                relationFilters.Add(FilterUtils.FamilyRelationFilter<Family>(relationTypes, Individual.UNKNOWN));
-            return FilterUtils.OrFilter<Family>(relationFilters);
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, Individual.UNKNOWN));
+            return FilterUtils.OrFilter(relationFilters);
         }
 
         public event EventHandler RelationTypesChanged;
-        protected void OnRelationTypesChanged()
-        {
-            RelationTypesChanged?.Invoke(this, EventArgs.Empty);
-        }
+        protected void OnRelationTypesChanged() => RelationTypesChanged?.Invoke(this, EventArgs.Empty);
 
-        private void Tickbox_CheckedChanged(object sender, EventArgs e)
-        {
-            OnRelationTypesChanged();
-        }
+        private void Tickbox_CheckedChanged(object sender, EventArgs e) => OnRelationTypesChanged();
     }
 }

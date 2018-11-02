@@ -30,7 +30,7 @@ namespace FTAnalyzer
     public partial class MainForm : Form
 
     {
-        public static string VERSION = "7.0.0.3";
+        public static string VERSION = "7.0.0.4";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -377,6 +377,7 @@ namespace FTAnalyzer
             mnuLifelines.Enabled = enabled;
             mnuPlaces.Enabled = enabled;
             mnuCousinsCountReport.Enabled = enabled;
+            mnuHowManyGreats.Enabled = enabled;
             mnuLookupBlankFoundLocations.Enabled = enabled;
             mnuTreetopsToExcel.Enabled = enabled && dgTreeTops.RowCount > 0;
             mnuWorldWarsToExcel.Enabled = enabled && dgWorldWars.RowCount > 0;
@@ -2467,8 +2468,8 @@ namespace FTAnalyzer
 
         private string GetRandomSurname()
         {
-            IEnumerable<Individual> directs = ft.AllIndividuals.Filter(x => x.RelationType == Individual.DIRECT);
-            List<string> surnames = directs.Select(x => x.Surname).Distinct<string>().ToList<string>();
+            IEnumerable<Individual> directs = ft.AllIndividuals.Filter(x => x.RelationType == Individual.DIRECT || x.RelationType == Individual.DESCENDANT);
+            List<string> surnames = directs.Select(x => x.Surname).Distinct().ToList();
             Random rnd = new Random();
             string surname;
             do
@@ -3207,6 +3208,17 @@ namespace FTAnalyzer
             f.Show();
             HourGlass(false);
             Analytics.TrackAction(Analytics.MainFormAction, "Cousins Count Viewed");
+        }
+
+        private void HowManyDirectsReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            StatisticsForm f = new StatisticsForm();
+            f.HowManyDirectsReport();
+            DisposeDuplicateForms(f);
+            f.Show();
+            HourGlass(false);
+            Analytics.TrackAction(Analytics.MainFormAction, "How Many Directs Viewed");
         }
     }
 }

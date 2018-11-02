@@ -14,16 +14,16 @@ namespace FTAnalyzer.Forms
 {
     public partial class TimeLine : Form
     {
-        private FamilyTree ft = FamilyTree.Instance;
-        private MapHelper mh = MapHelper.Instance;
-        private int minGeoCodedYear;
-        private int maxGeoCodedYear;
-        private int geocodedRange;
-        private int yearLimit;
-        private Color backgroundColour;
-        private ClusterLayer clusters;
-        private bool loading;
-        private IProgress<string> outputText;
+        FamilyTree ft = FamilyTree.Instance;
+        MapHelper mh = MapHelper.Instance;
+        int minGeoCodedYear;
+        int maxGeoCodedYear;
+        int geocodedRange;
+        int yearLimit;
+        Color backgroundColour;
+        ClusterLayer clusters;
+        bool loading;
+        IProgress<string> outputText;
 
         public TimeLine(IProgress<string> outputText)
         {
@@ -152,6 +152,8 @@ namespace FTAnalyzer.Forms
                     return relatedByMarriageToolStripMenuItem.Checked;
                 case Individual.MARRIEDTODB:
                     return marriedToDirectOrBloodToolStripMenuItem.Checked;
+                case Individual.DESCENDANT:
+                    return descendantToolStripMenuItem.Checked;
                 case Individual.UNKNOWN:
                 default:
                     return unknownToolStripMenuItem.Checked;
@@ -165,13 +167,13 @@ namespace FTAnalyzer.Forms
 
         private void UpdateMap()
         {
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
             labValue.Text = tbYears.Value.ToString();
             if (mnuDisableTimeline.Checked)
                 DisplayLocationsForYear("9999");
             else
                 DisplayLocationsForYear(labValue.Text);
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         private void TbYears_MouseWheel(object sender, EventArgs e)
@@ -228,7 +230,7 @@ namespace FTAnalyzer.Forms
 
         private void MapBox1_MapQueried(FeatureDataTable data)
         {
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
             List<MapLocation> locations = new List<MapLocation>();
             foreach (FeatureDataRow row in data)
             {
@@ -240,7 +242,7 @@ namespace FTAnalyzer.Forms
             }
             MapIndividuals ind = new MapIndividuals(locations, labValue.Text, this);
             ind.Show();
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         private void MapBox1_MapViewOnChange()
@@ -298,7 +300,7 @@ namespace FTAnalyzer.Forms
 
         private void TxtTimeInterval_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (Char.IsDigit(e.KeyChar) || e.KeyChar == '\b')
+            if (char.IsDigit(e.KeyChar) || e.KeyChar == '\b')
                 e.Handled = false;
             else
                 e.Handled = true;
@@ -306,7 +308,7 @@ namespace FTAnalyzer.Forms
 
         private void TxtTimeInterval_Validated(object sender, EventArgs e)
         {
-            if (Int32.TryParse(txtTimeInterval.Text, out int result))
+            if (int.TryParse(txtTimeInterval.Text, out int result))
             {
                 timer.Interval = result;
             }
@@ -433,7 +435,7 @@ namespace FTAnalyzer.Forms
 
         private void TimeLine_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.Dispose();
+            Dispose();
         }
 
         private void TimeLine_Resize(object sender, EventArgs e)
@@ -448,22 +450,22 @@ namespace FTAnalyzer.Forms
 
         private void SavePosition()
         {
-            if (!loading && this.WindowState == FormWindowState.Normal)
+            if (!loading && WindowState == FormWindowState.Normal)
             {  //only save window size if not maximised or minimised
-                Application.UserAppDataRegistry.SetValue("Timeline size - width", this.Width);
-                Application.UserAppDataRegistry.SetValue("Timeline size - height", this.Height);
-                Application.UserAppDataRegistry.SetValue("Timeline position - top", this.Top);
-                Application.UserAppDataRegistry.SetValue("Timeline position - left", this.Left);
+                Application.UserAppDataRegistry.SetValue("Timeline size - width", Width);
+                Application.UserAppDataRegistry.SetValue("Timeline size - height", Height);
+                Application.UserAppDataRegistry.SetValue("Timeline position - top", Top);
+                Application.UserAppDataRegistry.SetValue("Timeline position - left", Left);
             }
         }
 
         private void ResetFormToDefaultPostiionAndSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             loading = true;
-            this.Height = 622;
-            this.Width = 937;
-            this.Top = 50;
-            this.Left = 50;
+            Height = 622;
+            Width = 937;
+            Top = 50;
+            Left = 50;
             loading = false;
             SavePosition();
         }
@@ -482,9 +484,9 @@ namespace FTAnalyzer.Forms
 
         private void RefreshMap()
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                this.Invoke(new Action(() => RefreshMap()));
+                Invoke(new Action(() => RefreshMap()));
                 return;
             }
             SetOpacity();

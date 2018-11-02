@@ -71,6 +71,7 @@ namespace FTAnalyzer.Forms
             this.btnBack10 = new System.Windows.Forms.Button();
             this.btnForward10 = new System.Windows.Forms.Button();
             this.tbOpacity = new System.Windows.Forms.TrackBar();
+            this.descendantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -127,6 +128,7 @@ namespace FTAnalyzer.Forms
             this.relationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.directAncestorsToolStripMenuItem,
             this.bloodRelativesToolStripMenuItem,
+            this.descendantToolStripMenuItem,
             this.marriedToDirectOrBloodToolStripMenuItem,
             this.relatedByMarriageToolStripMenuItem,
             this.unknownToolStripMenuItem});
@@ -481,6 +483,15 @@ namespace FTAnalyzer.Forms
             this.tbOpacity.Value = 100;
             this.tbOpacity.Scroll += new System.EventHandler(this.TbOpacity_Scroll);
             // 
+            // descendantToolStripMenuItem
+            // 
+            this.descendantToolStripMenuItem.Checked = true;
+            this.descendantToolStripMenuItem.CheckOnClick = true;
+            this.descendantToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.descendantToolStripMenuItem.Name = "descendantToolStripMenuItem";
+            this.descendantToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.descendantToolStripMenuItem.Text = "Descendant";
+            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -563,5 +574,6 @@ namespace FTAnalyzer.Forms
         private ToolStripMapSelector mnuMapStyle = new ToolStripMapSelector();
         private System.Windows.Forms.ToolStripMenuItem resetFormToDefaultPostiionAndSizeToolStripMenuItem;
         private System.Windows.Forms.TrackBar tbOpacity;
+        private System.Windows.Forms.ToolStripMenuItem descendantToolStripMenuItem;
     }
 }

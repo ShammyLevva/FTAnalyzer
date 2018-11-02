@@ -1,3 +1,11 @@
+#### Updated Release Version 7.0.1.0, 2nd November 2018  
+**Updates**  
+Added extra relation categeory for descendants  
+Added report to show how many direct ancestors/descendants you've got  
+
+**Bugfixes**  
+ 
+
 #### Updated Release Version 7.0.0.3, 31st October 2018  
 **Bugfixes**  
 Minor tweak to version control  

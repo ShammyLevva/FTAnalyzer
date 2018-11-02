@@ -35,7 +35,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,6 +66,7 @@
             this.mnuOlderParents = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPossibleCensusFacts = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCousinsCountReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuHowManyGreats = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuExport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuIndividualsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFamiliesToExcel = new System.Windows.Forms.ToolStripMenuItem();
@@ -585,7 +586,8 @@
             this.mnuChildAgeProfiles,
             this.mnuOlderParents,
             this.mnuPossibleCensusFacts,
-            this.mnuCousinsCountReport});
+            this.mnuCousinsCountReport,
+            this.mnuHowManyGreats});
             this.mnuReports.Name = "mnuReports";
             this.mnuReports.Size = new System.Drawing.Size(59, 20);
             this.mnuReports.Text = "Reports";
@@ -593,21 +595,21 @@
             // mnuChildAgeProfiles
             // 
             this.mnuChildAgeProfiles.Name = "mnuChildAgeProfiles";
-            this.mnuChildAgeProfiles.Size = new System.Drawing.Size(190, 22);
+            this.mnuChildAgeProfiles.Size = new System.Drawing.Size(209, 22);
             this.mnuChildAgeProfiles.Text = "Parent Age Report";
             this.mnuChildAgeProfiles.Click += new System.EventHandler(this.ChildAgeProfilesToolStripMenuItem_Click);
             // 
             // mnuOlderParents
             // 
             this.mnuOlderParents.Name = "mnuOlderParents";
-            this.mnuOlderParents.Size = new System.Drawing.Size(190, 22);
+            this.mnuOlderParents.Size = new System.Drawing.Size(209, 22);
             this.mnuOlderParents.Text = "Older Parents";
             this.mnuOlderParents.Click += new System.EventHandler(this.OlderParentsToolStripMenuItem_Click);
             // 
             // mnuPossibleCensusFacts
             // 
             this.mnuPossibleCensusFacts.Name = "mnuPossibleCensusFacts";
-            this.mnuPossibleCensusFacts.Size = new System.Drawing.Size(190, 22);
+            this.mnuPossibleCensusFacts.Size = new System.Drawing.Size(209, 22);
             this.mnuPossibleCensusFacts.Text = "Possible Census Facts";
             this.mnuPossibleCensusFacts.ToolTipText = "This report aims to find census facts that have been incorrectly recorded as note" +
     "s";
@@ -616,9 +618,16 @@
             // mnuCousinsCountReport
             // 
             this.mnuCousinsCountReport.Name = "mnuCousinsCountReport";
-            this.mnuCousinsCountReport.Size = new System.Drawing.Size(190, 22);
+            this.mnuCousinsCountReport.Size = new System.Drawing.Size(209, 22);
             this.mnuCousinsCountReport.Text = "Cousins Count Report";
             this.mnuCousinsCountReport.Click += new System.EventHandler(this.CousinsCountReportToolStripMenuItem_Click);
+            // 
+            // mnuHowManyGreats
+            // 
+            this.mnuHowManyGreats.Name = "mnuHowManyGreats";
+            this.mnuHowManyGreats.Size = new System.Drawing.Size(209, 22);
+            this.mnuHowManyGreats.Text = "How Many Directs Report";
+            this.mnuHowManyGreats.Click += new System.EventHandler(this.HowManyDirectsReportToolStripMenuItem_Click);
             // 
             // mnuExport
             // 
@@ -1007,11 +1016,11 @@
             this.ckbFactExclude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.ckbFactExclude.FormattingEnabled = true;
-            this.ckbFactExclude.Location = new System.Drawing.Point(361, 122);
+            this.ckbFactExclude.Location = new System.Drawing.Point(361, 137);
             this.ckbFactExclude.Name = "ckbFactExclude";
             this.ckbFactExclude.ScrollAlwaysVisible = true;
             this.ckbFactExclude.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.ckbFactExclude.Size = new System.Drawing.Size(313, 289);
+            this.ckbFactExclude.Size = new System.Drawing.Size(313, 274);
             this.ckbFactExclude.TabIndex = 28;
             this.toolTips.SetToolTip(this.ckbFactExclude, "Any fact types selected in this box excludes people who have this fact type from " +
         "report");
@@ -1038,14 +1047,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 166);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1110,7 +1119,7 @@
             // ckbMilitaryOnly
             // 
             this.ckbMilitaryOnly.AutoSize = true;
-            this.ckbMilitaryOnly.Location = new System.Drawing.Point(270, 87);
+            this.ckbMilitaryOnly.Location = new System.Drawing.Point(279, 105);
             this.ckbMilitaryOnly.Name = "ckbMilitaryOnly";
             this.ckbMilitaryOnly.Size = new System.Drawing.Size(257, 17);
             this.ckbMilitaryOnly.TabIndex = 33;
@@ -1122,7 +1131,7 @@
             this.ckbWDIgnoreLocations.AutoSize = true;
             this.ckbWDIgnoreLocations.Checked = true;
             this.ckbWDIgnoreLocations.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbWDIgnoreLocations.Location = new System.Drawing.Point(8, 87);
+            this.ckbWDIgnoreLocations.Location = new System.Drawing.Point(8, 105);
             this.ckbWDIgnoreLocations.Name = "ckbWDIgnoreLocations";
             this.ckbWDIgnoreLocations.Size = new System.Drawing.Size(252, 17);
             this.ckbWDIgnoreLocations.TabIndex = 32;
@@ -1159,12 +1168,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgWorldWars.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgWorldWars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgWorldWars.Location = new System.Drawing.Point(0, 110);
+            this.dgWorldWars.Location = new System.Drawing.Point(0, 128);
             this.dgWorldWars.MultiSelect = false;
             this.dgWorldWars.Name = "dgWorldWars";
             this.dgWorldWars.ReadOnly = true;
             this.dgWorldWars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgWorldWars.Size = new System.Drawing.Size(1035, 330);
+            this.dgWorldWars.Size = new System.Drawing.Size(1082, 312);
             this.dgWorldWars.TabIndex = 29;
             this.dgWorldWars.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgWorldWars_CellDoubleClick);
             this.dgWorldWars.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgWorldWars_MouseDown);
@@ -1187,15 +1196,15 @@
             // 
             // wardeadRelation
             // 
-            this.wardeadRelation.Location = new System.Drawing.Point(270, 12);
+            this.wardeadRelation.Location = new System.Drawing.Point(270, 3);
             this.wardeadRelation.MarriedToDB = true;
             this.wardeadRelation.Name = "wardeadRelation";
-            this.wardeadRelation.Size = new System.Drawing.Size(322, 74);
+            this.wardeadRelation.Size = new System.Drawing.Size(322, 100);
             this.wardeadRelation.TabIndex = 26;
             // 
             // wardeadCountry
             // 
-            this.wardeadCountry.Location = new System.Drawing.Point(8, 12);
+            this.wardeadCountry.Location = new System.Drawing.Point(8, 25);
             this.wardeadCountry.Name = "wardeadCountry";
             this.wardeadCountry.Size = new System.Drawing.Size(256, 74);
             this.wardeadCountry.TabIndex = 25;
@@ -1239,7 +1248,7 @@
             this.ckbTTIncludeOnlyOneParent.AutoSize = true;
             this.ckbTTIncludeOnlyOneParent.Checked = true;
             this.ckbTTIncludeOnlyOneParent.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbTTIncludeOnlyOneParent.Location = new System.Drawing.Point(270, 87);
+            this.ckbTTIncludeOnlyOneParent.Location = new System.Drawing.Point(279, 105);
             this.ckbTTIncludeOnlyOneParent.Name = "ckbTTIncludeOnlyOneParent";
             this.ckbTTIncludeOnlyOneParent.Size = new System.Drawing.Size(273, 17);
             this.ckbTTIncludeOnlyOneParent.TabIndex = 29;
@@ -1255,12 +1264,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgTreeTops.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgTreeTops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgTreeTops.Location = new System.Drawing.Point(0, 110);
+            this.dgTreeTops.Location = new System.Drawing.Point(0, 128);
             this.dgTreeTops.MultiSelect = false;
             this.dgTreeTops.Name = "dgTreeTops";
             this.dgTreeTops.ReadOnly = true;
             this.dgTreeTops.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgTreeTops.Size = new System.Drawing.Size(1035, 330);
+            this.dgTreeTops.Size = new System.Drawing.Size(1082, 312);
             this.dgTreeTops.TabIndex = 28;
             this.dgTreeTops.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgTreeTops_CellDoubleClick);
             this.dgTreeTops.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgTreeTops_MouseDown);
@@ -1270,7 +1279,7 @@
             this.ckbTTIgnoreLocations.AutoSize = true;
             this.ckbTTIgnoreLocations.Checked = true;
             this.ckbTTIgnoreLocations.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbTTIgnoreLocations.Location = new System.Drawing.Point(8, 87);
+            this.ckbTTIgnoreLocations.Location = new System.Drawing.Point(8, 105);
             this.ckbTTIgnoreLocations.Name = "ckbTTIgnoreLocations";
             this.ckbTTIgnoreLocations.Size = new System.Drawing.Size(238, 17);
             this.ckbTTIgnoreLocations.TabIndex = 27;
@@ -1306,15 +1315,15 @@
             // 
             // treetopsRelation
             // 
-            this.treetopsRelation.Location = new System.Drawing.Point(270, 12);
+            this.treetopsRelation.Location = new System.Drawing.Point(270, 3);
             this.treetopsRelation.MarriedToDB = true;
             this.treetopsRelation.Name = "treetopsRelation";
-            this.treetopsRelation.Size = new System.Drawing.Size(322, 74);
+            this.treetopsRelation.Size = new System.Drawing.Size(322, 96);
             this.treetopsRelation.TabIndex = 12;
             // 
             // treetopsCountry
             // 
-            this.treetopsCountry.Location = new System.Drawing.Point(8, 12);
+            this.treetopsCountry.Location = new System.Drawing.Point(8, 25);
             this.treetopsCountry.Name = "treetopsCountry";
             this.treetopsCountry.Size = new System.Drawing.Size(256, 74);
             this.treetopsCountry.TabIndex = 11;
@@ -1343,7 +1352,7 @@
             // 
             this.groupBox7.Controls.Add(this.btnAdvancedMissingData);
             this.groupBox7.Controls.Add(this.btnStandardMissingData);
-            this.groupBox7.Location = new System.Drawing.Point(423, 92);
+            this.groupBox7.Location = new System.Drawing.Point(423, 116);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(409, 109);
             this.groupBox7.TabIndex = 63;
@@ -1388,7 +1397,7 @@
             this.groupBox3.Controls.Add(this.btnCanadianColourCensus);
             this.groupBox3.Controls.Add(this.btnUKColourCensus);
             this.groupBox3.Controls.Add(this.btnUSColourCensus);
-            this.groupBox3.Location = new System.Drawing.Point(8, 92);
+            this.groupBox3.Location = new System.Drawing.Point(8, 116);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(409, 109);
             this.groupBox3.TabIndex = 36;
@@ -1457,7 +1466,7 @@
             // 
             // btnColourBMD
             // 
-            this.btnColourBMD.Location = new System.Drawing.Point(58, 207);
+            this.btnColourBMD.Location = new System.Drawing.Point(58, 231);
             this.btnColourBMD.Name = "btnColourBMD";
             this.btnColourBMD.Size = new System.Drawing.Size(307, 23);
             this.btnColourBMD.TabIndex = 42;
@@ -1487,7 +1496,7 @@
             this.relTypesColoured.Location = new System.Drawing.Point(8, 8);
             this.relTypesColoured.MarriedToDB = true;
             this.relTypesColoured.Name = "relTypesColoured";
-            this.relTypesColoured.Size = new System.Drawing.Size(325, 78);
+            this.relTypesColoured.Size = new System.Drawing.Size(325, 102);
             this.relTypesColoured.TabIndex = 26;
             this.relTypesColoured.RelationTypesChanged += new System.EventHandler(this.RelTypesColoured_RelationTypesChanged);
             // 
@@ -1571,7 +1580,7 @@
             // 
             // btnLCnoCensus
             // 
-            this.btnLCnoCensus.Location = new System.Drawing.Point(344, 233);
+            this.btnLCnoCensus.Location = new System.Drawing.Point(344, 243);
             this.btnLCnoCensus.Name = "btnLCnoCensus";
             this.btnLCnoCensus.Size = new System.Drawing.Size(162, 27);
             this.btnLCnoCensus.TabIndex = 22;
@@ -1581,7 +1590,7 @@
             // 
             // btnLCDuplicates
             // 
-            this.btnLCDuplicates.Location = new System.Drawing.Point(176, 233);
+            this.btnLCDuplicates.Location = new System.Drawing.Point(176, 243);
             this.btnLCDuplicates.Name = "btnLCDuplicates";
             this.btnLCDuplicates.Size = new System.Drawing.Size(162, 27);
             this.btnLCDuplicates.TabIndex = 21;
@@ -1591,7 +1600,7 @@
             // 
             // btnLCMissingCountry
             // 
-            this.btnLCMissingCountry.Location = new System.Drawing.Point(8, 233);
+            this.btnLCMissingCountry.Location = new System.Drawing.Point(8, 243);
             this.btnLCMissingCountry.Name = "btnLCMissingCountry";
             this.btnLCMissingCountry.Size = new System.Drawing.Size(162, 27);
             this.btnLCMissingCountry.TabIndex = 20;
@@ -1601,7 +1610,7 @@
             // 
             // btnLC1940USA
             // 
-            this.btnLC1940USA.Location = new System.Drawing.Point(344, 158);
+            this.btnLC1940USA.Location = new System.Drawing.Point(344, 178);
             this.btnLC1940USA.Name = "btnLC1940USA";
             this.btnLC1940USA.Size = new System.Drawing.Size(162, 27);
             this.btnLC1940USA.TabIndex = 18;
@@ -1636,7 +1645,7 @@
             // 
             // btnLC1911EW
             // 
-            this.btnLC1911EW.Location = new System.Drawing.Point(8, 158);
+            this.btnLC1911EW.Location = new System.Drawing.Point(8, 178);
             this.btnLC1911EW.Name = "btnLC1911EW";
             this.btnLC1911EW.Size = new System.Drawing.Size(162, 27);
             this.btnLC1911EW.TabIndex = 14;
@@ -1659,7 +1668,7 @@
             // ckbShowLCEntered
             // 
             this.ckbShowLCEntered.AutoSize = true;
-            this.ckbShowLCEntered.Location = new System.Drawing.Point(8, 191);
+            this.ckbShowLCEntered.Location = new System.Drawing.Point(8, 211);
             this.ckbShowLCEntered.Name = "ckbShowLCEntered";
             this.ckbShowLCEntered.Size = new System.Drawing.Size(415, 17);
             this.ckbShowLCEntered.TabIndex = 10;
@@ -1669,7 +1678,7 @@
             // 
             // btnLC1841EW
             // 
-            this.btnLC1841EW.Location = new System.Drawing.Point(8, 125);
+            this.btnLC1841EW.Location = new System.Drawing.Point(8, 145);
             this.btnLC1841EW.Name = "btnLC1841EW";
             this.btnLC1841EW.Size = new System.Drawing.Size(162, 27);
             this.btnLC1841EW.TabIndex = 8;
@@ -1679,7 +1688,7 @@
             // 
             // btnLC1911Ireland
             // 
-            this.btnLC1911Ireland.Location = new System.Drawing.Point(176, 125);
+            this.btnLC1911Ireland.Location = new System.Drawing.Point(176, 145);
             this.btnLC1911Ireland.Name = "btnLC1911Ireland";
             this.btnLC1911Ireland.Size = new System.Drawing.Size(162, 27);
             this.btnLC1911Ireland.TabIndex = 7;
@@ -1689,7 +1698,7 @@
             // 
             // btnLC1880USA
             // 
-            this.btnLC1880USA.Location = new System.Drawing.Point(344, 125);
+            this.btnLC1880USA.Location = new System.Drawing.Point(344, 145);
             this.btnLC1880USA.Name = "btnLC1880USA";
             this.btnLC1880USA.Size = new System.Drawing.Size(162, 27);
             this.btnLC1880USA.TabIndex = 6;
@@ -1699,7 +1708,7 @@
             // 
             // btnLC1881EW
             // 
-            this.btnLC1881EW.Location = new System.Drawing.Point(8, 92);
+            this.btnLC1881EW.Location = new System.Drawing.Point(8, 112);
             this.btnLC1881EW.Name = "btnLC1881EW";
             this.btnLC1881EW.Size = new System.Drawing.Size(162, 27);
             this.btnLC1881EW.TabIndex = 5;
@@ -1709,7 +1718,7 @@
             // 
             // btnLC1881Canada
             // 
-            this.btnLC1881Canada.Location = new System.Drawing.Point(176, 158);
+            this.btnLC1881Canada.Location = new System.Drawing.Point(176, 178);
             this.btnLC1881Canada.Name = "btnLC1881Canada";
             this.btnLC1881Canada.Size = new System.Drawing.Size(162, 27);
             this.btnLC1881Canada.TabIndex = 4;
@@ -1719,7 +1728,7 @@
             // 
             // btnLC1881Scot
             // 
-            this.btnLC1881Scot.Location = new System.Drawing.Point(176, 92);
+            this.btnLC1881Scot.Location = new System.Drawing.Point(176, 112);
             this.btnLC1881Scot.Name = "btnLC1881Scot";
             this.btnLC1881Scot.Size = new System.Drawing.Size(162, 27);
             this.btnLC1881Scot.TabIndex = 0;
@@ -1729,10 +1738,10 @@
             // 
             // relTypesLC
             // 
-            this.relTypesLC.Location = new System.Drawing.Point(8, 8);
+            this.relTypesLC.Location = new System.Drawing.Point(8, 3);
             this.relTypesLC.MarriedToDB = true;
             this.relTypesLC.Name = "relTypesLC";
-            this.relTypesLC.Size = new System.Drawing.Size(325, 78);
+            this.relTypesLC.Size = new System.Drawing.Size(325, 103);
             this.relTypesLC.TabIndex = 19;
             this.relTypesLC.RelationTypesChanged += new System.EventHandler(this.RelTypesLC_RelationTypesChanged);
             // 
@@ -1756,7 +1765,7 @@
             this.groupBox6.Controls.Add(this.btnExportMissingCensusRefs);
             this.groupBox6.Controls.Add(this.btnReportUnrecognised);
             this.groupBox6.Controls.Add(this.btnReportUnrecognisedNotes);
-            this.groupBox6.Location = new System.Drawing.Point(339, 276);
+            this.groupBox6.Location = new System.Drawing.Point(339, 301);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(632, 59);
             this.groupBox6.TabIndex = 30;
@@ -1800,7 +1809,7 @@
             // 
             this.groupBox5.Controls.Add(this.btnMismatchedChildrenStatus);
             this.groupBox5.Controls.Add(this.btnNoChildrenStatus);
-            this.groupBox5.Location = new System.Drawing.Point(6, 276);
+            this.groupBox5.Location = new System.Drawing.Point(6, 301);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(327, 59);
             this.groupBox5.TabIndex = 27;
@@ -1834,7 +1843,7 @@
             this.groupBox4.Controls.Add(this.btnIncompleteCensusRef);
             this.groupBox4.Controls.Add(this.btnMissingCensusRefs);
             this.groupBox4.Controls.Add(this.btnCensusRefs);
-            this.groupBox4.Location = new System.Drawing.Point(339, 182);
+            this.groupBox4.Location = new System.Drawing.Point(339, 207);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(632, 88);
             this.groupBox4.TabIndex = 25;
@@ -1907,14 +1916,14 @@
             this.groupBox2.Controls.Add(this.btnShowCensusMissing);
             this.groupBox2.Location = new System.Drawing.Point(8, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(963, 170);
+            this.groupBox2.Size = new System.Drawing.Size(963, 195);
             this.groupBox2.TabIndex = 23;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Census Search Reports";
             // 
             // btnRandomSurnameEntered
             // 
-            this.btnRandomSurnameEntered.Location = new System.Drawing.Point(649, 136);
+            this.btnRandomSurnameEntered.Location = new System.Drawing.Point(643, 157);
             this.btnRandomSurnameEntered.Name = "btnRandomSurnameEntered";
             this.btnRandomSurnameEntered.Size = new System.Drawing.Size(306, 25);
             this.btnRandomSurnameEntered.TabIndex = 33;
@@ -1924,7 +1933,7 @@
             // 
             // btnRandomSurnameMissing
             // 
-            this.btnRandomSurnameMissing.Location = new System.Drawing.Point(337, 136);
+            this.btnRandomSurnameMissing.Location = new System.Drawing.Point(331, 157);
             this.btnRandomSurnameMissing.Name = "btnRandomSurnameMissing";
             this.btnRandomSurnameMissing.Size = new System.Drawing.Size(306, 25);
             this.btnRandomSurnameMissing.TabIndex = 32;
@@ -1994,7 +2003,7 @@
             this.cenDate.AutoSize = true;
             this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.cenDate.Country = "";
-            this.cenDate.Location = new System.Drawing.Point(15, 103);
+            this.cenDate.Location = new System.Drawing.Point(9, 124);
             this.cenDate.Name = "cenDate";
             this.cenDate.Size = new System.Drawing.Size(234, 27);
             this.cenDate.TabIndex = 28;
@@ -2004,12 +2013,12 @@
             this.relTypesCensus.Location = new System.Drawing.Point(9, 19);
             this.relTypesCensus.MarriedToDB = true;
             this.relTypesCensus.Name = "relTypesCensus";
-            this.relTypesCensus.Size = new System.Drawing.Size(325, 78);
+            this.relTypesCensus.Size = new System.Drawing.Size(325, 99);
             this.relTypesCensus.TabIndex = 27;
             // 
             // btnShowCensusEntered
             // 
-            this.btnShowCensusEntered.Location = new System.Drawing.Point(165, 136);
+            this.btnShowCensusEntered.Location = new System.Drawing.Point(159, 157);
             this.btnShowCensusEntered.Name = "btnShowCensusEntered";
             this.btnShowCensusEntered.Size = new System.Drawing.Size(150, 25);
             this.btnShowCensusEntered.TabIndex = 22;
@@ -2019,7 +2028,7 @@
             // 
             // btnShowCensusMissing
             // 
-            this.btnShowCensusMissing.Location = new System.Drawing.Point(9, 136);
+            this.btnShowCensusMissing.Location = new System.Drawing.Point(3, 157);
             this.btnShowCensusMissing.Name = "btnShowCensusMissing";
             this.btnShowCensusMissing.Size = new System.Drawing.Size(150, 25);
             this.btnShowCensusMissing.TabIndex = 5;
@@ -2031,7 +2040,7 @@
             // 
             this.groupBox1.Controls.Add(this.btnDuplicateCensus);
             this.groupBox1.Controls.Add(this.btnMissingCensusLocation);
-            this.groupBox1.Location = new System.Drawing.Point(8, 182);
+            this.groupBox1.Location = new System.Drawing.Point(8, 207);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(325, 88);
             this.groupBox1.TabIndex = 22;
@@ -2920,7 +2929,7 @@
             // 
             // btnShowSurnames
             // 
-            this.btnShowSurnames.Location = new System.Drawing.Point(337, 52);
+            this.btnShowSurnames.Location = new System.Drawing.Point(337, 74);
             this.btnShowSurnames.Name = "btnShowSurnames";
             this.btnShowSurnames.Size = new System.Drawing.Size(154, 23);
             this.btnShowSurnames.TabIndex = 23;
@@ -2942,13 +2951,13 @@
             this.Individuals,
             this.Families,
             this.Marriages});
-            this.dgSurnames.Location = new System.Drawing.Point(3, 90);
+            this.dgSurnames.Location = new System.Drawing.Point(3, 103);
             this.dgSurnames.MultiSelect = false;
             this.dgSurnames.Name = "dgSurnames";
             this.dgSurnames.ReadOnly = true;
             this.dgSurnames.RowHeadersWidth = 20;
             this.dgSurnames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgSurnames.Size = new System.Drawing.Size(1079, 350);
+            this.dgSurnames.Size = new System.Drawing.Size(1079, 337);
             this.dgSurnames.TabIndex = 1;
             this.dgSurnames.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSurnames_CellContentClick);
             this.dgSurnames.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSurnames_CellDoubleClick);
@@ -2996,10 +3005,10 @@
             // 
             // reltypesSurnames
             // 
-            this.reltypesSurnames.Location = new System.Drawing.Point(6, 6);
+            this.reltypesSurnames.Location = new System.Drawing.Point(6, 3);
             this.reltypesSurnames.MarriedToDB = true;
             this.reltypesSurnames.Name = "reltypesSurnames";
-            this.reltypesSurnames.Size = new System.Drawing.Size(325, 78);
+            this.reltypesSurnames.Size = new System.Drawing.Size(325, 99);
             this.reltypesSurnames.TabIndex = 22;
             // 
             // tabFacts
@@ -3058,7 +3067,7 @@
             // 
             // btnDeselectExcludeAllFactTypes
             // 
-            this.btnDeselectExcludeAllFactTypes.Location = new System.Drawing.Point(538, 93);
+            this.btnDeselectExcludeAllFactTypes.Location = new System.Drawing.Point(538, 109);
             this.btnDeselectExcludeAllFactTypes.Name = "btnDeselectExcludeAllFactTypes";
             this.btnDeselectExcludeAllFactTypes.Size = new System.Drawing.Size(136, 23);
             this.btnDeselectExcludeAllFactTypes.TabIndex = 30;
@@ -3069,7 +3078,7 @@
             // 
             // btnExcludeAllFactTypes
             // 
-            this.btnExcludeAllFactTypes.Location = new System.Drawing.Point(361, 92);
+            this.btnExcludeAllFactTypes.Location = new System.Drawing.Point(361, 108);
             this.btnExcludeAllFactTypes.Name = "btnExcludeAllFactTypes";
             this.btnExcludeAllFactTypes.Size = new System.Drawing.Size(136, 23);
             this.btnExcludeAllFactTypes.TabIndex = 29;
@@ -3080,7 +3089,7 @@
             // 
             // btnDeselectAllFactTypes
             // 
-            this.btnDeselectAllFactTypes.Location = new System.Drawing.Point(185, 93);
+            this.btnDeselectAllFactTypes.Location = new System.Drawing.Point(185, 109);
             this.btnDeselectAllFactTypes.Name = "btnDeselectAllFactTypes";
             this.btnDeselectAllFactTypes.Size = new System.Drawing.Size(136, 23);
             this.btnDeselectAllFactTypes.TabIndex = 27;
@@ -3090,7 +3099,7 @@
             // 
             // btnSelectAllFactTypes
             // 
-            this.btnSelectAllFactTypes.Location = new System.Drawing.Point(8, 92);
+            this.btnSelectAllFactTypes.Location = new System.Drawing.Point(8, 108);
             this.btnSelectAllFactTypes.Name = "btnSelectAllFactTypes";
             this.btnSelectAllFactTypes.Size = new System.Drawing.Size(136, 23);
             this.btnSelectAllFactTypes.TabIndex = 26;
@@ -3103,11 +3112,11 @@
             this.ckbFactSelect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.ckbFactSelect.FormattingEnabled = true;
-            this.ckbFactSelect.Location = new System.Drawing.Point(8, 122);
+            this.ckbFactSelect.Location = new System.Drawing.Point(8, 137);
             this.ckbFactSelect.Name = "ckbFactSelect";
             this.ckbFactSelect.ScrollAlwaysVisible = true;
             this.ckbFactSelect.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.ckbFactSelect.Size = new System.Drawing.Size(313, 289);
+            this.ckbFactSelect.Size = new System.Drawing.Size(313, 274);
             this.ckbFactSelect.TabIndex = 25;
             this.ckbFactSelect.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CkbFactSelect_MouseClick);
             // 
@@ -3140,10 +3149,10 @@
             // 
             // relTypesFacts
             // 
-            this.relTypesFacts.Location = new System.Drawing.Point(8, 8);
+            this.relTypesFacts.Location = new System.Drawing.Point(8, 3);
             this.relTypesFacts.MarriedToDB = true;
             this.relTypesFacts.Name = "relTypesFacts";
-            this.relTypesFacts.Size = new System.Drawing.Size(325, 78);
+            this.relTypesFacts.Size = new System.Drawing.Size(325, 100);
             this.relTypesFacts.TabIndex = 21;
             this.relTypesFacts.RelationTypesChanged += new System.EventHandler(this.RelTypesFacts_RelationTypesChanged);
             // 
@@ -3673,6 +3682,7 @@
         private Utilities.ScrollingRichTextBox rtbOutput;
         private System.Windows.Forms.CheckBox ckbTTIncludeOnlyOneParent;
         private System.Windows.Forms.ToolStripMenuItem privacyPolicyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuHowManyGreats;
     }
 }
 
