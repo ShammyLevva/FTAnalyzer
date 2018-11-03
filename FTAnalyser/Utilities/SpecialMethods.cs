@@ -39,7 +39,6 @@ namespace FTAnalyzer.Utilities
             {
                 ClientId = Properties.Settings.Default.GUID.ToString(),
                 UserId = Properties.Settings.Default.GUID.ToString(),
-
                 ApplicationName = "FTAnalyzer",
                 ApplicationVersion = Analytics.AppVersion,
                 Category = category,

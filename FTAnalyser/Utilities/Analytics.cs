@@ -43,9 +43,7 @@ namespace FTAnalyzer.Utilities
             try
             {
                 await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Startup", "Load Program", AppVersion).ConfigureAwait(false);
-             //   await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Startup", "Record OS Version", OSVersion).ConfigureAwait(false);
-              //  await SpecialMethods.TrackEventAsync(tracker, "FTAnalyzer Startup", "Deployment Type", DeploymentType).ConfigureAwait(false);
-                await SpecialMethods.TrackScreenviewAsync(tracker, "FTAnalyzer Startup");
+                await SpecialMethods.TrackScreenviewAsync(tracker, "FTAnalyzer Startup").ConfigureAwait(false);
             }
             catch (Exception e)
                 { Console.WriteLine(e.Message); }
@@ -68,7 +66,7 @@ namespace FTAnalyzer.Utilities
             try
             {
                 await SpecialMethods.TrackEventAsync(tracker, category, action, value).ConfigureAwait(false);
-                await SpecialMethods.TrackScreenviewAsync(tracker, category);
+                await SpecialMethods.TrackScreenviewAsync(tracker, category).ConfigureAwait(false);
             }
             catch (Exception e)
                 { Console.WriteLine(e.Message); }
