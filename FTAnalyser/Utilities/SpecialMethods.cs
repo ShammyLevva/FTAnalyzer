@@ -12,6 +12,7 @@ namespace FTAnalyzer.Utilities
 {
     public static class SpecialMethods
     {
+#if __PC__
         public static IEnumerable<Control> GetAllControls(Control aControl)
         {
             Stack<Control> stack = new Stack<Control>();
@@ -31,10 +32,15 @@ namespace FTAnalyzer.Utilities
                 if (theControl.Font.Name.Equals(Properties.FontSettings.Default.SelectedFont.Name))
                     theControl.Font = Properties.FontSettings.Default.SelectedFont;
         }
+#endif
 
         public static async Task<TrackingResult> TrackEventAsync(this SimpleTracker tracker, string category, string action, string label, long value = 1)
         {
-            string resolution = Screen.PrimaryScreen.Bounds.ToString();
+#if __PC__
+            string resolution = Screen.PrimaryScreen.Bounds.ToString()
+#elif __MACOS__
+            string resolution = NSScreen.MainScreen.Frame.ToString();
+#endif
             var eventTrackingParameters = new EventTracking
             {
                 ClientId = Properties.Settings.Default.GUID.ToString(),
@@ -58,11 +64,15 @@ namespace FTAnalyzer.Utilities
 
         public static async Task<TrackingResult> TrackScreenviewAsync(this SimpleTracker tracker, string screen)
         {
-            string resolution = Screen.PrimaryScreen.Bounds.ToString();
+#if __PC__
+            string resolution = Screen.PrimaryScreen.Bounds.ToString()
+#elif __MACOS__
+            string resolution = NSScreen.MainScreen.Frame.ToString();
+#endif
             var screenViewTrackingParameters = new ScreenviewTracking
             {
-                ClientId = Properties.Settings.Default.GUID.ToString(),
-                UserId = Properties.Settings.Default.GUID.ToString(),
+                ClientId = Analytics.GUID.ToString(),
+                UserId = Analytics.GUID.ToString(),
 
                 ApplicationName = "FTAnalyzer",
                 ApplicationVersion = Analytics.AppVersion,
