@@ -447,7 +447,6 @@
     <Compile Include="Utilities\ScrollingRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Utilities\SpecialMethods.cs" />
     <Compile Include="Utilities\TestSettings.cs" />
     <EmbeddedResource Include="Resources\Lib\DgvFilterPopup.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

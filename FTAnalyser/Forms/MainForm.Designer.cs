@@ -870,7 +870,7 @@
             this.facebookSupportGroupToolStripMenuItem.Name = "facebookSupportGroupToolStripMenuItem";
             this.facebookSupportGroupToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.facebookSupportGroupToolStripMenuItem.Text = "Facebook Support Page";
-            this.facebookSupportGroupToolStripMenuItem.Click += new System.EventHandler(this.facebookSupportGroupToolStripMenuItem_Click);
+            this.facebookSupportGroupToolStripMenuItem.Click += new System.EventHandler(this.FacebookSupportGroupToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -3315,7 +3315,7 @@
             this.facebookUserGroupToolStripMenuItem.Name = "facebookUserGroupToolStripMenuItem";
             this.facebookUserGroupToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.facebookUserGroupToolStripMenuItem.Text = "Facebook User Group";
-            this.facebookUserGroupToolStripMenuItem.Click += new System.EventHandler(this.facebookUserGroupToolStripMenuItem_Click);
+            this.facebookUserGroupToolStripMenuItem.Click += new System.EventHandler(this.FacebookUserGroupToolStripMenuItem_Click);
             // 
             // MainForm
             // 
