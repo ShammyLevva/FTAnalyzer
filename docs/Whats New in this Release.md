@@ -1,3 +1,7 @@
+#### Updated Release Version 7.0.1.1, 4th November 2018  
+**Bugfixes**  
+Fixed issue with text dates in family facts
+
 #### Updated Release Version 7.0.1.0, 2nd November 2018  
 **Updates**  
 Added extra relation categeory for descendants  
