@@ -336,7 +336,7 @@ namespace FTAnalyzer
                 await LoadFileAsync(openGedcom.FileName);
                 Settings.Default.LoadLocation = Path.GetFullPath(openGedcom.FileName);
                 Settings.Default.Save();
-                await Analytics.TrackActionAsync(Analytics.MainFormAction, Analytics.LoadGEDCOMEvent, FamilyTree.Instance.IndividualCount.ToString());
+                await Analytics.TrackAction(Analytics.MainFormAction, Analytics.LoadGEDCOMEvent);
             }
         }
 
