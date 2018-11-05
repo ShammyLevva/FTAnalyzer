@@ -1,3 +1,13 @@
+#### Updated Release Version 7.0.1.2, 5th November 2018  
+**Updates**  
+Added option to show/hide display altering you to ancestors who are multi directs  
+* Show Multi direct ancestors can cause issues for files going back many centuries as program runs out of memory trying to list what  the relationships are  
+
+Tweaked database settings to try to use less resources on loading GEDCOM file should make loading a little faster on large files
+
+**Bugfixes**  
+Fixed issue with years prior to 1000 being double dates
+
 #### Updated Release Version 7.0.1.1, 4th November 2018  
 **Bugfixes**  
 Fixed issue with text dates in family facts
