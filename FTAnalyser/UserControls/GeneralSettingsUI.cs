@@ -21,7 +21,8 @@ namespace FTAnalyzer.UserControls
             chkShowWorldEvents.Checked = Properties.GeneralSettings.Default.ShowWorldEvents;
             chkIgnoreFactTypeWarnings.Checked = Properties.GeneralSettings.Default.IgnoreFactTypeWarnings;
             chkTreatFemaleAsUnknown.Checked = Properties.GeneralSettings.Default.TreatFemaleSurnamesAsUnknown;
-		}
+            chkMultiAncestor.Checked = Properties.GeneralSettings.Default.ShowMultiAncestors;
+        }
 
 		#region IOptions Members
 
@@ -37,6 +38,7 @@ namespace FTAnalyzer.UserControls
             Properties.GeneralSettings.Default.ShowWorldEvents = chkShowWorldEvents.Checked;
             Properties.GeneralSettings.Default.IgnoreFactTypeWarnings = chkIgnoreFactTypeWarnings.Checked;
             Properties.GeneralSettings.Default.TreatFemaleSurnamesAsUnknown = chkTreatFemaleAsUnknown.Checked;
+            Properties.GeneralSettings.Default.ShowMultiAncestors = chkMultiAncestor.Checked;
             Properties.GeneralSettings.Default.Save();
             OnMinParentalAgeChanged();
             OnAliasInNameChanged();
@@ -55,7 +57,7 @@ namespace FTAnalyzer.UserControls
 
 			for (int i = 0; i < control.Controls.Count; i++)
 			{
-				if (!String.IsNullOrEmpty(errorProvider1.GetError(control.Controls[i])))
+				if (!string.IsNullOrEmpty(errorProvider1.GetError(control.Controls[i])))
 				{
 					invalid = true;
 					break;

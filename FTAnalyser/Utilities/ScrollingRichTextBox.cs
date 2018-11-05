@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 
 
 namespace FTAnalyzer.Utilities
@@ -25,24 +22,12 @@ namespace FTAnalyzer.Utilities
         private const int SB_TOP = 6;
         private const int SB_BOTTOM = 7;
 
-        public void ScrollToBottom()
-        {
-            NativeMethods.SendMessage(Handle, WM_VSCROLL, new IntPtr(SB_BOTTOM), new IntPtr(0));
-        }
+        public void ScrollToBottom() => NativeMethods.SendMessage(Handle, WM_VSCROLL, new IntPtr(SB_BOTTOM), new IntPtr(0));
 
-        public void ScrollToTop()
-        {
-            NativeMethods.SendMessage(Handle, WM_VSCROLL, new IntPtr(SB_TOP), new IntPtr(0));
-        }
+        public void ScrollToTop() => NativeMethods.SendMessage(Handle, WM_VSCROLL, new IntPtr(SB_TOP), new IntPtr(0));
 
-        public void ScrollLineDown()
-        {
-            NativeMethods.SendMessage(Handle, WM_VSCROLL, new IntPtr(SB_LINEDOWN), new IntPtr(0));
-        }
+        public void ScrollLineDown() => NativeMethods.SendMessage(Handle, WM_VSCROLL, new IntPtr(SB_LINEDOWN), new IntPtr(0));
 
-        public void ScrollLineUp()
-        {
-            NativeMethods.SendMessage(Handle, WM_VSCROLL, new IntPtr(SB_LINEUP), new IntPtr(0));
-        }
+        public void ScrollLineUp() => NativeMethods.SendMessage(Handle, WM_VSCROLL, new IntPtr(SB_LINEUP), new IntPtr(0));
     }
 }

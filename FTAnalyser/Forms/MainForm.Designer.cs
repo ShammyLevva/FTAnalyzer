@@ -98,6 +98,7 @@
             this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportAnIssueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.facebookSupportGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.facebookUserGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.privacyPolicyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.whatsNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -318,7 +319,6 @@
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.facebookUserGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -871,6 +871,14 @@
             this.facebookSupportGroupToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.facebookSupportGroupToolStripMenuItem.Text = "Facebook Support Page";
             this.facebookSupportGroupToolStripMenuItem.Click += new System.EventHandler(this.FacebookSupportGroupToolStripMenuItem_Click);
+            // 
+            // facebookUserGroupToolStripMenuItem
+            // 
+            this.facebookUserGroupToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.flogo_rgb_hex_brc_site_250;
+            this.facebookUserGroupToolStripMenuItem.Name = "facebookUserGroupToolStripMenuItem";
+            this.facebookUserGroupToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.facebookUserGroupToolStripMenuItem.Text = "Facebook User Group";
+            this.facebookUserGroupToolStripMenuItem.Click += new System.EventHandler(this.FacebookUserGroupToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -2313,6 +2321,7 @@
             this.rtbOutput.Size = new System.Drawing.Size(1079, 325);
             this.rtbOutput.TabIndex = 13;
             this.rtbOutput.Text = "";
+            this.rtbOutput.TextChanged += new System.EventHandler(this.RtbOutput_TextChanged);
             // 
             // panel2
             // 
@@ -3308,14 +3317,6 @@
             // 
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
-            // 
-            // facebookUserGroupToolStripMenuItem
-            // 
-            this.facebookUserGroupToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.flogo_rgb_hex_brc_site_250;
-            this.facebookUserGroupToolStripMenuItem.Name = "facebookUserGroupToolStripMenuItem";
-            this.facebookUserGroupToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.facebookUserGroupToolStripMenuItem.Text = "Facebook User Group";
-            this.facebookUserGroupToolStripMenuItem.Click += new System.EventHandler(this.FacebookUserGroupToolStripMenuItem_Click);
             // 
             // MainForm
             // 

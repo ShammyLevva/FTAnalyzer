@@ -812,7 +812,7 @@ namespace FTAnalyzer.Forms
             }
             else
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
                 pbGeocoding.Visible = true;
                 mnuGoogleGeocodeLocations.Enabled = false;
                 mnuEditLocation.Enabled = false;
@@ -822,7 +822,7 @@ namespace FTAnalyzer.Forms
                 ft.Geocoding = true;
                 DatabaseHelper.Instance.AddEmptyLocationsToQueue(queue);
                 reverseGeocodeBackgroundWorker.RunWorkerAsync();
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
         }
 

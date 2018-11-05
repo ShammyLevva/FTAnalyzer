@@ -61,6 +61,8 @@ namespace FTAnalyzer.Utilities
 
         public void Dispose()
         {
+            if (InstanceConnection?.State == ConnectionState.Open)
+                InstanceConnection.Close();
             InstanceConnection?.Dispose();
             Dispose(true);
             GC.SuppressFinalize(this);
@@ -110,7 +112,8 @@ namespace FTAnalyzer.Utilities
             string db = null;
             try
             {
-                InstanceConnection.Open();
+                if (InstanceConnection.State != ConnectionState.Open)
+                    InstanceConnection.Open();
                 using (SQLiteCommand cmd = new SQLiteCommand("select Database from versions", InstanceConnection))
                 {
                     db = (string)cmd.ExecuteScalar();
@@ -167,7 +170,8 @@ namespace FTAnalyzer.Utilities
                     }
                     File.Copy(Path.Combine(Application.StartupPath, @"Resources\Geocodes-Empty.s3db"), Filename);
                 }
-                InstanceConnection.Open();
+                if (InstanceConnection.State != ConnectionState.Open)
+                    InstanceConnection.Open();
                 if (dbVersion < v3_0_2_0)
                 {
                     // Version v3.0.2.0 needs to reset Google Matches to not searched and set partials to level
@@ -286,7 +290,8 @@ namespace FTAnalyzer.Utilities
             Coordinate mPoint, mNorthEast, mSouthWest;
             double latitude, longitude, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw;
 
-            InstanceConnection.Open();
+            if (InstanceConnection.State != ConnectionState.Open)
+                InstanceConnection.Open();
             int rowcount = 0;
             using (SQLiteCommand cmd = new SQLiteCommand("select count(*) from geocode where latitude <> 0 and longitude <> 0", InstanceConnection))
             {
@@ -365,7 +370,6 @@ namespace FTAnalyzer.Utilities
                 }
             }
             #endregion
-            InstanceConnection.Close();
         }
 
         public string LatLongHashKey(double latitude, double longitude) => latitude.ToString("F6") + longitude.ToString("F6");
@@ -376,7 +380,8 @@ namespace FTAnalyzer.Utilities
             {
                 Dictionary<string, Tuple<string, string>> results = new Dictionary<string, Tuple<string, string>>();
 
-                InstanceConnection.Open();
+                if (InstanceConnection.State != ConnectionState.Open)
+                    InstanceConnection.Open();
                 double latitude = 0;
                 double longitude = 0;
                 string hashkey;
@@ -399,7 +404,6 @@ namespace FTAnalyzer.Utilities
                         }
                     }
                 }
-                InstanceConnection.Close();
                 return results;
             }
         }
@@ -410,7 +414,8 @@ namespace FTAnalyzer.Utilities
         public bool IsLocationInDatabase(string location)
         {
             bool inDatabase;
-            InstanceConnection.Open();
+            if(InstanceConnection.State != ConnectionState.Open)
+                InstanceConnection.Open();
             using (SQLiteCommand cmd = new SQLiteCommand("select location from geocode where location = ?", InstanceConnection))
             {
                 SQLiteParameter param = cmd.CreateParameter();
@@ -423,13 +428,13 @@ namespace FTAnalyzer.Utilities
                     inDatabase = reader.Read();
                 }
             }
-            InstanceConnection.Close();
             return inDatabase;
         }
 
         public void ResetPartials()
         {
-            InstanceConnection.Open();
+            if (InstanceConnection.State != ConnectionState.Open)
+                InstanceConnection.Open();
             using (SQLiteCommand cmd = new SQLiteCommand("update geocode set latitude = 0, longitude = 0, founddate = date('now'), foundlocation = '', foundlevel = -2, viewport_x_ne = 0, viewport_y_ne = 0, viewport_x_sw = 0, viewport_y_sw = 0, geocodestatus = 0, foundresulttype = '' where geocodestatus in (2,7,9)", InstanceConnection))
             {
                 cmd.ExecuteNonQuery();
@@ -439,7 +444,8 @@ namespace FTAnalyzer.Utilities
 
         public void LoadGeoLocations()
         {
-            InstanceConnection.Open();
+            if (InstanceConnection.State != ConnectionState.Open)
+                InstanceConnection.Open();
             foreach (FactLocation loc in FactLocation.AllLocations)
             {
                 ReadLocationIntoFact(loc, InstanceConnection);
@@ -450,9 +456,9 @@ namespace FTAnalyzer.Utilities
         public void GetLocationDetails(FactLocation location)
         {
             if (location.ToString().Length == 0) return;
-            InstanceConnection.Open();
+            if (InstanceConnection.State != ConnectionState.Open)
+                InstanceConnection.Open();
             ReadLocationIntoFact(location, InstanceConnection);
-            InstanceConnection.Close();
         }
 
         private static void ReadLocationIntoFact(FactLocation location, SQLiteConnection conn)
@@ -503,7 +509,8 @@ namespace FTAnalyzer.Utilities
         }
         public void InsertGeocode(FactLocation loc)
         {
-            InstanceConnection.Open();
+            if (InstanceConnection.State != ConnectionState.Open)
+                InstanceConnection.Open();
             SQLiteParameter param;
             using (SQLiteCommand insertCmd = new SQLiteCommand("insert into geocode (location, level, latitude, longitude, founddate, foundlocation, foundlevel, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw, geocodestatus, foundresulttype, latm, longm) values(?,?,?,?,date('now'),?,?,?,?,?,?,?,?,?,?)", InstanceConnection))
             {
@@ -582,12 +589,12 @@ namespace FTAnalyzer.Utilities
 
                 int rowsaffected = insertCmd.ExecuteNonQuery();
             }
-            InstanceConnection.Close();
         }
 
         public void UpdateGeocode(FactLocation loc)
         {
-            InstanceConnection.Open();
+            if (InstanceConnection.State != ConnectionState.Open)
+                InstanceConnection.Open();
             using (SQLiteCommand updateCmd = new SQLiteCommand("update geocode set founddate=date('now'), level = ?, latitude = ?, longitude = ?, foundlocation = ?, foundlevel = ?, viewport_x_ne = ?, viewport_y_ne = ?, viewport_x_sw = ?, viewport_y_sw = ?, geocodestatus = ?, foundresulttype = ?, latm = ?, longm = ? where location = ?", InstanceConnection))
             {
                 SQLiteParameter param = updateCmd.CreateParameter();
@@ -667,7 +674,6 @@ namespace FTAnalyzer.Utilities
                     Console.WriteLine("Problem updating");
                 OnGeoLocationUpdated(loc);
             }
-            InstanceConnection.Close();
         }
         #endregion
 
@@ -675,7 +681,8 @@ namespace FTAnalyzer.Utilities
 
         public void AddEmptyLocationsToQueue(ConcurrentQueue<FactLocation> queue)
         {
-            InstanceConnection.Open();
+            if (InstanceConnection.State != ConnectionState.Open)
+                InstanceConnection.Open();
             using (SQLiteCommand cmd = new SQLiteCommand("select location from geocode where foundlocation='' and geocodestatus in (3, 8, 9)", InstanceConnection))
             {
                 using (SQLiteDataReader reader = cmd.ExecuteReader())
