@@ -303,6 +303,14 @@ namespace FactDateTest
             target = new FactDate("15 FEB 1599/00");
             Assert.AreEqual(new DateTime(1600, 2, 15), target.StartDate);
             Assert.AreEqual(new DateTime(1600, 2, 15), target.EndDate);
+
+            target = new FactDate("1 MAR 922/23");
+            Assert.AreEqual(new DateTime(923, 3, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(923, 3, 1), target.EndDate);
+
+            target = new FactDate("1 MAR 922/923");
+            Assert.AreEqual(new DateTime(923, 3, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(923, 3, 1), target.EndDate);
             return target;
         }
 

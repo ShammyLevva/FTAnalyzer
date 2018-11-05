@@ -53,6 +53,9 @@ namespace FTAnalyzer.Utilities
             {
                 try
                 {
+                    if (InstanceConnection?.State == ConnectionState.Open)
+                        InstanceConnection.Close();
+                    InstanceConnection?.Dispose();
                     // dispose of things here
                 }
                 catch (Exception) { }
@@ -61,9 +64,6 @@ namespace FTAnalyzer.Utilities
 
         public void Dispose()
         {
-            if (InstanceConnection?.State == ConnectionState.Open)
-                InstanceConnection.Close();
-            InstanceConnection?.Dispose();
             Dispose(true);
             GC.SuppressFinalize(this);
         }
