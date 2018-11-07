@@ -59,7 +59,7 @@ namespace FTAnalyzer.Forms
             Text = $"Facts Report for {individual.IndividualID}: {individual.Name}";
             SetupFacts();
             dgFacts.Columns["IndividualID"].Visible = false; // all same individual so hide ID
-            Analytics.TrackAction(Analytics.FactsFormAction, "Individual Facts Viewed");
+            Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsIndividualsEvent);
         }
 
         public Facts(Family family)
@@ -70,7 +70,7 @@ namespace FTAnalyzer.Forms
                 facts.Add(f);
             Text = $"Facts Report for {family.FamilyRef}";
             SetupFacts();
-            Analytics.TrackAction(Analytics.FactsFormAction, "Family Facts Viewed");
+            Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsFamiliesEvent);
         }
 
         public Facts(IEnumerable<Individual> individuals, List<string> factTypes, List<string> excludedTypes)
@@ -92,7 +92,7 @@ namespace FTAnalyzer.Forms
             string text = distinctIndividuals + " individuals.";
             Text = "Facts Report for all " + text + " Facts count: " + facts.Count;
             SetupFacts(text);
-            Analytics.TrackAction(Analytics.FactsFormAction, "Various Individuals Facts Viewed");
+            Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsGroupIndividualsEvent);
         }
 
         public Facts(IEnumerable<Individual> individuals, List<string> duplicateTypes)
@@ -111,7 +111,7 @@ namespace FTAnalyzer.Forms
             string text = distinctIndividuals + " individuals.";
             Text = "Duplicates Facts Report for all " + text + " Facts count: " + facts.Count;
             SetupFacts(text);
-            Analytics.TrackAction(Analytics.FactsFormAction, "Duplicate Facts Viewed");
+            Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsDuplicatesEvent);
         }
 
         public Facts(CensusReference.ReferenceStatus status)
@@ -132,7 +132,7 @@ namespace FTAnalyzer.Forms
                 Text = "Blank Census Reference Report. Facts count: " + facts.Count;
             SetupFacts();
             //dgFacts.Columns["CensusReference"].Visible = true;
-            Analytics.TrackAction(Analytics.FactsFormAction, "Census References Facts Viewed");
+            Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsCensusRefEvent);
         }
 
         public Facts(FactSource source)
@@ -140,10 +140,10 @@ namespace FTAnalyzer.Forms
         {
             allFacts = true;
             facts = ft.GetSourceDisplayFacts(source);
-            Text = "Facts Report for source: " + source.ToString() + ". Facts count: " + facts.Count;
+            Text = $"Facts Report for source: {source.ToString()}. Facts count: {facts.Count}";
             SetupFacts();
             //dgFacts.Columns["CensusReference"].Visible = true;
-            Analytics.TrackAction(Analytics.FactsFormAction, "Facts for Source Viewed");
+            Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsSourceEvent);
         }
 
         public Facts(List<DisplayFact> results)
@@ -165,7 +165,7 @@ namespace FTAnalyzer.Forms
             dgFacts.ReadOnly = false;
             sep1.Visible = true;
             btnShowHideFacts.Visible = true;
-            Analytics.TrackAction(Analytics.FactsFormAction, "Census Ref Issue Viewed");
+            Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsCensusRefIssueEvent);
         }
 
         #region IgnoreList
