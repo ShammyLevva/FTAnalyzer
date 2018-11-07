@@ -278,6 +278,10 @@ namespace FactDateTest
             target = new FactDate("Q1 1966");
             Assert.AreEqual(new DateTime(1965, 12, 1), target.StartDate);
             Assert.AreEqual(new DateTime(1966, 3, 31), target.EndDate);
+
+            target = new FactDate("2 QTR 1870.");
+            Assert.AreEqual(new DateTime(1870, 3, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1870, 6, 30), target.EndDate);
             return target;
         }
 
