@@ -56,7 +56,7 @@ namespace FTAnalyzer.Forms
         {
             Individual = individual;
             AddIndividualsFacts(individual);
-            Text = "Facts Report for " + individual.IndividualID + ": " + individual.Name;
+            Text = $"Facts Report for {individual.IndividualID}: {individual.Name}";
             SetupFacts();
             dgFacts.Columns["IndividualID"].Visible = false; // all same individual so hide ID
             Analytics.TrackAction(Analytics.FactsFormAction, "Individual Facts Viewed");
@@ -68,7 +68,7 @@ namespace FTAnalyzer.Forms
             Family = family;
             foreach (DisplayFact f in family.AllDisplayFacts)
                 facts.Add(f);
-            Text = "Facts Report for " + family.FamilyRef;
+            Text = $"Facts Report for {family.FamilyRef}";
             SetupFacts();
             Analytics.TrackAction(Analytics.FactsFormAction, "Family Facts Viewed");
         }
