@@ -28,9 +28,8 @@ using System.Xml;
 namespace FTAnalyzer
 {
     public partial class MainForm : Form
-
     {
-        public static string VERSION = "7.0.1.2";
+        public static string VERSION = "7.0.1.3";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -67,7 +66,7 @@ namespace FTAnalyzer
         {
             SetupFonts();
             RegisterEventHandlers();
-            Text = "Family Tree Analyzer v" + VERSION;
+            Text = $"Family Tree Analyzer v{VERSION}";
             SetHeightWidth();
             dgSurnames.AutoGenerateColumns = false;
             dgDuplicates.AutoGenerateColumns = false;
