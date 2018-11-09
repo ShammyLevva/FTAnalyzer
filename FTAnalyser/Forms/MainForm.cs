@@ -2356,7 +2356,7 @@ namespace FTAnalyzer
                 dgDuplicates.DataSource = data;
                 rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
                 labDuplicateSlider.Text = "Duplicates Match Quality : " + tbDuplicateScore.Value;
-                tsCountLabel.Text = "Possible Duplicate Count : " + dgDuplicates.RowCount.ToString() + ".  " + Properties.Messages.Hints_Duplicates;
+                tsCountLabel.Text = $"Possible Duplicate Count : {dgDuplicates.RowCount.ToString()}.  {Messages.Hints_Duplicates}";
                 dgDuplicates.UseWaitCursor = false;
             }
             SetDuplicateControlsVisibility(false);
