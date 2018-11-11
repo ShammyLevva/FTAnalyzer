@@ -1,3 +1,13 @@
+#### Updated Release Version 7.0.2.0, 11th November 2018  
+**Updates**  
+Trim quotes from dates and recognise dates with weekday names  
+Cater for 2 QTR date formats and months with no space before year  
+Support Surnames of LNU (Last Name Unknown) and 5 underscores meaning surname unknown  
+Support Quaker date formats  
+
+**Bugfixes**  
+Add extra progress records for loading data errors during initial load  
+
 #### Updated Release Version 7.0.1.2, 5th November 2018  
 **Updates**  
 Added option to show/hide display altering you to ancestors who are multi directs  
