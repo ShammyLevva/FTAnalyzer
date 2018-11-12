@@ -61,6 +61,12 @@ namespace FactDateTest
             FactDate target = BasicDates();
             target = AlternateDateFormats();
 
+            target = new FactDate(null);
+            Assert.AreEqual(target, UNKNOWN_DATE);
+
+            target = new FactDate("");
+            Assert.AreEqual(target, UNKNOWN_DATE);
+
             target = new FactDate("C1914");
             Assert.AreEqual(new DateTime(1913, 1, 1), target.StartDate);
             Assert.AreEqual(new DateTime(1914, 12, 31), target.EndDate);

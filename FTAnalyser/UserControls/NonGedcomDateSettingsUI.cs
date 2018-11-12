@@ -36,10 +36,7 @@ namespace FTAnalyzer.UserControls
             //NOOP;
         }
 
-        public bool HasValidationErrors()
-        {
-            return CheckChildrenValidation(this);
-        }
+        public bool HasValidationErrors() => CheckChildrenValidation(this);
 
         private bool CheckChildrenValidation(Control control)
         {
@@ -47,38 +44,26 @@ namespace FTAnalyzer.UserControls
 
             for (int i = 0; i < control.Controls.Count; i++)
             {
-                if (!String.IsNullOrEmpty(errorProvider1.GetError(control.Controls[i])))
+                if (string.IsNullOrEmpty(errorProvider1.GetError(control.Controls[i])))
+                {
+                    invalid = CheckChildrenValidation(control.Controls[i]);
+                    if (invalid)
+                        break;
+                }
+                else
                 {
                     invalid = true;
                     break;
                 }
-                else
-                {
-                    invalid = CheckChildrenValidation(control.Controls[i]);
-                    if (invalid)
-                    {
-                        break;
-                    }
-                }
             }
-
             return invalid;
         }
 
-        public string DisplayName
-        {
-            get { return "Non GEDCOM Date Settings"; }
-        }
+        public string DisplayName => "Non GEDCOM Date Settings";
 
-        public string TreePosition
-        {
-            get { return DisplayName; }
-        }
+        public string TreePosition => DisplayName;
 
-        public Image MenuIcon
-        {
-            get { return null; }
-        }
+        public Image MenuIcon => null;
 
         #endregion
 
@@ -175,7 +160,6 @@ namespace FTAnalyzer.UserControls
                 rbyyyymmdd.Text = "yyyy mm dd";
                 rbyyyyddmm.Text = "yyyy dd mm";
             }
-
         }
     }
 }
