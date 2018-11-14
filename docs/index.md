@@ -1,7 +1,8 @@
 Family Tree Analyzer
 ====================
 
-#### To install the latest Windows version click [here.](http://ftanalyzer.com/install/) If you have a Mac click [here.](http://mac.ftanalyzer.com)
+#### To install the latest Windows version click [here.](http://ftanalyzer.com/install/)  
+If you have a Mac click [here.](http://mac.ftanalyzer.com)
 
 Windows 10 & 8.1 installs may require you to click More Info and accept the certificate the first time you run the app. 
 
@@ -17,11 +18,11 @@ There is now a series of helpful guides to downloading, installing and using FTA
 
 ### Documentation Website
 
-The [documentation](./Documentation) is similarly in need of some updating. It's a work in progress and I tend to focus on new features rather than documnetation. If anyone would like to assist updating the documentation I'd be happy to accept their assistance. 
+The [documentation](./Documentation) is similarly in need of some updating. It's a work in progress and I tend to focus on new features rather than documentation. If anyone would like to assist updating the documentation I'd be happy to accept their assistance. 
 
 ### Facebook, Support Site & Twitter
 
-The [Support website](facebook.com/FTAnalyzer) is hosted as a group on Facebook. The Twitter account is @FTAnalyzer note I don't check twitter very often so easiest is to raise an issue on the [issues site](www.ftanalyzer.com/issues)
+The [Support website](facebook.com/FTAnalyzer) is hosted as a page on Facebook. The [User Group](facebook.com/groups/ftanalyzer) is also on Facebook. The Twitter account is @FTAnalyzer note I don't check twitter very often so easiest is to raise an issue on the [issues site](www.ftanalyzer.com/issues)
 
 ### Initial Features
 
