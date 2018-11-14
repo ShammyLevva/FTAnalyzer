@@ -2649,6 +2649,8 @@
             // 
             // ckbDataErrors
             // 
+            this.ckbDataErrors.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ckbDataErrors.CheckOnClick = true;
             this.ckbDataErrors.ColumnWidth = 225;
             this.ckbDataErrors.FormattingEnabled = true;
