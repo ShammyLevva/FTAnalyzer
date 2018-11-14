@@ -1,7 +1,7 @@
 Family Tree Analyzer
 ====================
 
-#### To install the latest version click [here.](http://ftanalyzer.com/install/)
+#### To install the latest Windows version click [here.](http://ftanalyzer.com/install/) If you have a Mac click [here.](http://mac.ftanalyzer.com)
 
 Windows 10 & 8.1 installs may require you to click More Info and accept the certificate the first time you run the app. 
 
