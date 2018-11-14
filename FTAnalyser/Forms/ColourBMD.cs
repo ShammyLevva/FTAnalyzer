@@ -134,7 +134,7 @@ namespace FTAnalyzer.Forms
             {
                 DataGridViewCellStyle style = dgBMDReportSheet.DefaultCellStyle;
                 DataGridViewCell cell = dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                ColourValues.BMDColour value = (ColourValues.BMDColour)cell.Value;
+                BMDColour value = (BMDColour)cell.Value;
                 styles.TryGetValue(value, out style);
                 if (style != null)
                 {
@@ -150,49 +150,49 @@ namespace FTAnalyzer.Forms
 
                     switch (value)
                     {
-                        case ColourValues.BMDColour.EMPTY: // Grey
+                        case BMDColour.EMPTY: // Grey
                             if (e.ColumnIndex == burialColumnIndex - 1) // death column
                                 cell.ToolTipText = "Individual is probably still alive"; // if OVER90 still grey cell but use different tooltip
                             else
                                 cell.ToolTipText = string.Empty;
                             break;
-                        case ColourValues.BMDColour.UNKNOWN_DATE: // Red
+                        case BMDColour.UNKNOWN_DATE: // Red
                             cell.ToolTipText = "Unknown date.";
                             break;
-                        case ColourValues.BMDColour.OPEN_ENDED_DATE: // Orange Red
+                        case BMDColour.OPEN_ENDED_DATE: // Orange Red
                             cell.ToolTipText = "Date is open ended, BEFore or AFTer a date.";
                             break;
-                        case ColourValues.BMDColour.VERY_WIDE_DATE: // Tomato Red
+                        case BMDColour.VERY_WIDE_DATE: // Tomato Red
                             cell.ToolTipText = "Date only accurate to more than ten year date range.";
                             break;
-                        case ColourValues.BMDColour.WIDE_DATE: // Orange
+                        case BMDColour.WIDE_DATE: // Orange
                             cell.ToolTipText = "Date covers up to a ten year date range.";
                             break;
-                        case ColourValues.BMDColour.NARROW_DATE: // Yellow
+                        case BMDColour.NARROW_DATE: // Yellow
                             cell.ToolTipText = "Date accurate to within one to two year period.";
                             break;
-                        case ColourValues.BMDColour.JUST_YEAR_DATE: // Yellow
+                        case BMDColour.JUST_YEAR_DATE: // Yellow
                             cell.ToolTipText = "Date accurate to within one year period, but longer than 3 months.";
                             break;
-                        case ColourValues.BMDColour.APPROX_DATE: // Pale Green 
+                        case BMDColour.APPROX_DATE: // Pale Green 
                             cell.ToolTipText = "Date accurate to within 3 months (note may be date of registration not event date)";
                             break;
-                        case ColourValues.BMDColour.EXACT_DATE: // Green
+                        case BMDColour.EXACT_DATE: // Green
                             cell.ToolTipText = "Exact date.";
                             break;
-                        case ColourValues.BMDColour.NO_SPOUSE: // pale grey
+                        case BMDColour.NO_SPOUSE: // pale grey
                             cell.ToolTipText = "Of marrying age but no spouse recorded";
                             break;
-                        case ColourValues.BMDColour.NO_PARTNER: // light blue
+                        case BMDColour.NO_PARTNER: // light blue
                             cell.ToolTipText = "No partner but has shared fact or children";
                             break;
-                        case ColourValues.BMDColour.NO_MARRIAGE: // dark blue
+                        case BMDColour.NO_MARRIAGE: // dark blue
                             cell.ToolTipText = "Has partner but no marriage fact";
                             break;
-                        case ColourValues.BMDColour.ISLIVING: // dark grey
+                        case BMDColour.ISLIVING: // dark grey
                             cell.ToolTipText = "Is flagged as living";
                             break;
-                        case ColourValues.BMDColour.OVER90:
+                        case BMDColour.OVER90:
                             cell.ToolTipText = "Individual may be still alive";
                             break;
                     }
@@ -219,8 +219,8 @@ namespace FTAnalyzer.Forms
                 if (e.ColumnIndex >= birthColumnIndex && e.ColumnIndex <= burialColumnIndex)
                 {
                     DataGridViewCell cell = dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                    ColourValues.BMDColour value = (ColourValues.BMDColour)cell.Value;
-                    if (value != ColourValues.BMDColour.EXACT_DATE)
+                    BMDColour value = (BMDColour)cell.Value;
+                    if (value != BMDColour.EXACT_DATE)
                     {
                         IDisplayColourBMD person = (IDisplayColourBMD)dgBMDReportSheet.Rows[e.RowIndex].DataBoundItem;
                         Individual ind = ft.GetIndividual(person.IndividualID);

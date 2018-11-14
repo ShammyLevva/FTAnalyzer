@@ -573,7 +573,7 @@ namespace FTAnalyzer
         {
             var ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
             if (ind != null)
-                viewNotesToolStripMenuItem.Enabled = ind.HasNotes;
+                viewNotesToolStripMenuItem.Enabled = ind.HasNotes == "Yes";
         }
 
         void ViewNotesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -735,7 +735,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 DataError error = (DataError)dgDataErrors.CurrentRow.DataBoundItem;
-                if (error.IsFamily())
+                if (error.IsFamily == "Yes")
                     ShowFamilyFacts((string)dgDataErrors.CurrentRow.Cells["Reference"].Value);
                 else
                     ShowFacts((string)dgDataErrors.CurrentRow.Cells["Reference"].Value);
@@ -2298,7 +2298,7 @@ namespace FTAnalyzer
         {
             loading = true;
             Height = 561;
-            Width = 1059;
+            Width = 1114;
             Top = 50;
             Left = 50;
             loading = false;
@@ -2800,7 +2800,7 @@ namespace FTAnalyzer
         {
             Individual ind = GetContextIndividual(sender);
             if (ind != null)
-                mnuViewNotes.Enabled = ind.HasNotes;
+                mnuViewNotes.Enabled = ind.HasNotes == "Yes";
             else
                 e.Cancel = true;
         }
