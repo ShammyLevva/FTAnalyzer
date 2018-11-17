@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using FTAnalyzer.Utilities;
 using Printing.DataGridViewPrint.Tools;
-using System.Drawing.Printing;
-using System.Windows.Forms;
-using System.Drawing;
-using FTAnalyzer.Utilities;
-using System.Data;
-using System.IO;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Drawing.Printing;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace FTAnalyzer
 {

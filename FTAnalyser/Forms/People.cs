@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using FTAnalyzer.Utilities;
 using FTAnalyzer.Filters;
@@ -13,16 +11,16 @@ namespace FTAnalyzer.Forms
 {
     public partial class People : Form
     {
-        private enum ReportType { People, MissingChildrenStatus, MismatchedChildrenStatus }
+        enum ReportType { People, MissingChildrenStatus, MismatchedChildrenStatus }
 
-        private bool selectRow = false;
-        private Font boldFont;
-        private Font normalFont;
-        private Dictionary<IDisplayIndividual, IDisplayFamily> families;
-        private FamilyTree ft = FamilyTree.Instance;
-        private ReportFormHelper indReportFormHelper;
-        private ReportFormHelper famReportFormHelper;
-        private ReportType reportType = ReportType.People;
+        bool selectRow = false;
+        Font boldFont;
+        Font normalFont;
+        Dictionary<IDisplayIndividual, IDisplayFamily> families;
+        FamilyTree ft = FamilyTree.Instance;
+        ReportFormHelper indReportFormHelper;
+        ReportFormHelper famReportFormHelper;
+        ReportType reportType = ReportType.People;
 
         public People()
         {
@@ -36,14 +34,14 @@ namespace FTAnalyzer.Forms
             SetSaveButtonsStatus(false);
         }
 
-        private void SetSaveButtonsStatus(bool value)
+        void SetSaveButtonsStatus(bool value)
         {
             mnuSaveColumnLayout.Visible = value;
             mnuResetColumns.Visible = value;
             tssSaveButtons.Visible = value;
         }
 
-        private void UpdateStatusCount()
+        void UpdateStatusCount()
         {
             if (reportType == ReportType.MissingChildrenStatus || reportType == ReportType.MismatchedChildrenStatus)
                 txtCount.Text = dgFamilies.RowCount + " Problems detected. " + Properties.Messages.Hints_IndividualFamily + " Shift Double click to see colour census report for family.";
@@ -58,7 +56,7 @@ namespace FTAnalyzer.Forms
 
         public void SetLocation(FactLocation loc, int level)
         {
-            this.Text = "Individuals & Families with connection to " + loc.ToString();
+            Text = "Individuals & Families with connection to " + loc.ToString();
             level = Math.Min(loc.Level, level); // if location level isn't as detailed as level on tab use location level
             IEnumerable<Individual> listInd = ft.GetIndividualsAtLocation(loc, level);
             SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
@@ -79,7 +77,7 @@ namespace FTAnalyzer.Forms
 
         public void SetWorkers(string job, SortableBindingList<Individual> workers)
         {
-            this.Text = "Individuals whose occupation was " + (job.Length == 0 ? "not entered" : job);
+            Text = "Individuals whose occupation was " + (job.Length == 0 ? "not entered" : job);
             SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
             foreach (Individual i in workers)
                 dsInd.Add(i);
@@ -92,7 +90,7 @@ namespace FTAnalyzer.Forms
 
         public void SetSurnameStats(SurnameStats stat)
         {
-            this.Text = "Individuals & Families whose surame is " + stat.Surname;
+            Text = "Individuals & Families whose surame is " + stat.Surname;
             SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
             bool indSurnames(Individual x) => x.Surname.Equals(stat.Surname);
             foreach (Individual i in ft.AllIndividuals.Filter(indSurnames))
@@ -155,20 +153,20 @@ namespace FTAnalyzer.Forms
             SetIndividuals(individuals, "Individuals who are a " + relationtoRoot + " of root person");
         }
 
-        private void SortIndividuals()
+        void SortIndividuals()
         {
             dgIndividuals.Sort(dgIndividuals.Columns[1], ListSortDirection.Ascending);
             dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
         }
 
-        private void SortFamilies()
+        void SortFamilies()
         {
             dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);
         }
 
         public void SetIndividuals(List<Individual> individuals, string reportTitle)
         {
-            this.Text = reportTitle;
+            Text = reportTitle;
             dgIndividuals.DataSource = new SortableBindingList<IDisplayIndividual>(individuals);
             dgIndividuals.Dock = DockStyle.Fill;
 
@@ -178,7 +176,7 @@ namespace FTAnalyzer.Forms
 
         public bool OlderParents(int minAge)
         {
-            this.Text = "Parents aged " + minAge + "+ at time of child's birth";
+            Text = "Parents aged " + minAge + "+ at time of child's birth";
             selectRow = true;
             SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
             SortableBindingList<IDisplayFamily> dsFam = new SortableBindingList<IDisplayFamily>();
@@ -235,7 +233,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void DgIndividuals_SelectionChanged(object sender, EventArgs e)
+        void DgIndividuals_SelectionChanged(object sender, EventArgs e)
         {
             if (selectRow && dgIndividuals.CurrentRow != null)
             {
@@ -255,7 +253,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void DgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        void DgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -267,7 +265,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void DgFamilies_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        void DgFamilies_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -319,12 +317,12 @@ namespace FTAnalyzer.Forms
             SetIndividuals(individuals, "Individuals that may have more than one census/residence record for a census year");
         }
 
-        private void People_FormClosed(object sender, FormClosedEventArgs e)
+        void People_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.Dispose();
+            Dispose();
         }
 
-        private void ContextMenuStrip1_Opened(object sender, EventArgs e)
+        void ContextMenuStrip1_Opened(object sender, EventArgs e)
         {
             string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
             Individual ind = ft.GetIndividual(indID);
@@ -332,7 +330,7 @@ namespace FTAnalyzer.Forms
                 viewNotesToolStripMenuItem.Enabled = ind.HasNotes == "Yes";
         }
 
-        private void ViewNotesToolStripMenuItem_Click(object sender, EventArgs e)
+        void ViewNotesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
             Individual ind = ft.GetIndividual(indID);
@@ -343,7 +341,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void ShowViewNotesMenu(DataGridView dg, MouseEventArgs e)
+        void ShowViewNotesMenu(DataGridView dg, MouseEventArgs e)
         {
             DataGridView.HitTestInfo hti = dg.HitTest(e.Location.X, e.Location.Y);
             if (e.Button == MouseButtons.Right)
@@ -364,7 +362,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void ResetTable()
+        void ResetTable()
         {
             if (!splitContainer.Panel1Collapsed)
                 SortIndividuals();

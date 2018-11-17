@@ -564,7 +564,7 @@ namespace FTAnalyzer
                 var outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
                 ft.UpdateRootIndividual(ind.IndividualID, null, outputText);
                 dgIndividuals.Refresh();
-                MessageBox.Show("Root person set as " + ind.Name + "\n\n" + ft.PrintRelationCount(), "FTAnalyzer");
+                MessageBox.Show($"Root person set as {ind.Name}\n\n{ft.PrintRelationCount()}", "FTAnalyzer");
             }
             HourGlass(false);
         }
