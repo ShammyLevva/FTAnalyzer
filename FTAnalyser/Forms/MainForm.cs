@@ -29,7 +29,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.0.3.0";
+        public static string VERSION = "7.0.3.1";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1691,65 +1691,72 @@ namespace FTAnalyzer
         #region Print Routines
         void MnuPrint_Click(object sender, EventArgs e)
         {
-            printDocument = new PrintDocument();
-            printDocument.DefaultPageSettings.Margins =
-               new Margins(15, 15, 15, 15);
-            printDocument.DefaultPageSettings.Landscape = true;
-            printDialog.PrinterSettings.DefaultPageSettings.Landscape = true;
+            try
+            {
+                printDocument = new PrintDocument();
+                printDocument.DefaultPageSettings.Margins = new Margins(50, 50, 50, 25);
+                printDocument.DefaultPageSettings.Landscape = true;
+                printDialog.PrinterSettings.DefaultPageSettings.Margins = new Margins(50, 50, 50, 25);
+                printDialog.PrinterSettings.DefaultPageSettings.Landscape = true;
 
-            if (tabSelector.SelectedTab == tabDisplayProgress && ft.DataLoaded)
-            {
-                if (printDialog.ShowDialog(this) == DialogResult.OK)
+                if (tabSelector.SelectedTab == tabDisplayProgress && ft.DataLoaded)
                 {
-                    Utilities.Printing p = new Utilities.Printing(rtbOutput);
-                    printDocument.PrintPage += new PrintPageEventHandler(p.PrintPage);
-                    printDocument.PrinterSettings = printDialog.PrinterSettings;
-                    printDocument.DocumentName = "GEDCOM Load Results";
-                    printDocument.Print();
+                    if (printDialog.ShowDialog(this) == DialogResult.OK)
+                    {
+                        Utilities.Printing p = new Utilities.Printing(rtbOutput);
+                        printDocument.PrintPage += new PrintPageEventHandler(p.PrintPage);
+                        printDocument.PrinterSettings = printDialog.PrinterSettings;
+                        printDocument.DocumentName = "GEDCOM Load Results";
+                        printDocument.Print();
+                    }
                 }
-            }
-            if (tabSelector.SelectedTab == tabMainLists)
+                if (tabSelector.SelectedTab == tabMainLists)
+                {
+                    if (tabMainListsSelector.SelectedTab == tabIndividuals)
+                        PrintDataGrid(Orientation.Landscape, dgIndividuals, "List of Individuals");
+                    else if (tabMainListsSelector.SelectedTab == tabFamilies)
+                        PrintDataGrid(Orientation.Landscape, dgFamilies, "List of Families");
+                    else if (tabMainListsSelector.SelectedTab == tabSources)
+                        PrintDataGrid(Orientation.Landscape, dgSources, "List of Sources");
+                    else if (tabMainListsSelector.SelectedTab == tabOccupations)
+                        PrintDataGrid(Orientation.Portrait, dgOccupations, "List of Occupations");
+                }
+                else if (tabSelector.SelectedTab == tabErrorsFixes)
+                {
+                    if (tabErrorFixSelector.SelectedTab == tabDuplicates)
+                        PrintDataGrid(Orientation.Landscape, dgDuplicates, "List of Potential Duplicates");
+                    else if (tabErrorFixSelector.SelectedTab == tabDataErrors)
+                        PrintDataGrid(Orientation.Landscape, dgDataErrors, "List of Data Errors");
+                    else if (tabErrorFixSelector.SelectedTab == tabLooseBirths)
+                        PrintDataGrid(Orientation.Landscape, dgLooseBirths, "List of Loose Births");
+                    else if (tabErrorFixSelector.SelectedTab == tabLooseDeaths)
+                        PrintDataGrid(Orientation.Landscape, dgLooseDeaths, "List of Loose Deaths");
+                }
+                else if (tabSelector.SelectedTab == tabLocations)
+                {
+                    if (tabCtrlLocations.SelectedTab == tabCountries)
+                        PrintDataGrid(Orientation.Portrait, dgCountries, "List of Countries");
+                    if (tabCtrlLocations.SelectedTab == tabRegions)
+                        PrintDataGrid(Orientation.Portrait, dgRegions, "List of Regions");
+                    if (tabCtrlLocations.SelectedTab == tabSubRegions)
+                        PrintDataGrid(Orientation.Portrait, dgSubRegions, "List of Sub Regions");
+                    if (tabCtrlLocations.SelectedTab == tabAddresses)
+                        PrintDataGrid(Orientation.Portrait, dgAddresses, "List of Addresses");
+                    if (tabCtrlLocations.SelectedTab == tabPlaces)
+                        PrintDataGrid(Orientation.Portrait, dgPlaces, "List of Places");
+                }
+                else if (tabSelector.SelectedTab == tabTreetops)
+                {
+                    PrintDataGrid(Orientation.Landscape, dgTreeTops, "List of People at Top of Tree");
+                }
+                else if (tabSelector.SelectedTab == tabWorldWars)
+                {
+                    PrintDataGrid(Orientation.Landscape, dgWorldWars, "List of Individuals who may have served in the World Wars");
+                }
+            } 
+            catch (Exception ex)
             {
-                if (tabMainListsSelector.SelectedTab == tabIndividuals)
-                    PrintDataGrid(Orientation.Landscape, dgIndividuals, "List of Individuals");
-                else if (tabMainListsSelector.SelectedTab == tabFamilies)
-                    PrintDataGrid(Orientation.Landscape, dgFamilies, "List of Families");
-                else if (tabMainListsSelector.SelectedTab == tabSources)
-                    PrintDataGrid(Orientation.Landscape, dgSources, "List of Sources");
-                else if (tabMainListsSelector.SelectedTab == tabOccupations)
-                    PrintDataGrid(Orientation.Portrait, dgOccupations, "List of Occupations");
-            }
-            else if (tabSelector.SelectedTab == tabErrorsFixes)
-            {
-                if (tabErrorFixSelector.SelectedTab == tabDuplicates)
-                    PrintDataGrid(Orientation.Landscape, dgDuplicates, "List of Potential Duplicates");
-                else if (tabErrorFixSelector.SelectedTab == tabDataErrors)
-                    PrintDataGrid(Orientation.Landscape, dgDataErrors, "List of Data Errors");
-                else if (tabErrorFixSelector.SelectedTab == tabLooseBirths)
-                    PrintDataGrid(Orientation.Landscape, dgLooseBirths, "List of Loose Births");
-                else if (tabErrorFixSelector.SelectedTab == tabLooseDeaths)
-                    PrintDataGrid(Orientation.Landscape, dgLooseDeaths, "List of Loose Deaths");
-            }
-            else if (tabSelector.SelectedTab == tabLocations)
-            {
-                if (tabCtrlLocations.SelectedTab == tabCountries)
-                    PrintDataGrid(Orientation.Portrait, dgCountries, "List of Countries");
-                if (tabCtrlLocations.SelectedTab == tabRegions)
-                    PrintDataGrid(Orientation.Portrait, dgRegions, "List of Regions");
-                if (tabCtrlLocations.SelectedTab == tabSubRegions)
-                    PrintDataGrid(Orientation.Portrait, dgSubRegions, "List of Sub Regions");
-                if (tabCtrlLocations.SelectedTab == tabAddresses)
-                    PrintDataGrid(Orientation.Portrait, dgAddresses, "List of Addresses");
-                if (tabCtrlLocations.SelectedTab == tabPlaces)
-                    PrintDataGrid(Orientation.Portrait, dgPlaces, "List of Places");
-            }
-            else if (tabSelector.SelectedTab == tabTreetops)
-            {
-                PrintDataGrid(Orientation.Landscape, dgTreeTops, "List of People at Top of Tree");
-            }
-            else if (tabSelector.SelectedTab == tabWorldWars)
-            {
-                PrintDataGrid(Orientation.Landscape, dgWorldWars, "List of Individuals who may have served in the World Wars");
+                MessageBox.Show($"Error Printing : {ex.Message}");
             }
         }
 

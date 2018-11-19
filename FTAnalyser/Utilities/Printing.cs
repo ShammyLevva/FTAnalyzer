@@ -7,8 +7,8 @@ namespace FTAnalyzer.Utilities
 {
     class Printing : IDisposable
     {
-        private ScrollingRichTextBox rtb;
-        private StringReader reader;
+        ScrollingRichTextBox rtb;
+        StringReader reader;
         
         public Printing(ScrollingRichTextBox rtb)
         {
@@ -18,32 +18,26 @@ namespace FTAnalyzer.Utilities
 
         public void PrintPage(object sender, PrintPageEventArgs e)
         {
-            float LinesPerPage = 0;
             float YPosition = 0;
-            int Count = 0;
             float LeftMargin = e.MarginBounds.Left;
             float TopMargin = e.MarginBounds.Top;
             string Line = null;
-            Font PrintFont = this.rtb.Font;
+            Font PrintFont = rtb.Font;
+            if (PrintFont.SizeInPoints < 11)
+                PrintFont = new Font(PrintFont.FontFamily, 11f);
+            int maxWidth = e.MarginBounds.Right - e.MarginBounds.Left;
+            int maxHeight = e.MarginBounds.Bottom - e.MarginBounds.Top;
+            float fontHeight = PrintFont.GetHeight(e.Graphics);
             SolidBrush PrintBrush = new SolidBrush(Color.Black);
 
-            LinesPerPage = e.MarginBounds.Height / PrintFont.GetHeight(e.Graphics);
-
-            while (Count < LinesPerPage && ((Line = reader.ReadLine()) != null))
+            YPosition = TopMargin;
+            while (YPosition < maxHeight && ((Line = reader.ReadLine()) != null))
             {
-                YPosition = TopMargin + (Count * PrintFont.GetHeight(e.Graphics));
-                e.Graphics.DrawString(Line, PrintFont, PrintBrush, LeftMargin, YPosition, new StringFormat());
-                Count++;
+                SizeF sf = e.Graphics.MeasureString(Line, PrintFont, maxWidth);
+                e.Graphics.DrawString(Line, PrintFont, PrintBrush, new RectangleF(new PointF(LeftMargin, YPosition), sf), StringFormat.GenericTypographic);
+                YPosition += sf.Height;
             }
-
-            if (Line != null)
-            {
-                e.HasMorePages = true;
-            }
-            else
-            {
-                e.HasMorePages = false;
-            }
+            e.HasMorePages = Line != null;
             PrintBrush.Dispose();
         }
 
