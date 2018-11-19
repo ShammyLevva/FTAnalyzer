@@ -1,3 +1,10 @@
+#### Updated Release Version 7.0.3.0, 19th November 2018  
+**Updates**  
+Better support for accented characters in different codesets  
+Added support for Legacy 9 Hashtags  
+Added option to skip checking notes and stories for census references  
+
+
 #### Updated Release Version 7.0.2.0, 11th November 2018  
 **Updates**  
 Trim quotes from dates and recognise dates with weekday names  

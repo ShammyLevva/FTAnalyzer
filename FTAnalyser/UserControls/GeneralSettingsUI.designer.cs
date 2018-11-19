@@ -44,6 +44,7 @@
             this.chkIgnoreFactTypeWarnings = new System.Windows.Forms.CheckBox();
             this.chkTreatFemaleAsUnknown = new System.Windows.Forms.CheckBox();
             this.chkMultiAncestor = new System.Windows.Forms.CheckBox();
+            this.chkSkipCensusReferences = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownAge)).BeginInit();
             this.SuspendLayout();
@@ -153,10 +154,17 @@
             this.chkMultiAncestor.Name = "chkMultiAncestor";
             this.chkMultiAncestor.UseVisualStyleBackColor = true;
             // 
+            // chkSkipCensusReferences
+            // 
+            resources.ApplyResources(this.chkSkipCensusReferences, "chkSkipCensusReferences");
+            this.chkSkipCensusReferences.Name = "chkSkipCensusReferences";
+            this.chkSkipCensusReferences.UseVisualStyleBackColor = true;
+            // 
             // GeneralSettingsUI
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkSkipCensusReferences);
             this.Controls.Add(this.chkMultiAncestor);
             this.Controls.Add(this.chkTreatFemaleAsUnknown);
             this.Controls.Add(this.chkIgnoreFactTypeWarnings);
@@ -194,5 +202,6 @@
         private System.Windows.Forms.CheckBox chkIgnoreFactTypeWarnings;
         private System.Windows.Forms.CheckBox chkTreatFemaleAsUnknown;
         private System.Windows.Forms.CheckBox chkMultiAncestor;
+        private System.Windows.Forms.CheckBox chkSkipCensusReferences;
     }
 }
