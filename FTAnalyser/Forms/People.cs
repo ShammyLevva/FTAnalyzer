@@ -454,7 +454,7 @@ namespace FTAnalyzer.Forms
             splitContainer.Panel2Collapsed = false;
             famReportFormHelper.LoadColumnLayout("ChildrenStatusFamColumns.xml");
             SetSaveButtonsStatus(true);
-            this.Text = "1911 Census Families where the children status recorded doesn't match the children in tree";
+            Text = "1911 Census Families where the children status recorded doesn't match the children in tree";
             UpdateStatusCount();
         }
 
