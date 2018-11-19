@@ -4,6 +4,9 @@ Better support for accented characters in different codesets
 Added support for Legacy 9 Hashtags  
 Added option to skip checking notes and stories for census references  
 
+**Bugfixes**  
+Fix non GEDCOM dates with a dot not being recognised  
+Fix default window size & grid sizing bug  
 
 #### Updated Release Version 7.0.2.0, 11th November 2018  
 **Updates**  
