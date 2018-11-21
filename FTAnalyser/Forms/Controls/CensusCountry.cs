@@ -1,9 +1,8 @@
-﻿using System;
+﻿using FTAnalyzer.Filters;
+using System;
 using System.Windows.Forms;
-using FTAnalyzer;
-using FTAnalyzer.Filters;
 
-namespace Controls
+namespace FTAnalyzer.Controls
 {
     public partial class CensusCountry : UserControl
     {

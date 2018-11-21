@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
 using BruTile.Web;
-using static FTAnalyzer.Forms.Controls.ToolStripMapSelector;
+using static FTAnalyzer.Controls.ToolStripMapSelector;
 
-namespace FTAnalyzer.Mapping
+namespace FTAnalyzer.Controls
 {
     public class MapToolStripMenuItem : ToolStripMenuItem
     {
-        private HttpTileSource tileSource;
-        private LinkLabelType linkLabelType;
-
         public MapToolStripMenuItem(HttpTileSource tileSource, LinkLabelType linkLabelType) 
             : base()
         {
@@ -25,7 +22,7 @@ namespace FTAnalyzer.Mapping
             Click += eventHandler;
         }
 
-        public HttpTileSource TileSource { get => tileSource; set => tileSource = value; }
-        public LinkLabelType LinkLabelType { get => linkLabelType; set => linkLabelType = value; }
+        public HttpTileSource TileSource { get; set; }
+        public LinkLabelType LinkLabelType { get; set; }
     }
 }

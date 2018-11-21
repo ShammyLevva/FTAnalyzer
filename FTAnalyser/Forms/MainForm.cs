@@ -1,4 +1,5 @@
-﻿using FTAnalyzer.Filters;
+﻿using FTAnalyzer.Controls;
+using FTAnalyzer.Filters;
 using FTAnalyzer.Forms;
 using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;

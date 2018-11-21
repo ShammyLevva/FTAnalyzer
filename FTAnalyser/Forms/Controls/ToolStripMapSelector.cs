@@ -5,22 +5,22 @@ using SharpMap.Forms;
 using System.Drawing;
 using FTAnalyzer.Mapping;
 
-namespace FTAnalyzer.Forms.Controls
+namespace FTAnalyzer.Controls
 {
     public class ToolStripMapSelector : ToolStripDropDownButton
     {
-        private LinkLabel copyrightLabel;
-        private MapBox mapbox;
-        private TrackBar opacitySlider;
-        private string defaultMap = "mnuOpenStreetMap";
-        private MapToolStripMenuItem mnuOpenStreetMap;
-        private MapToolStripMenuItem mnuOpenHistoricMap;
-        private MapToolStripMenuItem mnuBingMapAerial;
-        private MapToolStripMenuItem mnuBingMapRoads;
-        private MapToolStripMenuItem mnuBingMapHybrid;
-        private MapToolStripMenuItem mnuNLS1843_1882;
-        private MapToolStripMenuItem mnuNLS1885_1900;
-        private MapToolStripMenuItem mnuNLS1921_1930;
+        LinkLabel copyrightLabel;
+        MapBox mapbox;
+        TrackBar opacitySlider;
+        readonly string defaultMap = "mnuOpenStreetMap";
+        MapToolStripMenuItem mnuOpenStreetMap;
+        MapToolStripMenuItem mnuOpenHistoricMap;
+        MapToolStripMenuItem mnuBingMapAerial;
+        MapToolStripMenuItem mnuBingMapRoads;
+        MapToolStripMenuItem mnuBingMapHybrid;
+        MapToolStripMenuItem mnuNLS1843_1882;
+        MapToolStripMenuItem mnuNLS1885_1900;
+        MapToolStripMenuItem mnuNLS1921_1930;
 
         public ToolStripMapSelector()
             : base("Map style")
@@ -48,7 +48,7 @@ namespace FTAnalyzer.Forms.Controls
             }
         }
 
-        private void SetupDropdown()
+        void SetupDropdown()
         {
             TileSourceFactory factory = new TileSourceFactory();
             mnuOpenStreetMap = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.OpenStreetMap), LinkLabelType.OSM);
@@ -115,7 +115,7 @@ namespace FTAnalyzer.Forms.Controls
             copyrightLabel.Links.Add(link);
         }
 
-        private void _Click(object sender, EventArgs e)
+        void _Click(object sender, EventArgs e)
         {
             foreach (ToolStripMenuItem menu in DropDownItems)
                 menu.Checked = false;

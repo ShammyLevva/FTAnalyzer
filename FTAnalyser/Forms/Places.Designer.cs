@@ -1,7 +1,6 @@
-﻿using FTAnalyzer.Forms.Controls;
+﻿using FTAnalyzer.Controls;
 using FTAnalyzer.Utilities;
 using System.Windows.Forms;
-using System.Collections;
 
 namespace FTAnalyzer.Forms
 {

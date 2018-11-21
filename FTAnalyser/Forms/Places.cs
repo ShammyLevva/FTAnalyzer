@@ -1,4 +1,5 @@
-﻿using FTAnalyzer.Mapping;
+﻿using FTAnalyzer.Controls;
+using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
 using GeoAPI.Geometries;
 using SharpMap.Data;
@@ -149,9 +150,7 @@ namespace FTAnalyzer.Forms
         private void DgFacts_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
-            {
                 e.ToolTipText = "Double click to edit location.";
-            }
         }
 
         private void Places_Load(object sender, EventArgs e)

@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Forms.Controls;
+﻿using FTAnalyzer.Controls;
 namespace FTAnalyzer.Forms
 {
     partial class LifeLine

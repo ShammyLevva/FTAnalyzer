@@ -1,4 +1,5 @@
-﻿using FTAnalyzer.Mapping;
+﻿using FTAnalyzer.Controls;
+using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
 using GeoAPI.Geometries;
 using SharpMap.Data;

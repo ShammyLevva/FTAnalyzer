@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using FTAnalyzer;
 using FTAnalyzer.Filters;
 
-namespace Controls
+namespace FTAnalyzer.Controls
 {
     public partial class RelationTypes : UserControl
     {

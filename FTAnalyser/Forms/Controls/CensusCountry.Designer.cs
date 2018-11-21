@@ -1,4 +1,4 @@
-﻿namespace Controls
+﻿namespace FTAnalyzer.Controls
 {
     partial class CensusCountry
     {

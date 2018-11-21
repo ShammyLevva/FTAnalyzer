@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 
-namespace FTAnalyzer
+namespace FTAnalyzer.Controls
 {
     public class TreeViewHandler
     {

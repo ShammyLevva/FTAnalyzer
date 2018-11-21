@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MissingData));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.dsBirth = new FTAnalyzer.Forms.Controls.DateSliders();
+            this.dsBirth = new FTAnalyzer.Controls.DateSliders();
             this.SuspendLayout();
             // 
             // statusStrip1

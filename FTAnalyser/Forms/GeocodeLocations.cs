@@ -13,36 +13,36 @@ using FTAnalyzer.Utilities;
 using GeoAPI.Geometries;
 using System.Text;
 using SharpMap.Utilities;
+using FTAnalyzer.Controls;
 
 namespace FTAnalyzer.Forms
 {
     public partial class GeocodeLocations : Form
     {
-        private static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private FamilyTree ft;
-        private Font italicFont;
-        private ReportFormHelper reportFormHelper;
-        private List<IDisplayGeocodedLocation> locations;
-        private bool formClosing;
-        private string statusText;
-        private bool refreshingMenus;
-        private ISet<string> noneOfTheAbove;
-        private ToolStripMenuItem[] noneOfTheAboveMenus;
-        private ConcurrentQueue<FactLocation> queue;
-        private IDictionary<string, IList<OS50kGazetteer>> OS50kDictionary;
-        private IList<OS50kGazetteer> OS50k;
-        private IProgress<string> outputText;
+        FamilyTree ft;
+        Font italicFont;
+        ReportFormHelper reportFormHelper;
+        List<IDisplayGeocodedLocation> locations;
+        bool formClosing;
+        string statusText;
+        bool refreshingMenus;
+        ISet<string> noneOfTheAbove;
+        ToolStripMenuItem[] noneOfTheAboveMenus;
+        ConcurrentQueue<FactLocation> queue;
+        IDictionary<string, IList<OS50kGazetteer>> OS50kDictionary;
+        IList<OS50kGazetteer> OS50k;
+        IProgress<string> outputText;
 
-        private FactLocation CopyLocation;
+        FactLocation CopyLocation;
 
         public GeocodeLocations(IProgress<string> outputText)
         {
             InitializeComponent();
             ft = FamilyTree.Instance;
-            this.refreshingMenus = false;
-            this.locations = ft.AllGeocodingLocations;
-            this.queue = new ConcurrentQueue<FactLocation>();
-            this.CopyLocation = FactLocation.UNKNOWN_LOCATION;
+            refreshingMenus = false;
+            locations = ft.AllGeocodingLocations;
+            queue = new ConcurrentQueue<FactLocation>();
+            CopyLocation = FactLocation.UNKNOWN_LOCATION;
             this.outputText = outputText;
             mnuPasteLocation.Enabled = false;
             dgLocations.AutoGenerateColumns = false;
@@ -59,7 +59,7 @@ namespace FTAnalyzer.Forms
             UpdateGridWithFilters(false);
         }
 
-        private void SetStatusText()
+        void SetStatusText()
         {
             int gedcom = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.GEDCOM_USER));
             int found = FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.MATCHED));
@@ -81,7 +81,7 @@ namespace FTAnalyzer.Forms
             txtLocations.Text = statusText;
         }
 
-        private void SetupFilterMenu()
+        void SetupFilterMenu()
         {
             foreach (KeyValuePair<FactLocation.Geocode, string> item in FactLocation.Geocodes.OrderBy(x => x.Value))
             {
@@ -124,7 +124,7 @@ namespace FTAnalyzer.Forms
                 mnuSelectClear.Text = "Select All";
         }
 
-        private bool AllFiltersActive(bool GoogleOnly)
+        bool AllFiltersActive(bool GoogleOnly)
         {
             int count = 0;
             int menus = 0;
@@ -166,9 +166,9 @@ namespace FTAnalyzer.Forms
             return count == menus;
         }
 
-        private void UpdateGridWithFilters(bool keepCurrentLocation)
+        void UpdateGridWithFilters(bool keepCurrentLocation)
         {
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
             FactLocation loc = dgLocations.CurrentRow != null ? dgLocations.CurrentRow.DataBoundItem as FactLocation : null;
             SortableBindingList<IDisplayGeocodedLocation> filteredLocations = ApplyFilters(null);
             // store sort order
@@ -183,10 +183,10 @@ namespace FTAnalyzer.Forms
             txtLocations.Text = statusText + " Displaying: " + dgLocations.RowCount + ". ";
             if(loc != null) 
                 SelectLocation(loc);
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
-        private bool StatusFilter(IDisplayGeocodedLocation loc)
+        bool StatusFilter(IDisplayGeocodedLocation loc)
         {
             bool result = false;
             foreach (ToolStripMenuItem menu in mnuGeocodeStatus.DropDownItems)
@@ -200,7 +200,7 @@ namespace FTAnalyzer.Forms
             return result;
         }
 
-        private SortableBindingList<IDisplayGeocodedLocation> ApplyFilters(FactLocation mustDisplay)
+        SortableBindingList<IDisplayGeocodedLocation> ApplyFilters(FactLocation mustDisplay)
         {
             if (AllFiltersActive(false))
                 return new SortableBindingList<IDisplayGeocodedLocation>(locations);
@@ -233,7 +233,7 @@ namespace FTAnalyzer.Forms
             return new SortableBindingList<IDisplayGeocodedLocation>(results);
         }
 
-        private void CheckGoogleStatusCodes(List<IDisplayGeocodedLocation> input)
+        void CheckGoogleStatusCodes(List<IDisplayGeocodedLocation> input)
         {
             noneOfTheAbove = new HashSet<string>();
             Dictionary<string, List<IDisplayGeocodedLocation>> results = new Dictionary<string, List<IDisplayGeocodedLocation>>();
@@ -271,13 +271,13 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void MenuGeocode_CheckedChanged(object sender, EventArgs e)
+        void MenuGeocode_CheckedChanged(object sender, EventArgs e)
         {
             if (!refreshingMenus)
                 UpdateGeocodeStatusMenus();
         }
 
-        private void UpdateGeocodeStatusMenus()
+        void UpdateGeocodeStatusMenus()
         {
             foreach (ToolStripMenuItem menu in mnuGeocodeStatus.DropDownItems)
             {
@@ -286,13 +286,13 @@ namespace FTAnalyzer.Forms
             UpdateGridWithFilters(false);
         }
 
-        private void MenuResultType_CheckedChanged(object sender, EventArgs e)
+        void MenuResultType_CheckedChanged(object sender, EventArgs e)
         {
             if (!refreshingMenus)
                 UpdateGoogleStatusMenus();
         }
 
-        private void UpdateGoogleStatusMenus()
+        void UpdateGoogleStatusMenus()
         {
             foreach (ToolStripMenuItem menu in mnuFoundResultType.DropDownItems)
             {
@@ -301,7 +301,7 @@ namespace FTAnalyzer.Forms
             UpdateGridWithFilters(false);
         }
 
-        private void MnuSelectClear_Click(object sender, EventArgs e)
+        void MnuSelectClear_Click(object sender, EventArgs e)
         {
             refreshingMenus = true;
             ToolStripMenuItem places = mnuFoundResultType.DropDownItems["Places"] as ToolStripMenuItem;
@@ -328,7 +328,7 @@ namespace FTAnalyzer.Forms
             UpdateGoogleStatusMenus();
         }
 
-        private void MnuStatusSelectAll_Click(object sender, EventArgs e)
+        void MnuStatusSelectAll_Click(object sender, EventArgs e)
         {
             refreshingMenus = true;
             if (mnuStatusSelectAll.Text.Equals("Clear All"))
@@ -348,43 +348,43 @@ namespace FTAnalyzer.Forms
             UpdateGeocodeStatusMenus();
         }
 
-        private void ResetTable()
+        void ResetTable()
         {
             dgLocations.Sort(dgLocations.Columns["GeocodedLocation"], ListSortDirection.Ascending);
         }
 
-        private void PrintToolStripButton_Click(object sender, EventArgs e)
+        void PrintToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintReport("Locations report");
         }
 
-        private void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
+        void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintPreviewReport();
         }
 
-        private void Facts_TextChanged(object sender, EventArgs e)
+        void Facts_TextChanged(object sender, EventArgs e)
         {
             reportFormHelper.PrintTitle = this.Text;
         }
 
-        private void MnuExportToExcel_Click(object sender, EventArgs e)
+        void MnuExportToExcel_Click(object sender, EventArgs e)
         {
             reportFormHelper.DoExportToExcel<IDisplayGeocodedLocation>();
         }
 
-        private void MnuResetColumns_Click(object sender, EventArgs e)
+        void MnuResetColumns_Click(object sender, EventArgs e)
         {
             reportFormHelper.ResetColumnLayout("GeocodeLocationsColumns.xml");
         }
 
-        private void MnuSaveColumnLayout_Click(object sender, EventArgs e)
+        void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("GeocodeLocationsColumns.xml");
             MessageBox.Show("Form Settings Saved", "Geocode Locations");
         }
 
-        private void DgLocations_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        void DgLocations_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -393,7 +393,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void DgLocations_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        void DgLocations_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (!ft.Geocoding && e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -403,7 +403,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void MnuEditLocation_Click(object sender, EventArgs e)
+        void MnuEditLocation_Click(object sender, EventArgs e)
         {
             if (!ft.Geocoding)
             {
@@ -413,7 +413,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void EditLocation(FactLocation loc)
+        void EditLocation(FactLocation loc)
         {
             EditLocation editform = new EditLocation(loc);
             this.Cursor = Cursors.Default;
@@ -427,13 +427,13 @@ namespace FTAnalyzer.Forms
             dgLocations.Refresh();
         }
 
-        private void MnuCopyLocation_Click(object sender, EventArgs e)
+        void MnuCopyLocation_Click(object sender, EventArgs e)
         {
             CopyLocation = dgLocations.CurrentRow.DataBoundItem as FactLocation;
             mnuPasteLocation.Enabled = true;
         }
 
-        private void MnuPasteLocation_Click(object sender, EventArgs e)
+        void MnuPasteLocation_Click(object sender, EventArgs e)
         {
             if (CopyLocation.IsGeoCoded(false))
             {
@@ -575,7 +575,7 @@ namespace FTAnalyzer.Forms
                                      loc.GeocodeStatus == FactLocation.Geocode.LEVEL_MISMATCH ||
                                      loc.GeocodeStatus == FactLocation.Geocode.OS_50KPARTIAL)))
                             {
-                                log.Info("Searching Google for '" + loc.GoogleFixed + "' original text was '" + loc.GEDCOMLocation + "'.");
+//                                log.Info("Searching Google for '" + loc.GoogleFixed + "' original text was '" + loc.GEDCOMLocation + "'.");
                                 res = SearchGoogle(loc.GoogleFixed);
                             }
                             if (res != null && ((res.Status == "OK" && res.Results.Length > 0) || res.Status == "ZERO_RESULTS"))
@@ -608,8 +608,8 @@ namespace FTAnalyzer.Forms
                                                 loc.ViewPort = MapTransforms.TransformViewport(viewport);
                                                 if (!result.PartialMatch)
                                                 {
-                                                    if (checkresultsPass == 2)
-                                                        log.Info("Geocoding found a match with " + loc.GEDCOMLocation + " previously failed with " + loc.GoogleFixed);
+                                                    //if (checkresultsPass == 2)
+                                                        //log.Info("Geocoding found a match with " + loc.GEDCOMLocation + " previously failed with " + loc.GoogleFixed);
                                                     checkresultsPass = 3; // force exit
                                                     break; // we've got a good match so exit
                                                 }
@@ -621,7 +621,7 @@ namespace FTAnalyzer.Forms
                                                 checkresultsPass++;  // if we have the same string skip checking GEDCOM location
                                             else
                                             {
-                                                log.Info("Searching Google for original text '" + loc.GEDCOMLocation + "'.");
+                                                //log.Info("Searching Google for original text '" + loc.GEDCOMLocation + "'.");
                                                 res = SearchGoogle(loc.GEDCOMLocation);
                                             }
                                         }
@@ -693,7 +693,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private GeoResponse SearchGoogle(string location)
+        GeoResponse SearchGoogle(string location)
         {
             // This call is the real workhorse that does the actual Google lookup
             GeoResponse res = GoogleMap.GoogleGeocode(location, 8);
@@ -706,7 +706,7 @@ namespace FTAnalyzer.Forms
             return res;
         }
 
-        private void UpdateDatabase(FactLocation loc, bool inDatabase)
+        void UpdateDatabase(FactLocation loc, bool inDatabase)
         {
             if (inDatabase)
                 DatabaseHelper.Instance.UpdateGeocode(loc);
@@ -715,28 +715,28 @@ namespace FTAnalyzer.Forms
             RefreshTreeNode(loc);
         }
 
-        private void RefreshTreeNode(FactLocation loc)
+        void RefreshTreeNode(FactLocation loc)
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                this.Invoke(new Action(() => RefreshTreeNode(loc)));
+                Invoke(new Action(() => RefreshTreeNode(loc)));
                 return;
             }
             TreeViewHandler.Instance.RefreshTreeNodeIcon(loc);
         }
 
-        private void MnuGeocodeLocations_Click(object sender, EventArgs e)
+        void MnuGeocodeLocations_Click(object sender, EventArgs e)
         {
             StartGoogleGeoCoding(false);
         }
         #endregion
 
-        private void UpdateChangesWithoutAskingToolStripMenuItem_Click(object sender, EventArgs e)
+        void UpdateChangesWithoutAskingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.UserAppDataRegistry.SetValue("Ask to update database", updateChangesWithoutAskingToolStripMenuItem.Checked);
         }
 
-        private void DgLocations_CellToolTipTextNeeded_1(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        void DgLocations_CellToolTipTextNeeded_1(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
@@ -915,7 +915,7 @@ namespace FTAnalyzer.Forms
                     {
                         loc.FoundLocation = result.ReturnAddress;
                         loc.FoundResultType = resultTypes;
-                        log.Info("Decided to use: Pixelsize: " + loc.PixelSize + ", level: " + foundLevel + "=" + result.ReturnAddress + ". Type: " + resultTypes);
+                        //log.Info("Decided to use: Pixelsize: " + loc.PixelSize + ", level: " + foundLevel + "=" + result.ReturnAddress + ". Type: " + resultTypes);
                         break;
                     }
                 }
@@ -944,11 +944,11 @@ namespace FTAnalyzer.Forms
 
         private static void LogResults(FactLocation loc, GeoResponse res)
         {
-            log.Info("Pixelsize: " + loc.PixelSize + ", Found " + res.Results.Count() + " results for " + loc.ToString());
-            foreach (GeoResponse.CResult result in res.Results)
-            {
-                log.Info("Level: " + GoogleMap.GetFactLocationType(result.Types, loc) + "=" + result.ReturnAddress + ". Type: " + EnhancedTextInfo.ConvertStringArrayToString(result.Types));
-            }
+            //log.Info("Pixelsize: " + loc.PixelSize + ", Found " + res.Results.Count() + " results for " + loc.ToString());
+            //foreach (GeoResponse.CResult result in res.Results)
+            //{
+            //    log.Info("Level: " + GoogleMap.GetFactLocationType(result.Types, loc) + "=" + result.ReturnAddress + ". Type: " + EnhancedTextInfo.ConvertStringArrayToString(result.Types));
+            //}
         }
         #endregion
 
@@ -1048,7 +1048,7 @@ namespace FTAnalyzer.Forms
             }
             catch (Exception e)
             {
-                log.Warn("Failed to load OS50k Gazetteer error was : " + e.Message);
+                //log.Warn("Failed to load OS50k Gazetteer error was : " + e.Message);
                 MessageBox.Show("Failed to load OS50k Gazetteer error was : " + e.Message);
             }
             OS50kDictionary = null; // only reach here on exception so discard partially loaded file
@@ -1208,7 +1208,7 @@ namespace FTAnalyzer.Forms
                 return true;
             if (CheckLocationMatch(loc.SubRegion.ToLower(), loc))
                 return true;
-            log.Info("OS Geocoder Failed to match: " + loc.ToString());
+            //log.Info("OS Geocoder Failed to match: " + loc.ToString());
             return false;
         }
 
@@ -1226,7 +1226,7 @@ namespace FTAnalyzer.Forms
                         SetOSGeocoding(loc, results[0], FactLocation.ADDRESS, true);
                     return true;
                 }
-                log.Info("OS Geocoder Fuzzy match Failed to match: " + loc.ToString());
+                //log.Info("OS Geocoder Fuzzy match Failed to match: " + loc.ToString());
             }
             return false;
         }
@@ -1253,7 +1253,7 @@ namespace FTAnalyzer.Forms
             if (selected != null)
             {
                 SetOSGeocoding(loc, selected, FactLocation.ADDRESS, true);
-                log.Info("Accepted " + selected.ToString() + " for " + loc.ToString() + ". Distance: " + minDistance + " Level: " + foundLevel);
+                //log.Info("Accepted " + selected.ToString() + " for " + loc.ToString() + ". Distance: " + minDistance + " Level: " + foundLevel);
             }
             return selected != null;
         }

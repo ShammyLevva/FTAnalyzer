@@ -1,4 +1,4 @@
-﻿namespace FTAnalyzer.Forms.Controls
+﻿namespace FTAnalyzer.Controls
 {
     partial class DateSliders
     {
