@@ -83,10 +83,6 @@ namespace FactDateTest
             target = new FactDate("INT 4 OCT 1723 4DA 8MNTH 1723");
             Assert.AreEqual(new DateTime(1723, 10, 4), target.StartDate);
             Assert.AreEqual(new DateTime(1723, 10, 4), target.EndDate);
-
-            target = new FactDate("BET 5/6/2018 AND 7/6/2018");
-            Assert.AreEqual(new DateTime(2018, 6, 5), target.StartDate);
-            Assert.AreEqual(new DateTime(2018, 6, 7), target.EndDate);
         }
 
         /// <summary>
@@ -130,6 +126,10 @@ namespace FactDateTest
             target = new FactDate("5/6/2018");
             Assert.AreEqual(new DateTime(2018, 6, 5), target.StartDate);
             Assert.AreEqual(new DateTime(2018, 6, 5), target.EndDate);
+
+            target = new FactDate("BET 5/6/2018 AND 7/6/2018");
+            Assert.AreEqual(new DateTime(2018, 6, 5), target.StartDate);
+            Assert.AreEqual(new DateTime(2018, 6, 7), target.EndDate);
 
             test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.MM_DD_YYYY, "mm/dd/yyyy", "/");
             target = new FactDate("5/6/2018");
@@ -215,6 +215,10 @@ namespace FactDateTest
             Assert.AreEqual(new DateTime(1918, 4, 30), target.EndDate);
 
             target = new FactDate("1914 - 1918");
+            Assert.AreEqual(new DateTime(1914, 1, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1918, 12, 31), target.EndDate);
+
+            target = new FactDate("Bet. 1914-1918");
             Assert.AreEqual(new DateTime(1914, 1, 1), target.StartDate);
             Assert.AreEqual(new DateTime(1918, 12, 31), target.EndDate);
 
