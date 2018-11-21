@@ -438,6 +438,10 @@ namespace FactDateTest
             target = new FactDate("AFT 19 Nov 1966");
             Assert.AreEqual(new DateTime(1966, 11, 20), target.StartDate);
             Assert.AreEqual(FactDate.MAXDATE, target.EndDate);
+            
+            target = new FactDate("AFT 19Ÿ©Nov 1966");
+            Assert.AreEqual(new DateTime(1966, 11, 20), target.StartDate);
+            Assert.AreEqual(FactDate.MAXDATE, target.EndDate);
             return target;
         }
 
