@@ -1,3 +1,7 @@
+#### Updated Release Version 7.0.3.1, 21th November 2018  
+**Bugfixes**  
+Fix issue with printing not wrapping lines
+
 #### Updated Release Version 7.0.3.0, 19th November 2018  
 **Updates**  
 Better support for accented characters in different codesets  
