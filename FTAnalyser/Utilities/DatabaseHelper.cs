@@ -23,10 +23,9 @@ namespace FTAnalyzer.Utilities
         static SQLiteConnection InstanceConnection { get; set; }
         Version ProgramVersion { get; set; }
         bool restoring;
-        static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         #region Constructor/Destructor
-        private DatabaseHelper()
+        DatabaseHelper()
         {
             DatabasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer");
             CurrentFilename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\FTA-RestoreTemp.s3db");
@@ -84,7 +83,7 @@ namespace FTAnalyzer.Utilities
             }
             catch (Exception ex)
             {
-                log.Error("Error opening database. Error is :" + ex.Message);
+//                log.Error("Error opening database. Error is :" + ex.Message);
                 MessageBox.Show("Error opening database. Error is :" + ex.Message, "FTAnalyzer");
             }
         }
@@ -100,9 +99,9 @@ namespace FTAnalyzer.Utilities
                 if (dbVersion < programVersion)
                     UpgradeDatabase(dbVersion);
             }
-            catch (SQLiteException e)
+            catch (SQLiteException)
             {
-                log.Debug("Caught Exception in CheckDatabaseVersion " + e.Message);
+//                log.Debug("Caught Exception in CheckDatabaseVersion " + e.Message);
                 UpgradeDatabase(new Version("0.0.0.0"));
             }
         }
@@ -120,9 +119,9 @@ namespace FTAnalyzer.Utilities
                 }
                 InstanceConnection.Close();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                log.Error("Error in GetDatabaseVersion " + e.Message);
+                //log.Error("Error in GetDatabaseVersion " + e.Message);
             }
             Version dbVersion = db == null ? new Version("0.0.0.0") : new Version(db);
             return dbVersion;

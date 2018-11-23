@@ -327,7 +327,7 @@ namespace FTAnalyzer.Forms
             string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
             Individual ind = ft.GetIndividual(indID);
             if (ind != null)
-                viewNotesToolStripMenuItem.Enabled = ind.HasNotes == "Yes";
+                viewNotesToolStripMenuItem.Enabled = ind.HasNotes;
         }
 
         void ViewNotesToolStripMenuItem_Click(object sender, EventArgs e)

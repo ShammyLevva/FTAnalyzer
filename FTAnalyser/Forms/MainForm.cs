@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.0.3.1";
+        public static string VERSION = "7.0.3.2";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -574,7 +574,7 @@ namespace FTAnalyzer
         {
             var ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
             if (ind != null)
-                viewNotesToolStripMenuItem.Enabled = ind.HasNotes == "Yes";
+                viewNotesToolStripMenuItem.Enabled = ind.HasNotes;
         }
 
         void ViewNotesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -736,7 +736,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 DataError error = (DataError)dgDataErrors.CurrentRow.DataBoundItem;
-                if (error.IsFamily == "Yes")
+                if (error.IsFamily)
                     ShowFamilyFacts((string)dgDataErrors.CurrentRow.Cells["Reference"].Value);
                 else
                     ShowFacts((string)dgDataErrors.CurrentRow.Cells["Reference"].Value);
@@ -2808,7 +2808,7 @@ namespace FTAnalyzer
         {
             Individual ind = GetContextIndividual(sender);
             if (ind != null)
-                mnuViewNotes.Enabled = ind.HasNotes == "Yes";
+                mnuViewNotes.Enabled = ind.HasNotes;
             else
                 e.Cancel = true;
         }

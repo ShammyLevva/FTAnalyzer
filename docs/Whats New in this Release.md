@@ -1,3 +1,7 @@
+#### Updated Release Version 7.0.3.2, 23th November 2018  
+**Bugfixes**  
+Fix issue with facts form crashing due to leak of Mac code into windows code
+
 #### Updated Release Version 7.0.3.1, 21th November 2018  
 **Bugfixes**  
 Fix issue with printing not wrapping lines

@@ -14,7 +14,6 @@ namespace FTAnalyzer.Forms
 {
     public partial class Facts : Form
     {
-        private static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public Individual Individual { get; private set; }
         public Family Family { get; private set; }
         private FamilyTree ft = FamilyTree.Instance;
@@ -180,15 +179,15 @@ namespace FTAnalyzer.Forms
                     formatter.Serialize(stream, IgnoreList);
                 }
             }
-            catch (Exception e)
+            catch (Exception )
             {
-                log.Error("Error " + e.Message + " writing IgnoreList.xml");
+                //log.Error("Error " + e.Message + " writing IgnoreList.xml");
             }
         }
 
         public void DeserializeIgnoreList()
         {
-            log.Debug("FamilyTree.DeserializeIgnoreList");
+            //log.Debug("FamilyTree.DeserializeIgnoreList");
             IgnoreList = new List<string>();
             try
             {
@@ -202,9 +201,9 @@ namespace FTAnalyzer.Forms
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception )
             {
-                log.Error("Error " + e.Message + " reading IgnoreList.xml");
+               //log.Error("Error " + e.Message + " reading IgnoreList.xml");
             }
         }
 
