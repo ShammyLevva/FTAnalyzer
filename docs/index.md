@@ -2,7 +2,7 @@ Family Tree Analyzer
 ====================
 
 #### To install the latest Windows version click [here.](http://ftanalyzer.com/install/)  
-If you have a Mac click [here.](http://mac.ftanalyzer.com)
+#### If you have a Mac click [here.](http://mac.ftanalyzer.com)  
 
 Windows 10 & 8.1 installs may require you to click More Info and accept the certificate the first time you run the app. 
 
@@ -70,3 +70,6 @@ Similarly on the regular census reports clicking on the name of a person to find
 ### Notes
 
 All feedback welcome. Please note this is very much a work in progress, it works for my own Gedcom file however there is no guarantee that other ways of recording data will be consistently handled. If you wish to post error logs and log issues please include a sample gedcom file that demonstrates the problem you are having. I'd like to ensure that it works consistently for every user. Please also note that there is a bias in the program for UK searching as that is where my Ancestors are from. So some defaults may need to be tweaked or turned into user configurable options in later versions. Again let me know what works and what causes you problems.
+
+
+[Privacy Policy](http://www.ftanalyzer.com/privacy)
