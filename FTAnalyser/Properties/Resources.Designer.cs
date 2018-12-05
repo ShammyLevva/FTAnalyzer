@@ -65,17 +65,8 @@ namespace FTAnalyzer.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap flogo_rgb_hex_brc_site_250 {
             get {
-                object obj = ResourceManager.GetObject("flogo_rgb_hex-brc-site-250", resourceCulture);
+                object obj = ResourceManager.GetObject("flogo_rgb_hex_brc_site_250", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string FTA_0002 {
-            get {
-                return ResourceManager.GetString("FTA_0002", resourceCulture);
             }
         }
         
