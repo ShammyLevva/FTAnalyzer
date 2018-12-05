@@ -6,7 +6,7 @@ Family Tree Analyzer
 
 Windows 10 & 8.1 installs may require you to click More Info and accept the certificate the first time you run the app. 
 
-Installation is simple with the click once installer. Click the download button and run the application. This will then ask you to allow it to run once allowed it downloads and installs the application for you.  
+Installation is simple with the click once installer. Click the download button and run the application. This will then ask you to allow it to run, once allowed it downloads and installs the application for you.  
   
 **NB. This program will require the Microsoft .Net 4.7.2 to have been installed.** This is usually present on most windows machines from Windows 7 onwards assuming that your machine is patched with the all the Microsoft updates. If not it can be downloaded free from Microsoft at [https://support.microsoft.com/en-gb/help/4054531/microsoft-net-framework-4-7-2-web-installer-for-windows](https://support.microsoft.com/en-gb/help/4054531/microsoft-net-framework-4-7-2-web-installer-for-windows) and clicking the download link for your machine. Once downloaded simply run the file to install.
 
