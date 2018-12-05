@@ -22,7 +22,7 @@ The [documentation](./Documentation) is similarly in need of some updating. It's
 
 ### Facebook, Support Site & Twitter
 
-The [Support website](facebook.com/FTAnalyzer) is hosted as a page on Facebook. The [User Group](facebook.com/groups/ftanalyzer) is also on Facebook. The Twitter account is @FTAnalyzer note I don't check twitter very often so easiest is to raise an issue on the [issues site](www.ftanalyzer.com/issues)
+The [Support website](https://www.facebook.com/FTAnalyzer) is hosted as a page on Facebook. The [User Group](https://www.facebook.com/groups/ftanalyzer) is also on Facebook. The Twitter account is @FTAnalyzer note I don't check twitter very often so easiest is to raise an issue on the [issues site](http://www.ftanalyzer.com/issues)
 
 ### Initial Features
 
