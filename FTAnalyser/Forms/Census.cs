@@ -20,10 +20,10 @@ namespace FTAnalyzer.Forms
         //private int numFamilies;
         public CensusDate CensusDate { get; private set; }
         public int RecordCount { get; private set; }
-        private string censusCountry;
-        private bool CensusDone;
-        private ReportFormHelper reportFormHelper;
-        private FamilyTree ft;
+        string censusCountry;
+        bool CensusDone;
+        ReportFormHelper reportFormHelper;
+        FamilyTree ft;
 
         public bool LostCousins { get; private set; }
 
@@ -35,11 +35,11 @@ namespace FTAnalyzer.Forms
             ft = FamilyTree.Instance;
             reportFormHelper = new ReportFormHelper(this, "Census Report", dgCensus, this.ResetTable, "Census");
 
-            this.LostCousins = false;
-            this.CensusDate = censusDate;
-            this.censusCountry = CensusDate.Country;
-            this.RecordCount = 0;
-            this.CensusDone = censusDone;
+            LostCousins = false;
+            CensusDate = censusDate;
+            censusCountry = CensusDate.Country;
+            RecordCount = 0;
+            CensusDone = censusDone;
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
             if (defaultProvider == null)
                 defaultProvider = "FamilySearch";
@@ -56,7 +56,7 @@ namespace FTAnalyzer.Forms
             SetupDataGridView(CensusDone, individuals);
         }
 
-        private List<CensusIndividual> FilterDuplicateIndividuals(List<CensusIndividual> individuals)
+        List<CensusIndividual> FilterDuplicateIndividuals(List<CensusIndividual> individuals)
         {
             List<CensusIndividual> result = individuals.Filter(i => i.FamilyMembersCount > 1).ToList();
             HashSet<string> ids = new HashSet<string>(result.Select(i => i.IndividualID));
@@ -71,7 +71,7 @@ namespace FTAnalyzer.Forms
 
         public void SetupLCCensus(Predicate<CensusIndividual> relationFilter, bool showEnteredLostCousins)
         {
-            this.LostCousins = true;
+            LostCousins = true;
             Predicate<CensusIndividual> predicate;
             if (showEnteredLostCousins)
                 predicate = x => x.IsLostCousinsEntered(CensusDate, false);
@@ -84,7 +84,7 @@ namespace FTAnalyzer.Forms
             SetupDataGridView(true, individuals);
         }
 
-        private void SetupDataGridView(bool censusDone, List<CensusIndividual> individuals)
+        void SetupDataGridView(bool censusDone, List<CensusIndividual> individuals)
         {
             dgCensus.DataSource = new SortableBindingList<IDisplayCensus>(individuals);
             if (!censusDone)
@@ -97,7 +97,7 @@ namespace FTAnalyzer.Forms
                              numFamilies + " Families. " + CensusProviderText();
         }
 
-        private void ResetTable()
+        void ResetTable()
         {
             dgCensus.Sort(dgCensus.Columns["Position"], ListSortDirection.Ascending);
             dgCensus.Sort(dgCensus.Columns["FamilyID"], ListSortDirection.Ascending);
@@ -105,7 +105,7 @@ namespace FTAnalyzer.Forms
             StyleRows();
         }
 
-        private void StyleRows()
+        void StyleRows()
         {
             string currentRowText = "";
             bool highlighted = true;
@@ -131,28 +131,25 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private string GetTooltipText(DataGridViewCellStyle style)
+        string GetTooltipText(DataGridViewCellStyle style)
         {
             string result;
             if (style.Font.Bold && style.ForeColor == Color.Red)
-                result = "This direct ancestor is known to be alive on this census.";
+                result = "Bold Red: This direct ancestor is known to be alive on this census.";
             else if (style.Font.Bold)
-                result = "This individual is known to be alive on this census.\n";
+                result = "Bold: This individual is known to be alive on this census.\n";
             else if (style.ForeColor == Color.Red)
-                result = "This is a direct ancestor that may be alive on this census.";
+                result = "Red: This is a direct ancestor that may be alive on this census.";
             else
                 result = "This individual may be alive on this census.";
-            return result + "\n" + CensusProviderText();
+            return $"{result}\n{CensusProviderText()}";
         }
 
-        private string CensusProviderText()
-        {
-            if (CensusDate.VALUATIONROLLS.Contains(CensusDate))
-                return string.Empty;
-            return "Double click to search " + cbCensusSearchProvider.Text + " for this person's census record. Shift Double click to display their facts.";
-        }
+        string CensusProviderText() => CensusDate.VALUATIONROLLS.Contains(CensusDate)
+                ? string.Empty
+                : $"Double click to search {cbCensusSearchProvider.Text} for this person's census record. Shift Double click to display their facts.";
 
-        private void DgCensus_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        void DgCensus_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -166,39 +163,24 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private class IDisplayCensusComparerWrapper : Comparer<IDisplayCensus>
+        class IDisplayCensusComparerWrapper : Comparer<IDisplayCensus>
         {
             private Comparer<CensusIndividual> comparer;
 
-            public IDisplayCensusComparerWrapper(Comparer<CensusIndividual> comp)
-            {
-                this.comparer = comp;
-            }
+            public IDisplayCensusComparerWrapper(Comparer<CensusIndividual> comp) => comparer = comp;
 
-            public override int Compare(IDisplayCensus x, IDisplayCensus y)
-            {
-                return comparer.Compare((CensusIndividual)x, (CensusIndividual)y);
-            }
+            public override int Compare(IDisplayCensus x, IDisplayCensus y) => comparer.Compare((CensusIndividual)x, (CensusIndividual)y);
         }
 
-        private void PrintToolStripButton_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.PrintReport("Census Report");
-        }
+        void PrintToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintReport("Census Report");
 
-        private void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.PrintPreviewReport();
-        }
+        void PrintPreviewToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintPreviewReport();
 
-        private void Census_TextChanged(object sender, EventArgs e)
-        {
-            reportFormHelper.PrintTitle = this.Text;
-        }
+        void Census_TextChanged(object sender, EventArgs e) => reportFormHelper.PrintTitle = Text;
 
-        private void TsBtnMapLocation_Click(object sender, EventArgs e)
+        void TsBtnMapLocation_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
             CensusIndividual ds = dgCensus.CurrentRow == null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
             FactLocation loc = ds?.CensusLocation;
             if (loc != null)
@@ -207,14 +189,14 @@ namespace FTAnalyzer.Forms
                 if (frmGoogleMap.SetLocation(loc, loc.Level))
                     frmGoogleMap.Show();
                 else
-                    MessageBox.Show("Unable to find location : " + loc.ToString(), "FTAnalyzer");
+                    MessageBox.Show($"Unable to find location : {loc.ToString()}", "FTAnalyzer");
             }
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
-        private void TsBtnMapOSLocation_Click(object sender, EventArgs e)
+        void TsBtnMapOSLocation_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
             CensusIndividual ds = dgCensus.CurrentRow == null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
             FactLocation loc = ds?.CensusLocation;
             if (loc != null)
@@ -223,12 +205,12 @@ namespace FTAnalyzer.Forms
                 if (frmBingMap.SetLocation(loc, loc.Level))
                     frmBingMap.Show();
                 else
-                    MessageBox.Show("Unable to find location : " + loc.ToString(), "FTAnalyzer");
+                    MessageBox.Show($"Unable to find location : {loc.ToString()}", "FTAnalyzer");
             }
             Cursor = Cursors.Default;
         }
 
-        private void DgCensus_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        void DgCensus_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && dgCensus.CurrentRow != null && !CensusDate.VALUATIONROLLS.Contains(CensusDate))
             {
@@ -254,40 +236,28 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void CbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
+        void CbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
             Application.UserAppDataRegistry.SetValue("Default Search Provider", cbCensusSearchProvider.SelectedItem.ToString());
             dgCensus.Refresh(); // force update of tooltips
             dgCensus.Focus();
         }
 
-        private void MnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
+        void MnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("CensusColumns.xml");
             MessageBox.Show("Form Settings Saved", "Census");
         }
 
-        private void MnuResetCensusColumns_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.ResetColumnLayout("CensusColumns.xml");
-        }
+        void MnuResetCensusColumns_Click(object sender, EventArgs e) => reportFormHelper.ResetColumnLayout("CensusColumns.xml");
 
-        private void MnuExportToExcel_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.DoExportToExcel<IDisplayCensus>();
-        }
+        void MnuExportToExcel_Click(object sender, EventArgs e) => reportFormHelper.DoExportToExcel<IDisplayCensus>();
 
-        private void DgCensus_ColumnSortModeChanged(object sender, DataGridViewColumnEventArgs e)
-        {
-            StyleRows();
-        }
+        void DgCensus_ColumnSortModeChanged(object sender, DataGridViewColumnEventArgs e) => StyleRows();
 
-        private void DgCensus_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            StyleRows();
-        }
+        void DgCensus_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e) => StyleRows();
 
-        private void MnuViewFacts_Click(object sender, EventArgs e)
+        void MnuViewFacts_Click(object sender, EventArgs e)
         {
             if (dgCensus.CurrentRow != null)
             {
@@ -298,30 +268,18 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void DgCensus_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        void DgCensus_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 dgCensus.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
         }
 
-        private void RefreshCensusReferences(object sender, EventArgs e)
-        {
-            dgCensus.Refresh();
-        }
+        void RefreshCensusReferences(object sender, EventArgs e) => dgCensus.Refresh();
 
-        private void Census_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Dispose();
-        }
+        void Census_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        private void BtnHelp_Click(object sender, EventArgs e)
-        {
-            HttpUtility.VisitWebsite("http://ftanalyzer.com/The%20Census%20Tab");
-        }
+        void BtnHelp_Click(object sender, EventArgs e) => HttpUtility.VisitWebsite("http://ftanalyzer.com/The%20Census%20Tab");
 
-        private void Census_Load(object sender, EventArgs e)
-        {
-            SpecialMethods.SetFonts(this);
-        }
+        void Census_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }
 }
