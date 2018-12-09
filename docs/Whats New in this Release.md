@@ -1,3 +1,13 @@
+#### Updated Release Version 7.0.4.0 9th December 2018  
+**Updates**  
+Add colour note to tooltip to make it clearer what the status is.  
+Add support for Census UK XXXX custom fact formats  
+Change way UTF8 files handled  
+
+**Bugfixes**  
+Parental relationships were only using relationship from first child  
+Update Loading to cope with crash on bad lines  
+
 #### Updated Release Version 7.0.3.2, 23th November 2018  
 **Bugfixes**  
 Fix issue with facts form crashing due to leak of Mac code into windows code
