@@ -1,16 +1,9 @@
-﻿using System;
+﻿using FTAnalyzer.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using Printing.DataGridViewPrint.Tools;
-using FTAnalyzer.Utilities;
-using System.Web;
-using System.Diagnostics;
-using System.IO;
 using static FTAnalyzer.ColourValues;
 
 namespace FTAnalyzer.Forms
@@ -19,7 +12,7 @@ namespace FTAnalyzer.Forms
     {
         private ReportFormHelper reportFormHelper;
 
-        private Dictionary<ColourValues.BMDColour, DataGridViewCellStyle> styles;
+        private Dictionary<BMDColour, DataGridViewCellStyle> styles;
         private int birthColumnIndex;
         private int burialColumnIndex;
         private SortableBindingList<IDisplayColourBMD> reportList;
@@ -31,7 +24,7 @@ namespace FTAnalyzer.Forms
             dgBMDReportSheet.AutoGenerateColumns = false;
 
             this.reportList = new SortableBindingList<IDisplayColourBMD>(reportList);
-            reportFormHelper = new ReportFormHelper(this, "Colour BMD Report", dgBMDReportSheet, this.ResetTable, "Colour BMD");
+            reportFormHelper = new ReportFormHelper(this, "Colour BMD Report", dgBMDReportSheet, ResetTable, "Colour BMD");
             ExtensionMethods.DoubleBuffered(dgBMDReportSheet, true);
             
             boldFont = new Font(dgBMDReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
