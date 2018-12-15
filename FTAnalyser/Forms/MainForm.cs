@@ -365,6 +365,7 @@ namespace FTAnalyzer
             mnuIndividualsToExcel.Enabled = enabled;
             mnuFamiliesToExcel.Enabled = enabled;
             mnuSourcesToExcel.Enabled = enabled;
+            mnuDataErrorsToExcel.Enabled = enabled;
             mnuLooseBirthsToExcel.Enabled = enabled;
             mnuLooseDeathsToExcel.Enabled = enabled;
             mnuChildAgeProfiles.Enabled = enabled;

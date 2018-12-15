@@ -1,6 +1,17 @@
 #### Updated Release Version 7.0.5.0 15th December 2018  
 **Updates**  
-
+Added a Data Errors export to Excel feature  
+Added support for Family Historian _PLAC codes  
+**Bugfixes**  
+Add fix for hyphenated capitalised shires  
+Add recognition of UK/GB countries with ,UK and ,GB at end  
+Duplicate fact checks for unknown facts now look at original tag  
+Duplicate fact checks no longer treats shared facts and individual facts as duplicates  
+Shared surname errors now don't error if wife's natural father had that surname as that isn't an error  
+No longer reports bad lines twice if stripping bad line breaks  
+Dots in dates now correctly stripped  
+Between dates with just day and month wasn't working correctly  
+Dates that are formatted correctly but are wrong eg: 29 FEB 1735 now highlighted as error  
 
 #### Updated Release Version 7.0.4.0 9th December 2018  
 **Updates**  
