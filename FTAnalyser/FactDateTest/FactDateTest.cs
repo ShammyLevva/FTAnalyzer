@@ -79,10 +79,16 @@ namespace FactDateTest
             Assert.AreEqual(new DateTime(966, 1, 1), target.StartDate);
             Assert.AreEqual(new DateTime(966, 12, 31), target.EndDate);
 
+            target = new FactDate("BET 2 JAN AND 2 DEC 1743");
+            Assert.AreEqual(new DateTime(1743, 1, 2), target.StartDate);
+            Assert.AreEqual(new DateTime(1743, 12, 2), target.EndDate);
+
             // interpreted dates
             target = new FactDate("INT 4 OCT 1723 4DA 8MNTH 1723");
             Assert.AreEqual(new DateTime(1723, 10, 4), target.StartDate);
             Assert.AreEqual(new DateTime(1723, 10, 4), target.EndDate);
+
+            
 
             // 29th Feb
             try

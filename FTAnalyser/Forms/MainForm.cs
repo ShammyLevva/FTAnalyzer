@@ -3248,10 +3248,5 @@ namespace FTAnalyzer
             HttpUtility.VisitWebsite("https://www.facebook.com/groups/ftanalyzer");
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.FacebookUsersEvent);
         }
-
-        private void mnuExport_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

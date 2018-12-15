@@ -651,7 +651,6 @@
             this.mnuExport.Name = "mnuExport";
             this.mnuExport.Size = new System.Drawing.Size(52, 20);
             this.mnuExport.Text = "Export";
-            this.mnuExport.Click += new System.EventHandler(this.mnuExport_Click);
             // 
             // mnuIndividualsToExcel
             // 
