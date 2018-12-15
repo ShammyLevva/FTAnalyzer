@@ -745,8 +745,7 @@ namespace FTAnalyzer
 
         void SetupDataErrors()
         {
-            SortableBindingList<DataError> errors = DataErrors(ckbDataErrors);
-            dgDataErrors.DataSource = errors;
+            dgDataErrors.DataSource = DataErrors(ckbDataErrors);
             dgDataErrors.AllowUserToResizeColumns = true;
             dgDataErrors.Focus();
             mnuPrint.Enabled = true;
@@ -2980,6 +2979,16 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
+        void MnuDataErrorsToExcel_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+            DataTable dt = convertor.ToDataTable(new List<DataError>(DataErrors(ckbDataErrors)));
+            ExportToExcel.Export(dt);
+            Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportDataErrorsEvent);
+            HourGlass(false);
+        }
+
         void MnuTreetopsToExcel_Click(object sender, EventArgs e)
         {
             HourGlass(true);
@@ -3238,6 +3247,11 @@ namespace FTAnalyzer
         {
             HttpUtility.VisitWebsite("https://www.facebook.com/groups/ftanalyzer");
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.FacebookUsersEvent);
+        }
+
+        private void mnuExport_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

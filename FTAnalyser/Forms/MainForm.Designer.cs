@@ -72,6 +72,8 @@
             this.mnuFamiliesToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFactsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSourcesToExcel = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuDataErrorsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuLooseBirthsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuLooseDeathsToExcel = new System.Windows.Forms.ToolStripMenuItem();
@@ -132,8 +134,8 @@
             this.dgWorldWars = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
             this.txtWorldWarsSurname = new System.Windows.Forms.TextBox();
-            this.wardeadRelation = new Controls.RelationTypes();
-            this.wardeadCountry = new Controls.CensusCountry();
+            this.wardeadRelation = new FTAnalyzer.Controls.RelationTypes();
+            this.wardeadCountry = new FTAnalyzer.Controls.CensusCountry();
             this.ctxViewNotes = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuViewNotes = new System.Windows.Forms.ToolStripMenuItem();
             this.tabTreetops = new System.Windows.Forms.TabPage();
@@ -143,8 +145,8 @@
             this.btnTreeTops = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.txtTreetopsSurname = new System.Windows.Forms.TextBox();
-            this.treetopsRelation = new Controls.RelationTypes();
-            this.treetopsCountry = new Controls.CensusCountry();
+            this.treetopsRelation = new FTAnalyzer.Controls.RelationTypes();
+            this.treetopsCountry = new FTAnalyzer.Controls.CensusCountry();
             this.tabColourReports = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.btnAdvancedMissingData = new System.Windows.Forms.Button();
@@ -160,7 +162,7 @@
             this.btnColourBMD = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.txtColouredSurname = new System.Windows.Forms.TextBox();
-            this.relTypesColoured = new Controls.RelationTypes();
+            this.relTypesColoured = new FTAnalyzer.Controls.RelationTypes();
             this.tabLostCousins = new System.Windows.Forms.TabPage();
             this.Referrals = new System.Windows.Forms.GroupBox();
             this.ckbReferralInCommon = new System.Windows.Forms.CheckBox();
@@ -182,7 +184,7 @@
             this.btnLC1881EW = new System.Windows.Forms.Button();
             this.btnLC1881Canada = new System.Windows.Forms.Button();
             this.btnLC1881Scot = new System.Windows.Forms.Button();
-            this.relTypesLC = new Controls.RelationTypes();
+            this.relTypesLC = new FTAnalyzer.Controls.RelationTypes();
             this.tabCensus = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnExportMissingCensusRefs = new System.Windows.Forms.Button();
@@ -205,8 +207,8 @@
             this.txtCensusSurname = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
-            this.cenDate = new Controls.CensusDateSelector();
-            this.relTypesCensus = new Controls.RelationTypes();
+            this.cenDate = new FTAnalyzer.Controls.CensusDateSelector();
+            this.relTypesCensus = new FTAnalyzer.Controls.RelationTypes();
             this.btnShowCensusEntered = new System.Windows.Forms.Button();
             this.btnShowCensusMissing = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -292,7 +294,7 @@
             this.Individuals = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Families = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Marriages = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.reltypesSurnames = new Controls.RelationTypes();
+            this.reltypesSurnames = new FTAnalyzer.Controls.RelationTypes();
             this.tabFacts = new System.Windows.Forms.TabPage();
             this.btnDuplicateFacts = new System.Windows.Forms.Button();
             this.lblExclude = new System.Windows.Forms.Label();
@@ -305,7 +307,7 @@
             this.btnShowFacts = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtFactsSurname = new System.Windows.Forms.TextBox();
-            this.relTypesFacts = new Controls.RelationTypes();
+            this.relTypesFacts = new FTAnalyzer.Controls.RelationTypes();
             this.tabToday = new System.Windows.Forms.TabPage();
             this.label18 = new System.Windows.Forms.Label();
             this.nudToday = new System.Windows.Forms.NumericUpDown();
@@ -638,6 +640,8 @@
             this.mnuFamiliesToExcel,
             this.mnuFactsToExcel,
             this.mnuSourcesToExcel,
+            this.toolStripSeparator12,
+            this.mnuDataErrorsToExcel,
             this.toolStripSeparator8,
             this.mnuLooseBirthsToExcel,
             this.mnuLooseDeathsToExcel,
@@ -647,6 +651,7 @@
             this.mnuExport.Name = "mnuExport";
             this.mnuExport.Size = new System.Drawing.Size(52, 20);
             this.mnuExport.Text = "Export";
+            this.mnuExport.Click += new System.EventHandler(this.mnuExport_Click);
             // 
             // mnuIndividualsToExcel
             // 
@@ -675,6 +680,18 @@
             this.mnuSourcesToExcel.Size = new System.Drawing.Size(221, 22);
             this.mnuSourcesToExcel.Text = "Sources to Excel";
             this.mnuSourcesToExcel.Click += new System.EventHandler(this.MnuSourcesToExcel_Click);
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(218, 6);
+            // 
+            // mnuDataErrorsToExcel
+            // 
+            this.mnuDataErrorsToExcel.Name = "mnuDataErrorsToExcel";
+            this.mnuDataErrorsToExcel.Size = new System.Drawing.Size(221, 22);
+            this.mnuDataErrorsToExcel.Text = "Data Errors to Excel";
+            this.mnuDataErrorsToExcel.Click += new System.EventHandler(this.MnuDataErrorsToExcel_Click);
             // 
             // toolStripSeparator8
             // 
@@ -3708,6 +3725,8 @@
         private System.Windows.Forms.ToolStripMenuItem mnuHowManyGreats;
         private System.Windows.Forms.ToolStripMenuItem facebookSupportGroupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem facebookUserGroupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
+        private System.Windows.Forms.ToolStripMenuItem mnuDataErrorsToExcel;
     }
 }
 

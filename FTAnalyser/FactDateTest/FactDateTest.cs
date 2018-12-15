@@ -83,6 +83,16 @@ namespace FactDateTest
             target = new FactDate("INT 4 OCT 1723 4DA 8MNTH 1723");
             Assert.AreEqual(new DateTime(1723, 10, 4), target.StartDate);
             Assert.AreEqual(new DateTime(1723, 10, 4), target.EndDate);
+
+            // 29th Feb
+            try
+            {
+                target = new FactDate("29 FEB 1735");
+                Assert.Fail(); // if we get here the date was seen as valid so that's wrong
+            }
+            catch (FactDateException) { }  // we expect this so no test failure
+            catch (Exception) { Assert.Fail(); } // if we get some other sort of failure test failed
+            
         }
 
         /// <summary>

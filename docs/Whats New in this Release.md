@@ -1,3 +1,7 @@
+#### Updated Release Version 7.0.5.0 15th December 2018  
+**Updates**  
+
+
 #### Updated Release Version 7.0.4.0 9th December 2018  
 **Updates**  
 Add colour note to tooltip to make it clearer what the status is.  
