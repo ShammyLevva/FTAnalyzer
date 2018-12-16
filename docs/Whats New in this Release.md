@@ -1,3 +1,7 @@
+#### Bugfix Release Version 7.1.0.1 16th December 2018  
+**Bugfixes**  
+Issue with hash codes for facts fixed
+
 #### Updated Release Version 7.1.0.0 16th December 2018  
 **Updates**  
 Update Google Maps display on Locations tab to work with updated Google Maps  
