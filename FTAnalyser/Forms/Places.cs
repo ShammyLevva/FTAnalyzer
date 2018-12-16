@@ -124,10 +124,7 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.Default;
         }
 
-        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            HttpUtility.VisitWebsite(e.Link.LinkData as string);
-        }
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => HttpUtility.VisitWebsite(e.Link.LinkData as string);
 
         private void DgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

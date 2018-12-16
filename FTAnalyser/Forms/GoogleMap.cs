@@ -79,9 +79,6 @@ namespace FTAnalyzer.Forms
             VETERINARY_CARE, AMUSEMENT_PARK
         });
 
-        private String location;
-        private bool loaded;
-
         public delegate void GoogleEventHandler(object sender, GoogleWaitingEventArgs e);
         public static event GoogleEventHandler WaitingForGoogle;
         public static bool ThreadCancelled { get; set; }
@@ -89,60 +86,17 @@ namespace FTAnalyzer.Forms
         public GoogleMap()
         {
             InitializeComponent();
-            loaded = false;
-            string filename = Path.Combine(Application.StartupPath + @"\Resources\GoogleMaps.htm");
-            webBrowser.Navigate(filename);
-            webBrowser.Hide();
         }
 
-        public bool SetLocation(FactLocation loc, int level)
+        public void ShowLocation(FactLocation loc, int level)
         {
-            while (!loaded)
+            if (loc.IsGeoCoded(false))
             {
-                Application.DoEvents();
-            }
-            GeoResponse.CResult.CGeometry.CViewPort viewport = null;
-            GeoResponse res = null;
-            Object[] args = new Object[] { 0, 0 };
-            if (loc.IsGeoCoded(false) && loc.ViewPort != null)
-            {
-                labMapLevel.Text = "Previously Geocoded: " + loc.ToString();
-                viewport = MapTransforms.ReverseTransformViewport(loc.ViewPort);
-                args = new Object[] { loc.Latitude, loc.Longitude };
+                string URL = $"https://www.google.com/maps/@{loc.Latitude},{loc.Longitude},{level}z";
+                HttpUtility.VisitWebsite(URL);
             }
             else
-            {
-                location = loc.ToString();
-                res = CallGoogleGeocode(location);
-                if (res.Status == "OK")
-                {
-                    labMapLevel.Text = GoogleMap.LocationText(res, loc, level);
-                    viewport = res.Results[0].Geometry.ViewPort;
-                    double lat = res.Results[0].Geometry.Location.Lat;
-                    double lng = res.Results[0].Geometry.Location.Long;
-                    args = new Object[] { lat, lng };
-                }
-                else if (res.Status == "OVER_QUERY_LIMIT" && loc.IsGeoCoded(false))
-                {
-                    labMapLevel.Text = "Previously Geocoded: " + loc.ToString();
-                    viewport = new GeoResponse.CResult.CGeometry.CViewPort();
-                    viewport.NorthEast.Lat = loc.Latitude + 2;
-                    viewport.NorthEast.Long = loc.Longitude + 2;
-                    viewport.SouthWest.Lat = loc.Latitude - 2;
-                    viewport.SouthWest.Long = loc.Longitude - 2;
-                    args = new Object[] { loc.Latitude, loc.Longitude };
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            Object marker = webBrowser.Document.InvokeScript("frontAndCenter", args);
-
-            args = new Object[] { viewport.NorthEast.Lat, viewport.NorthEast.Long, viewport.SouthWest.Lat, viewport.SouthWest.Long };
-            webBrowser.Document.InvokeScript("setViewport", args);
-            webBrowser.Show();
-            return true;
+                MessageBox.Show($"{loc.ToString()} is not yet geocoded so can't be displayed.");
         }
 
         public static string LocationText(GeoResponse res, FactLocation loc, int level)
@@ -218,8 +172,7 @@ namespace FTAnalyzer.Forms
                 request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
                 request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
                 DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(GeoResponse));
-                WebProxy proxy = request.Proxy as WebProxy;
-                if (proxy != null)
+                if (request.Proxy is WebProxy proxy)
                 {
                     string proxyuri = proxy.GetProxy(request.RequestUri).ToString();
                     request.UseDefaultCredentials = true;
@@ -336,20 +289,10 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void WebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            loaded = true;
-            System.Diagnostics.Debug.Print("DocumentCompleted called");
-        }
+        private void WebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e) => System.Diagnostics.Debug.Print("DocumentCompleted called");
 
-        private void GoogleMap_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Dispose();
-        }
+        private void GoogleMap_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        private void GoogleMap_Load(object sender, EventArgs e)
-        {
-            SpecialMethods.SetFonts(this);
-        }
+        private void GoogleMap_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }
 }

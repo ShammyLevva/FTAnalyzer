@@ -530,7 +530,7 @@ namespace FTAnalyzer.Forms
             }
             else
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
                 pbGeocoding.Visible = true;
                 mnuGoogleGeocodeLocations.Enabled = false;
                 mnuEditLocation.Enabled = false;
@@ -538,7 +538,7 @@ namespace FTAnalyzer.Forms
                 mnuOSGeocodeLocations.Enabled = false;
                 ft.Geocoding = true;
                 googleGeocodeBackgroundWorker.RunWorkerAsync(retryPartials);
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
         }
 

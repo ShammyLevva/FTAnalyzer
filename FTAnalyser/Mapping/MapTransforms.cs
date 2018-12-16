@@ -41,7 +41,7 @@ namespace FTAnalyzer.Mapping
             {
                 if (wgs84toGoogle == null)
                 {
-                    CoordinateSystemFactory csFac = new ProjNet.CoordinateSystems.CoordinateSystemFactory();
+                    CoordinateSystemFactory csFac = new CoordinateSystemFactory();
                     CoordinateTransformationFactory ctFac = new CoordinateTransformationFactory();
 
                     IGeographicCoordinateSystem wgs84 = csFac.CreateGeographicCoordinateSystem(
@@ -96,8 +96,8 @@ namespace FTAnalyzer.Mapping
 
         public static GeoResponse.CResult.CGeometry.CViewPort TransformViewport(GeoResponse.CResult.CGeometry.CViewPort viewport)
         {
-            Coordinate mNorthEast = MapTransforms.TransformCoordinate(new Coordinate(viewport.NorthEast.Long, viewport.NorthEast.Lat));
-            Coordinate mSouthWest = MapTransforms.TransformCoordinate(new Coordinate(viewport.SouthWest.Long, viewport.SouthWest.Lat));
+            Coordinate mNorthEast = TransformCoordinate(new Coordinate(viewport.NorthEast.Long, viewport.NorthEast.Lat));
+            Coordinate mSouthWest = TransformCoordinate(new Coordinate(viewport.SouthWest.Long, viewport.SouthWest.Lat));
             GeoResponse.CResult.CGeometry.CViewPort result = new GeoResponse.CResult.CGeometry.CViewPort();
             result.NorthEast.Long = mNorthEast.X;
             result.NorthEast.Lat = mNorthEast.Y;
@@ -108,8 +108,8 @@ namespace FTAnalyzer.Mapping
 
         public static GeoResponse.CResult.CGeometry.CViewPort ReverseTransformViewport(GeoResponse.CResult.CGeometry.CViewPort viewport)
         {
-            Coordinate mNorthEast = MapTransforms.ReverseTransformCoordinate(new Coordinate(viewport.NorthEast.Long, viewport.NorthEast.Lat));
-            Coordinate mSouthWest = MapTransforms.ReverseTransformCoordinate(new Coordinate(viewport.SouthWest.Long, viewport.SouthWest.Lat));
+            Coordinate mNorthEast = ReverseTransformCoordinate(new Coordinate(viewport.NorthEast.Long, viewport.NorthEast.Lat));
+            Coordinate mSouthWest = ReverseTransformCoordinate(new Coordinate(viewport.SouthWest.Long, viewport.SouthWest.Lat));
             GeoResponse.CResult.CGeometry.CViewPort result = new GeoResponse.CResult.CGeometry.CViewPort();
             result.NorthEast.Long = mNorthEast.X;
             result.NorthEast.Lat = mNorthEast.Y;

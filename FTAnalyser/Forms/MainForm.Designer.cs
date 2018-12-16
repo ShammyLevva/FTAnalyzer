@@ -2119,18 +2119,19 @@
             // btnBingOSMap
             // 
             this.btnBingOSMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBingOSMap.Location = new System.Drawing.Point(920, 1);
+            this.btnBingOSMap.Location = new System.Drawing.Point(800, 1);
             this.btnBingOSMap.Name = "btnBingOSMap";
             this.btnBingOSMap.Size = new System.Drawing.Size(104, 22);
             this.btnBingOSMap.TabIndex = 3;
             this.btnBingOSMap.Text = "Show OS Map";
             this.btnBingOSMap.UseVisualStyleBackColor = true;
+            this.btnBingOSMap.Visible = false;
             this.btnBingOSMap.Click += new System.EventHandler(this.BtnBingOSMap_Click);
             // 
             // btnShowMap
             // 
             this.btnShowMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnShowMap.Location = new System.Drawing.Point(800, 1);
+            this.btnShowMap.Location = new System.Drawing.Point(970, 1);
             this.btnShowMap.Name = "btnShowMap";
             this.btnShowMap.Size = new System.Drawing.Size(104, 22);
             this.btnShowMap.TabIndex = 2;

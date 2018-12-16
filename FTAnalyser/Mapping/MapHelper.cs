@@ -186,6 +186,7 @@ namespace FTAnalyzer.Mapping
         public Envelope GetExtents(FeatureDataTable table)
         {
             Envelope bbox = new Envelope();
+            Envelope empty = new Envelope();
             foreach (FeatureDataRow row in table)
             {
                 foreach (Coordinate c in row.Geometry.Coordinates)
@@ -193,7 +194,12 @@ namespace FTAnalyzer.Mapping
                     if (c != null)
                         bbox.ExpandToInclude(c);
                 }
-                bbox.ExpandToInclude((Envelope)row["ViewPort"]);
+                var x = (Envelope)row["ViewPort"];
+                Console.WriteLine(x.ToString());
+                if (x.MaxX == 0 && x.MaxY == 0 )
+                    Console.WriteLine("we have zeos");
+                else
+                    bbox.ExpandToInclude(x);
             }
             Envelope expand;
             if (bbox.Centre == null)

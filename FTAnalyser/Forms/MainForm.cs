@@ -460,10 +460,7 @@ namespace FTAnalyzer
             }
         }
 
-        void RtbOutput_TextChanged(object sender, EventArgs e)
-        {
-            rtbOutput.ScrollToBottom();
-        }
+        void RtbOutput_TextChanged(object sender, EventArgs e) => rtbOutput.ScrollToBottom();
 
         bool shutdown = false;
 
@@ -592,60 +589,44 @@ namespace FTAnalyzer
 
         void BtnShowMap_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
-            int locType = GetMapLocationType(out FactLocation loc);
-            if (loc != null)
-            {   // Do geo coding stuff
-                GoogleMap frmGoogleMap = new GoogleMap();
-                if (frmGoogleMap.SetLocation(loc, locType))
-                {
-                    DisposeDuplicateForms(frmGoogleMap);
-                    frmGoogleMap.Show();
-                }
-                else
-                {
-                    frmGoogleMap.Dispose();
-                    MessageBox.Show("Unable to find location : " + loc.GetLocation(locType), "FTAnalyzer");
-                }
-            }
-            HourGlass(false);
+            int zoom = GetMapZoomLevel(out FactLocation loc);
+            if (loc != null && loc.IsGeoCoded(false))
+                HttpUtility.VisitWebsite($"https://www.google.com/maps/@?api=1&map_action=map&center={loc.Latitude},{loc.Longitude}&zoom={zoom}");
+            else
+                MessageBox.Show($"{loc.ToString()} is not yet geocoded so can't be displayed.");
         }
 
         void BtnBingOSMap_Click(object sender, EventArgs e)
         {
-            Cursor = Cursors.WaitCursor;
-            int locType = GetMapLocationType(out FactLocation loc);
-            if (loc != null)
-            {   // Do geo coding stuff
-                BingOSMap frmBingMap = new BingOSMap();
-                if (frmBingMap.SetLocation(loc, locType))
-                {
-                    DisposeDuplicateForms(frmBingMap);
-                    frmBingMap.Show();
-                }
-                else
-                {
-                    frmBingMap.Dispose();
-                    MessageBox.Show("Unable to find location : " + loc.GetLocation(locType), "FTAnalyzer");
-                }
-            }
-            Cursor = Cursors.Default;
+            //Cursor = Cursors.WaitCursor;
+            //int zoom = GetMapZoomLevel(out FactLocation loc);
+            //if (loc != null)
+            //{   // Do geo coding stuff
+            //    BingOSMap frmBingMap = new BingOSMap();
+            //    if (frmBingMap.SetLocation(loc, zoom))
+            //    {
+            //        DisposeDuplicateForms(frmBingMap);
+            //        frmBingMap.Show();
+            //    }
+            //    else
+            //    {
+            //        frmBingMap.Dispose();
+            //        MessageBox.Show("Unable to find location : " + loc.GetLocation(locType), "FTAnalyzer");
+            //    }
+            //}
+            //Cursor = Cursors.Default;
         }
 
-        private int GetMapLocationType(out FactLocation loc)
+        int GetMapZoomLevel(out FactLocation loc)
         {
             // get the tab
-            int locType = FactLocation.UNKNOWN;
             loc = null;
             switch (tabCtrlLocations.SelectedTab.Text)
             {
                 case "Tree View":
                     TreeNode node = treeViewLocations.SelectedNode;
                     if (node != null)
-                    {
                         loc = node.Text == "<blank>" ? null : ((FactLocation)node.Tag).GetLocation(node.Level);
-                        locType = node.Level;
-                    }
                     break;
                 case "Countries":
                     loc = dgCountries.CurrentRow == null ? null : (FactLocation)dgCountries.CurrentRow.DataBoundItem;
@@ -669,12 +650,9 @@ namespace FTAnalyzer
                     MessageBox.Show("Location selected isn't valid to show on the map.", "FTAnalyzer");
                 else
                     MessageBox.Show("Nothing selected. Please select a location to show on the map.", "FTAnalyzer");
-                return locType;
+                return 0;
             }
-            if (locType == FactLocation.UNKNOWN)
-                return loc.Level;
-            else
-                return locType;
+            return loc.ZoomLevel;
         }
 
         #region DataErrors
