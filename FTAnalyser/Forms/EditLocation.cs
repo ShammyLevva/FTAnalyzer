@@ -48,7 +48,7 @@ namespace FTAnalyzer.Forms
             SetLocation();
         }
 
-        private void SetupMap()
+        void SetupMap()
         {
             pointTable = new FeatureDataTable();
             pointTable.Columns.Add("Label", typeof(string));
@@ -67,7 +67,7 @@ namespace FTAnalyzer.Forms
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
         }
 
-        private void ResetMap()
+        void ResetMap()
         {
             FactLocation.CopyLocationDetails(originalLocation, location);
             SetLocation();
@@ -81,7 +81,7 @@ namespace FTAnalyzer.Forms
             return pointFeature;
         }
 
-        private void MapBox1_MouseClick(object sender, MouseEventArgs e)
+        void MapBox1_MouseClick(object sender, MouseEventArgs e)
         {
             Coordinate c1 = mapBox1.Map.ImageToWorld(new PointF(e.X - 21.0f, e.Y - 34.0f));
             Coordinate c2 = mapBox1.Map.ImageToWorld(new PointF(e.X + 21.0f, e.Y + 34.0f));
@@ -103,7 +103,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void EditLocation_FormClosing(object sender, FormClosingEventArgs e)
+        void EditLocation_FormClosing(object sender, FormClosingEventArgs e)
         {
             // If point updated and we are warning then warn
             if (pointUpdated)
@@ -133,7 +133,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void UpdateDatabase()
+        void UpdateDatabase()
         {
             Envelope env = new Envelope(mapBox1.Map.Envelope.TopLeft(), mapBox1.Map.Envelope.BottomRight());
             Coordinate point = MapTransforms.ReverseTransformCoordinate(pointFeature.Geometry.Coordinate);
@@ -154,7 +154,7 @@ namespace FTAnalyzer.Forms
             dataUpdated = true;
         }
 
-        private void BtnSave_Click(object sender, EventArgs e)
+        void BtnSave_Click(object sender, EventArgs e)
         {
             UpdateDatabase();
             UserSavedPoint = true;
@@ -162,7 +162,7 @@ namespace FTAnalyzer.Forms
             MessageBox.Show("Data for " + location.ToString() + " updated.", "Save new location");
         }
 
-        private void BtnSaveExit_Click(object sender, EventArgs e)
+        void BtnSaveExit_Click(object sender, EventArgs e)
         {
             UpdateDatabase();
             UserSavedPoint = true;
@@ -170,7 +170,7 @@ namespace FTAnalyzer.Forms
             Close();
         }
 
-        private void BtnReload_Click(object sender, EventArgs e)
+        void BtnReload_Click(object sender, EventArgs e)
         {
             ResetMap();
             if (dataUpdated)
@@ -180,12 +180,12 @@ namespace FTAnalyzer.Forms
             UserSavedPoint = false;
         }
 
-        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             HttpUtility.VisitWebsite(e.Link.LinkData as string);
         }
 
-        private void MapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        void MapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             bool zoomed = false;
             if (e.Button == MouseButtons.Left && mapBox1.Map.Zoom > mapBox1.Map.MinimumZoom)
@@ -207,12 +207,12 @@ namespace FTAnalyzer.Forms
             //Console.WriteLine("Pixel : " + mapBox1.Map.PixelSize);
         }
 
-        private void BtnSearch_Click(object sender, EventArgs e)
+        void BtnSearch_Click(object sender, EventArgs e)
         {
             GoogleLocationSearch();
         }
 
-        private void GoogleLocationSearch()
+        void GoogleLocationSearch()
         {
             if (txtSearch.Text.Length > 0)
             {
@@ -247,7 +247,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void SetLocation()
+        void SetLocation()
         {
             pointTable.Clear();
             pointTable.AddRow(GetRow(location.LongitudeM, location.LatitudeM));
@@ -271,19 +271,19 @@ namespace FTAnalyzer.Forms
             mapBox1.Refresh();
         }
 
-        private void TxtSearch_KeyDown(object sender, KeyEventArgs e)
+        void TxtSearch_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
                 GoogleLocationSearch();
         }
 
-        private void BtnEdit_Click(object sender, EventArgs e)
+        void BtnEdit_Click(object sender, EventArgs e)
         {
             mapBox1.Cursor = new Cursor(Path.Combine(Application.StartupPath, @"Resources\Icons\teardrop_blue.cur"));
             iconSelected = true;
         }
 
-        private void BtnCustomMap_Click(object sender, EventArgs e)
+        void BtnCustomMap_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
             RemoveCustomMapLayers();
@@ -292,7 +292,7 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.Default;
         }
 
-        private void RemoveCustomMapLayers()
+        void RemoveCustomMapLayers()
         {
             if (customMapLayers.Count > 0)
             {
@@ -314,24 +314,24 @@ namespace FTAnalyzer.Forms
             return layers;
         }
 
-        private void EditLocation_FormClosed(object sender, FormClosedEventArgs e)
+        void EditLocation_FormClosed(object sender, FormClosedEventArgs e)
         {
             Dispose();
         }
 
-        private void TbOpacity_Scroll(object sender, EventArgs e)
+        void TbOpacity_Scroll(object sender, EventArgs e)
         {
             RefreshMap();
         }
 
-        private void SetOpacity()
+        void SetOpacity()
         {
             float opacity = tbOpacity.Value / 100.0f;
             TileAsyncLayer layer = (TileAsyncLayer)mapBox1.Map.BackgroundLayer[1];
             layer.SetOpacity(opacity);
         }
 
-        private void RefreshMap()
+        void RefreshMap()
         {
             if (InvokeRequired)
             {
@@ -342,7 +342,7 @@ namespace FTAnalyzer.Forms
             mapBox1.Refresh();
         }
 
-        private void EditLocation_Load(object sender, EventArgs e)
+        void EditLocation_Load(object sender, EventArgs e)
         {
             SpecialMethods.SetFonts(this);
         }

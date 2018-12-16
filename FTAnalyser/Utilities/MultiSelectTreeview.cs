@@ -416,7 +416,7 @@ namespace FTAnalyzer.Utilities
 
         #region Helper Methods
 
-        private void HighlightSelection()
+        void HighlightSelection()
         {
             foreach (TreeNode node in SelectedNodes)
             {
@@ -425,7 +425,7 @@ namespace FTAnalyzer.Utilities
             }
         }
 
-        private void DimSelection()
+        void DimSelection()
         {
             foreach (TreeNode node in SelectedNodes)
             {
@@ -434,7 +434,7 @@ namespace FTAnalyzer.Utilities
             }
         }
         
-        private void SelectNode(TreeNode node)
+        void SelectNode(TreeNode node)
         {
             try
             {
@@ -571,7 +571,7 @@ namespace FTAnalyzer.Utilities
             }
         }
 
-        private void ClearSelectedNodes()
+        void ClearSelectedNodes()
         {
             try
             {
@@ -588,7 +588,7 @@ namespace FTAnalyzer.Utilities
             }
         }
 
-        private void SelectSingleNode(TreeNode node)
+        void SelectSingleNode(TreeNode node)
         {
             if (node == null)
             {
@@ -602,7 +602,7 @@ namespace FTAnalyzer.Utilities
             OnAfterSelect(new TreeViewEventArgs(node));
         }
 
-        private void ToggleNode(TreeNode node, bool bSelectNode)
+        void ToggleNode(TreeNode node, bool bSelectNode)
         {
             if (bSelectNode)
             {
@@ -622,7 +622,7 @@ namespace FTAnalyzer.Utilities
             }
         }
 
-        private void HandleException(Exception ex)
+        void HandleException(Exception ex)
         {
             // Perform some error handling here.
             // We don't want to bubble errors to the CLR. 

@@ -96,32 +96,32 @@ namespace FTAnalyzer.Controls
             CountryChanged?.Invoke(this, e);
         }
 
-        private void RbScotland_CheckedChanged(object sender, EventArgs e)
+        void RbScotland_CheckedChanged(object sender, EventArgs e)
         {
             OnCountryChanged(e);
         }
 
-        private void RbEngland_CheckedChanged(object sender, EventArgs e)
+        void RbEngland_CheckedChanged(object sender, EventArgs e)
         {
             OnCountryChanged(e);
         }
 
-        private void RbWales_CheckedChanged(object sender, EventArgs e)
+        void RbWales_CheckedChanged(object sender, EventArgs e)
         {
             OnCountryChanged(e);
         }
 
-        private void RbUK_CheckedChanged(object sender, EventArgs e)
+        void RbUK_CheckedChanged(object sender, EventArgs e)
         {
             OnCountryChanged(e);
         }
 
-        private void RbCanada_CheckedChanged(object sender, EventArgs e)
+        void RbCanada_CheckedChanged(object sender, EventArgs e)
         {
             OnCountryChanged(e);
         }
 
-        private void RbUSA_CheckedChanged(object sender, EventArgs e)
+        void RbUSA_CheckedChanged(object sender, EventArgs e)
         {
             OnCountryChanged(e);
         }

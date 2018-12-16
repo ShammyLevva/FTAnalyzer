@@ -445,23 +445,23 @@ namespace FTAnalyzer.Forms
         }
 
         #region Google Geocode Threading
-        private void GoogleGeocodingBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        void GoogleGeocodingBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             GoogleGeoCode(googleGeocodeBackgroundWorker, e);
         }
 
-        private void GoogleGeocodingBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        void GoogleGeocodingBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             pbGeocoding.Value = (e.ProgressPercentage < 0) ? 1 : e.ProgressPercentage; ;
             txtLocations.Text = (string)e.UserState;
         }
 
-        private void GoogleGeocodingBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        void GoogleGeocodingBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             WorkFinished(sender);
         }
 
-        private void WorkFinished(object sender)
+        void WorkFinished(object sender)
         {
             pbGeocoding.Value = 100;
             pbGeocoding.Visible = false;
@@ -479,7 +479,7 @@ namespace FTAnalyzer.Forms
                 UpdateGridWithFilters(true);
         }
 
-        private void GeocodeLocations_FormClosing(object sender, FormClosingEventArgs e)
+        void GeocodeLocations_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (googleGeocodeBackgroundWorker.IsBusy)
             {
@@ -513,7 +513,7 @@ namespace FTAnalyzer.Forms
             txtGoogleWait.Text = args.Message;
         }
 
-        private void ReverseGeocodeBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        void ReverseGeocodeBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             ReverseGeoCode(reverseGeocodeBackgroundWorker, e);
         }
@@ -745,7 +745,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void MnuVerified_Click(object sender, EventArgs e)
+        void MnuVerified_Click(object sender, EventArgs e)
         {
             FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
             loc.GeocodeStatus = FactLocation.Geocode.GEDCOM_USER;
@@ -753,7 +753,7 @@ namespace FTAnalyzer.Forms
             dgLocations.Refresh();
         }
 
-        private void MnuIncorrect_Click(object sender, EventArgs e)
+        void MnuIncorrect_Click(object sender, EventArgs e)
         {
             FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
             loc.GeocodeStatus = FactLocation.Geocode.INCORRECT;
@@ -761,7 +761,7 @@ namespace FTAnalyzer.Forms
             dgLocations.Refresh();
         }
 
-        private void MnuNotSearched_Click(object sender, EventArgs e)
+        void MnuNotSearched_Click(object sender, EventArgs e)
         {
             FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
             loc.GeocodeStatus = FactLocation.Geocode.NOT_SEARCHED;
@@ -780,7 +780,7 @@ namespace FTAnalyzer.Forms
             dgLocations.Refresh();
         }
 
-        private void DgLocations_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        void DgLocations_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -790,7 +790,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void MnuReverseGeocde_Click(object sender, EventArgs e)
+        void MnuReverseGeocde_Click(object sender, EventArgs e)
         {
             StartReverseGeoCoding();
         }
@@ -952,12 +952,12 @@ namespace FTAnalyzer.Forms
         }
         #endregion
 
-        private void MnuRetryPartial_Click(object sender, EventArgs e)
+        void MnuRetryPartial_Click(object sender, EventArgs e)
         {
             StartGoogleGeoCoding(true);
         }
 
-        private void ResetAllPartialMatchesToNotSearchedToolStripMenuItem_Click(object sender, EventArgs e)
+        void ResetAllPartialMatchesToNotSearchedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Are you sure you want to reset all Partial Matches (Google, Level and Ord Surv) to not searched?",
                 "Reset ALL Partials", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -993,7 +993,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void GeocodeLocations_FormClosed(object sender, FormClosedEventArgs e)
+        void GeocodeLocations_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Dispose();
         }
@@ -1019,7 +1019,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void OSGeoCode(BackgroundWorker worker, DoWorkEventArgs e)
+        void OSGeoCode(BackgroundWorker worker, DoWorkEventArgs e)
         {
             if (LoadOS50kGazetteer())
             {
@@ -1160,7 +1160,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void GenerateTestGedcom(List<FactLocation> failedToFind, string name, Dictionary<FactLocation, IList<OS50kGazetteer>> noCounty)
+        void GenerateTestGedcom(List<FactLocation> failedToFind, string name, Dictionary<FactLocation, IList<OS50kGazetteer>> noCounty)
         {
             if (Directory.Exists(Properties.MappingSettings.Default.CustomMapPath))
             {
@@ -1298,7 +1298,7 @@ namespace FTAnalyzer.Forms
             return false;
         }
 
-        private void SetOSGeocoding(FactLocation location, OS50kGazetteer gaz, int level, bool fuzzy)
+        void SetOSGeocoding(FactLocation location, OS50kGazetteer gaz, int level, bool fuzzy)
         {
             int expandBy = 2500;
             Coordinate p = new Coordinate(gaz.Point.X, gaz.Point.Y);
@@ -1329,32 +1329,32 @@ namespace FTAnalyzer.Forms
             UpdateDatabase(location, inDatabase);
         }
 
-        private void MnuOSGeocodeLocations_Click(object sender, EventArgs e)
+        void MnuOSGeocodeLocations_Click(object sender, EventArgs e)
         {
             StartOSGeoCoding();
         }
         #endregion
 
         #region OS Geocoding Threading
-        private void OSGeocodeBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        void OSGeocodeBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             OSGeoCode(OSGeocodeBackgroundWorker, e);
         }
 
-        private void OSGeocodeBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        void OSGeocodeBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             pbGeocoding.Visible = true;
             pbGeocoding.Value = (e.ProgressPercentage < 0) ? 1 : e.ProgressPercentage;
             txtLocations.Text = (string)e.UserState;
         }
 
-        private void OSGeocodeBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        void OSGeocodeBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             WorkFinished(sender);
         }
         #endregion
 
-        private void GeocodeLocations_Load(object sender, EventArgs e)
+        void GeocodeLocations_Load(object sender, EventArgs e)
         {
             SpecialMethods.SetFonts(this);
         }

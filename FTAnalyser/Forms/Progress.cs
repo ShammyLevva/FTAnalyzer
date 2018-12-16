@@ -24,12 +24,12 @@ namespace FTAnalyzer.Forms
             Application.DoEvents();
         }
 
-        private void Progress_FormClosed(object sender, FormClosedEventArgs e)
+        void Progress_FormClosed(object sender, FormClosedEventArgs e)
         {
             Dispose();
         }
 
-        private void Progress_Load(object sender, EventArgs e)
+        void Progress_Load(object sender, EventArgs e)
         {
             SpecialMethods.SetFonts(this);
         }

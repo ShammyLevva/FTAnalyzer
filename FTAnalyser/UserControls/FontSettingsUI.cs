@@ -89,7 +89,7 @@ namespace FTAnalyzer.UserControls
             GlobalFontChanged?.Invoke(null, EventArgs.Empty);
         }
 
-        private void SetSelectedFont(int value)
+        void SetSelectedFont(int value)
         {
             switch (value)
             {
@@ -122,7 +122,7 @@ namespace FTAnalyzer.UserControls
             lbSample.Font = selectedFont;
         }
 
-        private void tbFontScale_Scroll(object sender, EventArgs e)
+        void tbFontScale_Scroll(object sender, EventArgs e)
         {
             SetSelectedFont(tbFontScale.Value);
         }

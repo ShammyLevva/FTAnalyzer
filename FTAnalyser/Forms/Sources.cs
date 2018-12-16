@@ -28,7 +28,7 @@ namespace FTAnalyzer.Forms
             AddSources(fact);
         }
 
-        private void AddSources(DisplayFact fact)
+        void AddSources(DisplayFact fact)
         {
             foreach (FactSource s in fact.Sources)
                 if(!sources.Contains(s))
@@ -38,48 +38,48 @@ namespace FTAnalyzer.Forms
             tsRecords.Text = sources.Count + " Records";
         }
         
-        private void ResetTable()
+        void ResetTable()
         {
             dgSources.Sort(dgSources.Columns["SourceTitle"], ListSortDirection.Ascending);
         }
 
-        private void PrintToolStripButton_Click(object sender, EventArgs e)
+        void PrintToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintReport("Sources Report");
         }
 
-        private void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
+        void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintPreviewReport();
         }
 
-        private void Sources_TextChanged(object sender, EventArgs e)
+        void Sources_TextChanged(object sender, EventArgs e)
         {
             reportFormHelper.PrintTitle = this.Text;
         }
 
-        private void MnuExportToExcel_Click(object sender, EventArgs e)
+        void MnuExportToExcel_Click(object sender, EventArgs e)
         {
             reportFormHelper.DoExportToExcel<IDisplaySource>();
         }
 
-        private void MnuResetColumns_Click(object sender, EventArgs e)
+        void MnuResetColumns_Click(object sender, EventArgs e)
         {
             reportFormHelper.ResetColumnLayout("SourcesColumns.xml");
         }
 
-        private void MnuSaveColumnLayout_Click(object sender, EventArgs e)
+        void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("SourcesColumns.xml");
             MessageBox.Show("Form Settings Saved", "Sources");
         }
 
-        private void Sources_FormClosed(object sender, FormClosedEventArgs e)
+        void Sources_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Dispose();
         }
 
-        private void DgSources_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        void DgSources_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if(e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
@@ -90,7 +90,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void Sources_Load(object sender, EventArgs e)
+        void Sources_Load(object sender, EventArgs e)
         {
             SpecialMethods.SetFonts(this);
         }

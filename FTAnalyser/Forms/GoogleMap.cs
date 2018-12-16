@@ -289,10 +289,10 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void WebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e) => System.Diagnostics.Debug.Print("DocumentCompleted called");
+        void WebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e) => System.Diagnostics.Debug.Print("DocumentCompleted called");
 
-        private void GoogleMap_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
+        void GoogleMap_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        private void GoogleMap_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
+        void GoogleMap_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }
 }

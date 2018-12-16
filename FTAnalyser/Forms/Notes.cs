@@ -13,7 +13,7 @@ namespace FTAnalyzer.Forms
             Text = "Notes for " + ind.ToString();
         }
 
-        private void Notes_Load(object sender, EventArgs e)
+        void Notes_Load(object sender, EventArgs e)
         {
             SpecialMethods.SetFonts(this);
         }

@@ -767,7 +767,7 @@ namespace FTAnalyzer
             HttpUtility.VisitWebsite("http://www.ftanalyzer.com/guides");
         }
 
-        private void PrivacyPolicyToolStripMenuItem_Click(object sender, EventArgs e)
+        void PrivacyPolicyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.PrivacyEvent);
             HttpUtility.VisitWebsite("http://www.ftanalyzer.com/privacy");
@@ -3205,7 +3205,7 @@ namespace FTAnalyzer
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.CousinCountEvent);
         }
 
-        private void HowManyDirectsReportToolStripMenuItem_Click(object sender, EventArgs e)
+        void HowManyDirectsReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             StatisticsForm f = new StatisticsForm();
@@ -3216,13 +3216,13 @@ namespace FTAnalyzer
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.DirectsReportEvent);
         }
 
-        private void FacebookSupportGroupToolStripMenuItem_Click(object sender, EventArgs e)
+        void FacebookSupportGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HttpUtility.VisitWebsite("https://www.facebook.com/ftanalyzer");
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.FacebookSupportEvent);
         }
 
-        private void FacebookUserGroupToolStripMenuItem_Click(object sender, EventArgs e)
+        void FacebookUserGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HttpUtility.VisitWebsite("https://www.facebook.com/groups/ftanalyzer");
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.FacebookUsersEvent);

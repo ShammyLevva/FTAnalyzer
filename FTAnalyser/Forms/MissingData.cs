@@ -12,7 +12,7 @@ namespace FTAnalyzer.Forms
             SetDefaultValues();
         }
 
-        private void SetDefaultValues()
+        void SetDefaultValues()
         {
             dsBirth.Scores.UnknownDate = 100;
             dsBirth.Scores.VeryWideDate = 90;
@@ -23,7 +23,7 @@ namespace FTAnalyzer.Forms
             dsBirth.Scores.ExactDate = 0;
         }
 
-        private void MissingData_Load(object sender, System.EventArgs e)
+        void MissingData_Load(object sender, System.EventArgs e)
         {
             SpecialMethods.SetFonts(this);
         }

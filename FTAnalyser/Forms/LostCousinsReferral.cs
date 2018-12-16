@@ -50,49 +50,49 @@ namespace FTAnalyzer.Forms
             return total + $" Lost Cousins Records listed made up of {direct} Direct Ancestors, {blood} Blood Relatives, {marriage} Marriage and {others} Others.";
         }
 
-        private void ResetTable()
+        void ResetTable()
         {
             referrals.Sort(new LostCousinsReferralComparer());
             dgLCReferrals.DataSource = new SortableBindingList<ExportReferrals>(referrals);
         }
 
-        private void RefreshCensusReferences(object sender, EventArgs e)
+        void RefreshCensusReferences(object sender, EventArgs e)
         {
             dgLCReferrals.Refresh();
         }
 
-        private void MnuSaveColumnLayout_Click(object sender, EventArgs e)
+        void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("LCReferralsColumns.xml");
             MessageBox.Show("Form Settings Saved", "Lost Cousins Referrals");
         }
 
-        private void MnuResetColumns_Click(object sender, EventArgs e)
+        void MnuResetColumns_Click(object sender, EventArgs e)
         {
             reportFormHelper.ResetColumnLayout("LCReferralsColumns.xml");
         }
 
-        private void PrintToolStripButton_Click(object sender, EventArgs e)
+        void PrintToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintReport("Lost Cousins Referral Report");
         }
 
-        private void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
+        void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintPreviewReport();
         }
 
-        private void MnuExportToExcel_Click(object sender, EventArgs e)
+        void MnuExportToExcel_Click(object sender, EventArgs e)
         {
             reportFormHelper.DoExportToExcel(referrals.ToList<IExportReferrals>());
         }
 
-        private void LostCousinsReferral_FormClosed(object sender, FormClosedEventArgs e)
+        void LostCousinsReferral_FormClosed(object sender, FormClosedEventArgs e)
         {
             Dispose();
         }
 
-        private void LostCousinsReferral_Load(object sender, EventArgs e)
+        void LostCousinsReferral_Load(object sender, EventArgs e)
         {
             SpecialMethods.SetFonts(this);
         }

@@ -67,14 +67,14 @@ namespace FTAnalyzer.UserControls
 
         #endregion
 
-        private void ChkUseNonGedcomDates_CheckedChanged(object sender, EventArgs e)
+        void ChkUseNonGedcomDates_CheckedChanged(object sender, EventArgs e)
         {
             Properties.NonGedcomDate.Default.UseNonGedcomDates = chkUseNonGedcomDates.Checked;
             gbDateFormat.Enabled = chkUseNonGedcomDates.Checked;
             gbSeparator.Enabled = chkUseNonGedcomDates.Checked;
         }
 
-        private void NonGedcomDateSettingsUI_Leave(object sender, EventArgs e)
+        void NonGedcomDateSettingsUI_Leave(object sender, EventArgs e)
         {
             string separator = string.Empty;
             string regexSeparator = string.Empty;
@@ -116,7 +116,7 @@ namespace FTAnalyzer.UserControls
             Properties.GeneralSettings.Default.ReloadRequired = true;
         }
 
-        private void RbSlash_CheckedChanged(object sender, EventArgs e)
+        void RbSlash_CheckedChanged(object sender, EventArgs e)
         {
             if (rbSlash.Checked)
             {
@@ -127,7 +127,7 @@ namespace FTAnalyzer.UserControls
             }
         }
 
-        private void RbDot_CheckedChanged(object sender, EventArgs e)
+        void RbDot_CheckedChanged(object sender, EventArgs e)
         {
             if (rbDot.Checked)
             {
@@ -139,7 +139,7 @@ namespace FTAnalyzer.UserControls
 
         }
 
-        private void RbDash_CheckedChanged(object sender, EventArgs e)
+        void RbDash_CheckedChanged(object sender, EventArgs e)
         {
             if (rbDash.Checked)
             {
@@ -151,7 +151,7 @@ namespace FTAnalyzer.UserControls
 
         }
 
-        private void RbSpace_CheckedChanged(object sender, EventArgs e)
+        void RbSpace_CheckedChanged(object sender, EventArgs e)
         {
             if (rbSpace.Checked)
             {

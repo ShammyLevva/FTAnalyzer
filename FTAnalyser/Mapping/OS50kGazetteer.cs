@@ -73,7 +73,7 @@ namespace FTAnalyzer.Mapping
             }
         }
 
-        private void FixCommas()
+        void FixCommas()
         {
             DefinitiveName = DefinitiveName.Replace(", The", ""); // strip out supurflous "the"
             int pos = DefinitiveName.IndexOf(",");
@@ -83,7 +83,7 @@ namespace FTAnalyzer.Mapping
 
         static Regex slash = new Regex(@"(.*)\(.*\)", RegexOptions.Compiled);
 
-        private void FixAbbreviations()
+        void FixAbbreviations()
         {
             DefinitiveName = DefinitiveName.Trim();
             if (DefinitiveName.EndsWith(" Fm")) // Fm is abbreviation for Farm

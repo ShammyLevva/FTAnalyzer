@@ -95,12 +95,12 @@ namespace FTAnalyzer.Core.Displays
         }
         #endregion
 
-        private void AboutBox1_FormClosed(object sender, FormClosedEventArgs e)
+        void AboutBox1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Dispose();
         }
 
-        private void AboutBox1_Load(object sender, System.EventArgs e)
+        void AboutBox1_Load(object sender, System.EventArgs e)
         {
             SpecialMethods.SetFonts(this);
         }

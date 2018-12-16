@@ -46,7 +46,7 @@ namespace FTAnalyzer.Mapping
             get { return clusterLayer.Envelope; }
         }
 
-        private void SetupMap()
+        void SetupMap()
         {
             FactLocations = new FeatureDataTable();
             FactLocations.Columns.Add("MapLocation", typeof(MapLocation));

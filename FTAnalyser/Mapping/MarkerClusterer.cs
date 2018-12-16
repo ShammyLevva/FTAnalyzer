@@ -49,7 +49,7 @@ namespace FTAnalyzer.Mapping
             }
         }
 
-        private void AddToClosestCluster(FeatureDataRow row)
+        void AddToClosestCluster(FeatureDataRow row)
         {
             double distance = double.MaxValue;
             MapCluster clusterToAddTo = null;
@@ -79,7 +79,7 @@ namespace FTAnalyzer.Mapping
 
         public FeatureDataTable FeatureDataTable { get { return clusteredDataTable; } }
 
-        private void BuildClusteredFeatureTable()
+        void BuildClusteredFeatureTable()
         {
             clusteredDataTable.Clear();
             foreach (MapCluster cluster in this.clusters)

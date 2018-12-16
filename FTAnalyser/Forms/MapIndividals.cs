@@ -42,44 +42,44 @@ namespace FTAnalyzer
             DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
         }
 
-        private void ResetTable()
+        void ResetTable()
         {
             dgIndividuals.Sort(dgIndividuals.Columns["IndividualID"], ListSortDirection.Ascending);
             dgIndividuals.AutoResizeColumns();
         }
 
-        private void PrintToolStripButton_Click(object sender, EventArgs e)
+        void PrintToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintReport("Map Individuals");
         }
 
-        private void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
+        void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintPreviewReport();
         }
 
-        private void Facts_TextChanged(object sender, EventArgs e)
+        void Facts_TextChanged(object sender, EventArgs e)
         {
             reportFormHelper.PrintTitle = this.Text;
         }
 
-        private void MnuExportToExcel_Click(object sender, EventArgs e)
+        void MnuExportToExcel_Click(object sender, EventArgs e)
         {
             reportFormHelper.DoExportToExcel<MapLocation>();
         }
 
-        private void MnuResetColumns_Click(object sender, EventArgs e)
+        void MnuResetColumns_Click(object sender, EventArgs e)
         {
             reportFormHelper.ResetColumnLayout("MapIndividualColumns.xml");
         }
 
-        private void MnuSaveColumnLayout_Click(object sender, EventArgs e)
+        void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("MapIndividualColumns.xml");
             MessageBox.Show("Form Settings Saved", "Map Individuals");
         }
 
-        private void DgIndividuals_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        void DgIndividuals_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -88,7 +88,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void DgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        void DgIndividuals_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -100,7 +100,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void MnuEditLocation_Click(object sender, EventArgs e)
+        void MnuEditLocation_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
             MapLocation loc = dgIndividuals.SelectedRows[0].DataBoundItem as MapLocation;
@@ -118,7 +118,7 @@ namespace FTAnalyzer
             UpdateIcons(loc.Location);  
         }
 
-        private void UpdateIcons(FactLocation changed)
+        void UpdateIcons(FactLocation changed)
         {
             foreach (MapLocation loc in locations)
             {
@@ -128,7 +128,7 @@ namespace FTAnalyzer
             dgIndividuals.Refresh();
         }
 
-        private void EditLocationToolStripMenuItem_Click(object sender, EventArgs e)
+        void EditLocationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!ft.Geocoding)
             {
@@ -138,7 +138,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void EditLocation(FactLocation loc)
+        void EditLocation(FactLocation loc)
         {
             EditLocation editform = new EditLocation(loc);
             this.Cursor = Cursors.Default;
@@ -148,13 +148,13 @@ namespace FTAnalyzer
             dgIndividuals.Refresh();
         }
 
-        private void DgIndividuals_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        void DgIndividuals_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 dgIndividuals.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
         }
 
-        private void DatabaseHelper_GeoLocationUpdated(object location, EventArgs e)
+        void DatabaseHelper_GeoLocationUpdated(object location, EventArgs e)
         {
             if (this.InvokeRequired)
             {
@@ -164,13 +164,13 @@ namespace FTAnalyzer
             UpdateIcons((FactLocation)location);
         }
 
-        private void MapIndividuals_FormClosed(object sender, FormClosedEventArgs e)
+        void MapIndividuals_FormClosed(object sender, FormClosedEventArgs e)
         {
             DatabaseHelper.GeoLocationUpdated -= DatabaseHelper_GeoLocationUpdated;
             this.Dispose();
         }
 
-        private void MapIndividuals_Load(object sender, EventArgs e)
+        void MapIndividuals_Load(object sender, EventArgs e)
         {
             SpecialMethods.SetFonts(this);
         }

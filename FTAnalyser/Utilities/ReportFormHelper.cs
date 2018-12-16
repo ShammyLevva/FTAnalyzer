@@ -218,7 +218,7 @@ namespace FTAnalyzer
             }
         }
 
-        private void ResetFormLayout()
+        void ResetFormLayout()
         {
             if (_saveForm)
             {

@@ -77,23 +77,23 @@ namespace FTAnalyzer.Forms
             return true;
         }
 
-        private void WebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        void WebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             loaded = true;
             System.Diagnostics.Debug.Print("DocumentCompleted called");
         }
 
-        private void LabTOU_Click(object sender, EventArgs e)
+        void LabTOU_Click(object sender, EventArgs e)
         {
             webBrowser.Navigate("http://www.microsoft.com/Maps/product/terms.html");
         }
 
-        private void BingOSMap_FormClosed(object sender, FormClosedEventArgs e)
+        void BingOSMap_FormClosed(object sender, FormClosedEventArgs e)
         {
             Dispose();
         }
 
-        private void BingOSMap_Load(object sender, EventArgs e)
+        void BingOSMap_Load(object sender, EventArgs e)
         {
             SpecialMethods.SetFonts(this);
         }

@@ -23,7 +23,7 @@ namespace FTAnalyzer.UserControls
             _lookupTable = new Dictionary<string, UserControl>();
 		}
 
-		private void Options_Load(object sender, EventArgs e)
+		void Options_Load(object sender, EventArgs e)
 		{
 			SuspendLayout();
 			Type[] types = Assembly.GetExecutingAssembly().GetTypes();
@@ -59,13 +59,13 @@ namespace FTAnalyzer.UserControls
 			this.ResumeLayout();
 		}
 
-		private void AddNodesToTree(string treeNodePosition)
+		void AddNodesToTree(string treeNodePosition)
 		{
 			string[] splitPosition = treeNodePosition.Split(MENU_DELIMETER);
 			SearchAndAddToSubTree(splitPosition, 0, treeView1.Nodes, treeNodePosition);
 		}
 
-		private void SearchAndAddToSubTree(string[] splitPosition,int startPositon, TreeNodeCollection nodes, string key)
+		void SearchAndAddToSubTree(string[] splitPosition,int startPositon, TreeNodeCollection nodes, string key)
 		{
 			TreeNode tempNode = null;
 			if (splitPosition.Length > startPositon)
@@ -97,7 +97,7 @@ namespace FTAnalyzer.UserControls
 			}
 		}
 
-		private void OK_Click(object sender, EventArgs e)
+		void OK_Click(object sender, EventArgs e)
 		{
 			List<string> controlErrors = new List<string>();
 			foreach (Control control in panel1.Controls)
@@ -134,7 +134,7 @@ namespace FTAnalyzer.UserControls
             ReloadRequired?.Invoke(null, EventArgs.Empty);
         }
 
-        private void Cancel_Click(object sender, EventArgs e)
+        void Cancel_Click(object sender, EventArgs e)
 		{
 			foreach (Control control in panel1.Controls)
 			{
@@ -146,7 +146,7 @@ namespace FTAnalyzer.UserControls
 			DialogResult = DialogResult.Cancel;
 		}
 
-		private void TreeView1_AfterSelect(object sender, TreeViewEventArgs e)
+		void TreeView1_AfterSelect(object sender, TreeViewEventArgs e)
 		{
 			if (treeView1.SelectedNode != null)
 			{

@@ -62,7 +62,7 @@ namespace FTAnalyzer.Forms
             splitContainerMap.SplitterDistance = (int)Application.UserAppDataRegistry.GetValue("Lifeline Map Splitter Distance", splitContainerMap.SplitterDistance);
         }
 
-        private void DatabaseHelper_GeoLocationUpdated(object location, EventArgs e)
+        void DatabaseHelper_GeoLocationUpdated(object location, EventArgs e)
         {
             if (this.InvokeRequired)
             {
@@ -72,7 +72,7 @@ namespace FTAnalyzer.Forms
             BuildMap();
         }
 
-        private void SetupMap()
+        void SetupMap()
         {
             lifelines = new FeatureDataTable();
             lifelines.Columns.Add("MapLifeLine", typeof(MapLifeLine));
@@ -157,13 +157,13 @@ namespace FTAnalyzer.Forms
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
         }
 
-        private void DgIndividuals_SelectionChanged(object sender, EventArgs e)
+        void DgIndividuals_SelectionChanged(object sender, EventArgs e)
         {
             if (!isLoading)
                 BuildMap();
         }
 
-        private void BuildMap()
+        void BuildMap()
         {
             this.Cursor = Cursors.WaitCursor;
             lifelines.Clear();
@@ -195,12 +195,12 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
         }
 
-        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             HttpUtility.VisitWebsite(e.Link.LinkData as string);
         }
 
-        private void DgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        void DgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -211,7 +211,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void AddAllFamilyMembersToolStripMenuItem_Click(object sender, EventArgs e)
+        void AddAllFamilyMembersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Individual ind = dgIndividuals.CurrentRow.DataBoundItem as Individual;
             isLoading = true;
@@ -221,14 +221,14 @@ namespace FTAnalyzer.Forms
             BuildMap();
         }
 
-        private void SelectIndividual(Individual i)
+        void SelectIndividual(Individual i)
         {
             DataGridViewRow row = dgIndividuals.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["IndividualID"].Value.ToString().Equals(i.IndividualID)).FirstOrDefault();
             if (row != null)
                 dgIndividuals.Rows[row.Index].Selected = true;
         }
 
-        private void SelectIndividuals(Func<Individual, List<Individual>> method)
+        void SelectIndividuals(Func<Individual, List<Individual>> method)
         {
             this.Cursor = Cursors.WaitCursor;
             isLoading = true;
@@ -240,28 +240,28 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
         }
 
-        private void SelectAllAncestorsToolStripMenuItem_Click(object sender, EventArgs e)
+        void SelectAllAncestorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SelectIndividuals(ft.GetAncestors);
         }
 
-        private void SelectAllDescendantsToolStripMenuItem_Click(object sender, EventArgs e)
+        void SelectAllDescendantsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SelectIndividuals(ft.GetDescendants);
         }
 
-        private void SelectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem_Click(object sender, EventArgs e)
+        void SelectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SelectIndividuals(ft.GetAllRelations);
         }
 
-        private void LifeLine_FormClosed(object sender, FormClosedEventArgs e)
+        void LifeLine_FormClosed(object sender, FormClosedEventArgs e)
         {
             DatabaseHelper.GeoLocationUpdated -= DatabaseHelper_GeoLocationUpdated;
             this.Dispose();
         }
 
-        private void DgIndividuals_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        void DgIndividuals_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
@@ -273,7 +273,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void DgFacts_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        void DgFacts_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
@@ -281,7 +281,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void LifeLine_Load(object sender, EventArgs e)
+        void LifeLine_Load(object sender, EventArgs e)
         {
             int Width = (int)Application.UserAppDataRegistry.GetValue("Lifeline size - width", this.Width);
             int Height = (int)Application.UserAppDataRegistry.GetValue("Lifeline size - height", this.Height);
@@ -300,7 +300,7 @@ namespace FTAnalyzer.Forms
             SpecialMethods.SetFonts(this);
         }
 
-        private void HideLabelsToolStripMenuItem_Click(object sender, EventArgs e)
+        void HideLabelsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (hideLabelsToolStripMenuItem.Checked)
                 mapBox1.Map.Layers.Remove(labelLayer);
@@ -309,48 +309,48 @@ namespace FTAnalyzer.Forms
             RefreshMap();
         }
 
-        private void MnuHideScaleBar_Click(object sender, EventArgs e)
+        void MnuHideScaleBar_Click(object sender, EventArgs e)
         {
             mh.MnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
         }
 
-        private void SplitContainerFacts_SplitterMoved(object sender, SplitterEventArgs e)
+        void SplitContainerFacts_SplitterMoved(object sender, SplitterEventArgs e)
         {
             SplitContainer splitter = (SplitContainer)sender;
             Application.UserAppDataRegistry.SetValue("Lifeline Facts Splitter Distance", this.Height - splitter.SplitterDistance);
         }
 
-        private void SplitContainerMap_SplitterMoved(object sender, SplitterEventArgs e)
+        void SplitContainerMap_SplitterMoved(object sender, SplitterEventArgs e)
         {
             SplitContainer splitter = (SplitContainer)sender;
             Application.UserAppDataRegistry.SetValue("Lifeline Map Splitter Distance", splitter.SplitterDistance);
         }
 
-        private void DgFacts_SelectionChanged(object sender, EventArgs e)
+        void DgFacts_SelectionChanged(object sender, EventArgs e)
         {
             if (!isQuerying)
                 UpdateSelection();
         }
 
-        private void UpdateSelection()
+        void UpdateSelection()
         {
             selections.AddSelections(dgFacts.SelectedRows);
             RefreshMap();
         }
 
-        private void BtnSelect_Click(object sender, EventArgs e)
+        void BtnSelect_Click(object sender, EventArgs e)
         {
             btnSelect.Checked = true;
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.QueryPoint;
         }
 
-        private void MapBox1_ActiveToolChanged(SharpMap.Forms.MapBox.Tools tool)
+        void MapBox1_ActiveToolChanged(SharpMap.Forms.MapBox.Tools tool)
         {
             if (mapBox1.ActiveTool != SharpMap.Forms.MapBox.Tools.QueryPoint)
                 btnSelect.Checked = false;
         }
 
-        private void MapBox1_MapQueried(FeatureDataTable data)
+        void MapBox1_MapQueried(FeatureDataTable data)
         {
             this.Cursor = Cursors.WaitCursor;
             isQuerying = true;
@@ -367,7 +367,7 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
         }
 
-        private void SelectFact(DisplayFact dispFact)
+        void SelectFact(DisplayFact dispFact)
         {
             foreach (DataGridViewRow row in dgFacts.Rows)
             {
@@ -377,7 +377,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void MapBox1_MouseMove(Coordinate worldPos, MouseEventArgs imagePos)
+        void MapBox1_MouseMove(Coordinate worldPos, MouseEventArgs imagePos)
         {
             string tooltip = string.Empty;
             Envelope infoPoint = new Envelope(worldPos.CoordinateValue);
@@ -404,17 +404,17 @@ namespace FTAnalyzer.Forms
                 mapTooltip.SetToolTip(mapBox1, tooltip);
         }
 
-        private void LifeLine_Move(object sender, EventArgs e)
+        void LifeLine_Move(object sender, EventArgs e)
         {
             SavePosition();
         }
 
-        private void LifeLine_Resize(object sender, EventArgs e)
+        void LifeLine_Resize(object sender, EventArgs e)
         {
             SavePosition();
         }
 
-        private void SavePosition()
+        void SavePosition()
         {
             if (!isLoading && this.WindowState == FormWindowState.Normal)
             {  //only save window size if not maximised or minimised
@@ -425,7 +425,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void ResetFormToDefaultSizeAndPositionToolStripMenuItem_Click(object sender, EventArgs e)
+        void ResetFormToDefaultSizeAndPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             isLoading = true;
             this.Height = 682;
@@ -436,19 +436,19 @@ namespace FTAnalyzer.Forms
             SavePosition();
         }
 
-        private void TbOpacity_Scroll(object sender, EventArgs e)
+        void TbOpacity_Scroll(object sender, EventArgs e)
         {
             RefreshMap();
         }
 
-        private void SetOpacity()
+        void SetOpacity()
         {
             float opacity = tbOpacity.Value / 100.0f;
             TileAsyncLayer layer = (TileAsyncLayer)mapBox1.Map.BackgroundLayer[1];
             layer.SetOpacity(opacity);
         }
 
-        private void RefreshMap()
+        void RefreshMap()
         {
             if (this.InvokeRequired)
             {

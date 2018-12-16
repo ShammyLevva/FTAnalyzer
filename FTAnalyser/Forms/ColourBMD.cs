@@ -86,7 +86,7 @@ namespace FTAnalyzer.Forms
             cbFilter.Text = "All Individuals";
         }
 
-        private void ResetTable()
+        void ResetTable()
         {
             dgBMDReportSheet.Sort(dgBMDReportSheet.Columns["BirthDate"], ListSortDirection.Ascending);
             dgBMDReportSheet.Sort(dgBMDReportSheet.Columns["Forenames"], ListSortDirection.Ascending);
@@ -95,7 +95,7 @@ namespace FTAnalyzer.Forms
                 column.Width = column.MinimumWidth;
         }
 
-        private void DgReportSheet_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        void DgReportSheet_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex == -1 || e.ColumnIndex == -1)
             {
@@ -193,18 +193,18 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void PrintToolStripButton_Click(object sender, EventArgs e)
+        void PrintToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintTitle = "Colour BMD Report";
             reportFormHelper.PrintReport("Colour BMD Report");
         }
 
-        private void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
+        void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintPreviewReport();
         }
 
-        private void DgReportSheet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        void DgReportSheet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
@@ -248,7 +248,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void CbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
+        void CbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
             string provider = cbBMDSearchProvider.SelectedItem.ToString();
             if (provider.Equals("FreeBMD"))
@@ -281,7 +281,7 @@ namespace FTAnalyzer.Forms
             return result;
         }
 
-        private void CbFilter_SelectedIndexChanged(object sender, EventArgs e)
+        void CbFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
             switch (cbFilter.SelectedIndex)
@@ -353,23 +353,23 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
         }
 
-        private void MnuExportToExcel_Click(object sender, EventArgs e)
+        void MnuExportToExcel_Click(object sender, EventArgs e)
         {
             reportFormHelper.DoExportToExcel<IDisplayColourBMD>();
         }
 
-        private void MnuResetCensusColumns_Click(object sender, EventArgs e)
+        void MnuResetCensusColumns_Click(object sender, EventArgs e)
         {
             reportFormHelper.ResetColumnLayout("ColourBMDColumns.xml");
         }
 
-        private void MnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
+        void MnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("ColourBMDColumns.xml");
             MessageBox.Show("Form Settings Saved", "BMD Colour");
         }
 
-        private void MnuViewFacts_Click(object sender, EventArgs e)
+        void MnuViewFacts_Click(object sender, EventArgs e)
         {
             if (dgBMDReportSheet.CurrentRow != null)
             {
@@ -381,18 +381,18 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void DgBMDReportSheet_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        void DgBMDReportSheet_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
         }
 
-        private void ColourBMD_FormClosed(object sender, FormClosedEventArgs e)
+        void ColourBMD_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Dispose();
         }
 
-        private void ColourBMD_Load(object sender, EventArgs e)
+        void ColourBMD_Load(object sender, EventArgs e)
         {
             SpecialMethods.SetFonts(this);
         }

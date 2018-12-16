@@ -370,7 +370,7 @@ namespace FTAnalyzer.Forms
                 SortFamilies();
         }
 
-        private void MnuSaveColumnLayout_Click(object sender, EventArgs e)
+        void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
             if (reportType == ReportType.MismatchedChildrenStatus || reportType == ReportType.MissingChildrenStatus)
             {
@@ -382,7 +382,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void MnuResetColumns_Click(object sender, EventArgs e)
+        void MnuResetColumns_Click(object sender, EventArgs e)
         {
             if (reportType == ReportType.MismatchedChildrenStatus || reportType == ReportType.MissingChildrenStatus)
             {
@@ -393,28 +393,28 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void PrintToolStripButton_Click(object sender, EventArgs e)
+        void PrintToolStripButton_Click(object sender, EventArgs e)
         {
             indReportFormHelper.PrintReport(this.Text);
             if (!splitContainer.Panel2Collapsed)
                 famReportFormHelper.PrintReport(this.Text + " - Families");
         }
 
-        private void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
+        void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
         {
             indReportFormHelper.PrintPreviewReport();
             if (!splitContainer.Panel2Collapsed)
                 famReportFormHelper.PrintPreviewReport();
         }
 
-        private void MnuExportToExcel_Click(object sender, EventArgs e)
+        void MnuExportToExcel_Click(object sender, EventArgs e)
         {
             indReportFormHelper.DoExportToExcel<IDisplayIndividual>();
             if (!splitContainer.Panel2Collapsed)
                 famReportFormHelper.DoExportToExcel<IDisplayFamily>();
         }
 
-        private void DgIndividuals_MouseDown(object sender, MouseEventArgs e)
+        void DgIndividuals_MouseDown(object sender, MouseEventArgs e)
         {
             ShowViewNotesMenu(dgIndividuals, e);
         }
@@ -458,7 +458,7 @@ namespace FTAnalyzer.Forms
             UpdateStatusCount();
         }
 
-        private void DgFamilies_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        void DgFamilies_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (reportType == ReportType.MissingChildrenStatus)
                 e.CellStyle.BackColor = Color.BlanchedAlmond;
@@ -510,7 +510,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void People_Load(object sender, EventArgs e)
+        void People_Load(object sender, EventArgs e)
         {
             SpecialMethods.SetFonts(this);
         }

@@ -37,12 +37,12 @@ namespace FTAnalyzer.Forms
             chartDisplay.ChartAreas.Add(caArea);
         }
 
-        private void Chart_FormClosed(object sender, FormClosedEventArgs e)
+        void Chart_FormClosed(object sender, FormClosedEventArgs e)
         {
             Dispose();
         }
 
-        private void Chart_Load(object sender, System.EventArgs e)
+        void Chart_Load(object sender, System.EventArgs e)
         {
             SpecialMethods.SetFonts(this);
         }

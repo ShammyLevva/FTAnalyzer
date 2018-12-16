@@ -67,7 +67,7 @@ namespace FTAnalyzer.Utilities
             GC.SuppressFinalize(this);
         }
 
-        private void CheckDatabaseConnection()
+        void CheckDatabaseConnection()
         {
             try
             {
@@ -150,7 +150,7 @@ namespace FTAnalyzer.Utilities
             return false;
         }
 
-        private void UpgradeDatabase(Version dbVersion)
+        void UpgradeDatabase(Version dbVersion)
         {
             try
             {
@@ -283,7 +283,7 @@ namespace FTAnalyzer.Utilities
         #endregion
 
         #region Lat/Long Routines
-        private void ConvertLatLongs()
+        void ConvertLatLongs()
         {
             Coordinate Point, NorthEast, SouthWest;
             Coordinate mPoint, mNorthEast, mSouthWest;

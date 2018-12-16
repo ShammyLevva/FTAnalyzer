@@ -43,7 +43,7 @@ namespace FTAnalyzer.Forms
             cbLimitFactDates.Text = "No Limit";
         }
 
-        private void SetupMap()
+        void SetupMap()
         {
             clusters = new ClusterLayer(mapBox1.Map);
             mh.AddParishLayers(mapBox1.Map);
@@ -56,7 +56,7 @@ namespace FTAnalyzer.Forms
             mh.SetScaleBar(mapBox1);
         }
 
-        private void SetGeoCodedYearRange()
+        void SetGeoCodedYearRange()
         {
             minGeoCodedYear = FactDate.MAXDATE.Year;
             maxGeoCodedYear = FactDate.MINDATE.Year;
@@ -92,7 +92,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void GeocodeLocationsToolStripMenuItem_Click(object sender, EventArgs e)
+        void GeocodeLocationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
             mh.StartGeocoding(outputText);
@@ -160,12 +160,12 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void TbYears_Scroll(object sender, EventArgs e)
+        void TbYears_Scroll(object sender, EventArgs e)
         {
             UpdateMap();
         }
 
-        private void UpdateMap()
+        void UpdateMap()
         {
             Cursor = Cursors.WaitCursor;
             labValue.Text = tbYears.Value.ToString();
@@ -176,18 +176,18 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.Default;
         }
 
-        private void TbYears_MouseWheel(object sender, EventArgs e)
+        void TbYears_MouseWheel(object sender, EventArgs e)
         {
             // do nothing if using mousewheel this prevents year scrolling when map should scroll
         }
 
-        private void Relations_CheckedChanged(object sender, EventArgs e)
+        void Relations_CheckedChanged(object sender, EventArgs e)
         {
             SetGeoCodedYearRange(); // need to refresh range of years when filters change
             DisplayLocationsForYear(labValue.Text);
         }
 
-        private void MapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        void MapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             bool zoomed = false;
             if (e.Button == MouseButtons.Left && mapBox1.Map.Zoom > mapBox1.Map.MinimumZoom)
@@ -209,7 +209,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void TimeLine_Load(object sender, EventArgs e)
+        void TimeLine_Load(object sender, EventArgs e)
         {
             SetGeoCodedYearRange();
             SetupMap();
@@ -228,7 +228,7 @@ namespace FTAnalyzer.Forms
             loading = false;
         }
 
-        private void MapBox1_MapQueried(FeatureDataTable data)
+        void MapBox1_MapQueried(FeatureDataTable data)
         {
             Cursor = Cursors.WaitCursor;
             List<MapLocation> locations = new List<MapLocation>();
@@ -245,12 +245,12 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.Default;
         }
 
-        private void MapBox1_MapViewOnChange()
+        void MapBox1_MapViewOnChange()
         {
             clusters.Refresh();
         }
 
-        private void MapBox1_MapZoomChanged(double zoom)
+        void MapBox1_MapZoomChanged(double zoom)
         {
             RefreshClusters();
         }
@@ -261,12 +261,12 @@ namespace FTAnalyzer.Forms
             RefreshMap();
         }
 
-        private void MapBox1_MapCenterChanged(Coordinate center)
+        void MapBox1_MapCenterChanged(Coordinate center)
         {
             RefreshClusters();
         }
 
-        private void BtnPlay_Click(object sender, EventArgs e)
+        void BtnPlay_Click(object sender, EventArgs e)
         {
             btnPlay.Visible = false;
             btnStop.Visible = true;
@@ -274,12 +274,12 @@ namespace FTAnalyzer.Forms
             txtTimeInterval.Enabled = false;
         }
 
-        private void BtnStop_Click(object sender, EventArgs e)
+        void BtnStop_Click(object sender, EventArgs e)
         {
             StopTimer();
         }
 
-        private void StopTimer()
+        void StopTimer()
         {
             btnPlay.Visible = !mnuDisableTimeline.Checked; // don't make visible if showing all locations
             btnStop.Visible = false;
@@ -287,7 +287,7 @@ namespace FTAnalyzer.Forms
             txtTimeInterval.Enabled = true;
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        void Timer_Tick(object sender, EventArgs e)
         {
             if (tbYears.Value < tbYears.Maximum)
             {
@@ -298,7 +298,7 @@ namespace FTAnalyzer.Forms
                 StopTimer();
         }
 
-        private void TxtTimeInterval_KeyPress(object sender, KeyPressEventArgs e)
+        void TxtTimeInterval_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (char.IsDigit(e.KeyChar) || e.KeyChar == '\b')
                 e.Handled = false;
@@ -306,7 +306,7 @@ namespace FTAnalyzer.Forms
                 e.Handled = true;
         }
 
-        private void TxtTimeInterval_Validated(object sender, EventArgs e)
+        void TxtTimeInterval_Validated(object sender, EventArgs e)
         {
             if (int.TryParse(txtTimeInterval.Text, out int result))
             {
@@ -314,19 +314,19 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void BtnSelect_Click(object sender, EventArgs e)
+        void BtnSelect_Click(object sender, EventArgs e)
         {
             btnSelect.Checked = true;
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.QueryPoint;
         }
 
-        private void MapBox1_ActiveToolChanged(SharpMap.Forms.MapBox.Tools tool)
+        void MapBox1_ActiveToolChanged(SharpMap.Forms.MapBox.Tools tool)
         {
             if (mapBox1.ActiveTool != SharpMap.Forms.MapBox.Tools.QueryPoint)
                 btnSelect.Checked = false;
         }
 
-        private void BtnBack10_Click(object sender, EventArgs e)
+        void BtnBack10_Click(object sender, EventArgs e)
         {
             int step = 10;
             if (geocodedRange <= 150)
@@ -338,21 +338,21 @@ namespace FTAnalyzer.Forms
             UpdateMap();
         }
 
-        private void BtnBack1_Click(object sender, EventArgs e)
+        void BtnBack1_Click(object sender, EventArgs e)
         {
             if (tbYears.Value != tbYears.Minimum)
                 tbYears.Value -= 1;
             UpdateMap();
         }
 
-        private void BtnForward1_Click(object sender, EventArgs e)
+        void BtnForward1_Click(object sender, EventArgs e)
         {
             if (tbYears.Value != tbYears.Maximum)
                 tbYears.Value += 1;
             UpdateMap();
         }
 
-        private void BtnForward10_Click(object sender, EventArgs e)
+        void BtnForward10_Click(object sender, EventArgs e)
         {
             int step = 10;
             if (geocodedRange <= 150)
@@ -364,7 +364,7 @@ namespace FTAnalyzer.Forms
             UpdateMap();
         }
 
-        private void MnuDisableTimeline_Click(object sender, EventArgs e)
+        void MnuDisableTimeline_Click(object sender, EventArgs e)
         {
             tbYears.Visible = !mnuDisableTimeline.Checked;
             btnBack1.Visible = !mnuDisableTimeline.Checked;
@@ -390,7 +390,7 @@ namespace FTAnalyzer.Forms
             UpdateMap();
         }
 
-        private void CbLimitFactDates_SelectedIndexChanged(object sender, EventArgs e)
+        void CbLimitFactDates_SelectedIndexChanged(object sender, EventArgs e)
         {
             yearLimit = GetYearLimit();
             UpdateMap();
@@ -423,32 +423,32 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void MnuHideScaleBar_Click(object sender, EventArgs e)
+        void MnuHideScaleBar_Click(object sender, EventArgs e)
         {
             mh.MnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
         }
 
-        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             HttpUtility.VisitWebsite(e.Link.LinkData as string);
         }
 
-        private void TimeLine_FormClosed(object sender, FormClosedEventArgs e)
+        void TimeLine_FormClosed(object sender, FormClosedEventArgs e)
         {
             Dispose();
         }
 
-        private void TimeLine_Resize(object sender, EventArgs e)
+        void TimeLine_Resize(object sender, EventArgs e)
         {
             SavePosition();
         }
 
-        private void TimeLine_Move(object sender, EventArgs e)
+        void TimeLine_Move(object sender, EventArgs e)
         {
             SavePosition();
         }
 
-        private void SavePosition()
+        void SavePosition()
         {
             if (!loading && WindowState == FormWindowState.Normal)
             {  //only save window size if not maximised or minimised
@@ -459,7 +459,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void ResetFormToDefaultPostiionAndSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        void ResetFormToDefaultPostiionAndSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             loading = true;
             Height = 622;
@@ -470,19 +470,19 @@ namespace FTAnalyzer.Forms
             SavePosition();
         }
 
-        private void TbOpacity_Scroll(object sender, EventArgs e)
+        void TbOpacity_Scroll(object sender, EventArgs e)
         {
             RefreshMap();
         }
 
-        private void SetOpacity()
+        void SetOpacity()
         {
             float opacity = tbOpacity.Value / 100.0f;
             TileAsyncLayer layer = (TileAsyncLayer)mapBox1.Map.BackgroundLayer[1];
             layer.SetOpacity(opacity);
         }
 
-        private void RefreshMap()
+        void RefreshMap()
         {
             if (InvokeRequired)
             {

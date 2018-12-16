@@ -79,7 +79,7 @@ namespace FTAnalyzer.UserControls
 
 		#endregion
 
-        private void BtnBrowseFolder_Click(object sender, EventArgs e)
+        void BtnBrowseFolder_Click(object sender, EventArgs e)
         {
             DialogResult result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK)

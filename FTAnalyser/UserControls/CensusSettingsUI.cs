@@ -92,22 +92,22 @@ namespace FTAnalyzer.UserControls
             CompactCensusRefChanged?.Invoke(null, EventArgs.Empty);
         }
 
-        private void ChkTolerateInaccurateCensus_CheckedChanged(object sender, EventArgs e)
+        void ChkTolerateInaccurateCensus_CheckedChanged(object sender, EventArgs e)
         {
             Properties.GeneralSettings.Default.ReloadRequired = true;
         }
 
-        private void ChkCensusResidence_CheckedChanged(object sender, EventArgs e)
+        void ChkCensusResidence_CheckedChanged(object sender, EventArgs e)
         {
             Properties.GeneralSettings.Default.ReloadRequired = true;
         }
 
-        private void ChkFamilyCensus_CheckedChanged(object sender, EventArgs e)
+        void ChkFamilyCensus_CheckedChanged(object sender, EventArgs e)
         {
             Properties.GeneralSettings.Default.ReloadRequired = true;
         }
 
-        private void ChkAutoCreateCensus_CheckedChanged(object sender, EventArgs e)
+        void ChkAutoCreateCensus_CheckedChanged(object sender, EventArgs e)
         {
             Properties.GeneralSettings.Default.ReloadRequired = true;
         }

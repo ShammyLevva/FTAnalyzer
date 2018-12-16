@@ -45,7 +45,7 @@ namespace FTAnalyzer.Forms
             btnShowHideFacts.Visible = false;
         }
 
-        private void Grid_SortFinished(object sender, EventArgs e)
+        void Grid_SortFinished(object sender, EventArgs e)
         {
             SetBackColour();
         }
@@ -207,7 +207,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void DgFacts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        void DgFacts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == 1)
             {
@@ -230,7 +230,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void BtnShowHideFacts_Click(object sender, EventArgs e)
+        void BtnShowHideFacts_Click(object sender, EventArgs e)
         {
             ShowHideFactRows();
         }
@@ -255,14 +255,14 @@ namespace FTAnalyzer.Forms
 
         #endregion
 
-        private void AddIndividualsFacts(Individual individual)
+        void AddIndividualsFacts(Individual individual)
         {
             IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
             foreach (Fact f in list)
                 facts.Add(new DisplayFact(individual, f));
         }
 
-        private void AddIndividualsFacts(Individual individual, List<string> factTypes, List<string> excludedTypes)
+        void AddIndividualsFacts(Individual individual, List<string> factTypes, List<string> excludedTypes)
         {
             IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
             if (factTypes.Count == 0 && excludedTypes != null && !list.Any(x => excludedTypes.Contains(x.FactTypeDescription)))
@@ -275,7 +275,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void AddDuplicateFacts(Individual individual, List<string> factTypes)
+        void AddDuplicateFacts(Individual individual, List<string> factTypes)
         {
             IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
             foreach (string factType in factTypes)
@@ -286,7 +286,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void SetupFacts(string extraText = "")
+        void SetupFacts(string extraText = "")
         {
             dgFacts.DataSource = facts;
             reportFormHelper.LoadColumnLayout("FactsColumns.xml");
@@ -294,7 +294,7 @@ namespace FTAnalyzer.Forms
             SetBackColour();
         }
 
-        private void SetBackColour()
+        void SetBackColour()
         {
             bool backColourGrey = false;
             DisplayFact previous = null;
@@ -310,7 +310,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void ResetTable()
+        void ResetTable()
         {
             if (allFacts)
             {
@@ -323,38 +323,38 @@ namespace FTAnalyzer.Forms
             SetBackColour();
         }
 
-        private void PrintToolStripButton_Click(object sender, EventArgs e)
+        void PrintToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintReport("Facts Report");
         }
 
-        private void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
+        void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintPreviewReport();
         }
 
-        private void Facts_TextChanged(object sender, EventArgs e)
+        void Facts_TextChanged(object sender, EventArgs e)
         {
             reportFormHelper.PrintTitle = Text;
         }
 
-        private void MnuExportToExcel_Click(object sender, EventArgs e)
+        void MnuExportToExcel_Click(object sender, EventArgs e)
         {
             reportFormHelper.DoExportToExcel<IDisplayFact>();
         }
 
-        private void MnuResetColumns_Click(object sender, EventArgs e)
+        void MnuResetColumns_Click(object sender, EventArgs e)
         {
             reportFormHelper.ResetColumnLayout("FactsColumns.xml");
         }
 
-        private void MnuSaveColumnLayout_Click(object sender, EventArgs e)
+        void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("FactsColumns.xml");
             MessageBox.Show("Form Settings Saved", "Facts");
         }
 
-        private void DgFacts_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        void DgFacts_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == 0)
             {
@@ -363,7 +363,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void DgFacts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        void DgFacts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex > 0)
             {
@@ -389,12 +389,12 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void Facts_FormClosed(object sender, FormClosedEventArgs e)
+        void Facts_FormClosed(object sender, FormClosedEventArgs e)
         {
             Dispose();
         }
 
-        private void DgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        void DgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -412,7 +412,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void Facts_Load(object sender, EventArgs e)
+        void Facts_Load(object sender, EventArgs e)
         {
             SpecialMethods.SetFonts(this);
         }

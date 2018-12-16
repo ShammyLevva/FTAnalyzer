@@ -54,7 +54,7 @@ namespace FTAnalyzer.Forms
             tsStatusLabel.Visible = true;
         }
 
-        private void DgStatistics_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        void DgStatistics_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -65,7 +65,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private void StatisticsForm_Load(object sender, EventArgs e)
+        void StatisticsForm_Load(object sender, EventArgs e)
         {
             SpecialMethods.SetFonts(this);
         }

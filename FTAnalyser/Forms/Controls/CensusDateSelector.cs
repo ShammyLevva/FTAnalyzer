@@ -32,7 +32,7 @@ namespace FTAnalyzer.Controls
             SetControlWidth();
         }
 
-        private void AddValuationItems()
+        void AddValuationItems()
         {
             cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1865);
             cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1875);
@@ -86,7 +86,7 @@ namespace FTAnalyzer.Controls
             }
         }
 
-        private void AddCensusItems(string location)
+        void AddCensusItems(string location)
         {
             if (location.Equals(Countries.UNITED_KINGDOM))
             {
@@ -162,7 +162,7 @@ namespace FTAnalyzer.Controls
             cbCensusDate.SelectedItem = defaultDate;
         }
 
-        private void SetControlWidth()
+        void SetControlWidth()
         {
             cbCensusDate.Width = 10;
             Graphics g = cbCensusDate.CreateGraphics();
@@ -187,7 +187,7 @@ namespace FTAnalyzer.Controls
             }
         }
 
-        private void CbCensusDate_SelectedIndexChanged(object sender, EventArgs e)
+        void CbCensusDate_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!_loading)
                 OnCensusChanged(e);
