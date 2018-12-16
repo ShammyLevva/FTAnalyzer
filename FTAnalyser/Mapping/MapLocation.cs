@@ -1,8 +1,7 @@
-﻿using System.Drawing;
-using GeoAPI.Geometries;
+﻿using GeoAPI.Geometries;
 using NetTopologySuite.Geometries;
 using SharpMap.Data;
-using System;
+using System.Drawing;
 
 namespace FTAnalyzer.Mapping
 {
@@ -13,8 +12,9 @@ namespace FTAnalyzer.Mapping
         public Fact Fact { get; private set; }
         public FactLocation Location { get; private set; }
         public Geometry Geometry { get; private set; }
-        private FactDate year;
         public string FoundLocation { get; private set; }
+
+        readonly FactDate _year;
 
         private static IPoint centre = new NetTopologySuite.Geometries.Point(0, 0);
 
@@ -22,13 +22,13 @@ namespace FTAnalyzer.Mapping
 
         public MapLocation(Individual ind, Fact fact, FactLocation loc, FactDate year)
         {
-            this.Individual = ind;
-            this.Fact = fact;
-            this.Location = loc;
-            this.year = year;
-            this.Icon = FactLocationImage.ErrorIcon(loc.GeocodeStatus).Icon;
-            this.Geometry = new NetTopologySuite.Geometries.Point(Location.LongitudeM, Location.LatitudeM);
-            this.FoundLocation = loc.FoundLocation;
+            Individual = ind;
+            Fact = fact;
+            Location = loc;
+            _year = year;
+            Icon = FactLocationImage.ErrorIcon(loc.GeocodeStatus).Icon;
+            Geometry = new NetTopologySuite.Geometries.Point(Location.LongitudeM, Location.LatitudeM);
+            FoundLocation = loc.FoundLocation;
         }
 
         public FeatureDataRow AddFeatureDataRow(FeatureDataTable table)
@@ -43,33 +43,27 @@ namespace FTAnalyzer.Mapping
             return r;
         }
 
-        public void UpdateIcon()
-        {
-            this.Icon = FactLocationImage.ErrorIcon(Location.GeocodeStatus).Icon;
-        }
+        public void UpdateIcon() => Icon = FactLocationImage.ErrorIcon(Location.GeocodeStatus).Icon;
 
-        public FactDate FactDate { get { return Fact.FactDate; } }
+        public FactDate FactDate => Fact.FactDate;
 
-        public string IndividualID { get { return Individual.IndividualID; } }
+        public string IndividualID => Individual.IndividualID;
 
-        public string Name { get { return Individual.Name; } }
+        public string Name => Individual.Name;
 
-        public string TypeOfFact { get { return Fact.FactTypeDescription; } }
+        public string TypeOfFact => Fact.FactTypeDescription;
 
-        public Age AgeAtFact { get { return Individual?.GetAge(year); } }
+        public Age AgeAtFact => Individual?.GetAge(_year);
 
-        public string Relation { get { return Individual.Relation; } }
+        public string Relation => Individual.Relation;
 
-        public string RelationToRoot { get { return Individual.RelationToRoot; } }
+        public string RelationToRoot => Individual.RelationToRoot;
 
-        public Int64 Ahnentafel { get { return Individual.Ahnentafel; } }
+        public decimal Ahnentafel => Individual.Ahnentafel;
 
-        public double SortDistance { get { return centre.Distance(Geometry); } }
+        public double SortDistance => centre.Distance(Geometry);
 
-        public override string ToString()
-        {
-            return Individual.IndividualID + ": " + Individual.Name + ", " + Fact.ToString();
-        }
+        public override string ToString() => Individual.IndividualID + ": " + Individual.Name + ", " + Fact.ToString();
     }
 }
 

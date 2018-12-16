@@ -15,17 +15,16 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace FTAnalyzer.Mapping
 {
     public class MapHelper
     {
-        private static MapHelper instance;
-        private FamilyTree ft = FamilyTree.Instance;
+        static MapHelper instance;
+        FamilyTree ft = FamilyTree.Instance;
 
-        private MapHelper()
+        MapHelper()
         {
         }
 
@@ -34,9 +33,7 @@ namespace FTAnalyzer.Mapping
             get
             {
                 if (instance == null)
-                {
                     instance = new MapHelper();
-                }
                 return instance;
             }
         }

@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.0.5.0";
+        public static string VERSION = "7.1.0.0";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -342,7 +342,8 @@ namespace FTAnalyzer
 
         void MnuCloseGEDCOM_Click(object sender, EventArgs e)
         {
-            CleanUp();
+            if(!loading)
+                CleanUp();
         }
 
         void CleanUp()
@@ -361,6 +362,7 @@ namespace FTAnalyzer
         {
             mnuPrint.Enabled = enabled;
             mnuReload.Enabled = enabled;
+            mnuCloseGEDCOM.Enabled = enabled;
             mnuFactsToExcel.Enabled = enabled;
             mnuIndividualsToExcel.Enabled = enabled;
             mnuFamiliesToExcel.Enabled = enabled;
@@ -589,35 +591,40 @@ namespace FTAnalyzer
 
         void BtnShowMap_Click(object sender, EventArgs e)
         {
-            int zoom = GetMapZoomLevel(out FactLocation loc);
+            float zoom = GetMapZoomLevel(out FactLocation loc);
             if (loc != null && loc.IsGeoCoded(false))
-                HttpUtility.VisitWebsite($"https://www.google.com/maps/@?api=1&map_action=map&center={loc.Latitude},{loc.Longitude}&zoom={zoom}");
+            {
+                string URL = $"https://www.google.com/maps/@{loc.Latitude},{loc.Longitude},{zoom}z";
+                HttpUtility.VisitWebsite(URL);
+            }
             else
                 MessageBox.Show($"{loc.ToString()} is not yet geocoded so can't be displayed.");
         }
 
-        void BtnBingOSMap_Click(object sender, EventArgs e)
+        void BtnOSMap_Click(object sender, EventArgs e)
         {
-            //Cursor = Cursors.WaitCursor;
-            //int zoom = GetMapZoomLevel(out FactLocation loc);
-            //if (loc != null)
-            //{   // Do geo coding stuff
-            //    BingOSMap frmBingMap = new BingOSMap();
-            //    if (frmBingMap.SetLocation(loc, zoom))
-            //    {
-            //        DisposeDuplicateForms(frmBingMap);
-            //        frmBingMap.Show();
-            //    }
-            //    else
-            //    {
-            //        frmBingMap.Dispose();
-            //        MessageBox.Show("Unable to find location : " + loc.GetLocation(locType), "FTAnalyzer");
-            //    }
-            //}
-            //Cursor = Cursors.Default;
+            bool oldOSMap = (sender as Button).Name == "btnOldOSMap";
+            {
+                float zoom = GetMapZoomLevel(out FactLocation loc);
+                if (loc != null && loc.IsGeoCoded(false))
+                {
+                    if (loc.IsWithinUKBounds)
+                    {
+                        if (oldOSMap)
+                        {
+                            string URL = $"https://maps.nls.uk/geo/explore/#zoom={zoom}&lat={loc.Latitude}&lon={loc.Longitude}&layers=1&b=1";
+                            HttpUtility.VisitWebsite(URL);
+                        }
+                    }
+                    else
+                        MessageBox.Show($"{loc.ToString()} is outwith the UK so cannot be shown on a UK OS Map.");
+                }
+                else
+                    MessageBox.Show($"{loc.ToString()} is not yet geocoded so can't be displayed.");
+            }
         }
 
-        int GetMapZoomLevel(out FactLocation loc)
+        float GetMapZoomLevel(out FactLocation loc)
         {
             // get the tab
             loc = null;
@@ -650,7 +657,7 @@ namespace FTAnalyzer
                     MessageBox.Show("Location selected isn't valid to show on the map.", "FTAnalyzer");
                 else
                     MessageBox.Show("Nothing selected. Please select a location to show on the map.", "FTAnalyzer");
-                return 0;
+                return 0f;
             }
             return loc.ZoomLevel;
         }

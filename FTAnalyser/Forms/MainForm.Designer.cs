@@ -215,7 +215,8 @@
             this.btnDuplicateCensus = new System.Windows.Forms.Button();
             this.btnMissingCensusLocation = new System.Windows.Forms.Button();
             this.tabLocations = new System.Windows.Forms.TabPage();
-            this.btnBingOSMap = new System.Windows.Forms.Button();
+            this.btnModernOSMap = new System.Windows.Forms.Button();
+            this.btnOldOSMap = new System.Windows.Forms.Button();
             this.btnShowMap = new System.Windows.Forms.Button();
             this.tabCtrlLocations = new System.Windows.Forms.TabControl();
             this.tabTreeView = new System.Windows.Forms.TabPage();
@@ -2105,7 +2106,8 @@
             // 
             // tabLocations
             // 
-            this.tabLocations.Controls.Add(this.btnBingOSMap);
+            this.tabLocations.Controls.Add(this.btnModernOSMap);
+            this.tabLocations.Controls.Add(this.btnOldOSMap);
             this.tabLocations.Controls.Add(this.btnShowMap);
             this.tabLocations.Controls.Add(this.tabCtrlLocations);
             this.tabLocations.Location = new System.Drawing.Point(4, 22);
@@ -2116,22 +2118,33 @@
             this.tabLocations.Text = "Locations";
             this.tabLocations.UseVisualStyleBackColor = true;
             // 
-            // btnBingOSMap
+            // btnModernOSMap
             // 
-            this.btnBingOSMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBingOSMap.Location = new System.Drawing.Point(800, 1);
-            this.btnBingOSMap.Name = "btnBingOSMap";
-            this.btnBingOSMap.Size = new System.Drawing.Size(104, 22);
-            this.btnBingOSMap.TabIndex = 3;
-            this.btnBingOSMap.Text = "Show OS Map";
-            this.btnBingOSMap.UseVisualStyleBackColor = true;
-            this.btnBingOSMap.Visible = false;
-            this.btnBingOSMap.Click += new System.EventHandler(this.BtnBingOSMap_Click);
+            this.btnModernOSMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnModernOSMap.Location = new System.Drawing.Point(709, 2);
+            this.btnModernOSMap.Name = "btnModernOSMap";
+            this.btnModernOSMap.Size = new System.Drawing.Size(125, 22);
+            this.btnModernOSMap.TabIndex = 5;
+            this.btnModernOSMap.Text = "Show Modern OS Map";
+            this.btnModernOSMap.UseVisualStyleBackColor = true;
+            this.btnModernOSMap.Visible = false;
+            this.btnModernOSMap.Click += new System.EventHandler(this.BtnOSMap_Click);
+            // 
+            // btnOldOSMap
+            // 
+            this.btnOldOSMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOldOSMap.Location = new System.Drawing.Point(850, 2);
+            this.btnOldOSMap.Name = "btnOldOSMap";
+            this.btnOldOSMap.Size = new System.Drawing.Size(104, 22);
+            this.btnOldOSMap.TabIndex = 3;
+            this.btnOldOSMap.Text = "Show Old OS Map";
+            this.btnOldOSMap.UseVisualStyleBackColor = true;
+            this.btnOldOSMap.Click += new System.EventHandler(this.BtnOSMap_Click);
             // 
             // btnShowMap
             // 
             this.btnShowMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnShowMap.Location = new System.Drawing.Point(970, 1);
+            this.btnShowMap.Location = new System.Drawing.Point(970, 2);
             this.btnShowMap.Name = "btnShowMap";
             this.btnShowMap.Size = new System.Drawing.Size(104, 22);
             this.btnShowMap.TabIndex = 2;
@@ -2332,7 +2345,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbOutput.Location = new System.Drawing.Point(0, 112);
+            this.rtbOutput.Location = new System.Drawing.Point(0, 118);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.ReadOnly = true;
             this.rtbOutput.Size = new System.Drawing.Size(1079, 325);
@@ -3527,7 +3540,7 @@
         private System.Windows.Forms.TabPage tabDisplayProgress;
         private System.Windows.Forms.TabControl tabSelector;
         private System.Windows.Forms.ToolStripMenuItem mnuMaps;
-        private System.Windows.Forms.Button btnBingOSMap;
+        private System.Windows.Forms.Button btnOldOSMap;
         private System.Windows.Forms.ToolStripMenuItem mnuShowTimeline;
         private System.Windows.Forms.ImageList imageList;
         private System.Windows.Forms.ToolStripMenuItem whatsNewToolStripMenuItem;
@@ -3727,6 +3740,7 @@
         private System.Windows.Forms.ToolStripMenuItem facebookUserGroupToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.ToolStripMenuItem mnuDataErrorsToExcel;
+        private System.Windows.Forms.Button btnModernOSMap;
     }
 }
 

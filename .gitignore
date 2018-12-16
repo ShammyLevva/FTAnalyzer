@@ -28,6 +28,8 @@ bld/
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
+[Bb]uild[Tt]ools/
+[Bb]uild[Pr]oocess[Tt]emplates/
 
 # NUNIT
 *.VisualState.xml
@@ -160,6 +162,7 @@ PublishScripts/
 # NuGet v3's project.json files produces more ignoreable files
 *.nuget.props
 *.nuget.targets
+.nuget/
 
 # Microsoft Azure Build Output
 csx/
@@ -261,3 +264,5 @@ __pycache__/
 /OSGazetteerProcessor/Resources
 /FTAnalyser/Mapping/GoogleAPIKey.cs
 !/docs/releases
+/FTAnalyser/FTAnalyzer.Windows*.ruleset
+/FTAnalyser/Performance*.psess

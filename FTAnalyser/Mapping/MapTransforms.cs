@@ -74,17 +74,14 @@ namespace FTAnalyzer.Mapping
             }
         }
 
-        private static ICoordinateTransformation wgs84toGoogle;
+        static ICoordinateTransformation wgs84toGoogle;
 
-        private static CoordinateTransformationFactory ctFact = new CoordinateTransformationFactory();
-        private static CoordinateSystemFactory csFact = new CoordinateSystemFactory();
+        static CoordinateTransformationFactory ctFact = new CoordinateTransformationFactory();
+        static readonly CoordinateSystemFactory csFact = new CoordinateSystemFactory();
 
-        private static ICoordinateTransformation Transform()
-        {
-            return ctFact.CreateFromCoordinateSystems(GeographicCoordinateSystem.WGS84, GetEPSG900913(csFact));
-        }
+        static ICoordinateTransformation Transform() => ctFact.CreateFromCoordinateSystems(GeographicCoordinateSystem.WGS84, GetEPSG900913(csFact));
 
-        private static ICoordinateTransformation ReverseTransform()
+        static ICoordinateTransformation ReverseTransform()
         {
             return ctFact.CreateFromCoordinateSystems(GetEPSG900913(csFact), GeographicCoordinateSystem.WGS84); ;
         }
