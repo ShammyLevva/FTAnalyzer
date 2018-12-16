@@ -1,7 +1,20 @@
+#### Updated Release Version 7.1.0.0 16th December 2018  
+**Updates**  
+Update Google Maps display on Locations tab to work with updated Google Maps  
+Updated OS Maps to display on historic OS Maps via interactive National Library of Scotland Maps  
+Added extra Family Historian Fact types  
+Added extra census custom fact type recognition  
+
+**Bugfixes**  
+Fix max extents on map zooming out too much and including 0,0  
+Add marriage ID differentiator for possible duplicate facts  
+Fix progress bar for Family Historian locations  
+
 #### Updated Release Version 7.0.5.0 15th December 2018  
 **Updates**  
 Added a Data Errors export to Excel feature  
 Added support for Family Historian _PLAC codes  
+
 **Bugfixes**  
 Add fix for hyphenated capitalised shires  
 Add recognition of UK/GB countries with ,UK and ,GB at end  
