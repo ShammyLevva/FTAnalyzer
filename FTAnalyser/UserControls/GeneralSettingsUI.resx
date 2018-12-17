@@ -134,35 +134,35 @@
   <data name="$this.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="chkSkipCensusReferences.AutoSize" type="System.Boolean, mscorlib">
+  <data name="chkSkipFixingLocations.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="chkSkipCensusReferences.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="chkSkipFixingLocations.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="chkSkipCensusReferences.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="chkSkipFixingLocations.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 259</value>
   </data>
-  <data name="chkSkipCensusReferences.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 17</value>
+  <data name="chkSkipFixingLocations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 17</value>
   </data>
-  <data name="chkSkipCensusReferences.TabIndex" type="System.Int32, mscorlib">
+  <data name="chkSkipFixingLocations.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
   </data>
-  <data name="chkSkipCensusReferences.Text" xml:space="preserve">
-    <value>Skip checking for Census References in notes etc</value>
+  <data name="chkSkipFixingLocations.Text" xml:space="preserve">
+    <value>Skip Fixing Locations on Load (*)</value>
   </data>
-  <data name="&gt;&gt;chkSkipCensusReferences.Name" xml:space="preserve">
-    <value>chkSkipCensusReferences</value>
+  <data name="&gt;&gt;chkSkipFixingLocations.Name" xml:space="preserve">
+    <value>chkSkipFixingLocations</value>
   </data>
-  <data name="&gt;&gt;chkSkipCensusReferences.Type" xml:space="preserve">
+  <data name="&gt;&gt;chkSkipFixingLocations.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;chkSkipCensusReferences.Parent" xml:space="preserve">
+  <data name="&gt;&gt;chkSkipFixingLocations.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;chkSkipCensusReferences.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;chkSkipFixingLocations.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="chkMultiAncestor.AutoSize" type="System.Boolean, mscorlib">

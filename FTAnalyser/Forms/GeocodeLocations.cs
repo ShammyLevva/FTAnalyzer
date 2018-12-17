@@ -617,13 +617,10 @@ namespace FTAnalyzer.Forms
                                         }
                                         if (loc.GeocodeStatus != FactLocation.Geocode.MATCHED && checkresultsPass == 1)
                                         {
-                                            if (loc.GEDCOMLocation.Equals(loc.GoogleFixed))
-                                                checkresultsPass++;  // if we have the same string skip checking GEDCOM location
+                                            if (loc.OriginalText == loc.GoogleFixed)
+                                                checkresultsPass++;  // if we have the same string skip checking Original Text location
                                             else
-                                            {
-                                                //log.Info("Searching Google for original text '" + loc.GEDCOMLocation + "'.");
-                                                res = SearchGoogle(loc.GEDCOMLocation);
-                                            }
+                                                res = SearchGoogle(loc.OriginalText);
                                         }
                                         checkresultsPass++;
                                     }

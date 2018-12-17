@@ -367,6 +367,7 @@ namespace FTAnalyzer
             mnuFactsToExcel.Enabled = enabled;
             mnuIndividualsToExcel.Enabled = enabled;
             mnuFamiliesToExcel.Enabled = enabled;
+            MnuExportLocations.Enabled = enabled;
             mnuSourcesToExcel.Enabled = enabled;
             mnuDataErrorsToExcel.Enabled = enabled;
             mnuLooseBirthsToExcel.Enabled = enabled;
@@ -2957,6 +2958,16 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
+        void MnuExportLocations_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+            DataTable dt = convertor.ToDataTable(new List<IDisplayLocation>(ft.AllDisplayPlaces));
+            ExportToExcel.Export(dt);
+            Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportSourcesEvent);
+            HourGlass(false);
+        }
+
         void MnuSourcesToExcel_Click(object sender, EventArgs e)
         {
             HourGlass(true);
@@ -3243,5 +3254,6 @@ namespace FTAnalyzer
             DNA_GEDCOM.Export();
             HourGlass(false);
         }
+
     }
 }

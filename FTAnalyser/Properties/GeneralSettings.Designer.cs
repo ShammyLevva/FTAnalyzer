@@ -310,5 +310,17 @@ namespace FTAnalyzer.Properties {
                 this["SkipCensusReferences"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SkipFixingLocations {
+            get {
+                return ((bool)(this["SkipFixingLocations"]));
+            }
+            set {
+                this["SkipFixingLocations"] = value;
+            }
+        }
     }
 }

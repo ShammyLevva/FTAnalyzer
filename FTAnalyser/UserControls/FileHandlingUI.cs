@@ -74,15 +74,8 @@ namespace FTAnalyzer.UserControls
 		}
 
         #endregion
-        void ChkLoadWithFilters_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.GeneralSettings.Default.ReloadRequired = true;
-        }
+        void ChkLoadWithFilters_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
 
-        void ChkRetryFailedLines_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.GeneralSettings.Default.ReloadRequired = true;
-        }
-
+        void ChkRetryFailedLines_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
     }
 }

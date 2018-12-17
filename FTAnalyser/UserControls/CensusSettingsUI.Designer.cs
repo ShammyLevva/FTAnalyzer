@@ -38,6 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.chkHideMissingTagged = new System.Windows.Forms.CheckBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.chkSkipCensusReferences = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,6 +54,7 @@
             this.chkAddCreatedLocations.TabIndex = 36;
             this.chkAddCreatedLocations.Text = "Add Auto Created Census Locations to Locations List (*)";
             this.chkAddCreatedLocations.UseVisualStyleBackColor = true;
+            this.chkAddCreatedLocations.CheckedChanged += new System.EventHandler(this.ChkAddCreatedLocations_CheckedChanged);
             // 
             // chkAutoCreateCensus
             // 
@@ -66,6 +68,7 @@
             this.chkAutoCreateCensus.TabIndex = 35;
             this.chkAutoCreateCensus.Text = "Auto Create Census Events from Notes && Sources (*)";
             this.chkAutoCreateCensus.UseVisualStyleBackColor = true;
+            this.chkAutoCreateCensus.CheckedChanged += new System.EventHandler(this.ChkAutoCreateCensus_CheckedChanged);
             // 
             // chkCompactCensusRef
             // 
@@ -88,6 +91,7 @@
             this.chkFamilyCensus.TabIndex = 33;
             this.chkFamilyCensus.Text = "Family Census Facts Apply To Only Parents (*)";
             this.chkFamilyCensus.UseVisualStyleBackColor = true;
+            this.chkFamilyCensus.CheckedChanged += new System.EventHandler(this.ChkFamilyCensus_CheckedChanged);
             // 
             // chkTolerateInaccurateCensus
             // 
@@ -101,6 +105,7 @@
             this.chkTolerateInaccurateCensus.TabIndex = 32;
             this.chkTolerateInaccurateCensus.Text = "Tolerate Slightly Inaccurate Census Dates (*)";
             this.chkTolerateInaccurateCensus.UseVisualStyleBackColor = true;
+            this.chkTolerateInaccurateCensus.CheckedChanged += new System.EventHandler(this.ChkTolerateInaccurateCensus_CheckedChanged);
             // 
             // chkCensusResidence
             // 
@@ -114,6 +119,7 @@
             this.chkCensusResidence.TabIndex = 31;
             this.chkCensusResidence.Text = "Treat Residence Facts As Census Facts (*)";
             this.chkCensusResidence.UseVisualStyleBackColor = true;
+            this.chkCensusResidence.CheckedChanged += new System.EventHandler(this.ChkCensusResidence_CheckedChanged);
             // 
             // label1
             // 
@@ -142,12 +148,26 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // chkSkipCensusReferences
+            // 
+            this.chkSkipCensusReferences.AutoSize = true;
+            this.chkSkipCensusReferences.Checked = true;
+            this.chkSkipCensusReferences.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSkipCensusReferences.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.chkSkipCensusReferences.Location = new System.Drawing.Point(3, 164);
+            this.chkSkipCensusReferences.Name = "chkSkipCensusReferences";
+            this.chkSkipCensusReferences.Size = new System.Drawing.Size(263, 17);
+            this.chkSkipCensusReferences.TabIndex = 39;
+            this.chkSkipCensusReferences.Text = "Skip checking for Census References in notes etc";
+            this.chkSkipCensusReferences.UseVisualStyleBackColor = true;
+            // 
             // CensusSettingsUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
+            this.Controls.Add(this.chkSkipCensusReferences);
             this.Controls.Add(this.chkHideMissingTagged);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.chkAddCreatedLocations);
@@ -175,5 +195,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkHideMissingTagged;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.CheckBox chkSkipCensusReferences;
     }
 }

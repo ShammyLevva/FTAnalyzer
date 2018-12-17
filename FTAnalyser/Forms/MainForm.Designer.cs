@@ -80,6 +80,8 @@
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuTreetopsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuWorldWarsToExcel = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuDNA_GEDCOM = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -322,8 +324,7 @@
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.mnuDNA_GEDCOM = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            this.MnuExportLocations = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -642,6 +643,7 @@
             this.mnuIndividualsToExcel,
             this.mnuFamiliesToExcel,
             this.mnuFactsToExcel,
+            this.MnuExportLocations,
             this.mnuSourcesToExcel,
             this.toolStripSeparator12,
             this.mnuDataErrorsToExcel,
@@ -734,6 +736,18 @@
             this.mnuWorldWarsToExcel.Size = new System.Drawing.Size(221, 22);
             this.mnuWorldWarsToExcel.Text = "Current World Wars to Excel";
             this.mnuWorldWarsToExcel.Click += new System.EventHandler(this.MnuWorldWarsToExcel_Click);
+            // 
+            // toolStripSeparator13
+            // 
+            this.toolStripSeparator13.Name = "toolStripSeparator13";
+            this.toolStripSeparator13.Size = new System.Drawing.Size(218, 6);
+            // 
+            // mnuDNA_GEDCOM
+            // 
+            this.mnuDNA_GEDCOM.Name = "mnuDNA_GEDCOM";
+            this.mnuDNA_GEDCOM.Size = new System.Drawing.Size(221, 22);
+            this.mnuDNA_GEDCOM.Text = "Minimalist DNA GEDCOM";
+            this.mnuDNA_GEDCOM.Click += new System.EventHandler(this.MnuDNA_GEDCOM_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -3354,17 +3368,12 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // mnuDNA_GEDCOM
+            // MnuExportLocations
             // 
-            this.mnuDNA_GEDCOM.Name = "mnuDNA_GEDCOM";
-            this.mnuDNA_GEDCOM.Size = new System.Drawing.Size(221, 22);
-            this.mnuDNA_GEDCOM.Text = "Minimalist DNA GEDCOM";
-            this.mnuDNA_GEDCOM.Click += new System.EventHandler(this.MnuDNA_GEDCOM_Click);
-            // 
-            // toolStripSeparator13
-            // 
-            this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(218, 6);
+            this.MnuExportLocations.Name = "MnuExportLocations";
+            this.MnuExportLocations.Size = new System.Drawing.Size(221, 22);
+            this.MnuExportLocations.Text = "Locations to Excel";
+            this.MnuExportLocations.Click += new System.EventHandler(this.MnuExportLocations_Click);
             // 
             // MainForm
             // 
@@ -3759,6 +3768,7 @@
         private System.Windows.Forms.Button btnModernOSMap;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripMenuItem mnuDNA_GEDCOM;
+        private System.Windows.Forms.ToolStripMenuItem MnuExportLocations;
     }
 }
 

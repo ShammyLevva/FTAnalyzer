@@ -22,7 +22,7 @@ namespace FTAnalyzer.UserControls
             chkIgnoreFactTypeWarnings.Checked = Properties.GeneralSettings.Default.IgnoreFactTypeWarnings;
             chkTreatFemaleAsUnknown.Checked = Properties.GeneralSettings.Default.TreatFemaleSurnamesAsUnknown;
             chkMultiAncestor.Checked = Properties.GeneralSettings.Default.ShowMultiAncestors;
-            chkSkipCensusReferences.Checked = Properties.GeneralSettings.Default.SkipCensusReferences;
+            chkSkipFixingLocations.Checked = Properties.GeneralSettings.Default.SkipFixingLocations;
         }
 
 		#region IOptions Members
@@ -40,7 +40,7 @@ namespace FTAnalyzer.UserControls
             Properties.GeneralSettings.Default.IgnoreFactTypeWarnings = chkIgnoreFactTypeWarnings.Checked;
             Properties.GeneralSettings.Default.TreatFemaleSurnamesAsUnknown = chkTreatFemaleAsUnknown.Checked;
             Properties.GeneralSettings.Default.ShowMultiAncestors = chkMultiAncestor.Checked;
-            Properties.GeneralSettings.Default.SkipCensusReferences = chkSkipCensusReferences.Checked;
+            Properties.GeneralSettings.Default.SkipFixingLocations = chkSkipFixingLocations.Checked;
             Properties.GeneralSettings.Default.Save();
             OnMinParentalAgeChanged();
             OnAliasInNameChanged();
@@ -99,5 +99,8 @@ namespace FTAnalyzer.UserControls
 
         void ChkTreatFemaleAsUnknown_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
 
+        void ChkSkipFixingLocations_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
+
+        void UpDownAge_ValueChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
     }
 }
