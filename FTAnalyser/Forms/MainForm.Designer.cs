@@ -322,6 +322,8 @@
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.mnuDNA_GEDCOM = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -648,7 +650,9 @@
             this.mnuLooseDeathsToExcel,
             this.toolStripSeparator9,
             this.mnuTreetopsToExcel,
-            this.mnuWorldWarsToExcel});
+            this.mnuWorldWarsToExcel,
+            this.toolStripSeparator13,
+            this.mnuDNA_GEDCOM});
             this.mnuExport.Name = "mnuExport";
             this.mnuExport.Size = new System.Drawing.Size(52, 20);
             this.mnuExport.Text = "Export";
@@ -3350,6 +3354,18 @@
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
+            // mnuDNA_GEDCOM
+            // 
+            this.mnuDNA_GEDCOM.Name = "mnuDNA_GEDCOM";
+            this.mnuDNA_GEDCOM.Size = new System.Drawing.Size(221, 22);
+            this.mnuDNA_GEDCOM.Text = "Minimalist DNA GEDCOM";
+            this.mnuDNA_GEDCOM.Click += new System.EventHandler(this.MnuDNA_GEDCOM_Click);
+            // 
+            // toolStripSeparator13
+            // 
+            this.toolStripSeparator13.Name = "toolStripSeparator13";
+            this.toolStripSeparator13.Size = new System.Drawing.Size(218, 6);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -3741,6 +3757,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.ToolStripMenuItem mnuDataErrorsToExcel;
         private System.Windows.Forms.Button btnModernOSMap;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
+        private System.Windows.Forms.ToolStripMenuItem mnuDNA_GEDCOM;
     }
 }
 

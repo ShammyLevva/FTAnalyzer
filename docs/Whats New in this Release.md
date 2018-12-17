@@ -1,6 +1,6 @@
 #### Bugfix Release Version 7.1.0.1 16th December 2018  
 **Bugfixes**  
-Issue with hash codes for facts fixed
+Issue with custom tags for facts fixed was causing crash on load
 
 #### Updated Release Version 7.1.0.0 16th December 2018  
 **Updates**  

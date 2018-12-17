@@ -1,4 +1,5 @@
 ﻿using FTAnalyzer.Controls;
+using FTAnalyzer.Exports;
 using FTAnalyzer.Filters;
 using FTAnalyzer.Forms;
 using FTAnalyzer.Properties;
@@ -30,7 +31,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.1.0.1";
+        public static string VERSION = "7.2.0.0";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -384,6 +385,7 @@ namespace FTAnalyzer
             mnuLookupBlankFoundLocations.Enabled = enabled;
             mnuTreetopsToExcel.Enabled = enabled && dgTreeTops.RowCount > 0;
             mnuWorldWarsToExcel.Enabled = enabled && dgWorldWars.RowCount > 0;
+            mnuDNA_GEDCOM.Enabled = enabled;
         }
 
         void HourGlass(bool on)
@@ -3233,6 +3235,13 @@ namespace FTAnalyzer
         {
             HttpUtility.VisitWebsite("https://www.facebook.com/groups/ftanalyzer");
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.FacebookUsersEvent);
+        }
+
+        void MnuDNA_GEDCOM_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            DNA_GEDCOM.Export();
+            HourGlass(false);
         }
     }
 }

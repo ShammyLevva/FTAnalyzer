@@ -419,7 +419,6 @@
     </Compile>
     <Compile Include="Utilities\DatabaseHelper.cs" />
     <Compile Include="Utilities\ErrorHandler.cs" />
-    <Compile Include="Utilities\ExportToExcel.cs" />
     <Compile Include="Utilities\FooterPrintBlock.cs" />
     <Compile Include="Utilities\NativeMethods.cs" />
     <Compile Include="Utilities\ReportFormHelper.cs" />
