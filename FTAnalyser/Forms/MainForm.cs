@@ -274,11 +274,11 @@ namespace FTAnalyzer
 
         void SetupGridControls()
         {
-            dgCountries.DataSource = null;
-            dgRegions.DataSource = null;
-            dgSubRegions.DataSource = null;
+            dgPlaces.DataSource = null; // set datasources for locations in reverse order to avoid null pointer cell formatting race condition
             dgAddresses.DataSource = null;
-            dgPlaces.DataSource = null;
+            dgSubRegions.DataSource = null;
+            dgRegions.DataSource = null;
+            dgCountries.DataSource = null;
             dgIndividuals.DataSource = null;
             dgFamilies.DataSource = null;
             dgTreeTops.DataSource = null;
@@ -873,37 +873,37 @@ namespace FTAnalyzer
             else
             {
                 FactLocation loc = grid.Rows[e.RowIndex].DataBoundItem as FactLocation;
-                cell.ToolTipText = "Geocoding Status : " + loc.Geocoded;
+                cell.ToolTipText = $"Geocoding Status : {loc.Geocoded}";
             }
         }
 
         void DgCountries_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 0 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
+            if (e.ColumnIndex == 0 || e.ColumnIndex == dgCountries?.Columns["Icon"].Index)
                 FormatCellLocations(dgCountries, e);
         }
 
         void DgRegions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
+            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns["Icon"].Index)
                 FormatCellLocations(dgRegions, e);
         }
 
         void DgSubRegions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
+            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns["Icon"].Index)
                 FormatCellLocations(dgSubRegions, e);
         }
 
         void DgAddresses_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
+            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns["Icon"].Index)
                 FormatCellLocations(dgAddresses, e);
         }
 
         void DgPlaces_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries.Columns["Icon"].Index)
+            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns["Icon"].Index)
                 FormatCellLocations(dgPlaces, e);
         }
         #endregion
