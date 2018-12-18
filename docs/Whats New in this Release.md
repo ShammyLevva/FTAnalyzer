@@ -1,3 +1,15 @@
+#### Updated Release Version 7.2.0.0 18th December 2018  
+**Updates**  
+Added option to export a GEDCOM file stripped down for DNA purposes  
+Added option to export Locations  
+Added display of raw locations loaded from GEDCOM file  
+Added option to skip tidying up locations so you can see the raw mess  
+Repeated bad lines now gives option to stop processing and turn on bad line filter  
+
+**Bugfixes**  
+Fix crash on closing file  
+Web version check skips now checking on beta versions  
+
 #### Bugfix Release Version 7.1.0.1 16th December 2018  
 **Bugfixes**  
 Issue with custom tags for facts fixed was causing crash on load
