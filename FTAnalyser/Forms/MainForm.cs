@@ -59,7 +59,9 @@ namespace FTAnalyzer
             int pos = VERSION.IndexOf('-');
             string ver = pos > 0 ? VERSION.Substring(0, VERSION.IndexOf('-')) : VERSION;
             DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
+#if !__DEBUG__
             CheckWebVersion();
+#endif
             SetSavePath();
             BuildRecentList();
         }
@@ -92,7 +94,7 @@ namespace FTAnalyzer
                     doc.LoadHtml(webData);
                     HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//table/tr[2]/td/table/tr/td/table/tr[4]/td[3]");
                     string webVersion = versionNode.InnerText;
-                    if (webVersion != VERSION && !appPath.StartsWith(@"D:\Programming\GitRepo\FTAnalyzer\FTAnalyser\bin")) // skip showing messagebox if on my development PC
+                    if (new Version(webVersion) > new Version(VERSION))
                     {
                         string text = $"Version installed: {VERSION}, Web version available: {webVersion}\nDo you want to go to website to download the latest version?";
                         DialogResult download = MessageBox.Show(text, "FTAnalyzer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
