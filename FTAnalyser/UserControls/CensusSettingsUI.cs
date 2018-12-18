@@ -42,10 +42,7 @@ namespace FTAnalyzer.UserControls
             //NOOP;
         }
 
-        public bool HasValidationErrors()
-        {
-            return CheckChildrenValidation(this);
-        }
+        public bool HasValidationErrors() => CheckChildrenValidation(this);
 
         private bool CheckChildrenValidation(Control control)
         {
@@ -53,7 +50,7 @@ namespace FTAnalyzer.UserControls
 
             for (int i = 0; i < control.Controls.Count; i++)
             {
-                if (!String.IsNullOrEmpty(errorProvider1.GetError(control.Controls[i])))
+                if (!string.IsNullOrEmpty(errorProvider1.GetError(control.Controls[i])))
                 {
                     invalid = true;
                     break;
@@ -62,29 +59,17 @@ namespace FTAnalyzer.UserControls
                 {
                     invalid = CheckChildrenValidation(control.Controls[i]);
                     if (invalid)
-                    {
                         break;
-                    }
                 }
             }
-
             return invalid;
         }
 
-        public string DisplayName
-        {
-            get { return "Census Settings"; }
-        }
+        public string DisplayName => "Census Settings";
 
-        public string TreePosition
-        {
-            get { return DisplayName; }
-        }
+        public string TreePosition => DisplayName;
 
-        public Image MenuIcon
-        {
-            get { return null; }
-        }
+        public Image MenuIcon => null;
 
         #endregion
 
