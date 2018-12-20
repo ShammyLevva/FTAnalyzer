@@ -1,4 +1,6 @@
-﻿namespace FTAnalyzer.Forms
+﻿using System;
+
+namespace FTAnalyzer.Forms
 {
     partial class Facts
     {
@@ -18,9 +20,12 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
-            italicFont.Dispose();
-            linkFont.Dispose();
-            reportFormHelper.Dispose();
+            try { 
+                italicFont.Dispose();
+                linkFont.Dispose();
+                reportFormHelper.Dispose();
+            }
+            catch (Exception) { }
         }
 
         #region Windows Form Designer generated code

@@ -24,8 +24,8 @@ namespace FTAnalyzer.Forms
         public static string ROUTE = "route";
         public static string INTERSECTION = "intersection";
 
-        private string location;
-        private bool loaded;
+        string location;
+        bool loaded;
 
         public BingOSMap()
         {
@@ -71,7 +71,7 @@ namespace FTAnalyzer.Forms
                     return false;
                 }
             }
-            Object[] args = new Object[] { viewport.NorthEast.Lat, viewport.NorthEast.Long, viewport.SouthWest.Lat, viewport.SouthWest.Long };
+            object[] args = new object[] { viewport.NorthEast.Lat, viewport.NorthEast.Long, viewport.SouthWest.Lat, viewport.SouthWest.Long };
             webBrowser.Document.InvokeScript("setBounds", args);
             webBrowser.Show();
             return true;

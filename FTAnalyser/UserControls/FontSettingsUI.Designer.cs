@@ -1,4 +1,6 @@
-﻿namespace FTAnalyzer.UserControls
+﻿using System;
+
+namespace FTAnalyzer.UserControls
 {
     partial class FontSettingsUI
     {
@@ -18,7 +20,11 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
-            selectedFont.Dispose();
+            try
+            {
+                selectedFont.Dispose();
+            }
+            catch (Exception) { }
         }
 
         #region Component Designer generated code

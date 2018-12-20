@@ -1,4 +1,6 @@
-﻿namespace FTAnalyzer.Forms
+﻿using System;
+
+namespace FTAnalyzer.Forms
 {
     partial class People
     {
@@ -18,10 +20,14 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
-            indReportFormHelper.Dispose();
-            famReportFormHelper.Dispose();
-            boldFont.Dispose();
-            normalFont.Dispose();
+            try
+            {
+                indReportFormHelper.Dispose();
+                famReportFormHelper.Dispose();
+                boldFont.Dispose();
+                normalFont.Dispose();
+            }
+            catch (Exception) { }
         }
 
         #region Windows Form Designer generated code

@@ -1,4 +1,6 @@
-﻿namespace FTAnalyzer.Forms
+﻿using System;
+
+namespace FTAnalyzer.Forms
 {
     partial class GeocodeLocations
     {
@@ -18,8 +20,11 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
-            italicFont.Dispose();
-            reportFormHelper.Dispose();
+            try { 
+                italicFont.Dispose();
+                reportFormHelper.Dispose();
+            }
+            catch (Exception) { }
         }
 
         #region Windows Form Designer generated code

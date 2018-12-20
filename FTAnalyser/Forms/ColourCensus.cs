@@ -11,23 +11,21 @@ namespace FTAnalyzer.Forms
 {
     public partial class ColourCensus : Form
     {
-
-        private ReportFormHelper reportFormHelper;
-
-        private Dictionary<int, DataGridViewCellStyle> styles;
-        private int startColumnIndex;
-        private int endColumnIndex;
-        private SortableBindingList<IDisplayColourCensus> reportList;
-        private Font boldFont;
-        private string country;
+        ReportFormHelper reportFormHelper;
+        Dictionary<int, DataGridViewCellStyle> styles;
+        int startColumnIndex;
+        int endColumnIndex;
+        SortableBindingList<IDisplayColourCensus> _reportList;
+        Font boldFont;
+        string _country;
 
         public ColourCensus(string country, List<IDisplayColourCensus> reportList)
         {
             InitializeComponent();
             dgReportSheet.AutoGenerateColumns = false;
             ExtensionMethods.DoubleBuffered(dgReportSheet, true);
-            this.country = country;
-            this.reportList = new SortableBindingList<IDisplayColourCensus>(reportList);
+            _country = country;
+            _reportList = new SortableBindingList<IDisplayColourCensus>(reportList);
             reportFormHelper = new ReportFormHelper(this, "Colour Census Report", dgReportSheet, ResetTable, "Colour Census");
 
             boldFont = new Font(dgReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
@@ -60,7 +58,7 @@ namespace FTAnalyzer.Forms
             knownMissing.BackColor = knownMissing.ForeColor = Color.MediumSeaGreen;
             styles.Add(8, knownMissing);
             SetColumns(country);
-            dgReportSheet.DataSource = this.reportList;
+            dgReportSheet.DataSource = this._reportList;
             reportFormHelper.LoadColumnLayout("ColourCensusLayout.xml");
             tsRecords.Text = Properties.Messages.Count + reportList.Count + " records listed.";
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
@@ -175,10 +173,10 @@ namespace FTAnalyzer.Forms
                             cell.ToolTipText = "Lost Cousins flagged but no Census entered.";
                             break;
                         case 6:
-                            cell.ToolTipText = $"On Census outside {country}";
+                            cell.ToolTipText = $"On Census outside {_country}";
                             break;
                         case 7:
-                            cell.ToolTipText = $"Likely outside {country} on census date";
+                            cell.ToolTipText = $"Likely outside {_country} on census date";
                             break;
                         case 8:
                             cell.ToolTipText = "Known to be missing from the census";
@@ -212,14 +210,14 @@ namespace FTAnalyzer.Forms
                     {
                         IDisplayColourCensus person = (IDisplayColourCensus)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
                         int censusYear;
-                        if (country.Equals(Countries.UNITED_STATES))
+                        if (_country.Equals(Countries.UNITED_STATES))
                             censusYear = (1790 + (e.ColumnIndex - startColumnIndex) * 10);
-                        else if (country.Equals(Countries.CANADA))
+                        else if (_country.Equals(Countries.CANADA))
                             if (e.ColumnIndex <= dgReportSheet.Columns["Can1901"].Index)
                                 censusYear = (1851 + (e.ColumnIndex - startColumnIndex) * 10);
                             else
                                 censusYear = (1901 + (e.ColumnIndex - dgReportSheet.Columns["Can1901"].Index) * 5);
-                        else if (country.Equals(Countries.IRELAND))
+                        else if (_country.Equals(Countries.IRELAND))
                             censusYear = (1901 + (e.ColumnIndex - startColumnIndex) * 10);
                         else
                         {
@@ -263,10 +261,10 @@ namespace FTAnalyzer.Forms
             dgReportSheet.Focus();
         }
 
-        private List<IDisplayColourCensus> BuildFilter(CensusColour toFind, bool all)
+        List<IDisplayColourCensus> BuildFilter(CensusColour toFind, bool all)
         {
             List<IDisplayColourCensus> result = new List<IDisplayColourCensus>();
-            foreach (IDisplayColourCensus row in reportList)
+            foreach (IDisplayColourCensus row in _reportList)
             {
                 if (all)
                 {
@@ -316,7 +314,7 @@ namespace FTAnalyzer.Forms
             {
                 case -1: // nothing selected
                 case 0: // All Individuals
-                    dgReportSheet.DataSource = reportList;
+                    dgReportSheet.DataSource = _reportList;
                     break;
                 case 1: // None Found (All Red)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(CensusColour.NO_CENSUS, true));

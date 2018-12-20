@@ -1,4 +1,6 @@
-﻿namespace FTAnalyzer
+﻿using System;
+
+namespace FTAnalyzer
 {
     partial class MainForm
     {
@@ -18,11 +20,14 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
-            normalFont.Dispose();
-            boldFont.Dispose();
-            handwritingFont.Dispose();
-            fonts.Dispose();
-            rfhDuplicates.Dispose();
+            try { 
+                normalFont.Dispose();
+                boldFont.Dispose();
+                handwritingFont.Dispose();
+                fonts.Dispose();
+                rfhDuplicates.Dispose();
+            }
+            catch (Exception) { }
         }
 
         #region Windows Form Designer generated code

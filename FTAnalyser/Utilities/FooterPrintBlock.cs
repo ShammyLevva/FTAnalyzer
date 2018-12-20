@@ -36,10 +36,12 @@ namespace FTAnalyzer.Utilities
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
+            try
             {
-                font.Dispose();
+                if (disposing)
+                    font.Dispose();
             }
+            catch (Exception) { }
         }
          
         public void Dispose()

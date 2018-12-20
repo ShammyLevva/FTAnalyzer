@@ -31,7 +31,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.2.0.1-beta 3";
+        public static string VERSION = "7.2.0.1-beta 5";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -189,29 +189,28 @@ namespace FTAnalyzer
                     {
                         SetDataErrorsCheckedDefaults(ckbDataErrors);
                         SetupFactsCheckboxes();
+                        AddFileToRecentList(filename);
+                        Text = $"Family Tree Analyzer v{VERSION}. Analysing: {filename}";
                         Application.UseWaitCursor = false;
                         mnuCloseGEDCOM.Enabled = true;
                         EnableLoadMenus();
                         ShowMenus(true);
-                        HourGlass(false);
-                        AddFileToRecentList(filename);
-                        Text = "Family Tree Analyzer v" + VERSION + ". Analysing: " + filename;
-                        MessageBox.Show("Gedcom File " + filename + " Loaded", "FTAnalyzer");
+                        MessageBox.Show($"Gedcom File {filename} Loaded", "FTAnalyzer");
                     }
                     else
-                        CloseGEDCOM(true);
+                        CleanUp(true);
                 }
             }
             catch (IOException ex)
             {
-                MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message, "FTAnalyzer");
+                MessageBox.Show($"Error: Could not read file from disk. Original error: {ex.Message}", "FTAnalyzer");
             }
             catch (Exception ex2)
             {
                 string message = ex2.Message + "\n" + (ex2.InnerException != null ? ex2.InnerException.Message : string.Empty);
                 MessageBox.Show("Error: Problem processing your file. Please try again.\n" +
                     "If this problem persists please report this at http://www.ftanalyzer.com/issues. Error was: " + ex2.Message + "\n" + ex2.InnerException, "FTAnalyzer");
-                CleanUp();
+                CleanUp(true);
             }
             finally
             {
@@ -219,11 +218,12 @@ namespace FTAnalyzer
             }
         }
 
-        private async Task<bool> LoadTreeAsync(string filename)
+        async Task<bool> LoadTreeAsync(string filename)
         {
             var outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
             XmlDocument doc = await Task.Run(() => ft.LoadTreeHeader(filename, outputText));
-            if (doc == null) return false;
+            if (doc == null)
+                return false;
             var sourceProgress = new Progress<int>(value => { pbSources.Value = value; });
             var individualProgress = new Progress<int>(value => { pbIndividuals.Value = value; });
             var familyProgress = new Progress<int>(value => { pbFamilies.Value = value; });
@@ -346,12 +346,12 @@ namespace FTAnalyzer
         void MnuCloseGEDCOM_Click(object sender, EventArgs e)
         {
             if(!loading)
-                CleanUp();
+                CleanUp(false);
         }
 
-        void CleanUp()
+        void CleanUp(bool retainText)
         {
-            CloseGEDCOM(false);
+            CloseGEDCOM(retainText);
             ft.ResetData();
             EnableLoadMenus();
             mnuRestore.Enabled = true;
@@ -1778,7 +1778,7 @@ namespace FTAnalyzer
             List<Form> toDispose = new List<Form>();
             foreach (Form f in Application.OpenForms)
             {
-                if (!object.ReferenceEquals(f, this))
+                if (!ReferenceEquals(f, this))
                     toDispose.Add(f);
             }
             foreach (Form f in toDispose)
@@ -1790,7 +1790,7 @@ namespace FTAnalyzer
             List<Form> toDispose = new List<Form>();
             foreach (Form f in Application.OpenForms)
             {
-                if (!object.ReferenceEquals(f, form) && f.GetType() == form.GetType())
+                if (!ReferenceEquals(f, form) && f.GetType() == form.GetType())
                     if (form is Census)
                     {
                         Census newForm = form as Census;
@@ -1901,10 +1901,7 @@ namespace FTAnalyzer
         void BuildRecentList()
         {
             if (Settings.Default.RecentFiles == null || Settings.Default.RecentFiles.Count != 5)
-            {
                 ClearRecentList();
-            }
-
             bool added = false;
             int count = 0;
             for (int i = 0; i < 5; i++)
@@ -1918,11 +1915,8 @@ namespace FTAnalyzer
                     mnuRecent.DropDownItems[i].Tag = name;
                 }
                 else
-                {
                     mnuRecent.DropDownItems[i].Visible = false;
-                }
             }
-
             toolStripSeparator7.Visible = added;
             clearRecentFileListToolStripMenuItem.Visible = added;
             mnuRecent.Enabled = added;
@@ -2329,7 +2323,7 @@ namespace FTAnalyzer
         #region Duplicates Tab
         CancellationTokenSource cts;
 
-        private async Task SetPossibleDuplicates()
+        async Task SetPossibleDuplicates()
         {
             SetDuplicateControlsVisibility(true);
             rfhDuplicates.SaveColumnLayout("DuplicatesColumns.xml");
@@ -3080,15 +3074,9 @@ namespace FTAnalyzer
             }
         }
 
-        void MnuLoadLocationsCSV_Click(object sender, EventArgs e)
-        {
-            LoadLocations(tspbTabProgress, tsStatusLabel, 1);
-        }
+        void MnuLoadLocationsCSV_Click(object sender, EventArgs e) => LoadLocations(tspbTabProgress, tsStatusLabel, 1);
 
-        void MnuLoadLocationsTNG_Click(object sender, EventArgs e)
-        {
-            LoadLocations(tspbTabProgress, tsStatusLabel, 2);
-        }
+        void MnuLoadLocationsTNG_Click(object sender, EventArgs e) => LoadLocations(tspbTabProgress, tsStatusLabel, 2);
 
         #region Load CSV Location Data
 

@@ -10,13 +10,13 @@ namespace FTAnalyzer.Forms
 {
     public partial class ColourBMD : Form
     {
-        private ReportFormHelper reportFormHelper;
+        ReportFormHelper reportFormHelper;
 
-        private Dictionary<BMDColour, DataGridViewCellStyle> styles;
-        private int birthColumnIndex;
-        private int burialColumnIndex;
-        private SortableBindingList<IDisplayColourBMD> reportList;
-        private Font boldFont;
+        Dictionary<BMDColour, DataGridViewCellStyle> styles;
+        int birthColumnIndex;
+        int burialColumnIndex;
+        SortableBindingList<IDisplayColourBMD> reportList;
+        Font boldFont;
 
         public ColourBMD(List<IDisplayColourBMD> reportList)
         {
@@ -350,7 +350,7 @@ namespace FTAnalyzer.Forms
             }
             dgBMDReportSheet.Focus();
             tsRecords.Text = Properties.Messages.Count + dgBMDReportSheet.RowCount + " records listed.";
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         void MnuExportToExcel_Click(object sender, EventArgs e)
@@ -389,7 +389,7 @@ namespace FTAnalyzer.Forms
 
         void ColourBMD_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.Dispose();
+            Dispose();
         }
 
         void ColourBMD_Load(object sender, EventArgs e)

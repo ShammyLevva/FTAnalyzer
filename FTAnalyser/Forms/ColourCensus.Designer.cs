@@ -1,4 +1,6 @@
-﻿namespace FTAnalyzer.Forms
+﻿using System;
+
+namespace FTAnalyzer.Forms
 {
     partial class ColourCensus
     {
@@ -18,8 +20,12 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
-            boldFont.Dispose();
-            reportFormHelper.Dispose();
+            try
+            {
+                boldFont.Dispose();
+                reportFormHelper.Dispose();
+            }
+            catch (Exception) { }
         }
 
         #region Windows Form Designer generated code
