@@ -58,9 +58,9 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                Tuple<string, int> row = dgStatistics.Rows[e.RowIndex].DataBoundItem as Tuple<string, int>;
+                DisplayGreatStats row = dgStatistics.Rows[e.RowIndex].DataBoundItem as DisplayGreatStats;
                 People form = new People();
-                form.ListRelationToRoot(row.Item1);
+                form.ListRelationToRoot(row.RelationToRoot);
                 form.Show();
             }
         }
