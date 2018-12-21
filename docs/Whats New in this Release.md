@@ -1,3 +1,12 @@
+#### Updated Release Version 7.2.1.1 21st December 2018  
+**Updates**  
+Added option not to filter diacritics  
+Added support for German date names  
+
+**Bugfixes**  
+Fixed issue with duplicates crashing on opening tab  
+Fixed bug with crash when local date name wasn't recognised  
+
 #### Updated Release Version 7.2.1.0 20th December 2018  
 **Updates**  
 Added option to export descendants to the GEDCOM file stripped down for DNA purposes  
@@ -8,7 +17,7 @@ Attempted to catch font disposal bug
 Lat/Long reporting from GEDCOM fixed to exclude ones from database  
 Fixed Duplicates report occassional crash with rounding error  
 Fixed space bug in dates like BET 3 AND 4 JAN 2001  
-Fixed bug with big Ahnantafel numbers crashing  
+Fixed bug with huge Ahnantafel numbers crashing  
 
 #### Updated Release Version 7.2.0.0 18th December 2018  
 **Updates**  

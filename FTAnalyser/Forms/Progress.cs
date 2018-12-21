@@ -6,7 +6,7 @@ namespace FTAnalyzer.Forms
 {
     public partial class Progress : Form
     {
-        private DateTime startTime;
+        DateTime startTime;
 
         public Progress(int maximum)
         {

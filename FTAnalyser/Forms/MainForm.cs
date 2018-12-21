@@ -31,7 +31,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.2.1.0";
+        public static string VERSION = "7.2.1.1";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -2330,9 +2330,10 @@ namespace FTAnalyzer
             var progress = new Progress<int>(value =>
             {
                 if (value < 0)
-                    Console.WriteLine("Hmm ok a problem.");
-                else
-                    pbDuplicates.Value = value;
+                    value = 0;
+                if (value > pbDuplicates.Maximum)
+                    value = pbDuplicates.Maximum;
+                pbDuplicates.Value = value;
             });
             var maxScore = new Progress<int>(value =>
             {

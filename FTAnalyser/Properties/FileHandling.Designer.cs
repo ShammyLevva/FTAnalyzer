@@ -46,5 +46,17 @@ namespace FTAnalyzer.Properties {
                 this["RetryFailedLines"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ConvertDiacrits {
+            get {
+                return ((bool)(this["ConvertDiacrits"]));
+            }
+            set {
+                this["ConvertDiacrits"] = value;
+            }
+        }
     }
 }

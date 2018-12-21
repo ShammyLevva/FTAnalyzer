@@ -134,10 +134,40 @@
   <data name="$this.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="chkRetryFailedLines.AutoSize" type="System.Boolean, mscorlib">
+  <data name="chkConvertDiacrits.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chkConvertDiacrits.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkConvertDiacrits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 49</value>
+  </data>
+  <data name="chkConvertDiacrits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>295, 17</value>
+  </data>
+  <data name="chkConvertDiacrits.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="chkConvertDiacrits.Text" xml:space="preserve">
+    <value>Convert diacrits (marks over letters in some languages) (*)</value>
+  </data>
+  <data name="&gt;&gt;chkConvertDiacrits.Name" xml:space="preserve">
+    <value>chkConvertDiacrits</value>
+  </data>
+  <data name="&gt;&gt;chkConvertDiacrits.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkConvertDiacrits.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkConvertDiacrits.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkRetryFailedLines.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="chkRetryFailedLines.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -163,7 +193,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkRetryFailedLines.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -193,7 +223,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="chkLoadWithFilters.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -220,7 +250,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkLoadWithFilters.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>325, 421</value>

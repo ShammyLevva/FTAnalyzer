@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using FTAnalyzer.Properties;
 
 namespace FTAnalyzer.UserControls
 {
@@ -11,17 +12,19 @@ namespace FTAnalyzer.UserControls
 			InitializeComponent();
 			//cannot be in load, because its possible this tab won't show, and the values will not be initialized.
 			//if this happens, then the users settings will be cleared.
-            chkLoadWithFilters.Checked = Properties.FileHandling.Default.LoadWithFilters;
-            chkRetryFailedLines.Checked = Properties.FileHandling.Default.RetryFailedLines;
+            chkLoadWithFilters.Checked = FileHandling.Default.LoadWithFilters;
+            chkRetryFailedLines.Checked = FileHandling.Default.RetryFailedLines;
+            chkConvertDiacrits.Checked = FileHandling.Default.ConvertDiacrits;
 		}
 
 		#region IOptions Members
 
 		public void Save()
 		{
-            Properties.FileHandling.Default.LoadWithFilters = chkLoadWithFilters.Checked;
-            Properties.FileHandling.Default.RetryFailedLines = chkRetryFailedLines.Checked;
-            Properties.FileHandling.Default.Save();
+            FileHandling.Default.LoadWithFilters = chkLoadWithFilters.Checked;
+            FileHandling.Default.RetryFailedLines = chkRetryFailedLines.Checked;
+            FileHandling.Default.ConvertDiacrits = chkConvertDiacrits.Checked;
+            FileHandling.Default.Save();
 		}
 
 		public void Cancel()
@@ -40,7 +43,7 @@ namespace FTAnalyzer.UserControls
 
 			for (int i = 0; i < control.Controls.Count; i++)
 			{
-				if (!String.IsNullOrEmpty(errorProvider1.GetError(control.Controls[i])))
+				if (!string.IsNullOrEmpty(errorProvider1.GetError(control.Controls[i])))
 				{
 					invalid = true;
 					break;
@@ -58,24 +61,18 @@ namespace FTAnalyzer.UserControls
 			return invalid;
 		}
 
-		public string DisplayName
-		{
-			get { return "File Handling Settings"; }
-		}
+        public string DisplayName => "File Handling Settings";
 
-		public string TreePosition
-		{
-			get { return DisplayName; }
-		}
+        public string TreePosition => DisplayName;
 
-		public Image MenuIcon
-		{
-			get { return null; }
-		}
+        public Image MenuIcon => null;
 
         #endregion
-        void ChkLoadWithFilters_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
+        void ChkLoadWithFilters_CheckedChanged(object sender, EventArgs e) =>  GeneralSettings.Default.ReloadRequired = true;
 
-        void ChkRetryFailedLines_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
+        void ChkRetryFailedLines_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
+
+        void ChkConvertDiacrits_CheckedChanged(object sender, EventArgs e) =>  GeneralSettings.Default.ReloadRequired = true;
+
     }
 }
