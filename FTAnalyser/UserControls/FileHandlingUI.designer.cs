@@ -35,7 +35,7 @@
             this.chkLoadWithFilters = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.chkRetryFailedLines = new System.Windows.Forms.CheckBox();
-            this.chkConvertDiacrits = new System.Windows.Forms.CheckBox();
+            this.chkConvertDiacritics = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,20 +62,20 @@
             this.chkRetryFailedLines.UseVisualStyleBackColor = true;
             this.chkRetryFailedLines.CheckedChanged += new System.EventHandler(this.ChkRetryFailedLines_CheckedChanged);
             // 
-            // chkConvertDiacrits
+            // chkConvertDiacritics
             // 
-            resources.ApplyResources(this.chkConvertDiacrits, "chkConvertDiacrits");
-            this.chkConvertDiacrits.Checked = true;
-            this.chkConvertDiacrits.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkConvertDiacrits.Name = "chkConvertDiacrits";
-            this.chkConvertDiacrits.UseVisualStyleBackColor = true;
-            this.chkConvertDiacrits.CheckedChanged += new System.EventHandler(this.ChkConvertDiacrits_CheckedChanged);
+            resources.ApplyResources(this.chkConvertDiacritics, "chkConvertDiacritics");
+            this.chkConvertDiacritics.Checked = true;
+            this.chkConvertDiacritics.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkConvertDiacritics.Name = "chkConvertDiacritics";
+            this.chkConvertDiacritics.UseVisualStyleBackColor = true;
+            this.chkConvertDiacritics.CheckedChanged += new System.EventHandler(this.ChkConvertdiacritics_CheckedChanged);
             // 
             // FileHandlingUI
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.chkConvertDiacrits);
+            this.Controls.Add(this.chkConvertDiacritics);
             this.Controls.Add(this.chkRetryFailedLines);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.chkLoadWithFilters);
@@ -93,6 +93,6 @@
         private System.Windows.Forms.CheckBox chkLoadWithFilters;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkRetryFailedLines;
-        private System.Windows.Forms.CheckBox chkConvertDiacrits;
+        private System.Windows.Forms.CheckBox chkConvertDiacritics;
     }
 }

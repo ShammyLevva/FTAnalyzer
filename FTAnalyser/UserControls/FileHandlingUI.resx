@@ -134,35 +134,35 @@
   <data name="$this.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="chkConvertDiacrits.AutoSize" type="System.Boolean, mscorlib">
+  <data name="chkConvertDiacritics.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="chkConvertDiacrits.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="chkConvertDiacritics.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="chkConvertDiacrits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 49</value>
+  <data name="chkConvertDiacritics.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 49</value>
   </data>
-  <data name="chkConvertDiacrits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 17</value>
+  <data name="chkConvertDiacritics.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 17</value>
   </data>
-  <data name="chkConvertDiacrits.TabIndex" type="System.Int32, mscorlib">
+  <data name="chkConvertDiacritics.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
-  <data name="chkConvertDiacrits.Text" xml:space="preserve">
-    <value>Convert diacrits (marks over letters in some languages) (*)</value>
+  <data name="chkConvertDiacritics.Text" xml:space="preserve">
+    <value>Convert diacritics (marks over letters in some languages) (*)</value>
   </data>
-  <data name="&gt;&gt;chkConvertDiacrits.Name" xml:space="preserve">
-    <value>chkConvertDiacrits</value>
+  <data name="&gt;&gt;chkConvertDiacritics.Name" xml:space="preserve">
+    <value>chkConvertDiacritics</value>
   </data>
-  <data name="&gt;&gt;chkConvertDiacrits.Type" xml:space="preserve">
+  <data name="&gt;&gt;chkConvertDiacritics.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;chkConvertDiacrits.Parent" xml:space="preserve">
+  <data name="&gt;&gt;chkConvertDiacritics.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;chkConvertDiacrits.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;chkConvertDiacritics.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="chkRetryFailedLines.AutoSize" type="System.Boolean, mscorlib">

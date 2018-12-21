@@ -14,7 +14,7 @@ namespace FTAnalyzer.UserControls
 			//if this happens, then the users settings will be cleared.
             chkLoadWithFilters.Checked = FileHandling.Default.LoadWithFilters;
             chkRetryFailedLines.Checked = FileHandling.Default.RetryFailedLines;
-            chkConvertDiacrits.Checked = FileHandling.Default.ConvertDiacrits;
+            chkConvertDiacritics.Checked = FileHandling.Default.Convertdiacritics;
 		}
 
 		#region IOptions Members
@@ -23,7 +23,7 @@ namespace FTAnalyzer.UserControls
 		{
             FileHandling.Default.LoadWithFilters = chkLoadWithFilters.Checked;
             FileHandling.Default.RetryFailedLines = chkRetryFailedLines.Checked;
-            FileHandling.Default.ConvertDiacrits = chkConvertDiacrits.Checked;
+            FileHandling.Default.Convertdiacritics = chkConvertDiacritics.Checked;
             FileHandling.Default.Save();
 		}
 
@@ -72,7 +72,11 @@ namespace FTAnalyzer.UserControls
 
         void ChkRetryFailedLines_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
 
-        void ChkConvertDiacrits_CheckedChanged(object sender, EventArgs e) =>  GeneralSettings.Default.ReloadRequired = true;
+        void ChkConvertdiacritics_CheckedChanged(object sender, EventArgs e) =>  GeneralSettings.Default.ReloadRequired = true;
 
+        private void ChkConvertDiacritics_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

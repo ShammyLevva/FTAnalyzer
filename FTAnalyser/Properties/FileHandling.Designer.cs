@@ -50,12 +50,12 @@ namespace FTAnalyzer.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool ConvertDiacrits {
+        public bool Convertdiacritics {
             get {
-                return ((bool)(this["ConvertDiacrits"]));
+                return ((bool)(this["Convertdiacritics"]));
             }
             set {
-                this["ConvertDiacrits"] = value;
+                this["Convertdiacritics"] = value;
             }
         }
     }
