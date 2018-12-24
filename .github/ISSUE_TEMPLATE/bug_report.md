@@ -1,8 +1,15 @@
 ---
 name: Bug report
 about: Create a report to help us improve FTAnalyzer
+title: "[BUG] "
+labels: ''
+assignees: ''
 
 ---
+
+**Version Number problem appear on**
+You MUST provide this information so I know what the scope of the problem is. Bugs without this info are unlikely to be addressed. 
+NB. at no time ever in the history of the app has there been a version called “latest” they all have a version number. 
 
 **Describe the bug**
 A clear and concise description of what the bug is.
