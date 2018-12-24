@@ -23,6 +23,7 @@ namespace FTAnalyzer.UserControls
             chkTreatFemaleAsUnknown.Checked = Properties.GeneralSettings.Default.TreatFemaleSurnamesAsUnknown;
             chkMultiAncestor.Checked = Properties.GeneralSettings.Default.ShowMultiAncestors;
             chkSkipFixingLocations.Checked = Properties.GeneralSettings.Default.SkipFixingLocations;
+            chkHideIgnoredDuplicates.Checked = Properties.GeneralSettings.Default.HideIgnoredDuplicates;
         }
 
 		#region IOptions Members
@@ -41,6 +42,7 @@ namespace FTAnalyzer.UserControls
             Properties.GeneralSettings.Default.TreatFemaleSurnamesAsUnknown = chkTreatFemaleAsUnknown.Checked;
             Properties.GeneralSettings.Default.ShowMultiAncestors = chkMultiAncestor.Checked;
             Properties.GeneralSettings.Default.SkipFixingLocations = chkSkipFixingLocations.Checked;
+            Properties.GeneralSettings.Default.HideIgnoredDuplicates = chkHideIgnoredDuplicates.Checked;
             Properties.GeneralSettings.Default.Save();
             OnMinParentalAgeChanged();
             OnAliasInNameChanged();

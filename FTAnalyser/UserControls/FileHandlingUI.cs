@@ -14,7 +14,7 @@ namespace FTAnalyzer.UserControls
 			//if this happens, then the users settings will be cleared.
             chkLoadWithFilters.Checked = FileHandling.Default.LoadWithFilters;
             chkRetryFailedLines.Checked = FileHandling.Default.RetryFailedLines;
-            chkConvertDiacritics.Checked = FileHandling.Default.Convertdiacritics;
+            chkConvertDiacritics.Checked = FileHandling.Default.ConvertDiacritics;
 		}
 
 		#region IOptions Members
@@ -23,7 +23,7 @@ namespace FTAnalyzer.UserControls
 		{
             FileHandling.Default.LoadWithFilters = chkLoadWithFilters.Checked;
             FileHandling.Default.RetryFailedLines = chkRetryFailedLines.Checked;
-            FileHandling.Default.Convertdiacritics = chkConvertDiacritics.Checked;
+            FileHandling.Default.ConvertDiacritics = chkConvertDiacritics.Checked;
             FileHandling.Default.Save();
 		}
 

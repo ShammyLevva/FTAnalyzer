@@ -443,9 +443,12 @@ namespace FTAnalyzer.Forms
 
         void SetOpacity()
         {
-            float opacity = tbOpacity.Value / 100.0f;
-            TileAsyncLayer layer = (TileAsyncLayer)mapBox1.Map.BackgroundLayer[1];
-            layer.SetOpacity(opacity);
+            if (mapBox1 != null && mapBox1.Map != null && mapBox1.Map.BackgroundLayer.Count > 1)
+            {
+                float opacity = tbOpacity.Value / 100.0f;
+                TileAsyncLayer layer = (TileAsyncLayer)mapBox1.Map.BackgroundLayer[1];
+                layer.SetOpacity(opacity);
+            }
         }
 
         void RefreshMap()

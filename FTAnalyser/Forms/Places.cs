@@ -172,10 +172,7 @@ namespace FTAnalyzer.Forms
             SpecialMethods.SetFonts(this);
         }
 
-        void TvPlaces_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            BuildMap();
-        }
+        void TvPlaces_AfterSelect(object sender, TreeViewEventArgs e) => BuildMap();
 
         void TvPlaces_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
@@ -183,7 +180,7 @@ namespace FTAnalyzer.Forms
             FactLocation location = e.Node.Tag as FactLocation;
             if (location != null)
             {
-                Forms.People frmInd = new Forms.People();
+                People frmInd = new People();
                 frmInd.SetLocation(location, e.Node.Level);
                 MainForm.DisposeDuplicateForms(frmInd);
                 frmInd.Show();
@@ -191,15 +188,9 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.Default;
         }
 
-        void MapBox1_MapViewOnChange()
-        {
-            clusters.Refresh();
-        }
+        void MapBox1_MapViewOnChange() => clusters.Refresh();
 
-        void MapBox1_MapZoomChanged(double zoom)
-        {
-            RefreshClusters();
-        }
+        void MapBox1_MapZoomChanged(double zoom) => RefreshClusters();
 
         public void RefreshClusters()
         {
@@ -249,10 +240,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void MnuHideScaleBar_Click(object sender, EventArgs e)
-        {
-            mh.MnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
-        }
+        void MnuHideScaleBar_Click(object sender, EventArgs e) => mh.MnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
 
         void BtnSelect_Click(object sender, EventArgs e)
         {
@@ -305,15 +293,9 @@ namespace FTAnalyzer.Forms
             SavePosition();
         }
 
-        void Places_Move(object sender, EventArgs e)
-        {
-            SavePosition();
-        }
+        void Places_Move(object sender, EventArgs e) => SavePosition();
 
-        void Places_Resize(object sender, EventArgs e)
-        {
-            SavePosition();
-        }
+        void Places_Resize(object sender, EventArgs e) => SavePosition();
 
         void SavePosition()
         {
@@ -333,9 +315,12 @@ namespace FTAnalyzer.Forms
 
         void SetOpacity()
         {
-            float opacity = tbOpacity.Value / 100.0f;
-            TileAsyncLayer layer = (TileAsyncLayer)mapBox1.Map.BackgroundLayer[1];
-            layer.SetOpacity(opacity);
+            if (mapBox1 != null && mapBox1.Map != null && mapBox1.Map.BackgroundLayer.Count > 1)
+            {
+                float opacity = tbOpacity.Value / 100.0f;
+                TileAsyncLayer layer = (TileAsyncLayer)mapBox1.Map.BackgroundLayer[1];
+                layer.SetOpacity(opacity);
+            }
         }
     }
 }

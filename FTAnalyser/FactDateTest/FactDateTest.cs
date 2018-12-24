@@ -258,6 +258,15 @@ namespace FactDateTest
             Assert.AreEqual(new DateTime(2001, 1, 3), target.StartDate);
             Assert.AreEqual(new DateTime(2001, 1, 4), target.EndDate);
 
+            target = new FactDate("BET 9 AND 10 JAN 2001");
+            Assert.AreEqual(new DateTime(2001, 1, 9), target.StartDate);
+            Assert.AreEqual(new DateTime(2001, 1, 10), target.EndDate);
+
+            target = new FactDate("BET 11 AND 12 JAN 2001");
+            Assert.AreEqual(new DateTime(2001, 1, 11), target.StartDate);
+            Assert.AreEqual(new DateTime(2001, 1, 12), target.EndDate);
+
+
             return target;
         }
 

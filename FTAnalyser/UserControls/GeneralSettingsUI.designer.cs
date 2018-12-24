@@ -45,6 +45,7 @@
             this.chkTreatFemaleAsUnknown = new System.Windows.Forms.CheckBox();
             this.chkMultiAncestor = new System.Windows.Forms.CheckBox();
             this.chkSkipFixingLocations = new System.Windows.Forms.CheckBox();
+            this.chkHideIgnoredDuplicates = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownAge)).BeginInit();
             this.SuspendLayout();
@@ -162,10 +163,19 @@
             this.chkSkipFixingLocations.UseVisualStyleBackColor = true;
             this.chkSkipFixingLocations.CheckedChanged += new System.EventHandler(this.ChkSkipFixingLocations_CheckedChanged);
             // 
+            // chkHideIgnoredDuplicates
+            // 
+            resources.ApplyResources(this.chkHideIgnoredDuplicates, "chkHideIgnoredDuplicates");
+            this.chkHideIgnoredDuplicates.Checked = true;
+            this.chkHideIgnoredDuplicates.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkHideIgnoredDuplicates.Name = "chkHideIgnoredDuplicates";
+            this.chkHideIgnoredDuplicates.UseVisualStyleBackColor = true;
+            // 
             // GeneralSettingsUI
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkHideIgnoredDuplicates);
             this.Controls.Add(this.chkSkipFixingLocations);
             this.Controls.Add(this.chkMultiAncestor);
             this.Controls.Add(this.chkTreatFemaleAsUnknown);
@@ -205,5 +215,6 @@
         private System.Windows.Forms.CheckBox chkTreatFemaleAsUnknown;
         private System.Windows.Forms.CheckBox chkMultiAncestor;
         private System.Windows.Forms.CheckBox chkSkipFixingLocations;
+        private System.Windows.Forms.CheckBox chkHideIgnoredDuplicates;
     }
 }
