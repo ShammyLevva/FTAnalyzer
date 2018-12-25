@@ -31,7 +31,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.2.1.1";
+        public static string VERSION = "7.2.2.0";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -3208,8 +3208,7 @@ namespace FTAnalyzer
         void CousinsCountReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            StatisticsForm f = new StatisticsForm();
-            f.CousinsCountReport();
+            StatisticsForm f = new StatisticsForm(StatisticsForm.StatisticType.CousinCount);
             DisposeDuplicateForms(f);
             f.Show();
             HourGlass(false);
@@ -3219,8 +3218,7 @@ namespace FTAnalyzer
         void HowManyDirectsReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            StatisticsForm f = new StatisticsForm();
-            f.HowManyDirectsReport();
+            StatisticsForm f = new StatisticsForm(StatisticsForm.StatisticType.HowManyDirects);
             DisposeDuplicateForms(f);
             f.Show();
             HourGlass(false);

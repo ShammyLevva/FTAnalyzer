@@ -9,13 +9,27 @@ namespace FTAnalyzer.Forms
 {
     public partial class StatisticsForm : Form
     {
-        public StatisticsForm()
+        public enum StatisticType { CousinCount = 1, HowManyDirects = 2 };
+
+        StatisticType StatType { get; }
+
+        public StatisticsForm(StatisticType type)
         {
             InitializeComponent();
+            StatType = type;
             tsStatusLabel.Text = string.Empty;
+            switch(type)
+            {
+                case StatisticType.CousinCount:
+                    CousinsCountReport();
+                    break;
+                case StatisticType.HowManyDirects:
+                    HowManyDirectsReport();
+                    break;
+            }
         }
 
-        public void CousinsCountReport()
+        void CousinsCountReport()
         {
             IEnumerable<Tuple<string,int>> relations = FamilyTree.Instance.AllIndividuals.Where(x => x.RelationToRoot.Length > 0).GroupBy(i => i.RelationToRoot)
                 .Select(r => new Tuple<string, int>(r.Key, r.Count()));
@@ -32,7 +46,7 @@ namespace FTAnalyzer.Forms
             tsStatusLabel.Visible = true;
         }
 
-        public void HowManyDirectsReport()
+        void HowManyDirectsReport()
         {
             IEnumerable<DisplayGreatStats> relations = FamilyTree.Instance.AllIndividuals.Where(x => x.RelationToRoot.Length > 0 && (x.RelationType == Individual.DIRECT || x.RelationType == Individual.DESCENDANT))
                 .GroupBy(i => (i.RelationToRoot, i.RelationSort))
@@ -58,10 +72,20 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                DisplayGreatStats row = dgStatistics.Rows[e.RowIndex].DataBoundItem as DisplayGreatStats;
-                People form = new People();
-                form.ListRelationToRoot(row.RelationToRoot);
-                form.Show();
+                if (StatType == StatisticType.HowManyDirects)
+                {
+                    DisplayGreatStats row = dgStatistics.Rows[e.RowIndex].DataBoundItem as DisplayGreatStats;
+                    People form = new People();
+                    form.ListRelationToRoot(row.RelationToRoot);
+                    form.Show();
+                }
+                else if (StatType == StatisticType.CousinCount)
+                {
+                    Tuple<string,int> row = dgStatistics.Rows[e.RowIndex].DataBoundItem as Tuple<string,int>;
+                    People form = new People();
+                    form.ListRelationToRoot(row.Item1);
+                    form.Show();
+                }
             }
         }
 
