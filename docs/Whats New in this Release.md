@@ -1,3 +1,15 @@
+#### Updated Release Version 7.2.2.0 25th December 2018  
+**Updates**  
+FreeCEN Searches url changed to use old site until new one ready  
+ADDR tags now recognised as additional to PLAC tags instead of just alternatives  
+
+**Bugfixes**  
+Fix crash on Cousin Count double click  
+Fix crash on Opacity settings in map options where no background map selected  
+Dont warn errors on same sex marriages post 2000  
+Options on load reports all new options  
+Fix bug with double spaces in between dates  
+
 #### Updated Release Version 7.2.1.1 21st December 2018  
 **Updates**  
 Added option not to filter diacritics  
