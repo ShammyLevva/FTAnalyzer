@@ -2861,8 +2861,8 @@ namespace FTAnalyzer
             if (cmbReferrals.Items.Count == 0)
             {
                 HourGlass(true);
-                List<Individual> list = ft.AllIndividuals.ToList<Individual>();
-                list.Sort(new NameComparer());
+                List<Individual> list = ft.AllIndividuals.ToList();
+                list.Sort(new NameComparer(true, false));
                 foreach (Individual ind in list)
                     cmbReferrals.Items.Add(ind);
                 btnReferrals.Enabled = true;
