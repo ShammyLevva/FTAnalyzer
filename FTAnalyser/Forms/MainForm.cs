@@ -2862,7 +2862,7 @@ namespace FTAnalyzer
             {
                 HourGlass(true);
                 List<Individual> list = ft.AllIndividuals.ToList();
-                list.Sort(new NameComparer(true, false));
+                list.Sort(new NameComparer<Individual>(true, false));
                 foreach (Individual ind in list)
                     cmbReferrals.Items.Add(ind);
                 btnReferrals.Enabled = true;
