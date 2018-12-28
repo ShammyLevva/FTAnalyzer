@@ -7,9 +7,9 @@ assignees: ''
 
 ---
 
-**Version Number problem appear on**
+**Version Number problem appears in**
 You MUST provide this information so I know what the scope of the problem is. Bugs without this info are unlikely to be addressed. 
-NB. at no time ever in the history of the app has there been a version called “latest” they all have a version number. 
+NB. at no time ever in the history of the app has there been a version called “latest” they all have a version number. eg: v7.2.2.0
 
 **Describe the bug**
 A clear and concise description of what the bug is.
@@ -26,17 +26,6 @@ A clear and concise description of what you expected to happen.
 
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
-
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
-
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
 
 **Additional context**
 Add any other context about the problem here.
