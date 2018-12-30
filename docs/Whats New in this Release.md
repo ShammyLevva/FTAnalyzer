@@ -1,3 +1,12 @@
+#### Updated Release Version 7.2.2.1 30th December 2018  
+**Updates**  
+Added option to privatise or include details of living people on GEDCOM export  
+
+**Bugfixes**  
+Fixed GEDCOM export missing out families of siblings  
+Fixed GEDCOM export not displaying middle names  
+Fixed date ranges for census searches where birth year is wide date range  
+
 #### Updated Release Version 7.2.2.0 25th December 2018  
 **Updates**  
 FreeCEN Searches url changed to use old site until new one ready  

@@ -31,7 +31,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.2.2.0";
+        public static string VERSION = "7.2.2.1";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -76,6 +76,8 @@ namespace FTAnalyzer
             dgDuplicates.AutoGenerateColumns = false;
             rfhDuplicates = new ReportFormHelper(this, "Duplicates", dgDuplicates, ResetDuplicatesTable, "Duplicates", false);
             ft.LoadStandardisedNames(Application.StartupPath);
+            tsCountLabel.Text = string.Empty;
+            tsHintsLabel.Text = "Welcome to Family Tree Analyzer, if you have any questions please raise them on the User group - see help menu for details";
             loading = false;
         }
 
@@ -841,7 +843,7 @@ namespace FTAnalyzer
             if (control is DataGridView)
             {
                 DataGridView dg = control as DataGridView;
-                tsCountLabel.Text = Messages.Count + dg.RowCount + " " + dg.Name.Substring(2);
+                tsCountLabel.Text = $"{Messages.Count}{dg.RowCount} {dg.Name.Substring(2)}";
                 mnuPrint.Enabled = true;
             }
             else
