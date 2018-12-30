@@ -2961,7 +2961,7 @@ namespace FTAnalyzer
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
             DataTable dt = convertor.ToDataTable(new List<IDisplayLocation>(ft.AllDisplayPlaces));
             ExportToExcel.Export(dt);
-            Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportSourcesEvent);
+            Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportLocationsEvent);
             HourGlass(false);
         }
 

@@ -160,11 +160,11 @@
     <Reference Include="GeoAPI, Version=1.7.4.0, Culture=neutral, PublicKeyToken=a1a0da7def465678, processorArchitecture=MSIL">
       <HintPath>packages\GeoAPI.1.7.4\lib\net45\GeoAPI.dll</HintPath>
     </Reference>
-    <Reference Include="GoogleAnalyticsTracker.Core, Version=4.6.7.0, Culture=neutral, PublicKeyToken=04ab204e84b117c0, processorArchitecture=MSIL">
-      <HintPath>packages\GoogleAnalyticsTracker.Core.4.6.7\lib\portable45-net45+win8+wpa81\GoogleAnalyticsTracker.Core.dll</HintPath>
+    <Reference Include="GoogleAnalyticsTracker.Core, Version=4.6.8.0, Culture=neutral, PublicKeyToken=04ab204e84b117c0, processorArchitecture=MSIL">
+      <HintPath>packages\GoogleAnalyticsTracker.Core.4.6.8\lib\portable45-net45+win8+wpa81\GoogleAnalyticsTracker.Core.dll</HintPath>
     </Reference>
-    <Reference Include="GoogleAnalyticsTracker.Simple, Version=4.6.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\GoogleAnalyticsTracker.Simple.4.6.7\lib\portable45-net45+win8+wpa81\GoogleAnalyticsTracker.Simple.dll</HintPath>
+    <Reference Include="GoogleAnalyticsTracker.Simple, Version=4.6.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\GoogleAnalyticsTracker.Simple.4.6.8\lib\portable45-net45+win8+wpa81\GoogleAnalyticsTracker.Simple.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.8.11.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>packages\HtmlAgilityPack.1.8.11\lib\Net45\HtmlAgilityPack.dll</HintPath>
