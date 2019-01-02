@@ -1,19 +1,8 @@
 FTAnalyzer Documentation
 ========================
 
-Delve deep into your Family Tree and find out where you have gaps, errors, and untapped sources and find new ways of viewing your tree.
-
-##### PLEASE NOTE you MUST uninstall the old Codeplex version before the version 6.0.1.0 or above can be updated. 
-The latest version can be installed from the [install](http://www.ftanalyzer.com/install) page. The current version works on Windows Vista SP2 through to Windows 10. 
-
-A MAC version is under development and an initial early test version is [available here](http://mac.ftanalyzer.com).
-
-If you have any problems, issues or suggestions please add them to the [Issues Section](https://github.com/ShammyLevva/FTAnalyzer/issues).  
-
-Thank you.
-
 #### Documentation ####  
-**[Install Instructions](Install%20Instructions)**  
+**[Windows Install Instructions](Install%20Instructions)**  
 **[Getting Started](Getting%20Started)**  
 **[Program's Purpose](Program%27s%20Purpose)**  
 **[Changing the Root Person](The%20Individuals%20Tab)**
