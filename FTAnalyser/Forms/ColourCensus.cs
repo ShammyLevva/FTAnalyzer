@@ -192,10 +192,7 @@ namespace FTAnalyzer.Forms
             reportFormHelper.PrintReport("Missing from Census Report");
         }
 
-        void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.PrintPreviewReport();
-        }
+        void PrintPreviewToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintPreviewReport();
 
         void DgReportSheet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -235,7 +232,7 @@ namespace FTAnalyzer.Forms
                         {
                             try
                             {
-                                ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex);
+                                ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex, cbRegion.Text);
                             }
                             catch (CensusSearchException ex)
                             {
@@ -356,10 +353,7 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.Default;
         }
 
-        void MnuExportToExcel_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.DoExportToExcel<IDisplayColourCensus>(dgReportSheet.Columns);
-        }
+        void MnuExportToExcel_Click(object sender, EventArgs e) => reportFormHelper.DoExportToExcel<IDisplayColourCensus>(dgReportSheet.Columns);
 
         void MnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
         {
@@ -367,10 +361,7 @@ namespace FTAnalyzer.Forms
             MessageBox.Show("Form Settings Saved", "Colour Census");
         }
 
-        void MnuResetCensusColumns_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.ResetColumnLayout("ColourCensusLayout.xml");
-        }
+        void MnuResetCensusColumns_Click(object sender, EventArgs e) => reportFormHelper.ResetColumnLayout("ColourCensusLayout.xml");
 
         void MnuViewFacts_Click(object sender, EventArgs e)
         {
@@ -390,14 +381,8 @@ namespace FTAnalyzer.Forms
                 dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
         }
 
-        void ColourCensus_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Dispose();
-        }
+        void ColourCensus_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        void ColourCensus_Load(object sender, EventArgs e)
-        {
-            SpecialMethods.SetFonts(this);
-        }
+        void ColourCensus_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }
 }

@@ -219,7 +219,7 @@ namespace FTAnalyzer.Forms
                         Individual ind = ft.GetIndividual(person.IndividualID);
                         if (e.ColumnIndex == birthColumnIndex || e.ColumnIndex == birthColumnIndex + 1)
                         {
-                            ft.SearchBMD(FamilyTree.SearchType.BIRTH, ind, ind.BirthDate, cbBMDSearchProvider.SelectedIndex);
+                            ft.SearchBMD(FamilyTree.SearchType.BIRTH, ind, ind.BirthDate, cbBMDSearchProvider.SelectedIndex, cbRegion.Text);
                         }
                         else if (e.ColumnIndex >= birthColumnIndex + 2 && e.ColumnIndex <= birthColumnIndex + 4)
                         {
@@ -230,11 +230,11 @@ namespace FTAnalyzer.Forms
                                 marriageDate = ind.SecondMarriageDate;
                             if (e.ColumnIndex == birthColumnIndex + 4)
                                 marriageDate = ind.ThirdMarriageDate;
-                            ft.SearchBMD(FamilyTree.SearchType.MARRIAGE, ind, marriageDate, cbBMDSearchProvider.SelectedIndex);
+                            ft.SearchBMD(FamilyTree.SearchType.MARRIAGE, ind, marriageDate, cbBMDSearchProvider.SelectedIndex, cbRegion.Text);
                         }
                         else if (e.ColumnIndex == burialColumnIndex || e.ColumnIndex == burialColumnIndex - 1)
                         {
-                            ft.SearchBMD(FamilyTree.SearchType.DEATH, ind, ind.DeathDate, cbBMDSearchProvider.SelectedIndex);
+                            ft.SearchBMD(FamilyTree.SearchType.DEATH, ind, ind.DeathDate, cbBMDSearchProvider.SelectedIndex, cbRegion.Text);
                         }
                     }
                 }
@@ -283,7 +283,7 @@ namespace FTAnalyzer.Forms
 
         void CbFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
             switch (cbFilter.SelectedIndex)
             {
                 case -1: // nothing selected
@@ -291,77 +291,71 @@ namespace FTAnalyzer.Forms
                     dgBMDReportSheet.DataSource = this.reportList;
                     break;
                 case 1: // None Found (All Red)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.UNKNOWN_DATE, true));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.UNKNOWN_DATE, true));
                     break;
                 case 2: // All Found (All Green)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.EXACT_DATE, true));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.EXACT_DATE, true));
                     break;
                 case 3: // All Open Ended ranges (Orange Red)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.OPEN_ENDED_DATE, true));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.OPEN_ENDED_DATE, true));
                     break;
                 case 4: // All Wide date ranges (Tomato)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.VERY_WIDE_DATE, true));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.VERY_WIDE_DATE, true));
                     break;
                 case 5: // All Wide date ranges (Orange)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.WIDE_DATE, true));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.WIDE_DATE, true));
                     break;
                 case 6: // All Narrow date ranges (Yellow)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.NARROW_DATE, true));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.NARROW_DATE, true));
                     break;
                 case 7: // All Just year date ranges (Yellow)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.JUST_YEAR_DATE, true));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.JUST_YEAR_DATE, true));
                     break;
                 case 8: // All Approx date ranges (Light Green)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.APPROX_DATE, true));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.APPROX_DATE, true));
                     break;
                 case 9: // Some Missing (Some Red)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.UNKNOWN_DATE, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.UNKNOWN_DATE, false));
                     break;
                 case 10: // Some found (Some Green)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.EXACT_DATE, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.EXACT_DATE, false));
                     break;
                 case 11: // Some Open Ended date ranges (Orange Red)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.OPEN_ENDED_DATE, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.OPEN_ENDED_DATE, false));
                     break;
                 case 12: // Some Very Wide date ranges (Tomato)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.VERY_WIDE_DATE, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.VERY_WIDE_DATE, false));
                     break;
                 case 13: // Some Wide date ranges (Orange)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.WIDE_DATE, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.WIDE_DATE, false));
                     break;
                 case 14: // Some Narrow date ranges (Yellow)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.NARROW_DATE, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.NARROW_DATE, false));
                     break;
                 case 15: // Some Approx date ranges (Light Green)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.JUST_YEAR_DATE, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.JUST_YEAR_DATE, false));
                     break;
                 case 16: // Some Approx date ranges (Light Green)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.APPROX_DATE, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.APPROX_DATE, false));
                     break;
                 case 17: // Of Marrying age (Peach)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.NO_SPOUSE, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.NO_SPOUSE, false));
                     break;
                 case 18: // No Partner shared fact/children (Light Blue)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.NO_PARTNER, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.NO_PARTNER, false));
                     break;
                 case 19: // Partner but no marriage (Dark Blue)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(ColourValues.BMDColour.NO_MARRIAGE, false));
+                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.NO_MARRIAGE, false));
                     break;
             }
             dgBMDReportSheet.Focus();
-            tsRecords.Text = Properties.Messages.Count + dgBMDReportSheet.RowCount + " records listed.";
+            tsRecords.Text = $"{Properties.Messages.Count}{dgBMDReportSheet.RowCount} records listed.";
             Cursor = Cursors.Default;
         }
 
-        void MnuExportToExcel_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.DoExportToExcel<IDisplayColourBMD>();
-        }
+        void MnuExportToExcel_Click(object sender, EventArgs e) => reportFormHelper.DoExportToExcel<IDisplayColourBMD>();
 
-        void MnuResetCensusColumns_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.ResetColumnLayout("ColourBMDColumns.xml");
-        }
+        void MnuResetCensusColumns_Click(object sender, EventArgs e) => reportFormHelper.ResetColumnLayout("ColourBMDColumns.xml");
 
         void MnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
         {
@@ -387,14 +381,8 @@ namespace FTAnalyzer.Forms
                 dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
         }
 
-        void ColourBMD_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Dispose();
-        }
+        void ColourBMD_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        void ColourBMD_Load(object sender, EventArgs e)
-        {
-            SpecialMethods.SetFonts(this);
-        }
+        void ColourBMD_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }
 }

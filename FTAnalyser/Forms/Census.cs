@@ -222,7 +222,7 @@ namespace FTAnalyzer.Forms
                 {
                     try
                     {
-                        ft.SearchCensus(censusCountry, CensusDate.StartDate.Year, ds, cbCensusSearchProvider.SelectedIndex);
+                        ft.SearchCensus(censusCountry, CensusDate.StartDate.Year, ds, cbCensusSearchProvider.SelectedIndex, cbRegion.Text);
                     }
                     catch (CensusSearchException ex)
                     {

@@ -1,3 +1,7 @@
+#### Updated Release Version 7.2.3.0 2nd January 2019  
+**Updates**  
+Added region selector to searching to allow for different regional websites to be used  
+
 #### Updated Release Version 7.2.2.1 30th December 2018  
 **Updates**  
 Added option to privatise or include details of living people on GEDCOM export  

@@ -67,6 +67,8 @@
             this.btnHelp = new System.Windows.Forms.ToolStripButton();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuViewFacts = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.cbRegion = new System.Windows.Forms.ToolStripComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgCensus)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -285,6 +287,8 @@
             this.toolStripSeparator1,
             this.toolStripLabel1,
             this.cbCensusSearchProvider,
+            this.toolStripLabel2,
+            this.cbRegion,
             this.btnHelp});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -424,6 +428,28 @@
             this.mnuViewFacts.Text = "View Individuals Facts";
             this.mnuViewFacts.Click += new System.EventHandler(this.MnuViewFacts_Click);
             // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(47, 22);
+            this.toolStripLabel2.Text = "Region:";
+            // 
+            // cbRegion
+            // 
+            this.cbRegion.AutoCompleteCustomSource.AddRange(new string[] {
+            ".com",
+            ".co.uk",
+            ".ca",
+            ".com.au"});
+            this.cbRegion.Items.AddRange(new object[] {
+            ".com",
+            ".co.uk",
+            ".ca",
+            ".com.au"});
+            this.cbRegion.Name = "cbRegion";
+            this.cbRegion.Size = new System.Drawing.Size(121, 25);
+            this.cbRegion.Text = ".co.uk";
+            // 
             // Census
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -487,5 +513,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn RelationToRoot;
         private System.Windows.Forms.DataGridViewTextBoxColumn CensusReference;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ahnentafel;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.ToolStripComboBox cbRegion;
     }
 }
