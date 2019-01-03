@@ -50,6 +50,8 @@ A Google API Key is entirely free to create and private to you. You will never p
 10) Entry you billing information and save
     ![Mapping Tab](http://www.ftanalyzer.com/GoogleAPI-12b.png)
 
-Now you are all set to use your own personal Google API limits and 40,000 lookups a month should be plenty for you. 
+Thats's it once you start your free trial you are all set to use your own personal Google API limits and 40,000 lookups a month should be plenty for you. 
 
-Note you can check your usage by going to the [Google API dashboard](https://console.cloud.google.com/google/maps-apis/overview)
+Note you can always check your usage by going to the [Google API dashboard](https://console.cloud.google.com/google/maps-apis/overview) to make sure you never exceed the limit and thus always have totally free lookups.
+
+NB. Remember to keep your key private and don't disclose it to anyone to ensure that no one else can use it.
