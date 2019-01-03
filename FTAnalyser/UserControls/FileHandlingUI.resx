@@ -142,7 +142,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkConvertDiacritics.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 49</value>
+    <value>3, 26</value>
   </data>
   <data name="chkConvertDiacritics.Size" type="System.Drawing.Size, System.Drawing">
     <value>303, 17</value>
@@ -172,7 +172,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkRetryFailedLines.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 26</value>
+    <value>3, 3</value>
   </data>
   <data name="chkRetryFailedLines.Size" type="System.Drawing.Size, System.Drawing">
     <value>257, 17</value>
@@ -224,33 +224,6 @@
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="chkLoadWithFilters.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="chkLoadWithFilters.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="chkLoadWithFilters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 17</value>
-  </data>
-  <data name="chkLoadWithFilters.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="chkLoadWithFilters.Text" xml:space="preserve">
-    <value>Use Special Character Filters When Loading (*)</value>
-  </data>
-  <data name="&gt;&gt;chkLoadWithFilters.Name" xml:space="preserve">
-    <value>chkLoadWithFilters</value>
-  </data>
-  <data name="&gt;&gt;chkLoadWithFilters.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;chkLoadWithFilters.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;chkLoadWithFilters.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>325, 421</value>

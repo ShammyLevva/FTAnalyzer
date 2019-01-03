@@ -29,7 +29,7 @@ A Google API Key is entirely free to create and private to you. You will never p
    ![create credentials](http://www.ftanalyzer.com/GoogleAPI-5c.png)  
    d) and select API Key  
    ![select API key](http://www.ftanalyzer.com/GoogleAPI-5d.png)  
-   e) once your key is displayed click close  
+   e) once your key is displayed click close or you can click to restrict your key to just geocoding   
    ![created API](http://www.ftanalyzer.com/GoogleAPI-5e.png)  
 6) Now copy your API key from this page by clicking on button next to key  
    ![Copy Key](http://www.ftanalyzer.com/GoogleAPI-6.png)  

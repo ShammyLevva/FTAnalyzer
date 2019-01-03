@@ -12,7 +12,6 @@ namespace FTAnalyzer.UserControls
 			InitializeComponent();
 			//cannot be in load, because its possible this tab won't show, and the values will not be initialized.
 			//if this happens, then the users settings will be cleared.
-            chkLoadWithFilters.Checked = FileHandling.Default.LoadWithFilters;
             chkRetryFailedLines.Checked = FileHandling.Default.RetryFailedLines;
             chkConvertDiacritics.Checked = FileHandling.Default.ConvertDiacritics;
 		}
@@ -21,7 +20,6 @@ namespace FTAnalyzer.UserControls
 
 		public void Save()
 		{
-            FileHandling.Default.LoadWithFilters = chkLoadWithFilters.Checked;
             FileHandling.Default.RetryFailedLines = chkRetryFailedLines.Checked;
             FileHandling.Default.ConvertDiacritics = chkConvertDiacritics.Checked;
             FileHandling.Default.Save();

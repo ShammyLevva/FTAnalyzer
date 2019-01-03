@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileHandlingUI));
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.chkLoadWithFilters = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.chkRetryFailedLines = new System.Windows.Forms.CheckBox();
             this.chkConvertDiacritics = new System.Windows.Forms.CheckBox();
@@ -42,13 +41,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // chkLoadWithFilters
-            // 
-            resources.ApplyResources(this.chkLoadWithFilters, "chkLoadWithFilters");
-            this.chkLoadWithFilters.Name = "chkLoadWithFilters";
-            this.chkLoadWithFilters.UseVisualStyleBackColor = true;
-            this.chkLoadWithFilters.CheckedChanged += new System.EventHandler(this.ChkLoadWithFilters_CheckedChanged);
             // 
             // label1
             // 
@@ -78,7 +70,6 @@
             this.Controls.Add(this.chkConvertDiacritics);
             this.Controls.Add(this.chkRetryFailedLines);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.chkLoadWithFilters);
             this.Name = "FileHandlingUI";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
@@ -90,7 +81,6 @@
 
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
-        private System.Windows.Forms.CheckBox chkLoadWithFilters;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkRetryFailedLines;
         private System.Windows.Forms.CheckBox chkConvertDiacritics;
