@@ -15,20 +15,20 @@ A Google API Key is entirely free to create and private to you. You will never p
 1) Visit the [Google API Key website](https://cloud.google.com/console/google/maps-apis/overview) and login with your existing Google account if you have one, or create a new one.  
    ![Example Screen when logged in](http://www.ftanalyzer.com/GoogleAPI-1.png) 
 2) Click to create a new Project  
-   ![Creating a Project](http://www.ftanalyzer.com/GoogleAPI-2.png) 
+   ![Creating a Project](http://www.ftanalyzer.com/GoogleAPI-2.png)  
 3) Search for Geocoding API and click to view it
-   ![Searching for Geocoding API](http://www.ftanalyzer.com/GoogleAPI-3.png) 
+   ![Searching for Geocoding API](http://www.ftanalyzer.com/GoogleAPI-3.png)   
 4) Enable Geocoding API  
-   ![Enable Google API](http://www.ftanalyzer.com/GoogleAPI-4.png)
+   ![Enable Google API](http://www.ftanalyzer.com/GoogleAPI-4.png)  
 5) Get your API Key for FTAnalyzer
    a) Click on APIs then click on details on the right  
-   ![APIs](http://www.ftanalyzer.com/GoogleAPI-5a.png)
+   ![APIs](http://www.ftanalyzer.com/GoogleAPI-5a.png)  
    b) then click on credentials  
    ![credentials](http://www.ftanalyzer.com/GoogleAPI-5b.png)  
    c) then click create credentials   
-   ![create credentials](http://www.ftanalyzer.com/GoogleAPI-5c.png)
+   ![create credentials](http://www.ftanalyzer.com/GoogleAPI-5c.png)  
    d) and select API Key  
-   ![select API key](http://www.ftanalyzer.com/GoogleAPI-5d.png)
+   ![select API key](http://www.ftanalyzer.com/GoogleAPI-5d.png)  
    e) once your key is displayed click close  
    ![created API](http://www.ftanalyzer.com/GoogleAPI-5e.png)
 6) Now copy your API key from this page by clicking on button next to key  
