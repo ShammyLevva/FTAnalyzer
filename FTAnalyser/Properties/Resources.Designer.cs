@@ -63,9 +63,29 @@ namespace FTAnalyzer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _256 {
+            get {
+                object obj = ResourceManager.GetObject("256", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap flogo_rgb_hex_brc_site_250 {
             get {
                 object obj = ResourceManager.GetObject("flogo_rgb_hex_brc_site_250", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GoogleMapsAPI {
+            get {
+                object obj = ResourceManager.GetObject("GoogleMapsAPI", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

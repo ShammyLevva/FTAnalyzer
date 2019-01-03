@@ -39,8 +39,8 @@ namespace FTAnalyzer
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,7 +55,6 @@ namespace FTAnalyzer
             this.mnuRecent4 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRecent5 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.clearRecentFileListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,6 +75,7 @@ namespace FTAnalyzer
             this.mnuIndividualsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFamiliesToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFactsToExcel = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuExportLocations = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSourcesToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuDataErrorsToExcel = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,9 +106,8 @@ namespace FTAnalyzer
             this.viewOnlineManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportAnIssueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.facebookSupportGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.facebookUserGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.privacyPolicyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.whatsNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -240,7 +239,6 @@ namespace FTAnalyzer
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LbProgramName = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.pbRelationships = new System.Windows.Forms.ProgressBar();
@@ -270,7 +268,6 @@ namespace FTAnalyzer
             this.ckbDataErrors = new System.Windows.Forms.CheckedListBox();
             this.tabDuplicates = new System.Windows.Forms.TabPage();
             this.ckbHideIgnoredDuplicates = new System.Windows.Forms.CheckBox();
-            this.btnCancelDuplicates = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.labDuplicateSlider = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -329,7 +326,13 @@ namespace FTAnalyzer
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.MnuExportLocations = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearRecentFileListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.facebookSupportGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.facebookUserGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.getGoogleAPIKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnCancelDuplicates = new System.Windows.Forms.Button();
+            this.googleAPISetupGuideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -367,7 +370,6 @@ namespace FTAnalyzer
             ((System.ComponentModel.ISupportInitialize)(this.dgPlaces)).BeginInit();
             this.tabDisplayProgress.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabSelector.SuspendLayout();
             this.tabMainLists.SuspendLayout();
             this.tabMainListsSelector.SuspendLayout();
@@ -394,6 +396,7 @@ namespace FTAnalyzer
             this.tabFacts.SuspendLayout();
             this.tabToday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -514,14 +517,6 @@ namespace FTAnalyzer
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(179, 6);
-            // 
-            // clearRecentFileListToolStripMenuItem
-            // 
-            this.clearRecentFileListToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearRecentFileListToolStripMenuItem.Image")));
-            this.clearRecentFileListToolStripMenuItem.Name = "clearRecentFileListToolStripMenuItem";
-            this.clearRecentFileListToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.clearRecentFileListToolStripMenuItem.Text = "Clear Recent File List";
-            this.clearRecentFileListToolStripMenuItem.Click += new System.EventHandler(this.ClearRecentFileListToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -684,6 +679,13 @@ namespace FTAnalyzer
             this.mnuFactsToExcel.Size = new System.Drawing.Size(221, 22);
             this.mnuFactsToExcel.Text = "Facts to Excel";
             this.mnuFactsToExcel.Click += new System.EventHandler(this.FactsToExcelToolStripMenuItem_Click);
+            // 
+            // MnuExportLocations
+            // 
+            this.MnuExportLocations.Name = "MnuExportLocations";
+            this.MnuExportLocations.Size = new System.Drawing.Size(221, 22);
+            this.MnuExportLocations.Text = "Locations to Excel";
+            this.MnuExportLocations.Click += new System.EventHandler(this.MnuExportLocations_Click);
             // 
             // mnuSourcesToExcel
             // 
@@ -876,6 +878,9 @@ namespace FTAnalyzer
             this.facebookSupportGroupToolStripMenuItem,
             this.facebookUserGroupToolStripMenuItem,
             this.toolStripSeparator1,
+            this.getGoogleAPIKeyToolStripMenuItem,
+            this.googleAPISetupGuideToolStripMenuItem,
+            this.toolStripSeparator14,
             this.privacyPolicyToolStripMenuItem,
             this.whatsNewToolStripMenuItem,
             this.aboutToolStripMenuItem});
@@ -904,26 +909,15 @@ namespace FTAnalyzer
             this.reportAnIssueToolStripMenuItem.Text = "Report an Issue";
             this.reportAnIssueToolStripMenuItem.Click += new System.EventHandler(this.ReportAnIssueToolStripMenuItem_Click);
             // 
-            // facebookSupportGroupToolStripMenuItem
-            // 
-            this.facebookSupportGroupToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.flogo_rgb_hex_brc_site_250;
-            this.facebookSupportGroupToolStripMenuItem.Name = "facebookSupportGroupToolStripMenuItem";
-            this.facebookSupportGroupToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.facebookSupportGroupToolStripMenuItem.Text = "Facebook Support Page";
-            this.facebookSupportGroupToolStripMenuItem.Click += new System.EventHandler(this.FacebookSupportGroupToolStripMenuItem_Click);
-            // 
-            // facebookUserGroupToolStripMenuItem
-            // 
-            this.facebookUserGroupToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.flogo_rgb_hex_brc_site_250;
-            this.facebookUserGroupToolStripMenuItem.Name = "facebookUserGroupToolStripMenuItem";
-            this.facebookUserGroupToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.facebookUserGroupToolStripMenuItem.Text = "Facebook User Group";
-            this.facebookUserGroupToolStripMenuItem.Click += new System.EventHandler(this.FacebookUserGroupToolStripMenuItem_Click);
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(252, 6);
+            // 
+            // toolStripSeparator14
+            // 
+            this.toolStripSeparator14.Name = "toolStripSeparator14";
+            this.toolStripSeparator14.Size = new System.Drawing.Size(252, 6);
             // 
             // privacyPolicyToolStripMenuItem
             // 
@@ -1107,14 +1101,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 166);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -2393,15 +2387,6 @@ namespace FTAnalyzer
             this.panel2.Size = new System.Drawing.Size(1074, 109);
             this.panel2.TabIndex = 12;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(971, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox1.TabIndex = 18;
-            this.pictureBox1.TabStop = false;
-            // 
             // LbProgramName
             // 
             this.LbProgramName.AutoSize = true;
@@ -2718,7 +2703,6 @@ namespace FTAnalyzer
             // tabDuplicates
             // 
             this.tabDuplicates.Controls.Add(this.ckbHideIgnoredDuplicates);
-            this.tabDuplicates.Controls.Add(this.btnCancelDuplicates);
             this.tabDuplicates.Controls.Add(this.label16);
             this.tabDuplicates.Controls.Add(this.labDuplicateSlider);
             this.tabDuplicates.Controls.Add(this.label13);
@@ -2727,6 +2711,7 @@ namespace FTAnalyzer
             this.tabDuplicates.Controls.Add(this.labCalcDuplicates);
             this.tabDuplicates.Controls.Add(this.pbDuplicates);
             this.tabDuplicates.Controls.Add(this.dgDuplicates);
+            this.tabDuplicates.Controls.Add(this.btnCancelDuplicates);
             this.tabDuplicates.Location = new System.Drawing.Point(4, 22);
             this.tabDuplicates.Name = "tabDuplicates";
             this.tabDuplicates.Padding = new System.Windows.Forms.Padding(3);
@@ -2747,18 +2732,6 @@ namespace FTAnalyzer
             this.ckbHideIgnoredDuplicates.Text = "Hide Possible Duplicates marked as Ignore";
             this.ckbHideIgnoredDuplicates.UseVisualStyleBackColor = true;
             this.ckbHideIgnoredDuplicates.CheckedChanged += new System.EventHandler(this.CkbHideIgnoredDuplicates_CheckedChanged);
-            // 
-            // btnCancelDuplicates
-            // 
-            this.btnCancelDuplicates.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelDuplicates.Image")));
-            this.btnCancelDuplicates.Location = new System.Drawing.Point(414, 6);
-            this.btnCancelDuplicates.Name = "btnCancelDuplicates";
-            this.btnCancelDuplicates.Size = new System.Drawing.Size(23, 23);
-            this.btnCancelDuplicates.TabIndex = 27;
-            this.btnCancelDuplicates.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCancelDuplicates.UseVisualStyleBackColor = true;
-            this.btnCancelDuplicates.Visible = false;
-            this.btnCancelDuplicates.Click += new System.EventHandler(this.BtnCancelDuplicates_Click);
             // 
             // label16
             // 
@@ -3373,12 +3346,66 @@ namespace FTAnalyzer
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // MnuExportLocations
+            // clearRecentFileListToolStripMenuItem
             // 
-            this.MnuExportLocations.Name = "MnuExportLocations";
-            this.MnuExportLocations.Size = new System.Drawing.Size(221, 22);
-            this.MnuExportLocations.Text = "Locations to Excel";
-            this.MnuExportLocations.Click += new System.EventHandler(this.MnuExportLocations_Click);
+            this.clearRecentFileListToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearRecentFileListToolStripMenuItem.Image")));
+            this.clearRecentFileListToolStripMenuItem.Name = "clearRecentFileListToolStripMenuItem";
+            this.clearRecentFileListToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.clearRecentFileListToolStripMenuItem.Text = "Clear Recent File List";
+            this.clearRecentFileListToolStripMenuItem.Click += new System.EventHandler(this.ClearRecentFileListToolStripMenuItem_Click);
+            // 
+            // facebookSupportGroupToolStripMenuItem
+            // 
+            this.facebookSupportGroupToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.flogo_rgb_hex_brc_site_250;
+            this.facebookSupportGroupToolStripMenuItem.Name = "facebookSupportGroupToolStripMenuItem";
+            this.facebookSupportGroupToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.facebookSupportGroupToolStripMenuItem.Text = "Facebook Support Page";
+            this.facebookSupportGroupToolStripMenuItem.Click += new System.EventHandler(this.FacebookSupportGroupToolStripMenuItem_Click);
+            // 
+            // facebookUserGroupToolStripMenuItem
+            // 
+            this.facebookUserGroupToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.flogo_rgb_hex_brc_site_250;
+            this.facebookUserGroupToolStripMenuItem.Name = "facebookUserGroupToolStripMenuItem";
+            this.facebookUserGroupToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.facebookUserGroupToolStripMenuItem.Text = "Facebook User Group";
+            this.facebookUserGroupToolStripMenuItem.Click += new System.EventHandler(this.FacebookUserGroupToolStripMenuItem_Click);
+            // 
+            // getGoogleAPIKeyToolStripMenuItem
+            // 
+            this.getGoogleAPIKeyToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.GoogleMapsAPI;
+            this.getGoogleAPIKeyToolStripMenuItem.Name = "getGoogleAPIKeyToolStripMenuItem";
+            this.getGoogleAPIKeyToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.getGoogleAPIKeyToolStripMenuItem.Text = "Get Google API Key";
+            this.getGoogleAPIKeyToolStripMenuItem.Click += new System.EventHandler(this.GetGoogleAPIKeyToolStripMenuItem_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(971, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 18;
+            this.pictureBox1.TabStop = false;
+            // 
+            // btnCancelDuplicates
+            // 
+            this.btnCancelDuplicates.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelDuplicates.Image")));
+            this.btnCancelDuplicates.Location = new System.Drawing.Point(414, 6);
+            this.btnCancelDuplicates.Name = "btnCancelDuplicates";
+            this.btnCancelDuplicates.Size = new System.Drawing.Size(23, 23);
+            this.btnCancelDuplicates.TabIndex = 27;
+            this.btnCancelDuplicates.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCancelDuplicates.UseVisualStyleBackColor = true;
+            this.btnCancelDuplicates.Visible = false;
+            this.btnCancelDuplicates.Click += new System.EventHandler(this.BtnCancelDuplicates_Click);
+            // 
+            // googleAPISetupGuideToolStripMenuItem
+            // 
+            this.googleAPISetupGuideToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.GoogleMapsAPI;
+            this.googleAPISetupGuideToolStripMenuItem.Name = "googleAPISetupGuideToolStripMenuItem";
+            this.googleAPISetupGuideToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.googleAPISetupGuideToolStripMenuItem.Text = "Google API Setup Guide";
+            this.googleAPISetupGuideToolStripMenuItem.Click += new System.EventHandler(this.googleAPISetupGuideToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -3447,7 +3474,6 @@ namespace FTAnalyzer
             this.tabDisplayProgress.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabSelector.ResumeLayout(false);
             this.tabMainLists.ResumeLayout(false);
             this.tabMainListsSelector.ResumeLayout(false);
@@ -3477,6 +3503,7 @@ namespace FTAnalyzer
             this.tabToday.ResumeLayout(false);
             this.tabToday.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3774,6 +3801,9 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripMenuItem mnuDNA_GEDCOM;
         private System.Windows.Forms.ToolStripMenuItem MnuExportLocations;
+        private System.Windows.Forms.ToolStripMenuItem getGoogleAPIKeyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
+        private System.Windows.Forms.ToolStripMenuItem googleAPISetupGuideToolStripMenuItem;
     }
 }
 

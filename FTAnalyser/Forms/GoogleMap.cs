@@ -105,15 +105,15 @@ namespace FTAnalyzer.Forms
             int returnlevel = GetFactLocationType(res.Results[0].Types, loc);
             if (returnlevel != FactLocation.UNKNOWN)
             {
-                output = "Google found " + loc.GetLocation(returnlevel);
+                output = $"Google found {loc.GetLocation(returnlevel)}";
                 // if we have different input and output levels, assuming it isn't just a more accurate place in the address field
                 // then also show what Google found
                 if (level != returnlevel && !(level == FactLocation.ADDRESS && returnlevel >= FactLocation.ADDRESS))
-                    output += " as " + res.Results[0].ReturnAddress;
+                    output += $" as {res.Results[0].ReturnAddress}";
             }
             else
             {
-                output = "Best guess for " + loc.GetLocation(level) + " is " + res.Results[0].ReturnAddress;
+                output = $"Best guess for {loc.GetLocation(level)} is {res.Results[0].ReturnAddress}";
             }
             return output;
         }
@@ -186,7 +186,7 @@ namespace FTAnalyzer.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to contact https://maps.googleapis.com error was : " + ex.Message, "FTAnalyzer");
+                MessageBox.Show($"Unable to contact https://maps.googleapis.com error was: {ex.Message}", "FTAnalyzer");
             }
             return res;
         }
@@ -201,7 +201,7 @@ namespace FTAnalyzer.Forms
                 OnWaitingForGoogle("Over Google limit. Waiting " + seconds + " seconds.");
             if (sleepinterval >= 20000)
             {
-                OnWaitingForGoogle("Max Google GeoLocations exceeded for today.");
+                OnWaitingForGoogle("Max Google GeoLocations exceeded for today. Consider getting your own FREE Google API Key for 40,000 lookups a day. See Help Menu.");
                 GeoResponse response = new GeoResponse
                 {
                     Status = "Maxed"

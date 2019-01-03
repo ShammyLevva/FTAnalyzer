@@ -3247,5 +3247,15 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
+        void GetGoogleAPIKeyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HttpUtility.VisitWebsite("https://developers.google.com/maps/documentation/embed/get-api-key");
+            Analytics.TrackAction(Analytics.MainFormAction, Analytics.GoogleAPIKey);
+        }
+
+        void googleAPISetupGuideToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HttpUtility.VisitWebsite("http://www.ftanalyzer.com/GoogleAPI");
+        }
     }
 }
