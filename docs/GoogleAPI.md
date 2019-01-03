@@ -18,7 +18,7 @@ A Google API Key is entirely free to create and private to you. You will never p
    ![Creating a Project](http://www.ftanalyzer.com/GoogleAPI-2.png)  
 3) Search for Geocoding API and click to view it
    ![Searching for Geocoding API](http://www.ftanalyzer.com/GoogleAPI-3.png)   
-4) Enable Geocoding API  
+4) Enable Geocoding API (sometimes it gets stuck at this stage if it hasn't refreshed after about 30 seconds click your browser refresh button)  
    ![Enable Google API](http://www.ftanalyzer.com/GoogleAPI-4.png)  
 5) Get your API Key for FTAnalyzer
    a) Click on APIs then click on details on the right  
