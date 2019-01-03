@@ -21,7 +21,7 @@ A Google API Key is entirely free to create and private to you. You will never p
 4) Enable Geocoding API  
    ![Enable Google API](http://www.ftanalyzer.com/GoogleAPI-4.png)
 5) Get your API Key for FTAnalyzer
-   a) Click on APIs  
+   a) Click on APIs then click on details on the right  
    ![APIs](http://www.ftanalyzer.com/GoogleAPI-5a.png)
    b) then click on credentials  
    ![credentials](http://www.ftanalyzer.com/GoogleAPI-5b.png)  
