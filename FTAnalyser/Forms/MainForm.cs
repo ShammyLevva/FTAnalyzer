@@ -3253,7 +3253,7 @@ namespace FTAnalyzer
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.GoogleAPIKey);
         }
 
-        void googleAPISetupGuideToolStripMenuItem_Click(object sender, EventArgs e)
+        void GoogleAPISetupGuideToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HttpUtility.VisitWebsite("http://www.ftanalyzer.com/GoogleAPI");
         }

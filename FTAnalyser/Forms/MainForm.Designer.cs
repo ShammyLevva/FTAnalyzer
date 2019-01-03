@@ -3405,7 +3405,7 @@ namespace FTAnalyzer
             this.googleAPISetupGuideToolStripMenuItem.Name = "googleAPISetupGuideToolStripMenuItem";
             this.googleAPISetupGuideToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.googleAPISetupGuideToolStripMenuItem.Text = "Google API Setup Guide";
-            this.googleAPISetupGuideToolStripMenuItem.Click += new System.EventHandler(this.googleAPISetupGuideToolStripMenuItem_Click);
+            this.googleAPISetupGuideToolStripMenuItem.Click += new System.EventHandler(this.GoogleAPISetupGuideToolStripMenuItem_Click);
             // 
             // MainForm
             // 

@@ -667,8 +667,7 @@ namespace FTAnalyzer.Forms
                     }
                     count++;
                     int percent = (int)Math.Truncate((count - 1) * 100.0 / total);
-                    string status = "Previously geocoded: " + geocoded + ", skipped: " + skipped +
-                                    ", Googled: " + googled + ". Done " + (count - 1) + " of " + total + ".  ";
+                    string status = $"Previously geocoded: {geocoded}, skipped: {skipped}, Googled: {googled}. Done {count - 1} of {total}.  ";
                     worker.ReportProgress(percent, status);
 
                     if (worker.CancellationPending ||
@@ -686,7 +685,7 @@ namespace FTAnalyzer.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error Google Geocoding : " + ex.Message, "FTAnalyzer Geocoding");
+                MessageBox.Show($"Error Google Geocoding: {ex.Message}", "FTAnalyzer Geocoding");
             }
         }
 

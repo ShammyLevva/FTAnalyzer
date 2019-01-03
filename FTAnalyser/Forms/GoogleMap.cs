@@ -163,7 +163,7 @@ namespace FTAnalyzer.Forms
             return GetGeoResponse(url);
         }
 
-        private static GeoResponse GetGeoResponse(string url)
+        static GeoResponse GetGeoResponse(string url)
         {
             GeoResponse res = null;
             try
@@ -191,23 +191,16 @@ namespace FTAnalyzer.Forms
             return res;
         }
 
-        private static int sleepinterval = 200;
+        static int sleepinterval = 200;
 
         // Call geocoding routine but account for throttling by Google geocoding engine
         public static GeoResponse GoogleGeocode(string address, int badtries)
         {
             double seconds = sleepinterval / 1000;
             if (sleepinterval > 500)
-                OnWaitingForGoogle("Over Google limit. Waiting " + seconds + " seconds.");
+                OnWaitingForGoogle($"Over Google limit. Waiting {seconds} seconds.");
             if (sleepinterval >= 20000)
-            {
-                OnWaitingForGoogle("Max Google GeoLocations exceeded for today. Consider getting your own FREE Google API Key for 40,000 lookups a day. See Help Menu.");
-                GeoResponse response = new GeoResponse
-                {
-                    Status = "Maxed"
-                };
-                return response;
-            }
+                return MaxedOut();
             for (int interval = 0; interval < sleepinterval; interval += 1000)
             {
                 Thread.Sleep(1000);
@@ -220,7 +213,7 @@ namespace FTAnalyzer.Forms
             }
             catch (Exception e)
             {
-                OnWaitingForGoogle("Caught exception: " + e);
+                OnWaitingForGoogle($"Caught exception: {e}");
                 res = null;
             }
             if (res == null || res.Status == "OVER_QUERY_LIMIT")
@@ -246,16 +239,9 @@ namespace FTAnalyzer.Forms
         {
             double seconds = sleepinterval / 1000;
             if (sleepinterval > 500)
-                OnWaitingForGoogle("Over Google limit. Waiting " + seconds + " seconds.");
+                OnWaitingForGoogle($"Over Google limit. Waiting {seconds} seconds.");
             if (sleepinterval >= 20000)
-            {
-                OnWaitingForGoogle("Max Google GeoLocations exceeded for today.");
-                GeoResponse response = new GeoResponse
-                {
-                    Status = "Maxed"
-                };
-                return response;
-            }
+                return MaxedOut();
             for (int interval = 0; interval < sleepinterval; interval += 1000)
             {
                 Thread.Sleep(1000);
@@ -268,7 +254,7 @@ namespace FTAnalyzer.Forms
             }
             catch (Exception e)
             {
-                OnWaitingForGoogle("Caught exception: " + e);
+                OnWaitingForGoogle($"Caught exception: {e}");
                 res = null;
             }
             if (res == null || res.Status == "OVER_QUERY_LIMIT")
@@ -287,6 +273,19 @@ namespace FTAnalyzer.Forms
                     sleepinterval = Math.Max(sleepinterval / 2, 75);
                 return res;
             }
+        }
+
+        static GeoResponse MaxedOut()
+        {
+            string message = string.IsNullOrEmpty(Properties.MappingSettings.Default.GoogleAPI) ?
+                                "Max Google GeoLocations exceeded for today.\nConsider getting your own FREE Google API Key for 40,000 lookups a day. See Help Menu.\n" :
+                                "Max Google GeoLocations exceeded for today.\n";
+            OnWaitingForGoogle(message);
+            GeoResponse response = new GeoResponse
+            {
+                Status = "Maxed"
+            };
+            return response;
         }
 
         void WebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e) => System.Diagnostics.Debug.Print("DocumentCompleted called");
