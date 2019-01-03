@@ -13,4 +13,9 @@ A Google API Key is entirely free to create and private to you. You will never p
 
 ### Creating your own Google API Key ###
 1) Visit the [Google API Key website](https://developers.google.com/maps/documentation/embed/get-api-key) and login with your existing Google account if you have one, or create a new one.  
-2) 
+   ![Example Screen when logged in](http://www.ftanalyzer.com/GoogleAPI-1.png) 
+2) Click to create a new Project  
+   ![Creating a Project](http://www.ftanalyzer.com/GoogleAPI-2.png) 
+3) Search for Geocoding API  
+   ![Searching for Geocoding API](http://www.ftanalyzer.com/GoogleAPI-3.png) 
+4) x
