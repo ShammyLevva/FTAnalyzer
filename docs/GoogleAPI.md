@@ -30,25 +30,25 @@ A Google API Key is entirely free to create and private to you. You will never p
    d) and select API Key  
    ![select API key](http://www.ftanalyzer.com/GoogleAPI-5d.png)  
    e) once your key is displayed click close  
-   ![created API](http://www.ftanalyzer.com/GoogleAPI-5e.png)
+   ![created API](http://www.ftanalyzer.com/GoogleAPI-5e.png)  
 6) Now copy your API key from this page by clicking on button next to key  
-   ![Copy Key](http://www.ftanalyzer.com/GoogleAPI-6.png)
-7) Open FTAnalyzer Tools Menu and select Options
+   ![Copy Key](http://www.ftanalyzer.com/GoogleAPI-6.png)  
+7) Open FTAnalyzer Tools Menu and select Options  
     a) Select the Mapping tab  
-   ![Mapping Tab](http://www.ftanalyzer.com/GoogleAPI-8.png)
-    b) Right click on the Google API box and paste in your key
-    c) Click OK to save your key.
-8) Now back on the website we need to setup billing 
+   ![Mapping Tab](http://www.ftanalyzer.com/GoogleAPI-8.png)  
+    b) Right click on the Google API box and paste in your key  
+    c) Click OK to save your key.  
+8) Now back on the website we need to setup billing  
     - NB. billing will be zero if you stay under the 40,000 lookups a month but Google no longer allows you to use the lookups without setting up billing.  
-    ![Mapping Tab](http://www.ftanalyzer.com/GoogleAPI-11.png)
+    ![Mapping Tab](http://www.ftanalyzer.com/GoogleAPI-11.png)  
     a) Click to link a billing account  
-    ![Mapping Tab](http://www.ftanalyzer.com/GoogleAPI-11a.png)
+    ![Mapping Tab](http://www.ftanalyzer.com/GoogleAPI-11a.png)  
     b) If you don't have a billing account it will prompt you to create one  
-    ![Mapping Tab](http://www.ftanalyzer.com/GoogleAPI-11b.png)
-9) Select your country and agree to terms and conditions
-    ![Mapping Tab](http://www.ftanalyzer.com/GoogleAPI-12a.png)
-10) Entry you billing information and save
-    ![Mapping Tab](http://www.ftanalyzer.com/GoogleAPI-12b.png)
+    ![Mapping Tab](http://www.ftanalyzer.com/GoogleAPI-11b.png)  
+9) Select your country and agree to terms and conditions  
+    ![Mapping Tab](http://www.ftanalyzer.com/GoogleAPI-12a.png)  
+10) Entry you billing information and save  
+    ![Mapping Tab](http://www.ftanalyzer.com/GoogleAPI-12b.png)  
 
 Thats's it once you start your free trial you are all set to use your own personal Google API limits and 40,000 lookups a month should be plenty for you. 
 
