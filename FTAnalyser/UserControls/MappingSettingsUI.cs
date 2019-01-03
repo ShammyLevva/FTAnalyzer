@@ -15,6 +15,7 @@ namespace FTAnalyzer.UserControls
             ckbUseParishBoundaries.Checked = Properties.MappingSettings.Default.UseParishBoundaries;
             chkIncludePartialGeocoded.Checked = Properties.MappingSettings.Default.IncludePartials;
             ckbHideScaleBar.Checked = Properties.MappingSettings.Default.HideScaleBar;
+            txtGoogleAPI.Text = Properties.MappingSettings.Default.GoogleAPI;
 		}
 
 		#region IOptions Members
@@ -25,6 +26,7 @@ namespace FTAnalyzer.UserControls
             Properties.MappingSettings.Default.UseParishBoundaries = ckbUseParishBoundaries.Checked;
             Properties.MappingSettings.Default.HideScaleBar = ckbHideScaleBar.Checked;
             Properties.MappingSettings.Default.IncludePartials = chkIncludePartialGeocoded.Checked;
+            Properties.MappingSettings.Default.GoogleAPI = txtGoogleAPI.Text;
             Properties.MappingSettings.Default.Save();
 		}
 

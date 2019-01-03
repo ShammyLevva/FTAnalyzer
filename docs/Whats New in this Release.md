@@ -1,3 +1,7 @@
+#### Updated Release Version 7.2.4.0 2nd January 2019  
+**Updates**  
+Added User setting for Google API Key  
+
 #### Updated Release Version 7.2.3.0 2nd January 2019  
 **Updates**  
 Added region selector to searching to allow for different regional websites to be used  

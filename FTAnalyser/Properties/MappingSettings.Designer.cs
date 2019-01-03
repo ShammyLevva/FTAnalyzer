@@ -70,5 +70,17 @@ namespace FTAnalyzer.Properties {
                 this["IncludePartials"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string GoogleAPI {
+            get {
+                return ((string)(this["GoogleAPI"]));
+            }
+            set {
+                this["GoogleAPI"] = value;
+            }
+        }
     }
 }

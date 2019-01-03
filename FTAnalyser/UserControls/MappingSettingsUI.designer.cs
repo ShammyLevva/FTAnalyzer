@@ -38,6 +38,8 @@
             this.ckbUseParishBoundaries = new System.Windows.Forms.CheckBox();
             this.ckbHideScaleBar = new System.Windows.Forms.CheckBox();
             this.chkIncludePartialGeocoded = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtGoogleAPI = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,10 +88,22 @@
             this.chkIncludePartialGeocoded.Name = "chkIncludePartialGeocoded";
             this.chkIncludePartialGeocoded.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // txtGoogleAPI
+            // 
+            resources.ApplyResources(this.txtGoogleAPI, "txtGoogleAPI");
+            this.txtGoogleAPI.Name = "txtGoogleAPI";
+            // 
             // MappingSettingsUI
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.txtGoogleAPI);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.chkIncludePartialGeocoded);
             this.Controls.Add(this.ckbHideScaleBar);
             this.Controls.Add(this.ckbUseParishBoundaries);
@@ -113,7 +127,7 @@
         private System.Windows.Forms.CheckBox ckbUseParishBoundaries;
         private System.Windows.Forms.CheckBox ckbHideScaleBar;
         private System.Windows.Forms.CheckBox chkIncludePartialGeocoded;
-
-
-	}
+        private System.Windows.Forms.TextBox txtGoogleAPI;
+        private System.Windows.Forms.Label label2;
+    }
 }
