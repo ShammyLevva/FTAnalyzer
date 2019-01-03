@@ -1,6 +1,9 @@
-#### Updated Release Version 7.2.4.0 2nd January 2019  
+#### Updated Release Version 7.2.4.1 3rd January 2019  
 **Updates**  
-Added User setting for Google API Key  
+Added User setting for Google API Key see [Google API Key Documentation](/GoogleAPI)
+
+**Bugfixes**  
+Fixed missing icon file  
 
 #### Updated Release Version 7.2.3.0 2nd January 2019  
 **Updates**  
