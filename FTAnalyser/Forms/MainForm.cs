@@ -223,7 +223,8 @@ namespace FTAnalyzer
         async Task<bool> LoadTreeAsync(string filename)
         {
             var outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
-            XmlDocument doc = await Task.Run(() => ft.LoadTreeHeader(filename, outputText));
+            FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            XmlDocument doc = await Task.Run(() => ft.LoadTreeHeader(filename, stream, outputText));
             if (doc == null)
                 return false;
             var sourceProgress = new Progress<int>(value => { pbSources.Value = value; });
