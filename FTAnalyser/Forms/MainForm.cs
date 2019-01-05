@@ -28,10 +28,10 @@ using System.Windows.Forms;
 using System.Xml;
 
 namespace FTAnalyzer
-{
+{ 
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.2.4.3";
+        public static string VERSION = "7.2.4.4";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

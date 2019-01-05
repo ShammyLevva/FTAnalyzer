@@ -1,4 +1,9 @@
-#### Updated Release Version 7.2.4.3 3rd January 2019  
+#### Updated Release Version 7.2.4.4 3rd January 2019  
+**Bugfixes**  
+Fixed issue with adding months to edge case dates  
+Fixed issue with line errors reporting twice  
+
+#### Updated Release Version 7.2.4.0-3 3rd January 2019  
 **Updates**  
 Added User setting for Google API Key see [Google API Key Documentation](/GoogleAPI)  
 Changed file loading options to detect code sets - note incompatible code sets will now give errors.
