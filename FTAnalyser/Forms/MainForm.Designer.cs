@@ -39,8 +39,8 @@ namespace FTAnalyzer
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,6 +55,7 @@ namespace FTAnalyzer
             this.mnuRecent4 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRecent5 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.clearRecentFileListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,7 +107,11 @@ namespace FTAnalyzer
             this.viewOnlineManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportAnIssueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.facebookSupportGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.facebookUserGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.getGoogleAPIKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.googleAPISetupGuideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.privacyPolicyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.whatsNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -170,6 +175,8 @@ namespace FTAnalyzer
             this.txtColouredSurname = new System.Windows.Forms.TextBox();
             this.relTypesColoured = new FTAnalyzer.Controls.RelationTypes();
             this.tabLostCousins = new System.Windows.Forms.TabPage();
+            this.LCSubTabs = new System.Windows.Forms.TabControl();
+            this.LCReportsTab = new System.Windows.Forms.TabPage();
             this.Referrals = new System.Windows.Forms.GroupBox();
             this.ckbReferralInCommon = new System.Windows.Forms.CheckBox();
             this.btnReferrals = new System.Windows.Forms.Button();
@@ -191,6 +198,8 @@ namespace FTAnalyzer
             this.btnLC1881Canada = new System.Windows.Forms.Button();
             this.btnLC1881Scot = new System.Windows.Forms.Button();
             this.relTypesLC = new FTAnalyzer.Controls.RelationTypes();
+            this.LCUpdatesTab = new System.Windows.Forms.TabPage();
+            this.btnUpdateLostCousinsWebsite = new System.Windows.Forms.Button();
             this.tabCensus = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnExportMissingCensusRefs = new System.Windows.Forms.Button();
@@ -239,6 +248,7 @@ namespace FTAnalyzer
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LbProgramName = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.pbRelationships = new System.Windows.Forms.ProgressBar();
@@ -287,6 +297,7 @@ namespace FTAnalyzer
             this.MatchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MatchBirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MatchBirthLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnCancelDuplicates = new System.Windows.Forms.Button();
             this.tabLooseBirths = new System.Windows.Forms.TabPage();
             this.dgLooseBirths = new System.Windows.Forms.DataGridView();
             this.tabLooseDeaths = new System.Windows.Forms.TabPage();
@@ -326,13 +337,6 @@ namespace FTAnalyzer
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.clearRecentFileListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.facebookSupportGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.facebookUserGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.getGoogleAPIKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnCancelDuplicates = new System.Windows.Forms.Button();
-            this.googleAPISetupGuideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -349,7 +353,10 @@ namespace FTAnalyzer
             this.groupBox7.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabLostCousins.SuspendLayout();
+            this.LCSubTabs.SuspendLayout();
+            this.LCReportsTab.SuspendLayout();
             this.Referrals.SuspendLayout();
+            this.LCUpdatesTab.SuspendLayout();
             this.tabCensus.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -370,6 +377,7 @@ namespace FTAnalyzer
             ((System.ComponentModel.ISupportInitialize)(this.dgPlaces)).BeginInit();
             this.tabDisplayProgress.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabSelector.SuspendLayout();
             this.tabMainLists.SuspendLayout();
             this.tabMainListsSelector.SuspendLayout();
@@ -396,7 +404,6 @@ namespace FTAnalyzer
             this.tabFacts.SuspendLayout();
             this.tabToday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -517,6 +524,14 @@ namespace FTAnalyzer
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(179, 6);
+            // 
+            // clearRecentFileListToolStripMenuItem
+            // 
+            this.clearRecentFileListToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearRecentFileListToolStripMenuItem.Image")));
+            this.clearRecentFileListToolStripMenuItem.Name = "clearRecentFileListToolStripMenuItem";
+            this.clearRecentFileListToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.clearRecentFileListToolStripMenuItem.Text = "Clear Recent File List";
+            this.clearRecentFileListToolStripMenuItem.Click += new System.EventHandler(this.ClearRecentFileListToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -909,10 +924,42 @@ namespace FTAnalyzer
             this.reportAnIssueToolStripMenuItem.Text = "Report an Issue";
             this.reportAnIssueToolStripMenuItem.Click += new System.EventHandler(this.ReportAnIssueToolStripMenuItem_Click);
             // 
+            // facebookSupportGroupToolStripMenuItem
+            // 
+            this.facebookSupportGroupToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.flogo_rgb_hex_brc_site_250;
+            this.facebookSupportGroupToolStripMenuItem.Name = "facebookSupportGroupToolStripMenuItem";
+            this.facebookSupportGroupToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.facebookSupportGroupToolStripMenuItem.Text = "Facebook Support Page";
+            this.facebookSupportGroupToolStripMenuItem.Click += new System.EventHandler(this.FacebookSupportGroupToolStripMenuItem_Click);
+            // 
+            // facebookUserGroupToolStripMenuItem
+            // 
+            this.facebookUserGroupToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.flogo_rgb_hex_brc_site_250;
+            this.facebookUserGroupToolStripMenuItem.Name = "facebookUserGroupToolStripMenuItem";
+            this.facebookUserGroupToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.facebookUserGroupToolStripMenuItem.Text = "Facebook User Group";
+            this.facebookUserGroupToolStripMenuItem.Click += new System.EventHandler(this.FacebookUserGroupToolStripMenuItem_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(252, 6);
+            // 
+            // getGoogleAPIKeyToolStripMenuItem
+            // 
+            this.getGoogleAPIKeyToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.GoogleMapsAPI;
+            this.getGoogleAPIKeyToolStripMenuItem.Name = "getGoogleAPIKeyToolStripMenuItem";
+            this.getGoogleAPIKeyToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.getGoogleAPIKeyToolStripMenuItem.Text = "Get Google API Key";
+            this.getGoogleAPIKeyToolStripMenuItem.Click += new System.EventHandler(this.GetGoogleAPIKeyToolStripMenuItem_Click);
+            // 
+            // googleAPISetupGuideToolStripMenuItem
+            // 
+            this.googleAPISetupGuideToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.GoogleMapsAPI;
+            this.googleAPISetupGuideToolStripMenuItem.Name = "googleAPISetupGuideToolStripMenuItem";
+            this.googleAPISetupGuideToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.googleAPISetupGuideToolStripMenuItem.Text = "Google API Setup Guide";
+            this.googleAPISetupGuideToolStripMenuItem.Click += new System.EventHandler(this.GoogleAPISetupGuideToolStripMenuItem_Click);
             // 
             // toolStripSeparator14
             // 
@@ -1101,14 +1148,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 166);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1556,23 +1603,7 @@ namespace FTAnalyzer
             // 
             // tabLostCousins
             // 
-            this.tabLostCousins.Controls.Add(this.Referrals);
-            this.tabLostCousins.Controls.Add(this.btnLCnoCensus);
-            this.tabLostCousins.Controls.Add(this.btnLCDuplicates);
-            this.tabLostCousins.Controls.Add(this.btnLCMissingCountry);
-            this.tabLostCousins.Controls.Add(this.btnLC1940USA);
-            this.tabLostCousins.Controls.Add(this.rtbLostCousins);
-            this.tabLostCousins.Controls.Add(this.linkLabel2);
-            this.tabLostCousins.Controls.Add(this.btnLC1911EW);
-            this.tabLostCousins.Controls.Add(this.linkLabel1);
-            this.tabLostCousins.Controls.Add(this.ckbShowLCEntered);
-            this.tabLostCousins.Controls.Add(this.btnLC1841EW);
-            this.tabLostCousins.Controls.Add(this.btnLC1911Ireland);
-            this.tabLostCousins.Controls.Add(this.btnLC1880USA);
-            this.tabLostCousins.Controls.Add(this.btnLC1881EW);
-            this.tabLostCousins.Controls.Add(this.btnLC1881Canada);
-            this.tabLostCousins.Controls.Add(this.btnLC1881Scot);
-            this.tabLostCousins.Controls.Add(this.relTypesLC);
+            this.tabLostCousins.Controls.Add(this.LCSubTabs);
             this.tabLostCousins.Location = new System.Drawing.Point(4, 22);
             this.tabLostCousins.Name = "tabLostCousins";
             this.tabLostCousins.Padding = new System.Windows.Forms.Padding(3);
@@ -1581,16 +1612,53 @@ namespace FTAnalyzer
             this.tabLostCousins.Text = "Lost Cousins";
             this.tabLostCousins.UseVisualStyleBackColor = true;
             // 
+            // LCSubTabs
+            // 
+            this.LCSubTabs.Controls.Add(this.LCReportsTab);
+            this.LCSubTabs.Controls.Add(this.LCUpdatesTab);
+            this.LCSubTabs.Location = new System.Drawing.Point(0, 0);
+            this.LCSubTabs.Name = "LCSubTabs";
+            this.LCSubTabs.SelectedIndex = 0;
+            this.LCSubTabs.Size = new System.Drawing.Size(1089, 447);
+            this.LCSubTabs.TabIndex = 0;
+            // 
+            // LCReportsTab
+            // 
+            this.LCReportsTab.Controls.Add(this.Referrals);
+            this.LCReportsTab.Controls.Add(this.btnLCnoCensus);
+            this.LCReportsTab.Controls.Add(this.btnLCDuplicates);
+            this.LCReportsTab.Controls.Add(this.btnLCMissingCountry);
+            this.LCReportsTab.Controls.Add(this.btnLC1940USA);
+            this.LCReportsTab.Controls.Add(this.rtbLostCousins);
+            this.LCReportsTab.Controls.Add(this.linkLabel2);
+            this.LCReportsTab.Controls.Add(this.btnLC1911EW);
+            this.LCReportsTab.Controls.Add(this.linkLabel1);
+            this.LCReportsTab.Controls.Add(this.ckbShowLCEntered);
+            this.LCReportsTab.Controls.Add(this.btnLC1841EW);
+            this.LCReportsTab.Controls.Add(this.btnLC1911Ireland);
+            this.LCReportsTab.Controls.Add(this.btnLC1880USA);
+            this.LCReportsTab.Controls.Add(this.btnLC1881EW);
+            this.LCReportsTab.Controls.Add(this.btnLC1881Canada);
+            this.LCReportsTab.Controls.Add(this.btnLC1881Scot);
+            this.LCReportsTab.Controls.Add(this.relTypesLC);
+            this.LCReportsTab.Location = new System.Drawing.Point(4, 22);
+            this.LCReportsTab.Name = "LCReportsTab";
+            this.LCReportsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.LCReportsTab.Size = new System.Drawing.Size(1081, 421);
+            this.LCReportsTab.TabIndex = 0;
+            this.LCReportsTab.Text = "Reports";
+            this.LCReportsTab.UseVisualStyleBackColor = true;
+            // 
             // Referrals
             // 
             this.Referrals.Controls.Add(this.ckbReferralInCommon);
             this.Referrals.Controls.Add(this.btnReferrals);
             this.Referrals.Controls.Add(this.cmbReferrals);
             this.Referrals.Controls.Add(this.label11);
-            this.Referrals.Location = new System.Drawing.Point(8, 316);
+            this.Referrals.Location = new System.Drawing.Point(6, 319);
             this.Referrals.Name = "Referrals";
             this.Referrals.Size = new System.Drawing.Size(498, 83);
-            this.Referrals.TabIndex = 23;
+            this.Referrals.TabIndex = 40;
             this.Referrals.TabStop = false;
             this.Referrals.Text = "Referrals";
             // 
@@ -1634,40 +1702,40 @@ namespace FTAnalyzer
             // 
             // btnLCnoCensus
             // 
-            this.btnLCnoCensus.Location = new System.Drawing.Point(344, 243);
+            this.btnLCnoCensus.Location = new System.Drawing.Point(342, 246);
             this.btnLCnoCensus.Name = "btnLCnoCensus";
             this.btnLCnoCensus.Size = new System.Drawing.Size(162, 27);
-            this.btnLCnoCensus.TabIndex = 22;
+            this.btnLCnoCensus.TabIndex = 39;
             this.btnLCnoCensus.Text = "Lost Cousins w/bad Census";
             this.btnLCnoCensus.UseVisualStyleBackColor = true;
             this.btnLCnoCensus.Click += new System.EventHandler(this.BtnLCnoCensus_Click);
             // 
             // btnLCDuplicates
             // 
-            this.btnLCDuplicates.Location = new System.Drawing.Point(176, 243);
+            this.btnLCDuplicates.Location = new System.Drawing.Point(174, 246);
             this.btnLCDuplicates.Name = "btnLCDuplicates";
             this.btnLCDuplicates.Size = new System.Drawing.Size(162, 27);
-            this.btnLCDuplicates.TabIndex = 21;
+            this.btnLCDuplicates.TabIndex = 38;
             this.btnLCDuplicates.Text = "Lost Cousins Duplicate Facts";
             this.btnLCDuplicates.UseVisualStyleBackColor = true;
             this.btnLCDuplicates.Click += new System.EventHandler(this.BtnLCDuplicates_Click);
             // 
             // btnLCMissingCountry
             // 
-            this.btnLCMissingCountry.Location = new System.Drawing.Point(8, 243);
+            this.btnLCMissingCountry.Location = new System.Drawing.Point(6, 246);
             this.btnLCMissingCountry.Name = "btnLCMissingCountry";
             this.btnLCMissingCountry.Size = new System.Drawing.Size(162, 27);
-            this.btnLCMissingCountry.TabIndex = 20;
+            this.btnLCMissingCountry.TabIndex = 37;
             this.btnLCMissingCountry.Text = "Lost Cousins with no Country";
             this.btnLCMissingCountry.UseVisualStyleBackColor = true;
             this.btnLCMissingCountry.Click += new System.EventHandler(this.BtnLCMissingCountry_Click);
             // 
             // btnLC1940USA
             // 
-            this.btnLC1940USA.Location = new System.Drawing.Point(344, 178);
+            this.btnLC1940USA.Location = new System.Drawing.Point(342, 181);
             this.btnLC1940USA.Name = "btnLC1940USA";
             this.btnLC1940USA.Size = new System.Drawing.Size(162, 27);
-            this.btnLC1940USA.TabIndex = 18;
+            this.btnLC1940USA.TabIndex = 35;
             this.btnLC1940USA.Text = "1940 US Census";
             this.btnLC1940USA.UseVisualStyleBackColor = true;
             this.btnLC1940USA.Click += new System.EventHandler(this.BtnLC1940USA_Click);
@@ -1677,11 +1745,11 @@ namespace FTAnalyzer
             this.rtbLostCousins.BackColor = System.Drawing.SystemColors.Window;
             this.rtbLostCousins.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbLostCousins.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbLostCousins.Location = new System.Drawing.Point(535, 8);
+            this.rtbLostCousins.Location = new System.Drawing.Point(533, 11);
             this.rtbLostCousins.Name = "rtbLostCousins";
             this.rtbLostCousins.ReadOnly = true;
             this.rtbLostCousins.Size = new System.Drawing.Size(388, 362);
-            this.rtbLostCousins.TabIndex = 17;
+            this.rtbLostCousins.TabIndex = 34;
             this.rtbLostCousins.TabStop = false;
             this.rtbLostCousins.Text = "";
             // 
@@ -1689,20 +1757,20 @@ namespace FTAnalyzer
             // 
             this.linkLabel2.AutoSize = true;
             this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel2.Location = new System.Drawing.Point(727, 383);
+            this.linkLabel2.Location = new System.Drawing.Point(725, 386);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(174, 16);
-            this.linkLabel2.TabIndex = 15;
+            this.linkLabel2.TabIndex = 33;
             this.linkLabel2.TabStop = true;
             this.linkLabel2.Text = "Visit the Lost Cousins Forum";
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel2_LinkClicked);
             // 
             // btnLC1911EW
             // 
-            this.btnLC1911EW.Location = new System.Drawing.Point(8, 178);
+            this.btnLC1911EW.Location = new System.Drawing.Point(6, 181);
             this.btnLC1911EW.Name = "btnLC1911EW";
             this.btnLC1911EW.Size = new System.Drawing.Size(162, 27);
-            this.btnLC1911EW.TabIndex = 14;
+            this.btnLC1911EW.TabIndex = 32;
             this.btnLC1911EW.Text = "1911 England && Wales Census";
             this.btnLC1911EW.UseVisualStyleBackColor = true;
             this.btnLC1911EW.Click += new System.EventHandler(this.BtnLC1911EW_Click);
@@ -1711,93 +1779,114 @@ namespace FTAnalyzer
             // 
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.Location = new System.Drawing.Point(535, 383);
+            this.linkLabel1.Location = new System.Drawing.Point(533, 386);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(186, 16);
-            this.linkLabel1.TabIndex = 12;
+            this.linkLabel1.TabIndex = 31;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Visit the Lost Cousins Website";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
-            // 
+            //
             // ckbShowLCEntered
             // 
             this.ckbShowLCEntered.AutoSize = true;
-            this.ckbShowLCEntered.Location = new System.Drawing.Point(8, 211);
+            this.ckbShowLCEntered.Location = new System.Drawing.Point(6, 214);
             this.ckbShowLCEntered.Name = "ckbShowLCEntered";
             this.ckbShowLCEntered.Size = new System.Drawing.Size(415, 17);
-            this.ckbShowLCEntered.TabIndex = 10;
+            this.ckbShowLCEntered.TabIndex = 30;
             this.ckbShowLCEntered.Text = "Show already entered to Lost Cousins (unticked = show those to yet to be entered)" +
     "";
             this.ckbShowLCEntered.UseVisualStyleBackColor = true;
             // 
             // btnLC1841EW
             // 
-            this.btnLC1841EW.Location = new System.Drawing.Point(8, 145);
+            this.btnLC1841EW.Location = new System.Drawing.Point(6, 148);
             this.btnLC1841EW.Name = "btnLC1841EW";
             this.btnLC1841EW.Size = new System.Drawing.Size(162, 27);
-            this.btnLC1841EW.TabIndex = 8;
+            this.btnLC1841EW.TabIndex = 29;
             this.btnLC1841EW.Text = "1841 England && Wales Census";
             this.btnLC1841EW.UseVisualStyleBackColor = true;
             this.btnLC1841EW.Click += new System.EventHandler(this.BtnLC1841EW_Click);
             // 
             // btnLC1911Ireland
             // 
-            this.btnLC1911Ireland.Location = new System.Drawing.Point(176, 145);
+            this.btnLC1911Ireland.Location = new System.Drawing.Point(174, 148);
             this.btnLC1911Ireland.Name = "btnLC1911Ireland";
             this.btnLC1911Ireland.Size = new System.Drawing.Size(162, 27);
-            this.btnLC1911Ireland.TabIndex = 7;
+            this.btnLC1911Ireland.TabIndex = 28;
             this.btnLC1911Ireland.Text = "1911 Ireland Census";
             this.btnLC1911Ireland.UseVisualStyleBackColor = true;
             this.btnLC1911Ireland.Click += new System.EventHandler(this.BtnLC1911Ireland_Click);
             // 
             // btnLC1880USA
             // 
-            this.btnLC1880USA.Location = new System.Drawing.Point(344, 145);
+            this.btnLC1880USA.Location = new System.Drawing.Point(342, 148);
             this.btnLC1880USA.Name = "btnLC1880USA";
             this.btnLC1880USA.Size = new System.Drawing.Size(162, 27);
-            this.btnLC1880USA.TabIndex = 6;
+            this.btnLC1880USA.TabIndex = 27;
             this.btnLC1880USA.Text = "1880 US Census";
             this.btnLC1880USA.UseVisualStyleBackColor = true;
             this.btnLC1880USA.Click += new System.EventHandler(this.BtnLC1880USA_Click);
             // 
             // btnLC1881EW
             // 
-            this.btnLC1881EW.Location = new System.Drawing.Point(8, 112);
+            this.btnLC1881EW.Location = new System.Drawing.Point(6, 115);
             this.btnLC1881EW.Name = "btnLC1881EW";
             this.btnLC1881EW.Size = new System.Drawing.Size(162, 27);
-            this.btnLC1881EW.TabIndex = 5;
+            this.btnLC1881EW.TabIndex = 26;
             this.btnLC1881EW.Text = "1881 England && Wales Census";
             this.btnLC1881EW.UseVisualStyleBackColor = true;
             this.btnLC1881EW.Click += new System.EventHandler(this.BtnLC1881EW_Click);
             // 
             // btnLC1881Canada
             // 
-            this.btnLC1881Canada.Location = new System.Drawing.Point(176, 178);
+            this.btnLC1881Canada.Location = new System.Drawing.Point(174, 181);
             this.btnLC1881Canada.Name = "btnLC1881Canada";
             this.btnLC1881Canada.Size = new System.Drawing.Size(162, 27);
-            this.btnLC1881Canada.TabIndex = 4;
+            this.btnLC1881Canada.TabIndex = 25;
             this.btnLC1881Canada.Text = "1881 Canada Census";
             this.btnLC1881Canada.UseVisualStyleBackColor = true;
             this.btnLC1881Canada.Click += new System.EventHandler(this.BtnLC1881Canada_Click);
             // 
             // btnLC1881Scot
             // 
-            this.btnLC1881Scot.Location = new System.Drawing.Point(176, 112);
+            this.btnLC1881Scot.Location = new System.Drawing.Point(174, 115);
             this.btnLC1881Scot.Name = "btnLC1881Scot";
             this.btnLC1881Scot.Size = new System.Drawing.Size(162, 27);
-            this.btnLC1881Scot.TabIndex = 0;
+            this.btnLC1881Scot.TabIndex = 24;
             this.btnLC1881Scot.Text = "1881 Scotland Census";
             this.btnLC1881Scot.UseVisualStyleBackColor = true;
             this.btnLC1881Scot.Click += new System.EventHandler(this.BtnLC1881Scot_Click);
             // 
             // relTypesLC
             // 
-            this.relTypesLC.Location = new System.Drawing.Point(8, 3);
+            this.relTypesLC.Location = new System.Drawing.Point(6, 6);
             this.relTypesLC.MarriedToDB = true;
             this.relTypesLC.Name = "relTypesLC";
             this.relTypesLC.Size = new System.Drawing.Size(325, 103);
-            this.relTypesLC.TabIndex = 19;
+            this.relTypesLC.TabIndex = 36;
             this.relTypesLC.RelationTypesChanged += new System.EventHandler(this.RelTypesLC_RelationTypesChanged);
+            // 
+            // LCUpdatesTab
+            // 
+            this.LCUpdatesTab.Controls.Add(this.btnUpdateLostCousinsWebsite);
+            this.LCUpdatesTab.Location = new System.Drawing.Point(4, 22);
+            this.LCUpdatesTab.Name = "LCUpdatesTab";
+            this.LCUpdatesTab.Padding = new System.Windows.Forms.Padding(3);
+            this.LCUpdatesTab.Size = new System.Drawing.Size(1081, 421);
+            this.LCUpdatesTab.TabIndex = 1;
+            this.LCUpdatesTab.Text = "Updates";
+            this.LCUpdatesTab.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdateLostCousinsWebsite
+            // 
+            this.btnUpdateLostCousinsWebsite.Location = new System.Drawing.Point(16, 17);
+            this.btnUpdateLostCousinsWebsite.Name = "btnUpdateLostCousinsWebsite";
+            this.btnUpdateLostCousinsWebsite.Size = new System.Drawing.Size(197, 23);
+            this.btnUpdateLostCousinsWebsite.TabIndex = 0;
+            this.btnUpdateLostCousinsWebsite.Text = "Update Lost Cousins Website";
+            this.btnUpdateLostCousinsWebsite.UseVisualStyleBackColor = true;
+            this.btnUpdateLostCousinsWebsite.Click += new System.EventHandler(this.BtnUpdateLostCousinsWebsite_Click);
             // 
             // tabCensus
             // 
@@ -2387,6 +2476,15 @@ namespace FTAnalyzer
             this.panel2.Size = new System.Drawing.Size(1074, 109);
             this.panel2.TabIndex = 12;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(971, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 18;
+            this.pictureBox1.TabStop = false;
+            // 
             // LbProgramName
             // 
             this.LbProgramName.AutoSize = true;
@@ -2911,6 +3009,18 @@ namespace FTAnalyzer
             this.MatchBirthLocation.Name = "MatchBirthLocation";
             this.MatchBirthLocation.Width = 175;
             // 
+            // btnCancelDuplicates
+            // 
+            this.btnCancelDuplicates.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelDuplicates.Image")));
+            this.btnCancelDuplicates.Location = new System.Drawing.Point(414, 6);
+            this.btnCancelDuplicates.Name = "btnCancelDuplicates";
+            this.btnCancelDuplicates.Size = new System.Drawing.Size(23, 23);
+            this.btnCancelDuplicates.TabIndex = 27;
+            this.btnCancelDuplicates.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCancelDuplicates.UseVisualStyleBackColor = true;
+            this.btnCancelDuplicates.Visible = false;
+            this.btnCancelDuplicates.Click += new System.EventHandler(this.BtnCancelDuplicates_Click);
+            // 
             // tabLooseBirths
             // 
             this.tabLooseBirths.Controls.Add(this.dgLooseBirths);
@@ -3346,67 +3456,6 @@ namespace FTAnalyzer
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // clearRecentFileListToolStripMenuItem
-            // 
-            this.clearRecentFileListToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearRecentFileListToolStripMenuItem.Image")));
-            this.clearRecentFileListToolStripMenuItem.Name = "clearRecentFileListToolStripMenuItem";
-            this.clearRecentFileListToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.clearRecentFileListToolStripMenuItem.Text = "Clear Recent File List";
-            this.clearRecentFileListToolStripMenuItem.Click += new System.EventHandler(this.ClearRecentFileListToolStripMenuItem_Click);
-            // 
-            // facebookSupportGroupToolStripMenuItem
-            // 
-            this.facebookSupportGroupToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.flogo_rgb_hex_brc_site_250;
-            this.facebookSupportGroupToolStripMenuItem.Name = "facebookSupportGroupToolStripMenuItem";
-            this.facebookSupportGroupToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.facebookSupportGroupToolStripMenuItem.Text = "Facebook Support Page";
-            this.facebookSupportGroupToolStripMenuItem.Click += new System.EventHandler(this.FacebookSupportGroupToolStripMenuItem_Click);
-            // 
-            // facebookUserGroupToolStripMenuItem
-            // 
-            this.facebookUserGroupToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.flogo_rgb_hex_brc_site_250;
-            this.facebookUserGroupToolStripMenuItem.Name = "facebookUserGroupToolStripMenuItem";
-            this.facebookUserGroupToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.facebookUserGroupToolStripMenuItem.Text = "Facebook User Group";
-            this.facebookUserGroupToolStripMenuItem.Click += new System.EventHandler(this.FacebookUserGroupToolStripMenuItem_Click);
-            // 
-            // getGoogleAPIKeyToolStripMenuItem
-            // 
-            this.getGoogleAPIKeyToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.GoogleMapsAPI;
-            this.getGoogleAPIKeyToolStripMenuItem.Name = "getGoogleAPIKeyToolStripMenuItem";
-            this.getGoogleAPIKeyToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.getGoogleAPIKeyToolStripMenuItem.Text = "Get Google API Key";
-            this.getGoogleAPIKeyToolStripMenuItem.Click += new System.EventHandler(this.GetGoogleAPIKeyToolStripMenuItem_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(971, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox1.TabIndex = 18;
-            this.pictureBox1.TabStop = false;
-            // 
-            // btnCancelDuplicates
-            // 
-            this.btnCancelDuplicates.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelDuplicates.Image")));
-            this.btnCancelDuplicates.Location = new System.Drawing.Point(414, 6);
-            this.btnCancelDuplicates.Name = "btnCancelDuplicates";
-            this.btnCancelDuplicates.Size = new System.Drawing.Size(23, 23);
-            this.btnCancelDuplicates.TabIndex = 27;
-            this.btnCancelDuplicates.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCancelDuplicates.UseVisualStyleBackColor = true;
-            this.btnCancelDuplicates.Visible = false;
-            this.btnCancelDuplicates.Click += new System.EventHandler(this.BtnCancelDuplicates_Click);
-            // 
-            // googleAPISetupGuideToolStripMenuItem
-            // 
-            this.googleAPISetupGuideToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.GoogleMapsAPI;
-            this.googleAPISetupGuideToolStripMenuItem.Name = "googleAPISetupGuideToolStripMenuItem";
-            this.googleAPISetupGuideToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.googleAPISetupGuideToolStripMenuItem.Text = "Google API Setup Guide";
-            this.googleAPISetupGuideToolStripMenuItem.Click += new System.EventHandler(this.GoogleAPISetupGuideToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -3449,9 +3498,12 @@ namespace FTAnalyzer
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabLostCousins.ResumeLayout(false);
-            this.tabLostCousins.PerformLayout();
+            this.LCSubTabs.ResumeLayout(false);
+            this.LCReportsTab.ResumeLayout(false);
+            this.LCReportsTab.PerformLayout();
             this.Referrals.ResumeLayout(false);
             this.Referrals.PerformLayout();
+            this.LCUpdatesTab.ResumeLayout(false);
             this.tabCensus.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
@@ -3474,6 +3526,7 @@ namespace FTAnalyzer
             this.tabDisplayProgress.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabSelector.ResumeLayout(false);
             this.tabMainLists.ResumeLayout(false);
             this.tabMainListsSelector.ResumeLayout(false);
@@ -3503,7 +3556,6 @@ namespace FTAnalyzer
             this.tabToday.ResumeLayout(false);
             this.tabToday.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3568,16 +3620,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.TextBox txtColouredSurname;
         private Controls.RelationTypes relTypesColoured;
         private System.Windows.Forms.TabPage tabLostCousins;
-        private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.Button btnLC1911EW;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.CheckBox ckbShowLCEntered;
-        private System.Windows.Forms.Button btnLC1841EW;
-        private System.Windows.Forms.Button btnLC1911Ireland;
-        private System.Windows.Forms.Button btnLC1880USA;
-        private System.Windows.Forms.Button btnLC1881EW;
-        private System.Windows.Forms.Button btnLC1881Canada;
-        private System.Windows.Forms.Button btnLC1881Scot;
         private System.Windows.Forms.TabPage tabCensus;
         private System.Windows.Forms.TabPage tabLocations;
         private System.Windows.Forms.Button btnShowMap;
@@ -3603,8 +3645,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem whatsNewToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem mnuLocationsGeocodeReport;
-        private System.Windows.Forms.RichTextBox rtbLostCousins;
-        private System.Windows.Forms.Button btnLC1940USA;
         private System.Windows.Forms.ToolStripMenuItem mnuGeocodeLocations;
         private System.Windows.Forms.ToolStripMenuItem databaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem backupToolStripMenuItem;
@@ -3621,10 +3661,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem mnuRecent3;
         private System.Windows.Forms.ToolStripMenuItem mnuRecent4;
         private System.Windows.Forms.ToolStripMenuItem mnuRecent5;
-        private Controls.RelationTypes relTypesLC;
-        private System.Windows.Forms.Button btnLCMissingCountry;
-        private System.Windows.Forms.Button btnLCDuplicates;
-        private System.Windows.Forms.Button btnLCnoCensus;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnDuplicateCensus;
         private System.Windows.Forms.Button btnMissingCensusLocation;
@@ -3656,11 +3692,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem mnuLooseBirthsToExcel;
         private System.Windows.Forms.ToolStripMenuItem mnuLooseDeathsToExcel;
         private System.Windows.Forms.ToolStripMenuItem mnuSourcesToExcel;
-        private System.Windows.Forms.GroupBox Referrals;
-        private System.Windows.Forms.Button btnReferrals;
-        private System.Windows.Forms.ComboBox cmbReferrals;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.CheckBox ckbReferralInCommon;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem mnuTreetopsToExcel;
@@ -3804,6 +3835,31 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem getGoogleAPIKeyToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
         private System.Windows.Forms.ToolStripMenuItem googleAPISetupGuideToolStripMenuItem;
+        private System.Windows.Forms.TabControl LCSubTabs;
+        private System.Windows.Forms.TabPage LCReportsTab;
+        private System.Windows.Forms.GroupBox Referrals;
+        private System.Windows.Forms.CheckBox ckbReferralInCommon;
+        private System.Windows.Forms.Button btnReferrals;
+        private System.Windows.Forms.ComboBox cmbReferrals;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnLCnoCensus;
+        private System.Windows.Forms.Button btnLCDuplicates;
+        private System.Windows.Forms.Button btnLCMissingCountry;
+        private System.Windows.Forms.Button btnLC1940USA;
+        private System.Windows.Forms.RichTextBox rtbLostCousins;
+        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.Button btnLC1911EW;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.CheckBox ckbShowLCEntered;
+        private System.Windows.Forms.Button btnLC1841EW;
+        private System.Windows.Forms.Button btnLC1911Ireland;
+        private System.Windows.Forms.Button btnLC1880USA;
+        private System.Windows.Forms.Button btnLC1881EW;
+        private System.Windows.Forms.Button btnLC1881Canada;
+        private System.Windows.Forms.Button btnLC1881Scot;
+        private Controls.RelationTypes relTypesLC;
+        private System.Windows.Forms.TabPage LCUpdatesTab;
+        private System.Windows.Forms.Button btnUpdateLostCousinsWebsite;
     }
 }
 

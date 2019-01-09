@@ -17,7 +17,6 @@ namespace FTAnalyzer.Forms
 {
     public partial class Census : Form
     {
-        //private int numFamilies;
         public CensusDate CensusDate { get; private set; }
         public int RecordCount { get; private set; }
         string censusCountry;

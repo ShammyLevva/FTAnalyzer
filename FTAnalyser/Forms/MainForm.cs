@@ -225,6 +225,7 @@ namespace FTAnalyzer
             var outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
             FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
             XmlDocument doc = await Task.Run(() => ft.LoadTreeHeader(filename, stream, outputText));
+            stream.Close();
             if (doc == null)
                 return false;
             var sourceProgress = new Progress<int>(value => { pbSources.Value = value; });
@@ -1552,6 +1553,23 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
+        void BtnUpdateLostCousinsWebsite_Click(object sender, EventArgs e)
+        {
+            IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate.EWCENSUS1881, true, false);
+            Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType);
+            Predicate<CensusIndividual> missingLC = x => x.MissingLostCousins(CensusDate.EWCENSUS1881, false);
+            Predicate<CensusIndividual> hasCensusRef = x => x.IsAlive(CensusDate.EWCENSUS1881); // && !string.IsNullOrEmpty(x.CensusReference);
+            Predicate<CensusIndividual> filter = FilterUtils.AndFilter(relationFilter, missingLC, hasCensusRef);
+            List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Filter(filter).ToList();
+            if (individuals.Count > 0)
+            {
+                int response = UIHelpers.ShowYesNo($"You have {individuals.Count} possible records to add to Lost Cousins. Proceed?");
+            }
+            else
+                UIHelpers.ShowMessage("You have no records to add to Lost Cousins at this time. Use the Research Suggestions to find more people on the census.");
+        }
+
+
         void BtnLCMissingCountry_Click(object sender, EventArgs e)
         {
             HourGlass(true);
@@ -2677,7 +2695,6 @@ namespace FTAnalyzer
         void BtnUSColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.UNITED_STATES);
 
         void BtnCanadianColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.CANADA);
-
 
         void BtnStandardMissingData_Click(object sender, EventArgs e)
         {
