@@ -68,19 +68,41 @@ namespace FTAnalyzer.Forms
             return result;
         }
 
-        public void SetupLCCensus(Predicate<CensusIndividual> relationFilter, bool showEnteredLostCousins)
+        public void SetupLCCensus(Predicate<CensusIndividual> relationFilter, bool showEnteredLostCousins, Predicate<Individual> individualRelationFilter)
         {
             LostCousins = true;
             Predicate<CensusIndividual> predicate;
+            Predicate<Individual> individualPredicate;
             if (showEnteredLostCousins)
+            {
                 predicate = x => x.IsLostCousinsEntered(CensusDate, false);
+                individualPredicate = x => x.IsLostCousinsEntered(CensusDate, false);
+            }
             else
+            { 
                 predicate = x => x.MissingLostCousins(CensusDate, false);
-            IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, true, false);
+                individualPredicate = x => x.MissingLostCousins(CensusDate, false);
+            }
             Predicate<CensusIndividual> filter = FilterUtils.AndFilter(relationFilter, predicate);
+            Predicate<Individual> individualFilter = FilterUtils.AndFilter(individualRelationFilter, individualPredicate);
+            IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, true, false);
             List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Filter(filter).ToList();
+            individuals = FilterDuplicateIndividuals(individuals);
+            List<Individual> listToCheck = ft.AllIndividuals.Filter(individualFilter).ToList();
+            //CompareLists(individuals, listToCheck);
             RecordCount = individuals.Count;
             SetupDataGridView(true, individuals);
+        }
+
+        void CompareLists(List<CensusIndividual> individuals, List<Individual> listToCheck)
+        {
+            List<string> ids = individuals.Select(x => x.IndividualID).ToList();
+            List<Individual> missing = new List<Individual>();
+            foreach(Individual ind in listToCheck)
+            {
+                if (!ids.Contains(ind.IndividualID))
+                    missing.Add(ind);
+            }
         }
 
         void SetupDataGridView(bool censusDone, List<CensusIndividual> individuals)
