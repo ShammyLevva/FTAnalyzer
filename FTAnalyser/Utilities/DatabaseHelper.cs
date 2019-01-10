@@ -106,7 +106,7 @@ namespace FTAnalyzer.Utilities
             }
         }
 
-        private static Version GetDatabaseVersion()
+        static Version GetDatabaseVersion()
         {
             string db = null;
             try
@@ -159,6 +159,7 @@ namespace FTAnalyzer.Utilities
                 Version v3_1_2_0 = new Version("3.1.2.0");
                 Version v3_3_2_5 = new Version("3.3.2.5");
                 Version v7_0_0_0 = new Version("7.0.0.0");
+                Version v7_3_0_0 = new Version("7.3.0.0");
                 if (dbVersion < v3_0_0_0)
                 {
                     // Version is less than 3.0.0.0 or none existent so copy latest database from empty database
@@ -273,6 +274,18 @@ namespace FTAnalyzer.Utilities
                         cmd.ExecuteNonQuery();
                     }
                 }
+                if (dbVersion < v7_3_0_0)
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand("create table LostCousins(CensusYear INTEGER(4), CensusCountry STRING (20), CensusRef STRING(25), IndID STRING(10), constraint pkLostCousins primary key(CensusYear, CensusCountry, CensusRef))", InstanceConnection))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    using (SQLiteCommand cmd = new SQLiteCommand("update versions set Database = '7.3.0.0'", InstanceConnection))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                
                 InstanceConnection.Close();
             }
             catch (Exception ex)
@@ -408,7 +421,6 @@ namespace FTAnalyzer.Utilities
         }
         #endregion
 
-
         #region Commands
         public bool IsLocationInDatabase(string location)
         {
@@ -460,7 +472,7 @@ namespace FTAnalyzer.Utilities
             ReadLocationIntoFact(location, InstanceConnection);
         }
 
-        private static void ReadLocationIntoFact(FactLocation location, SQLiteConnection conn)
+        static void ReadLocationIntoFact(FactLocation location, SQLiteConnection conn)
         {
             using (SQLiteCommand cmd = new SQLiteCommand("select latitude, longitude, latm, longm, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw, geocodestatus, foundlevel, foundlocation, foundresulttype from geocode where location = ?", conn))
             {
@@ -676,9 +688,80 @@ namespace FTAnalyzer.Utilities
         }
         #endregion
 
-        #region Cursor Queries
+        #region LostCousins
+        public int AddLostCousinsFacts()
+        {
+            int count = 0;
+            if (InstanceConnection.State != ConnectionState.Open)
+                InstanceConnection.Open();
+            using (SQLiteCommand cmd = new SQLiteCommand("select CensusYear, CensusCountry, CensusRef, IndID from LostCousins", InstanceConnection))
+            {
+                SQLiteParameter param = cmd.CreateParameter();
+                param.DbType = DbType.String;
+                cmd.Prepare();
+                using (SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SequentialAccess))
+                {
+                    if (reader.Read())
+                    {
+                        string indID = reader["IndID"].ToString();
+                        Individual ind = FamilyTree.Instance.GetIndividual(indID);
+                        string CensusYear = reader["CensusYear"].ToString();
+                        string CensusCountry = reader["CensusCountry"].ToString();
+                        string CensusRef = reader["CensusRef"].ToString();
+                        FactLocation location = FactLocation.GetLocation(CensusCountry);
+                        Fact f = new Fact(CensusRef, Fact.LOSTCOUSINS, new FactDate(CensusYear), location, string.Empty, true, true);
+                        ind?.AddFact(f);
+                        count++;
+                    }
+                }
+            }
+            return count;
+        }
 
-        public void AddEmptyLocationsToQueue(ConcurrentQueue<FactLocation> queue)
+        public void StoreLostCousinsFact(CensusIndividual ind)
+        {
+            try
+            { 
+                if (InstanceConnection.State != ConnectionState.Open)
+                    InstanceConnection.Open();
+                SQLiteParameter param;
+
+                using (SQLiteCommand cmd = new SQLiteCommand("insert into LostCousins (CensusYear, CensusCountry, CensusRef, IndID) values(?,?,?,?)", InstanceConnection))
+                {
+                    param = cmd.CreateParameter();
+                    param.DbType = DbType.Int32;
+                    cmd.Parameters.Add(param);
+                    param = cmd.CreateParameter();
+                    param.DbType = DbType.String;
+                    cmd.Parameters.Add(param);
+                    param = cmd.CreateParameter();
+                    param.DbType = DbType.String;
+                    cmd.Parameters.Add(param);
+                    param = cmd.CreateParameter();
+                    param.DbType = DbType.String;
+                    cmd.Parameters.Add(param);
+                    cmd.Prepare();
+
+                    cmd.Parameters[0].Value = ind.CensusDate.BestYear;
+                    cmd.Parameters[1].Value = ind.CensusLocation.CensusCountry;
+                    cmd.Parameters[2].Value = ind.CensusReference;
+                    cmd.Parameters[3].Value = ind.IndividualID;
+
+                    int rowsaffected = cmd.ExecuteNonQuery();
+                    if (rowsaffected != 1)
+                        Console.WriteLine("Problem updating");
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+        #endregion
+
+            #region Cursor Queries
+
+            public void AddEmptyLocationsToQueue(ConcurrentQueue<FactLocation> queue)
         {
             if (InstanceConnection.State != ConnectionState.Open)
                 InstanceConnection.Open();

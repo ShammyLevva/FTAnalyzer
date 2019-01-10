@@ -40,7 +40,7 @@ namespace FTAnalyzer
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -199,6 +199,10 @@ namespace FTAnalyzer
             this.btnLC1881Scot = new System.Windows.Forms.Button();
             this.relTypesLC = new FTAnalyzer.Controls.RelationTypes();
             this.LCUpdatesTab = new System.Windows.Forms.TabPage();
+            this.rtbLCoutput = new System.Windows.Forms.RichTextBox();
+            this.chkLCRootPersonConfirm = new System.Windows.Forms.CheckBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.rtbLCUpdateData = new System.Windows.Forms.RichTextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.btnLCLogin = new System.Windows.Forms.Button();
             this.label20 = new System.Windows.Forms.Label();
@@ -1155,14 +1159,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 166);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1876,6 +1880,10 @@ namespace FTAnalyzer
             // 
             // LCUpdatesTab
             // 
+            this.LCUpdatesTab.Controls.Add(this.rtbLCoutput);
+            this.LCUpdatesTab.Controls.Add(this.chkLCRootPersonConfirm);
+            this.LCUpdatesTab.Controls.Add(this.label21);
+            this.LCUpdatesTab.Controls.Add(this.rtbLCUpdateData);
             this.LCUpdatesTab.Controls.Add(this.groupBox8);
             this.LCUpdatesTab.Controls.Add(this.btnUpdateLostCousinsWebsite);
             this.LCUpdatesTab.Location = new System.Drawing.Point(4, 22);
@@ -1885,6 +1893,55 @@ namespace FTAnalyzer
             this.LCUpdatesTab.TabIndex = 1;
             this.LCUpdatesTab.Text = "Updates";
             this.LCUpdatesTab.UseVisualStyleBackColor = true;
+            // 
+            // rtbLCoutput
+            // 
+            this.rtbLCoutput.BackColor = System.Drawing.SystemColors.Window;
+            this.rtbLCoutput.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.rtbLCoutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbLCoutput.Location = new System.Drawing.Point(3, 206);
+            this.rtbLCoutput.Name = "rtbLCoutput";
+            this.rtbLCoutput.ReadOnly = true;
+            this.rtbLCoutput.Size = new System.Drawing.Size(1075, 212);
+            this.rtbLCoutput.TabIndex = 38;
+            this.rtbLCoutput.TabStop = false;
+            this.rtbLCoutput.Text = "";
+            // 
+            // chkLCRootPersonConfirm
+            // 
+            this.chkLCRootPersonConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkLCRootPersonConfirm.Location = new System.Drawing.Point(30, 147);
+            this.chkLCRootPersonConfirm.Name = "chkLCRootPersonConfirm";
+            this.chkLCRootPersonConfirm.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkLCRootPersonConfirm.Size = new System.Drawing.Size(407, 24);
+            this.chkLCRootPersonConfirm.TabIndex = 4;
+            this.chkLCRootPersonConfirm.Text = "checkBox1";
+            this.chkLCRootPersonConfirm.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkLCRootPersonConfirm.UseVisualStyleBackColor = true;
+            this.chkLCRootPersonConfirm.CheckedChanged += new System.EventHandler(this.ChkLCRootPersonConfirm_CheckedChanged);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(468, 22);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(383, 16);
+            this.label21.TabIndex = 37;
+            this.label21.Text = "Census Records with valid Reference to upload to Lost Cousins";
+            // 
+            // rtbLCUpdateData
+            // 
+            this.rtbLCUpdateData.BackColor = System.Drawing.SystemColors.Window;
+            this.rtbLCUpdateData.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtbLCUpdateData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbLCUpdateData.Location = new System.Drawing.Point(471, 50);
+            this.rtbLCUpdateData.Name = "rtbLCUpdateData";
+            this.rtbLCUpdateData.ReadOnly = true;
+            this.rtbLCUpdateData.Size = new System.Drawing.Size(391, 150);
+            this.rtbLCUpdateData.TabIndex = 36;
+            this.rtbLCUpdateData.TabStop = false;
+            this.rtbLCUpdateData.Text = "";
             // 
             // groupBox8
             // 
@@ -1948,10 +2005,11 @@ namespace FTAnalyzer
             // 
             // btnUpdateLostCousinsWebsite
             // 
-            this.btnUpdateLostCousinsWebsite.Location = new System.Drawing.Point(39, 155);
+            this.btnUpdateLostCousinsWebsite.Enabled = false;
+            this.btnUpdateLostCousinsWebsite.Location = new System.Drawing.Point(138, 177);
             this.btnUpdateLostCousinsWebsite.Name = "btnUpdateLostCousinsWebsite";
             this.btnUpdateLostCousinsWebsite.Size = new System.Drawing.Size(197, 23);
-            this.btnUpdateLostCousinsWebsite.TabIndex = 4;
+            this.btnUpdateLostCousinsWebsite.TabIndex = 5;
             this.btnUpdateLostCousinsWebsite.Text = "Update Lost Cousins Website";
             this.btnUpdateLostCousinsWebsite.UseVisualStyleBackColor = true;
             this.btnUpdateLostCousinsWebsite.Visible = false;
@@ -3573,6 +3631,7 @@ namespace FTAnalyzer
             this.Referrals.ResumeLayout(false);
             this.Referrals.PerformLayout();
             this.LCUpdatesTab.ResumeLayout(false);
+            this.LCUpdatesTab.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             this.tabCensus.ResumeLayout(false);
@@ -3937,6 +3996,10 @@ namespace FTAnalyzer
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox txtLCEmail;
         private System.Windows.Forms.MaskedTextBox txtLCPassword;
+        private System.Windows.Forms.CheckBox chkLCRootPersonConfirm;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.RichTextBox rtbLCUpdateData;
+        private System.Windows.Forms.RichTextBox rtbLCoutput;
     }
 }
 

@@ -1248,6 +1248,7 @@ namespace FTAnalyzer
                         btnLC1911EW.Enabled = ft.IndividualCount > 0;
                     UpdateLostCousinsReport();
                     txtLCEmail.Text = (string)Application.UserAppDataRegistry.GetValue("LostCousinsEmail", string.Empty);
+                    chkLCRootPersonConfirm.Text = $"Confirm {ft.RootPerson} as root Person";
                     Analytics.TrackAction(Analytics.MainFormAction, Analytics.LostCousinsTabEvent);
                 }
                 else if (tabSelector.SelectedTab == tabToday)
@@ -1567,11 +1568,19 @@ namespace FTAnalyzer
         void BtnUpdateLostCousinsWebsite_Click(object sender, EventArgs e)
         {
             List<CensusIndividual> individuals = GetMissingLCIndividuals(CensusDate.EWCENSUS1881);
+            individuals.AddRange(GetMissingLCIndividuals(CensusDate.SCOTCENSUS1881));
+            //individuals.AddRange(GetMissingLCIndividuals(CensusDate.CANADACENSUS1881));
+            //individuals.AddRange(GetMissingLCIndividuals(CensusDate.EWCENSUS1841));
+            //individuals.AddRange(GetMissingLCIndividuals(CensusDate.USCENSUS1880));
             if (individuals.Count > 0)
             {
+                rtbLCoutput.Text = string.Empty;
                 int response = UIHelpers.ShowYesNo($"You have {individuals.Count} possible records to add to Lost Cousins. Proceed?");
                 if (response == UIHelpers.Yes)
-                    ExportToLostCousins.ProcessList(individuals);
+                {
+                    Progress<string> outputText = new Progress<string>(value => { rtbLCoutput.AppendText(value); });
+                    ExportToLostCousins.ProcessList(individuals, outputText);
+                }
             }
             else
                 UIHelpers.ShowMessage("You have no records to add to Lost Cousins at this time. Use the Research Suggestions to find more people on the census.");
@@ -1584,8 +1593,22 @@ namespace FTAnalyzer
             Predicate<CensusIndividual> missingLC = x => x.MissingLostCousins(censusDate, false) && x.IsKnownCensusReference;
             Predicate<CensusIndividual> filter = FilterUtils.AndFilter(relationFilter, missingLC);
             List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Filter(filter).ToList();
-            individuals.Distinct(); // eliminate duplicates
-            return individuals;
+            return LCRemoveDuplicateIndividuals(individuals);
+        }
+
+        List<CensusIndividual> LCRemoveDuplicateIndividuals(List<CensusIndividual> individuals)
+        {
+            List<CensusIndividual> output = new List<CensusIndividual>();
+            List<string> ids = new List<string>();
+            foreach(CensusIndividual ind in individuals)
+            {
+                if(!ids.Contains(ind.IndividualID))
+                {
+                    output.Add(ind);
+                    ids.Add(ind.IndividualID);
+                }
+            }
+            return output;
         }
 
         void BtnLCMissingCountry_Click(object sender, EventArgs e)
@@ -1600,10 +1623,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        void RelTypesLC_RelationTypesChanged(object sender, EventArgs e)
-        {
-            UpdateLostCousinsReport();
-        }
+        void RelTypesLC_RelationTypesChanged(object sender, EventArgs e) => UpdateLostCousinsReport();
 
         void BtnLCDuplicates_Click(object sender, EventArgs e)
         {
@@ -1628,6 +1648,8 @@ namespace FTAnalyzer
             Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.NoLCCensusEvent);
             HourGlass(false);
         }
+
+        void ChkLCRootPersonConfirm_CheckedChanged(object sender, EventArgs e) => btnUpdateLostCousinsWebsite.Enabled = chkLCRootPersonConfirm.Checked;
 
         void BtnLC1881EW_Click(object sender, EventArgs e)
         {
