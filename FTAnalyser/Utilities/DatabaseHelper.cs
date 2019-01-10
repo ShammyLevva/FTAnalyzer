@@ -745,7 +745,7 @@ namespace FTAnalyzer.Utilities
                     cmd.Prepare();
 
                     cmd.Parameters[0].Value = ind.CensusDate.BestYear;
-                    cmd.Parameters[1].Value = ind.CensusLocation.CensusCountry;
+                    cmd.Parameters[1].Value = ind.CensusLocation.Country;
                     cmd.Parameters[2].Value = ind.CensusReference;
                     cmd.Parameters[3].Value = ind.IndividualID;
 

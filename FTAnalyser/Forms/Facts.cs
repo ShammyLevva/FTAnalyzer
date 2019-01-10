@@ -226,7 +226,7 @@ namespace FTAnalyzer.Forms
             {
                 DisplayFact df = (DisplayFact)dgFacts.Rows[e.RowIndex].DataBoundItem;
                 if (df.CensusReference.URL.Length > 0)
-                    HttpUtility.VisitWebsite(df.CensusReference.URL);
+                    SpecialMethods.VisitWebsite(df.CensusReference.URL);
             }
         }
 

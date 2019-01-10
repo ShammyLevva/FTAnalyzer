@@ -197,7 +197,7 @@ namespace FTAnalyzer.Forms
 
         void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            HttpUtility.VisitWebsite(e.Link.LinkData as string);
+            SpecialMethods.VisitWebsite(e.Link.LinkData as string);
         }
 
         void DgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

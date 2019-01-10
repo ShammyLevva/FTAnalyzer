@@ -101,7 +101,7 @@ namespace FTAnalyzer
                         string text = $"Version installed: {VERSION}, Web version available: {webVersion}\nDo you want to go to website to download the latest version?";
                         DialogResult download = MessageBox.Show(text, "FTAnalyzer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (download == DialogResult.Yes)
-                            HttpUtility.VisitWebsite("https://github.com/ShammyLevva/FTAnalyzer/releases");
+                            SpecialMethods.VisitWebsite("https://github.com/ShammyLevva/FTAnalyzer/releases");
                     }
                 }
                 await Analytics.CheckProgramUsageAsync();
@@ -548,7 +548,7 @@ namespace FTAnalyzer
 
         void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            HttpUtility.VisitWebsite("http://forums.lc");
+            SpecialMethods.VisitWebsite("http://forums.lc");
         }
 
         void DgOccupations_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -604,7 +604,7 @@ namespace FTAnalyzer
             if (loc != null && loc.IsGeoCoded(false))
             {
                 string URL = $"https://www.google.com/maps/@{loc.Latitude},{loc.Longitude},{zoom}z";
-                HttpUtility.VisitWebsite(URL);
+                SpecialMethods.VisitWebsite(URL);
             }
             else
                 MessageBox.Show($"{loc.ToString()} is not yet geocoded so can't be displayed.");
@@ -622,7 +622,7 @@ namespace FTAnalyzer
                         if (oldOSMap)
                         {
                             string URL = $"https://maps.nls.uk/geo/explore/#zoom={zoom}&lat={loc.Latitude}&lon={loc.Longitude}&layers=1&b=1";
-                            HttpUtility.VisitWebsite(URL);
+                            SpecialMethods.VisitWebsite(URL);
                         }
                     }
                     else
@@ -774,19 +774,19 @@ namespace FTAnalyzer
         void ViewOnlineManualToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.OnlineManualEvent);
-            HttpUtility.VisitWebsite("http://www.ftanalyzer.com");
+            SpecialMethods.VisitWebsite("http://www.ftanalyzer.com");
         }
 
         void OnlineGuidesToUsingFTAnalyzerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.OnlineGuideEvent);
-            HttpUtility.VisitWebsite("http://www.ftanalyzer.com/guides");
+            SpecialMethods.VisitWebsite("http://www.ftanalyzer.com/guides");
         }
 
         void PrivacyPolicyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.PrivacyEvent);
-            HttpUtility.VisitWebsite("http://www.ftanalyzer.com/privacy");
+            SpecialMethods.VisitWebsite("http://www.ftanalyzer.com/privacy");
         }
 
         void OlderParentsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1002,13 +1002,13 @@ namespace FTAnalyzer
         void ReportAnIssueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.ReportIssueEvent);
-            HttpUtility.VisitWebsite("https://github.com/ShammyLevva/FTAnalyzer/issues");
+            SpecialMethods.VisitWebsite("https://github.com/ShammyLevva/FTAnalyzer/issues");
         }
 
         void WhatsNewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.WhatsNewEvent);
-            HttpUtility.VisitWebsite("http://ftanalyzer.com/Whats%20New%20in%20this%20Release");
+            SpecialMethods.VisitWebsite("http://ftanalyzer.com/Whats%20New%20in%20this%20Release");
         }
 
         void MnuShowTimeline_Click(object sender, EventArgs e)
@@ -1568,7 +1568,7 @@ namespace FTAnalyzer
         async void BtnUpdateLostCousinsWebsite_Click(object sender, EventArgs e)
         {
             List<CensusIndividual> individuals = GetMissingLCIndividuals(CensusDate.EWCENSUS1881);
-            individuals.AddRange(GetMissingLCIndividuals(CensusDate.SCOTCENSUS1881));
+            //individuals.AddRange(GetMissingLCIndividuals(CensusDate.SCOTCENSUS1881));
             //individuals.AddRange(GetMissingLCIndividuals(CensusDate.CANADACENSUS1881));
             //individuals.AddRange(GetMissingLCIndividuals(CensusDate.EWCENSUS1841));
             //individuals.AddRange(GetMissingLCIndividuals(CensusDate.USCENSUS1880));
@@ -1580,6 +1580,9 @@ namespace FTAnalyzer
                 {
                     Progress<string> outputText = new Progress<string>(value => { rtbLCoutput.AppendText(value); });
                     await Task.Run(() => ExportToLostCousins.ProcessList(individuals, outputText));
+                    SpecialMethods.VisitWebsite("https://www.lostcousins.com/pages/members/ancestors/");
+                    UpdateLostCousinsReport();
+
                 }
             }
             else
@@ -1702,7 +1705,7 @@ namespace FTAnalyzer
 
         void LabLostCousinsWeb_Click(object sender, EventArgs e)
         {
-            HttpUtility.VisitWebsite("http://www.lostcousins.com/?ref=LC585149");
+            SpecialMethods.VisitWebsite("http://www.lostcousins.com/?ref=LC585149");
             Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.LCWebLinkEvent);
         }
 
@@ -1719,7 +1722,7 @@ namespace FTAnalyzer
 
         void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            HttpUtility.VisitWebsite("http://www.lostcousins.com/?ref=LC585149");
+            SpecialMethods.VisitWebsite("http://www.lostcousins.com/?ref=LC585149");
             Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.LCWebLinkEvent);
         }
         #endregion
@@ -2071,7 +2074,7 @@ namespace FTAnalyzer
             string searchtext = ind.Forename + "+" + ind.Surname;
             if (ind.ServiceNumber.Length > 0)
                 searchtext += "+" + ind.ServiceNumber;
-            HttpUtility.VisitWebsite("https://www.livesofthefirstworldwar.org/search#FreeSearch=" + searchtext + "&PageIndex=1&PageSize=20");
+            SpecialMethods.VisitWebsite("https://www.livesofthefirstworldwar.org/search#FreeSearch=" + searchtext + "&PageIndex=1&PageSize=20");
         }
 
         void DgIndividuals_MouseDown(object sender, MouseEventArgs e)
@@ -3287,13 +3290,13 @@ namespace FTAnalyzer
 
         void FacebookSupportGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HttpUtility.VisitWebsite("https://www.facebook.com/ftanalyzer");
+            SpecialMethods.VisitWebsite("https://www.facebook.com/ftanalyzer");
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.FacebookSupportEvent);
         }
 
         void FacebookUserGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HttpUtility.VisitWebsite("https://www.facebook.com/groups/ftanalyzer");
+            SpecialMethods.VisitWebsite("https://www.facebook.com/groups/ftanalyzer");
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.FacebookUsersEvent);
         }
 
@@ -3306,13 +3309,13 @@ namespace FTAnalyzer
 
         void GetGoogleAPIKeyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HttpUtility.VisitWebsite("https://developers.google.com/maps/documentation/embed/get-api-key");
+            SpecialMethods.VisitWebsite("https://developers.google.com/maps/documentation/embed/get-api-key");
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.GoogleAPIKey);
         }
 
         void GoogleAPISetupGuideToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HttpUtility.VisitWebsite("http://www.ftanalyzer.com/GoogleAPI");
+            SpecialMethods.VisitWebsite("http://www.ftanalyzer.com/GoogleAPI");
         }
     }
 }

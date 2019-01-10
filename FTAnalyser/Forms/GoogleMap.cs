@@ -93,7 +93,7 @@ namespace FTAnalyzer.Forms
             if (loc.IsGeoCoded(false))
             {
                 string URL = $"https://www.google.com/maps/@{loc.Latitude},{loc.Longitude},{level}z";
-                HttpUtility.VisitWebsite(URL);
+                SpecialMethods.VisitWebsite(URL);
             }
             else
                 MessageBox.Show($"{loc.ToString()} is not yet geocoded so can't be displayed.");
