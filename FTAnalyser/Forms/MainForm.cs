@@ -1337,7 +1337,7 @@ namespace FTAnalyzer
             tsHintsLabel.Text = Messages.Hints_Individual;
         }
 
-        private async void TabErrorFixSelector_SelectedIndexChanged(object sender, EventArgs e)
+        async void TabErrorFixSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabErrorFixSelector.SelectedTab == tabDataErrors)
                 SetupDataErrors();
@@ -1565,7 +1565,7 @@ namespace FTAnalyzer
                 UIHelpers.ShowMessage("Unable to login to Lost Cousins website. Check email/password and try again.");
         }
 
-        void BtnUpdateLostCousinsWebsite_Click(object sender, EventArgs e)
+        async void BtnUpdateLostCousinsWebsite_Click(object sender, EventArgs e)
         {
             List<CensusIndividual> individuals = GetMissingLCIndividuals(CensusDate.EWCENSUS1881);
             individuals.AddRange(GetMissingLCIndividuals(CensusDate.SCOTCENSUS1881));
@@ -1579,7 +1579,7 @@ namespace FTAnalyzer
                 if (response == UIHelpers.Yes)
                 {
                     Progress<string> outputText = new Progress<string>(value => { rtbLCoutput.AppendText(value); });
-                    ExportToLostCousins.ProcessList(individuals, outputText);
+                    await Task.Run(() => ExportToLostCousins.ProcessList(individuals, outputText));
                 }
             }
             else

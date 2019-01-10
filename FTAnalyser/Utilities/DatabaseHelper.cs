@@ -276,7 +276,7 @@ namespace FTAnalyzer.Utilities
                 }
                 if (dbVersion < v7_3_0_0)
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("create table LostCousins(CensusYear INTEGER(4), CensusCountry STRING (20), CensusRef STRING(25), IndID STRING(10), constraint pkLostCousins primary key(CensusYear, CensusCountry, CensusRef))", InstanceConnection))
+                    using (SQLiteCommand cmd = new SQLiteCommand("create table LostCousins(CensusYear INTEGER(4), CensusCountry STRING (20), CensusRef STRING(25), IndID STRING(10), constraint pkLostCousins primary key(CensusYear, CensusCountry, CensusRef, IndID))", InstanceConnection))
                     {
                         cmd.ExecuteNonQuery();
                     }
@@ -699,12 +699,14 @@ namespace FTAnalyzer.Utilities
                 SQLiteParameter param = cmd.CreateParameter();
                 param.DbType = DbType.String;
                 cmd.Prepare();
-                using (SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SequentialAccess))
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
                 {
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         string indID = reader["IndID"].ToString();
                         Individual ind = FamilyTree.Instance.GetIndividual(indID);
+                        if (ind == null)
+                            Console.WriteLine("problem");
                         string CensusYear = reader["CensusYear"].ToString();
                         string CensusCountry = reader["CensusCountry"].ToString();
                         string CensusRef = reader["CensusRef"].ToString();
