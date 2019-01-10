@@ -40,7 +40,7 @@ namespace FTAnalyzer
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -199,6 +199,12 @@ namespace FTAnalyzer
             this.btnLC1881Scot = new System.Windows.Forms.Button();
             this.relTypesLC = new FTAnalyzer.Controls.RelationTypes();
             this.LCUpdatesTab = new System.Windows.Forms.TabPage();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.btnLCLogin = new System.Windows.Forms.Button();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtLCEmail = new System.Windows.Forms.TextBox();
+            this.txtLCPassword = new System.Windows.Forms.MaskedTextBox();
             this.btnUpdateLostCousinsWebsite = new System.Windows.Forms.Button();
             this.tabCensus = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -357,6 +363,7 @@ namespace FTAnalyzer
             this.LCReportsTab.SuspendLayout();
             this.Referrals.SuspendLayout();
             this.LCUpdatesTab.SuspendLayout();
+            this.groupBox8.SuspendLayout();
             this.tabCensus.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -1148,14 +1155,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 166);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1786,7 +1793,7 @@ namespace FTAnalyzer
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Visit the Lost Cousins Website";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
-            //
+            // 
             // ckbShowLCEntered
             // 
             this.ckbShowLCEntered.AutoSize = true;
@@ -1869,6 +1876,7 @@ namespace FTAnalyzer
             // 
             // LCUpdatesTab
             // 
+            this.LCUpdatesTab.Controls.Add(this.groupBox8);
             this.LCUpdatesTab.Controls.Add(this.btnUpdateLostCousinsWebsite);
             this.LCUpdatesTab.Location = new System.Drawing.Point(4, 22);
             this.LCUpdatesTab.Name = "LCUpdatesTab";
@@ -1878,14 +1886,75 @@ namespace FTAnalyzer
             this.LCUpdatesTab.Text = "Updates";
             this.LCUpdatesTab.UseVisualStyleBackColor = true;
             // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.btnLCLogin);
+            this.groupBox8.Controls.Add(this.label20);
+            this.groupBox8.Controls.Add(this.label19);
+            this.groupBox8.Controls.Add(this.txtLCEmail);
+            this.groupBox8.Controls.Add(this.txtLCPassword);
+            this.groupBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox8.Location = new System.Drawing.Point(30, 22);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(407, 118);
+            this.groupBox8.TabIndex = 1;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Lost Cousins Login Details";
+            // 
+            // btnLCLogin
+            // 
+            this.btnLCLogin.BackColor = System.Drawing.Color.Red;
+            this.btnLCLogin.Location = new System.Drawing.Point(310, 68);
+            this.btnLCLogin.Name = "btnLCLogin";
+            this.btnLCLogin.Size = new System.Drawing.Size(75, 25);
+            this.btnLCLogin.TabIndex = 3;
+            this.btnLCLogin.Text = "Login";
+            this.btnLCLogin.UseVisualStyleBackColor = false;
+            this.btnLCLogin.Click += new System.EventHandler(this.BtnLCLogin_Click);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(34, 72);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(68, 16);
+            this.label20.TabIndex = 3;
+            this.label20.Text = "Password";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(6, 31);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(96, 16);
+            this.label19.TabIndex = 2;
+            this.label19.Text = "Email Address";
+            // 
+            // txtLCEmail
+            // 
+            this.txtLCEmail.Location = new System.Drawing.Point(108, 28);
+            this.txtLCEmail.Name = "txtLCEmail";
+            this.txtLCEmail.Size = new System.Drawing.Size(277, 22);
+            this.txtLCEmail.TabIndex = 1;
+            // 
+            // txtLCPassword
+            // 
+            this.txtLCPassword.Location = new System.Drawing.Point(108, 69);
+            this.txtLCPassword.Name = "txtLCPassword";
+            this.txtLCPassword.PasswordChar = '*';
+            this.txtLCPassword.Size = new System.Drawing.Size(196, 22);
+            this.txtLCPassword.TabIndex = 2;
+            // 
             // btnUpdateLostCousinsWebsite
             // 
-            this.btnUpdateLostCousinsWebsite.Location = new System.Drawing.Point(16, 17);
+            this.btnUpdateLostCousinsWebsite.Location = new System.Drawing.Point(39, 155);
             this.btnUpdateLostCousinsWebsite.Name = "btnUpdateLostCousinsWebsite";
             this.btnUpdateLostCousinsWebsite.Size = new System.Drawing.Size(197, 23);
-            this.btnUpdateLostCousinsWebsite.TabIndex = 0;
+            this.btnUpdateLostCousinsWebsite.TabIndex = 4;
             this.btnUpdateLostCousinsWebsite.Text = "Update Lost Cousins Website";
             this.btnUpdateLostCousinsWebsite.UseVisualStyleBackColor = true;
+            this.btnUpdateLostCousinsWebsite.Visible = false;
             this.btnUpdateLostCousinsWebsite.Click += new System.EventHandler(this.BtnUpdateLostCousinsWebsite_Click);
             // 
             // tabCensus
@@ -3504,6 +3573,8 @@ namespace FTAnalyzer
             this.Referrals.ResumeLayout(false);
             this.Referrals.PerformLayout();
             this.LCUpdatesTab.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
             this.tabCensus.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
@@ -3860,6 +3931,12 @@ namespace FTAnalyzer
         private Controls.RelationTypes relTypesLC;
         private System.Windows.Forms.TabPage LCUpdatesTab;
         private System.Windows.Forms.Button btnUpdateLostCousinsWebsite;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.Button btnLCLogin;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox txtLCEmail;
+        private System.Windows.Forms.MaskedTextBox txtLCPassword;
     }
 }
 

@@ -94,16 +94,16 @@ namespace FTAnalyzer.Forms
             SetupDataGridView(true, individuals);
         }
 
-        void CompareLists(List<CensusIndividual> individuals, List<Individual> listToCheck)
-        {
-            List<string> ids = individuals.Select(x => x.IndividualID).ToList();
-            List<Individual> missing = new List<Individual>();
-            foreach(Individual ind in listToCheck)
-            {
-                if (!ids.Contains(ind.IndividualID))
-                    missing.Add(ind);
-            }
-        }
+        //void CompareLists(List<CensusIndividual> individuals, List<Individual> listToCheck)
+        //{
+        //    List<string> ids = individuals.Select(x => x.IndividualID).ToList();
+        //    List<Individual> missing = new List<Individual>();
+        //    foreach(Individual ind in listToCheck)
+        //    {
+        //        if (!ids.Contains(ind.IndividualID))
+        //            missing.Add(ind);
+        //    }
+        //}
 
         void SetupDataGridView(bool censusDone, List<CensusIndividual> individuals)
         {

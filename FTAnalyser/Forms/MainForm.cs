@@ -31,7 +31,7 @@ namespace FTAnalyzer
 { 
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.3.0.0";
+        public static string VERSION = "7.3.0.0-beta1";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1247,6 +1247,7 @@ namespace FTAnalyzer
                         btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled =
                         btnLC1911EW.Enabled = ft.IndividualCount > 0;
                     UpdateLostCousinsReport();
+                    txtLCEmail.Text = (string)Application.UserAppDataRegistry.GetValue("LostCousinsEmail", string.Empty);
                     Analytics.TrackAction(Analytics.MainFormAction, Analytics.LostCousinsTabEvent);
                 }
                 else if (tabSelector.SelectedTab == tabToday)
@@ -1550,22 +1551,42 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
+        void BtnLCLogin_Click(object sender, EventArgs e)
+        {
+            Application.UserAppDataRegistry.SetValue("LostCousinsEmail", txtLCEmail.Text);
+            bool websiteAvailable = ExportToLostCousins.CheckLostCousinsLogin(txtLCEmail.Text, txtLCPassword.Text);
+            btnLCLogin.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
+            btnLCLogin.Enabled = !websiteAvailable;
+            btnUpdateLostCousinsWebsite.Visible = websiteAvailable;
+            if (websiteAvailable)
+                UIHelpers.ShowMessage("Lost Cousins login succeeded.");
+            else
+                UIHelpers.ShowMessage("Unable to login to Lost Cousins website. Check email/password and try again.");
+        }
+
         void BtnUpdateLostCousinsWebsite_Click(object sender, EventArgs e)
         {
-            IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate.EWCENSUS1881, true, false);
-            Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType);
-            Predicate<CensusIndividual> missingLC = x => x.MissingLostCousins(CensusDate.EWCENSUS1881, false);
-            Predicate<CensusIndividual> hasCensusRef = x => !string.IsNullOrEmpty(x.CensusReference) && x.IsKnownCensusReference;
-            Predicate<CensusIndividual> filter = FilterUtils.AndFilter(relationFilter, missingLC, hasCensusRef);
-            List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Filter(filter).ToList();
+            List<CensusIndividual> individuals = GetMissingLCIndividuals(CensusDate.EWCENSUS1881);
             if (individuals.Count > 0)
             {
                 int response = UIHelpers.ShowYesNo($"You have {individuals.Count} possible records to add to Lost Cousins. Proceed?");
+                if (response == UIHelpers.Yes)
+                    ExportToLostCousins.ProcessList(individuals);
             }
             else
                 UIHelpers.ShowMessage("You have no records to add to Lost Cousins at this time. Use the Research Suggestions to find more people on the census.");
         }
 
+        List<CensusIndividual> GetMissingLCIndividuals(CensusDate censusDate)
+        {
+            IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(censusDate, true, false);
+            Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType, true);
+            Predicate<CensusIndividual> missingLC = x => x.MissingLostCousins(censusDate, false) && x.IsKnownCensusReference;
+            Predicate<CensusIndividual> filter = FilterUtils.AndFilter(relationFilter, missingLC);
+            List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Filter(filter).ToList();
+            individuals.Distinct(); // eliminate duplicates
+            return individuals;
+        }
 
         void BtnLCMissingCountry_Click(object sender, EventArgs e)
         {

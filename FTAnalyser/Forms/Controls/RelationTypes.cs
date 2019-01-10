@@ -40,7 +40,7 @@ namespace FTAnalyzer.Controls
             }
         }
 
-        public Predicate<T> BuildFilter<T>(Func<T, int> relationType)
+        public Predicate<T> BuildFilter<T>(Func<T, int> relationType, bool excludeUnknown = false)
         {
             List<Predicate<T>> relationFilters = new List<Predicate<T>>();
             if (Blood)
@@ -53,7 +53,7 @@ namespace FTAnalyzer.Controls
                 relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.MARRIEDTODB));
             if (Descendant)
                 relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.DESCENDANT));
-            if (Unknown)
+            if (Unknown && !excludeUnknown)
                 relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.UNKNOWN));
             return FilterUtils.OrFilter(relationFilters);
         }
