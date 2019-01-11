@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.3.0.0-beta1";
+        public static string VERSION = "7.3.0.0-beta2";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1572,10 +1572,7 @@ namespace FTAnalyzer
             btnLCLogin.Enabled = !websiteAvailable;
             btnUpdateLostCousinsWebsite.Visible = websiteAvailable;
             if (websiteAvailable)
-            {
                 UIHelpers.ShowMessage("Lost Cousins login succeeded.");
-                UpdateLCOutput();
-            }
             else
                 UIHelpers.ShowMessage("Unable to login to Lost Cousins website. Check email/password and try again.");
         }
@@ -1591,9 +1588,9 @@ namespace FTAnalyzer
                 int response = UIHelpers.ShowYesNo($"You have {LCUpdates.Count} possible records to add to Lost Cousins. Proceed?");
                 if (response == UIHelpers.Yes)
                 {
-                    await Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.UpdateLostCousins);
                     Progress<string> outputText = new Progress<string>(value => { rtbLCoutput.AppendText(value); });
-                    await Task.Run(() => ExportToLostCousins.ProcessList(LCUpdates, outputText));
+                    int count = await Task.Run(() => ExportToLostCousins.ProcessList(LCUpdates, outputText));
+                    await Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.UpdateLostCousins, count.ToString());
                     SpecialMethods.VisitWebsite("https://www.lostcousins.com/pages/members/ancestors/");
                     UpdateLostCousinsReport();
                     UpdateLCOutput();
@@ -1608,15 +1605,15 @@ namespace FTAnalyzer
             rtbLCUpdateData.Text = string.Empty;
             rtbLCUpdateData.ForeColor = Color.Black;
             LCUpdates = GetMissingLCIndividuals(CensusDate.EWCENSUS1881, rtbLCUpdateData);
-            //LCUpdates.AddRange(GetMissingLCIndividuals(CensusDate.EWCENSUS1841, rtbLCUpdateData));
-            //LCUpdates.AddRange(GetMissingLCIndividuals(CensusDate.EWCENSUS1911, rtbLCUpdateData));
+            LCUpdates.AddRange(GetMissingLCIndividuals(CensusDate.EWCENSUS1841, rtbLCUpdateData));
+            LCUpdates.AddRange(GetMissingLCIndividuals(CensusDate.EWCENSUS1911, rtbLCUpdateData));
             rtbLCUpdateData.AppendText($"————————————————————————————————————————————————————\n");
             LCUpdates.AddRange(GetMissingLCIndividuals(CensusDate.SCOTCENSUS1881, rtbLCUpdateData));
-            // LCUpdates.AddRange(GetMissingLCIndividuals(CensusDate.IRELANDCENSUS1911, rtbLCUpdateData));
-            //LCUpdates.AddRange(GetMissingLCIndividuals(CensusDate.CANADACENSUS1881, rtbLCUpdateData));
+            //LCUpdates.AddRange(GetMissingLCIndividuals(CensusDate.IRELANDCENSUS1911, rtbLCUpdateData));
+            LCUpdates.AddRange(GetMissingLCIndividuals(CensusDate.CANADACENSUS1881, rtbLCUpdateData));
             rtbLCUpdateData.AppendText($"————————————————————————————————————————————————————\n");
-            // LCUpdates.AddRange(GetMissingLCIndividuals(CensusDate.USCENSUS1880, rtbLCUpdateData));
-            // LCUpdates.AddRange(GetMissingLCIndividuals(CensusDate.USCENSUS1940, rtbLCUpdateData));
+            LCUpdates.AddRange(GetMissingLCIndividuals(CensusDate.USCENSUS1880, rtbLCUpdateData));
+            LCUpdates.AddRange(GetMissingLCIndividuals(CensusDate.USCENSUS1940, rtbLCUpdateData));
             rtbLCUpdateData.AppendText($"————————————————————————————————————————————————————\n");
             rtbLCUpdateData.AppendText($"{LCUpdates.Count} possible records to upload to Lost Cousins.");
         }

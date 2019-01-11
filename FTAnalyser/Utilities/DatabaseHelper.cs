@@ -783,15 +783,24 @@ namespace FTAnalyzer.Utilities
                     cmd.Parameters.Add(param);
                     cmd.Prepare();
 
-                    cmd.Parameters[0].Value = ind.CensusDate.BestYear;
-                    cmd.Parameters[1].Value = ind.CensusLocation.Country;
-                    cmd.Parameters[2].Value = ind.CensusReference;
-                    cmd.Parameters[3].Value = ind.IndividualID;
-                    cmd.Parameters[4].Value = ind.Name;
+                    if (ind.CensusReference != null)
+                    {
+                        cmd.Parameters[0].Value = ind.CensusDate.BestYear;
+                        cmd.Parameters[1].Value = ind.CensusCountry;
+                        cmd.Parameters[2].Value = ind.CensusReference;
+                        cmd.Parameters[3].Value = ind.IndividualID;
+                        cmd.Parameters[4].Value = ind.Name;
 
-                    int rowsaffected = cmd.ExecuteNonQuery();
-                    if (rowsaffected != 1)
-                        Console.WriteLine("Problem updating");
+                        int rowsaffected = cmd.ExecuteNonQuery();
+                        if (rowsaffected != 1)
+                            Console.WriteLine("Problem updating");
+                        else
+                        {
+                            FactLocation location = FactLocation.GetLocation(ind.CensusCountry);
+                            Fact f = new Fact(ind.CensusRef, Fact.LOSTCOUSINS, ind.CensusDate, location, string.Empty, true, true);
+                            ind?.AddFact(f);
+                        }
+                    }
                 }
             }
             catch(Exception e)
