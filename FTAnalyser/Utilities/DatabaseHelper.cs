@@ -694,30 +694,66 @@ namespace FTAnalyzer.Utilities
             int count = 0;
             if (InstanceConnection.State != ConnectionState.Open)
                 InstanceConnection.Open();
-            using (SQLiteCommand cmd = new SQLiteCommand("select CensusYear, CensusCountry, CensusRef, IndID from LostCousins", InstanceConnection))
+            using (SQLiteCommand cmd = new SQLiteCommand("select CensusYear, CensusCountry, CensusRef, IndID, FullName from LostCousins", InstanceConnection))
             {
-                SQLiteParameter param = cmd.CreateParameter();
-                param.DbType = DbType.String;
-                cmd.Prepare();
                 using (SQLiteDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         string indID = reader["IndID"].ToString();
+                        string fullName = reader["FullName"].ToString();
                         Individual ind = FamilyTree.Instance.GetIndividual(indID);
-                        if (ind == null)
-                            Console.WriteLine("problem");
-                        string CensusYear = reader["CensusYear"].ToString();
-                        string CensusCountry = reader["CensusCountry"].ToString();
-                        string CensusRef = reader["CensusRef"].ToString();
-                        FactLocation location = FactLocation.GetLocation(CensusCountry);
-                        Fact f = new Fact(CensusRef, Fact.LOSTCOUSINS, new FactDate(CensusYear), location, string.Empty, true, true);
-                        ind?.AddFact(f);
-                        count++;
+                        if (ind?.Name == fullName) // only load if individual exists in this tree.
+                        {
+                            string CensusYear = reader["CensusYear"].ToString();
+                            string CensusCountry = reader["CensusCountry"].ToString();
+                            string CensusRef = reader["CensusRef"].ToString();
+                            FactLocation location = FactLocation.GetLocation(CensusCountry);
+                            Fact f = new Fact(CensusRef, Fact.LOSTCOUSINS, new FactDate(CensusYear), location, string.Empty, true, true);
+                            ind?.AddFact(f);
+                            count++;
+                        }
+                        else
+                        {
+                            Console.Write("name wrong");
+                           // UpdateFullName(reader, ind.Name); needed during testing
+                        }
                     }
                 }
             }
             return count;
+        }
+
+        void UpdateFullName(SQLiteDataReader reader, string name)
+        {
+            using (SQLiteCommand updateCmd = new SQLiteCommand("update LostCousins set FullName=? Where CensusYear=? and CensusCountry=? and CensusRef=? and IndID=?", InstanceConnection))
+            {
+                SQLiteParameter param = updateCmd.CreateParameter();
+                param.DbType = DbType.String;
+                updateCmd.Parameters.Add(param);
+                param = updateCmd.CreateParameter();
+                param.DbType = DbType.Int32;
+                updateCmd.Parameters.Add(param);
+                param = updateCmd.CreateParameter();
+                param.DbType = DbType.String;
+                updateCmd.Parameters.Add(param);
+                param = updateCmd.CreateParameter();
+                param.DbType = DbType.String;
+                updateCmd.Parameters.Add(param);
+                param = updateCmd.CreateParameter();
+                param.DbType = DbType.String;
+                updateCmd.Parameters.Add(param);
+                updateCmd.Prepare();
+
+                updateCmd.Parameters[0].Value = name;
+                updateCmd.Parameters[1].Value = reader["CensusYear"];
+                updateCmd.Parameters[2].Value = reader["CensusCountry"];
+                updateCmd.Parameters[3].Value = reader["CensusRef"];
+                updateCmd.Parameters[4].Value = reader["IndID"];
+                int rowsaffected = updateCmd.ExecuteNonQuery();
+                if (rowsaffected != 1)
+                    Console.WriteLine("Problem updating");
+            }
         }
 
         public void StoreLostCousinsFact(CensusIndividual ind)
@@ -728,10 +764,13 @@ namespace FTAnalyzer.Utilities
                     InstanceConnection.Open();
                 SQLiteParameter param;
 
-                using (SQLiteCommand cmd = new SQLiteCommand("insert into LostCousins (CensusYear, CensusCountry, CensusRef, IndID) values(?,?,?,?)", InstanceConnection))
+                using (SQLiteCommand cmd = new SQLiteCommand("insert into LostCousins (CensusYear, CensusCountry, CensusRef, IndID, FullName) values(?,?,?,?,?)", InstanceConnection))
                 {
                     param = cmd.CreateParameter();
                     param.DbType = DbType.Int32;
+                    cmd.Parameters.Add(param);
+                    param = cmd.CreateParameter();
+                    param.DbType = DbType.String;
                     cmd.Parameters.Add(param);
                     param = cmd.CreateParameter();
                     param.DbType = DbType.String;
@@ -748,6 +787,7 @@ namespace FTAnalyzer.Utilities
                     cmd.Parameters[1].Value = ind.CensusLocation.Country;
                     cmd.Parameters[2].Value = ind.CensusReference;
                     cmd.Parameters[3].Value = ind.IndividualID;
+                    cmd.Parameters[4].Value = ind.Name;
 
                     int rowsaffected = cmd.ExecuteNonQuery();
                     if (rowsaffected != 1)

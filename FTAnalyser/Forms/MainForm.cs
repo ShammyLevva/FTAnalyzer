@@ -257,6 +257,7 @@ namespace FTAnalyzer
             tsCountLabel.Text = string.Empty;
             tsHintsLabel.Text = string.Empty;
             tsStatusLabel.Text = string.Empty;
+            rtbLCoutput.Text = string.Empty;
             rtbToday.Text = string.Empty;
             pbSources.Value = 0;
             pbIndividuals.Value = 0;
@@ -472,7 +473,8 @@ namespace FTAnalyzer
         }
 
         void RtbOutput_TextChanged(object sender, EventArgs e) => rtbOutput.ScrollToBottom();
-
+        void RtbLCoutput_TextChanged(object sender, EventArgs e) => rtbLCoutput.ScrollToBottom();
+        
         bool shutdown = false;
 
         async void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -1578,11 +1580,11 @@ namespace FTAnalyzer
                 int response = UIHelpers.ShowYesNo($"You have {individuals.Count} possible records to add to Lost Cousins. Proceed?");
                 if (response == UIHelpers.Yes)
                 {
+                    await Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.UpdateLostCousins);
                     Progress<string> outputText = new Progress<string>(value => { rtbLCoutput.AppendText(value); });
                     await Task.Run(() => ExportToLostCousins.ProcessList(individuals, outputText));
                     SpecialMethods.VisitWebsite("https://www.lostcousins.com/pages/members/ancestors/");
                     UpdateLostCousinsReport();
-
                 }
             }
             else
