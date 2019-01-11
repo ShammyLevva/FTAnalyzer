@@ -1,3 +1,16 @@
+#### Updated Release Version 7.3.0.0 11th January 2019  
+**Updates**  
+Major new feature ability to automatically post your Lost Cousins entries to the Lost Cousins website  
+Tracks uploaded individuals and creates an automated Lost Cousins Fact Type for you.  
+This relies on the individual name and ID for a more permenent flagging you should still add a flag to your GEDCOM file  
+Added Line Errors report to show you where the error is in the original file  
+
+**Bugfixes**  
+Fix issue with 3 digit years in a between statement  
+Census families were missing one parent families  
+Fixed issue with filestream being held open once file had loaded  
+Fixed issue with min/max dates arithmetic  
+
 #### Updated Release Version 7.2.4.4 3rd January 2019  
 **Bugfixes**  
 Fixed issue with adding months to edge case dates  

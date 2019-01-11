@@ -23,12 +23,11 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using System.Windows.Forms;
 using System.Xml;
 
 namespace FTAnalyzer
-{ 
+{
     public partial class MainForm : Form
     {
         public static string VERSION = "7.3.0.0-beta1";
@@ -1245,13 +1244,16 @@ namespace FTAnalyzer
                 }
                 else if (tabSelector.SelectedTab == tabLostCousins)
                 {
+                    HourGlass(true);
                     btnLC1881EW.Enabled = btnLC1881Scot.Enabled = btnLC1841EW.Enabled =
                         btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled =
                         btnLC1911EW.Enabled = ft.IndividualCount > 0;
                     UpdateLostCousinsReport();
+                    UpdateLCOutput();
                     txtLCEmail.Text = (string)Application.UserAppDataRegistry.GetValue("LostCousinsEmail", string.Empty);
                     chkLCRootPersonConfirm.Text = $"Confirm {ft.RootPerson} as root Person";
                     Analytics.TrackAction(Analytics.MainFormAction, Analytics.LostCousinsTabEvent);
+                    HourGlass(false);
                 }
                 else if (tabSelector.SelectedTab == tabToday)
                 {
@@ -1463,6 +1465,7 @@ namespace FTAnalyzer
 
             Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
             IEnumerable<Individual> listToCheck = ft.AllIndividuals.Filter(relationFilter).ToList();
+            MissingLCEntries = new Dictionary<CensusDate, int>();
 
             int countEW1841 = listToCheck.Count(ind => ind.IsLostCousinsEntered(CensusDate.EWCENSUS1841, false));
             int countEW1881 = listToCheck.Count(ind => ind.IsLostCousinsEntered(CensusDate.EWCENSUS1881, false));
@@ -1482,6 +1485,15 @@ namespace FTAnalyzer
             int missingUS1880 = listToCheck.Count(ind => ind.MissingLostCousins(CensusDate.USCENSUS1880, false));
             int missingUS1940 = listToCheck.Count(ind => ind.MissingLostCousins(CensusDate.USCENSUS1940, false));
 
+            MissingLCEntries.Add(CensusDate.EWCENSUS1841, missingEW1841);
+            MissingLCEntries.Add(CensusDate.EWCENSUS1881, missingEW1881);
+            MissingLCEntries.Add(CensusDate.SCOTCENSUS1881, missingSco1881);
+            MissingLCEntries.Add(CensusDate.CANADACENSUS1881, missingCan1881);
+            MissingLCEntries.Add(CensusDate.EWCENSUS1911, missingEW1911);
+            MissingLCEntries.Add(CensusDate.IRELANDCENSUS1911, missingIre1911);
+            MissingLCEntries.Add(CensusDate.USCENSUS1880, missingUS1880);
+            MissingLCEntries.Add(CensusDate.USCENSUS1940, missingUS1940);
+            
             int LostCousinsCensusYearFacts = listToCheck.Sum(ind => ind.LostCousinsCensusFactCount);
             int LCnoCensus = listToCheck.Count(i => i.HasLostCousinsFactWithNoCensusFact);
 
@@ -1495,16 +1507,14 @@ namespace FTAnalyzer
             rtbLostCousins.AppendText($"1881 England & Wales Census: {countEW1881} Found, {missingEW1881} Missing\n");
             rtbLostCousins.AppendText($"1841 England & Wales Census: {countEW1841} Found, {missingEW1841} Missing\n");
             rtbLostCousins.AppendText($"1911 England & Wales Census: {countEW1911} Found, {missingEW1911} Missing\n");
-            rtbLostCousins.AppendText($"____________________________________________________\n");
+            rtbLostCousins.AppendText($"————————————————————————————————————————————————————\n");
             rtbLostCousins.AppendText($"1881 Scotland Census: {countSco1881} Found, {missingSco1881} Missing\n");
-            rtbLostCousins.AppendText($"____________________________________________________\n");
             rtbLostCousins.AppendText($"1911 Ireland Census: {countIre1911} Found, {missingIre1911} Missing\n");
-            rtbLostCousins.AppendText($"____________________________________________________\n");
             rtbLostCousins.AppendText($"1881 Canada Census: {countCan1881} Found, {missingCan1881} Missing\n");
-            rtbLostCousins.AppendText($"____________________________________________________\n");
+            rtbLostCousins.AppendText($"————————————————————————————————————————————————————\n");
             rtbLostCousins.AppendText($"1880 US Census: {countUS1880} Found, {missingUS1880} Missing\n");
             rtbLostCousins.AppendText($"1940 US Census: {countUS1940} Found, {missingUS1940} Missing\n");
-            rtbLostCousins.AppendText($"____________________________________________________\n");
+            rtbLostCousins.AppendText($"————————————————————————————————————————————————————\n");
             if (moreThanOneLCfact > 0)
                 rtbLostCousins.AppendText($"Duplicate Lost Cousins facts: {moreThanOneLCfact}\n");
             if (LCtotal > total)
@@ -1512,7 +1522,7 @@ namespace FTAnalyzer
             //if (noCountryTotal > 0)
             //    rtbLostCousins.AppendText($"Census facts with no census country and no Lost Cousins fact : {noCountryTotal}\n");
             if (moreThanOneLCfact > 0 || LCtotal > total) // || noCountryTotal > 0)
-                rtbLostCousins.AppendText($"____________________________________________________\n");
+                rtbLostCousins.AppendText($"————————————————————————————————————————————————————\n");
             rtbLostCousins.AppendText($"Totals: {LCtotal} Found, {missingTotal} Missing");
 
             if (LCnoCensus > 0 || missingTotal > 0)
@@ -1562,43 +1572,66 @@ namespace FTAnalyzer
             btnLCLogin.Enabled = !websiteAvailable;
             btnUpdateLostCousinsWebsite.Visible = websiteAvailable;
             if (websiteAvailable)
+            {
                 UIHelpers.ShowMessage("Lost Cousins login succeeded.");
+                UpdateLCOutput();
+            }
             else
                 UIHelpers.ShowMessage("Unable to login to Lost Cousins website. Check email/password and try again.");
         }
 
+        List<CensusIndividual> LCUpdates;
+        Dictionary<CensusDate, int> MissingLCEntries;
+
         async void BtnUpdateLostCousinsWebsite_Click(object sender, EventArgs e)
         {
-            List<CensusIndividual> individuals = GetMissingLCIndividuals(CensusDate.EWCENSUS1881);
-            //individuals.AddRange(GetMissingLCIndividuals(CensusDate.SCOTCENSUS1881));
-            //individuals.AddRange(GetMissingLCIndividuals(CensusDate.CANADACENSUS1881));
-            //individuals.AddRange(GetMissingLCIndividuals(CensusDate.EWCENSUS1841));
-            //individuals.AddRange(GetMissingLCIndividuals(CensusDate.USCENSUS1880));
-            if (individuals.Count > 0)
+            if (LCUpdates?.Count > 0)
             {
                 rtbLCoutput.Text = string.Empty;
-                int response = UIHelpers.ShowYesNo($"You have {individuals.Count} possible records to add to Lost Cousins. Proceed?");
+                int response = UIHelpers.ShowYesNo($"You have {LCUpdates.Count} possible records to add to Lost Cousins. Proceed?");
                 if (response == UIHelpers.Yes)
                 {
                     await Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.UpdateLostCousins);
                     Progress<string> outputText = new Progress<string>(value => { rtbLCoutput.AppendText(value); });
-                    await Task.Run(() => ExportToLostCousins.ProcessList(individuals, outputText));
+                    await Task.Run(() => ExportToLostCousins.ProcessList(LCUpdates, outputText));
                     SpecialMethods.VisitWebsite("https://www.lostcousins.com/pages/members/ancestors/");
                     UpdateLostCousinsReport();
+                    UpdateLCOutput();
                 }
             }
             else
                 UIHelpers.ShowMessage("You have no records to add to Lost Cousins at this time. Use the Research Suggestions to find more people on the census.");
         }
 
-        List<CensusIndividual> GetMissingLCIndividuals(CensusDate censusDate)
+        void UpdateLCOutput()
+        {
+            rtbLCUpdateData.Text = string.Empty;
+            rtbLCUpdateData.ForeColor = Color.Black;
+            LCUpdates = GetMissingLCIndividuals(CensusDate.EWCENSUS1881, rtbLCUpdateData);
+            //LCUpdates.AddRange(GetMissingLCIndividuals(CensusDate.EWCENSUS1841, rtbLCUpdateData));
+            //LCUpdates.AddRange(GetMissingLCIndividuals(CensusDate.EWCENSUS1911, rtbLCUpdateData));
+            rtbLCUpdateData.AppendText($"————————————————————————————————————————————————————\n");
+            LCUpdates.AddRange(GetMissingLCIndividuals(CensusDate.SCOTCENSUS1881, rtbLCUpdateData));
+            // LCUpdates.AddRange(GetMissingLCIndividuals(CensusDate.IRELANDCENSUS1911, rtbLCUpdateData));
+            //LCUpdates.AddRange(GetMissingLCIndividuals(CensusDate.CANADACENSUS1881, rtbLCUpdateData));
+            rtbLCUpdateData.AppendText($"————————————————————————————————————————————————————\n");
+            // LCUpdates.AddRange(GetMissingLCIndividuals(CensusDate.USCENSUS1880, rtbLCUpdateData));
+            // LCUpdates.AddRange(GetMissingLCIndividuals(CensusDate.USCENSUS1940, rtbLCUpdateData));
+            rtbLCUpdateData.AppendText($"————————————————————————————————————————————————————\n");
+            rtbLCUpdateData.AppendText($"{LCUpdates.Count} possible records to upload to Lost Cousins.");
+        }
+
+        List<CensusIndividual> GetMissingLCIndividuals(CensusDate censusDate, RichTextBox output)
         {
             IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(censusDate, true, false);
             Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType, true);
             Predicate<CensusIndividual> missingLC = x => x.MissingLostCousins(censusDate, false) && x.IsKnownCensusReference;
             Predicate<CensusIndividual> filter = FilterUtils.AndFilter(relationFilter, missingLC);
             List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Filter(filter).ToList();
-            return LCRemoveDuplicateIndividuals(individuals);
+            individuals = LCRemoveDuplicateIndividuals(individuals);
+            int missing = MissingLCEntries[censusDate];
+            output.AppendText($"{censusDate}: {individuals.Count} possible {missing-individuals.Count} no Census Ref\n");
+            return individuals;
         }
 
         List<CensusIndividual> LCRemoveDuplicateIndividuals(List<CensusIndividual> individuals)
