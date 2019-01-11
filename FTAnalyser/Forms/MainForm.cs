@@ -105,7 +105,10 @@ namespace FTAnalyzer
                 }
                 await Analytics.CheckProgramUsageAsync();
             }
-            catch (Exception) { }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         void SetupFonts()

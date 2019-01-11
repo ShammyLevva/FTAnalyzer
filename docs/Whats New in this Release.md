@@ -1,4 +1,4 @@
-#### Updated Release Version 7.3.0.0 11th January 2019  
+#### Updated BETA Release (NOT YET LIVE) Version 7.3.0.0 11th January 2019  
 **Updates**  
 Major new feature ability to automatically post your Lost Cousins entries to the Lost Cousins website  
 Tracks uploaded individuals and creates an automated Lost Cousins Fact Type for you.  
