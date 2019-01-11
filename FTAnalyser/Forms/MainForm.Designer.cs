@@ -248,7 +248,6 @@ namespace FTAnalyzer
             this.dgPlaces = new System.Windows.Forms.DataGridView();
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LbProgramName = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.pbRelationships = new System.Windows.Forms.ProgressBar();
@@ -347,6 +346,7 @@ namespace FTAnalyzer
             this.wardeadRelation = new FTAnalyzer.Controls.RelationTypes();
             this.wardeadCountry = new FTAnalyzer.Controls.CensusCountry();
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -388,7 +388,6 @@ namespace FTAnalyzer
             ((System.ComponentModel.ISupportInitialize)(this.dgPlaces)).BeginInit();
             this.tabDisplayProgress.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabSelector.SuspendLayout();
             this.tabMainLists.SuspendLayout();
             this.tabMainListsSelector.SuspendLayout();
@@ -415,6 +414,7 @@ namespace FTAnalyzer
             this.tabFacts.SuspendLayout();
             this.tabToday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -432,7 +432,7 @@ namespace FTAnalyzer
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1093, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1109, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1036,7 +1036,7 @@ namespace FTAnalyzer
             this.tsStatusLabel});
             this.statusStrip.Location = new System.Drawing.Point(0, 499);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1093, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1109, 22);
             this.statusStrip.TabIndex = 10;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -1575,7 +1575,7 @@ namespace FTAnalyzer
             this.tabLostCousins.Location = new System.Drawing.Point(4, 22);
             this.tabLostCousins.Name = "tabLostCousins";
             this.tabLostCousins.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLostCousins.Size = new System.Drawing.Size(1085, 443);
+            this.tabLostCousins.Size = new System.Drawing.Size(1105, 443);
             this.tabLostCousins.TabIndex = 5;
             this.tabLostCousins.Text = "Lost Cousins";
             this.tabLostCousins.UseVisualStyleBackColor = true;
@@ -1584,10 +1584,11 @@ namespace FTAnalyzer
             // 
             this.LCSubTabs.Controls.Add(this.LCReportsTab);
             this.LCSubTabs.Controls.Add(this.LCUpdatesTab);
-            this.LCSubTabs.Location = new System.Drawing.Point(0, 0);
+            this.LCSubTabs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LCSubTabs.Location = new System.Drawing.Point(3, 3);
             this.LCSubTabs.Name = "LCSubTabs";
             this.LCSubTabs.SelectedIndex = 0;
-            this.LCSubTabs.Size = new System.Drawing.Size(1089, 447);
+            this.LCSubTabs.Size = new System.Drawing.Size(1099, 437);
             this.LCSubTabs.TabIndex = 0;
             // 
             // LCReportsTab
@@ -1612,7 +1613,7 @@ namespace FTAnalyzer
             this.LCReportsTab.Location = new System.Drawing.Point(4, 22);
             this.LCReportsTab.Name = "LCReportsTab";
             this.LCReportsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.LCReportsTab.Size = new System.Drawing.Size(1081, 421);
+            this.LCReportsTab.Size = new System.Drawing.Size(1091, 411);
             this.LCReportsTab.TabIndex = 0;
             this.LCReportsTab.Text = "Reports";
             this.LCReportsTab.UseVisualStyleBackColor = true;
@@ -1837,7 +1838,7 @@ namespace FTAnalyzer
             this.LCUpdatesTab.Location = new System.Drawing.Point(4, 22);
             this.LCUpdatesTab.Name = "LCUpdatesTab";
             this.LCUpdatesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.LCUpdatesTab.Size = new System.Drawing.Size(1081, 421);
+            this.LCUpdatesTab.Size = new System.Drawing.Size(1091, 411);
             this.LCUpdatesTab.TabIndex = 1;
             this.LCUpdatesTab.Text = "Updates";
             this.LCUpdatesTab.UseVisualStyleBackColor = true;
@@ -2485,7 +2486,7 @@ namespace FTAnalyzer
             this.tabDisplayProgress.Location = new System.Drawing.Point(4, 22);
             this.tabDisplayProgress.Name = "tabDisplayProgress";
             this.tabDisplayProgress.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDisplayProgress.Size = new System.Drawing.Size(1085, 443);
+            this.tabDisplayProgress.Size = new System.Drawing.Size(1089, 443);
             this.tabDisplayProgress.TabIndex = 1;
             this.tabDisplayProgress.Text = "Gedcom Stats";
             this.tabDisplayProgress.UseVisualStyleBackColor = true;
@@ -2506,15 +2507,6 @@ namespace FTAnalyzer
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1074, 109);
             this.panel2.TabIndex = 12;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(971, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox1.TabIndex = 18;
-            this.pictureBox1.TabStop = false;
             // 
             // LbProgramName
             // 
@@ -2610,7 +2602,7 @@ namespace FTAnalyzer
             this.tabSelector.Location = new System.Drawing.Point(0, 27);
             this.tabSelector.Name = "tabSelector";
             this.tabSelector.SelectedIndex = 0;
-            this.tabSelector.Size = new System.Drawing.Size(1093, 469);
+            this.tabSelector.Size = new System.Drawing.Size(1097, 469);
             this.tabSelector.TabIndex = 9;
             this.tabSelector.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             // 
@@ -3466,7 +3458,7 @@ namespace FTAnalyzer
             this.rtbOutput.Location = new System.Drawing.Point(0, 118);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.ReadOnly = true;
-            this.rtbOutput.Size = new System.Drawing.Size(1079, 325);
+            this.rtbOutput.Size = new System.Drawing.Size(1083, 325);
             this.rtbOutput.TabIndex = 13;
             this.rtbOutput.Text = "";
             this.rtbOutput.TextChanged += new System.EventHandler(this.RtbOutput_TextChanged);
@@ -3517,13 +3509,15 @@ namespace FTAnalyzer
             // 
             // rtbLCoutput
             // 
+            this.rtbLCoutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbLCoutput.BackColor = System.Drawing.SystemColors.Control;
-            this.rtbLCoutput.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.rtbLCoutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbLCoutput.Location = new System.Drawing.Point(3, 206);
+            this.rtbLCoutput.Location = new System.Drawing.Point(3, 203);
             this.rtbLCoutput.Name = "rtbLCoutput";
             this.rtbLCoutput.ReadOnly = true;
-            this.rtbLCoutput.Size = new System.Drawing.Size(1075, 212);
+            this.rtbLCoutput.Size = new System.Drawing.Size(1088, 202);
             this.rtbLCoutput.TabIndex = 38;
             this.rtbLCoutput.TabStop = false;
             this.rtbLCoutput.Text = "";
@@ -3585,12 +3579,21 @@ namespace FTAnalyzer
             this.rtbToday.TabIndex = 7;
             this.rtbToday.Text = "";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(971, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 19;
+            this.pictureBox1.TabStop = false;
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1093, 521);
+            this.ClientSize = new System.Drawing.Size(1109, 521);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tabSelector);
@@ -3658,7 +3661,6 @@ namespace FTAnalyzer
             this.tabDisplayProgress.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabSelector.ResumeLayout(false);
             this.tabMainLists.ResumeLayout(false);
             this.tabMainListsSelector.ResumeLayout(false);
@@ -3688,6 +3690,7 @@ namespace FTAnalyzer
             this.tabToday.ResumeLayout(false);
             this.tabToday.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3931,7 +3934,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.TabPage tabLooseDeaths;
         private System.Windows.Forms.DataGridView dgLooseDeaths;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label LbProgramName;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ProgressBar pbRelationships;
@@ -4002,6 +4004,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.RichTextBox rtbLCUpdateData;
         private Utilities.ScrollingRichTextBox rtbLCoutput;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

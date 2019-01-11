@@ -708,9 +708,12 @@ namespace FTAnalyzer.Utilities
                             string CensusYear = reader["CensusYear"].ToString();
                             string CensusCountry = reader["CensusCountry"].ToString();
                             string CensusRef = reader["CensusRef"].ToString();
-                            FactLocation location = FactLocation.GetLocation(CensusCountry);
-                            Fact f = new Fact(CensusRef, Fact.LOSTCOUSINS, new FactDate(CensusYear), location, string.Empty, true, true);
-                            ind?.AddFact(f);
+                            if (!ind.IsLostCousinsEntered(CensusDate.GetLostCousinsCensusYear(new FactDate(CensusYear),true)))
+                            { 
+                                FactLocation location = FactLocation.GetLocation(CensusCountry);
+                                Fact f = new Fact(CensusRef, Fact.LOSTCOUSINS, new FactDate(CensusYear), location, string.Empty, true, true);
+                                ind?.AddFact(f);
+                            }
                             count++;
                         }
                         else

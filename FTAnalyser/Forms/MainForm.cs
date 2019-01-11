@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.3.0.0-beta2";
+        public static string VERSION = "7.3.0.0-beta4";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1625,7 +1625,7 @@ namespace FTAnalyzer
         {
             IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(censusDate, true, false);
             Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType, true);
-            Predicate<CensusIndividual> missingLC = x => x.MissingLostCousins(censusDate, false) && x.IsKnownCensusReference;
+            Predicate<CensusIndividual> missingLC = x => x.MissingLostCousins(censusDate, false) && x.CensusReference?.Status == CensusReference.ReferenceStatus.GOOD;
             Predicate<CensusIndividual> filter = FilterUtils.AndFilter(relationFilter, missingLC);
             List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Filter(filter).ToList();
             individuals = LCRemoveDuplicateIndividuals(individuals);
