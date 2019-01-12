@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.3.0.0-beta5";
+        public static string VERSION = "7.3.0.0-beta7";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1593,7 +1593,8 @@ namespace FTAnalyzer
                 {
                     Progress<string> outputText = new Progress<string>(value => { rtbLCoutput.AppendText(value); });
                     int count = await Task.Run(() => ExportToLostCousins.ProcessList(LCUpdates, outputText));
-                    await Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.UpdateLostCousins, count.ToString());
+                    string resultText = $"{DateTime.Now.ToString("yyyy-MM-dd")} uploaded {count} records";
+                    await Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.UpdateLostCousins, resultText);
                     SpecialMethods.VisitWebsite("https://www.lostcousins.com/pages/members/ancestors/");
                     UpdateLostCousinsReport();
                     UpdateLCOutput();
