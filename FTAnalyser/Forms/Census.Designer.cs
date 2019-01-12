@@ -32,22 +32,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Census));
             this.dgCensus = new System.Windows.Forms.DataGridView();
-            this.FamilyID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CensusLoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CensusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Occupation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BirthLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DeathDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DeathLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CensusStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Relation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CensusReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -64,11 +48,27 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.cbCensusSearchProvider = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.cbRegion = new System.Windows.Forms.ToolStripComboBox();
             this.btnHelp = new System.Windows.Forms.ToolStripButton();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuViewFacts = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.cbRegion = new System.Windows.Forms.ToolStripComboBox();
+            this.FamilyID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CensusLoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CensusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Occupation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BirthLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DeathDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DeathLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CensusStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Relation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CensusReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgCensus)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -114,145 +114,6 @@
             this.dgCensus.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgCensus_CellFormatting);
             this.dgCensus.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgCensus_ColumnHeaderMouseClick);
             this.dgCensus.ColumnSortModeChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.DgCensus_ColumnSortModeChanged);
-            // 
-            // FamilyID
-            // 
-            this.FamilyID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.FamilyID.DataPropertyName = "FamilyID";
-            this.FamilyID.HeaderText = "Family ID";
-            this.FamilyID.Name = "FamilyID";
-            this.FamilyID.ReadOnly = true;
-            // 
-            // Position
-            // 
-            this.Position.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Position.DataPropertyName = "Position";
-            this.Position.HeaderText = "Position";
-            this.Position.Name = "Position";
-            this.Position.ReadOnly = true;
-            this.Position.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Position.Visible = false;
-            this.Position.Width = 5;
-            // 
-            // IndividualID
-            // 
-            this.IndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.IndividualID.DataPropertyName = "IndividualID";
-            this.IndividualID.HeaderText = "Ind. ID";
-            this.IndividualID.Name = "IndividualID";
-            this.IndividualID.ReadOnly = true;
-            // 
-            // CensusLoc
-            // 
-            this.CensusLoc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.CensusLoc.DataPropertyName = "CensusLocation";
-            this.CensusLoc.HeaderText = "Likely Census Location";
-            this.CensusLoc.Name = "CensusLoc";
-            this.CensusLoc.ReadOnly = true;
-            // 
-            // CensusName
-            // 
-            this.CensusName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.CensusName.DataPropertyName = "CensusName";
-            this.CensusName.HeaderText = "Census Name";
-            this.CensusName.Name = "CensusName";
-            this.CensusName.ReadOnly = true;
-            // 
-            // Age
-            // 
-            this.Age.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Age.DataPropertyName = "Age";
-            this.Age.HeaderText = "Age";
-            this.Age.Name = "Age";
-            this.Age.ReadOnly = true;
-            // 
-            // Occupation
-            // 
-            this.Occupation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Occupation.DataPropertyName = "Occupation";
-            this.Occupation.HeaderText = "Occupation";
-            this.Occupation.Name = "Occupation";
-            this.Occupation.ReadOnly = true;
-            // 
-            // BirthDate
-            // 
-            this.BirthDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.BirthDate.DataPropertyName = "BirthDate";
-            this.BirthDate.HeaderText = "Birth Date";
-            this.BirthDate.MinimumWidth = 50;
-            this.BirthDate.Name = "BirthDate";
-            this.BirthDate.ReadOnly = true;
-            this.BirthDate.Width = 150;
-            // 
-            // BirthLocation
-            // 
-            this.BirthLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.BirthLocation.DataPropertyName = "BirthLocation";
-            this.BirthLocation.HeaderText = "Birth Location";
-            this.BirthLocation.Name = "BirthLocation";
-            this.BirthLocation.ReadOnly = true;
-            // 
-            // DeathDate
-            // 
-            this.DeathDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.DeathDate.DataPropertyName = "DeathDate";
-            this.DeathDate.HeaderText = "Death Date";
-            this.DeathDate.MinimumWidth = 50;
-            this.DeathDate.Name = "DeathDate";
-            this.DeathDate.ReadOnly = true;
-            this.DeathDate.Width = 150;
-            // 
-            // DeathLocation
-            // 
-            this.DeathLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.DeathLocation.DataPropertyName = "DeathLocation";
-            this.DeathLocation.HeaderText = "DeathLocation";
-            this.DeathLocation.Name = "DeathLocation";
-            this.DeathLocation.ReadOnly = true;
-            // 
-            // CensusStatus
-            // 
-            this.CensusStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.CensusStatus.DataPropertyName = "CensusStatus";
-            this.CensusStatus.HeaderText = "Husband / Wife / Child";
-            this.CensusStatus.Name = "CensusStatus";
-            this.CensusStatus.ReadOnly = true;
-            // 
-            // Relation
-            // 
-            this.Relation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Relation.DataPropertyName = "Relation";
-            this.Relation.HeaderText = "Relation";
-            this.Relation.Name = "Relation";
-            this.Relation.ReadOnly = true;
-            // 
-            // RelationToRoot
-            // 
-            this.RelationToRoot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.RelationToRoot.DataPropertyName = "RelationToRoot";
-            this.RelationToRoot.HeaderText = "Relation To Root";
-            this.RelationToRoot.MinimumWidth = 50;
-            this.RelationToRoot.Name = "RelationToRoot";
-            this.RelationToRoot.ReadOnly = true;
-            this.RelationToRoot.Width = 150;
-            // 
-            // CensusReference
-            // 
-            this.CensusReference.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.CensusReference.DataPropertyName = "CensusReference";
-            this.CensusReference.HeaderText = "Census Reference";
-            this.CensusReference.MinimumWidth = 50;
-            this.CensusReference.Name = "CensusReference";
-            this.CensusReference.ReadOnly = true;
-            this.CensusReference.Width = 250;
-            // 
-            // Ahnentafel
-            // 
-            this.Ahnentafel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Ahnentafel.DataPropertyName = "Ahnentafel";
-            this.Ahnentafel.HeaderText = "Ahnentafel";
-            this.Ahnentafel.Name = "Ahnentafel";
-            this.Ahnentafel.ReadOnly = true;
             // 
             // statusStrip
             // 
@@ -404,6 +265,28 @@
             this.cbCensusSearchProvider.Size = new System.Drawing.Size(121, 25);
             this.cbCensusSearchProvider.SelectedIndexChanged += new System.EventHandler(this.CbCensusSearchProvider_SelectedIndexChanged);
             // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(47, 22);
+            this.toolStripLabel2.Text = "Region:";
+            // 
+            // cbRegion
+            // 
+            this.cbRegion.AutoCompleteCustomSource.AddRange(new string[] {
+            ".com",
+            ".co.uk",
+            ".ca",
+            ".com.au"});
+            this.cbRegion.Items.AddRange(new object[] {
+            ".com",
+            ".co.uk",
+            ".ca",
+            ".com.au"});
+            this.cbRegion.Name = "cbRegion";
+            this.cbRegion.Size = new System.Drawing.Size(121, 25);
+            this.cbRegion.Text = ".co.uk";
+            // 
             // btnHelp
             // 
             this.btnHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -428,27 +311,144 @@
             this.mnuViewFacts.Text = "View Individuals Facts";
             this.mnuViewFacts.Click += new System.EventHandler(this.MnuViewFacts_Click);
             // 
-            // toolStripLabel2
+            // FamilyID
             // 
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(47, 22);
-            this.toolStripLabel2.Text = "Region:";
+            this.FamilyID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.FamilyID.DataPropertyName = "FamilyID";
+            this.FamilyID.HeaderText = "Family ID";
+            this.FamilyID.Name = "FamilyID";
+            this.FamilyID.ReadOnly = true;
             // 
-            // cbRegion
+            // Position
             // 
-            this.cbRegion.AutoCompleteCustomSource.AddRange(new string[] {
-            ".com",
-            ".co.uk",
-            ".ca",
-            ".com.au"});
-            this.cbRegion.Items.AddRange(new object[] {
-            ".com",
-            ".co.uk",
-            ".ca",
-            ".com.au"});
-            this.cbRegion.Name = "cbRegion";
-            this.cbRegion.Size = new System.Drawing.Size(121, 25);
-            this.cbRegion.Text = ".co.uk";
+            this.Position.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Position.DataPropertyName = "Position";
+            this.Position.HeaderText = "Position";
+            this.Position.Name = "Position";
+            this.Position.ReadOnly = true;
+            this.Position.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Position.Visible = false;
+            this.Position.Width = 5;
+            // 
+            // IndividualID
+            // 
+            this.IndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.IndividualID.DataPropertyName = "IndividualID";
+            this.IndividualID.HeaderText = "Ind. ID";
+            this.IndividualID.Name = "IndividualID";
+            this.IndividualID.ReadOnly = true;
+            // 
+            // CensusLoc
+            // 
+            this.CensusLoc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CensusLoc.DataPropertyName = "CensusLocation";
+            this.CensusLoc.HeaderText = "Likely Census Location";
+            this.CensusLoc.Name = "CensusLoc";
+            this.CensusLoc.ReadOnly = true;
+            // 
+            // CensusName
+            // 
+            this.CensusName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CensusName.DataPropertyName = "CensusName";
+            this.CensusName.HeaderText = "Census Name";
+            this.CensusName.Name = "CensusName";
+            this.CensusName.ReadOnly = true;
+            // 
+            // Age
+            // 
+            this.Age.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Age.DataPropertyName = "Age";
+            this.Age.HeaderText = "Age";
+            this.Age.Name = "Age";
+            this.Age.ReadOnly = true;
+            // 
+            // Occupation
+            // 
+            this.Occupation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Occupation.DataPropertyName = "Occupation";
+            this.Occupation.HeaderText = "Occupation";
+            this.Occupation.Name = "Occupation";
+            this.Occupation.ReadOnly = true;
+            // 
+            // BirthDate
+            // 
+            this.BirthDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.BirthDate.DataPropertyName = "BirthDate";
+            this.BirthDate.HeaderText = "Birth Date";
+            this.BirthDate.MinimumWidth = 50;
+            this.BirthDate.Name = "BirthDate";
+            this.BirthDate.ReadOnly = true;
+            this.BirthDate.Width = 150;
+            // 
+            // BirthLocation
+            // 
+            this.BirthLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.BirthLocation.DataPropertyName = "BirthLocation";
+            this.BirthLocation.HeaderText = "Birth Location";
+            this.BirthLocation.Name = "BirthLocation";
+            this.BirthLocation.ReadOnly = true;
+            // 
+            // DeathDate
+            // 
+            this.DeathDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.DeathDate.DataPropertyName = "DeathDate";
+            this.DeathDate.HeaderText = "Death Date";
+            this.DeathDate.MinimumWidth = 50;
+            this.DeathDate.Name = "DeathDate";
+            this.DeathDate.ReadOnly = true;
+            this.DeathDate.Width = 150;
+            // 
+            // DeathLocation
+            // 
+            this.DeathLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.DeathLocation.DataPropertyName = "DeathLocation";
+            this.DeathLocation.HeaderText = "DeathLocation";
+            this.DeathLocation.Name = "DeathLocation";
+            this.DeathLocation.ReadOnly = true;
+            // 
+            // CensusStatus
+            // 
+            this.CensusStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CensusStatus.DataPropertyName = "CensusStatus";
+            this.CensusStatus.HeaderText = "Husband / Wife / Child";
+            this.CensusStatus.Name = "CensusStatus";
+            this.CensusStatus.ReadOnly = true;
+            // 
+            // Relation
+            // 
+            this.Relation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Relation.DataPropertyName = "Relation";
+            this.Relation.HeaderText = "Relation";
+            this.Relation.Name = "Relation";
+            this.Relation.ReadOnly = true;
+            // 
+            // RelationToRoot
+            // 
+            this.RelationToRoot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.RelationToRoot.DataPropertyName = "RelationToRoot";
+            this.RelationToRoot.HeaderText = "Relation To Root";
+            this.RelationToRoot.MinimumWidth = 50;
+            this.RelationToRoot.Name = "RelationToRoot";
+            this.RelationToRoot.ReadOnly = true;
+            this.RelationToRoot.Width = 150;
+            // 
+            // CensusReference
+            // 
+            this.CensusReference.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CensusReference.DataPropertyName = "CensusRef";
+            this.CensusReference.HeaderText = "Census Reference";
+            this.CensusReference.MinimumWidth = 50;
+            this.CensusReference.Name = "CensusReference";
+            this.CensusReference.ReadOnly = true;
+            this.CensusReference.Width = 250;
+            // 
+            // Ahnentafel
+            // 
+            this.Ahnentafel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Ahnentafel.DataPropertyName = "Ahnentafel";
+            this.Ahnentafel.HeaderText = "Ahnentafel";
+            this.Ahnentafel.Name = "Ahnentafel";
+            this.Ahnentafel.ReadOnly = true;
             // 
             // Census
             // 
@@ -497,6 +497,8 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem mnuViewFacts;
         private System.Windows.Forms.ToolStripButton btnHelp;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.ToolStripComboBox cbRegion;
         private System.Windows.Forms.DataGridViewTextBoxColumn FamilyID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Position;
         private System.Windows.Forms.DataGridViewTextBoxColumn IndividualID;
@@ -513,7 +515,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn RelationToRoot;
         private System.Windows.Forms.DataGridViewTextBoxColumn CensusReference;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ahnentafel;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
-        private System.Windows.Forms.ToolStripComboBox cbRegion;
     }
 }

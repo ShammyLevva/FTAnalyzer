@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.3.0.0-beta4";
+        public static string VERSION = "7.3.0.0-beta5";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1687,7 +1687,11 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        void ChkLCRootPersonConfirm_CheckedChanged(object sender, EventArgs e) => btnUpdateLostCousinsWebsite.Enabled = chkLCRootPersonConfirm.Checked;
+        void ChkLCRootPersonConfirm_CheckedChanged(object sender, EventArgs e)
+        {
+            btnUpdateLostCousinsWebsite.Enabled = chkLCRootPersonConfirm.Checked;
+            btnUpdateLostCousinsWebsite.BackColor = chkLCRootPersonConfirm.Checked ? Color.LightGreen : Color.LightGray;
+        }
 
         void BtnLC1881EW_Click(object sender, EventArgs e)
         {

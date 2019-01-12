@@ -165,54 +165,6 @@
   <metadata name="Ahnentafel.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="FamilyID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Position.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="IndividualID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="CensusLoc.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="CensusName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Age.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Occupation.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="BirthDate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="BirthLocation.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="DeathDate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="DeathLocation.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="CensusStatus.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Relation.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="RelationToRoot.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="CensusReference.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Ahnentafel.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="statusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -329,23 +281,23 @@
   <data name="btnHelp.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        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
 </value>
   </data>
   <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

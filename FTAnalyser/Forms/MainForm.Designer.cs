@@ -40,7 +40,7 @@ namespace FTAnalyzer
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -432,7 +432,7 @@ namespace FTAnalyzer
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1109, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1104, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1036,7 +1036,7 @@ namespace FTAnalyzer
             this.tsStatusLabel});
             this.statusStrip.Location = new System.Drawing.Point(0, 499);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1109, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1104, 22);
             this.statusStrip.TabIndex = 10;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -1159,14 +1159,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 166);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1575,7 +1575,7 @@ namespace FTAnalyzer
             this.tabLostCousins.Location = new System.Drawing.Point(4, 22);
             this.tabLostCousins.Name = "tabLostCousins";
             this.tabLostCousins.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLostCousins.Size = new System.Drawing.Size(1105, 443);
+            this.tabLostCousins.Size = new System.Drawing.Size(1084, 443);
             this.tabLostCousins.TabIndex = 5;
             this.tabLostCousins.Text = "Lost Cousins";
             this.tabLostCousins.UseVisualStyleBackColor = true;
@@ -1588,7 +1588,7 @@ namespace FTAnalyzer
             this.LCSubTabs.Location = new System.Drawing.Point(3, 3);
             this.LCSubTabs.Name = "LCSubTabs";
             this.LCSubTabs.SelectedIndex = 0;
-            this.LCSubTabs.Size = new System.Drawing.Size(1099, 437);
+            this.LCSubTabs.Size = new System.Drawing.Size(1078, 437);
             this.LCSubTabs.TabIndex = 0;
             // 
             // LCReportsTab
@@ -1838,7 +1838,7 @@ namespace FTAnalyzer
             this.LCUpdatesTab.Location = new System.Drawing.Point(4, 22);
             this.LCUpdatesTab.Name = "LCUpdatesTab";
             this.LCUpdatesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.LCUpdatesTab.Size = new System.Drawing.Size(1091, 411);
+            this.LCUpdatesTab.Size = new System.Drawing.Size(1070, 411);
             this.LCUpdatesTab.TabIndex = 1;
             this.LCUpdatesTab.Text = "Updates";
             this.LCUpdatesTab.UseVisualStyleBackColor = true;
@@ -1853,6 +1853,8 @@ namespace FTAnalyzer
             this.chkLCRootPersonConfirm.TabIndex = 4;
             this.chkLCRootPersonConfirm.Text = "rootperson";
             this.chkLCRootPersonConfirm.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTips.SetToolTip(this.chkLCRootPersonConfirm, "The Lost Cousins Data includes a relationship field please make sure the root per" +
+        "son relates to the root person on the Lost Cousins website.");
             this.chkLCRootPersonConfirm.UseVisualStyleBackColor = true;
             this.chkLCRootPersonConfirm.CheckedChanged += new System.EventHandler(this.ChkLCRootPersonConfirm_CheckedChanged);
             // 
@@ -2486,7 +2488,7 @@ namespace FTAnalyzer
             this.tabDisplayProgress.Location = new System.Drawing.Point(4, 22);
             this.tabDisplayProgress.Name = "tabDisplayProgress";
             this.tabDisplayProgress.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDisplayProgress.Size = new System.Drawing.Size(1089, 443);
+            this.tabDisplayProgress.Size = new System.Drawing.Size(1084, 443);
             this.tabDisplayProgress.TabIndex = 1;
             this.tabDisplayProgress.Text = "Gedcom Stats";
             this.tabDisplayProgress.UseVisualStyleBackColor = true;
@@ -2512,7 +2514,7 @@ namespace FTAnalyzer
             // 
             this.LbProgramName.AutoSize = true;
             this.LbProgramName.Font = new System.Drawing.Font("Kunstler Script", 52F, System.Drawing.FontStyle.Bold);
-            this.LbProgramName.Location = new System.Drawing.Point(456, 10);
+            this.LbProgramName.Location = new System.Drawing.Point(456, 13);
             this.LbProgramName.Name = "LbProgramName";
             this.LbProgramName.Size = new System.Drawing.Size(522, 76);
             this.LbProgramName.TabIndex = 17;
@@ -2602,7 +2604,7 @@ namespace FTAnalyzer
             this.tabSelector.Location = new System.Drawing.Point(0, 27);
             this.tabSelector.Name = "tabSelector";
             this.tabSelector.SelectedIndex = 0;
-            this.tabSelector.Size = new System.Drawing.Size(1097, 469);
+            this.tabSelector.Size = new System.Drawing.Size(1092, 469);
             this.tabSelector.TabIndex = 9;
             this.tabSelector.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             // 
@@ -3451,14 +3453,12 @@ namespace FTAnalyzer
             // 
             // rtbOutput
             // 
-            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbOutput.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbOutput.Location = new System.Drawing.Point(0, 118);
+            this.rtbOutput.Location = new System.Drawing.Point(3, 115);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.ReadOnly = true;
-            this.rtbOutput.Size = new System.Drawing.Size(1083, 325);
+            this.rtbOutput.Size = new System.Drawing.Size(1078, 325);
             this.rtbOutput.TabIndex = 13;
             this.rtbOutput.Text = "";
             this.rtbOutput.TextChanged += new System.EventHandler(this.RtbOutput_TextChanged);
@@ -3517,7 +3517,7 @@ namespace FTAnalyzer
             this.rtbLCoutput.Location = new System.Drawing.Point(3, 203);
             this.rtbLCoutput.Name = "rtbLCoutput";
             this.rtbLCoutput.ReadOnly = true;
-            this.rtbLCoutput.Size = new System.Drawing.Size(1088, 202);
+            this.rtbLCoutput.Size = new System.Drawing.Size(1067, 202);
             this.rtbLCoutput.TabIndex = 38;
             this.rtbLCoutput.TabStop = false;
             this.rtbLCoutput.Text = "";
@@ -3593,7 +3593,7 @@ namespace FTAnalyzer
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1109, 521);
+            this.ClientSize = new System.Drawing.Size(1104, 521);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tabSelector);
