@@ -1600,7 +1600,7 @@ namespace FTAnalyzer
                 }
             }
             else
-                UIHelpers.ShowMessage("You have no records to add to Lost Cousins at this time. Use the Research Suggestions to find more people on the census.");
+                UIHelpers.ShowMessage("You have no records to add to Lost Cousins at this time. Use the Research Suggestions to find more people on the census, or enter/update missing or incomplete census references.");
         }
 
         void UpdateLCOutput()
