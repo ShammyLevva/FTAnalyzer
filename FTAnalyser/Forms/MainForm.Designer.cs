@@ -40,7 +40,7 @@ namespace FTAnalyzer
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -134,6 +134,8 @@ namespace FTAnalyzer
             this.btnShowExclusions = new System.Windows.Forms.Button();
             this.dgDataErrors = new System.Windows.Forms.DataGridView();
             this.tbDuplicateScore = new System.Windows.Forms.TrackBar();
+            this.chkLCRootPersonConfirm = new System.Windows.Forms.CheckBox();
+            this.chkLCRootPersonConfirm2 = new System.Windows.Forms.CheckBox();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
@@ -145,6 +147,8 @@ namespace FTAnalyzer
             this.dgWorldWars = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
             this.txtWorldWarsSurname = new System.Windows.Forms.TextBox();
+            this.wardeadRelation = new FTAnalyzer.Controls.RelationTypes();
+            this.wardeadCountry = new FTAnalyzer.Controls.CensusCountry();
             this.ctxViewNotes = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuViewNotes = new System.Windows.Forms.ToolStripMenuItem();
             this.tabTreetops = new System.Windows.Forms.TabPage();
@@ -154,6 +158,8 @@ namespace FTAnalyzer
             this.btnTreeTops = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.txtTreetopsSurname = new System.Windows.Forms.TextBox();
+            this.treetopsRelation = new FTAnalyzer.Controls.RelationTypes();
+            this.treetopsCountry = new FTAnalyzer.Controls.CensusCountry();
             this.tabColourReports = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.btnAdvancedMissingData = new System.Windows.Forms.Button();
@@ -169,6 +175,7 @@ namespace FTAnalyzer
             this.btnColourBMD = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.txtColouredSurname = new System.Windows.Forms.TextBox();
+            this.relTypesColoured = new FTAnalyzer.Controls.RelationTypes();
             this.tabLostCousins = new System.Windows.Forms.TabPage();
             this.LCSubTabs = new System.Windows.Forms.TabControl();
             this.LCReportsTab = new System.Windows.Forms.TabPage();
@@ -192,8 +199,9 @@ namespace FTAnalyzer
             this.btnLC1881EW = new System.Windows.Forms.Button();
             this.btnLC1881Canada = new System.Windows.Forms.Button();
             this.btnLC1881Scot = new System.Windows.Forms.Button();
+            this.relTypesLC = new FTAnalyzer.Controls.RelationTypes();
             this.LCUpdatesTab = new System.Windows.Forms.TabPage();
-            this.chkLCRootPersonConfirm = new System.Windows.Forms.CheckBox();
+            this.rtbLCoutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.rtbLCUpdateData = new System.Windows.Forms.RichTextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
@@ -203,6 +211,13 @@ namespace FTAnalyzer
             this.txtLCEmail = new System.Windows.Forms.TextBox();
             this.txtLCPassword = new System.Windows.Forms.MaskedTextBox();
             this.btnUpdateLostCousinsWebsite = new System.Windows.Forms.Button();
+            this.LCVerify = new System.Windows.Forms.TabPage();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.btnLCLogin2 = new System.Windows.Forms.Button();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.txtLCEmail2 = new System.Windows.Forms.TextBox();
+            this.txtLCPassword2 = new System.Windows.Forms.MaskedTextBox();
             this.tabCensus = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnExportMissingCensusRefs = new System.Windows.Forms.Button();
@@ -225,6 +240,8 @@ namespace FTAnalyzer
             this.txtCensusSurname = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
+            this.cenDate = new FTAnalyzer.Controls.CensusDateSelector();
+            this.relTypesCensus = new FTAnalyzer.Controls.RelationTypes();
             this.btnShowCensusEntered = new System.Windows.Forms.Button();
             this.btnShowCensusMissing = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -247,7 +264,9 @@ namespace FTAnalyzer
             this.tabPlaces = new System.Windows.Forms.TabPage();
             this.dgPlaces = new System.Windows.Forms.DataGridView();
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
+            this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LbProgramName = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.pbRelationships = new System.Windows.Forms.ProgressBar();
@@ -309,6 +328,7 @@ namespace FTAnalyzer
             this.Individuals = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Families = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Marriages = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.reltypesSurnames = new FTAnalyzer.Controls.RelationTypes();
             this.tabFacts = new System.Windows.Forms.TabPage();
             this.btnDuplicateFacts = new System.Windows.Forms.Button();
             this.lblExclude = new System.Windows.Forms.Label();
@@ -321,6 +341,7 @@ namespace FTAnalyzer
             this.btnShowFacts = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtFactsSurname = new System.Windows.Forms.TextBox();
+            this.relTypesFacts = new FTAnalyzer.Controls.RelationTypes();
             this.tabToday = new System.Windows.Forms.TabPage();
             this.label18 = new System.Windows.Forms.Label();
             this.nudToday = new System.Windows.Forms.NumericUpDown();
@@ -331,30 +352,9 @@ namespace FTAnalyzer
             this.rbTodaySingle = new System.Windows.Forms.RadioButton();
             this.label17 = new System.Windows.Forms.Label();
             this.dpToday = new System.Windows.Forms.DateTimePicker();
+            this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
-            this.reltypesSurnames = new FTAnalyzer.Controls.RelationTypes();
-            this.relTypesFacts = new FTAnalyzer.Controls.RelationTypes();
-            this.cenDate = new FTAnalyzer.Controls.CensusDateSelector();
-            this.relTypesCensus = new FTAnalyzer.Controls.RelationTypes();
-            this.relTypesLC = new FTAnalyzer.Controls.RelationTypes();
-            this.rtbLCoutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
-            this.relTypesColoured = new FTAnalyzer.Controls.RelationTypes();
-            this.treetopsRelation = new FTAnalyzer.Controls.RelationTypes();
-            this.treetopsCountry = new FTAnalyzer.Controls.CensusCountry();
-            this.wardeadRelation = new FTAnalyzer.Controls.RelationTypes();
-            this.wardeadCountry = new FTAnalyzer.Controls.CensusCountry();
-            this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.LCVerify = new System.Windows.Forms.TabPage();
-            this.chkLCRootPersonConfirm2 = new System.Windows.Forms.CheckBox();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.btnLCLogin2 = new System.Windows.Forms.Button();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.txtLCEmail2 = new System.Windows.Forms.TextBox();
-            this.txtLCPassword2 = new System.Windows.Forms.MaskedTextBox();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -376,6 +376,8 @@ namespace FTAnalyzer
             this.Referrals.SuspendLayout();
             this.LCUpdatesTab.SuspendLayout();
             this.groupBox8.SuspendLayout();
+            this.LCVerify.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.tabCensus.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -396,6 +398,7 @@ namespace FTAnalyzer
             ((System.ComponentModel.ISupportInitialize)(this.dgPlaces)).BeginInit();
             this.tabDisplayProgress.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabSelector.SuspendLayout();
             this.tabMainLists.SuspendLayout();
             this.tabMainListsSelector.SuspendLayout();
@@ -422,9 +425,6 @@ namespace FTAnalyzer
             this.tabFacts.SuspendLayout();
             this.tabToday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.LCVerify.SuspendLayout();
-            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -1169,21 +1169,21 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 166);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
             this.dgDataErrors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgDataErrors.ShowCellToolTips = false;
             this.dgDataErrors.ShowEditingIcon = false;
-            this.dgDataErrors.Size = new System.Drawing.Size(1074, 251);
+            this.dgDataErrors.Size = new System.Drawing.Size(1073, 251);
             this.dgDataErrors.TabIndex = 6;
             this.toolTips.SetToolTip(this.dgDataErrors, "Double click to see list of facts for that individual");
             this.dgDataErrors.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgDataErrors_CellDoubleClick);
@@ -1202,6 +1202,36 @@ namespace FTAnalyzer
             this.toolTips.SetToolTip(this.tbDuplicateScore, "Adjust Slider to right to limit results to more likely matches");
             this.tbDuplicateScore.Value = 1;
             this.tbDuplicateScore.Scroll += new System.EventHandler(this.TbDuplicateScore_Scroll);
+            // 
+            // chkLCRootPersonConfirm
+            // 
+            this.chkLCRootPersonConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkLCRootPersonConfirm.Location = new System.Drawing.Point(30, 147);
+            this.chkLCRootPersonConfirm.Name = "chkLCRootPersonConfirm";
+            this.chkLCRootPersonConfirm.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkLCRootPersonConfirm.Size = new System.Drawing.Size(407, 24);
+            this.chkLCRootPersonConfirm.TabIndex = 4;
+            this.chkLCRootPersonConfirm.Text = "rootperson";
+            this.chkLCRootPersonConfirm.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTips.SetToolTip(this.chkLCRootPersonConfirm, "The Lost Cousins Data includes a relationship field please make sure the root per" +
+        "son relates to the root person on the Lost Cousins website.");
+            this.chkLCRootPersonConfirm.UseVisualStyleBackColor = true;
+            this.chkLCRootPersonConfirm.CheckedChanged += new System.EventHandler(this.ChkLCRootPersonConfirm_CheckedChanged);
+            // 
+            // chkLCRootPersonConfirm2
+            // 
+            this.chkLCRootPersonConfirm2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkLCRootPersonConfirm2.Location = new System.Drawing.Point(30, 146);
+            this.chkLCRootPersonConfirm2.Name = "chkLCRootPersonConfirm2";
+            this.chkLCRootPersonConfirm2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkLCRootPersonConfirm2.Size = new System.Drawing.Size(407, 24);
+            this.chkLCRootPersonConfirm2.TabIndex = 6;
+            this.chkLCRootPersonConfirm2.Text = "rootperson";
+            this.chkLCRootPersonConfirm2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTips.SetToolTip(this.chkLCRootPersonConfirm2, "The Lost Cousins Data includes a relationship field please make sure the root per" +
+        "son relates to the root person on the Lost Cousins website.");
+            this.chkLCRootPersonConfirm2.UseVisualStyleBackColor = true;
+            this.chkLCRootPersonConfirm2.CheckedChanged += new System.EventHandler(this.ChkLCRootPersonConfirm2_CheckedChanged);
             // 
             // printPreviewDialog
             // 
@@ -1232,7 +1262,7 @@ namespace FTAnalyzer
             this.tabWorldWars.Controls.Add(this.wardeadCountry);
             this.tabWorldWars.Location = new System.Drawing.Point(4, 22);
             this.tabWorldWars.Name = "tabWorldWars";
-            this.tabWorldWars.Size = new System.Drawing.Size(1085, 443);
+            this.tabWorldWars.Size = new System.Drawing.Size(1084, 443);
             this.tabWorldWars.TabIndex = 8;
             this.tabWorldWars.Text = "World Wars";
             this.tabWorldWars.ToolTipText = "Find men of fighting age during WWI & WWII";
@@ -1316,6 +1346,23 @@ namespace FTAnalyzer
             this.txtWorldWarsSurname.Size = new System.Drawing.Size(201, 20);
             this.txtWorldWarsSurname.TabIndex = 27;
             // 
+            // wardeadRelation
+            // 
+            this.wardeadRelation.Location = new System.Drawing.Point(270, 3);
+            this.wardeadRelation.MarriedToDB = true;
+            this.wardeadRelation.Name = "wardeadRelation";
+            this.wardeadRelation.Size = new System.Drawing.Size(322, 100);
+            this.wardeadRelation.TabIndex = 26;
+            // 
+            // wardeadCountry
+            // 
+            this.wardeadCountry.Location = new System.Drawing.Point(8, 25);
+            this.wardeadCountry.Name = "wardeadCountry";
+            this.wardeadCountry.Size = new System.Drawing.Size(256, 74);
+            this.wardeadCountry.TabIndex = 25;
+            this.wardeadCountry.Title = "Default Country";
+            this.wardeadCountry.UKEnabled = true;
+            // 
             // ctxViewNotes
             // 
             this.ctxViewNotes.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1343,7 +1390,7 @@ namespace FTAnalyzer
             this.tabTreetops.Controls.Add(this.treetopsCountry);
             this.tabTreetops.Location = new System.Drawing.Point(4, 22);
             this.tabTreetops.Name = "tabTreetops";
-            this.tabTreetops.Size = new System.Drawing.Size(1085, 443);
+            this.tabTreetops.Size = new System.Drawing.Size(1084, 443);
             this.tabTreetops.TabIndex = 7;
             this.tabTreetops.Text = "Treetops";
             this.tabTreetops.UseVisualStyleBackColor = true;
@@ -1418,6 +1465,23 @@ namespace FTAnalyzer
             this.txtTreetopsSurname.Size = new System.Drawing.Size(201, 20);
             this.txtTreetopsSurname.TabIndex = 23;
             // 
+            // treetopsRelation
+            // 
+            this.treetopsRelation.Location = new System.Drawing.Point(270, 3);
+            this.treetopsRelation.MarriedToDB = true;
+            this.treetopsRelation.Name = "treetopsRelation";
+            this.treetopsRelation.Size = new System.Drawing.Size(322, 96);
+            this.treetopsRelation.TabIndex = 12;
+            // 
+            // treetopsCountry
+            // 
+            this.treetopsCountry.Location = new System.Drawing.Point(8, 25);
+            this.treetopsCountry.Name = "treetopsCountry";
+            this.treetopsCountry.Size = new System.Drawing.Size(256, 74);
+            this.treetopsCountry.TabIndex = 11;
+            this.treetopsCountry.Title = "Default Country";
+            this.treetopsCountry.UKEnabled = true;
+            // 
             // tabColourReports
             // 
             this.tabColourReports.Controls.Add(this.groupBox7);
@@ -1431,7 +1495,7 @@ namespace FTAnalyzer
             this.tabColourReports.Controls.Add(this.relTypesColoured);
             this.tabColourReports.Location = new System.Drawing.Point(4, 22);
             this.tabColourReports.Name = "tabColourReports";
-            this.tabColourReports.Size = new System.Drawing.Size(1085, 443);
+            this.tabColourReports.Size = new System.Drawing.Size(1084, 443);
             this.tabColourReports.TabIndex = 12;
             this.tabColourReports.Text = "Research Suggestions";
             this.tabColourReports.UseVisualStyleBackColor = true;
@@ -1578,6 +1642,15 @@ namespace FTAnalyzer
             this.txtColouredSurname.Size = new System.Drawing.Size(201, 20);
             this.txtColouredSurname.TabIndex = 30;
             this.txtColouredSurname.TextChanged += new System.EventHandler(this.TxtColouredSurname_TextChanged);
+            // 
+            // relTypesColoured
+            // 
+            this.relTypesColoured.Location = new System.Drawing.Point(8, 8);
+            this.relTypesColoured.MarriedToDB = true;
+            this.relTypesColoured.Name = "relTypesColoured";
+            this.relTypesColoured.Size = new System.Drawing.Size(325, 102);
+            this.relTypesColoured.TabIndex = 26;
+            this.relTypesColoured.RelationTypesChanged += new System.EventHandler(this.RelTypesColoured_RelationTypesChanged);
             // 
             // tabLostCousins
             // 
@@ -1838,6 +1911,15 @@ namespace FTAnalyzer
             this.btnLC1881Scot.UseVisualStyleBackColor = true;
             this.btnLC1881Scot.Click += new System.EventHandler(this.BtnLC1881Scot_Click);
             // 
+            // relTypesLC
+            // 
+            this.relTypesLC.Location = new System.Drawing.Point(6, 6);
+            this.relTypesLC.MarriedToDB = true;
+            this.relTypesLC.Name = "relTypesLC";
+            this.relTypesLC.Size = new System.Drawing.Size(325, 103);
+            this.relTypesLC.TabIndex = 36;
+            this.relTypesLC.RelationTypesChanged += new System.EventHandler(this.RelTypesLC_RelationTypesChanged);
+            // 
             // LCUpdatesTab
             // 
             this.LCUpdatesTab.Controls.Add(this.rtbLCoutput);
@@ -1854,20 +1936,21 @@ namespace FTAnalyzer
             this.LCUpdatesTab.Text = "Updates";
             this.LCUpdatesTab.UseVisualStyleBackColor = true;
             // 
-            // chkLCRootPersonConfirm
+            // rtbLCoutput
             // 
-            this.chkLCRootPersonConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkLCRootPersonConfirm.Location = new System.Drawing.Point(30, 147);
-            this.chkLCRootPersonConfirm.Name = "chkLCRootPersonConfirm";
-            this.chkLCRootPersonConfirm.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkLCRootPersonConfirm.Size = new System.Drawing.Size(407, 24);
-            this.chkLCRootPersonConfirm.TabIndex = 4;
-            this.chkLCRootPersonConfirm.Text = "rootperson";
-            this.chkLCRootPersonConfirm.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.toolTips.SetToolTip(this.chkLCRootPersonConfirm, "The Lost Cousins Data includes a relationship field please make sure the root per" +
-        "son relates to the root person on the Lost Cousins website.");
-            this.chkLCRootPersonConfirm.UseVisualStyleBackColor = true;
-            this.chkLCRootPersonConfirm.CheckedChanged += new System.EventHandler(this.ChkLCRootPersonConfirm_CheckedChanged);
+            this.rtbLCoutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbLCoutput.BackColor = System.Drawing.SystemColors.Control;
+            this.rtbLCoutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbLCoutput.Location = new System.Drawing.Point(3, 203);
+            this.rtbLCoutput.Name = "rtbLCoutput";
+            this.rtbLCoutput.ReadOnly = true;
+            this.rtbLCoutput.Size = new System.Drawing.Size(1067, 202);
+            this.rtbLCoutput.TabIndex = 38;
+            this.rtbLCoutput.TabStop = false;
+            this.rtbLCoutput.Text = "";
+            this.rtbLCoutput.TextChanged += new System.EventHandler(this.RtbLCoutput_TextChanged);
             // 
             // label21
             // 
@@ -1965,6 +2048,77 @@ namespace FTAnalyzer
             this.btnUpdateLostCousinsWebsite.Visible = false;
             this.btnUpdateLostCousinsWebsite.Click += new System.EventHandler(this.BtnUpdateLostCousinsWebsite_Click);
             // 
+            // LCVerify
+            // 
+            this.LCVerify.Controls.Add(this.chkLCRootPersonConfirm2);
+            this.LCVerify.Controls.Add(this.groupBox9);
+            this.LCVerify.Location = new System.Drawing.Point(4, 22);
+            this.LCVerify.Name = "LCVerify";
+            this.LCVerify.Size = new System.Drawing.Size(1070, 411);
+            this.LCVerify.TabIndex = 2;
+            this.LCVerify.Text = "Verify";
+            this.LCVerify.UseVisualStyleBackColor = true;
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.btnLCLogin2);
+            this.groupBox9.Controls.Add(this.label22);
+            this.groupBox9.Controls.Add(this.label23);
+            this.groupBox9.Controls.Add(this.txtLCEmail2);
+            this.groupBox9.Controls.Add(this.txtLCPassword2);
+            this.groupBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox9.Location = new System.Drawing.Point(30, 22);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(407, 118);
+            this.groupBox9.TabIndex = 5;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Lost Cousins Login Details";
+            // 
+            // btnLCLogin2
+            // 
+            this.btnLCLogin2.BackColor = System.Drawing.Color.Red;
+            this.btnLCLogin2.Location = new System.Drawing.Point(310, 68);
+            this.btnLCLogin2.Name = "btnLCLogin2";
+            this.btnLCLogin2.Size = new System.Drawing.Size(75, 25);
+            this.btnLCLogin2.TabIndex = 3;
+            this.btnLCLogin2.Text = "Login";
+            this.btnLCLogin2.UseVisualStyleBackColor = false;
+            this.btnLCLogin2.Click += new System.EventHandler(this.BtnLCLogin_Click);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(34, 72);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(68, 16);
+            this.label22.TabIndex = 3;
+            this.label22.Text = "Password";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(6, 31);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(96, 16);
+            this.label23.TabIndex = 2;
+            this.label23.Text = "Email Address";
+            // 
+            // txtLCEmail2
+            // 
+            this.txtLCEmail2.Location = new System.Drawing.Point(108, 28);
+            this.txtLCEmail2.Name = "txtLCEmail2";
+            this.txtLCEmail2.Size = new System.Drawing.Size(277, 22);
+            this.txtLCEmail2.TabIndex = 1;
+            // 
+            // txtLCPassword2
+            // 
+            this.txtLCPassword2.Location = new System.Drawing.Point(108, 69);
+            this.txtLCPassword2.Name = "txtLCPassword2";
+            this.txtLCPassword2.PasswordChar = '*';
+            this.txtLCPassword2.Size = new System.Drawing.Size(196, 22);
+            this.txtLCPassword2.TabIndex = 2;
+            // 
             // tabCensus
             // 
             this.tabCensus.Controls.Add(this.groupBox6);
@@ -1975,7 +2129,7 @@ namespace FTAnalyzer
             this.tabCensus.Location = new System.Drawing.Point(4, 22);
             this.tabCensus.Name = "tabCensus";
             this.tabCensus.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCensus.Size = new System.Drawing.Size(1085, 443);
+            this.tabCensus.Size = new System.Drawing.Size(1084, 443);
             this.tabCensus.TabIndex = 0;
             this.tabCensus.Text = "Census";
             this.tabCensus.UseVisualStyleBackColor = true;
@@ -2218,6 +2372,24 @@ namespace FTAnalyzer
             0,
             0});
             // 
+            // cenDate
+            // 
+            this.cenDate.AutoSize = true;
+            this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cenDate.Country = "";
+            this.cenDate.Location = new System.Drawing.Point(9, 124);
+            this.cenDate.Name = "cenDate";
+            this.cenDate.Size = new System.Drawing.Size(234, 27);
+            this.cenDate.TabIndex = 28;
+            // 
+            // relTypesCensus
+            // 
+            this.relTypesCensus.Location = new System.Drawing.Point(9, 19);
+            this.relTypesCensus.MarriedToDB = true;
+            this.relTypesCensus.Name = "relTypesCensus";
+            this.relTypesCensus.Size = new System.Drawing.Size(325, 99);
+            this.relTypesCensus.TabIndex = 27;
+            // 
             // btnShowCensusEntered
             // 
             this.btnShowCensusEntered.Location = new System.Drawing.Point(159, 157);
@@ -2278,7 +2450,7 @@ namespace FTAnalyzer
             this.tabLocations.Location = new System.Drawing.Point(4, 22);
             this.tabLocations.Name = "tabLocations";
             this.tabLocations.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLocations.Size = new System.Drawing.Size(1085, 443);
+            this.tabLocations.Size = new System.Drawing.Size(1084, 443);
             this.tabLocations.TabIndex = 4;
             this.tabLocations.Text = "Locations";
             this.tabLocations.UseVisualStyleBackColor = true;
@@ -2329,7 +2501,7 @@ namespace FTAnalyzer
             this.tabCtrlLocations.Location = new System.Drawing.Point(3, 3);
             this.tabCtrlLocations.Name = "tabCtrlLocations";
             this.tabCtrlLocations.SelectedIndex = 0;
-            this.tabCtrlLocations.Size = new System.Drawing.Size(1079, 437);
+            this.tabCtrlLocations.Size = new System.Drawing.Size(1078, 437);
             this.tabCtrlLocations.TabIndex = 0;
             this.tabCtrlLocations.SelectedIndexChanged += new System.EventHandler(this.TabCtrlLocations_SelectedIndexChanged);
             this.tabCtrlLocations.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabCtrlLocations_Selecting);
@@ -2340,7 +2512,7 @@ namespace FTAnalyzer
             this.tabTreeView.Location = new System.Drawing.Point(4, 22);
             this.tabTreeView.Name = "tabTreeView";
             this.tabTreeView.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTreeView.Size = new System.Drawing.Size(1071, 411);
+            this.tabTreeView.Size = new System.Drawing.Size(1070, 411);
             this.tabTreeView.TabIndex = 5;
             this.tabTreeView.Text = "Tree View";
             this.tabTreeView.UseVisualStyleBackColor = true;
@@ -2356,7 +2528,7 @@ namespace FTAnalyzer
             this.treeViewLocations.Name = "treeViewLocations";
             this.treeViewLocations.SelectedImageIndex = 0;
             this.treeViewLocations.ShowNodeToolTips = true;
-            this.treeViewLocations.Size = new System.Drawing.Size(1065, 405);
+            this.treeViewLocations.Size = new System.Drawing.Size(1064, 405);
             this.treeViewLocations.TabIndex = 0;
             this.treeViewLocations.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewLocations_BeforeCollapse);
             this.treeViewLocations.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewLocations_BeforeExpand);
@@ -2504,6 +2676,18 @@ namespace FTAnalyzer
             this.tabDisplayProgress.Text = "Gedcom Stats";
             this.tabDisplayProgress.UseVisualStyleBackColor = true;
             // 
+            // rtbOutput
+            // 
+            this.rtbOutput.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbOutput.Location = new System.Drawing.Point(3, 118);
+            this.rtbOutput.Name = "rtbOutput";
+            this.rtbOutput.ReadOnly = true;
+            this.rtbOutput.Size = new System.Drawing.Size(1078, 322);
+            this.rtbOutput.TabIndex = 13;
+            this.rtbOutput.Text = "";
+            this.rtbOutput.TextChanged += new System.EventHandler(this.RtbOutput_TextChanged);
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.pictureBox1);
@@ -2521,11 +2705,20 @@ namespace FTAnalyzer
             this.panel2.Size = new System.Drawing.Size(1074, 109);
             this.panel2.TabIndex = 12;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(943, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 19;
+            this.pictureBox1.TabStop = false;
+            // 
             // LbProgramName
             // 
             this.LbProgramName.AutoSize = true;
             this.LbProgramName.Font = new System.Drawing.Font("Kunstler Script", 52F, System.Drawing.FontStyle.Bold);
-            this.LbProgramName.Location = new System.Drawing.Point(456, 13);
+            this.LbProgramName.Location = new System.Drawing.Point(415, 13);
             this.LbProgramName.Name = "LbProgramName";
             this.LbProgramName.Size = new System.Drawing.Size(522, 76);
             this.LbProgramName.TabIndex = 17;
@@ -2544,7 +2737,7 @@ namespace FTAnalyzer
             // 
             this.pbRelationships.Location = new System.Drawing.Point(134, 76);
             this.pbRelationships.Name = "pbRelationships";
-            this.pbRelationships.Size = new System.Drawing.Size(316, 16);
+            this.pbRelationships.Size = new System.Drawing.Size(275, 16);
             this.pbRelationships.TabIndex = 15;
             // 
             // label6
@@ -2560,7 +2753,7 @@ namespace FTAnalyzer
             // 
             this.pbFamilies.Location = new System.Drawing.Point(134, 54);
             this.pbFamilies.Name = "pbFamilies";
-            this.pbFamilies.Size = new System.Drawing.Size(316, 16);
+            this.pbFamilies.Size = new System.Drawing.Size(275, 16);
             this.pbFamilies.TabIndex = 13;
             // 
             // label5
@@ -2576,7 +2769,7 @@ namespace FTAnalyzer
             // 
             this.pbIndividuals.Location = new System.Drawing.Point(134, 32);
             this.pbIndividuals.Name = "pbIndividuals";
-            this.pbIndividuals.Size = new System.Drawing.Size(316, 16);
+            this.pbIndividuals.Size = new System.Drawing.Size(275, 16);
             this.pbIndividuals.TabIndex = 11;
             // 
             // label4
@@ -2592,7 +2785,7 @@ namespace FTAnalyzer
             // 
             this.pbSources.Location = new System.Drawing.Point(134, 10);
             this.pbSources.Name = "pbSources";
-            this.pbSources.Size = new System.Drawing.Size(316, 16);
+            this.pbSources.Size = new System.Drawing.Size(275, 16);
             this.pbSources.TabIndex = 9;
             // 
             // tabSelector
@@ -2625,7 +2818,7 @@ namespace FTAnalyzer
             this.tabMainLists.Location = new System.Drawing.Point(4, 22);
             this.tabMainLists.Name = "tabMainLists";
             this.tabMainLists.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMainLists.Size = new System.Drawing.Size(1085, 443);
+            this.tabMainLists.Size = new System.Drawing.Size(1084, 443);
             this.tabMainLists.TabIndex = 18;
             this.tabMainLists.Text = "Main Lists";
             this.tabMainLists.UseVisualStyleBackColor = true;
@@ -2640,7 +2833,7 @@ namespace FTAnalyzer
             this.tabMainListsSelector.Location = new System.Drawing.Point(3, 3);
             this.tabMainListsSelector.Name = "tabMainListsSelector";
             this.tabMainListsSelector.SelectedIndex = 0;
-            this.tabMainListsSelector.Size = new System.Drawing.Size(1079, 437);
+            this.tabMainListsSelector.Size = new System.Drawing.Size(1078, 437);
             this.tabMainListsSelector.TabIndex = 0;
             this.tabMainListsSelector.SelectedIndexChanged += new System.EventHandler(this.TabMainListSelector_SelectedIndexChanged);
             // 
@@ -2650,7 +2843,7 @@ namespace FTAnalyzer
             this.tabIndividuals.Location = new System.Drawing.Point(4, 22);
             this.tabIndividuals.Name = "tabIndividuals";
             this.tabIndividuals.Padding = new System.Windows.Forms.Padding(3);
-            this.tabIndividuals.Size = new System.Drawing.Size(1071, 411);
+            this.tabIndividuals.Size = new System.Drawing.Size(1070, 411);
             this.tabIndividuals.TabIndex = 0;
             this.tabIndividuals.Text = "Individuals";
             this.tabIndividuals.UseVisualStyleBackColor = true;
@@ -2667,7 +2860,7 @@ namespace FTAnalyzer
             this.dgIndividuals.Name = "dgIndividuals";
             this.dgIndividuals.ReadOnly = true;
             this.dgIndividuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgIndividuals.Size = new System.Drawing.Size(1065, 405);
+            this.dgIndividuals.Size = new System.Drawing.Size(1064, 405);
             this.dgIndividuals.TabIndex = 1;
             this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgIndividuals_CellDoubleClick);
             this.dgIndividuals.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgIndividuals_MouseDown);
@@ -2754,7 +2947,7 @@ namespace FTAnalyzer
             this.tabErrorsFixes.Controls.Add(this.tabErrorFixSelector);
             this.tabErrorsFixes.Location = new System.Drawing.Point(4, 22);
             this.tabErrorsFixes.Name = "tabErrorsFixes";
-            this.tabErrorsFixes.Size = new System.Drawing.Size(1085, 443);
+            this.tabErrorsFixes.Size = new System.Drawing.Size(1084, 443);
             this.tabErrorsFixes.TabIndex = 19;
             this.tabErrorsFixes.Text = "Errors/FIxes";
             this.tabErrorsFixes.UseVisualStyleBackColor = true;
@@ -2770,7 +2963,7 @@ namespace FTAnalyzer
             this.tabErrorFixSelector.Name = "tabErrorFixSelector";
             this.tabErrorFixSelector.SelectedIndex = 0;
             this.tabErrorFixSelector.ShowToolTips = true;
-            this.tabErrorFixSelector.Size = new System.Drawing.Size(1085, 443);
+            this.tabErrorFixSelector.Size = new System.Drawing.Size(1084, 443);
             this.tabErrorFixSelector.TabIndex = 0;
             this.tabErrorFixSelector.SelectedIndexChanged += new System.EventHandler(this.TabErrorFixSelector_SelectedIndexChanged);
             // 
@@ -2781,7 +2974,7 @@ namespace FTAnalyzer
             this.tabDataErrors.Location = new System.Drawing.Point(4, 22);
             this.tabDataErrors.Name = "tabDataErrors";
             this.tabDataErrors.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDataErrors.Size = new System.Drawing.Size(1077, 417);
+            this.tabDataErrors.Size = new System.Drawing.Size(1076, 417);
             this.tabDataErrors.TabIndex = 0;
             this.tabDataErrors.Text = "Data Errors";
             this.tabDataErrors.UseVisualStyleBackColor = true;
@@ -2794,7 +2987,7 @@ namespace FTAnalyzer
             this.gbDataErrorTypes.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbDataErrorTypes.Location = new System.Drawing.Point(3, 3);
             this.gbDataErrorTypes.Name = "gbDataErrorTypes";
-            this.gbDataErrorTypes.Size = new System.Drawing.Size(1071, 166);
+            this.gbDataErrorTypes.Size = new System.Drawing.Size(1070, 166);
             this.gbDataErrorTypes.TabIndex = 1;
             this.gbDataErrorTypes.TabStop = false;
             this.gbDataErrorTypes.Text = "Types of Data Error to display";
@@ -2830,7 +3023,7 @@ namespace FTAnalyzer
             this.ckbDataErrors.MultiColumn = true;
             this.ckbDataErrors.Name = "ckbDataErrors";
             this.ckbDataErrors.ScrollAlwaysVisible = true;
-            this.ckbDataErrors.Size = new System.Drawing.Size(1069, 109);
+            this.ckbDataErrors.Size = new System.Drawing.Size(1068, 109);
             this.ckbDataErrors.TabIndex = 0;
             this.ckbDataErrors.SelectedIndexChanged += new System.EventHandler(this.CkbDataErrors_SelectedIndexChanged);
             // 
@@ -3117,7 +3310,7 @@ namespace FTAnalyzer
             this.tabSurnames.Location = new System.Drawing.Point(4, 22);
             this.tabSurnames.Name = "tabSurnames";
             this.tabSurnames.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSurnames.Size = new System.Drawing.Size(1085, 443);
+            this.tabSurnames.Size = new System.Drawing.Size(1084, 443);
             this.tabSurnames.TabIndex = 14;
             this.tabSurnames.Text = "Surnames";
             this.tabSurnames.UseVisualStyleBackColor = true;
@@ -3198,6 +3391,14 @@ namespace FTAnalyzer
             this.Marriages.Name = "Marriages";
             this.Marriages.ReadOnly = true;
             // 
+            // reltypesSurnames
+            // 
+            this.reltypesSurnames.Location = new System.Drawing.Point(6, 3);
+            this.reltypesSurnames.MarriedToDB = true;
+            this.reltypesSurnames.Name = "reltypesSurnames";
+            this.reltypesSurnames.Size = new System.Drawing.Size(325, 99);
+            this.reltypesSurnames.TabIndex = 22;
+            // 
             // tabFacts
             // 
             this.tabFacts.Controls.Add(this.btnDuplicateFacts);
@@ -3216,7 +3417,7 @@ namespace FTAnalyzer
             this.tabFacts.Controls.Add(this.relTypesFacts);
             this.tabFacts.Location = new System.Drawing.Point(4, 22);
             this.tabFacts.Name = "tabFacts";
-            this.tabFacts.Size = new System.Drawing.Size(1085, 443);
+            this.tabFacts.Size = new System.Drawing.Size(1084, 443);
             this.tabFacts.TabIndex = 13;
             this.tabFacts.Text = "Facts";
             this.tabFacts.UseVisualStyleBackColor = true;
@@ -3334,6 +3535,15 @@ namespace FTAnalyzer
             this.txtFactsSurname.TabIndex = 22;
             this.txtFactsSurname.TextChanged += new System.EventHandler(this.TxtFactsSurname_TextChanged);
             // 
+            // relTypesFacts
+            // 
+            this.relTypesFacts.Location = new System.Drawing.Point(8, 3);
+            this.relTypesFacts.MarriedToDB = true;
+            this.relTypesFacts.Name = "relTypesFacts";
+            this.relTypesFacts.Size = new System.Drawing.Size(325, 100);
+            this.relTypesFacts.TabIndex = 21;
+            this.relTypesFacts.RelationTypesChanged += new System.EventHandler(this.RelTypesFacts_RelationTypesChanged);
+            // 
             // tabToday
             // 
             this.tabToday.Controls.Add(this.label18);
@@ -3349,7 +3559,7 @@ namespace FTAnalyzer
             this.tabToday.Location = new System.Drawing.Point(4, 22);
             this.tabToday.Name = "tabToday";
             this.tabToday.Padding = new System.Windows.Forms.Padding(3);
-            this.tabToday.Size = new System.Drawing.Size(1085, 443);
+            this.tabToday.Size = new System.Drawing.Size(1084, 443);
             this.tabToday.TabIndex = 17;
             this.tabToday.Text = "On This Day";
             this.tabToday.UseVisualStyleBackColor = true;
@@ -3452,131 +3662,6 @@ namespace FTAnalyzer
             this.dpToday.Size = new System.Drawing.Size(171, 20);
             this.dpToday.TabIndex = 8;
             // 
-            // saveDatabase
-            // 
-            this.saveDatabase.DefaultExt = "zip";
-            this.saveDatabase.Filter = "Zip Files | *.zip";
-            // 
-            // restoreDatabase
-            // 
-            this.restoreDatabase.FileName = "*.zip";
-            this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
-            // 
-            // rtbOutput
-            // 
-            this.rtbOutput.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbOutput.Location = new System.Drawing.Point(3, 115);
-            this.rtbOutput.Name = "rtbOutput";
-            this.rtbOutput.ReadOnly = true;
-            this.rtbOutput.Size = new System.Drawing.Size(1078, 325);
-            this.rtbOutput.TabIndex = 13;
-            this.rtbOutput.Text = "";
-            this.rtbOutput.TextChanged += new System.EventHandler(this.RtbOutput_TextChanged);
-            // 
-            // reltypesSurnames
-            // 
-            this.reltypesSurnames.Location = new System.Drawing.Point(6, 3);
-            this.reltypesSurnames.MarriedToDB = true;
-            this.reltypesSurnames.Name = "reltypesSurnames";
-            this.reltypesSurnames.Size = new System.Drawing.Size(325, 99);
-            this.reltypesSurnames.TabIndex = 22;
-            // 
-            // relTypesFacts
-            // 
-            this.relTypesFacts.Location = new System.Drawing.Point(8, 3);
-            this.relTypesFacts.MarriedToDB = true;
-            this.relTypesFacts.Name = "relTypesFacts";
-            this.relTypesFacts.Size = new System.Drawing.Size(325, 100);
-            this.relTypesFacts.TabIndex = 21;
-            this.relTypesFacts.RelationTypesChanged += new System.EventHandler(this.RelTypesFacts_RelationTypesChanged);
-            // 
-            // cenDate
-            // 
-            this.cenDate.AutoSize = true;
-            this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.cenDate.Country = "";
-            this.cenDate.Location = new System.Drawing.Point(9, 124);
-            this.cenDate.Name = "cenDate";
-            this.cenDate.Size = new System.Drawing.Size(234, 27);
-            this.cenDate.TabIndex = 28;
-            // 
-            // relTypesCensus
-            // 
-            this.relTypesCensus.Location = new System.Drawing.Point(9, 19);
-            this.relTypesCensus.MarriedToDB = true;
-            this.relTypesCensus.Name = "relTypesCensus";
-            this.relTypesCensus.Size = new System.Drawing.Size(325, 99);
-            this.relTypesCensus.TabIndex = 27;
-            // 
-            // relTypesLC
-            // 
-            this.relTypesLC.Location = new System.Drawing.Point(6, 6);
-            this.relTypesLC.MarriedToDB = true;
-            this.relTypesLC.Name = "relTypesLC";
-            this.relTypesLC.Size = new System.Drawing.Size(325, 103);
-            this.relTypesLC.TabIndex = 36;
-            this.relTypesLC.RelationTypesChanged += new System.EventHandler(this.RelTypesLC_RelationTypesChanged);
-            // 
-            // rtbLCoutput
-            // 
-            this.rtbLCoutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbLCoutput.BackColor = System.Drawing.SystemColors.Control;
-            this.rtbLCoutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbLCoutput.Location = new System.Drawing.Point(3, 203);
-            this.rtbLCoutput.Name = "rtbLCoutput";
-            this.rtbLCoutput.ReadOnly = true;
-            this.rtbLCoutput.Size = new System.Drawing.Size(1067, 202);
-            this.rtbLCoutput.TabIndex = 38;
-            this.rtbLCoutput.TabStop = false;
-            this.rtbLCoutput.Text = "";
-            this.rtbLCoutput.TextChanged += new System.EventHandler(this.RtbLCoutput_TextChanged);
-            // 
-            // relTypesColoured
-            // 
-            this.relTypesColoured.Location = new System.Drawing.Point(8, 8);
-            this.relTypesColoured.MarriedToDB = true;
-            this.relTypesColoured.Name = "relTypesColoured";
-            this.relTypesColoured.Size = new System.Drawing.Size(325, 102);
-            this.relTypesColoured.TabIndex = 26;
-            this.relTypesColoured.RelationTypesChanged += new System.EventHandler(this.RelTypesColoured_RelationTypesChanged);
-            // 
-            // treetopsRelation
-            // 
-            this.treetopsRelation.Location = new System.Drawing.Point(270, 3);
-            this.treetopsRelation.MarriedToDB = true;
-            this.treetopsRelation.Name = "treetopsRelation";
-            this.treetopsRelation.Size = new System.Drawing.Size(322, 96);
-            this.treetopsRelation.TabIndex = 12;
-            // 
-            // treetopsCountry
-            // 
-            this.treetopsCountry.Location = new System.Drawing.Point(8, 25);
-            this.treetopsCountry.Name = "treetopsCountry";
-            this.treetopsCountry.Size = new System.Drawing.Size(256, 74);
-            this.treetopsCountry.TabIndex = 11;
-            this.treetopsCountry.Title = "Default Country";
-            this.treetopsCountry.UKEnabled = true;
-            // 
-            // wardeadRelation
-            // 
-            this.wardeadRelation.Location = new System.Drawing.Point(270, 3);
-            this.wardeadRelation.MarriedToDB = true;
-            this.wardeadRelation.Name = "wardeadRelation";
-            this.wardeadRelation.Size = new System.Drawing.Size(322, 100);
-            this.wardeadRelation.TabIndex = 26;
-            // 
-            // wardeadCountry
-            // 
-            this.wardeadCountry.Location = new System.Drawing.Point(8, 25);
-            this.wardeadCountry.Name = "wardeadCountry";
-            this.wardeadCountry.Size = new System.Drawing.Size(256, 74);
-            this.wardeadCountry.TabIndex = 25;
-            this.wardeadCountry.Title = "Default Country";
-            this.wardeadCountry.UKEnabled = true;
-            // 
             // rtbToday
             // 
             this.rtbToday.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -3590,100 +3675,15 @@ namespace FTAnalyzer
             this.rtbToday.TabIndex = 7;
             this.rtbToday.Text = "";
             // 
-            // pictureBox1
+            // saveDatabase
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(971, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox1.TabIndex = 19;
-            this.pictureBox1.TabStop = false;
+            this.saveDatabase.DefaultExt = "zip";
+            this.saveDatabase.Filter = "Zip Files | *.zip";
             // 
-            // LCVerify
+            // restoreDatabase
             // 
-            this.LCVerify.Controls.Add(this.chkLCRootPersonConfirm2);
-            this.LCVerify.Controls.Add(this.groupBox9);
-            this.LCVerify.Location = new System.Drawing.Point(4, 22);
-            this.LCVerify.Name = "LCVerify";
-            this.LCVerify.Size = new System.Drawing.Size(1070, 411);
-            this.LCVerify.TabIndex = 2;
-            this.LCVerify.Text = "Verify";
-            this.LCVerify.UseVisualStyleBackColor = true;
-            // 
-            // chkLCRootPersonConfirm2
-            // 
-            this.chkLCRootPersonConfirm2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkLCRootPersonConfirm2.Location = new System.Drawing.Point(30, 146);
-            this.chkLCRootPersonConfirm2.Name = "chkLCRootPersonConfirm2";
-            this.chkLCRootPersonConfirm2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkLCRootPersonConfirm2.Size = new System.Drawing.Size(407, 24);
-            this.chkLCRootPersonConfirm2.TabIndex = 6;
-            this.chkLCRootPersonConfirm2.Text = "rootperson";
-            this.chkLCRootPersonConfirm2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.toolTips.SetToolTip(this.chkLCRootPersonConfirm2, "The Lost Cousins Data includes a relationship field please make sure the root per" +
-        "son relates to the root person on the Lost Cousins website.");
-            this.chkLCRootPersonConfirm2.UseVisualStyleBackColor = true;
-            this.chkLCRootPersonConfirm2.CheckedChanged += new System.EventHandler(this.ChkLCRootPersonConfirm2_CheckedChanged);
-            // 
-            // groupBox9
-            // 
-            this.groupBox9.Controls.Add(this.btnLCLogin2);
-            this.groupBox9.Controls.Add(this.label22);
-            this.groupBox9.Controls.Add(this.label23);
-            this.groupBox9.Controls.Add(this.txtLCEmail2);
-            this.groupBox9.Controls.Add(this.txtLCPassword2);
-            this.groupBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox9.Location = new System.Drawing.Point(30, 22);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(407, 118);
-            this.groupBox9.TabIndex = 5;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Lost Cousins Login Details";
-            // 
-            // btnLCLogin2
-            // 
-            this.btnLCLogin2.BackColor = System.Drawing.Color.Red;
-            this.btnLCLogin2.Location = new System.Drawing.Point(310, 68);
-            this.btnLCLogin2.Name = "btnLCLogin2";
-            this.btnLCLogin2.Size = new System.Drawing.Size(75, 25);
-            this.btnLCLogin2.TabIndex = 3;
-            this.btnLCLogin2.Text = "Login";
-            this.btnLCLogin2.UseVisualStyleBackColor = false;
-            this.btnLCLogin2.Click += new System.EventHandler(this.BtnLCLogin_Click);
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(34, 72);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(68, 16);
-            this.label22.TabIndex = 3;
-            this.label22.Text = "Password";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(6, 31);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(96, 16);
-            this.label23.TabIndex = 2;
-            this.label23.Text = "Email Address";
-            // 
-            // txtLCEmail2
-            // 
-            this.txtLCEmail2.Location = new System.Drawing.Point(108, 28);
-            this.txtLCEmail2.Name = "txtLCEmail2";
-            this.txtLCEmail2.Size = new System.Drawing.Size(277, 22);
-            this.txtLCEmail2.TabIndex = 1;
-            // 
-            // txtLCPassword2
-            // 
-            this.txtLCPassword2.Location = new System.Drawing.Point(108, 69);
-            this.txtLCPassword2.Name = "txtLCPassword2";
-            this.txtLCPassword2.PasswordChar = '*';
-            this.txtLCPassword2.Size = new System.Drawing.Size(196, 22);
-            this.txtLCPassword2.TabIndex = 2;
+            this.restoreDatabase.FileName = "*.zip";
+            this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
             // MainForm
             // 
@@ -3736,6 +3736,9 @@ namespace FTAnalyzer
             this.LCUpdatesTab.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
+            this.LCVerify.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
             this.tabCensus.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
@@ -3758,6 +3761,7 @@ namespace FTAnalyzer
             this.tabDisplayProgress.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabSelector.ResumeLayout(false);
             this.tabMainLists.ResumeLayout(false);
             this.tabMainListsSelector.ResumeLayout(false);
@@ -3787,10 +3791,6 @@ namespace FTAnalyzer
             this.tabToday.ResumeLayout(false);
             this.tabToday.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.LCVerify.ResumeLayout(false);
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
