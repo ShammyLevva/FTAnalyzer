@@ -1254,7 +1254,11 @@ namespace FTAnalyzer
                     UpdateLostCousinsReport();
                     UpdateLCOutput();
                     txtLCEmail.Text = (string)Application.UserAppDataRegistry.GetValue("LostCousinsEmail", string.Empty);
+                    txtLCEmail2.Text = txtLCEmail.Text;
                     chkLCRootPersonConfirm.Text = $"Confirm {ft.RootPerson} as root Person";
+                    chkLCRootPersonConfirm2.Text = chkLCRootPersonConfirm.Text;
+                    LCSubTabs.TabPages.RemoveAt(2); // hide verify tab
+                    tabLostCousins.Refresh();
                     Analytics.TrackAction(Analytics.MainFormAction, Analytics.LostCousinsTabEvent);
                     HourGlass(false);
                 }
@@ -1573,6 +1577,8 @@ namespace FTAnalyzer
             bool websiteAvailable = ExportToLostCousins.CheckLostCousinsLogin(txtLCEmail.Text, txtLCPassword.Text);
             btnLCLogin.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
             btnLCLogin.Enabled = !websiteAvailable;
+            btnLCLogin2.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
+            btnLCLogin2.Enabled = !websiteAvailable;
             btnUpdateLostCousinsWebsite.Visible = websiteAvailable;
             if (websiteAvailable)
                 UIHelpers.ShowMessage("Lost Cousins login succeeded.");
@@ -1631,7 +1637,7 @@ namespace FTAnalyzer
             List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Filter(filter).ToList();
             individuals = LCRemoveDuplicateIndividuals(individuals);
             int missing = MissingLCEntries[censusDate];
-            output.AppendText($"{censusDate}: {individuals.Count} possible {missing-individuals.Count} no Census Ref\n");
+            output.AppendText($"{censusDate}: {individuals.Count} possible {missing-individuals.Count} no valid Census Ref\n");
             return individuals;
         }
 
@@ -1692,6 +1698,14 @@ namespace FTAnalyzer
         {
             btnUpdateLostCousinsWebsite.Enabled = chkLCRootPersonConfirm.Checked;
             btnUpdateLostCousinsWebsite.BackColor = chkLCRootPersonConfirm.Checked ? Color.LightGreen : Color.LightGray;
+            chkLCRootPersonConfirm2.Checked = chkLCRootPersonConfirm.Checked;
+        }
+
+        void ChkLCRootPersonConfirm2_CheckedChanged(object sender, EventArgs e)
+        {
+            btnUpdateLostCousinsWebsite.Enabled = chkLCRootPersonConfirm2.Checked;
+            btnUpdateLostCousinsWebsite.BackColor = chkLCRootPersonConfirm2.Checked ? Color.LightGreen : Color.LightGray;
+            chkLCRootPersonConfirm.Checked = chkLCRootPersonConfirm2.Checked;
         }
 
         void BtnLC1881EW_Click(object sender, EventArgs e)

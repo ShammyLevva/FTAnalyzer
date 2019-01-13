@@ -40,7 +40,7 @@ namespace FTAnalyzer
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -347,6 +347,14 @@ namespace FTAnalyzer
             this.wardeadCountry = new FTAnalyzer.Controls.CensusCountry();
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.LCVerify = new System.Windows.Forms.TabPage();
+            this.chkLCRootPersonConfirm2 = new System.Windows.Forms.CheckBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.btnLCLogin2 = new System.Windows.Forms.Button();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.txtLCEmail2 = new System.Windows.Forms.TextBox();
+            this.txtLCPassword2 = new System.Windows.Forms.MaskedTextBox();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -415,6 +423,8 @@ namespace FTAnalyzer
             this.tabToday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.LCVerify.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -1159,14 +1169,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 166);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1584,6 +1594,7 @@ namespace FTAnalyzer
             // 
             this.LCSubTabs.Controls.Add(this.LCReportsTab);
             this.LCSubTabs.Controls.Add(this.LCUpdatesTab);
+            this.LCSubTabs.Controls.Add(this.LCVerify);
             this.LCSubTabs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LCSubTabs.Location = new System.Drawing.Point(3, 3);
             this.LCSubTabs.Name = "LCSubTabs";
@@ -1613,7 +1624,7 @@ namespace FTAnalyzer
             this.LCReportsTab.Location = new System.Drawing.Point(4, 22);
             this.LCReportsTab.Name = "LCReportsTab";
             this.LCReportsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.LCReportsTab.Size = new System.Drawing.Size(1091, 411);
+            this.LCReportsTab.Size = new System.Drawing.Size(1070, 411);
             this.LCReportsTab.TabIndex = 0;
             this.LCReportsTab.Text = "Reports";
             this.LCReportsTab.UseVisualStyleBackColor = true;
@@ -3588,6 +3599,92 @@ namespace FTAnalyzer
             this.pictureBox1.TabIndex = 19;
             this.pictureBox1.TabStop = false;
             // 
+            // LCVerify
+            // 
+            this.LCVerify.Controls.Add(this.chkLCRootPersonConfirm2);
+            this.LCVerify.Controls.Add(this.groupBox9);
+            this.LCVerify.Location = new System.Drawing.Point(4, 22);
+            this.LCVerify.Name = "LCVerify";
+            this.LCVerify.Size = new System.Drawing.Size(1070, 411);
+            this.LCVerify.TabIndex = 2;
+            this.LCVerify.Text = "Verify";
+            this.LCVerify.UseVisualStyleBackColor = true;
+            // 
+            // chkLCRootPersonConfirm2
+            // 
+            this.chkLCRootPersonConfirm2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkLCRootPersonConfirm2.Location = new System.Drawing.Point(30, 146);
+            this.chkLCRootPersonConfirm2.Name = "chkLCRootPersonConfirm2";
+            this.chkLCRootPersonConfirm2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkLCRootPersonConfirm2.Size = new System.Drawing.Size(407, 24);
+            this.chkLCRootPersonConfirm2.TabIndex = 6;
+            this.chkLCRootPersonConfirm2.Text = "rootperson";
+            this.chkLCRootPersonConfirm2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTips.SetToolTip(this.chkLCRootPersonConfirm2, "The Lost Cousins Data includes a relationship field please make sure the root per" +
+        "son relates to the root person on the Lost Cousins website.");
+            this.chkLCRootPersonConfirm2.UseVisualStyleBackColor = true;
+            this.chkLCRootPersonConfirm2.CheckedChanged += new System.EventHandler(this.ChkLCRootPersonConfirm2_CheckedChanged);
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.btnLCLogin2);
+            this.groupBox9.Controls.Add(this.label22);
+            this.groupBox9.Controls.Add(this.label23);
+            this.groupBox9.Controls.Add(this.txtLCEmail2);
+            this.groupBox9.Controls.Add(this.txtLCPassword2);
+            this.groupBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox9.Location = new System.Drawing.Point(30, 22);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(407, 118);
+            this.groupBox9.TabIndex = 5;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Lost Cousins Login Details";
+            // 
+            // btnLCLogin2
+            // 
+            this.btnLCLogin2.BackColor = System.Drawing.Color.Red;
+            this.btnLCLogin2.Location = new System.Drawing.Point(310, 68);
+            this.btnLCLogin2.Name = "btnLCLogin2";
+            this.btnLCLogin2.Size = new System.Drawing.Size(75, 25);
+            this.btnLCLogin2.TabIndex = 3;
+            this.btnLCLogin2.Text = "Login";
+            this.btnLCLogin2.UseVisualStyleBackColor = false;
+            this.btnLCLogin2.Click += new System.EventHandler(this.BtnLCLogin_Click);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(34, 72);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(68, 16);
+            this.label22.TabIndex = 3;
+            this.label22.Text = "Password";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(6, 31);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(96, 16);
+            this.label23.TabIndex = 2;
+            this.label23.Text = "Email Address";
+            // 
+            // txtLCEmail2
+            // 
+            this.txtLCEmail2.Location = new System.Drawing.Point(108, 28);
+            this.txtLCEmail2.Name = "txtLCEmail2";
+            this.txtLCEmail2.Size = new System.Drawing.Size(277, 22);
+            this.txtLCEmail2.TabIndex = 1;
+            // 
+            // txtLCPassword2
+            // 
+            this.txtLCPassword2.Location = new System.Drawing.Point(108, 69);
+            this.txtLCPassword2.Name = "txtLCPassword2";
+            this.txtLCPassword2.PasswordChar = '*';
+            this.txtLCPassword2.Size = new System.Drawing.Size(196, 22);
+            this.txtLCPassword2.TabIndex = 2;
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -3691,6 +3788,9 @@ namespace FTAnalyzer
             this.tabToday.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.LCVerify.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4005,6 +4105,14 @@ namespace FTAnalyzer
         private System.Windows.Forms.RichTextBox rtbLCUpdateData;
         private Utilities.ScrollingRichTextBox rtbLCoutput;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TabPage LCVerify;
+        private System.Windows.Forms.CheckBox chkLCRootPersonConfirm2;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.Button btnLCLogin2;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox txtLCEmail2;
+        private System.Windows.Forms.MaskedTextBox txtLCPassword2;
     }
 }
 
