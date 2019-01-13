@@ -29,17 +29,19 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ckbDescendants = new System.Windows.Forms.CheckBox();
             this.ckbUnknown = new System.Windows.Forms.CheckBox();
             this.ckbMarriageDB = new System.Windows.Forms.CheckBox();
             this.ckbMarriage = new System.Windows.Forms.CheckBox();
             this.ckbBlood = new System.Windows.Forms.CheckBox();
             this.ckbDirects = new System.Windows.Forms.CheckBox();
-            this.ckbDescendants = new System.Windows.Forms.CheckBox();
+            this.ckbLinked = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.ckbLinked);
             this.groupBox2.Controls.Add(this.ckbDescendants);
             this.groupBox2.Controls.Add(this.ckbUnknown);
             this.groupBox2.Controls.Add(this.ckbMarriageDB);
@@ -52,6 +54,18 @@
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Relationship Types";
+            // 
+            // ckbDescendants
+            // 
+            this.ckbDescendants.AutoSize = true;
+            this.ckbDescendants.Checked = true;
+            this.ckbDescendants.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbDescendants.Location = new System.Drawing.Point(116, 43);
+            this.ckbDescendants.Name = "ckbDescendants";
+            this.ckbDescendants.Size = new System.Drawing.Size(89, 17);
+            this.ckbDescendants.TabIndex = 5;
+            this.ckbDescendants.Text = "Descendants";
+            this.ckbDescendants.UseVisualStyleBackColor = true;
             // 
             // ckbUnknown
             // 
@@ -114,17 +128,15 @@
             this.ckbDirects.UseVisualStyleBackColor = true;
             this.ckbDirects.CheckedChanged += new System.EventHandler(this.Tickbox_CheckedChanged);
             // 
-            // ckbDescendants
+            // ckbLinked
             // 
-            this.ckbDescendants.AutoSize = true;
-            this.ckbDescendants.Checked = true;
-            this.ckbDescendants.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbDescendants.Location = new System.Drawing.Point(116, 43);
-            this.ckbDescendants.Name = "ckbDescendants";
-            this.ckbDescendants.Size = new System.Drawing.Size(89, 17);
-            this.ckbDescendants.TabIndex = 5;
-            this.ckbDescendants.Text = "Descendants";
-            this.ckbDescendants.UseVisualStyleBackColor = true;
+            this.ckbLinked.AutoSize = true;
+            this.ckbLinked.Location = new System.Drawing.Point(158, 66);
+            this.ckbLinked.Name = "ckbLinked";
+            this.ckbLinked.Size = new System.Drawing.Size(146, 17);
+            this.ckbLinked.TabIndex = 6;
+            this.ckbLinked.Text = "Linked through Marriages";
+            this.ckbLinked.UseVisualStyleBackColor = true;
             // 
             // RelationTypes
             // 
@@ -148,5 +160,6 @@
         private System.Windows.Forms.CheckBox ckbBlood;
         private System.Windows.Forms.CheckBox ckbDirects;
         private System.Windows.Forms.CheckBox ckbDescendants;
+        private System.Windows.Forms.CheckBox ckbLinked;
     }
 }

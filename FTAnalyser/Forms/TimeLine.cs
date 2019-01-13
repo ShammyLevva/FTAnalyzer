@@ -154,6 +154,8 @@ namespace FTAnalyzer.Forms
                     return marriedToDirectOrBloodToolStripMenuItem.Checked;
                 case Individual.DESCENDANT:
                     return descendantToolStripMenuItem.Checked;
+                case Individual.LINKED:
+                    return linkedByMarriageToolStripMenuItem.Checked;
                 case Individual.UNKNOWN:
                 default:
                     return unknownToolStripMenuItem.Checked;

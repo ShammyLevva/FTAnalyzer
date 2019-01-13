@@ -18,6 +18,7 @@ namespace FTAnalyzer.Controls
         public bool MarriedToDB { get => ckbMarriageDB.Checked; set => ckbMarriageDB.Checked = value; }
         public bool Unknown => ckbUnknown.Checked;
         public bool Descendant => ckbDescendants.Checked;
+        public bool Linked => ckbLinked.Checked;
 
         public int Status
         {
@@ -36,6 +37,8 @@ namespace FTAnalyzer.Controls
                     result += Individual.MARRIEDTODB;
                 if (ckbDescendants.Checked)
                     result += Individual.DESCENDANT;
+                if (ckbLinked.Checked)
+                    result += Individual.LINKED;
                 return result;
             }
         }
@@ -53,6 +56,8 @@ namespace FTAnalyzer.Controls
                 relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.MARRIEDTODB));
             if (Descendant)
                 relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.DESCENDANT));
+            if (Linked)
+                relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.LINKED));
             if (Unknown && !excludeUnknown)
                 relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.UNKNOWN));
             return FilterUtils.OrFilter(relationFilters);
@@ -71,6 +76,8 @@ namespace FTAnalyzer.Controls
                 relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, Individual.MARRIEDTODB));
             if (Descendant)
                 relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, Individual.DESCENDANT));
+            if (Linked)
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, Individual.LINKED));
             if (Unknown)
                 relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, Individual.UNKNOWN));
             return FilterUtils.OrFilter(relationFilters);

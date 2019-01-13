@@ -41,6 +41,7 @@ namespace FTAnalyzer.Forms
             this.relationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.directAncestorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bloodRelativesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.descendantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.marriedToDirectOrBloodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.relatedByMarriageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unknownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,7 +73,7 @@ namespace FTAnalyzer.Forms
             this.btnBack10 = new System.Windows.Forms.Button();
             this.btnForward10 = new System.Windows.Forms.Button();
             this.tbOpacity = new System.Windows.Forms.TrackBar();
-            this.descendantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.linkedByMarriageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
@@ -132,6 +133,7 @@ namespace FTAnalyzer.Forms
             this.descendantToolStripMenuItem,
             this.marriedToDirectOrBloodToolStripMenuItem,
             this.relatedByMarriageToolStripMenuItem,
+            this.linkedByMarriageToolStripMenuItem,
             this.unknownToolStripMenuItem});
             this.relationsToolStripMenuItem.Name = "relationsToolStripMenuItem";
             this.relationsToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
@@ -156,6 +158,15 @@ namespace FTAnalyzer.Forms
             this.bloodRelativesToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.bloodRelativesToolStripMenuItem.Text = "Blood Relatives";
             this.bloodRelativesToolStripMenuItem.CheckedChanged += new System.EventHandler(this.Relations_CheckedChanged);
+            // 
+            // descendantToolStripMenuItem
+            // 
+            this.descendantToolStripMenuItem.Checked = true;
+            this.descendantToolStripMenuItem.CheckOnClick = true;
+            this.descendantToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.descendantToolStripMenuItem.Name = "descendantToolStripMenuItem";
+            this.descendantToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.descendantToolStripMenuItem.Text = "Descendant";
             // 
             // marriedToDirectOrBloodToolStripMenuItem
             // 
@@ -484,14 +495,11 @@ namespace FTAnalyzer.Forms
             this.tbOpacity.Value = 100;
             this.tbOpacity.Scroll += new System.EventHandler(this.TbOpacity_Scroll);
             // 
-            // descendantToolStripMenuItem
+            // linkedByMarriageToolStripMenuItem
             // 
-            this.descendantToolStripMenuItem.Checked = true;
-            this.descendantToolStripMenuItem.CheckOnClick = true;
-            this.descendantToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.descendantToolStripMenuItem.Name = "descendantToolStripMenuItem";
-            this.descendantToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
-            this.descendantToolStripMenuItem.Text = "Descendant";
+            this.linkedByMarriageToolStripMenuItem.Name = "linkedByMarriageToolStripMenuItem";
+            this.linkedByMarriageToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.linkedByMarriageToolStripMenuItem.Text = "Linked through Marriages";
             // 
             // TimeLine
             // 
@@ -576,5 +584,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripMenuItem resetFormToDefaultPostiionAndSizeToolStripMenuItem;
         private System.Windows.Forms.TrackBar tbOpacity;
         private System.Windows.Forms.ToolStripMenuItem descendantToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem linkedByMarriageToolStripMenuItem;
     }
 }
