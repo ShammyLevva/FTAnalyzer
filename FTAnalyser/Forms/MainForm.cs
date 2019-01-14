@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.3.0.0-beta8";
+        public static string VERSION = "7.3.0.0-beta12";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -139,6 +139,8 @@ namespace FTAnalyzer
                     break;
             }
             LbProgramName.Font = handwritingFont;
+            pictureBox1.Left = LbProgramName.Right;
+            splitGedcom.SplitterDistance = Math.Max(pbRelationships.Bottom + 18, 110);
             UpdateDataErrorsDisplay();
         }
 
@@ -1257,7 +1259,8 @@ namespace FTAnalyzer
                     txtLCEmail2.Text = txtLCEmail.Text;
                     chkLCRootPersonConfirm.Text = $"Confirm {ft.RootPerson} as root Person";
                     chkLCRootPersonConfirm2.Text = chkLCRootPersonConfirm.Text;
-                    LCSubTabs.TabPages.RemoveAt(2); // hide verify tab
+                    if(LCSubTabs.TabPages.Count > 2)
+                        LCSubTabs.TabPages.RemoveAt(2); // hide verify tab
                     tabLostCousins.Refresh();
                     Analytics.TrackAction(Analytics.MainFormAction, Analytics.LostCousinsTabEvent);
                     HourGlass(false);
@@ -1537,7 +1540,7 @@ namespace FTAnalyzer
             if (LCnoCensus > 0)
             {
                 int startpos = rtbLostCousins.TextLength;
-                rtbLostCousins.AppendText("Lost Cousins facts with bad/missing census fact: " + LCnoCensus + "\n\n");
+                rtbLostCousins.AppendText($"Lost Cousins facts with bad/missing census fact: {LCnoCensus}\n\n");
                 int endpos = rtbLostCousins.TextLength;
                 rtbLostCousins.Select(startpos, endpos);
                 rtbLostCousins.SelectionColor = Color.Red;
@@ -1637,7 +1640,7 @@ namespace FTAnalyzer
             List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Filter(filter).ToList();
             individuals = LCRemoveDuplicateIndividuals(individuals);
             int missing = MissingLCEntries[censusDate];
-            output.AppendText($"{censusDate}: {individuals.Count} possible {missing-individuals.Count} no valid Census Ref\n");
+            output.AppendText($"{censusDate}: {individuals.Count} possible {missing-individuals.Count} no valid census ref\n");
             return individuals;
         }
 
@@ -2416,8 +2419,8 @@ namespace FTAnalyzer
 
         void MainForm_Resize(object sender, EventArgs e)
         {
-            rtbOutput.Top = pbRelationships.Top + 30;
             rtbToday.Top = dpToday.Top + 30;
+            splitGedcom.Height = 100;
             SavePosition();
         }
 

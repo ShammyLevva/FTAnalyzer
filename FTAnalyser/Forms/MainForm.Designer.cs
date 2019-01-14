@@ -40,7 +40,7 @@ namespace FTAnalyzer
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -264,18 +264,6 @@ namespace FTAnalyzer
             this.tabPlaces = new System.Windows.Forms.TabPage();
             this.dgPlaces = new System.Windows.Forms.DataGridView();
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
-            this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.LbProgramName = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.pbRelationships = new System.Windows.Forms.ProgressBar();
-            this.label6 = new System.Windows.Forms.Label();
-            this.pbFamilies = new System.Windows.Forms.ProgressBar();
-            this.label5 = new System.Windows.Forms.Label();
-            this.pbIndividuals = new System.Windows.Forms.ProgressBar();
-            this.label4 = new System.Windows.Forms.Label();
-            this.pbSources = new System.Windows.Forms.ProgressBar();
             this.tabSelector = new System.Windows.Forms.TabControl();
             this.tabMainLists = new System.Windows.Forms.TabPage();
             this.tabMainListsSelector = new System.Windows.Forms.TabControl();
@@ -355,6 +343,19 @@ namespace FTAnalyzer
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.splitGedcom = new System.Windows.Forms.SplitContainer();
+            this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.LbProgramName = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.pbRelationships = new System.Windows.Forms.ProgressBar();
+            this.label6 = new System.Windows.Forms.Label();
+            this.pbFamilies = new System.Windows.Forms.ProgressBar();
+            this.label5 = new System.Windows.Forms.Label();
+            this.pbIndividuals = new System.Windows.Forms.ProgressBar();
+            this.label4 = new System.Windows.Forms.Label();
+            this.pbSources = new System.Windows.Forms.ProgressBar();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -397,8 +398,6 @@ namespace FTAnalyzer
             this.tabPlaces.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgPlaces)).BeginInit();
             this.tabDisplayProgress.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabSelector.SuspendLayout();
             this.tabMainLists.SuspendLayout();
             this.tabMainListsSelector.SuspendLayout();
@@ -425,6 +424,12 @@ namespace FTAnalyzer
             this.tabFacts.SuspendLayout();
             this.tabToday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitGedcom)).BeginInit();
+            this.splitGedcom.Panel1.SuspendLayout();
+            this.splitGedcom.Panel2.SuspendLayout();
+            this.splitGedcom.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -1084,7 +1089,7 @@ namespace FTAnalyzer
             this.dgRegions.Name = "dgRegions";
             this.dgRegions.RowHeadersVisible = false;
             this.dgRegions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgRegions.Size = new System.Drawing.Size(1065, 405);
+            this.dgRegions.Size = new System.Drawing.Size(1064, 405);
             this.dgRegions.TabIndex = 1;
             this.toolTips.SetToolTip(this.dgRegions, "Double click on Region name to see list of individuals with that Region.");
             this.dgRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgRegions_CellDoubleClick);
@@ -1103,7 +1108,7 @@ namespace FTAnalyzer
             this.dgCountries.Name = "dgCountries";
             this.dgCountries.RowHeadersVisible = false;
             this.dgCountries.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgCountries.Size = new System.Drawing.Size(1065, 405);
+            this.dgCountries.Size = new System.Drawing.Size(1064, 405);
             this.dgCountries.TabIndex = 0;
             this.toolTips.SetToolTip(this.dgCountries, "Double click on Country name to see list of individuals with that Country.");
             this.dgCountries.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgCountries_CellDoubleClick);
@@ -1169,14 +1174,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 166);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1196,7 +1201,7 @@ namespace FTAnalyzer
             this.tbDuplicateScore.Location = new System.Drawing.Point(447, 3);
             this.tbDuplicateScore.Minimum = 1;
             this.tbDuplicateScore.Name = "tbDuplicateScore";
-            this.tbDuplicateScore.Size = new System.Drawing.Size(589, 45);
+            this.tbDuplicateScore.Size = new System.Drawing.Size(588, 45);
             this.tbDuplicateScore.TabIndex = 22;
             this.tbDuplicateScore.TickFrequency = 5;
             this.toolTips.SetToolTip(this.tbDuplicateScore, "Adjust Slider to right to limit results to more likely matches");
@@ -2556,7 +2561,7 @@ namespace FTAnalyzer
             this.tabCountries.Location = new System.Drawing.Point(4, 22);
             this.tabCountries.Name = "tabCountries";
             this.tabCountries.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCountries.Size = new System.Drawing.Size(1071, 411);
+            this.tabCountries.Size = new System.Drawing.Size(1070, 411);
             this.tabCountries.TabIndex = 0;
             this.tabCountries.Text = "Countries";
             this.tabCountries.ToolTipText = "Double click on Country name to see list of individuals with that Country.";
@@ -2568,7 +2573,7 @@ namespace FTAnalyzer
             this.tabRegions.Location = new System.Drawing.Point(4, 22);
             this.tabRegions.Name = "tabRegions";
             this.tabRegions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRegions.Size = new System.Drawing.Size(1071, 411);
+            this.tabRegions.Size = new System.Drawing.Size(1070, 411);
             this.tabRegions.TabIndex = 1;
             this.tabRegions.Text = "Regions";
             this.tabRegions.ToolTipText = "Double click on Region name to see list of individuals with that Region.";
@@ -2580,7 +2585,7 @@ namespace FTAnalyzer
             this.tabSubRegions.Location = new System.Drawing.Point(4, 22);
             this.tabSubRegions.Name = "tabSubRegions";
             this.tabSubRegions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSubRegions.Size = new System.Drawing.Size(1071, 411);
+            this.tabSubRegions.Size = new System.Drawing.Size(1070, 411);
             this.tabSubRegions.TabIndex = 2;
             this.tabSubRegions.Text = "SubRegions";
             this.tabSubRegions.ToolTipText = "Double click on \'Parish\' name to see list of individuals with that parish/area.";
@@ -2599,7 +2604,7 @@ namespace FTAnalyzer
             this.dgSubRegions.Name = "dgSubRegions";
             this.dgSubRegions.RowHeadersVisible = false;
             this.dgSubRegions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgSubRegions.Size = new System.Drawing.Size(1065, 405);
+            this.dgSubRegions.Size = new System.Drawing.Size(1064, 405);
             this.dgSubRegions.TabIndex = 1;
             this.dgSubRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSubRegions_CellDoubleClick);
             this.dgSubRegions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgSubRegions_CellFormatting);
@@ -2610,7 +2615,7 @@ namespace FTAnalyzer
             this.tabAddresses.Location = new System.Drawing.Point(4, 22);
             this.tabAddresses.Name = "tabAddresses";
             this.tabAddresses.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAddresses.Size = new System.Drawing.Size(1071, 411);
+            this.tabAddresses.Size = new System.Drawing.Size(1070, 411);
             this.tabAddresses.TabIndex = 3;
             this.tabAddresses.Text = "Addresses";
             this.tabAddresses.ToolTipText = "Double click on Address name to see list of individuals with that Address.";
@@ -2629,7 +2634,7 @@ namespace FTAnalyzer
             this.dgAddresses.Name = "dgAddresses";
             this.dgAddresses.RowHeadersVisible = false;
             this.dgAddresses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgAddresses.Size = new System.Drawing.Size(1065, 405);
+            this.dgAddresses.Size = new System.Drawing.Size(1064, 405);
             this.dgAddresses.TabIndex = 1;
             this.dgAddresses.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgAddresses_CellDoubleClick);
             this.dgAddresses.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgAddresses_CellFormatting);
@@ -2640,7 +2645,7 @@ namespace FTAnalyzer
             this.tabPlaces.Location = new System.Drawing.Point(4, 22);
             this.tabPlaces.Name = "tabPlaces";
             this.tabPlaces.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPlaces.Size = new System.Drawing.Size(1071, 411);
+            this.tabPlaces.Size = new System.Drawing.Size(1070, 411);
             this.tabPlaces.TabIndex = 4;
             this.tabPlaces.Text = "Places";
             this.tabPlaces.ToolTipText = "Double click on Address name to see list of individuals with that Place";
@@ -2659,15 +2664,14 @@ namespace FTAnalyzer
             this.dgPlaces.Name = "dgPlaces";
             this.dgPlaces.RowHeadersVisible = false;
             this.dgPlaces.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgPlaces.Size = new System.Drawing.Size(1065, 405);
+            this.dgPlaces.Size = new System.Drawing.Size(1064, 405);
             this.dgPlaces.TabIndex = 2;
             this.dgPlaces.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgPlaces_CellDoubleClick);
             this.dgPlaces.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgPlaces_CellFormatting);
             // 
             // tabDisplayProgress
             // 
-            this.tabDisplayProgress.Controls.Add(this.rtbOutput);
-            this.tabDisplayProgress.Controls.Add(this.panel2);
+            this.tabDisplayProgress.Controls.Add(this.splitGedcom);
             this.tabDisplayProgress.Location = new System.Drawing.Point(4, 22);
             this.tabDisplayProgress.Name = "tabDisplayProgress";
             this.tabDisplayProgress.Padding = new System.Windows.Forms.Padding(3);
@@ -2675,118 +2679,6 @@ namespace FTAnalyzer
             this.tabDisplayProgress.TabIndex = 1;
             this.tabDisplayProgress.Text = "Gedcom Stats";
             this.tabDisplayProgress.UseVisualStyleBackColor = true;
-            // 
-            // rtbOutput
-            // 
-            this.rtbOutput.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbOutput.Location = new System.Drawing.Point(3, 118);
-            this.rtbOutput.Name = "rtbOutput";
-            this.rtbOutput.ReadOnly = true;
-            this.rtbOutput.Size = new System.Drawing.Size(1078, 322);
-            this.rtbOutput.TabIndex = 13;
-            this.rtbOutput.Text = "";
-            this.rtbOutput.TextChanged += new System.EventHandler(this.RtbOutput_TextChanged);
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Controls.Add(this.LbProgramName);
-            this.panel2.Controls.Add(this.label7);
-            this.panel2.Controls.Add(this.pbRelationships);
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.pbFamilies);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.pbIndividuals);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.pbSources);
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1074, 109);
-            this.panel2.TabIndex = 12;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(943, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox1.TabIndex = 19;
-            this.pictureBox1.TabStop = false;
-            // 
-            // LbProgramName
-            // 
-            this.LbProgramName.AutoSize = true;
-            this.LbProgramName.Font = new System.Drawing.Font("Kunstler Script", 52F, System.Drawing.FontStyle.Bold);
-            this.LbProgramName.Location = new System.Drawing.Point(415, 13);
-            this.LbProgramName.Name = "LbProgramName";
-            this.LbProgramName.Size = new System.Drawing.Size(522, 76);
-            this.LbProgramName.TabIndex = 17;
-            this.LbProgramName.Text = "Family Tree Analyzer";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 79);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(128, 13);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "Relationships && Locations";
-            // 
-            // pbRelationships
-            // 
-            this.pbRelationships.Location = new System.Drawing.Point(134, 76);
-            this.pbRelationships.Name = "pbRelationships";
-            this.pbRelationships.Size = new System.Drawing.Size(275, 16);
-            this.pbRelationships.TabIndex = 15;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 57);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(85, 13);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Loading Families";
-            // 
-            // pbFamilies
-            // 
-            this.pbFamilies.Location = new System.Drawing.Point(134, 54);
-            this.pbFamilies.Name = "pbFamilies";
-            this.pbFamilies.Size = new System.Drawing.Size(275, 16);
-            this.pbFamilies.TabIndex = 13;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 35);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(98, 13);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Loading Individuals";
-            // 
-            // pbIndividuals
-            // 
-            this.pbIndividuals.Location = new System.Drawing.Point(134, 32);
-            this.pbIndividuals.Name = "pbIndividuals";
-            this.pbIndividuals.Size = new System.Drawing.Size(275, 16);
-            this.pbIndividuals.TabIndex = 11;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 13);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Loading Sources";
-            // 
-            // pbSources
-            // 
-            this.pbSources.Location = new System.Drawing.Point(134, 10);
-            this.pbSources.Name = "pbSources";
-            this.pbSources.Size = new System.Drawing.Size(275, 16);
-            this.pbSources.TabIndex = 9;
             // 
             // tabSelector
             // 
@@ -2871,7 +2763,7 @@ namespace FTAnalyzer
             this.tabFamilies.Location = new System.Drawing.Point(4, 22);
             this.tabFamilies.Name = "tabFamilies";
             this.tabFamilies.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFamilies.Size = new System.Drawing.Size(1071, 411);
+            this.tabFamilies.Size = new System.Drawing.Size(1070, 411);
             this.tabFamilies.TabIndex = 1;
             this.tabFamilies.Text = "Families";
             this.tabFamilies.UseVisualStyleBackColor = true;
@@ -2887,7 +2779,7 @@ namespace FTAnalyzer
             this.dgFamilies.MultiSelect = false;
             this.dgFamilies.Name = "dgFamilies";
             this.dgFamilies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgFamilies.Size = new System.Drawing.Size(1065, 405);
+            this.dgFamilies.Size = new System.Drawing.Size(1064, 405);
             this.dgFamilies.TabIndex = 2;
             this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgFamilies_CellDoubleClick);
             // 
@@ -2896,7 +2788,7 @@ namespace FTAnalyzer
             this.tabSources.Controls.Add(this.dgSources);
             this.tabSources.Location = new System.Drawing.Point(4, 22);
             this.tabSources.Name = "tabSources";
-            this.tabSources.Size = new System.Drawing.Size(1071, 411);
+            this.tabSources.Size = new System.Drawing.Size(1070, 411);
             this.tabSources.TabIndex = 2;
             this.tabSources.Text = "Sources";
             this.tabSources.UseVisualStyleBackColor = true;
@@ -2913,7 +2805,7 @@ namespace FTAnalyzer
             this.dgSources.Name = "dgSources";
             this.dgSources.ReadOnly = true;
             this.dgSources.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgSources.Size = new System.Drawing.Size(1071, 411);
+            this.dgSources.Size = new System.Drawing.Size(1070, 411);
             this.dgSources.TabIndex = 2;
             this.dgSources.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSources_CellDoubleClick);
             // 
@@ -2922,7 +2814,7 @@ namespace FTAnalyzer
             this.tabOccupations.Controls.Add(this.dgOccupations);
             this.tabOccupations.Location = new System.Drawing.Point(4, 22);
             this.tabOccupations.Name = "tabOccupations";
-            this.tabOccupations.Size = new System.Drawing.Size(1071, 411);
+            this.tabOccupations.Size = new System.Drawing.Size(1070, 411);
             this.tabOccupations.TabIndex = 3;
             this.tabOccupations.Text = "Occupations";
             this.tabOccupations.UseVisualStyleBackColor = true;
@@ -2938,7 +2830,7 @@ namespace FTAnalyzer
             this.dgOccupations.MultiSelect = false;
             this.dgOccupations.Name = "dgOccupations";
             this.dgOccupations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgOccupations.Size = new System.Drawing.Size(1071, 411);
+            this.dgOccupations.Size = new System.Drawing.Size(1070, 411);
             this.dgOccupations.TabIndex = 3;
             this.dgOccupations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgOccupations_CellDoubleClick);
             // 
@@ -3042,7 +2934,7 @@ namespace FTAnalyzer
             this.tabDuplicates.Location = new System.Drawing.Point(4, 22);
             this.tabDuplicates.Name = "tabDuplicates";
             this.tabDuplicates.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDuplicates.Size = new System.Drawing.Size(1077, 417);
+            this.tabDuplicates.Size = new System.Drawing.Size(1076, 417);
             this.tabDuplicates.TabIndex = 1;
             this.tabDuplicates.Text = "Duplicates?";
             this.tabDuplicates.UseVisualStyleBackColor = true;
@@ -3087,7 +2979,7 @@ namespace FTAnalyzer
             // 
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(944, 24);
+            this.label13.Location = new System.Drawing.Point(943, 24);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(92, 13);
             this.label13.TabIndex = 24;
@@ -3141,7 +3033,7 @@ namespace FTAnalyzer
             this.dgDuplicates.Name = "dgDuplicates";
             this.dgDuplicates.RowHeadersWidth = 15;
             this.dgDuplicates.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgDuplicates.Size = new System.Drawing.Size(1077, 348);
+            this.dgDuplicates.Size = new System.Drawing.Size(1076, 348);
             this.dgDuplicates.TabIndex = 19;
             this.dgDuplicates.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgDuplicates_CellContentClick);
             this.dgDuplicates.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgDuplicates_CellDoubleClick);
@@ -3255,7 +3147,7 @@ namespace FTAnalyzer
             this.tabLooseBirths.Controls.Add(this.dgLooseBirths);
             this.tabLooseBirths.Location = new System.Drawing.Point(4, 22);
             this.tabLooseBirths.Name = "tabLooseBirths";
-            this.tabLooseBirths.Size = new System.Drawing.Size(1077, 417);
+            this.tabLooseBirths.Size = new System.Drawing.Size(1076, 417);
             this.tabLooseBirths.TabIndex = 2;
             this.tabLooseBirths.Text = "Loose Births";
             this.tabLooseBirths.UseVisualStyleBackColor = true;
@@ -3272,7 +3164,7 @@ namespace FTAnalyzer
             this.dgLooseBirths.MultiSelect = false;
             this.dgLooseBirths.Name = "dgLooseBirths";
             this.dgLooseBirths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgLooseBirths.Size = new System.Drawing.Size(1077, 417);
+            this.dgLooseBirths.Size = new System.Drawing.Size(1076, 417);
             this.dgLooseBirths.TabIndex = 3;
             this.dgLooseBirths.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLooseBirths_CellDoubleClick);
             // 
@@ -3281,7 +3173,7 @@ namespace FTAnalyzer
             this.tabLooseDeaths.Controls.Add(this.dgLooseDeaths);
             this.tabLooseDeaths.Location = new System.Drawing.Point(4, 22);
             this.tabLooseDeaths.Name = "tabLooseDeaths";
-            this.tabLooseDeaths.Size = new System.Drawing.Size(1077, 417);
+            this.tabLooseDeaths.Size = new System.Drawing.Size(1076, 417);
             this.tabLooseDeaths.TabIndex = 3;
             this.tabLooseDeaths.Text = "Loose Deaths";
             this.tabLooseDeaths.UseVisualStyleBackColor = true;
@@ -3298,7 +3190,7 @@ namespace FTAnalyzer
             this.dgLooseDeaths.MultiSelect = false;
             this.dgLooseDeaths.Name = "dgLooseDeaths";
             this.dgLooseDeaths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgLooseDeaths.Size = new System.Drawing.Size(1077, 417);
+            this.dgLooseDeaths.Size = new System.Drawing.Size(1076, 417);
             this.dgLooseDeaths.TabIndex = 2;
             this.dgLooseDeaths.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLooseDeaths_CellDoubleClick);
             // 
@@ -3685,6 +3577,138 @@ namespace FTAnalyzer
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
+            // splitGedcom
+            // 
+            this.splitGedcom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitGedcom.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitGedcom.Location = new System.Drawing.Point(3, 3);
+            this.splitGedcom.Name = "splitGedcom";
+            this.splitGedcom.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitGedcom.Panel1
+            // 
+            this.splitGedcom.Panel1.Controls.Add(this.panel2);
+            this.splitGedcom.Panel1MinSize = 110;
+            // 
+            // splitGedcom.Panel2
+            // 
+            this.splitGedcom.Panel2.Controls.Add(this.rtbOutput);
+            this.splitGedcom.Size = new System.Drawing.Size(1078, 437);
+            this.splitGedcom.SplitterDistance = 110;
+            this.splitGedcom.TabIndex = 14;
+            // 
+            // rtbOutput
+            // 
+            this.rtbOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbOutput.Location = new System.Drawing.Point(0, 0);
+            this.rtbOutput.Name = "rtbOutput";
+            this.rtbOutput.ReadOnly = true;
+            this.rtbOutput.Size = new System.Drawing.Size(1078, 323);
+            this.rtbOutput.TabIndex = 14;
+            this.rtbOutput.Text = "";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Controls.Add(this.LbProgramName);
+            this.panel2.Controls.Add(this.label7);
+            this.panel2.Controls.Add(this.pbRelationships);
+            this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.pbFamilies);
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.pbIndividuals);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.pbSources);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1078, 110);
+            this.panel2.TabIndex = 13;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(943, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 19;
+            this.pictureBox1.TabStop = false;
+            // 
+            // LbProgramName
+            // 
+            this.LbProgramName.AutoSize = true;
+            this.LbProgramName.Font = new System.Drawing.Font("Kunstler Script", 52F, System.Drawing.FontStyle.Bold);
+            this.LbProgramName.Location = new System.Drawing.Point(415, 13);
+            this.LbProgramName.Name = "LbProgramName";
+            this.LbProgramName.Size = new System.Drawing.Size(522, 76);
+            this.LbProgramName.TabIndex = 17;
+            this.LbProgramName.Text = "Family Tree Analyzer";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 79);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(128, 13);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Relationships && Locations";
+            // 
+            // pbRelationships
+            // 
+            this.pbRelationships.Location = new System.Drawing.Point(134, 76);
+            this.pbRelationships.Name = "pbRelationships";
+            this.pbRelationships.Size = new System.Drawing.Size(275, 16);
+            this.pbRelationships.TabIndex = 15;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 57);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(85, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Loading Families";
+            // 
+            // pbFamilies
+            // 
+            this.pbFamilies.Location = new System.Drawing.Point(134, 54);
+            this.pbFamilies.Name = "pbFamilies";
+            this.pbFamilies.Size = new System.Drawing.Size(275, 16);
+            this.pbFamilies.TabIndex = 13;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 35);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(98, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Loading Individuals";
+            // 
+            // pbIndividuals
+            // 
+            this.pbIndividuals.Location = new System.Drawing.Point(134, 32);
+            this.pbIndividuals.Name = "pbIndividuals";
+            this.pbIndividuals.Size = new System.Drawing.Size(275, 16);
+            this.pbIndividuals.TabIndex = 11;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 13);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(87, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Loading Sources";
+            // 
+            // pbSources
+            // 
+            this.pbSources.Location = new System.Drawing.Point(134, 10);
+            this.pbSources.Name = "pbSources";
+            this.pbSources.Size = new System.Drawing.Size(275, 16);
+            this.pbSources.TabIndex = 9;
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -3759,9 +3783,6 @@ namespace FTAnalyzer
             this.tabPlaces.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgPlaces)).EndInit();
             this.tabDisplayProgress.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabSelector.ResumeLayout(false);
             this.tabMainLists.ResumeLayout(false);
             this.tabMainListsSelector.ResumeLayout(false);
@@ -3791,6 +3812,13 @@ namespace FTAnalyzer
             this.tabToday.ResumeLayout(false);
             this.tabToday.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).EndInit();
+            this.splitGedcom.Panel1.ResumeLayout(false);
+            this.splitGedcom.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitGedcom)).EndInit();
+            this.splitGedcom.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4033,16 +4061,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.DataGridView dgLooseBirths;
         private System.Windows.Forms.TabPage tabLooseDeaths;
         private System.Windows.Forms.DataGridView dgLooseDeaths;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label LbProgramName;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ProgressBar pbRelationships;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ProgressBar pbFamilies;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ProgressBar pbIndividuals;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ProgressBar pbSources;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Button btnAdvancedMissingData;
         private System.Windows.Forms.Button btnStandardMissingData;
@@ -4054,7 +4072,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.Button btnColourBMD;
         private System.Windows.Forms.CheckBox ckbIgnoreNoDeathDate;
         private System.Windows.Forms.CheckBox ckbIgnoreNoBirthDate;
-        private Utilities.ScrollingRichTextBox rtbOutput;
         private System.Windows.Forms.CheckBox ckbTTIncludeOnlyOneParent;
         private System.Windows.Forms.ToolStripMenuItem privacyPolicyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuHowManyGreats;
@@ -4104,7 +4121,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.RichTextBox rtbLCUpdateData;
         private Utilities.ScrollingRichTextBox rtbLCoutput;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TabPage LCVerify;
         private System.Windows.Forms.CheckBox chkLCRootPersonConfirm2;
         private System.Windows.Forms.GroupBox groupBox9;
@@ -4113,6 +4129,19 @@ namespace FTAnalyzer
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox txtLCEmail2;
         private System.Windows.Forms.MaskedTextBox txtLCPassword2;
+        private System.Windows.Forms.SplitContainer splitGedcom;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label LbProgramName;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ProgressBar pbRelationships;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ProgressBar pbFamilies;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ProgressBar pbIndividuals;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ProgressBar pbSources;
+        private Utilities.ScrollingRichTextBox rtbOutput;
     }
 }
 
