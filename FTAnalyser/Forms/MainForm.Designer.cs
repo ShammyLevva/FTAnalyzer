@@ -40,7 +40,7 @@ namespace FTAnalyzer
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -135,7 +135,6 @@ namespace FTAnalyzer
             this.dgDataErrors = new System.Windows.Forms.DataGridView();
             this.tbDuplicateScore = new System.Windows.Forms.TrackBar();
             this.chkLCRootPersonConfirm = new System.Windows.Forms.CheckBox();
-            this.chkLCRootPersonConfirm2 = new System.Windows.Forms.CheckBox();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
@@ -211,13 +210,6 @@ namespace FTAnalyzer
             this.txtLCEmail = new System.Windows.Forms.TextBox();
             this.txtLCPassword = new System.Windows.Forms.MaskedTextBox();
             this.btnUpdateLostCousinsWebsite = new System.Windows.Forms.Button();
-            this.LCVerify = new System.Windows.Forms.TabPage();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.btnLCLogin2 = new System.Windows.Forms.Button();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.txtLCEmail2 = new System.Windows.Forms.TextBox();
-            this.txtLCPassword2 = new System.Windows.Forms.MaskedTextBox();
             this.tabCensus = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnExportMissingCensusRefs = new System.Windows.Forms.Button();
@@ -264,6 +256,19 @@ namespace FTAnalyzer
             this.tabPlaces = new System.Windows.Forms.TabPage();
             this.dgPlaces = new System.Windows.Forms.DataGridView();
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
+            this.splitGedcom = new System.Windows.Forms.SplitContainer();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.LbProgramName = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.pbRelationships = new System.Windows.Forms.ProgressBar();
+            this.label6 = new System.Windows.Forms.Label();
+            this.pbFamilies = new System.Windows.Forms.ProgressBar();
+            this.label5 = new System.Windows.Forms.Label();
+            this.pbIndividuals = new System.Windows.Forms.ProgressBar();
+            this.label4 = new System.Windows.Forms.Label();
+            this.pbSources = new System.Windows.Forms.ProgressBar();
+            this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.tabSelector = new System.Windows.Forms.TabControl();
             this.tabMainLists = new System.Windows.Forms.TabPage();
             this.tabMainListsSelector = new System.Windows.Forms.TabControl();
@@ -343,19 +348,6 @@ namespace FTAnalyzer
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.splitGedcom = new System.Windows.Forms.SplitContainer();
-            this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.LbProgramName = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.pbRelationships = new System.Windows.Forms.ProgressBar();
-            this.label6 = new System.Windows.Forms.Label();
-            this.pbFamilies = new System.Windows.Forms.ProgressBar();
-            this.label5 = new System.Windows.Forms.Label();
-            this.pbIndividuals = new System.Windows.Forms.ProgressBar();
-            this.label4 = new System.Windows.Forms.Label();
-            this.pbSources = new System.Windows.Forms.ProgressBar();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -377,8 +369,6 @@ namespace FTAnalyzer
             this.Referrals.SuspendLayout();
             this.LCUpdatesTab.SuspendLayout();
             this.groupBox8.SuspendLayout();
-            this.LCVerify.SuspendLayout();
-            this.groupBox9.SuspendLayout();
             this.tabCensus.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -398,6 +388,12 @@ namespace FTAnalyzer
             this.tabPlaces.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgPlaces)).BeginInit();
             this.tabDisplayProgress.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitGedcom)).BeginInit();
+            this.splitGedcom.Panel1.SuspendLayout();
+            this.splitGedcom.Panel2.SuspendLayout();
+            this.splitGedcom.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabSelector.SuspendLayout();
             this.tabMainLists.SuspendLayout();
             this.tabMainListsSelector.SuspendLayout();
@@ -424,12 +420,6 @@ namespace FTAnalyzer
             this.tabFacts.SuspendLayout();
             this.tabToday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitGedcom)).BeginInit();
-            this.splitGedcom.Panel1.SuspendLayout();
-            this.splitGedcom.Panel2.SuspendLayout();
-            this.splitGedcom.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -1174,14 +1164,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 166);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1222,21 +1212,6 @@ namespace FTAnalyzer
         "son relates to the root person on the Lost Cousins website.");
             this.chkLCRootPersonConfirm.UseVisualStyleBackColor = true;
             this.chkLCRootPersonConfirm.CheckedChanged += new System.EventHandler(this.ChkLCRootPersonConfirm_CheckedChanged);
-            // 
-            // chkLCRootPersonConfirm2
-            // 
-            this.chkLCRootPersonConfirm2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkLCRootPersonConfirm2.Location = new System.Drawing.Point(30, 146);
-            this.chkLCRootPersonConfirm2.Name = "chkLCRootPersonConfirm2";
-            this.chkLCRootPersonConfirm2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkLCRootPersonConfirm2.Size = new System.Drawing.Size(407, 24);
-            this.chkLCRootPersonConfirm2.TabIndex = 6;
-            this.chkLCRootPersonConfirm2.Text = "rootperson";
-            this.chkLCRootPersonConfirm2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.toolTips.SetToolTip(this.chkLCRootPersonConfirm2, "The Lost Cousins Data includes a relationship field please make sure the root per" +
-        "son relates to the root person on the Lost Cousins website.");
-            this.chkLCRootPersonConfirm2.UseVisualStyleBackColor = true;
-            this.chkLCRootPersonConfirm2.CheckedChanged += new System.EventHandler(this.ChkLCRootPersonConfirm2_CheckedChanged);
             // 
             // printPreviewDialog
             // 
@@ -1672,7 +1647,6 @@ namespace FTAnalyzer
             // 
             this.LCSubTabs.Controls.Add(this.LCReportsTab);
             this.LCSubTabs.Controls.Add(this.LCUpdatesTab);
-            this.LCSubTabs.Controls.Add(this.LCVerify);
             this.LCSubTabs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LCSubTabs.Location = new System.Drawing.Point(3, 3);
             this.LCSubTabs.Name = "LCSubTabs";
@@ -2052,77 +2026,6 @@ namespace FTAnalyzer
             this.btnUpdateLostCousinsWebsite.UseVisualStyleBackColor = true;
             this.btnUpdateLostCousinsWebsite.Visible = false;
             this.btnUpdateLostCousinsWebsite.Click += new System.EventHandler(this.BtnUpdateLostCousinsWebsite_Click);
-            // 
-            // LCVerify
-            // 
-            this.LCVerify.Controls.Add(this.chkLCRootPersonConfirm2);
-            this.LCVerify.Controls.Add(this.groupBox9);
-            this.LCVerify.Location = new System.Drawing.Point(4, 22);
-            this.LCVerify.Name = "LCVerify";
-            this.LCVerify.Size = new System.Drawing.Size(1070, 411);
-            this.LCVerify.TabIndex = 2;
-            this.LCVerify.Text = "Verify";
-            this.LCVerify.UseVisualStyleBackColor = true;
-            // 
-            // groupBox9
-            // 
-            this.groupBox9.Controls.Add(this.btnLCLogin2);
-            this.groupBox9.Controls.Add(this.label22);
-            this.groupBox9.Controls.Add(this.label23);
-            this.groupBox9.Controls.Add(this.txtLCEmail2);
-            this.groupBox9.Controls.Add(this.txtLCPassword2);
-            this.groupBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox9.Location = new System.Drawing.Point(30, 22);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(407, 118);
-            this.groupBox9.TabIndex = 5;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Lost Cousins Login Details";
-            // 
-            // btnLCLogin2
-            // 
-            this.btnLCLogin2.BackColor = System.Drawing.Color.Red;
-            this.btnLCLogin2.Location = new System.Drawing.Point(310, 68);
-            this.btnLCLogin2.Name = "btnLCLogin2";
-            this.btnLCLogin2.Size = new System.Drawing.Size(75, 25);
-            this.btnLCLogin2.TabIndex = 3;
-            this.btnLCLogin2.Text = "Login";
-            this.btnLCLogin2.UseVisualStyleBackColor = false;
-            this.btnLCLogin2.Click += new System.EventHandler(this.BtnLCLogin_Click);
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(34, 72);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(68, 16);
-            this.label22.TabIndex = 3;
-            this.label22.Text = "Password";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(6, 31);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(96, 16);
-            this.label23.TabIndex = 2;
-            this.label23.Text = "Email Address";
-            // 
-            // txtLCEmail2
-            // 
-            this.txtLCEmail2.Location = new System.Drawing.Point(108, 28);
-            this.txtLCEmail2.Name = "txtLCEmail2";
-            this.txtLCEmail2.Size = new System.Drawing.Size(277, 22);
-            this.txtLCEmail2.TabIndex = 1;
-            // 
-            // txtLCPassword2
-            // 
-            this.txtLCPassword2.Location = new System.Drawing.Point(108, 69);
-            this.txtLCPassword2.Name = "txtLCPassword2";
-            this.txtLCPassword2.PasswordChar = '*';
-            this.txtLCPassword2.Size = new System.Drawing.Size(196, 22);
-            this.txtLCPassword2.TabIndex = 2;
             // 
             // tabCensus
             // 
@@ -2679,6 +2582,138 @@ namespace FTAnalyzer
             this.tabDisplayProgress.TabIndex = 1;
             this.tabDisplayProgress.Text = "Gedcom Stats";
             this.tabDisplayProgress.UseVisualStyleBackColor = true;
+            // 
+            // splitGedcom
+            // 
+            this.splitGedcom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitGedcom.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitGedcom.Location = new System.Drawing.Point(3, 3);
+            this.splitGedcom.Name = "splitGedcom";
+            this.splitGedcom.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitGedcom.Panel1
+            // 
+            this.splitGedcom.Panel1.Controls.Add(this.panel2);
+            this.splitGedcom.Panel1MinSize = 110;
+            // 
+            // splitGedcom.Panel2
+            // 
+            this.splitGedcom.Panel2.Controls.Add(this.rtbOutput);
+            this.splitGedcom.Size = new System.Drawing.Size(1078, 437);
+            this.splitGedcom.SplitterDistance = 110;
+            this.splitGedcom.TabIndex = 14;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Controls.Add(this.LbProgramName);
+            this.panel2.Controls.Add(this.label7);
+            this.panel2.Controls.Add(this.pbRelationships);
+            this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.pbFamilies);
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.pbIndividuals);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.pbSources);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1078, 110);
+            this.panel2.TabIndex = 13;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(943, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 19;
+            this.pictureBox1.TabStop = false;
+            // 
+            // LbProgramName
+            // 
+            this.LbProgramName.AutoSize = true;
+            this.LbProgramName.Font = new System.Drawing.Font("Kunstler Script", 52F, System.Drawing.FontStyle.Bold);
+            this.LbProgramName.Location = new System.Drawing.Point(415, 13);
+            this.LbProgramName.Name = "LbProgramName";
+            this.LbProgramName.Size = new System.Drawing.Size(522, 76);
+            this.LbProgramName.TabIndex = 17;
+            this.LbProgramName.Text = "Family Tree Analyzer";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 79);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(128, 13);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Relationships && Locations";
+            // 
+            // pbRelationships
+            // 
+            this.pbRelationships.Location = new System.Drawing.Point(134, 76);
+            this.pbRelationships.Name = "pbRelationships";
+            this.pbRelationships.Size = new System.Drawing.Size(275, 16);
+            this.pbRelationships.TabIndex = 15;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 57);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(85, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Loading Families";
+            // 
+            // pbFamilies
+            // 
+            this.pbFamilies.Location = new System.Drawing.Point(134, 54);
+            this.pbFamilies.Name = "pbFamilies";
+            this.pbFamilies.Size = new System.Drawing.Size(275, 16);
+            this.pbFamilies.TabIndex = 13;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 35);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(98, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Loading Individuals";
+            // 
+            // pbIndividuals
+            // 
+            this.pbIndividuals.Location = new System.Drawing.Point(134, 32);
+            this.pbIndividuals.Name = "pbIndividuals";
+            this.pbIndividuals.Size = new System.Drawing.Size(275, 16);
+            this.pbIndividuals.TabIndex = 11;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 13);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(87, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Loading Sources";
+            // 
+            // pbSources
+            // 
+            this.pbSources.Location = new System.Drawing.Point(134, 10);
+            this.pbSources.Name = "pbSources";
+            this.pbSources.Size = new System.Drawing.Size(275, 16);
+            this.pbSources.TabIndex = 9;
+            // 
+            // rtbOutput
+            // 
+            this.rtbOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbOutput.Location = new System.Drawing.Point(0, 0);
+            this.rtbOutput.Name = "rtbOutput";
+            this.rtbOutput.ReadOnly = true;
+            this.rtbOutput.Size = new System.Drawing.Size(1078, 323);
+            this.rtbOutput.TabIndex = 14;
+            this.rtbOutput.Text = "";
             // 
             // tabSelector
             // 
@@ -3577,138 +3612,6 @@ namespace FTAnalyzer
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // splitGedcom
-            // 
-            this.splitGedcom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitGedcom.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitGedcom.Location = new System.Drawing.Point(3, 3);
-            this.splitGedcom.Name = "splitGedcom";
-            this.splitGedcom.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitGedcom.Panel1
-            // 
-            this.splitGedcom.Panel1.Controls.Add(this.panel2);
-            this.splitGedcom.Panel1MinSize = 110;
-            // 
-            // splitGedcom.Panel2
-            // 
-            this.splitGedcom.Panel2.Controls.Add(this.rtbOutput);
-            this.splitGedcom.Size = new System.Drawing.Size(1078, 437);
-            this.splitGedcom.SplitterDistance = 110;
-            this.splitGedcom.TabIndex = 14;
-            // 
-            // rtbOutput
-            // 
-            this.rtbOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbOutput.Location = new System.Drawing.Point(0, 0);
-            this.rtbOutput.Name = "rtbOutput";
-            this.rtbOutput.ReadOnly = true;
-            this.rtbOutput.Size = new System.Drawing.Size(1078, 323);
-            this.rtbOutput.TabIndex = 14;
-            this.rtbOutput.Text = "";
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Controls.Add(this.LbProgramName);
-            this.panel2.Controls.Add(this.label7);
-            this.panel2.Controls.Add(this.pbRelationships);
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.pbFamilies);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.pbIndividuals);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.pbSources);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1078, 110);
-            this.panel2.TabIndex = 13;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(943, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox1.TabIndex = 19;
-            this.pictureBox1.TabStop = false;
-            // 
-            // LbProgramName
-            // 
-            this.LbProgramName.AutoSize = true;
-            this.LbProgramName.Font = new System.Drawing.Font("Kunstler Script", 52F, System.Drawing.FontStyle.Bold);
-            this.LbProgramName.Location = new System.Drawing.Point(415, 13);
-            this.LbProgramName.Name = "LbProgramName";
-            this.LbProgramName.Size = new System.Drawing.Size(522, 76);
-            this.LbProgramName.TabIndex = 17;
-            this.LbProgramName.Text = "Family Tree Analyzer";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 79);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(128, 13);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "Relationships && Locations";
-            // 
-            // pbRelationships
-            // 
-            this.pbRelationships.Location = new System.Drawing.Point(134, 76);
-            this.pbRelationships.Name = "pbRelationships";
-            this.pbRelationships.Size = new System.Drawing.Size(275, 16);
-            this.pbRelationships.TabIndex = 15;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 57);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(85, 13);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Loading Families";
-            // 
-            // pbFamilies
-            // 
-            this.pbFamilies.Location = new System.Drawing.Point(134, 54);
-            this.pbFamilies.Name = "pbFamilies";
-            this.pbFamilies.Size = new System.Drawing.Size(275, 16);
-            this.pbFamilies.TabIndex = 13;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 35);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(98, 13);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Loading Individuals";
-            // 
-            // pbIndividuals
-            // 
-            this.pbIndividuals.Location = new System.Drawing.Point(134, 32);
-            this.pbIndividuals.Name = "pbIndividuals";
-            this.pbIndividuals.Size = new System.Drawing.Size(275, 16);
-            this.pbIndividuals.TabIndex = 11;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 13);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Loading Sources";
-            // 
-            // pbSources
-            // 
-            this.pbSources.Location = new System.Drawing.Point(134, 10);
-            this.pbSources.Name = "pbSources";
-            this.pbSources.Size = new System.Drawing.Size(275, 16);
-            this.pbSources.TabIndex = 9;
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -3760,9 +3663,6 @@ namespace FTAnalyzer
             this.LCUpdatesTab.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
-            this.LCVerify.ResumeLayout(false);
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
             this.tabCensus.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
@@ -3783,6 +3683,13 @@ namespace FTAnalyzer
             this.tabPlaces.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgPlaces)).EndInit();
             this.tabDisplayProgress.ResumeLayout(false);
+            this.splitGedcom.Panel1.ResumeLayout(false);
+            this.splitGedcom.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitGedcom)).EndInit();
+            this.splitGedcom.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabSelector.ResumeLayout(false);
             this.tabMainLists.ResumeLayout(false);
             this.tabMainListsSelector.ResumeLayout(false);
@@ -3812,13 +3719,6 @@ namespace FTAnalyzer
             this.tabToday.ResumeLayout(false);
             this.tabToday.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).EndInit();
-            this.splitGedcom.Panel1.ResumeLayout(false);
-            this.splitGedcom.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitGedcom)).EndInit();
-            this.splitGedcom.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4121,14 +4021,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.RichTextBox rtbLCUpdateData;
         private Utilities.ScrollingRichTextBox rtbLCoutput;
-        private System.Windows.Forms.TabPage LCVerify;
-        private System.Windows.Forms.CheckBox chkLCRootPersonConfirm2;
-        private System.Windows.Forms.GroupBox groupBox9;
-        private System.Windows.Forms.Button btnLCLogin2;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox txtLCEmail2;
-        private System.Windows.Forms.MaskedTextBox txtLCPassword2;
         private System.Windows.Forms.SplitContainer splitGedcom;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pictureBox1;

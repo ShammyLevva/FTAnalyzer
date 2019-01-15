@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.3.0.0-beta12";
+        public static string VERSION = "7.3.0.0-beta15";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1253,14 +1253,12 @@ namespace FTAnalyzer
                     btnLC1881EW.Enabled = btnLC1881Scot.Enabled = btnLC1841EW.Enabled =
                         btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled =
                         btnLC1911EW.Enabled = ft.IndividualCount > 0;
+                    if (LCSubTabs.TabPages.Count > 2)
+                        LCSubTabs.TabPages.RemoveAt(2); // hide verify tab
                     UpdateLostCousinsReport();
                     UpdateLCOutput();
                     txtLCEmail.Text = (string)Application.UserAppDataRegistry.GetValue("LostCousinsEmail", string.Empty);
-                    txtLCEmail2.Text = txtLCEmail.Text;
                     chkLCRootPersonConfirm.Text = $"Confirm {ft.RootPerson} as root Person";
-                    chkLCRootPersonConfirm2.Text = chkLCRootPersonConfirm.Text;
-                    if(LCSubTabs.TabPages.Count > 2)
-                        LCSubTabs.TabPages.RemoveAt(2); // hide verify tab
                     tabLostCousins.Refresh();
                     Analytics.TrackAction(Analytics.MainFormAction, Analytics.LostCousinsTabEvent);
                     HourGlass(false);
@@ -1580,8 +1578,6 @@ namespace FTAnalyzer
             bool websiteAvailable = ExportToLostCousins.CheckLostCousinsLogin(txtLCEmail.Text, txtLCPassword.Text);
             btnLCLogin.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
             btnLCLogin.Enabled = !websiteAvailable;
-            btnLCLogin2.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
-            btnLCLogin2.Enabled = !websiteAvailable;
             btnUpdateLostCousinsWebsite.Visible = websiteAvailable;
             if (websiteAvailable)
                 UIHelpers.ShowMessage("Lost Cousins login succeeded.");
@@ -1701,14 +1697,6 @@ namespace FTAnalyzer
         {
             btnUpdateLostCousinsWebsite.Enabled = chkLCRootPersonConfirm.Checked;
             btnUpdateLostCousinsWebsite.BackColor = chkLCRootPersonConfirm.Checked ? Color.LightGreen : Color.LightGray;
-            chkLCRootPersonConfirm2.Checked = chkLCRootPersonConfirm.Checked;
-        }
-
-        void ChkLCRootPersonConfirm2_CheckedChanged(object sender, EventArgs e)
-        {
-            btnUpdateLostCousinsWebsite.Enabled = chkLCRootPersonConfirm2.Checked;
-            btnUpdateLostCousinsWebsite.BackColor = chkLCRootPersonConfirm2.Checked ? Color.LightGreen : Color.LightGray;
-            chkLCRootPersonConfirm.Checked = chkLCRootPersonConfirm2.Checked;
         }
 
         void BtnLC1881EW_Click(object sender, EventArgs e)
