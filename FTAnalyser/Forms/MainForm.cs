@@ -1962,13 +1962,13 @@ namespace FTAnalyzer
                         DatabaseHelper dbh = DatabaseHelper.Instance;
                         if (dbh.StartBackupRestoreDatabase())
                         {
-                            File.Copy(dbh.Filename, dbh.CurrentFilename, true); // copy exisiting file to safety
+                            File.Copy(dbh.DatabaseFile, dbh.CurrentFilename, true); // copy exisiting file to safety
                             zip.ExtractAll(dbh.DatabasePath, ExtractExistingFileAction.OverwriteSilently);
                             if (dbh.RestoreDatabase(new Progress<string>(value => { rtbOutput.AppendText(value); })))
                                 MessageBox.Show("Database restored from " + restoreDatabase.FileName, "FTAnalyzer Database Restore Complete");
                             else
                             {
-                                File.Copy(dbh.CurrentFilename, dbh.Filename, true);
+                                File.Copy(dbh.CurrentFilename, dbh.DatabaseFile, true);
                                 dbh.RestoreDatabase(new Progress<string>(value => { rtbOutput.AppendText(value); })); // restore original database
                                 failed = true;
                             }
