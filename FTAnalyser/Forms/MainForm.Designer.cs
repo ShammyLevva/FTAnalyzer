@@ -348,6 +348,7 @@ namespace FTAnalyzer
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.chkSurnamesIgnoreCase = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -3231,6 +3232,7 @@ namespace FTAnalyzer
             // 
             // tabSurnames
             // 
+            this.tabSurnames.Controls.Add(this.chkSurnamesIgnoreCase);
             this.tabSurnames.Controls.Add(this.btnShowSurnames);
             this.tabSurnames.Controls.Add(this.dgSurnames);
             this.tabSurnames.Controls.Add(this.reltypesSurnames);
@@ -3612,6 +3614,16 @@ namespace FTAnalyzer
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
+            // chkSurnamesIgnoreCase
+            // 
+            this.chkSurnamesIgnoreCase.AutoSize = true;
+            this.chkSurnamesIgnoreCase.Location = new System.Drawing.Point(497, 78);
+            this.chkSurnamesIgnoreCase.Name = "chkSurnamesIgnoreCase";
+            this.chkSurnamesIgnoreCase.Size = new System.Drawing.Size(83, 17);
+            this.chkSurnamesIgnoreCase.TabIndex = 24;
+            this.chkSurnamesIgnoreCase.Text = "Ignore Case";
+            this.chkSurnamesIgnoreCase.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -3713,6 +3725,7 @@ namespace FTAnalyzer
             this.tabLooseDeaths.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).EndInit();
             this.tabSurnames.ResumeLayout(false);
+            this.tabSurnames.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSurnames)).EndInit();
             this.tabFacts.ResumeLayout(false);
             this.tabFacts.PerformLayout();
@@ -4034,6 +4047,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ProgressBar pbSources;
         private Utilities.ScrollingRichTextBox rtbOutput;
+        private System.Windows.Forms.CheckBox chkSurnamesIgnoreCase;
     }
 }
 

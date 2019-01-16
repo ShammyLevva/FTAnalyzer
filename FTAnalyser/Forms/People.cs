@@ -88,9 +88,9 @@ namespace FTAnalyzer.Forms
             UpdateStatusCount();
         }
 
-        public void SetSurnameStats(SurnameStats stat)
+        public void SetSurnameStats(SurnameStats stat, bool ignoreCase)
         {
-            Text = "Individuals & Families whose surame is " + stat.Surname;
+            Text = $"Individuals & Families whose surame is {stat.Surname}";
             SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
             bool indSurnames(Individual x) => x.Surname.Equals(stat.Surname);
             foreach (Individual i in ft.AllIndividuals.Filter(indSurnames))
@@ -99,7 +99,7 @@ namespace FTAnalyzer.Forms
             SortIndividuals();
             dgIndividuals.Dock = DockStyle.Fill;
 
-            bool famSurnames(Family x) => x.ContainsSurname(stat.Surname);
+            bool famSurnames(Family x) => x.ContainsSurname(stat.Surname, ignoreCase);
             SortableBindingList<IDisplayFamily> dsFam = new SortableBindingList<IDisplayFamily>();
             foreach (Family f in ft.AllFamilies.Filter(famSurnames))
                 dsFam.Add(f);

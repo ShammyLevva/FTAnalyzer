@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.3.0.0-beta15";
+        public static string VERSION = "7.3.0.0-beta16";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1130,7 +1130,7 @@ namespace FTAnalyzer
                 HourGlass(true);
                 SurnameStats stat = (SurnameStats)dgSurnames.CurrentRow.DataBoundItem;
                 People frmInd = new People();
-                frmInd.SetSurnameStats(stat);
+                frmInd.SetSurnameStats(stat, chkSurnamesIgnoreCase.Checked);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
                 HourGlass(false);
@@ -2832,8 +2832,8 @@ namespace FTAnalyzer
                 IEnumerable<Family> candidates = ft.AllFamilies;
                 Predicate<Family> relationFilter = relTypesColoured.BuildFamilyFilter<Family>(x => x.RelationTypes);
                 if (txtColouredSurname.Text.Length > 0)
-                    candidates = candidates.Filter(x => x.ContainsSurname(txtColouredSurname.Text));
-                List<Family> list = candidates.Filter(relationFilter).ToList<Family>();
+                    candidates = candidates.Filter(x => x.ContainsSurname(txtColouredSurname.Text, true));
+                List<Family> list = candidates.Filter(relationFilter).ToList();
                 list.Sort(new DefaultFamilyComparer());
                 foreach (Family family in list)
                 {
@@ -3301,12 +3301,12 @@ namespace FTAnalyzer
             Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => x.RelationType);
             Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
             var progress = new Progress<int>(value => { tspbTabProgress.Value = value; });
-            var list = await Task.Run(() => new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(indFilter, famFilter, progress)));
+            var list = await Task.Run(() => new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked)));
             dgSurnames.DataSource = list;
             dgSurnames.Sort(dgSurnames.Columns["Surname"], ListSortDirection.Ascending);
             dgSurnames.AllowUserToResizeColumns = true;
             dgSurnames.Focus();
-            tsCountLabel.Text = Messages.Count + list.Count + " Surnames.";
+            tsCountLabel.Text = $"{Messages.Count}{list.Count} Surnames.";
             tsHintsLabel.Text = Messages.Hints_Surname;
             tspbTabProgress.Visible = false;
             HourGlass(false);
