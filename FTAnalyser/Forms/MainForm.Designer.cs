@@ -314,6 +314,7 @@ namespace FTAnalyzer
             this.tabLooseDeaths = new System.Windows.Forms.TabPage();
             this.dgLooseDeaths = new System.Windows.Forms.DataGridView();
             this.tabSurnames = new System.Windows.Forms.TabPage();
+            this.chkSurnamesIgnoreCase = new System.Windows.Forms.CheckBox();
             this.btnShowSurnames = new System.Windows.Forms.Button();
             this.dgSurnames = new System.Windows.Forms.DataGridView();
             this.Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -348,7 +349,6 @@ namespace FTAnalyzer
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.chkSurnamesIgnoreCase = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -3244,6 +3244,18 @@ namespace FTAnalyzer
             this.tabSurnames.Text = "Surnames";
             this.tabSurnames.UseVisualStyleBackColor = true;
             // 
+            // chkSurnamesIgnoreCase
+            // 
+            this.chkSurnamesIgnoreCase.AutoSize = true;
+            this.chkSurnamesIgnoreCase.Checked = true;
+            this.chkSurnamesIgnoreCase.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSurnamesIgnoreCase.Location = new System.Drawing.Point(497, 78);
+            this.chkSurnamesIgnoreCase.Name = "chkSurnamesIgnoreCase";
+            this.chkSurnamesIgnoreCase.Size = new System.Drawing.Size(83, 17);
+            this.chkSurnamesIgnoreCase.TabIndex = 24;
+            this.chkSurnamesIgnoreCase.Text = "Ignore Case";
+            this.chkSurnamesIgnoreCase.UseVisualStyleBackColor = true;
+            // 
             // btnShowSurnames
             // 
             this.btnShowSurnames.Location = new System.Drawing.Point(337, 74);
@@ -3613,16 +3625,6 @@ namespace FTAnalyzer
             // 
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
-            // 
-            // chkSurnamesIgnoreCase
-            // 
-            this.chkSurnamesIgnoreCase.AutoSize = true;
-            this.chkSurnamesIgnoreCase.Location = new System.Drawing.Point(497, 78);
-            this.chkSurnamesIgnoreCase.Name = "chkSurnamesIgnoreCase";
-            this.chkSurnamesIgnoreCase.Size = new System.Drawing.Size(83, 17);
-            this.chkSurnamesIgnoreCase.TabIndex = 24;
-            this.chkSurnamesIgnoreCase.Text = "Ignore Case";
-            this.chkSurnamesIgnoreCase.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
