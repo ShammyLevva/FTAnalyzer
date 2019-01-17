@@ -1,15 +1,23 @@
-#### Updated BETA Release (NOT YET LIVE) Version 7.3.0.0 11th January 2019  
+#### Updated BETA Release (NOT YET LIVE) Version 7.3.0.0 17th January 2019  
 **Updates**  
 Major new feature ability to automatically post your Lost Cousins entries to the Lost Cousins website  
 Tracks uploaded individuals and creates an automated Lost Cousins Fact Type for you.  
 This relies on the individual name and ID for a more permenent flagging you should still add a flag to your GEDCOM file  
 Added Line Errors report to show you where the error is in the original file  
+Added Linked relationship type - for people who are linked to root person but not related  
+Added an option on Surnames tab to ignore case  
+Added extra recognition of Scottish Parishes to fix missing cases  
+Added extra recognition of some US 1940 census references  
+Added piece number search to FMP census if Schedule missing - typically UK 1911 census  
 
 **Bugfixes**  
 Fix issue with 3 digit years in a between statement  
 Census families were missing one parent families  
 Fixed issue with filestream being held open once file had loaded  
 Fixed issue with min/max dates arithmetic  
+Replace old custom HttpUtility class with system one  
+Fix issue on front page when maximising form  
+Report if Census reference check is disabled  
 
 #### Updated Release Version 7.2.4.4 3rd January 2019  
 **Bugfixes**  
