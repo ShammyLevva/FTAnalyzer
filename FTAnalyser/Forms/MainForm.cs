@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.3.0.0-beta17";
+        public static string VERSION = "7.3.0.0-RC3";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1494,12 +1494,14 @@ namespace FTAnalyzer
 
         async void BtnUpdateLostCousinsWebsite_Click(object sender, EventArgs e)
         {
+            btnUpdateLostCousinsWebsite.Enabled = false;
             if (LCUpdates?.Count > 0)
             {
                 rtbLCoutput.Text = string.Empty;
                 int response = UIHelpers.ShowYesNo($"You have {LCUpdates.Count} possible records to add to Lost Cousins. Proceed?");
                 if (response == UIHelpers.Yes)
                 {
+                    rtbLCoutput.Text = "Started Processing Lost Cousins entries.\n\n";
                     Progress<string> outputText = new Progress<string>(value => { rtbLCoutput.AppendText(value); });
                     int count = await Task.Run(() => ExportToLostCousins.ProcessList(LCUpdates, outputText));
                     string resultText = $"{DateTime.Now.ToString("yyyy-MM-dd")} uploaded {count} records";
@@ -1511,6 +1513,7 @@ namespace FTAnalyzer
             }
             else
                 UIHelpers.ShowMessage("You have no records to add to Lost Cousins at this time. Use the Research Suggestions to find more people on the census, or enter/update missing or incomplete census references.");
+            btnUpdateLostCousinsWebsite.Enabled = true;
         }
 
         void UpdateLCOutput()
@@ -1537,7 +1540,9 @@ namespace FTAnalyzer
 
         void UpdateLostCousinsReport()
         {
+            HourGlass(true);
             rtbLostCousins.Text = ft.UpdateLostCousinsReport(relTypesLC.BuildFilter<Individual>(x => x.RelationType));
+            HourGlass(false);
         }
 
         void BtnLCDuplicates_Click(object sender, EventArgs e)
