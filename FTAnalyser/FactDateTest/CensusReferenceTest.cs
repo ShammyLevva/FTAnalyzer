@@ -54,6 +54,7 @@ namespace CensusReferenceTest
             USCensusTest("Year: 1930; Census Place: Sea Cliff, Nassau, New York; Roll: 1462; Page: 14B; Enumeration District: 193;", CensusDate.USCENSUS1930, "1462", "193", "14B");
             USCensusTest("Year: 1900; Census Place: South Prairie, Pierce,Washington; Roll: T623_1748; Page: 4B; Enumeration District: 160.", CensusDate.USCENSUS1900, "T623_1748", "160", "4B");
             USCensusTest("Census 1910 Springfield MO USA Ward 8 ED44 p9A", CensusDate.USCENSUS1910, "8", "44", "9A");
+            USCensusTest("United States Census, 1880, database with images, FamilySearch(https://familysearch.org/ark:/61903/1:1:M4J9-Z86 : 12 August 2017), John Smith, Spring Hill, Barbour, Alabama, United States; citing enumeration district ED 13, sheet 155B, NARA microfilm publication T9 (Washington D.C.: National Archives and Records Administration, n.d.), roll 0002; FHL microfilm 1,254,002.", CensusDate.USCENSUS1880, "2", "13", "155B");
             USCensusTest("Census 1940 Minneapolis MN USA Ward 7 ED89-190 p3B", CensusDate.USCENSUS1940, "7", "89-190", "3B");
             USCensusTest("Census 1940 Lebanon NH USA T627_2286 Page 12B ED 5-33", CensusDate.USCENSUS1940, "2286", "5-33", "12B");
             USCensusTest("Year: 1940; Census Place: Smyrna, Kent, Delaware; Roll: T627_544; Page: 10B; Enumeration District: 1-2", CensusDate.USCENSUS1940, "544", "1-2", "10B");
