@@ -1,3 +1,13 @@
+#### Updated Release Version 7.3.1.0 19th January 2019
+**Updates**
+Added option to convert any residence facts with a valid census reference to a census fact  
+Added breakdown of husband and wifes forenames and surnames in family reports  
+
+**Bugfixes**
+Added further fix for US 1940 census on records with very long notes  
+Added Null pointer fix for loading Lost Cousins entries where no prior records exist  
+LostCousin Facts that are auto created treated as LC_FTA facts to allow reporting separately from GEDCOM Lost Cousin facts  
+
 #### Major Release Version 7.3.0.0 19th January 2019  
 **Updates**  
 Major new feature ability to automatically post your Lost Cousins entries to the Lost Cousins website  

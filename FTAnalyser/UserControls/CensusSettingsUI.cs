@@ -19,6 +19,7 @@ namespace FTAnalyzer.UserControls
             chkAutoCreateCensus.Checked = Properties.GeneralSettings.Default.AutoCreateCensusFacts;
             chkAddCreatedLocations.Checked = Properties.GeneralSettings.Default.AddCreatedLocations;
             chkSkipCensusReferences.Checked = Properties.GeneralSettings.Default.SkipCensusReferences;
+            chkConvertResidenceFacts.Checked = Properties.GeneralSettings.Default.ConvertResidenceFacts;
         }
 
         #region IOptions Members
@@ -33,6 +34,7 @@ namespace FTAnalyzer.UserControls
             Properties.GeneralSettings.Default.AutoCreateCensusFacts = chkAutoCreateCensus.Checked;
             Properties.GeneralSettings.Default.AddCreatedLocations = chkAddCreatedLocations.Checked;
             Properties.GeneralSettings.Default.SkipCensusReferences = chkSkipCensusReferences.Checked;
+            Properties.GeneralSettings.Default.ConvertResidenceFacts = chkConvertResidenceFacts.Checked;
             Properties.GeneralSettings.Default.Save();
             OnCompactCensusRefChanged();
         }
@@ -82,6 +84,8 @@ namespace FTAnalyzer.UserControls
         void ChkTolerateInaccurateCensus_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
 
         void ChkCensusResidence_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
+
+        void ChkConvertResidenceFact_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
 
         void ChkFamilyCensus_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
 

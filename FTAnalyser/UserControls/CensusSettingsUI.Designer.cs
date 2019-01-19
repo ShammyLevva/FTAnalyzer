@@ -39,6 +39,7 @@
             this.chkHideMissingTagged = new System.Windows.Forms.CheckBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.chkSkipCensusReferences = new System.Windows.Forms.CheckBox();
+            this.chkConvertResidenceFacts = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,7 +49,7 @@
             this.chkAddCreatedLocations.Checked = true;
             this.chkAddCreatedLocations.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkAddCreatedLocations.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chkAddCreatedLocations.Location = new System.Drawing.Point(3, 118);
+            this.chkAddCreatedLocations.Location = new System.Drawing.Point(3, 141);
             this.chkAddCreatedLocations.Name = "chkAddCreatedLocations";
             this.chkAddCreatedLocations.Size = new System.Drawing.Size(290, 17);
             this.chkAddCreatedLocations.TabIndex = 36;
@@ -62,7 +63,7 @@
             this.chkAutoCreateCensus.Checked = true;
             this.chkAutoCreateCensus.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkAutoCreateCensus.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chkAutoCreateCensus.Location = new System.Drawing.Point(3, 95);
+            this.chkAutoCreateCensus.Location = new System.Drawing.Point(3, 118);
             this.chkAutoCreateCensus.Name = "chkAutoCreateCensus";
             this.chkAutoCreateCensus.Size = new System.Drawing.Size(274, 17);
             this.chkAutoCreateCensus.TabIndex = 35;
@@ -74,7 +75,7 @@
             // 
             this.chkCompactCensusRef.AutoSize = true;
             this.chkCompactCensusRef.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chkCompactCensusRef.Location = new System.Drawing.Point(3, 72);
+            this.chkCompactCensusRef.Location = new System.Drawing.Point(3, 95);
             this.chkCompactCensusRef.Name = "chkCompactCensusRef";
             this.chkCompactCensusRef.Size = new System.Drawing.Size(186, 17);
             this.chkCompactCensusRef.TabIndex = 34;
@@ -85,7 +86,7 @@
             // 
             this.chkFamilyCensus.AutoSize = true;
             this.chkFamilyCensus.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chkFamilyCensus.Location = new System.Drawing.Point(3, 49);
+            this.chkFamilyCensus.Location = new System.Drawing.Point(3, 72);
             this.chkFamilyCensus.Name = "chkFamilyCensus";
             this.chkFamilyCensus.Size = new System.Drawing.Size(243, 17);
             this.chkFamilyCensus.TabIndex = 33;
@@ -99,7 +100,7 @@
             this.chkTolerateInaccurateCensus.Checked = true;
             this.chkTolerateInaccurateCensus.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkTolerateInaccurateCensus.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chkTolerateInaccurateCensus.Location = new System.Drawing.Point(3, 26);
+            this.chkTolerateInaccurateCensus.Location = new System.Drawing.Point(3, 49);
             this.chkTolerateInaccurateCensus.Name = "chkTolerateInaccurateCensus";
             this.chkTolerateInaccurateCensus.Size = new System.Drawing.Size(237, 17);
             this.chkTolerateInaccurateCensus.TabIndex = 32;
@@ -137,7 +138,7 @@
             this.chkHideMissingTagged.Checked = true;
             this.chkHideMissingTagged.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkHideMissingTagged.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chkHideMissingTagged.Location = new System.Drawing.Point(3, 141);
+            this.chkHideMissingTagged.Location = new System.Drawing.Point(3, 164);
             this.chkHideMissingTagged.Name = "chkHideMissingTagged";
             this.chkHideMissingTagged.Size = new System.Drawing.Size(241, 17);
             this.chkHideMissingTagged.TabIndex = 38;
@@ -154,12 +155,26 @@
             this.chkSkipCensusReferences.Checked = true;
             this.chkSkipCensusReferences.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSkipCensusReferences.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chkSkipCensusReferences.Location = new System.Drawing.Point(3, 164);
+            this.chkSkipCensusReferences.Location = new System.Drawing.Point(3, 187);
             this.chkSkipCensusReferences.Name = "chkSkipCensusReferences";
             this.chkSkipCensusReferences.Size = new System.Drawing.Size(263, 17);
             this.chkSkipCensusReferences.TabIndex = 39;
             this.chkSkipCensusReferences.Text = "Skip checking for Census References in notes etc";
             this.chkSkipCensusReferences.UseVisualStyleBackColor = true;
+            // 
+            // chkConvertResidenceFacts
+            // 
+            this.chkConvertResidenceFacts.AutoSize = true;
+            this.chkConvertResidenceFacts.Checked = true;
+            this.chkConvertResidenceFacts.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkConvertResidenceFacts.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.chkConvertResidenceFacts.Location = new System.Drawing.Point(3, 26);
+            this.chkConvertResidenceFacts.Name = "chkConvertResidenceFacts";
+            this.chkConvertResidenceFacts.Size = new System.Drawing.Size(303, 17);
+            this.chkConvertResidenceFacts.TabIndex = 40;
+            this.chkConvertResidenceFacts.Text = "Convert Residence Facts w/census ref to Census Facts (*)";
+            this.chkConvertResidenceFacts.UseVisualStyleBackColor = true;
+            this.chkConvertResidenceFacts.CheckedChanged += new System.EventHandler(this.ChkConvertResidenceFact_CheckedChanged);
             // 
             // CensusSettingsUI
             // 
@@ -167,6 +182,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
+            this.Controls.Add(this.chkConvertResidenceFacts);
             this.Controls.Add(this.chkSkipCensusReferences);
             this.Controls.Add(this.chkHideMissingTagged);
             this.Controls.Add(this.label1);
@@ -196,5 +212,6 @@
         private System.Windows.Forms.CheckBox chkHideMissingTagged;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.CheckBox chkSkipCensusReferences;
+        private System.Windows.Forms.CheckBox chkConvertResidenceFacts;
     }
 }

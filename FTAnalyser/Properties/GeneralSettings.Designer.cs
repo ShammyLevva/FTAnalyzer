@@ -322,5 +322,17 @@ namespace FTAnalyzer.Properties {
                 this["SkipFixingLocations"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ConvertResidenceFacts {
+            get {
+                return ((bool)(this["ConvertResidenceFacts"]));
+            }
+            set {
+                this["ConvertResidenceFacts"] = value;
+            }
+        }
     }
 }
