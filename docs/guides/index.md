@@ -6,4 +6,4 @@ Part Two - [Family Tree Analyzer Guide Part 2 - Introduction to the Menus & Tabs
 
 Part Three [Family Tree Analyzer Guide Part 3 - Errors & Specialist Tabs](Family%20Tree%20Analyzer%20Guide%20Part%203%20-%20Errors%20%26%20Specialist%20Tabs.pdf) - deals with the error report tabs and the specialist tabs.
 
-Part Four [Family Tree Analyzer Guide Part 4 - Lost Cousins Tabs](Family%20Tree%20Analyzer%20Lost%20CousinsGuide.pdf) - deals with how to use the Lost Cousins report to automatically find other people who are researching the same family as you.
+Part Four [Family Tree Analyzer Guide Part 4 - Lost Cousins Tabs](Family%20Tree%20Analyzer%20Lost%20Cousins%20Guide.pdf) - deals with how to use the Lost Cousins report to automatically find other people who are researching the same family as you.
