@@ -113,7 +113,7 @@ namespace CensusReferenceTest
             Assert.IsTrue(censusRef.Status.Equals(CensusReference.ReferenceStatus.INCOMPLETE));
         }
 
-        private void Canadian1881Census(string reference, string ED, string SD, string page, string family)
+        void Canadian1881Census(string reference, string ED, string SD, string page, string family)
         {
             CensusReference censusRef = new CensusReference("I1", reference, false);
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.CANADACENSUS1881));
@@ -123,7 +123,7 @@ namespace CensusReferenceTest
             Assert.IsTrue(censusRef.Family.Equals(family));
         }
 
-        private void CanadianCensus(string reference, FactDate year, string Roll,string page, string family)
+        void CanadianCensus(string reference, FactDate year, string Roll,string page, string family)
         {
             CensusReference censusRef = new CensusReference("I1", reference, false);
             Assert.IsTrue(censusRef.CensusYear.Equals(year));
@@ -132,7 +132,7 @@ namespace CensusReferenceTest
             Assert.IsTrue(censusRef.Family.Equals(family));
         }
 
-        private void USCensusTest(string reference, FactDate year, string roll, string ED, string page)
+        void USCensusTest(string reference, FactDate year, string roll, string ED, string page)
         {
             CensusReference censusRef = new CensusReference("I1", reference, false);
             Assert.IsTrue(censusRef.CensusYear.Equals(year));
@@ -141,7 +141,7 @@ namespace CensusReferenceTest
             Assert.IsTrue(censusRef.Page.Equals(page));
         }
 
-        private void Census1911Test(string reference, string piece, string schedule)
+        void Census1911Test(string reference, string piece, string schedule)
         {
             CensusReference censusRef = new CensusReference("I1", reference, false);
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1911));
@@ -149,12 +149,12 @@ namespace CensusReferenceTest
             Assert.IsTrue(censusRef.Schedule.Equals(schedule));
         }
 
-        private void UKCensusTest(string reference, FactDate year, string piece, string folio, string page)
+        void UKCensusTest(string reference, FactDate year, string piece, string folio, string page)
         {
             CensusHO107Test(reference, year, piece, string.Empty, folio, page);
         }
 
-        private void CensusHO107Test(string reference, FactDate year, string piece, string book, string folio, string page)
+        void CensusHO107Test(string reference, FactDate year, string piece, string book, string folio, string page)
         {
             CensusReference censusRef = new CensusReference("I1", reference, false);
             Assert.IsTrue(censusRef.CensusYear.Equals(year));
@@ -165,7 +165,7 @@ namespace CensusReferenceTest
                 Assert.IsTrue(censusRef.Book.Equals(book));
         }
 
-        private void ScottishCensusTest(string reference, FactDate year, string parish, string ED, string page)
+        void ScottishCensusTest(string reference, FactDate year, string parish, string ED, string page)
         {
             CensusReference censusRef = new CensusReference("I1", reference, false);
             Assert.IsTrue(censusRef.CensusYear.Equals(year));
