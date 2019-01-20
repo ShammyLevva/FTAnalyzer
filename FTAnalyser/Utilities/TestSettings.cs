@@ -35,7 +35,7 @@ namespace FTAnalyzer.Utilities
 
         public void Save() { _Settings.Save(); _NonGEDCOMDateSettings.Save(); }
 
-        private string SetRegex(NonGEDCOMFormatSelected formatSelected, string regexSeparator)
+        string SetRegex(NonGEDCOMFormatSelected formatSelected, string regexSeparator)
         {
             switch(formatSelected)
             {

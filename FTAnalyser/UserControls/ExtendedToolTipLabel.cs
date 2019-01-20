@@ -11,7 +11,7 @@ namespace FTAnalyzer.UserControls
     public partial class ExtendedToolTipLabel : Label
     {
         private ToolTip _ToolTip;
-        private string _ToolTipText;
+        string _ToolTipText;
 
         public ExtendedToolTipLabel()
         {

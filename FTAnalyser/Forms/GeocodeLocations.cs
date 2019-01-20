@@ -1196,7 +1196,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private bool GazetteerMatchMethodA(FactLocation loc)
+        bool GazetteerMatchMethodA(FactLocation loc)
         {
             if (CheckLocationMatch(loc.PlaceNoNumerics.ToLower(), loc))
                 return true;
@@ -1208,7 +1208,7 @@ namespace FTAnalyzer.Forms
             return false;
         }
 
-        private bool GazetteerMatchMethodB(FactLocation loc)
+        bool GazetteerMatchMethodB(FactLocation loc)
         {
             if (loc.Level >= FactLocation.ADDRESS)
             {
@@ -1227,7 +1227,7 @@ namespace FTAnalyzer.Forms
             return false;
         }
 
-        private bool CheckNearest(FactLocation loc, List<OS50kGazetteer> results)
+        bool CheckNearest(FactLocation loc, List<OS50kGazetteer> results)
         {
             double minDistance = double.MaxValue;
             OS50kGazetteer selected = null;
@@ -1254,7 +1254,7 @@ namespace FTAnalyzer.Forms
             return selected != null;
         }
 
-        private bool CheckLocationMatch(string key, FactLocation loc)
+        bool CheckLocationMatch(string key, FactLocation loc)
         {
             if (key.Length > 0 && OS50kDictionary.TryGetValue(key, out IList<OS50kGazetteer> results))
             {
@@ -1270,7 +1270,7 @@ namespace FTAnalyzer.Forms
             return false;
         }
 
-        private bool ProcessOS50kMatches(IEnumerable<OS50kGazetteer> matches, FactLocation loc, int level)
+        bool ProcessOS50kMatches(IEnumerable<OS50kGazetteer> matches, FactLocation loc, int level)
         {
             int count = matches.Count();
             OS50kGazetteer gazA = matches.First<OS50kGazetteer>();

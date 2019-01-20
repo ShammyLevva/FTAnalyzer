@@ -40,7 +40,7 @@ namespace FTAnalyzer.UserControls
 			return CheckChildrenValidation(this);
 		}
 
-		private bool CheckChildrenValidation(Control control)
+		bool CheckChildrenValidation(Control control)
 		{
 			bool invalid = false;
 

@@ -6,10 +6,10 @@ namespace FTAnalyzer.Controls
 {
     public partial class CensusDateSelector : UserControl
     {
-        private string country = Countries.SCOTLAND;
+        string country = Countries.SCOTLAND;
         private CensusDate defaultDate = CensusDate.UKCENSUS1881;
         private CensusDate previousDate;
-        private bool _loading = false;
+        bool _loading = false;
 
         public CensusDateSelector()
         {

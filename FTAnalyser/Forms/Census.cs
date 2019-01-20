@@ -1,17 +1,12 @@
-﻿using System;
+﻿using FTAnalyzer.Filters;
+using FTAnalyzer.UserControls;
+using FTAnalyzer.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using FTAnalyzer.Filters;
-using System.IO;
-using FTAnalyzer.Utilities;
-using System.Collections;
-using FTAnalyzer.UserControls;
-using System.Web;
 
 namespace FTAnalyzer.Forms
 {
@@ -32,11 +27,11 @@ namespace FTAnalyzer.Forms
             dgCensus.AutoGenerateColumns = false;
             ExtensionMethods.DoubleBuffered(dgCensus, true);
             ft = FamilyTree.Instance;
-            reportFormHelper = new ReportFormHelper(this, "Census Report", dgCensus, this.ResetTable, "Census");
+            reportFormHelper = new ReportFormHelper(this, "Census Report", dgCensus, ResetTable, "Census");
 
             LostCousins = false;
             CensusDate = censusDate;
-            censusCountry = CensusDate.Country;
+            //censusCountry = CensusDate.Country;
             RecordCount = 0;
             CensusDone = censusDone;
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
@@ -92,6 +87,13 @@ namespace FTAnalyzer.Forms
             //CompareLists(individuals, listToCheck);
             RecordCount = individuals.Count;
             SetupDataGridView(true, individuals);
+        }
+
+        public void SetupLCPotentials(List<CensusIndividual> potentials)
+        {
+            LostCousins = true;
+            RecordCount = potentials.Count;
+            SetupDataGridView(true, potentials);
         }
 
         //void CompareLists(List<CensusIndividual> individuals, List<Individual> listToCheck)
@@ -185,7 +187,7 @@ namespace FTAnalyzer.Forms
 
         class IDisplayCensusComparerWrapper : Comparer<IDisplayCensus>
         {
-            private Comparer<CensusIndividual> comparer;
+            Comparer<CensusIndividual> comparer;
 
             public IDisplayCensusComparerWrapper(Comparer<CensusIndividual> comp) => comparer = comp;
 

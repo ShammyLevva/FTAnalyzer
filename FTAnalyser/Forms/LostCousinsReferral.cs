@@ -40,7 +40,7 @@ namespace FTAnalyzer.Forms
             tsRecords.Text = GetCountofRecords();
         }
 
-        private string GetCountofRecords()
+        string GetCountofRecords()
         {
             int total = referrals.Count();
             int direct = referrals.Count(x => x.RelationType.Equals(Properties.Messages.Referral_Direct));

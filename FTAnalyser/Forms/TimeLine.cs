@@ -140,7 +140,7 @@ namespace FTAnalyzer.Forms
             return result;
         }
 
-        private bool RelationIncluded(int relationtype)
+        bool RelationIncluded(int relationtype)
         {
             switch (relationtype)
             {

@@ -28,8 +28,8 @@ namespace FTAnalyzer.Forms
         private LabelLayer labelLayer;
         private TearDropLayer points;
         private TearDropLayer selections;
-        private bool isLoading;
-        private bool isQuerying;
+        bool isLoading;
+        bool isQuerying;
         private IProgress<string> outputText;
 
         public LifeLine(IProgress<string> outputText)

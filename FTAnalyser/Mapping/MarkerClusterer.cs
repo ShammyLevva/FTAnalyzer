@@ -12,7 +12,7 @@ namespace FTAnalyzer.Mapping
         private int minClusterSize;
         private FeatureDataTable clusteredDataTable;
         private FeatureDataTable sourceDataTable;
-        private bool reclustering;
+        bool reclustering;
 
         public MarkerClusterer(FeatureDataTable source)
         {

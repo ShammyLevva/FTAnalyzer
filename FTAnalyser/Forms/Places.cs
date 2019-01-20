@@ -18,7 +18,7 @@ namespace FTAnalyzer.Forms
         private MapHelper mh = MapHelper.Instance;
         private Color backgroundColour;
         private ClusterLayer clusters;
-        private bool isloading;
+        bool isloading;
         private IProgress<string> outputText;
 
         public Places(IProgress<string> outputText)

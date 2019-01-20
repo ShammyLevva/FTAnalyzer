@@ -168,7 +168,7 @@ namespace FTAnalyzer
         }
 
         #region Version Info
-        private string PublishVersion()
+        string PublishVersion()
         {
             if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
             {
@@ -181,7 +181,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Load File
-        private async Task LoadFileAsync(string filename)
+        async Task LoadFileAsync(string filename)
         {
             try
             {
@@ -332,7 +332,7 @@ namespace FTAnalyzer
             }
         }
 
-        private async void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+        async void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(Settings.Default.LoadLocation))
                 openGedcom.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -927,7 +927,7 @@ namespace FTAnalyzer
             // do anything that needs doing when option changes
         }
 
-        private async void Options_ReloadData(object sender, EventArgs e)
+        async void Options_ReloadData(object sender, EventArgs e)
         {
             await QueryReloadData();
         }
@@ -955,7 +955,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Reload Data
-        private async Task QueryReloadData()
+        async Task QueryReloadData()
         {
             if (GeneralSettings.Default.ReloadRequired && ft.DataLoaded)
             {
@@ -969,7 +969,7 @@ namespace FTAnalyzer
             }
         }
 
-        private async void ReloadToolStripMenuItem_Click(object sender, EventArgs e)
+        async void ReloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GeneralSettings.Default.ReloadRequired = false;
             GeneralSettings.Default.Save();
@@ -977,7 +977,7 @@ namespace FTAnalyzer
         }
         #endregion
 
-        private bool preventExpand;
+        bool preventExpand;
 
         void TreeViewLocations_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
@@ -1027,7 +1027,7 @@ namespace FTAnalyzer
             Analytics.TrackAction(Analytics.MapsAction, Analytics.ShowTimelinesEvent);
         }
 
-        private enum GecodingType { Google = 1, OS = 2, Reverse = 3 }
+        enum GecodingType { Google = 1, OS = 2, Reverse = 3 }
 
         void MnuGeocodeLocations_Click(object sender, EventArgs e)
         {
@@ -1380,7 +1380,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Filters
-        private Predicate<ExportFact> CreateFactsFilter()
+        Predicate<ExportFact> CreateFactsFilter()
         {
             var filter = relTypesFacts.BuildFilter<ExportFact>(x => x.RelationType);
             if (txtFactsSurname.Text.Length > 0)
@@ -1391,7 +1391,7 @@ namespace FTAnalyzer
             return filter;
         }
 
-        private Predicate<CensusIndividual> CreateCensusIndividualFilter(bool censusDone, string surname)
+        Predicate<CensusIndividual> CreateCensusIndividualFilter(bool censusDone, string surname)
         {
             var relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => x.RelationType);
             var dateFilter = censusDone ?
@@ -1414,7 +1414,7 @@ namespace FTAnalyzer
             return filter;
         }
 
-        private Predicate<Individual> CreateTreeTopsIndividualFilter()
+        Predicate<Individual> CreateTreeTopsIndividualFilter()
         {
             Predicate<Individual> treetopFilter = ckbTTIncludeOnlyOneParent.Checked ?
                 new Predicate<Individual>(ind => ind.HasOnlyOneParent || !ind.HasParents) : new Predicate<Individual>(ind => !ind.HasParents);
@@ -1432,7 +1432,7 @@ namespace FTAnalyzer
             return filter;
         }
 
-        private Predicate<Individual> CreateWardeadIndividualFilter(FactDate birthRange, FactDate deathRange)
+        Predicate<Individual> CreateWardeadIndividualFilter(FactDate birthRange, FactDate deathRange)
         {
             Predicate<Individual> filter;
             Predicate<Individual> locationFilter = wardeadCountry.BuildFilter<Individual>(FactDate.UNKNOWN_DATE, (d, x) => x.BestLocation(d));
@@ -1491,6 +1491,17 @@ namespace FTAnalyzer
         }
 
         List<CensusIndividual> LCUpdates;
+
+        void BtnLCPotentialUploads_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            Census census = new Census(CensusDate.ANYCENSUS, true);
+            census.SetupLCPotentials(LCUpdates);
+            census.Text = $"Potential Records to upload to Lost Cousins Website";
+            DisposeDuplicateForms(census);
+            census.Show();
+            HourGlass(false);
+        }
 
         async void BtnUpdateLostCousinsWebsite_Click(object sender, EventArgs e)
         {
@@ -1873,7 +1884,7 @@ namespace FTAnalyzer
             BuildRecentList();
         }
 
-        private static void ClearRecentList()
+        static void ClearRecentList()
         {
             Settings.Default.RecentFiles.Clear();
             for (int i = 0; i < 5; i++)
@@ -1932,7 +1943,7 @@ namespace FTAnalyzer
             BuildRecentList();
         }
 
-        private async void OpenRecentFile_Click(object sender, EventArgs e)
+        async void OpenRecentFile_Click(object sender, EventArgs e)
         {
             string filename = (string)(sender as ToolStripMenuItem).Tag;
             await LoadFileAsync(filename);
@@ -2128,7 +2139,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        private List<string> BuildFactTypeList(CheckedListBox list, bool includeCreated)
+        List<string> BuildFactTypeList(CheckedListBox list, bool includeCreated)
         {
             List<string> result = new List<string>();
             if (list == ckbFactExclude && ckbFactExclude.Visible == false)
@@ -2237,7 +2248,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Form Drag Drop
-        private async void MainForm_DragDrop(object sender, DragEventArgs e)
+        async void MainForm_DragDrop(object sender, DragEventArgs e)
         {
             bool fileLoaded = false;
             string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
@@ -2359,7 +2370,7 @@ namespace FTAnalyzer
             }
         }
 
-        private async void TbDuplicateScore_Scroll(object sender, EventArgs e)
+        async void TbDuplicateScore_Scroll(object sender, EventArgs e)
         {
             // do nothing if progress bar still visible
             if (!pbDuplicates.Visible)
@@ -2393,7 +2404,7 @@ namespace FTAnalyzer
             }
         }
 
-        private async void CkbHideIgnoredDuplicates_CheckedChanged(object sender, EventArgs e)
+        async void CkbHideIgnoredDuplicates_CheckedChanged(object sender, EventArgs e)
         {
             if (pbDuplicates.Visible)
                 return; // do nothing if progress bar still visible
@@ -2443,7 +2454,7 @@ namespace FTAnalyzer
             ShowCensus(censusDone, surname, true);
         }
 
-        private string GetRandomSurname()
+        string GetRandomSurname()
         {
             IEnumerable<Individual> directs = ft.AllIndividuals.Filter(x => x.RelationType == Individual.DIRECT || x.RelationType == Individual.DESCENDANT);
             List<string> surnames = directs.Select(x => x.Surname).Distinct().ToList();
@@ -2699,7 +2710,7 @@ namespace FTAnalyzer
             cmbColourFamily.Text = "All Families";
         }
 
-        private bool UpdateColourFamilyComboBox(ComboBoxFamily f)
+        bool UpdateColourFamilyComboBox(ComboBoxFamily f)
         {
             bool stillThere = false;
             if (cmbColourFamily.Items.Count == 0)
@@ -2782,7 +2793,7 @@ namespace FTAnalyzer
                 e.Cancel = true;
         }
 
-        private Individual GetContextIndividual(object sender)
+        Individual GetContextIndividual(object sender)
         {
             Individual ind = null;
             ContextMenuStrip cms = null;
@@ -3002,7 +3013,7 @@ namespace FTAnalyzer
 
         #region Today
 
-        private async Task ShowTodaysEvents()
+        async Task ShowTodaysEvents()
         {
             pbToday.Visible = true;
             labToday.Visible = true;
@@ -3015,25 +3026,13 @@ namespace FTAnalyzer
             await Analytics.TrackAction(Analytics.MainFormAction, Analytics.TodayClickedEvent);
         }
 
-        void RbTodayMonth_CheckedChanged(object sender, EventArgs e)
-        {
-            Application.UserAppDataRegistry.SetValue("Todays Events Month", rbTodayMonth.Checked);
-        }
+        void RbTodayMonth_CheckedChanged(object sender, EventArgs e) => Application.UserAppDataRegistry.SetValue("Todays Events Month", rbTodayMonth.Checked);
 
-        void RbTodaySingle_CheckedChanged(object sender, EventArgs e)
-        {
-            Application.UserAppDataRegistry.SetValue("Todays Events Month", !rbTodaySingle.Checked);
-        }
+        void RbTodaySingle_CheckedChanged(object sender, EventArgs e) => Application.UserAppDataRegistry.SetValue("Todays Events Month", !rbTodaySingle.Checked);
 
-        private async void BtnUpdateTodaysEvents_Click(object sender, EventArgs e)
-        {
-            await ShowTodaysEvents();
-        }
+        async void BtnUpdateTodaysEvents_Click(object sender, EventArgs e) => await ShowTodaysEvents();
 
-        void NudToday_ValueChanged(object sender, EventArgs e)
-        {
-            Application.UserAppDataRegistry.SetValue("Todays Events Step", nudToday.Value);
-        }
+        void NudToday_ValueChanged(object sender, EventArgs e) => Application.UserAppDataRegistry.SetValue("Todays Events Step", nudToday.Value);
         #endregion
 
         public void SetFactTypeList(CheckedListBox ckbFactSelect, CheckedListBox ckbFactExclude, Predicate<ExportFact> filter)

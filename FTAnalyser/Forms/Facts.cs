@@ -20,9 +20,9 @@ namespace FTAnalyzer.Forms
         private SortableBindingList<IDisplayFact> facts;
         private Font italicFont;
         private Font linkFont;
-        private bool allFacts;
+        bool allFacts;
         private ReportFormHelper reportFormHelper;
-        private bool CensusRefReport;
+        bool CensusRefReport;
         private List<string> IgnoreList;
 
         private Facts()

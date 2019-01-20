@@ -22,9 +22,9 @@ namespace FTAnalyzer.Forms
         private FactLocation location;
         private FactLocation originalLocation;
         private FeatureDataRow pointFeature;
-        private bool iconSelected;
-        private bool pointUpdated;
-        private bool dataUpdated;
+        bool iconSelected;
+        bool pointUpdated;
+        bool dataUpdated;
         public bool UserSavedPoint { get; private set; }
 
         public EditLocation(FactLocation location)

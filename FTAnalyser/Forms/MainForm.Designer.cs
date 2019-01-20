@@ -200,6 +200,7 @@ namespace FTAnalyzer
             this.btnLC1881Scot = new System.Windows.Forms.Button();
             this.relTypesLC = new FTAnalyzer.Controls.RelationTypes();
             this.LCUpdatesTab = new System.Windows.Forms.TabPage();
+            this.btnLCPotentialUploads = new System.Windows.Forms.Button();
             this.rtbLCoutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.rtbLCUpdateData = new System.Windows.Forms.RichTextBox();
@@ -1902,6 +1903,7 @@ namespace FTAnalyzer
             // 
             // LCUpdatesTab
             // 
+            this.LCUpdatesTab.Controls.Add(this.btnLCPotentialUploads);
             this.LCUpdatesTab.Controls.Add(this.rtbLCoutput);
             this.LCUpdatesTab.Controls.Add(this.chkLCRootPersonConfirm);
             this.LCUpdatesTab.Controls.Add(this.label21);
@@ -1915,6 +1917,16 @@ namespace FTAnalyzer
             this.LCUpdatesTab.TabIndex = 1;
             this.LCUpdatesTab.Text = "Updates";
             this.LCUpdatesTab.UseVisualStyleBackColor = true;
+            // 
+            // btnLCPotentialUploads
+            // 
+            this.btnLCPotentialUploads.Location = new System.Drawing.Point(30, 174);
+            this.btnLCPotentialUploads.Name = "btnLCPotentialUploads";
+            this.btnLCPotentialUploads.Size = new System.Drawing.Size(197, 23);
+            this.btnLCPotentialUploads.TabIndex = 39;
+            this.btnLCPotentialUploads.Text = "View Potential Records to Upload";
+            this.btnLCPotentialUploads.UseVisualStyleBackColor = true;
+            this.btnLCPotentialUploads.Click += new System.EventHandler(this.BtnLCPotentialUploads_Click);
             // 
             // rtbLCoutput
             // 
@@ -1990,6 +2002,7 @@ namespace FTAnalyzer
             this.label20.Size = new System.Drawing.Size(68, 16);
             this.label20.TabIndex = 3;
             this.label20.Text = "Password";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label19
             // 
@@ -2000,6 +2013,7 @@ namespace FTAnalyzer
             this.label19.Size = new System.Drawing.Size(96, 16);
             this.label19.TabIndex = 2;
             this.label19.Text = "Email Address";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // txtLCEmail
             // 
@@ -2019,7 +2033,7 @@ namespace FTAnalyzer
             // btnUpdateLostCousinsWebsite
             // 
             this.btnUpdateLostCousinsWebsite.Enabled = false;
-            this.btnUpdateLostCousinsWebsite.Location = new System.Drawing.Point(138, 177);
+            this.btnUpdateLostCousinsWebsite.Location = new System.Drawing.Point(240, 174);
             this.btnUpdateLostCousinsWebsite.Name = "btnUpdateLostCousinsWebsite";
             this.btnUpdateLostCousinsWebsite.Size = new System.Drawing.Size(197, 23);
             this.btnUpdateLostCousinsWebsite.TabIndex = 5;
@@ -4050,6 +4064,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.ProgressBar pbSources;
         private Utilities.ScrollingRichTextBox rtbOutput;
         private System.Windows.Forms.CheckBox chkSurnamesIgnoreCase;
+        private System.Windows.Forms.Button btnLCPotentialUploads;
     }
 }
 
