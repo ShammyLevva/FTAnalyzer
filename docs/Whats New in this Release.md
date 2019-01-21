@@ -1,3 +1,11 @@
+#### Updated Release Version 7.3.2.0 19th January 2019
+**Updates**
+Added option preview records for upload to Lost Cousins  
+Added Analytics for Lost Cousins preview
+
+**Bugfixes**
+Added check for ABT dates missing a space  
+
 #### Updated Release Version 7.3.1.0 19th January 2019
 **Updates**
 Added option to convert any residence facts with a valid census reference to a census fact  
