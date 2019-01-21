@@ -1,4 +1,4 @@
-#### Updated Release Version 7.3.2.0 19th January 2019
+#### Updated Release Version 7.3.2.0 21st January 2019
 **Updates**
 Added option preview records for upload to Lost Cousins  
 Added Analytics for Lost Cousins preview
