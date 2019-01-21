@@ -31,7 +31,7 @@ namespace FTAnalyzer.Forms
 
             LostCousins = false;
             CensusDate = censusDate;
-            //censusCountry = CensusDate.Country;
+            censusCountry = CensusDate.Country;
             RecordCount = 0;
             CensusDone = censusDone;
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");

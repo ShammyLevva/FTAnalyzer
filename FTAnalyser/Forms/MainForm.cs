@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.3.1.0";
+        public static string VERSION = "7.3.2.0";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1499,6 +1499,7 @@ namespace FTAnalyzer
             census.SetupLCPotentials(LCUpdates);
             census.Text = $"Potential Records to upload to Lost Cousins Website";
             DisposeDuplicateForms(census);
+            Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.PreviewLostCousins);
             census.Show();
             HourGlass(false);
         }
