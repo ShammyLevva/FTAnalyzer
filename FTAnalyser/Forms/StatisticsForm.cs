@@ -74,8 +74,7 @@ namespace FTAnalyzer.Forms
             {
                 if (StatType == StatisticType.HowManyDirects)
                 {
-                    DisplayGreatStats row = dgStatistics.Rows[e.RowIndex].DataBoundItem as DisplayGreatStats;
-                    if (row != null)
+                    if (dgStatistics.Rows[e.RowIndex].DataBoundItem is DisplayGreatStats row)
                     {
                         People form = new People();
                         form.ListRelationToRoot(row.RelationToRoot);
@@ -84,8 +83,7 @@ namespace FTAnalyzer.Forms
                 }
                 else if (StatType == StatisticType.CousinCount)
                 {
-                    Tuple<string,int> row = dgStatistics.Rows[e.RowIndex].DataBoundItem as Tuple<string,int>;
-                    if (row != null)
+                    if (dgStatistics.Rows[e.RowIndex].DataBoundItem is Tuple<string, int> row)
                     {
                         People form = new People();
                         form.ListRelationToRoot(row.Item1);

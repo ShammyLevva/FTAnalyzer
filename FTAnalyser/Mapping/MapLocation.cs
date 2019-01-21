@@ -2,6 +2,7 @@
 using NetTopologySuite.Geometries;
 using SharpMap.Data;
 using System.Drawing;
+using System.Numerics;
 
 namespace FTAnalyzer.Mapping
 {
@@ -59,7 +60,7 @@ namespace FTAnalyzer.Mapping
 
         public string RelationToRoot => Individual.RelationToRoot;
 
-        public decimal Ahnentafel => Individual.Ahnentafel;
+        public BigInteger Ahnentafel => Individual.Ahnentafel;
 
         public double SortDistance => centre.Distance(Geometry);
 
