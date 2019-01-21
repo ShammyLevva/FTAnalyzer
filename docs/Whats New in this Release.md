@@ -1,17 +1,25 @@
+#### Updated Release Version 7.3.2.2 21st January 2019
+**Bugfixes**  
+Custom tag prefixes of CENSUS are treated as a census fact  
+Use BigIntegers for Ahnantefal numbers  
+Added clarification that custom types is a warning not an error  
+Fix bug with individual ID of 0  
+Fix Lost Cousins Action Analytic  
+
 #### Updated Release Version 7.3.2.0 21st January 2019
-**Updates**
+**Updates**  
 Added option preview records for upload to Lost Cousins  
 Added Analytics for Lost Cousins preview
 
-**Bugfixes**
+**Bugfixes**  
 Added check for ABT dates missing a space  
 
 #### Updated Release Version 7.3.1.0 19th January 2019
-**Updates**
+**Updates**  
 Added option to convert any residence facts with a valid census reference to a census fact  
 Added breakdown of husband and wifes forenames and surnames in family reports  
 
-**Bugfixes**
+**Bugfixes**  
 Added further fix for US 1940 census on records with very long notes  
 Added Null pointer fix for loading Lost Cousins entries where no prior records exist  
 LostCousin Facts that are auto created treated as LC_FTA facts to allow reporting separately from GEDCOM Lost Cousin facts  

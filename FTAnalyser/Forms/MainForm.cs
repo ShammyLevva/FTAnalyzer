@@ -1516,7 +1516,9 @@ namespace FTAnalyzer
                     rtbLCoutput.Text = "Started Processing Lost Cousins entries.\n\n";
                     Progress<string> outputText = new Progress<string>(value => { rtbLCoutput.AppendText(value); });
                     int count = await Task.Run(() => ExportToLostCousins.ProcessList(LCUpdates, outputText));
-                    string resultText = $"{DateTime.Now.ToString("yyyy-MM-dd")} uploaded {count} records";
+                     count = 0;
+
+                    string resultText = $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm")}: uploaded {count} records";
                     await Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.UpdateLostCousins, resultText);
                     SpecialMethods.VisitWebsite("https://www.lostcousins.com/pages/members/ancestors/");
                     UpdateLostCousinsReport();
