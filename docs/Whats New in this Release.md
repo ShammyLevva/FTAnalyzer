@@ -1,3 +1,8 @@
+#### Updated Release Version 7.3.2.3 22nd January 2019  
+**Bugfixes**  
+Lost Cousins duplicate check uses forename not forenames  
+Tweak to Analytics to include timestamp  
+
 #### Updated Release Version 7.3.2.2 21st January 2019
 **Bugfixes**  
 Custom tag prefixes of CENSUS are treated as a census fact  

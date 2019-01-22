@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.3.2.2";
+        public static string VERSION = "7.3.2.3";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1460,7 +1460,7 @@ namespace FTAnalyzer
         #region Lost Cousins
         void CkbRestrictions_CheckedChanged(object sender, EventArgs e) => UpdateLostCousinsReport();
 
-        async void LostCousinsCensus(CensusDate censusDate, string reportTitle)
+        void LostCousinsCensus(CensusDate censusDate, string reportTitle)
         {
             HourGlass(true);
             Census census = new Census(censusDate, true);
@@ -1473,7 +1473,7 @@ namespace FTAnalyzer
                 census.Text = $"{reportTitle} to enter into Lost Cousins website";
             DisposeDuplicateForms(census);
             census.Show();
-            await Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.LCReportYearEvent, censusDate.BestYear.ToString());
+            Task.Run(() => Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.LCReportYearEvent, censusDate.BestYear.ToString()));
             HourGlass(false);
         }
 
