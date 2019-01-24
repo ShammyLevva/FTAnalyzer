@@ -1,3 +1,17 @@
+#### Updated Release Version 7.3.3.0 22nd January 2019  
+**Updates**  
+Added new 1939 census reference recognition  
+Added option to see all Lost Cousins records with invalid references  
+Added Lost Cousins Stats analytic  
+
+**Bugfixes**  
+Added check to see if LostCousins table exists in database and add it if missing  
+Fixed issue with long notes not looking for secondary entries as other census references  
+Fix issue with BigIntegers & relationtypes  
+fix analytics issue showing zero uploads  
+Fix census references to strip bold and italic markers  
+Tweak Lost Cousins duplicate check to be 5 year age tolerant  
+
 #### Updated Release Version 7.3.2.3 22nd January 2019  
 **Bugfixes**  
 Lost Cousins duplicate check uses forename not forenames  

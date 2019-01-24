@@ -350,6 +350,7 @@ namespace FTAnalyzer
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.btnViewInvalidRefs = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -1903,6 +1904,7 @@ namespace FTAnalyzer
             // 
             // LCUpdatesTab
             // 
+            this.LCUpdatesTab.Controls.Add(this.btnViewInvalidRefs);
             this.LCUpdatesTab.Controls.Add(this.btnLCPotentialUploads);
             this.LCUpdatesTab.Controls.Add(this.rtbLCoutput);
             this.LCUpdatesTab.Controls.Add(this.chkLCRootPersonConfirm);
@@ -1920,11 +1922,11 @@ namespace FTAnalyzer
             // 
             // btnLCPotentialUploads
             // 
-            this.btnLCPotentialUploads.Location = new System.Drawing.Point(30, 174);
+            this.btnLCPotentialUploads.Location = new System.Drawing.Point(6, 174);
             this.btnLCPotentialUploads.Name = "btnLCPotentialUploads";
-            this.btnLCPotentialUploads.Size = new System.Drawing.Size(197, 23);
+            this.btnLCPotentialUploads.Size = new System.Drawing.Size(138, 23);
             this.btnLCPotentialUploads.TabIndex = 39;
-            this.btnLCPotentialUploads.Text = "View Potential Records to Upload";
+            this.btnLCPotentialUploads.Text = "View Potential Uploads";
             this.btnLCPotentialUploads.UseVisualStyleBackColor = true;
             this.btnLCPotentialUploads.Click += new System.EventHandler(this.BtnLCPotentialUploads_Click);
             // 
@@ -2033,11 +2035,11 @@ namespace FTAnalyzer
             // btnUpdateLostCousinsWebsite
             // 
             this.btnUpdateLostCousinsWebsite.Enabled = false;
-            this.btnUpdateLostCousinsWebsite.Location = new System.Drawing.Point(240, 174);
+            this.btnUpdateLostCousinsWebsite.Location = new System.Drawing.Point(299, 174);
             this.btnUpdateLostCousinsWebsite.Name = "btnUpdateLostCousinsWebsite";
-            this.btnUpdateLostCousinsWebsite.Size = new System.Drawing.Size(197, 23);
+            this.btnUpdateLostCousinsWebsite.Size = new System.Drawing.Size(138, 23);
             this.btnUpdateLostCousinsWebsite.TabIndex = 5;
-            this.btnUpdateLostCousinsWebsite.Text = "Update Lost Cousins Website";
+            this.btnUpdateLostCousinsWebsite.Text = "Update Lost Cousins site";
             this.btnUpdateLostCousinsWebsite.UseVisualStyleBackColor = true;
             this.btnUpdateLostCousinsWebsite.Visible = false;
             this.btnUpdateLostCousinsWebsite.Click += new System.EventHandler(this.BtnUpdateLostCousinsWebsite_Click);
@@ -3640,6 +3642,16 @@ namespace FTAnalyzer
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
+            // btnViewInvalidRefs
+            // 
+            this.btnViewInvalidRefs.Location = new System.Drawing.Point(152, 174);
+            this.btnViewInvalidRefs.Name = "btnViewInvalidRefs";
+            this.btnViewInvalidRefs.Size = new System.Drawing.Size(138, 23);
+            this.btnViewInvalidRefs.TabIndex = 40;
+            this.btnViewInvalidRefs.Text = "View Invalid Census Refs";
+            this.btnViewInvalidRefs.UseVisualStyleBackColor = true;
+            this.btnViewInvalidRefs.Click += new System.EventHandler(this.BtnViewInvalidRefs_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -4065,6 +4077,7 @@ namespace FTAnalyzer
         private Utilities.ScrollingRichTextBox rtbOutput;
         private System.Windows.Forms.CheckBox chkSurnamesIgnoreCase;
         private System.Windows.Forms.Button btnLCPotentialUploads;
+        private System.Windows.Forms.Button btnViewInvalidRefs;
     }
 }
 

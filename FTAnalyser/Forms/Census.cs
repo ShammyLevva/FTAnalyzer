@@ -88,11 +88,11 @@ namespace FTAnalyzer.Forms
             SetupDataGridView(true, individuals);
         }
 
-        public void SetupLCPotentials(List<CensusIndividual> potentials)
+        public void SetupLCupdateList(List<CensusIndividual> listItems)
         {
             LostCousins = true;
-            RecordCount = potentials.Count;
-            SetupDataGridView(true, potentials);
+            RecordCount = listItems.Count;
+            SetupDataGridView(true, listItems);
         }
 
         //void CompareLists(List<CensusIndividual> individuals, List<Individual> listToCheck)

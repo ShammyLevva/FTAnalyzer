@@ -1491,13 +1491,26 @@ namespace FTAnalyzer
         }
 
         List<CensusIndividual> LCUpdates;
+        List<CensusIndividual> LCInvalidReferences;
 
         void BtnLCPotentialUploads_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             Census census = new Census(CensusDate.ANYCENSUS, true);
-            census.SetupLCPotentials(LCUpdates);
+            census.SetupLCupdateList(LCUpdates);
             census.Text = $"Potential Records to upload to Lost Cousins Website";
+            DisposeDuplicateForms(census);
+            Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.PreviewLostCousins);
+            census.Show();
+            HourGlass(false);
+        }
+
+        void BtnViewInvalidRefs_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            Census census = new Census(CensusDate.ANYCENSUS, true);
+            census.SetupLCupdateList(LCInvalidReferences);
+            census.Text = $"Incompatible Census References in Records to upload to Lost Cousins Website";
             DisposeDuplicateForms(census);
             Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.PreviewLostCousins);
             census.Show();
@@ -1533,7 +1546,8 @@ namespace FTAnalyzer
             rtbLCUpdateData.ForeColor = Color.Black;
             Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType, true);
             LCUpdates = new List<CensusIndividual>();
-            rtbLCUpdateData.Text = ft.LCOutput(LCUpdates, relationFilter);
+            LCInvalidReferences = new List<CensusIndividual>();
+            rtbLCUpdateData.Text = ft.LCOutput(LCUpdates, LCInvalidReferences, relationFilter);
          }
 
         void BtnLCMissingCountry_Click(object sender, EventArgs e)
