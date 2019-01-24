@@ -1,4 +1,4 @@
-#### Updated Release Version 7.3.3.0 22nd January 2019  
+#### Updated Release Version 7.3.3.0 24th January 2019  
 **Updates**  
 Added new 1939 census reference recognition  
 Added option to see all Lost Cousins records with invalid references  
