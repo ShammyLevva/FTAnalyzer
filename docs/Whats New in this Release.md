@@ -1,3 +1,7 @@
+#### Updated Release Version 7.3.3.1 24th January 2019  
+**Bugfixes**  
+Relationship types calc was using wrong logs  
+
 #### Updated Release Version 7.3.3.0 24th January 2019  
 **Updates**  
 Added new 1939 census reference recognition  
