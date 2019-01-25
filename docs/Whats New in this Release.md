@@ -1,3 +1,8 @@
+#### Updated Release Version 7.3.3.2 25th January 2019  
+**Bugfixes**  
+Fixed SQL loading bug creating missing LostCousins table  
+Fixed analytics using local instead of UTC time  
+
 #### Updated Release Version 7.3.3.1 24th January 2019  
 **Bugfixes**  
 Relationship types calc was using wrong logs  
