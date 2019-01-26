@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.3.3.2";
+        public static string VERSION = "7.3.4.0";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -2557,36 +2557,19 @@ namespace FTAnalyzer
 
         void BtnReportUnrecognised_Click(object sender, EventArgs e)
         {
-            IEnumerable<string> results = ft.UnrecognisedCensusReferences();
-            results = results.OrderBy(x => x.ToString());
-            if (results.Count() > 0)
-                SaveUnrecognisedDataFile(results, "Unrecognised Census References for " + Path.GetFileNameWithoutExtension(filename) + ".txt", string.Empty);
+            IEnumerable<string> unrecognisedResults = ft.UnrecognisedCensusReferences();
+            IEnumerable<string> missingResults = ft.MissingCensusReferences();
+            IEnumerable<string> notesResults = ft.UnrecognisedCensusReferencesNotes();
+            
+            if (unrecognisedResults.Count() > 0 || missingResults.Count() > 0 || notesResults.Count() > 0)
+                SaveUnrecognisedDataFile(unrecognisedResults, missingResults, notesResults, $"Unrecognised & Missing Census References for {Path.GetFileNameWithoutExtension(filename)}.txt", 
+                    "\n\nPlease check the file and remove any private notes information before posting");
             else
                 MessageBox.Show("No unrecognised census references found.", "FTAnalyzer");
         }
 
-        void BtnExportMissingCensusRefs_Click(object sender, EventArgs e)
-        {
-            IEnumerable<string> results = ft.MissingCensusReferences();
-            results = results.OrderBy(x => x.ToString());
-            if (results.Count() > 0)
-                SaveUnrecognisedDataFile(results, "Missing Census References for " + Path.GetFileNameWithoutExtension(filename) + ".txt", string.Empty);
-            else
-                MessageBox.Show("No missing census references found.", "FTAnalyzer");
-        }
-
-        void BtnReportUnrecognisedNotes_Click(object sender, EventArgs e)
-        {
-            IEnumerable<string> results = ft.UnrecognisedCensusReferencesNotes();
-            results = results.OrderBy(x => x.ToString());
-            if (results.Count() > 0)
-                SaveUnrecognisedDataFile(results, "Notes with no recognised Census Reference formats for " + Path.GetFileNameWithoutExtension(filename) + ".txt",
-                    "\n\nPlease check the file and remove any private notes information before posting");
-            else
-                MessageBox.Show("No notes with unrecognised census references found.", "FTAnalyzer");
-        }
-
-        void SaveUnrecognisedDataFile(IEnumerable<string> results, string unrecognisedFilename, string privateWarning)
+        void SaveUnrecognisedDataFile(IEnumerable<string> unrecognisedResults, IEnumerable<string> missingResults, IEnumerable<string> notesResults, 
+                                      string unrecognisedFilename, string privateWarning)
         {
             try
             {
@@ -2601,7 +2584,7 @@ namespace FTAnalyzer
                 {
                     string path = Path.GetDirectoryName(saveFileDialog.FileName);
                     Application.UserAppDataRegistry.SetValue("Report Unrecognised Census References Path", path);
-                    WriteFile(results, saveFileDialog.FileName);
+                    ft.WriteUnrecognisedReferencesFile(unrecognisedResults, missingResults, notesResults, saveFileDialog.FileName);
                     Analytics.TrackAction(Analytics.ReportsAction, Analytics.UnrecognisedCensusEvent);
                     MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease create an issue at http://www.ftanalyzer.com/issues in issues section and upload your file, if you feel you have standard census references that should be recognised." + privateWarning, "FTAnalyzer");
                 }
@@ -2610,15 +2593,6 @@ namespace FTAnalyzer
             {
                 MessageBox.Show(ex.Message, "FTAnalyzer");
             }
-        }
-
-        void WriteFile(IEnumerable<string> results, string filename)
-        {
-            Encoding isoWesternEuropean = Encoding.GetEncoding(28591);
-            StreamWriter output = new StreamWriter(new FileStream(filename, FileMode.Create, FileAccess.Write), isoWesternEuropean);
-            foreach (string line in results)
-                output.WriteLine(line);
-            output.Close();
         }
 
         void BtnInconsistentLocations_Click(object sender, EventArgs e)

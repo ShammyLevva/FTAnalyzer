@@ -200,6 +200,7 @@ namespace FTAnalyzer
             this.btnLC1881Scot = new System.Windows.Forms.Button();
             this.relTypesLC = new FTAnalyzer.Controls.RelationTypes();
             this.LCUpdatesTab = new System.Windows.Forms.TabPage();
+            this.btnViewInvalidRefs = new System.Windows.Forms.Button();
             this.btnLCPotentialUploads = new System.Windows.Forms.Button();
             this.rtbLCoutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.label21 = new System.Windows.Forms.Label();
@@ -213,9 +214,7 @@ namespace FTAnalyzer
             this.btnUpdateLostCousinsWebsite = new System.Windows.Forms.Button();
             this.tabCensus = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.btnExportMissingCensusRefs = new System.Windows.Forms.Button();
             this.btnReportUnrecognised = new System.Windows.Forms.Button();
-            this.btnReportUnrecognisedNotes = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.btnMismatchedChildrenStatus = new System.Windows.Forms.Button();
             this.btnNoChildrenStatus = new System.Windows.Forms.Button();
@@ -350,7 +349,6 @@ namespace FTAnalyzer
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.btnViewInvalidRefs = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -1920,6 +1918,16 @@ namespace FTAnalyzer
             this.LCUpdatesTab.Text = "Updates";
             this.LCUpdatesTab.UseVisualStyleBackColor = true;
             // 
+            // btnViewInvalidRefs
+            // 
+            this.btnViewInvalidRefs.Location = new System.Drawing.Point(152, 174);
+            this.btnViewInvalidRefs.Name = "btnViewInvalidRefs";
+            this.btnViewInvalidRefs.Size = new System.Drawing.Size(138, 23);
+            this.btnViewInvalidRefs.TabIndex = 40;
+            this.btnViewInvalidRefs.Text = "View Invalid Census Refs";
+            this.btnViewInvalidRefs.UseVisualStyleBackColor = true;
+            this.btnViewInvalidRefs.Click += new System.EventHandler(this.BtnViewInvalidRefs_Click);
+            // 
             // btnLCPotentialUploads
             // 
             this.btnLCPotentialUploads.Location = new System.Drawing.Point(6, 174);
@@ -2061,9 +2069,7 @@ namespace FTAnalyzer
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.btnExportMissingCensusRefs);
             this.groupBox6.Controls.Add(this.btnReportUnrecognised);
-            this.groupBox6.Controls.Add(this.btnReportUnrecognisedNotes);
             this.groupBox6.Location = new System.Drawing.Point(339, 301);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(632, 59);
@@ -2071,38 +2077,16 @@ namespace FTAnalyzer
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Export Missing/Unrecognised data to File";
             // 
-            // btnExportMissingCensusRefs
-            // 
-            this.btnExportMissingCensusRefs.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnExportMissingCensusRefs.Location = new System.Drawing.Point(162, 19);
-            this.btnExportMissingCensusRefs.Name = "btnExportMissingCensusRefs";
-            this.btnExportMissingCensusRefs.Size = new System.Drawing.Size(150, 25);
-            this.btnExportMissingCensusRefs.TabIndex = 31;
-            this.btnExportMissingCensusRefs.Text = "Missing Census Refs";
-            this.btnExportMissingCensusRefs.UseVisualStyleBackColor = true;
-            this.btnExportMissingCensusRefs.Click += new System.EventHandler(this.BtnExportMissingCensusRefs_Click);
-            // 
             // btnReportUnrecognised
             // 
             this.btnReportUnrecognised.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnReportUnrecognised.Location = new System.Drawing.Point(6, 19);
             this.btnReportUnrecognised.Name = "btnReportUnrecognised";
-            this.btnReportUnrecognised.Size = new System.Drawing.Size(150, 25);
+            this.btnReportUnrecognised.Size = new System.Drawing.Size(300, 25);
             this.btnReportUnrecognised.TabIndex = 30;
-            this.btnReportUnrecognised.Text = "Unrecognised Census Refs";
+            this.btnReportUnrecognised.Text = "Export Unrecognised/Missing Census Refs";
             this.btnReportUnrecognised.UseVisualStyleBackColor = true;
             this.btnReportUnrecognised.Click += new System.EventHandler(this.BtnReportUnrecognised_Click);
-            // 
-            // btnReportUnrecognisedNotes
-            // 
-            this.btnReportUnrecognisedNotes.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnReportUnrecognisedNotes.Location = new System.Drawing.Point(318, 19);
-            this.btnReportUnrecognisedNotes.Name = "btnReportUnrecognisedNotes";
-            this.btnReportUnrecognisedNotes.Size = new System.Drawing.Size(306, 25);
-            this.btnReportUnrecognisedNotes.TabIndex = 29;
-            this.btnReportUnrecognisedNotes.Text = "Notes with no Recognised Census Reference formats";
-            this.btnReportUnrecognisedNotes.UseVisualStyleBackColor = true;
-            this.btnReportUnrecognisedNotes.Click += new System.EventHandler(this.BtnReportUnrecognisedNotes_Click);
             // 
             // groupBox5
             // 
@@ -2152,7 +2136,7 @@ namespace FTAnalyzer
             // btnInconsistentLocations
             // 
             this.btnInconsistentLocations.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnInconsistentLocations.Location = new System.Drawing.Point(318, 50);
+            this.btnInconsistentLocations.Location = new System.Drawing.Point(312, 50);
             this.btnInconsistentLocations.Name = "btnInconsistentLocations";
             this.btnInconsistentLocations.Size = new System.Drawing.Size(306, 25);
             this.btnInconsistentLocations.TabIndex = 29;
@@ -2164,7 +2148,7 @@ namespace FTAnalyzer
             // 
             this.btnUnrecognisedCensusRef.Location = new System.Drawing.Point(474, 19);
             this.btnUnrecognisedCensusRef.Name = "btnUnrecognisedCensusRef";
-            this.btnUnrecognisedCensusRef.Size = new System.Drawing.Size(150, 25);
+            this.btnUnrecognisedCensusRef.Size = new System.Drawing.Size(144, 25);
             this.btnUnrecognisedCensusRef.TabIndex = 8;
             this.btnUnrecognisedCensusRef.Text = "Unrecognised Census Refs";
             this.btnUnrecognisedCensusRef.UseVisualStyleBackColor = true;
@@ -2172,9 +2156,9 @@ namespace FTAnalyzer
             // 
             // btnIncompleteCensusRef
             // 
-            this.btnIncompleteCensusRef.Location = new System.Drawing.Point(318, 19);
+            this.btnIncompleteCensusRef.Location = new System.Drawing.Point(312, 19);
             this.btnIncompleteCensusRef.Name = "btnIncompleteCensusRef";
-            this.btnIncompleteCensusRef.Size = new System.Drawing.Size(150, 25);
+            this.btnIncompleteCensusRef.Size = new System.Drawing.Size(156, 25);
             this.btnIncompleteCensusRef.TabIndex = 7;
             this.btnIncompleteCensusRef.Text = "Incomplete Census Refs";
             this.btnIncompleteCensusRef.UseVisualStyleBackColor = true;
@@ -2184,7 +2168,7 @@ namespace FTAnalyzer
             // 
             this.btnMissingCensusRefs.Location = new System.Drawing.Point(162, 19);
             this.btnMissingCensusRefs.Name = "btnMissingCensusRefs";
-            this.btnMissingCensusRefs.Size = new System.Drawing.Size(150, 25);
+            this.btnMissingCensusRefs.Size = new System.Drawing.Size(144, 25);
             this.btnMissingCensusRefs.TabIndex = 6;
             this.btnMissingCensusRefs.Text = "Missing Census Refs";
             this.btnMissingCensusRefs.UseVisualStyleBackColor = true;
@@ -2194,7 +2178,7 @@ namespace FTAnalyzer
             // 
             this.btnCensusRefs.Location = new System.Drawing.Point(6, 19);
             this.btnCensusRefs.Name = "btnCensusRefs";
-            this.btnCensusRefs.Size = new System.Drawing.Size(150, 25);
+            this.btnCensusRefs.Size = new System.Drawing.Size(137, 25);
             this.btnCensusRefs.TabIndex = 5;
             this.btnCensusRefs.Text = "Facts with Census Refs";
             this.btnCensusRefs.UseVisualStyleBackColor = true;
@@ -3642,16 +3626,6 @@ namespace FTAnalyzer
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // btnViewInvalidRefs
-            // 
-            this.btnViewInvalidRefs.Location = new System.Drawing.Point(152, 174);
-            this.btnViewInvalidRefs.Name = "btnViewInvalidRefs";
-            this.btnViewInvalidRefs.Size = new System.Drawing.Size(138, 23);
-            this.btnViewInvalidRefs.TabIndex = 40;
-            this.btnViewInvalidRefs.Text = "View Invalid Census Refs";
-            this.btnViewInvalidRefs.UseVisualStyleBackColor = true;
-            this.btnViewInvalidRefs.Click += new System.EventHandler(this.BtnViewInvalidRefs_Click);
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -3948,10 +3922,8 @@ namespace FTAnalyzer
         private System.Windows.Forms.NumericUpDown nudToday;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button btnReportUnrecognised;
-        private System.Windows.Forms.Button btnReportUnrecognisedNotes;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripMenuItem mnuLoadLocationsCSV;
-        private System.Windows.Forms.Button btnExportMissingCensusRefs;
         private System.Windows.Forms.ToolStripMenuItem mnuLoadLocationsTNG;
         private System.Windows.Forms.ToolStripStatusLabel tsStatusLabel;
         private System.Windows.Forms.Button btnShowSurnames;
