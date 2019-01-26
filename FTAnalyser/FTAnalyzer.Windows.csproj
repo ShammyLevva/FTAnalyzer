@@ -423,6 +423,7 @@
     <Compile Include="UserControls\NonGedcomDateSettingsUI.Designer.cs">
       <DependentUpon>NonGedcomDateSettingsUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\DatabaseHelper.cs" />
     <Compile Include="Utilities\ErrorHandler.cs" />
     <Compile Include="Utilities\FooterPrintBlock.cs" />
     <Compile Include="Utilities\NativeMethods.cs" />
