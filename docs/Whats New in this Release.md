@@ -1,3 +1,15 @@
+#### Updated Release Version 7.3.4.0 26th January 2019  
+**Updates**  
+Export of unrecognised & Missing references changed to single report  
+Change get text to look at siblings for CONC lines - should pickup more extended text fields beyond usual one line descriptions  
+Added 1939 National Register recognitions for incomplete patterns (missing page references)  
+Added extra UK census reference checks  
+Extra support for unknown surnames  
+
+**Bugfixes**  
+Lost Cousins metaphones weren't being set for loaded data resulting in some duplicate checks being missed.  
+If a valid census reference was found in notes it wasn't updating an invalid census ref on fact  
+
 #### Updated Release Version 7.3.3.2 25th January 2019  
 **Bugfixes**  
 Fixed SQL loading bug creating missing LostCousins table  
