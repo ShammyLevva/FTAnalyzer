@@ -1,3 +1,9 @@
+#### Updated Release Version 7.3.5.0 27th January 2019  
+**Updates**  
+Added support for dashes in UK census refs  
+Added extra 1841-51 UK census checks  
+Tweak to Lost Cousins Age Calc for Abt years
+
 #### Updated Release Version 7.3.4.0 26th January 2019  
 **Updates**  
 Export of unrecognised & Missing references changed to single report  
