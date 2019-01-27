@@ -77,6 +77,7 @@ namespace CensusReferenceTest
             CensusHO107Test("Database online. Class: HO107; Piece 709; Book: 6; Civil Parish: StLeonard Shoreditch; County: Middlesex; Enumeration District: 19;Folio: 53; Page: 15; Line: 16; GSU roll: 438819.", CensusDate.UKCENSUS1841, "709", "6", "53", "15");
             CensusHO107Test("HO107, Piece 704, Folio 11, Page  14", CensusDate.UKCENSUS1841, "704", string.Empty, "11", "14");
             CensusHO107Test("Database online. Class: HO107; Piece: 1782; Folio: 719; Page: 25; GSU", CensusDate.UKCENSUS1851, "1782", string.Empty, "719", "25");
+            CensusHO107Test(@" Bethnal Green, folio 10/9, page 11, Caroline Shaboe; digital images, \i FindMyPast.co.uk\i0  (https://search.findmypast.co.uk/search-world-Records/1841-england-wales-and-scotland-census : accessed 29 Dec 2009); citing PRO HO/107/692", CensusDate.UKCENSUS1841, "692", "9", "10", "11");
 
             Census1911Test("1911 census - Piece 22623, SN 183", "22623", "183");
             Census1911Test("1911 census - Piece: 22623, SN: 183", "22623", "183");
