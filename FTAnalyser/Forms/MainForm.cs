@@ -262,6 +262,8 @@ namespace FTAnalyzer
             tsHintsLabel.Text = string.Empty;
             tsStatusLabel.Text = string.Empty;
             rtbLCoutput.Text = string.Empty;
+            rtbLCUpdateData.Text = string.Empty;
+            rtbCheckAncestors.Text = string.Empty;
             rtbToday.Text = string.Empty;
             pbSources.Value = 0;
             pbIndividuals.Value = 0;
@@ -478,6 +480,7 @@ namespace FTAnalyzer
 
         void RtbOutput_TextChanged(object sender, EventArgs e) => rtbOutput.ScrollToBottom();
         void RtbLCoutput_TextChanged(object sender, EventArgs e) => rtbLCoutput.ScrollToBottom();
+        void RtbCheckAncestors_TextChanged(object sender, EventArgs e) => rtbCheckAncestors.ScrollToBottom();
         
         bool shutdown = false;
 
@@ -1253,8 +1256,6 @@ namespace FTAnalyzer
                     btnLC1881EW.Enabled = btnLC1881Scot.Enabled = btnLC1841EW.Enabled =
                         btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled =
                         btnLC1911EW.Enabled = ft.IndividualCount > 0;
-                    if (LCSubTabs.TabPages.Count > 2)
-                        LCSubTabs.TabPages.RemoveAt(2); // hide verify tab
                     UpdateLostCousinsReport();
                     UpdateLCOutput();
                     txtLCEmail.Text = (string)Application.UserAppDataRegistry.GetValue("LostCousinsEmail", string.Empty);
@@ -1484,6 +1485,8 @@ namespace FTAnalyzer
             btnLCLogin.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
             btnLCLogin.Enabled = !websiteAvailable;
             btnUpdateLostCousinsWebsite.Visible = websiteAvailable;
+            btnCheckMyAncestors.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
+            lblCheckAncestors.Text = websiteAvailable ? "Logged into Lost Cousins" : "Not Currently Logged in Use Updates Page to Login";
             if (websiteAvailable)
                 UIHelpers.ShowMessage("Lost Cousins login succeeded.");
             else
@@ -1548,7 +1551,15 @@ namespace FTAnalyzer
             LCUpdates = new List<CensusIndividual>();
             LCInvalidReferences = new List<CensusIndividual>();
             rtbLCUpdateData.Text = ft.LCOutput(LCUpdates, LCInvalidReferences, relationFilter);
-         }
+        }
+
+
+        void BtnCheckMyAncestors_Click(object sender, EventArgs e)
+        {
+            Progress<string> outputText = new Progress<string>(value => { rtbCheckAncestors.AppendText(value); });
+            dgCheckAncestors.DataSource = ExportToLostCousins.VerifyAncestors(outputText);
+            dgCheckAncestors.Refresh();
+        }
 
         void BtnLCMissingCountry_Click(object sender, EventArgs e)
         {
