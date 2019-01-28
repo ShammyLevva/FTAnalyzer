@@ -1,3 +1,7 @@
+#### Updated Release Version 7.3.5.1 28th January 2019  
+**Bugfixes**  
+Lost Cousins login cleared if user name or password changes  
+
 #### Updated Release Version 7.3.5.0 27th January 2019  
 **Updates**  
 Added support for dashes in UK census refs  
