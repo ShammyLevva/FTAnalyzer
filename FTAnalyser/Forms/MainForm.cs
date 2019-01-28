@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.3.5.0";
+        public static string VERSION = "7.3.5.1";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1479,11 +1479,13 @@ namespace FTAnalyzer
 
         void BtnLCLogin_Click(object sender, EventArgs e)
         {
+            HourGlass(true);
             Application.UserAppDataRegistry.SetValue("LostCousinsEmail", txtLCEmail.Text);
             bool websiteAvailable = ExportToLostCousins.CheckLostCousinsLogin(txtLCEmail.Text, txtLCPassword.Text);
             btnLCLogin.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
             btnLCLogin.Enabled = !websiteAvailable;
             btnUpdateLostCousinsWebsite.Visible = websiteAvailable;
+            HourGlass(false);
             if (websiteAvailable)
                 UIHelpers.ShowMessage("Lost Cousins login succeeded.");
             else
@@ -1563,6 +1565,19 @@ namespace FTAnalyzer
         }
 
         void RelTypesLC_RelationTypesChanged(object sender, EventArgs e) => UpdateLostCousinsReport();
+
+        void TxtLCEmail_TextChanged(object sender, EventArgs e) => ClearLogin();
+
+        void TxtLCPassword_TextChanged(object sender, EventArgs e) => ClearLogin();
+
+        void ClearLogin()
+        {
+            if (btnUpdateLostCousinsWebsite.Visible) // if we can login clear cookies to reset session
+                ExportToLostCousins.EmptyCookieJar();
+            btnLCLogin.BackColor = Color.Red;
+            btnLCLogin.Enabled = true;
+            btnUpdateLostCousinsWebsite.Visible = false;
+        }
 
         void UpdateLostCousinsReport()
         {
