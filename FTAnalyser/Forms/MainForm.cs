@@ -296,6 +296,7 @@ namespace FTAnalyzer
             dgWorldWars.DataSource = null;
             dgLooseBirths.DataSource = null;
             dgLooseDeaths.DataSource = null;
+            dgLooseInfo.DataSource = null;
             dgDataErrors.DataSource = null;
             dgOccupations.DataSource = null;
             dgSurnames.DataSource = null;
@@ -311,6 +312,7 @@ namespace FTAnalyzer
             ExtensionMethods.DoubleBuffered(dgWorldWars, true);
             ExtensionMethods.DoubleBuffered(dgLooseBirths, true);
             ExtensionMethods.DoubleBuffered(dgLooseDeaths, true);
+            ExtensionMethods.DoubleBuffered(dgLooseInfo, true);
             ExtensionMethods.DoubleBuffered(dgDataErrors, true);
             ExtensionMethods.DoubleBuffered(dgOccupations, true);
             ExtensionMethods.DoubleBuffered(dgSurnames, true);
@@ -1375,6 +1377,12 @@ namespace FTAnalyzer
                     SetupLooseDeaths();
                 await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseDeathsEvent);
             }
+            else if (tabErrorFixSelector.SelectedTab == tabLooseInfo)
+            {
+                if (dgLooseInfo.DataSource == null)
+                    SetupLooseInfo();
+                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseInfoEvent);
+            }
         }
 
         #endregion
@@ -1748,6 +1756,8 @@ namespace FTAnalyzer
                         PrintDataGrid(Orientation.Landscape, dgLooseBirths, "List of Loose Births");
                     else if (tabErrorFixSelector.SelectedTab == tabLooseDeaths)
                         PrintDataGrid(Orientation.Landscape, dgLooseDeaths, "List of Loose Deaths");
+                    else if (tabErrorFixSelector.SelectedTab == tabLooseInfo)
+                        PrintDataGrid(Orientation.Landscape, dgLooseInfo, "List of Loose Births/Deaths");
                 }
                 else if (tabSelector.SelectedTab == tabLocations)
                 {
@@ -2012,6 +2022,12 @@ namespace FTAnalyzer
                 ShowFacts((string)dgLooseBirths.CurrentRow.Cells["IndividualID"].Value);
         }
 
+        void DgLooseInfo_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                ShowFacts((string)dgLooseInfo.CurrentRow.Cells["IndividualID"].Value);
+        }
+
         void DgTreeTops_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
@@ -2132,26 +2148,32 @@ namespace FTAnalyzer
         void ShowFacts(string indID, bool offset = false)
         {
             Individual ind = ft.GetIndividual(indID);
-            Facts factForm = new Facts(ind);
-            DisposeDuplicateForms(factForm);
-            factForm.Show();
-            if (offset)
+            if (ind != null)
             {
-                factForm.Left += 200;
-                factForm.Top += 100;
+                Facts factForm = new Facts(ind);
+                DisposeDuplicateForms(factForm);
+                factForm.Show();
+                if (offset)
+                {
+                    factForm.Left += 200;
+                    factForm.Top += 100;
+                }
             }
         }
 
         void ShowFamilyFacts(string famID, bool offset = false)
         {
             Family fam = ft.GetFamily(famID);
-            Facts factForm = new Facts(fam);
-            DisposeDuplicateForms(factForm);
-            factForm.Show();
-            if (offset)
+            if (fam != null)
             {
-                factForm.Left += 200;
-                factForm.Top += 100;
+                Facts factForm = new Facts(fam);
+                DisposeDuplicateForms(factForm);
+                factForm.Show();
+                if (offset)
+                {
+                    factForm.Left += 200;
+                    factForm.Top += 100;
+                }
             }
         }
 
@@ -2778,6 +2800,25 @@ namespace FTAnalyzer
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + looseDeathList.Count;
                 tsHintsLabel.Text = Messages.Hints_Loose_Deaths + Messages.Hints_Individual;
+            }
+            catch (LooseDataException ex)
+            {
+                MessageBox.Show(ex.Message, "FTAnalyzer");
+            }
+        }
+
+        void SetupLooseInfo()
+        {
+            try
+            {
+                SortableBindingList<IDisplayLooseInfo> looseInfoList = ft.LooseInfo();
+                dgLooseInfo.DataSource = looseInfoList;
+                dgLooseInfo.Sort(dgLooseInfo.Columns["Forenames"], ListSortDirection.Ascending);
+                dgLooseInfo.Sort(dgLooseInfo.Columns["Surname"], ListSortDirection.Ascending);
+                dgLooseInfo.Focus();
+                mnuPrint.Enabled = true;
+                tsCountLabel.Text = Messages.Count + looseInfoList.Count;
+                tsHintsLabel.Text = "Double click to view records. " + Messages.Hints_Individual;
             }
             catch (LooseDataException ex)
             {

@@ -92,8 +92,6 @@ namespace FactDateTest
             Assert.AreEqual(new DateTime(1723, 10, 4), target.StartDate);
             Assert.AreEqual(new DateTime(1723, 10, 4), target.EndDate);
 
-            
-
             // 29th Feb
             try
             {
@@ -101,8 +99,18 @@ namespace FactDateTest
                 Assert.Fail(); // if we get here the date was seen as valid so that's wrong
             }
             catch (FactDateException) { }  // we expect this so no test failure
-            catch (Exception) { Assert.Fail(); } // if we get some other sort of failure test failed
-            
+            catch (Exception) { Assert.Fail(); } // if we get some other sort of failure test failed  
+        }
+
+        /// <summary>
+        ///A test for FactDate Constructor
+        ///</summary>
+        [TestMethod()]
+        public void SpecialDates()
+        {
+            FactDate target = new FactDate("ABT @#DJULIAN@ 1567");
+            Assert.AreEqual(new DateTime(1566, 1, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1567, 12, 31), target.EndDate);
         }
 
         /// <summary>

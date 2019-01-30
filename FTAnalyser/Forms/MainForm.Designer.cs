@@ -40,7 +40,7 @@ namespace FTAnalyzer
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -349,6 +349,8 @@ namespace FTAnalyzer
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.tabLooseInfo = new System.Windows.Forms.TabPage();
+            this.dgLooseInfo = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -421,6 +423,8 @@ namespace FTAnalyzer
             this.tabFacts.SuspendLayout();
             this.tabToday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).BeginInit();
+            this.tabLooseInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgLooseInfo)).BeginInit();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -1165,14 +1169,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 166);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -2888,6 +2892,7 @@ namespace FTAnalyzer
             this.tabErrorFixSelector.Controls.Add(this.tabDuplicates);
             this.tabErrorFixSelector.Controls.Add(this.tabLooseBirths);
             this.tabErrorFixSelector.Controls.Add(this.tabLooseDeaths);
+            this.tabErrorFixSelector.Controls.Add(this.tabLooseInfo);
             this.tabErrorFixSelector.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabErrorFixSelector.Location = new System.Drawing.Point(0, 0);
             this.tabErrorFixSelector.Name = "tabErrorFixSelector";
@@ -3628,6 +3633,32 @@ namespace FTAnalyzer
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
+            // tabLooseInfo
+            // 
+            this.tabLooseInfo.Controls.Add(this.dgLooseInfo);
+            this.tabLooseInfo.Location = new System.Drawing.Point(4, 22);
+            this.tabLooseInfo.Name = "tabLooseInfo";
+            this.tabLooseInfo.Size = new System.Drawing.Size(1076, 417);
+            this.tabLooseInfo.TabIndex = 4;
+            this.tabLooseInfo.Text = "All Loose Info";
+            this.tabLooseInfo.UseVisualStyleBackColor = true;
+            // 
+            // dgLooseInfo
+            // 
+            this.dgLooseInfo.AllowUserToAddRows = false;
+            this.dgLooseInfo.AllowUserToDeleteRows = false;
+            this.dgLooseInfo.AllowUserToOrderColumns = true;
+            this.dgLooseInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgLooseInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgLooseInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgLooseInfo.Location = new System.Drawing.Point(0, 0);
+            this.dgLooseInfo.MultiSelect = false;
+            this.dgLooseInfo.Name = "dgLooseInfo";
+            this.dgLooseInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgLooseInfo.Size = new System.Drawing.Size(1076, 417);
+            this.dgLooseInfo.TabIndex = 4;
+            this.dgLooseInfo.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLooseInfo_CellDoubleClick);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -3736,6 +3767,8 @@ namespace FTAnalyzer
             this.tabToday.ResumeLayout(false);
             this.tabToday.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).EndInit();
+            this.tabLooseInfo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgLooseInfo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4052,6 +4085,8 @@ namespace FTAnalyzer
         private System.Windows.Forms.CheckBox chkSurnamesIgnoreCase;
         private System.Windows.Forms.Button btnLCPotentialUploads;
         private System.Windows.Forms.Button btnViewInvalidRefs;
+        private System.Windows.Forms.TabPage tabLooseInfo;
+        private System.Windows.Forms.DataGridView dgLooseInfo;
     }
 }
 

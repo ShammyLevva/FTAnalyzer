@@ -38,7 +38,7 @@ namespace FTAnalyzer.Forms
             italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
             linkFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Underline);
             dgFacts.Columns["IndividualID"].Visible = true;
-            dgFacts.Columns["CensusReference"].Visible = true; // originally false - trying true v5.0.0.3
+            dgFacts.Columns["CensusReference"].Visible = true; 
             dgFacts.Columns["IgnoreFact"].Visible = false;
             dgFacts.ReadOnly = true;
             sep1.Visible = false;
@@ -257,32 +257,41 @@ namespace FTAnalyzer.Forms
 
         void AddIndividualsFacts(Individual individual)
         {
-            IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
-            foreach (Fact f in list)
-                facts.Add(new DisplayFact(individual, f));
+            if (individual != null)
+            {
+                IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
+                foreach (Fact f in list)
+                    facts.Add(new DisplayFact(individual, f));
+            }
         }
 
         void AddIndividualsFacts(Individual individual, List<string> factTypes, List<string> excludedTypes)
         {
-            IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
-            if (factTypes.Count == 0 && excludedTypes != null && !list.Any(x => excludedTypes.Contains(x.FactTypeDescription)))
-                facts.Add(new DisplayFact(individual, new Fact(individual.IndividualID, Fact.REPORT, individual.BirthDate, individual.BirthLocation)));
-            else
+            if (individual != null)
             {
-                foreach (Fact f in list)
-                    if (factTypes.Contains(f.FactTypeDescription) && !list.Any(x => excludedTypes.Contains(x.FactTypeDescription)))
-                        facts.Add(new DisplayFact(individual, f));
+                IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
+                if (factTypes.Count == 0 && excludedTypes != null && !list.Any(x => excludedTypes.Contains(x.FactTypeDescription)))
+                    facts.Add(new DisplayFact(individual, new Fact(individual.IndividualID, Fact.REPORT, individual.BirthDate, individual.BirthLocation)));
+                else
+                {
+                    foreach (Fact f in list)
+                        if (factTypes.Contains(f.FactTypeDescription) && !list.Any(x => excludedTypes.Contains(x.FactTypeDescription)))
+                            facts.Add(new DisplayFact(individual, f));
+                }
             }
         }
 
         void AddDuplicateFacts(Individual individual, List<string> factTypes)
         {
-            IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
-            foreach (string factType in factTypes)
+            if (individual != null)
             {
-                if (list.Count(x => x.FactTypeDescription.Equals(factType)) > 1)
-                    foreach (Fact f in list.Where(x => x.FactTypeDescription.Equals(factType)))
-                        facts.Add(new DisplayFact(individual, f));
+                IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
+                foreach (string factType in factTypes)
+                {
+                    if (list.Count(x => x.FactTypeDescription.Equals(factType)) > 1)
+                        foreach (Fact f in list.Where(x => x.FactTypeDescription.Equals(factType)))
+                            facts.Add(new DisplayFact(individual, f));
+                }
             }
         }
 
