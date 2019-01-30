@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.3.5.0";
+        public static string VERSION = "7.4.0.0-beta1";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1556,9 +1556,13 @@ namespace FTAnalyzer
 
         void BtnCheckMyAncestors_Click(object sender, EventArgs e)
         {
-            Progress<string> outputText = new Progress<string>(value => { rtbCheckAncestors.AppendText(value); });
-            dgCheckAncestors.DataSource = ExportToLostCousins.VerifyAncestors(outputText);
-            dgCheckAncestors.Refresh();
+            if (btnCheckMyAncestors.BackColor == Color.LightGreen)
+            {
+                Progress<string> outputText = new Progress<string>(value => { rtbCheckAncestors.AppendText(value); });
+                dgCheckAncestors.DataSource = ExportToLostCousins.VerifyAncestors(outputText);
+                dgCheckAncestors.Refresh();
+                ExportToLostCousins.CheckWebLinks(outputText);
+            }
         }
 
         void BtnLCMissingCountry_Click(object sender, EventArgs e)
