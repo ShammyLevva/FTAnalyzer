@@ -1,3 +1,9 @@
+#### Updated Release Version 7.3.6.0 30th January 2019  
+**Updates**  
+Added LooseInfo tab to combine Loose Births and Death info in one tab  
+Added lots of new census reference checking thanks to a couple of people who pointed out missing references  
+Added support for Julian dates  
+
 #### Updated Release Version 7.3.5.1 28th January 2019  
 **Bugfixes**  
 Lost Cousins login cleared if user name or password changes  
