@@ -68,6 +68,7 @@
             this.Relation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CensusReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CensusYear = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgCensus)).BeginInit();
             this.statusStrip.SuspendLayout();
@@ -100,6 +101,7 @@
             this.Relation,
             this.RelationToRoot,
             this.CensusReference,
+            this.CensusYear,
             this.Ahnentafel});
             this.dgCensus.Location = new System.Drawing.Point(0, 28);
             this.dgCensus.Name = "dgCensus";
@@ -402,7 +404,7 @@
             // 
             this.DeathLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.DeathLocation.DataPropertyName = "DeathLocation";
-            this.DeathLocation.HeaderText = "DeathLocation";
+            this.DeathLocation.HeaderText = "Death Location";
             this.DeathLocation.Name = "DeathLocation";
             this.DeathLocation.ReadOnly = true;
             // 
@@ -441,6 +443,13 @@
             this.CensusReference.Name = "CensusReference";
             this.CensusReference.ReadOnly = true;
             this.CensusReference.Width = 250;
+            // 
+            // CensusYear
+            // 
+            this.CensusYear.DataPropertyName = "Census";
+            this.CensusYear.HeaderText = "Census";
+            this.CensusYear.Name = "CensusYear";
+            this.CensusYear.ReadOnly = true;
             // 
             // Ahnentafel
             // 
@@ -514,6 +523,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Relation;
         private System.Windows.Forms.DataGridViewTextBoxColumn RelationToRoot;
         private System.Windows.Forms.DataGridViewTextBoxColumn CensusReference;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CensusYear;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ahnentafel;
     }
 }
