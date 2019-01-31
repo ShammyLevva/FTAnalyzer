@@ -40,7 +40,7 @@ namespace FTAnalyzer
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -213,20 +213,22 @@ namespace FTAnalyzer
             this.txtLCPassword = new System.Windows.Forms.MaskedTextBox();
             this.btnUpdateLostCousinsWebsite = new System.Windows.Forms.Button();
             this.tabCensus = new System.Windows.Forms.TabPage();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.btnReportUnrecognised = new System.Windows.Forms.Button();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnDuplicateCensus = new System.Windows.Forms.Button();
+            this.btnMissingCensusLocation = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.btnMismatchedChildrenStatus = new System.Windows.Forms.Button();
             this.btnNoChildrenStatus = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnReportUnrecognised = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnInconsistentLocations = new System.Windows.Forms.Button();
             this.btnUnrecognisedCensusRef = new System.Windows.Forms.Button();
             this.btnIncompleteCensusRef = new System.Windows.Forms.Button();
             this.btnMissingCensusRefs = new System.Windows.Forms.Button();
             this.btnCensusRefs = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnRandomSurnameEntered = new System.Windows.Forms.Button();
-            this.btnRandomSurnameMissing = new System.Windows.Forms.Button();
             this.chkExcludeUnknownBirths = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtCensusSurname = new System.Windows.Forms.TextBox();
@@ -234,11 +236,6 @@ namespace FTAnalyzer
             this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
             this.cenDate = new FTAnalyzer.Controls.CensusDateSelector();
             this.relTypesCensus = new FTAnalyzer.Controls.RelationTypes();
-            this.btnShowCensusEntered = new System.Windows.Forms.Button();
-            this.btnShowCensusMissing = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnDuplicateCensus = new System.Windows.Forms.Button();
-            this.btnMissingCensusLocation = new System.Windows.Forms.Button();
             this.tabLocations = new System.Windows.Forms.TabPage();
             this.btnModernOSMap = new System.Windows.Forms.Button();
             this.btnOldOSMap = new System.Windows.Forms.Button();
@@ -313,6 +310,8 @@ namespace FTAnalyzer
             this.dgLooseBirths = new System.Windows.Forms.DataGridView();
             this.tabLooseDeaths = new System.Windows.Forms.TabPage();
             this.dgLooseDeaths = new System.Windows.Forms.DataGridView();
+            this.tabLooseInfo = new System.Windows.Forms.TabPage();
+            this.dgLooseInfo = new System.Windows.Forms.DataGridView();
             this.tabSurnames = new System.Windows.Forms.TabPage();
             this.chkSurnamesIgnoreCase = new System.Windows.Forms.CheckBox();
             this.btnShowSurnames = new System.Windows.Forms.Button();
@@ -349,8 +348,12 @@ namespace FTAnalyzer
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.tabLooseInfo = new System.Windows.Forms.TabPage();
-            this.dgLooseInfo = new System.Windows.Forms.DataGridView();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.btnRandomSurnameEntered = new System.Windows.Forms.Button();
+            this.btnRandomSurnameMissing = new System.Windows.Forms.Button();
+            this.btnShowCensusEntered = new System.Windows.Forms.Button();
+            this.btnShowCensusMissing = new System.Windows.Forms.Button();
+            this.chkAnyCensusYear = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -373,12 +376,13 @@ namespace FTAnalyzer
             this.LCUpdatesTab.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.tabCensus.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).BeginInit();
+            this.groupBox9.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).BeginInit();
             this.tabLocations.SuspendLayout();
             this.tabCtrlLocations.SuspendLayout();
             this.tabTreeView.SuspendLayout();
@@ -418,13 +422,14 @@ namespace FTAnalyzer
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseBirths)).BeginInit();
             this.tabLooseDeaths.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).BeginInit();
+            this.tabLooseInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgLooseInfo)).BeginInit();
             this.tabSurnames.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSurnames)).BeginInit();
             this.tabFacts.SuspendLayout();
             this.tabToday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).BeginInit();
-            this.tabLooseInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgLooseInfo)).BeginInit();
+            this.groupBox10.SuspendLayout();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -1169,14 +1174,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 166);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -2060,11 +2065,8 @@ namespace FTAnalyzer
             // 
             // tabCensus
             // 
-            this.tabCensus.Controls.Add(this.groupBox6);
-            this.tabCensus.Controls.Add(this.groupBox5);
-            this.tabCensus.Controls.Add(this.groupBox4);
+            this.tabCensus.Controls.Add(this.groupBox9);
             this.tabCensus.Controls.Add(this.groupBox2);
-            this.tabCensus.Controls.Add(this.groupBox1);
             this.tabCensus.Location = new System.Drawing.Point(4, 22);
             this.tabCensus.Name = "tabCensus";
             this.tabCensus.Padding = new System.Windows.Forms.Padding(3);
@@ -2073,43 +2075,65 @@ namespace FTAnalyzer
             this.tabCensus.Text = "Census";
             this.tabCensus.UseVisualStyleBackColor = true;
             // 
-            // groupBox6
+            // groupBox9
             // 
-            this.groupBox6.Controls.Add(this.btnReportUnrecognised);
-            this.groupBox6.Location = new System.Drawing.Point(339, 301);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(632, 59);
-            this.groupBox6.TabIndex = 30;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Export Missing/Unrecognised data to File";
+            this.groupBox9.Controls.Add(this.groupBox1);
+            this.groupBox9.Controls.Add(this.groupBox5);
+            this.groupBox9.Controls.Add(this.groupBox6);
+            this.groupBox9.Location = new System.Drawing.Point(8, 314);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(963, 93);
+            this.groupBox9.TabIndex = 32;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Census Reports that don\'t use filters above";
             // 
-            // btnReportUnrecognised
+            // groupBox1
             // 
-            this.btnReportUnrecognised.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnReportUnrecognised.Location = new System.Drawing.Point(6, 19);
-            this.btnReportUnrecognised.Name = "btnReportUnrecognised";
-            this.btnReportUnrecognised.Size = new System.Drawing.Size(300, 25);
-            this.btnReportUnrecognised.TabIndex = 30;
-            this.btnReportUnrecognised.Text = "Export Unrecognised/Missing Census Refs";
-            this.btnReportUnrecognised.UseVisualStyleBackColor = true;
-            this.btnReportUnrecognised.Click += new System.EventHandler(this.BtnReportUnrecognised_Click);
+            this.groupBox1.Controls.Add(this.btnDuplicateCensus);
+            this.groupBox1.Controls.Add(this.btnMissingCensusLocation);
+            this.groupBox1.Location = new System.Drawing.Point(627, 19);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(330, 59);
+            this.groupBox1.TabIndex = 33;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Potential Census Fact Problems";
+            // 
+            // btnDuplicateCensus
+            // 
+            this.btnDuplicateCensus.Location = new System.Drawing.Point(166, 19);
+            this.btnDuplicateCensus.Name = "btnDuplicateCensus";
+            this.btnDuplicateCensus.Size = new System.Drawing.Size(150, 25);
+            this.btnDuplicateCensus.TabIndex = 6;
+            this.btnDuplicateCensus.Text = "Duplicate Census Facts";
+            this.btnDuplicateCensus.UseVisualStyleBackColor = true;
+            this.btnDuplicateCensus.Click += new System.EventHandler(this.BtnDuplicateCensus_Click);
+            // 
+            // btnMissingCensusLocation
+            // 
+            this.btnMissingCensusLocation.Location = new System.Drawing.Point(10, 19);
+            this.btnMissingCensusLocation.Name = "btnMissingCensusLocation";
+            this.btnMissingCensusLocation.Size = new System.Drawing.Size(150, 25);
+            this.btnMissingCensusLocation.TabIndex = 5;
+            this.btnMissingCensusLocation.Text = "Missing Census Locations";
+            this.btnMissingCensusLocation.UseVisualStyleBackColor = true;
+            this.btnMissingCensusLocation.Click += new System.EventHandler(this.BtnMissingCensusLocation_Click);
             // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.btnMismatchedChildrenStatus);
             this.groupBox5.Controls.Add(this.btnNoChildrenStatus);
-            this.groupBox5.Location = new System.Drawing.Point(6, 301);
+            this.groupBox5.Location = new System.Drawing.Point(6, 19);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(327, 59);
-            this.groupBox5.TabIndex = 27;
+            this.groupBox5.TabIndex = 32;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "1911 UK Census";
             // 
             // btnMismatchedChildrenStatus
             // 
-            this.btnMismatchedChildrenStatus.Location = new System.Drawing.Point(167, 19);
+            this.btnMismatchedChildrenStatus.Location = new System.Drawing.Point(165, 19);
             this.btnMismatchedChildrenStatus.Name = "btnMismatchedChildrenStatus";
-            this.btnMismatchedChildrenStatus.Size = new System.Drawing.Size(150, 25);
+            this.btnMismatchedChildrenStatus.Size = new System.Drawing.Size(154, 25);
             this.btnMismatchedChildrenStatus.TabIndex = 7;
             this.btnMismatchedChildrenStatus.Text = "Mismatched Children Status";
             this.btnMismatchedChildrenStatus.UseVisualStyleBackColor = true;
@@ -2117,13 +2141,53 @@ namespace FTAnalyzer
             // 
             // btnNoChildrenStatus
             // 
-            this.btnNoChildrenStatus.Location = new System.Drawing.Point(11, 19);
+            this.btnNoChildrenStatus.Location = new System.Drawing.Point(9, 19);
             this.btnNoChildrenStatus.Name = "btnNoChildrenStatus";
             this.btnNoChildrenStatus.Size = new System.Drawing.Size(150, 25);
             this.btnNoChildrenStatus.TabIndex = 6;
             this.btnNoChildrenStatus.Text = "Missing Children Status";
             this.btnNoChildrenStatus.UseVisualStyleBackColor = true;
             this.btnNoChildrenStatus.Click += new System.EventHandler(this.BtnNoChildrenStatus_Click);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.btnReportUnrecognised);
+            this.groupBox6.Location = new System.Drawing.Point(363, 19);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(244, 59);
+            this.groupBox6.TabIndex = 31;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Export Missing/Unrecognised data to File";
+            // 
+            // btnReportUnrecognised
+            // 
+            this.btnReportUnrecognised.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnReportUnrecognised.Location = new System.Drawing.Point(6, 19);
+            this.btnReportUnrecognised.Name = "btnReportUnrecognised";
+            this.btnReportUnrecognised.Size = new System.Drawing.Size(224, 25);
+            this.btnReportUnrecognised.TabIndex = 30;
+            this.btnReportUnrecognised.Text = "Export Unrecognised/Missing Census Refs";
+            this.btnReportUnrecognised.UseVisualStyleBackColor = true;
+            this.btnReportUnrecognised.Click += new System.EventHandler(this.BtnReportUnrecognised_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.chkAnyCensusYear);
+            this.groupBox2.Controls.Add(this.groupBox10);
+            this.groupBox2.Controls.Add(this.groupBox4);
+            this.groupBox2.Controls.Add(this.chkExcludeUnknownBirths);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.txtCensusSurname);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.udAgeFilter);
+            this.groupBox2.Controls.Add(this.cenDate);
+            this.groupBox2.Controls.Add(this.relTypesCensus);
+            this.groupBox2.Location = new System.Drawing.Point(8, 6);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(963, 290);
+            this.groupBox2.TabIndex = 23;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Census Search Reports";
             // 
             // groupBox4
             // 
@@ -2132,19 +2196,18 @@ namespace FTAnalyzer
             this.groupBox4.Controls.Add(this.btnIncompleteCensusRef);
             this.groupBox4.Controls.Add(this.btnMissingCensusRefs);
             this.groupBox4.Controls.Add(this.btnCensusRefs);
-            this.groupBox4.Location = new System.Drawing.Point(339, 207);
+            this.groupBox4.Location = new System.Drawing.Point(9, 226);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(632, 88);
-            this.groupBox4.TabIndex = 25;
+            this.groupBox4.Size = new System.Drawing.Size(948, 53);
+            this.groupBox4.TabIndex = 34;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Census Reference Reports";
             // 
             // btnInconsistentLocations
             // 
-            this.btnInconsistentLocations.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnInconsistentLocations.Location = new System.Drawing.Point(312, 50);
+            this.btnInconsistentLocations.Location = new System.Drawing.Point(628, 19);
             this.btnInconsistentLocations.Name = "btnInconsistentLocations";
-            this.btnInconsistentLocations.Size = new System.Drawing.Size(306, 25);
+            this.btnInconsistentLocations.Size = new System.Drawing.Size(307, 25);
             this.btnInconsistentLocations.TabIndex = 29;
             this.btnInconsistentLocations.Text = "Inconsistent census locations for families with same census ref";
             this.btnInconsistentLocations.UseVisualStyleBackColor = true;
@@ -2152,7 +2215,7 @@ namespace FTAnalyzer
             // 
             // btnUnrecognisedCensusRef
             // 
-            this.btnUnrecognisedCensusRef.Location = new System.Drawing.Point(474, 19);
+            this.btnUnrecognisedCensusRef.Location = new System.Drawing.Point(322, 19);
             this.btnUnrecognisedCensusRef.Name = "btnUnrecognisedCensusRef";
             this.btnUnrecognisedCensusRef.Size = new System.Drawing.Size(144, 25);
             this.btnUnrecognisedCensusRef.TabIndex = 8;
@@ -2162,9 +2225,9 @@ namespace FTAnalyzer
             // 
             // btnIncompleteCensusRef
             // 
-            this.btnIncompleteCensusRef.Location = new System.Drawing.Point(312, 19);
+            this.btnIncompleteCensusRef.Location = new System.Drawing.Point(162, 19);
             this.btnIncompleteCensusRef.Name = "btnIncompleteCensusRef";
-            this.btnIncompleteCensusRef.Size = new System.Drawing.Size(156, 25);
+            this.btnIncompleteCensusRef.Size = new System.Drawing.Size(154, 25);
             this.btnIncompleteCensusRef.TabIndex = 7;
             this.btnIncompleteCensusRef.Text = "Incomplete Census Refs";
             this.btnIncompleteCensusRef.UseVisualStyleBackColor = true;
@@ -2172,9 +2235,9 @@ namespace FTAnalyzer
             // 
             // btnMissingCensusRefs
             // 
-            this.btnMissingCensusRefs.Location = new System.Drawing.Point(162, 19);
+            this.btnMissingCensusRefs.Location = new System.Drawing.Point(472, 19);
             this.btnMissingCensusRefs.Name = "btnMissingCensusRefs";
-            this.btnMissingCensusRefs.Size = new System.Drawing.Size(144, 25);
+            this.btnMissingCensusRefs.Size = new System.Drawing.Size(150, 25);
             this.btnMissingCensusRefs.TabIndex = 6;
             this.btnMissingCensusRefs.Text = "Missing Census Refs";
             this.btnMissingCensusRefs.UseVisualStyleBackColor = true;
@@ -2184,57 +2247,18 @@ namespace FTAnalyzer
             // 
             this.btnCensusRefs.Location = new System.Drawing.Point(6, 19);
             this.btnCensusRefs.Name = "btnCensusRefs";
-            this.btnCensusRefs.Size = new System.Drawing.Size(137, 25);
+            this.btnCensusRefs.Size = new System.Drawing.Size(150, 25);
             this.btnCensusRefs.TabIndex = 5;
-            this.btnCensusRefs.Text = "Facts with Census Refs";
+            this.btnCensusRefs.Text = "Good Census Refs";
             this.btnCensusRefs.UseVisualStyleBackColor = true;
             this.btnCensusRefs.Click += new System.EventHandler(this.BtnCensusRefs_Click);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.btnRandomSurnameEntered);
-            this.groupBox2.Controls.Add(this.btnRandomSurnameMissing);
-            this.groupBox2.Controls.Add(this.chkExcludeUnknownBirths);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.txtCensusSurname);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.udAgeFilter);
-            this.groupBox2.Controls.Add(this.cenDate);
-            this.groupBox2.Controls.Add(this.relTypesCensus);
-            this.groupBox2.Controls.Add(this.btnShowCensusEntered);
-            this.groupBox2.Controls.Add(this.btnShowCensusMissing);
-            this.groupBox2.Location = new System.Drawing.Point(8, 6);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(963, 195);
-            this.groupBox2.TabIndex = 23;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Census Search Reports";
-            // 
-            // btnRandomSurnameEntered
-            // 
-            this.btnRandomSurnameEntered.Location = new System.Drawing.Point(643, 157);
-            this.btnRandomSurnameEntered.Name = "btnRandomSurnameEntered";
-            this.btnRandomSurnameEntered.Size = new System.Drawing.Size(306, 25);
-            this.btnRandomSurnameEntered.TabIndex = 33;
-            this.btnRandomSurnameEntered.Text = "Show Entered Random Surname from Direct Ancestors";
-            this.btnRandomSurnameEntered.UseVisualStyleBackColor = true;
-            this.btnRandomSurnameEntered.Click += new System.EventHandler(this.BtnRandomSurname_Click);
-            // 
-            // btnRandomSurnameMissing
-            // 
-            this.btnRandomSurnameMissing.Location = new System.Drawing.Point(331, 157);
-            this.btnRandomSurnameMissing.Name = "btnRandomSurnameMissing";
-            this.btnRandomSurnameMissing.Size = new System.Drawing.Size(306, 25);
-            this.btnRandomSurnameMissing.TabIndex = 32;
-            this.btnRandomSurnameMissing.Text = "Show Missing Random Surname from Direct Ancestors";
-            this.btnRandomSurnameMissing.UseVisualStyleBackColor = true;
-            this.btnRandomSurnameMissing.Click += new System.EventHandler(this.BtnRandomSurname_Click);
             // 
             // chkExcludeUnknownBirths
             // 
             this.chkExcludeUnknownBirths.AutoSize = true;
-            this.chkExcludeUnknownBirths.Location = new System.Drawing.Point(349, 63);
+            this.chkExcludeUnknownBirths.Location = new System.Drawing.Point(340, 63);
             this.chkExcludeUnknownBirths.Name = "chkExcludeUnknownBirths";
+            this.chkExcludeUnknownBirths.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkExcludeUnknownBirths.Size = new System.Drawing.Size(238, 17);
             this.chkExcludeUnknownBirths.TabIndex = 31;
             this.chkExcludeUnknownBirths.Text = "Exclude Individuals with unknown birth dates";
@@ -2259,7 +2283,7 @@ namespace FTAnalyzer
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(346, 39);
+            this.label2.Location = new System.Drawing.Point(340, 39);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(175, 13);
             this.label2.TabIndex = 26;
@@ -2267,7 +2291,7 @@ namespace FTAnalyzer
             // 
             // udAgeFilter
             // 
-            this.udAgeFilter.Location = new System.Drawing.Point(527, 37);
+            this.udAgeFilter.Location = new System.Drawing.Point(521, 36);
             this.udAgeFilter.Maximum = new decimal(new int[] {
             110,
             0,
@@ -2304,57 +2328,6 @@ namespace FTAnalyzer
             this.relTypesCensus.Name = "relTypesCensus";
             this.relTypesCensus.Size = new System.Drawing.Size(325, 99);
             this.relTypesCensus.TabIndex = 27;
-            // 
-            // btnShowCensusEntered
-            // 
-            this.btnShowCensusEntered.Location = new System.Drawing.Point(159, 157);
-            this.btnShowCensusEntered.Name = "btnShowCensusEntered";
-            this.btnShowCensusEntered.Size = new System.Drawing.Size(150, 25);
-            this.btnShowCensusEntered.TabIndex = 22;
-            this.btnShowCensusEntered.Text = "Show Entered on Census";
-            this.btnShowCensusEntered.UseVisualStyleBackColor = true;
-            this.btnShowCensusEntered.Click += new System.EventHandler(this.BtnShowCensus_Click);
-            // 
-            // btnShowCensusMissing
-            // 
-            this.btnShowCensusMissing.Location = new System.Drawing.Point(3, 157);
-            this.btnShowCensusMissing.Name = "btnShowCensusMissing";
-            this.btnShowCensusMissing.Size = new System.Drawing.Size(150, 25);
-            this.btnShowCensusMissing.TabIndex = 5;
-            this.btnShowCensusMissing.Text = "Show Missing from Census";
-            this.btnShowCensusMissing.UseVisualStyleBackColor = true;
-            this.btnShowCensusMissing.Click += new System.EventHandler(this.BtnShowCensus_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btnDuplicateCensus);
-            this.groupBox1.Controls.Add(this.btnMissingCensusLocation);
-            this.groupBox1.Location = new System.Drawing.Point(8, 207);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(325, 88);
-            this.groupBox1.TabIndex = 22;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Potential Census Fact Problems";
-            // 
-            // btnDuplicateCensus
-            // 
-            this.btnDuplicateCensus.Location = new System.Drawing.Point(165, 19);
-            this.btnDuplicateCensus.Name = "btnDuplicateCensus";
-            this.btnDuplicateCensus.Size = new System.Drawing.Size(150, 25);
-            this.btnDuplicateCensus.TabIndex = 6;
-            this.btnDuplicateCensus.Text = "Duplicate Census Facts";
-            this.btnDuplicateCensus.UseVisualStyleBackColor = true;
-            this.btnDuplicateCensus.Click += new System.EventHandler(this.BtnDuplicateCensus_Click);
-            // 
-            // btnMissingCensusLocation
-            // 
-            this.btnMissingCensusLocation.Location = new System.Drawing.Point(9, 19);
-            this.btnMissingCensusLocation.Name = "btnMissingCensusLocation";
-            this.btnMissingCensusLocation.Size = new System.Drawing.Size(150, 25);
-            this.btnMissingCensusLocation.TabIndex = 5;
-            this.btnMissingCensusLocation.Text = "Missing Census Locations";
-            this.btnMissingCensusLocation.UseVisualStyleBackColor = true;
-            this.btnMissingCensusLocation.Click += new System.EventHandler(this.BtnMissingCensusLocation_Click);
             // 
             // tabLocations
             // 
@@ -3237,6 +3210,32 @@ namespace FTAnalyzer
             this.dgLooseDeaths.TabIndex = 2;
             this.dgLooseDeaths.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLooseDeaths_CellDoubleClick);
             // 
+            // tabLooseInfo
+            // 
+            this.tabLooseInfo.Controls.Add(this.dgLooseInfo);
+            this.tabLooseInfo.Location = new System.Drawing.Point(4, 22);
+            this.tabLooseInfo.Name = "tabLooseInfo";
+            this.tabLooseInfo.Size = new System.Drawing.Size(1076, 417);
+            this.tabLooseInfo.TabIndex = 4;
+            this.tabLooseInfo.Text = "All Loose Info";
+            this.tabLooseInfo.UseVisualStyleBackColor = true;
+            // 
+            // dgLooseInfo
+            // 
+            this.dgLooseInfo.AllowUserToAddRows = false;
+            this.dgLooseInfo.AllowUserToDeleteRows = false;
+            this.dgLooseInfo.AllowUserToOrderColumns = true;
+            this.dgLooseInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgLooseInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgLooseInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgLooseInfo.Location = new System.Drawing.Point(0, 0);
+            this.dgLooseInfo.MultiSelect = false;
+            this.dgLooseInfo.Name = "dgLooseInfo";
+            this.dgLooseInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgLooseInfo.Size = new System.Drawing.Size(1076, 417);
+            this.dgLooseInfo.TabIndex = 4;
+            this.dgLooseInfo.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLooseInfo_CellDoubleClick);
+            // 
             // tabSurnames
             // 
             this.tabSurnames.Controls.Add(this.chkSurnamesIgnoreCase);
@@ -3633,31 +3632,69 @@ namespace FTAnalyzer
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // tabLooseInfo
+            // groupBox10
             // 
-            this.tabLooseInfo.Controls.Add(this.dgLooseInfo);
-            this.tabLooseInfo.Location = new System.Drawing.Point(4, 22);
-            this.tabLooseInfo.Name = "tabLooseInfo";
-            this.tabLooseInfo.Size = new System.Drawing.Size(1076, 417);
-            this.tabLooseInfo.TabIndex = 4;
-            this.tabLooseInfo.Text = "All Loose Info";
-            this.tabLooseInfo.UseVisualStyleBackColor = true;
+            this.groupBox10.Controls.Add(this.btnRandomSurnameEntered);
+            this.groupBox10.Controls.Add(this.btnRandomSurnameMissing);
+            this.groupBox10.Controls.Add(this.btnShowCensusEntered);
+            this.groupBox10.Controls.Add(this.btnShowCensusMissing);
+            this.groupBox10.Location = new System.Drawing.Point(9, 157);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(948, 63);
+            this.groupBox10.TabIndex = 35;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Census Record Reports";
             // 
-            // dgLooseInfo
+            // btnRandomSurnameEntered
             // 
-            this.dgLooseInfo.AllowUserToAddRows = false;
-            this.dgLooseInfo.AllowUserToDeleteRows = false;
-            this.dgLooseInfo.AllowUserToOrderColumns = true;
-            this.dgLooseInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgLooseInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgLooseInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgLooseInfo.Location = new System.Drawing.Point(0, 0);
-            this.dgLooseInfo.MultiSelect = false;
-            this.dgLooseInfo.Name = "dgLooseInfo";
-            this.dgLooseInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgLooseInfo.Size = new System.Drawing.Size(1076, 417);
-            this.dgLooseInfo.TabIndex = 4;
-            this.dgLooseInfo.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLooseInfo_CellDoubleClick);
+            this.btnRandomSurnameEntered.Location = new System.Drawing.Point(628, 22);
+            this.btnRandomSurnameEntered.Name = "btnRandomSurnameEntered";
+            this.btnRandomSurnameEntered.Size = new System.Drawing.Size(306, 25);
+            this.btnRandomSurnameEntered.TabIndex = 37;
+            this.btnRandomSurnameEntered.Text = "Show Found Random Surname from Direct Ancestors";
+            this.btnRandomSurnameEntered.UseVisualStyleBackColor = true;
+            this.btnRandomSurnameEntered.Click += new System.EventHandler(this.BtnRandomSurname_Click);
+            // 
+            // btnRandomSurnameMissing
+            // 
+            this.btnRandomSurnameMissing.Location = new System.Drawing.Point(322, 22);
+            this.btnRandomSurnameMissing.Name = "btnRandomSurnameMissing";
+            this.btnRandomSurnameMissing.Size = new System.Drawing.Size(300, 25);
+            this.btnRandomSurnameMissing.TabIndex = 36;
+            this.btnRandomSurnameMissing.Text = "Show Not Found Random Surname from Direct Ancestors";
+            this.btnRandomSurnameMissing.UseVisualStyleBackColor = true;
+            this.btnRandomSurnameMissing.Click += new System.EventHandler(this.BtnRandomSurname_Click);
+            // 
+            // btnShowCensusEntered
+            // 
+            this.btnShowCensusEntered.Location = new System.Drawing.Point(162, 22);
+            this.btnShowCensusEntered.Name = "btnShowCensusEntered";
+            this.btnShowCensusEntered.Size = new System.Drawing.Size(154, 25);
+            this.btnShowCensusEntered.TabIndex = 35;
+            this.btnShowCensusEntered.Text = "Show Found on Census";
+            this.btnShowCensusEntered.UseVisualStyleBackColor = true;
+            this.btnShowCensusEntered.Click += new System.EventHandler(this.BtnShowCensus_Click);
+            // 
+            // btnShowCensusMissing
+            // 
+            this.btnShowCensusMissing.Location = new System.Drawing.Point(6, 22);
+            this.btnShowCensusMissing.Name = "btnShowCensusMissing";
+            this.btnShowCensusMissing.Size = new System.Drawing.Size(150, 25);
+            this.btnShowCensusMissing.TabIndex = 34;
+            this.btnShowCensusMissing.Text = "Show Not Found on Census";
+            this.btnShowCensusMissing.UseVisualStyleBackColor = true;
+            this.btnShowCensusMissing.Click += new System.EventHandler(this.BtnShowCensus_Click);
+            // 
+            // chkAnyCensusYear
+            // 
+            this.chkAnyCensusYear.AutoSize = true;
+            this.chkAnyCensusYear.Location = new System.Drawing.Point(340, 130);
+            this.chkAnyCensusYear.Name = "chkAnyCensusYear";
+            this.chkAnyCensusYear.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkAnyCensusYear.Size = new System.Drawing.Size(292, 17);
+            this.chkAnyCensusYear.TabIndex = 36;
+            this.chkAnyCensusYear.Text = "Include ALL census years for Census Reference reports ";
+            this.chkAnyCensusYear.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -3711,13 +3748,14 @@ namespace FTAnalyzer
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             this.tabCensus.ResumeLayout(false);
-            this.groupBox6.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).EndInit();
-            this.groupBox1.ResumeLayout(false);
             this.tabLocations.ResumeLayout(false);
             this.tabCtrlLocations.ResumeLayout(false);
             this.tabTreeView.ResumeLayout(false);
@@ -3759,6 +3797,8 @@ namespace FTAnalyzer
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseBirths)).EndInit();
             this.tabLooseDeaths.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).EndInit();
+            this.tabLooseInfo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgLooseInfo)).EndInit();
             this.tabSurnames.ResumeLayout(false);
             this.tabSurnames.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSurnames)).EndInit();
@@ -3767,8 +3807,7 @@ namespace FTAnalyzer
             this.tabToday.ResumeLayout(false);
             this.tabToday.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).EndInit();
-            this.tabLooseInfo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgLooseInfo)).EndInit();
+            this.groupBox10.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3874,12 +3913,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem mnuRecent3;
         private System.Windows.Forms.ToolStripMenuItem mnuRecent4;
         private System.Windows.Forms.ToolStripMenuItem mnuRecent5;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnDuplicateCensus;
-        private System.Windows.Forms.Button btnMissingCensusLocation;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button btnShowCensusEntered;
-        private System.Windows.Forms.Button btnShowCensusMissing;
         private System.Windows.Forms.ToolStripMenuItem mnuLifelines;
         private System.Windows.Forms.ToolStripMenuItem resetToDefaultFormSizeToolStripMenuItem;
         private System.Windows.Forms.TabPage tabFacts;
@@ -3909,11 +3943,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem mnuTreetopsToExcel;
         private System.Windows.Forms.ToolStripMenuItem mnuWorldWarsToExcel;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Button btnMissingCensusRefs;
-        private System.Windows.Forms.Button btnCensusRefs;
-        private System.Windows.Forms.Button btnUnrecognisedCensusRef;
-        private System.Windows.Forms.Button btnIncompleteCensusRef;
         private System.Windows.Forms.CheckBox chkExcludeUnknownBirths;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtCensusSurname;
@@ -3929,13 +3958,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripMenuItem mnuLookupBlankFoundLocations;
         private System.Windows.Forms.CheckBox ckbMilitaryOnly;
-        private System.Windows.Forms.Button btnRandomSurnameMissing;
-        private System.Windows.Forms.Button btnRandomSurnameEntered;
         private System.Windows.Forms.Button btnRandomSurnameColour;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Button btnInconsistentLocations;
-        private System.Windows.Forms.Button btnNoChildrenStatus;
-        private System.Windows.Forms.Button btnMismatchedChildrenStatus;
         private System.Windows.Forms.CheckedListBox ckbFactExclude;
         private System.Windows.Forms.Button btnShowExclusions;
         private System.Windows.Forms.Label lblExclude;
@@ -3955,8 +3978,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.Button btnUpdateTodaysEvents;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.NumericUpDown nudToday;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Button btnReportUnrecognised;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripMenuItem mnuLoadLocationsCSV;
         private System.Windows.Forms.ToolStripMenuItem mnuLoadLocationsTNG;
@@ -4087,6 +4108,27 @@ namespace FTAnalyzer
         private System.Windows.Forms.Button btnViewInvalidRefs;
         private System.Windows.Forms.TabPage tabLooseInfo;
         private System.Windows.Forms.DataGridView dgLooseInfo;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnDuplicateCensus;
+        private System.Windows.Forms.Button btnMissingCensusLocation;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button btnMismatchedChildrenStatus;
+        private System.Windows.Forms.Button btnNoChildrenStatus;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Button btnReportUnrecognised;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button btnInconsistentLocations;
+        private System.Windows.Forms.Button btnUnrecognisedCensusRef;
+        private System.Windows.Forms.Button btnIncompleteCensusRef;
+        private System.Windows.Forms.Button btnMissingCensusRefs;
+        private System.Windows.Forms.Button btnCensusRefs;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.Button btnRandomSurnameEntered;
+        private System.Windows.Forms.Button btnRandomSurnameMissing;
+        private System.Windows.Forms.Button btnShowCensusEntered;
+        private System.Windows.Forms.Button btnShowCensusMissing;
+        private System.Windows.Forms.CheckBox chkAnyCensusYear;
     }
 }
 

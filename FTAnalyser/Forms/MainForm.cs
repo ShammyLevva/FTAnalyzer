@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.3.6.0";
+        public static string VERSION = "7.3.7.0";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1422,6 +1422,29 @@ namespace FTAnalyzer
             return filter;
         }
 
+        Predicate<Individual> CreateIndividualCensusFilter(bool censusDone, string surname)
+        {
+            var relationFilter = relTypesCensus.BuildFilter<Individual>(x => x.RelationType);
+            var dateFilter = censusDone ?
+                new Predicate<Individual>(x => x.IsCensusDone(cenDate.SelectedDate) && !x.OutOfCountry(cenDate.SelectedDate)) :
+                new Predicate<Individual>(x => !x.IsCensusDone(cenDate.SelectedDate) && !x.OutOfCountry(cenDate.SelectedDate));
+            Predicate<Individual> filter = FilterUtils.AndFilter(relationFilter, dateFilter);
+            if (!censusDone && GeneralSettings.Default.HidePeopleWithMissingTag)
+            {  //if we are reporting missing from census and we are hiding people who have a missing tag then only select those who are not tagged missing
+                Predicate<Individual> missingTag = new Predicate<Individual>(x => !x.IsTaggedMissingCensus(cenDate.SelectedDate));
+                filter = FilterUtils.AndFilter(filter, missingTag);
+            }
+            if (surname.Length > 0)
+            {
+                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, surname);
+                filter = FilterUtils.AndFilter(filter, surnameFilter);
+            }
+            if (chkExcludeUnknownBirths.Checked)
+                filter = FilterUtils.AndFilter(x => x.BirthDate.IsKnown, filter);
+            filter = FilterUtils.AndFilter(x => x.GetMinAge(cenDate.SelectedDate) < (int)udAgeFilter.Value, filter);
+            return filter;
+        }
+
         Predicate<Individual> CreateTreeTopsIndividualFilter()
         {
             Predicate<Individual> treetopFilter = ckbTTIncludeOnlyOneParent.Checked ?
@@ -2485,15 +2508,22 @@ namespace FTAnalyzer
                 census.Text += $" entered with a {cenDate.SelectedDate.ToString()} record";
             else
                 census.Text += $" missing a {cenDate.SelectedDate.ToString()} record that you can search for";
-            Predicate<CensusIndividual> filter = CreateCensusIndividualFilter(censusDone, surname);
-            census.SetupCensus(filter);
-            int tries = 0;
-            while (random && census.RecordCount == 0 && tries < 5)
+            Predicate<CensusIndividual> filter;
+            if (random)
             {
-                surname = GetRandomSurname();
+                int tries = 0;
+                while (random && census.RecordCount == 0 && tries < 5)
+                {
+                    surname = GetRandomSurname();
+                    filter = CreateCensusIndividualFilter(censusDone, surname);
+                    census.SetupCensus(filter);
+                    tries++;
+                }
+            }
+            else
+            {
                 filter = CreateCensusIndividualFilter(censusDone, surname);
                 census.SetupCensus(filter);
-                tries++;
             }
             DisposeDuplicateForms(census);
             census.Show();
@@ -2564,33 +2594,26 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        void ShowCensusRefFacts(CensusReference.ReferenceStatus status)
+        void ShowCensusRefFacts(CensusReference.ReferenceStatus status, Predicate<Individual> filter)
         {
             HourGlass(true);
-            Facts facts = new Facts(status);
+            CensusDate date = chkAnyCensusYear.Checked ? CensusDate.ANYCENSUS : cenDate.SelectedDate;
+            Facts facts = new Facts(status, filter, date);
             facts.Show();
             HourGlass(false);
         }
 
-        void BtnCensusRefs_Click(object sender, EventArgs e)
-        {
-            ShowCensusRefFacts(CensusReference.ReferenceStatus.GOOD);
-        }
+        void BtnCensusRefs_Click(object sender, EventArgs e) => 
+            ShowCensusRefFacts(CensusReference.ReferenceStatus.GOOD, CreateIndividualCensusFilter(true, txtCensusSurname.Text));
 
-        void BtnMissingCensusRefs_Click(object sender, EventArgs e)
-        {
-            ShowCensusRefFacts(CensusReference.ReferenceStatus.BLANK);
-        }
+        void BtnMissingCensusRefs_Click(object sender, EventArgs e) => 
+            ShowCensusRefFacts(CensusReference.ReferenceStatus.BLANK, CreateIndividualCensusFilter(true, txtCensusSurname.Text));
 
-        void BtnIncompleteCensusRef_Click(object sender, EventArgs e)
-        {
-            ShowCensusRefFacts(CensusReference.ReferenceStatus.INCOMPLETE);
-        }
+        void BtnIncompleteCensusRef_Click(object sender, EventArgs e) => 
+            ShowCensusRefFacts(CensusReference.ReferenceStatus.INCOMPLETE, CreateIndividualCensusFilter(true, txtCensusSurname.Text));
 
-        void BtnUnrecognisedCensusRef_Click(object sender, EventArgs e)
-        {
-            ShowCensusRefFacts(CensusReference.ReferenceStatus.UNRECOGNISED);
-        }
+        void BtnUnrecognisedCensusRef_Click(object sender, EventArgs e) => 
+            ShowCensusRefFacts(CensusReference.ReferenceStatus.UNRECOGNISED, CreateIndividualCensusFilter(true, txtCensusSurname.Text));
 
         void BtnReportUnrecognised_Click(object sender, EventArgs e)
         {
@@ -2637,7 +2660,8 @@ namespace FTAnalyzer
             HourGlass(true);
             List<DisplayFact> results = new List<DisplayFact>();
             List<DisplayFact> censusRefs = new List<DisplayFact>();
-            foreach (Individual ind in ft.AllIndividuals)
+            Predicate<Individual> filter = CreateIndividualCensusFilter(true, txtCensusSurname.Text);
+            foreach (Individual ind in ft.AllIndividuals.Filter(filter))
                 foreach (Fact f in ind.AllFacts)
                     if (f.IsCensusFact && f.CensusReference != null && f.CensusReference.Reference.Length > 0)
                         censusRefs.Add(new DisplayFact(ind, f));

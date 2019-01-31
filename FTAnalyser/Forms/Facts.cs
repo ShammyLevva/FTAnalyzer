@@ -1,4 +1,5 @@
-﻿using FTAnalyzer.Utilities;
+﻿using FTAnalyzer.Filters;
+using FTAnalyzer.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -107,28 +108,31 @@ namespace FTAnalyzer.Forms
                 if (before != after)
                     distinctIndividuals++;
             }
-            string text = distinctIndividuals + " individuals.";
-            Text = "Duplicates Facts Report for all " + text + " Facts count: " + facts.Count;
+            string text = $"{distinctIndividuals} individuals.";
+            Text = $"Duplicates Facts Report for all{text} Facts count: {facts.Count}";
             SetupFacts(text);
             Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsDuplicatesEvent);
         }
 
-        public Facts(CensusReference.ReferenceStatus status)
+        public Facts(CensusReference.ReferenceStatus status, Predicate<Individual> filter, CensusDate censusDate)
             : this()
         {
             allFacts = true;
-            foreach (Individual ind in ft.AllIndividuals)
+            IEnumerable<Individual> listToCheck = ft.AllIndividuals.Filter(filter);
+            foreach (Individual ind in listToCheck)
+            {
                 foreach (Fact f in ind.AllFacts)
-                    if (f.IsCensusFact && f.CensusReference != null && f.CensusReference.Status == status)
+                    if (f.IsCensusFact && f.FactDate.Overlaps(censusDate) && f.CensusReference != null && f.CensusReference.Status == status)
                         facts.Add(new DisplayFact(ind, f));
+            }
             if (status == FTAnalyzer.CensusReference.ReferenceStatus.GOOD)
-                Text = "Census Reference Report. Facts count: " + facts.Count;
+                Text = $"Census Reference Report. Facts count: {facts.Count}";
             else if (status == FTAnalyzer.CensusReference.ReferenceStatus.INCOMPLETE)
-                Text = "Incomplete Census Reference Report. Facts count: " + facts.Count;
+                Text = $"Incomplete Census Reference Report. Facts count: {facts.Count}";
             else if (status == FTAnalyzer.CensusReference.ReferenceStatus.UNRECOGNISED)
-                Text = "Unrecognised Census Reference Report. Facts count: " + facts.Count;
+                Text = $"Unrecognised Census Reference Report. Facts count: {facts.Count}";
             else if (status == FTAnalyzer.CensusReference.ReferenceStatus.BLANK)
-                Text = "Blank Census Reference Report. Facts count: " + facts.Count;
+                Text = $"Blank Census Reference Report. Facts count: {facts.Count}";
             SetupFacts();
             //dgFacts.Columns["CensusReference"].Visible = true;
             Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsCensusRefEvent);
