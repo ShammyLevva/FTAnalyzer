@@ -82,6 +82,7 @@ namespace CensusReferenceTest
             CensusHO107Test("HO107/797/10 f6 p5", CensusDate.UKCENSUS1841, "797", "10", "6", "5");
             CensusHO107Test("Archive reference HO107 Piece number 142 Book number 10 Folio number 51 Page number 1 Record set 1841 England, Wales & Scotland Census", CensusDate.UKCENSUS1841, "142", "10", "51", "1");
             CensusHO107Test(@"Ulleskelf, Tadcaster, folio 9, Book 8, page 12, Joshua Hey and family; digital images, \i FindMyPast.co.uk\i0  (https://search.findmypast.co.uk/search-world-Records/1841-england-wales-and-scotland-census : accessed 12 Jun 2017); citing PRO HO/107/1282", CensusDate.UKCENSUS1841, "1282", "8", "9", "12");
+            CensusHO107Test("Archive reference HO107 Piece number 1541 Folio 119 Page 15 Record set 1851 England, Wales & Scotland Census", CensusDate.UKCENSUS1851, "1541", "", "119", "15");
 
             Census1911Test("1911 census - Piece 22623, SN 183", "22623", "183");
             Census1911Test("1911 census - Piece: 22623, SN: 183", "22623", "183");

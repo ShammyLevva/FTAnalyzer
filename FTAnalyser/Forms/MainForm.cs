@@ -1580,7 +1580,7 @@ namespace FTAnalyzer
             Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType, true);
             LCUpdates = new List<CensusIndividual>();
             LCInvalidReferences = new List<CensusIndividual>();
-            rtbLCUpdateData.Text = ft.LCOutput(LCUpdates, LCInvalidReferences, relationFilter);
+            rtbLCUpdateData.Text = ft.LCOutput(LCUpdates, LCInvalidReferences, relationFilter, null);
          }
 
         void BtnLCMissingCountry_Click(object sender, EventArgs e)
@@ -1613,7 +1613,7 @@ namespace FTAnalyzer
         void UpdateLostCousinsReport()
         {
             HourGlass(true);
-            rtbLostCousins.Text = ft.UpdateLostCousinsReport(relTypesLC.BuildFilter<Individual>(x => x.RelationType));
+            rtbLostCousins.Text = ft.UpdateLostCousinsReport(relTypesLC.BuildFilter<Individual>(x => x.RelationType), null);
             HourGlass(false);
         }
 

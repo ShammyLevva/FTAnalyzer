@@ -1,3 +1,14 @@
+#### Updated Release Version 7.3.7.0 1st February 2019  
+**Updates**  
+Reorganised Census Form to make it clearer what uses Filters and what doesn't  
+Added Please verify the references text on upload to Lost Cousins  
+
+**Bugfixes**  
+Fixed typo on Welsh & IOM piece numbers in 1851 census refs  
+Lost Cousins ages tweaks and cater for 5 year rounding in 1841 census  
+Fix to Scottish reference pattern  
+Census referecences that are recognised but incomplete weren't then checking rest of text  
+
 #### Updated Release Version 7.3.6.0 30th January 2019  
 **Updates**  
 Added LooseInfo tab to combine Loose Births and Death info in one tab  
