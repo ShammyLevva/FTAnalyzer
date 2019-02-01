@@ -126,16 +126,16 @@ namespace FTAnalyzer
             switch (FontSettings.Default.FontNumber)
             {
                 case 1:
-                    handwritingFont = new Font(fonts.Families[0], 52.0F, FontStyle.Bold);
+                    handwritingFont = new Font(fonts.Families[0], 46.0F, FontStyle.Bold);
                     break;
                 case 2:
-                    handwritingFont = new Font(fonts.Families[0], 72.0F, FontStyle.Bold);
+                    handwritingFont = new Font(fonts.Families[0], 68.0F, FontStyle.Bold);
                     break;
                 case 3:
-                    handwritingFont = new Font(fonts.Families[0], 82.0F, FontStyle.Bold);
+                    handwritingFont = new Font(fonts.Families[0], 72.0F, FontStyle.Bold);
                     break;
                 case 4:
-                    handwritingFont = new Font(fonts.Families[0], 100.0F, FontStyle.Bold);
+                    handwritingFont = new Font(fonts.Families[0], 90.0F, FontStyle.Bold);
                     break;
             }
             LbProgramName.Font = handwritingFont;

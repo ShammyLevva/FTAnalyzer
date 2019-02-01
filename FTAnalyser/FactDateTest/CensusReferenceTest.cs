@@ -106,7 +106,7 @@ namespace CensusReferenceTest
             UKCensusTest("RG11 Piece 2529 Folio 68 Page 1", CensusDate.UKCENSUS1881, "2529", "68", "1");
             UKCensusTest("Class: RG11; Piece: 3934; Folio: 60; Page: 9; Line:; GSU roll: 1341939", CensusDate.UKCENSUS1881, "3934", "60", "9");
             UKCensusTest("Piece: RG9/480 Place: Gillingham -Kent Enumeration District: 14, Civil Parish: Gillingham Ecclesiastical Parish: Trinity,Folio: 42 Page: 20 Schedule: 117", CensusDate.UKCENSUS1861, "480", "42", "20");
-            
+            UKCensusTest("1901 census RG13/Piece3800/Folio112/Page16/SN#110", CensusDate.UKCENSUS1901, "3800", "112", "16");
 
             Canadian1881Census("        123/A/55/35/1	Canada 1881", "123", "A", "35", "1");
             Canadian1881Census("        123/A/35/1	Canada 1881", "123", "A", "35", "1");

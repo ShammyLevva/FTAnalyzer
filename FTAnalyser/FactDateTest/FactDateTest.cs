@@ -208,10 +208,10 @@ namespace FactDateTest
 
             target = new FactDate("FROM 1915");
             Assert.AreEqual(new DateTime(1915, 1, 1), target.StartDate);
-            Assert.AreEqual(FactDate.MAXDATE, target.EndDate);
+            Assert.AreEqual(MAXDATE, target.EndDate);
 
             target = new FactDate("TO 1915");
-            Assert.AreEqual(FactDate.MINDATE, target.StartDate);
+            Assert.AreEqual(MINDATE, target.StartDate);
             Assert.AreEqual(new DateTime(1915, 12, 31), target.EndDate);
 
             target = new FactDate("FROM 1914 TO 1918");
