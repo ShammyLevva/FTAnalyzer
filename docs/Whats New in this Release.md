@@ -1,3 +1,13 @@
+#### Updated Release Version 7.3.7.1 2nd February 2019  
+**Updates**  
+Cater for forename and surname in data exports  
+Recognise more census references with RGxx and /s and nothing else  
+
+**Bugfixes**  
+Lost Cousins Age was being trimmed to 1.  
+Factdates with long em dashes were not getting recognised  
+Tweak Handwriting font size  
+
 #### Updated Release Version 7.3.7.0 1st February 2019  
 **Updates**  
 Reorganised Census Form to make it clearer what uses Filters and what doesn't  
