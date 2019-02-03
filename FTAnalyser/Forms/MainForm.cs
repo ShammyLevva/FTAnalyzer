@@ -159,11 +159,14 @@ namespace FTAnalyzer
             int Height = (int)Application.UserAppDataRegistry.GetValue("Mainform size - height", this.Height);
             int Top = (int)Application.UserAppDataRegistry.GetValue("Mainform position - top", this.Top);
             int Left = (int)Application.UserAppDataRegistry.GetValue("Mainform position - left", this.Left);
+            bool maximised = (bool)Application.UserAppDataRegistry.GetValue("Mainform maximised", WindowState == FormWindowState.Maximized);
             Point leftTop = ReportFormHelper.CheckIsOnScreen(Top, Left);
             this.Width = Width;
             this.Height = Height;
             this.Top = leftTop.Y;
             this.Left = leftTop.X;
+            if (maximised)
+                WindowState = FormWindowState.Maximized;
         }
 
         #region Version Info
@@ -1711,12 +1714,6 @@ namespace FTAnalyzer
         {
             Cursor = storedCursor;
         }
-
-        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            SpecialMethods.VisitWebsite("http://www.lostcousins.com/?ref=LC585149");
-            Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.LCWebLinkEvent);
-        }
         #endregion
 
         #region ToolStrip Clicks
@@ -2386,6 +2383,7 @@ namespace FTAnalyzer
                 Application.UserAppDataRegistry.SetValue("Mainform size - height", Height);
                 Application.UserAppDataRegistry.SetValue("Mainform position - top", Top);
                 Application.UserAppDataRegistry.SetValue("Mainform position - left", Left);
+                Application.UserAppDataRegistry.SetValue("Mainform maximised", WindowState == FormWindowState.Maximized);
             }
         }
         #endregion

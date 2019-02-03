@@ -113,15 +113,25 @@ namespace FTAnalyzer.Utilities
             {
                 if (InstanceConnection.State != ConnectionState.Open)
                     InstanceConnection.Open();
-                using (SQLiteCommand cmd = new SQLiteCommand("select Database from versions", InstanceConnection))
+                using (SQLiteCommand cmd = new SQLiteCommand("select Database from versions where platform='PC'", InstanceConnection))
                 {
                     db = (string)cmd.ExecuteScalar();
-                }
-                InstanceConnection.Close();
+                }   
             }
             catch (Exception)
+            {  // use old method if current method fails
+                try
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand("select Database from versions", InstanceConnection))
+                    {
+                        db = (string)cmd.ExecuteScalar();
+                    }
+                }
+                catch { }
+            }
+            finally
             {
-                //log.Error("Error in GetDatabaseVersion " + e.Message);
+                InstanceConnection.Close();
             }
             Version dbVersion = db == null ? new Version("0.0.0.0") : new Version(db);
             if (dbVersion == new Version("7.3.0.0"))
@@ -164,6 +174,7 @@ namespace FTAnalyzer.Utilities
                 Version v7_3_0_0 = new Version("7.3.0.0");
                 Version v7_3_0_1 = new Version("7.3.0.1");
                 Version v7_3_3_2 = new Version("7.3.3.2");
+                Version v7_4_0_0 = new Version("7.4.0.0");
                 if (dbVersion < v3_0_0_0)
                 {
                     // Version is less than 3.0.0.0 or none existent so copy latest database from empty database
@@ -325,6 +336,26 @@ namespace FTAnalyzer.Utilities
                         }
                     }
                     using (SQLiteCommand cmd = new SQLiteCommand("update versions set Database = '7.3.3.2'", InstanceConnection))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                if (dbVersion < v7_4_0_0)
+                {
+
+                    using (SQLiteCommand cmd = new SQLiteCommand("drop table versions", InstanceConnection))
+                    {
+                            cmd.ExecuteNonQuery();
+                    }
+                    using (SQLiteCommand cmd = new SQLiteCommand("CREATE TABLE Versions(Platform VARCHAR(10) PRIMARY KEY, [Database] VARCHAR(10));", InstanceConnection))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    using (SQLiteCommand cmd = new SQLiteCommand("insert into Versions(platform, database) values('PC', '7.4.0.0')", InstanceConnection))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    using (SQLiteCommand cmd = new SQLiteCommand("insert into Versions(platform, database) values('Mac', '1.2.0.42')", InstanceConnection))
                     {
                         cmd.ExecuteNonQuery();
                     }

@@ -190,7 +190,7 @@ namespace FTAnalyzer
             this.rtbLostCousins = new System.Windows.Forms.RichTextBox();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.btnLC1911EW = new System.Windows.Forms.Button();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.LabLostCousinsWeb = new System.Windows.Forms.LinkLabel();
             this.ckbShowLCEntered = new System.Windows.Forms.CheckBox();
             this.btnLC1841EW = new System.Windows.Forms.Button();
             this.btnLC1911Ireland = new System.Windows.Forms.Button();
@@ -1674,7 +1674,7 @@ namespace FTAnalyzer
             this.LCReportsTab.Controls.Add(this.rtbLostCousins);
             this.LCReportsTab.Controls.Add(this.linkLabel2);
             this.LCReportsTab.Controls.Add(this.btnLC1911EW);
-            this.LCReportsTab.Controls.Add(this.linkLabel1);
+            this.LCReportsTab.Controls.Add(this.LabLostCousinsWeb);
             this.LCReportsTab.Controls.Add(this.ckbShowLCEntered);
             this.LCReportsTab.Controls.Add(this.btnLC1841EW);
             this.LCReportsTab.Controls.Add(this.btnLC1911Ireland);
@@ -1817,17 +1817,17 @@ namespace FTAnalyzer
             this.btnLC1911EW.UseVisualStyleBackColor = true;
             this.btnLC1911EW.Click += new System.EventHandler(this.BtnLC1911EW_Click);
             // 
-            // linkLabel1
+            // LabLostCousinsWeb
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.Location = new System.Drawing.Point(533, 386);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(186, 16);
-            this.linkLabel1.TabIndex = 31;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Visit the Lost Cousins Website";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
+            this.LabLostCousinsWeb.AutoSize = true;
+            this.LabLostCousinsWeb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabLostCousinsWeb.Location = new System.Drawing.Point(533, 386);
+            this.LabLostCousinsWeb.Name = "LabLostCousinsWeb";
+            this.LabLostCousinsWeb.Size = new System.Drawing.Size(186, 16);
+            this.LabLostCousinsWeb.TabIndex = 31;
+            this.LabLostCousinsWeb.TabStop = true;
+            this.LabLostCousinsWeb.Text = "Visit the Lost Cousins Website";
+            this.LabLostCousinsWeb.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LabLostCousinsWeb_Click);
             // 
             // ckbShowLCEntered
             // 
@@ -4069,7 +4069,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.RichTextBox rtbLostCousins;
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.Button btnLC1911EW;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel LabLostCousinsWeb;
         private System.Windows.Forms.CheckBox ckbShowLCEntered;
         private System.Windows.Forms.Button btnLC1841EW;
         private System.Windows.Forms.Button btnLC1911Ireland;
