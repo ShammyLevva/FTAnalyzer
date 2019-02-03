@@ -1259,8 +1259,7 @@ namespace FTAnalyzer
                         btnLC1911EW.Enabled = ft.IndividualCount > 0;
                     if (LCSubTabs.TabPages.Count > 2)
                         LCSubTabs.TabPages.RemoveAt(2); // hide verify tab
-                    UpdateLostCousinsReport();
-                    UpdateLCOutput();
+                    UpdateLCReports();
                     txtLCEmail.Text = (string)Application.UserAppDataRegistry.GetValue("LostCousinsEmail", string.Empty);
                     chkLCRootPersonConfirm.Text = $"Confirm {ft.RootPerson} as root Person";
                     tabLostCousins.Refresh();
@@ -1491,7 +1490,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Lost Cousins
-        void CkbRestrictions_CheckedChanged(object sender, EventArgs e) => UpdateLostCousinsReport();
+        void CkbRestrictions_CheckedChanged(object sender, EventArgs e) => UpdateLCReports();
 
         void LostCousinsCensus(CensusDate censusDate, string reportTitle)
         {
@@ -1567,13 +1566,18 @@ namespace FTAnalyzer
                     string resultText = $"{DateTime.Now.ToUniversalTime().ToString("yyyy-MM-dd HH:mm")}: uploaded {count} records";
                     await Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.UpdateLostCousins, resultText);
                     SpecialMethods.VisitWebsite("https://www.lostcousins.com/pages/members/ancestors/");
-                    UpdateLostCousinsReport();
-                    UpdateLCOutput();
+                    UpdateLCReports();
                 }
             }
             else
                 UIHelpers.ShowMessage("You have no records to add to Lost Cousins at this time. Use the Research Suggestions to find more people on the census, or enter/update missing or incomplete census references.");
             btnUpdateLostCousinsWebsite.Enabled = true;
+        }
+
+        void UpdateLCReports()
+        {
+            UpdateLostCousinsReport();
+            UpdateLCOutput();
         }
 
         void UpdateLCOutput()
@@ -1597,7 +1601,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        void RelTypesLC_RelationTypesChanged(object sender, EventArgs e) => UpdateLostCousinsReport();
+        void RelTypesLC_RelationTypesChanged(object sender, EventArgs e) => UpdateLCReports();
 
         void TxtLCEmail_TextChanged(object sender, EventArgs e) => ClearLogin();
 
