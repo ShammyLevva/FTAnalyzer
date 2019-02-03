@@ -833,7 +833,7 @@ namespace FTAnalyzer.Utilities
             }
         }
 
-        public void StoreLostCousinsFact(CensusIndividual ind)
+        public void StoreLostCousinsFact(CensusIndividual ind, IProgress<string> outputText)
         {
             try
             {
@@ -870,7 +870,7 @@ namespace FTAnalyzer.Utilities
 
                         int rowsaffected = cmd.ExecuteNonQuery();
                         if (rowsaffected != 1)
-                            Console.WriteLine("Problem updating");
+                            outputText.Report($"\nProblem updating record in database update affected {rowsaffected} records.");
                         else
                         {
                             FactLocation location = FactLocation.GetLocation(ind.CensusCountry);
@@ -883,7 +883,7 @@ namespace FTAnalyzer.Utilities
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                outputText.Report($"\nFailed to save Lost Cousins record in database error was: {e.Message}");
             }
         }
         #endregion

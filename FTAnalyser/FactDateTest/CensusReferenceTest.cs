@@ -65,6 +65,7 @@ namespace CensusReferenceTest
             //USCensusTest("Year: 1860; Census Place: Boston Ward 12, Suffolk, Massachusetts; Roll: M653_525; Page: 515; Image: 519; Family History Library Film: 803525", CensusDate.USCENSUS1860, "M653_525", "12", "515");
             USCensusTest("Roll T627_1141; ED 8-14; Page 9A", CensusDate.USCENSUS1940, "1141","8-14", "9A");
             USCensusTest("Roll: m-t0627_2227; ED 1-7; Page 19A", CensusDate.USCENSUS1940, "2227", "1-7", "19A");
+            USCensusTest("T627, roll 4515, Burlington, enumeration district (ED) 51-5, sheet 4A, household 45, Alice Reed, accessed 22 Jan 2019", CensusDate.USCENSUS1940, "4515", "51-5", "4A");
 
             ScottishCensusTest("GROS 692/01 019/00 008", FactDate.UNKNOWN_DATE, "692-1", "19", "8");
             ScottishCensusTest("in the 1851 census, GROS 343/00 001/00 011.", CensusDate.UKCENSUS1851, "343", "1", "11");
