@@ -29,7 +29,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.3.7.2";
+        public static string VERSION = "7.3.7.3";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -159,7 +159,8 @@ namespace FTAnalyzer
             int Height = (int)Application.UserAppDataRegistry.GetValue("Mainform size - height", this.Height);
             int Top = (int)Application.UserAppDataRegistry.GetValue("Mainform position - top", this.Top);
             int Left = (int)Application.UserAppDataRegistry.GetValue("Mainform position - left", this.Left);
-            string maximised = (string)Application.UserAppDataRegistry.GetValue("Mainform maximised", WindowState == FormWindowState.Maximized);
+            string maxState = (WindowState == FormWindowState.Maximized).ToString();
+            string maximised = (string)Application.UserAppDataRegistry.GetValue("Mainform maximised", maxState);
             Point leftTop = ReportFormHelper.CheckIsOnScreen(Top, Left);
             this.Width = Width;
             this.Height = Height;
@@ -2371,10 +2372,7 @@ namespace FTAnalyzer
             SavePosition();
         }
 
-        void MainForm_Move(object sender, EventArgs e)
-        {
-            SavePosition();
-        }
+        void MainForm_Move(object sender, EventArgs e) => SavePosition();
 
         void SavePosition()
         {
@@ -2384,7 +2382,8 @@ namespace FTAnalyzer
                 Application.UserAppDataRegistry.SetValue("Mainform size - height", Height);
                 Application.UserAppDataRegistry.SetValue("Mainform position - top", Top);
                 Application.UserAppDataRegistry.SetValue("Mainform position - left", Left);
-                Application.UserAppDataRegistry.SetValue("Mainform maximised", WindowState == FormWindowState.Maximized);
+                string maxState = (WindowState == FormWindowState.Maximized).ToString();
+                Application.UserAppDataRegistry.SetValue("Mainform maximised", maxState);
             }
         }
         #endregion
