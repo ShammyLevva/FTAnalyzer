@@ -159,13 +159,13 @@ namespace FTAnalyzer
             int Height = (int)Application.UserAppDataRegistry.GetValue("Mainform size - height", this.Height);
             int Top = (int)Application.UserAppDataRegistry.GetValue("Mainform position - top", this.Top);
             int Left = (int)Application.UserAppDataRegistry.GetValue("Mainform position - left", this.Left);
-            bool maximised = (bool)Application.UserAppDataRegistry.GetValue("Mainform maximised", WindowState == FormWindowState.Maximized);
+            string maximised = (string)Application.UserAppDataRegistry.GetValue("Mainform maximised", WindowState == FormWindowState.Maximized);
             Point leftTop = ReportFormHelper.CheckIsOnScreen(Top, Left);
             this.Width = Width;
             this.Height = Height;
             this.Top = leftTop.Y;
             this.Left = leftTop.X;
-            if (maximised)
+            if (maximised=="True")
                 WindowState = FormWindowState.Maximized;
         }
 
@@ -556,10 +556,7 @@ namespace FTAnalyzer
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.WWIIReportEvent);
         }
 
-        void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            SpecialMethods.VisitWebsite("http://forums.lc");
-        }
+        void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite("http://forums.lc");
 
         void DgOccupations_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -2381,8 +2378,8 @@ namespace FTAnalyzer
 
         void SavePosition()
         {
-            if (!loading && WindowState == FormWindowState.Normal)
-            {  //only save window size if not maximised or minimised
+            if (!loading && WindowState != FormWindowState.Minimized)
+            {  //only save window size if not minimised
                 Application.UserAppDataRegistry.SetValue("Mainform size - width", Width);
                 Application.UserAppDataRegistry.SetValue("Mainform size - height", Height);
                 Application.UserAppDataRegistry.SetValue("Mainform position - top", Top);
