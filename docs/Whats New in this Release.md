@@ -1,3 +1,17 @@
+#### Updated Release Version 7.3.7.2 4th February 2019  
+**Updates**  
+Main Form now remembers its maximised state  
+Issues when storing Lost Cousins facts shows error in feedback window  
+Database checks for PC version number on startup different from Mac version number  
+Added text to confirm login required to Lost Cousins before button becomes active  
+
+**Bugfixes**  
+Updating relationships on Lost Cousins tab updates LC reports
+Strip invalid characters from Lost Cousins upload strings  
+Only add shared facts if not already added  
+11Th, 12Th, 13Th weren't fixed to lower case th  
+Fixed bug where all ? were being converted to -  
+
 #### Updated Release Version 7.3.7.1 2nd February 2019  
 **Updates**  
 Cater for forename and surname in data exports  
