@@ -1,3 +1,7 @@
+#### Updated Release Version 7.3.7.3 4th February 2019  
+**Bugfixes**  
+Maximise was failing cast operation  
+
 #### Updated Release Version 7.3.7.2 4th February 2019  
 **Updates**  
 Main Form now remembers its maximised state  
