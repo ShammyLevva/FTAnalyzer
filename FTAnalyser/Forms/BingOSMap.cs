@@ -34,6 +34,7 @@ namespace FTAnalyzer.Forms
             string filename = Path.Combine(Application.StartupPath + @"\Resources\BingOSMaps.htm");
             webBrowser.Navigate(filename);
             webBrowser.Hide();
+            Top = Top + WindowHelper.TopTaskbarOffset;
         }
 
         public bool SetLocation(FactLocation loc, int level)

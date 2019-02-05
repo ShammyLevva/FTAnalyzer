@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using FTAnalyzer.Utilities;
+using System;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using FTAnalyzer.Utilities;
-using Printing.DataGridViewPrint.Tools;
-using System.IO;
 
 namespace FTAnalyzer.Forms
 {
@@ -21,7 +14,8 @@ namespace FTAnalyzer.Forms
         public Sources(DisplayFact fact)
         {
             InitializeComponent();
-            this.sources = new SortableBindingList<IDisplaySource>();
+            Top = Top + WindowHelper.TopTaskbarOffset;
+            sources = new SortableBindingList<IDisplaySource>();
             dgSources.AutoGenerateColumns = false;
             ExtensionMethods.DoubleBuffered(dgSources, true);
             reportFormHelper = new ReportFormHelper(this, this.Text, dgSources, this.ResetTable, "Sources");

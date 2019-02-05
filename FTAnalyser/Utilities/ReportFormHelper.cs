@@ -128,11 +128,11 @@ namespace FTAnalyzer
 
         public static Point CheckIsOnScreen(int top, int left)
         {
-            Point toCheck = new Point(left, top);
+            Point toCheck = new Point(left, top + WindowHelper.TopTaskbarOffset);
             foreach (Screen s in Screen.AllScreens)
                 if (s.Bounds.Contains(toCheck))
                     return toCheck; // its inside bounds so return the point checked
-            return new Point(50, 50);
+            return new Point(50, 50 + WindowHelper.TopTaskbarOffset);
         }
 
         public void LoadColumnLayout(string filename)

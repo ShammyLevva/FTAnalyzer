@@ -1,31 +1,27 @@
-﻿using System;
+﻿using FTAnalyzer.Filters;
+using FTAnalyzer.Forms;
+using FTAnalyzer.Mapping;
+using FTAnalyzer.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using FTAnalyzer.Utilities;
-using Printing.DataGridViewPrint.Tools;
-using System.IO;
-using FTAnalyzer.Mapping;
-using FTAnalyzer.Filters;
-using FTAnalyzer.Forms;
 
 namespace FTAnalyzer
 {
     public partial class MapIndividuals : Form
     {
-        private FamilyTree ft = FamilyTree.Instance;
-        private Font italicFont;
-        private ReportFormHelper reportFormHelper;
-        private List<MapLocation> locations;
-        private Form mapForm;
+        FamilyTree ft = FamilyTree.Instance;
+        Font italicFont;
+        ReportFormHelper reportFormHelper;
+        List<MapLocation> locations;
+        Form mapForm;
 
         public MapIndividuals(List<MapLocation> locations, string year, Form mapForm)
         {
             InitializeComponent();
+            Top = Top + WindowHelper.TopTaskbarOffset;
             this.mapForm = mapForm;
             this.locations = locations;
             dgIndividuals.AutoGenerateColumns = false;
@@ -38,7 +34,7 @@ namespace FTAnalyzer
             string titleText = mostCommon.Location.ToString();
             if (mapForm is TimeLine)
                 titleText += " in " + year;
-            this.Text = this.locations.Count < 2 ? titleText : "Centred near " + titleText;
+            Text = this.locations.Count < 2 ? titleText : "Centred near " + titleText;
             DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
         }
 
@@ -48,30 +44,15 @@ namespace FTAnalyzer
             dgIndividuals.AutoResizeColumns();
         }
 
-        void PrintToolStripButton_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.PrintReport("Map Individuals");
-        }
+        void PrintToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintReport("Map Individuals");
 
-        void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.PrintPreviewReport();
-        }
+        void PrintPreviewToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintPreviewReport();
 
-        void Facts_TextChanged(object sender, EventArgs e)
-        {
-            reportFormHelper.PrintTitle = this.Text;
-        }
+        void Facts_TextChanged(object sender, EventArgs e) => reportFormHelper.PrintTitle = this.Text;
 
-        void MnuExportToExcel_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.DoExportToExcel<MapLocation>();
-        }
+        void MnuExportToExcel_Click(object sender, EventArgs e) => reportFormHelper.DoExportToExcel<MapLocation>();
 
-        void MnuResetColumns_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.ResetColumnLayout("MapIndividualColumns.xml");
-        }
+        void MnuResetColumns_Click(object sender, EventArgs e) => reportFormHelper.ResetColumnLayout("MapIndividualColumns.xml");
 
         void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
@@ -132,7 +113,7 @@ namespace FTAnalyzer
         {
             if (!ft.Geocoding)
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
                 MapLocation loc = dgIndividuals.CurrentRow.DataBoundItem as MapLocation;
                 EditLocation(loc.Location);
             }
@@ -141,7 +122,7 @@ namespace FTAnalyzer
         void EditLocation(FactLocation loc)
         {
             EditLocation editform = new EditLocation(loc);
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
             DialogResult result = editform.ShowDialog(this);
             editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
             // force refresh of locations from new edited data
@@ -156,9 +137,9 @@ namespace FTAnalyzer
 
         void DatabaseHelper_GeoLocationUpdated(object location, EventArgs e)
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                this.Invoke(new Action(() => DatabaseHelper_GeoLocationUpdated(location, e)));
+                Invoke(new Action(() => DatabaseHelper_GeoLocationUpdated(location, e)));
                 return;
             }
             UpdateIcons((FactLocation)location);
@@ -167,12 +148,9 @@ namespace FTAnalyzer
         void MapIndividuals_FormClosed(object sender, FormClosedEventArgs e)
         {
             DatabaseHelper.GeoLocationUpdated -= DatabaseHelper_GeoLocationUpdated;
-            this.Dispose();
+            Dispose();
         }
 
-        void MapIndividuals_Load(object sender, EventArgs e)
-        {
-            SpecialMethods.SetFonts(this);
-        }
+        void MapIndividuals_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }
 }

@@ -35,6 +35,7 @@ namespace FTAnalyzer.Forms
         public LifeLine(IProgress<string> outputText)
         {
             InitializeComponent();
+            Top = Top + WindowHelper.TopTaskbarOffset;
             isLoading = true;
             isQuerying = false;
             this.outputText = outputText;

@@ -8,7 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Web;
 using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms
@@ -17,18 +16,19 @@ namespace FTAnalyzer.Forms
     {
         public Individual Individual { get; private set; }
         public Family Family { get; private set; }
-        private FamilyTree ft = FamilyTree.Instance;
-        private SortableBindingList<IDisplayFact> facts;
-        private Font italicFont;
-        private Font linkFont;
+        FamilyTree ft = FamilyTree.Instance;
+        SortableBindingList<IDisplayFact> facts;
+        Font italicFont;
+        Font linkFont;
         bool allFacts;
-        private ReportFormHelper reportFormHelper;
+        ReportFormHelper reportFormHelper;
         bool CensusRefReport;
-        private List<string> IgnoreList;
+        List<string> IgnoreList;
 
-        private Facts()
+        Facts()
         {
             InitializeComponent();
+            Top = Top + WindowHelper.TopTaskbarOffset;
             facts = new SortableBindingList<IDisplayFact>();
             facts.SortFinished += new EventHandler(Grid_SortFinished);
             allFacts = false;

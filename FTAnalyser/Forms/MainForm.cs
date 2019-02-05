@@ -49,6 +49,7 @@ namespace FTAnalyzer
         {
             InitializeComponent();
             loading = true;
+            var x= WindowHelper.GetTaskBarPos(); // Sets taskbar offset
             displayOptionsOnLoadToolStripMenuItem.Checked = GeneralSettings.Default.ReportOptions;
             treetopsRelation.MarriedToDB = false;
             ShowMenus(false);
@@ -2360,7 +2361,7 @@ namespace FTAnalyzer
             loading = true;
             Height = 561;
             Width = 1114;
-            Top = 50;
+            Top = 50 + WindowHelper.TopTaskbarOffset;
             Left = 50;
             loading = false;
         }
