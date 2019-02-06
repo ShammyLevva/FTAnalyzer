@@ -1575,8 +1575,10 @@ namespace FTAnalyzer
 
         void UpdateLCReports()
         {
+            HourGlass(true);
             UpdateLostCousinsReport();
             UpdateLCOutput();
+            HourGlass(false);
         }
 
         void UpdateLCOutput()
@@ -1615,12 +1617,7 @@ namespace FTAnalyzer
             btnUpdateLostCousinsWebsite.Visible = false;
         }
 
-        void UpdateLostCousinsReport()
-        {
-            HourGlass(true);
-            rtbLostCousins.Text = ft.UpdateLostCousinsReport(relTypesLC.BuildFilter<Individual>(x => x.RelationType), null);
-            HourGlass(false);
-        }
+        void UpdateLostCousinsReport() => rtbLostCousins.Text = ft.UpdateLostCousinsReport(relTypesLC.BuildFilter<Individual>(x => x.RelationType), null);
 
         void BtnLCDuplicates_Click(object sender, EventArgs e)
         {
@@ -1652,54 +1649,21 @@ namespace FTAnalyzer
             btnUpdateLostCousinsWebsite.BackColor = chkLCRootPersonConfirm.Checked ? Color.LightGreen : Color.LightGray;
         }
 
-        void BtnLC1881EW_Click(object sender, EventArgs e)
-        {
-            string reportTitle = "1881 England & Wales Census Records on file";
-            LostCousinsCensus(CensusDate.EWCENSUS1881, reportTitle);
-        }
+        void BtnLC1881EW_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.EWCENSUS1881, "1881 England & Wales Census Records on file");
 
-        void BtnLC1881Scot_Click(object sender, EventArgs e)
-        {
-            string reportTitle = "1881 Scotland Census Records on file";
-            LostCousinsCensus(CensusDate.SCOTCENSUS1881, reportTitle);
-        }
+        void BtnLC1881Scot_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.SCOTCENSUS1881, "1881 Scotland Census Records on file");
 
-        void BtnLC1881Canada_Click(object sender, EventArgs e)
-        {
-            string reportTitle = "1881 Canada Census Records on file";
-            LostCousinsCensus(CensusDate.CANADACENSUS1881, reportTitle);
-        }
+        void BtnLC1881Canada_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.CANADACENSUS1881, "1881 Canada Census Records on file");
 
-        void BtnLC1841EW_Click(object sender, EventArgs e)
-        {
-            string reportTitle = "1841 England & Wales Census Records on file";
-            LostCousinsCensus(CensusDate.EWCENSUS1841, reportTitle);
-        }
+        void BtnLC1841EW_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.EWCENSUS1841, "1841 England & Wales Census Records on file");
 
+        void BtnLC1911EW_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.EWCENSUS1911, "1911 England & Wales Census Records on file");
 
-        void BtnLC1911EW_Click(object sender, EventArgs e)
-        {
-            string reportTitle = "1911 England & Wales Census Records on file";
-            LostCousinsCensus(CensusDate.EWCENSUS1911, reportTitle);
-        }
+        void BtnLC1880USA_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.USCENSUS1880, "1880 US Census Records on file");
 
-        void BtnLC1880USA_Click(object sender, EventArgs e)
-        {
-            string reportTitle = "1880 US Census Records on file";
-            LostCousinsCensus(CensusDate.USCENSUS1880, reportTitle);
-        }
+        void BtnLC1911Ireland_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.IRELANDCENSUS1911, "1911 Ireland Census Records on file");
 
-        void BtnLC1911Ireland_Click(object sender, EventArgs e)
-        {
-            string reportTitle = "1911 Ireland Census Records on file";
-            LostCousinsCensus(CensusDate.IRELANDCENSUS1911, reportTitle);
-        }
-
-        void BtnLC1940USA_Click(object sender, EventArgs e)
-        {
-            string reportTitle = "1940 US Census Records on file";
-            LostCousinsCensus(CensusDate.USCENSUS1940, reportTitle);
-        }
+        void BtnLC1940USA_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.USCENSUS1940, "1940 US Census Records on file");
 
         void LabLostCousinsWeb_Click(object sender, EventArgs e)
         {
@@ -1713,16 +1677,13 @@ namespace FTAnalyzer
             Cursor = Cursors.Hand;
         }
 
-        void LabLostCousinsWeb_MouseLeave(object sender, EventArgs e)
-        {
-            Cursor = storedCursor;
-        }
+        void LabLostCousinsWeb_MouseLeave(object sender, EventArgs e) => Cursor = storedCursor;
         #endregion
 
         #region ToolStrip Clicks
         void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This is Family Tree Analyzer version " + VERSION, "FTAnalyzer");
+            MessageBox.Show($"This is Family Tree Analyzer version {VERSION}, "FTAnalyzer");
         }
 
         void OptionsToolStripMenuItem_Click(object sender, EventArgs e)
