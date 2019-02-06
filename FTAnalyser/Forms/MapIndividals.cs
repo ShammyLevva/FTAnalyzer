@@ -21,7 +21,7 @@ namespace FTAnalyzer
         public MapIndividuals(List<MapLocation> locations, string year, Form mapForm)
         {
             InitializeComponent();
-            Top = Top + WindowHelper.TopTaskbarOffset;
+            Top = Top + NativeMethods.TopTaskbarOffset;
             this.mapForm = mapForm;
             this.locations = locations;
             dgIndividuals.AutoGenerateColumns = false;

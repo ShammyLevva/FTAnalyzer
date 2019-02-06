@@ -38,7 +38,7 @@ namespace FTAnalyzer.Forms
         public GeocodeLocations(IProgress<string> outputText)
         {
             InitializeComponent();
-            Top = Top + WindowHelper.TopTaskbarOffset;
+            Top = Top + NativeMethods.TopTaskbarOffset;
             ft = FamilyTree.Instance;
             refreshingMenus = false;
             locations = ft.AllGeocodingLocations;

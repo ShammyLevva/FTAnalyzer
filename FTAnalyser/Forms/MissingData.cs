@@ -9,7 +9,7 @@ namespace FTAnalyzer.Forms
         public MissingData()
         {
             InitializeComponent();
-            Top = Top + WindowHelper.TopTaskbarOffset;
+            Top = Top + NativeMethods.TopTaskbarOffset;
             SetDefaultValues();
         }
 

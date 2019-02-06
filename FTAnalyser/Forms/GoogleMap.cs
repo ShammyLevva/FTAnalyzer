@@ -86,7 +86,7 @@ namespace FTAnalyzer.Forms
         public GoogleMap()
         {
             InitializeComponent();
-            Top = Top + WindowHelper.TopTaskbarOffset;
+            Top = Top + NativeMethods.TopTaskbarOffset;
         }
 
         public void ShowLocation(FactLocation loc, int level)

@@ -9,7 +9,7 @@ namespace FTAnalyzer.Forms
         public Notes(Individual ind)
         {
             InitializeComponent();
-            Top = Top + WindowHelper.TopTaskbarOffset;
+            Top = Top + NativeMethods.TopTaskbarOffset;
             rtbNotes.Text = ind.Notes;
             Text = "Notes for " + ind.ToString();
         }

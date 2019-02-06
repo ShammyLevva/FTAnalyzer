@@ -28,7 +28,7 @@ namespace FTAnalyzer.Forms
         public TimeLine(IProgress<string> outputText)
         {
             InitializeComponent();
-            Top = Top + WindowHelper.TopTaskbarOffset;
+            Top = Top + NativeMethods.TopTaskbarOffset;
             loading = true;
             this.outputText = outputText;
             mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
@@ -221,7 +221,7 @@ namespace FTAnalyzer.Forms
             int Left = (int)Application.UserAppDataRegistry.GetValue("Timeline position - left", this.Left);
             this.Width = Width;
             this.Height = Height;
-            this.Top = Top + WindowHelper.TopTaskbarOffset;
+            this.Top = Top + NativeMethods.TopTaskbarOffset;
             this.Left = Left;
             SpecialMethods.SetFonts(this);
             RefreshMap();

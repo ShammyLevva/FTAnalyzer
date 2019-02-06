@@ -30,7 +30,7 @@ namespace FTAnalyzer.Forms
         public EditLocation(FactLocation location)
         {
             InitializeComponent();
-            Top = Top + WindowHelper.TopTaskbarOffset;
+            Top = Top + NativeMethods.TopTaskbarOffset;
             customMapLayers = new List<GdalRasterLayer>();
             mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
             mapZoomToolStrip.Items.Add(mnuMapStyle);

@@ -29,7 +29,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.3.7.3";
+        public static string VERSION = "7.3.7.4";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -49,7 +49,7 @@ namespace FTAnalyzer
         {
             InitializeComponent();
             loading = true;
-            var x= WindowHelper.GetTaskBarPos(); // Sets taskbar offset
+            var x= NativeMethods.GetTaskBarPos(); // Sets taskbar offset
             displayOptionsOnLoadToolStripMenuItem.Checked = GeneralSettings.Default.ReportOptions;
             treetopsRelation.MarriedToDB = false;
             ShowMenus(false);
@@ -1683,7 +1683,7 @@ namespace FTAnalyzer
         #region ToolStrip Clicks
         void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"This is Family Tree Analyzer version {VERSION}, "FTAnalyzer");
+            MessageBox.Show($"This is Family Tree Analyzer version {VERSION}", "FTAnalyzer");
         }
 
         void OptionsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2322,7 +2322,7 @@ namespace FTAnalyzer
             loading = true;
             Height = 561;
             Width = 1114;
-            Top = 50 + WindowHelper.TopTaskbarOffset;
+            Top = 50 + NativeMethods.TopTaskbarOffset;
             Left = 50;
             loading = false;
         }

@@ -1,3 +1,12 @@
+#### Updated Release Version 7.3.7.4 7th February 2019  
+**Updates**  
+Forms forced to move down if taskbar at top  
+
+**Bugfixes**  
+Add check to see if lost cousins database entry exists before adding it  
+Strip invalid characters from Lost Cousins upload strings  
+Only add shared facts if not already added  
+
 #### Updated Release Version 7.3.7.3 4th February 2019  
 **Bugfixes**  
 Maximise was failing cast operation  

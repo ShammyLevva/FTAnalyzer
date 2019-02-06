@@ -16,7 +16,7 @@ namespace FTAnalyzer.Forms
         public StatisticsForm(StatisticType type)
         {
             InitializeComponent();
-            Top = Top + WindowHelper.TopTaskbarOffset;
+            Top = Top + NativeMethods.TopTaskbarOffset;
             StatType = type;
             tsStatusLabel.Text = string.Empty;
             switch(type)

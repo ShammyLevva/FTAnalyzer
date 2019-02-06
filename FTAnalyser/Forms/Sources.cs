@@ -14,7 +14,7 @@ namespace FTAnalyzer.Forms
         public Sources(DisplayFact fact)
         {
             InitializeComponent();
-            Top = Top + WindowHelper.TopTaskbarOffset;
+            Top = Top + NativeMethods.TopTaskbarOffset;
             sources = new SortableBindingList<IDisplaySource>();
             dgSources.AutoGenerateColumns = false;
             ExtensionMethods.DoubleBuffered(dgSources, true);

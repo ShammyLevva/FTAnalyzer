@@ -15,7 +15,7 @@ namespace FTAnalyzer.Core.Displays
             labelCopyright.Text = AssemblyCopyright;
             labelCompanyName.Text = AssemblyCompany;
             textBoxDescription.Text = AssemblyDescription;
-            Top = Top + WindowHelper.TopTaskbarOffset;
+            Top = Top + NativeMethods.TopTaskbarOffset;
         }
 
         #region Assembly Attribute Accessors

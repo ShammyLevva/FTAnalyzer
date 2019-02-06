@@ -28,7 +28,7 @@ namespace FTAnalyzer.Forms
         Facts()
         {
             InitializeComponent();
-            Top = Top + WindowHelper.TopTaskbarOffset;
+            Top = Top + NativeMethods.TopTaskbarOffset;
             facts = new SortableBindingList<IDisplayFact>();
             facts.SortFinished += new EventHandler(Grid_SortFinished);
             allFacts = false;
