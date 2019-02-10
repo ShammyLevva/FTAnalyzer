@@ -907,13 +907,6 @@ namespace FTAnalyzer.Utilities
                         int rowsaffected = cmd.ExecuteNonQuery();
                         if (rowsaffected != 1)
                             outputText.Report($"\nProblem updating record in database update affected {rowsaffected} records.");
-                        else
-                        {
-                            FactLocation location = FactLocation.GetLocation(ind.CensusCountry);
-                            Fact f = new Fact(ind.CensusRef, Fact.LC_FTA, ind.CensusDate, location, string.Empty, true, true);
-                            Individual person = FamilyTree.Instance.GetIndividual(ind.IndividualID); // get the individual not the census indvidual
-                            person?.AddFact(f);
-                        }
                     }
                 }
             }
