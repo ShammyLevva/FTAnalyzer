@@ -11,7 +11,7 @@ namespace FTAnalyzer.Utilities
         [DllImport("gdi32.dll")]
         internal static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
 
-        [DllImport("user32.dll", SetLastError = true)]
+        [DllImport("user32.dll", SetLastError = true, BestFitMapping =false, CharSet = CharSet.Unicode,ThrowOnUnmappableChar = true)]
         static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
         [DllImport("SHELL32", CallingConvention = CallingConvention.StdCall)]

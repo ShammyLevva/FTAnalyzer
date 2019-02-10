@@ -238,13 +238,6 @@ namespace FTAnalyzer
             this.txtCensusSurname = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
-            this.btnShowCensusEntered = new System.Windows.Forms.Button();
-            this.btnShowCensusMissing = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnDuplicateCensus = new System.Windows.Forms.Button();
-            this.btnMissingCensusLocation = new System.Windows.Forms.Button();
-            this.cenDate = new FTAnalyzer.Controls.CensusDateSelector();
-            this.relTypesCensus = new FTAnalyzer.Controls.RelationTypes();
             this.tabLocations = new System.Windows.Forms.TabPage();
             this.btnModernOSMap = new System.Windows.Forms.Button();
             this.btnOldOSMap = new System.Windows.Forms.Button();
@@ -353,7 +346,6 @@ namespace FTAnalyzer
             this.dpToday = new System.Windows.Forms.DateTimePicker();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.LCVerifyTab = new System.Windows.Forms.TabPage();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.reltypesSurnames = new FTAnalyzer.Controls.RelationTypes();
             this.relTypesFacts = new FTAnalyzer.Controls.RelationTypes();
@@ -4295,7 +4287,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.Button btnShowCensusEntered;
         private System.Windows.Forms.Button btnShowCensusMissing;
         private System.Windows.Forms.CheckBox chkAnyCensusYear;
-        private System.Windows.Forms.TabPage LCVerifyTab;
         private System.Windows.Forms.TabPage LCVerifyTab;
         private System.Windows.Forms.DataGridView dgCheckAncestors;
         private System.Windows.Forms.Button btnCheckMyAncestors;

@@ -1601,7 +1601,7 @@ namespace FTAnalyzer
                 Progress<string> outputText = new Progress<string>(value => { rtbCheckAncestors.AppendText(value); });
                 dgCheckAncestors.DataSource = ExportToLostCousins.VerifyAncestors(outputText);
                 dgCheckAncestors.Refresh();
-                ExportToLostCousins.CheckWebLinks(outputText);
+
             }
         }
 
