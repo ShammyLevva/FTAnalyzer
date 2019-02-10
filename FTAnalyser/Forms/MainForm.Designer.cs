@@ -354,6 +354,7 @@ namespace FTAnalyzer
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.LCVerifyTab = new System.Windows.Forms.TabPage();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -1657,6 +1658,7 @@ namespace FTAnalyzer
             // 
             this.LCSubTabs.Controls.Add(this.LCReportsTab);
             this.LCSubTabs.Controls.Add(this.LCUpdatesTab);
+            this.LCSubTabs.Controls.Add(this.LCVerifyTab);
             this.LCSubTabs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LCSubTabs.Location = new System.Drawing.Point(3, 3);
             this.LCSubTabs.Name = "LCSubTabs";
@@ -3697,6 +3699,15 @@ namespace FTAnalyzer
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
+            // LCVerifyTab
+            // 
+            this.LCVerifyTab.Location = new System.Drawing.Point(4, 22);
+            this.LCVerifyTab.Name = "LCVerifyTab";
+            this.LCVerifyTab.Size = new System.Drawing.Size(1070, 411);
+            this.LCVerifyTab.TabIndex = 2;
+            this.LCVerifyTab.Text = "Verification";
+            this.LCVerifyTab.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -4130,6 +4141,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.Button btnShowCensusEntered;
         private System.Windows.Forms.Button btnShowCensusMissing;
         private System.Windows.Forms.CheckBox chkAnyCensusYear;
+        private System.Windows.Forms.TabPage LCVerifyTab;
     }
 }
 
