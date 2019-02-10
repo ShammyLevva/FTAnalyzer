@@ -21,6 +21,7 @@ namespace FTAnalyzer.Forms
         public ColourBMD(List<IDisplayColourBMD> reportList)
         {
             InitializeComponent();
+            Top = Top + NativeMethods.TopTaskbarOffset;
             dgBMDReportSheet.AutoGenerateColumns = false;
 
             this.reportList = new SortableBindingList<IDisplayColourBMD>(reportList);

@@ -20,7 +20,6 @@ using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -50,6 +49,7 @@ namespace FTAnalyzer
         {
             InitializeComponent();
             loading = true;
+            var x= NativeMethods.GetTaskBarPos(); // Sets taskbar offset
             displayOptionsOnLoadToolStripMenuItem.Checked = GeneralSettings.Default.ReportOptions;
             treetopsRelation.MarriedToDB = false;
             ShowMenus(false);
@@ -126,16 +126,16 @@ namespace FTAnalyzer
             switch (FontSettings.Default.FontNumber)
             {
                 case 1:
-                    handwritingFont = new Font(fonts.Families[0], 52.0F, FontStyle.Bold);
+                    handwritingFont = new Font(fonts.Families[0], 46.0F, FontStyle.Bold);
                     break;
                 case 2:
-                    handwritingFont = new Font(fonts.Families[0], 72.0F, FontStyle.Bold);
+                    handwritingFont = new Font(fonts.Families[0], 68.0F, FontStyle.Bold);
                     break;
                 case 3:
-                    handwritingFont = new Font(fonts.Families[0], 82.0F, FontStyle.Bold);
+                    handwritingFont = new Font(fonts.Families[0], 72.0F, FontStyle.Bold);
                     break;
                 case 4:
-                    handwritingFont = new Font(fonts.Families[0], 100.0F, FontStyle.Bold);
+                    handwritingFont = new Font(fonts.Families[0], 90.0F, FontStyle.Bold);
                     break;
             }
             LbProgramName.Font = handwritingFont;
@@ -160,11 +160,15 @@ namespace FTAnalyzer
             int Height = (int)Application.UserAppDataRegistry.GetValue("Mainform size - height", this.Height);
             int Top = (int)Application.UserAppDataRegistry.GetValue("Mainform position - top", this.Top);
             int Left = (int)Application.UserAppDataRegistry.GetValue("Mainform position - left", this.Left);
+            string maxState = (WindowState == FormWindowState.Maximized).ToString();
+            string maximised = (string)Application.UserAppDataRegistry.GetValue("Mainform maximised", maxState);
             Point leftTop = ReportFormHelper.CheckIsOnScreen(Top, Left);
             this.Width = Width;
             this.Height = Height;
             this.Top = leftTop.Y;
             this.Left = leftTop.X;
+            if (maximised=="True")
+                WindowState = FormWindowState.Maximized;
         }
 
         #region Version Info
@@ -298,6 +302,7 @@ namespace FTAnalyzer
             dgWorldWars.DataSource = null;
             dgLooseBirths.DataSource = null;
             dgLooseDeaths.DataSource = null;
+            dgLooseInfo.DataSource = null;
             dgDataErrors.DataSource = null;
             dgOccupations.DataSource = null;
             dgSurnames.DataSource = null;
@@ -313,6 +318,7 @@ namespace FTAnalyzer
             ExtensionMethods.DoubleBuffered(dgWorldWars, true);
             ExtensionMethods.DoubleBuffered(dgLooseBirths, true);
             ExtensionMethods.DoubleBuffered(dgLooseDeaths, true);
+            ExtensionMethods.DoubleBuffered(dgLooseInfo, true);
             ExtensionMethods.DoubleBuffered(dgDataErrors, true);
             ExtensionMethods.DoubleBuffered(dgOccupations, true);
             ExtensionMethods.DoubleBuffered(dgSurnames, true);
@@ -555,10 +561,7 @@ namespace FTAnalyzer
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.WWIIReportEvent);
         }
 
-        void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            SpecialMethods.VisitWebsite("http://forums.lc");
-        }
+        void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite("http://forums.lc");
 
         void DgOccupations_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -1256,8 +1259,7 @@ namespace FTAnalyzer
                     btnLC1881EW.Enabled = btnLC1881Scot.Enabled = btnLC1841EW.Enabled =
                         btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled =
                         btnLC1911EW.Enabled = ft.IndividualCount > 0;
-                    UpdateLostCousinsReport();
-                    UpdateLCOutput();
+                    UpdateLCReports();
                     txtLCEmail.Text = (string)Application.UserAppDataRegistry.GetValue("LostCousinsEmail", string.Empty);
                     chkLCRootPersonConfirm.Text = $"Confirm {ft.RootPerson} as root Person";
                     tabLostCousins.Refresh();
@@ -1376,6 +1378,12 @@ namespace FTAnalyzer
                     SetupLooseDeaths();
                 await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseDeathsEvent);
             }
+            else if (tabErrorFixSelector.SelectedTab == tabLooseInfo)
+            {
+                if (dgLooseInfo.DataSource == null)
+                    SetupLooseInfo();
+                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseInfoEvent);
+            }
         }
 
         #endregion
@@ -1412,6 +1420,29 @@ namespace FTAnalyzer
             if (chkExcludeUnknownBirths.Checked)
                 filter = FilterUtils.AndFilter(x => x.BirthDate.IsKnown, filter);
             filter = FilterUtils.AndFilter(x => x.Age.MinAge < (int)udAgeFilter.Value, filter);
+            return filter;
+        }
+
+        Predicate<Individual> CreateIndividualCensusFilter(bool censusDone, string surname)
+        {
+            var relationFilter = relTypesCensus.BuildFilter<Individual>(x => x.RelationType);
+            var dateFilter = censusDone ?
+                new Predicate<Individual>(x => x.IsCensusDone(cenDate.SelectedDate) && !x.OutOfCountry(cenDate.SelectedDate)) :
+                new Predicate<Individual>(x => !x.IsCensusDone(cenDate.SelectedDate) && !x.OutOfCountry(cenDate.SelectedDate));
+            Predicate<Individual> filter = FilterUtils.AndFilter(relationFilter, dateFilter);
+            if (!censusDone && GeneralSettings.Default.HidePeopleWithMissingTag)
+            {  //if we are reporting missing from census and we are hiding people who have a missing tag then only select those who are not tagged missing
+                Predicate<Individual> missingTag = new Predicate<Individual>(x => !x.IsTaggedMissingCensus(cenDate.SelectedDate));
+                filter = FilterUtils.AndFilter(filter, missingTag);
+            }
+            if (surname.Length > 0)
+            {
+                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, surname);
+                filter = FilterUtils.AndFilter(filter, surnameFilter);
+            }
+            if (chkExcludeUnknownBirths.Checked)
+                filter = FilterUtils.AndFilter(x => x.BirthDate.IsKnown, filter);
+            filter = FilterUtils.AndFilter(x => x.GetMinAge(cenDate.SelectedDate) < (int)udAgeFilter.Value, filter);
             return filter;
         }
 
@@ -1459,7 +1490,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Lost Cousins
-        void CkbRestrictions_CheckedChanged(object sender, EventArgs e) => UpdateLostCousinsReport();
+        void CkbRestrictions_CheckedChanged(object sender, EventArgs e) => UpdateLCReports();
 
         void LostCousinsCensus(CensusDate censusDate, string reportTitle)
         {
@@ -1480,6 +1511,7 @@ namespace FTAnalyzer
 
         void BtnLCLogin_Click(object sender, EventArgs e)
         {
+            HourGlass(true);
             Application.UserAppDataRegistry.SetValue("LostCousinsEmail", txtLCEmail.Text);
             bool websiteAvailable = ExportToLostCousins.CheckLostCousinsLogin(txtLCEmail.Text, txtLCPassword.Text);
             btnLCLogin.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
@@ -1487,6 +1519,7 @@ namespace FTAnalyzer
             btnUpdateLostCousinsWebsite.Visible = websiteAvailable;
             btnCheckMyAncestors.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
             lblCheckAncestors.Text = websiteAvailable ? "Logged into Lost Cousins" : "Not Currently Logged in Use Updates Page to Login";
+            HourGlass(false);
             if (websiteAvailable)
                 UIHelpers.ShowMessage("Lost Cousins login succeeded.");
             else
@@ -1535,13 +1568,20 @@ namespace FTAnalyzer
                     string resultText = $"{DateTime.Now.ToUniversalTime().ToString("yyyy-MM-dd HH:mm")}: uploaded {count} records";
                     await Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.UpdateLostCousins, resultText);
                     SpecialMethods.VisitWebsite("https://www.lostcousins.com/pages/members/ancestors/");
-                    UpdateLostCousinsReport();
-                    UpdateLCOutput();
+                    UpdateLCReports();
                 }
             }
             else
                 UIHelpers.ShowMessage("You have no records to add to Lost Cousins at this time. Use the Research Suggestions to find more people on the census, or enter/update missing or incomplete census references.");
             btnUpdateLostCousinsWebsite.Enabled = true;
+        }
+
+        void UpdateLCReports()
+        {
+            HourGlass(true);
+            UpdateLostCousinsReport();
+            UpdateLCOutput();
+            HourGlass(false);
         }
 
         void UpdateLCOutput()
@@ -1550,8 +1590,8 @@ namespace FTAnalyzer
             Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType, true);
             LCUpdates = new List<CensusIndividual>();
             LCInvalidReferences = new List<CensusIndividual>();
-            rtbLCUpdateData.Text = ft.LCOutput(LCUpdates, LCInvalidReferences, relationFilter);
-        }
+            rtbLCUpdateData.Text = ft.LCOutput(LCUpdates, LCInvalidReferences, relationFilter, null);
+         }
 
 
         void BtnCheckMyAncestors_Click(object sender, EventArgs e)
@@ -1577,14 +1617,22 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        void RelTypesLC_RelationTypesChanged(object sender, EventArgs e) => UpdateLostCousinsReport();
+        void RelTypesLC_RelationTypesChanged(object sender, EventArgs e) => UpdateLCReports();
 
-        void UpdateLostCousinsReport()
+        void TxtLCEmail_TextChanged(object sender, EventArgs e) => ClearLogin();
+
+        void TxtLCPassword_TextChanged(object sender, EventArgs e) => ClearLogin();
+
+        void ClearLogin()
         {
-            HourGlass(true);
-            rtbLostCousins.Text = ft.UpdateLostCousinsReport(relTypesLC.BuildFilter<Individual>(x => x.RelationType));
-            HourGlass(false);
+            if (btnUpdateLostCousinsWebsite.Visible) // if we can login clear cookies to reset session
+                ExportToLostCousins.EmptyCookieJar();
+            btnLCLogin.BackColor = Color.Red;
+            btnLCLogin.Enabled = true;
+            btnUpdateLostCousinsWebsite.Visible = false;
         }
+
+        void UpdateLostCousinsReport() => rtbLostCousins.Text = ft.UpdateLostCousinsReport(relTypesLC.BuildFilter<Individual>(x => x.RelationType), null);
 
         void BtnLCDuplicates_Click(object sender, EventArgs e)
         {
@@ -1616,54 +1664,21 @@ namespace FTAnalyzer
             btnUpdateLostCousinsWebsite.BackColor = chkLCRootPersonConfirm.Checked ? Color.LightGreen : Color.LightGray;
         }
 
-        void BtnLC1881EW_Click(object sender, EventArgs e)
-        {
-            string reportTitle = "1881 England & Wales Census Records on file";
-            LostCousinsCensus(CensusDate.EWCENSUS1881, reportTitle);
-        }
+        void BtnLC1881EW_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.EWCENSUS1881, "1881 England & Wales Census Records on file");
 
-        void BtnLC1881Scot_Click(object sender, EventArgs e)
-        {
-            string reportTitle = "1881 Scotland Census Records on file";
-            LostCousinsCensus(CensusDate.SCOTCENSUS1881, reportTitle);
-        }
+        void BtnLC1881Scot_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.SCOTCENSUS1881, "1881 Scotland Census Records on file");
 
-        void BtnLC1881Canada_Click(object sender, EventArgs e)
-        {
-            string reportTitle = "1881 Canada Census Records on file";
-            LostCousinsCensus(CensusDate.CANADACENSUS1881, reportTitle);
-        }
+        void BtnLC1881Canada_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.CANADACENSUS1881, "1881 Canada Census Records on file");
 
-        void BtnLC1841EW_Click(object sender, EventArgs e)
-        {
-            string reportTitle = "1841 England & Wales Census Records on file";
-            LostCousinsCensus(CensusDate.EWCENSUS1841, reportTitle);
-        }
+        void BtnLC1841EW_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.EWCENSUS1841, "1841 England & Wales Census Records on file");
 
+        void BtnLC1911EW_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.EWCENSUS1911, "1911 England & Wales Census Records on file");
 
-        void BtnLC1911EW_Click(object sender, EventArgs e)
-        {
-            string reportTitle = "1911 England & Wales Census Records on file";
-            LostCousinsCensus(CensusDate.EWCENSUS1911, reportTitle);
-        }
+        void BtnLC1880USA_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.USCENSUS1880, "1880 US Census Records on file");
 
-        void BtnLC1880USA_Click(object sender, EventArgs e)
-        {
-            string reportTitle = "1880 US Census Records on file";
-            LostCousinsCensus(CensusDate.USCENSUS1880, reportTitle);
-        }
+        void BtnLC1911Ireland_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.IRELANDCENSUS1911, "1911 Ireland Census Records on file");
 
-        void BtnLC1911Ireland_Click(object sender, EventArgs e)
-        {
-            string reportTitle = "1911 Ireland Census Records on file";
-            LostCousinsCensus(CensusDate.IRELANDCENSUS1911, reportTitle);
-        }
-
-        void BtnLC1940USA_Click(object sender, EventArgs e)
-        {
-            string reportTitle = "1940 US Census Records on file";
-            LostCousinsCensus(CensusDate.USCENSUS1940, reportTitle);
-        }
+        void BtnLC1940USA_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.USCENSUS1940, "1940 US Census Records on file");
 
         void LabLostCousinsWeb_Click(object sender, EventArgs e)
         {
@@ -1677,22 +1692,13 @@ namespace FTAnalyzer
             Cursor = Cursors.Hand;
         }
 
-        void LabLostCousinsWeb_MouseLeave(object sender, EventArgs e)
-        {
-            Cursor = storedCursor;
-        }
-
-        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            SpecialMethods.VisitWebsite("http://www.lostcousins.com/?ref=LC585149");
-            Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.LCWebLinkEvent);
-        }
+        void LabLostCousinsWeb_MouseLeave(object sender, EventArgs e) => Cursor = storedCursor;
         #endregion
 
         #region ToolStrip Clicks
         void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This is Family Tree Analyzer version " + VERSION, "FTAnalyzer");
+            MessageBox.Show($"This is Family Tree Analyzer version {VERSION}", "FTAnalyzer");
         }
 
         void OptionsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1748,6 +1754,8 @@ namespace FTAnalyzer
                         PrintDataGrid(Orientation.Landscape, dgLooseBirths, "List of Loose Births");
                     else if (tabErrorFixSelector.SelectedTab == tabLooseDeaths)
                         PrintDataGrid(Orientation.Landscape, dgLooseDeaths, "List of Loose Deaths");
+                    else if (tabErrorFixSelector.SelectedTab == tabLooseInfo)
+                        PrintDataGrid(Orientation.Landscape, dgLooseInfo, "List of Loose Births/Deaths");
                 }
                 else if (tabSelector.SelectedTab == tabLocations)
                 {
@@ -2012,6 +2020,12 @@ namespace FTAnalyzer
                 ShowFacts((string)dgLooseBirths.CurrentRow.Cells["IndividualID"].Value);
         }
 
+        void DgLooseInfo_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                ShowFacts((string)dgLooseInfo.CurrentRow.Cells["IndividualID"].Value);
+        }
+
         void DgTreeTops_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
@@ -2132,26 +2146,32 @@ namespace FTAnalyzer
         void ShowFacts(string indID, bool offset = false)
         {
             Individual ind = ft.GetIndividual(indID);
-            Facts factForm = new Facts(ind);
-            DisposeDuplicateForms(factForm);
-            factForm.Show();
-            if (offset)
+            if (ind != null)
             {
-                factForm.Left += 200;
-                factForm.Top += 100;
+                Facts factForm = new Facts(ind);
+                DisposeDuplicateForms(factForm);
+                factForm.Show();
+                if (offset)
+                {
+                    factForm.Left += 200;
+                    factForm.Top += 100;
+                }
             }
         }
 
         void ShowFamilyFacts(string famID, bool offset = false)
         {
             Family fam = ft.GetFamily(famID);
-            Facts factForm = new Facts(fam);
-            DisposeDuplicateForms(factForm);
-            factForm.Show();
-            if (offset)
+            if (fam != null)
             {
-                factForm.Left += 200;
-                factForm.Top += 100;
+                Facts factForm = new Facts(fam);
+                DisposeDuplicateForms(factForm);
+                factForm.Show();
+                if (offset)
+                {
+                    factForm.Left += 200;
+                    factForm.Top += 100;
+                }
             }
         }
 
@@ -2317,7 +2337,7 @@ namespace FTAnalyzer
             loading = true;
             Height = 561;
             Width = 1114;
-            Top = 50;
+            Top = 50 + NativeMethods.TopTaskbarOffset;
             Left = 50;
             loading = false;
         }
@@ -2329,19 +2349,18 @@ namespace FTAnalyzer
             SavePosition();
         }
 
-        void MainForm_Move(object sender, EventArgs e)
-        {
-            SavePosition();
-        }
+        void MainForm_Move(object sender, EventArgs e) => SavePosition();
 
         void SavePosition()
         {
-            if (!loading && WindowState == FormWindowState.Normal)
-            {  //only save window size if not maximised or minimised
+            if (!loading && WindowState != FormWindowState.Minimized)
+            {  //only save window size if not minimised
                 Application.UserAppDataRegistry.SetValue("Mainform size - width", Width);
                 Application.UserAppDataRegistry.SetValue("Mainform size - height", Height);
                 Application.UserAppDataRegistry.SetValue("Mainform position - top", Top);
                 Application.UserAppDataRegistry.SetValue("Mainform position - left", Left);
+                string maxState = (WindowState == FormWindowState.Maximized).ToString();
+                Application.UserAppDataRegistry.SetValue("Mainform maximised", maxState);
             }
         }
         #endregion
@@ -2463,15 +2482,22 @@ namespace FTAnalyzer
                 census.Text += $" entered with a {cenDate.SelectedDate.ToString()} record";
             else
                 census.Text += $" missing a {cenDate.SelectedDate.ToString()} record that you can search for";
-            Predicate<CensusIndividual> filter = CreateCensusIndividualFilter(censusDone, surname);
-            census.SetupCensus(filter);
-            int tries = 0;
-            while (random && census.RecordCount == 0 && tries < 5)
+            Predicate<CensusIndividual> filter;
+            if (random)
             {
-                surname = GetRandomSurname();
+                int tries = 0;
+                while (random && census.RecordCount == 0 && tries < 5)
+                {
+                    surname = GetRandomSurname();
+                    filter = CreateCensusIndividualFilter(censusDone, surname);
+                    census.SetupCensus(filter);
+                    tries++;
+                }
+            }
+            else
+            {
                 filter = CreateCensusIndividualFilter(censusDone, surname);
                 census.SetupCensus(filter);
-                tries++;
             }
             DisposeDuplicateForms(census);
             census.Show();
@@ -2542,33 +2568,26 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        void ShowCensusRefFacts(CensusReference.ReferenceStatus status)
+        void ShowCensusRefFacts(CensusReference.ReferenceStatus status, Predicate<Individual> filter)
         {
             HourGlass(true);
-            Facts facts = new Facts(status);
+            CensusDate date = chkAnyCensusYear.Checked ? CensusDate.ANYCENSUS : cenDate.SelectedDate;
+            Facts facts = new Facts(status, filter, date);
             facts.Show();
             HourGlass(false);
         }
 
-        void BtnCensusRefs_Click(object sender, EventArgs e)
-        {
-            ShowCensusRefFacts(CensusReference.ReferenceStatus.GOOD);
-        }
+        void BtnCensusRefs_Click(object sender, EventArgs e) => 
+            ShowCensusRefFacts(CensusReference.ReferenceStatus.GOOD, CreateIndividualCensusFilter(true, txtCensusSurname.Text));
 
-        void BtnMissingCensusRefs_Click(object sender, EventArgs e)
-        {
-            ShowCensusRefFacts(CensusReference.ReferenceStatus.BLANK);
-        }
+        void BtnMissingCensusRefs_Click(object sender, EventArgs e) => 
+            ShowCensusRefFacts(CensusReference.ReferenceStatus.BLANK, CreateIndividualCensusFilter(true, txtCensusSurname.Text));
 
-        void BtnIncompleteCensusRef_Click(object sender, EventArgs e)
-        {
-            ShowCensusRefFacts(CensusReference.ReferenceStatus.INCOMPLETE);
-        }
+        void BtnIncompleteCensusRef_Click(object sender, EventArgs e) => 
+            ShowCensusRefFacts(CensusReference.ReferenceStatus.INCOMPLETE, CreateIndividualCensusFilter(true, txtCensusSurname.Text));
 
-        void BtnUnrecognisedCensusRef_Click(object sender, EventArgs e)
-        {
-            ShowCensusRefFacts(CensusReference.ReferenceStatus.UNRECOGNISED);
-        }
+        void BtnUnrecognisedCensusRef_Click(object sender, EventArgs e) => 
+            ShowCensusRefFacts(CensusReference.ReferenceStatus.UNRECOGNISED, CreateIndividualCensusFilter(true, txtCensusSurname.Text));
 
         void BtnReportUnrecognised_Click(object sender, EventArgs e)
         {
@@ -2615,7 +2634,8 @@ namespace FTAnalyzer
             HourGlass(true);
             List<DisplayFact> results = new List<DisplayFact>();
             List<DisplayFact> censusRefs = new List<DisplayFact>();
-            foreach (Individual ind in ft.AllIndividuals)
+            Predicate<Individual> filter = CreateIndividualCensusFilter(true, txtCensusSurname.Text);
+            foreach (Individual ind in ft.AllIndividuals.Filter(filter))
                 foreach (Fact f in ind.AllFacts)
                     if (f.IsCensusFact && f.CensusReference != null && f.CensusReference.Reference.Length > 0)
                         censusRefs.Add(new DisplayFact(ind, f));
@@ -2778,6 +2798,25 @@ namespace FTAnalyzer
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + looseDeathList.Count;
                 tsHintsLabel.Text = Messages.Hints_Loose_Deaths + Messages.Hints_Individual;
+            }
+            catch (LooseDataException ex)
+            {
+                MessageBox.Show(ex.Message, "FTAnalyzer");
+            }
+        }
+
+        void SetupLooseInfo()
+        {
+            try
+            {
+                SortableBindingList<IDisplayLooseInfo> looseInfoList = ft.LooseInfo();
+                dgLooseInfo.DataSource = looseInfoList;
+                dgLooseInfo.Sort(dgLooseInfo.Columns["Forenames"], ListSortDirection.Ascending);
+                dgLooseInfo.Sort(dgLooseInfo.Columns["Surname"], ListSortDirection.Ascending);
+                dgLooseInfo.Focus();
+                mnuPrint.Enabled = true;
+                tsCountLabel.Text = Messages.Count + looseInfoList.Count;
+                tsHintsLabel.Text = "Double click to view records. " + Messages.Hints_Individual;
             }
             catch (LooseDataException ex)
             {
@@ -2978,7 +3017,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            DataTable dt = convertor.ToDataTable(new List<DataError>(DataErrors(ckbDataErrors)));
+            DataTable dt = convertor.ToDataTable(new List<IDisplayDataError>(DataErrors(ckbDataErrors)));
             ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportDataErrorsEvent);
             HourGlass(false);

@@ -16,6 +16,7 @@ namespace FTAnalyzer.Forms
         public LostCousinsReferral(Individual referee, bool onlyInCommon)
         {
             InitializeComponent();
+            Top = Top + NativeMethods.TopTaskbarOffset;
             FamilyTree ft = FamilyTree.Instance;
             Text = "Lost Cousins Referral for " + referee.ToString();
             reportFormHelper = new ReportFormHelper(this, Text, dgLCReferrals, ResetTable, "Lost Cousins Referrals");

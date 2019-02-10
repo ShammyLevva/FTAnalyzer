@@ -1,3 +1,61 @@
+#### Updated Release Version 7.3.7.4 7th February 2019  
+**Updates**  
+Forms forced to move down if taskbar at top  
+
+**Bugfixes**  
+Add check to see if lost cousins database entry exists before adding it  
+Strip invalid characters from Lost Cousins upload strings  
+Only add shared facts if not already added  
+
+#### Updated Release Version 7.3.7.3 4th February 2019  
+**Bugfixes**  
+Maximise was failing cast operation  
+
+#### Updated Release Version 7.3.7.2 4th February 2019  
+**Updates**  
+Main Form now remembers its maximised state  
+Issues when storing Lost Cousins facts shows error in feedback window  
+Database checks for PC version number on startup different from Mac version number  
+Added text to confirm login required to Lost Cousins before button becomes active  
+
+**Bugfixes**  
+Updating relationships on Lost Cousins tab updates LC reports
+Strip invalid characters from Lost Cousins upload strings  
+Only add shared facts if not already added  
+11Th, 12Th, 13Th weren't fixed to lower case th  
+Fixed bug where all ? were being converted to -  
+
+#### Updated Release Version 7.3.7.1 2nd February 2019  
+**Updates**  
+Cater for forename and surname in data exports  
+Recognise more census references with RGxx and /s and nothing else  
+
+**Bugfixes**  
+Lost Cousins Age was being trimmed to 1.  
+Factdates with long em dashes were not getting recognised  
+Tweak Handwriting font size  
+
+#### Updated Release Version 7.3.7.0 1st February 2019  
+**Updates**  
+Reorganised Census Form to make it clearer what uses Filters and what doesn't  
+Added Please verify the references text on upload to Lost Cousins  
+
+**Bugfixes**  
+Fixed typo on Welsh & IOM piece numbers in 1851 census refs  
+Lost Cousins ages tweaks and cater for 5 year rounding in 1841 census  
+Fix to Scottish reference pattern  
+Census referecences that are recognised but incomplete weren't then checking rest of text  
+
+#### Updated Release Version 7.3.6.0 30th January 2019  
+**Updates**  
+Added LooseInfo tab to combine Loose Births and Death info in one tab  
+Added lots of new census reference checking thanks to a couple of people who pointed out missing references  
+Added support for Julian dates  
+
+#### Updated Release Version 7.3.5.1 28th January 2019  
+**Bugfixes**  
+Lost Cousins login cleared if user name or password changes  
+
 #### Updated Release Version 7.3.5.0 27th January 2019  
 **Updates**  
 Added support for dashes in UK census refs  

@@ -25,6 +25,7 @@ namespace FTAnalyzer.Forms
         public People()
         {
             InitializeComponent();
+            Top = Top + NativeMethods.TopTaskbarOffset;
             indReportFormHelper = new ReportFormHelper(this, Text, dgIndividuals, ResetTable, "People");
             famReportFormHelper = new ReportFormHelper(this, Text, dgFamilies, ResetTable, "People");
             ExtensionMethods.DoubleBuffered(dgIndividuals, true);

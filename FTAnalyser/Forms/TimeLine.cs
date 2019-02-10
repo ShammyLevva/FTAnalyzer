@@ -28,6 +28,7 @@ namespace FTAnalyzer.Forms
         public TimeLine(IProgress<string> outputText)
         {
             InitializeComponent();
+            Top = Top + NativeMethods.TopTaskbarOffset;
             loading = true;
             this.outputText = outputText;
             mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
@@ -131,7 +132,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private List<MapLocation> FilterToRelationsIncluded(List<MapLocation> locations)
+        List<MapLocation> FilterToRelationsIncluded(List<MapLocation> locations)
         {
             List<MapLocation> result = new List<MapLocation>();
             foreach (MapLocation ml in locations)
@@ -162,10 +163,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void TbYears_Scroll(object sender, EventArgs e)
-        {
-            UpdateMap();
-        }
+        void TbYears_Scroll(object sender, EventArgs e) => UpdateMap();
 
         void UpdateMap()
         {
@@ -223,7 +221,7 @@ namespace FTAnalyzer.Forms
             int Left = (int)Application.UserAppDataRegistry.GetValue("Timeline position - left", this.Left);
             this.Width = Width;
             this.Height = Height;
-            this.Top = Top;
+            this.Top = Top + NativeMethods.TopTaskbarOffset;
             this.Left = Left;
             SpecialMethods.SetFonts(this);
             RefreshMap();

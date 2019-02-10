@@ -65,6 +65,7 @@ namespace CensusReferenceTest
             //USCensusTest("Year: 1860; Census Place: Boston Ward 12, Suffolk, Massachusetts; Roll: M653_525; Page: 515; Image: 519; Family History Library Film: 803525", CensusDate.USCENSUS1860, "M653_525", "12", "515");
             USCensusTest("Roll T627_1141; ED 8-14; Page 9A", CensusDate.USCENSUS1940, "1141","8-14", "9A");
             USCensusTest("Roll: m-t0627_2227; ED 1-7; Page 19A", CensusDate.USCENSUS1940, "2227", "1-7", "19A");
+            USCensusTest("T627, roll 4515, Burlington, enumeration district (ED) 51-5, sheet 4A, household 45, Alice Reed, accessed 22 Jan 2019", CensusDate.USCENSUS1940, "4515", "51-5", "4A");
 
             ScottishCensusTest("GROS 692/01 019/00 008", FactDate.UNKNOWN_DATE, "692-1", "19", "8");
             ScottishCensusTest("in the 1851 census, GROS 343/00 001/00 011.", CensusDate.UKCENSUS1851, "343", "1", "11");
@@ -78,12 +79,18 @@ namespace CensusReferenceTest
             CensusHO107Test("HO107, Piece 704, Folio 11, Page  14", CensusDate.UKCENSUS1841, "704", string.Empty, "11", "14");
             CensusHO107Test("Database online. Class: HO107; Piece: 1782; Folio: 719; Page: 25; GSU", CensusDate.UKCENSUS1851, "1782", string.Empty, "719", "25");
             CensusHO107Test(@" Bethnal Green, folio 10/9, page 11, Caroline Shaboe; digital images, \i FindMyPast.co.uk\i0  (https://search.findmypast.co.uk/search-world-Records/1841-england-wales-and-scotland-census : accessed 29 Dec 2009); citing PRO HO/107/692", CensusDate.UKCENSUS1841, "692", "9", "10", "11");
+            CensusHO107Test(@"Leeds, Yorkshire, folio 9, page 10, John Knowling; digital images, \i FindMyPast.co.uk\i0 (https://search.findmypast.co.uk/search-world-Records/1841-england-wales-and-scotland-census : accessed 20 Oct 2017); citing PRO HO/107/1345", CensusDate.UKCENSUS1841, "1345", "", "9", "10");
+            CensusHO107Test("HO107/797/10 f6 p5", CensusDate.UKCENSUS1841, "797", "10", "6", "5");
+            CensusHO107Test("Archive reference HO107 Piece number 142 Book number 10 Folio number 51 Page number 1 Record set 1841 England, Wales & Scotland Census", CensusDate.UKCENSUS1841, "142", "10", "51", "1");
+            CensusHO107Test(@"Ulleskelf, Tadcaster, folio 9, Book 8, page 12, Joshua Hey and family; digital images, \i FindMyPast.co.uk\i0  (https://search.findmypast.co.uk/search-world-Records/1841-england-wales-and-scotland-census : accessed 12 Jun 2017); citing PRO HO/107/1282", CensusDate.UKCENSUS1841, "1282", "8", "9", "12");
+            CensusHO107Test("Archive reference HO107 Piece number 1541 Folio 119 Page 15 Record set 1851 England, Wales & Scotland Census", CensusDate.UKCENSUS1851, "1541", "", "119", "15");
 
             Census1911Test("1911 census - Piece 22623, SN 183", "22623", "183");
             Census1911Test("1911 census - Piece: 22623, SN: 183", "22623", "183");
             Census1911Test("1911 census - Piece: 22623; Schedule No. : 183", "22623", "183");
             Census1911Test("Class: RG14; Piece: 22623; Schedule Number: 183", "22623", "183");
             Census1911Test("RG14PN22623 RG78PN1327 RD455 SD10 ED13 SN183", "22623", "183");
+            Census1911Test("RG14/17131 SN117", "17131", "117");
             Census1911Test("RG14, Piece 00866, Registration District 10, Sub District 4, Enumeration District 25, Schedule No. 63", "00866", "63");
             Census1911Test("Census 1911 Coventry WAR ENG RG14Piece18568 RG78Piece1111 RD390 SD2 ED30 SN129", "18568", "129");
             Census1911Test("Census 1911 Wortley Leeds YKS ENG RG14/Piece26892 RG78Piece1545 RD499 SD3 ED22 SN150", "26892", "150");
@@ -92,11 +99,15 @@ namespace CensusReferenceTest
             UKCensusTest("Class: RG11; Piece: 890; Folio: 114; Page: 9; GSU roll: 1341211", CensusDate.UKCENSUS1881, "890", "114", "9");
             UKCensusTest("Database online. Class: RG9; Piece: 1105; Folio: 90; Page: 21; GSU", CensusDate.UKCENSUS1861, "1105", "90", "21");
             UKCensusTest("            RG11 piece 870 folio 49 page 10", CensusDate.UKCENSUS1881, "870", "49", "10");
-            //UKCensusTest("Archive reference	RG11\nPiece number	870\nFolio	49\nPage	10", CensusDate.UKCENSUS1881, "870", "49", "10");
+            UKCensusTest("Archive reference RG11 Piece number 4594 Folio 9 Page 12", CensusDate.UKCENSUS1881, "4594", "9", "12");
+            UKCensusTest("Archive reference	RG11\nPiece number	870\nFolio	49\nPage	10", CensusDate.UKCENSUS1881, "870", "49", "10");
+            UKCensusTest("Archive reference RG11 Piece number 4594 Folio 9 Page 12", CensusDate.UKCENSUS1881, "4594", "9", "12");
+            UKCensusTest(@"Castleford, Pontefract, folio 9, page 12, Thomas Hey and family; digital images, \i FindMyPast.co.uk\i0  (https://search.findmypast.co.uk/search-world-Records/1881-england-wales-and-scotland-census : accessed 12 Jun 2017); citing PRO RG 11/4594", CensusDate.UKCENSUS1881, "4594", "9", "12");
             UKCensusTest("RG11 Piece/Folio  4738 / 103 Page Number  16", CensusDate.UKCENSUS1881, "4738", "103", "16");
             UKCensusTest("RG11 Piece 2529 Folio 68 Page 1", CensusDate.UKCENSUS1881, "2529", "68", "1");
             UKCensusTest("Class: RG11; Piece: 3934; Folio: 60; Page: 9; Line:; GSU roll: 1341939", CensusDate.UKCENSUS1881, "3934", "60", "9");
             UKCensusTest("Piece: RG9/480 Place: Gillingham -Kent Enumeration District: 14, Civil Parish: Gillingham Ecclesiastical Parish: Trinity,Folio: 42 Page: 20 Schedule: 117", CensusDate.UKCENSUS1861, "480", "42", "20");
+            UKCensusTest("1901 census RG13/Piece3800/Folio112/Page16/SN#110", CensusDate.UKCENSUS1901, "3800", "112", "16");
 
             Canadian1881Census("        123/A/55/35/1	Canada 1881", "123", "A", "35", "1");
             Canadian1881Census("        123/A/35/1	Canada 1881", "123", "A", "35", "1");

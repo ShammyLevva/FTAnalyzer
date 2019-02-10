@@ -24,6 +24,7 @@ namespace FTAnalyzer.Forms
         public Places(IProgress<string> outputText)
         {
             InitializeComponent();
+            Top = Top + NativeMethods.TopTaskbarOffset;
             isloading = true;
             this.outputText = outputText;
             mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);

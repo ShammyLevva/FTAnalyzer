@@ -1,4 +1,5 @@
-﻿using FTAnalyzer.Utilities;
+﻿using FTAnalyzer.Filters;
+using FTAnalyzer.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Web;
 using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms
@@ -16,18 +16,19 @@ namespace FTAnalyzer.Forms
     {
         public Individual Individual { get; private set; }
         public Family Family { get; private set; }
-        private FamilyTree ft = FamilyTree.Instance;
-        private SortableBindingList<IDisplayFact> facts;
-        private Font italicFont;
-        private Font linkFont;
+        FamilyTree ft = FamilyTree.Instance;
+        SortableBindingList<IDisplayFact> facts;
+        Font italicFont;
+        Font linkFont;
         bool allFacts;
-        private ReportFormHelper reportFormHelper;
+        ReportFormHelper reportFormHelper;
         bool CensusRefReport;
-        private List<string> IgnoreList;
+        List<string> IgnoreList;
 
-        private Facts()
+        Facts()
         {
             InitializeComponent();
+            Top = Top + NativeMethods.TopTaskbarOffset;
             facts = new SortableBindingList<IDisplayFact>();
             facts.SortFinished += new EventHandler(Grid_SortFinished);
             allFacts = false;
@@ -38,7 +39,7 @@ namespace FTAnalyzer.Forms
             italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
             linkFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Underline);
             dgFacts.Columns["IndividualID"].Visible = true;
-            dgFacts.Columns["CensusReference"].Visible = true; // originally false - trying true v5.0.0.3
+            dgFacts.Columns["CensusReference"].Visible = true; 
             dgFacts.Columns["IgnoreFact"].Visible = false;
             dgFacts.ReadOnly = true;
             sep1.Visible = false;
@@ -107,28 +108,31 @@ namespace FTAnalyzer.Forms
                 if (before != after)
                     distinctIndividuals++;
             }
-            string text = distinctIndividuals + " individuals.";
-            Text = "Duplicates Facts Report for all " + text + " Facts count: " + facts.Count;
+            string text = $"{distinctIndividuals} individuals.";
+            Text = $"Duplicates Facts Report for all{text} Facts count: {facts.Count}";
             SetupFacts(text);
             Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsDuplicatesEvent);
         }
 
-        public Facts(CensusReference.ReferenceStatus status)
+        public Facts(CensusReference.ReferenceStatus status, Predicate<Individual> filter, CensusDate censusDate)
             : this()
         {
             allFacts = true;
-            foreach (Individual ind in ft.AllIndividuals)
+            IEnumerable<Individual> listToCheck = ft.AllIndividuals.Filter(filter);
+            foreach (Individual ind in listToCheck)
+            {
                 foreach (Fact f in ind.AllFacts)
-                    if (f.IsCensusFact && f.CensusReference != null && f.CensusReference.Status == status)
+                    if (f.IsCensusFact && f.FactDate.Overlaps(censusDate) && f.CensusReference != null && f.CensusReference.Status == status)
                         facts.Add(new DisplayFact(ind, f));
+            }
             if (status == FTAnalyzer.CensusReference.ReferenceStatus.GOOD)
-                Text = "Census Reference Report. Facts count: " + facts.Count;
+                Text = $"Census Reference Report. Facts count: {facts.Count}";
             else if (status == FTAnalyzer.CensusReference.ReferenceStatus.INCOMPLETE)
-                Text = "Incomplete Census Reference Report. Facts count: " + facts.Count;
+                Text = $"Incomplete Census Reference Report. Facts count: {facts.Count}";
             else if (status == FTAnalyzer.CensusReference.ReferenceStatus.UNRECOGNISED)
-                Text = "Unrecognised Census Reference Report. Facts count: " + facts.Count;
+                Text = $"Unrecognised Census Reference Report. Facts count: {facts.Count}";
             else if (status == FTAnalyzer.CensusReference.ReferenceStatus.BLANK)
-                Text = "Blank Census Reference Report. Facts count: " + facts.Count;
+                Text = $"Blank Census Reference Report. Facts count: {facts.Count}";
             SetupFacts();
             //dgFacts.Columns["CensusReference"].Visible = true;
             Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsCensusRefEvent);
@@ -257,32 +261,41 @@ namespace FTAnalyzer.Forms
 
         void AddIndividualsFacts(Individual individual)
         {
-            IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
-            foreach (Fact f in list)
-                facts.Add(new DisplayFact(individual, f));
+            if (individual != null)
+            {
+                IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
+                foreach (Fact f in list)
+                    facts.Add(new DisplayFact(individual, f));
+            }
         }
 
         void AddIndividualsFacts(Individual individual, List<string> factTypes, List<string> excludedTypes)
         {
-            IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
-            if (factTypes.Count == 0 && excludedTypes != null && !list.Any(x => excludedTypes.Contains(x.FactTypeDescription)))
-                facts.Add(new DisplayFact(individual, new Fact(individual.IndividualID, Fact.REPORT, individual.BirthDate, individual.BirthLocation)));
-            else
+            if (individual != null)
             {
-                foreach (Fact f in list)
-                    if (factTypes.Contains(f.FactTypeDescription) && !list.Any(x => excludedTypes.Contains(x.FactTypeDescription)))
-                        facts.Add(new DisplayFact(individual, f));
+                IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
+                if (factTypes.Count == 0 && excludedTypes != null && !list.Any(x => excludedTypes.Contains(x.FactTypeDescription)))
+                    facts.Add(new DisplayFact(individual, new Fact(individual.IndividualID, Fact.REPORT, individual.BirthDate, individual.BirthLocation)));
+                else
+                {
+                    foreach (Fact f in list)
+                        if (factTypes.Contains(f.FactTypeDescription) && !list.Any(x => excludedTypes.Contains(x.FactTypeDescription)))
+                            facts.Add(new DisplayFact(individual, f));
+                }
             }
         }
 
         void AddDuplicateFacts(Individual individual, List<string> factTypes)
         {
-            IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
-            foreach (string factType in factTypes)
+            if (individual != null)
             {
-                if (list.Count(x => x.FactTypeDescription.Equals(factType)) > 1)
-                    foreach (Fact f in list.Where(x => x.FactTypeDescription.Equals(factType)))
-                        facts.Add(new DisplayFact(individual, f));
+                IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
+                foreach (string factType in factTypes)
+                {
+                    if (list.Count(x => x.FactTypeDescription.Equals(factType)) > 1)
+                        foreach (Fact f in list.Where(x => x.FactTypeDescription.Equals(factType)))
+                            facts.Add(new DisplayFact(individual, f));
+                }
             }
         }
 

@@ -10,6 +10,7 @@ namespace FTAnalyzer.Forms
         public Chart()
         {
             InitializeComponent();
+            Top = Top + NativeMethods.TopTaskbarOffset;
         }
 
         public void BuildChildBirthProfile(int[,,] chartData)
