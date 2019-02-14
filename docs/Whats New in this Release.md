@@ -1,3 +1,7 @@
+#### Updated Release Version 7.3.7.6 14th February 2019  
+**Bugfix**  
+Remove Pupetteer nuget package  
+
 #### Updated Release Version 7.3.7.5 14th February 2019  
 **Updates**  
 Initial work on verification tab  
