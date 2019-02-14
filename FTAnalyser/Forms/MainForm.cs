@@ -29,7 +29,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.4.0.0-beta1";
+        public static string VERSION = "7.3.7.5";
 
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -49,6 +49,7 @@ namespace FTAnalyzer
         {
             InitializeComponent();
             loading = true;
+            FamilyTree.Instance.Version = $"v{VERSION}";
             var x= NativeMethods.GetTaskBarPos(); // Sets taskbar offset
             displayOptionsOnLoadToolStripMenuItem.Checked = GeneralSettings.Default.ReportOptions;
             treetopsRelation.MarriedToDB = false;

@@ -1,3 +1,14 @@
+#### Updated Release Version 7.3.7.5 14th February 2019  
+**Updates**  
+Initial work on verification tab  
+Add Race as a fact type  
+
+**Bugfixes**  
+Lost Cousins Duplicate checking was using surname instead of surname at date  
+1841 census pattern 3 book and folio wrong way round  
+Lost Cousins other names should allow spaces  
+Tweak Scottish Census Refs  
+
 #### Updated Release Version 7.3.7.4 7th February 2019  
 **Updates**  
 Forms forced to move down if taskbar at top  
