@@ -146,7 +146,7 @@ namespace FactDateTest
         [TestMethod()]
         public void InvalidGEDCOMFormats()
         {
-            TestSettings test = new TestSettings();
+            CustomSettings test = new CustomSettings();
             test.ClearNonGEDCOMDateSettings();
             FactDate target;
             // invalid GEDCOM format dates

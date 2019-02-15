@@ -508,7 +508,7 @@
     <Compile Include="Utilities\ScrollingRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Utilities\TestSettings.cs" />
+    <Compile Include="Utilities\CustomSettings.cs" />
     <Compile Include="Utilities\UIHelpers.cs" />
     <EmbeddedResource Include="Properties\Messages.resx">
       <Generator>ResXFileCodeGenerator</Generator>

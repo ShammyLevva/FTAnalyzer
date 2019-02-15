@@ -2,12 +2,12 @@
 
 namespace FTAnalyzer.Utilities
 {
-    public class TestSettings
+    public class CustomSettings
     {
         Properties.Settings _Settings;
         Properties.NonGedcomDate _NonGEDCOMDateSettings;
 
-        public TestSettings()
+        public CustomSettings()
         {
             _Settings = Properties.Settings.Default;
             _NonGEDCOMDateSettings = Properties.NonGedcomDate.Default;
