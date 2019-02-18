@@ -1000,9 +1000,9 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        void TreeViewLocations_BeforeCollapse(object sender, TreeViewCancelEventArgs e) => e.Cancel = (preventExpand && e.Action == TreeViewAction.Collapse);
+        void TreeViewLocations_BeforeCollapse(object sender, TreeViewCancelEventArgs e) => e.Cancel = preventExpand && e.Action == TreeViewAction.Collapse;
 
-        void TreeViewLocations_BeforeExpand(object sender, TreeViewCancelEventArgs e) => e.Cancel = (preventExpand && e.Action == TreeViewAction.Expand);
+        void TreeViewLocations_BeforeExpand(object sender, TreeViewCancelEventArgs e) => e.Cancel = preventExpand && e.Action == TreeViewAction.Expand;
 
         void TreeViewLocations_MouseDown(object sender, MouseEventArgs e) => preventExpand = e.Clicks > 1;
 
@@ -1260,6 +1260,7 @@ namespace FTAnalyzer
                     btnLC1881EW.Enabled = btnLC1881Scot.Enabled = btnLC1841EW.Enabled =
                         btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled =
                         btnLC1911EW.Enabled = ft.IndividualCount > 0;
+                    LCSubTabs.TabPages.Remove(LCVerifyTab); // hide verification tab as it does nothing
                     UpdateLCReports();
                     txtLCEmail.Text = (string)Application.UserAppDataRegistry.GetValue("LostCousinsEmail", string.Empty);
                     chkLCRootPersonConfirm.Text = $"Confirm {ft.RootPerson} as root Person";
