@@ -1,10 +1,13 @@
 #### Updated Release Version 7.4.0.0 26th May 2019  
 **Updates**  
-Core code now built using VS 2019 and .Net 4.8
+Core code now built using VS 2019 and .Net 4.8  
+Added recognition of Windows 10 1904  
+Added Birthday Effect Report  
+Added support for automatic searching of Scotland's People Census records  
 
 **Bugfixes**  
-Fixed residence as census facts where the date was after census date
-Descendants and Linked through marriage boxes now triggers updates on change
+Fixed residence as census facts where the date was after census date  
+Descendants and Linked through marriage boxes now triggers updates on change  
 
 #### Updated Release Version 7.3.7.7 14th February 2019  
 **Updates**  

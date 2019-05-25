@@ -259,7 +259,7 @@ namespace FTAnalyzer.Forms
             dgBMDReportSheet.Focus();
         }
 
-        private List<IDisplayColourBMD> BuildFilter(BMDColour toFind, bool all)
+        List<IDisplayColourBMD> BuildFilter(BMDColour toFind, bool all)
         {
             List<IDisplayColourBMD> result = new List<IDisplayColourBMD>();
             foreach (IDisplayColourBMD row in this.reportList)

@@ -3281,5 +3281,15 @@ namespace FTAnalyzer
         {
             SpecialMethods.VisitWebsite("http://www.ftanalyzer.com/GoogleAPI");
         }
+
+        void BirthdayEffectReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            StatisticsForm f = new StatisticsForm(StatisticsForm.StatisticType.BirthdayEffect);
+            DisposeDuplicateForms(f);
+            f.Show();
+            HourGlass(false);
+            Analytics.TrackAction(Analytics.MainFormAction, Analytics.BirthdayEffectEvent);
+        }
     }
 }

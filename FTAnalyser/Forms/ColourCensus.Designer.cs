@@ -102,13 +102,13 @@ namespace FTAnalyzer.Forms
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.cbCensusSearchProvider = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.cbRegion = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.cbFilter = new System.Windows.Forms.ToolStripComboBox();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
-            this.cbRegion = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgReportSheet)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -832,10 +832,28 @@ namespace FTAnalyzer.Forms
             "Ancestry",
             "Find My Past",
             "FreeCen",
-            "FamilySearch"});
+            "FamilySearch",
+            "Scotlands People"});
             this.cbCensusSearchProvider.Name = "cbCensusSearchProvider";
             this.cbCensusSearchProvider.Size = new System.Drawing.Size(121, 25);
             this.cbCensusSearchProvider.SelectedIndexChanged += new System.EventHandler(this.CbCensusSearchProvider_SelectedIndexChanged);
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(47, 22);
+            this.toolStripLabel3.Text = "Region:";
+            // 
+            // cbRegion
+            // 
+            this.cbRegion.Items.AddRange(new object[] {
+            ".com",
+            ".co.uk",
+            ".ca",
+            ".com.au"});
+            this.cbRegion.Name = "cbRegion";
+            this.cbRegion.Size = new System.Drawing.Size(121, 25);
+            this.cbRegion.Text = ".co.uk";
             // 
             // toolStripLabel2
             // 
@@ -878,23 +896,6 @@ namespace FTAnalyzer.Forms
             this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
             this.printPreviewDialog.Name = "printPreviewDialog";
             this.printPreviewDialog.Visible = false;
-            // 
-            // cbRegion
-            // 
-            this.cbRegion.Items.AddRange(new object[] {
-            ".com",
-            ".co.uk",
-            ".ca",
-            ".com.au"});
-            this.cbRegion.Name = "cbRegion";
-            this.cbRegion.Size = new System.Drawing.Size(121, 25);
-            this.cbRegion.Text = ".co.uk";
-            // 
-            // toolStripLabel3
-            // 
-            this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(47, 22);
-            this.toolStripLabel3.Text = "Region:";
             // 
             // ColourCensus
             // 

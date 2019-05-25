@@ -1,4 +1,5 @@
-﻿using FTAnalyzer.Utilities;
+﻿using FTAnalyzer.Filters;
+using FTAnalyzer.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ namespace FTAnalyzer.Forms
 {
     public partial class StatisticsForm : Form
     {
-        public enum StatisticType { CousinCount = 1, HowManyDirects = 2 };
+        public enum StatisticType { CousinCount = 1, HowManyDirects = 2, BirthdayEffect = 3 };
 
         StatisticType StatType { get; }
 
@@ -26,6 +27,9 @@ namespace FTAnalyzer.Forms
                     break;
                 case StatisticType.HowManyDirects:
                     HowManyDirectsReport();
+                    break;
+                case StatisticType.BirthdayEffect:
+                    BirthdayEffectReport();
                     break;
             }
         }
@@ -69,6 +73,38 @@ namespace FTAnalyzer.Forms
             tsStatusLabel.Visible = true;
         }
 
+        void BirthdayEffectReport()
+        {
+            List<Tuple<string, int>> birthdayEffect = FamilyTree.Instance.AllIndividuals.Where(x => x.BirthdayEffect).GroupBy(i => i.BirthMonth)
+                .Select(r => new Tuple<string, int>(r.Key, r.Count())).ToList();
+            List<Tuple<string, int>> exactDates = FamilyTree.Instance.AllIndividuals.Where(x => x.BirthDate.IsExact && x.DeathDate.IsExact).GroupBy(i => i.BirthMonth)
+                .Select(r => new Tuple<string, int>(r.Key, r.Count())).ToList();
+            birthdayEffect.Sort();
+            exactDates.Sort();
+            List<Tuple<string, string, string>> result = new List<Tuple<string, string, string>>();
+            for(int i=0; i<12; i++)
+            {
+                var column2 = $"{birthdayEffect[i].Item2}/{exactDates[i].Item2}";
+                float percent = (float)birthdayEffect[i].Item2 / exactDates[i].Item2;
+                result.Add(new Tuple<string, string, string>(birthdayEffect[i].Item1, column2, string.Format("{0:P2}",percent)));
+            }
+            dgStatistics.DataSource = new SortableBindingList<Tuple<string, string, string>>(result);
+            dgStatistics.Columns[0].Width = 150;
+            dgStatistics.Columns[0].SortMode = DataGridViewColumnSortMode.Automatic;
+            dgStatistics.Columns[0].HeaderText = "Birth Month";
+            dgStatistics.Columns[1].Width = 80;
+            dgStatistics.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgStatistics.Columns[1].SortMode = DataGridViewColumnSortMode.Automatic;
+            dgStatistics.Columns[1].HeaderText = "Died Near Birthday";
+            dgStatistics.Columns[2].Width = 80;
+            dgStatistics.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgStatistics.Columns[2].SortMode = DataGridViewColumnSortMode.Automatic;
+            dgStatistics.Columns[2].HeaderText = "Percentage";
+            dgStatistics.Sort(dgStatistics.Columns[0], ListSortDirection.Ascending);
+            tsStatusLabel.Text = "Double click shows those born who died within 15 days of birthday.";
+            tsStatusLabel.Visible = true;
+        }
+
         void DgStatistics_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
@@ -88,6 +124,17 @@ namespace FTAnalyzer.Forms
                     {
                         People form = new People();
                         form.ListRelationToRoot(row.Item1);
+                        form.Show();
+                    }
+                }
+                else if(StatType == StatisticType.BirthdayEffect)
+                {
+                    if (dgStatistics.Rows[e.RowIndex].DataBoundItem is Tuple<string, string, string> row)
+                    {
+                        People form = new People();
+                        bool filter(Individual x) => x.BirthdayEffect && x.BirthMonth == row.Item1;
+                        List<Individual> individuals = FamilyTree.Instance.AllIndividuals.Filter(filter).ToList();
+                        form.SetIndividuals(individuals, $"Indiviudals who died within 15 days of their birthday in {row.Item1.Substring(5)}");
                         form.Show();
                     }
                 }

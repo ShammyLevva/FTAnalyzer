@@ -72,6 +72,8 @@ namespace FTAnalyzer.Forms
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.cbBMDSearchProvider = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.cbRegion = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.cbFilter = new System.Windows.Forms.ToolStripComboBox();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
@@ -79,8 +81,6 @@ namespace FTAnalyzer.Forms
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuViewFacts = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-            this.cbRegion = new System.Windows.Forms.ToolStripComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgBMDReportSheet)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -460,10 +460,33 @@ namespace FTAnalyzer.Forms
             "Ancestry",
             "Find My Past",
             "FreeBMD",
-            "FamilySearch"});
+            "FamilySearch",
+            "Scotlands People"});
             this.cbBMDSearchProvider.Name = "cbBMDSearchProvider";
             this.cbBMDSearchProvider.Size = new System.Drawing.Size(121, 25);
             this.cbBMDSearchProvider.SelectedIndexChanged += new System.EventHandler(this.CbCensusSearchProvider_SelectedIndexChanged);
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(47, 22);
+            this.toolStripLabel3.Text = "Region:";
+            // 
+            // cbRegion
+            // 
+            this.cbRegion.AutoCompleteCustomSource.AddRange(new string[] {
+            ".com",
+            ".co.uk",
+            ".ca",
+            ".com.au"});
+            this.cbRegion.Items.AddRange(new object[] {
+            ".com",
+            ".co.uk",
+            ".ca",
+            ".com.au"});
+            this.cbRegion.Name = "cbRegion";
+            this.cbRegion.Size = new System.Drawing.Size(121, 25);
+            this.cbRegion.Text = ".co.uk";
             // 
             // toolStripLabel2
             // 
@@ -531,28 +554,6 @@ namespace FTAnalyzer.Forms
             this.mnuViewFacts.Size = new System.Drawing.Size(189, 22);
             this.mnuViewFacts.Text = "View Individuals Facts";
             this.mnuViewFacts.Click += new System.EventHandler(this.MnuViewFacts_Click);
-            // 
-            // toolStripLabel3
-            // 
-            this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(47, 22);
-            this.toolStripLabel3.Text = "Region:";
-            // 
-            // cbRegion
-            // 
-            this.cbRegion.AutoCompleteCustomSource.AddRange(new string[] {
-            ".com",
-            ".co.uk",
-            ".ca",
-            ".com.au"});
-            this.cbRegion.Items.AddRange(new object[] {
-            ".com",
-            ".co.uk",
-            ".ca",
-            ".com.au"});
-            this.cbRegion.Name = "cbRegion";
-            this.cbRegion.Size = new System.Drawing.Size(121, 25);
-            this.cbRegion.Text = ".co.uk";
             // 
             // ColourBMD
             // 
