@@ -29,9 +29,9 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.3.7.7";
+        public static string VERSION = "7.4.0.0";
 
-        static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         Cursor storedCursor = Cursors.Default;
         FamilyTree ft = FamilyTree.Instance;
@@ -287,7 +287,6 @@ namespace FTAnalyzer
             tabCtrlLocations.SelectedTab = tabTreeView; // otherwise totals etc look wrong
             treeViewLocations.Nodes.Clear();
             Text = "Family Tree Analyzer v" + VERSION;
-            Application.DoEvents();
         }
 
         void SetupGridControls()

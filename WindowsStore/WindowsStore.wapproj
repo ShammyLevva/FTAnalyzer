@@ -38,8 +38,8 @@
     <TargetPlatformVersion>10.0.17763.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <PackageCertificateKeyFile>WindowsStore_TemporaryKey.pfx</PackageCertificateKeyFile>
     <EntryPointProjectUniqueName>..\FTAnalyser\FTAnalyzer.Windows.csproj</EntryPointProjectUniqueName>
+    <PackageCertificateThumbprint>544B2C041CECDDF973974E4355A5496DE4EA94F0</PackageCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

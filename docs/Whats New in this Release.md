@@ -1,3 +1,24 @@
+#### Updated Release Version 7.4.0.0 26th May 2019  
+**Updates**  
+Core code now built using VS 2019 and .Net 4.8
+
+**Bugfixes**  
+Fixed residence as census facts where the date was after census date
+Descendants and Linked through marriage boxes now triggers updates on change
+
+#### Updated Release Version 7.3.7.7 14th February 2019  
+**Updates**  
+Initial work on verification tab  
+Add Race as a fact type  
+
+**Bugfixes**  
+Lost Cousins Duplicate checking was using surname instead of surname at date  
+1841 census pattern 3 book and folio wrong way round  
+Lost Cousins other names should allow spaces  
+Tweak Scottish Census Refs  
+Fix crash on loading v7.3.7.5
+Fix multiple dashes in name
+
 #### Updated Release Version 7.3.7.6 14th February 2019  
 **Bugfix**  
 Remove Pupetteer nuget package   
