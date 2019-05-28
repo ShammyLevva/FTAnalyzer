@@ -5,6 +5,7 @@ Added recognition of Windows 10 1904
 Added Birthday Effect Report  
 Added support for automatic searching of Scotland's People Census records  
 Added support for automatic searching of Scotland's People BMD records  
+Added FamilyIDs as Parent & Child to export Individuals to Excel
 
 **Bugfixes**  
 Fixed residence as census facts where the date was after census date  
