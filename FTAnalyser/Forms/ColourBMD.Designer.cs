@@ -38,27 +38,6 @@ namespace FTAnalyzer.Forms
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColourBMD));
             this.dgBMDReportSheet = new System.Windows.Forms.DataGridView();
-            this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Forenames = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Relation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Birth = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BaptChri = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Marriage1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Marriage2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Marriage3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Death = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CremBuri = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DeathDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FirstMarriage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SecondMarriage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ThirdMarriage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BirthLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DeathLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BestLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -81,6 +60,26 @@ namespace FTAnalyzer.Forms
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuViewFacts = new System.Windows.Forms.ToolStripMenuItem();
+            this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Forenames = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Relation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Birth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BaptChri = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Marriage1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Marriage2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Marriage3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Death = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CremBuri = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DeathDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FirstMarriage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SecondMarriage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ThirdMarriage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BirthLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DeathLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgBMDReportSheet)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -117,7 +116,6 @@ namespace FTAnalyzer.Forms
             this.ThirdMarriage,
             this.BirthLocation,
             this.DeathLocation,
-            this.BestLocation,
             this.Ahnentafel});
             this.dgBMDReportSheet.Location = new System.Drawing.Point(0, 28);
             this.dgBMDReportSheet.MultiSelect = false;
@@ -129,218 +127,6 @@ namespace FTAnalyzer.Forms
             this.dgBMDReportSheet.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.DgBMDReportSheet_CellContextMenuStripNeeded);
             this.dgBMDReportSheet.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgReportSheet_CellDoubleClick);
             this.dgBMDReportSheet.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgReportSheet_CellFormatting);
-            // 
-            // IndividualID
-            // 
-            this.IndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.IndividualID.DataPropertyName = "IndividualID";
-            this.IndividualID.HeaderText = "Ind. ID";
-            this.IndividualID.MinimumWidth = 50;
-            this.IndividualID.Name = "IndividualID";
-            this.IndividualID.ReadOnly = true;
-            this.IndividualID.Width = 50;
-            // 
-            // Forenames
-            // 
-            this.Forenames.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Forenames.DataPropertyName = "Forenames";
-            this.Forenames.HeaderText = "Forenames";
-            this.Forenames.MinimumWidth = 100;
-            this.Forenames.Name = "Forenames";
-            this.Forenames.ReadOnly = true;
-            // 
-            // Surname
-            // 
-            this.Surname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Surname.DataPropertyName = "Surname";
-            this.Surname.HeaderText = "Surname";
-            this.Surname.MinimumWidth = 75;
-            this.Surname.Name = "Surname";
-            this.Surname.ReadOnly = true;
-            this.Surname.Width = 75;
-            // 
-            // Relation
-            // 
-            this.Relation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Relation.DataPropertyName = "Relation";
-            this.Relation.HeaderText = "Relation";
-            this.Relation.MinimumWidth = 105;
-            this.Relation.Name = "Relation";
-            this.Relation.ReadOnly = true;
-            this.Relation.Width = 105;
-            // 
-            // RelationToRoot
-            // 
-            this.RelationToRoot.DataPropertyName = "RelationToRoot";
-            this.RelationToRoot.HeaderText = "Relation To Root";
-            this.RelationToRoot.MinimumWidth = 100;
-            this.RelationToRoot.Name = "RelationToRoot";
-            this.RelationToRoot.ReadOnly = true;
-            this.RelationToRoot.Width = 150;
-            // 
-            // Birth
-            // 
-            this.Birth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Birth.DataPropertyName = "Birth";
-            this.Birth.HeaderText = "Birth";
-            this.Birth.MinimumWidth = 60;
-            this.Birth.Name = "Birth";
-            this.Birth.ReadOnly = true;
-            this.Birth.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Birth.Width = 60;
-            // 
-            // BaptChri
-            // 
-            this.BaptChri.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.BaptChri.DataPropertyName = "BaptChri";
-            this.BaptChri.HeaderText = "Baptism Christening";
-            this.BaptChri.MinimumWidth = 62;
-            this.BaptChri.Name = "BaptChri";
-            this.BaptChri.ReadOnly = true;
-            this.BaptChri.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.BaptChri.Width = 62;
-            // 
-            // Marriage1
-            // 
-            this.Marriage1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Marriage1.DataPropertyName = "Marriage1";
-            this.Marriage1.HeaderText = "Marriage No. 1";
-            this.Marriage1.MinimumWidth = 60;
-            this.Marriage1.Name = "Marriage1";
-            this.Marriage1.ReadOnly = true;
-            this.Marriage1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Marriage1.Width = 60;
-            // 
-            // Marriage2
-            // 
-            this.Marriage2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Marriage2.DataPropertyName = "Marriage2";
-            this.Marriage2.HeaderText = "Marriage No. 2";
-            this.Marriage2.MinimumWidth = 60;
-            this.Marriage2.Name = "Marriage2";
-            this.Marriage2.ReadOnly = true;
-            this.Marriage2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Marriage2.Width = 60;
-            // 
-            // Marriage3
-            // 
-            this.Marriage3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Marriage3.DataPropertyName = "Marriage3";
-            this.Marriage3.HeaderText = "Marriage No. 3";
-            this.Marriage3.MinimumWidth = 60;
-            this.Marriage3.Name = "Marriage3";
-            this.Marriage3.ReadOnly = true;
-            this.Marriage3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Marriage3.Width = 60;
-            // 
-            // Death
-            // 
-            this.Death.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Death.DataPropertyName = "Death";
-            this.Death.HeaderText = "Death";
-            this.Death.MinimumWidth = 60;
-            this.Death.Name = "Death";
-            this.Death.ReadOnly = true;
-            this.Death.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Death.Width = 60;
-            // 
-            // CremBuri
-            // 
-            this.CremBuri.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.CremBuri.DataPropertyName = "CremBuri";
-            this.CremBuri.HeaderText = "Burial Cremation";
-            this.CremBuri.MinimumWidth = 60;
-            this.CremBuri.Name = "CremBuri";
-            this.CremBuri.ReadOnly = true;
-            this.CremBuri.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.CremBuri.Width = 60;
-            // 
-            // BirthDate
-            // 
-            this.BirthDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.BirthDate.DataPropertyName = "BirthDate";
-            this.BirthDate.HeaderText = "Birth Date";
-            this.BirthDate.MinimumWidth = 50;
-            this.BirthDate.Name = "BirthDate";
-            this.BirthDate.ReadOnly = true;
-            this.BirthDate.Width = 150;
-            // 
-            // DeathDate
-            // 
-            this.DeathDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.DeathDate.DataPropertyName = "DeathDate";
-            this.DeathDate.HeaderText = "Death Date";
-            this.DeathDate.MinimumWidth = 50;
-            this.DeathDate.Name = "DeathDate";
-            this.DeathDate.ReadOnly = true;
-            this.DeathDate.Width = 150;
-            // 
-            // FirstMarriage
-            // 
-            this.FirstMarriage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.FirstMarriage.DataPropertyName = "FirstMarriage";
-            this.FirstMarriage.HeaderText = "First Marriage";
-            this.FirstMarriage.MinimumWidth = 100;
-            this.FirstMarriage.Name = "FirstMarriage";
-            this.FirstMarriage.ReadOnly = true;
-            // 
-            // SecondMarriage
-            // 
-            this.SecondMarriage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.SecondMarriage.DataPropertyName = "SecondMarriage";
-            this.SecondMarriage.HeaderText = "Second Marriage";
-            this.SecondMarriage.MinimumWidth = 100;
-            this.SecondMarriage.Name = "SecondMarriage";
-            this.SecondMarriage.ReadOnly = true;
-            // 
-            // ThirdMarriage
-            // 
-            this.ThirdMarriage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.ThirdMarriage.DataPropertyName = "ThirdMarriage";
-            this.ThirdMarriage.HeaderText = "Third Marriage";
-            this.ThirdMarriage.MinimumWidth = 100;
-            this.ThirdMarriage.Name = "ThirdMarriage";
-            this.ThirdMarriage.ReadOnly = true;
-            // 
-            // BirthLocation
-            // 
-            this.BirthLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.BirthLocation.DataPropertyName = "BirthLocation";
-            this.BirthLocation.HeaderText = "Birth Location";
-            this.BirthLocation.MinimumWidth = 120;
-            this.BirthLocation.Name = "BirthLocation";
-            this.BirthLocation.ReadOnly = true;
-            this.BirthLocation.Width = 120;
-            // 
-            // DeathLocation
-            // 
-            this.DeathLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.DeathLocation.DataPropertyName = "DeathLocation";
-            this.DeathLocation.HeaderText = "Death Location";
-            this.DeathLocation.MinimumWidth = 120;
-            this.DeathLocation.Name = "DeathLocation";
-            this.DeathLocation.ReadOnly = true;
-            this.DeathLocation.Width = 120;
-            // 
-            // BestLocation
-            // 
-            this.BestLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.BestLocation.DataPropertyName = "BestLocation";
-            this.BestLocation.HeaderText = "Best Location";
-            this.BestLocation.MinimumWidth = 120;
-            this.BestLocation.Name = "BestLocation";
-            this.BestLocation.ReadOnly = true;
-            this.BestLocation.Width = 120;
-            // 
-            // Ahnentafel
-            // 
-            this.Ahnentafel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Ahnentafel.DataPropertyName = "Ahnentafel";
-            this.Ahnentafel.HeaderText = "Ahnentafel";
-            this.Ahnentafel.MinimumWidth = 20;
-            this.Ahnentafel.Name = "Ahnentafel";
-            this.Ahnentafel.ReadOnly = true;
-            this.Ahnentafel.Width = 83;
             // 
             // statusStrip
             // 
@@ -555,6 +341,208 @@ namespace FTAnalyzer.Forms
             this.mnuViewFacts.Text = "View Individuals Facts";
             this.mnuViewFacts.Click += new System.EventHandler(this.MnuViewFacts_Click);
             // 
+            // IndividualID
+            // 
+            this.IndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.IndividualID.DataPropertyName = "IndividualID";
+            this.IndividualID.HeaderText = "Ind. ID";
+            this.IndividualID.MinimumWidth = 50;
+            this.IndividualID.Name = "IndividualID";
+            this.IndividualID.ReadOnly = true;
+            this.IndividualID.Width = 50;
+            // 
+            // Forenames
+            // 
+            this.Forenames.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Forenames.DataPropertyName = "Forenames";
+            this.Forenames.HeaderText = "Forenames";
+            this.Forenames.MinimumWidth = 100;
+            this.Forenames.Name = "Forenames";
+            this.Forenames.ReadOnly = true;
+            // 
+            // Surname
+            // 
+            this.Surname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Surname.DataPropertyName = "Surname";
+            this.Surname.HeaderText = "Surname";
+            this.Surname.MinimumWidth = 75;
+            this.Surname.Name = "Surname";
+            this.Surname.ReadOnly = true;
+            this.Surname.Width = 75;
+            // 
+            // Relation
+            // 
+            this.Relation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Relation.DataPropertyName = "Relation";
+            this.Relation.HeaderText = "Relation";
+            this.Relation.MinimumWidth = 105;
+            this.Relation.Name = "Relation";
+            this.Relation.ReadOnly = true;
+            this.Relation.Width = 105;
+            // 
+            // RelationToRoot
+            // 
+            this.RelationToRoot.DataPropertyName = "RelationToRoot";
+            this.RelationToRoot.HeaderText = "Relation To Root";
+            this.RelationToRoot.MinimumWidth = 100;
+            this.RelationToRoot.Name = "RelationToRoot";
+            this.RelationToRoot.ReadOnly = true;
+            this.RelationToRoot.Width = 150;
+            // 
+            // Birth
+            // 
+            this.Birth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Birth.DataPropertyName = "Birth";
+            this.Birth.HeaderText = "Birth";
+            this.Birth.MinimumWidth = 60;
+            this.Birth.Name = "Birth";
+            this.Birth.ReadOnly = true;
+            this.Birth.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Birth.Width = 60;
+            // 
+            // BaptChri
+            // 
+            this.BaptChri.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.BaptChri.DataPropertyName = "BaptChri";
+            this.BaptChri.HeaderText = "Baptism Christening";
+            this.BaptChri.MinimumWidth = 62;
+            this.BaptChri.Name = "BaptChri";
+            this.BaptChri.ReadOnly = true;
+            this.BaptChri.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.BaptChri.Width = 62;
+            // 
+            // Marriage1
+            // 
+            this.Marriage1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Marriage1.DataPropertyName = "Marriage1";
+            this.Marriage1.HeaderText = "Marriage No. 1";
+            this.Marriage1.MinimumWidth = 60;
+            this.Marriage1.Name = "Marriage1";
+            this.Marriage1.ReadOnly = true;
+            this.Marriage1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Marriage1.Width = 60;
+            // 
+            // Marriage2
+            // 
+            this.Marriage2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Marriage2.DataPropertyName = "Marriage2";
+            this.Marriage2.HeaderText = "Marriage No. 2";
+            this.Marriage2.MinimumWidth = 60;
+            this.Marriage2.Name = "Marriage2";
+            this.Marriage2.ReadOnly = true;
+            this.Marriage2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Marriage2.Width = 60;
+            // 
+            // Marriage3
+            // 
+            this.Marriage3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Marriage3.DataPropertyName = "Marriage3";
+            this.Marriage3.HeaderText = "Marriage No. 3";
+            this.Marriage3.MinimumWidth = 60;
+            this.Marriage3.Name = "Marriage3";
+            this.Marriage3.ReadOnly = true;
+            this.Marriage3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Marriage3.Width = 60;
+            // 
+            // Death
+            // 
+            this.Death.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Death.DataPropertyName = "Death";
+            this.Death.HeaderText = "Death";
+            this.Death.MinimumWidth = 60;
+            this.Death.Name = "Death";
+            this.Death.ReadOnly = true;
+            this.Death.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Death.Width = 60;
+            // 
+            // CremBuri
+            // 
+            this.CremBuri.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CremBuri.DataPropertyName = "CremBuri";
+            this.CremBuri.HeaderText = "Burial Cremation";
+            this.CremBuri.MinimumWidth = 60;
+            this.CremBuri.Name = "CremBuri";
+            this.CremBuri.ReadOnly = true;
+            this.CremBuri.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.CremBuri.Width = 60;
+            // 
+            // BirthDate
+            // 
+            this.BirthDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.BirthDate.DataPropertyName = "BirthDate";
+            this.BirthDate.HeaderText = "Birth Date";
+            this.BirthDate.MinimumWidth = 50;
+            this.BirthDate.Name = "BirthDate";
+            this.BirthDate.ReadOnly = true;
+            this.BirthDate.Width = 150;
+            // 
+            // DeathDate
+            // 
+            this.DeathDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.DeathDate.DataPropertyName = "DeathDate";
+            this.DeathDate.HeaderText = "Death Date";
+            this.DeathDate.MinimumWidth = 50;
+            this.DeathDate.Name = "DeathDate";
+            this.DeathDate.ReadOnly = true;
+            this.DeathDate.Width = 150;
+            // 
+            // FirstMarriage
+            // 
+            this.FirstMarriage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.FirstMarriage.DataPropertyName = "FirstMarriage";
+            this.FirstMarriage.HeaderText = "First Marriage";
+            this.FirstMarriage.MinimumWidth = 100;
+            this.FirstMarriage.Name = "FirstMarriage";
+            this.FirstMarriage.ReadOnly = true;
+            // 
+            // SecondMarriage
+            // 
+            this.SecondMarriage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.SecondMarriage.DataPropertyName = "SecondMarriage";
+            this.SecondMarriage.HeaderText = "Second Marriage";
+            this.SecondMarriage.MinimumWidth = 100;
+            this.SecondMarriage.Name = "SecondMarriage";
+            this.SecondMarriage.ReadOnly = true;
+            // 
+            // ThirdMarriage
+            // 
+            this.ThirdMarriage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ThirdMarriage.DataPropertyName = "ThirdMarriage";
+            this.ThirdMarriage.HeaderText = "Third Marriage";
+            this.ThirdMarriage.MinimumWidth = 100;
+            this.ThirdMarriage.Name = "ThirdMarriage";
+            this.ThirdMarriage.ReadOnly = true;
+            // 
+            // BirthLocation
+            // 
+            this.BirthLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.BirthLocation.DataPropertyName = "BirthLocation";
+            this.BirthLocation.HeaderText = "Birth Location";
+            this.BirthLocation.MinimumWidth = 120;
+            this.BirthLocation.Name = "BirthLocation";
+            this.BirthLocation.ReadOnly = true;
+            this.BirthLocation.Width = 120;
+            // 
+            // DeathLocation
+            // 
+            this.DeathLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.DeathLocation.DataPropertyName = "DeathLocation";
+            this.DeathLocation.HeaderText = "Death Location";
+            this.DeathLocation.MinimumWidth = 120;
+            this.DeathLocation.Name = "DeathLocation";
+            this.DeathLocation.ReadOnly = true;
+            this.DeathLocation.Width = 120;
+            // 
+            // Ahnentafel
+            // 
+            this.Ahnentafel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Ahnentafel.DataPropertyName = "Ahnentafel";
+            this.Ahnentafel.HeaderText = "Ahnentafel";
+            this.Ahnentafel.MinimumWidth = 20;
+            this.Ahnentafel.Name = "Ahnentafel";
+            this.Ahnentafel.ReadOnly = true;
+            this.Ahnentafel.Width = 83;
+            // 
             // ColourBMD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -602,6 +590,8 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem mnuViewFacts;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+        private System.Windows.Forms.ToolStripComboBox cbRegion;
         private System.Windows.Forms.DataGridViewTextBoxColumn IndividualID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Forenames;
         private System.Windows.Forms.DataGridViewTextBoxColumn Surname;
@@ -621,9 +611,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn ThirdMarriage;
         private System.Windows.Forms.DataGridViewTextBoxColumn BirthLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn DeathLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BestLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ahnentafel;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
-        private System.Windows.Forms.ToolStripComboBox cbRegion;
     }
 }

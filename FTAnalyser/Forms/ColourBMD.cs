@@ -220,22 +220,32 @@ namespace FTAnalyzer.Forms
                         Individual ind = ft.GetIndividual(person.IndividualID);
                         if (e.ColumnIndex == birthColumnIndex || e.ColumnIndex == birthColumnIndex + 1)
                         {
-                            ft.SearchBMD(FamilyTree.SearchType.BIRTH, ind, ind.BirthDate, cbBMDSearchProvider.SelectedIndex, cbRegion.Text);
+                            ft.SearchBMD(FamilyTree.SearchType.BIRTH, ind, ind.BirthDate, cbBMDSearchProvider.SelectedIndex, cbRegion.Text, null);
                         }
                         else if (e.ColumnIndex >= birthColumnIndex + 2 && e.ColumnIndex <= birthColumnIndex + 4)
                         {
                             FactDate marriageDate = FactDate.UNKNOWN_DATE;
+                            Individual spouse = null;
                             if (e.ColumnIndex == birthColumnIndex + 2)
+                            {
                                 marriageDate = ind.FirstMarriageDate;
+                                spouse = ind.FirstSpouse;
+                            }
                             if (e.ColumnIndex == birthColumnIndex + 3)
+                            {
                                 marriageDate = ind.SecondMarriageDate;
+                                spouse = ind.SecondSpouse;
+                            }
                             if (e.ColumnIndex == birthColumnIndex + 4)
+                            {
                                 marriageDate = ind.ThirdMarriageDate;
-                            ft.SearchBMD(FamilyTree.SearchType.MARRIAGE, ind, marriageDate, cbBMDSearchProvider.SelectedIndex, cbRegion.Text);
+                                spouse = ind.ThirdSpouse;
+                            }
+                            ft.SearchBMD(FamilyTree.SearchType.MARRIAGE, ind, marriageDate, cbBMDSearchProvider.SelectedIndex, cbRegion.Text, spouse);
                         }
                         else if (e.ColumnIndex == burialColumnIndex || e.ColumnIndex == burialColumnIndex - 1)
                         {
-                            ft.SearchBMD(FamilyTree.SearchType.DEATH, ind, ind.DeathDate, cbBMDSearchProvider.SelectedIndex, cbRegion.Text);
+                            ft.SearchBMD(FamilyTree.SearchType.DEATH, ind, ind.DeathDate, cbBMDSearchProvider.SelectedIndex, cbRegion.Text, null);
                         }
                     }
                 }

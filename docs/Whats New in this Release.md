@@ -4,6 +4,7 @@ Core code now built using VS 2019 and .Net 4.8
 Added recognition of Windows 10 1904  
 Added Birthday Effect Report  
 Added support for automatic searching of Scotland's People Census records  
+Added support for automatic searching of Scotland's People BMD records  
 
 **Bugfixes**  
 Fixed residence as census facts where the date was after census date  
