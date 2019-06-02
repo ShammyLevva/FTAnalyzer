@@ -29,7 +29,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.4.0.0";
+        public static string VERSION = "7.4.0.1";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -393,6 +393,7 @@ namespace FTAnalyzer
             mnuLooseDeathsToExcel.Enabled = enabled;
             mnuChildAgeProfiles.Enabled = enabled;
             mnuOlderParents.Enabled = enabled;
+            mnuBirthdayEffect.Enabled = enabled;
             mnuPossibleCensusFacts.Enabled = enabled;
             mnuShowTimeline.Enabled = enabled;
             mnuGeocodeLocations.Enabled = enabled;

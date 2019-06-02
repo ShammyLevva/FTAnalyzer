@@ -1,3 +1,10 @@
+#### Updated Release Version 7.4.0.1 2nd Jun 2019  
+**Updates**  
+
+**Bugfixes**  
+Birthday Effect Menu wasn't disabled when no file was loaded  
+Incomplete census refs in sources were getting ignored  
+
 #### Updated Release Version 7.4.0.0 26th May 2019  
 **Updates**  
 Core code now built using VS 2019 and .Net 4.8  
