@@ -33,6 +33,7 @@ namespace SharpMap.Layers
     [Serializable]
     public class GdalRasterLayerCachingProxy : Layer, ICanQueryLayer
     {
+        [Serializable]
         private class ViewPort
         {
             public Envelope BoundingBox { get; set; }
