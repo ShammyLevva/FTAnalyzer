@@ -3015,7 +3015,7 @@ namespace FTAnalyzer
             this.tabErrorsFixes.Name = "tabErrorsFixes";
             this.tabErrorsFixes.Size = new System.Drawing.Size(1084, 443);
             this.tabErrorsFixes.TabIndex = 19;
-            this.tabErrorsFixes.Text = "Errors/FIxes";
+            this.tabErrorsFixes.Text = "Errors/Fixes";
             this.tabErrorsFixes.UseVisualStyleBackColor = true;
             // 
             // tabErrorFixSelector

@@ -83,7 +83,6 @@ namespace FTAnalyzer
 
         async void CheckWebVersion()
         {
-            string appPath = Application.ExecutablePath;
             Settings.Default.StartTime = DateTime.Now;
             Settings.Default.Save();
             try
@@ -693,7 +692,7 @@ namespace FTAnalyzer
         void UpdateDataErrorsDisplay()
         {
             HourGlass(true);
-            SortableBindingList<DataError> errors = DataErrors(ckbDataErrors);
+            SortableBindingList<IDisplayDataError> errors = DataErrors(ckbDataErrors);
             dgDataErrors.DataSource = errors;
             tsCountLabel.Text = Messages.Count + errors.Count;
             tsHintsLabel.Text = Messages.Hints_Individual;
@@ -760,15 +759,15 @@ namespace FTAnalyzer
             UpdateDataErrorsDisplay();
         }
 
-        public SortableBindingList<DataError> DataErrors(CheckedListBox list)
+        public static SortableBindingList<IDisplayDataError> DataErrors(CheckedListBox list)
         {
-            var errors = new List<DataError>();
+            var errors = new List<IDisplayDataError>();
             foreach (int indexChecked in list.CheckedIndices)
             {
                 DataErrorGroup item = (DataErrorGroup)list.Items[indexChecked];
                 errors.AddRange(item.Errors);
             }
-            return new SortableBindingList<DataError>(errors);
+            return new SortableBindingList<IDisplayDataError>(errors);
         }
         #endregion
 
@@ -1749,7 +1748,7 @@ namespace FTAnalyzer
                 else if (tabSelector.SelectedTab == tabErrorsFixes)
                 {
                     if (tabErrorFixSelector.SelectedTab == tabDuplicates)
-                        PrintDataGrid(Orientation.Landscape, dgDuplicates, "List of Potential Duplicates");
+                        PrintDataGrid(Orientation.Landscape, dgDuplicates, "ist of Potential Duplicates");
                     else if (tabErrorFixSelector.SelectedTab == tabDataErrors)
                         PrintDataGrid(Orientation.Landscape, dgDataErrors, "List of Data Errors");
                     else if (tabErrorFixSelector.SelectedTab == tabLooseBirths)
@@ -2705,7 +2704,7 @@ namespace FTAnalyzer
         void BtnAdvancedMissingData_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            List<IDisplayMissingData> list = ft.MissingData(relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily);
+            //List<IDisplayMissingData> list = ft.MissingData(relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily);
             MissingData rs = new MissingData();
             DisposeDuplicateForms(rs);
             rs.Show();
@@ -3109,7 +3108,7 @@ namespace FTAnalyzer
 
         #region Load CSV Location Data
 
-        public void LoadLocationData(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
+        public static void LoadLocationData(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
         {
             string csvFilename = string.Empty;
             pb.Visible = true;
@@ -3141,7 +3140,7 @@ namespace FTAnalyzer
             label.Text = string.Empty;
         }
 
-        public void ReadTNGdata(ToolStripProgressBar pb, string tngFilename)
+        public static void ReadTNGdata(ToolStripProgressBar pb, string tngFilename)
         {
             int rowCount = 0;
             int lineCount = File.ReadLines(tngFilename).Count();
@@ -3166,7 +3165,7 @@ namespace FTAnalyzer
             }
         }
 
-        public void ReadCSVdata(ToolStripProgressBar pb, string csvFilename)
+        public static void ReadCSVdata(ToolStripProgressBar pb, string csvFilename)
         {
             int rowCount = 0;
             int lineCount = File.ReadLines(csvFilename).Count();
