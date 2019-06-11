@@ -1,9 +1,15 @@
-#### Updated Release Version 7.4.0.1 2nd Jun 2019  
+#### Updated Release Version 7.4.0.1 10th Jun 2019  
 **Updates**  
+Updated referenced packages to latest versions  
+Added new code analysers 
 
 **Bugfixes**  
 Birthday Effect Menu wasn't disabled when no file was loaded  
 Incomplete census refs in sources were getting ignored  
+Incomplete census refs in Lost Cousins were looking up wrong census year  
+Typo in Error/Fixes tab  
+The internal column IsFamily shouldn't have been displayed on Data Errors report  
+
 
 #### Updated Release Version 7.4.0.0 26th May 2019  
 **Updates**  

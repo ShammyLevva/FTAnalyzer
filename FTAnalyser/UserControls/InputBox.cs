@@ -6,13 +6,9 @@ using System.Drawing;
 
 namespace FTAnalyzer
 {
-    public class InputBox
+    public static class InputBox
     {
-        public InputBox()
-        {
-        }
-
-        public static DialogResult Show(string title, string promptText, ref string value)
+         public static DialogResult Show(string title, string promptText, ref string value)
         {
             Form form = new Form();
             Label label = new Label();

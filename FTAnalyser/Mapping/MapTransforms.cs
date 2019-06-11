@@ -76,7 +76,7 @@ namespace FTAnalyzer.Mapping
 
         static ICoordinateTransformation wgs84toGoogle;
 
-        static CoordinateTransformationFactory ctFact = new CoordinateTransformationFactory();
+        static readonly CoordinateTransformationFactory ctFact = new CoordinateTransformationFactory();
         static readonly CoordinateSystemFactory csFact = new CoordinateSystemFactory();
 
         static ICoordinateTransformation Transform() => ctFact.CreateFromCoordinateSystems(GeographicCoordinateSystem.WGS84, GetEPSG900913(csFact));
