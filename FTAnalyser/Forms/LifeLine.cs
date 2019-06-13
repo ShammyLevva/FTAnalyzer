@@ -173,9 +173,9 @@ namespace FTAnalyzer.Forms
             foreach (DataGridViewRow row in dgIndividuals.SelectedRows)
             {
                 Individual ind = row.DataBoundItem as Individual;
-                if (ind.AllGeocodedFacts.Count > 0)
+                if (ind.AllLifeLineFacts.Count > 0)
                 {
-                    displayFacts.AddRange(ind.AllGeocodedFacts);
+                    displayFacts.AddRange(ind.AllLifeLineFacts);
                     MapLifeLine line = new MapLifeLine(ind);
                     line.AddFeatureDataRow(lifelines);
                     points.AddFeatureDataRows(ind);

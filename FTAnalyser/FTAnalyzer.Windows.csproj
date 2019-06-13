@@ -55,7 +55,7 @@
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>FTAnalyzer.Windows1.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>ftanalyzer.windows.ruleset</CodeAnalysisRuleSet>
     <LangVersion>7.3</LangVersion>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -72,7 +72,7 @@
     <Prefer32Bit>false</Prefer32Bit>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>FTAnalyzer.Windows1.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>ftanalyzer.windows.ruleset</CodeAnalysisRuleSet>
     <LangVersion>7.3</LangVersion>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
@@ -87,7 +87,7 @@
     <ErrorReport>prompt</ErrorReport>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>FTAnalyzer.Windows1.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>ftanalyzer.windows.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -99,7 +99,7 @@
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>FTAnalyzer.Windows1.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>ftanalyzer.windows.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>544B2C041CECDDF973974E4355A5496DE4EA94F0</ManifestCertificateThumbprint>
@@ -514,7 +514,6 @@
     </EmbeddedResource>
     <Content Include="FTAnalyzer.ico" />
     <None Include="FTAnalyzer.Windows.ruleset" />
-    <None Include="FTAnalyzer.Windows1.ruleset" />
     <None Include="Properties\FileHandling.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>FileHandling.Designer.cs</LastGenOutput>
@@ -774,7 +773,6 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="FTAnalyzer.Windows2.ruleset" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <EmbeddedResource Include="Resources\KUNSTLER.TTF">

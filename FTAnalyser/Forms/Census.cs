@@ -38,7 +38,7 @@ namespace FTAnalyzer.Forms
                 defaultProvider = "FamilySearch";
             cbCensusSearchProvider.Text = defaultProvider;
             CensusSettingsUI.CompactCensusRefChanged += new EventHandler(RefreshCensusReferences);
-            Top = Top + NativeMethods.TopTaskbarOffset;
+            Top += NativeMethods.TopTaskbarOffset;
         }
 
         public void SetupCensus(Predicate<CensusIndividual> filter)
@@ -187,10 +187,8 @@ namespace FTAnalyzer.Forms
 
         class IDisplayCensusComparerWrapper : Comparer<IDisplayCensus>
         {
-            Comparer<CensusIndividual> comparer;
-
+            readonly Comparer<CensusIndividual> comparer;
             public IDisplayCensusComparerWrapper(Comparer<CensusIndividual> comp) => comparer = comp;
-
             public override int Compare(IDisplayCensus x, IDisplayCensus y) => comparer.Compare((CensusIndividual)x, (CensusIndividual)y);
         }
 

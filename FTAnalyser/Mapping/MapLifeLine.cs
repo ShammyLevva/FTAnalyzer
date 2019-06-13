@@ -23,12 +23,12 @@ namespace FTAnalyzer.Mapping
             List<Coordinate> points = new List<Coordinate>();
             this.Viewport = new Envelope();
             Coordinate previousPoint = null;
-            foreach (IDisplayFact f in ind.AllGeocodedFacts)
+            foreach (IDisplayFact f in ind.AllLifeLineFacts)
             {
                 Coordinate point = new Coordinate(f.Location.LongitudeM, f.Location.LatitudeM);
                 if (index == 1)
                     StartPoint = new Point(point);
-                if (index == ind.AllGeocodedFacts.Count)
+                if (index == ind.AllLifeLineFacts.Count)
                     EndPoint = new Point(point);
                 index++;
                 if (points.Count == 0 || (points.Count > 0 && !point.Equals2D(previousPoint)))
