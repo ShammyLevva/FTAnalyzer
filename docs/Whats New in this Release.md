@@ -1,4 +1,4 @@
-#### Updated Release Version 7.4.1.0 12th Jun 2019  
+#### Updated Release Version 7.4.1.0 15th Jun 2019  
 **Updates**  
 Updated referenced packages to latest versions  
 Added new code analysers  
