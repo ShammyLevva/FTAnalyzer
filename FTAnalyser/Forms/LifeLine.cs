@@ -35,7 +35,7 @@ namespace FTAnalyzer.Forms
         public LifeLine(IProgress<string> outputText)
         {
             InitializeComponent();
-            Top = Top + NativeMethods.TopTaskbarOffset;
+            Top += NativeMethods.TopTaskbarOffset;
             isLoading = true;
             isQuerying = false;
             this.outputText = outputText;
@@ -216,7 +216,7 @@ namespace FTAnalyzer.Forms
         {
             Individual ind = dgIndividuals.CurrentRow.DataBoundItem as Individual;
             isLoading = true;
-            foreach (Individual i in ft.GetFamily(ind))
+            foreach (Individual i in FamilyTree.GetFamily(ind))
                 SelectIndividual(i);
             isLoading = false;
             BuildMap();
@@ -243,17 +243,17 @@ namespace FTAnalyzer.Forms
 
         void SelectAllAncestorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SelectIndividuals(ft.GetAncestors);
+            SelectIndividuals(FamilyTree.GetAncestors);
         }
 
         void SelectAllDescendantsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SelectIndividuals(ft.GetDescendants);
+            SelectIndividuals(FamilyTree.GetDescendants);
         }
 
         void SelectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SelectIndividuals(ft.GetAllRelations);
+            SelectIndividuals(FamilyTree.GetAllRelations);
         }
 
         void LifeLine_FormClosed(object sender, FormClosedEventArgs e)

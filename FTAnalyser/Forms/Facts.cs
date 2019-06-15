@@ -28,7 +28,7 @@ namespace FTAnalyzer.Forms
         Facts()
         {
             InitializeComponent();
-            Top = Top + NativeMethods.TopTaskbarOffset;
+            Top += NativeMethods.TopTaskbarOffset;
             facts = new SortableBindingList<IDisplayFact>();
             facts.SortFinished += new EventHandler(Grid_SortFinished);
             allFacts = false;
@@ -142,7 +142,7 @@ namespace FTAnalyzer.Forms
             : this()
         {
             allFacts = true;
-            facts = ft.GetSourceDisplayFacts(source);
+            facts = FamilyTree.GetSourceDisplayFacts(source);
             Text = $"Facts Report for source: {source.ToString()}. Facts count: {facts.Count}";
             SetupFacts();
             //dgFacts.Columns["CensusReference"].Visible = true;

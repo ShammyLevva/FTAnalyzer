@@ -1591,7 +1591,7 @@ namespace FTAnalyzer
             Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType, true);
             LCUpdates = new List<CensusIndividual>();
             LCInvalidReferences = new List<CensusIndividual>();
-            rtbLCUpdateData.Text = ft.LCOutput(LCUpdates, LCInvalidReferences, relationFilter, null);
+            rtbLCUpdateData.Text = ft.LCOutput(LCUpdates, LCInvalidReferences, relationFilter);
          }
 
 
@@ -1633,7 +1633,7 @@ namespace FTAnalyzer
             btnUpdateLostCousinsWebsite.Visible = false;
         }
 
-        void UpdateLostCousinsReport() => rtbLostCousins.Text = ft.UpdateLostCousinsReport(relTypesLC.BuildFilter<Individual>(x => x.RelationType), null);
+        void UpdateLostCousinsReport() => rtbLostCousins.Text = ft.UpdateLostCousinsReport(relTypesLC.BuildFilter<Individual>(x => x.RelationType));
 
         void BtnLCDuplicates_Click(object sender, EventArgs e)
         {
@@ -1886,7 +1886,7 @@ namespace FTAnalyzer
                     if (zip.Count == 1 && zip.ContainsEntry("Geocodes.s3db"))
                     {
                         DatabaseHelper dbh = DatabaseHelper.Instance;
-                        if (dbh.StartBackupRestoreDatabase())
+                        if (DatabaseHelper.StartBackupRestoreDatabase())
                         {
                             File.Copy(dbh.DatabaseFile, dbh.CurrentFilename, true); // copy exisiting file to safety
                             zip.ExtractAll(dbh.DatabasePath, ExtractExistingFileAction.OverwriteSilently);
@@ -2619,7 +2619,7 @@ namespace FTAnalyzer
                 {
                     string path = Path.GetDirectoryName(saveFileDialog.FileName);
                     Application.UserAppDataRegistry.SetValue("Report Unrecognised Census References Path", path);
-                    ft.WriteUnrecognisedReferencesFile(unrecognisedResults, missingResults, notesResults, saveFileDialog.FileName);
+                    FamilyTree.WriteUnrecognisedReferencesFile(unrecognisedResults, missingResults, notesResults, saveFileDialog.FileName);
                     Analytics.TrackAction(Analytics.ReportsAction, Analytics.UnrecognisedCensusEvent);
                     MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease create an issue at http://www.ftanalyzer.com/issues in issues section and upload your file, if you feel you have standard census references that should be recognised." + privateWarning, "FTAnalyzer");
                 }

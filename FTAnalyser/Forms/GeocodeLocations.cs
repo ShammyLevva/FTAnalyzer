@@ -38,7 +38,7 @@ namespace FTAnalyzer.Forms
         public GeocodeLocations(IProgress<string> outputText)
         {
             InitializeComponent();
-            Top = Top + NativeMethods.TopTaskbarOffset;
+            Top += NativeMethods.TopTaskbarOffset;
             ft = FamilyTree.Instance;
             refreshingMenus = false;
             locations = ft.AllGeocodingLocations;
@@ -420,7 +420,7 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
             mnuPasteLocation.Enabled = false;
             CopyLocation = FactLocation.UNKNOWN_LOCATION;
-            DialogResult result = editform.ShowDialog(this);
+            editform.ShowDialog(this);
             if (editform.UserSavedPoint)
                 AddLocationToQueue(loc);  // we have edited the location so add reverse geocode to queue
             editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
@@ -472,7 +472,7 @@ namespace FTAnalyzer.Forms
             mnuReverseGeocode.Enabled = true;
             mnuOSGeocodeLocations.Enabled = true;
             string title = sender == OSGeocodeBackgroundWorker ? "OS Geocoding Results:" : "Google Geocoding Results:";
-            ft.WriteGeocodeStatstoRTB(title, outputText);
+            FamilyTree.WriteGeocodeStatstoRTB(title, outputText);
             ft.Geocoding = false;
             if (formClosing)
                 this.Close();
@@ -566,7 +566,7 @@ namespace FTAnalyzer.Forms
                         skipped++; // don't re-geocode incorrect ones as that would reset incorrect flag back to what user already identified was wrong
                     else
                     {
-                        bool inDatabase = dbh.IsLocationInDatabase(loc.ToString());
+                        bool inDatabase = DatabaseHelper.IsLocationInDatabase(loc.ToString());
                         if (loc.ToString().Length > 0)
                         {
                             GeoResponse res = null;
@@ -706,9 +706,9 @@ namespace FTAnalyzer.Forms
         void UpdateDatabase(FactLocation loc, bool inDatabase)
         {
             if (inDatabase)
-                DatabaseHelper.Instance.UpdateGeocode(loc);
+                DatabaseHelper.UpdateGeocode(loc);
             else
-                DatabaseHelper.Instance.InsertGeocode(loc);
+                DatabaseHelper.InsertGeocode(loc);
             RefreshTreeNode(loc);
         }
 
@@ -817,7 +817,7 @@ namespace FTAnalyzer.Forms
                 txtLocations.Text = string.Empty;
                 txtGoogleWait.Text = string.Empty;
                 ft.Geocoding = true;
-                DatabaseHelper.Instance.AddEmptyLocationsToQueue(queue);
+                DatabaseHelper.AddEmptyLocationsToQueue(queue);
                 reverseGeocodeBackgroundWorker.RunWorkerAsync();
                 Cursor = Cursors.Default;
             }
@@ -842,7 +842,7 @@ namespace FTAnalyzer.Forms
                             GeoResponse res = null;
                             double latitude = loc.Latitude;
                             double longitude = loc.Longitude;
-                            string hashkey = dbh.LatLongHashKey(latitude, longitude);
+                            string hashkey = DatabaseHelper.LatLongHashKey(latitude, longitude);
                             if (LatLongIndex.ContainsKey(hashkey))
                             {
                                 loc.FoundLocation = LatLongIndex[hashkey].Item1;
@@ -893,7 +893,7 @@ namespace FTAnalyzer.Forms
 
         public static void ProcessReverseResult(FactLocation loc, GeoResponse res)
         {
-            int foundLevel = -1;
+            int foundLevel;
             GeoResponse.CResult.CGeometry.CViewPort viewport;
             if (res.Status == "OK")
             {
@@ -960,10 +960,10 @@ namespace FTAnalyzer.Forms
                 "Reset ALL Partials", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                DatabaseHelper.Instance.ResetPartials();
-                if (ft.LoadGeoLocationsFromDataBase(outputText))
+                DatabaseHelper.ResetPartials();
+                if (FamilyTree.LoadGeoLocationsFromDataBase(outputText))
                 {
-                    ft.WriteGeocodeStatstoRTB("Geocoding status after reset partials:", outputText);
+                    FamilyTree.WriteGeocodeStatstoRTB("Geocoding status after reset partials:", outputText);
                     MessageBox.Show("Partials have been reset", "FTAnalyzer");
                 }
                 else
@@ -1322,7 +1322,7 @@ namespace FTAnalyzer.Forms
             location.FoundLevel = level;
             location.FoundLocation = gaz.ToString();
             location.FoundResultType = GoogleMap.OS_FEATURE;
-            bool inDatabase = DatabaseHelper.Instance.IsLocationInDatabase(location.ToString());
+            bool inDatabase = DatabaseHelper.IsLocationInDatabase(location.ToString());
             UpdateDatabase(location, inDatabase);
         }
 

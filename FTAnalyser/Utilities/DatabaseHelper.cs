@@ -458,7 +458,7 @@ namespace FTAnalyzer.Utilities
             #endregion
         }
 
-        public string LatLongHashKey(double latitude, double longitude) => latitude.ToString("F6") + longitude.ToString("F6");
+        public static string LatLongHashKey(double latitude, double longitude) => latitude.ToString("F6") + longitude.ToString("F6");
 
         public Dictionary<string, Tuple<string, string>> LatLongIndex
         {
@@ -468,8 +468,6 @@ namespace FTAnalyzer.Utilities
 
                 if (InstanceConnection.State != ConnectionState.Open)
                     InstanceConnection.Open();
-                double latitude = 0;
-                double longitude = 0;
                 string hashkey;
                 string foundlocation;
                 string foundresulttype;
@@ -480,8 +478,8 @@ namespace FTAnalyzer.Utilities
                     {
                         while (reader.Read())
                         {
-                            double.TryParse(reader[0].ToString(), out latitude);
-                            double.TryParse(reader[1].ToString(), out longitude);
+                            double.TryParse(reader[0].ToString(), out double latitude);
+                            double.TryParse(reader[1].ToString(), out double longitude);
                             hashkey = LatLongHashKey(latitude, longitude);
                             foundlocation = reader[2].ToString();
                             foundresulttype = reader[3].ToString();
@@ -496,7 +494,7 @@ namespace FTAnalyzer.Utilities
         #endregion
 
         #region Commands
-        public bool IsLocationInDatabase(string location)
+        public static bool IsLocationInDatabase(string location)
         {
             bool inDatabase;
             if (InstanceConnection.State != ConnectionState.Open)
@@ -516,7 +514,7 @@ namespace FTAnalyzer.Utilities
             return inDatabase;
         }
 
-        public void ResetPartials()
+        public static void ResetPartials()
         {
             if (InstanceConnection.State != ConnectionState.Open)
                 InstanceConnection.Open();
@@ -527,7 +525,7 @@ namespace FTAnalyzer.Utilities
             InstanceConnection.Close();
         }
 
-        public void LoadGeoLocations()
+        public static void LoadGeoLocations()
         {
             if (InstanceConnection.State != ConnectionState.Open)
                 InstanceConnection.Open();
@@ -538,7 +536,7 @@ namespace FTAnalyzer.Utilities
             InstanceConnection.Close();
         }
 
-        public void GetLocationDetails(FactLocation location)
+        public static void GetLocationDetails(FactLocation location)
         {
             if (location.ToString().Length == 0) return;
             if (InstanceConnection.State != ConnectionState.Open)
@@ -592,7 +590,7 @@ namespace FTAnalyzer.Utilities
                 }
             }
         }
-        public void InsertGeocode(FactLocation loc)
+        public static void InsertGeocode(FactLocation loc)
         {
             if (InstanceConnection.State != ConnectionState.Open)
                 InstanceConnection.Open();
@@ -676,7 +674,7 @@ namespace FTAnalyzer.Utilities
             }
         }
 
-        public void UpdateGeocode(FactLocation loc)
+        public static void UpdateGeocode(FactLocation loc)
         {
             if (InstanceConnection.State != ConnectionState.Open)
                 InstanceConnection.Open();
@@ -763,7 +761,7 @@ namespace FTAnalyzer.Utilities
         #endregion
 
         #region LostCousins
-        public int AddLostCousinsFacts()
+        public static int AddLostCousinsFacts()
         {
             int count = 0;
             if (InstanceConnection.State != ConnectionState.Open)
@@ -801,39 +799,39 @@ namespace FTAnalyzer.Utilities
             return count;
         }
 
-        void UpdateFullName(SQLiteDataReader reader, string name)
-        {
-            using (SQLiteCommand updateCmd = new SQLiteCommand("update LostCousins set FullName=? Where CensusYear=? and CensusCountry=? and CensusRef=? and IndID=?", InstanceConnection))
-            {
-                SQLiteParameter param = updateCmd.CreateParameter();
-                param.DbType = DbType.String;
-                updateCmd.Parameters.Add(param);
-                param = updateCmd.CreateParameter();
-                param.DbType = DbType.Int32;
-                updateCmd.Parameters.Add(param);
-                param = updateCmd.CreateParameter();
-                param.DbType = DbType.String;
-                updateCmd.Parameters.Add(param);
-                param = updateCmd.CreateParameter();
-                param.DbType = DbType.String;
-                updateCmd.Parameters.Add(param);
-                param = updateCmd.CreateParameter();
-                param.DbType = DbType.String;
-                updateCmd.Parameters.Add(param);
-                updateCmd.Prepare();
+        //void UpdateFullName(SQLiteDataReader reader, string name)
+        //{
+        //    using (SQLiteCommand updateCmd = new SQLiteCommand("update LostCousins set FullName=? Where CensusYear=? and CensusCountry=? and CensusRef=? and IndID=?", InstanceConnection))
+        //    {
+        //        SQLiteParameter param = updateCmd.CreateParameter();
+        //        param.DbType = DbType.String;
+        //        updateCmd.Parameters.Add(param);
+        //        param = updateCmd.CreateParameter();
+        //        param.DbType = DbType.Int32;
+        //        updateCmd.Parameters.Add(param);
+        //        param = updateCmd.CreateParameter();
+        //        param.DbType = DbType.String;
+        //        updateCmd.Parameters.Add(param);
+        //        param = updateCmd.CreateParameter();
+        //        param.DbType = DbType.String;
+        //        updateCmd.Parameters.Add(param);
+        //        param = updateCmd.CreateParameter();
+        //        param.DbType = DbType.String;
+        //        updateCmd.Parameters.Add(param);
+        //        updateCmd.Prepare();
 
-                updateCmd.Parameters[0].Value = name;
-                updateCmd.Parameters[1].Value = reader["CensusYear"];
-                updateCmd.Parameters[2].Value = reader["CensusCountry"];
-                updateCmd.Parameters[3].Value = reader["CensusRef"];
-                updateCmd.Parameters[4].Value = reader["IndID"];
-                int rowsaffected = updateCmd.ExecuteNonQuery();
-                if (rowsaffected != 1)
-                    Console.WriteLine("Problem updating");
-            }
-        }
+        //        updateCmd.Parameters[0].Value = name;
+        //        updateCmd.Parameters[1].Value = reader["CensusYear"];
+        //        updateCmd.Parameters[2].Value = reader["CensusCountry"];
+        //        updateCmd.Parameters[3].Value = reader["CensusRef"];
+        //        updateCmd.Parameters[4].Value = reader["IndID"];
+        //        int rowsaffected = updateCmd.ExecuteNonQuery();
+        //        if (rowsaffected != 1)
+        //            Console.WriteLine("Problem updating");
+        //    }
+        //}
 
-        public bool LostCousinsExists(CensusIndividual ind)
+        public static bool LostCousinsExists(CensusIndividual ind)
         {
             if (InstanceConnection.State != ConnectionState.Open)
                 InstanceConnection.Open();
@@ -869,7 +867,7 @@ namespace FTAnalyzer.Utilities
             return result;
         }
 
-        public void StoreLostCousinsFact(CensusIndividual ind, IProgress<string> outputText)
+        public static void StoreLostCousinsFact(CensusIndividual ind, IProgress<string> outputText)
         {
             try
             {
@@ -919,7 +917,7 @@ namespace FTAnalyzer.Utilities
 
         #region Cursor Queries
 
-        public void AddEmptyLocationsToQueue(ConcurrentQueue<FactLocation> queue)
+        public static void AddEmptyLocationsToQueue(ConcurrentQueue<FactLocation> queue)
         {
             if (InstanceConnection.State != ConnectionState.Open)
                 InstanceConnection.Open();
@@ -946,7 +944,7 @@ namespace FTAnalyzer.Utilities
         #endregion
 
         #region BackupRestore
-        public bool StartBackupRestoreDatabase()
+        public static bool StartBackupRestoreDatabase()
         {
             string tempFilename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\Geocodes.s3db.tmp");
             try
@@ -973,7 +971,7 @@ namespace FTAnalyzer.Utilities
                 restoring = false;
                 FamilyTree ft = FamilyTree.Instance;
                 if (ft.DataLoaded)
-                    return ft.LoadGeoLocationsFromDataBase(outputText);
+                    return FamilyTree.LoadGeoLocationsFromDataBase(outputText);
             }
             catch (Exception)
             {
