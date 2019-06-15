@@ -30,7 +30,7 @@ namespace FTAnalyzer.Forms
         public EditLocation(FactLocation location)
         {
             InitializeComponent();
-            Top = Top + NativeMethods.TopTaskbarOffset;
+            Top += NativeMethods.TopTaskbarOffset;
             customMapLayers = new List<GdalRasterLayer>();
             mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
@@ -150,7 +150,7 @@ namespace FTAnalyzer.Forms
             location.FoundLocation = string.Empty;
             location.GeocodeStatus = FactLocation.Geocode.GEDCOM_USER;
             location.FoundLevel = -2;
-            DatabaseHelper.Instance.UpdateGeocode(location);
+            DatabaseHelper.UpdateGeocode(location);
             pointUpdated = false;
             dataUpdated = true;
         }
@@ -160,7 +160,7 @@ namespace FTAnalyzer.Forms
             UpdateDatabase();
             UserSavedPoint = true;
             TreeViewHandler.Instance.RefreshTreeNodeIcon(location);
-            MessageBox.Show("Data for " + location.ToString() + " updated.", "Save new location");
+            MessageBox.Show($"Data for {location.ToString()} updated.", "Save new location");
         }
 
         void BtnSaveExit_Click(object sender, EventArgs e)
@@ -219,7 +219,7 @@ namespace FTAnalyzer.Forms
             {
                 FactLocation loc = FactLocation.LookupLocation(txtSearch.Text);
                 if (!loc.IsGeoCoded(false)) // if not geocoded then try database
-                    DatabaseHelper.Instance.GetLocationDetails(loc);
+                    DatabaseHelper.GetLocationDetails(loc);
                 if (loc.IsGeoCoded(false))
                 {
                     FactLocation.CopyLocationDetails(loc, location);

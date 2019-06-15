@@ -1,7 +1,8 @@
 #### Updated Release Version 7.4.1.0 12th Jun 2019  
 **Updates**  
 Updated referenced packages to latest versions  
-Added new code analysers 
+Added new code analysers  
+Applied various code tidyups  
 
 **Bugfixes**  
 Birthday Effect Menu wasn't disabled when no file was loaded  
@@ -10,6 +11,7 @@ Incomplete census refs in Lost Cousins were looking up wrong census year
 Typo in Error/Fixes tab  
 The internal column IsFamily shouldn't have been displayed on Data Errors report  
 Lifelines no longer includes LostCousins facts with just country location  
+Fix 1940 US Census not correctly searching on Ancestry  
 
 #### Updated Release Version 7.4.0.0 26th May 2019  
 **Updates**  
