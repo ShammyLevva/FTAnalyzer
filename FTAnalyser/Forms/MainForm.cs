@@ -1790,9 +1790,9 @@ namespace FTAnalyzer
 
         void PrintDataGrid(Orientation orientation, DataGridView dg, string title)
         {
-            PrintingDataGridViewProvider printProvider = PrintingDataGridViewProvider.Create(
-                printDocument, dg, true, true, true,
-                new TitlePrintBlock(title), null, null);
+            //PrintingDataGridViewProvider printProvider = PrintingDataGridViewProvider.Create(
+            //    printDocument, dg, true, true, true,
+            //    new TitlePrintBlock(title), null, null);
             printDialog.PrinterSettings.DefaultPageSettings.Landscape = (orientation == Orientation.Landscape);
             printDialog.PrinterSettings.DefaultPageSettings.Margins.Left = 50;
             printDialog.PrinterSettings.DefaultPageSettings.Margins.Right = 50;
