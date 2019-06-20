@@ -17,7 +17,7 @@ namespace FTAnalyzer.Forms
         public StatisticsForm(StatisticType type)
         {
             InitializeComponent();
-            Top = Top + NativeMethods.TopTaskbarOffset;
+            Top += NativeMethods.TopTaskbarOffset;
             StatType = type;
             tsStatusLabel.Text = string.Empty;
             switch(type)
@@ -38,7 +38,8 @@ namespace FTAnalyzer.Forms
         {
             IEnumerable<Tuple<string,int>> relations = FamilyTree.Instance.AllIndividuals.Where(x => x.RelationToRoot.Length > 0).GroupBy(i => i.RelationToRoot)
                 .Select(r => new Tuple<string, int>(r.Key, r.Count()));
-            dgStatistics.DataSource = new SortableBindingList<Tuple<string, int>>(relations.ToList());
+            var list = new SortableBindingList<Tuple<string, int>>(relations.ToList());
+            dgStatistics.DataSource = list;
             dgStatistics.Columns[0].Width = 180;
             dgStatistics.Columns[0].SortMode = DataGridViewColumnSortMode.Automatic;
             dgStatistics.Columns[0].HeaderText = "Relation to Root";
@@ -47,6 +48,8 @@ namespace FTAnalyzer.Forms
             dgStatistics.Columns[1].SortMode = DataGridViewColumnSortMode.Automatic;
             dgStatistics.Columns[1].HeaderText = "Count";
             dgStatistics.Sort(dgStatistics.Columns[0], ListSortDirection.Ascending);
+            int count = list.Sum(x => x.Item2);
+            Text = $"Cousin Count Report - {count} Individuals";
             tsStatusLabel.Text = "Double click to show all individuals with that relationship to root person.";
             tsStatusLabel.Visible = true;
         }
@@ -56,7 +59,8 @@ namespace FTAnalyzer.Forms
             IEnumerable<DisplayGreatStats> relations = FamilyTree.Instance.AllIndividuals.Where(x => x.RelationToRoot.Length > 0 && (x.RelationType == Individual.DIRECT || x.RelationType == Individual.DESCENDANT))
                 .GroupBy(i => (i.RelationToRoot, i.RelationSort))
                 .Select(r => new DisplayGreatStats(r.Key.RelationToRoot, r.Key.RelationSort ,r.Count()));
-            dgStatistics.DataSource = new SortableBindingList<DisplayGreatStats>(relations.ToList());
+            var list = new SortableBindingList<DisplayGreatStats>(relations.ToList());
+            dgStatistics.DataSource = list;
             dgStatistics.Columns[0].Width = 180;
             dgStatistics.Columns[0].SortMode = DataGridViewColumnSortMode.Automatic;
             dgStatistics.Columns[0].HeaderText = "Relation to Root";
@@ -69,6 +73,8 @@ namespace FTAnalyzer.Forms
             dgStatistics.Columns[2].SortMode = DataGridViewColumnSortMode.Automatic;
             dgStatistics.Columns[2].HeaderText = "Count";
             dgStatistics.Sort(dgStatistics.Columns[1], ListSortDirection.Descending);
+            int count = list.Sum(x => x.Count);
+            Text = $"How Many Directs Report - {count} directs";
             tsStatusLabel.Text = "Double click to show all individuals with that relationship to root person.";
             tsStatusLabel.Visible = true;
         }
@@ -101,6 +107,7 @@ namespace FTAnalyzer.Forms
             dgStatistics.Columns[2].SortMode = DataGridViewColumnSortMode.Automatic;
             dgStatistics.Columns[2].HeaderText = "Percentage";
             dgStatistics.Sort(dgStatistics.Columns[0], ListSortDirection.Ascending);
+            Text = "Birthday Effect Report";
             tsStatusLabel.Text = "Double click shows those born who died within 15 days of birthday.";
             tsStatusLabel.Visible = true;
         }
