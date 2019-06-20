@@ -1,6 +1,6 @@
 #### Updated Release Version 7.4.2.0 20th Jun 2019  
 **Updates**  
-Addded Children Count & Marriage Count to Individuals export  
+Added Children Count & Marriage Count to Individuals export  
 Add statistics form titles  
 
 #### Updated Release Version 7.4.1.0 15th Jun 2019  
