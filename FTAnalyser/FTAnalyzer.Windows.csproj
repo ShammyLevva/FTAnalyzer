@@ -118,10 +118,10 @@
     </CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>544B2C041CECDDF973974E4355A5496DE4EA94F0</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>AD4193C0AE6475EFFEC7D1AFDC51A8184CAE8D16</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>code signing certificate.crt.pfx</ManifestKeyFile>
+    <ManifestKeyFile>code signing certificate. 2019.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -155,8 +155,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Resources\Lib\DgvFilterPopup.dll</HintPath>
     </Reference>
-    <Reference Include="DotNetZip, Version=1.13.3.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
-      <HintPath>packages\DotNetZip.1.13.3\lib\net40\DotNetZip.dll</HintPath>
+    <Reference Include="DotNetZip, Version=1.13.4.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetZip.1.13.4\lib\net40\DotNetZip.dll</HintPath>
     </Reference>
     <Reference Include="gdalconst_csharp, Version=1.0.5387.28601, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
       <HintPath>packages\GDAL.1.11.1\lib\net40\gdalconst_csharp.dll</HintPath>
@@ -173,8 +173,8 @@
     <Reference Include="GoogleAnalyticsTracker.Simple, Version=5.0.0.0, Culture=neutral, PublicKeyToken=04ab204e84b117c0, processorArchitecture=MSIL">
       <HintPath>packages\GoogleAnalyticsTracker.Simple.5.0.0\lib\portable45-net45+win8+wpa81\GoogleAnalyticsTracker.Simple.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.11.7.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>packages\HtmlAgilityPack.1.11.7\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack, Version=1.11.17.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>packages\HtmlAgilityPack.1.11.17\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
@@ -206,7 +206,7 @@
       <HintPath>packages\NetTopologySuite.IO.1.14.0.1\lib\net45\NetTopologySuite.IO.ShapeFile.Extended.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ogr_csharp, Version=1.0.5387.28600, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
       <HintPath>packages\GDAL.1.11.1\lib\net40\ogr_csharp.dll</HintPath>
@@ -231,7 +231,7 @@
       <HintPath>packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+      <HintPath>packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -240,8 +240,8 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.SQLite, Version=1.0.111.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>packages\System.Data.SQLite.Core.1.0.111.0\lib\net46\System.Data.SQLite.dll</HintPath>
+    <Reference Include="System.Data.SQLite, Version=1.0.112.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>packages\System.Data.SQLite.Core.1.0.112.0\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -262,15 +262,15 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Encodings.Web.4.7.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Tasks.Extensions.4.5.3\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -526,6 +526,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <Content Include="FTAnalyzer.ico" />
+    <None Include="code signing certificate. 2019.pfx" />
     <None Include="FTAnalyzer.Windows.ruleset" />
     <None Include="Properties\FileHandling.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
@@ -959,12 +960,12 @@ rem    xcopy /s /y "$(SolutionDir)packages\GDAL.Native.1.11.1\gdal\*.*" "$(Targe
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\GDAL.Native.1.11.1\build\net40\GDAL.Native.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\GDAL.Native.1.11.1\build\net40\GDAL.Native.targets'))" />
-    <Error Condition="!Exists('packages\System.Data.SQLite.Core.1.0.111.0\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.Data.SQLite.Core.1.0.111.0\build\net46\System.Data.SQLite.Core.targets'))" />
     <Error Condition="!Exists('packages\Microsoft.NetCore.Analyzers.2.9.3\build\Microsoft.NetCore.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.NetCore.Analyzers.2.9.3\build\Microsoft.NetCore.Analyzers.props'))" />
     <Error Condition="!Exists('packages\Microsoft.NetFramework.Analyzers.2.9.3\build\Microsoft.NetFramework.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.NetFramework.Analyzers.2.9.3\build\Microsoft.NetFramework.Analyzers.props'))" />
+    <Error Condition="!Exists('packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets'))" />
   </Target>
   <Import Project="packages\GDAL.Native.1.11.1\build\net40\GDAL.Native.targets" Condition="Exists('packages\GDAL.Native.1.11.1\build\net40\GDAL.Native.targets')" />
-  <Import Project="packages\System.Data.SQLite.Core.1.0.111.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('packages\System.Data.SQLite.Core.1.0.111.0\build\net46\System.Data.SQLite.Core.targets')" />
+  <Import Project="packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

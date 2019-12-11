@@ -157,6 +157,7 @@ namespace FTAnalyzer.Utilities
                 //EndBackupDatabase();
                 Application.UserAppDataRegistry.SetValue("Geocode Backup Directory", Path.GetDirectoryName(saveDatabase.FileName));
                 UIHelpers.ShowMessage($"Database exported to {saveDatabase.FileName}", "FTAnalyzer Database Export Complete");
+                zip.Dispose();
                 return true;
             }
             return false;
@@ -215,7 +216,11 @@ namespace FTAnalyzer.Utilities
                         DialogResult result = MessageBox.Show("In order to improve speed of the maps a database upgrade is needed.\nThis may take several minutes and must be allowed to complete.\nYou must backup your database first. Ok to proceed?", "Database upgrading", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         Application.UseWaitCursor = true;
                         if (result == DialogResult.Yes)
-                            proceed = BackupDatabase(new SaveFileDialog(), "FTAnalyzer zip file created by Database upgrade for v3.2.1.0");
+                        {
+                            SaveFileDialog sfd = new SaveFileDialog();
+                            proceed = BackupDatabase(sfd, "FTAnalyzer zip file created by Database upgrade for v3.2.1.0");
+                            sfd.Dispose();
+                        }
                         Application.UseWaitCursor = false;
                     }
                     if (proceed)
@@ -454,6 +459,7 @@ namespace FTAnalyzer.Utilities
                         }
                     }
                 }
+                p.Dispose();
             }
             #endregion
         }
