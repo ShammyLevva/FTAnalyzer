@@ -20,18 +20,17 @@ namespace FTAnalyzer.Forms
 {
     public partial class LifeLine : Form
     {
-        private FamilyTree ft = FamilyTree.Instance;
-        private MapHelper mh = MapHelper.Instance;
-        private Color backgroundColour;
-        private FeatureDataTable lifelines;
-        private VectorLayer linesLayer;
-        private LabelLayer labelLayer;
-        private TearDropLayer points;
-        private TearDropLayer selections;
+        readonly FamilyTree ft = FamilyTree.Instance;
+        readonly MapHelper mh = MapHelper.Instance;
+        readonly IProgress<string> outputText;
+        FeatureDataTable lifelines;
+        VectorLayer linesLayer;
+        LabelLayer labelLayer;
+        TearDropLayer points;
+        TearDropLayer selections;
         bool isLoading;
         bool isQuerying;
-        private IProgress<string> outputText;
-
+        
         public LifeLine(IProgress<string> outputText)
         {
             InitializeComponent();
@@ -48,7 +47,6 @@ namespace FTAnalyzer.Forms
             mapZoomToolStrip.Items[4].ToolTipText = "Draw rectangle by dragging mouse to specify zoom area";
             for (int i = 7; i <= 10; i++)
                 mapZoomToolStrip.Items[i].Visible = false;
-            backgroundColour = mapZoomToolStrip.Items[0].BackColor;
             mnuHideScaleBar.Checked = Properties.MappingSettings.Default.HideScaleBar;
             SetupMap();
             dgFacts.AutoGenerateColumns = false;

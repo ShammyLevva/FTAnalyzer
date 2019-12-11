@@ -15,10 +15,11 @@ namespace FTAnalyzer.Forms
         public CensusDate CensusDate { get; private set; }
         public int RecordCount { get; private set; }
         public bool LostCousins { get; private set; }
-        string censusCountry;
-        bool CensusDone;
-        ReportFormHelper reportFormHelper;
-        FamilyTree ft;
+
+        readonly string censusCountry;
+        readonly bool CensusDone;
+        readonly ReportFormHelper reportFormHelper;
+        readonly FamilyTree ft;
 
         public Census(CensusDate censusDate, bool censusDone)
         {

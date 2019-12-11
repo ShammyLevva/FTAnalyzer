@@ -5,21 +5,17 @@ using FTAnalyzer.Forms;
 using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
-using HtmlAgilityPack;
 using Ionic.Zip;
-using Printing.DataGridViewPrint.Tools;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
-using System.Deployment.Application;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,15 +25,15 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.4.2.0";
+        public static string VERSION = "7.5.0.0";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         Cursor storedCursor = Cursors.Default;
-        FamilyTree ft = FamilyTree.Instance;
+        readonly FamilyTree ft = FamilyTree.Instance;
         bool stopProcessing = false;
         string filename;
-        PrivateFontCollection fonts = new PrivateFontCollection();
+        readonly PrivateFontCollection fonts = new PrivateFontCollection();
         Font handwritingFont;
         Font boldFont;
         Font normalFont;
@@ -81,7 +77,8 @@ namespace FTAnalyzer
             loading = false;
         }
 
-        async void CheckWebVersion()
+ #if !__DEBUG__
+       async void CheckWebVersion()
         {
             Settings.Default.StartTime = DateTime.Now;
             Settings.Default.Save();
@@ -110,7 +107,7 @@ namespace FTAnalyzer
                 Console.WriteLine(e.Message);
             }
         }
-
+#endif
         void SetupFonts()
         {
             SpecialMethods.SetFonts(this);
@@ -171,7 +168,7 @@ namespace FTAnalyzer
                 WindowState = FormWindowState.Maximized;
         }
 
-        #region Version Info
+#region Version Info
         string PublishVersion()
         {
             if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
@@ -182,9 +179,9 @@ namespace FTAnalyzer
             else
                 return VERSION;
         }
-        #endregion
+#endregion
 
-        #region Load File
+#region Load File
         async Task LoadFileAsync(string filename)
         {
             try
@@ -219,7 +216,7 @@ namespace FTAnalyzer
             {
                 string message = ex2.Message + "\n" + (ex2.InnerException != null ? ex2.InnerException.Message : string.Empty);
                 MessageBox.Show("Error: Problem processing your file. Please try again.\n" +
-                    "If this problem persists please report this at http://www.ftanalyzer.com/issues. Error was: " + ex2.Message + "\n" + ex2.InnerException, "FTAnalyzer");
+                    "If this problem persists please report this at http://www.ftanalyzer.com/issues. Error was: " + message + "\n" + ex2.InnerException, "FTAnalyzer");
                 CleanUp(true);
             }
             finally
@@ -375,7 +372,7 @@ namespace FTAnalyzer
             mnuCloseGEDCOM.Enabled = false;
             BuildRecentList();
         }
-        #endregion
+#endregion
 
         void ShowMenus(bool enabled)
         {
@@ -683,7 +680,7 @@ namespace FTAnalyzer
             return loc.ZoomLevel;
         }
 
-        #region DataErrors
+#region DataErrors
         void CkbDataErrors_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateDataErrorsDisplay();
@@ -769,7 +766,7 @@ namespace FTAnalyzer
             }
             return new SortableBindingList<IDisplayDataError>(errors);
         }
-        #endregion
+#endregion
 
         void ChildAgeProfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -869,7 +866,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        #region CellFormatting
+#region CellFormatting
         void FormatCellLocations(DataGridView grid, DataGridViewCellFormattingEventArgs e)
         {
             DataGridViewCell cell = grid.Rows[e.RowIndex].Cells[e.ColumnIndex];
@@ -925,9 +922,9 @@ namespace FTAnalyzer
             if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns["Icon"].Index)
                 FormatCellLocations(dgPlaces, e);
         }
-        #endregion
+#endregion
 
-        #region EventHandlers
+#region EventHandlers
         void Options_BaptismChanged(object sender, EventArgs e)
         {
             // do anything that needs doing when option changes
@@ -958,9 +955,9 @@ namespace FTAnalyzer
             SetupFonts();
             HourGlass(false);
         }
-        #endregion
+#endregion
 
-        #region Reload Data
+#region Reload Data
         async Task QueryReloadData()
         {
             if (GeneralSettings.Default.ReloadRequired && ft.DataLoaded)
@@ -981,7 +978,7 @@ namespace FTAnalyzer
             GeneralSettings.Default.Save();
             await LoadFileAsync(filename);
         }
-        #endregion
+#endregion
 
         bool preventExpand;
 
@@ -1182,7 +1179,7 @@ namespace FTAnalyzer
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.PossibleCensusEvent);
         }
 
-        #region Tab Control
+#region Tab Control
         void TabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             mnuPrint.Enabled = false;
@@ -1387,9 +1384,9 @@ namespace FTAnalyzer
             }
         }
 
-        #endregion
+#endregion
 
-        #region Filters
+#region Filters
         Predicate<ExportFact> CreateFactsFilter()
         {
             var filter = relTypesFacts.BuildFilter<ExportFact>(x => x.RelationType);
@@ -1488,9 +1485,9 @@ namespace FTAnalyzer
 
             return filter;
         }
-        #endregion
+#endregion
 
-        #region Lost Cousins
+#region Lost Cousins
         void CkbRestrictions_CheckedChanged(object sender, EventArgs e) => UpdateLCReports();
 
         void LostCousinsCensus(CensusDate censusDate, string reportTitle)
@@ -1694,9 +1691,9 @@ namespace FTAnalyzer
         }
 
         void LabLostCousinsWeb_MouseLeave(object sender, EventArgs e) => Cursor = storedCursor;
-        #endregion
+#endregion
 
-        #region ToolStrip Clicks
+#region ToolStrip Clicks
         void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show($"This is Family Tree Analyzer version {VERSION}", "FTAnalyzer");
@@ -1710,9 +1707,9 @@ namespace FTAnalyzer
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.OptionsEvent);
         }
 
-        #endregion
+#endregion
 
-        #region Print Routines
+#region Print Routines
         void MnuPrint_Click(object sender, EventArgs e)
         {
             try
@@ -1788,7 +1785,9 @@ namespace FTAnalyzer
 
         enum Orientation { Landscape, Portrait }
 
+#pragma warning disable IDE0060 // Remove unused parameter
         void PrintDataGrid(Orientation orientation, DataGridView dg, string title)
+#pragma warning restore IDE0060 // Remove unused parameter
         {
             //PrintingDataGridViewProvider printProvider = PrintingDataGridViewProvider.Create(
             //    printDocument, dg, true, true, true,
@@ -1805,9 +1804,9 @@ namespace FTAnalyzer
                 printDocument.Print();
             }
         }
-        #endregion
+#endregion
 
-        #region Dispose Routines
+#region Dispose Routines
         void DisposeIndividualForms()
         {
             List<Form> toDispose = new List<Form>();
@@ -1854,9 +1853,9 @@ namespace FTAnalyzer
                     f.Dispose();
             }
         }
-        #endregion
+#endregion
 
-        #region Backup/Restore Database
+#region Backup/Restore Database
         void BackupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ft.Geocoding)
@@ -1914,9 +1913,9 @@ namespace FTAnalyzer
                 }
             }
         }
-        #endregion
+#endregion
 
-        #region Recent File List
+#region Recent File List
         void ClearRecentFileListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ClearRecentList();
@@ -1992,7 +1991,7 @@ namespace FTAnalyzer
         {
             BuildRecentList();
         }
-        #endregion
+#endregion
 
         void DgFamilies_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -2126,7 +2125,7 @@ namespace FTAnalyzer
             }
         }
 
-        #region Facts Tab
+#region Facts Tab
         void SetupFactsCheckboxes()
         {
             Predicate<ExportFact> filter = CreateFactsFilter();
@@ -2296,9 +2295,9 @@ namespace FTAnalyzer
             facts.Show();
             HourGlass(false);
         }
-        #endregion
+#endregion
 
-        #region Form Drag Drop
+#region Form Drag Drop
         async void MainForm_DragDrop(object sender, DragEventArgs e)
         {
             bool fileLoaded = false;
@@ -2324,9 +2323,9 @@ namespace FTAnalyzer
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 e.Effect = DragDropEffects.Copy;
         }
-        #endregion
+#endregion
 
-        #region Manage Form Position
+#region Manage Form Position
         void ResetToDefaultFormSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadDefaultPosition();
@@ -2364,9 +2363,9 @@ namespace FTAnalyzer
                 Application.UserAppDataRegistry.SetValue("Mainform maximised", maxState);
             }
         }
-        #endregion
+#endregion
 
-        #region Duplicates Tab
+#region Duplicates Tab
         CancellationTokenSource cts;
 
         async Task SetPossibleDuplicates()
@@ -2462,9 +2461,9 @@ namespace FTAnalyzer
             GeneralSettings.Default.Save();
             await SetPossibleDuplicates();
         }
-        #endregion
+#endregion
 
-        #region Census Tab
+#region Census Tab
         void BtnShowCensus_Click(object sender, EventArgs e)
         {
             bool censusDone = sender == btnShowCensusEntered;
@@ -2660,9 +2659,9 @@ namespace FTAnalyzer
             factForm.ShowHideFactRows();
             HourGlass(false);
         }
-        #endregion
+#endregion
 
-        #region Colour Reports Tab
+#region Colour Reports Tab
         void BtnColourBMD_Click(object sender, EventArgs e)
         {
             HourGlass(true);
@@ -2764,9 +2763,9 @@ namespace FTAnalyzer
         {
             txtColouredSurname.Text = GetRandomSurname();
         }
-        #endregion
+#endregion
 
-        #region Loose Birth/Death Tabs
+#region Loose Birth/Death Tabs
         void SetupLooseBirths()
         {
             try
@@ -2825,9 +2824,9 @@ namespace FTAnalyzer
             }
         }
 
-        #endregion
+#endregion
 
-        #region View Notes
+#region View Notes
         void CtxViewNotes_Opening(object sender, CancelEventArgs e)
         {
             Individual ind = GetContextIndividual(sender);
@@ -2892,9 +2891,9 @@ namespace FTAnalyzer
                 }
             }
         }
-        #endregion
+#endregion
 
-        #region Referrals
+#region Referrals
         void CmbReferrals_Click(object sender, EventArgs e)
         {
             if (cmbReferrals.Items.Count == 0)
@@ -2923,9 +2922,9 @@ namespace FTAnalyzer
                 HourGlass(false);
             }
         }
-        #endregion
+#endregion
 
-        #region Export To Excel
+#region Export To Excel
         void IndividualsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
@@ -3053,9 +3052,9 @@ namespace FTAnalyzer
             }
             HourGlass(false);
         }
-        #endregion
+#endregion
 
-        #region Today
+#region Today
 
         async Task ShowTodaysEvents()
         {
@@ -3077,7 +3076,7 @@ namespace FTAnalyzer
         async void BtnUpdateTodaysEvents_Click(object sender, EventArgs e) => await ShowTodaysEvents();
 
         void NudToday_ValueChanged(object sender, EventArgs e) => Application.UserAppDataRegistry.SetValue("Todays Events Step", nudToday.Value);
-        #endregion
+#endregion
 
         public void SetFactTypeList(CheckedListBox ckbFactSelect, CheckedListBox ckbFactExclude, Predicate<ExportFact> filter)
         {
@@ -3106,7 +3105,7 @@ namespace FTAnalyzer
 
         void MnuLoadLocationsTNG_Click(object sender, EventArgs e) => LoadLocations(tspbTabProgress, tsStatusLabel, 2);
 
-        #region Load CSV Location Data
+#region Load CSV Location Data
 
         public static void LoadLocationData(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
         {
@@ -3154,7 +3153,7 @@ namespace FTAnalyzer
                 {
                     if (row.Count == 4)
                     {
-                        FactLocation loc = FactLocation.GetLocation(row[1], row[3], row[2], FactLocation.Geocode.NOT_SEARCHED, true, true);
+                        FactLocation.GetLocation(row[1], row[3], row[2], FactLocation.Geocode.NOT_SEARCHED, true, true);
                         rowCount++;
                     }
                     pb.Value++;
@@ -3200,7 +3199,7 @@ namespace FTAnalyzer
             }
             MessageBox.Show("Loaded " + rowCount + " locations from file " + csvFilename, "FTAnalyzer");
         }
-        #endregion
+#endregion
 
         void LoadLocations(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
         {
