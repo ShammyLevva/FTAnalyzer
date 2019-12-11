@@ -32,7 +32,6 @@ namespace FTAnalyzer.Utilities
             CheckDatabaseConnection();
             InstanceConnection = new SQLiteConnection(connectionString);
             restoring = false;
-
         }
 
         public static DatabaseHelper Instance
