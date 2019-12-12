@@ -642,42 +642,50 @@ namespace FTAnalyzer
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
         float GetMapZoomLevel(out FactLocation loc)
         {
             // get the tab
             loc = null;
-            switch (tabCtrlLocations.SelectedTab.Text)
+            try
             {
-                case "Tree View":
-                    TreeNode node = treeViewLocations.SelectedNode;
-                    if (node != null)
-                        loc = node.Text == "<blank>" ? null : ((FactLocation)node.Tag).GetLocation(node.Level);
-                    break;
-                case "Countries":
-                    loc = dgCountries.CurrentRow == null ? null : (FactLocation)dgCountries.CurrentRow.DataBoundItem;
-                    break;
-                case "Regions":
-                    loc = dgRegions.CurrentRow == null ? null : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
-                    break;
-                case "SubRegions":
-                    loc = dgSubRegions.CurrentRow == null ? null : (FactLocation)dgSubRegions.CurrentRow.DataBoundItem;
-                    break;
-                case "Addresses":
-                    loc = dgAddresses.CurrentRow == null ? null : (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
-                    break;
-                case "Places":
-                    loc = dgPlaces.CurrentRow == null ? null : (FactLocation)dgPlaces.CurrentRow.DataBoundItem;
-                    break;
-            }
-            if (loc == null)
+                switch (tabCtrlLocations.SelectedTab.Text)
+                {
+                    case "Tree View":
+                        TreeNode node = treeViewLocations.SelectedNode;
+                        if (node != null)
+                            loc = node.Text == "<blank>" ? null : ((FactLocation)node.Tag).GetLocation(node.Level);
+                        break;
+                    case "Countries":
+                        loc = dgCountries.CurrentRow == null ? null : (FactLocation)dgCountries.CurrentRow.DataBoundItem;
+                        break;
+                    case "Regions":
+                        loc = dgRegions.CurrentRow == null ? null : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
+                        break;
+                    case "SubRegions":
+                        loc = dgSubRegions.CurrentRow == null ? null : (FactLocation)dgSubRegions.CurrentRow.DataBoundItem;
+                        break;
+                    case "Addresses":
+                        loc = dgAddresses.CurrentRow == null ? null : (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
+                        break;
+                    case "Places":
+                        loc = dgPlaces.CurrentRow == null ? null : (FactLocation)dgPlaces.CurrentRow.DataBoundItem;
+                        break;
+                }
+                if (loc == null)
+                {
+                    if (tabCtrlLocations.SelectedTab.Text == "Tree View")
+                        MessageBox.Show("Location selected isn't valid to show on the map.", "FTAnalyzer");
+                    else
+                        MessageBox.Show("Nothing selected. Please select a location to show on the map.", "FTAnalyzer");
+                    return 0f;
+                }
+                return loc.ZoomLevel;
+            } 
+            catch(NullReferenceException)
             {
-                if (tabCtrlLocations.SelectedTab.Text == "Tree View")
-                    MessageBox.Show("Location selected isn't valid to show on the map.", "FTAnalyzer");
-                else
-                    MessageBox.Show("Nothing selected. Please select a location to show on the map.", "FTAnalyzer");
                 return 0f;
             }
-            return loc.ZoomLevel;
         }
 
 #region DataErrors
@@ -842,28 +850,41 @@ namespace FTAnalyzer
             Application.Exit();
         }
 
-        void TabCtrlLocations_Selecting(object sender, TabControlCancelEventArgs e) => HourGlass(true); // turn on when tab selected so all the formatting gets hourglass
+        void TabCtrlLocations_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            try
+            {
+                HourGlass(true); // turn on when tab selected so all the formatting gets hourglass
+            }
+            catch(ArgumentException) // attempt to fix font issue
+            { }
+        }
 
         void TabCtrlLocations_SelectedIndexChanged(object sender, EventArgs e)
         {
-            HourGlass(true);
-            Application.DoEvents();
-            TabPage current = tabCtrlLocations.SelectedTab;
-            Control control = current.Controls[0];
-            control.Focus();
-            if (control is DataGridView)
+            try
             {
-                DataGridView dg = control as DataGridView;
-                tsCountLabel.Text = $"{Messages.Count}{dg.RowCount} {dg.Name.Substring(2)}";
-                mnuPrint.Enabled = true;
+                HourGlass(true);
+                Application.DoEvents();
+                TabPage current = tabCtrlLocations.SelectedTab;
+                Control control = current.Controls[0];
+                control.Focus();
+                if (control is DataGridView)
+                {
+                    DataGridView dg = control as DataGridView;
+                    tsCountLabel.Text = $"{Messages.Count}{dg.RowCount} {dg.Name.Substring(2)}";
+                    mnuPrint.Enabled = true;
+                }
+                else
+                {
+                    tsCountLabel.Text = string.Empty;
+                    mnuPrint.Enabled = false;
+                }
+                tsHintsLabel.Text = Messages.Hints_Location;
+                HourGlass(false);
             }
-            else
-            {
-                tsCountLabel.Text = string.Empty;
-                mnuPrint.Enabled = false;
-            }
-            tsHintsLabel.Text = Messages.Hints_Location;
-            HourGlass(false);
+            catch(ArgumentException) // attempt to fix font issue
+            { }
         }
 
 #region CellFormatting
@@ -3133,7 +3154,7 @@ namespace FTAnalyzer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading CSV location data from " + csvFilename + "\nError was " + ex.Message, "FTAnalyzer");
+                MessageBox.Show($"Error loading CSV location data from {csvFilename}\nError was {ex.Message}", "FTAnalyzer");
             }
             pb.Visible = false;
             label.Text = string.Empty;
@@ -3160,7 +3181,7 @@ namespace FTAnalyzer
                     if (pb.Value % 10 == 0)
                         Application.DoEvents();
                 }
-                MessageBox.Show("Loaded " + rowCount + " locations from TNG file " + tngFilename, "FTAnalyzer");
+                MessageBox.Show($"Loaded {rowCount} locations from TNG file {tngFilename}", "FTAnalyzer");
             }
         }
 
@@ -3197,7 +3218,7 @@ namespace FTAnalyzer
                         Application.DoEvents();
                 }
             }
-            MessageBox.Show("Loaded " + rowCount + " locations from file " + csvFilename, "FTAnalyzer");
+            MessageBox.Show($"Loaded {rowCount} locations from file {csvFilename}", "FTAnalyzer");
         }
 #endregion
 

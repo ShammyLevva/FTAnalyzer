@@ -86,10 +86,10 @@ namespace FTAnalyzer.Forms
         public GoogleMap()
         {
             InitializeComponent();
-            Top = Top + NativeMethods.TopTaskbarOffset;
+            Top += NativeMethods.TopTaskbarOffset;
         }
 
-        public void ShowLocation(FactLocation loc, int level)
+        public static void ShowLocation(FactLocation loc, int level)
         {
             if (loc.IsGeoCoded(false))
             {
@@ -102,7 +102,7 @@ namespace FTAnalyzer.Forms
 
         public static string LocationText(GeoResponse res, FactLocation loc, int level)
         {
-            string output = string.Empty;
+            string output;
             int returnlevel = GetFactLocationType(res.Results[0].Types, loc);
             if (returnlevel != FactLocation.UNKNOWN)
             {
