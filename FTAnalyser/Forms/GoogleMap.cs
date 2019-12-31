@@ -89,7 +89,7 @@ namespace FTAnalyzer.Forms
             Top += NativeMethods.TopTaskbarOffset;
         }
 
-        public static void ShowLocation(FactLocation loc, int level)
+        public void ShowLocation(FactLocation loc, int level)
         {
             if (loc.IsGeoCoded(false))
             {
