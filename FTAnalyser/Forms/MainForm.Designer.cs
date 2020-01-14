@@ -1832,10 +1832,10 @@ namespace FTAnalyzer
             this.rtbLostCousins.BackColor = System.Drawing.SystemColors.Window;
             this.rtbLostCousins.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbLostCousins.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbLostCousins.Location = new System.Drawing.Point(533, 11);
+            this.rtbLostCousins.Location = new System.Drawing.Point(536, 6);
             this.rtbLostCousins.Name = "rtbLostCousins";
             this.rtbLostCousins.ReadOnly = true;
-            this.rtbLostCousins.Size = new System.Drawing.Size(388, 362);
+            this.rtbLostCousins.Size = new System.Drawing.Size(528, 362);
             this.rtbLostCousins.TabIndex = 34;
             this.rtbLostCousins.TabStop = false;
             this.rtbLostCousins.Text = "";
