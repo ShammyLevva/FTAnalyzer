@@ -1532,7 +1532,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Application.UserAppDataRegistry.SetValue("LostCousinsEmail", txtLCEmail.Text);
-            bool websiteAvailable = ExportToLostCousins.CheckLostCousinsLogin(txtLCEmail.Text, txtLCPassword.Text);
+            bool websiteAvailable = ExportToLostCousins.CheckLostCousinsLogin(txtLCEmail.Text, txtLCPassword.Text.Substring(0,15));
             btnLCLogin.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
             btnLCLogin.Enabled = !websiteAvailable;
             btnUpdateLostCousinsWebsite.Visible = websiteAvailable;
