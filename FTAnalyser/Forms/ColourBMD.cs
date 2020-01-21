@@ -10,18 +10,17 @@ namespace FTAnalyzer.Forms
 {
     public partial class ColourBMD : Form
     {
-        ReportFormHelper reportFormHelper;
-
-        Dictionary<BMDColour, DataGridViewCellStyle> styles;
-        int birthColumnIndex;
-        int burialColumnIndex;
-        SortableBindingList<IDisplayColourBMD> reportList;
-        Font boldFont;
+        readonly ReportFormHelper reportFormHelper;
+        readonly Dictionary<BMDColour, DataGridViewCellStyle> styles;
+        readonly int birthColumnIndex;
+        readonly int burialColumnIndex;
+        readonly SortableBindingList<IDisplayColourBMD> reportList;
+        readonly Font boldFont;
 
         public ColourBMD(List<IDisplayColourBMD> reportList)
         {
             InitializeComponent();
-            Top = Top + NativeMethods.TopTaskbarOffset;
+            Top += NativeMethods.TopTaskbarOffset;
             dgBMDReportSheet.AutoGenerateColumns = false;
 
             this.reportList = new SortableBindingList<IDisplayColourBMD>(reportList);
@@ -85,6 +84,7 @@ namespace FTAnalyzer.Forms
                 defaultProvider = "FreeBMD";
             cbBMDSearchProvider.Text = defaultProvider;
             cbFilter.Text = "All Individuals";
+            cbApplyTo.Text = "All BMD Records";
         }
 
         void ResetTable()
@@ -200,10 +200,7 @@ namespace FTAnalyzer.Forms
             reportFormHelper.PrintReport("Colour BMD Report");
         }
 
-        void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.PrintPreviewReport();
-        }
+        void PrintPreviewToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintPreviewReport();
 
         void DgReportSheet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -269,96 +266,107 @@ namespace FTAnalyzer.Forms
             dgBMDReportSheet.Focus();
         }
 
-        List<IDisplayColourBMD> BuildFilter(BMDColour toFind, bool all)
+        List<IDisplayColourBMD> BuildFilter(List<FamilyTree.SearchType> types, BMDColour toFind)
         {
-            List<IDisplayColourBMD> result = new List<IDisplayColourBMD>();
-            foreach (IDisplayColourBMD row in this.reportList)
+            var result = new List<IDisplayColourBMD>();
+            foreach (IDisplayColourBMD row in reportList)
             {
-                if (all)
-                {
-                    if ((row.Birth == toFind || row.Birth == BMDColour.EMPTY) && (row.BaptChri == toFind || row.BaptChri == BMDColour.EMPTY) &&
-                        (row.Marriage1 == toFind || row.Marriage1 == BMDColour.EMPTY) && (row.Marriage2 == toFind || row.Marriage2 == BMDColour.EMPTY) &&
-                        (row.Marriage3 == toFind || row.Marriage3 == BMDColour.EMPTY) && (row.Death == toFind || row.Death == BMDColour.EMPTY) &&
-                        (row.CremBuri == toFind || row.CremBuri == BMDColour.EMPTY))
-                        result.Add(row);
-                }
-                else
-                {
-                    if (row.Birth == toFind || row.BaptChri == toFind || row.Marriage1 == toFind || row.Marriage2 == toFind ||
-                        row.Marriage3 == toFind || row.Death == toFind || row.CremBuri == toFind)
-                        result.Add(row);
-                }
+                if (types.Contains(FamilyTree.SearchType.BIRTH) && (row.Birth == toFind || row.BaptChri == toFind))
+                    result.Add(row);
+                else if (types.Contains(FamilyTree.SearchType.MARRIAGE) && (row.Marriage1 == toFind || row.Marriage2 == toFind || row.Marriage3 == toFind))
+                    result.Add(row);
+                else if (types.Contains(FamilyTree.SearchType.DEATH) && (row.Death == toFind || row.CremBuri == toFind))
+                    result.Add(row);
             }
             return result;
         }
 
         void CbFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
+            UpdateBMDFilter();
+            cbApplyTo.Enabled = cbFilter.SelectedIndex != 0;
+        }
+
+        void CbApplyTo_SelectedIndexChanged(object sender, EventArgs e) => UpdateBMDFilter();
+
+        void UpdateBMDFilter()
+        {
             Cursor = Cursors.WaitCursor;
+            var types = new List<FamilyTree.SearchType>();
+            BMDColour colour = BMDColour.ALL_RECORDS;
+            switch (cbApplyTo.SelectedIndex)
+            {
+                case -1: // nothing selected
+                    break;
+                case 0: // All BMD Records
+                    types.Add(FamilyTree.SearchType.BIRTH);
+                    types.Add(FamilyTree.SearchType.MARRIAGE);
+                    types.Add(FamilyTree.SearchType.DEATH);
+                    break;
+                case 1: // Births Only
+                    types.Add(FamilyTree.SearchType.BIRTH);
+                    break;
+                case 2: // Marriages Only
+                    types.Add(FamilyTree.SearchType.MARRIAGE);
+                    break;
+                case 3: // Deaths Only
+                    types.Add(FamilyTree.SearchType.DEATH);
+                    break;
+                case 4: // Births & Deaths
+                    types.Add(FamilyTree.SearchType.BIRTH);
+                    types.Add(FamilyTree.SearchType.DEATH);
+                    break;
+                case 5: // Births & Marriages
+                    types.Add(FamilyTree.SearchType.BIRTH);
+                    types.Add(FamilyTree.SearchType.MARRIAGE);
+                    break;
+                case 6: // Marriages & Deaths
+                    types.Add(FamilyTree.SearchType.MARRIAGE);
+                    types.Add(FamilyTree.SearchType.DEATH);
+                    break;
+            }
             switch (cbFilter.SelectedIndex)
             {
                 case -1: // nothing selected
                 case 0: // All Individuals
-                    dgBMDReportSheet.DataSource = this.reportList;
+                    dgBMDReportSheet.DataSource = reportList;
                     break;
-                case 1: // None Found (All Red)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.UNKNOWN_DATE, true));
+                case 1: // Date Missing (Red)
+                    colour = BMDColour.UNKNOWN_DATE;
                     break;
-                case 2: // All Found (All Green)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.EXACT_DATE, true));
+                case 2: // Date Found (Green)
+                    colour = BMDColour.EXACT_DATE;
                     break;
-                case 3: // All Open Ended ranges (Orange Red)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.OPEN_ENDED_DATE, true));
+                case 3: // Open Ended Date Range (Orange Red)
+                    colour = BMDColour.OPEN_ENDED_DATE;
                     break;
-                case 4: // All Wide date ranges (Tomato)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.VERY_WIDE_DATE, true));
+                case 4: // Very Wide Date Range(Light Red)
+                    colour = BMDColour.VERY_WIDE_DATE;
                     break;
-                case 5: // All Wide date ranges (Orange)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.WIDE_DATE, true));
+                case 5: // Wide Date Range (Orange)
+                    colour = BMDColour.WIDE_DATE;
                     break;
-                case 6: // All Narrow date ranges (Yellow)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.NARROW_DATE, true));
+                case 6: // Narrow date ranges (Yellow)
+                    colour = BMDColour.NARROW_DATE;
                     break;
-                case 7: // All Just year date ranges (Yellow)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.JUST_YEAR_DATE, true));
+                case 7: // Just year date ranges (Yellow)
+                    colour = BMDColour.JUST_YEAR_DATE;
                     break;
-                case 8: // All Approx date ranges (Light Green)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.APPROX_DATE, true));
+                case 8: // Approx date ranges (Light Green)
+                    colour = BMDColour.APPROX_DATE;
                     break;
-                case 9: // Some Missing (Some Red)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.UNKNOWN_DATE, false));
+                case 9: // Of Marrying age (Peach)
+                    colour = BMDColour.NO_SPOUSE;
                     break;
-                case 10: // Some found (Some Green)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.EXACT_DATE, false));
+                case 10: // No Partner shared fact/children (Light Blue)
+                    colour = BMDColour.NO_PARTNER;
                     break;
-                case 11: // Some Open Ended date ranges (Orange Red)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.OPEN_ENDED_DATE, false));
-                    break;
-                case 12: // Some Very Wide date ranges (Tomato)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.VERY_WIDE_DATE, false));
-                    break;
-                case 13: // Some Wide date ranges (Orange)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.WIDE_DATE, false));
-                    break;
-                case 14: // Some Narrow date ranges (Yellow)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.NARROW_DATE, false));
-                    break;
-                case 15: // Some Approx date ranges (Light Green)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.JUST_YEAR_DATE, false));
-                    break;
-                case 16: // Some Approx date ranges (Light Green)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.APPROX_DATE, false));
-                    break;
-                case 17: // Of Marrying age (Peach)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.NO_SPOUSE, false));
-                    break;
-                case 18: // No Partner shared fact/children (Light Blue)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.NO_PARTNER, false));
-                    break;
-                case 19: // Partner but no marriage (Dark Blue)
-                    dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(BMDColour.NO_MARRIAGE, false));
+                case 11: // Partner but no marriage (Dark Blue)
+                    colour = BMDColour.NO_MARRIAGE;
                     break;
             }
+            if (cbFilter.SelectedIndex >0)
+                dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(types, colour));
             dgBMDReportSheet.Focus();
             tsRecords.Text = $"{Properties.Messages.Count}{dgBMDReportSheet.RowCount} records listed.";
             Cursor = Cursors.Default;
