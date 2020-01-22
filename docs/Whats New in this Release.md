@@ -1,7 +1,8 @@
-#### Updated Release Version 7.5.0.0 21th Jan 2020  
+#### Updated Release Version 7.5.0.0 21st Jan 2020  
 **Updates**  
 Added feature to filter colour BMD report on births, deaths and marriages  
 Added warning about using potentially unstable out of date Windows 7  
+Using new code signing certificate  
 **Bugfixes**  
 Trim Lost Cousins password to be max 15 characters  
 Fix icon sizing on high definition monitors  
