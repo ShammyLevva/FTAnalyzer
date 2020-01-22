@@ -5,17 +5,20 @@ using FTAnalyzer.Forms;
 using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
+using HtmlAgilityPack;
 using Ionic.Zip;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
+using System.Deployment.Application;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -55,6 +58,7 @@ namespace FTAnalyzer
             int pos = VERSION.IndexOf('-');
             string ver = pos > 0 ? VERSION.Substring(0, VERSION.IndexOf('-')) : VERSION;
             DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
+            CheckSystemVersion();
 #if !__DEBUG__
             CheckWebVersion();
 #endif
@@ -77,7 +81,14 @@ namespace FTAnalyzer
             loading = false;
         }
 
- #if !__DEBUG__
+        void CheckSystemVersion()
+        {
+            OperatingSystem os = Environment.OSVersion;
+            if (os.Version.Major == 6 && os.Version.Minor < 2)
+                MessageBox.Show("Please note Microsoft has ended Windows 7 support as such it is no longer advisable to be connected to the internet using it. Any security flaws that are unpatched may be being actively exploited by hackers. You should upgrade as soon as possible.\n\nPlease be aware that FTAnalyzer may be unstable on an outdated unsupported Operating System.");
+        }
+
+#if !__DEBUG__
        async void CheckWebVersion()
         {
             Settings.Default.StartTime = DateTime.Now;

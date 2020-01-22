@@ -1,3 +1,13 @@
+#### Updated Release Version 7.5.0.0 21th Jan 2020  
+**Updates**  
+Added feature to filter colour BMD report on births, deaths and marriages  
+Added warning about using potentially unstable out of date Windows 7  
+**Bugfixes**  
+Trim Lost Cousins password to be max 15 characters  
+Fix icon sizing on high definition monitors  
+Update width of Lost Cousins report details tab  
+Attempt to fix font issues with Locations tab  
+
 #### Updated Release Version 7.4.2.0 20th Jun 2019  
 **Updates**  
 Added Children Count & Marriage Count to Individuals export  
