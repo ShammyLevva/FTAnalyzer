@@ -28,7 +28,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.5.0.0";
+        public static string VERSION = "7.5.0.1";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1543,7 +1543,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Application.UserAppDataRegistry.SetValue("LostCousinsEmail", txtLCEmail.Text);
-            bool websiteAvailable = ExportToLostCousins.CheckLostCousinsLogin(txtLCEmail.Text, txtLCPassword.Text.Substring(0,15));
+            bool websiteAvailable = ExportToLostCousins.CheckLostCousinsLogin(txtLCEmail.Text, txtLCPassword.Text);
             btnLCLogin.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
             btnLCLogin.Enabled = !websiteAvailable;
             btnUpdateLostCousinsWebsite.Visible = websiteAvailable;

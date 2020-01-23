@@ -1,3 +1,7 @@
+#### Bugfix Release Version 7.5.0.1 23rd Jan 2020  
+**Bugfixes**  
+Lost Cousins passwords shorter than 15 characters were causing a crash  
+
 #### Updated Release Version 7.5.0.0 21st Jan 2020  
 **Updates**  
 Added feature to filter colour BMD report on births, deaths and marriages  

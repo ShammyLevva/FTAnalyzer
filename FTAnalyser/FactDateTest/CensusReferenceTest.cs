@@ -176,7 +176,7 @@ namespace CensusReferenceTest
             Assert.IsTrue(censusRef.Piece.Equals(piece));
             Assert.IsTrue(censusRef.Folio.Equals(folio));
             Assert.IsTrue(censusRef.Page.Equals(page));
-            if (!book.Equals(string.Empty))
+            if (!string.IsNullOrEmpty(book))
                 Assert.IsTrue(censusRef.Book.Equals(book));
         }
 
