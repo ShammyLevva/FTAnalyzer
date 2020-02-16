@@ -5,30 +5,32 @@ using FTAnalyzer.Forms;
 using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
-using HtmlAgilityPack;
 using Ionic.Zip;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
-using System.Deployment.Application;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+#if !__DEBUG__
+    using HtmlAgilityPack;
+    using System.Deployment.Application;
+    using System.Net;
+#endif
 
 namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.5.0.1";
+        public static string VERSION = "7.5.1.0";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

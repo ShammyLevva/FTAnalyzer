@@ -10,13 +10,13 @@ namespace FTAnalyzer.Forms
 {
     public partial class LostCousinsReferral : Form
     {
-        private ReportFormHelper reportFormHelper;
-        List<ExportReferrals> referrals;
+        readonly ReportFormHelper reportFormHelper;
+        readonly List<ExportReferrals> referrals;
 
         public LostCousinsReferral(Individual referee, bool onlyInCommon)
         {
             InitializeComponent();
-            Top = Top + NativeMethods.TopTaskbarOffset;
+            Top += NativeMethods.TopTaskbarOffset;
             FamilyTree ft = FamilyTree.Instance;
             Text = "Lost Cousins Referral for " + referee.ToString();
             reportFormHelper = new ReportFormHelper(this, Text, dgLCReferrals, ResetTable, "Lost Cousins Referrals");
@@ -57,10 +57,7 @@ namespace FTAnalyzer.Forms
             dgLCReferrals.DataSource = new SortableBindingList<ExportReferrals>(referrals);
         }
 
-        void RefreshCensusReferences(object sender, EventArgs e)
-        {
-            dgLCReferrals.Refresh();
-        }
+        void RefreshCensusReferences(object sender, EventArgs e) => dgLCReferrals.Refresh();
 
         void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
@@ -68,34 +65,16 @@ namespace FTAnalyzer.Forms
             MessageBox.Show("Form Settings Saved", "Lost Cousins Referrals");
         }
 
-        void MnuResetColumns_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.ResetColumnLayout("LCReferralsColumns.xml");
-        }
+        void MnuResetColumns_Click(object sender, EventArgs e) => reportFormHelper.ResetColumnLayout("LCReferralsColumns.xml");
 
-        void PrintToolStripButton_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.PrintReport("Lost Cousins Referral Report");
-        }
+        void PrintToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintReport("Lost Cousins Referral Report");
 
-        void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.PrintPreviewReport();
-        }
+        void PrintPreviewToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintPreviewReport();
 
-        void MnuExportToExcel_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.DoExportToExcel(referrals.ToList<IExportReferrals>());
-        }
+        void MnuExportToExcel_Click(object sender, EventArgs e) => reportFormHelper.DoExportToExcel(referrals.ToList<IExportReferrals>());
 
-        void LostCousinsReferral_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Dispose();
-        }
+        void LostCousinsReferral_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        void LostCousinsReferral_Load(object sender, EventArgs e)
-        {
-            SpecialMethods.SetFonts(this);
-        }
+        void LostCousinsReferral_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }
 }

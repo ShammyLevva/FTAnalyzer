@@ -1,3 +1,7 @@
+#### Bugfix Release Version 7.5.1.0 5th Feb 2020  
+**Updates**  
+Added support for "1881 GROS 233/ 2/ 7" style Scottish census references  
+  
 #### Bugfix Release Version 7.5.0.1 23rd Jan 2020  
 **Bugfixes**  
 Lost Cousins passwords shorter than 15 characters were causing a crash  
