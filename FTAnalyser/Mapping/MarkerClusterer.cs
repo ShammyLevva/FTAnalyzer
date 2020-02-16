@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
 using SharpMap.Data;
 using System;
 
@@ -53,10 +53,10 @@ namespace FTAnalyzer.Mapping
         {
             double distance = double.MaxValue;
             MapCluster clusterToAddTo = null;
-            IPoint rowCentre = row.Geometry.Centroid;
+            Point rowCentre = row.Geometry.Centroid;
             foreach (MapCluster cluster in this.clusters)
             {
-                IPoint centre = cluster.Centroid;
+                Point centre = cluster.Centroid;
                 if (centre.X != 0 && centre.Y != 0)
                 {
                     double d = centre.Distance(rowCentre);

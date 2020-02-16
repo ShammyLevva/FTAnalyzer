@@ -24,7 +24,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.Globalization;
 using Common.Logging;
-using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
 using SharpMap.Converters.WellKnownBinary;
 using SharpMap.Converters.WellKnownText;
 
@@ -308,9 +308,9 @@ namespace SharpMap.Data.Providers
             }
         }
 
-        public override Collection<IGeometry> GetGeometriesInView(Envelope bbox)
+        public override Collection<Geometry> GetGeometriesInView(Envelope bbox)
         {
-            var features = new Collection<IGeometry>();
+            var features = new Collection<Geometry>();
             using (var conn = SpatiaLiteConnection(ConnectionString))
             {
                 var boxIntersect = GetBoxClause(bbox);
@@ -372,9 +372,9 @@ namespace SharpMap.Data.Providers
             return objectlist;
         }
 
-        public override IGeometry GetGeometryByID(uint oid)
+        public override Geometry GetGeometryByID(uint oid)
         {
-            IGeometry geom = null;
+            Geometry geom = null;
             using (var conn = SpatiaLiteConnection(ConnectionString))
             {
                 string strSql = "SELECT AsBinary(" + GeometryColumn + ") AS Geom FROM " + Table + " WHERE " +
@@ -397,7 +397,7 @@ namespace SharpMap.Data.Providers
             return geom;
         }
 
-        protected override void OnExecuteIntersectionQuery(IGeometry geom, FeatureDataSet ds)
+        protected override void OnExecuteIntersectionQuery(Geometry geom, FeatureDataSet ds)
         {
             using (var conn = SpatiaLiteConnection(ConnectionString))
             {
@@ -744,13 +744,13 @@ namespace SharpMap.Data.Providers
             return "MBRIntersects(GeomFromText('" + wkt + "')," + _geometryColumn + ")=1";
         }
 
-        private IGeometry LineFromBbox(Envelope bbox)
+        private Geometry LineFromBbox(Envelope bbox)
         {
             var pointColl = new[] {bbox.Min(), bbox.Max()};
             return Factory.CreateLineString(pointColl);
         }
 
-        public string GetOverlapsClause(IGeometry geom)
+        public string GetOverlapsClause(Geometry geom)
         {
             string wkt = GeometryToWKT.Write(geom);
             string retval = "Intersects(GeomFromText('" + wkt + "')," + _geometryColumn + ")=1";

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NetTopologySuite;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -16,10 +17,10 @@ namespace SharpMap.Forms
             _wktTokens.Add("POINT", "POINT(10 10)");
             _wktTokens.Add("LINESTRING", "LINESTRING(5 5, 7 16, 3 8)");
             _wktTokens.Add("POLYGON", "POLYGON((10 10, 10 20, 20 20, 20 10, 10 10), (12 12, 18 12, 18 18, 12 18, 12 12))");
-            _wktTokens.Add("MULTIPOINT", "MULTIPOINT((10 10), (15 15), (13 9))");
-            _wktTokens.Add("MULTILINESTRING", "MULTILINESTRING((5 5, 7 16, 3 8), (15 15, 13 9))");
-            _wktTokens.Add("MULTIPOLYGON", "MULTIPOLYGON(((10 10, 10 20, 20 20, 20 10, 10 10), (12 12, 18 12, 18 18, 12 18, 12 12)), ((21 21, 21 31, 31 31, 31 21, 21 21)))");
-            _wktTokens.Add("GEOMETRYCOLLECTION", "GEOMETRYCOLLECTION(MULTIPOINT((10 10), (15 15), (13 9)), LINESTRING(5 5, 7 16, 3 8))");
+            _wktTokens.Add("MultiPoint", "MultiPoint((10 10), (15 15), (13 9))");
+            _wktTokens.Add("MultiLineString", "MultiLineString((5 5, 7 16, 3 8), (15 15, 13 9))");
+            _wktTokens.Add("MultiPolygon", "MultiPolygon(((10 10, 10 20, 20 20, 20 10, 10 10), (12 12, 18 12, 18 18, 12 18, 12 12)), ((21 21, 21 31, 31 31, 31 21, 21 21)))");
+            _wktTokens.Add("GEOMETRYCOLLECTION", "GEOMETRYCOLLECTION(MultiPoint((10 10), (15 15), (13 9)), LINESTRING(5 5, 7 16, 3 8))");
 
             ShowInTaskbar = false;
 
@@ -37,8 +38,8 @@ namespace SharpMap.Forms
             Hide();
         }
 
-        private GeoAPI.Geometries.IGeometry _geometry;
-        public GeoAPI.Geometries.IGeometry Geometry
+        private NetTopologySuite.Geometries.Geometry _geometry;
+        public NetTopologySuite.Geometries.Geometry Geometry
         {
             get
             {
@@ -67,7 +68,7 @@ namespace SharpMap.Forms
         }
 
         private readonly NetTopologySuite.IO.WKTReader _wktReader = new NetTopologySuite.IO.WKTReader(
-            GeoAPI.GeometryServiceProvider.Instance.CreateGeometryFactory());
+            NtsGeometryServices.Instance.CreateGeometryFactory());
         
         
         private void txtWkt_TextChanged(object sender, EventArgs e)
@@ -76,7 +77,7 @@ namespace SharpMap.Forms
             if (string.IsNullOrEmpty(txt))
                 return;
 
-            GeoAPI.Geometries.IGeometry geometry = null;
+            NetTopologySuite.Geometries.Geometry geometry = null;
             try
             {
                 geometry = _wktReader.Read(txt);

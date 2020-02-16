@@ -21,12 +21,13 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using SharpMap.Data;
 using SharpMap.Data.Providers;
-using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
 using SharpMap.Rendering;
 using SharpMap.Rendering.Thematics;
 using SharpMap.Styles;
 using System.Collections.Generic;
 using Common.Logging;
+using Point = NetTopologySuite.Geometries.Point;
 
 namespace SharpMap.Layers
 {
@@ -89,8 +90,8 @@ namespace SharpMap.Layers
         /// Specifies whether polygons should be clipped prior to rendering
         /// </summary>
         /// <remarks>
-        /// <para>Clipping will clip <see cref="GeoAPI.Geometries.IPolygon"/> and
-        /// <see cref="GeoAPI.Geometries.IMultiPolygon"/> to the current view prior
+        /// <para>Clipping will clip <see cref="NetTopologySuite.Geometries.Polygon"/> and
+        /// <see cref="NetTopologySuite.Geometries.MultiPolygon"/> to the current view prior
         /// to rendering the object.</para>
         /// <para>Enabling clipping might improve rendering speed if you are rendering 
         /// only small portions of very large objects.</para>
@@ -144,7 +145,7 @@ namespace SharpMap.Layers
                     throw (new ApplicationException("DataSource property not set on layer '" + LayerName + "'"));
 
                 if (_envelope != null && CacheExtent)
-                    return ToTarget(_envelope.Clone());
+                    return ToTarget(_envelope.Copy());
 
                 Envelope box;
                 lock (_dataSource)
@@ -284,14 +285,14 @@ namespace SharpMap.Layers
                             if (outlineStyle != null)
                             {
                                 //Draw background of all line-outlines first
-                                if (feature.Geometry is ILineString)
+                                if (feature.Geometry is LineString)
                                 {
-                                    VectorRenderer.DrawLineString(g, feature.Geometry as ILineString, outlineStyle.Outline,
+                                    VectorRenderer.DrawLineString(g, feature.Geometry as LineString, outlineStyle.Outline,
                                                                         map, outlineStyle.LineOffset);
                                 }
-                                else if (feature.Geometry is IMultiLineString)
+                                else if (feature.Geometry is MultiLineString)
                                 {
-                                    VectorRenderer.DrawMultiLineString(g, feature.Geometry as IMultiLineString,
+                                    VectorRenderer.DrawMultiLineString(g, feature.Geometry as MultiLineString,
                                                                         outlineStyle.Outline, map, outlineStyle.LineOffset);
                                 }
                             }
@@ -350,7 +351,7 @@ namespace SharpMap.Layers
             if (stylesToRender == null)
                 return;
 
-            Collection<IGeometry> geoms = null;
+            Collection<Geometry> geoms = null;
 
             foreach (var style in stylesToRender)
             {
@@ -404,16 +405,16 @@ namespace SharpMap.Layers
                                     if (geom != null)
                                     {
                                         //Draw background of all line-outlines first
-                                        if (geom is ILineString)
-                                            VectorRenderer.DrawLineString(g, geom as ILineString, vStyle.Outline, map, vStyle.LineOffset);
-                                        else if (geom is IMultiLineString)
-                                            VectorRenderer.DrawMultiLineString(g, geom as IMultiLineString, vStyle.Outline, map, vStyle.LineOffset);
+                                        if (geom is LineString)
+                                            VectorRenderer.DrawLineString(g, geom as LineString, vStyle.Outline, map, vStyle.LineOffset);
+                                        else if (geom is MultiLineString)
+                                            VectorRenderer.DrawMultiLineString(g, geom as MultiLineString, vStyle.Outline, map, vStyle.LineOffset);
                                     }
                                 }
                             }
                         }
 
-                        foreach (IGeometry geom in geoms)
+                        foreach (Geometry geom in geoms)
                         {
                             if (geom != null)
                                 RenderGeometry(g, map, geom, vStyle);
@@ -462,7 +463,7 @@ namespace SharpMap.Layers
         /// <param name="map">The map</param>
         /// <param name="feature">The feature's geometry</param>
         /// <param name="style">The style to apply</param>
-        protected void RenderGeometry(Graphics g, MapViewport map, IGeometry feature, VectorStyle style)
+        protected void RenderGeometry(Graphics g, MapViewport map, Geometry feature, VectorStyle style)
         {
             if (feature == null)
                 return;
@@ -472,71 +473,71 @@ namespace SharpMap.Layers
             {
                 case OgcGeometryType.Polygon:
                     if (style.EnableOutline)
-                        VectorRenderer.DrawPolygon(g, (IPolygon)feature, style.Fill, style.Outline, _clippingEnabled,
+                        VectorRenderer.DrawPolygon(g, (Polygon)feature, style.Fill, style.Outline, _clippingEnabled,
                                                    map);
                     else
-                        VectorRenderer.DrawPolygon(g, (IPolygon)feature, style.Fill, null, _clippingEnabled, map);
+                        VectorRenderer.DrawPolygon(g, (Polygon)feature, style.Fill, null, _clippingEnabled, map);
                     break;
                 case OgcGeometryType.MultiPolygon:
                     if (style.EnableOutline)
-                        VectorRenderer.DrawMultiPolygon(g, (IMultiPolygon)feature, style.Fill, style.Outline,
+                        VectorRenderer.DrawMultiPolygon(g, (MultiPolygon)feature, style.Fill, style.Outline,
                                                         _clippingEnabled, map);
                     else
-                        VectorRenderer.DrawMultiPolygon(g, (IMultiPolygon)feature, style.Fill, null, _clippingEnabled,
+                        VectorRenderer.DrawMultiPolygon(g, (MultiPolygon)feature, style.Fill, null, _clippingEnabled,
                                                         map);
                     break;
                 case OgcGeometryType.LineString:
                     if (style.LineSymbolizer != null)
                     {
-                        style.LineSymbolizer.Render(map, (ILineString)feature, g);
+                        style.LineSymbolizer.Render(map, (LineString)feature, g);
                         return;
                     }
-                    VectorRenderer.DrawLineString(g, (ILineString)feature, style.Line, map, style.LineOffset);
+                    VectorRenderer.DrawLineString(g, (LineString)feature, style.Line, map, style.LineOffset);
                     return;
                 case OgcGeometryType.MultiLineString:
                     if (style.LineSymbolizer != null)
                     {
-                        style.LineSymbolizer.Render(map, (IMultiLineString)feature, g);
+                        style.LineSymbolizer.Render(map, (MultiLineString)feature, g);
                         return;
                     }
-                    VectorRenderer.DrawMultiLineString(g, (IMultiLineString)feature, style.Line, map, style.LineOffset);
+                    VectorRenderer.DrawMultiLineString(g, (MultiLineString)feature, style.Line, map, style.LineOffset);
                     break;
                 case OgcGeometryType.Point:
                     if (style.PointSymbolizer != null)
                     {
-                        VectorRenderer.DrawPoint(style.PointSymbolizer, g, (IPoint)feature, map);
+                        VectorRenderer.DrawPoint(style.PointSymbolizer, g, (Point)feature, map);
                         return;
                     }
 
                     if (style.Symbol != null || style.PointColor == null)
                     {
-                        VectorRenderer.DrawPoint(g, (IPoint)feature, style.Symbol, style.SymbolScale, style.SymbolOffset,
+                        VectorRenderer.DrawPoint(g, (Point)feature, style.Symbol, style.SymbolScale, style.SymbolOffset,
                                                  style.SymbolRotation, map);
                         return;
                     }
-                    VectorRenderer.DrawPoint(g, (IPoint)feature, style.PointColor, style.PointSize, style.SymbolOffset, map);
+                    VectorRenderer.DrawPoint(g, (Point)feature, style.PointColor, style.PointSize, style.SymbolOffset, map);
 
                     break;
                 case OgcGeometryType.MultiPoint:
                     if (style.PointSymbolizer != null)
                     {
-                        VectorRenderer.DrawMultiPoint(style.PointSymbolizer, g, (IMultiPoint)feature, map);
+                        VectorRenderer.DrawMultiPoint(style.PointSymbolizer, g, (MultiPoint)feature, map);
                     }
                     if (style.Symbol != null || style.PointColor == null)
                     {
-                        VectorRenderer.DrawMultiPoint(g, (IMultiPoint)feature, style.Symbol, style.SymbolScale,
+                        VectorRenderer.DrawMultiPoint(g, (MultiPoint)feature, style.Symbol, style.SymbolScale,
                                                   style.SymbolOffset, style.SymbolRotation, map);
                     }
                     else
                     {
-                        VectorRenderer.DrawMultiPoint(g, (IMultiPoint)feature, style.PointColor, style.PointSize, style.SymbolOffset, map);
+                        VectorRenderer.DrawMultiPoint(g, (MultiPoint)feature, style.PointColor, style.PointSize, style.SymbolOffset, map);
                     }
                     break;
                 case OgcGeometryType.GeometryCollection:
-                    var coll = (IGeometryCollection)feature;
+                    var coll = (GeometryCollection)feature;
                     for (var i = 0; i < coll.NumGeometries; i++)
                     {
-                        IGeometry geom = coll[i];
+                        Geometry geom = coll[i];
                         RenderGeometry(g, map, geom, style);
                     }
                     break;
@@ -581,7 +582,7 @@ namespace SharpMap.Layers
         /// </summary>
         /// <param name="geometry">Geometry to intersect with</param>
         /// <param name="ds">FeatureDataSet to fill data into</param>
-        public void ExecuteIntersectionQuery(IGeometry geometry, FeatureDataSet ds)
+        public void ExecuteIntersectionQuery(Geometry geometry, FeatureDataSet ds)
         {
             geometry = ToSource(geometry);
 

@@ -1,10 +1,6 @@
 ﻿using FTAnalyzer.Utilities;
-using GeoAPI.Geometries;
 using NetTopologySuite.Geometries;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace FTAnalyzer.Mapping
@@ -20,7 +16,7 @@ namespace FTAnalyzer.Mapping
         public string CountyName { get; private set; }
         public string CountryName { get; private set; }
         public string ParishName { get; private set; }
-        public IPoint Point { get; private set; }
+        public Point Point { get; private set; }
         public string FuzzyMatch { get; private set; }
         public string FuzzyNoParishMatch { get; private set; }
 

@@ -1,5 +1,4 @@
-﻿using GeoAPI.Geometries;
-using NetTopologySuite.Geometries;
+﻿using NetTopologySuite.Geometries;
 using SharpMap.Data;
 using System.Drawing;
 using System.Numerics;
@@ -17,7 +16,7 @@ namespace FTAnalyzer.Mapping
 
         readonly FactDate _year;
 
-        private static IPoint centre = new NetTopologySuite.Geometries.Point(0, 0);
+        private static NetTopologySuite.Geometries.Point centre = new NetTopologySuite.Geometries.Point(0, 0);
 
         public MapLocation(Individual ind, Fact fact, FactDate year) : this(ind, fact, fact.Location, year) { }
 

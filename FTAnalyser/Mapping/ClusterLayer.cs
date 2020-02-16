@@ -10,7 +10,7 @@ using SharpMap.Data;
 using SharpMap.Data.Providers;
 using SharpMap.Layers;
 using SharpMap.Styles;
-using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
 
 namespace FTAnalyzer.Mapping
 {

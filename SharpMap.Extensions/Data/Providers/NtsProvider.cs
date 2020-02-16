@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
-using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
 #if GisSharpBlog
 using GisSharpBlog.NetTopologySuite.Features;
 using GisSharpBlog.NetTopologySuite.Geometries;
@@ -30,8 +30,8 @@ using NetTopologySuite.Geometries;
 using NtsGeometry = NetTopologySuite.Geometries.Geometry;
 #endif
 
-using Geometry = GeoAPI.Geometries.IGeometry;
-using BoundingBox = GeoAPI.Geometries.Envelope;
+using Geometry = NetTopologySuite.Geometries.Geometry;
+using BoundingBox = NetTopologySuite.Geometries.Envelope;
 
 
 namespace SharpMap.Data.Providers
@@ -103,7 +103,7 @@ namespace SharpMap.Data.Providers
         /// </param>
         /// <seealso cref="NetTopologySuite.Geometries.PrecisionModel"/>
         /// <seealso cref="NetTopologySuite.Geometries.GeometryFactory"/>
-        protected internal NtsProvider(IPrecisionModel precisionModel)
+        protected internal NtsProvider(PrecisionModel precisionModel)
         {
             Factory = new GeometryFactory(precisionModel);
         }
@@ -228,7 +228,7 @@ namespace SharpMap.Data.Providers
                         //    throw new ApplicationException("Null values not supported");
                         var value = dataRow[column];
                         if (value is DBNull) value = null;
-                        attributes.AddAttribute(column.ColumnName, value);
+                        attributes.Add(column.ColumnName, value);
                     }
                     _features.Add(new Feature(geometry, attributes));
                 }
@@ -274,7 +274,7 @@ namespace SharpMap.Data.Providers
                 dataTable.Columns.Add(new DataColumn(columnName, feature.Attributes.GetType(columnName)));
 
             var dataRow = dataTable.NewRow();
-            dataRow.Geometry = (Geometry) feature.Geometry.Clone();
+            dataRow.Geometry = (Geometry) feature.Geometry.Copy();
             foreach (var columnName in feature.Attributes.GetNames())
                 dataRow[columnName] = feature.Attributes[columnName];
             return dataRow;

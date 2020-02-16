@@ -386,7 +386,7 @@
       <FileName>Layers\Symbolizer\LinealVectorLayer.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SharpMap.Layers.Symbolizer.PolygonalVectorLayer">
+  <Class Name="SharpMap.Layers.Symbolizer.IPolygonalVectorLayer">
     <Position X="32.25" Y="20.75" Width="3" />
     <InheritanceLine Type="SharpMap.Layers.Symbolizer.BaseVectorLayer&lt;TGeometry&gt;" FixedFromPoint="true">
       <Path>
@@ -398,7 +398,7 @@
     </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Layers\Symbolizer\PolygonalVectorLayer.cs</FileName>
+      <FileName>Layers\Symbolizer\IPolygonalVectorLayer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SharpMap.Layers.Symbolizer.PuntalVectorLayer">

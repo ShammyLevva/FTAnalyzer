@@ -9,12 +9,12 @@ using System.Runtime.ExceptionServices;
 using NetTopologySuite.Geometries;
 using SharpMap.Rendering;
 
-namespace GeoAPI.Geometries
+namespace NetTopologySuite.Geometries
 {
     /// <summary>
     /// Set of extension methods for use of GeoAPI within SharpMap
     /// </summary>
-    public static class GeoAPIEx
+    public static class NetTopologySuiteEx
     {
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace GeoAPI.Geometries
         /// <param name="fact">The CoordinateSequenceFactory to use to create the new sequence</param>
         /// <param name="seq">The sequence to test</param>
         /// <returns>The original sequence, if it was a valid ring, or a new sequence which is valid.</returns>
-        public static ICoordinateSequence EnsureValidRing(ICoordinateSequenceFactory fact, ICoordinateSequence seq)
+        public static CoordinateSequence EnsureValidRing(CoordinateSequenceFactory fact, CoordinateSequence seq)
         {
             var n = seq.Count;
             // empty sequence is valid
@@ -54,7 +54,7 @@ namespace GeoAPI.Geometries
             return CreateClosedRing(fact, seq, n + 1);
         }
 
-        private static ICoordinateSequence CreateClosedRing(ICoordinateSequenceFactory fact, ICoordinateSequence seq, int size)
+        private static CoordinateSequence CreateClosedRing(CoordinateSequenceFactory fact, CoordinateSequence seq, int size)
         {
             var newseq = fact.Create(size, seq.Dimension);
             int n = seq.Count;
@@ -66,7 +66,7 @@ namespace GeoAPI.Geometries
         }
 
         ///<summary>
-        /// Copies a section of a <see cref="ICoordinateSequence"/> to another <see cref="ICoordinateSequence"/>.
+        /// Copies a section of a <see cref="CoordinateSequence"/> to another <see cref="CoordinateSequence"/>.
         /// The sequences may have different dimensions;
         /// in this case only the common dimensions are copied.
         ///</summary>
@@ -75,14 +75,14 @@ namespace GeoAPI.Geometries
         /// <param name="dest">The sequence to which the coordinates should be copied to</param>
         /// <param name="destPos">The starting index of the coordinates in <see paramref="dest"/></param>
         /// <param name="length">The number of coordinates to copy</param>
-        public static void Copy(ICoordinateSequence src, int srcPos, ICoordinateSequence dest, int destPos, int length)
+        public static void Copy(CoordinateSequence src, int srcPos, CoordinateSequence dest, int destPos, int length)
         {
             for (int i = 0; i < length; i++)
                 CopyCoord(src, srcPos + i, dest, destPos + i);
         }
 
         ///<summary>
-        /// Copies a coordinate of a <see cref="ICoordinateSequence"/> to another <see cref="ICoordinateSequence"/>.
+        /// Copies a coordinate of a <see cref="CoordinateSequence"/> to another <see cref="CoordinateSequence"/>.
         /// The sequences may have different dimensions;
         /// in this case only the common dimensions are copied.
         ///</summary>
@@ -90,7 +90,7 @@ namespace GeoAPI.Geometries
         /// <param name="srcPos">The index of the coordinate to copy</param>
         /// <param name="dest">The sequence to which the coordinate should be copied to</param>
         /// <param name="destPos">The index of the coordinate in <see paramref="dest"/></param>
-        public static void CopyCoord(ICoordinateSequence src, int srcPos, ICoordinateSequence dest, int destPos)
+        public static void CopyCoord(CoordinateSequence src, int srcPos, CoordinateSequence dest, int destPos)
         {
             int minDim = Math.Min(src.Dimension, dest.Dimension);
             for (int dim = 0; dim < minDim; dim++)
@@ -113,8 +113,8 @@ namespace GeoAPI.Geometries
         /// <returns>The original sequence, if it was a valid ring, or a new sequence which is valid.</returns>
         public static void EnsureValidRing(this List<Coordinate> coordinates)
         {
-            var seq = GeometryServiceProvider.Instance.DefaultCoordinateSequenceFactory.Create(coordinates.ToArray());
-            seq = EnsureValidRing(GeometryServiceProvider.Instance.DefaultCoordinateSequenceFactory, seq);
+            var seq = NtsGeometryServices.Instance.DefaultCoordinateSequenceFactory.Create(coordinates.ToArray());
+            seq = EnsureValidRing(NtsGeometryServices.Instance.DefaultCoordinateSequenceFactory, seq);
             if (seq.Count != coordinates.Count)
             {
                 for (int i = coordinates.Count; i < seq.Count; i++)
@@ -263,12 +263,12 @@ namespace GeoAPI.Geometries
         }
 
         /// <summary>
-        /// Transforms a <see cref="ILineString"/> to an array of <see cref="PointF"/>s.
+        /// Transforms a <see cref="LineString"/> to an array of <see cref="PointF"/>s.
         /// </summary>
         /// <param name="self">The linestring</param>
         /// <param name="map">The map that defines the affine coordinate transformation</param>
         /// <returns>The array of <see cref="PointF"/>s</returns>
-        public static PointF[] TransformToImage(this ILineString self, MapViewport map)
+        public static PointF[] TransformToImage(this LineString self, MapViewport map)
         {
             return TransformToImage(self.Coordinates, map);
         }
@@ -302,9 +302,9 @@ namespace GeoAPI.Geometries
         /// </summary>
         /// <param name="self">The ring</param>
         /// <returns><c>true</c> if the ring is oriented counter clockwise</returns>
-        public static bool IsCCW(this ILinearRing self)
+        public static bool IsCCW(this LinearRing self)
         {
-            return NetTopologySuite.Algorithm.CGAlgorithms.IsCCW(self.Coordinates);
+            return NetTopologySuite.Algorithm.Orientation.IsCCW(self.Coordinates);
         }
 
         /// <summary>
@@ -331,13 +331,13 @@ namespace GeoAPI.Geometries
         }
 
         /// <summary>
-        /// Transforms a <see cref="IPolygon"/> to an array of <see cref="PointF"/>s
+        /// Transforms a <see cref="Polygon"/> to an array of <see cref="PointF"/>s
         /// </summary>
         /// <param name="self">The polygon</param>
         /// <param name="map">The map that defines the affine coordinate transformation.</param>
         /// <param name="useClipping">Use clipping for the polygon</param>
         /// <returns>An array of PointFs</returns>
-        public static GraphicsPath TransformToImage(this IPolygon self, MapViewport map, bool useClipping = false)
+        public static GraphicsPath TransformToImage(this Polygon self, MapViewport map, bool useClipping = false)
         {
             var res = new GraphicsPath(FillMode.Alternate);
             if (useClipping)
@@ -377,7 +377,7 @@ namespace GeoAPI.Geometries
         /// <param name="self"></param>
         /// <param name="wkt"></param>
         /// <returns></returns>
-        public static IGeometry GeomFromText(this IGeometry self, string wkt)
+        public static Geometry GeomFromText(this Geometry self, string wkt)
         {
             var factory = self == null ? new NetTopologySuite.Geometries.GeometryFactory() : self.Factory;
             var reader = new NetTopologySuite.IO.WKTReader(factory);
@@ -386,7 +386,7 @@ namespace GeoAPI.Geometries
 
 
         private static readonly FieldInfo _envFi;
-        static GeoAPIEx()
+        static NetTopologySuiteEx()
         {
             try
             {

@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Text;
-using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
 
 
 namespace SharpMap.Data.Providers
@@ -324,7 +324,7 @@ namespace SharpMap.Data.Providers
         private bool _makeValid;
 
         /// <summary>
-        /// Gets/Sets whether all <see cref="GeoAPI.Geometries"/> passed to SqlServer2008 should be made valid using this function.
+        /// Gets/Sets whether all <see cref="NetTopologySuite.Geometries"/> passed to SqlServer2008 should be made valid using this function.
         /// </summary>
         public Boolean ValidateGeometries
         {
@@ -387,9 +387,9 @@ namespace SharpMap.Data.Providers
         /// </summary>   
         /// <param name="bbox"></param>   
         /// <returns></returns>   
-        public override Collection<IGeometry> GetGeometriesInView(Envelope bbox)
+        public override Collection<Geometry> GetGeometriesInView(Envelope bbox)
         {
-            var features = new Collection<IGeometry>();
+            var features = new Collection<Geometry>();
             using (var conn = new SqlConnection(ConnectionString))
             {
                 //Get bounding box string   
@@ -436,9 +436,9 @@ namespace SharpMap.Data.Providers
         /// </summary>   
         /// <param name="oid">Object ID</param>   
         /// <returns>geometry</returns>   
-        public override IGeometry GetGeometryByID(uint oid)
+        public override Geometry GetGeometryByID(uint oid)
         {
-            IGeometry geom = null;
+            Geometry geom = null;
             using (var conn = new SqlConnection(ConnectionString))
             {
                 string strSql = "SELECT g." + GeometryColumn + ".STAsBinary() FROM " + QualifiedTable + " g WHERE " +
@@ -463,7 +463,7 @@ namespace SharpMap.Data.Providers
             return geom;
         }
 
-        private static void FlipXY(IGeometry geom)
+        private static void FlipXY(Geometry geom)
         {
             var coords = geom.Coordinates;
             for (var i = 0; i < coords.Length; i++)
@@ -543,7 +543,7 @@ namespace SharpMap.Data.Providers
         /// </summary>   
         /// <param name="geom"></param>   
         /// <param name="ds">FeatureDataSet to fill data into</param>   
-        protected override void OnExecuteIntersectionQuery(IGeometry geom, FeatureDataSet ds)
+        protected override void OnExecuteIntersectionQuery(Geometry geom, FeatureDataSet ds)
         {
             using (var conn = new SqlConnection(ConnectionString))
             {

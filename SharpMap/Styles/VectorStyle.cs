@@ -19,7 +19,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Reflection;
-using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
 using SharpMap.Rendering.Symbolizer;
 using Common.Logging;
 
@@ -251,7 +251,7 @@ namespace SharpMap.Styles
         /// Gets or sets the symbolizer for puntal geometries
         /// </summary>
         /// <remarks>Setting this property will lead to ignorance towards all <see cref="IPuntal"/> related style settings</remarks>
-        public IPointSymbolizer PointSymbolizer { get; set; }
+        public PointSymbolizer PointSymbolizer { get; set; }
 
         /// <summary>
         /// Gets or sets the symbolizer for lineal geometries
@@ -260,10 +260,10 @@ namespace SharpMap.Styles
         public ILineSymbolizer LineSymbolizer { get; set; }
 
         /// <summary>
-        /// Gets or sets the symbolizer for polygonal geometries
+        /// Gets or sets the symbolizer for IPolygonal geometries
         /// </summary>
         /// <remarks>Setting this property will lead to ignorance towards all <see cref="IPolygonal"/> related style settings</remarks>
-        public IPolygonSymbolizer PolygonSymbolizer { get; set; }
+        public PolygonSymbolizer PolygonSymbolizer { get; set; }
 
         #endregion
 
@@ -318,7 +318,7 @@ namespace SharpMap.Styles
             var res = new VectorStyle();
             RandomizePuntalStyle(res);
             RandomizeLinealStyle(res);
-            RandomizePolygonalStyle(res);
+            RandomizeIPolygonalStyle(res);
             return res;
         }
 
@@ -330,7 +330,7 @@ namespace SharpMap.Styles
         {
             var res = new VectorStyle();
             ClearLinealStyle(res);
-            ClearPolygonalStyle(res);
+            ClearIPolygonalStyle(res);
             RandomizePuntalStyle(res);
             return res;
         }
@@ -343,7 +343,7 @@ namespace SharpMap.Styles
         {
             var res = new VectorStyle();
             ClearPuntalStyle(res);
-            ClearPolygonalStyle(res);
+            ClearIPolygonalStyle(res);
             RandomizeLinealStyle(res);
             return res;
         }
@@ -352,12 +352,12 @@ namespace SharpMap.Styles
         /// Factory method to create a random puntal style
         /// </summary>
         /// <returns>A puntal vector style</returns>
-        public static VectorStyle CreateRandomPolygonalStyle()
+        public static VectorStyle CreateRandomIPolygonalStyle()
         {
             var res = new VectorStyle();
             ClearPuntalStyle(res);
             ClearLinealStyle(res);
-            RandomizePolygonalStyle(res);
+            RandomizeIPolygonalStyle(res);
             return res;
         }
 
@@ -388,7 +388,7 @@ namespace SharpMap.Styles
         /// Utility function to modify <paramref name="style"/> in order to prevent drawing of any puntal components
         /// </summary>
         /// <param name="style">The style to modify</param>
-        private static void ClearPolygonalStyle(VectorStyle style)
+        private static void ClearIPolygonalStyle(VectorStyle style)
         {
             style.EnableOutline = false;
             style.Line = Pens.Transparent;
@@ -429,10 +429,10 @@ namespace SharpMap.Styles
         }
 
         /// <summary>
-        /// Utility function to randomize polygonal settings
+        /// Utility function to randomize IPolygonal settings
         /// </summary>
         /// <param name="res"></param>
-        private static void RandomizePolygonalStyle(VectorStyle res)
+        private static void RandomizeIPolygonalStyle(VectorStyle res)
         {
             switch (_rnd.Next(3))
             {
@@ -445,7 +445,7 @@ namespace SharpMap.Styles
                     break;
                 case 2:
                     var alpha = _rnd.Next(67, 256);
-                    res.Fill = new LinearGradientBrush(new Point(0, 0), new Point(_rnd.Next(5, 10), _rnd.Next(5, 10)),
+                    res.Fill = new LinearGradientBrush(new System.Drawing.Point(0, 0), new System.Drawing.Point(_rnd.Next(5, 10), _rnd.Next(5, 10)),
                         CreateRandomKnownColor(alpha), CreateRandomKnownColor(alpha));
                     break;
             }

@@ -1,15 +1,13 @@
 ﻿using System.Collections.Generic;
-using GeoAPI.CoordinateSystems;
-using GeoAPI.CoordinateSystems.Transformations;
-using GeoAPI.Geometries;
 using ProjNet.CoordinateSystems;
 using ProjNet.CoordinateSystems.Transformations;
+using NetTopologySuite.Geometries;
 
 namespace FTAnalyzer.Mapping
 {
     class MapTransforms
     {
-        private static IProjectedCoordinateSystem GetEPSG900913(CoordinateSystemFactory csFact)
+        private static ProjectedCoordinateSystem GetEPSG900913(CoordinateSystemFactory csFact)
         {
             List<ProjectionParameter> parameters = new List<ProjectionParameter>
             {
@@ -22,12 +20,12 @@ namespace FTAnalyzer.Mapping
                 new ProjectionParameter("false_northing", 0.0)
             };
             IProjection projection = csFact.CreateProjection("Google Mercator", "mercator_1sp", parameters);
-            IGeographicCoordinateSystem wgs84 = csFact.CreateGeographicCoordinateSystem(
+            GeographicCoordinateSystem wgs84 = csFact.CreateGeographicCoordinateSystem(
                 "WGS 84", AngularUnit.Degrees, HorizontalDatum.WGS84, PrimeMeridian.Greenwich,
                 new AxisInfo("north", AxisOrientationEnum.North), new AxisInfo("east", AxisOrientationEnum.East)
             );
 
-            IProjectedCoordinateSystem epsg900913 = csFact.CreateProjectedCoordinateSystem("Google Mercator", wgs84, projection, LinearUnit.Metre,
+            ProjectedCoordinateSystem epsg900913 = csFact.CreateProjectedCoordinateSystem("Google Mercator", wgs84, projection, LinearUnit.Metre,
               new AxisInfo("East", AxisOrientationEnum.East), new AxisInfo("North", AxisOrientationEnum.North));
             return epsg900913;
         }
@@ -44,7 +42,7 @@ namespace FTAnalyzer.Mapping
                     CoordinateSystemFactory csFac = new CoordinateSystemFactory();
                     CoordinateTransformationFactory ctFac = new CoordinateTransformationFactory();
 
-                    IGeographicCoordinateSystem wgs84 = csFac.CreateGeographicCoordinateSystem(
+                    GeographicCoordinateSystem wgs84 = csFac.CreateGeographicCoordinateSystem(
                       "WGS 84", AngularUnit.Degrees, HorizontalDatum.WGS84, PrimeMeridian.Greenwich,
                       new AxisInfo("north", AxisOrientationEnum.North), new AxisInfo("east", AxisOrientationEnum.East));
 
@@ -60,7 +58,7 @@ namespace FTAnalyzer.Mapping
                     };
                     IProjection projection = csFac.CreateProjection("Google Mercator", "mercator_1sp", parameters);
 
-                    IProjectedCoordinateSystem epsg900913 = csFac.CreateProjectedCoordinateSystem(
+                    ProjectedCoordinateSystem epsg900913 = csFac.CreateProjectedCoordinateSystem(
                       "Google Mercator", wgs84, projection, LinearUnit.Metre, new AxisInfo("East", AxisOrientationEnum.East),
                       new AxisInfo("North", AxisOrientationEnum.North));
 
@@ -86,7 +84,7 @@ namespace FTAnalyzer.Mapping
             return ctFact.CreateFromCoordinateSystems(GetEPSG900913(csFact), GeographicCoordinateSystem.WGS84); ;
         }
 
-        //public static IMathTransform MathTransform
+        //public static MathTransform MathTransform
         //{
         //    get { return Transform().MathTransform; }
         //}
@@ -117,12 +115,14 @@ namespace FTAnalyzer.Mapping
 
         public static Coordinate TransformCoordinate(Coordinate point)
         {
-            return Transform().MathTransform.Transform(point);
+            var (x,y) = Transform().MathTransform.Transform(point.X,point.Y);
+            return new Coordinate(x, y);
         }
 
         public static Coordinate ReverseTransformCoordinate(Coordinate point)
         {
-            return ReverseTransform().MathTransform.Transform(point);
+            var (x,y) = ReverseTransform().MathTransform.Transform(point.X, point.Y);
+            return new Coordinate(x, y);
         }
     }
 }

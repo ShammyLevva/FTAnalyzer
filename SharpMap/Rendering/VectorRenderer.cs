@@ -20,12 +20,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Reflection;
-using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
 using SharpMap.Rendering.Symbolizer;
 using SharpMap.Styles;
 using SharpMap.Utilities;
-using Point=GeoAPI.Geometries.Coordinate;
 using System.Runtime.CompilerServices;
+using Point = NetTopologySuite.Geometries.Point;
 
 namespace SharpMap.Rendering
 {
@@ -56,11 +56,11 @@ namespace SharpMap.Rendering
         /// <param name="map">Map reference</param>
         /// <param name="offset">Offset by which line will be moved to right</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void DrawMultiLineString(Graphics g, IMultiLineString lines, Pen pen, MapViewport map, float offset)
+        public static void DrawMultiLineString(Graphics g, MultiLineString lines, Pen pen, MapViewport map, float offset)
         {
             for(var i = 0; i < lines.NumGeometries; i++)
             {
-                var line = (ILineString) lines[i];
+                var line = (LineString) lines[i];
                 DrawLineString(g, line, pen, map, offset);
             }
         }
@@ -124,7 +124,7 @@ namespace SharpMap.Rendering
         /// <param name="pen">Pen style used for rendering</param>
         /// <param name="map">Map reference</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void DrawLineString(Graphics g, ILineString line, Pen pen, MapViewport map)
+        public static void DrawLineString(Graphics g, LineString line, Pen pen, MapViewport map)
         {
             DrawLineString(g, line, pen, map, 0);
         }
@@ -136,7 +136,7 @@ namespace SharpMap.Rendering
         /// <param name="pen">Pen style used for rendering</param>
         /// <param name="map">Map reference</param>
         /// <param name="offset">Offset by which line will be moved to right</param>
-        public static void DrawLineString(Graphics g, ILineString line, Pen pen, MapViewport map, float offset)
+        public static void DrawLineString(Graphics g, LineString line, Pen pen, MapViewport map, float offset)
         {
             var points = line.TransformToImage(map);
             if (points.Length > 1)
@@ -151,7 +151,7 @@ namespace SharpMap.Rendering
         }
 
         /// <summary>
-        /// Renders a multipolygon byt rendering each polygon in the collection by calling DrawPolygon.
+        /// Renders a MultiPolygon byt rendering each polygon in the collection by calling DrawPolygon.
         /// </summary>
         /// <param name="g">Graphics reference</param>
         /// <param name="pols">MultiPolygon to render</param>
@@ -160,11 +160,11 @@ namespace SharpMap.Rendering
         /// <param name="clip">Specifies whether polygon clipping should be applied</param>
         /// <param name="map">Map reference</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void DrawMultiPolygon(Graphics g, IMultiPolygon pols, Brush brush, Pen pen, bool clip, MapViewport map)
+        public static void DrawMultiPolygon(Graphics g, MultiPolygon pols, Brush brush, Pen pen, bool clip, MapViewport map)
         {
             for (var i = 0; i < pols.NumGeometries;i++ )
             {
-                var p = (IPolygon) pols[i];
+                var p = (Polygon) pols[i];
                 DrawPolygon(g, p, brush, pen, clip, map);
             }
         }
@@ -179,7 +179,7 @@ namespace SharpMap.Rendering
         /// <param name="clip">Specifies whether polygon clipping should be applied</param>
         /// <param name="map">Map reference</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void DrawPolygon(Graphics g, IPolygon pol, Brush brush, Pen pen, bool clip, MapViewport map)
+        public static void DrawPolygon(Graphics g, Polygon pol, Brush brush, Pen pen, bool clip, MapViewport map)
         {
             if (pol.ExteriorRing == null)
                 return;
@@ -199,7 +199,7 @@ namespace SharpMap.Rendering
                 //Add the interior polygons (holes)
                 if (pol.NumInteriorRings > 0)
                 {
-                    foreach (ILinearRing ring in pol.InteriorRings)
+                    foreach (LinearRing ring in pol.InteriorRings)
                     {
                         points = ring.TransformToImage(map);
                         if (!clip)
@@ -568,7 +568,7 @@ namespace SharpMap.Rendering
         /// <param name="offset">Symbol offset af scale=1</param>
         /// <param name="map">Map reference</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void DrawPoint(Graphics g, IPoint point, Brush b, float size, PointF offset, MapViewport map)
+        public static void DrawPoint(Graphics g, Point point, Brush b, float size, PointF offset, MapViewport map)
         {
             if (point == null)
                 return;
@@ -591,7 +591,7 @@ namespace SharpMap.Rendering
         /// <param name="symbolizer">Symbolizer to decorate point</param>
         /// <param name="map">Map reference</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void DrawPoint(IPointSymbolizer symbolizer, Graphics g, IPoint point, MapViewport map)
+        public static void DrawPoint(PointSymbolizer symbolizer, Graphics g, Point point, MapViewport map)
         {
             if (point == null)
                 return; 
@@ -610,7 +610,7 @@ namespace SharpMap.Rendering
         /// <param name="rotation">Symbol rotation in degrees</param>
         /// <param name="map">Map reference</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void DrawPoint(Graphics g, IPoint point, Image symbol, float symbolscale, PointF offset,
+        public static void DrawPoint(Graphics g, Point point, Image symbol, float symbolscale, PointF offset,
                                      float rotation, MapViewport map)
         {
             if (point == null)
@@ -674,7 +674,7 @@ namespace SharpMap.Rendering
         }
 
         /// <summary>
-        /// Renders a <see cref="GeoAPI.Geometries.IMultiPoint"/> to the map.
+        /// Renders a <see cref="NetTopologySuite.Geometries.MultiPoint"/> to the map.
         /// </summary>
         /// <param name="g">Graphics reference</param>
         /// <param name="points">MultiPoint to render</param>
@@ -684,31 +684,31 @@ namespace SharpMap.Rendering
         /// <param name="rotation">Symbol rotation in degrees</param>
         /// <param name="map">Map reference</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void DrawMultiPoint(Graphics g, IMultiPoint points, Image symbol, float symbolscale, PointF offset,
+        public static void DrawMultiPoint(Graphics g, MultiPoint points, Image symbol, float symbolscale, PointF offset,
                                           float rotation, MapViewport map)
         {
             for (var i = 0; i < points.NumGeometries; i++)
             {
-                var point = (IPoint) points[i];
+                var point = (Point) points[i];
                 DrawPoint(g, point, symbol, symbolscale, offset, rotation, map);
             }
         }
 
         /// <summary>
-        /// Renders a <see cref="GeoAPI.Geometries.IMultiPoint"/> to the map.
+        /// Renders a <see cref="NetTopologySuite.Geometries.MultiPoint"/> to the map.
         /// </summary>
         /// <param name="g">Graphics reference</param>
         /// <param name="points">MultiPoint to render</param>
         /// <param name="symbolizer">Symbolizer to decorate point</param>
         /// <param name="map">Map reference</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void DrawMultiPoint(IPointSymbolizer symbolizer, Graphics g, IMultiPoint points, MapViewport map)
+        public static void DrawMultiPoint(PointSymbolizer symbolizer, Graphics g, MultiPoint points, MapViewport map)
         {
             symbolizer.Render(map, points, g);
         }
 
         /// <summary>
-        /// Renders a <see cref="GeoAPI.Geometries.IMultiPoint"/> to the map.
+        /// Renders a <see cref="NetTopologySuite.Geometries.MultiPoint"/> to the map.
         /// </summary>
         /// <param name="g">Graphics reference</param>
         /// <param name="points">MultiPoint to render</param>
@@ -717,11 +717,11 @@ namespace SharpMap.Rendering
         /// <param name="offset">Symbol offset af scale=1</param>
         /// <param name="map">Map reference</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void DrawMultiPoint(Graphics g, IMultiPoint points, Brush brush, float size, PointF offset, MapViewport map)
+        public static void DrawMultiPoint(Graphics g, MultiPoint points, Brush brush, float size, PointF offset, MapViewport map)
         {
             for (var i = 0; i < points.NumGeometries; i++)
             {
-                var point = (IPoint) points[i];
+                var point = (Point) points[i];
                 DrawPoint(g, point, brush, size, offset, map);
             }
         }

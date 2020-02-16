@@ -24,7 +24,7 @@ using System.Drawing.Text;
 using System.Globalization;
 using SharpMap.Data;
 using SharpMap.Data.Providers;
-using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
 using SharpMap.Rendering;
 using SharpMap.Rendering.Thematics;
 using SharpMap.Styles;
@@ -95,7 +95,7 @@ namespace SharpMap.Layers
             /// Place label on object which the greatest length or area.
             /// </summary>
             /// <remarks>
-            /// Multipoint geometries will default to <see cref="First"/>
+            /// MultiPoint geometries will default to <see cref="First"/>
             /// </remarks>
             Largest,
             /// <summary>
@@ -261,14 +261,14 @@ namespace SharpMap.Layers
         /// </summary>
         /// <remarks>
         /// <para>If this method is not null, it will override the position based on the centroid of the boundingbox of the feature </para>
-        /// <para>The label delegate must take a <see cref="SharpMap.Data.FeatureDataRow"/> and return a GeoAPI.Geometries.Coordinate.</para>
+        /// <para>The label delegate must take a <see cref="SharpMap.Data.FeatureDataRow"/> and return a NetTopologySuite.Geometries.Coordinate.</para>
         /// <para>If the delegate returns a null, the centroid of the feature will be used</para>
         /// <example>
         /// Creating a custom position by using X and Y values from the FeatureDataRow attributes "LabelX" and "LabelY", using
         /// an anonymous delegate:
         /// <code lang="C#">
         /// myLabelLayer.LabelPositionDelegate = delegate(SharpMap.Data.FeatureDataRow fdr)
-        ///				{ return new GeoAPI.Geometries.Coordinate(Convert.ToDouble(fdr["LabelX"]), Convert.ToDouble(fdr["LabelY"]));};
+        ///				{ return new NetTopologySuite.Geometries.Coordinate(Convert.ToDouble(fdr["LabelX"]), Convert.ToDouble(fdr["LabelY"]));};
         /// </code>
         /// </example>
         /// </remarks>
@@ -343,7 +343,7 @@ namespace SharpMap.Layers
                     throw (new ApplicationException("DataSource property not set on layer '" + LayerName + "'"));
 
                 if (_envelope != null && CacheExtent)
-                    return ToTarget(_envelope.Clone());
+                    return ToTarget(_envelope.Copy());
 
                 var wasOpen = DataSource.IsOpen;
                 if (!wasOpen)
@@ -474,17 +474,17 @@ namespace SharpMap.Layers
                     // for lineal geometries, try clipping to ensure proper labeling
                     if (feature.Geometry is ILineal)
                     {
-                        if (feature.Geometry is ILineString)
-                            feature.Geometry = lineClipping.ClipLineString(feature.Geometry as ILineString);
-                        else if (feature.Geometry is IMultiLineString)
-                            feature.Geometry = lineClipping.ClipLineString(feature.Geometry as IMultiLineString);
+                        if (feature.Geometry is LineString)
+                            feature.Geometry = lineClipping.ClipLineString(feature.Geometry as LineString);
+                        else if (feature.Geometry is MultiLineString)
+                            feature.Geometry = lineClipping.ClipLineString(feature.Geometry as MultiLineString);
                     }
 
-                    if (feature.Geometry is IGeometryCollection)
+                    if (feature.Geometry is GeometryCollection)
                     {
                         if (MultipartGeometryBehaviour == MultipartGeometryBehaviourEnum.All)
                         {
-                            foreach (var geom in (feature.Geometry as IGeometryCollection))
+                            foreach (var geom in (feature.Geometry as GeometryCollection))
                             {
                                 BaseLabel lbl = CreateLabel(feature, geom, text, rotation, priority, style, map, g, _getLocationMethod);
                                 if (lbl != null)
@@ -499,9 +499,9 @@ namespace SharpMap.Layers
                         }
                         else if (MultipartGeometryBehaviour == MultipartGeometryBehaviourEnum.First)
                         {
-                            if ((feature.Geometry as IGeometryCollection).NumGeometries > 0)
+                            if ((feature.Geometry as GeometryCollection).NumGeometries > 0)
                             {
-                                BaseLabel lbl = CreateLabel(feature, (feature.Geometry as IGeometryCollection).GetGeometryN(0), text,
+                                BaseLabel lbl = CreateLabel(feature, (feature.Geometry as GeometryCollection).GetGeometryN(0), text,
                                     rotation, style, map, g);
                                 if (lbl != null)
                                     labels.Add(lbl);
@@ -509,7 +509,7 @@ namespace SharpMap.Layers
                         }
                         else if (MultipartGeometryBehaviour == MultipartGeometryBehaviourEnum.Largest)
                         {
-                            var coll = (feature.Geometry as IGeometryCollection);
+                            var coll = (feature.Geometry as GeometryCollection);
                             if (coll.NumGeometries > 0)
                             {
                                 var largestVal = 0d;
@@ -517,24 +517,24 @@ namespace SharpMap.Layers
                                 for (var j = 0; j < coll.NumGeometries; j++)
                                 {
                                     var geom = coll.GetGeometryN(j);
-                                    if (geom is ILineString && ((ILineString) geom).Length > largestVal)
+                                    if (geom is LineString && ((LineString) geom).Length > largestVal)
                                     {
-                                        largestVal = ((ILineString) geom).Length;
+                                        largestVal = ((LineString) geom).Length;
                                         idxOfLargest = j;
                                     }
-                                    if (geom is IMultiLineString && ((IMultiLineString) geom).Length > largestVal)
+                                    if (geom is MultiLineString && ((MultiLineString) geom).Length > largestVal)
                                     {
-                                        largestVal = ((IMultiLineString) geom).Length;
+                                        largestVal = ((MultiLineString) geom).Length;
                                         idxOfLargest = j;
                                     }
-                                    if (geom is IPolygon && ((IPolygon) geom).Area > largestVal)
+                                    if (geom is Polygon && ((Polygon) geom).Area > largestVal)
                                     {
-                                        largestVal = ((IPolygon) geom).Area;
+                                        largestVal = ((Polygon) geom).Area;
                                         idxOfLargest = j;
                                     }
-                                    if (geom is IMultiPolygon && ((IMultiPolygon) geom).Area > largestVal)
+                                    if (geom is MultiPolygon && ((MultiPolygon) geom).Area > largestVal)
                                     {
-                                        largestVal = ((IMultiPolygon) geom).Area;
+                                        largestVal = ((MultiPolygon) geom).Area;
                                         idxOfLargest = j;
                                     }
                                 }
@@ -606,12 +606,12 @@ namespace SharpMap.Layers
         }
 
 
-        private BaseLabel CreateLabel(FeatureDataRow fdr, IGeometry feature, string text, float rotation, LabelStyle style, MapViewport map, Graphics g)
+        private BaseLabel CreateLabel(FeatureDataRow fdr, Geometry feature, string text, float rotation, LabelStyle style, MapViewport map, Graphics g)
         {
             return CreateLabel(fdr, feature, text, rotation, Priority, style, map, g, _getLocationMethod);
         }
 
-        private static BaseLabel CreateLabel(FeatureDataRow fdr, IGeometry feature, string text, float rotation, int priority, LabelStyle style, MapViewport map, Graphics g, GetLocationMethod _getLocationMethod)
+        private static BaseLabel CreateLabel(FeatureDataRow fdr, Geometry feature, string text, float rotation, int priority, LabelStyle style, MapViewport map, Graphics g, GetLocationMethod _getLocationMethod)
         {
             if (feature == null) return null;
 
@@ -622,7 +622,7 @@ namespace SharpMap.Layers
 
             if (feature is ILineal)
             {
-                if (feature is ILineString line)
+                if (feature is LineString line)
                 {
                     if (style.IsTextOnPath == false)
                     {
@@ -711,7 +711,7 @@ namespace SharpMap.Layers
         /// <param name="line">The linestring to test</param>
         /// <param name="isRightToLeft">Value indicating whether labels are to be printed right to left</param>
         /// <returns>The positively directed linestring</returns>
-        private static ILineString PositiveLineString(ILineString line, bool isRightToLeft)
+        private static LineString PositiveLineString(LineString line, bool isRightToLeft)
         {
             var s = line.StartPoint;
             var e = line.EndPoint;
@@ -753,7 +753,7 @@ namespace SharpMap.Layers
         /// <param name="map">The map</param>
         /// <!--<param name="useClipping">A value indicating whether clipping should be applied or not</param>-->
         /// <returns>A GraphicsPath</returns>
-        public static GraphicsPath LineStringToPath(ILineString lineString, MapViewport map/*, bool useClipping*/)
+        public static GraphicsPath LineStringToPath(LineString lineString, MapViewport map/*, bool useClipping*/)
         {
             var gp = new GraphicsPath(FillMode.Alternate);
             //if (!useClipping)
@@ -791,14 +791,14 @@ namespace SharpMap.Layers
         ///// <summary>
         ///// Function to transform a linestring to a graphics path for further processing
         ///// </summary>
-        ///// <param name="multiLineString">The Linestring</param>
+        ///// <param name="MultiLineString">The Linestring</param>
         ///// <param name="map">The map</param>
         ///// <param name="useClipping">A value indicating whether clipping should be applied or not</param>
         ///// <returns>A GraphicsPath</returns>
-        //public static GraphicsPath MultiLineStringToPath(MultiLineString multiLineString, Map map, bool useClipping)
+        //public static GraphicsPath MultiLineStringToPath(MultiLineString MultiLineString, Map map, bool useClipping)
         //{
         //    var gp = new GraphicsPath(FillMode.Alternate);
-        //    foreach (var lineString in multiLineString.LineStrings)
+        //    foreach (var lineString in MultiLineString.LineStrings)
         //        gp.AddPath(LineStringToPath(lineString, map, useClipping), false);
 
         //    return gp;
@@ -811,7 +811,7 @@ namespace SharpMap.Layers
         //    return path;
         //}
 
-        private static void CalculateLabelOnLinestring(ILineString line, ref BaseLabel baseLabel, Map map)
+        private static void CalculateLabelOnLinestring(LineString line, ref BaseLabel baseLabel, Map map)
         {
             double dx, dy;
             var label = baseLabel as Label;
@@ -846,7 +846,7 @@ namespace SharpMap.Layers
             label.Location = map.WorldToImage(new Coordinate(tmpx, tmpy));
         }
 
-        private static void CalculateLabelAroundOnLineString(ILineString line, ref BaseLabel label, MapViewport map, System.Drawing.Graphics g, System.Drawing.SizeF textSize)
+        private static void CalculateLabelAroundOnLineString(LineString line, ref BaseLabel label, MapViewport map, System.Drawing.Graphics g, System.Drawing.SizeF textSize)
         {
             var sPoints = line.Coordinates;
 

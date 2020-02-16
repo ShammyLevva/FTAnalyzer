@@ -10,7 +10,7 @@ using FTAnalyzer.Events;
 using FTAnalyzer.Filters;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
-using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
 using System.Text;
 using SharpMap.Utilities;
 using FTAnalyzer.Controls;

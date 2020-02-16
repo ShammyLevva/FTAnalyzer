@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.Common;
 using System.Text;
-using GeoAPI.IO;
 using NetTopologySuite.IO;
 
 namespace SharpMap.Data.Providers
@@ -42,7 +41,7 @@ namespace SharpMap.Data.Providers
         /// <param name="reader"> </param>
         /// <param name="writer"> </param>
         public SpatialDbUtility(string entityDecoratorFormat, string literalDecoratorFormat, string parameterDecoratorFormat,
-            IBinaryGeometryReader reader, IBinaryGeometryWriter writer)
+            WKBReader reader, WKBWriter writer)
         {
             EntityDecoratorFormat = entityDecoratorFormat;
             LiteralDecoratorFormat = literalDecoratorFormat;
@@ -329,12 +328,12 @@ namespace SharpMap.Data.Providers
         /// <summary>
         /// Reader for geometry data
         /// </summary>
-        public IBinaryGeometryReader Reader { get; private set; }
+        public WKBReader Reader { get; private set; }
 
         /// <summary>
         /// Writer for geometry
         /// </summary>
-        public IBinaryGeometryWriter Writer { get; private set; }
+        public WKBWriter Writer { get; private set; }
 
         #endregion SpatialFunctions
     }

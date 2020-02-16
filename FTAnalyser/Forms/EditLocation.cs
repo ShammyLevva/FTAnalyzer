@@ -1,7 +1,7 @@
 ﻿using FTAnalyzer.Controls;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
-using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
 using SharpMap.Data;
 using SharpMap.Data.Providers;
 using SharpMap.Layers;

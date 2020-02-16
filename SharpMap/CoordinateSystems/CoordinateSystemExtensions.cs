@@ -2,10 +2,11 @@ using System;
 using System.Runtime.CompilerServices;
 using Common.Logging;
 using System.Collections.Generic;
-using GeoAPI.CoordinateSystems;
-using GeoAPI.Geometries;
+using ProjNet.CoordinateSystems;
+using NetTopologySuite.Geometries;
 using SharpMap.Data.Providers;
 using SharpMap.Layers;
+using NetTopologySuite;
 
 namespace SharpMap.CoordinateSystems
 {
@@ -16,14 +17,14 @@ namespace SharpMap.CoordinateSystems
     {
         private static readonly ILog _logger = LogManager.GetLogger(typeof(CoordinateSystemExtensions));
 
-        private static readonly Dictionary<int, ICoordinateSystem> _sridCoordinateSystem = new Dictionary<int, ICoordinateSystem>();
+        private static readonly Dictionary<int, CoordinateSystem> _sridCoordinateSystem = new Dictionary<int, CoordinateSystem>();
 
         /// <summary>
         /// Gets a coordinate system for the map based on the <see cref="Map.SRID"/> property
         /// </summary>
         /// <param name="self">The map</param>
         /// <returns>A coordinate system</returns>
-        public static ICoordinateSystem GetCoordinateSystem(this Map self)
+        public static CoordinateSystem GetCoordinateSystem(this Map self)
         {
             _logger.Debug( fmh => fmh("Getting coordinate system for map"));
             return GetCoordinateSystemForSrid(self.SRID);
@@ -34,7 +35,7 @@ namespace SharpMap.CoordinateSystems
         /// </summary>
         /// <param name="self">The layer</param>
         /// <returns>A coordinate system</returns>
-        public static ICoordinateSystem GetCoordinateSystem(this ILayer self)
+        public static CoordinateSystem GetCoordinateSystem(this ILayer self)
         {
             _logger.Debug(fmh => fmh("Getting coordinate system for {0} '{1}'", self.GetType().Name, self.LayerName));
             return GetCoordinateSystemForSrid(self.SRID);
@@ -45,24 +46,24 @@ namespace SharpMap.CoordinateSystems
         /// </summary>
         /// <param name="self">The provider</param>
         /// <returns>A coordinate system</returns>
-        public static ICoordinateSystem GetCoordinateSystem(this IProvider self)
+        public static CoordinateSystem GetCoordinateSystem(this IProvider self)
         {
             _logger.Debug(fmh => fmh("Getting coordinate system for {0} '{1}'", self.GetType().Name, self.ConnectionID));
             return GetCoordinateSystemForSrid(self.SRID);
         }
 
         /// <summary>
-        /// Gets a coordinate system for the map based on the <see cref="IGeometry.SRID"/> property
+        /// Gets a coordinate system for the map based on the <see cref="Geometry.SRID"/> property
         /// </summary>
         /// <param name="self">The layer</param>
         /// <returns>A coordinate system</returns>
-        public static ICoordinateSystem GetCoordinateSystem(this IGeometry self)
+        public static CoordinateSystem GetCoordinateSystem(this Geometry self)
         {
             return GetCoordinateSystemForSrid(self.SRID);
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        private static ICoordinateSystem GetCoordinateSystemForSrid(int srid)
+        private static CoordinateSystem GetCoordinateSystemForSrid(int srid)
         {
             if (srid <= 0)
                 return null;
@@ -71,33 +72,33 @@ namespace SharpMap.CoordinateSystems
         }
 
         /// <summary>
-        /// Method to get a <see cref="IGeometryFactory"/> for the specified <paramref name="self">map</paramref>
+        /// Method to get a <see cref="GeometryFactory"/> for the specified <paramref name="self">map</paramref>
         /// </summary>
         /// <param name="self">The map</param>
         /// <returns>A geometry factory</returns>
-        public static IGeometryFactory GetFactory(this Map self)
+        public static GeometryFactory GetFactory(this Map self)
         {
-            return GeoAPI.GeometryServiceProvider.Instance.CreateGeometryFactory(self.SRID);
+            return NtsGeometryServices.Instance.CreateGeometryFactory(self.SRID);
         }
 
         /// <summary>
-        /// Method to get a <see cref="IGeometryFactory"/> for the specified <paramref name="self">layer</paramref>
+        /// Method to get a <see cref="GeometryFactory"/> for the specified <paramref name="self">layer</paramref>
         /// </summary>
         /// <param name="self">The layer</param>
         /// <returns>A geometry factory</returns>
-        public static IGeometryFactory GetFactory(this ILayer self)
+        public static GeometryFactory GetFactory(this ILayer self)
         {
-            return GeoAPI.GeometryServiceProvider.Instance.CreateGeometryFactory(self.SRID);
+            return NtsGeometryServices.Instance.CreateGeometryFactory(self.SRID);
         }
 
         /// <summary>
-        /// Method to get a <see cref="IGeometryFactory"/> for the specified <paramref name="self">provider</paramref>
+        /// Method to get a <see cref="GeometryFactory"/> for the specified <paramref name="self">provider</paramref>
         /// </summary>
         /// <param name="self">The provider</param>
         /// <returns>A geometry factory</returns>
-        public static IGeometryFactory GetFactory(this IProvider self)
+        public static GeometryFactory GetFactory(this IProvider self)
         {
-            return GeoAPI.GeometryServiceProvider.Instance.CreateGeometryFactory(self.SRID);
+            return NtsGeometryServices.Instance.CreateGeometryFactory(self.SRID);
         }
         
     }

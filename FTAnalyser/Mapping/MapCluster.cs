@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using GeoAPI.Geometries;
-using NetTopologySuite.Geometries;
+﻿using NetTopologySuite.Geometries;
 using SharpMap.Data;
-using GeoAPI.Geometries.Prepared;
-using NetTopologySuite.Geometries.Prepared;
+using System.Collections.Generic;
 
 namespace FTAnalyzer.Mapping
 {
@@ -12,8 +9,8 @@ namespace FTAnalyzer.Mapping
         private List<FeatureDataRow> cluster;
         private int minSize;
         private double gridSize;
-        private List<IPoint> points;
-        private IPoint centroid;
+        private List<Point> points;
+        private Point centroid;
 
         public static string CLUSTER = "Cluster", FEATURE = "Feature", UNKNOWN = "Unknown";
 
@@ -24,14 +21,14 @@ namespace FTAnalyzer.Mapping
             this.cluster = new List<FeatureDataRow>();
             this.minSize = minSize;
             this.gridSize = gridSize;
-            this.points = new List<IPoint>();
+            this.points = new List<Point>();
         }
 
-        public IGeometry Geometry { get { return centroid; } }
+        public Geometry Geometry { get { return centroid; } }
 
         public string ClusterType { get { return (cluster.Count < minSize) ? FEATURE : CLUSTER; } }
 
-        public IPoint Centroid
+        public Point Centroid
         {
             get { return centroid; }
         }
@@ -39,7 +36,7 @@ namespace FTAnalyzer.Mapping
         public void AddFeature(FeatureDataRow row)
         {
             cluster.Add(row);
-            IPoint p = (IPoint)row.Geometry;
+            Point p = (Point)row.Geometry;
             UpdateCentroid(p);
             points.Add(p);
         }
@@ -49,7 +46,7 @@ namespace FTAnalyzer.Mapping
             return centroid.Distance(row.Geometry) <= gridSize;
         }
 
-        public void UpdateCentroid(IPoint point)
+        public void UpdateCentroid(Point point)
         {
             double oldCount = points.Count;
             if (oldCount == 0)

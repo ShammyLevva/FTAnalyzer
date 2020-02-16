@@ -1,4 +1,4 @@
-﻿using GeoAPI;
+﻿using NetTopologySuite;
 
 namespace SharpMap
 {
@@ -10,12 +10,12 @@ namespace SharpMap
         /// <summary>
         /// The geometry services instance
         /// </summary>
-        IGeometryServices GeometryServices { get; }
+        NtsGeometryServices GeometryServices { get; }
 
         /// <summary>
         /// Gets the coordinate system services instance
         /// </summary>
-        ICoordinateSystemServices CoordinateSystemServices { get; }
+        CoordinateSystems.CoordinateSystemServices CoordinateSystemServices { get; }
 
         /// <summary>
         /// Gets the coordinate system repository
@@ -23,8 +23,8 @@ namespace SharpMap
         ICoordinateSystemRepository CoordinateSystemRepository { get; }
 
 #region Fluent configuration
-        ISession SetGeometryServices(IGeometryServices geometryServices);
-        ISession SetCoordinateSystemServices(ICoordinateSystemServices geometryServices);
+        ISession SetGeometryServices(NtsGeometryServices geometryServices);
+        ISession SetCoordinateSystemServices(CoordinateSystems.CoordinateSystemServices geometryServices);
         ISession SetCoordinateSystemRepository(ICoordinateSystemRepository geometryServices);
 #endregion
 

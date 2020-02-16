@@ -1,6 +1,6 @@
 ﻿using FTAnalyzer.Forms;
 using FTAnalyzer.Mapping;
-using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
 using Ionic.Zip;
 using System;
 using System.Collections.Concurrent;

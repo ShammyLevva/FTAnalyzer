@@ -1,5 +1,5 @@
 ﻿using FTAnalyzer.Forms;
-using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
 using SharpMap;
 using SharpMap.Data;
 using SharpMap.Data.Providers;

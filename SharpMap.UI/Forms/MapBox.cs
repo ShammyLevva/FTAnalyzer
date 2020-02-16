@@ -42,11 +42,11 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
 using SharpMap.Forms.Tools;
 using SharpMap.Layers;
 using System.Drawing.Imaging;
-using IGeometry = GeoAPI.Geometries.IGeometry;
+using Geometry = NetTopologySuite.Geometries.Geometry;
 using System.Threading;
 using Common.Logging;
 using System.Collections.Generic;
@@ -160,7 +160,7 @@ namespace SharpMap.Forms
             QueryGeometry = QueryPoint,
 
             ///// <summary>
-            ///// Attempt true intersection query on polygonal geometry
+            ///// Attempt true intersection query on IPolygonal geometry
             ///// </summary>
             //QueryPolygon,
 
@@ -347,7 +347,7 @@ namespace SharpMap.Forms
         /// Eventtype fired when a new geometry has been defined
         /// </summary>
         /// <param name="geometry">New Geometry</param>
-        public delegate void GeometryDefinedHandler(IGeometry geometry);
+        public delegate void GeometryDefinedHandler(Geometry geometry);
 
         /// <summary>
         /// Fired when a new polygon has been defined
@@ -388,8 +388,8 @@ namespace SharpMap.Forms
         private double _fineZoomFactor = 10;
         private Map _map;
         private int _queryLayerIndex;
-        private Point _dragStartPoint;
-        private Point _dragEndPoint;
+        private System.Drawing.Point _dragStartPoint;
+        private System.Drawing.Point _dragEndPoint;
         private Bitmap _dragImage;
         private Rectangle _rectangle = Rectangle.Empty;
         private bool _dragging;
@@ -778,7 +778,7 @@ namespace SharpMap.Forms
             _progressBar = new ProgressBar
                 {
                     Style = ProgressBarStyle.Marquee,
-                    Location = new Point(2, 2),
+                    Location = new System.Drawing.Point(2, 2),
                     Size = new Size(50, 10)
                 };
             Controls.Add(_progressBar);
@@ -922,8 +922,8 @@ namespace SharpMap.Forms
             {
                 try
                 {
-                    var min = Point.Round(_map.WorldToImage(box.Min()));
-                    var max = Point.Round(_map.WorldToImage(box.Max()));
+                    var min = System.Drawing.Point.Round(_map.WorldToImage(box.Min()));
+                    var max = System.Drawing.Point.Round(_map.WorldToImage(box.Max()));
 
                     if (IsDisposed == false && _isDisposed == false)
                     {
@@ -1133,7 +1133,7 @@ namespace SharpMap.Forms
                         if (_setActiveToolNoneDuringRedraw)
                             ActiveTool = res.Tool.Value;
 
-                        _dragEndPoint = new Point(0, 0);
+                        _dragEndPoint = new System.Drawing.Point(0, 0);
 
                         if (_setActiveToolNoneDuringRedraw)
                             Enabled = true;
@@ -1315,7 +1315,7 @@ namespace SharpMap.Forms
         }
 
 
-        private Point _lastHoverPostiton;
+        private System.Drawing.Point _lastHoverPostiton;
 
         /// <summary>
         /// Invokes the <see cref="E:System.Windows.Forms.Control.MouseHover"/>-event.
@@ -1491,7 +1491,7 @@ namespace SharpMap.Forms
                 return;
 
             // Position in world coordinates
-            var p = _map.ImageToWorld(new Point(e.X, e.Y));
+            var p = _map.ImageToWorld(new System.Drawing.Point(e.X, e.Y));
 
             // Raise event
             MouseDown?.Invoke(p, e);
@@ -1544,7 +1544,7 @@ namespace SharpMap.Forms
         /// Private method to check if we need to reenable the <see cref="Control.MouseHover"/> event.
         /// </summary>
         /// <param name="position">The current position of the cursor</param>
-        private void CheckEnableHover(Point position)
+        private void CheckEnableHover(System.Drawing.Point position)
         {
             var delta = new Size(position.X - _lastHoverPostiton.X,
                                  position.Y - _lastHoverPostiton.Y);
@@ -1574,7 +1574,7 @@ namespace SharpMap.Forms
             }
 
             // Position in world coordinates
-            var p = _map.ImageToWorld(new Point(e.X, e.Y));
+            var p = _map.ImageToWorld(new System.Drawing.Point(e.X, e.Y));
 
             // Raise event
             MouseMove?.Invoke(p, e);
@@ -1679,7 +1679,7 @@ namespace SharpMap.Forms
             {
                 if (_activeTool == Tools.DrawPolygon || _activeTool == Tools.DrawLine)
                 {
-                    _dragEndPoint = new Point(0, 0);
+                    _dragEndPoint = new System.Drawing.Point(0, 0);
                     if (_pointArray != null)
                     {
                         _pointArray[_pointArray.Count - 1] = Map.ImageToWorld(ClipPoint(e.Location));
@@ -1860,14 +1860,14 @@ namespace SharpMap.Forms
         }
                  */
 
-        private Point ClipPoint(Point p)
+        private System.Drawing.Point ClipPoint(System.Drawing.Point p)
         {
             var x = p.X < 0 ? 0 : (p.X > ClientSize.Width ? ClientSize.Width : p.X);
             var y = p.Y < 0 ? 0 : (p.Y > ClientSize.Height ? ClientSize.Height : p.Y);
-            return new Point(x, y);
+            return new System.Drawing.Point(x, y);
         }
 
-        private static Rectangle GenerateRectangle(Point p1, Point p2)
+        private static Rectangle GenerateRectangle(System.Drawing.Point p1, System.Drawing.Point p2)
         {
             var x = Math.Min(p1.X, p2.X);
             var y = Math.Min(p1.Y, p2.Y);
@@ -2039,7 +2039,7 @@ namespace SharpMap.Forms
                 return;
 
             // Position in world coordinates
-            var p = _map.ImageToWorld(new Point(e.X, e.Y));
+            var p = _map.ImageToWorld(new System.Drawing.Point(e.X, e.Y));
 
             // Raise event
             MouseUp?.Invoke(p, e);
@@ -2073,7 +2073,7 @@ namespace SharpMap.Forms
                     {
                         var oldCenter = _map.Center;
 
-                        _map.Center = _map.ImageToWorld(new Point(e.X, e.Y));
+                        _map.Center = _map.ImageToWorld(new System.Drawing.Point(e.X, e.Y));
 
                         if (!_map.Center.Equals2D(oldCenter, PrecisionTolerance))
                         {
@@ -2106,7 +2106,7 @@ namespace SharpMap.Forms
                     else
                     {
                         var oldCenter = _map.Center;
-                        _map.Center = _map.ImageToWorld(new Point(e.X, e.Y));
+                        _map.Center = _map.ImageToWorld(new System.Drawing.Point(e.X, e.Y));
 
                         if (!_map.Center.Equals2D(oldCenter, PrecisionTolerance))
                         {
@@ -2145,7 +2145,7 @@ namespace SharpMap.Forms
                         if (_panOnClick)
                         {
                             var oldValue = _map.Center;
-                            _map.Center = _map.ImageToWorld(new Point(e.X, e.Y));
+                            _map.Center = _map.ImageToWorld(new System.Drawing.Point(e.X, e.Y));
 
                             if (!_map.Center.Equals2D(oldValue, PrecisionTolerance))
                             {
@@ -2179,7 +2179,7 @@ namespace SharpMap.Forms
                             }
                             else
                             {
-                                bounding = new Envelope(_map.ImageToWorld(new Point(e.X, e.Y)));
+                                bounding = new Envelope(_map.ImageToWorld(new System.Drawing.Point(e.X, e.Y)));
                                 bounding = bounding.Grow(_map.PixelSize*_queryGrowFactor);
                                 isPoint = true;
                             }
@@ -2191,9 +2191,9 @@ namespace SharpMap.Forms
                             }
                             else
                             {
-                                IGeometry geom;
+                                Geometry geom;
                                 if (isPoint && QueryGrowFactor == 0)
-                                    geom = _map.Factory.CreatePoint(_map.ImageToWorld(new Point(e.X, e.Y)));
+                                    geom = _map.Factory.CreatePoint(_map.ImageToWorld(new System.Drawing.Point(e.X, e.Y)));
                                 else
                                     geom = _map.Factory.ToGeometry(bounding);
                                 layer.ExecuteIntersectionQuery(geom, ds);
@@ -2453,7 +2453,7 @@ namespace SharpMap.Forms
                 if (m.Msg == 0x020A)
                 {
                     var delta = ((int) (m.WParam.ToInt64() & 0xFFFF0000) >> 16);
-                    var pt = _redirectHandle.PointToClient(new Point(m.LParam.ToInt32()));
+                    var pt = _redirectHandle.PointToClient(new System.Drawing.Point(m.LParam.ToInt32()));
                     if (_redirectHandle.ClientRectangle.Contains(pt))
                     {
                         if (_mouseIn)

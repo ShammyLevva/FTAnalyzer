@@ -16,7 +16,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System.Drawing;
-using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
 
 namespace SharpMap.Utilities
 {
@@ -45,7 +45,7 @@ namespace SharpMap.Utilities
 
         /// <summary>
         /// Transforms from world coordinate system (WCS) to image coordinates
-        /// NOTE: This method DOES NOT take the MapTransform property into account (use <see cref="Map.WorldToImage(GeoAPI.Geometries.Coordinate,bool)"/> instead)
+        /// NOTE: This method DOES NOT take the MapTransform property into account (use <see cref="Map.WorldToImage(NetTopologySuite.Geometries.Coordinate,bool)"/> instead)
         /// </summary>
         /// <param name="p">Point in WCS</param>
         /// <param name="map">Map reference</param>

@@ -24,7 +24,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
 using SharpMap.CoordinateSystems;
 using SharpMap.Rendering.Exceptions;
 using SharpMap.Web.Wms;
@@ -54,7 +54,7 @@ namespace SharpMap.Layers
     /// myLayer.SetImageFormat(layWms.OutputFormats[0]);
     /// myLayer.SRID = 4326;	
     /// myMap.Layers.Add(myLayer);
-    /// myMap.Center = new GeoAPI.Geometries.Coordinate(0, 0);
+    /// myMap.Center = new NetTopologySuite.Geometries.Coordinate(0, 0);
     /// myMap.Zoom = 360;
     /// myMap.MaximumZoom = 360;
     /// myMap.MinimumZoom = 0.1;

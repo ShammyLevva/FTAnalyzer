@@ -26,8 +26,8 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
-using GeoAPI;
-using GeoAPI.Geometries;
+using NetTopologySuite;
+using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
 
 namespace SharpMap.Data
@@ -358,7 +358,7 @@ namespace SharpMap.Data
                     var row = (FeatureDataRow) Rows[rowIndex];
                     var srid = reader.ReadInt32();
 #pragma warning disable CS0612 // Type or member is obsolete
-                    var wkbReader = new WKBReader(GeometryServiceProvider.Instance.CreateGeometryFactory(srid));
+                    var wkbReader = new WKBReader(NtsGeometryServices.Instance);
 #pragma warning restore CS0612 // Type or member is obsolete
                     var wkbSize = reader.ReadInt32();
                     var wkb = reader.ReadBytes(wkbSize);
@@ -482,7 +482,7 @@ namespace SharpMap.Data
 
         //private void InitClass()
         //{
-        //    //this.columnFeatureGeometry = new DataColumn("FeatureGeometry", typeof(GeoAPI.Geometries.IGeometry), null, System.Data.MappingType.Element);
+        //    //this.columnFeatureGeometry = new DataColumn("FeatureGeometry", typeof(NetTopologySuite.Geometries.Geometry), null, System.Data.MappingType.Element);
         //    //this.Columns.Add(this.columnFeatureGeometry);
         //}
 
@@ -854,7 +854,7 @@ namespace SharpMap.Data
     {
         //private FeatureDataTable tableFeatureTable;
 
-        private IGeometry _geometry;
+        private Geometry _geometry;
 
         /// <summary>
         /// Creates an instance of this class
@@ -868,7 +868,7 @@ namespace SharpMap.Data
         /// <summary>
         /// The geometry of the current feature
         /// </summary>
-        public IGeometry Geometry
+        public Geometry Geometry
         {
             get { return _geometry; }
             set

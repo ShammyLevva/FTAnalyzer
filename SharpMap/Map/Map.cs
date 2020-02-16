@@ -28,14 +28,14 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
 using NetTopologySuite;
 using SharpMap.Layers;
 using SharpMap.Rendering;
 using SharpMap.Rendering.Decoration;
 using SharpMap.Styles;
 using SharpMap.Utilities;
-using Point = GeoAPI.Geometries.Coordinate;
+using Point = NetTopologySuite.Geometries.Coordinate;
 using System.Drawing.Imaging;
 using Common.Logging;
 using System.Reflection;
@@ -60,14 +60,14 @@ namespace SharpMap
         }
 
         /// <summary>
-        /// Static constructor. Needed to get <see cref="GeoAPI.GeometryServiceProvider.Instance"/> set.
+        /// Static constructor. Needed to get <see cref="NtsGeometryServices.Instance"/> set.
         /// </summary>
         static Map()
         {
             try
             {
-                _logger.Debug("Trying to get GeoAPI.GeometryServiceProvider.Instance");
-                var instance = GeoAPI.GeometryServiceProvider.Instance;
+                _logger.Debug("Trying to get NtsGeometryServices.Instance");
+                var instance = NtsGeometryServices.Instance;
                 if (instance == null)
                 {
                     _logger.Debug("Returned null");
@@ -79,8 +79,8 @@ namespace SharpMap
                 _logger.Debug("Loading NetTopologySuite");
                 Assembly.Load("NetTopologySuite");
                 _logger.Debug("Loaded NetTopologySuite");
-                _logger.Debug("Trying to get GeoAPI.GeometryServiceProvider.Instance");
-                var instance = GeoAPI.GeometryServiceProvider.Instance;
+                _logger.Debug("Trying to get NtsGeometryServices.Instance");
+                var instance = NtsGeometryServices.Instance;
                 if (instance == null)
                 {
                     _logger.Debug("Returned null");
@@ -101,16 +101,16 @@ namespace SharpMap
                 Trace.WriteLine("Loaded NetTopologySuite");
                 try
                 {
-                    _logger.Debug("Trying to access GeoAPI.GeometryServiceProvider.Instance");
-                    Trace.WriteLine("Trying to access GeoAPI.GeometryServiceProvider.Instance");
-                    if (GeoAPI.GeometryServiceProvider.Instance == null)
+                    _logger.Debug("Trying to access NtsGeometryServices.Instance");
+                    Trace.WriteLine("Trying to access NtsGeometryServices.Instance");
+                    if (NtsGeometryServices.Instance == null)
                     {
                         _logger.Debug("Returned null, setting it to default");
                         Trace.WriteLine("Returned null, setting it to default");
-                        var ntsApiGeometryServices = ntsAssembly.GetType("NetTopologySuite.NtsGeometryServices");
-                        GeoAPI.GeometryServiceProvider.Instance =
-                            ntsApiGeometryServices.GetProperty("Instance").GetValue(null, null) as
-                                GeoAPI.IGeometryServices;
+                        var ntsApGeometryServices = ntsAssembly.GetType("NetTopologySuite.NtsGeometryServices");
+                        NtsGeometryServices.Instance =
+                            ntsApGeometryServices.GetProperty("Instance").GetValue(null, null) as
+                                NetTopologySuite.GeometryServices;
                     }
                 }
 
@@ -118,10 +118,10 @@ namespace SharpMap
                 {
                     _logger.Debug("InvalidOperationException thrown, setting it to default");
                     Trace.WriteLine("InvalidOperationException thrown, setting it to default");
-                    var ntsApiGeometryServices = ntsAssembly.GetType("NetTopologySuite.NtsGeometryServices");
-                    GeoAPI.GeometryServiceProvider.Instance =
-                        ntsApiGeometryServices.GetProperty("Instance").GetValue(null, null) as
-                            GeoAPI.IGeometryServices;
+                    var ntsApGeometryServices = ntsAssembly.GetType("NetTopologySuite.NtsGeometryServices");
+                    NtsGeometryServices.Instance =
+                        ntsApGeometryServices.GetProperty("Instance").GetValue(null, null) as
+                            NetTopologySuite.GeometryServices;
                 }
                 _logger.Debug("Exiting design mode handling");
                 Trace.WriteLine("Exiting design mode handling");
@@ -183,7 +183,7 @@ namespace SharpMap
 
             if (LicenseManager.UsageMode != LicenseUsageMode.Designtime)
             {
-                Factory = GeoAPI.GeometryServiceProvider.Instance.CreateGeometryFactory(_srid);
+                Factory = NtsGeometryServices.Instance.CreateGeometryFactory(_srid);
             }
             _layers = new LayerCollection();
             _layersPerGroup.Add(_layers, new List<ILayer>());
@@ -892,7 +892,7 @@ namespace SharpMap
                 if (!Size.IsEmpty)
                     clone.Size = new Size(Size.Width, Size.Height);
                 if (Center != null)
-                    clone.Center = (Coordinate)Center.Clone();
+                    clone.Center = (Coordinate)Center.Copy();
 
             }
 
@@ -1120,14 +1120,14 @@ namespace SharpMap
                 if (_srid == value)
                     return;
                 _srid = value;
-                Factory = GeoAPI.GeometryServiceProvider.Instance.CreateGeometryFactory(_srid);
+                Factory = NtsGeometryServices.Instance.CreateGeometryFactory(_srid);
             }
         }
 
         /// <summary>
         /// Factory used to create geometries
         /// </summary>
-        public IGeometryFactory Factory { get; private set; }
+        public GeometryFactory Factory { get; private set; }
 
         /// <summary>
         /// List of all map decorations

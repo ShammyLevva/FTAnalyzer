@@ -10,7 +10,7 @@ using System.Threading;
 using BruTile;
 using BruTile.Cache;
 using Common.Logging;
-using GeoAPI.Geometries;
+using NetTopologySuite.Geometries;
 
 namespace SharpMap.Layers
 {
