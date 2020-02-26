@@ -166,10 +166,12 @@ namespace FTAnalyzer.Forms
 
         static GeoResponse GetGeoResponse(string url)
         {
-            GeoResponse res = null;
+            GeoResponse res;
             try
             {
                 HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+                request.Timeout = 3000; // set timeout to 3 seconds from default 100 seconds
+                request.ReadWriteTimeout = 10000;
                 request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
                 request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
                 DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(GeoResponse));
@@ -185,9 +187,13 @@ namespace FTAnalyzer.Forms
                 Stream stream = request.GetResponse().GetResponseStream();
                 res = (GeoResponse)serializer.ReadObject(stream);
             }
-            catch (Exception ex)
+            catch (WebException ex)
             {
-                MessageBox.Show($"Unable to contact https://maps.googleapis.com error was: {ex.Message}", "FTAnalyzer");
+                if (ex.Status == WebExceptionStatus.Timeout)
+                    Console.WriteLine($"Timeout with {url}\n");
+                else
+                    MessageBox.Show($"Unable to contact https://maps.googleapis.com error was: {ex.Message}", "FTAnalyzer");
+                res = null;
             }
             return res;
         }

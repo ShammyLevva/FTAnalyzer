@@ -525,21 +525,27 @@ namespace FTAnalyzer.Forms
 
         public void StartGoogleGeoCoding(bool retryPartials)
         {
-            if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy)
+            try
             {
-                MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
-            }
-            else
+                if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy)
+                {
+                    MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
+                }
+                else
+                {
+                    Cursor = Cursors.WaitCursor;
+                    pbGeocoding.Visible = true;
+                    mnuGoogleGeocodeLocations.Enabled = false;
+                    mnuEditLocation.Enabled = false;
+                    mnuReverseGeocode.Enabled = false;
+                    mnuOSGeocodeLocations.Enabled = false;
+                    ft.Geocoding = true;
+                    googleGeocodeBackgroundWorker.RunWorkerAsync(retryPartials);
+                    Cursor = Cursors.Default;
+                }
+            } catch(ArgumentException ex)
             {
-                Cursor = Cursors.WaitCursor;
-                pbGeocoding.Visible = true;
-                mnuGoogleGeocodeLocations.Enabled = false;
-                mnuEditLocation.Enabled = false;
-                mnuReverseGeocode.Enabled = false;
-                mnuOSGeocodeLocations.Enabled = false;
-                ft.Geocoding = true;
-                googleGeocodeBackgroundWorker.RunWorkerAsync(retryPartials);
-                Cursor = Cursors.Default;
+                Console.WriteLine(ex.Message); // sometimes setting pbGeocoding.Visible triggers font error for resizing fonts
             }
         }
 
