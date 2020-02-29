@@ -1,3 +1,8 @@
+#### Updated Release Version 7.6.1.0 29th Feb 2020  
+**Updates**  
+Added support for some non standard Ancestry tags and method to tag others  
+This should then detect various facts that previously went undetected  
+
 #### Updated Release Version 7.6.0.0 16th Feb 2020  
 **Updates**  
 Updated Mapping tools to use new version of BruTile/SharpMap  
