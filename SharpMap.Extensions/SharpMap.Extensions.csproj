@@ -56,18 +56,18 @@
     <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\FTAnalyser\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="gdalconst_csharp, Version=1.0.7284.37396, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
-      <HintPath>..\FTAnalyser\packages\GDAL.2.4.3\lib\net40\gdalconst_csharp.dll</HintPath>
+    <Reference Include="gdalconst_csharp, Version=1.0.7372.36899, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <HintPath>..\FTAnalyser\packages\GDAL.2.4.4\lib\net40\gdalconst_csharp.dll</HintPath>
     </Reference>
-    <Reference Include="gdal_csharp, Version=1.0.7284.37396, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
-      <HintPath>..\FTAnalyser\packages\GDAL.2.4.3\lib\net40\gdal_csharp.dll</HintPath>
+    <Reference Include="gdal_csharp, Version=1.0.7372.36899, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <HintPath>..\FTAnalyser\packages\GDAL.2.4.4\lib\net40\gdal_csharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NetTopologySuite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
       <HintPath>..\FTAnalyser\packages\NetTopologySuite.2.0.0\lib\netstandard2.0\NetTopologySuite.dll</HintPath>
     </Reference>
     <Reference Include="NetTopologySuite.Features, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
-      <HintPath>..\FTAnalyser\packages\NetTopologySuite.Features.2.0.0\lib\netstandard2.0\NetTopologySuite.Features.dll</HintPath>
+      <HintPath>..\FTAnalyser\packages\NetTopologySuite.Features.2.1.0\lib\netstandard2.0\NetTopologySuite.Features.dll</HintPath>
     </Reference>
     <Reference Include="NetTopologySuite.IO.PostGis, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
       <HintPath>..\FTAnalyser\packages\NetTopologySuite.IO.PostGis.2.0.0\lib\netstandard2.0\NetTopologySuite.IO.PostGis.dll</HintPath>
@@ -75,18 +75,18 @@
     <Reference Include="NetTopologySuite.IO.SpatiaLite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
       <HintPath>..\FTAnalyser\packages\NetTopologySuite.IO.SpatiaLite.2.0.0\lib\netstandard2.0\NetTopologySuite.IO.SpatiaLite.dll</HintPath>
     </Reference>
-    <Reference Include="ogr_csharp, Version=1.0.7284.37396, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
-      <HintPath>..\FTAnalyser\packages\GDAL.2.4.3\lib\net40\ogr_csharp.dll</HintPath>
+    <Reference Include="ogr_csharp, Version=1.0.7372.36898, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <HintPath>..\FTAnalyser\packages\GDAL.2.4.4\lib\net40\ogr_csharp.dll</HintPath>
     </Reference>
-    <Reference Include="osr_csharp, Version=1.0.7284.37395, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
-      <HintPath>..\FTAnalyser\packages\GDAL.2.4.3\lib\net40\osr_csharp.dll</HintPath>
+    <Reference Include="osr_csharp, Version=1.0.7372.36898, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <HintPath>..\FTAnalyser\packages\GDAL.2.4.4\lib\net40\osr_csharp.dll</HintPath>
     </Reference>
     <Reference Include="ProjNET, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a1f5bdcd9c6f5740, processorArchitecture=MSIL">
       <HintPath>..\FTAnalyser\packages\ProjNET.2.0.0\lib\netstandard2.0\ProjNET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\FTAnalyser\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+      <HintPath>..\FTAnalyser\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -95,14 +95,14 @@
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\FTAnalyser\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+      <HintPath>..\FTAnalyser\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\FTAnalyser\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\FTAnalyser\packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>..\FTAnalyser\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
