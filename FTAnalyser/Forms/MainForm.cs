@@ -16,6 +16,7 @@ using System.Drawing.Printing;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -30,7 +31,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.6.1.0";
+        public static string VERSION = "7.6.1.1";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -416,6 +417,7 @@ namespace FTAnalyzer
             mnuTreetopsToExcel.Enabled = enabled && dgTreeTops.RowCount > 0;
             mnuWorldWarsToExcel.Enabled = enabled && dgWorldWars.RowCount > 0;
             mnuDNA_GEDCOM.Enabled = enabled;
+            mnuJSON.Enabled = enabled;
         }
 
         void HourGlass(bool on)
@@ -3323,6 +3325,36 @@ namespace FTAnalyzer
             f.Show();
             HourGlass(false);
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.BirthdayEffectEvent);
+        }
+
+        void MnuJSON_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            try
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                string initialDir = (string)Application.UserAppDataRegistry.GetValue("JSON Export Path");
+                saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
+                saveFileDialog.Filter = "JavaScript Object Notation (*.json)|*.json";
+                saveFileDialog.FilterIndex = 1;
+                DialogResult dr = saveFileDialog.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    string path = Path.GetDirectoryName(saveFileDialog.FileName);
+                    Application.UserAppDataRegistry.SetValue("JSON Export Path", path);
+                    using (StreamWriter output = new StreamWriter(new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write), Encoding.UTF8))
+                    {
+                        var data = new JsonExport(filename);
+                        data.WriteJsonData(output);
+                    }
+                    UIHelpers.ShowMessage($"File written to {saveFileDialog.FileName}", "FTAnalyzer");
+                }
+            }
+            catch (Exception ex)
+            {
+                UIHelpers.ShowMessage(ex.Message, "FTAnalyzer");
+            }
+            HourGlass(false);
         }
     }
 }

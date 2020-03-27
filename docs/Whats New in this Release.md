@@ -1,3 +1,7 @@
+#### Updated Release Version 7.6.1.1 29th Feb 2020  
+**Bugfixes**  
+Fix bug with leap day 29th Jan in On this day reports.  
+
 #### Updated Release Version 7.6.1.0 29th Feb 2020  
 **Updates**  
 Added support for some non standard Ancestry tags and method to tag others  
