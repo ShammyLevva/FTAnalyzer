@@ -1,3 +1,9 @@
+#### Updated Release Version 7.6.2.0 27th Mar 2020  
+**Updates**  
+Add Name fact  
+Add Sources to Name fact - Sources for an individual were getting ignored 
+as they weren't tied to a fact adding a name fact addresses this  
+
 #### Updated Release Version 7.6.1.1 29th Feb 2020  
 **Bugfixes**  
 Fix bug with leap day 29th Jan in On this day reports.  
