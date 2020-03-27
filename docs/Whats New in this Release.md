@@ -3,6 +3,7 @@
 Add Name fact  
 Add Sources to Name fact - Sources for an individual were getting ignored 
 as they weren't tied to a fact adding a name fact addresses this  
+Added support for CHANge tag  
 
 #### Updated Release Version 7.6.1.1 29th Feb 2020  
 **Bugfixes**  
