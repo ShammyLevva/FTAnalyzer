@@ -72,7 +72,10 @@ namespace CensusReferenceTest
             ScottishCensusTest("Parish: Inverurie; ED: 4; Page: 12; Line: 3; Roll: CSSCT1901_69", FactDate.UNKNOWN_DATE, "Inverurie", "4", "12");
             ScottishCensusTest("Census 1841 Kelso ROX SCT1841/793 f4 p45", CensusDate.UKCENSUS1841, "793", "4", "45");
             ScottishCensusTest("1881 GROS 233/ 2/ 7", CensusDate.SCOTCENSUS1881, "233", "2", "7");
-                
+            ScottishCensusTest("GROS 225 / 7 / 15", FactDate.UNKNOWN_DATE, "225", "7", "15");
+            ScottishCensusTest("1881 GROS 225 / 7 / 15", CensusDate.SCOTCENSUS1881, "225", "7", "15");
+            ScottishCensusTest("Ref: 1881 GROS 225 / 7 / 15", CensusDate.SCOTCENSUS1881, "225", "7", "15");
+
             CensusHO107Test("HO107 Piece: 1607 Folio: 880 Page: 29", CensusDate.UKCENSUS1851, "1607", string.Empty, "880", "29");
             CensusHO107Test("HO107 piece 729 folio 5/15 page 6", CensusDate.UKCENSUS1841, "729", "5", "15", "6");
             CensusHO107Test("HO107 piece 2195 folio 507 page 71", CensusDate.UKCENSUS1851, "2195", string.Empty, "507", "71");
