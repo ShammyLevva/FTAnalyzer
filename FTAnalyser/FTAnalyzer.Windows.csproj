@@ -164,11 +164,11 @@
     <Reference Include="gdal_csharp, Version=1.0.7372.36899, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
       <HintPath>packages\GDAL.2.4.4\lib\net40\gdal_csharp.dll</HintPath>
     </Reference>
-    <Reference Include="GoogleAnalyticsTracker.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=04ab204e84b117c0, processorArchitecture=MSIL">
-      <HintPath>packages\GoogleAnalyticsTracker.Core.5.0.0\lib\portable45-net45+win8+wpa81\GoogleAnalyticsTracker.Core.dll</HintPath>
+    <Reference Include="GoogleAnalyticsTracker.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=04ab204e84b117c0, processorArchitecture=MSIL">
+      <HintPath>packages\GoogleAnalyticsTracker.Core.6.0.0\lib\netstandard2.0\GoogleAnalyticsTracker.Core.dll</HintPath>
     </Reference>
-    <Reference Include="GoogleAnalyticsTracker.Simple, Version=5.0.0.0, Culture=neutral, PublicKeyToken=04ab204e84b117c0, processorArchitecture=MSIL">
-      <HintPath>packages\GoogleAnalyticsTracker.Simple.5.0.0\lib\portable45-net45+win8+wpa81\GoogleAnalyticsTracker.Simple.dll</HintPath>
+    <Reference Include="GoogleAnalyticsTracker.Simple, Version=6.0.0.0, Culture=neutral, PublicKeyToken=04ab204e84b117c0, processorArchitecture=MSIL">
+      <HintPath>packages\GoogleAnalyticsTracker.Simple.6.0.0\lib\netstandard2.0\GoogleAnalyticsTracker.Simple.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.11.23.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>packages\HtmlAgilityPack.1.11.23\lib\Net45\HtmlAgilityPack.dll</HintPath>
