@@ -1,3 +1,14 @@
+#### Updated Release Version 7.6.3.0 6th Apr 2020  
+**Updates**  
+Update to Analytics v6  
+Update included packages to latest versions  
+Add new Scottish Census Reference checks  
+Sources now parse note fields as well as text fields  
+
+**Bugfixes**  
+Changing region on Census & Research Suggestion remembers selection  
+Failed Census references found in source fact pages are added to list of unrecognised  
+
 #### Updated Release Version 7.6.2.0 27th Mar 2020  
 **Updates**  
 Add Name fact  
