@@ -435,6 +435,7 @@
             this.cbRegion.Name = "cbRegion";
             this.cbRegion.Size = new System.Drawing.Size(121, 25);
             this.cbRegion.Text = ".co.uk";
+            this.cbRegion.SelectedIndexChanged += new System.EventHandler(this.CbRegion_SelectedIndexChanged);
             // 
             // btnHelp
             // 

@@ -83,6 +83,10 @@ namespace FTAnalyzer.Forms
             if (defaultProvider.Equals("FreeCen"))
                 defaultProvider = "FreeBMD";
             cbBMDSearchProvider.Text = defaultProvider;
+            string defaultRegion = (string)Application.UserAppDataRegistry.GetValue("Default Region");
+            if (defaultRegion == null)
+                defaultRegion = ".co.uk";
+            cbRegion.Text = defaultRegion;
             cbFilter.Text = "All Individuals";
             cbApplyTo.Text = "All BMD Records";
         }
@@ -262,6 +266,13 @@ namespace FTAnalyzer.Forms
             if (provider.Equals("FreeBMD"))
                 provider = "FreeCen";
             Application.UserAppDataRegistry.SetValue("Default Search Provider", provider);
+            dgBMDReportSheet.Refresh(); // forces refresh of tooltips
+            dgBMDReportSheet.Focus();
+        }
+
+        void CbRegion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Application.UserAppDataRegistry.SetValue("Default Region", cbRegion.SelectedItem.ToString());
             dgBMDReportSheet.Refresh(); // forces refresh of tooltips
             dgBMDReportSheet.Focus();
         }

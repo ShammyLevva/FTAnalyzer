@@ -37,7 +37,11 @@ namespace FTAnalyzer.Forms
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
             if (defaultProvider == null)
                 defaultProvider = "FamilySearch";
+            string defaultRegion = (string)Application.UserAppDataRegistry.GetValue("Default Region");
+            if (defaultRegion == null)
+                defaultRegion = ".co.uk";
             cbCensusSearchProvider.Text = defaultProvider;
+            cbRegion.Text = defaultRegion;
             CensusSettingsUI.CompactCensusRefChanged += new EventHandler(RefreshCensusReferences);
             Top += NativeMethods.TopTaskbarOffset;
         }
@@ -260,6 +264,13 @@ namespace FTAnalyzer.Forms
         void CbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
             Application.UserAppDataRegistry.SetValue("Default Search Provider", cbCensusSearchProvider.SelectedItem.ToString());
+            dgCensus.Refresh(); // force update of tooltips
+            dgCensus.Focus();
+        }
+
+        void CbRegion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Application.UserAppDataRegistry.SetValue("Default Region", cbRegion.SelectedItem.ToString());
             dgCensus.Refresh(); // force update of tooltips
             dgCensus.Focus();
         }
