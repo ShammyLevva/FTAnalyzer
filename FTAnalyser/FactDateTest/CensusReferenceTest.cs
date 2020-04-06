@@ -75,6 +75,8 @@ namespace CensusReferenceTest
             ScottishCensusTest("GROS 225 / 7 / 15", FactDate.UNKNOWN_DATE, "225", "7", "15");
             ScottishCensusTest("1881 GROS 225 / 7 / 15", CensusDate.SCOTCENSUS1881, "225", "7", "15");
             ScottishCensusTest("Ref: 1881 GROS 225 / 7 / 15", CensusDate.SCOTCENSUS1881, "225", "7", "15");
+            ScottishCensusTest("1871, Census 496 / 11 / 69", CensusDate.UKCENSUS1871, "496", "11", "69");
+            ScottishCensusTest("1891, Census 496/ 13/ 26", CensusDate.UKCENSUS1891, "496", "13", "26");
 
             CensusHO107Test("HO107 Piece: 1607 Folio: 880 Page: 29", CensusDate.UKCENSUS1851, "1607", string.Empty, "880", "29");
             CensusHO107Test("HO107 piece 729 folio 5/15 page 6", CensusDate.UKCENSUS1841, "729", "5", "15", "6");
@@ -187,7 +189,7 @@ namespace CensusReferenceTest
         void ScottishCensusTest(string reference, FactDate year, string parish, string ED, string page)
         {
             CensusReference censusRef = new CensusReference("I1", reference, false);
-            Assert.IsTrue(censusRef.CensusYear.Equals(year));
+            Assert.IsTrue(censusRef.CensusYear.BestYear == year.BestYear);
             Assert.IsTrue(censusRef.Parish.Equals(parish));
             Assert.IsTrue(censusRef.ED.Equals(ED));
             Assert.IsTrue(censusRef.Page.Equals(page));
