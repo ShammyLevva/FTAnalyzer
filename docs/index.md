@@ -12,7 +12,7 @@ Installation is simple with the click once installer. Click the download button 
   
 **NB. This program will require the Microsoft .Net 4.7.2 to have been installed.** This is usually present on most windows machines from Windows 7 onwards assuming that your machine is patched with the all the Microsoft updates. If not it can be downloaded free from Microsoft at [https://support.microsoft.com/en-gb/help/4054531/microsoft-net-framework-4-7-2-web-installer-for-windows](https://support.microsoft.com/en-gb/help/4054531/microsoft-net-framework-4-7-2-web-installer-for-windows) and clicking the download link for your machine. Once downloaded simply run the file to install.
 
-NB. There have been known problems with Windows Defender blocking the app due to insufficient downloads per month so it is marked as insufficiently trusted. You can solve this by downloading the latest [manual install version](https://github.com/ShammyLevva/FTAnalyzer/releases) or by using a proper Anti Virus solution. DO NOT simply disable your AV/Firewall to install that's the usual bad advice given by app vendors that don't know how to setup their apps properly.
+NB. There have been known problems with Windows Defender blocking the app, when you install with the click once installer, so the app gets due to insufficient downloads per month  marked as insufficiently trusted. You can avoid this by using the Micrsoft Store install or by downloading the latest [manual install version](https://github.com/ShammyLevva/FTAnalyzer/releases) or by using a proper Anti Virus solution. DO NOT simply disable your AV/Firewall to install that's the usual bad advice given by app vendors that don't know how to setup their apps properly.
 
 ### Helpful Guides to Using FTAnalyzer
 
