@@ -18,6 +18,7 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
+            _ToolTip.Dispose();
         }
 
         #region Component Designer generated code

@@ -1,3 +1,7 @@
+#### Updated Release Version 7.6.4.0 11th Apr 2020  
+**Updates**  
+Added in extra census dates so modern census records eg: US2020 don't throw errors  
+
 #### Updated Release Version 7.6.3.0 6th Apr 2020  
 **Updates**  
 Update to Analytics v6  

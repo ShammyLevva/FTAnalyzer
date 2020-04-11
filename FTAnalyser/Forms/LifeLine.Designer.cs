@@ -23,6 +23,7 @@ namespace FTAnalyzer.Forms
             linesLayer.Dispose();
             points.Dispose();
             selections.Dispose();
+            lifelines.Dispose();
         }
 
         #region Windows Form Designer generated code

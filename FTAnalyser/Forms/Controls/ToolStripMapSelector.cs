@@ -134,5 +134,18 @@ namespace FTAnalyzer.Controls
             Application.UserAppDataRegistry.SetValue("Default Map Background", selectedOption.Name);
             mapbox.Refresh();
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            mnuOpenStreetMap.Dispose();
+            mnuOpenHistoricMap.Dispose();
+            mnuBingMapAerial.Dispose();
+            mnuBingMapRoads.Dispose();
+            mnuBingMapHybrid.Dispose();
+            mnuNLS1843_1882.Dispose();
+            mnuNLS1885_1900.Dispose();
+            mnuNLS1921_1930.Dispose();
+        }
     }
 }

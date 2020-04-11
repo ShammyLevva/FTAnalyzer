@@ -1456,7 +1456,6 @@ namespace FTAnalyzer
             filter = FilterUtils.AndFilter(x => x.Age.MinAge < (int)udAgeFilter.Value, filter);
             return filter;
         }
-
         Predicate<Individual> CreateIndividualCensusFilter(bool censusDone, string surname)
         {
             var relationFilter = relTypesCensus.BuildFilter<Individual>(x => x.RelationType);

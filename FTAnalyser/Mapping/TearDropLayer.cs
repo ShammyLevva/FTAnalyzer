@@ -16,7 +16,7 @@ using System.Windows.Forms;
 
 namespace FTAnalyzer.Mapping
 {
-    public class TearDropLayer : VectorLayer, IDisposable
+    public class TearDropLayer : VectorLayer
     {
         public FeatureDataTable TearDropLocations { get; private set; }
         public Image Icon { get; private set; }

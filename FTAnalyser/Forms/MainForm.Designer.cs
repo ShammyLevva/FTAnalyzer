@@ -26,6 +26,8 @@ namespace FTAnalyzer
                 handwritingFont.Dispose();
                 fonts.Dispose();
                 rfhDuplicates.Dispose();
+                cts.Dispose();
+                storedCursor.Dispose();
             }
             catch (Exception) { }
         }

@@ -1,0 +1,5 @@
+Package Name: 26245AlexanderBisset.56195460DD6F1
+Package Display Name: FTAnalyzer
+Publisher Name: CN=A9B22507-AD23-4870-AFE9-FB8F05F6EB76
+Publisher Display Name: FTAnalyzer
+Package Description: Analyse your family tree

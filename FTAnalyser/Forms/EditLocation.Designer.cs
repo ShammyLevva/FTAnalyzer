@@ -20,6 +20,7 @@ namespace FTAnalyzer.Forms
             }
             base.Dispose(disposing);
             pointLayer.Dispose();
+            pointTable.Dispose();
         }
 
         #region Windows Form Designer generated code
