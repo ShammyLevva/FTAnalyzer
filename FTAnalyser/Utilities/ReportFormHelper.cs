@@ -188,7 +188,6 @@ namespace FTAnalyzer
                // ReportGrid.Columns[i].Width = ReportGrid.Columns[i].MinimumWidth;
             }
             SaveColumnLayout(filename);
-            ResetFormLayout();
         }
 
         public void LoadFormLayout()
