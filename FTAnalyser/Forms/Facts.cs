@@ -46,10 +46,7 @@ namespace FTAnalyzer.Forms
             btnShowHideFacts.Visible = false;
         }
 
-        void Grid_SortFinished(object sender, EventArgs e)
-        {
-            SetBackColour();
-        }
+        void Grid_SortFinished(object sender, EventArgs e) => SetBackColour();
 
         public Facts(Individual individual)
             : this()
@@ -234,10 +231,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void BtnShowHideFacts_Click(object sender, EventArgs e)
-        {
-            ShowHideFactRows();
-        }
+        void BtnShowHideFacts_Click(object sender, EventArgs e) => ShowHideFactRows();
 
         public void ShowHideFactRows()
         {
@@ -336,30 +330,15 @@ namespace FTAnalyzer.Forms
             SetBackColour();
         }
 
-        void PrintToolStripButton_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.PrintReport("Facts Report");
-        }
+        void PrintToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintReport("Facts Report");
 
-        void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.PrintPreviewReport();
-        }
+        void PrintPreviewToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintPreviewReport();
 
-        void Facts_TextChanged(object sender, EventArgs e)
-        {
-            reportFormHelper.PrintTitle = Text;
-        }
+        void Facts_TextChanged(object sender, EventArgs e) => reportFormHelper.PrintTitle = Text;
 
-        void MnuExportToExcel_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.DoExportToExcel<IDisplayFact>();
-        }
+        void MnuExportToExcel_Click(object sender, EventArgs e) => reportFormHelper.DoExportToExcel<IDisplayFact>();
 
-        void MnuResetColumns_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.ResetColumnLayout("FactsColumns.xml");
-        }
+        void MnuResetColumns_Click(object sender, EventArgs e) => reportFormHelper.ResetColumnLayout("FactsColumns.xml");
 
         void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
@@ -402,10 +381,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void Facts_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Dispose();
-        }
+        void Facts_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
         void DgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -425,9 +401,6 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void Facts_Load(object sender, EventArgs e)
-        {
-            SpecialMethods.SetFonts(this);
-        }
+        void Facts_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }
 }

@@ -9,14 +9,11 @@ namespace FTAnalyzer.Forms
         public Notes(Individual ind)
         {
             InitializeComponent();
-            Top = Top + NativeMethods.TopTaskbarOffset;
+            Top += NativeMethods.TopTaskbarOffset;
             rtbNotes.Text = ind.Notes;
             Text = "Notes for " + ind.ToString();
         }
 
-        void Notes_Load(object sender, EventArgs e)
-        {
-            SpecialMethods.SetFonts(this);
-        }
+        void Notes_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }
 }

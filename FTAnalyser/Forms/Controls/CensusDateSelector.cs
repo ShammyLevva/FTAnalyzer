@@ -141,26 +141,14 @@ namespace FTAnalyzer.Controls
 
         #region Properties
 
-        public CensusDate SelectedDate
-        {
-            get { return (CensusDate)cbCensusDate.SelectedItem; }
-        }
+        public CensusDate SelectedDate => (CensusDate)cbCensusDate.SelectedItem;
 
-        public FactDate DefaultDate
-        {
-            get { return defaultDate; }
-        }
+        public FactDate DefaultDate => defaultDate;
 
-        public string CensusCountry
-        {
-            get { return SelectedDate.Country; }
-        }
+        public string CensusCountry => SelectedDate.Country;
         #endregion
 
-        public void RevertToDefaultDate()
-        {
-            cbCensusDate.SelectedItem = defaultDate;
-        }
+        public void RevertToDefaultDate() => cbCensusDate.SelectedItem = defaultDate;
 
         void SetControlWidth()
         {

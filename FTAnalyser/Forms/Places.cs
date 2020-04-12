@@ -109,11 +109,11 @@ namespace FTAnalyzer.Forms
                     }
                 }
                 progressbar.Value = ++count;
-                txtCount.Text = "Processed " + count + " Individuals from list of " + list.Count;
+                txtCount.Text = $"Processed {count} Individuals from list of {list.Count}";
                 Application.DoEvents();
             }
             progressbar.Visible = false;
-            txtCount.Text = "Downloading map tiles and computing clusters for " + displayFacts.Count + " facts. Please wait";
+            txtCount.Text = $"Downloading map tiles and computing clusters for {displayFacts.Count} facts. Please wait";
             Application.DoEvents();
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
 
@@ -121,7 +121,7 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.ZoomToBox(expand);
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
             RefreshClusters();
-            txtCount.Text = dgFacts.RowCount + " Geolocated fact(s) displayed";
+            txtCount.Text = $"{dgFacts.RowCount} Geolocated fact(s) displayed";
             Cursor = Cursors.Default;
         }
 
@@ -309,10 +309,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void TbOpacity_Scroll(object sender, EventArgs e)
-        {
-            RefreshMap();
-        }
+        void TbOpacity_Scroll(object sender, EventArgs e) => RefreshMap();
 
         void SetOpacity()
         {

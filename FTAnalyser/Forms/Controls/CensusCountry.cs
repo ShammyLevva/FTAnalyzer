@@ -91,39 +91,18 @@ namespace FTAnalyzer.Controls
 
         public event EventHandler CountryChanged;
 
-        protected void OnCountryChanged(EventArgs e)
-        {
-            CountryChanged?.Invoke(this, e);
-        }
+        protected void OnCountryChanged(EventArgs e) => CountryChanged?.Invoke(this, e);
 
-        void RbScotland_CheckedChanged(object sender, EventArgs e)
-        {
-            OnCountryChanged(e);
-        }
+        void RbScotland_CheckedChanged(object sender, EventArgs e) => OnCountryChanged(e);
 
-        void RbEngland_CheckedChanged(object sender, EventArgs e)
-        {
-            OnCountryChanged(e);
-        }
+        void RbEngland_CheckedChanged(object sender, EventArgs e) => OnCountryChanged(e);
 
-        void RbWales_CheckedChanged(object sender, EventArgs e)
-        {
-            OnCountryChanged(e);
-        }
+        void RbWales_CheckedChanged(object sender, EventArgs e) => OnCountryChanged(e);
 
-        void RbUK_CheckedChanged(object sender, EventArgs e)
-        {
-            OnCountryChanged(e);
-        }
+        void RbUK_CheckedChanged(object sender, EventArgs e) => OnCountryChanged(e);
 
-        void RbCanada_CheckedChanged(object sender, EventArgs e)
-        {
-            OnCountryChanged(e);
-        }
+        void RbCanada_CheckedChanged(object sender, EventArgs e) => OnCountryChanged(e);
 
-        void RbUSA_CheckedChanged(object sender, EventArgs e)
-        {
-            OnCountryChanged(e);
-        }
+        void RbUSA_CheckedChanged(object sender, EventArgs e) => OnCountryChanged(e);
     }
 }

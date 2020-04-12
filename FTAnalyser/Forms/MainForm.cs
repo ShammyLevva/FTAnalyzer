@@ -31,7 +31,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.6.3.0";
+        public static string VERSION = "7.6.4.0";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -165,19 +165,20 @@ namespace FTAnalyzer
 
         void SetHeightWidth()
         {
+            MainForm mainForm = this;
             // load height & width from registry - note need to use temp variables as setting them causes form
             // to resize thus setting the values for both
-            int Width = (int)Application.UserAppDataRegistry.GetValue("Mainform size - width", this.Width);
-            int Height = (int)Application.UserAppDataRegistry.GetValue("Mainform size - height", this.Height);
-            int Top = (int)Application.UserAppDataRegistry.GetValue("Mainform position - top", this.Top);
-            int Left = (int)Application.UserAppDataRegistry.GetValue("Mainform position - left", this.Left);
+            int Width = (int)Application.UserAppDataRegistry.GetValue("Mainform size - width", mainForm.Width);
+            int Height = (int)Application.UserAppDataRegistry.GetValue("Mainform size - height", mainForm.Height);
+            int Top = (int)Application.UserAppDataRegistry.GetValue("Mainform position - top", mainForm.Top);
+            int Left = (int)Application.UserAppDataRegistry.GetValue("Mainform position - left", mainForm.Left);
             string maxState = (WindowState == FormWindowState.Maximized).ToString();
             string maximised = (string)Application.UserAppDataRegistry.GetValue("Mainform maximised", maxState);
             Point leftTop = ReportFormHelper.CheckIsOnScreen(Top, Left);
-            this.Width = Width;
-            this.Height = Height;
-            this.Top = leftTop.Y;
-            this.Left = leftTop.X;
+            mainForm.Width = Width;
+            mainForm.Height = Height;
+            mainForm.Top = leftTop.Y;
+            mainForm.Left = leftTop.X;
             if (maximised=="True")
                 WindowState = FormWindowState.Maximized;
         }
@@ -405,6 +406,7 @@ namespace FTAnalyzer
             mnuOlderParents.Enabled = enabled;
             mnuBirthdayEffect.Enabled = enabled;
             mnuPossibleCensusFacts.Enabled = enabled;
+            mnuPossiblyMissingChildReport.Enabled = enabled;
             mnuShowTimeline.Enabled = enabled;
             mnuGeocodeLocations.Enabled = enabled;
             mnuOSGeocoder.Enabled = enabled;
@@ -3324,6 +3326,17 @@ namespace FTAnalyzer
             f.Show();
             HourGlass(false);
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.BirthdayEffectEvent);
+        }
+
+        void PossiblyMissingChildReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            People people = new People();
+            people.SetupPossiblyMissingChildrenReport();
+            DisposeDuplicateForms(people);
+            people.Show();
+            //Analytics.TrackAction(Analytics.CensusTabAction, Analytics.MissingCensusLocationEvent);
+            HourGlass(false);
         }
 
         void MnuJSON_Click(object sender, EventArgs e)

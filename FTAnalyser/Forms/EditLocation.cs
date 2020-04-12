@@ -181,10 +181,7 @@ namespace FTAnalyzer.Forms
             UserSavedPoint = false;
         }
 
-        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            SpecialMethods.VisitWebsite(e.Link.LinkData as string);
-        }
+        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite(e.Link.LinkData as string);
 
         void MapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -208,10 +205,7 @@ namespace FTAnalyzer.Forms
             //Console.WriteLine("Pixel : " + mapBox1.Map.PixelSize);
         }
 
-        void BtnSearch_Click(object sender, EventArgs e)
-        {
-            GoogleLocationSearch();
-        }
+        void BtnSearch_Click(object sender, EventArgs e) => GoogleLocationSearch();
 
         void GoogleLocationSearch()
         {
@@ -315,15 +309,9 @@ namespace FTAnalyzer.Forms
             return layers;
         }
 
-        void EditLocation_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Dispose();
-        }
+        void EditLocation_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        void TbOpacity_Scroll(object sender, EventArgs e)
-        {
-            RefreshMap();
-        }
+        void TbOpacity_Scroll(object sender, EventArgs e) => RefreshMap();
 
         void SetOpacity()
         {
@@ -346,9 +334,6 @@ namespace FTAnalyzer.Forms
             mapBox1.Refresh();
         }
 
-        void EditLocation_Load(object sender, EventArgs e)
-        {
-            SpecialMethods.SetFonts(this);
-        }
+        void EditLocation_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }
 }

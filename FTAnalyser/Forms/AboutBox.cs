@@ -35,13 +35,7 @@ namespace FTAnalyzer.Core.Displays
             }
         }
 
-        public string AssemblyVersion
-        {
-            get
-            {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            }
-        }
+        public string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
         public string AssemblyDescription
         {
@@ -96,14 +90,8 @@ namespace FTAnalyzer.Core.Displays
         }
         #endregion
 
-        void AboutBox1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Dispose();
-        }
+        void AboutBox1_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        void AboutBox1_Load(object sender, System.EventArgs e)
-        {
-            SpecialMethods.SetFonts(this);
-        }
+        void AboutBox1_Load(object sender, System.EventArgs e) => SpecialMethods.SetFonts(this);
     }
 }

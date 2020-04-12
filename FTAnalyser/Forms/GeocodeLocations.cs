@@ -349,35 +349,17 @@ namespace FTAnalyzer.Forms
             UpdateGeocodeStatusMenus();
         }
 
-        void ResetTable()
-        {
-            dgLocations.Sort(dgLocations.Columns["GeocodedLocation"], ListSortDirection.Ascending);
-        }
+        void ResetTable() => dgLocations.Sort(dgLocations.Columns["GeocodedLocation"], ListSortDirection.Ascending);
 
-        void PrintToolStripButton_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.PrintReport("Locations report");
-        }
+        void PrintToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintReport("Locations report");
 
-        void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.PrintPreviewReport();
-        }
+        void PrintPreviewToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintPreviewReport();
 
-        void Facts_TextChanged(object sender, EventArgs e)
-        {
-            reportFormHelper.PrintTitle = this.Text;
-        }
+        void Facts_TextChanged(object sender, EventArgs e) => reportFormHelper.PrintTitle = this.Text;
 
-        void MnuExportToExcel_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.DoExportToExcel<IDisplayGeocodedLocation>();
-        }
+        void MnuExportToExcel_Click(object sender, EventArgs e) => reportFormHelper.DoExportToExcel<IDisplayGeocodedLocation>();
 
-        void MnuResetColumns_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.ResetColumnLayout("GeocodeLocationsColumns.xml");
-        }
+        void MnuResetColumns_Click(object sender, EventArgs e) => reportFormHelper.ResetColumnLayout("GeocodeLocationsColumns.xml");
 
         void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
@@ -398,7 +380,7 @@ namespace FTAnalyzer.Forms
         {
             if (!ft.Geocoding && e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
                 FactLocation loc = dgLocations.Rows[e.RowIndex].DataBoundItem as FactLocation;
                 EditLocation(loc);
             }
@@ -408,7 +390,7 @@ namespace FTAnalyzer.Forms
         {
             if (!ft.Geocoding)
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
                 FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
                 EditLocation(loc);
             }
@@ -417,7 +399,7 @@ namespace FTAnalyzer.Forms
         void EditLocation(FactLocation loc)
         {
             EditLocation editform = new EditLocation(loc);
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
             mnuPasteLocation.Enabled = false;
             CopyLocation = FactLocation.UNKNOWN_LOCATION;
             editform.ShowDialog(this);
@@ -728,10 +710,7 @@ namespace FTAnalyzer.Forms
             TreeViewHandler.Instance.RefreshTreeNodeIcon(loc);
         }
 
-        void MnuGeocodeLocations_Click(object sender, EventArgs e)
-        {
-            StartGoogleGeoCoding(false);
-        }
+        void MnuGeocodeLocations_Click(object sender, EventArgs e) => StartGoogleGeoCoding(false);
         #endregion
 
         void UpdateChangesWithoutAskingToolStripMenuItem_Click(object sender, EventArgs e)
@@ -793,10 +772,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void MnuReverseGeocde_Click(object sender, EventArgs e)
-        {
-            StartReverseGeoCoding();
-        }
+        void MnuReverseGeocde_Click(object sender, EventArgs e) => StartReverseGeoCoding();
 
         #region Reverse Geocoding
 
@@ -1351,15 +1327,9 @@ namespace FTAnalyzer.Forms
             txtLocations.Text = (string)e.UserState;
         }
 
-        void OSGeocodeBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            WorkFinished(sender);
-        }
+        void OSGeocodeBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) => WorkFinished(sender);
         #endregion
 
-        void GeocodeLocations_Load(object sender, EventArgs e)
-        {
-            SpecialMethods.SetFonts(this);
-        }
+        void GeocodeLocations_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }
 }

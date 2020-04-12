@@ -141,10 +141,7 @@ namespace FTAnalyzer.Forms
             return FactLocation.UNKNOWN;
         }
 
-        public static void OnWaitingForGoogle(string message)
-        {
-            WaitingForGoogle?.Invoke(null, new GoogleWaitingEventArgs(message));
-        }
+        public static void OnWaitingForGoogle(string message) => WaitingForGoogle?.Invoke(null, new GoogleWaitingEventArgs(message));
 
         public static GeoResponse CallGoogleGeocode(string address)
         {

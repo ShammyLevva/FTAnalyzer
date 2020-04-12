@@ -132,7 +132,7 @@ namespace FTAnalyzer.Forms
         public void SetupLCNoCountry(Predicate<Individual> relationFilter)
         {
             bool lcFacts(Individual x) => x.LostCousinsFacts > 0;
-            Predicate<Individual> filter = FilterUtils.AndFilter<Individual>(relationFilter, lcFacts);
+            Predicate<Individual> filter = FilterUtils.AndFilter(relationFilter, lcFacts);
             IEnumerable<Individual> listToCheck = ft.AllIndividuals.Filter(filter).ToList();
 
             bool missing(Individual x) => !x.IsLostCousinsEntered(CensusDate.EWCENSUS1841, false)
@@ -145,6 +145,16 @@ namespace FTAnalyzer.Forms
                                        && !x.IsLostCousinsEntered(CensusDate.USCENSUS1940, false);
             List<Individual> individuals = listToCheck.Filter(missing).ToList<Individual>();
             SetIndividuals(individuals, "Lost Cousins facts with no facts found to identify Country");
+        }
+
+        public void SetupPossiblyMissingChildrenReport()
+        {
+            Text = "Families who might be missing a child between marriage date and first child born.";
+            dgFamilies.DataSource = ft.PossiblyMissingChildFamilies;
+            SortFamilies();
+            splitContainer.Panel1Collapsed = true;
+            splitContainer.Panel2Collapsed = false;
+            UpdateStatusCount();
         }
 
         public void ListRelationToRoot(string relationtoRoot)
@@ -160,10 +170,7 @@ namespace FTAnalyzer.Forms
             dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
         }
 
-        void SortFamilies()
-        {
-            dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);
-        }
+        void SortFamilies() => dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);
 
         public void SetIndividuals(List<Individual> individuals, string reportTitle)
         {
@@ -301,7 +308,7 @@ namespace FTAnalyzer.Forms
                 IEnumerable<Individual> censusMissing = ft.AllIndividuals.Filter(censusFacts);
                 individuals.AddRange(censusMissing);
             }
-            individuals = individuals.Distinct<Individual>().ToList();
+            individuals = individuals.Distinct().ToList();
             SetIndividuals(individuals, "Individuals with census records with no census location");
         }
 
@@ -314,14 +321,11 @@ namespace FTAnalyzer.Forms
                 IEnumerable<Individual> censusMissing = ft.AllIndividuals.Filter(censusFacts);
                 individuals.AddRange(censusMissing);
             }
-            individuals = individuals.Distinct<Individual>().ToList();
+            individuals = individuals.Distinct().ToList();
             SetIndividuals(individuals, "Individuals that may have more than one census/residence record for a census year");
         }
 
-        void People_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Dispose();
-        }
+        void People_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
         void ContextMenuStrip1_Opened(object sender, EventArgs e)
         {
@@ -396,9 +400,9 @@ namespace FTAnalyzer.Forms
 
         void PrintToolStripButton_Click(object sender, EventArgs e)
         {
-            indReportFormHelper.PrintReport(this.Text);
+            indReportFormHelper.PrintReport(Text);
             if (!splitContainer.Panel2Collapsed)
-                famReportFormHelper.PrintReport(this.Text + " - Families");
+                famReportFormHelper.PrintReport(Text + " - Families");
         }
 
         void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
@@ -415,10 +419,7 @@ namespace FTAnalyzer.Forms
                 famReportFormHelper.DoExportToExcel<IDisplayFamily>();
         }
 
-        void DgIndividuals_MouseDown(object sender, MouseEventArgs e)
-        {
-            ShowViewNotesMenu(dgIndividuals, e);
-        }
+        void DgIndividuals_MouseDown(object sender, MouseEventArgs e) => ShowViewNotesMenu(dgIndividuals, e);
 
         public void SetupNoChildrenStatus()
         {
@@ -435,7 +436,7 @@ namespace FTAnalyzer.Forms
             splitContainer.Panel2Collapsed = false;
             famReportFormHelper.LoadColumnLayout("ChildrenStatusFamColumns.xml");
             SetSaveButtonsStatus(true);
-            this.Text = "Families with a 1911 census record but no Children Status record showing Children Alive/Dead";
+            Text = "Families with a 1911 census record but no Children Status record showing Children Alive/Dead";
             UpdateStatusCount();
         }
 
@@ -511,9 +512,6 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void People_Load(object sender, EventArgs e)
-        {
-            SpecialMethods.SetFonts(this);
-        }
+        void People_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }
 }

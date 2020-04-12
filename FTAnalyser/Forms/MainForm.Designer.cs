@@ -26,7 +26,8 @@ namespace FTAnalyzer
                 handwritingFont.Dispose();
                 fonts.Dispose();
                 rfhDuplicates.Dispose();
-                cts.Dispose();
+                if (cts!=null)
+                    cts.Dispose();
                 storedCursor.Dispose();
             }
             catch (Exception) { }
@@ -42,8 +43,8 @@ namespace FTAnalyzer
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,6 +77,7 @@ namespace FTAnalyzer
             this.mnuCousinsCountReport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHowManyGreats = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuBirthdayEffect = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPossiblyMissingChildReport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuExport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuIndividualsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFamiliesToExcel = new System.Windows.Forms.ToolStripMenuItem();
@@ -650,7 +652,8 @@ namespace FTAnalyzer
             this.mnuPossibleCensusFacts,
             this.mnuCousinsCountReport,
             this.mnuHowManyGreats,
-            this.mnuBirthdayEffect});
+            this.mnuBirthdayEffect,
+            this.mnuPossiblyMissingChildReport});
             this.mnuReports.Name = "mnuReports";
             this.mnuReports.Size = new System.Drawing.Size(59, 20);
             this.mnuReports.Text = "Reports";
@@ -658,21 +661,21 @@ namespace FTAnalyzer
             // mnuChildAgeProfiles
             // 
             this.mnuChildAgeProfiles.Name = "mnuChildAgeProfiles";
-            this.mnuChildAgeProfiles.Size = new System.Drawing.Size(209, 22);
+            this.mnuChildAgeProfiles.Size = new System.Drawing.Size(230, 22);
             this.mnuChildAgeProfiles.Text = "Parent Age Report";
             this.mnuChildAgeProfiles.Click += new System.EventHandler(this.ChildAgeProfilesToolStripMenuItem_Click);
             // 
             // mnuOlderParents
             // 
             this.mnuOlderParents.Name = "mnuOlderParents";
-            this.mnuOlderParents.Size = new System.Drawing.Size(209, 22);
+            this.mnuOlderParents.Size = new System.Drawing.Size(230, 22);
             this.mnuOlderParents.Text = "Older Parents";
             this.mnuOlderParents.Click += new System.EventHandler(this.OlderParentsToolStripMenuItem_Click);
             // 
             // mnuPossibleCensusFacts
             // 
             this.mnuPossibleCensusFacts.Name = "mnuPossibleCensusFacts";
-            this.mnuPossibleCensusFacts.Size = new System.Drawing.Size(209, 22);
+            this.mnuPossibleCensusFacts.Size = new System.Drawing.Size(230, 22);
             this.mnuPossibleCensusFacts.Text = "Possible Census Facts";
             this.mnuPossibleCensusFacts.ToolTipText = "This report aims to find census facts that have been incorrectly recorded as note" +
     "s";
@@ -681,23 +684,30 @@ namespace FTAnalyzer
             // mnuCousinsCountReport
             // 
             this.mnuCousinsCountReport.Name = "mnuCousinsCountReport";
-            this.mnuCousinsCountReport.Size = new System.Drawing.Size(209, 22);
+            this.mnuCousinsCountReport.Size = new System.Drawing.Size(230, 22);
             this.mnuCousinsCountReport.Text = "Cousins Count Report";
             this.mnuCousinsCountReport.Click += new System.EventHandler(this.CousinsCountReportToolStripMenuItem_Click);
             // 
             // mnuHowManyGreats
             // 
             this.mnuHowManyGreats.Name = "mnuHowManyGreats";
-            this.mnuHowManyGreats.Size = new System.Drawing.Size(209, 22);
+            this.mnuHowManyGreats.Size = new System.Drawing.Size(230, 22);
             this.mnuHowManyGreats.Text = "How Many Directs Report";
             this.mnuHowManyGreats.Click += new System.EventHandler(this.HowManyDirectsReportToolStripMenuItem_Click);
             // 
             // mnuBirthdayEffect
             // 
             this.mnuBirthdayEffect.Name = "mnuBirthdayEffect";
-            this.mnuBirthdayEffect.Size = new System.Drawing.Size(209, 22);
+            this.mnuBirthdayEffect.Size = new System.Drawing.Size(230, 22);
             this.mnuBirthdayEffect.Text = "Birthday Effect Report";
             this.mnuBirthdayEffect.Click += new System.EventHandler(this.BirthdayEffectReportToolStripMenuItem_Click);
+            // 
+            // mnuPossiblyMissingChildReport
+            // 
+            this.mnuPossiblyMissingChildReport.Name = "mnuPossiblyMissingChildReport";
+            this.mnuPossiblyMissingChildReport.Size = new System.Drawing.Size(230, 22);
+            this.mnuPossiblyMissingChildReport.Text = "Possibly Missing Child Report";
+            this.mnuPossiblyMissingChildReport.Click += new System.EventHandler(this.PossiblyMissingChildReportToolStripMenuItem_Click);
             // 
             // mnuExport
             // 
@@ -1211,14 +1221,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 166);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1269,14 +1279,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgCheckAncestors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgCheckAncestors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgCheckAncestors.Location = new System.Drawing.Point(-1, 84);
             this.dgCheckAncestors.Name = "dgCheckAncestors";
             this.dgCheckAncestors.ReadOnly = true;
@@ -4256,6 +4266,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem mnuBirthdayEffect;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
         private System.Windows.Forms.ToolStripMenuItem mnuJSON;
+        private System.Windows.Forms.ToolStripMenuItem mnuPossiblyMissingChildReport;
     }
 }
 

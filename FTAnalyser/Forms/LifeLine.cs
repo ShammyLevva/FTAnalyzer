@@ -31,13 +31,13 @@ namespace FTAnalyzer.Forms
         bool isLoading;
         bool isQuerying;
         
-        public LifeLine(IProgress<string> outputText)
+        public LifeLine(IProgress<string> _outputText)
         {
             InitializeComponent();
             Top += NativeMethods.TopTaskbarOffset;
             isLoading = true;
             isQuerying = false;
-            this.outputText = outputText;
+            outputText = _outputText;
             mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
             foreach (ToolStripItem item in mapZoomToolStrip.Items)
@@ -57,15 +57,15 @@ namespace FTAnalyzer.Forms
             DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
             int splitheight = (int)Application.UserAppDataRegistry.GetValue("Lifeline Facts Splitter Distance", -1);
             if (splitheight != -1)
-                splitContainerFacts.SplitterDistance = this.Height - splitheight;
+                splitContainerFacts.SplitterDistance = Height - splitheight;
             splitContainerMap.SplitterDistance = (int)Application.UserAppDataRegistry.GetValue("Lifeline Map Splitter Distance", splitContainerMap.SplitterDistance);
         }
 
         void DatabaseHelper_GeoLocationUpdated(object location, EventArgs e)
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                this.Invoke(new Action(() => DatabaseHelper_GeoLocationUpdated(location, e)));
+                Invoke(new Action(() => DatabaseHelper_GeoLocationUpdated(location, e)));
                 return;
             }
             BuildMap();
@@ -164,7 +164,7 @@ namespace FTAnalyzer.Forms
 
         void BuildMap()
         {
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
             lifelines.Clear();
             points.Clear();
             List<IDisplayFact> displayFacts = new List<IDisplayFact>();
@@ -194,10 +194,7 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
         }
 
-        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            SpecialMethods.VisitWebsite(e.Link.LinkData as string);
-        }
+        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite(e.Link.LinkData as string);
 
         void DgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -239,25 +236,16 @@ namespace FTAnalyzer.Forms
             this.Cursor = Cursors.Default;
         }
 
-        void SelectAllAncestorsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SelectIndividuals(FamilyTree.GetAncestors);
-        }
+        void SelectAllAncestorsToolStripMenuItem_Click(object sender, EventArgs e) => SelectIndividuals(FamilyTree.GetAncestors);
 
-        void SelectAllDescendantsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SelectIndividuals(FamilyTree.GetDescendants);
-        }
+        void SelectAllDescendantsToolStripMenuItem_Click(object sender, EventArgs e) => SelectIndividuals(FamilyTree.GetDescendants);
 
-        void SelectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SelectIndividuals(FamilyTree.GetAllRelations);
-        }
+        void SelectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem_Click(object sender, EventArgs e) => SelectIndividuals(FamilyTree.GetAllRelations);
 
         void LifeLine_FormClosed(object sender, FormClosedEventArgs e)
         {
             DatabaseHelper.GeoLocationUpdated -= DatabaseHelper_GeoLocationUpdated;
-            this.Dispose();
+            Dispose();
         }
 
         void DgIndividuals_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
@@ -308,10 +296,7 @@ namespace FTAnalyzer.Forms
             RefreshMap();
         }
 
-        void MnuHideScaleBar_Click(object sender, EventArgs e)
-        {
-            mh.MnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
-        }
+        void MnuHideScaleBar_Click(object sender, EventArgs e) => mh.MnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
 
         void SplitContainerFacts_SplitterMoved(object sender, SplitterEventArgs e)
         {
@@ -351,7 +336,7 @@ namespace FTAnalyzer.Forms
 
         void MapBox1_MapQueried(FeatureDataTable data)
         {
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
             isQuerying = true;
             dgFacts.ClearSelection();
             foreach (FeatureDataRow row in data)
@@ -363,7 +348,7 @@ namespace FTAnalyzer.Forms
                 }
             }
             isQuerying = false;
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         void SelectFact(DisplayFact dispFact)
@@ -403,42 +388,33 @@ namespace FTAnalyzer.Forms
                 mapTooltip.SetToolTip(mapBox1, tooltip);
         }
 
-        void LifeLine_Move(object sender, EventArgs e)
-        {
-            SavePosition();
-        }
+        void LifeLine_Move(object sender, EventArgs e) => SavePosition();
 
-        void LifeLine_Resize(object sender, EventArgs e)
-        {
-            SavePosition();
-        }
+        void LifeLine_Resize(object sender, EventArgs e) => SavePosition();
 
         void SavePosition()
         {
             if (!isLoading && this.WindowState == FormWindowState.Normal)
             {  //only save window size if not maximised or minimised
-                Application.UserAppDataRegistry.SetValue("Lifeline size - width", this.Width);
-                Application.UserAppDataRegistry.SetValue("Lifeline size - height", this.Height);
-                Application.UserAppDataRegistry.SetValue("Lifeline position - top", this.Top);
-                Application.UserAppDataRegistry.SetValue("Lifeline position - left", this.Left);
+                Application.UserAppDataRegistry.SetValue("Lifeline size - width", Width);
+                Application.UserAppDataRegistry.SetValue("Lifeline size - height", Height);
+                Application.UserAppDataRegistry.SetValue("Lifeline position - top", Top);
+                Application.UserAppDataRegistry.SetValue("Lifeline position - left", Left);
             }
         }
 
         void ResetFormToDefaultSizeAndPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             isLoading = true;
-            this.Height = 682;
-            this.Width = 1139;
-            this.Top = 50;
-            this.Left = 50;
+            Width = 1139;
+            Height = 682;
+            Top = 50;
+            Left = 50;
             isLoading = false;
             SavePosition();
         }
 
-        void TbOpacity_Scroll(object sender, EventArgs e)
-        {
-            RefreshMap();
-        }
+        void TbOpacity_Scroll(object sender, EventArgs e) => RefreshMap();
 
         void SetOpacity()
         {
@@ -452,9 +428,9 @@ namespace FTAnalyzer.Forms
 
         void RefreshMap()
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                this.Invoke(new Action(() => RefreshMap()));
+                Invoke(new Action(() => RefreshMap()));
                 return;
             }
             SetOpacity();

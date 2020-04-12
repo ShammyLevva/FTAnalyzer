@@ -6,14 +6,11 @@ namespace FTAnalyzer.Controls
 {
     public class TreeViewHandler
     {
-        private static TreeViewHandler instance;
-        private TreeNode mainformTreeRootNode;
-        private TreeNode placesTreeRootNode;
+        static TreeViewHandler instance;
+        TreeNode mainformTreeRootNode;
+        TreeNode placesTreeRootNode;
 
-        private TreeViewHandler()
-        {
-            ResetData();
-        }
+        TreeViewHandler() => ResetData();
 
         public static TreeViewHandler Instance
         {
@@ -101,7 +98,7 @@ namespace FTAnalyzer.Controls
             return BuildTreeNodeArray(mainform);
         }
 
-        private static void SetTreeNodeImage(FactLocation location, TreeNode child)
+        static void SetTreeNodeImage(FactLocation location, TreeNode child)
         {
             if (child == null)
                 return;
@@ -144,7 +141,7 @@ namespace FTAnalyzer.Controls
             }
         }
 
-        private TreeNode[] BuildTreeNodeArray(bool mainForm)
+        TreeNode[] BuildTreeNodeArray(bool mainForm)
         {
             TreeNodeCollection nodes;
             if (mainForm)

@@ -22,7 +22,7 @@ namespace FTAnalyzer.Forms
         public ColourCensus(string country, List<IDisplayColourCensus> reportList)
         {
             InitializeComponent();
-            Top = Top + NativeMethods.TopTaskbarOffset;
+            Top += NativeMethods.TopTaskbarOffset;
             dgReportSheet.AutoGenerateColumns = false;
             ExtensionMethods.DoubleBuffered(dgReportSheet, true);
             _country = country;

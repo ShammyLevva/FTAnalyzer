@@ -10,7 +10,7 @@ namespace FTAnalyzer.Forms
         public Chart()
         {
             InitializeComponent();
-            Top = Top + NativeMethods.TopTaskbarOffset;
+            Top += NativeMethods.TopTaskbarOffset;
         }
 
         public void BuildChildBirthProfile(int[,,] chartData)
@@ -38,14 +38,8 @@ namespace FTAnalyzer.Forms
             chartDisplay.ChartAreas.Add(caArea);
         }
 
-        void Chart_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Dispose();
-        }
+        void Chart_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        void Chart_Load(object sender, System.EventArgs e)
-        {
-            SpecialMethods.SetFonts(this);
-        }
+        void Chart_Load(object sender, System.EventArgs e) => SpecialMethods.SetFonts(this);
     }
 }

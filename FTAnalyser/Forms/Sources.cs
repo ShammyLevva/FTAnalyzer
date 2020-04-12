@@ -14,7 +14,7 @@ namespace FTAnalyzer.Forms
         public Sources(DisplayFact fact)
         {
             InitializeComponent();
-            Top = Top + NativeMethods.TopTaskbarOffset;
+            Top += NativeMethods.TopTaskbarOffset;
             sources = new SortableBindingList<IDisplaySource>();
             dgSources.AutoGenerateColumns = false;
             ExtensionMethods.DoubleBuffered(dgSources, true);
@@ -31,36 +31,21 @@ namespace FTAnalyzer.Forms
             reportFormHelper.LoadColumnLayout("SourcesColumns.xml");
             tsRecords.Text = sources.Count + " Records";
         }
-        
-        void ResetTable()
-        {
-            dgSources.Sort(dgSources.Columns["SourceTitle"], ListSortDirection.Ascending);
-        }
+
+        void ResetTable() => dgSources.Sort(dgSources.Columns["SourceTitle"], ListSortDirection.Ascending);
 
         void PrintToolStripButton_Click(object sender, EventArgs e)
         {
             reportFormHelper.PrintReport("Sources Report");
         }
 
-        void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.PrintPreviewReport();
-        }
+        void PrintPreviewToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintPreviewReport();
 
-        void Sources_TextChanged(object sender, EventArgs e)
-        {
-            reportFormHelper.PrintTitle = this.Text;
-        }
+        void Sources_TextChanged(object sender, EventArgs e) => reportFormHelper.PrintTitle = this.Text;
 
-        void MnuExportToExcel_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.DoExportToExcel<IDisplaySource>();
-        }
+        void MnuExportToExcel_Click(object sender, EventArgs e) => reportFormHelper.DoExportToExcel<IDisplaySource>();
 
-        void MnuResetColumns_Click(object sender, EventArgs e)
-        {
-            reportFormHelper.ResetColumnLayout("SourcesColumns.xml");
-        }
+        void MnuResetColumns_Click(object sender, EventArgs e) => reportFormHelper.ResetColumnLayout("SourcesColumns.xml");
 
         void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
@@ -68,10 +53,7 @@ namespace FTAnalyzer.Forms
             MessageBox.Show("Form Settings Saved", "Sources");
         }
 
-        void Sources_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            this.Dispose();
-        }
+        void Sources_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
         void DgSources_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -84,9 +66,6 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void Sources_Load(object sender, EventArgs e)
-        {
-            SpecialMethods.SetFonts(this);
-        }
+        void Sources_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }
 }

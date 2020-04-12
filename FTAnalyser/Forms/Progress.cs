@@ -11,7 +11,7 @@ namespace FTAnalyzer.Forms
         public Progress(int maximum)
         {
             InitializeComponent();
-            Top = Top + NativeMethods.TopTaskbarOffset;
+            Top += NativeMethods.TopTaskbarOffset;
             progressBar1.Minimum = 0;
             progressBar1.Maximum = maximum;
             progressBar1.Value = 0;
@@ -25,14 +25,8 @@ namespace FTAnalyzer.Forms
             Application.DoEvents();
         }
 
-        void Progress_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Dispose();
-        }
+        void Progress_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        void Progress_Load(object sender, EventArgs e)
-        {
-            SpecialMethods.SetFonts(this);
-        }
+        void Progress_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }
 }

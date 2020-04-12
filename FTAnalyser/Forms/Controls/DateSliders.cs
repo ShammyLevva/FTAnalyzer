@@ -27,10 +27,7 @@ namespace FTAnalyzer.Controls
             public int ApproxDate { get { return Slider.msApprox.Value; } set { Slider.msApprox.Value = value; } }
             public int ExactDate { get { return Slider.msExact.Value; } set { Slider.msExact.Value = value; } }
 
-            public ScoreValues(DateSliders parent)
-            {
-                this.Slider = parent;
-            }
+            public ScoreValues(DateSliders parent) => Slider = parent;
         }
     }
 }

@@ -84,19 +84,10 @@ namespace FTAnalyzer.Forms
             System.Diagnostics.Debug.Print("DocumentCompleted called");
         }
 
-        void LabTOU_Click(object sender, EventArgs e)
-        {
-            webBrowser.Navigate("http://www.microsoft.com/Maps/product/terms.html");
-        }
+        void LabTOU_Click(object sender, EventArgs e) => webBrowser.Navigate("http://www.microsoft.com/Maps/product/terms.html");
 
-        void BingOSMap_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Dispose();
-        }
+        void BingOSMap_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        void BingOSMap_Load(object sender, EventArgs e)
-        {
-            SpecialMethods.SetFonts(this);
-        }
+        void BingOSMap_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }
 }

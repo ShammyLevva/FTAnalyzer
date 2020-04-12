@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using FTAnalyzer.Mapping;
 using NetTopologySuite.Geometries;
 using SharpMap.Data;
-using System.Web;
 using SharpMap.Layers;
 using FTAnalyzer.Utilities;
 
@@ -28,7 +27,7 @@ namespace FTAnalyzer.Forms
         public TimeLine(IProgress<string> outputText)
         {
             InitializeComponent();
-            Top = Top + NativeMethods.TopTaskbarOffset;
+            Top += NativeMethods.TopTaskbarOffset;
             loading = true;
             this.outputText = outputText;
             mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
@@ -245,15 +244,9 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.Default;
         }
 
-        void MapBox1_MapViewOnChange()
-        {
-            clusters.Refresh();
-        }
+        void MapBox1_MapViewOnChange() => clusters.Refresh();
 
-        void MapBox1_MapZoomChanged(double zoom)
-        {
-            RefreshClusters();
-        }
+        void MapBox1_MapZoomChanged(double zoom) => RefreshClusters();
 
         public void RefreshClusters()
         {
@@ -261,10 +254,7 @@ namespace FTAnalyzer.Forms
             RefreshMap();
         }
 
-        void MapBox1_MapCenterChanged(Coordinate center)
-        {
-            RefreshClusters();
-        }
+        void MapBox1_MapCenterChanged(Coordinate center) => RefreshClusters();
 
         void BtnPlay_Click(object sender, EventArgs e)
         {
@@ -274,10 +264,7 @@ namespace FTAnalyzer.Forms
             txtTimeInterval.Enabled = false;
         }
 
-        void BtnStop_Click(object sender, EventArgs e)
-        {
-            StopTimer();
-        }
+        void BtnStop_Click(object sender, EventArgs e) => StopTimer();
 
         void StopTimer()
         {
@@ -397,7 +384,7 @@ namespace FTAnalyzer.Forms
             mnuOptions.HideDropDown();
         }
 
-        private int GetYearLimit()
+        int GetYearLimit()
         {
             //check the 
             switch (cbLimitFactDates.Text)
@@ -423,30 +410,15 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void MnuHideScaleBar_Click(object sender, EventArgs e)
-        {
-            mh.MnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
-        }
+        void MnuHideScaleBar_Click(object sender, EventArgs e) => mh.MnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
 
-        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            SpecialMethods.VisitWebsite(e.Link.LinkData as string);
-        }
+        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite(e.Link.LinkData as string);
 
-        void TimeLine_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Dispose();
-        }
+        void TimeLine_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        void TimeLine_Resize(object sender, EventArgs e)
-        {
-            SavePosition();
-        }
+        void TimeLine_Resize(object sender, EventArgs e) => SavePosition();
 
-        void TimeLine_Move(object sender, EventArgs e)
-        {
-            SavePosition();
-        }
+        void TimeLine_Move(object sender, EventArgs e) => SavePosition();
 
         void SavePosition()
         {
