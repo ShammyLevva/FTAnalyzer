@@ -1,6 +1,12 @@
 #### Updated Release Version 7.6.4.0 11th Apr 2020  
 **Updates**  
 Added in extra census dates so modern census records eg: US2020 don't throw errors  
+Added score for duplicate parents names even if different individuals, 
+this should catch entirely duplicated families  
+Added potentially missing children report  
+
+**Bugfixes**  
+Resetting column layouts no longer resets form layouts  
 
 #### Updated Release Version 7.6.3.0 6th Apr 2020  
 **Updates**  
