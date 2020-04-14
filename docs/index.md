@@ -1,19 +1,13 @@
 Family Tree Analyzer
 ====================
 
-#### Install the latest Windows version FREE from the [Offical Microsoft Store](https://www.microsoft.com/store/apps/9PMJL9HVPL7X?cid=storebadge&ocid=badge) or you can use the [Click once installer](http://ftanalyzer.com/install/) or you can manually download it from [here.](http://ftanalyzer.com/releases)  
+#### Install the latest Windows version FREE from the [Offical Microsoft Store](https://www.microsoft.com/store/apps/9PMJL9HVPL7X?cid=storebadge&ocid=badge) or you can manually download it from [here.](http://ftanalyzer.com/releases)  
 #### If you have a Mac search for FTAnalyzer on the Mac App Store for your region or for a beta version click [here.](http://mac.ftanalyzer.com)  
 
 The simplest Windows 10 install method is to install from the Offical Microsoft App Store. This will then auto update the application when a new version comes out assuming you've not turned off this option in the Microsoft App Store app.  
 
-Windows 10 & 8.1 installs using the click once installer or local install may require you to click More Info and accept the certificate the first time you run the app. 
-
-Installation is simple with the click once installer. Click the download button and run the application. This will then ask you to allow it to run, once allowed it downloads and installs the application for you.  
+Installation is simple with Windows Store Click the link and click Get to get the application or Launch to run the application once installed. You can put a short cut on your desktop by dragging the icon from your start menu to the desktop.  
   
-**NB. This program will require the Microsoft .Net 4.7.2 to have been installed.** This is usually present on most windows machines from Windows 7 onwards assuming that your machine is patched with the all the Microsoft updates. If not it can be downloaded free from Microsoft at [https://support.microsoft.com/en-gb/help/4054531/microsoft-net-framework-4-7-2-web-installer-for-windows](https://support.microsoft.com/en-gb/help/4054531/microsoft-net-framework-4-7-2-web-installer-for-windows) and clicking the download link for your machine. Once downloaded simply run the file to install.
-
-NB. There have been known problems with Windows Defender blocking the app, when you install with the click once installer, so the app gets due to insufficient downloads per month  marked as insufficiently trusted. You can avoid this by using the Micrsoft Store install or by downloading the latest [manual install version](https://github.com/ShammyLevva/FTAnalyzer/releases) or by using a proper Anti Virus solution. DO NOT simply disable your AV/Firewall to install that's the usual bad advice given by app vendors that don't know how to setup their apps properly.
-
 ### Helpful Guides to Using FTAnalyzer
 
 There is now a series of helpful guides to downloading, installing and using FTAnalyzer. You can get them from [here](/guides "FTAnalyzer Guides") note these guides were created a while ago so the screen shots are a bit dated.
