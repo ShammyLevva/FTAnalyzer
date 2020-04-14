@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.6.3.9999";
+        public static string VERSION = "7.6.5.0";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -62,7 +62,7 @@ namespace FTAnalyzer
             DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
             CheckSystemVersion();
 #if !__DEBUG__
-            CheckWebVersion();
+            //CheckWebVersion();
 #endif
             SetSavePath();
             BuildRecentList();
@@ -3363,11 +3363,6 @@ namespace FTAnalyzer
                 UIHelpers.ShowMessage(ex.Message, "FTAnalyzer");
             }
             HourGlass(false);
-        }
-
-        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            SpecialMethods.VisitWebsite("https://www.microsoft.com/en-gb/p/ftanalyzer/9pmjl9hvpl7x?cid=clickonceapp");
         }
     }
 }
