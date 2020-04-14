@@ -23,7 +23,6 @@ using System.Windows.Forms;
 using System.Xml;
 #if !__DEBUG__
     using HtmlAgilityPack;
-    using System.Deployment.Application;
     using System.Net;
 #endif
 
@@ -31,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.6.4.0";
+        public static string VERSION = "7.6.3.9999";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -92,28 +91,25 @@ namespace FTAnalyzer
         }
 
 #if !__DEBUG__
-       async void CheckWebVersion()
+        async void CheckWebVersion()
         {
             Settings.Default.StartTime = DateTime.Now;
             Settings.Default.Save();
             try
             {
-                if (!ApplicationDeployment.IsNetworkDeployed) // only check for new version if not click once
-                {
                     WebClient wc = new WebClient();
                     HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-                    string webData = wc.DownloadString("http://www.ftanalyzer.com/install");
+                    string webData = wc.DownloadString("https://github.com/ShammyLevva/FTAnalyzer/releases");
                     doc.LoadHtml(webData);
-                    HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//table/tr[2]/td/table/tr/td/table/tr[4]/td[3]");
-                    string webVersion = versionNode.InnerText;
+                    HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//div/div/div/span/../../ul/li/a");
+                    string webVersion = versionNode.InnerText.Replace('v', ' ').Trim();
                     if (new Version(webVersion) > new Version(VERSION))
                     {
                         string text = $"Version installed: {VERSION}, Web version available: {webVersion}\nDo you want to go to website to download the latest version?";
                         DialogResult download = MessageBox.Show(text, "FTAnalyzer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (download == DialogResult.Yes)
-                            SpecialMethods.VisitWebsite("https://github.com/ShammyLevva/FTAnalyzer/releases");
+                            SpecialMethods.VisitWebsite("https://www.microsoft.com/en-gb/p/ftanalyzer/9pmjl9hvpl7x?cid=clickonceappupgrade");
                     }
-                }
                 await Analytics.CheckProgramUsageAsync();
             }
             catch (Exception e)
@@ -3367,6 +3363,11 @@ namespace FTAnalyzer
                 UIHelpers.ShowMessage(ex.Message, "FTAnalyzer");
             }
             HourGlass(false);
+        }
+
+        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            SpecialMethods.VisitWebsite("https://www.microsoft.com/en-gb/p/ftanalyzer/9pmjl9hvpl7x?cid=clickonceapp");
         }
     }
 }
