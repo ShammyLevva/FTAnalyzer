@@ -1,6 +1,10 @@
 #### Updated Release Version 7.6.5.0 11th Apr 2020  
+**Updates**  
+Changed FindMyPast UK Census search to use specialist form for that specific census  
+
 **Bugfixes**  
 Missed adding the new census records to the list of approved censuses  
+Added force update of settings to avoid exception on locked user settings  
 
 #### Updated Release Version 7.6.4.0 11th Apr 2020  
 **Updates**  
@@ -437,7 +441,7 @@ Added link to Facebook support site in Help menu.
 Added link to Facebook User Group site in Help menu 
 
 **Bugfixes**  
-Updated LAT/LONG coordinates in GEDCOM weren't updating internal database if there was a change
+Updated LAT/LONG coordinates in GEDCOM weren't updating internal database if there was a change  
 
 #### Updated Release Version 7.0.0.3, 31st October 2018  
 **Bugfixes**  
