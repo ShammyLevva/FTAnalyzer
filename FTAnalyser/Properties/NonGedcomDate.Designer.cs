@@ -8,6 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Configuration;
+using System.IO;
+
 namespace FTAnalyzer.Properties {
     
     
@@ -94,5 +98,35 @@ namespace FTAnalyzer.Properties {
                 this["Setting"] = value;
             }
         }
+
+        public override void Save()
+        {
+            ClearUserConfigFile();
+            base.Save();
+        }
+
+        public static void ClearUserConfigFile()
+        {
+            //Touch each setting
+            foreach (SettingsProperty property in NonGedcomDate.Default.Properties)
+            {
+                if (property.DefaultValue != NonGedcomDate.Default[property.Name])
+                    NonGedcomDate.Default[property.Name] = NonGedcomDate.Default[property.Name];
+            }
+
+            //Delete the user.config file
+            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoaming);
+            var userConfigPath = config.FilePath;
+            try
+            {
+                if (File.Exists(userConfigPath) == true)
+                    File.Delete(userConfigPath);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception thrown while deleting user.config : {0}", ex.ToString());
+            }
+        }
+
     }
 }

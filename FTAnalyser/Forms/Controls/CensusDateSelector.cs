@@ -90,15 +90,8 @@ namespace FTAnalyzer.Controls
         {
             if (location.Equals(Countries.UNITED_KINGDOM))
             {
-                cbCensusDate.Items.Add(CensusDate.UKCENSUS1841);
-                cbCensusDate.Items.Add(CensusDate.UKCENSUS1851);
-                cbCensusDate.Items.Add(CensusDate.UKCENSUS1861);
-                cbCensusDate.Items.Add(CensusDate.UKCENSUS1871);
-                cbCensusDate.Items.Add(CensusDate.UKCENSUS1881);
-                cbCensusDate.Items.Add(CensusDate.UKCENSUS1891);
-                cbCensusDate.Items.Add(CensusDate.UKCENSUS1901);
-                cbCensusDate.Items.Add(CensusDate.UKCENSUS1911);
-                cbCensusDate.Items.Add(CensusDate.UKCENSUS1939);
+                foreach (CensusDate censusDate in CensusDate.UK_CENSUS)
+                    cbCensusDate.Items.Add(censusDate);
             }
             else if (location.Equals(Countries.IRELAND))
             {
@@ -107,35 +100,13 @@ namespace FTAnalyzer.Controls
             }
             else if (location.Equals(Countries.UNITED_STATES))
             {
-                cbCensusDate.Items.Add(CensusDate.USCENSUS1790);
-                cbCensusDate.Items.Add(CensusDate.USCENSUS1800);
-                cbCensusDate.Items.Add(CensusDate.USCENSUS1810);
-                cbCensusDate.Items.Add(CensusDate.USCENSUS1820);
-                cbCensusDate.Items.Add(CensusDate.USCENSUS1830);
-                cbCensusDate.Items.Add(CensusDate.USCENSUS1840);
-                cbCensusDate.Items.Add(CensusDate.USCENSUS1850);
-                cbCensusDate.Items.Add(CensusDate.USCENSUS1860);
-                cbCensusDate.Items.Add(CensusDate.USCENSUS1870);
-                cbCensusDate.Items.Add(CensusDate.USCENSUS1880);
-                cbCensusDate.Items.Add(CensusDate.USCENSUS1890);
-                cbCensusDate.Items.Add(CensusDate.USCENSUS1900);
-                cbCensusDate.Items.Add(CensusDate.USCENSUS1910);
-                cbCensusDate.Items.Add(CensusDate.USCENSUS1920);
-                cbCensusDate.Items.Add(CensusDate.USCENSUS1930);
-                cbCensusDate.Items.Add(CensusDate.USCENSUS1940);
+                foreach (CensusDate censusDate in CensusDate.US_FEDERAL_CENSUS)
+                    cbCensusDate.Items.Add(censusDate);
             }
             else if (location.Equals(Countries.CANADA))
             {
-                cbCensusDate.Items.Add(CensusDate.CANADACENSUS1851);
-                cbCensusDate.Items.Add(CensusDate.CANADACENSUS1861);
-                cbCensusDate.Items.Add(CensusDate.CANADACENSUS1871);
-                cbCensusDate.Items.Add(CensusDate.CANADACENSUS1881);
-                cbCensusDate.Items.Add(CensusDate.CANADACENSUS1891);
-                cbCensusDate.Items.Add(CensusDate.CANADACENSUS1901);
-                cbCensusDate.Items.Add(CensusDate.CANADACENSUS1906);
-                cbCensusDate.Items.Add(CensusDate.CANADACENSUS1911);
-                cbCensusDate.Items.Add(CensusDate.CANADACENSUS1916);
-                cbCensusDate.Items.Add(CensusDate.CANADACENSUS1921);
+                foreach(CensusDate censusDate in CensusDate.CANADIAN_CENSUS)
+                    cbCensusDate.Items.Add(censusDate);
             }
         }
 

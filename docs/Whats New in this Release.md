@@ -1,3 +1,7 @@
+#### Updated Release Version 7.6.5.0 11th Apr 2020  
+**Bugfixes**  
+Missed adding the new census records to the list of approved censuses  
+
 #### Updated Release Version 7.6.4.0 11th Apr 2020  
 **Updates**  
 Added in extra census dates so modern census records eg: US2020 don't throw errors  
