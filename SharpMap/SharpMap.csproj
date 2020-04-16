@@ -126,6 +126,7 @@
     <Compile Include="Drawing\Matrix.cs" />
     <Compile Include="Drawing\Point.cs" />
     <Compile Include="Geometries\NetTopologySuiteEx.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ISession.cs" />
     <Compile Include="Layers\AsyncLayerProxyLayer.cs" />
     <Compile Include="Layers\DuplicateLayerException.cs" />

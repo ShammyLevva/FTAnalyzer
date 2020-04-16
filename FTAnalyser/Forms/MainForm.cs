@@ -629,7 +629,7 @@ namespace FTAnalyzer
                 SpecialMethods.VisitWebsite(URL);
             }
             else
-                MessageBox.Show($"{loc.ToString()} is not yet geocoded so can't be displayed.");
+                MessageBox.Show($"{loc} is not yet geocoded so can't be displayed.");
         }
 
         void BtnOSMap_Click(object sender, EventArgs e)
@@ -648,10 +648,10 @@ namespace FTAnalyzer
                         }
                     }
                     else
-                        MessageBox.Show($"{loc.ToString()} is outwith the UK so cannot be shown on a UK OS Map.");
+                        MessageBox.Show($"{loc} is outwith the UK so cannot be shown on a UK OS Map.");
                 }
                 else
-                    MessageBox.Show($"{loc.ToString()} is not yet geocoded so can't be displayed.");
+                    MessageBox.Show($"{loc} is not yet geocoded so can't be displayed.");
             }
         }
 
@@ -1596,7 +1596,7 @@ namespace FTAnalyzer
                     rtbLCoutput.Text = "Started Processing Lost Cousins entries.\n\n";
                     Progress<string> outputText = new Progress<string>(value => { rtbLCoutput.AppendText(value); });
                     int count = await Task.Run(() => ExportToLostCousins.ProcessList(LCUpdates, outputText));
-                    string resultText = $"{DateTime.Now.ToUniversalTime().ToString("yyyy-MM-dd HH:mm")}: uploaded {count} records";
+                    string resultText = $"{DateTime.Now.ToUniversalTime():yyyy-MM-dd HH:mm}: uploaded {count} records";
                     await Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.UpdateLostCousins, resultText);
                     SpecialMethods.VisitWebsite("https://www.lostcousins.com/pages/members/ancestors/");
                     UpdateLCReports();
@@ -2427,7 +2427,7 @@ namespace FTAnalyzer
                 dgDuplicates.DataSource = data;
                 rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
                 labDuplicateSlider.Text = "Duplicates Match Quality : " + tbDuplicateScore.Value;
-                tsCountLabel.Text = $"Possible Duplicate Count : {dgDuplicates.RowCount.ToString()}.  {Messages.Hints_Duplicates}";
+                tsCountLabel.Text = $"Possible Duplicate Count : {dgDuplicates.RowCount}.  {Messages.Hints_Duplicates}";
                 dgDuplicates.UseWaitCursor = false;
             }
             SetDuplicateControlsVisibility(false);
@@ -2512,9 +2512,9 @@ namespace FTAnalyzer
             else
                 census.Text = "People";
             if (censusDone)
-                census.Text += $" entered with a {cenDate.SelectedDate.ToString()} record";
+                census.Text += $" entered with a {cenDate.SelectedDate} record";
             else
-                census.Text += $" missing a {cenDate.SelectedDate.ToString()} record that you can search for";
+                census.Text += $" missing a {cenDate.SelectedDate} record that you can search for";
             Predicate<CensusIndividual> filter;
             if (random)
             {

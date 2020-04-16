@@ -78,14 +78,8 @@ namespace SharpMap.CoordinateSystems
         public CoordinateSystemServices(CoordinateSystemFactory coordinateSystemFactory,
             CoordinateTransformationFactory coordinateTransformationFactory)
         {
-            if (coordinateSystemFactory == null)
-                throw new ArgumentNullException("coordinateSystemFactory");
-
-            if (coordinateTransformationFactory == null)
-                throw new ArgumentNullException("coordinateTransformationFactory");
-
-            _coordinateSystemFactory = coordinateSystemFactory;
-            _ctFactory = coordinateTransformationFactory;
+            _coordinateSystemFactory = coordinateSystemFactory ?? throw new ArgumentNullException(nameof(coordinateSystemFactory));
+            _ctFactory = coordinateTransformationFactory ?? throw new ArgumentNullException(nameof(coordinateTransformationFactory));
 
             _csBySrid = new Dictionary<int, CoordinateSystem>();
             _sridByCs = new Dictionary<IInfo, int>(new CsEqualityComparer());
@@ -197,11 +191,7 @@ namespace SharpMap.CoordinateSystems
         /// <returns>
         /// The coordinate system.
         /// </returns>
-        new public virtual CoordinateSystem GetCoordinateSystem(int srid)
-        {
-            CoordinateSystem cs;
-            return _csBySrid.TryGetValue(srid, out cs) ? cs : null;
-        }
+        new public virtual CoordinateSystem GetCoordinateSystem(int srid) => _csBySrid.TryGetValue(srid, out CoordinateSystem cs) ? cs : null;
 
         /// <summary>
         /// Returns the coordinate system by <paramref name="authority"/> and <paramref name="code"/>.
@@ -229,8 +219,7 @@ namespace SharpMap.CoordinateSystems
         new public virtual int? GetSRID(string authority, long authorityCode)
         {
             var key = new CoordinateSystemKey(authority, authorityCode);
-            int srid;
-            if (_sridByCs.TryGetValue(key, out srid))
+            if (_sridByCs.TryGetValue(key, out int srid))
                 return srid;
 
             return null;
@@ -353,10 +342,10 @@ namespace SharpMap.CoordinateSystems
         public static CoordinateSystemServices FromSpatialRefSys(CoordinateSystemFactory coordinateSystemFactory, CoordinateTransformationFactory coordinateTransformationFactory)
         {
             if (coordinateSystemFactory == null)
-                throw new ArgumentNullException("coordinateSystemFactory");
+                throw new ArgumentNullException(nameof(coordinateSystemFactory));
 
             if (coordinateTransformationFactory == null)
-                throw new ArgumentNullException("coordinateTransformationFactory");
+                throw new ArgumentNullException(nameof(coordinateTransformationFactory));
 
             var css = new CoordinateSystemServices(coordinateSystemFactory, coordinateTransformationFactory);
             css.AddCoordinateSystems(SpatialReference.GetAllReferenceSystems());

@@ -2,6 +2,8 @@
 **Bugfixes**  
 Fixed duplicate check name score crashing  
 Fixed unable to save user config crashing  
+Update icons to use extra sizes  
+Code tidy ups as per analyzer suggestions  
 
 #### Updated Release Version 7.6.5.0 15th Apr 2020  
 **Updates**  

@@ -19,19 +19,19 @@ namespace FTAnalyzer.Forms
 {
     public partial class GeocodeLocations : Form
     {
-        FamilyTree ft;
-        Font italicFont;
-        ReportFormHelper reportFormHelper;
-        List<IDisplayGeocodedLocation> locations;
+        readonly FamilyTree ft;
+        readonly Font italicFont;
+        readonly ReportFormHelper reportFormHelper;
+        readonly List<IDisplayGeocodedLocation> locations;
         bool formClosing;
         string statusText;
         bool refreshingMenus;
         ISet<string> noneOfTheAbove;
         ToolStripMenuItem[] noneOfTheAboveMenus;
-        ConcurrentQueue<FactLocation> queue;
+        readonly ConcurrentQueue<FactLocation> queue;
         IDictionary<string, IList<OS50kGazetteer>> OS50kDictionary;
         IList<OS50kGazetteer> OS50k;
-        IProgress<string> outputText;
+        readonly IProgress<string> outputText;
 
         FactLocation CopyLocation;
 
@@ -879,7 +879,7 @@ namespace FTAnalyzer.Forms
             GeoResponse.CResult.CGeometry.CViewPort viewport;
             if (res.Status == "OK")
             {
-                LogResults(loc, res);
+                //LogResults(loc, res);
                 foreach (GeoResponse.CResult result in res.Results)
                 {
                     foundLevel = GoogleMap.GetFactLocationType(result.Types, loc);
@@ -921,20 +921,17 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        private static void LogResults(FactLocation loc, GeoResponse res)
-        {
+//      static void LogResults(FactLocation loc, GeoResponse res)
+//        {
             //log.Info("Pixelsize: " + loc.PixelSize + ", Found " + res.Results.Count() + " results for " + loc.ToString());
             //foreach (GeoResponse.CResult result in res.Results)
             //{
             //    log.Info("Level: " + GoogleMap.GetFactLocationType(result.Types, loc) + "=" + result.ReturnAddress + ". Type: " + EnhancedTextInfo.ConvertStringArrayToString(result.Types));
             //}
-        }
+//      }
         #endregion
 
-        void MnuRetryPartial_Click(object sender, EventArgs e)
-        {
-            StartGoogleGeoCoding(true);
-        }
+        void MnuRetryPartial_Click(object sender, EventArgs e) => StartGoogleGeoCoding(true);
 
         void ResetAllPartialMatchesToNotSearchedToolStripMenuItem_Click(object sender, EventArgs e)
         {

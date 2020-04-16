@@ -97,7 +97,7 @@ namespace FTAnalyzer.Forms
                 SpecialMethods.VisitWebsite(URL);
             }
             else
-                MessageBox.Show($"{loc.ToString()} is not yet geocoded so can't be displayed.");
+                MessageBox.Show($"{loc} is not yet geocoded so can't be displayed.");
         }
 
         public static string LocationText(GeoResponse res, FactLocation loc, int level)
