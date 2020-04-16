@@ -17,10 +17,10 @@ namespace FTAnalyzer.Mapping
     public class ClusterLayer : IDisposable
     {
         public FeatureDataTable FactLocations { get; private set; }
-        private VectorLayer clusterLayer;
-        private LabelLayer labelLayer;
-        private MarkerClusterer clusterer;
-        private Map map;
+        VectorLayer clusterLayer;
+        LabelLayer labelLayer;
+        MarkerClusterer clusterer;
+        readonly Map map;
 
         public ClusterLayer(Map map)
         {
@@ -115,14 +115,18 @@ namespace FTAnalyzer.Mapping
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
+            try
             {
-                FactLocations.Dispose();
-                clusterLayer.Dispose();
-                labelLayer.Dispose();
-                clusterer.Dispose();
-                map.Dispose();
+                if (disposing)
+                {
+                    FactLocations.Dispose();
+                    clusterLayer.Dispose();
+                    labelLayer.Dispose();
+                    clusterer.Dispose();
+                    map.Dispose();
+                }
             }
+            catch (Exception) { }
         }
 
         public void Dispose()

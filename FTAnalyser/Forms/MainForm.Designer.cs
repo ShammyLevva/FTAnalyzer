@@ -15,12 +15,13 @@ namespace FTAnalyzer
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            try
             {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-            try { 
+                if (disposing && (components != null))
+                {
+                    components.Dispose();
+                }
+                base.Dispose(disposing);
                 normalFont.Dispose();
                 boldFont.Dispose();
                 handwritingFont.Dispose();

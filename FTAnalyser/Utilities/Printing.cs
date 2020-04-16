@@ -7,8 +7,8 @@ namespace FTAnalyzer.Utilities
 {
     class Printing : IDisposable
     {
-        ScrollingRichTextBox rtb;
-        StringReader reader;
+        readonly ScrollingRichTextBox rtb;
+        readonly StringReader reader;
         
         public Printing(ScrollingRichTextBox rtb)
         {
@@ -18,36 +18,43 @@ namespace FTAnalyzer.Utilities
 
         public void PrintPage(object sender, PrintPageEventArgs e)
         {
-            float YPosition = 0;
-            float LeftMargin = e.MarginBounds.Left;
-            float TopMargin = e.MarginBounds.Top;
-            string Line = null;
-            Font PrintFont = rtb.Font;
-            if (PrintFont.SizeInPoints < 11)
-                PrintFont = new Font(PrintFont.FontFamily, 11f);
-            int maxWidth = e.MarginBounds.Right - e.MarginBounds.Left;
-            int maxHeight = e.MarginBounds.Bottom - e.MarginBounds.Top;
-            float fontHeight = PrintFont.GetHeight(e.Graphics);
-            SolidBrush PrintBrush = new SolidBrush(Color.Black);
-
-            YPosition = TopMargin;
-            while (YPosition < maxHeight && ((Line = reader.ReadLine()) != null))
+            try
             {
-                SizeF sf = e.Graphics.MeasureString(Line, PrintFont, maxWidth);
-                e.Graphics.DrawString(Line, PrintFont, PrintBrush, new RectangleF(new PointF(LeftMargin, YPosition), sf), StringFormat.GenericTypographic);
-                YPosition += sf.Height;
+                float LeftMargin = e.MarginBounds.Left;
+                float TopMargin = e.MarginBounds.Top;
+                string Line = null;
+                Font PrintFont = rtb.Font;
+                if (PrintFont.SizeInPoints < 11)
+                    PrintFont = new Font(PrintFont.FontFamily, 11f);
+                int maxWidth = e.MarginBounds.Right - e.MarginBounds.Left;
+                int maxHeight = e.MarginBounds.Bottom - e.MarginBounds.Top;
+                float fontHeight = PrintFont.GetHeight(e.Graphics);
+                SolidBrush PrintBrush = new SolidBrush(Color.Black);
+
+                float YPosition = TopMargin;
+                while (YPosition < maxHeight && ((Line = reader.ReadLine()) != null))
+                {
+                    SizeF sf = e.Graphics.MeasureString(Line, PrintFont, maxWidth);
+                    e.Graphics.DrawString(Line, PrintFont, PrintBrush, new RectangleF(new PointF(LeftMargin, YPosition), sf), StringFormat.GenericTypographic);
+                    YPosition += sf.Height;
+                }
+                e.HasMorePages = Line != null;
+                PrintBrush.Dispose();
             }
-            e.HasMorePages = Line != null;
-            PrintBrush.Dispose();
+            catch (Exception) { }
         }
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
+            try
             {
-                reader.Dispose();
-                rtb.Dispose();
+                if (disposing)
+                {
+                    reader.Dispose();
+                    rtb.Dispose();
+                }
             }
+            catch (Exception) { }
         }
 
         public void Dispose()

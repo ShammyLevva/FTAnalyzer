@@ -7,23 +7,22 @@ namespace FTAnalyzer.Mapping
 {
     public class MarkerClusterer : IDisposable
     {
-        private List<MapCluster> clusters;
-        private double gridsize;
-        private int minClusterSize;
-        private FeatureDataTable clusteredDataTable;
-        private FeatureDataTable sourceDataTable;
+        readonly List<MapCluster> clusters;
+        double gridsize;
+        readonly int minClusterSize;
+        readonly FeatureDataTable sourceDataTable;
         bool reclustering;
 
         public MarkerClusterer(FeatureDataTable source)
         {
-            this.sourceDataTable = source;
-            this.minClusterSize = 2;
-            this.clusters = new List<MapCluster>();
-            clusteredDataTable = new FeatureDataTable();
-            clusteredDataTable.Columns.Add("Features", typeof(List<FeatureDataRow>)); ;
-            clusteredDataTable.Columns.Add("Count", typeof(int));
-            clusteredDataTable.Columns.Add("Label", typeof(string));
-            clusteredDataTable.Columns.Add("Cluster", typeof(string));
+            sourceDataTable = source;
+            minClusterSize = 2;
+            clusters = new List<MapCluster>();
+            FeatureDataTable = new FeatureDataTable();
+            FeatureDataTable.Columns.Add("Features", typeof(List<FeatureDataRow>)); ;
+            FeatureDataTable.Columns.Add("Count", typeof(int));
+            FeatureDataTable.Columns.Add("Label", typeof(string));
+            FeatureDataTable.Columns.Add("Cluster", typeof(string));
 
             reclustering = false;
         }
@@ -33,8 +32,8 @@ namespace FTAnalyzer.Mapping
             if (!reclustering)
             {
                 reclustering = true;
-                this.gridsize = gridSize;
-                this.clusters.Clear();
+                gridsize = gridSize;
+                clusters.Clear();
                 int count = 0;
                 foreach (FeatureDataRow row in sourceDataTable)
                 {
@@ -54,7 +53,7 @@ namespace FTAnalyzer.Mapping
             double distance = double.MaxValue;
             MapCluster clusterToAddTo = null;
             Point rowCentre = row.Geometry.Centroid;
-            foreach (MapCluster cluster in this.clusters)
+            foreach (MapCluster cluster in clusters)
             {
                 Point centre = cluster.Centroid;
                 if (centre.X != 0 && centre.Y != 0)
@@ -77,30 +76,34 @@ namespace FTAnalyzer.Mapping
             }
         }
 
-        public FeatureDataTable FeatureDataTable { get { return clusteredDataTable; } }
+        public FeatureDataTable FeatureDataTable { get; }
 
         void BuildClusteredFeatureTable()
         {
-            clusteredDataTable.Clear();
-            foreach (MapCluster cluster in this.clusters)
+            FeatureDataTable.Clear();
+            foreach (MapCluster cluster in clusters)
             {
-                FeatureDataRow row = clusteredDataTable.NewRow();
+                FeatureDataRow row = FeatureDataTable.NewRow();
                 row.Geometry = cluster.Geometry;
                 row["Features"] = cluster.Features;
                 row["Count"] = cluster.Features.Count;
                 row["Label"] = cluster.Features.Count >= minClusterSize ? cluster.Features.Count.ToString() : string.Empty;
                 row["Cluster"] = cluster.ClusterType;
-                clusteredDataTable.AddRow(row);
+                FeatureDataTable.AddRow(row);
             }
         }
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
+            try
             {
-                clusteredDataTable.Dispose();
-                sourceDataTable.Dispose();
+                if (disposing)
+                {
+                    FeatureDataTable.Dispose();
+                    sourceDataTable.Dispose();
+                }
             }
+            catch (Exception) { }
         }
 
         public void Dispose()

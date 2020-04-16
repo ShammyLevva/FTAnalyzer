@@ -1,4 +1,6 @@
-﻿namespace FTAnalyzer.Forms
+﻿using System;
+
+namespace FTAnalyzer.Forms
 {
     partial class Census
     {
@@ -13,12 +15,16 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
+            try
+            { 
+                if (disposing && (components != null))
+                {
+                    components.Dispose();
+                }
+                base.Dispose(disposing);
+                reportFormHelper.Dispose();
             }
-            base.Dispose(disposing);
-            reportFormHelper.Dispose();
+            catch (Exception) { }
         }
 
         #region Windows Form Designer generated code

@@ -148,7 +148,7 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.VariableLayers.Add(selections);
 
             mh.AddParishLayers(mapBox1.Map);
-            mh.SetScaleBar(mapBox1);
+            MapHelper.SetScaleBar(mapBox1);
             mapBox1.Map.MinimumZoom = 500;
             mapBox1.Map.MaximumZoom = 50000000;
             mapBox1.QueryGrowFactor = 30;
@@ -182,7 +182,7 @@ namespace FTAnalyzer.Forms
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
             txtCount.Text = dgIndividuals.SelectedRows.Count + " Individual(s) selected, " + dgFacts.RowCount + " Geolocated fact(s) displayed";
 
-            Envelope expand = mh.GetExtents(lifelines);
+            Envelope expand = MapHelper.GetExtents(lifelines);
             mapBox1.Map.ZoomToBox(expand);
             if (mapBox1.Map.Zoom < mapBox1.Map.MaximumZoom)
             {
@@ -191,7 +191,7 @@ namespace FTAnalyzer.Forms
             }
             RefreshMap();
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite(e.Link.LinkData as string);
@@ -200,10 +200,10 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
                 IDisplayFact fact = (IDisplayFact)dgFacts.CurrentRow.DataBoundItem;
-                mh.OpenGeoLocations(fact.Location, outputText);
-                this.Cursor = Cursors.Default;
+                MapHelper.OpenGeoLocations(fact.Location, outputText);
+                Cursor = Cursors.Default;
             }
         }
 
@@ -226,14 +226,14 @@ namespace FTAnalyzer.Forms
 
         void SelectIndividuals(Func<Individual, List<Individual>> method)
         {
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
             isLoading = true;
             Individual ind = dgIndividuals.CurrentRow.DataBoundItem as Individual;
             foreach (Individual i in method(ind))
                 SelectIndividual(i);
             isLoading = false;
             BuildMap();
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         void SelectAllAncestorsToolStripMenuItem_Click(object sender, EventArgs e) => SelectIndividuals(FamilyTree.GetAncestors);
@@ -296,12 +296,12 @@ namespace FTAnalyzer.Forms
             RefreshMap();
         }
 
-        void MnuHideScaleBar_Click(object sender, EventArgs e) => mh.MnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
+        void MnuHideScaleBar_Click(object sender, EventArgs e) => MapHelper.MnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
 
         void SplitContainerFacts_SplitterMoved(object sender, SplitterEventArgs e)
         {
             SplitContainer splitter = (SplitContainer)sender;
-            Application.UserAppDataRegistry.SetValue("Lifeline Facts Splitter Distance", this.Height - splitter.SplitterDistance);
+            Application.UserAppDataRegistry.SetValue("Lifeline Facts Splitter Distance", Height - splitter.SplitterDistance);
         }
 
         void SplitContainerMap_SplitterMoved(object sender, SplitterEventArgs e)

@@ -1,5 +1,6 @@
 ﻿using FTAnalyzer.Controls;
 using FTAnalyzer.Utilities;
+using System;
 using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms
@@ -17,12 +18,16 @@ namespace FTAnalyzer.Forms
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            try
             {
-                components.Dispose();
+                if (disposing && (components != null))
+                {
+                    components.Dispose();
+                }
+                base.Dispose(disposing);
+                clusters.Dispose();
             }
-            base.Dispose(disposing);
-            clusters.Dispose();
+            catch (Exception) { }
         }
 
         #region Windows Form Designer generated code

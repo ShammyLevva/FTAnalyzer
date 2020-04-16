@@ -14,18 +14,18 @@ namespace FTAnalyzer.Forms
         enum ReportType { People, MissingChildrenStatus, MismatchedChildrenStatus }
 
         bool selectRow = false;
-        Font boldFont;
-        Font normalFont;
+        readonly Font boldFont;
+        readonly Font normalFont;
         Dictionary<IDisplayIndividual, IDisplayFamily> families;
-        FamilyTree ft = FamilyTree.Instance;
-        ReportFormHelper indReportFormHelper;
-        ReportFormHelper famReportFormHelper;
+        readonly FamilyTree ft = FamilyTree.Instance;
+        readonly ReportFormHelper indReportFormHelper;
+        readonly ReportFormHelper famReportFormHelper;
         ReportType reportType = ReportType.People;
 
         public People()
         {
             InitializeComponent();
-            Top = Top + NativeMethods.TopTaskbarOffset;
+            Top += NativeMethods.TopTaskbarOffset;
             indReportFormHelper = new ReportFormHelper(this, Text, dgIndividuals, ResetTable, "People");
             famReportFormHelper = new ReportFormHelper(this, Text, dgFamilies, ResetTable, "People");
             ExtensionMethods.DoubleBuffered(dgIndividuals, true);

@@ -12,11 +12,11 @@ namespace FTAnalyzer
 {
     public partial class MapIndividuals : Form
     {
-        FamilyTree ft = FamilyTree.Instance;
-        Font italicFont;
-        ReportFormHelper reportFormHelper;
-        List<MapLocation> locations;
-        Form mapForm;
+        readonly FamilyTree ft = FamilyTree.Instance;
+        readonly Font italicFont;
+        readonly ReportFormHelper reportFormHelper;
+        readonly List<MapLocation> locations;
+        readonly Form mapForm;
 
         public MapIndividuals(List<MapLocation> locations, string year, Form mapForm)
         {
@@ -83,20 +83,24 @@ namespace FTAnalyzer
 
         void MnuEditLocation_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
-            MapLocation loc = dgIndividuals.SelectedRows[0].DataBoundItem as MapLocation;
-            EditLocation editform = new EditLocation(loc.Location);
-            this.Cursor = Cursors.Default;
-            DialogResult result = editform.ShowDialog(this);
-            editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
-            if (mapForm != null && mapForm.Visible)
+            try
             {
-                if (mapForm is TimeLine)
-                    ((TimeLine)mapForm).RefreshClusters();
-                else if (mapForm is Places)
-                    ((Places)mapForm).RefreshClusters();
-            }       
-            UpdateIcons(loc.Location);  
+                Cursor = Cursors.WaitCursor;
+                MapLocation loc = dgIndividuals.SelectedRows[0].DataBoundItem as MapLocation;
+                EditLocation editform = new EditLocation(loc.Location);
+                Cursor = Cursors.Default;
+                DialogResult result = editform.ShowDialog(this);
+                editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
+                if (mapForm != null && mapForm.Visible)
+                {
+                    if (mapForm is TimeLine)
+                        ((TimeLine)mapForm).RefreshClusters();
+                    else if (mapForm is Places)
+                        ((Places)mapForm).RefreshClusters();
+                }
+                UpdateIcons(loc.Location);
+            }
+            catch (Exception) { }
         }
 
         void UpdateIcons(FactLocation changed)
@@ -121,12 +125,16 @@ namespace FTAnalyzer
 
         void EditLocation(FactLocation loc)
         {
-            EditLocation editform = new EditLocation(loc);
-            Cursor = Cursors.Default;
-            DialogResult result = editform.ShowDialog(this);
-            editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
-            // force refresh of locations from new edited data
-            dgIndividuals.Refresh();
+            try
+            {
+                EditLocation editform = new EditLocation(loc);
+                Cursor = Cursors.Default;
+                DialogResult result = editform.ShowDialog(this);
+                editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
+                                    // force refresh of locations from new edited data
+                dgIndividuals.Refresh();
+            }
+            catch (Exception) { }
         }
 
         void DgIndividuals_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)

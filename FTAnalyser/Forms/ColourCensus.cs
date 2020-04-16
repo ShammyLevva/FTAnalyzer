@@ -11,13 +11,13 @@ namespace FTAnalyzer.Forms
 {
     public partial class ColourCensus : Form
     {
-        ReportFormHelper reportFormHelper;
-        Dictionary<int, DataGridViewCellStyle> styles;
+        readonly ReportFormHelper reportFormHelper;
+        readonly Dictionary<int, DataGridViewCellStyle> styles;
         int startColumnIndex;
         int endColumnIndex;
-        SortableBindingList<IDisplayColourCensus> _reportList;
-        Font boldFont;
-        string _country;
+        readonly SortableBindingList<IDisplayColourCensus> _reportList;
+        readonly Font boldFont;
+        readonly string _country;
 
         public ColourCensus(string country, List<IDisplayColourCensus> reportList)
         {

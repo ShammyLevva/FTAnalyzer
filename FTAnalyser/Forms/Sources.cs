@@ -7,9 +7,8 @@ namespace FTAnalyzer.Forms
 {
     public partial class Sources : Form
     {
-        private FamilyTree ft = FamilyTree.Instance;
-        private SortableBindingList<IDisplaySource> sources;
-        private ReportFormHelper reportFormHelper;
+        readonly SortableBindingList<IDisplaySource> sources;
+        readonly ReportFormHelper reportFormHelper;
 
         public Sources(DisplayFact fact)
         {

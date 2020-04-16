@@ -14,17 +14,17 @@ namespace FTAnalyzer.Forms
 {
     public partial class Places : Form
     {
-        private FamilyTree ft = FamilyTree.Instance;
-        private MapHelper mh = MapHelper.Instance;
-        private Color backgroundColour;
-        private ClusterLayer clusters;
+        readonly FamilyTree ft = FamilyTree.Instance;
+        readonly MapHelper mh = MapHelper.Instance;
+        readonly Color backgroundColour;
+        ClusterLayer clusters;
         bool isloading;
-        private IProgress<string> outputText;
+        readonly IProgress<string> outputText;
 
         public Places(IProgress<string> outputText)
         {
             InitializeComponent();
-            Top = Top + NativeMethods.TopTaskbarOffset;
+            Top += NativeMethods.TopTaskbarOffset;
             isloading = true;
             this.outputText = outputText;
             mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
@@ -66,7 +66,7 @@ namespace FTAnalyzer.Forms
             mapBox1.QueryGrowFactor = 30;
             mapBox1.Map.ZoomToExtents();
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
-            mh.SetScaleBar(mapBox1);
+            MapHelper.SetScaleBar(mapBox1);
         }
 
         void BuildMap()
@@ -117,7 +117,7 @@ namespace FTAnalyzer.Forms
             Application.DoEvents();
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
 
-            Envelope expand = mh.GetExtents(clusters.FactLocations);
+            Envelope expand = MapHelper.GetExtents(clusters.FactLocations);
             mapBox1.Map.ZoomToBox(expand);
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
             RefreshClusters();
@@ -133,7 +133,7 @@ namespace FTAnalyzer.Forms
             {
                 Cursor = Cursors.WaitCursor;
                 IDisplayFact fact = (IDisplayFact)dgFacts.CurrentRow.DataBoundItem;
-                mh.OpenGeoLocations(fact.Location, outputText);
+                MapHelper.OpenGeoLocations(fact.Location, outputText);
                 Cursor = Cursors.Default;
             }
         }
@@ -241,7 +241,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void MnuHideScaleBar_Click(object sender, EventArgs e) => mh.MnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
+        void MnuHideScaleBar_Click(object sender, EventArgs e) => MapHelper.MnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
 
         void BtnSelect_Click(object sender, EventArgs e)
         {

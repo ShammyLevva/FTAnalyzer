@@ -122,10 +122,14 @@ namespace FTAnalyzer.Mapping
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
+            try
             {
-                TearDropLocations.Dispose();
+                if (disposing)
+                {
+                    TearDropLocations.Dispose();
+                }
             }
+            catch (Exception) { }
         }
     }
 }

@@ -22,7 +22,7 @@ namespace FTAnalyzer.Mapping
     public class MapHelper
     {
         static MapHelper instance;
-        FamilyTree ft = FamilyTree.Instance;
+        readonly FamilyTree ft = FamilyTree.Instance;
 
         MapHelper()
         {
@@ -38,7 +38,7 @@ namespace FTAnalyzer.Mapping
             }
         }
 
-        public void SetScaleBar(MapBox mapBox1)
+        public static void SetScaleBar(MapBox mapBox1)
         {
             if (Properties.MappingSettings.Default.HideScaleBar)
             {
@@ -57,7 +57,7 @@ namespace FTAnalyzer.Mapping
             mapBox1.Refresh();
         }
 
-        public void MnuHideScaleBar_Click(ToolStripMenuItem mnuHideScaleBar, MapBox mapBox1)
+        public static void MnuHideScaleBar_Click(ToolStripMenuItem mnuHideScaleBar, MapBox mapBox1)
         {
             Properties.MappingSettings.Default.HideScaleBar = mnuHideScaleBar.Checked;
             Properties.MappingSettings.Default.Save();
@@ -80,7 +80,7 @@ namespace FTAnalyzer.Mapping
             }
         }
 
-        public void OpenGeoLocations(FactLocation location, IProgress<string> outputText)
+        public static void OpenGeoLocations(FactLocation location, IProgress<string> outputText)
         {
             GeocodeLocations geoLocations = null;
             foreach (Form f in Application.OpenForms)
@@ -128,7 +128,7 @@ namespace FTAnalyzer.Mapping
             AddParishLayer(map, filename, "Scottish", "name");
         }
 
-        public void AddParishLayer(Map map, string filename, string prefix, string labelField)
+        public static void AddParishLayer(Map map, string filename, string prefix, string labelField)
         {
             if (Properties.MappingSettings.Default.UseParishBoundaries)
             {
@@ -174,13 +174,13 @@ namespace FTAnalyzer.Mapping
         }
 
         // alternate sizing function to fix bug in sharpmap v1.1
-        private SizeF SizeOfString(Graphics graphics, string text, Font font)
+        SizeF SizeOfString(Graphics graphics, string text, Font font)
         {
             var s = TextRenderer.MeasureText(text, font);
             return new SizeF(s.Width + 1f, s.Height);
         }
 
-        public Envelope GetExtents(FeatureDataTable table)
+        public static Envelope GetExtents(FeatureDataTable table)
         {
             Envelope bbox = new Envelope();
             Envelope empty = new Envelope();
@@ -224,7 +224,7 @@ namespace FTAnalyzer.Mapping
             }
         }
 
-        public List<MapLocation> YearMapLocations(FactDate when, int limit)
+        public static List<MapLocation> YearMapLocations(FactDate when, int limit)
         {
             List<MapLocation> result = new List<MapLocation>();
             foreach (Individual ind in FamilyTree.Instance.AllIndividuals)

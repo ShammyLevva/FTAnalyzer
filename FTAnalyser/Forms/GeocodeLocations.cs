@@ -398,16 +398,20 @@ namespace FTAnalyzer.Forms
 
         void EditLocation(FactLocation loc)
         {
-            EditLocation editform = new EditLocation(loc);
-            Cursor = Cursors.Default;
-            mnuPasteLocation.Enabled = false;
-            CopyLocation = FactLocation.UNKNOWN_LOCATION;
-            editform.ShowDialog(this);
-            if (editform.UserSavedPoint)
-                AddLocationToQueue(loc);  // we have edited the location so add reverse geocode to queue
-            editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
-            // force refresh of locations from new edited data
-            dgLocations.Refresh();
+            try
+            {
+                EditLocation editform = new EditLocation(loc);
+                Cursor = Cursors.Default;
+                mnuPasteLocation.Enabled = false;
+                CopyLocation = FactLocation.UNKNOWN_LOCATION;
+                editform.ShowDialog(this);
+                if (editform.UserSavedPoint)
+                    AddLocationToQueue(loc);  // we have edited the location so add reverse geocode to queue
+                editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
+                                    // force refresh of locations from new edited data
+                dgLocations.Refresh();
+            }
+            catch (Exception) { }
         }
 
         void MnuCopyLocation_Click(object sender, EventArgs e)
@@ -971,7 +975,11 @@ namespace FTAnalyzer.Forms
 
         void GeocodeLocations_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.Dispose();
+            try
+            {
+                Dispose();
+            }
+            catch (Exception) { }
         }
 
         #region OS Geocoding
@@ -983,7 +991,7 @@ namespace FTAnalyzer.Forms
             }
             else
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
                 mnuGoogleGeocodeLocations.Enabled = false;
                 mnuEditLocation.Enabled = false;
                 mnuReverseGeocode.Enabled = false;
@@ -991,7 +999,7 @@ namespace FTAnalyzer.Forms
                 ft.Geocoding = true;
                 txtLocations.Text = "Initialising OS Geocoding.";
                 OSGeocodeBackgroundWorker.RunWorkerAsync();
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
         }
 

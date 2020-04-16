@@ -13,16 +13,14 @@ namespace FTAnalyzer.Forms
 {
     public partial class TimeLine : Form
     {
-        FamilyTree ft = FamilyTree.Instance;
-        MapHelper mh = MapHelper.Instance;
+        readonly MapHelper mh = MapHelper.Instance;
         int minGeoCodedYear;
         int maxGeoCodedYear;
         int geocodedRange;
         int yearLimit;
-        Color backgroundColour;
         ClusterLayer clusters;
         bool loading;
-        IProgress<string> outputText;
+        readonly IProgress<string> outputText;
 
         public TimeLine(IProgress<string> outputText)
         {
@@ -38,7 +36,6 @@ namespace FTAnalyzer.Forms
             mapZoomToolStrip.Items[4].ToolTipText = "Draw rectangle by dragging mouse to specify zoom area";
             for (int i = 7; i <= 10; i++)
                 mapZoomToolStrip.Items[i].Visible = false;
-            backgroundColour = mapZoomToolStrip.Items[0].BackColor;
             mapBox1.Map.MapViewOnChange += new SharpMap.Map.MapViewChangedHandler(MapBox1_MapViewOnChange);
             cbLimitFactDates.Text = "No Limit";
         }
@@ -53,7 +50,7 @@ namespace FTAnalyzer.Forms
             mapBox1.Map.ZoomToExtents();
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
             SetOpacity();
-            mh.SetScaleBar(mapBox1);
+            MapHelper.SetScaleBar(mapBox1);
         }
 
         void SetGeoCodedYearRange()
@@ -113,7 +110,7 @@ namespace FTAnalyzer.Forms
                 }
                 else
                 {
-                    locations = FilterToRelationsIncluded(mh.YearMapLocations(new FactDate(year), yearLimit));
+                    locations = FilterToRelationsIncluded(MapHelper.YearMapLocations(new FactDate(year), yearLimit));
                     txtLocations.Text = locations.Count() + " Locations in total for year " + year;
                 }
                 txtLocations.Text += " (you may need to zoom out to see them all). Use arrow tool then select icon to view ancestors at location";
@@ -124,7 +121,7 @@ namespace FTAnalyzer.Forms
                 }
                 if (!mnuKeepZoom.Checked)
                 {
-                    Envelope expand = mh.GetExtents(clusters.FactLocations);
+                    Envelope expand = MapHelper.GetExtents(clusters.FactLocations);
                     mapBox1.Map.ZoomToBox(expand);
                 }
                 RefreshClusters();
@@ -410,7 +407,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void MnuHideScaleBar_Click(object sender, EventArgs e) => mh.MnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
+        void MnuHideScaleBar_Click(object sender, EventArgs e) => MapHelper.MnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
 
         void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite(e.Link.LinkData as string);
 

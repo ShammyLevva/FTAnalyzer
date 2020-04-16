@@ -132,7 +132,11 @@ namespace FTAnalyzer.Controls
                 if (itemWidth > cbCensusDate.Width)
                     cbCensusDate.Width = (int)itemWidth;
             }
-            g.Dispose();
+            try
+            {
+                g.Dispose();
+            }
+            catch (Exception) { }
         }
 
         public event EventHandler CensusChanged;

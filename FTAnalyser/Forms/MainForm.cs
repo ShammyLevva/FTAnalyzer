@@ -1724,20 +1724,21 @@ namespace FTAnalyzer
         }
 
         void LabLostCousinsWeb_MouseLeave(object sender, EventArgs e) => Cursor = storedCursor;
-#endregion
+        #endregion
 
-#region ToolStrip Clicks
-        void AboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show($"This is Family Tree Analyzer version {VERSION}", "FTAnalyzer");
-        }
+        #region ToolStrip Clicks
+        void AboutToolStripMenuItem_Click(object sender, EventArgs e) => MessageBox.Show($"This is Family Tree Analyzer version {VERSION}", "FTAnalyzer");
 
         void OptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Options options = new Options();
-            options.ShowDialog(this);
-            options.Dispose();
-            Analytics.TrackAction(Analytics.MainFormAction, Analytics.OptionsEvent);
+            try
+            {
+                Options options = new Options();
+                options.ShowDialog(this);
+                options.Dispose();
+                Analytics.TrackAction(Analytics.MainFormAction, Analytics.OptionsEvent);
+            }
+            catch (Exception) { }
         }
 
 #endregion
@@ -1842,49 +1843,57 @@ namespace FTAnalyzer
 #region Dispose Routines
         void DisposeIndividualForms()
         {
-            List<Form> toDispose = new List<Form>();
-            foreach (Form f in Application.OpenForms)
+            try
             {
-                if (!ReferenceEquals(f, this))
-                    toDispose.Add(f);
+                List<Form> toDispose = new List<Form>();
+                foreach (Form f in Application.OpenForms)
+                {
+                    if (!ReferenceEquals(f, this))
+                        toDispose.Add(f);
+                }
+                foreach (Form f in toDispose)
+                    f.Dispose();
             }
-            foreach (Form f in toDispose)
-                f.Dispose();
+            catch (Exception) { }
         }
 
         public static void DisposeDuplicateForms(object form)
         {
-            List<Form> toDispose = new List<Form>();
-            foreach (Form f in Application.OpenForms)
+            try
             {
-                if (!ReferenceEquals(f, form) && f.GetType() == form.GetType())
-                    if (form is Census)
-                    {
-                        Census newForm = form as Census;
-                        Census oldForm = f as Census;
-                        if (oldForm.CensusDate.Equals(newForm.CensusDate) && oldForm.LostCousins == newForm.LostCousins)
+                List<Form> toDispose = new List<Form>();
+                foreach (Form f in Application.OpenForms)
+                {
+                    if (!ReferenceEquals(f, form) && f.GetType() == form.GetType())
+                        if (form is Census)
+                        {
+                            Census newForm = form as Census;
+                            Census oldForm = f as Census;
+                            if (oldForm.CensusDate.Equals(newForm.CensusDate) && oldForm.LostCousins == newForm.LostCousins)
+                                toDispose.Add(f);
+                        }
+                        else if (form is Facts)
+                        {
+                            Facts newForm = form as Facts;
+                            Facts oldForm = f as Facts;
+                            if (oldForm.Individual != null && oldForm.Individual.Equals(newForm.Individual))
+                                toDispose.Add(f);
+                            if (oldForm.Family != null && oldForm.Family.Equals(newForm.Family))
+                                toDispose.Add(f);
+                        }
+                        else
                             toDispose.Add(f);
-                    }
-                    else if (form is Facts)
-                    {
-                        Facts newForm = form as Facts;
-                        Facts oldForm = f as Facts;
-                        if (oldForm.Individual != null && oldForm.Individual.Equals(newForm.Individual))
-                            toDispose.Add(f);
-                        if (oldForm.Family != null && oldForm.Family.Equals(newForm.Family))
-                            toDispose.Add(f);
-                    }
+                }
+                foreach (Form f in toDispose)
+                {
+                    GC.SuppressFinalize(f);
+                    if (f.Visible)
+                        f.Close(); // call close method to force tidy up of forms & dispose
                     else
-                        toDispose.Add(f);
+                        f.Dispose();
+                }
             }
-            foreach (Form f in toDispose)
-            {
-                GC.SuppressFinalize(f);
-                if (f.Visible)
-                    f.Close(); // call close method to force tidy up of forms & dispose
-                else
-                    f.Dispose();
-            }
+            catch (Exception) { }
         }
 #endregion
 

@@ -28,7 +28,7 @@ namespace FTAnalyzer.Controls
 
         public void Setup(LinkLabel label, MapBox mapbox, TrackBar opacitySlider)
         {
-            this.copyrightLabel = label;
+            copyrightLabel = label;
             this.mapbox = mapbox;
             this.opacitySlider = opacitySlider;
             SetupDropdown();
@@ -137,15 +137,19 @@ namespace FTAnalyzer.Controls
 
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing);
-            mnuOpenStreetMap.Dispose();
-            mnuOpenHistoricMap.Dispose();
-            mnuBingMapAerial.Dispose();
-            mnuBingMapRoads.Dispose();
-            mnuBingMapHybrid.Dispose();
-            mnuNLS1843_1882.Dispose();
-            mnuNLS1885_1900.Dispose();
-            mnuNLS1921_1930.Dispose();
+            try
+            {
+                base.Dispose(disposing);
+                mnuOpenStreetMap.Dispose();
+                mnuOpenHistoricMap.Dispose();
+                mnuBingMapAerial.Dispose();
+                mnuBingMapRoads.Dispose();
+                mnuBingMapHybrid.Dispose();
+                mnuNLS1843_1882.Dispose();
+                mnuNLS1885_1900.Dispose();
+                mnuNLS1921_1930.Dispose();
+            }
+            catch (Exception) { }
         }
     }
 }

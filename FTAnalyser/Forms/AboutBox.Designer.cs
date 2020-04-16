@@ -1,4 +1,6 @@
-﻿namespace FTAnalyzer.Core.Displays
+﻿using System;
+
+namespace FTAnalyzer.Core.Displays
 {
     partial class AboutBox1
     {
@@ -12,11 +14,15 @@
         /// </summary>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            try
             {
-                components.Dispose();
+                if (disposing && (components != null))
+                {
+                    components.Dispose();
+                }
+                base.Dispose(disposing);
             }
-            base.Dispose(disposing);
+            catch (Exception) { }
         }
 
         #region Windows Form Designer generated code

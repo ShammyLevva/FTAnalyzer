@@ -1,4 +1,6 @@
-﻿namespace FTAnalyzer.UserControls
+﻿using System;
+
+namespace FTAnalyzer.UserControls
 {
     partial class ExtendedToolTipLabel
     {
@@ -13,12 +15,16 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            try
             {
-                components.Dispose();
+                if (disposing && (components != null))
+                {
+                    components.Dispose();
+                }
+                base.Dispose(disposing);
+                _ToolTip.Dispose();
             }
-            base.Dispose(disposing);
-            _ToolTip.Dispose();
+            catch (Exception) { }
         }
 
         #region Component Designer generated code

@@ -1,4 +1,6 @@
-﻿namespace FTAnalyzer.Controls
+﻿using System;
+
+namespace FTAnalyzer.Controls
 {
     partial class RelationTypes
     {
@@ -13,11 +15,15 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            try
             {
-                components.Dispose();
+                if (disposing && (components != null))
+                {
+                    components.Dispose();
+                }
+                base.Dispose(disposing);
             }
-            base.Dispose(disposing);
+            catch (Exception) { }
         }
 
         #region Component Designer generated code

@@ -14,13 +14,13 @@ namespace FTAnalyzer
 {
     public class ReportFormHelper : IDisposable
     {
-        PrintingDataGridViewProvider printProvider;
-        PrintDocument printDocument;
-        PrintDialog printDialog;
-        PrintPreviewDialog printPreviewDialog;
-        Form parent;
-        Tuple<int, int> defaultLocation;
-        Tuple<int, int> defaultSize;
+        readonly PrintingDataGridViewProvider printProvider;
+        readonly PrintDocument printDocument;
+        readonly PrintDialog printDialog;
+        readonly PrintPreviewDialog printPreviewDialog;
+        readonly Form parent;
+        readonly Tuple<int, int> defaultLocation;
+        readonly Tuple<int, int> defaultSize;
         readonly Action _resetTable;
         readonly string _registry;
         readonly bool _saveForm;
@@ -231,12 +231,16 @@ namespace FTAnalyzer
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
+            try
             {
-                printDocument.Dispose();
-                printDialog.Dispose();
-                printPreviewDialog.Dispose();
+                if (disposing)
+                {
+                    printDocument.Dispose();
+                    printDialog.Dispose();
+                    printPreviewDialog.Dispose();
+                }
             }
+            catch (Exception) { }
         }
 
         public void Dispose()

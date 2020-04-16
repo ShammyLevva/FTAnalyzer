@@ -227,7 +227,7 @@ namespace FTAnalyzer.Forms
                 if (frmBingMap.SetLocation(loc, loc.Level))
                     frmBingMap.Show();
                 else
-                    MessageBox.Show($"Unable to find location : {loc.ToString()}", "FTAnalyzer");
+                    MessageBox.Show($"Unable to find location : {loc}", "FTAnalyzer");
             }
             Cursor = Cursors.Default;
         }

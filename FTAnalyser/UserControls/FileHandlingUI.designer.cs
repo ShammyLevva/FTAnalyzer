@@ -1,4 +1,6 @@
-﻿namespace FTAnalyzer.UserControls
+﻿using System;
+
+namespace FTAnalyzer.UserControls
 {
 	partial class FileHandlingUI
 	{
@@ -13,11 +15,15 @@
 		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
 		protected override void Dispose(bool disposing)
 		{
-			if (disposing && (components != null))
-			{
-				components.Dispose();
-			}
-			base.Dispose(disposing);
+            try
+            {
+                if (disposing && (components != null))
+                {
+                    components.Dispose();
+                }
+                base.Dispose(disposing);
+            }
+            catch (Exception) { }
 		}
 
 		#region Component Designer generated code
