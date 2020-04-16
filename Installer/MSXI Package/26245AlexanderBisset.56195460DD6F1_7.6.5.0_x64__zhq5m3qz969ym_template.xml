@@ -54,7 +54,7 @@
       <RegistryExclusion ExcludePath="REGISTRY\USER\[{CurrentUserSID}]_Classes\SyncEngineFileInfoProvider.SyncEngineFileInfoProvider" />
     </ExclusionItems>
   </Settings>
-  <PrepareComputer DisableWindowsSearchService="true" />
+  <PrepareComputer DisableWindowsSearchService="true" DisableWindowsUpdateService="true" />
   <SaveLocation PackagePath="D:\Programming\GitRepo\FTAnalyzer\Installer\MSXI Package\26245AlexanderBisset.56195460DD6F1_7.6.5.0_x64__zhq5m3qz969ym.msix" TemplatePath="D:\Programming\GitRepo\FTAnalyzer\Installer\MSXI Package\26245AlexanderBisset.56195460DD6F1_7.6.5.0_x64__zhq5m3qz969ym_template.xml" />
   <Installer Path="D:\Programming\GitRepo\FTAnalyzer\Installer\Release\FTAnalyzer Installer.msi" />
   <PackageInformation PackageName="26245AlexanderBisset.56195460DD6F1" PackageDisplayName="FTAnalyzer" PublisherName="CN=A9B22507-AD23-4870-AFE9-FB8F05F6EB76" PublisherDisplayName="FTAnalyzer" Version="7.6.5.0" p4:PackageDescription="Analyse the hidden depths in your family tree" xmlns:p4="http://schemas.microsoft.com/msix/msixpackagingtool/template/1910" />

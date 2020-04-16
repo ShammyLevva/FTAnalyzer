@@ -141,6 +141,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_1A7FA1B5C5A6431CAEB4E8DF9C828FAF"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_1D434ACB6E326AFDE8DF59826F75A6AB"
         "OwnerKey" = "8:_25C28675C5BA41E382571E7E49149B3F"
         "MsmSig" = "8:_UNDEFINED"
@@ -881,12 +887,6 @@
         {
         "MsmKey" = "8:_C91C88A91146E193F753189DF9372B2C"
         "OwnerKey" = "8:_25C28675C5BA41E382571E7E49149B3F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_CC096D2C3B044601A70724B89064449E"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2656,6 +2656,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1A7FA1B5C5A6431CAEB4E8DF9C828FAF"
+            {
+            "SourcePath" = "8:..\\FTAnalyser\\FTAnalyzer.ico"
+            "TargetName" = "8:FTAnalyzer.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1D434ACB6E326AFDE8DF59826F75A6AB"
@@ -5572,26 +5592,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CC096D2C3B044601A70724B89064449E"
-            {
-            "SourcePath" = "8:..\\FTAnalyser\\bin\\Release\\Resources\\Icons\\FTAnalyzer.ico"
-            "TargetName" = "8:FTAnalyzer.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CE86DE0F4D07A18474A308F0FB72AC6E"
             {
             "AssemblyRegister" = "3:1"
@@ -6590,14 +6590,14 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FTAnalyzer"
         "ProductCode" = "8:{0CB83177-B432-4009-A5F0-56CD2D4D389F}"
-        "PackageCode" = "8:{777F240D-F803-47A6-99D2-667C3687C53E}"
+        "PackageCode" = "8:{AE80061F-D747-4377-AE0E-928461B241C0}"
         "UpgradeCode" = "8:{1207BD34-CD5A-4BEA-838E-74C0B720E1DA}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:7.6.5"
+        "ProductVersion" = "8:7.6.6"
         "Manufacturer" = "8:FTAnalyzer"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://www.facebook.com/groups/ftanalyzer"
@@ -6607,7 +6607,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:Family Tree Analyzer"
         "ARPURLINFOABOUT" = "8:http://www.ftanalyzer.com"
-        "ARPPRODUCTICON" = "8:_CC096D2C3B044601A70724B89064449E"
+        "ARPPRODUCTICON" = "8:_1A7FA1B5C5A6431CAEB4E8DF9C828FAF"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -6721,7 +6721,7 @@
             "Target" = "8:_25C28675C5BA41E382571E7E49149B3F"
             "Folder" = "8:_C17C87ECBA8547689333067FB8B2F89A"
             "WorkingFolder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
-            "Icon" = "8:_CC096D2C3B044601A70724B89064449E"
+            "Icon" = "8:_1A7FA1B5C5A6431CAEB4E8DF9C828FAF"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_8B04C8A489A84D99A195B6B5F29A8EA8"
@@ -6735,7 +6735,7 @@
             "Target" = "8:_25C28675C5BA41E382571E7E49149B3F"
             "Folder" = "8:_B0B5B231A17A455DB1E1E4039C5A0482"
             "WorkingFolder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
-            "Icon" = "8:_CC096D2C3B044601A70724B89064449E"
+            "Icon" = "8:_1A7FA1B5C5A6431CAEB4E8DF9C828FAF"
             "Feature" = "8:"
             }
         }

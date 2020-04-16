@@ -1,4 +1,9 @@
-#### Updated Release Version 7.6.5.0 11th Apr 2020  
+#### Updated Release Version 7.6.6.0 16th Apr 2020  
+**Bugfixes**  
+Fixed duplicate check name score crashing  
+Fixed unable to save user config crashing  
+
+#### Updated Release Version 7.6.5.0 15th Apr 2020  
 **Updates**  
 Changed FindMyPast UK Census search to use specialist form for that specific census  
 
