@@ -6,7 +6,7 @@ Family Tree Analyzer
 
 The simplest Windows 10 install method is to install from the Offical Microsoft App Store. This will then auto update the application when a new version comes out assuming you've not turned off this option in the Microsoft App Store app.  
 
-Installation is simple with Windows Store Click the link and click Get to get the application or Launch to run the application once installed. You can put a short cut on your desktop by dragging the icon from your start menu to the desktop.  
+Installation is simple with Windows Store Click the link and click Get to get the application or Launch to run the application once installed. You can put a short cut on your desktop by dragging the icon from your start menu to the desktop. [This article](https://winaero.com/blog/desktop-shortcut-store-app-windows-10/) explains if you are having issues creating a shortcut icon.
   
 ### Helpful Guides to Using FTAnalyzer
 
