@@ -175,7 +175,7 @@ namespace SharpMap.CoordinateSystems
         /// </summary>
         /// <param name="srid">The identifier of the coordinate system to remove</param>
         /// <returns><value>true</value> if the coordinate system was removed successfully, otherwise <value>false</value></returns>
-        public virtual bool RemoveCoordinateSystem(int srid)
+        new public virtual bool RemoveCoordinateSystem(int srid)
         {
             if (IsReadOnly)
                 throw new NotSupportedException();
@@ -197,7 +197,7 @@ namespace SharpMap.CoordinateSystems
         /// <returns>
         /// The coordinate system.
         /// </returns>
-        public virtual CoordinateSystem GetCoordinateSystem(int srid)
+        new public virtual CoordinateSystem GetCoordinateSystem(int srid)
         {
             CoordinateSystem cs;
             return _csBySrid.TryGetValue(srid, out cs) ? cs : null;
@@ -210,7 +210,7 @@ namespace SharpMap.CoordinateSystems
         /// <returns>
         /// The coordinate system.
         /// </returns>
-        public virtual CoordinateSystem GetCoordinateSystem(string authority, long code)
+        new public virtual CoordinateSystem GetCoordinateSystem(string authority, long code)
         {
             var srid = GetSRID(authority, code);
             return srid.HasValue ? GetCoordinateSystem(srid.Value) : null;
@@ -226,7 +226,7 @@ namespace SharpMap.CoordinateSystems
         /// null
         /// </value>
         /// </returns>
-        public virtual int? GetSRID(string authority, long authorityCode)
+        new public virtual int? GetSRID(string authority, long authorityCode)
         {
             var key = new CoordinateSystemKey(authority, authorityCode);
             int srid;
@@ -250,7 +250,7 @@ namespace SharpMap.CoordinateSystems
         /// </value>
         ///  if no transformation could be created.
         /// </returns>
-        public ICoordinateTransformation CreateTransformation(int sourceSrid, int targetSrid)
+        new public ICoordinateTransformation CreateTransformation(int sourceSrid, int targetSrid)
         {
             return CreateTransformation(
                 GetCoordinateSystem(sourceSrid),
@@ -268,7 +268,7 @@ namespace SharpMap.CoordinateSystems
         /// </value>
         ///  if no transformation could be created.
         /// </returns>
-        public ICoordinateTransformation CreateTransformation(CoordinateSystem source, CoordinateSystem target)
+        new public ICoordinateTransformation CreateTransformation(CoordinateSystem source, CoordinateSystem target)
         {
             return _ctFactory.CreateFromCoordinateSystems(source, target);
         }
@@ -280,7 +280,7 @@ namespace SharpMap.CoordinateSystems
         /// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
         /// </returns>
         /// <filterpriority>1</filterpriority>
-        public virtual IEnumerator<KeyValuePair<int, CoordinateSystem>> GetEnumerator()
+        new public virtual IEnumerator<KeyValuePair<int, CoordinateSystem>> GetEnumerator()
         {
             return _csBySrid.GetEnumerator();
         }
@@ -288,7 +288,7 @@ namespace SharpMap.CoordinateSystems
         /// <summary>
         /// Method to remove all coordinate systems from the service
         /// </summary>
-        public virtual void Clear()
+        new public virtual void Clear()
         {
             if (IsReadOnly)
                 throw new NotSupportedException();
@@ -300,7 +300,7 @@ namespace SharpMap.CoordinateSystems
         /// <summary>
         /// Gets a value indicating the number of unique coordinate systems in the repository
         /// </summary>
-        public virtual int Count
+        new public virtual int Count
         {
             get { return _sridByCs.Count; }
         }
@@ -322,7 +322,7 @@ namespace SharpMap.CoordinateSystems
         /// </summary>
         /// <param name="srid">The identifier for the <paramref name="coordinateSystem"/> in the store.</param>
         /// <param name="coordinateSystem">The coordinate system.</param>
-        public virtual void AddCoordinateSystem(int srid, CoordinateSystem coordinateSystem)
+        new public virtual void AddCoordinateSystem(int srid, CoordinateSystem coordinateSystem)
         {
             if (IsReadOnly)
                 throw new NotSupportedException();

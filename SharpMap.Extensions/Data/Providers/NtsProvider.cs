@@ -26,8 +26,6 @@ using GisSharpBlog.NetTopologySuite.Geometries;
 using NtsGeometry = GisSharpBlog.NetTopologySuite.Geometries.Geometry;
 #else
 using NetTopologySuite.Features;
-using NetTopologySuite.Geometries;
-using NtsGeometry = NetTopologySuite.Geometries.Geometry;
 #endif
 
 using Geometry = NetTopologySuite.Geometries.Geometry;
