@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using FTAnalyzer.Utilities;
 using System;
 using System.Configuration;
 using System.IO;
@@ -341,8 +342,17 @@ namespace FTAnalyzer.Properties {
 
         public override void Save()
         {
-            ClearUserConfigFile();
-            base.Save();
+            try
+            {
+                ClearUserConfigFile();
+                base.Save();
+            }
+            catch (ConfigurationErrorsException)
+            {
+                var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoaming);
+                var userConfigPath = config.FilePath;
+                UIHelpers.ShowMessage($"Failed to write configuration file. Check you have write permission to file\n\n{userConfigPath}");
+            }
         }
 
         public static void ClearUserConfigFile()
