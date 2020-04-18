@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using System.Reflection;
+using System.IO;
 
 //TODO: Load option controls dynamically
 //TODO: Add ability for option controls to have an icon next to their display name in tree view
@@ -14,8 +15,7 @@ namespace FTAnalyzer.UserControls
 	public partial class Options : Form
 	{
 		public const char MENU_DELIMETER = '|';
-
-		private Dictionary<string, UserControl> _lookupTable;
+		readonly Dictionary<string, UserControl> _lookupTable;
 		public Options()
 		{
 			InitializeComponent();
@@ -26,31 +26,53 @@ namespace FTAnalyzer.UserControls
 		void Options_Load(object sender, EventArgs e)
 		{
 			SuspendLayout();
-			Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-			for (int i = 0; i < types.Length; i++)
+			try
 			{
-				if (types[i].GetInterface(typeof(IOptions).FullName) != null && types[i].BaseType == typeof(UserControl)) 
+				Type[] types = Assembly.GetExecutingAssembly().GetTypes();
+				for (int i = 0; i < types.Length; i++)
 				{
-					UserControl userControl = Activator.CreateInstance(types[i]) as UserControl;
-					IOptions optionCast = userControl as IOptions;
-					if (userControl != null && optionCast != null)
+					if (types[i].GetInterface(typeof(IOptions).FullName) != null && types[i].BaseType == typeof(UserControl)) 
 					{
-						userControl.Anchor = (((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right);
-						userControl.Location = new System.Drawing.Point(3, 3);
-						userControl.Name = optionCast.TreePosition;
-						userControl.Size = new System.Drawing.Size(243, 356);
-						userControl.TabIndex = 0;
-						userControl.Visible = false;
-						panel1.Controls.Add(userControl);
-						if (optionCast.MenuIcon != null)
+						if (Activator.CreateInstance(types[i]) is UserControl userControl && userControl is IOptions optionCast)
 						{
-							OptionsMenuImageList.Images.Add(optionCast.TreePosition, optionCast.MenuIcon);
+							userControl.Anchor = (((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right);
+							userControl.Location = new System.Drawing.Point(3, 3);
+							userControl.Name = optionCast.TreePosition;
+							userControl.Size = new System.Drawing.Size(243, 356);
+							userControl.TabIndex = 0;
+							userControl.Visible = false;
+							panel1.Controls.Add(userControl);
+							if (optionCast.MenuIcon != null)
+							{
+								OptionsMenuImageList.Images.Add(optionCast.TreePosition, optionCast.MenuIcon);
+							}
+							AddNodesToTree(optionCast.TreePosition);
+							_lookupTable.Add(optionCast.TreePosition, userControl);
 						}
-						AddNodesToTree(optionCast.TreePosition);
-						_lookupTable.Add(optionCast.TreePosition, userControl);
 					}
 				}
 			}
+			catch (ReflectionTypeLoadException ex)
+			{
+				StringBuilder sb = new StringBuilder();
+				foreach (Exception exSub in ex.LoaderExceptions)
+				{
+					sb.AppendLine(exSub.Message);
+					if (exSub is FileNotFoundException exFileNotFound)
+					{
+						if (!string.IsNullOrEmpty(exFileNotFound.FusionLog))
+						{
+							sb.AppendLine("Fusion Log:");
+							sb.AppendLine(exFileNotFound.FusionLog);
+						}
+					}
+					sb.AppendLine();
+				}
+				string errorMessage = sb.ToString();
+				Console.WriteLine(errorMessage);
+				//Display or log the error based on your application.
+			}
+
 			treeView1.ExpandAll();
 			if (treeView1.Nodes.Count > 0)
 			{
