@@ -4,8 +4,6 @@ One of these sets of data that may be useful to people with British Ancestry is 
 
 The data set is current parish boundaries and won't match exactly with historic parish boundaries as these do occasionally change. However for the most part the parish boundaries have remains as is for hundreds of years.
 
-You can download the boundary map from here. [https://ftanalyzer.codeplex.com/releases/view/115135](https://ftanalyzer.codeplex.com/releases/view/115135)
+You can download the boundary map from [here](http://ftanalyzer.com/ParishBoundaries.zip)
 
-To install simply unzip to any directory eg: c:\Custom Maps and then in Tools | Options | Mapping Settings in FTAnalyzer set the custom maps folder to this directory. Also then tick the box to use British Parishes.
-
-
+To install simply unzip to any directory eg: c:\Custom Maps and then in Tools, Options, Mapping Settings in FTAnalyzer set the custom maps folder to this directory. Also then tick the box to use British Parishes.
