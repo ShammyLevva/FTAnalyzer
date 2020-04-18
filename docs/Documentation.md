@@ -61,5 +61,5 @@ FTAnalyzer Documentation
 
 **Mapping**
 
-*   [**Displaying British Parish Boundaries**](Displaying%20England%20and%20Wales%20Parish%20Boundaries)
+*   [**Displaying British Parish Boundaries**](Displaying%20British%20Parish%20Boundaries)
 *   [**Adding a Custom Map to FTAnalyzer**](Adding%20Custom%20Maps)
