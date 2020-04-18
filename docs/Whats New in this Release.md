@@ -1,3 +1,14 @@
+#### Updated Release Version 7.7.0.0 18th Apr 2020  
+**Updates**  
+Added new Census problem facts report  
+Added new auto created census fact report  
+Updated links to Parish boundary files that were locked on old Codeplex site  
+Added error comment on Facts export to Excel  
+
+**Bugfixes**  
+Web special characters were preventing recognition of valid census references  
+Don't export class name if icon in exports to Excel  
+
 #### Updated Release Version 7.6.6.0 16th Apr 2020  
 **Bugfixes**  
 Fixed duplicate check name score crashing  
