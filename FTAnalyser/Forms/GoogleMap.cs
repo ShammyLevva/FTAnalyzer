@@ -145,9 +145,10 @@ namespace FTAnalyzer.Forms
 
         public static GeoResponse CallGoogleGeocode(string address)
         {
+            string encodedAddress = HttpUtility.UrlEncode(address.Replace(" ", "+"));
             string url = string.Format(
                     "https://maps.googleapis.com/maps/api/geocode/json?address={0}&region=uk&sensor=false&key={1}",
-                    HttpUtility.UrlEncode(address), GoogleAPIKey.KeyValue
+                    encodedAddress, GoogleAPIKey.KeyValue
                     );
             return GetGeoResponse(url);
         }
@@ -192,6 +193,8 @@ namespace FTAnalyzer.Forms
                     MessageBox.Show($"Unable to contact https://maps.googleapis.com error was: {ex.Message}", "FTAnalyzer");
                 res = null;
             }
+            if (res.Status == "REQUEST_DENIED")
+                UIHelpers.ShowMessage("Google returned REQUEST_DENIED - please check you have a valid key and enabled the Geocoding API & Places API");
             return res;
         }
 
@@ -228,12 +231,15 @@ namespace FTAnalyzer.Forms
             }
             else
             {
-                OnWaitingForGoogle(string.Empty); // going well clear any previous message
-                // no throttling, go a little bit faster
-                if (sleepinterval > 10000)
-                    sleepinterval = 200;
-                else
-                    sleepinterval = Math.Max(sleepinterval / 2, 75);
+                if (res.Status != "REQUEST_DENIED")
+                {
+                    OnWaitingForGoogle(string.Empty); // going well clear any previous message
+                                                      // no throttling, go a little bit faster
+                    if (sleepinterval > 10000)
+                        sleepinterval = 200;
+                    else
+                        sleepinterval = Math.Max(sleepinterval / 2, 75);
+                }
                 return res;
             }
         }

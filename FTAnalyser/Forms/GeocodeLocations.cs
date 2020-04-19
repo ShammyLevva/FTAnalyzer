@@ -520,12 +520,19 @@ namespace FTAnalyzer.Forms
                 else
                 {
                     Cursor = Cursors.WaitCursor;
-                    pbGeocoding.Visible = true;
-                    mnuGoogleGeocodeLocations.Enabled = false;
-                    mnuEditLocation.Enabled = false;
-                    mnuReverseGeocode.Enabled = false;
-                    mnuOSGeocodeLocations.Enabled = false;
-                    ft.Geocoding = true;
+                    try
+                    {
+                        pbGeocoding.Visible = true;
+                        mnuGoogleGeocodeLocations.Enabled = false;
+                        mnuEditLocation.Enabled = false;
+                        mnuReverseGeocode.Enabled = false;
+                        mnuOSGeocodeLocations.Enabled = false;
+                        ft.Geocoding = true;
+                    }
+                    catch(ArgumentException)
+                    {
+                        Console.WriteLine("Race condition gets here sometimes");
+                    }
                     googleGeocodeBackgroundWorker.RunWorkerAsync(retryPartials);
                     Cursor = Cursors.Default;
                 }
@@ -686,7 +693,7 @@ namespace FTAnalyzer.Forms
         {
             // This call is the real workhorse that does the actual Google lookup
             GeoResponse res = GoogleMap.GoogleGeocode(location, 8);
-            if (res != null && res.Status == "Maxed")
+            if (res != null && (res.Status == "Maxed" || res.Status == "REQUEST_DENIED"))
             {
                 googleGeocodeBackgroundWorker.CancelAsync();
                 GoogleMap.ThreadCancelled = true;

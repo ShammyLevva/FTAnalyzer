@@ -16,12 +16,12 @@ namespace FTAnalyzer.Forms
 {
     public partial class EditLocation : Form
     {
-        private FeatureDataTable pointTable;
-        private VectorLayer pointLayer;
-        private List<GdalRasterLayer> customMapLayers;
-        private FactLocation location;
-        private FactLocation originalLocation;
-        private FeatureDataRow pointFeature;
+        FeatureDataTable pointTable;
+        VectorLayer pointLayer;
+        List<GdalRasterLayer> customMapLayers;
+        readonly FactLocation location;
+        readonly FactLocation originalLocation;
+        FeatureDataRow pointFeature;
         bool iconSelected;
         bool pointUpdated;
         bool dataUpdated;
@@ -160,7 +160,7 @@ namespace FTAnalyzer.Forms
             UpdateDatabase();
             UserSavedPoint = true;
             TreeViewHandler.Instance.RefreshTreeNodeIcon(location);
-            MessageBox.Show($"Data for {location.ToString()} updated.", "Save new location");
+            MessageBox.Show($"Data for {location} updated.", "Save new location");
         }
 
         void BtnSaveExit_Click(object sender, EventArgs e)
@@ -237,7 +237,7 @@ namespace FTAnalyzer.Forms
                         pointUpdated = true;
                     }
                     else
-                        MessageBox.Show("Google didn't find " + txtSearch.Text, "Failed Google Lookup");
+                        MessageBox.Show($"Google didn't find {txtSearch.Text}", "Failed Google Lookup");
                 }
             }
         }
