@@ -87,12 +87,19 @@ namespace FTAnalyzer.Forms
                 .Select(r => new Tuple<string, int>(r.Key, r.Count())).ToList();
             birthdayEffect.Sort();
             exactDates.Sort();
+            int beIndex = 0, edIndex = 0, beItem2 = 0, edItem2 = 0;
             List<Tuple<string, string, string>> result = new List<Tuple<string, string, string>>();
-            for(int i=0; i<12; i++)
+            for(int month=1; month<=12; month++)
             {
-                var column2 = $"{birthdayEffect[i].Item2}/{exactDates[i].Item2}";
-                float percent = (float)birthdayEffect[i].Item2 / exactDates[i].Item2;
-                result.Add(new Tuple<string, string, string>(birthdayEffect[i].Item1, column2, string.Format("{0:P2}",percent)));
+                beItem2 = edItem2 = 0;
+                string monthStr = new DateTime(2000, month, 1).ToString("MM : MMMM");
+                if(month<=birthdayEffect.Count && birthdayEffect[beIndex].Item1 == monthStr)
+                    beItem2 = birthdayEffect[beIndex++].Item2;
+                if(month<=exactDates.Count && exactDates[edIndex].Item1 == monthStr)
+                    edItem2 = exactDates[edIndex++].Item2;
+                var column2 = $"{beItem2}/{edItem2}";
+                float percent = edItem2 == 0 ? 0f : (float)beItem2 / edItem2;
+                result.Add(new Tuple<string, string, string>(monthStr, column2, string.Format("{0:P2}",percent)));
             }
             dgStatistics.DataSource = new SortableBindingList<Tuple<string, string, string>>(result);
             dgStatistics.Columns[0].Width = 150;
