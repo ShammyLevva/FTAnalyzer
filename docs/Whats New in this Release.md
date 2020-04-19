@@ -4,11 +4,13 @@ Added new Census problem facts report
 Added new auto created census fact report  
 Updated links to Parish boundary files that were locked on old Codeplex site  
 Added error comment on Facts export to Excel  
+Disable Google API calls for now until new method worked out  
 
 **Bugfixes**  
 Web special characters were preventing recognition of valid census references  
 Don't export class name if icon in exports to Excel  
 Fix Birthday Effect report crash  
+Fix printing displaying blank page  
 
 #### Updated Release Version 7.6.6.0 16th Apr 2020  
 **Bugfixes**  

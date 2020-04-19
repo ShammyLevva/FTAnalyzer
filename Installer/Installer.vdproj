@@ -1192,6 +1192,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_FE8E0721373F4377AC94F8F462528932"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_25C28675C5BA41E382571E7E49149B3F"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1997,12 +2003,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_BE154EF5C8E6C4BA7B07809946122FF0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FE8E0721373F4377AC94F8F462528932"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -6590,14 +6590,14 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FTAnalyzer"
         "ProductCode" = "8:{0CB83177-B432-4009-A5F0-56CD2D4D389F}"
-        "PackageCode" = "8:{AE80061F-D747-4377-AE0E-928461B241C0}"
+        "PackageCode" = "8:{2DC0B054-4145-478B-A2EA-972B8E7D525A}"
         "UpgradeCode" = "8:{1207BD34-CD5A-4BEA-838E-74C0B720E1DA}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:7.6.6"
+        "ProductVersion" = "8:7.7.0"
         "Manufacturer" = "8:FTAnalyzer"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://www.facebook.com/groups/ftanalyzer"
