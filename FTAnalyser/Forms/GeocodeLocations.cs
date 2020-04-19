@@ -529,7 +529,7 @@ namespace FTAnalyzer.Forms
                     googleGeocodeBackgroundWorker.RunWorkerAsync(retryPartials);
                     Cursor = Cursors.Default;
                 }
-            } catch(ArgumentException ex)
+            } catch(Exception ex)
             {
                 Console.WriteLine(ex.Message); // sometimes setting pbGeocoding.Visible triggers font error for resizing fonts
             }

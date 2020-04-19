@@ -73,55 +73,59 @@ namespace FTAnalyzer.Forms
         {
             if (isloading) return;
             Cursor = Cursors.WaitCursor;
-            clusters.Clear();
-            dgFacts.DataSource = null;
-            List<IDisplayFact> displayFacts = new List<IDisplayFact>();
-            List<Individual> list = new List<Individual>();
-            List<Tuple<FactLocation, int>> locations = new List<Tuple<FactLocation, int>>();
-            foreach (TreeNode node in tvPlaces.SelectedNodes)
+            try
             {
-                Tuple<FactLocation, int> location = new Tuple<FactLocation, int>((FactLocation)node.Tag, node.Level);
-                list.AddRange(ft.GetIndividualsAtLocation(location.Item1, location.Item2));
-                locations.Add(location);
-            }
-            if (list.Count == 0)
-            {
-                Cursor = Cursors.Default;
-                RefreshClusters();
-                return;
-            }
-            int count = 0;
-            progressbar.Visible = true;
-            progressbar.Maximum = list.Count;
-            foreach (Individual ind in list)
-            {
-                foreach (DisplayFact dispfact in ind.AllGeocodedFacts)
+                clusters.Clear();
+                dgFacts.DataSource = null;
+                List<IDisplayFact> displayFacts = new List<IDisplayFact>();
+                List<Individual> list = new List<Individual>();
+                List<Tuple<FactLocation, int>> locations = new List<Tuple<FactLocation, int>>();
+                foreach (TreeNode node in tvPlaces.SelectedNodes)
                 {
-                    foreach (Tuple<FactLocation, int> location in locations)
+                    Tuple<FactLocation, int> location = new Tuple<FactLocation, int>((FactLocation)node.Tag, node.Level);
+                    list.AddRange(ft.GetIndividualsAtLocation(location.Item1, location.Item2));
+                    locations.Add(location);
+                }
+                if (list.Count == 0)
+                {
+                    Cursor = Cursors.Default;
+                    RefreshClusters();
+                    return;
+                }
+                int count = 0;
+                progressbar.Visible = true;
+                progressbar.Maximum = list.Count;
+                foreach (Individual ind in list)
+                {
+                    foreach (DisplayFact dispfact in ind.AllGeocodedFacts)
                     {
-                        if (dispfact.Location.CompareTo(location.Item1, location.Item2) == 0)
+                        foreach (Tuple<FactLocation, int> location in locations)
                         {
-                            displayFacts.Add(dispfact);
-                            MapLocation loc = new MapLocation(ind, dispfact.Fact, dispfact.FactDate);
-                            loc.AddFeatureDataRow(clusters.FactLocations);
-                            break;
+                            if (dispfact.Location.CompareTo(location.Item1, location.Item2) == 0)
+                            {
+                                displayFacts.Add(dispfact);
+                                MapLocation loc = new MapLocation(ind, dispfact.Fact, dispfact.FactDate);
+                                loc.AddFeatureDataRow(clusters.FactLocations);
+                                break;
+                            }
                         }
                     }
+                    progressbar.Value = ++count;
+                    txtCount.Text = $"Processed {count} Individuals from list of {list.Count}";
+                    Application.DoEvents();
                 }
-                progressbar.Value = ++count;
-                txtCount.Text = $"Processed {count} Individuals from list of {list.Count}";
+                progressbar.Visible = false;
+                txtCount.Text = $"Downloading map tiles and computing clusters for {displayFacts.Count} facts. Please wait";
                 Application.DoEvents();
-            }
-            progressbar.Visible = false;
-            txtCount.Text = $"Downloading map tiles and computing clusters for {displayFacts.Count} facts. Please wait";
-            Application.DoEvents();
-            dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
+                dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
 
-            Envelope expand = MapHelper.GetExtents(clusters.FactLocations);
-            mapBox1.Map.ZoomToBox(expand);
-            mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
-            RefreshClusters();
-            txtCount.Text = $"{dgFacts.RowCount} Geolocated fact(s) displayed";
+                Envelope expand = MapHelper.GetExtents(clusters.FactLocations);
+                mapBox1.Map.ZoomToBox(expand);
+                mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
+                RefreshClusters();
+                txtCount.Text = $"{dgFacts.RowCount} Geolocated fact(s) displayed";
+            }
+            catch (Exception) { }
             Cursor = Cursors.Default;
         }
 
@@ -140,9 +144,15 @@ namespace FTAnalyzer.Forms
 
         void Places_FormClosed(object sender, FormClosedEventArgs e)
         {
-            DatabaseHelper.GeoLocationUpdated -= DatabaseHelper_GeoLocationUpdated;
-            tvPlaces.Nodes.Clear();
-            Dispose();
+            try
+            {
+                DatabaseHelper.GeoLocationUpdated -= DatabaseHelper_GeoLocationUpdated;
+                tvPlaces.Nodes.Clear();
+                Dispose();
+            }
+            catch
+            (Exception)
+            { }
         }
 
         void DgFacts_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
@@ -153,40 +163,48 @@ namespace FTAnalyzer.Forms
 
         void Places_Load(object sender, EventArgs e)
         {
-            TreeNode[] nodes = TreeViewHandler.Instance.GetAllLocationsTreeNodes(tvPlaces.Font, false);
-            tvPlaces.Nodes.AddRange(nodes);
-            int Width = (int)Application.UserAppDataRegistry.GetValue("Places size - width", this.Width);
-            int Height = (int)Application.UserAppDataRegistry.GetValue("Places size - height", this.Height);
-            int Top = (int)Application.UserAppDataRegistry.GetValue("Places position - top", this.Top);
-            int Left = (int)Application.UserAppDataRegistry.GetValue("Places position - left", this.Left);
-            this.Width = Width;
-            this.Height = Height;
-            this.Top = Top;
-            this.Left = Left;
-            isloading = false; // only turn off building map if completely done initializing
-            if (tvPlaces.Nodes.Count > 0)
-            {   // update map using first node as selected node
-                tvPlaces.SelectedNode = tvPlaces.Nodes[0];
+            try
+            {
+                TreeNode[] nodes = TreeViewHandler.Instance.GetAllLocationsTreeNodes(tvPlaces.Font, false);
+                tvPlaces.Nodes.AddRange(nodes);
+                int Width = (int)Application.UserAppDataRegistry.GetValue("Places size - width", this.Width);
+                int Height = (int)Application.UserAppDataRegistry.GetValue("Places size - height", this.Height);
+                int Top = (int)Application.UserAppDataRegistry.GetValue("Places position - top", this.Top);
+                int Left = (int)Application.UserAppDataRegistry.GetValue("Places position - left", this.Left);
+                this.Width = Width;
+                this.Height = Height;
+                this.Top = Top;
+                this.Left = Left;
+                isloading = false; // only turn off building map if completely done initializing
+                if (tvPlaces.Nodes.Count > 0)
+                {   // update map using first node as selected node
+                    tvPlaces.SelectedNode = tvPlaces.Nodes[0];
+                }
+                mh.CheckIfGeocodingNeeded(this, outputText);
+                Cursor = Cursors.Default;
+                SpecialMethods.SetFonts(this);
             }
-            mh.CheckIfGeocodingNeeded(this, outputText);
-            Cursor = Cursors.Default;
-            SpecialMethods.SetFonts(this);
+            catch (Exception) { }
         }
 
         void TvPlaces_AfterSelect(object sender, TreeViewEventArgs e) => BuildMap();
 
         void TvPlaces_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            Cursor = Cursors.WaitCursor; ;
-            FactLocation location = e.Node.Tag as FactLocation;
-            if (location != null)
+            try
             {
-                People frmInd = new People();
-                frmInd.SetLocation(location, e.Node.Level);
-                MainForm.DisposeDuplicateForms(frmInd);
-                frmInd.Show();
+                Cursor = Cursors.WaitCursor; ;
+                FactLocation location = e.Node.Tag as FactLocation;
+                if (location != null)
+                {
+                    People frmInd = new People();
+                    frmInd.SetLocation(location, e.Node.Level);
+                    MainForm.DisposeDuplicateForms(frmInd);
+                    frmInd.Show();
+                }
+                Cursor = Cursors.Default;
             }
-            Cursor = Cursors.Default;
+            catch (Exception) { }
         }
 
         void MapBox1_MapViewOnChange() => clusters.Refresh();

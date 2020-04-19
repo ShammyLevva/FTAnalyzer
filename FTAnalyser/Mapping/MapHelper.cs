@@ -1,4 +1,5 @@
 ﻿using FTAnalyzer.Forms;
+using FTAnalyzer.Utilities;
 using NetTopologySuite.Geometries;
 using SharpMap;
 using SharpMap.Data;
@@ -82,36 +83,47 @@ namespace FTAnalyzer.Mapping
 
         public static void OpenGeoLocations(FactLocation location, IProgress<string> outputText)
         {
-            GeocodeLocations geoLocations = null;
-            foreach (Form f in Application.OpenForms)
+            try
             {
-                if (f is GeocodeLocations)
+                GeocodeLocations geoLocations = null;
+                foreach (Form f in Application.OpenForms)
                 {
-                    f.BringToFront();
-                    f.Focus();
-                    geoLocations = (GeocodeLocations)f;
-                    break;
+                    if (f is GeocodeLocations)
+                    {
+                        f.BringToFront();
+                        f.Focus();
+                        geoLocations = (GeocodeLocations)f;
+                        break;
+                    }
                 }
+                if (geoLocations == null)
+                {
+                    geoLocations = new GeocodeLocations(outputText);
+                    geoLocations.Show();
+                }
+                // we now have opened form
+                geoLocations.SelectLocation(location);
             }
-            if (geoLocations == null)
-            {
-                geoLocations = new GeocodeLocations(outputText);
-                geoLocations.Show();
-            }
-            // we now have opened form
-            geoLocations.SelectLocation(location);
+            catch (Exception) { }
         }
 
         public void StartGeocoding(IProgress<string> outputText)
         {
-            if (!ft.Geocoding) // don't geocode if another geocode session in progress
+            try
             {
-                GeocodeLocations geo = new GeocodeLocations(outputText);
-                MainForm.DisposeDuplicateForms(geo);
-                geo.Show();
-                geo.StartGoogleGeoCoding(false);
-                geo.BringToFront();
-                geo.Focus();
+                if (!ft.Geocoding) // don't geocode if another geocode session in progress
+                {
+                    GeocodeLocations geo = new GeocodeLocations(outputText);
+                    MainForm.DisposeDuplicateForms(geo);
+                    geo.Show();
+                    geo.StartGoogleGeoCoding(false);
+                    geo.BringToFront();
+                    geo.Focus();
+                }
+            }
+            catch (Exception e)
+            {
+                UIHelpers.ShowMessage($"A problem occurred starting geocoding the error was:\n{e.Message}");
             }
         }
 
