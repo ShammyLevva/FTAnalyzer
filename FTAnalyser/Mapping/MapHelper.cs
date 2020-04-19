@@ -70,7 +70,7 @@ namespace FTAnalyzer.Mapping
             int notsearched = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)));
             if (notsearched > 0 && !ft.Geocoding)
             {
-                DialogResult res = MessageBox.Show("You have " + notsearched + " places with no map location do you want to search Google for the locations?",
+                DialogResult res = MessageBox.Show($"You have {notsearched} places with no map location do you want to search Google for the locations?",
                                                    "Geocode Locations", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
