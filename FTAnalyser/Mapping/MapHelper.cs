@@ -75,7 +75,8 @@ namespace FTAnalyzer.Mapping
                 if (res == DialogResult.Yes)
                 {
                     form.Cursor = Cursors.WaitCursor;
-                    StartGeocoding(outputText);
+                    //   StartGeocoding(outputText);
+                    UIHelpers.ShowMessage("Sorry Google have changed the method of accessing API data - this feature is unavailable until access method been reprogrammed.");
                     form.Cursor = Cursors.Default;
                 }
             }
