@@ -81,42 +81,48 @@ namespace FTAnalyzer.Forms
 
         void BirthdayEffectReport()
         {
-            List<Tuple<string, int>> birthdayEffect = FamilyTree.Instance.AllIndividuals.Where(x => x.BirthdayEffect).GroupBy(i => i.BirthMonth)
-                .Select(r => new Tuple<string, int>(r.Key, r.Count())).ToList();
-            List<Tuple<string, int>> exactDates = FamilyTree.Instance.AllIndividuals.Where(x => x.BirthDate.IsExact && x.DeathDate.IsExact).GroupBy(i => i.BirthMonth)
-                .Select(r => new Tuple<string, int>(r.Key, r.Count())).ToList();
-            birthdayEffect.Sort();
-            exactDates.Sort();
-            int beIndex = 0, edIndex = 0, beItem2 = 0, edItem2 = 0;
-            List<Tuple<string, string, string>> result = new List<Tuple<string, string, string>>();
-            for(int month=1; month<=12; month++)
+            try
             {
-                beItem2 = edItem2 = 0;
-                string monthStr = new DateTime(2000, month, 1).ToString("MM : MMMM");
-                if(month<=birthdayEffect.Count && birthdayEffect[beIndex].Item1 == monthStr)
-                    beItem2 = birthdayEffect[beIndex++].Item2;
-                if(month<=exactDates.Count && exactDates[edIndex].Item1 == monthStr)
-                    edItem2 = exactDates[edIndex++].Item2;
-                var column2 = $"{beItem2}/{edItem2}";
-                float percent = edItem2 == 0 ? 0f : (float)beItem2 / edItem2;
-                result.Add(new Tuple<string, string, string>(monthStr, column2, string.Format("{0:P2}",percent)));
+                List<Tuple<string, int>> birthdayEffect = FamilyTree.Instance.AllIndividuals.Where(x => x.BirthdayEffect).GroupBy(i => i.BirthMonth)
+                    .Select(r => new Tuple<string, int>(r.Key, r.Count())).ToList();
+                List<Tuple<string, int>> exactDates = FamilyTree.Instance.AllIndividuals.Where(x => x.BirthDate.IsExact && x.DeathDate.IsExact).GroupBy(i => i.BirthMonth)
+                    .Select(r => new Tuple<string, int>(r.Key, r.Count())).ToList();
+                birthdayEffect.Sort();
+                exactDates.Sort();
+                int beIndex = 0, edIndex = 0, beItem2 = 0, edItem2 = 0;
+                List<Tuple<string, string, string>> result = new List<Tuple<string, string, string>>();
+                for (int month = 1; month <= 12; month++)
+                {
+                    beItem2 = edItem2 = 0;
+                    string monthStr = new DateTime(2000, month, 1).ToString("MM : MMMM");
+                    if (month <= birthdayEffect.Count && birthdayEffect[beIndex].Item1 == monthStr)
+                        beItem2 = birthdayEffect[beIndex++].Item2;
+                    if (month <= exactDates.Count && exactDates[edIndex].Item1 == monthStr)
+                        edItem2 = exactDates[edIndex++].Item2;
+                    var column2 = $"{beItem2}/{edItem2}";
+                    float percent = edItem2 == 0 ? 0f : (float)beItem2 / edItem2;
+                    result.Add(new Tuple<string, string, string>(monthStr, column2, string.Format("{0:P2}", percent)));
+                }
+                dgStatistics.DataSource = new SortableBindingList<Tuple<string, string, string>>(result);
+                dgStatistics.Columns[0].Width = 150;
+                dgStatistics.Columns[0].SortMode = DataGridViewColumnSortMode.Automatic;
+                dgStatistics.Columns[0].HeaderText = "Birth Month";
+                dgStatistics.Columns[1].Width = 80;
+                dgStatistics.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dgStatistics.Columns[1].SortMode = DataGridViewColumnSortMode.Automatic;
+                dgStatistics.Columns[1].HeaderText = "Died Near Birthday";
+                dgStatistics.Columns[2].Width = 80;
+                dgStatistics.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dgStatistics.Columns[2].SortMode = DataGridViewColumnSortMode.Automatic;
+                dgStatistics.Columns[2].HeaderText = "Percentage";
+                dgStatistics.Sort(dgStatistics.Columns[0], ListSortDirection.Ascending);
+                Text = "Birthday Effect Report";
+                tsStatusLabel.Text = "Double click shows those born who died within 15 days of birthday.";
+                tsStatusLabel.Visible = true;
+            } catch(ArgumentException e)
+            {
+                UIHelpers.ShowMessage($"Sorry there's a problem with generating Birthday report.\nMessage is:{e.Message}");
             }
-            dgStatistics.DataSource = new SortableBindingList<Tuple<string, string, string>>(result);
-            dgStatistics.Columns[0].Width = 150;
-            dgStatistics.Columns[0].SortMode = DataGridViewColumnSortMode.Automatic;
-            dgStatistics.Columns[0].HeaderText = "Birth Month";
-            dgStatistics.Columns[1].Width = 80;
-            dgStatistics.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgStatistics.Columns[1].SortMode = DataGridViewColumnSortMode.Automatic;
-            dgStatistics.Columns[1].HeaderText = "Died Near Birthday";
-            dgStatistics.Columns[2].Width = 80;
-            dgStatistics.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgStatistics.Columns[2].SortMode = DataGridViewColumnSortMode.Automatic;
-            dgStatistics.Columns[2].HeaderText = "Percentage";
-            dgStatistics.Sort(dgStatistics.Columns[0], ListSortDirection.Ascending);
-            Text = "Birthday Effect Report";
-            tsStatusLabel.Text = "Double click shows those born who died within 15 days of birthday.";
-            tsStatusLabel.Visible = true;
         }
 
         void DgStatistics_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

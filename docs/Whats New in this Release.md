@@ -8,6 +8,7 @@ Added error comment on Facts export to Excel
 **Bugfixes**  
 Web special characters were preventing recognition of valid census references  
 Don't export class name if icon in exports to Excel  
+Fix Birthday Effect report crash  
 
 #### Updated Release Version 7.6.6.0 16th Apr 2020  
 **Bugfixes**  
