@@ -1,10 +1,10 @@
-#### Updated Release Version 7.7.0.0 18th Apr 2020  
+#### Updated Release Version 7.7.0.0 20th Apr 2020  
 **Updates**  
 Added new Census problem facts report  
 Added new auto created census fact report  
 Updated links to Parish boundary files that were locked on old Codeplex site  
 Added error comment on Facts export to Excel  
-Disable Google API calls for now until new method worked out  
+Fix Google API calls when request denied    
 
 **Bugfixes**  
 Web special characters were preventing recognition of valid census references  
