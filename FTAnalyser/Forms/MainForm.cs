@@ -6,6 +6,7 @@ using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
 using Ionic.Zip;
+using Printing.DataGridViewPrint.Tools;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -30,7 +31,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.7.0.0-beta 5";
+        public static string VERSION = "7.7.0.0";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1828,13 +1829,9 @@ namespace FTAnalyzer
 
         enum Orientation { Landscape, Portrait }
 
-#pragma warning disable IDE0060 // Remove unused parameter
         void PrintDataGrid(Orientation orientation, DataGridView dg, string title)
-#pragma warning restore IDE0060 // Remove unused parameter
         {
-            //PrintingDataGridViewProvider printProvider = PrintingDataGridViewProvider.Create(
-            //    printDocument, dg, true, true, true,
-            //    new TitlePrintBlock(title), null, null);
+            PrintingDataGridViewProvider.Create(printDocument, dg, true, true, true, new TitlePrintBlock(title), null, null);
             printDialog.PrinterSettings.DefaultPageSettings.Landscape = (orientation == Orientation.Landscape);
             printDialog.PrinterSettings.DefaultPageSettings.Margins.Left = 50;
             printDialog.PrinterSettings.DefaultPageSettings.Margins.Right = 50;
