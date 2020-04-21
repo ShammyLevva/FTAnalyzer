@@ -1,3 +1,8 @@
+#### Updated Release Version 7.7.1 21st Apr 2020  
+**Updates**  
+Added extra Canadian census reference check  
+Added Windows Store check for analytics  
+
 #### Updated Release Version 7.7.0.0 20th Apr 2020  
 **Updates**  
 Added new Census problem facts report  
