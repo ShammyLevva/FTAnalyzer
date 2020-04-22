@@ -1,4 +1,5 @@
 ﻿using FTAnalyzer.Filters;
+using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
 using System;
@@ -271,6 +272,8 @@ namespace FTAnalyzer.Forms
         void CbRegion_SelectedIndexChanged(object sender, EventArgs e)
         {
             Application.UserAppDataRegistry.SetValue("Default Region", cbRegion.SelectedItem.ToString());
+            Settings.Default.defaultURLRegion = cbRegion.SelectedItem.ToString();
+            Settings.Default.Save();
             dgCensus.Refresh(); // force update of tooltips
             dgCensus.Focus();
         }

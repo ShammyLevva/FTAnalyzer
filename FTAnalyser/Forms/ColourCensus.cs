@@ -1,4 +1,5 @@
-﻿using FTAnalyzer.Utilities;
+﻿using FTAnalyzer.Properties;
+using FTAnalyzer.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -266,6 +267,8 @@ namespace FTAnalyzer.Forms
         void CbRegion_SelectedIndexChanged(object sender, EventArgs e)
         {
             Application.UserAppDataRegistry.SetValue("Default Region", cbRegion.SelectedItem.ToString());
+            Settings.Default.defaultURLRegion = cbRegion.SelectedItem.ToString();
+            Settings.Default.Save();
             dgReportSheet.Refresh(); // forces update of tooltips
             dgReportSheet.Focus();
         }

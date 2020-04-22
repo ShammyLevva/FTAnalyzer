@@ -1,8 +1,11 @@
-#### Updated Release Version 7.7.1 21st Apr 2020  
+#### Updated Release Version 7.7.1 22nd Apr 2020  
 **Updates**  
 Added FamilySearchID recognition and clickable link in Individuals Report  
 Added extra Canadian census reference check  
 Added Windows Store check for analytics  
+
+**Bugfixes**  
+1911 FindMyPast UK Census links were broken by v7.6.5  
 
 #### Updated Release Version 7.7.0.0 20th Apr 2020  
 **Updates**  

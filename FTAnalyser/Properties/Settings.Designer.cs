@@ -8,16 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using FTAnalyzer.Utilities;
-using System;
-using System.Configuration;
-using System.IO;
-
 namespace FTAnalyzer.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.8.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.5.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -77,44 +72,17 @@ namespace FTAnalyzer.Properties {
                 this["StartTime"] = value;
             }
         }
-
-        public override void Save()
-        {
-            try
-            {
-                ClearUserConfigFile();
-                base.Save();
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".co.uk")]
+        public string defaultURLRegion {
+            get {
+                return ((string)(this["defaultURLRegion"]));
             }
-            catch (ConfigurationErrorsException)
-            {
-                var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoaming);
-                var userConfigPath = config.FilePath;
-                UIHelpers.ShowMessage($"Failed to write configuration file. Check you have write permission to file\n\n{userConfigPath}");
+            set {
+                this["defaultURLRegion"] = value;
             }
         }
-
-        public static void ClearUserConfigFile()
-        {
-            //Touch each setting
-            foreach (SettingsProperty property in Settings.Default.Properties)
-            {
-                if (property.DefaultValue != Settings.Default[property.Name])
-                    Settings.Default[property.Name] = Settings.Default[property.Name];
-            }
-
-            //Delete the user.config file
-            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoaming);
-            var userConfigPath = config.FilePath;
-            try
-            {
-                if (File.Exists(userConfigPath) == true)
-                    File.Delete(userConfigPath);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception thrown while deleting user.config : {0}", ex.ToString());
-            }
-        }
-
     }
 }
