@@ -316,10 +316,11 @@ namespace FTAnalyzer
             dgSurnames.DataSource = null;
             dgDuplicates.DataSource = null;
             dgSources.DataSource = null;
-            ExtensionMethods.DoubleBuffered(dgCountries, true);
-            ExtensionMethods.DoubleBuffered(dgRegions, true);
-            ExtensionMethods.DoubleBuffered(dgSubRegions, true);
+            ExtensionMethods.DoubleBuffered(dgPlaces, true);
             ExtensionMethods.DoubleBuffered(dgAddresses, true);
+            ExtensionMethods.DoubleBuffered(dgSubRegions, true);
+            ExtensionMethods.DoubleBuffered(dgRegions, true);
+            ExtensionMethods.DoubleBuffered(dgCountries, true);
             ExtensionMethods.DoubleBuffered(dgIndividuals, true);
             ExtensionMethods.DoubleBuffered(dgFamilies, true);
             ExtensionMethods.DoubleBuffered(dgTreeTops, true);
@@ -2116,9 +2117,15 @@ namespace FTAnalyzer
                     }
                 }
             }
-            if (e.Clicks == 2)
+            if (hti.RowIndex >= 0 && hti.ColumnIndex >= 0)
             {
-                if (hti.RowIndex >= 0 && hti.ColumnIndex >= 0)
+                if (dgIndividuals.Rows[hti.RowIndex].Cells[hti.ColumnIndex].GetType() == typeof(DataGridViewLinkCell))
+                {
+                    string familySearchID = dgIndividuals.Rows[hti.RowIndex].Cells[hti.ColumnIndex].Value.ToString();
+                    string url = $"https://www.familysearch.org/tree/person/details/{familySearchID}";
+                    SpecialMethods.VisitWebsite(url);
+                }
+                else if (e.Clicks == 2)
                 {
                     string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
                     ShowFacts(indID);
@@ -2132,6 +2139,16 @@ namespace FTAnalyzer
             {
                 string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
                 ShowFacts(indID);
+            }
+        }
+
+        void DgIndividuals_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow r in dgIndividuals.Rows)
+            {
+                string familySearchID = r.Cells["FamilySearchID"].Value.ToString();
+                if (!string.IsNullOrEmpty(familySearchID))
+                    r.Cells["FamilySearchID"] = new DataGridViewLinkCell();
             }
         }
 

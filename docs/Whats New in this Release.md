@@ -1,5 +1,6 @@
 #### Updated Release Version 7.7.1 21st Apr 2020  
 **Updates**  
+Added FamilySearchID recognition and clickable link in Individuals Report  
 Added extra Canadian census reference check  
 Added Windows Store check for analytics  
 

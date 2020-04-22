@@ -2988,6 +2988,7 @@ namespace FTAnalyzer
             this.dgIndividuals.TabIndex = 1;
             this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgIndividuals_CellDoubleClick);
             this.dgIndividuals.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgIndividuals_MouseDown);
+            this.dgIndividuals.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DgIndividuals_DataBindingComplete);
             // 
             // tabFamilies
             // 
