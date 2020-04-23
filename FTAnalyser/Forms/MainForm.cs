@@ -31,7 +31,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.7.1.0";
+        public static string VERSION = "7.7.2.0-beta2";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1092,34 +1092,38 @@ namespace FTAnalyzer
         {
             if (!ft.Geocoding) // don't geocode if another geocode session in progress
             {
-                HourGlass(true);
-                GeocodeLocations geo = null;
-                foreach (Form f in Application.OpenForms)
+                try
                 {
-                    if (f is GeocodeLocations)
+                    HourGlass(true);
+                    GeocodeLocations geo = null;
+                    foreach (Form f in Application.OpenForms)
                     {
-                        geo = f as GeocodeLocations;
-                        break;
+                        if (f is GeocodeLocations)
+                        {
+                            geo = f as GeocodeLocations;
+                            break;
+                        }
                     }
+                    if (geo == null)
+                        geo = new GeocodeLocations(new Progress<string>(value => { rtbOutput.AppendText(value); }));
+                    geo.Show();
+                    geo.Focus();
+                    Application.DoEvents();
+                    switch (type)
+                    {
+                        case GecodingType.Google:
+                            geo.StartGoogleGeoCoding(false);
+                            break;
+                        case GecodingType.OS:
+                            geo.StartOSGeoCoding();
+                            break;
+                        case GecodingType.Reverse:
+                            geo.StartReverseGeoCoding();
+                            break;
+                    }
+                    HourGlass(false);
                 }
-                if (geo == null)
-                    geo = new GeocodeLocations(new Progress<string>(value => { rtbOutput.AppendText(value); }));
-                geo.Show();
-                geo.Focus();
-                Application.DoEvents();
-                switch (type)
-                {
-                    case GecodingType.Google:
-                        geo.StartGoogleGeoCoding(false);
-                        break;
-                    case GecodingType.OS:
-                        geo.StartOSGeoCoding();
-                        break;
-                    case GecodingType.Reverse:
-                        geo.StartReverseGeoCoding();
-                        break;
-                }
-                HourGlass(false);
+                catch (Exception) { }
             }
         }
 

@@ -85,8 +85,12 @@ namespace FTAnalyzer.Forms
 
         public GoogleMap()
         {
-            InitializeComponent();
-            Top += NativeMethods.TopTaskbarOffset;
+            try
+            {
+                InitializeComponent();
+                Top += NativeMethods.TopTaskbarOffset;
+            }
+            catch (Exception) { }
         }
 
         public void ShowLocation(FactLocation loc, int level)
@@ -146,19 +150,15 @@ namespace FTAnalyzer.Forms
         public static GeoResponse CallGoogleGeocode(string address)
         {
             string encodedAddress = HttpUtility.UrlEncode(address.Replace(" ", "+"));
-            string url = string.Format(
-                    "https://maps.googleapis.com/maps/api/geocode/json?address={0}&region=uk&sensor=false&key={1}",
-                    encodedAddress, GoogleAPIKey.KeyValue
-                    );
+            string url = $"https://maps.googleapis.com/maps/api/geocode/json?address={encodedAddress}&region=uk&sensor=false&key={GoogleAPIKey.KeyValue}";
             return GetGeoResponse(url);
         }
 
         public static GeoResponse CallGoogleReverseGeocode(double latitude, double longitude)
         {
-            string url = string.Format(
-                    "https://maps.googleapis.com/maps/api/geocode/json?latlng={0},{1}&region=uk&sensor=false&key={2}",
-                    HttpUtility.UrlEncode(latitude.ToString()), HttpUtility.UrlEncode(longitude.ToString()), GoogleAPIKey.KeyValue
-                    );
+            string lat = HttpUtility.UrlEncode(latitude.ToString());
+            string lng = HttpUtility.UrlEncode(longitude.ToString());
+            string url = $"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&region=uk&sensor=false&key={GoogleAPIKey.KeyValue}";
             return GetGeoResponse(url);
         }
 
@@ -168,7 +168,7 @@ namespace FTAnalyzer.Forms
             try
             {
                 HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
-                request.Timeout = 3000; // set timeout to 3 seconds from default 100 seconds
+                request.Timeout = 10000; // set timeout to 3 seconds from default 100 seconds
                 request.ReadWriteTimeout = 10000;
                 request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
                 request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
@@ -193,7 +193,7 @@ namespace FTAnalyzer.Forms
                     MessageBox.Show($"Unable to contact https://maps.googleapis.com error was: {ex.Message}", "FTAnalyzer");
                 res = null;
             }
-            if (res.Status == "REQUEST_DENIED")
+            if (res!= null && res.Status == "REQUEST_DENIED")
                 UIHelpers.ShowMessage("Google returned REQUEST_DENIED - please check you have a valid key and enabled the Geocoding API & Places API");
             return res;
         }
@@ -205,7 +205,7 @@ namespace FTAnalyzer.Forms
         {
             double seconds = sleepinterval / 1000;
             if (sleepinterval > 500)
-                OnWaitingForGoogle($"Over Google limit. Waiting {seconds} seconds.");
+                OnWaitingForGoogle($"Google Timeout. Waiting {seconds} seconds.");
             if (sleepinterval >= 20000)
                 return MaxedOut();
             for (int interval = 0; interval < sleepinterval; interval += 1000)
@@ -231,7 +231,7 @@ namespace FTAnalyzer.Forms
             }
             else
             {
-                if (res.Status != "REQUEST_DENIED")
+                if (res!= null && res.Status != "REQUEST_DENIED")
                 {
                     OnWaitingForGoogle(string.Empty); // going well clear any previous message
                                                       // no throttling, go a little bit faster
@@ -288,7 +288,7 @@ namespace FTAnalyzer.Forms
         static GeoResponse MaxedOut()
         {
             string message = string.IsNullOrEmpty(Properties.MappingSettings.Default.GoogleAPI) ?
-                                "Max Google GeoLocations exceeded for today.\nConsider getting your own FREE Google API Key for 40,000 lookups a day. See Help Menu.\n" :
+                                "Google Geocoding timing out. Possibly exceeded max GeoLocations for today.\nConsider getting your own FREE Google API Key for 40,000 lookups a day. See Help Menu.\n" :
                                 "Max Google GeoLocations exceeded for today.\n";
             OnWaitingForGoogle(message);
             GeoResponse response = new GeoResponse
