@@ -849,7 +849,7 @@ namespace SharpMap.Data.Providers
 
             // Configuration for GetFeature request */
             WFSClientHTTPConfigurator config = new WFSClientHTTPConfigurator(_textResources);
-            config.configureForWfsGetFeatureRequest(_httpClientUtil, _featureTypeInfo, _label, bbox, _ogcFilter,
+            config.ConfigureForWfsGetFeatureRequest(_httpClientUtil, _featureTypeInfo, _label, bbox, _ogcFilter,
                                                     _getFeatureGETRequest, UseCache);
 
             try
@@ -983,7 +983,7 @@ namespace SharpMap.Data.Providers
                     _featureTypeInfoQueryManager =
                         new XPathQueryManager_CompiledExpressionsDecorator(new XPathQueryManager());
                     _featureTypeInfoQueryManager.SetDocumentToParse(
-                        config.configureForWfsGetCapabilitiesRequest(_httpClientUtil, _getCapabilitiesUri));
+                        config.ConfigureForWfsGetCapabilitiesRequest(_httpClientUtil, _getCapabilitiesUri));
                     /* Namespaces for XPath queries */
                     _featureTypeInfoQueryManager.AddNamespace(_textResources.NSWFSPREFIX, _textResources.NSWFS);
                     _featureTypeInfoQueryManager.AddNamespace(_textResources.NSOWSPREFIX, _textResources.NSOWS);
@@ -1127,7 +1127,7 @@ namespace SharpMap.Data.Providers
 
                 /* Initialize IXPathQueryManager with configured HttpClientUtil */
                 describeFeatureTypeQueryManager.ResetNamespaces();
-                describeFeatureTypeQueryManager.SetDocumentToParse(config.configureForWfsDescribeFeatureTypeRequest
+                describeFeatureTypeQueryManager.SetDocumentToParse(config.ConfigureForWfsDescribeFeatureTypeRequest
                                                                        (_httpClientUtil, describeFeatureTypeUri,
                                                                         featureQueryName));
 
@@ -1361,7 +1361,7 @@ namespace SharpMap.Data.Providers
             /// Configures for WFS 'GetCapabilities' request using an instance implementing <see cref="SharpMap.Utilities.Wfs.IWFS_TextResources"/>.
             /// The <see cref="SharpMap.Utilities.Wfs.HttpClientUtil"/> instance is returned for immediate usage. 
             /// </summary>
-            internal HttpClientUtil configureForWfsGetCapabilitiesRequest(HttpClientUtil httpClientUtil,
+            internal HttpClientUtil ConfigureForWfsGetCapabilitiesRequest(HttpClientUtil httpClientUtil,
                                                                           string targetUrl)
             {
                 httpClientUtil.Reset();
@@ -1373,7 +1373,7 @@ namespace SharpMap.Data.Providers
             /// Configures for WFS 'DescribeFeatureType' request using an instance implementing <see cref="SharpMap.Utilities.Wfs.IWFS_TextResources"/>.
             /// The <see cref="SharpMap.Utilities.Wfs.HttpClientUtil"/> instance is returned for immediate usage. 
             /// </summary>
-            internal HttpClientUtil configureForWfsDescribeFeatureTypeRequest(HttpClientUtil httpClientUtil,
+            internal HttpClientUtil ConfigureForWfsDescribeFeatureTypeRequest(HttpClientUtil httpClientUtil,
                                                                               string targetUrl,
                                                                               string featureTypeName)
             {
@@ -1386,7 +1386,7 @@ namespace SharpMap.Data.Providers
             /// Configures for WFS 'GetFeature' request using an instance implementing <see cref="SharpMap.Utilities.Wfs.IWFS_TextResources"/>.
             /// The <see cref="SharpMap.Utilities.Wfs.HttpClientUtil"/> instance is returned for immediate usage. 
             /// </summary>
-            internal HttpClientUtil configureForWfsGetFeatureRequest(HttpClientUtil httpClientUtil,
+            internal HttpClientUtil ConfigureForWfsGetFeatureRequest(HttpClientUtil httpClientUtil,
                                                                      WfsFeatureTypeInfo featureTypeInfo,
                                                                      string labelProperty, Envelope boundingBox,
                                                                      IFilter filter, bool GET, bool loadAllElements)

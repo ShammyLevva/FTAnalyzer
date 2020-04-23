@@ -20,22 +20,26 @@ namespace FTAnalyzer
 
         public MapIndividuals(List<MapLocation> locations, string year, Form mapForm)
         {
-            InitializeComponent();
-            Top += NativeMethods.TopTaskbarOffset;
-            this.mapForm = mapForm;
-            this.locations = locations;
-            dgIndividuals.AutoGenerateColumns = false;
-            dgIndividuals.DataSource = new SortableBindingList<MapLocation>(this.locations);
-            reportFormHelper = new ReportFormHelper(this, this.Text, dgIndividuals, this.ResetTable, "Map Individuals");
-            italicFont = new Font(dgIndividuals.DefaultCellStyle.Font, FontStyle.Italic);
-            reportFormHelper.LoadColumnLayout("MapIndividualColumns.xml");
-            tsRecords.Text = this.locations.Count + " Records. " + Properties.Messages.Hints_Individual;
-            MapLocation mostCommon = this.locations.MostCommon();
-            string titleText = mostCommon.Location.ToString();
-            if (mapForm is TimeLine)
-                titleText += " in " + year;
-            Text = this.locations.Count < 2 ? titleText : "Centred near " + titleText;
-            DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
+            try
+            {
+                InitializeComponent();
+                Top += NativeMethods.TopTaskbarOffset;
+                this.mapForm = mapForm;
+                this.locations = locations;
+                dgIndividuals.AutoGenerateColumns = false;
+                dgIndividuals.DataSource = new SortableBindingList<MapLocation>(this.locations);
+                reportFormHelper = new ReportFormHelper(this, this.Text, dgIndividuals, this.ResetTable, "Map Individuals");
+                italicFont = new Font(dgIndividuals.DefaultCellStyle.Font, FontStyle.Italic);
+                reportFormHelper.LoadColumnLayout("MapIndividualColumns.xml");
+                tsRecords.Text = this.locations.Count + " Records. " + Properties.Messages.Hints_Individual;
+                MapLocation mostCommon = this.locations.MostCommon();
+                string titleText = mostCommon.Location.ToString();
+                if (mapForm is TimeLine)
+                    titleText += " in " + year;
+                Text = this.locations.Count < 2 ? titleText : "Centred near " + titleText;
+                DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
+            }
+            catch (Exception) { }
         }
 
         void ResetTable()

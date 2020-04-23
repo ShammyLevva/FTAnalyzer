@@ -121,36 +121,40 @@ namespace FTAnalyzer
 #endif
         void SetupFonts()
         {
-            SpecialMethods.SetFonts(this);
-            boldFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Bold);
-            normalFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Regular);
-            byte[] fontData = Resources.KUNSTLER;
-            IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
-            System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
-            uint dummy = 0;
-            fonts.AddMemoryFont(fontPtr, Resources.KUNSTLER.Length);
-            NativeMethods.AddFontMemResourceEx(fontPtr, (uint)Resources.KUNSTLER.Length, IntPtr.Zero, ref dummy);
-            System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
-            switch (FontSettings.Default.FontNumber)
+            try
             {
-                case 1:
-                    handwritingFont = new Font(fonts.Families[0], 46.0F, FontStyle.Bold);
-                    break;
-                case 2:
-                    handwritingFont = new Font(fonts.Families[0], 68.0F, FontStyle.Bold);
-                    break;
-                case 3:
-                    handwritingFont = new Font(fonts.Families[0], 72.0F, FontStyle.Bold);
-                    break;
-                case 4:
-                    handwritingFont = new Font(fonts.Families[0], 90.0F, FontStyle.Bold);
-                    break;
+                SpecialMethods.SetFonts(this);
+                boldFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Bold);
+                normalFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Regular);
+                byte[] fontData = Resources.KUNSTLER;
+                IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
+                System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
+                uint dummy = 0;
+                fonts.AddMemoryFont(fontPtr, Resources.KUNSTLER.Length);
+                NativeMethods.AddFontMemResourceEx(fontPtr, (uint)Resources.KUNSTLER.Length, IntPtr.Zero, ref dummy);
+                System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
+                switch (FontSettings.Default.FontNumber)
+                {
+                    case 1:
+                        handwritingFont = new Font(fonts.Families[0], 46.0F, FontStyle.Bold);
+                        break;
+                    case 2:
+                        handwritingFont = new Font(fonts.Families[0], 68.0F, FontStyle.Bold);
+                        break;
+                    case 3:
+                        handwritingFont = new Font(fonts.Families[0], 72.0F, FontStyle.Bold);
+                        break;
+                    case 4:
+                        handwritingFont = new Font(fonts.Families[0], 90.0F, FontStyle.Bold);
+                        break;
+                }
+                LbProgramName.Font = handwritingFont;
+                pictureBox1.Left = LbProgramName.Right;
+                splitGedcom.SplitterDistance = Math.Max(pbRelationships.Bottom + 18, 110);
+                UpdateDataErrorsDisplay();
             }
-            LbProgramName.Font = handwritingFont;
-            pictureBox1.Left = LbProgramName.Right;
-            splitGedcom.SplitterDistance = Math.Max(pbRelationships.Bottom + 18, 110);
-            UpdateDataErrorsDisplay();
-        }
+            catch (Exception) { } // for font sizing exception
+         }
 
         void RegisterEventHandlers()
         {

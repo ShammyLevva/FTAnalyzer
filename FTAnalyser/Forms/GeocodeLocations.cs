@@ -37,27 +37,31 @@ namespace FTAnalyzer.Forms
 
         public GeocodeLocations(IProgress<string> outputText)
         {
-            InitializeComponent();
-            Top += NativeMethods.TopTaskbarOffset;
-            ft = FamilyTree.Instance;
-            refreshingMenus = false;
-            locations = ft.AllGeocodingLocations;
-            queue = new ConcurrentQueue<FactLocation>();
-            CopyLocation = FactLocation.UNKNOWN_LOCATION;
-            this.outputText = outputText;
-            mnuPasteLocation.Enabled = false;
-            dgLocations.AutoGenerateColumns = false;
-            reportFormHelper = new ReportFormHelper(this, this.Text, dgLocations, this.ResetTable, "Geocode Locations");
-            italicFont = new Font(dgLocations.DefaultCellStyle.Font, FontStyle.Italic);
-            reportFormHelper.LoadColumnLayout("GeocodeLocationsColumns.xml");
-            mnuGoogleGeocodeLocations.Enabled = !ft.Geocoding; // disable menu if already geocoding
-            mnuEditLocation.Enabled = !ft.Geocoding;
-            mnuReverseGeocode.Enabled = !ft.Geocoding;
-            mnuOSGeocodeLocations.Enabled = !ft.Geocoding;
-            SetupFilterMenu();
-            SetStatusText();
-            CheckGoogleStatusCodes(locations);
-            UpdateGridWithFilters(false);
+            try
+            {
+                InitializeComponent();
+                Top += NativeMethods.TopTaskbarOffset;
+                ft = FamilyTree.Instance;
+                refreshingMenus = false;
+                locations = ft.AllGeocodingLocations;
+                queue = new ConcurrentQueue<FactLocation>();
+                CopyLocation = FactLocation.UNKNOWN_LOCATION;
+                this.outputText = outputText;
+                mnuPasteLocation.Enabled = false;
+                dgLocations.AutoGenerateColumns = false;
+                reportFormHelper = new ReportFormHelper(this, this.Text, dgLocations, this.ResetTable, "Geocode Locations");
+                italicFont = new Font(dgLocations.DefaultCellStyle.Font, FontStyle.Italic);
+                reportFormHelper.LoadColumnLayout("GeocodeLocationsColumns.xml");
+                mnuGoogleGeocodeLocations.Enabled = !ft.Geocoding; // disable menu if already geocoding
+                mnuEditLocation.Enabled = !ft.Geocoding;
+                mnuReverseGeocode.Enabled = !ft.Geocoding;
+                mnuOSGeocodeLocations.Enabled = !ft.Geocoding;
+                SetupFilterMenu();
+                SetStatusText();
+                CheckGoogleStatusCodes(locations);
+                UpdateGridWithFilters(false);
+            }
+            catch (Exception) { }
         }
 
         void SetStatusText()

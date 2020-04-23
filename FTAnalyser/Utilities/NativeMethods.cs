@@ -52,7 +52,7 @@ namespace FTAnalyzer.Utilities
 
         static int GetEdge(RECT rc)
         {
-            int uEdge = -1;
+            int uEdge;
             if (rc.top == rc.left && rc.bottom > rc.right)
                 uEdge = (int)ABEdge.ABE_LEFT;
             else if (rc.top == rc.left && rc.bottom < rc.right)

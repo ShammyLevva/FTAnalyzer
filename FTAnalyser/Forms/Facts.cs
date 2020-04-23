@@ -28,23 +28,27 @@ namespace FTAnalyzer.Forms
 
         Facts()
         {
-            InitializeComponent();
-            Top += NativeMethods.TopTaskbarOffset;
-            facts = new SortableBindingList<IDisplayFact>();
-            facts.SortFinished += new EventHandler(Grid_SortFinished);
-            allFacts = false;
-            CensusRefReport = false;
-            dgFacts.AutoGenerateColumns = false;
-            ExtensionMethods.DoubleBuffered(dgFacts, true);
-            reportFormHelper = new ReportFormHelper(this, Text, dgFacts, ResetTable, "Facts");
-            italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
-            linkFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Underline);
-            dgFacts.Columns["IndividualID"].Visible = true;
-            dgFacts.Columns["CensusReference"].Visible = true; 
-            dgFacts.Columns["IgnoreFact"].Visible = false;
-            dgFacts.ReadOnly = true;
-            sep1.Visible = false;
-            btnShowHideFacts.Visible = false;
+            try
+            {
+                InitializeComponent();
+                Top += NativeMethods.TopTaskbarOffset;
+                facts = new SortableBindingList<IDisplayFact>();
+                facts.SortFinished += new EventHandler(Grid_SortFinished);
+                allFacts = false;
+                CensusRefReport = false;
+                dgFacts.AutoGenerateColumns = false;
+                ExtensionMethods.DoubleBuffered(dgFacts, true);
+                reportFormHelper = new ReportFormHelper(this, Text, dgFacts, ResetTable, "Facts");
+                italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
+                linkFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Underline);
+                dgFacts.Columns["IndividualID"].Visible = true;
+                dgFacts.Columns["CensusReference"].Visible = true;
+                dgFacts.Columns["IgnoreFact"].Visible = false;
+                dgFacts.ReadOnly = true;
+                sep1.Visible = false;
+                btnShowHideFacts.Visible = false;
+            }
+            catch (Exception) { }
         }
 
         void Grid_SortFinished(object sender, EventArgs e) => SetBackColour();

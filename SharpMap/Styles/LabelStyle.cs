@@ -79,20 +79,20 @@ namespace SharpMap.Styles
 
         #endregion
 
-        private Brush _BackColor;
-        private SizeF _CollisionBuffer;
-        private bool _CollisionDetection;
+        Brush _BackColor;
+        SizeF _CollisionBuffer;
+        bool _CollisionDetection;
 
-        private Font _Font;
+        Font _Font;
 
-        private Color _ForeColor;
-        private Pen _Halo;
-        private HorizontalAlignmentEnum _HorizontalAlignment;
-        private PointF _Offset;
-        private VerticalAlignmentEnum _VerticalAlignment;
-        private float _rotation;
-        private bool _ignoreLength;
-        private bool _isTextOnPath = false;
+        Color _ForeColor;
+        Pen _Halo;
+        HorizontalAlignmentEnum _HorizontalAlignment;
+        PointF _Offset;
+        VerticalAlignmentEnum _VerticalAlignment;
+        float _rotation;
+        bool _ignoreLength;
+        bool _isTextOnPath = false;
         /// <summary>
         /// get or set label on path
         /// </summary>

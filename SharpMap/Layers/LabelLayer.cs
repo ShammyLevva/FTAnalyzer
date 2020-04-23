@@ -811,7 +811,7 @@ namespace SharpMap.Layers
         //    return path;
         //}
 
-        private static void CalculateLabelOnLinestring(LineString line, ref BaseLabel baseLabel, Map map)
+        static void CalculateLabelOnLinestring(LineString line, ref BaseLabel baseLabel, Map map)
         {
             double dx, dy;
             var label = baseLabel as Label;
@@ -846,7 +846,7 @@ namespace SharpMap.Layers
             label.Location = map.WorldToImage(new Coordinate(tmpx, tmpy));
         }
 
-        private static void CalculateLabelAroundOnLineString(LineString line, ref BaseLabel label, MapViewport map, System.Drawing.Graphics g, System.Drawing.SizeF textSize)
+        private static void CalculateLabelAroundOnLineString(LineString line, ref BaseLabel label, MapViewport map, System.Drawing.Graphics g, SizeF textSize)
         {
             var sPoints = line.Coordinates;
 

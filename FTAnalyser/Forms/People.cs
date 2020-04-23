@@ -24,15 +24,19 @@ namespace FTAnalyzer.Forms
 
         public People()
         {
-            InitializeComponent();
-            Top += NativeMethods.TopTaskbarOffset;
-            indReportFormHelper = new ReportFormHelper(this, Text, dgIndividuals, ResetTable, "People");
-            famReportFormHelper = new ReportFormHelper(this, Text, dgFamilies, ResetTable, "People");
-            ExtensionMethods.DoubleBuffered(dgIndividuals, true);
-            ExtensionMethods.DoubleBuffered(dgFamilies, true);
-            boldFont = new Font(dgFamilies.DefaultCellStyle.Font, FontStyle.Bold);
-            normalFont = new Font(dgFamilies.DefaultCellStyle.Font, FontStyle.Regular);
-            SetSaveButtonsStatus(false);
+            try
+            {
+                InitializeComponent();
+                Top += NativeMethods.TopTaskbarOffset;
+                indReportFormHelper = new ReportFormHelper(this, Text, dgIndividuals, ResetTable, "People");
+                famReportFormHelper = new ReportFormHelper(this, Text, dgFamilies, ResetTable, "People");
+                ExtensionMethods.DoubleBuffered(dgIndividuals, true);
+                ExtensionMethods.DoubleBuffered(dgFamilies, true);
+                boldFont = new Font(dgFamilies.DefaultCellStyle.Font, FontStyle.Bold);
+                normalFont = new Font(dgFamilies.DefaultCellStyle.Font, FontStyle.Regular);
+                SetSaveButtonsStatus(false);
+            }
+            catch (Exception) { }
         }
 
         void SetSaveButtonsStatus(bool value)

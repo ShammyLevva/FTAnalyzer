@@ -62,7 +62,7 @@ namespace FTAnalyzer.UserControls
             this.tbFontScale.Size = new System.Drawing.Size(309, 45);
             this.tbFontScale.TabIndex = 23;
             this.tbFontScale.Value = 1;
-            this.tbFontScale.Scroll += new System.EventHandler(this.tbFontScale_Scroll);
+            this.tbFontScale.Scroll += new System.EventHandler(this.TbFontScale_Scroll);
             // 
             // label1
             // 

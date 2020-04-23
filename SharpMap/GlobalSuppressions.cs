@@ -6,3 +6,8 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>", Scope = "member", Target = "~M:SharpMap.CoordinateSystems.CoordinateSystemServices.CreateCoordinateSystem(System.String)~ProjNet.CoordinateSystems.CoordinateSystem")]
+[assembly: SuppressMessage("Usage", "CA2235:Mark all non-serializable fields", Justification = "<Pending>", Scope = "member", Target = "~F:SharpMap.Styles.LabelStyle._BackColor")]
+[assembly: SuppressMessage("Usage", "CA2235:Mark all non-serializable fields", Justification = "<Pending>", Scope = "member", Target = "~F:SharpMap.Styles.LabelStyle._Halo")]
+[assembly: SuppressMessage("Usage", "CA2235:Mark all non-serializable fields", Justification = "<Pending>", Scope = "member", Target = "~P:SharpMap.Rendering.Symbolizer.CharacterPointSymbolizer.Foreground")]
+[assembly: SuppressMessage("Usage", "CA2235:Mark all non-serializable fields", Justification = "<Pending>", Scope = "member", Target = "~P:SharpMap.Rendering.Symbolizer.CharacterPointSymbolizer.HaloBrush")]
+[assembly: SuppressMessage("Usage", "CA2235:Mark all non-serializable fields", Justification = "<Pending>", Scope = "member", Target = "~P:SharpMap.Rendering.Symbolizer.CharacterPointSymbolizer.StringFormat")]

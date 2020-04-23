@@ -73,87 +73,91 @@ namespace FTAnalyzer.Forms
 
         void SetupMap()
         {
-            lifelines = new FeatureDataTable();
-            lifelines.Columns.Add("MapLifeLine", typeof(MapLifeLine));
-            lifelines.Columns.Add("LineCap", typeof(string));
-            lifelines.Columns.Add("Label", typeof(string));
-            lifelines.Columns.Add("ViewPort", typeof(Envelope));
-
-            GeometryFeatureProvider lifelinesGFP = new GeometryFeatureProvider(lifelines);
-
-            VectorStyle linestyle = new VectorStyle
+            try
             {
-                Line = new Pen(Color.Green, 2f)
-            };
-            linestyle.Line.MiterLimit = 0;
-            linesLayer = new VectorLayer("LifeLines")
-            {
-                DataSource = lifelinesGFP,
-                Style = linestyle
-            };
+                lifelines = new FeatureDataTable();
+                lifelines.Columns.Add("MapLifeLine", typeof(MapLifeLine));
+                lifelines.Columns.Add("LineCap", typeof(string));
+                lifelines.Columns.Add("Label", typeof(string));
+                lifelines.Columns.Add("ViewPort", typeof(Envelope));
 
-            Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
-            VectorStyle line = new VectorStyle
-            {
-                PointColor = new SolidBrush(Color.Green),
-                PointSize = 2
-            };
-            styles.Add(MapLifeLine.LINE, line);
+                GeometryFeatureProvider lifelinesGFP = new GeometryFeatureProvider(lifelines);
 
-            VectorStyle startPoint = new VectorStyle
-            {
-                PointColor = new SolidBrush(Color.Green),
-                PointSize = 2,
-                Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\arrow-right.png"))
-            };
-            styles.Add(MapLifeLine.START, startPoint);
+                VectorStyle linestyle = new VectorStyle
+                {
+                    Line = new Pen(Color.Green, 2f)
+                };
+                linestyle.Line.MiterLimit = 0;
+                linesLayer = new VectorLayer("LifeLines")
+                {
+                    DataSource = lifelinesGFP,
+                    Style = linestyle
+                };
 
-            VectorStyle endPoint = new VectorStyle
-            {
-                PointColor = new SolidBrush(Color.Green),
-                PointSize = 2,
-                Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\arrow-left.png"))
-            };
-            styles.Add(MapLifeLine.END, endPoint);
+                Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
+                VectorStyle line = new VectorStyle
+                {
+                    PointColor = new SolidBrush(Color.Green),
+                    PointSize = 2
+                };
+                styles.Add(MapLifeLine.LINE, line);
 
-            linesLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<string>("LineCap", styles, line);
+                VectorStyle startPoint = new VectorStyle
+                {
+                    PointColor = new SolidBrush(Color.Green),
+                    PointSize = 2,
+                    Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\arrow-right.png"))
+                };
+                styles.Add(MapLifeLine.START, startPoint);
 
-            mapBox1.Map.Layers.Add(linesLayer);
+                VectorStyle endPoint = new VectorStyle
+                {
+                    PointColor = new SolidBrush(Color.Green),
+                    PointSize = 2,
+                    Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\arrow-left.png"))
+                };
+                styles.Add(MapLifeLine.END, endPoint);
 
-            labelLayer = new LabelLayer("Label")
-            {
-                DataSource = lifelinesGFP,
-                Enabled = true,
-                //Specifiy field that contains the label string.
-                LabelColumn = "Label",
-                TextRenderingHint = TextRenderingHint.AntiAlias,
-                SmoothingMode = SmoothingMode.AntiAlias
-            };
-            LabelStyle style = new LabelStyle
-            {
-                ForeColor = Color.Black,
-                Font = new Font(FontFamily.GenericSerif, 14, FontStyle.Bold),
-                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
-                VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom,
-                CollisionDetection = true,
-                Offset = new PointF(0, 25),
-                Halo = new Pen(Color.Yellow, 3)
-            };
-            labelLayer.Style = style;
-            mapBox1.Map.Layers.Add(labelLayer);
+                linesLayer.Theme = new SharpMap.Rendering.Thematics.UniqueValuesTheme<string>("LineCap", styles, line);
 
-            points = new TearDropLayer("Points");
-            mapBox1.Map.Layers.Add(points);
-            selections = new TearDropLayer("Selections");
-            mapBox1.Map.VariableLayers.Add(selections);
+                mapBox1.Map.Layers.Add(linesLayer);
 
-            mh.AddParishLayers(mapBox1.Map);
-            MapHelper.SetScaleBar(mapBox1);
-            mapBox1.Map.MinimumZoom = 500;
-            mapBox1.Map.MaximumZoom = 50000000;
-            mapBox1.QueryGrowFactor = 30;
-            mapBox1.Map.ZoomToExtents();
-            mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
+                labelLayer = new LabelLayer("Label")
+                {
+                    DataSource = lifelinesGFP,
+                    Enabled = true,
+                    //Specifiy field that contains the label string.
+                    LabelColumn = "Label",
+                    TextRenderingHint = TextRenderingHint.AntiAlias,
+                    SmoothingMode = SmoothingMode.AntiAlias
+                };
+                LabelStyle style = new LabelStyle
+                {
+                    ForeColor = Color.Black,
+                    Font = new Font(FontFamily.GenericSerif, 14, FontStyle.Bold),
+                    HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+                    VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom,
+                    CollisionDetection = true,
+                    Offset = new PointF(0, 25),
+                    Halo = new Pen(Color.Yellow, 3)
+                };
+                labelLayer.Style = style;
+                mapBox1.Map.Layers.Add(labelLayer);
+
+                points = new TearDropLayer("Points");
+                mapBox1.Map.Layers.Add(points);
+                selections = new TearDropLayer("Selections");
+                mapBox1.Map.VariableLayers.Add(selections);
+
+                mh.AddParishLayers(mapBox1.Map);
+                MapHelper.SetScaleBar(mapBox1);
+                mapBox1.Map.MinimumZoom = 500;
+                mapBox1.Map.MaximumZoom = 50000000;
+                mapBox1.QueryGrowFactor = 30;
+                mapBox1.Map.ZoomToExtents();
+                mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
+            }
+            catch (Exception) { }
         }
 
         void DgIndividuals_SelectionChanged(object sender, EventArgs e)
@@ -180,7 +184,7 @@ namespace FTAnalyzer.Forms
                 }
             }
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
-            txtCount.Text = dgIndividuals.SelectedRows.Count + " Individual(s) selected, " + dgFacts.RowCount + " Geolocated fact(s) displayed";
+            txtCount.Text = $"{dgIndividuals.SelectedRows.Count} Individual(s) selected, {dgFacts.RowCount} Geolocated fact(s) displayed";
 
             Envelope expand = MapHelper.GetExtents(lifelines);
             mapBox1.Map.ZoomToBox(expand);
@@ -254,9 +258,9 @@ namespace FTAnalyzer.Forms
             {
                 Individual ind = (Individual)dgIndividuals.Rows[e.RowIndex].DataBoundItem;
                 if (ind.GeoLocationCount == 0)
-                    e.ToolTipText = ind.Name + " has no geolocated facts to show on map";
+                    e.ToolTipText = $"{ind.Name} has no geolocated facts to show on map";
                 else
-                    e.ToolTipText = "Click to display " + ind.Name + "'s geolocated facts on the map. Right click to add their relatives";
+                    e.ToolTipText = $"Click to display {ind.Name}'s geolocated facts on the map. Right click to add their relatives";
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -33,68 +34,72 @@ namespace FTAnalyzer.Controls
         #region Location Tree Building
         public TreeNode[] GetAllLocationsTreeNodes(Font defaultFont, bool mainform)
         {
-            if (mainformTreeRootNode != null)
-                return BuildTreeNodeArray(mainform);
-
-            mainformTreeRootNode = new TreeNode();
-            placesTreeRootNode = new TreeNode();
-            Font regularFont = new Font(defaultFont, FontStyle.Regular);
-            Font boldFont = new Font(defaultFont, FontStyle.Bold);
-            foreach (FactLocation location in FamilyTree.Instance.AllDisplayPlaces)
+            try
             {
-                string[] parts = location.GetParts();
-                TreeNode currentM = mainformTreeRootNode;
-                TreeNode currentP = placesTreeRootNode;
-                foreach (string part in parts)
+                if (mainformTreeRootNode != null)
+                    return BuildTreeNodeArray(mainform);
+
+                mainformTreeRootNode = new TreeNode();
+                placesTreeRootNode = new TreeNode();
+                Font regularFont = new Font(defaultFont, FontStyle.Regular);
+                Font boldFont = new Font(defaultFont, FontStyle.Bold);
+                foreach (FactLocation location in FamilyTree.Instance.AllDisplayPlaces)
                 {
-                    if (part.Length == 0 && !Properties.GeneralSettings.Default.AllowEmptyLocations) break;
-                    TreeNode childM = currentM.Nodes.Find(part, false).FirstOrDefault();
-                    TreeNode childP = currentP.Nodes.Find(part, false).FirstOrDefault();
-                    if (childM == null)
+                    string[] parts = location.GetParts();
+                    TreeNode currentM = mainformTreeRootNode;
+                    TreeNode currentP = placesTreeRootNode;
+                    foreach (string part in parts)
                     {
-                        TreeNode child = new TreeNode((part.Length == 0 ? "<blank>" : part))
+                        if (part.Length == 0 && !Properties.GeneralSettings.Default.AllowEmptyLocations) break;
+                        TreeNode childM = currentM.Nodes.Find(part, false).FirstOrDefault();
+                        TreeNode childP = currentP.Nodes.Find(part, false).FirstOrDefault();
+                        if (childM == null)
                         {
-                            Name = part,
-                            Tag = location,
-                            ToolTipText = "Geocoding Status : " + location.Geocoded
-                        };
-                        SetTreeNodeImage(location, child);
-                        // Set everything other than known countries and known regions to regular
-                        if ((currentM.Level == 0 && Countries.IsKnownCountry(part)) ||
-                            (currentM.Level == 1 && Regions.IsKnownRegion(part)))
-                            child.NodeFont = boldFont;
-                        else
-                            child.NodeFont = regularFont;
-                        childM = child;
-                        childP = (TreeNode)child.Clone();
-                        currentM.Nodes.Add(childM);
-                        currentP.Nodes.Add(childP);
+                            TreeNode child = new TreeNode((part.Length == 0 ? "<blank>" : part))
+                            {
+                                Name = part,
+                                Tag = location,
+                                ToolTipText = "Geocoding Status : " + location.Geocoded
+                            };
+                            SetTreeNodeImage(location, child);
+                            // Set everything other than known countries and known regions to regular
+                            if ((currentM.Level == 0 && Countries.IsKnownCountry(part)) ||
+                                (currentM.Level == 1 && Regions.IsKnownRegion(part)))
+                                child.NodeFont = boldFont;
+                            else
+                                child.NodeFont = regularFont;
+                            childM = child;
+                            childP = (TreeNode)child.Clone();
+                            currentM.Nodes.Add(childM);
+                            currentP.Nodes.Add(childP);
+                        }
+                        currentM = childM;
+                        currentP = childP;
                     }
-                    currentM = childM;
-                    currentP = childP;
                 }
-            }
-            if (Properties.GeneralSettings.Default.AllowEmptyLocations)
-            { // trim empty end nodes
-                bool recheck = true;
-                while (recheck)
-                {
-                    TreeNode[] emptyNodes = mainformTreeRootNode.Nodes.Find(string.Empty, true);
-                    recheck = false;
-                    foreach (TreeNode node in emptyNodes)
+                if (Properties.GeneralSettings.Default.AllowEmptyLocations)
+                { // trim empty end nodes
+                    bool recheck = true;
+                    while (recheck)
                     {
-                        if (node.FirstNode == null)
+                        TreeNode[] emptyNodes = mainformTreeRootNode.Nodes.Find(string.Empty, true);
+                        recheck = false;
+                        foreach (TreeNode node in emptyNodes)
                         {
-                            node.Remove();
-                            recheck = true;
+                            if (node.FirstNode == null)
+                            {
+                                node.Remove();
+                                recheck = true;
+                            }
                         }
                     }
                 }
+                foreach (TreeNode node in mainformTreeRootNode.Nodes)
+                    node.Text += "         "; // force text to be longer to fix bold bug
+                foreach (TreeNode node in placesTreeRootNode.Nodes)
+                    node.Text += "         "; // force text to be longer to fix bold bug
             }
-            foreach (TreeNode node in mainformTreeRootNode.Nodes)
-                node.Text += "         "; // force text to be longer to fix bold bug
-            foreach (TreeNode node in placesTreeRootNode.Nodes)
-                node.Text += "         "; // force text to be longer to fix bold bug
+            catch (Exception) { }
             return BuildTreeNodeArray(mainform);
         }
 

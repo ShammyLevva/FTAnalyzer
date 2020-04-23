@@ -20,76 +20,80 @@ namespace FTAnalyzer.Forms
 
         public ColourBMD(List<IDisplayColourBMD> reportList)
         {
-            InitializeComponent();
-            Top += NativeMethods.TopTaskbarOffset;
-            dgBMDReportSheet.AutoGenerateColumns = false;
+            try
+            {
+                InitializeComponent();
+                Top += NativeMethods.TopTaskbarOffset;
+                dgBMDReportSheet.AutoGenerateColumns = false;
 
-            this.reportList = new SortableBindingList<IDisplayColourBMD>(reportList);
-            reportFormHelper = new ReportFormHelper(this, "Colour BMD Report", dgBMDReportSheet, ResetTable, "Colour BMD");
-            ExtensionMethods.DoubleBuffered(dgBMDReportSheet, true);
-            
-            boldFont = new Font(dgBMDReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
-            styles = new Dictionary<BMDColour, DataGridViewCellStyle>();
-            DataGridViewCellStyle notRequired = new DataGridViewCellStyle();
-            notRequired.BackColor = notRequired.ForeColor = Color.DarkGray;
-            styles.Add(BMDColour.EMPTY, notRequired);
-            DataGridViewCellStyle missingData = new DataGridViewCellStyle();
-            missingData.BackColor = missingData.ForeColor = Color.Red;
-            styles.Add(BMDColour.UNKNOWN_DATE, missingData);
-            DataGridViewCellStyle openEndedDateRange = new DataGridViewCellStyle();
-            openEndedDateRange.BackColor = openEndedDateRange.ForeColor = Color.OrangeRed;
-            styles.Add(BMDColour.OPEN_ENDED_DATE, openEndedDateRange);
-            DataGridViewCellStyle verywideDateRange = new DataGridViewCellStyle();
-            verywideDateRange.BackColor = verywideDateRange.ForeColor = Color.Tomato;
-            styles.Add(BMDColour.VERY_WIDE_DATE, verywideDateRange);
-            DataGridViewCellStyle wideDateRange = new DataGridViewCellStyle();
-            wideDateRange.BackColor = wideDateRange.ForeColor = Color.Orange;
-            styles.Add(BMDColour.WIDE_DATE, wideDateRange);
-            DataGridViewCellStyle narrowDateRange = new DataGridViewCellStyle();
-            narrowDateRange.BackColor = narrowDateRange.ForeColor = Color.Yellow;
-            styles.Add(BMDColour.NARROW_DATE, narrowDateRange);
-            DataGridViewCellStyle justYearDateRange = new DataGridViewCellStyle();
-            justYearDateRange.BackColor = justYearDateRange.ForeColor = Color.YellowGreen;
-            styles.Add(BMDColour.JUST_YEAR_DATE, justYearDateRange);
-            DataGridViewCellStyle approxDate = new DataGridViewCellStyle();
-            approxDate.BackColor = approxDate.ForeColor = Color.PaleGreen;
-            styles.Add(BMDColour.APPROX_DATE, approxDate);
-            DataGridViewCellStyle exactDate = new DataGridViewCellStyle();
-            exactDate.BackColor = exactDate.ForeColor = Color.LawnGreen;
-            styles.Add(BMDColour.EXACT_DATE, exactDate);
-            DataGridViewCellStyle noSpouse = new DataGridViewCellStyle();
-            noSpouse.BackColor = noSpouse.ForeColor = Color.LightPink;
-            styles.Add(BMDColour.NO_SPOUSE, noSpouse);
-            DataGridViewCellStyle hasChildren = new DataGridViewCellStyle();
-            hasChildren.BackColor = hasChildren.ForeColor = Color.LightCoral;
-            styles.Add(BMDColour.NO_PARTNER, hasChildren);
-            DataGridViewCellStyle noMarriage = new DataGridViewCellStyle();
-            noMarriage.BackColor = noMarriage.ForeColor = Color.Firebrick;
-            styles.Add(BMDColour.NO_MARRIAGE, noMarriage);
-            DataGridViewCellStyle isLiving = new DataGridViewCellStyle();
-            isLiving.BackColor = isLiving.ForeColor = Color.WhiteSmoke;
-            styles.Add(BMDColour.ISLIVING, isLiving);
-            DataGridViewCellStyle over90 = new DataGridViewCellStyle();
-            over90.BackColor = over90.ForeColor = Color.DarkGray;
-            styles.Add(BMDColour.OVER90, over90);
+                this.reportList = new SortableBindingList<IDisplayColourBMD>(reportList);
+                reportFormHelper = new ReportFormHelper(this, "Colour BMD Report", dgBMDReportSheet, ResetTable, "Colour BMD");
+                ExtensionMethods.DoubleBuffered(dgBMDReportSheet, true);
 
-            birthColumnIndex = dgBMDReportSheet.Columns["Birth"].Index;
-            burialColumnIndex = dgBMDReportSheet.Columns["CremBuri"].Index;
-            dgBMDReportSheet.DataSource = this.reportList;
-            reportFormHelper.LoadColumnLayout("ColourBMDColumns.xml");
-            tsRecords.Text = Properties.Messages.Count + reportList.Count + " records listed.";
-            string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
-            if (defaultProvider == null)
-                defaultProvider = "FamilySearch";
-            if (defaultProvider.Equals("FreeCen"))
-                defaultProvider = "FreeBMD";
-            cbBMDSearchProvider.Text = defaultProvider;
-            string defaultRegion = (string)Application.UserAppDataRegistry.GetValue("Default Region");
-            if (defaultRegion == null)
-                defaultRegion = ".co.uk";
-            cbRegion.Text = defaultRegion;
-            cbFilter.Text = "All Individuals";
-            cbApplyTo.Text = "All BMD Records";
+                boldFont = new Font(dgBMDReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
+                styles = new Dictionary<BMDColour, DataGridViewCellStyle>();
+                DataGridViewCellStyle notRequired = new DataGridViewCellStyle();
+                notRequired.BackColor = notRequired.ForeColor = Color.DarkGray;
+                styles.Add(BMDColour.EMPTY, notRequired);
+                DataGridViewCellStyle missingData = new DataGridViewCellStyle();
+                missingData.BackColor = missingData.ForeColor = Color.Red;
+                styles.Add(BMDColour.UNKNOWN_DATE, missingData);
+                DataGridViewCellStyle openEndedDateRange = new DataGridViewCellStyle();
+                openEndedDateRange.BackColor = openEndedDateRange.ForeColor = Color.OrangeRed;
+                styles.Add(BMDColour.OPEN_ENDED_DATE, openEndedDateRange);
+                DataGridViewCellStyle verywideDateRange = new DataGridViewCellStyle();
+                verywideDateRange.BackColor = verywideDateRange.ForeColor = Color.Tomato;
+                styles.Add(BMDColour.VERY_WIDE_DATE, verywideDateRange);
+                DataGridViewCellStyle wideDateRange = new DataGridViewCellStyle();
+                wideDateRange.BackColor = wideDateRange.ForeColor = Color.Orange;
+                styles.Add(BMDColour.WIDE_DATE, wideDateRange);
+                DataGridViewCellStyle narrowDateRange = new DataGridViewCellStyle();
+                narrowDateRange.BackColor = narrowDateRange.ForeColor = Color.Yellow;
+                styles.Add(BMDColour.NARROW_DATE, narrowDateRange);
+                DataGridViewCellStyle justYearDateRange = new DataGridViewCellStyle();
+                justYearDateRange.BackColor = justYearDateRange.ForeColor = Color.YellowGreen;
+                styles.Add(BMDColour.JUST_YEAR_DATE, justYearDateRange);
+                DataGridViewCellStyle approxDate = new DataGridViewCellStyle();
+                approxDate.BackColor = approxDate.ForeColor = Color.PaleGreen;
+                styles.Add(BMDColour.APPROX_DATE, approxDate);
+                DataGridViewCellStyle exactDate = new DataGridViewCellStyle();
+                exactDate.BackColor = exactDate.ForeColor = Color.LawnGreen;
+                styles.Add(BMDColour.EXACT_DATE, exactDate);
+                DataGridViewCellStyle noSpouse = new DataGridViewCellStyle();
+                noSpouse.BackColor = noSpouse.ForeColor = Color.LightPink;
+                styles.Add(BMDColour.NO_SPOUSE, noSpouse);
+                DataGridViewCellStyle hasChildren = new DataGridViewCellStyle();
+                hasChildren.BackColor = hasChildren.ForeColor = Color.LightCoral;
+                styles.Add(BMDColour.NO_PARTNER, hasChildren);
+                DataGridViewCellStyle noMarriage = new DataGridViewCellStyle();
+                noMarriage.BackColor = noMarriage.ForeColor = Color.Firebrick;
+                styles.Add(BMDColour.NO_MARRIAGE, noMarriage);
+                DataGridViewCellStyle isLiving = new DataGridViewCellStyle();
+                isLiving.BackColor = isLiving.ForeColor = Color.WhiteSmoke;
+                styles.Add(BMDColour.ISLIVING, isLiving);
+                DataGridViewCellStyle over90 = new DataGridViewCellStyle();
+                over90.BackColor = over90.ForeColor = Color.DarkGray;
+                styles.Add(BMDColour.OVER90, over90);
+
+                birthColumnIndex = dgBMDReportSheet.Columns["Birth"].Index;
+                burialColumnIndex = dgBMDReportSheet.Columns["CremBuri"].Index;
+                dgBMDReportSheet.DataSource = this.reportList;
+                reportFormHelper.LoadColumnLayout("ColourBMDColumns.xml");
+                tsRecords.Text = Properties.Messages.Count + reportList.Count + " records listed.";
+                string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
+                if (defaultProvider == null)
+                    defaultProvider = "FamilySearch";
+                if (defaultProvider.Equals("FreeCen"))
+                    defaultProvider = "FreeBMD";
+                cbBMDSearchProvider.Text = defaultProvider;
+                string defaultRegion = (string)Application.UserAppDataRegistry.GetValue("Default Region");
+                if (defaultRegion == null)
+                    defaultRegion = ".co.uk";
+                cbRegion.Text = defaultRegion;
+                cbFilter.Text = "All Individuals";
+                cbApplyTo.Text = "All BMD Records";
+            }
+            catch (Exception) { }
         }
 
         void ResetTable()

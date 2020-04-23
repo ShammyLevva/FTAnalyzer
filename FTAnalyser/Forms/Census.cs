@@ -135,28 +135,32 @@ namespace FTAnalyzer.Forms
 
         void StyleRows()
         {
-            string currentRowText = "";
-            bool highlighted = true;
-
-            Font boldFont = new Font(dgCensus.DefaultCellStyle.Font, FontStyle.Bold);
-            Font regularFont = new Font(dgCensus.DefaultCellStyle.Font, FontStyle.Regular);
-            int sortColumn = dgCensus.SortedColumn.Index;
-            foreach (DataGridViewRow row in dgCensus.Rows)
+            try
             {
-                CensusIndividual cr = (CensusIndividual)row.DataBoundItem;
-                if (row.Cells[sortColumn].Value.ToString() != currentRowText)
+                string currentRowText = "";
+                bool highlighted = true;
+
+                Font boldFont = new Font(dgCensus.DefaultCellStyle.Font, FontStyle.Bold);
+                Font regularFont = new Font(dgCensus.DefaultCellStyle.Font, FontStyle.Regular);
+                int sortColumn = dgCensus.SortedColumn.Index;
+                foreach (DataGridViewRow row in dgCensus.Rows)
                 {
-                    currentRowText = row.Cells[sortColumn].Value.ToString();
-                    highlighted = !highlighted;
+                    CensusIndividual cr = (CensusIndividual)row.DataBoundItem;
+                    if (row.Cells[sortColumn].Value.ToString() != currentRowText)
+                    {
+                        currentRowText = row.Cells[sortColumn].Value.ToString();
+                        highlighted = !highlighted;
+                    }
+                    DataGridViewCellStyle style = new DataGridViewCellStyle(dgCensus.DefaultCellStyle)
+                    {
+                        BackColor = highlighted ? Color.LightGray : Color.White,
+                        ForeColor = (cr.RelationType == Individual.DIRECT || cr.RelationType == Individual.DESCENDANT) ? Color.Red : Color.Black,
+                        Font = (cr.IsCensusDone(CensusDate) || (cr.IsAlive(CensusDate) && !cr.DeathDate.StartsBefore(CensusDate))) ? boldFont : regularFont
+                    };
+                    cr.CellStyle = style;
                 }
-                DataGridViewCellStyle style = new DataGridViewCellStyle(dgCensus.DefaultCellStyle)
-                {
-                    BackColor = highlighted ? Color.LightGray : Color.White,
-                    ForeColor = (cr.RelationType == Individual.DIRECT || cr.RelationType == Individual.DESCENDANT) ? Color.Red : Color.Black,
-                    Font = (cr.IsCensusDone(CensusDate) || (cr.IsAlive(CensusDate) && !cr.DeathDate.StartsBefore(CensusDate))) ? boldFont : regularFont
-                };
-                cr.CellStyle = style;
             }
+            catch (Exception) { }
         }
 
         string GetTooltipText(DataGridViewCellStyle style)

@@ -143,47 +143,51 @@ namespace FTAnalyzer.Mapping
 
         public static void AddParishLayer(Map map, string filename, string prefix, string labelField)
         {
-            if (Properties.MappingSettings.Default.UseParishBoundaries)
+            try
             {
-                if (File.Exists(filename))
+                if (Properties.MappingSettings.Default.UseParishBoundaries)
                 {
-                    VectorLayer parishLayer = new VectorLayer(prefix + "ParishBoundaries")
+                    if (File.Exists(filename))
                     {
-                        DataSource = new ShapeFile(filename, true)
-                    };
-                    parishLayer.Style.Fill = null;
-                    parishLayer.Style.Outline = new Pen(Color.Black, 2.0f);
-                    parishLayer.Style.EnableOutline = true;
-                    parishLayer.MinVisible = 500;
-                    parishLayer.MaxVisible = 300000;
-                    map.VariableLayers.Add(parishLayer);
+                        VectorLayer parishLayer = new VectorLayer(prefix + "ParishBoundaries")
+                        {
+                            DataSource = new ShapeFile(filename, true)
+                        };
+                        parishLayer.Style.Fill = null;
+                        parishLayer.Style.Outline = new Pen(Color.Black, 2.0f);
+                        parishLayer.Style.EnableOutline = true;
+                        parishLayer.MinVisible = 500;
+                        parishLayer.MaxVisible = 300000;
+                        map.VariableLayers.Add(parishLayer);
 
-                    LabelLayer parishLabelLayer = new LabelLayer(prefix + "ParishNames")
-                    {
-                        DataSource = new ShapeFile(filename, true),
-                        LabelColumn = labelField,
-                        TextRenderingHint = TextRenderingHint.AntiAlias,
-                        SmoothingMode = SmoothingMode.AntiAlias
-                    };
+                        LabelLayer parishLabelLayer = new LabelLayer(prefix + "ParishNames")
+                        {
+                            DataSource = new ShapeFile(filename, true),
+                            LabelColumn = labelField,
+                            TextRenderingHint = TextRenderingHint.AntiAlias,
+                            SmoothingMode = SmoothingMode.AntiAlias
+                        };
 
-                    LabelStyle style = new LabelStyle
-                    {
-                        ForeColor = Color.DarkRed,
-                        Font = new Font(FontFamily.GenericSerif, 14, FontStyle.Bold),
-                        HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
-                        VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Middle,
-                        CollisionDetection = true,
-                        CollisionBuffer = new SizeF(4f, 4f)
-                    };
+                        LabelStyle style = new LabelStyle
+                        {
+                            ForeColor = Color.DarkRed,
+                            Font = new Font(FontFamily.GenericSerif, 14, FontStyle.Bold),
+                            HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+                            VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Middle,
+                            CollisionDetection = true,
+                            CollisionBuffer = new SizeF(4f, 4f)
+                        };
 
-                    parishLabelLayer.Style = style;
-                    parishLabelLayer.LabelFilter = LabelCollisionDetection.ThoroughCollisionDetection;
-                    parishLabelLayer.Style.CollisionDetection = true; // set twice to fix bug 
-                    parishLabelLayer.MinVisible = 500;
-                    parishLabelLayer.MaxVisible = 100000;
-                    map.Layers.Add(parishLabelLayer);
+                        parishLabelLayer.Style = style;
+                        parishLabelLayer.LabelFilter = LabelCollisionDetection.ThoroughCollisionDetection;
+                        parishLabelLayer.Style.CollisionDetection = true; // set twice to fix bug 
+                        parishLabelLayer.MinVisible = 500;
+                        parishLabelLayer.MaxVisible = 100000;
+                        map.Layers.Add(parishLabelLayer);
+                    }
                 }
             }
+            catch (Exception) { }
         }
 
         // alternate sizing function to fix bug in sharpmap v1.1
