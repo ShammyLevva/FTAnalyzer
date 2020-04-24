@@ -1,4 +1,11 @@
-#### Updated Release Version 7.7.1 22nd Apr 2020  
+#### Updated Release Version 7.7.2 24th Apr 2020  
+**Bugfixes**  
+Google API now works as intended 
+  - timeouts after two lookups no longer crashes or erroneously says used up limit for today  
+First fact type in facts tab wasn't allowing you to select it  
+Added various using groups to catch similar possible issues   
+
+ #### Updated Release Version 7.7.1 22nd Apr 2020  
 **Updates**  
 Added FamilySearchID recognition and clickable link in Individuals Report  
 Added extra Canadian census reference check  

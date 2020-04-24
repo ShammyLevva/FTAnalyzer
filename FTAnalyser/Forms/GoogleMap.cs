@@ -89,6 +89,7 @@ namespace FTAnalyzer.Forms
             {
                 InitializeComponent();
                 Top += NativeMethods.TopTaskbarOffset;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12; // force TLS1.2
             }
             catch (Exception) { }
         }
@@ -183,8 +184,10 @@ namespace FTAnalyzer.Forms
                         Credentials = CredentialCache.DefaultCredentials
                     };
                 }
-                Stream stream = request.GetResponse().GetResponseStream();
-                res = (GeoResponse)serializer.ReadObject(stream);
+                using (Stream stream = request.GetResponse().GetResponseStream())
+                {
+                    res = (GeoResponse)serializer.ReadObject(stream);
+                }
             }
             catch (WebException ex)
             {
@@ -283,7 +286,7 @@ namespace FTAnalyzer.Forms
                 if (sleepinterval > 10000)
                     sleepinterval = 200;
                 else
-                    sleepinterval = Math.Max(sleepinterval / 2, 75);
+                    sleepinterval = Math.Max(sleepinterval / 2, 751);
                 return res;
             }
         }
@@ -292,7 +295,7 @@ namespace FTAnalyzer.Forms
         {
             string message = string.IsNullOrEmpty(Properties.MappingSettings.Default.GoogleAPI) ?
                                 "Google Geocoding timing out. Possibly exceeded max GeoLocations for today.\nConsider getting your own FREE Google API Key for 40,000 lookups a day. See Help Menu.\n" :
-                                "Max Google GeoLocations exceeded for today.\n";
+                                "Google Timeout Limit Exceeded.\n";
             OnWaitingForGoogle(message);
             GeoResponse response = new GeoResponse
             {
