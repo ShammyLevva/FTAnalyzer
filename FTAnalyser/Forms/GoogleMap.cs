@@ -150,7 +150,7 @@ namespace FTAnalyzer.Forms
         public static GeoResponse CallGoogleGeocode(string address)
         {
             string encodedAddress = HttpUtility.UrlEncode(address.Replace(" ", "+"));
-            string url = $"https://maps.googleapis.com/maps/api/geocode/json?address={encodedAddress}&region=uk&sensor=false&key={GoogleAPIKey.KeyValue}";
+            string url = $"https://maps.googleapis.com/maps/api/geocode/json?address={encodedAddress}&region=uk&key={GoogleAPIKey.KeyValue}";
             return GetGeoResponse(url);
         }
 
@@ -158,17 +158,18 @@ namespace FTAnalyzer.Forms
         {
             string lat = HttpUtility.UrlEncode(latitude.ToString());
             string lng = HttpUtility.UrlEncode(longitude.ToString());
-            string url = $"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&region=uk&sensor=false&key={GoogleAPIKey.KeyValue}";
+            string url = $"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&region=uk&key={GoogleAPIKey.KeyValue}";
             return GetGeoResponse(url);
         }
 
         static GeoResponse GetGeoResponse(string url)
         {
             GeoResponse res;
+            HttpWebRequest request;
             try
             {
-                HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
-                request.Timeout = 10000; // set timeout to 3 seconds from default 100 seconds
+                request = WebRequest.Create(url) as HttpWebRequest;
+                request.Timeout = 3000; // set timeout to 5 seconds from default 100 seconds
                 request.ReadWriteTimeout = 10000;
                 request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
                 request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
@@ -203,10 +204,11 @@ namespace FTAnalyzer.Forms
         // Call geocoding routine but account for throttling by Google geocoding engine
         public static GeoResponse GoogleGeocode(string address, int badtries)
         {
+            int maxInterval = 30000;
             double seconds = sleepinterval / 1000;
             if (sleepinterval > 500)
                 OnWaitingForGoogle($"Google Timeout. Waiting {seconds} seconds.");
-            if (sleepinterval >= 20000)
+            if (sleepinterval >= maxInterval)
                 return MaxedOut();
             for (int interval = 0; interval < sleepinterval; interval += 1000)
             {
@@ -226,7 +228,7 @@ namespace FTAnalyzer.Forms
             if (res == null || res.Status == "OVER_QUERY_LIMIT")
             {
                 // we're hitting Google too fast, increase interval
-                sleepinterval = Math.Min(sleepinterval + ++badtries * 750, 20000);
+                sleepinterval = Math.Min(sleepinterval + ++badtries * 750, maxInterval);
                 return GoogleGeocode(address, badtries);
             }
             else
@@ -247,10 +249,11 @@ namespace FTAnalyzer.Forms
         // Call geocoding routine but account for throttling by Google geocoding engine
         public static GeoResponse GoogleReverseGeocode(double latitude, double longitude, int badtries)
         {
+            int maxInterval = 30000;
             double seconds = sleepinterval / 1000;
             if (sleepinterval > 500)
                 OnWaitingForGoogle($"Over Google limit. Waiting {seconds} seconds.");
-            if (sleepinterval >= 20000)
+            if (sleepinterval >= maxInterval)
                 return MaxedOut();
             for (int interval = 0; interval < sleepinterval; interval += 1000)
             {
@@ -270,7 +273,7 @@ namespace FTAnalyzer.Forms
             if (res == null || res.Status == "OVER_QUERY_LIMIT")
             {
                 // we're hitting Google too fast, increase interval
-                sleepinterval = Math.Min(sleepinterval + ++badtries * 750, 20000);
+                sleepinterval = Math.Min(sleepinterval + ++badtries * 750, maxInterval);
                 return GoogleReverseGeocode(latitude, longitude, badtries);
             }
             else
