@@ -271,9 +271,11 @@ namespace FTAnalyzer.Forms
             {
                 string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
                 Individual ind = ft.GetIndividual(indID);
-                Facts factForm = new Facts(ind);
-                MainForm.DisposeDuplicateForms(factForm);
-                factForm.Show();
+                using (Facts factForm = new Facts(ind))
+                {
+                    MainForm.DisposeDuplicateForms(factForm);
+                    factForm.Show();
+                }
             }
         }
 
@@ -288,16 +290,20 @@ namespace FTAnalyzer.Forms
                     if ((reportType == ReportType.MismatchedChildrenStatus || reportType == ReportType.MissingChildrenStatus) && ModifierKeys.Equals(Keys.Shift))
                     {
                         List<IDisplayColourCensus> list = fam.Members.ToList<IDisplayColourCensus>();
-                        ColourCensus rs = new ColourCensus(Countries.UNITED_KINGDOM, list);
-                        MainForm.DisposeDuplicateForms(rs);
-                        rs.Show();
-                        rs.Focus();
+                        using (ColourCensus rs = new ColourCensus(Countries.UNITED_KINGDOM, list))
+                        {
+                            MainForm.DisposeDuplicateForms(rs);
+                            rs.Show();
+                            rs.Focus();
+                        }
                     }
                     else
                     {
-                        Facts factForm = new Facts(fam);
-                        MainForm.DisposeDuplicateForms(factForm);
-                        factForm.Show();
+                        using (Facts factForm = new Facts(fam))
+                        {
+                            MainForm.DisposeDuplicateForms(factForm);
+                            factForm.Show();
+                        }
                     }
                 }
             }
@@ -345,8 +351,8 @@ namespace FTAnalyzer.Forms
             Individual ind = ft.GetIndividual(indID);
             if (ind != null)
             {
-                Notes notes = new Notes(ind);
-                notes.Show();
+                using (Notes notes = new Notes(ind))
+                    notes.Show();
             }
         }
 

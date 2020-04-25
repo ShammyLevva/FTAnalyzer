@@ -622,8 +622,8 @@ namespace FTAnalyzer
             Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
             if (ind != null)
             {
-                Notes notes = new Notes(ind);
-                notes.Show();
+                using (Notes notes = new Notes(ind))
+                    notes.Show();
             }
             HourGlass(false);
         }
@@ -800,11 +800,13 @@ namespace FTAnalyzer
         void ChildAgeProfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Statistics s = Statistics.Instance;
-            Chart chart = new Chart();
-            int[,,] stats = s.ChildrenBirthProfiles();
-            chart.BuildChildBirthProfile(stats);
-            DisposeDuplicateForms(chart);
-            chart.Show();
+            using (Chart chart = new Chart())
+            {
+                int[,,] stats = s.ChildrenBirthProfiles();
+                chart.BuildChildBirthProfile(stats);
+                DisposeDuplicateForms(chart);
+                chart.Show();
+            }
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.BirthProfileEvent);
             MessageBox.Show(s.BuildOutput(stats), "Birth Profile Information");
         }
@@ -1585,24 +1587,28 @@ namespace FTAnalyzer
         void BtnLCPotentialUploads_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Census census = new Census(CensusDate.ANYCENSUS, true);
-            census.SetupLCupdateList(LCUpdates);
-            census.Text = $"Potential Records to upload to Lost Cousins Website";
-            DisposeDuplicateForms(census);
-            Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.PreviewLostCousins);
-            census.Show();
+            using (Census census = new Census(CensusDate.ANYCENSUS, true))
+            {
+                census.SetupLCupdateList(LCUpdates);
+                census.Text = $"Potential Records to upload to Lost Cousins Website";
+                DisposeDuplicateForms(census);
+                Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.PreviewLostCousins);
+                census.Show();
+            }
             HourGlass(false);
         }
 
         void BtnViewInvalidRefs_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Census census = new Census(CensusDate.ANYCENSUS, true);
-            census.SetupLCupdateList(LCInvalidReferences);
-            census.Text = $"Incompatible Census References in Records to upload to Lost Cousins Website";
-            DisposeDuplicateForms(census);
-            Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.PreviewLostCousins);
-            census.Show();
+            using (Census census = new Census(CensusDate.ANYCENSUS, true))
+            {
+                census.SetupLCupdateList(LCInvalidReferences);
+                census.Text = $"Incompatible Census References in Records to upload to Lost Cousins Website";
+                DisposeDuplicateForms(census);
+                Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.PreviewLostCousins);
+                census.Show();
+            }
             HourGlass(false);
         }
 
@@ -2057,9 +2063,11 @@ namespace FTAnalyzer
                 Family fam = ft.GetFamily(famID);
                 if (fam != null)
                 {
-                    Facts factForm = new Facts(fam);
-                    DisposeDuplicateForms(factForm);
-                    factForm.Show();
+                    using (Facts factForm = new Facts(fam))
+                    {
+                        DisposeDuplicateForms(factForm);
+                        factForm.Show();
+                    }
                 }
             }
         }
@@ -2167,9 +2175,11 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 FactSource source = (FactSource)dgSources.CurrentRow.DataBoundItem;
-                Facts factForm = new Facts(source);
-                DisposeDuplicateForms(factForm);
-                factForm.Show();
+                using (Facts factForm = new Facts(source))
+                {
+                    DisposeDuplicateForms(factForm);
+                    factForm.Show();
+                }
             }
         }
 
@@ -2191,9 +2201,11 @@ namespace FTAnalyzer
                     ft.GetIndividual(indA_ID),
                     ft.GetIndividual(indB_ID)
                 };
-                Facts f = new Facts(dupInd, null, null);
-                DisposeDuplicateForms(f);
-                f.Show();
+                using (Facts f = new Facts(dupInd, null, null))
+                {
+                    DisposeDuplicateForms(f);
+                    f.Show();
+                }
             }
         }
 
@@ -2214,13 +2226,15 @@ namespace FTAnalyzer
             Individual ind = ft.GetIndividual(indID);
             if (ind != null)
             {
-                Facts factForm = new Facts(ind);
-                DisposeDuplicateForms(factForm);
-                factForm.Show();
-                if (offset)
+                using (Facts factForm = new Facts(ind))
                 {
-                    factForm.Left += 200;
-                    factForm.Top += 100;
+                    DisposeDuplicateForms(factForm);
+                    factForm.Show();
+                    if (offset)
+                    {
+                        factForm.Left += 200;
+                        factForm.Top += 100;
+                    }
                 }
             }
         }
@@ -2230,13 +2244,15 @@ namespace FTAnalyzer
             Family fam = ft.GetFamily(famID);
             if (fam != null)
             {
-                Facts factForm = new Facts(fam);
-                DisposeDuplicateForms(factForm);
-                factForm.Show();
-                if (offset)
+                using (Facts factForm = new Facts(fam))
                 {
-                    factForm.Left += 200;
-                    factForm.Top += 100;
+                    DisposeDuplicateForms(factForm);
+                    factForm.Show();
+                    if (offset)
+                    {
+                        factForm.Left += 200;
+                        factForm.Top += 100;
+                    }
                 }
             }
         }
@@ -2250,8 +2266,8 @@ namespace FTAnalyzer
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtFactsSurname.Text);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
-            Facts facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, true), BuildFactTypeList(ckbFactExclude, true));
-            facts.Show();
+            using (Facts facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, true), BuildFactTypeList(ckbFactExclude, true)))
+                facts.Show();
             HourGlass(false);
         }
 
@@ -2345,8 +2361,8 @@ namespace FTAnalyzer
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtFactsSurname.Text);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
-            Facts facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, false));
-            facts.Show();
+            using (Facts facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, false)))
+                facts.Show();
             HourGlass(false);
         }
         #endregion
@@ -2618,10 +2634,12 @@ namespace FTAnalyzer
         void BtnMismatchedChildrenStatus_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            People people = new People();
-            people.SetupChildrenStatusReport();
-            DisposeDuplicateForms(people);
-            people.Show();
+            using (People people = new People())
+            {
+                people.SetupChildrenStatusReport();
+                DisposeDuplicateForms(people);
+                people.Show();
+            }
             Analytics.TrackAction(Analytics.CensusTabAction, Analytics.MisMatchedEvent);
             HourGlass(false);
         }
@@ -2630,8 +2648,8 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             CensusDate date = chkAnyCensusYear.Checked ? CensusDate.ANYCENSUS : cenDate.SelectedDate;
-            Facts facts = new Facts(status, filter, date);
-            facts.Show();
+            using (Facts facts = new Facts(status, filter, date))
+                facts.Show();
             HourGlass(false);
         }
 
@@ -2711,18 +2729,20 @@ namespace FTAnalyzer
                 Application.DoEvents();
             }
             tspbTabProgress.Visible = false;
-            Facts factForm = new Facts(results);
-            DisposeDuplicateForms(factForm);
-            factForm.Show();
-            factForm.ShowHideFactRows();
+            using (Facts factForm = new Facts(results))
+            {
+                DisposeDuplicateForms(factForm);
+                factForm.Show();
+                factForm.ShowHideFactRows();
+            }
             HourGlass(false);
         }
         void BtnCensusProblemFacts_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             Predicate<Individual> filter = new Predicate<Individual>(x => x.ErrorFacts.Count > 0);
-            Facts facts = new Facts(filter, true);
-            facts.Show();
+            using (Facts facts = new Facts(filter, true))
+                facts.Show();
             HourGlass(false);
         }
 
@@ -2730,8 +2750,8 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Predicate<Individual> filter = new Predicate<Individual>(x => x.FactCount(Fact.CENSUS_FTA) > 0);
-            Facts facts = new Facts(filter, false);
-            facts.Show();
+            using (Facts facts = new Facts(filter, false))
+                facts.Show();
             HourGlass(false);
         }
         #endregion
@@ -2741,10 +2761,12 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             List<IDisplayColourBMD> list = ft.ColourBMD(relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily);
-            ColourBMD rs = new ColourBMD(list);
-            DisposeDuplicateForms(rs);
-            rs.Show();
-            rs.Focus();
+            using (ColourBMD rs = new ColourBMD(list))
+            {
+                DisposeDuplicateForms(rs);
+                rs.Show();
+                rs.Focus();
+            }
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.ColourBMDEvent);
             HourGlass(false);
         }
@@ -2754,11 +2776,13 @@ namespace FTAnalyzer
             HourGlass(true);
             List<IDisplayColourCensus> list =
                 ft.ColourCensus(country, relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily, ckbIgnoreNoBirthDate.Checked, ckbIgnoreNoDeathDate.Checked);
-            ColourCensus rs = new ColourCensus(country, list);
-            DisposeDuplicateForms(rs);
-            rs.Show();
-            rs.Focus();
-            await Analytics.TrackActionAsync(Analytics.MainFormAction, Analytics.ColourCensusEvent, country);
+            using (ColourCensus rs = new ColourCensus(country, list))
+            {
+                DisposeDuplicateForms(rs);
+                rs.Show();
+                rs.Focus();
+            }
+            await Analytics.TrackActionAsync(Analytics.MainFormAction, Analytics.ColourCensusEvent, country).ConfigureAwait(false);
             HourGlass(false);
         }
 
@@ -2779,10 +2803,12 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             //List<IDisplayMissingData> list = ft.MissingData(relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily);
-            MissingData rs = new MissingData();
-            DisposeDuplicateForms(rs);
-            rs.Show();
-            rs.Focus();
+            using (MissingData rs = new MissingData())
+            {
+                DisposeDuplicateForms(rs);
+                rs.Show();
+                rs.Focus();
+            }
             HourGlass(false);
         }
 
@@ -2927,8 +2953,8 @@ namespace FTAnalyzer
             Individual ind = GetContextIndividual(sender);
             if (ind != null)
             {
-                Notes notes = new Notes(ind);
-                notes.Show();
+                using (Notes notes = new Notes(ind))
+                    notes.Show();
             }
             HourGlass(false);
         }
@@ -2981,9 +3007,11 @@ namespace FTAnalyzer
                 HourGlass(true);
                 Individual root = ft.RootPerson;
                 ft.SetRelations(selected.IndividualID, null);
-                LostCousinsReferral lcr = new LostCousinsReferral(selected, ckbReferralInCommon.Checked);
-                DisposeDuplicateForms(lcr);
-                lcr.Show();
+                using (LostCousinsReferral lcr = new LostCousinsReferral(selected, ckbReferralInCommon.Checked))
+                {
+                    DisposeDuplicateForms(lcr);
+                    lcr.Show();
+                }
                 ft.SetRelations(root.IndividualID, null);
                 HourGlass(false);
             }
@@ -3146,6 +3174,8 @@ namespace FTAnalyzer
 
         public void SetFactTypeList(CheckedListBox ckbFactSelect, CheckedListBox ckbFactExclude, Predicate<ExportFact> filter)
         {
+            if (ckbFactSelect == null || ckbFactExclude == null)
+                return;
             List<string> factTypes = ft.AllExportFacts.Filter(filter).Select(x => x.FactType).Distinct().ToList<string>();
             factTypes.Sort();
             ckbFactSelect.Items.Clear();

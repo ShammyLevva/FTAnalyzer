@@ -209,7 +209,7 @@ namespace FTAnalyzer.Forms
 
         void MapBox1_MapViewOnChange() => clusters.Refresh();
 
-        void MapBox1_MapZoomChanged(double zoom) => RefreshClusters();
+        void MapBox1_MapZoomChanged() => RefreshClusters();
 
         public void RefreshClusters()
         {
@@ -235,7 +235,7 @@ namespace FTAnalyzer.Forms
             mapBox1.Refresh();
         }
 
-        void MapBox1_MapCenterChanged(Coordinate center) => RefreshClusters();
+        void MapBox1_MapCenterChanged() => RefreshClusters();
 
         void MapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -283,8 +283,8 @@ namespace FTAnalyzer.Forms
                 foreach (FeatureDataRow feature in features)
                     locations.Add((MapLocation)feature["MapLocation"]);
             }
-            MapIndividuals ind = new MapIndividuals(locations, null, this);
-            ind.Show();
+            using (MapIndividuals ind = new MapIndividuals(locations, null, this))
+                ind.Show();
             Cursor = Cursors.Default;
 
         }

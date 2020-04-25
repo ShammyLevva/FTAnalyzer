@@ -421,13 +421,13 @@ namespace FTAnalyzer.Forms
                 DisplayFact f = dgFacts.Rows[e.RowIndex].DataBoundItem as DisplayFact;
                 if (f.Fact.FactType == Fact.REPORT)
                 {
-                    Facts person = new Facts(f.Ind);
-                    person.Show();
+                    using (Facts person = new Facts(f.Ind))
+                        person.Show();
                 }
                 else
                 {
-                    SourcesForm sourceForm = new SourcesForm(f);
-                    sourceForm.Show();
+                    using(SourcesForm sourceForm = new SourcesForm(f)
+                        sourceForm.Show();
                 }
             }
         }

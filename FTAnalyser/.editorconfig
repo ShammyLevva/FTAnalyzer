@@ -13,7 +13,7 @@ dotnet_diagnostic.CA1304.severity = silent
 dotnet_diagnostic.CA2211.severity = silent
 
 # CA1707: Identifiers should not contain underscores
-dotnet_diagnostic.CA1707.severity = silent
+dotnet_diagnostic.CA1707.severity = none
 
 # CA1307: Specify StringComparison
 dotnet_diagnostic.CA1307.severity = none
@@ -26,3 +26,9 @@ dotnet_diagnostic.CA1822.severity = none
 
 # CA1721: Property names should not match get methods
 dotnet_diagnostic.CA1721.severity = none
+
+# IDE0040: Add accessibility modifiers
+dotnet_style_require_accessibility_modifiers = never:silent
+
+# CA1710: Identifiers should have correct suffix
+dotnet_diagnostic.CA1710.severity = silent
