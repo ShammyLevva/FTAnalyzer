@@ -5,12 +5,12 @@ using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms
 {
-    public partial class Sources : Form
+    public partial class SourcesForm : Form
     {
         readonly SortableBindingList<IDisplaySource> sources;
         readonly ReportFormHelper reportFormHelper;
 
-        public Sources(DisplayFact fact)
+        public SourcesForm(DisplayFact fact)
         {
             InitializeComponent();
             Top += NativeMethods.TopTaskbarOffset;

@@ -23,23 +23,24 @@ namespace FTAnalyzer.Utilities
                 float LeftMargin = e.MarginBounds.Left;
                 float TopMargin = e.MarginBounds.Top;
                 string Line = null;
-                Font PrintFont = rtb.Font;
-                if (PrintFont.SizeInPoints < 11)
-                    PrintFont = new Font(PrintFont.FontFamily, 11f);
-                int maxWidth = e.MarginBounds.Right - e.MarginBounds.Left;
-                int maxHeight = e.MarginBounds.Bottom - e.MarginBounds.Top;
-                float fontHeight = PrintFont.GetHeight(e.Graphics);
-                SolidBrush PrintBrush = new SolidBrush(Color.Black);
-
-                float YPosition = TopMargin;
-                while (YPosition < maxHeight && ((Line = reader.ReadLine()) != null))
+                float fontsize = Math.Max(rtb.Font.SizeInPoints,11f);
+                using (Font PrintFont = new Font(rtb.Font.FontFamily, fontsize))
                 {
-                    SizeF sf = e.Graphics.MeasureString(Line, PrintFont, maxWidth);
-                    e.Graphics.DrawString(Line, PrintFont, PrintBrush, new RectangleF(new PointF(LeftMargin, YPosition), sf), StringFormat.GenericTypographic);
-                    YPosition += sf.Height;
+                    int maxWidth = e.MarginBounds.Right - e.MarginBounds.Left;
+                    int maxHeight = e.MarginBounds.Bottom - e.MarginBounds.Top;
+                    float fontHeight = PrintFont.GetHeight(e.Graphics);
+                    SolidBrush PrintBrush = new SolidBrush(Color.Black);
+
+                    float YPosition = TopMargin;
+                    while (YPosition < maxHeight && ((Line = reader.ReadLine()) != null))
+                    {
+                        SizeF sf = e.Graphics.MeasureString(Line, PrintFont, maxWidth);
+                        e.Graphics.DrawString(Line, PrintFont, PrintBrush, new RectangleF(new PointF(LeftMargin, YPosition), sf), StringFormat.GenericTypographic);
+                        YPosition += sf.Height;
+                    }
+                    e.HasMorePages = Line != null;
+                    PrintBrush.Dispose();
                 }
-                e.HasMorePages = Line != null;
-                PrintBrush.Dispose();
             }
             catch (Exception) { }
         }

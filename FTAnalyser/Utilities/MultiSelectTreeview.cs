@@ -10,7 +10,7 @@ namespace FTAnalyzer.Utilities
 
         #region Selected Node(s) Properties
 
-        private List<TreeNode> m_SelectedNodes = null;
+        readonly List<TreeNode> m_SelectedNodes = null;
         public List<TreeNode> SelectedNodes
         {
             get => m_SelectedNodes;
@@ -98,7 +98,8 @@ namespace FTAnalyzer.Utilities
         {
             // If the user clicks on a node that was not
             // previously selected, select it now.
-
+            if (e == null)
+                return;
             try
             {
                 base.SelectedNode = null;
@@ -136,6 +137,8 @@ namespace FTAnalyzer.Utilities
             // selected then, reselect it now. This will clear
             // any other selected nodes. e.g. A B C D are selected
             // the user clicks on B, now A C & D are no longer selected.
+            if (e == null)
+                return;
             try
             {
                 // Check to see if a node was clicked on 
@@ -191,6 +194,8 @@ namespace FTAnalyzer.Utilities
 
         protected override void OnBeforeSelect(TreeViewCancelEventArgs e)
         {
+            if (e == null)
+                return;
             // Never allow base.SelectedNode to be set!
             try
             {
@@ -225,7 +230,8 @@ namespace FTAnalyzer.Utilities
             // including navigation, selection, etc.
 
             base.OnKeyDown(e);
-
+            if (e == null)
+                return;
             if (e.KeyCode == Keys.ShiftKey) return;
             if (e.KeyCode == Keys.ControlKey) return;
 

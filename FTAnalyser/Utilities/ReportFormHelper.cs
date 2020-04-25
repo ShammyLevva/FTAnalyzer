@@ -30,36 +30,39 @@ namespace FTAnalyzer
 
         public ReportFormHelper(Form parent, string title, DataGridView report, Action resetTable, string registry, bool saveForm = true)
         {
-            this.parent = parent;
-            defaultLocation = new Tuple<int, int>(parent.Top, parent.Left);
-            defaultSize = new Tuple<int, int>(parent.Height, parent.Width);
-            PrintTitle = title;
-            ReportGrid = report;
-            _resetTable = resetTable;
-            _registry = registry;
-            _saveForm = saveForm;
-
-            printDocument = new PrintDocument();
-            printDocument.DefaultPageSettings.Landscape = true;
-            printDocument.DefaultPageSettings.Margins = new Margins(15, 15, 15, 15);
-
-            printProvider = PrintingDataGridViewProvider.Create(printDocument, ReportGrid, true, true, true, new TitlePrintBlock(PrintTitle), null, null);
-
-            printDialog = new PrintDialog
+            if (parent != null)
             {
-                AllowSelection = true,
-                AllowSomePages = true,
-                Document = printDocument,
-                UseEXDialog = true
-            };
+                this.parent = parent;
+                defaultLocation = new Tuple<int, int>(parent.Top, parent.Left);
+                defaultSize = new Tuple<int, int>(parent.Height, parent.Width);
+                PrintTitle = title;
+                ReportGrid = report;
+                _resetTable = resetTable;
+                _registry = registry;
+                _saveForm = saveForm;
 
-            printPreviewDialog = new PrintPreviewDialog
-            {
-                AutoScrollMargin = new Size(0, 0),
-                AutoScrollMinSize = new Size(0, 0),
-                ClientSize = new Size(400, 300),
-                Document = printDocument
-            };
+                printDocument = new PrintDocument();
+                printDocument.DefaultPageSettings.Landscape = true;
+                printDocument.DefaultPageSettings.Margins = new Margins(15, 15, 15, 15);
+
+                printProvider = PrintingDataGridViewProvider.Create(printDocument, ReportGrid, true, true, true, new TitlePrintBlock(PrintTitle), null, null);
+
+                printDialog = new PrintDialog
+                {
+                    AllowSelection = true,
+                    AllowSomePages = true,
+                    Document = printDocument,
+                    UseEXDialog = true
+                };
+
+                printPreviewDialog = new PrintPreviewDialog
+                {
+                    AutoScrollMargin = new Size(0, 0),
+                    AutoScrollMinSize = new Size(0, 0),
+                    ClientSize = new Size(400, 300),
+                    Document = printDocument
+                };
+            }
         }
 
         public void PrintReport(string reportname)
@@ -92,6 +95,7 @@ namespace FTAnalyzer
             SortableBindingList<T> gridDatasource = ReportGrid.DataSource as SortableBindingList<T>;
             DataTable dt = convertor.ToDataTable(gridDatasource.ToList(), shown);
             ExportToExcel.Export(dt);
+            dt.Dispose();
             parent.Cursor = Cursors.Default;
         }
 
@@ -103,6 +107,7 @@ namespace FTAnalyzer
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
             DataTable dt = convertor.ToDataTable(list);
             ExportToExcel.Export(dt);
+            dt.Dispose();
             parent.Cursor = Cursors.Default;
         }
 
@@ -124,6 +129,7 @@ namespace FTAnalyzer
             string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, filename);
             dt.WriteXmlSchema(path);
             SaveFormLayout();
+            dt.Dispose();
         }
 
         public static Point CheckIsOnScreen(int top, int left)
@@ -171,6 +177,7 @@ namespace FTAnalyzer
                 }
                 else
                     ResetColumnLayout(filename);
+                dt.Dispose();
             }
             catch (Exception)
             {

@@ -41,40 +41,44 @@ namespace FTAnalyzer.Controls
 
                 mainformTreeRootNode = new TreeNode();
                 placesTreeRootNode = new TreeNode();
-                Font regularFont = new Font(defaultFont, FontStyle.Regular);
-                Font boldFont = new Font(defaultFont, FontStyle.Bold);
-                foreach (FactLocation location in FamilyTree.Instance.AllDisplayPlaces)
+                using (Font regularFont = new Font(defaultFont, FontStyle.Regular))
                 {
-                    string[] parts = location.GetParts();
-                    TreeNode currentM = mainformTreeRootNode;
-                    TreeNode currentP = placesTreeRootNode;
-                    foreach (string part in parts)
+                    using (Font boldFont = new Font(defaultFont, FontStyle.Bold))
                     {
-                        if (part.Length == 0 && !Properties.GeneralSettings.Default.AllowEmptyLocations) break;
-                        TreeNode childM = currentM.Nodes.Find(part, false).FirstOrDefault();
-                        TreeNode childP = currentP.Nodes.Find(part, false).FirstOrDefault();
-                        if (childM == null)
+                        foreach (FactLocation location in FamilyTree.Instance.AllDisplayPlaces)
                         {
-                            TreeNode child = new TreeNode((part.Length == 0 ? "<blank>" : part))
+                            string[] parts = location.GetParts();
+                            TreeNode currentM = mainformTreeRootNode;
+                            TreeNode currentP = placesTreeRootNode;
+                            foreach (string part in parts)
                             {
-                                Name = part,
-                                Tag = location,
-                                ToolTipText = "Geocoding Status : " + location.Geocoded
-                            };
-                            SetTreeNodeImage(location, child);
-                            // Set everything other than known countries and known regions to regular
-                            if ((currentM.Level == 0 && Countries.IsKnownCountry(part)) ||
-                                (currentM.Level == 1 && Regions.IsKnownRegion(part)))
-                                child.NodeFont = boldFont;
-                            else
-                                child.NodeFont = regularFont;
-                            childM = child;
-                            childP = (TreeNode)child.Clone();
-                            currentM.Nodes.Add(childM);
-                            currentP.Nodes.Add(childP);
+                                if (part.Length == 0 && !Properties.GeneralSettings.Default.AllowEmptyLocations) break;
+                                TreeNode childM = currentM.Nodes.Find(part, false).FirstOrDefault();
+                                TreeNode childP = currentP.Nodes.Find(part, false).FirstOrDefault();
+                                if (childM == null)
+                                {
+                                    TreeNode child = new TreeNode((part.Length == 0 ? "<blank>" : part))
+                                    {
+                                        Name = part,
+                                        Tag = location,
+                                        ToolTipText = "Geocoding Status : " + location.Geocoded
+                                    };
+                                    SetTreeNodeImage(location, child);
+                                    // Set everything other than known countries and known regions to regular
+                                    if ((currentM.Level == 0 && Countries.IsKnownCountry(part)) ||
+                                        (currentM.Level == 1 && Regions.IsKnownRegion(part)))
+                                        child.NodeFont = boldFont;
+                                    else
+                                        child.NodeFont = regularFont;
+                                    childM = child;
+                                    childP = (TreeNode)child.Clone();
+                                    currentM.Nodes.Add(childM);
+                                    currentP.Nodes.Add(childP);
+                                }
+                                currentM = childM;
+                                currentP = childP;
+                            }
                         }
-                        currentM = childM;
-                        currentP = childP;
                     }
                 }
                 if (Properties.GeneralSettings.Default.AllowEmptyLocations)

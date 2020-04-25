@@ -97,10 +97,10 @@ namespace FTAnalyzer.Forms
 
         public void ShowLocation(FactLocation loc, int level)
         {
-            if (loc.IsGeoCoded(false))
+            if (loc != null && loc.IsGeoCoded(false))
             {
                 string URL = $"https://www.google.com/maps/@{loc.Latitude},{loc.Longitude},{level}z";
-                SpecialMethods.VisitWebsite(URL);
+                SpecialMethods.VisitWebsite(new Uri(URL));
             }
             else
                 MessageBox.Show($"{loc} is not yet geocoded so can't be displayed.");
@@ -109,6 +109,8 @@ namespace FTAnalyzer.Forms
         public static string LocationText(GeoResponse res, FactLocation loc, int level)
         {
             string output;
+            if (loc == null || res == null)
+                return string.Empty;
             int returnlevel = GetFactLocationType(res.Results[0].Types, loc);
             if (returnlevel != FactLocation.UNKNOWN)
             {
@@ -127,23 +129,26 @@ namespace FTAnalyzer.Forms
 
         public static int GetFactLocationType(string[] locationTypes, FactLocation loc)
         {
-            bool UK = loc.IsUnitedKingdom;
-            HashSet<string> types = new HashSet<string>(locationTypes);
-            foreach (string type in types)
-                if (PLACES.Contains(type))
-                    return FactLocation.PLACE;
-            if (types.Contains(SUBLOCALITY) || types.Contains(POSTALCODE) || types.Contains(NEIGHBOURHOOD))
-                return FactLocation.ADDRESS;
-            if (types.Contains(ADMIN3) || types.Contains(LOCALITY))
-                return UK ? FactLocation.SUBREGION : FactLocation.ADDRESS;
-            if (types.Contains(POSTALCODEPREFIX) || types.Contains(POSTALTOWN) || types.Contains(COLLOQUIAL_AREA))
-                return FactLocation.SUBREGION;
-            if (types.Contains(ADMIN2))
-                return UK ? FactLocation.REGION : FactLocation.SUBREGION;
-            if (types.Contains(ADMIN1))
-                return UK ? FactLocation.COUNTRY : FactLocation.REGION;
-            if (types.Contains(COUNTRY))
-                return FactLocation.COUNTRY;
+            if (loc != null)
+            {
+                bool UK = loc.IsUnitedKingdom;
+                HashSet<string> types = new HashSet<string>(locationTypes);
+                foreach (string type in types)
+                    if (PLACES.Contains(type))
+                        return FactLocation.PLACE;
+                if (types.Contains(SUBLOCALITY) || types.Contains(POSTALCODE) || types.Contains(NEIGHBOURHOOD))
+                    return FactLocation.ADDRESS;
+                if (types.Contains(ADMIN3) || types.Contains(LOCALITY))
+                    return UK ? FactLocation.SUBREGION : FactLocation.ADDRESS;
+                if (types.Contains(POSTALCODEPREFIX) || types.Contains(POSTALTOWN) || types.Contains(COLLOQUIAL_AREA))
+                    return FactLocation.SUBREGION;
+                if (types.Contains(ADMIN2))
+                    return UK ? FactLocation.REGION : FactLocation.SUBREGION;
+                if (types.Contains(ADMIN1))
+                    return UK ? FactLocation.COUNTRY : FactLocation.REGION;
+                if (types.Contains(COUNTRY))
+                    return FactLocation.COUNTRY;
+            }
             return FactLocation.UNKNOWN;
         }
 
@@ -152,7 +157,7 @@ namespace FTAnalyzer.Forms
         public static GeoResponse CallGoogleGeocode(FactLocation address, string text)
         {
             string bounds = string.Empty;
-            string tld = address.IsUnitedKingdom ? "&region=uk" : string.Empty;
+            string tld = address != null && address.IsUnitedKingdom ? "&region=uk" : string.Empty;
             if (address != null)
             {
                 //if (address.Level > FactLocation.SUBREGION)
@@ -195,7 +200,7 @@ namespace FTAnalyzer.Forms
             HttpWebRequest request;
             try
             {
-                request = WebRequest.Create(url) as HttpWebRequest;
+                request = WebRequest.Create(new Uri(url)) as HttpWebRequest;
                 request.Timeout = 3000; // set timeout to 5 seconds from default 100 seconds
                 request.ReadWriteTimeout = 10000;
                 request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");

@@ -140,8 +140,10 @@ namespace FTAnalyzer.Utilities
 
         public bool BackupDatabase(SaveFileDialog saveDatabase, string comment)
         {
+            if (saveDatabase == null || comment == null)
+                return false;
             string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString();
-            saveDatabase.FileName = "FTAnalyzer-Geocodes-" + DateTime.Now.ToString("yyyy-MM-dd") + "-v" + MainForm.VERSION + ".zip";
+            saveDatabase.FileName = $"FTAnalyzer-Geocodes-{DateTime.Now:yyyy-MM-dd}-v{MainForm.VERSION}.zip";
             saveDatabase.InitialDirectory = directory;
             DialogResult result = saveDatabase.ShowDialog();
             if (result == DialogResult.OK)
@@ -151,7 +153,7 @@ namespace FTAnalyzer.Utilities
                     File.Delete(saveDatabase.FileName);
                 ZipFile zip = new ZipFile(saveDatabase.FileName);
                 zip.AddFile(DatabaseFile, string.Empty);
-                zip.Comment = comment + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm");
+                zip.Comment = $"{comment} on {DateTime.Now:dd MMM yyyy HH:mm}";
                 zip.Save();
                 //EndBackupDatabase();
                 Application.UserAppDataRegistry.SetValue("Geocode Backup Directory", Path.GetDirectoryName(saveDatabase.FileName));
@@ -483,8 +485,8 @@ namespace FTAnalyzer.Utilities
                     {
                         while (reader.Read())
                         {
-                            double.TryParse(reader[0].ToString(), out double latitude);
-                            double.TryParse(reader[1].ToString(), out double longitude);
+                            _ = double.TryParse(reader[0].ToString(), out double latitude);
+                            _ = double.TryParse(reader[1].ToString(), out double longitude);
                             hashkey = LatLongHashKey(latitude, longitude);
                             foundlocation = reader[2].ToString();
                             foundresulttype = reader[3].ToString();
@@ -543,7 +545,7 @@ namespace FTAnalyzer.Utilities
 
         public static void GetLocationDetails(FactLocation location)
         {
-            if (location.ToString().Length == 0) return;
+            if (location == null || string.IsNullOrEmpty(location.ToString())) return;
             if (InstanceConnection.State != ConnectionState.Open)
                 InstanceConnection.Open();
             ReadLocationIntoFact(location, InstanceConnection);
@@ -603,6 +605,8 @@ namespace FTAnalyzer.Utilities
         }
         public static void InsertGeocode(FactLocation loc)
         {
+            if (loc == null)
+                return;
             if (InstanceConnection.State != ConnectionState.Open)
                 InstanceConnection.Open();
             SQLiteParameter param;
@@ -687,6 +691,8 @@ namespace FTAnalyzer.Utilities
 
         public static void UpdateGeocode(FactLocation loc)
         {
+            if (loc == null)
+                return;
             if (InstanceConnection.State != ConnectionState.Open)
                 InstanceConnection.Open();
             using (SQLiteCommand updateCmd = new SQLiteCommand("update geocode set founddate=date('now'), level = ?, latitude = ?, longitude = ?, foundlocation = ?, foundlevel = ?, viewport_x_ne = ?, viewport_y_ne = ?, viewport_x_sw = ?, viewport_y_sw = ?, geocodestatus = ?, foundresulttype = ?, latm = ?, longm = ? where location = ?", InstanceConnection))
@@ -844,6 +850,8 @@ namespace FTAnalyzer.Utilities
 
         public static bool LostCousinsExists(CensusIndividual ind)
         {
+            if (ind == null)
+                return false;
             if (InstanceConnection.State != ConnectionState.Open)
                 InstanceConnection.Open();
             bool result = false;
@@ -880,6 +888,8 @@ namespace FTAnalyzer.Utilities
 
         public static void StoreLostCousinsFact(CensusIndividual ind, IProgress<string> outputText)
         {
+            if (ind == null || outputText == null)
+                return;
             try
             {
                 if (InstanceConnection.State != ConnectionState.Open)
@@ -930,6 +940,8 @@ namespace FTAnalyzer.Utilities
 
         public static void AddEmptyLocationsToQueue(ConcurrentQueue<FactLocation> queue)
         {
+            if (queue == null)
+                return;
             if (InstanceConnection.State != ConnectionState.Open)
                 InstanceConnection.Open();
             using (SQLiteCommand cmd = new SQLiteCommand("select location from geocode where foundlocation='' and geocodestatus in (3, 8, 9) order by level", InstanceConnection))

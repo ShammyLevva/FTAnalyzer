@@ -13,12 +13,11 @@ namespace FTAnalyzer.Utilities
 
         public static void Show(string errorNum, Exception ex, MessageBoxIcon icon)
         {
-            string message = ErrorMessages.ResourceManager.GetString(errorNum);
-            int.TryParse(errorNum.Substring(4), out int eventId);
-            MessageBox.Show(message + "\n" + ex.Message,
-                        "Error: " + errorNum,
-                        MessageBoxButtons.OK,
-                        icon);
+            if (errorNum == null || errorNum.Length < 4 || ex == null)
+                return;
+            var message = ErrorMessages.ResourceManager.GetString(errorNum);
+            int.TryParse(errorNum.Substring(4), out _);
+            MessageBox.Show(message + "\n" + ex.Message, "Error: " + errorNum, MessageBoxButtons.OK, icon);
         }
     }
 }
