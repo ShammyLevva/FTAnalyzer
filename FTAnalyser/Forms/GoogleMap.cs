@@ -155,12 +155,12 @@ namespace FTAnalyzer.Forms
             string tld = address.IsUnitedKingdom ? "&region=uk" : string.Empty;
             if (address != null)
             {
-                if (address.Level > FactLocation.SUBREGION)
-                {
-                    FactLocation area = address.GetLocation(FactLocation.SUBREGION);
-                    if (area != null && area.IsGeoCoded(false) && !string.IsNullOrEmpty(area.Bounds))
-                        bounds = $"{area.Bounds}";
-                }
+                //if (address.Level > FactLocation.SUBREGION)
+                //{
+                //    FactLocation area = address.GetLocation(FactLocation.SUBREGION);
+                //    if (area != null && area.IsGeoCoded(false) && !string.IsNullOrEmpty(area.Bounds))
+                //        bounds = $"{area.Bounds}";
+                //}
                 if (string.IsNullOrEmpty(bounds) && address.Level > FactLocation.REGION)
                 {
                     FactLocation area = address.GetLocation(FactLocation.REGION);
@@ -321,7 +321,7 @@ namespace FTAnalyzer.Forms
         {
             string message = string.IsNullOrEmpty(Properties.MappingSettings.Default.GoogleAPI) ?
                                 "Google Geocoding timing out. Possibly exceeded max GeoLocations for today.\nConsider getting your own FREE Google API Key for 40,000 lookups a day. See Help Menu.\n" :
-                                "Google Timeout - Limit Exceeded.\n";
+                                "Max Google Timeout - Limit Exceeded.\n";
             OnWaitingForGoogle(message);
             GeoResponse response = new GeoResponse
             {

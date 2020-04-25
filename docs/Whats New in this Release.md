@@ -10,6 +10,7 @@ First fact type in facts tab wasn't allowing you to select it
 Added various using groups to catch similar possible issues   
 Reverse geocoding now updates viewports  
 Don't geocode unknown location  
+Treat UNKNOWN location as already Geocoded  
 
  #### Updated Release Version 7.7.1 22nd Apr 2020  
 **Updates**  

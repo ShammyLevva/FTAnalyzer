@@ -38,9 +38,9 @@ namespace FTAnalyzer.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeocodeLocations));
             this.dgLocations = new System.Windows.Forms.DataGridView();
             this.LocationIcon = new System.Windows.Forms.DataGridViewImageColumn();
@@ -77,6 +77,7 @@ namespace FTAnalyzer.Forms
             this.mnuRetryPartial = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOSGeocodeLocations = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuReverseGeocode = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCheckEmptyViewPorts = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.updateChangesWithoutAskingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetAllPartialMatchesToNotSearchedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,7 +88,7 @@ namespace FTAnalyzer.Forms
             this.mnuSelectClear = new System.Windows.Forms.ToolStripMenuItem();
             this.reverseGeocodeBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.OSGeocodeBackgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.MnuCheckForEmptyViewPortsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EmptyViewPortsBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.dgLocations)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -110,14 +111,14 @@ namespace FTAnalyzer.Forms
             this.FoundLocation,
             this.FoundResultType});
             this.dgLocations.ContextMenuStrip = this.contextMenuStrip;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgLocations.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgLocations.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgLocations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgLocations.Location = new System.Drawing.Point(0, 49);
             this.dgLocations.MultiSelect = false;
@@ -157,8 +158,8 @@ namespace FTAnalyzer.Forms
             // 
             this.Latitude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Latitude.DataPropertyName = "Latitude";
-            dataGridViewCellStyle1.Format = "N7";
-            this.Latitude.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Format = "N7";
+            this.Latitude.DefaultCellStyle = dataGridViewCellStyle4;
             this.Latitude.HeaderText = "Latitude";
             this.Latitude.MinimumWidth = 75;
             this.Latitude.Name = "Latitude";
@@ -170,8 +171,8 @@ namespace FTAnalyzer.Forms
             // 
             this.Longitude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Longitude.DataPropertyName = "Longitude";
-            dataGridViewCellStyle2.Format = "N7";
-            this.Longitude.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Format = "N7";
+            this.Longitude.DefaultCellStyle = dataGridViewCellStyle5;
             this.Longitude.HeaderText = "Longitude";
             this.Longitude.MinimumWidth = 75;
             this.Longitude.Name = "Longitude";
@@ -405,7 +406,7 @@ namespace FTAnalyzer.Forms
             this.mnuRetryPartial,
             this.mnuOSGeocodeLocations,
             this.mnuReverseGeocode,
-            this.MnuCheckForEmptyViewPortsToolStripMenuItem});
+            this.mnuCheckEmptyViewPorts});
             this.geocodeToolStripMenuItem.Name = "geocodeToolStripMenuItem";
             this.geocodeToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
             this.geocodeToolStripMenuItem.Text = "Geocoder";
@@ -438,6 +439,13 @@ namespace FTAnalyzer.Forms
             this.mnuReverseGeocode.Size = new System.Drawing.Size(282, 22);
             this.mnuReverseGeocode.Text = "Lookup Blank Google Locations";
             this.mnuReverseGeocode.Click += new System.EventHandler(this.MnuReverseGeocde_Click);
+            // 
+            // mnuCheckEmptyViewPorts
+            // 
+            this.mnuCheckEmptyViewPorts.Name = "mnuCheckEmptyViewPorts";
+            this.mnuCheckEmptyViewPorts.Size = new System.Drawing.Size(282, 22);
+            this.mnuCheckEmptyViewPorts.Text = "Check For Empty ViewPorts";
+            this.mnuCheckEmptyViewPorts.Click += new System.EventHandler(this.MnuCheckForEmptyViewPortsToolStripMenuItem_Click);
             // 
             // mnuOptions
             // 
@@ -519,12 +527,13 @@ namespace FTAnalyzer.Forms
             this.OSGeocodeBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.OSGeocodeBackgroundWorker_ProgressChanged);
             this.OSGeocodeBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.OSGeocodeBackgroundWorker_RunWorkerCompleted);
             // 
-            // MnuCheckForEmptyViewPortsToolStripMenuItem
+            // EmptyViewPortsBackgroundWorker
             // 
-            this.MnuCheckForEmptyViewPortsToolStripMenuItem.Name = "MnuCheckForEmptyViewPortsToolStripMenuItem";
-            this.MnuCheckForEmptyViewPortsToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
-            this.MnuCheckForEmptyViewPortsToolStripMenuItem.Text = "Check For Empty ViewPorts";
-            this.MnuCheckForEmptyViewPortsToolStripMenuItem.Click += new System.EventHandler(this.MnuCheckForEmptyViewPortsToolStripMenuItem_Click);
+            this.EmptyViewPortsBackgroundWorker.WorkerReportsProgress = true;
+            this.EmptyViewPortsBackgroundWorker.WorkerSupportsCancellation = true;
+            this.EmptyViewPortsBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.EmptyViewPortsBackgroundWorker_DoWork);
+            this.EmptyViewPortsBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.GoogleGeocodingBackgroundWorker_ProgressChanged);
+            this.EmptyViewPortsBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.GoogleGeocodingBackgroundWorker_RunWorkerCompleted);
             // 
             // GeocodeLocations
             // 
@@ -601,6 +610,7 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn GeocodeStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn FoundLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn FoundResultType;
-        private System.Windows.Forms.ToolStripMenuItem MnuCheckForEmptyViewPortsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuCheckEmptyViewPorts;
+        private System.ComponentModel.BackgroundWorker EmptyViewPortsBackgroundWorker;
     }
 }

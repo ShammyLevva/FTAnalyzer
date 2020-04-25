@@ -441,7 +441,8 @@ namespace FTAnalyzer.Forms
 
         void GoogleGeocodingBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            pbGeocoding.Value = (e.ProgressPercentage < 0) ? 1 : e.ProgressPercentage; ;
+            pbGeocoding.Visible = true;
+            pbGeocoding.Value = (e.ProgressPercentage < 0) ? 1 : e.ProgressPercentage;
             txtLocations.Text = (string)e.UserState;
         }
 
@@ -456,11 +457,12 @@ namespace FTAnalyzer.Forms
             mnuEditLocation.Enabled = true;
             mnuReverseGeocode.Enabled = true;
             mnuOSGeocodeLocations.Enabled = true;
+            mnuCheckEmptyViewPorts.Enabled = true;
             string title = sender == OSGeocodeBackgroundWorker ? "OS Geocoding Results:" : "Google Geocoding Results:";
             FamilyTree.WriteGeocodeStatstoRTB(title, outputText);
             ft.Geocoding = false;
             if (formClosing)
-                this.Close();
+                Close();
             else
                 UpdateGridWithFilters(true);
         }
@@ -487,6 +489,12 @@ namespace FTAnalyzer.Forms
                 e.Cancel = true;
                 formClosing = true;
             }
+            if(EmptyViewPortsBackgroundWorker.IsBusy)
+            {
+                EmptyViewPortsBackgroundWorker.CancelAsync();
+                e.Cancel = true;
+                formClosing = true;
+            }
         }
 
         public void GoogleMap_WaitingForGoogle(object sender, GoogleWaitingEventArgs args)
@@ -499,20 +507,19 @@ namespace FTAnalyzer.Forms
             txtGoogleWait.Text = args.Message;
         }
 
-        void ReverseGeocodeBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            ReverseGeoCode(reverseGeocodeBackgroundWorker, e);
-        }
+        void ReverseGeocodeBackgroundWorker_DoWork(object sender, DoWorkEventArgs e) => ReverseGeoCode(reverseGeocodeBackgroundWorker, e);
 
         #endregion
 
         #region Google Geocoding
 
+        void EmptyViewPortsBackgroundWorker_DoWork(object sender, DoWorkEventArgs e) => CheckEmptyViewPorts(EmptyViewPortsBackgroundWorker, e);
+
         public void StartGoogleGeoCoding(bool retryPartials)
         {
             try
             {
-                if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy)
+                if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy || EmptyViewPortsBackgroundWorker.IsBusy)
                 {
                     MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
                 }
@@ -526,6 +533,7 @@ namespace FTAnalyzer.Forms
                         mnuEditLocation.Enabled = false;
                         mnuReverseGeocode.Enabled = false;
                         mnuOSGeocodeLocations.Enabled = false;
+                        mnuCheckEmptyViewPorts.Enabled = false;
                         ft.Geocoding = true;
                     }
                     catch(ArgumentException)
@@ -541,7 +549,42 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        public void CheckEmptyViewPorts()
+        void StartCheckEmptyViewPorts()
+        {
+            try
+            {
+                if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy || EmptyViewPortsBackgroundWorker.IsBusy)
+                {
+                    MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
+                }
+                else
+                {
+                    Cursor = Cursors.WaitCursor;
+                    try
+                    {
+                        pbGeocoding.Visible = true;
+                        mnuGoogleGeocodeLocations.Enabled = false;
+                        mnuEditLocation.Enabled = false;
+                        mnuReverseGeocode.Enabled = false;
+                        mnuOSGeocodeLocations.Enabled = false;
+                        mnuCheckEmptyViewPorts.Enabled = false;
+                        ft.Geocoding = true;
+                    }
+                    catch (ArgumentException)
+                    {
+                        Console.WriteLine("Race condition gets here sometimes");
+                    }
+                    EmptyViewPortsBackgroundWorker.RunWorkerAsync();
+                    Cursor = Cursors.Default;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message); // sometimes setting pbGeocoding.Visible triggers font error for resizing fonts
+            }
+        }
+
+        public void CheckEmptyViewPorts(BackgroundWorker worker, DoWorkEventArgs e)
         {
             try
             {
@@ -550,9 +593,10 @@ namespace FTAnalyzer.Forms
                 GoogleMap.ThreadCancelled = false;
                 int vpchecked = 0;
                 int updated = 0;
+                int maxtoCheck = FactLocation.AllLocations.Where(x => x.EmptyViewPort).Count();
                 foreach (FactLocation loc in FactLocation.AllLocations.Where(x => x.EmptyViewPort).OrderBy(x => x.Level))
                 {
-                    if (loc != FactLocation.UNKNOWN_LOCATION && loc.Level <= FactLocation.SUBREGION && loc.ToString().Length > 0)
+                    if (loc != FactLocation.UNKNOWN_LOCATION && loc.Level <= FactLocation.REGION && loc.ToString().Length > 0)
                     {
                         vpchecked++;
                         GeoResponse res = null;
@@ -569,20 +613,30 @@ namespace FTAnalyzer.Forms
                                     !result.PartialMatch)
                                 {
                                     loc.ViewPort = MapTransforms.TransformViewport(viewport);
-                                    DatabaseHelper.UpdateGeocode(loc);
-                                    updated++;
+                                    if (!loc.EmptyViewPort)
+                                    {
+                                        DatabaseHelper.UpdateGeocode(loc);
+                                        updated++;
+                                    }
                                 }
                             }
                         }
                     }
+                    int percent = (int) Math.Truncate(100.0 * vpchecked / maxtoCheck);
+                    string status = $"Googled empty ViewPorts and have updated {updated}. Done {vpchecked} of {maxtoCheck}.  ";
+                    worker.ReportProgress(percent, status);
+                    if (worker.CancellationPending ||
+                        (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text.Substring(0, 3).Equals("Max")))
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
                 }
-                    MessageBox.Show($"Google found and updated {updated} of {vpchecked} Empty ViewPorts");
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error Google Geocoding: {ex.Message}", "FTAnalyzer Geocoding");
             }
-
         }
 
         public void GoogleGeoCode(BackgroundWorker worker, DoWorkEventArgs e)
@@ -766,10 +820,8 @@ namespace FTAnalyzer.Forms
         void MnuGeocodeLocations_Click(object sender, EventArgs e) => StartGoogleGeoCoding(false);
         #endregion
 
-        void UpdateChangesWithoutAskingToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        void UpdateChangesWithoutAskingToolStripMenuItem_Click(object sender, EventArgs e) =>
             Application.UserAppDataRegistry.SetValue("Ask to update database", updateChangesWithoutAskingToolStripMenuItem.Checked);
-        }
 
         void DgLocations_CellToolTipTextNeeded_1(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
@@ -1368,10 +1420,7 @@ namespace FTAnalyzer.Forms
         #endregion
 
         #region OS Geocoding Threading
-        void OSGeocodeBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            OSGeoCode(OSGeocodeBackgroundWorker, e);
-        }
+        void OSGeocodeBackgroundWorker_DoWork(object sender, DoWorkEventArgs e) => OSGeoCode(OSGeocodeBackgroundWorker, e);
 
         void OSGeocodeBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -1385,6 +1434,6 @@ namespace FTAnalyzer.Forms
 
         void GeocodeLocations_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
 
-        void MnuCheckForEmptyViewPortsToolStripMenuItem_Click(object sender, EventArgs e) => CheckEmptyViewPorts();
+        void MnuCheckForEmptyViewPortsToolStripMenuItem_Click(object sender, EventArgs e) => StartCheckEmptyViewPorts();
     }
 }
