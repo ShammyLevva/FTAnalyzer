@@ -87,6 +87,7 @@ namespace FTAnalyzer.Forms
             this.mnuSelectClear = new System.Windows.Forms.ToolStripMenuItem();
             this.reverseGeocodeBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.OSGeocodeBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.MnuCheckForEmptyViewPortsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgLocations)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -403,7 +404,8 @@ namespace FTAnalyzer.Forms
             this.mnuGoogleGeocodeLocations,
             this.mnuRetryPartial,
             this.mnuOSGeocodeLocations,
-            this.mnuReverseGeocode});
+            this.mnuReverseGeocode,
+            this.MnuCheckForEmptyViewPortsToolStripMenuItem});
             this.geocodeToolStripMenuItem.Name = "geocodeToolStripMenuItem";
             this.geocodeToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
             this.geocodeToolStripMenuItem.Text = "Geocoder";
@@ -476,7 +478,7 @@ namespace FTAnalyzer.Forms
             this.mnuGeocodeStatus.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuStatusSelectAll});
             this.mnuGeocodeStatus.Name = "mnuGeocodeStatus";
-            this.mnuGeocodeStatus.Size = new System.Drawing.Size(171, 22);
+            this.mnuGeocodeStatus.Size = new System.Drawing.Size(170, 22);
             this.mnuGeocodeStatus.Text = "Geocode Status";
             // 
             // mnuStatusSelectAll
@@ -491,7 +493,7 @@ namespace FTAnalyzer.Forms
             this.mnuFoundResultType.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuSelectClear});
             this.mnuFoundResultType.Name = "mnuFoundResultType";
-            this.mnuFoundResultType.Size = new System.Drawing.Size(171, 22);
+            this.mnuFoundResultType.Size = new System.Drawing.Size(170, 22);
             this.mnuFoundResultType.Text = "Found Result Type";
             // 
             // mnuSelectClear
@@ -516,6 +518,13 @@ namespace FTAnalyzer.Forms
             this.OSGeocodeBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.OSGeocodeBackgroundWorker_DoWork);
             this.OSGeocodeBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.OSGeocodeBackgroundWorker_ProgressChanged);
             this.OSGeocodeBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.OSGeocodeBackgroundWorker_RunWorkerCompleted);
+            // 
+            // MnuCheckForEmptyViewPortsToolStripMenuItem
+            // 
+            this.MnuCheckForEmptyViewPortsToolStripMenuItem.Name = "MnuCheckForEmptyViewPortsToolStripMenuItem";
+            this.MnuCheckForEmptyViewPortsToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
+            this.MnuCheckForEmptyViewPortsToolStripMenuItem.Text = "Check For Empty ViewPorts";
+            this.MnuCheckForEmptyViewPortsToolStripMenuItem.Click += new System.EventHandler(this.MnuCheckForEmptyViewPortsToolStripMenuItem_Click);
             // 
             // GeocodeLocations
             // 
@@ -592,5 +601,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn GeocodeStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn FoundLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn FoundResultType;
+        private System.Windows.Forms.ToolStripMenuItem MnuCheckForEmptyViewPortsToolStripMenuItem;
     }
 }

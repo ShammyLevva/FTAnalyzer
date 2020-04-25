@@ -1,6 +1,7 @@
 ﻿using FTAnalyzer.Events;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
+using log4net.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -148,10 +149,33 @@ namespace FTAnalyzer.Forms
 
         public static void OnWaitingForGoogle(string message) => WaitingForGoogle?.Invoke(null, new GoogleWaitingEventArgs(message));
 
-        public static GeoResponse CallGoogleGeocode(string address)
+        public static GeoResponse CallGoogleGeocode(FactLocation address, string text)
         {
-            string encodedAddress = HttpUtility.UrlEncode(address.Replace(" ", "+"));
-            string url = $"https://maps.googleapis.com/maps/api/geocode/json?address={encodedAddress}&region=uk&key={GoogleAPIKey.KeyValue}";
+            string bounds = string.Empty;
+            string tld = address.IsUnitedKingdom ? "&region=uk" : string.Empty;
+            if (address != null)
+            {
+                if (address.Level > FactLocation.SUBREGION)
+                {
+                    FactLocation area = address.GetLocation(FactLocation.SUBREGION);
+                    if (area != null && area.IsGeoCoded(false) && !string.IsNullOrEmpty(area.Bounds))
+                        bounds = $"{area.Bounds}";
+                }
+                if (string.IsNullOrEmpty(bounds) && address.Level > FactLocation.REGION)
+                {
+                    FactLocation area = address.GetLocation(FactLocation.REGION);
+                    if (area != null && area.IsGeoCoded(false) && !string.IsNullOrEmpty(area.Bounds))
+                        bounds = $"{area.Bounds}";
+                }
+                if (string.IsNullOrEmpty(bounds) && address.Level > FactLocation.COUNTRY)
+                {
+                    FactLocation area = address.GetLocation(FactLocation.COUNTRY);
+                    if (area != null && area.IsGeoCoded(false) && !string.IsNullOrEmpty(area.Bounds))
+                        bounds = $"{area.Bounds}";
+                }
+            }
+            string encodedAddress = HttpUtility.UrlEncode(text.Replace(" ", "+"));
+            string url = $"https://maps.googleapis.com/maps/api/geocode/json?address={encodedAddress}{bounds}{tld}&key={GoogleAPIKey.KeyValue}";
             return GetGeoResponse(url);
         }
 
@@ -159,7 +183,9 @@ namespace FTAnalyzer.Forms
         {
             string lat = HttpUtility.UrlEncode(latitude.ToString());
             string lng = HttpUtility.UrlEncode(longitude.ToString());
-            string url = $"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&region=uk&key={GoogleAPIKey.KeyValue}";
+            string region = longitude >= -7.974074 && longitude <= 1.879409 && latitude >= 49.814376 && latitude <= 60.970872 ?
+                "&region=uk" : string.Empty;
+            string url = $"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}{region}&key={GoogleAPIKey.KeyValue}";
             return GetGeoResponse(url);
         }
 
@@ -205,11 +231,11 @@ namespace FTAnalyzer.Forms
         static int sleepinterval = 200;
 
         // Call geocoding routine but account for throttling by Google geocoding engine
-        public static GeoResponse GoogleGeocode(string address, int badtries)
+        public static GeoResponse GoogleGeocode(FactLocation address, string text, int badtries)
         {
             int maxInterval = 30000;
             double seconds = sleepinterval / 1000;
-            if (sleepinterval > 500)
+            if (sleepinterval > 500 && seconds > 0.1)
                 OnWaitingForGoogle($"Google Timeout. Waiting {seconds} seconds.");
             if (sleepinterval >= maxInterval)
                 return MaxedOut();
@@ -221,7 +247,7 @@ namespace FTAnalyzer.Forms
             GeoResponse res;
             try
             {
-                res = CallGoogleGeocode(address);
+                res = CallGoogleGeocode(address, text);
             }
             catch (Exception e)
             {
@@ -232,7 +258,7 @@ namespace FTAnalyzer.Forms
             {
                 // we're hitting Google too fast, increase interval
                 sleepinterval = Math.Min(sleepinterval + ++badtries * 750, maxInterval);
-                return GoogleGeocode(address, badtries);
+                return GoogleGeocode(address, text, badtries);
             }
             else
             {
@@ -254,7 +280,7 @@ namespace FTAnalyzer.Forms
         {
             int maxInterval = 30000;
             double seconds = sleepinterval / 1000;
-            if (sleepinterval > 500)
+            if (sleepinterval > 500 && seconds > 0.1)
                 OnWaitingForGoogle($"Over Google limit. Waiting {seconds} seconds.");
             if (sleepinterval >= maxInterval)
                 return MaxedOut();
@@ -295,7 +321,7 @@ namespace FTAnalyzer.Forms
         {
             string message = string.IsNullOrEmpty(Properties.MappingSettings.Default.GoogleAPI) ?
                                 "Google Geocoding timing out. Possibly exceeded max GeoLocations for today.\nConsider getting your own FREE Google API Key for 40,000 lookups a day. See Help Menu.\n" :
-                                "Google Timeout Limit Exceeded.\n";
+                                "Google Timeout - Limit Exceeded.\n";
             OnWaitingForGoogle(message);
             GeoResponse response = new GeoResponse
             {

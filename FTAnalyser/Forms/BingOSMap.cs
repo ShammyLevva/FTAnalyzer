@@ -24,7 +24,6 @@ namespace FTAnalyzer.Forms
         public static string ROUTE = "route";
         public static string INTERSECTION = "intersection";
 
-        string location;
         bool loaded;
 
         public BingOSMap()
@@ -34,7 +33,7 @@ namespace FTAnalyzer.Forms
             string filename = Path.Combine(Application.StartupPath + @"\Resources\BingOSMaps.htm");
             webBrowser.Navigate(filename);
             webBrowser.Hide();
-            Top = Top + NativeMethods.TopTaskbarOffset;
+            Top += NativeMethods.TopTaskbarOffset;
         }
 
         public bool SetLocation(FactLocation loc, int level)
@@ -43,7 +42,7 @@ namespace FTAnalyzer.Forms
             {
                 Application.DoEvents();
             }
-            GeoResponse.CResult.CGeometry.CViewPort viewport = null;
+            GeoResponse.CResult.CGeometry.CViewPort viewport;
             if (loc.IsGeoCoded(false) && loc.ViewPort != null)
             {
                 labMapLevel.Text = "Previously Geocoded: " + loc.ToString();
@@ -51,8 +50,7 @@ namespace FTAnalyzer.Forms
             }
             else
             {
-                location = loc.ToString();
-                GeoResponse res = GoogleMap.CallGoogleGeocode(location);
+                GeoResponse res = GoogleMap.CallGoogleGeocode(loc, loc.ToString());
                 if (res.Status == "OK")
                 {
                     labMapLevel.Text = GoogleMap.LocationText(res, loc, level);

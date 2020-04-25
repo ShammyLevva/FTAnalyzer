@@ -436,10 +436,8 @@ namespace FTAnalyzer.Forms
         }
 
         #region Google Geocode Threading
-        void GoogleGeocodingBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            GoogleGeoCode(googleGeocodeBackgroundWorker, e);
-        }
+
+        void GoogleGeocodingBackgroundWorker_DoWork(object sender, DoWorkEventArgs e) => GoogleGeoCode(googleGeocodeBackgroundWorker, e);
 
         void GoogleGeocodingBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -447,10 +445,7 @@ namespace FTAnalyzer.Forms
             txtLocations.Text = (string)e.UserState;
         }
 
-        void GoogleGeocodingBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            WorkFinished(sender);
-        }
+        void GoogleGeocodingBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) => WorkFinished(sender);
 
         void WorkFinished(object sender)
         {
@@ -496,9 +491,9 @@ namespace FTAnalyzer.Forms
 
         public void GoogleMap_WaitingForGoogle(object sender, GoogleWaitingEventArgs args)
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                this.Invoke(new Action(() => GoogleMap_WaitingForGoogle(sender, args)));
+                Invoke(new Action(() => GoogleMap_WaitingForGoogle(sender, args)));
                 return;
             }
             txtGoogleWait.Text = args.Message;
@@ -546,6 +541,50 @@ namespace FTAnalyzer.Forms
             }
         }
 
+        public void CheckEmptyViewPorts()
+        {
+            try
+            {
+                GoogleMap.WaitingForGoogle += new GoogleMap.GoogleEventHandler(GoogleMap_WaitingForGoogle);
+                DatabaseHelper dbh = DatabaseHelper.Instance;
+                GoogleMap.ThreadCancelled = false;
+                int vpchecked = 0;
+                int updated = 0;
+                foreach (FactLocation loc in FactLocation.AllLocations.Where(x => x.EmptyViewPort).OrderBy(x => x.Level))
+                {
+                    if (loc != FactLocation.UNKNOWN_LOCATION && loc.Level <= FactLocation.SUBREGION && loc.ToString().Length > 0)
+                    {
+                        vpchecked++;
+                        GeoResponse res = null;
+                        res = SearchGoogle(loc, loc.ToString());
+                        Envelope bbox = Countries.BoundingBox(loc.Country);
+                        if (res != null && res.Status == "OK" && res.Results.Length > 0)
+                        {
+                            foreach (GeoResponse.CResult result in res.Results)
+                            {
+                                int foundLevel = GoogleMap.GetFactLocationType(result.Types, loc);
+                                string address = result.ReturnAddress;
+                                GeoResponse.CResult.CGeometry.CViewPort viewport = result.Geometry.ViewPort;
+                                if (foundLevel == loc.Level && bbox.Covers(new Coordinate(result.Geometry.Location.Long, result.Geometry.Location.Lat)) &&
+                                    !result.PartialMatch)
+                                {
+                                    loc.ViewPort = MapTransforms.TransformViewport(viewport);
+                                    DatabaseHelper.UpdateGeocode(loc);
+                                    updated++;
+                                }
+                            }
+                        }
+                    }
+                }
+                    MessageBox.Show($"Google found and updated {updated} of {vpchecked} Empty ViewPorts");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error Google Geocoding: {ex.Message}", "FTAnalyzer Geocoding");
+            }
+
+        }
+
         public void GoogleGeoCode(BackgroundWorker worker, DoWorkEventArgs e)
         {
             try
@@ -560,10 +599,9 @@ namespace FTAnalyzer.Forms
                 int skipped = 0;
                 int total = FactLocation.LocationsCount;
                 GoogleMap.ThreadCancelled = false;
-
-                foreach (FactLocation loc in FactLocation.AllLocations)
+                foreach (FactLocation loc in FactLocation.AllLocations.OrderBy(x => x.Level))
                 {
-                    if (loc.IsGeoCoded(retryPartial))
+                    if (loc == FactLocation.UNKNOWN_LOCATION || loc.IsGeoCoded(retryPartial))
                         geocoded++;
                     else if (loc.GeocodeStatus == FactLocation.Geocode.INCORRECT || loc.Country.Equals(Countries.AT_SEA))
                         skipped++; // don't re-geocode incorrect ones as that would reset incorrect flag back to what user already identified was wrong
@@ -580,7 +618,7 @@ namespace FTAnalyzer.Forms
                                      loc.GeocodeStatus == FactLocation.Geocode.OS_50KPARTIAL)))
                             {
 //                                log.Info("Searching Google for '" + loc.GoogleFixed + "' original text was '" + loc.GEDCOMLocation + "'.");
-                                res = SearchGoogle(loc.GoogleFixed);
+                                res = SearchGoogle(loc, loc.GoogleFixed);
                             }
                             if (res != null && ((res.Status == "OK" && res.Results.Length > 0) || res.Status == "ZERO_RESULTS"))
                             {
@@ -624,7 +662,7 @@ namespace FTAnalyzer.Forms
                                             if (loc.OriginalText == loc.GoogleFixed)
                                                 checkresultsPass++;  // if we have the same string skip checking Original Text location
                                             else
-                                                res = SearchGoogle(loc.OriginalText);
+                                                res = SearchGoogle(loc, loc.OriginalText);
                                         }
                                         checkresultsPass++;
                                     }
@@ -683,7 +721,7 @@ namespace FTAnalyzer.Forms
                 }
                 ft.ClearLocations(); // Locations tab needs to be invalidated so it refreshes
                 if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text.Substring(0, 3).Equals("Max"))
-                    MessageBox.Show("Finished Google Geocoding.\n" + txtGoogleWait.Text + "\nPlease wait 24hrs before trying again as Google\nwill not allow further geocoding before then.", "FTAnalyzer Geocoding");
+                    MessageBox.Show($"Finished Google Geocoding.\n{txtGoogleWait.Text}\nPlease wait 24hrs before trying again as Google\nwill not allow further geocoding before then.", "FTAnalyzer Geocoding");
                 else
                     MessageBox.Show("Finished Google Geocoding.", "FTAnalyzer Geocoding");
             }
@@ -693,10 +731,10 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        GeoResponse SearchGoogle(string location)
+        GeoResponse SearchGoogle(FactLocation location, string text)
         {
             // This call is the real workhorse that does the actual Google lookup
-            GeoResponse res = GoogleMap.GoogleGeocode(location, 8);
+            GeoResponse res = GoogleMap.GoogleGeocode(location, text, 8);
             if (res != null && (res.Status == "Maxed" || res.Status == "REQUEST_DENIED"))
             {
                 googleGeocodeBackgroundWorker.CancelAsync();
@@ -909,6 +947,7 @@ namespace FTAnalyzer.Forms
                     {
                         loc.FoundLocation = result.ReturnAddress;
                         loc.FoundResultType = resultTypes;
+                        loc.ViewPort = MapTransforms.TransformViewport(viewport);
                         //log.Info("Decided to use: Pixelsize: " + loc.PixelSize + ", level: " + foundLevel + "=" + result.ReturnAddress + ". Type: " + resultTypes);
                         break;
                     }
@@ -924,6 +963,7 @@ namespace FTAnalyzer.Forms
                         {
                             loc.FoundLocation = result.ReturnAddress;
                             loc.FoundResultType = EnhancedTextInfo.ConvertStringArrayToString(result.Types);
+                            loc.ViewPort = MapTransforms.TransformViewport(viewport);
                             break;
                         }
                     }
@@ -1324,10 +1364,7 @@ namespace FTAnalyzer.Forms
             UpdateDatabase(location, inDatabase);
         }
 
-        void MnuOSGeocodeLocations_Click(object sender, EventArgs e)
-        {
-            StartOSGeoCoding();
-        }
+        void MnuOSGeocodeLocations_Click(object sender, EventArgs e) => StartOSGeoCoding();
         #endregion
 
         #region OS Geocoding Threading
@@ -1347,5 +1384,7 @@ namespace FTAnalyzer.Forms
         #endregion
 
         void GeocodeLocations_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
+
+        void MnuCheckForEmptyViewPortsToolStripMenuItem_Click(object sender, EventArgs e) => CheckEmptyViewPorts();
     }
 }

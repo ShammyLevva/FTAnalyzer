@@ -593,6 +593,12 @@ namespace FTAnalyzer.Utilities
                         location.FoundLevel = foundlevel;
                     }
                 }
+                if(location.ViewPort.NorthEast.Lat !=0 && location.ViewPort.NorthEast.Long != 0 && 
+                   location.ViewPort.NorthEast.Long >-180 && location.ViewPort.NorthEast.Long < 180) // fix any ViewPorts stored as mPoints
+                {
+                    location.ViewPort = MapTransforms.TransformViewport(location.ViewPort);
+                    UpdateGeocode(location);
+                }
             }
         }
         public static void InsertGeocode(FactLocation loc)
@@ -926,14 +932,14 @@ namespace FTAnalyzer.Utilities
         {
             if (InstanceConnection.State != ConnectionState.Open)
                 InstanceConnection.Open();
-            using (SQLiteCommand cmd = new SQLiteCommand("select location from geocode where foundlocation='' and geocodestatus in (3, 8, 9)", InstanceConnection))
+            using (SQLiteCommand cmd = new SQLiteCommand("select location from geocode where foundlocation='' and geocodestatus in (3, 8, 9) order by level", InstanceConnection))
             {
                 using (SQLiteDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         FactLocation loc = FactLocation.LookupLocation(reader[0].ToString());
-                        if (!queue.Contains(loc))
+                        if (!queue.Contains(loc) && loc.Latitude != 0 && loc.Longitude != 0)
                             queue.Enqueue(loc);
                     }
                 }
