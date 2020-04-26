@@ -38,6 +38,7 @@ namespace FTAnalyzer.Forms
 
         public bool SetLocation(FactLocation loc, int level)
         {
+            if (loc is null) return false;
             while (!loaded)
             {
                 Application.DoEvents();

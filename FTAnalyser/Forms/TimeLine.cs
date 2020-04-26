@@ -98,7 +98,8 @@ namespace FTAnalyzer.Forms
 
         public void DisplayLocationsForYear(string year)
         {
-            int.TryParse(year, out int result);
+            year = year ?? string.Empty;
+            _ = int.TryParse(year, out int result);
             if (year.Length == 4 && result != 0)
             {
                 List<MapLocation> locations;

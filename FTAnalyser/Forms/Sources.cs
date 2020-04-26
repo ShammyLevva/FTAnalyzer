@@ -18,7 +18,8 @@ namespace FTAnalyzer.Forms
             dgSources.AutoGenerateColumns = false;
             ExtensionMethods.DoubleBuffered(dgSources, true);
             reportFormHelper = new ReportFormHelper(this, this.Text, dgSources, this.ResetTable, "Sources");
-            AddSources(fact);
+            if (fact is object) // checks for not null 
+                AddSources(fact);
         }
 
         void AddSources(DisplayFact fact)
