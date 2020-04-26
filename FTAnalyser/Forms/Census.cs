@@ -249,11 +249,9 @@ namespace FTAnalyzer.Forms
                 FamilyTree ft = FamilyTree.Instance;
                 if (ModifierKeys.Equals(Keys.Shift))
                 {
-                    using (Facts factForm = new Facts(ds))
-                    {
-                        MainForm.DisposeDuplicateForms(factForm);
-                        factForm.Show();
-                    }
+                    Facts factForm = new Facts(ds);
+                    MainForm.DisposeDuplicateForms(factForm);
+                    factForm.Show();
                 }
                 else
                 {
@@ -307,11 +305,9 @@ namespace FTAnalyzer.Forms
             if (dgCensus.CurrentRow != null)
             {
                 CensusIndividual ds = (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
-                using (Facts factForm = new Facts(ds))
-                {
-                    MainForm.DisposeDuplicateForms(factForm);
-                    factForm.Show();
-                }
+                Facts factForm = new Facts(ds);
+                MainForm.DisposeDuplicateForms(factForm);
+                factForm.Show();
             }
         }
 

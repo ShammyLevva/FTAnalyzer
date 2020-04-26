@@ -259,8 +259,8 @@ namespace FTAnalyzer.Forms
                 {
                     string indID = (string)dgBMDReportSheet.CurrentRow.Cells["IndividualID"].Value;
                     Individual ind = ft.GetIndividual(indID);
-                    using (Facts factForm = new Facts(ind))
-                        factForm.Show();
+                    Facts factForm = new Facts(ind);
+                    factForm.Show();
                 }
             }
         }
@@ -406,11 +406,9 @@ namespace FTAnalyzer.Forms
             {
                 IDisplayColourBMD ds = (IDisplayColourBMD)dgBMDReportSheet.CurrentRow.DataBoundItem;
                 Individual ind = FamilyTree.Instance.GetIndividual(ds.IndividualID);
-                using (Facts factForm = new Facts(ind))
-                {
-                    MainForm.DisposeDuplicateForms(factForm);
-                    factForm.Show();
-                }
+                Facts factForm = new Facts(ind);
+                MainForm.DisposeDuplicateForms(factForm);
+                factForm.Show();
             }
         }
 

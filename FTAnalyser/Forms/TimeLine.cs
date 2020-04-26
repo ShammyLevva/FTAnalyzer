@@ -236,16 +236,14 @@ namespace FTAnalyzer.Forms
                     locations.Add((MapLocation)feature["MapLocation"]);
                 }
             }
-            using (MapIndividuals ind = new MapIndividuals(locations, labValue.Text, this))
-            {
-                ind.Show();
-            }
+            MapIndividuals ind = new MapIndividuals(locations, labValue.Text, this);
+            ind.Show();
             Cursor = Cursors.Default;
         }
 
         void MapBox1_MapViewOnChange() => clusters.Refresh();
 
-        void MapBox1_MapZoomChanged() => RefreshClusters();
+        void MapBox1_MapZoomChanged(double zoom) => RefreshClusters();
 
         public void RefreshClusters()
         {
@@ -253,7 +251,7 @@ namespace FTAnalyzer.Forms
             RefreshMap();
         }
 
-        void MapBox1_MapCenterChanged() => RefreshClusters();
+        void MapBox1_MapCenterChanged(Coordinate center) => RefreshClusters();
 
         void BtnPlay_Click(object sender, EventArgs e)
         {

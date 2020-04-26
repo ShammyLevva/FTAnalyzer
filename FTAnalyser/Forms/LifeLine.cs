@@ -14,6 +14,7 @@ using SharpMap.Data.Providers;
 using SharpMap.Layers;
 using SharpMap.Styles;
 using System.IO;
+using System.Web;
 
 namespace FTAnalyzer.Forms
 {
@@ -331,7 +332,7 @@ namespace FTAnalyzer.Forms
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.QueryPoint;
         }
 
-        void MapBox1_ActiveToolChanged()
+        void MapBox1_ActiveToolChanged(SharpMap.Forms.MapBox.Tools tool)
         {
             if (mapBox1.ActiveTool != SharpMap.Forms.MapBox.Tools.QueryPoint)
                 btnSelect.Checked = false;
@@ -373,19 +374,17 @@ namespace FTAnalyzer.Forms
             {
                 if (layer is TearDropLayer tdl)
                 {
-                    using (FeatureDataSet ds = new FeatureDataSet())
+                    FeatureDataSet ds = new FeatureDataSet();
+                    if (!tdl.DataSource.IsOpen)
+                        tdl.DataSource.Open();
+                    tdl.DataSource.ExecuteIntersectionQuery(infoPoint, ds);
+                    tdl.DataSource.Close();
+                    foreach (FeatureDataRow row in ds.Tables[0].Rows)
                     {
-                        if (!tdl.DataSource.IsOpen)
-                            tdl.DataSource.Open();
-                        tdl.DataSource.ExecuteIntersectionQuery(infoPoint, ds);
-                        tdl.DataSource.Close();
-                        foreach (FeatureDataRow row in ds.Tables[0].Rows)
-                        {
-                            MapLocation line = (MapLocation)row["MapLocation"];
-                            string colour = (string)row["Colour"];
-                            if (colour == TearDropLayer.GREY)
-                                tooltip += line.ToString() + "\n";
-                        }
+                        MapLocation line = (MapLocation)row["MapLocation"];
+                        string colour = (string)row["Colour"];
+                        if (colour == TearDropLayer.GREY)
+                            tooltip += line.ToString() + "\n";
                     }
                 }
             }
