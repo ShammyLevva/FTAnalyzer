@@ -374,17 +374,19 @@ namespace FTAnalyzer.Forms
             {
                 if (layer is TearDropLayer tdl)
                 {
-                    FeatureDataSet ds = new FeatureDataSet();
-                    if (!tdl.DataSource.IsOpen)
-                        tdl.DataSource.Open();
-                    tdl.DataSource.ExecuteIntersectionQuery(infoPoint, ds);
-                    tdl.DataSource.Close();
-                    foreach (FeatureDataRow row in ds.Tables[0].Rows)
+                    using (FeatureDataSet ds = new FeatureDataSet())
                     {
-                        MapLocation line = (MapLocation)row["MapLocation"];
-                        string colour = (string)row["Colour"];
-                        if (colour == TearDropLayer.GREY)
-                            tooltip += line.ToString() + "\n";
+                        if (!tdl.DataSource.IsOpen)
+                            tdl.DataSource.Open();
+                        tdl.DataSource.ExecuteIntersectionQuery(infoPoint, ds);
+                        tdl.DataSource.Close();
+                        foreach (FeatureDataRow row in ds.Tables[0].Rows)
+                        {
+                            MapLocation line = (MapLocation)row["MapLocation"];
+                            string colour = (string)row["Colour"];
+                            if (colour == TearDropLayer.GREY)
+                                tooltip += line.ToString() + "\n";
+                        }
                     }
                 }
             }

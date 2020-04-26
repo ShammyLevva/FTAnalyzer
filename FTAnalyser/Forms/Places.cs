@@ -193,7 +193,7 @@ namespace FTAnalyzer.Forms
         {
             try
             {
-                Cursor = Cursors.WaitCursor; ;
+                Cursor = Cursors.WaitCursor;
                 FactLocation location = e.Node.Tag as FactLocation;
                 if (location != null)
                 {

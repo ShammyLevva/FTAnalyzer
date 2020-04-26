@@ -483,8 +483,8 @@ namespace FTAnalyzer.Utilities
                     {
                         while (reader.Read())
                         {
-                            double.TryParse(reader[0].ToString(), out double latitude);
-                            double.TryParse(reader[1].ToString(), out double longitude);
+                            _ = double.TryParse(reader[0].ToString(), out double latitude);
+                            _ = double.TryParse(reader[1].ToString(), out double longitude);
                             hashkey = LatLongHashKey(latitude, longitude);
                             foundlocation = reader[2].ToString();
                             foundresulttype = reader[3].ToString();
@@ -848,6 +848,7 @@ namespace FTAnalyzer.Utilities
 
         public static bool LostCousinsExists(CensusIndividual ind)
         {
+            if (ind is null) return false;
             if (InstanceConnection.State != ConnectionState.Open)
                 InstanceConnection.Open();
             bool result = false;

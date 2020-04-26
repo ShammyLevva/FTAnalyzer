@@ -29,7 +29,7 @@ namespace FTAnalyzer.Utilities
                 APPBARDATA abd = new APPBARDATA();
                 abd.cbSize = Marshal.SizeOf(abd);
                 abd.hWnd = hwnd;
-                SHAppBarMessage((int)ABMsg.ABM_GETTASKBARPOS, ref abd);
+                _ = SHAppBarMessage((int)ABMsg.ABM_GETTASKBARPOS, ref abd);
                 int uEdge = GetEdge(abd.rc);
                 TopTaskbarOffset = 0;
                 switch (uEdge)

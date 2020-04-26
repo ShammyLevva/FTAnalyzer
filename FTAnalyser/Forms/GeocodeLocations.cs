@@ -1351,7 +1351,7 @@ namespace FTAnalyzer.Forms
             if (key.Length > 0 && OS50kDictionary.TryGetValue(key, out IList<OS50kGazetteer> results))
             {
                 IEnumerable<OS50kGazetteer> placeMatches = results.Filter(x => x.IsCountyMatch(loc));
-                if (placeMatches.Count() > 0)
+                if (placeMatches.Any())
                     return ProcessOS50kMatches(placeMatches, loc, FactLocation.PLACE);
                 else
                 {

@@ -208,7 +208,7 @@ namespace FTAnalyzer
                 if (!stopProcessing)
                 {
                     // document.Save("GedcomOutput.xml");
-                    if (await LoadTreeAsync(filename))
+                    if (await LoadTreeAsync(filename).ConfigureAwait(false))
                     {
                         SetDataErrorsCheckedDefaults(ckbDataErrors);
                         SetupFactsCheckboxes();
@@ -247,7 +247,7 @@ namespace FTAnalyzer
             XmlDocument doc;
             using (FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
             {
-                doc = await Task.Run(() => ft.LoadTreeHeader(filename, stream, outputText));
+                doc = await Task.Run(() => ft.LoadTreeHeader(filename, stream, outputText)).ConfigureAwait(false);
             }
             if (doc == null)
                 return false;
@@ -255,10 +255,10 @@ namespace FTAnalyzer
             var individualProgress = new Progress<int>(value => { pbIndividuals.Value = value; });
             var familyProgress = new Progress<int>(value => { pbFamilies.Value = value; });
             var RelationshipProgress = new Progress<int>(value => { pbRelationships.Value = value; });
-            await Task.Run(() => ft.LoadTreeSources(doc, sourceProgress, outputText));
-            await Task.Run(() => ft.LoadTreeIndividuals(doc, individualProgress, outputText));
-            await Task.Run(() => ft.LoadTreeFamilies(doc, familyProgress, outputText));
-            await Task.Run(() => ft.LoadTreeRelationships(doc, RelationshipProgress, outputText));
+            await Task.Run(() => ft.LoadTreeSources(doc, sourceProgress, outputText)).ConfigureAwait(false);
+            await Task.Run(() => ft.LoadTreeIndividuals(doc, individualProgress, outputText)).ConfigureAwait(false);
+            await Task.Run(() => ft.LoadTreeFamilies(doc, familyProgress, outputText)).ConfigureAwait(false);
+            await Task.Run(() => ft.LoadTreeRelationships(doc, RelationshipProgress, outputText)).ConfigureAwait(false);
             return true;
         }
 
@@ -368,10 +368,10 @@ namespace FTAnalyzer
 
             if (openGedcom.ShowDialog() == DialogResult.OK)
             {
-                await LoadFileAsync(openGedcom.FileName);
+                await LoadFileAsync(openGedcom.FileName).ConfigureAwait(false);
                 Settings.Default.LoadLocation = Path.GetFullPath(openGedcom.FileName);
                 Settings.Default.Save();
-                await Analytics.TrackAction(Analytics.MainFormAction, Analytics.LoadGEDCOMEvent);
+                await Analytics.TrackAction(Analytics.MainFormAction, Analytics.LoadGEDCOMEvent).ConfigureAwait(false);
             }
         }
 
@@ -514,7 +514,7 @@ namespace FTAnalyzer
             {
                 shutdown = true;
                 e.Cancel = true;
-                await Analytics.EndProgramAsync();
+                await Analytics.EndProgramAsync().ConfigureAwait(false);
                 Close();
             }
             DatabaseHelper.Instance.Dispose();
@@ -976,7 +976,7 @@ namespace FTAnalyzer
             // do anything that needs doing when option changes
         }
 
-        async void Options_ReloadData(object sender, EventArgs e) => await QueryReloadData();
+        async void Options_ReloadData(object sender, EventArgs e) => await QueryReloadData().ConfigureAwait(false);
 
         void Options_MinimumParentalAgeChanged(object sender, EventArgs e)
         {
@@ -1007,7 +1007,7 @@ namespace FTAnalyzer
                 GeneralSettings.Default.Save();
                 if (dr == DialogResult.Yes)
                 {
-                    await LoadFileAsync(filename);
+                    await LoadFileAsync(filename).ConfigureAwait(false);
                 }
             }
         }
@@ -1016,7 +1016,7 @@ namespace FTAnalyzer
         {
             GeneralSettings.Default.ReloadRequired = false;
             GeneralSettings.Default.Save();
-            await LoadFileAsync(filename);
+            await LoadFileAsync(filename).ConfigureAwait(false);
         }
         #endregion
 
@@ -1414,29 +1414,29 @@ namespace FTAnalyzer
             {
                 rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
                 ckbHideIgnoredDuplicates.Checked = GeneralSettings.Default.HideIgnoredDuplicates;
-                await SetPossibleDuplicates();
+                await SetPossibleDuplicates().ConfigureAwait(false);
                 ResetDuplicatesTable(); // force a reset on intial load
                 dgDuplicates.Focus();
                 mnuPrint.Enabled = true;
-                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.DuplicatesTabEvent);
+                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.DuplicatesTabEvent).ConfigureAwait(false);
             }
             if (tabErrorFixSelector.SelectedTab == tabLooseBirths)
             {
                 if (dgLooseBirths.DataSource == null)
                     SetupLooseBirths();
-                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseBirthsEvent);
+                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseBirthsEvent).ConfigureAwait(false);
             }
             else if (tabErrorFixSelector.SelectedTab == tabLooseDeaths)
             {
                 if (dgLooseDeaths.DataSource == null)
                     SetupLooseDeaths();
-                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseDeathsEvent);
+                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseDeathsEvent).ConfigureAwait(false);
             }
             else if (tabErrorFixSelector.SelectedTab == tabLooseInfo)
             {
                 if (dgLooseInfo.DataSource == null)
                     SetupLooseInfo();
-                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseInfoEvent);
+                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseInfoEvent).ConfigureAwait(false);
             }
         }
 
@@ -1617,9 +1617,9 @@ namespace FTAnalyzer
                 {
                     rtbLCoutput.Text = "Started Processing Lost Cousins entries.\n\n";
                     Progress<string> outputText = new Progress<string>(value => { rtbLCoutput.AppendText(value); });
-                    int count = await Task.Run(() => ExportToLostCousins.ProcessList(LCUpdates, outputText));
+                    int count = await Task.Run(() => ExportToLostCousins.ProcessList(LCUpdates, outputText)).ConfigureAwait(false);
                     string resultText = $"{DateTime.Now.ToUniversalTime():yyyy-MM-dd HH:mm}: uploaded {count} records";
-                    await Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.UpdateLostCousins, resultText);
+                    await Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.UpdateLostCousins, resultText).ConfigureAwait(false);
                     SpecialMethods.VisitWebsite("https://www.lostcousins.com/pages/members/ancestors/");
                     UpdateLCReports();
                 }
@@ -1779,11 +1779,13 @@ namespace FTAnalyzer
                 {
                     if (printDialog.ShowDialog(this) == DialogResult.OK)
                     {
-                        Utilities.Printing p = new Utilities.Printing(rtbOutput);
-                        printDocument.PrintPage += new PrintPageEventHandler(p.PrintPage);
-                        printDocument.PrinterSettings = printDialog.PrinterSettings;
-                        printDocument.DocumentName = "GEDCOM Load Results";
-                        printDocument.Print();
+                        using (Utilities.Printing p = new Utilities.Printing(rtbOutput))
+                        {
+                            printDocument.PrintPage += new PrintPageEventHandler(p.PrintPage);
+                            printDocument.PrinterSettings = printDialog.PrinterSettings;
+                            printDocument.DocumentName = "GEDCOM Load Results";
+                            printDocument.Print();
+                        }
                     }
                 }
                 if (tabSelector.SelectedTab == tabMainLists)
@@ -1940,34 +1942,36 @@ namespace FTAnalyzer
                 {
                     HourGlass(true);
                     bool failed = false;
-                    ZipFile zip = new ZipFile(restoreDatabase.FileName);
-                    if (zip.Count == 1 && zip.ContainsEntry("Geocodes.s3db"))
+                    using (ZipFile zip = new ZipFile(restoreDatabase.FileName))
                     {
-                        DatabaseHelper dbh = DatabaseHelper.Instance;
-                        if (DatabaseHelper.StartBackupRestoreDatabase())
+                        if (zip.Count == 1 && zip.ContainsEntry("Geocodes.s3db"))
                         {
-                            File.Copy(dbh.DatabaseFile, dbh.CurrentFilename, true); // copy exisiting file to safety
-                            zip.ExtractAll(dbh.DatabasePath, ExtractExistingFileAction.OverwriteSilently);
-                            if (dbh.RestoreDatabase(new Progress<string>(value => { rtbOutput.AppendText(value); })))
-                                MessageBox.Show("Database restored from " + restoreDatabase.FileName, "FTAnalyzer Database Restore Complete");
-                            else
+                            DatabaseHelper dbh = DatabaseHelper.Instance;
+                            if (DatabaseHelper.StartBackupRestoreDatabase())
                             {
-                                File.Copy(dbh.CurrentFilename, dbh.DatabaseFile, true);
-                                dbh.RestoreDatabase(new Progress<string>(value => { rtbOutput.AppendText(value); })); // restore original database
-                                failed = true;
+                                File.Copy(dbh.DatabaseFile, dbh.CurrentFilename, true); // copy exisiting file to safety
+                                zip.ExtractAll(dbh.DatabasePath, ExtractExistingFileAction.OverwriteSilently);
+                                if (dbh.RestoreDatabase(new Progress<string>(value => { rtbOutput.AppendText(value); })))
+                                    MessageBox.Show("Database restored from " + restoreDatabase.FileName, "FTAnalyzer Database Restore Complete");
+                                else
+                                {
+                                    File.Copy(dbh.CurrentFilename, dbh.DatabaseFile, true);
+                                    dbh.RestoreDatabase(new Progress<string>(value => { rtbOutput.AppendText(value); })); // restore original database
+                                    failed = true;
+                                }
                             }
+                            else
+                                MessageBox.Show("Database file could not be extracted", "FTAnalyzer Database Restore Error");
                         }
                         else
-                            MessageBox.Show("Database file could not be extracted", "FTAnalyzer Database Restore Error");
+                        {
+                            failed = true;
+                        }
+                        if (failed)
+                            MessageBox.Show(restoreDatabase.FileName + " doesn't appear to be an FTAnalyzer database", "FTAnalyzer Database Restore Error");
+                        else
+                            Analytics.TrackAction(Analytics.MainFormAction, Analytics.DBRestoreEvent);
                     }
-                    else
-                    {
-                        failed = true;
-                    }
-                    if (failed)
-                        MessageBox.Show(restoreDatabase.FileName + " doesn't appear to be an FTAnalyzer database", "FTAnalyzer Database Restore Error");
-                    else
-                        Analytics.TrackAction(Analytics.MainFormAction, Analytics.DBRestoreEvent);
                     HourGlass(false);
                 }
             }
@@ -2043,7 +2047,7 @@ namespace FTAnalyzer
         async void OpenRecentFile_Click(object sender, EventArgs e)
         {
             string filename = (string)(sender as ToolStripMenuItem).Tag;
-            await LoadFileAsync(filename);
+            await LoadFileAsync(filename).ConfigureAwait(false);
         }
 
         void MnuRecent_DropDownOpening(object sender, EventArgs e) => BuildRecentList();
@@ -2361,7 +2365,7 @@ namespace FTAnalyzer
                 if (Path.GetExtension(filename.ToLower()) == ".ged")
                 {
                     fileLoaded = true;
-                    await LoadFileAsync(filename);
+                    await LoadFileAsync(filename).ConfigureAwait(false);
                     break;
                 }
             }
@@ -2445,7 +2449,7 @@ namespace FTAnalyzer
             });
             cts = new CancellationTokenSource();
             int score = tbDuplicateScore.Value;
-            SortableBindingList<IDisplayDuplicateIndividual> data = await Task.Run(() => ft.GenerateDuplicatesList(score, progress, maxScore, cts.Token));
+            SortableBindingList<IDisplayDuplicateIndividual> data = await Task.Run(() => ft.GenerateDuplicatesList(score, progress, maxScore, cts.Token)).ConfigureAwait(false);
             cts = null;
             if (data != null)
             {
@@ -2481,7 +2485,7 @@ namespace FTAnalyzer
         {
             // do nothing if progress bar still visible
             if (!pbDuplicates.Visible)
-                await SetPossibleDuplicates();
+                await SetPossibleDuplicates().ConfigureAwait(false);
         }
 
         void BtnCancelDuplicates_Click(object sender, EventArgs e)
@@ -2517,7 +2521,7 @@ namespace FTAnalyzer
                 return; // do nothing if progress bar still visible
             GeneralSettings.Default.HideIgnoredDuplicates = ckbHideIgnoredDuplicates.Checked;
             GeneralSettings.Default.Save();
-            await SetPossibleDuplicates();
+            await SetPossibleDuplicates().ConfigureAwait(false);
         }
         #endregion
 
@@ -2653,7 +2657,7 @@ namespace FTAnalyzer
             IEnumerable<string> missingResults = ft.MissingCensusReferences();
             IEnumerable<string> notesResults = ft.UnrecognisedCensusReferencesNotes();
 
-            if (unrecognisedResults.Count() > 0 || missingResults.Count() > 0 || notesResults.Count() > 0)
+            if (unrecognisedResults.Any() || missingResults.Any() || notesResults.Any())
                 SaveUnrecognisedDataFile(unrecognisedResults, missingResults, notesResults, $"Unrecognised & Missing Census References for {Path.GetFileNameWithoutExtension(filename)}.txt",
                     "\n\nPlease check the file and remove any private notes information before posting");
             else
@@ -2665,20 +2669,22 @@ namespace FTAnalyzer
         {
             try
             {
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                string initialDir = (string)Application.UserAppDataRegistry.GetValue("Report Unrecognised Census References Path");
-                saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
-                saveFileDialog.FileName = unrecognisedFilename;
-                saveFileDialog.Filter = "Report File (*.txt)|*.txt";
-                saveFileDialog.FilterIndex = 1;
-
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                 {
-                    string path = Path.GetDirectoryName(saveFileDialog.FileName);
-                    Application.UserAppDataRegistry.SetValue("Report Unrecognised Census References Path", path);
-                    FamilyTree.WriteUnrecognisedReferencesFile(unrecognisedResults, missingResults, notesResults, saveFileDialog.FileName);
-                    Analytics.TrackAction(Analytics.ReportsAction, Analytics.UnrecognisedCensusEvent);
-                    MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease create an issue at http://www.ftanalyzer.com/issues in issues section and upload your file, if you feel you have standard census references that should be recognised." + privateWarning, "FTAnalyzer");
+                    string initialDir = (string)Application.UserAppDataRegistry.GetValue("Report Unrecognised Census References Path");
+                    saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
+                    saveFileDialog.FileName = unrecognisedFilename;
+                    saveFileDialog.Filter = "Report File (*.txt)|*.txt";
+                    saveFileDialog.FilterIndex = 1;
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string path = Path.GetDirectoryName(saveFileDialog.FileName);
+                        Application.UserAppDataRegistry.SetValue("Report Unrecognised Census References Path", path);
+                        FamilyTree.WriteUnrecognisedReferencesFile(unrecognisedResults, missingResults, notesResults, saveFileDialog.FileName);
+                        Analytics.TrackAction(Analytics.ReportsAction, Analytics.UnrecognisedCensusEvent);
+                        MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease create an issue at http://www.ftanalyzer.com/issues in issues section and upload your file, if you feel you have standard census references that should be recognised." + privateWarning, "FTAnalyzer");
+                    }
                 }
             }
             catch (Exception ex)
@@ -2758,7 +2764,7 @@ namespace FTAnalyzer
             DisposeDuplicateForms(rs);
             rs.Show();
             rs.Focus();
-            await Analytics.TrackActionAsync(Analytics.MainFormAction, Analytics.ColourCensusEvent, country);
+            await Analytics.TrackActionAsync(Analytics.MainFormAction, Analytics.ColourCensusEvent, country).ConfigureAwait(false);
             HourGlass(false);
         }
 
@@ -3129,17 +3135,17 @@ namespace FTAnalyzer
             rtbToday.ResetText();
             Progress<int> progress = new Progress<int>(value => { pbToday.Value = value; });
             Progress<string> outputText = new Progress<string>(text => { rtbToday.Rtf = text; });
-            await Task.Run(() => ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, (int)nudToday.Value, progress, outputText));
+            await Task.Run(() => ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, (int)nudToday.Value, progress, outputText)).ConfigureAwait(false);
             labToday.Visible = false;
             pbToday.Visible = false;
-            await Analytics.TrackAction(Analytics.MainFormAction, Analytics.TodayClickedEvent);
+            await Analytics.TrackAction(Analytics.MainFormAction, Analytics.TodayClickedEvent).ConfigureAwait(false);
         }
 
         void RbTodayMonth_CheckedChanged(object sender, EventArgs e) => Application.UserAppDataRegistry.SetValue("Todays Events Month", rbTodayMonth.Checked);
 
         void RbTodaySingle_CheckedChanged(object sender, EventArgs e) => Application.UserAppDataRegistry.SetValue("Todays Events Month", !rbTodaySingle.Checked);
 
-        async void BtnUpdateTodaysEvents_Click(object sender, EventArgs e) => await ShowTodaysEvents();
+        async void BtnUpdateTodaysEvents_Click(object sender, EventArgs e) => await ShowTodaysEvents().ConfigureAwait(false);
 
         void NudToday_ValueChanged(object sender, EventArgs e) => Application.UserAppDataRegistry.SetValue("Todays Events Step", nudToday.Value);
         #endregion
@@ -3179,22 +3185,24 @@ namespace FTAnalyzer
             pb.Visible = true;
             try
             {
-                OpenFileDialog openFileDialog = new OpenFileDialog();
-                string initialDir = (string)Application.UserAppDataRegistry.GetValue("Excel Export Individual Path");
-                openFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
-                openFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv|TNG format (*.tng)|*.tng";
-                openFileDialog.FilterIndex = defaultIndex;
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
-                    csvFilename = openFileDialog.FileName;
-                    label.Text = "Loading " + csvFilename;
-                    string path = Path.GetDirectoryName(csvFilename);
-                    Application.UserAppDataRegistry.SetValue("Excel Export Individual Path", path);
-                    if (csvFilename.EndsWith("TNG", StringComparison.InvariantCultureIgnoreCase))
-                        ReadTNGdata(pb, csvFilename);
-                    else
-                        ReadCSVdata(pb, csvFilename);
+                    string initialDir = (string)Application.UserAppDataRegistry.GetValue("Excel Export Individual Path");
+                    openFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
+                    openFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv|TNG format (*.tng)|*.tng";
+                    openFileDialog.FilterIndex = defaultIndex;
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        csvFilename = openFileDialog.FileName;
+                        label.Text = "Loading " + csvFilename;
+                        string path = Path.GetDirectoryName(csvFilename);
+                        Application.UserAppDataRegistry.SetValue("Excel Export Individual Path", path);
+                        if (csvFilename.EndsWith("TNG", StringComparison.InvariantCultureIgnoreCase))
+                            ReadTNGdata(pb, csvFilename);
+                        else
+                            ReadCSVdata(pb, csvFilename);
+                    }
                 }
             }
             catch (Exception ex)
@@ -3285,7 +3293,8 @@ namespace FTAnalyzer
             Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => x.RelationType);
             Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
             var progress = new Progress<int>(value => { tspbTabProgress.Value = value; });
-            var list = await Task.Run(() => new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked)));
+            var list = await Task.Run(() => 
+                new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked))).ConfigureAwait(false);
             dgSurnames.DataSource = list;
             dgSurnames.Sort(dgSurnames.Columns["Surname"], ListSortDirection.Ascending);
             dgSurnames.AllowUserToResizeColumns = true;
@@ -3294,7 +3303,7 @@ namespace FTAnalyzer
             tsHintsLabel.Text = Messages.Hints_Surname;
             tspbTabProgress.Visible = false;
             HourGlass(false);
-            await Analytics.TrackAction(Analytics.MainFormAction, Analytics.ShowSurnamesEvent);
+            await Analytics.TrackAction(Analytics.MainFormAction, Analytics.ShowSurnamesEvent).ConfigureAwait(false);
         }
 
         void CousinsCountReportToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3370,22 +3379,24 @@ namespace FTAnalyzer
             HourGlass(true);
             try
             {
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                string initialDir = (string)Application.UserAppDataRegistry.GetValue("JSON Export Path");
-                saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
-                saveFileDialog.Filter = "JavaScript Object Notation (*.json)|*.json";
-                saveFileDialog.FilterIndex = 1;
-                DialogResult dr = saveFileDialog.ShowDialog();
-                if (dr == DialogResult.OK)
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                 {
-                    string path = Path.GetDirectoryName(saveFileDialog.FileName);
-                    Application.UserAppDataRegistry.SetValue("JSON Export Path", path);
-                    using (StreamWriter output = new StreamWriter(new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write), Encoding.UTF8))
+                    string initialDir = (string)Application.UserAppDataRegistry.GetValue("JSON Export Path");
+                    saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
+                    saveFileDialog.Filter = "JavaScript Object Notation (*.json)|*.json";
+                    saveFileDialog.FilterIndex = 1;
+                    DialogResult dr = saveFileDialog.ShowDialog();
+                    if (dr == DialogResult.OK)
                     {
-                        var data = new JsonExport(filename);
-                        data.WriteJsonData(output);
+                        string path = Path.GetDirectoryName(saveFileDialog.FileName);
+                        Application.UserAppDataRegistry.SetValue("JSON Export Path", path);
+                        using (StreamWriter output = new StreamWriter(new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write), Encoding.UTF8))
+                        {
+                            var data = new JsonExport(filename);
+                            data.WriteJsonData(output);
+                        }
+                        UIHelpers.ShowMessage($"File written to {saveFileDialog.FileName}", "FTAnalyzer");
                     }
-                    UIHelpers.ShowMessage($"File written to {saveFileDialog.FileName}", "FTAnalyzer");
                 }
             }
             catch (Exception ex)

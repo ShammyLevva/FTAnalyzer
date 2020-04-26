@@ -81,7 +81,7 @@ namespace FTAnalyzer.Mapping
 
         static ICoordinateTransformation ReverseTransform()
         {
-            return ctFact.CreateFromCoordinateSystems(GetEPSG900913(csFact), GeographicCoordinateSystem.WGS84); ;
+            return ctFact.CreateFromCoordinateSystems(GetEPSG900913(csFact), GeographicCoordinateSystem.WGS84);
         }
 
         //public static MathTransform MathTransform
