@@ -3214,7 +3214,7 @@ namespace FTAnalyzer
             pb.Value = rowCount;
             using (CsvFileReader reader = new CsvFileReader(tngFilename, ';'))
             {
-                CsvRowCollection row = new CsvRowCollection();
+                CsvRow row = new CsvRow();
                 while (reader.ReadRow(row))
                 {
                     if (row.Count == 4)
@@ -3239,8 +3239,8 @@ namespace FTAnalyzer
             pb.Value = rowCount;
             using (CsvFileReader reader = new CsvFileReader(csvFilename))
             {
-                CsvRowCollection headerRow = new CsvRowCollection();
-                CsvRowCollection row = new CsvRowCollection();
+                CsvRow headerRow = new CsvRow();
+                CsvRow row = new CsvRow();
 
                 reader.ReadRow(headerRow);
                 if (headerRow.Count != 3)

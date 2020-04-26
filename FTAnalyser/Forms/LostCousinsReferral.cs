@@ -43,7 +43,7 @@ namespace FTAnalyzer.Forms
 
         string GetCountofRecords()
         {
-            int total = referrals.Count;
+            int total = referrals.Count();
             int direct = referrals.Count(x => x.RelationType.Equals(Properties.Messages.Referral_Direct));
             int blood = referrals.Count(x => x.RelationType.Equals(Properties.Messages.Referral_Blood));
             int marriage = referrals.Count(x => x.RelationType.Equals(Properties.Messages.Referral_Marriage));

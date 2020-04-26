@@ -97,23 +97,23 @@ namespace FTAnalyzer.Mapping
             if (DefinitiveName.EndsWith(" Rly")) // Pt is abbreviation for Park
                 DefinitiveName = DefinitiveName.Replace(" Rly", " Railway"); ;
             if (DefinitiveName.EndsWith(" Sq")) // Sq is abbreviation for Square
-                DefinitiveName += "uare";
+                DefinitiveName = DefinitiveName + "uare";
             if (DefinitiveName.EndsWith(" Sch")) // Sch is abbreviation for School
-                DefinitiveName += "ool";
+                DefinitiveName = DefinitiveName + "ool";
             if (DefinitiveName.EndsWith(" Ho")) // Ho is abbreviation for House
-                DefinitiveName += "use";
+                DefinitiveName = DefinitiveName + "use";
             if (DefinitiveName.EndsWith(" St")) // St is abbreviation for Street
-                DefinitiveName += "reet";
+                DefinitiveName = DefinitiveName + "reet";
             if (DefinitiveName.EndsWith(" Sta")) // Sta is abbreviation for Station
-                DefinitiveName += "tion";
+                DefinitiveName = DefinitiveName + "tion";
             if (DefinitiveName.EndsWith(" Br")) // Br is abbreviation for Bridge
-                DefinitiveName += "idge";
+                DefinitiveName = DefinitiveName + "idge";
             if (DefinitiveName.EndsWith(" Ch")) // Ch is abbreviation for Church
-                DefinitiveName += "urch";
+                DefinitiveName = DefinitiveName + "urch";
             if (DefinitiveName.EndsWith(" Pl")) // Pl is abbreviation for Place
-                DefinitiveName += "ace";
+                DefinitiveName = DefinitiveName + "ace";
             if (DefinitiveName.EndsWith(" Ave")) // Ave is abbreviation for Avenue
-                DefinitiveName += "nue";
+                DefinitiveName = DefinitiveName + "nue";
             if (DefinitiveName.EndsWith(" The")) // we can strip trailing the's
                 DefinitiveName = DefinitiveName.Substring(DefinitiveName.Length -4);
 

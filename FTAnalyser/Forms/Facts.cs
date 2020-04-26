@@ -147,7 +147,7 @@ namespace FTAnalyzer.Forms
             IEnumerable<Individual> listToCheck = ft.AllIndividuals.Filter(filter);
             foreach (Individual ind in listToCheck)
             {
-                IList<Fact> factsToCheck = errors ? ind.ErrorFacts : ind.IndividualFacts;
+                IList<Fact> factsToCheck = errors ? ind.ErrorFacts : ind.Facts;
                 foreach (Fact f in factsToCheck)
                 {
                     if (errors)
@@ -426,7 +426,7 @@ namespace FTAnalyzer.Forms
                 }
                 else
                 {
-                    SourcesForm sourceForm = new SourcesForm(f);
+                    Sources sourceForm = new Sources(f);
                     sourceForm.Show();
                 }
             }
