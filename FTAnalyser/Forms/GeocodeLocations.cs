@@ -981,6 +981,7 @@ namespace FTAnalyzer.Forms
         public static void ProcessReverseResult(FactLocation loc, GeoResponse res)
         {
             int foundLevel;
+            if (loc is null || res is null) return;
             GeoResponse.CResult.CGeometry.CViewPort viewport;
             if (res.Status == "OK")
             {

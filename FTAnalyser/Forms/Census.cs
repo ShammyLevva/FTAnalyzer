@@ -97,8 +97,9 @@ namespace FTAnalyzer.Forms
 
         public void SetupLCupdateList(List<CensusIndividual> listItems)
         {
+            if (listItems is null) return;
             LostCousins = true;
-            RecordCount = listItems.Count;
+            RecordCount = listItems is null ? 0 : listItems.Count;
             SetupDataGridView(true, listItems);
         }
 

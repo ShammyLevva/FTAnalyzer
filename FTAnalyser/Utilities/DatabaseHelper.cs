@@ -543,7 +543,8 @@ namespace FTAnalyzer.Utilities
 
         public static void GetLocationDetails(FactLocation location)
         {
-            if (location.ToString().Length == 0) return;
+            if (location is null) return;
+            if (string.IsNullOrEmpty(location.ToString())) return;
             if (InstanceConnection.State != ConnectionState.Open)
                 InstanceConnection.Open();
             ReadLocationIntoFact(location, InstanceConnection);
@@ -551,6 +552,7 @@ namespace FTAnalyzer.Utilities
 
         static void ReadLocationIntoFact(FactLocation location, SQLiteConnection conn)
         {
+            if (location is null) return;
             using (SQLiteCommand cmd = new SQLiteCommand("select latitude, longitude, latm, longm, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw, geocodestatus, foundlevel, foundlocation, foundresulttype from geocode where location = ?", conn))
             {
                 SQLiteParameter param = cmd.CreateParameter();
@@ -603,6 +605,7 @@ namespace FTAnalyzer.Utilities
         }
         public static void InsertGeocode(FactLocation loc)
         {
+            if (loc is null) return;
             if (InstanceConnection.State != ConnectionState.Open)
                 InstanceConnection.Open();
             SQLiteParameter param;
@@ -687,6 +690,7 @@ namespace FTAnalyzer.Utilities
 
         public static void UpdateGeocode(FactLocation loc)
         {
+            if (loc is null) return;
             if (InstanceConnection.State != ConnectionState.Open)
                 InstanceConnection.Open();
             using (SQLiteCommand updateCmd = new SQLiteCommand("update geocode set founddate=date('now'), level = ?, latitude = ?, longitude = ?, foundlocation = ?, foundlevel = ?, viewport_x_ne = ?, viewport_y_ne = ?, viewport_x_sw = ?, viewport_y_sw = ?, geocodestatus = ?, foundresulttype = ?, latm = ?, longm = ? where location = ?", InstanceConnection))
@@ -930,6 +934,7 @@ namespace FTAnalyzer.Utilities
 
         public static void AddEmptyLocationsToQueue(ConcurrentQueue<FactLocation> queue)
         {
+            if (queue is null) return;
             if (InstanceConnection.State != ConnectionState.Open)
                 InstanceConnection.Open();
             using (SQLiteCommand cmd = new SQLiteCommand("select location from geocode where foundlocation='' and geocodestatus in (3, 8, 9) order by level", InstanceConnection))

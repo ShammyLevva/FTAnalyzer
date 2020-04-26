@@ -97,7 +97,7 @@ namespace FTAnalyzer.Forms
 
         public void ShowLocation(FactLocation loc, int level)
         {
-            if (loc.IsGeoCoded(false))
+            if (loc is object && loc.IsGeoCoded(false))
             {
                 string URL = $"https://www.google.com/maps/@{loc.Latitude},{loc.Longitude},{level}z";
                 SpecialMethods.VisitWebsite(URL);
