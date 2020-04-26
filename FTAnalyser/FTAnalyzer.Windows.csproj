@@ -528,7 +528,6 @@
     </EmbeddedResource>
     <Content Include="FTAnalyzer.ico" />
     <None Include="code signing certificate. 2019.pfx" />
-    <None Include="FTAnalyzer.Windows.ruleset" />
     <None Include="Properties\FileHandling.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>FileHandling.Designer.cs</LastGenOutput>
@@ -545,7 +544,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>NonGedcomDate.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="GdalConfiguration.vb" />
     <Content Include="Resources\Icons\16.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
