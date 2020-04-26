@@ -1,7 +1,7 @@
 ﻿using FTAnalyzer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FactDateTest
+namespace Testing
 {
     /// <summary>
     /// Summary description for AgeTest1

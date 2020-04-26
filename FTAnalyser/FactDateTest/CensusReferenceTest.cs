@@ -1,7 +1,7 @@
 ﻿using FTAnalyzer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CensusReferenceTest
+namespace Testing
 {
     /// <summary>
     /// Summary description for CensusReferenceTest
@@ -176,7 +176,7 @@ namespace CensusReferenceTest
             CensusHO107Test(reference, year, piece, string.Empty, folio, page);
         }
 
-        void CensusHO107Test(string reference, FactDate year, string piece, string book, string folio, string page)
+        static void CensusHO107Test(string reference, FactDate year, string piece, string book, string folio, string page)
         {
             CensusReference censusRef = new CensusReference("I1", reference, false);
             Assert.IsTrue(censusRef.CensusYear.Equals(year));

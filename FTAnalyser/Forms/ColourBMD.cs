@@ -79,7 +79,7 @@ namespace FTAnalyzer.Forms
                 burialColumnIndex = dgBMDReportSheet.Columns["CremBuri"].Index;
                 dgBMDReportSheet.DataSource = this.reportList;
                 reportFormHelper.LoadColumnLayout("ColourBMDColumns.xml");
-                tsRecords.Text = Properties.Messages.Count + reportList.Count + " records listed.";
+                tsRecords.Text = $"{Messages.Count}{reportList.Count} records listed.";
                 string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
                 if (defaultProvider == null)
                     defaultProvider = "FamilySearch";

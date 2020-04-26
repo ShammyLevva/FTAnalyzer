@@ -77,7 +77,7 @@ namespace FTAnalyzer.Mapping
                 DefinitiveName = (DefinitiveName.Substring(pos + 1) + " " + DefinitiveName.Substring(0, pos)).Trim();
         }
 
-        static Regex slash = new Regex(@"(.*)\(.*\)", RegexOptions.Compiled);
+        static readonly Regex slash = new Regex(@"(.*)\(.*\)", RegexOptions.Compiled);
 
         void FixAbbreviations()
         {
@@ -97,23 +97,23 @@ namespace FTAnalyzer.Mapping
             if (DefinitiveName.EndsWith(" Rly")) // Pt is abbreviation for Park
                 DefinitiveName = DefinitiveName.Replace(" Rly", " Railway");
             if (DefinitiveName.EndsWith(" Sq")) // Sq is abbreviation for Square
-                DefinitiveName = DefinitiveName + "uare";
+                DefinitiveName += "uare";
             if (DefinitiveName.EndsWith(" Sch")) // Sch is abbreviation for School
-                DefinitiveName = DefinitiveName + "ool";
+                DefinitiveName += "ool";
             if (DefinitiveName.EndsWith(" Ho")) // Ho is abbreviation for House
-                DefinitiveName = DefinitiveName + "use";
+                DefinitiveName += "use";
             if (DefinitiveName.EndsWith(" St")) // St is abbreviation for Street
-                DefinitiveName = DefinitiveName + "reet";
+                DefinitiveName += "reet";
             if (DefinitiveName.EndsWith(" Sta")) // Sta is abbreviation for Station
-                DefinitiveName = DefinitiveName + "tion";
+                DefinitiveName += "tion";
             if (DefinitiveName.EndsWith(" Br")) // Br is abbreviation for Bridge
-                DefinitiveName = DefinitiveName + "idge";
+                DefinitiveName += "idge";
             if (DefinitiveName.EndsWith(" Ch")) // Ch is abbreviation for Church
-                DefinitiveName = DefinitiveName + "urch";
+                DefinitiveName += "urch";
             if (DefinitiveName.EndsWith(" Pl")) // Pl is abbreviation for Place
-                DefinitiveName = DefinitiveName + "ace";
+                DefinitiveName += "ace";
             if (DefinitiveName.EndsWith(" Ave")) // Ave is abbreviation for Avenue
-                DefinitiveName = DefinitiveName + "nue";
+                DefinitiveName += "nue";
             if (DefinitiveName.EndsWith(" The")) // we can strip trailing the's
                 DefinitiveName = DefinitiveName.Substring(DefinitiveName.Length -4);
 

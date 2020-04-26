@@ -18,7 +18,7 @@ namespace FTAnalyzer.Forms
             InitializeComponent();
             Top += NativeMethods.TopTaskbarOffset;
             FamilyTree ft = FamilyTree.Instance;
-            Text = "Lost Cousins Referral for " + referee.ToString();
+            Text = $"Lost Cousins Referral for {referee}";
             reportFormHelper = new ReportFormHelper(this, Text, dgLCReferrals, ResetTable, "Lost Cousins Referrals");
             dgLCReferrals.AutoGenerateColumns = false;
             ExtensionMethods.DoubleBuffered(dgLCReferrals, true);

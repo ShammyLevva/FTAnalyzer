@@ -64,7 +64,7 @@ namespace FTAnalyzer.Forms
                 SetColumns(country);
                 dgReportSheet.DataSource = this._reportList;
                 reportFormHelper.LoadColumnLayout("ColourCensusLayout.xml");
-                tsRecords.Text = Properties.Messages.Count + reportList.Count + " records listed.";
+                tsRecords.Text = $"{Messages.Count}{reportList.Count} records listed.";
                 string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
                 if (defaultProvider == null)
                     defaultProvider = "FamilySearch";

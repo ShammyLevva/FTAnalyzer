@@ -6,12 +6,12 @@ namespace FTAnalyzer.Mapping
 {
     public class MapLifeLine
     {
-        private Individual ind;
-        private Geometry Geometry { get; set; }
-        private Geometry StartPoint { get; set; }
-        private Geometry EndPoint { get; set; }
-        private int Count { get; set; }
-        private Envelope Viewport { get; set; }
+        readonly Individual ind;
+        Geometry Geometry { get; set; }
+        Geometry StartPoint { get; set; }
+        Geometry EndPoint { get; set; }
+        int Count { get; set; }
+        Envelope Viewport { get; set; }
 
         public static string LINE = "Line", START = "Start", END = "End";
 
@@ -20,7 +20,7 @@ namespace FTAnalyzer.Mapping
             this.ind = ind;
             int index = 1;
             List<Coordinate> points = new List<Coordinate>();
-            this.Viewport = new Envelope();
+            Viewport = new Envelope();
             Coordinate previousPoint = null;
             foreach (IDisplayFact f in ind.AllLifeLineFacts)
             {

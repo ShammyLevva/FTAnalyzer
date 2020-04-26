@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using static FTAnalyzer.FactDate;
 
-namespace FactDateTest
+namespace Testing
 {
 
 
@@ -58,10 +58,10 @@ namespace FactDateTest
         [TestMethod()]
         public void FactDateBasicTest()
         {
-            FactDate target = BasicDates();
-            target = AlternateDateFormats();
+            _ = BasicDates();
+            _ = AlternateDateFormats();
 
-            target = new FactDate(null);
+            FactDate target = new FactDate(null);
             Assert.AreEqual(target, UNKNOWN_DATE);
 
             target = new FactDate("");
@@ -119,8 +119,8 @@ namespace FactDateTest
         [TestMethod()]
         public void FactDateBetweensTest()
         {
-            FactDate target = Betweens();
-            target = MoreBetweens();
+            _ = Betweens();
+            _ = MoreBetweens();
         }
 
         /// <summary>
@@ -287,10 +287,10 @@ namespace FactDateTest
 
         private static FactDate AlternateDateFormats()
         {
-            FactDate target = DoubleDates();
+            _ = DoubleDates();
 
             // test some alternative date formats
-            target = new FactDate("Q3 1947");
+            FactDate target = new FactDate("Q3 1947");
             Assert.AreEqual(new DateTime(1947, 6, 1), target.StartDate);
             Assert.AreEqual(new DateTime(1947, 9, 30), target.EndDate);
 

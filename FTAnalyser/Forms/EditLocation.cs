@@ -40,7 +40,7 @@ namespace FTAnalyzer.Forms
             originalLocation = FactLocation.TEMP;
             btnCustomMap.Visible = (Properties.MappingSettings.Default.CustomMapPath.Length > 0);
             FactLocation.CopyLocationDetails(location, originalLocation);
-            Text = "Editing : " + location.ToString();
+            Text = $"Editing : {location}";
             iconSelected = false;
             pointUpdated = false;
             dataUpdated = false;
