@@ -806,9 +806,9 @@ namespace FTAnalyzer
                 chart.BuildChildBirthProfile(stats);
                 DisposeDuplicateForms(chart);
                 chart.Show();
+                Analytics.TrackAction(Analytics.MainFormAction, Analytics.BirthProfileEvent);
+                MessageBox.Show(s.BuildOutput(stats), "Birth Profile Information");
             }
-            Analytics.TrackAction(Analytics.MainFormAction, Analytics.BirthProfileEvent);
-            MessageBox.Show(s.BuildOutput(stats), "Birth Profile Information");
         }
 
         void ViewOnlineManualToolStripMenuItem_Click(object sender, EventArgs e)

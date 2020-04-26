@@ -267,7 +267,7 @@ namespace FTAnalyzer.Forms
             mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.QueryPoint;
         }
 
-        void MapBox1_ActiveToolChanged(SharpMap.Forms.MapBox.Tools tool)
+        void MapBox1_ActiveToolChanged()
         {
             if (mapBox1.ActiveTool != SharpMap.Forms.MapBox.Tools.QueryPoint)
                 btnSelect.Checked = false;

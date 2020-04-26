@@ -32,3 +32,9 @@ dotnet_style_require_accessibility_modifiers = never:silent
 
 # CA1710: Identifiers should have correct suffix
 dotnet_diagnostic.CA1710.severity = silent
+
+# CA1801: Parameter imagePos of method MapBox1_MouseMove is never used. Remove the parameter or use it in the method body.
+dotnet_diagnostic.CA1801.severity = silent
+
+# CA1812: OpenDatabaseException is an internal class that is apparently never instantiated. If so, remove the code from the assembly. If this class is intended to contain only static members, make it static (Shared in Visual Basic).
+dotnet_diagnostic.CA1812.severity = silent
