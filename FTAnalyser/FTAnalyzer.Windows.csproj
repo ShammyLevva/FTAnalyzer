@@ -78,7 +78,7 @@
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <NoWarn>CA1031; CA1303; CA1304; CA1305; CA1707; CA1710; CA1721; CA1801; CA1812; CA1822; CA2211;</NoWarn>
+    <NoWarn>CA1031; CA1303; CA1304; CA1305; CA1307; CA1707; CA1710; CA1721; CA1801; CA1812; CA1822; CA2211;</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -96,7 +96,7 @@
     <LangVersion>7.3</LangVersion>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
-    <NoWarn>CA1031; CA1303; CA1304; CA1305; CA1707; CA1710; CA1721; CA1801; CA1812; CA1822; CA2211;</NoWarn>
+    <NoWarn>CA1031; CA1303; CA1304; CA1305; CA1307; CA1707; CA1710; CA1721; CA1801; CA1812; CA1822; CA2211;</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
