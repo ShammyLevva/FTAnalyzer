@@ -345,6 +345,7 @@
     <Compile Include="Forms\Controls\MapToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="GdalConfiguration.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Graphics\FactImage.cs" />
     <Compile Include="Graphics\FactLocationImage.cs" />
@@ -897,32 +898,32 @@
   <ItemGroup>
     <PublishFile Include="Resources\CensusLocations.xml">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="Resources\FactLocationFixes.xml">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="Resources\ScottishParishes.xml">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
