@@ -160,6 +160,7 @@ namespace FTAnalyzer.Controls
 
         public void RefreshTreeNodeIcon(FactLocation location)
         {
+            if (location is null) return;
             string[] parts = location.GetParts();
             TreeNode currentM = mainformTreeRootNode;
             TreeNode currentP = placesTreeRootNode;

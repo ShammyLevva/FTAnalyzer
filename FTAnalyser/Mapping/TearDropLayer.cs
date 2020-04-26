@@ -79,6 +79,7 @@ namespace FTAnalyzer.Mapping
 
         public void AddFeatureDataRows(Individual ind)
         {
+            if (ind is null) return;
             foreach (DisplayFact f in ind.AllGeocodedFacts)
             {
                 MapLocation ml = new MapLocation(ind, f.Fact, f.FactDate);
