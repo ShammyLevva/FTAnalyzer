@@ -9,6 +9,7 @@ using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace FTAnalyzer
 {
@@ -140,37 +141,44 @@ namespace FTAnalyzer
             try
             {
                 _resetTable();
-                DataTable dt = new DataTable();
-                string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, filename);
-                dt.ReadXmlSchema(path);
-                if (dt.Columns.Count == ReportGrid.Columns.Count)
-                {   // only load column layout and sort order if save file has same number of columns as current form
-                    // this allows for upgrades that add extra columns
-                    int i = 0;
-                    foreach (DataColumn col in dt.Columns)
+                using (DataTable dt = new DataTable())
+                {
+                    string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, filename);
+                    string xml = File.ReadAllText(path);
+                    StringReader sreader = new StringReader(xml);
+                    using (XmlReader reader = XmlReader.Create(sreader, new XmlReaderSettings() { XmlResolver = null }))
                     {
-                        if (col.ColumnName == "GoogleLocation")
-                            col.ColumnName = "FoundLocation";
-                        if (col.ColumnName == "GoogleResultType")
-                            col.ColumnName = "FoundResultType";
-                        ReportGrid.Columns[col.ColumnName].DisplayIndex = i;
-                        if (col.ExtendedProperties.Contains("Width"))
-                        {
-                            if (int.TryParse((string)col.ExtendedProperties["Width"], out int width))
-                                ReportGrid.Columns[col.ColumnName].Width = width;
-                        }
-                        if (col.ExtendedProperties.Contains("Sort"))
-                        {
-                            ListSortDirection direction = "Ascending".Equals(col.ExtendedProperties["Sort"]) ?
-                                    ListSortDirection.Ascending :
-                                    ListSortDirection.Descending;
-                            ReportGrid.Sort(ReportGrid.Columns[col.ColumnName], direction);
-                        }
-                        i++;
+                        dt.ReadXmlSchema(reader);
                     }
+                    if (dt.Columns.Count == ReportGrid.Columns.Count)
+                    {   // only load column layout and sort order if save file has same number of columns as current form
+                        // this allows for upgrades that add extra columns
+                        int i = 0;
+                        foreach (DataColumn col in dt.Columns)
+                        {
+                            if (col.ColumnName == "GoogleLocation")
+                                col.ColumnName = "FoundLocation";
+                            if (col.ColumnName == "GoogleResultType")
+                                col.ColumnName = "FoundResultType";
+                            ReportGrid.Columns[col.ColumnName].DisplayIndex = i;
+                            if (col.ExtendedProperties.Contains("Width"))
+                            {
+                                if (int.TryParse((string)col.ExtendedProperties["Width"], out int width))
+                                    ReportGrid.Columns[col.ColumnName].Width = width;
+                            }
+                            if (col.ExtendedProperties.Contains("Sort"))
+                            {
+                                ListSortDirection direction = "Ascending".Equals(col.ExtendedProperties["Sort"]) ?
+                                        ListSortDirection.Ascending :
+                                        ListSortDirection.Descending;
+                                ReportGrid.Sort(ReportGrid.Columns[col.ColumnName], direction);
+                            }
+                            i++;
+                        }
+                    }
+                    else
+                        ResetColumnLayout(filename);
                 }
-                else
-                    ResetColumnLayout(filename);
             }
             catch (Exception)
             {

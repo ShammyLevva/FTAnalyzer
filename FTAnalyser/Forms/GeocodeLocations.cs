@@ -211,7 +211,7 @@ namespace FTAnalyzer.Forms
                 return new SortableBindingList<IDisplayGeocodedLocation>(locations);
             List<IDisplayGeocodedLocation> results = new List<IDisplayGeocodedLocation>();
             ToolStripMenuItem places = mnuFoundResultType.DropDownItems["Places"] as ToolStripMenuItem;
-            ToolStripMenuItem[] list = new ToolStripMenuItem[places.DropDownItems.Count + mnuFoundResultType.DropDownItems.Count + noneOfTheAboveMenus.Count()];
+            ToolStripMenuItem[] list = new ToolStripMenuItem[places.DropDownItems.Count + mnuFoundResultType.DropDownItems.Count + noneOfTheAboveMenus.Length];
             mnuFoundResultType.DropDownItems.CopyTo(list, 0);
             places.DropDownItems.CopyTo(list, mnuFoundResultType.DropDownItems.Count);
             noneOfTheAboveMenus.CopyTo(list, mnuFoundResultType.DropDownItems.Count + places.DropDownItems.Count); // add any missing elements to always display them
@@ -219,7 +219,7 @@ namespace FTAnalyzer.Forms
             {
                 if (StatusFilter(loc) || (mustDisplay != null && loc.Equals(mustDisplay)))
                 {
-                    if (loc.FoundResultType == null || loc.FoundResultType.Length == 0 || (mustDisplay != null && loc.Equals(mustDisplay)))
+                    if (loc.FoundResultType is null || loc.FoundResultType.Length == 0 || (mustDisplay != null && loc.Equals(mustDisplay)))
                         results.Add(loc);
                     else
                     {

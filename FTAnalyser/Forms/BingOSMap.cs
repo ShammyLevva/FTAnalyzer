@@ -31,7 +31,7 @@ namespace FTAnalyzer.Forms
             InitializeComponent();
             loaded = false;
             string filename = Path.Combine(Application.StartupPath + @"\Resources\BingOSMaps.htm");
-            webBrowser.Navigate(filename);
+            webBrowser.Navigate(new Uri(filename));
             webBrowser.Hide();
             Top += NativeMethods.TopTaskbarOffset;
         }
@@ -82,7 +82,7 @@ namespace FTAnalyzer.Forms
             System.Diagnostics.Debug.Print("DocumentCompleted called");
         }
 
-        void LabTOU_Click(object sender, EventArgs e) => webBrowser.Navigate("http://www.microsoft.com/Maps/product/terms.html");
+        void LabTOU_Click(object sender, EventArgs e) => webBrowser.Navigate(new Uri("http://www.microsoft.com/Maps/product/terms.html"));
 
         void BingOSMap_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 

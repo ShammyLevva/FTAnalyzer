@@ -426,7 +426,7 @@ namespace FTAnalyzer.Forms
                 }
                 else
                 {
-                    Sources sourceForm = new Sources(f);
+                    SourcesForm sourceForm = new SourcesForm(f);
                     sourceForm.Show();
                 }
             }

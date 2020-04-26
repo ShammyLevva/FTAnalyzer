@@ -195,7 +195,7 @@ namespace FTAnalyzer.Forms
             HttpWebRequest request;
             try
             {
-                request = WebRequest.Create(url) as HttpWebRequest;
+                request = WebRequest.Create(new Uri(url)) as HttpWebRequest;
                 request.Timeout = 3000; // set timeout to 5 seconds from default 100 seconds
                 request.ReadWriteTimeout = 10000;
                 request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
