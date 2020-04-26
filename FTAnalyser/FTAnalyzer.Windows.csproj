@@ -85,8 +85,7 @@
     <Prefer32Bit>false</Prefer32Bit>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>
-    </CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <LangVersion>7.3</LangVersion>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
@@ -529,7 +528,6 @@
     <Content Include="FTAnalyzer.ico" />
     <None Include=".editorconfig" />
     <None Include="code signing certificate. 2019.pfx" />
-    <None Include="FTAnalyzer.Windows.ruleset" />
     <None Include="Properties\FileHandling.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>FileHandling.Designer.cs</LastGenOutput>
