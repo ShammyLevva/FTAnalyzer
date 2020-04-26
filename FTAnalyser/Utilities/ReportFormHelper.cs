@@ -91,8 +91,8 @@ namespace FTAnalyzer
             parent.Cursor = Cursors.WaitCursor;
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
             SortableBindingList<T> gridDatasource = ReportGrid.DataSource as SortableBindingList<T>;
-            DataTable dt = convertor.ToDataTable(gridDatasource.ToList(), shown);
-            ExportToExcel.Export(dt);
+            using (DataTable dt = convertor.ToDataTable(gridDatasource.ToList(), shown))
+                ExportToExcel.Export(dt);
             parent.Cursor = Cursors.Default;
         }
 
@@ -102,29 +102,31 @@ namespace FTAnalyzer
                 return;
             parent.Cursor = Cursors.WaitCursor;
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            DataTable dt = convertor.ToDataTable(list);
-            ExportToExcel.Export(dt);
+            using (DataTable dt = convertor.ToDataTable(list))
+                ExportToExcel.Export(dt);
             parent.Cursor = Cursors.Default;
         }
 
         public void SaveColumnLayout(string filename)
         {
-            DataTable dt = new DataTable("table");
-            var query = from DataGridViewColumn col in ReportGrid.Columns
-                        orderby col.DisplayIndex
-                        select col;
-
-            foreach (DataGridViewColumn col in query)
+            using (DataTable dt = new DataTable("table"))
             {
-                DataColumn dc = new DataColumn(col.Name);
-                dc.ExtendedProperties["Width"] = col.Width;
-                if (col == ReportGrid.SortedColumn)
-                    dc.ExtendedProperties["Sort"] = ReportGrid.SortOrder;
-                dt.Columns.Add(dc);
+                var query = from DataGridViewColumn col in ReportGrid.Columns
+                            orderby col.DisplayIndex
+                            select col;
+
+                foreach (DataGridViewColumn col in query)
+                {
+                    DataColumn dc = new DataColumn(col.Name);
+                    dc.ExtendedProperties["Width"] = col.Width;
+                    if (col == ReportGrid.SortedColumn)
+                        dc.ExtendedProperties["Sort"] = ReportGrid.SortOrder;
+                    dt.Columns.Add(dc);
+                }
+                string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, filename);
+                dt.WriteXmlSchema(path);
+                SaveFormLayout();
             }
-            string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, filename);
-            dt.WriteXmlSchema(path);
-            SaveFormLayout();
         }
 
         public static Point CheckIsOnScreen(int top, int left)

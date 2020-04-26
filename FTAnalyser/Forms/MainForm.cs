@@ -31,7 +31,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.7.2.0";
+        public static string VERSION = "7.8.0.0";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -2995,8 +2995,8 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            DataTable dt = convertor.ToDataTable(new List<IExportIndividual>(ft.AllIndividuals));
-            ExportToExcel.Export(dt);
+            using (DataTable dt = convertor.ToDataTable(new List<IExportIndividual>(ft.AllIndividuals)))
+                ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportIndEvent);
             HourGlass(false);
         }
@@ -3005,8 +3005,8 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            DataTable dt = convertor.ToDataTable(new List<IDisplayFamily>(ft.AllFamilies));
-            ExportToExcel.Export(dt);
+            using (DataTable dt = convertor.ToDataTable(new List<IDisplayFamily>(ft.AllFamilies)))
+                ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportFamEvent);
             HourGlass(false);
         }
@@ -3015,8 +3015,8 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            DataTable dt = convertor.ToDataTable(new List<ExportFact>(ft.AllExportFacts));
-            ExportToExcel.Export(dt);
+            using (DataTable dt = convertor.ToDataTable(new List<ExportFact>(ft.AllExportFacts)))
+                ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportFactsEvent);
             HourGlass(false);
         }
@@ -3029,8 +3029,8 @@ namespace FTAnalyzer
                 ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
                 List<IDisplayLooseBirth> list = ft.LooseBirths().ToList();
                 list.Sort(new LooseBirthComparer());
-                DataTable dt = convertor.ToDataTable(list);
-                ExportToExcel.Export(dt);
+                using (DataTable dt = convertor.ToDataTable(list))
+                    ExportToExcel.Export(dt);
                 Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportLooseBirthsEvent);
             }
             catch (LooseDataException ex)
@@ -3048,8 +3048,8 @@ namespace FTAnalyzer
                 ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
                 List<IDisplayLooseDeath> list = ft.LooseDeaths().ToList();
                 list.Sort(new LooseDeathComparer());
-                DataTable dt = convertor.ToDataTable(list);
-                ExportToExcel.Export(dt);
+                using (DataTable dt = convertor.ToDataTable(list))
+                    ExportToExcel.Export(dt);
                 Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportLooseDeathsEvent);
             }
             catch (LooseDataException ex)
@@ -3063,8 +3063,8 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            DataTable dt = convertor.ToDataTable(new List<IDisplayLocation>(ft.AllDisplayPlaces));
-            ExportToExcel.Export(dt);
+            using (DataTable dt = convertor.ToDataTable(new List<IDisplayLocation>(ft.AllDisplayPlaces)))
+                ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportLocationsEvent);
             HourGlass(false);
         }
@@ -3073,8 +3073,8 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            DataTable dt = convertor.ToDataTable(new List<IDisplaySource>(ft.AllSources));
-            ExportToExcel.Export(dt);
+            using (DataTable dt = convertor.ToDataTable(new List<IDisplaySource>(ft.AllSources)))
+                ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportSourcesEvent);
             HourGlass(false);
         }
@@ -3083,8 +3083,8 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            DataTable dt = convertor.ToDataTable(new List<IDisplayDataError>(DataErrors(ckbDataErrors)));
-            ExportToExcel.Export(dt);
+            using (DataTable dt = convertor.ToDataTable(new List<IDisplayDataError>(DataErrors(ckbDataErrors))))
+                ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportDataErrorsEvent);
             HourGlass(false);
         }
@@ -3097,8 +3097,8 @@ namespace FTAnalyzer
             List<IExportIndividual> treeTopsList = ft.GetExportTreeTops(filter).ToList();
             treeTopsList.Sort(new BirthDateComparer());
             SortableBindingList<IExportIndividual> list = new SortableBindingList<IExportIndividual>(treeTopsList);
-            DataTable dt = convertor.ToDataTable(list.ToList());
-            ExportToExcel.Export(dt);
+            using (DataTable dt = convertor.ToDataTable(list.ToList()))
+                ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportTreeTopsEvent);
             HourGlass(false);
         }
@@ -3112,8 +3112,8 @@ namespace FTAnalyzer
                 List<IExportIndividual> warDeadList = ft.GetExportWorldWars(warDeadFilter).ToList();
                 warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
                 SortableBindingList<IExportIndividual> list = new SortableBindingList<IExportIndividual>(warDeadList);
-                DataTable dt = convertor.ToDataTable(list.ToList());
-                ExportToExcel.Export(dt);
+                using (DataTable dt = convertor.ToDataTable(list.ToList()))
+                    ExportToExcel.Export(dt);
                 Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportWorldWarsEvent);
             }
             HourGlass(false);

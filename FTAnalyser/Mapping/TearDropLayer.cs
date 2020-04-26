@@ -99,6 +99,7 @@ namespace FTAnalyzer.Mapping
 
         public void AddSelections(DataGridViewSelectedRowCollection rows)
         {
+            if (rows is null) return;
             Clear();
             foreach (DataGridViewRow row in rows)
             {

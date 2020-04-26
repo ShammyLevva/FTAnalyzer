@@ -10,7 +10,7 @@ namespace FTAnalyzer.Utilities
 
         #region Selected Node(s) Properties
 
-        private List<TreeNode> m_SelectedNodes = null;
+        readonly List<TreeNode> m_SelectedNodes = null;
         public List<TreeNode> SelectedNodes
         {
             get => m_SelectedNodes;

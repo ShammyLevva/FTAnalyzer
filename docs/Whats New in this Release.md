@@ -1,3 +1,7 @@
+#### Updated Release Version 7.8.0 26th Apr 2020  
+**Updates**  
+Refactored code to take on board code analysis recommendations  
+
 #### Updated Release Version 7.7.2 26th Apr 2020  
 **Updates**  
 Geocoding now using region/country viewports to try to get more accurate results  
