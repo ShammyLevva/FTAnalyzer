@@ -5,8 +5,6 @@
   <Import Project="packages\Microsoft.NetCore.Analyzers.2.9.8\build\Microsoft.NetCore.Analyzers.props" Condition="Exists('packages\Microsoft.NetCore.Analyzers.2.9.8\build\Microsoft.NetCore.Analyzers.props')" />
   <Import Project="packages\Microsoft.CodeQuality.Analyzers.2.9.8\build\Microsoft.CodeQuality.Analyzers.props" Condition="Exists('packages\Microsoft.CodeQuality.Analyzers.2.9.8\build\Microsoft.CodeQuality.Analyzers.props')" />
   <Import Project="packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props" Condition="Exists('packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props')" />
-  <Import Project="packages\Microsoft.NetFramework.Analyzers.2.9.3\build\Microsoft.NetFramework.Analyzers.props" Condition="Exists('packages\Microsoft.NetFramework.Analyzers.2.9.3\build\Microsoft.NetFramework.Analyzers.props')" />
-  <Import Project="packages\Microsoft.NetCore.Analyzers.2.9.3\build\Microsoft.NetCore.Analyzers.props" Condition="Exists('packages\Microsoft.NetCore.Analyzers.2.9.3\build\Microsoft.NetCore.Analyzers.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -982,8 +980,6 @@ rem    xcopy /s /y "$(SolutionDir)packages\GDAL.Native.1.11.1\gdal\*.*" "$(Targe
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\Microsoft.NetCore.Analyzers.2.9.3\build\Microsoft.NetCore.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.NetCore.Analyzers.2.9.3\build\Microsoft.NetCore.Analyzers.props'))" />
-    <Error Condition="!Exists('packages\Microsoft.NetFramework.Analyzers.2.9.3\build\Microsoft.NetFramework.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.NetFramework.Analyzers.2.9.3\build\Microsoft.NetFramework.Analyzers.props'))" />
     <Error Condition="!Exists('packages\GDAL.Native.2.4.4\build\net40\GDAL.Native.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\GDAL.Native.2.4.4\build\net40\GDAL.Native.targets'))" />
     <Error Condition="!Exists('packages\System.Data.SQLite.Core.1.0.112.1\build\net40\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.Data.SQLite.Core.1.0.112.1\build\net40\System.Data.SQLite.Core.targets'))" />
     <Error Condition="!Exists('packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props'))" />

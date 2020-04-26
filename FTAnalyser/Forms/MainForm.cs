@@ -208,7 +208,7 @@ namespace FTAnalyzer
                 if (!stopProcessing)
                 {
                     // document.Save("GedcomOutput.xml");
-                    if (await LoadTreeAsync(filename).ConfigureAwait(false))
+                    if (await LoadTreeAsync(filename).ConfigureAwait(true))
                     {
                         SetDataErrorsCheckedDefaults(ckbDataErrors);
                         SetupFactsCheckboxes();
@@ -247,7 +247,7 @@ namespace FTAnalyzer
             XmlDocument doc;
             using (FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
             {
-                doc = await Task.Run(() => ft.LoadTreeHeader(filename, stream, outputText)).ConfigureAwait(false);
+                doc = await Task.Run(() => ft.LoadTreeHeader(filename, stream, outputText)).ConfigureAwait(true);
             }
             if (doc == null)
                 return false;
@@ -255,10 +255,10 @@ namespace FTAnalyzer
             var individualProgress = new Progress<int>(value => { pbIndividuals.Value = value; });
             var familyProgress = new Progress<int>(value => { pbFamilies.Value = value; });
             var RelationshipProgress = new Progress<int>(value => { pbRelationships.Value = value; });
-            await Task.Run(() => ft.LoadTreeSources(doc, sourceProgress, outputText)).ConfigureAwait(false);
-            await Task.Run(() => ft.LoadTreeIndividuals(doc, individualProgress, outputText)).ConfigureAwait(false);
-            await Task.Run(() => ft.LoadTreeFamilies(doc, familyProgress, outputText)).ConfigureAwait(false);
-            await Task.Run(() => ft.LoadTreeRelationships(doc, RelationshipProgress, outputText)).ConfigureAwait(false);
+            await Task.Run(() => ft.LoadTreeSources(doc, sourceProgress, outputText)).ConfigureAwait(true);
+            await Task.Run(() => ft.LoadTreeIndividuals(doc, individualProgress, outputText)).ConfigureAwait(true);
+            await Task.Run(() => ft.LoadTreeFamilies(doc, familyProgress, outputText)).ConfigureAwait(true);
+            await Task.Run(() => ft.LoadTreeRelationships(doc, RelationshipProgress, outputText)).ConfigureAwait(true);
             return true;
         }
 
@@ -368,10 +368,10 @@ namespace FTAnalyzer
 
             if (openGedcom.ShowDialog() == DialogResult.OK)
             {
-                await LoadFileAsync(openGedcom.FileName).ConfigureAwait(false);
+                await LoadFileAsync(openGedcom.FileName).ConfigureAwait(true);
                 Settings.Default.LoadLocation = Path.GetFullPath(openGedcom.FileName);
                 Settings.Default.Save();
-                await Analytics.TrackAction(Analytics.MainFormAction, Analytics.LoadGEDCOMEvent).ConfigureAwait(false);
+                await Analytics.TrackAction(Analytics.MainFormAction, Analytics.LoadGEDCOMEvent).ConfigureAwait(true);
             }
         }
 
@@ -514,7 +514,7 @@ namespace FTAnalyzer
             {
                 shutdown = true;
                 e.Cancel = true;
-                await Analytics.EndProgramAsync().ConfigureAwait(false);
+                await Analytics.EndProgramAsync().ConfigureAwait(true);
                 Close();
             }
             DatabaseHelper.Instance.Dispose();
@@ -976,7 +976,7 @@ namespace FTAnalyzer
             // do anything that needs doing when option changes
         }
 
-        async void Options_ReloadData(object sender, EventArgs e) => await QueryReloadData().ConfigureAwait(false);
+        async void Options_ReloadData(object sender, EventArgs e) => await QueryReloadData().ConfigureAwait(true);
 
         void Options_MinimumParentalAgeChanged(object sender, EventArgs e)
         {
@@ -1007,7 +1007,7 @@ namespace FTAnalyzer
                 GeneralSettings.Default.Save();
                 if (dr == DialogResult.Yes)
                 {
-                    await LoadFileAsync(filename).ConfigureAwait(false);
+                    await LoadFileAsync(filename).ConfigureAwait(true);
                 }
             }
         }
@@ -1016,7 +1016,7 @@ namespace FTAnalyzer
         {
             GeneralSettings.Default.ReloadRequired = false;
             GeneralSettings.Default.Save();
-            await LoadFileAsync(filename).ConfigureAwait(false);
+            await LoadFileAsync(filename).ConfigureAwait(true);
         }
         #endregion
 
@@ -1414,29 +1414,29 @@ namespace FTAnalyzer
             {
                 rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
                 ckbHideIgnoredDuplicates.Checked = GeneralSettings.Default.HideIgnoredDuplicates;
-                await SetPossibleDuplicates().ConfigureAwait(false);
+                await SetPossibleDuplicates().ConfigureAwait(true);
                 ResetDuplicatesTable(); // force a reset on intial load
                 dgDuplicates.Focus();
                 mnuPrint.Enabled = true;
-                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.DuplicatesTabEvent).ConfigureAwait(false);
+                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.DuplicatesTabEvent).ConfigureAwait(true);
             }
             if (tabErrorFixSelector.SelectedTab == tabLooseBirths)
             {
                 if (dgLooseBirths.DataSource == null)
                     SetupLooseBirths();
-                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseBirthsEvent).ConfigureAwait(false);
+                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseBirthsEvent).ConfigureAwait(true);
             }
             else if (tabErrorFixSelector.SelectedTab == tabLooseDeaths)
             {
                 if (dgLooseDeaths.DataSource == null)
                     SetupLooseDeaths();
-                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseDeathsEvent).ConfigureAwait(false);
+                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseDeathsEvent).ConfigureAwait(true);
             }
             else if (tabErrorFixSelector.SelectedTab == tabLooseInfo)
             {
                 if (dgLooseInfo.DataSource == null)
                     SetupLooseInfo();
-                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseInfoEvent).ConfigureAwait(false);
+                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseInfoEvent).ConfigureAwait(true);
             }
         }
 
@@ -1617,9 +1617,9 @@ namespace FTAnalyzer
                 {
                     rtbLCoutput.Text = "Started Processing Lost Cousins entries.\n\n";
                     Progress<string> outputText = new Progress<string>(value => { rtbLCoutput.AppendText(value); });
-                    int count = await Task.Run(() => ExportToLostCousins.ProcessList(LCUpdates, outputText)).ConfigureAwait(false);
+                    int count = await Task.Run(() => ExportToLostCousins.ProcessList(LCUpdates, outputText)).ConfigureAwait(true);
                     string resultText = $"{DateTime.Now.ToUniversalTime():yyyy-MM-dd HH:mm}: uploaded {count} records";
-                    await Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.UpdateLostCousins, resultText).ConfigureAwait(false);
+                    await Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.UpdateLostCousins, resultText).ConfigureAwait(true);
                     SpecialMethods.VisitWebsite("https://www.lostcousins.com/pages/members/ancestors/");
                     UpdateLCReports();
                 }
@@ -2047,7 +2047,7 @@ namespace FTAnalyzer
         async void OpenRecentFile_Click(object sender, EventArgs e)
         {
             string filename = (string)(sender as ToolStripMenuItem).Tag;
-            await LoadFileAsync(filename).ConfigureAwait(false);
+            await LoadFileAsync(filename).ConfigureAwait(true);
         }
 
         void MnuRecent_DropDownOpening(object sender, EventArgs e) => BuildRecentList();
@@ -2365,7 +2365,7 @@ namespace FTAnalyzer
                 if (Path.GetExtension(filename.ToLower()) == ".ged")
                 {
                     fileLoaded = true;
-                    await LoadFileAsync(filename).ConfigureAwait(false);
+                    await LoadFileAsync(filename).ConfigureAwait(true);
                     break;
                 }
             }
@@ -2449,7 +2449,7 @@ namespace FTAnalyzer
             });
             cts = new CancellationTokenSource();
             int score = tbDuplicateScore.Value;
-            SortableBindingList<IDisplayDuplicateIndividual> data = await Task.Run(() => ft.GenerateDuplicatesList(score, progress, maxScore, cts.Token)).ConfigureAwait(false);
+            SortableBindingList<IDisplayDuplicateIndividual> data = await Task.Run(() => ft.GenerateDuplicatesList(score, progress, maxScore, cts.Token)).ConfigureAwait(true);
             cts = null;
             if (data != null)
             {
@@ -2485,7 +2485,7 @@ namespace FTAnalyzer
         {
             // do nothing if progress bar still visible
             if (!pbDuplicates.Visible)
-                await SetPossibleDuplicates().ConfigureAwait(false);
+                await SetPossibleDuplicates().ConfigureAwait(true);
         }
 
         void BtnCancelDuplicates_Click(object sender, EventArgs e)
@@ -2521,7 +2521,7 @@ namespace FTAnalyzer
                 return; // do nothing if progress bar still visible
             GeneralSettings.Default.HideIgnoredDuplicates = ckbHideIgnoredDuplicates.Checked;
             GeneralSettings.Default.Save();
-            await SetPossibleDuplicates().ConfigureAwait(false);
+            await SetPossibleDuplicates().ConfigureAwait(true);
         }
         #endregion
 
@@ -2764,7 +2764,7 @@ namespace FTAnalyzer
             DisposeDuplicateForms(rs);
             rs.Show();
             rs.Focus();
-            await Analytics.TrackActionAsync(Analytics.MainFormAction, Analytics.ColourCensusEvent, country).ConfigureAwait(false);
+            await Analytics.TrackActionAsync(Analytics.MainFormAction, Analytics.ColourCensusEvent, country).ConfigureAwait(true);
             HourGlass(false);
         }
 
@@ -3135,17 +3135,17 @@ namespace FTAnalyzer
             rtbToday.ResetText();
             Progress<int> progress = new Progress<int>(value => { pbToday.Value = value; });
             Progress<string> outputText = new Progress<string>(text => { rtbToday.Rtf = text; });
-            await Task.Run(() => ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, (int)nudToday.Value, progress, outputText)).ConfigureAwait(false);
+            await Task.Run(() => ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, (int)nudToday.Value, progress, outputText)).ConfigureAwait(true);
             labToday.Visible = false;
             pbToday.Visible = false;
-            await Analytics.TrackAction(Analytics.MainFormAction, Analytics.TodayClickedEvent).ConfigureAwait(false);
+            await Analytics.TrackAction(Analytics.MainFormAction, Analytics.TodayClickedEvent).ConfigureAwait(true);
         }
 
         void RbTodayMonth_CheckedChanged(object sender, EventArgs e) => Application.UserAppDataRegistry.SetValue("Todays Events Month", rbTodayMonth.Checked);
 
         void RbTodaySingle_CheckedChanged(object sender, EventArgs e) => Application.UserAppDataRegistry.SetValue("Todays Events Month", !rbTodaySingle.Checked);
 
-        async void BtnUpdateTodaysEvents_Click(object sender, EventArgs e) => await ShowTodaysEvents().ConfigureAwait(false);
+        async void BtnUpdateTodaysEvents_Click(object sender, EventArgs e) => await ShowTodaysEvents().ConfigureAwait(true);
 
         void NudToday_ValueChanged(object sender, EventArgs e) => Application.UserAppDataRegistry.SetValue("Todays Events Step", nudToday.Value);
         #endregion
@@ -3294,7 +3294,7 @@ namespace FTAnalyzer
             Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
             var progress = new Progress<int>(value => { tspbTabProgress.Value = value; });
             var list = await Task.Run(() => 
-                new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked))).ConfigureAwait(false);
+                new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked))).ConfigureAwait(true);
             dgSurnames.DataSource = list;
             dgSurnames.Sort(dgSurnames.Columns["Surname"], ListSortDirection.Ascending);
             dgSurnames.AllowUserToResizeColumns = true;
@@ -3303,7 +3303,7 @@ namespace FTAnalyzer
             tsHintsLabel.Text = Messages.Hints_Surname;
             tspbTabProgress.Visible = false;
             HourGlass(false);
-            await Analytics.TrackAction(Analytics.MainFormAction, Analytics.ShowSurnamesEvent).ConfigureAwait(false);
+            await Analytics.TrackAction(Analytics.MainFormAction, Analytics.ShowSurnamesEvent).ConfigureAwait(true);
         }
 
         void CousinsCountReportToolStripMenuItem_Click(object sender, EventArgs e)
