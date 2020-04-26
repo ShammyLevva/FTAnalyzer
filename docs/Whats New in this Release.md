@@ -1,7 +1,8 @@
-#### Updated Release Version 7.7.2 24th Apr 2020  
+#### Updated Release Version 7.7.2 26th Apr 2020  
 **Updates**  
 Geocoding now using region/country viewports to try to get more accurate results  
 Geocoding now searches on country then region first to enable use of viewports  
+Update Analytics to show x64 vs x86 OS  
 
 **Bugfixes**  
 Google API now works as intended 
