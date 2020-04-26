@@ -171,7 +171,7 @@ namespace FTAnalyzer.Forms
             return count == menus;
         }
 
-        void UpdateGridWithFilters()
+        void UpdateGridWithFilters(bool keepCurrentLocation)
         {
             Cursor = Cursors.WaitCursor;
             FactLocation loc = dgLocations.CurrentRow != null ? dgLocations.CurrentRow.DataBoundItem as FactLocation : null;
