@@ -114,12 +114,13 @@ namespace Testing
             UKCensusTest("Class: RG11; Piece: 3934; Folio: 60; Page: 9; Line:; GSU roll: 1341939", CensusDate.UKCENSUS1881, "3934", "60", "9");
             UKCensusTest("Piece: RG9/480 Place: Gillingham -Kent Enumeration District: 14, Civil Parish: Gillingham Ecclesiastical Parish: Trinity,Folio: 42 Page: 20 Schedule: 117", CensusDate.UKCENSUS1861, "480", "42", "20");
             UKCensusTest("1901 census RG13/Piece3800/Folio112/Page16/SN#110", CensusDate.UKCENSUS1901, "3800", "112", "16");
+            UKCensusTest("18910405 Census RG12 Piece: 3485, Folio: 134, Page: 30, Sch: 151 - Lancashire Barrow-In-Furness - John MARR", CensusDate.UKCENSUS1891, "3485", "134", "30");
 
             Canadian1881Census("        123/A/55/35/1	Canada 1881", "123", "A", "35", "1");
             Canadian1881Census("        123/A/35/1	Canada 1881", "123", "A", "35", "1");
             //Canadian1881Census("C_13266; Page 67; Family 301", "132", "C", "67", "301");
             CanadianCensus("Year: 1881; Census Place: Richibucto, Kent, New Brunswick; Roll: C_13184; Page: 32; Family No: 144", CensusDate.CANADACENSUS1881, "C_13184", "32", "144");
-            CanadianCensus("19110601 Census RG31 District 61 Sub-DIstrict 28 Family 66 Page 6 - Canada Ontario - Elizabeth Harriet DAVEY", CensusDate.CANADACENSUS1911, "", "6", "66");
+            //CanadianCensus("19110601 Census RG31 District 61 Sub-DIstrict 28 Family 66 Page 6 - Canada Ontario - Elizabeth Harriet DAVEY", CensusDate.CANADACENSUS1911, "", "6", "66");
             Canadian1881Census("1881 census - District 146/B, Page 59, Family 273 - living at Rainham, Haldimand, Ontario, Canada.", "146", "B", "59", "273");
             //CanadianCensus("Event Place: Dumfries South, Brant North, Ontario, Canada\nDistrict Number: 160\nSub-District: C\nDivision: 2\nPage Number: 1\nFamily Number: 3\nAffiliate Film Number: C-13264", , CensusDate.CANADACENSUS1881, "C_13184", "1", "3");
 
