@@ -89,10 +89,10 @@ namespace FTAnalyzer
         }
         async void CheckWebVersion()
         {
-            Settings.Default.StartTime = DateTime.Now;
-            Settings.Default.Save();
             try
             {
+                Settings.Default.StartTime = DateTime.Now;
+                Settings.Default.Save();
                 HtmlAgilityPack.HtmlDocument doc;
                 using (WebClient wc = new WebClient())
                 {
