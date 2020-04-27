@@ -22,10 +22,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
-#if !__DEBUG__
-    using HtmlAgilityPack;
-    using System.Net;
-#endif
+using HtmlAgilityPack;
+using System.Net;
+
 
 namespace FTAnalyzer
 {
@@ -52,7 +51,7 @@ namespace FTAnalyzer
             InitializeComponent();
             loading = true;
             FamilyTree.Instance.Version = $"v{VERSION}";
-            var x = NativeMethods.GetTaskBarPos(); // Sets taskbar offset
+            _ = NativeMethods.GetTaskBarPos(); // Sets taskbar offset
             displayOptionsOnLoadToolStripMenuItem.Checked = GeneralSettings.Default.ReportOptions;
             treetopsRelation.MarriedToDB = false;
             ShowMenus(false);
@@ -62,9 +61,7 @@ namespace FTAnalyzer
             string ver = pos > 0 ? VERSION.Substring(0, VERSION.IndexOf('-')) : VERSION;
             DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
             CheckSystemVersion();
-#if !__DEBUG__
-            //CheckWebVersion();
-#endif
+            CheckWebVersion();
             SetSavePath();
             BuildRecentList();
         }
@@ -90,18 +87,19 @@ namespace FTAnalyzer
             if (os.Version.Major == 6 && os.Version.Minor < 2)
                 MessageBox.Show("Please note Microsoft has ended Windows 7 support as such it is no longer advisable to be connected to the internet using it. Any security flaws that are unpatched may be being actively exploited by hackers. You should upgrade as soon as possible.\n\nPlease be aware that FTAnalyzer may be unstable on an outdated unsupported Operating System.");
         }
-
-#if !__DEBUG__
         async void CheckWebVersion()
         {
             Settings.Default.StartTime = DateTime.Now;
             Settings.Default.Save();
             try
             {
-                WebClient wc = new WebClient();
-                HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-                string webData = wc.DownloadString("https://github.com/ShammyLevva/FTAnalyzer/releases");
-                doc.LoadHtml(webData);
+                HtmlAgilityPack.HtmlDocument doc;
+                using (WebClient wc = new WebClient())
+                {
+                    doc = new HtmlAgilityPack.HtmlDocument();
+                    string webData = wc.DownloadString("https://github.com/ShammyLevva/FTAnalyzer/releases");
+                    doc.LoadHtml(webData);
+                }
                 HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//div/div/div/span/../../ul/li/a");
                 string webVersion = versionNode.InnerText.Replace('v', ' ').Trim();
                 if (new Version(webVersion) > new Version(VERSION))
@@ -111,14 +109,14 @@ namespace FTAnalyzer
                     if (download == DialogResult.Yes)
                         SpecialMethods.VisitWebsite("https://www.microsoft.com/en-gb/p/ftanalyzer/9pmjl9hvpl7x?cid=clickonceappupgrade");
                 }
-                await Analytics.CheckProgramUsageAsync();
+
+                await Analytics.CheckProgramUsageAsync().ConfigureAwait(true);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
         }
-#endif
         void SetupFonts()
         {
             try
@@ -154,7 +152,7 @@ namespace FTAnalyzer
                 UpdateDataErrorsDisplay();
             }
             catch (Exception) { } // for font sizing exception
-         }
+        }
 
         void RegisterEventHandlers()
         {
@@ -3293,7 +3291,7 @@ namespace FTAnalyzer
             Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => x.RelationType);
             Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
             var progress = new Progress<int>(value => { tspbTabProgress.Value = value; });
-            var list = await Task.Run(() => 
+            var list = await Task.Run(() =>
                 new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked))).ConfigureAwait(true);
             dgSurnames.DataSource = list;
             dgSurnames.Sort(dgSurnames.Columns["Surname"], ListSortDirection.Ascending);
