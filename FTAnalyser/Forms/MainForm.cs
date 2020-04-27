@@ -102,7 +102,10 @@ namespace FTAnalyzer
                 }
                 HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//div/div/div/span/../../ul/li/a");
                 string webVersion = versionNode.InnerText.Replace('v', ' ').Trim();
-                if (new Version(webVersion) > new Version(VERSION))
+                string thisVersion = VERSION;
+                if (VERSION.Contains("-beta"))
+                    thisVersion = VERSION.Substring(0, VERSION.IndexOf("-"));
+                if (new Version(webVersion) > new Version(thisVersion))
                 {
                     string text = $"Version installed: {VERSION}, Web version available: {webVersion}\nDo you want to go to website to download the latest version?";
                     DialogResult download = MessageBox.Show(text, "FTAnalyzer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
