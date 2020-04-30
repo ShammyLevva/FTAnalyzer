@@ -44,8 +44,8 @@ namespace FTAnalyzer
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -249,6 +249,7 @@ namespace FTAnalyzer
             this.relTypesCensus = new FTAnalyzer.Controls.RelationTypes();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.BtnAutoCreatedCensusFacts = new System.Windows.Forms.Button();
             this.BtnProblemCensusFacts = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnDuplicateCensus = new System.Windows.Forms.Button();
@@ -370,7 +371,7 @@ namespace FTAnalyzer
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.BtnAutoCreatedCensusFacts = new System.Windows.Forms.Button();
+            this.MnuAgedOver99Report = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -658,7 +659,8 @@ namespace FTAnalyzer
             this.mnuCousinsCountReport,
             this.mnuHowManyGreats,
             this.mnuBirthdayEffect,
-            this.mnuPossiblyMissingChildReport});
+            this.mnuPossiblyMissingChildReport,
+            this.MnuAgedOver99Report});
             this.mnuReports.Name = "mnuReports";
             this.mnuReports.Size = new System.Drawing.Size(59, 20);
             this.mnuReports.Text = "Reports";
@@ -1226,14 +1228,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 166);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1284,14 +1286,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgCheckAncestors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgCheckAncestors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgCheckAncestors.Location = new System.Drawing.Point(-1, 84);
             this.dgCheckAncestors.Name = "dgCheckAncestors";
             this.dgCheckAncestors.ReadOnly = true;
@@ -2452,6 +2454,16 @@ namespace FTAnalyzer
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Census Facts";
             // 
+            // BtnAutoCreatedCensusFacts
+            // 
+            this.BtnAutoCreatedCensusFacts.Location = new System.Drawing.Point(164, 21);
+            this.BtnAutoCreatedCensusFacts.Name = "BtnAutoCreatedCensusFacts";
+            this.BtnAutoCreatedCensusFacts.Size = new System.Drawing.Size(150, 23);
+            this.BtnAutoCreatedCensusFacts.TabIndex = 39;
+            this.BtnAutoCreatedCensusFacts.Text = "Auto Created Census Facts";
+            this.BtnAutoCreatedCensusFacts.UseVisualStyleBackColor = true;
+            this.BtnAutoCreatedCensusFacts.Click += new System.EventHandler(this.BtnCensusAutoCreatedFacts_Click);
+            // 
             // BtnProblemCensusFacts
             // 
             this.BtnProblemCensusFacts.Location = new System.Drawing.Point(6, 21);
@@ -2987,8 +2999,8 @@ namespace FTAnalyzer
             this.dgIndividuals.Size = new System.Drawing.Size(1064, 405);
             this.dgIndividuals.TabIndex = 1;
             this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgIndividuals_CellDoubleClick);
-            this.dgIndividuals.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgIndividuals_MouseDown);
             this.dgIndividuals.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DgIndividuals_DataBindingComplete);
+            this.dgIndividuals.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgIndividuals_MouseDown);
             // 
             // tabFamilies
             // 
@@ -3850,15 +3862,12 @@ namespace FTAnalyzer
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // BtnAutoCreatedCensusFacts
+            // MnuAgedOver99Report
             // 
-            this.BtnAutoCreatedCensusFacts.Location = new System.Drawing.Point(164, 21);
-            this.BtnAutoCreatedCensusFacts.Name = "BtnAutoCreatedCensusFacts";
-            this.BtnAutoCreatedCensusFacts.Size = new System.Drawing.Size(150, 23);
-            this.BtnAutoCreatedCensusFacts.TabIndex = 39;
-            this.BtnAutoCreatedCensusFacts.Text = "Auto Created Census Facts";
-            this.BtnAutoCreatedCensusFacts.UseVisualStyleBackColor = true;
-            this.BtnAutoCreatedCensusFacts.Click += new System.EventHandler(this.BtnCensusAutoCreatedFacts_Click);
+            this.MnuAgedOver99Report.Name = "MnuAgedOver99Report";
+            this.MnuAgedOver99Report.Size = new System.Drawing.Size(230, 22);
+            this.MnuAgedOver99Report.Text = "Aged over 99 Report";
+            this.MnuAgedOver99Report.Click += new System.EventHandler(this.MnuAgedOver99Report_Click);
             // 
             // MainForm
             // 
@@ -4309,6 +4318,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.Button BtnProblemCensusFacts;
         private System.Windows.Forms.Button BtnAutoCreatedCensusFacts;
+        private System.Windows.Forms.ToolStripMenuItem MnuAgedOver99Report;
     }
 }
 

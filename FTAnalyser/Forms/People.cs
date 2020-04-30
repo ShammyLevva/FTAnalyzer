@@ -161,6 +161,16 @@ namespace FTAnalyzer.Forms
             UpdateStatusCount();
         }
 
+        public void SetupAgedOver99Report()
+        {
+            Text = "Invididuals Aged over 99 in file.";
+            dgIndividuals.DataSource = ft.AgedOver99;
+            SortIndividuals();
+            splitContainer.Panel1Collapsed = false;
+            splitContainer.Panel2Collapsed = true;
+            UpdateStatusCount();
+        }
+
         public void ListRelationToRoot(string relationtoRoot)
         {
             bool filter(Individual x) => x.RelationToRoot.Equals(relationtoRoot);

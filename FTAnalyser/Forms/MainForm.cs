@@ -424,6 +424,7 @@ namespace FTAnalyzer
             mnuPlaces.Enabled = enabled;
             mnuCousinsCountReport.Enabled = enabled;
             mnuHowManyGreats.Enabled = enabled;
+            MnuAgedOver99Report.Enabled = enabled;
             mnuLookupBlankFoundLocations.Enabled = enabled;
             mnuTreetopsToExcel.Enabled = enabled && dgTreeTops.RowCount > 0;
             mnuWorldWarsToExcel.Enabled = enabled && dgWorldWars.RowCount > 0;
@@ -3383,7 +3384,18 @@ namespace FTAnalyzer
             people.SetupPossiblyMissingChildrenReport();
             DisposeDuplicateForms(people);
             people.Show();
-            //Analytics.TrackAction(Analytics.CensusTabAction, Analytics.MissingCensusLocationEvent);
+            Analytics.TrackAction(Analytics.ReportsAction, Analytics.PossiblyMissingChildren);
+            HourGlass(false);
+        }
+
+        void MnuAgedOver99Report_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            People people = new People();
+            people.SetupAgedOver99Report();
+            DisposeDuplicateForms(people);
+            people.Show();
+            Analytics.TrackAction(Analytics.ReportsAction, Analytics.AgedOver99Report);
             HourGlass(false);
         }
 
