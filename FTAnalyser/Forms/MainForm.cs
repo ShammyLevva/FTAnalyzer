@@ -55,7 +55,6 @@ namespace FTAnalyzer
             displayOptionsOnLoadToolStripMenuItem.Checked = GeneralSettings.Default.ReportOptions;
             treetopsRelation.MarriedToDB = false;
             ShowMenus(false);
-            VERSION = PublishVersion();
             log.Info("Started FTAnalyzer version " + VERSION);
             int pos = VERSION.IndexOf('-');
             string ver = pos > 0 ? VERSION.Substring(0, VERSION.IndexOf('-')) : VERSION;
@@ -185,23 +184,6 @@ namespace FTAnalyzer
             if (maximised == "True")
                 WindowState = FormWindowState.Maximized;
         }
-
-        #region Version Info
-        string PublishVersion()
-        {
-            try
-            {
-                if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
-                {
-                    Version ver = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
-                    return string.Format("{0}.{1}.{2}.{3}", ver.Major, ver.Minor, ver.Build, ver.Revision);
-                }
-            }
-            catch (Exception) { }
-                
-            return VERSION;
-        }
-        #endregion
 
         #region Load File
         async Task LoadFileAsync(string filename)

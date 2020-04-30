@@ -3,6 +3,7 @@
 Refactored code to take on board code analysis recommendations  
 Added aged over 99 report  
 Re-enabled web version check for releases  
+Remove old clickonce dependancies  
 
 **Bugfixes**  
 Fixed font error crash when resizing fonts  
