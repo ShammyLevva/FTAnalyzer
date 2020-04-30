@@ -10,35 +10,30 @@ namespace FTAnalyzer.UserControls
 {
     public partial class ExtendedToolTipLabel : Label
     {
-        private ToolTip _ToolTip;
-        string _ToolTipText;
+        readonly ToolTip _ToolTip;
 
         public ExtendedToolTipLabel()
         {
             InitializeComponent();
             _ToolTip = new ToolTip();
-            this.MouseLeave += new EventHandler(ExtendedToolTipLabel_MouseLeave);
-            this.MouseHover += new EventHandler(ExtendedToolTipLabel_MouseHover);
+            MouseLeave += new EventHandler(ExtendedToolTipLabel_MouseLeave);
+            MouseHover += new EventHandler(ExtendedToolTipLabel_MouseHover);
         }
 
         void ExtendedToolTipLabel_MouseHover(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(_ToolTipText))
+            if (!string.IsNullOrEmpty(ToolTipText))
             {
                 int x = PointToClient(MousePosition).X + 10;
-                _ToolTip.Show(_ToolTipText, this, new Point(x, -10));
+                _ToolTip.Show(ToolTipText, this, new Point(x, -10));
             }
         }
 
-        public string ToolTipText
-        {
-            get { return _ToolTipText; }
-            set { _ToolTipText = value; }
-        }
+        public string ToolTipText { get; set; }
 
         void ExtendedToolTipLabel_MouseLeave(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(_ToolTipText))
+            if (!string.IsNullOrEmpty(ToolTipText))
             {
                 _ToolTip.Hide(this);
             }

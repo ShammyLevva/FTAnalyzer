@@ -10,15 +10,15 @@ namespace FTAnalyzer
         public Fact.FactError ErrorLevel { get; private set; }
         public Bitmap Icon { get; private set; }
 
-        private static FactImage GOOD = new FactImage(Fact.FactError.GOOD,
+        static readonly FactImage GOOD = new FactImage(Fact.FactError.GOOD,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Complete_OK.png")));
-        private static FactImage WARNINGALLOW = new FactImage(Fact.FactError.WARNINGALLOW,
+        static readonly FactImage WARNINGALLOW = new FactImage(Fact.FactError.WARNINGALLOW,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Warning.png")));
-        private static FactImage WARNINGIGNORE = new FactImage(Fact.FactError.WARNINGIGNORE,
+        static readonly FactImage WARNINGIGNORE = new FactImage(Fact.FactError.WARNINGIGNORE,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\SeriousWarning.png")));
-        private static FactImage ERROR = new FactImage(Fact.FactError.ERROR,
+        static readonly FactImage ERROR = new FactImage(Fact.FactError.ERROR,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\CriticalError.png")));
-        private static FactImage QUESTIONABLE = new FactImage(Fact.FactError.QUESTIONABLE,
+        static readonly FactImage QUESTIONABLE = new FactImage(Fact.FactError.QUESTIONABLE,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\QuestionMark.png")));
 
         public FactImage(Fact.FactError errorLevel, Image img)

@@ -9,27 +9,27 @@ namespace FTAnalyzer
         public FactLocation.Geocode ErrorLevel { get; private set; }
         public Bitmap Icon { get; private set; }
 
-        private static FactLocationImage IMG_NOT_SEARCHED = new FactLocationImage(FactLocation.Geocode.NOT_SEARCHED,
+        static readonly FactLocationImage IMG_NOT_SEARCHED = new  FactLocationImage(FactLocation.Geocode.NOT_SEARCHED,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\QuestionMark.png")));
-        private static FactLocationImage IMG_MATCHED = new FactLocationImage(FactLocation.Geocode.MATCHED,
+        static readonly FactLocationImage IMG_MATCHED = new  FactLocationImage(FactLocation.Geocode.MATCHED,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\GoogleMatch.png")));
-        private static FactLocationImage IMG_PARTIAL_MATCH = new FactLocationImage(FactLocation.Geocode.PARTIAL_MATCH,
+        static readonly FactLocationImage IMG_PARTIAL_MATCH = new  FactLocationImage(FactLocation.Geocode.PARTIAL_MATCH,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\GooglePartial.png")));
-        private static FactLocationImage IMG_GEDCOM_USER = new FactLocationImage(FactLocation.Geocode.GEDCOM_USER,
+        static readonly FactLocationImage IMG_GEDCOM_USER = new  FactLocationImage(FactLocation.Geocode.GEDCOM_USER,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Complete_OK.png")));
-        private static FactLocationImage IMG_NO_MATCH = new FactLocationImage(FactLocation.Geocode.NO_MATCH,
+        static readonly FactLocationImage IMG_NO_MATCH = new  FactLocationImage(FactLocation.Geocode.NO_MATCH,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\CriticalError.png")));
-        private static FactLocationImage IMG_INCORRECT = new FactLocationImage(FactLocation.Geocode.INCORRECT,
+        static readonly FactLocationImage IMG_INCORRECT = new  FactLocationImage(FactLocation.Geocode.INCORRECT,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Flagged.png")));
-        private static FactLocationImage IMG_OUT_OF_BOUNDS = new FactLocationImage(FactLocation.Geocode.OUT_OF_BOUNDS,
+        static readonly FactLocationImage IMG_OUT_OF_BOUNDS = new  FactLocationImage(FactLocation.Geocode.OUT_OF_BOUNDS,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\OutOfBounds.png")));
-        private static FactLocationImage IMG_LEVEL_MISMATCH = new FactLocationImage(FactLocation.Geocode.LEVEL_MISMATCH,
+        static readonly FactLocationImage IMG_LEVEL_MISMATCH = new  FactLocationImage(FactLocation.Geocode.LEVEL_MISMATCH,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Warning.png")));
-        private static FactLocationImage IMG_OS50k_MATCH = new FactLocationImage(FactLocation.Geocode.OS_50KMATCH,
+        static readonly FactLocationImage IMG_OS50k_MATCH = new  FactLocationImage(FactLocation.Geocode.OS_50KMATCH,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\OS50kMatch.png")));
-        private static FactLocationImage IMG_OS50k_PARTIAL = new FactLocationImage(FactLocation.Geocode.OS_50KPARTIAL,
+        static readonly FactLocationImage IMG_OS50k_PARTIAL = new  FactLocationImage(FactLocation.Geocode.OS_50KPARTIAL,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\OS50kPartial.png")));
-        private static FactLocationImage IMG_OS50k_FUZZY = new FactLocationImage(FactLocation.Geocode.OS_50KFUZZY,
+        static readonly FactLocationImage IMG_OS50k_FUZZY = new  FactLocationImage(FactLocation.Geocode.OS_50KFUZZY,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\OS50kFuzzy.png")));
 
         public FactLocationImage(FactLocation.Geocode errorLevel, Image img)

@@ -6,12 +6,10 @@ namespace FTAnalyzer.Mapping
 {
     class MapCluster
     {
-        private List<FeatureDataRow> cluster;
-        private int minSize;
-        private double gridSize;
-        private List<Point> points;
-        private Point centroid;
-
+        readonly List<FeatureDataRow> cluster;
+        readonly int minSize;
+        readonly double gridSize;
+        readonly List<Point> points;
         public static string CLUSTER = "Cluster", FEATURE = "Feature", UNKNOWN = "Unknown";
 
         public IList<FeatureDataRow> Features { get { return cluster; } }
@@ -24,14 +22,11 @@ namespace FTAnalyzer.Mapping
             this.points = new List<Point>();
         }
 
-        public Geometry Geometry { get { return centroid; } }
+        public Geometry Geometry { get { return Centroid; } }
 
         public string ClusterType { get { return (cluster.Count < minSize) ? FEATURE : CLUSTER; } }
 
-        public Point Centroid
-        {
-            get { return centroid; }
-        }
+        public Point Centroid { get; private set; }
 
         public void AddFeature(FeatureDataRow row)
         {
@@ -43,7 +38,7 @@ namespace FTAnalyzer.Mapping
 
         public bool IsFeatureInClusterBounds(FeatureDataRow row)
         {
-            return centroid.Distance(row.Geometry) <= gridSize;
+            return Centroid.Distance(row.Geometry) <= gridSize;
         }
 
         public void UpdateCentroid(Point point)
@@ -51,14 +46,14 @@ namespace FTAnalyzer.Mapping
             double oldCount = points.Count;
             if (oldCount == 0)
             {
-                centroid = point;
+                Centroid = point;
             }
             else
             {
                 double newCount = oldCount + 1;
-                double X = (centroid.X * oldCount + point.X) / newCount;
-                double Y = (centroid.Y * oldCount + point.Y) / newCount;
-                centroid = new Point(new Coordinate(X, Y));
+                double X = (Centroid.X * oldCount + point.X) / newCount;
+                double Y = (Centroid.Y * oldCount + point.Y) / newCount;
+                Centroid = new Point(new Coordinate(X, Y));
             }
         }
 

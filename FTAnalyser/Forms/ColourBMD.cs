@@ -12,7 +12,7 @@ namespace FTAnalyzer.Forms
     public partial class ColourBMD : Form
     {
         readonly ReportFormHelper reportFormHelper;
-        readonly Dictionary<BMDColour, DataGridViewCellStyle> styles;
+        readonly Dictionary<BMDColours, DataGridViewCellStyle> styles;
         readonly int birthColumnIndex;
         readonly int burialColumnIndex;
         readonly SortableBindingList<IDisplayColourBMD> reportList;
@@ -31,49 +31,49 @@ namespace FTAnalyzer.Forms
                 ExtensionMethods.DoubleBuffered(dgBMDReportSheet, true);
 
                 boldFont = new Font(dgBMDReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
-                styles = new Dictionary<BMDColour, DataGridViewCellStyle>();
+                styles = new Dictionary<BMDColours, DataGridViewCellStyle>();
                 DataGridViewCellStyle notRequired = new DataGridViewCellStyle();
                 notRequired.BackColor = notRequired.ForeColor = Color.DarkGray;
-                styles.Add(BMDColour.EMPTY, notRequired);
+                styles.Add(BMDColours.EMPTY, notRequired);
                 DataGridViewCellStyle missingData = new DataGridViewCellStyle();
                 missingData.BackColor = missingData.ForeColor = Color.Red;
-                styles.Add(BMDColour.UNKNOWN_DATE, missingData);
+                styles.Add(BMDColours.UNKNOWN_DATE, missingData);
                 DataGridViewCellStyle openEndedDateRange = new DataGridViewCellStyle();
                 openEndedDateRange.BackColor = openEndedDateRange.ForeColor = Color.OrangeRed;
-                styles.Add(BMDColour.OPEN_ENDED_DATE, openEndedDateRange);
+                styles.Add(BMDColours.OPEN_ENDED_DATE, openEndedDateRange);
                 DataGridViewCellStyle verywideDateRange = new DataGridViewCellStyle();
                 verywideDateRange.BackColor = verywideDateRange.ForeColor = Color.Tomato;
-                styles.Add(BMDColour.VERY_WIDE_DATE, verywideDateRange);
+                styles.Add(BMDColours.VERY_WIDE_DATE, verywideDateRange);
                 DataGridViewCellStyle wideDateRange = new DataGridViewCellStyle();
                 wideDateRange.BackColor = wideDateRange.ForeColor = Color.Orange;
-                styles.Add(BMDColour.WIDE_DATE, wideDateRange);
+                styles.Add(BMDColours.WIDE_DATE, wideDateRange);
                 DataGridViewCellStyle narrowDateRange = new DataGridViewCellStyle();
                 narrowDateRange.BackColor = narrowDateRange.ForeColor = Color.Yellow;
-                styles.Add(BMDColour.NARROW_DATE, narrowDateRange);
+                styles.Add(BMDColours.NARROW_DATE, narrowDateRange);
                 DataGridViewCellStyle justYearDateRange = new DataGridViewCellStyle();
                 justYearDateRange.BackColor = justYearDateRange.ForeColor = Color.YellowGreen;
-                styles.Add(BMDColour.JUST_YEAR_DATE, justYearDateRange);
+                styles.Add(BMDColours.JUST_YEAR_DATE, justYearDateRange);
                 DataGridViewCellStyle approxDate = new DataGridViewCellStyle();
                 approxDate.BackColor = approxDate.ForeColor = Color.PaleGreen;
-                styles.Add(BMDColour.APPROX_DATE, approxDate);
+                styles.Add(BMDColours.APPROX_DATE, approxDate);
                 DataGridViewCellStyle exactDate = new DataGridViewCellStyle();
                 exactDate.BackColor = exactDate.ForeColor = Color.LawnGreen;
-                styles.Add(BMDColour.EXACT_DATE, exactDate);
+                styles.Add(BMDColours.EXACT_DATE, exactDate);
                 DataGridViewCellStyle noSpouse = new DataGridViewCellStyle();
                 noSpouse.BackColor = noSpouse.ForeColor = Color.LightPink;
-                styles.Add(BMDColour.NO_SPOUSE, noSpouse);
+                styles.Add(BMDColours.NO_SPOUSE, noSpouse);
                 DataGridViewCellStyle hasChildren = new DataGridViewCellStyle();
                 hasChildren.BackColor = hasChildren.ForeColor = Color.LightCoral;
-                styles.Add(BMDColour.NO_PARTNER, hasChildren);
+                styles.Add(BMDColours.NO_PARTNER, hasChildren);
                 DataGridViewCellStyle noMarriage = new DataGridViewCellStyle();
                 noMarriage.BackColor = noMarriage.ForeColor = Color.Firebrick;
-                styles.Add(BMDColour.NO_MARRIAGE, noMarriage);
+                styles.Add(BMDColours.NO_MARRIAGE, noMarriage);
                 DataGridViewCellStyle isLiving = new DataGridViewCellStyle();
                 isLiving.BackColor = isLiving.ForeColor = Color.WhiteSmoke;
-                styles.Add(BMDColour.ISLIVING, isLiving);
+                styles.Add(BMDColours.ISLIVING, isLiving);
                 DataGridViewCellStyle over90 = new DataGridViewCellStyle();
                 over90.BackColor = over90.ForeColor = Color.DarkGray;
-                styles.Add(BMDColour.OVER90, over90);
+                styles.Add(BMDColours.OVER90, over90);
 
                 birthColumnIndex = dgBMDReportSheet.Columns["Birth"].Index;
                 burialColumnIndex = dgBMDReportSheet.Columns["CremBuri"].Index;
@@ -137,7 +137,7 @@ namespace FTAnalyzer.Forms
             {
                 DataGridViewCellStyle style = dgBMDReportSheet.DefaultCellStyle;
                 DataGridViewCell cell = dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                BMDColour value = (BMDColour)cell.Value;
+                BMDColours value = (BMDColours)cell.Value;
                 styles.TryGetValue(value, out style);
                 if (style != null)
                 {
@@ -153,49 +153,49 @@ namespace FTAnalyzer.Forms
 
                     switch (value)
                     {
-                        case BMDColour.EMPTY: // Grey
+                        case BMDColours.EMPTY: // Grey
                             if (e.ColumnIndex == burialColumnIndex - 1) // death column
                                 cell.ToolTipText = "Individual is probably still alive"; // if OVER90 still grey cell but use different tooltip
                             else
                                 cell.ToolTipText = string.Empty;
                             break;
-                        case BMDColour.UNKNOWN_DATE: // Red
+                        case BMDColours.UNKNOWN_DATE: // Red
                             cell.ToolTipText = "Unknown date.";
                             break;
-                        case BMDColour.OPEN_ENDED_DATE: // Orange Red
+                        case BMDColours.OPEN_ENDED_DATE: // Orange Red
                             cell.ToolTipText = "Date is open ended, BEFore or AFTer a date.";
                             break;
-                        case BMDColour.VERY_WIDE_DATE: // Tomato Red
+                        case BMDColours.VERY_WIDE_DATE: // Tomato Red
                             cell.ToolTipText = "Date only accurate to more than ten year date range.";
                             break;
-                        case BMDColour.WIDE_DATE: // Orange
+                        case BMDColours.WIDE_DATE: // Orange
                             cell.ToolTipText = "Date covers up to a ten year date range.";
                             break;
-                        case BMDColour.NARROW_DATE: // Yellow
+                        case BMDColours.NARROW_DATE: // Yellow
                             cell.ToolTipText = "Date accurate to within one to two year period.";
                             break;
-                        case BMDColour.JUST_YEAR_DATE: // Yellow
+                        case BMDColours.JUST_YEAR_DATE: // Yellow
                             cell.ToolTipText = "Date accurate to within one year period, but longer than 3 months.";
                             break;
-                        case BMDColour.APPROX_DATE: // Pale Green 
+                        case BMDColours.APPROX_DATE: // Pale Green 
                             cell.ToolTipText = "Date accurate to within 3 months (note may be date of registration not event date)";
                             break;
-                        case BMDColour.EXACT_DATE: // Green
+                        case BMDColours.EXACT_DATE: // Green
                             cell.ToolTipText = "Exact date.";
                             break;
-                        case BMDColour.NO_SPOUSE: // pale grey
+                        case BMDColours.NO_SPOUSE: // pale grey
                             cell.ToolTipText = "Of marrying age but no spouse recorded";
                             break;
-                        case BMDColour.NO_PARTNER: // light blue
+                        case BMDColours.NO_PARTNER: // light blue
                             cell.ToolTipText = "No partner but has shared fact or children";
                             break;
-                        case BMDColour.NO_MARRIAGE: // dark blue
+                        case BMDColours.NO_MARRIAGE: // dark blue
                             cell.ToolTipText = "Has partner but no marriage fact";
                             break;
-                        case BMDColour.ISLIVING: // dark grey
+                        case BMDColours.ISLIVING: // dark grey
                             cell.ToolTipText = "Is flagged as living";
                             break;
-                        case BMDColour.OVER90:
+                        case BMDColours.OVER90:
                             cell.ToolTipText = "Individual may be still alive";
                             break;
                     }
@@ -219,8 +219,8 @@ namespace FTAnalyzer.Forms
                 if (e.ColumnIndex >= birthColumnIndex && e.ColumnIndex <= burialColumnIndex)
                 {
                     DataGridViewCell cell = dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                    BMDColour value = (BMDColour)cell.Value;
-                    if (value != BMDColour.EXACT_DATE)
+                    BMDColours value = (BMDColours)cell.Value;
+                    if (value != BMDColours.EXACT_DATE)
                     {
                         IDisplayColourBMD person = (IDisplayColourBMD)dgBMDReportSheet.Rows[e.RowIndex].DataBoundItem;
                         Individual ind = ft.GetIndividual(person.IndividualID);
@@ -284,7 +284,7 @@ namespace FTAnalyzer.Forms
             dgBMDReportSheet.Focus();
         }
 
-        List<IDisplayColourBMD> BuildFilter(List<FamilyTree.SearchType> types, BMDColour toFind)
+        List<IDisplayColourBMD> BuildFilter(List<FamilyTree.SearchType> types, BMDColours toFind)
         {
             var result = new List<IDisplayColourBMD>();
             foreach (IDisplayColourBMD row in reportList)
@@ -311,7 +311,7 @@ namespace FTAnalyzer.Forms
         {
             Cursor = Cursors.WaitCursor;
             var types = new List<FamilyTree.SearchType>();
-            BMDColour colour = BMDColour.ALL_RECORDS;
+            BMDColours colour = BMDColours.ALL_RECORDS;
             switch (cbApplyTo.SelectedIndex)
             {
                 case -1: // nothing selected
@@ -350,37 +350,37 @@ namespace FTAnalyzer.Forms
                     dgBMDReportSheet.DataSource = reportList;
                     break;
                 case 1: // Date Missing (Red)
-                    colour = BMDColour.UNKNOWN_DATE;
+                    colour = BMDColours.UNKNOWN_DATE;
                     break;
                 case 2: // Date Found (Green)
-                    colour = BMDColour.EXACT_DATE;
+                    colour = BMDColours.EXACT_DATE;
                     break;
                 case 3: // Open Ended Date Range (Orange Red)
-                    colour = BMDColour.OPEN_ENDED_DATE;
+                    colour = BMDColours.OPEN_ENDED_DATE;
                     break;
                 case 4: // Very Wide Date Range(Light Red)
-                    colour = BMDColour.VERY_WIDE_DATE;
+                    colour = BMDColours.VERY_WIDE_DATE;
                     break;
                 case 5: // Wide Date Range (Orange)
-                    colour = BMDColour.WIDE_DATE;
+                    colour = BMDColours.WIDE_DATE;
                     break;
                 case 6: // Narrow date ranges (Yellow)
-                    colour = BMDColour.NARROW_DATE;
+                    colour = BMDColours.NARROW_DATE;
                     break;
                 case 7: // Just year date ranges (Yellow)
-                    colour = BMDColour.JUST_YEAR_DATE;
+                    colour = BMDColours.JUST_YEAR_DATE;
                     break;
                 case 8: // Approx date ranges (Light Green)
-                    colour = BMDColour.APPROX_DATE;
+                    colour = BMDColours.APPROX_DATE;
                     break;
                 case 9: // Of Marrying age (Peach)
-                    colour = BMDColour.NO_SPOUSE;
+                    colour = BMDColours.NO_SPOUSE;
                     break;
                 case 10: // No Partner shared fact/children (Light Blue)
-                    colour = BMDColour.NO_PARTNER;
+                    colour = BMDColours.NO_PARTNER;
                     break;
                 case 11: // Partner but no marriage (Dark Blue)
-                    colour = BMDColour.NO_MARRIAGE;
+                    colour = BMDColours.NO_MARRIAGE;
                     break;
             }
             if (cbFilter.SelectedIndex >0)

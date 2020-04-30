@@ -188,13 +188,17 @@ namespace FTAnalyzer
         #region Version Info
         string PublishVersion()
         {
-            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            try
             {
-                Version ver = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
-                return string.Format("{0}.{1}.{2}.{3}", ver.Major, ver.Minor, ver.Build, ver.Revision);
+                if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+                {
+                    Version ver = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
+                    return string.Format("{0}.{1}.{2}.{3}", ver.Major, ver.Minor, ver.Build, ver.Revision);
+                }
             }
-            else
-                return VERSION;
+            catch (Exception) { }
+                
+            return VERSION;
         }
         #endregion
 

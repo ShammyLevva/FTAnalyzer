@@ -4,7 +4,7 @@ namespace FTAnalyzer.Utilities
 {
     public class CustomSettings
     {
-        Properties.Settings _Settings;
+        readonly Properties.Settings _Settings;
         Properties.NonGedcomDate _NonGEDCOMDateSettings;
 
         public CustomSettings()
