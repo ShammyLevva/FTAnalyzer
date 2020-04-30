@@ -1,6 +1,12 @@
-#### Updated Release Version 7.8.0 26th Apr 2020  
+#### Updated Release Version 7.8.0 1st May 2020  
 **Updates**  
 Refactored code to take on board code analysis recommendations  
+Added aged over 99 report  
+Re-enabled web version check for releases  
+
+**Bugfixes**  
+Fixed font error crash when resizing fonts  
+Fix issue of not showing census facts if selecting all dates  
 
 #### Updated Release Version 7.7.2 26th Apr 2020  
 **Updates**  

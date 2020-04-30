@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.8.0.0-beta5";
+        public static string VERSION = "7.8.0.0";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -61,7 +61,8 @@ namespace FTAnalyzer
             string ver = pos > 0 ? VERSION.Substring(0, VERSION.IndexOf('-')) : VERSION;
             DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
             CheckSystemVersion();
-            CheckWebVersion();
+            if(!Application.ExecutablePath.Contains("WindowsApps"))
+                CheckWebVersion(); // check for web version if not windows store app
             SetSavePath();
             BuildRecentList();
         }
