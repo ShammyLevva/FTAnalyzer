@@ -45,10 +45,8 @@ namespace Testing
         #endregion
 
         [TestMethod]
-        public void CensusReferenceConstructorTest()
+        public void CensusReferenceUSTests()
         {
-            CensusReference censusRef;
-
             //USCensusTest("District: 1-2 , Family Number: 251 , Sheet Number and Letter: 10B , Line Number: 78 , Affiliate Publication Number: T627 , Affiliate Film Number: 544 , Digital Folder Number: 005449024 , Image Number: 00057", CensusDate.USCENSUS1940, "T627_544", "1-2", "10B");
             //USCensusTest("enumeration district (ED) 1-2, sheet 10B, family 251, NARA digital publication T627 (Washington, D.C.: National Archives and Records Administration, 2012), roll 544.", CensusDate.USCENSUS1940, "T627_544", "1-2", "10B");
             USCensusTest("Year: 1930; Census Place: Sea Cliff, Nassau, New York; Roll: 1462; Page: 14B; Enumeration District: 193;", CensusDate.USCENSUS1930, "1462", "193", "14B");
@@ -63,10 +61,14 @@ namespace Testing
             USCensusTest("Year: 1880; Census Place: New York City, New York, New York; Roll: 885; Family History Film: 1254885; Page: 29C; Enumeration District: 376; Image: 0060", CensusDate.USCENSUS1880, "885", "376", "29C");
             USCensusTest("Census 1930 Salt Lake City UT USA ED50 p6B", CensusDate.USCENSUS1930, string.Empty, "50", "6B");
             //USCensusTest("Year: 1860; Census Place: Boston Ward 12, Suffolk, Massachusetts; Roll: M653_525; Page: 515; Image: 519; Family History Library Film: 803525", CensusDate.USCENSUS1860, "M653_525", "12", "515");
-            USCensusTest("Roll T627_1141; ED 8-14; Page 9A", CensusDate.USCENSUS1940, "1141","8-14", "9A");
+            USCensusTest("Roll T627_1141; ED 8-14; Page 9A", CensusDate.USCENSUS1940, "1141", "8-14", "9A");
             USCensusTest("Roll: m-t0627_2227; ED 1-7; Page 19A", CensusDate.USCENSUS1940, "2227", "1-7", "19A");
             USCensusTest("T627, roll 4515, Burlington, enumeration district (ED) 51-5, sheet 4A, household 45, Alice Reed, accessed 22 Jan 2019", CensusDate.USCENSUS1940, "4515", "51-5", "4A");
+        }
 
+        [TestMethod]
+        public void CensusReferenceScottishTests()
+        {
             ScottishCensusTest("GROS 692/01 019/00 008", FactDate.UNKNOWN_DATE, "692-1", "19", "8");
             ScottishCensusTest("in the 1851 census, GROS 343/00 001/00 011.", CensusDate.UKCENSUS1851, "343", "1", "11");
             ScottishCensusTest("Parish: Inverurie; ED: 4; Page: 12; Line: 3; Roll: CSSCT1901_69", FactDate.UNKNOWN_DATE, "Inverurie", "4", "12");
@@ -77,7 +79,11 @@ namespace Testing
             ScottishCensusTest("Ref: 1881 GROS 225 / 7 / 15", CensusDate.SCOTCENSUS1881, "225", "7", "15");
             ScottishCensusTest("1871, Census 496 / 11 / 69", CensusDate.UKCENSUS1871, "496", "11", "69");
             ScottishCensusTest("1891, Census 496/ 13/ 26", CensusDate.UKCENSUS1891, "496", "13", "26");
+        }
 
+        [TestMethod]
+        public void CensusReferenceH107Tests()
+        {
             CensusHO107Test("HO107 Piece: 1607 Folio: 880 Page: 29", CensusDate.UKCENSUS1851, "1607", string.Empty, "880", "29");
             CensusHO107Test("HO107 piece 729 folio 5/15 page 6", CensusDate.UKCENSUS1841, "729", "5", "15", "6");
             CensusHO107Test("HO107 piece 2195 folio 507 page 71", CensusDate.UKCENSUS1851, "2195", string.Empty, "507", "71");
@@ -90,7 +96,11 @@ namespace Testing
             CensusHO107Test("Archive reference HO107 Piece number 142 Book number 10 Folio number 51 Page number 1 Record set 1841 England, Wales & Scotland Census", CensusDate.UKCENSUS1841, "142", "10", "51", "1");
             CensusHO107Test(@"Ulleskelf, Tadcaster, folio 9, Book 8, page 12, Joshua Hey and family; digital images, \i FindMyPast.co.uk\i0  (https://search.findmypast.co.uk/search-world-Records/1841-england-wales-and-scotland-census : accessed 12 Jun 2017); citing PRO HO/107/1282", CensusDate.UKCENSUS1841, "1282", "8", "9", "12");
             CensusHO107Test("Archive reference HO107 Piece number 1541 Folio 119 Page 15 Record set 1851 England, Wales & Scotland Census", CensusDate.UKCENSUS1851, "1541", "", "119", "15");
+        }
 
+        [TestMethod]
+        public void CensusReference1911Tests()
+        {
             Census1911Test("1911 census - Piece 22623, SN 183", "22623", "183");
             Census1911Test("1911 census - Piece: 22623, SN: 183", "22623", "183");
             Census1911Test("1911 census - Piece: 22623; Schedule No. : 183", "22623", "183");
@@ -101,7 +111,11 @@ namespace Testing
             Census1911Test("Census 1911 Coventry WAR ENG RG14Piece18568 RG78Piece1111 RD390 SD2 ED30 SN129", "18568", "129");
             Census1911Test("Census 1911 Wortley Leeds YKS ENG RG14/Piece26892 RG78Piece1545 RD499 SD3 ED22 SN150", "26892", "150");
             Census1911Test("1911 census - Piece 23919, SN 32 - living at 114 Princess Road, Moss Side, Manchester, Lancashire", "23919", "32");
+        }
 
+        [TestMethod]
+        public void CensusReferenceUKTests()
+        {
             UKCensusTest("Class: RG11; Piece: 890; Folio: 114; Page: 9; GSU roll: 1341211", CensusDate.UKCENSUS1881, "890", "114", "9");
             UKCensusTest("Database online. Class: RG9; Piece: 1105; Folio: 90; Page: 21; GSU", CensusDate.UKCENSUS1861, "1105", "90", "21");
             UKCensusTest("            RG11 piece 870 folio 49 page 10", CensusDate.UKCENSUS1881, "870", "49", "10");
@@ -115,7 +129,12 @@ namespace Testing
             UKCensusTest("Piece: RG9/480 Place: Gillingham -Kent Enumeration District: 14, Civil Parish: Gillingham Ecclesiastical Parish: Trinity,Folio: 42 Page: 20 Schedule: 117", CensusDate.UKCENSUS1861, "480", "42", "20");
             UKCensusTest("1901 census RG13/Piece3800/Folio112/Page16/SN#110", CensusDate.UKCENSUS1901, "3800", "112", "16");
             UKCensusTest("18910405 Census RG12 Piece: 3485, Folio: 134, Page: 30, Sch: 151 - Lancashire Barrow-In-Furness - John MARR", CensusDate.UKCENSUS1891, "3485", "134", "30");
+            UKCensusTest("Census 1881 Thwaite, Suffolk RG11/1852/92/4", CensusDate.UKCENSUS1881, "1852", "92", "4");
+        }
 
+        [TestMethod]
+        public void CensusReferenceCanadaTests()
+        {
             Canadian1881Census("        123/A/55/35/1	Canada 1881", "123", "A", "35", "1");
             Canadian1881Census("        123/A/35/1	Canada 1881", "123", "A", "35", "1");
             //Canadian1881Census("C_13266; Page 67; Family 301", "132", "C", "67", "301");
@@ -123,6 +142,12 @@ namespace Testing
             //CanadianCensus("19110601 Census RG31 District 61 Sub-DIstrict 28 Family 66 Page 6 - Canada Ontario - Elizabeth Harriet DAVEY", CensusDate.CANADACENSUS1911, "", "6", "66");
             Canadian1881Census("1881 census - District 146/B, Page 59, Family 273 - living at Rainham, Haldimand, Ontario, Canada.", "146", "B", "59", "273");
             //CanadianCensus("Event Place: Dumfries South, Brant North, Ontario, Canada\nDistrict Number: 160\nSub-District: C\nDivision: 2\nPage Number: 1\nFamily Number: 3\nAffiliate Film Number: C-13264", , CensusDate.CANADACENSUS1881, "C_13184", "1", "3");
+        }
+
+        [TestMethod]
+        public void CensusReferenceOtherTests()
+        {
+            CensusReference censusRef;
 
             censusRef = new CensusReference("I1", "826/134/7 England & Wales 1881", false);
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1881));
