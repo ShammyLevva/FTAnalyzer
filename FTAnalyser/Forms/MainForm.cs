@@ -25,7 +25,6 @@ using System.Xml;
 using HtmlAgilityPack;
 using System.Net;
 
-
 namespace FTAnalyzer
 {
     public partial class MainForm : Form
@@ -60,7 +59,7 @@ namespace FTAnalyzer
             string ver = pos > 0 ? VERSION.Substring(0, VERSION.IndexOf('-')) : VERSION;
             DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
             CheckSystemVersion();
-            if(!Application.ExecutablePath.Contains("WindowsApps"))
+            if (!Application.ExecutablePath.Contains("WindowsApps"))
                 CheckWebVersion(); // check for web version if not windows store app
             SetSavePath();
             BuildRecentList();
@@ -713,12 +712,19 @@ namespace FTAnalyzer
             tsHintsLabel.Text = Messages.Hints_Individual;
             int index = 0;
             int maxwidth = 0;
-            foreach (DataErrorGroup dataError in ckbDataErrors.Items)
+            try
             {
-                if (dataError.ToString().Length > maxwidth)
-                    maxwidth = dataError.ToString().Length;
-                bool itemChecked = ckbDataErrors.GetItemChecked(index++);
-                Application.UserAppDataRegistry.SetValue(dataError.ToString(), itemChecked);
+                foreach (DataErrorGroup dataError in ckbDataErrors.Items)
+                {
+                    if (dataError.ToString().Length > maxwidth)
+                        maxwidth = dataError.ToString().Length;
+                    bool itemChecked = ckbDataErrors.GetItemChecked(index++);
+                    Application.UserAppDataRegistry.SetValue(dataError.ToString(), itemChecked);
+                }
+            }
+            catch (IOException)
+            {
+                UIHelpers.ShowMessage("Unable to save DataError preferences. Please check App has rights to save user preferences to registry.");
             }
             ckbDataErrors.ColumnWidth = (int)(maxwidth * FontSettings.Default.FontWidth);
             HourGlass(false);
@@ -1562,7 +1568,14 @@ namespace FTAnalyzer
         void BtnLCLogin_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Application.UserAppDataRegistry.SetValue("LostCousinsEmail", txtLCEmail.Text);
+            try
+            {
+                Application.UserAppDataRegistry.SetValue("LostCousinsEmail", txtLCEmail.Text);
+            }
+            catch (IOException)
+            {
+                UIHelpers.ShowMessage("Error unable to save Lost Cousins email address preference. Please check App has rights to save user preferences to registry.");
+            }
             bool websiteAvailable = ExportToLostCousins.CheckLostCousinsLogin(txtLCEmail.Text, txtLCPassword.Text);
             btnLCLogin.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
             btnLCLogin.Enabled = !websiteAvailable;
@@ -2286,7 +2299,14 @@ namespace FTAnalyzer
             {
                 string factType = list.Items[index].ToString();
                 list.SetItemChecked(index, selected);
-                Application.UserAppDataRegistry.SetValue(registryPrefix + factType, selected);
+                try
+                { 
+                    Application.UserAppDataRegistry.SetValue(registryPrefix + factType, selected);
+                }
+                catch (IOException)
+                {
+                    UIHelpers.ShowMessage("Unable to save fact selection preferences. Please check App has permission to save user preferences to registry.");
+                }
             }
             SetShowFactsButton();
         }
@@ -2299,7 +2319,14 @@ namespace FTAnalyzer
                 string factType = ckbFactSelect.Items[index].ToString();
                 bool selected = ckbFactSelect.GetItemChecked(index);
                 ckbFactSelect.SetItemChecked(index, !selected);
-                Application.UserAppDataRegistry.SetValue("Fact: " + factType, !selected);
+                try
+                {
+                    Application.UserAppDataRegistry.SetValue("Fact: " + factType, !selected);
+                }
+                catch (IOException)
+                {
+                    UIHelpers.ShowMessage("Unable to save fact selection preferences. Please check App has permission to save user preferences to registry.");
+                }
                 SetShowFactsButton();
             }
         }
@@ -2333,7 +2360,14 @@ namespace FTAnalyzer
             string factType = ckbFactExclude.Items[index].ToString();
             bool selected = ckbFactExclude.GetItemChecked(index);
             ckbFactExclude.SetItemChecked(index, !selected);
-            Application.UserAppDataRegistry.SetValue("Exclude Fact: " + factType, !selected);
+            try
+            {
+                Application.UserAppDataRegistry.SetValue("Exclude Fact: " + factType, !selected);
+            }
+            catch (IOException)
+            {
+                UIHelpers.ShowMessage("Unable to save fact exclusion preferences. Please check App has permission to save user preferences to registry.");
+            }
             SetShowFactsButton();
         }
 
@@ -2414,12 +2448,19 @@ namespace FTAnalyzer
         {
             if (!loading && WindowState != FormWindowState.Minimized)
             {  //only save window size if not minimised
-                Application.UserAppDataRegistry.SetValue("Mainform size - width", Width);
-                Application.UserAppDataRegistry.SetValue("Mainform size - height", Height);
-                Application.UserAppDataRegistry.SetValue("Mainform position - top", Top);
-                Application.UserAppDataRegistry.SetValue("Mainform position - left", Left);
-                string maxState = (WindowState == FormWindowState.Maximized).ToString();
-                Application.UserAppDataRegistry.SetValue("Mainform maximised", maxState);
+                try
+                {
+                    Application.UserAppDataRegistry.SetValue("Mainform size - width", Width);
+                    Application.UserAppDataRegistry.SetValue("Mainform size - height", Height);
+                    Application.UserAppDataRegistry.SetValue("Mainform position - top", Top);
+                    Application.UserAppDataRegistry.SetValue("Mainform position - left", Left);
+                    string maxState = (WindowState == FormWindowState.Maximized).ToString();
+                    Application.UserAppDataRegistry.SetValue("Mainform maximised", maxState);
+                }
+                catch (IOException)
+                {
+                    UIHelpers.ShowMessage("Unable to save window permissions please check App has rights to save user preferences to registry");
+                }
             }
         }
         #endregion
@@ -3138,13 +3179,43 @@ namespace FTAnalyzer
             await Analytics.TrackAction(Analytics.MainFormAction, Analytics.TodayClickedEvent).ConfigureAwait(true);
         }
 
-        void RbTodayMonth_CheckedChanged(object sender, EventArgs e) => Application.UserAppDataRegistry.SetValue("Todays Events Month", rbTodayMonth.Checked);
+        void RbTodayMonth_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Application.UserAppDataRegistry.SetValue("Todays Events Month", rbTodayMonth.Checked);
+            }
+            catch (IOException)
+            {
+                UIHelpers.ShowMessage("Unable to save Today preference. Please check App has rights to save user preferences to registry.");
+            }
+        }
 
-        void RbTodaySingle_CheckedChanged(object sender, EventArgs e) => Application.UserAppDataRegistry.SetValue("Todays Events Month", !rbTodaySingle.Checked);
+        void RbTodaySingle_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Application.UserAppDataRegistry.SetValue("Todays Events Month", !rbTodaySingle.Checked);
+            }
+            catch (IOException)
+            {
+                UIHelpers.ShowMessage("Unable to save Today preference. Please check App has rights to save user preferences to registry.");
+            }
+        }
 
         async void BtnUpdateTodaysEvents_Click(object sender, EventArgs e) => await ShowTodaysEvents().ConfigureAwait(true);
 
-        void NudToday_ValueChanged(object sender, EventArgs e) => Application.UserAppDataRegistry.SetValue("Todays Events Step", nudToday.Value);
+        void NudToday_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Application.UserAppDataRegistry.SetValue("Todays Events Step", nudToday.Value);
+            }
+            catch (IOException)
+            {
+                UIHelpers.ShowMessage("Unable to save Today preference. Please check App has rights to save user preferences to registry.");
+            }
+        }
         #endregion
 
         public void SetFactTypeList(CheckedListBox ckbFactSelect, CheckedListBox ckbFactExclude, Predicate<ExportFact> filter)
