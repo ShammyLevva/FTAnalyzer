@@ -698,10 +698,7 @@ namespace FTAnalyzer
         }
 
         #region DataErrors
-        void CkbDataErrors_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdateDataErrorsDisplay();
-        }
+        void CkbDataErrors_SelectedIndexChanged(object sender, EventArgs e) => UpdateDataErrorsDisplay();
 
         void UpdateDataErrorsDisplay()
         {
@@ -2300,7 +2297,7 @@ namespace FTAnalyzer
                 string factType = list.Items[index].ToString();
                 list.SetItemChecked(index, selected);
                 try
-                { 
+                {
                     Application.UserAppDataRegistry.SetValue(registryPrefix + factType, selected);
                 }
                 catch (IOException)
