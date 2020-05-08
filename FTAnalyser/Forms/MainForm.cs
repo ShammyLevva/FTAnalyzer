@@ -104,7 +104,9 @@ namespace FTAnalyzer
                 string thisVersion = VERSION;
                 if (VERSION.Contains("-beta"))
                     thisVersion = VERSION.Substring(0, VERSION.IndexOf("-"));
-                if (new Version(webVersion) > new Version(thisVersion))
+                Version web = new Version(webVersion);
+                Version local = new Version(thisVersion);
+                if (web > local)
                 {
                     string text = $"Version installed: {VERSION}, Web version available: {webVersion}\nDo you want to go to website to download the latest version?";
                     DialogResult download = MessageBox.Show(text, "FTAnalyzer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);

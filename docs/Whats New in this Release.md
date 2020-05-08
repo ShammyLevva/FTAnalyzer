@@ -1,8 +1,9 @@
-#### Updated Release Version 7.8.1 6th May 2020  
+#### Updated Release Version 7.8.1 8th May 2020  
 **Updates**  
 Added Birth before baptism error check  
 (NB. This may cause error tick boxes to change as I added this one at start)  
 Only shows error for quarter day births if birth 4 months after baptism/christening   
+Added extra census reference checks for census references with /  
 
 **Bugfixes**  
 Lost cousins upload error when forename is empty fixed  
