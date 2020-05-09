@@ -412,6 +412,7 @@ namespace FTAnalyzer
             mnuHowManyGreats.Enabled = enabled;
             MnuAgedOver99Report.Enabled = enabled;
             mnuLookupBlankFoundLocations.Enabled = enabled;
+            MnuSingleParentsReport.Enabled = enabled;
             mnuTreetopsToExcel.Enabled = enabled && dgTreeTops.RowCount > 0;
             mnuWorldWarsToExcel.Enabled = enabled && dgWorldWars.RowCount > 0;
             mnuDNA_GEDCOM.Enabled = enabled;
@@ -3448,6 +3449,17 @@ namespace FTAnalyzer
             HourGlass(true);
             People people = new People();
             people.SetupAgedOver99Report();
+            DisposeDuplicateForms(people);
+            people.Show();
+            Analytics.TrackAction(Analytics.ReportsAction, Analytics.AgedOver99Report);
+            HourGlass(false);
+        }
+
+        void MnuSingleParentsReport_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            People people = new People();
+            people.SingleParents();
             DisposeDuplicateForms(people);
             people.Show();
             Analytics.TrackAction(Analytics.ReportsAction, Analytics.AgedOver99Report);

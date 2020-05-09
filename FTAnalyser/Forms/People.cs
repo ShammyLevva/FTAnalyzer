@@ -171,6 +171,16 @@ namespace FTAnalyzer.Forms
             UpdateStatusCount();
         }
 
+        public void SingleParents()
+        {
+            Text = "Families with only one or no parent";
+            dgFamilies.DataSource = ft.SingleFamilies;
+            SortFamilies();
+            splitContainer.Panel1Collapsed = true;
+            splitContainer.Panel2Collapsed = false;
+            UpdateStatusCount();
+        }
+
         public void ListRelationToRoot(string relationtoRoot)
         {
             bool filter(Individual x) => x.RelationToRoot.Equals(relationtoRoot);
@@ -339,6 +349,26 @@ namespace FTAnalyzer.Forms
             SetIndividuals(individuals, "Individuals that may have more than one census/residence record for a census year");
         }
 
+        public void SetupChildrenStatusReport()
+        {
+            SortableBindingList<IDisplayChildrenStatus> results = new SortableBindingList<IDisplayChildrenStatus>();
+            IEnumerable<CensusFamily> toSearch = ft.GetAllCensusFamilies(CensusDate.UKCENSUS1911, true, true);
+            foreach (CensusFamily fam in toSearch)
+            {
+                if (fam.On1911Census && fam.HasGoodChildrenStatus && !fam.FamilyType.Equals(Family.SOLOINDIVIDUAL) && !fam.FamilyType.Equals(Family.PRE_MARRIAGE) &&
+                    (fam.ExpectedTotal != fam.ChildrenTotal || fam.ExpectedAlive != fam.ChildrenAlive || fam.ExpectedDead != fam.ChildrenDead))
+                    results.Add(fam);
+            }
+            reportType = ReportType.MismatchedChildrenStatus;
+            dgFamilies.DataSource = results;
+            splitContainer.Panel1Collapsed = true;
+            splitContainer.Panel2Collapsed = false;
+            famReportFormHelper.LoadColumnLayout("ChildrenStatusFamColumns.xml");
+            SetSaveButtonsStatus(true);
+            Text = "1911 Census Families where the children status recorded doesn't match the children in tree";
+            UpdateStatusCount();
+        }
+
         void People_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
         void ContextMenuStrip1_Opened(object sender, EventArgs e)
@@ -451,26 +481,6 @@ namespace FTAnalyzer.Forms
             famReportFormHelper.LoadColumnLayout("ChildrenStatusFamColumns.xml");
             SetSaveButtonsStatus(true);
             Text = "Families with a 1911 census record but no Children Status record showing Children Alive/Dead";
-            UpdateStatusCount();
-        }
-
-        public void SetupChildrenStatusReport()
-        {
-            SortableBindingList<IDisplayChildrenStatus> results = new SortableBindingList<IDisplayChildrenStatus>();
-            IEnumerable<CensusFamily> toSearch = ft.GetAllCensusFamilies(CensusDate.UKCENSUS1911, true, true);
-            foreach (CensusFamily fam in toSearch)
-            {
-                if (fam.On1911Census && fam.HasGoodChildrenStatus && !fam.FamilyType.Equals(Family.SOLOINDIVIDUAL) && !fam.FamilyType.Equals(Family.PRE_MARRIAGE) &&
-                    (fam.ExpectedTotal != fam.ChildrenTotal || fam.ExpectedAlive != fam.ChildrenAlive || fam.ExpectedDead != fam.ChildrenDead))
-                    results.Add(fam);
-            }
-            reportType = ReportType.MismatchedChildrenStatus;
-            dgFamilies.DataSource = results;
-            splitContainer.Panel1Collapsed = true;
-            splitContainer.Panel2Collapsed = false;
-            famReportFormHelper.LoadColumnLayout("ChildrenStatusFamColumns.xml");
-            SetSaveButtonsStatus(true);
-            Text = "1911 Census Families where the children status recorded doesn't match the children in tree";
             UpdateStatusCount();
         }
 

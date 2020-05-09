@@ -79,6 +79,7 @@ namespace FTAnalyzer
             this.mnuHowManyGreats = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuBirthdayEffect = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPossiblyMissingChildReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuAgedOver99Report = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuExport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuIndividualsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFamiliesToExcel = new System.Windows.Forms.ToolStripMenuItem();
@@ -371,7 +372,7 @@ namespace FTAnalyzer
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.MnuAgedOver99Report = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuSingleParentsReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -660,7 +661,8 @@ namespace FTAnalyzer
             this.mnuHowManyGreats,
             this.mnuBirthdayEffect,
             this.mnuPossiblyMissingChildReport,
-            this.MnuAgedOver99Report});
+            this.MnuAgedOver99Report,
+            this.MnuSingleParentsReport});
             this.mnuReports.Name = "mnuReports";
             this.mnuReports.Size = new System.Drawing.Size(59, 20);
             this.mnuReports.Text = "Reports";
@@ -715,6 +717,13 @@ namespace FTAnalyzer
             this.mnuPossiblyMissingChildReport.Size = new System.Drawing.Size(230, 22);
             this.mnuPossiblyMissingChildReport.Text = "Possibly Missing Child Report";
             this.mnuPossiblyMissingChildReport.Click += new System.EventHandler(this.PossiblyMissingChildReportToolStripMenuItem_Click);
+            // 
+            // MnuAgedOver99Report
+            // 
+            this.MnuAgedOver99Report.Name = "MnuAgedOver99Report";
+            this.MnuAgedOver99Report.Size = new System.Drawing.Size(230, 22);
+            this.MnuAgedOver99Report.Text = "Aged over 99 Report";
+            this.MnuAgedOver99Report.Click += new System.EventHandler(this.MnuAgedOver99Report_Click);
             // 
             // mnuExport
             // 
@@ -3862,12 +3871,12 @@ namespace FTAnalyzer
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // MnuAgedOver99Report
+            // MnuSingleParentsReport
             // 
-            this.MnuAgedOver99Report.Name = "MnuAgedOver99Report";
-            this.MnuAgedOver99Report.Size = new System.Drawing.Size(230, 22);
-            this.MnuAgedOver99Report.Text = "Aged over 99 Report";
-            this.MnuAgedOver99Report.Click += new System.EventHandler(this.MnuAgedOver99Report_Click);
+            this.MnuSingleParentsReport.Name = "MnuSingleParentsReport";
+            this.MnuSingleParentsReport.Size = new System.Drawing.Size(230, 22);
+            this.MnuSingleParentsReport.Text = "Single Parents Report";
+            this.MnuSingleParentsReport.Click += new System.EventHandler(this.MnuSingleParentsReport_Click);
             // 
             // MainForm
             // 
@@ -4319,6 +4328,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.Button BtnProblemCensusFacts;
         private System.Windows.Forms.Button BtnAutoCreatedCensusFacts;
         private System.Windows.Forms.ToolStripMenuItem MnuAgedOver99Report;
+        private System.Windows.Forms.ToolStripMenuItem MnuSingleParentsReport;
     }
 }
 
