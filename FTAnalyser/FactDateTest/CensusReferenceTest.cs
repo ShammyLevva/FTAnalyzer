@@ -135,12 +135,15 @@ namespace Testing
         [TestMethod]
         public void CensusReferenceCanadaTests()
         {
-            Canadian1881Census("        123/A/55/35/1	Canada 1881", "123", "A", "35", "1");
-            Canadian1881Census("        123/A/35/1	Canada 1881", "123", "A", "35", "1");
+            CanadianCensus("        123/A/55/35/1	Canada 1881", CensusDate.CANADACENSUS1881, "123", "A", "35", "1");
+            CanadianCensus("        123/A/35/1	Canada 1881", CensusDate.CANADACENSUS1881, "123", "A", "35", "1");
             //Canadian1881Census("C_13266; Page 67; Family 301", "132", "C", "67", "301");
             CanadianCensus("Year: 1881; Census Place: Richibucto, Kent, New Brunswick; Roll: C_13184; Page: 32; Family No: 144", CensusDate.CANADACENSUS1881, "C_13184", "32", "144");
-            //CanadianCensus("19110601 Census RG31 District 61 Sub-DIstrict 28 Family 66 Page 6 - Canada Ontario - Elizabeth Harriet DAVEY", CensusDate.CANADACENSUS1911, "", "6", "66");
-            Canadian1881Census("1881 census - District 146/B, Page 59, Family 273 - living at Rainham, Haldimand, Ontario, Canada.", "146", "B", "59", "273");
+            CanadianCensus("19210601 RG31 Canada Census Item 4360292 013/52/15/01 - British Columbia North Vancouver - Abraham COLEY", CensusDate.CANADACENSUS1921, "013", "52", "01", "15");
+            CanadianCensus("1851 RG31 Item 1301944 38/558/396", CensusDate.CANADACENSUS1851, "38", "558", "396", "");
+            CanadianCensus("1881 census - District 146/B, Page 59, Family 273 - living at Rainham, Haldimand, Ontario, Canada.", CensusDate.CANADACENSUS1881, "146", "B", "59", "273");
+            CanadianCensus("1921 RG31 Canada Census Item 4360292 013/52/15/01", CensusDate.CANADACENSUS1921, "013", "52", "01", "15");
+            CanadianCensus("19110601 Census RG31 District 61 Sub-DIstrict 28 Family 66 Page 6 - Canada Ontario - Elizabeth Harriet DAVEY", CensusDate.CANADACENSUS1911, "61", "28", "6", "66");
             //CanadianCensus("Event Place: Dumfries South, Brant North, Ontario, Canada\nDistrict Number: 160\nSub-District: C\nDivision: 2\nPage Number: 1\nFamily Number: 3\nAffiliate Film Number: C-13264", , CensusDate.CANADACENSUS1881, "C_13184", "1", "3");
         }
 
@@ -161,17 +164,17 @@ namespace Testing
             Assert.IsTrue(censusRef.Status.Equals(CensusReference.ReferenceStatus.INCOMPLETE));
         }
 
-        void Canadian1881Census(string reference, string ED, string SD, string page, string family)
+        void CanadianCensus(string reference, FactDate year, string ED, string SD, string page, string family)
         {
             CensusReference censusRef = new CensusReference("I1", reference, false);
-            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.CANADACENSUS1881));
+            Assert.IsTrue(censusRef.CensusYear.Equals(year));
             Assert.IsTrue(censusRef.ED.Equals(ED));
             Assert.IsTrue(censusRef.SD.Equals(SD));
             Assert.IsTrue(censusRef.Page.Equals(page));
             Assert.IsTrue(censusRef.Family.Equals(family));
         }
 
-        void CanadianCensus(string reference, FactDate year, string Roll,string page, string family)
+        void CanadianCensus(string reference, FactDate year, string Roll, string page, string family)
         {
             CensusReference censusRef = new CensusReference("I1", reference, false);
             Assert.IsTrue(censusRef.CensusYear.Equals(year));

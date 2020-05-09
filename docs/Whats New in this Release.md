@@ -1,3 +1,10 @@
+#### Updated Release Version 7.8.2 8th May 2020  
+**Updates**  
+Website update offers release version if cancel clicked.  
+Added various additional Canadian Census reference checks  
+Added web link to Library and Archives Canada site if item number included in reference  
+Added web link to Scottish census references if identified  
+
 #### Updated Release Version 7.8.1 8th May 2020  
 **Updates**  
 Added Birth before baptism error check  

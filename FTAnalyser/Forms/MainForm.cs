@@ -29,7 +29,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.8.1.0";
+        public static string VERSION = "7.8.2.0";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -108,10 +108,12 @@ namespace FTAnalyzer
                 Version local = new Version(thisVersion);
                 if (web > local)
                 {
-                    string text = $"Version installed: {VERSION}, Web version available: {webVersion}\nDo you want to go to website to download the latest version?";
-                    DialogResult download = MessageBox.Show(text, "FTAnalyzer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    string text = $"Version installed: {VERSION}, Web version available: {webVersion}\nDo you want to go to website to download the latest version?\nSelect Cancel to visit release website for older machines.";
+                    DialogResult download = MessageBox.Show(text, "FTAnalyzer", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                     if (download == DialogResult.Yes)
                         SpecialMethods.VisitWebsite("https://www.microsoft.com/en-gb/p/ftanalyzer/9pmjl9hvpl7x?cid=clickonceappupgrade");
+                    if (download == DialogResult.Cancel)
+                        SpecialMethods.VisitWebsite("https://github.com/ShammyLevva/FTAnalyzer/releases");
                 }
 
                 await Analytics.CheckProgramUsageAsync().ConfigureAwait(true);
