@@ -200,7 +200,7 @@ namespace Testing
             Assert.AreEqual(MAXDATE, target.EndDate);
         }
 
-        private static FactDate MoreBetweens()
+        static FactDate MoreBetweens()
         {
             FactDate target = new FactDate("BTW 1914-1918");
             Assert.AreEqual(new DateTime(1914, 1, 1), target.StartDate);
@@ -285,7 +285,7 @@ namespace Testing
             return target;
         }
 
-        private static FactDate AlternateDateFormats()
+        static FactDate AlternateDateFormats()
         {
             _ = DoubleDates();
 
@@ -348,7 +348,7 @@ namespace Testing
             return target;
         }
 
-        private static FactDate DoubleDates()
+        static FactDate DoubleDates()
         {
             // Double dates
             FactDate target = new FactDate("11 Mar 1747/48");
@@ -378,10 +378,15 @@ namespace Testing
             target = new FactDate("1 MAR 922/923");
             Assert.AreEqual(new DateTime(923, 3, 1), target.StartDate);
             Assert.AreEqual(new DateTime(923, 3, 1), target.EndDate);
+
+            target = new FactDate("29 Feb 1703/1704");
+            Assert.AreEqual(new DateTime(1704, 2, 29), target.StartDate);
+            Assert.AreEqual(new DateTime(1704, 2, 29), target.EndDate);
+
             return target;
         }
 
-        private static FactDate Betweens()
+        static FactDate Betweens()
         {
             // Betweens 
             FactDate target = new FactDate("BET 1983 AND 1986");
@@ -422,7 +427,7 @@ namespace Testing
             return target;
         }
 
-        private static FactDate BasicDates()
+        static FactDate BasicDates()
         {
             FactDate target = new FactDate("1966");
             Assert.AreEqual(new DateTime(1966, 1, 1), target.StartDate);
@@ -461,37 +466,59 @@ namespace Testing
             Assert.AreEqual(new DateTime(1966, 11, 19), target.EndDate);
 
             target = new FactDate("UNKNOWN");
-            Assert.AreEqual(FactDate.MINDATE, target.StartDate);
-            Assert.AreEqual(FactDate.MAXDATE, target.EndDate);
+            Assert.AreEqual(MINDATE, target.StartDate);
+            Assert.AreEqual(MAXDATE, target.EndDate);
 
             target = new FactDate("BEF 1966");
-            Assert.AreEqual(FactDate.MINDATE, target.StartDate);
+            Assert.AreEqual(MINDATE, target.StartDate);
             Assert.AreEqual(new DateTime(1965, 12, 31), target.EndDate);
 
             target = new FactDate("BEF NOV 1966");
-            Assert.AreEqual(FactDate.MINDATE, target.StartDate);
+            Assert.AreEqual(MINDATE, target.StartDate);
             Assert.AreEqual(new DateTime(1966, 10, 31), target.EndDate);
 
             target = new FactDate("BEF 19 Nov 1966");
-            Assert.AreEqual(FactDate.MINDATE, target.StartDate);
+            Assert.AreEqual(MINDATE, target.StartDate);
             Assert.AreEqual(new DateTime(1966, 11, 18), target.EndDate);
 
             target = new FactDate("AFT 1966");
             Assert.AreEqual(new DateTime(1967, 1, 1), target.StartDate);
-            Assert.AreEqual(FactDate.MAXDATE, target.EndDate);
+            Assert.AreEqual(MAXDATE, target.EndDate);
 
             target = new FactDate("AFT Nov 1966");
             Assert.AreEqual(new DateTime(1966, 12, 01), target.StartDate);
-            Assert.AreEqual(FactDate.MAXDATE, target.EndDate);
+            Assert.AreEqual(MAXDATE, target.EndDate);
 
             target = new FactDate("AFT 19 Nov 1966");
             Assert.AreEqual(new DateTime(1966, 11, 20), target.StartDate);
-            Assert.AreEqual(FactDate.MAXDATE, target.EndDate);
+            Assert.AreEqual(MAXDATE, target.EndDate);
             
             target = new FactDate("AFT 19Ÿ©Nov 1966");
             Assert.AreEqual(new DateTime(1966, 11, 20), target.StartDate);
-            Assert.AreEqual(FactDate.MAXDATE, target.EndDate);
+            Assert.AreEqual(MAXDATE, target.EndDate);
+
+            target = new FactDate("1881 census");
+            Assert.AreEqual(new DateTime(1881, 1, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1881, 12, 31), target.EndDate);
+
             return target;
+        }
+
+        [TestMethod()]
+        public void FactDatePhraseTest()
+        {
+            FactDate target = new FactDate("INT 17 APR 1917 (Easter Sunday 1917)");
+            Assert.AreEqual(new DateTime(1917, 4, 17), target.StartDate);
+            Assert.AreEqual(new DateTime(1917, 4, 17), target.EndDate);
+
+            target = new FactDate("(1881 Census)");
+            Assert.AreEqual(new DateTime(1881, 1, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1881, 12, 31), target.EndDate);
+
+            //target = new FactDate("(Easter Sunday 1917)");
+            //Assert.AreEqual(UNKNOWN_DATE, target.StartDate);
+            //Assert.AreEqual(UNKNOWN_DATE, target.EndDate);
+
         }
 
         [TestMethod()]

@@ -12,6 +12,7 @@ namespace FTAnalyzer
         /// </summary>
         [STAThread]
         static void Main()
+        
         {
             if (Environment.OSVersion.Version.Major >= 10) NativeMethods.SetProcessDPIAware();
             SharpMapUtility.Configure();

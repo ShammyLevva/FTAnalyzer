@@ -171,10 +171,10 @@
       <HintPath>packages\GDAL.2.4.4\lib\net40\gdal_csharp.dll</HintPath>
     </Reference>
     <Reference Include="GoogleAnalyticsTracker.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=04ab204e84b117c0, processorArchitecture=MSIL">
-      <HintPath>packages\GoogleAnalyticsTracker.Core.6.0.3\lib\netstandard2.0\GoogleAnalyticsTracker.Core.dll</HintPath>
+      <HintPath>packages\GoogleAnalyticsTracker.Core.6.0.4\lib\netstandard2.0\GoogleAnalyticsTracker.Core.dll</HintPath>
     </Reference>
     <Reference Include="GoogleAnalyticsTracker.Simple, Version=6.0.0.0, Culture=neutral, PublicKeyToken=04ab204e84b117c0, processorArchitecture=MSIL">
-      <HintPath>packages\GoogleAnalyticsTracker.Simple.6.0.3\lib\netstandard2.0\GoogleAnalyticsTracker.Simple.dll</HintPath>
+      <HintPath>packages\GoogleAnalyticsTracker.Simple.6.0.4\lib\netstandard2.0\GoogleAnalyticsTracker.Simple.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.11.23.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>packages\HtmlAgilityPack.1.11.23\lib\Net45\HtmlAgilityPack.dll</HintPath>
@@ -274,7 +274,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Text.Encodings.Web, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Text.Encodings.Web.4.7.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+      <HintPath>packages\System.Text.Encodings.Web.4.7.1\lib\net461\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -907,32 +907,32 @@
   <ItemGroup>
     <PublishFile Include="Resources\CensusLocations.xml">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="Resources\FactLocationFixes.xml">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="Resources\ScottishParishes.xml">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>

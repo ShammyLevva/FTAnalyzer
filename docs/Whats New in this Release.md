@@ -1,4 +1,9 @@
-#### Updated Release Version 7.8.2 10th May 2020  
+#### Updated Release Version 7.8.3 15th May 2020  
+**Bugfixes**  
+Single families shouldn't show solo indidivuals  
+Fixed issue with 29th Feb in double dates  
+
+#### Updated Release Version 7.8.2 12th May 2020  
 **Updates**  
 Website update offers release version if cancel clicked.  
 Added various additional Canadian Census reference checks  
