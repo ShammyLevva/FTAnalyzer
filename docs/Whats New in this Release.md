@@ -1,7 +1,8 @@
-#### Updated Release Version 7.8.3 15th May 2020  
+#### Updated Release Version 7.8.3 4th June 2020  
 **Bugfixes**  
-Single families shouldn't show solo indidivuals  
+Single families shouldn't show solo individuals    
 Fixed issue with 29th Feb in double dates  
+Fixed issue with printing initial loading page  
 
 #### Updated Release Version 7.8.2 12th May 2020  
 **Updates**  
