@@ -383,6 +383,11 @@ namespace Testing
             Assert.AreEqual(new DateTime(1704, 2, 29), target.StartDate);
             Assert.AreEqual(new DateTime(1704, 2, 29), target.EndDate);
 
+            
+            target = new FactDate("Bef 29 Feb 1611/12");
+            Assert.AreEqual(MINDATE, target.StartDate);
+            Assert.AreEqual(new DateTime(1612, 2, 29), target.EndDate);
+
             return target;
         }
 

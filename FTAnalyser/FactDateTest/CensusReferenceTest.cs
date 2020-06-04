@@ -184,7 +184,7 @@ namespace Testing
             Assert.IsTrue(censusRef.Family.Equals(family));
         }
 
-        void USCensusTest(string reference, FactDate year, string roll, string ED, string page)
+        static void USCensusTest(string reference, FactDate year, string roll, string ED, string page)
         {
             CensusReference censusRef = new CensusReference("I1", reference, false);
             Assert.IsTrue(censusRef.CensusYear.Equals(year));
