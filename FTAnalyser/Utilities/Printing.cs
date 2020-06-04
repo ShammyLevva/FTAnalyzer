@@ -44,9 +44,18 @@ namespace FTAnalyzer.Utilities
             catch (Exception) { }
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            try
+            {
+                if (disposing)
+                    reader?.Dispose();
+            }
+            catch (Exception) { }
+        }
         public void Dispose()
         {
-            reader.Dispose();
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
     }
