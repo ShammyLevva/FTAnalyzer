@@ -386,7 +386,7 @@ namespace Testing
             
             target = new FactDate("Bef 29 Feb 1611/12");
             Assert.AreEqual(MINDATE, target.StartDate);
-            Assert.AreEqual(new DateTime(1612, 2, 29), target.EndDate);
+            Assert.AreEqual(new DateTime(1612, 2, 28), target.EndDate);
 
             return target;
         }
