@@ -1,3 +1,9 @@
+#### Updated Release Version 7.8.4 9th June 2020  
+**Updates**  
+Added _ATTR custom attribute flag support from Family Historian  
+Renamed Unknown fact types to Unknown/Custom fact types  
+Reworked loading to speed up loading times signficantly on larger files  
+
 #### Updated Release Version 7.8.3 4th June 2020  
 **Bugfixes**  
 Single families shouldn't show solo individuals    

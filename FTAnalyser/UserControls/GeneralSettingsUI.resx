@@ -271,7 +271,7 @@
     <value>31</value>
   </data>
   <data name="chkIgnoreFactTypeWarnings.Text" xml:space="preserve">
-    <value>Ignore Unknown Fact Type Warnings</value>
+    <value>Ignore Unknown/Custom Fact Type Warnings</value>
   </data>
   <data name="&gt;&gt;chkIgnoreFactTypeWarnings.Name" xml:space="preserve">
     <value>chkIgnoreFactTypeWarnings</value>

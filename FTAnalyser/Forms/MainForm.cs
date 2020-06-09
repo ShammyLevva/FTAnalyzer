@@ -100,7 +100,7 @@ namespace FTAnalyzer
                     doc.LoadHtml(webData);
                 }
                 HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//div/div/div/span/../../ul/li/a");
-                string webVersion = versionNode.InnerText.Replace('v', ' ').Trim();
+                string webVersion = versionNode.InnerText.ToUpper().Replace('V', ' ').Trim();
                 string thisVersion = VERSION;
                 if (VERSION.Contains("-beta"))
                     thisVersion = VERSION.Substring(0, VERSION.IndexOf("-"));
@@ -2546,7 +2546,7 @@ namespace FTAnalyzer
                 dupInd.IgnoreNonDuplicate = !dupInd.IgnoreNonDuplicate; // flip state of checkbox
                 if (dupInd.IgnoreNonDuplicate)
                 {  //ignoring this record so add it to the list if its not already present
-                    if (!ft.NonDuplicates.Contains(nonDup))
+                    if (!ft.NonDuplicates.ContainsDuplicate(nonDup))
                         ft.NonDuplicates.Add(nonDup);
                 }
                 else
