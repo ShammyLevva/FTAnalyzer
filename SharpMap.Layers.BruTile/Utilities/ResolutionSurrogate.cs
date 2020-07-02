@@ -17,7 +17,7 @@ namespace BruTile
                 public ResolutionRef(SerializationInfo info, StreamingContext context)
                 {
                     _resolution = new Resolution(
-                        info.GetString("id"), info.GetDouble("upp"),
+                        info.GetInt32("level"), info.GetDouble("upp"),
                         info.GetInt32("th"), info.GetInt32("tw"),
                         info.GetDouble("t"), info.GetDouble("l"),
                         info.GetInt32("mw"), info.GetInt32("mh"),
@@ -44,7 +44,7 @@ namespace BruTile
         {
             var res = (Resolution)obj;
             info.SetType(typeof(ResolutionRef));
-            info.AddValue("id", res.Id);
+            info.AddValue("level", res.Level);
             info.AddValue("upp", res.UnitsPerPixel);
             info.AddValue("th", res.TileHeight);
             info.AddValue("tw", res.TileWidth);
