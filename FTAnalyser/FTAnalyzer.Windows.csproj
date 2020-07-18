@@ -171,10 +171,10 @@
       <HintPath>packages\GDAL.2.4.4\lib\net40\gdal_csharp.dll</HintPath>
     </Reference>
     <Reference Include="GoogleAnalyticsTracker.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=04ab204e84b117c0, processorArchitecture=MSIL">
-      <HintPath>packages\GoogleAnalyticsTracker.Core.6.0.4\lib\netstandard2.0\GoogleAnalyticsTracker.Core.dll</HintPath>
+      <HintPath>packages\GoogleAnalyticsTracker.Core.6.0.5\lib\netstandard2.0\GoogleAnalyticsTracker.Core.dll</HintPath>
     </Reference>
     <Reference Include="GoogleAnalyticsTracker.Simple, Version=6.0.0.0, Culture=neutral, PublicKeyToken=04ab204e84b117c0, processorArchitecture=MSIL">
-      <HintPath>packages\GoogleAnalyticsTracker.Simple.6.0.4\lib\netstandard2.0\GoogleAnalyticsTracker.Simple.dll</HintPath>
+      <HintPath>packages\GoogleAnalyticsTracker.Simple.6.0.5\lib\netstandard2.0\GoogleAnalyticsTracker.Simple.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.11.24.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>packages\HtmlAgilityPack.1.11.24\lib\Net45\HtmlAgilityPack.dll</HintPath>
@@ -907,32 +907,32 @@
   <ItemGroup>
     <PublishFile Include="Resources\CensusLocations.xml">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="Resources\FactLocationFixes.xml">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="Resources\ScottishParishes.xml">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
