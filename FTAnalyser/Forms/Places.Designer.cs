@@ -68,7 +68,7 @@ namespace FTAnalyzer.Forms
             this.SourceList = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.txtCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.progressbar = new System.Windows.Forms.ToolStripProgressBar();
+            this.pbPlaces = new System.Windows.Forms.ToolStripProgressBar();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHideScaleBar = new System.Windows.Forms.ToolStripMenuItem();
@@ -415,7 +415,7 @@ namespace FTAnalyzer.Forms
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.txtCount,
-            this.progressbar});
+            this.pbPlaces});
             this.statusStrip.Location = new System.Drawing.Point(0, 105);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(1113, 22);
@@ -427,11 +427,11 @@ namespace FTAnalyzer.Forms
             this.txtCount.Name = "txtCount";
             this.txtCount.Size = new System.Drawing.Size(0, 17);
             // 
-            // progressbar
+            // pbPlaces
             // 
-            this.progressbar.Name = "progressbar";
-            this.progressbar.Size = new System.Drawing.Size(100, 16);
-            this.progressbar.Visible = false;
+            this.pbPlaces.Name = "pbPlaces";
+            this.pbPlaces.Size = new System.Drawing.Size(100, 16);
+            this.pbPlaces.Visible = false;
             // 
             // menuStrip
             // 
@@ -534,7 +534,7 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn FoundResultType;
         private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceList;
-        private System.Windows.Forms.ToolStripProgressBar progressbar;
+        private System.Windows.Forms.ToolStripProgressBar pbPlaces;
         private System.Windows.Forms.ToolStripMenuItem mnuHideScaleBar;
         private System.Windows.Forms.ToolStripButton btnSelect;
         private MultiSelectTreeview tvPlaces;

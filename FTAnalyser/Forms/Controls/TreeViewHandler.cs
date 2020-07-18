@@ -32,13 +32,15 @@ namespace FTAnalyzer.Controls
         }
 
         #region Location Tree Building
-        public TreeNode[] GetAllLocationsTreeNodes(Font defaultFont, bool mainform)
+        public TreeNode[] GetAllLocationsTreeNodes(Font defaultFont, bool mainform, ToolStripProgressBar progressBar)
         {
             try
             {
                 if (mainformTreeRootNode != null)
                     return BuildTreeNodeArray(mainform);
-
+                progressBar.Value = 0;
+                int locationCount = 0;
+                progressBar.Maximum = FamilyTree.Instance.AllDisplayPlaces.Count;
                 mainformTreeRootNode = new TreeNode();
                 placesTreeRootNode = new TreeNode();
                 Font regularFont = new Font(defaultFont, FontStyle.Regular);
@@ -76,6 +78,11 @@ namespace FTAnalyzer.Controls
                         currentM = childM;
                         currentP = childP;
                     }
+                    if (++locationCount % 10 == 0)
+                    {
+                        progressBar.Value = locationCount;
+                        Application.DoEvents();
+                    }
                 }
                 if (Properties.GeneralSettings.Default.AllowEmptyLocations)
                 { // trim empty end nodes
@@ -98,6 +105,8 @@ namespace FTAnalyzer.Controls
                     node.Text += "         "; // force text to be longer to fix bold bug
                 foreach (TreeNode node in placesTreeRootNode.Nodes)
                     node.Text += "         "; // force text to be longer to fix bold bug
+                regularFont = null;
+                boldFont = null; // hopefully fixes dispose bug
             }
             catch (Exception) { }
             return BuildTreeNodeArray(mainform);

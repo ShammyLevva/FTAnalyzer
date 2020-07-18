@@ -93,8 +93,8 @@ namespace FTAnalyzer.Forms
                     return;
                 }
                 int count = 0;
-                progressbar.Visible = true;
-                progressbar.Maximum = list.Count;
+                pbPlaces.Visible = true;
+                pbPlaces.Maximum = list.Count;
                 foreach (Individual ind in list)
                 {
                     foreach (DisplayFact dispfact in ind.AllGeocodedFacts)
@@ -110,11 +110,11 @@ namespace FTAnalyzer.Forms
                             }
                         }
                     }
-                    progressbar.Value = ++count;
+                    pbPlaces.Value = ++count;
                     txtCount.Text = $"Processed {count} Individuals from list of {list.Count}";
                     Application.DoEvents();
                 }
-                progressbar.Visible = false;
+                pbPlaces.Visible = false;
                 txtCount.Text = $"Downloading map tiles and computing clusters for {displayFacts.Count} facts. Please wait";
                 Application.DoEvents();
                 dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
@@ -165,7 +165,7 @@ namespace FTAnalyzer.Forms
         {
             try
             {
-                TreeNode[] nodes = TreeViewHandler.Instance.GetAllLocationsTreeNodes(tvPlaces.Font, false);
+                TreeNode[] nodes = TreeViewHandler.Instance.GetAllLocationsTreeNodes(tvPlaces.Font, false, pbPlaces);
                 tvPlaces.Nodes.AddRange(nodes);
                 int Width = (int)Application.UserAppDataRegistry.GetValue("Places size - width", this.Width);
                 int Height = (int)Application.UserAppDataRegistry.GetValue("Places size - height", this.Height);

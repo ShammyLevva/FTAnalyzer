@@ -29,7 +29,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.8.4.0-beta3";
+        public static string VERSION = "7.8.5.0-beta1";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1329,15 +1329,25 @@ namespace FTAnalyzer
                         tabCtrlLocations.SelectedIndex = 0;
                         tsCountLabel.Text = string.Empty;
                         tsHintsLabel.Text = Messages.Hints_Location;
+                        tspbTabProgress.Visible = true;
                         treeViewLocations.Nodes.Clear();
                         Application.DoEvents();
-                        treeViewLocations.Nodes.AddRange(TreeViewHandler.Instance.GetAllLocationsTreeNodes(treeViewLocations.Font, true));
+                        TreeNode[] nodes = TreeViewHandler.Instance.GetAllLocationsTreeNodes(treeViewLocations.Font, true, tspbTabProgress);
+                        try
+                        {
+                            treeViewLocations.Nodes.AddRange(nodes);
+                        } 
+                        catch(ArgumentException fEx)
+                        {
+                            Console.WriteLine(fEx.Message); // typically font loading error
+                        }
                         mnuPrint.Enabled = false;
                         dgCountries.DataSource = ft.AllDisplayCountries;
                         dgRegions.DataSource = ft.AllDisplayRegions;
                         dgSubRegions.DataSource = ft.AllDisplaySubRegions;
                         dgAddresses.DataSource = ft.AllDisplayAddresses;
                         dgPlaces.DataSource = ft.AllDisplayPlaces;
+                        tspbTabProgress.Visible = false;
                         Analytics.TrackAction(Analytics.MainFormAction, Analytics.LocationTabViewed);
                     }
                     HourGlass(false);
