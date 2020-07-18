@@ -1,8 +1,14 @@
-#### Updated Release Version 7.8.4 9th June 2020  
+#### Updated Release Version 7.8.5 18th July 2020  
 **Updates**  
 Added _ATTR custom attribute flag support from Family Historian  
 Renamed Unknown fact types to Unknown/Custom fact types  
 Reworked loading to speed up loading times signficantly on larger files  
+Add progress bar to locations tree loading  
+Update to BruTile 3.0  
+Add in children born too close together checks  
+
+**Bugfixes**  
+Add Font set to null to try to fix dispose error  
 
 #### Updated Release Version 7.8.3 4th June 2020  
 **Bugfixes**  
