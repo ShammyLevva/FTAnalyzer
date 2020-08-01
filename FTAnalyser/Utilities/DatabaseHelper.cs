@@ -175,6 +175,7 @@ namespace FTAnalyzer.Utilities
                 Version v7_3_0_1 = new Version("7.3.0.1");
                 Version v7_3_3_2 = new Version("7.3.3.2");
                 Version v7_4_0_0 = new Version("7.4.0.0");
+                Version v8_0_0_0 = new Version("8.0.0.0");
                 if (dbVersion < v3_0_0_0)
                 {
                     // Version is less than 3.0.0.0 or none existent so copy latest database from empty database
@@ -360,6 +361,17 @@ namespace FTAnalyzer.Utilities
                         cmd.ExecuteNonQuery();
                     }
                     using (SQLiteCommand cmd = new SQLiteCommand("insert into Versions(platform, database) values('Mac', '1.2.0.42')", InstanceConnection))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                if(dbVersion < v8_0_0_0)
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand("CREATE TABLE CustomFacts (FactType STRING(60) PRIMARY KEY, [Ignore] BOOLEAN)", InstanceConnection))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    using (SQLiteCommand cmd = new SQLiteCommand("update Versions set database = '8.0.0.0' where platform = 'PC'", InstanceConnection))
                     {
                         cmd.ExecuteNonQuery();
                     }
@@ -931,9 +943,53 @@ namespace FTAnalyzer.Utilities
         }
         #endregion
 
-        #region Cursor Queries
+        #region Custom Facts
 
-        public static void AddEmptyLocationsToQueue(ConcurrentQueue<FactLocation> queue)
+        public static bool IgnoreCustomFact(string factType)
+        {
+            if (InstanceConnection.State != ConnectionState.Open)
+                InstanceConnection.Open();
+            bool result = false;
+            using (SQLiteCommand cmd = new SQLiteCommand("SELECT EXISTS(SELECT ignore FROM CustomFacts where FactType=?)", InstanceConnection))
+            {
+                SQLiteParameter param = cmd.CreateParameter();
+                param.DbType = DbType.String;
+                cmd.Parameters.Add(param);
+                param = cmd.CreateParameter();
+                cmd.Prepare();
+                cmd.Parameters[0].Value = factType;
+                using (SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult))
+                {
+                    if (reader.Read())
+                        result = reader[0].ToString() == "1";
+                }
+            }
+            return result;
+        }
+
+        public static void IgnoreCustomFact(string factType, bool ignore)
+        {
+            using (SQLiteCommand cmd = new SQLiteCommand("insert or replace into CustomFacts(FactType,Ignore) values(?,?)", InstanceConnection))
+            {
+                SQLiteParameter param = cmd.CreateParameter();
+                param.DbType = DbType.String;
+                cmd.Parameters.Add(param);
+                param = cmd.CreateParameter();
+                param.DbType = DbType.Boolean;
+                cmd.Parameters.Add(param);
+                param = cmd.CreateParameter();
+                cmd.Prepare();
+                cmd.Parameters[0].Value = factType;
+                cmd.Parameters[1].Value = ignore; 
+                int rowsaffected = cmd.ExecuteNonQuery();
+            }
+        }
+
+            #endregion
+
+            #region Cursor Queries
+
+            public static void AddEmptyLocationsToQueue(ConcurrentQueue<FactLocation> queue)
         {
             if (queue is null) return;
             if (InstanceConnection.State != ConnectionState.Open)

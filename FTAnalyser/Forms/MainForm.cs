@@ -588,7 +588,7 @@ namespace FTAnalyzer
             }
         }
 
-        void dgCustomFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        void DgCustomFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -600,6 +600,12 @@ namespace FTAnalyzer
                 frmInd.Show();
                 HourGlass(false);
             }
+        }
+
+        void DgCustomFacts_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            var customFact = (DisplayCustomFact)dgCustomFacts.CurrentRow.DataBoundItem;
+            DatabaseHelper.IgnoreCustomFact(customFact.CustomFactName, customFact.Ignore);
         }
 
         void SetAsRootToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1420,6 +1426,8 @@ namespace FTAnalyzer
                 dgCustomFacts.Sort(dgCustomFacts.Columns["CustomFactName"], ListSortDirection.Ascending);
                 dgCustomFacts.AllowUserToResizeColumns = true;
                 dgCustomFacts.Focus();
+                dgCustomFacts.Columns["Ignore"].ReadOnly = false;
+                dgCustomFacts.Columns["Ignore"].ToolTipText = "Tick box to ignore warnings for this custom fact type.";
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + list.Count;
                 tsHintsLabel.Text = Messages.Hints_CustomFacts;
@@ -3533,6 +3541,5 @@ namespace FTAnalyzer
             }
             HourGlass(false);
         }
-
     }
 }

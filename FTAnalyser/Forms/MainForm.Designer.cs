@@ -3123,7 +3123,8 @@ namespace FTAnalyzer
             this.dgCustomFacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgCustomFacts.Size = new System.Drawing.Size(1070, 411);
             this.dgCustomFacts.TabIndex = 4;
-            this.dgCustomFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCustomFacts_CellDoubleClick);
+            this.dgCustomFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgCustomFacts_CellDoubleClick);
+            this.dgCustomFacts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgCustomFacts_CellValueChanged);
             // 
             // tabErrorsFixes
             // 
