@@ -120,6 +120,9 @@
   <data name="Count" xml:space="preserve">
     <value>Count: </value>
   </data>
+  <data name="Hints_CustomFacts" xml:space="preserve">
+    <value>Double click to show list of individuals with this custom fact</value>
+  </data>
   <data name="Hints_Duplicates" xml:space="preserve">
     <value>Double click to show the facts for both the individual and their possible match.</value>
   </data>

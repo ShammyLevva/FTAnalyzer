@@ -92,6 +92,18 @@ namespace FTAnalyzer.Forms
             splitContainer.Panel2Collapsed = true;
             UpdateStatusCount();
         }
+        public void SetCustomFacts(string factType, SortableBindingList<Individual> individuals)
+        {
+            Text = "Individuals whose have the custom fact of " + (string.IsNullOrEmpty(factType) ? "not entered" : factType);
+            SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
+            foreach (Individual i in individuals)
+                dsInd.Add(i);
+            dgIndividuals.DataSource = dsInd;
+            SortIndividuals();
+            dgIndividuals.Dock = DockStyle.Fill;
+            splitContainer.Panel2Collapsed = true;
+            UpdateStatusCount();
+        }
 
         public void SetSurnameStats(SurnameStats stat, bool ignoreCase)
         {

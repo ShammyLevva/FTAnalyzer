@@ -80,6 +80,7 @@ namespace FTAnalyzer
             this.mnuBirthdayEffect = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPossiblyMissingChildReport = new System.Windows.Forms.ToolStripMenuItem();
             this.MnuAgedOver99Report = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuSingleParentsReport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuExport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuIndividualsToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFamiliesToExcel = new System.Windows.Forms.ToolStripMenuItem();
@@ -301,6 +302,8 @@ namespace FTAnalyzer
             this.dgSources = new System.Windows.Forms.DataGridView();
             this.tabOccupations = new System.Windows.Forms.TabPage();
             this.dgOccupations = new System.Windows.Forms.DataGridView();
+            this.tabCustomFacts = new System.Windows.Forms.TabPage();
+            this.dgCustomFacts = new System.Windows.Forms.DataGridView();
             this.tabErrorsFixes = new System.Windows.Forms.TabPage();
             this.tabErrorFixSelector = new System.Windows.Forms.TabControl();
             this.tabDataErrors = new System.Windows.Forms.TabPage();
@@ -372,7 +375,6 @@ namespace FTAnalyzer
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.MnuSingleParentsReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -435,6 +437,8 @@ namespace FTAnalyzer
             ((System.ComponentModel.ISupportInitialize)(this.dgSources)).BeginInit();
             this.tabOccupations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgOccupations)).BeginInit();
+            this.tabCustomFacts.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgCustomFacts)).BeginInit();
             this.tabErrorsFixes.SuspendLayout();
             this.tabErrorFixSelector.SuspendLayout();
             this.tabDataErrors.SuspendLayout();
@@ -724,6 +728,13 @@ namespace FTAnalyzer
             this.MnuAgedOver99Report.Size = new System.Drawing.Size(230, 22);
             this.MnuAgedOver99Report.Text = "Aged over 99 Report";
             this.MnuAgedOver99Report.Click += new System.EventHandler(this.MnuAgedOver99Report_Click);
+            // 
+            // MnuSingleParentsReport
+            // 
+            this.MnuSingleParentsReport.Name = "MnuSingleParentsReport";
+            this.MnuSingleParentsReport.Size = new System.Drawing.Size(230, 22);
+            this.MnuSingleParentsReport.Text = "Single Parents Report";
+            this.MnuSingleParentsReport.Click += new System.EventHandler(this.MnuSingleParentsReport_Click);
             // 
             // mnuExport
             // 
@@ -2974,6 +2985,7 @@ namespace FTAnalyzer
             this.tabMainListsSelector.Controls.Add(this.tabFamilies);
             this.tabMainListsSelector.Controls.Add(this.tabSources);
             this.tabMainListsSelector.Controls.Add(this.tabOccupations);
+            this.tabMainListsSelector.Controls.Add(this.tabCustomFacts);
             this.tabMainListsSelector.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabMainListsSelector.Location = new System.Drawing.Point(3, 3);
             this.tabMainListsSelector.Name = "tabMainListsSelector";
@@ -3087,6 +3099,31 @@ namespace FTAnalyzer
             this.dgOccupations.Size = new System.Drawing.Size(1070, 411);
             this.dgOccupations.TabIndex = 3;
             this.dgOccupations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgOccupations_CellDoubleClick);
+            // 
+            // tabCustomFacts
+            // 
+            this.tabCustomFacts.Controls.Add(this.dgCustomFacts);
+            this.tabCustomFacts.Location = new System.Drawing.Point(4, 22);
+            this.tabCustomFacts.Name = "tabCustomFacts";
+            this.tabCustomFacts.Size = new System.Drawing.Size(1070, 411);
+            this.tabCustomFacts.TabIndex = 4;
+            this.tabCustomFacts.Text = "Custom Facts";
+            this.tabCustomFacts.UseVisualStyleBackColor = true;
+            // 
+            // dgCustomFacts
+            // 
+            this.dgCustomFacts.AllowUserToAddRows = false;
+            this.dgCustomFacts.AllowUserToDeleteRows = false;
+            this.dgCustomFacts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgCustomFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgCustomFacts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgCustomFacts.Location = new System.Drawing.Point(0, 0);
+            this.dgCustomFacts.MultiSelect = false;
+            this.dgCustomFacts.Name = "dgCustomFacts";
+            this.dgCustomFacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgCustomFacts.Size = new System.Drawing.Size(1070, 411);
+            this.dgCustomFacts.TabIndex = 4;
+            this.dgCustomFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCustomFacts_CellDoubleClick);
             // 
             // tabErrorsFixes
             // 
@@ -3871,13 +3908,6 @@ namespace FTAnalyzer
             this.restoreDatabase.FileName = "*.zip";
             this.restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // MnuSingleParentsReport
-            // 
-            this.MnuSingleParentsReport.Name = "MnuSingleParentsReport";
-            this.MnuSingleParentsReport.Size = new System.Drawing.Size(230, 22);
-            this.MnuSingleParentsReport.Text = "Single Parents Report";
-            this.MnuSingleParentsReport.Click += new System.EventHandler(this.MnuSingleParentsReport_Click);
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -3973,6 +4003,8 @@ namespace FTAnalyzer
             ((System.ComponentModel.ISupportInitialize)(this.dgSources)).EndInit();
             this.tabOccupations.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgOccupations)).EndInit();
+            this.tabCustomFacts.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgCustomFacts)).EndInit();
             this.tabErrorsFixes.ResumeLayout(false);
             this.tabErrorFixSelector.ResumeLayout(false);
             this.tabDataErrors.ResumeLayout(false);
@@ -4329,6 +4361,8 @@ namespace FTAnalyzer
         private System.Windows.Forms.Button BtnAutoCreatedCensusFacts;
         private System.Windows.Forms.ToolStripMenuItem MnuAgedOver99Report;
         private System.Windows.Forms.ToolStripMenuItem MnuSingleParentsReport;
+        private System.Windows.Forms.TabPage tabCustomFacts;
+        private System.Windows.Forms.DataGridView dgCustomFacts;
     }
 }
 

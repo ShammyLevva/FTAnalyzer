@@ -1,4 +1,4 @@
-#### Updated Release Version 7.8.5 18th July 2020  
+#### Updated Release Version 7.8.5 21st July 2020  
 **Updates**  
 Added _ATTR custom attribute flag support from Family Historian  
 Renamed Unknown fact types to Unknown/Custom fact types  

@@ -29,7 +29,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "7.8.5.0";
+        public static string VERSION = "8.0.0.0";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -582,6 +582,20 @@ namespace FTAnalyzer
                 var occ = (DisplayOccupation)dgOccupations.CurrentRow.DataBoundItem;
                 var frmInd = new People();
                 frmInd.SetWorkers(occ.Occupation, ft.AllWorkers(occ.Occupation));
+                DisposeDuplicateForms(frmInd);
+                frmInd.Show();
+                HourGlass(false);
+            }
+        }
+
+        void dgCustomFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                HourGlass(true);
+                var customFacts = (DisplayCustomFact)dgCustomFacts.CurrentRow.DataBoundItem;
+                var frmInd = new People();
+                frmInd.SetCustomFacts(customFacts.CustomFactName, ft.AllCustomFactIndividuals(customFacts.CustomFactName));
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
                 HourGlass(false);
@@ -1336,8 +1350,8 @@ namespace FTAnalyzer
                         try
                         {
                             treeViewLocations.Nodes.AddRange(nodes);
-                        } 
-                        catch(ArgumentException fEx)
+                        }
+                        catch (ArgumentException fEx)
                         {
                             Console.WriteLine(fEx.Message); // typically font loading error
                         }
@@ -1398,6 +1412,18 @@ namespace FTAnalyzer
                 tsCountLabel.Text = Messages.Count + list.Count;
                 tsHintsLabel.Text = Messages.Hints_Occupation;
                 Analytics.TrackAction(Analytics.MainListsAction, Analytics.OccupationsTabEvent);
+            }
+            else if (tabMainListsSelector.SelectedTab == tabCustomFacts)
+            {
+                SortableBindingList<IDisplayCustomFact> list = ft.AllCustomFacts;
+                dgCustomFacts.DataSource = list;
+                dgCustomFacts.Sort(dgCustomFacts.Columns["CustomFactName"], ListSortDirection.Ascending);
+                dgCustomFacts.AllowUserToResizeColumns = true;
+                dgCustomFacts.Focus();
+                mnuPrint.Enabled = true;
+                tsCountLabel.Text = Messages.Count + list.Count;
+                tsHintsLabel.Text = Messages.Hints_CustomFacts;
+                Analytics.TrackAction(Analytics.MainListsAction, Analytics.CustomFactTabEvent);
             }
         }
 
@@ -3507,5 +3533,6 @@ namespace FTAnalyzer
             }
             HourGlass(false);
         }
+
     }
 }
