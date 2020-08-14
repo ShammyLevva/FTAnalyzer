@@ -1,3 +1,9 @@
+#### Updated Release Version 8.0.0 1st August 2020  
+**Updates**  
+Implemented Custom Fact display and ignoring of custom fact warnings  
+BCE & CE dates (and their religious equivalents BC & AD) now understood  
+BCE & BC dates treated as unknown as I no means of handling negative years  
+
 #### Updated Release Version 7.8.5 21st July 2020  
 **Updates**  
 Added _ATTR custom attribute flag support from Family Historian  

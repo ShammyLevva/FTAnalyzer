@@ -111,6 +111,12 @@ namespace Testing
             FactDate target = new FactDate("ABT @#DJULIAN@ 1567");
             Assert.AreEqual(new DateTime(1566, 1, 1), target.StartDate);
             Assert.AreEqual(new DateTime(1567, 12, 31), target.EndDate);
+
+            target = new FactDate("605 BC");
+            Assert.AreEqual(target, UNKNOWN_DATE);
+
+            target = new FactDate("605 B.C.");
+            Assert.AreEqual(target, UNKNOWN_DATE);
         }
 
         /// <summary>
