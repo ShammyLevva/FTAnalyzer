@@ -35,14 +35,14 @@ namespace FTAnalyzer
 
         Cursor storedCursor = Cursors.Default;
         readonly FamilyTree ft = FamilyTree.Instance;
-        bool stopProcessing = false;
+        bool stopProcessing;
         string filename;
         readonly PrivateFontCollection fonts = new PrivateFontCollection();
         Font handwritingFont;
         Font boldFont;
         Font normalFont;
         bool loading;
-        bool WWI = false;
+        bool WWI;
         ReportFormHelper rfhDuplicates;
 
         public MainForm()
@@ -499,7 +499,7 @@ namespace FTAnalyzer
         void RtbLCoutput_TextChanged(object sender, EventArgs e) => rtbLCoutput.ScrollToBottom();
         void RtbCheckAncestors_TextChanged(object sender, EventArgs e) => rtbCheckAncestors.ScrollToBottom();
 
-        bool shutdown = false;
+        bool shutdown;
 
         async void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {

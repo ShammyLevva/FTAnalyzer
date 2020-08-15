@@ -13,7 +13,7 @@ namespace FTAnalyzer.Forms
     {
         enum ReportType { People, MissingChildrenStatus, MismatchedChildrenStatus }
 
-        bool selectRow = false;
+        bool selectRow;
         readonly Font boldFont;
         readonly Font normalFont;
         Dictionary<IDisplayIndividual, IDisplayFamily> families;

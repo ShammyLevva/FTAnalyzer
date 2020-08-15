@@ -9,7 +9,7 @@ namespace FTAnalyzer.Controls
         string country = Countries.SCOTLAND;
         private CensusDate defaultDate = CensusDate.UKCENSUS1881;
         private CensusDate previousDate;
-        bool _loading = false;
+        bool _loading;
 
         public CensusDateSelector()
         {
