@@ -1,4 +1,4 @@
-#### Updated Release Version 8.0.0 1st August 2020  
+#### Updated Release Version 8.0.0 22nd August 2020  
 **Updates**  
 Implemented Custom Fact display and ignoring of custom fact warnings  
 BCE & CE dates (and their religious equivalents BC & AD) now understood  
