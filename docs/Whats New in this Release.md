@@ -6,6 +6,13 @@ BCE & BC dates treated as unknown as I have no means of handling negative years
 Update code analysis to v3.0.0  
 Load Title & Suffix and nicknames from Name parts  
 Show any futuristic facts - dates after today eg: born in the future  
+Added Facts count to individuals report & export  
+Added unique Sources count to individuals report & export  
+Added Sources count to facts report & export  
+
+**Bugfixes**  
+Fixed display error with CAL dates showing as ABTL dates instead of ABT date  
+Blessing fact type was looking for BLESS instead of BLES and so missing blessing facts  
 
 #### Updated Release Version 7.8.5 21st July 2020  
 **Updates**  

@@ -566,14 +566,8 @@ namespace Testing
         [TestMethod()]
         public void FactDateIsAliveTest()
         {
-            XmlDocument doc = new XmlDocument();
-            try
-            {
-                doc.XmlResolver = null;
-                doc.LoadXml(@"<INDI><NAME>Alexander McGregor /Bisset/<SOUR REF='S836' /><SOUR REF='S1465'><PAGE>Facebook update -  - 12/05/2013</PAGE><_LINK>http://www.facebook.com/100000969227468</_LINK></SOUR></NAME><SEX>M</SEX><BIRT><DATE>19 NOV 1966</DATE><PLAC>Aberdeen Royal Infirmary, Aberdeen, Scotland</PLAC><SOUR REF='S836' /><SOUR REF='S1465'><PAGE>Facebook update -  - 12/05/2013</PAGE><_LINK>http://www.facebook.com/100000969227468</_LINK></SOUR></BIRT><EDUC>Degree in Mathematics and Computer Studies from Robert Gordon's Instit<CONC>ute of Technology, Aberdeen, Scotland</CONC><DATE>BET SEP 1983 AND JUN 1986</DATE><SOUR REF='S836' /></EDUC><_ELEC>Chairman Ferryhill Community Council<DATE>OCT 2000</DATE><SOUR REF='S836' /></_ELEC><ADDR>319 Hardgate / Aberdeen, Scotland AB10 6AR / Scotland<RESN>privacy</RESN></ADDR><EMAIL>ambisset@btinternet.com<RESN>privacy</RESN></EMAIL><PHON>01224 573064<RESN>privacy</RESN></PHON><_HEIG>1.75 m<RESN>privacy</RESN></_HEIG><_WEIG>81.0 kg<RESN>privacy</RESN></_WEIG><OCCU>IT Manager at Aberdeen Harbour Board<DATE>26 JAN 1990</DATE><PLAC>Aberdeen, Scotland</PLAC><SOUR REF='S836' /><RESN>privacy</RESN></OCCU><RESI><DATE>31 AUG 1993</DATE><PLAC>319 Hardgate, Aberdeen, Scotland</PLAC><SOUR REF='S836' /><RESN>privacy</RESN></RESI><_ELEC>Vice Chairman Aberdeen Civic Forum<DATE>AUG 2002</DATE><SOUR REF='S836' /></_ELEC><_ELEC>Chairman Aberdeen Community Council Forum<DATE>FEB 2004</DATE><SOUR REF='S836' /></_ELEC><_PHOTO REF='M28' /><OBJE REF='M28' /><FAMC REF='F1439' /></INDI>");
-            }
-            catch (XmlException)
-            { }
+            XmlDocument doc = new XmlDocument() { XmlResolver = null };
+            doc.LoadXml(@"<INDI><NAME>Alexander McGregor /Bisset/</NAME><SEX>M</SEX><BIRT><DATE>19 NOV 1966</DATE><PLAC>Aberdeen, Scotland</PLAC></BIRT></INDI>");
             XmlAttribute attr = doc.CreateAttribute("ID");
             attr.Value = "2";
             doc.DocumentElement.SetAttributeNode(attr);

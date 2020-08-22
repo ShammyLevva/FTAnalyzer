@@ -70,6 +70,7 @@ namespace FTAnalyzer.Forms
             this.CensusReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AgeAtFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Preferred = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.SourcesCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SourceList = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFacts)).BeginInit();
@@ -197,6 +198,7 @@ namespace FTAnalyzer.Forms
             this.CensusReference,
             this.AgeAtFact,
             this.Preferred,
+            this.SourcesCount,
             this.SourceList});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -400,6 +402,13 @@ namespace FTAnalyzer.Forms
             this.Preferred.ReadOnly = true;
             this.Preferred.Width = 55;
             // 
+            // SourcesCount
+            // 
+            this.SourcesCount.DataPropertyName = "SourcesCount";
+            this.SourcesCount.HeaderText = "Num Sources";
+            this.SourcesCount.Name = "SourcesCount";
+            this.SourcesCount.ReadOnly = true;
+            // 
             // SourceList
             // 
             this.SourceList.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -466,6 +475,7 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn CensusReference;
         private System.Windows.Forms.DataGridViewTextBoxColumn AgeAtFact;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Preferred;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SourcesCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceList;
     }
 }
