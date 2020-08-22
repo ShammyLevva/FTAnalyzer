@@ -183,6 +183,20 @@ namespace FTAnalyzer.Forms
             UpdateStatusCount();
         }
 
+        public void SetupAliveAtDate(FactDate aliveAtDate, Predicate<Individual> filter)
+        {
+            Text = $"Individuals alive {aliveAtDate}";
+            var result = new SortableBindingList<IDisplayIndividual>();
+            IEnumerable<Individual> list = ft.AllIndividuals.Filter(filter);
+            foreach(Individual i in list)
+                result.Add(i);
+            dgIndividuals.DataSource = result;
+            SortIndividuals();
+            splitContainer.Panel1Collapsed = false;
+            splitContainer.Panel2Collapsed = true;
+            UpdateStatusCount();
+        }
+
         public void SingleParents()
         {
             Text = "Families with only one or no parent";
@@ -202,8 +216,11 @@ namespace FTAnalyzer.Forms
 
         void SortIndividuals()
         {
-            dgIndividuals.Sort(dgIndividuals.Columns[1], ListSortDirection.Ascending);
-            dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
+            if (dgIndividuals.Columns.Count > 0)
+            {
+                dgIndividuals.Sort(dgIndividuals.Columns[1], ListSortDirection.Ascending);
+                dgIndividuals.Sort(dgIndividuals.Columns[2], ListSortDirection.Ascending);
+            }
         }
 
         void SortFamilies() => dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);

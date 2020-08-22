@@ -2,6 +2,7 @@
 using FTAnalyzer.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Xml;
 using static FTAnalyzer.FactDate;
 
 namespace Testing
@@ -560,6 +561,36 @@ namespace Testing
             Assert.IsTrue(census.Overlaps(CensusDate.UKCENSUS1911));
             census = new FactDate("FROM 1 JAN 1911 TO 2 APR 1911");
             Assert.IsTrue(census.Overlaps(CensusDate.UKCENSUS1911));
+        }
+
+        [TestMethod()]
+        public void FactDateIsAliveTest()
+        {
+            XmlDocument doc = new XmlDocument();
+            try
+            {
+                doc.XmlResolver = null;
+                doc.LoadXml(@"<INDI><NAME>Alexander McGregor /Bisset/<SOUR REF='S836' /><SOUR REF='S1465'><PAGE>Facebook update -  - 12/05/2013</PAGE><_LINK>http://www.facebook.com/100000969227468</_LINK></SOUR></NAME><SEX>M</SEX><BIRT><DATE>19 NOV 1966</DATE><PLAC>Aberdeen Royal Infirmary, Aberdeen, Scotland</PLAC><SOUR REF='S836' /><SOUR REF='S1465'><PAGE>Facebook update -  - 12/05/2013</PAGE><_LINK>http://www.facebook.com/100000969227468</_LINK></SOUR></BIRT><EDUC>Degree in Mathematics and Computer Studies from Robert Gordon's Instit<CONC>ute of Technology, Aberdeen, Scotland</CONC><DATE>BET SEP 1983 AND JUN 1986</DATE><SOUR REF='S836' /></EDUC><_ELEC>Chairman Ferryhill Community Council<DATE>OCT 2000</DATE><SOUR REF='S836' /></_ELEC><ADDR>319 Hardgate / Aberdeen, Scotland AB10 6AR / Scotland<RESN>privacy</RESN></ADDR><EMAIL>ambisset@btinternet.com<RESN>privacy</RESN></EMAIL><PHON>01224 573064<RESN>privacy</RESN></PHON><_HEIG>1.75 m<RESN>privacy</RESN></_HEIG><_WEIG>81.0 kg<RESN>privacy</RESN></_WEIG><OCCU>IT Manager at Aberdeen Harbour Board<DATE>26 JAN 1990</DATE><PLAC>Aberdeen, Scotland</PLAC><SOUR REF='S836' /><RESN>privacy</RESN></OCCU><RESI><DATE>31 AUG 1993</DATE><PLAC>319 Hardgate, Aberdeen, Scotland</PLAC><SOUR REF='S836' /><RESN>privacy</RESN></RESI><_ELEC>Vice Chairman Aberdeen Civic Forum<DATE>AUG 2002</DATE><SOUR REF='S836' /></_ELEC><_ELEC>Chairman Aberdeen Community Council Forum<DATE>FEB 2004</DATE><SOUR REF='S836' /></_ELEC><_PHOTO REF='M28' /><OBJE REF='M28' /><FAMC REF='F1439' /></INDI>");
+            }
+            catch (XmlException)
+            { }
+            XmlAttribute attr = doc.CreateAttribute("ID");
+            attr.Value = "2";
+            doc.DocumentElement.SetAttributeNode(attr);
+            XmlNode node = doc.FirstChild;
+            Individual ind = new Individual(node, new Progress<string>());
+
+            Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("20 AUG 2020")));
+            Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("BEF 20 AUG 2020")));
+            Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("AFT 20 AUG 1990")));
+            Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("AFT 20 AUG 2090")));
+            Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("BET 20 AUG 1990 AND 1 APR 2000")));
+            Assert.IsTrue(ind.IsPossiblyAlive(FactDate.UNKNOWN_DATE));
+
+            Assert.IsFalse(ind.IsPossiblyAlive(new FactDate("20 AUG 1965")));
+            Assert.IsFalse(ind.IsPossiblyAlive(new FactDate("BEF 20 AUG 1920")));
+            Assert.IsFalse(ind.IsPossiblyAlive(new FactDate("BET 20 AUG 1890 AND 1 APR 1900")));
+
         }
     }
 }

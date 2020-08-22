@@ -1495,16 +1495,31 @@ namespace FTAnalyzer
             return filter;
         }
 
-        Predicate<CensusIndividual> CreateCensusIndividualFilter(bool censusDone, string surname)
+        Predicate<Individual> CreateAliveatDateFilter(FactDate censusDate, string surname)
+        {
+            var relationFilter = relTypesCensus.BuildFilter<Individual>(x => x.RelationType);
+            var dateFilter = new Predicate<Individual>(x => x.IsPossiblyAlive(censusDate));
+            Predicate<Individual> filter = FilterUtils.AndFilter(relationFilter, dateFilter);
+            if (surname.Length > 0)
+            {
+                Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, surname);
+                filter = FilterUtils.AndFilter(filter, surnameFilter);
+            }
+            if (chkExcludeUnknownBirths.Checked)
+                filter = FilterUtils.AndFilter(x => x.BirthDate.IsKnown, filter);
+            return filter;
+        }
+
+        Predicate<CensusIndividual> CreateCensusIndividualFilter(CensusDate censusDate, bool censusDone, string surname)
         {
             var relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => x.RelationType);
             var dateFilter = censusDone ?
-                new Predicate<CensusIndividual>(x => x.IsCensusDone(cenDate.SelectedDate) && !x.OutOfCountry(cenDate.SelectedDate)) :
-                new Predicate<CensusIndividual>(x => !x.IsCensusDone(cenDate.SelectedDate) && !x.OutOfCountry(cenDate.SelectedDate));
+                new Predicate<CensusIndividual>(x => x.IsCensusDone(censusDate) && !x.OutOfCountry(censusDate)) :
+                new Predicate<CensusIndividual>(x => !x.IsCensusDone(censusDate) && !x.OutOfCountry(censusDate));
             Predicate<CensusIndividual> filter = FilterUtils.AndFilter(relationFilter, dateFilter);
             if (!censusDone && GeneralSettings.Default.HidePeopleWithMissingTag)
             {  //if we are reporting missing from census and we are hiding people who have a missing tag then only select those who are not tagged missing
-                Predicate<CensusIndividual> missingTag = new Predicate<CensusIndividual>(x => !x.IsTaggedMissingCensus(cenDate.SelectedDate));
+                Predicate<CensusIndividual> missingTag = new Predicate<CensusIndividual>(x => !x.IsTaggedMissingCensus(censusDate));
                 filter = FilterUtils.AndFilter(filter, missingTag);
             }
             if (surname.Length > 0)
@@ -2613,36 +2628,37 @@ namespace FTAnalyzer
         void BtnShowCensus_Click(object sender, EventArgs e)
         {
             bool censusDone = sender == btnShowCensusEntered;
-            ShowCensus(censusDone, txtCensusSurname.Text, false);
+            ShowCensus(cenDate.SelectedDate, censusDone, txtCensusSurname.Text, false);
             Analytics.TrackAction(Analytics.CensusTabAction, censusDone ? Analytics.ShowCensusEvent : Analytics.MissingCensusEvent);
         }
 
-        void ShowCensus(bool censusDone, string surname, bool random)
+        void ShowCensus(CensusDate censusDate, bool censusDone, string surname, bool random)
         {
-            Census census = new Census(cenDate.SelectedDate, censusDone);
+            Predicate<CensusIndividual> filter;
+            Census census = new Census(censusDate, censusDone);
             if (random)
                 census.Text = $"People with surname {surname}";
             else
                 census.Text = "People";
             if (censusDone)
-                census.Text += $" entered with a {cenDate.SelectedDate} record";
+                census.Text += $" entered with a {censusDate} record";
             else
-                census.Text += $" missing a {cenDate.SelectedDate} record that you can search for";
-            Predicate<CensusIndividual> filter;
+                census.Text += $" missing a {censusDate} record that you can search for";
+
             if (random)
             {
                 int tries = 0;
                 while (random && census.RecordCount == 0 && tries < 5)
                 {
                     surname = GetRandomSurname();
-                    filter = CreateCensusIndividualFilter(censusDone, surname);
+                    filter = CreateCensusIndividualFilter(censusDate, censusDone, surname);
                     census.SetupCensus(filter);
                     tries++;
                 }
             }
             else
             {
-                filter = CreateCensusIndividualFilter(censusDone, surname);
+                filter = CreateCensusIndividualFilter(censusDate, censusDone, surname);
                 census.SetupCensus(filter);
             }
             DisposeDuplicateForms(census);
@@ -2653,7 +2669,7 @@ namespace FTAnalyzer
         {
             string surname = GetRandomSurname();
             bool censusDone = sender == btnRandomSurnameEntered;
-            ShowCensus(censusDone, surname, true);
+            ShowCensus(cenDate.SelectedDate, censusDone, surname, true);
         }
 
         string GetRandomSurname()
@@ -3540,6 +3556,49 @@ namespace FTAnalyzer
                 UIHelpers.ShowMessage(ex.Message, "FTAnalyzer");
             }
             HourGlass(false);
+        }
+
+        FactDate AliveDate { get; set; }
+        void TxtAliveDates_Validating(object sender, CancelEventArgs e)
+        {
+            FactDate aliveDate = FactDate.UNKNOWN_DATE;
+            HourGlass(true);
+            try
+            {
+                 aliveDate = new FactDate(txtAliveDates.Text);
+            } catch(FactDateException)
+            {
+                aliveDate = FactDate.UNKNOWN_DATE;
+            }
+            HourGlass(false);
+            if(aliveDate == FactDate.UNKNOWN_DATE)
+            {
+                e.Cancel = true;
+                MessageBox.Show($"{txtAliveDates.Text} is not a valid GEDCOM date.", "FTAnalyzer");
+                return;
+            }
+            AliveDate = aliveDate;
+        }
+
+        void TxtAliveDates_Enter(object sender, EventArgs e)
+        {
+            if(txtAliveDates.Text.StartsWith("Enter"))
+                txtAliveDates.Text = string.Empty;
+        }
+
+        void BtnAliveOnDate_Click(object sender, EventArgs e)
+        {
+            if(AliveDate != FactDate.UNKNOWN_DATE)
+            {
+                HourGlass(true);
+                People people = new People();
+                Predicate<Individual> filter = CreateAliveatDateFilter(AliveDate, txtCensusSurname.Text);
+                people.SetupAliveAtDate(AliveDate, filter);
+                DisposeDuplicateForms(people);
+                people.Show();
+                Analytics.TrackAction(Analytics.CensusTabAction, Analytics.AliveAtDate);
+                HourGlass(false);
+            }
         }
     }
 }

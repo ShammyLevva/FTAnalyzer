@@ -89,6 +89,7 @@
     <Compile Include="FactDateTest.cs" />
     <Compile Include="CensusReferenceTest.cs" />
     <Compile Include="FactLocationTest.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
