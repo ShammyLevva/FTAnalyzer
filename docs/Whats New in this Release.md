@@ -1,3 +1,11 @@
+#### Updated Release Version 8.0.1 4th September 2020  
+**Updates**  
+GEDCOM processing errors now show last name seen in GEDCOM file to aid diagnosis  
+
+**Bugfixes**
+Census references as a entry on the CENS line weren't getting recognised  
+1939 National Register census reference recognition fix  
+
 #### Updated Release Version 8.0.0 22nd August 2020  
 **Updates**  
 Implemented Custom Fact display and ignoring of custom fact warnings  
