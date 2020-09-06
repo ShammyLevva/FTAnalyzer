@@ -58,7 +58,7 @@
         "Entry"
         {
         "MsmKey" = "8:_0F8E36613E3B54A79C08B5845C3097B9"
-        "OwnerKey" = "8:_25C28675C5BA41E382571E7E49149B3F"
+        "OwnerKey" = "8:_C489D25864FA8A6D09D06577665B33C1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -70,7 +70,7 @@
         "Entry"
         {
         "MsmKey" = "8:_0F8E36613E3B54A79C08B5845C3097B9"
-        "OwnerKey" = "8:_C489D25864FA8A6D09D06577665B33C1"
+        "OwnerKey" = "8:_25C28675C5BA41E382571E7E49149B3F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -172,13 +172,13 @@
         "Entry"
         {
         "MsmKey" = "8:_21BA087428B339B57E493D6B95DBA1CA"
-        "OwnerKey" = "8:_56BB4A68BA24C947486A13D2CE3F4511"
+        "OwnerKey" = "8:_25C28675C5BA41E382571E7E49149B3F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_21BA087428B339B57E493D6B95DBA1CA"
-        "OwnerKey" = "8:_25C28675C5BA41E382571E7E49149B3F"
+        "OwnerKey" = "8:_56BB4A68BA24C947486A13D2CE3F4511"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -340,6 +340,12 @@
         "Entry"
         {
         "MsmKey" = "8:_4961E2C096921A9884F6A04233D4A9A2"
+        "OwnerKey" = "8:_25C28675C5BA41E382571E7E49149B3F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4BF062AC9B1E5F93FC67B24F3F65D0B9"
         "OwnerKey" = "8:_25C28675C5BA41E382571E7E49149B3F"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -939,12 +945,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_C58F8F96995CBA727B1523E4D1AF897B"
-        "OwnerKey" = "8:_25C28675C5BA41E382571E7E49149B3F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_C91C88A91146E193F753189DF9372B2C"
         "OwnerKey" = "8:_25C28675C5BA41E382571E7E49149B3F"
         "MsmSig" = "8:_UNDEFINED"
@@ -1222,6 +1222,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_4BF062AC9B1E5F93FC67B24F3F65D0B9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_80D098F3B1761DDA52CF9F2216FE92D8"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1289,12 +1295,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_162CBB5E4EB0E4583231E895B31DEAF4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C58F8F96995CBA727B1523E4D1AF897B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -3312,6 +3312,37 @@
                     }
                 }
             "SourcePath" = "8:System.Xml.XDocument.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4BF062AC9B1E5F93FC67B24F3F65D0B9"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:log4net, Version=2.0.9.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_4BF062AC9B1E5F93FC67B24F3F65D0B9"
+                    {
+                    "Name" = "8:log4net.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:log4net.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
@@ -5623,37 +5654,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C58F8F96995CBA727B1523E4D1AF897B"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_C58F8F96995CBA727B1523E4D1AF897B"
-                    {
-                    "Name" = "8:log4net.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:log4net.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C91C88A91146E193F753189DF9372B2C"
             {
             "AssemblyRegister" = "3:1"
@@ -6590,14 +6590,14 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FTAnalyzer"
         "ProductCode" = "8:{0CB83177-B432-4009-A5F0-56CD2D4D389F}"
-        "PackageCode" = "8:{A51ED054-3B7F-4256-A2BD-7EB8AF990CA8}"
+        "PackageCode" = "8:{B9C87266-19C4-4B4F-B0C0-0238C22E8BB9}"
         "UpgradeCode" = "8:{1207BD34-CD5A-4BEA-838E-74C0B720E1DA}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:8.0.0"
+        "ProductVersion" = "8:8.0.1"
         "Manufacturer" = "8:FTAnalyzer"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://www.facebook.com/groups/ftanalyzer"

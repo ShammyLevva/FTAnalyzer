@@ -1,4 +1,4 @@
-#### Updated Release Version 8.0.1 5th September 2020  
+#### Updated Release Version 8.0.1 6th September 2020  
 **Updates**  
 GEDCOM processing errors now show last name seen in GEDCOM file to aid diagnosis  
 
