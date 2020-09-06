@@ -3561,6 +3561,12 @@ namespace FTAnalyzer
         FactDate AliveDate { get; set; }
         void TxtAliveDates_Validating(object sender, CancelEventArgs e)
         {
+            if (string.IsNullOrEmpty(txtAliveDates.Text))
+            {
+                txtAliveDates.Text = "Enter valid GEDCOM date/date range";
+                AliveDate = FactDate.UNKNOWN_DATE;
+                return;
+            }
             FactDate aliveDate = FactDate.UNKNOWN_DATE;
             HourGlass(true);
             try

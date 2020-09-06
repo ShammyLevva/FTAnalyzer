@@ -6,6 +6,8 @@ GEDCOM processing errors now show last name seen in GEDCOM file to aid diagnosis
 Census references as a entry on the CENS line weren't getting recognised  
 1939 National Register census reference recognition fix  
 1881 Scotland Lost Cousins entries wrongly treated as both Scotland, and England and Wales  
+Alive date on census wasn't allowing you to enter nothing and leave field  
+Census reports now don't show female married names if not old enough to be married  
 
 #### Updated Release Version 8.0.0 22nd August 2020  
 **Updates**  
