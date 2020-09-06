@@ -298,7 +298,7 @@ namespace FTAnalyzer.Utilities
                 {
                     try
                     {
-                        using (SQLiteCommand cmd = new SQLiteCommand("create table LostCousins (CensusYear INTEGER(4), CensusCountry STRING (20), CensusRef STRING(25), IndID STRING(10), FullName String(80), constraint pkLostCousins primary key (CensusYear, CensusCountry, CensusRef, IndID))", InstanceConnection))
+                        using (SQLiteCommand cmd = new SQLiteCommand("create table if not exists LostCousins (CensusYear INTEGER(4), CensusCountry STRING (20), CensusRef STRING(25), IndID STRING(10), FullName String(80), constraint pkLostCousins primary key (CensusYear, CensusCountry, CensusRef, IndID))", InstanceConnection))
                         {
                             cmd.ExecuteNonQuery();
                         }
@@ -335,7 +335,7 @@ namespace FTAnalyzer.Utilities
                     }
                     catch (SQLiteException)
                     {
-                        using (SQLiteCommand cmd = new SQLiteCommand("create table LostCousins (CensusYear INTEGER(4), CensusCountry STRING (20), CensusRef STRING(25), IndID STRING(10), FullName String(80), constraint pkLostCousins primary key (CensusYear, CensusCountry, CensusRef, IndID))", InstanceConnection))
+                        using (SQLiteCommand cmd = new SQLiteCommand("create table IF NOT EXISTS LostCousins (CensusYear INTEGER(4), CensusCountry STRING (20), CensusRef STRING(25), IndID STRING(10), FullName String(80), constraint pkLostCousins primary key (CensusYear, CensusCountry, CensusRef, IndID))", InstanceConnection))
                         {
                             cmd.ExecuteNonQuery();
                         }
@@ -352,7 +352,7 @@ namespace FTAnalyzer.Utilities
                     {
                             cmd.ExecuteNonQuery();
                     }
-                    using (SQLiteCommand cmd = new SQLiteCommand("CREATE TABLE Versions(Platform VARCHAR(10) PRIMARY KEY, [Database] VARCHAR(10));", InstanceConnection))
+                    using (SQLiteCommand cmd = new SQLiteCommand("CREATE TABLE IF NOT EXISTS Versions(Platform VARCHAR(10) PRIMARY KEY, [Database] VARCHAR(10));", InstanceConnection))
                     {
                         cmd.ExecuteNonQuery();
                     }
@@ -367,7 +367,7 @@ namespace FTAnalyzer.Utilities
                 }
                 if(dbVersion < v8_0_0_0)
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("CREATE TABLE CustomFacts (FactType STRING(60) PRIMARY KEY, [Ignore] BOOLEAN)", InstanceConnection))
+                    using (SQLiteCommand cmd = new SQLiteCommand("CREATE TABLE IF NOT EXISTS CustomFacts (FactType STRING(60) PRIMARY KEY, [Ignore] BOOLEAN)", InstanceConnection))
                     {
                         cmd.ExecuteNonQuery();
                     }
