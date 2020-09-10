@@ -1994,7 +1994,7 @@ namespace FTAnalyzer
                 MessageBox.Show("You need to stop Geocoding before you can export the database", "FTAnalyzer");
             else
             {
-                DatabaseHelper.Instance.BackupDatabase(saveDatabase, "FTAnalyzer zip file created by v" + VERSION);
+                DatabaseHelper.Instance.BackupDatabase(saveDatabase, $"FTAnalyzer zip file created by v{VERSION}");
                 Analytics.TrackAction(Analytics.MainFormAction, Analytics.DBBackupEvent);
             }
         }

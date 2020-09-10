@@ -140,29 +140,36 @@ namespace FTAnalyzer.Utilities
 
         public bool BackupDatabase(SaveFileDialog saveDatabase, string comment)
         {
-            string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString();
-            saveDatabase.FileName = "FTAnalyzer-Geocodes-" + DateTime.Now.ToString("yyyy-MM-dd") + "-v" + MainForm.VERSION + ".zip";
-            saveDatabase.InitialDirectory = directory;
-            DialogResult result = saveDatabase.ShowDialog();
-            if (result == DialogResult.OK)
+            try
             {
-                StartBackupRestoreDatabase();
-                if (File.Exists(saveDatabase.FileName))
-                    File.Delete(saveDatabase.FileName);
-                ZipFile zip = new ZipFile(saveDatabase.FileName);
-                zip.AddFile(DatabaseFile, string.Empty);
-                zip.Comment = comment + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm");
-                zip.Save();
-                //EndBackupDatabase();
-                Application.UserAppDataRegistry.SetValue("Geocode Backup Directory", Path.GetDirectoryName(saveDatabase.FileName));
-                UIHelpers.ShowMessage($"Database exported to {saveDatabase.FileName}", "FTAnalyzer Database Export Complete");
-                zip.Dispose();
-                return true;
+                string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString();
+                saveDatabase.FileName = "FTAnalyzer-Geocodes-" + DateTime.Now.ToString("yyyy-MM-dd") + "-v" + MainForm.VERSION + ".zip";
+                saveDatabase.InitialDirectory = directory;
+                DialogResult result = saveDatabase.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    StartBackupRestoreDatabase();
+                    if (File.Exists(saveDatabase.FileName))
+                        File.Delete(saveDatabase.FileName);
+                    ZipFile zip = new ZipFile(saveDatabase.FileName);
+                    zip.AddFile(DatabaseFile, string.Empty);
+                    zip.Comment = comment + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm");
+                    zip.Save();
+                    //EndBackupDatabase();
+                    Application.UserAppDataRegistry.SetValue("Geocode Backup Directory", Path.GetDirectoryName(saveDatabase.FileName));
+                    UIHelpers.ShowMessage($"Database exported to {saveDatabase.FileName}", "FTAnalyzer Database Export Complete");
+                    zip.Dispose();
+                    return true;
+                }
+            }
+            catch(Exception ex)
+            {
+                UIHelpers.ShowMessage($"Problem exporting database. Error was {ex.Message}");
             }
             return false;
-        }
+            }
 
-        void UpgradeDatabase(Version dbVersion)
+            void UpgradeDatabase(Version dbVersion)
         {
             try
             {
