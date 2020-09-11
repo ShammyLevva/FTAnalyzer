@@ -24,6 +24,7 @@ using System.Windows.Forms;
 using System.Xml;
 using HtmlAgilityPack;
 using System.Net;
+using System.Diagnostics;
 
 namespace FTAnalyzer
 {
@@ -198,7 +199,6 @@ namespace FTAnalyzer
                 CloseGEDCOM(false);
                 if (!stopProcessing)
                 {
-                    // document.Save("GedcomOutput.xml");
                     if (await LoadTreeAsync(filename).ConfigureAwait(true))
                     {
                         SetDataErrorsCheckedDefaults(ckbDataErrors);
@@ -236,12 +236,17 @@ namespace FTAnalyzer
         {
             var outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
             XmlDocument doc;
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
             using (FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
             {
                 doc = await Task.Run(() => ft.LoadTreeHeader(filename, stream, outputText)).ConfigureAwait(true);
             }
             if (doc == null)
+            {
+                timer.Stop();
                 return false;
+            }
             var sourceProgress = new Progress<int>(value => { pbSources.Value = value; });
             var individualProgress = new Progress<int>(value => { pbIndividuals.Value = value; });
             var familyProgress = new Progress<int>(value => { pbFamilies.Value = value; });
@@ -250,7 +255,17 @@ namespace FTAnalyzer
             await Task.Run(() => ft.LoadTreeIndividuals(doc, individualProgress, outputText)).ConfigureAwait(true);
             await Task.Run(() => ft.LoadTreeFamilies(doc, familyProgress, outputText)).ConfigureAwait(true);
             await Task.Run(() => ft.LoadTreeRelationships(doc, RelationshipProgress, outputText)).ConfigureAwait(true);
+            timer.Stop();
+            WriteTime(outputText, timer);
             return true;
+        }
+
+        void WriteTime(IProgress<string> outputText, Stopwatch timer)
+        {
+            TimeSpan ts = timer.Elapsed;
+            // Format and display the TimeSpan value.
+            string elapsedTime = String.Format("{0:00}h {1:00}m {2:00}.{3:00}s", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+            outputText.Report($"\nFile loaded and Analysed in {elapsedTime}\n");
         }
 
         void EnableLoadMenus()
