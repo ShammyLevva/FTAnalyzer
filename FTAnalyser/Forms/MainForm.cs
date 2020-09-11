@@ -3018,8 +3018,8 @@ namespace FTAnalyzer
         {
             Individual ind = null;
             ContextMenuStrip cms = null;
-            if (sender is ContextMenuStrip)
-                cms = (ContextMenuStrip)sender;
+            if (sender is ContextMenuStrip strip)
+                cms = strip;
             if (sender is ToolStripMenuItem tsmi)
                 cms = (ContextMenuStrip)tsmi.Owner;
             if (cms != null && cms.Tag != null)

@@ -1,6 +1,8 @@
-#### Updated Release Version 8.0.2 6th September 2020  
+#### Updated Release Version 8.0.2 not yet released    
 **Bugfixes**  
 Catch Database save to invalid location error  
+Updated Lost Cousins tooltip to indicate not year or country  
+If still living then max age at death should be age today  
 
 #### Updated Release Version 8.0.1 6th September 2020  
 **Updates**  

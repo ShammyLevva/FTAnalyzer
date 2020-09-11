@@ -174,7 +174,7 @@ namespace FTAnalyzer.Forms
                             cell.ToolTipText = "Census entered but no Lost Cousins flag set.";
                             break;
                         case 3:
-                            cell.ToolTipText = "Census entered and not a Lost Cousins year.";
+                            cell.ToolTipText = "Census entered and not a Lost Cousins year/country.";
                             break;
                         case 4:
                             cell.ToolTipText = "Census entered and flagged as entered on Lost Cousins.";
