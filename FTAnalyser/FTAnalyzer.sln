@@ -39,6 +39,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "FTAnalyzer.Shared", "..\..\
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "..\Installer\Installer.vdproj", "{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegexPerformance", "..\RegexPerformance\RegexPerformance.csproj", "{BD521EC2-33D8-41C5-8913-4A23C197789C}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\..\FTAnalyzer.Shared\FTAnalyzer.Shared\FTAnalyzer.Shared.projitems*{799eca65-6748-4b7c-bbd5-429c19e02161}*SharedItemsImports = 4
@@ -332,6 +334,48 @@ Global
 		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.SingleImage|Any CPU.ActiveCfg = Release
 		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.SingleImage|x64.ActiveCfg = Release
 		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.SingleImage|x86.ActiveCfg = Release
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.CD_ROM|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.CD_ROM|Any CPU.Build.0 = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.CD_ROM|x64.ActiveCfg = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.CD_ROM|x64.Build.0 = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.CD_ROM|x86.ActiveCfg = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.CD_ROM|x86.Build.0 = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.Debug|x64.Build.0 = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.Debug|x86.Build.0 = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.DebugDSProjection|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.DebugDSProjection|Any CPU.Build.0 = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.DebugDSProjection|x64.ActiveCfg = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.DebugDSProjection|x64.Build.0 = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.DebugDSProjection|x86.ActiveCfg = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.DebugDSProjection|x86.Build.0 = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.DVD-5|x64.ActiveCfg = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.DVD-5|x64.Build.0 = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.DVD-5|x86.ActiveCfg = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.DVD-5|x86.Build.0 = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.Release|x64.ActiveCfg = Release|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.Release|x64.Build.0 = Release|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.Release|x86.ActiveCfg = Release|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.Release|x86.Build.0 = Release|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.ReleaseDSProjection|Any CPU.ActiveCfg = Release|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.ReleaseDSProjection|Any CPU.Build.0 = Release|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.ReleaseDSProjection|x64.ActiveCfg = Release|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.ReleaseDSProjection|x64.Build.0 = Release|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.ReleaseDSProjection|x86.ActiveCfg = Release|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.ReleaseDSProjection|x86.Build.0 = Release|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.SingleImage|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.SingleImage|Any CPU.Build.0 = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.SingleImage|x64.ActiveCfg = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.SingleImage|x64.Build.0 = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.SingleImage|x86.ActiveCfg = Debug|Any CPU
+		{BD521EC2-33D8-41C5-8913-4A23C197789C}.SingleImage|x86.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

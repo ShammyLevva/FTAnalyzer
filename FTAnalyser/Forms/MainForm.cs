@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "8.0.1.0";
+        public static string VERSION = "8.0.2.0";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -247,6 +247,9 @@ namespace FTAnalyzer
                 timer.Stop();
                 return false;
             }
+            timer.Stop();
+            WriteTime("File Loaded", outputText, timer);
+            timer.Start();
             var sourceProgress = new Progress<int>(value => { pbSources.Value = value; });
             var individualProgress = new Progress<int>(value => { pbIndividuals.Value = value; });
             var familyProgress = new Progress<int>(value => { pbFamilies.Value = value; });
@@ -256,16 +259,16 @@ namespace FTAnalyzer
             await Task.Run(() => ft.LoadTreeFamilies(doc, familyProgress, outputText)).ConfigureAwait(true);
             await Task.Run(() => ft.LoadTreeRelationships(doc, RelationshipProgress, outputText)).ConfigureAwait(true);
             timer.Stop();
-            WriteTime(outputText, timer);
+            WriteTime("\nFile Loaded and Analysed", outputText, timer);
             return true;
         }
 
-        void WriteTime(IProgress<string> outputText, Stopwatch timer)
+        void WriteTime(String prefixText, IProgress<string> outputText, Stopwatch timer)
         {
             TimeSpan ts = timer.Elapsed;
             // Format and display the TimeSpan value.
             string elapsedTime = String.Format("{0:00}h {1:00}m {2:00}.{3:00}s", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
-            outputText.Report($"\nFile loaded and Analysed in {elapsedTime}\n");
+            outputText.Report($"{prefixText} in {elapsedTime}\n\n");
         }
 
         void EnableLoadMenus()

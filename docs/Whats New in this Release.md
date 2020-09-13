@@ -1,4 +1,8 @@
-#### Updated Release Version 8.0.2 not yet released    
+#### Updated Release Version 8.0.2 not yet released   
+**Updates**  
+Added timer showing time to load file and time to analyse file  
+Check footnotes in Ancestry source records for census references  
+
 **Bugfixes**  
 Catch Database save to invalid location error  
 Updated Lost Cousins tooltip to indicate not year or country  
