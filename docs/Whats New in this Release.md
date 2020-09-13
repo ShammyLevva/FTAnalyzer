@@ -2,11 +2,13 @@
 **Updates**  
 Added timer showing time to load file and time to analyse file  
 Check footnotes in Ancestry source records for census references  
-
+Add extra US Census reference checks from Ancestry  
+  
 **Bugfixes**  
 Catch Database save to invalid location error  
 Updated Lost Cousins tooltip to indicate not year or country  
 If still living then max age at death should be age today  
+Solo individual with no children fixed in colour BMD report  
 
 #### Updated Release Version 8.0.1 6th September 2020  
 **Updates**  

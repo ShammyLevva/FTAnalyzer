@@ -21,11 +21,12 @@ namespace RegexPerformance
         {
             var outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
             CensusReference censusRef;
-            //censusRef = new CensusReference("Age: 30; Marital status: Married; Relation to Head of House: Wife", outputText);
-            //censusRef = new CensusReference("St Louis Ward 17, enumeration district 0261, page 1A, dwelling number 1, family number 2, lines 10 - 14, John Roselauf household", outputText);
-            //censusRef = new CensusReference("1900 U.S. census, population schedule, Missouri, City of St Louis, St Louis Ward 17, enumeration district 0261, page 1A, dwelling number 1, family number 2, lines 10 - 14, John Roselauf household; NARA microfilm publication T623, roll 896; digital image, Ancestry.com (www.ancestry.com : accessed 4 July 2011).", outputText);
-            //censusRef = new CensusReference("Year: 1930; Census Place: Sea Cliff, Nassau, New York; Roll: 1462; Page: 14B; Enumeration District: 193;", outputText);
-            //censusRef = new CensusReference("United States Census, 1880, database with images, FamilySearch(https://familysearch.org/ark:/61903/1:1:M4J9-Z86 : 12 August 2017), John Smith, Spring Hill, Barbour, Alabama, United States; citing enumeration district ED 13, sheet 155B, NARA microfilm publication T9 (Washington D.C.: National Archives and Records Administration, n.d.), roll 0002; FHL microfilm 1,254,002.", outputText);
+            censusRef = new CensusReference("Age: 30; Marital status: Married; Relation to Head of House: Wife", outputText);
+            censusRef = new CensusReference("St Louis Ward 17, enumeration district 0261, page 1A, dwelling number 1, family number 2, lines 10 - 14, John Roselauf household", outputText);
+            censusRef = new CensusReference("1900 U.S. census, population schedule, Missouri, City of St Louis, St Louis Ward 17, enumeration district 0261, page 1A, dwelling number 1, family number 2, lines 10 - 14, John Roselauf household; NARA microfilm publication T623, roll 896; digital image, Ancestry.com (www.ancestry.com : accessed 4 July 2011).", outputText);
+            censusRef = new CensusReference("Year: 1930; Census Place: Sea Cliff, Nassau, New York; Roll: 1462; Page: 14B; Enumeration District: 193;", outputText);
+            censusRef = new CensusReference("United States Census, 1880, database with images, FamilySearch(https://familysearch.org/ark:/61903/1:1:M4J9-Z86 : 12 August 2017), John Smith, Spring Hill, Barbour, Alabama, United States; citing enumeration district ED 13, sheet 155B, NARA microfilm publication T9 (Washington D.C.: National Archives and Records Administration, n.d.), roll 0002; FHL microfilm 1,254,002.", outputText);
+            censusRef = new CensusReference("1930 U.S.census, population schedule, Illinois, Madison, Venice, enumeration district 90, page 8A, dwelling number 229, family number 233, lines 38 - 42, Henry Anters household; NARA microfilm publication T626, roll 542; digital image, Ancestry.com(www.ancestry.com : accessed 12 Jun 2019).", outputText);
             censusRef = new CensusReference(@"Mr Russell Eugene Stoner Age 58
 Full Background Report Available
 

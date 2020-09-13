@@ -2822,7 +2822,7 @@ namespace FTAnalyzer
                     if (f.IsCensusFact && f.CensusReference != null && f.CensusReference.Reference.Length > 0)
                         censusRefs.Add(new DisplayFact(ind, f));
             IEnumerable<string> distinctRefs = censusRefs.Select(x => x.FactDate.StartDate.Year + x.CensusReference.ToString()).Distinct();
-            tspbTabProgress.Maximum = distinctRefs.Count();
+            tspbTabProgress.Maximum = distinctRefs.Count()+1;
             tspbTabProgress.Value = 0;
             tspbTabProgress.Visible = true;
             foreach (string censusref in distinctRefs)

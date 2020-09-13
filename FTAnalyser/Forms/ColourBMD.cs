@@ -187,7 +187,7 @@ namespace FTAnalyzer.Forms
                             cell.ToolTipText = "Of marrying age but no spouse recorded";
                             break;
                         case BMDColours.NO_PARTNER: // light blue
-                            cell.ToolTipText = "No partner but has shared fact or children";
+                            cell.ToolTipText = "No partner but has a shared fact or children";
                             break;
                         case BMDColours.NO_MARRIAGE: // dark blue
                             cell.ToolTipText = "Has partner but no marriage fact";
