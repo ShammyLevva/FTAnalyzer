@@ -29,9 +29,11 @@ namespace FTAnalyzer.Utilities
         {
             DatabasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer");
             CurrentFilename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\FTA-RestoreTemp.s3db");
-            CheckDatabaseConnection();
-            InstanceConnection = new SQLiteConnection(connectionString);
-            restoring = false;
+            if (CheckDatabaseConnection())
+            {
+                InstanceConnection = new SQLiteConnection(connectionString);
+                restoring = false;
+            }
         }
 
         public static DatabaseHelper Instance
@@ -67,7 +69,7 @@ namespace FTAnalyzer.Utilities
             GC.SuppressFinalize(this);
         }
 
-        void CheckDatabaseConnection()
+        bool CheckDatabaseConnection()
         {
             try
             {
@@ -80,10 +82,12 @@ namespace FTAnalyzer.Utilities
                     File.Copy(Path.Combine(Application.StartupPath, @"Resources\Geocodes-Empty.s3db"), DatabaseFile);
                 }
                 connectionString = $"Data Source={DatabaseFile};Version=3;";
+                return true;
             }
             catch (Exception ex)
             {
-                UIHelpers.ShowMessage($"Error opening database. Error is :{ex.Message}", "FTAnalyzer");
+                UIHelpers.ShowMessage($"Error opening database - Filename: {DatabaseFile}. Error is :{ex.Message}", "FTAnalyzer");
+                return false;
             }
         }
         #endregion
@@ -130,7 +134,7 @@ namespace FTAnalyzer.Utilities
             }
             finally
             {
-                InstanceConnection.Close();
+                InstanceConnection?.Close();
             }
             Version dbVersion = db == null ? new Version("0.0.0.0") : new Version(db);
             if (dbVersion == new Version("7.3.0.0"))
