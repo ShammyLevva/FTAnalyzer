@@ -566,13 +566,8 @@ namespace Testing
         [TestMethod()]
         public void FactDateIsAliveTest()
         {
-            XmlDocument doc = new XmlDocument() { XmlResolver = null };
-            doc.LoadXml(@"<INDI><NAME>Alexander McGregor /Bisset/</NAME><SEX>M</SEX><BIRT><DATE>19 NOV 1966</DATE><PLAC>Aberdeen, Scotland</PLAC></BIRT></INDI>");
-            XmlAttribute attr = doc.CreateAttribute("ID");
-            attr.Value = "2";
-            doc.DocumentElement.SetAttributeNode(attr);
-            XmlNode node = doc.FirstChild;
-            Individual ind = new Individual(node, new Progress<string>());
+            // Individual with fixed birth no death
+            Individual ind = SetupIndividual(@"<INDI><NAME>Alexander McGregor /Bisset/</NAME><SEX>M</SEX><BIRT><DATE>19 NOV 1966</DATE><PLAC>Aberdeen, Scotland</PLAC></BIRT></INDI>");
 
             Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("20 AUG 2020")));
             Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("BEF 20 AUG 2020")));
@@ -585,6 +580,30 @@ namespace Testing
             Assert.IsFalse(ind.IsPossiblyAlive(new FactDate("BEF 20 AUG 1920")));
             Assert.IsFalse(ind.IsPossiblyAlive(new FactDate("BET 20 AUG 1890 AND 1 APR 1900")));
 
+            // Individual with no birth and fixed death
+            ind = SetupIndividual(@"<INDI><NAME>Alexander McGregor /Bisset/</NAME><SEX>M</SEX><DEAT><DATE>25 DEC 2000</DATE><PLAC>Aberdeen, Scotland</PLAC></DEAT></INDI>");
+            Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("BEF 20 AUG 2020")));
+            Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("AFT 20 AUG 1990")));
+            Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("BET 20 AUG 1990 AND 1 APR 2000")));
+            Assert.IsTrue(ind.IsPossiblyAlive(FactDate.UNKNOWN_DATE));
+            Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("20 AUG 1965")));
+            Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("BEF 20 AUG 1920")));
+
+            Assert.IsFalse(ind.IsPossiblyAlive(new FactDate("AFT 20 AUG 2090")));
+            Assert.IsFalse(ind.IsPossiblyAlive(new FactDate("20 AUG 2020")));
+            Assert.IsFalse(ind.IsPossiblyAlive(new FactDate("BET 20 AUG 1890 AND 1 APR 1900")));
+        }
+
+        static Individual SetupIndividual(string individual)
+        {
+            XmlDocument doc = new XmlDocument() { XmlResolver = null };
+            doc.LoadXml(individual);
+            XmlAttribute attr = doc.CreateAttribute("ID");
+            attr.Value = "2";
+            doc.DocumentElement.SetAttributeNode(attr);
+            XmlNode node = doc.FirstChild;
+            Individual ind = new Individual(node, new Progress<string>());
+            return ind;
         }
     }
 }

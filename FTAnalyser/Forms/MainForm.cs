@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "8.1.0.0-beta2";
+        public static string VERSION = "8.1.0.0-beta3";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1513,10 +1513,10 @@ namespace FTAnalyzer
             return filter;
         }
 
-        Predicate<Individual> CreateAliveatDateFilter(FactDate censusDate, string surname)
+        Predicate<Individual> CreateAliveatDateFilter(FactDate aliveDate, string surname)
         {
             var relationFilter = relTypesCensus.BuildFilter<Individual>(x => x.RelationType);
-            var dateFilter = new Predicate<Individual>(x => x.IsPossiblyAlive(censusDate));
+            var dateFilter = new Predicate<Individual>(x => x.IsPossiblyAlive(aliveDate));
             Predicate<Individual> filter = FilterUtils.AndFilter(relationFilter, dateFilter);
             if (surname.Length > 0)
             {
