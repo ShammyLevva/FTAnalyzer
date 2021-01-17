@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "8.1.0.0-beta1";
+        public static string VERSION = "8.1.0.0-beta2";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -413,6 +413,7 @@ namespace FTAnalyzer
             MnuExportLocations.Enabled = enabled;
             mnuSourcesToExcel.Enabled = enabled;
             mnuDataErrorsToExcel.Enabled = enabled;
+            mnuSurnamesToExcel.Enabled = enabled;
             mnuLooseBirthsToExcel.Enabled = enabled;
             mnuLooseDeathsToExcel.Enabled = enabled;
             mnuChildAgeProfiles.Enabled = enabled;
@@ -1275,7 +1276,6 @@ namespace FTAnalyzer
                 tsCountLabel.Text = string.Empty;
                 tsHintsLabel.Text = string.Empty;
                 tspbTabProgress.Visible = false;
-                Application.DoEvents();
                 if (ft.Loading)
                 {
                     tabSelector.SelectedTab = tabDisplayProgress;
@@ -2822,7 +2822,7 @@ namespace FTAnalyzer
                     if (f.IsCensusFact && f.CensusReference != null && f.CensusReference.Reference.Length > 0)
                         censusRefs.Add(new DisplayFact(ind, f));
             IEnumerable<string> distinctRefs = censusRefs.Select(x => x.FactDate.StartDate.Year + x.CensusReference.ToString()).Distinct();
-            tspbTabProgress.Maximum = distinctRefs.Count()+1;
+            tspbTabProgress.Maximum = distinctRefs.Count() + 1;
             tspbTabProgress.Value = 0;
             tspbTabProgress.Visible = true;
             foreach (string censusref in distinctRefs)
@@ -3242,6 +3242,30 @@ namespace FTAnalyzer
             }
             HourGlass(false);
         }
+
+        async void MnuSurnamesToExcel_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+            SortableBindingList<SurnameStats> stats;
+            if (dgSurnames.DataSource != null)
+                stats = (SortableBindingList<SurnameStats>)dgSurnames.DataSource;
+            else
+            {
+                tspbTabProgress.Visible = true;
+                Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => x.RelationType);
+                Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
+                var progress = new Progress<int>(value => { tspbTabProgress.Value = value; });
+                stats = await Task.Run(() =>
+                    new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked))).ConfigureAwait(true);
+                tspbTabProgress.Visible = false;
+            }
+            List<SurnameStats> list = new List<SurnameStats>(stats);
+            using (DataTable dt = convertor.ToDataTable(list))
+                ExportToExcel.Export(dt);
+            await Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportSurnamesEvent);
+            HourGlass(false);
+        }
         #endregion
 
         #region Today
@@ -3443,13 +3467,13 @@ namespace FTAnalyzer
             var progress = new Progress<int>(value => { tspbTabProgress.Value = value; });
             var list = await Task.Run(() =>
                 new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked))).ConfigureAwait(true);
+            tspbTabProgress.Visible = false;
             dgSurnames.DataSource = list;
             dgSurnames.Sort(dgSurnames.Columns["Surname"], ListSortDirection.Ascending);
             dgSurnames.AllowUserToResizeColumns = true;
             dgSurnames.Focus();
             tsCountLabel.Text = $"{Messages.Count}{list.Count} Surnames.";
             tsHintsLabel.Text = Messages.Hints_Surname;
-            tspbTabProgress.Visible = false;
             HourGlass(false);
             await Analytics.TrackAction(Analytics.MainFormAction, Analytics.ShowSurnamesEvent).ConfigureAwait(true);
         }
@@ -3589,13 +3613,14 @@ namespace FTAnalyzer
             HourGlass(true);
             try
             {
-                 aliveDate = new FactDate(txtAliveDates.Text);
-            } catch(FactDateException)
+                aliveDate = new FactDate(txtAliveDates.Text);
+            }
+            catch (FactDateException)
             {
                 aliveDate = FactDate.UNKNOWN_DATE;
             }
             HourGlass(false);
-            if(aliveDate == FactDate.UNKNOWN_DATE)
+            if (aliveDate == FactDate.UNKNOWN_DATE)
             {
                 e.Cancel = true;
                 MessageBox.Show($"{txtAliveDates.Text} is not a valid GEDCOM date.", "FTAnalyzer");
@@ -3606,13 +3631,13 @@ namespace FTAnalyzer
 
         void TxtAliveDates_Enter(object sender, EventArgs e)
         {
-            if(txtAliveDates.Text.StartsWith("Enter"))
+            if (txtAliveDates.Text.StartsWith("Enter"))
                 txtAliveDates.Text = string.Empty;
         }
 
         void BtnAliveOnDate_Click(object sender, EventArgs e)
         {
-            if(AliveDate != FactDate.UNKNOWN_DATE)
+            if (AliveDate != FactDate.UNKNOWN_DATE)
             {
                 HourGlass(true);
                 People people = new People();

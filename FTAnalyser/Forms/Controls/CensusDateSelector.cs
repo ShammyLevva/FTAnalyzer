@@ -34,6 +34,7 @@ namespace FTAnalyzer.Controls
 
         void AddValuationItems()
         {
+            cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1855);
             cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1865);
             cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1875);
             cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1885);
@@ -42,6 +43,9 @@ namespace FTAnalyzer.Controls
             cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1915);
             cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1920);
             cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1925);
+            cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1930);
+            cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1935);
+            cbCensusDate.Items.Add(CensusDate.SCOTVALUATION1940);
         }
 
         public void AddLCCensusItems()

@@ -294,9 +294,11 @@ namespace FTAnalyzer.Forms
                             (row.C1891 == toFind || row.C1891 == CensusColours.NOT_ALIVE) &&
                             (row.C1901 == toFind || row.C1901 == CensusColours.NOT_ALIVE) &&
                             (row.C1911 == toFind || row.C1911 == CensusColours.CENSUS_PRESENT_LC_PRESENT || row.C1911 == CensusColours.NOT_ALIVE) &&
+                            (row.C1921 == toFind || row.C1921 == CensusColours.CENSUS_PRESENT_LC_PRESENT || row.C1921 == CensusColours.NOT_ALIVE) &&
                             (row.C1939 == toFind || row.C1939 == CensusColours.CENSUS_PRESENT_LC_PRESENT || row.C1939 == CensusColours.NOT_ALIVE) &&
                             !(row.C1841 == CensusColours.NOT_ALIVE && row.C1851 == CensusColours.NOT_ALIVE && row.C1861 == CensusColours.NOT_ALIVE && row.C1871 == CensusColours.NOT_ALIVE &&
-                              row.C1881 == CensusColours.NOT_ALIVE && row.C1891 == CensusColours.NOT_ALIVE && row.C1901 == CensusColours.NOT_ALIVE && row.C1911 == CensusColours.NOT_ALIVE && row.C1939 == CensusColours.NOT_ALIVE && toFind != 0)) // exclude all greys
+                              row.C1881 == CensusColours.NOT_ALIVE && row.C1891 == CensusColours.NOT_ALIVE && row.C1901 == CensusColours.NOT_ALIVE && row.C1911 == CensusColours.NOT_ALIVE &&
+                              row.C1921 == CensusColours.NOT_ALIVE && row.C1939 == CensusColours.NOT_ALIVE && toFind != 0)) // exclude all greys
                             result.Add(row);
                     }
                     else
@@ -304,17 +306,18 @@ namespace FTAnalyzer.Forms
                             (row.C1861 == toFind || row.C1861 == CensusColours.NOT_ALIVE) && (row.C1871 == toFind || row.C1871 == CensusColours.NOT_ALIVE) &&
                             (row.C1881 == toFind || row.C1881 == CensusColours.NOT_ALIVE) && (row.C1891 == toFind || row.C1891 == CensusColours.NOT_ALIVE) &&
                             (row.C1901 == toFind || row.C1901 == CensusColours.NOT_ALIVE) && (row.C1911 == toFind || row.C1911 == CensusColours.NOT_ALIVE) &&
-                            (row.C1939 == toFind || row.C1939 == CensusColours.NOT_ALIVE) &&
+                            (row.C1921 == toFind || row.C1921 == CensusColours.NOT_ALIVE) && (row.C1939 == toFind || row.C1939 == CensusColours.NOT_ALIVE) &&
                             !(row.C1841 == CensusColours.NOT_ALIVE && row.C1851 == CensusColours.NOT_ALIVE && row.C1861 == CensusColours.NOT_ALIVE &&
                               row.C1871 == CensusColours.NOT_ALIVE && row.C1881 == CensusColours.NOT_ALIVE && row.C1891 == CensusColours.NOT_ALIVE &&
-                              row.C1901 == CensusColours.NOT_ALIVE && row.C1911 == CensusColours.NOT_ALIVE && row.C1939 == CensusColours.NOT_ALIVE &&
+                              row.C1901 == CensusColours.NOT_ALIVE && row.C1911 == CensusColours.NOT_ALIVE && row.C1921 == CensusColours.NOT_ALIVE && 
+                              row.C1939 == CensusColours.NOT_ALIVE &&
                               toFind != CensusColours.NOT_ALIVE)) // exclude all greys
                         result.Add(row);
                 }
                 else
                 {
                     if (row.C1841 == toFind || row.C1851 == toFind || row.C1861 == toFind || row.C1871 == toFind ||
-                       row.C1881 == toFind || row.C1891 == toFind || row.C1901 == toFind || row.C1911 == toFind || row.C1939 == toFind)
+                       row.C1881 == toFind || row.C1891 == toFind || row.C1901 == toFind || row.C1911 == toFind || row.C1921 == toFind || row.C1939 == toFind)
                         result.Add(row);
                 }
 
