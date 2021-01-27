@@ -574,7 +574,7 @@ namespace Testing
             Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("AFT 20 AUG 1990")));
             Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("AFT 20 AUG 2090")));
             Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("BET 20 AUG 1990 AND 1 APR 2000")));
-            Assert.IsTrue(ind.IsPossiblyAlive(FactDate.UNKNOWN_DATE));
+            Assert.IsTrue(ind.IsPossiblyAlive(UNKNOWN_DATE));
 
             Assert.IsFalse(ind.IsPossiblyAlive(new FactDate("20 AUG 1965")));
             Assert.IsFalse(ind.IsPossiblyAlive(new FactDate("BEF 20 AUG 1920")));
@@ -585,13 +585,13 @@ namespace Testing
             Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("BEF 20 AUG 2020")));
             Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("AFT 20 AUG 1990")));
             Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("BET 20 AUG 1990 AND 1 APR 2000")));
-            Assert.IsTrue(ind.IsPossiblyAlive(FactDate.UNKNOWN_DATE));
+            Assert.IsTrue(ind.IsPossiblyAlive(UNKNOWN_DATE));
             Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("20 AUG 1965")));
             Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("BEF 20 AUG 1920")));
+            Assert.IsTrue(ind.IsPossiblyAlive(new FactDate("BET 20 AUG 1890 AND 1 APR 1900")));
 
             Assert.IsFalse(ind.IsPossiblyAlive(new FactDate("AFT 20 AUG 2090")));
             Assert.IsFalse(ind.IsPossiblyAlive(new FactDate("20 AUG 2020")));
-            Assert.IsFalse(ind.IsPossiblyAlive(new FactDate("BET 20 AUG 1890 AND 1 APR 1900")));
         }
 
         static Individual SetupIndividual(string individual)
