@@ -1,14 +1,19 @@
-#### Updated Release Version 8.0.2 not yet released   
+#### Updated Release Version 8.1.0 28th January 2021
 **Updates**  
 Added timer showing time to load file and time to analyse file  
 Check footnotes in Ancestry source records for census references  
 Add extra US Census reference checks from Ancestry  
+Change Ancestry US Census links to use new databases  
+Add support for 1921 UK Census to Research Suggestions in preparation for release soon  
+Recognise alternate name facts as alias if no alias fact  
+Recognise Windows 10 20H2  
   
 **Bugfixes**  
 Catch Database save to invalid location error  
 Updated Lost Cousins tooltip to indicate not year or country  
 If still living then max age at death should be age today  
 Solo individual with no children fixed in colour BMD report  
+Strip &nbsp; from line during XML parsing to check for spaces  
 
 #### Updated Release Version 8.0.1 6th September 2020  
 **Updates**  
