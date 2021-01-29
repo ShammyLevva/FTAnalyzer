@@ -1,3 +1,7 @@
+#### Updated Release Version 8.1.1 29th January 2021
+**Bugfixes**  
+Fixed missing icon for desktop shortcuts  
+
 #### Updated Release Version 8.1.0 28th January 2021
 **Updates**  
 Added timer showing time to load file and time to analyse file  
