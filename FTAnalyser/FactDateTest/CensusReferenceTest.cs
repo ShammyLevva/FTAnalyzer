@@ -66,6 +66,8 @@ namespace Testing
             USCensusTest("T627, roll 4515, Burlington, enumeration district (ED) 51-5, sheet 4A, household 45, Alice Reed, accessed 22 Jan 2019", CensusDate.USCENSUS1940, "4515", "51-5", "4A");
             //            USCensusTest("Madison, Venice, enumeration district 90, page 8A, dwelling number 229, family number 233, lines 38 - 42, Henry Anters household", CensusDate.UNKNOWN_DATE, "Unknown", "90", "8A");
             USCensusTest("1930 U.S. census, population schedule, Illinois, Madison, Venice, enumeration district 90, page 8A, dwelling number 229, family number 233, lines 38 - 42, Henry Anters household; NARA microfilm publication T626, roll 542; digital image, Ancestry.com (www.ancestry.com : accessed 12 Jun 2019).", CensusDate.USCENSUS1930, "542", "90", "8A");
+            USCensusTest("Microfilm T623 Roll 1685 State Utah County Salt Lake ED 63 Page 9A Dwelling Number 169 Family 177", CensusDate.USCENSUS1900, "1685", "63", "9A");
+            USCensusTest("Microfilm T9 Roll 1337 State Utah County Salt Lake ED 57 Page 272B Dwelling Number 186 Family 191", CensusDate.USCENSUS1880, "1337", "57", "272B");
         }
 
         [TestMethod]
