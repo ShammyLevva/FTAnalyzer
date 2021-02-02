@@ -172,9 +172,9 @@ namespace FTAnalyzer.UserControls
             this.chkSkipCensusReferences.Location = new System.Drawing.Point(6, 360);
             this.chkSkipCensusReferences.Margin = new System.Windows.Forms.Padding(6);
             this.chkSkipCensusReferences.Name = "chkSkipCensusReferences";
-            this.chkSkipCensusReferences.Size = new System.Drawing.Size(452, 29);
+            this.chkSkipCensusReferences.Size = new System.Drawing.Size(584, 29);
             this.chkSkipCensusReferences.TabIndex = 39;
-            this.chkSkipCensusReferences.Text = "Skip search for any Census References (*)";
+            this.chkSkipCensusReferences.Text = "Skip search for any Census References (loads faster) (*)";
             this.chkSkipCensusReferences.UseVisualStyleBackColor = true;
             this.chkSkipCensusReferences.CheckedChanged += new System.EventHandler(this.ChkSkipCensusReferences_CheckedChanged);
             // 
