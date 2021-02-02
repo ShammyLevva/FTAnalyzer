@@ -56,7 +56,7 @@ namespace FTAnalyzer.UserControls
             this.chkAddCreatedLocations.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkAddCreatedLocations.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.chkAddCreatedLocations.Location = new System.Drawing.Point(6, 271);
-            this.chkAddCreatedLocations.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkAddCreatedLocations.Margin = new System.Windows.Forms.Padding(6);
             this.chkAddCreatedLocations.Name = "chkAddCreatedLocations";
             this.chkAddCreatedLocations.Size = new System.Drawing.Size(583, 29);
             this.chkAddCreatedLocations.TabIndex = 36;
@@ -71,7 +71,7 @@ namespace FTAnalyzer.UserControls
             this.chkAutoCreateCensus.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkAutoCreateCensus.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.chkAutoCreateCensus.Location = new System.Drawing.Point(6, 227);
-            this.chkAutoCreateCensus.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkAutoCreateCensus.Margin = new System.Windows.Forms.Padding(6);
             this.chkAutoCreateCensus.Name = "chkAutoCreateCensus";
             this.chkAutoCreateCensus.Size = new System.Drawing.Size(552, 29);
             this.chkAutoCreateCensus.TabIndex = 35;
@@ -84,7 +84,7 @@ namespace FTAnalyzer.UserControls
             this.chkCompactCensusRef.AutoSize = true;
             this.chkCompactCensusRef.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.chkCompactCensusRef.Location = new System.Drawing.Point(6, 183);
-            this.chkCompactCensusRef.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkCompactCensusRef.Margin = new System.Windows.Forms.Padding(6);
             this.chkCompactCensusRef.Name = "chkCompactCensusRef";
             this.chkCompactCensusRef.Size = new System.Drawing.Size(368, 29);
             this.chkCompactCensusRef.TabIndex = 34;
@@ -96,7 +96,7 @@ namespace FTAnalyzer.UserControls
             this.chkFamilyCensus.AutoSize = true;
             this.chkFamilyCensus.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.chkFamilyCensus.Location = new System.Drawing.Point(6, 138);
-            this.chkFamilyCensus.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkFamilyCensus.Margin = new System.Windows.Forms.Padding(6);
             this.chkFamilyCensus.Name = "chkFamilyCensus";
             this.chkFamilyCensus.Size = new System.Drawing.Size(494, 29);
             this.chkFamilyCensus.TabIndex = 33;
@@ -111,7 +111,7 @@ namespace FTAnalyzer.UserControls
             this.chkTolerateInaccurateCensus.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkTolerateInaccurateCensus.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.chkTolerateInaccurateCensus.Location = new System.Drawing.Point(6, 94);
-            this.chkTolerateInaccurateCensus.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkTolerateInaccurateCensus.Margin = new System.Windows.Forms.Padding(6);
             this.chkTolerateInaccurateCensus.Name = "chkTolerateInaccurateCensus";
             this.chkTolerateInaccurateCensus.Size = new System.Drawing.Size(474, 29);
             this.chkTolerateInaccurateCensus.TabIndex = 32;
@@ -126,7 +126,7 @@ namespace FTAnalyzer.UserControls
             this.chkCensusResidence.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkCensusResidence.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.chkCensusResidence.Location = new System.Drawing.Point(6, 6);
-            this.chkCensusResidence.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkCensusResidence.Margin = new System.Windows.Forms.Padding(6);
             this.chkCensusResidence.Name = "chkCensusResidence";
             this.chkCensusResidence.Size = new System.Drawing.Size(458, 29);
             this.chkCensusResidence.TabIndex = 31;
@@ -152,7 +152,7 @@ namespace FTAnalyzer.UserControls
             this.chkHideMissingTagged.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkHideMissingTagged.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.chkHideMissingTagged.Location = new System.Drawing.Point(6, 315);
-            this.chkHideMissingTagged.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkHideMissingTagged.Margin = new System.Windows.Forms.Padding(6);
             this.chkHideMissingTagged.Name = "chkHideMissingTagged";
             this.chkHideMissingTagged.Size = new System.Drawing.Size(485, 29);
             this.chkHideMissingTagged.TabIndex = 38;
@@ -170,12 +170,13 @@ namespace FTAnalyzer.UserControls
             this.chkSkipCensusReferences.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSkipCensusReferences.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.chkSkipCensusReferences.Location = new System.Drawing.Point(6, 360);
-            this.chkSkipCensusReferences.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkSkipCensusReferences.Margin = new System.Windows.Forms.Padding(6);
             this.chkSkipCensusReferences.Name = "chkSkipCensusReferences";
-            this.chkSkipCensusReferences.Size = new System.Drawing.Size(489, 29);
+            this.chkSkipCensusReferences.Size = new System.Drawing.Size(452, 29);
             this.chkSkipCensusReferences.TabIndex = 39;
-            this.chkSkipCensusReferences.Text = "Do not check for Census References in the file";
+            this.chkSkipCensusReferences.Text = "Skip search for any Census References (*)";
             this.chkSkipCensusReferences.UseVisualStyleBackColor = true;
+            this.chkSkipCensusReferences.CheckedChanged += new System.EventHandler(this.ChkSkipCensusReferences_CheckedChanged);
             // 
             // chkConvertResidenceFacts
             // 
@@ -184,7 +185,7 @@ namespace FTAnalyzer.UserControls
             this.chkConvertResidenceFacts.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkConvertResidenceFacts.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.chkConvertResidenceFacts.Location = new System.Drawing.Point(6, 50);
-            this.chkConvertResidenceFacts.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkConvertResidenceFacts.Margin = new System.Windows.Forms.Padding(6);
             this.chkConvertResidenceFacts.Name = "chkConvertResidenceFacts";
             this.chkConvertResidenceFacts.Size = new System.Drawing.Size(603, 29);
             this.chkConvertResidenceFacts.TabIndex = 40;
@@ -208,7 +209,7 @@ namespace FTAnalyzer.UserControls
             this.Controls.Add(this.chkFamilyCensus);
             this.Controls.Add(this.chkTolerateInaccurateCensus);
             this.Controls.Add(this.chkCensusResidence);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "CensusSettingsUI";
             this.Size = new System.Drawing.Size(1218, 810);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();

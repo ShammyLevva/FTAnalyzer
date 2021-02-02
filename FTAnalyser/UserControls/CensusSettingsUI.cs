@@ -92,5 +92,7 @@ namespace FTAnalyzer.UserControls
         void ChkAutoCreateCensus_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
 
         void ChkAddCreatedLocations_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
+
+        void ChkSkipCensusReferences_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
     }
 }
