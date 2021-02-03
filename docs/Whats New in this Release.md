@@ -1,3 +1,13 @@
+#### Updated Release Version 8.1.2 3rd February 2021
+**Updates**  
+Added support for US census references 1790-1890 using Mxxx reference format  
+
+**Bugfixes**  
+Reworded the check census reference option  
+Fix on this day not loading world events  
+1911 Child report shouldn't show families married after 1911  
+Fix 1940 US census as default for Txxx references  
+
 #### Updated Release Version 8.1.1 29th January 2021
 **Bugfixes**  
 Fixed missing icon for desktop shortcuts  
