@@ -305,7 +305,7 @@ namespace SharpMap.Data.Providers
             {
                 var strSql = "SELECT \"" + GeometryColumn + "\" AS \"_smtmp_\" ";
                 strSql += "FROM " + Table + " WHERE ";
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSql += DefinitionQuery + " AND ";
                 strSql += GetBoxClause(bbox);
 
@@ -357,7 +357,7 @@ namespace SharpMap.Data.Providers
 
                 strSql += "FROM " + Table + " WHERE ";
 
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSql += DefinitionQuery + " AND ";
 
                 strSql += GetBoxClause(bbox);
@@ -437,7 +437,7 @@ namespace SharpMap.Data.Providers
                 strSql += "FROM " + Table + " WHERE ";
 
                 // Attribute constraint
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSql += DefinitionQuery + " AND ";
 
                 // Spatial constraint
@@ -517,7 +517,7 @@ namespace SharpMap.Data.Providers
                 strSql += "FROM " + Table + " WHERE ";
 
                 // Attribute constraint
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSql += DefinitionQuery + " AND ";
                 
                 // Spatial constraint
@@ -569,7 +569,7 @@ namespace SharpMap.Data.Providers
             using (var conn = GetConnection(ConnectionString))
             {
                 var strSql = "SELECT COUNT(*) as numrecs FROM " + Table;
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                 {
                     strSql += " WHERE " + DefinitionQuery;
                 }

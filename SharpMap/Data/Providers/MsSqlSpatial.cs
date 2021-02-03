@@ -208,10 +208,10 @@ namespace SharpMap.Data.Providers
         //        var strSQL = "SELECT ST.AsBinary(" + BuildGeometryExpression() + ") ";
         //        strSQL += "FROM ST.FilterQuery" + BuildSpatialQuerySuffix() + "(" + BuildEnvelope(bbox) + ")";
 
-        //        if (!String.IsNullOrEmpty(DefinitionQuery))
+        //        if (!string.IsNullOrEmpty(DefinitionQuery))
         //            strSQL += " WHERE " + DefinitionQuery;
 
-        //        if (!String.IsNullOrEmpty(OrderQuery))
+        //        if (!string.IsNullOrEmpty(OrderQuery))
         //            strSQL += " ORDER BY " + OrderQuery;
 
         //        using (var command = new SqlCommand(strSQL, conn))
@@ -284,7 +284,7 @@ namespace SharpMap.Data.Providers
                                 Table, GeometryColumn, @where, BuildEnvelope(bbox, command), ObjectIdColumn);
 
 #pragma warning disable 612, 618
-                    if (!String.IsNullOrEmpty(OrderQuery))
+                    if (!string.IsNullOrEmpty(OrderQuery))
                         strSQL += " ORDER BY " + OrderQuery;
 #pragma warning restore 612, 618
 
@@ -328,10 +328,10 @@ namespace SharpMap.Data.Providers
         //                        ") As sharpmap_tempgeometry ";
         //        strSQL += "FROM ST.RelateQuery" + BuildSpatialQuerySuffix() + "(" + strGeom + ", 'intersects')";
 
-        //        if (!String.IsNullOrEmpty(DefinitionQuery))
+        //        if (!string.IsNullOrEmpty(DefinitionQuery))
         //            strSQL += " WHERE " + DefinitionQuery;
 
-        //        if (!String.IsNullOrEmpty(OrderQuery))
+        //        if (!string.IsNullOrEmpty(OrderQuery))
         //            strSQL += " ORDER BY " + OrderQuery;
 
         //        using (var adapter = new SqlDataAdapter(strSQL, conn))
@@ -467,7 +467,7 @@ namespace SharpMap.Data.Providers
             using (var conn = (SqlConnection)CreateOpenDbConnection())
             {
 #pragma warning disable 612,618
-                var where = (String.IsNullOrEmpty(DefinitionQuery)
+                var where = (string.IsNullOrEmpty(DefinitionQuery)
                                  ? FeatureColumns.GetWhereClause()
                                  : DefinitionQuery).Replace(" WHERE ", "").Replace("'", "''");
 #pragma warning restore 612,618
@@ -498,10 +498,10 @@ namespace SharpMap.Data.Providers
         //                        ") AS sharpmap_tempgeometry ";
         //        strSQL += "FROM ST.FilterQuery" + BuildSpatialQuerySuffix() + "(" + BuildEnvelope(bbox) + ")";
 
-        //        if (!String.IsNullOrEmpty(DefinitionQuery))
+        //        if (!string.IsNullOrEmpty(DefinitionQuery))
         //            strSQL += " WHERE " + DefinitionQuery;
 
-        //        if (!String.IsNullOrEmpty(OrderQuery))
+        //        if (!string.IsNullOrEmpty(OrderQuery))
         //            strSQL += " ORDER BY " + OrderQuery;
 
         //        using (SqlDataAdapter adapter = new SqlDataAdapter(strSQL, conn))

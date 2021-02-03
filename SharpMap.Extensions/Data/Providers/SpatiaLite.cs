@@ -71,7 +71,7 @@ namespace SharpMap.Data.Providers
             try
             {
                 var slBin = ConfigurationManager.AppSettings["SpatiaLiteNativeDll"];
-                if (!String.IsNullOrEmpty(slBin))
+                if (!string.IsNullOrEmpty(slBin))
                 {
                     SpatiaLiteNativeDll = slBin;
                 }
@@ -318,7 +318,7 @@ namespace SharpMap.Data.Providers
                 var strSql = "SELECT AsBinary(" + GeometryColumn + ") AS Geom ";
                 strSql += "FROM " + Table + " WHERE ";
                 strSql += boxIntersect;
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSql += " AND " + DefinitionQuery;
 
                 using (var command = new SQLiteCommand(strSql, conn))
@@ -351,7 +351,7 @@ namespace SharpMap.Data.Providers
 
                 strSql += GetBoxClause(bbox);
 
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSql += " AND " + DefinitionQuery + " AND ";
 
                 using (var command = new SQLiteCommand(strSql, conn))
@@ -410,7 +410,7 @@ namespace SharpMap.Data.Providers
                 strSql += "FROM " + Table + " WHERE ";
                 strSql += GetOverlapsClause(geom);
 
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSql += " AND " + DefinitionQuery;
 
                 using (var adapter = new SQLiteDataAdapter(strSql, conn))
@@ -455,7 +455,7 @@ namespace SharpMap.Data.Providers
                 strSql += "FROM " + Table + " WHERE ";
                 strSql += GetBoxClause(box);
 
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSql += " AND " + DefinitionQuery;
 
                 using (var adapter = new SQLiteDataAdapter(strSql, conn))
@@ -493,7 +493,7 @@ namespace SharpMap.Data.Providers
             using (var conn = new SQLiteConnection(ConnectionString))
             {
                 string strSql = "SELECT COUNT(*) as numrecs FROM " + Table;
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSql += " WHERE " + DefinitionQuery;
                 using (var command = new SQLiteCommand(strSql, conn))
                 {
@@ -681,7 +681,7 @@ namespace SharpMap.Data.Providers
             {
                 //string strSQL = "SELECT Min(minx) AS MinX, Min(miny) AS MinY, Max(maxx) AS MaxX, Max(maxy) AS MaxY FROM " + this.Table;
                 string strSQL;
-                if (_spatiaLiteIndex == SpatiaLiteIndex.RTree && String.IsNullOrEmpty(_definitionQuery))
+                if (_spatiaLiteIndex == SpatiaLiteIndex.RTree && string.IsNullOrEmpty(_definitionQuery))
                 {
                     strSQL = string.Format(
                         "SELECT MIN(xmin) AS minx, MAX(xmax) AS maxx, MIN(ymin) AS miny, MAX(ymax) AS maxy from {0};",
@@ -715,7 +715,7 @@ namespace SharpMap.Data.Providers
 
         private string FromClause(String table)
         {
-            if (String.IsNullOrEmpty(DefinitionQuery))
+            if (string.IsNullOrEmpty(DefinitionQuery))
                 return table;
 
             return string.Format("{0} WHERE ({1})", table, _definitionQuery);

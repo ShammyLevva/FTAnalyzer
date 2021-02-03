@@ -76,7 +76,7 @@ Namespace SharpMap
 
                 Dim executingAssemblyFile As String = New Uri(Assembly.GetExecutingAssembly.GetName.CodeBase).LocalPath
                 executingDirectory = Path.GetDirectoryName(executingAssemblyFile)
-                If String.IsNullOrEmpty(executingDirectory) Then
+                If string.IsNullOrEmpty(executingDirectory) Then
                     Throw New InvalidOperationException("cannot get executing directory")
                 End If
 

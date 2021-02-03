@@ -180,7 +180,7 @@ namespace SharpMap.Data.Providers
                 string strSQL = "SELECT " + GeometryColumn + " AS Geom ";
                 strSQL += "FROM " + Table + " WHERE ";
                 strSQL += BoxIntersect;
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSQL += " AND " + DefinitionQuery;
 
                 using (SqlCommand command = new SqlCommand(strSQL, conn))
@@ -248,7 +248,7 @@ namespace SharpMap.Data.Providers
 
                 strSQL += GetBoxClause(bbox);
 
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSQL += " AND " + DefinitionQuery + " AND ";
 
                 using (SqlCommand command = new SqlCommand(strSQL, conn))
@@ -291,7 +291,7 @@ namespace SharpMap.Data.Providers
             using (SqlConnection conn = new SqlConnection(_ConnectionString))
             {
                 string strSQL = "SELECT COUNT(*) FROM " + Table;
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSQL += " WHERE " + DefinitionQuery;
                 using (SqlCommand command = new SqlCommand(strSQL, conn))
                 {
@@ -375,7 +375,7 @@ namespace SharpMap.Data.Providers
                 string strSQL =
                     "SELECT Min(Envelope_MinX) AS MinX, Min(Envelope_MinY) AS MinY, Max(Envelope_MaxX) AS MaxX, Max(Envelope_MaxY) AS MaxY FROM " +
                     Table;
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSQL += " WHERE " + DefinitionQuery;
                 using (SqlCommand command = new SqlCommand(strSQL, conn))
                 {
@@ -413,7 +413,7 @@ namespace SharpMap.Data.Providers
                 strSQL += "FROM " + Table + " WHERE ";
                 strSQL += GetBoxClause(bbox);
 
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSQL += " AND " + DefinitionQuery;
 
                 using (SqlDataAdapter adapter = new SqlDataAdapter(strSQL, conn))

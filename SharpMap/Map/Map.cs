@@ -545,7 +545,7 @@ namespace SharpMap
                      }
 
                      //Save metafile if desired
-                     if (!String.IsNullOrEmpty(metafileName))
+                     if (!string.IsNullOrEmpty(metafileName))
                          File.WriteAllBytes(metafileName, stream.ToArray());
                  }
                 g.ReleaseHdc(hdc);
@@ -901,7 +901,7 @@ namespace SharpMap
         private void RenderDisclaimer(Graphics g)
         {
             //Disclaimer
-            if (!String.IsNullOrEmpty(_disclaimer))
+            if (!string.IsNullOrEmpty(_disclaimer))
             {
                 var size = VectorRenderer.SizeOfString(g, _disclaimer, _disclaimerFont);
                 size.Width = (Single)Math.Ceiling(size.Width);
@@ -1499,7 +1499,7 @@ namespace SharpMap
             get { return _disclaimer; }
             set {
                 //only set disclaimer if not already done
-                if (String.IsNullOrEmpty(_disclaimer))
+                if (string.IsNullOrEmpty(_disclaimer))
                 {
                     _disclaimer = value;
                     //Ensure that Font for disclaimer is set

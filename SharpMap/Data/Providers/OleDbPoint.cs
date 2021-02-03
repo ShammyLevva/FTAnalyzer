@@ -313,7 +313,7 @@ namespace SharpMap.Data.Providers
                 conn.Open();
 
                 var strSQL = "SELECT Count(*) FROM " + Table;
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     //If a definition query has been specified, add this as a filter on the query
                     strSQL += " WHERE " + _definitionQuery;
 
@@ -374,7 +374,7 @@ namespace SharpMap.Data.Providers
                                     "Max(" + XColumn + ") As MaxX, Max(" + YColumn + ") As MaxY FROM " + Table;
 
                 //If a definition query has been specified, add this as a filter on the query
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSQL += " WHERE " + _definitionQuery;
 
                 using (var command = new OleDbCommand(strSQL, conn))

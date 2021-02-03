@@ -545,7 +545,7 @@ namespace SharpMap.Data.Providers
                     var sql = new StringBuilder();
                     sql.AppendFormat("SELECT COUNT(*) FROM {0}", _dbUtility.DecorateTable(Schema, Table));
 #pragma warning disable 612,618
-                    if (!String.IsNullOrEmpty(DefinitionQuery))
+                    if (!string.IsNullOrEmpty(DefinitionQuery))
                         sql.AppendFormat(" WHERE {0}", DefinitionQuery);
 #pragma warning restore 612,618
                     else

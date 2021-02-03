@@ -46,7 +46,7 @@ namespace FTAnalyzer.UserControls
 
 			for (int i = 0; i < control.Controls.Count; i++)
 			{
-				if (!String.IsNullOrEmpty(errorProvider1.GetError(control.Controls[i])))
+				if (!string.IsNullOrEmpty(errorProvider1.GetError(control.Controls[i])))
 				{
 					invalid = true;
 					break;

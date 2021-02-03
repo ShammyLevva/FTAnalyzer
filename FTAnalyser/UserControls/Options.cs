@@ -98,7 +98,7 @@ namespace FTAnalyzer.UserControls
 					{
 						tempNode = nodes[i];
 						//if a root node, set the tag to the first child node in the branch
-						if (tempNode.Tag == null || String.IsNullOrEmpty(tempNode.Tag.ToString()))
+						if (tempNode.Tag == null || string.IsNullOrEmpty(tempNode.Tag.ToString()))
 						{
 							tempNode.Tag = key;
 						}

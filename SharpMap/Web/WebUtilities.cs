@@ -173,7 +173,7 @@ namespace SharpMap.Web
             epsg = default(int);
             if (node == null) return false;
             string epsgString = node.Value;
-            if (String.IsNullOrEmpty(epsgString)) return false;
+            if (string.IsNullOrEmpty(epsgString)) return false;
             const string prefix = "EPSG:";
             int index = epsgString.IndexOf(prefix, StringComparison.InvariantCulture);
             if (index < 0) return false;
@@ -183,7 +183,7 @@ namespace SharpMap.Web
         public static double ParseNodeAsDouble(XmlNode node, double defaultValue)
         {
             if (node == null) return defaultValue;
-            if (String.IsNullOrEmpty(node.InnerText)) return defaultValue;
+            if (string.IsNullOrEmpty(node.InnerText)) return defaultValue;
             double value;
             if (Double.TryParse(node.InnerText, NumberStyles.Any, Map.NumberFormatEnUs, out value))
                 return value;
@@ -194,7 +194,7 @@ namespace SharpMap.Web
         {
             value = default(double);
             if (node == null) return false;
-            if (String.IsNullOrEmpty(node.InnerText)) return false;
+            if (string.IsNullOrEmpty(node.InnerText)) return false;
             return Double.TryParse(node.InnerText, NumberStyles.Any, Map.NumberFormatEnUs, out value);
         }
 

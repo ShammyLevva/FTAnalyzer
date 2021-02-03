@@ -102,7 +102,7 @@ namespace SharpMap.Data.Providers
                 var strSQL = "SELECT " + GeometryColumn + " AS Geom ";
                 strSQL += "FROM " + Table + " WHERE ";
                 strSQL += boxIntersect;
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSQL += " AND " + DefinitionQuery;
 
                 using (var command = new SQLiteCommand(strSQL, conn))
@@ -136,7 +136,7 @@ namespace SharpMap.Data.Providers
 
                 strSQL += GetBoxClause(bbox);
 
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSQL += " AND " + DefinitionQuery + " AND ";
 
                 using (var command = new SQLiteCommand(strSQL, conn))
@@ -218,7 +218,7 @@ namespace SharpMap.Data.Providers
                 strSQL += "FROM " + Table + " WHERE ";
                 strSQL += GetBoxClause(box);
 
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSQL += " AND " + DefinitionQuery;
 
                 using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(strSQL, conn))
@@ -257,7 +257,7 @@ namespace SharpMap.Data.Providers
             using (var conn = new SQLiteConnection(ConnectionString))
             {
                 string strSQL = "SELECT COUNT(*) FROM " + Table;
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSQL += " WHERE " + DefinitionQuery;
                 using (var command = new SQLiteCommand(strSQL, conn))
                 {
@@ -314,7 +314,7 @@ namespace SharpMap.Data.Providers
             {
                 string strSQL =
                     "SELECT Min(minx) AS MinX, Min(miny) AS MinY, Max(maxx) AS MaxX, Max(maxy) AS MaxY FROM " + Table;
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSQL += " WHERE " + DefinitionQuery;
                 using (var command = new SQLiteCommand(strSQL, conn))
                 {

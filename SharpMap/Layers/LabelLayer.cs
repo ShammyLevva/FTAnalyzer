@@ -449,7 +449,7 @@ namespace SharpMap.Layers
                 // Rotation
                 float rotationStyle = style != null ? style.Rotation : 0f;
                 float rotationColumn = 0f;
-                if (!String.IsNullOrEmpty(RotationColumn))
+                if (!string.IsNullOrEmpty(RotationColumn))
                     Single.TryParse(feature[RotationColumn].ToString(), NumberStyles.Any, Map.NumberFormatEnUs,
                         out rotationColumn);
                 float rotation = rotationStyle + rotationColumn;
@@ -458,7 +458,7 @@ namespace SharpMap.Layers
                 int priority = Priority;
                 if (_getPriorityMethod != null)
                     priority = _getPriorityMethod(feature);
-                else if (!String.IsNullOrEmpty(PriorityColumn))
+                else if (!string.IsNullOrEmpty(PriorityColumn))
                     Int32.TryParse(feature[PriorityColumn].ToString(), NumberStyles.Any, Map.NumberFormatEnUs,
                         out priority);
 
@@ -469,7 +469,7 @@ namespace SharpMap.Layers
                 else
                     text = feature[LabelColumn].ToString();
 
-                if (!String.IsNullOrEmpty(text))
+                if (!string.IsNullOrEmpty(text))
                 {
                     // for lineal geometries, try clipping to ensure proper labeling
                     if (feature.Geometry is ILineal)

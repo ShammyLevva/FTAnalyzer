@@ -398,7 +398,7 @@ namespace SharpMap.Data.Providers
                 string strSql = "SELECT g." + GeometryColumn + ".STAsBinary() ";
                 strSql += " FROM " + QualifiedTable + " g " + BuildTableHints() + " WHERE ";
 
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSql += DefinitionQuery + " AND ";
 
                 strSql += strBbox;
@@ -491,7 +491,7 @@ namespace SharpMap.Data.Providers
                 string strSql = "SELECT g." + ObjectIdColumn + " ";
                 strSql += "FROM " + QualifiedTable + " g " + BuildTableHints() + " WHERE ";
 
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSql += DefinitionQuery + " AND ";
 
                 strSql += strBbox;
@@ -555,7 +555,7 @@ namespace SharpMap.Data.Providers
                 string strSql = "SELECT g.* , g." + GeometryColumn + ".STAsBinary() As sharpmap_tempgeometry FROM " +
                                 QualifiedTable + " g " + BuildTableHints() + " WHERE ";
 
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSql += DefinitionQuery + " AND ";
 
                 strSql += strGeom;
@@ -629,7 +629,7 @@ namespace SharpMap.Data.Providers
             using (var conn = new SqlConnection(ConnectionString))
             {
                 var strSql = "SELECT COUNT(*) FROM " + QualifiedTable;
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSql += " WHERE " + DefinitionQuery;
                 using (var command = new SqlCommand(strSql, conn))
                 {
@@ -756,7 +756,7 @@ namespace SharpMap.Data.Providers
                         sql = String.Format("SELECT g.{0}{1}.STEnvelope().STAsText() FROM {2} g ",
                             GeometryColumn, MakeValidString, QualifiedTable);
 
-                        if (!String.IsNullOrEmpty(_definitionQuery))
+                        if (!string.IsNullOrEmpty(_definitionQuery))
                             sql += " WHERE " + DefinitionQuery;
 
                         using (var command = new SqlCommand(sql, conn))
@@ -778,7 +778,7 @@ namespace SharpMap.Data.Providers
                         sql = String.Format("SELECT {3}::EnvelopeAggregate(g.{0}{1}).STAsText() FROM {2} g ",
                             GeometryColumn, MakeValidString, QualifiedTable, _spatialObject);
 
-                        if (!String.IsNullOrEmpty(_definitionQuery))
+                        if (!string.IsNullOrEmpty(_definitionQuery))
                             sql += " WHERE " + DefinitionQuery;
                         using (var command = new SqlCommand(sql, conn))
                         {
@@ -825,7 +825,7 @@ namespace SharpMap.Data.Providers
                     "SELECT g.*, g.{0}{1}.STAsBinary() AS sharpmap_tempgeometry FROM {2} g {3} WHERE ",
                     GeometryColumn, MakeValidString, QualifiedTable, BuildTableHints());
 
-                if (!String.IsNullOrEmpty(_definitionQuery))
+                if (!string.IsNullOrEmpty(_definitionQuery))
                     strSql += DefinitionQuery + " AND ";
 
                 strSql += strBbox;

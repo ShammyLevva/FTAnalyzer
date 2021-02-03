@@ -296,20 +296,20 @@ namespace SharpMap.Styles
             string pointSymbolPath
             )
         {
-            if (!String.IsNullOrEmpty(stroke))
+            if (!string.IsNullOrEmpty(stroke))
             {
                 var color = ColorTranslator.FromHtml(stroke);
                 var opacity = 255;
                 var width = 1f;
 
-                if (!String.IsNullOrEmpty(strokeOpacity))
+                if (!string.IsNullOrEmpty(strokeOpacity))
                 {
                     opacity = Convert.ToInt32(Math.Round(Convert.ToDouble(strokeOpacity)/0.0039215, 0));
                     if (opacity > 255)
                         opacity = 255;
                 }
 
-                if (!String.IsNullOrEmpty(strokeWidth))
+                if (!string.IsNullOrEmpty(strokeWidth))
                 {
                     width = Convert.ToSingle(strokeWidth);
                 }
@@ -318,7 +318,7 @@ namespace SharpMap.Styles
                     Convert.ToInt32(color.B)));
                 var pen = new Pen(brush, width);
 
-                if (!String.IsNullOrEmpty(strokeLinejoin))
+                if (!string.IsNullOrEmpty(strokeLinejoin))
                 {
                     switch (strokeLinejoin.ToLower())
                     {
@@ -338,7 +338,7 @@ namespace SharpMap.Styles
                     }
                 }
 
-                if (!String.IsNullOrEmpty(strokeLineCap))
+                if (!string.IsNullOrEmpty(strokeLineCap))
                 {
                     switch (strokeLineCap.ToLower())
                     {
@@ -359,7 +359,7 @@ namespace SharpMap.Styles
                     }
                 }
 
-                if (!String.IsNullOrEmpty(strokeDasharray))
+                if (!string.IsNullOrEmpty(strokeDasharray))
                 {
                     var numbers = strokeDasharray.Split(Char.Parse(" "));
                     Func<string[], float[]> processor = strings =>
@@ -372,7 +372,7 @@ namespace SharpMap.Styles
                     pen.DashPattern = processor(numbers);
                 }
 
-                if (!String.IsNullOrEmpty(strokeDashOffset))
+                if (!string.IsNullOrEmpty(strokeDashOffset))
                 {
                     float dashOffset;
                     var success = float.TryParse(strokeDashOffset, out dashOffset);
@@ -384,12 +384,12 @@ namespace SharpMap.Styles
                 style.Line = pen;
             }
 
-            if (!String.IsNullOrEmpty(fill))
+            if (!string.IsNullOrEmpty(fill))
             {
                 Color color = ColorTranslator.FromHtml(fill);
                 int opacity = 255;
 
-                if (!String.IsNullOrEmpty(fillOpacity))
+                if (!string.IsNullOrEmpty(fillOpacity))
                 {
                     opacity = Convert.ToInt32(Math.Round(Convert.ToDouble(fillOpacity)/0.0039215, 0));
                     if (opacity > 255)
@@ -404,7 +404,7 @@ namespace SharpMap.Styles
             }
 
 
-            if (!String.IsNullOrEmpty(pointSymbolPath))
+            if (!string.IsNullOrEmpty(pointSymbolPath))
             {
                 var source = new Uri(pointSymbolPath);
 
