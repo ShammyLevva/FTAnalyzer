@@ -134,10 +134,40 @@
   <data name="$this.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="chkHideIgnoredDuplicates.AutoSize" type="System.Boolean, mscorlib">
+  <data name="chkIncludeAlternateFacts.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chkIncludeAlternateFacts.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkIncludeAlternateFacts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 305</value>
+  </data>
+  <data name="chkIncludeAlternateFacts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 17</value>
+  </data>
+  <data name="chkIncludeAlternateFacts.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="chkIncludeAlternateFacts.Text" xml:space="preserve">
+    <value>Include Alternate Facts (*)</value>
+  </data>
+  <data name="&gt;&gt;chkIncludeAlternateFacts.Name" xml:space="preserve">
+    <value>chkIncludeAlternateFacts</value>
+  </data>
+  <data name="&gt;&gt;chkIncludeAlternateFacts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkIncludeAlternateFacts.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkIncludeAlternateFacts.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkHideIgnoredDuplicates.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="chkHideIgnoredDuplicates.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -163,7 +193,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkHideIgnoredDuplicates.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="chkSkipFixingLocations.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -193,7 +223,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkSkipFixingLocations.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="chkMultiAncestor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -223,7 +253,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkMultiAncestor.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="chkTreatFemaleAsUnknown.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -253,7 +283,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkTreatFemaleAsUnknown.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="chkIgnoreFactTypeWarnings.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -265,7 +295,7 @@
     <value>3, 190</value>
   </data>
   <data name="chkIgnoreFactTypeWarnings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 17</value>
+    <value>244, 17</value>
   </data>
   <data name="chkIgnoreFactTypeWarnings.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -283,7 +313,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkIgnoreFactTypeWarnings.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="chkShowWorldEvents.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -313,7 +343,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkShowWorldEvents.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="chkReverseLocations.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -343,7 +373,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkReverseLocations.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="chkUseAlias.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -373,7 +403,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkUseAlias.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="chkMultipleFactForms.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -403,7 +433,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkMultipleFactForms.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="chkUseBurials.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -433,7 +463,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkUseBurials.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -460,7 +490,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="upDownAge.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 92</value>
@@ -481,7 +511,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;upDownAge.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -508,7 +538,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="chkAllowEmptyLocations.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -538,7 +568,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkAllowEmptyLocations.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="chkUseBaptisms.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -565,7 +595,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkUseBaptisms.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>325, 421</value>

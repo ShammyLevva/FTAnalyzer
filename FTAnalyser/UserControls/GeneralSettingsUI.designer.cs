@@ -52,6 +52,7 @@ namespace FTAnalyzer.UserControls
             this.chkMultiAncestor = new System.Windows.Forms.CheckBox();
             this.chkSkipFixingLocations = new System.Windows.Forms.CheckBox();
             this.chkHideIgnoredDuplicates = new System.Windows.Forms.CheckBox();
+            this.chkIncludeAlternateFacts = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownAge)).BeginInit();
             this.SuspendLayout();
@@ -177,10 +178,18 @@ namespace FTAnalyzer.UserControls
             this.chkHideIgnoredDuplicates.Name = "chkHideIgnoredDuplicates";
             this.chkHideIgnoredDuplicates.UseVisualStyleBackColor = true;
             // 
+            // chkIncludeAlternateFacts
+            // 
+            resources.ApplyResources(this.chkIncludeAlternateFacts, "chkIncludeAlternateFacts");
+            this.chkIncludeAlternateFacts.Name = "chkIncludeAlternateFacts";
+            this.chkIncludeAlternateFacts.UseVisualStyleBackColor = true;
+            this.chkIncludeAlternateFacts.CheckedChanged += new System.EventHandler(this.ChkIncludeAlternateFacts_CheckedChanged);
+            // 
             // GeneralSettingsUI
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkIncludeAlternateFacts);
             this.Controls.Add(this.chkHideIgnoredDuplicates);
             this.Controls.Add(this.chkSkipFixingLocations);
             this.Controls.Add(this.chkMultiAncestor);
@@ -222,5 +231,6 @@ namespace FTAnalyzer.UserControls
         private System.Windows.Forms.CheckBox chkMultiAncestor;
         private System.Windows.Forms.CheckBox chkSkipFixingLocations;
         private System.Windows.Forms.CheckBox chkHideIgnoredDuplicates;
+        private System.Windows.Forms.CheckBox chkIncludeAlternateFacts;
     }
 }

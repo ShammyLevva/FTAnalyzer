@@ -24,6 +24,7 @@ namespace FTAnalyzer.UserControls
             chkMultiAncestor.Checked = Properties.GeneralSettings.Default.ShowMultiAncestors;
             chkSkipFixingLocations.Checked = Properties.GeneralSettings.Default.SkipFixingLocations;
             chkHideIgnoredDuplicates.Checked = Properties.GeneralSettings.Default.HideIgnoredDuplicates;
+            chkIncludeAlternateFacts.Checked = Properties.GeneralSettings.Default.IncludeAlternateFacts;
         }
 
 		#region IOptions Members
@@ -43,6 +44,7 @@ namespace FTAnalyzer.UserControls
             Properties.GeneralSettings.Default.ShowMultiAncestors = chkMultiAncestor.Checked;
             Properties.GeneralSettings.Default.SkipFixingLocations = chkSkipFixingLocations.Checked;
             Properties.GeneralSettings.Default.HideIgnoredDuplicates = chkHideIgnoredDuplicates.Checked;
+            Properties.GeneralSettings.Default.IncludeAlternateFacts = chkIncludeAlternateFacts.Checked;
             Properties.GeneralSettings.Default.Save();
             OnMinParentalAgeChanged();
             OnAliasInNameChanged();
@@ -104,5 +106,7 @@ namespace FTAnalyzer.UserControls
         void ChkSkipFixingLocations_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
 
         void UpDownAge_ValueChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
+
+        void ChkIncludeAlternateFacts_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
     }
 }

@@ -6588,9 +6588,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:FTAnalyzer"
+        "ProductName" = "8:26245AlexanderBisset.56195460DD6F1"
         "ProductCode" = "8:{0CB83177-B432-4009-A5F0-56CD2D4D389F}"
-        "PackageCode" = "8:{56163599-E35E-491D-87E8-15BF0C26E60F}"
+        "PackageCode" = "8:{ACD06030-CF6C-4741-84A7-1786EC178FCF}"
         "UpgradeCode" = "8:{1207BD34-CD5A-4BEA-838E-74C0B720E1DA}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
