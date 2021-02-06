@@ -1,3 +1,9 @@
+#### Updated Release Version 8.2.0 6th February 2021
+**Updates**  
+Add option to include processing of alternate facts  
+Display AKA name facts as ALIAS facts  
+Allow loading of bad Ancestry GEDCOM bug with @@? tags on source references  
+
 #### Updated Release Version 8.1.2 3rd February 2021
 **Updates**  
 Added support for US census references 1790-1890 using Mxxx reference format  
