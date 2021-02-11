@@ -1,3 +1,7 @@
+#### Updated Release Version 8.3.0 11th February 2021
+**Bugfixes**  
+Fixed bad bug causing skipping of preferred facts  
+
 #### Updated Release Version 8.2.0 6th February 2021
 **Updates**  
 Add option to include processing of alternate facts  
