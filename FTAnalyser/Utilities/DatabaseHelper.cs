@@ -187,6 +187,7 @@ namespace FTAnalyzer.Utilities
                 Version v7_3_3_2 = new Version("7.3.3.2");
                 Version v7_4_0_0 = new Version("7.4.0.0");
                 Version v8_0_0_0 = new Version("8.0.0.0");
+                Version v8_3_1_0 = new Version("8.3.1.0");
                 if (dbVersion < v3_0_0_0)
                 {
                     // Version is less than 3.0.0.0 or none existent so copy latest database from empty database
@@ -324,7 +325,7 @@ namespace FTAnalyzer.Utilities
                 {
                     try
                     {
-                        using (SQLiteCommand cmd = new SQLiteCommand("update table LostCousins add column FullName String(80)", InstanceConnection))
+                        using (SQLiteCommand cmd = new SQLiteCommand("update table LostCousins add column FullName Varchar(80)", InstanceConnection))
                         {
                             cmd.ExecuteNonQuery();
                         }
@@ -385,6 +386,24 @@ namespace FTAnalyzer.Utilities
                     using (SQLiteCommand cmd = new SQLiteCommand("update Versions set database = '8.0.0.0' where platform = 'PC'", InstanceConnection))
                     {
                         cmd.ExecuteNonQuery();
+                    }
+                }
+                if (dbVersion < v8_3_1_0)
+                {
+                    if (dbVersion < v8_3_1_0)
+                    {
+                        try
+                        {
+                            using (SQLiteCommand cmd = new SQLiteCommand("alter table LostCousins add column FullName VARCHAR(80)", InstanceConnection))
+                            {
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+                        catch (SQLiteException) { } // don't complain if adding field already exists due to beta testing.
+                        using (SQLiteCommand cmd = new SQLiteCommand("update versions set Database = '8.3.1.0'", InstanceConnection))
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
                     }
                 }
                 InstanceConnection.Close();

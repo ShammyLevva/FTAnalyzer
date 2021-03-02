@@ -83,7 +83,7 @@ namespace FTAnalyzer.Forms
                 foreach (TreeNode node in tvPlaces.SelectedNodes)
                 {
                     Tuple<FactLocation, int> location = new Tuple<FactLocation, int>((FactLocation)node.Tag, node.Level);
-                    list.AddRange(ft.GetIndividualsAtLocation(location.Item1, location.Item2));
+                    list.AddUnique(ft.GetIndividualsAtLocation(location.Item1, location.Item2));
                     locations.Add(location);
                 }
                 if (list.Count == 0)

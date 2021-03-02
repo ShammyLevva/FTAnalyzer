@@ -177,7 +177,7 @@ namespace FTAnalyzer.Forms
                 Individual ind = row.DataBoundItem as Individual;
                 if (ind.AllLifeLineFacts.Count > 0)
                 {
-                    displayFacts.AddRange(ind.AllLifeLineFacts);
+                    displayFacts.AddUnique(ind.AllLifeLineFacts);
                     MapLifeLine line = new MapLifeLine(ind);
                     line.AddFeatureDataRow(lifelines);
                     points.AddFeatureDataRows(ind);
