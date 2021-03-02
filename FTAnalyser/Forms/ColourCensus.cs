@@ -62,7 +62,7 @@ namespace FTAnalyzer.Forms
                 knownMissing.BackColor = knownMissing.ForeColor = Color.MediumSeaGreen;
                 styles.Add(8, knownMissing);
                 SetColumns(country);
-                dgReportSheet.DataSource = this._reportList;
+                dgReportSheet.DataSource = _reportList;
                 reportFormHelper.LoadColumnLayout("ColourCensusLayout.xml");
                 tsRecords.Text = $"{Messages.Count}{reportList.Count} records listed.";
                 string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
@@ -87,7 +87,7 @@ namespace FTAnalyzer.Forms
             if (country.Equals(Countries.UNITED_STATES))
             {
                 startColumnIndex = dgReportSheet.Columns["US1790"].Index;
-                endColumnIndex = dgReportSheet.Columns["US1940"].Index;
+                endColumnIndex = dgReportSheet.Columns["US1950"].Index;
                 cbFilter.Items[5] = "Outside USA (Dark Grey)";
             }
             else if (country.Equals(Countries.CANADA))
@@ -218,20 +218,20 @@ namespace FTAnalyzer.Forms
                         IDisplayColourCensus person = (IDisplayColourCensus)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
                         int censusYear;
                         if (_country.Equals(Countries.UNITED_STATES))
-                            censusYear = (1790 + (e.ColumnIndex - startColumnIndex) * 10);
+                            censusYear = 1790 + (e.ColumnIndex - startColumnIndex) * 10;
                         else if (_country.Equals(Countries.CANADA))
                             if (e.ColumnIndex <= dgReportSheet.Columns["Can1901"].Index)
-                                censusYear = (1851 + (e.ColumnIndex - startColumnIndex) * 10);
+                                censusYear = 1851 + (e.ColumnIndex - startColumnIndex) * 10;
                             else
-                                censusYear = (1901 + (e.ColumnIndex - dgReportSheet.Columns["Can1901"].Index) * 5);
+                                censusYear = 1901 + (e.ColumnIndex - dgReportSheet.Columns["Can1901"].Index) * 5;
                         else if (_country.Equals(Countries.IRELAND))
-                            censusYear = (1901 + (e.ColumnIndex - startColumnIndex) * 10);
+                            censusYear = 1901 + (e.ColumnIndex - startColumnIndex) * 10;
                         else
                         {
                             if (e.ColumnIndex == C1939.Index)
                                 censusYear = 1939;
                             else
-                                censusYear = (1841 + (e.ColumnIndex - startColumnIndex) * 10);
+                                censusYear = 1841 + (e.ColumnIndex - startColumnIndex) * 10;
                         }
                         string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
                         if (censusYear == 1939 && 

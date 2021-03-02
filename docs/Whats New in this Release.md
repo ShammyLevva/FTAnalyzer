@@ -1,3 +1,8 @@
+#### Updated Release Version 8.3.1 to be released
+**Bugfixes**  
+Fixed duplicate display of facts in places and lifelines  
+Fixed missing FULLNAME field in beta testers database  
+
 #### Updated Release Version 8.3.0 11th February 2021
 **Bugfixes**  
 Fixed bad bug causing skipping of preferred facts  

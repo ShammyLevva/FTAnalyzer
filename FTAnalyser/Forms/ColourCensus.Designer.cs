@@ -93,6 +93,7 @@ namespace FTAnalyzer.Forms
             this.US1920 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.US1930 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.US1940 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.US1950 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Can1851 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Can1861 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Can1871 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -159,6 +160,7 @@ namespace FTAnalyzer.Forms
             this.US1920,
             this.US1930,
             this.US1940,
+            this.US1950,
             this.Can1851,
             this.Can1861,
             this.Can1871,
@@ -179,7 +181,7 @@ namespace FTAnalyzer.Forms
             this.Ahnentafel});
             this.dgReportSheet.ContextMenuStrip = this.contextMenuStrip;
             this.dgReportSheet.Location = new System.Drawing.Point(0, 54);
-            this.dgReportSheet.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dgReportSheet.Margin = new System.Windows.Forms.Padding(6);
             this.dgReportSheet.MultiSelect = false;
             this.dgReportSheet.Name = "dgReportSheet";
             this.dgReportSheet.ReadOnly = true;
@@ -727,6 +729,17 @@ namespace FTAnalyzer.Forms
             this.US1940.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.US1940.Width = 60;
             // 
+            // US1950
+            // 
+            this.US1950.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.US1950.DataPropertyName = "US1950";
+            this.US1950.HeaderText = "1950 US Census";
+            this.US1950.MinimumWidth = 60;
+            this.US1950.Name = "US1950";
+            this.US1950.ReadOnly = true;
+            this.US1950.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.US1950.Width = 60;
+            // 
             // Can1851
             // 
             this.Can1851.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -928,7 +941,7 @@ namespace FTAnalyzer.Forms
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.dgReportSheet);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "ColourCensus";
             this.Text = "Colour Census Report Result";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ColourCensus_FormClosed);
@@ -1000,6 +1013,7 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn US1920;
         private System.Windows.Forms.DataGridViewTextBoxColumn US1930;
         private System.Windows.Forms.DataGridViewTextBoxColumn US1940;
+        private System.Windows.Forms.DataGridViewTextBoxColumn US1950;
         private System.Windows.Forms.DataGridViewTextBoxColumn Can1851;
         private System.Windows.Forms.DataGridViewTextBoxColumn Can1861;
         private System.Windows.Forms.DataGridViewTextBoxColumn Can1871;
