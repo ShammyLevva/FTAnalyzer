@@ -1,4 +1,7 @@
 #### Updated Release Version 8.3.1 to be released
+**Updates**  
+Added display of 1950 US census support in preparation for release on 1st April  
+
 **Bugfixes**  
 Fixed duplicate display of facts in places and lifelines  
 Fixed missing FULLNAME field in beta testers database  

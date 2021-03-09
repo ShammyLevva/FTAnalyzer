@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "8.3.1.0";
+        public static string VERSION = "8.3.1.0-beta2";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -3648,6 +3648,15 @@ namespace FTAnalyzer
                 Analytics.TrackAction(Analytics.CensusTabAction, Analytics.AliveAtDate);
                 HourGlass(false);
             }
+        }
+
+        void DgIndividuals_Resize(object sender, EventArgs e) => ForceScrollBarVisible(dgIndividuals);
+
+        void ForceScrollBarVisible(DataGridView dataGridView)
+        {
+            var scrollbar = dataGridView.Controls.OfType<VScrollBar>().First();
+            if (!scrollbar.Visible)
+                scrollbar.Visible = true;
         }
     }
 }
