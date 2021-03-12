@@ -1,23 +1,26 @@
 #### Updated Release Version 8.3.1 to be released
 **Updates**  
-Added display of 1950 US census support in preparation for release on 1st April  
+Added display of 1950 US census support in preparation for release on 1st April 2022   
+Updated to NetTopologySuite 2.2.0  
 
 **Bugfixes**  
 Fixed duplicate display of facts in places and lifelines  
 Fixed missing FULLNAME field in beta testers database  
+Fixed issue where UK in location became England, England  
+Added message where no one in file is at location  
 
 #### Updated Release Version 8.3.0 11th February 2021
 **Bugfixes**  
 Fixed bad bug causing skipping of preferred facts  
 
 #### Updated Release Version 8.2.0 6th February 2021
-**Updates**  
+**Updates**  you
 Add option to include processing of alternate facts  
 Display AKA name facts as ALIAS facts  
 Allow loading of bad Ancestry GEDCOM bug with @@? tags on source references  
 
 #### Updated Release Version 8.1.2 3rd February 2021
-**Updates**  
+**Updates**  make 
 Added support for US census references 1790-1890 using Mxxx reference format  
 
 **Bugfixes**  

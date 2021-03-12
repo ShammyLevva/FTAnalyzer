@@ -49,19 +49,19 @@ namespace FTAnalyzer.Forms
         void UpdateStatusCount()
         {
             if (reportType == ReportType.MissingChildrenStatus || reportType == ReportType.MismatchedChildrenStatus)
-                txtCount.Text = dgFamilies.RowCount + " Problems detected. " + Properties.Messages.Hints_IndividualFamily + " Shift Double click to see colour census report for family.";
+                txtCount.Text = $"{dgFamilies.RowCount} Problems detected. {Properties.Messages.Hints_IndividualFamily} Shift Double click to see colour census report for family.";
             else
             {
                 if (splitContainer.Panel2Collapsed)
-                    txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals.  " + Properties.Messages.Hints_Individual;
+                    txtCount.Text = $"Count: {dgIndividuals.RowCount} Individuals.  {Properties.Messages.Hints_Individual}";
                 else
-                    txtCount.Text = "Count: " + dgIndividuals.RowCount + " Individuals and " + dgFamilies.RowCount + " Families. " + Properties.Messages.Hints_IndividualFamily;
+                    txtCount.Text = $"Count: {dgIndividuals.RowCount} Individuals and {dgFamilies.RowCount} Families. {Properties.Messages.Hints_IndividualFamily}";
             }
         }
 
         public void SetLocation(FactLocation loc, int level)
         {
-            Text = "Individuals & Families with connection to " + loc.ToString();
+            Text = $"Individuals & Families with connection to {loc}";
             level = Math.Min(loc.Level, level); // if location level isn't as detailed as level on tab use location level
             IEnumerable<Individual> listInd = ft.GetIndividualsAtLocation(loc, level);
             SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();

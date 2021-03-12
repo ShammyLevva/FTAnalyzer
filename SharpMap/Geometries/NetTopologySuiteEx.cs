@@ -56,7 +56,7 @@ namespace NetTopologySuite.Geometries
 
         private static CoordinateSequence CreateClosedRing(CoordinateSequenceFactory fact, CoordinateSequence seq, int size)
         {
-            var newseq = fact.Create(size, seq.Dimension);
+            var newseq = fact.Create(size, seq.Dimension,2);
             int n = seq.Count;
             Copy(seq, 0, newseq, 0, n);
             // fill remaining coordinates with start point
@@ -377,10 +377,10 @@ namespace NetTopologySuite.Geometries
         /// <param name="self"></param>
         /// <param name="wkt"></param>
         /// <returns></returns>
-        public static Geometry GeomFromText(this Geometry self, string wkt)
+        public static Geometry GeomFromText(string wkt)
         {
-            var factory = self == null ? new NetTopologySuite.Geometries.GeometryFactory() : self.Factory;
-            var reader = new NetTopologySuite.IO.WKTReader(factory);
+            //var factory = self == null ? new GeometryFactory() : self.Factory;
+            var reader = new IO.WKTReader(NtsGeometryServices.Instance);
             return reader.Read(wkt);
         }
 

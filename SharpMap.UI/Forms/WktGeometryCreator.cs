@@ -67,9 +67,7 @@ namespace SharpMap.Forms
             txtWkt.Text = _wktWriter.Write(_geometry);
         }
 
-        private readonly NetTopologySuite.IO.WKTReader _wktReader = new NetTopologySuite.IO.WKTReader(
-            NtsGeometryServices.Instance.CreateGeometryFactory());
-        
+        private readonly NetTopologySuite.IO.WKTReader _wktReader = new NetTopologySuite.IO.WKTReader(NtsGeometryServices.Instance);
         
         private void txtWkt_TextChanged(object sender, EventArgs e)
         {

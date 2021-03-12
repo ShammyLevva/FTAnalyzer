@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "8.3.1.0-beta2";
+        public static string VERSION = "8.3.1.0";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -695,7 +695,6 @@ namespace FTAnalyzer
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
         float GetMapZoomLevel(out FactLocation loc)
         {
             // get the tab
@@ -1064,10 +1063,15 @@ namespace FTAnalyzer
             var location = e.Node.Tag as FactLocation;
             if (location != null)
             {
-                var frmInd = new People();
-                frmInd.SetLocation(location, e.Node.Level);
-                DisposeDuplicateForms(frmInd);
-                frmInd.Show();
+                if (ft.CountPeopleAtLocation(location, e.Node.Level) == 0)
+                    UIHelpers.ShowMessage($"You have no one in your file at {location}.");
+                else
+                {
+                    var frmInd = new People();
+                    frmInd.SetLocation(location, e.Node.Level);
+                    DisposeDuplicateForms(frmInd);
+                    frmInd.Show();
+                }
             }
             HourGlass(false);
         }
