@@ -8,6 +8,8 @@ Fixed duplicate display of facts in places and lifelines
 Fixed missing FULLNAME field in beta testers database  
 Fixed issue where UK in location became England, England  
 Added message where no one in file is at location  
+Fixed issue of colour census reports not showing correctly when alternate facts off  
+Fixed issue of created facts creating for dates when individual wasn't alive  
 
 #### Updated Release Version 8.3.0 11th February 2021
 **Bugfixes**  
