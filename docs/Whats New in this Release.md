@@ -1,4 +1,4 @@
-#### Updated Release Version 8.3.1 to be released
+#### Updated Release Version 8.3.1 16th March 2021  
 **Updates**  
 Added display of 1950 US census support in preparation for release on 1st April 2022   
 Updated to NetTopologySuite 2.2.0  
@@ -10,6 +10,7 @@ Fixed issue where UK in location became England, England
 Added message where no one in file is at location  
 Fixed issue of colour census reports not showing correctly when alternate facts off  
 Fixed issue of created facts creating for dates when individual wasn't alive  
+Hopefully fixed the installer uninstall first issue  
 
 #### Updated Release Version 8.3.0 11th February 2021
 **Bugfixes**  
