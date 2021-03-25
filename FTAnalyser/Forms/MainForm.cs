@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "8.3.1.0";
+        public static string VERSION = "8.4.0.0";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -48,22 +48,28 @@ namespace FTAnalyzer
 
         public MainForm()
         {
-            InitializeComponent();
-            loading = true;
-            FamilyTree.Instance.Version = $"v{VERSION}";
-            _ = NativeMethods.GetTaskBarPos(); // Sets taskbar offset
-            displayOptionsOnLoadToolStripMenuItem.Checked = GeneralSettings.Default.ReportOptions;
-            treetopsRelation.MarriedToDB = false;
-            ShowMenus(false);
-            log.Info("Started FTAnalyzer version " + VERSION);
-            int pos = VERSION.IndexOf('-');
-            string ver = pos > 0 ? VERSION.Substring(0, VERSION.IndexOf('-')) : VERSION;
-            DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
-            CheckSystemVersion();
-            if (!Application.ExecutablePath.Contains("WindowsApps"))
-                CheckWebVersion(); // check for web version if not windows store app
-            SetSavePath();
-            BuildRecentList();
+            try
+            {
+                InitializeComponent();
+                loading = true;
+                FamilyTree.Instance.Version = $"v{VERSION}";
+                _ = NativeMethods.GetTaskBarPos(); // Sets taskbar offset
+                displayOptionsOnLoadToolStripMenuItem.Checked = GeneralSettings.Default.ReportOptions;
+                treetopsRelation.MarriedToDB = false;
+                ShowMenus(false);
+                log.Info($"Started FTAnalyzer version {VERSION}");
+                int pos = VERSION.IndexOf('-');
+                string ver = pos > 0 ? VERSION.Substring(0, VERSION.IndexOf('-')) : VERSION;
+                DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
+                CheckSystemVersion();
+                if (!Application.ExecutablePath.Contains("WindowsApps"))
+                    CheckWebVersion(); // check for web version if not windows store app
+                SetSavePath();
+                BuildRecentList();
+            } catch (Exception e)
+            {
+                UIHelpers.ShowMessage($"Problem starting up error was : {e.Message}");
+            }
         }
 
         void MainForm_Load(object sender, EventArgs e)
@@ -250,6 +256,7 @@ namespace FTAnalyzer
             timer.Stop();
             WriteTime("File Loaded", outputText, timer);
             timer.Start();
+            ft.DocumentLoaded = true;
             var sourceProgress = new Progress<int>(value => { pbSources.Value = value; });
             var individualProgress = new Progress<int>(value => { pbIndividuals.Value = value; });
             var familyProgress = new Progress<int>(value => { pbFamilies.Value = value; });
@@ -258,17 +265,30 @@ namespace FTAnalyzer
             await Task.Run(() => ft.LoadTreeIndividuals(doc, individualProgress, outputText)).ConfigureAwait(true);
             await Task.Run(() => ft.LoadTreeFamilies(doc, familyProgress, outputText)).ConfigureAwait(true);
             await Task.Run(() => ft.LoadTreeRelationships(doc, RelationshipProgress, outputText)).ConfigureAwait(true);
+            await Task.Run(() => ft.CleanUpXML()).ConfigureAwait(true);
+            doc = null;
+            ft.DocumentLoaded = false;
             timer.Stop();
             WriteTime("\nFile Loaded and Analysed", outputText, timer);
+            WriteMemory(outputText);
             return true;
         }
 
-        void WriteTime(String prefixText, IProgress<string> outputText, Stopwatch timer)
+        void WriteTime(string prefixText, IProgress<string> outputText, Stopwatch timer)
         {
             TimeSpan ts = timer.Elapsed;
             // Format and display the TimeSpan value.
-            string elapsedTime = String.Format("{0:00}h {1:00}m {2:00}.{3:00}s", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+            string elapsedTime = string.Format("{0:00}h {1:00}m {2:00}.{3:00}s", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
             outputText.Report($"{prefixText} in {elapsedTime}\n\n");
+        }
+
+        void WriteMemory(IProgress<string> outputText)
+        {
+            long memoryBefore = GC.GetTotalMemory(false);
+            long memoryAfter = GC.GetTotalMemory(true);
+            string sizeBefore = SpecialMethods.SizeSuffix(memoryBefore, 2);
+            string sizeAfter = SpecialMethods.SizeSuffix(memoryAfter, 2);
+            outputText.Report($"File used {sizeBefore} during loading, reduced to {sizeAfter} after processing.");
         }
 
         void EnableLoadMenus()

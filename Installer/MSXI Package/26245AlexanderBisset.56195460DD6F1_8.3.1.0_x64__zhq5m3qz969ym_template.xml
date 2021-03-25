@@ -56,5 +56,5 @@
   </Settings>
   <SaveLocation PackagePath="C:\Users\ambis\source\repos\ShammyLevva\FTAnalyzer\Installer\MSXI Package\26245AlexanderBisset.56195460DD6F1_8.3.1.0_x64__zhq5m3qz969ym.msix" TemplatePath="C:\Users\ambis\source\repos\ShammyLevva\FTAnalyzer\Installer\MSXI Package\26245AlexanderBisset.56195460DD6F1_8.3.1.0_x64__zhq5m3qz969ym_template.xml" />
   <Installer Path="C:\Users\ambis\source\repos\ShammyLevva\FTAnalyzer\Installer\Debug\Installer.msi" />
-  <PackageInformation PackageName="26245AlexanderBisset.56195460DD6F1" PackageDisplayName="FTAnalyzer" PublisherName="CN=A9B22507-AD23-4870-AFE9-FB8F05F6EB76" PublisherDisplayName="FTAnalyzer" Version="8.3.1.0" p4:PackageDescription="Analyse the hidden depths in your family tree" xmlns:p4="http://schemas.microsoft.com/msix/msixpackagingtool/template/1910" />
+  <PackageInformation PackageName="FTAnalyzer" PackageDisplayName="FTAnalyzer" PublisherName="CN=A9B22507-AD23-4870-AFE9-FB8F05F6EB76" PublisherDisplayName="FTAnalyzer" Version="8.3.1.0" p4:PackageDescription="Analyse the hidden depths in your family tree" xmlns:p4="http://schemas.microsoft.com/msix/msixpackagingtool/template/1910" />
 </MsixPackagingToolTemplate>
