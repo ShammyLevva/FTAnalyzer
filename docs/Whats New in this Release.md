@@ -1,3 +1,9 @@
+#### Updated Release Version 8.4.0 to be released  
+**Updates**  
+Temp XML file is now unloaded after initial processing freeing up memory  
+Initial Load now says how much memory was used during loading and procesing  
+Updated packages to latest versions including BruTile & NewtonsoftJSON  
+
 #### Updated Release Version 8.3.1 16th March 2021  
 **Updates**  
 Added display of 1950 US census support in preparation for release on 1st April 2022   
