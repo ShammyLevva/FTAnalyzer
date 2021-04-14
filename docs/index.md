@@ -3,7 +3,7 @@ Family Tree Analyzer
 
 #### Install the latest Windows version FREE from the [Offical Microsoft Store](https://www.microsoft.com/store/apps/9PMJL9HVPL7X?cid=storebadge&ocid=badge). This version will automatically update as new versions become available.  
 
-If you have [issues with the Windows Store](http://www.ftanalyzer.com/ResetWindowsStore) or have a older version of Windows you can find a stand alone installer version [here](http://ftanalyzer.com/releases). This version is identical to the Windows Store version but it will require you to manually update to get the latest changes. It does however allow you to run the program on pre-Windows 10 versions of Windows, however as time passes the ability to keep it working on really old versions of Windows may stop working.
+If you have [issues with the Windows Store](http://www.ftanalyzer.com/ResetWindowsStore) or have a older version of Windows you can [download a stand alone installer version here](http://ftanalyzer.com/releases). This version is identical to the Windows Store version but it will require you to manually update to get the latest changes. It does however allow you to run the program on pre-Windows 10 versions of Windows, however as time passes the ability to keep it working on really old versions of Windows may stop working.
 
 #### If you have a Mac search for FTAnalyzer on the Mac App Store for your region or for a beta version click [here.](http://mac.ftanalyzer.com)  
 
