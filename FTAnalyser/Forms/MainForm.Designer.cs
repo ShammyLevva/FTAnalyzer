@@ -44,8 +44,8 @@ namespace FTAnalyzer
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -148,6 +148,9 @@ namespace FTAnalyzer
             this.tbDuplicateScore = new System.Windows.Forms.TrackBar();
             this.chkLCRootPersonConfirm = new System.Windows.Forms.CheckBox();
             this.dgCheckAncestors = new System.Windows.Forms.DataGridView();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.chkIgnoreUnnamedTwins = new System.Windows.Forms.CheckBox();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
@@ -319,8 +322,6 @@ namespace FTAnalyzer
             this.ckbHideIgnoredDuplicates = new System.Windows.Forms.CheckBox();
             this.label16 = new System.Windows.Forms.Label();
             this.labDuplicateSlider = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.labCalcDuplicates = new System.Windows.Forms.Label();
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.dgDuplicates = new System.Windows.Forms.DataGridView();
@@ -1275,14 +1276,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 319);
             this.dgDataErrors.Margin = new System.Windows.Forms.Padding(6);
             this.dgDataErrors.Name = "dgDataErrors";
@@ -1337,14 +1338,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgCheckAncestors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgCheckAncestors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgCheckAncestors.Location = new System.Drawing.Point(-2, 162);
             this.dgCheckAncestors.Margin = new System.Windows.Forms.Padding(6);
             this.dgCheckAncestors.Name = "dgCheckAncestors";
@@ -1356,6 +1357,46 @@ namespace FTAnalyzer
             this.dgCheckAncestors.Size = new System.Drawing.Size(2122, 568);
             this.dgCheckAncestors.TabIndex = 7;
             this.toolTips.SetToolTip(this.dgCheckAncestors, "Double click to see list of facts for that individual");
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(1425, 46);
+            this.label13.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(184, 25);
+            this.label13.TabIndex = 24;
+            this.label13.Text = "Aggressive Match";
+            this.toolTips.SetToolTip(this.label13, "Will produce duplicates in list when the two individuals are a very close match t" +
+        "o each other - only those with highest duplicate match score");
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(888, 46);
+            this.label12.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(136, 25);
+            this.label12.TabIndex = 23;
+            this.label12.Text = "Loose Match";
+            this.toolTips.SetToolTip(this.label12, "Will produce duplicates in list when the two individuals decent but vague match t" +
+        "o each other - Lowest duplicate match score");
+            // 
+            // chkIgnoreUnnamedTwins
+            // 
+            this.chkIgnoreUnnamedTwins.AutoSize = true;
+            this.chkIgnoreUnnamedTwins.Checked = true;
+            this.chkIgnoreUnnamedTwins.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkIgnoreUnnamedTwins.Location = new System.Drawing.Point(491, 79);
+            this.chkIgnoreUnnamedTwins.Margin = new System.Windows.Forms.Padding(6);
+            this.chkIgnoreUnnamedTwins.Name = "chkIgnoreUnnamedTwins";
+            this.chkIgnoreUnnamedTwins.Size = new System.Drawing.Size(261, 29);
+            this.chkIgnoreUnnamedTwins.TabIndex = 29;
+            this.chkIgnoreUnnamedTwins.Text = "Ignore unnamed Twins";
+            this.toolTips.SetToolTip(this.chkIgnoreUnnamedTwins, "Ignores duplicates where forename is unknown");
+            this.chkIgnoreUnnamedTwins.UseVisualStyleBackColor = true;
+            this.chkIgnoreUnnamedTwins.Visible = false;
             // 
             // printPreviewDialog
             // 
@@ -3466,6 +3507,7 @@ namespace FTAnalyzer
             // 
             // tabDuplicates
             // 
+            this.tabDuplicates.Controls.Add(this.chkIgnoreUnnamedTwins);
             this.tabDuplicates.Controls.Add(this.ckbHideIgnoredDuplicates);
             this.tabDuplicates.Controls.Add(this.label16);
             this.tabDuplicates.Controls.Add(this.labDuplicateSlider);
@@ -3523,31 +3565,6 @@ namespace FTAnalyzer
             this.labDuplicateSlider.Size = new System.Drawing.Size(311, 26);
             this.labDuplicateSlider.TabIndex = 25;
             this.labDuplicateSlider.Text = "Duplicates Match Quality : 1";
-            // 
-            // label13
-            // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(1425, 46);
-            this.label13.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(184, 25);
-            this.label13.TabIndex = 24;
-            this.label13.Text = "Aggressive Match";
-            this.toolTips.SetToolTip(this.label13, "Will produce duplicates in list when the two individuals are a very close match t" +
-        "o each other");
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(888, 46);
-            this.label12.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(136, 25);
-            this.label12.TabIndex = 23;
-            this.label12.Text = "Loose Match";
-            this.toolTips.SetToolTip(this.label12, "Will produce duplicates in list when the two individuals decent but vague match t" +
-        "o each other");
             // 
             // labCalcDuplicates
             // 
@@ -4696,6 +4713,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Button btnAliveOnDate;
         private System.Windows.Forms.ToolStripMenuItem mnuSurnamesToExcel;
+        private System.Windows.Forms.CheckBox chkIgnoreUnnamedTwins;
     }
 }
 

@@ -352,6 +352,10 @@ namespace Testing
             target = new FactDate("2d 3m 1870");
             Assert.AreEqual(new DateTime(1870, 5, 2), target.StartDate);
             Assert.AreEqual(new DateTime(1870, 5, 2), target.EndDate);
+
+            target = new FactDate("<1870>");
+            Assert.AreEqual(new DateTime(1870, 1, 1), target.StartDate);
+            Assert.AreEqual(new DateTime(1870, 12, 31), target.EndDate);
             return target;
         }
 

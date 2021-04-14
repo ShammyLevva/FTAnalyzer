@@ -2590,7 +2590,8 @@ namespace FTAnalyzer
             });
             cts = new CancellationTokenSource();
             int score = tbDuplicateScore.Value;
-            SortableBindingList<IDisplayDuplicateIndividual> data = await Task.Run(() => ft.GenerateDuplicatesList(score, progress, maxScore, cts.Token)).ConfigureAwait(true);
+            bool ignoreUnknownTwins = chkIgnoreUnnamedTwins.Checked;
+            SortableBindingList<IDisplayDuplicateIndividual> data = await Task.Run(() => ft.GenerateDuplicatesList(score, ignoreUnknownTwins, progress, maxScore, cts.Token)).ConfigureAwait(true);
             cts = null;
             if (data != null)
             {
