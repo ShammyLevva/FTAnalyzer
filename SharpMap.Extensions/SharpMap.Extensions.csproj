@@ -70,7 +70,7 @@
       <HintPath>..\FTAnalyser\packages\NetTopologySuite.Features.2.1.0\lib\netstandard2.0\NetTopologySuite.Features.dll</HintPath>
     </Reference>
     <Reference Include="NetTopologySuite.IO.PostGis, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
-      <HintPath>..\FTAnalyser\packages\NetTopologySuite.IO.PostGis.2.0.0\lib\netstandard2.0\NetTopologySuite.IO.PostGis.dll</HintPath>
+      <HintPath>..\FTAnalyser\packages\NetTopologySuite.IO.PostGis.2.1.0\lib\netstandard2.0\NetTopologySuite.IO.PostGis.dll</HintPath>
     </Reference>
     <Reference Include="NetTopologySuite.IO.SpatiaLite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
       <HintPath>..\FTAnalyser\packages\NetTopologySuite.IO.SpatiaLite.2.0.0\lib\netstandard2.0\NetTopologySuite.IO.SpatiaLite.dll</HintPath>
