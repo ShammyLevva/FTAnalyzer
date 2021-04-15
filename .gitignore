@@ -266,3 +266,5 @@ __pycache__/
 !/docs/releases
 /FTAnalyser/FTAnalyzer.Windows*.ruleset
 /FTAnalyser/Performance*.psess
+/FTAnalyser/Report20210415-1344.diagsession
+/FTAnalyser/Report20210415-0049.diagsession
