@@ -2583,6 +2583,7 @@ namespace FTAnalyzer
                     value = pbDuplicates.Maximum;
                 pbDuplicates.Value = value;
             });
+            var progressText = new Progress<string>(value => labCompletion.Text = value);
             var maxScore = new Progress<int>(value =>
             {
                 tbDuplicateScore.TickFrequency = value / 20;
@@ -2593,13 +2594,13 @@ namespace FTAnalyzer
             bool ignoreUnknownTwins = chkIgnoreUnnamedTwins.Checked;
             tsCountLabel.Text = "Calculating Duplicates this may take some considerable time";
             tsHintsLabel.Text = string.Empty;
-            SortableBindingList <IDisplayDuplicateIndividual> data = await Task.Run(() => ft.GenerateDuplicatesList(score, ignoreUnknownTwins, progress, maxScore, cts.Token)).ConfigureAwait(true);
+            SortableBindingList <IDisplayDuplicateIndividual> data = await Task.Run(() => ft.GenerateDuplicatesList(score, ignoreUnknownTwins, progress, progressText, maxScore, cts.Token)).ConfigureAwait(true);
             cts = null;
             if (data != null)
             {
                 dgDuplicates.DataSource = data;
                 rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
-                labDuplicateSlider.Text = "Duplicates Match Quality : " + tbDuplicateScore.Value;
+                labDuplicateSlider.Text = $"Match Quality : {tbDuplicateScore.Value}";
                 tsCountLabel.Text = $"Possible Duplicate Count : {dgDuplicates.RowCount}.  {Messages.Hints_Duplicates}";
                 dgDuplicates.UseWaitCursor = false;
             }
@@ -2612,6 +2613,7 @@ namespace FTAnalyzer
             btnCancelDuplicates.Visible = visible;
             labCalcDuplicates.Visible = visible;
             pbDuplicates.Visible = visible;
+            labCompletion.Visible = visible;
         }
 
         void ResetDuplicatesTable()
