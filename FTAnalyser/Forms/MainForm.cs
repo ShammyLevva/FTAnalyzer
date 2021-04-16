@@ -2591,6 +2591,7 @@ namespace FTAnalyzer
             });
             cts = new CancellationTokenSource();
             int score = tbDuplicateScore.Value;
+            labDuplicateSlider.Text = $"Match Quality : {tbDuplicateScore.Value}";
             bool ignoreUnknownTwins = chkIgnoreUnnamedTwins.Checked;
             tsCountLabel.Text = "Calculating Duplicates this may take some considerable time";
             tsHintsLabel.Text = string.Empty;
@@ -2600,7 +2601,6 @@ namespace FTAnalyzer
             {
                 dgDuplicates.DataSource = data;
                 rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
-                labDuplicateSlider.Text = $"Match Quality : {tbDuplicateScore.Value}";
                 tsCountLabel.Text = $"Possible Duplicate Count : {dgDuplicates.RowCount}.  {Messages.Hints_Duplicates}";
                 dgDuplicates.UseWaitCursor = false;
             }

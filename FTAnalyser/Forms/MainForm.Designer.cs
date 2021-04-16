@@ -44,8 +44,8 @@ namespace FTAnalyzer
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -310,7 +310,6 @@ namespace FTAnalyzer
             this.tabDuplicates = new System.Windows.Forms.TabPage();
             this.ckbHideIgnoredDuplicates = new System.Windows.Forms.CheckBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.labDuplicateSlider = new System.Windows.Forms.Label();
             this.labCalcDuplicates = new System.Windows.Forms.Label();
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
             this.dgDuplicates = new System.Windows.Forms.DataGridView();
@@ -382,6 +381,7 @@ namespace FTAnalyzer
             this.wardeadRelation = new FTAnalyzer.Controls.RelationTypes();
             this.wardeadCountry = new FTAnalyzer.Controls.CensusCountry();
             this.rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
+            this.labDuplicateSlider = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -1269,14 +1269,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgDataErrors.Location = new System.Drawing.Point(0, 166);
             this.dgDataErrors.Name = "dgDataErrors";
             this.dgDataErrors.ReadOnly = true;
@@ -1328,14 +1328,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgCheckAncestors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgCheckAncestors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgCheckAncestors.Location = new System.Drawing.Point(-1, 84);
             this.dgCheckAncestors.Name = "dgCheckAncestors";
             this.dgCheckAncestors.ReadOnly = true;
@@ -3206,11 +3206,11 @@ namespace FTAnalyzer
             // 
             // tabDuplicates
             // 
+            this.tabDuplicates.Controls.Add(this.labDuplicateSlider);
             this.tabDuplicates.Controls.Add(this.labCompletion);
             this.tabDuplicates.Controls.Add(this.chkIgnoreUnnamedTwins);
             this.tabDuplicates.Controls.Add(this.ckbHideIgnoredDuplicates);
             this.tabDuplicates.Controls.Add(this.label16);
-            this.tabDuplicates.Controls.Add(this.labDuplicateSlider);
             this.tabDuplicates.Controls.Add(this.label13);
             this.tabDuplicates.Controls.Add(this.label12);
             this.tabDuplicates.Controls.Add(this.tbDuplicateScore);
@@ -3250,17 +3250,6 @@ namespace FTAnalyzer
             this.label16.Size = new System.Drawing.Size(199, 18);
             this.label16.TabIndex = 26;
             this.label16.Text = "Candidate Duplicates List";
-            // 
-            // labDuplicateSlider
-            // 
-            this.labDuplicateSlider.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.labDuplicateSlider.AutoSize = true;
-            this.labDuplicateSlider.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labDuplicateSlider.Location = new System.Drawing.Point(561, 24);
-            this.labDuplicateSlider.Name = "labDuplicateSlider";
-            this.labDuplicateSlider.Size = new System.Drawing.Size(104, 13);
-            this.labDuplicateSlider.TabIndex = 25;
-            this.labDuplicateSlider.Text = "Match Quality : 1";
             // 
             // labCalcDuplicates
             // 
@@ -4040,6 +4029,17 @@ namespace FTAnalyzer
             this.rtbToday.TabIndex = 7;
             this.rtbToday.Text = "";
             // 
+            // labDuplicateSlider
+            // 
+            this.labDuplicateSlider.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labDuplicateSlider.AutoSize = true;
+            this.labDuplicateSlider.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labDuplicateSlider.Location = new System.Drawing.Point(560, 35);
+            this.labDuplicateSlider.Name = "labDuplicateSlider";
+            this.labDuplicateSlider.Size = new System.Drawing.Size(104, 13);
+            this.labDuplicateSlider.TabIndex = 31;
+            this.labDuplicateSlider.Text = "Match Quality : 1";
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -4357,7 +4357,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.CheckBox ckbHideIgnoredDuplicates;
         private System.Windows.Forms.Button btnCancelDuplicates;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label labDuplicateSlider;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TrackBar tbDuplicateScore;
@@ -4502,6 +4501,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem mnuSurnamesToExcel;
         private System.Windows.Forms.CheckBox chkIgnoreUnnamedTwins;
         private System.Windows.Forms.Label labCompletion;
+        private System.Windows.Forms.Label labDuplicateSlider;
     }
 }
 
