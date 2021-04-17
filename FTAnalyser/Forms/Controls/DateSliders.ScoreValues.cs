@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace FTAnalyzer.Controls
+namespace FTAnalyzer.Forms.Controls
 {
     public partial class DateSliders
     {
