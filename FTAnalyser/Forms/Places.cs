@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Controls;
+﻿using FTAnalyzer.Forms.Controls;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
 using NetTopologySuite.Geometries;

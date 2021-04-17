@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Controls;
+﻿using FTAnalyzer.Forms.Controls;
 using FTAnalyzer.Exports;
 using FTAnalyzer.Filters;
 using FTAnalyzer.Forms;
@@ -3290,7 +3290,7 @@ namespace FTAnalyzer
             }
             List<SurnameStats> list = new List<SurnameStats>(stats);
             using (DataTable dt = convertor.ToDataTable(list))
-                ExportToExcel.Export(dt);
+                ExportToExcel. Export(dt);
             await Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportSurnamesEvent);
             HourGlass(false);
         }

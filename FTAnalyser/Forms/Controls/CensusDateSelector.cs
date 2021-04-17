@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace FTAnalyzer.Controls
+namespace FTAnalyzer.Forms.Controls
 {
     public partial class CensusDateSelector : UserControl
     {

@@ -13,7 +13,7 @@ using FTAnalyzer.Utilities;
 using NetTopologySuite.Geometries;
 using System.Text;
 using SharpMap.Utilities;
-using FTAnalyzer.Controls;
+using FTAnalyzer.Forms.Controls;
 
 namespace FTAnalyzer.Forms
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FTAnalyzer.Controls
+namespace FTAnalyzer.Forms.Controls
 {
     partial class CensusDateSelector
     {

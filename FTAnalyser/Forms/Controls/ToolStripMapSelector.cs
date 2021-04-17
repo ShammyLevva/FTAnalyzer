@@ -5,7 +5,7 @@ using SharpMap.Forms;
 using System.Drawing;
 using FTAnalyzer.Mapping;
 
-namespace FTAnalyzer.Controls
+namespace FTAnalyzer.Forms.Controls
 {
     public class ToolStripMapSelector : ToolStripDropDownButton
     {

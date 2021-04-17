@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 using BruTile.Web;
-using static FTAnalyzer.Controls.ToolStripMapSelector;
+using static FTAnalyzer.Forms.Controls.ToolStripMapSelector;
 
-namespace FTAnalyzer.Controls
+namespace FTAnalyzer.Forms.Controls
 {
     public class MapToolStripMenuItem : ToolStripMenuItem
     {
