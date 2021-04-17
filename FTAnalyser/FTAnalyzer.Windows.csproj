@@ -301,6 +301,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Forms\Controls\TreeViewHandler.cs" />
+    <Compile Include="Forms\Controls\DuplicatesVirtualDGV.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\LostCousinsReferral.cs">
       <SubType>Form</SubType>
     </Compile>

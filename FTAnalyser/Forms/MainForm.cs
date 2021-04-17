@@ -1498,7 +1498,6 @@ namespace FTAnalyzer
                 rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
                 ckbHideIgnoredDuplicates.Checked = GeneralSettings.Default.HideIgnoredDuplicates;
                 await SetPossibleDuplicates().ConfigureAwait(true);
-                ResetDuplicatesTable(); // force a reset on intial load
                 dgDuplicates.Focus();
                 mnuPrint.Enabled = true;
                 await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.DuplicatesTabEvent).ConfigureAwait(true);
@@ -2570,6 +2569,7 @@ namespace FTAnalyzer
 
         #region Duplicates Tab
         CancellationTokenSource cts;
+        SortableBindingList<IDisplayDuplicateIndividual> duplicateData;
 
         async Task SetPossibleDuplicates()
         {
@@ -2591,17 +2591,17 @@ namespace FTAnalyzer
             });
             cts = new CancellationTokenSource();
             int score = tbDuplicateScore.Value;
-            labDuplicateSlider.Text = $"Match Quality : {tbDuplicateScore.Value}";
+            labDuplicateSlider.Text = $"Match Quality : {tbDuplicateScore.Value}  ";
             bool ignoreUnknownTwins = chkIgnoreUnnamedTwins.Checked;
             tsCountLabel.Text = "Calculating Duplicates this may take some considerable time";
             tsHintsLabel.Text = string.Empty;
-            SortableBindingList <IDisplayDuplicateIndividual> data = await Task.Run(() => ft.GenerateDuplicatesList(score, ignoreUnknownTwins, progress, progressText, maxScore, cts.Token)).ConfigureAwait(true);
+            duplicateData = await Task.Run(() => ft.GenerateDuplicatesList(score, ignoreUnknownTwins, progress, progressText, maxScore, cts.Token)).ConfigureAwait(true);
             cts = null;
-            if (data != null)
+            if (duplicateData != null)
             {
-                dgDuplicates.DataSource = data;
+                dgDuplicates.DataSource = duplicateData;
                 rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
-                tsCountLabel.Text = $"Possible Duplicate Count : {dgDuplicates.RowCount}.  {Messages.Hints_Duplicates}";
+                tsCountLabel.Text = $"Possible Duplicate Count : {dgDuplicates.RowCount:N0}.  {Messages.Hints_Duplicates}";
                 dgDuplicates.UseWaitCursor = false;
             }
             SetDuplicateControlsVisibility(false);
@@ -2620,7 +2620,6 @@ namespace FTAnalyzer
         {
             if (dgDuplicates.RowCount > 0)
             {
-                dgDuplicates.Sort(dgDuplicates.Columns["DuplicateBirthDate"], ListSortDirection.Ascending);
                 dgDuplicates.Sort(dgDuplicates.Columns["DuplicateForenames"], ListSortDirection.Ascending);
                 dgDuplicates.Sort(dgDuplicates.Columns["DuplicateSurname"], ListSortDirection.Ascending);
                 dgDuplicates.Sort(dgDuplicates.Columns["Score"], ListSortDirection.Descending);
