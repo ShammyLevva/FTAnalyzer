@@ -1433,7 +1433,7 @@ namespace FTAnalyzer
                 dgFamilies.AllowUserToResizeColumns = true;
                 dgFamilies.Focus();
                 mnuPrint.Enabled = true;
-                tsCountLabel.Text = Messages.Count + list.Count;
+                tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
                 tsHintsLabel.Text = Messages.Hints_Family;
                 Analytics.TrackAction(Analytics.MainListsAction, Analytics.FamilyTabEvent);
             }
@@ -1445,7 +1445,7 @@ namespace FTAnalyzer
                 dgSources.AllowUserToResizeColumns = true;
                 dgSources.Focus();
                 mnuPrint.Enabled = true;
-                tsCountLabel.Text = Messages.Count + list.Count;
+                tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
                 tsHintsLabel.Text = Messages.Hints_Sources;
                 Analytics.TrackAction(Analytics.MainListsAction, Analytics.SourcesTabEvent);
             }
@@ -1457,7 +1457,7 @@ namespace FTAnalyzer
                 dgOccupations.AllowUserToResizeColumns = true;
                 dgOccupations.Focus();
                 mnuPrint.Enabled = true;
-                tsCountLabel.Text = Messages.Count + list.Count;
+                tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
                 tsHintsLabel.Text = Messages.Hints_Occupation;
                 Analytics.TrackAction(Analytics.MainListsAction, Analytics.OccupationsTabEvent);
             }
@@ -1471,7 +1471,7 @@ namespace FTAnalyzer
                 dgCustomFacts.Columns["Ignore"].ReadOnly = false;
                 dgCustomFacts.Columns["Ignore"].ToolTipText = "Tick box to ignore warnings for this custom fact type.";
                 mnuPrint.Enabled = true;
-                tsCountLabel.Text = Messages.Count + list.Count;
+                tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
                 tsHintsLabel.Text = Messages.Hints_CustomFacts;
                 Analytics.TrackAction(Analytics.MainListsAction, Analytics.CustomFactTabEvent);
             }
@@ -1485,7 +1485,7 @@ namespace FTAnalyzer
             dgIndividuals.AllowUserToResizeColumns = true;
             dgIndividuals.Focus();
             mnuPrint.Enabled = true;
-            tsCountLabel.Text = Messages.Count + list.Count;
+            tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
             tsHintsLabel.Text = Messages.Hints_Individual;
         }
 

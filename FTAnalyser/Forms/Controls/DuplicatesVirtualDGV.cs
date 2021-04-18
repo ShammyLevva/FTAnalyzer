@@ -51,7 +51,7 @@ namespace FTAnalyzer.Forms.Controls
 
             if (_duplicateData is null) return;
 
-            var comparer = new PropertyComparer(sortedColumn.DataPropertyName, direction);
+            var comparer = new DuplicateIndividualPropertyComparer(sortedColumn.DataPropertyName, direction);
             _duplicateData.Sort(comparer);
 
             Refresh();
@@ -123,12 +123,12 @@ namespace FTAnalyzer.Forms.Controls
 
     }
 
-    class PropertyComparer : IComparer<IDisplayDuplicateIndividual>
+    class DuplicateIndividualPropertyComparer : IComparer<IDisplayDuplicateIndividual>
     {
         PropertyInfo _accessor;
         int _direction;
 
-        public PropertyComparer(string propertyName, ListSortDirection direction)
+        public DuplicateIndividualPropertyComparer(string propertyName, ListSortDirection direction)
         {
             _accessor = typeof(IDisplayDuplicateIndividual).GetProperty(propertyName);
             _direction = direction == ListSortDirection.Ascending ? 1 : -1;
