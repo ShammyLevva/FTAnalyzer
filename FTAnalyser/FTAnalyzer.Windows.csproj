@@ -298,6 +298,15 @@
     <Compile Include="Forms\Controls\DateSliders.ScoreValues.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Forms\Controls\DataErrorsVirtualDGV.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\Controls\OccupationsVirtualDGV.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\Controls\SourcesVirtualDGV.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\Controls\FamilyVirtualDGV.cs">
       <SubType>Component</SubType>
     </Compile>

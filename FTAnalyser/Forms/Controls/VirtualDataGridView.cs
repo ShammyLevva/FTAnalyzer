@@ -19,6 +19,8 @@ namespace FTAnalyzer.Forms.Controls
             CellValueNeeded += OnCellValueNeeded;
             ColumnHeaderMouseClick += OnColumnHeaderMouseClick;
             AllowUserToAddRows = false;
+            AllowUserToOrderColumns = true;
+            AllowUserToResizeColumns = true;
             ReadOnly = true;
             CreateGridColumns();
         }
@@ -36,7 +38,6 @@ namespace FTAnalyzer.Forms.Controls
         void CreateGridColumns()
         {
             Columns.Clear();
-            // needs to add columns as grid isn't defined in Main Form
             foreach (PropertyInfo info in typeof(T).GetProperties())
             {
                 ColumnDetail cd = info.GetCustomAttribute<ColumnDetail>();
@@ -48,6 +49,9 @@ namespace FTAnalyzer.Forms.Controls
                         break;
                     case ColumnDetail.ColumnType.CheckBox:
                         dgvc = new DataGridViewCheckBoxColumn();
+                        break;
+                    case ColumnDetail.ColumnType.Icon:
+                        dgvc = new DataGridViewImageColumn();
                         break;
                     default:
                         dgvc = new DataGridViewTextBoxColumn();
