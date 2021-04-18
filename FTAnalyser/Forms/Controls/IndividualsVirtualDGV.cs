@@ -1,8 +1,4 @@
-﻿using FTAnalyzer.Utilities;
-using System.Reflection;
-using System.Windows.Forms;
-
-namespace FTAnalyzer.Forms.Controls
+﻿namespace FTAnalyzer.Forms.Controls
 {
     class IndividualsVirtualDGV : VirtualDataGridView<IDisplayIndividual>
     {

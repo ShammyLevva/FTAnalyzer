@@ -327,7 +327,7 @@ namespace FTAnalyzer
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabFamilies = new System.Windows.Forms.TabPage();
-            this.dgFamilies = new System.Windows.Forms.DataGridView();
+            this.dgFamilies = new FTAnalyzer.Forms.Controls.FamilyVirtualDGV();
             this.tabSources = new System.Windows.Forms.TabPage();
             this.dgSources = new System.Windows.Forms.DataGridView();
             this.tabOccupations = new System.Windows.Forms.TabPage();
@@ -4609,7 +4609,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.TabPage tabIndividuals;
         private FTAnalyzer.Forms.Controls.IndividualsVirtualDGV dgIndividuals;
         private System.Windows.Forms.TabPage tabFamilies;
-        private System.Windows.Forms.DataGridView dgFamilies;
+        private FTAnalyzer.Forms.Controls.FamilyVirtualDGV dgFamilies;
         private System.Windows.Forms.TabPage tabSources;
         private System.Windows.Forms.TabPage tabOccupations;
         private System.Windows.Forms.DataGridView dgOccupations;
