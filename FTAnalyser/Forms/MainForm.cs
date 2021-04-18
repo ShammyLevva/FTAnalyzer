@@ -327,6 +327,7 @@ namespace FTAnalyzer
             databaseToolStripMenuItem.Enabled = false;
             mnuRecent.Enabled = false;
             tabMainListsSelector.SelectedTab = tabIndividuals; // force back to first tab
+            tabErrorFixSelector.SelectedTab = tabDataErrors; //force tab back to data errors tab
             tabCtrlLocations.SelectedTab = tabTreeView; // otherwise totals etc look wrong
             treeViewLocations.Nodes.Clear();
             Text = "Family Tree Analyzer v" + VERSION;
