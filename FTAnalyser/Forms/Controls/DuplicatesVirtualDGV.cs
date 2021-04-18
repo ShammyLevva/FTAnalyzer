@@ -35,18 +35,20 @@ namespace FTAnalyzer.Forms.Controls
             }
         }
 
-        public override void Sort(DataGridViewColumn dataGridViewColumn, ListSortDirection direction)
+        public override void Sort(DataGridViewColumn dgvColumn, ListSortDirection direction)
         {
+            if (dgvColumn is null || dgvColumn.SortMode == DataGridViewColumnSortMode.NotSortable)
+                return;
             // needs to implemt the column sorting depending on colum clicked
             // add comparers
             foreach (DataGridViewColumn column in Columns)
             {
-                if (column == dataGridViewColumn)
+                if (column == dgvColumn)
                     column.HeaderCell.SortGlyphDirection = direction == ListSortDirection.Ascending ? SortOrder.Ascending : SortOrder.Descending;
                 else
                     column.HeaderCell.SortGlyphDirection = SortOrder.None;
             }
-            sortedColumn = dataGridViewColumn;
+            sortedColumn = dgvColumn;
             sortedDirection = direction;
 
             if (_duplicateData is null) return;

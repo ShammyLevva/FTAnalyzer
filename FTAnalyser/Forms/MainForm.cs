@@ -2248,8 +2248,11 @@ namespace FTAnalyzer
                 if (dgIndividuals.Rows[hti.RowIndex].Cells[hti.ColumnIndex].GetType() == typeof(DataGridViewLinkCell))
                 {
                     string familySearchID = dgIndividuals.Rows[hti.RowIndex].Cells[hti.ColumnIndex].Value.ToString();
-                    string url = $"https://www.familysearch.org/tree/person/details/{familySearchID}";
-                    SpecialMethods.VisitWebsite(url);
+                    if (!string.IsNullOrEmpty(familySearchID))
+                    {
+                        string url = $"https://www.familysearch.org/tree/person/details/{familySearchID}";
+                        SpecialMethods.VisitWebsite(url);
+                    }
                 }
                 else if (e.Clicks == 2)
                 {
@@ -2265,16 +2268,6 @@ namespace FTAnalyzer
             {
                 string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
                 ShowFacts(indID);
-            }
-        }
-
-        void DgIndividuals_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            foreach (DataGridViewRow r in dgIndividuals.Rows)
-            {
-                string familySearchID = r.Cells["FamilySearchID"].Value.ToString();
-                if (!string.IsNullOrEmpty(familySearchID))
-                    r.Cells["FamilySearchID"] = new DataGridViewLinkCell();
             }
         }
 

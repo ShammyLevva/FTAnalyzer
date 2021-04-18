@@ -23,19 +23,22 @@ namespace FTAnalyzer.Forms.Controls
             ColumnHeaderMouseClick += IndividualsVirtualDGV_ColumnHeaderMouseClick;
             AllowUserToAddRows = false;
             ReadOnly = true;
-            // needs to add columns as grod isn't defined in Main Form
+            Columns.Clear();
+            // needs to add columns as grid isn't defined in Main Form
             foreach (PropertyInfo info in typeof(IDisplayIndividual).GetProperties())
             {
-                ColumnDetail cd = (ColumnDetail)info.GetCustomAttribute(typeof(ColumnDetail));
-                var dgvc = new DataGridViewTextBoxColumn()
-                {
-                    Name = info.Name,
-                    DataPropertyName = info.Name,
-                    // get following from the attributes
-                    HeaderText = cd.ColumnName,
-                    Width = (int)cd.ColumnWidth,
-                    MinimumWidth = (int)cd.ColumnWidth,
-                };
+                ColumnDetail cd = info.GetCustomAttribute<ColumnDetail>();
+                DataGridViewColumn dgvc;
+                if (info.Name == "FamilySearchID")
+                    dgvc = new DataGridViewLinkColumn();
+                else
+                    dgvc = new DataGridViewTextBoxColumn();
+                dgvc.Name = info.Name;
+                dgvc.DataPropertyName = info.Name;
+                // get following from the attributes
+                dgvc.HeaderText = cd.ColumnName;
+                dgvc.Width = (int)cd.ColumnWidth;
+                dgvc.MinimumWidth = (int)cd.ColumnWidth;
                 Columns.Add(dgvc);
             }
         }
@@ -52,7 +55,7 @@ namespace FTAnalyzer.Forms.Controls
 
         public override void Sort(DataGridViewColumn dgvColumn, ListSortDirection direction)
         {
-            if (dgvColumn is null)
+            if (dgvColumn is null || dgvColumn.SortMode == DataGridViewColumnSortMode.NotSortable)
                 return;
             // needs to implemt the column sorting depending on colum clicked
             // add comparers
@@ -143,32 +146,27 @@ namespace FTAnalyzer.Forms.Controls
                 case nameof(IDisplayIndividual.Suffix):
                     e.Value = ind.Suffix;
                     break;
-                
+
                 case nameof(IDisplayIndividual.Alias):
                     e.Value = ind.Alias;
                     break;
-                
+
                 case nameof(IDisplayIndividual.FamilySearchID):
                     e.Value = ind.FamilySearchID;
-                    if(!string.IsNullOrEmpty(ind.FamilySearchID))
-                    {
-                        // set cell style = new DataGridViewLinkCell();
-                        // mimic what was done in main form DgIndividuals_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-                    }
                     break;
-                
+
                 case nameof(IDisplayIndividual.MarriageCount):
                     e.Value = ind.MarriageCount;
                     break;
-                
+
                 case nameof(IDisplayIndividual.ChildrenCount):
                     e.Value = ind.ChildrenCount;
                     break;
-                
+
                 case nameof(IDisplayIndividual.BudgieCode):
                     e.Value = ind.BudgieCode;
                     break;
-                
+
                 case nameof(IDisplayIndividual.Ahnentafel):
                     e.Value = ind.Ahnentafel;
                     break;
