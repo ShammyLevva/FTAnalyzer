@@ -1244,7 +1244,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(true);
-                SurnameStats stat = (SurnameStats)dgSurnames.CurrentRow.DataBoundItem;
+                IDisplaySurnames stat = (IDisplaySurnames)dgSurnames.CurrentRow.DataBoundItem;
                 People frmInd = new People();
                 frmInd.SetSurnameStats(stat, chkSurnamesIgnoreCase.Checked);
                 DisposeDuplicateForms(frmInd);
@@ -1256,26 +1256,14 @@ namespace FTAnalyzer
 
         void DgSurnames_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 0)
+            if (e.ColumnIndex == 0 && e.RowIndex >= 0)
             {
-                DataGridViewCell cell = dgSurnames.Rows[e.RowIndex].Cells["Surname"];
+                DataGridViewCell cell = dgSurnames.Rows[e.RowIndex].Cells[nameof(IDisplaySurnames.Surname)];
                 if (cell.Value != null)
                 {
                     Statistics.DisplayGOONSpage(cell.Value.ToString());
                     Analytics.TrackAction(Analytics.MainFormAction, Analytics.GOONSEvent);
                 }
-            }
-        }
-
-        void DgSurnames_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            foreach (DataGridViewRow r in dgSurnames.Rows)
-            {
-                string surname = r.Cells["Surname"].Value.ToString();
-                r.Cells["Surname"] = new DataGridViewLinkCell();
-                DataGridViewLinkCell c = (DataGridViewLinkCell)r.Cells["Surname"];
-                c.UseColumnTextForLinkValue = true;
-                c.Value = surname;
             }
         }
 
@@ -3269,9 +3257,9 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            SortableBindingList<SurnameStats> stats;
+            SortableBindingList<IDisplaySurnames> stats;
             if (dgSurnames.DataSource != null)
-                stats = (SortableBindingList<SurnameStats>)dgSurnames.DataSource;
+                stats = dgSurnames.DataSource;
             else
             {
                 tspbTabProgress.Visible = true;
@@ -3279,10 +3267,10 @@ namespace FTAnalyzer
                 Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
                 var progress = new Progress<int>(value => { tspbTabProgress.Value = value; });
                 stats = await Task.Run(() =>
-                    new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked))).ConfigureAwait(true);
+                    new SortableBindingList<IDisplaySurnames>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked))).ConfigureAwait(true);
                 tspbTabProgress.Visible = false;
             }
-            List<SurnameStats> list = new List<SurnameStats>(stats);
+            List<IDisplaySurnames> list = new List<IDisplaySurnames>(stats);
             using (DataTable dt = convertor.ToDataTable(list))
                 ExportToExcel. Export(dt);
             await Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportSurnamesEvent);
@@ -3488,10 +3476,10 @@ namespace FTAnalyzer
             Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
             var progress = new Progress<int>(value => { tspbTabProgress.Value = value; });
             var list = await Task.Run(() =>
-                new SortableBindingList<SurnameStats>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked))).ConfigureAwait(true);
+                new SortableBindingList<IDisplaySurnames>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked))).ConfigureAwait(true);
             tspbTabProgress.Visible = false;
             dgSurnames.DataSource = list;
-            dgSurnames.Sort(dgSurnames.Columns["Surname"], ListSortDirection.Ascending);
+            dgSurnames.Sort(dgSurnames.Columns[nameof(IDisplaySurnames.Surname)], ListSortDirection.Ascending);
             dgSurnames.AllowUserToResizeColumns = true;
             dgSurnames.Focus();
             tsCountLabel.Text = $"{Messages.Count}{list.Count} Surnames.";

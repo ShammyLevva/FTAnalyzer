@@ -298,26 +298,29 @@
     <Compile Include="Forms\Controls\DateSliders.ScoreValues.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Controls\DataErrorsVirtualDGV.cs">
+    <Compile Include="Forms\Controls\VirtualDGVDataErrors.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Forms\Controls\OccupationsVirtualDGV.cs">
+    <Compile Include="Forms\Controls\VirtualDGVSurnames.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Forms\Controls\SourcesVirtualDGV.cs">
+    <Compile Include="Forms\Controls\VirtualDGVOccupations.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Forms\Controls\FamilyVirtualDGV.cs">
+    <Compile Include="Forms\Controls\VirtualDGVSources.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Forms\Controls\IndividualsVirtualDGV.cs">
+    <Compile Include="Forms\Controls\VirtualDGVFamily.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\Controls\VirtualDGVIndividuals.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Forms\Controls\ToolStripMapSelector.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Forms\Controls\TreeViewHandler.cs" />
-    <Compile Include="Forms\Controls\DuplicatesVirtualDGV.cs">
+    <Compile Include="Forms\Controls\VirtualDGVDuplicates.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Forms\Controls\VirtualDataGridView.cs">

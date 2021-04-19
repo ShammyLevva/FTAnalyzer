@@ -144,7 +144,7 @@ namespace FTAnalyzer
             this.btnRandomSurnameColour = new System.Windows.Forms.Button();
             this.ckbFactExclude = new System.Windows.Forms.CheckedListBox();
             this.btnShowExclusions = new System.Windows.Forms.Button();
-            this.dgDataErrors = new FTAnalyzer.Forms.Controls.DataErrorsVirtualDGV();
+            this.dgDataErrors = new FTAnalyzer.Forms.Controls.VirtualDGVDataErrors();
             this.tbDuplicateScore = new System.Windows.Forms.TrackBar();
             this.chkLCRootPersonConfirm = new System.Windows.Forms.CheckBox();
             this.dgCheckAncestors = new System.Windows.Forms.DataGridView();
@@ -302,13 +302,13 @@ namespace FTAnalyzer
             this.tabMainLists = new System.Windows.Forms.TabPage();
             this.tabMainListsSelector = new System.Windows.Forms.TabControl();
             this.tabIndividuals = new System.Windows.Forms.TabPage();
-            this.dgIndividuals = new FTAnalyzer.Forms.Controls.IndividualsVirtualDGV();
+            this.dgIndividuals = new FTAnalyzer.Forms.Controls.VirtualDGVIndividuals();
             this.tabFamilies = new System.Windows.Forms.TabPage();
-            this.dgFamilies = new FTAnalyzer.Forms.Controls.FamilyVirtualDGV();
+            this.dgFamilies = new FTAnalyzer.Forms.Controls.VirtualDGVFamily();
             this.tabSources = new System.Windows.Forms.TabPage();
-            this.dgSources = new FTAnalyzer.Forms.Controls.SourcesVirtualDGV();
+            this.dgSources = new FTAnalyzer.Forms.Controls.VirtualDGVSources();
             this.tabOccupations = new System.Windows.Forms.TabPage();
-            this.dgOccupations = new FTAnalyzer.Forms.Controls.OccupationsVirtualDGV();
+            this.dgOccupations = new FTAnalyzer.Forms.Controls.VirtualDGVOccupations();
             this.tabCustomFacts = new System.Windows.Forms.TabPage();
             this.dgCustomFacts = new System.Windows.Forms.DataGridView();
             this.tabErrorsFixes = new System.Windows.Forms.TabPage();
@@ -325,7 +325,7 @@ namespace FTAnalyzer
             this.label16 = new System.Windows.Forms.Label();
             this.labCalcDuplicates = new System.Windows.Forms.Label();
             this.pbDuplicates = new System.Windows.Forms.ProgressBar();
-            this.dgDuplicates = new FTAnalyzer.Forms.Controls.DuplicatesVirtualDGV();
+            this.dgDuplicates = new FTAnalyzer.Forms.Controls.VirtualDGVDuplicates();
             this.btnCancelDuplicates = new System.Windows.Forms.Button();
             this.tabLooseBirths = new System.Windows.Forms.TabPage();
             this.dgLooseBirths = new System.Windows.Forms.DataGridView();
@@ -336,7 +336,7 @@ namespace FTAnalyzer
             this.tabSurnames = new System.Windows.Forms.TabPage();
             this.chkSurnamesIgnoreCase = new System.Windows.Forms.CheckBox();
             this.btnShowSurnames = new System.Windows.Forms.Button();
-            this.dgSurnames = new System.Windows.Forms.DataGridView();
+            this.dgSurnames = new FTAnalyzer.Forms.Controls.VirtualDGVSurnames();
             this.Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.URI = new System.Windows.Forms.DataGridViewLinkColumn();
             this.Individuals = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -3590,7 +3590,6 @@ namespace FTAnalyzer
             this.dgSurnames.TabIndex = 1;
             this.dgSurnames.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSurnames_CellContentClick);
             this.dgSurnames.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSurnames_CellDoubleClick);
-            this.dgSurnames.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DgSurnames_DataBindingComplete);
             // 
             // Surname
             // 
@@ -4287,7 +4286,7 @@ namespace FTAnalyzer
         private FTAnalyzer.Forms.Controls.RelationTypes relTypesFacts;
         private System.Windows.Forms.ToolStripMenuItem mnuPlaces;
         private System.Windows.Forms.TabPage tabSurnames;
-        private System.Windows.Forms.DataGridView dgSurnames;
+        private FTAnalyzer.Forms.Controls.VirtualDGVSurnames dgSurnames;
         private System.Windows.Forms.DataGridViewTextBoxColumn Surname;
         private System.Windows.Forms.DataGridViewLinkColumn URI;
         private System.Windows.Forms.DataGridViewTextBoxColumn Individuals;
@@ -4352,17 +4351,17 @@ namespace FTAnalyzer
         private System.Windows.Forms.TabPage tabMainLists;
         private System.Windows.Forms.TabControl tabMainListsSelector;
         private System.Windows.Forms.TabPage tabIndividuals;
-        private FTAnalyzer.Forms.Controls.IndividualsVirtualDGV dgIndividuals;
+        private FTAnalyzer.Forms.Controls.VirtualDGVIndividuals dgIndividuals;
         private System.Windows.Forms.TabPage tabFamilies;
-        private FTAnalyzer.Forms.Controls.FamilyVirtualDGV dgFamilies;
+        private FTAnalyzer.Forms.Controls.VirtualDGVFamily dgFamilies;
         private System.Windows.Forms.TabPage tabSources;
         private System.Windows.Forms.TabPage tabOccupations;
-        private FTAnalyzer.Forms.Controls.OccupationsVirtualDGV dgOccupations;
-        private FTAnalyzer.Forms.Controls.SourcesVirtualDGV dgSources;
+        private FTAnalyzer.Forms.Controls.VirtualDGVOccupations dgOccupations;
+        private FTAnalyzer.Forms.Controls.VirtualDGVSources dgSources;
         private System.Windows.Forms.TabPage tabErrorsFixes;
         private System.Windows.Forms.TabControl tabErrorFixSelector;
         private System.Windows.Forms.TabPage tabDataErrors;
-        private FTAnalyzer.Forms.Controls.DataErrorsVirtualDGV dgDataErrors;
+        private FTAnalyzer.Forms.Controls.VirtualDGVDataErrors dgDataErrors;
         private System.Windows.Forms.GroupBox gbDataErrorTypes;
         private System.Windows.Forms.Button btnSelectAll;
         private System.Windows.Forms.Button btnClearAll;
@@ -4376,7 +4375,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.TrackBar tbDuplicateScore;
         private System.Windows.Forms.Label labCalcDuplicates;
         private System.Windows.Forms.ProgressBar pbDuplicates;
-        private FTAnalyzer.Forms.Controls.DuplicatesVirtualDGV dgDuplicates;
+        private FTAnalyzer.Forms.Controls.VirtualDGVDuplicates dgDuplicates;
         private System.Windows.Forms.TabPage tabLooseBirths;
         private System.Windows.Forms.DataGridView dgLooseBirths;
         private System.Windows.Forms.TabPage tabLooseDeaths;

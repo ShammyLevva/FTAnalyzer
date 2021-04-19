@@ -105,7 +105,7 @@ namespace FTAnalyzer.Forms
             UpdateStatusCount();
         }
 
-        public void SetSurnameStats(SurnameStats stat, bool ignoreCase)
+        public void SetSurnameStats(IDisplaySurnames stat, bool ignoreCase)
         {
             Text = $"Individuals & Families whose surame is {stat.Surname}";
             SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
