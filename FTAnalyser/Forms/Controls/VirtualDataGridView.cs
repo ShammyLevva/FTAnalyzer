@@ -18,6 +18,7 @@ namespace FTAnalyzer.Forms.Controls
             VirtualMode = true;
             CellValueNeeded += OnCellValueNeeded;
             ColumnHeaderMouseClick += OnColumnHeaderMouseClick;
+            ColumnWidthChanged += OnColumnWidthChanged; // for debugging purposes
             AllowUserToAddRows = false;
             AllowUserToOrderColumns = true;
             AllowUserToResizeColumns = true;
@@ -104,6 +105,11 @@ namespace FTAnalyzer.Forms.Controls
                 return;
             var data = _dataSource[e.RowIndex];
             e.Value = GetValueFor(data, Columns[e.ColumnIndex].DataPropertyName);
+        }
+
+        void OnColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            Console.WriteLine($"Column {e.Column.Name} changed width to {e.Column.Width}");
         }
 
         protected abstract object GetValueFor(T data, string propertyName);
