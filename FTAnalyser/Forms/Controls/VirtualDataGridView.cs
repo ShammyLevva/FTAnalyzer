@@ -7,6 +7,7 @@ using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms.Controls
 {
+    [ComplexBindingProperties()]
     abstract class VirtualDataGridView<T> : DataGridView
     {
         SortableBindingList<T> _dataSource;
@@ -15,6 +16,7 @@ namespace FTAnalyzer.Forms.Controls
 
         public VirtualDataGridView()
         {
+            _dataSource = new SortableBindingList<T>();
             VirtualMode = true;
             CellValueNeeded += OnCellValueNeeded;
             ColumnHeaderMouseClick += OnColumnHeaderMouseClick;
@@ -23,14 +25,15 @@ namespace FTAnalyzer.Forms.Controls
             AllowUserToOrderColumns = true;
             AllowUserToResizeColumns = true;
             ReadOnly = true;
-            CreateGridColumns();
         }
 
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public new SortableBindingList<T> DataSource
         {
             get => _dataSource;
             set
             {
+                CreateGridColumns();
                 _dataSource = value;
                 RowCount = value?.Count ?? 1;
             }
@@ -38,6 +41,8 @@ namespace FTAnalyzer.Forms.Controls
 
         void CreateGridColumns()
         {
+            if (DesignMode)
+                return;
             Columns.Clear();
             foreach (PropertyInfo info in typeof(T).GetProperties())
             {
