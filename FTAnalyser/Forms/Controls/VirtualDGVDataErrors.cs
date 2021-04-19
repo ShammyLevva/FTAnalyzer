@@ -1,6 +1,6 @@
 ﻿namespace FTAnalyzer.Forms.Controls
 {
-    class DataErrorsVirtualDGV : VirtualDataGridView<IDisplayDataError>
+    class VirtualDGVDataErrors : VirtualDataGridView<IDisplayDataError>
     {
         protected override object GetValueFor(IDisplayDataError err, string propertyName)
         {
