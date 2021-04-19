@@ -826,9 +826,9 @@ namespace FTAnalyzer
             {
                 DataError error = (DataError)dgDataErrors.CurrentRow.DataBoundItem;
                 if (error.IsFamily)
-                    ShowFamilyFacts((string)dgDataErrors.CurrentRow.Cells["Reference"].Value);
+                    ShowFamilyFacts((string)dgDataErrors.CurrentRow.Cells[nameof(IDisplayDataError.Reference)].Value);
                 else
-                    ShowFacts((string)dgDataErrors.CurrentRow.Cells["Reference"].Value);
+                    ShowFacts((string)dgDataErrors.CurrentRow.Cells[nameof(IDisplayDataError.Reference)].Value);
             }
         }
 
@@ -2257,7 +2257,7 @@ namespace FTAnalyzer
                 }
                 else if (e.Clicks == 2)
                 {
-                    string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+                    string indID = (string)dgIndividuals.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
                     ShowFacts(indID);
                 }
             }
@@ -2267,7 +2267,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+                string indID = (string)dgIndividuals.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
                 ShowFacts(indID);
             }
         }
@@ -2287,8 +2287,8 @@ namespace FTAnalyzer
         {
             if (pbDuplicates.Visible || e.RowIndex < 0 || e.ColumnIndex < 0)
                 return; // do nothing if progress bar still visible
-            string indA_ID = (string)dgDuplicates.CurrentRow.Cells["DuplicateIndividualID"].Value;
-            string indB_ID = (string)dgDuplicates.CurrentRow.Cells["MatchIndividualID"].Value;
+            string indA_ID = (string)dgDuplicates.CurrentRow.Cells[nameof(IDisplayDuplicateIndividual.IndividualID)].Value;
+            string indB_ID = (string)dgDuplicates.CurrentRow.Cells[nameof(IDisplayDuplicateIndividual.MatchIndividualID)].Value;
             if (GeneralSettings.Default.MultipleFactForms)
             {
                 ShowFacts(indA_ID);
