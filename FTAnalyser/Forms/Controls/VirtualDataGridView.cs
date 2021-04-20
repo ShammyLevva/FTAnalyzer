@@ -18,13 +18,17 @@ namespace FTAnalyzer.Forms.Controls
         {
             _dataSource = new SortableBindingList<T>();
             VirtualMode = true;
-            CellValueNeeded += OnCellValueNeeded;
-            ColumnHeaderMouseClick += OnColumnHeaderMouseClick;
-            ColumnWidthChanged += OnColumnWidthChanged; // for debugging purposes
+            AutoGenerateColumns = false;
             AllowUserToAddRows = false;
+            AllowUserToDeleteRows = false;
             AllowUserToOrderColumns = true;
             AllowUserToResizeColumns = true;
             ReadOnly = true;
+            RowHeadersWidth = 50;
+            MultiSelect = false;
+            CellValueNeeded += OnCellValueNeeded;
+            ColumnHeaderMouseClick += OnColumnHeaderMouseClick;
+            ColumnWidthChanged += OnColumnWidthChanged; // for debugging purposes
         }
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]

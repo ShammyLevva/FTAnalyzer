@@ -78,8 +78,6 @@ namespace FTAnalyzer
             RegisterEventHandlers();
             Text = $"Family Tree Analyzer v{VERSION}";
             SetHeightWidth();
-            dgSurnames.AutoGenerateColumns = false;
-            dgDuplicates.AutoGenerateColumns = false;
             rfhDuplicates = new ReportFormHelper(this, "Duplicates", dgDuplicates, ResetDuplicatesTable, "Duplicates", false);
             ft.LoadStandardisedNames(Application.StartupPath);
             tsCountLabel.Text = string.Empty;
@@ -633,7 +631,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(true);
-                var customFacts = (DisplayCustomFact)dgCustomFacts.CurrentRow.DataBoundItem;
+                var customFacts = (DisplayCustomFact)dgCustomFacts.CurrentRowDataBoundItem;
                 var frmInd = new People();
                 frmInd.SetCustomFacts(customFacts.CustomFactName, ft.AllCustomFactIndividuals(customFacts.CustomFactName));
                 DisposeDuplicateForms(frmInd);
@@ -644,7 +642,7 @@ namespace FTAnalyzer
 
         void DgCustomFacts_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            var customFact = (DisplayCustomFact)dgCustomFacts.CurrentRow.DataBoundItem;
+            var customFact = (DisplayCustomFact)dgCustomFacts.CurrentRowDataBoundItem;
             DatabaseHelper.IgnoreCustomFact(customFact.CustomFactName, customFact.Ignore);
         }
 
@@ -835,7 +833,6 @@ namespace FTAnalyzer
         void SetupDataErrors()
         {
             dgDataErrors.DataSource = DataErrors(ckbDataErrors);
-            dgDataErrors.AllowUserToResizeColumns = true;
             dgDataErrors.Focus();
             mnuPrint.Enabled = true;
             UpdateDataErrorsDisplay();
@@ -1244,7 +1241,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(true);
-                IDisplaySurnames stat = (IDisplaySurnames)dgSurnames.CurrentRowDataBoundItem;
+                IDisplaySurnames stat = dgSurnames.CurrentRowDataBoundItem;
                 People frmInd = new People();
                 frmInd.SetSurnameStats(stat, chkSurnamesIgnoreCase.Checked);
                 DisposeDuplicateForms(frmInd);
@@ -1418,8 +1415,7 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplayFamily> list = ft.AllDisplayFamilies;
                 dgFamilies.DataSource = list;
-                dgFamilies.Sort(dgFamilies.Columns["FamilyID"], ListSortDirection.Ascending);
-                dgFamilies.AllowUserToResizeColumns = true;
+                dgFamilies.Sort(dgFamilies.Columns[nameof(IDisplayFamily.FamilyID)], ListSortDirection.Ascending);
                 dgFamilies.Focus();
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
@@ -1430,8 +1426,7 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplaySource> list = ft.AllDisplaySources;
                 dgSources.DataSource = list;
-                dgSources.Sort(dgSources.Columns["SourceTitle"], ListSortDirection.Ascending);
-                dgSources.AllowUserToResizeColumns = true;
+                dgSources.Sort(dgSources.Columns[nameof(IDisplaySource.SourceID)], ListSortDirection.Ascending);
                 dgSources.Focus();
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
@@ -1442,8 +1437,7 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplayOccupation> list = ft.AllDisplayOccupations;
                 dgOccupations.DataSource = list;
-                dgOccupations.Sort(dgOccupations.Columns["Occupation"], ListSortDirection.Ascending);
-                dgOccupations.AllowUserToResizeColumns = true;
+                dgOccupations.Sort(dgOccupations.Columns[nameof(IDisplayOccupation.Occupation)], ListSortDirection.Ascending);
                 dgOccupations.Focus();
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
@@ -1454,11 +1448,10 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplayCustomFact> list = ft.AllCustomFacts;
                 dgCustomFacts.DataSource = list;
-                dgCustomFacts.Sort(dgCustomFacts.Columns["CustomFactName"], ListSortDirection.Ascending);
-                dgCustomFacts.AllowUserToResizeColumns = true;
+                dgCustomFacts.Sort(dgCustomFacts.Columns[nameof(IDisplayCustomFact.CustomFactName)], ListSortDirection.Ascending);
                 dgCustomFacts.Focus();
-                dgCustomFacts.Columns["Ignore"].ReadOnly = false;
-                dgCustomFacts.Columns["Ignore"].ToolTipText = "Tick box to ignore warnings for this custom fact type.";
+                dgCustomFacts.Columns[nameof(IDisplayCustomFact.Ignore)].ReadOnly = false;
+                dgCustomFacts.Columns[nameof(IDisplayCustomFact.Ignore)].ToolTipText = "Tick box to ignore warnings for this custom fact type.";
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
                 tsHintsLabel.Text = Messages.Hints_CustomFacts;
@@ -1470,7 +1463,7 @@ namespace FTAnalyzer
         {
             SortableBindingList<IDisplayIndividual> list = ft.AllDisplayIndividuals;
             dgIndividuals.DataSource = list;
-            dgIndividuals.Sort(dgIndividuals.Columns["IndividualID"], ListSortDirection.Ascending);
+            dgIndividuals.Sort(dgIndividuals.Columns[nameof(IDisplayIndividual.IndividualID)], ListSortDirection.Ascending);
             dgIndividuals.AllowUserToResizeColumns = true;
             dgIndividuals.Focus();
             mnuPrint.Enabled = true;
@@ -2602,9 +2595,9 @@ namespace FTAnalyzer
         {
             if (dgDuplicates.RowCount > 0)
             {
-                dgDuplicates.Sort(dgDuplicates.Columns["DuplicateForenames"], ListSortDirection.Ascending);
-                dgDuplicates.Sort(dgDuplicates.Columns["DuplicateSurname"], ListSortDirection.Ascending);
-                dgDuplicates.Sort(dgDuplicates.Columns["Score"], ListSortDirection.Descending);
+                dgDuplicates.Sort(dgDuplicates.Columns[nameof(IDisplayDuplicateIndividual.Forenames)], ListSortDirection.Ascending);
+                dgDuplicates.Sort(dgDuplicates.Columns[nameof(IDisplayDuplicateIndividual.Surname)], ListSortDirection.Ascending);
+                dgDuplicates.Sort(dgDuplicates.Columns[nameof(IDisplayDuplicateIndividual.Score)], ListSortDirection.Descending);
             }
         }
 
@@ -3480,7 +3473,6 @@ namespace FTAnalyzer
             tspbTabProgress.Visible = false;
             dgSurnames.DataSource = list;
             dgSurnames.Sort(dgSurnames.Columns[nameof(IDisplaySurnames.Surname)], ListSortDirection.Ascending);
-            dgSurnames.AllowUserToResizeColumns = true;
             dgSurnames.Focus();
             tsCountLabel.Text = $"{Messages.Count}{list.Count} Surnames.";
             tsHintsLabel.Text = Messages.Hints_Surname;

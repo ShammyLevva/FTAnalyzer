@@ -301,6 +301,9 @@
     <Compile Include="Forms\Controls\VirtualDGVDataErrors.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\Controls\VirtualDGVCustomFacts.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\Controls\VirtualDGVSurnames.cs">
       <SubType>Component</SubType>
     </Compile>
