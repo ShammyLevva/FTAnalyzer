@@ -619,7 +619,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(true);
-                var occ = (DisplayOccupation)dgOccupations.CurrentRow.DataBoundItem;
+                var occ = (DisplayOccupation)dgOccupations.CurrentRowDataBoundItem;
                 var frmInd = new People();
                 frmInd.SetWorkers(occ.Occupation, ft.AllWorkers(occ.Occupation));
                 DisposeDuplicateForms(frmInd);
@@ -651,7 +651,7 @@ namespace FTAnalyzer
         void SetAsRootToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            var ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
+            var ind = (Individual)dgIndividuals.CurrentRowDataBoundItem;
             if (ind != null)
             {
                 var outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
@@ -664,7 +664,7 @@ namespace FTAnalyzer
 
         void MnuSetRoot_Opened(object sender, EventArgs e)
         {
-            var ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
+            var ind = (Individual)dgIndividuals.CurrentRowDataBoundItem;
             if (ind != null)
                 viewNotesToolStripMenuItem.Enabled = ind.HasNotes;
         }
@@ -672,7 +672,7 @@ namespace FTAnalyzer
         void ViewNotesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
+            Individual ind = (Individual)dgIndividuals.CurrentRowDataBoundItem;
             if (ind != null)
             {
                 Notes notes = new Notes(ind);
@@ -824,7 +824,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                DataError error = (DataError)dgDataErrors.CurrentRow.DataBoundItem;
+                DataError error = (DataError)dgDataErrors.CurrentRowDataBoundItem;
                 if (error.IsFamily)
                     ShowFamilyFacts((string)dgDataErrors.CurrentRow.Cells[nameof(IDisplayDataError.Reference)].Value);
                 else
@@ -1244,7 +1244,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(true);
-                IDisplaySurnames stat = (IDisplaySurnames)dgSurnames.CurrentRow.DataBoundItem;
+                IDisplaySurnames stat = (IDisplaySurnames)dgSurnames.CurrentRowDataBoundItem;
                 People frmInd = new People();
                 frmInd.SetSurnameStats(stat, chkSurnamesIgnoreCase.Checked);
                 DisposeDuplicateForms(frmInd);
@@ -2158,7 +2158,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string famID = (string)dgFamilies.CurrentRow.Cells["FamilyID"].Value;
+                string famID = (string)dgFamilies.CurrentRow.Cells[nameof(IDisplayFamily.FamilyID)].Value;
                 Family fam = ft.GetFamily(famID);
                 if (fam != null)
                 {
@@ -2172,32 +2172,32 @@ namespace FTAnalyzer
         void DgLooseDeaths_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgLooseDeaths.CurrentRow.Cells["IndividualID"].Value);
+                ShowFacts((string)dgLooseDeaths.CurrentRow.Cells[nameof(IDisplayLooseDeath.IndividualID)].Value);
         }
 
         void DgLooseBirths_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgLooseBirths.CurrentRow.Cells["IndividualID"].Value);
+                ShowFacts((string)dgLooseBirths.CurrentRow.Cells[nameof(IDisplayLooseBirth.IndividualID)].Value);
         }
 
         void DgLooseInfo_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgLooseInfo.CurrentRow.Cells["IndividualID"].Value);
+                ShowFacts((string)dgLooseInfo.CurrentRow.Cells[nameof(IDisplayLooseInfo.IndividualID)].Value);
         }
 
         void DgTreeTops_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgTreeTops.CurrentRow.Cells["IndividualID"].Value);
+                ShowFacts((string)dgTreeTops.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value);
         }
 
         void DgWorldWars_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string indID = (string)dgWorldWars.CurrentRow.Cells["IndividualID"].Value;
+                string indID = (string)dgWorldWars.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
                 if (WWI && ModifierKeys.Equals(Keys.Shift))
                     LivesOfFirstWorldWar(indID);
                 else
@@ -2264,7 +2264,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                FactSource source = (FactSource)dgSources.CurrentRow.DataBoundItem;
+                FactSource source = (FactSource)dgSources.CurrentRowDataBoundItem;
                 Facts factForm = new Facts(source);
                 DisposeDuplicateForms(factForm);
                 factForm.Show();
@@ -3071,7 +3071,7 @@ namespace FTAnalyzer
 
         void DgWorldWars_MouseDown(object sender, MouseEventArgs e) => ShowViewNotesMenu(dgWorldWars, e);
 
-        void ShowViewNotesMenu(DataGridView dg, MouseEventArgs e)
+        void ShowViewNotesMenu(VirtualDataGridView<IDisplayIndividual> dg, MouseEventArgs e)
         {
             DataGridView.HitTestInfo hti = dg.HitTest(e.Location.X, e.Location.Y);
             if (e.Button == MouseButtons.Right)
@@ -3085,7 +3085,7 @@ namespace FTAnalyzer
                         // Can leave these here - doesn't hurt
                         dg.Rows[hti.RowIndex].Selected = true;
                         dg.Focus();
-                        ctxViewNotes.Tag = dg.CurrentRow.DataBoundItem;
+                        ctxViewNotes.Tag = dg.CurrentRowDataBoundItem;
                         ctxViewNotes.Show(MousePosition);
                     }
                 }
@@ -3658,15 +3658,6 @@ namespace FTAnalyzer
                 Analytics.TrackAction(Analytics.CensusTabAction, Analytics.AliveAtDate);
                 HourGlass(false);
             }
-        }
-
-        void DgIndividuals_Resize(object sender, EventArgs e) => ForceScrollBarVisible(dgIndividuals);
-
-        void ForceScrollBarVisible(DataGridView dataGridView)
-        {
-            var scrollbar = dataGridView.Controls.OfType<VScrollBar>().First();
-            if (!scrollbar.Visible)
-                scrollbar.Visible = true;
         }
     }
 }

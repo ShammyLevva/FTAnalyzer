@@ -159,7 +159,7 @@ namespace FTAnalyzer
             this.ckbWDIgnoreLocations = new System.Windows.Forms.CheckBox();
             this.btnWWII = new System.Windows.Forms.Button();
             this.btnWWI = new System.Windows.Forms.Button();
-            this.dgWorldWars = new System.Windows.Forms.DataGridView();
+            this.dgWorldWars = new FTAnalyzer.Forms.Controls.VirtualDGVIndividuals();
             this.label9 = new System.Windows.Forms.Label();
             this.txtWorldWarsSurname = new System.Windows.Forms.TextBox();
             this.wardeadRelation = new FTAnalyzer.Forms.Controls.RelationTypes();
@@ -168,7 +168,7 @@ namespace FTAnalyzer
             this.mnuViewNotes = new System.Windows.Forms.ToolStripMenuItem();
             this.tabTreetops = new System.Windows.Forms.TabPage();
             this.ckbTTIncludeOnlyOneParent = new System.Windows.Forms.CheckBox();
-            this.dgTreeTops = new System.Windows.Forms.DataGridView();
+            this.dgTreeTops = new FTAnalyzer.Forms.Controls.VirtualDGVIndividuals();
             this.ckbTTIgnoreLocations = new System.Windows.Forms.CheckBox();
             this.btnTreeTops = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
@@ -3132,7 +3132,6 @@ namespace FTAnalyzer
             this.dgIndividuals.VirtualMode = true;
             this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgIndividuals_CellDoubleClick);
             this.dgIndividuals.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgIndividuals_MouseDown);
-            this.dgIndividuals.Resize += new System.EventHandler(this.DgIndividuals_Resize);
             // 
             // tabFamilies
             // 
@@ -4217,13 +4216,13 @@ namespace FTAnalyzer
         private System.Windows.Forms.CheckBox ckbWDIgnoreLocations;
         private System.Windows.Forms.Button btnWWII;
         private System.Windows.Forms.Button btnWWI;
-        private System.Windows.Forms.DataGridView dgWorldWars;
+        private FTAnalyzer.Forms.Controls.VirtualDGVIndividuals dgWorldWars;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtWorldWarsSurname;
         private FTAnalyzer.Forms.Controls.RelationTypes wardeadRelation;
         private FTAnalyzer.Forms.Controls.CensusCountry wardeadCountry;
         private System.Windows.Forms.TabPage tabTreetops;
-        private System.Windows.Forms.DataGridView dgTreeTops;
+        private FTAnalyzer.Forms.Controls.VirtualDGVIndividuals dgTreeTops;
         private System.Windows.Forms.CheckBox ckbTTIgnoreLocations;
         private System.Windows.Forms.Button btnTreeTops;
         private System.Windows.Forms.Label label8;
