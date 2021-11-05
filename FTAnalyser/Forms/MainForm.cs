@@ -104,8 +104,8 @@ namespace FTAnalyzer
                     string webData = wc.DownloadString("https://github.com/ShammyLevva/FTAnalyzer/releases");
                     doc.LoadHtml(webData);
                 }
-                HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//div/div/div/span/../../ul/li/a");
-                string webVersion = versionNode.InnerText.ToUpper().Replace('V', ' ').Trim();
+                HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//div/div/h1/a");
+                string webVersion = versionNode.InnerText.ToUpper().Replace("VERSION", "").Trim();
                 string thisVersion = VERSION;
                 if (VERSION.Contains("-beta"))
                     thisVersion = VERSION.Substring(0, VERSION.IndexOf("-"));
