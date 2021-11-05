@@ -52,6 +52,8 @@ namespace FTAnalyzer.Forms.Controls
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public T CurrentRowDataBoundItem => _dataSource[CurrentRow.Index];
 
+        public T DataBoundItem(int rowIndex) => _dataSource[rowIndex];
+
         void CreateGridColumns()
         {
             if (DesignMode)

@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "8.4.0.0";
+        public static string VERSION = "8.4.0.0-beta1";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -350,6 +350,7 @@ namespace FTAnalyzer
             dgSurnames.DataSource = null;
             dgDuplicates.DataSource = null;
             dgSources.DataSource = null;
+            dgCustomFacts.DataSource = null;
             ExtensionMethods.DoubleBuffered(dgPlaces, true);
             ExtensionMethods.DoubleBuffered(dgAddresses, true);
             ExtensionMethods.DoubleBuffered(dgSubRegions, true);
@@ -367,6 +368,7 @@ namespace FTAnalyzer
             ExtensionMethods.DoubleBuffered(dgSurnames, true);
             ExtensionMethods.DoubleBuffered(dgDuplicates, true);
             ExtensionMethods.DoubleBuffered(dgSources, true);
+            ExtensionMethods.DoubleBuffered(dgCustomFacts, true);
         }
 
         void SetSavePath()
@@ -468,7 +470,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(true);
-                var loc = (FactLocation)dgCountries.CurrentRow.DataBoundItem;
+                var loc = (FactLocation)dgCountries.CurrentRowDataBoundItem;
                 var frmInd = new People();
                 frmInd.SetLocation(loc, FactLocation.COUNTRY);
                 DisposeDuplicateForms(frmInd);
@@ -482,7 +484,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(true);
-                var loc = dgRegions.CurrentRow == null ? FactLocation.BLANK_LOCATION : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
+                var loc = dgRegions.CurrentRow == null ? FactLocation.BLANK_LOCATION : (FactLocation)dgRegions.CurrentRowDataBoundItem;
                 var frmInd = new People();
                 frmInd.SetLocation(loc, FactLocation.REGION);
                 DisposeDuplicateForms(frmInd);
@@ -496,7 +498,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(true);
-                var loc = (FactLocation)dgSubRegions.CurrentRow.DataBoundItem;
+                var loc = (FactLocation)dgSubRegions.CurrentRowDataBoundItem;
                 var frmInd = new People();
                 frmInd.SetLocation(loc, FactLocation.SUBREGION);
                 DisposeDuplicateForms(frmInd);
@@ -510,7 +512,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(true);
-                var loc = (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
+                var loc = (FactLocation)dgAddresses.CurrentRowDataBoundItem;
                 var frmInd = new People();
                 frmInd.SetLocation(loc, FactLocation.ADDRESS);
                 DisposeDuplicateForms(frmInd);
@@ -524,7 +526,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(true);
-                var loc = (FactLocation)dgPlaces.CurrentRow.DataBoundItem;
+                var loc = (FactLocation)dgPlaces.CurrentRowDataBoundItem;
                 var frmInd = new People();
                 frmInd.SetLocation(loc, FactLocation.PLACE);
                 DisposeDuplicateForms(frmInd);
@@ -728,19 +730,19 @@ namespace FTAnalyzer
                             loc = node.Text == "<blank>" ? null : ((FactLocation)node.Tag).GetLocation(node.Level);
                         break;
                     case "Countries":
-                        loc = dgCountries.CurrentRow == null ? null : (FactLocation)dgCountries.CurrentRow.DataBoundItem;
+                        loc = dgCountries.CurrentRow == null ? null : (FactLocation)dgCountries.CurrentRowDataBoundItem;
                         break;
                     case "Regions":
-                        loc = dgRegions.CurrentRow == null ? null : (FactLocation)dgRegions.CurrentRow.DataBoundItem;
+                        loc = dgRegions.CurrentRow == null ? null : (FactLocation)dgRegions.CurrentRowDataBoundItem;
                         break;
                     case "SubRegions":
-                        loc = dgSubRegions.CurrentRow == null ? null : (FactLocation)dgSubRegions.CurrentRow.DataBoundItem;
+                        loc = dgSubRegions.CurrentRow == null ? null : (FactLocation)dgSubRegions.CurrentRowDataBoundItem;
                         break;
                     case "Addresses":
-                        loc = dgAddresses.CurrentRow == null ? null : (FactLocation)dgAddresses.CurrentRow.DataBoundItem;
+                        loc = dgAddresses.CurrentRow == null ? null : (FactLocation)dgAddresses.CurrentRowDataBoundItem;
                         break;
                     case "Places":
-                        loc = dgPlaces.CurrentRow == null ? null : (FactLocation)dgPlaces.CurrentRow.DataBoundItem;
+                        loc = dgPlaces.CurrentRow == null ? null : (FactLocation)dgPlaces.CurrentRowDataBoundItem;
                         break;
                 }
                 if (loc == null)
@@ -962,7 +964,7 @@ namespace FTAnalyzer
         }
 
         #region CellFormatting
-        void FormatCellLocations(DataGridView grid, DataGridViewCellFormattingEventArgs e)
+        void FormatCellLocations(VirtualDGVLocations grid, DataGridViewCellFormattingEventArgs e)
         {
             try
             {
@@ -985,7 +987,7 @@ namespace FTAnalyzer
                 }
                 else
                 {
-                    FactLocation loc = grid.Rows[e.RowIndex].DataBoundItem as FactLocation;
+                    FactLocation loc = grid.DataBoundItem(e.RowIndex) as FactLocation;
                     cell.ToolTipText = $"Geocoding Status : {loc.Geocoded}";
                 }
             }
@@ -994,31 +996,31 @@ namespace FTAnalyzer
 
         void DgCountries_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 0 || e.ColumnIndex == dgCountries?.Columns["Icon"].Index)
+            if (e.ColumnIndex == 0 || e.ColumnIndex == dgCountries?.Columns[nameof(IDisplayLocation.Icon)].Index)
                 FormatCellLocations(dgCountries, e);
         }
 
         void DgRegions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns["Icon"].Index)
+            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns[nameof(IDisplayLocation.Icon)].Index)
                 FormatCellLocations(dgRegions, e);
         }
 
         void DgSubRegions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns["Icon"].Index)
+            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns[nameof(IDisplayLocation.Icon)].Index)
                 FormatCellLocations(dgSubRegions, e);
         }
 
         void DgAddresses_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns["Icon"].Index)
+            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns[nameof(IDisplayLocation.Icon)].Index)
                 FormatCellLocations(dgAddresses, e);
         }
 
         void DgPlaces_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns["Icon"].Index)
+            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns[nameof(IDisplayLocation.Icon)].Index)
                 FormatCellLocations(dgPlaces, e);
         }
         #endregion
@@ -2621,7 +2623,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == 0 && !pbDuplicates.Visible) // don't do anything if progressbar still loading duplicates
             {
-                DisplayDuplicateIndividual dupInd = (DisplayDuplicateIndividual)dgDuplicates.Rows[e.RowIndex].DataBoundItem;
+                DisplayDuplicateIndividual dupInd = dgDuplicates.DataBoundItem(e.RowIndex) as DisplayDuplicateIndividual;
                 NonDuplicate nonDup = new NonDuplicate(dupInd);
                 dupInd.IgnoreNonDuplicate = !dupInd.IgnoreNonDuplicate; // flip state of checkbox
                 if (dupInd.IgnoreNonDuplicate)
@@ -2971,8 +2973,8 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplayLooseBirth> looseBirthList = ft.LooseBirths();
                 dgLooseBirths.DataSource = looseBirthList;
-                dgLooseBirths.Sort(dgLooseBirths.Columns["Forenames"], ListSortDirection.Ascending);
-                dgLooseBirths.Sort(dgLooseBirths.Columns["Surname"], ListSortDirection.Ascending);
+                dgLooseBirths.Sort(dgLooseBirths.Columns[nameof(IDisplayLooseBirth.Forenames)], ListSortDirection.Ascending);
+                dgLooseBirths.Sort(dgLooseBirths.Columns[nameof(IDisplayLooseBirth.Surname)], ListSortDirection.Ascending);
                 dgLooseBirths.Focus();
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + looseBirthList.Count;
@@ -2991,8 +2993,8 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.LooseDeaths();
                 dgLooseDeaths.DataSource = looseDeathList;
-                dgLooseDeaths.Sort(dgLooseDeaths.Columns["Forenames"], ListSortDirection.Ascending);
-                dgLooseDeaths.Sort(dgLooseDeaths.Columns["Surname"], ListSortDirection.Ascending);
+                dgLooseDeaths.Sort(dgLooseDeaths.Columns[nameof(IDisplayLooseDeath.Forenames)], ListSortDirection.Ascending);
+                dgLooseDeaths.Sort(dgLooseDeaths.Columns[nameof(IDisplayLooseDeath.Surname)], ListSortDirection.Ascending);
                 dgLooseDeaths.Focus();
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + looseDeathList.Count;
@@ -3010,8 +3012,8 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplayLooseInfo> looseInfoList = ft.LooseInfo();
                 dgLooseInfo.DataSource = looseInfoList;
-                dgLooseInfo.Sort(dgLooseInfo.Columns["Forenames"], ListSortDirection.Ascending);
-                dgLooseInfo.Sort(dgLooseInfo.Columns["Surname"], ListSortDirection.Ascending);
+                dgLooseInfo.Sort(dgLooseInfo.Columns[nameof(IDisplayLooseInfo.Forenames)], ListSortDirection.Ascending);
+                dgLooseInfo.Sort(dgLooseInfo.Columns[nameof(IDisplayLooseInfo.Surname)], ListSortDirection.Ascending);
                 dgLooseInfo.Focus();
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + looseInfoList.Count;
