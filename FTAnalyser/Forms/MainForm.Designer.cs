@@ -138,8 +138,8 @@ namespace FTAnalyzer
             this.tspbTabProgress = new System.Windows.Forms.ToolStripProgressBar();
             this.tsStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
-            this.dgRegions = new System.Windows.Forms.DataGridView();
-            this.dgCountries = new System.Windows.Forms.DataGridView();
+            this.dgRegions = new FTAnalyzer.Forms.Controls.VirtualDGVLocations();
+            this.dgCountries = new FTAnalyzer.Forms.Controls.VirtualDGVLocations();
             this.cmbColourFamily = new System.Windows.Forms.ComboBox();
             this.btnRandomSurnameColour = new System.Windows.Forms.Button();
             this.ckbFactExclude = new System.Windows.Forms.CheckedListBox();
@@ -279,11 +279,11 @@ namespace FTAnalyzer
             this.tabCountries = new System.Windows.Forms.TabPage();
             this.tabRegions = new System.Windows.Forms.TabPage();
             this.tabSubRegions = new System.Windows.Forms.TabPage();
-            this.dgSubRegions = new System.Windows.Forms.DataGridView();
+            this.dgSubRegions = new FTAnalyzer.Forms.Controls.VirtualDGVLocations();
             this.tabAddresses = new System.Windows.Forms.TabPage();
-            this.dgAddresses = new System.Windows.Forms.DataGridView();
+            this.dgAddresses = new FTAnalyzer.Forms.Controls.VirtualDGVLocations();
             this.tabPlaces = new System.Windows.Forms.TabPage();
-            this.dgPlaces = new System.Windows.Forms.DataGridView();
+            this.dgPlaces = new FTAnalyzer.Forms.Controls.VirtualDGVLocations();
             this.tabDisplayProgress = new System.Windows.Forms.TabPage();
             this.splitGedcom = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -328,11 +328,11 @@ namespace FTAnalyzer
             this.dgDuplicates = new FTAnalyzer.Forms.Controls.VirtualDGVDuplicates();
             this.btnCancelDuplicates = new System.Windows.Forms.Button();
             this.tabLooseBirths = new System.Windows.Forms.TabPage();
-            this.dgLooseBirths = new System.Windows.Forms.DataGridView();
+            this.dgLooseBirths = new FTAnalyzer.Forms.Controls.VirtualDGVLooseBirths();
             this.tabLooseDeaths = new System.Windows.Forms.TabPage();
-            this.dgLooseDeaths = new System.Windows.Forms.DataGridView();
+            this.dgLooseDeaths = new FTAnalyzer.Forms.Controls.VirtualDGVLooseDeaths();
             this.tabLooseInfo = new System.Windows.Forms.TabPage();
-            this.dgLooseInfo = new System.Windows.Forms.DataGridView();
+            this.dgLooseInfo = new FTAnalyzer.Forms.Controls.VirtualDGVLooseInfo();
             this.tabSurnames = new System.Windows.Forms.TabPage();
             this.chkSurnamesIgnoreCase = new System.Windows.Forms.CheckBox();
             this.btnShowSurnames = new System.Windows.Forms.Button();
@@ -1174,19 +1174,9 @@ namespace FTAnalyzer
             // 
             // dgRegions
             // 
-            this.dgRegions.AllowUserToAddRows = false;
-            this.dgRegions.AllowUserToDeleteRows = false;
-            this.dgRegions.AllowUserToResizeRows = false;
             this.dgRegions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgRegions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgRegions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgRegions.Location = new System.Drawing.Point(6, 6);
-            this.dgRegions.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.dgRegions.MultiSelect = false;
             this.dgRegions.Name = "dgRegions";
-            this.dgRegions.RowHeadersVisible = false;
-            this.dgRegions.RowHeadersWidth = 82;
-            this.dgRegions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgRegions.Size = new System.Drawing.Size(1969, 799);
             this.dgRegions.TabIndex = 1;
             this.toolTips.SetToolTip(this.dgRegions, "Double click on Region name to see list of individuals with that Region.");
@@ -1195,19 +1185,9 @@ namespace FTAnalyzer
             // 
             // dgCountries
             // 
-            this.dgCountries.AllowUserToAddRows = false;
-            this.dgCountries.AllowUserToDeleteRows = false;
-            this.dgCountries.AllowUserToResizeRows = false;
             this.dgCountries.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgCountries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgCountries.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgCountries.Location = new System.Drawing.Point(6, 6);
-            this.dgCountries.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.dgCountries.MultiSelect = false;
             this.dgCountries.Name = "dgCountries";
-            this.dgCountries.RowHeadersVisible = false;
-            this.dgCountries.RowHeadersWidth = 82;
-            this.dgCountries.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgCountries.Size = new System.Drawing.Size(1969, 799);
             this.dgCountries.TabIndex = 0;
             this.toolTips.SetToolTip(this.dgCountries, "Double click on Country name to see list of individuals with that Country.");
@@ -1271,9 +1251,6 @@ namespace FTAnalyzer
             // 
             // dgDataErrors
             // 
-            this.dgDataErrors.AllowUserToAddRows = false;
-            this.dgDataErrors.AllowUserToDeleteRows = false;
-            this.dgDataErrors.AllowUserToOrderColumns = true;
             this.dgDataErrors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -1288,18 +1265,12 @@ namespace FTAnalyzer
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgDataErrors.Location = new System.Drawing.Point(11, 306);
-            this.dgDataErrors.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.dgDataErrors.MultiSelect = false;
             this.dgDataErrors.Name = "dgDataErrors";
-            this.dgDataErrors.ReadOnly = true;
-            this.dgDataErrors.RowHeadersWidth = 82;
-            this.dgDataErrors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgDataErrors.ShowCellToolTips = false;
             this.dgDataErrors.ShowEditingIcon = false;
             this.dgDataErrors.Size = new System.Drawing.Size(1968, 497);
             this.dgDataErrors.TabIndex = 6;
             this.toolTips.SetToolTip(this.dgDataErrors, "Double click to see list of facts for that individual");
-            this.dgDataErrors.VirtualMode = true;
             this.dgDataErrors.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgDataErrors_CellDoubleClick);
             // 
             // tbDuplicateScore
@@ -1488,24 +1459,15 @@ namespace FTAnalyzer
             // 
             // dgWorldWars
             // 
-            this.dgWorldWars.AllowUserToAddRows = false;
-            this.dgWorldWars.AllowUserToDeleteRows = false;
-            this.dgWorldWars.AllowUserToOrderColumns = true;
             this.dgWorldWars.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgWorldWars.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgWorldWars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgWorldWars.Location = new System.Drawing.Point(0, 236);
-            this.dgWorldWars.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.dgWorldWars.MultiSelect = false;
             this.dgWorldWars.Name = "dgWorldWars";
-            this.dgWorldWars.ReadOnly = true;
-            this.dgWorldWars.RowHeadersWidth = 82;
-            this.dgWorldWars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgWorldWars.Size = new System.Drawing.Size(1984, 576);
             this.dgWorldWars.TabIndex = 29;
-            this.dgWorldWars.VirtualMode = true;
             this.dgWorldWars.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgWorldWars_CellDoubleClick);
             this.dgWorldWars.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgWorldWars_MouseDown);
             // 
@@ -1595,24 +1557,15 @@ namespace FTAnalyzer
             // 
             // dgTreeTops
             // 
-            this.dgTreeTops.AllowUserToAddRows = false;
-            this.dgTreeTops.AllowUserToDeleteRows = false;
-            this.dgTreeTops.AllowUserToOrderColumns = true;
             this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgTreeTops.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgTreeTops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgTreeTops.Location = new System.Drawing.Point(0, 236);
-            this.dgTreeTops.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.dgTreeTops.MultiSelect = false;
             this.dgTreeTops.Name = "dgTreeTops";
-            this.dgTreeTops.ReadOnly = true;
-            this.dgTreeTops.RowHeadersWidth = 82;
-            this.dgTreeTops.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgTreeTops.Size = new System.Drawing.Size(1984, 576);
             this.dgTreeTops.TabIndex = 28;
-            this.dgTreeTops.VirtualMode = true;
             this.dgTreeTops.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgTreeTops_CellDoubleClick);
             this.dgTreeTops.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgTreeTops_MouseDown);
             // 
@@ -2976,19 +2929,9 @@ namespace FTAnalyzer
             // 
             // dgSubRegions
             // 
-            this.dgSubRegions.AllowUserToAddRows = false;
-            this.dgSubRegions.AllowUserToDeleteRows = false;
-            this.dgSubRegions.AllowUserToResizeRows = false;
             this.dgSubRegions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgSubRegions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgSubRegions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgSubRegions.Location = new System.Drawing.Point(6, 6);
-            this.dgSubRegions.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.dgSubRegions.MultiSelect = false;
             this.dgSubRegions.Name = "dgSubRegions";
-            this.dgSubRegions.RowHeadersVisible = false;
-            this.dgSubRegions.RowHeadersWidth = 82;
-            this.dgSubRegions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgSubRegions.Size = new System.Drawing.Size(1969, 799);
             this.dgSubRegions.TabIndex = 1;
             this.dgSubRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSubRegions_CellDoubleClick);
@@ -3009,19 +2952,9 @@ namespace FTAnalyzer
             // 
             // dgAddresses
             // 
-            this.dgAddresses.AllowUserToAddRows = false;
-            this.dgAddresses.AllowUserToDeleteRows = false;
-            this.dgAddresses.AllowUserToResizeRows = false;
             this.dgAddresses.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgAddresses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgAddresses.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgAddresses.Location = new System.Drawing.Point(6, 6);
-            this.dgAddresses.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.dgAddresses.MultiSelect = false;
             this.dgAddresses.Name = "dgAddresses";
-            this.dgAddresses.RowHeadersVisible = false;
-            this.dgAddresses.RowHeadersWidth = 82;
-            this.dgAddresses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgAddresses.Size = new System.Drawing.Size(1969, 799);
             this.dgAddresses.TabIndex = 1;
             this.dgAddresses.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgAddresses_CellDoubleClick);
@@ -3042,19 +2975,9 @@ namespace FTAnalyzer
             // 
             // dgPlaces
             // 
-            this.dgPlaces.AllowUserToAddRows = false;
-            this.dgPlaces.AllowUserToDeleteRows = false;
-            this.dgPlaces.AllowUserToResizeRows = false;
             this.dgPlaces.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgPlaces.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgPlaces.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgPlaces.Location = new System.Drawing.Point(6, 6);
-            this.dgPlaces.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.dgPlaces.MultiSelect = false;
             this.dgPlaces.Name = "dgPlaces";
-            this.dgPlaces.RowHeadersVisible = false;
-            this.dgPlaces.RowHeadersWidth = 82;
-            this.dgPlaces.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgPlaces.Size = new System.Drawing.Size(1969, 799);
             this.dgPlaces.TabIndex = 2;
             this.dgPlaces.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgPlaces_CellDoubleClick);
@@ -3286,22 +3209,11 @@ namespace FTAnalyzer
             // 
             // dgIndividuals
             // 
-            this.dgIndividuals.AllowUserToAddRows = false;
-            this.dgIndividuals.AllowUserToDeleteRows = false;
-            this.dgIndividuals.AllowUserToOrderColumns = true;
             this.dgIndividuals.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgIndividuals.Location = new System.Drawing.Point(6, 6);
-            this.dgIndividuals.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.dgIndividuals.MultiSelect = false;
             this.dgIndividuals.Name = "dgIndividuals";
-            this.dgIndividuals.ReadOnly = true;
-            this.dgIndividuals.RowHeadersWidth = 50;
-            this.dgIndividuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgIndividuals.Size = new System.Drawing.Size(1969, 799);
             this.dgIndividuals.TabIndex = 1;
-            this.dgIndividuals.VirtualMode = true;
             this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgIndividuals_CellDoubleClick);
             this.dgIndividuals.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgIndividuals_MouseDown);
             // 
@@ -3319,22 +3231,11 @@ namespace FTAnalyzer
             // 
             // dgFamilies
             // 
-            this.dgFamilies.AllowUserToAddRows = false;
-            this.dgFamilies.AllowUserToDeleteRows = false;
-            this.dgFamilies.AllowUserToOrderColumns = true;
             this.dgFamilies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgFamilies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgFamilies.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgFamilies.Location = new System.Drawing.Point(6, 6);
-            this.dgFamilies.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.dgFamilies.MultiSelect = false;
             this.dgFamilies.Name = "dgFamilies";
-            this.dgFamilies.ReadOnly = true;
-            this.dgFamilies.RowHeadersWidth = 50;
-            this.dgFamilies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgFamilies.Size = new System.Drawing.Size(1969, 799);
             this.dgFamilies.TabIndex = 2;
-            this.dgFamilies.VirtualMode = true;
             this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgFamilies_CellDoubleClick);
             // 
             // tabSources
@@ -3350,22 +3251,11 @@ namespace FTAnalyzer
             // 
             // dgSources
             // 
-            this.dgSources.AllowUserToAddRows = false;
-            this.dgSources.AllowUserToDeleteRows = false;
-            this.dgSources.AllowUserToOrderColumns = true;
             this.dgSources.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgSources.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgSources.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgSources.Location = new System.Drawing.Point(0, 0);
-            this.dgSources.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.dgSources.MultiSelect = false;
             this.dgSources.Name = "dgSources";
-            this.dgSources.ReadOnly = true;
-            this.dgSources.RowHeadersWidth = 50;
-            this.dgSources.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgSources.Size = new System.Drawing.Size(1981, 811);
             this.dgSources.TabIndex = 2;
-            this.dgSources.VirtualMode = true;
             this.dgSources.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSources_CellDoubleClick);
             // 
             // tabOccupations
@@ -3381,22 +3271,11 @@ namespace FTAnalyzer
             // 
             // dgOccupations
             // 
-            this.dgOccupations.AllowUserToAddRows = false;
-            this.dgOccupations.AllowUserToDeleteRows = false;
-            this.dgOccupations.AllowUserToOrderColumns = true;
             this.dgOccupations.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgOccupations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgOccupations.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgOccupations.Location = new System.Drawing.Point(0, 0);
-            this.dgOccupations.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.dgOccupations.MultiSelect = false;
             this.dgOccupations.Name = "dgOccupations";
-            this.dgOccupations.ReadOnly = true;
-            this.dgOccupations.RowHeadersWidth = 50;
-            this.dgOccupations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgOccupations.Size = new System.Drawing.Size(1981, 811);
             this.dgOccupations.TabIndex = 3;
-            this.dgOccupations.VirtualMode = true;
             this.dgOccupations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgOccupations_CellDoubleClick);
             // 
             // tabCustomFacts
@@ -3412,22 +3291,11 @@ namespace FTAnalyzer
             // 
             // dgCustomFacts
             // 
-            this.dgCustomFacts.AllowUserToAddRows = false;
-            this.dgCustomFacts.AllowUserToDeleteRows = false;
-            this.dgCustomFacts.AllowUserToOrderColumns = true;
             this.dgCustomFacts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgCustomFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgCustomFacts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgCustomFacts.Location = new System.Drawing.Point(0, 0);
-            this.dgCustomFacts.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.dgCustomFacts.MultiSelect = false;
             this.dgCustomFacts.Name = "dgCustomFacts";
-            this.dgCustomFacts.ReadOnly = true;
-            this.dgCustomFacts.RowHeadersWidth = 50;
-            this.dgCustomFacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgCustomFacts.Size = new System.Drawing.Size(1981, 811);
             this.dgCustomFacts.TabIndex = 4;
-            this.dgCustomFacts.VirtualMode = true;
             this.dgCustomFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgCustomFacts_CellDoubleClick);
             this.dgCustomFacts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgCustomFacts_CellValueChanged);
             // 
@@ -3617,23 +3485,14 @@ namespace FTAnalyzer
             // 
             // dgDuplicates
             // 
-            this.dgDuplicates.AllowUserToAddRows = false;
-            this.dgDuplicates.AllowUserToDeleteRows = false;
-            this.dgDuplicates.AllowUserToOrderColumns = true;
             this.dgDuplicates.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDuplicates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgDuplicates.Location = new System.Drawing.Point(-2, 161);
-            this.dgDuplicates.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.dgDuplicates.MultiSelect = false;
             this.dgDuplicates.Name = "dgDuplicates";
-            this.dgDuplicates.ReadOnly = true;
-            this.dgDuplicates.RowHeadersWidth = 15;
-            this.dgDuplicates.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgDuplicates.Size = new System.Drawing.Size(1971, 605);
             this.dgDuplicates.TabIndex = 19;
-            this.dgDuplicates.VirtualMode = true;
             this.dgDuplicates.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgDuplicates_CellContentClick);
             this.dgDuplicates.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgDuplicates_CellDoubleClick);
             // 
@@ -3663,18 +3522,9 @@ namespace FTAnalyzer
             // 
             // dgLooseBirths
             // 
-            this.dgLooseBirths.AllowUserToAddRows = false;
-            this.dgLooseBirths.AllowUserToDeleteRows = false;
-            this.dgLooseBirths.AllowUserToOrderColumns = true;
             this.dgLooseBirths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgLooseBirths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgLooseBirths.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgLooseBirths.Location = new System.Drawing.Point(0, 0);
-            this.dgLooseBirths.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.dgLooseBirths.MultiSelect = false;
             this.dgLooseBirths.Name = "dgLooseBirths";
-            this.dgLooseBirths.RowHeadersWidth = 82;
-            this.dgLooseBirths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgLooseBirths.Size = new System.Drawing.Size(1993, 823);
             this.dgLooseBirths.TabIndex = 3;
             this.dgLooseBirths.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLooseBirths_CellDoubleClick);
@@ -3692,18 +3542,9 @@ namespace FTAnalyzer
             // 
             // dgLooseDeaths
             // 
-            this.dgLooseDeaths.AllowUserToAddRows = false;
-            this.dgLooseDeaths.AllowUserToDeleteRows = false;
-            this.dgLooseDeaths.AllowUserToOrderColumns = true;
             this.dgLooseDeaths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgLooseDeaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgLooseDeaths.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgLooseDeaths.Location = new System.Drawing.Point(0, 0);
-            this.dgLooseDeaths.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.dgLooseDeaths.MultiSelect = false;
             this.dgLooseDeaths.Name = "dgLooseDeaths";
-            this.dgLooseDeaths.RowHeadersWidth = 82;
-            this.dgLooseDeaths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgLooseDeaths.Size = new System.Drawing.Size(1993, 823);
             this.dgLooseDeaths.TabIndex = 2;
             this.dgLooseDeaths.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLooseDeaths_CellDoubleClick);
@@ -3721,18 +3562,9 @@ namespace FTAnalyzer
             // 
             // dgLooseInfo
             // 
-            this.dgLooseInfo.AllowUserToAddRows = false;
-            this.dgLooseInfo.AllowUserToDeleteRows = false;
-            this.dgLooseInfo.AllowUserToOrderColumns = true;
             this.dgLooseInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgLooseInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgLooseInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgLooseInfo.Location = new System.Drawing.Point(0, 0);
-            this.dgLooseInfo.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.dgLooseInfo.MultiSelect = false;
             this.dgLooseInfo.Name = "dgLooseInfo";
-            this.dgLooseInfo.RowHeadersWidth = 82;
-            this.dgLooseInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgLooseInfo.Size = new System.Drawing.Size(1993, 823);
             this.dgLooseInfo.TabIndex = 4;
             this.dgLooseInfo.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLooseInfo_CellDoubleClick);
@@ -3778,9 +3610,6 @@ namespace FTAnalyzer
             // 
             // dgSurnames
             // 
-            this.dgSurnames.AllowUserToAddRows = false;
-            this.dgSurnames.AllowUserToDeleteRows = false;
-            this.dgSurnames.AllowUserToOrderColumns = true;
             this.dgSurnames.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -3792,15 +3621,9 @@ namespace FTAnalyzer
             this.Families,
             this.Marriages});
             this.dgSurnames.Location = new System.Drawing.Point(6, 190);
-            this.dgSurnames.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.dgSurnames.MultiSelect = false;
             this.dgSurnames.Name = "dgSurnames";
-            this.dgSurnames.ReadOnly = true;
-            this.dgSurnames.RowHeadersWidth = 20;
-            this.dgSurnames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgSurnames.Size = new System.Drawing.Size(1978, 622);
             this.dgSurnames.TabIndex = 1;
-            this.dgSurnames.VirtualMode = true;
             this.dgSurnames.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSurnames_CellContentClick);
             this.dgSurnames.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSurnames_CellDoubleClick);
             // 

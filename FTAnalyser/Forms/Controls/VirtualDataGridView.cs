@@ -18,14 +18,20 @@ namespace FTAnalyzer.Forms.Controls
         {
             _dataSource = new SortableBindingList<T>();
             VirtualMode = true;
-            AutoGenerateColumns = false;
             AllowUserToAddRows = false;
             AllowUserToDeleteRows = false;
             AllowUserToOrderColumns = true;
             AllowUserToResizeColumns = true;
-            ReadOnly = true;
-            RowHeadersWidth = 50;
+            AllowUserToResizeRows = false;
+            AutoGenerateColumns = false;
+            Dock = DockStyle.Fill;
+            Location = new System.Drawing.Point(6, 6);
+            Margin = new Padding(6, 6, 6, 6);
             MultiSelect = false;
+            ReadOnly = true;
+            RowHeadersVisible = false;
+            RowHeadersWidth = 50;
+            SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             CellValueNeeded += OnCellValueNeeded;
             ColumnHeaderMouseClick += OnColumnHeaderMouseClick;
             ColumnWidthChanged += OnColumnWidthChanged; // for debugging purposes
