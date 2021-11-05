@@ -139,8 +139,8 @@ namespace FTAnalyzer.Forms.Controls
 
             public int Compare(T ind1, T ind2)
             {
-                var val1 = _accessor?.GetValue(ind1) as IComparable;
-                var val2 = _accessor?.GetValue(ind2) as IComparable;
+                IComparable val1 = _accessor?.GetValue(ind1) as IComparable;
+                IComparable val2 = _accessor?.GetValue(ind2) as IComparable;
 
                 if (val1 is null)
                     return val2 is null ? 0 : _direction * -1;

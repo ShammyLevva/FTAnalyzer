@@ -304,6 +304,12 @@
     <Compile Include="Forms\Controls\VirtualDGVCustomFacts.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\Controls\VirtualDGVLooseDeaths.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\Controls\VirtualDGVLooseBirths.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\Controls\VirtualDGVSurnames.cs">
       <SubType>Component</SubType>
     </Compile>
