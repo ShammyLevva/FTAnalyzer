@@ -412,8 +412,6 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void Facts_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
-
         void DgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
@@ -432,6 +430,8 @@ namespace FTAnalyzer.Forms
             }
         }
 
+        void Facts_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
+        
         void Facts_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }
 }

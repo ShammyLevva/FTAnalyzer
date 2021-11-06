@@ -1077,15 +1077,6 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void GeocodeLocations_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            try
-            {
-                Dispose();
-            }
-            catch (Exception) { }
-        }
-
         #region OS Geocoding
         public void StartOSGeoCoding()
         {
@@ -1432,9 +1423,10 @@ namespace FTAnalyzer.Forms
 
         void OSGeocodeBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) => WorkFinished(sender);
         #endregion
+        void MnuCheckForEmptyViewPortsToolStripMenuItem_Click(object sender, EventArgs e) => StartCheckEmptyViewPorts();
+
+        void GeocodeLocations_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
         void GeocodeLocations_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
-
-        void MnuCheckForEmptyViewPortsToolStripMenuItem_Click(object sender, EventArgs e) => StartCheckEmptyViewPorts();
     }
 }

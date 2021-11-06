@@ -309,8 +309,6 @@ namespace FTAnalyzer.Forms
             return layers;
         }
 
-        void EditLocation_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
-
         void TbOpacity_Scroll(object sender, EventArgs e) => RefreshMap();
 
         void SetOpacity()
@@ -333,6 +331,8 @@ namespace FTAnalyzer.Forms
             SetOpacity();
             mapBox1.Refresh();
         }
+
+        void EditLocation_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
         void EditLocation_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }
