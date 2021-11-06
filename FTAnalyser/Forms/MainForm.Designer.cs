@@ -44,8 +44,8 @@ namespace FTAnalyzer
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -289,13 +289,13 @@ namespace FTAnalyzer
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LbProgramName = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.labRelationships = new System.Windows.Forms.Label();
             this.pbRelationships = new System.Windows.Forms.ProgressBar();
-            this.label6 = new System.Windows.Forms.Label();
+            this.labFamilies = new System.Windows.Forms.Label();
             this.pbFamilies = new System.Windows.Forms.ProgressBar();
-            this.label5 = new System.Windows.Forms.Label();
+            this.labIndividuals = new System.Windows.Forms.Label();
             this.pbIndividuals = new System.Windows.Forms.ProgressBar();
-            this.label4 = new System.Windows.Forms.Label();
+            this.labSources = new System.Windows.Forms.Label();
             this.pbSources = new System.Windows.Forms.ProgressBar();
             this.rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             this.tabSelector = new System.Windows.Forms.TabControl();
@@ -1285,14 +1285,14 @@ namespace FTAnalyzer
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgDataErrors.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgDataErrors.Location = new System.Drawing.Point(11, 306);
             this.dgDataErrors.Margin = new System.Windows.Forms.Padding(6);
             this.dgDataErrors.MultiSelect = false;
@@ -1349,14 +1349,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgCheckAncestors.ColumnHeadersHeight = 40;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgCheckAncestors.Location = new System.Drawing.Point(-2, 155);
             this.dgCheckAncestors.Margin = new System.Windows.Forms.Padding(6);
             this.dgCheckAncestors.Name = "dgCheckAncestors";
@@ -3109,7 +3109,7 @@ namespace FTAnalyzer
             // 
             this.splitGedcom.Panel2.Controls.Add(this.rtbOutput);
             this.splitGedcom.Size = new System.Drawing.Size(1989, 848);
-            this.splitGedcom.SplitterDistance = 110;
+            this.splitGedcom.SplitterDistance = 206;
             this.splitGedcom.SplitterWidth = 7;
             this.splitGedcom.TabIndex = 14;
             // 
@@ -3117,19 +3117,19 @@ namespace FTAnalyzer
             // 
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.LbProgramName);
-            this.panel2.Controls.Add(this.label7);
+            this.panel2.Controls.Add(this.labRelationships);
             this.panel2.Controls.Add(this.pbRelationships);
-            this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.labFamilies);
             this.panel2.Controls.Add(this.pbFamilies);
-            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.labIndividuals);
             this.panel2.Controls.Add(this.pbIndividuals);
-            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.labSources);
             this.panel2.Controls.Add(this.pbSources);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(6);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1989, 110);
+            this.panel2.Size = new System.Drawing.Size(1989, 206);
             this.panel2.TabIndex = 13;
             // 
             // pictureBox1
@@ -3154,15 +3154,15 @@ namespace FTAnalyzer
             this.LbProgramName.TabIndex = 17;
             this.LbProgramName.Text = "Family Tree Analyzer";
             // 
-            // label7
+            // labRelationships
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 146);
-            this.label7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(235, 25);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "Relationships && Locations";
+            this.labRelationships.AutoSize = true;
+            this.labRelationships.Location = new System.Drawing.Point(6, 146);
+            this.labRelationships.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labRelationships.Name = "labRelationships";
+            this.labRelationships.Size = new System.Drawing.Size(235, 25);
+            this.labRelationships.TabIndex = 16;
+            this.labRelationships.Text = "Relationships && Locations";
             // 
             // pbRelationships
             // 
@@ -3172,15 +3172,15 @@ namespace FTAnalyzer
             this.pbRelationships.Size = new System.Drawing.Size(504, 30);
             this.pbRelationships.TabIndex = 15;
             // 
-            // label6
+            // labFamilies
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 105);
-            this.label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(159, 25);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Loading Families";
+            this.labFamilies.AutoSize = true;
+            this.labFamilies.Location = new System.Drawing.Point(6, 105);
+            this.labFamilies.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labFamilies.Name = "labFamilies";
+            this.labFamilies.Size = new System.Drawing.Size(159, 25);
+            this.labFamilies.TabIndex = 14;
+            this.labFamilies.Text = "Loading Families";
             // 
             // pbFamilies
             // 
@@ -3190,15 +3190,15 @@ namespace FTAnalyzer
             this.pbFamilies.Size = new System.Drawing.Size(504, 30);
             this.pbFamilies.TabIndex = 13;
             // 
-            // label5
+            // labIndividuals
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 65);
-            this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(179, 25);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Loading Individuals";
+            this.labIndividuals.AutoSize = true;
+            this.labIndividuals.Location = new System.Drawing.Point(6, 65);
+            this.labIndividuals.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labIndividuals.Name = "labIndividuals";
+            this.labIndividuals.Size = new System.Drawing.Size(179, 25);
+            this.labIndividuals.TabIndex = 12;
+            this.labIndividuals.Text = "Loading Individuals";
             // 
             // pbIndividuals
             // 
@@ -3208,15 +3208,15 @@ namespace FTAnalyzer
             this.pbIndividuals.Size = new System.Drawing.Size(504, 30);
             this.pbIndividuals.TabIndex = 11;
             // 
-            // label4
+            // labSources
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 24);
-            this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(160, 25);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Loading Sources";
+            this.labSources.AutoSize = true;
+            this.labSources.Location = new System.Drawing.Point(6, 24);
+            this.labSources.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labSources.Name = "labSources";
+            this.labSources.Size = new System.Drawing.Size(160, 25);
+            this.labSources.TabIndex = 10;
+            this.labSources.Text = "Loading Sources";
             // 
             // pbSources
             // 
@@ -3234,7 +3234,7 @@ namespace FTAnalyzer
             this.rtbOutput.Margin = new System.Windows.Forms.Padding(6);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.ReadOnly = true;
-            this.rtbOutput.Size = new System.Drawing.Size(1989, 731);
+            this.rtbOutput.Size = new System.Drawing.Size(1989, 635);
             this.rtbOutput.TabIndex = 14;
             this.rtbOutput.Text = "";
             // 
@@ -4728,13 +4728,13 @@ namespace FTAnalyzer
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label LbProgramName;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labRelationships;
         private System.Windows.Forms.ProgressBar pbRelationships;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labFamilies;
         private System.Windows.Forms.ProgressBar pbFamilies;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labIndividuals;
         private System.Windows.Forms.ProgressBar pbIndividuals;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labSources;
         private System.Windows.Forms.ProgressBar pbSources;
         private Utilities.ScrollingRichTextBox rtbOutput;
         private System.Windows.Forms.CheckBox chkSurnamesIgnoreCase;

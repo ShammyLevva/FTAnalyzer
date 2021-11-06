@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "8.4.0.0-beta1";
+        public static string VERSION = "8.4.0.0-beta2";
 
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -144,31 +144,52 @@ namespace FTAnalyzer
                 {
                     case 1:
                         handwritingFont = new Font(fonts.Families[0], 46.0F, FontStyle.Bold);
-                        boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 6F, FontStyle.Bold);
-                        normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 6F, FontStyle.Regular);
-                        break;
-                    case 2:
-                        handwritingFont = new Font(fonts.Families[0], 68.0F, FontStyle.Bold);
                         boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 8.25F, FontStyle.Bold);
                         normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 8.25F, FontStyle.Regular);
                         break;
-                    case 3:
-                        handwritingFont = new Font(fonts.Families[0], 72.0F, FontStyle.Bold);
+                    case 2:
+                        handwritingFont = new Font(fonts.Families[0], 68.0F, FontStyle.Bold);
                         boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 10F, FontStyle.Bold);
                         normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 10F, FontStyle.Regular);
                         break;
-                    case 4:
-                        handwritingFont = new Font(fonts.Families[0], 90.0F, FontStyle.Bold);
+                    case 3:
+                        handwritingFont = new Font(fonts.Families[0], 72.0F, FontStyle.Bold);
                         boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 12F, FontStyle.Bold);
                         normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 12F, FontStyle.Regular);
                         break;
+                    case 4:
+                        handwritingFont = new Font(fonts.Families[0], 90.0F, FontStyle.Bold);
+                        boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 14F, FontStyle.Bold);
+                        normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 14F, FontStyle.Regular);
+                        break;
                 }
-                LbProgramName.Font = handwritingFont;
-                pictureBox1.Left = LbProgramName.Right;
-                splitGedcom.SplitterDistance = Math.Max(pbRelationships.Bottom + 18, 110);
+                SetInitialScreenControls();
                 UpdateDataErrorsDisplay();
             }
-            catch (Exception) { } // for font sizing exception
+            catch (Exception e) {
+                Console.WriteLine($"Exception {e.Message}");
+            } // for font sizing exception
+        }
+
+        void SetInitialScreenControls()
+        {
+            int progressBarLeft = labRelationships.Right + 15;
+            pbSources.Left = progressBarLeft;
+            pbIndividuals.Left = progressBarLeft;
+            pbFamilies.Left = progressBarLeft;
+            pbRelationships.Left = progressBarLeft;
+            pbSources.Refresh();
+            pbIndividuals.Refresh();
+            pbFamilies.Refresh();
+            pbRelationships.Refresh();
+            LbProgramName.Left = pbRelationships.Right + 15;
+            LbProgramName.Font = handwritingFont;
+            LbProgramName.Refresh();
+            pictureBox1.Left = LbProgramName.Right;
+            pictureBox1.Refresh();
+            Width = pictureBox1.Right + 100;
+            splitGedcom.SplitterDistance = Math.Max(pbRelationships.Bottom + 18, 110);
+            splitGedcom.Refresh();
         }
 
         void RegisterEventHandlers()
