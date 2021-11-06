@@ -35,6 +35,7 @@ namespace FTAnalyzer.Forms.Controls
             RowHeadersVisible = false;
             RowHeadersWidth = 50;
             SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            ScrollBars = ScrollBars.Both;
             CellValueNeeded += OnCellValueNeeded;
             ColumnHeaderMouseClick += OnColumnHeaderMouseClick;
             ColumnWidthChanged += OnColumnWidthChanged; // for debugging purposes

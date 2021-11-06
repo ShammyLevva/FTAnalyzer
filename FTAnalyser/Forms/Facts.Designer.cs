@@ -51,6 +51,8 @@ namespace FTAnalyzer.Forms
             this.sep1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnShowHideFacts = new System.Windows.Forms.ToolStripButton();
             this.dgFacts = new System.Windows.Forms.DataGridView();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.IgnoreFact = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,8 +72,6 @@ namespace FTAnalyzer.Forms
             this.Preferred = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.SourcesCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SourceList = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFacts)).BeginInit();
             this.statusStrip.SuspendLayout();
@@ -214,7 +214,7 @@ namespace FTAnalyzer.Forms
             this.dgFacts.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgFacts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgFacts.Location = new System.Drawing.Point(0, 38);
-            this.dgFacts.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dgFacts.Margin = new System.Windows.Forms.Padding(6);
             this.dgFacts.Name = "dgFacts";
             this.dgFacts.ReadOnly = true;
             this.dgFacts.RowHeadersWidth = 20;
@@ -227,16 +227,33 @@ namespace FTAnalyzer.Forms
             this.dgFacts.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgFacts_CellFormatting);
             this.dgFacts.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.DgFacts_CellToolTipTextNeeded);
             // 
+            // statusStrip
+            // 
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(28, 28);
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsRecords});
+            this.statusStrip.Location = new System.Drawing.Point(0, 675);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 26, 0);
+            this.statusStrip.Size = new System.Drawing.Size(1571, 39);
+            this.statusStrip.TabIndex = 3;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // tsRecords
+            // 
+            this.tsRecords.Name = "tsRecords";
+            this.tsRecords.Size = new System.Drawing.Size(206, 30);
+            this.tsRecords.Text = "toolStripStatusLabel1";
+            // 
             // FactIcon
             // 
-            this.FactIcon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.FactIcon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.FactIcon.DataPropertyName = "Icon";
             this.FactIcon.HeaderText = "";
-            this.FactIcon.MinimumWidth = 20;
+            this.FactIcon.MinimumWidth = 30;
             this.FactIcon.Name = "FactIcon";
             this.FactIcon.ReadOnly = true;
-            this.FactIcon.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.FactIcon.Width = 20;
+            this.FactIcon.Width = 30;
             // 
             // IgnoreFact
             // 
@@ -416,24 +433,6 @@ namespace FTAnalyzer.Forms
             this.SourceList.ReadOnly = true;
             this.SourceList.Width = 300;
             // 
-            // statusStrip
-            // 
-            this.statusStrip.ImageScalingSize = new System.Drawing.Size(28, 28);
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsRecords});
-            this.statusStrip.Location = new System.Drawing.Point(0, 675);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 26, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1571, 39);
-            this.statusStrip.TabIndex = 3;
-            this.statusStrip.Text = "statusStrip1";
-            // 
-            // tsRecords
-            // 
-            this.tsRecords.Name = "tsRecords";
-            this.tsRecords.Size = new System.Drawing.Size(206, 30);
-            this.tsRecords.Text = "toolStripStatusLabel1";
-            // 
             // Facts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -443,7 +442,7 @@ namespace FTAnalyzer.Forms
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Facts";
             this.Text = "Facts";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Facts_FormClosed);
