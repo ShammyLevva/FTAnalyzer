@@ -22,8 +22,11 @@ namespace FTAnalyzer.Forms.Controls
             AllowUserToDeleteRows = false;
             AllowUserToOrderColumns = true;
             AllowUserToResizeColumns = true;
-            AllowUserToResizeRows = false;
+            AllowUserToResizeRows = true;
             AutoGenerateColumns = false;
+            AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             Dock = DockStyle.Fill;
             Location = new System.Drawing.Point(6, 6);
             Margin = new Padding(6, 6, 6, 6);

@@ -133,8 +133,6 @@ namespace FTAnalyzer
             try
             {
                 SpecialMethods.SetFonts(this);
-                boldFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Bold);
-                normalFont = new Font(dgCountries.DefaultCellStyle.Font, FontStyle.Regular);
                 byte[] fontData = Resources.KUNSTLER;
                 IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
                 System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
@@ -146,15 +144,23 @@ namespace FTAnalyzer
                 {
                     case 1:
                         handwritingFont = new Font(fonts.Families[0], 46.0F, FontStyle.Bold);
+                        boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 6F, FontStyle.Bold);
+                        normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 6F, FontStyle.Regular);
                         break;
                     case 2:
                         handwritingFont = new Font(fonts.Families[0], 68.0F, FontStyle.Bold);
+                        boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 8.25F, FontStyle.Bold);
+                        normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 8.25F, FontStyle.Regular);
                         break;
                     case 3:
                         handwritingFont = new Font(fonts.Families[0], 72.0F, FontStyle.Bold);
+                        boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 10F, FontStyle.Bold);
+                        normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 10F, FontStyle.Regular);
                         break;
                     case 4:
                         handwritingFont = new Font(fonts.Families[0], 90.0F, FontStyle.Bold);
+                        boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 12F, FontStyle.Bold);
+                        normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 12F, FontStyle.Regular);
                         break;
                 }
                 LbProgramName.Font = handwritingFont;

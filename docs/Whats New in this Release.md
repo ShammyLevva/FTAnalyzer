@@ -3,6 +3,9 @@
 Temp XML file is now unloaded after initial processing freeing up memory  
 Initial Load now says how much memory was used during loading and procesing  
 Updated packages to latest versions including BruTile & NewtonsoftJSON  
+Changed all main form grids to use virtual grids this should make loading faster  
+Duplicate checking radically overhauled thanks to assistance from Tamura Jones and Enno Borgsteede  
+
 
 #### Updated Release Version 8.3.1 16th March 2021  
 **Updates**  

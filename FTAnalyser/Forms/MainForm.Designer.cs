@@ -482,7 +482,6 @@ namespace FTAnalyzer
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 2, 0, 2);
             this.menuStrip1.Size = new System.Drawing.Size(2024, 38);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
@@ -1174,23 +1173,49 @@ namespace FTAnalyzer
             // 
             // dgRegions
             // 
-            this.dgRegions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgRegions.AllowUserToAddRows = false;
+            this.dgRegions.AllowUserToDeleteRows = false;
+            this.dgRegions.AllowUserToOrderColumns = true;
+            this.dgRegions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgRegions.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgRegions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgRegions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgRegions.Location = new System.Drawing.Point(6, 6);
+            this.dgRegions.Margin = new System.Windows.Forms.Padding(6);
+            this.dgRegions.MultiSelect = false;
             this.dgRegions.Name = "dgRegions";
+            this.dgRegions.ReadOnly = true;
+            this.dgRegions.RowHeadersVisible = false;
+            this.dgRegions.RowHeadersWidth = 50;
+            this.dgRegions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgRegions.Size = new System.Drawing.Size(1969, 799);
             this.dgRegions.TabIndex = 1;
             this.toolTips.SetToolTip(this.dgRegions, "Double click on Region name to see list of individuals with that Region.");
+            this.dgRegions.VirtualMode = true;
             this.dgRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgRegions_CellDoubleClick);
             this.dgRegions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgRegions_CellFormatting);
             // 
             // dgCountries
             // 
-            this.dgCountries.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgCountries.AllowUserToAddRows = false;
+            this.dgCountries.AllowUserToDeleteRows = false;
+            this.dgCountries.AllowUserToOrderColumns = true;
+            this.dgCountries.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgCountries.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgCountries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgCountries.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgCountries.Location = new System.Drawing.Point(6, 6);
+            this.dgCountries.Margin = new System.Windows.Forms.Padding(6);
+            this.dgCountries.MultiSelect = false;
             this.dgCountries.Name = "dgCountries";
+            this.dgCountries.ReadOnly = true;
+            this.dgCountries.RowHeadersVisible = false;
+            this.dgCountries.RowHeadersWidth = 50;
+            this.dgCountries.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgCountries.Size = new System.Drawing.Size(1969, 799);
             this.dgCountries.TabIndex = 0;
             this.toolTips.SetToolTip(this.dgCountries, "Double click on Country name to see list of individuals with that Country.");
+            this.dgCountries.VirtualMode = true;
             this.dgCountries.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgCountries_CellDoubleClick);
             this.dgCountries.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgCountries_CellFormatting);
             // 
@@ -1200,7 +1225,7 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbColourFamily.FormattingEnabled = true;
             this.cmbColourFamily.Location = new System.Drawing.Point(744, 90);
-            this.cmbColourFamily.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cmbColourFamily.Margin = new System.Windows.Forms.Padding(6);
             this.cmbColourFamily.Name = "cmbColourFamily";
             this.cmbColourFamily.Size = new System.Drawing.Size(930, 32);
             this.cmbColourFamily.TabIndex = 60;
@@ -1210,7 +1235,7 @@ namespace FTAnalyzer
             // btnRandomSurnameColour
             // 
             this.btnRandomSurnameColour.Location = new System.Drawing.Point(1140, 24);
-            this.btnRandomSurnameColour.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnRandomSurnameColour.Margin = new System.Windows.Forms.Padding(6);
             this.btnRandomSurnameColour.Name = "btnRandomSurnameColour";
             this.btnRandomSurnameColour.Size = new System.Drawing.Size(537, 46);
             this.btnRandomSurnameColour.TabIndex = 62;
@@ -1226,7 +1251,7 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Left)));
             this.ckbFactExclude.FormattingEnabled = true;
             this.ckbFactExclude.Location = new System.Drawing.Point(662, 253);
-            this.ckbFactExclude.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ckbFactExclude.Margin = new System.Windows.Forms.Padding(6);
             this.ckbFactExclude.Name = "ckbFactExclude";
             this.ckbFactExclude.ScrollAlwaysVisible = true;
             this.ckbFactExclude.SelectionMode = System.Windows.Forms.SelectionMode.None;
@@ -1240,7 +1265,7 @@ namespace FTAnalyzer
             // btnShowExclusions
             // 
             this.btnShowExclusions.Location = new System.Drawing.Point(600, 439);
-            this.btnShowExclusions.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnShowExclusions.Margin = new System.Windows.Forms.Padding(6);
             this.btnShowExclusions.Name = "btnShowExclusions";
             this.btnShowExclusions.Size = new System.Drawing.Size(51, 94);
             this.btnShowExclusions.TabIndex = 33;
@@ -1251,10 +1276,14 @@ namespace FTAnalyzer
             // 
             // dgDataErrors
             // 
+            this.dgDataErrors.AllowUserToAddRows = false;
+            this.dgDataErrors.AllowUserToDeleteRows = false;
+            this.dgDataErrors.AllowUserToOrderColumns = true;
             this.dgDataErrors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgDataErrors.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -1265,12 +1294,19 @@ namespace FTAnalyzer
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgDataErrors.Location = new System.Drawing.Point(11, 306);
+            this.dgDataErrors.Margin = new System.Windows.Forms.Padding(6);
+            this.dgDataErrors.MultiSelect = false;
             this.dgDataErrors.Name = "dgDataErrors";
+            this.dgDataErrors.ReadOnly = true;
+            this.dgDataErrors.RowHeadersVisible = false;
+            this.dgDataErrors.RowHeadersWidth = 50;
+            this.dgDataErrors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgDataErrors.ShowCellToolTips = false;
             this.dgDataErrors.ShowEditingIcon = false;
             this.dgDataErrors.Size = new System.Drawing.Size(1968, 497);
             this.dgDataErrors.TabIndex = 6;
             this.toolTips.SetToolTip(this.dgDataErrors, "Double click to see list of facts for that individual");
+            this.dgDataErrors.VirtualMode = true;
             this.dgDataErrors.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgDataErrors_CellDoubleClick);
             // 
             // tbDuplicateScore
@@ -1279,7 +1315,7 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbDuplicateScore.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tbDuplicateScore.Location = new System.Drawing.Point(820, 6);
-            this.tbDuplicateScore.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tbDuplicateScore.Margin = new System.Windows.Forms.Padding(6);
             this.tbDuplicateScore.Minimum = 1;
             this.tbDuplicateScore.Name = "tbDuplicateScore";
             this.tbDuplicateScore.Size = new System.Drawing.Size(681, 80);
@@ -1293,7 +1329,7 @@ namespace FTAnalyzer
             // 
             this.chkLCRootPersonConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkLCRootPersonConfirm.Location = new System.Drawing.Point(55, 271);
-            this.chkLCRootPersonConfirm.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkLCRootPersonConfirm.Margin = new System.Windows.Forms.Padding(6);
             this.chkLCRootPersonConfirm.Name = "chkLCRootPersonConfirm";
             this.chkLCRootPersonConfirm.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkLCRootPersonConfirm.Size = new System.Drawing.Size(746, 44);
@@ -1312,8 +1348,7 @@ namespace FTAnalyzer
             this.dgCheckAncestors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgCheckAncestors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgCheckAncestors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgCheckAncestors.ColumnHeadersHeight = 40;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1323,14 +1358,14 @@ namespace FTAnalyzer
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgCheckAncestors.Location = new System.Drawing.Point(-2, 155);
-            this.dgCheckAncestors.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dgCheckAncestors.Margin = new System.Windows.Forms.Padding(6);
             this.dgCheckAncestors.Name = "dgCheckAncestors";
             this.dgCheckAncestors.ReadOnly = true;
             this.dgCheckAncestors.RowHeadersWidth = 82;
             this.dgCheckAncestors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgCheckAncestors.ShowCellToolTips = false;
             this.dgCheckAncestors.ShowEditingIcon = false;
-            this.dgCheckAncestors.Size = new System.Drawing.Size(1947, 537);
+            this.dgCheckAncestors.Size = new System.Drawing.Size(1952, 547);
             this.dgCheckAncestors.TabIndex = 7;
             this.toolTips.SetToolTip(this.dgCheckAncestors, "Double click to see list of facts for that individual");
             // 
@@ -1365,7 +1400,7 @@ namespace FTAnalyzer
             this.chkIgnoreUnnamedTwins.Checked = true;
             this.chkIgnoreUnnamedTwins.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkIgnoreUnnamedTwins.Location = new System.Drawing.Point(451, 118);
-            this.chkIgnoreUnnamedTwins.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkIgnoreUnnamedTwins.Margin = new System.Windows.Forms.Padding(6);
             this.chkIgnoreUnnamedTwins.Name = "chkIgnoreUnnamedTwins";
             this.chkIgnoreUnnamedTwins.Size = new System.Drawing.Size(150, 29);
             this.chkIgnoreUnnamedTwins.TabIndex = 29;
@@ -1402,7 +1437,7 @@ namespace FTAnalyzer
             this.tabWorldWars.Controls.Add(this.wardeadRelation);
             this.tabWorldWars.Controls.Add(this.wardeadCountry);
             this.tabWorldWars.Location = new System.Drawing.Point(4, 33);
-            this.tabWorldWars.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabWorldWars.Margin = new System.Windows.Forms.Padding(6);
             this.tabWorldWars.Name = "tabWorldWars";
             this.tabWorldWars.Size = new System.Drawing.Size(2001, 860);
             this.tabWorldWars.TabIndex = 8;
@@ -1414,7 +1449,7 @@ namespace FTAnalyzer
             // 
             this.ckbMilitaryOnly.AutoSize = true;
             this.ckbMilitaryOnly.Location = new System.Drawing.Point(512, 194);
-            this.ckbMilitaryOnly.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ckbMilitaryOnly.Margin = new System.Windows.Forms.Padding(6);
             this.ckbMilitaryOnly.Name = "ckbMilitaryOnly";
             this.ckbMilitaryOnly.Size = new System.Drawing.Size(463, 29);
             this.ckbMilitaryOnly.TabIndex = 33;
@@ -1427,7 +1462,7 @@ namespace FTAnalyzer
             this.ckbWDIgnoreLocations.Checked = true;
             this.ckbWDIgnoreLocations.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbWDIgnoreLocations.Location = new System.Drawing.Point(15, 194);
-            this.ckbWDIgnoreLocations.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ckbWDIgnoreLocations.Margin = new System.Windows.Forms.Padding(6);
             this.ckbWDIgnoreLocations.Name = "ckbWDIgnoreLocations";
             this.ckbWDIgnoreLocations.Size = new System.Drawing.Size(453, 29);
             this.ckbWDIgnoreLocations.TabIndex = 32;
@@ -1438,7 +1473,7 @@ namespace FTAnalyzer
             // btnWWII
             // 
             this.btnWWII.Location = new System.Drawing.Point(1390, 107);
-            this.btnWWII.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnWWII.Margin = new System.Windows.Forms.Padding(6);
             this.btnWWII.Name = "btnWWII";
             this.btnWWII.Size = new System.Drawing.Size(174, 46);
             this.btnWWII.TabIndex = 31;
@@ -1449,7 +1484,7 @@ namespace FTAnalyzer
             // btnWWI
             // 
             this.btnWWI.Location = new System.Drawing.Point(1192, 107);
-            this.btnWWI.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnWWI.Margin = new System.Windows.Forms.Padding(6);
             this.btnWWI.Name = "btnWWI";
             this.btnWWI.Size = new System.Drawing.Size(174, 46);
             this.btnWWI.TabIndex = 30;
@@ -1459,15 +1494,26 @@ namespace FTAnalyzer
             // 
             // dgWorldWars
             // 
+            this.dgWorldWars.AllowUserToAddRows = false;
+            this.dgWorldWars.AllowUserToDeleteRows = false;
+            this.dgWorldWars.AllowUserToOrderColumns = true;
             this.dgWorldWars.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgWorldWars.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgWorldWars.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgWorldWars.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgWorldWars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgWorldWars.Location = new System.Drawing.Point(0, 236);
+            this.dgWorldWars.Margin = new System.Windows.Forms.Padding(6);
+            this.dgWorldWars.MultiSelect = false;
             this.dgWorldWars.Name = "dgWorldWars";
+            this.dgWorldWars.ReadOnly = true;
+            this.dgWorldWars.RowHeadersVisible = false;
+            this.dgWorldWars.RowHeadersWidth = 50;
+            this.dgWorldWars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgWorldWars.Size = new System.Drawing.Size(1984, 576);
             this.dgWorldWars.TabIndex = 29;
+            this.dgWorldWars.VirtualMode = true;
             this.dgWorldWars.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgWorldWars_CellDoubleClick);
             this.dgWorldWars.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgWorldWars_MouseDown);
             // 
@@ -1484,7 +1530,7 @@ namespace FTAnalyzer
             // txtWorldWarsSurname
             // 
             this.txtWorldWarsSurname.Location = new System.Drawing.Point(1192, 41);
-            this.txtWorldWarsSurname.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtWorldWarsSurname.Margin = new System.Windows.Forms.Padding(6);
             this.txtWorldWarsSurname.Name = "txtWorldWarsSurname";
             this.txtWorldWarsSurname.Size = new System.Drawing.Size(365, 29);
             this.txtWorldWarsSurname.TabIndex = 27;
@@ -1492,7 +1538,7 @@ namespace FTAnalyzer
             // wardeadRelation
             // 
             this.wardeadRelation.Location = new System.Drawing.Point(495, 6);
-            this.wardeadRelation.Margin = new System.Windows.Forms.Padding(11, 11, 11, 11);
+            this.wardeadRelation.Margin = new System.Windows.Forms.Padding(11);
             this.wardeadRelation.MarriedToDB = true;
             this.wardeadRelation.Name = "wardeadRelation";
             this.wardeadRelation.Size = new System.Drawing.Size(590, 185);
@@ -1501,7 +1547,7 @@ namespace FTAnalyzer
             // wardeadCountry
             // 
             this.wardeadCountry.Location = new System.Drawing.Point(15, 46);
-            this.wardeadCountry.Margin = new System.Windows.Forms.Padding(11, 11, 11, 11);
+            this.wardeadCountry.Margin = new System.Windows.Forms.Padding(11);
             this.wardeadCountry.Name = "wardeadCountry";
             this.wardeadCountry.Size = new System.Drawing.Size(469, 137);
             this.wardeadCountry.TabIndex = 25;
@@ -1535,7 +1581,7 @@ namespace FTAnalyzer
             this.tabTreetops.Controls.Add(this.treetopsRelation);
             this.tabTreetops.Controls.Add(this.treetopsCountry);
             this.tabTreetops.Location = new System.Drawing.Point(4, 33);
-            this.tabTreetops.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabTreetops.Margin = new System.Windows.Forms.Padding(6);
             this.tabTreetops.Name = "tabTreetops";
             this.tabTreetops.Size = new System.Drawing.Size(2001, 860);
             this.tabTreetops.TabIndex = 7;
@@ -1548,7 +1594,7 @@ namespace FTAnalyzer
             this.ckbTTIncludeOnlyOneParent.Checked = true;
             this.ckbTTIncludeOnlyOneParent.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbTTIncludeOnlyOneParent.Location = new System.Drawing.Point(512, 194);
-            this.ckbTTIncludeOnlyOneParent.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ckbTTIncludeOnlyOneParent.Margin = new System.Windows.Forms.Padding(6);
             this.ckbTTIncludeOnlyOneParent.Name = "ckbTTIncludeOnlyOneParent";
             this.ckbTTIncludeOnlyOneParent.Size = new System.Drawing.Size(484, 29);
             this.ckbTTIncludeOnlyOneParent.TabIndex = 29;
@@ -1557,15 +1603,26 @@ namespace FTAnalyzer
             // 
             // dgTreeTops
             // 
+            this.dgTreeTops.AllowUserToAddRows = false;
+            this.dgTreeTops.AllowUserToDeleteRows = false;
+            this.dgTreeTops.AllowUserToOrderColumns = true;
             this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgTreeTops.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgTreeTops.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgTreeTops.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgTreeTops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgTreeTops.Location = new System.Drawing.Point(0, 236);
+            this.dgTreeTops.Margin = new System.Windows.Forms.Padding(6);
+            this.dgTreeTops.MultiSelect = false;
             this.dgTreeTops.Name = "dgTreeTops";
+            this.dgTreeTops.ReadOnly = true;
+            this.dgTreeTops.RowHeadersVisible = false;
+            this.dgTreeTops.RowHeadersWidth = 50;
+            this.dgTreeTops.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgTreeTops.Size = new System.Drawing.Size(1984, 576);
             this.dgTreeTops.TabIndex = 28;
+            this.dgTreeTops.VirtualMode = true;
             this.dgTreeTops.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgTreeTops_CellDoubleClick);
             this.dgTreeTops.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgTreeTops_MouseDown);
             // 
@@ -1575,7 +1632,7 @@ namespace FTAnalyzer
             this.ckbTTIgnoreLocations.Checked = true;
             this.ckbTTIgnoreLocations.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbTTIgnoreLocations.Location = new System.Drawing.Point(15, 194);
-            this.ckbTTIgnoreLocations.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ckbTTIgnoreLocations.Margin = new System.Windows.Forms.Padding(6);
             this.ckbTTIgnoreLocations.Name = "ckbTTIgnoreLocations";
             this.ckbTTIgnoreLocations.Size = new System.Drawing.Size(427, 29);
             this.ckbTTIgnoreLocations.TabIndex = 27;
@@ -1586,7 +1643,7 @@ namespace FTAnalyzer
             // btnTreeTops
             // 
             this.btnTreeTops.Location = new System.Drawing.Point(1192, 107);
-            this.btnTreeTops.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnTreeTops.Margin = new System.Windows.Forms.Padding(6);
             this.btnTreeTops.Name = "btnTreeTops";
             this.btnTreeTops.Size = new System.Drawing.Size(369, 46);
             this.btnTreeTops.TabIndex = 25;
@@ -1607,7 +1664,7 @@ namespace FTAnalyzer
             // txtTreetopsSurname
             // 
             this.txtTreetopsSurname.Location = new System.Drawing.Point(1192, 41);
-            this.txtTreetopsSurname.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtTreetopsSurname.Margin = new System.Windows.Forms.Padding(6);
             this.txtTreetopsSurname.Name = "txtTreetopsSurname";
             this.txtTreetopsSurname.Size = new System.Drawing.Size(365, 29);
             this.txtTreetopsSurname.TabIndex = 23;
@@ -1615,7 +1672,7 @@ namespace FTAnalyzer
             // treetopsRelation
             // 
             this.treetopsRelation.Location = new System.Drawing.Point(495, 6);
-            this.treetopsRelation.Margin = new System.Windows.Forms.Padding(11, 11, 11, 11);
+            this.treetopsRelation.Margin = new System.Windows.Forms.Padding(11);
             this.treetopsRelation.MarriedToDB = true;
             this.treetopsRelation.Name = "treetopsRelation";
             this.treetopsRelation.Size = new System.Drawing.Size(590, 177);
@@ -1624,7 +1681,7 @@ namespace FTAnalyzer
             // treetopsCountry
             // 
             this.treetopsCountry.Location = new System.Drawing.Point(15, 46);
-            this.treetopsCountry.Margin = new System.Windows.Forms.Padding(11, 11, 11, 11);
+            this.treetopsCountry.Margin = new System.Windows.Forms.Padding(11);
             this.treetopsCountry.Name = "treetopsCountry";
             this.treetopsCountry.Size = new System.Drawing.Size(469, 137);
             this.treetopsCountry.TabIndex = 11;
@@ -1643,7 +1700,7 @@ namespace FTAnalyzer
             this.tabColourReports.Controls.Add(this.txtColouredSurname);
             this.tabColourReports.Controls.Add(this.relTypesColoured);
             this.tabColourReports.Location = new System.Drawing.Point(4, 33);
-            this.tabColourReports.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabColourReports.Margin = new System.Windows.Forms.Padding(6);
             this.tabColourReports.Name = "tabColourReports";
             this.tabColourReports.Size = new System.Drawing.Size(2001, 860);
             this.tabColourReports.TabIndex = 12;
@@ -1655,9 +1712,9 @@ namespace FTAnalyzer
             this.groupBox7.Controls.Add(this.btnAdvancedMissingData);
             this.groupBox7.Controls.Add(this.btnStandardMissingData);
             this.groupBox7.Location = new System.Drawing.Point(776, 214);
-            this.groupBox7.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox7.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox7.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox7.Size = new System.Drawing.Size(750, 201);
             this.groupBox7.TabIndex = 63;
             this.groupBox7.TabStop = false;
@@ -1667,7 +1724,7 @@ namespace FTAnalyzer
             // btnAdvancedMissingData
             // 
             this.btnAdvancedMissingData.Location = new System.Drawing.Point(380, 35);
-            this.btnAdvancedMissingData.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnAdvancedMissingData.Margin = new System.Windows.Forms.Padding(6);
             this.btnAdvancedMissingData.Name = "btnAdvancedMissingData";
             this.btnAdvancedMissingData.Size = new System.Drawing.Size(358, 42);
             this.btnAdvancedMissingData.TabIndex = 40;
@@ -1678,7 +1735,7 @@ namespace FTAnalyzer
             // btnStandardMissingData
             // 
             this.btnStandardMissingData.Location = new System.Drawing.Point(11, 35);
-            this.btnStandardMissingData.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnStandardMissingData.Margin = new System.Windows.Forms.Padding(6);
             this.btnStandardMissingData.Name = "btnStandardMissingData";
             this.btnStandardMissingData.Size = new System.Drawing.Size(358, 42);
             this.btnStandardMissingData.TabIndex = 39;
@@ -1705,9 +1762,9 @@ namespace FTAnalyzer
             this.groupBox3.Controls.Add(this.btnUKColourCensus);
             this.groupBox3.Controls.Add(this.btnUSColourCensus);
             this.groupBox3.Location = new System.Drawing.Point(15, 214);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox3.Size = new System.Drawing.Size(750, 201);
             this.groupBox3.TabIndex = 36;
             this.groupBox3.TabStop = false;
@@ -1717,7 +1774,7 @@ namespace FTAnalyzer
             // 
             this.ckbIgnoreNoDeathDate.AutoSize = true;
             this.ckbIgnoreNoDeathDate.Location = new System.Drawing.Point(381, 142);
-            this.ckbIgnoreNoDeathDate.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ckbIgnoreNoDeathDate.Margin = new System.Windows.Forms.Padding(6);
             this.ckbIgnoreNoDeathDate.Name = "ckbIgnoreNoDeathDate";
             this.ckbIgnoreNoDeathDate.Size = new System.Drawing.Size(353, 29);
             this.ckbIgnoreNoDeathDate.TabIndex = 67;
@@ -1728,7 +1785,7 @@ namespace FTAnalyzer
             // 
             this.ckbIgnoreNoBirthDate.AutoSize = true;
             this.ckbIgnoreNoBirthDate.Location = new System.Drawing.Point(11, 142);
-            this.ckbIgnoreNoBirthDate.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ckbIgnoreNoBirthDate.Margin = new System.Windows.Forms.Padding(6);
             this.ckbIgnoreNoBirthDate.Name = "ckbIgnoreNoBirthDate";
             this.ckbIgnoreNoBirthDate.Size = new System.Drawing.Size(341, 29);
             this.ckbIgnoreNoBirthDate.TabIndex = 66;
@@ -1738,7 +1795,7 @@ namespace FTAnalyzer
             // btnIrishColourCensus
             // 
             this.btnIrishColourCensus.Location = new System.Drawing.Point(380, 35);
-            this.btnIrishColourCensus.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnIrishColourCensus.Margin = new System.Windows.Forms.Padding(6);
             this.btnIrishColourCensus.Name = "btnIrishColourCensus";
             this.btnIrishColourCensus.Size = new System.Drawing.Size(358, 42);
             this.btnIrishColourCensus.TabIndex = 39;
@@ -1749,7 +1806,7 @@ namespace FTAnalyzer
             // btnCanadianColourCensus
             // 
             this.btnCanadianColourCensus.Location = new System.Drawing.Point(380, 89);
-            this.btnCanadianColourCensus.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnCanadianColourCensus.Margin = new System.Windows.Forms.Padding(6);
             this.btnCanadianColourCensus.Name = "btnCanadianColourCensus";
             this.btnCanadianColourCensus.Size = new System.Drawing.Size(358, 42);
             this.btnCanadianColourCensus.TabIndex = 41;
@@ -1760,7 +1817,7 @@ namespace FTAnalyzer
             // btnUKColourCensus
             // 
             this.btnUKColourCensus.Location = new System.Drawing.Point(11, 35);
-            this.btnUKColourCensus.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnUKColourCensus.Margin = new System.Windows.Forms.Padding(6);
             this.btnUKColourCensus.Name = "btnUKColourCensus";
             this.btnUKColourCensus.Size = new System.Drawing.Size(358, 42);
             this.btnUKColourCensus.TabIndex = 38;
@@ -1771,7 +1828,7 @@ namespace FTAnalyzer
             // btnUSColourCensus
             // 
             this.btnUSColourCensus.Location = new System.Drawing.Point(11, 89);
-            this.btnUSColourCensus.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnUSColourCensus.Margin = new System.Windows.Forms.Padding(6);
             this.btnUSColourCensus.Name = "btnUSColourCensus";
             this.btnUSColourCensus.Size = new System.Drawing.Size(358, 42);
             this.btnUSColourCensus.TabIndex = 40;
@@ -1782,7 +1839,7 @@ namespace FTAnalyzer
             // btnColourBMD
             // 
             this.btnColourBMD.Location = new System.Drawing.Point(106, 426);
-            this.btnColourBMD.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnColourBMD.Margin = new System.Windows.Forms.Padding(6);
             this.btnColourBMD.Name = "btnColourBMD";
             this.btnColourBMD.Size = new System.Drawing.Size(563, 42);
             this.btnColourBMD.TabIndex = 42;
@@ -1803,7 +1860,7 @@ namespace FTAnalyzer
             // txtColouredSurname
             // 
             this.txtColouredSurname.Location = new System.Drawing.Point(744, 30);
-            this.txtColouredSurname.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtColouredSurname.Margin = new System.Windows.Forms.Padding(6);
             this.txtColouredSurname.Name = "txtColouredSurname";
             this.txtColouredSurname.Size = new System.Drawing.Size(365, 29);
             this.txtColouredSurname.TabIndex = 30;
@@ -1812,7 +1869,7 @@ namespace FTAnalyzer
             // relTypesColoured
             // 
             this.relTypesColoured.Location = new System.Drawing.Point(15, 15);
-            this.relTypesColoured.Margin = new System.Windows.Forms.Padding(11, 11, 11, 11);
+            this.relTypesColoured.Margin = new System.Windows.Forms.Padding(11);
             this.relTypesColoured.MarriedToDB = true;
             this.relTypesColoured.Name = "relTypesColoured";
             this.relTypesColoured.Size = new System.Drawing.Size(596, 188);
@@ -1823,9 +1880,9 @@ namespace FTAnalyzer
             // 
             this.tabLostCousins.Controls.Add(this.LCSubTabs);
             this.tabLostCousins.Location = new System.Drawing.Point(4, 33);
-            this.tabLostCousins.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabLostCousins.Margin = new System.Windows.Forms.Padding(6);
             this.tabLostCousins.Name = "tabLostCousins";
-            this.tabLostCousins.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabLostCousins.Padding = new System.Windows.Forms.Padding(6);
             this.tabLostCousins.Size = new System.Drawing.Size(2001, 860);
             this.tabLostCousins.TabIndex = 5;
             this.tabLostCousins.Text = "Lost Cousins";
@@ -1838,7 +1895,7 @@ namespace FTAnalyzer
             this.LCSubTabs.Controls.Add(this.LCVerifyTab);
             this.LCSubTabs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LCSubTabs.Location = new System.Drawing.Point(6, 6);
-            this.LCSubTabs.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.LCSubTabs.Margin = new System.Windows.Forms.Padding(6);
             this.LCSubTabs.Name = "LCSubTabs";
             this.LCSubTabs.SelectedIndex = 0;
             this.LCSubTabs.Size = new System.Drawing.Size(1989, 848);
@@ -1864,9 +1921,9 @@ namespace FTAnalyzer
             this.LCReportsTab.Controls.Add(this.btnLC1881Scot);
             this.LCReportsTab.Controls.Add(this.relTypesLC);
             this.LCReportsTab.Location = new System.Drawing.Point(4, 33);
-            this.LCReportsTab.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.LCReportsTab.Margin = new System.Windows.Forms.Padding(6);
             this.LCReportsTab.Name = "LCReportsTab";
-            this.LCReportsTab.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.LCReportsTab.Padding = new System.Windows.Forms.Padding(6);
             this.LCReportsTab.Size = new System.Drawing.Size(1981, 811);
             this.LCReportsTab.TabIndex = 0;
             this.LCReportsTab.Text = "Reports";
@@ -1879,9 +1936,9 @@ namespace FTAnalyzer
             this.Referrals.Controls.Add(this.cmbReferrals);
             this.Referrals.Controls.Add(this.label11);
             this.Referrals.Location = new System.Drawing.Point(11, 589);
-            this.Referrals.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Referrals.Margin = new System.Windows.Forms.Padding(6);
             this.Referrals.Name = "Referrals";
-            this.Referrals.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Referrals.Padding = new System.Windows.Forms.Padding(6);
             this.Referrals.Size = new System.Drawing.Size(913, 153);
             this.Referrals.TabIndex = 40;
             this.Referrals.TabStop = false;
@@ -1891,7 +1948,7 @@ namespace FTAnalyzer
             // 
             this.ckbReferralInCommon.AutoSize = true;
             this.ckbReferralInCommon.Location = new System.Drawing.Point(20, 90);
-            this.ckbReferralInCommon.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ckbReferralInCommon.Margin = new System.Windows.Forms.Padding(6);
             this.ckbReferralInCommon.Name = "ckbReferralInCommon";
             this.ckbReferralInCommon.Size = new System.Drawing.Size(268, 29);
             this.ckbReferralInCommon.TabIndex = 3;
@@ -1901,7 +1958,7 @@ namespace FTAnalyzer
             // btnReferrals
             // 
             this.btnReferrals.Location = new System.Drawing.Point(499, 83);
-            this.btnReferrals.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnReferrals.Margin = new System.Windows.Forms.Padding(6);
             this.btnReferrals.Name = "btnReferrals";
             this.btnReferrals.Size = new System.Drawing.Size(403, 42);
             this.btnReferrals.TabIndex = 2;
@@ -1913,7 +1970,7 @@ namespace FTAnalyzer
             // 
             this.cmbReferrals.FormattingEnabled = true;
             this.cmbReferrals.Location = new System.Drawing.Point(178, 33);
-            this.cmbReferrals.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cmbReferrals.Margin = new System.Windows.Forms.Padding(6);
             this.cmbReferrals.Name = "cmbReferrals";
             this.cmbReferrals.Size = new System.Drawing.Size(721, 32);
             this.cmbReferrals.TabIndex = 1;
@@ -1932,7 +1989,7 @@ namespace FTAnalyzer
             // btnLCnoCensus
             // 
             this.btnLCnoCensus.Location = new System.Drawing.Point(627, 454);
-            this.btnLCnoCensus.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnLCnoCensus.Margin = new System.Windows.Forms.Padding(6);
             this.btnLCnoCensus.Name = "btnLCnoCensus";
             this.btnLCnoCensus.Size = new System.Drawing.Size(297, 50);
             this.btnLCnoCensus.TabIndex = 39;
@@ -1943,7 +2000,7 @@ namespace FTAnalyzer
             // btnLCDuplicates
             // 
             this.btnLCDuplicates.Location = new System.Drawing.Point(319, 454);
-            this.btnLCDuplicates.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnLCDuplicates.Margin = new System.Windows.Forms.Padding(6);
             this.btnLCDuplicates.Name = "btnLCDuplicates";
             this.btnLCDuplicates.Size = new System.Drawing.Size(297, 50);
             this.btnLCDuplicates.TabIndex = 38;
@@ -1954,7 +2011,7 @@ namespace FTAnalyzer
             // btnLCMissingCountry
             // 
             this.btnLCMissingCountry.Location = new System.Drawing.Point(11, 454);
-            this.btnLCMissingCountry.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnLCMissingCountry.Margin = new System.Windows.Forms.Padding(6);
             this.btnLCMissingCountry.Name = "btnLCMissingCountry";
             this.btnLCMissingCountry.Size = new System.Drawing.Size(297, 50);
             this.btnLCMissingCountry.TabIndex = 37;
@@ -1965,7 +2022,7 @@ namespace FTAnalyzer
             // btnLC1940USA
             // 
             this.btnLC1940USA.Location = new System.Drawing.Point(627, 334);
-            this.btnLC1940USA.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnLC1940USA.Margin = new System.Windows.Forms.Padding(6);
             this.btnLC1940USA.Name = "btnLC1940USA";
             this.btnLC1940USA.Size = new System.Drawing.Size(297, 50);
             this.btnLC1940USA.TabIndex = 35;
@@ -1979,7 +2036,7 @@ namespace FTAnalyzer
             this.rtbLostCousins.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbLostCousins.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbLostCousins.Location = new System.Drawing.Point(983, 11);
-            this.rtbLostCousins.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rtbLostCousins.Margin = new System.Windows.Forms.Padding(6);
             this.rtbLostCousins.Name = "rtbLostCousins";
             this.rtbLostCousins.ReadOnly = true;
             this.rtbLostCousins.Size = new System.Drawing.Size(968, 668);
@@ -2003,7 +2060,7 @@ namespace FTAnalyzer
             // btnLC1911EW
             // 
             this.btnLC1911EW.Location = new System.Drawing.Point(11, 334);
-            this.btnLC1911EW.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnLC1911EW.Margin = new System.Windows.Forms.Padding(6);
             this.btnLC1911EW.Name = "btnLC1911EW";
             this.btnLC1911EW.Size = new System.Drawing.Size(297, 50);
             this.btnLC1911EW.TabIndex = 32;
@@ -2029,7 +2086,7 @@ namespace FTAnalyzer
             // 
             this.ckbShowLCEntered.AutoSize = true;
             this.ckbShowLCEntered.Location = new System.Drawing.Point(11, 395);
-            this.ckbShowLCEntered.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ckbShowLCEntered.Margin = new System.Windows.Forms.Padding(6);
             this.ckbShowLCEntered.Name = "ckbShowLCEntered";
             this.ckbShowLCEntered.Size = new System.Drawing.Size(752, 29);
             this.ckbShowLCEntered.TabIndex = 30;
@@ -2040,7 +2097,7 @@ namespace FTAnalyzer
             // btnLC1841EW
             // 
             this.btnLC1841EW.Location = new System.Drawing.Point(11, 273);
-            this.btnLC1841EW.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnLC1841EW.Margin = new System.Windows.Forms.Padding(6);
             this.btnLC1841EW.Name = "btnLC1841EW";
             this.btnLC1841EW.Size = new System.Drawing.Size(297, 50);
             this.btnLC1841EW.TabIndex = 29;
@@ -2051,7 +2108,7 @@ namespace FTAnalyzer
             // btnLC1911Ireland
             // 
             this.btnLC1911Ireland.Location = new System.Drawing.Point(319, 273);
-            this.btnLC1911Ireland.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnLC1911Ireland.Margin = new System.Windows.Forms.Padding(6);
             this.btnLC1911Ireland.Name = "btnLC1911Ireland";
             this.btnLC1911Ireland.Size = new System.Drawing.Size(297, 50);
             this.btnLC1911Ireland.TabIndex = 28;
@@ -2062,7 +2119,7 @@ namespace FTAnalyzer
             // btnLC1880USA
             // 
             this.btnLC1880USA.Location = new System.Drawing.Point(627, 273);
-            this.btnLC1880USA.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnLC1880USA.Margin = new System.Windows.Forms.Padding(6);
             this.btnLC1880USA.Name = "btnLC1880USA";
             this.btnLC1880USA.Size = new System.Drawing.Size(297, 50);
             this.btnLC1880USA.TabIndex = 27;
@@ -2073,7 +2130,7 @@ namespace FTAnalyzer
             // btnLC1881EW
             // 
             this.btnLC1881EW.Location = new System.Drawing.Point(11, 212);
-            this.btnLC1881EW.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnLC1881EW.Margin = new System.Windows.Forms.Padding(6);
             this.btnLC1881EW.Name = "btnLC1881EW";
             this.btnLC1881EW.Size = new System.Drawing.Size(297, 50);
             this.btnLC1881EW.TabIndex = 26;
@@ -2084,7 +2141,7 @@ namespace FTAnalyzer
             // btnLC1881Canada
             // 
             this.btnLC1881Canada.Location = new System.Drawing.Point(319, 334);
-            this.btnLC1881Canada.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnLC1881Canada.Margin = new System.Windows.Forms.Padding(6);
             this.btnLC1881Canada.Name = "btnLC1881Canada";
             this.btnLC1881Canada.Size = new System.Drawing.Size(297, 50);
             this.btnLC1881Canada.TabIndex = 25;
@@ -2095,7 +2152,7 @@ namespace FTAnalyzer
             // btnLC1881Scot
             // 
             this.btnLC1881Scot.Location = new System.Drawing.Point(319, 212);
-            this.btnLC1881Scot.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnLC1881Scot.Margin = new System.Windows.Forms.Padding(6);
             this.btnLC1881Scot.Name = "btnLC1881Scot";
             this.btnLC1881Scot.Size = new System.Drawing.Size(297, 50);
             this.btnLC1881Scot.TabIndex = 24;
@@ -2106,7 +2163,7 @@ namespace FTAnalyzer
             // relTypesLC
             // 
             this.relTypesLC.Location = new System.Drawing.Point(11, 11);
-            this.relTypesLC.Margin = new System.Windows.Forms.Padding(11, 11, 11, 11);
+            this.relTypesLC.Margin = new System.Windows.Forms.Padding(11);
             this.relTypesLC.MarriedToDB = true;
             this.relTypesLC.Name = "relTypesLC";
             this.relTypesLC.Size = new System.Drawing.Size(596, 190);
@@ -2124,10 +2181,10 @@ namespace FTAnalyzer
             this.LCUpdatesTab.Controls.Add(this.btnUpdateLostCousinsWebsite);
             this.LCUpdatesTab.Controls.Add(this.rtbLCoutput);
             this.LCUpdatesTab.Location = new System.Drawing.Point(4, 33);
-            this.LCUpdatesTab.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.LCUpdatesTab.Margin = new System.Windows.Forms.Padding(6);
             this.LCUpdatesTab.Name = "LCUpdatesTab";
-            this.LCUpdatesTab.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.LCUpdatesTab.Size = new System.Drawing.Size(1976, 801);
+            this.LCUpdatesTab.Padding = new System.Windows.Forms.Padding(6);
+            this.LCUpdatesTab.Size = new System.Drawing.Size(1981, 811);
             this.LCUpdatesTab.TabIndex = 1;
             this.LCUpdatesTab.Text = "Updates";
             this.LCUpdatesTab.UseVisualStyleBackColor = true;
@@ -2135,7 +2192,7 @@ namespace FTAnalyzer
             // btnViewInvalidRefs
             // 
             this.btnViewInvalidRefs.Location = new System.Drawing.Point(279, 321);
-            this.btnViewInvalidRefs.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnViewInvalidRefs.Margin = new System.Windows.Forms.Padding(6);
             this.btnViewInvalidRefs.Name = "btnViewInvalidRefs";
             this.btnViewInvalidRefs.Size = new System.Drawing.Size(253, 42);
             this.btnViewInvalidRefs.TabIndex = 40;
@@ -2146,7 +2203,7 @@ namespace FTAnalyzer
             // btnLCPotentialUploads
             // 
             this.btnLCPotentialUploads.Location = new System.Drawing.Point(11, 321);
-            this.btnLCPotentialUploads.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnLCPotentialUploads.Margin = new System.Windows.Forms.Padding(6);
             this.btnLCPotentialUploads.Name = "btnLCPotentialUploads";
             this.btnLCPotentialUploads.Size = new System.Drawing.Size(253, 42);
             this.btnLCPotentialUploads.TabIndex = 39;
@@ -2172,7 +2229,7 @@ namespace FTAnalyzer
             this.rtbLCUpdateData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbLCUpdateData.ForeColor = System.Drawing.Color.Red;
             this.rtbLCUpdateData.Location = new System.Drawing.Point(864, 57);
-            this.rtbLCUpdateData.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rtbLCUpdateData.Margin = new System.Windows.Forms.Padding(6);
             this.rtbLCUpdateData.Name = "rtbLCUpdateData";
             this.rtbLCUpdateData.ReadOnly = true;
             this.rtbLCUpdateData.Size = new System.Drawing.Size(717, 312);
@@ -2189,9 +2246,9 @@ namespace FTAnalyzer
             this.groupBox8.Controls.Add(this.txtLCPassword);
             this.groupBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox8.Location = new System.Drawing.Point(55, 41);
-            this.groupBox8.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox8.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox8.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox8.Size = new System.Drawing.Size(746, 218);
             this.groupBox8.TabIndex = 1;
             this.groupBox8.TabStop = false;
@@ -2201,7 +2258,7 @@ namespace FTAnalyzer
             // 
             this.btnLCLogin.BackColor = System.Drawing.Color.Red;
             this.btnLCLogin.Location = new System.Drawing.Point(568, 126);
-            this.btnLCLogin.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnLCLogin.Margin = new System.Windows.Forms.Padding(6);
             this.btnLCLogin.Name = "btnLCLogin";
             this.btnLCLogin.Size = new System.Drawing.Size(138, 46);
             this.btnLCLogin.TabIndex = 3;
@@ -2235,7 +2292,7 @@ namespace FTAnalyzer
             // txtLCEmail
             // 
             this.txtLCEmail.Location = new System.Drawing.Point(198, 52);
-            this.txtLCEmail.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtLCEmail.Margin = new System.Windows.Forms.Padding(6);
             this.txtLCEmail.Name = "txtLCEmail";
             this.txtLCEmail.Size = new System.Drawing.Size(505, 33);
             this.txtLCEmail.TabIndex = 1;
@@ -2244,7 +2301,7 @@ namespace FTAnalyzer
             // txtLCPassword
             // 
             this.txtLCPassword.Location = new System.Drawing.Point(198, 127);
-            this.txtLCPassword.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtLCPassword.Margin = new System.Windows.Forms.Padding(6);
             this.txtLCPassword.Name = "txtLCPassword";
             this.txtLCPassword.PasswordChar = '*';
             this.txtLCPassword.Size = new System.Drawing.Size(356, 33);
@@ -2255,7 +2312,7 @@ namespace FTAnalyzer
             // 
             this.btnUpdateLostCousinsWebsite.Enabled = false;
             this.btnUpdateLostCousinsWebsite.Location = new System.Drawing.Point(548, 321);
-            this.btnUpdateLostCousinsWebsite.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnUpdateLostCousinsWebsite.Margin = new System.Windows.Forms.Padding(6);
             this.btnUpdateLostCousinsWebsite.Name = "btnUpdateLostCousinsWebsite";
             this.btnUpdateLostCousinsWebsite.Size = new System.Drawing.Size(253, 42);
             this.btnUpdateLostCousinsWebsite.TabIndex = 5;
@@ -2272,10 +2329,10 @@ namespace FTAnalyzer
             this.rtbLCoutput.BackColor = System.Drawing.SystemColors.Control;
             this.rtbLCoutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbLCoutput.Location = new System.Drawing.Point(6, 375);
-            this.rtbLCoutput.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rtbLCoutput.Margin = new System.Windows.Forms.Padding(6);
             this.rtbLCoutput.Name = "rtbLCoutput";
             this.rtbLCoutput.ReadOnly = true;
-            this.rtbLCoutput.Size = new System.Drawing.Size(1933, 309);
+            this.rtbLCoutput.Size = new System.Drawing.Size(1938, 319);
             this.rtbLCoutput.TabIndex = 38;
             this.rtbLCoutput.TabStop = false;
             this.rtbLCoutput.Text = "";
@@ -2288,9 +2345,9 @@ namespace FTAnalyzer
             this.LCVerifyTab.Controls.Add(this.btnCheckMyAncestors);
             this.LCVerifyTab.Controls.Add(this.lblCheckAncestors);
             this.LCVerifyTab.Location = new System.Drawing.Point(4, 33);
-            this.LCVerifyTab.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.LCVerifyTab.Margin = new System.Windows.Forms.Padding(6);
             this.LCVerifyTab.Name = "LCVerifyTab";
-            this.LCVerifyTab.Size = new System.Drawing.Size(1976, 801);
+            this.LCVerifyTab.Size = new System.Drawing.Size(1981, 811);
             this.LCVerifyTab.TabIndex = 2;
             this.LCVerifyTab.Text = "Verification";
             this.LCVerifyTab.UseVisualStyleBackColor = true;
@@ -2302,7 +2359,7 @@ namespace FTAnalyzer
             this.rtbCheckAncestors.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbCheckAncestors.ForeColor = System.Drawing.Color.Red;
             this.rtbCheckAncestors.Location = new System.Drawing.Point(612, 22);
-            this.rtbCheckAncestors.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rtbCheckAncestors.Margin = new System.Windows.Forms.Padding(6);
             this.rtbCheckAncestors.Name = "rtbCheckAncestors";
             this.rtbCheckAncestors.ReadOnly = true;
             this.rtbCheckAncestors.Size = new System.Drawing.Size(1344, 122);
@@ -2315,7 +2372,7 @@ namespace FTAnalyzer
             // 
             this.btnCheckMyAncestors.BackColor = System.Drawing.Color.Red;
             this.btnCheckMyAncestors.Location = new System.Drawing.Point(28, 74);
-            this.btnCheckMyAncestors.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnCheckMyAncestors.Margin = new System.Windows.Forms.Padding(6);
             this.btnCheckMyAncestors.Name = "btnCheckMyAncestors";
             this.btnCheckMyAncestors.Size = new System.Drawing.Size(453, 42);
             this.btnCheckMyAncestors.TabIndex = 1;
@@ -2339,9 +2396,9 @@ namespace FTAnalyzer
             this.tabCensus.Controls.Add(this.groupBox2);
             this.tabCensus.Controls.Add(this.groupBox9);
             this.tabCensus.Location = new System.Drawing.Point(4, 33);
-            this.tabCensus.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabCensus.Margin = new System.Windows.Forms.Padding(6);
             this.tabCensus.Name = "tabCensus";
-            this.tabCensus.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabCensus.Padding = new System.Windows.Forms.Padding(6);
             this.tabCensus.Size = new System.Drawing.Size(2001, 860);
             this.tabCensus.TabIndex = 0;
             this.tabCensus.Text = "Census";
@@ -2363,9 +2420,9 @@ namespace FTAnalyzer
             this.groupBox2.Controls.Add(this.cenDate);
             this.groupBox2.Controls.Add(this.relTypesCensus);
             this.groupBox2.Location = new System.Drawing.Point(15, 11);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox2.Size = new System.Drawing.Size(1766, 535);
             this.groupBox2.TabIndex = 23;
             this.groupBox2.TabStop = false;
@@ -2374,7 +2431,7 @@ namespace FTAnalyzer
             // btnAliveOnDate
             // 
             this.btnAliveOnDate.Location = new System.Drawing.Point(1179, 229);
-            this.btnAliveOnDate.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnAliveOnDate.Margin = new System.Windows.Forms.Padding(6);
             this.btnAliveOnDate.Name = "btnAliveOnDate";
             this.btnAliveOnDate.Size = new System.Drawing.Size(550, 46);
             this.btnAliveOnDate.TabIndex = 41;
@@ -2385,7 +2442,7 @@ namespace FTAnalyzer
             // txtAliveDates
             // 
             this.txtAliveDates.Location = new System.Drawing.Point(1304, 155);
-            this.txtAliveDates.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtAliveDates.Margin = new System.Windows.Forms.Padding(6);
             this.txtAliveDates.Name = "txtAliveDates";
             this.txtAliveDates.Size = new System.Drawing.Size(422, 29);
             this.txtAliveDates.TabIndex = 40;
@@ -2407,7 +2464,7 @@ namespace FTAnalyzer
             // 
             this.chkAnyCensusYear.AutoSize = true;
             this.chkAnyCensusYear.Location = new System.Drawing.Point(622, 238);
-            this.chkAnyCensusYear.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkAnyCensusYear.Margin = new System.Windows.Forms.Padding(6);
             this.chkAnyCensusYear.Name = "chkAnyCensusYear";
             this.chkAnyCensusYear.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkAnyCensusYear.Size = new System.Drawing.Size(527, 29);
@@ -2422,9 +2479,9 @@ namespace FTAnalyzer
             this.groupBox10.Controls.Add(this.btnRandomSurnameEntered);
             this.groupBox10.Controls.Add(this.btnRandomSurnameMissing);
             this.groupBox10.Location = new System.Drawing.Point(17, 290);
-            this.groupBox10.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox10.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox10.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox10.Size = new System.Drawing.Size(1738, 116);
             this.groupBox10.TabIndex = 35;
             this.groupBox10.TabStop = false;
@@ -2433,7 +2490,7 @@ namespace FTAnalyzer
             // btnShowCensusMissing
             // 
             this.btnShowCensusMissing.Location = new System.Drawing.Point(11, 41);
-            this.btnShowCensusMissing.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnShowCensusMissing.Margin = new System.Windows.Forms.Padding(6);
             this.btnShowCensusMissing.Name = "btnShowCensusMissing";
             this.btnShowCensusMissing.Size = new System.Drawing.Size(275, 46);
             this.btnShowCensusMissing.TabIndex = 39;
@@ -2444,7 +2501,7 @@ namespace FTAnalyzer
             // btnShowCensusEntered
             // 
             this.btnShowCensusEntered.Location = new System.Drawing.Point(297, 41);
-            this.btnShowCensusEntered.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnShowCensusEntered.Margin = new System.Windows.Forms.Padding(6);
             this.btnShowCensusEntered.Name = "btnShowCensusEntered";
             this.btnShowCensusEntered.Size = new System.Drawing.Size(282, 46);
             this.btnShowCensusEntered.TabIndex = 38;
@@ -2455,7 +2512,7 @@ namespace FTAnalyzer
             // btnRandomSurnameEntered
             // 
             this.btnRandomSurnameEntered.Location = new System.Drawing.Point(590, 41);
-            this.btnRandomSurnameEntered.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnRandomSurnameEntered.Margin = new System.Windows.Forms.Padding(6);
             this.btnRandomSurnameEntered.Name = "btnRandomSurnameEntered";
             this.btnRandomSurnameEntered.Size = new System.Drawing.Size(550, 46);
             this.btnRandomSurnameEntered.TabIndex = 37;
@@ -2466,7 +2523,7 @@ namespace FTAnalyzer
             // btnRandomSurnameMissing
             // 
             this.btnRandomSurnameMissing.Location = new System.Drawing.Point(1162, 41);
-            this.btnRandomSurnameMissing.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnRandomSurnameMissing.Margin = new System.Windows.Forms.Padding(6);
             this.btnRandomSurnameMissing.Name = "btnRandomSurnameMissing";
             this.btnRandomSurnameMissing.Size = new System.Drawing.Size(552, 46);
             this.btnRandomSurnameMissing.TabIndex = 36;
@@ -2482,9 +2539,9 @@ namespace FTAnalyzer
             this.groupBox4.Controls.Add(this.btnMissingCensusRefs);
             this.groupBox4.Controls.Add(this.btnCensusRefs);
             this.groupBox4.Location = new System.Drawing.Point(17, 417);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox4.Size = new System.Drawing.Size(1738, 98);
             this.groupBox4.TabIndex = 34;
             this.groupBox4.TabStop = false;
@@ -2493,7 +2550,7 @@ namespace FTAnalyzer
             // btnInconsistentLocations
             // 
             this.btnInconsistentLocations.Location = new System.Drawing.Point(1162, 35);
-            this.btnInconsistentLocations.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnInconsistentLocations.Margin = new System.Windows.Forms.Padding(6);
             this.btnInconsistentLocations.Name = "btnInconsistentLocations";
             this.btnInconsistentLocations.Size = new System.Drawing.Size(552, 46);
             this.btnInconsistentLocations.TabIndex = 29;
@@ -2504,7 +2561,7 @@ namespace FTAnalyzer
             // btnUnrecognisedCensusRef
             // 
             this.btnUnrecognisedCensusRef.Location = new System.Drawing.Point(590, 35);
-            this.btnUnrecognisedCensusRef.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnUnrecognisedCensusRef.Margin = new System.Windows.Forms.Padding(6);
             this.btnUnrecognisedCensusRef.Name = "btnUnrecognisedCensusRef";
             this.btnUnrecognisedCensusRef.Size = new System.Drawing.Size(264, 46);
             this.btnUnrecognisedCensusRef.TabIndex = 8;
@@ -2515,7 +2572,7 @@ namespace FTAnalyzer
             // btnIncompleteCensusRef
             // 
             this.btnIncompleteCensusRef.Location = new System.Drawing.Point(297, 35);
-            this.btnIncompleteCensusRef.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnIncompleteCensusRef.Margin = new System.Windows.Forms.Padding(6);
             this.btnIncompleteCensusRef.Name = "btnIncompleteCensusRef";
             this.btnIncompleteCensusRef.Size = new System.Drawing.Size(282, 46);
             this.btnIncompleteCensusRef.TabIndex = 7;
@@ -2526,7 +2583,7 @@ namespace FTAnalyzer
             // btnMissingCensusRefs
             // 
             this.btnMissingCensusRefs.Location = new System.Drawing.Point(865, 35);
-            this.btnMissingCensusRefs.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnMissingCensusRefs.Margin = new System.Windows.Forms.Padding(6);
             this.btnMissingCensusRefs.Name = "btnMissingCensusRefs";
             this.btnMissingCensusRefs.Size = new System.Drawing.Size(275, 46);
             this.btnMissingCensusRefs.TabIndex = 6;
@@ -2537,7 +2594,7 @@ namespace FTAnalyzer
             // btnCensusRefs
             // 
             this.btnCensusRefs.Location = new System.Drawing.Point(11, 35);
-            this.btnCensusRefs.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnCensusRefs.Margin = new System.Windows.Forms.Padding(6);
             this.btnCensusRefs.Name = "btnCensusRefs";
             this.btnCensusRefs.Size = new System.Drawing.Size(275, 46);
             this.btnCensusRefs.TabIndex = 5;
@@ -2549,7 +2606,7 @@ namespace FTAnalyzer
             // 
             this.chkExcludeUnknownBirths.AutoSize = true;
             this.chkExcludeUnknownBirths.Location = new System.Drawing.Point(623, 116);
-            this.chkExcludeUnknownBirths.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkExcludeUnknownBirths.Margin = new System.Windows.Forms.Padding(6);
             this.chkExcludeUnknownBirths.Name = "chkExcludeUnknownBirths";
             this.chkExcludeUnknownBirths.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkExcludeUnknownBirths.Size = new System.Drawing.Size(423, 29);
@@ -2570,7 +2627,7 @@ namespace FTAnalyzer
             // txtCensusSurname
             // 
             this.txtCensusSurname.Location = new System.Drawing.Point(1304, 66);
-            this.txtCensusSurname.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtCensusSurname.Margin = new System.Windows.Forms.Padding(6);
             this.txtCensusSurname.Name = "txtCensusSurname";
             this.txtCensusSurname.Size = new System.Drawing.Size(422, 29);
             this.txtCensusSurname.TabIndex = 29;
@@ -2588,7 +2645,7 @@ namespace FTAnalyzer
             // udAgeFilter
             // 
             this.udAgeFilter.Location = new System.Drawing.Point(955, 66);
-            this.udAgeFilter.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.udAgeFilter.Margin = new System.Windows.Forms.Padding(6);
             this.udAgeFilter.Maximum = new decimal(new int[] {
             110,
             0,
@@ -2614,7 +2671,7 @@ namespace FTAnalyzer
             this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.cenDate.Country = "";
             this.cenDate.Location = new System.Drawing.Point(15, 225);
-            this.cenDate.Margin = new System.Windows.Forms.Padding(11, 11, 11, 11);
+            this.cenDate.Margin = new System.Windows.Forms.Padding(11);
             this.cenDate.Name = "cenDate";
             this.cenDate.Size = new System.Drawing.Size(413, 44);
             this.cenDate.TabIndex = 28;
@@ -2622,7 +2679,7 @@ namespace FTAnalyzer
             // relTypesCensus
             // 
             this.relTypesCensus.Location = new System.Drawing.Point(17, 35);
-            this.relTypesCensus.Margin = new System.Windows.Forms.Padding(11, 11, 11, 11);
+            this.relTypesCensus.Margin = new System.Windows.Forms.Padding(11);
             this.relTypesCensus.MarriedToDB = true;
             this.relTypesCensus.Name = "relTypesCensus";
             this.relTypesCensus.Size = new System.Drawing.Size(596, 183);
@@ -2635,9 +2692,9 @@ namespace FTAnalyzer
             this.groupBox9.Controls.Add(this.groupBox5);
             this.groupBox9.Controls.Add(this.groupBox6);
             this.groupBox9.Location = new System.Drawing.Point(15, 591);
-            this.groupBox9.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox9.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox9.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox9.Size = new System.Drawing.Size(1766, 172);
             this.groupBox9.TabIndex = 32;
             this.groupBox9.TabStop = false;
@@ -2648,9 +2705,9 @@ namespace FTAnalyzer
             this.groupBox11.Controls.Add(this.BtnAutoCreatedCensusFacts);
             this.groupBox11.Controls.Add(this.BtnProblemCensusFacts);
             this.groupBox11.Location = new System.Drawing.Point(1168, 35);
-            this.groupBox11.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox11.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox11.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox11.Size = new System.Drawing.Size(587, 109);
             this.groupBox11.TabIndex = 33;
             this.groupBox11.TabStop = false;
@@ -2659,7 +2716,7 @@ namespace FTAnalyzer
             // BtnAutoCreatedCensusFacts
             // 
             this.BtnAutoCreatedCensusFacts.Location = new System.Drawing.Point(301, 39);
-            this.BtnAutoCreatedCensusFacts.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.BtnAutoCreatedCensusFacts.Margin = new System.Windows.Forms.Padding(6);
             this.BtnAutoCreatedCensusFacts.Name = "BtnAutoCreatedCensusFacts";
             this.BtnAutoCreatedCensusFacts.Size = new System.Drawing.Size(275, 42);
             this.BtnAutoCreatedCensusFacts.TabIndex = 39;
@@ -2670,7 +2727,7 @@ namespace FTAnalyzer
             // BtnProblemCensusFacts
             // 
             this.BtnProblemCensusFacts.Location = new System.Drawing.Point(11, 39);
-            this.BtnProblemCensusFacts.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.BtnProblemCensusFacts.Margin = new System.Windows.Forms.Padding(6);
             this.BtnProblemCensusFacts.Name = "BtnProblemCensusFacts";
             this.BtnProblemCensusFacts.Size = new System.Drawing.Size(275, 42);
             this.BtnProblemCensusFacts.TabIndex = 38;
@@ -2683,9 +2740,9 @@ namespace FTAnalyzer
             this.groupBox1.Controls.Add(this.btnDuplicateCensus);
             this.groupBox1.Controls.Add(this.btnMissingCensusLocation);
             this.groupBox1.Location = new System.Drawing.Point(15, 382);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox1.Size = new System.Drawing.Size(596, 162);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
@@ -2694,7 +2751,7 @@ namespace FTAnalyzer
             // btnDuplicateCensus
             // 
             this.btnDuplicateCensus.Location = new System.Drawing.Point(303, 35);
-            this.btnDuplicateCensus.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnDuplicateCensus.Margin = new System.Windows.Forms.Padding(6);
             this.btnDuplicateCensus.Name = "btnDuplicateCensus";
             this.btnDuplicateCensus.Size = new System.Drawing.Size(275, 46);
             this.btnDuplicateCensus.TabIndex = 6;
@@ -2705,7 +2762,7 @@ namespace FTAnalyzer
             // btnMissingCensusLocation
             // 
             this.btnMissingCensusLocation.Location = new System.Drawing.Point(17, 35);
-            this.btnMissingCensusLocation.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnMissingCensusLocation.Margin = new System.Windows.Forms.Padding(6);
             this.btnMissingCensusLocation.Name = "btnMissingCensusLocation";
             this.btnMissingCensusLocation.Size = new System.Drawing.Size(275, 46);
             this.btnMissingCensusLocation.TabIndex = 5;
@@ -2718,9 +2775,9 @@ namespace FTAnalyzer
             this.groupBox5.Controls.Add(this.btnMismatchedChildrenStatus);
             this.groupBox5.Controls.Add(this.btnNoChildrenStatus);
             this.groupBox5.Location = new System.Drawing.Point(11, 35);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox5.Size = new System.Drawing.Size(600, 109);
             this.groupBox5.TabIndex = 32;
             this.groupBox5.TabStop = false;
@@ -2729,7 +2786,7 @@ namespace FTAnalyzer
             // btnMismatchedChildrenStatus
             // 
             this.btnMismatchedChildrenStatus.Location = new System.Drawing.Point(303, 35);
-            this.btnMismatchedChildrenStatus.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnMismatchedChildrenStatus.Margin = new System.Windows.Forms.Padding(6);
             this.btnMismatchedChildrenStatus.Name = "btnMismatchedChildrenStatus";
             this.btnMismatchedChildrenStatus.Size = new System.Drawing.Size(282, 46);
             this.btnMismatchedChildrenStatus.TabIndex = 7;
@@ -2740,7 +2797,7 @@ namespace FTAnalyzer
             // btnNoChildrenStatus
             // 
             this.btnNoChildrenStatus.Location = new System.Drawing.Point(17, 35);
-            this.btnNoChildrenStatus.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnNoChildrenStatus.Margin = new System.Windows.Forms.Padding(6);
             this.btnNoChildrenStatus.Name = "btnNoChildrenStatus";
             this.btnNoChildrenStatus.Size = new System.Drawing.Size(275, 46);
             this.btnNoChildrenStatus.TabIndex = 6;
@@ -2752,9 +2809,9 @@ namespace FTAnalyzer
             // 
             this.groupBox6.Controls.Add(this.btnReportUnrecognised);
             this.groupBox6.Location = new System.Drawing.Point(666, 35);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox6.Size = new System.Drawing.Size(447, 109);
             this.groupBox6.TabIndex = 31;
             this.groupBox6.TabStop = false;
@@ -2764,7 +2821,7 @@ namespace FTAnalyzer
             // 
             this.btnReportUnrecognised.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btnReportUnrecognised.Location = new System.Drawing.Point(11, 35);
-            this.btnReportUnrecognised.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnReportUnrecognised.Margin = new System.Windows.Forms.Padding(6);
             this.btnReportUnrecognised.Name = "btnReportUnrecognised";
             this.btnReportUnrecognised.Size = new System.Drawing.Size(411, 46);
             this.btnReportUnrecognised.TabIndex = 30;
@@ -2779,9 +2836,9 @@ namespace FTAnalyzer
             this.tabLocations.Controls.Add(this.btnShowMap);
             this.tabLocations.Controls.Add(this.tabCtrlLocations);
             this.tabLocations.Location = new System.Drawing.Point(4, 33);
-            this.tabLocations.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabLocations.Margin = new System.Windows.Forms.Padding(6);
             this.tabLocations.Name = "tabLocations";
-            this.tabLocations.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabLocations.Padding = new System.Windows.Forms.Padding(6);
             this.tabLocations.Size = new System.Drawing.Size(2001, 860);
             this.tabLocations.TabIndex = 4;
             this.tabLocations.Text = "Locations";
@@ -2791,7 +2848,7 @@ namespace FTAnalyzer
             // 
             this.btnModernOSMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnModernOSMap.Location = new System.Drawing.Point(1300, 4);
-            this.btnModernOSMap.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnModernOSMap.Margin = new System.Windows.Forms.Padding(6);
             this.btnModernOSMap.Name = "btnModernOSMap";
             this.btnModernOSMap.Size = new System.Drawing.Size(229, 41);
             this.btnModernOSMap.TabIndex = 5;
@@ -2804,7 +2861,7 @@ namespace FTAnalyzer
             // 
             this.btnOldOSMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOldOSMap.Location = new System.Drawing.Point(1558, 4);
-            this.btnOldOSMap.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnOldOSMap.Margin = new System.Windows.Forms.Padding(6);
             this.btnOldOSMap.Name = "btnOldOSMap";
             this.btnOldOSMap.Size = new System.Drawing.Size(191, 41);
             this.btnOldOSMap.TabIndex = 3;
@@ -2816,7 +2873,7 @@ namespace FTAnalyzer
             // 
             this.btnShowMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnShowMap.Location = new System.Drawing.Point(1778, 4);
-            this.btnShowMap.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnShowMap.Margin = new System.Windows.Forms.Padding(6);
             this.btnShowMap.Name = "btnShowMap";
             this.btnShowMap.Size = new System.Drawing.Size(191, 41);
             this.btnShowMap.TabIndex = 2;
@@ -2834,7 +2891,7 @@ namespace FTAnalyzer
             this.tabCtrlLocations.Controls.Add(this.tabPlaces);
             this.tabCtrlLocations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabCtrlLocations.Location = new System.Drawing.Point(6, 6);
-            this.tabCtrlLocations.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabCtrlLocations.Margin = new System.Windows.Forms.Padding(6);
             this.tabCtrlLocations.Name = "tabCtrlLocations";
             this.tabCtrlLocations.SelectedIndex = 0;
             this.tabCtrlLocations.Size = new System.Drawing.Size(1989, 848);
@@ -2846,9 +2903,9 @@ namespace FTAnalyzer
             // 
             this.tabTreeView.Controls.Add(this.treeViewLocations);
             this.tabTreeView.Location = new System.Drawing.Point(4, 33);
-            this.tabTreeView.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabTreeView.Margin = new System.Windows.Forms.Padding(6);
             this.tabTreeView.Name = "tabTreeView";
-            this.tabTreeView.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabTreeView.Padding = new System.Windows.Forms.Padding(6);
             this.tabTreeView.Size = new System.Drawing.Size(1981, 811);
             this.tabTreeView.TabIndex = 5;
             this.tabTreeView.Text = "Tree View";
@@ -2862,7 +2919,7 @@ namespace FTAnalyzer
             this.treeViewLocations.ImageIndex = 0;
             this.treeViewLocations.ImageList = this.imageList;
             this.treeViewLocations.Location = new System.Drawing.Point(6, 6);
-            this.treeViewLocations.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.treeViewLocations.Margin = new System.Windows.Forms.Padding(6);
             this.treeViewLocations.Name = "treeViewLocations";
             this.treeViewLocations.SelectedImageIndex = 0;
             this.treeViewLocations.ShowNodeToolTips = true;
@@ -2892,9 +2949,9 @@ namespace FTAnalyzer
             // 
             this.tabCountries.Controls.Add(this.dgCountries);
             this.tabCountries.Location = new System.Drawing.Point(4, 33);
-            this.tabCountries.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabCountries.Margin = new System.Windows.Forms.Padding(6);
             this.tabCountries.Name = "tabCountries";
-            this.tabCountries.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabCountries.Padding = new System.Windows.Forms.Padding(6);
             this.tabCountries.Size = new System.Drawing.Size(1981, 811);
             this.tabCountries.TabIndex = 0;
             this.tabCountries.Text = "Countries";
@@ -2905,9 +2962,9 @@ namespace FTAnalyzer
             // 
             this.tabRegions.Controls.Add(this.dgRegions);
             this.tabRegions.Location = new System.Drawing.Point(4, 33);
-            this.tabRegions.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabRegions.Margin = new System.Windows.Forms.Padding(6);
             this.tabRegions.Name = "tabRegions";
-            this.tabRegions.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabRegions.Padding = new System.Windows.Forms.Padding(6);
             this.tabRegions.Size = new System.Drawing.Size(1981, 811);
             this.tabRegions.TabIndex = 1;
             this.tabRegions.Text = "Regions";
@@ -2918,9 +2975,9 @@ namespace FTAnalyzer
             // 
             this.tabSubRegions.Controls.Add(this.dgSubRegions);
             this.tabSubRegions.Location = new System.Drawing.Point(4, 33);
-            this.tabSubRegions.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabSubRegions.Margin = new System.Windows.Forms.Padding(6);
             this.tabSubRegions.Name = "tabSubRegions";
-            this.tabSubRegions.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabSubRegions.Padding = new System.Windows.Forms.Padding(6);
             this.tabSubRegions.Size = new System.Drawing.Size(1981, 811);
             this.tabSubRegions.TabIndex = 2;
             this.tabSubRegions.Text = "SubRegions";
@@ -2929,11 +2986,24 @@ namespace FTAnalyzer
             // 
             // dgSubRegions
             // 
-            this.dgSubRegions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgSubRegions.AllowUserToAddRows = false;
+            this.dgSubRegions.AllowUserToDeleteRows = false;
+            this.dgSubRegions.AllowUserToOrderColumns = true;
+            this.dgSubRegions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgSubRegions.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgSubRegions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgSubRegions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgSubRegions.Location = new System.Drawing.Point(6, 6);
+            this.dgSubRegions.Margin = new System.Windows.Forms.Padding(6);
+            this.dgSubRegions.MultiSelect = false;
             this.dgSubRegions.Name = "dgSubRegions";
+            this.dgSubRegions.ReadOnly = true;
+            this.dgSubRegions.RowHeadersVisible = false;
+            this.dgSubRegions.RowHeadersWidth = 50;
+            this.dgSubRegions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgSubRegions.Size = new System.Drawing.Size(1969, 799);
             this.dgSubRegions.TabIndex = 1;
+            this.dgSubRegions.VirtualMode = true;
             this.dgSubRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSubRegions_CellDoubleClick);
             this.dgSubRegions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgSubRegions_CellFormatting);
             // 
@@ -2941,9 +3011,9 @@ namespace FTAnalyzer
             // 
             this.tabAddresses.Controls.Add(this.dgAddresses);
             this.tabAddresses.Location = new System.Drawing.Point(4, 33);
-            this.tabAddresses.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabAddresses.Margin = new System.Windows.Forms.Padding(6);
             this.tabAddresses.Name = "tabAddresses";
-            this.tabAddresses.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabAddresses.Padding = new System.Windows.Forms.Padding(6);
             this.tabAddresses.Size = new System.Drawing.Size(1981, 811);
             this.tabAddresses.TabIndex = 3;
             this.tabAddresses.Text = "Addresses";
@@ -2952,11 +3022,24 @@ namespace FTAnalyzer
             // 
             // dgAddresses
             // 
-            this.dgAddresses.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgAddresses.AllowUserToAddRows = false;
+            this.dgAddresses.AllowUserToDeleteRows = false;
+            this.dgAddresses.AllowUserToOrderColumns = true;
+            this.dgAddresses.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgAddresses.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgAddresses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgAddresses.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgAddresses.Location = new System.Drawing.Point(6, 6);
+            this.dgAddresses.Margin = new System.Windows.Forms.Padding(6);
+            this.dgAddresses.MultiSelect = false;
             this.dgAddresses.Name = "dgAddresses";
+            this.dgAddresses.ReadOnly = true;
+            this.dgAddresses.RowHeadersVisible = false;
+            this.dgAddresses.RowHeadersWidth = 50;
+            this.dgAddresses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgAddresses.Size = new System.Drawing.Size(1969, 799);
             this.dgAddresses.TabIndex = 1;
+            this.dgAddresses.VirtualMode = true;
             this.dgAddresses.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgAddresses_CellDoubleClick);
             this.dgAddresses.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgAddresses_CellFormatting);
             // 
@@ -2964,9 +3047,9 @@ namespace FTAnalyzer
             // 
             this.tabPlaces.Controls.Add(this.dgPlaces);
             this.tabPlaces.Location = new System.Drawing.Point(4, 33);
-            this.tabPlaces.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabPlaces.Margin = new System.Windows.Forms.Padding(6);
             this.tabPlaces.Name = "tabPlaces";
-            this.tabPlaces.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabPlaces.Padding = new System.Windows.Forms.Padding(6);
             this.tabPlaces.Size = new System.Drawing.Size(1981, 811);
             this.tabPlaces.TabIndex = 4;
             this.tabPlaces.Text = "Places";
@@ -2975,11 +3058,24 @@ namespace FTAnalyzer
             // 
             // dgPlaces
             // 
-            this.dgPlaces.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgPlaces.AllowUserToAddRows = false;
+            this.dgPlaces.AllowUserToDeleteRows = false;
+            this.dgPlaces.AllowUserToOrderColumns = true;
+            this.dgPlaces.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgPlaces.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgPlaces.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgPlaces.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgPlaces.Location = new System.Drawing.Point(6, 6);
+            this.dgPlaces.Margin = new System.Windows.Forms.Padding(6);
+            this.dgPlaces.MultiSelect = false;
             this.dgPlaces.Name = "dgPlaces";
+            this.dgPlaces.ReadOnly = true;
+            this.dgPlaces.RowHeadersVisible = false;
+            this.dgPlaces.RowHeadersWidth = 50;
+            this.dgPlaces.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgPlaces.Size = new System.Drawing.Size(1969, 799);
             this.dgPlaces.TabIndex = 2;
+            this.dgPlaces.VirtualMode = true;
             this.dgPlaces.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgPlaces_CellDoubleClick);
             this.dgPlaces.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgPlaces_CellFormatting);
             // 
@@ -2987,9 +3083,9 @@ namespace FTAnalyzer
             // 
             this.tabDisplayProgress.Controls.Add(this.splitGedcom);
             this.tabDisplayProgress.Location = new System.Drawing.Point(4, 33);
-            this.tabDisplayProgress.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabDisplayProgress.Margin = new System.Windows.Forms.Padding(6);
             this.tabDisplayProgress.Name = "tabDisplayProgress";
-            this.tabDisplayProgress.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabDisplayProgress.Padding = new System.Windows.Forms.Padding(6);
             this.tabDisplayProgress.Size = new System.Drawing.Size(2001, 860);
             this.tabDisplayProgress.TabIndex = 1;
             this.tabDisplayProgress.Text = "Gedcom Stats";
@@ -3000,7 +3096,7 @@ namespace FTAnalyzer
             this.splitGedcom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitGedcom.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitGedcom.Location = new System.Drawing.Point(6, 6);
-            this.splitGedcom.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.splitGedcom.Margin = new System.Windows.Forms.Padding(6);
             this.splitGedcom.Name = "splitGedcom";
             this.splitGedcom.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -3031,16 +3127,16 @@ namespace FTAnalyzer
             this.panel2.Controls.Add(this.pbSources);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.panel2.Margin = new System.Windows.Forms.Padding(6);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1989, 110);
             this.panel2.TabIndex = 13;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Image = global::FTAnalyzer.Properties.Resources._256;
             this.pictureBox1.Location = new System.Drawing.Point(1729, 6);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(6);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(183, 185);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -3071,7 +3167,7 @@ namespace FTAnalyzer
             // pbRelationships
             // 
             this.pbRelationships.Location = new System.Drawing.Point(246, 140);
-            this.pbRelationships.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pbRelationships.Margin = new System.Windows.Forms.Padding(6);
             this.pbRelationships.Name = "pbRelationships";
             this.pbRelationships.Size = new System.Drawing.Size(504, 30);
             this.pbRelationships.TabIndex = 15;
@@ -3089,7 +3185,7 @@ namespace FTAnalyzer
             // pbFamilies
             // 
             this.pbFamilies.Location = new System.Drawing.Point(246, 100);
-            this.pbFamilies.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pbFamilies.Margin = new System.Windows.Forms.Padding(6);
             this.pbFamilies.Name = "pbFamilies";
             this.pbFamilies.Size = new System.Drawing.Size(504, 30);
             this.pbFamilies.TabIndex = 13;
@@ -3107,7 +3203,7 @@ namespace FTAnalyzer
             // pbIndividuals
             // 
             this.pbIndividuals.Location = new System.Drawing.Point(246, 59);
-            this.pbIndividuals.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pbIndividuals.Margin = new System.Windows.Forms.Padding(6);
             this.pbIndividuals.Name = "pbIndividuals";
             this.pbIndividuals.Size = new System.Drawing.Size(504, 30);
             this.pbIndividuals.TabIndex = 11;
@@ -3125,7 +3221,7 @@ namespace FTAnalyzer
             // pbSources
             // 
             this.pbSources.Location = new System.Drawing.Point(246, 18);
-            this.pbSources.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pbSources.Margin = new System.Windows.Forms.Padding(6);
             this.pbSources.Name = "pbSources";
             this.pbSources.Size = new System.Drawing.Size(504, 30);
             this.pbSources.TabIndex = 9;
@@ -3135,7 +3231,7 @@ namespace FTAnalyzer
             this.rtbOutput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbOutput.Location = new System.Drawing.Point(0, 0);
-            this.rtbOutput.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rtbOutput.Margin = new System.Windows.Forms.Padding(6);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.ReadOnly = true;
             this.rtbOutput.Size = new System.Drawing.Size(1989, 731);
@@ -3160,7 +3256,7 @@ namespace FTAnalyzer
             this.tabSelector.Controls.Add(this.tabWorldWars);
             this.tabSelector.Controls.Add(this.tabToday);
             this.tabSelector.Location = new System.Drawing.Point(0, 50);
-            this.tabSelector.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabSelector.Margin = new System.Windows.Forms.Padding(6);
             this.tabSelector.Name = "tabSelector";
             this.tabSelector.SelectedIndex = 0;
             this.tabSelector.Size = new System.Drawing.Size(2009, 897);
@@ -3171,9 +3267,9 @@ namespace FTAnalyzer
             // 
             this.tabMainLists.Controls.Add(this.tabMainListsSelector);
             this.tabMainLists.Location = new System.Drawing.Point(4, 33);
-            this.tabMainLists.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabMainLists.Margin = new System.Windows.Forms.Padding(6);
             this.tabMainLists.Name = "tabMainLists";
-            this.tabMainLists.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabMainLists.Padding = new System.Windows.Forms.Padding(6);
             this.tabMainLists.Size = new System.Drawing.Size(2001, 860);
             this.tabMainLists.TabIndex = 18;
             this.tabMainLists.Text = "Main Lists";
@@ -3188,7 +3284,7 @@ namespace FTAnalyzer
             this.tabMainListsSelector.Controls.Add(this.tabCustomFacts);
             this.tabMainListsSelector.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabMainListsSelector.Location = new System.Drawing.Point(6, 6);
-            this.tabMainListsSelector.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabMainListsSelector.Margin = new System.Windows.Forms.Padding(6);
             this.tabMainListsSelector.Name = "tabMainListsSelector";
             this.tabMainListsSelector.SelectedIndex = 0;
             this.tabMainListsSelector.Size = new System.Drawing.Size(1989, 848);
@@ -3199,9 +3295,9 @@ namespace FTAnalyzer
             // 
             this.tabIndividuals.Controls.Add(this.dgIndividuals);
             this.tabIndividuals.Location = new System.Drawing.Point(4, 33);
-            this.tabIndividuals.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabIndividuals.Margin = new System.Windows.Forms.Padding(6);
             this.tabIndividuals.Name = "tabIndividuals";
-            this.tabIndividuals.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabIndividuals.Padding = new System.Windows.Forms.Padding(6);
             this.tabIndividuals.Size = new System.Drawing.Size(1981, 811);
             this.tabIndividuals.TabIndex = 0;
             this.tabIndividuals.Text = "Individuals";
@@ -3209,11 +3305,24 @@ namespace FTAnalyzer
             // 
             // dgIndividuals
             // 
+            this.dgIndividuals.AllowUserToAddRows = false;
+            this.dgIndividuals.AllowUserToDeleteRows = false;
+            this.dgIndividuals.AllowUserToOrderColumns = true;
             this.dgIndividuals.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgIndividuals.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgIndividuals.Location = new System.Drawing.Point(6, 6);
+            this.dgIndividuals.Margin = new System.Windows.Forms.Padding(6);
+            this.dgIndividuals.MultiSelect = false;
             this.dgIndividuals.Name = "dgIndividuals";
+            this.dgIndividuals.ReadOnly = true;
+            this.dgIndividuals.RowHeadersVisible = false;
+            this.dgIndividuals.RowHeadersWidth = 50;
+            this.dgIndividuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgIndividuals.Size = new System.Drawing.Size(1969, 799);
             this.dgIndividuals.TabIndex = 1;
+            this.dgIndividuals.VirtualMode = true;
             this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgIndividuals_CellDoubleClick);
             this.dgIndividuals.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgIndividuals_MouseDown);
             // 
@@ -3221,9 +3330,9 @@ namespace FTAnalyzer
             // 
             this.tabFamilies.Controls.Add(this.dgFamilies);
             this.tabFamilies.Location = new System.Drawing.Point(4, 33);
-            this.tabFamilies.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabFamilies.Margin = new System.Windows.Forms.Padding(6);
             this.tabFamilies.Name = "tabFamilies";
-            this.tabFamilies.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabFamilies.Padding = new System.Windows.Forms.Padding(6);
             this.tabFamilies.Size = new System.Drawing.Size(1981, 811);
             this.tabFamilies.TabIndex = 1;
             this.tabFamilies.Text = "Families";
@@ -3231,18 +3340,31 @@ namespace FTAnalyzer
             // 
             // dgFamilies
             // 
+            this.dgFamilies.AllowUserToAddRows = false;
+            this.dgFamilies.AllowUserToDeleteRows = false;
+            this.dgFamilies.AllowUserToOrderColumns = true;
             this.dgFamilies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgFamilies.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgFamilies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgFamilies.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgFamilies.Location = new System.Drawing.Point(6, 6);
+            this.dgFamilies.Margin = new System.Windows.Forms.Padding(6);
+            this.dgFamilies.MultiSelect = false;
             this.dgFamilies.Name = "dgFamilies";
+            this.dgFamilies.ReadOnly = true;
+            this.dgFamilies.RowHeadersVisible = false;
+            this.dgFamilies.RowHeadersWidth = 50;
+            this.dgFamilies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgFamilies.Size = new System.Drawing.Size(1969, 799);
             this.dgFamilies.TabIndex = 2;
+            this.dgFamilies.VirtualMode = true;
             this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgFamilies_CellDoubleClick);
             // 
             // tabSources
             // 
             this.tabSources.Controls.Add(this.dgSources);
             this.tabSources.Location = new System.Drawing.Point(4, 33);
-            this.tabSources.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabSources.Margin = new System.Windows.Forms.Padding(6);
             this.tabSources.Name = "tabSources";
             this.tabSources.Size = new System.Drawing.Size(1981, 811);
             this.tabSources.TabIndex = 2;
@@ -3251,18 +3373,31 @@ namespace FTAnalyzer
             // 
             // dgSources
             // 
+            this.dgSources.AllowUserToAddRows = false;
+            this.dgSources.AllowUserToDeleteRows = false;
+            this.dgSources.AllowUserToOrderColumns = true;
             this.dgSources.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgSources.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgSources.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgSources.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgSources.Location = new System.Drawing.Point(0, 0);
+            this.dgSources.Margin = new System.Windows.Forms.Padding(6);
+            this.dgSources.MultiSelect = false;
             this.dgSources.Name = "dgSources";
+            this.dgSources.ReadOnly = true;
+            this.dgSources.RowHeadersVisible = false;
+            this.dgSources.RowHeadersWidth = 50;
+            this.dgSources.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgSources.Size = new System.Drawing.Size(1981, 811);
             this.dgSources.TabIndex = 2;
+            this.dgSources.VirtualMode = true;
             this.dgSources.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSources_CellDoubleClick);
             // 
             // tabOccupations
             // 
             this.tabOccupations.Controls.Add(this.dgOccupations);
             this.tabOccupations.Location = new System.Drawing.Point(4, 33);
-            this.tabOccupations.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabOccupations.Margin = new System.Windows.Forms.Padding(6);
             this.tabOccupations.Name = "tabOccupations";
             this.tabOccupations.Size = new System.Drawing.Size(1981, 811);
             this.tabOccupations.TabIndex = 3;
@@ -3271,18 +3406,31 @@ namespace FTAnalyzer
             // 
             // dgOccupations
             // 
-            this.dgOccupations.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgOccupations.AllowUserToAddRows = false;
+            this.dgOccupations.AllowUserToDeleteRows = false;
+            this.dgOccupations.AllowUserToOrderColumns = true;
+            this.dgOccupations.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgOccupations.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgOccupations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgOccupations.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgOccupations.Location = new System.Drawing.Point(0, 0);
+            this.dgOccupations.Margin = new System.Windows.Forms.Padding(6);
+            this.dgOccupations.MultiSelect = false;
             this.dgOccupations.Name = "dgOccupations";
+            this.dgOccupations.ReadOnly = true;
+            this.dgOccupations.RowHeadersVisible = false;
+            this.dgOccupations.RowHeadersWidth = 50;
+            this.dgOccupations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgOccupations.Size = new System.Drawing.Size(1981, 811);
             this.dgOccupations.TabIndex = 3;
+            this.dgOccupations.VirtualMode = true;
             this.dgOccupations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgOccupations_CellDoubleClick);
             // 
             // tabCustomFacts
             // 
             this.tabCustomFacts.Controls.Add(this.dgCustomFacts);
             this.tabCustomFacts.Location = new System.Drawing.Point(4, 33);
-            this.tabCustomFacts.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabCustomFacts.Margin = new System.Windows.Forms.Padding(6);
             this.tabCustomFacts.Name = "tabCustomFacts";
             this.tabCustomFacts.Size = new System.Drawing.Size(1981, 811);
             this.tabCustomFacts.TabIndex = 4;
@@ -3291,11 +3439,24 @@ namespace FTAnalyzer
             // 
             // dgCustomFacts
             // 
-            this.dgCustomFacts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgCustomFacts.AllowUserToAddRows = false;
+            this.dgCustomFacts.AllowUserToDeleteRows = false;
+            this.dgCustomFacts.AllowUserToOrderColumns = true;
+            this.dgCustomFacts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgCustomFacts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgCustomFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgCustomFacts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgCustomFacts.Location = new System.Drawing.Point(0, 0);
+            this.dgCustomFacts.Margin = new System.Windows.Forms.Padding(6);
+            this.dgCustomFacts.MultiSelect = false;
             this.dgCustomFacts.Name = "dgCustomFacts";
+            this.dgCustomFacts.ReadOnly = true;
+            this.dgCustomFacts.RowHeadersVisible = false;
+            this.dgCustomFacts.RowHeadersWidth = 50;
+            this.dgCustomFacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgCustomFacts.Size = new System.Drawing.Size(1981, 811);
             this.dgCustomFacts.TabIndex = 4;
+            this.dgCustomFacts.VirtualMode = true;
             this.dgCustomFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgCustomFacts_CellDoubleClick);
             this.dgCustomFacts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgCustomFacts_CellValueChanged);
             // 
@@ -3303,7 +3464,7 @@ namespace FTAnalyzer
             // 
             this.tabErrorsFixes.Controls.Add(this.tabErrorFixSelector);
             this.tabErrorsFixes.Location = new System.Drawing.Point(4, 33);
-            this.tabErrorsFixes.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabErrorsFixes.Margin = new System.Windows.Forms.Padding(6);
             this.tabErrorsFixes.Name = "tabErrorsFixes";
             this.tabErrorsFixes.Size = new System.Drawing.Size(2001, 860);
             this.tabErrorsFixes.TabIndex = 19;
@@ -3319,7 +3480,7 @@ namespace FTAnalyzer
             this.tabErrorFixSelector.Controls.Add(this.tabLooseInfo);
             this.tabErrorFixSelector.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabErrorFixSelector.Location = new System.Drawing.Point(0, 0);
-            this.tabErrorFixSelector.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabErrorFixSelector.Margin = new System.Windows.Forms.Padding(6);
             this.tabErrorFixSelector.Name = "tabErrorFixSelector";
             this.tabErrorFixSelector.SelectedIndex = 0;
             this.tabErrorFixSelector.ShowToolTips = true;
@@ -3332,9 +3493,9 @@ namespace FTAnalyzer
             this.tabDataErrors.Controls.Add(this.dgDataErrors);
             this.tabDataErrors.Controls.Add(this.gbDataErrorTypes);
             this.tabDataErrors.Location = new System.Drawing.Point(4, 33);
-            this.tabDataErrors.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabDataErrors.Margin = new System.Windows.Forms.Padding(6);
             this.tabDataErrors.Name = "tabDataErrors";
-            this.tabDataErrors.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabDataErrors.Padding = new System.Windows.Forms.Padding(6);
             this.tabDataErrors.Size = new System.Drawing.Size(1993, 823);
             this.tabDataErrors.TabIndex = 0;
             this.tabDataErrors.Text = "Data Errors";
@@ -3347,9 +3508,9 @@ namespace FTAnalyzer
             this.gbDataErrorTypes.Controls.Add(this.ckbDataErrors);
             this.gbDataErrorTypes.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbDataErrorTypes.Location = new System.Drawing.Point(6, 6);
-            this.gbDataErrorTypes.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gbDataErrorTypes.Margin = new System.Windows.Forms.Padding(6);
             this.gbDataErrorTypes.Name = "gbDataErrorTypes";
-            this.gbDataErrorTypes.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gbDataErrorTypes.Padding = new System.Windows.Forms.Padding(6);
             this.gbDataErrorTypes.Size = new System.Drawing.Size(1981, 306);
             this.gbDataErrorTypes.TabIndex = 1;
             this.gbDataErrorTypes.TabStop = false;
@@ -3358,7 +3519,7 @@ namespace FTAnalyzer
             // btnSelectAll
             // 
             this.btnSelectAll.Location = new System.Drawing.Point(15, 247);
-            this.btnSelectAll.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnSelectAll.Margin = new System.Windows.Forms.Padding(6);
             this.btnSelectAll.Name = "btnSelectAll";
             this.btnSelectAll.Size = new System.Drawing.Size(138, 42);
             this.btnSelectAll.TabIndex = 7;
@@ -3369,7 +3530,7 @@ namespace FTAnalyzer
             // btnClearAll
             // 
             this.btnClearAll.Location = new System.Drawing.Point(163, 247);
-            this.btnClearAll.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnClearAll.Margin = new System.Windows.Forms.Padding(6);
             this.btnClearAll.Name = "btnClearAll";
             this.btnClearAll.Size = new System.Drawing.Size(138, 42);
             this.btnClearAll.TabIndex = 6;
@@ -3386,7 +3547,7 @@ namespace FTAnalyzer
             this.ckbDataErrors.ColumnWidth = 300;
             this.ckbDataErrors.FormattingEnabled = true;
             this.ckbDataErrors.Location = new System.Drawing.Point(15, 35);
-            this.ckbDataErrors.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ckbDataErrors.Margin = new System.Windows.Forms.Padding(6);
             this.ckbDataErrors.MultiColumn = true;
             this.ckbDataErrors.Name = "ckbDataErrors";
             this.ckbDataErrors.ScrollAlwaysVisible = true;
@@ -3409,9 +3570,9 @@ namespace FTAnalyzer
             this.tabDuplicates.Controls.Add(this.dgDuplicates);
             this.tabDuplicates.Controls.Add(this.btnCancelDuplicates);
             this.tabDuplicates.Location = new System.Drawing.Point(4, 33);
-            this.tabDuplicates.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabDuplicates.Margin = new System.Windows.Forms.Padding(6);
             this.tabDuplicates.Name = "tabDuplicates";
-            this.tabDuplicates.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabDuplicates.Padding = new System.Windows.Forms.Padding(6);
             this.tabDuplicates.Size = new System.Drawing.Size(1993, 823);
             this.tabDuplicates.TabIndex = 1;
             this.tabDuplicates.Text = "Duplicates?";
@@ -3444,7 +3605,7 @@ namespace FTAnalyzer
             this.ckbHideIgnoredDuplicates.Checked = true;
             this.ckbHideIgnoredDuplicates.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbHideIgnoredDuplicates.Location = new System.Drawing.Point(22, 118);
-            this.ckbHideIgnoredDuplicates.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ckbHideIgnoredDuplicates.Margin = new System.Windows.Forms.Padding(6);
             this.ckbHideIgnoredDuplicates.Name = "ckbHideIgnoredDuplicates";
             this.ckbHideIgnoredDuplicates.Size = new System.Drawing.Size(409, 29);
             this.ckbHideIgnoredDuplicates.TabIndex = 28;
@@ -3478,21 +3639,33 @@ namespace FTAnalyzer
             // pbDuplicates
             // 
             this.pbDuplicates.Location = new System.Drawing.Point(229, 11);
-            this.pbDuplicates.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pbDuplicates.Margin = new System.Windows.Forms.Padding(6);
             this.pbDuplicates.Name = "pbDuplicates";
             this.pbDuplicates.Size = new System.Drawing.Size(519, 42);
             this.pbDuplicates.TabIndex = 20;
             // 
             // dgDuplicates
             // 
+            this.dgDuplicates.AllowUserToAddRows = false;
+            this.dgDuplicates.AllowUserToDeleteRows = false;
+            this.dgDuplicates.AllowUserToOrderColumns = true;
             this.dgDuplicates.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgDuplicates.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgDuplicates.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgDuplicates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgDuplicates.Location = new System.Drawing.Point(-2, 161);
+            this.dgDuplicates.Margin = new System.Windows.Forms.Padding(6);
+            this.dgDuplicates.MultiSelect = false;
             this.dgDuplicates.Name = "dgDuplicates";
+            this.dgDuplicates.ReadOnly = true;
+            this.dgDuplicates.RowHeadersVisible = false;
+            this.dgDuplicates.RowHeadersWidth = 50;
+            this.dgDuplicates.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgDuplicates.Size = new System.Drawing.Size(1971, 605);
             this.dgDuplicates.TabIndex = 19;
+            this.dgDuplicates.VirtualMode = true;
             this.dgDuplicates.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgDuplicates_CellContentClick);
             this.dgDuplicates.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgDuplicates_CellDoubleClick);
             // 
@@ -3500,7 +3673,7 @@ namespace FTAnalyzer
             // 
             this.btnCancelDuplicates.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelDuplicates.Image")));
             this.btnCancelDuplicates.Location = new System.Drawing.Point(759, 11);
-            this.btnCancelDuplicates.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnCancelDuplicates.Margin = new System.Windows.Forms.Padding(6);
             this.btnCancelDuplicates.Name = "btnCancelDuplicates";
             this.btnCancelDuplicates.Size = new System.Drawing.Size(42, 42);
             this.btnCancelDuplicates.TabIndex = 27;
@@ -3513,7 +3686,7 @@ namespace FTAnalyzer
             // 
             this.tabLooseBirths.Controls.Add(this.dgLooseBirths);
             this.tabLooseBirths.Location = new System.Drawing.Point(4, 33);
-            this.tabLooseBirths.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabLooseBirths.Margin = new System.Windows.Forms.Padding(6);
             this.tabLooseBirths.Name = "tabLooseBirths";
             this.tabLooseBirths.Size = new System.Drawing.Size(1993, 823);
             this.tabLooseBirths.TabIndex = 2;
@@ -3522,18 +3695,31 @@ namespace FTAnalyzer
             // 
             // dgLooseBirths
             // 
-            this.dgLooseBirths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgLooseBirths.AllowUserToAddRows = false;
+            this.dgLooseBirths.AllowUserToDeleteRows = false;
+            this.dgLooseBirths.AllowUserToOrderColumns = true;
+            this.dgLooseBirths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgLooseBirths.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgLooseBirths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgLooseBirths.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgLooseBirths.Location = new System.Drawing.Point(0, 0);
+            this.dgLooseBirths.Margin = new System.Windows.Forms.Padding(6);
+            this.dgLooseBirths.MultiSelect = false;
             this.dgLooseBirths.Name = "dgLooseBirths";
+            this.dgLooseBirths.ReadOnly = true;
+            this.dgLooseBirths.RowHeadersVisible = false;
+            this.dgLooseBirths.RowHeadersWidth = 50;
+            this.dgLooseBirths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgLooseBirths.Size = new System.Drawing.Size(1993, 823);
             this.dgLooseBirths.TabIndex = 3;
+            this.dgLooseBirths.VirtualMode = true;
             this.dgLooseBirths.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLooseBirths_CellDoubleClick);
             // 
             // tabLooseDeaths
             // 
             this.tabLooseDeaths.Controls.Add(this.dgLooseDeaths);
             this.tabLooseDeaths.Location = new System.Drawing.Point(4, 33);
-            this.tabLooseDeaths.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabLooseDeaths.Margin = new System.Windows.Forms.Padding(6);
             this.tabLooseDeaths.Name = "tabLooseDeaths";
             this.tabLooseDeaths.Size = new System.Drawing.Size(1993, 823);
             this.tabLooseDeaths.TabIndex = 3;
@@ -3542,18 +3728,31 @@ namespace FTAnalyzer
             // 
             // dgLooseDeaths
             // 
-            this.dgLooseDeaths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgLooseDeaths.AllowUserToAddRows = false;
+            this.dgLooseDeaths.AllowUserToDeleteRows = false;
+            this.dgLooseDeaths.AllowUserToOrderColumns = true;
+            this.dgLooseDeaths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgLooseDeaths.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgLooseDeaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgLooseDeaths.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgLooseDeaths.Location = new System.Drawing.Point(0, 0);
+            this.dgLooseDeaths.Margin = new System.Windows.Forms.Padding(6);
+            this.dgLooseDeaths.MultiSelect = false;
             this.dgLooseDeaths.Name = "dgLooseDeaths";
+            this.dgLooseDeaths.ReadOnly = true;
+            this.dgLooseDeaths.RowHeadersVisible = false;
+            this.dgLooseDeaths.RowHeadersWidth = 50;
+            this.dgLooseDeaths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgLooseDeaths.Size = new System.Drawing.Size(1993, 823);
             this.dgLooseDeaths.TabIndex = 2;
+            this.dgLooseDeaths.VirtualMode = true;
             this.dgLooseDeaths.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLooseDeaths_CellDoubleClick);
             // 
             // tabLooseInfo
             // 
             this.tabLooseInfo.Controls.Add(this.dgLooseInfo);
             this.tabLooseInfo.Location = new System.Drawing.Point(4, 33);
-            this.tabLooseInfo.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabLooseInfo.Margin = new System.Windows.Forms.Padding(6);
             this.tabLooseInfo.Name = "tabLooseInfo";
             this.tabLooseInfo.Size = new System.Drawing.Size(1993, 823);
             this.tabLooseInfo.TabIndex = 4;
@@ -3562,11 +3761,24 @@ namespace FTAnalyzer
             // 
             // dgLooseInfo
             // 
-            this.dgLooseInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgLooseInfo.AllowUserToAddRows = false;
+            this.dgLooseInfo.AllowUserToDeleteRows = false;
+            this.dgLooseInfo.AllowUserToOrderColumns = true;
+            this.dgLooseInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgLooseInfo.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgLooseInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgLooseInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgLooseInfo.Location = new System.Drawing.Point(0, 0);
+            this.dgLooseInfo.Margin = new System.Windows.Forms.Padding(6);
+            this.dgLooseInfo.MultiSelect = false;
             this.dgLooseInfo.Name = "dgLooseInfo";
+            this.dgLooseInfo.ReadOnly = true;
+            this.dgLooseInfo.RowHeadersVisible = false;
+            this.dgLooseInfo.RowHeadersWidth = 50;
+            this.dgLooseInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgLooseInfo.Size = new System.Drawing.Size(1993, 823);
             this.dgLooseInfo.TabIndex = 4;
+            this.dgLooseInfo.VirtualMode = true;
             this.dgLooseInfo.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLooseInfo_CellDoubleClick);
             // 
             // tabSurnames
@@ -3576,9 +3788,9 @@ namespace FTAnalyzer
             this.tabSurnames.Controls.Add(this.dgSurnames);
             this.tabSurnames.Controls.Add(this.reltypesSurnames);
             this.tabSurnames.Location = new System.Drawing.Point(4, 33);
-            this.tabSurnames.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabSurnames.Margin = new System.Windows.Forms.Padding(6);
             this.tabSurnames.Name = "tabSurnames";
-            this.tabSurnames.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabSurnames.Padding = new System.Windows.Forms.Padding(6);
             this.tabSurnames.Size = new System.Drawing.Size(2001, 860);
             this.tabSurnames.TabIndex = 14;
             this.tabSurnames.Text = "Surnames";
@@ -3590,7 +3802,7 @@ namespace FTAnalyzer
             this.chkSurnamesIgnoreCase.Checked = true;
             this.chkSurnamesIgnoreCase.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSurnamesIgnoreCase.Location = new System.Drawing.Point(911, 144);
-            this.chkSurnamesIgnoreCase.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkSurnamesIgnoreCase.Margin = new System.Windows.Forms.Padding(6);
             this.chkSurnamesIgnoreCase.Name = "chkSurnamesIgnoreCase";
             this.chkSurnamesIgnoreCase.Size = new System.Drawing.Size(145, 29);
             this.chkSurnamesIgnoreCase.TabIndex = 24;
@@ -3600,7 +3812,7 @@ namespace FTAnalyzer
             // btnShowSurnames
             // 
             this.btnShowSurnames.Location = new System.Drawing.Point(618, 137);
-            this.btnShowSurnames.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnShowSurnames.Margin = new System.Windows.Forms.Padding(6);
             this.btnShowSurnames.Name = "btnShowSurnames";
             this.btnShowSurnames.Size = new System.Drawing.Size(282, 42);
             this.btnShowSurnames.TabIndex = 23;
@@ -3610,9 +3822,14 @@ namespace FTAnalyzer
             // 
             // dgSurnames
             // 
+            this.dgSurnames.AllowUserToAddRows = false;
+            this.dgSurnames.AllowUserToDeleteRows = false;
+            this.dgSurnames.AllowUserToOrderColumns = true;
             this.dgSurnames.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgSurnames.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgSurnames.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgSurnames.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgSurnames.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Surname,
@@ -3621,9 +3838,16 @@ namespace FTAnalyzer
             this.Families,
             this.Marriages});
             this.dgSurnames.Location = new System.Drawing.Point(6, 190);
+            this.dgSurnames.Margin = new System.Windows.Forms.Padding(6);
+            this.dgSurnames.MultiSelect = false;
             this.dgSurnames.Name = "dgSurnames";
+            this.dgSurnames.ReadOnly = true;
+            this.dgSurnames.RowHeadersVisible = false;
+            this.dgSurnames.RowHeadersWidth = 50;
+            this.dgSurnames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgSurnames.Size = new System.Drawing.Size(1978, 622);
             this.dgSurnames.TabIndex = 1;
+            this.dgSurnames.VirtualMode = true;
             this.dgSurnames.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSurnames_CellContentClick);
             this.dgSurnames.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSurnames_CellDoubleClick);
             // 
@@ -3634,7 +3858,7 @@ namespace FTAnalyzer
             this.Surname.MinimumWidth = 10;
             this.Surname.Name = "Surname";
             this.Surname.ReadOnly = true;
-            this.Surname.Width = 200;
+            this.Surname.Width = 133;
             // 
             // URI
             // 
@@ -3655,7 +3879,7 @@ namespace FTAnalyzer
             this.Individuals.MinimumWidth = 10;
             this.Individuals.Name = "Individuals";
             this.Individuals.ReadOnly = true;
-            this.Individuals.Width = 200;
+            this.Individuals.Width = 145;
             // 
             // Families
             // 
@@ -3664,7 +3888,7 @@ namespace FTAnalyzer
             this.Families.MinimumWidth = 10;
             this.Families.Name = "Families";
             this.Families.ReadOnly = true;
-            this.Families.Width = 200;
+            this.Families.Width = 125;
             // 
             // Marriages
             // 
@@ -3673,12 +3897,12 @@ namespace FTAnalyzer
             this.Marriages.MinimumWidth = 10;
             this.Marriages.Name = "Marriages";
             this.Marriages.ReadOnly = true;
-            this.Marriages.Width = 200;
+            this.Marriages.Width = 140;
             // 
             // reltypesSurnames
             // 
             this.reltypesSurnames.Location = new System.Drawing.Point(11, 6);
-            this.reltypesSurnames.Margin = new System.Windows.Forms.Padding(11, 11, 11, 11);
+            this.reltypesSurnames.Margin = new System.Windows.Forms.Padding(11);
             this.reltypesSurnames.MarriedToDB = true;
             this.reltypesSurnames.Name = "reltypesSurnames";
             this.reltypesSurnames.Size = new System.Drawing.Size(596, 183);
@@ -3701,7 +3925,7 @@ namespace FTAnalyzer
             this.tabFacts.Controls.Add(this.txtFactsSurname);
             this.tabFacts.Controls.Add(this.relTypesFacts);
             this.tabFacts.Location = new System.Drawing.Point(4, 33);
-            this.tabFacts.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabFacts.Margin = new System.Windows.Forms.Padding(6);
             this.tabFacts.Name = "tabFacts";
             this.tabFacts.Size = new System.Drawing.Size(2001, 860);
             this.tabFacts.TabIndex = 13;
@@ -3711,7 +3935,7 @@ namespace FTAnalyzer
             // btnDuplicateFacts
             // 
             this.btnDuplicateFacts.Location = new System.Drawing.Point(1249, 78);
-            this.btnDuplicateFacts.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnDuplicateFacts.Margin = new System.Windows.Forms.Padding(6);
             this.btnDuplicateFacts.Name = "btnDuplicateFacts";
             this.btnDuplicateFacts.Size = new System.Drawing.Size(297, 70);
             this.btnDuplicateFacts.TabIndex = 34;
@@ -3745,7 +3969,7 @@ namespace FTAnalyzer
             // btnDeselectExcludeAllFactTypes
             // 
             this.btnDeselectExcludeAllFactTypes.Location = new System.Drawing.Point(986, 201);
-            this.btnDeselectExcludeAllFactTypes.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnDeselectExcludeAllFactTypes.Margin = new System.Windows.Forms.Padding(6);
             this.btnDeselectExcludeAllFactTypes.Name = "btnDeselectExcludeAllFactTypes";
             this.btnDeselectExcludeAllFactTypes.Size = new System.Drawing.Size(249, 42);
             this.btnDeselectExcludeAllFactTypes.TabIndex = 30;
@@ -3757,7 +3981,7 @@ namespace FTAnalyzer
             // btnExcludeAllFactTypes
             // 
             this.btnExcludeAllFactTypes.Location = new System.Drawing.Point(662, 199);
-            this.btnExcludeAllFactTypes.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnExcludeAllFactTypes.Margin = new System.Windows.Forms.Padding(6);
             this.btnExcludeAllFactTypes.Name = "btnExcludeAllFactTypes";
             this.btnExcludeAllFactTypes.Size = new System.Drawing.Size(249, 42);
             this.btnExcludeAllFactTypes.TabIndex = 29;
@@ -3769,7 +3993,7 @@ namespace FTAnalyzer
             // btnDeselectAllFactTypes
             // 
             this.btnDeselectAllFactTypes.Location = new System.Drawing.Point(339, 201);
-            this.btnDeselectAllFactTypes.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnDeselectAllFactTypes.Margin = new System.Windows.Forms.Padding(6);
             this.btnDeselectAllFactTypes.Name = "btnDeselectAllFactTypes";
             this.btnDeselectAllFactTypes.Size = new System.Drawing.Size(249, 42);
             this.btnDeselectAllFactTypes.TabIndex = 27;
@@ -3780,7 +4004,7 @@ namespace FTAnalyzer
             // btnSelectAllFactTypes
             // 
             this.btnSelectAllFactTypes.Location = new System.Drawing.Point(15, 199);
-            this.btnSelectAllFactTypes.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnSelectAllFactTypes.Margin = new System.Windows.Forms.Padding(6);
             this.btnSelectAllFactTypes.Name = "btnSelectAllFactTypes";
             this.btnSelectAllFactTypes.Size = new System.Drawing.Size(249, 42);
             this.btnSelectAllFactTypes.TabIndex = 26;
@@ -3794,7 +4018,7 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Left)));
             this.ckbFactSelect.FormattingEnabled = true;
             this.ckbFactSelect.Location = new System.Drawing.Point(15, 253);
-            this.ckbFactSelect.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ckbFactSelect.Margin = new System.Windows.Forms.Padding(6);
             this.ckbFactSelect.Name = "ckbFactSelect";
             this.ckbFactSelect.ScrollAlwaysVisible = true;
             this.ckbFactSelect.SelectionMode = System.Windows.Forms.SelectionMode.None;
@@ -3805,7 +4029,7 @@ namespace FTAnalyzer
             // btnShowFacts
             // 
             this.btnShowFacts.Location = new System.Drawing.Point(662, 78);
-            this.btnShowFacts.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnShowFacts.Margin = new System.Windows.Forms.Padding(6);
             this.btnShowFacts.Name = "btnShowFacts";
             this.btnShowFacts.Size = new System.Drawing.Size(574, 70);
             this.btnShowFacts.TabIndex = 24;
@@ -3826,7 +4050,7 @@ namespace FTAnalyzer
             // txtFactsSurname
             // 
             this.txtFactsSurname.Location = new System.Drawing.Point(766, 30);
-            this.txtFactsSurname.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtFactsSurname.Margin = new System.Windows.Forms.Padding(6);
             this.txtFactsSurname.Name = "txtFactsSurname";
             this.txtFactsSurname.Size = new System.Drawing.Size(466, 29);
             this.txtFactsSurname.TabIndex = 22;
@@ -3835,7 +4059,7 @@ namespace FTAnalyzer
             // relTypesFacts
             // 
             this.relTypesFacts.Location = new System.Drawing.Point(15, 6);
-            this.relTypesFacts.Margin = new System.Windows.Forms.Padding(11, 11, 11, 11);
+            this.relTypesFacts.Margin = new System.Windows.Forms.Padding(11);
             this.relTypesFacts.MarriedToDB = true;
             this.relTypesFacts.Name = "relTypesFacts";
             this.relTypesFacts.Size = new System.Drawing.Size(596, 185);
@@ -3855,9 +4079,9 @@ namespace FTAnalyzer
             this.tabToday.Controls.Add(this.dpToday);
             this.tabToday.Controls.Add(this.rtbToday);
             this.tabToday.Location = new System.Drawing.Point(4, 33);
-            this.tabToday.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabToday.Margin = new System.Windows.Forms.Padding(6);
             this.tabToday.Name = "tabToday";
-            this.tabToday.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabToday.Padding = new System.Windows.Forms.Padding(6);
             this.tabToday.Size = new System.Drawing.Size(2001, 860);
             this.tabToday.TabIndex = 17;
             this.tabToday.Text = "On This Day";
@@ -3876,7 +4100,7 @@ namespace FTAnalyzer
             // nudToday
             // 
             this.nudToday.Location = new System.Drawing.Point(1135, 39);
-            this.nudToday.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.nudToday.Margin = new System.Windows.Forms.Padding(6);
             this.nudToday.Maximum = new decimal(new int[] {
             10,
             0,
@@ -3900,7 +4124,7 @@ namespace FTAnalyzer
             // btnUpdateTodaysEvents
             // 
             this.btnUpdateTodaysEvents.Location = new System.Drawing.Point(468, 33);
-            this.btnUpdateTodaysEvents.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnUpdateTodaysEvents.Margin = new System.Windows.Forms.Padding(6);
             this.btnUpdateTodaysEvents.Name = "btnUpdateTodaysEvents";
             this.btnUpdateTodaysEvents.Size = new System.Drawing.Size(211, 42);
             this.btnUpdateTodaysEvents.TabIndex = 14;
@@ -3921,7 +4145,7 @@ namespace FTAnalyzer
             // pbToday
             // 
             this.pbToday.Location = new System.Drawing.Point(1465, 39);
-            this.pbToday.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pbToday.Margin = new System.Windows.Forms.Padding(6);
             this.pbToday.Name = "pbToday";
             this.pbToday.Size = new System.Drawing.Size(422, 37);
             this.pbToday.TabIndex = 12;
@@ -3930,7 +4154,7 @@ namespace FTAnalyzer
             // 
             this.rbTodayMonth.AutoSize = true;
             this.rbTodayMonth.Location = new System.Drawing.Point(840, 39);
-            this.rbTodayMonth.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rbTodayMonth.Margin = new System.Windows.Forms.Padding(6);
             this.rbTodayMonth.Name = "rbTodayMonth";
             this.rbTodayMonth.Size = new System.Drawing.Size(154, 29);
             this.rbTodayMonth.TabIndex = 11;
@@ -3943,7 +4167,7 @@ namespace FTAnalyzer
             this.rbTodaySingle.AutoSize = true;
             this.rbTodaySingle.Checked = true;
             this.rbTodaySingle.Location = new System.Drawing.Point(689, 39);
-            this.rbTodaySingle.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rbTodaySingle.Margin = new System.Windows.Forms.Padding(6);
             this.rbTodaySingle.Name = "rbTodaySingle";
             this.rbTodaySingle.Size = new System.Drawing.Size(132, 29);
             this.rbTodaySingle.TabIndex = 10;
@@ -3965,7 +4189,7 @@ namespace FTAnalyzer
             // dpToday
             // 
             this.dpToday.Location = new System.Drawing.Point(143, 39);
-            this.dpToday.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dpToday.Margin = new System.Windows.Forms.Padding(6);
             this.dpToday.Name = "dpToday";
             this.dpToday.Size = new System.Drawing.Size(310, 29);
             this.dpToday.TabIndex = 8;
@@ -3977,7 +4201,7 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbToday.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbToday.Location = new System.Drawing.Point(0, 109);
-            this.rtbToday.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rtbToday.Margin = new System.Windows.Forms.Padding(6);
             this.rtbToday.Name = "rtbToday";
             this.rtbToday.ReadOnly = true;
             this.rtbToday.Size = new System.Drawing.Size(1975, 713);
@@ -4123,7 +4347,7 @@ namespace FTAnalyzer
             this.Controls.Add(this.tabSelector);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.MinimumSize = new System.Drawing.Size(1043, 867);
             this.Name = "MainForm";
             this.Text = "Family Tree Analyzer";
