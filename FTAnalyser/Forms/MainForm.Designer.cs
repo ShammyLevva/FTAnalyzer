@@ -44,8 +44,8 @@ namespace FTAnalyzer
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -319,7 +319,6 @@ namespace FTAnalyzer
             this.btnClearAll = new System.Windows.Forms.Button();
             this.ckbDataErrors = new System.Windows.Forms.CheckedListBox();
             this.tabDuplicates = new System.Windows.Forms.TabPage();
-            this.labDuplicateSlider = new System.Windows.Forms.Label();
             this.labCompletion = new System.Windows.Forms.Label();
             this.ckbHideIgnoredDuplicates = new System.Windows.Forms.CheckBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -382,6 +381,7 @@ namespace FTAnalyzer
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.labDuplicateSlider = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -1228,7 +1228,7 @@ namespace FTAnalyzer
             this.tbDuplicateScore.Location = new System.Drawing.Point(447, 3);
             this.tbDuplicateScore.Minimum = 1;
             this.tbDuplicateScore.Name = "tbDuplicateScore";
-            this.tbDuplicateScore.Size = new System.Drawing.Size(973, 45);
+            this.tbDuplicateScore.Size = new System.Drawing.Size(619, 45);
             this.tbDuplicateScore.TabIndex = 22;
             this.tbDuplicateScore.TickFrequency = 5;
             this.toolTips.SetToolTip(this.tbDuplicateScore, "Adjust Slider to right to limit results to more likely matches");
@@ -1258,14 +1258,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgCheckAncestors.ColumnHeadersHeight = 40;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle9;
             this.dgCheckAncestors.Location = new System.Drawing.Point(-1, 84);
             this.dgCheckAncestors.Name = "dgCheckAncestors";
             this.dgCheckAncestors.ReadOnly = true;
@@ -1281,9 +1281,10 @@ namespace FTAnalyzer
             // 
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(1329, 21);
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(960, 24);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(92, 13);
+            this.label13.Size = new System.Drawing.Size(108, 13);
             this.label13.TabIndex = 24;
             this.label13.Text = "Aggressive Match";
             this.toolTips.SetToolTip(this.label13, "Will produce duplicates in list when the two individuals are a very close match t" +
@@ -1292,9 +1293,10 @@ namespace FTAnalyzer
             // label12
             // 
             this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Location = new System.Drawing.Point(444, 24);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(69, 13);
+            this.label12.Size = new System.Drawing.Size(80, 13);
             this.label12.TabIndex = 23;
             this.label12.Text = "Loose Match";
             this.toolTips.SetToolTip(this.label12, "Will produce duplicates in list when the two individuals decent but vague match t" +
@@ -1325,14 +1327,14 @@ namespace FTAnalyzer
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgDataErrors.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgDataErrors.Location = new System.Drawing.Point(6, 166);
             this.dgDataErrors.Margin = new System.Windows.Forms.Padding(6);
             this.dgDataErrors.MultiSelect = false;
@@ -1343,7 +1345,7 @@ namespace FTAnalyzer
             this.dgDataErrors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgDataErrors.ShowCellToolTips = false;
             this.dgDataErrors.ShowEditingIcon = false;
-            this.dgDataErrors.Size = new System.Drawing.Size(802, 314);
+            this.dgDataErrors.Size = new System.Drawing.Size(1062, 223);
             this.dgDataErrors.TabIndex = 6;
             this.toolTips.SetToolTip(this.dgDataErrors, "Double click to see list of facts for that individual");
             this.dgDataErrors.VirtualMode = true;
@@ -1366,7 +1368,7 @@ namespace FTAnalyzer
             this.dgCountries.RowHeadersVisible = false;
             this.dgCountries.RowHeadersWidth = 50;
             this.dgCountries.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgCountries.Size = new System.Drawing.Size(800, 467);
+            this.dgCountries.Size = new System.Drawing.Size(1060, 376);
             this.dgCountries.TabIndex = 0;
             this.toolTips.SetToolTip(this.dgCountries, "Double click on Country name to see list of individuals with that Country.");
             this.dgCountries.VirtualMode = true;
@@ -1390,7 +1392,7 @@ namespace FTAnalyzer
             this.dgRegions.RowHeadersVisible = false;
             this.dgRegions.RowHeadersWidth = 50;
             this.dgRegions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgRegions.Size = new System.Drawing.Size(800, 467);
+            this.dgRegions.Size = new System.Drawing.Size(1060, 376);
             this.dgRegions.TabIndex = 1;
             this.toolTips.SetToolTip(this.dgRegions, "Double click on Region name to see list of individuals with that Region.");
             this.dgRegions.VirtualMode = true;
@@ -1426,7 +1428,7 @@ namespace FTAnalyzer
             this.tabWorldWars.Controls.Add(this.wardeadCountry);
             this.tabWorldWars.Location = new System.Drawing.Point(4, 22);
             this.tabWorldWars.Name = "tabWorldWars";
-            this.tabWorldWars.Size = new System.Drawing.Size(820, 505);
+            this.tabWorldWars.Size = new System.Drawing.Size(1080, 414);
             this.tabWorldWars.TabIndex = 8;
             this.tabWorldWars.Text = "World Wars";
             this.tabWorldWars.ToolTipText = "Find men of fighting age during WWI & WWII";
@@ -1510,7 +1512,7 @@ namespace FTAnalyzer
             this.dgWorldWars.RowHeadersVisible = false;
             this.dgWorldWars.RowHeadersWidth = 50;
             this.dgWorldWars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgWorldWars.Size = new System.Drawing.Size(1225, 356);
+            this.dgWorldWars.Size = new System.Drawing.Size(1074, 280);
             this.dgWorldWars.TabIndex = 29;
             this.dgWorldWars.VirtualMode = true;
             this.dgWorldWars.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgWorldWars_CellDoubleClick);
@@ -1563,7 +1565,7 @@ namespace FTAnalyzer
             this.tabTreetops.Controls.Add(this.treetopsCountry);
             this.tabTreetops.Location = new System.Drawing.Point(4, 22);
             this.tabTreetops.Name = "tabTreetops";
-            this.tabTreetops.Size = new System.Drawing.Size(820, 505);
+            this.tabTreetops.Size = new System.Drawing.Size(1080, 414);
             this.tabTreetops.TabIndex = 7;
             this.tabTreetops.Text = "Treetops";
             this.tabTreetops.UseVisualStyleBackColor = true;
@@ -1638,7 +1640,7 @@ namespace FTAnalyzer
             this.dgTreeTops.RowHeadersVisible = false;
             this.dgTreeTops.RowHeadersWidth = 50;
             this.dgTreeTops.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgTreeTops.Size = new System.Drawing.Size(1225, 356);
+            this.dgTreeTops.Size = new System.Drawing.Size(1074, 280);
             this.dgTreeTops.TabIndex = 28;
             this.dgTreeTops.VirtualMode = true;
             this.dgTreeTops.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgTreeTops_CellDoubleClick);
@@ -1676,7 +1678,7 @@ namespace FTAnalyzer
             this.tabColourReports.Controls.Add(this.relTypesColoured);
             this.tabColourReports.Location = new System.Drawing.Point(4, 22);
             this.tabColourReports.Name = "tabColourReports";
-            this.tabColourReports.Size = new System.Drawing.Size(820, 505);
+            this.tabColourReports.Size = new System.Drawing.Size(1080, 414);
             this.tabColourReports.TabIndex = 12;
             this.tabColourReports.Text = "Research Suggestions";
             this.tabColourReports.UseVisualStyleBackColor = true;
@@ -1840,7 +1842,7 @@ namespace FTAnalyzer
             this.tabLostCousins.Location = new System.Drawing.Point(4, 22);
             this.tabLostCousins.Name = "tabLostCousins";
             this.tabLostCousins.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLostCousins.Size = new System.Drawing.Size(820, 505);
+            this.tabLostCousins.Size = new System.Drawing.Size(1080, 414);
             this.tabLostCousins.TabIndex = 5;
             this.tabLostCousins.Text = "Lost Cousins";
             this.tabLostCousins.UseVisualStyleBackColor = true;
@@ -1854,7 +1856,7 @@ namespace FTAnalyzer
             this.LCSubTabs.Location = new System.Drawing.Point(3, 3);
             this.LCSubTabs.Name = "LCSubTabs";
             this.LCSubTabs.SelectedIndex = 0;
-            this.LCSubTabs.Size = new System.Drawing.Size(814, 499);
+            this.LCSubTabs.Size = new System.Drawing.Size(1074, 408);
             this.LCSubTabs.TabIndex = 0;
             // 
             // LCReportsTab
@@ -1879,7 +1881,7 @@ namespace FTAnalyzer
             this.LCReportsTab.Location = new System.Drawing.Point(4, 22);
             this.LCReportsTab.Name = "LCReportsTab";
             this.LCReportsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.LCReportsTab.Size = new System.Drawing.Size(806, 473);
+            this.LCReportsTab.Size = new System.Drawing.Size(1066, 382);
             this.LCReportsTab.TabIndex = 0;
             this.LCReportsTab.Text = "Reports";
             this.LCReportsTab.UseVisualStyleBackColor = true;
@@ -2314,7 +2316,7 @@ namespace FTAnalyzer
             this.tabCensus.Location = new System.Drawing.Point(4, 22);
             this.tabCensus.Name = "tabCensus";
             this.tabCensus.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCensus.Size = new System.Drawing.Size(820, 505);
+            this.tabCensus.Size = new System.Drawing.Size(1080, 414);
             this.tabCensus.TabIndex = 0;
             this.tabCensus.Text = "Census";
             this.tabCensus.UseVisualStyleBackColor = true;
@@ -2712,7 +2714,7 @@ namespace FTAnalyzer
             this.tabLocations.Location = new System.Drawing.Point(4, 22);
             this.tabLocations.Name = "tabLocations";
             this.tabLocations.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLocations.Size = new System.Drawing.Size(820, 505);
+            this.tabLocations.Size = new System.Drawing.Size(1080, 414);
             this.tabLocations.TabIndex = 4;
             this.tabLocations.Text = "Locations";
             this.tabLocations.UseVisualStyleBackColor = true;
@@ -2763,7 +2765,7 @@ namespace FTAnalyzer
             this.tabCtrlLocations.Location = new System.Drawing.Point(3, 3);
             this.tabCtrlLocations.Name = "tabCtrlLocations";
             this.tabCtrlLocations.SelectedIndex = 0;
-            this.tabCtrlLocations.Size = new System.Drawing.Size(814, 499);
+            this.tabCtrlLocations.Size = new System.Drawing.Size(1074, 408);
             this.tabCtrlLocations.TabIndex = 0;
             this.tabCtrlLocations.SelectedIndexChanged += new System.EventHandler(this.TabCtrlLocations_SelectedIndexChanged);
             this.tabCtrlLocations.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabCtrlLocations_Selecting);
@@ -2774,7 +2776,7 @@ namespace FTAnalyzer
             this.tabTreeView.Location = new System.Drawing.Point(4, 22);
             this.tabTreeView.Name = "tabTreeView";
             this.tabTreeView.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTreeView.Size = new System.Drawing.Size(806, 473);
+            this.tabTreeView.Size = new System.Drawing.Size(1066, 382);
             this.tabTreeView.TabIndex = 5;
             this.tabTreeView.Text = "Tree View";
             this.tabTreeView.UseVisualStyleBackColor = true;
@@ -2790,7 +2792,7 @@ namespace FTAnalyzer
             this.treeViewLocations.Name = "treeViewLocations";
             this.treeViewLocations.SelectedImageIndex = 0;
             this.treeViewLocations.ShowNodeToolTips = true;
-            this.treeViewLocations.Size = new System.Drawing.Size(800, 467);
+            this.treeViewLocations.Size = new System.Drawing.Size(1060, 376);
             this.treeViewLocations.TabIndex = 0;
             this.treeViewLocations.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewLocations_BeforeCollapse);
             this.treeViewLocations.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewLocations_BeforeExpand);
@@ -2818,7 +2820,7 @@ namespace FTAnalyzer
             this.tabCountries.Location = new System.Drawing.Point(4, 22);
             this.tabCountries.Name = "tabCountries";
             this.tabCountries.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCountries.Size = new System.Drawing.Size(806, 473);
+            this.tabCountries.Size = new System.Drawing.Size(1066, 382);
             this.tabCountries.TabIndex = 0;
             this.tabCountries.Text = "Countries";
             this.tabCountries.ToolTipText = "Double click on Country name to see list of individuals with that Country.";
@@ -2830,7 +2832,7 @@ namespace FTAnalyzer
             this.tabRegions.Location = new System.Drawing.Point(4, 22);
             this.tabRegions.Name = "tabRegions";
             this.tabRegions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRegions.Size = new System.Drawing.Size(806, 473);
+            this.tabRegions.Size = new System.Drawing.Size(1066, 382);
             this.tabRegions.TabIndex = 1;
             this.tabRegions.Text = "Regions";
             this.tabRegions.ToolTipText = "Double click on Region name to see list of individuals with that Region.";
@@ -2842,7 +2844,7 @@ namespace FTAnalyzer
             this.tabSubRegions.Location = new System.Drawing.Point(4, 22);
             this.tabSubRegions.Name = "tabSubRegions";
             this.tabSubRegions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSubRegions.Size = new System.Drawing.Size(806, 473);
+            this.tabSubRegions.Size = new System.Drawing.Size(1066, 382);
             this.tabSubRegions.TabIndex = 2;
             this.tabSubRegions.Text = "SubRegions";
             this.tabSubRegions.ToolTipText = "Double click on \'Parish\' name to see list of individuals with that parish/area.";
@@ -2865,7 +2867,7 @@ namespace FTAnalyzer
             this.dgSubRegions.RowHeadersVisible = false;
             this.dgSubRegions.RowHeadersWidth = 50;
             this.dgSubRegions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgSubRegions.Size = new System.Drawing.Size(800, 467);
+            this.dgSubRegions.Size = new System.Drawing.Size(1060, 376);
             this.dgSubRegions.TabIndex = 1;
             this.dgSubRegions.VirtualMode = true;
             this.dgSubRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSubRegions_CellDoubleClick);
@@ -2877,7 +2879,7 @@ namespace FTAnalyzer
             this.tabAddresses.Location = new System.Drawing.Point(4, 22);
             this.tabAddresses.Name = "tabAddresses";
             this.tabAddresses.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAddresses.Size = new System.Drawing.Size(806, 473);
+            this.tabAddresses.Size = new System.Drawing.Size(1066, 382);
             this.tabAddresses.TabIndex = 3;
             this.tabAddresses.Text = "Addresses";
             this.tabAddresses.ToolTipText = "Double click on Address name to see list of individuals with that Address.";
@@ -2900,7 +2902,7 @@ namespace FTAnalyzer
             this.dgAddresses.RowHeadersVisible = false;
             this.dgAddresses.RowHeadersWidth = 50;
             this.dgAddresses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgAddresses.Size = new System.Drawing.Size(800, 467);
+            this.dgAddresses.Size = new System.Drawing.Size(1060, 376);
             this.dgAddresses.TabIndex = 1;
             this.dgAddresses.VirtualMode = true;
             this.dgAddresses.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgAddresses_CellDoubleClick);
@@ -2912,7 +2914,7 @@ namespace FTAnalyzer
             this.tabPlaces.Location = new System.Drawing.Point(4, 22);
             this.tabPlaces.Name = "tabPlaces";
             this.tabPlaces.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPlaces.Size = new System.Drawing.Size(806, 473);
+            this.tabPlaces.Size = new System.Drawing.Size(1066, 382);
             this.tabPlaces.TabIndex = 4;
             this.tabPlaces.Text = "Places";
             this.tabPlaces.ToolTipText = "Double click on Address name to see list of individuals with that Place";
@@ -2935,7 +2937,7 @@ namespace FTAnalyzer
             this.dgPlaces.RowHeadersVisible = false;
             this.dgPlaces.RowHeadersWidth = 50;
             this.dgPlaces.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgPlaces.Size = new System.Drawing.Size(800, 467);
+            this.dgPlaces.Size = new System.Drawing.Size(1060, 376);
             this.dgPlaces.TabIndex = 2;
             this.dgPlaces.VirtualMode = true;
             this.dgPlaces.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgPlaces_CellDoubleClick);
@@ -3270,7 +3272,7 @@ namespace FTAnalyzer
             this.tabCustomFacts.Controls.Add(this.dgCustomFacts);
             this.tabCustomFacts.Location = new System.Drawing.Point(4, 22);
             this.tabCustomFacts.Name = "tabCustomFacts";
-            this.tabCustomFacts.Size = new System.Drawing.Size(806, 473);
+            this.tabCustomFacts.Size = new System.Drawing.Size(1066, 382);
             this.tabCustomFacts.TabIndex = 4;
             this.tabCustomFacts.Text = "Custom Facts";
             this.tabCustomFacts.UseVisualStyleBackColor = true;
@@ -3292,7 +3294,7 @@ namespace FTAnalyzer
             this.dgCustomFacts.RowHeadersVisible = false;
             this.dgCustomFacts.RowHeadersWidth = 50;
             this.dgCustomFacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgCustomFacts.Size = new System.Drawing.Size(806, 473);
+            this.dgCustomFacts.Size = new System.Drawing.Size(1066, 382);
             this.dgCustomFacts.TabIndex = 4;
             this.dgCustomFacts.VirtualMode = true;
             this.dgCustomFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgCustomFacts_CellDoubleClick);
@@ -3303,7 +3305,7 @@ namespace FTAnalyzer
             this.tabErrorsFixes.Controls.Add(this.tabErrorFixSelector);
             this.tabErrorsFixes.Location = new System.Drawing.Point(4, 22);
             this.tabErrorsFixes.Name = "tabErrorsFixes";
-            this.tabErrorsFixes.Size = new System.Drawing.Size(820, 505);
+            this.tabErrorsFixes.Size = new System.Drawing.Size(1080, 414);
             this.tabErrorsFixes.TabIndex = 19;
             this.tabErrorsFixes.Text = "Errors/Fixes";
             this.tabErrorsFixes.UseVisualStyleBackColor = true;
@@ -3320,7 +3322,7 @@ namespace FTAnalyzer
             this.tabErrorFixSelector.Name = "tabErrorFixSelector";
             this.tabErrorFixSelector.SelectedIndex = 0;
             this.tabErrorFixSelector.ShowToolTips = true;
-            this.tabErrorFixSelector.Size = new System.Drawing.Size(820, 505);
+            this.tabErrorFixSelector.Size = new System.Drawing.Size(1080, 414);
             this.tabErrorFixSelector.TabIndex = 0;
             this.tabErrorFixSelector.SelectedIndexChanged += new System.EventHandler(this.TabErrorFixSelector_SelectedIndexChanged);
             // 
@@ -3331,7 +3333,7 @@ namespace FTAnalyzer
             this.tabDataErrors.Location = new System.Drawing.Point(4, 22);
             this.tabDataErrors.Name = "tabDataErrors";
             this.tabDataErrors.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDataErrors.Size = new System.Drawing.Size(812, 479);
+            this.tabDataErrors.Size = new System.Drawing.Size(1072, 388);
             this.tabDataErrors.TabIndex = 0;
             this.tabDataErrors.Text = "Data Errors";
             this.tabDataErrors.UseVisualStyleBackColor = true;
@@ -3344,7 +3346,7 @@ namespace FTAnalyzer
             this.gbDataErrorTypes.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbDataErrorTypes.Location = new System.Drawing.Point(3, 3);
             this.gbDataErrorTypes.Name = "gbDataErrorTypes";
-            this.gbDataErrorTypes.Size = new System.Drawing.Size(806, 166);
+            this.gbDataErrorTypes.Size = new System.Drawing.Size(1066, 166);
             this.gbDataErrorTypes.TabIndex = 1;
             this.gbDataErrorTypes.TabStop = false;
             this.gbDataErrorTypes.Text = "Types of Data Error to display";
@@ -3381,7 +3383,7 @@ namespace FTAnalyzer
             this.ckbDataErrors.MultiColumn = true;
             this.ckbDataErrors.Name = "ckbDataErrors";
             this.ckbDataErrors.ScrollAlwaysVisible = true;
-            this.ckbDataErrors.Size = new System.Drawing.Size(786, 79);
+            this.ckbDataErrors.Size = new System.Drawing.Size(1046, 79);
             this.ckbDataErrors.TabIndex = 0;
             this.ckbDataErrors.SelectedIndexChanged += new System.EventHandler(this.CkbDataErrors_SelectedIndexChanged);
             // 
@@ -3402,21 +3404,10 @@ namespace FTAnalyzer
             this.tabDuplicates.Location = new System.Drawing.Point(4, 22);
             this.tabDuplicates.Name = "tabDuplicates";
             this.tabDuplicates.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDuplicates.Size = new System.Drawing.Size(812, 479);
+            this.tabDuplicates.Size = new System.Drawing.Size(1072, 388);
             this.tabDuplicates.TabIndex = 1;
             this.tabDuplicates.Text = "Duplicates?";
             this.tabDuplicates.UseVisualStyleBackColor = true;
-            // 
-            // labDuplicateSlider
-            // 
-            this.labDuplicateSlider.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.labDuplicateSlider.AutoSize = true;
-            this.labDuplicateSlider.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labDuplicateSlider.Location = new System.Drawing.Point(841, 31);
-            this.labDuplicateSlider.Name = "labDuplicateSlider";
-            this.labDuplicateSlider.Size = new System.Drawing.Size(104, 13);
-            this.labDuplicateSlider.TabIndex = 31;
-            this.labDuplicateSlider.Text = "Match Quality : 1";
             // 
             // labCompletion
             // 
@@ -3498,7 +3489,7 @@ namespace FTAnalyzer
             this.dgDuplicates.RowHeadersVisible = false;
             this.dgDuplicates.RowHeadersWidth = 50;
             this.dgDuplicates.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgDuplicates.Size = new System.Drawing.Size(1661, 329);
+            this.dgDuplicates.Size = new System.Drawing.Size(1073, 299);
             this.dgDuplicates.TabIndex = 19;
             this.dgDuplicates.VirtualMode = true;
             this.dgDuplicates.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgDuplicates_CellContentClick);
@@ -3509,7 +3500,7 @@ namespace FTAnalyzer
             this.tabLooseBirths.Controls.Add(this.dgLooseBirths);
             this.tabLooseBirths.Location = new System.Drawing.Point(4, 22);
             this.tabLooseBirths.Name = "tabLooseBirths";
-            this.tabLooseBirths.Size = new System.Drawing.Size(812, 479);
+            this.tabLooseBirths.Size = new System.Drawing.Size(1072, 388);
             this.tabLooseBirths.TabIndex = 2;
             this.tabLooseBirths.Text = "Loose Births";
             this.tabLooseBirths.UseVisualStyleBackColor = true;
@@ -3531,7 +3522,7 @@ namespace FTAnalyzer
             this.dgLooseBirths.RowHeadersVisible = false;
             this.dgLooseBirths.RowHeadersWidth = 50;
             this.dgLooseBirths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgLooseBirths.Size = new System.Drawing.Size(812, 479);
+            this.dgLooseBirths.Size = new System.Drawing.Size(1072, 388);
             this.dgLooseBirths.TabIndex = 3;
             this.dgLooseBirths.VirtualMode = true;
             this.dgLooseBirths.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLooseBirths_CellDoubleClick);
@@ -3541,7 +3532,7 @@ namespace FTAnalyzer
             this.tabLooseDeaths.Controls.Add(this.dgLooseDeaths);
             this.tabLooseDeaths.Location = new System.Drawing.Point(4, 22);
             this.tabLooseDeaths.Name = "tabLooseDeaths";
-            this.tabLooseDeaths.Size = new System.Drawing.Size(812, 479);
+            this.tabLooseDeaths.Size = new System.Drawing.Size(1072, 388);
             this.tabLooseDeaths.TabIndex = 3;
             this.tabLooseDeaths.Text = "Loose Deaths";
             this.tabLooseDeaths.UseVisualStyleBackColor = true;
@@ -3563,7 +3554,7 @@ namespace FTAnalyzer
             this.dgLooseDeaths.RowHeadersVisible = false;
             this.dgLooseDeaths.RowHeadersWidth = 50;
             this.dgLooseDeaths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgLooseDeaths.Size = new System.Drawing.Size(812, 479);
+            this.dgLooseDeaths.Size = new System.Drawing.Size(1072, 388);
             this.dgLooseDeaths.TabIndex = 2;
             this.dgLooseDeaths.VirtualMode = true;
             this.dgLooseDeaths.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLooseDeaths_CellDoubleClick);
@@ -3573,7 +3564,7 @@ namespace FTAnalyzer
             this.tabLooseInfo.Controls.Add(this.dgLooseInfo);
             this.tabLooseInfo.Location = new System.Drawing.Point(4, 22);
             this.tabLooseInfo.Name = "tabLooseInfo";
-            this.tabLooseInfo.Size = new System.Drawing.Size(812, 479);
+            this.tabLooseInfo.Size = new System.Drawing.Size(1072, 388);
             this.tabLooseInfo.TabIndex = 4;
             this.tabLooseInfo.Text = "All Loose Info";
             this.tabLooseInfo.UseVisualStyleBackColor = true;
@@ -3595,7 +3586,7 @@ namespace FTAnalyzer
             this.dgLooseInfo.RowHeadersVisible = false;
             this.dgLooseInfo.RowHeadersWidth = 50;
             this.dgLooseInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgLooseInfo.Size = new System.Drawing.Size(812, 479);
+            this.dgLooseInfo.Size = new System.Drawing.Size(1072, 388);
             this.dgLooseInfo.TabIndex = 4;
             this.dgLooseInfo.VirtualMode = true;
             this.dgLooseInfo.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLooseInfo_CellDoubleClick);
@@ -3609,7 +3600,7 @@ namespace FTAnalyzer
             this.tabSurnames.Location = new System.Drawing.Point(4, 22);
             this.tabSurnames.Name = "tabSurnames";
             this.tabSurnames.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSurnames.Size = new System.Drawing.Size(820, 505);
+            this.tabSurnames.Size = new System.Drawing.Size(1080, 414);
             this.tabSurnames.TabIndex = 14;
             this.tabSurnames.Text = "Surnames";
             this.tabSurnames.UseVisualStyleBackColor = true;
@@ -3661,7 +3652,7 @@ namespace FTAnalyzer
             this.dgSurnames.RowHeadersVisible = false;
             this.dgSurnames.RowHeadersWidth = 50;
             this.dgSurnames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgSurnames.Size = new System.Drawing.Size(1079, 337);
+            this.dgSurnames.Size = new System.Drawing.Size(1071, 302);
             this.dgSurnames.TabIndex = 1;
             this.dgSurnames.VirtualMode = true;
             this.dgSurnames.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgSurnames_CellContentClick);
@@ -3742,7 +3733,7 @@ namespace FTAnalyzer
             this.tabFacts.Controls.Add(this.relTypesFacts);
             this.tabFacts.Location = new System.Drawing.Point(4, 22);
             this.tabFacts.Name = "tabFacts";
-            this.tabFacts.Size = new System.Drawing.Size(820, 505);
+            this.tabFacts.Size = new System.Drawing.Size(1080, 414);
             this.tabFacts.TabIndex = 13;
             this.tabFacts.Text = "Facts";
             this.tabFacts.UseVisualStyleBackColor = true;
@@ -3885,7 +3876,7 @@ namespace FTAnalyzer
             this.tabToday.Location = new System.Drawing.Point(4, 22);
             this.tabToday.Name = "tabToday";
             this.tabToday.Padding = new System.Windows.Forms.Padding(3);
-            this.tabToday.Size = new System.Drawing.Size(820, 505);
+            this.tabToday.Size = new System.Drawing.Size(1080, 414);
             this.tabToday.TabIndex = 17;
             this.tabToday.Text = "On This Day";
             this.tabToday.UseVisualStyleBackColor = true;
@@ -3997,7 +3988,7 @@ namespace FTAnalyzer
             this.rtbToday.Location = new System.Drawing.Point(0, 59);
             this.rtbToday.Name = "rtbToday";
             this.rtbToday.ReadOnly = true;
-            this.rtbToday.Size = new System.Drawing.Size(1221, 432);
+            this.rtbToday.Size = new System.Drawing.Size(1084, 359);
             this.rtbToday.TabIndex = 7;
             this.rtbToday.Text = "";
             // 
@@ -4128,6 +4119,17 @@ namespace FTAnalyzer
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // labDuplicateSlider
+            // 
+            this.labDuplicateSlider.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labDuplicateSlider.AutoSize = true;
+            this.labDuplicateSlider.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labDuplicateSlider.Location = new System.Drawing.Point(700, 24);
+            this.labDuplicateSlider.Name = "labDuplicateSlider";
+            this.labDuplicateSlider.Size = new System.Drawing.Size(104, 13);
+            this.labDuplicateSlider.TabIndex = 32;
+            this.labDuplicateSlider.Text = "Match Quality : 1";
             // 
             // MainForm
             // 
@@ -4578,7 +4580,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem mnuSurnamesToExcel;
         private System.Windows.Forms.CheckBox chkIgnoreUnnamedTwins;
         private System.Windows.Forms.Label labCompletion;
-        private System.Windows.Forms.Label labDuplicateSlider;
         private System.Windows.Forms.DataGridViewCheckBoxColumn NonDuplicate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Score;
         private System.Windows.Forms.DataGridViewTextBoxColumn DuplicateIndividualID;
@@ -4591,6 +4592,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.DataGridViewTextBoxColumn MatchName;
         private System.Windows.Forms.DataGridViewTextBoxColumn MatchBirthDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn MatchBirthLocation;
+        private System.Windows.Forms.Label labDuplicateSlider;
     }
 }
 

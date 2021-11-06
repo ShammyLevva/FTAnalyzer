@@ -50,8 +50,8 @@ namespace FTAnalyzer
         {
             try
             {
-                InitializeComponent();
                 loading = true;
+                InitializeComponent();
                 FamilyTree.Instance.Version = $"v{VERSION}";
                 _ = NativeMethods.GetTaskBarPos(); // Sets taskbar offset
                 displayOptionsOnLoadToolStripMenuItem.Checked = GeneralSettings.Default.ReportOptions;

@@ -5,7 +5,11 @@ Initial Load now says how much memory was used during loading and procesing
 Updated packages to latest versions including BruTile & NewtonsoftJSON  
 Changed all main form grids to use virtual grids this should make loading faster  
 Duplicate checking radically overhauled thanks to assistance from Tamura Jones and Enno Borgsteede  
+Added support for England and Wales 2021 census  
 
+**Bugfixes**  
+Remapped sizes of all controls on main form to hopefully eliminate the scroll bar bug  
+Duplicates exclude those with unknown names  
 
 #### Updated Release Version 8.3.1 16th March 2021  
 **Updates**  
