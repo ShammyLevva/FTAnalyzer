@@ -90,6 +90,8 @@ namespace FTAnalyzer.Forms
             this.dgCensus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgCensus.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgCensus.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgCensus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgCensus.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FamilyID,
@@ -109,13 +111,14 @@ namespace FTAnalyzer.Forms
             this.CensusReference,
             this.CensusYear,
             this.Ahnentafel});
-            this.dgCensus.Location = new System.Drawing.Point(0, 28);
+            this.dgCensus.Location = new System.Drawing.Point(0, 52);
+            this.dgCensus.Margin = new System.Windows.Forms.Padding(6);
             this.dgCensus.Name = "dgCensus";
             this.dgCensus.ReadOnly = true;
             this.dgCensus.RowHeadersWidth = 23;
             this.dgCensus.ShowEditingIcon = false;
             this.dgCensus.ShowRowErrors = false;
-            this.dgCensus.Size = new System.Drawing.Size(1038, 530);
+            this.dgCensus.Size = new System.Drawing.Size(1903, 978);
             this.dgCensus.TabIndex = 1;
             this.dgCensus.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.DgCensus_CellContextMenuStripNeeded);
             this.dgCensus.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgCensus_CellDoubleClick);
@@ -128,59 +131,71 @@ namespace FTAnalyzer.Forms
             this.FamilyID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.FamilyID.DataPropertyName = "FamilyID";
             this.FamilyID.HeaderText = "Family ID";
+            this.FamilyID.MinimumWidth = 9;
             this.FamilyID.Name = "FamilyID";
             this.FamilyID.ReadOnly = true;
+            this.FamilyID.Width = 175;
             // 
             // Position
             // 
             this.Position.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Position.DataPropertyName = "Position";
             this.Position.HeaderText = "Position";
+            this.Position.MinimumWidth = 9;
             this.Position.Name = "Position";
             this.Position.ReadOnly = true;
-            this.Position.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Position.Visible = false;
-            this.Position.Width = 5;
+            this.Position.Width = 9;
             // 
             // IndividualID
             // 
             this.IndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.IndividualID.DataPropertyName = "IndividualID";
             this.IndividualID.HeaderText = "Ind. ID";
+            this.IndividualID.MinimumWidth = 9;
             this.IndividualID.Name = "IndividualID";
             this.IndividualID.ReadOnly = true;
+            this.IndividualID.Width = 175;
             // 
             // CensusLoc
             // 
             this.CensusLoc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.CensusLoc.DataPropertyName = "CensusLocation";
             this.CensusLoc.HeaderText = "Likely Census Location";
+            this.CensusLoc.MinimumWidth = 9;
             this.CensusLoc.Name = "CensusLoc";
             this.CensusLoc.ReadOnly = true;
+            this.CensusLoc.Width = 175;
             // 
             // CensusName
             // 
             this.CensusName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.CensusName.DataPropertyName = "CensusName";
             this.CensusName.HeaderText = "Census Name";
+            this.CensusName.MinimumWidth = 9;
             this.CensusName.Name = "CensusName";
             this.CensusName.ReadOnly = true;
+            this.CensusName.Width = 175;
             // 
             // Age
             // 
             this.Age.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Age.DataPropertyName = "Age";
             this.Age.HeaderText = "Age";
+            this.Age.MinimumWidth = 9;
             this.Age.Name = "Age";
             this.Age.ReadOnly = true;
+            this.Age.Width = 175;
             // 
             // Occupation
             // 
             this.Occupation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Occupation.DataPropertyName = "Occupation";
             this.Occupation.HeaderText = "Occupation";
+            this.Occupation.MinimumWidth = 9;
             this.Occupation.Name = "Occupation";
             this.Occupation.ReadOnly = true;
+            this.Occupation.Width = 175;
             // 
             // BirthDate
             // 
@@ -197,8 +212,10 @@ namespace FTAnalyzer.Forms
             this.BirthLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.BirthLocation.DataPropertyName = "BirthLocation";
             this.BirthLocation.HeaderText = "Birth Location";
+            this.BirthLocation.MinimumWidth = 9;
             this.BirthLocation.Name = "BirthLocation";
             this.BirthLocation.ReadOnly = true;
+            this.BirthLocation.Width = 175;
             // 
             // DeathDate
             // 
@@ -215,24 +232,30 @@ namespace FTAnalyzer.Forms
             this.DeathLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.DeathLocation.DataPropertyName = "DeathLocation";
             this.DeathLocation.HeaderText = "Death Location";
+            this.DeathLocation.MinimumWidth = 9;
             this.DeathLocation.Name = "DeathLocation";
             this.DeathLocation.ReadOnly = true;
+            this.DeathLocation.Width = 175;
             // 
             // CensusStatus
             // 
             this.CensusStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.CensusStatus.DataPropertyName = "CensusStatus";
             this.CensusStatus.HeaderText = "Husband / Wife / Child";
+            this.CensusStatus.MinimumWidth = 9;
             this.CensusStatus.Name = "CensusStatus";
             this.CensusStatus.ReadOnly = true;
+            this.CensusStatus.Width = 175;
             // 
             // Relation
             // 
             this.Relation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Relation.DataPropertyName = "Relation";
             this.Relation.HeaderText = "Relation";
+            this.Relation.MinimumWidth = 9;
             this.Relation.Name = "Relation";
             this.Relation.ReadOnly = true;
+            this.Relation.Width = 175;
             // 
             // RelationToRoot
             // 
@@ -258,36 +281,43 @@ namespace FTAnalyzer.Forms
             // 
             this.CensusYear.DataPropertyName = "Census";
             this.CensusYear.HeaderText = "Census";
+            this.CensusYear.MinimumWidth = 9;
             this.CensusYear.Name = "CensusYear";
             this.CensusYear.ReadOnly = true;
+            this.CensusYear.Width = 121;
             // 
             // Ahnentafel
             // 
             this.Ahnentafel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Ahnentafel.DataPropertyName = "Ahnentafel";
             this.Ahnentafel.HeaderText = "Ahnentafel";
+            this.Ahnentafel.MinimumWidth = 9;
             this.Ahnentafel.Name = "Ahnentafel";
             this.Ahnentafel.ReadOnly = true;
+            this.Ahnentafel.Width = 175;
             // 
             // statusStrip
             // 
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsRecords});
-            this.statusStrip.Location = new System.Drawing.Point(0, 561);
+            this.statusStrip.Location = new System.Drawing.Point(0, 1037);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1038, 22);
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 26, 0);
+            this.statusStrip.Size = new System.Drawing.Size(1903, 39);
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "statusStrip1";
             // 
             // tsRecords
             // 
             this.tsRecords.Name = "tsRecords";
-            this.tsRecords.Size = new System.Drawing.Size(118, 17);
+            this.tsRecords.Size = new System.Drawing.Size(206, 30);
             this.tsRecords.Text = "toolStripStatusLabel1";
             // 
             // toolStrip1
             // 
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuSaveCensusColumnLayout,
             this.mnuResetCensusColumns,
@@ -307,7 +337,8 @@ namespace FTAnalyzer.Forms
             this.btnHelp});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1038, 25);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
+            this.toolStrip1.Size = new System.Drawing.Size(1903, 40);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -317,7 +348,7 @@ namespace FTAnalyzer.Forms
             this.mnuSaveCensusColumnLayout.Image = ((System.Drawing.Image)(resources.GetObject("mnuSaveCensusColumnLayout.Image")));
             this.mnuSaveCensusColumnLayout.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuSaveCensusColumnLayout.Name = "mnuSaveCensusColumnLayout";
-            this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(23, 22);
+            this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(40, 34);
             this.mnuSaveCensusColumnLayout.Text = "Save Census Column Sort Order";
             this.mnuSaveCensusColumnLayout.Click += new System.EventHandler(this.MnuSaveCensusColumnLayout_Click);
             // 
@@ -327,14 +358,14 @@ namespace FTAnalyzer.Forms
             this.mnuResetCensusColumns.Image = ((System.Drawing.Image)(resources.GetObject("mnuResetCensusColumns.Image")));
             this.mnuResetCensusColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuResetCensusColumns.Name = "mnuResetCensusColumns";
-            this.mnuResetCensusColumns.Size = new System.Drawing.Size(23, 22);
+            this.mnuResetCensusColumns.Size = new System.Drawing.Size(40, 34);
             this.mnuResetCensusColumns.Text = "Reset Census Column Sort Order to Default";
             this.mnuResetCensusColumns.Click += new System.EventHandler(this.MnuResetCensusColumns_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 40);
             // 
             // printToolStripButton
             // 
@@ -342,7 +373,7 @@ namespace FTAnalyzer.Forms
             this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
             this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripButton.Name = "printToolStripButton";
-            this.printToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.printToolStripButton.Size = new System.Drawing.Size(40, 34);
             this.printToolStripButton.Text = "&Print";
             this.printToolStripButton.Click += new System.EventHandler(this.PrintToolStripButton_Click);
             // 
@@ -352,14 +383,14 @@ namespace FTAnalyzer.Forms
             this.printPreviewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripButton.Image")));
             this.printPreviewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
-            this.printPreviewToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.printPreviewToolStripButton.Size = new System.Drawing.Size(40, 34);
             this.printPreviewToolStripButton.Text = "Print Preview...";
             this.printPreviewToolStripButton.Click += new System.EventHandler(this.PrintPreviewToolStripButton_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator.Size = new System.Drawing.Size(6, 40);
             // 
             // mnuExportToExcel
             // 
@@ -367,14 +398,14 @@ namespace FTAnalyzer.Forms
             this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
             this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuExportToExcel.Name = "mnuExportToExcel";
-            this.mnuExportToExcel.Size = new System.Drawing.Size(23, 22);
+            this.mnuExportToExcel.Size = new System.Drawing.Size(40, 34);
             this.mnuExportToExcel.Text = "Export to Excel";
             this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 40);
             // 
             // tsBtnMapLocation
             // 
@@ -382,7 +413,7 @@ namespace FTAnalyzer.Forms
             this.tsBtnMapLocation.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnMapLocation.Image")));
             this.tsBtnMapLocation.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnMapLocation.Name = "tsBtnMapLocation";
-            this.tsBtnMapLocation.Size = new System.Drawing.Size(174, 22);
+            this.tsBtnMapLocation.Size = new System.Drawing.Size(302, 34);
             this.tsBtnMapLocation.Text = "Show Location on Google Map";
             this.tsBtnMapLocation.Click += new System.EventHandler(this.TsBtnMapLocation_Click);
             // 
@@ -392,24 +423,25 @@ namespace FTAnalyzer.Forms
             this.tsBtnMapOSLocation.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnMapOSLocation.Image")));
             this.tsBtnMapOSLocation.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnMapOSLocation.Name = "tsBtnMapOSLocation";
-            this.tsBtnMapOSLocation.Size = new System.Drawing.Size(151, 22);
+            this.tsBtnMapOSLocation.Size = new System.Drawing.Size(263, 34);
             this.tsBtnMapOSLocation.Text = "Show Location on OS Map";
             this.tsBtnMapOSLocation.Click += new System.EventHandler(this.TsBtnMapOSLocation_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 40);
             // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(117, 22);
+            this.toolStripLabel1.Size = new System.Drawing.Size(206, 34);
             this.toolStripLabel1.Text = "Census search using:";
             // 
             // cbCensusSearchProvider
             // 
             this.cbCensusSearchProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCensusSearchProvider.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbCensusSearchProvider.Items.AddRange(new object[] {
             "Ancestry",
             "Find My Past",
@@ -417,13 +449,13 @@ namespace FTAnalyzer.Forms
             "FamilySearch",
             "Scotlands People"});
             this.cbCensusSearchProvider.Name = "cbCensusSearchProvider";
-            this.cbCensusSearchProvider.Size = new System.Drawing.Size(121, 25);
+            this.cbCensusSearchProvider.Size = new System.Drawing.Size(121, 40);
             this.cbCensusSearchProvider.SelectedIndexChanged += new System.EventHandler(this.CbCensusSearchProvider_SelectedIndexChanged);
             // 
             // toolStripLabel2
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(47, 22);
+            this.toolStripLabel2.Size = new System.Drawing.Size(82, 34);
             this.toolStripLabel2.Text = "Region:";
             // 
             // cbRegion
@@ -433,13 +465,14 @@ namespace FTAnalyzer.Forms
             ".co.uk",
             ".ca",
             ".com.au"});
+            this.cbRegion.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbRegion.Items.AddRange(new object[] {
             ".com",
             ".co.uk",
             ".ca",
             ".com.au"});
             this.cbRegion.Name = "cbRegion";
-            this.cbRegion.Size = new System.Drawing.Size(121, 25);
+            this.cbRegion.Size = new System.Drawing.Size(121, 40);
             this.cbRegion.Text = ".co.uk";
             this.cbRegion.SelectedIndexChanged += new System.EventHandler(this.CbRegion_SelectedIndexChanged);
             // 
@@ -449,33 +482,35 @@ namespace FTAnalyzer.Forms
             this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
             this.btnHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(23, 22);
+            this.btnHelp.Size = new System.Drawing.Size(40, 34);
             this.btnHelp.Text = "toolStripButton1";
             this.btnHelp.Click += new System.EventHandler(this.BtnHelp_Click);
             // 
             // contextMenuStrip
             // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuViewFacts});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(190, 26);
+            this.contextMenuStrip.Size = new System.Drawing.Size(288, 40);
             // 
             // mnuViewFacts
             // 
             this.mnuViewFacts.Name = "mnuViewFacts";
-            this.mnuViewFacts.Size = new System.Drawing.Size(189, 22);
+            this.mnuViewFacts.Size = new System.Drawing.Size(287, 36);
             this.mnuViewFacts.Text = "View Individuals Facts";
             this.mnuViewFacts.Click += new System.EventHandler(this.MnuViewFacts_Click);
             // 
             // Census
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1038, 583);
+            this.ClientSize = new System.Drawing.Size(1903, 1076);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.dgCensus);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Census";
             this.Text = "Census Records to search for";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Census_FormClosed);

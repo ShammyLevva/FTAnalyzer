@@ -123,10 +123,11 @@ namespace FTAnalyzer.Forms
             this.dgReportSheet.AllowUserToAddRows = false;
             this.dgReportSheet.AllowUserToDeleteRows = false;
             this.dgReportSheet.AllowUserToOrderColumns = true;
-            this.dgReportSheet.AllowUserToResizeRows = false;
             this.dgReportSheet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgReportSheet.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgReportSheet.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgReportSheet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgReportSheet.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IndividualID,
@@ -180,13 +181,13 @@ namespace FTAnalyzer.Forms
             this.BestLocation,
             this.Ahnentafel});
             this.dgReportSheet.ContextMenuStrip = this.contextMenuStrip;
-            this.dgReportSheet.Location = new System.Drawing.Point(0, 54);
+            this.dgReportSheet.Location = new System.Drawing.Point(0, 52);
             this.dgReportSheet.Margin = new System.Windows.Forms.Padding(6);
             this.dgReportSheet.MultiSelect = false;
             this.dgReportSheet.Name = "dgReportSheet";
             this.dgReportSheet.ReadOnly = true;
             this.dgReportSheet.RowHeadersWidth = 20;
-            this.dgReportSheet.Size = new System.Drawing.Size(2076, 1019);
+            this.dgReportSheet.Size = new System.Drawing.Size(1903, 978);
             this.dgReportSheet.TabIndex = 1;
             this.dgReportSheet.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.DgReportSheet_CellContextMenuStripNeeded);
             this.dgReportSheet.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgReportSheet_CellDoubleClick);
@@ -198,12 +199,12 @@ namespace FTAnalyzer.Forms
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuViewFacts});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(322, 42);
+            this.contextMenuStrip.Size = new System.Drawing.Size(288, 40);
             // 
             // mnuViewFacts
             // 
             this.mnuViewFacts.Name = "mnuViewFacts";
-            this.mnuViewFacts.Size = new System.Drawing.Size(321, 38);
+            this.mnuViewFacts.Size = new System.Drawing.Size(287, 36);
             this.mnuViewFacts.Text = "View Individuals Facts";
             this.mnuViewFacts.Click += new System.EventHandler(this.MnuViewFacts_Click);
             // 
@@ -212,17 +213,17 @@ namespace FTAnalyzer.Forms
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsRecords});
-            this.statusStrip.Location = new System.Drawing.Point(0, 1079);
+            this.statusStrip.Location = new System.Drawing.Point(0, 1037);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 28, 0);
-            this.statusStrip.Size = new System.Drawing.Size(2076, 42);
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 26, 0);
+            this.statusStrip.Size = new System.Drawing.Size(1903, 39);
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "statusStrip1";
             // 
             // tsRecords
             // 
             this.tsRecords.Name = "tsRecords";
-            this.tsRecords.Size = new System.Drawing.Size(238, 32);
+            this.tsRecords.Size = new System.Drawing.Size(206, 30);
             this.tsRecords.Text = "toolStripStatusLabel1";
             // 
             // toolStrip1
@@ -247,7 +248,7 @@ namespace FTAnalyzer.Forms
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(2076, 42);
+            this.toolStrip1.Size = new System.Drawing.Size(1903, 42);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -257,7 +258,7 @@ namespace FTAnalyzer.Forms
             this.mnuSaveCensusColumnLayout.Image = ((System.Drawing.Image)(resources.GetObject("mnuSaveCensusColumnLayout.Image")));
             this.mnuSaveCensusColumnLayout.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuSaveCensusColumnLayout.Name = "mnuSaveCensusColumnLayout";
-            this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(46, 36);
+            this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(40, 36);
             this.mnuSaveCensusColumnLayout.Text = "Save Census Column Sort Order";
             this.mnuSaveCensusColumnLayout.Click += new System.EventHandler(this.MnuSaveCensusColumnLayout_Click);
             // 
@@ -267,7 +268,7 @@ namespace FTAnalyzer.Forms
             this.mnuResetCensusColumns.Image = ((System.Drawing.Image)(resources.GetObject("mnuResetCensusColumns.Image")));
             this.mnuResetCensusColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuResetCensusColumns.Name = "mnuResetCensusColumns";
-            this.mnuResetCensusColumns.Size = new System.Drawing.Size(46, 36);
+            this.mnuResetCensusColumns.Size = new System.Drawing.Size(40, 36);
             this.mnuResetCensusColumns.Text = "Reset Census Column Sort Order to Default";
             this.mnuResetCensusColumns.Click += new System.EventHandler(this.MnuResetCensusColumns_Click);
             // 
@@ -282,7 +283,7 @@ namespace FTAnalyzer.Forms
             this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
             this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripButton.Name = "printToolStripButton";
-            this.printToolStripButton.Size = new System.Drawing.Size(46, 36);
+            this.printToolStripButton.Size = new System.Drawing.Size(40, 36);
             this.printToolStripButton.Text = "&Print";
             this.printToolStripButton.Click += new System.EventHandler(this.PrintToolStripButton_Click);
             // 
@@ -292,7 +293,7 @@ namespace FTAnalyzer.Forms
             this.printPreviewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripButton.Image")));
             this.printPreviewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
-            this.printPreviewToolStripButton.Size = new System.Drawing.Size(46, 36);
+            this.printPreviewToolStripButton.Size = new System.Drawing.Size(40, 36);
             this.printPreviewToolStripButton.Text = "Print Preview...";
             this.printPreviewToolStripButton.Click += new System.EventHandler(this.PrintPreviewToolStripButton_Click);
             // 
@@ -307,7 +308,7 @@ namespace FTAnalyzer.Forms
             this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
             this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuExportToExcel.Name = "mnuExportToExcel";
-            this.mnuExportToExcel.Size = new System.Drawing.Size(46, 36);
+            this.mnuExportToExcel.Size = new System.Drawing.Size(40, 36);
             this.mnuExportToExcel.Text = "Export to Excel";
             this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
             // 
@@ -319,12 +320,13 @@ namespace FTAnalyzer.Forms
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(236, 36);
+            this.toolStripLabel1.Size = new System.Drawing.Size(206, 36);
             this.toolStripLabel1.Text = "Census search using:";
             // 
             // cbCensusSearchProvider
             // 
             this.cbCensusSearchProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCensusSearchProvider.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbCensusSearchProvider.Items.AddRange(new object[] {
             "Ancestry",
             "Find My Past",
@@ -332,37 +334,39 @@ namespace FTAnalyzer.Forms
             "FamilySearch",
             "Scotlands People"});
             this.cbCensusSearchProvider.Name = "cbCensusSearchProvider";
-            this.cbCensusSearchProvider.Size = new System.Drawing.Size(238, 42);
+            this.cbCensusSearchProvider.Size = new System.Drawing.Size(219, 42);
             this.cbCensusSearchProvider.SelectedIndexChanged += new System.EventHandler(this.CbCensusSearchProvider_SelectedIndexChanged);
             // 
             // toolStripLabel3
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(94, 36);
+            this.toolStripLabel3.Size = new System.Drawing.Size(82, 36);
             this.toolStripLabel3.Text = "Region:";
             // 
             // cbRegion
             // 
+            this.cbRegion.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbRegion.Items.AddRange(new object[] {
             ".com",
             ".co.uk",
             ".ca",
             ".com.au"});
             this.cbRegion.Name = "cbRegion";
-            this.cbRegion.Size = new System.Drawing.Size(238, 42);
+            this.cbRegion.Size = new System.Drawing.Size(219, 42);
             this.cbRegion.Text = ".co.uk";
             this.cbRegion.SelectedIndexChanged += new System.EventHandler(this.CbRegion_SelectedIndexChanged);
             // 
             // toolStripLabel2
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(80, 36);
+            this.toolStripLabel2.Size = new System.Drawing.Size(69, 36);
             this.toolStripLabel2.Text = "Filter :";
             // 
             // cbFilter
             // 
             this.cbFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFilter.DropDownWidth = 170;
+            this.cbFilter.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbFilter.Items.AddRange(new object[] {
             "All Individuals",
             "None Found (All Red)",
@@ -374,7 +378,7 @@ namespace FTAnalyzer.Forms
             "Some Found (Some Green)",
             "Known Missing (Mid Green)"});
             this.cbFilter.Name = "cbFilter";
-            this.cbFilter.Size = new System.Drawing.Size(185, 42);
+            this.cbFilter.Size = new System.Drawing.Size(170, 42);
             this.cbFilter.SelectedIndexChanged += new System.EventHandler(this.CbFilter_SelectedIndexChanged);
             // 
             // printDialog
@@ -442,7 +446,7 @@ namespace FTAnalyzer.Forms
             this.RelationToRoot.MinimumWidth = 100;
             this.RelationToRoot.Name = "RelationToRoot";
             this.RelationToRoot.ReadOnly = true;
-            this.RelationToRoot.Width = 150;
+            this.RelationToRoot.Width = 145;
             // 
             // C1841
             // 
@@ -452,7 +456,6 @@ namespace FTAnalyzer.Forms
             this.C1841.MinimumWidth = 60;
             this.C1841.Name = "C1841";
             this.C1841.ReadOnly = true;
-            this.C1841.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.C1841.Width = 60;
             // 
             // C1851
@@ -463,7 +466,6 @@ namespace FTAnalyzer.Forms
             this.C1851.MinimumWidth = 60;
             this.C1851.Name = "C1851";
             this.C1851.ReadOnly = true;
-            this.C1851.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.C1851.Width = 60;
             // 
             // C1861
@@ -474,7 +476,6 @@ namespace FTAnalyzer.Forms
             this.C1861.MinimumWidth = 60;
             this.C1861.Name = "C1861";
             this.C1861.ReadOnly = true;
-            this.C1861.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.C1861.Width = 60;
             // 
             // C1871
@@ -485,7 +486,6 @@ namespace FTAnalyzer.Forms
             this.C1871.MinimumWidth = 60;
             this.C1871.Name = "C1871";
             this.C1871.ReadOnly = true;
-            this.C1871.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.C1871.Width = 60;
             // 
             // C1881
@@ -496,7 +496,6 @@ namespace FTAnalyzer.Forms
             this.C1881.MinimumWidth = 60;
             this.C1881.Name = "C1881";
             this.C1881.ReadOnly = true;
-            this.C1881.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.C1881.Width = 60;
             // 
             // C1891
@@ -507,7 +506,6 @@ namespace FTAnalyzer.Forms
             this.C1891.MinimumWidth = 60;
             this.C1891.Name = "C1891";
             this.C1891.ReadOnly = true;
-            this.C1891.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.C1891.Width = 60;
             // 
             // C1901
@@ -518,7 +516,6 @@ namespace FTAnalyzer.Forms
             this.C1901.MinimumWidth = 60;
             this.C1901.Name = "C1901";
             this.C1901.ReadOnly = true;
-            this.C1901.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.C1901.Width = 60;
             // 
             // C1911
@@ -529,7 +526,6 @@ namespace FTAnalyzer.Forms
             this.C1911.MinimumWidth = 60;
             this.C1911.Name = "C1911";
             this.C1911.ReadOnly = true;
-            this.C1911.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.C1911.Width = 60;
             // 
             // C1921
@@ -540,7 +536,6 @@ namespace FTAnalyzer.Forms
             this.C1921.MinimumWidth = 60;
             this.C1921.Name = "C1921";
             this.C1921.ReadOnly = true;
-            this.C1921.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.C1921.Width = 60;
             // 
             // C1939
@@ -551,7 +546,6 @@ namespace FTAnalyzer.Forms
             this.C1939.MinimumWidth = 60;
             this.C1939.Name = "C1939";
             this.C1939.ReadOnly = true;
-            this.C1939.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.C1939.Width = 60;
             // 
             // US1790
@@ -562,7 +556,6 @@ namespace FTAnalyzer.Forms
             this.US1790.MinimumWidth = 60;
             this.US1790.Name = "US1790";
             this.US1790.ReadOnly = true;
-            this.US1790.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.US1790.Width = 60;
             // 
             // US1800
@@ -573,7 +566,6 @@ namespace FTAnalyzer.Forms
             this.US1800.MinimumWidth = 60;
             this.US1800.Name = "US1800";
             this.US1800.ReadOnly = true;
-            this.US1800.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.US1800.Width = 60;
             // 
             // US1810
@@ -584,7 +576,6 @@ namespace FTAnalyzer.Forms
             this.US1810.MinimumWidth = 60;
             this.US1810.Name = "US1810";
             this.US1810.ReadOnly = true;
-            this.US1810.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.US1810.Width = 60;
             // 
             // US1820
@@ -595,7 +586,6 @@ namespace FTAnalyzer.Forms
             this.US1820.MinimumWidth = 60;
             this.US1820.Name = "US1820";
             this.US1820.ReadOnly = true;
-            this.US1820.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.US1820.Width = 60;
             // 
             // US1830
@@ -606,7 +596,6 @@ namespace FTAnalyzer.Forms
             this.US1830.MinimumWidth = 60;
             this.US1830.Name = "US1830";
             this.US1830.ReadOnly = true;
-            this.US1830.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.US1830.Width = 60;
             // 
             // US1840
@@ -617,7 +606,6 @@ namespace FTAnalyzer.Forms
             this.US1840.MinimumWidth = 60;
             this.US1840.Name = "US1840";
             this.US1840.ReadOnly = true;
-            this.US1840.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.US1840.Width = 60;
             // 
             // US1850
@@ -628,7 +616,6 @@ namespace FTAnalyzer.Forms
             this.US1850.MinimumWidth = 60;
             this.US1850.Name = "US1850";
             this.US1850.ReadOnly = true;
-            this.US1850.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.US1850.Width = 60;
             // 
             // US1860
@@ -639,7 +626,6 @@ namespace FTAnalyzer.Forms
             this.US1860.MinimumWidth = 60;
             this.US1860.Name = "US1860";
             this.US1860.ReadOnly = true;
-            this.US1860.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.US1860.Width = 60;
             // 
             // US1870
@@ -660,7 +646,6 @@ namespace FTAnalyzer.Forms
             this.US1880.MinimumWidth = 60;
             this.US1880.Name = "US1880";
             this.US1880.ReadOnly = true;
-            this.US1880.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.US1880.Width = 60;
             // 
             // US1890
@@ -671,7 +656,6 @@ namespace FTAnalyzer.Forms
             this.US1890.MinimumWidth = 60;
             this.US1890.Name = "US1890";
             this.US1890.ReadOnly = true;
-            this.US1890.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.US1890.Width = 60;
             // 
             // US1900
@@ -682,7 +666,6 @@ namespace FTAnalyzer.Forms
             this.US1900.MinimumWidth = 60;
             this.US1900.Name = "US1900";
             this.US1900.ReadOnly = true;
-            this.US1900.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.US1900.Width = 60;
             // 
             // US1910
@@ -693,7 +676,6 @@ namespace FTAnalyzer.Forms
             this.US1910.MinimumWidth = 60;
             this.US1910.Name = "US1910";
             this.US1910.ReadOnly = true;
-            this.US1910.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.US1910.Width = 60;
             // 
             // US1920
@@ -704,7 +686,6 @@ namespace FTAnalyzer.Forms
             this.US1920.MinimumWidth = 60;
             this.US1920.Name = "US1920";
             this.US1920.ReadOnly = true;
-            this.US1920.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.US1920.Width = 60;
             // 
             // US1930
@@ -715,7 +696,6 @@ namespace FTAnalyzer.Forms
             this.US1930.MinimumWidth = 60;
             this.US1930.Name = "US1930";
             this.US1930.ReadOnly = true;
-            this.US1930.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.US1930.Width = 60;
             // 
             // US1940
@@ -726,7 +706,6 @@ namespace FTAnalyzer.Forms
             this.US1940.MinimumWidth = 60;
             this.US1940.Name = "US1940";
             this.US1940.ReadOnly = true;
-            this.US1940.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.US1940.Width = 60;
             // 
             // US1950
@@ -737,7 +716,6 @@ namespace FTAnalyzer.Forms
             this.US1950.MinimumWidth = 60;
             this.US1950.Name = "US1950";
             this.US1950.ReadOnly = true;
-            this.US1950.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.US1950.Width = 60;
             // 
             // Can1851
@@ -748,7 +726,6 @@ namespace FTAnalyzer.Forms
             this.Can1851.MinimumWidth = 60;
             this.Can1851.Name = "Can1851";
             this.Can1851.ReadOnly = true;
-            this.Can1851.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Can1851.Width = 60;
             // 
             // Can1861
@@ -759,7 +736,6 @@ namespace FTAnalyzer.Forms
             this.Can1861.MinimumWidth = 60;
             this.Can1861.Name = "Can1861";
             this.Can1861.ReadOnly = true;
-            this.Can1861.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Can1861.Width = 60;
             // 
             // Can1871
@@ -770,7 +746,6 @@ namespace FTAnalyzer.Forms
             this.Can1871.MinimumWidth = 60;
             this.Can1871.Name = "Can1871";
             this.Can1871.ReadOnly = true;
-            this.Can1871.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Can1871.Width = 60;
             // 
             // Can1881
@@ -781,7 +756,6 @@ namespace FTAnalyzer.Forms
             this.Can1881.MinimumWidth = 60;
             this.Can1881.Name = "Can1881";
             this.Can1881.ReadOnly = true;
-            this.Can1881.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Can1881.Width = 60;
             // 
             // Can1891
@@ -792,7 +766,6 @@ namespace FTAnalyzer.Forms
             this.Can1891.MinimumWidth = 60;
             this.Can1891.Name = "Can1891";
             this.Can1891.ReadOnly = true;
-            this.Can1891.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Can1891.Width = 60;
             // 
             // Can1901
@@ -803,7 +776,6 @@ namespace FTAnalyzer.Forms
             this.Can1901.MinimumWidth = 60;
             this.Can1901.Name = "Can1901";
             this.Can1901.ReadOnly = true;
-            this.Can1901.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Can1901.Width = 60;
             // 
             // Can1906
@@ -814,7 +786,6 @@ namespace FTAnalyzer.Forms
             this.Can1906.MinimumWidth = 60;
             this.Can1906.Name = "Can1906";
             this.Can1906.ReadOnly = true;
-            this.Can1906.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Can1906.Width = 60;
             // 
             // Can1911
@@ -836,7 +807,6 @@ namespace FTAnalyzer.Forms
             this.Can1916.MinimumWidth = 60;
             this.Can1916.Name = "Can1916";
             this.Can1916.ReadOnly = true;
-            this.Can1916.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Can1916.Width = 60;
             // 
             // Can1921
@@ -847,7 +817,6 @@ namespace FTAnalyzer.Forms
             this.Can1921.MinimumWidth = 60;
             this.Can1921.Name = "Can1921";
             this.Can1921.ReadOnly = true;
-            this.Can1921.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Can1921.Width = 60;
             // 
             // Ire1901
@@ -858,7 +827,6 @@ namespace FTAnalyzer.Forms
             this.Ire1901.MinimumWidth = 60;
             this.Ire1901.Name = "Ire1901";
             this.Ire1901.ReadOnly = true;
-            this.Ire1901.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Ire1901.Width = 60;
             // 
             // Ire1911
@@ -869,7 +837,6 @@ namespace FTAnalyzer.Forms
             this.Ire1911.MinimumWidth = 60;
             this.Ire1911.Name = "Ire1911";
             this.Ire1911.ReadOnly = true;
-            this.Ire1911.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Ire1911.Width = 60;
             // 
             // BirthDate
@@ -930,13 +897,13 @@ namespace FTAnalyzer.Forms
             this.Ahnentafel.MinimumWidth = 20;
             this.Ahnentafel.Name = "Ahnentafel";
             this.Ahnentafel.ReadOnly = true;
-            this.Ahnentafel.Width = 160;
+            this.Ahnentafel.Width = 147;
             // 
             // ColourCensus
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2076, 1121);
+            this.ClientSize = new System.Drawing.Size(1903, 1076);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.dgReportSheet);
