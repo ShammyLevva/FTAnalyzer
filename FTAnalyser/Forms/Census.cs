@@ -141,8 +141,8 @@ namespace FTAnalyzer.Forms
                 string currentRowText = "";
                 bool highlighted = true;
 
-                Font boldFont = new Font(dgCensus.DefaultCellStyle.Font, FontStyle.Bold);
-                Font regularFont = new Font(dgCensus.DefaultCellStyle.Font, FontStyle.Regular);
+                Font boldFont = new Font(dgCensus.DefaultCellStyle.Font.FontFamily, Properties.FontSettings.Default.FontSize, FontStyle.Bold);
+                Font regularFont = new Font(dgCensus.DefaultCellStyle.Font.FontFamily, Properties.FontSettings.Default.FontSize, FontStyle.Regular);
                 int sortColumn = dgCensus.SortedColumn.Index;
                 foreach (DataGridViewRow row in dgCensus.Rows)
                 {

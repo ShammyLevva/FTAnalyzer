@@ -39,8 +39,8 @@ namespace FTAnalyzer.Forms
                 dgFacts.AutoGenerateColumns = false;
                 ExtensionMethods.DoubleBuffered(dgFacts, true);
                 reportFormHelper = new ReportFormHelper(this, Text, dgFacts, ResetTable, "Facts");
-                italicFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Italic);
-                linkFont = new Font(dgFacts.DefaultCellStyle.Font, FontStyle.Underline);
+                italicFont = new Font(dgFacts.DefaultCellStyle.Font.FontFamily, Properties.FontSettings.Default.FontSize, FontStyle.Italic);
+                linkFont = new Font(dgFacts.DefaultCellStyle.Font.FontFamily, Properties.FontSettings.Default.FontSize, FontStyle.Underline);
                 dgFacts.Columns["IndividualID"].Visible = true;
                 dgFacts.Columns["CensusReference"].Visible = true;
                 dgFacts.Columns["IgnoreFact"].Visible = false;

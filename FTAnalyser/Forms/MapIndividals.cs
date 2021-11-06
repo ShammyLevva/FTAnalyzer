@@ -29,7 +29,7 @@ namespace FTAnalyzer
                 dgIndividuals.AutoGenerateColumns = false;
                 dgIndividuals.DataSource = new SortableBindingList<MapLocation>(this.locations);
                 reportFormHelper = new ReportFormHelper(this, this.Text, dgIndividuals, this.ResetTable, "Map Individuals");
-                italicFont = new Font(dgIndividuals.DefaultCellStyle.Font, FontStyle.Italic);
+                italicFont = new Font(dgIndividuals.DefaultCellStyle.Font.FontFamily, Properties.FontSettings.Default.FontSize, FontStyle.Italic);
                 reportFormHelper.LoadColumnLayout("MapIndividualColumns.xml");
                 tsRecords.Text = this.locations.Count + " Records. " + Properties.Messages.Hints_Individual;
                 MapLocation mostCommon = this.locations.MostCommon();

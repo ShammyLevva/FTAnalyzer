@@ -32,7 +32,7 @@ namespace FTAnalyzer.Forms
                 _reportList = new SortableBindingList<IDisplayColourCensus>(reportList);
                 reportFormHelper = new ReportFormHelper(this, "Colour Census Report", dgReportSheet, ResetTable, "Colour Census");
 
-                boldFont = new Font(dgReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
+                boldFont = new Font(dgReportSheet.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
                 styles = new Dictionary<int, DataGridViewCellStyle>();
                 DataGridViewCellStyle notAlive = new DataGridViewCellStyle();
                 notAlive.BackColor = notAlive.ForeColor = Color.DarkGray;
