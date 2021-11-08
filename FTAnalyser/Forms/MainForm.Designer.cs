@@ -2375,6 +2375,8 @@ namespace FTAnalyzer
             // chkAnyCensusYear
             // 
             this.chkAnyCensusYear.AutoSize = true;
+            this.chkAnyCensusYear.Checked = true;
+            this.chkAnyCensusYear.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkAnyCensusYear.Location = new System.Drawing.Point(339, 129);
             this.chkAnyCensusYear.Name = "chkAnyCensusYear";
             this.chkAnyCensusYear.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
