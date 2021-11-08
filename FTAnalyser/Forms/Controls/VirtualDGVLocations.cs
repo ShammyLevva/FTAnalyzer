@@ -22,7 +22,7 @@
                     return loc.Longitude;
 #if __PC__
                 case nameof(IDisplayLocation.Icon):
-                    return loc.Icon;
+                    return GraphicsUtilities.ResizeImageToCurrentScale(loc.Icon);
 #endif
                 case nameof(IDisplayLocation.Geocoded):
                     return loc.Geocoded;

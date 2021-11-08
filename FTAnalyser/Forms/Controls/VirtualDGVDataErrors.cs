@@ -1,4 +1,6 @@
-﻿namespace FTAnalyzer.Forms.Controls
+﻿using System.Windows;
+
+namespace FTAnalyzer.Forms.Controls
 {
     class VirtualDGVDataErrors : VirtualDataGridView<IDisplayDataError>
     {
@@ -6,8 +8,10 @@
         {
             switch (propertyName)
             {
+#if __PC__
                 case nameof(IDisplayDataError.Icon):
-                    return err.Icon;
+                    return GraphicsUtilities.ResizeImageToCurrentScale(err.Icon);
+#endif
                 case nameof(IDisplayDataError.ErrorType):
                     return err.ErrorType;
                 case nameof(IDisplayDataError.Reference):

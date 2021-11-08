@@ -399,6 +399,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Graphics\FactImage.cs" />
     <Compile Include="Graphics\FactLocationImage.cs" />
+    <Compile Include="Graphics\GraphicsUtilities.cs" />
     <Compile Include="Mapping\ClusterLayer.cs" />
     <Compile Include="Mapping\GeoResponse.cs" />
     <Compile Include="Mapping\GoogleAPIKey.cs" />
