@@ -147,8 +147,8 @@
     <AssemblyOriginatorKeyFile>code signing certificate. 2019.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=3.1.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\BruTile.3.1.3\lib\net45\BruTile.dll</HintPath>
+    <Reference Include="BruTile, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\BruTile.4.0.0\lib\netstandard2.0\BruTile.dll</HintPath>
     </Reference>
     <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
@@ -169,11 +169,11 @@
     <Reference Include="gdal_csharp, Version=1.0.7372.36899, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
       <HintPath>packages\GDAL.2.4.4\lib\net40\gdal_csharp.dll</HintPath>
     </Reference>
-    <Reference Include="GoogleAnalyticsTracker.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=04ab204e84b117c0, processorArchitecture=MSIL">
-      <HintPath>packages\GoogleAnalyticsTracker.Core.6.0.5\lib\netstandard2.0\GoogleAnalyticsTracker.Core.dll</HintPath>
+    <Reference Include="GoogleAnalyticsTracker.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=04ab204e84b117c0, processorArchitecture=MSIL">
+      <HintPath>packages\GoogleAnalyticsTracker.Core.7.0.0\lib\netstandard2.0\GoogleAnalyticsTracker.Core.dll</HintPath>
     </Reference>
-    <Reference Include="GoogleAnalyticsTracker.Simple, Version=6.0.0.0, Culture=neutral, PublicKeyToken=04ab204e84b117c0, processorArchitecture=MSIL">
-      <HintPath>packages\GoogleAnalyticsTracker.Simple.6.0.5\lib\netstandard2.0\GoogleAnalyticsTracker.Simple.dll</HintPath>
+    <Reference Include="GoogleAnalyticsTracker.Simple, Version=1.0.0.0, Culture=neutral, PublicKeyToken=04ab204e84b117c0, processorArchitecture=MSIL">
+      <HintPath>packages\GoogleAnalyticsTracker.Simple.7.0.0\lib\netstandard2.0\GoogleAnalyticsTracker.Simple.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.11.32.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>packages\HtmlAgilityPack.1.11.32\lib\Net45\HtmlAgilityPack.dll</HintPath>
