@@ -7,11 +7,13 @@ Changed all main form grids to use virtual grids this should make loading faster
 Duplicate checking radically overhauled thanks to assistance from Tamura Jones and Enno Borgsteede  
 Added support for England and Wales 2021 census  
 Removed 1931 England and Wales as census as it was destroyed  
+Added feature to facts tab to filter on alternate/preferred facts  
 
 **Bugfixes**  
 Remapped sizes of all controls on main form to hopefully eliminate the scroll bar bug  
 Duplicates exclude those with unknown names  
 Icon sizes now scale if using a high resolution monitor  
+Google lookups forced to use HTMLencoded strings  
 
 #### Updated Release Version 8.3.1 16th March 2021  
 **Updates**  

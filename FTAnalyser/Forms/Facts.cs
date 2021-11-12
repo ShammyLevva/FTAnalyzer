@@ -75,7 +75,9 @@ namespace FTAnalyzer.Forms
             Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsFamiliesEvent);
         }
 
-        public Facts(IEnumerable<Individual> individuals, List<string> factTypes, List<string> excludedTypes)
+        public enum AlternateFacts { AllFacts, PreferredOnly, AlternateOnly }
+
+        public Facts(IEnumerable<Individual> individuals, List<string> factTypes, List<string> excludedTypes, AlternateFacts alternateFacts)
             : this()
         {
             allFacts = true;
@@ -86,13 +88,13 @@ namespace FTAnalyzer.Forms
                 if (factTypes == null)
                     AddIndividualsFacts(ind);
                 else
-                    AddIndividualsFacts(ind, factTypes, excludedTypes);
+                    AddIndividualsFacts(ind, factTypes, excludedTypes, alternateFacts);
                 int after = facts.Count;
                 if (before != after)
                     distinctIndividuals++;
             }
-            string text = distinctIndividuals + " individuals.";
-            Text = "Facts Report for all " + text + " Facts count: " + facts.Count;
+            string text = $"{distinctIndividuals} individuals.";
+            Text = $"Facts Report for all {text} Facts count: {facts.Count}";
             SetupFacts(text);
             Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsGroupIndividualsEvent);
         }
@@ -294,11 +296,15 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void AddIndividualsFacts(Individual individual, List<string> factTypes, List<string> excludedTypes)
+        void AddIndividualsFacts(Individual individual, List<string> factTypes, List<string> excludedTypes, AlternateFacts alternateFacts)
         {
             if (individual != null)
             {
                 IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
+                if (alternateFacts == AlternateFacts.PreferredOnly)
+                    list = list.Where(x => x.Preferred);
+                else if (alternateFacts == AlternateFacts.AlternateOnly)
+                    list = list.Where(x => !x.Preferred);
                 if (factTypes.Count == 0 && excludedTypes != null && !list.Any(x => excludedTypes.Contains(x.FactTypeDescription)))
                     facts.Add(new DisplayFact(individual, new Fact(individual.IndividualID, Fact.REPORT, individual.BirthDate, individual.BirthLocation)));
                 else

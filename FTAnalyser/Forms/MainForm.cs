@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "8.4.0.0-beta3";
+        public static string VERSION = "8.4.0.0-beta4";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         Cursor storedCursor = Cursors.Default;
@@ -2310,7 +2310,7 @@ namespace FTAnalyzer
                     ft.GetIndividual(indA_ID),
                     ft.GetIndividual(indB_ID)
                 };
-                Facts f = new Facts(dupInd, null, null);
+                Facts f = new Facts(dupInd, null, null, Facts.AlternateFacts.AllFacts);
                 DisposeDuplicateForms(f);
                 f.Show();
             }
@@ -2369,7 +2369,13 @@ namespace FTAnalyzer
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtFactsSurname.Text);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
-            Facts facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, true), BuildFactTypeList(ckbFactExclude, true));
+            Facts facts;
+            if (radioOnlyPreferred.Checked)
+                facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, true), BuildFactTypeList(ckbFactExclude, true), Facts.AlternateFacts.PreferredOnly);
+            else if(radioOnlyAlternate.Checked)
+                facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, true), BuildFactTypeList(ckbFactExclude, true), Facts.AlternateFacts.AlternateOnly);
+            else
+                facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, true), BuildFactTypeList(ckbFactExclude, true), Facts.AlternateFacts.AllFacts);
             facts.Show();
             HourGlass(false);
         }
@@ -2426,7 +2432,7 @@ namespace FTAnalyzer
                 ckbFactSelect.SetItemChecked(index, !selected);
                 try
                 {
-                    Application.UserAppDataRegistry.SetValue("Fact: " + factType, !selected);
+                    Application.UserAppDataRegistry.SetValue($"Fact: {factType}", !selected);
                 }
                 catch (IOException)
                 {
@@ -2438,10 +2444,15 @@ namespace FTAnalyzer
 
         void SetShowFactsButton()
         {
+            string alternate = string.Empty;
+            if (radioOnlyAlternate.Checked)
+                alternate = "Alternate ";
+            else if (radioOnlyPreferred.Checked)
+                alternate = "Preferred ";
             if (ckbFactSelect.CheckedItems.Count == 0 && ckbFactExclude.CheckedItems.Count > 0)
-                btnShowFacts.Text = "Show all Facts for Individuals who are missing the selected excluded Fact Types";
+                btnShowFacts.Text = $"Show all {alternate}Facts for Individuals who are missing the selected excluded Fact Types";
             else
-                btnShowFacts.Text = "Show only the selected Facts for Individuals" + (ckbFactExclude.Visible ? " who don't have any of the excluded Fact Types" : string.Empty);
+                btnShowFacts.Text = $"Show only the selected {alternate}Facts for Individuals" + (ckbFactExclude.Visible ? " who don't have any of the excluded Fact Types" : string.Empty);
             btnShowFacts.Enabled = ckbFactSelect.CheckedItems.Count > 0 || (ckbFactExclude.Visible && ckbFactExclude.CheckedItems.Count > 0);
         }
 
@@ -3678,6 +3689,11 @@ namespace FTAnalyzer
                 Analytics.TrackAction(Analytics.CensusTabAction, Analytics.AliveAtDate);
                 HourGlass(false);
             }
+        }
+
+        void RadioFacts_CheckedChanged(object sender, EventArgs e)
+        {
+            SetShowFactsButton();
         }
     }
 }
