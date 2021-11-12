@@ -38,9 +38,9 @@ namespace FTAnalyzer.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeocodeLocations));
             this.dgLocations = new System.Windows.Forms.DataGridView();
             this.LocationIcon = new System.Windows.Forms.DataGridViewImageColumn();
@@ -101,6 +101,8 @@ namespace FTAnalyzer.Forms
             this.dgLocations.AllowUserToAddRows = false;
             this.dgLocations.AllowUserToDeleteRows = false;
             this.dgLocations.AllowUserToOrderColumns = true;
+            this.dgLocations.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgLocations.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgLocations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLocations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.LocationIcon,
@@ -111,23 +113,25 @@ namespace FTAnalyzer.Forms
             this.FoundLocation,
             this.FoundResultType});
             this.dgLocations.ContextMenuStrip = this.contextMenuStrip;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgLocations.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgLocations.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgLocations.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgLocations.Location = new System.Drawing.Point(0, 49);
+            this.dgLocations.Location = new System.Drawing.Point(0, 80);
+            this.dgLocations.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.dgLocations.MultiSelect = false;
             this.dgLocations.Name = "dgLocations";
             this.dgLocations.ReadOnly = true;
             this.dgLocations.RowHeadersVisible = false;
+            this.dgLocations.RowHeadersWidth = 72;
             this.dgLocations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgLocations.ShowEditingIcon = false;
-            this.dgLocations.Size = new System.Drawing.Size(894, 300);
+            this.dgLocations.Size = new System.Drawing.Size(1639, 583);
             this.dgLocations.TabIndex = 5;
             this.dgLocations.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.DgLocations_CellContextMenuStripNeeded);
             this.dgLocations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgLocations_CellDoubleClick);
@@ -158,8 +162,8 @@ namespace FTAnalyzer.Forms
             // 
             this.Latitude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Latitude.DataPropertyName = "Latitude";
-            dataGridViewCellStyle4.Format = "N7";
-            this.Latitude.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Format = "N7";
+            this.Latitude.DefaultCellStyle = dataGridViewCellStyle1;
             this.Latitude.HeaderText = "Latitude";
             this.Latitude.MinimumWidth = 75;
             this.Latitude.Name = "Latitude";
@@ -171,8 +175,8 @@ namespace FTAnalyzer.Forms
             // 
             this.Longitude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Longitude.DataPropertyName = "Longitude";
-            dataGridViewCellStyle5.Format = "N7";
-            this.Longitude.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Format = "N7";
+            this.Longitude.DefaultCellStyle = dataGridViewCellStyle2;
             this.Longitude.HeaderText = "Longitude";
             this.Longitude.MinimumWidth = 75;
             this.Longitude.Name = "Longitude";
@@ -212,6 +216,7 @@ namespace FTAnalyzer.Forms
             // 
             // contextMenuStrip
             // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuVerified,
             this.mnuIncorrect,
@@ -221,13 +226,13 @@ namespace FTAnalyzer.Forms
             this.mnuCopyLocation,
             this.mnuPasteLocation});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(240, 142);
+            this.contextMenuStrip.Size = new System.Drawing.Size(391, 226);
             // 
             // mnuVerified
             // 
             this.mnuVerified.Image = ((System.Drawing.Image)(resources.GetObject("mnuVerified.Image")));
             this.mnuVerified.Name = "mnuVerified";
-            this.mnuVerified.Size = new System.Drawing.Size(239, 22);
+            this.mnuVerified.Size = new System.Drawing.Size(390, 36);
             this.mnuVerified.Text = "Mark Location as Verified";
             this.mnuVerified.Click += new System.EventHandler(this.MnuVerified_Click);
             // 
@@ -235,7 +240,7 @@ namespace FTAnalyzer.Forms
             // 
             this.mnuIncorrect.Image = ((System.Drawing.Image)(resources.GetObject("mnuIncorrect.Image")));
             this.mnuIncorrect.Name = "mnuIncorrect";
-            this.mnuIncorrect.Size = new System.Drawing.Size(239, 22);
+            this.mnuIncorrect.Size = new System.Drawing.Size(390, 36);
             this.mnuIncorrect.Text = "Mark Location as Incorrect";
             this.mnuIncorrect.Click += new System.EventHandler(this.MnuIncorrect_Click);
             // 
@@ -243,26 +248,26 @@ namespace FTAnalyzer.Forms
             // 
             this.mnuNotSearched.Image = ((System.Drawing.Image)(resources.GetObject("mnuNotSearched.Image")));
             this.mnuNotSearched.Name = "mnuNotSearched";
-            this.mnuNotSearched.Size = new System.Drawing.Size(239, 22);
+            this.mnuNotSearched.Size = new System.Drawing.Size(390, 36);
             this.mnuNotSearched.Text = "Reset Location to Not Searched";
             this.mnuNotSearched.Click += new System.EventHandler(this.MnuNotSearched_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(236, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(387, 6);
             // 
             // mnuEditLocation
             // 
             this.mnuEditLocation.Name = "mnuEditLocation";
-            this.mnuEditLocation.Size = new System.Drawing.Size(239, 22);
+            this.mnuEditLocation.Size = new System.Drawing.Size(390, 36);
             this.mnuEditLocation.Text = "Edit Location";
             this.mnuEditLocation.Click += new System.EventHandler(this.MnuEditLocation_Click);
             // 
             // mnuCopyLocation
             // 
             this.mnuCopyLocation.Name = "mnuCopyLocation";
-            this.mnuCopyLocation.Size = new System.Drawing.Size(239, 22);
+            this.mnuCopyLocation.Size = new System.Drawing.Size(390, 36);
             this.mnuCopyLocation.Text = "Copy Location";
             this.mnuCopyLocation.Click += new System.EventHandler(this.MnuCopyLocation_Click);
             // 
@@ -270,38 +275,40 @@ namespace FTAnalyzer.Forms
             // 
             this.mnuPasteLocation.Enabled = false;
             this.mnuPasteLocation.Name = "mnuPasteLocation";
-            this.mnuPasteLocation.Size = new System.Drawing.Size(239, 22);
+            this.mnuPasteLocation.Size = new System.Drawing.Size(390, 36);
             this.mnuPasteLocation.Text = "Paste Location";
             this.mnuPasteLocation.Click += new System.EventHandler(this.MnuPasteLocation_Click);
             // 
             // statusStrip
             // 
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.txtLocations,
             this.pbGeocoding,
             this.txtGoogleWait});
-            this.statusStrip.Location = new System.Drawing.Point(0, 349);
+            this.statusStrip.Location = new System.Drawing.Point(0, 663);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(894, 22);
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 26, 0);
+            this.statusStrip.Size = new System.Drawing.Size(1639, 22);
             this.statusStrip.TabIndex = 6;
             this.statusStrip.Text = "statusStrip1";
             // 
             // txtLocations
             // 
             this.txtLocations.Name = "txtLocations";
-            this.txtLocations.Size = new System.Drawing.Size(0, 17);
+            this.txtLocations.Size = new System.Drawing.Size(0, 13);
             // 
             // pbGeocoding
             // 
             this.pbGeocoding.Name = "pbGeocoding";
-            this.pbGeocoding.Size = new System.Drawing.Size(100, 16);
+            this.pbGeocoding.Size = new System.Drawing.Size(183, 22);
             this.pbGeocoding.Visible = false;
             // 
             // txtGoogleWait
             // 
             this.txtGoogleWait.Name = "txtGoogleWait";
             this.txtGoogleWait.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.txtGoogleWait.Size = new System.Drawing.Size(0, 17);
+            this.txtGoogleWait.Size = new System.Drawing.Size(0, 13);
             // 
             // mnuSaveColumnLayout
             // 
@@ -309,7 +316,7 @@ namespace FTAnalyzer.Forms
             this.mnuSaveColumnLayout.Image = ((System.Drawing.Image)(resources.GetObject("mnuSaveColumnLayout.Image")));
             this.mnuSaveColumnLayout.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuSaveColumnLayout.Name = "mnuSaveColumnLayout";
-            this.mnuSaveColumnLayout.Size = new System.Drawing.Size(23, 22);
+            this.mnuSaveColumnLayout.Size = new System.Drawing.Size(40, 32);
             this.mnuSaveColumnLayout.Text = "Save Column Sort Order, layout, width etc";
             this.mnuSaveColumnLayout.Click += new System.EventHandler(this.MnuSaveColumnLayout_Click);
             // 
@@ -319,7 +326,7 @@ namespace FTAnalyzer.Forms
             this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
             this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuExportToExcel.Name = "mnuExportToExcel";
-            this.mnuExportToExcel.Size = new System.Drawing.Size(23, 22);
+            this.mnuExportToExcel.Size = new System.Drawing.Size(40, 32);
             this.mnuExportToExcel.Text = "Export to Excel";
             this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
             // 
@@ -329,12 +336,13 @@ namespace FTAnalyzer.Forms
             this.mnuResetColumns.Image = ((System.Drawing.Image)(resources.GetObject("mnuResetColumns.Image")));
             this.mnuResetColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuResetColumns.Name = "mnuResetColumns";
-            this.mnuResetColumns.Size = new System.Drawing.Size(23, 22);
+            this.mnuResetColumns.Size = new System.Drawing.Size(40, 32);
             this.mnuResetColumns.Text = "Reset Column Sort Order to Default";
             this.mnuResetColumns.Click += new System.EventHandler(this.MnuResetColumns_Click);
             // 
             // toolStrip1
             // 
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuSaveColumnLayout,
             this.mnuResetColumns,
@@ -343,16 +351,17 @@ namespace FTAnalyzer.Forms
             this.printPreviewToolStripButton,
             this.toolStripSeparator,
             this.mnuExportToExcel});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 42);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(894, 25);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
+            this.toolStrip1.Size = new System.Drawing.Size(1639, 38);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 38);
             // 
             // printToolStripButton
             // 
@@ -360,7 +369,7 @@ namespace FTAnalyzer.Forms
             this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
             this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripButton.Name = "printToolStripButton";
-            this.printToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.printToolStripButton.Size = new System.Drawing.Size(40, 32);
             this.printToolStripButton.Text = "&Print";
             this.printToolStripButton.Click += new System.EventHandler(this.PrintToolStripButton_Click);
             // 
@@ -370,14 +379,14 @@ namespace FTAnalyzer.Forms
             this.printPreviewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripButton.Image")));
             this.printPreviewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
-            this.printPreviewToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.printPreviewToolStripButton.Size = new System.Drawing.Size(40, 32);
             this.printPreviewToolStripButton.Text = "Print Preview...";
             this.printPreviewToolStripButton.Click += new System.EventHandler(this.PrintPreviewToolStripButton_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator.Size = new System.Drawing.Size(6, 38);
             // 
             // googleGeocodeBackgroundWorker
             // 
@@ -389,13 +398,16 @@ namespace FTAnalyzer.Forms
             // 
             // menuStrip1
             // 
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.geocodeToolStripMenuItem,
             this.mnuOptions,
             this.filtersToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(894, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(11, 4, 0, 4);
+            this.menuStrip1.Size = new System.Drawing.Size(1639, 42);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -408,13 +420,13 @@ namespace FTAnalyzer.Forms
             this.mnuReverseGeocode,
             this.mnuCheckEmptyViewPorts});
             this.geocodeToolStripMenuItem.Name = "geocodeToolStripMenuItem";
-            this.geocodeToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
+            this.geocodeToolStripMenuItem.Size = new System.Drawing.Size(120, 34);
             this.geocodeToolStripMenuItem.Text = "Geocoder";
             // 
             // mnuGoogleGeocodeLocations
             // 
             this.mnuGoogleGeocodeLocations.Name = "mnuGoogleGeocodeLocations";
-            this.mnuGoogleGeocodeLocations.Size = new System.Drawing.Size(282, 22);
+            this.mnuGoogleGeocodeLocations.Size = new System.Drawing.Size(496, 40);
             this.mnuGoogleGeocodeLocations.Text = "Run Google Geocoder to find Locations";
             this.mnuGoogleGeocodeLocations.ToolTipText = "Looks up map co-ordinates for locations in your file";
             this.mnuGoogleGeocodeLocations.Click += new System.EventHandler(this.MnuGeocodeLocations_Click);
@@ -422,28 +434,28 @@ namespace FTAnalyzer.Forms
             // mnuRetryPartial
             // 
             this.mnuRetryPartial.Name = "mnuRetryPartial";
-            this.mnuRetryPartial.Size = new System.Drawing.Size(282, 22);
+            this.mnuRetryPartial.Size = new System.Drawing.Size(496, 40);
             this.mnuRetryPartial.Text = "Run Google Geocoder retrying Partials";
             this.mnuRetryPartial.Click += new System.EventHandler(this.MnuRetryPartial_Click);
             // 
             // mnuOSGeocodeLocations
             // 
             this.mnuOSGeocodeLocations.Name = "mnuOSGeocodeLocations";
-            this.mnuOSGeocodeLocations.Size = new System.Drawing.Size(282, 22);
+            this.mnuOSGeocodeLocations.Size = new System.Drawing.Size(496, 40);
             this.mnuOSGeocodeLocations.Text = "Run OS Geocoder to find Locations";
             this.mnuOSGeocodeLocations.Click += new System.EventHandler(this.MnuOSGeocodeLocations_Click);
             // 
             // mnuReverseGeocode
             // 
             this.mnuReverseGeocode.Name = "mnuReverseGeocode";
-            this.mnuReverseGeocode.Size = new System.Drawing.Size(282, 22);
+            this.mnuReverseGeocode.Size = new System.Drawing.Size(496, 40);
             this.mnuReverseGeocode.Text = "Lookup Blank Google Locations";
             this.mnuReverseGeocode.Click += new System.EventHandler(this.MnuReverseGeocde_Click);
             // 
             // mnuCheckEmptyViewPorts
             // 
             this.mnuCheckEmptyViewPorts.Name = "mnuCheckEmptyViewPorts";
-            this.mnuCheckEmptyViewPorts.Size = new System.Drawing.Size(282, 22);
+            this.mnuCheckEmptyViewPorts.Size = new System.Drawing.Size(496, 40);
             this.mnuCheckEmptyViewPorts.Text = "Check For Empty ViewPorts";
             this.mnuCheckEmptyViewPorts.Click += new System.EventHandler(this.MnuCheckForEmptyViewPortsToolStripMenuItem_Click);
             // 
@@ -453,14 +465,14 @@ namespace FTAnalyzer.Forms
             this.updateChangesWithoutAskingToolStripMenuItem,
             this.resetAllPartialMatchesToNotSearchedToolStripMenuItem});
             this.mnuOptions.Name = "mnuOptions";
-            this.mnuOptions.Size = new System.Drawing.Size(61, 20);
+            this.mnuOptions.Size = new System.Drawing.Size(104, 34);
             this.mnuOptions.Text = "Options";
             // 
             // updateChangesWithoutAskingToolStripMenuItem
             // 
             this.updateChangesWithoutAskingToolStripMenuItem.CheckOnClick = true;
             this.updateChangesWithoutAskingToolStripMenuItem.Name = "updateChangesWithoutAskingToolStripMenuItem";
-            this.updateChangesWithoutAskingToolStripMenuItem.Size = new System.Drawing.Size(286, 22);
+            this.updateChangesWithoutAskingToolStripMenuItem.Size = new System.Drawing.Size(507, 40);
             this.updateChangesWithoutAskingToolStripMenuItem.Text = "Update Changes without asking";
             this.updateChangesWithoutAskingToolStripMenuItem.ToolTipText = "No longer asks if you want to save changes to locations";
             this.updateChangesWithoutAskingToolStripMenuItem.Click += new System.EventHandler(this.UpdateChangesWithoutAskingToolStripMenuItem_Click);
@@ -468,7 +480,7 @@ namespace FTAnalyzer.Forms
             // resetAllPartialMatchesToNotSearchedToolStripMenuItem
             // 
             this.resetAllPartialMatchesToNotSearchedToolStripMenuItem.Name = "resetAllPartialMatchesToNotSearchedToolStripMenuItem";
-            this.resetAllPartialMatchesToNotSearchedToolStripMenuItem.Size = new System.Drawing.Size(286, 22);
+            this.resetAllPartialMatchesToNotSearchedToolStripMenuItem.Size = new System.Drawing.Size(507, 40);
             this.resetAllPartialMatchesToNotSearchedToolStripMenuItem.Text = "Reset all partial matches to not searched";
             this.resetAllPartialMatchesToNotSearchedToolStripMenuItem.Click += new System.EventHandler(this.ResetAllPartialMatchesToNotSearchedToolStripMenuItem_Click);
             // 
@@ -478,7 +490,7 @@ namespace FTAnalyzer.Forms
             this.mnuGeocodeStatus,
             this.mnuFoundResultType});
             this.filtersToolStripMenuItem.Name = "filtersToolStripMenuItem";
-            this.filtersToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.filtersToolStripMenuItem.Size = new System.Drawing.Size(85, 34);
             this.filtersToolStripMenuItem.Text = "Filters";
             // 
             // mnuGeocodeStatus
@@ -486,13 +498,13 @@ namespace FTAnalyzer.Forms
             this.mnuGeocodeStatus.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuStatusSelectAll});
             this.mnuGeocodeStatus.Name = "mnuGeocodeStatus";
-            this.mnuGeocodeStatus.Size = new System.Drawing.Size(170, 22);
+            this.mnuGeocodeStatus.Size = new System.Drawing.Size(300, 40);
             this.mnuGeocodeStatus.Text = "Geocode Status";
             // 
             // mnuStatusSelectAll
             // 
             this.mnuStatusSelectAll.Name = "mnuStatusSelectAll";
-            this.mnuStatusSelectAll.Size = new System.Drawing.Size(122, 22);
+            this.mnuStatusSelectAll.Size = new System.Drawing.Size(216, 40);
             this.mnuStatusSelectAll.Text = "Select All";
             this.mnuStatusSelectAll.Click += new System.EventHandler(this.MnuStatusSelectAll_Click);
             // 
@@ -501,13 +513,13 @@ namespace FTAnalyzer.Forms
             this.mnuFoundResultType.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuSelectClear});
             this.mnuFoundResultType.Name = "mnuFoundResultType";
-            this.mnuFoundResultType.Size = new System.Drawing.Size(170, 22);
+            this.mnuFoundResultType.Size = new System.Drawing.Size(300, 40);
             this.mnuFoundResultType.Text = "Found Result Type";
             // 
             // mnuSelectClear
             // 
             this.mnuSelectClear.Name = "mnuSelectClear";
-            this.mnuSelectClear.Size = new System.Drawing.Size(122, 22);
+            this.mnuSelectClear.Size = new System.Drawing.Size(216, 40);
             this.mnuSelectClear.Text = "Select All";
             this.mnuSelectClear.Click += new System.EventHandler(this.MnuSelectClear_Click);
             // 
@@ -537,14 +549,15 @@ namespace FTAnalyzer.Forms
             // 
             // GeocodeLocations
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(894, 371);
+            this.ClientSize = new System.Drawing.Size(1639, 685);
             this.Controls.Add(this.dgLocations);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.statusStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "GeocodeLocations";
             this.Text = "Locations Geocoding  Status Report";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GeocodeLocations_FormClosing);

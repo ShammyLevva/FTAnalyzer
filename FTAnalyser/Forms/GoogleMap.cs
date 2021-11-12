@@ -221,7 +221,18 @@ namespace FTAnalyzer.Forms
                 if (ex.Status == WebExceptionStatus.Timeout)
                     Console.WriteLine($"Timeout with {url}\n");
                 else
-                    MessageBox.Show($"Unable to contact https://maps.googleapis.com error was: {ex.Message}", "FTAnalyzer");
+                {
+                    int startpos = url.IndexOf("json?");
+                    int endpos = url.IndexOf("&key");
+                    if (startpos != -1 && endpos != -1 && endpos > startpos + 5)
+                    {
+                        startpos += 5;
+                        string latlng = url.Substring(startpos, endpos - startpos);
+                        MessageBox.Show($"Unable to contact https://maps.googleapis.com error was: {ex.Message}\nWhen trying to look for {latlng}", "FTAnalyzer");
+                    }
+                    else
+                        MessageBox.Show($"Unable to contact https://maps.googleapis.com error was: {ex.Message}", "FTAnalyzer");
+                }
                 res = null;
             }
             if (res!= null && res.Status == "REQUEST_DENIED")
