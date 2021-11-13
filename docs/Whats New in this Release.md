@@ -14,6 +14,7 @@ Remapped sizes of all controls on main form to hopefully eliminate the scroll ba
 Duplicates exclude those with unknown names  
 Icon sizes now scale if using a high resolution monitor  
 Google lookups forced to use HTMLencoded strings  
+Loose deaths for fathers now limit to 1st of month rather than 1st January of year of oldest child  
 
 #### Updated Release Version 8.3.1 16th March 2021  
 **Updates**  
