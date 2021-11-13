@@ -46,7 +46,7 @@ namespace FTAnalyzer.Forms
             GeoResponse.CResult.CGeometry.CViewPort viewport;
             if (loc.IsGeoCoded(false) && loc.ViewPort != null)
             {
-                labMapLevel.Text = "Previously Geocoded: " + loc.ToString();
+                labMapLevel.Text = $"Previously Geocoded: {loc}";
                 viewport = MapTransforms.ReverseTransformViewport(loc.ViewPort);
             }
             else
@@ -59,7 +59,7 @@ namespace FTAnalyzer.Forms
                 }
                 else if (res.Status == "OVER_QUERY_LIMIT" && loc.IsGeoCoded(false))
                 {
-                    labMapLevel.Text = "Previously Geocoded: " + loc.ToString();
+                    labMapLevel.Text = $"Previously Geocoded: {loc}";
                     viewport = new GeoResponse.CResult.CGeometry.CViewPort();
                     viewport.NorthEast.Lat = loc.Latitude + 2;
                     viewport.NorthEast.Long = loc.Longitude + 2;

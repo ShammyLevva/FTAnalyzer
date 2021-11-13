@@ -177,7 +177,7 @@ namespace FTAnalyzer.Forms
             }
             string encodedAddress = HttpUtility.UrlEncode(text.Replace(" ", "+"));
             string url = $"https://maps.googleapis.com/maps/api/geocode/json?address={encodedAddress}{bounds}{tld}&key={GoogleAPIKey.KeyValue}";
-            return GetGeoResponse(url);
+            return GetGeoResponse(url, text);
         }
 
         public static GeoResponse CallGoogleReverseGeocode(double latitude, double longitude)
@@ -187,10 +187,10 @@ namespace FTAnalyzer.Forms
             string region = longitude >= -7.974074 && longitude <= 1.879409 && latitude >= 49.814376 && latitude <= 60.970872 ?
                 "&region=uk" : string.Empty;
             string url = $"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}{region}&key={GoogleAPIKey.KeyValue}";
-            return GetGeoResponse(url);
+            return GetGeoResponse(url, $"latlng={lat},{lng}{region}");
         }
 
-        static GeoResponse GetGeoResponse(string url)
+        static GeoResponse GetGeoResponse(string url, string text)
         {
             GeoResponse res;
             HttpWebRequest request;
@@ -222,18 +222,7 @@ namespace FTAnalyzer.Forms
                 if (ex.Status == WebExceptionStatus.Timeout)
                     Console.WriteLine($"Timeout with {url}\n");
                 else
-                {
-                    int startpos = url.IndexOf("json?");
-                    int endpos = url.IndexOf("&key");
-                    if (startpos != -1 && endpos != -1 && endpos > startpos + 5)
-                    {
-                        startpos += 5;
-                        string latlng = url.Substring(startpos, endpos - startpos);
-                        MessageBox.Show($"Unable to contact https://maps.googleapis.com error was: {ex.Message}\nWhen trying to look for {latlng}", "FTAnalyzer");
-                    }
-                    else
-                        MessageBox.Show($"Unable to contact https://maps.googleapis.com error was: {ex.Message}", "FTAnalyzer");
-                }
+                    MessageBox.Show($"Unable to contact https://maps.googleapis.com error was: {ex.Message}\nWhen trying to look for {text}", "FTAnalyzer");
                 res = null;
             }
             if (res!= null && res.Status == "REQUEST_DENIED")
