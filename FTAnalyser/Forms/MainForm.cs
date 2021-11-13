@@ -1350,7 +1350,9 @@ namespace FTAnalyzer
                     }
                     else if (tabSelector.SelectedTab == tabFacts)
                     {
-                        // already cleared text don't need to do anything else
+                        // already cleared text just set preferred facts button
+                        radioAllFacts.Checked = true;
+                        radioOnlyAlternate.Enabled = GeneralSettings.Default.IncludeAlternateFacts;
                         Analytics.TrackAction(Analytics.MainFormAction, Analytics.FactsTabEvent);
                     }
                     else if (tabSelector.SelectedTab == tabSurnames)

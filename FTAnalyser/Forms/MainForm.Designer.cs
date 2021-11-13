@@ -151,8 +151,8 @@ namespace FTAnalyzer
             this.dgDataErrors = new FTAnalyzer.Forms.Controls.VirtualDGVDataErrors();
             this.dgCountries = new FTAnalyzer.Forms.Controls.VirtualDGVLocations();
             this.dgRegions = new FTAnalyzer.Forms.Controls.VirtualDGVLocations();
-            this.radioOnlyAlternate = new System.Windows.Forms.RadioButton();
             this.radioOnlyPreferred = new System.Windows.Forms.RadioButton();
+            this.radioOnlyAlternate = new System.Windows.Forms.RadioButton();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
@@ -1416,19 +1416,6 @@ namespace FTAnalyzer
             this.dgRegions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgRegions_CellDoubleClick);
             this.dgRegions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgRegions_CellFormatting);
             // 
-            // radioOnlyAlternate
-            // 
-            this.radioOnlyAlternate.AutoSize = true;
-            this.radioOnlyAlternate.Location = new System.Drawing.Point(418, 5);
-            this.radioOnlyAlternate.Name = "radioOnlyAlternate";
-            this.radioOnlyAlternate.Size = new System.Drawing.Size(225, 29);
-            this.radioOnlyAlternate.TabIndex = 40;
-            this.radioOnlyAlternate.Text = "Show only Alternative";
-            this.toolTips.SetToolTip(this.radioOnlyAlternate, "Select this option to only show Alternative facts when you click one of the displ" +
-        "ay buttons");
-            this.radioOnlyAlternate.UseVisualStyleBackColor = true;
-            this.radioOnlyAlternate.CheckedChanged += new System.EventHandler(this.RadioFacts_CheckedChanged);
-            // 
             // radioOnlyPreferred
             // 
             this.radioOnlyPreferred.AutoSize = true;
@@ -1441,6 +1428,19 @@ namespace FTAnalyzer
         " buttons");
             this.radioOnlyPreferred.UseVisualStyleBackColor = true;
             this.radioOnlyPreferred.CheckedChanged += new System.EventHandler(this.RadioFacts_CheckedChanged);
+            // 
+            // radioOnlyAlternate
+            // 
+            this.radioOnlyAlternate.AutoSize = true;
+            this.radioOnlyAlternate.Location = new System.Drawing.Point(418, 5);
+            this.radioOnlyAlternate.Name = "radioOnlyAlternate";
+            this.radioOnlyAlternate.Size = new System.Drawing.Size(225, 29);
+            this.radioOnlyAlternate.TabIndex = 40;
+            this.radioOnlyAlternate.Text = "Show only Alternative";
+            this.toolTips.SetToolTip(this.radioOnlyAlternate, "Select this option to only show Alternative facts when you click one of the displ" +
+        "ay buttons");
+            this.radioOnlyAlternate.UseVisualStyleBackColor = true;
+            this.radioOnlyAlternate.CheckedChanged += new System.EventHandler(this.RadioFacts_CheckedChanged);
             // 
             // printPreviewDialog
             // 
