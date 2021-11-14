@@ -94,16 +94,43 @@ namespace FTAnalyzer.Forms
             splitContainer.Panel2Collapsed = true;
             UpdateStatusCount();
         }
-        public void SetCustomFacts(string factType, SortableBindingList<Individual> individuals)
+        public void SetCustomFacts(string factType, SortableBindingList<Individual> individuals, SortableBindingList<Family> families)
         {
-            Text = "Individuals whose have the custom fact of " + (string.IsNullOrEmpty(factType) ? "not entered" : factType);
-            SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
-            foreach (Individual i in individuals)
-                dsInd.Add(i);
-            dgIndividuals.DataSource = dsInd;
-            SortIndividuals();
-            dgIndividuals.Dock = DockStyle.Fill;
-            splitContainer.Panel2Collapsed = true;
+            Text = "Individuals/Families whose have the custom fact of " + (string.IsNullOrEmpty(factType) ? "not entered" : factType);
+            if (individuals.Count > 0)
+            {
+                SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
+                foreach (Individual i in individuals)
+                    dsInd.Add(i);
+                dgIndividuals.DataSource = dsInd;
+                SortIndividuals();
+                dgIndividuals.Dock = DockStyle.Fill;
+                splitContainer.Panel1Collapsed = false;
+            }
+            else
+            {
+                dgIndividuals.Visible = false;
+                splitContainer.Panel1Collapsed = true;
+            }
+            if (families.Count > 0)
+            {
+                SortableBindingList<IDisplayFamily> dsFam = new SortableBindingList<IDisplayFamily>();
+                foreach (Family f in families)
+                    dsFam.Add(f);
+                splitContainer.Panel2Collapsed = false;
+                dgFamilies.Visible = true;
+                dgChildrenStatus.Visible = false;
+                dgFamilies.DataSource = dsFam;
+                SortFamilies();
+                dgFamilies.Dock = DockStyle.Fill;
+            }
+            else
+            {
+                splitContainer.Panel2Collapsed = true;
+                dgFamilies.Visible = false;
+                dgChildrenStatus.Visible = false;
+            }
+
             UpdateStatusCount();
         }
 
@@ -233,9 +260,9 @@ namespace FTAnalyzer.Forms
 
         void SortFamilies()
         {
-            if (dgFamilies.Visible)
+            if (dgFamilies.RowCount > 1)
                 dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);
-            if(dgChildrenStatus.Visible)
+            if(dgChildrenStatus.RowCount > 1)
                 dgChildrenStatus.Sort(dgChildrenStatus.Columns[0], ListSortDirection.Ascending);
         }
 

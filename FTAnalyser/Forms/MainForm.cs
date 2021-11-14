@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "8.4.0.0-beta6";
+        public static string VERSION = "8.4.0.0-beta7";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         Cursor storedCursor = Cursors.Default;
@@ -660,10 +660,10 @@ namespace FTAnalyzer
             {
                 HourGlass(true);
                 var customFacts = (DisplayCustomFact)dgCustomFacts.CurrentRowDataBoundItem;
-                var frmInd = new People();
-                frmInd.SetCustomFacts(customFacts.CustomFactName, ft.AllCustomFactIndividuals(customFacts.CustomFactName));
-                DisposeDuplicateForms(frmInd);
-                frmInd.Show();
+                var frmCustomFacts = new People();
+                frmCustomFacts.SetCustomFacts(customFacts.CustomFactName, ft.AllCustomFactIndividuals(customFacts.CustomFactName), ft.AllCustomFactFamilies(customFacts.CustomFactName));
+                DisposeDuplicateForms(frmCustomFacts);
+                frmCustomFacts.Show();
                 HourGlass(false);
             }
         }

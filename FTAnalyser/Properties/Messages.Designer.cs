@@ -70,7 +70,7 @@ namespace FTAnalyzer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Double click to show list of individuals with this custom fact. Tick ignore to turn off warnings for this custom fact..
+        ///   Looks up a localized string similar to Double click to show list of individuals/families with this custom fact. Tick ignore to turn off warnings for this custom fact..
         /// </summary>
         internal static string Hints_CustomFacts {
             get {
