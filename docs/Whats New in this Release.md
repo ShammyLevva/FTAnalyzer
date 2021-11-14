@@ -13,7 +13,7 @@ Added feature to facts tab to filter on alternate/preferred facts
 Remapped sizes of all controls on main form to hopefully eliminate the scroll bar bug  
 Duplicates exclude those with unknown names  
 Icon sizes now scale if using a high resolution monitor  
-Google lookups forced to use HTMLencoded strings  
+Forced update of SQLite.Interop.dll files  
 Loose deaths for fathers now limit to 1st of month rather than 1st January of year of oldest child  
 Cope with missing characterset in GEDCOM header  
 1940 US census is allowed to be a reference for a 1935 residence  
