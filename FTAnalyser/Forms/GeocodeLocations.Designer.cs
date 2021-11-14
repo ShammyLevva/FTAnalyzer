@@ -102,7 +102,6 @@ namespace FTAnalyzer.Forms
             this.dgLocations.AllowUserToDeleteRows = false;
             this.dgLocations.AllowUserToOrderColumns = true;
             this.dgLocations.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgLocations.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgLocations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLocations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.LocationIcon,
@@ -123,7 +122,7 @@ namespace FTAnalyzer.Forms
             this.dgLocations.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgLocations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgLocations.Location = new System.Drawing.Point(0, 80);
-            this.dgLocations.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dgLocations.Margin = new System.Windows.Forms.Padding(6);
             this.dgLocations.MultiSelect = false;
             this.dgLocations.Name = "dgLocations";
             this.dgLocations.ReadOnly = true;
@@ -557,7 +556,7 @@ namespace FTAnalyzer.Forms
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.statusStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "GeocodeLocations";
             this.Text = "Locations Geocoding  Status Report";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GeocodeLocations_FormClosing);

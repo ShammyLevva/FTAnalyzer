@@ -40,28 +40,6 @@ namespace FTAnalyzer.Forms
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColourCensus));
             this.dgReportSheet = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnuViewFacts = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.mnuSaveCensusColumnLayout = new System.Windows.Forms.ToolStripButton();
-            this.mnuResetCensusColumns = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuExportToExcel = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.cbCensusSearchProvider = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-            this.cbRegion = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.cbFilter = new System.Windows.Forms.ToolStripComboBox();
-            this.printDocument = new System.Drawing.Printing.PrintDocument();
-            this.printDialog = new System.Windows.Forms.PrintDialog();
-            this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Forenames = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -112,6 +90,28 @@ namespace FTAnalyzer.Forms
             this.DeathLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BestLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuViewFacts = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.mnuSaveCensusColumnLayout = new System.Windows.Forms.ToolStripButton();
+            this.mnuResetCensusColumns = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuExportToExcel = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.cbCensusSearchProvider = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.cbRegion = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.cbFilter = new System.Windows.Forms.ToolStripComboBox();
+            this.printDocument = new System.Drawing.Printing.PrintDocument();
+            this.printDialog = new System.Windows.Forms.PrintDialog();
+            this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgReportSheet)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -127,7 +127,6 @@ namespace FTAnalyzer.Forms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgReportSheet.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgReportSheet.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgReportSheet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgReportSheet.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IndividualID,
@@ -192,212 +191,6 @@ namespace FTAnalyzer.Forms
             this.dgReportSheet.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.DgReportSheet_CellContextMenuStripNeeded);
             this.dgReportSheet.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgReportSheet_CellDoubleClick);
             this.dgReportSheet.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgReportSheet_CellFormatting);
-            // 
-            // contextMenuStrip
-            // 
-            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuViewFacts});
-            this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(288, 40);
-            // 
-            // mnuViewFacts
-            // 
-            this.mnuViewFacts.Name = "mnuViewFacts";
-            this.mnuViewFacts.Size = new System.Drawing.Size(287, 36);
-            this.mnuViewFacts.Text = "View Individuals Facts";
-            this.mnuViewFacts.Click += new System.EventHandler(this.MnuViewFacts_Click);
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsRecords});
-            this.statusStrip.Location = new System.Drawing.Point(0, 1037);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 26, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1903, 39);
-            this.statusStrip.TabIndex = 2;
-            this.statusStrip.Text = "statusStrip1";
-            // 
-            // tsRecords
-            // 
-            this.tsRecords.Name = "tsRecords";
-            this.tsRecords.Size = new System.Drawing.Size(206, 30);
-            this.tsRecords.Text = "toolStripStatusLabel1";
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuSaveCensusColumnLayout,
-            this.mnuResetCensusColumns,
-            this.toolStripSeparator3,
-            this.printToolStripButton,
-            this.printPreviewToolStripButton,
-            this.toolStripSeparator1,
-            this.mnuExportToExcel,
-            this.toolStripSeparator2,
-            this.toolStripLabel1,
-            this.cbCensusSearchProvider,
-            this.toolStripLabel3,
-            this.cbRegion,
-            this.toolStripLabel2,
-            this.cbFilter});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1903, 42);
-            this.toolStrip1.TabIndex = 3;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // mnuSaveCensusColumnLayout
-            // 
-            this.mnuSaveCensusColumnLayout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mnuSaveCensusColumnLayout.Image = ((System.Drawing.Image)(resources.GetObject("mnuSaveCensusColumnLayout.Image")));
-            this.mnuSaveCensusColumnLayout.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuSaveCensusColumnLayout.Name = "mnuSaveCensusColumnLayout";
-            this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(40, 36);
-            this.mnuSaveCensusColumnLayout.Text = "Save Census Column Sort Order";
-            this.mnuSaveCensusColumnLayout.Click += new System.EventHandler(this.MnuSaveCensusColumnLayout_Click);
-            // 
-            // mnuResetCensusColumns
-            // 
-            this.mnuResetCensusColumns.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mnuResetCensusColumns.Image = ((System.Drawing.Image)(resources.GetObject("mnuResetCensusColumns.Image")));
-            this.mnuResetCensusColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuResetCensusColumns.Name = "mnuResetCensusColumns";
-            this.mnuResetCensusColumns.Size = new System.Drawing.Size(40, 36);
-            this.mnuResetCensusColumns.Text = "Reset Census Column Sort Order to Default";
-            this.mnuResetCensusColumns.Click += new System.EventHandler(this.MnuResetCensusColumns_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 42);
-            // 
-            // printToolStripButton
-            // 
-            this.printToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
-            this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printToolStripButton.Name = "printToolStripButton";
-            this.printToolStripButton.Size = new System.Drawing.Size(40, 36);
-            this.printToolStripButton.Text = "&Print";
-            this.printToolStripButton.Click += new System.EventHandler(this.PrintToolStripButton_Click);
-            // 
-            // printPreviewToolStripButton
-            // 
-            this.printPreviewToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.printPreviewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripButton.Image")));
-            this.printPreviewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
-            this.printPreviewToolStripButton.Size = new System.Drawing.Size(40, 36);
-            this.printPreviewToolStripButton.Text = "Print Preview...";
-            this.printPreviewToolStripButton.Click += new System.EventHandler(this.PrintPreviewToolStripButton_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 42);
-            // 
-            // mnuExportToExcel
-            // 
-            this.mnuExportToExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
-            this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuExportToExcel.Name = "mnuExportToExcel";
-            this.mnuExportToExcel.Size = new System.Drawing.Size(40, 36);
-            this.mnuExportToExcel.Text = "Export to Excel";
-            this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 42);
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(206, 36);
-            this.toolStripLabel1.Text = "Census search using:";
-            // 
-            // cbCensusSearchProvider
-            // 
-            this.cbCensusSearchProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCensusSearchProvider.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.cbCensusSearchProvider.Items.AddRange(new object[] {
-            "Ancestry",
-            "Find My Past",
-            "FreeCen",
-            "FamilySearch",
-            "Scotlands People"});
-            this.cbCensusSearchProvider.Name = "cbCensusSearchProvider";
-            this.cbCensusSearchProvider.Size = new System.Drawing.Size(219, 42);
-            this.cbCensusSearchProvider.SelectedIndexChanged += new System.EventHandler(this.CbCensusSearchProvider_SelectedIndexChanged);
-            // 
-            // toolStripLabel3
-            // 
-            this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(82, 36);
-            this.toolStripLabel3.Text = "Region:";
-            // 
-            // cbRegion
-            // 
-            this.cbRegion.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.cbRegion.Items.AddRange(new object[] {
-            ".com",
-            ".co.uk",
-            ".ca",
-            ".com.au"});
-            this.cbRegion.Name = "cbRegion";
-            this.cbRegion.Size = new System.Drawing.Size(219, 42);
-            this.cbRegion.Text = ".co.uk";
-            this.cbRegion.SelectedIndexChanged += new System.EventHandler(this.CbRegion_SelectedIndexChanged);
-            // 
-            // toolStripLabel2
-            // 
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(69, 36);
-            this.toolStripLabel2.Text = "Filter :";
-            // 
-            // cbFilter
-            // 
-            this.cbFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFilter.DropDownWidth = 170;
-            this.cbFilter.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.cbFilter.Items.AddRange(new object[] {
-            "All Individuals",
-            "None Found (All Red)",
-            "All Found (All Green)",
-            "Lost Cousins Missing (Yellow)",
-            "Lost Cousins Present (Orange)",
-            "Outside UK (Dark Grey)",
-            "Some Missing (Some Red)",
-            "Some Found (Some Green)",
-            "Known Missing (Mid Green)"});
-            this.cbFilter.Name = "cbFilter";
-            this.cbFilter.Size = new System.Drawing.Size(170, 42);
-            this.cbFilter.SelectedIndexChanged += new System.EventHandler(this.CbFilter_SelectedIndexChanged);
-            // 
-            // printDialog
-            // 
-            this.printDialog.AllowSelection = true;
-            this.printDialog.AllowSomePages = true;
-            this.printDialog.Document = this.printDocument;
-            this.printDialog.UseEXDialog = true;
-            // 
-            // printPreviewDialog
-            // 
-            this.printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog.Document = this.printDocument;
-            this.printPreviewDialog.Enabled = true;
-            this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
-            this.printPreviewDialog.Name = "printPreviewDialog";
-            this.printPreviewDialog.Visible = false;
             // 
             // IndividualID
             // 
@@ -898,6 +691,212 @@ namespace FTAnalyzer.Forms
             this.Ahnentafel.Name = "Ahnentafel";
             this.Ahnentafel.ReadOnly = true;
             this.Ahnentafel.Width = 147;
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuViewFacts});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(288, 40);
+            // 
+            // mnuViewFacts
+            // 
+            this.mnuViewFacts.Name = "mnuViewFacts";
+            this.mnuViewFacts.Size = new System.Drawing.Size(287, 36);
+            this.mnuViewFacts.Text = "View Individuals Facts";
+            this.mnuViewFacts.Click += new System.EventHandler(this.MnuViewFacts_Click);
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsRecords});
+            this.statusStrip.Location = new System.Drawing.Point(0, 1037);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 26, 0);
+            this.statusStrip.Size = new System.Drawing.Size(1903, 39);
+            this.statusStrip.TabIndex = 2;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // tsRecords
+            // 
+            this.tsRecords.Name = "tsRecords";
+            this.tsRecords.Size = new System.Drawing.Size(206, 30);
+            this.tsRecords.Text = "toolStripStatusLabel1";
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuSaveCensusColumnLayout,
+            this.mnuResetCensusColumns,
+            this.toolStripSeparator3,
+            this.printToolStripButton,
+            this.printPreviewToolStripButton,
+            this.toolStripSeparator1,
+            this.mnuExportToExcel,
+            this.toolStripSeparator2,
+            this.toolStripLabel1,
+            this.cbCensusSearchProvider,
+            this.toolStripLabel3,
+            this.cbRegion,
+            this.toolStripLabel2,
+            this.cbFilter});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
+            this.toolStrip1.Size = new System.Drawing.Size(1903, 42);
+            this.toolStrip1.TabIndex = 3;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // mnuSaveCensusColumnLayout
+            // 
+            this.mnuSaveCensusColumnLayout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mnuSaveCensusColumnLayout.Image = ((System.Drawing.Image)(resources.GetObject("mnuSaveCensusColumnLayout.Image")));
+            this.mnuSaveCensusColumnLayout.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mnuSaveCensusColumnLayout.Name = "mnuSaveCensusColumnLayout";
+            this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(40, 36);
+            this.mnuSaveCensusColumnLayout.Text = "Save Census Column Sort Order";
+            this.mnuSaveCensusColumnLayout.Click += new System.EventHandler(this.MnuSaveCensusColumnLayout_Click);
+            // 
+            // mnuResetCensusColumns
+            // 
+            this.mnuResetCensusColumns.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mnuResetCensusColumns.Image = ((System.Drawing.Image)(resources.GetObject("mnuResetCensusColumns.Image")));
+            this.mnuResetCensusColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mnuResetCensusColumns.Name = "mnuResetCensusColumns";
+            this.mnuResetCensusColumns.Size = new System.Drawing.Size(40, 36);
+            this.mnuResetCensusColumns.Text = "Reset Census Column Sort Order to Default";
+            this.mnuResetCensusColumns.Click += new System.EventHandler(this.MnuResetCensusColumns_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 42);
+            // 
+            // printToolStripButton
+            // 
+            this.printToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
+            this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.printToolStripButton.Name = "printToolStripButton";
+            this.printToolStripButton.Size = new System.Drawing.Size(40, 36);
+            this.printToolStripButton.Text = "&Print";
+            this.printToolStripButton.Click += new System.EventHandler(this.PrintToolStripButton_Click);
+            // 
+            // printPreviewToolStripButton
+            // 
+            this.printPreviewToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.printPreviewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripButton.Image")));
+            this.printPreviewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
+            this.printPreviewToolStripButton.Size = new System.Drawing.Size(40, 36);
+            this.printPreviewToolStripButton.Text = "Print Preview...";
+            this.printPreviewToolStripButton.Click += new System.EventHandler(this.PrintPreviewToolStripButton_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 42);
+            // 
+            // mnuExportToExcel
+            // 
+            this.mnuExportToExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
+            this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mnuExportToExcel.Name = "mnuExportToExcel";
+            this.mnuExportToExcel.Size = new System.Drawing.Size(40, 36);
+            this.mnuExportToExcel.Text = "Export to Excel";
+            this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 42);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(206, 36);
+            this.toolStripLabel1.Text = "Census search using:";
+            // 
+            // cbCensusSearchProvider
+            // 
+            this.cbCensusSearchProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCensusSearchProvider.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.cbCensusSearchProvider.Items.AddRange(new object[] {
+            "Ancestry",
+            "Find My Past",
+            "FreeCen",
+            "FamilySearch",
+            "Scotlands People"});
+            this.cbCensusSearchProvider.Name = "cbCensusSearchProvider";
+            this.cbCensusSearchProvider.Size = new System.Drawing.Size(219, 42);
+            this.cbCensusSearchProvider.SelectedIndexChanged += new System.EventHandler(this.CbCensusSearchProvider_SelectedIndexChanged);
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(82, 36);
+            this.toolStripLabel3.Text = "Region:";
+            // 
+            // cbRegion
+            // 
+            this.cbRegion.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.cbRegion.Items.AddRange(new object[] {
+            ".com",
+            ".co.uk",
+            ".ca",
+            ".com.au"});
+            this.cbRegion.Name = "cbRegion";
+            this.cbRegion.Size = new System.Drawing.Size(219, 42);
+            this.cbRegion.Text = ".co.uk";
+            this.cbRegion.SelectedIndexChanged += new System.EventHandler(this.CbRegion_SelectedIndexChanged);
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(69, 36);
+            this.toolStripLabel2.Text = "Filter :";
+            // 
+            // cbFilter
+            // 
+            this.cbFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFilter.DropDownWidth = 170;
+            this.cbFilter.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.cbFilter.Items.AddRange(new object[] {
+            "All Individuals",
+            "None Found (All Red)",
+            "All Found (All Green)",
+            "Lost Cousins Missing (Yellow)",
+            "Lost Cousins Present (Orange)",
+            "Outside UK (Dark Grey)",
+            "Some Missing (Some Red)",
+            "Some Found (Some Green)",
+            "Known Missing (Mid Green)"});
+            this.cbFilter.Name = "cbFilter";
+            this.cbFilter.Size = new System.Drawing.Size(170, 42);
+            this.cbFilter.SelectedIndexChanged += new System.EventHandler(this.CbFilter_SelectedIndexChanged);
+            // 
+            // printDialog
+            // 
+            this.printDialog.AllowSelection = true;
+            this.printDialog.AllowSomePages = true;
+            this.printDialog.Document = this.printDocument;
+            this.printDialog.UseEXDialog = true;
+            // 
+            // printPreviewDialog
+            // 
+            this.printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog.Document = this.printDocument;
+            this.printPreviewDialog.Enabled = true;
+            this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
+            this.printPreviewDialog.Name = "printPreviewDialog";
+            this.printPreviewDialog.Visible = false;
             // 
             // ColourCensus
             // 

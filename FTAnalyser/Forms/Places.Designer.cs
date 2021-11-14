@@ -92,7 +92,8 @@ namespace FTAnalyzer.Forms
             // 
             this.splitContainerFacts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerFacts.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainerFacts.Location = new System.Drawing.Point(0, 24);
+            this.splitContainerFacts.Location = new System.Drawing.Point(0, 42);
+            this.splitContainerFacts.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.splitContainerFacts.Name = "splitContainerFacts";
             this.splitContainerFacts.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -104,8 +105,9 @@ namespace FTAnalyzer.Forms
             // 
             this.splitContainerFacts.Panel2.Controls.Add(this.dgFacts);
             this.splitContainerFacts.Panel2.Controls.Add(this.statusStrip);
-            this.splitContainerFacts.Size = new System.Drawing.Size(1113, 566);
-            this.splitContainerFacts.SplitterDistance = 435;
+            this.splitContainerFacts.Size = new System.Drawing.Size(2041, 1047);
+            this.splitContainerFacts.SplitterDistance = 913;
+            this.splitContainerFacts.SplitterWidth = 7;
             this.splitContainerFacts.TabIndex = 18;
             this.splitContainerFacts.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.SplitContainerFacts_SplitterMoved);
             // 
@@ -114,6 +116,7 @@ namespace FTAnalyzer.Forms
             this.splitContainerMap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerMap.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainerMap.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerMap.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.splitContainerMap.Name = "splitContainerMap";
             // 
             // splitContainerMap.Panel1
@@ -126,8 +129,9 @@ namespace FTAnalyzer.Forms
             this.splitContainerMap.Panel2.Controls.Add(this.mapBox1);
             this.splitContainerMap.Panel2.Controls.Add(this.mapZoomToolStrip);
             this.splitContainerMap.Panel2.Controls.Add(this.linkLabel1);
-            this.splitContainerMap.Size = new System.Drawing.Size(1113, 435);
+            this.splitContainerMap.Size = new System.Drawing.Size(2041, 913);
             this.splitContainerMap.SplitterDistance = 200;
+            this.splitContainerMap.SplitterWidth = 7;
             this.splitContainerMap.TabIndex = 2;
             this.splitContainerMap.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.SplitContainerMap_SplitterMoved);
             // 
@@ -137,9 +141,10 @@ namespace FTAnalyzer.Forms
             this.tvPlaces.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tvPlaces.HideSelection = false;
             this.tvPlaces.Location = new System.Drawing.Point(0, 0);
+            this.tvPlaces.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tvPlaces.Name = "tvPlaces";
             this.tvPlaces.SelectedNodes = ((System.Collections.Generic.List<System.Windows.Forms.TreeNode>)(resources.GetObject("tvPlaces.SelectedNodes")));
-            this.tvPlaces.Size = new System.Drawing.Size(200, 435);
+            this.tvPlaces.Size = new System.Drawing.Size(200, 913);
             this.tvPlaces.TabIndex = 0;
             this.tvPlaces.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvPlaces_AfterSelect);
             this.tvPlaces.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TvPlaces_NodeMouseDoubleClick);
@@ -148,10 +153,11 @@ namespace FTAnalyzer.Forms
             // 
             this.tbOpacity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbOpacity.LargeChange = 20;
-            this.tbOpacity.Location = new System.Drawing.Point(0, 387);
+            this.tbOpacity.Location = new System.Drawing.Point(0, 824);
+            this.tbOpacity.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbOpacity.Maximum = 100;
             this.tbOpacity.Name = "tbOpacity";
-            this.tbOpacity.Size = new System.Drawing.Size(250, 45);
+            this.tbOpacity.Size = new System.Drawing.Size(458, 80);
             this.tbOpacity.SmallChange = 5;
             this.tbOpacity.TabIndex = 17;
             this.tbOpacity.TickFrequency = 10;
@@ -166,15 +172,16 @@ namespace FTAnalyzer.Forms
             this.mapBox1.CustomTool = null;
             this.mapBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mapBox1.FineZoomFactor = 10D;
-            this.mapBox1.Location = new System.Drawing.Point(0, 25);
+            this.mapBox1.Location = new System.Drawing.Point(0, 40);
             this.mapBox1.MapQueryMode = SharpMap.Forms.MapBox.MapQueryType.LayerByIndex;
+            this.mapBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.mapBox1.Name = "mapBox1";
             this.mapBox1.QueryGrowFactor = 5F;
             this.mapBox1.QueryLayerIndex = 0;
             this.mapBox1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.mapBox1.ShowProgressUpdate = true;
-            this.mapBox1.Size = new System.Drawing.Size(909, 410);
+            this.mapBox1.Size = new System.Drawing.Size(1834, 873);
             this.mapBox1.TabIndex = 2;
             this.mapBox1.Text = "mapBox1";
             this.mapBox1.WheelZoomMagnitude = -2D;
@@ -187,12 +194,14 @@ namespace FTAnalyzer.Forms
             // mapZoomToolStrip
             // 
             this.mapZoomToolStrip.Enabled = false;
+            this.mapZoomToolStrip.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.mapZoomToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSelect});
             this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 0);
             this.mapZoomToolStrip.MapControl = this.mapBox1;
             this.mapZoomToolStrip.Name = "mapZoomToolStrip";
-            this.mapZoomToolStrip.Size = new System.Drawing.Size(909, 25);
+            this.mapZoomToolStrip.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
+            this.mapZoomToolStrip.Size = new System.Drawing.Size(1834, 40);
             this.mapZoomToolStrip.TabIndex = 1;
             this.mapZoomToolStrip.Text = "mapZoomToolStrip1";
             // 
@@ -202,7 +211,7 @@ namespace FTAnalyzer.Forms
             this.btnSelect.Image = ((System.Drawing.Image)(resources.GetObject("btnSelect.Image")));
             this.btnSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(23, 22);
+            this.btnSelect.Size = new System.Drawing.Size(40, 34);
             this.btnSelect.Text = "Location Selection ";
             this.btnSelect.Click += new System.EventHandler(this.BtnSelect_Click);
             // 
@@ -210,9 +219,10 @@ namespace FTAnalyzer.Forms
             // 
             this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(781, 25);
+            this.linkLabel1.Location = new System.Drawing.Point(1599, 46);
+            this.linkLabel1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(125, 13);
+            this.linkLabel1.Size = new System.Drawing.Size(229, 25);
             this.linkLabel1.TabIndex = 16;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "© Google - Terms of Use";
@@ -224,6 +234,7 @@ namespace FTAnalyzer.Forms
             this.dgFacts.AllowUserToAddRows = false;
             this.dgFacts.AllowUserToDeleteRows = false;
             this.dgFacts.AllowUserToOrderColumns = true;
+            this.dgFacts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgFacts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FactIcon,
@@ -252,12 +263,13 @@ namespace FTAnalyzer.Forms
             this.dgFacts.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgFacts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgFacts.Location = new System.Drawing.Point(0, 0);
+            this.dgFacts.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.dgFacts.Name = "dgFacts";
             this.dgFacts.ReadOnly = true;
             this.dgFacts.RowHeadersWidth = 16;
             this.dgFacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgFacts.ShowEditingIcon = false;
-            this.dgFacts.Size = new System.Drawing.Size(1113, 105);
+            this.dgFacts.Size = new System.Drawing.Size(2041, 105);
             this.dgFacts.TabIndex = 3;
             this.dgFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgFacts_CellDoubleClick);
             this.dgFacts.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.DgFacts_CellToolTipTextNeeded);
@@ -278,6 +290,7 @@ namespace FTAnalyzer.Forms
             this.FactsIndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.FactsIndividualID.DataPropertyName = "IndividualID";
             this.FactsIndividualID.HeaderText = "Ind. ID";
+            this.FactsIndividualID.MinimumWidth = 9;
             this.FactsIndividualID.Name = "FactsIndividualID";
             this.FactsIndividualID.ReadOnly = true;
             this.FactsIndividualID.Width = 50;
@@ -289,6 +302,7 @@ namespace FTAnalyzer.Forms
             this.Forenames.MinimumWidth = 100;
             this.Forenames.Name = "Forenames";
             this.Forenames.ReadOnly = true;
+            this.Forenames.Width = 152;
             // 
             // Surname
             // 
@@ -349,29 +363,35 @@ namespace FTAnalyzer.Forms
             this.LocationIcon.ReadOnly = true;
             this.LocationIcon.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.LocationIcon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.LocationIcon.Width = 20;
+            this.LocationIcon.Width = 33;
             // 
             // Latitude
             // 
             this.Latitude.DataPropertyName = "Latitude";
             this.Latitude.HeaderText = "Latitude";
+            this.Latitude.MinimumWidth = 9;
             this.Latitude.Name = "Latitude";
             this.Latitude.ReadOnly = true;
+            this.Latitude.Width = 122;
             // 
             // Longitude
             // 
             this.Longitude.DataPropertyName = "Longitude";
             this.Longitude.HeaderText = "Longitude";
+            this.Longitude.MinimumWidth = 9;
             this.Longitude.Name = "Longitude";
             this.Longitude.ReadOnly = true;
+            this.Longitude.Width = 139;
             // 
             // GeocodeStatus
             // 
             this.GeocodeStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.GeocodeStatus.DataPropertyName = "GeocodeStatus";
             this.GeocodeStatus.HeaderText = "Geocode Status";
+            this.GeocodeStatus.MinimumWidth = 9;
             this.GeocodeStatus.Name = "GeocodeStatus";
             this.GeocodeStatus.ReadOnly = true;
+            this.GeocodeStatus.Width = 175;
             // 
             // FoundLocation
             // 
@@ -388,8 +408,10 @@ namespace FTAnalyzer.Forms
             this.FoundResultType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.FoundResultType.DataPropertyName = "FoundResultType";
             this.FoundResultType.HeaderText = "Found Result Type";
+            this.FoundResultType.MinimumWidth = 9;
             this.FoundResultType.Name = "FoundResultType";
             this.FoundResultType.ReadOnly = true;
+            this.FoundResultType.Width = 175;
             // 
             // Comment
             // 
@@ -413,33 +435,38 @@ namespace FTAnalyzer.Forms
             // 
             // statusStrip
             // 
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.txtCount,
             this.pbPlaces});
             this.statusStrip.Location = new System.Drawing.Point(0, 105);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1113, 22);
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 26, 0);
+            this.statusStrip.Size = new System.Drawing.Size(2041, 22);
             this.statusStrip.TabIndex = 4;
             this.statusStrip.Text = "statusStrip1";
             // 
             // txtCount
             // 
             this.txtCount.Name = "txtCount";
-            this.txtCount.Size = new System.Drawing.Size(0, 17);
+            this.txtCount.Size = new System.Drawing.Size(0, 13);
             // 
             // pbPlaces
             // 
             this.pbPlaces.Name = "pbPlaces";
-            this.pbPlaces.Size = new System.Drawing.Size(100, 16);
+            this.pbPlaces.Size = new System.Drawing.Size(183, 30);
             this.pbPlaces.Visible = false;
             // 
             // menuStrip
             // 
+            this.menuStrip.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.menuStrip.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionsToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1113, 24);
+            this.menuStrip.Padding = new System.Windows.Forms.Padding(11, 4, 0, 4);
+            this.menuStrip.Size = new System.Drawing.Size(2041, 42);
             this.menuStrip.TabIndex = 19;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -449,33 +476,34 @@ namespace FTAnalyzer.Forms
             this.mnuHideScaleBar,
             this.resetFormDefaultSizeAndPositionToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(104, 34);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // mnuHideScaleBar
             // 
             this.mnuHideScaleBar.CheckOnClick = true;
             this.mnuHideScaleBar.Name = "mnuHideScaleBar";
-            this.mnuHideScaleBar.Size = new System.Drawing.Size(262, 22);
+            this.mnuHideScaleBar.Size = new System.Drawing.Size(464, 40);
             this.mnuHideScaleBar.Text = "Hide Scale Bar";
             this.mnuHideScaleBar.Click += new System.EventHandler(this.MnuHideScaleBar_Click);
             // 
             // resetFormDefaultSizeAndPositionToolStripMenuItem
             // 
             this.resetFormDefaultSizeAndPositionToolStripMenuItem.Name = "resetFormDefaultSizeAndPositionToolStripMenuItem";
-            this.resetFormDefaultSizeAndPositionToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
+            this.resetFormDefaultSizeAndPositionToolStripMenuItem.Size = new System.Drawing.Size(464, 40);
             this.resetFormDefaultSizeAndPositionToolStripMenuItem.Text = "Reset form default size and position";
             this.resetFormDefaultSizeAndPositionToolStripMenuItem.Click += new System.EventHandler(this.ResetFormDefaultSizeAndPositionToolStripMenuItem_Click);
             // 
             // Places
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1113, 590);
+            this.ClientSize = new System.Drawing.Size(2041, 1089);
             this.Controls.Add(this.splitContainerFacts);
             this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "Places";
             this.Text = "Places";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Places_FormClosed);

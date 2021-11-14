@@ -112,7 +112,6 @@ namespace FTAnalyzer.Forms
             this.dgIndividuals.AllowUserToDeleteRows = false;
             this.dgIndividuals.AllowUserToOrderColumns = true;
             this.dgIndividuals.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgIndividuals.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgIndividuals.ContextMenuStrip = this.ctxViewNotes;
             this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -152,7 +151,6 @@ namespace FTAnalyzer.Forms
             this.dgChildrenStatus.AllowUserToDeleteRows = false;
             this.dgChildrenStatus.AllowUserToOrderColumns = true;
             this.dgChildrenStatus.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgChildrenStatus.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgChildrenStatus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgChildrenStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgChildrenStatus.Location = new System.Drawing.Point(0, 0);

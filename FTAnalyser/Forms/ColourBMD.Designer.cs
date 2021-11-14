@@ -100,7 +100,6 @@ namespace FTAnalyzer.Forms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgBMDReportSheet.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgBMDReportSheet.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgBMDReportSheet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgBMDReportSheet.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IndividualID,
@@ -124,7 +123,7 @@ namespace FTAnalyzer.Forms
             this.DeathLocation,
             this.Ahnentafel});
             this.dgBMDReportSheet.Location = new System.Drawing.Point(0, 52);
-            this.dgBMDReportSheet.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dgBMDReportSheet.Margin = new System.Windows.Forms.Padding(6);
             this.dgBMDReportSheet.MultiSelect = false;
             this.dgBMDReportSheet.Name = "dgBMDReportSheet";
             this.dgBMDReportSheet.ReadOnly = true;
@@ -590,7 +589,7 @@ namespace FTAnalyzer.Forms
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.dgBMDReportSheet);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "ColourBMD";
             this.Text = "Colour BMD Report Result";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ColourBMD_FormClosed);

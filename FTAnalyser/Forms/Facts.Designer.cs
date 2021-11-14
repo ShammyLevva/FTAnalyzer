@@ -92,8 +92,8 @@ namespace FTAnalyzer.Forms
             this.btnShowHideFacts});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(948, 35);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
+            this.toolStrip1.Size = new System.Drawing.Size(1738, 38);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -103,7 +103,7 @@ namespace FTAnalyzer.Forms
             this.mnuSaveColumnLayout.Image = ((System.Drawing.Image)(resources.GetObject("mnuSaveColumnLayout.Image")));
             this.mnuSaveColumnLayout.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuSaveColumnLayout.Name = "mnuSaveColumnLayout";
-            this.mnuSaveColumnLayout.Size = new System.Drawing.Size(32, 32);
+            this.mnuSaveColumnLayout.Size = new System.Drawing.Size(40, 32);
             this.mnuSaveColumnLayout.Text = "Save Column Sort Order, layout, width etc";
             this.mnuSaveColumnLayout.Click += new System.EventHandler(this.MnuSaveColumnLayout_Click);
             // 
@@ -113,14 +113,14 @@ namespace FTAnalyzer.Forms
             this.mnuResetColumns.Image = ((System.Drawing.Image)(resources.GetObject("mnuResetColumns.Image")));
             this.mnuResetColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuResetColumns.Name = "mnuResetColumns";
-            this.mnuResetColumns.Size = new System.Drawing.Size(32, 32);
+            this.mnuResetColumns.Size = new System.Drawing.Size(40, 32);
             this.mnuResetColumns.Text = "Reset Column Sort Order to Default";
             this.mnuResetColumns.Click += new System.EventHandler(this.MnuResetColumns_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 35);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 38);
             // 
             // printToolStripButton
             // 
@@ -128,7 +128,7 @@ namespace FTAnalyzer.Forms
             this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
             this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripButton.Name = "printToolStripButton";
-            this.printToolStripButton.Size = new System.Drawing.Size(32, 32);
+            this.printToolStripButton.Size = new System.Drawing.Size(40, 32);
             this.printToolStripButton.Text = "&Print";
             this.printToolStripButton.Click += new System.EventHandler(this.PrintToolStripButton_Click);
             // 
@@ -138,14 +138,14 @@ namespace FTAnalyzer.Forms
             this.printPreviewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripButton.Image")));
             this.printPreviewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
-            this.printPreviewToolStripButton.Size = new System.Drawing.Size(32, 32);
+            this.printPreviewToolStripButton.Size = new System.Drawing.Size(40, 32);
             this.printPreviewToolStripButton.Text = "Print Preview...";
             this.printPreviewToolStripButton.Click += new System.EventHandler(this.PrintPreviewToolStripButton_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(6, 35);
+            this.toolStripSeparator.Size = new System.Drawing.Size(6, 38);
             // 
             // mnuExportToExcel
             // 
@@ -153,14 +153,14 @@ namespace FTAnalyzer.Forms
             this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
             this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuExportToExcel.Name = "mnuExportToExcel";
-            this.mnuExportToExcel.Size = new System.Drawing.Size(32, 32);
+            this.mnuExportToExcel.Size = new System.Drawing.Size(40, 32);
             this.mnuExportToExcel.Text = "Export to Excel";
             this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
             // 
             // sep1
             // 
             this.sep1.Name = "sep1";
-            this.sep1.Size = new System.Drawing.Size(6, 35);
+            this.sep1.Size = new System.Drawing.Size(6, 38);
             // 
             // btnShowHideFacts
             // 
@@ -171,7 +171,7 @@ namespace FTAnalyzer.Forms
             this.btnShowHideFacts.Image = ((System.Drawing.Image)(resources.GetObject("btnShowHideFacts.Image")));
             this.btnShowHideFacts.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnShowHideFacts.Name = "btnShowHideFacts";
-            this.btnShowHideFacts.Size = new System.Drawing.Size(32, 32);
+            this.btnShowHideFacts.Size = new System.Drawing.Size(40, 32);
             this.btnShowHideFacts.Text = "Show Hide";
             this.btnShowHideFacts.ToolTipText = "Show/Hide Ignored Facts";
             this.btnShowHideFacts.Click += new System.EventHandler(this.BtnShowHideFacts_Click);
@@ -182,7 +182,6 @@ namespace FTAnalyzer.Forms
             this.dgFacts.AllowUserToDeleteRows = false;
             this.dgFacts.AllowUserToOrderColumns = true;
             this.dgFacts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgFacts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgFacts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FactIcon,
@@ -213,13 +212,14 @@ namespace FTAnalyzer.Forms
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgFacts.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgFacts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgFacts.Location = new System.Drawing.Point(0, 35);
+            this.dgFacts.Location = new System.Drawing.Point(0, 38);
+            this.dgFacts.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.dgFacts.Name = "dgFacts";
             this.dgFacts.ReadOnly = true;
             this.dgFacts.RowHeadersWidth = 20;
             this.dgFacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgFacts.ShowEditingIcon = false;
-            this.dgFacts.Size = new System.Drawing.Size(948, 330);
+            this.dgFacts.Size = new System.Drawing.Size(1738, 637);
             this.dgFacts.TabIndex = 2;
             this.dgFacts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgFacts_CellContentClick);
             this.dgFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgFacts_CellDoubleClick);
@@ -305,7 +305,7 @@ namespace FTAnalyzer.Forms
             this.SurnameAtDate.MinimumWidth = 75;
             this.SurnameAtDate.Name = "SurnameAtDate";
             this.SurnameAtDate.ReadOnly = true;
-            this.SurnameAtDate.Width = 82;
+            this.SurnameAtDate.Width = 147;
             // 
             // Relation
             // 
@@ -314,7 +314,7 @@ namespace FTAnalyzer.Forms
             this.Relation.MinimumWidth = 105;
             this.Relation.Name = "Relation";
             this.Relation.ReadOnly = true;
-            this.Relation.Width = 105;
+            this.Relation.Width = 123;
             // 
             // RelationToRoot
             // 
@@ -323,6 +323,7 @@ namespace FTAnalyzer.Forms
             this.RelationToRoot.MinimumWidth = 100;
             this.RelationToRoot.Name = "RelationToRoot";
             this.RelationToRoot.ReadOnly = true;
+            this.RelationToRoot.Width = 145;
             // 
             // DateofBirth
             // 
@@ -361,7 +362,7 @@ namespace FTAnalyzer.Forms
             this.CensusRefYear.MinimumWidth = 9;
             this.CensusRefYear.Name = "CensusRefYear";
             this.CensusRefYear.ReadOnly = true;
-            this.CensusRefYear.Width = 83;
+            this.CensusRefYear.Width = 148;
             // 
             // CensusReference
             // 
@@ -401,7 +402,7 @@ namespace FTAnalyzer.Forms
             this.SourcesCount.MinimumWidth = 9;
             this.SourcesCount.Name = "SourcesCount";
             this.SourcesCount.ReadOnly = true;
-            this.SourcesCount.Width = 88;
+            this.SourcesCount.Width = 158;
             // 
             // SourceList
             // 
@@ -418,27 +419,29 @@ namespace FTAnalyzer.Forms
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsRecords});
-            this.statusStrip.Location = new System.Drawing.Point(0, 365);
+            this.statusStrip.Location = new System.Drawing.Point(0, 675);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(948, 22);
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 26, 0);
+            this.statusStrip.Size = new System.Drawing.Size(1738, 39);
             this.statusStrip.TabIndex = 3;
             this.statusStrip.Text = "statusStrip1";
             // 
             // tsRecords
             // 
             this.tsRecords.Name = "tsRecords";
-            this.tsRecords.Size = new System.Drawing.Size(118, 17);
+            this.tsRecords.Size = new System.Drawing.Size(206, 30);
             this.tsRecords.Text = "toolStripStatusLabel1";
             // 
             // Facts
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(948, 387);
+            this.ClientSize = new System.Drawing.Size(1738, 714);
             this.Controls.Add(this.dgFacts);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "Facts";
             this.Text = "Facts";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Facts_FormClosed);

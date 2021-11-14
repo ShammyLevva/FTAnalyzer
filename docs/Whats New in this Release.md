@@ -15,6 +15,9 @@ Duplicates exclude those with unknown names
 Icon sizes now scale if using a high resolution monitor  
 Google lookups forced to use HTMLencoded strings  
 Loose deaths for fathers now limit to 1st of month rather than 1st January of year of oldest child  
+Cope with missing characterset in GEDCOM header  
+1940 US census is allowed to be a reference for a 1935 residence  
+Dont overwrite a good census reference if more than one per fact  
 
 #### Updated Release Version 8.3.1 16th March 2021  
 **Updates**  

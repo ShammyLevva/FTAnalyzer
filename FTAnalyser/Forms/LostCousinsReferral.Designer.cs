@@ -63,6 +63,7 @@ namespace FTAnalyzer.Forms
             // 
             // toolStrip1
             // 
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuSaveColumnLayout,
             this.mnuResetColumns,
@@ -73,7 +74,8 @@ namespace FTAnalyzer.Forms
             this.mnuExportToExcel});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(943, 25);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
+            this.toolStrip1.Size = new System.Drawing.Size(1729, 38);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -83,7 +85,7 @@ namespace FTAnalyzer.Forms
             this.mnuSaveColumnLayout.Image = ((System.Drawing.Image)(resources.GetObject("mnuSaveColumnLayout.Image")));
             this.mnuSaveColumnLayout.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuSaveColumnLayout.Name = "mnuSaveColumnLayout";
-            this.mnuSaveColumnLayout.Size = new System.Drawing.Size(23, 22);
+            this.mnuSaveColumnLayout.Size = new System.Drawing.Size(40, 32);
             this.mnuSaveColumnLayout.Text = "Save Column Sort Order, layout, width etc";
             this.mnuSaveColumnLayout.Click += new System.EventHandler(this.MnuSaveColumnLayout_Click);
             // 
@@ -93,14 +95,14 @@ namespace FTAnalyzer.Forms
             this.mnuResetColumns.Image = ((System.Drawing.Image)(resources.GetObject("mnuResetColumns.Image")));
             this.mnuResetColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuResetColumns.Name = "mnuResetColumns";
-            this.mnuResetColumns.Size = new System.Drawing.Size(23, 22);
+            this.mnuResetColumns.Size = new System.Drawing.Size(40, 32);
             this.mnuResetColumns.Text = "Reset Column Sort Order to Default";
             this.mnuResetColumns.Click += new System.EventHandler(this.MnuResetColumns_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 38);
             // 
             // printToolStripButton
             // 
@@ -108,7 +110,7 @@ namespace FTAnalyzer.Forms
             this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
             this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripButton.Name = "printToolStripButton";
-            this.printToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.printToolStripButton.Size = new System.Drawing.Size(40, 32);
             this.printToolStripButton.Text = "&Print";
             this.printToolStripButton.Click += new System.EventHandler(this.PrintToolStripButton_Click);
             // 
@@ -118,14 +120,14 @@ namespace FTAnalyzer.Forms
             this.printPreviewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripButton.Image")));
             this.printPreviewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
-            this.printPreviewToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.printPreviewToolStripButton.Size = new System.Drawing.Size(40, 32);
             this.printPreviewToolStripButton.Text = "Print Preview...";
             this.printPreviewToolStripButton.Click += new System.EventHandler(this.PrintPreviewToolStripButton_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator.Size = new System.Drawing.Size(6, 38);
             // 
             // mnuExportToExcel
             // 
@@ -133,7 +135,7 @@ namespace FTAnalyzer.Forms
             this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
             this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuExportToExcel.Name = "mnuExportToExcel";
-            this.mnuExportToExcel.Size = new System.Drawing.Size(23, 22);
+            this.mnuExportToExcel.Size = new System.Drawing.Size(40, 32);
             this.mnuExportToExcel.Text = "Export to Excel";
             this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
             // 
@@ -142,6 +144,7 @@ namespace FTAnalyzer.Forms
             this.dgLCReferrals.AllowUserToAddRows = false;
             this.dgLCReferrals.AllowUserToDeleteRows = false;
             this.dgLCReferrals.AllowUserToOrderColumns = true;
+            this.dgLCReferrals.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgLCReferrals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLCReferrals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CensusReference,
@@ -161,27 +164,31 @@ namespace FTAnalyzer.Forms
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgLCReferrals.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgLCReferrals.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgLCReferrals.Location = new System.Drawing.Point(0, 25);
+            this.dgLCReferrals.Location = new System.Drawing.Point(0, 38);
+            this.dgLCReferrals.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.dgLCReferrals.Name = "dgLCReferrals";
             this.dgLCReferrals.ReadOnly = true;
             this.dgLCReferrals.RowHeadersWidth = 20;
             this.dgLCReferrals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgLCReferrals.ShowEditingIcon = false;
-            this.dgLCReferrals.Size = new System.Drawing.Size(943, 364);
+            this.dgLCReferrals.Size = new System.Drawing.Size(1729, 699);
             this.dgLCReferrals.TabIndex = 3;
             // 
             // CensusReference
             // 
             this.CensusReference.DataPropertyName = "CensusReference";
             this.CensusReference.HeaderText = "Census Reference";
+            this.CensusReference.MinimumWidth = 9;
             this.CensusReference.Name = "CensusReference";
             this.CensusReference.ReadOnly = true;
+            this.CensusReference.Width = 197;
             // 
             // IndividualID
             // 
             this.IndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.IndividualID.DataPropertyName = "IndividualID";
             this.IndividualID.HeaderText = "Ind ID";
+            this.IndividualID.MinimumWidth = 9;
             this.IndividualID.Name = "IndividualID";
             this.IndividualID.ReadOnly = true;
             this.IndividualID.Width = 50;
@@ -194,6 +201,7 @@ namespace FTAnalyzer.Forms
             this.Forenames.MinimumWidth = 100;
             this.Forenames.Name = "Forenames";
             this.Forenames.ReadOnly = true;
+            this.Forenames.Width = 175;
             // 
             // Surname
             // 
@@ -222,7 +230,7 @@ namespace FTAnalyzer.Forms
             this.Census.MinimumWidth = 50;
             this.Census.Name = "Census";
             this.Census.ReadOnly = true;
-            this.Census.Width = 375;
+            this.Census.Width = 121;
             // 
             // Include
             // 
@@ -231,7 +239,7 @@ namespace FTAnalyzer.Forms
             this.Include.MinimumWidth = 45;
             this.Include.Name = "Include";
             this.Include.ReadOnly = true;
-            this.Include.Width = 45;
+            this.Include.Width = 81;
             // 
             // RelationType
             // 
@@ -240,32 +248,35 @@ namespace FTAnalyzer.Forms
             this.RelationType.MinimumWidth = 105;
             this.RelationType.Name = "RelationType";
             this.RelationType.ReadOnly = true;
-            this.RelationType.Width = 105;
+            this.RelationType.Width = 159;
             // 
             // statusStrip
             // 
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsRecords});
-            this.statusStrip.Location = new System.Drawing.Point(0, 389);
+            this.statusStrip.Location = new System.Drawing.Point(0, 737);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(943, 22);
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 26, 0);
+            this.statusStrip.Size = new System.Drawing.Size(1729, 22);
             this.statusStrip.TabIndex = 4;
             this.statusStrip.Text = "statusStrip1";
             // 
             // tsRecords
             // 
             this.tsRecords.Name = "tsRecords";
-            this.tsRecords.Size = new System.Drawing.Size(0, 17);
+            this.tsRecords.Size = new System.Drawing.Size(0, 13);
             // 
             // LostCousinsReferral
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(943, 411);
+            this.ClientSize = new System.Drawing.Size(1729, 759);
             this.Controls.Add(this.dgLCReferrals);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "LostCousinsReferral";
             this.Text = "LostCousinsReferral";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LostCousinsReferral_FormClosed);

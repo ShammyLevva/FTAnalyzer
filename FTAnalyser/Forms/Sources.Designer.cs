@@ -147,7 +147,6 @@ namespace FTAnalyzer.Forms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgSources.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgSources.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgSources.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgSources.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SourceID,
@@ -166,7 +165,7 @@ namespace FTAnalyzer.Forms
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgSources.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgSources.Location = new System.Drawing.Point(0, 46);
-            this.dgSources.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dgSources.Margin = new System.Windows.Forms.Padding(6);
             this.dgSources.Name = "dgSources";
             this.dgSources.ReadOnly = true;
             this.dgSources.RowHeadersWidth = 20;
@@ -273,7 +272,7 @@ namespace FTAnalyzer.Forms
             this.Controls.Add(this.dgSources);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "SourcesForm";
             this.Text = "Sources";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Sources_FormClosed);
