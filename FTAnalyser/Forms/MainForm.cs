@@ -483,6 +483,7 @@ namespace FTAnalyzer
             mnuWorldWarsToExcel.Enabled = enabled && dgWorldWars.RowCount > 0;
             mnuDNA_GEDCOM.Enabled = enabled;
             mnuJSON.Enabled = enabled;
+            MnuExportLocations.Enabled = enabled;
         }
 
         void HourGlass(bool on)
@@ -3696,6 +3697,44 @@ namespace FTAnalyzer
         void RadioFacts_CheckedChanged(object sender, EventArgs e)
         {
             SetShowFactsButton();
+        }
+
+        async void MnuGoogleMyMaps_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    string initialDir = (string)Application.UserAppDataRegistry.GetValue("Google MyMaps Path");
+                    string initialFile = (string)Application.UserAppDataRegistry.GetValue("Google MyMaps Filename");
+                    saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
+                    saveFileDialog.FileName = initialFile ?? string.Empty;
+                    saveFileDialog.Filter = "Keyhole Markup Language (*.kml)|*.kml";
+                    saveFileDialog.FilterIndex = 1;
+                    DialogResult dr = saveFileDialog.ShowDialog();
+                    if (dr == DialogResult.OK)
+                    {
+                        if (!saveFileDialog.FileName.EndsWith(".kml"))
+                            saveFileDialog.FileName += ".kml";
+                        string path = Path.GetDirectoryName(saveFileDialog.FileName);
+                        string file = Path.GetFileName(saveFileDialog.FileName);
+                        Application.UserAppDataRegistry.SetValue("Google MyMaps Path", path);
+                        Application.UserAppDataRegistry.SetValue("Google MyMaps Filename", file);
+                        Progress<int> progress = new Progress<int>(value => { tspbTabProgress.Value = value; });
+                        tspbTabProgress.Visible = true;
+                        tspbTabProgress.Maximum = 100;
+                        await Task.Run(() => 
+                            GoogleMap.GenerateKML(saveFileDialog.FileName, ft.AllExportableGeocodedLocations(progress)));
+                        UIHelpers.ShowMessage($"File written to {saveFileDialog.FileName}", "FTAnalyzer");
+                        tspbTabProgress.Visible = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                UIHelpers.ShowMessage(ex.Message, "FTAnalyzer");
+            }
+
         }
     }
 }

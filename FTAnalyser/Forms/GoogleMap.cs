@@ -1,12 +1,14 @@
 ﻿using FTAnalyzer.Events;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
+using Ionic.Zip;
 using log4net.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Json;
+using System.Text;
 using System.Threading;
 using System.Web;
 using System.Windows.Forms;
@@ -329,6 +331,52 @@ namespace FTAnalyzer.Forms
                 Status = "Maxed"
             };
             return response;
+        }
+
+        public static void GenerateKML(string filename, List<ExportFactsAtLocation> locations)
+        {
+            using(StreamWriter output = new StreamWriter(new FileStream(filename, FileMode.Create, FileAccess.Write), Encoding.UTF8))
+            {
+                output.WriteLine(@"<?xml version=""1.0"" encoding=""UTF-8""?>");
+                output.WriteLine(@"<kml xmlns=""http://www.opengis.net/kml/2.2"">");
+                output.WriteLine("<Document>");
+                foreach(ExportFactsAtLocation loc in locations)
+                {
+                    if (loc.FactsAtLocation?.Count > 0)
+                    {
+                        output.WriteLine("<Placemark>");
+                        output.WriteLine($"    <name>{loc.LocationName}</name>");
+                        output.WriteLine($"    <description>The following individuals/families were here:");
+                        int placecount = 0;
+                        foreach (string factAtLocation in loc.FactsAtLocation)
+                        {
+                            if(placecount++ <= 100)
+                                output.WriteLine($"{factAtLocation}"); // eg: John Smith born here XX XXX XXXX
+                            else
+                            {
+                                int remaining = loc.FactsAtLocation.Count - 100;
+                                output.WriteLine($"and {remaining} more. (Google limit max 100 lines).");
+                                break;
+                            }
+                        }
+                        output.WriteLine("    </description>");
+                        output.WriteLine("    <Point>");
+                        output.WriteLine($"        <coordinates>{loc.Longitude},{loc.Latitude},0</coordinates>");
+                        output.WriteLine("    </Point>");
+                        output.WriteLine("</Placemark>");
+                    }
+                }
+                output.WriteLine("</Document>");
+                output.WriteLine("</kml>");
+            }
+            long length = new FileInfo(filename).Length;
+            if (length > 5000000)
+            {
+                string zipFilename = filename.Replace(".kml", ".kmz");
+                ZipFile zip = new ZipFile(zipFilename);
+                zip.AddFile(filename);
+                zip.Save();
+            }
         }
 
         void WebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e) => System.Diagnostics.Debug.Print("DocumentCompleted called");

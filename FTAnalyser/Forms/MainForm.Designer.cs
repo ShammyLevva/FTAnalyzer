@@ -386,6 +386,8 @@ namespace FTAnalyzer
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuGoogleMyMaps = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -942,7 +944,9 @@ namespace FTAnalyzer
             this.toolStripSeparator10,
             this.mnuGeocodeLocations,
             this.mnuOSGeocoder,
-            this.mnuLookupBlankFoundLocations});
+            this.mnuLookupBlankFoundLocations,
+            this.toolStripSeparator16,
+            this.mnuGoogleMyMaps});
             this.mnuMaps.Name = "mnuMaps";
             this.mnuMaps.Size = new System.Drawing.Size(82, 34);
             this.mnuMaps.Text = "Maps";
@@ -4394,6 +4398,18 @@ namespace FTAnalyzer
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // toolStripSeparator16
+            // 
+            this.toolStripSeparator16.Name = "toolStripSeparator16";
+            this.toolStripSeparator16.Size = new System.Drawing.Size(496, 6);
+            // 
+            // mnuGoogleMyMaps
+            // 
+            this.mnuGoogleMyMaps.Name = "mnuGoogleMyMaps";
+            this.mnuGoogleMyMaps.Size = new System.Drawing.Size(499, 40);
+            this.mnuGoogleMyMaps.Text = "Export to Google MyMaps";
+            this.mnuGoogleMyMaps.Click += new System.EventHandler(this.MnuGoogleMyMaps_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -4863,6 +4879,8 @@ namespace FTAnalyzer
         private System.Windows.Forms.RadioButton radioOnlyAlternate;
         private System.Windows.Forms.RadioButton radioOnlyPreferred;
         private System.Windows.Forms.RadioButton radioAllFacts;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
+        private System.Windows.Forms.ToolStripMenuItem mnuGoogleMyMaps;
     }
 }
 

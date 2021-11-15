@@ -9,6 +9,7 @@ Added support for England and Wales 2021 census
 Removed 1931 England and Wales as census as it was destroyed  
 Added feature to facts tab to filter on alternate/preferred facts  
 Custom Facts tab now shows families who have a custom fact  
+Added export of geocoded locations to Google MyMaps KML format  
 
 **Bugfixes**  
 Remapped sizes of all controls on main form to hopefully eliminate the scroll bar bug  
