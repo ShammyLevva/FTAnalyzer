@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "8.4.0.0-beta7";
+        public static string VERSION = "8.4.0.0-beta8";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         Cursor storedCursor = Cursors.Default;
@@ -483,7 +483,7 @@ namespace FTAnalyzer
             mnuWorldWarsToExcel.Enabled = enabled && dgWorldWars.RowCount > 0;
             mnuDNA_GEDCOM.Enabled = enabled;
             mnuJSON.Enabled = enabled;
-            MnuExportLocations.Enabled = enabled;
+            mnuGoogleMyMaps.Enabled = enabled;
         }
 
         void HourGlass(bool on)
