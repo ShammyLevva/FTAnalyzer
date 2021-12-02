@@ -589,6 +589,7 @@ namespace FTAnalyzer
             treeTopsList.Sort(new BirthDateComparer());
             dgTreeTops.DataSource = new SortableBindingList<IDisplayIndividual>(treeTopsList);
             dgTreeTops.Focus();
+            CheckDataGridSize(dgTreeTops);
             foreach (DataGridViewColumn c in dgTreeTops.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = Messages.Count + treeTopsList.Count;
@@ -610,6 +611,7 @@ namespace FTAnalyzer
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
             dgWorldWars.DataSource = new SortableBindingList<IDisplayIndividual>(warDeadList);
             dgWorldWars.Focus();
+            CheckDataGridSize(dgWorldWars);
             foreach (DataGridViewColumn c in dgWorldWars.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = Messages.Count + warDeadList.Count;
@@ -629,6 +631,7 @@ namespace FTAnalyzer
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
             dgWorldWars.DataSource = new SortableBindingList<IDisplayIndividual>(warDeadList);
             dgWorldWars.Focus();
+            CheckDataGridSize(dgWorldWars);
             foreach (DataGridViewColumn c in dgWorldWars.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = Messages.Count + warDeadList.Count;
@@ -863,6 +866,7 @@ namespace FTAnalyzer
         {
             dgDataErrors.DataSource = DataErrors(ckbDataErrors);
             dgDataErrors.Focus();
+            CheckDataGridSize(dgDataErrors);
             mnuPrint.Enabled = true;
             UpdateDataErrorsDisplay();
         }
@@ -1448,6 +1452,7 @@ namespace FTAnalyzer
                 dgFamilies.DataSource = list;
                 dgFamilies.Sort(dgFamilies.Columns[nameof(IDisplayFamily.FamilyID)], ListSortDirection.Ascending);
                 dgFamilies.Focus();
+                CheckDataGridSize(dgFamilies);
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
                 tsHintsLabel.Text = Messages.Hints_Family;
@@ -1459,6 +1464,7 @@ namespace FTAnalyzer
                 dgSources.DataSource = list;
                 dgSources.Sort(dgSources.Columns[nameof(IDisplaySource.SourceID)], ListSortDirection.Ascending);
                 dgSources.Focus();
+                CheckDataGridSize(dgSources);
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
                 tsHintsLabel.Text = Messages.Hints_Sources;
@@ -1470,6 +1476,7 @@ namespace FTAnalyzer
                 dgOccupations.DataSource = list;
                 dgOccupations.Sort(dgOccupations.Columns[nameof(IDisplayOccupation.Occupation)], ListSortDirection.Ascending);
                 dgOccupations.Focus();
+                CheckDataGridSize(dgOccupations);
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
                 tsHintsLabel.Text = Messages.Hints_Occupation;
@@ -1481,6 +1488,7 @@ namespace FTAnalyzer
                 dgCustomFacts.DataSource = list;
                 dgCustomFacts.Sort(dgCustomFacts.Columns[nameof(IDisplayCustomFact.CustomFactName)], ListSortDirection.Ascending);
                 dgCustomFacts.Focus();
+                CheckDataGridSize(dgCustomFacts);
                 dgCustomFacts.Columns[nameof(IDisplayCustomFact.Ignore)].ReadOnly = false;
                 dgCustomFacts.Columns[nameof(IDisplayCustomFact.Ignore)].ToolTipText = "Tick box to ignore warnings for this custom fact type.";
                 mnuPrint.Enabled = true;
@@ -1497,9 +1505,18 @@ namespace FTAnalyzer
             dgIndividuals.Sort(dgIndividuals.Columns[nameof(IDisplayIndividual.IndividualID)], ListSortDirection.Ascending);
             dgIndividuals.AllowUserToResizeColumns = true;
             dgIndividuals.Focus();
+            CheckDataGridSize(dgIndividuals);
             mnuPrint.Enabled = true;
             tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
             tsHintsLabel.Text = Messages.Hints_Individual;
+        }
+
+        void CheckDataGridSize(DataGridView datagrid)
+        {
+            if (datagrid.Height > datagrid.Parent.Height)
+                datagrid.Height = datagrid.Parent.Height;
+            if (datagrid.Width > datagrid.Parent.Width)
+                datagrid.Width = datagrid.Parent.Width;
         }
 
         async void TabErrorFixSelector_SelectedIndexChanged(object sender, EventArgs e)
@@ -1512,6 +1529,7 @@ namespace FTAnalyzer
                 ckbHideIgnoredDuplicates.Checked = GeneralSettings.Default.HideIgnoredDuplicates;
                 await SetPossibleDuplicates().ConfigureAwait(true);
                 dgDuplicates.Focus();
+                CheckDataGridSize(dgDuplicates);
                 mnuPrint.Enabled = true;
                 await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.DuplicatesTabEvent).ConfigureAwait(true);
             }
@@ -3016,6 +3034,7 @@ namespace FTAnalyzer
                 dgLooseBirths.Sort(dgLooseBirths.Columns[nameof(IDisplayLooseBirth.Forenames)], ListSortDirection.Ascending);
                 dgLooseBirths.Sort(dgLooseBirths.Columns[nameof(IDisplayLooseBirth.Surname)], ListSortDirection.Ascending);
                 dgLooseBirths.Focus();
+                CheckDataGridSize(dgLooseBirths);
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + looseBirthList.Count;
                 tsHintsLabel.Text = Messages.Hints_Loose_Births + Messages.Hints_Individual;
@@ -3036,6 +3055,7 @@ namespace FTAnalyzer
                 dgLooseDeaths.Sort(dgLooseDeaths.Columns[nameof(IDisplayLooseDeath.Forenames)], ListSortDirection.Ascending);
                 dgLooseDeaths.Sort(dgLooseDeaths.Columns[nameof(IDisplayLooseDeath.Surname)], ListSortDirection.Ascending);
                 dgLooseDeaths.Focus();
+                CheckDataGridSize(dgLooseDeaths);
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + looseDeathList.Count;
                 tsHintsLabel.Text = Messages.Hints_Loose_Deaths + Messages.Hints_Individual;
@@ -3055,6 +3075,7 @@ namespace FTAnalyzer
                 dgLooseInfo.Sort(dgLooseInfo.Columns[nameof(IDisplayLooseInfo.Forenames)], ListSortDirection.Ascending);
                 dgLooseInfo.Sort(dgLooseInfo.Columns[nameof(IDisplayLooseInfo.Surname)], ListSortDirection.Ascending);
                 dgLooseInfo.Focus();
+                CheckDataGridSize(dgLooseInfo);
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + looseInfoList.Count;
                 tsHintsLabel.Text = "Double click to view records. " + Messages.Hints_Individual;
@@ -3516,6 +3537,7 @@ namespace FTAnalyzer
             dgSurnames.DataSource = list;
             dgSurnames.Sort(dgSurnames.Columns[nameof(IDisplaySurnames.Surname)], ListSortDirection.Ascending);
             dgSurnames.Focus();
+            CheckDataGridSize(dgSurnames);
             tsCountLabel.Text = $"{Messages.Count}{list.Count} Surnames.";
             tsHintsLabel.Text = Messages.Hints_Surname;
             HourGlass(false);
