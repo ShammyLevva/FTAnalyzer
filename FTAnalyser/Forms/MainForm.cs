@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "8.4.0.0-beta8";
+        public static string VERSION = "8.4.0.0";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         Cursor storedCursor = Cursors.Default;
@@ -189,6 +189,11 @@ namespace FTAnalyzer
             Width = pictureBox1.Right + 100;
             splitGedcom.SplitterDistance = Math.Max(pbRelationships.Bottom + 18, 110);
             splitGedcom.Refresh();
+            tsCountLabel.Font = normalFont;
+            tsHintsLabel.Font = normalFont;
+            tsStatusLabel.Font = normalFont;
+            menuStrip1.Font = normalFont;
+            Refresh();
         }
 
         void RegisterEventHandlers()
