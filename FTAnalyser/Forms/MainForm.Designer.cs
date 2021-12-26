@@ -44,8 +44,8 @@ namespace FTAnalyzer
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1285,14 +1285,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgCheckAncestors.ColumnHeadersHeight = 40;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgCheckAncestors.Location = new System.Drawing.Point(-2, 155);
             this.dgCheckAncestors.Margin = new System.Windows.Forms.Padding(6);
             this.dgCheckAncestors.Name = "dgCheckAncestors";
@@ -1358,14 +1358,14 @@ namespace FTAnalyzer
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgDataErrors.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgDataErrors.Location = new System.Drawing.Point(11, 306);
             this.dgDataErrors.Margin = new System.Windows.Forms.Padding(11);
             this.dgDataErrors.MultiSelect = false;
@@ -1576,7 +1576,7 @@ namespace FTAnalyzer
             this.dgWorldWars.RowHeadersVisible = false;
             this.dgWorldWars.RowHeadersWidth = 50;
             this.dgWorldWars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgWorldWars.Size = new System.Drawing.Size(1969, 517);
+            this.dgWorldWars.Size = new System.Drawing.Size(1964, 527);
             this.dgWorldWars.TabIndex = 29;
             this.dgWorldWars.VirtualMode = true;
             this.dgWorldWars.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgWorldWars_CellDoubleClick);
@@ -1710,7 +1710,7 @@ namespace FTAnalyzer
             this.dgTreeTops.RowHeadersVisible = false;
             this.dgTreeTops.RowHeadersWidth = 50;
             this.dgTreeTops.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgTreeTops.Size = new System.Drawing.Size(1969, 517);
+            this.dgTreeTops.Size = new System.Drawing.Size(1964, 517);
             this.dgTreeTops.TabIndex = 28;
             this.dgTreeTops.VirtualMode = true;
             this.dgTreeTops.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgTreeTops_CellDoubleClick);
@@ -2899,7 +2899,7 @@ namespace FTAnalyzer
             this.btnModernOSMap.Location = new System.Drawing.Point(1366, 4);
             this.btnModernOSMap.Margin = new System.Windows.Forms.Padding(6);
             this.btnModernOSMap.Name = "btnModernOSMap";
-            this.btnModernOSMap.Size = new System.Drawing.Size(229, 41);
+            this.btnModernOSMap.Size = new System.Drawing.Size(229, 29);
             this.btnModernOSMap.TabIndex = 5;
             this.btnModernOSMap.Text = "Show Modern OS Map";
             this.btnModernOSMap.UseVisualStyleBackColor = true;
@@ -2912,7 +2912,7 @@ namespace FTAnalyzer
             this.btnOldOSMap.Location = new System.Drawing.Point(1591, 4);
             this.btnOldOSMap.Margin = new System.Windows.Forms.Padding(6);
             this.btnOldOSMap.Name = "btnOldOSMap";
-            this.btnOldOSMap.Size = new System.Drawing.Size(191, 41);
+            this.btnOldOSMap.Size = new System.Drawing.Size(191, 29);
             this.btnOldOSMap.TabIndex = 3;
             this.btnOldOSMap.Text = "Show Old OS Map";
             this.btnOldOSMap.UseVisualStyleBackColor = true;
@@ -2924,7 +2924,7 @@ namespace FTAnalyzer
             this.btnShowMap.Location = new System.Drawing.Point(1784, 4);
             this.btnShowMap.Margin = new System.Windows.Forms.Padding(6);
             this.btnShowMap.Name = "btnShowMap";
-            this.btnShowMap.Size = new System.Drawing.Size(191, 41);
+            this.btnShowMap.Size = new System.Drawing.Size(180, 29);
             this.btnShowMap.TabIndex = 2;
             this.btnShowMap.Text = "Show Google Map";
             this.btnShowMap.UseVisualStyleBackColor = true;
@@ -4278,7 +4278,7 @@ namespace FTAnalyzer
             this.rtbToday.Margin = new System.Windows.Forms.Padding(6);
             this.rtbToday.Name = "rtbToday";
             this.rtbToday.ReadOnly = true;
-            this.rtbToday.Size = new System.Drawing.Size(1984, 659);
+            this.rtbToday.Size = new System.Drawing.Size(1958, 646);
             this.rtbToday.TabIndex = 7;
             this.rtbToday.Text = "";
             // 
