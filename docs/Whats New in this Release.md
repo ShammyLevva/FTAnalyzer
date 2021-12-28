@@ -1,4 +1,4 @@
-#### Updated Release Version 8.4.0 to be released  
+#### Updated Release Version 8.4.0 26th December 2021
 **Updates**  
 Temp XML file is now unloaded after initial processing freeing up memory  
 Initial Load now says how much memory was used during loading and procesing  
