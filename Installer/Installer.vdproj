@@ -6547,7 +6547,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FTAnalyzer"
         "ProductCode" = "8:{C83CFC62-DF5C-438A-A023-96B3872133E7}"
-        "PackageCode" = "8:{65812150-CAEE-43BA-9B6C-C02C866C6EAA}"
+        "PackageCode" = "8:{23713F99-B88F-4F0F-ABA3-9124F612B020}"
         "UpgradeCode" = "8:{1207BD34-CD5A-4BEA-838E-74C0B720E1DA}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
