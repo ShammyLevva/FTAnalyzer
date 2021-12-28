@@ -101,7 +101,7 @@ namespace FTAnalyzer.Forms.Controls
         {
             if (Parent != null)
             {
-                Rectangle bounds = Bounds;
+                //Rectangle bounds = Bounds;
                 int maxHeight = Parent.Height - SystemInformation.HorizontalScrollBarHeight - Location.Y;
                 int maxWidth = Parent.Width - SystemInformation.VerticalScrollBarWidth - Location.X;
                 Size = new Size(maxWidth, maxHeight);

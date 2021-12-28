@@ -1,3 +1,7 @@
+### Updated Release Version 8.4.0.1 to be released
+**Bugfixes**  
+Altered grid resize to force to account for size of scrollbars on different resolutions  
+
 #### Updated Release Version 8.4.0 26th December 2021
 **Updates**  
 Temp XML file is now unloaded after initial processing freeing up memory  
