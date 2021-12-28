@@ -87,17 +87,17 @@ namespace FTAnalyzer.Forms
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsRecords});
-            this.statusStrip.Location = new System.Drawing.Point(0, 1054);
+            this.statusStrip.Location = new System.Drawing.Point(0, 1037);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 26, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1903, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1903, 39);
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "statusStrip1";
             // 
             // tsRecords
             // 
             this.tsRecords.Name = "tsRecords";
-            this.tsRecords.Size = new System.Drawing.Size(118, 17);
+            this.tsRecords.Size = new System.Drawing.Size(206, 30);
             this.tsRecords.Text = "toolStripStatusLabel1";
             // 
             // toolStrip1
@@ -124,7 +124,7 @@ namespace FTAnalyzer.Forms
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1903, 35);
+            this.toolStrip1.Size = new System.Drawing.Size(1903, 40);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -134,7 +134,7 @@ namespace FTAnalyzer.Forms
             this.mnuSaveCensusColumnLayout.Image = ((System.Drawing.Image)(resources.GetObject("mnuSaveCensusColumnLayout.Image")));
             this.mnuSaveCensusColumnLayout.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuSaveCensusColumnLayout.Name = "mnuSaveCensusColumnLayout";
-            this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(32, 32);
+            this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(40, 34);
             this.mnuSaveCensusColumnLayout.Text = "Save Census Column Sort Order";
             this.mnuSaveCensusColumnLayout.Click += new System.EventHandler(this.MnuSaveCensusColumnLayout_Click);
             // 
@@ -144,14 +144,14 @@ namespace FTAnalyzer.Forms
             this.mnuResetCensusColumns.Image = ((System.Drawing.Image)(resources.GetObject("mnuResetCensusColumns.Image")));
             this.mnuResetCensusColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuResetCensusColumns.Name = "mnuResetCensusColumns";
-            this.mnuResetCensusColumns.Size = new System.Drawing.Size(32, 32);
+            this.mnuResetCensusColumns.Size = new System.Drawing.Size(40, 34);
             this.mnuResetCensusColumns.Text = "Reset Census Column Sort Order to Default";
             this.mnuResetCensusColumns.Click += new System.EventHandler(this.MnuResetCensusColumns_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 35);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 40);
             // 
             // printToolStripButton
             // 
@@ -159,7 +159,7 @@ namespace FTAnalyzer.Forms
             this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
             this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripButton.Name = "printToolStripButton";
-            this.printToolStripButton.Size = new System.Drawing.Size(32, 32);
+            this.printToolStripButton.Size = new System.Drawing.Size(40, 34);
             this.printToolStripButton.Text = "&Print";
             this.printToolStripButton.Click += new System.EventHandler(this.PrintToolStripButton_Click);
             // 
@@ -169,14 +169,14 @@ namespace FTAnalyzer.Forms
             this.printPreviewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripButton.Image")));
             this.printPreviewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
-            this.printPreviewToolStripButton.Size = new System.Drawing.Size(32, 32);
+            this.printPreviewToolStripButton.Size = new System.Drawing.Size(40, 34);
             this.printPreviewToolStripButton.Text = "Print Preview...";
             this.printPreviewToolStripButton.Click += new System.EventHandler(this.PrintPreviewToolStripButton_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(6, 35);
+            this.toolStripSeparator.Size = new System.Drawing.Size(6, 40);
             // 
             // mnuExportToExcel
             // 
@@ -184,14 +184,14 @@ namespace FTAnalyzer.Forms
             this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
             this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuExportToExcel.Name = "mnuExportToExcel";
-            this.mnuExportToExcel.Size = new System.Drawing.Size(32, 32);
+            this.mnuExportToExcel.Size = new System.Drawing.Size(40, 34);
             this.mnuExportToExcel.Text = "Export to Excel";
             this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 35);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 40);
             // 
             // tsBtnMapLocation
             // 
@@ -199,7 +199,7 @@ namespace FTAnalyzer.Forms
             this.tsBtnMapLocation.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnMapLocation.Image")));
             this.tsBtnMapLocation.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnMapLocation.Name = "tsBtnMapLocation";
-            this.tsBtnMapLocation.Size = new System.Drawing.Size(174, 32);
+            this.tsBtnMapLocation.Size = new System.Drawing.Size(302, 34);
             this.tsBtnMapLocation.Text = "Show Location on Google Map";
             this.tsBtnMapLocation.Click += new System.EventHandler(this.TsBtnMapLocation_Click);
             // 
@@ -209,25 +209,26 @@ namespace FTAnalyzer.Forms
             this.tsBtnMapOSLocation.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnMapOSLocation.Image")));
             this.tsBtnMapOSLocation.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnMapOSLocation.Name = "tsBtnMapOSLocation";
-            this.tsBtnMapOSLocation.Size = new System.Drawing.Size(151, 32);
+            this.tsBtnMapOSLocation.Size = new System.Drawing.Size(263, 34);
             this.tsBtnMapOSLocation.Text = "Show Location on OS Map";
             this.tsBtnMapOSLocation.Click += new System.EventHandler(this.TsBtnMapOSLocation_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 35);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 40);
             // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(117, 32);
+            this.toolStripLabel1.Size = new System.Drawing.Size(206, 34);
             this.toolStripLabel1.Text = "Census search using:";
             // 
             // cbCensusSearchProvider
             // 
             this.cbCensusSearchProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCensusSearchProvider.DropDownWidth = 200;
+            this.cbCensusSearchProvider.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbCensusSearchProvider.Items.AddRange(new object[] {
             "Ancestry",
             "Find My Past",
@@ -235,13 +236,13 @@ namespace FTAnalyzer.Forms
             "FamilySearch",
             "Scotlands People"});
             this.cbCensusSearchProvider.Name = "cbCensusSearchProvider";
-            this.cbCensusSearchProvider.Size = new System.Drawing.Size(200, 35);
+            this.cbCensusSearchProvider.Size = new System.Drawing.Size(200, 40);
             this.cbCensusSearchProvider.SelectedIndexChanged += new System.EventHandler(this.CbCensusSearchProvider_SelectedIndexChanged);
             // 
             // toolStripLabel2
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(47, 32);
+            this.toolStripLabel2.Size = new System.Drawing.Size(82, 34);
             this.toolStripLabel2.Text = "Region:";
             // 
             // cbRegion
@@ -251,13 +252,14 @@ namespace FTAnalyzer.Forms
             ".co.uk",
             ".ca",
             ".com.au"});
+            this.cbRegion.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbRegion.Items.AddRange(new object[] {
             ".com",
             ".co.uk",
             ".ca",
             ".com.au"});
             this.cbRegion.Name = "cbRegion";
-            this.cbRegion.Size = new System.Drawing.Size(121, 35);
+            this.cbRegion.Size = new System.Drawing.Size(121, 40);
             this.cbRegion.Text = ".co.uk";
             this.cbRegion.SelectedIndexChanged += new System.EventHandler(this.CbRegion_SelectedIndexChanged);
             // 
@@ -267,7 +269,7 @@ namespace FTAnalyzer.Forms
             this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
             this.btnHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(32, 32);
+            this.btnHelp.Size = new System.Drawing.Size(40, 34);
             this.btnHelp.Text = "toolStripButton1";
             this.btnHelp.Click += new System.EventHandler(this.BtnHelp_Click);
             // 
@@ -277,12 +279,12 @@ namespace FTAnalyzer.Forms
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuViewFacts});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(190, 26);
+            this.contextMenuStrip.Size = new System.Drawing.Size(288, 40);
             // 
             // mnuViewFacts
             // 
             this.mnuViewFacts.Name = "mnuViewFacts";
-            this.mnuViewFacts.Size = new System.Drawing.Size(189, 22);
+            this.mnuViewFacts.Size = new System.Drawing.Size(287, 36);
             this.mnuViewFacts.Text = "View Individuals Facts";
             this.mnuViewFacts.Click += new System.EventHandler(this.MnuViewFacts_Click);
             // 
@@ -314,14 +316,14 @@ namespace FTAnalyzer.Forms
             this.CensusReference,
             this.CensusYear,
             this.Ahnentafel});
-            this.dgCensus.Location = new System.Drawing.Point(0, 52);
+            this.dgCensus.Location = new System.Drawing.Point(0, 46);
             this.dgCensus.Margin = new System.Windows.Forms.Padding(6);
             this.dgCensus.Name = "dgCensus";
             this.dgCensus.ReadOnly = true;
             this.dgCensus.RowHeadersWidth = 23;
             this.dgCensus.ShowEditingIcon = false;
             this.dgCensus.ShowRowErrors = false;
-            this.dgCensus.Size = new System.Drawing.Size(1903, 978);
+            this.dgCensus.Size = new System.Drawing.Size(1903, 984);
             this.dgCensus.TabIndex = 1;
             this.dgCensus.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.DgCensus_CellContextMenuStripNeeded);
             this.dgCensus.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgCensus_CellDoubleClick);
@@ -337,7 +339,7 @@ namespace FTAnalyzer.Forms
             this.FamilyID.MinimumWidth = 9;
             this.FamilyID.Name = "FamilyID";
             this.FamilyID.ReadOnly = true;
-            this.FamilyID.Width = 103;
+            this.FamilyID.Width = 124;
             // 
             // Position
             // 
@@ -348,6 +350,7 @@ namespace FTAnalyzer.Forms
             this.Position.Name = "Position";
             this.Position.ReadOnly = true;
             this.Position.Visible = false;
+            this.Position.Width = 175;
             // 
             // IndividualID
             // 
@@ -357,7 +360,7 @@ namespace FTAnalyzer.Forms
             this.IndividualID.MinimumWidth = 9;
             this.IndividualID.Name = "IndividualID";
             this.IndividualID.ReadOnly = true;
-            this.IndividualID.Width = 66;
+            this.IndividualID.Width = 85;
             // 
             // CensusLoc
             // 
@@ -367,7 +370,7 @@ namespace FTAnalyzer.Forms
             this.CensusLoc.MinimumWidth = 9;
             this.CensusLoc.Name = "CensusLoc";
             this.CensusLoc.ReadOnly = true;
-            this.CensusLoc.Width = 206;
+            this.CensusLoc.Width = 233;
             // 
             // CensusName
             // 
@@ -377,7 +380,7 @@ namespace FTAnalyzer.Forms
             this.CensusName.MinimumWidth = 9;
             this.CensusName.Name = "CensusName";
             this.CensusName.ReadOnly = true;
-            this.CensusName.Width = 141;
+            this.CensusName.Width = 164;
             // 
             // Age
             // 
@@ -387,7 +390,7 @@ namespace FTAnalyzer.Forms
             this.Age.MinimumWidth = 9;
             this.Age.Name = "Age";
             this.Age.ReadOnly = true;
-            this.Age.Width = 70;
+            this.Age.Width = 89;
             // 
             // Occupation
             // 
@@ -397,7 +400,7 @@ namespace FTAnalyzer.Forms
             this.Occupation.MinimumWidth = 9;
             this.Occupation.Name = "Occupation";
             this.Occupation.ReadOnly = true;
-            this.Occupation.Width = 132;
+            this.Occupation.Width = 153;
             // 
             // BirthDate
             // 
@@ -407,7 +410,7 @@ namespace FTAnalyzer.Forms
             this.BirthDate.MinimumWidth = 50;
             this.BirthDate.Name = "BirthDate";
             this.BirthDate.ReadOnly = true;
-            this.BirthDate.Width = 105;
+            this.BirthDate.Width = 128;
             // 
             // BirthLocation
             // 
@@ -417,7 +420,7 @@ namespace FTAnalyzer.Forms
             this.BirthLocation.MinimumWidth = 9;
             this.BirthLocation.Name = "BirthLocation";
             this.BirthLocation.ReadOnly = true;
-            this.BirthLocation.Width = 135;
+            this.BirthLocation.Width = 157;
             // 
             // DeathDate
             // 
@@ -427,7 +430,7 @@ namespace FTAnalyzer.Forms
             this.DeathDate.MinimumWidth = 50;
             this.DeathDate.Name = "DeathDate";
             this.DeathDate.ReadOnly = true;
-            this.DeathDate.Width = 116;
+            this.DeathDate.Width = 139;
             // 
             // DeathLocation
             // 
@@ -437,7 +440,7 @@ namespace FTAnalyzer.Forms
             this.DeathLocation.MinimumWidth = 9;
             this.DeathLocation.Name = "DeathLocation";
             this.DeathLocation.ReadOnly = true;
-            this.DeathLocation.Width = 146;
+            this.DeathLocation.Width = 169;
             // 
             // CensusStatus
             // 
@@ -447,7 +450,7 @@ namespace FTAnalyzer.Forms
             this.CensusStatus.MinimumWidth = 9;
             this.CensusStatus.Name = "CensusStatus";
             this.CensusStatus.ReadOnly = true;
-            this.CensusStatus.Width = 163;
+            this.CensusStatus.Width = 187;
             // 
             // Relation
             // 
@@ -457,7 +460,7 @@ namespace FTAnalyzer.Forms
             this.Relation.MinimumWidth = 9;
             this.Relation.Name = "Relation";
             this.Relation.ReadOnly = true;
-            this.Relation.Width = 103;
+            this.Relation.Width = 123;
             // 
             // RelationToRoot
             // 
@@ -467,7 +470,7 @@ namespace FTAnalyzer.Forms
             this.RelationToRoot.MinimumWidth = 50;
             this.RelationToRoot.Name = "RelationToRoot";
             this.RelationToRoot.ReadOnly = true;
-            this.RelationToRoot.Width = 124;
+            this.RelationToRoot.Width = 145;
             // 
             // CensusReference
             // 
@@ -477,7 +480,7 @@ namespace FTAnalyzer.Forms
             this.CensusReference.MinimumWidth = 50;
             this.CensusReference.Name = "CensusReference";
             this.CensusReference.ReadOnly = true;
-            this.CensusReference.Width = 175;
+            this.CensusReference.Width = 197;
             // 
             // CensusYear
             // 
@@ -487,7 +490,7 @@ namespace FTAnalyzer.Forms
             this.CensusYear.MinimumWidth = 9;
             this.CensusYear.Name = "CensusYear";
             this.CensusYear.ReadOnly = true;
-            this.CensusYear.Width = 99;
+            this.CensusYear.Width = 121;
             // 
             // Ahnentafel
             // 
@@ -497,7 +500,7 @@ namespace FTAnalyzer.Forms
             this.Ahnentafel.MinimumWidth = 9;
             this.Ahnentafel.Name = "Ahnentafel";
             this.Ahnentafel.ReadOnly = true;
-            this.Ahnentafel.Width = 125;
+            this.Ahnentafel.Width = 147;
             // 
             // Census
             // 

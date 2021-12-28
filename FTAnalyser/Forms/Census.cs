@@ -122,7 +122,6 @@ namespace FTAnalyzer.Forms
             reportFormHelper.LoadColumnLayout("CensusColumns.xml");
             int numIndividuals = (from x in individuals select x.IndividualID).Distinct().Count();
             int numFamilies = (from x in individuals select x.FamilyID).Distinct().Count();
-
             tsRecords.Text = $"{individuals.Count} Rows containing {numIndividuals} Individuals and {numFamilies} Families. {CensusProviderText()}";
         }
 

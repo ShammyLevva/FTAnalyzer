@@ -220,39 +220,40 @@ namespace FTAnalyzer.Forms
                 {
                     DataGridViewCell cell = dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
                     BMDColours value = (BMDColours)cell.Value;
-                    if (value != BMDColours.EXACT_DATE)
+                    IDisplayColourBMD person = (IDisplayColourBMD)dgBMDReportSheet.Rows[e.RowIndex].DataBoundItem;
+                    Individual ind = ft.GetIndividual(person.IndividualID);
+                    if (e.ColumnIndex == birthColumnIndex || e.ColumnIndex == birthColumnIndex + 1)
                     {
-                        IDisplayColourBMD person = (IDisplayColourBMD)dgBMDReportSheet.Rows[e.RowIndex].DataBoundItem;
-                        Individual ind = ft.GetIndividual(person.IndividualID);
-                        if (e.ColumnIndex == birthColumnIndex || e.ColumnIndex == birthColumnIndex + 1)
+                        ft.SearchBMD(FamilyTree.SearchType.BIRTH, ind, ind.BirthDate, ind.BirthLocation, cbBMDSearchProvider.SelectedIndex, cbRegion.Text, null);
+                    }
+                    else if (e.ColumnIndex >= birthColumnIndex + 2 && e.ColumnIndex <= birthColumnIndex + 4)
+                    {
+                        FactDate marriageDate = FactDate.UNKNOWN_DATE;
+                        FactLocation marriageLocation = FactLocation.UNKNOWN_LOCATION;
+                        Individual spouse = null;
+                        if (e.ColumnIndex == birthColumnIndex + 2)
                         {
-                            ft.SearchBMD(FamilyTree.SearchType.BIRTH, ind, ind.BirthDate, cbBMDSearchProvider.SelectedIndex, cbRegion.Text, null);
+                            marriageDate = ind.FirstMarriageDate;
+                            marriageLocation = ind.FirstMarriageLocation;
+                            spouse = ind.FirstSpouse;
                         }
-                        else if (e.ColumnIndex >= birthColumnIndex + 2 && e.ColumnIndex <= birthColumnIndex + 4)
+                        if (e.ColumnIndex == birthColumnIndex + 3)
                         {
-                            FactDate marriageDate = FactDate.UNKNOWN_DATE;
-                            Individual spouse = null;
-                            if (e.ColumnIndex == birthColumnIndex + 2)
-                            {
-                                marriageDate = ind.FirstMarriageDate;
-                                spouse = ind.FirstSpouse;
-                            }
-                            if (e.ColumnIndex == birthColumnIndex + 3)
-                            {
-                                marriageDate = ind.SecondMarriageDate;
-                                spouse = ind.SecondSpouse;
-                            }
-                            if (e.ColumnIndex == birthColumnIndex + 4)
-                            {
-                                marriageDate = ind.ThirdMarriageDate;
-                                spouse = ind.ThirdSpouse;
-                            }
-                            ft.SearchBMD(FamilyTree.SearchType.MARRIAGE, ind, marriageDate, cbBMDSearchProvider.SelectedIndex, cbRegion.Text, spouse);
+                            marriageDate = ind.SecondMarriageDate;
+                            marriageLocation = ind.SecondMarriageLocation;
+                            spouse = ind.SecondSpouse;
                         }
-                        else if (e.ColumnIndex == burialColumnIndex || e.ColumnIndex == burialColumnIndex - 1)
+                        if (e.ColumnIndex == birthColumnIndex + 4)
                         {
-                            ft.SearchBMD(FamilyTree.SearchType.DEATH, ind, ind.DeathDate, cbBMDSearchProvider.SelectedIndex, cbRegion.Text, null);
+                            marriageDate = ind.ThirdMarriageDate;
+                            marriageLocation = ind.ThirdMarriageLocation;
+                            spouse = ind.ThirdSpouse;
                         }
+                        ft.SearchBMD(FamilyTree.SearchType.MARRIAGE, ind, marriageDate, marriageLocation, cbBMDSearchProvider.SelectedIndex, cbRegion.Text, spouse);
+                    }
+                    else if (e.ColumnIndex == burialColumnIndex || e.ColumnIndex == burialColumnIndex - 1)
+                    {
+                        ft.SearchBMD(FamilyTree.SearchType.DEATH, ind, ind.DeathDate, ind.DeathLocation, cbBMDSearchProvider.SelectedIndex, cbRegion.Text, null);
                     }
                 }
                 else if (e.ColumnIndex >= 0)
@@ -383,7 +384,7 @@ namespace FTAnalyzer.Forms
                     colour = BMDColours.NO_MARRIAGE;
                     break;
             }
-            if (cbFilter.SelectedIndex >0)
+            if (cbFilter.SelectedIndex > 0)
                 dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(types, colour));
             dgBMDReportSheet.Focus();
             tsRecords.Text = $"{Properties.Messages.Count}{dgBMDReportSheet.RowCount} records listed.";

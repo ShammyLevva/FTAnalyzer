@@ -1,6 +1,10 @@
 ### Updated Release Version 8.4.0.1 to be released
+**Updates**  
+Allow auto searching on BMDs even if exact date  
+
 **Bugfixes**  
 Altered grid resize to force to account for size of scrollbars on different resolutions  
+Fixed FamilySearch searches given website changes  
 
 #### Updated Release Version 8.4.0 26th December 2021
 **Updates**  
