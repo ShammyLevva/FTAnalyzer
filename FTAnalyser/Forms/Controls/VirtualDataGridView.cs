@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -27,11 +28,12 @@ namespace FTAnalyzer.Forms.Controls
             AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
             ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            Dock = DockStyle.Fill;
-            Location = new System.Drawing.Point(6, 6);
+            Dock = DockStyle.None;
+            Location = new Point(6, 6);
             Margin = new Padding(6, 6, 6, 6);
             MultiSelect = false;
             ReadOnly = true;
+            ResizeRedraw = true;
             RowHeadersVisible = false;
             RowHeadersWidth = 50;
             SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -39,7 +41,9 @@ namespace FTAnalyzer.Forms.Controls
             CellValueNeeded += OnCellValueNeeded;
             ColumnHeaderMouseClick += OnColumnHeaderMouseClick;
             ColumnWidthChanged += OnColumnWidthChanged; // for debugging purposes
+            Resize += OnResizeChanged;
         }
+
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public new SortableBindingList<T> DataSource
@@ -93,6 +97,17 @@ namespace FTAnalyzer.Forms.Controls
             }
         }
 
+        void ForceToParent()
+        {
+            if (Parent != null)
+            {
+                Rectangle bounds = Bounds;
+                int maxHeight = Parent.Height - SystemInformation.HorizontalScrollBarHeight - Location.Y;
+                int maxWidth = Parent.Width - SystemInformation.VerticalScrollBarWidth - Location.X;
+                Size = new Size(maxWidth, maxHeight);
+            }
+        }
+
         public override void Sort(DataGridViewColumn dgvColumn, ListSortDirection direction)
         {
             if (dgvColumn is null || dgvColumn.SortMode == DataGridViewColumnSortMode.NotSortable)
@@ -116,6 +131,8 @@ namespace FTAnalyzer.Forms.Controls
 
             Refresh();
         }
+
+        void OnResizeChanged(object sender, EventArgs e) => ForceToParent();
 
         void OnColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
