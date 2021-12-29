@@ -37,6 +37,9 @@ namespace FTAnalyzer.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColourBMD));
             this.dgBMDReportSheet = new System.Windows.Forms.DataGridView();
             this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -100,6 +103,14 @@ namespace FTAnalyzer.Forms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgBMDReportSheet.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.142858F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgBMDReportSheet.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgBMDReportSheet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgBMDReportSheet.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IndividualID,
@@ -122,11 +133,27 @@ namespace FTAnalyzer.Forms
             this.BirthLocation,
             this.DeathLocation,
             this.Ahnentafel});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.142858F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgBMDReportSheet.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgBMDReportSheet.Location = new System.Drawing.Point(0, 44);
             this.dgBMDReportSheet.Margin = new System.Windows.Forms.Padding(6);
             this.dgBMDReportSheet.MultiSelect = false;
             this.dgBMDReportSheet.Name = "dgBMDReportSheet";
             this.dgBMDReportSheet.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.142858F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgBMDReportSheet.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgBMDReportSheet.RowHeadersWidth = 20;
             this.dgBMDReportSheet.Size = new System.Drawing.Size(1903, 986);
             this.dgBMDReportSheet.TabIndex = 1;
@@ -383,7 +410,7 @@ namespace FTAnalyzer.Forms
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1903, 38);
+            this.toolStrip1.Size = new System.Drawing.Size(1903, 44);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -393,7 +420,7 @@ namespace FTAnalyzer.Forms
             this.mnuSaveCensusColumnLayout.Image = ((System.Drawing.Image)(resources.GetObject("mnuSaveCensusColumnLayout.Image")));
             this.mnuSaveCensusColumnLayout.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuSaveCensusColumnLayout.Name = "mnuSaveCensusColumnLayout";
-            this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(40, 32);
+            this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(40, 38);
             this.mnuSaveCensusColumnLayout.Text = "Save Census Column Sort Order";
             this.mnuSaveCensusColumnLayout.Click += new System.EventHandler(this.MnuSaveCensusColumnLayout_Click);
             // 
@@ -403,14 +430,14 @@ namespace FTAnalyzer.Forms
             this.mnuResetCensusColumns.Image = ((System.Drawing.Image)(resources.GetObject("mnuResetCensusColumns.Image")));
             this.mnuResetCensusColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuResetCensusColumns.Name = "mnuResetCensusColumns";
-            this.mnuResetCensusColumns.Size = new System.Drawing.Size(40, 32);
+            this.mnuResetCensusColumns.Size = new System.Drawing.Size(40, 38);
             this.mnuResetCensusColumns.Text = "Reset Census Column Sort Order to Default";
             this.mnuResetCensusColumns.Click += new System.EventHandler(this.MnuResetCensusColumns_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 38);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 44);
             // 
             // printToolStripButton
             // 
@@ -418,7 +445,7 @@ namespace FTAnalyzer.Forms
             this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
             this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripButton.Name = "printToolStripButton";
-            this.printToolStripButton.Size = new System.Drawing.Size(40, 32);
+            this.printToolStripButton.Size = new System.Drawing.Size(40, 38);
             this.printToolStripButton.Text = "&Print";
             this.printToolStripButton.Click += new System.EventHandler(this.PrintToolStripButton_Click);
             // 
@@ -428,14 +455,14 @@ namespace FTAnalyzer.Forms
             this.printPreviewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripButton.Image")));
             this.printPreviewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
-            this.printPreviewToolStripButton.Size = new System.Drawing.Size(40, 32);
+            this.printPreviewToolStripButton.Size = new System.Drawing.Size(40, 38);
             this.printPreviewToolStripButton.Text = "Print Preview...";
             this.printPreviewToolStripButton.Click += new System.EventHandler(this.PrintPreviewToolStripButton_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 38);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 44);
             // 
             // mnuExportToExcel
             // 
@@ -443,19 +470,19 @@ namespace FTAnalyzer.Forms
             this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
             this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuExportToExcel.Name = "mnuExportToExcel";
-            this.mnuExportToExcel.Size = new System.Drawing.Size(40, 32);
+            this.mnuExportToExcel.Size = new System.Drawing.Size(40, 38);
             this.mnuExportToExcel.Text = "Export to Excel";
             this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 38);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 44);
             // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(188, 32);
+            this.toolStripLabel1.Size = new System.Drawing.Size(188, 38);
             this.toolStripLabel1.Text = "BMD Search using:";
             // 
             // cbBMDSearchProvider
@@ -469,13 +496,13 @@ namespace FTAnalyzer.Forms
             "FamilySearch",
             "Scotlands People"});
             this.cbBMDSearchProvider.Name = "cbBMDSearchProvider";
-            this.cbBMDSearchProvider.Size = new System.Drawing.Size(219, 38);
+            this.cbBMDSearchProvider.Size = new System.Drawing.Size(219, 44);
             this.cbBMDSearchProvider.SelectedIndexChanged += new System.EventHandler(this.CbCensusSearchProvider_SelectedIndexChanged);
             // 
             // toolStripLabel3
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(82, 32);
+            this.toolStripLabel3.Size = new System.Drawing.Size(82, 38);
             this.toolStripLabel3.Text = "Region:";
             // 
             // cbRegion
@@ -492,14 +519,14 @@ namespace FTAnalyzer.Forms
             ".ca",
             ".com.au"});
             this.cbRegion.Name = "cbRegion";
-            this.cbRegion.Size = new System.Drawing.Size(219, 38);
+            this.cbRegion.Size = new System.Drawing.Size(219, 44);
             this.cbRegion.Text = ".co.uk";
             this.cbRegion.SelectedIndexChanged += new System.EventHandler(this.CbRegion_SelectedIndexChanged);
             // 
             // toolStripLabel2
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(69, 32);
+            this.toolStripLabel2.Size = new System.Drawing.Size(69, 38);
             this.toolStripLabel2.Text = "Filter :";
             // 
             // cbFilter
@@ -521,14 +548,14 @@ namespace FTAnalyzer.Forms
             "No Partner shared fact/children (Coral)",
             "Partner but no marriage (Red Brown)"});
             this.cbFilter.Name = "cbFilter";
-            this.cbFilter.Size = new System.Drawing.Size(235, 38);
+            this.cbFilter.Size = new System.Drawing.Size(235, 44);
             this.cbFilter.SelectedIndexChanged += new System.EventHandler(this.CbFilter_SelectedIndexChanged);
             // 
             // toolStripLabel4
             // 
             this.toolStripLabel4.AccessibleDescription = "";
             this.toolStripLabel4.Name = "toolStripLabel4";
-            this.toolStripLabel4.Size = new System.Drawing.Size(98, 32);
+            this.toolStripLabel4.Size = new System.Drawing.Size(98, 38);
             this.toolStripLabel4.Text = "Apply To:";
             // 
             // cbApplyTo
@@ -545,7 +572,7 @@ namespace FTAnalyzer.Forms
             "Births & Marriages",
             "Marriages & Deaths"});
             this.cbApplyTo.Name = "cbApplyTo";
-            this.cbApplyTo.Size = new System.Drawing.Size(121, 38);
+            this.cbApplyTo.Size = new System.Drawing.Size(121, 44);
             this.cbApplyTo.SelectedIndexChanged += new System.EventHandler(this.CbApplyTo_SelectedIndexChanged);
             // 
             // printDialog
