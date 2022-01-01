@@ -854,14 +854,7 @@ namespace FTAnalyzer
 
         void DgDataErrors_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                DataError error = (DataError)dgDataErrors.CurrentRowDataBoundItem;
-                if (error.IsFamily)
-                    ShowFamilyFacts((string)dgDataErrors.CurrentRow.Cells[nameof(IDisplayDataError.Reference)].Value);
-                else
-                    ShowFacts((string)dgDataErrors.CurrentRow.Cells[nameof(IDisplayDataError.Reference)].Value);
-            }
+
         }
 
         void SetupDataErrors()
