@@ -5,11 +5,12 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
+using Zuby.ADGV;
 
 namespace FTAnalyzer.Forms.Controls
 {
     [ComplexBindingProperties()]
-    abstract class VirtualDataGridView<T> : DataGridView
+    abstract class VirtualDataGridView<T> : AdvancedDataGridView
     {
         SortableBindingList<T> _dataSource;
         DataGridViewColumn sortedColumn;
@@ -28,7 +29,7 @@ namespace FTAnalyzer.Forms.Controls
             AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
             ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            Dock = DockStyle.None;
+            Dock = DockStyle.Fill;
             Location = new Point(6, 6);
             Margin = new Padding(6, 6, 6, 6);
             MultiSelect = false;
@@ -42,8 +43,27 @@ namespace FTAnalyzer.Forms.Controls
             ColumnHeaderMouseClick += OnColumnHeaderMouseClick;
             ColumnWidthChanged += OnColumnWidthChanged; // for debugging purposes
             Resize += OnResizeChanged;
+
+            FilterStringChanged += OnFilterStringChanged;
+            SortStringChanged += OnSortStringChanged;
+
+            SetDoubleBuffered();
         }
 
+        void OnSortStringChanged(object sender, SortEventArgs e)
+        {
+            MessageBox.Show("Sorting not yet implemented", "FTAnalyzer");
+        }
+
+        void OnFilterStringChanged(object sender, FilterEventArgs e)
+        {
+            MessageBox.Show("Filters not yet implemented", "FTAnalyzer");
+            //string stringcolumnfilter = textBox_strfilter.Text;
+            //if (!String.IsNullOrEmpty(stringcolumnfilter))
+            //    e.FilterString += (!String.IsNullOrEmpty(e.FilterString) ? " AND " : "") + String.Format("string LIKE '%{0}%'", stringcolumnfilter.Replace("'", "''"));
+
+            //textBox_filter.Text = e.FilterString;
+        }
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public new SortableBindingList<T> DataSource
@@ -101,10 +121,12 @@ namespace FTAnalyzer.Forms.Controls
         {
             if (Parent != null)
             {
-                //Rectangle bounds = Bounds;
-                int maxHeight = Parent.Height - SystemInformation.HorizontalScrollBarHeight - Location.Y;
-                int maxWidth = Parent.Width - SystemInformation.VerticalScrollBarWidth - Location.X;
+                //maxHeight = Parent.Height - SystemInformation.HorizontalScrollBarHeight - Location.Y;
+                //maxWidth = Parent.Width - SystemInformation.VerticalScrollBarWidth - Location.X;
+                int maxHeight = Parent.Height - Location.Y;
+                int maxWidth = Parent.Width - Location.X;
                 Size = new Size(maxWidth, maxHeight);
+                //Console.WriteLine($"{Name} has parent of {Parent}");
             }
         }
 
@@ -136,8 +158,8 @@ namespace FTAnalyzer.Forms.Controls
 
         void OnColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            sortedDirection = Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
-            Sort(Columns[e.ColumnIndex], sortedDirection);
+            //sortedDirection = Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+            //Sort(Columns[e.ColumnIndex], sortedDirection);
         }
 
         void OnCellValueNeeded(object sender, DataGridViewCellValueEventArgs e)

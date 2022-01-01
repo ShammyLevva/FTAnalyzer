@@ -147,6 +147,9 @@
     <AssemblyOriginatorKeyFile>code signing certificate. 2019.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AdvancedDataGridView, Version=1.2.26428.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DG.AdvancedDataGridView.1.2.26428.4\lib\net40\AdvancedDataGridView.dll</HintPath>
+    </Reference>
     <Reference Include="BruTile, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\BruTile.4.0.0\lib\netstandard2.0\BruTile.dll</HintPath>
     </Reference>
@@ -298,52 +301,24 @@
     <Compile Include="Forms\Controls\DateSliders.ScoreValues.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Controls\VirtualDGVDataErrors.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\Controls\VirtualDGVCustomFacts.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\Controls\VirtualDGVChildrenStatus.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\Controls\VirtualDGVLooseInfo.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\Controls\VirtualDGVLooseDeaths.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\Controls\VirtualDGVLooseBirths.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\Controls\VirtualDGVLocations.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\Controls\VirtualDGVSurnames.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\Controls\VirtualDGVOccupations.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\Controls\VirtualDGVSources.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\Controls\VirtualDGVFamily.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\Controls\VirtualDGVIndividuals.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Forms\Controls\VirtualDGVDataErrors.cs" />
+    <Compile Include="Forms\Controls\VirtualDGVCustomFacts.cs" />
+    <Compile Include="Forms\Controls\VirtualDGVChildrenStatus.cs" />
+    <Compile Include="Forms\Controls\VirtualDGVLooseInfo.cs" />
+    <Compile Include="Forms\Controls\VirtualDGVLooseDeaths.cs" />
+    <Compile Include="Forms\Controls\VirtualDGVLooseBirths.cs" />
+    <Compile Include="Forms\Controls\VirtualDGVLocations.cs" />
+    <Compile Include="Forms\Controls\VirtualDGVSurnames.cs" />
+    <Compile Include="Forms\Controls\VirtualDGVOccupations.cs" />
+    <Compile Include="Forms\Controls\VirtualDGVSources.cs" />
+    <Compile Include="Forms\Controls\VirtualDGVFamily.cs" />
+    <Compile Include="Forms\Controls\VirtualDGVIndividuals.cs" />
     <Compile Include="Forms\Controls\ToolStripMapSelector.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Forms\Controls\TreeViewHandler.cs" />
-    <Compile Include="Forms\Controls\VirtualDGVDuplicates.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\Controls\VirtualDataGridView.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Forms\Controls\VirtualDGVDuplicates.cs" />
+    <Compile Include="Forms\Controls\VirtualDataGridView.cs" />
     <Compile Include="Forms\LostCousinsReferral.cs">
       <SubType>Form</SubType>
     </Compile>
