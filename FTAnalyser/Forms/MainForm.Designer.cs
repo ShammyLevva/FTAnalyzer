@@ -44,8 +44,8 @@ namespace FTAnalyzer
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -152,6 +152,9 @@ namespace FTAnalyzer
             this.chkIgnoreUnnamedTwins = new System.Windows.Forms.CheckBox();
             this.radioOnlyPreferred = new System.Windows.Forms.RadioButton();
             this.radioOnlyAlternate = new System.Windows.Forms.RadioButton();
+            this.dgDataErrors = new FTAnalyzer.Forms.Controls.VirtualDGVDataErrors();
+            this.dgCountries = new FTAnalyzer.Forms.Controls.VirtualDGVLocations();
+            this.dgRegions = new FTAnalyzer.Forms.Controls.VirtualDGVLocations();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
@@ -385,14 +388,14 @@ namespace FTAnalyzer
             this.saveDatabase = new System.Windows.Forms.SaveFileDialog();
             this.restoreDatabase = new System.Windows.Forms.OpenFileDialog();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.dgDataErrors = new FTAnalyzer.Forms.Controls.VirtualDGVDataErrors();
-            this.dgCountries = new FTAnalyzer.Forms.Controls.VirtualDGVLocations();
-            this.dgRegions = new FTAnalyzer.Forms.Controls.VirtualDGVLocations();
             this.menuStrip1.SuspendLayout();
             this.mnuSetRoot.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbDuplicateScore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgCheckAncestors)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgDataErrors)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgCountries)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgRegions)).BeginInit();
             this.tabWorldWars.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgWorldWars)).BeginInit();
             this.ctxViewNotes.SuspendLayout();
@@ -467,9 +470,6 @@ namespace FTAnalyzer
             this.panel1.SuspendLayout();
             this.tabToday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgDataErrors)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgCountries)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgRegions)).BeginInit();
             this.SuspendLayout();
             // 
             // openGedcom
@@ -489,7 +489,7 @@ namespace FTAnalyzer
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1994, 42);
+            this.menuStrip1.Size = new System.Drawing.Size(1994, 38);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1164,22 +1164,22 @@ namespace FTAnalyzer
             this.tsHintsLabel,
             this.tspbTabProgress,
             this.tsStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 844);
+            this.statusStrip.Location = new System.Drawing.Point(0, 833);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 26, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1994, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1994, 33);
             this.statusStrip.TabIndex = 10;
             this.statusStrip.Text = "statusStrip1";
             // 
             // tsCountLabel
             // 
             this.tsCountLabel.Name = "tsCountLabel";
-            this.tsCountLabel.Size = new System.Drawing.Size(0, 13);
+            this.tsCountLabel.Size = new System.Drawing.Size(0, 24);
             // 
             // tsHintsLabel
             // 
             this.tsHintsLabel.Name = "tsHintsLabel";
-            this.tsHintsLabel.Size = new System.Drawing.Size(0, 13);
+            this.tsHintsLabel.Size = new System.Drawing.Size(0, 24);
             // 
             // tspbTabProgress
             // 
@@ -1190,7 +1190,7 @@ namespace FTAnalyzer
             // tsStatusLabel
             // 
             this.tsStatusLabel.Name = "tsStatusLabel";
-            this.tsStatusLabel.Size = new System.Drawing.Size(0, 13);
+            this.tsStatusLabel.Size = new System.Drawing.Size(0, 24);
             // 
             // cmbColourFamily
             // 
@@ -1287,14 +1287,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgCheckAncestors.ColumnHeadersHeight = 40;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgCheckAncestors.Location = new System.Drawing.Point(-2, 155);
             this.dgCheckAncestors.Margin = new System.Windows.Forms.Padding(6);
             this.dgCheckAncestors.Name = "dgCheckAncestors";
@@ -1374,6 +1374,90 @@ namespace FTAnalyzer
         "ay buttons");
             this.radioOnlyAlternate.UseVisualStyleBackColor = true;
             this.radioOnlyAlternate.CheckedChanged += new System.EventHandler(this.RadioFacts_CheckedChanged);
+            // 
+            // dgDataErrors
+            // 
+            this.dgDataErrors.AllowUserToAddRows = false;
+            this.dgDataErrors.AllowUserToDeleteRows = false;
+            this.dgDataErrors.AllowUserToOrderColumns = true;
+            this.dgDataErrors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgDataErrors.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgDataErrors.FilterAndSortEnabled = true;
+            this.dgDataErrors.Location = new System.Drawing.Point(14, 312);
+            this.dgDataErrors.Margin = new System.Windows.Forms.Padding(11);
+            this.dgDataErrors.MultiSelect = false;
+            this.dgDataErrors.Name = "dgDataErrors";
+            this.dgDataErrors.ReadOnly = true;
+            this.dgDataErrors.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dgDataErrors.RowHeadersVisible = false;
+            this.dgDataErrors.RowHeadersWidth = 50;
+            this.dgDataErrors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgDataErrors.ShowCellToolTips = false;
+            this.dgDataErrors.ShowEditingIcon = false;
+            this.dgDataErrors.Size = new System.Drawing.Size(1931, 391);
+            this.dgDataErrors.TabIndex = 7;
+            this.toolTips.SetToolTip(this.dgDataErrors, "Double click to see list of facts for that individual");
+            this.dgDataErrors.VirtualMode = true;
+            // 
+            // dgCountries
+            // 
+            this.dgCountries.AllowUserToAddRows = false;
+            this.dgCountries.AllowUserToDeleteRows = false;
+            this.dgCountries.AllowUserToOrderColumns = true;
+            this.dgCountries.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgCountries.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dgCountries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgCountries.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgCountries.FilterAndSortEnabled = true;
+            this.dgCountries.Location = new System.Drawing.Point(6, 6);
+            this.dgCountries.Margin = new System.Windows.Forms.Padding(11);
+            this.dgCountries.MultiSelect = false;
+            this.dgCountries.Name = "dgCountries";
+            this.dgCountries.ReadOnly = true;
+            this.dgCountries.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dgCountries.RowHeadersVisible = false;
+            this.dgCountries.RowHeadersWidth = 50;
+            this.dgCountries.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgCountries.Size = new System.Drawing.Size(1932, 703);
+            this.dgCountries.TabIndex = 1;
+            this.toolTips.SetToolTip(this.dgCountries, "Double click on Country name to see list of individuals with that Country.");
+            this.dgCountries.VirtualMode = true;
+            // 
+            // dgRegions
+            // 
+            this.dgRegions.AllowUserToAddRows = false;
+            this.dgRegions.AllowUserToDeleteRows = false;
+            this.dgRegions.AllowUserToOrderColumns = true;
+            this.dgRegions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgRegions.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dgRegions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgRegions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgRegions.FilterAndSortEnabled = true;
+            this.dgRegions.Location = new System.Drawing.Point(6, 6);
+            this.dgRegions.Margin = new System.Windows.Forms.Padding(11);
+            this.dgRegions.MultiSelect = false;
+            this.dgRegions.Name = "dgRegions";
+            this.dgRegions.ReadOnly = true;
+            this.dgRegions.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dgRegions.RowHeadersVisible = false;
+            this.dgRegions.RowHeadersWidth = 50;
+            this.dgRegions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgRegions.Size = new System.Drawing.Size(1932, 703);
+            this.dgRegions.TabIndex = 2;
+            this.toolTips.SetToolTip(this.dgRegions, "Double click on Region name to see list of individuals with that Region.");
+            this.dgRegions.VirtualMode = true;
             // 
             // printPreviewDialog
             // 
@@ -4363,90 +4447,6 @@ namespace FTAnalyzer
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // dgDataErrors
-            // 
-            this.dgDataErrors.AllowUserToAddRows = false;
-            this.dgDataErrors.AllowUserToDeleteRows = false;
-            this.dgDataErrors.AllowUserToOrderColumns = true;
-            this.dgDataErrors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgDataErrors.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dgDataErrors.FilterAndSortEnabled = true;
-            this.dgDataErrors.Location = new System.Drawing.Point(14, 312);
-            this.dgDataErrors.Margin = new System.Windows.Forms.Padding(11);
-            this.dgDataErrors.MultiSelect = false;
-            this.dgDataErrors.Name = "dgDataErrors";
-            this.dgDataErrors.ReadOnly = true;
-            this.dgDataErrors.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dgDataErrors.RowHeadersVisible = false;
-            this.dgDataErrors.RowHeadersWidth = 50;
-            this.dgDataErrors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgDataErrors.ShowCellToolTips = false;
-            this.dgDataErrors.ShowEditingIcon = false;
-            this.dgDataErrors.Size = new System.Drawing.Size(1931, 391);
-            this.dgDataErrors.TabIndex = 7;
-            this.toolTips.SetToolTip(this.dgDataErrors, "Double click to see list of facts for that individual");
-            this.dgDataErrors.VirtualMode = true;
-            // 
-            // dgCountries
-            // 
-            this.dgCountries.AllowUserToAddRows = false;
-            this.dgCountries.AllowUserToDeleteRows = false;
-            this.dgCountries.AllowUserToOrderColumns = true;
-            this.dgCountries.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgCountries.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.dgCountries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgCountries.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgCountries.FilterAndSortEnabled = true;
-            this.dgCountries.Location = new System.Drawing.Point(6, 6);
-            this.dgCountries.Margin = new System.Windows.Forms.Padding(11);
-            this.dgCountries.MultiSelect = false;
-            this.dgCountries.Name = "dgCountries";
-            this.dgCountries.ReadOnly = true;
-            this.dgCountries.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dgCountries.RowHeadersVisible = false;
-            this.dgCountries.RowHeadersWidth = 50;
-            this.dgCountries.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgCountries.Size = new System.Drawing.Size(1932, 703);
-            this.dgCountries.TabIndex = 1;
-            this.toolTips.SetToolTip(this.dgCountries, "Double click on Country name to see list of individuals with that Country.");
-            this.dgCountries.VirtualMode = true;
-            // 
-            // dgRegions
-            // 
-            this.dgRegions.AllowUserToAddRows = false;
-            this.dgRegions.AllowUserToDeleteRows = false;
-            this.dgRegions.AllowUserToOrderColumns = true;
-            this.dgRegions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgRegions.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.dgRegions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgRegions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgRegions.FilterAndSortEnabled = true;
-            this.dgRegions.Location = new System.Drawing.Point(6, 6);
-            this.dgRegions.Margin = new System.Windows.Forms.Padding(11);
-            this.dgRegions.MultiSelect = false;
-            this.dgRegions.Name = "dgRegions";
-            this.dgRegions.ReadOnly = true;
-            this.dgRegions.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dgRegions.RowHeadersVisible = false;
-            this.dgRegions.RowHeadersWidth = 50;
-            this.dgRegions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgRegions.Size = new System.Drawing.Size(1932, 703);
-            this.dgRegions.TabIndex = 2;
-            this.toolTips.SetToolTip(this.dgRegions, "Double click on Region name to see list of individuals with that Region.");
-            this.dgRegions.VirtualMode = true;
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -4475,6 +4475,9 @@ namespace FTAnalyzer
             this.statusStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbDuplicateScore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgCheckAncestors)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgDataErrors)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgCountries)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgRegions)).EndInit();
             this.tabWorldWars.ResumeLayout(false);
             this.tabWorldWars.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgWorldWars)).EndInit();
@@ -4565,9 +4568,6 @@ namespace FTAnalyzer
             this.tabToday.ResumeLayout(false);
             this.tabToday.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudToday)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgDataErrors)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgCountries)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgRegions)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

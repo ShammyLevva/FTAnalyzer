@@ -193,6 +193,7 @@ namespace FTAnalyzer
             tsHintsLabel.Font = normalFont;
             tsStatusLabel.Font = normalFont;
             menuStrip1.Font = normalFont;
+            statusStrip.Height = normalFont.Height;
             Refresh();
         }
 
