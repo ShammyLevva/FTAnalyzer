@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "8.4.1.0";
+        public static string VERSION = "8.5.0.0";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         Cursor storedCursor = Cursors.Default;
@@ -819,7 +819,7 @@ namespace FTAnalyzer
             {
                 UIHelpers.ShowMessage("Unable to save DataError preferences. Please check App has rights to save user preferences to registry.");
             }
-            ckbDataErrors.ColumnWidth = (int)(maxwidth * FontSettings.Default.FontWidth);
+            ckbDataErrors.ColumnWidth = (int)(maxwidth * FontSettings.Default.FontWidth * GraphicsUtilities.GetCurrentScaling());
             HourGlass(false);
         }
 
