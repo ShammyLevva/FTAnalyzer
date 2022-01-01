@@ -41,6 +41,7 @@ namespace FTAnalyzer.UserControls
 							userControl.Size = new System.Drawing.Size(243, 356);
 							userControl.TabIndex = 0;
 							userControl.Visible = false;
+							userControl.Dock = DockStyle.Fill;
 							panel1.Controls.Add(userControl);
 							if (optionCast.MenuIcon != null)
 							{

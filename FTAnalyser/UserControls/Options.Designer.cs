@@ -45,21 +45,20 @@ namespace FTAnalyzer.UserControls
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
-            this.panel1.Location = new System.Drawing.Point(202, 12);
+            this.panel1.Location = new System.Drawing.Point(370, 22);
+            this.panel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(325, 421);
+            this.panel1.Size = new System.Drawing.Size(596, 777);
             this.panel1.TabIndex = 1;
             // 
             // OK
             // 
             this.OK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.OK.Location = new System.Drawing.Point(370, 446);
+            this.OK.Location = new System.Drawing.Point(678, 823);
+            this.OK.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.OK.Name = "OK";
-            this.OK.Size = new System.Drawing.Size(75, 23);
+            this.OK.Size = new System.Drawing.Size(138, 42);
             this.OK.TabIndex = 2;
             this.OK.Text = "OK";
             this.OK.UseVisualStyleBackColor = true;
@@ -68,9 +67,10 @@ namespace FTAnalyzer.UserControls
             // Cancel
             // 
             this.Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cancel.Location = new System.Drawing.Point(452, 446);
+            this.Cancel.Location = new System.Drawing.Point(829, 823);
+            this.Cancel.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Cancel.Name = "Cancel";
-            this.Cancel.Size = new System.Drawing.Size(75, 23);
+            this.Cancel.Size = new System.Drawing.Size(138, 42);
             this.Cancel.TabIndex = 3;
             this.Cancel.Text = "Cancel";
             this.Cancel.UseVisualStyleBackColor = true;
@@ -83,13 +83,14 @@ namespace FTAnalyzer.UserControls
             this.treeView1.HideSelection = false;
             this.treeView1.ImageKey = "wi0064-32.ico";
             this.treeView1.ImageList = this.OptionsMenuImageList;
-            this.treeView1.Location = new System.Drawing.Point(12, 12);
+            this.treeView1.Location = new System.Drawing.Point(22, 22);
+            this.treeView1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.treeView1.Name = "treeView1";
             this.treeView1.SelectedImageKey = "wi0064-32.ico";
             this.treeView1.ShowNodeToolTips = true;
             this.treeView1.ShowPlusMinus = false;
             this.treeView1.ShowRootLines = false;
-            this.treeView1.Size = new System.Drawing.Size(184, 421);
+            this.treeView1.Size = new System.Drawing.Size(334, 774);
             this.treeView1.TabIndex = 4;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView1_AfterSelect);
             // 
@@ -102,17 +103,18 @@ namespace FTAnalyzer.UserControls
             // 
             // Options
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(539, 481);
+            this.ClientSize = new System.Drawing.Size(988, 888);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.Cancel);
             this.Controls.Add(this.OK);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(483, 475);
+            this.MinimumSize = new System.Drawing.Size(866, 823);
             this.Name = "Options";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
