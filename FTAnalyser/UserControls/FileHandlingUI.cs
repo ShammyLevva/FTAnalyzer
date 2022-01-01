@@ -30,12 +30,9 @@ namespace FTAnalyzer.UserControls
 			//NOOP;
 		}
 
-		public bool HasValidationErrors()
-		{
-			return CheckChildrenValidation(this);
-		}
+        public bool HasValidationErrors => CheckChildrenValidation(this);
 
-		bool CheckChildrenValidation(Control control)
+        bool CheckChildrenValidation(Control control)
 		{
 			bool invalid = false;
 

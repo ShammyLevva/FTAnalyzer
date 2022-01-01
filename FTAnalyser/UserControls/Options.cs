@@ -79,7 +79,7 @@ namespace FTAnalyzer.UserControls
 			{
 				treeView1.SelectedNode = treeView1.Nodes[0];
 			}
-			this.ResumeLayout();
+			ResumeLayout();
 		}
 
 		void AddNodesToTree(string treeNodePosition)
@@ -126,7 +126,7 @@ namespace FTAnalyzer.UserControls
 			foreach (Control control in panel1.Controls)
 			{
                 if (control is IOptions options)
-                    if (options.HasValidationErrors())
+                    if (options.HasValidationErrors)
                         controlErrors.Add(options.DisplayName);
             }
 			if (controlErrors.Count > 0)
@@ -146,16 +146,14 @@ namespace FTAnalyzer.UserControls
 				foreach (Control control in panel1.Controls)
                     if (control is IOptions options)
                         options.Save();
-                OnReloadRequired();
+                if(Properties.GeneralSettings.Default.ReloadRequired)
+					OnReloadRequired();
 				DialogResult = DialogResult.OK;
 			}
 		}
 
         public static event EventHandler ReloadRequired;
-        protected static void OnReloadRequired()
-        {
-            ReloadRequired?.Invoke(null, EventArgs.Empty);
-        }
+        protected static void OnReloadRequired() => ReloadRequired?.Invoke(null, EventArgs.Empty);
 
         void Cancel_Click(object sender, EventArgs e)
 		{

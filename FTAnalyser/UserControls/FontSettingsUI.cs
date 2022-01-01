@@ -36,10 +36,7 @@ namespace FTAnalyzer.UserControls
             //NOOP;
         }
 
-        public bool HasValidationErrors()
-        {
-            return CheckChildrenValidation(this);
-        }
+        public bool HasValidationErrors => CheckChildrenValidation(this);
 
         bool CheckChildrenValidation(Control control)
         {
@@ -65,20 +62,11 @@ namespace FTAnalyzer.UserControls
             return invalid;
         }
 
-        public string DisplayName
-        {
-            get { return "Font Settings"; }
-        }
+        public string DisplayName => "Font Settings";
 
-        public string TreePosition
-        {
-            get { return DisplayName; }
-        }
+        public string TreePosition => DisplayName;
 
-        public Image MenuIcon
-        {
-            get { return null; }
-        }
+        public Image MenuIcon => null;
 
         #endregion
 
@@ -126,9 +114,6 @@ namespace FTAnalyzer.UserControls
             catch (Exception) { }
         }
 
-        void TbFontScale_Scroll(object sender, EventArgs e)
-        {
-            SetSelectedFont(tbFontScale.Value);
-        }
+        void TbFontScale_Scroll(object sender, EventArgs e) => SetSelectedFont(tbFontScale.Value);
     }
 }

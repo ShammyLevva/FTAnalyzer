@@ -7,8 +7,8 @@ namespace FTAnalyzer.UserControls
 	{
 		void Save();
 		void Cancel();
-		bool HasValidationErrors();
-		string DisplayName { get; }
+        bool HasValidationErrors { get; }
+        string DisplayName { get; }
 		string TreePosition { get; }
 		Image MenuIcon{get;}
 	}
