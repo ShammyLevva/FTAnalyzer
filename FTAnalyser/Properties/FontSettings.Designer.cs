@@ -8,16 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using FTAnalyzer.Utilities;
-using System;
-using System.Configuration;
-using System.IO;
-
 namespace FTAnalyzer.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.8.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class FontSettings : global::System.Configuration.ApplicationSettingsBase {
         
         private static FontSettings defaultInstance = ((FontSettings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new FontSettings())));
@@ -75,44 +70,17 @@ namespace FTAnalyzer.Properties {
                 this["FontSize"] = value;
             }
         }
-
-        public override void Save()
-        {
-            try
-            {
-                ClearUserConfigFile();
-                base.Save();
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int FontHeight {
+            get {
+                return ((int)(this["FontHeight"]));
             }
-            catch (ConfigurationErrorsException)
-            {
-                var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoaming);
-                var userConfigPath = config.FilePath;
-                UIHelpers.ShowMessage($"Failed to write configuration file. Check you have write permission to file\n\n{userConfigPath}");
+            set {
+                this["FontHeight"] = value;
             }
         }
-
-        public static void ClearUserConfigFile()
-        {
-            //Touch each setting
-            foreach (SettingsProperty property in FontSettings.Default.Properties)
-            {
-                if (property.DefaultValue != FontSettings.Default[property.Name])
-                    FontSettings.Default[property.Name] = FontSettings.Default[property.Name];
-            }
-
-            //Delete the user.config file
-            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoaming);
-            var userConfigPath = config.FilePath;
-            try
-            {
-                if (File.Exists(userConfigPath) == true)
-                    File.Delete(userConfigPath);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception thrown while deleting user.config : {0}", ex.ToString());
-            }
-        }
-
     }
 }

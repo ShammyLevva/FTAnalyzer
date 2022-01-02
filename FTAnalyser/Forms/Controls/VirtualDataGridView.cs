@@ -15,8 +15,6 @@ namespace FTAnalyzer.Forms.Controls
     {
         internal SortableBindingList<T> _dataSource;
         internal SortableBindingList<T> _fulllist;
-        DataGridViewColumn sortedColumn;
-        ListSortDirection sortedDirection;
 
         public VirtualDataGridView()
         {
@@ -162,6 +160,7 @@ namespace FTAnalyzer.Forms.Controls
                         break;
                     case ColumnDetail.ColumnType.Icon:
                         dgvc = new DataGridViewImageColumn();
+                        DisableFilterChecklist(dgvc);
                         break;
                     default:
                         dgvc = new DataGridViewTextBoxColumn();
@@ -174,6 +173,7 @@ namespace FTAnalyzer.Forms.Controls
                 dgvc.Width = (int)(cd?.ColumnWidth ?? 100);
                 dgvc.MinimumWidth = (int)(cd?.ColumnWidth ?? 100);
                 dgvc.HeaderCell.Style.Alignment = cd?.Alignment ?? DataGridViewContentAlignment.MiddleLeft;
+                DisableFilterCustom(dgvc);
                 Columns.Add(dgvc);
             }
         }
@@ -204,12 +204,9 @@ namespace FTAnalyzer.Forms.Controls
                 else
                     column.HeaderCell.SortGlyphDirection = SortOrder.None;
             }
-            sortedColumn = dgvColumn;
-            sortedDirection = direction;
-
             if (_dataSource is null) return;
 
-            var comparer = new PropertyComparer(sortedColumn.DataPropertyName, direction);
+            var comparer = new PropertyComparer(dgvColumn.DataPropertyName, direction);
             _dataSource.Sort(comparer);
 
             Refresh();

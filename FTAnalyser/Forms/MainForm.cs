@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "8.5.0.0-beta1";
+        public static string VERSION = "8.5.0.0-beta2";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         Cursor storedCursor = Cursors.Default;
@@ -193,7 +193,7 @@ namespace FTAnalyzer
             tsHintsLabel.Font = normalFont;
             tsStatusLabel.Font = normalFont;
             menuStrip1.Font = normalFont;
-            statusStrip.Height = normalFont.Height;
+            statusStrip.Height = FontSettings.Default.FontHeight;
             Refresh();
         }
 

@@ -1,3 +1,14 @@
+### Updated Release Version 8.5.0.0 to be released
+**Updates**  
+Changed default grid used in reports to one that supports filtering  
+Added extra DPI support for different monitor resolutions should help with auto scaling  
+
+**Bugfixes**  
+Forced data grids to fill to their parent to hopefully fix scroll bar issue  
+Data errors tab checkboxes now scale to high dpi scaling  
+Status bar height now scales to font setting  
+Fact column heights auto scale  
+
 ### Updated Release Version 8.4.1.0 28th December 2021  
 **Updates**  
 Allow auto searching on BMDs even if exact date  
