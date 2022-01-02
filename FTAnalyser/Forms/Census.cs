@@ -117,6 +117,7 @@ namespace FTAnalyzer.Forms
         void SetupDataGridView(bool censusDone, List<CensusIndividual> individuals)
         {
             dgCensus.DataSource = new SortableBindingList<IDisplayCensus>(individuals);
+            dgCensus.RowTemplate.Height = FontSettings.Default.SelectedFont.Height;
             if (!censusDone)
                 dgCensus.Columns["CensusReference"].Visible = false;
             reportFormHelper.LoadColumnLayout("CensusColumns.xml");

@@ -45,6 +45,7 @@ namespace FTAnalyzer.Forms
                 dgFacts.Columns["CensusReference"].Visible = true;
                 dgFacts.Columns["IgnoreFact"].Visible = false;
                 dgFacts.ReadOnly = true;
+                dgFacts.RowTemplate.Height = Properties.FontSettings.Default.SelectedFont.Height;
                 sep1.Visible = false;
                 btnShowHideFacts.Visible = false;
             }

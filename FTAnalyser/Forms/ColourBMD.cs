@@ -15,7 +15,7 @@ namespace FTAnalyzer.Forms
         readonly Dictionary<BMDColours, DataGridViewCellStyle> styles;
         readonly int birthColumnIndex;
         readonly int burialColumnIndex;
-        readonly SortableBindingList<IDisplayColourBMD> reportList;
+        readonly SortableBindingList<IDisplayColourBMD> _reportList;
         readonly Font boldFont;
 
         public ColourBMD(List<IDisplayColourBMD> reportList)
@@ -26,7 +26,7 @@ namespace FTAnalyzer.Forms
                 Top += NativeMethods.TopTaskbarOffset;
                 dgBMDReportSheet.AutoGenerateColumns = false;
 
-                this.reportList = new SortableBindingList<IDisplayColourBMD>(reportList);
+                this._reportList = new SortableBindingList<IDisplayColourBMD>(reportList);
                 reportFormHelper = new ReportFormHelper(this, "Colour BMD Report", dgBMDReportSheet, ResetTable, "Colour BMD");
                 ExtensionMethods.DoubleBuffered(dgBMDReportSheet, true);
 
@@ -77,7 +77,8 @@ namespace FTAnalyzer.Forms
 
                 birthColumnIndex = dgBMDReportSheet.Columns["Birth"].Index;
                 burialColumnIndex = dgBMDReportSheet.Columns["CremBuri"].Index;
-                dgBMDReportSheet.DataSource = this.reportList;
+                dgBMDReportSheet.DataSource = _reportList;
+                dgBMDReportSheet.RowTemplate.Height = FontSettings.Default.SelectedFont.Height;
                 reportFormHelper.LoadColumnLayout("ColourBMDColumns.xml");
                 tsRecords.Text = $"{Messages.Count}{reportList.Count} records listed.";
                 string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
@@ -288,7 +289,7 @@ namespace FTAnalyzer.Forms
         List<IDisplayColourBMD> BuildFilter(List<FamilyTree.SearchType> types, BMDColours toFind)
         {
             var result = new List<IDisplayColourBMD>();
-            foreach (IDisplayColourBMD row in reportList)
+            foreach (IDisplayColourBMD row in _reportList)
             {
                 if (types.Contains(FamilyTree.SearchType.BIRTH) && (row.Birth == toFind || row.BaptChri == toFind))
                     result.Add(row);
@@ -348,7 +349,7 @@ namespace FTAnalyzer.Forms
             {
                 case -1: // nothing selected
                 case 0: // All Individuals
-                    dgBMDReportSheet.DataSource = reportList;
+                    dgBMDReportSheet.DataSource = _reportList;
                     break;
                 case 1: // Date Missing (Red)
                     colour = BMDColours.UNKNOWN_DATE;

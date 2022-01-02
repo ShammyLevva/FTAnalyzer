@@ -63,6 +63,7 @@ namespace FTAnalyzer.Forms
                 styles.Add(8, knownMissing);
                 SetColumns(country);
                 dgReportSheet.DataSource = _reportList;
+                dgReportSheet.RowTemplate.Height = FontSettings.Default.SelectedFont.Height;
                 reportFormHelper.LoadColumnLayout("ColourCensusLayout.xml");
                 tsRecords.Text = $"{Messages.Count}{reportList.Count} records listed.";
                 string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
