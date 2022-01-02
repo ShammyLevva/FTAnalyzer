@@ -74,37 +74,53 @@ namespace FTAnalyzer.Forms.Controls
                 _dataSource = _fulllist;
             else
             {
-                List<string> filteredValues = GetFilteredValues(e.FilterString);
-                string filteredColumns = GetFilteredColumns(e.FilterString);
-                _dataSource = new SortableBindingList<T>(_fulllist.Where(s => filteredValues.Contains(s.GetType().GetProperty(filteredColumns).GetValue(s, null))));
+                SortableBindingList<T> filter = _fulllist;
+                foreach (string filteredColumn in GetFilteredColumns(e.FilterString))
+                {
+                    List<string> filteredValues = GetFilteredValues(filteredColumn, e.FilterString);
+                    filter = new SortableBindingList<T>(filter.Where(x => filteredValues.Contains(x.GetType().GetProperty(filteredColumn).GetValue(x, null))));
+                }
+                _dataSource = filter;
             }
             Refresh();
         }
 
-        internal List<string> GetFilteredValues(string filterString)
+        internal List<string> GetFilteredColumns(string filterString)
         {
             List<string> result = new List<string>();
-            int pos = filterString.IndexOf("IN (");
-            if (pos >= 0 && pos < filterString.Length-6)
+            List<string> clauses = filterString.Split(new string[] { " AND " }, StringSplitOptions.None).ToList();
+            foreach (string clause in clauses)
             {
-                int endpos = filterString.IndexOf(")", pos);
-                string values = filterString.Substring(pos + 4, endpos - pos - 4);
-                foreach (string value in values.Split(','))
-                    result.Add(value.Replace("\'","").Trim());
+                int pos = clause.IndexOf("[");
+                if (pos > 0)
+                {
+                    int endpos = clause.IndexOf("]");
+                    if (endpos > 0 && pos < endpos)
+                        result.Add(clause.Substring(pos + 1, endpos - pos - 1));
+                }
             }
             return result;
         }
 
-        internal string GetFilteredColumns(string filterString)
+        // deal with filter string of type 
+        // (Convert([Gender],System.String) IN ('U')) AND (Convert([Surname],System.String) IN ('Mitchell')) AND (Convert([Forenames],System.String) IN ('UNKNOWN'))
+        // deal with updating count in statusbar
+        internal List<string> GetFilteredValues(string filterColumn, string filterString)
         {
-            string result = string.Empty;
-            // for now only return first filtered column later return list of strings
-            int pos = filterString.IndexOf("[");
-            if(pos > 0)
+            List<string> result = new List<string>();
+            int startclausepos = filterString.IndexOf(filterColumn);
+            if (startclausepos > 0)
             {
-                int endpos = filterString.IndexOf("]");
-                if (endpos > 0 && pos < endpos)
-                    result = filterString.Substring(pos+1, endpos - pos -1);
+                int endclausepos = filterString.IndexOf(" AND ", startclausepos);
+                string clause = endclausepos > 0 ? filterString.Substring(startclausepos, endclausepos) : filterString.Substring(startclausepos);
+                int pos = clause.IndexOf("IN (");
+                if (pos >= 0 && pos < clause.Length - 6)
+                {
+                    int endpos = clause.IndexOf(")", pos);
+                    string values = clause.Substring(pos + 4, endpos - pos - 4);
+                    foreach (string value in values.Split(','))
+                        result.Add(value.Replace("\'", "").Trim());
+                }
             }
             return result;
         }
