@@ -118,6 +118,7 @@ namespace FTAnalyzer.Forms
         {
             dgCensus.DataSource = new SortableBindingList<IDisplayCensus>(individuals);
             dgCensus.RowTemplate.Height = FontSettings.Default.SelectedFont.Height;
+            dgCensus.AllowUserToResizeColumns = true;
             if (!censusDone)
                 dgCensus.Columns["CensusReference"].Visible = false;
             reportFormHelper.LoadColumnLayout("CensusColumns.xml");
