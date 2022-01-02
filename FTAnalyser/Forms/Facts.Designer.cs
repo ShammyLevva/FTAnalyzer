@@ -182,6 +182,7 @@ namespace FTAnalyzer.Forms
             this.dgFacts.AllowUserToDeleteRows = false;
             this.dgFacts.AllowUserToOrderColumns = true;
             this.dgFacts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgFacts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgFacts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FactIcon,
@@ -213,7 +214,7 @@ namespace FTAnalyzer.Forms
             this.dgFacts.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgFacts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgFacts.Location = new System.Drawing.Point(0, 38);
-            this.dgFacts.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dgFacts.Margin = new System.Windows.Forms.Padding(6);
             this.dgFacts.Name = "dgFacts";
             this.dgFacts.ReadOnly = true;
             this.dgFacts.RowHeadersWidth = 20;
@@ -441,7 +442,7 @@ namespace FTAnalyzer.Forms
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Facts";
             this.Text = "Facts";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Facts_FormClosed);
