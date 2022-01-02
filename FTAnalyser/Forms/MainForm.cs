@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "8.5.0.0-beta2";
+        public static string VERSION = "8.5.0.0-beta3";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         Cursor storedCursor = Cursors.Default;
@@ -145,21 +145,25 @@ namespace FTAnalyzer
                         handwritingFont = new Font(fonts.Families[0], 46.0F, FontStyle.Bold);
                         boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 8.25F, FontStyle.Bold);
                         normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 8.25F, FontStyle.Regular);
+                        FontSettings.Default.FontHeight = 22;
                         break;
                     case 2:
                         handwritingFont = new Font(fonts.Families[0], 68.0F, FontStyle.Bold);
                         boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 10F, FontStyle.Bold);
                         normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 10F, FontStyle.Regular);
+                        FontSettings.Default.FontHeight = 27; 
                         break;
                     case 3:
                         handwritingFont = new Font(fonts.Families[0], 72.0F, FontStyle.Bold);
                         boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 12F, FontStyle.Bold);
                         normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 12F, FontStyle.Regular);
+                        FontSettings.Default.FontHeight = 32;
                         break;
                     case 4:
                         handwritingFont = new Font(fonts.Families[0], 90.0F, FontStyle.Bold);
                         boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 14F, FontStyle.Bold);
                         normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 14F, FontStyle.Regular);
+                        FontSettings.Default.FontHeight = 37;
                         break;
                 }
                 SetInitialScreenControls();

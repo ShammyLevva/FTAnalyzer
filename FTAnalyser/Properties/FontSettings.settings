@@ -15,7 +15,7 @@
       <Value Profile="(Default)">8.25</Value>
     </Setting>
     <Setting Name="FontHeight" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">22</Value>
     </Setting>
   </Settings>
 </SettingsFile>
