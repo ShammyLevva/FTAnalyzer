@@ -249,6 +249,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_2BA153118EDD27A1F36182B9155FCED5"
+        "OwnerKey" = "8:_335B00F1AA2B4DB49718EAE51ABB53FF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_2D15BCEC61EBC589BEBB383EA66DB081"
         "OwnerKey" = "8:_335B00F1AA2B4DB49718EAE51ABB53FF"
         "MsmSig" = "8:_UNDEFINED"
@@ -1325,6 +1331,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_98F137FBF9501436111EBCF9951D6F04"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_2BA153118EDD27A1F36182B9155FCED5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2897,6 +2909,37 @@
                     }
                 }
             "SourcePath" = "8:NetTopologySuite.Features.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2BA153118EDD27A1F36182B9155FCED5"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:AdvancedDataGridView, Version=1.2.26428.4, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_2BA153118EDD27A1F36182B9155FCED5"
+                    {
+                    "Name" = "8:AdvancedDataGridView.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:AdvancedDataGridView.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
@@ -6554,7 +6597,7 @@
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:8.4.1"
+        "ProductVersion" = "8:8.5.0"
         "Manufacturer" = "8:FTAnalyzer"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://www.facebook.com/groups/ftanalyzer"
@@ -7096,7 +7139,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_335B00F1AA2B4DB49718EAE51ABB53FF"
             {
-            "SourcePath" = "8:..\\FTAnalyser\\obj\\Release\\FTAnalyzer.exe"
+            "SourcePath" = "8:..\\FTAnalyser\\obj\\Debug\\FTAnalyzer.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_C2EA74B6184B431DA7F27108ED230A33"

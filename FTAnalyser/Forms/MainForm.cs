@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "8.5.0.0";
+        public static string VERSION = "8.5.0.0-beta1";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         Cursor storedCursor = Cursors.Default;
