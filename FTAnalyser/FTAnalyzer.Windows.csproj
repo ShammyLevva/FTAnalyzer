@@ -297,6 +297,7 @@
     <Compile Include="Forms\ColourBMD.designer.cs">
       <DependentUpon>ColourBMD.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Controls\CountEventArgs.cs" />
     <Compile Include="Forms\Controls\CustomToolStripRenderer.cs" />
     <Compile Include="Forms\Controls\DateSliders.cs">
       <SubType>UserControl</SubType>

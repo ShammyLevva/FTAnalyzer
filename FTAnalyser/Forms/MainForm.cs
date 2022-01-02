@@ -604,6 +604,7 @@ namespace FTAnalyzer
             tsCountLabel.Text = Messages.Count + treeTopsList.Count;
             tsHintsLabel.Text = Messages.Hints_Individual;
             mnuPrint.Enabled = true;
+            dgTreeTops.VirtualGridFiltered += VirtualGridFiltered;
             ShowMenus(true);
             HourGlass(false);
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.TreetopsEvent);
@@ -624,6 +625,7 @@ namespace FTAnalyzer
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = Messages.Count + warDeadList.Count;
             tsHintsLabel.Text = $"{Messages.Hints_Individual}  {Messages.Hints_LivesOfFirstWorldWar}";
+            dgWorldWars.VirtualGridFiltered += VirtualGridFiltered;
             mnuPrint.Enabled = true;
             ShowMenus(true);
             HourGlass(false);
@@ -643,6 +645,7 @@ namespace FTAnalyzer
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
             tsCountLabel.Text = Messages.Count + warDeadList.Count;
             tsHintsLabel.Text = Messages.Hints_Individual;
+            dgWorldWars.VirtualGridFiltered += VirtualGridFiltered;
             mnuPrint.Enabled = true;
             ShowMenus(true);
             HourGlass(false);
@@ -808,6 +811,7 @@ namespace FTAnalyzer
             dgDataErrors.DataSource = errors;
             tsCountLabel.Text = Messages.Count + errors.Count;
             tsHintsLabel.Text = Messages.Hints_Individual;
+            dgDataErrors.VirtualGridFiltered += VirtualGridFiltered;
             int index = 0;
             int maxwidth = 0;
             try
@@ -975,11 +979,12 @@ namespace FTAnalyzer
                 TabPage current = tabCtrlLocations.SelectedTab;
                 Control control = current.Controls[0];
                 control.Focus();
-                if (control is DataGridView)
+                if (control is VirtualDGVLocations)
                 {
-                    DataGridView dg = control as DataGridView;
+                    VirtualDGVLocations dg = control as VirtualDGVLocations;
                     tsCountLabel.Text = $"{Messages.Count}{dg.RowCount} {dg.Name.Substring(2)}";
                     mnuPrint.Enabled = true;
+                    dg.VirtualGridFiltered += VirtualGridFiltered;
                 }
                 else
                 {
@@ -1447,13 +1452,7 @@ namespace FTAnalyzer
             }
             else if (tabMainListsSelector.SelectedTab == tabFamilies)
             {
-                SortableBindingList<IDisplayFamily> list = ft.AllDisplayFamilies;
-                dgFamilies.DataSource = list;
-                dgFamilies.Sort(dgFamilies.Columns[nameof(IDisplayFamily.FamilyID)], ListSortDirection.Ascending);
-                dgFamilies.Focus();
-                mnuPrint.Enabled = true;
-                tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
-                tsHintsLabel.Text = Messages.Hints_Family;
+                SetupFamiliesTab();
                 Analytics.TrackAction(Analytics.MainListsAction, Analytics.FamilyTabEvent);
             }
             else if (tabMainListsSelector.SelectedTab == tabSources)
@@ -1465,6 +1464,7 @@ namespace FTAnalyzer
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
                 tsHintsLabel.Text = Messages.Hints_Sources;
+                dgSources.VirtualGridFiltered += VirtualGridFiltered;
                 Analytics.TrackAction(Analytics.MainListsAction, Analytics.SourcesTabEvent);
             }
             else if (tabMainListsSelector.SelectedTab == tabOccupations)
@@ -1476,6 +1476,7 @@ namespace FTAnalyzer
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
                 tsHintsLabel.Text = Messages.Hints_Occupation;
+                dgOccupations.VirtualGridFiltered += VirtualGridFiltered;
                 Analytics.TrackAction(Analytics.MainListsAction, Analytics.OccupationsTabEvent);
             }
             else if (tabMainListsSelector.SelectedTab == tabCustomFacts)
@@ -1489,8 +1490,21 @@ namespace FTAnalyzer
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
                 tsHintsLabel.Text = Messages.Hints_CustomFacts;
+                dgCustomFacts.VirtualGridFiltered += VirtualGridFiltered;
                 Analytics.TrackAction(Analytics.MainListsAction, Analytics.CustomFactTabEvent);
             }
+        }
+
+        private void SetupFamiliesTab()
+        {
+            SortableBindingList<IDisplayFamily> list = ft.AllDisplayFamilies;
+            dgFamilies.DataSource = list;
+            dgFamilies.Sort(dgFamilies.Columns[nameof(IDisplayFamily.FamilyID)], ListSortDirection.Ascending);
+            dgFamilies.Focus();
+            mnuPrint.Enabled = true;
+            tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
+            tsHintsLabel.Text = Messages.Hints_Family;
+            dgFamilies.VirtualGridFiltered += VirtualGridFiltered;
         }
 
         void SetupIndividualsTab()
@@ -1503,7 +1517,10 @@ namespace FTAnalyzer
             mnuPrint.Enabled = true;
             tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
             tsHintsLabel.Text = Messages.Hints_Individual;
+            dgIndividuals.VirtualGridFiltered += VirtualGridFiltered;
         }
+
+        void VirtualGridFiltered(object sender, CountEventArgs e) => tsCountLabel.Text = e.FilterText;
 
         async void TabErrorFixSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2622,6 +2639,7 @@ namespace FTAnalyzer
                 dgDuplicates.DataSource = duplicateData;
                 rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
                 tsCountLabel.Text = $"Possible Duplicate Count : {dgDuplicates.RowCount:N0}.  {Messages.Hints_Duplicates}";
+                dgDuplicates.VirtualGridFiltered += VirtualGridFiltered;
                 dgDuplicates.UseWaitCursor = false;
             }
             SetDuplicateControlsVisibility(false);
@@ -3022,7 +3040,7 @@ namespace FTAnalyzer
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + looseBirthList.Count;
                 tsHintsLabel.Text = Messages.Hints_Loose_Births + Messages.Hints_Individual;
-
+                dgLooseBirths.VirtualGridFiltered += VirtualGridFiltered;
             }
             catch (LooseDataException ex)
             {
@@ -3042,6 +3060,7 @@ namespace FTAnalyzer
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + looseDeathList.Count;
                 tsHintsLabel.Text = Messages.Hints_Loose_Deaths + Messages.Hints_Individual;
+                dgLooseDeaths.VirtualGridFiltered += VirtualGridFiltered;
             }
             catch (LooseDataException ex)
             {
@@ -3061,6 +3080,7 @@ namespace FTAnalyzer
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + looseInfoList.Count;
                 tsHintsLabel.Text = "Double click to view records. " + Messages.Hints_Individual;
+                dgLooseInfo.VirtualGridFiltered += VirtualGridFiltered;
             }
             catch (LooseDataException ex)
             {
@@ -3521,6 +3541,7 @@ namespace FTAnalyzer
             dgSurnames.Focus();
             tsCountLabel.Text = $"{Messages.Count}{list.Count} Surnames.";
             tsHintsLabel.Text = Messages.Hints_Surname;
+            dgSurnames.VirtualGridFiltered += VirtualGridFiltered;
             HourGlass(false);
             await Analytics.TrackAction(Analytics.MainFormAction, Analytics.ShowSurnamesEvent).ConfigureAwait(true);
         }

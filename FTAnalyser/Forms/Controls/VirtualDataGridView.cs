@@ -15,6 +15,7 @@ namespace FTAnalyzer.Forms.Controls
     {
         internal SortableBindingList<T> _dataSource;
         internal SortableBindingList<T> _fulllist;
+        public string FilterCountText { get; private set; }
 
         public VirtualDataGridView()
         {
@@ -79,6 +80,8 @@ namespace FTAnalyzer.Forms.Controls
                     filter = new SortableBindingList<T>(filter.Where(x => filteredValues.Contains(x.GetType().GetProperty(filteredColumn).GetValue(x, null))));
                 }
                 _dataSource = filter;
+                FilterCountText = $"Showing {filter.Count} of {_fulllist.Count}";
+                OnVirtualGridFiltered();
             }
             Refresh();
         }
@@ -121,6 +124,17 @@ namespace FTAnalyzer.Forms.Controls
                 }
             }
             return result;
+        }
+
+        public event EventHandler<CountEventArgs> VirtualGridFiltered;
+
+        protected void OnVirtualGridFiltered()
+        {
+            CountEventArgs args = new CountEventArgs
+            {
+                FilterText = FilterCountText
+            };
+            VirtualGridFiltered?.Invoke(null, args);
         }
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]

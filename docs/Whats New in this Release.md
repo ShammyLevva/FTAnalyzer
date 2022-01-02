@@ -2,12 +2,15 @@
 **Updates**  
 Changed default grid used in reports to one that supports filtering  
 Added extra DPI support for different monitor resolutions should help with auto scaling  
+Count updates to show number of records filtered  
 
 **Bugfixes**  
 Forced data grids to fill to their parent to hopefully fix scroll bar issue  
 Data errors tab checkboxes now scale to high dpi scaling  
 Status bar height now scales to font setting  
 Fact column heights auto scale  
+Font Height saved to avoid getHeight crash bug  
+Force font height defaults on load  
 
 ### Updated Release Version 8.4.1.0 28th December 2021  
 **Updates**  
