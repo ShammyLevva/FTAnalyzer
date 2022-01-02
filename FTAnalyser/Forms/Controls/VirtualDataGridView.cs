@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
@@ -12,13 +13,15 @@ namespace FTAnalyzer.Forms.Controls
     [ComplexBindingProperties()]
     abstract class VirtualDataGridView<T> : AdvancedDataGridView
     {
-        SortableBindingList<T> _dataSource;
+        internal SortableBindingList<T> _dataSource;
+        internal SortableBindingList<T> _fulllist;
         DataGridViewColumn sortedColumn;
         ListSortDirection sortedDirection;
 
         public VirtualDataGridView()
         {
             _dataSource = new SortableBindingList<T>();
+            _fulllist = new SortableBindingList<T>();
             VirtualMode = true;
             AllowUserToAddRows = false;
             AllowUserToDeleteRows = false;
@@ -52,17 +55,58 @@ namespace FTAnalyzer.Forms.Controls
 
         void OnSortStringChanged(object sender, SortEventArgs e)
         {
-            MessageBox.Show("Sorting not yet implemented", "FTAnalyzer");
+            int lastPos = e.SortString.LastIndexOf('[');
+            if (lastPos >= 0)
+            {
+                string lastsort = e.SortString.Right(e.SortString.Length - lastPos);
+                string column = lastsort.Between('[', ']');
+                int pos = lastsort.IndexOf("] ");
+                string direction = pos > 0 ? lastsort.Substring(pos + 2, 3) : "ASC";
+                ListSortDirection sortDirection = direction == "ASC" ? ListSortDirection.Ascending : ListSortDirection.Descending;
+                DataGridViewColumn sortColumn = Columns[column] is null ? Columns[0] : Columns[column];
+                Sort(sortColumn, sortDirection);
+            }
         }
 
-        void OnFilterStringChanged(object sender, FilterEventArgs e)
+        public void OnFilterStringChanged(object sender, FilterEventArgs e)
         {
-            MessageBox.Show("Filters not yet implemented", "FTAnalyzer");
-            //string stringcolumnfilter = textBox_strfilter.Text;
-            //if (!String.IsNullOrEmpty(stringcolumnfilter))
-            //    e.FilterString += (!String.IsNullOrEmpty(e.FilterString) ? " AND " : "") + String.Format("string LIKE '%{0}%'", stringcolumnfilter.Replace("'", "''"));
+            if (e.Cancel)
+                _dataSource = _fulllist;
+            else
+            {
+                List<string> filteredValues = GetFilteredValues(e.FilterString);
+                string filteredColumns = GetFilteredColumns(e.FilterString);
+                _dataSource = new SortableBindingList<T>(_fulllist.Where(s => filteredValues.Contains(s.GetType().GetProperty(filteredColumns).GetValue(s, null))));
+            }
+            Refresh();
+        }
 
-            //textBox_filter.Text = e.FilterString;
+        internal List<string> GetFilteredValues(string filterString)
+        {
+            List<string> result = new List<string>();
+            int pos = filterString.IndexOf("IN (");
+            if (pos >= 0 && pos < filterString.Length-6)
+            {
+                int endpos = filterString.IndexOf(")", pos);
+                string values = filterString.Substring(pos + 4, endpos - pos - 4);
+                foreach (string value in values.Split(','))
+                    result.Add(value.Replace("\'","").Trim());
+            }
+            return result;
+        }
+
+        internal string GetFilteredColumns(string filterString)
+        {
+            string result = string.Empty;
+            // for now only return first filtered column later return list of strings
+            int pos = filterString.IndexOf("[");
+            if(pos > 0)
+            {
+                int endpos = filterString.IndexOf("]");
+                if (endpos > 0 && pos < endpos)
+                    result = filterString.Substring(pos+1, endpos - pos -1);
+            }
+            return result;
         }
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
@@ -73,6 +117,7 @@ namespace FTAnalyzer.Forms.Controls
             {
                 CreateGridColumns();
                 _dataSource = value;
+                _fulllist = value;
                 RowCount = value?.Count ?? 1;
             }
         }
@@ -134,7 +179,7 @@ namespace FTAnalyzer.Forms.Controls
         {
             if (dgvColumn is null || dgvColumn.SortMode == DataGridViewColumnSortMode.NotSortable)
                 return;
-            // needs to implemt the column sorting depending on colum clicked
+            // needs to implemt the column sorting depending on column clicked
             // add comparers
             foreach (DataGridViewColumn column in Columns)
             {
@@ -164,7 +209,7 @@ namespace FTAnalyzer.Forms.Controls
 
         void OnCellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
         {
-            if (_dataSource is null || _dataSource.Count == 0)
+            if (_dataSource is null || _dataSource.Count == 0 || e.RowIndex > _dataSource.Count -1)
                 return;
             var data = _dataSource[e.RowIndex];
             e.Value = GetValueFor(data, Columns[e.ColumnIndex].DataPropertyName);
