@@ -44,8 +44,8 @@ namespace FTAnalyzer
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1174,12 +1174,12 @@ namespace FTAnalyzer
             // tsCountLabel
             // 
             this.tsCountLabel.Name = "tsCountLabel";
-            this.tsCountLabel.Size = new System.Drawing.Size(0, 24);
+            this.tsCountLabel.Size = new System.Drawing.Size(0, 13);
             // 
             // tsHintsLabel
             // 
             this.tsHintsLabel.Name = "tsHintsLabel";
-            this.tsHintsLabel.Size = new System.Drawing.Size(0, 24);
+            this.tsHintsLabel.Size = new System.Drawing.Size(0, 13);
             // 
             // tspbTabProgress
             // 
@@ -1190,7 +1190,7 @@ namespace FTAnalyzer
             // tsStatusLabel
             // 
             this.tsStatusLabel.Name = "tsStatusLabel";
-            this.tsStatusLabel.Size = new System.Drawing.Size(0, 24);
+            this.tsStatusLabel.Size = new System.Drawing.Size(0, 13);
             // 
             // cmbColourFamily
             // 
@@ -1287,14 +1287,14 @@ namespace FTAnalyzer
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgCheckAncestors.ColumnHeadersHeight = 40;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgCheckAncestors.Location = new System.Drawing.Point(-2, 155);
             this.dgCheckAncestors.Margin = new System.Windows.Forms.Padding(6);
             this.dgCheckAncestors.Name = "dgCheckAncestors";
@@ -1386,14 +1386,14 @@ namespace FTAnalyzer
             this.dgDataErrors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgDataErrors.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgDataErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDataErrors.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgDataErrors.FilterAndSortEnabled = true;
             this.dgDataErrors.Location = new System.Drawing.Point(14, 312);
             this.dgDataErrors.Margin = new System.Windows.Forms.Padding(11);
@@ -3148,7 +3148,7 @@ namespace FTAnalyzer
             this.tabDisplayProgress.Margin = new System.Windows.Forms.Padding(6);
             this.tabDisplayProgress.Name = "tabDisplayProgress";
             this.tabDisplayProgress.Padding = new System.Windows.Forms.Padding(6);
-            this.tabDisplayProgress.Size = new System.Drawing.Size(1964, 764);
+            this.tabDisplayProgress.Size = new System.Drawing.Size(1964, 751);
             this.tabDisplayProgress.TabIndex = 1;
             this.tabDisplayProgress.Text = "Gedcom Stats";
             this.tabDisplayProgress.UseVisualStyleBackColor = true;
@@ -3170,7 +3170,7 @@ namespace FTAnalyzer
             // splitGedcom.Panel2
             // 
             this.splitGedcom.Panel2.Controls.Add(this.rtbOutput);
-            this.splitGedcom.Size = new System.Drawing.Size(1952, 752);
+            this.splitGedcom.Size = new System.Drawing.Size(1952, 739);
             this.splitGedcom.SplitterDistance = 206;
             this.splitGedcom.SplitterWidth = 7;
             this.splitGedcom.TabIndex = 14;
@@ -3295,7 +3295,7 @@ namespace FTAnalyzer
             this.rtbOutput.Margin = new System.Windows.Forms.Padding(6);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.ReadOnly = true;
-            this.rtbOutput.Size = new System.Drawing.Size(1952, 539);
+            this.rtbOutput.Size = new System.Drawing.Size(1952, 526);
             this.rtbOutput.TabIndex = 14;
             this.rtbOutput.Text = "";
             // 
@@ -3320,7 +3320,7 @@ namespace FTAnalyzer
             this.tabSelector.Margin = new System.Windows.Forms.Padding(6);
             this.tabSelector.Name = "tabSelector";
             this.tabSelector.SelectedIndex = 0;
-            this.tabSelector.Size = new System.Drawing.Size(1972, 801);
+            this.tabSelector.Size = new System.Drawing.Size(1972, 788);
             this.tabSelector.TabIndex = 9;
             this.tabSelector.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             // 
