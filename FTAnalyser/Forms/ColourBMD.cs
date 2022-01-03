@@ -17,6 +17,7 @@ namespace FTAnalyzer.Forms
         readonly int burialColumnIndex;
         readonly SortableBindingList<IDisplayColourBMD> _reportList;
         readonly Font boldFont;
+        bool settingSelections;
 
         public ColourBMD(List<IDisplayColourBMD> reportList)
         {
@@ -29,7 +30,7 @@ namespace FTAnalyzer.Forms
                 this._reportList = new SortableBindingList<IDisplayColourBMD>(reportList);
                 reportFormHelper = new ReportFormHelper(this, "Colour BMD Report", dgBMDReportSheet, ResetTable, "Colour BMD");
                 ExtensionMethods.DoubleBuffered(dgBMDReportSheet, true);
-
+                settingSelections = false;
                 boldFont = new Font(dgBMDReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
                 styles = new Dictionary<BMDColours, DataGridViewCellStyle>();
                 DataGridViewCellStyle notRequired = new DataGridViewCellStyle();
@@ -423,5 +424,20 @@ namespace FTAnalyzer.Forms
         void ColourBMD_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
         void ColourBMD_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
+
+        void DgBMDReportSheet_SelectionChanged(object sender, EventArgs e)
+        {
+            if (!settingSelections && dgBMDReportSheet.CurrentRow != null)
+            {
+                settingSelections = true;
+                foreach (DataGridViewCell cell in dgBMDReportSheet.CurrentRow.Cells)
+                {
+                    if (cell.Visible)
+                        cell.Selected = cell.ColumnIndex < birthColumnIndex || cell.ColumnIndex > burialColumnIndex;
+                }
+                settingSelections = false;
+            }
+        }
+
     }
 }
