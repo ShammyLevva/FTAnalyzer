@@ -63,6 +63,9 @@ namespace FTAnalyzer.Forms
                 DataGridViewCellStyle knownMissing = new DataGridViewCellStyle();
                 knownMissing.BackColor = knownMissing.ForeColor = Color.MediumSeaGreen;
                 styles.Add(8, knownMissing);
+                DataGridViewCellStyle diedInCensusRange = new DataGridViewCellStyle();
+                diedInCensusRange.BackColor = diedInCensusRange.ForeColor = Color.PeachPuff;
+                styles.Add(9, diedInCensusRange);
                 SetColumns(country);
                 dgReportSheet.DataSource = _reportList;
                 dgReportSheet.RowTemplate.Height = FontSettings.Default.FontHeight;
@@ -194,6 +197,9 @@ namespace FTAnalyzer.Forms
                             break;
                         case 8:
                             cell.ToolTipText = "Known to be missing from the census";
+                            break;
+                        case 9:
+                            cell.ToolTipText = "Died within range of dates census was taken";
                             break;
                     }
                 }

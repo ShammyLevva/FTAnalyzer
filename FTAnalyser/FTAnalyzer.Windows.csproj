@@ -294,9 +294,7 @@
     <Compile Include="Forms\ColourBMD.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ColourBMD.designer.cs">
-      <DependentUpon>ColourBMD.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Forms\ColourBMD.Designer.cs" />
     <Compile Include="Forms\Controls\CountEventArgs.cs" />
     <Compile Include="Forms\Controls\CustomToolStripRenderer.cs" />
     <Compile Include="Forms\Controls\DateSliders.cs">
@@ -541,9 +539,7 @@
     </Compile>
     <Compile Include="Utilities\CustomSettings.cs" />
     <Compile Include="Utilities\UIHelpers.cs" />
-    <EmbeddedResource Include="Forms\ColourBMD.resx">
-      <DependentUpon>ColourBMD.cs</DependentUpon>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ColourBMD.resx" />
     <EmbeddedResource Include="Properties\Messages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
