@@ -141,9 +141,7 @@ namespace FTAnalyzer.Forms
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgBMDReportSheet.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgBMDReportSheet.Location = new System.Drawing.Point(0, 44);
-            this.dgBMDReportSheet.Margin = new System.Windows.Forms.Padding(6);
-            this.dgBMDReportSheet.MultiSelect = false;
+            this.dgBMDReportSheet.Location = new System.Drawing.Point(0, 24);
             this.dgBMDReportSheet.Name = "dgBMDReportSheet";
             this.dgBMDReportSheet.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -155,11 +153,12 @@ namespace FTAnalyzer.Forms
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgBMDReportSheet.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgBMDReportSheet.RowHeadersWidth = 20;
-            this.dgBMDReportSheet.Size = new System.Drawing.Size(1903, 986);
+            this.dgBMDReportSheet.Size = new System.Drawing.Size(1038, 534);
             this.dgBMDReportSheet.TabIndex = 1;
             this.dgBMDReportSheet.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.DgBMDReportSheet_CellContextMenuStripNeeded);
             this.dgBMDReportSheet.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgReportSheet_CellDoubleClick);
             this.dgBMDReportSheet.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgReportSheet_CellFormatting);
+            this.dgBMDReportSheet.SelectionChanged += new System.EventHandler(this.DgBMDReportSheet_SelectionChanged);
             // 
             // IndividualID
             // 
@@ -169,7 +168,7 @@ namespace FTAnalyzer.Forms
             this.IndividualID.MinimumWidth = 50;
             this.IndividualID.Name = "IndividualID";
             this.IndividualID.ReadOnly = true;
-            this.IndividualID.Width = 85;
+            this.IndividualID.Width = 50;
             // 
             // Forenames
             // 
@@ -179,7 +178,6 @@ namespace FTAnalyzer.Forms
             this.Forenames.MinimumWidth = 100;
             this.Forenames.Name = "Forenames";
             this.Forenames.ReadOnly = true;
-            this.Forenames.Width = 152;
             // 
             // Surname
             // 
@@ -189,7 +187,7 @@ namespace FTAnalyzer.Forms
             this.Surname.MinimumWidth = 75;
             this.Surname.Name = "Surname";
             this.Surname.ReadOnly = true;
-            this.Surname.Width = 133;
+            this.Surname.Width = 75;
             // 
             // Relation
             // 
@@ -199,7 +197,7 @@ namespace FTAnalyzer.Forms
             this.Relation.MinimumWidth = 105;
             this.Relation.Name = "Relation";
             this.Relation.ReadOnly = true;
-            this.Relation.Width = 123;
+            this.Relation.Width = 105;
             // 
             // RelationToRoot
             // 
@@ -209,7 +207,6 @@ namespace FTAnalyzer.Forms
             this.RelationToRoot.MinimumWidth = 100;
             this.RelationToRoot.Name = "RelationToRoot";
             this.RelationToRoot.ReadOnly = true;
-            this.RelationToRoot.Width = 145;
             // 
             // Birth
             // 
@@ -220,7 +217,7 @@ namespace FTAnalyzer.Forms
             this.Birth.Name = "Birth";
             this.Birth.ReadOnly = true;
             this.Birth.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Birth.Width = 92;
+            this.Birth.Width = 60;
             // 
             // BaptChri
             // 
@@ -231,7 +228,7 @@ namespace FTAnalyzer.Forms
             this.BaptChri.Name = "BaptChri";
             this.BaptChri.ReadOnly = true;
             this.BaptChri.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.BaptChri.Width = 208;
+            this.BaptChri.Width = 114;
             // 
             // Marriage1
             // 
@@ -242,7 +239,7 @@ namespace FTAnalyzer.Forms
             this.Marriage1.Name = "Marriage1";
             this.Marriage1.ReadOnly = true;
             this.Marriage1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Marriage1.Width = 152;
+            this.Marriage1.Width = 86;
             // 
             // Marriage2
             // 
@@ -253,7 +250,7 @@ namespace FTAnalyzer.Forms
             this.Marriage2.Name = "Marriage2";
             this.Marriage2.ReadOnly = true;
             this.Marriage2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Marriage2.Width = 152;
+            this.Marriage2.Width = 86;
             // 
             // Marriage3
             // 
@@ -264,7 +261,7 @@ namespace FTAnalyzer.Forms
             this.Marriage3.Name = "Marriage3";
             this.Marriage3.ReadOnly = true;
             this.Marriage3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Marriage3.Width = 152;
+            this.Marriage3.Width = 86;
             // 
             // Death
             // 
@@ -275,7 +272,7 @@ namespace FTAnalyzer.Forms
             this.Death.Name = "Death";
             this.Death.ReadOnly = true;
             this.Death.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Death.Width = 105;
+            this.Death.Width = 61;
             // 
             // CremBuri
             // 
@@ -286,7 +283,7 @@ namespace FTAnalyzer.Forms
             this.CremBuri.Name = "CremBuri";
             this.CremBuri.ReadOnly = true;
             this.CremBuri.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.CremBuri.Width = 181;
+            this.CremBuri.Width = 99;
             // 
             // BirthDate
             // 
@@ -296,7 +293,7 @@ namespace FTAnalyzer.Forms
             this.BirthDate.MinimumWidth = 50;
             this.BirthDate.Name = "BirthDate";
             this.BirthDate.ReadOnly = true;
-            this.BirthDate.Width = 128;
+            this.BirthDate.Width = 73;
             // 
             // DeathDate
             // 
@@ -306,7 +303,7 @@ namespace FTAnalyzer.Forms
             this.DeathDate.MinimumWidth = 50;
             this.DeathDate.Name = "DeathDate";
             this.DeathDate.ReadOnly = true;
-            this.DeathDate.Width = 139;
+            this.DeathDate.Width = 80;
             // 
             // FirstMarriage
             // 
@@ -316,7 +313,6 @@ namespace FTAnalyzer.Forms
             this.FirstMarriage.MinimumWidth = 100;
             this.FirstMarriage.Name = "FirstMarriage";
             this.FirstMarriage.ReadOnly = true;
-            this.FirstMarriage.Width = 158;
             // 
             // SecondMarriage
             // 
@@ -326,7 +322,7 @@ namespace FTAnalyzer.Forms
             this.SecondMarriage.MinimumWidth = 100;
             this.SecondMarriage.Name = "SecondMarriage";
             this.SecondMarriage.ReadOnly = true;
-            this.SecondMarriage.Width = 186;
+            this.SecondMarriage.Width = 104;
             // 
             // ThirdMarriage
             // 
@@ -336,7 +332,6 @@ namespace FTAnalyzer.Forms
             this.ThirdMarriage.MinimumWidth = 100;
             this.ThirdMarriage.Name = "ThirdMarriage";
             this.ThirdMarriage.ReadOnly = true;
-            this.ThirdMarriage.Width = 166;
             // 
             // BirthLocation
             // 
@@ -346,7 +341,7 @@ namespace FTAnalyzer.Forms
             this.BirthLocation.MinimumWidth = 120;
             this.BirthLocation.Name = "BirthLocation";
             this.BirthLocation.ReadOnly = true;
-            this.BirthLocation.Width = 157;
+            this.BirthLocation.Width = 120;
             // 
             // DeathLocation
             // 
@@ -356,7 +351,7 @@ namespace FTAnalyzer.Forms
             this.DeathLocation.MinimumWidth = 120;
             this.DeathLocation.Name = "DeathLocation";
             this.DeathLocation.ReadOnly = true;
-            this.DeathLocation.Width = 169;
+            this.DeathLocation.Width = 120;
             // 
             // Ahnentafel
             // 
@@ -366,24 +361,23 @@ namespace FTAnalyzer.Forms
             this.Ahnentafel.MinimumWidth = 20;
             this.Ahnentafel.Name = "Ahnentafel";
             this.Ahnentafel.ReadOnly = true;
-            this.Ahnentafel.Width = 147;
+            this.Ahnentafel.Width = 83;
             // 
             // statusStrip
             // 
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsRecords});
-            this.statusStrip.Location = new System.Drawing.Point(0, 1037);
+            this.statusStrip.Location = new System.Drawing.Point(0, 553);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 26, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1903, 39);
+            this.statusStrip.Size = new System.Drawing.Size(1038, 22);
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "statusStrip1";
             // 
             // tsRecords
             // 
             this.tsRecords.Name = "tsRecords";
-            this.tsRecords.Size = new System.Drawing.Size(206, 30);
+            this.tsRecords.Size = new System.Drawing.Size(118, 17);
             this.tsRecords.Text = "toolStripStatusLabel1";
             // 
             // toolStrip1
@@ -409,8 +403,8 @@ namespace FTAnalyzer.Forms
             this.cbApplyTo});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1903, 44);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.toolStrip1.Size = new System.Drawing.Size(1038, 35);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -420,7 +414,7 @@ namespace FTAnalyzer.Forms
             this.mnuSaveCensusColumnLayout.Image = ((System.Drawing.Image)(resources.GetObject("mnuSaveCensusColumnLayout.Image")));
             this.mnuSaveCensusColumnLayout.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuSaveCensusColumnLayout.Name = "mnuSaveCensusColumnLayout";
-            this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(40, 38);
+            this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(32, 32);
             this.mnuSaveCensusColumnLayout.Text = "Save Census Column Sort Order";
             this.mnuSaveCensusColumnLayout.Click += new System.EventHandler(this.MnuSaveCensusColumnLayout_Click);
             // 
@@ -430,14 +424,14 @@ namespace FTAnalyzer.Forms
             this.mnuResetCensusColumns.Image = ((System.Drawing.Image)(resources.GetObject("mnuResetCensusColumns.Image")));
             this.mnuResetCensusColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuResetCensusColumns.Name = "mnuResetCensusColumns";
-            this.mnuResetCensusColumns.Size = new System.Drawing.Size(40, 38);
+            this.mnuResetCensusColumns.Size = new System.Drawing.Size(32, 32);
             this.mnuResetCensusColumns.Text = "Reset Census Column Sort Order to Default";
             this.mnuResetCensusColumns.Click += new System.EventHandler(this.MnuResetCensusColumns_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 44);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 35);
             // 
             // printToolStripButton
             // 
@@ -445,7 +439,7 @@ namespace FTAnalyzer.Forms
             this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
             this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripButton.Name = "printToolStripButton";
-            this.printToolStripButton.Size = new System.Drawing.Size(40, 38);
+            this.printToolStripButton.Size = new System.Drawing.Size(32, 32);
             this.printToolStripButton.Text = "&Print";
             this.printToolStripButton.Click += new System.EventHandler(this.PrintToolStripButton_Click);
             // 
@@ -455,14 +449,14 @@ namespace FTAnalyzer.Forms
             this.printPreviewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripButton.Image")));
             this.printPreviewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
-            this.printPreviewToolStripButton.Size = new System.Drawing.Size(40, 38);
+            this.printPreviewToolStripButton.Size = new System.Drawing.Size(32, 32);
             this.printPreviewToolStripButton.Text = "Print Preview...";
             this.printPreviewToolStripButton.Click += new System.EventHandler(this.PrintPreviewToolStripButton_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 44);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 35);
             // 
             // mnuExportToExcel
             // 
@@ -470,25 +464,24 @@ namespace FTAnalyzer.Forms
             this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
             this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuExportToExcel.Name = "mnuExportToExcel";
-            this.mnuExportToExcel.Size = new System.Drawing.Size(40, 38);
+            this.mnuExportToExcel.Size = new System.Drawing.Size(32, 32);
             this.mnuExportToExcel.Text = "Export to Excel";
             this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 44);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 35);
             // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(188, 38);
+            this.toolStripLabel1.Size = new System.Drawing.Size(106, 32);
             this.toolStripLabel1.Text = "BMD Search using:";
             // 
             // cbBMDSearchProvider
             // 
             this.cbBMDSearchProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbBMDSearchProvider.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbBMDSearchProvider.Items.AddRange(new object[] {
             "Ancestry",
             "Find My Past",
@@ -496,13 +489,13 @@ namespace FTAnalyzer.Forms
             "FamilySearch",
             "Scotlands People"});
             this.cbBMDSearchProvider.Name = "cbBMDSearchProvider";
-            this.cbBMDSearchProvider.Size = new System.Drawing.Size(219, 44);
+            this.cbBMDSearchProvider.Size = new System.Drawing.Size(121, 35);
             this.cbBMDSearchProvider.SelectedIndexChanged += new System.EventHandler(this.CbCensusSearchProvider_SelectedIndexChanged);
             // 
             // toolStripLabel3
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(82, 38);
+            this.toolStripLabel3.Size = new System.Drawing.Size(47, 32);
             this.toolStripLabel3.Text = "Region:";
             // 
             // cbRegion
@@ -512,28 +505,26 @@ namespace FTAnalyzer.Forms
             ".co.uk",
             ".ca",
             ".com.au"});
-            this.cbRegion.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbRegion.Items.AddRange(new object[] {
             ".com",
             ".co.uk",
             ".ca",
             ".com.au"});
             this.cbRegion.Name = "cbRegion";
-            this.cbRegion.Size = new System.Drawing.Size(219, 44);
+            this.cbRegion.Size = new System.Drawing.Size(121, 35);
             this.cbRegion.Text = ".co.uk";
             this.cbRegion.SelectedIndexChanged += new System.EventHandler(this.CbRegion_SelectedIndexChanged);
             // 
             // toolStripLabel2
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(69, 38);
+            this.toolStripLabel2.Size = new System.Drawing.Size(39, 32);
             this.toolStripLabel2.Text = "Filter :";
             // 
             // cbFilter
             // 
             this.cbFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFilter.DropDownWidth = 220;
-            this.cbFilter.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbFilter.Items.AddRange(new object[] {
             "All Individuals",
             "Date Missing (Red)",
@@ -548,21 +539,20 @@ namespace FTAnalyzer.Forms
             "No Partner shared fact/children (Coral)",
             "Partner but no marriage (Red Brown)"});
             this.cbFilter.Name = "cbFilter";
-            this.cbFilter.Size = new System.Drawing.Size(235, 44);
+            this.cbFilter.Size = new System.Drawing.Size(130, 35);
             this.cbFilter.SelectedIndexChanged += new System.EventHandler(this.CbFilter_SelectedIndexChanged);
             // 
             // toolStripLabel4
             // 
             this.toolStripLabel4.AccessibleDescription = "";
             this.toolStripLabel4.Name = "toolStripLabel4";
-            this.toolStripLabel4.Size = new System.Drawing.Size(98, 38);
+            this.toolStripLabel4.Size = new System.Drawing.Size(56, 32);
             this.toolStripLabel4.Text = "Apply To:";
             // 
             // cbApplyTo
             // 
             this.cbApplyTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbApplyTo.DropDownWidth = 121;
-            this.cbApplyTo.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbApplyTo.Items.AddRange(new object[] {
             "All BMD Records",
             "Births Only",
@@ -572,7 +562,7 @@ namespace FTAnalyzer.Forms
             "Births & Marriages",
             "Marriages & Deaths"});
             this.cbApplyTo.Name = "cbApplyTo";
-            this.cbApplyTo.Size = new System.Drawing.Size(121, 44);
+            this.cbApplyTo.Size = new System.Drawing.Size(75, 35);
             this.cbApplyTo.SelectedIndexChanged += new System.EventHandler(this.CbApplyTo_SelectedIndexChanged);
             // 
             // printDialog
@@ -599,25 +589,24 @@ namespace FTAnalyzer.Forms
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuViewFacts});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(288, 40);
+            this.contextMenuStrip.Size = new System.Drawing.Size(190, 26);
             // 
             // mnuViewFacts
             // 
             this.mnuViewFacts.Name = "mnuViewFacts";
-            this.mnuViewFacts.Size = new System.Drawing.Size(287, 36);
+            this.mnuViewFacts.Size = new System.Drawing.Size(189, 22);
             this.mnuViewFacts.Text = "View Individuals Facts";
             this.mnuViewFacts.Click += new System.EventHandler(this.MnuViewFacts_Click);
             // 
             // ColourBMD
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1903, 1076);
+            this.ClientSize = new System.Drawing.Size(1038, 575);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.dgBMDReportSheet);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "ColourBMD";
             this.Text = "Colour BMD Report Result";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ColourBMD_FormClosed);
