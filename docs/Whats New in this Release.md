@@ -4,6 +4,7 @@ Changed default grid used in reports to one that supports filtering
 Added extra DPI support for different monitor resolutions should help with auto scaling  
 Count updates to show number of records filtered  
 Added option to show if person died during period census was taken  
+Colour Census and Colour BMD now highlight whole row  
 
 **Bugfixes**  
 Forced data grids to fill to their parent to hopefully fix scroll bar issue  
