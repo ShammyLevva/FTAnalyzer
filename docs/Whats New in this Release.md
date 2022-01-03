@@ -1,4 +1,4 @@
-### Updated Release Version 8.5.0.0 to be released
+### Updated Release Version 8.5.0.0 3rd Jan 2022
 **Updates**  
 Changed default grid used in reports to one that supports filtering  
 Added extra DPI support for different monitor resolutions should help with auto scaling  

@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "8.5.0.0-beta4";
+        public static string VERSION = "8.5.0.0";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         Cursor storedCursor = Cursors.Default;
@@ -193,12 +193,20 @@ namespace FTAnalyzer
             Width = pictureBox1.Right + 100;
             splitGedcom.SplitterDistance = Math.Max(pbRelationships.Bottom + 18, 110);
             splitGedcom.Refresh();
+            menuStrip1.Font = normalFont;
+            SetStatusBar();
+            Refresh();
+        }
+
+        private void SetStatusBar()
+        {
             tsCountLabel.Font = normalFont;
             tsHintsLabel.Font = normalFont;
             tsStatusLabel.Font = normalFont;
-            menuStrip1.Font = normalFont;
             statusStrip.Height = FontSettings.Default.FontHeight;
-            Refresh();
+            tsCountLabel.Height = FontSettings.Default.FontHeight;
+            tsHintsLabel.Height = FontSettings.Default.FontHeight;
+            tsStatusLabel.Height = FontSettings.Default.FontHeight;
         }
 
         void RegisterEventHandlers()
@@ -343,6 +351,7 @@ namespace FTAnalyzer
             tsCountLabel.Text = string.Empty;
             tsHintsLabel.Text = string.Empty;
             tsStatusLabel.Text = string.Empty;
+            statusStrip.Refresh();
             rtbLCoutput.Text = string.Empty;
             rtbLCUpdateData.Text = string.Empty;
             rtbCheckAncestors.Text = string.Empty;

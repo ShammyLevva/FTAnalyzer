@@ -19,6 +19,7 @@ namespace FTAnalyzer.Forms
         readonly SortableBindingList<IDisplayColourCensus> _reportList;
         readonly Font boldFont;
         readonly string _country;
+        bool settingSelections;
 
         public ColourCensus(string country, List<IDisplayColourCensus> reportList)
         {
@@ -28,6 +29,7 @@ namespace FTAnalyzer.Forms
                 Top += NativeMethods.TopTaskbarOffset;
                 dgReportSheet.AutoGenerateColumns = false;
                 ExtensionMethods.DoubleBuffered(dgReportSheet, true);
+                settingSelections = false;
                 _country = country;
                 _reportList = new SortableBindingList<IDisplayColourCensus>(reportList);
                 reportFormHelper = new ReportFormHelper(this, "Colour Census Report", dgReportSheet, ResetTable, "Colour Census");
@@ -408,5 +410,19 @@ namespace FTAnalyzer.Forms
         void ColourCensus_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
         void ColourCensus_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
+
+        void DgReportSheet_SelectionChanged(object sender, EventArgs e)
+        {
+            if (!settingSelections && dgReportSheet.CurrentRow != null)
+            {
+                settingSelections = true;
+                foreach (DataGridViewCell cell in dgReportSheet.CurrentRow.Cells)
+                {
+                    if(cell.Visible)
+                        cell.Selected = cell.ColumnIndex < startColumnIndex || cell.ColumnIndex > endColumnIndex;
+                }
+                settingSelections = false;
+            }
+        }
     }
 }
