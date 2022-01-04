@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "8.5.0.1-beta1";
+        public static string VERSION = "8.5.0.1-beta2";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         Cursor storedCursor = Cursors.Default;
@@ -195,7 +195,6 @@ namespace FTAnalyzer
             splitGedcom.Refresh();
             menuStrip1.Font = normalFont;
             SetStatusBar();
-            
             Refresh();
         }
 
@@ -1535,6 +1534,7 @@ namespace FTAnalyzer
             tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
             tsHintsLabel.Text = Messages.Hints_Individual;
             dgIndividuals.VirtualGridFiltered += VirtualGridFiltered;
+            ScrollBarDebug.LogScreenData(this, dgIndividuals, "SetupIndividualsTab");
         }
 
         void VirtualGridFiltered(object sender, CountEventArgs e) => tsCountLabel.Text = e.FilterText;

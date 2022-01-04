@@ -534,6 +534,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Utilities\Printing.cs" />
+    <Compile Include="Utilities\ScrollBarDebug.cs" />
     <Compile Include="Utilities\ScrollingRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
