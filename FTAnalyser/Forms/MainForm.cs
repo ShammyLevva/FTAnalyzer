@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "8.5.0.0";
+        public static string VERSION = "8.5.0.1-beta1";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         Cursor storedCursor = Cursors.Default;
@@ -190,11 +190,12 @@ namespace FTAnalyzer
             LbProgramName.Refresh();
             pictureBox1.Left = LbProgramName.Right;
             pictureBox1.Refresh();
-            Width = pictureBox1.Right + 100;
+            Width = Math.Min(pictureBox1.Right + 100, Screen.GetWorkingArea(new Point(0, 0)).Width);
             splitGedcom.SplitterDistance = Math.Max(pbRelationships.Bottom + 18, 110);
             splitGedcom.Refresh();
             menuStrip1.Font = normalFont;
             SetStatusBar();
+            
             Refresh();
         }
 
@@ -229,6 +230,13 @@ namespace FTAnalyzer
             string maxState = (WindowState == FormWindowState.Maximized).ToString();
             string maximised = (string)Application.UserAppDataRegistry.GetValue("Mainform maximised", maxState);
             Point leftTop = ReportFormHelper.CheckIsOnScreen(Top, Left);
+            Rectangle workarea = Screen.GetWorkingArea(leftTop);
+            if (Width > workarea.Width)
+                Width = workarea.Width;
+            if (Height > workarea.Height)
+                Height = workarea.Height;
+            if (leftTop.X < 0) leftTop.X = 0;
+            if (leftTop.Y < 0) leftTop.Y = 0;
             mainForm.Width = Width;
             mainForm.Height = Height;
             mainForm.Top = leftTop.Y;
@@ -2598,6 +2606,11 @@ namespace FTAnalyzer
             {  //only save window size if not minimised
                 try
                 {
+                    Rectangle workarea = Screen.GetWorkingArea(new Point(0, 0));
+                    if (Width > workarea.Width)
+                        Width = workarea.Width;
+                    if (Height > workarea.Height)
+                        Height = workarea.Height;
                     Application.UserAppDataRegistry.SetValue("Mainform size - width", Width);
                     Application.UserAppDataRegistry.SetValue("Mainform size - height", Height);
                     Application.UserAppDataRegistry.SetValue("Mainform position - top", Top);
