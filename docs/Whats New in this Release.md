@@ -1,4 +1,8 @@
-### Updated Release Version 8.5.0.0 3rd Jan 2022
+### Updated Release Version 8.5.0.1 5th Jan 2022  
+**Bugfixes**  
+Resized all tab controls to fix parent hope to finally fix scrollbar issue  
+
+### Updated Release Version 8.5.0.0 3rd Jan 2022  
 **Updates**  
 Changed default grid used in reports to one that supports filtering  
 Added extra DPI support for different monitor resolutions should help with auto scaling  
