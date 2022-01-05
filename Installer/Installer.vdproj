@@ -261,6 +261,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_2D24CF000758451916E9B758BC19D79C"
+        "OwnerKey" = "8:_335B00F1AA2B4DB49718EAE51ABB53FF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_30FD9108BF1CF4BD267FB254137C9C67"
         "OwnerKey" = "8:_335B00F1AA2B4DB49718EAE51ABB53FF"
         "MsmSig" = "8:_UNDEFINED"
@@ -418,12 +424,6 @@
         "Entry"
         {
         "MsmKey" = "8:_5E86461D3B8A4EE2C06F75EE953DE640"
-        "OwnerKey" = "8:_335B00F1AA2B4DB49718EAE51ABB53FF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_5F171B38F48A7B0B10C78C9AB89BB780"
         "OwnerKey" = "8:_335B00F1AA2B4DB49718EAE51ABB53FF"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1294,7 +1294,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5F171B38F48A7B0B10C78C9AB89BB780"
+        "OwnerKey" = "8:_2D24CF000758451916E9B758BC19D79C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2988,6 +2988,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2D24CF000758451916E9B758BC19D79C"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:log4net, Version=2.0.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_2D24CF000758451916E9B758BC19D79C"
+                    {
+                    "Name" = "8:log4net.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:log4net.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_30FD9108BF1CF4BD267FB254137C9C67"
             {
             "AssemblyRegister" = "3:1"
@@ -3684,37 +3715,6 @@
                     }
                 }
             "SourcePath" = "8:System.Security.Cryptography.Csp.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5F171B38F48A7B0B10C78C9AB89BB780"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:log4net, Version=2.0.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_5F171B38F48A7B0B10C78C9AB89BB780"
-                    {
-                    "Name" = "8:log4net.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:log4net.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
@@ -6590,14 +6590,14 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FTAnalyzer"
         "ProductCode" = "8:{C83CFC62-DF5C-438A-A023-96B3872133E7}"
-        "PackageCode" = "8:{23713F99-B88F-4F0F-ABA3-9124F612B020}"
+        "PackageCode" = "8:{0D1795A4-0B21-435D-8D2B-769F0D9A2494}"
         "UpgradeCode" = "8:{1207BD34-CD5A-4BEA-838E-74C0B720E1DA}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:8.5.0"
+        "ProductVersion" = "8:8.5.1"
         "Manufacturer" = "8:FTAnalyzer"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://www.facebook.com/groups/ftanalyzer"
