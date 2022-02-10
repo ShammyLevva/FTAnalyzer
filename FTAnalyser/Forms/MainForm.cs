@@ -30,7 +30,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "8.5.1.0";
+        public static string VERSION = "8.5.2.0";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         Cursor storedCursor = Cursors.Default;
@@ -3290,6 +3290,16 @@ namespace FTAnalyzer
             using (DataTable dt = convertor.ToDataTable(new List<IDisplaySource>(ft.AllSources)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportSourcesEvent);
+            HourGlass(false);
+        }
+
+        void MnuCustomFactsToExcel_Click(object sender, EventArgs e)
+        {
+            HourGlass(true);
+            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+            using (DataTable dt = convertor.ToDataTable(new List<IDisplayCustomFact>(ft.AllCustomFacts)))
+                ExportToExcel.Export(dt);
+            Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportCustomFactEvent);
             HourGlass(false);
         }
 

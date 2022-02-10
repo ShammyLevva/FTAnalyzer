@@ -1,3 +1,7 @@
+### Updated Release Version 8.5.2.0 Not yet released
+**Updates**  
+Added Custom Fact to Excel export option  
+
 ### Updated Release Version 8.5.1.0 5th Jan 2022  
 **Bugfixes**  
 Resized all tab controls to fix parent hope to finally fix scrollbar issue  
