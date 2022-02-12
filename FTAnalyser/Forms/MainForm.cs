@@ -1296,7 +1296,9 @@ namespace FTAnalyzer
                 HourGlass(true);
                 IDisplaySurnames stat = dgSurnames.CurrentRowDataBoundItem;
                 People frmInd = new People();
-                frmInd.SetSurnameStats(stat, chkSurnamesIgnoreCase.Checked);
+                Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => x.RelationType);
+                Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
+                frmInd.SetSurnameStats(stat, indFilter, famFilter, chkSurnamesIgnoreCase.Checked);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
                 HourGlass(false);
@@ -1321,7 +1323,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             var predicate = new Predicate<Individual>(x => x.Notes.ToLower().Contains("census"));
-            var censusNotes = ft.AllIndividuals.Filter(predicate).ToList<Individual>();
+            var censusNotes = ft.AllIndividuals.Filter(predicate).ToList();
             var people = new People();
             people.SetIndividuals(censusNotes, "List of Possible Census records incorrectly recorded as notes");
             DisposeDuplicateForms(people);

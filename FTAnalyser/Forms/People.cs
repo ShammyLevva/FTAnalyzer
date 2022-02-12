@@ -134,20 +134,22 @@ namespace FTAnalyzer.Forms
             UpdateStatusCount();
         }
 
-        public void SetSurnameStats(IDisplaySurnames stat, bool ignoreCase)
+        public void SetSurnameStats(IDisplaySurnames stat, Predicate<Individual> indFilter, Predicate<Family> famFilter, bool ignoreCase)
         {
             Text = $"Individuals & Families whose surame is {stat.Surname}";
             SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
             bool indSurnames(Individual x) => x.Surname.Equals(stat.Surname);
-            foreach (Individual i in ft.AllIndividuals.Filter(indSurnames))
+            Predicate<Individual> filter = FilterUtils.AndFilter(indFilter, indSurnames);
+            foreach (Individual i in ft.AllIndividuals.Filter(filter))
                 dsInd.Add(i);
             dgIndividuals.DataSource = dsInd;
             SortIndividuals();
             dgIndividuals.Dock = DockStyle.Fill;
 
             bool famSurnames(Family x) => x.ContainsSurname(stat.Surname, ignoreCase);
+            Predicate<Family> filter2 = FilterUtils.AndFilter(famFilter, famSurnames);
             SortableBindingList<IDisplayFamily> dsFam = new SortableBindingList<IDisplayFamily>();
-            foreach (Family f in ft.AllFamilies.Filter(famSurnames))
+            foreach (Family f in ft.AllFamilies.Filter(filter2))
                 dsFam.Add(f);
             dgFamilies.DataSource = dsFam;
             dgFamilies.Visible = true;
