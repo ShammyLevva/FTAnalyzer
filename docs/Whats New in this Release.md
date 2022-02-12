@@ -6,6 +6,9 @@ Recognises date of WWI or WWII
 **Bugfixes**  
 Outside country on census for UK census was erroneously showing US census if residence fact in UK in year before.  
 Extra tweaks for special date handling, should recognise more examples  
+Surnames tab double clck was not respecting selected filters  
+Relationship calcs respect same sex marriages now  
+Dates in brackets are now not reported as errors  
 
 ### Updated Release Version 8.5.1.0 5th Jan 2022  
 **Bugfixes**  
