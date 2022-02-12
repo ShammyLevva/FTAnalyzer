@@ -124,7 +124,7 @@ namespace FTAnalyzer.Forms
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1903, 40);
+            this.toolStrip1.Size = new System.Drawing.Size(1903, 44);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -134,7 +134,7 @@ namespace FTAnalyzer.Forms
             this.mnuSaveCensusColumnLayout.Image = ((System.Drawing.Image)(resources.GetObject("mnuSaveCensusColumnLayout.Image")));
             this.mnuSaveCensusColumnLayout.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuSaveCensusColumnLayout.Name = "mnuSaveCensusColumnLayout";
-            this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(40, 34);
+            this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(40, 38);
             this.mnuSaveCensusColumnLayout.Text = "Save Census Column Sort Order";
             this.mnuSaveCensusColumnLayout.Click += new System.EventHandler(this.MnuSaveCensusColumnLayout_Click);
             // 
@@ -144,14 +144,14 @@ namespace FTAnalyzer.Forms
             this.mnuResetCensusColumns.Image = ((System.Drawing.Image)(resources.GetObject("mnuResetCensusColumns.Image")));
             this.mnuResetCensusColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuResetCensusColumns.Name = "mnuResetCensusColumns";
-            this.mnuResetCensusColumns.Size = new System.Drawing.Size(40, 34);
+            this.mnuResetCensusColumns.Size = new System.Drawing.Size(40, 38);
             this.mnuResetCensusColumns.Text = "Reset Census Column Sort Order to Default";
             this.mnuResetCensusColumns.Click += new System.EventHandler(this.MnuResetCensusColumns_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 40);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 44);
             // 
             // printToolStripButton
             // 
@@ -159,7 +159,7 @@ namespace FTAnalyzer.Forms
             this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
             this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripButton.Name = "printToolStripButton";
-            this.printToolStripButton.Size = new System.Drawing.Size(40, 34);
+            this.printToolStripButton.Size = new System.Drawing.Size(40, 38);
             this.printToolStripButton.Text = "&Print";
             this.printToolStripButton.Click += new System.EventHandler(this.PrintToolStripButton_Click);
             // 
@@ -169,14 +169,14 @@ namespace FTAnalyzer.Forms
             this.printPreviewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripButton.Image")));
             this.printPreviewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
-            this.printPreviewToolStripButton.Size = new System.Drawing.Size(40, 34);
+            this.printPreviewToolStripButton.Size = new System.Drawing.Size(40, 38);
             this.printPreviewToolStripButton.Text = "Print Preview...";
             this.printPreviewToolStripButton.Click += new System.EventHandler(this.PrintPreviewToolStripButton_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(6, 40);
+            this.toolStripSeparator.Size = new System.Drawing.Size(6, 44);
             // 
             // mnuExportToExcel
             // 
@@ -184,14 +184,14 @@ namespace FTAnalyzer.Forms
             this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
             this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuExportToExcel.Name = "mnuExportToExcel";
-            this.mnuExportToExcel.Size = new System.Drawing.Size(40, 34);
+            this.mnuExportToExcel.Size = new System.Drawing.Size(40, 38);
             this.mnuExportToExcel.Text = "Export to Excel";
             this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 40);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 44);
             // 
             // tsBtnMapLocation
             // 
@@ -199,7 +199,7 @@ namespace FTAnalyzer.Forms
             this.tsBtnMapLocation.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnMapLocation.Image")));
             this.tsBtnMapLocation.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnMapLocation.Name = "tsBtnMapLocation";
-            this.tsBtnMapLocation.Size = new System.Drawing.Size(302, 34);
+            this.tsBtnMapLocation.Size = new System.Drawing.Size(302, 38);
             this.tsBtnMapLocation.Text = "Show Location on Google Map";
             this.tsBtnMapLocation.Click += new System.EventHandler(this.TsBtnMapLocation_Click);
             // 
@@ -209,26 +209,25 @@ namespace FTAnalyzer.Forms
             this.tsBtnMapOSLocation.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnMapOSLocation.Image")));
             this.tsBtnMapOSLocation.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnMapOSLocation.Name = "tsBtnMapOSLocation";
-            this.tsBtnMapOSLocation.Size = new System.Drawing.Size(263, 34);
+            this.tsBtnMapOSLocation.Size = new System.Drawing.Size(263, 38);
             this.tsBtnMapOSLocation.Text = "Show Location on OS Map";
             this.tsBtnMapOSLocation.Click += new System.EventHandler(this.TsBtnMapOSLocation_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 40);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 44);
             // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(206, 34);
+            this.toolStripLabel1.Size = new System.Drawing.Size(206, 38);
             this.toolStripLabel1.Text = "Census search using:";
             // 
             // cbCensusSearchProvider
             // 
             this.cbCensusSearchProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCensusSearchProvider.DropDownWidth = 200;
-            this.cbCensusSearchProvider.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbCensusSearchProvider.Items.AddRange(new object[] {
             "Ancestry",
             "Find My Past",
@@ -236,13 +235,13 @@ namespace FTAnalyzer.Forms
             "FamilySearch",
             "Scotlands People"});
             this.cbCensusSearchProvider.Name = "cbCensusSearchProvider";
-            this.cbCensusSearchProvider.Size = new System.Drawing.Size(200, 40);
+            this.cbCensusSearchProvider.Size = new System.Drawing.Size(200, 44);
             this.cbCensusSearchProvider.SelectedIndexChanged += new System.EventHandler(this.CbCensusSearchProvider_SelectedIndexChanged);
             // 
             // toolStripLabel2
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(82, 34);
+            this.toolStripLabel2.Size = new System.Drawing.Size(82, 38);
             this.toolStripLabel2.Text = "Region:";
             // 
             // cbRegion
@@ -252,14 +251,13 @@ namespace FTAnalyzer.Forms
             ".co.uk",
             ".ca",
             ".com.au"});
-            this.cbRegion.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbRegion.Items.AddRange(new object[] {
             ".com",
             ".co.uk",
             ".ca",
             ".com.au"});
             this.cbRegion.Name = "cbRegion";
-            this.cbRegion.Size = new System.Drawing.Size(121, 40);
+            this.cbRegion.Size = new System.Drawing.Size(121, 44);
             this.cbRegion.Text = ".co.uk";
             this.cbRegion.SelectedIndexChanged += new System.EventHandler(this.CbRegion_SelectedIndexChanged);
             // 
@@ -269,7 +267,7 @@ namespace FTAnalyzer.Forms
             this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
             this.btnHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(40, 34);
+            this.btnHelp.Size = new System.Drawing.Size(40, 38);
             this.btnHelp.Text = "toolStripButton1";
             this.btnHelp.Click += new System.EventHandler(this.BtnHelp_Click);
             // 

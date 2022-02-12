@@ -1,6 +1,8 @@
 ### Updated Release Version 8.5.2.0 Not yet released
 **Updates**  
 Added Custom Fact to Excel export option  
+**Bugfixes**  
+Outside country on census for UK census was erroneously showing US census if residence fact in UK in year before.  
 
 ### Updated Release Version 8.5.1.0 5th Jan 2022  
 **Bugfixes**  

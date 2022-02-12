@@ -105,6 +105,7 @@ namespace SharpMap
                 string projSharePath = Path.Combine(gdalPath, "share");
                 Environment.SetEnvironmentVariable("PROJ_LIB", projSharePath);
                 Gdal.SetConfigOption("PROJ_LIB", projSharePath);
+                OSGeo.OSR.Osr.SetPROJSearchPaths(new[] { projSharePath });
 
                 _usable = true;
             }

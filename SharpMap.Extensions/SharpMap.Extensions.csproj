@@ -56,11 +56,11 @@
     <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\FTAnalyser\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="gdalconst_csharp, Version=1.0.7372.36899, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
-      <HintPath>..\FTAnalyser\packages\GDAL.2.4.4\lib\net40\gdalconst_csharp.dll</HintPath>
+    <Reference Include="gdalconst_csharp, Version=3.4.1.0, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <HintPath>..\FTAnalyser\packages\GDAL.3.4.1\lib\netstandard2.0\gdalconst_csharp.dll</HintPath>
     </Reference>
-    <Reference Include="gdal_csharp, Version=1.0.7372.36899, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
-      <HintPath>..\FTAnalyser\packages\GDAL.2.4.4\lib\net40\gdal_csharp.dll</HintPath>
+    <Reference Include="gdal_csharp, Version=3.4.1.0, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <HintPath>..\FTAnalyser\packages\GDAL.3.4.1\lib\netstandard2.0\gdal_csharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NetTopologySuite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
@@ -75,11 +75,11 @@
     <Reference Include="NetTopologySuite.IO.SpatiaLite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
       <HintPath>..\FTAnalyser\packages\NetTopologySuite.IO.SpatiaLite.2.0.0\lib\netstandard2.0\NetTopologySuite.IO.SpatiaLite.dll</HintPath>
     </Reference>
-    <Reference Include="ogr_csharp, Version=1.0.7372.36898, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
-      <HintPath>..\FTAnalyser\packages\GDAL.2.4.4\lib\net40\ogr_csharp.dll</HintPath>
+    <Reference Include="ogr_csharp, Version=3.4.1.0, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <HintPath>..\FTAnalyser\packages\GDAL.3.4.1\lib\netstandard2.0\ogr_csharp.dll</HintPath>
     </Reference>
-    <Reference Include="osr_csharp, Version=1.0.7372.36898, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
-      <HintPath>..\FTAnalyser\packages\GDAL.2.4.4\lib\net40\osr_csharp.dll</HintPath>
+    <Reference Include="osr_csharp, Version=3.4.1.0, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <HintPath>..\FTAnalyser\packages\GDAL.3.4.1\lib\netstandard2.0\osr_csharp.dll</HintPath>
     </Reference>
     <Reference Include="ProjNET, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a1f5bdcd9c6f5740, processorArchitecture=MSIL">
       <HintPath>..\FTAnalyser\packages\ProjNET.2.0.0\lib\netstandard2.0\ProjNET.dll</HintPath>
@@ -145,9 +145,6 @@
       <Project>{C83777FC-AABB-47D9-911F-D76255D4D541}</Project>
       <Name>SharpMap</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="GdalConfiguration.vb" />
   </ItemGroup>
   <Import Project="..\FTAnalyser\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\FTAnalyser\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -730,7 +730,7 @@ namespace SharpMap.Layers
                 {
                     string wkt;
                     p.ImportFromEPSG(map.SRID);
-                    p.ExportToWkt(out wkt);
+                    p.ExportToWkt(out wkt, null);
                     cs = new CoordinateSystemFactory().CreateFromWkt(wkt);
                 }
             }
