@@ -1,4 +1,4 @@
-### Updated Release Version 8.5.2.0 Not yet released
+### Updated Release Version 8.5.2.0 13th Feb 2022
 **Updates**  
 Added Custom Fact to Excel export option  
 Recognises date of WWI or WWII  
