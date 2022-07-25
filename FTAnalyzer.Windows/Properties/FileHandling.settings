@@ -8,7 +8,7 @@
     <Setting Name="RetryFailedLines" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Convertdiacritics" Type="System.Boolean" Scope="User">
+    <Setting Name="ConvertDiacritics" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>

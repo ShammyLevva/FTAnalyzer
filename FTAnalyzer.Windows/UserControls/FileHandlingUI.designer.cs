@@ -67,7 +67,7 @@ namespace FTAnalyzer.UserControls
             this.chkConvertDiacritics.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkConvertDiacritics.Name = "chkConvertDiacritics";
             this.chkConvertDiacritics.UseVisualStyleBackColor = true;
-            this.chkConvertDiacritics.CheckedChanged += new System.EventHandler(this.ChkConvertdiacritics_CheckedChanged);
+            this.chkConvertDiacritics.CheckedChanged += new System.EventHandler(this.ChkConvertDiacritics_CheckedChanged);
             // 
             // FileHandlingUI
             // 

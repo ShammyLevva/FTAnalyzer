@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FTAnalyzer.Properties {
+namespace FTAnalyzer.Windows.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -50,12 +50,12 @@ namespace FTAnalyzer.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool Convertdiacritics {
+        public bool ConvertDiacritics {
             get {
-                return ((bool)(this["Convertdiacritics"]));
+                return ((bool)(this["ConvertDiacritics"]));
             }
             set {
-                this["Convertdiacritics"] = value;
+                this["ConvertDiacritics"] = value;
             }
         }
     }

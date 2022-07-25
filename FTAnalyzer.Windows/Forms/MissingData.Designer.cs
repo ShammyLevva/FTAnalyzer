@@ -36,7 +36,7 @@ namespace FTAnalyzer.Forms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MissingData));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.dsBirth = new FTAnalyzer.Forms.Controls.DateSliders();
+         //   this.dsBirth = new FTAnalyzer.Forms.Controls.DateSliders();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -49,18 +49,18 @@ namespace FTAnalyzer.Forms
             // 
             // dsBirth
             // 
-            this.dsBirth.GroupBoxText = "Birth Date";
-            this.dsBirth.Location = new System.Drawing.Point(12, 12);
-            this.dsBirth.Name = "dsBirth";
-            this.dsBirth.Size = new System.Drawing.Size(334, 163);
-            this.dsBirth.TabIndex = 2;
+            //this.dsBirth.GroupBoxText = "Birth Date";
+            //this.dsBirth.Location = new System.Drawing.Point(12, 12);
+            //this.dsBirth.Name = "dsBirth";
+            //this.dsBirth.Size = new System.Drawing.Size(334, 163);
+            //this.dsBirth.TabIndex = 2;
             // 
             // MissingData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(688, 457);
-            this.Controls.Add(this.dsBirth);
+//            this.Controls.Add(this.dsBirth);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MissingData";
@@ -73,6 +73,6 @@ namespace FTAnalyzer.Forms
 
         #endregion
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private FTAnalyzer.Forms.Controls.DateSliders dsBirth;
+        //private FTAnalyzer.Forms.Controls.DateSliders dsBirth;
     }
 }

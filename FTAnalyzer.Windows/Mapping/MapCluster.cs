@@ -7,41 +7,41 @@ namespace FTAnalyzer.Mapping
     class MapCluster
     {
         readonly List<FeatureDataRow> cluster;
-        readonly int minSize;
-        readonly double gridSize;
-        readonly List<Point> points;
+        readonly int _minSize;
+        readonly double _gridSize;
+        readonly List<NetTopologySuite.Geometries.Point> points;
         public static string CLUSTER = "Cluster", FEATURE = "Feature", UNKNOWN = "Unknown";
 
         public IList<FeatureDataRow> Features { get { return cluster; } }
 
         public MapCluster(int minSize, double gridSize)
         {
-            this.cluster = new List<FeatureDataRow>();
-            this.minSize = minSize;
-            this.gridSize = gridSize;
-            this.points = new List<Point>();
+            cluster = new List<FeatureDataRow>();
+            _minSize = minSize;
+            _gridSize = gridSize;
+            points = new List<NetTopologySuite.Geometries.Point>();
         }
 
         public Geometry Geometry { get { return Centroid; } }
 
-        public string ClusterType { get { return (cluster.Count < minSize) ? FEATURE : CLUSTER; } }
+        public string ClusterType { get { return (cluster.Count < _minSize) ? FEATURE : CLUSTER; } }
 
-        public Point Centroid { get; private set; }
+        public NetTopologySuite.Geometries.Point Centroid { get; private set; }
 
         public void AddFeature(FeatureDataRow row)
         {
             cluster.Add(row);
-            Point p = (Point)row.Geometry;
+            NetTopologySuite.Geometries.Point p = (NetTopologySuite.Geometries.Point)row.Geometry;
             UpdateCentroid(p);
             points.Add(p);
         }
 
         public bool IsFeatureInClusterBounds(FeatureDataRow row)
         {
-            return Centroid.Distance(row.Geometry) <= gridSize;
+            return Centroid.Distance(row.Geometry) <= _gridSize;
         }
 
-        public void UpdateCentroid(Point point)
+        public void UpdateCentroid(NetTopologySuite.Geometries.Point point)
         {
             double oldCount = points.Count;
             if (oldCount == 0)
@@ -53,7 +53,7 @@ namespace FTAnalyzer.Mapping
                 double newCount = oldCount + 1;
                 double X = (Centroid.X * oldCount + point.X) / newCount;
                 double Y = (Centroid.Y * oldCount + point.Y) / newCount;
-                Centroid = new Point(new Coordinate(X, Y));
+                Centroid = new NetTopologySuite.Geometries.Point(new Coordinate(X, Y));
             }
         }
 

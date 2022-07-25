@@ -16,7 +16,7 @@ namespace FTAnalyzer.Mapping
         public string CountyName { get; private set; }
         public string CountryName { get; private set; }
         public string ParishName { get; private set; }
-        public Point Point { get; private set; }
+        public NetTopologySuite.Geometries.Point Point { get; private set; }
         public string FuzzyMatch { get; private set; }
         public string FuzzyNoParishMatch { get; private set; }
 

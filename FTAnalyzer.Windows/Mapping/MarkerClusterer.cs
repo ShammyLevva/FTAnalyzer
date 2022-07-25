@@ -52,10 +52,10 @@ namespace FTAnalyzer.Mapping
         {
             double distance = double.MaxValue;
             MapCluster clusterToAddTo = null;
-            Point rowCentre = row.Geometry.Centroid;
+            NetTopologySuite.Geometries.Point rowCentre = row.Geometry.Centroid;
             foreach (MapCluster cluster in clusters)
             {
-                Point centre = cluster.Centroid;
+                NetTopologySuite.Geometries.Point centre = cluster.Centroid;
                 if (centre.X != 0 && centre.Y != 0)
                 {
                     double d = centre.Distance(rowCentre);

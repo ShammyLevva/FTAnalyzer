@@ -8,6 +8,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;__PC__;CODE_ANALYSIS;__DEBUG__</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;__PC__;CODE_ANALYSIS;__DEBUG__</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="Resources\FTAnalyzer.ico" />
     <None Remove="Resources\Icons\16.png" />
@@ -243,6 +251,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="DgvFilterPopup">
+      <HintPath>Resources\Lib\DgvFilterPopup.dll</HintPath>
+    </Reference>
+    <Reference Include="MediaSlider">
+      <HintPath>Resources\Lib\MediaSlider.dll</HintPath>
+    </Reference>
+    <Reference Include="Printing.DataGridViewPrint">
+      <HintPath>Resources\Lib\Printing.DataGridViewPrint.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Forms\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -265,12 +285,6 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Forms\Controls\CensusDateSelector.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Forms\Controls\DateSliders.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Forms\Controls\DateSliders.ScoreValues.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Forms\Controls\MapToolStripMenuItem.cs">

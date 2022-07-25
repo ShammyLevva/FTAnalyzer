@@ -1,7 +1,5 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using FTAnalyzer.Properties;
+﻿using FTAnalyzer.Properties;
+using FTAnalyzer.Windows.Properties;
 
 namespace FTAnalyzer.UserControls
 {
@@ -67,11 +65,7 @@ namespace FTAnalyzer.UserControls
 
         void ChkRetryFailedLines_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
 
-        void ChkConvertdiacritics_CheckedChanged(object sender, EventArgs e) =>  GeneralSettings.Default.ReloadRequired = true;
+        void ChkConvertDiacritics_CheckedChanged(object sender, EventArgs e) =>  GeneralSettings.Default.ReloadRequired = true;
 
-        private void ChkConvertDiacritics_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
