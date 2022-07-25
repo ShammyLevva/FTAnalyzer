@@ -80,9 +80,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FTAnalyser\FTAnalyzer.Windows.csproj">
+    <ProjectReference Include="..\FTAnalyser\FTAnalyzer.Windows.4.7.csproj">
       <Project>{799ECA65-6748-4B7C-BBD5-429C19E02161}</Project>
-      <Name>FTAnalyzer.Windows</Name>
+      <Name>FTAnalyzer.Windows.4.7</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

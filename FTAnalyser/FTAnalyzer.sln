@@ -1,8 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28922.388
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTAnalyzer.Windows", "FTAnalyzer.Windows.csproj", "{799ECA65-6748-4B7C-BBD5-429C19E02161}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTAnalyzer.Windows.4.7", "FTAnalyzer.Windows.4.7.csproj", "{799ECA65-6748-4B7C-BBD5-429C19E02161}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A4140C12-53F5-438C-8D24-9E48C504FECF} = {A4140C12-53F5-438C-8D24-9E48C504FECF}
 		{DD1CC1DB-4BF9-4C88-A100-733D84795F3A} = {DD1CC1DB-4BF9-4C88-A100-733D84795F3A}
@@ -41,11 +41,9 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "..\Installer\I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegexPerformance", "..\RegexPerformance\RegexPerformance.csproj", "{BD521EC2-33D8-41C5-8913-4A23C197789C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTAnalyzer.Windows", "..\FTAnalyzer.Windows\FTAnalyzer.Windows.csproj", "{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}"
+EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		..\..\FTAnalyzer.Shared\FTAnalyzer.Shared\FTAnalyzer.Shared.projitems*{799eca65-6748-4b7c-bbd5-429c19e02161}*SharedItemsImports = 4
-		..\..\FTAnalyzer.Shared\FTAnalyzer.Shared\FTAnalyzer.Shared.projitems*{89621ebe-2416-4e13-bf69-f1c145908518}*SharedItemsImports = 13
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
 		CD_ROM|x64 = CD_ROM|x64
@@ -376,12 +374,58 @@ Global
 		{BD521EC2-33D8-41C5-8913-4A23C197789C}.SingleImage|x64.Build.0 = Debug|Any CPU
 		{BD521EC2-33D8-41C5-8913-4A23C197789C}.SingleImage|x86.ActiveCfg = Debug|Any CPU
 		{BD521EC2-33D8-41C5-8913-4A23C197789C}.SingleImage|x86.Build.0 = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.CD_ROM|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.CD_ROM|Any CPU.Build.0 = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.CD_ROM|x64.ActiveCfg = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.CD_ROM|x64.Build.0 = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.CD_ROM|x86.ActiveCfg = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.CD_ROM|x86.Build.0 = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.Debug|x64.Build.0 = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.Debug|x86.Build.0 = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.DebugDSProjection|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.DebugDSProjection|Any CPU.Build.0 = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.DebugDSProjection|x64.ActiveCfg = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.DebugDSProjection|x64.Build.0 = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.DebugDSProjection|x86.ActiveCfg = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.DebugDSProjection|x86.Build.0 = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.DVD-5|x64.ActiveCfg = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.DVD-5|x64.Build.0 = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.DVD-5|x86.ActiveCfg = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.DVD-5|x86.Build.0 = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.Release|x64.ActiveCfg = Release|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.Release|x64.Build.0 = Release|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.Release|x86.ActiveCfg = Release|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.Release|x86.Build.0 = Release|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.ReleaseDSProjection|Any CPU.ActiveCfg = Release|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.ReleaseDSProjection|Any CPU.Build.0 = Release|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.ReleaseDSProjection|x64.ActiveCfg = Release|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.ReleaseDSProjection|x64.Build.0 = Release|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.ReleaseDSProjection|x86.ActiveCfg = Release|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.ReleaseDSProjection|x86.Build.0 = Release|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.SingleImage|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.SingleImage|Any CPU.Build.0 = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.SingleImage|x64.ActiveCfg = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.SingleImage|x64.Build.0 = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.SingleImage|x86.ActiveCfg = Debug|Any CPU
+		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.SingleImage|x86.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B79EA374-0D55-4C52-AFC5-E650027D0FE8}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\..\FTAnalyzer.Shared\FTAnalyzer.Shared\FTAnalyzer.Shared.projitems*{799eca65-6748-4b7c-bbd5-429c19e02161}*SharedItemsImports = 4
+		..\..\FTAnalyzer.Shared\FTAnalyzer.Shared\FTAnalyzer.Shared.projitems*{89621ebe-2416-4e13-bf69-f1c145908518}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FTAnalyzer.vsmdi
