@@ -216,6 +216,7 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.43" />
     <PackageReference Include="log4net" Version="2.0.14" />
     <PackageReference Include="NetTopologySuite" Version="2.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="ProjNET" Version="2.0.0" />
     <PackageReference Include="System.Buffers" Version="4.5.1" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
@@ -364,6 +365,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>NonGedcomDate.settings</DependentUpon>
     </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Properties\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
@@ -413,6 +419,11 @@
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -420,26 +431,56 @@
       <LastGenOutput>FileHandling.Designer.cs</LastGenOutput>
       <Generator>PublicSettingsSingleFileGenerator</Generator>
     </None>
+    <Compile Update="Properties\FileHandling.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FileHandling.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
     <None Update="Properties\FontSettings.settings">
       <LastGenOutput>FontSettings.Designer.cs</LastGenOutput>
       <Generator>SettingsSingleFileGenerator</Generator>
     </None>
+    <Compile Update="Properties\FontSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FontSettings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
     <None Update="Properties\GeneralSettings.settings">
       <LastGenOutput>GeneralSettings.Designer.cs</LastGenOutput>
       <Generator>PublicSettingsSingleFileGenerator</Generator>
     </None>
+    <Compile Update="Properties\GeneralSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GeneralSettings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
     <None Update="Properties\MappingSettings.settings">
       <LastGenOutput>MappingSettings.Designer.cs</LastGenOutput>
       <Generator>PublicSettingsSingleFileGenerator</Generator>
     </None>
+    <Compile Update="Properties\MappingSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MappingSettings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
     <None Update="Properties\NonGedcomDate.settings">
       <LastGenOutput>NonGedcomDate.Designer.cs</LastGenOutput>
       <Generator>SettingsSingleFileGenerator</Generator>
     </None>
+    <Compile Update="Properties\NonGedcomDate.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NonGedcomDate.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
     <None Update="Properties\Settings.settings">
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
       <Generator>SettingsSingleFileGenerator</Generator>
     </None>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
   </ItemGroup>
 
   <Import Project="..\..\FTAnalyzer.Shared\FTAnalyzer.Shared\FTAnalyzer.Shared.projitems" Label="Shared" />

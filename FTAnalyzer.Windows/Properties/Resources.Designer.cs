@@ -22,14 +22,14 @@ namespace FTAnalyzer.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ErrorMessages {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ErrorMessages() {
+        internal Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace FTAnalyzer.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FTAnalyzer.Windows.Properties.ErrorMessages", typeof(ErrorMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FTAnalyzer.Windows.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,24 +61,42 @@ namespace FTAnalyzer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unexpected Error Checking for inconsistencies in your data
-        ///Please report this on the issues page at http://ftanalyzer.com/issues
-        ///Error was:.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string FTA_0001 {
+        internal static System.Drawing.Bitmap _256 {
             get {
-                return ResourceManager.GetString("FTA_0001", resourceCulture);
+                object obj = ResourceManager.GetObject("256", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You need to load your GEDCOM file before the program can display results.
-        ///
-        ///Click File | Open GEDCOM File..
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string FTA_0002 {
+        internal static System.Drawing.Bitmap flogo_rgb_hex_brc_site_250 {
             get {
-                return ResourceManager.GetString("FTA_0002", resourceCulture);
+                object obj = ResourceManager.GetObject("flogo_rgb_hex_brc_site_250", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GoogleMapsAPI {
+            get {
+                object obj = ResourceManager.GetObject("GoogleMapsAPI", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] KUNSTLER {
+            get {
+                object obj = ResourceManager.GetObject("KUNSTLER", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }

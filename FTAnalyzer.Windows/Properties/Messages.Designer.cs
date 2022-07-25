@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FTAnalyzer.Windows.Properties {
+namespace FTAnalyzer.Properties {
     using System;
     
     
