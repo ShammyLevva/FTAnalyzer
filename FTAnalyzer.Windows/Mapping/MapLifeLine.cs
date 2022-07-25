@@ -26,9 +26,9 @@ namespace FTAnalyzer.Mapping
             {
                 Coordinate point = new Coordinate(f.Location.LongitudeM, f.Location.LatitudeM);
                 if (index == 1)
-                    StartPoint = new Point(point);
+                    StartPoint = new NetTopologySuite.Geometries.Point(point);
                 if (index == ind.AllLifeLineFacts.Count)
-                    EndPoint = new Point(point);
+                    EndPoint = new NetTopologySuite.Geometries.Point(point);
                 index++;
                 if (points.Count == 0 || (points.Count > 0 && !point.Equals2D(previousPoint)))
                 {
@@ -78,9 +78,6 @@ namespace FTAnalyzer.Mapping
             return r;
         }
 
-        public override string ToString()
-        {
-            return ind.ToString();
-        }
+        public override string ToString() => ind.ToString();
     }
 }

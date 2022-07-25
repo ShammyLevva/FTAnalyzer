@@ -22,14 +22,13 @@ namespace FTAnalyzer
                     components.Dispose();
                 }
                 base.Dispose(disposing);
-                normalFont.Dispose();
-                boldFont.Dispose();
-                handwritingFont.Dispose();
-                fonts.Dispose();
-                rfhDuplicates.Dispose();
-                if (cts!=null)
-                    cts.Dispose();
-                storedCursor.Dispose();
+                normalFont?.Dispose();
+                boldFont?.Dispose();
+                handwritingFont?.Dispose();
+                fonts?.Dispose();
+                rfhDuplicates?.Dispose();
+                cts?.Dispose();
+                storedCursor?.Dispose();
             }
             catch (Exception) { }
         }

@@ -67,7 +67,7 @@ namespace FTAnalyzer
                 BuildRecentList();
             } catch (Exception e)
             {
-                UIHelpers.ShowMessage($"Problem starting up error was : {e.Message}");
+                UIHelpers.ShowMessage($"FTAnalyzer encountered a problem whilst starting up error was : {e.Message}");
             }
         }
 
@@ -904,14 +904,15 @@ namespace FTAnalyzer
 
         void ChildAgeProfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Statistics s = Statistics.Instance;
-            Chart chart = new Chart();
-            int[,,] stats = s.ChildrenBirthProfiles();
-            chart.BuildChildBirthProfile(stats);
-            DisposeDuplicateForms(chart);
-            chart.Show();
-            Analytics.TrackAction(Analytics.MainFormAction, Analytics.BirthProfileEvent);
-            MessageBox.Show(s.BuildOutput(stats), "Birth Profile Information");
+            MessageBox.Show("Sorry this report is currently Unavailable.");
+            //Statistics s = Statistics.Instance;
+            //Chart chart = new Chart();
+            //int[,,] stats = s.ChildrenBirthProfiles();
+            //chart.BuildChildBirthProfile(stats);
+            //DisposeDuplicateForms(chart);
+            //chart.Show();
+            //Analytics.TrackAction(Analytics.MainFormAction, Analytics.BirthProfileEvent);
+            //MessageBox.Show(s.BuildOutput(stats), "Birth Profile Information");
         }
 
         void ViewOnlineManualToolStripMenuItem_Click(object sender, EventArgs e)
