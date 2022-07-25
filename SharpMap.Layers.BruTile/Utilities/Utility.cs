@@ -155,7 +155,7 @@ namespace BruTile
             
             ss.AddSurrogate(typeof(TmsRequest), new StreamingContext(StreamingContextStates.All),
                             new TmsRequestSurrogate());
-            ss.AddSurrogate(typeof (TmsTileSource), new StreamingContext(StreamingContextStates.All), tss2);
+            //ss.AddSurrogate(typeof (TmsTileSource), new StreamingContext(StreamingContextStates.All), tss2);
 
             ss.AddSurrogate(typeof (HttpTileProvider), new StreamingContext(StreamingContextStates.All),
                             new HttpTileProviderSurrogate());

@@ -288,7 +288,7 @@ namespace SharpMap.Layers
             var setEvent = true;
             try
             {
-                byte[] bytes = tileProvider.GetTile(tileInfo);
+                byte[] bytes = tileProvider.GetTileAsync(tileInfo).Result;
                 Bitmap bitmap = new Bitmap(new MemoryStream(bytes));
                 bitmaps.TryAdd(tileInfo.Index, bitmap);
 

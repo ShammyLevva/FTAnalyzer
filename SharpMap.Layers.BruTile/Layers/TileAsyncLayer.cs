@@ -267,7 +267,7 @@ namespace SharpMap.Layers
                 if (Logger.IsDebugEnabled)
                     Logger.DebugFormat("Calling gettile on provider for tile {0},{1},{2}", tileInfo.Index.Level, tileInfo.Index.Col, tileInfo.Index.Row);
 
-                bytes = tileProvider.GetTile(tileInfo);
+                bytes = tileProvider.GetTileAsync(tileInfo).Result;
                 if (cancelToken.IsCancellationRequested)
                     cancelToken.ThrowIfCancellationRequested();
 

@@ -68,7 +68,6 @@
     <Compile Include="Utilities\Web\ArcGisTileRequestSurrogate.cs" />
     <Compile Include="Utilities\Web\ArcGisTileSourceSurrogate.cs" />
     <Compile Include="Utilities\Web\BasicRequestSurrogate.cs" />
-    <Compile Include="Utilities\Web\BingRequestSurrogate.cs" />
     <Compile Include="Utilities\Web\HttpTileSourceSurrogate.cs" />
     <Compile Include="Utilities\Web\TileSourceSurrogate.cs" />
     <Compile Include="Utilities\Web\TmsRequestSurrogate.cs" />
