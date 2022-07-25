@@ -148,11 +148,11 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AdvancedDataGridView, Version=1.2.26609.5, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\DG.AdvancedDataGridView.1.2.26609.5\lib\net40\AdvancedDataGridView.dll</HintPath>
+    <Reference Include="AdvancedDataGridView, Version=1.2.26803.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DG.AdvancedDataGridView.1.2.26803.6\lib\net40\AdvancedDataGridView.dll</HintPath>
     </Reference>
-    <Reference Include="BruTile, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\BruTile.4.0.0\lib\netstandard2.0\BruTile.dll</HintPath>
+    <Reference Include="BruTile, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\BruTile.5.0.0\lib\netstandard2.0\BruTile.dll</HintPath>
     </Reference>
     <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
@@ -167,20 +167,20 @@
     <Reference Include="DotNetZip, Version=1.16.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>packages\DotNetZip.1.16.0\lib\net40\DotNetZip.dll</HintPath>
     </Reference>
-    <Reference Include="gdalconst_csharp, Version=3.4.1.0, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
-      <HintPath>packages\GDAL.3.4.1\lib\netstandard2.0\gdalconst_csharp.dll</HintPath>
+    <Reference Include="gdalconst_csharp, Version=3.5.0.0, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <HintPath>packages\GDAL.3.5.0\lib\netstandard2.0\gdalconst_csharp.dll</HintPath>
     </Reference>
-    <Reference Include="gdal_csharp, Version=3.4.1.0, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
-      <HintPath>packages\GDAL.3.4.1\lib\netstandard2.0\gdal_csharp.dll</HintPath>
+    <Reference Include="gdal_csharp, Version=3.5.0.0, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <HintPath>packages\GDAL.3.5.0\lib\netstandard2.0\gdal_csharp.dll</HintPath>
     </Reference>
-    <Reference Include="GoogleAnalyticsTracker.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=04ab204e84b117c0, processorArchitecture=MSIL">
-      <HintPath>packages\GoogleAnalyticsTracker.Core.7.0.0\lib\netstandard2.0\GoogleAnalyticsTracker.Core.dll</HintPath>
+    <Reference Include="GoogleAnalyticsTracker.Core, Version=7.0.0.0, Culture=neutral, PublicKeyToken=04ab204e84b117c0, processorArchitecture=MSIL">
+      <HintPath>packages\GoogleAnalyticsTracker.Core.7.0.1\lib\netstandard2.0\GoogleAnalyticsTracker.Core.dll</HintPath>
     </Reference>
-    <Reference Include="GoogleAnalyticsTracker.Simple, Version=1.0.0.0, Culture=neutral, PublicKeyToken=04ab204e84b117c0, processorArchitecture=MSIL">
-      <HintPath>packages\GoogleAnalyticsTracker.Simple.7.0.0\lib\netstandard2.0\GoogleAnalyticsTracker.Simple.dll</HintPath>
+    <Reference Include="GoogleAnalyticsTracker.Simple, Version=7.0.0.0, Culture=neutral, PublicKeyToken=04ab204e84b117c0, processorArchitecture=MSIL">
+      <HintPath>packages\GoogleAnalyticsTracker.Simple.7.0.1\lib\netstandard2.0\GoogleAnalyticsTracker.Simple.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.11.42.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>packages\HtmlAgilityPack.1.11.42\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack, Version=1.11.43.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>packages\HtmlAgilityPack.1.11.43\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>packages\log4net.2.0.14\lib\net45\log4net.dll</HintPath>
@@ -191,16 +191,16 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NetTopologySuite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
-      <HintPath>packages\NetTopologySuite.2.4.0\lib\netstandard2.0\NetTopologySuite.dll</HintPath>
+      <HintPath>packages\NetTopologySuite.2.5.0\lib\netstandard2.0\NetTopologySuite.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="ogr_csharp, Version=3.4.1.0, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
-      <HintPath>packages\GDAL.3.4.1\lib\netstandard2.0\ogr_csharp.dll</HintPath>
+    <Reference Include="ogr_csharp, Version=3.5.0.0, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <HintPath>packages\GDAL.3.5.0\lib\netstandard2.0\ogr_csharp.dll</HintPath>
     </Reference>
-    <Reference Include="osr_csharp, Version=3.4.1.0, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
-      <HintPath>packages\GDAL.3.4.1\lib\netstandard2.0\osr_csharp.dll</HintPath>
+    <Reference Include="osr_csharp, Version=3.5.0.0, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <HintPath>packages\GDAL.3.5.0\lib\netstandard2.0\osr_csharp.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -225,8 +225,8 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.SQLite, Version=1.0.115.5, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\lib\net46\System.Data.SQLite.dll</HintPath>
+    <Reference Include="System.Data.SQLite, Version=1.0.116.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.116.0\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -235,8 +235,8 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
@@ -984,11 +984,11 @@ rem    xcopy /s /y "$(SolutionDir)packages\GDAL.Native.1.11.1\gdal\*.*" "$(Targe
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
-    <Error Condition="!Exists('packages\GDAL.Native.3.4.1\build\netstandard2.0\GDAL.Native.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\GDAL.Native.3.4.1\build\netstandard2.0\GDAL.Native.targets'))" />
+    <Error Condition="!Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.116.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.116.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+    <Error Condition="!Exists('packages\GDAL.Native.3.5.0\build\netstandard2.0\GDAL.Native.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\GDAL.Native.3.5.0\build\netstandard2.0\GDAL.Native.targets'))" />
   </Target>
-  <Import Project="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
-  <Import Project="packages\GDAL.Native.3.4.1\build\netstandard2.0\GDAL.Native.targets" Condition="Exists('packages\GDAL.Native.3.4.1\build\netstandard2.0\GDAL.Native.targets')" />
+  <Import Project="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.116.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.116.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+  <Import Project="packages\GDAL.Native.3.5.0\build\netstandard2.0\GDAL.Native.targets" Condition="Exists('packages\GDAL.Native.3.5.0\build\netstandard2.0\GDAL.Native.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

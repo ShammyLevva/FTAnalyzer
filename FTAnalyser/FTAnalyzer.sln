@@ -425,6 +425,7 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\..\FTAnalyzer.Shared\FTAnalyzer.Shared\FTAnalyzer.Shared.projitems*{799eca65-6748-4b7c-bbd5-429c19e02161}*SharedItemsImports = 4
 		..\..\FTAnalyzer.Shared\FTAnalyzer.Shared\FTAnalyzer.Shared.projitems*{89621ebe-2416-4e13-bf69-f1c145908518}*SharedItemsImports = 13
+		..\..\FTAnalyzer.Shared\FTAnalyzer.Shared\FTAnalyzer.Shared.projitems*{bd462a5e-ddca-4d63-ae61-b31c21eaaa72}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FTAnalyzer.vsmdi

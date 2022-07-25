@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FTAnalyzer.Properties" GeneratedClassName="NonGedcomDate">
+  <Profiles />
+  <Settings>
+    <Setting Name="UseNonGedcomDates" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DateFormat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dd/MM/yyyy</Value>
+    </Setting>
+    <Setting Name="Regex" Type="System.String" Scope="User">
+      <Value Profile="(Default)">^\d{1,2}\/\d{1,2}\/\d{4}$</Value>
+    </Setting>
+    <Setting Name="Separator" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/</Value>
+    </Setting>
+    <Setting Name="FormatSelected" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="Setting" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>

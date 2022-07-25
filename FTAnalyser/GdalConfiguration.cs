@@ -45,8 +45,8 @@ namespace FTAnalyzer
 
         [DllImport("kernel32", CharSet = CharSet.Auto, SetLastError = true)]
         static extern bool SetDefaultDllDirectories(uint directoryFlags);
-        //               LOAD_LIBRARY_SEARCH_USER_DIRS | LOAD_LIBRARY_SEARCH_SYSTEM32
-        private const uint DllSearchFlags = 0x00000400 | 0x00000800;
+        //               LOAD_LIBRARY_SEARCH_DEFAULT_DIRS
+        private const uint DllSearchFlags = 0x00001000;
 
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
