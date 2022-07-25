@@ -8,4 +8,325 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\FTAnalyzer.ico" />
+    <None Remove="Resources\Icons\16.png" />
+    <None Remove="Resources\Icons\256.png" />
+    <None Remove="Resources\Icons\32.png" />
+    <None Remove="Resources\Icons\48.png" />
+    <None Remove="Resources\Icons\arrow-left.png" />
+    <None Remove="Resources\Icons\arrow-right.png" />
+    <None Remove="Resources\Icons\Complete_OK.png" />
+    <None Remove="Resources\Icons\CriticalError.png" />
+    <None Remove="Resources\Icons\DeleteHS.png" />
+    <None Remove="Resources\Icons\EditLocation.png" />
+    <None Remove="Resources\Icons\FileHandling.png" />
+    <None Remove="Resources\Icons\Filter.png" />
+    <None Remove="Resources\Icons\Flagged.png" />
+    <None Remove="Resources\Icons\flogo_rgb_hex-brc-site-250.png" />
+    <None Remove="Resources\Icons\FTAnalyzer.ico" />
+    <None Remove="Resources\Icons\GoogleMapsAPI.png" />
+    <None Remove="Resources\Icons\GoogleMatch.png" />
+    <None Remove="Resources\Icons\GooglePartial.png" />
+    <None Remove="Resources\Icons\OS50kFuzzy.png" />
+    <None Remove="Resources\Icons\OS50kMatch.png" />
+    <None Remove="Resources\Icons\OS50kPartial.png" />
+    <None Remove="Resources\Icons\OutOfBounds.png" />
+    <None Remove="Resources\Icons\people35.png" />
+    <None Remove="Resources\Icons\Pointer.bmp" />
+    <None Remove="Resources\Icons\QuestionMark.png" />
+    <None Remove="Resources\Icons\Restart.bmp" />
+    <None Remove="Resources\Icons\Save.bmp" />
+    <None Remove="Resources\Icons\SaveExit.bmp" />
+    <None Remove="Resources\Icons\Scroll_NoText.png" />
+    <None Remove="Resources\Icons\SeriousWarning.png" />
+    <None Remove="Resources\Icons\Stop.bmp" />
+    <None Remove="Resources\Icons\teardrop_black.png" />
+    <None Remove="Resources\Icons\teardrop_blue.cur" />
+    <None Remove="Resources\Icons\teardrop_blue.png" />
+    <None Remove="Resources\Icons\teardrop_lightgreen.png" />
+    <None Remove="Resources\Icons\teardrop_red.png" />
+    <None Remove="Resources\Icons\Validate.png" />
+    <None Remove="Resources\Icons\Warning.png" />
+    <None Remove="Resources\KUNSTLER.TTF" />
+    <None Remove="Resources\Lib\DgvFilterPopup.dll" />
+    <None Remove="Resources\Lib\MediaSlider.dll" />
+    <None Remove="Resources\Lib\Printing.DataGridViewPrint.dll" />
+    <None Remove="x64\gdal_wrap.dll" />
+    <None Remove="x64\SQLite.Interop.dll" />
+    <None Remove="x86\gdal_wrap.dll" />
+    <None Remove="x86\SQLite.Interop.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\FTAnalyzer.ico" />
+    <Content Include="Resources\Icons\16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\256.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\arrow-left.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\arrow-right.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Complete_OK.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\CriticalError.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\DeleteHS.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\EditLocation.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\FileHandling.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Filter.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Flagged.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\flogo_rgb_hex-brc-site-250.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\FTAnalyzer.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\GoogleMapsAPI.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\GoogleMatch.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\GooglePartial.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\OS50kFuzzy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\OS50kMatch.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\OS50kPartial.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\OutOfBounds.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\people35.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Pointer.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\QuestionMark.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Restart.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Save.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\SaveExit.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Scroll_NoText.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\SeriousWarning.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Stop.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\teardrop_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\teardrop_blue.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\teardrop_blue.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\teardrop_lightgreen.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\teardrop_red.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Validate.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Warning.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x64\gdal_wrap.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x64\SQLite.Interop.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\gdal_wrap.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\SQLite.Interop.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\KUNSTLER.TTF">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Lib\DgvFilterPopup.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Lib\MediaSlider.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Lib\Printing.DataGridViewPrint.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Forms\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\BingOSMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Census.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Chart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\ColourBMD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\ColourCensus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Controls\CensusCountry.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\Controls\CensusDateSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\Controls\DateSliders.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\Controls\DateSliders.ScoreValues.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\Controls\MapToolStripMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Forms\Controls\RelationTypes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\Controls\ToolStripMapSelector.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Forms\EditLocation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Facts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\GeocodeLocations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\GoogleMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\LifeLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\LostCousinsReferral.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\MapIndividals.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\MissingData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Notes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\People.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Places.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Progress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Sources.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\StatisticsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\TimeLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UserControls\CensusSettingsUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\ExtendedToolTipLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="UserControls\FileHandlingUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\FontSettingsUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\GeneralSettingsUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\MappingSettingsUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\NonGedcomDateSettingsUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\Options.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Utilities\MultiSelectTreeview.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Utilities\ScrollingRichTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Forms\MainForm.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

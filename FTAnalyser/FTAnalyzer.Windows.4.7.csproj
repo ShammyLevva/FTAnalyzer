@@ -144,7 +144,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>code signing certificate. 2019.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AdvancedDataGridView, Version=1.2.26609.5, Culture=neutral, processorArchitecture=MSIL">
@@ -555,7 +556,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <Content Include="FTAnalyzer.ico" />
-    <None Include="code signing certificate. 2019.pfx" />
     <None Include="Properties\FileHandling.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>FileHandling.Designer.cs</LastGenOutput>
