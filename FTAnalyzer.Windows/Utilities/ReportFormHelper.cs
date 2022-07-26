@@ -1,4 +1,5 @@
 ﻿using FTAnalyzer.Utilities;
+using FTAnalyzer.Windows.Properties;
 using Printing.DataGridViewPrint.Tools;
 using System;
 using System.Collections.Generic;
@@ -123,7 +124,7 @@ namespace FTAnalyzer
                         dc.ExtendedProperties["Sort"] = ReportGrid.SortOrder;
                     dt.Columns.Add(dc);
                 }
-                string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, filename);
+                string path = Path.Combine(GeneralSettings.Default.SavePath, filename);
                 dt.WriteXmlSchema(path);
                 SaveFormLayout();
             }
@@ -145,7 +146,7 @@ namespace FTAnalyzer
                 _resetTable();
                 using (DataTable dt = new DataTable())
                 {
-                    string path = Path.Combine(Properties.GeneralSettings.Default.SavePath, filename);
+                    string path = Path.Combine(GeneralSettings.Default.SavePath, filename);
                     string xml = File.ReadAllText(path);
                     StringReader sreader = new StringReader(xml);
                     using (XmlReader reader = XmlReader.Create(sreader, new XmlReaderSettings() { XmlResolver = null }))

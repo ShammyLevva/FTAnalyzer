@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FTAnalyzer.Windows.Properties;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -11,41 +12,41 @@ namespace FTAnalyzer.UserControls
 			InitializeComponent();
 			//cannot be in load, because its possible this tab won't show, and the values will not be initialized.
 			//if this happens, then the users settings will be cleared.
-			chkUseBaptisms.Checked = Properties.GeneralSettings.Default.UseBaptismDates;
-            chkUseBurials.Checked = Properties.GeneralSettings.Default.UseBurialDates;
-			chkAllowEmptyLocations.Checked = Properties.GeneralSettings.Default.AllowEmptyLocations;
-            chkMultipleFactForms.Checked = Properties.GeneralSettings.Default.MultipleFactForms;
-            upDownAge.Value = Properties.GeneralSettings.Default.MinParentalAge;
-            chkUseAlias.Checked = Properties.GeneralSettings.Default.ShowAliasInName;
-            chkReverseLocations.Checked = Properties.GeneralSettings.Default.ReverseLocations;
-            chkShowWorldEvents.Checked = Properties.GeneralSettings.Default.ShowWorldEvents;
-            chkIgnoreFactTypeWarnings.Checked = Properties.GeneralSettings.Default.IgnoreFactTypeWarnings;
-            chkTreatFemaleAsUnknown.Checked = Properties.GeneralSettings.Default.TreatFemaleSurnamesAsUnknown;
-            chkMultiAncestor.Checked = Properties.GeneralSettings.Default.ShowMultiAncestors;
-            chkSkipFixingLocations.Checked = Properties.GeneralSettings.Default.SkipFixingLocations;
-            chkHideIgnoredDuplicates.Checked = Properties.GeneralSettings.Default.HideIgnoredDuplicates;
-            chkIncludeAlternateFacts.Checked = Properties.GeneralSettings.Default.IncludeAlternateFacts;
+			chkUseBaptisms.Checked = GeneralSettings.Default.UseBaptismDates;
+            chkUseBurials.Checked = GeneralSettings.Default.UseBurialDates;
+			chkAllowEmptyLocations.Checked = GeneralSettings.Default.AllowEmptyLocations;
+            chkMultipleFactForms.Checked = GeneralSettings.Default.MultipleFactForms;
+            upDownAge.Value = GeneralSettings.Default.MinParentalAge;
+            chkUseAlias.Checked = GeneralSettings.Default.ShowAliasInName;
+            chkReverseLocations.Checked = GeneralSettings.Default.ReverseLocations;
+            chkShowWorldEvents.Checked = GeneralSettings.Default.ShowWorldEvents;
+            chkIgnoreFactTypeWarnings.Checked = GeneralSettings.Default.IgnoreFactTypeWarnings;
+            chkTreatFemaleAsUnknown.Checked = GeneralSettings.Default.TreatFemaleSurnamesAsUnknown;
+            chkMultiAncestor.Checked = GeneralSettings.Default.ShowMultiAncestors;
+            chkSkipFixingLocations.Checked = GeneralSettings.Default.SkipFixingLocations;
+            chkHideIgnoredDuplicates.Checked = GeneralSettings.Default.HideIgnoredDuplicates;
+            chkIncludeAlternateFacts.Checked = GeneralSettings.Default.IncludeAlternateFacts;
         }
 
 		#region IOptions Members
 
 		public void Save()
 		{
-			Properties.GeneralSettings.Default.UseBaptismDates = chkUseBaptisms.Checked;
-            Properties.GeneralSettings.Default.UseBurialDates = chkUseBurials.Checked;
-            Properties.GeneralSettings.Default.AllowEmptyLocations = chkAllowEmptyLocations.Checked;
-            Properties.GeneralSettings.Default.MinParentalAge = (int)upDownAge.Value;
-            Properties.GeneralSettings.Default.MultipleFactForms = chkMultipleFactForms.Checked;
-            Properties.GeneralSettings.Default.ShowAliasInName = chkUseAlias.Checked;
-            Properties.GeneralSettings.Default.ReverseLocations = chkReverseLocations.Checked;
-            Properties.GeneralSettings.Default.ShowWorldEvents = chkShowWorldEvents.Checked;
-            Properties.GeneralSettings.Default.IgnoreFactTypeWarnings = chkIgnoreFactTypeWarnings.Checked;
-            Properties.GeneralSettings.Default.TreatFemaleSurnamesAsUnknown = chkTreatFemaleAsUnknown.Checked;
-            Properties.GeneralSettings.Default.ShowMultiAncestors = chkMultiAncestor.Checked;
-            Properties.GeneralSettings.Default.SkipFixingLocations = chkSkipFixingLocations.Checked;
-            Properties.GeneralSettings.Default.HideIgnoredDuplicates = chkHideIgnoredDuplicates.Checked;
-            Properties.GeneralSettings.Default.IncludeAlternateFacts = chkIncludeAlternateFacts.Checked;
-            Properties.GeneralSettings.Default.Save();
+			GeneralSettings.Default.UseBaptismDates = chkUseBaptisms.Checked;
+            GeneralSettings.Default.UseBurialDates = chkUseBurials.Checked;
+            GeneralSettings.Default.AllowEmptyLocations = chkAllowEmptyLocations.Checked;
+            GeneralSettings.Default.MinParentalAge = (int)upDownAge.Value;
+            GeneralSettings.Default.MultipleFactForms = chkMultipleFactForms.Checked;
+            GeneralSettings.Default.ShowAliasInName = chkUseAlias.Checked;
+            GeneralSettings.Default.ReverseLocations = chkReverseLocations.Checked;
+            GeneralSettings.Default.ShowWorldEvents = chkShowWorldEvents.Checked;
+            GeneralSettings.Default.IgnoreFactTypeWarnings = chkIgnoreFactTypeWarnings.Checked;
+            GeneralSettings.Default.TreatFemaleSurnamesAsUnknown = chkTreatFemaleAsUnknown.Checked;
+            GeneralSettings.Default.ShowMultiAncestors = chkMultiAncestor.Checked;
+            GeneralSettings.Default.SkipFixingLocations = chkSkipFixingLocations.Checked;
+            GeneralSettings.Default.HideIgnoredDuplicates = chkHideIgnoredDuplicates.Checked;
+            GeneralSettings.Default.IncludeAlternateFacts = chkIncludeAlternateFacts.Checked;
+            GeneralSettings.Default.Save();
             OnMinParentalAgeChanged();
             OnAliasInNameChanged();
         }
@@ -95,18 +96,18 @@ namespace FTAnalyzer.UserControls
         public static event EventHandler AliasInNameChanged;
         protected static void OnAliasInNameChanged() => AliasInNameChanged?.Invoke(null, EventArgs.Empty);
 
-        void ChkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
+        void ChkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
 
-        void ChkReverseLocations_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
+        void ChkReverseLocations_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
 
-        void ChkAddCreatedLocations_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
+        void ChkAddCreatedLocations_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
 
-        void ChkTreatFemaleAsUnknown_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
+        void ChkTreatFemaleAsUnknown_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
 
-        void ChkSkipFixingLocations_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
+        void ChkSkipFixingLocations_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
 
-        void UpDownAge_ValueChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
+        void UpDownAge_ValueChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
 
-        void ChkIncludeAlternateFacts_CheckedChanged(object sender, EventArgs e) => Properties.GeneralSettings.Default.ReloadRequired = true;
+        void ChkIncludeAlternateFacts_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
     }
 }

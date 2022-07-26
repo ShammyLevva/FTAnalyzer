@@ -2,6 +2,7 @@
 using FTAnalyzer.Forms;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
+using FTAnalyzer.Windows.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,15 +29,15 @@ namespace FTAnalyzer
                 this.locations = locations;
                 dgIndividuals.AutoGenerateColumns = false;
                 dgIndividuals.DataSource = new SortableBindingList<MapLocation>(this.locations);
-                reportFormHelper = new ReportFormHelper(this, this.Text, dgIndividuals, this.ResetTable, "Map Individuals");
-                italicFont = new Font(dgIndividuals.DefaultCellStyle.Font.FontFamily, Properties.FontSettings.Default.FontSize, FontStyle.Italic);
+                reportFormHelper = new ReportFormHelper(this, Text, dgIndividuals, ResetTable, "Map Individuals");
+                italicFont = new Font(dgIndividuals.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Italic);
                 reportFormHelper.LoadColumnLayout("MapIndividualColumns.xml");
-                tsRecords.Text = this.locations.Count + " Records. " + Properties.Messages.Hints_Individual;
+                tsRecords.Text = this.locations.Count + " Records. " + Messages.Hints_Individual;
                 MapLocation mostCommon = this.locations.MostCommon();
                 string titleText = mostCommon.Location.ToString();
                 if (mapForm is TimeLine)
                     titleText += " in " + year;
-                Text = this.locations.Count < 2 ? titleText : "Centred near " + titleText;
+                Text = this.locations.Count < 2 ? titleText : $"Centred near {titleText}";
                 DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
             }
             catch (Exception) { }

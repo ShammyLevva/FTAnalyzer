@@ -1,5 +1,4 @@
-﻿using FTAnalyzer.Properties;
-using FTAnalyzer.Windows.Properties;
+﻿using FTAnalyzer.Windows.Properties;
 
 namespace FTAnalyzer.UserControls
 {

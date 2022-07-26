@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FTAnalyzer.Windows.Properties;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -52,7 +53,7 @@ namespace FTAnalyzer.Forms.Controls
                     TreeNode currentP = placesTreeRootNode;
                     foreach (string part in parts)
                     {
-                        if (part.Length == 0 && !Properties.GeneralSettings.Default.AllowEmptyLocations) break;
+                        if (part.Length == 0 && !GeneralSettings.Default.AllowEmptyLocations) break;
                         TreeNode childM = currentM.Nodes.Find(part, false).FirstOrDefault();
                         TreeNode childP = currentP.Nodes.Find(part, false).FirstOrDefault();
                         if (childM == null)
@@ -84,7 +85,7 @@ namespace FTAnalyzer.Forms.Controls
                         Application.DoEvents();
                     }
                 }
-                if (Properties.GeneralSettings.Default.AllowEmptyLocations)
+                if (GeneralSettings.Default.AllowEmptyLocations)
                 { // trim empty end nodes
                     bool recheck = true;
                     while (recheck)
@@ -175,7 +176,7 @@ namespace FTAnalyzer.Forms.Controls
             TreeNode currentP = placesTreeRootNode;
             foreach (string part in parts)
             {
-                if (part.Length == 0 && !Properties.GeneralSettings.Default.AllowEmptyLocations) break;
+                if (part.Length == 0 && !GeneralSettings.Default.AllowEmptyLocations) break;
                 if (mainformTreeRootNode != null && currentM != null)
                 {
                     TreeNode childM = currentM.Nodes.Find(part, false).FirstOrDefault();

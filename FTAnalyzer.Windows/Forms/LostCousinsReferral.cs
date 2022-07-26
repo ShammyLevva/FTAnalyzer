@@ -1,6 +1,7 @@
 ﻿using FTAnalyzer.Filters;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
+using FTAnalyzer.Windows.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace FTAnalyzer.Forms
             referrals = new List<ExportReferrals>();
             foreach (Individual ind in lostCousinsFacts)
             {
-                List<Fact> indLCFacts = new List<Fact>();
+                List<Fact> indLCFacts = new();
                 indLCFacts.AddRange(ind.GetFacts(Fact.LOSTCOUSINS));
                 indLCFacts.AddRange(ind.GetFacts(Fact.LC_FTA));
                 foreach (Fact f in indLCFacts)
@@ -44,9 +45,9 @@ namespace FTAnalyzer.Forms
         string GetCountofRecords()
         {
             int total = referrals.Count;
-            int direct = referrals.Count(x => x.RelationType.Equals(Properties.Messages.Referral_Direct));
-            int blood = referrals.Count(x => x.RelationType.Equals(Properties.Messages.Referral_Blood));
-            int marriage = referrals.Count(x => x.RelationType.Equals(Properties.Messages.Referral_Marriage));
+            int direct = referrals.Count(x => x.RelationType.Equals(Messages.Referral_Direct));
+            int blood = referrals.Count(x => x.RelationType.Equals(Messages.Referral_Blood));
+            int marriage = referrals.Count(x => x.RelationType.Equals(Messages.Referral_Marriage));
             int others = referrals.Count(x => string.IsNullOrEmpty(x.RelationType));
             return total + $" Lost Cousins Records listed made up of {direct} Direct Ancestors, {blood} Blood Relatives, {marriage} Marriage and {others} Others.";
         }

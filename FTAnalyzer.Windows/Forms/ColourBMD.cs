@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Properties;
+﻿using FTAnalyzer.Windows.Properties;
 using FTAnalyzer.Utilities;
 using System;
 using System.Collections.Generic;
@@ -389,7 +389,7 @@ namespace FTAnalyzer.Forms
             if (cbFilter.SelectedIndex > 0)
                 dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(types, colour));
             dgBMDReportSheet.Focus();
-            tsRecords.Text = $"{Properties.Messages.Count}{dgBMDReportSheet.RowCount} records listed.";
+            tsRecords.Text = $"{Messages.Count}{dgBMDReportSheet.RowCount} records listed.";
             Cursor = Cursors.Default;
         }
 

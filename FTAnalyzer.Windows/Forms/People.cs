@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using FTAnalyzer.Utilities;
 using FTAnalyzer.Filters;
+using FTAnalyzer.Windows.Properties;
 
 namespace FTAnalyzer.Forms
 {
@@ -32,8 +33,8 @@ namespace FTAnalyzer.Forms
                 famReportFormHelper = new ReportFormHelper(this, Text, dgFamilies, ResetTable, "People");
                 ExtensionMethods.DoubleBuffered(dgIndividuals, true);
                 ExtensionMethods.DoubleBuffered(dgFamilies, true);
-                boldFont = new Font(dgFamilies.DefaultCellStyle.Font.FontFamily, Properties.FontSettings.Default.FontSize, FontStyle.Bold);
-                normalFont = new Font(dgFamilies.DefaultCellStyle.Font.FontFamily, Properties.FontSettings.Default.FontSize, FontStyle.Regular);
+                boldFont = new Font(dgFamilies.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
+                normalFont = new Font(dgFamilies.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Regular);
                 SetSaveButtonsStatus(false);
             }
             catch (Exception) { }
@@ -49,13 +50,13 @@ namespace FTAnalyzer.Forms
         void UpdateStatusCount()
         {
             if (reportType == ReportType.MissingChildrenStatus || reportType == ReportType.MismatchedChildrenStatus)
-                txtCount.Text = $"{dgFamilies.RowCount} Problems detected. {Properties.Messages.Hints_IndividualFamily} Shift Double click to see colour census report for family.";
+                txtCount.Text = $"{dgFamilies.RowCount} Problems detected. {Messages.Hints_IndividualFamily} Shift Double click to see colour census report for family.";
             else
             {
                 if (splitContainer.Panel2Collapsed)
-                    txtCount.Text = $"Count: {dgIndividuals.RowCount} Individuals.  {Properties.Messages.Hints_Individual}";
+                    txtCount.Text = $"Count: {dgIndividuals.RowCount} Individuals.  {Messages.Hints_Individual}";
                 else
-                    txtCount.Text = $"Count: {dgIndividuals.RowCount} Individuals and {dgFamilies.RowCount} Families. {Properties.Messages.Hints_IndividualFamily}";
+                    txtCount.Text = $"Count: {dgIndividuals.RowCount} Individuals and {dgFamilies.RowCount} Families. {Messages.Hints_IndividualFamily}";
             }
         }
 

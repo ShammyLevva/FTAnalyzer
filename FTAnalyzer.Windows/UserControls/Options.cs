@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Reflection;
 using System.IO;
+using FTAnalyzer.Windows.Properties;
 
 //TODO: Load option controls dynamically
 //TODO: Add ability for option controls to have an icon next to their display name in tree view
@@ -19,7 +20,7 @@ namespace FTAnalyzer.UserControls
 		public Options()
 		{
 			InitializeComponent();
-            Properties.GeneralSettings.Default.ReloadRequired = false;
+            GeneralSettings.Default.ReloadRequired = false;
             _lookupTable = new Dictionary<string, UserControl>();
 		}
 
@@ -146,7 +147,7 @@ namespace FTAnalyzer.UserControls
 				foreach (Control control in panel1.Controls)
                     if (control is IOptions options)
                         options.Save();
-                if(Properties.GeneralSettings.Default.ReloadRequired)
+                if(GeneralSettings.Default.ReloadRequired)
 					OnReloadRequired();
 				DialogResult = DialogResult.OK;
 			}

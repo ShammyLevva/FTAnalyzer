@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Properties;
+﻿using FTAnalyzer.Windows.Properties;
 using FTAnalyzer.Utilities;
 using System;
 using System.Collections.Generic;
@@ -381,7 +381,7 @@ namespace FTAnalyzer.Forms
             }
             dgReportSheet.Focus();
             ApplyDefaultSort();
-            tsRecords.Text = Properties.Messages.Count + dgReportSheet.RowCount + " records listed.";
+            tsRecords.Text = $"{Messages.Count} {dgReportSheet.RowCount} records listed.";
             Cursor = Cursors.Default;
         }
 

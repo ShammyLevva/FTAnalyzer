@@ -8,6 +8,7 @@ using NetTopologySuite.Geometries;
 using SharpMap.Data;
 using SharpMap.Layers;
 using FTAnalyzer.Utilities;
+using FTAnalyzer.Windows.Properties;
 
 namespace FTAnalyzer.Forms
 {
@@ -31,7 +32,7 @@ namespace FTAnalyzer.Forms
             mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
             tbYears.MouseWheel += new MouseEventHandler(TbYears_MouseWheel);
-            mnuHideScaleBar.Checked = Properties.MappingSettings.Default.HideScaleBar;
+            mnuHideScaleBar.Checked = MappingSettings.Default.HideScaleBar;
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             mapZoomToolStrip.Items[4].ToolTipText = "Draw rectangle by dragging mouse to specify zoom area";
             for (int i = 7; i <= 10; i++)

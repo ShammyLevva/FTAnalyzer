@@ -1,6 +1,7 @@
 ﻿using FTAnalyzer.Forms.Controls;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
+using FTAnalyzer.Windows.Properties;
 using NetTopologySuite.Geometries;
 using SharpMap.Data;
 using SharpMap.Layers;
@@ -37,7 +38,7 @@ namespace FTAnalyzer.Forms
                 mapZoomToolStrip.Items[i].Visible = false;
             backgroundColour = mapZoomToolStrip.Items[0].BackColor;
             mapBox1.Map.MapViewOnChange += new SharpMap.Map.MapViewChangedHandler(MapBox1_MapViewOnChange);
-            mnuHideScaleBar.Checked = Properties.MappingSettings.Default.HideScaleBar;
+            mnuHideScaleBar.Checked = MappingSettings.Default.HideScaleBar;
             SetupMap();
             dgFacts.AutoGenerateColumns = false;
             DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);

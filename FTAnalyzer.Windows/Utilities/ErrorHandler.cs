@@ -1,5 +1,5 @@
 ﻿using System;
-using FTAnalyzer.Properties;
+using FTAnalyzer.Windows.Properties;
 using System.Windows.Forms;
 
 namespace FTAnalyzer.Utilities

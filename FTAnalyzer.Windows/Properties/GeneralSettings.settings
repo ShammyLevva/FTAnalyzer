@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FTAnalyzer.Properties" GeneratedClassName="GeneralSettings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FTAnalyzer.Windows.Properties" GeneratedClassName="GeneralSettings">
   <Profiles />
   <Settings>
     <Setting Name="UseBaptismDates" Type="System.Boolean" Scope="User">

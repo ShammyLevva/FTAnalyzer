@@ -1,6 +1,7 @@
 ﻿using FTAnalyzer.Events;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
+using FTAnalyzer.Windows.Properties;
 using Ionic.Zip;
 using log4net.Core;
 using System;
@@ -322,7 +323,7 @@ namespace FTAnalyzer.Forms
 
         static GeoResponse MaxedOut()
         {
-            string message = string.IsNullOrEmpty(Properties.MappingSettings.Default.GoogleAPI) ?
+            string message = string.IsNullOrEmpty(MappingSettings.Default.GoogleAPI) ?
                                 "Google Geocoding timing out. Possibly exceeded max GeoLocations for today.\nConsider getting your own FREE Google API Key for 40,000 lookups a day. See Help Menu.\n" :
                                 "Max Google Timeout - Limit Exceeded.\n";
             OnWaitingForGoogle(message);

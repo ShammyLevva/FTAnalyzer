@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FTAnalyzer.Windows.Properties;
+using System;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -12,23 +13,23 @@ namespace FTAnalyzer.UserControls
         public NonGedcomDateSettingsUI()
         {
             InitializeComponent();
-            chkUseNonGedcomDates.Checked = Properties.NonGedcomDate.Default.UseNonGedcomDates;
-            rbSlash.Checked = Properties.NonGedcomDate.Default.Separator == "/";
-            rbDot.Checked = Properties.NonGedcomDate.Default.Separator == ".";
-            rbDash.Checked = Properties.NonGedcomDate.Default.Separator == "-";
-            rbSpace.Checked = Properties.NonGedcomDate.Default.Separator == " ";
-            rbddmmyyyy.Checked = Properties.NonGedcomDate.Default.FormatSelected == (int)NonGEDCOMFormatSelected.DD_MM_YYYY;
-            rbmmddyyyy.Checked = Properties.NonGedcomDate.Default.FormatSelected == (int)NonGEDCOMFormatSelected.MM_DD_YYYY;
-            rbyyyyddmm.Checked = Properties.NonGedcomDate.Default.FormatSelected == (int)NonGEDCOMFormatSelected.YYYY_DD_MM;
-            rbyyyymmdd.Checked = Properties.NonGedcomDate.Default.FormatSelected == (int)NonGEDCOMFormatSelected.YYYY_MM_DD;
+            chkUseNonGedcomDates.Checked = NonGedcomDate.Default.UseNonGedcomDates;
+            rbSlash.Checked = NonGedcomDate.Default.Separator == "/";
+            rbDot.Checked = NonGedcomDate.Default.Separator == ".";
+            rbDash.Checked = NonGedcomDate.Default.Separator == "-";
+            rbSpace.Checked = NonGedcomDate.Default.Separator == " ";
+            rbddmmyyyy.Checked = NonGedcomDate.Default.FormatSelected == (int)NonGEDCOMFormatSelected.DD_MM_YYYY;
+            rbmmddyyyy.Checked = NonGedcomDate.Default.FormatSelected == (int)NonGEDCOMFormatSelected.MM_DD_YYYY;
+            rbyyyyddmm.Checked = NonGedcomDate.Default.FormatSelected == (int)NonGEDCOMFormatSelected.YYYY_DD_MM;
+            rbyyyymmdd.Checked = NonGedcomDate.Default.FormatSelected == (int)NonGEDCOMFormatSelected.YYYY_MM_DD;
         }
 
         #region IOptions Members
 
         public void Save()
         {
-            Properties.NonGedcomDate.Default.Save();
-            NonGEDCOMDateFormatRegex = new Regex(Properties.NonGedcomDate.Default.Regex, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            NonGedcomDate.Default.Save();
+            NonGEDCOMDateFormatRegex = new Regex(NonGedcomDate.Default.Regex, RegexOptions.Compiled | RegexOptions.IgnoreCase);
         }
 
         public void Cancel()
@@ -69,7 +70,7 @@ namespace FTAnalyzer.UserControls
 
         void ChkUseNonGedcomDates_CheckedChanged(object sender, EventArgs e)
         {
-            Properties.NonGedcomDate.Default.UseNonGedcomDates = chkUseNonGedcomDates.Checked;
+            NonGedcomDate.Default.UseNonGedcomDates = chkUseNonGedcomDates.Checked;
             gbDateFormat.Enabled = chkUseNonGedcomDates.Checked;
             gbSeparator.Enabled = chkUseNonGedcomDates.Checked;
         }
@@ -90,30 +91,30 @@ namespace FTAnalyzer.UserControls
             {
                 dateformat = "dd" + separator + "MM" + separator + "yyyy";
                 regex = @"(\d{1,2})" + regexSeparator + @"(\d{1,2})" + regexSeparator + @"(\d{4})";
-                Properties.NonGedcomDate.Default.FormatSelected = (int)NonGEDCOMFormatSelected.DD_MM_YYYY;
+                NonGedcomDate.Default.FormatSelected = (int)NonGEDCOMFormatSelected.DD_MM_YYYY;
             }
             if (rbmmddyyyy.Checked)
             {
                 dateformat = "MM" + separator + "dd" + separator + "yyyy";
                 regex = @"(\d{1,2})" + regexSeparator + @"(\d{1,2})" + regexSeparator + @"(\d{4})";
-                Properties.NonGedcomDate.Default.FormatSelected = (int)NonGEDCOMFormatSelected.MM_DD_YYYY;
+                NonGedcomDate.Default.FormatSelected = (int)NonGEDCOMFormatSelected.MM_DD_YYYY;
             }
             if (rbyyyyddmm.Checked)
             {
                 dateformat = "yyyy" + separator + "MM" + separator + "dd";
                 regex = @"(\d{4})" + regexSeparator + @"(\d{1,2})" + regexSeparator + @"(\d{1,2})";
-                Properties.NonGedcomDate.Default.FormatSelected = (int)NonGEDCOMFormatSelected.YYYY_DD_MM;
+                NonGedcomDate.Default.FormatSelected = (int)NonGEDCOMFormatSelected.YYYY_DD_MM;
             }
             if (rbyyyymmdd.Checked)
             {
                 dateformat = "yyyy" + separator + "MM" + separator + "dd";
                 regex = @"(\d{4})" + regexSeparator + @"(\d{1,2})" + regexSeparator + @"(\d{1,2})";
-                Properties.NonGedcomDate.Default.FormatSelected = (int)NonGEDCOMFormatSelected.YYYY_MM_DD;
+                NonGedcomDate.Default.FormatSelected = (int)NonGEDCOMFormatSelected.YYYY_MM_DD;
             }
-            Properties.NonGedcomDate.Default.DateFormat = dateformat;
-            Properties.NonGedcomDate.Default.Regex = regex;
-            Properties.NonGedcomDate.Default.Separator = separator;
-            Properties.GeneralSettings.Default.ReloadRequired = true;
+            NonGedcomDate.Default.DateFormat = dateformat;
+            NonGedcomDate.Default.Regex = regex;
+            NonGedcomDate.Default.Separator = separator;
+            GeneralSettings.Default.ReloadRequired = true;
         }
 
         void RbSlash_CheckedChanged(object sender, EventArgs e)

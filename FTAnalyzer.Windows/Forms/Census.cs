@@ -1,5 +1,5 @@
 ﻿using FTAnalyzer.Filters;
-using FTAnalyzer.Properties;
+using FTAnalyzer.Windows.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
 using System;

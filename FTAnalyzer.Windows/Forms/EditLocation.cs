@@ -1,6 +1,7 @@
 ﻿using FTAnalyzer.Forms.Controls;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
+using FTAnalyzer.Windows.Properties;
 using NetTopologySuite.Geometries;
 using SharpMap.Data;
 using SharpMap.Data.Providers;
@@ -38,7 +39,7 @@ namespace FTAnalyzer.Forms
             mapZoomToolStrip.Items[10].Visible = false;
             this.location = location;
             originalLocation = FactLocation.TEMP;
-            btnCustomMap.Visible = (Properties.MappingSettings.Default.CustomMapPath.Length > 0);
+            btnCustomMap.Visible = MappingSettings.Default.CustomMapPath.Length > 0;
             FactLocation.CopyLocationDetails(location, originalLocation);
             Text = $"Editing : {location}";
             iconSelected = false;
@@ -299,7 +300,7 @@ namespace FTAnalyzer.Forms
         private List<GdalRasterLayer> LoadGeoReferencedImages()
         {
             List<GdalRasterLayer> layers = new List<GdalRasterLayer>();
-            string[] files = Directory.GetFiles(Properties.MappingSettings.Default.CustomMapPath, "*.tif", SearchOption.TopDirectoryOnly);
+            string[] files = Directory.GetFiles(MappingSettings.Default.CustomMapPath, "*.tif", SearchOption.TopDirectoryOnly);
             foreach (string filename in files)
             {
                 GdalRasterLayer layer = new GdalRasterLayer(filename, filename);

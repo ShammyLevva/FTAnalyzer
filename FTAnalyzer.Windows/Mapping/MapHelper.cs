@@ -1,5 +1,6 @@
 ﻿using FTAnalyzer.Forms;
 using FTAnalyzer.Utilities;
+using FTAnalyzer.Windows.Properties;
 using NetTopologySuite.Geometries;
 using SharpMap;
 using SharpMap.Data;
@@ -41,7 +42,7 @@ namespace FTAnalyzer.Mapping
 
         public static void SetScaleBar(MapBox mapBox1)
         {
-            if (Properties.MappingSettings.Default.HideScaleBar)
+            if (MappingSettings.Default.HideScaleBar)
             {
                 if (mapBox1.Map.Decorations.Count > 0)
                     mapBox1.Map.Decorations.RemoveAt(0);
@@ -60,8 +61,8 @@ namespace FTAnalyzer.Mapping
 
         public static void MnuHideScaleBar_Click(ToolStripMenuItem mnuHideScaleBar, MapBox mapBox1)
         {
-            Properties.MappingSettings.Default.HideScaleBar = mnuHideScaleBar.Checked;
-            Properties.MappingSettings.Default.Save();
+            MappingSettings.Default.HideScaleBar = mnuHideScaleBar.Checked;
+            MappingSettings.Default.Save();
             SetScaleBar(mapBox1);
         }
 
@@ -134,10 +135,10 @@ namespace FTAnalyzer.Mapping
 
             string filename;
 
-            filename = Path.Combine(Properties.MappingSettings.Default.CustomMapPath, "parish_region.shp");
+            filename = Path.Combine(MappingSettings.Default.CustomMapPath, "parish_region.shp");
             AddParishLayer(map, filename, "English", "NAME");
 
-            filename = Path.Combine(Properties.MappingSettings.Default.CustomMapPath, "CivilParish1930.shp");
+            filename = Path.Combine(MappingSettings.Default.CustomMapPath, "CivilParish1930.shp");
             AddParishLayer(map, filename, "Scottish", "name");
         }
 
@@ -145,7 +146,7 @@ namespace FTAnalyzer.Mapping
         {
             try
             {
-                if (Properties.MappingSettings.Default.UseParishBoundaries)
+                if (MappingSettings.Default.UseParishBoundaries)
                 {
                     if (File.Exists(filename))
                     {

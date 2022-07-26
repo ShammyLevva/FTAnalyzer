@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FTAnalyzer.Windows.Properties;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -11,23 +12,23 @@ namespace FTAnalyzer.UserControls
 			InitializeComponent();
 			//cannot be in load, because its possible this tab won't show, and the values will not be initialized.
 			//if this happens, then the users settings will be cleared.
-            txtMapPath.Text = Properties.MappingSettings.Default.CustomMapPath;
-            ckbUseParishBoundaries.Checked = Properties.MappingSettings.Default.UseParishBoundaries;
-            chkIncludePartialGeocoded.Checked = Properties.MappingSettings.Default.IncludePartials;
-            ckbHideScaleBar.Checked = Properties.MappingSettings.Default.HideScaleBar;
-            txtGoogleAPI.Text = Properties.MappingSettings.Default.GoogleAPI;
+            txtMapPath.Text = MappingSettings.Default.CustomMapPath;
+            ckbUseParishBoundaries.Checked = MappingSettings.Default.UseParishBoundaries;
+            chkIncludePartialGeocoded.Checked = MappingSettings.Default.IncludePartials;
+            ckbHideScaleBar.Checked = MappingSettings.Default.HideScaleBar;
+            txtGoogleAPI.Text = MappingSettings.Default.GoogleAPI;
 		}
 
 		#region IOptions Members
 
 		public void Save()
 		{
-            Properties.MappingSettings.Default.CustomMapPath = txtMapPath.Text;
-            Properties.MappingSettings.Default.UseParishBoundaries = ckbUseParishBoundaries.Checked;
-            Properties.MappingSettings.Default.HideScaleBar = ckbHideScaleBar.Checked;
-            Properties.MappingSettings.Default.IncludePartials = chkIncludePartialGeocoded.Checked;
-            Properties.MappingSettings.Default.GoogleAPI = txtGoogleAPI.Text;
-            Properties.MappingSettings.Default.Save();
+            MappingSettings.Default.CustomMapPath = txtMapPath.Text;
+            MappingSettings.Default.UseParishBoundaries = ckbUseParishBoundaries.Checked;
+            MappingSettings.Default.HideScaleBar = ckbHideScaleBar.Checked;
+            MappingSettings.Default.IncludePartials = chkIncludePartialGeocoded.Checked;
+            MappingSettings.Default.GoogleAPI = txtGoogleAPI.Text;
+            MappingSettings.Default.Save();
 		}
 
 		public void Cancel()

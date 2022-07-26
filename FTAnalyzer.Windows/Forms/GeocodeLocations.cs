@@ -14,6 +14,7 @@ using NetTopologySuite.Geometries;
 using System.Text;
 using SharpMap.Utilities;
 using FTAnalyzer.Forms.Controls;
+using FTAnalyzer.Windows.Properties;
 
 namespace FTAnalyzer.Forms
 {
@@ -50,7 +51,7 @@ namespace FTAnalyzer.Forms
                 mnuPasteLocation.Enabled = false;
                 dgLocations.AutoGenerateColumns = false;
                 reportFormHelper = new ReportFormHelper(this, this.Text, dgLocations, this.ResetTable, "Geocode Locations");
-                italicFont = new Font(dgLocations.DefaultCellStyle.Font.FontFamily, Properties.FontSettings.Default.FontSize, FontStyle.Italic);
+                italicFont = new Font(dgLocations.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Italic);
                 reportFormHelper.LoadColumnLayout("GeocodeLocationsColumns.xml");
                 mnuGoogleGeocodeLocations.Enabled = !ft.Geocoding; // disable menu if already geocoding
                 mnuEditLocation.Enabled = !ft.Geocoding;
@@ -1241,9 +1242,9 @@ namespace FTAnalyzer.Forms
 
         void GenerateTestGedcom(List<FactLocation> failedToFind, string name, Dictionary<FactLocation, IList<OS50kGazetteer>> noCounty)
         {
-            if (Directory.Exists(Properties.MappingSettings.Default.CustomMapPath))
+            if (Directory.Exists(MappingSettings.Default.CustomMapPath))
             {
-                string filename = Path.Combine(Properties.MappingSettings.Default.CustomMapPath, name);
+                string filename = Path.Combine(MappingSettings.Default.CustomMapPath, name);
                 using (StreamWriter stream = new StreamWriter(filename))
                 {
                     stream.WriteLine("0 HEAD");

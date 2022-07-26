@@ -1,4 +1,5 @@
 ﻿using FTAnalyzer.Utilities;
+using FTAnalyzer.Windows.Properties;
 using System;
 
 namespace FTAnalyzer.Mapping
@@ -15,11 +16,11 @@ namespace FTAnalyzer.Mapping
                 {
                     try
                     {
-                        if (string.IsNullOrEmpty(Properties.MappingSettings.Default.GoogleAPI))
+                        if (string.IsNullOrEmpty(MappingSettings.Default.GoogleAPI))
                             APIkeyValue = "AIzaSyDJCForfeivoVF03Sr04rN9MMulO6KwA_M";
                         else
                         {
-                            APIkeyValue = Properties.MappingSettings.Default.GoogleAPI;
+                            APIkeyValue = MappingSettings.Default.GoogleAPI;
                           UIHelpers.ShowMessage("Using your private Google API Key.\nPlease observe monthly usage limits to avoid a large bill from Google.");
                         }
                     }

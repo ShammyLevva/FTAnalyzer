@@ -15,6 +15,7 @@ using SharpMap.Layers;
 using SharpMap.Styles;
 using System.IO;
 using System.Web;
+using FTAnalyzer.Windows.Properties;
 
 namespace FTAnalyzer.Forms
 {
@@ -47,7 +48,7 @@ namespace FTAnalyzer.Forms
             mapZoomToolStrip.Items[4].ToolTipText = "Draw rectangle by dragging mouse to specify zoom area";
             for (int i = 7; i <= 10; i++)
                 mapZoomToolStrip.Items[i].Visible = false;
-            mnuHideScaleBar.Checked = Properties.MappingSettings.Default.HideScaleBar;
+            mnuHideScaleBar.Checked = MappingSettings.Default.HideScaleBar;
             SetupMap();
             dgFacts.AutoGenerateColumns = false;
             dgIndividuals.AutoGenerateColumns = false;

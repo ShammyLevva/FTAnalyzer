@@ -1,5 +1,6 @@
 ﻿using FTAnalyzer.Filters;
 using FTAnalyzer.Utilities;
+using FTAnalyzer.Windows.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,13 +40,13 @@ namespace FTAnalyzer.Forms
                 dgFacts.AutoGenerateColumns = false;
                 ExtensionMethods.DoubleBuffered(dgFacts, true);
                 reportFormHelper = new ReportFormHelper(this, Text, dgFacts, ResetTable, "Facts");
-                italicFont = new Font(dgFacts.DefaultCellStyle.Font.FontFamily, Properties.FontSettings.Default.FontSize, FontStyle.Italic);
-                linkFont = new Font(dgFacts.DefaultCellStyle.Font.FontFamily, Properties.FontSettings.Default.FontSize, FontStyle.Underline);
+                italicFont = new Font(dgFacts.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Italic);
+                linkFont = new Font(dgFacts.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Underline);
                 dgFacts.Columns["IndividualID"].Visible = true;
                 dgFacts.Columns["CensusReference"].Visible = true;
                 dgFacts.Columns["IgnoreFact"].Visible = false;
                 dgFacts.ReadOnly = true;
-                dgFacts.RowTemplate.Height = Properties.FontSettings.Default.FontHeight;
+                dgFacts.RowTemplate.Height = FontSettings.Default.FontHeight;
                 sep1.Visible = false;
                 btnShowHideFacts.Visible = false;
             }
@@ -208,7 +209,7 @@ namespace FTAnalyzer.Forms
             try
             {
                 IFormatter formatter = new BinaryFormatter();
-                string file = Path.Combine(Properties.GeneralSettings.Default.SavePath, "IgnoreList.xml");
+                string file = Path.Combine(GeneralSettings.Default.SavePath, "IgnoreList.xml");
                 using (Stream stream = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.None))
                 {
                     formatter.Serialize(stream, IgnoreList);
@@ -227,7 +228,7 @@ namespace FTAnalyzer.Forms
             try
             {
                 IFormatter formatter = new BinaryFormatter();
-                string file = Path.Combine(Properties.GeneralSettings.Default.SavePath, "IgnoreList.xml");
+                string file = Path.Combine(GeneralSettings.Default.SavePath, "IgnoreList.xml");
                 if (File.Exists(file))
                 {
                     using (Stream stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))

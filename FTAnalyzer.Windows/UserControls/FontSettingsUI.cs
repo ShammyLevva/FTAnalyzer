@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FTAnalyzer.Windows.Properties;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -15,7 +16,7 @@ namespace FTAnalyzer.UserControls
         public FontSettingsUI()
         {
             InitializeComponent();
-            fontNumber = Properties.FontSettings.Default.FontNumber;
+            fontNumber = FontSettings.Default.FontNumber;
             tbFontScale.Value = fontNumber;
             SetSelectedFont(fontNumber);
         }
@@ -24,12 +25,12 @@ namespace FTAnalyzer.UserControls
 
         public void Save()
         {
-            Properties.FontSettings.Default.SelectedFont = selectedFont;
-            Properties.FontSettings.Default.FontNumber = tbFontScale.Value;
-            Properties.FontSettings.Default.FontWidth = fontWidth;
-            Properties.FontSettings.Default.FontSize = fontSize;
-            Properties.FontSettings.Default.FontHeight = fontHeight;
-            Properties.FontSettings.Default.Save();
+            FontSettings.Default.SelectedFont = selectedFont;
+            FontSettings.Default.FontNumber = tbFontScale.Value;
+            FontSettings.Default.FontWidth = fontWidth;
+            FontSettings.Default.FontSize = fontSize;
+            FontSettings.Default.FontHeight = fontHeight;
+            FontSettings.Default.Save();
             OnFontChanged();
         }
 
