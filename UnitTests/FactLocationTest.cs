@@ -1,4 +1,5 @@
 ﻿using FTAnalyzer;
+using FTAnalyzer.Windows.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
@@ -67,7 +68,7 @@ namespace Testing
             Assert.IsTrue(factLocation.ToString().Equals("United States"));
 
             // check for default strip empty locations
-            FTAnalyzer.Properties.GeneralSettings.Default.AllowEmptyLocations = false;
+            GeneralSettings.Default.AllowEmptyLocations = false;
             factLocation = FactLocation.GetLocation("Parish Church of St Mary, , South Stoneham, Hampshire, ENG");
             Assert.IsTrue(factLocation.ToString().Equals("Parish Church of St Mary, South Stoneham, Hampshire, England"));
 
@@ -78,7 +79,7 @@ namespace Testing
             Assert.IsTrue(factLocation.ToString().Equals("Fareham Registration District, Hampshire, England"));
 
             // check when allowing empty locations
-            FTAnalyzer.Properties.GeneralSettings.Default.AllowEmptyLocations = true;
+            GeneralSettings.Default.AllowEmptyLocations = true;
             factLocation = FactLocation.GetLocation("Parish Church of St Mary, , South Stoneham, Hampshire, ENG");
             Assert.IsTrue(factLocation.ToString().Equals("Parish Church of St Mary, , South Stoneham, Hampshire, England"));
 

@@ -291,7 +291,7 @@ namespace FTAnalyzer
         {
             var outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
             XmlDocument doc;
-            Stopwatch timer = new Stopwatch();
+            Stopwatch timer = new();
             timer.Start();
             using (FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
             {
@@ -2955,8 +2955,9 @@ namespace FTAnalyzer
         void BtnColourBMD_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            List<IDisplayColourBMD> list = ft.ColourBMD(relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily);
-            ColourBMD rs = new ColourBMD(list);
+            Predicate<Individual> relTypeFilter = relTypesColoured.BuildFilter<Individual>(x => x.RelationType);
+            List<IDisplayColourBMD> list = ft.ColourBMD(relTypeFilter, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily);
+            ColourBMD rs = new(list);
             DisposeDuplicateForms(rs);
             rs.Show();
             rs.Focus();
@@ -2967,9 +2968,10 @@ namespace FTAnalyzer
         async void DisplayColourCensus(string country)
         {
             HourGlass(true);
+            Predicate<Individual> relTypeFilter = relTypesColoured.BuildFilter<Individual>(x => x.RelationType);
             List<IDisplayColourCensus> list =
-                ft.ColourCensus(country, relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily, ckbIgnoreNoBirthDate.Checked, ckbIgnoreNoDeathDate.Checked);
-            ColourCensus rs = new ColourCensus(country, list);
+                ft.ColourCensus(country, relTypeFilter, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily, ckbIgnoreNoBirthDate.Checked, ckbIgnoreNoDeathDate.Checked);
+            ColourCensus rs = new(country, list);
             DisposeDuplicateForms(rs);
             rs.Show();
             rs.Focus();
