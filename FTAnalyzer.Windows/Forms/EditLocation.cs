@@ -137,7 +137,7 @@ namespace FTAnalyzer.Forms
 
         void UpdateDatabase()
         {
-            Envelope env = new Envelope(mapBox1.Map.Envelope.TopLeft(), mapBox1.Map.Envelope.BottomRight());
+            Envelope env = new(mapBox1.Map.Envelope.TopLeft(), mapBox1.Map.Envelope.BottomRight());
             Coordinate point = MapTransforms.ReverseTransformCoordinate(pointFeature.Geometry.Coordinate);
             location.Latitude = point.Y;
             location.Longitude = point.X;
@@ -254,8 +254,8 @@ namespace FTAnalyzer.Forms
                 expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
             else
                 expand = new Envelope(vp.NorthEast.Long, vp.SouthWest.Long, vp.NorthEast.Lat, vp.SouthWest.Lat);
-            Coordinate p = new Coordinate(location.LongitudeM, location.LatitudeM);
-            Envelope point = new Envelope(p, p);
+            Coordinate p = new(location.LongitudeM, location.LatitudeM);
+            Envelope point = new(p, p);
             point.ExpandBy(mapBox1.Map.PixelSize * 40);
             if (!expand.Contains(point))
             {
@@ -299,11 +299,11 @@ namespace FTAnalyzer.Forms
 
         private List<GdalRasterLayer> LoadGeoReferencedImages()
         {
-            List<GdalRasterLayer> layers = new List<GdalRasterLayer>();
+            List<GdalRasterLayer> layers = new();
             string[] files = Directory.GetFiles(MappingSettings.Default.CustomMapPath, "*.tif", SearchOption.TopDirectoryOnly);
             foreach (string filename in files)
             {
-                GdalRasterLayer layer = new GdalRasterLayer(filename, filename);
+                GdalRasterLayer layer = new(filename, filename);
                 layers.Add(layer);
                 mapBox1.Map.Layers.Add(layer);
             }
