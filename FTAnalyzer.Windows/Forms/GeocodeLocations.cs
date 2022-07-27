@@ -15,6 +15,7 @@ using System.Text;
 using SharpMap.Utilities;
 using FTAnalyzer.Forms.Controls;
 using FTAnalyzer.Windows.Properties;
+using System.Diagnostics;
 
 namespace FTAnalyzer.Forms
 {
@@ -539,14 +540,14 @@ namespace FTAnalyzer.Forms
                     }
                     catch(ArgumentException)
                     {
-                        Console.WriteLine("Race condition gets here sometimes");
+                        Debug.WriteLine("Race condition gets here sometimes");
                     }
                     googleGeocodeBackgroundWorker.RunWorkerAsync(retryPartials);
                     Cursor = Cursors.Default;
                 }
             } catch(Exception ex)
             {
-                Console.WriteLine(ex.Message); // sometimes setting pbGeocoding.Visible triggers font error for resizing fonts
+                Debug.WriteLine(ex.Message); // sometimes setting pbGeocoding.Visible triggers font error for resizing fonts
             }
         }
 
@@ -573,7 +574,7 @@ namespace FTAnalyzer.Forms
                     }
                     catch (ArgumentException)
                     {
-                        Console.WriteLine("Race condition gets here sometimes");
+                        Debug.WriteLine("Race condition gets here sometimes");
                     }
                     EmptyViewPortsBackgroundWorker.RunWorkerAsync();
                     Cursor = Cursors.Default;
@@ -581,7 +582,7 @@ namespace FTAnalyzer.Forms
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message); // sometimes setting pbGeocoding.Visible triggers font error for resizing fonts
+                Debug.WriteLine(ex.Message); // sometimes setting pbGeocoding.Visible triggers font error for resizing fonts
             }
         }
 

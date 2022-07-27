@@ -10,6 +10,7 @@ using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace FTAnalyzer.Utilities
 {
@@ -811,7 +812,7 @@ namespace FTAnalyzer.Utilities
                 updateCmd.Parameters[13].Value = loc.ToString();
                 int rowsaffected = updateCmd.ExecuteNonQuery();
                 if (rowsaffected != 1)
-                    Console.WriteLine("Problem updating");
+                    Debug.WriteLine("Problem updating");
                 OnGeoLocationUpdated(loc);
             }
         }
@@ -884,7 +885,7 @@ namespace FTAnalyzer.Utilities
         //        updateCmd.Parameters[4].Value = reader["IndID"];
         //        int rowsaffected = updateCmd.ExecuteNonQuery();
         //        if (rowsaffected != 1)
-        //            Console.WriteLine("Problem updating");
+        //            Debug.WriteLine("Problem updating");
         //    }
         //}
 

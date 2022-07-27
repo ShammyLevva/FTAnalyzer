@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using Zuby.ADGV;
+using System.Diagnostics;
 
 namespace FTAnalyzer.Forms.Controls
 {
@@ -201,7 +202,7 @@ namespace FTAnalyzer.Forms.Controls
                 int maxHeight = Parent.Height - Location.Y;
                 int maxWidth = Parent.Width - Location.X;
                 Size = new Size(maxWidth, maxHeight);
-                //Console.WriteLine($"{Name} has parent of {Parent}");
+                //Debug.WriteLine($"{Name} has parent of {Parent}");
             }
         }
 
@@ -244,7 +245,7 @@ namespace FTAnalyzer.Forms.Controls
 
         void OnColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
         {
-            Console.WriteLine($"Column {e.Column.Name} changed width to {e.Column.Width}");
+            Debug.WriteLine($"Column {e.Column.Name} changed width to {e.Column.Width}");
         }
 
         protected abstract object GetValueFor(T data, string propertyName);

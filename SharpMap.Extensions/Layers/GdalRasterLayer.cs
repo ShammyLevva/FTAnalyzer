@@ -33,6 +33,7 @@ using SharpMap.Rendering.Thematics;
 using Point = System.Drawing.Point;
 
 using Polygon = NetTopologySuite.Geometries.Polygon;
+using System.Diagnostics;
 
 namespace SharpMap.Layers
 {
@@ -1902,7 +1903,7 @@ namespace SharpMap.Layers
                                                     buffer, 
                                                     width, height, 0, 0);
                     if (err != CPLErr.CE_None)
-                        Console.WriteLine("err {0}", err);
+                        Debug.WriteLine("err {0}", err);
                 }
 
                 foreach (double t in buffer)

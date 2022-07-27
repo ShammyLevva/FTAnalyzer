@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.IO;
 using FTAnalyzer.Windows.Properties;
+using System.Diagnostics;
 
 //TODO: Load option controls dynamically
 //TODO: Add ability for option controls to have an icon next to their display name in tree view
@@ -71,7 +72,7 @@ namespace FTAnalyzer.UserControls
 					sb.AppendLine();
 				}
 				string errorMessage = sb.ToString();
-				Console.WriteLine(errorMessage);
+				Debug.WriteLine(errorMessage);
 				//Display or log the error based on your application.
 			}
 

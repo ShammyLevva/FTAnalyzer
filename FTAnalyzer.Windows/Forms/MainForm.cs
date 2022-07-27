@@ -124,7 +124,7 @@ namespace FTAnalyzer
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Debug.WriteLine(e.Message);
             }
         }
         void SetupFonts()
@@ -170,7 +170,7 @@ namespace FTAnalyzer
                 UpdateDataErrorsDisplay();
             }
             catch (Exception e) {
-                Console.WriteLine($"Exception {e.Message}");
+                Debug.WriteLine($"Exception {e.Message}");
             } // for font sizing exception
         }
 
@@ -1445,7 +1445,7 @@ namespace FTAnalyzer
                         }
                         catch (ArgumentException fEx)
                         {
-                            Console.WriteLine(fEx.Message); // typically font loading error
+                            Debug.WriteLine(fEx.Message); // typically font loading error
                         }
                         mnuPrint.Enabled = false;
                         dgCountries.DataSource = ft.AllDisplayCountries;

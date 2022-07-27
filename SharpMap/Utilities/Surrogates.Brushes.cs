@@ -259,7 +259,7 @@ namespace SharpMap.Utilities
                 Utility.SetPropertyValue(ref obj, "HatchStyle", Utility.PrivateInstance, 
                     (HatchStyle)info.GetValue("HatchStyle", typeof(HatchStyle)));
                 
-                Console.WriteLine(((HatchBrush)obj).HatchStyle);
+                Debug.WriteLine(((HatchBrush)obj).HatchStyle);
                 Utility.SetFieldValue(ref obj, "ForegroundColor", Utility.PrivateInstance, 
                     );
 

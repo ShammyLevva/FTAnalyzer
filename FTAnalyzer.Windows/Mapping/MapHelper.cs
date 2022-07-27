@@ -12,6 +12,7 @@ using SharpMap.Rendering.Decoration.ScaleBar;
 using SharpMap.Styles;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
@@ -210,9 +211,9 @@ namespace FTAnalyzer.Mapping
                         bbox.ExpandToInclude(c);
                 }
                 var x = (Envelope)row["ViewPort"];
-                Console.WriteLine(x.ToString());
+                Debug.WriteLine(x.ToString());
                 if (x.MaxX == 0 && x.MaxY == 0 )
-                    Console.WriteLine("we have zeos");
+                    Debug.WriteLine("we have zeos");
                 else
                     bbox.ExpandToInclude(x);
             }

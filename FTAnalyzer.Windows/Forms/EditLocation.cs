@@ -203,7 +203,7 @@ namespace FTAnalyzer.Forms
                 mapBox1.Map.Center.X = p.X;
                 mapBox1.Map.Center.Y = p.Y;
             }
-            //Console.WriteLine("Pixel : " + mapBox1.Map.PixelSize);
+            //Debug.WriteLine("Pixel : " + mapBox1.Map.PixelSize);
         }
 
         void BtnSearch_Click(object sender, EventArgs e) => GoogleLocationSearch();

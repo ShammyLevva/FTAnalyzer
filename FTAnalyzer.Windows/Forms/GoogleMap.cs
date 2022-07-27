@@ -6,6 +6,7 @@ using Ionic.Zip;
 using log4net.Core;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Json;
@@ -222,7 +223,7 @@ namespace FTAnalyzer.Forms
             catch (WebException ex)
             {
                 if (ex.Status == WebExceptionStatus.Timeout)
-                    Console.WriteLine($"Timeout with {url}\n");
+                    Debug.WriteLine($"Timeout with {url}\n");
                 else
                     MessageBox.Show($"Unable to contact https://maps.googleapis.com error was: {ex.Message}\nWhen trying to look for {text}", "FTAnalyzer");
                 res = null;
