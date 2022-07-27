@@ -55,7 +55,7 @@ namespace FTAnalyzer.Forms
             pointTable = new FeatureDataTable();
             pointTable.Columns.Add("Label", typeof(string));
 
-            GeometryFeatureProvider pointGFP = new GeometryFeatureProvider(pointTable);
+            GeometryFeatureProvider pointGFP = new(pointTable);
 
             pointLayer = new VectorLayer("Point to Edit");
             pointLayer.Style.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\teardrop_blue.png"));
@@ -87,7 +87,7 @@ namespace FTAnalyzer.Forms
         {
             Coordinate c1 = mapBox1.Map.ImageToWorld(new PointF(e.X - 21.0f, e.Y - 34.0f));
             Coordinate c2 = mapBox1.Map.ImageToWorld(new PointF(e.X + 21.0f, e.Y + 34.0f));
-            Envelope env = new Envelope(c1, c2);
+            Envelope env = new(c1, c2);
             if (iconSelected && e.Button == MouseButtons.Right)
             {
                 // we have finished and are saving icon
