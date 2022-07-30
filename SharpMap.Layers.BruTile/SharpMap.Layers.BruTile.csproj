@@ -77,12 +77,6 @@
     <Compile Include="Utilities\Wmts\WmtsRequestSurrogate.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SharpMap\SharpMap.csproj">
-      <Project>{c83777fc-aabb-47d9-911f-d76255d4d541}</Project>
-      <Name>SharpMap</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="BruTile">
       <Version>5.0.0</Version>
     </PackageReference>
