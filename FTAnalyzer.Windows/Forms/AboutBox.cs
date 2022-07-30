@@ -31,7 +31,7 @@ namespace FTAnalyzer.Core.Displays
                     if (!string.IsNullOrEmpty(titleAttribute.Title))
                         return titleAttribute.Title;
                 }
-                return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+                return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location);
             }
         }
 

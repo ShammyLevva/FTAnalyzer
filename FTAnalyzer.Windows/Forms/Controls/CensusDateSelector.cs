@@ -7,8 +7,8 @@ namespace FTAnalyzer.Forms.Controls
     public partial class CensusDateSelector : UserControl
     {
         string country = Countries.SCOTLAND;
-        private CensusDate defaultDate = CensusDate.UKCENSUS1881;
-        private CensusDate previousDate;
+        CensusDate defaultDate = CensusDate.UKCENSUS1881;
+        CensusDate previousDate;
         bool _loading;
 
         public CensusDateSelector()

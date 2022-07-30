@@ -66,7 +66,6 @@ namespace FTAnalyzer.Utilities
                 default:
                     return TaskbarPosition.Bottom;
             }
-            return TaskbarPosition.Bottom;
         }
 
         static int GetEdge(RECT rc)
