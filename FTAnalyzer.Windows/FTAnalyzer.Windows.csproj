@@ -61,7 +61,6 @@
     <None Remove="Resources\Icons\Warning.png" />
     <None Remove="Resources\KUNSTLER.TTF" />
     <None Remove="Resources\Lib\DgvFilterPopup.dll" />
-    <None Remove="Resources\Lib\MediaSlider.dll" />
     <None Remove="Resources\Lib\Printing.DataGridViewPrint.dll" />
     <None Remove="x64\gdal_wrap.dll" />
     <None Remove="x64\SQLite.Interop.dll" />
@@ -206,9 +205,6 @@
     <EmbeddedResource Include="Resources\Lib\DgvFilterPopup.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Lib\MediaSlider.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Lib\Printing.DataGridViewPrint.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -253,9 +249,6 @@
   <ItemGroup>
     <Reference Include="DgvFilterPopup">
       <HintPath>Resources\Lib\DgvFilterPopup.dll</HintPath>
-    </Reference>
-    <Reference Include="MediaSlider">
-      <HintPath>Resources\Lib\MediaSlider.dll</HintPath>
     </Reference>
     <Reference Include="Printing.DataGridViewPrint">
       <HintPath>Resources\Lib\Printing.DataGridViewPrint.dll</HintPath>

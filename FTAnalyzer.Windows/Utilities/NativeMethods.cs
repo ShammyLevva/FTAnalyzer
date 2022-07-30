@@ -32,7 +32,7 @@ namespace FTAnalyzer.Utilities
         [DllImport("gdi32.dll")]
         internal static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, [In] ref uint pcFonts);
 
-        [DllImport("user32.dll", SetLastError = true, BestFitMapping =false, CharSet = CharSet.Unicode,ThrowOnUnmappableChar = true)]
+        [DllImport("user32.dll", SetLastError = true, BestFitMapping = false, CharSet = CharSet.Unicode, ThrowOnUnmappableChar = true)]
         static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
         [DllImport("SHELL32", CallingConvention = CallingConvention.StdCall)]
@@ -45,28 +45,26 @@ namespace FTAnalyzer.Utilities
         public static TaskbarPosition GetTaskBarPos()
         {
             IntPtr hwnd = FindWindow("Shell_TrayWnd", null);
-            if (hwnd != null)
+
+            APPBARDATA abd = new APPBARDATA();
+            abd.cbSize = Marshal.SizeOf(abd);
+            abd.hWnd = hwnd;
+            _ = SHAppBarMessage((int)ABMsg.ABM_GETTASKBARPOS, ref abd);
+            int uEdge = GetEdge(abd.rc);
+            TopTaskbarOffset = 0;
+            switch (uEdge)
             {
-                APPBARDATA abd = new APPBARDATA();
-                abd.cbSize = Marshal.SizeOf(abd);
-                abd.hWnd = hwnd;
-                _ = SHAppBarMessage((int)ABMsg.ABM_GETTASKBARPOS, ref abd);
-                int uEdge = GetEdge(abd.rc);
-                TopTaskbarOffset = 0;
-                switch (uEdge)
-                {
-                    case (int)ABEdge.ABE_LEFT:
-                        return TaskbarPosition.Left;
-                    case (int)ABEdge.ABE_RIGHT:
-                        return TaskbarPosition.Right;
-                    case (int)ABEdge.ABE_TOP:
-                        TopTaskbarOffset = abd.rc.bottom;
-                        return TaskbarPosition.Top;
-                    case (int)ABEdge.ABE_BOTTOM:
-                        return TaskbarPosition.Bottom;
-                    default:
-                        return TaskbarPosition.Bottom;
-                }
+                case (int)ABEdge.ABE_LEFT:
+                    return TaskbarPosition.Left;
+                case (int)ABEdge.ABE_RIGHT:
+                    return TaskbarPosition.Right;
+                case (int)ABEdge.ABE_TOP:
+                    TopTaskbarOffset = abd.rc.bottom;
+                    return TaskbarPosition.Top;
+                case (int)ABEdge.ABE_BOTTOM:
+                    return TaskbarPosition.Bottom;
+                default:
+                    return TaskbarPosition.Bottom;
             }
             return TaskbarPosition.Bottom;
         }

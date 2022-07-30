@@ -5,10 +5,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9E472449-87D9-4733-B16D-C380B90A309C}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		..\..\NuGet\SharpMap.2.0.0.nupkg = ..\..\NuGet\SharpMap.2.0.0.nupkg
-		..\..\NuGet\SharpMap.Extensions.2.0.0.nupkg = ..\..\NuGet\SharpMap.Extensions.2.0.0.nupkg
-		..\..\NuGet\SharpMap.Layers.BruTile.2.0.0.nupkg = ..\..\NuGet\SharpMap.Layers.BruTile.2.0.0.nupkg
-		..\..\NuGet\SharpMap.UI.2.0.0.nupkg = ..\..\NuGet\SharpMap.UI.2.0.0.nupkg
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{918894A4-B33D-4D18-B384-FAD8FF756C1C}"

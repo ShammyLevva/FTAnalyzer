@@ -84,23 +84,24 @@ namespace FTAnalyzer
             loading = false;
         }
 
-        void CheckSystemVersion()
+        static void CheckSystemVersion()
         {
             OperatingSystem os = Environment.OSVersion;
             if (os.Version.Major == 6 && os.Version.Minor < 2)
                 MessageBox.Show("Please note Microsoft has ended Windows 7 support as such it is no longer advisable to be connected to the internet using it. Any security flaws that are unpatched may be being actively exploited by hackers. You should upgrade as soon as possible.\n\nPlease be aware that FTAnalyzer may be unstable on an outdated unsupported Operating System.");
         }
-        async void CheckWebVersion()
+
+        static async void CheckWebVersion()
         {
             try
             {
                 Settings.Default.StartTime = DateTime.Now;
                 Settings.Default.Save();
                 HtmlAgilityPack.HtmlDocument doc;
-                using (WebClient wc = new WebClient())
+                using (HttpClient client = new())
                 {
                     doc = new HtmlAgilityPack.HtmlDocument();
-                    string webData = wc.DownloadString("https://github.com/ShammyLevva/FTAnalyzer/releases");
+                    string webData = client.GetStringAsync("https://github.com/ShammyLevva/FTAnalyzer/releases").Result;
                     doc.LoadHtml(webData);
                 }
                 HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//div/div/h1/a");
