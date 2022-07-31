@@ -41,9 +41,10 @@ namespace FTAnalyzer.Forms.Controls
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 6);
+            this.label1.Location = new System.Drawing.Point(0, 10);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 13);
+            this.label1.Size = new System.Drawing.Size(129, 30);
             this.label1.TabIndex = 4;
             this.label1.Text = "Census Date";
             // 
@@ -51,31 +52,24 @@ namespace FTAnalyzer.Forms.Controls
             // 
             this.cbCensusDate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCensusDate.FormattingEnabled = true;
-            this.cbCensusDate.Items.AddRange(new object[] {
-            "1841",
-            "1851",
-            "1861",
-            "1871",
-            "1881",
-            "1891",
-            "1901",
-            "1911"});
-            this.cbCensusDate.Location = new System.Drawing.Point(77, 3);
+            this.cbCensusDate.Location = new System.Drawing.Point(154, 7);
+            this.cbCensusDate.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.cbCensusDate.Name = "cbCensusDate";
-            this.cbCensusDate.Size = new System.Drawing.Size(49, 21);
+            this.cbCensusDate.Size = new System.Drawing.Size(94, 38);
             this.cbCensusDate.TabIndex = 3;
             this.cbCensusDate.SelectedIndexChanged += new System.EventHandler(this.CbCensusDate_SelectedIndexChanged);
             // 
             // CensusDateSelector
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbCensusDate);
+            this.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.Name = "CensusDateSelector";
-            this.Size = new System.Drawing.Size(129, 27);
+            this.Size = new System.Drawing.Size(254, 52);
             this.ResumeLayout(false);
             this.PerformLayout();
 

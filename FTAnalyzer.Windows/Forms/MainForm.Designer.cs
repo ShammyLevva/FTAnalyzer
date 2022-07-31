@@ -258,6 +258,7 @@ namespace FTAnalyzer
             this.txtCensusSurname = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.udAgeFilter = new System.Windows.Forms.NumericUpDown();
+            this.cenDate = new FTAnalyzer.Forms.Controls.CensusDateSelector();
             this.relTypesCensus = new FTAnalyzer.Forms.Controls.RelationTypes();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
@@ -2490,6 +2491,7 @@ namespace FTAnalyzer
             this.groupBox2.Controls.Add(this.txtCensusSurname);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.udAgeFilter);
+            this.groupBox2.Controls.Add(this.cenDate);
             this.groupBox2.Controls.Add(this.relTypesCensus);
             this.groupBox2.Location = new System.Drawing.Point(16, 14);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
@@ -2738,6 +2740,17 @@ namespace FTAnalyzer
             0,
             0,
             0});
+            // 
+            // cenDate
+            // 
+            this.cenDate.AutoSize = true;
+            this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cenDate.Country = "";
+            this.cenDate.Location = new System.Drawing.Point(25, 280);
+            this.cenDate.Margin = new System.Windows.Forms.Padding(11);
+            this.cenDate.Name = "cenDate";
+            this.cenDate.Size = new System.Drawing.Size(452, 44);
+            this.cenDate.TabIndex = 28;
             // 
             // relTypesCensus
             // 
