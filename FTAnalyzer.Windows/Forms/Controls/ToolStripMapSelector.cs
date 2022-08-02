@@ -96,19 +96,19 @@ namespace FTAnalyzer.Forms.Controls
             switch (type)
             {
                 case LinkLabelType.GOOGLE:
-                    link.LinkData = "http://www.google.com/intl/en_ALL/help/terms_maps.html";
+                    link.LinkData = "https://www.google.com/intl/en_ALL/help/terms_maps.html";
                     copyrightLabel.Text = "© Google - Terms of Use";
                     break;
                 case LinkLabelType.BING:
-                    link.LinkData = "http://www.microsoft.com/maps/product/terms.html";
+                    link.LinkData = "https://www.microsoft.com/maps/product/terms.html";
                     copyrightLabel.Text = "© Bing Maps";
                     break;
                 case LinkLabelType.OSM:
-                    link.LinkData = "http://www.openstreetmap.org/copyright";
+                    link.LinkData = "https://www.openstreetmap.org/copyright";
                     copyrightLabel.Text = "© OpenStreetMap";
                     break;
                 case LinkLabelType.NLS:
-                    link.LinkData = "http://maps.nls.uk/projects/api/index.html#licence";
+                    link.LinkData = "https://maps.nls.uk/projects/api/index.html#licence";
                     copyrightLabel.Text = "© NLS";
                     break;
             }
