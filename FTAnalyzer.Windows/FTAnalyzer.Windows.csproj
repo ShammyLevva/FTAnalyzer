@@ -62,8 +62,6 @@
     <None Remove="Resources\KUNSTLER.TTF" />
     <None Remove="x64\gdal_wrap.dll" />
     <None Remove="x64\SQLite.Interop.dll" />
-    <None Remove="x86\gdal_wrap.dll" />
-    <None Remove="x86\SQLite.Interop.dll" />
   </ItemGroup>
 
   <ItemGroup>
@@ -186,12 +184,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="x64\SQLite.Interop.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\gdal_wrap.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\SQLite.Interop.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
