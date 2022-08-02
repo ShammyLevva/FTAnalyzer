@@ -320,7 +320,7 @@ namespace FTAnalyzer.Forms
 
         void Census_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        void BtnHelp_Click(object sender, EventArgs e) => SpecialMethods.VisitWebsite("http://ftanalyzer.com/The%20Census%20Tab");
+        void BtnHelp_Click(object sender, EventArgs e) => SpecialMethods.VisitWebsite("https://www.ftanalyzer.com/The%20Census%20Tab");
 
         void Census_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }

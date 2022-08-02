@@ -62,7 +62,7 @@ namespace FTAnalyzer.Windows.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to Unexpected Error Checking for inconsistencies in your data
-        ///Please report this on the issues page at http://ftanalyzer.com/issues
+        ///Please report this on the issues page at https://www.ftanalyzer.com/issues
         ///Error was:.
         /// </summary>
         internal static string FTA_0001 {

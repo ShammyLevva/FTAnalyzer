@@ -71,7 +71,7 @@ namespace FTAnalyzer.Forms
             this.labTOU.Name = "labTOU";
             this.labTOU.Size = new System.Drawing.Size(254, 13);
             this.labTOU.TabIndex = 2;
-            this.labTOU.Text = "http://www.microsoft.com/Maps/product/terms.html";
+            this.labTOU.Text = "https://www.microsoft.com/Maps/product/terms.html";
             this.labTOU.Click += new System.EventHandler(this.LabTOU_Click);
             // 
             // BingOSMap

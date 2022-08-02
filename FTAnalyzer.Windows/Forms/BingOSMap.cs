@@ -83,7 +83,7 @@ namespace FTAnalyzer.Forms
             System.Diagnostics.Debug.Print("DocumentCompleted called");
         }
 
-        void LabTOU_Click(object sender, EventArgs e) => webBrowser.Navigate(new Uri("http://www.microsoft.com/Maps/product/terms.html"));
+        void LabTOU_Click(object sender, EventArgs e) => webBrowser.Navigate(new Uri("https://www.microsoft.com/Maps/product/terms.html"));
 
         void BingOSMap_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 

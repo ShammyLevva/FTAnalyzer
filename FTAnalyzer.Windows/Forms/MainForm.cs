@@ -269,8 +269,8 @@ namespace FTAnalyzer
             catch (Exception ex2)
             {
                 string message = ex2.Message + "\n" + (ex2.InnerException != null ? ex2.InnerException.Message : string.Empty);
-                MessageBox.Show("Error: Problem processing your file. Please try again.\n" +
-                    "If this problem persists please report this at http://www.ftanalyzer.com/issues. Error was: " + message + "\n" + ex2.InnerException, "FTAnalyzer");
+                MessageBox.Show($"Error: Problem processing your file. Please try again.\n" +
+                    $"If this problem persists please report this at https://www.ftanalyzer.com/issues. Error was: {message}\n{ex2.InnerException}", "FTAnalyzer");
                 CleanUp(true);
             }
             finally
@@ -425,7 +425,7 @@ namespace FTAnalyzer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Found a problem starting up.\nPlease report this at http://www.ftanalyzer.com/issues\nThe error was :" + ex.Message, "FTAnalyzer");
+                MessageBox.Show($"Found a problem starting up.\nPlease report this at https://www.ftanalyzer.com/issues\nThe error was :{ex.Message}", "FTAnalyzer");
             }
         }
 
@@ -660,7 +660,7 @@ namespace FTAnalyzer
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.WWIIReportEvent);
         }
 
-        void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite("http://forums.lc");
+        void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite("https://forums.lc");
 
         void DgOccupations_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -910,19 +910,19 @@ namespace FTAnalyzer
         void ViewOnlineManualToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.OnlineManualEvent);
-            SpecialMethods.VisitWebsite("http://www.ftanalyzer.com");
+            SpecialMethods.VisitWebsite("https://www.ftanalyzer.com");
         }
 
         void OnlineGuidesToUsingFTAnalyzerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.OnlineGuideEvent);
-            SpecialMethods.VisitWebsite("http://www.ftanalyzer.com/guides");
+            SpecialMethods.VisitWebsite("https://www.ftanalyzer.com/guides");
         }
 
         void PrivacyPolicyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.PrivacyEvent);
-            SpecialMethods.VisitWebsite("http://www.ftanalyzer.com/privacy");
+            SpecialMethods.VisitWebsite("https://www.ftanalyzer.com/privacy");
         }
 
         void OlderParentsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1161,7 +1161,7 @@ namespace FTAnalyzer
         void WhatsNewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.WhatsNewEvent);
-            SpecialMethods.VisitWebsite("http://ftanalyzer.com/Whats%20New%20in%20this%20Release");
+            SpecialMethods.VisitWebsite("https://www.ftanalyzer.com/Whats%20New%20in%20this%20Release");
         }
 
         void MnuShowTimeline_Click(object sender, EventArgs e)
@@ -1891,7 +1891,7 @@ namespace FTAnalyzer
 
         void LabLostCousinsWeb_Click(object sender, EventArgs e)
         {
-            SpecialMethods.VisitWebsite("http://www.lostcousins.com/?ref=LC585149");
+            SpecialMethods.VisitWebsite("https://www.lostcousins.com/?ref=LC585149");
             Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.LCWebLinkEvent);
         }
 
@@ -2884,7 +2884,7 @@ namespace FTAnalyzer
                         Application.UserAppDataRegistry.SetValue("Report Unrecognised Census References Path", path);
                         FamilyTree.WriteUnrecognisedReferencesFile(unrecognisedResults, missingResults, notesResults, saveFileDialog.FileName);
                         Analytics.TrackAction(Analytics.ReportsAction, Analytics.UnrecognisedCensusEvent);
-                        MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease create an issue at http://www.ftanalyzer.com/issues in issues section and upload your file, if you feel you have standard census references that should be recognised." + privateWarning, "FTAnalyzer");
+                        MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease create an issue at https://www.ftanalyzer.com/issues in issues section and upload your file, if you feel you have standard census references that should be recognised." + privateWarning, "FTAnalyzer");
                     }
                 }
             }
@@ -3620,7 +3620,7 @@ namespace FTAnalyzer
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.GoogleAPIKey);
         }
 
-        void GoogleAPISetupGuideToolStripMenuItem_Click(object sender, EventArgs e) => SpecialMethods.VisitWebsite("http://www.ftanalyzer.com/GoogleAPI");
+        void GoogleAPISetupGuideToolStripMenuItem_Click(object sender, EventArgs e) => SpecialMethods.VisitWebsite("https://www.ftanalyzer.com/GoogleAPI");
 
         void BirthdayEffectReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
