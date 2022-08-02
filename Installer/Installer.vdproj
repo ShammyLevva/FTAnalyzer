@@ -355,7 +355,7 @@
             "Target" = "8:"
             "Folder" = "8:_C17C87ECBA8547689333067FB8B2F89A"
             "WorkingFolder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
-            "Icon" = "8:"
+            "Icon" = "8:_F51E9599869B443687890A310B0B3800"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_EA7ACFA0EE754387B44EBCBF43D20A0A"
@@ -829,7 +829,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_FA6A2BF0693B447C85A0B08E11A6A65C"
             {
-            "SourcePath" = "8:..\\FTAnalyzer.Windows\\obj\\Release\\net6.0-windows10.0.17763.0\\FTAnalyzer.Windows.dll"
+            "SourcePath" = "8:..\\FTAnalyzer.Windows\\obj\\Debug\\net6.0-windows10.0.17763.0\\FTAnalyzer.Windows.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
