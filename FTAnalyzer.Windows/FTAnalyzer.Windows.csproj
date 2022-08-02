@@ -203,9 +203,9 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Printing.DataGridViewPrint" Version="2.0.0" />
     <PackageReference Include="ProjNET" Version="2.0.0" />
-    <PackageReference Include="SharpMap.Extensions" Version="2.0.1" />
-    <PackageReference Include="SharpMap.Layers.BruTile" Version="2.0.1" />
-    <PackageReference Include="SharpMap.UI" Version="2.0.1" />
+    <PackageReference Include="SharpMap.Extensions" Version="2.0.2" />
+    <PackageReference Include="SharpMap.Layers.BruTile" Version="2.0.2" />
+    <PackageReference Include="SharpMap.UI" Version="2.0.2" />
     <PackageReference Include="System.Buffers" Version="4.5.1" />
     <PackageReference Include="System.Memory" Version="4.5.5" />
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
@@ -216,26 +216,66 @@
     <Compile Update="Forms\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\AboutBox.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AboutBox.resx</DependentUpon>
+    </Compile>
     <Compile Update="Forms\BingOSMap.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\BingOSMap.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BingOSMap.resx</DependentUpon>
     </Compile>
     <Compile Update="Forms\Census.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\Census.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Census.resx</DependentUpon>
+    </Compile>
     <Compile Update="Forms\Chart.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Chart.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Chart.resx</DependentUpon>
     </Compile>
     <Compile Update="Forms\ColourBMD.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\ColourBMD.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ColourBMD.resx</DependentUpon>
+    </Compile>
     <Compile Update="Forms\ColourCensus.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\ColourCensus.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ColourCensus.resx</DependentUpon>
     </Compile>
     <Compile Update="Forms\Controls\CensusCountry.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Forms\Controls\CensusCountry.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CensusCountry.resx</DependentUpon>
+    </Compile>
     <Compile Update="Forms\Controls\CensusDateSelector.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\Controls\CensusDateSelector.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CensusDateSelector.resx</DependentUpon>
     </Compile>
     <Compile Update="Forms\Controls\MapToolStripMenuItem.cs">
       <SubType>Component</SubType>
@@ -243,56 +283,141 @@
     <Compile Update="Forms\Controls\RelationTypes.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Forms\Controls\RelationTypes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RelationTypes.resx</DependentUpon>
+    </Compile>
     <Compile Update="Forms\Controls\ToolStripMapSelector.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Forms\EditLocation.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\EditLocation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EditLocation.resx</DependentUpon>
+    </Compile>
     <Compile Update="Forms\Facts.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Facts.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Facts.resx</DependentUpon>
     </Compile>
     <Compile Update="Forms\GeocodeLocations.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\GeocodeLocations.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GeocodeLocations.resx</DependentUpon>
+    </Compile>
     <Compile Update="Forms\GoogleMap.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\GoogleMap.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GoogleMap.resx</DependentUpon>
     </Compile>
     <Compile Update="Forms\LifeLine.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\LifeLine.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LifeLine.resx</DependentUpon>
+    </Compile>
     <Compile Update="Forms\LostCousinsReferral.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\LostCousinsReferral.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LostCousinsReferral.resx</DependentUpon>
     </Compile>
     <Compile Update="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\MainForm.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MainForm.resx</DependentUpon>
+    </Compile>
     <Compile Update="Forms\MapIndividals.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\MapIndividals.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MapIndividals.resx</DependentUpon>
     </Compile>
     <Compile Update="Forms\MissingData.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\MissingData.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MissingData.resx</DependentUpon>
+    </Compile>
     <Compile Update="Forms\Notes.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Notes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Notes.resx</DependentUpon>
     </Compile>
     <Compile Update="Forms\People.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\People.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>People.resx</DependentUpon>
+    </Compile>
     <Compile Update="Forms\Places.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Places.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Places.resx</DependentUpon>
     </Compile>
     <Compile Update="Forms\Progress.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\Progress.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Progress.resx</DependentUpon>
+    </Compile>
     <Compile Update="Forms\Sources.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Sources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Sources.resx</DependentUpon>
     </Compile>
     <Compile Update="Forms\StatisticsForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\StatisticsForm.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>StatisticsForm.resx</DependentUpon>
+    </Compile>
     <Compile Update="Forms\TimeLine.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\TimeLine.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TimeLine.resx</DependentUpon>
     </Compile>
     <Compile Update="Properties\ErrorMessages.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -342,26 +467,61 @@
     <Compile Update="UserControls\CensusSettingsUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UserControls\CensusSettingsUI.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CensusSettingsUI.resx</DependentUpon>
+    </Compile>
     <Compile Update="UserControls\ExtendedToolTipLabel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="UserControls\FileHandlingUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UserControls\FileHandlingUI.designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FileHandlingUI.resx</DependentUpon>
+    </Compile>
     <Compile Update="UserControls\FontSettingsUI.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\FontSettingsUI.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FontSettingsUI.resx</DependentUpon>
     </Compile>
     <Compile Update="UserControls\GeneralSettingsUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UserControls\GeneralSettingsUI.designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GeneralSettingsUI.resx</DependentUpon>
+    </Compile>
     <Compile Update="UserControls\MappingSettingsUI.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\MappingSettingsUI.designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MappingSettingsUI.resx</DependentUpon>
     </Compile>
     <Compile Update="UserControls\NonGedcomDateSettingsUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UserControls\NonGedcomDateSettingsUI.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NonGedcomDateSettingsUI.resx</DependentUpon>
+    </Compile>
     <Compile Update="UserControls\Options.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UserControls\Options.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Options.resx</DependentUpon>
     </Compile>
     <Compile Update="Utilities\MultiSelectTreeview.cs">
       <SubType>Component</SubType>
@@ -372,8 +532,106 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Forms\AboutBox.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AboutBox.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\BingOSMap.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>BingOSMap.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Census.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Census.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Chart.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Chart.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\ColourBMD.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ColourBMD.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\ColourCensus.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ColourCensus.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Controls\CensusCountry.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CensusCountry.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Controls\CensusDateSelector.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CensusDateSelector.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Controls\RelationTypes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RelationTypes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\EditLocation.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EditLocation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Facts.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Facts.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\GeocodeLocations.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GeocodeLocations.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\GoogleMap.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GoogleMap.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\LifeLine.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LifeLine.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\LostCousinsReferral.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LostCousinsReferral.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Forms\MainForm.resx">
       <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MainForm.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\MapIndividals.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MapIndividals.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\MissingData.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MissingData.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Notes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Notes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\People.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>People.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Places.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Places.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Progress.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Progress.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Sources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\StatisticsForm.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>StatisticsForm.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\TimeLine.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TimeLine.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Properties\ErrorMessages.resx">
       <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
@@ -387,6 +645,34 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserControls\CensusSettingsUI.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CensusSettingsUI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserControls\FileHandlingUI.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FileHandlingUI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserControls\FontSettingsUI.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FontSettingsUI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserControls\GeneralSettingsUI.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GeneralSettingsUI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserControls\MappingSettingsUI.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MappingSettingsUI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserControls\NonGedcomDateSettingsUI.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>NonGedcomDateSettingsUI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserControls\Options.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Options.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
