@@ -11,6 +11,7 @@
 "SccLocalPath" = "8:"
 "SccAuxPath" = "8:"
 "SccProvider" = "8:"
+"BackwardsCompatibleGUIDGeneration" = "8:TRUE"
     "Hierarchy"
     {
         "Entry"
@@ -56,6 +57,11 @@
                     {
                     "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
                     "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.NetCore.DesktopRuntime.6.0.x64"
+                    {
+                    "Name" = "8:.NET Desktop Runtime 6.0.7 (x64)"
+                    "ProductCode" = "8:Microsoft.NetCore.DesktopRuntime.6.0.x64"
                     }
                 }
             }
@@ -116,6 +122,16 @@
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=863262"
                 }
+                "{A06ECF26-33A3-4562-8140-9B0E340D4F24}:_B621844EB73F45B7A6C3423DCED92D02"
+                {
+                "Name" = "8:.NET Core"
+                "Message" = "8:[VSDNETCOREMSG]"
+                "AllowLaterVersions" = "11:FALSE"
+                "InstallUrl" = "8:https://dotnet.microsoft.com/download/dotnet-core/[NetCoreVerMajorDotMinor]"
+                "IsNETCore" = "11:TRUE"
+                "Architecture" = "2:0"
+                "Runtime" = "2:0"
+                }
             }
         }
         "File"
@@ -136,7 +152,7 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:FALSE"
+            "Exclude" = "11:TRUE"
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
@@ -207,15 +223,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FTAnalyzer"
-        "ProductCode" = "8:{C83CFC62-DF5C-438A-A023-96B3872133E7}"
-        "PackageCode" = "8:{35363C2C-1EDA-4557-9037-ABAC31BE12D6}"
+        "ProductCode" = "8:{F071B743-436C-4ADA-98FA-326F3227F139}"
+        "PackageCode" = "8:{7AB061DE-8D8C-4285-9BEA-A281A683682B}"
         "UpgradeCode" = "8:{1207BD34-CD5A-4BEA-838E-74C0B720E1DA}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:8.5.2"
+        "ProductVersion" = "8:10.0.0"
         "Manufacturer" = "8:FTAnalyzer"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://www.facebook.com/groups/ftanalyzer"
@@ -224,7 +240,7 @@
         "ARPCONTACT" = "8:Alexander Bisset"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:Analyse the hidden depths in your family tree"
-        "ARPURLINFOABOUT" = "8:http://www.ftanalyzer.com"
+        "ARPURLINFOABOUT" = "8:https://www.ftanalyzer.com"
         "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
@@ -813,7 +829,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_FA6A2BF0693B447C85A0B08E11A6A65C"
             {
-            "SourcePath" = "8:..\\FTAnalyzer.Windows\\obj\\Debug\\net6.0-windows10.0.17763.0\\FTAnalyzer.Windows.dll"
+            "SourcePath" = "8:..\\FTAnalyzer.Windows\\obj\\Release\\net6.0-windows10.0.17763.0\\FTAnalyzer.Windows.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
