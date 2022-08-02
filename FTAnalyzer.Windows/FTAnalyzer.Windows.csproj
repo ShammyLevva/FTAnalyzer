@@ -218,10 +218,10 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Printing.DataGridViewPrint" Version="2.0.0" />
     <PackageReference Include="ProjNET" Version="2.0.0" />
-    <PackageReference Include="SharpMap" Version="2.0.0" />
-    <PackageReference Include="SharpMap.Extensions" Version="2.0.0" />
-    <PackageReference Include="SharpMap.Layers.BruTile" Version="2.0.0" />
-    <PackageReference Include="SharpMap.UI" Version="2.0.0" />
+    <PackageReference Include="SharpMap" Version="2.0.1" />
+    <PackageReference Include="SharpMap.Extensions" Version="2.0.1" />
+    <PackageReference Include="SharpMap.Layers.BruTile" Version="2.0.1" />
+    <PackageReference Include="SharpMap.UI" Version="2.0.1" />
     <PackageReference Include="System.Buffers" Version="4.5.1" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.116" />
