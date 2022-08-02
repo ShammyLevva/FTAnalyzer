@@ -6,16 +6,21 @@ namespace FTAnalyzer.Forms.Controls
 {
     public partial class CensusDateSelector : UserControl
     {
-        string country = Countries.SCOTLAND;
-        CensusDate defaultDate = CensusDate.UKCENSUS1881;
+        string country;
+        CensusDate defaultDate;
         CensusDate previousDate;
         bool _loading;
 
         public CensusDateSelector()
         {
             InitializeComponent();
-            cbCensusDate.Items.Clear();
-            previousDate = defaultDate;
+            if (!DesignMode)
+            {
+                cbCensusDate.Items.Clear();
+                country = Countries.SCOTLAND;
+                defaultDate = CensusDate.UKCENSUS1881;
+                previousDate = defaultDate;
+            }
         }
 
         public void AddAllCensusItems()
@@ -67,6 +72,8 @@ namespace FTAnalyzer.Forms.Controls
             get { return country; }
             set
             {
+                if (DesignMode)
+                    return;
                 _loading = true;
                 country = value;
                 cbCensusDate.Items.Clear();
@@ -92,6 +99,8 @@ namespace FTAnalyzer.Forms.Controls
 
         void AddCensusItems(string location)
         {
+            if (DesignMode)
+                return;
             if (location.Equals(Countries.UNITED_KINGDOM))
             {
                 foreach (CensusDate censusDate in CensusDate.UK_CENSUS)
@@ -109,7 +118,7 @@ namespace FTAnalyzer.Forms.Controls
             }
             else if (location.Equals(Countries.CANADA))
             {
-                foreach(CensusDate censusDate in CensusDate.CANADIAN_CENSUS)
+                foreach (CensusDate censusDate in CensusDate.CANADIAN_CENSUS)
                     cbCensusDate.Items.Add(censusDate);
             }
         }
