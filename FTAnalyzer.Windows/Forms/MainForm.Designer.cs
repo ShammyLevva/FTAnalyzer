@@ -1581,12 +1581,10 @@ namespace FTAnalyzer
             this.dgWorldWars.AllowUserToAddRows = false;
             this.dgWorldWars.AllowUserToDeleteRows = false;
             this.dgWorldWars.AllowUserToOrderColumns = true;
-            this.dgWorldWars.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgWorldWars.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgWorldWars.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgWorldWars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgWorldWars.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgWorldWars.FilterAndSortEnabled = true;
             this.dgWorldWars.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dgWorldWars.Location = new System.Drawing.Point(0, 295);
@@ -1719,12 +1717,10 @@ namespace FTAnalyzer
             this.dgTreeTops.AllowUserToAddRows = false;
             this.dgTreeTops.AllowUserToDeleteRows = false;
             this.dgTreeTops.AllowUserToOrderColumns = true;
-            this.dgTreeTops.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgTreeTops.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgTreeTops.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgTreeTops.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgTreeTops.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgTreeTops.FilterAndSortEnabled = true;
             this.dgTreeTops.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dgTreeTops.Location = new System.Drawing.Point(0, 295);
@@ -4251,15 +4247,13 @@ namespace FTAnalyzer
             // 
             // rtbToday
             // 
-            this.rtbToday.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbToday.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.rtbToday.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.rtbToday.Location = new System.Drawing.Point(0, 169);
+            this.rtbToday.Location = new System.Drawing.Point(7, 121);
             this.rtbToday.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.rtbToday.Name = "rtbToday";
             this.rtbToday.ReadOnly = true;
-            this.rtbToday.Size = new System.Drawing.Size(2111, 823);
+            this.rtbToday.Size = new System.Drawing.Size(2114, 886);
             this.rtbToday.TabIndex = 17;
             this.rtbToday.Text = "";
             // 
@@ -4323,7 +4317,7 @@ namespace FTAnalyzer
             this.pbToday.Location = new System.Drawing.Point(1598, 49);
             this.pbToday.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.pbToday.Name = "pbToday";
-            this.pbToday.Size = new System.Drawing.Size(460, 46);
+            this.pbToday.Size = new System.Drawing.Size(340, 46);
             this.pbToday.TabIndex = 12;
             // 
             // rbTodayMonth

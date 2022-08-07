@@ -5,6 +5,8 @@ namespace FTAnalyzer.Windows
 {
     internal static class Program
     {
+        public static readonly HttpClient Client = new();
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
