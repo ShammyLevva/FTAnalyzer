@@ -1,15 +1,10 @@
 ﻿using FTAnalyzer.Forms.Controls;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
-using FTAnalyzer.Windows.Properties;
+using FTAnalyzer.Properties;
 using NetTopologySuite.Geometries;
 using SharpMap.Data;
 using SharpMap.Layers;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Web;
-using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms
 {

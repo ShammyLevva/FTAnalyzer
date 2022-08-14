@@ -1072,7 +1072,7 @@ namespace FTAnalyzer
             // 
             // facebookSupportGroupToolStripMenuItem
             // 
-            this.facebookSupportGroupToolStripMenuItem.Image = global::FTAnalyzer.Windows.Properties.Resources.flogo_rgb_hex_brc_site_250;
+            this.facebookSupportGroupToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.flogo_rgb_hex_brc_site_250;
             this.facebookSupportGroupToolStripMenuItem.Name = "facebookSupportGroupToolStripMenuItem";
             this.facebookSupportGroupToolStripMenuItem.Size = new System.Drawing.Size(450, 40);
             this.facebookSupportGroupToolStripMenuItem.Text = "Facebook Support Page";
@@ -1080,7 +1080,7 @@ namespace FTAnalyzer
             // 
             // facebookUserGroupToolStripMenuItem
             // 
-            this.facebookUserGroupToolStripMenuItem.Image = global::FTAnalyzer.Windows.Properties.Resources.flogo_rgb_hex_brc_site_250;
+            this.facebookUserGroupToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.flogo_rgb_hex_brc_site_250;
             this.facebookUserGroupToolStripMenuItem.Name = "facebookUserGroupToolStripMenuItem";
             this.facebookUserGroupToolStripMenuItem.Size = new System.Drawing.Size(450, 40);
             this.facebookUserGroupToolStripMenuItem.Text = "Facebook User Group";
@@ -1093,7 +1093,7 @@ namespace FTAnalyzer
             // 
             // getGoogleAPIKeyToolStripMenuItem
             // 
-            this.getGoogleAPIKeyToolStripMenuItem.Image = global::FTAnalyzer.Windows.Properties.Resources.GoogleMapsAPI;
+            this.getGoogleAPIKeyToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.GoogleMapsAPI;
             this.getGoogleAPIKeyToolStripMenuItem.Name = "getGoogleAPIKeyToolStripMenuItem";
             this.getGoogleAPIKeyToolStripMenuItem.Size = new System.Drawing.Size(450, 40);
             this.getGoogleAPIKeyToolStripMenuItem.Text = "Get Google API Key";
@@ -1101,7 +1101,7 @@ namespace FTAnalyzer
             // 
             // googleAPISetupGuideToolStripMenuItem
             // 
-            this.googleAPISetupGuideToolStripMenuItem.Image = global::FTAnalyzer.Windows.Properties.Resources.GoogleMapsAPI;
+            this.googleAPISetupGuideToolStripMenuItem.Image = global::FTAnalyzer.Properties.Resources.GoogleMapsAPI;
             this.googleAPISetupGuideToolStripMenuItem.Name = "googleAPISetupGuideToolStripMenuItem";
             this.googleAPISetupGuideToolStripMenuItem.Size = new System.Drawing.Size(450, 40);
             this.googleAPISetupGuideToolStripMenuItem.Text = "Google API Setup Guide";
@@ -3219,7 +3219,7 @@ namespace FTAnalyzer
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::FTAnalyzer.Windows.Properties.Resources._256;
+            this.pictureBox1.Image = global::FTAnalyzer.Properties.Resources._256;
             this.pictureBox1.Location = new System.Drawing.Point(1886, 8);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.pictureBox1.Name = "pictureBox1";

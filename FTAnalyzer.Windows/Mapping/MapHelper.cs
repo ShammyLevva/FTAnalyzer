@@ -1,6 +1,6 @@
 ﻿using FTAnalyzer.Forms;
 using FTAnalyzer.Utilities;
-using FTAnalyzer.Windows.Properties;
+using FTAnalyzer.Properties;
 using NetTopologySuite.Geometries;
 using SharpMap;
 using SharpMap.Data;
@@ -10,15 +10,9 @@ using SharpMap.Layers;
 using SharpMap.Rendering;
 using SharpMap.Rendering.Decoration.ScaleBar;
 using SharpMap.Styles;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace FTAnalyzer.Mapping
 {

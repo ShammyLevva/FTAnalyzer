@@ -1,10 +1,6 @@
-﻿using FTAnalyzer.Windows.Properties;
+﻿using FTAnalyzer.Properties;
 using FTAnalyzer.Utilities;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Windows.Forms;
 using static FTAnalyzer.ColourValues;
 
 namespace FTAnalyzer.Forms

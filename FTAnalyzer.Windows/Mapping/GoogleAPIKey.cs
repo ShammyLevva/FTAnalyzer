@@ -1,5 +1,5 @@
 ﻿using FTAnalyzer.Utilities;
-using FTAnalyzer.Windows.Properties;
+using FTAnalyzer.Properties;
 using System;
 
 namespace FTAnalyzer.Mapping

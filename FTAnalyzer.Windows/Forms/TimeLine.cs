@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
-using FTAnalyzer.Mapping;
+﻿using FTAnalyzer.Mapping;
 using NetTopologySuite.Geometries;
 using SharpMap.Data;
 using SharpMap.Layers;
 using FTAnalyzer.Utilities;
-using FTAnalyzer.Windows.Properties;
+using FTAnalyzer.Properties;
 
 namespace FTAnalyzer.Forms
 {

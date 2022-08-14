@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
 using System.ComponentModel;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
 using FTAnalyzer.Events;
 using FTAnalyzer.Filters;
 using FTAnalyzer.Mapping;
@@ -14,7 +8,7 @@ using NetTopologySuite.Geometries;
 using System.Text;
 using SharpMap.Utilities;
 using FTAnalyzer.Forms.Controls;
-using FTAnalyzer.Windows.Properties;
+using FTAnalyzer.Properties;
 using System.Diagnostics;
 
 namespace FTAnalyzer.Forms

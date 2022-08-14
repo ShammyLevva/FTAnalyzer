@@ -2,7 +2,7 @@
 using FTAnalyzer.Exports;
 using FTAnalyzer.Filters;
 using FTAnalyzer.Forms;
-using FTAnalyzer.Windows.Properties;
+using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
 using Ionic.Zip;

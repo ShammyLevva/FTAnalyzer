@@ -1,15 +1,9 @@
 ﻿using FTAnalyzer.Filters;
 using FTAnalyzer.Utilities;
-using FTAnalyzer.Windows.Properties;
-using System;
-using System.Collections.Generic;
+using FTAnalyzer.Properties;
 using System.ComponentModel;
-using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms
 {

@@ -1,13 +1,8 @@
 ﻿using FTAnalyzer.Filters;
-using FTAnalyzer.Windows.Properties;
+using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms
 {

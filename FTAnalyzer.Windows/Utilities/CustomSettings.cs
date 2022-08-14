@@ -1,17 +1,16 @@
 ﻿using static FTAnalyzer.FactDate;
-using FTAnalyzer.Windows;
 
 namespace FTAnalyzer.Utilities
 {
     public class CustomSettings
     {
-        readonly Windows.Properties.Settings _Settings;
-        Windows.Properties.NonGedcomDate _NonGEDCOMDateSettings;
+        readonly Properties.Settings _Settings;
+        Properties.NonGedcomDate _NonGEDCOMDateSettings;
 
         public CustomSettings()
         {
-            _Settings = Windows.Properties.Settings.Default;
-            _NonGEDCOMDateSettings = Windows.Properties.NonGedcomDate.Default;
+            _Settings = Properties.Settings.Default;
+            _NonGEDCOMDateSettings = Properties.NonGedcomDate.Default;
         }
 
         public void SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected formatSelected, string dateformat, string separator)

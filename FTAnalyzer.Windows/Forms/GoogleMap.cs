@@ -1,19 +1,13 @@
 ﻿using FTAnalyzer.Events;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
-using FTAnalyzer.Windows.Properties;
+using FTAnalyzer.Properties;
 using Ionic.Zip;
-using log4net.Core;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Threading;
 using System.Web;
-using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms
 {

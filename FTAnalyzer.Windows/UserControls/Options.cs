@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Text;
 using System.Reflection;
-using System.IO;
-using FTAnalyzer.Windows.Properties;
+using FTAnalyzer.Properties;
 using System.Diagnostics;
 
 //TODO: Load option controls dynamically
