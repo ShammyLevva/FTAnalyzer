@@ -14,7 +14,7 @@ namespace Testing
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext { get; set; }
+        public TestContext? TestContext { get; set; }
 
         #region Additional test attributes
         //
@@ -41,15 +41,15 @@ namespace Testing
         [TestMethod]
         public void AgeStringConstructor()
         {
-            FactDate baseDate = new FactDate("19 Nov 1988");
-            Age age = new Age("22y", baseDate);
-            Assert.AreEqual(age.GetBirthDate(baseDate), new FactDate("19 Nov 1966"));
+            FactDate baseDate = new("19 Nov 1988");
+            Age age = new("22y", baseDate);
+            Assert.AreEqual(age.GetBirthDate(baseDate), new("19 Nov 1966"));
 
             age = new Age("22y 2m", baseDate);
-            Assert.AreEqual(age.GetBirthDate(baseDate), new FactDate("19 Sep 1966"));
+            Assert.AreEqual(age.GetBirthDate(baseDate), new("19 Sep 1966"));
 
             age = new Age("22y 2m 5d", baseDate);
-            Assert.AreEqual(age.GetBirthDate(baseDate), new FactDate("14 Sep 1966"));
+            Assert.AreEqual(age.GetBirthDate(baseDate), new("14 Sep 1966"));
         }
     }
 }
