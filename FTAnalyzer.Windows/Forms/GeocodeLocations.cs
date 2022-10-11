@@ -915,7 +915,7 @@ namespace FTAnalyzer.Forms
                 int count = 0;
                 int total = queue.Count;
                 DatabaseHelper dbh = DatabaseHelper.Instance;
-                Dictionary<string, Tuple<string, string>> LatLongIndex = dbh.LatLongIndex;
+                Dictionary<string, Tuple<string, string>> LatLongIndex = DatabaseHelper.LatLongIndex;
                 while (!queue.IsEmpty)
                 {
                     if (queue.TryDequeue(out FactLocation loc))
