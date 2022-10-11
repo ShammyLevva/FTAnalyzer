@@ -16,6 +16,7 @@ using System.Text;
 using System.Xml;
 using HtmlAgilityPack;
 using System.Diagnostics;
+using System.Runtime.Versioning;
 
 namespace FTAnalyzer
 {
@@ -62,6 +63,7 @@ namespace FTAnalyzer
             }
         }
 
+        [SupportedOSPlatform("windows")]
         void MainForm_Load(object sender, EventArgs e)
         {
             SetupFonts();
@@ -120,6 +122,8 @@ namespace FTAnalyzer
                 MessageBox.Show("Unable to check website for new version please check https://github.com/ShammyLevva/FTAnalyzer/releases to see if you are running the latest version.", "FTAnalyzer");
             }
         }
+        
+        [SupportedOSPlatform("windows")]
         void SetupFonts()
         {
             try
@@ -202,6 +206,7 @@ namespace FTAnalyzer
             tsStatusLabel.Height = FontSettings.Default.FontHeight;
         }
 
+        [SupportedOSPlatform("windows")]
         void RegisterEventHandlers()
         {
             Options.ReloadRequired += new EventHandler(Options_ReloadData);
@@ -210,6 +215,7 @@ namespace FTAnalyzer
             FontSettingsUI.GlobalFontChanged += new EventHandler(Options_GlobalFontChanged);
         }
 
+        [SupportedOSPlatform("windows")]
         void SetHeightWidth()
         {
             MainForm mainForm = this;
@@ -238,6 +244,7 @@ namespace FTAnalyzer
         }
 
         #region Load File
+        [SupportedOSPlatform("windows")]
         async Task LoadFileAsync(string filename)
         {
             try
@@ -430,6 +437,7 @@ namespace FTAnalyzer
             }
         }
 
+        [SupportedOSPlatform("windows")]
         async void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(Settings.Default.LoadLocation))
@@ -811,8 +819,9 @@ namespace FTAnalyzer
         }
 
         #region DataErrors
-        void CkbDataErrors_SelectedIndexChanged(object sender, EventArgs e) => UpdateDataErrorsDisplay();
+        [SupportedOSPlatform("windows")] void CkbDataErrors_SelectedIndexChanged(object sender, EventArgs e) => UpdateDataErrorsDisplay();
 
+        [SupportedOSPlatform("windows")]
         void UpdateDataErrorsDisplay()
         {
             HourGlass(true);
@@ -841,6 +850,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
+        [SupportedOSPlatform("windows")]
         public void SetDataErrorsCheckedDefaults(CheckedListBox list)
         {
             list.Items.Clear();
@@ -852,6 +862,7 @@ namespace FTAnalyzer
             }
         }
 
+        [SupportedOSPlatform("windows")]
         void BtnSelectAll_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < ckbDataErrors.Items.Count; i++)
@@ -861,6 +872,7 @@ namespace FTAnalyzer
             UpdateDataErrorsDisplay();
         }
 
+        [SupportedOSPlatform("windows")]
         void BtnClearAll_Click(object sender, EventArgs e)
         {
             foreach (int indexChecked in ckbDataErrors.CheckedIndices)
@@ -870,11 +882,7 @@ namespace FTAnalyzer
             UpdateDataErrorsDisplay();
         }
 
-        void DgDataErrors_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
+        [SupportedOSPlatform("windows")]
         void SetupDataErrors()
         {
             dgDataErrors.DataSource = DataErrors(ckbDataErrors);
@@ -1089,6 +1097,7 @@ namespace FTAnalyzer
 
         void Options_AliasInNameChanged(object sender, EventArgs e) => ft.SetFullNames();
 
+        [SupportedOSPlatform("windows")]
         void Options_GlobalFontChanged(object sender, EventArgs e)
         {
             HourGlass(true);
@@ -1098,6 +1107,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Reload Data
+        [SupportedOSPlatform("windows")]
         async Task QueryReloadData()
         {
             if (GeneralSettings.Default.ReloadRequired && ft.DataLoaded)
@@ -1112,6 +1122,7 @@ namespace FTAnalyzer
             }
         }
 
+        [SupportedOSPlatform("windows")]
         async void ReloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GeneralSettings.Default.ReloadRequired = false;
@@ -1327,6 +1338,7 @@ namespace FTAnalyzer
         }
 
         #region Tab Control
+        [SupportedOSPlatform("windows")]
         void TabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -1713,6 +1725,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
+        [SupportedOSPlatform("windows")]
         void BtnLCLogin_Click(object sender, EventArgs e)
         {
             HourGlass(true);
@@ -1923,6 +1936,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Print Routines
+        [SupportedOSPlatform("windows10.0.17763")]
         void MnuPrint_Click(object sender, EventArgs e)
         {
             try
@@ -2000,6 +2014,7 @@ namespace FTAnalyzer
 
         enum Orientation { Landscape, Portrait }
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void PrintDataGrid(Orientation orientation, DataGridView dg, string title)
         {
             PrintingDataGridViewProvider.Create(printDocument, dg, true, true, true, new TitlePrintBlock(title), null, null);
@@ -2086,6 +2101,7 @@ namespace FTAnalyzer
             }
         }
 
+        [SupportedOSPlatform("windows")]
         void RestoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ft.Geocoding)
@@ -2202,6 +2218,7 @@ namespace FTAnalyzer
             BuildRecentList();
         }
 
+        [SupportedOSPlatform("windows")]
         async void OpenRecentFile_Click(object sender, EventArgs e)
         {
             string filename = (string)(sender as ToolStripMenuItem).Tag;
@@ -2353,6 +2370,7 @@ namespace FTAnalyzer
         }
 
         #region Facts Tab
+        [SupportedOSPlatform("windows")]
         void SetupFactsCheckboxes()
         {
             Predicate<ExportFact> filter = CreateFactsFilter();
@@ -2360,9 +2378,9 @@ namespace FTAnalyzer
             SetShowFactsButton();
         }
 
-        void RelTypesFacts_RelationTypesChanged(object sender, EventArgs e) => SetupFactsCheckboxes();
+        [SupportedOSPlatform("windows")] void RelTypesFacts_RelationTypesChanged(object sender, EventArgs e) => SetupFactsCheckboxes();
 
-        void TxtFactsSurname_TextChanged(object sender, EventArgs e) => SetupFactsCheckboxes();
+        [SupportedOSPlatform("windows")] void TxtFactsSurname_TextChanged(object sender, EventArgs e) => SetupFactsCheckboxes();
 
         void ShowFacts(string indID, bool offset = false)
         {
@@ -2436,10 +2454,11 @@ namespace FTAnalyzer
             return result;
         }
 
-        void BtnSelectAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactSelect, true, "Fact: ");
+        [SupportedOSPlatform("windows")] void BtnSelectAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactSelect, true, "Fact: ");
 
-        void BtnDeselectAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactSelect, false, "Fact: ");
+        [SupportedOSPlatform("windows")] void BtnDeselectAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactSelect, false, "Fact: ");
 
+        [SupportedOSPlatform("windows")]
         void SetFactTypes(CheckedListBox list, bool selected, string registryPrefix)
         {
             for (int index = 0; index < list.Items.Count; index++)
@@ -2458,6 +2477,7 @@ namespace FTAnalyzer
             SetShowFactsButton();
         }
 
+        [SupportedOSPlatform("windows")]
         void CkbFactSelect_MouseClick(object sender, MouseEventArgs e)
         {
             int index = ckbFactSelect.IndexFromPoint(e.Location);
@@ -2492,9 +2512,9 @@ namespace FTAnalyzer
             btnShowFacts.Enabled = ckbFactSelect.CheckedItems.Count > 0 || (ckbFactExclude.Visible && ckbFactExclude.CheckedItems.Count > 0);
         }
 
-        void BtnExcludeAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactExclude, true, "Exclude Fact: ");
+        [SupportedOSPlatform("windows")] void BtnExcludeAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactExclude, true, "Exclude Fact: ");
 
-        void BtnDeselectExcludeAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactExclude, false, "Exclude Fact: ");
+        [SupportedOSPlatform("windows")] void BtnDeselectExcludeAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactExclude, false, "Exclude Fact: ");
 
         void BtnShowExclusions_Click(object sender, EventArgs e)
         {
@@ -2506,6 +2526,7 @@ namespace FTAnalyzer
             SetShowFactsButton();
         }
 
+        [SupportedOSPlatform("windows")]
         void CkbFactExclude_MouseClick(object sender, MouseEventArgs e)
         {
             int index = ckbFactExclude.IndexFromPoint(e.Location);
@@ -2539,6 +2560,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Form Drag Drop
+        [SupportedOSPlatform("windows")]
         async void MainForm_DragDrop(object sender, DragEventArgs e)
         {
             bool fileLoaded = false;
@@ -2567,6 +2589,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Manage Form Position
+        [SupportedOSPlatform("windows")]
         void ResetToDefaultFormSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadDefaultPosition();
@@ -2583,6 +2606,7 @@ namespace FTAnalyzer
             loading = false;
         }
 
+        [SupportedOSPlatform("windows")]
         void MainForm_Resize(object sender, EventArgs e)
         {
             try
@@ -2594,8 +2618,9 @@ namespace FTAnalyzer
             catch (Exception) { }
         }
 
-        void MainForm_Move(object sender, EventArgs e) => SavePosition();
+        [SupportedOSPlatform("windows")] void MainForm_Move(object sender, EventArgs e) => SavePosition();
 
+        [SupportedOSPlatform("windows")]
         void SavePosition()
         {
             if (!loading && WindowState != FormWindowState.Minimized)
@@ -2853,6 +2878,7 @@ namespace FTAnalyzer
         void BtnUnrecognisedCensusRef_Click(object sender, EventArgs e) =>
             ShowCensusRefFacts(CensusReference.ReferenceStatus.UNRECOGNISED, CreateIndividualCensusFilter(true, txtCensusSurname.Text, chkAnyCensusYear.Checked));
 
+        [SupportedOSPlatform("windows")]
         void BtnReportUnrecognised_Click(object sender, EventArgs e)
         {
             IEnumerable<string> unrecognisedResults = ft.UnrecognisedCensusReferences();
@@ -2866,6 +2892,7 @@ namespace FTAnalyzer
                 MessageBox.Show("No unrecognised census references found.", "FTAnalyzer");
         }
 
+        [SupportedOSPlatform("windows")]
         void SaveUnrecognisedDataFile(IEnumerable<string> unrecognisedResults, IEnumerable<string> missingResults, IEnumerable<string> notesResults,
                                       string unrecognisedFilename, string privateWarning)
         {
@@ -3381,6 +3408,7 @@ namespace FTAnalyzer
             await Analytics.TrackAction(Analytics.MainFormAction, Analytics.TodayClickedEvent).ConfigureAwait(true);
         }
 
+        [SupportedOSPlatform("windows")]
         void RbTodayMonth_CheckedChanged(object sender, EventArgs e)
         {
             try
@@ -3393,6 +3421,7 @@ namespace FTAnalyzer
             }
         }
 
+        [SupportedOSPlatform("windows")]
         void RbTodaySingle_CheckedChanged(object sender, EventArgs e)
         {
             try
@@ -3407,6 +3436,7 @@ namespace FTAnalyzer
 
         async void BtnUpdateTodaysEvents_Click(object sender, EventArgs e) => await ShowTodaysEvents().ConfigureAwait(true);
 
+        [SupportedOSPlatform("windows")]
         void NudToday_ValueChanged(object sender, EventArgs e)
         {
             try
@@ -3420,6 +3450,7 @@ namespace FTAnalyzer
         }
         #endregion
 
+        [SupportedOSPlatform("windows")]
         public void SetFactTypeList(CheckedListBox ckbFactSelect, CheckedListBox ckbFactExclude, Predicate<ExportFact> filter)
         {
             List<string> factTypes = ft.AllExportFacts.Filter(filter).Select(x => x.FactType).Distinct().ToList();
@@ -3449,6 +3480,7 @@ namespace FTAnalyzer
 
         #region Load CSV Location Data
 
+        [SupportedOSPlatform("windows")]
         public static void LoadLocationData(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
         {
             string csvFilename = string.Empty;
@@ -3545,6 +3577,7 @@ namespace FTAnalyzer
         }
         #endregion
 
+        [SupportedOSPlatform("windows")]
         void LoadLocations(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
         {
             DialogResult result = MessageBox.Show("It is recommended you backup your Geocoding database first.\nDo you want to backup now?", "FTAnalyzer", MessageBoxButtons.YesNoCancel);
@@ -3666,6 +3699,7 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
+        [SupportedOSPlatform("windows")]
         void MnuJSON_Click(object sender, EventArgs e)
         {
             HourGlass(true);
@@ -3753,6 +3787,7 @@ namespace FTAnalyzer
             SetShowFactsButton();
         }
 
+        [SupportedOSPlatform("windows")]
         async void MnuGoogleMyMaps_Click(object sender, EventArgs e)
         {
             try
