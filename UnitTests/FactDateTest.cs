@@ -62,7 +62,9 @@ namespace Testing
             _ = BasicDates();
             _ = AlternateDateFormats();
 
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
             FactDate target = new(null);
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
             Assert.AreEqual(target, UNKNOWN_DATE);
 
             target = new("");

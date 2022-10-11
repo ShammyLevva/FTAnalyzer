@@ -64,6 +64,7 @@ namespace Testing
             USCensusTest("Microfilm T9 Roll 1337 State Utah County Salt Lake ED 57 Page 272B Dwelling Number 186 Family 191", CensusDate.USCENSUS1880, "1337", "57", "272B");
             USCensusTest("Microfilm M432 Roll 1337 State Utah County Salt Lake ED 57 Page 272B Dwelling Number 186 Family 191", CensusDate.USCENSUS1850, "1337", "57", "272B");
             USCensusTest("Microfilm M19 Roll 1337 State Utah County Salt Lake ED 57 Page 272B Dwelling Number 186 Family 191", CensusDate.USCENSUS1830, "1337", "57", "272B");
+            USCensusTest("Year 1900 Census Rochester Ward 9 Monroe New York Page 5 ED 0067 FHL microfilm", CensusDate.USCENSUS1900, "", "0067", "5");
         }
 
         [TestMethod]

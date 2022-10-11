@@ -1,8 +1,5 @@
 ﻿using FTAnalyzer;
-using FTAnalyzer.Windows.Properties;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.IO;
+using FTAnalyzer.Properties;
 
 namespace Testing
 {
@@ -12,11 +9,8 @@ namespace Testing
     [TestClass]
     public class FactLocationTest
     {
-        public FactLocationTest()
-        {
-        }
 
-        private TestContext testContextInstance;
+        private TestContext? testContextInstance;
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -24,14 +18,10 @@ namespace Testing
         ///</summary>
         public TestContext TestContext
         {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
+#pragma warning disable CS8603 // Possible null reference return.
+            get => testContextInstance;
+#pragma warning restore CS8603 // Possible null reference return.
+            set => testContextInstance = value;
         }
 
         #region Additional test attributes
