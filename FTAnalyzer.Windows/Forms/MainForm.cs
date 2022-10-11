@@ -95,7 +95,7 @@ namespace FTAnalyzer
                     string webData = client.GetStringAsync("https://github.com/ShammyLevva/FTAnalyzer/releases").Result;
                     doc.LoadHtml(webData);
                 }
-                HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//div/div/h1/a");
+                HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//div/section/h2");
                 string webVersion = versionNode.InnerText.ToUpper().Replace("VERSION", "").Trim();
                 string thisVersion = VERSION;
                 if (VERSION.Contains("-beta"))
@@ -117,6 +117,7 @@ namespace FTAnalyzer
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
+                MessageBox.Show("Unable to check website for new version please check https://github.com/ShammyLevva/FTAnalyzer/releases to see if you are running the latest version.", "FTAnalyzer");
             }
         }
         void SetupFonts()
