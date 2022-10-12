@@ -31,11 +31,9 @@ namespace FTAnalyzer.Forms
             RecordCount = 0;
             CensusDone = censusDone;
             string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
-            if (defaultProvider == null)
-                defaultProvider = "FamilySearch";
+            defaultProvider ??= "FamilySearch";
             string defaultRegion = (string)Application.UserAppDataRegistry.GetValue("Default Region");
-            if (defaultRegion == null)
-                defaultRegion = ".co.uk";
+            defaultRegion ??= ".co.uk";
             cbCensusSearchProvider.Text = defaultProvider;
             cbRegion.Text = defaultRegion;
             CensusSettingsUI.CompactCensusRefChanged += new EventHandler(RefreshCensusReferences);
@@ -51,10 +49,10 @@ namespace FTAnalyzer.Forms
             SetupDataGridView(CensusDone, individuals);
         }
 
-        List<CensusIndividual> FilterDuplicateIndividuals(List<CensusIndividual> individuals)
+        static List<CensusIndividual> FilterDuplicateIndividuals(List<CensusIndividual> individuals)
         {
             List<CensusIndividual> result = individuals.Filter(i => i.FamilyMembersCount > 1).ToList();
-            HashSet<string> ids = new HashSet<string>(result.Select(i => i.IndividualID));
+            HashSet<string> ids = new(result.Select(i => i.IndividualID));
             foreach (CensusIndividual i in individuals.Filter(i => i.FamilyMembersCount == 1))
                 if (!ids.Contains(i.IndividualID))
                 {
@@ -138,8 +136,8 @@ namespace FTAnalyzer.Forms
                 string currentRowText = "";
                 bool highlighted = true;
 
-                Font boldFont = new Font(dgCensus.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
-                Font regularFont = new Font(dgCensus.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Regular);
+                Font boldFont = new(dgCensus.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
+                Font regularFont = new(dgCensus.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Regular);
                 int sortColumn = dgCensus.SortedColumn.Index;
                 foreach (DataGridViewRow row in dgCensus.Rows)
                 {
@@ -149,7 +147,7 @@ namespace FTAnalyzer.Forms
                         currentRowText = row.Cells[sortColumn].Value.ToString();
                         highlighted = !highlighted;
                     }
-                    DataGridViewCellStyle style = new DataGridViewCellStyle(dgCensus.DefaultCellStyle)
+                    DataGridViewCellStyle style = new(dgCensus.DefaultCellStyle)
                     {
                         BackColor = highlighted ? Color.LightGray : Color.White,
                         ForeColor = (cr.RelationType == Individual.DIRECT || cr.RelationType == Individual.DESCENDANT) ? Color.Red : Color.Black,
@@ -213,7 +211,6 @@ namespace FTAnalyzer.Forms
             FactLocation loc = ds?.CensusLocation;
             if (loc != null)
             {   // Do geo coding stuff
-                GoogleMap frmGoogleMap = new GoogleMap();
                 GoogleMap.ShowLocation(loc, loc.Level);
             }
             Cursor = Cursors.Default;
@@ -226,7 +223,7 @@ namespace FTAnalyzer.Forms
             FactLocation loc = ds?.CensusLocation;
             if (loc != null)
             {   // Do geo coding stuff
-                BingOSMap frmBingMap = new BingOSMap();
+                BingOSMap frmBingMap = new();
                 if (frmBingMap.SetLocation(loc, loc.Level))
                     frmBingMap.Show();
                 else
@@ -243,7 +240,7 @@ namespace FTAnalyzer.Forms
                 FamilyTree ft = FamilyTree.Instance;
                 if (ModifierKeys.Equals(Keys.Shift))
                 {
-                    Facts factForm = new Facts(ds);
+                    Facts factForm = new(ds);
                     MainForm.DisposeDuplicateForms(factForm);
                     factForm.Show();
                 }
@@ -299,7 +296,7 @@ namespace FTAnalyzer.Forms
             if (dgCensus.CurrentRow != null)
             {
                 CensusIndividual ds = (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
-                Facts factForm = new Facts(ds);
+                Facts factForm = new(ds);
                 MainForm.DisposeDuplicateForms(factForm);
                 factForm.Show();
             }
