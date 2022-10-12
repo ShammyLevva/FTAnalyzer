@@ -39,7 +39,7 @@ namespace FTAnalyzer.Forms
                 Top += NativeMethods.TopTaskbarOffset;
                 ft = FamilyTree.Instance;
                 refreshingMenus = false;
-                locations = ft.AllGeocodingLocations;
+                locations = FamilyTree.AllGeocodingLocations;
                 queue = new ConcurrentQueue<FactLocation>();
                 CopyLocation = FactLocation.UNKNOWN_LOCATION;
                 this.outputText = outputText;

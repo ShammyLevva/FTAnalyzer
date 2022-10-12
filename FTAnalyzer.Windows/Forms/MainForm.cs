@@ -314,7 +314,7 @@ namespace FTAnalyzer
             await Task.Run(() => ft.LoadTreeIndividuals(doc, individualProgress, outputText)).ConfigureAwait(true);
             await Task.Run(() => ft.LoadTreeFamilies(doc, familyProgress, outputText)).ConfigureAwait(true);
             await Task.Run(() => ft.LoadTreeRelationships(doc, RelationshipProgress, outputText)).ConfigureAwait(true);
-            await Task.Run(() => ft.CleanUpXML()).ConfigureAwait(true);
+            await Task.Run(() => FamilyTree.CleanUpXML()).ConfigureAwait(true);
             doc = null;
             ft.DocumentLoaded = false;
             timer.Stop();

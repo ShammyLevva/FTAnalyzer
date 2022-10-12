@@ -220,7 +220,7 @@ namespace FTAnalyzer.Forms
                     Individual ind = ft.GetIndividual(person.IndividualID);
                     if (e.ColumnIndex == birthColumnIndex || e.ColumnIndex == birthColumnIndex + 1)
                     {
-                        ft.SearchBMD(FamilyTree.SearchType.BIRTH, ind, ind.BirthDate, ind.BirthLocation, cbBMDSearchProvider.SelectedIndex, cbRegion.Text, null);
+                        FamilyTree.SearchBMD(FamilyTree.SearchType.BIRTH, ind, ind.BirthDate, ind.BirthLocation, cbBMDSearchProvider.SelectedIndex, cbRegion.Text, null);
                     }
                     else if (e.ColumnIndex >= birthColumnIndex + 2 && e.ColumnIndex <= birthColumnIndex + 4)
                     {
@@ -245,11 +245,11 @@ namespace FTAnalyzer.Forms
                             marriageLocation = ind.ThirdMarriageLocation;
                             spouse = ind.ThirdSpouse;
                         }
-                        ft.SearchBMD(FamilyTree.SearchType.MARRIAGE, ind, marriageDate, marriageLocation, cbBMDSearchProvider.SelectedIndex, cbRegion.Text, spouse);
+                        FamilyTree.SearchBMD(FamilyTree.SearchType.MARRIAGE, ind, marriageDate, marriageLocation, cbBMDSearchProvider.SelectedIndex, cbRegion.Text, spouse);
                     }
                     else if (e.ColumnIndex == burialColumnIndex || e.ColumnIndex == burialColumnIndex - 1)
                     {
-                        ft.SearchBMD(FamilyTree.SearchType.DEATH, ind, ind.DeathDate, ind.DeathLocation, cbBMDSearchProvider.SelectedIndex, cbRegion.Text, null);
+                        FamilyTree.SearchBMD(FamilyTree.SearchType.DEATH, ind, ind.DeathDate, ind.DeathLocation, cbBMDSearchProvider.SelectedIndex, cbRegion.Text, null);
                     }
                 }
                 else if (e.ColumnIndex >= 0)

@@ -247,7 +247,7 @@ namespace FTAnalyzer.Forms
                         {
                             try
                             {
-                                ft.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex, cbRegion.Text);
+                                FamilyTree.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex, cbRegion.Text);
                             }
                             catch (CensusSearchException ex)
                             {

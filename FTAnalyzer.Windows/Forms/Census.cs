@@ -251,7 +251,7 @@ namespace FTAnalyzer.Forms
                         int year = CensusDate.StartDate.Year;
                         if (CensusDate == CensusDate.ANYCENSUS)
                             year = ds.CensusDate.BestYear;
-                        ft.SearchCensus(censusCountry, year, ds, cbCensusSearchProvider.SelectedIndex, cbRegion.Text);
+                        FamilyTree.SearchCensus(censusCountry, year, ds, cbCensusSearchProvider.SelectedIndex, cbRegion.Text);
                     }
                     catch (CensusSearchException ex)
                     {
