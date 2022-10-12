@@ -46,7 +46,7 @@ namespace FTAnalyzer.Utilities
         {
             IntPtr hwnd = FindWindow("Shell_TrayWnd", null);
 
-            APPBARDATA abd = new APPBARDATA();
+            APPBARDATA abd = new();
             abd.cbSize = Marshal.SizeOf(abd);
             abd.hWnd = hwnd;
             _ = SHAppBarMessage((int)ABMsg.ABM_GETTASKBARPOS, ref abd);

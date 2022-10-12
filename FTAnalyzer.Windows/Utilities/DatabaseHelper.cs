@@ -409,7 +409,7 @@ namespace FTAnalyzer.Utilities
             {
                 using SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
                 reader.Read();
-                int.TryParse(reader[0].ToString(), out rowcount);
+                _ = int.TryParse(reader[0].ToString(), out rowcount);
             }
             #region update cmd
             using SQLiteCommand updateCmd = new("update geocode set latm=?, longm=?, viewport_x_ne=?, viewport_y_ne=?, viewport_x_sw=?, viewport_y_sw=?  where location = ?", InstanceConnection);
@@ -451,12 +451,12 @@ namespace FTAnalyzer.Utilities
                 {
                     latitude = longitude = viewport_x_ne = viewport_x_sw = viewport_y_ne = viewport_y_sw = 0;
                     string location = reader["location"].ToString();
-                    double.TryParse(reader["latitude"].ToString(), out latitude);
-                    double.TryParse(reader["longitude"].ToString(), out longitude);
-                    double.TryParse(reader["viewport_x_ne"].ToString(), out viewport_x_ne);
-                    double.TryParse(reader["viewport_y_ne"].ToString(), out viewport_y_ne);
-                    double.TryParse(reader["viewport_x_sw"].ToString(), out viewport_x_sw);
-                    double.TryParse(reader["viewport_y_sw"].ToString(), out viewport_y_sw);
+                    _ = double.TryParse(reader["latitude"].ToString(), out latitude);
+                    _ = double.TryParse(reader["longitude"].ToString(), out longitude);
+                    _ = double.TryParse(reader["viewport_x_ne"].ToString(), out viewport_x_ne);
+                    _ = double.TryParse(reader["viewport_y_ne"].ToString(), out viewport_y_ne);
+                    _ = double.TryParse(reader["viewport_x_sw"].ToString(), out viewport_x_sw);
+                    _ = double.TryParse(reader["viewport_y_sw"].ToString(), out viewport_y_sw);
                     Point = new Coordinate(longitude, latitude);
                     NorthEast = new Coordinate(viewport_y_ne, viewport_x_ne); // old viewports had x & y wrong way round
                     SouthWest = new Coordinate(viewport_y_sw, viewport_x_sw); // x is stored as lat y as long
@@ -485,7 +485,7 @@ namespace FTAnalyzer.Utilities
         {
             get
             {
-                Dictionary<string, Tuple<string, string>> results = new Dictionary<string, Tuple<string, string>>();
+                Dictionary<string, Tuple<string, string>> results = new();
 
                 if (InstanceConnection.State != ConnectionState.Open)
                     InstanceConnection.Open();
@@ -575,14 +575,14 @@ namespace FTAnalyzer.Utilities
             {
                 if (reader.Read())
                 {
-                    double.TryParse(reader["latitude"].ToString(), out double latitude);
-                    double.TryParse(reader["longitude"].ToString(), out double longitude);
-                    double.TryParse(reader["latm"].ToString(), out double latm);
-                    double.TryParse(reader["longm"].ToString(), out double longm);
-                    double.TryParse(reader["viewport_x_ne"].ToString(), out double viewport_x_ne);
-                    double.TryParse(reader["viewport_y_ne"].ToString(), out double viewport_y_ne);
-                    double.TryParse(reader["viewport_x_sw"].ToString(), out double viewport_x_sw);
-                    double.TryParse(reader["viewport_y_sw"].ToString(), out double viewport_y_sw);
+                    _ = double.TryParse(reader["latitude"].ToString(), out double latitude);
+                    _ = double.TryParse(reader["longitude"].ToString(), out double longitude);
+                    _ = double.TryParse(reader["latm"].ToString(), out double latm);
+                    _ = double.TryParse(reader["longm"].ToString(), out double longm);
+                    _ = double.TryParse(reader["viewport_x_ne"].ToString(), out double viewport_x_ne);
+                    _ = double.TryParse(reader["viewport_y_ne"].ToString(), out double viewport_y_ne);
+                    _ = double.TryParse(reader["viewport_x_sw"].ToString(), out double viewport_x_sw);
+                    _ = double.TryParse(reader["viewport_y_sw"].ToString(), out double viewport_y_sw);
                     location.Latitude = latitude;
                     location.Longitude = longitude;
                     location.LatitudeM = latm;
@@ -599,7 +599,7 @@ namespace FTAnalyzer.Utilities
                     location.GeocodeStatus = (FactLocation.Geocode)Enum.Parse(typeof(FactLocation.Geocode), reader["geocodestatus"].ToString());
                     location.FoundLocation = reader["foundlocation"].ToString();
                     location.FoundResultType = reader["foundresulttype"].ToString();
-                    int.TryParse(reader["foundlevel"].ToString(), out int foundlevel);
+                    _ = int.TryParse(reader["foundlevel"].ToString(), out int foundlevel);
                     location.FoundLevel = foundlevel;
                 }
             }

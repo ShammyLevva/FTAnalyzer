@@ -53,7 +53,7 @@ namespace FTAnalyzer.Forms
         {
             minGeoCodedYear = FactDate.MAXDATE.Year;
             maxGeoCodedYear = FactDate.MINDATE.Year;
-            List<MapLocation> yearRange = FilterToRelationsIncluded(MapHelper.Instance.AllMapLocations);
+            List<MapLocation> yearRange = FilterToRelationsIncluded(MapHelper.AllMapLocations);
             foreach (MapLocation ml in yearRange)
             {
                 if (ml.Location.IsGeoCoded(false) && ml.FactDate.IsKnown)
@@ -102,7 +102,7 @@ namespace FTAnalyzer.Forms
                 var mh = MapHelper.Instance;
                 if (result == 9999)
                 {
-                    locations = FilterToRelationsIncluded(mh.AllMapLocations);
+                    locations = FilterToRelationsIncluded(MapHelper.AllMapLocations);
                     txtLocations.Text = locations.Count + " Locations in total";
                 }
                 else
