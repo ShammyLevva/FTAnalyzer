@@ -334,7 +334,7 @@ namespace FTAnalyzer.Forms
         {
             bool backColourGrey = false;
             DisplayFact previous = null;
-            foreach (DisplayFact fact in facts)
+            foreach (DisplayFact fact in facts.Cast<DisplayFact>())
             {
                 if (previous != null)
                     if ((CensusRefReport && previous.CensusReference != fact.CensusReference) || (!CensusRefReport && previous.IndividualID != fact.IndividualID))

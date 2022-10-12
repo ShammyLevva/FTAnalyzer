@@ -7,14 +7,14 @@ namespace FTAnalyzer.Utilities
 {
     public class FooterPrintBlock : PrintBlock, IDisposable
     {
-        readonly Font font = new Font("Tahoma", 9, GraphicsUnit.Point);
+        readonly Font font = new("Tahoma", 9, GraphicsUnit.Point);
 
         public override SizeF GetSize(Graphics g, DocumentMetrics metrics) => g.MeasureString("Page X Of Y", font);
 
 
         public override void Draw(System.Drawing.Graphics g, Dictionary<CodeEnum, string> codes)
         {
-            StringFormat format = new StringFormat
+            StringFormat format = new()
             {
                 Trimming = StringTrimming.Word,
                 FormatFlags = StringFormatFlags.NoWrap,

@@ -5,7 +5,7 @@ namespace FTAnalyzer.Utilities
     public class CustomSettings
     {
         readonly Properties.Settings _Settings;
-        Properties.NonGedcomDate _NonGEDCOMDateSettings;
+        readonly Properties.NonGedcomDate _NonGEDCOMDateSettings;
 
         public CustomSettings()
         {
@@ -35,20 +35,17 @@ namespace FTAnalyzer.Utilities
 
         public void Save() { _Settings.Save(); _NonGEDCOMDateSettings.Save(); }
 
-        string SetRegex(NonGEDCOMFormatSelected formatSelected, string regexSeparator)
+        static string SetRegex(NonGEDCOMFormatSelected formatSelected, string regexSeparator)
         {
-            switch(formatSelected)
+            return formatSelected switch
             {
-                case NonGEDCOMFormatSelected.DD_MM_YYYY:
-                    return @"(\d{1,2})" + regexSeparator + @"(\d{1,2})" + regexSeparator + @"(\d{4})";
-                case NonGEDCOMFormatSelected.MM_DD_YYYY:
-                    return @"(\d{1,2})" + regexSeparator + @"(\d{1,2})" + regexSeparator + @"(\d{4})";
-                case NonGEDCOMFormatSelected.YYYY_DD_MM:
-                    return @"(\d{4})" + regexSeparator + @"(\d{1,2})" + regexSeparator + @"(\d{1,2})";
-                case NonGEDCOMFormatSelected.YYYY_MM_DD:
-                    return @"(\d{4})" + regexSeparator + @"(\d{1,2})" + regexSeparator + @"(\d{1,2})";
-            }
-            return string.Empty;
+                NonGEDCOMFormatSelected.DD_MM_YYYY => @"(\d{1,2})" + regexSeparator + @"(\d{1,2})" + regexSeparator + @"(\d{4})",
+                NonGEDCOMFormatSelected.MM_DD_YYYY => @"(\d{1,2})" + regexSeparator + @"(\d{1,2})" + regexSeparator + @"(\d{4})",
+                NonGEDCOMFormatSelected.YYYY_DD_MM => @"(\d{4})" + regexSeparator + @"(\d{1,2})" + regexSeparator + @"(\d{1,2})",
+                NonGEDCOMFormatSelected.YYYY_MM_DD => @"(\d{4})" + regexSeparator + @"(\d{1,2})" + regexSeparator + @"(\d{1,2})",
+                NonGEDCOMFormatSelected.NONE => string.Empty,
+                _ => string.Empty,
+            };
         }
     }
 }
