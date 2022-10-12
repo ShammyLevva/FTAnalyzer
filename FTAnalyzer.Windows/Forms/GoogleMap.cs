@@ -13,53 +13,53 @@ namespace FTAnalyzer.Forms
 {
     public partial class GoogleMap : Form
     {
-        public static string ADMIN1 = "administrative_area_level_1";
-        public static string ADMIN2 = "administrative_area_level_2";
-        public static string ADMIN3 = "administrative_area_level_3";
-        public static string AIRPORT = "airport";
-        public static string AMUSEMENT_PARK = "amusement_park";
-        public static string AQUARIUM = "aquarium";
-        public static string BUS_STATION = "bus_station";
-        public static string CAMPGROUND = "campground";
-        public static string CEMETERY = "cemetery";
-        public static string CHURCH = "church";
-        public static string COLLOQUIAL_AREA = "colloquial_area";
-        public static string COUNTRY = "country";
-        public static string COURTHOUSE = "courthouse";
-        public static string ESTABLISHMENT = "establishment";
-        public static string FINANCE = "finance";
-        public static string FIRE_STATION = "fire_station";
-        public static string HOSPITAL = "hospital";
-        public static string INTERSECTION = "intersection";
-        public static string LIBRARY = "library";
-        public static string LOCALITY = "locality";
-        public static string LODGING = "lodging";
-        public static string MUSEUM = "museum";
-        public static string NATURALFEATURE = "natural_feature";
-        public static string NEIGHBOURHOOD = "neighborhood";
-        public static string OS_FEATURE = "OS Feature";
-        public static string PARK = "park";
-        public static string PLACE_OF_WORSHIP = "place_of_worship";
-        public static string POINT_OF_INTEREST = "point_of_interest";
-        public static string POLICE = "police";
-        public static string POLITICAL = "political";
-        public static string POSTALCODE = "postal_code";
-        public static string POSTALCODEPREFIX = "postal_code_prefix";
-        public static string POSTALTOWN = "postal_town";
-        public static string POST_OFFICE = "post_office";
-        public static string PREMISE = "premise";
-        public static string ROUTE = "route";
-        public static string STREET_ADDRESS = "street_address";
-        public static string STREET_NUMBER = "street_number";
-        public static string SUBLOCALITY = "sublocality";
-        public static string SUBPREMISE = "subpremise";
-        public static string SUBWAY_STATION = "subway_station";
-        public static string TRAIN_STATION = "train_station";
-        public static string TRANSIT_STATION = "transit_station";
-        public static string UNIVERSITY = "university";
-        public static string VETERINARY_CARE = "veterinary_care";
+        public static readonly string ADMIN1 = "administrative_area_level_1";
+        public static readonly string ADMIN2 = "administrative_area_level_2";
+        public static readonly string ADMIN3 = "administrative_area_level_3";
+        public static readonly string AIRPORT = "airport";
+        public static readonly string AMUSEMENT_PARK = "amusement_park";
+        public static readonly string AQUARIUM = "aquarium";
+        public static readonly string BUS_STATION = "bus_station";
+        public static readonly string CAMPGROUND = "campground";
+        public static readonly string CEMETERY = "cemetery";
+        public static readonly string CHURCH = "church";
+        public static readonly string COLLOQUIAL_AREA = "colloquial_area";
+        public static readonly string COUNTRY = "country";
+        public static readonly string COURTHOUSE = "courthouse";
+        public static readonly string ESTABLISHMENT = "establishment";
+        public static readonly string FINANCE = "finance";
+        public static readonly string FIRE_STATION = "fire_station";
+        public static readonly string HOSPITAL = "hospital";
+        public static readonly string INTERSECTION = "intersection";
+        public static readonly string LIBRARY = "library";
+        public static readonly string LOCALITY = "locality";
+        public static readonly string LODGING = "lodging";
+        public static readonly string MUSEUM = "museum";
+        public static readonly string NATURALFEATURE = "natural_feature";
+        public static readonly string NEIGHBOURHOOD = "neighborhood";
+        public static readonly string OS_FEATURE = "OS Feature";
+        public static readonly string PARK = "park";
+        public static readonly string PLACE_OF_WORSHIP = "place_of_worship";
+        public static readonly string POINT_OF_INTEREST = "point_of_interest";
+        public static readonly string POLICE = "police";
+        public static readonly string POLITICAL = "political";
+        public static readonly string POSTALCODE = "postal_code";
+        public static readonly string POSTALCODEPREFIX = "postal_code_prefix";
+        public static readonly string POSTALTOWN = "postal_town";
+        public static readonly string POST_OFFICE = "post_office";
+        public static readonly string PREMISE = "premise";
+        public static readonly string ROUTE = "route";
+        public static readonly string STREET_ADDRESS = "street_address";
+        public static readonly string STREET_NUMBER = "street_number";
+        public static readonly string SUBLOCALITY = "sublocality";
+        public static readonly string SUBPREMISE = "subpremise";
+        public static readonly string SUBWAY_STATION = "subway_station";
+        public static readonly string TRAIN_STATION = "train_station";
+        public static readonly string TRANSIT_STATION = "transit_station";
+        public static readonly string UNIVERSITY = "university";
+        public static readonly string VETERINARY_CARE = "veterinary_care";
 
-        public static ISet<string> RESULT_TYPES = new HashSet<string>(new string[] {
+        public static readonly ISet<string> RESULT_TYPES = new HashSet<string>(new string[] {
             STREET_ADDRESS, ROUTE, COUNTRY, ESTABLISHMENT, ADMIN1, ADMIN2, ADMIN3, LOCALITY,
             SUBLOCALITY, NEIGHBOURHOOD, PREMISE, SUBPREMISE, CEMETERY, HOSPITAL, PLACE_OF_WORSHIP,
             INTERSECTION, POLITICAL, POSTALCODE, POSTALTOWN, POSTALCODEPREFIX, NATURALFEATURE,
@@ -69,7 +69,7 @@ namespace FTAnalyzer.Forms
             CAMPGROUND, LODGING, VETERINARY_CARE, AMUSEMENT_PARK, OS_FEATURE
         });
 
-        public static ISet<string> PLACES = new HashSet<string>(new string[] {
+        public static readonly ISet<string> PLACES = new HashSet<string>(new string[] {
             PREMISE, STREET_ADDRESS, CEMETERY, HOSPITAL, PLACE_OF_WORSHIP, ROUTE,
             INTERSECTION, ESTABLISHMENT, SUBPREMISE, NATURALFEATURE,PARK, AIRPORT,
             POINT_OF_INTEREST, STREET_NUMBER, BUS_STATION, CHURCH, TRANSIT_STATION,
@@ -93,9 +93,9 @@ namespace FTAnalyzer.Forms
             catch (Exception) { }
         }
 
-        public void ShowLocation(FactLocation loc, int level)
+        public static void ShowLocation(FactLocation loc, int level)
         {
-            if (loc is object && loc.IsGeoCoded(false))
+            if (loc is not null && loc.IsGeoCoded(false))
             {
                 string URL = $"https://www.google.com/maps/@{loc.Latitude},{loc.Longitude},{level}z";
                 SpecialMethods.VisitWebsite(URL);
@@ -127,7 +127,7 @@ namespace FTAnalyzer.Forms
         {
             if (loc is null) return FactLocation.UNKNOWN;
             bool UK = loc.IsUnitedKingdom;
-            HashSet<string> types = new HashSet<string>(locationTypes);
+            HashSet<string> types = new(locationTypes);
             foreach (string type in types)
                 if (PLACES.Contains(type))
                     return FactLocation.PLACE;
@@ -199,7 +199,7 @@ namespace FTAnalyzer.Forms
                 request.ReadWriteTimeout = 10000;
                 request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
                 request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(GeoResponse));
+                DataContractJsonSerializer serializer = new(typeof(GeoResponse));
                 if (request.Proxy is WebProxy proxy)
                 {
                     string proxyuri = proxy.GetProxy(request.RequestUri).ToString();
@@ -209,10 +209,8 @@ namespace FTAnalyzer.Forms
                         Credentials = CredentialCache.DefaultCredentials
                     };
                 }
-                using (Stream stream = request.GetResponse().GetResponseStream())
-                {
-                    res = (GeoResponse)serializer.ReadObject(stream);
-                }
+                using Stream stream = request.GetResponse().GetResponseStream();
+                res = (GeoResponse)serializer.ReadObject(stream);
             }
             catch (WebException ex)
             {
@@ -322,7 +320,7 @@ namespace FTAnalyzer.Forms
                                 "Google Geocoding timing out. Possibly exceeded max GeoLocations for today.\nConsider getting your own FREE Google API Key for 40,000 lookups a day. See Help Menu.\n" :
                                 "Max Google Timeout - Limit Exceeded.\n";
             OnWaitingForGoogle(message);
-            GeoResponse response = new GeoResponse
+            GeoResponse response = new()
             {
                 Status = "Maxed"
             };
@@ -331,7 +329,7 @@ namespace FTAnalyzer.Forms
 
         public static void GenerateKML(string filename, List<ExportFactsAtLocation> locations)
         {
-            using(StreamWriter output = new StreamWriter(new FileStream(filename, FileMode.Create, FileAccess.Write), Encoding.UTF8))
+            using(StreamWriter output = new(new FileStream(filename, FileMode.Create, FileAccess.Write), Encoding.UTF8))
             {
                 output.WriteLine(@"<?xml version=""1.0"" encoding=""UTF-8""?>");
                 output.WriteLine(@"<kml xmlns=""http://www.opengis.net/kml/2.2"">");
@@ -369,7 +367,7 @@ namespace FTAnalyzer.Forms
             if (length > 5000000)
             {
                 string zipFilename = filename.Replace(".kml", ".kmz");
-                ZipFile zip = new ZipFile(zipFilename);
+                ZipFile zip = new(zipFilename);
                 zip.AddFile(filename);
                 zip.Save();
             }

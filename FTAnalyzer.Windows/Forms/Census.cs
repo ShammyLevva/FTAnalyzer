@@ -214,7 +214,7 @@ namespace FTAnalyzer.Forms
             if (loc != null)
             {   // Do geo coding stuff
                 GoogleMap frmGoogleMap = new GoogleMap();
-                frmGoogleMap.ShowLocation(loc, loc.Level);
+                GoogleMap.ShowLocation(loc, loc.Level);
             }
             Cursor = Cursors.Default;
         }

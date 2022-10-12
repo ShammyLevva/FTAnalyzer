@@ -204,10 +204,8 @@ namespace FTAnalyzer.Forms
             {
                 IFormatter formatter = new BinaryFormatter();
                 string file = Path.Combine(GeneralSettings.Default.SavePath, "IgnoreList.xml");
-                using (Stream stream = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.None))
-                {
-                    formatter.Serialize(stream, IgnoreList);
-                }
+                using Stream stream = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.None);
+                formatter.Serialize(stream, IgnoreList);
             }
             catch (Exception )
             {
@@ -225,10 +223,8 @@ namespace FTAnalyzer.Forms
                 string file = Path.Combine(GeneralSettings.Default.SavePath, "IgnoreList.xml");
                 if (File.Exists(file))
                 {
-                    using (Stream stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
-                    {
-                        IgnoreList = (List<string>)formatter.Deserialize(stream);
-                    }
+                    using Stream stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read);
+                    IgnoreList = (List<string>)formatter.Deserialize(stream);
                 }
             }
             catch (Exception )
@@ -421,12 +417,12 @@ namespace FTAnalyzer.Forms
                 DisplayFact f = dgFacts.Rows[e.RowIndex].DataBoundItem as DisplayFact;
                 if (f.Fact.FactType == Fact.REPORT)
                 {
-                    Facts person = new Facts(f.Ind);
+                    Facts person = new(f.Ind);
                     person.Show();
                 }
                 else
                 {
-                    SourcesForm sourceForm = new SourcesForm(f);
+                    SourcesForm sourceForm = new(f);
                     sourceForm.Show();
                 }
             }
