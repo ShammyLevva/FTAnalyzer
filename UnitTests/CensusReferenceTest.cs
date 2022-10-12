@@ -65,6 +65,7 @@ namespace Testing
             USCensusTest("Microfilm M432 Roll 1337 State Utah County Salt Lake ED 57 Page 272B Dwelling Number 186 Family 191", CensusDate.USCENSUS1850, "1337", "57", "272B");
             USCensusTest("Microfilm M19 Roll 1337 State Utah County Salt Lake ED 57 Page 272B Dwelling Number 186 Family 191", CensusDate.USCENSUS1830, "1337", "57", "272B");
             USCensusTest("Year 1900 Census Rochester Ward 9 Monroe New York Page 5 ED 0067 FHL microfilm", CensusDate.USCENSUS1900, "", "0067", "5");
+            USCensusTest("Year 1930 Census Trenton Mercer New Jersey Page 1B ED 0054 FHL", CensusDate.USCENSUS1930, "", "0054", "1B");
         }
 
         [TestMethod]
@@ -145,6 +146,7 @@ namespace Testing
             CanadianCensus("1921 RG31 Canada Census Item 4360292 013/52/15/01", CensusDate.CANADACENSUS1921, "013", "52", "01", "15");
             CanadianCensus("19210601 Canada Census RG31-013-52-015-01 - North Vancouver - Abraham COLEY", CensusDate.CANADACENSUS1921, "013", "52", "01", "015");
             CanadianCensus("19110601 Census RG31 District 61 Sub-DIstrict 28 Family 66 Page 6 - Canada Ontario - Elizabeth Harriet DAVEY", CensusDate.CANADACENSUS1911, "61", "28", "6", "66");
+            CanadianCensus("Year 1911 Census 65 - Little Current Algoma East Ontario Page 18 Family 159 ", CensusDate.CANADACENSUS1911, "", "18", "159");
             //Canadian1881Census("C_13266; Page 67; Family 301", "132", "C", "67", "301");
             //CanadianCensus("Event Place: Dumfries South, Brant North, Ontario, Canada\nDistrict Number: 160\nSub-District: C\nDivision: 2\nPage Number: 1\nFamily Number: 3\nAffiliate Film Number: C-13264", , CensusDate.CANADACENSUS1881, "C_13184", "1", "3");
         }
