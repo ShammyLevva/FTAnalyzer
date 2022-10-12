@@ -40,8 +40,8 @@ namespace FTAnalyzer.Forms.Controls
                 progressBar.Maximum = FamilyTree.Instance.AllDisplayPlaces.Count;
                 mainformTreeRootNode = new TreeNode();
                 placesTreeRootNode = new TreeNode();
-                Font regularFont = new Font(defaultFont, FontStyle.Regular);
-                Font boldFont = new Font(defaultFont, FontStyle.Bold);
+                Font regularFont = new(defaultFont, FontStyle.Regular);
+                Font boldFont = new(defaultFont, FontStyle.Bold);
                 foreach (FactLocation location in FamilyTree.Instance.AllDisplayPlaces)
                 {
                     string[] parts = location.GetParts();

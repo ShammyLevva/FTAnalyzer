@@ -30,6 +30,8 @@
                     return loc.GEDCOMLoaded;
                 case nameof(IDisplayLocation.GEDCOMLocation):
                     return loc.GEDCOMLocation;
+                default:
+                    break;
             }
             return null;
         }

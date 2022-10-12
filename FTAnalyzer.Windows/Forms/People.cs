@@ -28,8 +28,8 @@ namespace FTAnalyzer.Forms
                 famReportFormHelper = new ReportFormHelper(this, Text, dgFamilies, ResetTable, "People");
                 ExtensionMethods.DoubleBuffered(dgIndividuals, true);
                 ExtensionMethods.DoubleBuffered(dgFamilies, true);
-                boldFont = new Font(dgFamilies.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
-                normalFont = new Font(dgFamilies.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Regular);
+                boldFont = new(dgFamilies.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
+                normalFont = new(dgFamilies.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Regular);
                 SetSaveButtonsStatus(false);
             }
             catch (Exception) { }

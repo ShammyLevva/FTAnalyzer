@@ -90,7 +90,7 @@ namespace FTAnalyzer.Forms
                 birthdayEffect.Sort();
                 exactDates.Sort();
                 int beIndex = 0, edIndex = 0, beItem2 = 0, edItem2 = 0;
-                List<Tuple<string, string, string>> result = new List<Tuple<string, string, string>>();
+                List<Tuple<string, string, string>> result = new();
                 for (int month = 1; month <= 12; month++)
                 {
                     beItem2 = edItem2 = 0;
@@ -133,7 +133,7 @@ namespace FTAnalyzer.Forms
                 {
                     if (dgStatistics.Rows[e.RowIndex].DataBoundItem is DisplayGreatStats row)
                     {
-                        People form = new People();
+                        People form = new();
                         form.ListRelationToRoot(row.RelationToRoot);
                         form.Show();
                     }
@@ -142,7 +142,7 @@ namespace FTAnalyzer.Forms
                 {
                     if (dgStatistics.Rows[e.RowIndex].DataBoundItem is Tuple<string, int> row)
                     {
-                        People form = new People();
+                        People form = new();
                         form.ListRelationToRoot(row.Item1);
                         form.Show();
                     }
@@ -151,10 +151,10 @@ namespace FTAnalyzer.Forms
                 {
                     if (dgStatistics.Rows[e.RowIndex].DataBoundItem is Tuple<string, string, string> row)
                     {
-                        People form = new People();
+                        People form = new();
                         bool filter(Individual x) => x.BirthdayEffect && x.BirthMonth == row.Item1;
                         List<Individual> individuals = FamilyTree.Instance.AllIndividuals.Filter(filter).ToList();
-                        form.SetIndividuals(individuals, $"Indiviudals who died within 15 days of their birthday in {row.Item1.Substring(5)}");
+                        form.SetIndividuals(individuals, $"Indiviudals who died within 15 days of their birthday in {row.Item1[5..]}");
                         form.Show();
                     }
                 }

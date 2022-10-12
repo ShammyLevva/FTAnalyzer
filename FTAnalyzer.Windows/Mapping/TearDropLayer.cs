@@ -1,16 +1,8 @@
 ﻿using NetTopologySuite.Geometries;
-using SharpMap;
 using SharpMap.Data;
 using SharpMap.Data.Providers;
 using SharpMap.Layers;
 using SharpMap.Styles;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 
 //  http://thydzik.com/thydzikGoogleMap/markerlink.php?text=1&color=5680FC - sets up colour teardrops
 
@@ -21,7 +13,8 @@ namespace FTAnalyzer.Mapping
         public FeatureDataTable TearDropLocations { get; private set; }
         public Image Icon { get; private set; }
         
-        public static string RED = "Teardrop_Red.png", BLACK = "Teardrop_Black.png", LIGHT_GREEN = "Teardrop_LightGreen.png", GREY = "Grey";
+        public static readonly string RED = "Teardrop_Red.png", BLACK = "Teardrop_Black.png", 
+                                      LIGHT_GREEN = "Teardrop_LightGreen.png", GREY = "Grey";
 
         public TearDropLayer(string title) : base(title)
         {
@@ -31,11 +24,11 @@ namespace FTAnalyzer.Mapping
             TearDropLocations.Columns.Add("ViewPort", typeof(Envelope));
             TearDropLocations.Columns.Add("Colour", typeof(string));
 
-            GeometryFeatureProvider TearDropLocationGFP = new GeometryFeatureProvider(TearDropLocations);
+            GeometryFeatureProvider TearDropLocationGFP = new(TearDropLocations);
             this.DataSource = TearDropLocationGFP;
 
-            Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
-            VectorStyle birth = new VectorStyle
+            Dictionary<string, IStyle> styles = new();
+            VectorStyle birth = new()
             {
                 PointColor = new SolidBrush(Color.Red),
                 PointSize = 8,
@@ -44,7 +37,7 @@ namespace FTAnalyzer.Mapping
             };
             styles.Add(RED, birth);
 
-            VectorStyle death = new VectorStyle
+            VectorStyle death = new()
             {
                 PointColor = new SolidBrush(Color.Black),
                 PointSize = 8,
@@ -53,7 +46,7 @@ namespace FTAnalyzer.Mapping
             };
             styles.Add(BLACK, death);
 
-            VectorStyle selected = new VectorStyle
+            VectorStyle selected = new()
             {
                 PointColor = new SolidBrush(Color.LightGreen),
                 PointSize = 8,
@@ -62,7 +55,7 @@ namespace FTAnalyzer.Mapping
             };
             styles.Add(LIGHT_GREEN, selected);
 
-            VectorStyle point = new VectorStyle
+            VectorStyle point = new()
             {
                 PointColor = new SolidBrush(Color.DarkGray),
                 PointSize = 6
@@ -80,19 +73,19 @@ namespace FTAnalyzer.Mapping
         public void AddFeatureDataRows(Individual ind)
         {
             if (ind is null) return;
-            foreach (DisplayFact f in ind.AllGeocodedFacts)
+            foreach (DisplayFact f in ind.AllGeocodedFacts.Cast<DisplayFact>())
             {
-                MapLocation ml = new MapLocation(ind, f.Fact, f.FactDate);
+                MapLocation ml = new(ind, f.Fact, f.FactDate);
                 AddFeatureDataRow(f, ml, GREY);
             }
             if (ind.BirthFact != null)
             {
-                MapLocation birth = new MapLocation(ind, ind.BirthFact, ind.BirthDate);
+                MapLocation birth = new(ind, ind.BirthFact, ind.BirthDate);
                 AddFeatureDataRow(null, birth, RED);
             }
             if (ind.DeathFact != null)
             {
-                MapLocation death = new MapLocation(ind, ind.DeathFact, ind.DeathDate);
+                MapLocation death = new(ind, ind.DeathFact, ind.DeathDate);
                 AddFeatureDataRow(null, death, BLACK);
             }
         }
@@ -104,7 +97,7 @@ namespace FTAnalyzer.Mapping
             foreach (DataGridViewRow row in rows)
             {
                 DisplayFact dispFact = row.DataBoundItem as DisplayFact;
-                MapLocation ml = new MapLocation(dispFact.Ind, dispFact.Fact, dispFact.FactDate);
+                MapLocation ml = new(dispFact.Ind, dispFact.Fact, dispFact.FactDate);
                 AddFeatureDataRow(dispFact, ml, LIGHT_GREEN);
             }
         }

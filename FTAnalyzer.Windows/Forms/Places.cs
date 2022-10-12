@@ -73,12 +73,12 @@ namespace FTAnalyzer.Forms
             {
                 clusters.Clear();
                 dgFacts.DataSource = null;
-                List<IDisplayFact> displayFacts = new List<IDisplayFact>();
-                List<Individual> list = new List<Individual>();
-                List<Tuple<FactLocation, int>> locations = new List<Tuple<FactLocation, int>>();
+                List<IDisplayFact> displayFacts = new();
+                List<Individual> list = new();
+                List<Tuple<FactLocation, int>> locations = new();
                 foreach (TreeNode node in tvPlaces.SelectedNodes)
                 {
-                    Tuple<FactLocation, int> location = new Tuple<FactLocation, int>((FactLocation)node.Tag, node.Level);
+                    Tuple<FactLocation, int> location = new((FactLocation)node.Tag, node.Level);
                     list.AddUnique(ft.GetIndividualsAtLocation(location.Item1, location.Item2));
                     locations.Add(location);
                 }
@@ -93,14 +93,14 @@ namespace FTAnalyzer.Forms
                 pbPlaces.Maximum = list.Count;
                 foreach (Individual ind in list)
                 {
-                    foreach (DisplayFact dispfact in ind.AllGeocodedFacts)
+                    foreach (DisplayFact dispfact in ind.AllGeocodedFacts.Cast<DisplayFact>())
                     {
                         foreach (Tuple<FactLocation, int> location in locations)
                         {
                             if (dispfact.Location.CompareTo(location.Item1, location.Item2) == 0)
                             {
                                 displayFacts.Add(dispfact);
-                                MapLocation loc = new MapLocation(ind, dispfact.Fact, dispfact.FactDate);
+                                MapLocation loc = new(ind, dispfact.Fact, dispfact.FactDate);
                                 loc.AddFeatureDataRow(clusters.FactLocations);
                                 break;
                             }
@@ -193,7 +193,7 @@ namespace FTAnalyzer.Forms
                 FactLocation location = e.Node.Tag as FactLocation;
                 if (location != null)
                 {
-                    People frmInd = new People();
+                    People frmInd = new();
                     frmInd.SetLocation(location, e.Node.Level);
                     MainForm.DisposeDuplicateForms(frmInd);
                     frmInd.Show();
@@ -272,14 +272,14 @@ namespace FTAnalyzer.Forms
         void MapBox1_MapQueried(FeatureDataTable data)
         {
             Cursor = Cursors.WaitCursor;
-            List<MapLocation> locations = new List<MapLocation>();
+            List<MapLocation> locations = new();
             foreach (FeatureDataRow row in data)
             {
                 IList<FeatureDataRow> features = (List<FeatureDataRow>)row["Features"];
                 foreach (FeatureDataRow feature in features)
                     locations.Add((MapLocation)feature["MapLocation"]);
             }
-            MapIndividuals ind = new MapIndividuals(locations, null, this);
+            MapIndividuals ind = new(locations, null, this);
             ind.Show();
             Cursor = Cursors.Default;
 

@@ -167,7 +167,7 @@ namespace FTAnalyzer.Mapping
                         LabelStyle style = new LabelStyle
                         {
                             ForeColor = Color.DarkRed,
-                            Font = new Font(FontFamily.GenericSerif, 14, FontStyle.Bold),
+                            Font = new(FontFamily.GenericSerif, 14, FontStyle.Bold),
                             HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
                             VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Middle,
                             CollisionDetection = true,

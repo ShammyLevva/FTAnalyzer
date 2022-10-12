@@ -18,7 +18,7 @@ namespace FTAnalyzer.Forms
             dgSources.AutoGenerateColumns = false;
             ExtensionMethods.DoubleBuffered(dgSources, true);
             reportFormHelper = new ReportFormHelper(this, this.Text, dgSources, this.ResetTable, "Sources");
-            if (fact is object) // checks for not null 
+            if (fact is not null) // checks for not null 
                 AddSources(fact);
         }
 
@@ -60,7 +60,7 @@ namespace FTAnalyzer.Forms
             if(e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
                 FactSource source = (FactSource)dgSources.CurrentRow.DataBoundItem;
-                Facts factForm = new Facts(source);
+                Facts factForm = new(source);
                 MainForm.DisposeDuplicateForms(factForm);
                 factForm.Show();
             }

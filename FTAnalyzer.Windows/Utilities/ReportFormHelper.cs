@@ -86,7 +86,7 @@ namespace FTAnalyzer
             parent.Cursor = Cursors.WaitCursor;
             ListtoDataTableConvertor convertor = new();
             SortableBindingList<T> gridDatasource = ReportGrid.DataSource as SortableBindingList<T>;
-            using (DataTable dt = convertor.ToDataTable(gridDatasource.ToList(), shown))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(gridDatasource.ToList(), shown))
                 ExportToExcel.Export(dt);
             parent.Cursor = Cursors.Default;
         }
@@ -97,7 +97,7 @@ namespace FTAnalyzer
                 return;
             parent.Cursor = Cursors.WaitCursor;
             ListtoDataTableConvertor convertor = new();
-            using (DataTable dt = convertor.ToDataTable(list))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list))
                 ExportToExcel.Export(dt);
             parent.Cursor = Cursors.Default;
         }

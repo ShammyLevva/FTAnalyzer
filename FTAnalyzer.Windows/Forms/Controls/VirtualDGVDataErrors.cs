@@ -28,6 +28,8 @@ namespace FTAnalyzer.Forms.Controls
                     return err.Forenames;
                 case nameof(IDisplayDataError.Surname):
                     return err.Surname;
+                default:
+                    break;
             }
             return null;
         }

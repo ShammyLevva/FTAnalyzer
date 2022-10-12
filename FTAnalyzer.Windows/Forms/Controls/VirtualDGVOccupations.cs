@@ -4,14 +4,12 @@
     {
         protected override object GetValueFor(IDisplayOccupation occ, string propertyName)
         {
-            switch (propertyName)
+            return propertyName switch
             {
-                case nameof(IDisplayOccupation.Occupation):
-                    return occ.Occupation;
-                case nameof(IDisplayOccupation.Count):
-                    return occ.Count;
-            }
-            return null;
+                nameof(IDisplayOccupation.Occupation) => occ.Occupation,
+                nameof(IDisplayOccupation.Count) => occ.Count,
+                _ => null,
+            };
         }
     }
 }

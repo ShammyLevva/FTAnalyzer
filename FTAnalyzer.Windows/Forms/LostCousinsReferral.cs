@@ -20,8 +20,8 @@ namespace FTAnalyzer.Forms
             dgLCReferrals.AutoGenerateColumns = false;
             ExtensionMethods.DoubleBuffered(dgLCReferrals, true);
             CensusSettingsUI.CompactCensusRefChanged += new EventHandler(RefreshCensusReferences);
-            Predicate<Individual> lostCousinsFact = new Predicate<Individual>(x => x.HasLostCousinsFact);
-            List<Individual> lostCousinsFacts = ft.AllIndividuals.Filter(lostCousinsFact).ToList<Individual>();
+            Predicate<Individual> lostCousinsFact = new(x => x.HasLostCousinsFact);
+            List<Individual> lostCousinsFacts = ft.AllIndividuals.Filter(lostCousinsFact).ToList();
             referrals = new List<ExportReferrals>();
             foreach (Individual ind in lostCousinsFacts)
             {

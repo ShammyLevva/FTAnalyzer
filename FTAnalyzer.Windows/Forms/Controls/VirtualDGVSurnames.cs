@@ -4,18 +4,14 @@
     {
         protected override object GetValueFor(IDisplaySurnames occ, string propertyName)
         {
-            switch (propertyName)
+            return propertyName switch
             {
-                case nameof(IDisplaySurnames.Surname):
-                    return occ.Surname;
-                case nameof(IDisplaySurnames.Individuals):
-                    return occ.Individuals;
-                case nameof(IDisplaySurnames.Families):
-                    return occ.Families;
-                case nameof(IDisplaySurnames.Marriages):
-                    return occ.Marriages;
-            }
-            return null;
+                nameof(IDisplaySurnames.Surname) => occ.Surname,
+                nameof(IDisplaySurnames.Individuals) => occ.Individuals,
+                nameof(IDisplaySurnames.Families) => occ.Families,
+                nameof(IDisplaySurnames.Marriages) => occ.Marriages,
+                _ => null,
+            };
         }
     }
 }

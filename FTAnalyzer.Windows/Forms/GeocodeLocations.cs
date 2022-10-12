@@ -46,7 +46,7 @@ namespace FTAnalyzer.Forms
                 mnuPasteLocation.Enabled = false;
                 dgLocations.AutoGenerateColumns = false;
                 reportFormHelper = new ReportFormHelper(this, this.Text, dgLocations, this.ResetTable, "Geocode Locations");
-                italicFont = new Font(dgLocations.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Italic);
+                italicFont = new(dgLocations.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Italic);
                 reportFormHelper.LoadColumnLayout("GeocodeLocationsColumns.xml");
                 mnuGoogleGeocodeLocations.Enabled = !ft.Geocoding; // disable menu if already geocoding
                 mnuEditLocation.Enabled = !ft.Geocoding;

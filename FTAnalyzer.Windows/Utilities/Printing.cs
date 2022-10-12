@@ -25,7 +25,7 @@ namespace FTAnalyzer.Utilities
                 string Line = null;
                 Font PrintFont = rtb.Font;
                 if (PrintFont.SizeInPoints < 11)
-                    PrintFont = new Font(PrintFont.FontFamily, 11f);
+                    PrintFont = new(PrintFont.FontFamily, 11f);
                 int maxWidth = e.MarginBounds.Right - e.MarginBounds.Left;
                 int maxHeight = e.MarginBounds.Bottom - e.MarginBounds.Top;
                 float fontHeight = PrintFont.GetHeight(e.Graphics);

@@ -4,38 +4,24 @@
     {
         protected override object GetValueFor(IDisplayFamily fam, string propertyName)
         {
-            switch (propertyName)
+            return propertyName switch
             {
-                case nameof(IDisplayFamily.FamilyID):
-                    return fam.FamilyID;
-                case nameof(IDisplayFamily.HusbandID):
-                    return fam.HusbandID;
-                case nameof(IDisplayFamily.Husband):
-                    return fam.Husband;
-                case nameof(IDisplayFamily.WifeID):
-                    return fam.WifeID;
-                case nameof(IDisplayFamily.Wife):
-                    return fam.Wife;
-                case nameof(IDisplayFamily.Marriage):
-                    return fam.Marriage;
-                case nameof(IDisplayFamily.Location):
-                    return fam.Location;
-                case nameof(IDisplayFamily.Children):
-                    return fam.Children;
-                case nameof(IDisplayFamily.FamilySize):
-                    return fam.FamilySize;
-                case nameof(IDisplayFamily.HusbandSurname):
-                    return fam.HusbandSurname;
-                case nameof(IDisplayFamily.HusbandForenames):
-                    return fam.HusbandForenames;
-                case nameof(IDisplayFamily.WifeSurname):
-                    return fam.WifeSurname;
-                case nameof(IDisplayFamily.WifeForenames):
-                    return fam.WifeForenames;
-                case nameof(IDisplayFamily.MaritalStatus):
-                    return fam.MaritalStatus;
-            }
-            return null;
+                nameof(IDisplayFamily.FamilyID) => fam.FamilyID,
+                nameof(IDisplayFamily.HusbandID) => fam.HusbandID,
+                nameof(IDisplayFamily.Husband) => fam.Husband,
+                nameof(IDisplayFamily.WifeID) => fam.WifeID,
+                nameof(IDisplayFamily.Wife) => fam.Wife,
+                nameof(IDisplayFamily.Marriage) => fam.Marriage,
+                nameof(IDisplayFamily.Location) => fam.Location,
+                nameof(IDisplayFamily.Children) => fam.Children,
+                nameof(IDisplayFamily.FamilySize) => fam.FamilySize,
+                nameof(IDisplayFamily.HusbandSurname) => fam.HusbandSurname,
+                nameof(IDisplayFamily.HusbandForenames) => fam.HusbandForenames,
+                nameof(IDisplayFamily.WifeSurname) => fam.WifeSurname,
+                nameof(IDisplayFamily.WifeForenames) => fam.WifeForenames,
+                nameof(IDisplayFamily.MaritalStatus) => fam.MaritalStatus,
+                _ => null,
+            };
         }
     }
 }

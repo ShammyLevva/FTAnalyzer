@@ -9,7 +9,7 @@ namespace FTAnalyzer.Mapping
     {
         private static ProjectedCoordinateSystem GetEPSG900913(CoordinateSystemFactory csFact)
         {
-            List<ProjectionParameter> parameters = new List<ProjectionParameter>
+            List<ProjectionParameter> parameters = new()
             {
                 new ProjectionParameter("semi_major", 6378137.0),
                 new ProjectionParameter("semi_minor", 6378137.0),
@@ -39,14 +39,14 @@ namespace FTAnalyzer.Mapping
             {
                 if (wgs84toGoogle == null)
                 {
-                    CoordinateSystemFactory csFac = new CoordinateSystemFactory();
-                    CoordinateTransformationFactory ctFac = new CoordinateTransformationFactory();
+                    CoordinateSystemFactory csFac = new();
+                    CoordinateTransformationFactory ctFac = new();
 
                     GeographicCoordinateSystem wgs84 = csFac.CreateGeographicCoordinateSystem(
                       "WGS 84", AngularUnit.Degrees, HorizontalDatum.WGS84, PrimeMeridian.Greenwich,
                       new AxisInfo("north", AxisOrientationEnum.North), new AxisInfo("east", AxisOrientationEnum.East));
 
-                    List<ProjectionParameter> parameters = new List<ProjectionParameter>
+                    List<ProjectionParameter> parameters = new()
                     {
                         new ProjectionParameter("semi_major", 6378137.0),
                         new ProjectionParameter("semi_minor", 6378137.0),
@@ -74,8 +74,8 @@ namespace FTAnalyzer.Mapping
 
         static ICoordinateTransformation wgs84toGoogle;
 
-        static readonly CoordinateTransformationFactory ctFact = new CoordinateTransformationFactory();
-        static readonly CoordinateSystemFactory csFact = new CoordinateSystemFactory();
+        static readonly CoordinateTransformationFactory ctFact = new();
+        static readonly CoordinateSystemFactory csFact = new();
 
         static ICoordinateTransformation Transform() => ctFact.CreateFromCoordinateSystems(GeographicCoordinateSystem.WGS84, GetEPSG900913(csFact));
 
@@ -93,7 +93,7 @@ namespace FTAnalyzer.Mapping
         {
             Coordinate mNorthEast = TransformCoordinate(new Coordinate(viewport.NorthEast.Long, viewport.NorthEast.Lat));
             Coordinate mSouthWest = TransformCoordinate(new Coordinate(viewport.SouthWest.Long, viewport.SouthWest.Lat));
-            GeoResponse.CResult.CGeometry.CViewPort result = new GeoResponse.CResult.CGeometry.CViewPort();
+            GeoResponse.CResult.CGeometry.CViewPort result = new();
             result.NorthEast.Long = mNorthEast.X;
             result.NorthEast.Lat = mNorthEast.Y;
             result.SouthWest.Long = mSouthWest.X;
@@ -105,7 +105,7 @@ namespace FTAnalyzer.Mapping
         {
             Coordinate mNorthEast = ReverseTransformCoordinate(new Coordinate(viewport.NorthEast.Long, viewport.NorthEast.Lat));
             Coordinate mSouthWest = ReverseTransformCoordinate(new Coordinate(viewport.SouthWest.Long, viewport.SouthWest.Lat));
-            GeoResponse.CResult.CGeometry.CViewPort result = new GeoResponse.CResult.CGeometry.CViewPort();
+            GeoResponse.CResult.CGeometry.CViewPort result = new();
             result.NorthEast.Long = mNorthEast.X;
             result.NorthEast.Lat = mNorthEast.Y;
             result.SouthWest.Long = mSouthWest.X;

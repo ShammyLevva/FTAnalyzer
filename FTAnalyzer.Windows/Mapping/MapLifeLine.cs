@@ -13,18 +13,18 @@ namespace FTAnalyzer.Mapping
         int Count { get; set; }
         Envelope Viewport { get; set; }
 
-        public static string LINE = "Line", START = "Start", END = "End";
+        public static readonly string LINE = "Line", START = "Start", END = "End";
 
         public MapLifeLine(Individual ind)
         {
             this.ind = ind;
             int index = 1;
-            List<Coordinate> points = new List<Coordinate>();
+            List<Coordinate> points = new();
             Viewport = new Envelope();
             Coordinate previousPoint = null;
             foreach (IDisplayFact f in ind.AllLifeLineFacts)
             {
-                Coordinate point = new Coordinate(f.Location.LongitudeM, f.Location.LatitudeM);
+                Coordinate point = new(f.Location.LongitudeM, f.Location.LatitudeM);
                 if (index == 1)
                     StartPoint = new NetTopologySuite.Geometries.Point(point);
                 if (index == ind.AllLifeLineFacts.Count)
@@ -36,14 +36,14 @@ namespace FTAnalyzer.Mapping
                     previousPoint = point;
                 }
                 GeoResponse.CResult.CGeometry.CViewPort vp = f.Location.ViewPort;
-                Envelope env = new Envelope(vp.NorthEast.Long, vp.SouthWest.Long, vp.NorthEast.Lat, vp.SouthWest.Lat);
+                Envelope env = new(vp.NorthEast.Long, vp.SouthWest.Long, vp.NorthEast.Lat, vp.SouthWest.Lat);
                 if (!Viewport.Contains(env))
                     Viewport.ExpandToInclude(env);
             }
             if (points.Count > 1)
-                this.Geometry = new NetTopologySuite.Geometries.LineString(points.ToArray());
+                Geometry = new LineString(points.ToArray());
             else
-                this.Geometry = StartPoint;
+                Geometry = StartPoint;
             Count = points.Count;
         }
 

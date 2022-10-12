@@ -128,7 +128,7 @@ namespace FTAnalyzer.Forms
                 LabelStyle style = new LabelStyle
                 {
                     ForeColor = Color.Black,
-                    Font = new Font(FontFamily.GenericSerif, 14, FontStyle.Bold),
+                    Font = new(FontFamily.GenericSerif, 14, FontStyle.Bold),
                     HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
                     VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom,
                     CollisionDetection = true,

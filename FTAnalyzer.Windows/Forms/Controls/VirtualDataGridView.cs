@@ -75,9 +75,9 @@ namespace FTAnalyzer.Forms.Controls
             else
             {
                 SortableBindingList<T> filter = _fulllist;
-                foreach (string filteredColumn in GetFilteredColumns(e.FilterString))
+                foreach (string filteredColumn in VirtualDataGridView<T>.GetFilteredColumns(e.FilterString))
                 {
-                    List<string> filteredValues = GetFilteredValues(filteredColumn, e.FilterString);
+                    List<string> filteredValues = VirtualDataGridView<T>.GetFilteredValues(filteredColumn, e.FilterString);
                     filter = new SortableBindingList<T>(filter.Where(x => filteredValues.Contains(x.GetType().GetProperty(filteredColumn).GetValue(x, null))));
                 }
                 _dataSource = filter;
@@ -87,9 +87,9 @@ namespace FTAnalyzer.Forms.Controls
             Refresh();
         }
 
-        internal List<string> GetFilteredColumns(string filterString)
+        internal static List<string> GetFilteredColumns(string filterString)
         {
-            List<string> result = new List<string>();
+            List<string> result = new();
             List<string> clauses = filterString.Split(new string[] { " AND " }, StringSplitOptions.None).ToList();
             foreach (string clause in clauses)
             {
@@ -107,14 +107,14 @@ namespace FTAnalyzer.Forms.Controls
         // deal with filter string of type 
         // (Convert([Gender],System.String) IN ('U')) AND (Convert([Surname],System.String) IN ('Mitchell')) AND (Convert([Forenames],System.String) IN ('UNKNOWN'))
         // deal with updating count in statusbar
-        internal List<string> GetFilteredValues(string filterColumn, string filterString)
+        internal static List<string> GetFilteredValues(string filterColumn, string filterString)
         {
-            List<string> result = new List<string>();
+            List<string> result = new();
             int startclausepos = filterString.IndexOf(filterColumn);
             if (startclausepos > 0)
             {
                 int endclausepos = filterString.IndexOf(" AND ", startclausepos);
-                string clause = endclausepos > 0 ? filterString.Substring(startclausepos, endclausepos) : filterString.Substring(startclausepos);
+                string clause = endclausepos > 0 ? filterString.Substring(startclausepos, endclausepos) : filterString[startclausepos..];
                 int pos = clause.IndexOf("IN (");
                 if (pos >= 0 && pos < clause.Length - 6)
                 {
@@ -131,7 +131,7 @@ namespace FTAnalyzer.Forms.Controls
 
         protected void OnVirtualGridFiltered()
         {
-            CountEventArgs args = new CountEventArgs
+            CountEventArgs args = new()
             {
                 FilterText = FilterCountText
             };
@@ -252,8 +252,8 @@ namespace FTAnalyzer.Forms.Controls
 
         class PropertyComparer : IComparer<T>
         {
-            PropertyInfo _accessor;
-            int _direction;
+            readonly PropertyInfo _accessor;
+            readonly int _direction;
 
             public PropertyComparer(string propertyName, ListSortDirection direction)
             {
@@ -263,10 +263,9 @@ namespace FTAnalyzer.Forms.Controls
 
             public int Compare(T ind1, T ind2)
             {
-                IComparable val1 = _accessor?.GetValue(ind1) as IComparable;
                 IComparable val2 = _accessor?.GetValue(ind2) as IComparable;
 
-                if (val1 is null)
+                if (_accessor?.GetValue(ind1) is not IComparable val1)
                     return val2 is null ? 0 : _direction * -1;
 
                 return _direction * val1.CompareTo(val2);

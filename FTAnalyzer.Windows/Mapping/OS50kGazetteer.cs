@@ -2,6 +2,7 @@
 using NetTopologySuite.Geometries;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System;
 
 namespace FTAnalyzer.Mapping
 {
@@ -24,18 +25,18 @@ namespace FTAnalyzer.Mapping
         {
             line = EnhancedTextInfo.RemoveDiacritics(line); // remove any special characters for Gazatteer processing
             string[] values = line.Split(':');
-            int.TryParse(values[0], out int intval);
+            _ = int.TryParse(values[0], out int intval);
             SequenceNumber = intval;
             DefinitiveName = values[2];
-            int.TryParse(values[4], out intval);
-            double.TryParse(values[5], out double latitude);
+            _ = int.TryParse(values[4], out intval);
+            _ = double.TryParse(values[5], out double latitude);
             Latitude = intval + latitude / 60;
-            int.TryParse(values[6], out intval);
-            double.TryParse(values[7], out double longitude);
+            _ = int.TryParse(values[6], out intval);
+            _ = double.TryParse(values[7], out double longitude);
             Longitude = intval + longitude / 60;
             if (values[10] == "W")
                 Longitude = -1 * Longitude; // West Longitudes are negative
-            Coordinate c = new Coordinate(Longitude, Latitude);
+            Coordinate c = new(Longitude, Latitude);
             c = MapTransforms.TransformCoordinate(c);
             Point = GeometryFactory.Default.CreatePoint(c);
 
@@ -44,9 +45,9 @@ namespace FTAnalyzer.Mapping
             FeatureCode = values[14];
             ParishName = values[20];
             if (ParishName.EndsWith(" CP"))
-                ParishName = ParishName.Substring(0, ParishName.Length - 3);
+                ParishName = ParishName[..^3];
             if (ParishName.EndsWith(" Community"))
-                ParishName = ParishName.Substring(0, ParishName.Length - 10);
+                ParishName = ParishName[..^10];
             FixCommas();
             FixAbbreviations();
             ModernCounty county = Regions.OS_GetCounty(CountyCode);
@@ -55,15 +56,15 @@ namespace FTAnalyzer.Mapping
             else
             {
                 CountryName = county.CountryName;
-                DoubleMetaphone meta = new DoubleMetaphone(DefinitiveName);
+                DoubleMetaphone meta = new(DefinitiveName);
                 FuzzyMatch = meta.PrimaryKey + ":";
                 FuzzyNoParishMatch = meta.PrimaryKey + ":";
-                meta = new DoubleMetaphone(ParishName);
+                meta = new(ParishName);
                 FuzzyMatch += meta.PrimaryKey + ":";
-                meta = new DoubleMetaphone(CountyName);
+                meta = new(CountyName);
                 FuzzyMatch += meta.PrimaryKey + ":";
                 FuzzyNoParishMatch = meta.PrimaryKey + ":";
-                meta = new DoubleMetaphone(county.CountryName);
+                meta = new(county.CountryName);
                 FuzzyMatch += meta.PrimaryKey;
                 FuzzyNoParishMatch = meta.PrimaryKey + ":";
             }
@@ -74,10 +75,10 @@ namespace FTAnalyzer.Mapping
             DefinitiveName = DefinitiveName.Replace(", The", ""); // strip out supurflous "the"
             int pos = DefinitiveName.IndexOf(",");
             if(pos > 0)
-                DefinitiveName = (DefinitiveName.Substring(pos + 1) + " " + DefinitiveName.Substring(0, pos)).Trim();
+                DefinitiveName = (string.Concat(DefinitiveName.AsSpan(pos + 1), " ", DefinitiveName.AsSpan(0, pos))).Trim();
         }
 
-        static readonly Regex slash = new Regex(@"(.*)\(.*\)", RegexOptions.Compiled);
+        static readonly Regex slash = new(@"(.*)\(.*\)", RegexOptions.Compiled);
 
         void FixAbbreviations()
         {
@@ -115,15 +116,15 @@ namespace FTAnalyzer.Mapping
             if (DefinitiveName.EndsWith(" Ave")) // Ave is abbreviation for Avenue
                 DefinitiveName += "nue";
             if (DefinitiveName.EndsWith(" The")) // we can strip trailing the's
-                DefinitiveName = DefinitiveName.Substring(DefinitiveName.Length -4);
+                DefinitiveName = DefinitiveName[^4..];
 
-            if (DefinitiveName.Contains("("))
+            if (DefinitiveName.Contains('('))
             { 
                 Match match = slash.Match(DefinitiveName);
                 if(match.Success)
                     DefinitiveName = match.Groups[1].ToString().Trim();
             }
-            if (ParishName.Contains("("))
+            if (ParishName.Contains('('))
             {
                 Match match = slash.Match(ParishName);
                 if (match.Success)

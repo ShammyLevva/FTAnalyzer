@@ -94,7 +94,7 @@ namespace FTAnalyzer.Forms
 
         public void DisplayLocationsForYear(string year)
         {
-            year = year ?? string.Empty;
+            year ??= string.Empty;
             _ = int.TryParse(year, out int result);
             if (year.Length == 4 && result != 0)
             {
@@ -127,7 +127,7 @@ namespace FTAnalyzer.Forms
 
         List<MapLocation> FilterToRelationsIncluded(List<MapLocation> locations)
         {
-            List<MapLocation> result = new List<MapLocation>();
+            List<MapLocation> result = new();
             foreach (MapLocation ml in locations)
                 if (RelationIncluded(ml.Individual.RelationType))
                     result.Add(ml);
@@ -136,24 +136,16 @@ namespace FTAnalyzer.Forms
 
         bool RelationIncluded(int relationtype)
         {
-            switch (relationtype)
+            return relationtype switch
             {
-                case Individual.DIRECT:
-                    return directAncestorsToolStripMenuItem.Checked;
-                case Individual.BLOOD:
-                    return bloodRelativesToolStripMenuItem.Checked;
-                case Individual.MARRIAGE:
-                    return relatedByMarriageToolStripMenuItem.Checked;
-                case Individual.MARRIEDTODB:
-                    return marriedToDirectOrBloodToolStripMenuItem.Checked;
-                case Individual.DESCENDANT:
-                    return descendantToolStripMenuItem.Checked;
-                case Individual.LINKED:
-                    return linkedByMarriageToolStripMenuItem.Checked;
-                case Individual.UNKNOWN:
-                default:
-                    return unknownToolStripMenuItem.Checked;
-            }
+                Individual.DIRECT => directAncestorsToolStripMenuItem.Checked,
+                Individual.BLOOD => bloodRelativesToolStripMenuItem.Checked,
+                Individual.MARRIAGE => relatedByMarriageToolStripMenuItem.Checked,
+                Individual.MARRIEDTODB => marriedToDirectOrBloodToolStripMenuItem.Checked,
+                Individual.DESCENDANT => descendantToolStripMenuItem.Checked,
+                Individual.LINKED => linkedByMarriageToolStripMenuItem.Checked,
+                _ => unknownToolStripMenuItem.Checked,
+            };
         }
 
         void TbYears_Scroll(object sender, EventArgs e) => UpdateMap();
@@ -224,7 +216,7 @@ namespace FTAnalyzer.Forms
         void MapBox1_MapQueried(FeatureDataTable data)
         {
             Cursor = Cursors.WaitCursor;
-            List<MapLocation> locations = new List<MapLocation>();
+            List<MapLocation> locations = new();
             foreach (FeatureDataRow row in data)
             {
                 IList<FeatureDataRow> features = (List<FeatureDataRow>)row["Features"];
@@ -233,7 +225,7 @@ namespace FTAnalyzer.Forms
                     locations.Add((MapLocation)feature["MapLocation"]);
                 }
             }
-            MapIndividuals ind = new MapIndividuals(locations, labValue.Text, this);
+            MapIndividuals ind = new(locations, labValue.Text, this);
             ind.Show();
             Cursor = Cursors.Default;
         }
@@ -381,27 +373,18 @@ namespace FTAnalyzer.Forms
         int GetYearLimit()
         {
             //check the 
-            switch (cbLimitFactDates.Text)
+            return cbLimitFactDates.Text switch
             {
-                case "No Limit":
-                    return int.MaxValue;
-                case "Exact year only":
-                    return 1;
-                case "+/- 2 years":
-                    return 2;
-                case "+/- 5 years":
-                    return 5;
-                case "+/-10 years":
-                    return 10;
-                case "+/-20 years":
-                    return 20;
-                case "+/-50 years":
-                    return 50;
-                case "+/-100 years":
-                    return 100;
-                default:
-                    return int.MaxValue;
-            }
+                "No Limit" => int.MaxValue,
+                "Exact year only" => 1,
+                "+/- 2 years" => 2,
+                "+/- 5 years" => 5,
+                "+/-10 years" => 10,
+                "+/-20 years" => 20,
+                "+/-50 years" => 50,
+                "+/-100 years" => 100,
+                _ => int.MaxValue,
+            };
         }
 
         void MnuHideScaleBar_Click(object sender, EventArgs e) => MapHelper.MnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);

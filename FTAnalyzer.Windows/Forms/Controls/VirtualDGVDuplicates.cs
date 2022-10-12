@@ -4,38 +4,24 @@
     {
         protected override object GetValueFor(IDisplayDuplicateIndividual dup, string propertyName)
         {
-            switch (propertyName)
+            return propertyName switch
             {
-                case nameof(IDisplayDuplicateIndividual.IndividualID):
-                    return dup.IndividualID;
-                case nameof(IDisplayDuplicateIndividual.Name):
-                    return dup.Name;
-                case nameof(IDisplayDuplicateIndividual.Forenames):
-                    return dup.Forenames;
-                case nameof(IDisplayDuplicateIndividual.Surname):
-                    return dup.Surname;
-                case nameof(IDisplayDuplicateIndividual.BirthDate):
-                    return dup.BirthDate;
-                case nameof(IDisplayDuplicateIndividual.BirthLocation):
-                    return dup.BirthLocation;
-                case nameof(IDisplayDuplicateIndividual.Gender):
-                    return dup.Gender;
-                case nameof(IDisplayDuplicateIndividual.MatchIndividualID):
-                    return dup.MatchIndividualID;
-                case nameof(IDisplayDuplicateIndividual.MatchName):
-                    return dup.MatchName;
-                case nameof(IDisplayDuplicateIndividual.MatchBirthDate):
-                    return dup.MatchBirthDate;
-                case nameof(IDisplayDuplicateIndividual.MatchBirthLocation):
-                    return dup.MatchBirthLocation;
-                case nameof(IDisplayDuplicateIndividual.Score):
-                    return dup.Score;
-                case nameof(IDisplayDuplicateIndividual.IgnoreNonDuplicate):
-                    return dup.IgnoreNonDuplicate;
-                case nameof(IDisplayDuplicateIndividual.MatchGender):
-                    return dup.MatchGender;
-            }
-            return null;
+                nameof(IDisplayDuplicateIndividual.IndividualID) => dup.IndividualID,
+                nameof(IDisplayDuplicateIndividual.Name) => dup.Name,
+                nameof(IDisplayDuplicateIndividual.Forenames) => dup.Forenames,
+                nameof(IDisplayDuplicateIndividual.Surname) => dup.Surname,
+                nameof(IDisplayDuplicateIndividual.BirthDate) => dup.BirthDate,
+                nameof(IDisplayDuplicateIndividual.BirthLocation) => dup.BirthLocation,
+                nameof(IDisplayDuplicateIndividual.Gender) => dup.Gender,
+                nameof(IDisplayDuplicateIndividual.MatchIndividualID) => dup.MatchIndividualID,
+                nameof(IDisplayDuplicateIndividual.MatchName) => dup.MatchName,
+                nameof(IDisplayDuplicateIndividual.MatchBirthDate) => dup.MatchBirthDate,
+                nameof(IDisplayDuplicateIndividual.MatchBirthLocation) => dup.MatchBirthLocation,
+                nameof(IDisplayDuplicateIndividual.Score) => dup.Score,
+                nameof(IDisplayDuplicateIndividual.IgnoreNonDuplicate) => dup.IgnoreNonDuplicate,
+                nameof(IDisplayDuplicateIndividual.MatchGender) => dup.MatchGender,
+                _ => null,
+            };
         }
     }
 }

@@ -84,31 +84,31 @@ namespace FTAnalyzer.UserControls
                 switch (value)
                 {
                     case 1:
-                        selectedFont = new Font(lbSample.Font.Name, 8.25f);
+                        selectedFont = new(lbSample.Font.Name, 8.25f);
                         fontWidth = 5.8f;
                         fontSize = 8.25f;
                         fontHeight = 22;
                         break;
                     case 2:
-                        selectedFont = new Font(lbSample.Font.Name, 10f);
+                        selectedFont = new(lbSample.Font.Name, 10f);
                         fontWidth = 6.6f;
                         fontSize = 10f;
                         fontHeight = 27;
                         break;
                     case 3:
-                        selectedFont = new Font(lbSample.Font.Name, 12f);
+                        selectedFont = new(lbSample.Font.Name, 12f);
                         fontWidth = 8.0f;
                         fontSize = 12f;
                         fontHeight = 32;
                         break;
                     case 4:
-                        selectedFont = new Font(lbSample.Font.Name, 14f);
+                        selectedFont = new(lbSample.Font.Name, 14f);
                         fontWidth = 9.6f;
                         fontSize = 14f;
                         fontHeight = 37;
                         break;
                     default:
-                        selectedFont = new Font(lbSample.Font.Name, 8.25f);
+                        selectedFont = new(lbSample.Font.Name, 8.25f);
                         fontWidth = 5.8f;
                         fontSize = 8.25f;
                         fontHeight = 22;

@@ -139,27 +139,27 @@ namespace FTAnalyzer
                 switch (FontSettings.Default.FontNumber)
                 {
                     case 1:
-                        handwritingFont = new Font(fonts.Families[0], 46.0F, FontStyle.Bold);
-                        boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 8.25F, FontStyle.Bold);
-                        normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 8.25F, FontStyle.Regular);
+                        handwritingFont = new(fonts.Families[0], 46.0F, FontStyle.Bold);
+                        boldFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 8.25F, FontStyle.Bold);
+                        normalFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 8.25F, FontStyle.Regular);
                         FontSettings.Default.FontHeight = 22;
                         break;
                     case 2:
-                        handwritingFont = new Font(fonts.Families[0], 68.0F, FontStyle.Bold);
-                        boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 10F, FontStyle.Bold);
-                        normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 10F, FontStyle.Regular);
+                        handwritingFont = new(fonts.Families[0], 68.0F, FontStyle.Bold);
+                        boldFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 10F, FontStyle.Bold);
+                        normalFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 10F, FontStyle.Regular);
                         FontSettings.Default.FontHeight = 27; 
                         break;
                     case 3:
-                        handwritingFont = new Font(fonts.Families[0], 72.0F, FontStyle.Bold);
-                        boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 12F, FontStyle.Bold);
-                        normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 12F, FontStyle.Regular);
+                        handwritingFont = new(fonts.Families[0], 72.0F, FontStyle.Bold);
+                        boldFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 12F, FontStyle.Bold);
+                        normalFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 12F, FontStyle.Regular);
                         FontSettings.Default.FontHeight = 32;
                         break;
                     case 4:
-                        handwritingFont = new Font(fonts.Families[0], 90.0F, FontStyle.Bold);
-                        boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 14F, FontStyle.Bold);
-                        normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 14F, FontStyle.Regular);
+                        handwritingFont = new(fonts.Families[0], 90.0F, FontStyle.Bold);
+                        boldFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 14F, FontStyle.Bold);
+                        normalFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 14F, FontStyle.Regular);
                         FontSettings.Default.FontHeight = 37;
                         break;
                 }
@@ -3229,7 +3229,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new();
-            using (DataTable dt = convertor.ToDataTable(new List<IExportIndividual>(ft.AllIndividuals)))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IExportIndividual>(ft.AllIndividuals)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportIndEvent);
             HourGlass(false);
@@ -3239,7 +3239,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new();
-            using (DataTable dt = convertor.ToDataTable(new List<IDisplayFamily>(ft.AllFamilies)))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplayFamily>(ft.AllFamilies)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportFamEvent);
             HourGlass(false);
@@ -3249,7 +3249,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new();
-            using (DataTable dt = convertor.ToDataTable(new List<ExportFact>(ft.AllExportFacts)))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<ExportFact>(ft.AllExportFacts)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportFactsEvent);
             HourGlass(false);
@@ -3263,7 +3263,7 @@ namespace FTAnalyzer
                 ListtoDataTableConvertor convertor = new();
                 List<IDisplayLooseBirth> list = ft.LooseBirths().ToList();
                 list.Sort(new LooseBirthComparer());
-                using (DataTable dt = convertor.ToDataTable(list))
+                using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list))
                     ExportToExcel.Export(dt);
                 Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportLooseBirthsEvent);
             }
@@ -3282,7 +3282,7 @@ namespace FTAnalyzer
                 ListtoDataTableConvertor convertor = new();
                 List<IDisplayLooseDeath> list = ft.LooseDeaths().ToList();
                 list.Sort(new LooseDeathComparer());
-                using (DataTable dt = convertor.ToDataTable(list))
+                using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list))
                     ExportToExcel.Export(dt);
                 Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportLooseDeathsEvent);
             }
@@ -3297,7 +3297,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new();
-            using (DataTable dt = convertor.ToDataTable(new List<IDisplayLocation>(ft.AllDisplayPlaces)))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplayLocation>(ft.AllDisplayPlaces)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportLocationsEvent);
             HourGlass(false);
@@ -3307,7 +3307,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new();
-            using (DataTable dt = convertor.ToDataTable(new List<IDisplaySource>(ft.AllSources)))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplaySource>(ft.AllSources)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportSourcesEvent);
             HourGlass(false);
@@ -3317,7 +3317,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new();
-            using (DataTable dt = convertor.ToDataTable(new List<IDisplayCustomFact>(ft.AllCustomFacts)))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplayCustomFact>(ft.AllCustomFacts)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportCustomFactEvent);
             HourGlass(false);
@@ -3327,7 +3327,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             ListtoDataTableConvertor convertor = new();
-            using (DataTable dt = convertor.ToDataTable(new List<IDisplayDataError>(DataErrors(ckbDataErrors))))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplayDataError>(DataErrors(ckbDataErrors))))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportDataErrorsEvent);
             HourGlass(false);
@@ -3341,7 +3341,7 @@ namespace FTAnalyzer
             List<IExportIndividual> treeTopsList = ft.GetExportTreeTops(filter).ToList();
             treeTopsList.Sort(new BirthDateComparer());
             SortableBindingList<IExportIndividual> list = new(treeTopsList);
-            using (DataTable dt = convertor.ToDataTable(list.ToList()))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list.ToList()))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportTreeTopsEvent);
             HourGlass(false);
@@ -3356,7 +3356,7 @@ namespace FTAnalyzer
                 List<IExportIndividual> warDeadList = ft.GetExportWorldWars(warDeadFilter).ToList();
                 warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
                 SortableBindingList<IExportIndividual> list = new(warDeadList);
-                using (DataTable dt = convertor.ToDataTable(list.ToList()))
+                using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list.ToList()))
                     ExportToExcel.Export(dt);
                 Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportWorldWarsEvent);
             }
@@ -3381,7 +3381,7 @@ namespace FTAnalyzer
                 tspbTabProgress.Visible = false;
             }
             List<IDisplaySurnames> list = new(stats);
-            using (DataTable dt = convertor.ToDataTable(list))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list))
                 ExportToExcel. Export(dt);
             await Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportSurnamesEvent);
             HourGlass(false);

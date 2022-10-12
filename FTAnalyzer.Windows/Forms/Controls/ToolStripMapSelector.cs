@@ -42,7 +42,7 @@ namespace FTAnalyzer.Forms.Controls
             {
                 if (mapPreference.Equals(menu.Name))
                 {
-                    _Click(menu, null);
+                    Ctrl_Click(menu, null);
                     break;
                 }
             }
@@ -50,7 +50,7 @@ namespace FTAnalyzer.Forms.Controls
 
         void SetupDropdown()
         {
-            TileSourceFactory factory = new TileSourceFactory();
+            TileSourceFactory factory = new();
             mnuOpenStreetMap = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.OpenStreetMap), LinkLabelType.OSM);
             mnuOpenHistoricMap = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.OpenHistoricMap), LinkLabelType.OSM);
             mnuBingMapAerial = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.BingAerial), LinkLabelType.BING);
@@ -60,14 +60,14 @@ namespace FTAnalyzer.Forms.Controls
             mnuNLS1885_1900 = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.NLS_1885_1900_OS_1in), LinkLabelType.NLS);
             mnuNLS1921_1930 = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.NLS_1921_1930_OS_6in), LinkLabelType.NLS);
 
-            mnuOpenStreetMap.SetupMapToolStripMenuItem("mnuOpenStreetMap", "Open Street Map", new EventHandler(_Click));
-            mnuOpenHistoricMap.SetupMapToolStripMenuItem("mnuOpenHistoricMap", "Open Historical Map 1920-1940 UK", new EventHandler(_Click));
-            mnuBingMapAerial.SetupMapToolStripMenuItem("mnuBingMapAerial", "Aerial Bing Map", new EventHandler(_Click));
-            mnuBingMapRoads.SetupMapToolStripMenuItem("mnuBingMapRoads", "Roads Bing Map", new EventHandler(_Click));
-            mnuBingMapHybrid.SetupMapToolStripMenuItem("mnuBingMapHybrid", "Hybrid Bing Map", new EventHandler(_Click));
-            mnuNLS1843_1882.SetupMapToolStripMenuItem("mnuNLS1843_1882", "NLS 1843-1882 OS 6in UK Map", new EventHandler(_Click));
-            mnuNLS1885_1900.SetupMapToolStripMenuItem("mnuNLS1885_1900", "NLS 1885-1900 OS 1in UK Map", new EventHandler(_Click));
-            mnuNLS1921_1930.SetupMapToolStripMenuItem("mnuNLS1921_1930", "NLS 1921-1930 OS 6in Scotland Map", new EventHandler(_Click));
+            mnuOpenStreetMap.SetupMapToolStripMenuItem("mnuOpenStreetMap", "Open Street Map", new EventHandler(Ctrl_Click));
+            mnuOpenHistoricMap.SetupMapToolStripMenuItem("mnuOpenHistoricMap", "Open Historical Map 1920-1940 UK", new EventHandler(Ctrl_Click));
+            mnuBingMapAerial.SetupMapToolStripMenuItem("mnuBingMapAerial", "Aerial Bing Map", new EventHandler(Ctrl_Click));
+            mnuBingMapRoads.SetupMapToolStripMenuItem("mnuBingMapRoads", "Roads Bing Map", new EventHandler(Ctrl_Click));
+            mnuBingMapHybrid.SetupMapToolStripMenuItem("mnuBingMapHybrid", "Hybrid Bing Map", new EventHandler(Ctrl_Click));
+            mnuNLS1843_1882.SetupMapToolStripMenuItem("mnuNLS1843_1882", "NLS 1843-1882 OS 6in UK Map", new EventHandler(Ctrl_Click));
+            mnuNLS1885_1900.SetupMapToolStripMenuItem("mnuNLS1885_1900", "NLS 1885-1900 OS 1in UK Map", new EventHandler(Ctrl_Click));
+            mnuNLS1921_1930.SetupMapToolStripMenuItem("mnuNLS1921_1930", "NLS 1921-1930 OS 6in Scotland Map", new EventHandler(Ctrl_Click));
             
             // Setup map selector menu
             DisplayStyle = ToolStripItemDisplayStyle.Text;
@@ -91,7 +91,7 @@ namespace FTAnalyzer.Forms.Controls
 
         public void UpdateLinkLabel(LinkLabelType type)
         {
-            LinkLabel.Link link = new LinkLabel.Link();
+            LinkLabel.Link link = new();
             copyrightLabel.Links.Clear();
             switch (type)
             {
@@ -115,7 +115,7 @@ namespace FTAnalyzer.Forms.Controls
             copyrightLabel.Links.Add(link);
         }
 
-        void _Click(object sender, EventArgs e)
+        void Ctrl_Click(object sender, EventArgs e)
         {
             foreach (ToolStripMenuItem menu in DropDownItems)
                 menu.Checked = false;
@@ -123,7 +123,7 @@ namespace FTAnalyzer.Forms.Controls
                 mapbox.Map.BackgroundLayer.RemoveAt(0);
             MapToolStripMenuItem selectedOption = (MapToolStripMenuItem)sender;
             mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(mnuOpenStreetMap.TileSource, mnuOpenStreetMap.Name));
-            TileAsyncLayer mapLayer = new TileAsyncLayer(selectedOption.TileSource, selectedOption.Name)
+            TileAsyncLayer mapLayer = new(selectedOption.TileSource, selectedOption.Name)
             {
                 OnlyRedrawWhenComplete = true,
             };

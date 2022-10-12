@@ -4,24 +4,17 @@
     {
         protected override object GetValueFor(IDisplaySource src, string propertyName)
         {
-            switch (propertyName)
+            return propertyName switch
             {
-                case nameof(IDisplaySource.SourceID):
-                    return src.SourceID;
-                case nameof(IDisplaySource.SourceTitle):
-                    return src.SourceTitle;
-                case nameof(IDisplaySource.Publication):
-                    return src.Publication;
-                case nameof(IDisplaySource.Author):
-                    return src.Author;
-                case nameof(IDisplaySource.SourceText):
-                    return src.SourceText;
-                case nameof(IDisplaySource.SourceMedium):
-                    return src.SourceMedium;
-                case nameof(IDisplaySource.FactCount):
-                    return src.FactCount;
-            }
-            return null;
+                nameof(IDisplaySource.SourceID) => src.SourceID,
+                nameof(IDisplaySource.SourceTitle) => src.SourceTitle,
+                nameof(IDisplaySource.Publication) => src.Publication,
+                nameof(IDisplaySource.Author) => src.Author,
+                nameof(IDisplaySource.SourceText) => src.SourceText,
+                nameof(IDisplaySource.SourceMedium) => src.SourceMedium,
+                nameof(IDisplaySource.FactCount) => src.FactCount,
+                _ => null,
+            };
         }
     }
 }

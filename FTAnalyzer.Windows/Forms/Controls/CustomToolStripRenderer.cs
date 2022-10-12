@@ -17,7 +17,7 @@ namespace FTAnalyzer.Forms.Controls
             if (gsb.Checked)
             {
                 int borderThickness = 2;
-                Rectangle imageRectangle = new Rectangle(borderThickness, borderThickness,
+                Rectangle imageRectangle = new(borderThickness, borderThickness,
                     gsb.Width - 2 * borderThickness, gsb.Height - 2 * borderThickness);
 
                 Brush b = new SolidBrush(Color.LightSteelBlue);
