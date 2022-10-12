@@ -76,7 +76,7 @@ namespace FTAnalyzer
             {
                 string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
                 Individual ind = ft.GetIndividual(indID);
-                Facts factForm = new Facts(ind);
+                Facts factForm = new(ind);
                 MainForm.DisposeDuplicateForms(factForm);
                 factForm.Show();
             }
@@ -88,16 +88,16 @@ namespace FTAnalyzer
             {
                 Cursor = Cursors.WaitCursor;
                 MapLocation loc = dgIndividuals.SelectedRows[0].DataBoundItem as MapLocation;
-                EditLocation editform = new EditLocation(loc.Location);
+                EditLocation editform = new(loc.Location);
                 Cursor = Cursors.Default;
                 DialogResult result = editform.ShowDialog(this);
                 editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
                 if (mapForm != null && mapForm.Visible)
                 {
-                    if (mapForm is TimeLine)
-                        ((TimeLine)mapForm).RefreshClusters();
-                    else if (mapForm is Places)
-                        ((Places)mapForm).RefreshClusters();
+                    if (mapForm is TimeLine line)
+                        line.RefreshClusters();
+                    else if (mapForm is Places places)
+                        places.RefreshClusters();
                 }
                 UpdateIcons(loc.Location);
             }
@@ -128,7 +128,7 @@ namespace FTAnalyzer
         {
             try
             {
-                EditLocation editform = new EditLocation(loc);
+                EditLocation editform = new(loc);
                 Cursor = Cursors.Default;
                 DialogResult result = editform.ShowDialog(this);
                 editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog

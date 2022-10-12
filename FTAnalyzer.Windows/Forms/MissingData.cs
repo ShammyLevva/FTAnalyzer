@@ -13,7 +13,7 @@ namespace FTAnalyzer.Forms
             SetDefaultValues();
         }
 
-        void SetDefaultValues()
+        static void SetDefaultValues()
         {
             //dsBirth.Scores.UnknownDate = 100;
             //dsBirth.Scores.VeryWideDate = 90;

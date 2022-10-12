@@ -75,9 +75,9 @@ namespace FTAnalyzer.Forms
                 lifelines.Columns.Add("Label", typeof(string));
                 lifelines.Columns.Add("ViewPort", typeof(Envelope));
 
-                GeometryFeatureProvider lifelinesGFP = new GeometryFeatureProvider(lifelines);
+                GeometryFeatureProvider lifelinesGFP = new(lifelines);
 
-                VectorStyle linestyle = new VectorStyle
+                VectorStyle linestyle = new()
                 {
                     Line = new Pen(Color.Green, 2f)
                 };
@@ -88,15 +88,15 @@ namespace FTAnalyzer.Forms
                     Style = linestyle
                 };
 
-                Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
-                VectorStyle line = new VectorStyle
+                Dictionary<string, IStyle> styles = new();
+                VectorStyle line = new()
                 {
                     PointColor = new SolidBrush(Color.Green),
                     PointSize = 2
                 };
                 styles.Add(MapLifeLine.LINE, line);
 
-                VectorStyle startPoint = new VectorStyle
+                VectorStyle startPoint = new()
                 {
                     PointColor = new SolidBrush(Color.Green),
                     PointSize = 2,
@@ -104,7 +104,7 @@ namespace FTAnalyzer.Forms
                 };
                 styles.Add(MapLifeLine.START, startPoint);
 
-                VectorStyle endPoint = new VectorStyle
+                VectorStyle endPoint = new()
                 {
                     PointColor = new SolidBrush(Color.Green),
                     PointSize = 2,
@@ -125,7 +125,7 @@ namespace FTAnalyzer.Forms
                     TextRenderingHint = TextRenderingHint.AntiAlias,
                     SmoothingMode = SmoothingMode.AntiAlias
                 };
-                LabelStyle style = new LabelStyle
+                LabelStyle style = new()
                 {
                     ForeColor = Color.Black,
                     Font = new(FontFamily.GenericSerif, 14, FontStyle.Bold),
@@ -165,14 +165,14 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.WaitCursor;
             lifelines.Clear();
             points.Clear();
-            List<IDisplayFact> displayFacts = new List<IDisplayFact>();
+            List<IDisplayFact> displayFacts = new();
             foreach (DataGridViewRow row in dgIndividuals.SelectedRows)
             {
                 Individual ind = row.DataBoundItem as Individual;
                 if (ind.AllLifeLineFacts.Count > 0)
                 {
                     displayFacts.AddUnique(ind.AllLifeLineFacts);
-                    MapLifeLine line = new MapLifeLine(ind);
+                    MapLifeLine line = new(ind);
                     line.AddFeatureDataRow(lifelines);
                     points.AddFeatureDataRows(ind);
                 }
@@ -362,25 +362,23 @@ namespace FTAnalyzer.Forms
         void MapBox1_MouseMove(Coordinate worldPos, MouseEventArgs imagePos)
         {
             string tooltip = string.Empty;
-            Envelope infoPoint = new Envelope(worldPos.CoordinateValue);
+            Envelope infoPoint = new(worldPos.CoordinateValue);
             infoPoint.ExpandBy(mapBox1.Map.PixelSize * 30);
-            foreach (Layer layer in mapBox1.Map.Layers)
+            foreach (Layer layer in mapBox1.Map.Layers.Cast<Layer>())
             {
                 if (layer is TearDropLayer tdl)
                 {
-                    using (FeatureDataSet ds = new FeatureDataSet())
+                    using FeatureDataSet ds = new();
+                    if (!tdl.DataSource.IsOpen)
+                        tdl.DataSource.Open();
+                    tdl.DataSource.ExecuteIntersectionQuery(infoPoint, ds);
+                    tdl.DataSource.Close();
+                    foreach (FeatureDataRow row in ds.Tables[0].Rows)
                     {
-                        if (!tdl.DataSource.IsOpen)
-                            tdl.DataSource.Open();
-                        tdl.DataSource.ExecuteIntersectionQuery(infoPoint, ds);
-                        tdl.DataSource.Close();
-                        foreach (FeatureDataRow row in ds.Tables[0].Rows)
-                        {
-                            MapLocation line = (MapLocation)row["MapLocation"];
-                            string colour = (string)row["Colour"];
-                            if (colour == TearDropLayer.GREY)
-                                tooltip += line.ToString() + "\n";
-                        }
+                        MapLocation line = (MapLocation)row["MapLocation"];
+                        string colour = (string)row["Colour"];
+                        if (colour == TearDropLayer.GREY)
+                            tooltip += line.ToString() + "\n";
                     }
                 }
             }

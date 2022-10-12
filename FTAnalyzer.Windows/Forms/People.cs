@@ -60,14 +60,14 @@ namespace FTAnalyzer.Forms
             Text = $"Individuals & Families with connection to {loc}";
             level = Math.Min(loc.Level, level); // if location level isn't as detailed as level on tab use location level
             IEnumerable<Individual> listInd = ft.GetIndividualsAtLocation(loc, level);
-            SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
+            SortableBindingList<IDisplayIndividual> dsInd = new();
             foreach (Individual i in listInd)
                 dsInd.Add(i);
             dgIndividuals.DataSource = dsInd;
             SortIndividuals();
 
             IEnumerable<Family> listFam = ft.GetFamiliesAtLocation(loc, level);
-            SortableBindingList<IDisplayFamily> dsFam = new SortableBindingList<IDisplayFamily>();
+            SortableBindingList<IDisplayFamily> dsFam = new();
             foreach (Family f in listFam)
                 dsFam.Add(f);
             dgFamilies.DataSource = dsFam;
@@ -81,7 +81,7 @@ namespace FTAnalyzer.Forms
         public void SetWorkers(string job, SortableBindingList<Individual> workers)
         {
             Text = "Individuals whose occupation was " + (job.Length == 0 ? "not entered" : job);
-            SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
+            SortableBindingList<IDisplayIndividual> dsInd = new();
             foreach (Individual i in workers)
                 dsInd.Add(i);
             dgIndividuals.DataSource = dsInd;
@@ -95,7 +95,7 @@ namespace FTAnalyzer.Forms
             Text = "Individuals/Families whose have the custom fact of " + (string.IsNullOrEmpty(factType) ? "not entered" : factType);
             if (individuals.Count > 0)
             {
-                SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
+                SortableBindingList<IDisplayIndividual> dsInd = new();
                 foreach (Individual i in individuals)
                     dsInd.Add(i);
                 dgIndividuals.DataSource = dsInd;
@@ -110,7 +110,7 @@ namespace FTAnalyzer.Forms
             }
             if (families.Count > 0)
             {
-                SortableBindingList<IDisplayFamily> dsFam = new SortableBindingList<IDisplayFamily>();
+                SortableBindingList<IDisplayFamily> dsFam = new();
                 foreach (Family f in families)
                     dsFam.Add(f);
                 splitContainer.Panel2Collapsed = false;
@@ -133,7 +133,7 @@ namespace FTAnalyzer.Forms
         public void SetSurnameStats(IDisplaySurnames stat, Predicate<Individual> indFilter, Predicate<Family> famFilter, bool ignoreCase)
         {
             Text = $"Individuals & Families whose surame is {stat.Surname}";
-            SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
+            SortableBindingList<IDisplayIndividual> dsInd = new();
             bool indSurnames(Individual x) => x.Surname.Equals(stat.Surname);
             Predicate<Individual> filter = FilterUtils.AndFilter(indFilter, indSurnames);
             foreach (Individual i in ft.AllIndividuals.Filter(filter))
@@ -144,7 +144,7 @@ namespace FTAnalyzer.Forms
 
             bool famSurnames(Family x) => x.ContainsSurname(stat.Surname, ignoreCase);
             Predicate<Family> filter2 = FilterUtils.AndFilter(famFilter, famSurnames);
-            SortableBindingList<IDisplayFamily> dsFam = new SortableBindingList<IDisplayFamily>();
+            SortableBindingList<IDisplayFamily> dsFam = new();
             foreach (Family f in ft.AllFamilies.Filter(filter2))
                 dsFam.Add(f);
             dgFamilies.DataSource = dsFam;
@@ -157,8 +157,8 @@ namespace FTAnalyzer.Forms
 
         public void SetupLCDuplicates(Predicate<Individual> relationFilter)
         {
-            bool lcFacts(Individual i) => i.DuplicateLCFacts > 0;
-            Predicate<Individual> filter = FilterUtils.AndFilter<Individual>(relationFilter, lcFacts);
+            static bool lcFacts(Individual i) => i.DuplicateLCFacts > 0;
+            Predicate<Individual> filter = FilterUtils.AndFilter(relationFilter, lcFacts);
             List<Individual> individuals = ft.AllIndividuals.Filter(filter).ToList();
             SetIndividuals(individuals, "Lost Cousins with Duplicate Facts");
         }
@@ -166,11 +166,11 @@ namespace FTAnalyzer.Forms
         public void SetupLCnoCensus(Predicate<Individual> relationFilter)
         {
             List<Individual> listtoCheck = ft.AllIndividuals.Filter(relationFilter).ToList();
-            List<Individual> individuals = new List<Individual>();
-            Predicate<Individual> lcFacts = new Predicate<Individual>(i => i.HasLostCousinsFactWithNoCensusFact);
+            List<Individual> individuals = new();
+            Predicate<Individual> lcFacts = new(i => i.HasLostCousinsFactWithNoCensusFact);
             IEnumerable<Individual> censusMissing = listtoCheck.Filter(lcFacts);
             individuals.AddRange(censusMissing);
-            individuals = individuals.Distinct<Individual>().ToList();
+            individuals = individuals.Distinct().ToList();
             SetIndividuals(individuals, "Lost Cousins facts with no corresponding census entry");
         }
 
@@ -278,8 +278,8 @@ namespace FTAnalyzer.Forms
         {
             Text = "Parents aged " + minAge + "+ at time of child's birth";
             selectRow = true;
-            SortableBindingList<IDisplayIndividual> dsInd = new SortableBindingList<IDisplayIndividual>();
-            SortableBindingList<IDisplayFamily> dsFam = new SortableBindingList<IDisplayFamily>();
+            SortableBindingList<IDisplayIndividual> dsInd = new();
+            SortableBindingList<IDisplayFamily> dsFam = new();
             families = new Dictionary<IDisplayIndividual, IDisplayFamily>();
             foreach (Family f in ft.AllFamilies)
             {
@@ -361,7 +361,7 @@ namespace FTAnalyzer.Forms
             {
                 string indID = (string)dgIndividuals.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
                 Individual ind = ft.GetIndividual(indID);
-                Facts factForm = new Facts(ind);
+                Facts factForm = new(ind);
                 MainForm.DisposeDuplicateForms(factForm);
                 factForm.Show();
             }
@@ -380,14 +380,14 @@ namespace FTAnalyzer.Forms
                     if ((reportType == ReportType.MismatchedChildrenStatus || reportType == ReportType.MissingChildrenStatus) && ModifierKeys.Equals(Keys.Shift))
                     {
                         List<IDisplayColourCensus> list = fam.Members.ToList<IDisplayColourCensus>();
-                        ColourCensus rs = new ColourCensus(Countries.UNITED_KINGDOM, list);
+                        ColourCensus rs = new(Countries.UNITED_KINGDOM, list);
                         MainForm.DisposeDuplicateForms(rs);
                         rs.Show();
                         rs.Focus();
                     }
                     else
                     {
-                        Facts factForm = new Facts(fam);
+                        Facts factForm = new(fam);
                         MainForm.DisposeDuplicateForms(factForm);
                         factForm.Show();
                     }
@@ -397,10 +397,10 @@ namespace FTAnalyzer.Forms
 
         public void SetupMissingCensusLocation()
         {
-            List<Individual> individuals = new List<Individual>();
+            List<Individual> individuals = new();
             foreach (CensusDate censusDate in CensusDate.SUPPORTED_CENSUS)
             {
-                Predicate<Individual> censusFacts = new Predicate<Individual>(x => x.IsCensusDone(censusDate) && !x.HasCensusLocation(censusDate));
+                Predicate<Individual> censusFacts = new(x => x.IsCensusDone(censusDate) && !x.HasCensusLocation(censusDate));
                 IEnumerable<Individual> censusMissing = ft.AllIndividuals.Filter(censusFacts);
                 individuals.AddRange(censusMissing);
             }
@@ -410,10 +410,10 @@ namespace FTAnalyzer.Forms
 
         public void SetupDuplicateCensus()
         {
-            List<Individual> individuals = new List<Individual>();
+            List<Individual> individuals = new();
             foreach (CensusDate censusDate in CensusDate.SUPPORTED_CENSUS)
             {
-                Predicate<Individual> censusFacts = new Predicate<Individual>(i => i.CensusDateFactCount(censusDate) > 1);
+                Predicate<Individual> censusFacts = new(i => i.CensusDateFactCount(censusDate) > 1);
                 IEnumerable<Individual> censusMissing = ft.AllIndividuals.Filter(censusFacts);
                 individuals.AddRange(censusMissing);
             }
@@ -423,7 +423,7 @@ namespace FTAnalyzer.Forms
 
         public void SetupChildrenStatusReport()
         {
-            SortableBindingList<IDisplayChildrenStatus> results = new SortableBindingList<IDisplayChildrenStatus>();
+            SortableBindingList<IDisplayChildrenStatus> results = new();
             IEnumerable<CensusFamily> toSearch = ft.GetAllCensusFamilies(CensusDate.UKCENSUS1911, true, true);
             foreach (CensusFamily fam in toSearch)
             {
@@ -457,7 +457,7 @@ namespace FTAnalyzer.Forms
             Individual ind = ft.GetIndividual(indID);
             if (ind != null)
             {
-                Notes notes = new Notes(ind);
+                Notes notes = new(ind);
                 notes.Show();
             }
         }
@@ -539,7 +539,7 @@ namespace FTAnalyzer.Forms
 
         public void SetupNoChildrenStatus()
         {
-            SortableBindingList<IDisplayFamily> results = new SortableBindingList<IDisplayFamily>();
+            SortableBindingList<IDisplayFamily> results = new();
             IEnumerable<CensusFamily> toSearch = ft.GetAllCensusFamilies(CensusDate.UKCENSUS1911, true, true);
             foreach (Family fam in toSearch)
             {

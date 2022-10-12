@@ -29,21 +29,15 @@ namespace FTAnalyzer
 
         public static FactImage ErrorIcon(Fact.FactError errorLevel)
         {
-            switch (errorLevel)
+            return errorLevel switch
             {
-                case Fact.FactError.GOOD:
-                case Fact.FactError.IGNORE:
-                    return GOOD;
-                case Fact.FactError.WARNINGALLOW:
-                    return WARNINGALLOW;
-                case Fact.FactError.WARNINGIGNORE:
-                    return WARNINGIGNORE;
-                case Fact.FactError.ERROR:
-                    return ERROR;
-                case Fact.FactError.QUESTIONABLE:
-                    return QUESTIONABLE;
-            }
-            return GOOD;
+                Fact.FactError.GOOD or Fact.FactError.IGNORE => GOOD,
+                Fact.FactError.WARNINGALLOW => WARNINGALLOW,
+                Fact.FactError.WARNINGIGNORE => WARNINGIGNORE,
+                Fact.FactError.ERROR => ERROR,
+                Fact.FactError.QUESTIONABLE => QUESTIONABLE,
+                _ => GOOD,
+            };
         }
     }
 }

@@ -14,10 +14,7 @@ namespace FTAnalyzer.Forms.Controls
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new TreeViewHandler();
-                }
+                instance ??= new TreeViewHandler();
                 return instance;
             }
         }
@@ -42,7 +39,7 @@ namespace FTAnalyzer.Forms.Controls
                 placesTreeRootNode = new TreeNode();
                 Font regularFont = new(defaultFont, FontStyle.Regular);
                 Font boldFont = new(defaultFont, FontStyle.Bold);
-                foreach (FactLocation location in FamilyTree.Instance.AllDisplayPlaces)
+                foreach (FactLocation location in FamilyTree.Instance.AllDisplayPlaces.Cast<FactLocation>())
                 {
                     string[] parts = location.GetParts();
                     TreeNode currentM = mainformTreeRootNode;
@@ -54,7 +51,7 @@ namespace FTAnalyzer.Forms.Controls
                         TreeNode childP = currentP.Nodes.Find(part, false).FirstOrDefault();
                         if (childM == null)
                         {
-                            TreeNode child = new TreeNode((part.Length == 0 ? "<blank>" : part))
+                            TreeNode child = new((part.Length == 0 ? "<blank>" : part))
                             {
                                 Name = part,
                                 Tag = location,
