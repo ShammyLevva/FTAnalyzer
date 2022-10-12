@@ -9,6 +9,7 @@
     <ApplicationIcon>Resources\FTAnalyzer.ico</ApplicationIcon>
     <AssemblyName>FTAnalyzer</AssemblyName>
     <RootNamespace>FTAnalyzer</RootNamespace>
+    <NeutralLanguage>en-GB</NeutralLanguage>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
