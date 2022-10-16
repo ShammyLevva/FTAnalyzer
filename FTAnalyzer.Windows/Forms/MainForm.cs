@@ -22,7 +22,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static readonly string VERSION = "10.0.0.0";
+        public static readonly string VERSION = "10.0.0.0-beta 1";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         Cursor storedCursor = Cursors.Default;
@@ -3228,7 +3228,6 @@ namespace FTAnalyzer
         void IndividualsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            ListtoDataTableConvertor convertor = new();
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IExportIndividual>(ft.AllIndividuals)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportIndEvent);
@@ -3238,7 +3237,6 @@ namespace FTAnalyzer
         void FamiliesToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            ListtoDataTableConvertor convertor = new();
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplayFamily>(ft.AllFamilies)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportFamEvent);
@@ -3248,7 +3246,6 @@ namespace FTAnalyzer
         void FactsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            ListtoDataTableConvertor convertor = new();
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<ExportFact>(ft.AllExportFacts)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportFactsEvent);
@@ -3260,7 +3257,6 @@ namespace FTAnalyzer
             HourGlass(true);
             try
             {
-                ListtoDataTableConvertor convertor = new();
                 List<IDisplayLooseBirth> list = ft.LooseBirths().ToList();
                 list.Sort(new LooseBirthComparer());
                 using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list))
@@ -3279,7 +3275,6 @@ namespace FTAnalyzer
             HourGlass(true);
             try
             {
-                ListtoDataTableConvertor convertor = new();
                 List<IDisplayLooseDeath> list = ft.LooseDeaths().ToList();
                 list.Sort(new LooseDeathComparer());
                 using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list))
@@ -3296,7 +3291,6 @@ namespace FTAnalyzer
         void MnuExportLocations_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            ListtoDataTableConvertor convertor = new();
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplayLocation>(ft.AllDisplayPlaces)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportLocationsEvent);
@@ -3306,7 +3300,6 @@ namespace FTAnalyzer
         void MnuSourcesToExcel_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            ListtoDataTableConvertor convertor = new();
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplaySource>(ft.AllSources)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportSourcesEvent);
@@ -3316,7 +3309,6 @@ namespace FTAnalyzer
         void MnuCustomFactsToExcel_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            ListtoDataTableConvertor convertor = new();
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplayCustomFact>(ft.AllCustomFacts)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportCustomFactEvent);
@@ -3326,7 +3318,6 @@ namespace FTAnalyzer
         void MnuDataErrorsToExcel_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            ListtoDataTableConvertor convertor = new();
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplayDataError>(DataErrors(ckbDataErrors))))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportDataErrorsEvent);
@@ -3336,7 +3327,6 @@ namespace FTAnalyzer
         void MnuTreetopsToExcel_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            ListtoDataTableConvertor convertor = new();
             Predicate<Individual> filter = CreateTreeTopsIndividualFilter();
             List<IExportIndividual> treeTopsList = ft.GetExportTreeTops(filter).ToList();
             treeTopsList.Sort(new BirthDateComparer());
