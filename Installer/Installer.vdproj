@@ -20,6 +20,12 @@
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_2ACBEF6AA4AE4831A9A98A0A4F2C6A14"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -130,6 +136,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2ACBEF6AA4AE4831A9A98A0A4F2C6A14"
+            {
+            "SourcePath" = "8:..\\FTAnalyzer.Windows\\Resources\\FTAnalyzer.ico"
+            "TargetName" = "8:FTAnalyzer.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -326,10 +352,10 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:"
+            "Target" = "8:_05BA267D730A4B059AF55516C203B35C"
             "Folder" = "8:_C17C87ECBA8547689333067FB8B2F89A"
             "WorkingFolder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
-            "Icon" = "8:"
+            "Icon" = "8:_2ACBEF6AA4AE4831A9A98A0A4F2C6A14"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B4693F07B2BA471A8EDC371420AEF943"
@@ -340,10 +366,10 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:"
+            "Target" = "8:_05BA267D730A4B059AF55516C203B35C"
             "Folder" = "8:_B0B5B231A17A455DB1E1E4039C5A0482"
             "WorkingFolder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
-            "Icon" = "8:"
+            "Icon" = "8:_2ACBEF6AA4AE4831A9A98A0A4F2C6A14"
             "Feature" = "8:"
             }
         }
@@ -773,34 +799,6 @@
                 {
                 }
             }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_5D8BC72A97D74D7EAD96B022A69F1249"
-            {
-            "SourcePath" = "8:"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:ContentFiles"
-            "OutputProjectGuid" = "8:{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_BF082C03E0414091B78C1F272E9D5A99"
             {
             "SourcePath" = "8:"
@@ -823,6 +821,34 @@
             "ProjectOutputGroupRegister" = "3:1"
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:LocalizedResourceDlls"
+            "OutputProjectGuid" = "8:{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F68EE0DDF6C643EC81141926CB71F13D"
+            {
+            "SourcePath" = "8:"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:ContentFiles"
             "OutputProjectGuid" = "8:{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
