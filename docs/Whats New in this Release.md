@@ -1,3 +1,28 @@
+### BETA RELEASE Version 10.0.0.0-beta 1 - 16th October 2022  
+**Updates**
+
+Migrated project to .Net Core 6.0 from old .Net Framework  
+- This allows greater support of modern features  
+- It gives greater long term support moving off an old framework designed for Windows XP  
+- It should run faster and more efficiently than the old framework  
+- It will now **require Windows 10 or above** (Windows 7 and below haven't been supported by Microsoft for nearly 3 years)  
+
+Added extra US census reference checks  
+Relationship calcs respect same sex marriages now  
+Add custom fact event analysis  
+Added option to show if person died during period census was taken  
+Detect 21h2 and 22h2 versions of Windows 10  
+Detect 22h2 versions of Windows 11  
+
+**Bugfixes**
+Main form GEDCOM loading now auto scrolls the output window  
+Fix check for Web Version check to show if there is a new version  
+Fix sibling too soon check  
+Checking birth too soon only check if child birthdate is known  
+
+**Temporarily Unavailable**
+Child Birth Profile chart needs re-written to work with .Net Core 6 so for this beta is unavailable  
+
 ### Updated Release Version 8.5.2.0 13th Feb 2022
 **Updates**  
 Added Custom Fact to Excel export option  
