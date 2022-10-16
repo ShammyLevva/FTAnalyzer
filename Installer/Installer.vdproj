@@ -16,13 +16,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_F51E9599869B443687890A310B0B3800"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FA6A2BF0693B447C85A0B08E11A6A65C"
+        "MsmKey" = "8:_05BA267D730A4B059AF55516C203B35C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -136,26 +130,6 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F51E9599869B443687890A310B0B3800"
-            {
-            "SourcePath" = "8:..\\FTAnalyzer.Windows\\Resources\\FTAnalyzer.ico"
-            "TargetName" = "8:FTAnalyzer.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
         }
         "FileType"
         {
@@ -224,7 +198,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FTAnalyzer"
         "ProductCode" = "8:{F071B743-436C-4ADA-98FA-326F3227F139}"
-        "PackageCode" = "8:{7AB061DE-8D8C-4285-9BEA-A281A683682B}"
+        "PackageCode" = "8:{A590BDFE-98FA-4E60-BE42-E071902CB7DC}"
         "UpgradeCode" = "8:{1207BD34-CD5A-4BEA-838E-74C0B720E1DA}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -344,7 +318,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_7DAE5ECBD68A4191B2AB7939D84B58C1"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_05ABFA6F9796483BAE612F97FE6B0DFC"
             {
             "Name" = "8:FTAnalyzer"
             "Arguments" = "8:"
@@ -355,10 +329,10 @@
             "Target" = "8:"
             "Folder" = "8:_C17C87ECBA8547689333067FB8B2F89A"
             "WorkingFolder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
-            "Icon" = "8:_F51E9599869B443687890A310B0B3800"
+            "Icon" = "8:"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_EA7ACFA0EE754387B44EBCBF43D20A0A"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B4693F07B2BA471A8EDC371420AEF943"
             {
             "Name" = "8:FTAnalyzer"
             "Arguments" = "8:"
@@ -771,6 +745,34 @@
         }
         "ProjectOutput"
         {
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_05BA267D730A4B059AF55516C203B35C"
+            {
+            "SourcePath" = "8:..\\FTAnalyzer.Windows\\obj\\Release\\net6.0-windows10.0.17763.0\\FTAnalyzer.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_5D8BC72A97D74D7EAD96B022A69F1249"
             {
             "SourcePath" = "8:"
@@ -821,34 +823,6 @@
             "ProjectOutputGroupRegister" = "3:1"
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:LocalizedResourceDlls"
-            "OutputProjectGuid" = "8:{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_FA6A2BF0693B447C85A0B08E11A6A65C"
-            {
-            "SourcePath" = "8:..\\FTAnalyzer.Windows\\obj\\Debug\\net6.0-windows10.0.17763.0\\FTAnalyzer.Windows.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_C2EA74B6184B431DA7F27108ED230A33"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
