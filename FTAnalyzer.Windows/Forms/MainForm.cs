@@ -94,10 +94,10 @@ namespace FTAnalyzer
                 using (HttpClient client = new())
                 {
                     doc = new HtmlAgilityPack.HtmlDocument();
-                    string webData = client.GetStringAsync("https://github.com/ShammyLevva/FTAnalyzer/releases").Result;
+                    string webData = client.GetStringAsync("https://github.com/ShammyLevva/FTAnalyzer").Result;
                     doc.LoadHtml(webData);
                 }
-                HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//div/section/h2");
+                HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//div[@class='d-flex']/span");
                 string webVersion = versionNode.InnerText.ToUpper().Replace("VERSION", "").Trim();
                 string thisVersion = VERSION;
                 if (VERSION.Contains("-beta"))
