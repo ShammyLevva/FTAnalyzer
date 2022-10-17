@@ -16,11 +16,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{918894
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "FTAnalyzer.Shared", "..\FTAnalyzer.Shared\FTAnalyzer.Shared\FTAnalyzer.Shared.shproj", "{89621EBE-2416-4E13-BF69-F1C145908518}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FTAnalyzer.Windows", "FTAnalyzer.Windows\FTAnalyzer.Windows.csproj", "{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{B1B55881-8582-4121-A09D-EE0D29B859DE}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer.Net6", "Installer.Net6\Installer.Net6.vdproj", "{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,27 +47,6 @@ Global
 		SingleImage|x86 = SingleImage|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.CD_ROM|Any CPU.ActiveCfg = Release
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.CD_ROM|x64.ActiveCfg = Release
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.CD_ROM|x86.ActiveCfg = Release
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.Debug|Any CPU.ActiveCfg = Debug
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.Debug|x64.ActiveCfg = Debug
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.Debug|x86.ActiveCfg = Debug
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.DebugDSProjection|Any CPU.ActiveCfg = Debug
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.DebugDSProjection|x64.ActiveCfg = Debug
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.DebugDSProjection|x86.ActiveCfg = Debug
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.DVD-5|Any CPU.ActiveCfg = Debug
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.DVD-5|x64.ActiveCfg = Debug
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.DVD-5|x86.ActiveCfg = Debug
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.Release|Any CPU.ActiveCfg = Release
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.Release|x64.ActiveCfg = Release
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.Release|x86.ActiveCfg = Release
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.ReleaseDSProjection|Any CPU.ActiveCfg = Release
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.ReleaseDSProjection|x64.ActiveCfg = Release
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.ReleaseDSProjection|x86.ActiveCfg = Release
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.SingleImage|Any CPU.ActiveCfg = Release
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.SingleImage|x64.ActiveCfg = Release
-		{14A1204F-C2A9-48F9-90DD-4FE360E4F57B}.SingleImage|x86.ActiveCfg = Release
 		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.CD_ROM|Any CPU.ActiveCfg = Debug|Any CPU
 		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.CD_ROM|Any CPU.Build.0 = Debug|Any CPU
 		{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}.CD_ROM|x64.ActiveCfg = Debug|Any CPU
@@ -151,6 +130,27 @@ Global
 		{B1B55881-8582-4121-A09D-EE0D29B859DE}.SingleImage|x64.Build.0 = Debug|Any CPU
 		{B1B55881-8582-4121-A09D-EE0D29B859DE}.SingleImage|x86.ActiveCfg = Debug|Any CPU
 		{B1B55881-8582-4121-A09D-EE0D29B859DE}.SingleImage|x86.Build.0 = Debug|Any CPU
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.CD_ROM|Any CPU.ActiveCfg = Debug
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.CD_ROM|x64.ActiveCfg = Debug
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.CD_ROM|x86.ActiveCfg = Debug
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.Debug|Any CPU.ActiveCfg = Debug
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.Debug|x64.ActiveCfg = Debug
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.Debug|x86.ActiveCfg = Debug
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.DebugDSProjection|Any CPU.ActiveCfg = Debug
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.DebugDSProjection|x64.ActiveCfg = Debug
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.DebugDSProjection|x86.ActiveCfg = Debug
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.DVD-5|Any CPU.ActiveCfg = Debug
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.DVD-5|x64.ActiveCfg = Debug
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.DVD-5|x86.ActiveCfg = Debug
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.Release|Any CPU.ActiveCfg = Release
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.Release|x64.ActiveCfg = Release
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.Release|x86.ActiveCfg = Release
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.ReleaseDSProjection|Any CPU.ActiveCfg = Release
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.ReleaseDSProjection|x64.ActiveCfg = Release
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.ReleaseDSProjection|x86.ActiveCfg = Release
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.SingleImage|Any CPU.ActiveCfg = Debug
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.SingleImage|x64.ActiveCfg = Debug
+		{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}.SingleImage|x86.ActiveCfg = Debug
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1360,7 +1360,7 @@ namespace FTAnalyzer
             // radioOnlyPreferred
             // 
             this.radioOnlyPreferred.AutoSize = true;
-            this.radioOnlyPreferred.Location = new System.Drawing.Point(202, 5);
+            this.radioOnlyPreferred.Location = new System.Drawing.Point(204, 5);
             this.radioOnlyPreferred.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.radioOnlyPreferred.Name = "radioOnlyPreferred";
             this.radioOnlyPreferred.Size = new System.Drawing.Size(224, 34);
@@ -2741,11 +2741,11 @@ namespace FTAnalyzer
             // 
             this.cenDate.AutoSize = true;
             this.cenDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.cenDate.Country = "";
+            this.cenDate.Country = "Scotland";
             this.cenDate.Location = new System.Drawing.Point(25, 280);
             this.cenDate.Margin = new System.Windows.Forms.Padding(11);
             this.cenDate.Name = "cenDate";
-            this.cenDate.Size = new System.Drawing.Size(452, 44);
+            this.cenDate.Size = new System.Drawing.Size(254, 52);
             this.cenDate.TabIndex = 28;
             // 
             // relTypesCensus
@@ -3171,7 +3171,7 @@ namespace FTAnalyzer
             this.tabDisplayProgress.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.tabDisplayProgress.Name = "tabDisplayProgress";
             this.tabDisplayProgress.Padding = new System.Windows.Forms.Padding(7, 8, 7, 8);
-            this.tabDisplayProgress.Size = new System.Drawing.Size(2128, 1015);
+            this.tabDisplayProgress.Size = new System.Drawing.Size(2128, 1043);
             this.tabDisplayProgress.TabIndex = 1;
             this.tabDisplayProgress.Text = "Gedcom Stats";
             this.tabDisplayProgress.UseVisualStyleBackColor = true;
@@ -3193,7 +3193,7 @@ namespace FTAnalyzer
             // splitGedcom.Panel2
             // 
             this.splitGedcom.Panel2.Controls.Add(this.rtbOutput);
-            this.splitGedcom.Size = new System.Drawing.Size(2114, 999);
+            this.splitGedcom.Size = new System.Drawing.Size(2114, 1027);
             this.splitGedcom.SplitterDistance = 110;
             this.splitGedcom.SplitterWidth = 9;
             this.splitGedcom.TabIndex = 15;
@@ -3319,7 +3319,7 @@ namespace FTAnalyzer
             this.rtbOutput.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.ReadOnly = true;
-            this.rtbOutput.Size = new System.Drawing.Size(2114, 880);
+            this.rtbOutput.Size = new System.Drawing.Size(2114, 908);
             this.rtbOutput.TabIndex = 14;
             this.rtbOutput.Text = "";
             this.rtbOutput.TextChanged += new System.EventHandler(this.RtbOutput_TextChanged);
@@ -3345,7 +3345,7 @@ namespace FTAnalyzer
             this.tabSelector.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.tabSelector.Name = "tabSelector";
             this.tabSelector.SelectedIndex = 0;
-            this.tabSelector.Size = new System.Drawing.Size(2136, 1058);
+            this.tabSelector.Size = new System.Drawing.Size(2136, 1086);
             this.tabSelector.TabIndex = 9;
             this.tabSelector.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             // 
@@ -3652,12 +3652,12 @@ namespace FTAnalyzer
             this.ckbDataErrors.CheckOnClick = true;
             this.ckbDataErrors.ColumnWidth = 300;
             this.ckbDataErrors.FormattingEnabled = true;
-            this.ckbDataErrors.Location = new System.Drawing.Point(16, 44);
+            this.ckbDataErrors.Location = new System.Drawing.Point(7, 44);
             this.ckbDataErrors.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.ckbDataErrors.MultiColumn = true;
             this.ckbDataErrors.Name = "ckbDataErrors";
             this.ckbDataErrors.ScrollAlwaysVisible = true;
-            this.ckbDataErrors.Size = new System.Drawing.Size(2062, 196);
+            this.ckbDataErrors.Size = new System.Drawing.Size(2098, 260);
             this.ckbDataErrors.TabIndex = 0;
             this.ckbDataErrors.SelectedIndexChanged += new System.EventHandler(this.CkbDataErrors_SelectedIndexChanged);
             // 
@@ -4070,7 +4070,7 @@ namespace FTAnalyzer
             this.panel1.Controls.Add(this.radioOnlyAlternate);
             this.panel1.Controls.Add(this.radioOnlyPreferred);
             this.panel1.Controls.Add(this.radioAllFacts);
-            this.panel1.Location = new System.Drawing.Point(370, 884);
+            this.panel1.Location = new System.Drawing.Point(349, 959);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(706, 51);
