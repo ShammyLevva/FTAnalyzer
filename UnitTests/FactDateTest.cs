@@ -1,7 +1,5 @@
 ﻿using FTAnalyzer;
 using FTAnalyzer.Utilities;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Xml;
 using static FTAnalyzer.FactDate;
 
@@ -290,6 +288,14 @@ namespace Testing
             target = new("BET 997 AND 6 OCT 1014");
             Assert.AreEqual(new(997, 1, 1), target.StartDate);
             Assert.AreEqual(new(1014, 10, 6), target.EndDate);
+
+            target = new("BET AFT 1858 AND BEF 1871");
+            Assert.AreEqual(new(1858, 1, 1), target.StartDate);
+            Assert.AreEqual(new(1871, 12, 31), target.EndDate);
+
+            target = new("BET AFT MAR 1858 AND BEF FEB 1871");
+            Assert.AreEqual(new(1858, 3, 1), target.StartDate);
+            Assert.AreEqual(new(1871, 2, 28), target.EndDate);
             
             return target;
         }
