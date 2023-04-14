@@ -198,12 +198,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DG.AdvancedDataGridView" Version="1.2.27307.7" />
+    <PackageReference Include="DG.AdvancedDataGridView" Version="1.2.27706.9" />
     <PackageReference Include="DotNetZip" Version="1.16.0" />
     <PackageReference Include="GoogleAnalyticsTracker.Simple" Version="7.0.1" />
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.45" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.46" />
     <PackageReference Include="log4net" Version="2.0.15" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Printing.DataGridViewPrint" Version="2.0.0" />
     <PackageReference Include="ProjNET" Version="2.0.0" />
     <PackageReference Include="SharpMap.Extensions" Version="2.0.8" />
