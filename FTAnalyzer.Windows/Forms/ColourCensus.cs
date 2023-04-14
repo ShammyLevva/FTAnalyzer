@@ -31,34 +31,34 @@ namespace FTAnalyzer.Forms
 
                 boldFont = new(dgReportSheet.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
                 styles = new Dictionary<int, DataGridViewCellStyle>();
-                DataGridViewCellStyle notAlive = new DataGridViewCellStyle();
+                DataGridViewCellStyle notAlive = new();
                 notAlive.BackColor = notAlive.ForeColor = Color.DarkGray;
                 styles.Add(0, notAlive);
-                DataGridViewCellStyle missingCensus = new DataGridViewCellStyle();
+                DataGridViewCellStyle missingCensus = new();
                 missingCensus.BackColor = missingCensus.ForeColor = Color.Red;
                 styles.Add(1, missingCensus);
-                DataGridViewCellStyle censusMissingLC = new DataGridViewCellStyle();
+                DataGridViewCellStyle censusMissingLC = new();
                 censusMissingLC.BackColor = censusMissingLC.ForeColor = Color.Yellow;
                 styles.Add(2, censusMissingLC);
-                DataGridViewCellStyle notCensusEnterednotLCYear = new DataGridViewCellStyle();
+                DataGridViewCellStyle notCensusEnterednotLCYear = new();
                 notCensusEnterednotLCYear.BackColor = notCensusEnterednotLCYear.ForeColor = Color.LawnGreen;
                 styles.Add(3, notCensusEnterednotLCYear);
-                DataGridViewCellStyle allEntered = new DataGridViewCellStyle();
+                DataGridViewCellStyle allEntered = new();
                 allEntered.BackColor = allEntered.ForeColor = Color.LawnGreen;
                 styles.Add(4, allEntered);
-                DataGridViewCellStyle lcNoCensus = new DataGridViewCellStyle();
+                DataGridViewCellStyle lcNoCensus = new();
                 lcNoCensus.BackColor = lcNoCensus.ForeColor = Color.DarkOrange;
                 styles.Add(5, lcNoCensus);
-                DataGridViewCellStyle onOtherCensus = new DataGridViewCellStyle();
+                DataGridViewCellStyle onOtherCensus = new();
                 onOtherCensus.BackColor = onOtherCensus.ForeColor = Color.DarkSlateGray;
                 styles.Add(6, onOtherCensus);
-                DataGridViewCellStyle outsideUKCensus = new DataGridViewCellStyle();
+                DataGridViewCellStyle outsideUKCensus = new();
                 outsideUKCensus.BackColor = outsideUKCensus.ForeColor = Color.DarkSlateGray;
                 styles.Add(7, onOtherCensus);
-                DataGridViewCellStyle knownMissing = new DataGridViewCellStyle();
+                DataGridViewCellStyle knownMissing = new();
                 knownMissing.BackColor = knownMissing.ForeColor = Color.MediumSeaGreen;
                 styles.Add(8, knownMissing);
-                DataGridViewCellStyle diedInCensusRange = new DataGridViewCellStyle();
+                DataGridViewCellStyle diedInCensusRange = new();
                 diedInCensusRange.BackColor = diedInCensusRange.ForeColor = Color.PeachPuff;
                 styles.Add(9, diedInCensusRange);
                 SetColumns(country);
@@ -68,11 +68,9 @@ namespace FTAnalyzer.Forms
                 reportFormHelper.LoadColumnLayout("ColourCensusLayout.xml");
                 tsRecords.Text = $"{Messages.Count}{reportList.Count} records listed.";
                 string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
-                if (defaultProvider == null)
-                    defaultProvider = "FamilySearch";
+                defaultProvider ??= "FamilySearch";
                 string defaultRegion = (string)Application.UserAppDataRegistry.GetValue("Default Region");
-                if (defaultRegion == null)
-                    defaultRegion = ".co.uk";
+                defaultRegion ??= ".co.uk";
                 cbCensusSearchProvider.Text = defaultProvider;
                 cbRegion.Text = defaultRegion;
                 cbFilter.Text = "All Individuals";
@@ -144,10 +142,9 @@ namespace FTAnalyzer.Forms
             }
             else
             {
-                DataGridViewCellStyle style = dgReportSheet.DefaultCellStyle;
                 DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 int value = (int)cell.Value;
-                styles.TryGetValue(value, out style);
+                styles.TryGetValue(value, out DataGridViewCellStyle style);
                 if (style != null)
                 {
                     e.CellStyle.BackColor = style.BackColor;
@@ -260,7 +257,7 @@ namespace FTAnalyzer.Forms
                 {
                     string indID = (string)dgReportSheet.CurrentRow.Cells["IndividualID"].Value;
                     Individual ind = ft.GetIndividual(indID);
-                    Facts factForm = new Facts(ind);
+                    Facts factForm = new(ind);
                     factForm.Show();
                 }
             }
@@ -284,7 +281,7 @@ namespace FTAnalyzer.Forms
 
         List<IDisplayColourCensus> BuildFilter(CensusColours toFind, bool all)
         {
-            List<IDisplayColourCensus> result = new List<IDisplayColourCensus>();
+            List<IDisplayColourCensus> result = new();
             foreach (IDisplayColourCensus row in _reportList)
             {
                 if (all)
@@ -396,7 +393,7 @@ namespace FTAnalyzer.Forms
             {
                 IDisplayColourCensus ds = (IDisplayColourCensus)dgReportSheet.CurrentRow.DataBoundItem;
                 Individual ind = FamilyTree.Instance.GetIndividual(ds.IndividualID);
-                Facts factForm = new Facts(ind);
+                Facts factForm = new(ind);
                 MainForm.DisposeDuplicateForms(factForm);
                 factForm.Show();
             }
