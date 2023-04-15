@@ -1318,7 +1318,7 @@ namespace FTAnalyzer
             this.dgDataErrors.TabIndex = (7);
             this.toolTips.SetToolTip(this.dgDataErrors, "Double click to see list of facts for that individual");
             this.dgDataErrors.VirtualMode = (true);
-            this.dgDataErrors.CellDoubleClick += (this.dgDataErrors_CellDoubleClick);
+            this.dgDataErrors.CellDoubleClick += (this.DgDataErrors_CellDoubleClick);
             // 
             // dgCountries
             // 

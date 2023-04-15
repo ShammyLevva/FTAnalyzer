@@ -2244,7 +2244,7 @@ namespace FTAnalyzer
             }
         }
 
-        void dgDataErrors_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        void DgDataErrors_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 ShowFacts((string)dgDataErrors.CurrentRow.Cells[nameof(IDisplayDataError.Reference)].Value);
