@@ -22,7 +22,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static readonly string VERSION = "10.0.0.0-beta 1";
+        public static readonly string VERSION = "10.0.0.0-beta 2";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         Cursor storedCursor = Cursors.Default;
@@ -57,7 +57,8 @@ namespace FTAnalyzer
                     CheckWebVersion(); // check for web version if not windows store app
                 SetSavePath();
                 BuildRecentList();
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 UIHelpers.ShowMessage($"FTAnalyzer encountered a problem whilst starting up error was : {e.Message}");
             }
@@ -122,7 +123,7 @@ namespace FTAnalyzer
                 MessageBox.Show("Unable to check website for new version please check https://github.com/ShammyLevva/FTAnalyzer/releases to see if you are running the latest version.", "FTAnalyzer");
             }
         }
-        
+
         [SupportedOSPlatform("windows10.0.17763")]
         void SetupFonts()
         {
@@ -148,7 +149,7 @@ namespace FTAnalyzer
                         handwritingFont = new(fonts.Families[0], 68.0F, FontStyle.Bold);
                         boldFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 10F, FontStyle.Bold);
                         normalFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 10F, FontStyle.Regular);
-                        FontSettings.Default.FontHeight = 27; 
+                        FontSettings.Default.FontHeight = 27;
                         break;
                     case 3:
                         handwritingFont = new(fonts.Families[0], 72.0F, FontStyle.Bold);
@@ -166,7 +167,8 @@ namespace FTAnalyzer
                 SetInitialScreenControls();
                 UpdateDataErrorsDisplay();
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Debug.WriteLine($"Exception {e.Message}");
             } // for font sizing exception
         }
@@ -846,7 +848,8 @@ namespace FTAnalyzer
             {
                 UIHelpers.ShowMessage("Unable to save DataError preferences. Please check App has rights to save user preferences to registry.");
             }
-            ckbDataErrors.ColumnWidth = (int)(maxwidth * FontSettings.Default.FontWidth * GraphicsUtilities.GetCurrentScaling());
+            var scaling = GraphicsUtilities.GetCurrentScaling();
+            ckbDataErrors.ColumnWidth = (int)(maxwidth * FontSettings.Default.FontWidth * scaling);
             HourGlass(false);
         }
 
@@ -889,6 +892,7 @@ namespace FTAnalyzer
             dgDataErrors.Focus();
             mnuPrint.Enabled = true;
             UpdateDataErrorsDisplay();
+            dgDataErrors.BringToFront();
         }
 
         public static SortableBindingList<IDisplayDataError> DataErrors(CheckedListBox list)
@@ -2240,6 +2244,12 @@ namespace FTAnalyzer
             }
         }
 
+        void dgDataErrors_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                ShowFacts((string)dgDataErrors.CurrentRow.Cells[nameof(IDisplayDataError.Reference)].Value);
+        }
+
         void DgLooseDeaths_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
@@ -2423,7 +2433,7 @@ namespace FTAnalyzer
             Facts facts;
             if (radioOnlyPreferred.Checked)
                 facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, true), BuildFactTypeList(ckbFactExclude, true), Facts.AlternateFacts.PreferredOnly);
-            else if(radioOnlyAlternate.Checked)
+            else if (radioOnlyAlternate.Checked)
                 facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, true), BuildFactTypeList(ckbFactExclude, true), Facts.AlternateFacts.AlternateOnly);
             else
                 facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, true), BuildFactTypeList(ckbFactExclude, true), Facts.AlternateFacts.AllFacts);
@@ -3372,7 +3382,7 @@ namespace FTAnalyzer
             }
             List<IDisplaySurnames> list = new(stats);
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list))
-                ExportToExcel. Export(dt);
+                ExportToExcel.Export(dt);
             await Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportSurnamesEvent);
             HourGlass(false);
         }
