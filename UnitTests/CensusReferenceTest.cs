@@ -122,6 +122,10 @@ namespace Testing
             UKCensusTest("Database online. Class: RG9; Piece: 1105; Folio: 90; Page: 21; GSU", CensusDate.UKCENSUS1861, "1105", "90", "21");
             UKCensusTest("            RG11 piece 870 folio 49 page 10", CensusDate.UKCENSUS1881, "870", "49", "10");
             UKCensusTest("Archive reference RG11 Piece number 4594 Folio 9 Page 12", CensusDate.UKCENSUS1881, "4594", "9", "12");
+            UKCensusTest("Archive reference RG11 Piece number 1974  Folio 42 Page 3", CensusDate.UKCENSUS1881, "1974", "42", "3");
+            UKCensusTest("Archive reference RG11 Piece number 817 Folio 74\r\nPage 20", CensusDate.UKCENSUS1881, "817", "74", "20");
+            UKCensusTest("RG11   1781    5   4    587", CensusDate.UKCENSUS1881, "1781", "5", "4");
+            UKCensusTest("RG11   3282   63  10   178", CensusDate.UKCENSUS1881, "3282", "63", "10");
             UKCensusTest("Archive reference	RG11\nPiece number	870\nFolio	49\nPage	10", CensusDate.UKCENSUS1881, "870", "49", "10");
             UKCensusTest("Archive reference RG11 Piece number 4594 Folio 9 Page 12", CensusDate.UKCENSUS1881, "4594", "9", "12");
             UKCensusTest(@"Castleford, Pontefract, folio 9, page 12, Thomas Hey and family; digital images, \i FindMyPast.co.uk\i0  (https://search.findmypast.co.uk/search-world-Records/1881-england-wales-and-scotland-census : accessed 12 Jun 2017); citing PRO RG 11/4594", CensusDate.UKCENSUS1881, "4594", "9", "12");
