@@ -38,268 +38,270 @@ namespace FTAnalyzer.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(People));
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.txtCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.dgIndividuals = new FTAnalyzer.Forms.Controls.VirtualDGVIndividuals();
-            this.ctxViewNotes = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.viewNotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dgChildrenStatus = new FTAnalyzer.Forms.Controls.VirtualDGVChildrenStatus();
-            this.dgFamilies = new FTAnalyzer.Forms.Controls.VirtualDGVFamily();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.mnuSaveColumnLayout = new System.Windows.Forms.ToolStripButton();
-            this.mnuResetColumns = new System.Windows.Forms.ToolStripButton();
-            this.tssSaveButtons = new System.Windows.Forms.ToolStripSeparator();
-            this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuExportToExcel = new System.Windows.Forms.ToolStripButton();
-            this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
-            this.splitContainer.Panel1.SuspendLayout();
-            this.splitContainer.Panel2.SuspendLayout();
-            this.splitContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
-            this.ctxViewNotes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgChildrenStatus)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).BeginInit();
-            this.toolStrip1.SuspendLayout();
-            this.SuspendLayout();
+            statusStrip1 = new StatusStrip();
+            txtCount = new ToolStripStatusLabel();
+            splitContainer = new SplitContainer();
+            dgIndividuals = new Controls.VirtualDGVIndividuals();
+            ctxViewNotes = new ContextMenuStrip(components);
+            viewNotesToolStripMenuItem = new ToolStripMenuItem();
+            dgChildrenStatus = new Controls.VirtualDGVChildrenStatus();
+            dgFamilies = new Controls.VirtualDGVFamily();
+            toolStrip1 = new ToolStrip();
+            mnuSaveColumnLayout = new ToolStripButton();
+            mnuResetColumns = new ToolStripButton();
+            tssSaveButtons = new ToolStripSeparator();
+            printToolStripButton = new ToolStripButton();
+            printPreviewToolStripButton = new ToolStripButton();
+            toolStripSeparator = new ToolStripSeparator();
+            mnuExportToExcel = new ToolStripButton();
+            statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer).BeginInit();
+            splitContainer.Panel1.SuspendLayout();
+            splitContainer.Panel2.SuspendLayout();
+            splitContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgIndividuals).BeginInit();
+            ctxViewNotes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgChildrenStatus).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgFamilies).BeginInit();
+            toolStrip1.SuspendLayout();
+            SuspendLayout();
             // 
             // statusStrip1
             // 
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(28, 28);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.txtCount});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 1054);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 26, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1903, 22);
-            this.statusStrip1.TabIndex = 3;
-            this.statusStrip1.Text = "statusStrip1";
+            statusStrip1.ImageScalingSize = new Size(28, 28);
+            statusStrip1.Items.AddRange(new ToolStripItem[] { txtCount });
+            statusStrip1.Location = new Point(0, 1323);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Padding = new Padding(2, 0, 28, 0);
+            statusStrip1.Size = new Size(2076, 22);
+            statusStrip1.TabIndex = 3;
+            statusStrip1.Text = "statusStrip1";
             // 
             // txtCount
             // 
-            this.txtCount.Name = "txtCount";
-            this.txtCount.Size = new System.Drawing.Size(0, 13);
+            txtCount.Name = "txtCount";
+            txtCount.Size = new Size(0, 13);
             // 
             // splitContainer
             // 
-            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.Location = new System.Drawing.Point(0, 38);
-            this.splitContainer.Margin = new System.Windows.Forms.Padding(6);
-            this.splitContainer.Name = "splitContainer";
-            this.splitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            splitContainer.Dock = DockStyle.Fill;
+            splitContainer.Location = new Point(0, 0);
+            splitContainer.Margin = new Padding(7, 8, 7, 8);
+            splitContainer.Name = "splitContainer";
+            splitContainer.Orientation = Orientation.Horizontal;
             // 
             // splitContainer.Panel1
             // 
-            this.splitContainer.Panel1.Controls.Add(this.dgIndividuals);
+            splitContainer.Panel1.Controls.Add(dgIndividuals);
             // 
             // splitContainer.Panel2
             // 
-            this.splitContainer.Panel2.Controls.Add(this.dgChildrenStatus);
-            this.splitContainer.Panel2.Controls.Add(this.dgFamilies);
-            this.splitContainer.Size = new System.Drawing.Size(1903, 1016);
-            this.splitContainer.SplitterDistance = 517;
-            this.splitContainer.SplitterWidth = 7;
-            this.splitContainer.TabIndex = 7;
+            splitContainer.Panel2.Controls.Add(dgChildrenStatus);
+            splitContainer.Panel2.Controls.Add(dgFamilies);
+            splitContainer.Size = new Size(2076, 1323);
+            splitContainer.SplitterDistance = 673;
+            splitContainer.SplitterWidth = 9;
+            splitContainer.TabIndex = 7;
             // 
             // dgIndividuals
             // 
-            this.dgIndividuals.AllowUserToAddRows = false;
-            this.dgIndividuals.AllowUserToDeleteRows = false;
-            this.dgIndividuals.AllowUserToOrderColumns = true;
-            this.dgIndividuals.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgIndividuals.ContextMenuStrip = this.ctxViewNotes;
-            this.dgIndividuals.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgIndividuals.Location = new System.Drawing.Point(0, 0);
-            this.dgIndividuals.Margin = new System.Windows.Forms.Padding(6);
-            this.dgIndividuals.MultiSelect = false;
-            this.dgIndividuals.Name = "dgIndividuals";
-            this.dgIndividuals.ReadOnly = true;
-            this.dgIndividuals.RowHeadersVisible = false;
-            this.dgIndividuals.RowHeadersWidth = 50;
-            this.dgIndividuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgIndividuals.Size = new System.Drawing.Size(1903, 517);
-            this.dgIndividuals.TabIndex = 2;
-            this.dgIndividuals.VirtualMode = true;
-            this.dgIndividuals.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgIndividuals_CellDoubleClick);
-            this.dgIndividuals.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgIndividuals_MouseDown);
+            dgIndividuals.AllowUserToAddRows = false;
+            dgIndividuals.AllowUserToDeleteRows = false;
+            dgIndividuals.AllowUserToOrderColumns = true;
+            dgIndividuals.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgIndividuals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgIndividuals.ContextMenuStrip = ctxViewNotes;
+            dgIndividuals.Dock = DockStyle.Fill;
+            dgIndividuals.FilterAndSortEnabled = true;
+            dgIndividuals.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgIndividuals.Location = new Point(0, 0);
+            dgIndividuals.Margin = new Padding(7, 8, 7, 8);
+            dgIndividuals.MultiSelect = false;
+            dgIndividuals.Name = "dgIndividuals";
+            dgIndividuals.ReadOnly = true;
+            dgIndividuals.RightToLeft = RightToLeft.No;
+            dgIndividuals.RowHeadersVisible = false;
+            dgIndividuals.RowHeadersWidth = 50;
+            dgIndividuals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgIndividuals.Size = new Size(2076, 673);
+            dgIndividuals.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgIndividuals.TabIndex = 2;
+            dgIndividuals.VirtualMode = true;
+            dgIndividuals.CellDoubleClick += DgIndividuals_CellDoubleClick;
+            dgIndividuals.MouseDown += DgIndividuals_MouseDown;
             // 
             // ctxViewNotes
             // 
-            this.ctxViewNotes.ImageScalingSize = new System.Drawing.Size(28, 28);
-            this.ctxViewNotes.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewNotesToolStripMenuItem});
-            this.ctxViewNotes.Name = "contextMenuStrip1";
-            this.ctxViewNotes.Size = new System.Drawing.Size(192, 40);
-            this.ctxViewNotes.Opened += new System.EventHandler(this.ContextMenuStrip1_Opened);
+            ctxViewNotes.ImageScalingSize = new Size(28, 28);
+            ctxViewNotes.Items.AddRange(new ToolStripItem[] { viewNotesToolStripMenuItem });
+            ctxViewNotes.Name = "contextMenuStrip1";
+            ctxViewNotes.Size = new Size(192, 40);
+            ctxViewNotes.Opened += ContextMenuStrip1_Opened;
             // 
             // viewNotesToolStripMenuItem
             // 
-            this.viewNotesToolStripMenuItem.Name = "viewNotesToolStripMenuItem";
-            this.viewNotesToolStripMenuItem.Size = new System.Drawing.Size(191, 36);
-            this.viewNotesToolStripMenuItem.Text = "View Notes";
-            this.viewNotesToolStripMenuItem.Click += new System.EventHandler(this.ViewNotesToolStripMenuItem_Click);
+            viewNotesToolStripMenuItem.Name = "viewNotesToolStripMenuItem";
+            viewNotesToolStripMenuItem.Size = new Size(191, 36);
+            viewNotesToolStripMenuItem.Text = "View Notes";
+            viewNotesToolStripMenuItem.Click += ViewNotesToolStripMenuItem_Click;
             // 
             // dgChildrenStatus
             // 
-            this.dgChildrenStatus.AllowUserToAddRows = false;
-            this.dgChildrenStatus.AllowUserToDeleteRows = false;
-            this.dgChildrenStatus.AllowUserToOrderColumns = true;
-            this.dgChildrenStatus.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgChildrenStatus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgChildrenStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgChildrenStatus.Location = new System.Drawing.Point(0, 0);
-            this.dgChildrenStatus.Margin = new System.Windows.Forms.Padding(6);
-            this.dgChildrenStatus.MultiSelect = false;
-            this.dgChildrenStatus.Name = "dgChildrenStatus";
-            this.dgChildrenStatus.ReadOnly = true;
-            this.dgChildrenStatus.RowHeadersVisible = false;
-            this.dgChildrenStatus.RowHeadersWidth = 50;
-            this.dgChildrenStatus.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgChildrenStatus.Size = new System.Drawing.Size(1903, 492);
-            this.dgChildrenStatus.TabIndex = 6;
-            this.dgChildrenStatus.VirtualMode = true;
-            this.dgChildrenStatus.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgFamilies_CellDoubleClick);
-            this.dgChildrenStatus.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgChildrenStatus_CellFormatting);
+            dgChildrenStatus.AllowUserToAddRows = false;
+            dgChildrenStatus.AllowUserToDeleteRows = false;
+            dgChildrenStatus.AllowUserToOrderColumns = true;
+            dgChildrenStatus.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgChildrenStatus.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgChildrenStatus.Dock = DockStyle.Fill;
+            dgChildrenStatus.FilterAndSortEnabled = true;
+            dgChildrenStatus.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgChildrenStatus.Location = new Point(0, 0);
+            dgChildrenStatus.Margin = new Padding(7, 8, 7, 8);
+            dgChildrenStatus.MultiSelect = false;
+            dgChildrenStatus.Name = "dgChildrenStatus";
+            dgChildrenStatus.ReadOnly = true;
+            dgChildrenStatus.RightToLeft = RightToLeft.No;
+            dgChildrenStatus.RowHeadersVisible = false;
+            dgChildrenStatus.RowHeadersWidth = 50;
+            dgChildrenStatus.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgChildrenStatus.Size = new Size(2076, 641);
+            dgChildrenStatus.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgChildrenStatus.TabIndex = 6;
+            dgChildrenStatus.VirtualMode = true;
+            dgChildrenStatus.CellDoubleClick += DgFamilies_CellDoubleClick;
+            dgChildrenStatus.CellFormatting += DgChildrenStatus_CellFormatting;
             // 
             // dgFamilies
             // 
-            this.dgFamilies.AllowUserToAddRows = false;
-            this.dgFamilies.AllowUserToDeleteRows = false;
-            this.dgFamilies.AllowUserToOrderColumns = true;
-            this.dgFamilies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgFamilies.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.dgFamilies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgFamilies.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgFamilies.Location = new System.Drawing.Point(0, 0);
-            this.dgFamilies.Margin = new System.Windows.Forms.Padding(6);
-            this.dgFamilies.MultiSelect = false;
-            this.dgFamilies.Name = "dgFamilies";
-            this.dgFamilies.ReadOnly = true;
-            this.dgFamilies.RowHeadersVisible = false;
-            this.dgFamilies.RowHeadersWidth = 50;
-            this.dgFamilies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgFamilies.Size = new System.Drawing.Size(1903, 492);
-            this.dgFamilies.TabIndex = 5;
-            this.dgFamilies.VirtualMode = true;
-            this.dgFamilies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgFamilies_CellDoubleClick);
-            this.dgFamilies.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgFamilies_CellFormatting);
+            dgFamilies.AllowUserToAddRows = false;
+            dgFamilies.AllowUserToDeleteRows = false;
+            dgFamilies.AllowUserToOrderColumns = true;
+            dgFamilies.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgFamilies.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dgFamilies.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgFamilies.Dock = DockStyle.Fill;
+            dgFamilies.FilterAndSortEnabled = true;
+            dgFamilies.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgFamilies.Location = new Point(0, 0);
+            dgFamilies.Margin = new Padding(7, 8, 7, 8);
+            dgFamilies.MultiSelect = false;
+            dgFamilies.Name = "dgFamilies";
+            dgFamilies.ReadOnly = true;
+            dgFamilies.RightToLeft = RightToLeft.No;
+            dgFamilies.RowHeadersVisible = false;
+            dgFamilies.RowHeadersWidth = 50;
+            dgFamilies.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgFamilies.Size = new Size(2076, 641);
+            dgFamilies.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgFamilies.TabIndex = 5;
+            dgFamilies.VirtualMode = true;
+            dgFamilies.CellDoubleClick += DgFamilies_CellDoubleClick;
+            dgFamilies.CellFormatting += DgFamilies_CellFormatting;
             // 
             // toolStrip1
             // 
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(28, 28);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuSaveColumnLayout,
-            this.mnuResetColumns,
-            this.tssSaveButtons,
-            this.printToolStripButton,
-            this.printPreviewToolStripButton,
-            this.toolStripSeparator,
-            this.mnuExportToExcel});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1903, 38);
-            this.toolStrip1.TabIndex = 3;
-            this.toolStrip1.Text = "toolStrip1";
+            toolStrip1.ImageScalingSize = new Size(28, 28);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { mnuSaveColumnLayout, mnuResetColumns, tssSaveButtons, printToolStripButton, printPreviewToolStripButton, toolStripSeparator, mnuExportToExcel });
+            toolStrip1.Location = new Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Padding = new Padding(0, 0, 4, 0);
+            toolStrip1.Size = new Size(2076, 38);
+            toolStrip1.TabIndex = 3;
+            toolStrip1.Text = "toolStrip1";
             // 
             // mnuSaveColumnLayout
             // 
-            this.mnuSaveColumnLayout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mnuSaveColumnLayout.Image = ((System.Drawing.Image)(resources.GetObject("mnuSaveColumnLayout.Image")));
-            this.mnuSaveColumnLayout.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuSaveColumnLayout.Name = "mnuSaveColumnLayout";
-            this.mnuSaveColumnLayout.Size = new System.Drawing.Size(40, 32);
-            this.mnuSaveColumnLayout.Text = "Save Column Sort Order, layout, width etc";
-            this.mnuSaveColumnLayout.Visible = false;
-            this.mnuSaveColumnLayout.Click += new System.EventHandler(this.MnuSaveColumnLayout_Click);
+            mnuSaveColumnLayout.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            mnuSaveColumnLayout.Image = (Image)resources.GetObject("mnuSaveColumnLayout.Image");
+            mnuSaveColumnLayout.ImageTransparentColor = Color.Magenta;
+            mnuSaveColumnLayout.Name = "mnuSaveColumnLayout";
+            mnuSaveColumnLayout.Size = new Size(40, 32);
+            mnuSaveColumnLayout.Text = "Save Column Sort Order, layout, width etc";
+            mnuSaveColumnLayout.Visible = false;
+            mnuSaveColumnLayout.Click += MnuSaveColumnLayout_Click;
             // 
             // mnuResetColumns
             // 
-            this.mnuResetColumns.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mnuResetColumns.Image = ((System.Drawing.Image)(resources.GetObject("mnuResetColumns.Image")));
-            this.mnuResetColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuResetColumns.Name = "mnuResetColumns";
-            this.mnuResetColumns.Size = new System.Drawing.Size(40, 32);
-            this.mnuResetColumns.Text = "Reset Column Sort Order to Default";
-            this.mnuResetColumns.Visible = false;
-            this.mnuResetColumns.Click += new System.EventHandler(this.MnuResetColumns_Click);
+            mnuResetColumns.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            mnuResetColumns.Image = (Image)resources.GetObject("mnuResetColumns.Image");
+            mnuResetColumns.ImageTransparentColor = Color.Magenta;
+            mnuResetColumns.Name = "mnuResetColumns";
+            mnuResetColumns.Size = new Size(40, 32);
+            mnuResetColumns.Text = "Reset Column Sort Order to Default";
+            mnuResetColumns.Visible = false;
+            mnuResetColumns.Click += MnuResetColumns_Click;
             // 
             // tssSaveButtons
             // 
-            this.tssSaveButtons.Name = "tssSaveButtons";
-            this.tssSaveButtons.Size = new System.Drawing.Size(6, 38);
-            this.tssSaveButtons.Visible = false;
+            tssSaveButtons.Name = "tssSaveButtons";
+            tssSaveButtons.Size = new Size(6, 38);
+            tssSaveButtons.Visible = false;
             // 
             // printToolStripButton
             // 
-            this.printToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
-            this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printToolStripButton.Name = "printToolStripButton";
-            this.printToolStripButton.Size = new System.Drawing.Size(40, 32);
-            this.printToolStripButton.Text = "&Print";
-            this.printToolStripButton.Click += new System.EventHandler(this.PrintToolStripButton_Click);
+            printToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            printToolStripButton.Image = (Image)resources.GetObject("printToolStripButton.Image");
+            printToolStripButton.ImageTransparentColor = Color.Magenta;
+            printToolStripButton.Name = "printToolStripButton";
+            printToolStripButton.Size = new Size(40, 32);
+            printToolStripButton.Text = "&Print";
+            printToolStripButton.Click += PrintToolStripButton_Click;
             // 
             // printPreviewToolStripButton
             // 
-            this.printPreviewToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.printPreviewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripButton.Image")));
-            this.printPreviewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
-            this.printPreviewToolStripButton.Size = new System.Drawing.Size(40, 32);
-            this.printPreviewToolStripButton.Text = "Print Preview...";
-            this.printPreviewToolStripButton.Click += new System.EventHandler(this.PrintPreviewToolStripButton_Click);
+            printPreviewToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            printPreviewToolStripButton.Image = (Image)resources.GetObject("printPreviewToolStripButton.Image");
+            printPreviewToolStripButton.ImageTransparentColor = Color.Magenta;
+            printPreviewToolStripButton.Name = "printPreviewToolStripButton";
+            printPreviewToolStripButton.Size = new Size(40, 32);
+            printPreviewToolStripButton.Text = "Print Preview...";
+            printPreviewToolStripButton.Click += PrintPreviewToolStripButton_Click;
             // 
             // toolStripSeparator
             // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(6, 38);
+            toolStripSeparator.Name = "toolStripSeparator";
+            toolStripSeparator.Size = new Size(6, 38);
             // 
             // mnuExportToExcel
             // 
-            this.mnuExportToExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
-            this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuExportToExcel.Name = "mnuExportToExcel";
-            this.mnuExportToExcel.Size = new System.Drawing.Size(40, 32);
-            this.mnuExportToExcel.Text = "Export to Excel";
-            this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
+            mnuExportToExcel.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            mnuExportToExcel.Image = (Image)resources.GetObject("mnuExportToExcel.Image");
+            mnuExportToExcel.ImageTransparentColor = Color.Magenta;
+            mnuExportToExcel.Name = "mnuExportToExcel";
+            mnuExportToExcel.Size = new Size(40, 32);
+            mnuExportToExcel.Text = "Export to Excel";
+            mnuExportToExcel.Click += MnuExportToExcel_Click;
             // 
             // People
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1903, 1076);
-            this.Controls.Add(this.splitContainer);
-            this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.statusStrip1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6);
-            this.Name = "People";
-            this.Text = "Individuals & Families";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.People_FormClosed);
-            this.Load += new System.EventHandler(this.People_Load);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.splitContainer.Panel1.ResumeLayout(false);
-            this.splitContainer.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
-            this.splitContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
-            this.ctxViewNotes.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgChildrenStatus)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgFamilies)).EndInit();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(12F, 30F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(2076, 1345);
+            Controls.Add(toolStrip1);
+            Controls.Add(splitContainer);
+            Controls.Add(statusStrip1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(7, 8, 7, 8);
+            Name = "People";
+            Text = "Individuals & Families";
+            FormClosed += People_FormClosed;
+            Load += People_Load;
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
+            splitContainer.Panel1.ResumeLayout(false);
+            splitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer).EndInit();
+            splitContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgIndividuals).EndInit();
+            ctxViewNotes.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgChildrenStatus).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgFamilies).EndInit();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

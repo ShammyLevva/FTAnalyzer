@@ -237,7 +237,6 @@ namespace FTAnalyzer.Forms
             if (e.RowIndex >= 0 && dgCensus.CurrentRow != null && !CensusDate.VALUATIONROLLS.Contains(CensusDate))
             {
                 CensusIndividual ds = (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
-                FamilyTree ft = FamilyTree.Instance;
                 if (ModifierKeys.Equals(Keys.Shift))
                 {
                     Facts factForm = new(ds);

@@ -147,7 +147,8 @@ namespace FTAnalyzer.Forms.Controls
                 CreateGridColumns();
                 _dataSource = value;
                 _fulllist = value;
-                RowCount = value?.Count ?? 1;
+                base.DataSource = value;
+                //RowCount = value?.Count ?? 1;
             }
         }
 

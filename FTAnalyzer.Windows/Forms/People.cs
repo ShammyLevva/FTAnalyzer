@@ -2,6 +2,7 @@
 using FTAnalyzer.Utilities;
 using FTAnalyzer.Filters;
 using FTAnalyzer.Properties;
+using System.Diagnostics;
 
 namespace FTAnalyzer.Forms
 {
@@ -260,7 +261,7 @@ namespace FTAnalyzer.Forms
         {
             if (dgFamilies.RowCount > 1)
                 dgFamilies.Sort(dgFamilies.Columns[0], ListSortDirection.Ascending);
-            if(dgChildrenStatus.RowCount > 1)
+            if (dgChildrenStatus.RowCount > 1)
                 dgChildrenStatus.Sort(dgChildrenStatus.Columns[0], ListSortDirection.Ascending);
         }
 
@@ -516,21 +517,24 @@ namespace FTAnalyzer.Forms
 
         void PrintToolStripButton_Click(object sender, EventArgs e)
         {
-            indReportFormHelper.PrintReport(Text);
+            if (!splitContainer.Panel1Collapsed)
+                indReportFormHelper.PrintReport(Text);
             if (!splitContainer.Panel2Collapsed)
                 famReportFormHelper.PrintReport(Text + " - Families");
         }
 
         void PrintPreviewToolStripButton_Click(object sender, EventArgs e)
         {
-            indReportFormHelper.PrintPreviewReport();
+            if (!splitContainer.Panel1Collapsed)
+                indReportFormHelper.PrintPreviewReport();
             if (!splitContainer.Panel2Collapsed)
                 famReportFormHelper.PrintPreviewReport();
         }
 
         void MnuExportToExcel_Click(object sender, EventArgs e)
         {
-            indReportFormHelper.DoExportToExcel<IDisplayIndividual>();
+            if (!splitContainer.Panel1Collapsed)
+                indReportFormHelper.DoExportToExcel<IDisplayIndividual>();
             if (!splitContainer.Panel2Collapsed)
                 famReportFormHelper.DoExportToExcel<IDisplayFamily>();
         }
