@@ -15,19 +15,13 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_268413A1BD914BB9B7647C58B5B907DE"
+        "MsmKey" = "8:_BB14131B960C4C8CA6AA7FF563EF9E04"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_9007BEC7ACDE495E9D31A8D8D23D3266"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F1B3D5C9C6D64CA3B3F768F8486F00CE"
+        "MsmKey" = "8:_CB89AE8C28CE40B1923854C924A183B8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -49,13 +43,21 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:..\\Installer\\Release\\FTAnalyzer Installer.msi"
+        "OutputFilename" = "8:Release\\FTAnalyzer Installer.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -112,29 +114,9 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_268413A1BD914BB9B7647C58B5B907DE"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BB14131B960C4C8CA6AA7FF563EF9E04"
             {
-            "SourcePath" = "8:..\\FTAnalyzer.Windows\\bin\\Release\\net6.0-windows10.0.17763.0\\FTAnalyzer.exe"
-            "TargetName" = "8:FTAnalyzer.exe"
-            "Tag" = "8:"
-            "Folder" = "8:_12249BAB9E7A4E32BADCCECC439D1E75"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F1B3D5C9C6D64CA3B3F768F8486F00CE"
-            {
-            "SourcePath" = "8:..\\FTAnalyzer.Windows\\bin\\Release\\net6.0-windows10.0.17763.0\\Resources\\Icons\\FTAnalyzer.ico"
+            "SourcePath" = "8:..\\FTAnalyzer.Windows\\Resources\\FTAnalyzer.ico"
             "TargetName" = "8:FTAnalyzer.ico"
             "Tag" = "8:"
             "Folder" = "8:_12249BAB9E7A4E32BADCCECC439D1E75"
@@ -193,7 +175,7 @@
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_8B23290EDD8F4F3DB11717BE856491F0"
                     {
                     "Name" = "8:FTAnalyzer"
-                    "AlwaysCreate" = "11:FALSE"
+                    "AlwaysCreate" = "11:TRUE"
                     "Condition" = "8:"
                     "Transitive" = "11:FALSE"
                     "Property" = "8:_0483E54E76474A9E90384384444EF684"
@@ -219,15 +201,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FTAnalyzer"
-        "ProductCode" = "8:{83544459-B17C-41E1-A6AD-A4F6730156C6}"
-        "PackageCode" = "8:{BB5A3557-4C86-49A1-8936-AC56AC5BC67B}"
+        "ProductCode" = "8:{4F819359-78A0-47B3-89A9-BBFF422DA30B}"
+        "PackageCode" = "8:{67A13598-8721-4F75-A30D-D02461AFB33D}"
         "UpgradeCode" = "8:{CF5B0FD6-7288-42B8-8C86-4C519D6ACFBB}"
         "AspNetVersion" = "8:"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:10.0.0"
+        "ProductVersion" = "8:10.0.1"
         "Manufacturer" = "8:FTAnalyzer"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://www.facebook.com/groups/ftanalyzer"
@@ -237,7 +219,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:https://www.ftanalyzer.com"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_BB14131B960C4C8CA6AA7FF563EF9E04"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -348,10 +330,10 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_268413A1BD914BB9B7647C58B5B907DE"
+            "Target" = "8:_CB89AE8C28CE40B1923854C924A183B8"
             "Folder" = "8:_8B23290EDD8F4F3DB11717BE856491F0"
             "WorkingFolder" = "8:_12249BAB9E7A4E32BADCCECC439D1E75"
-            "Icon" = "8:_F1B3D5C9C6D64CA3B3F768F8486F00CE"
+            "Icon" = "8:_BB14131B960C4C8CA6AA7FF563EF9E04"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4BA8793A12394AB1A5571D1E73501A72"
@@ -362,10 +344,10 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_268413A1BD914BB9B7647C58B5B907DE"
+            "Target" = "8:_CB89AE8C28CE40B1923854C924A183B8"
             "Folder" = "8:_3F1898A45A2F43B0A8890BCFE778DE06"
             "WorkingFolder" = "8:_12249BAB9E7A4E32BADCCECC439D1E75"
-            "Icon" = "8:_F1B3D5C9C6D64CA3B3F768F8486F00CE"
+            "Icon" = "8:_BB14131B960C4C8CA6AA7FF563EF9E04"
             "Feature" = "8:"
             }
         }
@@ -767,7 +749,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_9007BEC7ACDE495E9D31A8D8D23D3266"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_CB89AE8C28CE40B1923854C924A183B8"
             {
             "SourcePath" = "8:..\\FTAnalyzer.Windows\\obj\\Release\\net6.0-windows10.0.17763.0\\apphost.exe"
             "TargetName" = "8:"
@@ -789,34 +771,6 @@
             "ProjectOutputGroupRegister" = "3:1"
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:PublishItems"
-            "OutputProjectGuid" = "8:{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_BFF2B225D49E498D855A929723E576E7"
-            {
-            "SourcePath" = "8:"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_12249BAB9E7A4E32BADCCECC439D1E75"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:LocalizedResourceDlls"
             "OutputProjectGuid" = "8:{BD462A5E-DDCA-4D63-AE61-B31C21EAAA72}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
