@@ -1729,7 +1729,7 @@ namespace FTAnalyzer
         }
 
         [SupportedOSPlatform("windows10.0.17763")]
-        void BtnLCLogin_Click(object sender, EventArgs e)
+        async void BtnLCLogin_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             try
@@ -1740,7 +1740,7 @@ namespace FTAnalyzer
             {
                 UIHelpers.ShowMessage("Error unable to save Lost Cousins email address preference. Please check App has rights to save user preferences to registry.");
             }
-            bool websiteAvailable = ExportToLostCousins.CheckLostCousinsLogin(txtLCEmail.Text, txtLCPassword.Text);
+            bool websiteAvailable = await ExportToLostCousins.CheckLostCousinsLoginAsync(txtLCEmail.Text, txtLCPassword.Text);
             btnLCLogin.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
             btnLCLogin.Enabled = !websiteAvailable;
             btnUpdateLostCousinsWebsite.Visible = websiteAvailable;
