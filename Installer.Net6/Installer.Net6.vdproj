@@ -50,6 +50,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -201,15 +209,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FTAnalyzer"
-        "ProductCode" = "8:{4F819359-78A0-47B3-89A9-BBFF422DA30B}"
-        "PackageCode" = "8:{67A13598-8721-4F75-A30D-D02461AFB33D}"
+        "ProductCode" = "8:{0349D37F-0D59-4A19-9194-695B03AE1DD8}"
+        "PackageCode" = "8:{2624A5E0-74A3-4EDB-8D30-DC5595FF94E5}"
         "UpgradeCode" = "8:{CF5B0FD6-7288-42B8-8C86-4C519D6ACFBB}"
         "AspNetVersion" = "8:"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:10.0.1"
+        "ProductVersion" = "8:10.0.0"
         "Manufacturer" = "8:FTAnalyzer"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://www.facebook.com/groups/ftanalyzer"
