@@ -1792,7 +1792,7 @@ namespace FTAnalyzer
                 {
                     rtbLCoutput.Text = "Started Processing Lost Cousins entries.\n\n";
                     Progress<string> outputText = new(value => { rtbLCoutput.AppendText(value); });
-                    int count = await Task.Run(() => ExportToLostCousins.ProcessList(LCUpdates, outputText)).ConfigureAwait(true);
+                    int count = await Task.Run(() => ExportToLostCousins.ProcessListAsync(LCUpdates, outputText)).ConfigureAwait(true);
                     string resultText = $"{DateTime.Now.ToUniversalTime():yyyy-MM-dd HH:mm}: uploaded {count} records";
                     await Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.UpdateLostCousins, resultText).ConfigureAwait(true);
                     SpecialMethods.VisitWebsite("https://www.lostcousins.com/pages/members/ancestors/");
@@ -1826,7 +1826,7 @@ namespace FTAnalyzer
             if (btnCheckMyAncestors.BackColor == Color.LightGreen)
             {
                 Progress<string> outputText = new(value => { rtbCheckAncestors.AppendText(value); });
-                dgCheckAncestors.DataSource = ExportToLostCousins.VerifyAncestors(outputText);
+                dgCheckAncestors.DataSource = ExportToLostCousins.VerifyAncestorsAsync(outputText);
                 dgCheckAncestors.Refresh();
 
             }
