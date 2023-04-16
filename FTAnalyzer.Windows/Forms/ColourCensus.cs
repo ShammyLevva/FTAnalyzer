@@ -15,7 +15,7 @@ namespace FTAnalyzer.Forms
         readonly Font boldFont;
         readonly string _country;
         bool settingSelections;
-
+        
         public ColourCensus(string country, List<IDisplayColourCensus> reportList)
         {
             try
@@ -32,34 +32,34 @@ namespace FTAnalyzer.Forms
                 boldFont = new(dgReportSheet.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
                 styles = new Dictionary<int, DataGridViewCellStyle>();
                 DataGridViewCellStyle notAlive = new();
-                notAlive.BackColor = notAlive.ForeColor = Color.DarkGray;
+                notAlive.BackColor = notAlive.ForeColor = CensusColourValues[(int)CensusColours.NOT_ALIVE];
                 styles.Add(0, notAlive);
                 DataGridViewCellStyle missingCensus = new();
-                missingCensus.BackColor = missingCensus.ForeColor = Color.Red;
+                missingCensus.BackColor = missingCensus.ForeColor = CensusColourValues[(int)CensusColours.NO_CENSUS];
                 styles.Add(1, missingCensus);
                 DataGridViewCellStyle censusMissingLC = new();
-                censusMissingLC.BackColor = censusMissingLC.ForeColor = Color.Yellow;
+                censusMissingLC.BackColor = censusMissingLC.ForeColor = CensusColourValues[(int)CensusColours.CENSUS_PRESENT_LC_MISSING];
                 styles.Add(2, censusMissingLC);
                 DataGridViewCellStyle notCensusEnterednotLCYear = new();
-                notCensusEnterednotLCYear.BackColor = notCensusEnterednotLCYear.ForeColor = Color.LawnGreen;
+                notCensusEnterednotLCYear.BackColor = notCensusEnterednotLCYear.ForeColor = CensusColourValues[(int)CensusColours.CENSUS_PRESENT_NOT_LC_YEAR];
                 styles.Add(3, notCensusEnterednotLCYear);
                 DataGridViewCellStyle allEntered = new();
-                allEntered.BackColor = allEntered.ForeColor = Color.LawnGreen;
+                allEntered.BackColor = allEntered.ForeColor = CensusColourValues[(int)CensusColours.CENSUS_PRESENT_LC_PRESENT];
                 styles.Add(4, allEntered);
                 DataGridViewCellStyle lcNoCensus = new();
-                lcNoCensus.BackColor = lcNoCensus.ForeColor = Color.DarkOrange;
+                lcNoCensus.BackColor = lcNoCensus.ForeColor = CensusColourValues[(int)CensusColours.LC_PRESENT_NO_CENSUS];
                 styles.Add(5, lcNoCensus);
                 DataGridViewCellStyle onOtherCensus = new();
-                onOtherCensus.BackColor = onOtherCensus.ForeColor = Color.DarkSlateGray;
+                onOtherCensus.BackColor = onOtherCensus.ForeColor = CensusColourValues[(int)CensusColours.OVERSEAS_CENSUS];
                 styles.Add(6, onOtherCensus);
                 DataGridViewCellStyle outsideUKCensus = new();
-                outsideUKCensus.BackColor = outsideUKCensus.ForeColor = Color.DarkSlateGray;
+                outsideUKCensus.BackColor = outsideUKCensus.ForeColor = CensusColourValues[(int)CensusColours.OUT_OF_COUNTRY];
                 styles.Add(7, onOtherCensus);
                 DataGridViewCellStyle knownMissing = new();
-                knownMissing.BackColor = knownMissing.ForeColor = Color.MediumSeaGreen;
+                knownMissing.BackColor = knownMissing.ForeColor = CensusColourValues[(int)CensusColours.KNOWN_MISSING];
                 styles.Add(8, knownMissing);
                 DataGridViewCellStyle diedInCensusRange = new();
-                diedInCensusRange.BackColor = diedInCensusRange.ForeColor = Color.PeachPuff;
+                diedInCensusRange.BackColor = diedInCensusRange.ForeColor = CensusColourValues[(int)CensusColours.DIED_DURING_CENSUS];
                 styles.Add(9, diedInCensusRange);
                 SetColumns(country);
                 dgReportSheet.DataSource = _reportList;
