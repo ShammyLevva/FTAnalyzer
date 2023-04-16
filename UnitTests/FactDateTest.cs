@@ -296,7 +296,11 @@ namespace Testing
             target = new("BET AFT MAR 1858 AND BEF FEB 1871");
             Assert.AreEqual(new(1858, 3, 1), target.StartDate);
             Assert.AreEqual(new(1871, 2, 28), target.EndDate);
-            
+
+            target = new("TO BEF 1934");
+            Assert.AreEqual(MINDATE, target.StartDate);
+            Assert.AreEqual(new(1933, 12, 31), target.EndDate);
+
             return target;
         }
 
