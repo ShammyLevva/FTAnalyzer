@@ -17,6 +17,7 @@ using System.Xml;
 using HtmlAgilityPack;
 using System.Diagnostics;
 using System.Runtime.Versioning;
+using FTAnalyzer.Windows;
 
 namespace FTAnalyzer
 {
@@ -1740,7 +1741,7 @@ namespace FTAnalyzer
             {
                 UIHelpers.ShowMessage("Error unable to save Lost Cousins email address preference. Please check App has rights to save user preferences to registry.");
             }
-            bool websiteAvailable = await ExportToLostCousins.CheckLostCousinsLoginAsync(txtLCEmail.Text, txtLCPassword.Text);
+            bool websiteAvailable = await Program.LCClient.LostCousinsLoginAsync(txtLCEmail.Text, txtLCPassword.Text);
             btnLCLogin.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
             btnLCLogin.Enabled = !websiteAvailable;
             btnUpdateLostCousinsWebsite.Visible = websiteAvailable;
@@ -1852,7 +1853,7 @@ namespace FTAnalyzer
         void ClearLogin()
         {
             if (btnUpdateLostCousinsWebsite.Visible) // if we can login clear cookies to reset session
-                ExportToLostCousins.EmptyCookieJar();
+                Program.LCClient.EmptyCookieJar();
             btnLCLogin.BackColor = Color.Red;
             btnLCLogin.Enabled = true;
             btnUpdateLostCousinsWebsite.Visible = false;
