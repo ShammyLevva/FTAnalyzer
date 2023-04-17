@@ -2,6 +2,7 @@
 using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
+using Printing.DataGridViewPrint;
 using System.ComponentModel;
 
 namespace FTAnalyzer.Forms
@@ -109,9 +110,8 @@ namespace FTAnalyzer.Forms
 
         void SetupDataGridView(bool censusDone, List<CensusIndividual> individuals)
         {
-            
             dgCensus.DataSource = new SortableBindingList<IDisplayCensus>(individuals);
-            dgCensus.RowTemplate.Height = FontSettings.Default.FontHeight;
+            dgCensus.RowTemplate.Height = (int)(FontSettings.Default.FontHeight * GraphicsUtilities.GetCurrentScaling()); 
             dgCensus.AllowUserToResizeColumns = true;
             if (!censusDone)
                 dgCensus.Columns["CensusReference"].Visible = false;
@@ -135,7 +135,6 @@ namespace FTAnalyzer.Forms
             {
                 string currentRowText = "";
                 bool highlighted = true;
-
                 Font boldFont = new(dgCensus.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
                 Font regularFont = new(dgCensus.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Regular);
                 int sortColumn = dgCensus.SortedColumn.Index;
