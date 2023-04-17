@@ -63,7 +63,7 @@ namespace FTAnalyzer.Forms
                 styles.Add(9, diedInCensusRange);
                 SetColumns(country);
                 dgReportSheet.DataSource = _reportList;
-                dgReportSheet.RowTemplate.Height = FontSettings.Default.FontHeight;
+                dgReportSheet.RowTemplate.Height = (int)(FontSettings.Default.FontHeight * GraphicsUtilities.GetCurrentScaling());
                 dgReportSheet.AllowUserToResizeColumns = true;
                 reportFormHelper.LoadColumnLayout("ColourCensusLayout.xml");
                 tsRecords.Text = $"{Messages.Count}{reportList.Count} records listed.";
