@@ -43,8 +43,8 @@ namespace FTAnalyzer
         {
             this.components = (new global::System.ComponentModel.Container());
             global::System.ComponentModel.ComponentResourceManager resources = new global::System.ComponentModel.ComponentResourceManager(typeof(global::FTAnalyzer.MainForm));
-            global::System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new global::System.Windows.Forms.DataGridViewCellStyle();
-            global::System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new global::System.Windows.Forms.DataGridViewCellStyle();
+            global::System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new global::System.Windows.Forms.DataGridViewCellStyle();
+            global::System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new global::System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = (new global::System.Windows.Forms.OpenFileDialog());
             this.menuStrip1 = (new global::System.Windows.Forms.MenuStrip());
             this.fileToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
@@ -155,6 +155,7 @@ namespace FTAnalyzer
             this.dgDataErrors = (new global::FTAnalyzer.Forms.Controls.VirtualDGVDataErrors());
             this.dgCountries = (new global::FTAnalyzer.Forms.Controls.VirtualDGVLocations());
             this.dgRegions = (new global::FTAnalyzer.Forms.Controls.VirtualDGVLocations());
+            this.btnUpdateLostCousinsWebsite = (new global::System.Windows.Forms.Button());
             this.printPreviewDialog = (new global::System.Windows.Forms.PrintPreviewDialog());
             this.printDialog = (new global::System.Windows.Forms.PrintDialog());
             this.printDocument = (new global::System.Drawing.Printing.PrintDocument());
@@ -220,6 +221,7 @@ namespace FTAnalyzer
             this.btnLC1881Scot = (new global::System.Windows.Forms.Button());
             this.relTypesLC = (new global::FTAnalyzer.Forms.Controls.RelationTypes());
             this.LCUpdatesTab = (new global::System.Windows.Forms.TabPage());
+            this.rtbLCoutput = (new global::FTAnalyzer.Utilities.ScrollingRichTextBox());
             this.btnViewInvalidRefs = (new global::System.Windows.Forms.Button());
             this.btnLCPotentialUploads = (new global::System.Windows.Forms.Button());
             this.label21 = (new global::System.Windows.Forms.Label());
@@ -230,8 +232,6 @@ namespace FTAnalyzer
             this.label19 = (new global::System.Windows.Forms.Label());
             this.txtLCEmail = (new global::System.Windows.Forms.TextBox());
             this.txtLCPassword = (new global::System.Windows.Forms.MaskedTextBox());
-            this.btnUpdateLostCousinsWebsite = (new global::System.Windows.Forms.Button());
-            this.rtbLCoutput = (new global::FTAnalyzer.Utilities.ScrollingRichTextBox());
             this.LCVerifyTab = (new global::System.Windows.Forms.TabPage());
             this.rtbCheckAncestors = (new global::FTAnalyzer.Utilities.ScrollingRichTextBox());
             this.btnCheckMyAncestors = (new global::System.Windows.Forms.Button());
@@ -1197,14 +1197,14 @@ namespace FTAnalyzer
             this.dgCheckAncestors.AllowUserToDeleteRows = (false);
             this.dgCheckAncestors.Anchor = ((global::System.Windows.Forms.AnchorStyles)((((global::System.Windows.Forms.AnchorStyles.Top) | (global::System.Windows.Forms.AnchorStyles.Bottom)) | (global::System.Windows.Forms.AnchorStyles.Left)) | (global::System.Windows.Forms.AnchorStyles.Right)));
             this.dgCheckAncestors.ColumnHeadersHeight = (40);
-            dataGridViewCellStyle5.Alignment = (global::System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft);
-            dataGridViewCellStyle5.BackColor = (global::System.Drawing.SystemColors.Window);
-            dataGridViewCellStyle5.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 8.25F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            dataGridViewCellStyle5.ForeColor = (global::System.Drawing.SystemColors.ControlText);
-            dataGridViewCellStyle5.SelectionBackColor = (global::System.Drawing.SystemColors.Highlight);
-            dataGridViewCellStyle5.SelectionForeColor = (global::System.Drawing.SystemColors.HighlightText);
-            dataGridViewCellStyle5.WrapMode = (global::System.Windows.Forms.DataGridViewTriState.False);
-            this.dgCheckAncestors.DefaultCellStyle = (dataGridViewCellStyle5);
+            dataGridViewCellStyle1.Alignment = (global::System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft);
+            dataGridViewCellStyle1.BackColor = (global::System.Drawing.SystemColors.Window);
+            dataGridViewCellStyle1.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 8.25F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
+            dataGridViewCellStyle1.ForeColor = (global::System.Drawing.SystemColors.ControlText);
+            dataGridViewCellStyle1.SelectionBackColor = (global::System.Drawing.SystemColors.Highlight);
+            dataGridViewCellStyle1.SelectionForeColor = (global::System.Drawing.SystemColors.HighlightText);
+            dataGridViewCellStyle1.WrapMode = (global::System.Windows.Forms.DataGridViewTriState.False);
+            this.dgCheckAncestors.DefaultCellStyle = (dataGridViewCellStyle1);
             this.dgCheckAncestors.Location = (new global::System.Drawing.Point(7, 196));
             this.dgCheckAncestors.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
             this.dgCheckAncestors.Name = ("dgCheckAncestors");
@@ -1292,14 +1292,14 @@ namespace FTAnalyzer
             this.dgDataErrors.AutoSizeColumnsMode = (global::System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
             this.dgDataErrors.AutoSizeRowsMode = (global::System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells);
             this.dgDataErrors.ColumnHeadersHeightSizeMode = (global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize);
-            dataGridViewCellStyle6.Alignment = (global::System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft);
-            dataGridViewCellStyle6.BackColor = (global::System.Drawing.SystemColors.Window);
-            dataGridViewCellStyle6.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 8.25F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            dataGridViewCellStyle6.ForeColor = (global::System.Drawing.SystemColors.ControlText);
-            dataGridViewCellStyle6.SelectionBackColor = (global::System.Drawing.SystemColors.Highlight);
-            dataGridViewCellStyle6.SelectionForeColor = (global::System.Drawing.SystemColors.HighlightText);
-            dataGridViewCellStyle6.WrapMode = (global::System.Windows.Forms.DataGridViewTriState.False);
-            this.dgDataErrors.DefaultCellStyle = (dataGridViewCellStyle6);
+            dataGridViewCellStyle2.Alignment = (global::System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft);
+            dataGridViewCellStyle2.BackColor = (global::System.Drawing.SystemColors.Window);
+            dataGridViewCellStyle2.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 8.25F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
+            dataGridViewCellStyle2.ForeColor = (global::System.Drawing.SystemColors.ControlText);
+            dataGridViewCellStyle2.SelectionBackColor = (global::System.Drawing.SystemColors.Highlight);
+            dataGridViewCellStyle2.SelectionForeColor = (global::System.Drawing.SystemColors.HighlightText);
+            dataGridViewCellStyle2.WrapMode = (global::System.Windows.Forms.DataGridViewTriState.False);
+            this.dgDataErrors.DefaultCellStyle = (dataGridViewCellStyle2);
             this.dgDataErrors.FilterAndSortEnabled = (true);
             this.dgDataErrors.FilterStringChangedInvokeBeforeDatasourceUpdate = (true);
             this.dgDataErrors.Location = (new global::System.Drawing.Point(16, 390));
@@ -1371,6 +1371,19 @@ namespace FTAnalyzer
             this.dgRegions.TabIndex = (2);
             this.toolTips.SetToolTip(this.dgRegions, "Double click on Region name to see list of individuals with that Region.");
             this.dgRegions.VirtualMode = (true);
+            // 
+            // btnUpdateLostCousinsWebsite
+            // 
+            this.btnUpdateLostCousinsWebsite.Enabled = (false);
+            this.btnUpdateLostCousinsWebsite.Location = (new global::System.Drawing.Point(598, 401));
+            this.btnUpdateLostCousinsWebsite.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
+            this.btnUpdateLostCousinsWebsite.Name = ("btnUpdateLostCousinsWebsite");
+            this.btnUpdateLostCousinsWebsite.Size = (new global::System.Drawing.Size(276, 52));
+            this.btnUpdateLostCousinsWebsite.TabIndex = (5);
+            this.btnUpdateLostCousinsWebsite.Text = ("Update Lost Cousins site");
+            this.btnUpdateLostCousinsWebsite.UseVisualStyleBackColor = (true);
+            this.btnUpdateLostCousinsWebsite.Visible = (false);
+            this.btnUpdateLostCousinsWebsite.Click += (this.BtnUpdateLostCousinsWebsite_Click);
             // 
             // printPreviewDialog
             // 
@@ -2137,6 +2150,7 @@ namespace FTAnalyzer
             // 
             // LCUpdatesTab
             // 
+            this.LCUpdatesTab.Controls.Add(this.rtbLCoutput);
             this.LCUpdatesTab.Controls.Add(this.btnViewInvalidRefs);
             this.LCUpdatesTab.Controls.Add(this.btnLCPotentialUploads);
             this.LCUpdatesTab.Controls.Add(this.chkLCRootPersonConfirm);
@@ -2144,7 +2158,6 @@ namespace FTAnalyzer
             this.LCUpdatesTab.Controls.Add(this.rtbLCUpdateData);
             this.LCUpdatesTab.Controls.Add(this.groupBox8);
             this.LCUpdatesTab.Controls.Add(this.btnUpdateLostCousinsWebsite);
-            this.LCUpdatesTab.Controls.Add(this.rtbLCoutput);
             this.LCUpdatesTab.Location = (new global::System.Drawing.Point(4, 39));
             this.LCUpdatesTab.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
             this.LCUpdatesTab.Name = ("LCUpdatesTab");
@@ -2153,6 +2166,19 @@ namespace FTAnalyzer
             this.LCUpdatesTab.TabIndex = (1);
             this.LCUpdatesTab.Text = ("Updates");
             this.LCUpdatesTab.UseVisualStyleBackColor = (true);
+            // 
+            // rtbLCoutput
+            // 
+            this.rtbLCoutput.BackColor = (global::System.Drawing.SystemColors.Window);
+            this.rtbLCoutput.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 9F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
+            this.rtbLCoutput.Location = (new global::System.Drawing.Point(7, 469));
+            this.rtbLCoutput.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
+            this.rtbLCoutput.Name = ("rtbLCoutput");
+            this.rtbLCoutput.ReadOnly = (true);
+            this.rtbLCoutput.Size = (new global::System.Drawing.Size(2092, 511));
+            this.rtbLCoutput.TabIndex = (41);
+            this.rtbLCoutput.TabStop = (false);
+            this.rtbLCoutput.Text = (resources.GetString("rtbLCoutput.Text"));
             // 
             // btnViewInvalidRefs
             // 
@@ -2272,34 +2298,6 @@ namespace FTAnalyzer
             this.txtLCPassword.Size = (new global::System.Drawing.Size(388, 33));
             this.txtLCPassword.TabIndex = (2);
             this.txtLCPassword.TextChanged += (this.TxtLCPassword_TextChanged);
-            // 
-            // btnUpdateLostCousinsWebsite
-            // 
-            this.btnUpdateLostCousinsWebsite.Enabled = (false);
-            this.btnUpdateLostCousinsWebsite.Location = (new global::System.Drawing.Point(598, 401));
-            this.btnUpdateLostCousinsWebsite.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnUpdateLostCousinsWebsite.Name = ("btnUpdateLostCousinsWebsite");
-            this.btnUpdateLostCousinsWebsite.Size = (new global::System.Drawing.Size(276, 52));
-            this.btnUpdateLostCousinsWebsite.TabIndex = (5);
-            this.btnUpdateLostCousinsWebsite.Text = ("Update Lost Cousins site");
-            this.btnUpdateLostCousinsWebsite.UseVisualStyleBackColor = (true);
-            this.btnUpdateLostCousinsWebsite.Visible = (false);
-            this.btnUpdateLostCousinsWebsite.Click += (this.BtnUpdateLostCousinsWebsite_Click);
-            // 
-            // rtbLCoutput
-            // 
-            this.rtbLCoutput.Anchor = ((global::System.Windows.Forms.AnchorStyles)((((global::System.Windows.Forms.AnchorStyles.Top) | (global::System.Windows.Forms.AnchorStyles.Bottom)) | (global::System.Windows.Forms.AnchorStyles.Left)) | (global::System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbLCoutput.BackColor = (global::System.Drawing.SystemColors.Control);
-            this.rtbLCoutput.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 9F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            this.rtbLCoutput.Location = (new global::System.Drawing.Point(7, 469));
-            this.rtbLCoutput.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.rtbLCoutput.Name = ("rtbLCoutput");
-            this.rtbLCoutput.ReadOnly = (true);
-            this.rtbLCoutput.Size = (new global::System.Drawing.Size(2149, 516));
-            this.rtbLCoutput.TabIndex = (38);
-            this.rtbLCoutput.TabStop = (false);
-            this.rtbLCoutput.Text = ("");
-            this.rtbLCoutput.TextChanged += (this.RtbLCoutput_TextChanged);
             // 
             // LCVerifyTab
             // 
@@ -4726,7 +4724,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.CheckBox chkLCRootPersonConfirm;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.RichTextBox rtbLCUpdateData;
-        private Utilities.ScrollingRichTextBox rtbLCoutput;
         private System.Windows.Forms.CheckBox chkSurnamesIgnoreCase;
         private System.Windows.Forms.Button btnLCPotentialUploads;
         private System.Windows.Forms.Button btnViewInvalidRefs;
@@ -4815,6 +4812,7 @@ namespace FTAnalyzer
         private Utilities.ScrollingRichTextBox rtbToday;
         private System.Windows.Forms.ToolStripMenuItem MnuCustomFactsToExcel;
         private global::System.Windows.Forms.CheckedListBox ckbDataErrors;
+        private global::FTAnalyzer.Utilities.ScrollingRichTextBox rtbLCoutput;
     }
 }
 

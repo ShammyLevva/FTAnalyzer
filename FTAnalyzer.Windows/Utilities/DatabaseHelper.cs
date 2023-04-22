@@ -2,14 +2,9 @@
 using FTAnalyzer.Mapping;
 using NetTopologySuite.Geometries;
 using Ionic.Zip;
-using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
 using System.Diagnostics;
 
 namespace FTAnalyzer.Utilities
