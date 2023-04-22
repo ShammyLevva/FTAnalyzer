@@ -4,22 +4,16 @@
     {
         protected override object GetValueFor(IDisplayLooseBirth ind, string propertyName)
         {
-            switch (propertyName)
-            {  
-                case nameof(IDisplayLooseBirth.IndividualID):
-                    return ind.IndividualID;
-                case nameof(IDisplayLooseBirth.Forenames):
-                    return ind.Forenames;
-                case nameof(IDisplayLooseBirth.Surname):
-                    return ind.Surname;
-                case nameof(IDisplayLooseBirth.BirthDate):
-                    return ind.BirthDate;
-                case nameof(IDisplayLooseBirth.BirthLocation):
-                    return ind.BirthLocation;
-                case nameof(IDisplayLooseBirth.LooseBirth):
-                    return ind.LooseBirth;
-            }
-            return null;
+            return propertyName switch
+            {
+                nameof(IDisplayLooseBirth.IndividualID) => ind.IndividualID,
+                nameof(IDisplayLooseBirth.Forenames) => ind.Forenames,
+                nameof(IDisplayLooseBirth.Surname) => ind.Surname,
+                nameof(IDisplayLooseBirth.BirthDate) => ind.BirthDate,
+                nameof(IDisplayLooseBirth.BirthLocation) => ind.BirthLocation,
+                nameof(IDisplayLooseBirth.LooseBirth) => ind.LooseBirth,
+                _ => null,
+            };
         }
     }
 }

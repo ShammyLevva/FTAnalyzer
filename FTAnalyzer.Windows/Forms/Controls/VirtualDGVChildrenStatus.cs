@@ -30,6 +30,8 @@
                     return fam.ExpectedAlive;
                 case nameof(IDisplayChildrenStatus.ExpectedDead):
                     return fam.ExpectedDead;
+                default:
+                    break;
             }
             return null;
         }

@@ -8,21 +8,21 @@ namespace FTAnalyzer.Forms
 {
     public partial class BingOSMap : Form
     {
-        public static string COUNTRY = "country";
-        public static string ESTABLISHMENT = "establishment";
-        public static string ADMIN1 = "administrative_area_level_1";
-        public static string ADMIN2 = "administrative_area_level_2";
-        public static string ADMIN3 = "administrative_area_level_3";
-        public static string LOCALITY = "locality";
-        public static string SUBLOCALITY = "sublocality";
-        public static string NEIGHBOURHOOD = "neighborhood";
-        public static string STREET_ADDRESS = "street_address";
-        public static string PREMISE = "premise";
-        public static string CEMETERY = "cemetery";
-        public static string HOSPITAL = "hospital";
-        public static string PLACE_OF_WORSHIP = "place_of_worship";
-        public static string ROUTE = "route";
-        public static string INTERSECTION = "intersection";
+        public static readonly string COUNTRY = "country";
+        public static readonly string ESTABLISHMENT = "establishment";
+        public static readonly string ADMIN1 = "administrative_area_level_1";
+        public static readonly string ADMIN2 = "administrative_area_level_2";
+        public static readonly string ADMIN3 = "administrative_area_level_3";
+        public static readonly string LOCALITY = "locality";
+        public static readonly string SUBLOCALITY = "sublocality";
+        public static readonly string NEIGHBOURHOOD = "neighborhood";
+        public static readonly string STREET_ADDRESS = "street_address";
+        public static readonly string PREMISE = "premise";
+        public static readonly string CEMETERY = "cemetery";
+        public static readonly string HOSPITAL = "hospital";
+        public static readonly string PLACE_OF_WORSHIP = "place_of_worship";
+        public static readonly string ROUTE = "route";
+        public static readonly string INTERSECTION = "intersection";
 
         bool loaded;
 

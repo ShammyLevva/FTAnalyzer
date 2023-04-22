@@ -1,8 +1,4 @@
-﻿using FTAnalyzer.Windows.Properties;
-using System;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
+﻿using FTAnalyzer.Properties;
 
 namespace FTAnalyzer.Forms.Controls
 {
@@ -18,10 +14,7 @@ namespace FTAnalyzer.Forms.Controls
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new TreeViewHandler();
-                }
+                instance ??= new TreeViewHandler();
                 return instance;
             }
         }
@@ -44,9 +37,9 @@ namespace FTAnalyzer.Forms.Controls
                 progressBar.Maximum = FamilyTree.Instance.AllDisplayPlaces.Count;
                 mainformTreeRootNode = new TreeNode();
                 placesTreeRootNode = new TreeNode();
-                Font regularFont = new Font(defaultFont, FontStyle.Regular);
-                Font boldFont = new Font(defaultFont, FontStyle.Bold);
-                foreach (FactLocation location in FamilyTree.Instance.AllDisplayPlaces)
+                Font regularFont = new(defaultFont, FontStyle.Regular);
+                Font boldFont = new(defaultFont, FontStyle.Bold);
+                foreach (FactLocation location in FamilyTree.Instance.AllDisplayPlaces.Cast<FactLocation>())
                 {
                     string[] parts = location.GetParts();
                     TreeNode currentM = mainformTreeRootNode;
@@ -58,7 +51,7 @@ namespace FTAnalyzer.Forms.Controls
                         TreeNode childP = currentP.Nodes.Find(part, false).FirstOrDefault();
                         if (childM == null)
                         {
-                            TreeNode child = new TreeNode((part.Length == 0 ? "<blank>" : part))
+                            TreeNode child = new((part.Length == 0 ? "<blank>" : part))
                             {
                                 Name = part,
                                 Tag = location,

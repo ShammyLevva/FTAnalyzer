@@ -2,12 +2,8 @@
 using FTAnalyzer.Forms;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
-using FTAnalyzer.Windows.Properties;
-using System;
-using System.Collections.Generic;
+using FTAnalyzer.Properties;
 using System.ComponentModel;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace FTAnalyzer
 {
@@ -30,7 +26,7 @@ namespace FTAnalyzer
                 dgIndividuals.AutoGenerateColumns = false;
                 dgIndividuals.DataSource = new SortableBindingList<MapLocation>(this.locations);
                 reportFormHelper = new ReportFormHelper(this, Text, dgIndividuals, ResetTable, "Map Individuals");
-                italicFont = new Font(dgIndividuals.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Italic);
+                italicFont = new(dgIndividuals.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Italic);
                 reportFormHelper.LoadColumnLayout("MapIndividualColumns.xml");
                 tsRecords.Text = this.locations.Count + " Records. " + Messages.Hints_Individual;
                 MapLocation mostCommon = this.locations.MostCommon();
@@ -80,7 +76,7 @@ namespace FTAnalyzer
             {
                 string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
                 Individual ind = ft.GetIndividual(indID);
-                Facts factForm = new Facts(ind);
+                Facts factForm = new(ind);
                 MainForm.DisposeDuplicateForms(factForm);
                 factForm.Show();
             }
@@ -92,16 +88,16 @@ namespace FTAnalyzer
             {
                 Cursor = Cursors.WaitCursor;
                 MapLocation loc = dgIndividuals.SelectedRows[0].DataBoundItem as MapLocation;
-                EditLocation editform = new EditLocation(loc.Location);
+                EditLocation editform = new(loc.Location);
                 Cursor = Cursors.Default;
                 DialogResult result = editform.ShowDialog(this);
                 editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
                 if (mapForm != null && mapForm.Visible)
                 {
-                    if (mapForm is TimeLine)
-                        ((TimeLine)mapForm).RefreshClusters();
-                    else if (mapForm is Places)
-                        ((Places)mapForm).RefreshClusters();
+                    if (mapForm is TimeLine line)
+                        line.RefreshClusters();
+                    else if (mapForm is Places places)
+                        places.RefreshClusters();
                 }
                 UpdateIcons(loc.Location);
             }
@@ -132,7 +128,7 @@ namespace FTAnalyzer
         {
             try
             {
-                EditLocation editform = new EditLocation(loc);
+                EditLocation editform = new(loc);
                 Cursor = Cursors.Default;
                 DialogResult result = editform.ShowDialog(this);
                 editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog

@@ -14,6 +14,8 @@
                     return fact.FamilyCount;
                 case nameof(IDisplayCustomFact.Ignore):
                     return fact.Ignore;
+                default:
+                    break;
             }
             return null;
         }

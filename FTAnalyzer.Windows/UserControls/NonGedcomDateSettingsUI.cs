@@ -1,8 +1,5 @@
-﻿using FTAnalyzer.Windows.Properties;
-using System;
-using System.Drawing;
+﻿using FTAnalyzer.Properties;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using static FTAnalyzer.FactDate;
 
 namespace FTAnalyzer.UserControls

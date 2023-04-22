@@ -2,7 +2,7 @@
 using FTAnalyzer.Exports;
 using FTAnalyzer.Filters;
 using FTAnalyzer.Forms;
-using FTAnalyzer.Windows.Properties;
+using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
 using Ionic.Zip;
@@ -16,19 +16,21 @@ using System.Text;
 using System.Xml;
 using HtmlAgilityPack;
 using System.Diagnostics;
+using System.Runtime.Versioning;
+using FTAnalyzer.Windows;
 
 namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static string VERSION = "10.0.0.0";
+        public static readonly string VERSION = "10.0.0.0-beta 2";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         Cursor storedCursor = Cursors.Default;
         readonly FamilyTree ft = FamilyTree.Instance;
         bool stopProcessing;
         string filename;
-        readonly PrivateFontCollection fonts = new PrivateFontCollection();
+        readonly PrivateFontCollection fonts = new();
         Font handwritingFont;
         Font boldFont;
         Font normalFont;
@@ -49,19 +51,21 @@ namespace FTAnalyzer
                 ShowMenus(false);
                 log.Info($"Started FTAnalyzer version {VERSION}");
                 int pos = VERSION.IndexOf('-');
-                string ver = pos > 0 ? VERSION.Substring(0, VERSION.IndexOf('-')) : VERSION;
+                string ver = pos > 0 ? VERSION[..VERSION.IndexOf('-')] : VERSION;
                 DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
                 CheckSystemVersion();
                 if (!Application.ExecutablePath.Contains("WindowsApps"))
                     CheckWebVersion(); // check for web version if not windows store app
                 SetSavePath();
                 BuildRecentList();
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 UIHelpers.ShowMessage($"FTAnalyzer encountered a problem whilst starting up error was : {e.Message}");
             }
         }
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void MainForm_Load(object sender, EventArgs e)
         {
             SetupFonts();
@@ -92,16 +96,16 @@ namespace FTAnalyzer
                 using (HttpClient client = new())
                 {
                     doc = new HtmlAgilityPack.HtmlDocument();
-                    string webData = client.GetStringAsync("https://github.com/ShammyLevva/FTAnalyzer/releases").Result;
+                    string webData = client.GetStringAsync("https://github.com/ShammyLevva/FTAnalyzer").Result;
                     doc.LoadHtml(webData);
                 }
-                HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//div/div/h1/a");
+                HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//div[@class='d-flex']/span");
                 string webVersion = versionNode.InnerText.ToUpper().Replace("VERSION", "").Trim();
                 string thisVersion = VERSION;
                 if (VERSION.Contains("-beta"))
-                    thisVersion = VERSION.Substring(0, VERSION.IndexOf("-"));
-                Version web = new Version(webVersion);
-                Version local = new Version(thisVersion);
+                    thisVersion = VERSION[..VERSION.IndexOf("-")];
+                Version web = new(webVersion);
+                Version local = new(thisVersion);
                 if (web > local)
                 {
                     string text = $"Version installed: {VERSION}, Web version available: {webVersion}\nDo you want to go to website to download the latest version?\nSelect Cancel to visit release website for older machines.";
@@ -117,8 +121,11 @@ namespace FTAnalyzer
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
+                MessageBox.Show("Unable to check website for new version please check https://github.com/ShammyLevva/FTAnalyzer/releases to see if you are running the latest version.", "FTAnalyzer");
             }
         }
+
+        [SupportedOSPlatform("windows10.0.17763")]
         void SetupFonts()
         {
             try
@@ -134,34 +141,35 @@ namespace FTAnalyzer
                 switch (FontSettings.Default.FontNumber)
                 {
                     case 1:
-                        handwritingFont = new Font(fonts.Families[0], 46.0F, FontStyle.Bold);
-                        boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 8.25F, FontStyle.Bold);
-                        normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 8.25F, FontStyle.Regular);
+                        handwritingFont = new(fonts.Families[0], 46.0F, FontStyle.Bold);
+                        boldFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 8.25F, FontStyle.Bold);
+                        normalFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 8.25F, FontStyle.Regular);
                         FontSettings.Default.FontHeight = 22;
                         break;
                     case 2:
-                        handwritingFont = new Font(fonts.Families[0], 68.0F, FontStyle.Bold);
-                        boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 10F, FontStyle.Bold);
-                        normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 10F, FontStyle.Regular);
-                        FontSettings.Default.FontHeight = 27; 
+                        handwritingFont = new(fonts.Families[0], 68.0F, FontStyle.Bold);
+                        boldFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 10F, FontStyle.Bold);
+                        normalFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 10F, FontStyle.Regular);
+                        FontSettings.Default.FontHeight = 27;
                         break;
                     case 3:
-                        handwritingFont = new Font(fonts.Families[0], 72.0F, FontStyle.Bold);
-                        boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 12F, FontStyle.Bold);
-                        normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 12F, FontStyle.Regular);
+                        handwritingFont = new(fonts.Families[0], 72.0F, FontStyle.Bold);
+                        boldFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 12F, FontStyle.Bold);
+                        normalFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 12F, FontStyle.Regular);
                         FontSettings.Default.FontHeight = 32;
                         break;
                     case 4:
-                        handwritingFont = new Font(fonts.Families[0], 90.0F, FontStyle.Bold);
-                        boldFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 14F, FontStyle.Bold);
-                        normalFont = new Font(dgCountries.DefaultCellStyle.Font.FontFamily, 14F, FontStyle.Regular);
+                        handwritingFont = new(fonts.Families[0], 90.0F, FontStyle.Bold);
+                        boldFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 14F, FontStyle.Bold);
+                        normalFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 14F, FontStyle.Regular);
                         FontSettings.Default.FontHeight = 37;
                         break;
                 }
                 SetInitialScreenControls();
                 UpdateDataErrorsDisplay();
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Debug.WriteLine($"Exception {e.Message}");
             } // for font sizing exception
         }
@@ -201,6 +209,7 @@ namespace FTAnalyzer
             tsStatusLabel.Height = FontSettings.Default.FontHeight;
         }
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void RegisterEventHandlers()
         {
             Options.ReloadRequired += new EventHandler(Options_ReloadData);
@@ -209,6 +218,7 @@ namespace FTAnalyzer
             FontSettingsUI.GlobalFontChanged += new EventHandler(Options_GlobalFontChanged);
         }
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void SetHeightWidth()
         {
             MainForm mainForm = this;
@@ -237,6 +247,7 @@ namespace FTAnalyzer
         }
 
         #region Load File
+        [SupportedOSPlatform("windows10.0.17763")]
         async Task LoadFileAsync(string filename)
         {
             try
@@ -285,7 +296,7 @@ namespace FTAnalyzer
             XmlDocument doc;
             Stopwatch timer = new();
             timer.Start();
-            using (FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
+            using (FileStream stream = new(filename, FileMode.Open, FileAccess.Read))
             {
                 doc = await Task.Run(() => ft.LoadTreeHeader(filename, stream, outputText)).ConfigureAwait(true);
             }
@@ -306,7 +317,7 @@ namespace FTAnalyzer
             await Task.Run(() => ft.LoadTreeIndividuals(doc, individualProgress, outputText)).ConfigureAwait(true);
             await Task.Run(() => ft.LoadTreeFamilies(doc, familyProgress, outputText)).ConfigureAwait(true);
             await Task.Run(() => ft.LoadTreeRelationships(doc, RelationshipProgress, outputText)).ConfigureAwait(true);
-            await Task.Run(() => ft.CleanUpXML()).ConfigureAwait(true);
+            await Task.Run(() => FamilyTree.CleanUpXML()).ConfigureAwait(true);
             doc = null;
             ft.DocumentLoaded = false;
             timer.Stop();
@@ -315,7 +326,7 @@ namespace FTAnalyzer
             return true;
         }
 
-        void WriteTime(string prefixText, IProgress<string> outputText, Stopwatch timer)
+        static void WriteTime(string prefixText, IProgress<string> outputText, Stopwatch timer)
         {
             TimeSpan ts = timer.Elapsed;
             // Format and display the TimeSpan value.
@@ -323,7 +334,7 @@ namespace FTAnalyzer
             outputText.Report($"{prefixText} in {elapsedTime}\n\n");
         }
 
-        void WriteMemory(IProgress<string> outputText)
+        static void WriteMemory(IProgress<string> outputText)
         {
             long memoryBefore = GC.GetTotalMemory(false);
             long memoryAfter = GC.GetTotalMemory(true);
@@ -415,7 +426,7 @@ namespace FTAnalyzer
             ExtensionMethods.DoubleBuffered(dgCustomFacts, true);
         }
 
-        void SetSavePath()
+        static void SetSavePath()
         {
             try
             {
@@ -429,6 +440,7 @@ namespace FTAnalyzer
             }
         }
 
+        [SupportedOSPlatform("windows10.0.17763")]
         async void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(Settings.Default.LoadLocation))
@@ -723,7 +735,7 @@ namespace FTAnalyzer
             Individual ind = (Individual)dgIndividuals.CurrentRowDataBoundItem;
             if (ind != null)
             {
-                Notes notes = new Notes(ind);
+                Notes notes = new(ind);
                 notes.Show();
             }
             HourGlass(false);
@@ -810,8 +822,9 @@ namespace FTAnalyzer
         }
 
         #region DataErrors
-        void CkbDataErrors_SelectedIndexChanged(object sender, EventArgs e) => UpdateDataErrorsDisplay();
+        [SupportedOSPlatform("windows10.0.17763")] void CkbDataErrors_SelectedIndexChanged(object sender, EventArgs e) => UpdateDataErrorsDisplay();
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void UpdateDataErrorsDisplay()
         {
             HourGlass(true);
@@ -836,10 +849,12 @@ namespace FTAnalyzer
             {
                 UIHelpers.ShowMessage("Unable to save DataError preferences. Please check App has rights to save user preferences to registry.");
             }
-            ckbDataErrors.ColumnWidth = (int)(maxwidth * FontSettings.Default.FontWidth * GraphicsUtilities.GetCurrentScaling());
+            var scaling = GraphicsUtilities.GetCurrentScaling();
+            ckbDataErrors.ColumnWidth = (int)(maxwidth * FontSettings.Default.FontWidth * scaling);
             HourGlass(false);
         }
 
+        [SupportedOSPlatform("windows10.0.17763")]
         public void SetDataErrorsCheckedDefaults(CheckedListBox list)
         {
             list.Items.Clear();
@@ -851,6 +866,7 @@ namespace FTAnalyzer
             }
         }
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void BtnSelectAll_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < ckbDataErrors.Items.Count; i++)
@@ -860,6 +876,7 @@ namespace FTAnalyzer
             UpdateDataErrorsDisplay();
         }
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void BtnClearAll_Click(object sender, EventArgs e)
         {
             foreach (int indexChecked in ckbDataErrors.CheckedIndices)
@@ -869,17 +886,14 @@ namespace FTAnalyzer
             UpdateDataErrorsDisplay();
         }
 
-        void DgDataErrors_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
+        [SupportedOSPlatform("windows10.0.17763")]
         void SetupDataErrors()
         {
             dgDataErrors.DataSource = DataErrors(ckbDataErrors);
             dgDataErrors.Focus();
             mnuPrint.Enabled = true;
             UpdateDataErrorsDisplay();
+            dgDataErrors.BringToFront();
         }
 
         public static SortableBindingList<IDisplayDataError> DataErrors(CheckedListBox list)
@@ -928,7 +942,7 @@ namespace FTAnalyzer
         void OlderParentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            People frmInd = new People();
+            People frmInd = new();
             string inputAge = "50";
             DialogResult result = DialogResult.Cancel;
             int age = 0;
@@ -991,7 +1005,7 @@ namespace FTAnalyzer
                 if (control is VirtualDGVLocations)
                 {
                     VirtualDGVLocations dg = control as VirtualDGVLocations;
-                    tsCountLabel.Text = $"{Messages.Count}{dg.RowCount} {dg.Name.Substring(2)}";
+                    tsCountLabel.Text = $"{Messages.Count}{dg.RowCount} {dg.Name[2..]}";
                     mnuPrint.Enabled = true;
                     dg.VirtualGridFiltered += VirtualGridFiltered;
                 }
@@ -1088,6 +1102,7 @@ namespace FTAnalyzer
 
         void Options_AliasInNameChanged(object sender, EventArgs e) => ft.SetFullNames();
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void Options_GlobalFontChanged(object sender, EventArgs e)
         {
             HourGlass(true);
@@ -1097,6 +1112,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Reload Data
+        [SupportedOSPlatform("windows10.0.17763")]
         async Task QueryReloadData()
         {
             if (GeneralSettings.Default.ReloadRequired && ft.DataLoaded)
@@ -1111,6 +1127,7 @@ namespace FTAnalyzer
             }
         }
 
+        [SupportedOSPlatform("windows10.0.17763")]
         async void ReloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GeneralSettings.Default.ReloadRequired = false;
@@ -1167,7 +1184,7 @@ namespace FTAnalyzer
         void MnuShowTimeline_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            TimeLine tl = new TimeLine(new Progress<string>(value => { rtbOutput.AppendText(value); }));
+            TimeLine tl = new(new Progress<string>(value => { rtbOutput.AppendText(value); }));
             DisposeDuplicateForms(tl);
             tl.Show();
             HourGlass(false);
@@ -1210,8 +1227,7 @@ namespace FTAnalyzer
                             break;
                         }
                     }
-                    if (geo == null)
-                        geo = new GeocodeLocations(new Progress<string>(value => { rtbOutput.AppendText(value); }));
+                    geo ??= new GeocodeLocations(new Progress<string>(value => { rtbOutput.AppendText(value); }));
                     geo.Show();
                     geo.Focus();
                     Application.DoEvents();
@@ -1236,7 +1252,7 @@ namespace FTAnalyzer
         void LocationsGeocodeReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            GeocodeLocations geo = new GeocodeLocations(new Progress<string>(value => { rtbOutput.AppendText(value); }));
+            GeocodeLocations geo = new(new Progress<string>(value => { rtbOutput.AppendText(value); }));
             DisposeDuplicateForms(geo);
             geo.Show();
             HourGlass(false);
@@ -1265,7 +1281,7 @@ namespace FTAnalyzer
         void MnuLifelines_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            LifeLine l = new LifeLine(new Progress<string>(value => { rtbOutput.AppendText(value); }));
+            LifeLine l = new(new Progress<string>(value => { rtbOutput.AppendText(value); }));
             DisposeDuplicateForms(l);
             l.Show();
             HourGlass(false);
@@ -1275,7 +1291,7 @@ namespace FTAnalyzer
         void MnuPlaces_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Places p = new Places(new Progress<string>(value => { rtbOutput.AppendText(value); }));
+            Places p = new(new Progress<string>(value => { rtbOutput.AppendText(value); }));
             DisposeDuplicateForms(p);
             p.Show();
             HourGlass(false);
@@ -1288,7 +1304,7 @@ namespace FTAnalyzer
             {
                 HourGlass(true);
                 IDisplaySurnames stat = dgSurnames.CurrentRowDataBoundItem;
-                People frmInd = new People();
+                People frmInd = new();
                 Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => x.RelationType);
                 Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
                 frmInd.SetSurnameStats(stat, indFilter, famFilter, chkSurnamesIgnoreCase.Checked);
@@ -1326,6 +1342,7 @@ namespace FTAnalyzer
         }
 
         #region Tab Control
+        [SupportedOSPlatform("windows10.0.17763")]
         void TabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -1598,14 +1615,14 @@ namespace FTAnalyzer
 
         Predicate<CensusIndividual> CreateCensusIndividualFilter(CensusDate censusDate, bool censusDone, string surname)
         {
-            var relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => x.RelationType);
-            var dateFilter = censusDone ?
-                new Predicate<CensusIndividual>(x => x.IsCensusDone(censusDate) && !x.OutOfCountry(censusDate)) :
-                new Predicate<CensusIndividual>(x => !x.IsCensusDone(censusDate) && !x.OutOfCountry(censusDate));
+            Predicate<CensusIndividual> relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => x.RelationType);
+            Predicate<CensusIndividual> dateFilter = censusDone ?
+                new(x => x.IsCensusDone(censusDate) && !x.OutOfCountry(censusDate)) :
+                new(x => !x.IsCensusDone(censusDate) && !x.OutOfCountry(censusDate));
             Predicate<CensusIndividual> filter = FilterUtils.AndFilter(relationFilter, dateFilter);
             if (!censusDone && GeneralSettings.Default.HidePeopleWithMissingTag)
             {  //if we are reporting missing from census and we are hiding people who have a missing tag then only select those who are not tagged missing
-                Predicate<CensusIndividual> missingTag = new Predicate<CensusIndividual>(x => !x.IsTaggedMissingCensus(censusDate));
+                Predicate<CensusIndividual> missingTag = new(x => !x.IsTaggedMissingCensus(censusDate));
                 filter = FilterUtils.AndFilter(filter, missingTag);
             }
             if (surname.Length > 0)
@@ -1628,14 +1645,14 @@ namespace FTAnalyzer
             }
             else
             {
-                var dateFilter = censusDone ?
-                    new Predicate<Individual>(x => x.IsCensusDone(cenDate.SelectedDate) && !x.OutOfCountry(cenDate.SelectedDate)) :
-                    new Predicate<Individual>(x => !x.IsCensusDone(cenDate.SelectedDate) && !x.OutOfCountry(cenDate.SelectedDate));
+                Predicate<Individual> dateFilter = censusDone ?
+                    new(x => x.IsCensusDone(cenDate.SelectedDate) && !x.OutOfCountry(cenDate.SelectedDate)) :
+                    new(x => !x.IsCensusDone(cenDate.SelectedDate) && !x.OutOfCountry(cenDate.SelectedDate));
                 filter = FilterUtils.AndFilter(relationFilter, dateFilter);
             }
             if (!censusDone && GeneralSettings.Default.HidePeopleWithMissingTag)
             {  //if we are reporting missing from census and we are hiding people who have a missing tag then only select those who are not tagged missing
-                Predicate<Individual> missingTag = new Predicate<Individual>(x => !x.IsTaggedMissingCensus(cenDate.SelectedDate));
+                Predicate<Individual> missingTag = new(x => !x.IsTaggedMissingCensus(cenDate.SelectedDate));
                 filter = FilterUtils.AndFilter(filter, missingTag);
             }
             if (surname.Length > 0)
@@ -1652,7 +1669,7 @@ namespace FTAnalyzer
         Predicate<Individual> CreateTreeTopsIndividualFilter()
         {
             Predicate<Individual> treetopFilter = ckbTTIncludeOnlyOneParent.Checked ?
-                new Predicate<Individual>(ind => ind.HasOnlyOneParent || !ind.HasParents) : new Predicate<Individual>(ind => !ind.HasParents);
+                new(ind => ind.HasOnlyOneParent || !ind.HasParents) : new(ind => !ind.HasParents);
             Predicate<Individual> locationFilter = treetopsCountry.BuildFilter<Individual>(FactDate.UNKNOWN_DATE, (d, x) => x.BestLocation(d));
             Predicate<Individual> relationFilter = treetopsRelation.BuildFilter<Individual>(x => x.RelationType);
             Predicate<Individual> filter = FilterUtils.AndFilter(locationFilter, relationFilter);
@@ -1698,7 +1715,7 @@ namespace FTAnalyzer
         void LostCousinsCensus(CensusDate censusDate, string reportTitle)
         {
             HourGlass(true);
-            Census census = new Census(censusDate, true);
+            Census census = new(censusDate, true);
             Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType);
             Predicate<Individual> individualRelationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
             census.SetupLCCensus(relationFilter, ckbShowLCEntered.Checked, individualRelationFilter);
@@ -1712,7 +1729,8 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
-        void BtnLCLogin_Click(object sender, EventArgs e)
+        [SupportedOSPlatform("windows10.0.17763")]
+        async void BtnLCLogin_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             try
@@ -1723,7 +1741,7 @@ namespace FTAnalyzer
             {
                 UIHelpers.ShowMessage("Error unable to save Lost Cousins email address preference. Please check App has rights to save user preferences to registry.");
             }
-            bool websiteAvailable = ExportToLostCousins.CheckLostCousinsLogin(txtLCEmail.Text, txtLCPassword.Text);
+            bool websiteAvailable = await Program.LCClient.LostCousinsLoginAsync(txtLCEmail.Text, txtLCPassword.Text);
             btnLCLogin.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
             btnLCLogin.Enabled = !websiteAvailable;
             btnUpdateLostCousinsWebsite.Visible = websiteAvailable;
@@ -1742,7 +1760,7 @@ namespace FTAnalyzer
         void BtnLCPotentialUploads_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Census census = new Census(CensusDate.ANYCENSUS, true);
+            Census census = new(CensusDate.ANYCENSUS, true);
             census.SetupLCupdateList(LCUpdates);
             census.Text = $"Potential Records to upload to Lost Cousins Website";
             DisposeDuplicateForms(census);
@@ -1754,7 +1772,7 @@ namespace FTAnalyzer
         void BtnViewInvalidRefs_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Census census = new Census(CensusDate.ANYCENSUS, true);
+            Census census = new(CensusDate.ANYCENSUS, true);
             census.SetupLCupdateList(LCInvalidReferences);
             census.Text = $"Incompatible Census References in Records to upload to Lost Cousins Website";
             DisposeDuplicateForms(census);
@@ -1773,8 +1791,8 @@ namespace FTAnalyzer
                 if (response == UIHelpers.Yes)
                 {
                     rtbLCoutput.Text = "Started Processing Lost Cousins entries.\n\n";
-                    Progress<string> outputText = new Progress<string>(value => { rtbLCoutput.AppendText(value); });
-                    int count = await Task.Run(() => ExportToLostCousins.ProcessList(LCUpdates, outputText)).ConfigureAwait(true);
+                    Progress<string> outputText = new(value => { rtbLCoutput.AppendText(value); });
+                    int count = await Task.Run(() => ExportToLostCousins.ProcessListAsync(LCUpdates, outputText)).ConfigureAwait(true);
                     string resultText = $"{DateTime.Now.ToUniversalTime():yyyy-MM-dd HH:mm}: uploaded {count} records";
                     await Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.UpdateLostCousins, resultText).ConfigureAwait(true);
                     SpecialMethods.VisitWebsite("https://www.lostcousins.com/pages/members/ancestors/");
@@ -1807,8 +1825,8 @@ namespace FTAnalyzer
         {
             if (btnCheckMyAncestors.BackColor == Color.LightGreen)
             {
-                Progress<string> outputText = new Progress<string>(value => { rtbCheckAncestors.AppendText(value); });
-                dgCheckAncestors.DataSource = ExportToLostCousins.VerifyAncestors(outputText);
+                Progress<string> outputText = new(value => { rtbCheckAncestors.AppendText(value); });
+                dgCheckAncestors.DataSource = ExportToLostCousins.VerifyAncestorsAsync(outputText);
                 dgCheckAncestors.Refresh();
 
             }
@@ -1818,7 +1836,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
-            People people = new People();
+            People people = new();
             people.SetupLCNoCountry(relationFilter);
             DisposeDuplicateForms(people);
             people.Show();
@@ -1835,7 +1853,7 @@ namespace FTAnalyzer
         void ClearLogin()
         {
             if (btnUpdateLostCousinsWebsite.Visible) // if we can login clear cookies to reset session
-                ExportToLostCousins.EmptyCookieJar();
+                Program.LCClient.EmptyCookieJar();
             btnLCLogin.BackColor = Color.Red;
             btnLCLogin.Enabled = true;
             btnUpdateLostCousinsWebsite.Visible = false;
@@ -1847,7 +1865,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
-            People people = new People();
+            People people = new();
             people.SetupLCDuplicates(relationFilter);
             DisposeDuplicateForms(people);
             people.Show();
@@ -1859,7 +1877,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
-            People people = new People();
+            People people = new();
             people.SetupLCnoCensus(relationFilter);
             DisposeDuplicateForms(people);
             people.Show();
@@ -1911,7 +1929,7 @@ namespace FTAnalyzer
         {
             try
             {
-                Options options = new Options();
+                Options options = new();
                 options.ShowDialog(this);
                 options.Dispose();
                 Analytics.TrackAction(Analytics.MainFormAction, Analytics.OptionsEvent);
@@ -1922,6 +1940,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Print Routines
+        [SupportedOSPlatform("windows10.0.17763")]
         void MnuPrint_Click(object sender, EventArgs e)
         {
             try
@@ -1936,13 +1955,11 @@ namespace FTAnalyzer
                 {
                     if (printDialog.ShowDialog(this) == DialogResult.OK)
                     {
-                        using (Utilities.Printing p = new Utilities.Printing(rtbOutput))
-                        {
-                            printDocument.PrintPage += new PrintPageEventHandler(p.PrintPage);
-                            printDocument.PrinterSettings = printDialog.PrinterSettings;
-                            printDocument.DocumentName = "GEDCOM Load Results";
-                            printDocument.Print();
-                        }
+                        using Utilities.Printing p = new(rtbOutput);
+                        printDocument.PrintPage += new PrintPageEventHandler(p.PrintPage);
+                        printDocument.PrinterSettings = printDialog.PrinterSettings;
+                        printDocument.DocumentName = "GEDCOM Load Results";
+                        printDocument.Print();
                     }
                 }
                 if (tabSelector.SelectedTab == tabMainLists)
@@ -1999,6 +2016,7 @@ namespace FTAnalyzer
 
         enum Orientation { Landscape, Portrait }
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void PrintDataGrid(Orientation orientation, DataGridView dg, string title)
         {
             PrintingDataGridViewProvider.Create(printDocument, dg, true, true, true, new TitlePrintBlock(title), null, null);
@@ -2021,7 +2039,7 @@ namespace FTAnalyzer
         {
             try
             {
-                List<Form> toDispose = new List<Form>();
+                List<Form> toDispose = new();
                 foreach (Form f in Application.OpenForms)
                 {
                     if (!ReferenceEquals(f, this))
@@ -2037,7 +2055,7 @@ namespace FTAnalyzer
         {
             try
             {
-                List<Form> toDispose = new List<Form>();
+                List<Form> toDispose = new();
                 foreach (Form f in Application.OpenForms)
                 {
                     if (!ReferenceEquals(f, form) && f.GetType() == form.GetType())
@@ -2085,6 +2103,7 @@ namespace FTAnalyzer
             }
         }
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void RestoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ft.Geocoding)
@@ -2099,7 +2118,7 @@ namespace FTAnalyzer
                 {
                     HourGlass(true);
                     bool failed = false;
-                    using (ZipFile zip = new ZipFile(restoreDatabase.FileName))
+                    using (ZipFile zip = new(restoreDatabase.FileName))
                     {
                         if (zip.Count == 1 && zip.ContainsEntry("Geocodes.s3db"))
                         {
@@ -2201,6 +2220,7 @@ namespace FTAnalyzer
             BuildRecentList();
         }
 
+        [SupportedOSPlatform("windows10.0.17763")]
         async void OpenRecentFile_Click(object sender, EventArgs e)
         {
             string filename = (string)(sender as ToolStripMenuItem).Tag;
@@ -2218,11 +2238,17 @@ namespace FTAnalyzer
                 Family fam = ft.GetFamily(famID);
                 if (fam != null)
                 {
-                    Facts factForm = new Facts(fam);
+                    Facts factForm = new(fam);
                     DisposeDuplicateForms(factForm);
                     factForm.Show();
                 }
             }
+        }
+
+        void DgDataErrors_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                ShowFacts((string)dgDataErrors.CurrentRow.Cells[nameof(IDisplayDataError.Reference)].Value);
         }
 
         void DgLooseDeaths_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -2321,7 +2347,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 FactSource source = (FactSource)dgSources.CurrentRowDataBoundItem;
-                Facts factForm = new Facts(source);
+                Facts factForm = new(source);
                 DisposeDuplicateForms(factForm);
                 factForm.Show();
             }
@@ -2340,18 +2366,19 @@ namespace FTAnalyzer
             }
             else
             {
-                List<Individual> dupInd = new List<Individual>
+                List<Individual> dupInd = new()
                 {
                     ft.GetIndividual(indA_ID),
                     ft.GetIndividual(indB_ID)
                 };
-                Facts f = new Facts(dupInd, null, null, Facts.AlternateFacts.AllFacts);
+                Facts f = new(dupInd, null, null, Facts.AlternateFacts.AllFacts);
                 DisposeDuplicateForms(f);
                 f.Show();
             }
         }
 
         #region Facts Tab
+        [SupportedOSPlatform("windows10.0.17763")]
         void SetupFactsCheckboxes()
         {
             Predicate<ExportFact> filter = CreateFactsFilter();
@@ -2359,16 +2386,16 @@ namespace FTAnalyzer
             SetShowFactsButton();
         }
 
-        void RelTypesFacts_RelationTypesChanged(object sender, EventArgs e) => SetupFactsCheckboxes();
+        [SupportedOSPlatform("windows10.0.17763")] void RelTypesFacts_RelationTypesChanged(object sender, EventArgs e) => SetupFactsCheckboxes();
 
-        void TxtFactsSurname_TextChanged(object sender, EventArgs e) => SetupFactsCheckboxes();
+        [SupportedOSPlatform("windows10.0.17763")] void TxtFactsSurname_TextChanged(object sender, EventArgs e) => SetupFactsCheckboxes();
 
         void ShowFacts(string indID, bool offset = false)
         {
             Individual ind = ft.GetIndividual(indID);
             if (ind != null)
             {
-                Facts factForm = new Facts(ind);
+                Facts factForm = new(ind);
                 DisposeDuplicateForms(factForm);
                 factForm.Show();
                 if (offset)
@@ -2384,7 +2411,7 @@ namespace FTAnalyzer
             Family fam = ft.GetFamily(famID);
             if (fam != null)
             {
-                Facts factForm = new Facts(fam);
+                Facts factForm = new(fam);
                 DisposeDuplicateForms(factForm);
                 factForm.Show();
                 if (offset)
@@ -2407,7 +2434,7 @@ namespace FTAnalyzer
             Facts facts;
             if (radioOnlyPreferred.Checked)
                 facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, true), BuildFactTypeList(ckbFactExclude, true), Facts.AlternateFacts.PreferredOnly);
-            else if(radioOnlyAlternate.Checked)
+            else if (radioOnlyAlternate.Checked)
                 facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, true), BuildFactTypeList(ckbFactExclude, true), Facts.AlternateFacts.AlternateOnly);
             else
                 facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, true), BuildFactTypeList(ckbFactExclude, true), Facts.AlternateFacts.AllFacts);
@@ -2417,7 +2444,7 @@ namespace FTAnalyzer
 
         List<string> BuildFactTypeList(CheckedListBox list, bool includeCreated)
         {
-            List<string> result = new List<string>();
+            List<string> result = new();
             if (list == ckbFactExclude && ckbFactExclude.Visible == false)
                 return result; // if we aren't looking to exclude facts don't pass anything to list of exclusions
             int index = 0;
@@ -2435,10 +2462,11 @@ namespace FTAnalyzer
             return result;
         }
 
-        void BtnSelectAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactSelect, true, "Fact: ");
+        [SupportedOSPlatform("windows10.0.17763")] void BtnSelectAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactSelect, true, "Fact: ");
 
-        void BtnDeselectAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactSelect, false, "Fact: ");
+        [SupportedOSPlatform("windows10.0.17763")] void BtnDeselectAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactSelect, false, "Fact: ");
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void SetFactTypes(CheckedListBox list, bool selected, string registryPrefix)
         {
             for (int index = 0; index < list.Items.Count; index++)
@@ -2457,6 +2485,7 @@ namespace FTAnalyzer
             SetShowFactsButton();
         }
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void CkbFactSelect_MouseClick(object sender, MouseEventArgs e)
         {
             int index = ckbFactSelect.IndexFromPoint(e.Location);
@@ -2491,9 +2520,9 @@ namespace FTAnalyzer
             btnShowFacts.Enabled = ckbFactSelect.CheckedItems.Count > 0 || (ckbFactExclude.Visible && ckbFactExclude.CheckedItems.Count > 0);
         }
 
-        void BtnExcludeAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactExclude, true, "Exclude Fact: ");
+        [SupportedOSPlatform("windows10.0.17763")] void BtnExcludeAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactExclude, true, "Exclude Fact: ");
 
-        void BtnDeselectExcludeAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactExclude, false, "Exclude Fact: ");
+        [SupportedOSPlatform("windows10.0.17763")] void BtnDeselectExcludeAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactExclude, false, "Exclude Fact: ");
 
         void BtnShowExclusions_Click(object sender, EventArgs e)
         {
@@ -2505,6 +2534,7 @@ namespace FTAnalyzer
             SetShowFactsButton();
         }
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void CkbFactExclude_MouseClick(object sender, MouseEventArgs e)
         {
             int index = ckbFactExclude.IndexFromPoint(e.Location);
@@ -2531,13 +2561,14 @@ namespace FTAnalyzer
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtFactsSurname.Text);
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
-            Facts facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, false));
+            Facts facts = new(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, false));
             facts.Show();
             HourGlass(false);
         }
         #endregion
 
         #region Form Drag Drop
+        [SupportedOSPlatform("windows10.0.17763")]
         async void MainForm_DragDrop(object sender, DragEventArgs e)
         {
             bool fileLoaded = false;
@@ -2566,6 +2597,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Manage Form Position
+        [SupportedOSPlatform("windows10.0.17763")]
         void ResetToDefaultFormSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadDefaultPosition();
@@ -2582,6 +2614,7 @@ namespace FTAnalyzer
             loading = false;
         }
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void MainForm_Resize(object sender, EventArgs e)
         {
             try
@@ -2593,8 +2626,9 @@ namespace FTAnalyzer
             catch (Exception) { }
         }
 
-        void MainForm_Move(object sender, EventArgs e) => SavePosition();
+        [SupportedOSPlatform("windows10.0.17763")] void MainForm_Move(object sender, EventArgs e) => SavePosition();
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void SavePosition()
         {
             if (!loading && WindowState != FormWindowState.Minimized)
@@ -2702,7 +2736,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex == 0 && !pbDuplicates.Visible) // don't do anything if progressbar still loading duplicates
             {
                 DisplayDuplicateIndividual dupInd = dgDuplicates.DataBoundItem(e.RowIndex) as DisplayDuplicateIndividual;
-                NonDuplicate nonDup = new NonDuplicate(dupInd);
+                NonDuplicate nonDup = new(dupInd);
                 dupInd.IgnoreNonDuplicate = !dupInd.IgnoreNonDuplicate; // flip state of checkbox
                 if (dupInd.IgnoreNonDuplicate)
                 {  //ignoring this record so add it to the list if its not already present
@@ -2736,7 +2770,7 @@ namespace FTAnalyzer
         void ShowCensus(CensusDate censusDate, bool censusDone, string surname, bool random)
         {
             Predicate<CensusIndividual> filter;
-            Census census = new Census(censusDate, censusDone);
+            Census census = new(censusDate, censusDone);
             if (random)
                 census.Text = $"People with surname {surname}";
             else
@@ -2777,7 +2811,7 @@ namespace FTAnalyzer
         {
             IEnumerable<Individual> directs = ft.AllIndividuals.Filter(x => x.RelationType == Individual.DIRECT || x.RelationType == Individual.DESCENDANT);
             List<string> surnames = directs.Select(x => x.Surname).Distinct().ToList();
-            Random rnd = new Random();
+            Random rnd = new();
             string surname;
             do
             {
@@ -2790,7 +2824,7 @@ namespace FTAnalyzer
         void BtnMissingCensusLocation_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            People people = new People();
+            People people = new();
             people.SetupMissingCensusLocation();
             DisposeDuplicateForms(people);
             people.Show();
@@ -2801,7 +2835,7 @@ namespace FTAnalyzer
         void BtnDuplicateCensus_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            People people = new People();
+            People people = new();
             people.SetupDuplicateCensus();
             DisposeDuplicateForms(people);
             people.Show();
@@ -2812,7 +2846,7 @@ namespace FTAnalyzer
         void BtnNoChildrenStatus_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            People people = new People();
+            People people = new();
             people.SetupNoChildrenStatus();
             DisposeDuplicateForms(people);
             people.Show();
@@ -2823,7 +2857,7 @@ namespace FTAnalyzer
         void BtnMismatchedChildrenStatus_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            People people = new People();
+            People people = new();
             people.SetupChildrenStatusReport();
             DisposeDuplicateForms(people);
             people.Show();
@@ -2835,7 +2869,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             CensusDate date = chkAnyCensusYear.Checked ? CensusDate.ANYCENSUS : cenDate.SelectedDate;
-            Facts facts = new Facts(status, filter, date);
+            Facts facts = new(status, filter, date);
             facts.Show();
             HourGlass(false);
         }
@@ -2852,6 +2886,7 @@ namespace FTAnalyzer
         void BtnUnrecognisedCensusRef_Click(object sender, EventArgs e) =>
             ShowCensusRefFacts(CensusReference.ReferenceStatus.UNRECOGNISED, CreateIndividualCensusFilter(true, txtCensusSurname.Text, chkAnyCensusYear.Checked));
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void BtnReportUnrecognised_Click(object sender, EventArgs e)
         {
             IEnumerable<string> unrecognisedResults = ft.UnrecognisedCensusReferences();
@@ -2865,27 +2900,26 @@ namespace FTAnalyzer
                 MessageBox.Show("No unrecognised census references found.", "FTAnalyzer");
         }
 
-        void SaveUnrecognisedDataFile(IEnumerable<string> unrecognisedResults, IEnumerable<string> missingResults, IEnumerable<string> notesResults,
+        [SupportedOSPlatform("windows10.0.17763")]
+        static void SaveUnrecognisedDataFile(IEnumerable<string> unrecognisedResults, IEnumerable<string> missingResults, IEnumerable<string> notesResults,
                                       string unrecognisedFilename, string privateWarning)
         {
             try
             {
-                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-                {
-                    string initialDir = (string)Application.UserAppDataRegistry.GetValue("Report Unrecognised Census References Path");
-                    saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
-                    saveFileDialog.FileName = unrecognisedFilename;
-                    saveFileDialog.Filter = "Report File (*.txt)|*.txt";
-                    saveFileDialog.FilterIndex = 1;
+                using SaveFileDialog saveFileDialog = new();
+                string initialDir = (string)Application.UserAppDataRegistry.GetValue("Report Unrecognised Census References Path");
+                saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
+                saveFileDialog.FileName = unrecognisedFilename;
+                saveFileDialog.Filter = "Report File (*.txt)|*.txt";
+                saveFileDialog.FilterIndex = 1;
 
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        string path = Path.GetDirectoryName(saveFileDialog.FileName);
-                        Application.UserAppDataRegistry.SetValue("Report Unrecognised Census References Path", path);
-                        FamilyTree.WriteUnrecognisedReferencesFile(unrecognisedResults, missingResults, notesResults, saveFileDialog.FileName);
-                        Analytics.TrackAction(Analytics.ReportsAction, Analytics.UnrecognisedCensusEvent);
-                        MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease create an issue at https://www.ftanalyzer.com/issues in issues section and upload your file, if you feel you have standard census references that should be recognised." + privateWarning, "FTAnalyzer");
-                    }
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string path = Path.GetDirectoryName(saveFileDialog.FileName);
+                    Application.UserAppDataRegistry.SetValue("Report Unrecognised Census References Path", path);
+                    FamilyTree.WriteUnrecognisedReferencesFile(unrecognisedResults, missingResults, notesResults, saveFileDialog.FileName);
+                    Analytics.TrackAction(Analytics.ReportsAction, Analytics.UnrecognisedCensusEvent);
+                    MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease create an issue at https://www.ftanalyzer.com/issues in issues section and upload your file, if you feel you have standard census references that should be recognised." + privateWarning, "FTAnalyzer");
                 }
             }
             catch (Exception ex)
@@ -2897,8 +2931,8 @@ namespace FTAnalyzer
         void BtnInconsistentLocations_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            List<DisplayFact> results = new List<DisplayFact>();
-            List<DisplayFact> censusRefs = new List<DisplayFact>();
+            List<DisplayFact> results = new();
+            List<DisplayFact> censusRefs = new();
             Predicate<Individual> filter = CreateIndividualCensusFilter(true, txtCensusSurname.Text, chkAnyCensusYear.Checked);
             foreach (Individual ind in ft.AllIndividuals.Filter(filter))
                 foreach (Fact f in ind.AllFacts)
@@ -2918,7 +2952,7 @@ namespace FTAnalyzer
                 Application.DoEvents();
             }
             tspbTabProgress.Visible = false;
-            Facts factForm = new Facts(results);
+            Facts factForm = new(results);
             DisposeDuplicateForms(factForm);
             factForm.Show();
             factForm.ShowHideFactRows();
@@ -2927,8 +2961,8 @@ namespace FTAnalyzer
         void BtnCensusProblemFacts_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Predicate<Individual> filter = new Predicate<Individual>(x => x.ErrorFacts.Count > 0);
-            Facts facts = new Facts(filter, true);
+            Predicate<Individual> filter = new(x => x.ErrorFacts.Count > 0);
+            Facts facts = new(filter, true);
             facts.Show();
             HourGlass(false);
         }
@@ -2936,8 +2970,8 @@ namespace FTAnalyzer
         void BtnCensusAutoCreatedFacts_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Predicate<Individual> filter = new Predicate<Individual>(x => x.FactCount(Fact.CENSUS_FTA) > 0);
-            Facts facts = new Facts(filter, false);
+            Predicate<Individual> filter = new(x => x.FactCount(Fact.CENSUS_FTA) > 0);
+            Facts facts = new(filter, false);
             facts.Show();
             HourGlass(false);
         }
@@ -2988,7 +3022,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             //List<IDisplayMissingData> list = ft.MissingData(relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily);
-            MissingData rs = new MissingData();
+            MissingData rs = new();
             DisposeDuplicateForms(rs);
             rs.Show();
             rs.Focus();
@@ -3032,7 +3066,7 @@ namespace FTAnalyzer
                 list.Sort(new DefaultFamilyComparer());
                 foreach (Family family in list)
                 {
-                    ComboBoxFamily cbf = new ComboBoxFamily(family);
+                    ComboBoxFamily cbf = new(family);
                     cmbColourFamily.Items.Add(cbf);
                     if (cbf.Equals(f))
                         stillThere = true;
@@ -3119,7 +3153,7 @@ namespace FTAnalyzer
                 e.Cancel = true;
         }
 
-        Individual GetContextIndividual(object sender)
+        static Individual GetContextIndividual(object sender)
         {
             Individual ind = null;
             ContextMenuStrip cms = null;
@@ -3138,7 +3172,7 @@ namespace FTAnalyzer
             Individual ind = GetContextIndividual(sender);
             if (ind != null)
             {
-                Notes notes = new Notes(ind);
+                Notes notes = new(ind);
                 notes.Show();
             }
             HourGlass(false);
@@ -3192,7 +3226,7 @@ namespace FTAnalyzer
                 HourGlass(true);
                 Individual root = ft.RootPerson;
                 ft.SetRelations(selected.IndividualID, null);
-                LostCousinsReferral lcr = new LostCousinsReferral(selected, ckbReferralInCommon.Checked);
+                LostCousinsReferral lcr = new(selected, ckbReferralInCommon.Checked);
                 DisposeDuplicateForms(lcr);
                 lcr.Show();
                 ft.SetRelations(root.IndividualID, null);
@@ -3205,8 +3239,7 @@ namespace FTAnalyzer
         void IndividualsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            using (DataTable dt = convertor.ToDataTable(new List<IExportIndividual>(ft.AllIndividuals)))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IExportIndividual>(ft.AllIndividuals)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportIndEvent);
             HourGlass(false);
@@ -3215,8 +3248,7 @@ namespace FTAnalyzer
         void FamiliesToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            using (DataTable dt = convertor.ToDataTable(new List<IDisplayFamily>(ft.AllFamilies)))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplayFamily>(ft.AllFamilies)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportFamEvent);
             HourGlass(false);
@@ -3225,8 +3257,7 @@ namespace FTAnalyzer
         void FactsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            using (DataTable dt = convertor.ToDataTable(new List<ExportFact>(ft.AllExportFacts)))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<ExportFact>(ft.AllExportFacts)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportFactsEvent);
             HourGlass(false);
@@ -3237,10 +3268,9 @@ namespace FTAnalyzer
             HourGlass(true);
             try
             {
-                ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
                 List<IDisplayLooseBirth> list = ft.LooseBirths().ToList();
                 list.Sort(new LooseBirthComparer());
-                using (DataTable dt = convertor.ToDataTable(list))
+                using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list))
                     ExportToExcel.Export(dt);
                 Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportLooseBirthsEvent);
             }
@@ -3256,10 +3286,9 @@ namespace FTAnalyzer
             HourGlass(true);
             try
             {
-                ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
                 List<IDisplayLooseDeath> list = ft.LooseDeaths().ToList();
                 list.Sort(new LooseDeathComparer());
-                using (DataTable dt = convertor.ToDataTable(list))
+                using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list))
                     ExportToExcel.Export(dt);
                 Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportLooseDeathsEvent);
             }
@@ -3273,8 +3302,7 @@ namespace FTAnalyzer
         void MnuExportLocations_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            using (DataTable dt = convertor.ToDataTable(new List<IDisplayLocation>(ft.AllDisplayPlaces)))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplayLocation>(ft.AllDisplayPlaces)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportLocationsEvent);
             HourGlass(false);
@@ -3283,8 +3311,7 @@ namespace FTAnalyzer
         void MnuSourcesToExcel_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            using (DataTable dt = convertor.ToDataTable(new List<IDisplaySource>(ft.AllSources)))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplaySource>(ft.AllSources)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportSourcesEvent);
             HourGlass(false);
@@ -3293,8 +3320,7 @@ namespace FTAnalyzer
         void MnuCustomFactsToExcel_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            using (DataTable dt = convertor.ToDataTable(new List<IDisplayCustomFact>(ft.AllCustomFacts)))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplayCustomFact>(ft.AllCustomFacts)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportCustomFactEvent);
             HourGlass(false);
@@ -3303,8 +3329,7 @@ namespace FTAnalyzer
         void MnuDataErrorsToExcel_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            using (DataTable dt = convertor.ToDataTable(new List<IDisplayDataError>(DataErrors(ckbDataErrors))))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplayDataError>(DataErrors(ckbDataErrors))))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportDataErrorsEvent);
             HourGlass(false);
@@ -3313,12 +3338,11 @@ namespace FTAnalyzer
         void MnuTreetopsToExcel_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
             Predicate<Individual> filter = CreateTreeTopsIndividualFilter();
             List<IExportIndividual> treeTopsList = ft.GetExportTreeTops(filter).ToList();
             treeTopsList.Sort(new BirthDateComparer());
-            SortableBindingList<IExportIndividual> list = new SortableBindingList<IExportIndividual>(treeTopsList);
-            using (DataTable dt = convertor.ToDataTable(list.ToList()))
+            SortableBindingList<IExportIndividual> list = new(treeTopsList);
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list.ToList()))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportTreeTopsEvent);
             HourGlass(false);
@@ -3329,11 +3353,11 @@ namespace FTAnalyzer
             HourGlass(true);
             if (warDeadFilter != null)
             {
-                ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+                ListtoDataTableConvertor convertor = new();
                 List<IExportIndividual> warDeadList = ft.GetExportWorldWars(warDeadFilter).ToList();
                 warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
-                SortableBindingList<IExportIndividual> list = new SortableBindingList<IExportIndividual>(warDeadList);
-                using (DataTable dt = convertor.ToDataTable(list.ToList()))
+                SortableBindingList<IExportIndividual> list = new(warDeadList);
+                using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list.ToList()))
                     ExportToExcel.Export(dt);
                 Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportWorldWarsEvent);
             }
@@ -3343,7 +3367,7 @@ namespace FTAnalyzer
         async void MnuSurnamesToExcel_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
+            ListtoDataTableConvertor convertor = new();
             SortableBindingList<IDisplaySurnames> stats;
             if (dgSurnames.DataSource != null)
                 stats = dgSurnames.DataSource;
@@ -3357,9 +3381,9 @@ namespace FTAnalyzer
                     new SortableBindingList<IDisplaySurnames>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked))).ConfigureAwait(true);
                 tspbTabProgress.Visible = false;
             }
-            List<IDisplaySurnames> list = new List<IDisplaySurnames>(stats);
-            using (DataTable dt = convertor.ToDataTable(list))
-                ExportToExcel. Export(dt);
+            List<IDisplaySurnames> list = new(stats);
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list))
+                ExportToExcel.Export(dt);
             await Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportSurnamesEvent);
             HourGlass(false);
         }
@@ -3372,14 +3396,15 @@ namespace FTAnalyzer
             pbToday.Visible = true;
             labToday.Visible = true;
             rtbToday.ResetText();
-            Progress<int> progress = new Progress<int>(value => { pbToday.Value = value; });
-            Progress<string> outputText = new Progress<string>(text => { rtbToday.Rtf = text; });
+            Progress<int> progress = new(value => { pbToday.Value = value; });
+            Progress<string> outputText = new(text => { rtbToday.Rtf = text; });
             await Task.Run(() => ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, (int)nudToday.Value, progress, outputText)).ConfigureAwait(true);
             labToday.Visible = false;
             pbToday.Visible = false;
             await Analytics.TrackAction(Analytics.MainFormAction, Analytics.TodayClickedEvent).ConfigureAwait(true);
         }
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void RbTodayMonth_CheckedChanged(object sender, EventArgs e)
         {
             try
@@ -3392,6 +3417,7 @@ namespace FTAnalyzer
             }
         }
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void RbTodaySingle_CheckedChanged(object sender, EventArgs e)
         {
             try
@@ -3406,6 +3432,7 @@ namespace FTAnalyzer
 
         async void BtnUpdateTodaysEvents_Click(object sender, EventArgs e) => await ShowTodaysEvents().ConfigureAwait(true);
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void NudToday_ValueChanged(object sender, EventArgs e)
         {
             try
@@ -3419,6 +3446,7 @@ namespace FTAnalyzer
         }
         #endregion
 
+        [SupportedOSPlatform("windows10.0.17763")]
         public void SetFactTypeList(CheckedListBox ckbFactSelect, CheckedListBox ckbFactExclude, Predicate<ExportFact> filter)
         {
             List<string> factTypes = ft.AllExportFacts.Filter(filter).Select(x => x.FactType).Distinct().ToList();
@@ -3448,30 +3476,29 @@ namespace FTAnalyzer
 
         #region Load CSV Location Data
 
+        [SupportedOSPlatform("windows10.0.17763")]
         public static void LoadLocationData(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
         {
             string csvFilename = string.Empty;
             pb.Visible = true;
             try
             {
-                using (OpenFileDialog openFileDialog = new OpenFileDialog())
-                {
-                    string initialDir = (string)Application.UserAppDataRegistry.GetValue("Excel Export Individual Path");
-                    openFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
-                    openFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv|TNG format (*.tng)|*.tng";
-                    openFileDialog.FilterIndex = defaultIndex;
+                using OpenFileDialog openFileDialog = new();
+                string initialDir = (string)Application.UserAppDataRegistry.GetValue("Excel Export Individual Path");
+                openFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
+                openFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv|TNG format (*.tng)|*.tng";
+                openFileDialog.FilterIndex = defaultIndex;
 
-                    if (openFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        csvFilename = openFileDialog.FileName;
-                        label.Text = "Loading " + csvFilename;
-                        string path = Path.GetDirectoryName(csvFilename);
-                        Application.UserAppDataRegistry.SetValue("Excel Export Individual Path", path);
-                        if (csvFilename.EndsWith("TNG", StringComparison.InvariantCultureIgnoreCase))
-                            ReadTNGdata(pb, csvFilename);
-                        else
-                            ReadCSVdata(pb, csvFilename);
-                    }
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    csvFilename = openFileDialog.FileName;
+                    label.Text = "Loading " + csvFilename;
+                    string path = Path.GetDirectoryName(csvFilename);
+                    Application.UserAppDataRegistry.SetValue("Excel Export Individual Path", path);
+                    if (csvFilename.EndsWith("TNG", StringComparison.InvariantCultureIgnoreCase))
+                        ReadTNGdata(pb, csvFilename);
+                    else
+                        ReadCSVdata(pb, csvFilename);
                 }
             }
             catch (Exception ex)
@@ -3489,22 +3516,20 @@ namespace FTAnalyzer
             pb.Maximum = lineCount;
             pb.Minimum = 0;
             pb.Value = rowCount;
-            using (CsvFileReader reader = new CsvFileReader(tngFilename, ';'))
+            using CsvFileReader reader = new(tngFilename, ';');
+            CsvRow row = new();
+            while (reader.ReadRow(row))
             {
-                CsvRow row = new CsvRow();
-                while (reader.ReadRow(row))
+                if (row.Count == 4)
                 {
-                    if (row.Count == 4)
-                    {
-                        FactLocation.GetLocation(row[1], row[3], row[2], FactLocation.Geocode.NOT_SEARCHED, true, true);
-                        rowCount++;
-                    }
-                    pb.Value++;
-                    if (pb.Value % 10 == 0)
-                        Application.DoEvents();
+                    FactLocation.GetLocation(row[1], row[3], row[2], FactLocation.Geocode.NOT_SEARCHED, true, true);
+                    rowCount++;
                 }
-                MessageBox.Show($"Loaded {rowCount} locations from TNG file {tngFilename}", "FTAnalyzer");
+                pb.Value++;
+                if (pb.Value % 10 == 0)
+                    Application.DoEvents();
             }
+            MessageBox.Show($"Loaded {rowCount} locations from TNG file {tngFilename}", "FTAnalyzer");
         }
 
         public static void ReadCSVdata(ToolStripProgressBar pb, string csvFilename)
@@ -3514,10 +3539,10 @@ namespace FTAnalyzer
             pb.Maximum = lineCount;
             pb.Minimum = 0;
             pb.Value = rowCount;
-            using (CsvFileReader reader = new CsvFileReader(csvFilename))
+            using (CsvFileReader reader = new(csvFilename))
             {
-                CsvRow headerRow = new CsvRow();
-                CsvRow row = new CsvRow();
+                CsvRow headerRow = new();
+                CsvRow row = new();
 
                 reader.ReadRow(headerRow);
                 if (headerRow.Count != 3)
@@ -3544,6 +3569,7 @@ namespace FTAnalyzer
         }
         #endregion
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void LoadLocations(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
         {
             DialogResult result = MessageBox.Show("It is recommended you backup your Geocoding database first.\nDo you want to backup now?", "FTAnalyzer", MessageBoxButtons.YesNoCancel);
@@ -3578,7 +3604,7 @@ namespace FTAnalyzer
         void CousinsCountReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            StatisticsForm f = new StatisticsForm(StatisticsForm.StatisticType.CousinCount);
+            StatisticsForm f = new(StatisticsForm.StatisticType.CousinCount);
             DisposeDuplicateForms(f);
             f.Show();
             HourGlass(false);
@@ -3588,7 +3614,7 @@ namespace FTAnalyzer
         void HowManyDirectsReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            StatisticsForm f = new StatisticsForm(StatisticsForm.StatisticType.HowManyDirects);
+            StatisticsForm f = new(StatisticsForm.StatisticType.HowManyDirects);
             DisposeDuplicateForms(f);
             f.Show();
             HourGlass(false);
@@ -3625,7 +3651,7 @@ namespace FTAnalyzer
         void BirthdayEffectReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            StatisticsForm f = new StatisticsForm(StatisticsForm.StatisticType.BirthdayEffect);
+            StatisticsForm f = new(StatisticsForm.StatisticType.BirthdayEffect);
             DisposeDuplicateForms(f);
             f.Show();
             HourGlass(false);
@@ -3635,7 +3661,7 @@ namespace FTAnalyzer
         void PossiblyMissingChildReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            People people = new People();
+            People people = new();
             people.SetupPossiblyMissingChildrenReport();
             DisposeDuplicateForms(people);
             people.Show();
@@ -3646,7 +3672,7 @@ namespace FTAnalyzer
         void MnuAgedOver99Report_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            People people = new People();
+            People people = new();
             people.SetupAgedOver99Report();
             DisposeDuplicateForms(people);
             people.Show();
@@ -3657,7 +3683,7 @@ namespace FTAnalyzer
         void MnuSingleParentsReport_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            People people = new People();
+            People people = new();
             people.SingleParents();
             DisposeDuplicateForms(people);
             people.Show();
@@ -3665,29 +3691,28 @@ namespace FTAnalyzer
             HourGlass(false);
         }
 
+        [SupportedOSPlatform("windows10.0.17763")]
         void MnuJSON_Click(object sender, EventArgs e)
         {
             HourGlass(true);
             try
             {
-                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                using SaveFileDialog saveFileDialog = new();
+                string initialDir = (string)Application.UserAppDataRegistry.GetValue("JSON Export Path");
+                saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
+                saveFileDialog.Filter = "JavaScript Object Notation (*.json)|*.json";
+                saveFileDialog.FilterIndex = 1;
+                DialogResult dr = saveFileDialog.ShowDialog();
+                if (dr == DialogResult.OK)
                 {
-                    string initialDir = (string)Application.UserAppDataRegistry.GetValue("JSON Export Path");
-                    saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
-                    saveFileDialog.Filter = "JavaScript Object Notation (*.json)|*.json";
-                    saveFileDialog.FilterIndex = 1;
-                    DialogResult dr = saveFileDialog.ShowDialog();
-                    if (dr == DialogResult.OK)
+                    string path = Path.GetDirectoryName(saveFileDialog.FileName);
+                    Application.UserAppDataRegistry.SetValue("JSON Export Path", path);
+                    using (StreamWriter output = new(new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write), Encoding.UTF8))
                     {
-                        string path = Path.GetDirectoryName(saveFileDialog.FileName);
-                        Application.UserAppDataRegistry.SetValue("JSON Export Path", path);
-                        using (StreamWriter output = new StreamWriter(new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write), Encoding.UTF8))
-                        {
-                            var data = new JsonExport(filename);
-                            data.WriteJsonData(output);
-                        }
-                        UIHelpers.ShowMessage($"File written to {saveFileDialog.FileName}", "FTAnalyzer");
+                        var data = new JsonExport(filename);
+                        data.WriteJsonData(output);
                     }
+                    UIHelpers.ShowMessage($"File written to {saveFileDialog.FileName}", "FTAnalyzer");
                 }
             }
             catch (Exception ex)
@@ -3706,7 +3731,7 @@ namespace FTAnalyzer
                 AliveDate = FactDate.UNKNOWN_DATE;
                 return;
             }
-            FactDate aliveDate = FactDate.UNKNOWN_DATE;
+            FactDate aliveDate;
             HourGlass(true);
             try
             {
@@ -3737,7 +3762,7 @@ namespace FTAnalyzer
             if (AliveDate != FactDate.UNKNOWN_DATE)
             {
                 HourGlass(true);
-                People people = new People();
+                People people = new();
                 Predicate<Individual> filter = CreateAliveatDateFilter(AliveDate, txtCensusSurname.Text);
                 people.SetupAliveAtDate(AliveDate, filter);
                 DisposeDuplicateForms(people);
@@ -3752,35 +3777,34 @@ namespace FTAnalyzer
             SetShowFactsButton();
         }
 
+        [SupportedOSPlatform("windows10.0.17763")]
         async void MnuGoogleMyMaps_Click(object sender, EventArgs e)
         {
             try
             {
-                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                using SaveFileDialog saveFileDialog = new();
+                string initialDir = (string)Application.UserAppDataRegistry.GetValue("Google MyMaps Path");
+                string initialFile = (string)Application.UserAppDataRegistry.GetValue("Google MyMaps Filename");
+                saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
+                saveFileDialog.FileName = initialFile ?? string.Empty;
+                saveFileDialog.Filter = "Keyhole Markup Language (*.kml)|*.kml";
+                saveFileDialog.FilterIndex = 1;
+                DialogResult dr = saveFileDialog.ShowDialog();
+                if (dr == DialogResult.OK)
                 {
-                    string initialDir = (string)Application.UserAppDataRegistry.GetValue("Google MyMaps Path");
-                    string initialFile = (string)Application.UserAppDataRegistry.GetValue("Google MyMaps Filename");
-                    saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
-                    saveFileDialog.FileName = initialFile ?? string.Empty;
-                    saveFileDialog.Filter = "Keyhole Markup Language (*.kml)|*.kml";
-                    saveFileDialog.FilterIndex = 1;
-                    DialogResult dr = saveFileDialog.ShowDialog();
-                    if (dr == DialogResult.OK)
-                    {
-                        if (!saveFileDialog.FileName.EndsWith(".kml"))
-                            saveFileDialog.FileName += ".kml";
-                        string path = Path.GetDirectoryName(saveFileDialog.FileName);
-                        string file = Path.GetFileName(saveFileDialog.FileName);
-                        Application.UserAppDataRegistry.SetValue("Google MyMaps Path", path);
-                        Application.UserAppDataRegistry.SetValue("Google MyMaps Filename", file);
-                        Progress<int> progress = new Progress<int>(value => { tspbTabProgress.Value = value; });
-                        tspbTabProgress.Visible = true;
-                        tspbTabProgress.Maximum = 100;
-                        await Task.Run(() => 
-                            GoogleMap.GenerateKML(saveFileDialog.FileName, ft.AllExportableGeocodedLocations(progress)));
-                        UIHelpers.ShowMessage($"File written to {saveFileDialog.FileName}", "FTAnalyzer");
-                        tspbTabProgress.Visible = false;
-                    }
+                    if (!saveFileDialog.FileName.EndsWith(".kml"))
+                        saveFileDialog.FileName += ".kml";
+                    string path = Path.GetDirectoryName(saveFileDialog.FileName);
+                    string file = Path.GetFileName(saveFileDialog.FileName);
+                    Application.UserAppDataRegistry.SetValue("Google MyMaps Path", path);
+                    Application.UserAppDataRegistry.SetValue("Google MyMaps Filename", file);
+                    Progress<int> progress = new(value => { tspbTabProgress.Value = value; });
+                    tspbTabProgress.Visible = true;
+                    tspbTabProgress.Maximum = 100;
+                    await Task.Run(() =>
+                        GoogleMap.GenerateKML(saveFileDialog.FileName, ft.AllExportableGeocodedLocations(progress)));
+                    UIHelpers.ShowMessage($"File written to {saveFileDialog.FileName}", "FTAnalyzer");
+                    tspbTabProgress.Visible = false;
                 }
             }
             catch (Exception ex)

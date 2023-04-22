@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Text;
 using System.Reflection;
-using System.IO;
-using FTAnalyzer.Windows.Properties;
+using FTAnalyzer.Properties;
 using System.Diagnostics;
 
 //TODO: Load option controls dynamically
@@ -57,7 +53,7 @@ namespace FTAnalyzer.UserControls
 			}
 			catch (ReflectionTypeLoadException ex)
 			{
-				StringBuilder sb = new StringBuilder();
+				StringBuilder sb = new();
 				foreach (Exception exSub in ex.LoaderExceptions)
 				{
 					sb.AppendLine(exSub.Message);
@@ -124,7 +120,7 @@ namespace FTAnalyzer.UserControls
 
 		void OK_Click(object sender, EventArgs e)
 		{
-			List<string> controlErrors = new List<string>();
+			List<string> controlErrors = new();
 			foreach (Control control in panel1.Controls)
 			{
                 if (control is IOptions options)
@@ -133,7 +129,7 @@ namespace FTAnalyzer.UserControls
             }
 			if (controlErrors.Count > 0)
 			{
-				StringBuilder sb = new StringBuilder();
+				StringBuilder sb = new();
 				sb.Append("The following tabs have validation errors on them:");
 				sb.Append(Environment.NewLine);
 				for (int i = 0; i < controlErrors.Count; i++)

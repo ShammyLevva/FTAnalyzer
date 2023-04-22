@@ -56,16 +56,16 @@ namespace FTAnalyzer.Mapping
                 FactLocations.Columns.Add("Label", typeof(string));
 
                 clusterer = new MarkerClusterer(FactLocations);
-                GeometryFeatureProvider factLocationGFP = new GeometryFeatureProvider(clusterer.FeatureDataTable);
+                GeometryFeatureProvider factLocationGFP = new(clusterer.FeatureDataTable);
 
                 clusterLayer = new VectorLayer("Clusters")
                 {
                     DataSource = factLocationGFP
                 };
 
-                Dictionary<string, IStyle> styles = new Dictionary<string, IStyle>();
+                Dictionary<string, IStyle> styles = new();
 
-                VectorStyle feature = new VectorStyle
+                VectorStyle feature = new()
                 {
                     PointColor = new SolidBrush(Color.Red),
                     PointSize = 20,
@@ -74,7 +74,7 @@ namespace FTAnalyzer.Mapping
                 };
                 styles.Add(MapCluster.FEATURE, feature);
 
-                VectorStyle cluster = new VectorStyle
+                VectorStyle cluster = new()
                 {
                     PointColor = new SolidBrush(Color.ForestGreen),
                     PointSize = 20,
@@ -82,7 +82,7 @@ namespace FTAnalyzer.Mapping
                 };
                 styles.Add(MapCluster.CLUSTER, cluster);
 
-                VectorStyle unknown = new VectorStyle
+                VectorStyle unknown = new()
                 {
                     PointColor = new SolidBrush(Color.Black),
                     PointSize = 10
@@ -101,10 +101,10 @@ namespace FTAnalyzer.Mapping
                     TextRenderingHint = TextRenderingHint.AntiAlias,
                     SmoothingMode = SmoothingMode.AntiAlias
                 };
-                LabelStyle style = new LabelStyle
+                LabelStyle style = new()
                 {
                     ForeColor = Color.Black,
-                    Font = new Font(FontFamily.GenericSerif, 14, FontStyle.Bold),
+                    Font = new(FontFamily.GenericSerif, 14, FontStyle.Bold),
                     HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
                     VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom,
                     CollisionDetection = true,

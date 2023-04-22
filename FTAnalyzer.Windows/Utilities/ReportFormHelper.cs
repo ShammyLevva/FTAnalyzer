@@ -1,15 +1,9 @@
 ﻿using FTAnalyzer.Utilities;
-using FTAnalyzer.Windows.Properties;
+using FTAnalyzer.Properties;
 using Printing.DataGridViewPrint.Tools;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Drawing.Printing;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
 using System.Xml;
 
 namespace FTAnalyzer
@@ -90,9 +84,8 @@ namespace FTAnalyzer
             if (ReportGrid.DataSource == null || ReportGrid.RowCount == 0)
                 return;
             parent.Cursor = Cursors.WaitCursor;
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
             SortableBindingList<T> gridDatasource = ReportGrid.DataSource as SortableBindingList<T>;
-            using (DataTable dt = convertor.ToDataTable(gridDatasource.ToList(), shown))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(gridDatasource.ToList(), shown))
                 ExportToExcel.Export(dt);
             parent.Cursor = Cursors.Default;
         }
@@ -102,37 +95,34 @@ namespace FTAnalyzer
             if (list == null || list.Count == 0)
                 return;
             parent.Cursor = Cursors.WaitCursor;
-            ListtoDataTableConvertor convertor = new ListtoDataTableConvertor();
-            using (DataTable dt = convertor.ToDataTable(list))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list))
                 ExportToExcel.Export(dt);
             parent.Cursor = Cursors.Default;
         }
 
         public void SaveColumnLayout(string filename)
         {
-            using (DataTable dt = new DataTable("table"))
-            {
-                var query = from DataGridViewColumn col in ReportGrid.Columns
-                            orderby col.DisplayIndex
-                            select col;
+            using DataTable dt = new("table");
+            var query = from DataGridViewColumn col in ReportGrid.Columns
+                        orderby col.DisplayIndex
+                        select col;
 
-                foreach (DataGridViewColumn col in query)
-                {
-                    DataColumn dc = new DataColumn(col.Name);
-                    dc.ExtendedProperties["Width"] = col.Width;
-                    if (col == ReportGrid.SortedColumn)
-                        dc.ExtendedProperties["Sort"] = ReportGrid.SortOrder;
-                    dt.Columns.Add(dc);
-                }
-                string path = Path.Combine(GeneralSettings.Default.SavePath, filename);
-                dt.WriteXmlSchema(path);
-                SaveFormLayout();
+            foreach (DataGridViewColumn col in query)
+            {
+                DataColumn dc = new(col.Name);
+                dc.ExtendedProperties["Width"] = col.Width;
+                if (col == ReportGrid.SortedColumn)
+                    dc.ExtendedProperties["Sort"] = ReportGrid.SortOrder;
+                dt.Columns.Add(dc);
             }
+            string path = Path.Combine(GeneralSettings.Default.SavePath, filename);
+            dt.WriteXmlSchema(path);
+            SaveFormLayout();
         }
 
         public static Point CheckIsOnScreen(int top, int left)
         {
-            Point toCheck = new Point(left, top + NativeMethods.TopTaskbarOffset);
+            Point toCheck = new(left, top + NativeMethods.TopTaskbarOffset);
             foreach (Screen s in Screen.AllScreens)
                 if (s.Bounds.Contains(toCheck))
                     return toCheck; // its inside bounds so return the point checked
@@ -144,44 +134,42 @@ namespace FTAnalyzer
             try
             {
                 _resetTable();
-                using (DataTable dt = new DataTable())
+                using DataTable dt = new();
+                string path = Path.Combine(GeneralSettings.Default.SavePath, filename);
+                string xml = File.ReadAllText(path);
+                StringReader sreader = new(xml);
+                using (XmlReader reader = XmlReader.Create(sreader, new XmlReaderSettings() { XmlResolver = null }))
                 {
-                    string path = Path.Combine(GeneralSettings.Default.SavePath, filename);
-                    string xml = File.ReadAllText(path);
-                    StringReader sreader = new StringReader(xml);
-                    using (XmlReader reader = XmlReader.Create(sreader, new XmlReaderSettings() { XmlResolver = null }))
-                    {
-                        dt.ReadXmlSchema(reader);
-                    }
-                    if (dt.Columns.Count == ReportGrid.Columns.Count)
-                    {   // only load column layout and sort order if save file has same number of columns as current form
-                        // this allows for upgrades that add extra columns
-                        int i = 0;
-                        foreach (DataColumn col in dt.Columns)
-                        {
-                            if (col.ColumnName == "GoogleLocation")
-                                col.ColumnName = "FoundLocation";
-                            if (col.ColumnName == "GoogleResultType")
-                                col.ColumnName = "FoundResultType";
-                            ReportGrid.Columns[col.ColumnName].DisplayIndex = i;
-                            if (col.ExtendedProperties.Contains("Width"))
-                            {
-                                if (int.TryParse((string)col.ExtendedProperties["Width"], out int width))
-                                    ReportGrid.Columns[col.ColumnName].Width = width;
-                            }
-                            if (col.ExtendedProperties.Contains("Sort"))
-                            {
-                                ListSortDirection direction = "Ascending".Equals(col.ExtendedProperties["Sort"]) ?
-                                        ListSortDirection.Ascending :
-                                        ListSortDirection.Descending;
-                                ReportGrid.Sort(ReportGrid.Columns[col.ColumnName], direction);
-                            }
-                            i++;
-                        }
-                    }
-                    else
-                        ResetColumnLayout(filename);
+                    dt.ReadXmlSchema(reader);
                 }
+                if (dt.Columns.Count == ReportGrid.Columns.Count)
+                {   // only load column layout and sort order if save file has same number of columns as current form
+                    // this allows for upgrades that add extra columns
+                    int i = 0;
+                    foreach (DataColumn col in dt.Columns)
+                    {
+                        if (col.ColumnName == "GoogleLocation")
+                            col.ColumnName = "FoundLocation";
+                        if (col.ColumnName == "GoogleResultType")
+                            col.ColumnName = "FoundResultType";
+                        ReportGrid.Columns[col.ColumnName].DisplayIndex = i;
+                        if (col.ExtendedProperties.Contains("Width"))
+                        {
+                            if (int.TryParse((string)col.ExtendedProperties["Width"], out int width))
+                                ReportGrid.Columns[col.ColumnName].Width = width;
+                        }
+                        if (col.ExtendedProperties.Contains("Sort"))
+                        {
+                            ListSortDirection direction = "Ascending".Equals(col.ExtendedProperties["Sort"]) ?
+                                    ListSortDirection.Ascending :
+                                    ListSortDirection.Descending;
+                            ReportGrid.Sort(ReportGrid.Columns[col.ColumnName], direction);
+                        }
+                        i++;
+                    }
+                }
+                else
+                    ResetColumnLayout(filename);
             }
             catch (Exception)
             {
@@ -228,17 +216,17 @@ namespace FTAnalyzer
             }
         }
 
-        void ResetFormLayout()
-        {
-            if (_saveForm)
-            {
-                parent.Top = defaultLocation.Item1;
-                parent.Left = defaultLocation.Item2;
-                parent.Height = defaultSize.Item1;
-                parent.Width = defaultSize.Item2;
-                SaveFormLayout();
-            }
-        }
+        //void ResetFormLayout()
+        //{
+        //    if (_saveForm)
+        //    {
+        //        parent.Top = defaultLocation.Item1;
+        //        parent.Left = defaultLocation.Item2;
+        //        parent.Height = defaultSize.Item1;
+        //        parent.Width = defaultSize.Item2;
+        //        SaveFormLayout();
+        //    }
+        //}
 
         protected virtual void Dispose(bool disposing)
         {

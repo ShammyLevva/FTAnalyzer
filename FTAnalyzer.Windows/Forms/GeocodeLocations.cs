@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
 using System.ComponentModel;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
 using FTAnalyzer.Events;
 using FTAnalyzer.Filters;
 using FTAnalyzer.Mapping;
@@ -14,7 +8,7 @@ using NetTopologySuite.Geometries;
 using System.Text;
 using SharpMap.Utilities;
 using FTAnalyzer.Forms.Controls;
-using FTAnalyzer.Windows.Properties;
+using FTAnalyzer.Properties;
 using System.Diagnostics;
 
 namespace FTAnalyzer.Forms
@@ -45,14 +39,14 @@ namespace FTAnalyzer.Forms
                 Top += NativeMethods.TopTaskbarOffset;
                 ft = FamilyTree.Instance;
                 refreshingMenus = false;
-                locations = ft.AllGeocodingLocations;
+                locations = FamilyTree.AllGeocodingLocations;
                 queue = new ConcurrentQueue<FactLocation>();
                 CopyLocation = FactLocation.UNKNOWN_LOCATION;
                 this.outputText = outputText;
                 mnuPasteLocation.Enabled = false;
                 dgLocations.AutoGenerateColumns = false;
                 reportFormHelper = new ReportFormHelper(this, this.Text, dgLocations, this.ResetTable, "Geocode Locations");
-                italicFont = new Font(dgLocations.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Italic);
+                italicFont = new(dgLocations.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Italic);
                 reportFormHelper.LoadColumnLayout("GeocodeLocationsColumns.xml");
                 mnuGoogleGeocodeLocations.Enabled = !ft.Geocoding; // disable menu if already geocoding
                 mnuEditLocation.Enabled = !ft.Geocoding;
@@ -90,7 +84,7 @@ namespace FTAnalyzer.Forms
 
         void SetupFilterMenu()
         {
-            foreach (KeyValuePair<FactLocation.Geocode, string> item in FactLocation.Geocodes.OrderBy(x => x.Value))
+            foreach (KeyValuePair<FactLocation.Geocode, string> item in FactLocation.GEOCODES.OrderBy(x => x.Value))
             {
                 string geocode = item.Value;
                 ToolStripMenuItem menu = new ToolStripMenuItem(geocode)
@@ -921,7 +915,7 @@ namespace FTAnalyzer.Forms
                 int count = 0;
                 int total = queue.Count;
                 DatabaseHelper dbh = DatabaseHelper.Instance;
-                Dictionary<string, Tuple<string, string>> LatLongIndex = dbh.LatLongIndex;
+                Dictionary<string, Tuple<string, string>> LatLongIndex = DatabaseHelper.LatLongIndex;
                 while (!queue.IsEmpty)
                 {
                     if (queue.TryDequeue(out FactLocation loc))

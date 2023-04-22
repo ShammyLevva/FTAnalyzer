@@ -308,9 +308,9 @@ namespace FTAnalyzer.Utilities
                     else
                     {
                         // Select this first node in the tree
-                        if (this.Nodes.Count > 0)
+                        if (Nodes.Count > 0)
                         {
-                            SelectSingleNode(this.Nodes[0]);
+                            SelectSingleNode(Nodes[0]);
                         }
                     }
                 }
@@ -321,9 +321,9 @@ namespace FTAnalyzer.Utilities
                         if (m_SelectedNode.Parent == null)
                         {
                             // Select the last ROOT node in the tree
-                            if (this.Nodes.Count > 0)
+                            if (Nodes.Count > 0)
                             {
-                                SelectNode(this.Nodes[this.Nodes.Count - 1]);
+                                SelectNode(Nodes[^1]);
                             }
                         }
                         else
@@ -334,11 +334,11 @@ namespace FTAnalyzer.Utilities
                     }
                     else
                     {
-                        if (this.Nodes.Count > 0)
+                        if (Nodes.Count > 0)
                         {
                             // Select the last node visible node in the tree.
                             // Don't expand branches incase the tree is virtual
-                            TreeNode ndLast = this.Nodes[0].LastNode;
+                            TreeNode ndLast = Nodes[0].LastNode;
                             while (ndLast.IsExpanded && (ndLast.LastNode != null))
                             {
                                 ndLast = ndLast.LastNode;
@@ -622,7 +622,7 @@ namespace FTAnalyzer.Utilities
             }
         }
 
-        void HandleException(Exception ex)
+        static void HandleException(Exception ex)
         {
             // Perform some error handling here.
             // We don't want to bubble errors to the CLR. 

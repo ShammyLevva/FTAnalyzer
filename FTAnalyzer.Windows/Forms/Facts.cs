@@ -1,15 +1,9 @@
 ﻿using FTAnalyzer.Filters;
 using FTAnalyzer.Utilities;
-using FTAnalyzer.Windows.Properties;
-using System;
-using System.Collections.Generic;
+using FTAnalyzer.Properties;
 using System.ComponentModel;
-using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms
 {
@@ -40,13 +34,13 @@ namespace FTAnalyzer.Forms
                 dgFacts.AutoGenerateColumns = false;
                 ExtensionMethods.DoubleBuffered(dgFacts, true);
                 reportFormHelper = new ReportFormHelper(this, Text, dgFacts, ResetTable, "Facts");
-                italicFont = new Font(dgFacts.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Italic);
-                linkFont = new Font(dgFacts.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Underline);
+                italicFont = new(dgFacts.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Italic);
+                linkFont = new(dgFacts.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Underline);
                 dgFacts.Columns["IndividualID"].Visible = true;
                 dgFacts.Columns["CensusReference"].Visible = true;
                 dgFacts.Columns["IgnoreFact"].Visible = false;
                 dgFacts.ReadOnly = true;
-                dgFacts.RowTemplate.Height = FontSettings.Default.FontHeight;
+                dgFacts.RowTemplate.Height = (int)(FontSettings.Default.FontHeight * GraphicsUtilities.GetCurrentScaling());
                 sep1.Visible = false;
                 btnShowHideFacts.Visible = false;
             }
@@ -210,10 +204,8 @@ namespace FTAnalyzer.Forms
             {
                 IFormatter formatter = new BinaryFormatter();
                 string file = Path.Combine(GeneralSettings.Default.SavePath, "IgnoreList.xml");
-                using (Stream stream = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.None))
-                {
-                    formatter.Serialize(stream, IgnoreList);
-                }
+                using Stream stream = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.None);
+                formatter.Serialize(stream, IgnoreList);
             }
             catch (Exception )
             {
@@ -231,10 +223,8 @@ namespace FTAnalyzer.Forms
                 string file = Path.Combine(GeneralSettings.Default.SavePath, "IgnoreList.xml");
                 if (File.Exists(file))
                 {
-                    using (Stream stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
-                    {
-                        IgnoreList = (List<string>)formatter.Deserialize(stream);
-                    }
+                    using Stream stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read);
+                    IgnoreList = (List<string>)formatter.Deserialize(stream);
                 }
             }
             catch (Exception )
@@ -344,7 +334,7 @@ namespace FTAnalyzer.Forms
         {
             bool backColourGrey = false;
             DisplayFact previous = null;
-            foreach (DisplayFact fact in facts)
+            foreach (DisplayFact fact in facts.Cast<DisplayFact>())
             {
                 if (previous != null)
                     if ((CensusRefReport && previous.CensusReference != fact.CensusReference) || (!CensusRefReport && previous.IndividualID != fact.IndividualID))
@@ -427,12 +417,12 @@ namespace FTAnalyzer.Forms
                 DisplayFact f = dgFacts.Rows[e.RowIndex].DataBoundItem as DisplayFact;
                 if (f.Fact.FactType == Fact.REPORT)
                 {
-                    Facts person = new Facts(f.Ind);
+                    Facts person = new(f.Ind);
                     person.Show();
                 }
                 else
                 {
-                    SourcesForm sourceForm = new SourcesForm(f);
+                    SourcesForm sourceForm = new(f);
                     sourceForm.Show();
                 }
             }

@@ -1,10 +1,14 @@
 using FTAnalyzer.Utilities;
+using FTAnalyzer.Exports;
 using SharpMap;
 
 namespace FTAnalyzer.Windows
 {
     internal static class Program
     {
+        public static HttpClient Client = new();
+        public static LostCousinsClient LCClient = new();
+        
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>

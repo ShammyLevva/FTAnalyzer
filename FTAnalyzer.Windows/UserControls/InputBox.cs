@@ -10,11 +10,11 @@ namespace FTAnalyzer
     {
          public static DialogResult Show(string title, string promptText, ref string value)
         {
-            Form form = new Form();
-            Label label = new Label();
-            TextBox textBox = new TextBox();
-            Button buttonOk = new Button();
-            Button buttonCancel = new Button();
+            Form form = new();
+            Label label = new();
+            TextBox textBox = new();
+            Button buttonOk = new();
+            Button buttonCancel = new();
 
             form.Text = title;
             label.Text = promptText;

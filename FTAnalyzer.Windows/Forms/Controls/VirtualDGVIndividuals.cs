@@ -4,56 +4,33 @@
     {
         protected override object GetValueFor(IDisplayIndividual ind, string propertyName)
         {
-            switch (propertyName)
+            return propertyName switch
             {
-                case nameof(IDisplayIndividual.IndividualID):
-                    return ind.IndividualID;
-                case nameof(IDisplayIndividual.Forenames):
-                    return ind.Forenames;
-                case nameof(IDisplayIndividual.Surname):
-                    return ind.Surname;
-                case nameof(IDisplayIndividual.Gender):
-                    return ind.Gender;
-                case nameof(IDisplayIndividual.BirthDate):
-                    return ind.BirthDate;
-                case nameof(IDisplayIndividual.BirthLocation):
-                    return ind.BirthLocation;
-                case nameof(IDisplayIndividual.DeathDate):
-                    return ind.DeathDate;
-                case nameof(IDisplayIndividual.DeathLocation):
-                    return ind.DeathLocation;
-                case nameof(IDisplayIndividual.Occupation):
-                    return ind.Occupation;
-                case nameof(IDisplayIndividual.LifeSpan):
-                    return ind.LifeSpan;
-                case nameof(IDisplayIndividual.Relation):
-                    return ind.Relation;
-                case nameof(IDisplayIndividual.RelationToRoot):
-                    return ind.RelationToRoot;
-                case nameof(IDisplayIndividual.Title):
-                    return ind.Title;
-                case nameof(IDisplayIndividual.Suffix):
-                    return ind.Suffix;
-                case nameof(IDisplayIndividual.Alias):
-                    return ind.Alias;
-                case nameof(IDisplayIndividual.FamilySearchID):
-                    return ind.FamilySearchID;
-                case nameof(IDisplayIndividual.MarriageCount):
-                    return ind.MarriageCount;
-                case nameof(IDisplayIndividual.ChildrenCount):
-                    return ind.ChildrenCount;
-                case nameof(IDisplayIndividual.BudgieCode):
-                    return ind.BudgieCode;
-                case nameof(IDisplayIndividual.Ahnentafel):
-                    return ind.Ahnentafel;
-                case nameof(IDisplayIndividual.HasNotes):
-                    return ind.HasNotes;
-                case nameof(IDisplayIndividual.FactsCount):
-                    return ind.FactsCount;
-                case nameof(IDisplayIndividual.SourcesCount):
-                    return ind.SourcesCount;
-            }
-            return null;
+                nameof(IDisplayIndividual.IndividualID) => ind.IndividualID,
+                nameof(IDisplayIndividual.Forenames) => ind.Forenames,
+                nameof(IDisplayIndividual.Surname) => ind.Surname,
+                nameof(IDisplayIndividual.Gender) => ind.Gender,
+                nameof(IDisplayIndividual.BirthDate) => ind.BirthDate,
+                nameof(IDisplayIndividual.BirthLocation) => ind.BirthLocation,
+                nameof(IDisplayIndividual.DeathDate) => ind.DeathDate,
+                nameof(IDisplayIndividual.DeathLocation) => ind.DeathLocation,
+                nameof(IDisplayIndividual.Occupation) => ind.Occupation,
+                nameof(IDisplayIndividual.LifeSpan) => ind.LifeSpan,
+                nameof(IDisplayIndividual.Relation) => ind.Relation,
+                nameof(IDisplayIndividual.RelationToRoot) => ind.RelationToRoot,
+                nameof(IDisplayIndividual.Title) => ind.Title,
+                nameof(IDisplayIndividual.Suffix) => ind.Suffix,
+                nameof(IDisplayIndividual.Alias) => ind.Alias,
+                nameof(IDisplayIndividual.FamilySearchID) => ind.FamilySearchID,
+                nameof(IDisplayIndividual.MarriageCount) => ind.MarriageCount,
+                nameof(IDisplayIndividual.ChildrenCount) => ind.ChildrenCount,
+                nameof(IDisplayIndividual.BudgieCode) => ind.BudgieCode,
+                nameof(IDisplayIndividual.Ahnentafel) => ind.Ahnentafel,
+                nameof(IDisplayIndividual.HasNotes) => ind.HasNotes,
+                nameof(IDisplayIndividual.FactsCount) => ind.FactsCount,
+                nameof(IDisplayIndividual.SourcesCount) => ind.SourcesCount,
+                _ => null,
+            };
         }
     }
 }

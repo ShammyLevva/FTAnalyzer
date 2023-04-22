@@ -9,18 +9,11 @@ namespace Testing
     [TestClass]
     public class CensusReferenceTest
     {
-        public CensusReferenceTest()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext { get; set; }
+        public TestContext? TestContext { get; set; }
 
         #region Additional test attributes
         //
@@ -71,6 +64,8 @@ namespace Testing
             USCensusTest("Microfilm T9 Roll 1337 State Utah County Salt Lake ED 57 Page 272B Dwelling Number 186 Family 191", CensusDate.USCENSUS1880, "1337", "57", "272B");
             USCensusTest("Microfilm M432 Roll 1337 State Utah County Salt Lake ED 57 Page 272B Dwelling Number 186 Family 191", CensusDate.USCENSUS1850, "1337", "57", "272B");
             USCensusTest("Microfilm M19 Roll 1337 State Utah County Salt Lake ED 57 Page 272B Dwelling Number 186 Family 191", CensusDate.USCENSUS1830, "1337", "57", "272B");
+            USCensusTest("Year 1900 Census Rochester Ward 9 Monroe New York Page 5 ED 0067 FHL microfilm", CensusDate.USCENSUS1900, "", "0067", "5");
+            USCensusTest("Year 1930 Census Trenton Mercer New Jersey Page 1B ED 0054 FHL", CensusDate.USCENSUS1930, "", "0054", "1B");
         }
 
         [TestMethod]
@@ -127,6 +122,10 @@ namespace Testing
             UKCensusTest("Database online. Class: RG9; Piece: 1105; Folio: 90; Page: 21; GSU", CensusDate.UKCENSUS1861, "1105", "90", "21");
             UKCensusTest("            RG11 piece 870 folio 49 page 10", CensusDate.UKCENSUS1881, "870", "49", "10");
             UKCensusTest("Archive reference RG11 Piece number 4594 Folio 9 Page 12", CensusDate.UKCENSUS1881, "4594", "9", "12");
+            UKCensusTest("Archive reference RG11 Piece number 1974  Folio 42 Page 3", CensusDate.UKCENSUS1881, "1974", "42", "3");
+            UKCensusTest("Archive reference RG11 Piece number 817 Folio 74\r\nPage 20", CensusDate.UKCENSUS1881, "817", "74", "20");
+            UKCensusTest("RG11   1781    5   4    587", CensusDate.UKCENSUS1881, "1781", "5", "4");
+            UKCensusTest("RG11   3282   63  10   178", CensusDate.UKCENSUS1881, "3282", "63", "10");
             UKCensusTest("Archive reference	RG11\nPiece number	870\nFolio	49\nPage	10", CensusDate.UKCENSUS1881, "870", "49", "10");
             UKCensusTest("Archive reference RG11 Piece number 4594 Folio 9 Page 12", CensusDate.UKCENSUS1881, "4594", "9", "12");
             UKCensusTest(@"Castleford, Pontefract, folio 9, page 12, Thomas Hey and family; digital images, \i FindMyPast.co.uk\i0  (https://search.findmypast.co.uk/search-world-Records/1881-england-wales-and-scotland-census : accessed 12 Jun 2017); citing PRO RG 11/4594", CensusDate.UKCENSUS1881, "4594", "9", "12");
@@ -151,6 +150,7 @@ namespace Testing
             CanadianCensus("1921 RG31 Canada Census Item 4360292 013/52/15/01", CensusDate.CANADACENSUS1921, "013", "52", "01", "15");
             CanadianCensus("19210601 Canada Census RG31-013-52-015-01 - North Vancouver - Abraham COLEY", CensusDate.CANADACENSUS1921, "013", "52", "01", "015");
             CanadianCensus("19110601 Census RG31 District 61 Sub-DIstrict 28 Family 66 Page 6 - Canada Ontario - Elizabeth Harriet DAVEY", CensusDate.CANADACENSUS1911, "61", "28", "6", "66");
+            CanadianCensus("Year 1911 Census 65 - Little Current Algoma East Ontario Page 18 Family 159 ", CensusDate.CANADACENSUS1911, "", "18", "159");
             //Canadian1881Census("C_13266; Page 67; Family 301", "132", "C", "67", "301");
             //CanadianCensus("Event Place: Dumfries South, Brant North, Ontario, Canada\nDistrict Number: 160\nSub-District: C\nDivision: 2\nPage Number: 1\nFamily Number: 3\nAffiliate Film Number: C-13264", , CensusDate.CANADACENSUS1881, "C_13184", "1", "3");
         }
@@ -160,13 +160,13 @@ namespace Testing
         {
             CensusReference censusRef;
 
-            censusRef = new CensusReference("I1", "826/134/7 England & Wales 1881", false);
+            censusRef = new("I1", "826/134/7 England & Wales 1881", false);
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1881));
             Assert.IsTrue(censusRef.Piece.Equals("826"));
             Assert.IsTrue(censusRef.Folio.Equals("134"));
             Assert.IsTrue(censusRef.Page.Equals("7"));
 
-            censusRef = new CensusReference("I1", "RG14; Piece: 21983", false);
+            censusRef = new("I1", "RG14; Piece: 21983", false);
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1911));
             Assert.IsTrue(censusRef.Piece.Equals("21983"));
             Assert.IsTrue(censusRef.Status.Equals(CensusReference.ReferenceStatus.INCOMPLETE));
@@ -174,7 +174,7 @@ namespace Testing
 
         static void CanadianCensus(string reference, FactDate year, string ED, string SD, string page, string family)
         {
-            CensusReference censusRef = new CensusReference("I1", reference, false);
+            CensusReference censusRef = new("I1", reference, false);
             Assert.IsTrue(censusRef.CensusYear.Equals(year));
             Assert.IsTrue(censusRef.ED.Equals(ED));
             Assert.IsTrue(censusRef.SD.Equals(SD));
@@ -184,7 +184,7 @@ namespace Testing
 
         static void CanadianCensus(string reference, FactDate year, string Roll, string page, string family)
         {
-            CensusReference censusRef = new CensusReference("I1", reference, false);
+            CensusReference censusRef = new("I1", reference, false);
             Assert.IsTrue(censusRef.CensusYear.Equals(year));
             Assert.IsTrue(censusRef.Roll.Equals(Roll));
             Assert.IsTrue(censusRef.Page.Equals(page));
@@ -193,7 +193,7 @@ namespace Testing
 
         static void USCensusTest(string reference, FactDate year, string roll, string ED, string page)
         {
-            CensusReference censusRef = new CensusReference("I1", reference, false);
+            CensusReference censusRef = new("I1", reference, false);
             Assert.IsTrue(censusRef.CensusYear.Equals(year));
             Assert.IsTrue(censusRef.Roll.Equals(roll));
             Assert.IsTrue(censusRef.ED.Equals(ED));
@@ -202,7 +202,7 @@ namespace Testing
 
         static void Census1911Test(string reference, string piece, string schedule)
         {
-            CensusReference censusRef = new CensusReference("I1", reference, false);
+            CensusReference censusRef = new("I1", reference, false);
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1911));
             Assert.IsTrue(censusRef.Piece.Equals(piece));
             Assert.IsTrue(censusRef.Schedule.Equals(schedule));
@@ -215,7 +215,7 @@ namespace Testing
 
         static void CensusHO107Test(string reference, FactDate year, string piece, string book, string folio, string page)
         {
-            CensusReference censusRef = new CensusReference("I1", reference, false);
+            CensusReference censusRef = new("I1", reference, false);
             Assert.IsTrue(censusRef.CensusYear.Equals(year));
             Assert.IsTrue(censusRef.Piece.Equals(piece));
             Assert.IsTrue(censusRef.Folio.Equals(folio));
@@ -226,7 +226,7 @@ namespace Testing
 
         static void ScottishCensusTest(string reference, FactDate year, string parish, string ED, string page)
         {
-            CensusReference censusRef = new CensusReference("I1", reference, false);
+            CensusReference censusRef = new("I1", reference, false);
             Assert.IsTrue(censusRef.CensusYear.BestYear == year.BestYear);
             Assert.IsTrue(censusRef.Parish.Equals(parish));
             Assert.IsTrue(censusRef.ED.Equals(ED));

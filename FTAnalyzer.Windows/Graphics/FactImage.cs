@@ -10,15 +10,15 @@ namespace FTAnalyzer
         public Fact.FactError ErrorLevel { get; private set; }
         public Bitmap Icon { get; private set; }
 
-        static readonly FactImage GOOD = new FactImage(Fact.FactError.GOOD,
+        static readonly FactImage GOOD = new(Fact.FactError.GOOD,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Complete_OK.png")));
-        static readonly FactImage WARNINGALLOW = new FactImage(Fact.FactError.WARNINGALLOW,
+        static readonly FactImage WARNINGALLOW = new(Fact.FactError.WARNINGALLOW,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Warning.png")));
-        static readonly FactImage WARNINGIGNORE = new FactImage(Fact.FactError.WARNINGIGNORE,
+        static readonly FactImage WARNINGIGNORE = new(Fact.FactError.WARNINGIGNORE,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\SeriousWarning.png")));
-        static readonly FactImage ERROR = new FactImage(Fact.FactError.ERROR,
+        static readonly FactImage ERROR = new(Fact.FactError.ERROR,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\CriticalError.png")));
-        static readonly FactImage QUESTIONABLE = new FactImage(Fact.FactError.QUESTIONABLE,
+        static readonly FactImage QUESTIONABLE = new(Fact.FactError.QUESTIONABLE,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\QuestionMark.png")));
 
         public FactImage(Fact.FactError errorLevel, Image img)
@@ -29,21 +29,15 @@ namespace FTAnalyzer
 
         public static FactImage ErrorIcon(Fact.FactError errorLevel)
         {
-            switch (errorLevel)
+            return errorLevel switch
             {
-                case Fact.FactError.GOOD:
-                case Fact.FactError.IGNORE:
-                    return GOOD;
-                case Fact.FactError.WARNINGALLOW:
-                    return WARNINGALLOW;
-                case Fact.FactError.WARNINGIGNORE:
-                    return WARNINGIGNORE;
-                case Fact.FactError.ERROR:
-                    return ERROR;
-                case Fact.FactError.QUESTIONABLE:
-                    return QUESTIONABLE;
-            }
-            return GOOD;
+                Fact.FactError.GOOD or Fact.FactError.IGNORE => GOOD,
+                Fact.FactError.WARNINGALLOW => WARNINGALLOW,
+                Fact.FactError.WARNINGIGNORE => WARNINGIGNORE,
+                Fact.FactError.ERROR => ERROR,
+                Fact.FactError.QUESTIONABLE => QUESTIONABLE,
+                _ => GOOD,
+            };
         }
     }
 }

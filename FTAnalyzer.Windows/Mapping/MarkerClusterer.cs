@@ -70,7 +70,7 @@ namespace FTAnalyzer.Mapping
                 clusterToAddTo.AddFeature(row);
             else
             {
-                MapCluster cluster = new MapCluster(minClusterSize, gridsize);
+                MapCluster cluster = new(minClusterSize, gridsize);
                 cluster.AddFeature(row);
                 clusters.Add(cluster);
             }

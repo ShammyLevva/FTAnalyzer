@@ -50,21 +50,22 @@ namespace FTAnalyzer.Forms.Controls
         public Predicate<T> BuildFilter<T>(FactDate when, Func<FactDate, T, FactLocation> location)
         {
             Predicate<T> locationFilter = FilterUtils.TrueFilter<T>();
-            string country(FactLocation x) => x.Country;
+
+            static string country(FactLocation x) => x.Country;
             if (Scotland)
-                locationFilter = FilterUtils.LocationFilter<T>(when, location, country, Countries.SCOTLAND);
+                locationFilter = FilterUtils.LocationFilter(when, location, country, Countries.SCOTLAND);
             else if (England)
-                locationFilter = FilterUtils.LocationFilter<T>(when, location, country, Countries.ENGLAND);
+                locationFilter = FilterUtils.LocationFilter(when, location, country, Countries.ENGLAND);
             else if (Wales)
-                locationFilter = FilterUtils.LocationFilter<T>(when, location, country, Countries.WALES);
+                locationFilter = FilterUtils.LocationFilter(when, location, country, Countries.WALES);
             else if (UK)
-                locationFilter = FilterUtils.OrFilter<T>(FilterUtils.LocationFilter<T>(when, location, country, Countries.SCOTLAND),
-                                        FilterUtils.LocationFilter<T>(when, location, country, Countries.ENGLAND),
-                                        FilterUtils.LocationFilter<T>(when, location, country, Countries.WALES));
+                locationFilter = FilterUtils.OrFilter(FilterUtils.LocationFilter(when, location, country, Countries.SCOTLAND),
+                                        FilterUtils.LocationFilter(when, location, country, Countries.ENGLAND),
+                                        FilterUtils.LocationFilter(when, location, country, Countries.WALES));
             else if (Canada)
-                locationFilter = FilterUtils.LocationFilter<T>(when, location, country, Countries.CANADA);
+                locationFilter = FilterUtils.LocationFilter(when, location, country, Countries.CANADA);
             else if (USA)
-                locationFilter = FilterUtils.LocationFilter<T>(when, location, country, Countries.UNITED_STATES);
+                locationFilter = FilterUtils.LocationFilter(when, location, country, Countries.UNITED_STATES);
             return locationFilter;
         }
 

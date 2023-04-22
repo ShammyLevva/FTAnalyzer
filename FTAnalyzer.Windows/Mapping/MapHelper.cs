@@ -1,6 +1,6 @@
 ﻿using FTAnalyzer.Forms;
 using FTAnalyzer.Utilities;
-using FTAnalyzer.Windows.Properties;
+using FTAnalyzer.Properties;
 using NetTopologySuite.Geometries;
 using SharpMap;
 using SharpMap.Data;
@@ -10,15 +10,9 @@ using SharpMap.Layers;
 using SharpMap.Rendering;
 using SharpMap.Rendering.Decoration.ScaleBar;
 using SharpMap.Styles;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace FTAnalyzer.Mapping
 {
@@ -35,8 +29,7 @@ namespace FTAnalyzer.Mapping
         {
             get
             {
-                if (instance == null)
-                    instance = new MapHelper();
+                instance ??= new MapHelper();
                 return instance;
             }
         }
@@ -50,7 +43,7 @@ namespace FTAnalyzer.Mapping
             }
             else
             {
-                ScaleBar scalebar = new ScaleBar
+                ScaleBar scalebar = new()
                 {
                     BackgroundColor = Color.White,
                     RoundedEdges = true
@@ -91,17 +84,17 @@ namespace FTAnalyzer.Mapping
                 GeocodeLocations geoLocations = null;
                 foreach (Form f in Application.OpenForms)
                 {
-                    if (f is GeocodeLocations)
+                    if (f is GeocodeLocations locations)
                     {
                         f.BringToFront();
                         f.Focus();
-                        geoLocations = (GeocodeLocations)f;
+                        geoLocations = locations;
                         break;
                     }
                 }
                 if (geoLocations == null)
                 {
-                    geoLocations = new GeocodeLocations(outputText);
+                    geoLocations = new(outputText);
                     geoLocations.Show();
                 }
                 // we now have opened form
@@ -116,7 +109,7 @@ namespace FTAnalyzer.Mapping
             {
                 if (!ft.Geocoding) // don't geocode if another geocode session in progress
                 {
-                    GeocodeLocations geo = new GeocodeLocations(outputText);
+                    GeocodeLocations geo = new(outputText);
                     MainForm.DisposeDuplicateForms(geo);
                     geo.Show();
                     geo.StartGoogleGeoCoding(false);
@@ -151,7 +144,7 @@ namespace FTAnalyzer.Mapping
                 {
                     if (File.Exists(filename))
                     {
-                        VectorLayer parishLayer = new VectorLayer(prefix + "ParishBoundaries")
+                        VectorLayer parishLayer = new(prefix + "ParishBoundaries")
                         {
                             DataSource = new ShapeFile(filename, true)
                         };
@@ -162,7 +155,7 @@ namespace FTAnalyzer.Mapping
                         parishLayer.MaxVisible = 300000;
                         map.VariableLayers.Add(parishLayer);
 
-                        LabelLayer parishLabelLayer = new LabelLayer(prefix + "ParishNames")
+                        LabelLayer parishLabelLayer = new(prefix + "ParishNames")
                         {
                             DataSource = new ShapeFile(filename, true),
                             LabelColumn = labelField,
@@ -170,10 +163,10 @@ namespace FTAnalyzer.Mapping
                             SmoothingMode = SmoothingMode.AntiAlias
                         };
 
-                        LabelStyle style = new LabelStyle
+                        LabelStyle style = new()
                         {
                             ForeColor = Color.DarkRed,
-                            Font = new Font(FontFamily.GenericSerif, 14, FontStyle.Bold),
+                            Font = new(FontFamily.GenericSerif, 14, FontStyle.Bold),
                             HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
                             VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Middle,
                             CollisionDetection = true,
@@ -201,8 +194,8 @@ namespace FTAnalyzer.Mapping
 
         public static Envelope GetExtents(FeatureDataTable table)
         {
-            Envelope bbox = new Envelope();
-            Envelope empty = new Envelope();
+            Envelope bbox = new();
+            Envelope empty = new();
             foreach (FeatureDataRow row in table)
             {
                 foreach (Coordinate c in row.Geometry.Coordinates)
@@ -228,11 +221,11 @@ namespace FTAnalyzer.Mapping
             return expand;
         }
 
-        public List<MapLocation> AllMapLocations
+        public static List<MapLocation> AllMapLocations
         {
             get
             {
-                List<MapLocation> result = new List<MapLocation>();
+                List<MapLocation> result = new();
                 foreach (Individual ind in FamilyTree.Instance.AllIndividuals)
                 {
                     foreach (Fact f in ind.AllFacts)
@@ -245,7 +238,7 @@ namespace FTAnalyzer.Mapping
 
         public static List<MapLocation> YearMapLocations(FactDate when, int limit)
         {
-            List<MapLocation> result = new List<MapLocation>();
+            List<MapLocation> result = new();
             foreach (Individual ind in FamilyTree.Instance.AllIndividuals)
             {
                 if (ind.IsAlive(when) && ind.GetMaxAge(when) < FactDate.MAXYEARS)

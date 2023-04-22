@@ -1,11 +1,7 @@
 ﻿using FTAnalyzer.Filters;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
-using FTAnalyzer.Windows.Properties;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
+using FTAnalyzer.Properties;
 
 namespace FTAnalyzer.Forms
 {
@@ -24,8 +20,8 @@ namespace FTAnalyzer.Forms
             dgLCReferrals.AutoGenerateColumns = false;
             ExtensionMethods.DoubleBuffered(dgLCReferrals, true);
             CensusSettingsUI.CompactCensusRefChanged += new EventHandler(RefreshCensusReferences);
-            Predicate<Individual> lostCousinsFact = new Predicate<Individual>(x => x.HasLostCousinsFact);
-            List<Individual> lostCousinsFacts = ft.AllIndividuals.Filter(lostCousinsFact).ToList<Individual>();
+            Predicate<Individual> lostCousinsFact = new(x => x.HasLostCousinsFact);
+            List<Individual> lostCousinsFacts = ft.AllIndividuals.Filter(lostCousinsFact).ToList();
             referrals = new List<ExportReferrals>();
             foreach (Individual ind in lostCousinsFacts)
             {

@@ -16,7 +16,7 @@ namespace FTAnalyzer.Mapping
 
         readonly FactDate _year;
 
-        static readonly NetTopologySuite.Geometries.Point centre = new NetTopologySuite.Geometries.Point(0, 0);
+        static readonly NetTopologySuite.Geometries.Point centre = new(0, 0);
 
         public MapLocation(Individual ind, Fact fact, FactDate year) : this(ind, fact, fact.Location, year) { }
 
