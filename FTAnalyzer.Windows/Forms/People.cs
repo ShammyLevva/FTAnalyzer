@@ -2,7 +2,6 @@
 using FTAnalyzer.Utilities;
 using FTAnalyzer.Filters;
 using FTAnalyzer.Properties;
-using System.Diagnostics;
 
 namespace FTAnalyzer.Forms
 {

@@ -5,7 +5,6 @@ using FTAnalyzer.Properties;
 using Ionic.Zip;
 using System.Diagnostics;
 using System.Net;
-using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Web;
 using FTAnalyzer.Windows;

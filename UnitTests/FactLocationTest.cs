@@ -10,17 +10,15 @@ namespace Testing
     public class FactLocationTest
     {
 
-        private TestContext? testContextInstance;
+        TestContext? testContextInstance;
 
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
+        public TestContext? TestContext
         {
-#pragma warning disable CS8603 // Possible null reference return.
             get => testContextInstance;
-#pragma warning restore CS8603 // Possible null reference return.
             set => testContextInstance = value;
         }
 
