@@ -92,7 +92,7 @@ namespace FTAnalyzer.Mapping
                         break;
                     }
                 }
-                if (geoLocations == null)
+                if (geoLocations is null)
                 {
                     geoLocations = new(outputText);
                     geoLocations.Show();
@@ -211,7 +211,7 @@ namespace FTAnalyzer.Mapping
                     bbox.ExpandToInclude(x);
             }
             Envelope expand;
-            if (bbox.Centre == null)
+            if (bbox.Centre is null)
                 expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
             else
             {

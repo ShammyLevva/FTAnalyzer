@@ -1060,7 +1060,7 @@ namespace FTAnalyzer.Forms
         {
             bool condition(DataGridViewRow r) => r.Cells["GeocodedLocation"].Value.ToString().Equals(location.SortableLocation);
             DataGridViewRow row = dgLocations.Rows.Cast<DataGridViewRow>().Filter(condition).FirstOrDefault();
-            if (row == null)
+            if (row is null)
             {
                 dgLocations.DataSource = ApplyFilters(location);  // forces location to appear in list
                 dgLocations.Refresh();

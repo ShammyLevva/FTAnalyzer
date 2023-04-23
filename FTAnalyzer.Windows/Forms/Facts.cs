@@ -83,7 +83,7 @@ namespace FTAnalyzer.Forms
             foreach (Individual ind in individuals)
             {
                 int before = facts.Count;
-                if (factTypes == null)
+                if (factTypes is null)
                     AddIndividualsFacts(ind);
                 else
                     AddIndividualsFacts(ind, factTypes, excludedTypes, alternateFacts);

@@ -51,7 +51,7 @@ namespace FTAnalyzer.Mapping
             FixCommas();
             FixAbbreviations();
             ModernCounty county = Regions.OS_GetCounty(CountyCode);
-            if (county == null)
+            if (county is null)
                 CountryName = string.Empty;
             else
             {

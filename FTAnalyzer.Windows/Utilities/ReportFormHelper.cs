@@ -60,7 +60,7 @@ namespace FTAnalyzer
 
         public void PrintReport(string reportname)
         {
-            if (ReportGrid.DataSource == null || ReportGrid.RowCount == 0)
+            if (ReportGrid.DataSource is null || ReportGrid.RowCount == 0)
                 return;
             if (printDialog.ShowDialog(parent) == DialogResult.OK)
             {
@@ -73,7 +73,7 @@ namespace FTAnalyzer
 
         public void PrintPreviewReport()
         {
-            if (ReportGrid.DataSource == null || ReportGrid.RowCount == 0)
+            if (ReportGrid.DataSource is null || ReportGrid.RowCount == 0)
                 return;
             printProvider.Drawer.TitlePrintBlock = new TitlePrintBlock(PrintTitle);
             printPreviewDialog.ShowDialog(parent);
@@ -81,7 +81,7 @@ namespace FTAnalyzer
 
         public void DoExportToExcel<T>(DataGridViewColumnCollection shown = null)
         {
-            if (ReportGrid.DataSource == null || ReportGrid.RowCount == 0)
+            if (ReportGrid.DataSource is null || ReportGrid.RowCount == 0)
                 return;
             parent.Cursor = Cursors.WaitCursor;
             SortableBindingList<T> gridDatasource = ReportGrid.DataSource as SortableBindingList<T>;
@@ -92,7 +92,7 @@ namespace FTAnalyzer
 
         public void DoExportToExcel(List<IExportReferrals> list)
         {
-            if (list == null || list.Count == 0)
+            if (list is null || list.Count == 0)
                 return;
             parent.Cursor = Cursors.WaitCursor;
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list))

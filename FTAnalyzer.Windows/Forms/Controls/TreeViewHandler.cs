@@ -49,7 +49,7 @@ namespace FTAnalyzer.Forms.Controls
                         if (part.Length == 0 && !GeneralSettings.Default.AllowEmptyLocations) break;
                         TreeNode childM = currentM.Nodes.Find(part, false).FirstOrDefault();
                         TreeNode childP = currentP.Nodes.Find(part, false).FirstOrDefault();
-                        if (childM == null)
+                        if (childM is null)
                         {
                             TreeNode child = new((part.Length == 0 ? "<blank>" : part))
                             {
@@ -87,7 +87,7 @@ namespace FTAnalyzer.Forms.Controls
                         recheck = false;
                         foreach (TreeNode node in emptyNodes)
                         {
-                            if (node.FirstNode == null)
+                            if (node.FirstNode is null)
                             {
                                 node.Remove();
                                 recheck = true;
@@ -108,7 +108,7 @@ namespace FTAnalyzer.Forms.Controls
 
         static void SetTreeNodeImage(FactLocation location, TreeNode child)
         {
-            if (child == null)
+            if (child is null)
                 return;
             switch (location.GeocodeStatus)
             {

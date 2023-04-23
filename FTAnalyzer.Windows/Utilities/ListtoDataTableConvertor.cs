@@ -37,7 +37,7 @@ namespace FTAnalyzer.Utilities
                     for (int i = 0; i < Props.Length; i++)
                     {
                         // if the property is not in the datagrid or not visible, don't add its value
-                        if (cols == null ||
+                        if (cols is null ||
                             (cols[Props[i].Name] is not null && cols[Props[i].Name].Visible))
                         {
                             //inserting property values to datatable rows

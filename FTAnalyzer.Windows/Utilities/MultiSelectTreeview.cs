@@ -59,7 +59,7 @@ namespace FTAnalyzer.Utilities
             // keyboard to select nodes
             try
             {
-                if (m_SelectedNode == null && this.TopNode is not null)
+                if (m_SelectedNode is null && this.TopNode is not null)
                 {
                     ToggleNode(this.TopNode, true);
                     OnAfterSelect(new TreeViewEventArgs(m_SelectedNode));
@@ -236,14 +236,14 @@ namespace FTAnalyzer.Utilities
             {
                 // Nothing is selected in the tree, this isn't a good state
                 // select the top node
-                if (m_SelectedNode == null && this.TopNode is not null)
+                if (m_SelectedNode is null && this.TopNode is not null)
                 {
                     ToggleNode(this.TopNode, true);
                     OnAfterSelect(new TreeViewEventArgs(m_SelectedNode));
                 }
 
                 // Nothing is still selected in the tree, this isn't a good state, leave.
-                if (m_SelectedNode == null) return;
+                if (m_SelectedNode is null) return;
 
                 if (e.KeyCode == Keys.Left)
                 {
@@ -291,7 +291,7 @@ namespace FTAnalyzer.Utilities
                 {
                     if (bShift)
                     {
-                        if (m_SelectedNode.Parent == null)
+                        if (m_SelectedNode.Parent is null)
                         {
                             // Select all of the root nodes up to this point 
                             if (this.Nodes.Count > 0)
@@ -318,7 +318,7 @@ namespace FTAnalyzer.Utilities
                 {
                     if (bShift)
                     {
-                        if (m_SelectedNode.Parent == null)
+                        if (m_SelectedNode.Parent is null)
                         {
                             // Select the last ROOT node in the tree
                             if (Nodes.Count > 0)
@@ -440,7 +440,7 @@ namespace FTAnalyzer.Utilities
             {
                 this.BeginUpdate();
 
-                if (m_SelectedNode == null || ModifierKeys == Keys.Control)
+                if (m_SelectedNode is null || ModifierKeys == Keys.Control)
                 {
                     // Ctrl+Click selects an unselected node, or unselects a selected node.
                     bool bIsSelected = m_SelectedNodes.Contains(node);
@@ -463,7 +463,7 @@ namespace FTAnalyzer.Utilities
                             while (ndStart != ndEnd)
                             {
                                 ndStart = ndStart.NextVisibleNode;
-                                if (ndStart == null) break;
+                                if (ndStart is null) break;
                                 ToggleNode(ndStart, true);
                             }
                         }
@@ -478,7 +478,7 @@ namespace FTAnalyzer.Utilities
                             while (ndStart != ndEnd)
                             {
                                 ndStart = ndStart.PrevVisibleNode;
-                                if (ndStart == null) break;
+                                if (ndStart is null) break;
                                 ToggleNode(ndStart, true);
                             }
                         }
@@ -520,7 +520,7 @@ namespace FTAnalyzer.Utilities
                             while (ndStart != ndEnd)
                             {
                                 ndStart = ndStart.NextVisibleNode;
-                                if (ndStart == null) break;
+                                if (ndStart is null) break;
                                 ToggleNode(ndStart, true);
                             }
                         }
@@ -531,7 +531,7 @@ namespace FTAnalyzer.Utilities
                                 while (ndStart != ndEnd)
                                 {
                                     ndStart = ndStart.NextVisibleNode;
-                                    if (ndStart == null) break;
+                                    if (ndStart is null) break;
                                     ToggleNode(ndStart, true);
                                 }
                             }
@@ -540,7 +540,7 @@ namespace FTAnalyzer.Utilities
                                 while (ndStart != ndEnd)
                                 {
                                     ndStart = ndStart.PrevVisibleNode;
-                                    if (ndStart == null) break;
+                                    if (ndStart is null) break;
                                     ToggleNode(ndStart, true);
                                 }
                             }
@@ -552,7 +552,7 @@ namespace FTAnalyzer.Utilities
                             while (ndStart != ndEnd)
                             {
                                 ndStart = ndStart.PrevVisibleNode;
-                                if (ndStart == null) break;
+                                if (ndStart is null) break;
                                 ToggleNode(ndStart, true);
                             }
                         }
@@ -590,7 +590,7 @@ namespace FTAnalyzer.Utilities
 
         void SelectSingleNode(TreeNode node)
         {
-            if (node == null)
+            if (node is null)
             {
                 return;
             }

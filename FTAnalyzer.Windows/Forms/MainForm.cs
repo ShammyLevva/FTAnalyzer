@@ -300,7 +300,7 @@ namespace FTAnalyzer
             {
                 doc = await Task.Run(() => ft.LoadTreeHeader(filename, stream, outputText)).ConfigureAwait(true);
             }
-            if (doc == null)
+            if (doc is null)
             {
                 timer.Stop();
                 return false;
@@ -541,7 +541,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(true);
-                var loc = dgRegions.CurrentRow == null ? FactLocation.BLANK_LOCATION : (FactLocation)dgRegions.CurrentRowDataBoundItem;
+                var loc = dgRegions.CurrentRow is null ? FactLocation.BLANK_LOCATION : (FactLocation)dgRegions.CurrentRowDataBoundItem;
                 var frmInd = new People();
                 frmInd.SetLocation(loc, FactLocation.REGION);
                 DisposeDuplicateForms(frmInd);
@@ -790,22 +790,22 @@ namespace FTAnalyzer
                             loc = node.Text == "<blank>" ? null : ((FactLocation)node.Tag).GetLocation(node.Level);
                         break;
                     case "Countries":
-                        loc = dgCountries.CurrentRow == null ? null : (FactLocation)dgCountries.CurrentRowDataBoundItem;
+                        loc = dgCountries.CurrentRow is null ? null : (FactLocation)dgCountries.CurrentRowDataBoundItem;
                         break;
                     case "Regions":
-                        loc = dgRegions.CurrentRow == null ? null : (FactLocation)dgRegions.CurrentRowDataBoundItem;
+                        loc = dgRegions.CurrentRow is null ? null : (FactLocation)dgRegions.CurrentRowDataBoundItem;
                         break;
                     case "SubRegions":
-                        loc = dgSubRegions.CurrentRow == null ? null : (FactLocation)dgSubRegions.CurrentRowDataBoundItem;
+                        loc = dgSubRegions.CurrentRow is null ? null : (FactLocation)dgSubRegions.CurrentRowDataBoundItem;
                         break;
                     case "Addresses":
-                        loc = dgAddresses.CurrentRow == null ? null : (FactLocation)dgAddresses.CurrentRowDataBoundItem;
+                        loc = dgAddresses.CurrentRow is null ? null : (FactLocation)dgAddresses.CurrentRowDataBoundItem;
                         break;
                     case "Places":
-                        loc = dgPlaces.CurrentRow == null ? null : (FactLocation)dgPlaces.CurrentRowDataBoundItem;
+                        loc = dgPlaces.CurrentRow is null ? null : (FactLocation)dgPlaces.CurrentRowDataBoundItem;
                         break;
                 }
-                if (loc == null)
+                if (loc is null)
                 {
                     if (tabCtrlLocations.SelectedTab.Text == "Tree View")
                         MessageBox.Show("Location selected isn't valid to show on the map.", "FTAnalyzer");
@@ -1377,13 +1377,13 @@ namespace FTAnalyzer
                     }
                     if (tabSelector.SelectedTab == tabMainLists)
                     {
-                        if (dgIndividuals.DataSource == null)
+                        if (dgIndividuals.DataSource is null)
                             SetupIndividualsTab(); // select individuals tab if first time opening main lists tab
                         Analytics.TrackAction(Analytics.MainFormAction, Analytics.MainListsEvent);
                     }
                     if (tabSelector.SelectedTab == tabErrorsFixes)
                     {
-                        if (dgDataErrors.DataSource == null)
+                        if (dgDataErrors.DataSource is null)
                             SetupDataErrors(); // select data errors tab if first time opening errors fixes tab
                         Analytics.TrackAction(Analytics.MainFormAction, Analytics.ErrorsFixesEvent);
                     }
@@ -1568,19 +1568,19 @@ namespace FTAnalyzer
             }
             if (tabErrorFixSelector.SelectedTab == tabLooseBirths)
             {
-                if (dgLooseBirths.DataSource == null)
+                if (dgLooseBirths.DataSource is null)
                     SetupLooseBirths();
                 await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseBirthsEvent).ConfigureAwait(true);
             }
             else if (tabErrorFixSelector.SelectedTab == tabLooseDeaths)
             {
-                if (dgLooseDeaths.DataSource == null)
+                if (dgLooseDeaths.DataSource is null)
                     SetupLooseDeaths();
                 await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseDeathsEvent).ConfigureAwait(true);
             }
             else if (tabErrorFixSelector.SelectedTab == tabLooseInfo)
             {
-                if (dgLooseInfo.DataSource == null)
+                if (dgLooseInfo.DataSource is null)
                     SetupLooseInfo();
                 await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseInfoEvent).ConfigureAwait(true);
             }
@@ -2175,7 +2175,7 @@ namespace FTAnalyzer
 
         void BuildRecentList()
         {
-            if (Settings.Default.RecentFiles == null || Settings.Default.RecentFiles.Count != 5)
+            if (Settings.Default.RecentFiles is null || Settings.Default.RecentFiles.Count != 5)
                 ClearRecentList();
             bool added = false;
             int count = 0;

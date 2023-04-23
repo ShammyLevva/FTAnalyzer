@@ -251,7 +251,7 @@ namespace FTAnalyzer.Forms
                 OnWaitingForGoogle($"Caught exception: {e}");
                 res = null;
             }
-            if (res == null || res.Status == "OVER_QUERY_LIMIT")
+            if (res is null || res.Status == "OVER_QUERY_LIMIT")
             {
                 // we're hitting Google too fast, increase interval
                 sleepinterval = Math.Min(sleepinterval + ++badtries * 750, maxInterval);
@@ -296,7 +296,7 @@ namespace FTAnalyzer.Forms
                 OnWaitingForGoogle($"Caught exception: {e}");
                 res = null;
             }
-            if (res == null || res.Status == "OVER_QUERY_LIMIT")
+            if (res is null || res.Status == "OVER_QUERY_LIMIT")
             {
                 // we're hitting Google too fast, increase interval
                 sleepinterval = Math.Min(sleepinterval + ++badtries * 750, maxInterval);

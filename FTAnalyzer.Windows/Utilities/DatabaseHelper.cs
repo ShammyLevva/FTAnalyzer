@@ -125,7 +125,7 @@ namespace FTAnalyzer.Utilities
             {
                 InstanceConnection?.Close();
             }
-            Version dbVersion = db == null ? new("0.0.0.0") : new(db);
+            Version dbVersion = db is null ? new("0.0.0.0") : new(db);
             if (dbVersion == new Version("7.3.0.0"))
                 return new Version("7.0.0.0"); // force old version so it updates after beta fix on v7.3.0.0
             return dbVersion;

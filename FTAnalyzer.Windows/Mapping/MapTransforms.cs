@@ -37,7 +37,7 @@ namespace FTAnalyzer.Mapping
         {
             get
             {
-                if (wgs84toGoogle == null)
+                if (wgs84toGoogle is null)
                 {
                     CoordinateSystemFactory csFac = new();
                     CoordinateTransformationFactory ctFac = new();
