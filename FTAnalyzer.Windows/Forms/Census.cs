@@ -2,7 +2,6 @@
 using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
-using Printing.DataGridViewPrint;
 using System.ComponentModel;
 
 namespace FTAnalyzer.Forms
@@ -194,7 +193,7 @@ namespace FTAnalyzer.Forms
         {
             readonly Comparer<CensusIndividual> comparer;
             public IDisplayCensusComparerWrapper(Comparer<CensusIndividual> comp) => comparer = comp;
-            public override int Compare(IDisplayCensus x, IDisplayCensus y) => comparer.Compare((CensusIndividual)x, (CensusIndividual)y);
+            public override int Compare(IDisplayCensus? x, IDisplayCensus? y) => comparer.Compare((CensusIndividual)x, (CensusIndividual)y);
         }
 
         void PrintToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintReport("Census Report");
