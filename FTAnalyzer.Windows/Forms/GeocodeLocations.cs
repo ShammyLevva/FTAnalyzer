@@ -154,7 +154,7 @@ namespace FTAnalyzer.Forms
                         count++;
                 }
             }
-            ToolStripMenuItem places = mnuFoundResultType.DropDownItems["Places"] as ToolStripMenuItem;
+            ToolStripMenuItem places = (ToolStripMenuItem)mnuFoundResultType.DropDownItems["Places"];
             foreach (ToolStripMenuItem menu in places.DropDownItems)
             {
                 if (menu.Text != "Select All" && menu.Text != "Clear All")
@@ -170,7 +170,7 @@ namespace FTAnalyzer.Forms
         void UpdateGridWithFilters(bool keepCurrentLocation)
         {
             Cursor = Cursors.WaitCursor;
-            FactLocation loc = dgLocations.CurrentRow is not null ? dgLocations.CurrentRow.DataBoundItem as FactLocation : null;
+            FactLocation? loc = dgLocations.CurrentRow is not null ? dgLocations.CurrentRow.DataBoundItem as FactLocation : null;
             SortableBindingList<IDisplayGeocodedLocation> filteredLocations = ApplyFilters(null);
             // store sort order
             DataGridViewColumn sortCol = dgLocations.SortedColumn;
@@ -206,7 +206,7 @@ namespace FTAnalyzer.Forms
             if (AllFiltersActive(false))
                 return new SortableBindingList<IDisplayGeocodedLocation>(locations);
             List<IDisplayGeocodedLocation> results = new();
-            ToolStripMenuItem places = mnuFoundResultType.DropDownItems["Places"] as ToolStripMenuItem;
+            ToolStripMenuItem places = (ToolStripMenuItem)mnuFoundResultType.DropDownItems["Places"];
             ToolStripMenuItem[] list = new ToolStripMenuItem[places.DropDownItems.Count + mnuFoundResultType.DropDownItems.Count + noneOfTheAboveMenus.Length];
             mnuFoundResultType.DropDownItems.CopyTo(list, 0);
             places.DropDownItems.CopyTo(list, mnuFoundResultType.DropDownItems.Count);
@@ -305,7 +305,7 @@ namespace FTAnalyzer.Forms
         void MnuSelectClear_Click(object sender, EventArgs e)
         {
             refreshingMenus = true;
-            ToolStripMenuItem places = mnuFoundResultType.DropDownItems["Places"] as ToolStripMenuItem;
+            ToolStripMenuItem places = (ToolStripMenuItem)mnuFoundResultType.DropDownItems["Places"];
             if (mnuSelectClear.Text.Equals("Clear All"))
             {
                 mnuSelectClear.Text = "Select All";
@@ -371,8 +371,8 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                IDisplayGeocodedLocation loc = dgLocations.Rows[e.RowIndex].DataBoundItem as IDisplayGeocodedLocation;
-                e.ToolTipText = "Geocoding status: " + loc.Geocoded;
+                IDisplayGeocodedLocation loc = (IDisplayGeocodedLocation)dgLocations.Rows[e.RowIndex].DataBoundItem;
+                e.ToolTipText = $"Geocoding status: {loc.Geocoded}";
             }
         }
 
@@ -381,7 +381,7 @@ namespace FTAnalyzer.Forms
             if (!ft.Geocoding && e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 Cursor = Cursors.WaitCursor;
-                FactLocation loc = dgLocations.Rows[e.RowIndex].DataBoundItem as FactLocation;
+                FactLocation loc = (FactLocation)dgLocations.Rows[e.RowIndex].DataBoundItem;
                 EditLocation(loc);
             }
         }
@@ -391,7 +391,7 @@ namespace FTAnalyzer.Forms
             if (!ft.Geocoding)
             {
                 Cursor = Cursors.WaitCursor;
-                FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
+                FactLocation loc = (FactLocation)dgLocations.CurrentRow.DataBoundItem;
                 EditLocation(loc);
             }
         }
@@ -424,7 +424,7 @@ namespace FTAnalyzer.Forms
         {
             if (CopyLocation.IsGeoCoded(false))
             {
-                FactLocation pasteLocation = dgLocations.CurrentRow.DataBoundItem as FactLocation;
+                FactLocation pasteLocation = (FactLocation)dgLocations.CurrentRow.DataBoundItem;
                 FactLocation.CopyLocationDetails(CopyLocation, pasteLocation);
                 UpdateDatabase(pasteLocation, true);
                 dgLocations.Refresh();
@@ -439,7 +439,7 @@ namespace FTAnalyzer.Forms
         {
             pbGeocoding.Visible = true;
             pbGeocoding.Value = (e.ProgressPercentage < 0) ? 1 : e.ProgressPercentage;
-            txtLocations.Text = (string)e.UserState;
+            txtLocations.Text = e.UserState.ToString() ?? string.Empty;
         }
 
         void GoogleGeocodingBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) => WorkFinished(sender);
@@ -595,8 +595,7 @@ namespace FTAnalyzer.Forms
                     if (loc != FactLocation.UNKNOWN_LOCATION && loc.Level <= FactLocation.REGION && loc.ToString().Length > 0)
                     {
                         vpchecked++;
-                        GeoResponse res = null;
-                        res = SearchGoogle(loc, loc.ToString());
+                        GeoResponse? res = SearchGoogle(loc, loc.ToString());
                         Envelope bbox = Countries.BoundingBox(loc.Country);
                         if (res is not null && res.Status == "OK" && res.Results.Length > 0)
                         {
@@ -660,7 +659,7 @@ namespace FTAnalyzer.Forms
                         bool inDatabase = DatabaseHelper.IsLocationInDatabase(loc.ToString());
                         if (loc.ToString().Length > 0)
                         {
-                            GeoResponse res = null;
+                            GeoResponse? res = null;
                             if (loc.GeocodeStatus == FactLocation.Geocode.NOT_SEARCHED ||
                                 (retryPartial &&
                                     (loc.GeocodeStatus == FactLocation.Geocode.PARTIAL_MATCH ||
@@ -781,10 +780,10 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        GeoResponse SearchGoogle(FactLocation location, string text)
+        GeoResponse? SearchGoogle(FactLocation location, string text)
         {
             // This call is the real workhorse that does the actual Google lookup
-            GeoResponse res = GoogleMap.GoogleGeocode(location, text, 8);
+            GeoResponse? res = GoogleMap.GoogleGeocode(location, text, 8);
             if (res is not null && (res.Status == "Maxed" || res.Status == "REQUEST_DENIED"))
             {
                 googleGeocodeBackgroundWorker.CancelAsync();
@@ -830,7 +829,7 @@ namespace FTAnalyzer.Forms
 
         void MnuVerified_Click(object sender, EventArgs e)
         {
-            FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
+            FactLocation loc = (FactLocation)dgLocations.CurrentRow.DataBoundItem;
             loc.GeocodeStatus = FactLocation.Geocode.GEDCOM_USER;
             UpdateDatabase(loc, true);
             dgLocations.Refresh();
@@ -838,7 +837,7 @@ namespace FTAnalyzer.Forms
 
         void MnuIncorrect_Click(object sender, EventArgs e)
         {
-            FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
+            FactLocation loc = (FactLocation)dgLocations.CurrentRow.DataBoundItem;
             loc.GeocodeStatus = FactLocation.Geocode.INCORRECT;
             UpdateDatabase(loc, true);
             dgLocations.Refresh();
@@ -846,7 +845,7 @@ namespace FTAnalyzer.Forms
 
         void MnuNotSearched_Click(object sender, EventArgs e)
         {
-            FactLocation loc = dgLocations.CurrentRow.DataBoundItem as FactLocation;
+            FactLocation loc = (FactLocation)dgLocations.CurrentRow.DataBoundItem;
             loc.GeocodeStatus = FactLocation.Geocode.NOT_SEARCHED;
             loc.FoundLocation = string.Empty;
             loc.FoundResultType = string.Empty;
@@ -868,7 +867,7 @@ namespace FTAnalyzer.Forms
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 dgLocations.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
-                FactLocation loc = dgLocations.Rows[e.RowIndex].DataBoundItem as FactLocation;
+                FactLocation loc = (FactLocation)dgLocations.Rows[e.RowIndex].DataBoundItem;
                 mnuCopyLocation.Enabled = loc.IsGeoCoded(false);
             }
         }
@@ -918,11 +917,11 @@ namespace FTAnalyzer.Forms
                 Dictionary<string, Tuple<string, string>> LatLongIndex = DatabaseHelper.LatLongIndex;
                 while (!queue.IsEmpty)
                 {
-                    if (queue.TryDequeue(out FactLocation loc))
+                    if (queue.TryDequeue(out FactLocation? loc))
                     {
-                        if (loc.ToString().Length > 0 && loc.Latitude != 0 && loc.Longitude != 0 && !loc.Country.Equals(Countries.AT_SEA))
+                        if (loc is not null && loc.ToString().Length > 0 && loc.Latitude != 0 && loc.Longitude != 0 && !loc.Country.Equals(Countries.AT_SEA))
                         {
-                            GeoResponse res = null;
+                            GeoResponse? res = null;
                             double latitude = loc.Latitude;
                             double longitude = loc.Longitude;
                             string hashkey = DatabaseHelper.LatLongHashKey(latitude, longitude);
@@ -1059,7 +1058,7 @@ namespace FTAnalyzer.Forms
         public void SelectLocation(FactLocation location)
         {
             bool condition(DataGridViewRow r) => r.Cells["GeocodedLocation"].Value.ToString().Equals(location.SortableLocation);
-            DataGridViewRow row = dgLocations.Rows.Cast<DataGridViewRow>().Filter(condition).FirstOrDefault();
+            DataGridViewRow? row = dgLocations.Rows.Cast<DataGridViewRow>().Filter(condition).FirstOrDefault();
             if (row is null)
             {
                 dgLocations.DataSource = ApplyFilters(location);  // forces location to appear in list
@@ -1137,12 +1136,12 @@ namespace FTAnalyzer.Forms
             using StreamReader reader = new(filename, isoWesternEuropean);
             while (!reader.EndOfStream)
             {
-                string line = reader.ReadLine();
+                string line = reader.ReadLine() ?? string.Empty;
                 if (line.IndexOf(':') > 0)
                 {
                     OS50kGazetteer gaz = new(line);
                     string key = gaz.DefinitiveName.ToLower();
-                    if (!OS50kDictionary.TryGetValue(key, out IList<OS50kGazetteer> list))
+                    if (!OS50kDictionary.TryGetValue(key, out IList<OS50kGazetteer>? list))
                     {
                         list = new List<OS50kGazetteer>();
                         OS50kDictionary.Add(key, list);
@@ -1303,7 +1302,7 @@ namespace FTAnalyzer.Forms
         bool CheckNearest(FactLocation loc, List<OS50kGazetteer> results)
         {
             double minDistance = double.MaxValue;
-            OS50kGazetteer selected = null;
+            OS50kGazetteer? selected = null;
             int foundLevel = loc.FoundLevel >= 0 ? loc.FoundLevel : loc.Level;
             foreach(OS50kGazetteer gaz in results)
             {
@@ -1329,7 +1328,7 @@ namespace FTAnalyzer.Forms
 
         bool CheckLocationMatch(string key, FactLocation loc)
         {
-            if (key.Length > 0 && OS50kDictionary.TryGetValue(key, out IList<OS50kGazetteer> results))
+            if (key.Length > 0 && OS50kDictionary.TryGetValue(key, out IList<OS50kGazetteer>? results))
             {
                 IEnumerable<OS50kGazetteer> placeMatches = results.Filter(x => x.IsCountyMatch(loc));
                 if (placeMatches.Any())
@@ -1346,7 +1345,7 @@ namespace FTAnalyzer.Forms
         bool ProcessOS50kMatches(IEnumerable<OS50kGazetteer> matches, FactLocation loc, int level)
         {
             int count = matches.Count();
-            OS50kGazetteer gazA = matches.First<OS50kGazetteer>();
+            OS50kGazetteer gazA = matches.First();
             if (count == 1)
             {  // we only have one match so its good
                 SetOSGeocoding(loc, gazA, level, false);
@@ -1408,7 +1407,7 @@ namespace FTAnalyzer.Forms
         {
             pbGeocoding.Visible = true;
             pbGeocoding.Value = (e.ProgressPercentage < 0) ? 1 : e.ProgressPercentage;
-            txtLocations.Text = (string)e.UserState;
+            txtLocations.Text = e.UserState.ToString() ?? string.Empty;
         }
 
         void OSGeocodeBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) => WorkFinished(sender);

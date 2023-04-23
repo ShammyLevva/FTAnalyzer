@@ -280,7 +280,7 @@ namespace FTAnalyzer.Forms
             {
                 if (btnShowHideFacts.Checked)
                 {
-                    DisplayFact fact = row.DataBoundItem as DisplayFact;
+                    DisplayFact fact = (DisplayFact)row.DataBoundItem;
                     row.Visible = !fact.IgnoreFact;
                 }
                 else
@@ -347,7 +347,7 @@ namespace FTAnalyzer.Forms
         void SetBackColour()
         {
             bool backColourGrey = false;
-            DisplayFact previous = null;
+            DisplayFact? previous = null;
             foreach (DisplayFact fact in facts.Cast<DisplayFact>())
             {
                 if (previous is not null)
@@ -393,7 +393,7 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == 0)
             {
-                DisplayFact f = dgFacts.Rows[e.RowIndex].DataBoundItem as DisplayFact;
+                DisplayFact f = (DisplayFact)dgFacts.Rows[e.RowIndex].DataBoundItem;
                 e.ToolTipText = f.Fact.FactErrorMessage;
             }
         }
@@ -402,7 +402,7 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex > 0)
             {
-                DisplayFact f = dgFacts.Rows[e.RowIndex].DataBoundItem as DisplayFact;
+                DisplayFact f = (DisplayFact)dgFacts.Rows[e.RowIndex].DataBoundItem;
                 DataGridViewCell cell = dgFacts.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 if (f.Fact.FactErrorLevel != Fact.FactError.GOOD)
                 {
@@ -428,7 +428,7 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                DisplayFact f = dgFacts.Rows[e.RowIndex].DataBoundItem as DisplayFact;
+                DisplayFact f = (DisplayFact)dgFacts.Rows[e.RowIndex].DataBoundItem;
                 if (f.Fact.FactType == Fact.REPORT)
                 {
                     Facts person = new(f.Ind);

@@ -228,7 +228,7 @@ namespace FTAnalyzer.Forms
         static int sleepinterval = 200;
 
         // Call geocoding routine but account for throttling by Google geocoding engine
-        public static GeoResponse? GoogleGeocode(FactLocation address, string text, int badtries)
+        public static GeoResponse GoogleGeocode(FactLocation address, string text, int badtries)
         {
             int maxInterval = 30000;
             double seconds = sleepinterval / 1000;

@@ -168,7 +168,7 @@ namespace FTAnalyzer.Forms
             List<IDisplayFact> displayFacts = new();
             foreach (DataGridViewRow row in dgIndividuals.SelectedRows)
             {
-                Individual ind = row.DataBoundItem as Individual;
+                Individual ind = (Individual)row.DataBoundItem;
                 if (ind.AllLifeLineFacts.Count > 0)
                 {
                     displayFacts.AddUnique(ind.AllLifeLineFacts);
@@ -207,7 +207,7 @@ namespace FTAnalyzer.Forms
 
         void AddAllFamilyMembersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Individual ind = dgIndividuals.CurrentRow.DataBoundItem as Individual;
+            Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
             isLoading = true;
             foreach (Individual i in FamilyTree.GetFamily(ind))
                 SelectIndividual(i);
@@ -217,7 +217,7 @@ namespace FTAnalyzer.Forms
 
         void SelectIndividual(Individual i)
         {
-            DataGridViewRow row = dgIndividuals.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["IndividualID"].Value.ToString().Equals(i.IndividualID)).FirstOrDefault();
+            DataGridViewRow? row = dgIndividuals.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["IndividualID"].Value.ToString().Equals(i.IndividualID)).FirstOrDefault();
             if (row is not null)
                 dgIndividuals.Rows[row.Index].Selected = true;
         }
@@ -226,7 +226,7 @@ namespace FTAnalyzer.Forms
         {
             Cursor = Cursors.WaitCursor;
             isLoading = true;
-            Individual ind = dgIndividuals.CurrentRow.DataBoundItem as Individual;
+            Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
             foreach (Individual i in method(ind))
                 SelectIndividual(i);
             isLoading = false;

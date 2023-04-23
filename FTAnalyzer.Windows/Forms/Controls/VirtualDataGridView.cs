@@ -164,7 +164,7 @@ namespace FTAnalyzer.Forms.Controls
             Columns.Clear();
             foreach (PropertyInfo info in typeof(T).GetProperties())
             {
-                ColumnDetail cd = info.GetCustomAttribute<ColumnDetail>();
+                ColumnDetail? cd = info.GetCustomAttribute<ColumnDetail>();
                 DataGridViewColumn dgvc;
                 switch (cd?.TypeofColumn)
                 {
@@ -264,7 +264,7 @@ namespace FTAnalyzer.Forms.Controls
 
             public int Compare(T? ind1, T? ind2)
             {
-                IComparable val2 = _accessor?.GetValue(ind2) as IComparable;
+                IComparable? val2 = _accessor?.GetValue(ind2) as IComparable;
 
                 if (_accessor?.GetValue(ind1) is not IComparable val1)
                     return val2 is null ? 0 : _direction * -1;

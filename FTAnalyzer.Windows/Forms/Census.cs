@@ -205,8 +205,8 @@ namespace FTAnalyzer.Forms
         void TsBtnMapLocation_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
-            CensusIndividual ds = dgCensus.CurrentRow is null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
-            FactLocation loc = ds?.CensusLocation;
+            CensusIndividual? ds = dgCensus.CurrentRow is null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
+            FactLocation? loc = ds?.CensusLocation;
             if (loc is not null)
             {   // Do geo coding stuff
                 GoogleMap.ShowLocation(loc, loc.Level);
@@ -217,8 +217,8 @@ namespace FTAnalyzer.Forms
         void TsBtnMapOSLocation_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
-            CensusIndividual ds = dgCensus.CurrentRow is null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
-            FactLocation loc = ds?.CensusLocation;
+            CensusIndividual? ds = dgCensus.CurrentRow is null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
+            FactLocation? loc = ds?.CensusLocation;
             if (loc is not null)
             {   // Do geo coding stuff
                 BingOSMap frmBingMap = new();

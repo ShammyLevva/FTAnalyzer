@@ -2181,7 +2181,7 @@ namespace FTAnalyzer
             int count = 0;
             for (int i = 0; i < 5; i++)
             {
-                string name = Settings.Default.RecentFiles[i];
+                string? name = Settings.Default.RecentFiles[i];
                 if (name is not null && name.Length > 0 && File.Exists(name))
                 {
                     added = true;
@@ -2320,7 +2320,7 @@ namespace FTAnalyzer
             {
                 if (dgIndividuals.Rows[hti.RowIndex].Cells[hti.ColumnIndex].GetType() == typeof(DataGridViewLinkCell))
                 {
-                    string familySearchID = dgIndividuals.Rows[hti.RowIndex].Cells[hti.ColumnIndex].Value.ToString();
+                    string familySearchID = dgIndividuals.Rows[hti.RowIndex].Cells[hti.ColumnIndex].Value.ToString() ?? string.Empty;
                     if (!string.IsNullOrEmpty(familySearchID))
                     {
                         string url = $"https://www.familysearch.org/tree/person/details/{familySearchID}";
@@ -2574,21 +2574,24 @@ namespace FTAnalyzer
         async void MainForm_DragDrop(object sender, DragEventArgs e)
         {
             bool fileLoaded = false;
-            string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
-            foreach (string filename in files)
+            string[]? files = e.Data.GetData(DataFormats.FileDrop) as string[];
+            if (files is not null)
             {
-                if (Path.GetExtension(filename.ToLower()) == ".ged")
+                foreach (string filename in files)
                 {
-                    fileLoaded = true;
-                    await LoadFileAsync(filename).ConfigureAwait(true);
-                    break;
+                    if (Path.GetExtension(filename.ToLower()) == ".ged")
+                    {
+                        fileLoaded = true;
+                        await LoadFileAsync(filename).ConfigureAwait(true);
+                        break;
+                    }
                 }
+                if (!fileLoaded)
+                    if (files.Length > 1)
+                        MessageBox.Show("Unable to load File. None of the files dragged and dropped were *.ged files", "FTAnalyzer");
+                    else
+                        MessageBox.Show("Unable to load File. The file dragged and dropped wasn't a *.ged file", "FTAnalyzer");
             }
-            if (!fileLoaded)
-                if (files.Length > 1)
-                    MessageBox.Show("Unable to load File. None of the files dragged and dropped were *.ged files", "FTAnalyzer");
-                else
-                    MessageBox.Show("Unable to load File. The file dragged and dropped wasn't a *.ged file", "FTAnalyzer");
         }
 
         void MainForm_DragEnter(object sender, DragEventArgs e)
@@ -2737,17 +2740,20 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == 0 && !pbDuplicates.Visible) // don't do anything if progressbar still loading duplicates
             {
-                DisplayDuplicateIndividual dupInd = dgDuplicates.DataBoundItem(e.RowIndex) as DisplayDuplicateIndividual;
-                NonDuplicate nonDup = new(dupInd);
-                dupInd.IgnoreNonDuplicate = !dupInd.IgnoreNonDuplicate; // flip state of checkbox
-                if (dupInd.IgnoreNonDuplicate)
-                {  //ignoring this record so add it to the list if its not already present
-                    if (!ft.NonDuplicates.ContainsDuplicate(nonDup))
-                        ft.NonDuplicates.Add(nonDup);
+                DisplayDuplicateIndividual? dupInd = dgDuplicates.DataBoundItem(e.RowIndex) as DisplayDuplicateIndividual;
+                if (dupInd is not null)
+                {
+                    NonDuplicate nonDup = new(dupInd);
+                    dupInd.IgnoreNonDuplicate = !dupInd.IgnoreNonDuplicate; // flip state of checkbox
+                    if (dupInd.IgnoreNonDuplicate)
+                    {  //ignoring this record so add it to the list if its not already present
+                        if (!ft.NonDuplicates.ContainsDuplicate(nonDup))
+                            ft.NonDuplicates.Add(nonDup);
+                    }
+                    else
+                        ft.NonDuplicates.Remove(nonDup); // no longer ignoring so remove from list
+                    ft.SerializeNonDuplicates();
                 }
-                else
-                    ft.NonDuplicates.Remove(nonDup); // no longer ignoring so remove from list
-                ft.SerializeNonDuplicates();
             }
         }
 
