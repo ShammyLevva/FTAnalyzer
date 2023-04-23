@@ -125,7 +125,7 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.Default;
         }
 
-        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite(e.Link.LinkData as string);
+        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite((string)e.Link.LinkData);
 
         void DgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

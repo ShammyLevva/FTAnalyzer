@@ -17,6 +17,9 @@ namespace FTAnalyzer.Forms
         readonly ReportFormHelper reportFormHelper;
         readonly FamilyTree ft;
 
+        readonly string DEFAULT_PROVIDER = "FamilySearch";
+        readonly string DEFAULT_REGION = ".co.uk";
+
         public Census(CensusDate censusDate, bool censusDone)
         {
             InitializeComponent();
@@ -31,9 +34,9 @@ namespace FTAnalyzer.Forms
             RecordCount = 0;
             CensusDone = censusDone;
             string defaultProvider = Application.UserAppDataRegistry.GetValue("Default Search Provider").ToString() ?? string.Empty;
-            defaultProvider ??= "FamilySearch";
+            defaultProvider ??= DEFAULT_PROVIDER;
             string defaultRegion = Application.UserAppDataRegistry.GetValue("Default Region").ToString() ?? string.Empty;
-            defaultRegion ??= ".co.uk";
+            defaultRegion ??= DEFAULT_REGION;
             cbCensusSearchProvider.Text = defaultProvider;
             cbRegion.Text = defaultRegion;
             CensusSettingsUI.CompactCensusRefChanged += new EventHandler(RefreshCensusReferences);
@@ -88,11 +91,11 @@ namespace FTAnalyzer.Forms
             SetupDataGridView(true, individuals);
         }
 
-        public void SetupLCupdateList(List<CensusIndividual> listItems)
+        public void SetupLCupdateList(List<CensusIndividual>? listItems)
         {
             if (listItems is null) return;
             LostCousins = true;
-            RecordCount = listItems is null ? 0 : listItems.Count;
+            RecordCount = listItems.Count;
             SetupDataGridView(true, listItems);
         }
 
@@ -260,14 +263,15 @@ namespace FTAnalyzer.Forms
 
         void CbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Application.UserAppDataRegistry.SetValue("Default Search Provider", cbCensusSearchProvider.SelectedItem.ToString());
+            string defaultProvider = cbCensusSearchProvider.SelectedItem.ToString() ?? DEFAULT_PROVIDER;
+            Application.UserAppDataRegistry.SetValue("Default Search Provider", defaultProvider);
             dgCensus.Refresh(); // force update of tooltips
             dgCensus.Focus();
         }
 
         void CbRegion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Application.UserAppDataRegistry.SetValue("Default Region", cbRegion.SelectedItem.ToString());
+            Application.UserAppDataRegistry.SetValue("Default Region", cbRegion.SelectedItem.ToString() ?? DEFAULT_REGION);
             Settings.Default.defaultURLRegion = cbRegion.SelectedItem.ToString();
             Settings.Default.Save();
             dgCensus.Refresh(); // force update of tooltips

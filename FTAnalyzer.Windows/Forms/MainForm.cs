@@ -3053,7 +3053,7 @@ namespace FTAnalyzer
             cmbColourFamily.Text = "All Families";
         }
 
-        bool UpdateColourFamilyComboBox(ComboBoxFamily f)
+        bool UpdateColourFamilyComboBox(ComboBoxFamily? f)
         {
             bool stillThere = false;
             if (cmbColourFamily.Items.Count == 0)

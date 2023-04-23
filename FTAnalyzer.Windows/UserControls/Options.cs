@@ -169,12 +169,14 @@ namespace FTAnalyzer.UserControls
 		{
 			if (treeView1.SelectedNode is not null)
 			{
-				this.SuspendLayout();
+				SuspendLayout();
 				for (int i = 0; i < panel1.Controls.Count; i++)
 				{
 					panel1.Controls[i].Visible = false;
 				}
-				_lookupTable[treeView1.SelectedNode.Tag.ToString()].Visible = true;
+				string tableTag = treeView1.SelectedNode.Tag.ToString() ?? string.Empty;
+				if (!string.IsNullOrEmpty(tableTag))
+					_lookupTable[tableTag].Visible = true;
 				ResumeLayout();
 			}
 		}

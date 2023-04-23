@@ -389,7 +389,7 @@ namespace FTAnalyzer.Forms
 
         void MnuHideScaleBar_Click(object sender, EventArgs e) => MapHelper.MnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
 
-        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite(e.Link.LinkData as string);
+        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite((string)e.Link.LinkData);
 
         void TimeLine_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
