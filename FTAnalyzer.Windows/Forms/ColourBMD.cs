@@ -131,7 +131,7 @@ namespace FTAnalyzer.Forms
             }
             else
             {
-                DataGridViewCellStyle style = dgBMDReportSheet.DefaultCellStyle;
+                DataGridViewCellStyle? style = dgBMDReportSheet.DefaultCellStyle;
                 DataGridViewCell cell = dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 BMDColours value = (BMDColours)cell.Value;
                 styles.TryGetValue(value, out style);
@@ -226,7 +226,7 @@ namespace FTAnalyzer.Forms
                     {
                         FactDate marriageDate = FactDate.UNKNOWN_DATE;
                         FactLocation marriageLocation = FactLocation.UNKNOWN_LOCATION;
-                        Individual spouse = null;
+                        Individual? spouse = null;
                         if (e.ColumnIndex == birthColumnIndex + 2)
                         {
                             marriageDate = ind.FirstMarriageDate;

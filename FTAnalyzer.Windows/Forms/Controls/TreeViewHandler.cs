@@ -37,18 +37,18 @@ namespace FTAnalyzer.Forms.Controls
                 progressBar.Maximum = FamilyTree.Instance.AllDisplayPlaces.Count;
                 mainformTreeRootNode = new TreeNode();
                 placesTreeRootNode = new TreeNode();
-                Font regularFont = new(defaultFont, FontStyle.Regular);
-                Font boldFont = new(defaultFont, FontStyle.Bold);
+                using Font regularFont = new(defaultFont, FontStyle.Regular);
+                using Font boldFont = new(defaultFont, FontStyle.Bold);
                 foreach (FactLocation location in FamilyTree.Instance.AllDisplayPlaces.Cast<FactLocation>())
                 {
                     string[] parts = location.GetParts();
-                    TreeNode currentM = mainformTreeRootNode;
-                    TreeNode currentP = placesTreeRootNode;
+                    TreeNode? currentM = mainformTreeRootNode;
+                    TreeNode? currentP = placesTreeRootNode;
                     foreach (string part in parts)
                     {
                         if (part.Length == 0 && !GeneralSettings.Default.AllowEmptyLocations) break;
-                        TreeNode childM = currentM.Nodes.Find(part, false).FirstOrDefault();
-                        TreeNode childP = currentP.Nodes.Find(part, false).FirstOrDefault();
+                        TreeNode? childM = currentM.Nodes.Find(part, false).FirstOrDefault();
+                        TreeNode? childP = currentP.Nodes.Find(part, false).FirstOrDefault();
                         if (childM is null)
                         {
                             TreeNode child = new((part.Length == 0 ? "<blank>" : part))
@@ -99,8 +99,6 @@ namespace FTAnalyzer.Forms.Controls
                     node.Text += "         "; // force text to be longer to fix bold bug
                 foreach (TreeNode node in placesTreeRootNode.Nodes)
                     node.Text += "         "; // force text to be longer to fix bold bug
-                regularFont = null;
-                boldFont = null; // hopefully fixes dispose bug
             }
             catch (Exception) { }
             return BuildTreeNodeArray(mainform);
@@ -165,19 +163,19 @@ namespace FTAnalyzer.Forms.Controls
         {
             if (location is null) return;
             string[] parts = location.GetParts();
-            TreeNode currentM = mainformTreeRootNode;
-            TreeNode currentP = placesTreeRootNode;
+            TreeNode? currentM = mainformTreeRootNode;
+            TreeNode? currentP = placesTreeRootNode;
             foreach (string part in parts)
             {
                 if (part.Length == 0 && !GeneralSettings.Default.AllowEmptyLocations) break;
                 if (mainformTreeRootNode is not null && currentM is not null)
                 {
-                    TreeNode childM = currentM.Nodes.Find(part, false).FirstOrDefault();
+                    TreeNode? childM = currentM.Nodes.Find(part, false).FirstOrDefault();
                     currentM = childM;
                 }
                 if (placesTreeRootNode is not null && currentP is not null)
                 {
-                    TreeNode childP = currentP.Nodes.Find(part, false).FirstOrDefault();
+                    TreeNode? childP = currentP.Nodes.Find(part, false).FirstOrDefault();
                     currentP = childP;
                 }
             }

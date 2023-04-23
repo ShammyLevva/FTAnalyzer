@@ -142,7 +142,7 @@ namespace FTAnalyzer.Forms
                     CensusIndividual cr = (CensusIndividual)row.DataBoundItem;
                     if (row.Cells[sortColumn].Value.ToString() != currentRowText)
                     {
-                        currentRowText = row.Cells[sortColumn].Value.ToString();
+                        currentRowText = row.Cells[sortColumn].Value.ToString() ?? string.Empty;
                         highlighted = !highlighted;
                     }
                     DataGridViewCellStyle style = new(dgCensus.DefaultCellStyle)
@@ -180,7 +180,7 @@ namespace FTAnalyzer.Forms
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 DataGridViewCell cell = dgCensus.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                CensusIndividual ind = dgCensus.Rows[e.RowIndex].DataBoundItem as CensusIndividual;
+                CensusIndividual ind = (CensusIndividual)dgCensus.Rows[e.RowIndex].DataBoundItem;
                 if (ind.CellStyle is not null)
                 {
                     e.CellStyle = ind.CellStyle;
@@ -193,7 +193,7 @@ namespace FTAnalyzer.Forms
         {
             readonly Comparer<CensusIndividual> comparer;
             public IDisplayCensusComparerWrapper(Comparer<CensusIndividual> comp) => comparer = comp;
-            public override int Compare(IDisplayCensus? x, IDisplayCensus? y) => comparer.Compare((CensusIndividual)x, (CensusIndividual)y);
+            public override int Compare(IDisplayCensus? x, IDisplayCensus? y) => comparer.Compare((CensusIndividual?)x, (CensusIndividual?)y);
         }
 
         void PrintToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintReport("Census Report");

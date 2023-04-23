@@ -144,7 +144,7 @@ namespace FTAnalyzer.Forms
             {
                 DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 int value = (int)cell.Value;
-                styles.TryGetValue(value, out DataGridViewCellStyle style);
+                styles.TryGetValue(value, out DataGridViewCellStyle? style);
                 if (style is not null)
                 {
                     e.CellStyle.BackColor = style.BackColor;

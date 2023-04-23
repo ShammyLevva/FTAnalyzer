@@ -49,7 +49,7 @@ namespace FTAnalyzer
 
         void PrintPreviewToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintPreviewReport();
 
-        void Facts_TextChanged(object sender, EventArgs e) => reportFormHelper.PrintTitle = this.Text;
+        void Facts_TextChanged(object sender, EventArgs e) => reportFormHelper.PrintTitle = Text;
 
         void MnuExportToExcel_Click(object sender, EventArgs e) => reportFormHelper.DoExportToExcel<MapLocation>();
 
@@ -65,7 +65,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                MapLocation loc = dgIndividuals.Rows[e.RowIndex].DataBoundItem as MapLocation;
+                MapLocation loc = (MapLocation)dgIndividuals.Rows[e.RowIndex].DataBoundItem;
                 e.ToolTipText = "Geocoding status: " + loc.Location.Geocoded;
             }
         }
@@ -87,7 +87,7 @@ namespace FTAnalyzer
             try
             {
                 Cursor = Cursors.WaitCursor;
-                MapLocation loc = dgIndividuals.SelectedRows[0].DataBoundItem as MapLocation;
+                MapLocation loc = (MapLocation)dgIndividuals.SelectedRows[0].DataBoundItem;
                 EditLocation editform = new(loc.Location);
                 Cursor = Cursors.Default;
                 DialogResult result = editform.ShowDialog(this);
@@ -119,7 +119,7 @@ namespace FTAnalyzer
             if (!ft.Geocoding)
             {
                 Cursor = Cursors.WaitCursor;
-                MapLocation loc = dgIndividuals.CurrentRow.DataBoundItem as MapLocation;
+                MapLocation loc = (MapLocation)dgIndividuals.CurrentRow.DataBoundItem;
                 EditLocation(loc.Location);
             }
         }

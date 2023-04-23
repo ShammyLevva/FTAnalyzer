@@ -96,7 +96,7 @@ namespace FTAnalyzer.Mapping
             Clear();
             foreach (DataGridViewRow row in rows)
             {
-                DisplayFact dispFact = row.DataBoundItem as DisplayFact;
+                DisplayFact dispFact = (DisplayFact)row.DataBoundItem;
                 MapLocation ml = new(dispFact.Ind, dispFact.Fact, dispFact.FactDate);
                 AddFeatureDataRow(dispFact, ml, LIGHT_GREEN);
             }

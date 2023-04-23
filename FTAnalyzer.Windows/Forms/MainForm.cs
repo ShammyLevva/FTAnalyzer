@@ -2060,20 +2060,18 @@ namespace FTAnalyzer
                 foreach (Form f in Application.OpenForms)
                 {
                     if (!ReferenceEquals(f, form) && f.GetType() == form.GetType())
-                        if (form is Census)
+                        if (form is Census newCensusForm)
                         {
-                            Census newForm = (Census)form;
                             Census oldForm = (Census)f;
-                            if (oldForm.CensusDate.Equals(newForm.CensusDate) && oldForm.LostCousins == newForm.LostCousins)
+                            if (oldForm.CensusDate.Equals(newCensusForm.CensusDate) && oldForm.LostCousins == newCensusForm.LostCousins)
                                 toDispose.Add(f);
                         }
-                        else if (form is Facts)
+                        else if (form is Facts newFactsForm)
                         {
-                            Facts newForm = (Facts)form;
                             Facts oldForm = (Facts)f;
-                            if (oldForm.Individual is not null && oldForm.Individual.Equals(newForm.Individual))
+                            if (oldForm.Individual is not null && oldForm.Individual.Equals(newFactsForm.Individual))
                                 toDispose.Add(f);
-                            if (oldForm.Family is not null && oldForm.Family.Equals(newForm.Family))
+                            if (oldForm.Family is not null && oldForm.Family.Equals(newFactsForm.Family))
                                 toDispose.Add(f);
                         }
                         else
@@ -3045,9 +3043,9 @@ namespace FTAnalyzer
 
         void RefreshColourFamilyComboBox()
         {
-            ComboBoxFamily f = null;
+            ComboBoxFamily? f = null;
             if (cmbColourFamily.Text != "All Families")
-                f = cmbColourFamily.SelectedItem as ComboBoxFamily; // store the previous value to set it again after
+                f = (ComboBoxFamily) cmbColourFamily.SelectedItem; // store the previous value to set it again after
             ClearColourFamilyCombo();
             bool stillThere = UpdateColourFamilyComboBox(f);
             if (f is not null && stillThere)  // the previously selected value is still present so select it
