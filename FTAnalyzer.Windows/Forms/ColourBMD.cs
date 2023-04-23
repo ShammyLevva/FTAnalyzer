@@ -78,12 +78,12 @@ namespace FTAnalyzer.Forms
                 dgBMDReportSheet.RowTemplate.Height = (int)(FontSettings.Default.SelectedFont.Height * GraphicsUtilities.GetCurrentScaling()); 
                 reportFormHelper.LoadColumnLayout("ColourBMDColumns.xml");
                 tsRecords.Text = $"{Messages.Count}{reportList.Count} records listed.";
-                string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
+                string defaultProvider = Application.UserAppDataRegistry.GetValue("Default Search Provider").ToString() ?? string.Empty;
                 defaultProvider ??= "FamilySearch";
                 if (defaultProvider.Equals("FreeCen"))
                     defaultProvider = "FreeBMD";
                 cbBMDSearchProvider.Text = defaultProvider;
-                string defaultRegion = (string)Application.UserAppDataRegistry.GetValue("Default Region");
+                string defaultRegion = Application.UserAppDataRegistry.GetValue("Default Region").ToString() ?? string.Empty;
                 defaultRegion ??= ".co.uk";
                 cbRegion.Text = defaultRegion;
                 cbFilter.Text = "All Individuals";
@@ -264,7 +264,7 @@ namespace FTAnalyzer.Forms
 
         void CbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string provider = cbBMDSearchProvider.SelectedItem.ToString();
+            string provider = cbBMDSearchProvider.SelectedItem.ToString() ?? string.Empty;
             if (provider.Equals("FreeBMD"))
                 provider = "FreeCen";
             Application.UserAppDataRegistry.SetValue("Default Search Provider", provider);

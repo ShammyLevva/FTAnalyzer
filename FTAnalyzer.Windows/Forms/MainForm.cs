@@ -229,7 +229,7 @@ namespace FTAnalyzer
             int Top = (int)Application.UserAppDataRegistry.GetValue("Mainform position - top", mainForm.Top);
             int Left = (int)Application.UserAppDataRegistry.GetValue("Mainform position - left", mainForm.Left);
             string maxState = (WindowState == FormWindowState.Maximized).ToString();
-            string maximised = (string)Application.UserAppDataRegistry.GetValue("Mainform maximised", maxState);
+            string maximised = Application.UserAppDataRegistry.GetValue("Mainform maximised", maxState).ToString() ?? maxState;
             Point leftTop = ReportFormHelper.CheckIsOnScreen(Top, Left);
             Rectangle workarea = Screen.GetWorkingArea(leftTop);
             if (Width > workarea.Width)
@@ -1002,9 +1002,8 @@ namespace FTAnalyzer
                 TabPage current = tabCtrlLocations.SelectedTab;
                 Control control = current.Controls[0];
                 control.Focus();
-                if (control is VirtualDGVLocations)
+                if (control is VirtualDGVLocations dg)
                 {
-                    VirtualDGVLocations dg = control as VirtualDGVLocations;
                     tsCountLabel.Text = $"{Messages.Count}{dg.RowCount} {dg.Name[2..]}";
                     mnuPrint.Enabled = true;
                     dg.VirtualGridFiltered += VirtualGridFiltered;
@@ -1045,7 +1044,7 @@ namespace FTAnalyzer
                 }
                 else
                 {
-                    FactLocation loc = grid.DataBoundItem(e.RowIndex) as FactLocation;
+                    FactLocation loc = (FactLocation)grid.DataBoundItem(e.RowIndex);
                     cell.ToolTipText = $"Geocoding Status : {loc.Geocoded}";
                 }
             }
@@ -1218,12 +1217,12 @@ namespace FTAnalyzer
                 try
                 {
                     HourGlass(true);
-                    GeocodeLocations geo = null;
+                    GeocodeLocations? geo = null;
                     foreach (Form f in Application.OpenForms)
                     {
-                        if (f is GeocodeLocations)
+                        if (f is GeocodeLocations locations)
                         {
-                            geo = f as GeocodeLocations;
+                            geo = locations;
                             break;
                         }
                     }
@@ -1426,7 +1425,7 @@ namespace FTAnalyzer
                             btnLC1911EW.Enabled = ft.IndividualCount > 0;
                         LCSubTabs.TabPages.Remove(LCVerifyTab); // hide verification tab as it does nothing
                         UpdateLCReports();
-                        txtLCEmail.Text = (string)Application.UserAppDataRegistry.GetValue("LostCousinsEmail", string.Empty);
+                        txtLCEmail.Text = Application.UserAppDataRegistry.GetValue("LostCousinsEmail", string.Empty).ToString();
                         chkLCRootPersonConfirm.Text = $"Confirm {ft.RootPerson} as root Person";
                         tabLostCousins.Refresh();
                         Analytics.TrackAction(Analytics.MainFormAction, Analytics.LostCousinsTabEvent);
@@ -2063,15 +2062,15 @@ namespace FTAnalyzer
                     if (!ReferenceEquals(f, form) && f.GetType() == form.GetType())
                         if (form is Census)
                         {
-                            Census newForm = form as Census;
-                            Census oldForm = f as Census;
+                            Census newForm = (Census)form;
+                            Census oldForm = (Census)f;
                             if (oldForm.CensusDate.Equals(newForm.CensusDate) && oldForm.LostCousins == newForm.LostCousins)
                                 toDispose.Add(f);
                         }
                         else if (form is Facts)
                         {
-                            Facts newForm = form as Facts;
-                            Facts oldForm = f as Facts;
+                            Facts newForm = (Facts)form;
+                            Facts oldForm = (Facts)f;
                             if (oldForm.Individual is not null && oldForm.Individual.Equals(newForm.Individual))
                                 toDispose.Add(f);
                             if (oldForm.Family is not null && oldForm.Family.Equals(newForm.Family))
@@ -2112,7 +2111,8 @@ namespace FTAnalyzer
                 MessageBox.Show("You need to stop Geocoding before you can import the database", "FTAnalyzer");
             else
             {
-                string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString();
+                string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString() 
+                                                                        ?? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 restoreDatabase.FileName = "*.zip";
                 restoreDatabase.InitialDirectory = directory;
                 DialogResult result = restoreDatabase.ShowDialog();
@@ -2473,7 +2473,7 @@ namespace FTAnalyzer
         {
             for (int index = 0; index < list.Items.Count; index++)
             {
-                string factType = list.Items[index].ToString();
+                string factType = list.Items[index].ToString() ?? string.Empty;
                 list.SetItemChecked(index, selected);
                 try
                 {
@@ -2493,7 +2493,7 @@ namespace FTAnalyzer
             int index = ckbFactSelect.IndexFromPoint(e.Location);
             if (index >= 0)
             {
-                string factType = ckbFactSelect.Items[index].ToString();
+                string factType = ckbFactSelect.Items[index].ToString() ?? string.Empty;
                 bool selected = ckbFactSelect.GetItemChecked(index);
                 ckbFactSelect.SetItemChecked(index, !selected);
                 try
@@ -2540,12 +2540,12 @@ namespace FTAnalyzer
         void CkbFactExclude_MouseClick(object sender, MouseEventArgs e)
         {
             int index = ckbFactExclude.IndexFromPoint(e.Location);
-            string factType = ckbFactExclude.Items[index].ToString();
+            string factType = ckbFactExclude.Items[index].ToString() ?? string.Empty;
             bool selected = ckbFactExclude.GetItemChecked(index);
             ckbFactExclude.SetItemChecked(index, !selected);
             try
             {
-                Application.UserAppDataRegistry.SetValue("Exclude Fact: " + factType, !selected);
+                Application.UserAppDataRegistry.SetValue($"Exclude Fact: {factType}", !selected);
             }
             catch (IOException)
             {
@@ -2909,7 +2909,7 @@ namespace FTAnalyzer
             try
             {
                 using SaveFileDialog saveFileDialog = new();
-                string initialDir = (string)Application.UserAppDataRegistry.GetValue("Report Unrecognised Census References Path");
+                string initialDir = Application.UserAppDataRegistry.GetValue("Report Unrecognised Census References Path").ToString() ?? string.Empty;
                 saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
                 saveFileDialog.FileName = unrecognisedFilename;
                 saveFileDialog.Filter = "Report File (*.txt)|*.txt";
@@ -2917,7 +2917,7 @@ namespace FTAnalyzer
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    string path = Path.GetDirectoryName(saveFileDialog.FileName);
+                    string path = Path.GetDirectoryName(saveFileDialog.FileName) ?? string.Empty;
                     Application.UserAppDataRegistry.SetValue("Report Unrecognised Census References Path", path);
                     FamilyTree.WriteUnrecognisedReferencesFile(unrecognisedResults, missingResults, notesResults, saveFileDialog.FileName);
                     Analytics.TrackAction(Analytics.ReportsAction, Analytics.UnrecognisedCensusEvent);
@@ -3460,13 +3460,13 @@ namespace FTAnalyzer
                 if (!ckbFactSelect.Items.Contains(factType))
                 {
                     int index = ckbFactSelect.Items.Add(factType);
-                    bool itemChecked = Application.UserAppDataRegistry.GetValue("Fact: " + factType, "True").Equals("True");
+                    bool itemChecked = Application.UserAppDataRegistry.GetValue($"Fact: {factType}", "True").Equals("True");
                     ckbFactSelect.SetItemChecked(index, itemChecked);
                 }
                 if (!ckbFactExclude.Items.Contains(factType))
                 {
                     int index = ckbFactExclude.Items.Add(factType);
-                    bool itemChecked = Application.UserAppDataRegistry.GetValue("Exlude Fact: " + factType, "False").Equals("True");
+                    bool itemChecked = Application.UserAppDataRegistry.GetValue($"Exlude Fact: {factType}", "False").Equals("True");
                     ckbFactExclude.SetItemChecked(index, itemChecked);
                 }
             }

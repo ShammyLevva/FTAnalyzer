@@ -30,9 +30,9 @@ namespace FTAnalyzer.Forms
             censusCountry = CensusDate.Country;
             RecordCount = 0;
             CensusDone = censusDone;
-            string defaultProvider = (string)Application.UserAppDataRegistry.GetValue("Default Search Provider");
+            string defaultProvider = Application.UserAppDataRegistry.GetValue("Default Search Provider").ToString() ?? string.Empty;
             defaultProvider ??= "FamilySearch";
-            string defaultRegion = (string)Application.UserAppDataRegistry.GetValue("Default Region");
+            string defaultRegion = Application.UserAppDataRegistry.GetValue("Default Region").ToString() ?? string.Empty;
             defaultRegion ??= ".co.uk";
             cbCensusSearchProvider.Text = defaultProvider;
             cbRegion.Text = defaultRegion;
