@@ -15,7 +15,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>$(DefineConstants)TRACE;__PC__;CODE_ANALYSIS;__DEBUG__</DefineConstants>
-    <NoWarn>1416;1701;1702;8600;8601;8602;8603;8604;8605;8618;8622;8625;8767</NoWarn>
+    <NoWarn>1416;1701;1702;8600;8601;8602;8603;8604;8605;8618;8622;8625</NoWarn>
     <WarningLevel>7</WarningLevel>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
     <WarningsAsErrors>$(WarningsAsErrors);NU1605</WarningsAsErrors>
@@ -23,7 +23,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DefineConstants>$(DefineConstants)TRACE;__PC__;CODE_ANALYSIS;__DEBUG__</DefineConstants>
-    <NoWarn>1416;1701;1702;8600;8601;8602;8603;8604;8605;8618;8622;8625;8767</NoWarn>
+    <NoWarn>1416;1701;1702;8600;8601;8602;8603;8604;8605;8618;8622;8625</NoWarn>
     <WarningLevel>7</WarningLevel>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
     <WarningsAsErrors>$(WarningsAsErrors);NU1605</WarningsAsErrors>

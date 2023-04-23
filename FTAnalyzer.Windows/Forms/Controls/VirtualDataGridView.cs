@@ -262,7 +262,7 @@ namespace FTAnalyzer.Forms.Controls
                 _direction = direction == ListSortDirection.Ascending ? 1 : -1;
             }
 
-            public int Compare(T ind1, T ind2)
+            public int Compare(T? ind1, T? ind2)
             {
                 IComparable val2 = _accessor?.GetValue(ind2) as IComparable;
 
