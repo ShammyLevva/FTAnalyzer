@@ -200,7 +200,7 @@ namespace FTAnalyzer.Mapping
             {
                 foreach (Coordinate c in row.Geometry.Coordinates)
                 {
-                    if (c != null)
+                    if (c is not null)
                         bbox.ExpandToInclude(c);
                 }
                 var x = (Envelope)row["ViewPort"];

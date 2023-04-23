@@ -170,19 +170,19 @@ namespace FTAnalyzer.Forms
         void UpdateGridWithFilters(bool keepCurrentLocation)
         {
             Cursor = Cursors.WaitCursor;
-            FactLocation loc = dgLocations.CurrentRow != null ? dgLocations.CurrentRow.DataBoundItem as FactLocation : null;
+            FactLocation loc = dgLocations.CurrentRow is not null ? dgLocations.CurrentRow.DataBoundItem as FactLocation : null;
             SortableBindingList<IDisplayGeocodedLocation> filteredLocations = ApplyFilters(null);
             // store sort order
             DataGridViewColumn sortCol = dgLocations.SortedColumn;
             ListSortDirection sortOrder = dgLocations.SortOrder == SortOrder.Descending ? ListSortDirection.Descending : ListSortDirection.Ascending;
             dgLocations.DataSource = filteredLocations;
             //restore sort order
-            if (sortCol != null)
+            if (sortCol is not null)
                 dgLocations.Sort(sortCol, sortOrder);
             dgLocations.Refresh();
             SetStatusText();
             txtLocations.Text = $"{statusText} Displaying: {dgLocations.RowCount}. ";
-            if(loc != null) 
+            if(loc is not null) 
                 SelectLocation(loc);
             Cursor = Cursors.Default;
         }
@@ -213,9 +213,9 @@ namespace FTAnalyzer.Forms
             noneOfTheAboveMenus.CopyTo(list, mnuFoundResultType.DropDownItems.Count + places.DropDownItems.Count); // add any missing elements to always display them
             foreach (IDisplayGeocodedLocation loc in locations)
             {
-                if (StatusFilter(loc) || (mustDisplay != null && loc.Equals(mustDisplay)))
+                if (StatusFilter(loc) || (mustDisplay is not null && loc.Equals(mustDisplay)))
                 {
-                    if (loc.FoundResultType is null || loc.FoundResultType.Length == 0 || (mustDisplay != null && loc.Equals(mustDisplay)))
+                    if (loc.FoundResultType is null || loc.FoundResultType.Length == 0 || (mustDisplay is not null && loc.Equals(mustDisplay)))
                         results.Add(loc);
                     else
                     {
@@ -598,7 +598,7 @@ namespace FTAnalyzer.Forms
                         GeoResponse res = null;
                         res = SearchGoogle(loc, loc.ToString());
                         Envelope bbox = Countries.BoundingBox(loc.Country);
-                        if (res != null && res.Status == "OK" && res.Results.Length > 0)
+                        if (res is not null && res.Status == "OK" && res.Results.Length > 0)
                         {
                             foreach (GeoResponse.CResult result in res.Results)
                             {
@@ -670,7 +670,7 @@ namespace FTAnalyzer.Forms
 //                                log.Info("Searching Google for '" + loc.GoogleFixed + "' original text was '" + loc.GEDCOMLocation + "'.");
                                 res = SearchGoogle(loc, loc.GoogleFixed);
                             }
-                            if (res != null && ((res.Status == "OK" && res.Results.Length > 0) || res.Status == "ZERO_RESULTS"))
+                            if (res is not null && ((res.Status == "OK" && res.Results.Length > 0) || res.Status == "ZERO_RESULTS"))
                             {
                                 double latitude = 0;
                                 double longitude = 0;
@@ -785,7 +785,7 @@ namespace FTAnalyzer.Forms
         {
             // This call is the real workhorse that does the actual Google lookup
             GeoResponse res = GoogleMap.GoogleGeocode(location, text, 8);
-            if (res != null && (res.Status == "Maxed" || res.Status == "REQUEST_DENIED"))
+            if (res is not null && (res.Status == "Maxed" || res.Status == "REQUEST_DENIED"))
             {
                 googleGeocodeBackgroundWorker.CancelAsync();
                 GoogleMap.ThreadCancelled = true;
@@ -935,13 +935,13 @@ namespace FTAnalyzer.Forms
                             else
                             {
                                 res = GoogleMap.GoogleReverseGeocode(latitude, longitude, 8);
-                                if (res != null && res.Status == "Maxed")
+                                if (res is not null && res.Status == "Maxed")
                                 {
                                     googleGeocodeBackgroundWorker.CancelAsync();
                                     GoogleMap.ThreadCancelled = true;
                                     res = null;
                                 }
-                                if (res != null && ((res.Status == "OK" && res.Results.Length > 0) || res.Status == "ZERO_RESULTS"))
+                                if (res is not null && ((res.Status == "OK" && res.Results.Length > 0) || res.Status == "ZERO_RESULTS"))
                                 {
                                     ProcessReverseResult(loc, res);
                                     UpdateDatabase(loc, true);
@@ -1066,7 +1066,7 @@ namespace FTAnalyzer.Forms
                 dgLocations.Refresh();
                 row = dgLocations.Rows.Cast<DataGridViewRow>().Filter(condition).FirstOrDefault();
             }
-            if (row != null)
+            if (row is not null)
             {
                 dgLocations.Rows[row.Index].Selected = true;
                 dgLocations.FirstDisplayedScrollingRowIndex = row.Index;
@@ -1105,7 +1105,7 @@ namespace FTAnalyzer.Forms
 
         public bool LoadOS50kGazetteer()
         {
-            if (OS50kDictionary != null)
+            if (OS50kDictionary is not null)
                 return true; // already loaded
             OS50kDictionary = new Dictionary<string, IList<OS50kGazetteer>>();
             OS50k = new List<OS50kGazetteer>();
@@ -1241,7 +1241,7 @@ namespace FTAnalyzer.Forms
                 stream.WriteLine("0 @I@ INDI");
                 stream.WriteLine("1 NAME Test /Person/");
                 DateTime date = new(1800, 1, 1);
-                if (failedToFind != null)
+                if (failedToFind is not null)
                 {
                     foreach (FactLocation loc in failedToFind)
                     {
@@ -1251,7 +1251,7 @@ namespace FTAnalyzer.Forms
                         date = date.AddDays(1);
                     }
                 }
-                if (noCounty != null)
+                if (noCounty is not null)
                 {
                     foreach (KeyValuePair<FactLocation, IList<OS50kGazetteer>> kvp in noCounty)
                     {
@@ -1319,12 +1319,12 @@ namespace FTAnalyzer.Forms
                     minDistance = distance;
                 }
             }
-            if (selected != null)
+            if (selected is not null)
             {
                 SetOSGeocoding(loc, selected, FactLocation.ADDRESS, true);
                 //log.Info("Accepted " + selected.ToString() + " for " + loc.ToString() + ". Distance: " + minDistance + " Level: " + foundLevel);
             }
-            return selected != null;
+            return selected is not null;
         }
 
         bool CheckLocationMatch(string key, FactLocation loc)

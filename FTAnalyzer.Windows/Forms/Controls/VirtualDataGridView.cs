@@ -196,7 +196,7 @@ namespace FTAnalyzer.Forms.Controls
 
         void ForceToParent()
         {
-            if (Parent != null)
+            if (Parent is not null)
             {
                 //maxHeight = Parent.Height - SystemInformation.HorizontalScrollBarHeight - Location.Y;
                 //maxWidth = Parent.Width - SystemInformation.VerticalScrollBarWidth - Location.X;

@@ -218,7 +218,7 @@ namespace FTAnalyzer.Forms
         void SelectIndividual(Individual i)
         {
             DataGridViewRow row = dgIndividuals.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["IndividualID"].Value.ToString().Equals(i.IndividualID)).FirstOrDefault();
-            if (row != null)
+            if (row is not null)
                 dgIndividuals.Rows[row.Index].Selected = true;
         }
 
@@ -339,7 +339,7 @@ namespace FTAnalyzer.Forms
             dgFacts.ClearSelection();
             foreach (FeatureDataRow row in data)
             {
-                if (row["DisplayFact"] != null && row["Colour"].ToString() == TearDropLayer.GREY)
+                if (row["DisplayFact"] is not null && row["Colour"].ToString() == TearDropLayer.GREY)
                 {
                     DisplayFact dispFact = (DisplayFact)row["DisplayFact"];
                     SelectFact(dispFact);
@@ -416,7 +416,7 @@ namespace FTAnalyzer.Forms
 
         void SetOpacity()
         {
-            if (mapBox1 != null && mapBox1.Map != null && mapBox1.Map.BackgroundLayer.Count > 1)
+            if (mapBox1 is not null && mapBox1.Map is not null && mapBox1.Map.BackgroundLayer.Count > 1)
             {
                 float opacity = tbOpacity.Value / 100.0f;
                 TileAsyncLayer layer = (TileAsyncLayer)mapBox1.Map.BackgroundLayer[1];

@@ -145,7 +145,7 @@ namespace FTAnalyzer.Forms
                 DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 int value = (int)cell.Value;
                 styles.TryGetValue(value, out DataGridViewCellStyle style);
-                if (style != null)
+                if (style is not null)
                 {
                     e.CellStyle.BackColor = style.BackColor;
                     e.CellStyle.ForeColor = style.ForeColor;
@@ -389,7 +389,7 @@ namespace FTAnalyzer.Forms
 
         void MnuViewFacts_Click(object sender, EventArgs e)
         {
-            if (dgReportSheet.CurrentRow != null)
+            if (dgReportSheet.CurrentRow is not null)
             {
                 IDisplayColourCensus ds = (IDisplayColourCensus)dgReportSheet.CurrentRow.DataBoundItem;
                 Individual ind = FamilyTree.Instance.GetIndividual(ds.IndividualID);
@@ -411,7 +411,7 @@ namespace FTAnalyzer.Forms
 
         void DgReportSheet_SelectionChanged(object sender, EventArgs e)
         {
-            if (!settingSelections && dgReportSheet.CurrentRow != null)
+            if (!settingSelections && dgReportSheet.CurrentRow is not null)
             {
                 settingSelections = true;
                 foreach (DataGridViewCell cell in dgReportSheet.CurrentRow.Cells)

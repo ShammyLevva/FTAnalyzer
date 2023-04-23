@@ -29,7 +29,7 @@ namespace FTAnalyzer.UserControls
 				Type[] types = Assembly.GetExecutingAssembly().GetTypes();
 				for (int i = 0; i < types.Length; i++)
 				{
-					if (types[i].GetInterface(typeof(IOptions).FullName) != null && types[i].BaseType == typeof(UserControl)) 
+					if (types[i].GetInterface(typeof(IOptions).FullName) is not null && types[i].BaseType == typeof(UserControl)) 
 					{
 						if (Activator.CreateInstance(types[i]) is UserControl userControl && userControl is IOptions optionCast)
 						{
@@ -41,7 +41,7 @@ namespace FTAnalyzer.UserControls
 							userControl.Visible = false;
 							userControl.Dock = DockStyle.Fill;
 							panel1.Controls.Add(userControl);
-							if (optionCast.MenuIcon != null)
+							if (optionCast.MenuIcon is not null)
 							{
 								OptionsMenuImageList.Images.Add(optionCast.TreePosition, optionCast.MenuIcon);
 							}
@@ -167,7 +167,7 @@ namespace FTAnalyzer.UserControls
 
 		void TreeView1_AfterSelect(object sender, TreeViewEventArgs e)
 		{
-			if (treeView1.SelectedNode != null)
+			if (treeView1.SelectedNode is not null)
 			{
 				this.SuspendLayout();
 				for (int i = 0; i < panel1.Controls.Count; i++)

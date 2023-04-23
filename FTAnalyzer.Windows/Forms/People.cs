@@ -288,7 +288,7 @@ namespace FTAnalyzer.Forms
                 {
                     if (child.BirthDate.IsKnown)
                     {
-                        if (f.Husband != null && f.Husband.BirthDate.IsKnown)
+                        if (f.Husband is not null && f.Husband.BirthDate.IsKnown)
                         {
                             Age age = f.Husband.GetAge(child.BirthDate);
                             if (age.MinAge >= minAge && !dsInd.Contains(f.Husband))
@@ -298,7 +298,7 @@ namespace FTAnalyzer.Forms
                                 added = true;
                             }
                         }
-                        if (f.Wife != null && f.Wife.BirthDate.IsKnown)
+                        if (f.Wife is not null && f.Wife.BirthDate.IsKnown)
                         {
                             Age age = f.Wife.GetAge(child.BirthDate);
                             if (age.MinAge >= minAge && !dsInd.Contains(f.Wife))
@@ -337,11 +337,11 @@ namespace FTAnalyzer.Forms
 
         void DgIndividuals_SelectionChanged(object sender, EventArgs e)
         {
-            if (selectRow && dgIndividuals.CurrentRow != null)
+            if (selectRow && dgIndividuals.CurrentRow is not null)
             {
                 IDisplayIndividual ind = (IDisplayIndividual)dgIndividuals.CurrentRow.DataBoundItem;
                 families.TryGetValue(ind, out IDisplayFamily f);
-                if (f != null)
+                if (f is not null)
                 {
                     foreach (DataGridViewRow r in dgFamilies.Rows)
                     {
@@ -375,7 +375,7 @@ namespace FTAnalyzer.Forms
                     (string)dgFamilies.CurrentRow.Cells[nameof(IDisplayFamily.FamilyID)].Value :
                     (string)dgChildrenStatus.CurrentRow.Cells[nameof(IDisplayFamily.FamilyID)].Value;
                 Family fam = ft.GetFamily(famID);
-                if (fam != null)
+                if (fam is not null)
                 {
                     if ((reportType == ReportType.MismatchedChildrenStatus || reportType == ReportType.MissingChildrenStatus) && ModifierKeys.Equals(Keys.Shift))
                     {
@@ -447,7 +447,7 @@ namespace FTAnalyzer.Forms
         {
             string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
             Individual ind = ft.GetIndividual(indID);
-            if (ind != null)
+            if (ind is not null)
                 viewNotesToolStripMenuItem.Enabled = ind.HasNotes;
         }
 
@@ -455,7 +455,7 @@ namespace FTAnalyzer.Forms
         {
             string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
             Individual ind = ft.GetIndividual(indID);
-            if (ind != null)
+            if (ind is not null)
             {
                 Notes notes = new(ind);
                 notes.Show();

@@ -153,24 +153,24 @@ namespace FTAnalyzer.Forms
         {
             string bounds = string.Empty;
             string tld = address.IsUnitedKingdom ? "&region=uk" : string.Empty;
-            if (address != null)
+            if (address is not null)
             {
                 //if (address.Level > FactLocation.SUBREGION)
                 //{
                 //    FactLocation area = address.GetLocation(FactLocation.SUBREGION);
-                //    if (area != null && area.IsGeoCoded(false) && !string.IsNullOrEmpty(area.Bounds))
+                //    if (area is not null && area.IsGeoCoded(false) && !string.IsNullOrEmpty(area.Bounds))
                 //        bounds = $"{area.Bounds}";
                 //}
                 if (string.IsNullOrEmpty(bounds) && address.Level > FactLocation.REGION)
                 {
                     FactLocation area = address.GetLocation(FactLocation.REGION);
-                    if (area != null && area.IsGeoCoded(false) && !string.IsNullOrEmpty(area.Bounds))
+                    if (area is not null && area.IsGeoCoded(false) && !string.IsNullOrEmpty(area.Bounds))
                         bounds = $"{area.Bounds}";
                 }
                 if (string.IsNullOrEmpty(bounds) && address.Level > FactLocation.COUNTRY)
                 {
                     FactLocation area = address.GetLocation(FactLocation.COUNTRY);
-                    if (area != null && area.IsGeoCoded(false) && !string.IsNullOrEmpty(area.Bounds))
+                    if (area is not null && area.IsGeoCoded(false) && !string.IsNullOrEmpty(area.Bounds))
                         bounds = $"{area.Bounds}";
                 }
             }
@@ -220,7 +220,7 @@ namespace FTAnalyzer.Forms
                     MessageBox.Show($"Unable to contact https://maps.googleapis.com error was: {ex.Message}\nWhen trying to look for {text}", "FTAnalyzer");
                 res = null;
             }
-            if (res!= null && res.Status == "REQUEST_DENIED")
+            if (resis not null && res.Status == "REQUEST_DENIED")
                 UIHelpers.ShowMessage("Google returned REQUEST_DENIED - please check you have a valid key and enabled the Geocoding API & Places API");
             return res;
         }
@@ -259,7 +259,7 @@ namespace FTAnalyzer.Forms
             }
             else
             {
-                if (res!= null && res.Status != "REQUEST_DENIED")
+                if (resis not null && res.Status != "REQUEST_DENIED")
                 {
                     OnWaitingForGoogle(string.Empty); // going well clear any previous message
                                                       // no throttling, go a little bit faster

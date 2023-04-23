@@ -124,7 +124,7 @@ namespace FTAnalyzer.Forms
             foreach (Individual ind in listToCheck)
             {
                 foreach (Fact f in ind.AllFacts)
-                    if (f.IsCensusFact && f.FactDate.Overlaps(censusDate) && f.CensusReference != null && f.CensusReference.Status == status)
+                    if (f.IsCensusFact && f.FactDate.Overlaps(censusDate) && f.CensusReference is not null && f.CensusReference.Status == status)
                         facts.Add(new DisplayFact(ind, f));
             }
             if (status == FTAnalyzer.CensusReference.ReferenceStatus.GOOD)
@@ -294,7 +294,7 @@ namespace FTAnalyzer.Forms
 
         void AddIndividualsFacts(Individual individual)
         {
-            if (individual != null)
+            if (individual is not null)
             {
                 IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
                 foreach (Fact f in list)
@@ -304,14 +304,14 @@ namespace FTAnalyzer.Forms
 
         void AddIndividualsFacts(Individual individual, List<string> factTypes, List<string> excludedTypes, AlternateFacts alternateFacts)
         {
-            if (individual != null)
+            if (individual is not null)
             {
                 IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
                 if (alternateFacts == AlternateFacts.PreferredOnly)
                     list = list.Where(x => x.Preferred);
                 else if (alternateFacts == AlternateFacts.AlternateOnly)
                     list = list.Where(x => !x.Preferred);
-                if (factTypes.Count == 0 && excludedTypes != null && !list.Any(x => excludedTypes.Contains(x.FactTypeDescription)))
+                if (factTypes.Count == 0 && excludedTypes is not null && !list.Any(x => excludedTypes.Contains(x.FactTypeDescription)))
                     facts.Add(new DisplayFact(individual, new Fact(individual.IndividualID, Fact.REPORT, individual.BirthDate, individual.BirthLocation)));
                 else
                 {
@@ -324,7 +324,7 @@ namespace FTAnalyzer.Forms
 
         void AddDuplicateFacts(Individual individual, List<string> factTypes)
         {
-            if (individual != null)
+            if (individual is not null)
             {
                 IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
                 foreach (string factType in factTypes)
@@ -350,7 +350,7 @@ namespace FTAnalyzer.Forms
             DisplayFact previous = null;
             foreach (DisplayFact fact in facts.Cast<DisplayFact>())
             {
-                if (previous != null)
+                if (previous is not null)
                     if ((CensusRefReport && previous.CensusReference != fact.CensusReference) || (!CensusRefReport && previous.IndividualID != fact.IndividualID))
                         backColourGrey = !backColourGrey;
 #if !__MACOS__
@@ -415,7 +415,7 @@ namespace FTAnalyzer.Forms
                     }
                 }
                 cell.Style.BackColor = f.BackColour;
-                if (e.ColumnIndex == dgFacts.Columns["CensusReference"].Index && f.CensusReference != null && f.CensusReference.URL.Length > 0)
+                if (e.ColumnIndex == dgFacts.Columns["CensusReference"].Index && f.CensusReference is not null && f.CensusReference.URL.Length > 0)
                 {
                     cell.Style.ForeColor = Color.Blue;
                     cell.Style.Font = linkFont;

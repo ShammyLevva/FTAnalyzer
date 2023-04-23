@@ -44,7 +44,7 @@ namespace FTAnalyzer.Forms
                 Application.DoEvents();
             }
             GeoResponse.CResult.CGeometry.CViewPort viewport;
-            if (loc.IsGeoCoded(false) && loc.ViewPort != null)
+            if (loc.IsGeoCoded(false) && loc.ViewPort is not null)
             {
                 labMapLevel.Text = $"Previously Geocoded: {loc}";
                 viewport = MapTransforms.ReverseTransformViewport(loc.ViewPort);

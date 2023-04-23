@@ -66,7 +66,7 @@ namespace FTAnalyzer.Mapping
                     }
                 }
             }
-            if (clusterToAddTo != null && clusterToAddTo.IsFeatureInClusterBounds(row))
+            if (clusterToAddTo is not null && clusterToAddTo.IsFeatureInClusterBounds(row))
                 clusterToAddTo.AddFeature(row);
             else
             {

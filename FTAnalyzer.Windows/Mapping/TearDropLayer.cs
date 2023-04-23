@@ -78,12 +78,12 @@ namespace FTAnalyzer.Mapping
                 MapLocation ml = new(ind, f.Fact, f.FactDate);
                 AddFeatureDataRow(f, ml, GREY);
             }
-            if (ind.BirthFact != null)
+            if (ind.BirthFact is not null)
             {
                 MapLocation birth = new(ind, ind.BirthFact, ind.BirthDate);
                 AddFeatureDataRow(null, birth, RED);
             }
-            if (ind.DeathFact != null)
+            if (ind.DeathFact is not null)
             {
                 MapLocation death = new(ind, ind.DeathFact, ind.DeathDate);
                 AddFeatureDataRow(null, death, BLACK);

@@ -191,7 +191,7 @@ namespace FTAnalyzer.Forms
             {
                 Cursor = Cursors.WaitCursor;
                 FactLocation location = e.Node.Tag as FactLocation;
-                if (location != null)
+                if (location is not null)
                 {
                     People frmInd = new();
                     frmInd.SetLocation(location, e.Node.Level);
@@ -327,7 +327,7 @@ namespace FTAnalyzer.Forms
 
         void SetOpacity()
         {
-            if (mapBox1 != null && mapBox1.Map != null && mapBox1.Map.BackgroundLayer.Count > 1)
+            if (mapBox1 is not null && mapBox1.Map is not null && mapBox1.Map.BackgroundLayer.Count > 1)
             {
                 float opacity = tbOpacity.Value / 100.0f;
                 TileAsyncLayer layer = (TileAsyncLayer)mapBox1.Map.BackgroundLayer[1];

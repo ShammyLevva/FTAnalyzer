@@ -903,7 +903,7 @@ namespace FTAnalyzer.Utilities
                 cmd.Parameters.Add(param);
                 cmd.Prepare();
 
-                if (ind.CensusReference != null)
+                if (ind.CensusReference is not null)
                 {
                     cmd.Parameters[0].Value = ind.CensusDate.BestYear;
                     cmd.Parameters[1].Value = ind.CensusCountry;

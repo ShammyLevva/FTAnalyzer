@@ -30,7 +30,7 @@ namespace FTAnalyzer.Forms.Controls
         {
             try
             {
-                if (mainformTreeRootNode != null)
+                if (mainformTreeRootNode is not null)
                     return BuildTreeNodeArray(mainform);
                 progressBar.Value = 0;
                 int locationCount = 0;
@@ -170,21 +170,21 @@ namespace FTAnalyzer.Forms.Controls
             foreach (string part in parts)
             {
                 if (part.Length == 0 && !GeneralSettings.Default.AllowEmptyLocations) break;
-                if (mainformTreeRootNode != null && currentM != null)
+                if (mainformTreeRootNode is not null && currentM is not null)
                 {
                     TreeNode childM = currentM.Nodes.Find(part, false).FirstOrDefault();
                     currentM = childM;
                 }
-                if (placesTreeRootNode != null && currentP != null)
+                if (placesTreeRootNode is not null && currentP is not null)
                 {
                     TreeNode childP = currentP.Nodes.Find(part, false).FirstOrDefault();
                     currentP = childP;
                 }
             }
             // we should now have nodes to update   
-            if (mainformTreeRootNode != null && currentM != null)
+            if (mainformTreeRootNode is not null && currentM is not null)
                 SetTreeNodeImage(location, currentM);
-            if (placesTreeRootNode != null && currentP != null)
+            if (placesTreeRootNode is not null && currentP is not null)
                 SetTreeNodeImage(location, currentP);
         }
         #endregion

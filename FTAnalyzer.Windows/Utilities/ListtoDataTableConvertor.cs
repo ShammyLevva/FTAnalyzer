@@ -14,12 +14,12 @@ namespace FTAnalyzer.Utilities
             PropertyInfo[] Props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (PropertyInfo prop in Props)
             {
-                if (cols != null)
+                if (cols is not null)
                 {
                     // Only add a column if in the DataGrid and visible.
                     // Use the datagrid caption, not the property name.
                     var dgvCol = cols[prop.Name];
-                    if (dgvCol != null && dgvCol.Visible)
+                    if (dgvCol is not null && dgvCol.Visible)
                         dataTable.Columns.Add(dgvCol.HeaderText);
                 }
                 else
@@ -28,7 +28,7 @@ namespace FTAnalyzer.Utilities
                     dataTable.Columns.Add(prop.Name);
                 }
             }
-            if (items != null)
+            if (items is not null)
             {
                 foreach (T item in items)
                 {
@@ -38,7 +38,7 @@ namespace FTAnalyzer.Utilities
                     {
                         // if the property is not in the datagrid or not visible, don't add its value
                         if (cols == null ||
-                            (cols[Props[i].Name] != null && cols[Props[i].Name].Visible))
+                            (cols[Props[i].Name] is not null && cols[Props[i].Name].Visible))
                         {
                             //inserting property values to datatable rows
                             values[dex++] = Props[i].GetValue(item, null);

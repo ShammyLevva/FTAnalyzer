@@ -92,7 +92,7 @@ namespace FTAnalyzer
                 Cursor = Cursors.Default;
                 DialogResult result = editform.ShowDialog(this);
                 editform.Dispose(); // needs disposed as it is only hidden because it is a modal dialog
-                if (mapForm != null && mapForm.Visible)
+                if (mapForm is not null && mapForm.Visible)
                 {
                     if (mapForm is TimeLine line)
                         line.RefreshClusters();

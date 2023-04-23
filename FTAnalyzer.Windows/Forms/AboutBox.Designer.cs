@@ -16,7 +16,7 @@ namespace FTAnalyzer.Core.Displays
         {
             try
             {
-                if (disposing && (components != null))
+                if (disposing && (components is not null))
                 {
                     components.Dispose();
                 }

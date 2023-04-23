@@ -17,7 +17,7 @@ namespace FTAnalyzer.Utilities
             set
             {
                 ClearSelectedNodes();
-                if (value != null)
+                if (value is not null)
                 {
                     foreach (TreeNode node in value)
                     {
@@ -35,7 +35,7 @@ namespace FTAnalyzer.Utilities
             set
             {
                 ClearSelectedNodes();
-                if (value != null)
+                if (value is not null)
                 {
                     SelectNode(value);
                 }
@@ -59,7 +59,7 @@ namespace FTAnalyzer.Utilities
             // keyboard to select nodes
             try
             {
-                if (m_SelectedNode == null && this.TopNode != null)
+                if (m_SelectedNode == null && this.TopNode is not null)
                 {
                     ToggleNode(this.TopNode, true);
                     OnAfterSelect(new TreeViewEventArgs(m_SelectedNode));
@@ -104,7 +104,7 @@ namespace FTAnalyzer.Utilities
                 base.SelectedNode = null;
 
                 TreeNode node = this.GetNodeAt(e.Location);
-                if (node != null)
+                if (node is not null)
                 {
                     int leftBound = node.Bounds.X; // - 20; // Allow user to click on image
                     int rightBound = node.Bounds.Right + 10; // Give a little extra room
@@ -140,7 +140,7 @@ namespace FTAnalyzer.Utilities
             {
                 // Check to see if a node was clicked on 
                 TreeNode node = this.GetNodeAt(e.Location);
-                if (node != null)
+                if (node is not null)
                 {
                     if (ModifierKeys == Keys.None && m_SelectedNodes.Contains(node) && m_SelectedNodes.Count > 1)
                     {
@@ -172,7 +172,7 @@ namespace FTAnalyzer.Utilities
         //    {
         //        TreeNode node = e.Item as TreeNode;
 
-        //        if (node != null)
+        //        if (node is not null)
         //        {
         //            if (!m_SelectedNodes.Contains(node))
         //            {
@@ -236,7 +236,7 @@ namespace FTAnalyzer.Utilities
             {
                 // Nothing is selected in the tree, this isn't a good state
                 // select the top node
-                if (m_SelectedNode == null && this.TopNode != null)
+                if (m_SelectedNode == null && this.TopNode is not null)
                 {
                     ToggleNode(this.TopNode, true);
                     OnAfterSelect(new TreeViewEventArgs(m_SelectedNode));
@@ -252,7 +252,7 @@ namespace FTAnalyzer.Utilities
                         // Collapse an expanded node that has children
                         m_SelectedNode.Collapse();
                     }
-                    else if (m_SelectedNode.Parent != null)
+                    else if (m_SelectedNode.Parent is not null)
                     {
                         // Node is already collapsed, try to select its parent.
                         SelectSingleNode(m_SelectedNode.Parent);
@@ -274,7 +274,7 @@ namespace FTAnalyzer.Utilities
                 else if (e.KeyCode == Keys.Up)
                 {
                     // Select the previous node
-                    if (m_SelectedNode.PrevVisibleNode != null)
+                    if (m_SelectedNode.PrevVisibleNode is not null)
                     {
                         SelectNode(m_SelectedNode.PrevVisibleNode);
                     }
@@ -282,7 +282,7 @@ namespace FTAnalyzer.Utilities
                 else if (e.KeyCode == Keys.Down)
                 {
                     // Select the next node
-                    if (m_SelectedNode.NextVisibleNode != null)
+                    if (m_SelectedNode.NextVisibleNode is not null)
                     {
                         SelectNode(m_SelectedNode.NextVisibleNode);
                     }
@@ -339,7 +339,7 @@ namespace FTAnalyzer.Utilities
                             // Select the last node visible node in the tree.
                             // Don't expand branches incase the tree is virtual
                             TreeNode ndLast = Nodes[0].LastNode;
-                            while (ndLast.IsExpanded && (ndLast.LastNode != null))
+                            while (ndLast.IsExpanded && (ndLast.LastNode is not null))
                             {
                                 ndLast = ndLast.LastNode;
                             }
@@ -352,7 +352,7 @@ namespace FTAnalyzer.Utilities
                     // Select the highest node in the display
                     int nCount = this.VisibleCount;
                     TreeNode ndCurrent = m_SelectedNode;
-                    while ((nCount) > 0 && (ndCurrent.PrevVisibleNode != null))
+                    while ((nCount) > 0 && (ndCurrent.PrevVisibleNode is not null))
                     {
                         ndCurrent = ndCurrent.PrevVisibleNode;
                         nCount--;
@@ -364,7 +364,7 @@ namespace FTAnalyzer.Utilities
                     // Select the lowest node in the display
                     int nCount = this.VisibleCount;
                     TreeNode ndCurrent = m_SelectedNode;
-                    while ((nCount) > 0 && (ndCurrent.NextVisibleNode != null))
+                    while ((nCount) > 0 && (ndCurrent.NextVisibleNode is not null))
                     {
                         ndCurrent = ndCurrent.NextVisibleNode;
                         nCount--;
@@ -377,7 +377,7 @@ namespace FTAnalyzer.Utilities
                     this.ClearSelectedNodes();
                     this.CollapseAll();
                     TreeNode ndCurrent = this.TopNode;
-                    while (ndCurrent != null)
+                    while (ndCurrent is not null)
                     {
                         ToggleNode(ndCurrent, true);
                         ndCurrent = ndCurrent.NextNode;
@@ -391,7 +391,7 @@ namespace FTAnalyzer.Utilities
                     string sSearch = ((char)e.KeyValue).ToString();
 
                     TreeNode ndCurrent = m_SelectedNode;
-                    while ((ndCurrent.NextVisibleNode != null))
+                    while ((ndCurrent.NextVisibleNode is not null))
                     {
                         ndCurrent = ndCurrent.NextVisibleNode;
                         if (ndCurrent.Text.StartsWith(sSearch))

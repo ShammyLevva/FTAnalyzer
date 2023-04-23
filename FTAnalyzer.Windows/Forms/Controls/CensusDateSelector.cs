@@ -156,7 +156,7 @@ namespace FTAnalyzer.Forms.Controls
 
         protected void OnCensusChanged(EventArgs e)
         {
-            if (CensusChanged != null)
+            if (CensusChanged is not null)
             {
                 CensusChanged(this, e);
                 previousDate = (CensusDate)cbCensusDate.SelectedItem;

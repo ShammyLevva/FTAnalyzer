@@ -279,7 +279,7 @@ namespace FTAnalyzer
             }
             catch (Exception ex2)
             {
-                string message = ex2.Message + "\n" + (ex2.InnerException != null ? ex2.InnerException.Message : string.Empty);
+                string message = ex2.Message + "\n" + (ex2.InnerException is not null ? ex2.InnerException.Message : string.Empty);
                 MessageBox.Show($"Error: Problem processing your file. Please try again.\n" +
                     $"If this problem persists please report this at https://www.ftanalyzer.com/issues. Error was: {message}\n{ex2.InnerException}", "FTAnalyzer");
                 CleanUp(true);
@@ -712,7 +712,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             var ind = (Individual)dgIndividuals.CurrentRowDataBoundItem;
-            if (ind != null)
+            if (ind is not null)
             {
                 var outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
                 ft.UpdateRootIndividual(ind.IndividualID, null, outputText);
@@ -725,7 +725,7 @@ namespace FTAnalyzer
         void MnuSetRoot_Opened(object sender, EventArgs e)
         {
             var ind = (Individual)dgIndividuals.CurrentRowDataBoundItem;
-            if (ind != null)
+            if (ind is not null)
                 viewNotesToolStripMenuItem.Enabled = ind.HasNotes;
         }
 
@@ -733,7 +733,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Individual ind = (Individual)dgIndividuals.CurrentRowDataBoundItem;
-            if (ind != null)
+            if (ind is not null)
             {
                 Notes notes = new(ind);
                 notes.Show();
@@ -744,7 +744,7 @@ namespace FTAnalyzer
         void BtnShowMap_Click(object sender, EventArgs e)
         {
             float zoom = GetMapZoomLevel(out FactLocation loc);
-            if (loc != null && loc.IsGeoCoded(false))
+            if (loc is not null && loc.IsGeoCoded(false))
             {
                 string URL = $"https://www.google.com/maps/@{loc.Latitude},{loc.Longitude},{zoom}z";
                 SpecialMethods.VisitWebsite(URL);
@@ -758,7 +758,7 @@ namespace FTAnalyzer
             bool oldOSMap = (sender as Button).Name == "btnOldOSMap";
             {
                 float zoom = GetMapZoomLevel(out FactLocation loc);
-                if (loc != null && loc.IsGeoCoded(false))
+                if (loc is not null && loc.IsGeoCoded(false))
                 {
                     if (loc.IsWithinUKBounds)
                     {
@@ -786,7 +786,7 @@ namespace FTAnalyzer
                 {
                     case "Tree View":
                         TreeNode node = treeViewLocations.SelectedNode;
-                        if (node != null)
+                        if (node is not null)
                             loc = node.Text == "<blank>" ? null : ((FactLocation)node.Tag).GetLocation(node.Level);
                         break;
                     case "Countries":
@@ -1142,7 +1142,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             var location = e.Node.Tag as FactLocation;
-            if (location != null)
+            if (location is not null)
             {
                 if (ft.CountPeopleAtLocation(location, e.Node.Level) == 0)
                     UIHelpers.ShowMessage($"You have no one in your file at {location}.");
@@ -1320,7 +1320,7 @@ namespace FTAnalyzer
             if (e.ColumnIndex == 0 && e.RowIndex >= 0)
             {
                 DataGridViewCell cell = dgSurnames.Rows[e.RowIndex].Cells[nameof(IDisplaySurnames.Surname)];
-                if (cell.Value != null)
+                if (cell.Value is not null)
                 {
                     HourGlass(true);
                     Statistics.DisplayGOONSpage(cell.Value.ToString());
@@ -2072,9 +2072,9 @@ namespace FTAnalyzer
                         {
                             Facts newForm = form as Facts;
                             Facts oldForm = f as Facts;
-                            if (oldForm.Individual != null && oldForm.Individual.Equals(newForm.Individual))
+                            if (oldForm.Individual is not null && oldForm.Individual.Equals(newForm.Individual))
                                 toDispose.Add(f);
-                            if (oldForm.Family != null && oldForm.Family.Equals(newForm.Family))
+                            if (oldForm.Family is not null && oldForm.Family.Equals(newForm.Family))
                                 toDispose.Add(f);
                         }
                         else
@@ -2182,7 +2182,7 @@ namespace FTAnalyzer
             for (int i = 0; i < 5; i++)
             {
                 string name = Settings.Default.RecentFiles[i];
-                if (name != null && name.Length > 0 && File.Exists(name))
+                if (name is not null && name.Length > 0 && File.Exists(name))
                 {
                     added = true;
                     mnuRecent.DropDownItems[i].Visible = true;
@@ -2201,7 +2201,7 @@ namespace FTAnalyzer
         {
             string[] recent = new string[5];
 
-            if (Settings.Default.RecentFiles != null)
+            if (Settings.Default.RecentFiles is not null)
             {
                 int j = 1;
                 for (int i = 0; i < Settings.Default.RecentFiles.Count; i++)
@@ -2238,7 +2238,7 @@ namespace FTAnalyzer
             {
                 string famID = (string)dgFamilies.CurrentRow.Cells[nameof(IDisplayFamily.FamilyID)].Value;
                 Family fam = ft.GetFamily(famID);
-                if (fam != null)
+                if (fam is not null)
                 {
                     Facts factForm = new(fam);
                     DisposeDuplicateForms(factForm);
@@ -2395,7 +2395,7 @@ namespace FTAnalyzer
         void ShowFacts(string indID, bool offset = false)
         {
             Individual ind = ft.GetIndividual(indID);
-            if (ind != null)
+            if (ind is not null)
             {
                 Facts factForm = new(ind);
                 DisposeDuplicateForms(factForm);
@@ -2411,7 +2411,7 @@ namespace FTAnalyzer
         void ShowFamilyFacts(string famID, bool offset = false)
         {
             Family fam = ft.GetFamily(famID);
-            if (fam != null)
+            if (fam is not null)
             {
                 Facts factForm = new(fam);
                 DisposeDuplicateForms(factForm);
@@ -2687,7 +2687,7 @@ namespace FTAnalyzer
             tsHintsLabel.Text = string.Empty;
             duplicateData = await Task.Run(() => ft.GenerateDuplicatesList(score, ignoreUnknownTwins, progress, progressText, maxScore, cts.Token)).ConfigureAwait(true);
             cts = null;
-            if (duplicateData != null)
+            if (duplicateData is not null)
             {
                 dgDuplicates.DataSource = duplicateData;
                 rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
@@ -2726,7 +2726,7 @@ namespace FTAnalyzer
 
         void BtnCancelDuplicates_Click(object sender, EventArgs e)
         {
-            if (cts != null)
+            if (cts is not null)
             {
                 cts.Cancel();
                 MessageBox.Show("Possible Duplicate Search Cancelled", "FTAnalyzer");
@@ -2938,7 +2938,7 @@ namespace FTAnalyzer
             Predicate<Individual> filter = CreateIndividualCensusFilter(true, txtCensusSurname.Text, chkAnyCensusYear.Checked);
             foreach (Individual ind in ft.AllIndividuals.Filter(filter))
                 foreach (Fact f in ind.AllFacts)
-                    if (f.IsCensusFact && f.CensusReference != null && f.CensusReference.Reference.Length > 0)
+                    if (f.IsCensusFact && f.CensusReference is not null && f.CensusReference.Reference.Length > 0)
                         censusRefs.Add(new DisplayFact(ind, f));
             IEnumerable<string> distinctRefs = censusRefs.Select(x => x.FactDate.StartDate.Year + x.CensusReference.ToString()).Distinct();
             tspbTabProgress.Maximum = distinctRefs.Count() + 1;
@@ -3044,7 +3044,7 @@ namespace FTAnalyzer
                 f = cmbColourFamily.SelectedItem as ComboBoxFamily; // store the previous value to set it again after
             ClearColourFamilyCombo();
             bool stillThere = UpdateColourFamilyComboBox(f);
-            if (f != null && stillThere)  // the previously selected value is still present so select it
+            if (f is not null && stillThere)  // the previously selected value is still present so select it
                 cmbColourFamily.SelectedItem = f;
         }
 
@@ -3149,7 +3149,7 @@ namespace FTAnalyzer
         void CtxViewNotes_Opening(object sender, CancelEventArgs e)
         {
             Individual ind = GetContextIndividual(sender);
-            if (ind != null)
+            if (ind is not null)
                 mnuViewNotes.Enabled = ind.HasNotes;
             else
                 e.Cancel = true;
@@ -3163,7 +3163,7 @@ namespace FTAnalyzer
                 cms = strip;
             if (sender is ToolStripMenuItem tsmi)
                 cms = (ContextMenuStrip)tsmi.Owner;
-            if (cms != null && cms.Tag != null)
+            if (cms is not null && cms.Tag is not null)
                 ind = (Individual)cms.Tag;
             return ind;
         }
@@ -3172,7 +3172,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Individual ind = GetContextIndividual(sender);
-            if (ind != null)
+            if (ind is not null)
             {
                 Notes notes = new(ind);
                 notes.Show();
@@ -3353,7 +3353,7 @@ namespace FTAnalyzer
         void MnuWorldWarsToExcel_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            if (warDeadFilter != null)
+            if (warDeadFilter is not null)
             {
                 ListtoDataTableConvertor convertor = new();
                 List<IExportIndividual> warDeadList = ft.GetExportWorldWars(warDeadFilter).ToList();
@@ -3371,7 +3371,7 @@ namespace FTAnalyzer
             HourGlass(true);
             ListtoDataTableConvertor convertor = new();
             SortableBindingList<IDisplaySurnames> stats;
-            if (dgSurnames.DataSource != null)
+            if (dgSurnames.DataSource is not null)
                 stats = dgSurnames.DataSource;
             else
             {

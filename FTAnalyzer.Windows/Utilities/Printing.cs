@@ -31,13 +31,13 @@ namespace FTAnalyzer.Utilities
                 float fontHeight = PrintFont.GetHeight(e.Graphics);
                 using SolidBrush PrintBrush = new(Color.Black);
                 float YPosition = TopMargin;
-                while (YPosition < maxHeight && ((Line = reader.ReadLine()) != null))
+                while (YPosition < maxHeight && ((Line = reader.ReadLine()) is not null))
                 {
                     SizeF sf = e.Graphics.MeasureString(Line, PrintFont, maxWidth);
                     e.Graphics.DrawString(Line, PrintFont, PrintBrush, new RectangleF(new PointF(LeftMargin, YPosition), sf), StringFormat.GenericTypographic);
                     YPosition += sf.Height;
                 }
-                e.HasMorePages = Line != null;
+                e.HasMorePages = Line is not null;
             }
             catch (Exception) { }
         }

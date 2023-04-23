@@ -17,7 +17,7 @@ namespace FTAnalyzer.UserControls
 		{
             try
             {
-                if (disposing && (components != null))
+                if (disposing && (components is not null))
                 {
                     components.Dispose();
                 }

@@ -181,7 +181,7 @@ namespace FTAnalyzer.Forms
             {
                 DataGridViewCell cell = dgCensus.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 CensusIndividual ind = dgCensus.Rows[e.RowIndex].DataBoundItem as CensusIndividual;
-                if (ind.CellStyle != null)
+                if (ind.CellStyle is not null)
                 {
                     e.CellStyle = ind.CellStyle;
                     cell.ToolTipText = GetTooltipText(ind.CellStyle);
@@ -207,7 +207,7 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.WaitCursor;
             CensusIndividual ds = dgCensus.CurrentRow == null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
             FactLocation loc = ds?.CensusLocation;
-            if (loc != null)
+            if (loc is not null)
             {   // Do geo coding stuff
                 GoogleMap.ShowLocation(loc, loc.Level);
             }
@@ -219,7 +219,7 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.WaitCursor;
             CensusIndividual ds = dgCensus.CurrentRow == null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
             FactLocation loc = ds?.CensusLocation;
-            if (loc != null)
+            if (loc is not null)
             {   // Do geo coding stuff
                 BingOSMap frmBingMap = new();
                 if (frmBingMap.SetLocation(loc, loc.Level))
@@ -232,7 +232,7 @@ namespace FTAnalyzer.Forms
 
         void DgCensus_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dgCensus.CurrentRow != null && !CensusDate.VALUATIONROLLS.Contains(CensusDate))
+            if (e.RowIndex >= 0 && dgCensus.CurrentRow is not null && !CensusDate.VALUATIONROLLS.Contains(CensusDate))
             {
                 CensusIndividual ds = (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
                 if (ModifierKeys.Equals(Keys.Shift))
@@ -290,7 +290,7 @@ namespace FTAnalyzer.Forms
 
         void MnuViewFacts_Click(object sender, EventArgs e)
         {
-            if (dgCensus.CurrentRow != null)
+            if (dgCensus.CurrentRow is not null)
             {
                 CensusIndividual ds = (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
                 Facts factForm = new(ds);

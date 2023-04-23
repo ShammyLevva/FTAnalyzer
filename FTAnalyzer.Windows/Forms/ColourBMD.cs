@@ -135,7 +135,7 @@ namespace FTAnalyzer.Forms
                 DataGridViewCell cell = dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 BMDColours value = (BMDColours)cell.Value;
                 styles.TryGetValue(value, out style);
-                if (style != null)
+                if (style is not null)
                 {
                     e.CellStyle.BackColor = style.BackColor;
                     e.CellStyle.ForeColor = style.ForeColor;
@@ -399,7 +399,7 @@ namespace FTAnalyzer.Forms
 
         void MnuViewFacts_Click(object sender, EventArgs e)
         {
-            if (dgBMDReportSheet.CurrentRow != null)
+            if (dgBMDReportSheet.CurrentRow is not null)
             {
                 IDisplayColourBMD ds = (IDisplayColourBMD)dgBMDReportSheet.CurrentRow.DataBoundItem;
                 Individual ind = FamilyTree.Instance.GetIndividual(ds.IndividualID);
@@ -421,7 +421,7 @@ namespace FTAnalyzer.Forms
 
         void DgBMDReportSheet_SelectionChanged(object sender, EventArgs e)
         {
-            if (!settingSelections && dgBMDReportSheet.CurrentRow != null)
+            if (!settingSelections && dgBMDReportSheet.CurrentRow is not null)
             {
                 settingSelections = true;
                 foreach (DataGridViewCell cell in dgBMDReportSheet.CurrentRow.Cells)
