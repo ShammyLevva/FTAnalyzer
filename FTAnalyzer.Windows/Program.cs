@@ -1,6 +1,7 @@
 using FTAnalyzer.Utilities;
 using FTAnalyzer.Exports;
 using SharpMap;
+using FTAnalyzer.Mapping;
 
 namespace FTAnalyzer.Windows
 {
@@ -8,6 +9,7 @@ namespace FTAnalyzer.Windows
     {
         public static HttpClient Client = new();
         public static LostCousinsClient LCClient = new();
+        public static GoogleClient GoogleClient = new();
         
         /// <summary>
         ///  The main entry point for the application.

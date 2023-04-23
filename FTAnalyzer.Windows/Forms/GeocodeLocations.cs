@@ -87,7 +87,7 @@ namespace FTAnalyzer.Forms
             foreach (KeyValuePair<FactLocation.Geocode, string> item in FactLocation.GEOCODES.OrderBy(x => x.Value))
             {
                 string geocode = item.Value;
-                ToolStripMenuItem menu = new ToolStripMenuItem(geocode)
+                ToolStripMenuItem menu = new(geocode)
                 {
                     Name = geocode,
                     Checked = Application.UserAppDataRegistry.GetValue(geocode, "True").Equals("True"),
@@ -99,14 +99,14 @@ namespace FTAnalyzer.Forms
                 mnuGeocodeStatus.DropDownItems.Add(menu);
             }
 
-            ToolStripMenuItem placesMenu = new ToolStripMenuItem("Places")
+            ToolStripMenuItem placesMenu = new("Places")
             {
                 Name = "Places"
             };
 
             foreach (string resultType in GoogleMap.RESULT_TYPES)
             {
-                ToolStripMenuItem menu = new ToolStripMenuItem(resultType)
+                ToolStripMenuItem menu = new(resultType)
                 {
                     Name = resultType,
                     Checked = Application.UserAppDataRegistry.GetValue(resultType, "True").Equals("True"),
@@ -181,7 +181,7 @@ namespace FTAnalyzer.Forms
                 dgLocations.Sort(sortCol, sortOrder);
             dgLocations.Refresh();
             SetStatusText();
-            txtLocations.Text = statusText + " Displaying: " + dgLocations.RowCount + ". ";
+            txtLocations.Text = $"{statusText} Displaying: {dgLocations.RowCount}. ";
             if(loc != null) 
                 SelectLocation(loc);
             Cursor = Cursors.Default;
@@ -205,7 +205,7 @@ namespace FTAnalyzer.Forms
         {
             if (AllFiltersActive(false))
                 return new SortableBindingList<IDisplayGeocodedLocation>(locations);
-            List<IDisplayGeocodedLocation> results = new List<IDisplayGeocodedLocation>();
+            List<IDisplayGeocodedLocation> results = new();
             ToolStripMenuItem places = mnuFoundResultType.DropDownItems["Places"] as ToolStripMenuItem;
             ToolStripMenuItem[] list = new ToolStripMenuItem[places.DropDownItems.Count + mnuFoundResultType.DropDownItems.Count + noneOfTheAboveMenus.Length];
             mnuFoundResultType.DropDownItems.CopyTo(list, 0);
@@ -237,7 +237,7 @@ namespace FTAnalyzer.Forms
         void CheckGoogleStatusCodes(List<IDisplayGeocodedLocation> input)
         {
             noneOfTheAbove = new HashSet<string>();
-            Dictionary<string, List<IDisplayGeocodedLocation>> results = new Dictionary<string, List<IDisplayGeocodedLocation>>();
+            Dictionary<string, List<IDisplayGeocodedLocation>> results = new();
             foreach (IDisplayGeocodedLocation loc in input)
             {
                 if (loc.FoundResultType.Length > 0)
@@ -262,7 +262,7 @@ namespace FTAnalyzer.Forms
                 int index = 0;
                 foreach (string resultType in noneOfTheAbove)
                 {
-                    ToolStripMenuItem menu = new ToolStripMenuItem(resultType)
+                    ToolStripMenuItem menu = new(resultType)
                     {
                         Name = resultType,
                         Checked = true
@@ -400,7 +400,7 @@ namespace FTAnalyzer.Forms
         {
             try
             {
-                EditLocation editform = new EditLocation(loc);
+                EditLocation editform = new(loc);
                 Cursor = Cursors.Default;
                 mnuPasteLocation.Enabled = false;
                 CopyLocation = FactLocation.UNKNOWN_LOCATION;
@@ -517,7 +517,7 @@ namespace FTAnalyzer.Forms
             {
                 if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy || EmptyViewPortsBackgroundWorker.IsBusy)
                 {
-                    MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
+                    MessageBox.Show(new Form() { TopMost = true }, "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
                 }
                 else
                 {
@@ -551,7 +551,7 @@ namespace FTAnalyzer.Forms
             {
                 if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy || EmptyViewPortsBackgroundWorker.IsBusy)
                 {
-                    MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
+                    MessageBox.Show(new Form() { TopMost = true }, "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
                 }
                 else
                 {
@@ -622,7 +622,7 @@ namespace FTAnalyzer.Forms
                     string status = $"Googled empty ViewPorts and have updated {updated}. Done {vpchecked} of {maxtoCheck}.  ";
                     worker.ReportProgress(percent, status);
                     if (worker.CancellationPending ||
-                        (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text.Substring(0, 3).Equals("Max")))
+                        (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max")))
                     {
                         e.Cancel = true;
                         break;
@@ -631,7 +631,7 @@ namespace FTAnalyzer.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error Google Geocoding: {ex.Message}", "FTAnalyzer Geocoding");
+                MessageBox.Show(new Form() { TopMost = true }, $"Error Google Geocoding: {ex.Message}", "FTAnalyzer Geocoding");
             }
         }
 
@@ -677,7 +677,7 @@ namespace FTAnalyzer.Forms
                                 int foundLevel = -1;
                                 string address = string.Empty;
                                 string resultType = string.Empty;
-                                GeoResponse.CResult.CGeometry.CViewPort viewport = new GeoResponse.CResult.CGeometry.CViewPort();
+                                GeoResponse.CResult.CGeometry.CViewPort viewport = new();
                                 loc.GeocodeStatus = FactLocation.Geocode.NO_MATCH;
                                 Envelope bbox = Countries.BoundingBox(loc.Country);
                                 if (res.Status == "OK")
@@ -763,21 +763,21 @@ namespace FTAnalyzer.Forms
                     worker.ReportProgress(percent, status);
 
                     if (worker.CancellationPending ||
-                        ((txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text.Substring(0, 3).Equals("Max"))))
+                        ((txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max"))))
                     {
                         e.Cancel = true;
                         break;
                     }
                 }
                 ft.ClearLocations(); // Locations tab needs to be invalidated so it refreshes
-                if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text.Substring(0, 3).Equals("Max"))
-                    MessageBox.Show($"Finished Google Geocoding.\n{txtGoogleWait.Text}\nPlease wait 24hrs before trying again as Google\nwill not allow further geocoding before then.", "FTAnalyzer Geocoding");
+                if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max"))
+                    MessageBox.Show(new Form() { TopMost = true }, $"Finished Google Geocoding.\n{txtGoogleWait.Text}\nPlease wait 24hrs before trying again as Google\nwill not allow further geocoding before then.", "FTAnalyzer Geocoding");
                 else
-                    MessageBox.Show("Finished Google Geocoding.", "FTAnalyzer Geocoding");
+                    MessageBox.Show(new Form() { TopMost = true }, "Finished Google Geocoding.", "FTAnalyzer Geocoding");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error Google Geocoding: {ex.Message}", "FTAnalyzer Geocoding");
+                MessageBox.Show(new Form() { TopMost = true }, $"Error Google Geocoding: {ex.Message}", "FTAnalyzer Geocoding");
             }
         }
 
@@ -888,7 +888,7 @@ namespace FTAnalyzer.Forms
         {
             if (reverseGeocodeBackgroundWorker.IsBusy)
             {
-                MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
+                MessageBox.Show(new Form() { TopMost = true }, "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
             }
             else
             {
@@ -952,25 +952,25 @@ namespace FTAnalyzer.Forms
                     count++;
                     if (count > total) total = count; // incase main thread has added extra items to queue
                     int percent = (int)Math.Truncate(count * 100.0 / total);
-                    string status = "Finding locations from Latitude/Longitude. Done " + count + " of " + total + ".  (Includes all blank locations in database)";
+                    string status = $"Finding locations from Latitude/Longitude. Done {count} of {total}.  (Includes all blank locations in database)";
                     worker.ReportProgress(percent, status);
 
                     if (worker.CancellationPending ||
-                        ((txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text.Substring(0, 3).Equals("Max"))))
+                        ((txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max"))))
                     {
                         e.Cancel = true;
                         break;
                     }
                 }
                 ft.ClearLocations(); // Locations tab needs to be invalidated so it refreshes
-                if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text.Substring(0, 3).Equals("Max"))
-                    MessageBox.Show("Finished Reverse Geocoding.\n" + txtGoogleWait.Text + "\nPlease wait 24hrs before trying again as Google\nwill not allow further reverse geocoding before then.", "FTAnalyzer Geocoding");
+                if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max"))
+                    MessageBox.Show(new Form() { TopMost = true }, $"Finished Reverse Geocoding.\n{txtGoogleWait.Text}\nPlease wait 24hrs before trying again as Google\nwill not allow further reverse geocoding before then.", "FTAnalyzer Geocoding");
                 else
-                    MessageBox.Show("Finished Reverse Geocoding.", "FTAnalyzer Geocoding");
+                    MessageBox.Show(new Form() { TopMost = true }, "Finished Reverse Geocoding.", "FTAnalyzer Geocoding");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error Reverse Geocoding : " + ex.Message, "FTAnalyzer Geocoding");
+                MessageBox.Show(new Form() { TopMost = true }, "Error Reverse Geocoding : " + ex.Message, "FTAnalyzer Geocoding");
             }
         }
 
@@ -1078,7 +1078,7 @@ namespace FTAnalyzer.Forms
         {
             if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy)
             {
-                MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
+                MessageBox.Show(new Form() { TopMost = true }, "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
             }
             else
             {
@@ -1099,7 +1099,7 @@ namespace FTAnalyzer.Forms
             if (LoadOS50kGazetteer())
             {
                 ProcessOS50kGazetteerData(worker, e);
-                MessageBox.Show("Finished Ordnance Survey Geocoding", "FTAnalyzer Geocoding");
+                MessageBox.Show(new Form() { TopMost = true }, "Finished Ordnance Survey Geocoding", "FTAnalyzer Geocoding");
             }
         }
 
@@ -1124,7 +1124,7 @@ namespace FTAnalyzer.Forms
             catch (Exception e)
             {
                 //log.Warn("Failed to load OS50k Gazetteer error was : " + e.Message);
-                MessageBox.Show("Failed to load OS50k Gazetteer error was : " + e.Message);
+                MessageBox.Show(new Form() { TopMost = true }, $"Failed to load OS50k Gazetteer error was : {e.Message}");
             }
             OS50kDictionary = null; // only reach here on exception so discard partially loaded file
             OS50k = null;
@@ -1134,23 +1134,21 @@ namespace FTAnalyzer.Forms
         public void ReadOS50kGazetteer(string filename)
         {
             Encoding isoWesternEuropean = Encoding.GetEncoding(28591);
-            using (StreamReader reader = new StreamReader(filename, isoWesternEuropean))
+            using StreamReader reader = new(filename, isoWesternEuropean);
+            while (!reader.EndOfStream)
             {
-                while (!reader.EndOfStream)
+                string line = reader.ReadLine();
+                if (line.IndexOf(':') > 0)
                 {
-                    string line = reader.ReadLine();
-                    if (line.IndexOf(':') > 0)
+                    OS50kGazetteer gaz = new(line);
+                    string key = gaz.DefinitiveName.ToLower();
+                    if (!OS50kDictionary.TryGetValue(key, out IList<OS50kGazetteer> list))
                     {
-                        OS50kGazetteer gaz = new OS50kGazetteer(line);
-                        string key = gaz.DefinitiveName.ToLower();
-                        if (!OS50kDictionary.TryGetValue(key, out IList<OS50kGazetteer> list))
-                        {
-                            list = new List<OS50kGazetteer>();
-                            OS50kDictionary.Add(key, list);
-                        }
-                        list.Add(gaz);
-                        OS50k.Add(gaz);
+                        list = new List<OS50kGazetteer>();
+                        OS50kDictionary.Add(key, list);
                     }
+                    list.Add(gaz);
+                    OS50k.Add(gaz);
                 }
             }
             //CheckGazetteer();
@@ -1158,28 +1156,26 @@ namespace FTAnalyzer.Forms
 
         public void CheckGazetteer()
         {
-            List<string> endings = new List<string>();
-            using (StreamWriter sw = new StreamWriter(@"C:\Maps\FTAnalyzer\endings.csv", false))
+            List<string> endings = new();
+            using StreamWriter sw = new(@"C:\Maps\FTAnalyzer\endings.csv", false);
+            sw.WriteLine("Ending,PlaceName,CountyCode,CountyName,FeatureCode,Latitude,Longitude,ParishName");
+            foreach (KeyValuePair<string, IList<OS50kGazetteer>> kvp in OS50kDictionary)
             {
-                sw.WriteLine("Ending,PlaceName,CountyCode,CountyName,FeatureCode,Latitude,Longitude,ParishName");
-                foreach(KeyValuePair<string, IList<OS50kGazetteer>> kvp in OS50kDictionary)
+                string name = kvp.Key;
+                OS50kGazetteer gaz = kvp.Value[0];
+                if (name.LastIndexOf(" ") > 0 && name.LastIndexOf(" ") + 4 >= name.ToString().Length)
                 {
-                    string name = kvp.Key;
-                    OS50kGazetteer gaz = kvp.Value[0];
-                    if(name.LastIndexOf(" ") > 0 && name.LastIndexOf(" ") + 4 >= name.ToString().Length)
+                    string ending = name[(name.LastIndexOf(" ") + 1)..].Trim();
+                    if (ending != "tor" && ending != "bay" && ending != "way" && ending != "law" && ending != "fen" && ending != "row" && ending != "lea"
+                         && ending != "top" && ending != "ure" && ending != "end" && ending != "oak" && ending != "den" && ending != "dun" && ending != "lee"
+                         && ending != "dam" && ending != "gap" && ending != "sea" && ending != "dee" && ending != "don" && ending != "dye" && ending != "bog"
+                         && ending != "bar" && ending != "low" && ending != "mor" && ending != "ard" && ending != "ark" && ending != "ash" && ending != "ayr"
+                         && ending != "ban" && ending != "bed" && ending != "beg" && ending != "box" && ending != "boy" && ending != "cap" && ending != "cat"
+                         && ending != "dhu" && ending != "dod" && ending != "elm" && ending != "esk")
                     {
-                        string ending = name.Substring(name.LastIndexOf(" ") + 1).Trim();
-                        if (ending != "tor" && ending != "bay" && ending != "way" && ending != "law" && ending != "fen" && ending != "row" && ending != "lea"
-                             && ending != "top" && ending != "ure" && ending != "end" && ending != "oak" && ending != "den" && ending != "dun" && ending != "lee"
-                             && ending != "dam" && ending != "gap" && ending != "sea" && ending != "dee" && ending != "don" && ending != "dye" && ending != "bog"
-                             && ending != "bar" && ending != "low" && ending != "mor" && ending != "ard" && ending != "ark" && ending != "ash" && ending != "ayr"
-                             && ending != "ban" && ending != "bed" && ending != "beg" && ending != "box" && ending != "boy" && ending != "cap" && ending != "cat"
-                             && ending != "dhu" && ending != "dod" && ending != "elm" && ending != "esk")
-                        {
-                            if (!endings.Contains(ending))
-                                endings.Add(ending);
-                            sw.WriteLine(ending + "," + gaz.DefinitiveName + "," + gaz.CountyCode + "," + gaz.CountyName + "," + gaz.FeatureCode + "," + gaz.Latitude + "," + gaz.Longitude + "," + gaz.ParishName);
-                        }
+                        if (!endings.Contains(ending))
+                            endings.Add(ending);
+                        sw.WriteLine(ending + "," + gaz.DefinitiveName + "," + gaz.CountyCode + "," + gaz.CountyName + "," + gaz.FeatureCode + "," + gaz.Latitude + "," + gaz.Longitude + "," + gaz.ParishName);
                     }
                 }
             }
@@ -1190,7 +1186,7 @@ namespace FTAnalyzer.Forms
         public void ProcessOS50kGazetteerData(BackgroundWorker worker, DoWorkEventArgs e)
         {
             IEnumerable<FactLocation> toSearch = FactLocation.AllLocations;
-            List<FactLocation> failedToFind = new List<FactLocation>();
+            List<FactLocation> failedToFind = new();
             noCounty = new Dictionary<FactLocation, IList<OS50kGazetteer>>();
             int total = FactLocation.LocationsCount;
             int count = 0;
@@ -1235,41 +1231,39 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void GenerateTestGedcom(List<FactLocation> failedToFind, string name, Dictionary<FactLocation, IList<OS50kGazetteer>> noCounty)
+        static void GenerateTestGedcom(List<FactLocation> failedToFind, string name, Dictionary<FactLocation, IList<OS50kGazetteer>> noCounty)
         {
             if (Directory.Exists(MappingSettings.Default.CustomMapPath))
             {
                 string filename = Path.Combine(MappingSettings.Default.CustomMapPath, name);
-                using (StreamWriter stream = new StreamWriter(filename))
+                using StreamWriter stream = new(filename);
+                stream.WriteLine("0 HEAD");
+                stream.WriteLine("0 @I@ INDI");
+                stream.WriteLine("1 NAME Test /Person/");
+                DateTime date = new(1800, 1, 1);
+                if (failedToFind != null)
                 {
-                    stream.WriteLine("0 HEAD");
-                    stream.WriteLine("0 @I@ INDI");
-                    stream.WriteLine("1 NAME Test /Person/");
-                    DateTime date = new DateTime(1800, 1, 1);
-                    if (failedToFind != null)
+                    foreach (FactLocation loc in failedToFind)
                     {
-                        foreach (FactLocation loc in failedToFind)
-                        {
-                            stream.WriteLine("1 RESI");
-                            stream.WriteLine("2 DATE " + date.ToString("dd MMM yyyy").ToUpper());
-                            stream.WriteLine("2 PLAC " + loc.ToString());
-                            date = date.AddDays(1);
-                        }
+                        stream.WriteLine("1 RESI");
+                        stream.WriteLine("2 DATE " + date.ToString("dd MMM yyyy").ToUpper());
+                        stream.WriteLine("2 PLAC " + loc.ToString());
+                        date = date.AddDays(1);
                     }
-                    if (noCounty != null)
+                }
+                if (noCounty != null)
+                {
+                    foreach (KeyValuePair<FactLocation, IList<OS50kGazetteer>> kvp in noCounty)
                     {
-                        foreach (KeyValuePair<FactLocation, IList<OS50kGazetteer>> kvp in noCounty)
-                        {
-                            stream.WriteLine("1 RESI");
-                            stream.WriteLine("2 DATE " + date.ToString("dd MMM yyyy").ToUpper());
-                            stream.WriteLine("2 PLAC " + kvp.Key.ToString());
-                            StringBuilder sb = new StringBuilder();
-                            sb.Append("2 NOTE Found " + kvp.Value[0].DefinitiveName + " in ");
-                            foreach (OS50kGazetteer gaz in kvp.Value)
-                                sb.Append(gaz.CountyCode + ": " + gaz.CountyName + ", ");
-                            stream.WriteLine(sb.ToString());
-                            date = date.AddDays(1);
-                        }
+                        stream.WriteLine("1 RESI");
+                        stream.WriteLine("2 DATE " + date.ToString("dd MMM yyyy").ToUpper());
+                        stream.WriteLine("2 PLAC " + kvp.Key.ToString());
+                        StringBuilder sb = new();
+                        sb.Append("2 NOTE Found " + kvp.Value[0].DefinitiveName + " in ");
+                        foreach (OS50kGazetteer gaz in kvp.Value)
+                            sb.Append(gaz.CountyCode + ": " + gaz.CountyName + ", ");
+                        stream.WriteLine(sb.ToString());
+                        date = date.AddDays(1);
                     }
                 }
             }
@@ -1376,8 +1370,8 @@ namespace FTAnalyzer.Forms
         void SetOSGeocoding(FactLocation location, OS50kGazetteer gaz, int level, bool fuzzy)
         {
             int expandBy = 2500;
-            Coordinate p = new Coordinate(gaz.Point.X, gaz.Point.Y);
-            Envelope env = new Envelope(p, p);
+            Coordinate p = new(gaz.Point.X, gaz.Point.Y);
+            Envelope env = new(p, p);
             env.ExpandBy(expandBy); // OS50k is 1km sq expand by 2.5km to ensure text is visible.
             location.Latitude = gaz.Latitude;
             location.Longitude = gaz.Longitude;
