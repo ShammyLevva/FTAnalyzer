@@ -8,6 +8,8 @@ using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Web;
+using FTAnalyzer.Windows;
+using Newtonsoft.Json;
 
 namespace FTAnalyzer.Forms
 {
@@ -175,7 +177,7 @@ namespace FTAnalyzer.Forms
             }
             string encodedAddress = HttpUtility.UrlEncode(text.Replace(" ", "+"));
             string url = $"https://maps.googleapis.com/maps/api/geocode/json?address={encodedAddress}{bounds}{tld}&key={GoogleAPIKey.KeyValue}";
-            return GetGeoResponse(url, text);
+            return GetGeoResponseAsync(url, text).Result;
         }
 
         public static GeoResponse CallGoogleReverseGeocode(double latitude, double longitude)
@@ -185,32 +187,34 @@ namespace FTAnalyzer.Forms
             string region = longitude >= -7.974074 && longitude <= 1.879409 && latitude >= 49.814376 && latitude <= 60.970872 ?
                 "&region=uk" : string.Empty;
             string url = $"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}{region}&key={GoogleAPIKey.KeyValue}";
-            return GetGeoResponse(url, $"latlng={lat},{lng}{region}");
+            return GetGeoResponseAsync(url, $"latlng={lat},{lng}{region}").Result;
         }
 
-        static GeoResponse GetGeoResponse(string url, string text)
+        static async Task<GeoResponse> GetGeoResponseAsync(string url, string text)
         {
             GeoResponse res;
-            HttpWebRequest request;
+            HttpRequestMessage request= new();
             try
             {
-                request = WebRequest.Create(new Uri(url)) as HttpWebRequest;
-                request.Timeout = 3000; // set timeout to 5 seconds from default 100 seconds
-                request.ReadWriteTimeout = 10000;
-                request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
-                request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-                DataContractJsonSerializer serializer = new(typeof(GeoResponse));
-                if (request.Proxy is WebProxy proxy)
-                {
-                    string proxyuri = proxy.GetProxy(request.RequestUri).ToString();
-                    request.UseDefaultCredentials = true;
-                    request.Proxy = new WebProxy(proxyuri, false)
-                    {
-                        Credentials = CredentialCache.DefaultCredentials
-                    };
-                }
-                using Stream stream = request.GetResponse().GetResponseStream();
-                res = (GeoResponse)serializer.ReadObject(stream);
+                request.Headers.Add("Accept-Encoding", "gzip,deflate");
+                request.RequestUri = new Uri(url);
+
+                HttpResponseMessage response = await Program.GoogleClient.SendAsync(request);
+
+                //request.ReadWriteTimeout = 10000;
+
+                //if (request.Proxy is WebProxy proxy)
+                //{
+                //    string proxyuri = proxy.GetProxy(request.RequestUri).ToString();
+                //    request.UseDefaultCredentials = true;
+                //    request.Proxy = new WebProxy(proxyuri, false)
+                //    {
+                //        Credentials = CredentialCache.DefaultCredentials
+                //    };
+                //}
+                response.EnsureSuccessStatusCode();
+                string jsonString = await response.Content.ReadAsStringAsync();
+                res = JsonConvert.DeserializeObject<GeoResponse>(jsonString);
             }
             catch (WebException ex)
             {

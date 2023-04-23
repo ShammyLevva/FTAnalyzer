@@ -517,7 +517,7 @@ namespace FTAnalyzer.Forms
             {
                 if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy || EmptyViewPortsBackgroundWorker.IsBusy)
                 {
-                    MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
+                    MessageBox.Show(new Form() { TopMost = true }, "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
                 }
                 else
                 {
@@ -551,7 +551,7 @@ namespace FTAnalyzer.Forms
             {
                 if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy || EmptyViewPortsBackgroundWorker.IsBusy)
                 {
-                    MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
+                    MessageBox.Show(new Form() { TopMost = true }, "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
                 }
                 else
                 {
@@ -631,7 +631,7 @@ namespace FTAnalyzer.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error Google Geocoding: {ex.Message}", "FTAnalyzer Geocoding");
+                MessageBox.Show(new Form() { TopMost = true }, $"Error Google Geocoding: {ex.Message}", "FTAnalyzer Geocoding");
             }
         }
 
@@ -771,13 +771,13 @@ namespace FTAnalyzer.Forms
                 }
                 ft.ClearLocations(); // Locations tab needs to be invalidated so it refreshes
                 if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max"))
-                    MessageBox.Show($"Finished Google Geocoding.\n{txtGoogleWait.Text}\nPlease wait 24hrs before trying again as Google\nwill not allow further geocoding before then.", "FTAnalyzer Geocoding");
+                    MessageBox.Show(new Form() { TopMost = true }, $"Finished Google Geocoding.\n{txtGoogleWait.Text}\nPlease wait 24hrs before trying again as Google\nwill not allow further geocoding before then.", "FTAnalyzer Geocoding");
                 else
-                    MessageBox.Show("Finished Google Geocoding.", "FTAnalyzer Geocoding");
+                    MessageBox.Show(new Form() { TopMost = true }, "Finished Google Geocoding.", "FTAnalyzer Geocoding");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error Google Geocoding: {ex.Message}", "FTAnalyzer Geocoding");
+                MessageBox.Show(new Form() { TopMost = true }, $"Error Google Geocoding: {ex.Message}", "FTAnalyzer Geocoding");
             }
         }
 
@@ -888,7 +888,7 @@ namespace FTAnalyzer.Forms
         {
             if (reverseGeocodeBackgroundWorker.IsBusy)
             {
-                MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
+                MessageBox.Show(new Form() { TopMost = true }, "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
             }
             else
             {
@@ -952,7 +952,7 @@ namespace FTAnalyzer.Forms
                     count++;
                     if (count > total) total = count; // incase main thread has added extra items to queue
                     int percent = (int)Math.Truncate(count * 100.0 / total);
-                    string status = "Finding locations from Latitude/Longitude. Done " + count + " of " + total + ".  (Includes all blank locations in database)";
+                    string status = $"Finding locations from Latitude/Longitude. Done {count} of {total}.  (Includes all blank locations in database)";
                     worker.ReportProgress(percent, status);
 
                     if (worker.CancellationPending ||
@@ -964,13 +964,13 @@ namespace FTAnalyzer.Forms
                 }
                 ft.ClearLocations(); // Locations tab needs to be invalidated so it refreshes
                 if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max"))
-                    MessageBox.Show("Finished Reverse Geocoding.\n" + txtGoogleWait.Text + "\nPlease wait 24hrs before trying again as Google\nwill not allow further reverse geocoding before then.", "FTAnalyzer Geocoding");
+                    MessageBox.Show(new Form() { TopMost = true }, $"Finished Reverse Geocoding.\n{txtGoogleWait.Text}\nPlease wait 24hrs before trying again as Google\nwill not allow further reverse geocoding before then.", "FTAnalyzer Geocoding");
                 else
-                    MessageBox.Show("Finished Reverse Geocoding.", "FTAnalyzer Geocoding");
+                    MessageBox.Show(new Form() { TopMost = true }, "Finished Reverse Geocoding.", "FTAnalyzer Geocoding");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error Reverse Geocoding : " + ex.Message, "FTAnalyzer Geocoding");
+                MessageBox.Show(new Form() { TopMost = true }, "Error Reverse Geocoding : " + ex.Message, "FTAnalyzer Geocoding");
             }
         }
 
@@ -1078,7 +1078,7 @@ namespace FTAnalyzer.Forms
         {
             if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy)
             {
-                MessageBox.Show("A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
+                MessageBox.Show(new Form() { TopMost = true }, "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
             }
             else
             {
@@ -1099,7 +1099,7 @@ namespace FTAnalyzer.Forms
             if (LoadOS50kGazetteer())
             {
                 ProcessOS50kGazetteerData(worker, e);
-                MessageBox.Show("Finished Ordnance Survey Geocoding", "FTAnalyzer Geocoding");
+                MessageBox.Show(new Form() { TopMost = true }, "Finished Ordnance Survey Geocoding", "FTAnalyzer Geocoding");
             }
         }
 
@@ -1124,7 +1124,7 @@ namespace FTAnalyzer.Forms
             catch (Exception e)
             {
                 //log.Warn("Failed to load OS50k Gazetteer error was : " + e.Message);
-                MessageBox.Show("Failed to load OS50k Gazetteer error was : " + e.Message);
+                MessageBox.Show(new Form() { TopMost = true }, $"Failed to load OS50k Gazetteer error was : {e.Message}");
             }
             OS50kDictionary = null; // only reach here on exception so discard partially loaded file
             OS50k = null;
