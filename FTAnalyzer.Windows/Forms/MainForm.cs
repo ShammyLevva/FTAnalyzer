@@ -1322,8 +1322,10 @@ namespace FTAnalyzer
                 DataGridViewCell cell = dgSurnames.Rows[e.RowIndex].Cells[nameof(IDisplaySurnames.Surname)];
                 if (cell.Value != null)
                 {
+                    HourGlass(true);
                     Statistics.DisplayGOONSpage(cell.Value.ToString());
                     Analytics.TrackAction(Analytics.MainFormAction, Analytics.GOONSEvent);
+                    HourGlass(false);
                 }
             }
         }

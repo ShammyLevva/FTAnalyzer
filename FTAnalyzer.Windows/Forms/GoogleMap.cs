@@ -198,10 +198,7 @@ namespace FTAnalyzer.Forms
             {
                 request.Headers.Add("Accept-Encoding", "gzip,deflate");
                 request.RequestUri = new Uri(url);
-
                 HttpResponseMessage response = await Program.GoogleClient.SendAsync(request);
-
-                //request.ReadWriteTimeout = 10000;
 
                 //if (request.Proxy is WebProxy proxy)
                 //{
