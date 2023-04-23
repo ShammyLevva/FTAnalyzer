@@ -787,7 +787,7 @@ namespace FTAnalyzer.Utilities
                 {
                     string indID = reader["IndID"].ToString() ?? string.Empty;
                     string fullName = reader["FullName"].ToString() ?? string.Empty;
-                    Individual ind = FamilyTree.Instance.GetIndividual(indID);
+                    Individual? ind = FamilyTree.Instance.GetIndividual(indID);
                     if (ind?.Name == fullName) // only load if individual exists in this tree.
                     {
                         string CensusYear = reader["CensusYear"].ToString() ?? string.Empty;
