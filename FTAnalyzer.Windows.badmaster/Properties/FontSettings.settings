@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FTAnalyzer.Windows.Properties" GeneratedClassName="FontSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SelectedFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Microsoft Sans Serif, 9pt</Value>
+    </Setting>
+    <Setting Name="FontNumber" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="FontWidth" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">5.8</Value>
+    </Setting>
+    <Setting Name="FontSize" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">8.25</Value>
+    </Setting>
+    <Setting Name="FontHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">22</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

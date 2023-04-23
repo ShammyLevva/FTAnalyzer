@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="errorProvider1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkIncludeAlternateFacts.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chkIncludeAlternateFacts.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkIncludeAlternateFacts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 305</value>
+  </data>
+  <data name="chkIncludeAlternateFacts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 17</value>
+  </data>
+  <data name="chkIncludeAlternateFacts.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="chkIncludeAlternateFacts.Text" xml:space="preserve">
+    <value>Include Alternate Facts (*)</value>
+  </data>
+  <data name="&gt;&gt;chkIncludeAlternateFacts.Name" xml:space="preserve">
+    <value>chkIncludeAlternateFacts</value>
+  </data>
+  <data name="&gt;&gt;chkIncludeAlternateFacts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkIncludeAlternateFacts.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkIncludeAlternateFacts.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkHideIgnoredDuplicates.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkHideIgnoredDuplicates.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkHideIgnoredDuplicates.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 282</value>
+  </data>
+  <data name="chkHideIgnoredDuplicates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 17</value>
+  </data>
+  <data name="chkHideIgnoredDuplicates.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="chkHideIgnoredDuplicates.Text" xml:space="preserve">
+    <value>Hide Ignored Duplicates</value>
+  </data>
+  <data name="&gt;&gt;chkHideIgnoredDuplicates.Name" xml:space="preserve">
+    <value>chkHideIgnoredDuplicates</value>
+  </data>
+  <data name="&gt;&gt;chkHideIgnoredDuplicates.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkHideIgnoredDuplicates.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkHideIgnoredDuplicates.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="chkSkipFixingLocations.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkSkipFixingLocations.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkSkipFixingLocations.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 259</value>
+  </data>
+  <data name="chkSkipFixingLocations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 17</value>
+  </data>
+  <data name="chkSkipFixingLocations.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="chkSkipFixingLocations.Text" xml:space="preserve">
+    <value>Skip Fixing Locations on Load (*)</value>
+  </data>
+  <data name="&gt;&gt;chkSkipFixingLocations.Name" xml:space="preserve">
+    <value>chkSkipFixingLocations</value>
+  </data>
+  <data name="&gt;&gt;chkSkipFixingLocations.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkSkipFixingLocations.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkSkipFixingLocations.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="chkMultiAncestor.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkMultiAncestor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkMultiAncestor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 236</value>
+  </data>
+  <data name="chkMultiAncestor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 17</value>
+  </data>
+  <data name="chkMultiAncestor.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="chkMultiAncestor.Text" xml:space="preserve">
+    <value>Show ancestors who are related multiple times</value>
+  </data>
+  <data name="&gt;&gt;chkMultiAncestor.Name" xml:space="preserve">
+    <value>chkMultiAncestor</value>
+  </data>
+  <data name="&gt;&gt;chkMultiAncestor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkMultiAncestor.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkMultiAncestor.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="chkTreatFemaleAsUnknown.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkTreatFemaleAsUnknown.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkTreatFemaleAsUnknown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 213</value>
+  </data>
+  <data name="chkTreatFemaleAsUnknown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>270, 17</value>
+  </data>
+  <data name="chkTreatFemaleAsUnknown.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="chkTreatFemaleAsUnknown.Text" xml:space="preserve">
+    <value>Treat Female Surnames in Brackets as Unknown (*)</value>
+  </data>
+  <data name="&gt;&gt;chkTreatFemaleAsUnknown.Name" xml:space="preserve">
+    <value>chkTreatFemaleAsUnknown</value>
+  </data>
+  <data name="&gt;&gt;chkTreatFemaleAsUnknown.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkTreatFemaleAsUnknown.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkTreatFemaleAsUnknown.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="chkIgnoreFactTypeWarnings.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkIgnoreFactTypeWarnings.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkIgnoreFactTypeWarnings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 190</value>
+  </data>
+  <data name="chkIgnoreFactTypeWarnings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 17</value>
+  </data>
+  <data name="chkIgnoreFactTypeWarnings.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="chkIgnoreFactTypeWarnings.Text" xml:space="preserve">
+    <value>Ignore Unknown/Custom Fact Type Warnings</value>
+  </data>
+  <data name="&gt;&gt;chkIgnoreFactTypeWarnings.Name" xml:space="preserve">
+    <value>chkIgnoreFactTypeWarnings</value>
+  </data>
+  <data name="&gt;&gt;chkIgnoreFactTypeWarnings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkIgnoreFactTypeWarnings.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkIgnoreFactTypeWarnings.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="chkShowWorldEvents.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkShowWorldEvents.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkShowWorldEvents.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 167</value>
+  </data>
+  <data name="chkShowWorldEvents.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 17</value>
+  </data>
+  <data name="chkShowWorldEvents.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="chkShowWorldEvents.Text" xml:space="preserve">
+    <value>Show World Events on the "On This Day" tab</value>
+  </data>
+  <data name="&gt;&gt;chkShowWorldEvents.Name" xml:space="preserve">
+    <value>chkShowWorldEvents</value>
+  </data>
+  <data name="&gt;&gt;chkShowWorldEvents.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkShowWorldEvents.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkShowWorldEvents.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="chkReverseLocations.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkReverseLocations.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkReverseLocations.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 144</value>
+  </data>
+  <data name="chkReverseLocations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 17</value>
+  </data>
+  <data name="chkReverseLocations.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="chkReverseLocations.Text" xml:space="preserve">
+    <value>Files use Country First Locations (*)</value>
+  </data>
+  <data name="&gt;&gt;chkReverseLocations.Name" xml:space="preserve">
+    <value>chkReverseLocations</value>
+  </data>
+  <data name="&gt;&gt;chkReverseLocations.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkReverseLocations.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkReverseLocations.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="chkUseAlias.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkUseAlias.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkUseAlias.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 121</value>
+  </data>
+  <data name="chkUseAlias.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 17</value>
+  </data>
+  <data name="chkUseAlias.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="chkUseAlias.Text" xml:space="preserve">
+    <value>Use Alias In Name Displays</value>
+  </data>
+  <data name="&gt;&gt;chkUseAlias.Name" xml:space="preserve">
+    <value>chkUseAlias</value>
+  </data>
+  <data name="&gt;&gt;chkUseAlias.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkUseAlias.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkUseAlias.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="chkMultipleFactForms.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkMultipleFactForms.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkMultipleFactForms.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 69</value>
+  </data>
+  <data name="chkMultipleFactForms.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 17</value>
+  </data>
+  <data name="chkMultipleFactForms.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="chkMultipleFactForms.Text" xml:space="preserve">
+    <value>Show Duplicates Facts in Separate Forms</value>
+  </data>
+  <data name="&gt;&gt;chkMultipleFactForms.Name" xml:space="preserve">
+    <value>chkMultipleFactForms</value>
+  </data>
+  <data name="&gt;&gt;chkMultipleFactForms.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkMultipleFactForms.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkMultipleFactForms.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="chkUseBurials.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkUseBurials.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkUseBurials.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 23</value>
+  </data>
+  <data name="chkUseBurials.Size" type="System.Drawing.Size, System.Drawing">
+    <value>236, 17</value>
+  </data>
+  <data name="chkUseBurials.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="chkUseBurials.Text" xml:space="preserve">
+    <value>Use Burial/Cremation Date If No Death Date</value>
+  </data>
+  <data name="&gt;&gt;chkUseBurials.Name" xml:space="preserve">
+    <value>chkUseBurials</value>
+  </data>
+  <data name="&gt;&gt;chkUseBurials.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkUseBurials.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkUseBurials.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>45, 94</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 13</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Loose Birth Minimum Parental Age (*)</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="upDownAge.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 92</value>
+  </data>
+  <data name="upDownAge.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 20</value>
+  </data>
+  <data name="upDownAge.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;upDownAge.Name" xml:space="preserve">
+    <value>upDownAge</value>
+  </data>
+  <data name="&gt;&gt;upDownAge.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;upDownAge.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;upDownAge.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 399</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 13</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>(*) This option requires a GEDCOM reload</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="chkAllowEmptyLocations.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkAllowEmptyLocations.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkAllowEmptyLocations.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 46</value>
+  </data>
+  <data name="chkAllowEmptyLocations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 17</value>
+  </data>
+  <data name="chkAllowEmptyLocations.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="chkAllowEmptyLocations.Text" xml:space="preserve">
+    <value>Allow Empty Values In Locations (*)</value>
+  </data>
+  <data name="&gt;&gt;chkAllowEmptyLocations.Name" xml:space="preserve">
+    <value>chkAllowEmptyLocations</value>
+  </data>
+  <data name="&gt;&gt;chkAllowEmptyLocations.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkAllowEmptyLocations.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkAllowEmptyLocations.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="chkUseBaptisms.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkUseBaptisms.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="chkUseBaptisms.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 17</value>
+  </data>
+  <data name="chkUseBaptisms.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="chkUseBaptisms.Text" xml:space="preserve">
+    <value>Use Baptism/Christening Date If No Birth Date</value>
+  </data>
+  <data name="&gt;&gt;chkUseBaptisms.Name" xml:space="preserve">
+    <value>chkUseBaptisms</value>
+  </data>
+  <data name="&gt;&gt;chkUseBaptisms.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkUseBaptisms.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkUseBaptisms.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>325, 421</value>
+  </data>
+  <data name="&gt;&gt;errorProvider1.Name" xml:space="preserve">
+    <value>errorProvider1</value>
+  </data>
+  <data name="&gt;&gt;errorProvider1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>GeneralSettingsUI</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>

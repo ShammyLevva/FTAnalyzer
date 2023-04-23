@@ -1,0 +1,741 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows10.0.17763.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>Resources\FTAnalyzer.ico</ApplicationIcon>
+    <AssemblyName>FTAnalyzer</AssemblyName>
+    <RootNamespace>FTAnalyzer</RootNamespace>
+    <NeutralLanguage>en-GB</NeutralLanguage>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;__PC__;CODE_ANALYSIS;__DEBUG__</DefineConstants>
+    <NoWarn>1701;1702;8600;8601;8602;8603;8604;8605;8618;8622;8625;8767;8765</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;__PC__;CODE_ANALYSIS;__DEBUG__</DefineConstants>
+    <NoWarn>1701;1702;8600;8601;8602;8603;8604;8605;8618;8622;8625;8767;8765</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\FTAnalyzer.ico" />
+    <None Remove="Resources\Icons\16.png" />
+    <None Remove="Resources\Icons\256.png" />
+    <None Remove="Resources\Icons\32.png" />
+    <None Remove="Resources\Icons\48.png" />
+    <None Remove="Resources\Icons\arrow-left.png" />
+    <None Remove="Resources\Icons\arrow-right.png" />
+    <None Remove="Resources\Icons\Complete_OK.png" />
+    <None Remove="Resources\Icons\CriticalError.png" />
+    <None Remove="Resources\Icons\DeleteHS.png" />
+    <None Remove="Resources\Icons\EditLocation.png" />
+    <None Remove="Resources\Icons\FileHandling.png" />
+    <None Remove="Resources\Icons\Filter.png" />
+    <None Remove="Resources\Icons\Flagged.png" />
+    <None Remove="Resources\Icons\flogo_rgb_hex-brc-site-250.png" />
+    <None Remove="Resources\Icons\FTAnalyzer.ico" />
+    <None Remove="Resources\Icons\GoogleMapsAPI.png" />
+    <None Remove="Resources\Icons\GoogleMatch.png" />
+    <None Remove="Resources\Icons\GooglePartial.png" />
+    <None Remove="Resources\Icons\OS50kFuzzy.png" />
+    <None Remove="Resources\Icons\OS50kMatch.png" />
+    <None Remove="Resources\Icons\OS50kPartial.png" />
+    <None Remove="Resources\Icons\OutOfBounds.png" />
+    <None Remove="Resources\Icons\people35.png" />
+    <None Remove="Resources\Icons\Pointer.bmp" />
+    <None Remove="Resources\Icons\QuestionMark.png" />
+    <None Remove="Resources\Icons\Restart.bmp" />
+    <None Remove="Resources\Icons\Save.bmp" />
+    <None Remove="Resources\Icons\SaveExit.bmp" />
+    <None Remove="Resources\Icons\Scroll_NoText.png" />
+    <None Remove="Resources\Icons\SeriousWarning.png" />
+    <None Remove="Resources\Icons\Stop.bmp" />
+    <None Remove="Resources\Icons\teardrop_black.png" />
+    <None Remove="Resources\Icons\teardrop_blue.cur" />
+    <None Remove="Resources\Icons\teardrop_blue.png" />
+    <None Remove="Resources\Icons\teardrop_lightgreen.png" />
+    <None Remove="Resources\Icons\teardrop_red.png" />
+    <None Remove="Resources\Icons\Validate.png" />
+    <None Remove="Resources\Icons\Warning.png" />
+    <None Remove="Resources\KUNSTLER.TTF" />
+    <None Remove="x64\gdal_wrap.dll" />
+    <None Remove="x64\SQLite.Interop.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\FTAnalyzer.ico" />
+    <Content Include="Resources\Icons\16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\256.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\arrow-left.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\arrow-right.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Complete_OK.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\CriticalError.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\DeleteHS.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\EditLocation.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\FileHandling.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Filter.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Flagged.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\flogo_rgb_hex-brc-site-250.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\FTAnalyzer.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\GoogleMapsAPI.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\GoogleMatch.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\GooglePartial.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\OS50kFuzzy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\OS50kMatch.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\OS50kPartial.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\OutOfBounds.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\people35.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Pointer.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\QuestionMark.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Restart.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Save.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\SaveExit.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Scroll_NoText.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\SeriousWarning.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Stop.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\teardrop_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\teardrop_blue.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\teardrop_blue.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\teardrop_lightgreen.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\teardrop_red.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Validate.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Warning.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x64\gdal_wrap.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x64\SQLite.Interop.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\KUNSTLER.TTF">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DG.AdvancedDataGridView" Version="1.2.27706.9" />
+    <PackageReference Include="DotNetZip" Version="1.16.0" />
+    <PackageReference Include="GoogleAnalyticsTracker.Simple" Version="7.0.1" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.46" />
+    <PackageReference Include="log4net" Version="2.0.15" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Printing.DataGridViewPrint" Version="2.0.0" />
+    <PackageReference Include="ProjNET" Version="2.0.0" />
+    <PackageReference Include="SharpMap.Extensions" Version="2.0.8" />
+    <PackageReference Include="SharpMap.Layers.BruTile" Version="2.0.8" />
+    <PackageReference Include="SharpMap.UI" Version="2.0.8" />
+    <PackageReference Include="System.Buffers" Version="4.5.1" />
+    <PackageReference Include="System.Memory" Version="4.5.5" />
+    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Forms\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\AboutBox.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AboutBox.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\BingOSMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\BingOSMap.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BingOSMap.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Census.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Census.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Census.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Chart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Chart.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Chart.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\ColourBMD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\ColourBMD.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ColourBMD.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\ColourCensus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\ColourCensus.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ColourCensus.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Controls\CensusCountry.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\Controls\CensusCountry.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CensusCountry.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Controls\CensusDateSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\Controls\CensusDateSelector.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CensusDateSelector.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Controls\MapToolStripMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Forms\Controls\RelationTypes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\Controls\RelationTypes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RelationTypes.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Controls\ToolStripMapSelector.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Forms\EditLocation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\EditLocation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EditLocation.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Facts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Facts.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Facts.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\GeocodeLocations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\GeocodeLocations.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GeocodeLocations.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\GoogleMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\GoogleMap.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GoogleMap.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\LifeLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\LifeLine.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LifeLine.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\LostCousinsReferral.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\LostCousinsReferral.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LostCousinsReferral.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\MainForm.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MainForm.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\MapIndividals.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\MapIndividals.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MapIndividals.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\MissingData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\MissingData.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MissingData.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Notes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Notes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Notes.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\People.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\People.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>People.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Places.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Places.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Places.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Progress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Progress.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Progress.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Sources.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Sources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Sources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\StatisticsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\StatisticsForm.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>StatisticsForm.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\TimeLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\TimeLine.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TimeLine.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\ErrorMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ErrorMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\FileHandling.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FileHandling.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\FontSettings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FontSettings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\GeneralSettings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GeneralSettings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\MappingSettings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MappingSettings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Messages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\NonGedcomDate.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NonGedcomDate.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="UserControls\CensusSettingsUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\CensusSettingsUI.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CensusSettingsUI.resx</DependentUpon>
+    </Compile>
+    <Compile Update="UserControls\ExtendedToolTipLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="UserControls\FileHandlingUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\FileHandlingUI.designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FileHandlingUI.resx</DependentUpon>
+    </Compile>
+    <Compile Update="UserControls\FontSettingsUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\FontSettingsUI.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FontSettingsUI.resx</DependentUpon>
+    </Compile>
+    <Compile Update="UserControls\GeneralSettingsUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\GeneralSettingsUI.designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GeneralSettingsUI.resx</DependentUpon>
+    </Compile>
+    <Compile Update="UserControls\MappingSettingsUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\MappingSettingsUI.designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MappingSettingsUI.resx</DependentUpon>
+    </Compile>
+    <Compile Update="UserControls\NonGedcomDateSettingsUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\NonGedcomDateSettingsUI.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NonGedcomDateSettingsUI.resx</DependentUpon>
+    </Compile>
+    <Compile Update="UserControls\Options.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UserControls\Options.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Options.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Utilities\MultiSelectTreeview.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Utilities\ScrollingRichTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Forms\AboutBox.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AboutBox.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\BingOSMap.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>BingOSMap.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Census.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Census.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Chart.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Chart.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\ColourBMD.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ColourBMD.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\ColourCensus.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ColourCensus.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Controls\CensusCountry.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CensusCountry.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Controls\CensusDateSelector.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CensusDateSelector.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Controls\RelationTypes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RelationTypes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\EditLocation.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EditLocation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Facts.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Facts.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\GeocodeLocations.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GeocodeLocations.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\GoogleMap.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GoogleMap.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\LifeLine.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LifeLine.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\LostCousinsReferral.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LostCousinsReferral.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\MainForm.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MainForm.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\MapIndividals.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MapIndividals.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\MissingData.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MissingData.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Notes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Notes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\People.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>People.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Places.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Places.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Progress.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Progress.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Sources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\StatisticsForm.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>StatisticsForm.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\TimeLine.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TimeLine.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\ErrorMessages.resx">
+      <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Messages.resx">
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserControls\CensusSettingsUI.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CensusSettingsUI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserControls\FileHandlingUI.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FileHandlingUI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserControls\FontSettingsUI.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FontSettingsUI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserControls\GeneralSettingsUI.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GeneralSettingsUI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserControls\MappingSettingsUI.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MappingSettingsUI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserControls\NonGedcomDateSettingsUI.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>NonGedcomDateSettingsUI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserControls\Options.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Options.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\FileHandling.settings">
+      <LastGenOutput>FileHandling.Designer.cs</LastGenOutput>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+    </None>
+    <Compile Update="Properties\FileHandling.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FileHandling.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Update="Properties\FontSettings.settings">
+      <LastGenOutput>FontSettings.Designer.cs</LastGenOutput>
+      <Generator>SettingsSingleFileGenerator</Generator>
+    </None>
+    <Compile Update="Properties\FontSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FontSettings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Update="Properties\GeneralSettings.settings">
+      <LastGenOutput>GeneralSettings.Designer.cs</LastGenOutput>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+    </None>
+    <Compile Update="Properties\GeneralSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GeneralSettings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Update="Properties\MappingSettings.settings">
+      <LastGenOutput>MappingSettings.Designer.cs</LastGenOutput>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+    </None>
+    <Compile Update="Properties\MappingSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MappingSettings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Update="Properties\NonGedcomDate.settings">
+      <LastGenOutput>NonGedcomDate.Designer.cs</LastGenOutput>
+      <Generator>SettingsSingleFileGenerator</Generator>
+    </None>
+    <Compile Update="Properties\NonGedcomDate.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NonGedcomDate.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Update="Properties\Settings.settings">
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <Generator>SettingsSingleFileGenerator</Generator>
+    </None>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+
+  <Import Project="..\..\FTAnalyzer.Shared\FTAnalyzer.Shared\FTAnalyzer.Shared.projitems" Label="Shared" />
+
+</Project>
