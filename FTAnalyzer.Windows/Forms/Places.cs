@@ -190,7 +190,7 @@ namespace FTAnalyzer.Forms
             try
             {
                 Cursor = Cursors.WaitCursor;
-                FactLocation location = e.Node.Tag as FactLocation;
+                FactLocation? location = e.Node.Tag as FactLocation;
                 if (location is not null)
                 {
                     People frmInd = new();

@@ -22,7 +22,7 @@ namespace FTAnalyzer.Utilities
             {
                 float LeftMargin = e.MarginBounds.Left;
                 float TopMargin = e.MarginBounds.Top;
-                string Line = null;
+                string? Line = null;
                 Font PrintFont = rtb.Font;
                 if (PrintFont.SizeInPoints < 11)
                     PrintFont = new(PrintFont.FontFamily, 11f);

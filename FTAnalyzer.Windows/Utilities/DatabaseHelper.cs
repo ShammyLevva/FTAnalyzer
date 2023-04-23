@@ -104,7 +104,7 @@ namespace FTAnalyzer.Utilities
 
         static Version GetDatabaseVersion()
         {
-            string db = null;
+            string? db = null;
             try
             {
                 if (InstanceConnection.State != ConnectionState.Open)
@@ -135,8 +135,8 @@ namespace FTAnalyzer.Utilities
         {
             try
             {
-                string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString();
-                saveDatabase.FileName = "FTAnalyzer-Geocodes-" + DateTime.Now.ToString("yyyy-MM-dd") + "-v" + MainForm.VERSION + ".zip";
+                string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString() ?? string.Empty;
+                saveDatabase.FileName = $"FTAnalyzer-Geocodes-{DateTime.Now:yyyy-MM-dd}-v{MainForm.VERSION}.zip";
                 saveDatabase.InitialDirectory = directory;
                 DialogResult result = saveDatabase.ShowDialog();
                 if (result == DialogResult.OK)
@@ -233,7 +233,7 @@ namespace FTAnalyzer.Utilities
                             using SQLiteDataReader reader = cmd.ExecuteReader();
                             while (reader.Read())
                             {
-                                string column = reader[1].ToString();
+                                string column = reader[1].ToString() ?? string.Empty;
                                 if (column.Equals("Latm"))
                                     latm = true;
                                 if (column.Equals("Longm"))
@@ -445,7 +445,7 @@ namespace FTAnalyzer.Utilities
                 while (reader.Read())
                 {
                     latitude = longitude = viewport_x_ne = viewport_x_sw = viewport_y_ne = viewport_y_sw = 0;
-                    string location = reader["location"].ToString();
+                    string location = reader["location"].ToString() ?? string.Empty;
                     _ = double.TryParse(reader["latitude"].ToString(), out latitude);
                     _ = double.TryParse(reader["longitude"].ToString(), out longitude);
                     _ = double.TryParse(reader["viewport_x_ne"].ToString(), out viewport_x_ne);
@@ -496,8 +496,8 @@ namespace FTAnalyzer.Utilities
                         _ = double.TryParse(reader[0].ToString(), out double latitude);
                         _ = double.TryParse(reader[1].ToString(), out double longitude);
                         hashkey = LatLongHashKey(latitude, longitude);
-                        foundlocation = reader[2].ToString();
-                        foundresulttype = reader[3].ToString();
+                        foundlocation = reader[2].ToString() ?? string.Empty;
+                        foundresulttype = reader[3].ToString() ?? string.Empty;
                         if (!results.ContainsKey(hashkey))
                             results.Add(hashkey, new Tuple<string, string>(foundlocation, foundresulttype));
                     }
@@ -784,14 +784,14 @@ namespace FTAnalyzer.Utilities
                 using SQLiteDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    string indID = reader["IndID"].ToString();
-                    string fullName = reader["FullName"].ToString();
+                    string indID = reader["IndID"].ToString() ?? string.Empty;
+                    string fullName = reader["FullName"].ToString() ?? string.Empty;
                     Individual ind = FamilyTree.Instance.GetIndividual(indID);
                     if (ind?.Name == fullName) // only load if individual exists in this tree.
                     {
-                        string CensusYear = reader["CensusYear"].ToString();
-                        string CensusCountry = reader["CensusCountry"].ToString();
-                        string CensusRef = reader["CensusRef"].ToString();
+                        string CensusYear = reader["CensusYear"].ToString() ?? string.Empty;
+                        string CensusCountry = reader["CensusCountry"].ToString() ?? string.Empty;
+                        string CensusRef = reader["CensusRef"].ToString() ?? string.Empty;
                         if (!ind.IsLostCousinsEntered(CensusDate.GetLostCousinsCensusYear(new FactDate(CensusYear), true)))
                         {
                             FactLocation location = FactLocation.GetLocation(CensusCountry);

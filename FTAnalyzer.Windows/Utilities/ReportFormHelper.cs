@@ -84,7 +84,9 @@ namespace FTAnalyzer
             if (ReportGrid.DataSource is null || ReportGrid.RowCount == 0)
                 return;
             parent.Cursor = Cursors.WaitCursor;
-            SortableBindingList<T> gridDatasource = ReportGrid.DataSource as SortableBindingList<T>;
+            SortableBindingList<T> gridDatasource = ReportGrid.DataSource as SortableBindingList<T> ?? new();
+            if (gridDatasource.Count == 0)
+                return;
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(gridDatasource.ToList(), shown))
                 ExportToExcel.Export(dt);
             parent.Cursor = Cursors.Default;
@@ -155,7 +157,7 @@ namespace FTAnalyzer
                         ReportGrid.Columns[col.ColumnName].DisplayIndex = i;
                         if (col.ExtendedProperties.Contains("Width"))
                         {
-                            if (int.TryParse((string)col.ExtendedProperties["Width"], out int width))
+                            if (int.TryParse(col.ExtendedProperties["Width"].ToString(), out int width))
                                 ReportGrid.Columns[col.ColumnName].Width = width;
                         }
                         if (col.ExtendedProperties.Contains("Sort"))

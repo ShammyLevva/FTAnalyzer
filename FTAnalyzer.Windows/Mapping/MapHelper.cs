@@ -81,7 +81,7 @@ namespace FTAnalyzer.Mapping
         {
             try
             {
-                GeocodeLocations geoLocations = null;
+                GeocodeLocations? geoLocations = null;
                 foreach (Form f in Application.OpenForms)
                 {
                     if (f is GeocodeLocations locations)

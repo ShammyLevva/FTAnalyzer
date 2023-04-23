@@ -340,7 +340,7 @@ namespace FTAnalyzer.Forms
             if (selectRow && dgIndividuals.CurrentRow is not null)
             {
                 IDisplayIndividual ind = (IDisplayIndividual)dgIndividuals.CurrentRow.DataBoundItem;
-                families.TryGetValue(ind, out IDisplayFamily f);
+                families.TryGetValue(ind, out IDisplayFamily? f);
                 if (f is not null)
                 {
                     foreach (DataGridViewRow r in dgFamilies.Rows)

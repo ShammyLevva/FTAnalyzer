@@ -189,9 +189,9 @@ namespace FTAnalyzer.Forms
             return GetGeoResponseAsync(url, $"latlng={lat},{lng}{region}").Result;
         }
 
-        static async Task<GeoResponse> GetGeoResponseAsync(string url, string text)
+        static async Task<GeoResponse?> GetGeoResponseAsync(string url, string text)
         {
-            GeoResponse res;
+            GeoResponse? res;
             HttpRequestMessage request= new();
             try
             {
@@ -220,7 +220,7 @@ namespace FTAnalyzer.Forms
                     MessageBox.Show($"Unable to contact https://maps.googleapis.com error was: {ex.Message}\nWhen trying to look for {text}", "FTAnalyzer");
                 res = null;
             }
-            if (resis not null && res.Status == "REQUEST_DENIED")
+            if (res is not null && res.Status == "REQUEST_DENIED")
                 UIHelpers.ShowMessage("Google returned REQUEST_DENIED - please check you have a valid key and enabled the Geocoding API & Places API");
             return res;
         }
@@ -228,7 +228,7 @@ namespace FTAnalyzer.Forms
         static int sleepinterval = 200;
 
         // Call geocoding routine but account for throttling by Google geocoding engine
-        public static GeoResponse GoogleGeocode(FactLocation address, string text, int badtries)
+        public static GeoResponse? GoogleGeocode(FactLocation address, string text, int badtries)
         {
             int maxInterval = 30000;
             double seconds = sleepinterval / 1000;
@@ -241,7 +241,7 @@ namespace FTAnalyzer.Forms
                 Thread.Sleep(1000);
                 if (ThreadCancelled) return null;
             }
-            GeoResponse res;
+            GeoResponse? res;
             try
             {
                 res = CallGoogleGeocode(address, text);
@@ -259,7 +259,7 @@ namespace FTAnalyzer.Forms
             }
             else
             {
-                if (resis not null && res.Status != "REQUEST_DENIED")
+                if (res is not null && res.Status != "REQUEST_DENIED")
                 {
                     OnWaitingForGoogle(string.Empty); // going well clear any previous message
                                                       // no throttling, go a little bit faster
@@ -273,7 +273,7 @@ namespace FTAnalyzer.Forms
         }
 
         // Call geocoding routine but account for throttling by Google geocoding engine
-        public static GeoResponse GoogleReverseGeocode(double latitude, double longitude, int badtries)
+        public static GeoResponse? GoogleReverseGeocode(double latitude, double longitude, int badtries)
         {
             int maxInterval = 30000;
             double seconds = sleepinterval / 1000;
@@ -286,7 +286,7 @@ namespace FTAnalyzer.Forms
                 Thread.Sleep(1000);
                 if (ThreadCancelled) return null;
             }
-            GeoResponse res;
+            GeoResponse? res;
             try
             {
                 res = CallGoogleReverseGeocode(latitude, longitude);

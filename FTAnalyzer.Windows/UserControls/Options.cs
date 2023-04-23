@@ -54,7 +54,7 @@ namespace FTAnalyzer.UserControls
 			catch (ReflectionTypeLoadException ex)
 			{
 				StringBuilder sb = new();
-				foreach (Exception exSub in ex.LoaderExceptions)
+				foreach (var exSub in ex.LoaderExceptions)
 				{
 					sb.AppendLine(exSub.Message);
 					if (exSub is FileNotFoundException exFileNotFound)
@@ -88,7 +88,7 @@ namespace FTAnalyzer.UserControls
 
 		void SearchAndAddToSubTree(string[] splitPosition,int startPositon, TreeNodeCollection nodes, string key)
 		{
-			TreeNode tempNode = null;
+			TreeNode? tempNode = null;
 			if (splitPosition.Length > startPositon)
 			{
 				for (int i = 0; i < nodes.Count; i++)

@@ -51,7 +51,7 @@ namespace FTAnalyzer.Mapping
         void AddToClosestCluster(FeatureDataRow row)
         {
             double distance = double.MaxValue;
-            MapCluster clusterToAddTo = null;
+            MapCluster? clusterToAddTo = null;
             NetTopologySuite.Geometries.Point rowCentre = row.Geometry.Centroid;
             foreach (MapCluster cluster in clusters)
             {

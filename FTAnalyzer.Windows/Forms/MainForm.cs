@@ -293,7 +293,7 @@ namespace FTAnalyzer
         async Task<bool> LoadTreeAsync(string filename)
         {
             var outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
-            XmlDocument doc;
+            XmlDocument? doc;
             Stopwatch timer = new();
             timer.Start();
             using (FileStream stream = new(filename, FileMode.Open, FileAccess.Read))
@@ -3148,17 +3148,17 @@ namespace FTAnalyzer
         #region View Notes
         void CtxViewNotes_Opening(object sender, CancelEventArgs e)
         {
-            Individual ind = GetContextIndividual(sender);
+            Individual? ind = GetContextIndividual(sender);
             if (ind is not null)
                 mnuViewNotes.Enabled = ind.HasNotes;
             else
                 e.Cancel = true;
         }
 
-        static Individual GetContextIndividual(object sender)
+        static Individual? GetContextIndividual(object? sender)
         {
-            Individual ind = null;
-            ContextMenuStrip cms = null;
+            Individual? ind = null;
+            ContextMenuStrip? cms = null;
             if (sender is ContextMenuStrip strip)
                 cms = strip;
             if (sender is ToolStripMenuItem tsmi)
@@ -3171,7 +3171,7 @@ namespace FTAnalyzer
         void MnuViewNotes_Click(object sender, EventArgs e)
         {
             HourGlass(true);
-            Individual ind = GetContextIndividual(sender);
+            Individual? ind = GetContextIndividual(sender);
             if (ind is not null)
             {
                 Notes notes = new(ind);
@@ -3486,7 +3486,7 @@ namespace FTAnalyzer
             try
             {
                 using OpenFileDialog openFileDialog = new();
-                string initialDir = (string)Application.UserAppDataRegistry.GetValue("Excel Export Individual Path");
+                string initialDir = Application.UserAppDataRegistry.GetValue("Excel Export Individual Path").ToString() ?? string.Empty;
                 openFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
                 openFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv|TNG format (*.tng)|*.tng";
                 openFileDialog.FilterIndex = defaultIndex;
@@ -3495,7 +3495,7 @@ namespace FTAnalyzer
                 {
                     csvFilename = openFileDialog.FileName;
                     label.Text = "Loading " + csvFilename;
-                    string path = Path.GetDirectoryName(csvFilename);
+                    string path = Path.GetDirectoryName(csvFilename) ?? string.Empty;
                     Application.UserAppDataRegistry.SetValue("Excel Export Individual Path", path);
                     if (csvFilename.EndsWith("TNG", StringComparison.InvariantCultureIgnoreCase))
                         ReadTNGdata(pb, csvFilename);
@@ -3700,14 +3700,14 @@ namespace FTAnalyzer
             try
             {
                 using SaveFileDialog saveFileDialog = new();
-                string initialDir = (string)Application.UserAppDataRegistry.GetValue("JSON Export Path");
+                string initialDir = Application.UserAppDataRegistry.GetValue("JSON Export Path").ToString() ?? string.Empty;
                 saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
                 saveFileDialog.Filter = "JavaScript Object Notation (*.json)|*.json";
                 saveFileDialog.FilterIndex = 1;
                 DialogResult dr = saveFileDialog.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    string path = Path.GetDirectoryName(saveFileDialog.FileName);
+                    string path = Path.GetDirectoryName(saveFileDialog.FileName) ?? string.Empty;
                     Application.UserAppDataRegistry.SetValue("JSON Export Path", path);
                     using (StreamWriter output = new(new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write), Encoding.UTF8))
                     {
@@ -3785,8 +3785,8 @@ namespace FTAnalyzer
             try
             {
                 using SaveFileDialog saveFileDialog = new();
-                string initialDir = (string)Application.UserAppDataRegistry.GetValue("Google MyMaps Path");
-                string initialFile = (string)Application.UserAppDataRegistry.GetValue("Google MyMaps Filename");
+                string initialDir = Application.UserAppDataRegistry.GetValue("Google MyMaps Path").ToString() ?? string.Empty;
+                string initialFile = Application.UserAppDataRegistry.GetValue("Google MyMaps Filename").ToString() ?? string.Empty;
                 saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
                 saveFileDialog.FileName = initialFile ?? string.Empty;
                 saveFileDialog.Filter = "Keyhole Markup Language (*.kml)|*.kml";
@@ -3796,8 +3796,8 @@ namespace FTAnalyzer
                 {
                     if (!saveFileDialog.FileName.EndsWith(".kml"))
                         saveFileDialog.FileName += ".kml";
-                    string path = Path.GetDirectoryName(saveFileDialog.FileName);
-                    string file = Path.GetFileName(saveFileDialog.FileName);
+                    string path = Path.GetDirectoryName(saveFileDialog.FileName) ?? string.Empty;
+                    string file = Path.GetFileName(saveFileDialog.FileName) ?? string.Empty;
                     Application.UserAppDataRegistry.SetValue("Google MyMaps Path", path);
                     Application.UserAppDataRegistry.SetValue("Google MyMaps Filename", file);
                     Progress<int> progress = new(value => { tspbTabProgress.Value = value; });

@@ -21,7 +21,7 @@ namespace FTAnalyzer.Mapping
             int index = 1;
             List<Coordinate> points = new();
             Viewport = new Envelope();
-            Coordinate previousPoint = null;
+            Coordinate? previousPoint = null;
             foreach (IDisplayFact f in ind.AllLifeLineFacts)
             {
                 Coordinate point = new(f.Location.LongitudeM, f.Location.LatitudeM);

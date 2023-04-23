@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Windows.Forms;
-
 namespace FTAnalyzer.Utilities
 {
     public class MultiSelectTreeview : TreeView
@@ -59,9 +54,9 @@ namespace FTAnalyzer.Utilities
             // keyboard to select nodes
             try
             {
-                if (m_SelectedNode is null && this.TopNode is not null)
+                if (m_SelectedNode is null && TopNode is not null)
                 {
-                    ToggleNode(this.TopNode, true);
+                    ToggleNode(TopNode, true);
                     OnAfterSelect(new TreeViewEventArgs(m_SelectedNode));
                 }
                 // Handle if HideSelection property is in use.
@@ -81,7 +76,7 @@ namespace FTAnalyzer.Utilities
             try
             {
                 // Handle if HideSelection property is in use.
-                if (this.HideSelection)
+                if (HideSelection)
                 {
                     DimSelection();
                 }
@@ -103,7 +98,7 @@ namespace FTAnalyzer.Utilities
             {
                 base.SelectedNode = null;
 
-                TreeNode node = this.GetNodeAt(e.Location);
+                TreeNode node = GetNodeAt(e.Location);
                 if (node is not null)
                 {
                     int leftBound = node.Bounds.X; // - 20; // Allow user to click on image
@@ -139,7 +134,7 @@ namespace FTAnalyzer.Utilities
             try
             {
                 // Check to see if a node was clicked on 
-                TreeNode node = this.GetNodeAt(e.Location);
+                TreeNode node = GetNodeAt(e.Location);
                 if (node is not null)
                 {
                     if (ModifierKeys == Keys.None && m_SelectedNodes.Contains(node) && m_SelectedNodes.Count > 1)
@@ -229,16 +224,16 @@ namespace FTAnalyzer.Utilities
             if (e.KeyCode == Keys.ShiftKey) return;
             if (e.KeyCode == Keys.ControlKey) return;
 
-            //this.BeginUpdate();
+            //BeginUpdate();
             bool bShift = (ModifierKeys == Keys.Shift);
 
             try
             {
                 // Nothing is selected in the tree, this isn't a good state
                 // select the top node
-                if (m_SelectedNode is null && this.TopNode is not null)
+                if (m_SelectedNode is null && TopNode is not null)
                 {
-                    ToggleNode(this.TopNode, true);
+                    ToggleNode(TopNode, true);
                     OnAfterSelect(new TreeViewEventArgs(m_SelectedNode));
                 }
 
@@ -294,9 +289,9 @@ namespace FTAnalyzer.Utilities
                         if (m_SelectedNode.Parent is null)
                         {
                             // Select all of the root nodes up to this point 
-                            if (this.Nodes.Count > 0)
+                            if (Nodes.Count > 0)
                             {
-                                SelectNode(this.Nodes[0]);
+                                SelectNode(Nodes[0]);
                             }
                         }
                         else
@@ -350,7 +345,7 @@ namespace FTAnalyzer.Utilities
                 else if (e.KeyCode == Keys.PageUp)
                 {
                     // Select the highest node in the display
-                    int nCount = this.VisibleCount;
+                    int nCount = VisibleCount;
                     TreeNode ndCurrent = m_SelectedNode;
                     while ((nCount) > 0 && (ndCurrent.PrevVisibleNode is not null))
                     {
@@ -362,7 +357,7 @@ namespace FTAnalyzer.Utilities
                 else if (e.KeyCode == Keys.PageDown)
                 {
                     // Select the lowest node in the display
-                    int nCount = this.VisibleCount;
+                    int nCount = VisibleCount;
                     TreeNode ndCurrent = m_SelectedNode;
                     while ((nCount) > 0 && (ndCurrent.NextVisibleNode is not null))
                     {
@@ -374,9 +369,9 @@ namespace FTAnalyzer.Utilities
                 else if (e.Control && (e.KeyCode == Keys.A))
                 {
                     // Select All (CTRL-A), selects all top level nodes
-                    this.ClearSelectedNodes();
-                    this.CollapseAll();
-                    TreeNode ndCurrent = this.TopNode;
+                    ClearSelectedNodes();
+                    CollapseAll();
+                    TreeNode? ndCurrent = TopNode;
                     while (ndCurrent is not null)
                     {
                         ToggleNode(ndCurrent, true);
@@ -408,7 +403,7 @@ namespace FTAnalyzer.Utilities
             }
             finally
             {
-                this.EndUpdate();
+                EndUpdate();
             }
         }
 
@@ -438,7 +433,7 @@ namespace FTAnalyzer.Utilities
         {
             try
             {
-                this.BeginUpdate();
+                BeginUpdate();
 
                 if (m_SelectedNode is null || ModifierKeys == Keys.Control)
                 {
@@ -567,7 +562,7 @@ namespace FTAnalyzer.Utilities
             }
             finally
             {
-                this.EndUpdate();
+                EndUpdate();
             }
         }
 
@@ -577,8 +572,8 @@ namespace FTAnalyzer.Utilities
             {
                 foreach (TreeNode node in m_SelectedNodes)
                 {
-                    node.BackColor = this.BackColor;
-                    node.ForeColor = this.ForeColor;
+                    node.BackColor = BackColor;
+                    node.ForeColor = ForeColor;
                 }
             }
             finally
@@ -617,8 +612,8 @@ namespace FTAnalyzer.Utilities
             else
             {
                 m_SelectedNodes.Remove(node);
-                node.BackColor = this.BackColor;
-                node.ForeColor = this.ForeColor;
+                node.BackColor = BackColor;
+                node.ForeColor = ForeColor;
             }
         }
 
