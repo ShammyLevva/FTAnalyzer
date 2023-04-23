@@ -256,9 +256,7 @@ namespace FTAnalyzer.Forms
                 else if (e.ColumnIndex >= 0)
                 {
                     string indID = (string)dgReportSheet.CurrentRow.Cells["IndividualID"].Value;
-                    Individual ind = ft.GetIndividual(indID);
-                    Facts factForm = new(ind);
-                    factForm.Show();
+                    MainForm.ShowIndividualsFacts(indID);
                 }
             }
         }
@@ -392,10 +390,7 @@ namespace FTAnalyzer.Forms
             if (dgReportSheet.CurrentRow is not null)
             {
                 IDisplayColourCensus ds = (IDisplayColourCensus)dgReportSheet.CurrentRow.DataBoundItem;
-                Individual ind = FamilyTree.Instance.GetIndividual(ds.IndividualID);
-                Facts factForm = new(ind);
-                MainForm.DisposeDuplicateForms(factForm);
-                factForm.Show();
+                MainForm.ShowIndividualsFacts(ds.IndividualID);
             }
         }
 

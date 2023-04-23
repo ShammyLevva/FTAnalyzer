@@ -20,7 +20,7 @@
                 nameof(IDisplayDuplicateIndividual.Score) => dup.Score,
                 nameof(IDisplayDuplicateIndividual.IgnoreNonDuplicate) => dup.IgnoreNonDuplicate,
                 nameof(IDisplayDuplicateIndividual.MatchGender) => dup.MatchGender,
-                _ => null,
+                _ => dup.IndividualID,
             };
         }
     }

@@ -31,7 +31,7 @@ namespace FTAnalyzer.Forms.Controls
                 default:
                     break;
             }
-            return null;
+            return err.Reference;
         }
     }
 }

@@ -593,8 +593,8 @@ namespace FTAnalyzer.Utilities
                     location.ViewPort.SouthWest.Lat = viewport_y_sw;
                     location.ViewPort.SouthWest.Long = viewport_x_sw;
                     location.GeocodeStatus = (FactLocation.Geocode)Enum.Parse(typeof(FactLocation.Geocode), reader["geocodestatus"].ToString());
-                    location.FoundLocation = reader["foundlocation"].ToString();
-                    location.FoundResultType = reader["foundresulttype"].ToString();
+                    location.FoundLocation = reader["foundlocation"].ToString() ?? string.Empty;
+                    location.FoundResultType = reader["foundresulttype"].ToString() ?? string.Empty;
                     _ = int.TryParse(reader["foundlevel"].ToString(), out int foundlevel);
                     location.FoundLevel = foundlevel;
                 }

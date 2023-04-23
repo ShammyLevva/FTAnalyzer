@@ -10,6 +10,6 @@ namespace FTAnalyzer.UserControls
         bool HasValidationErrors { get; }
         string DisplayName { get; }
 		string TreePosition { get; }
-		Image MenuIcon{get;}
+		Image? MenuIcon{get;}
 	}
 }

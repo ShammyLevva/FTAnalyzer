@@ -13,7 +13,7 @@
                 nameof(IDisplaySource.SourceText) => src.SourceText,
                 nameof(IDisplaySource.SourceMedium) => src.SourceMedium,
                 nameof(IDisplaySource.FactCount) => src.FactCount,
-                _ => null,
+                _ => src.SourceID,
             };
         }
     }

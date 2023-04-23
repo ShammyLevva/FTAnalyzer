@@ -8,7 +8,7 @@
             {
                 nameof(IDisplayOccupation.Occupation) => occ.Occupation,
                 nameof(IDisplayOccupation.Count) => occ.Count,
-                _ => null,
+                _ => occ.Occupation,
             };
         }
     }

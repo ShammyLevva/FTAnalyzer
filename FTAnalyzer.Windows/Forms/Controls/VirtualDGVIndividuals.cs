@@ -29,7 +29,7 @@
                 nameof(IDisplayIndividual.HasNotes) => ind.HasNotes,
                 nameof(IDisplayIndividual.FactsCount) => ind.FactsCount,
                 nameof(IDisplayIndividual.SourcesCount) => ind.SourcesCount,
-                _ => null,
+                _ => ind.IndividualID,
             };
         }
     }

@@ -53,7 +53,7 @@ namespace FTAnalyzer.Mapping
 
         public string TypeOfFact => Fact.FactTypeDescription;
 
-        public Age AgeAtFact => Individual?.GetAge(_year);
+        public Age? AgeAtFact => Individual?.GetAge(_year);
 
         public string Relation => Individual.Relation;
 

@@ -12,7 +12,7 @@
                 nameof(IDisplayLooseBirth.BirthDate) => ind.BirthDate,
                 nameof(IDisplayLooseBirth.BirthLocation) => ind.BirthLocation,
                 nameof(IDisplayLooseBirth.LooseBirth) => ind.LooseBirth,
-                _ => null,
+                _ => ind.IndividualID,
             };
         }
     }

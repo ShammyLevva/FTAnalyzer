@@ -69,7 +69,7 @@ namespace FTAnalyzer.UserControls
 			get { return DisplayName; }
 		}
 
-		public Image MenuIcon
+		public Image? MenuIcon
 		{
 			get { return null; }
 		}

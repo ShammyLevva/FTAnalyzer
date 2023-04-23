@@ -10,7 +10,7 @@
                 nameof(IDisplaySurnames.Individuals) => occ.Individuals,
                 nameof(IDisplaySurnames.Families) => occ.Families,
                 nameof(IDisplaySurnames.Marriages) => occ.Marriages,
-                _ => null,
+                _ => occ.Surname,
             };
         }
     }

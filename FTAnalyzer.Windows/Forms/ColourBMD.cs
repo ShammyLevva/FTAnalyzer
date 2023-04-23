@@ -217,7 +217,7 @@ namespace FTAnalyzer.Forms
                     DataGridViewCell cell = dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
                     BMDColours value = (BMDColours)cell.Value;
                     IDisplayColourBMD person = (IDisplayColourBMD)dgBMDReportSheet.Rows[e.RowIndex].DataBoundItem;
-                    Individual ind = ft.GetIndividual(person.IndividualID);
+                    Individual? ind = ft.GetIndividual(person.IndividualID);
                     if (e.ColumnIndex == birthColumnIndex || e.ColumnIndex == birthColumnIndex + 1)
                     {
                         FamilyTree.SearchBMD(FamilyTree.SearchType.BIRTH, ind, ind.BirthDate, ind.BirthLocation, cbBMDSearchProvider.SelectedIndex, cbRegion.Text, null);
@@ -255,9 +255,7 @@ namespace FTAnalyzer.Forms
                 else if (e.ColumnIndex >= 0)
                 {
                     string indID = (string)dgBMDReportSheet.CurrentRow.Cells["IndividualID"].Value;
-                    Individual ind = ft.GetIndividual(indID);
-                    Facts factForm = new(ind);
-                    factForm.Show();
+                    MainForm.ShowIndividualsFacts(indID);
                 }
             }
         }
@@ -402,10 +400,7 @@ namespace FTAnalyzer.Forms
             if (dgBMDReportSheet.CurrentRow is not null)
             {
                 IDisplayColourBMD ds = (IDisplayColourBMD)dgBMDReportSheet.CurrentRow.DataBoundItem;
-                Individual ind = FamilyTree.Instance.GetIndividual(ds.IndividualID);
-                Facts factForm = new(ind);
-                MainForm.DisposeDuplicateForms(factForm);
-                factForm.Show();
+                MainForm.ShowIndividualsFacts(ds.IndividualID);
             }
         }
 

@@ -360,10 +360,7 @@ namespace FTAnalyzer.Forms
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 string indID = (string)dgIndividuals.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
-                Individual ind = ft.GetIndividual(indID);
-                Facts factForm = new(ind);
-                MainForm.DisposeDuplicateForms(factForm);
-                factForm.Show();
+                MainForm.ShowIndividualsFacts(indID);
             }
         }
 
@@ -374,7 +371,7 @@ namespace FTAnalyzer.Forms
                 string famID = sender == dgFamilies ?
                     (string)dgFamilies.CurrentRow.Cells[nameof(IDisplayFamily.FamilyID)].Value :
                     (string)dgChildrenStatus.CurrentRow.Cells[nameof(IDisplayFamily.FamilyID)].Value;
-                Family fam = ft.GetFamily(famID);
+                Family? fam = ft.GetFamily(famID);
                 if (fam is not null)
                 {
                     if ((reportType == ReportType.MismatchedChildrenStatus || reportType == ReportType.MissingChildrenStatus) && ModifierKeys.Equals(Keys.Shift))
@@ -387,9 +384,7 @@ namespace FTAnalyzer.Forms
                     }
                     else
                     {
-                        Facts factForm = new(fam);
-                        MainForm.DisposeDuplicateForms(factForm);
-                        factForm.Show();
+                        MainForm.ShowFamilyFacts(fam.FamilyID);
                     }
                 }
             }
@@ -446,7 +441,7 @@ namespace FTAnalyzer.Forms
         void ContextMenuStrip1_Opened(object sender, EventArgs e)
         {
             string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
-            Individual ind = ft.GetIndividual(indID);
+            Individual? ind = ft.GetIndividual(indID);
             if (ind is not null)
                 viewNotesToolStripMenuItem.Enabled = ind.HasNotes;
         }
@@ -454,7 +449,7 @@ namespace FTAnalyzer.Forms
         void ViewNotesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
-            Individual ind = ft.GetIndividual(indID);
+            Individual? ind = ft.GetIndividual(indID);
             if (ind is not null)
             {
                 Notes notes = new(ind);

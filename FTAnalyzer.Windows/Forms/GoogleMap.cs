@@ -149,7 +149,7 @@ namespace FTAnalyzer.Forms
 
         public static void OnWaitingForGoogle(string message) => WaitingForGoogle?.Invoke(null, new GoogleWaitingEventArgs(message));
 
-        public static GeoResponse CallGoogleGeocode(FactLocation address, string text)
+        public static GeoResponse? CallGoogleGeocode(FactLocation address, string text)
         {
             string bounds = string.Empty;
             string tld = address.IsUnitedKingdom ? "&region=uk" : string.Empty;
@@ -179,7 +179,7 @@ namespace FTAnalyzer.Forms
             return GetGeoResponseAsync(url, text).Result;
         }
 
-        public static GeoResponse CallGoogleReverseGeocode(double latitude, double longitude)
+        public static GeoResponse? CallGoogleReverseGeocode(double latitude, double longitude)
         {
             string lat = HttpUtility.UrlEncode(latitude.ToString());
             string lng = HttpUtility.UrlEncode(longitude.ToString());
@@ -228,7 +228,7 @@ namespace FTAnalyzer.Forms
         static int sleepinterval = 200;
 
         // Call geocoding routine but account for throttling by Google geocoding engine
-        public static GeoResponse GoogleGeocode(FactLocation address, string text, int badtries)
+        public static GeoResponse? GoogleGeocode(FactLocation address, string text, int badtries)
         {
             int maxInterval = 30000;
             double seconds = sleepinterval / 1000;

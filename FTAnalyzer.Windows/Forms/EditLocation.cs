@@ -217,8 +217,8 @@ namespace FTAnalyzer.Forms
                 }
                 else
                 {
-                    GeoResponse res = GoogleMap.GoogleGeocode(null, txtSearch.Text, 8);
-                    if (res.Status == "OK" && !(res.Results[0].Geometry.Location.Lat == 0 && res.Results[0].Geometry.Location.Long == 0))
+                    GeoResponse? res = GoogleMap.GoogleGeocode(null, txtSearch.Text, 8);
+                    if (res is not null && res.Status == "OK" && !(res.Results[0].Geometry.Location.Lat == 0 && res.Results[0].Geometry.Location.Long == 0))
                     {
                         loc.Latitude = res.Results[0].Geometry.Location.Lat;
                         loc.Longitude = res.Results[0].Geometry.Location.Long;

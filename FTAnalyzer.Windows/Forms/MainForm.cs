@@ -2235,44 +2235,38 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 string famID = (string)dgFamilies.CurrentRow.Cells[nameof(IDisplayFamily.FamilyID)].Value;
-                Family fam = ft.GetFamily(famID);
-                if (fam is not null)
-                {
-                    Facts factForm = new(fam);
-                    DisposeDuplicateForms(factForm);
-                    factForm.Show();
-                }
+                MainForm.ShowFamilyFacts(famID);
             }
         }
 
         void DgDataErrors_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgDataErrors.CurrentRow.Cells[nameof(IDisplayDataError.Reference)].Value);
+                ShowIndividualsFacts((string)dgDataErrors.CurrentRow.Cells[nameof(IDisplayDataError.Reference)].Value);
         }
 
         void DgLooseDeaths_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgLooseDeaths.CurrentRow.Cells[nameof(IDisplayLooseDeath.IndividualID)].Value);
+                ShowIndividualsFacts((string)dgLooseDeaths.CurrentRow.Cells[nameof(IDisplayLooseDeath.IndividualID)].Value);
         }
 
         void DgLooseBirths_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgLooseBirths.CurrentRow.Cells[nameof(IDisplayLooseBirth.IndividualID)].Value);
+                ShowIndividualsFacts((string)dgLooseBirths.CurrentRow.Cells[nameof(IDisplayLooseBirth.IndividualID)].Value);
         }
 
         void DgLooseInfo_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgLooseInfo.CurrentRow.Cells[nameof(IDisplayLooseInfo.IndividualID)].Value);
+                ShowIndividualsFacts((string)dgLooseInfo.CurrentRow.Cells[nameof(IDisplayLooseInfo.IndividualID)].Value);
         }
 
         void DgTreeTops_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowFacts((string)dgTreeTops.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value);
+                ShowIndividualsFacts((string)dgTreeTops.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value);
         }
 
         void DgWorldWars_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -2283,13 +2277,14 @@ namespace FTAnalyzer
                 if (WWI && ModifierKeys.Equals(Keys.Shift))
                     LivesOfFirstWorldWar(indID);
                 else
-                    ShowFacts(indID);
+                    ShowIndividualsFacts(indID);
             }
         }
 
         void LivesOfFirstWorldWar(string indID)
         {
-            Individual ind = ft.GetIndividual(indID);
+            Individual? ind = ft.GetIndividual(indID);
+            if (ind is null) return;
             string searchtext = ind.Forename + "+" + ind.Surname;
             if (ind.ServiceNumber.Length > 0)
                 searchtext += "+" + ind.ServiceNumber;
@@ -2328,7 +2323,7 @@ namespace FTAnalyzer
                 else if (e.Clicks == 2)
                 {
                     string indID = (string)dgIndividuals.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
-                    ShowFacts(indID);
+                    ShowIndividualsFacts(indID);
                 }
             }
         }
@@ -2338,7 +2333,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 string indID = (string)dgIndividuals.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
-                ShowFacts(indID);
+                ShowIndividualsFacts(indID);
             }
         }
 
@@ -2361,8 +2356,8 @@ namespace FTAnalyzer
             string indB_ID = (string)dgDuplicates.CurrentRow.Cells[nameof(IDisplayDuplicateIndividual.MatchIndividualID)].Value;
             if (GeneralSettings.Default.MultipleFactForms)
             {
-                ShowFacts(indA_ID);
-                ShowFacts(indB_ID, true);
+                ShowIndividualsFacts(indA_ID);
+                ShowIndividualsFacts(indB_ID, true);
             }
             else
             {
@@ -2390,9 +2385,9 @@ namespace FTAnalyzer
 
         [SupportedOSPlatform("windows10.0.17763")] void TxtFactsSurname_TextChanged(object sender, EventArgs e) => SetupFactsCheckboxes();
 
-        void ShowFacts(string indID, bool offset = false)
+        public static void ShowIndividualsFacts(string indID, bool offset = false)
         {
-            Individual ind = ft.GetIndividual(indID);
+            Individual? ind = FamilyTree.Instance.GetIndividual(indID);
             if (ind is not null)
             {
                 Facts factForm = new(ind);
@@ -2406,9 +2401,9 @@ namespace FTAnalyzer
             }
         }
 
-        void ShowFamilyFacts(string famID, bool offset = false)
+        public static void ShowFamilyFacts(string famID, bool offset = false)
         {
-            Family fam = ft.GetFamily(famID);
+            Family? fam = FamilyTree.Instance.GetFamily(famID);
             if (fam is not null)
             {
                 Facts factForm = new(fam);

@@ -75,10 +75,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
-                Individual ind = ft.GetIndividual(indID);
-                Facts factForm = new(ind);
-                MainForm.DisposeDuplicateForms(factForm);
-                factForm.Show();
+                MainForm.ShowIndividualsFacts(indID);
             }
         }
 

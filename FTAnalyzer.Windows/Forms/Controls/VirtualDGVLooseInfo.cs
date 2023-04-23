@@ -15,7 +15,7 @@
                 nameof(IDisplayLooseInfo.DeathLocation) => ind.DeathLocation,
                 nameof(IDisplayLooseInfo.LooseBirth) => ind.LooseBirth,
                 nameof(IDisplayLooseInfo.LooseDeath) => ind.LooseDeath,
-                _ => null,
+                _ => ind.IndividualID,
             };
         }
     }

@@ -69,7 +69,7 @@ namespace FTAnalyzer.Forms.Controls
             return locationFilter;
         }
 
-        public FactLocation GetLocation
+        public FactLocation? GetLocation
         {
             get {
 

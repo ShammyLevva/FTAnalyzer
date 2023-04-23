@@ -33,7 +33,7 @@
                 default:
                     break;
             }
-            return null;
+            return loc.Country;
         }
     }
 }

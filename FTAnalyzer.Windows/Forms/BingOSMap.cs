@@ -51,13 +51,13 @@ namespace FTAnalyzer.Forms
             }
             else
             {
-                GeoResponse res = GoogleMap.CallGoogleGeocode(loc, loc.ToString());
-                if (res.Status == "OK")
+                GeoResponse? res = GoogleMap.CallGoogleGeocode(loc, loc.ToString());
+                if (res?.Status == "OK")
                 {
                     labMapLevel.Text = GoogleMap.LocationText(res, loc, level);
                     viewport = res.Results[0].Geometry.ViewPort;
                 }
-                else if (res.Status == "OVER_QUERY_LIMIT" && loc.IsGeoCoded(false))
+                else if (res?.Status == "OVER_QUERY_LIMIT" && loc.IsGeoCoded(false))
                 {
                     labMapLevel.Text = $"Previously Geocoded: {loc}";
                     viewport = new GeoResponse.CResult.CGeometry.CViewPort();

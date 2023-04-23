@@ -20,7 +20,7 @@
                 nameof(IDisplayFamily.WifeSurname) => fam.WifeSurname,
                 nameof(IDisplayFamily.WifeForenames) => fam.WifeForenames,
                 nameof(IDisplayFamily.MaritalStatus) => fam.MaritalStatus,
-                _ => null,
+                _ => fam.FamilyID,
             };
         }
     }

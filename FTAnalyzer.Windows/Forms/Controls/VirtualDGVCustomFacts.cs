@@ -17,7 +17,7 @@
                 default:
                     break;
             }
-            return null;
+            return fact.CustomFactName;
         }
     }
 }
