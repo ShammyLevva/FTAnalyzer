@@ -4,6 +4,8 @@ using FTAnalyzer.Properties;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.Json;
+using System.Diagnostics;
 
 namespace FTAnalyzer.Forms
 {
@@ -139,7 +141,7 @@ namespace FTAnalyzer.Forms
         }
 
         public Facts(Predicate<Individual> filter, bool errors)
-            :this()
+            : this()
         {
             allFacts = true;
             IEnumerable<Individual> listToCheck = ft.AllIndividuals.Filter(filter);
@@ -155,8 +157,8 @@ namespace FTAnalyzer.Forms
                     }
                     else
                     {
-                        if(f.FactType == Fact.CENSUS_FTA)
-                            facts.Add(new DisplayFact(ind,f));
+                        if (f.FactType == Fact.CENSUS_FTA)
+                            facts.Add(new DisplayFact(ind, f));
                     }
                 }
             }
@@ -202,12 +204,11 @@ namespace FTAnalyzer.Forms
         {
             try
             {
-                IFormatter formatter = new BinaryFormatter();
-                string file = Path.Combine(GeneralSettings.Default.SavePath, "IgnoreList.xml");
-                using Stream stream = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.None);
-                formatter.Serialize(stream, IgnoreList);
+                string jsonFile = Path.Combine(GeneralSettings.Default.SavePath, "IgnoreList.json");
+                string ignoreList = JsonSerializer.Serialize(IgnoreList);
+                File.WriteAllText(jsonFile, ignoreList);
             }
-            catch (Exception )
+            catch (Exception)
             {
                 //log.Error("Error " + e.Message + " writing IgnoreList.xml");
             }
@@ -215,23 +216,36 @@ namespace FTAnalyzer.Forms
 
         public void DeserializeIgnoreList()
         {
-            //log.Debug("FamilyTree.DeserializeIgnoreList");
             IgnoreList = new List<string>();
             try
             {
-                IFormatter formatter = new BinaryFormatter();
-                string file = Path.Combine(GeneralSettings.Default.SavePath, "IgnoreList.xml");
-                if (File.Exists(file))
-                {
-                    using Stream stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read);
-                    IgnoreList = (List<string>)formatter.Deserialize(stream);
-                }
+                string xmlfile = Path.Combine(GeneralSettings.Default.SavePath, "IgnoreList.xml");
+                string jsonFile = Path.Combine(GeneralSettings.Default.SavePath, "IgnoreList.json");
+                if (File.Exists(xmlfile))
+                    ConvertIgnoreListXMLToJson(xmlfile);
+                else if (File.Exists(jsonFile))
+                    IgnoreList = JsonSerializer.Deserialize<List<string>>(File.ReadAllText(jsonFile));
+                else
+                    IgnoreList = new List<string>();
             }
-            catch (Exception )
+            catch (Exception ex)
             {
-               //log.Error("Error " + e.Message + " reading IgnoreList.xml");
+                Debug.Print($"Error {ex.Message} reading IgnoreList file");
+                IgnoreList = new List<string>();
             }
         }
+
+        void ConvertIgnoreListXMLToJson(string xmlFile)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            using Stream stream = new FileStream(xmlFile, FileMode.Open, FileAccess.Read, FileShare.Read);
+            IgnoreList = (List<string>)formatter.Deserialize(stream);
+            string jsonFile = Path.Combine(GeneralSettings.Default.SavePath, "IgnoreList.json");
+            string nonDuplicates = JsonSerializer.Serialize(IgnoreList);
+            File.WriteAllText(jsonFile, nonDuplicates);
+            File.Delete(xmlFile);
+        }
+
 
         void DgFacts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -429,7 +443,7 @@ namespace FTAnalyzer.Forms
         }
 
         void Facts_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
-        
+
         void Facts_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }
 }
