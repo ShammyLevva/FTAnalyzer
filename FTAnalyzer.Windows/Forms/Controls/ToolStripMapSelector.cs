@@ -115,24 +115,26 @@ namespace FTAnalyzer.Forms.Controls
             copyrightLabel.Links.Add(link);
         }
 
-        void Ctrl_Click(object sender, EventArgs e)
+        void Ctrl_Click(object? sender, EventArgs e)
         {
             foreach (ToolStripMenuItem menu in DropDownItems)
                 menu.Checked = false;
             while(mapbox.Map.BackgroundLayer.Count > 0)
                 mapbox.Map.BackgroundLayer.RemoveAt(0);
-            MapToolStripMenuItem selectedOption = (MapToolStripMenuItem)sender;
-            mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(mnuOpenStreetMap.TileSource, mnuOpenStreetMap.Name));
-            TileAsyncLayer mapLayer = new(selectedOption.TileSource, selectedOption.Name)
+            if (sender is MapToolStripMenuItem selectedOption)
             {
-                OnlyRedrawWhenComplete = true,
-            };
-            mapbox.Map.BackgroundLayer.Add(mapLayer);
-            selectedOption.Checked = true;
-            opacitySlider.Visible = !selectedOption.Name.Equals(mnuOpenStreetMap.Name);
-            UpdateLinkLabel(selectedOption.LinkLabelType);
-            Application.UserAppDataRegistry.SetValue("Default Map Background", selectedOption.Name);
-            mapbox.Refresh();
+                mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(mnuOpenStreetMap.TileSource, mnuOpenStreetMap.Name));
+                TileAsyncLayer mapLayer = new(selectedOption.TileSource, selectedOption.Name)
+                {
+                    OnlyRedrawWhenComplete = true,
+                };
+                mapbox.Map.BackgroundLayer.Add(mapLayer);
+                selectedOption.Checked = true;
+                opacitySlider.Visible = !selectedOption.Name.Equals(mnuOpenStreetMap.Name);
+                UpdateLinkLabel(selectedOption.LinkLabelType);
+                Application.UserAppDataRegistry.SetValue("Default Map Background", selectedOption.Name);
+                mapbox.Refresh();
+            }
         }
 
         protected override void Dispose(bool disposing)

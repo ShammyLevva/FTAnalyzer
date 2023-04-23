@@ -161,7 +161,7 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.Default;
         }
 
-        void TbYears_MouseWheel(object sender, EventArgs e)
+        void TbYears_MouseWheel(object? sender, EventArgs e)
         {
             // do nothing if using mousewheel this prevents year scrolling when map should scroll
         }

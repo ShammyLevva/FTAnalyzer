@@ -20,7 +20,7 @@ namespace FTAnalyzer.UserControls
             MouseHover += new EventHandler(ExtendedToolTipLabel_MouseHover);
         }
 
-        void ExtendedToolTipLabel_MouseHover(object sender, EventArgs e)
+        void ExtendedToolTipLabel_MouseHover(object? sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(ToolTipText))
             {
@@ -31,7 +31,7 @@ namespace FTAnalyzer.UserControls
 
         public string ToolTipText { get; set; }
 
-        void ExtendedToolTipLabel_MouseLeave(object sender, EventArgs e)
+        void ExtendedToolTipLabel_MouseLeave(object? sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(ToolTipText))
             {

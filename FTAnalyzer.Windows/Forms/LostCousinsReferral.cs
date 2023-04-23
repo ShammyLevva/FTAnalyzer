@@ -54,7 +54,7 @@ namespace FTAnalyzer.Forms
             dgLCReferrals.DataSource = new SortableBindingList<ExportReferrals>(referrals);
         }
 
-        void RefreshCensusReferences(object sender, EventArgs e) => dgLCReferrals.Refresh();
+        void RefreshCensusReferences(object? sender, EventArgs e) => dgLCReferrals.Refresh();
 
         void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {

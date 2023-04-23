@@ -43,7 +43,7 @@ namespace FTAnalyzer.Forms
             splitContainerMap.SplitterDistance = (int)Application.UserAppDataRegistry.GetValue("Places Map Splitter Distance", splitContainerMap.SplitterDistance);
         }
 
-        void DatabaseHelper_GeoLocationUpdated(object location, EventArgs e)
+        void DatabaseHelper_GeoLocationUpdated(object? location, EventArgs e)
         {
             if (InvokeRequired)
             {

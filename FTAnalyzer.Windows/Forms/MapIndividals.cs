@@ -141,14 +141,15 @@ namespace FTAnalyzer
                 dgIndividuals.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
         }
 
-        void DatabaseHelper_GeoLocationUpdated(object location, EventArgs e)
+        void DatabaseHelper_GeoLocationUpdated(object? location, EventArgs e)
         {
             if (InvokeRequired)
             {
                 Invoke(new Action(() => DatabaseHelper_GeoLocationUpdated(location, e)));
                 return;
             }
-            UpdateIcons((FactLocation)location);
+            if(location is FactLocation loc)
+                UpdateIcons(loc);
         }
 
         void MapIndividuals_FormClosed(object sender, FormClosedEventArgs e)

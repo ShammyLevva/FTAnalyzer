@@ -272,7 +272,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void MenuGeocode_CheckedChanged(object sender, EventArgs e)
+        void MenuGeocode_CheckedChanged(object? sender, EventArgs e)
         {
             if (!refreshingMenus)
                 UpdateGeocodeStatusMenus();
@@ -287,7 +287,7 @@ namespace FTAnalyzer.Forms
             UpdateGridWithFilters(false);
         }
 
-        void MenuResultType_CheckedChanged(object sender, EventArgs e)
+        void MenuResultType_CheckedChanged(object? sender, EventArgs e)
         {
             if (!refreshingMenus)
                 UpdateGoogleStatusMenus();

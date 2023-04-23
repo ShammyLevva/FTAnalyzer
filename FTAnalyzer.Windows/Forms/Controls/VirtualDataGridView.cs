@@ -53,7 +53,7 @@ namespace FTAnalyzer.Forms.Controls
             SetDoubleBuffered();
         }
 
-        void OnSortStringChanged(object sender, SortEventArgs e)
+        void OnSortStringChanged(object? sender, SortEventArgs e)
         {
             int lastPos = e.SortString.LastIndexOf('[');
             if (lastPos >= 0)
@@ -68,7 +68,7 @@ namespace FTAnalyzer.Forms.Controls
             }
         }
 
-        public void OnFilterStringChanged(object sender, FilterEventArgs e)
+        public void OnFilterStringChanged(object? sender, FilterEventArgs e)
         {
             if (e.Cancel)
                 _dataSource = _fulllist;
@@ -228,15 +228,15 @@ namespace FTAnalyzer.Forms.Controls
             Refresh();
         }
 
-        void OnResizeChanged(object sender, EventArgs e) => ForceToParent();
+        void OnResizeChanged(object? sender, EventArgs e) => ForceToParent();
 
-        void OnColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        void OnColumnHeaderMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
         {
             //sortedDirection = Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
             //Sort(Columns[e.ColumnIndex], sortedDirection);
         }
 
-        void OnCellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
+        void OnCellValueNeeded(object? sender, DataGridViewCellValueEventArgs e)
         {
             if (_dataSource is null || _dataSource.Count == 0 || e.RowIndex > _dataSource.Count -1)
                 return;
@@ -244,7 +244,7 @@ namespace FTAnalyzer.Forms.Controls
             e.Value = GetValueFor(data, Columns[e.ColumnIndex].DataPropertyName);
         }
 
-        void OnColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+        void OnColumnWidthChanged(object? sender, DataGridViewColumnEventArgs e)
         {
             Debug.WriteLine($"Column {e.Column.Name} changed width to {e.Column.Width}");
         }

@@ -49,7 +49,7 @@ namespace FTAnalyzer.Forms
             catch (Exception) { }
         }
 
-        void Grid_SortFinished(object sender, EventArgs e) => SetBackColour();
+        void Grid_SortFinished(object? sender, EventArgs e) => SetBackColour();
 
         public Facts(Individual individual)
             : this()

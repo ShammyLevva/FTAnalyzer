@@ -1083,14 +1083,14 @@ namespace FTAnalyzer
         #endregion
 
         #region EventHandlers
-        void Options_BaptismChanged(object sender, EventArgs e)
+        void Options_BaptismChanged(object? sender, EventArgs e)
         {
             // do anything that needs doing when option changes
         }
 
-        async void Options_ReloadData(object sender, EventArgs e) => await QueryReloadData().ConfigureAwait(true);
+        async void Options_ReloadData(object? sender, EventArgs e) => await QueryReloadData().ConfigureAwait(true);
 
-        void Options_MinimumParentalAgeChanged(object sender, EventArgs e)
+        void Options_MinimumParentalAgeChanged(object? sender, EventArgs e)
         {
             ft.ResetLooseFacts();
             if (tabSelector.SelectedTab == tabErrorsFixes && tabErrorFixSelector.SelectedTab.Equals(tabLooseBirths))
@@ -1099,10 +1099,10 @@ namespace FTAnalyzer
                 SetupLooseDeaths();
         }
 
-        void Options_AliasInNameChanged(object sender, EventArgs e) => ft.SetFullNames();
+        void Options_AliasInNameChanged(object? sender, EventArgs e) => ft.SetFullNames();
 
         [SupportedOSPlatform("windows10.0.17763")]
-        void Options_GlobalFontChanged(object sender, EventArgs e)
+        void Options_GlobalFontChanged(object? sender, EventArgs e)
         {
             HourGlass(true);
             SetupFonts();
@@ -1550,7 +1550,7 @@ namespace FTAnalyzer
             ScrollBarDebug.LogScreenData(this, dgIndividuals, "SetupIndividualsTab");
         }
 
-        void VirtualGridFiltered(object sender, CountEventArgs e) => tsCountLabel.Text = e.FilterText;
+        void VirtualGridFiltered(object? sender, CountEventArgs e) => tsCountLabel.Text = e.FilterText;
 
         async void TabErrorFixSelector_SelectedIndexChanged(object sender, EventArgs e)
         {

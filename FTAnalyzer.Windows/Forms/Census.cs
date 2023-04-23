@@ -305,7 +305,7 @@ namespace FTAnalyzer.Forms
                 dgCensus.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
         }
 
-        void RefreshCensusReferences(object sender, EventArgs e) => dgCensus.Refresh();
+        void RefreshCensusReferences(object? sender, EventArgs e) => dgCensus.Refresh();
 
         void Census_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
