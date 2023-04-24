@@ -43,8 +43,8 @@ namespace FTAnalyzer
         {
             this.components = (new global::System.ComponentModel.Container());
             global::System.ComponentModel.ComponentResourceManager resources = new global::System.ComponentModel.ComponentResourceManager(typeof(global::FTAnalyzer.MainForm));
-            global::System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new global::System.Windows.Forms.DataGridViewCellStyle();
-            global::System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new global::System.Windows.Forms.DataGridViewCellStyle();
+            global::System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new global::System.Windows.Forms.DataGridViewCellStyle();
+            global::System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new global::System.Windows.Forms.DataGridViewCellStyle();
             this.openGedcom = (new global::System.Windows.Forms.OpenFileDialog());
             this.menuStrip1 = (new global::System.Windows.Forms.MenuStrip());
             this.fileToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
@@ -1197,14 +1197,14 @@ namespace FTAnalyzer
             this.dgCheckAncestors.AllowUserToDeleteRows = (false);
             this.dgCheckAncestors.Anchor = ((global::System.Windows.Forms.AnchorStyles)((((global::System.Windows.Forms.AnchorStyles.Top) | (global::System.Windows.Forms.AnchorStyles.Bottom)) | (global::System.Windows.Forms.AnchorStyles.Left)) | (global::System.Windows.Forms.AnchorStyles.Right)));
             this.dgCheckAncestors.ColumnHeadersHeight = (40);
-            dataGridViewCellStyle1.Alignment = (global::System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft);
-            dataGridViewCellStyle1.BackColor = (global::System.Drawing.SystemColors.Window);
-            dataGridViewCellStyle1.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 8.25F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            dataGridViewCellStyle1.ForeColor = (global::System.Drawing.SystemColors.ControlText);
-            dataGridViewCellStyle1.SelectionBackColor = (global::System.Drawing.SystemColors.Highlight);
-            dataGridViewCellStyle1.SelectionForeColor = (global::System.Drawing.SystemColors.HighlightText);
-            dataGridViewCellStyle1.WrapMode = (global::System.Windows.Forms.DataGridViewTriState.False);
-            this.dgCheckAncestors.DefaultCellStyle = (dataGridViewCellStyle1);
+            dataGridViewCellStyle3.Alignment = (global::System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft);
+            dataGridViewCellStyle3.BackColor = (global::System.Drawing.SystemColors.Window);
+            dataGridViewCellStyle3.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 8.25F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
+            dataGridViewCellStyle3.ForeColor = (global::System.Drawing.SystemColors.ControlText);
+            dataGridViewCellStyle3.SelectionBackColor = (global::System.Drawing.SystemColors.Highlight);
+            dataGridViewCellStyle3.SelectionForeColor = (global::System.Drawing.SystemColors.HighlightText);
+            dataGridViewCellStyle3.WrapMode = (global::System.Windows.Forms.DataGridViewTriState.False);
+            this.dgCheckAncestors.DefaultCellStyle = (dataGridViewCellStyle3);
             this.dgCheckAncestors.Location = (new global::System.Drawing.Point(7, 196));
             this.dgCheckAncestors.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
             this.dgCheckAncestors.Name = ("dgCheckAncestors");
@@ -1292,14 +1292,14 @@ namespace FTAnalyzer
             this.dgDataErrors.AutoSizeColumnsMode = (global::System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
             this.dgDataErrors.AutoSizeRowsMode = (global::System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells);
             this.dgDataErrors.ColumnHeadersHeightSizeMode = (global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize);
-            dataGridViewCellStyle2.Alignment = (global::System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft);
-            dataGridViewCellStyle2.BackColor = (global::System.Drawing.SystemColors.Window);
-            dataGridViewCellStyle2.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 8.25F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            dataGridViewCellStyle2.ForeColor = (global::System.Drawing.SystemColors.ControlText);
-            dataGridViewCellStyle2.SelectionBackColor = (global::System.Drawing.SystemColors.Highlight);
-            dataGridViewCellStyle2.SelectionForeColor = (global::System.Drawing.SystemColors.HighlightText);
-            dataGridViewCellStyle2.WrapMode = (global::System.Windows.Forms.DataGridViewTriState.False);
-            this.dgDataErrors.DefaultCellStyle = (dataGridViewCellStyle2);
+            dataGridViewCellStyle4.Alignment = (global::System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft);
+            dataGridViewCellStyle4.BackColor = (global::System.Drawing.SystemColors.Window);
+            dataGridViewCellStyle4.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 8.25F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
+            dataGridViewCellStyle4.ForeColor = (global::System.Drawing.SystemColors.ControlText);
+            dataGridViewCellStyle4.SelectionBackColor = (global::System.Drawing.SystemColors.Highlight);
+            dataGridViewCellStyle4.SelectionForeColor = (global::System.Drawing.SystemColors.HighlightText);
+            dataGridViewCellStyle4.WrapMode = (global::System.Windows.Forms.DataGridViewTriState.False);
+            this.dgDataErrors.DefaultCellStyle = (dataGridViewCellStyle4);
             this.dgDataErrors.FilterAndSortEnabled = (true);
             this.dgDataErrors.FilterStringChangedInvokeBeforeDatasourceUpdate = (true);
             this.dgDataErrors.Location = (new global::System.Drawing.Point(16, 390));
@@ -2179,6 +2179,7 @@ namespace FTAnalyzer
             this.rtbLCoutput.TabIndex = (41);
             this.rtbLCoutput.TabStop = (false);
             this.rtbLCoutput.Text = (resources.GetString("rtbLCoutput.Text"));
+            this.rtbLCoutput.TextChanged += (this.RtbLCoutput_TextChanged);
             // 
             // btnViewInvalidRefs
             // 
@@ -3512,6 +3513,7 @@ namespace FTAnalyzer
             this.ckbDataErrors.ScrollAlwaysVisible = (true);
             this.ckbDataErrors.Size = (new global::System.Drawing.Size(2092, 260));
             this.ckbDataErrors.TabIndex = (8);
+            this.ckbDataErrors.SelectedIndexChanged += (this.CkbDataErrors_SelectedIndexChanged);
             // 
             // btnSelectAll
             // 

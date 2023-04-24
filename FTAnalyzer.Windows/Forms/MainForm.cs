@@ -2109,7 +2109,7 @@ namespace FTAnalyzer
                 MessageBox.Show("You need to stop Geocoding before you can import the database", "FTAnalyzer");
             else
             {
-                string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString() 
+                string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString()
                                                                         ?? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 restoreDatabase.FileName = "*.zip";
                 restoreDatabase.InitialDirectory = directory;
@@ -3040,7 +3040,7 @@ namespace FTAnalyzer
         {
             ComboBoxFamily? f = null;
             if (cmbColourFamily.Text != "All Families")
-                f = (ComboBoxFamily) cmbColourFamily.SelectedItem; // store the previous value to set it again after
+                f = (ComboBoxFamily)cmbColourFamily.SelectedItem; // store the previous value to set it again after
             ClearColourFamilyCombo();
             bool stillThere = UpdateColourFamilyComboBox(f);
             if (f is not null && stillThere)  // the previously selected value is still present so select it
