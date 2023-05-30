@@ -150,7 +150,7 @@ namespace FTAnalyzer.Utilities
                     zip.Comment = comment + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm");
                     zip.Save();
                     //EndBackupDatabase();
-                    Application.UserAppDataRegistry.SetValue("Geocode Backup Directory", Path.GetDirectoryName(saveDatabase.FileName));
+                    Application.UserAppDataRegistry.SetValue("Geocode Backup Directory", Path.GetDirectoryName(saveDatabase.FileName) ?? string.Empty);
                     UIHelpers.ShowMessage($"Database exported to {saveDatabase.FileName}", "FTAnalyzer Database Export Complete");
                     zip.Dispose();
                     return true;
@@ -978,7 +978,7 @@ namespace FTAnalyzer.Utilities
                 using SQLiteDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    FactLocation loc = FactLocation.LookupLocation(reader[0].ToString());
+                    FactLocation loc = FactLocation.LookupLocation(reader[0].ToString() ?? string.Empty);
                     if (!queue.Contains(loc) && loc.Latitude != 0 && loc.Longitude != 0)
                         queue.Enqueue(loc);
                 }

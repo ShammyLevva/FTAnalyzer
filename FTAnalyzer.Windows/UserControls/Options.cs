@@ -34,9 +34,9 @@ namespace FTAnalyzer.UserControls
 						if (Activator.CreateInstance(types[i]) is UserControl userControl && userControl is IOptions optionCast)
 						{
 							userControl.Anchor = (((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right);
-							userControl.Location = new System.Drawing.Point(3, 3);
+							userControl.Location = new Point(3, 3);
 							userControl.Name = optionCast.TreePosition;
-							userControl.Size = new System.Drawing.Size(243, 356);
+							userControl.Size = new Size(243, 356);
 							userControl.TabIndex = 0;
 							userControl.Visible = false;
 							userControl.Dock = DockStyle.Fill;

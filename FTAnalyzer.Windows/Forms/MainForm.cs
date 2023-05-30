@@ -514,6 +514,7 @@ namespace FTAnalyzer
             mnuDNA_GEDCOM.Enabled = enabled;
             mnuJSON.Enabled = enabled;
             mnuGoogleMyMaps.Enabled = enabled;
+            MnuCustomFactsToExcel.Enabled = enabled;
         }
 
         void HourGlass(bool on)
@@ -1434,7 +1435,7 @@ namespace FTAnalyzer
                     else if (tabSelector.SelectedTab == tabToday)
                     {
                         bool todaysMonth = Application.UserAppDataRegistry.GetValue("Todays Events Month", "False").Equals("True");
-                        int todaysStep = int.Parse(Application.UserAppDataRegistry.GetValue("Todays Events Step", "5").ToString());
+                        int todaysStep = int.Parse(Application.UserAppDataRegistry.GetValue("Todays Events Step", "5").ToString() ?? "5");
                         rbTodayMonth.Checked = todaysMonth;
                         nudToday.Value = todaysStep;
                         Analytics.TrackAction(Analytics.MainFormAction, Analytics.TodayTabEvent);
@@ -2983,7 +2984,7 @@ namespace FTAnalyzer
         {
             HourGlass(true);
             Predicate<Individual> relTypeFilter = relTypesColoured.BuildFilter<Individual>(x => x.RelationType);
-            List<IDisplayColourBMD> list = ft.ColourBMD(relTypeFilter, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily);
+            List<IDisplayColourBMD> list = ft.ColourBMD(relTypeFilter, txtColouredSurname.Text, (ComboBoxFamily)cmbColourFamily.SelectedItem);
             ColourBMD rs = new(list);
             DisposeDuplicateForms(rs);
             rs.Show();
@@ -2997,7 +2998,7 @@ namespace FTAnalyzer
             HourGlass(true);
             Predicate<Individual> relTypeFilter = relTypesColoured.BuildFilter<Individual>(x => x.RelationType);
             List<IDisplayColourCensus> list =
-                ft.ColourCensus(country, relTypeFilter, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily, ckbIgnoreNoBirthDate.Checked, ckbIgnoreNoDeathDate.Checked);
+                ft.ColourCensus(country, relTypeFilter, txtColouredSurname.Text, (ComboBoxFamily)cmbColourFamily.SelectedItem, ckbIgnoreNoBirthDate.Checked, ckbIgnoreNoDeathDate.Checked);
             ColourCensus rs = new(country, list);
             DisposeDuplicateForms(rs);
             rs.Show();

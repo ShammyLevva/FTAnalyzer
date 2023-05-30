@@ -44,9 +44,7 @@ namespace FTAnalyzer.Utilities
                             values[dex++] = Props[i].GetValue(item, null);
                         }
                     }
-
                     dataTable.Rows.Add(values);
-
                 }
             }
             //put a breakpoint here and check datatable
