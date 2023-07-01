@@ -1,10 +1,9 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 
 namespace FTAnalyzer.Utilities
 {
-    class ScrollingRichTextBox : System.Windows.Forms.RichTextBox
+    class ScrollingRichTextBox : RichTextBox
     {
         private class NativeMethods
         {
