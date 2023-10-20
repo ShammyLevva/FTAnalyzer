@@ -5,7 +5,7 @@ Family Tree Analyzer
 
 If you have [issues with the Windows Store](http://www.ftanalyzer.com/ResetWindowsStore) or have a older version of Windows you can [download a stand alone installer version here](http://ftanalyzer.com/releases). This version is identical to the Windows Store version but it will require you to manually update to get the latest changes. It does however allow you to run the program on pre-Windows 10 versions of Windows, however as time passes the ability to keep it working on really old versions of Windows may stop working.
 
-#### If you have a Mac then sorry but it is no longer supported. There is an old version available but I have no plans to update it unless someone who is a Mac developer comes along and is willing to maintain it. The old version is available that this old page that hasn't been updated in years [here.](http://mac.ftanalyzer.com)  
+#### If you have a Mac I'm sorry but it is no longer supported. Apple charge me $100 a year just to allow me to publish on the store (Microsoft store is completely free to publish on for the Windows version) and after 6 years I cannot justify that for a free program. There is an old version available but I have no plans to update it unless someone who is a Mac developer comes along and is willing to maintain it. The old version is available that this old page that hasn't been updated in years [here.](http://mac.ftanalyzer.com)  
 
 The simplest Windows 10 install method is to install from the Offical Microsoft App Store. This will then auto update the application when a new version comes out assuming you've not turned off this option in the Microsoft App Store app.  
 
