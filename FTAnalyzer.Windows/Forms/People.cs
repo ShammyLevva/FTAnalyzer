@@ -92,7 +92,7 @@ namespace FTAnalyzer.Forms
         }
         public void SetCustomFacts(string factType, SortableBindingList<Individual> individuals, SortableBindingList<Family> families)
         {
-            Text = "Individuals/Families whose have the custom fact of " + (string.IsNullOrEmpty(factType) ? "not entered" : factType);
+            Text = "Individuals/Families who have the custom fact of " + (string.IsNullOrEmpty(factType) ? "not entered" : factType);
             if (individuals.Count > 0)
             {
                 SortableBindingList<IDisplayIndividual> dsInd = new();
@@ -132,7 +132,7 @@ namespace FTAnalyzer.Forms
 
         public void SetSurnameStats(IDisplaySurnames stat, Predicate<Individual> indFilter, Predicate<Family> famFilter, bool ignoreCase)
         {
-            Text = $"Individuals & Families whose surame is {stat.Surname}";
+            Text = $"Individuals & Families whose surname is {stat.Surname}";
             SortableBindingList<IDisplayIndividual> dsInd = new();
             bool indSurnames(Individual x) => x.Surname.Equals(stat.Surname);
             Predicate<Individual> filter = FilterUtils.AndFilter(indFilter, indSurnames);
