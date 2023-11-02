@@ -54,7 +54,7 @@ namespace FTAnalyzer
             this.FactLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Relaton = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Relation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeOfFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -180,7 +180,7 @@ namespace FTAnalyzer
             this.FactLocation,
             this.IndividualID,
             this.FactName,
-            this.Relaton,
+            this.Relation,
             this.RelationToRoot,
             this.TypeOfFact,
             this.FactDate,
@@ -251,14 +251,14 @@ namespace FTAnalyzer
             this.FactName.ReadOnly = true;
             this.FactName.Width = 150;
             // 
-            // Relaton
+            // Relation
             // 
-            this.Relaton.DataPropertyName = "Relation";
-            this.Relaton.HeaderText = "Relaton";
-            this.Relaton.MinimumWidth = 105;
-            this.Relaton.Name = "Relaton";
-            this.Relaton.ReadOnly = true;
-            this.Relaton.Width = 105;
+            this.Relation.DataPropertyName = "Relation";
+            this.Relation.HeaderText = "Relation";
+            this.Relation.MinimumWidth = 105;
+            this.Relation.Name = "Relation";
+            this.Relation.ReadOnly = true;
+            this.Relation.Width = 105;
             // 
             // RelationToRoot
             // 
@@ -400,7 +400,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.DataGridViewTextBoxColumn FactLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn IndividualID;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Relaton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Relation;
         private System.Windows.Forms.DataGridViewTextBoxColumn RelationToRoot;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeOfFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactDate;
