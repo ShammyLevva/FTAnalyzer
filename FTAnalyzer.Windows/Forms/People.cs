@@ -206,7 +206,7 @@ namespace FTAnalyzer.Forms
 
         public void SetupAgedOver99Report()
         {
-            Text = "Invididuals Aged over 99 in file.";
+            Text = "Individuals Aged over 99 in file.";
             dgIndividuals.DataSource = ft.AgedOver99;
             SortIndividuals();
             splitContainer.Panel1Collapsed = false;
