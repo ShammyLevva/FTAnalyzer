@@ -148,7 +148,7 @@ namespace FTAnalyzer
                 Invoke(new Action(() => DatabaseHelper_GeoLocationUpdated(location, e)));
                 return;
             }
-            if(location is FactLocation loc)
+            if (location is FactLocation loc)
                 UpdateIcons(loc);
         }
 

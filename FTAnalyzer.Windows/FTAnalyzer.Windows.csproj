@@ -277,7 +277,7 @@
     <Compile Update="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\MapIndividals.cs">
+    <Compile Update="Forms\MapIndividuals.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\MissingData.cs">
