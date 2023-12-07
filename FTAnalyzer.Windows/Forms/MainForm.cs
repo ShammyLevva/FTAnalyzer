@@ -1320,7 +1320,7 @@ namespace FTAnalyzer
             if (e.ColumnIndex == 0 && e.RowIndex >= 0)
             {
                 DataGridViewCell cell = dgSurnames.Rows[e.RowIndex].Cells[nameof(IDisplaySurnames.Surname)];
-                if (cell.Value is not null)
+                if (cell.Value.ToString() is not null)
                 {
                     HourGlass(true);
                     Statistics.DisplayGOONSpage(cell.Value.ToString());
