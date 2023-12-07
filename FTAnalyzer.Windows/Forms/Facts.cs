@@ -221,9 +221,9 @@ namespace FTAnalyzer.Forms
             {
                 string xmlfile = Path.Combine(GeneralSettings.Default.SavePath, "IgnoreList.xml");
                 string jsonFile = Path.Combine(GeneralSettings.Default.SavePath, "IgnoreList.json");
-                if (File.Exists(xmlfile))
-                    ConvertIgnoreListXMLToJson(xmlfile);
-                else if (File.Exists(jsonFile))
+                //if (File.Exists(xmlfile))
+                //    ConvertIgnoreListXMLToJson(xmlfile);
+                if (File.Exists(jsonFile))
                     IgnoreList = JsonSerializer.Deserialize<List<string>>(File.ReadAllText(jsonFile));
                 else
                     IgnoreList = new List<string>();
@@ -235,16 +235,16 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void ConvertIgnoreListXMLToJson(string xmlFile)
-        {
-            IFormatter formatter = new BinaryFormatter();
-            using Stream stream = new FileStream(xmlFile, FileMode.Open, FileAccess.Read, FileShare.Read);
-            IgnoreList = (List<string>)formatter.Deserialize(stream);
-            string jsonFile = Path.Combine(GeneralSettings.Default.SavePath, "IgnoreList.json");
-            string nonDuplicates = JsonSerializer.Serialize(IgnoreList);
-            File.WriteAllText(jsonFile, nonDuplicates);
-            File.Delete(xmlFile);
-        }
+        //void ConvertIgnoreListXMLToJson(string xmlFile)
+        //{
+        //    IFormatter formatter = new BinaryFormatter();
+        //    using Stream stream = new FileStream(xmlFile, FileMode.Open, FileAccess.Read, FileShare.Read);
+        //    IgnoreList = (List<string>)formatter.Deserialize(stream);
+        //    string jsonFile = Path.Combine(GeneralSettings.Default.SavePath, "IgnoreList.json");
+        //    string nonDuplicates = JsonSerializer.Serialize(IgnoreList);
+        //    File.WriteAllText(jsonFile, nonDuplicates);
+        //    File.Delete(xmlFile);
+        //}
 
 
         void DgFacts_CellContentClick(object sender, DataGridViewCellEventArgs e)
