@@ -231,11 +231,7 @@ namespace FTAnalyzer
             string maxState = (WindowState == FormWindowState.Maximized).ToString();
             string maximised = Application.UserAppDataRegistry.GetValue("Mainform maximised", maxState).ToString() ?? maxState;
             Point leftTop = ReportFormHelper.CheckIsOnScreen(Top, Left);
-            Rectangle workarea = Screen.GetWorkingArea(leftTop);
-            if (Width > workarea.Width)
-                Width = workarea.Width;
-            if (Height > workarea.Height)
-                Height = workarea.Height;
+            CheckMaxWindowSizes(leftTop);
             if (leftTop.X < 0) leftTop.X = 0;
             if (leftTop.Y < 0) leftTop.Y = 0;
             mainForm.Width = Width;
@@ -2634,11 +2630,7 @@ namespace FTAnalyzer
             {  //only save window size if not minimised
                 try
                 {
-                    Rectangle workarea = Screen.GetWorkingArea(new Point(0, 0));
-                    if (Width > workarea.Width)
-                        Width = workarea.Width;
-                    if (Height > workarea.Height)
-                        Height = workarea.Height;
+                    CheckMaxWindowSizes(new Point(0, 0));
                     Application.UserAppDataRegistry.SetValue("Mainform size - width", Width);
                     Application.UserAppDataRegistry.SetValue("Mainform size - height", Height);
                     Application.UserAppDataRegistry.SetValue("Mainform position - top", Top);
@@ -2651,6 +2643,19 @@ namespace FTAnalyzer
                     UIHelpers.ShowMessage("Unable to save window permissions please check App has rights to save user preferences to registry");
                 }
             }
+        }
+
+        void CheckMaxWindowSizes(Point topleft)
+        {
+            Rectangle workarea = Screen.GetWorkingArea(topleft);
+            if (Width > workarea.Width)
+                Width = workarea.Width;
+            if (Height > workarea.Height)
+                Height = workarea.Height;
+            if (tabSelector.Left + tabSelector.Width > workarea.Width)
+                tabSelector.Width = workarea.Width - tabSelector.Left;
+            if (tabSelector.Top + tabSelector.Height > workarea.Height)
+                tabSelector.Height = workarea.Height - tabSelector.Top;
         }
         #endregion
 
