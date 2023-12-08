@@ -2652,10 +2652,10 @@ namespace FTAnalyzer
                 Width = workarea.Width;
             if (Height > workarea.Height)
                 Height = workarea.Height;
-            if (tabSelector.Left + tabSelector.Width > workarea.Width)
-                tabSelector.Width = workarea.Width - tabSelector.Left;
-            if (tabSelector.Top + tabSelector.Height > workarea.Height)
-                tabSelector.Height = workarea.Height - tabSelector.Top;
+            if (tabSelector.Left + tabSelector.Width > Size.Width)
+                tabSelector.Width = Size.Width - tabSelector.Left;
+            if (tabSelector.Top + tabSelector.Height > Size.Height - statusStrip.Height)
+                tabSelector.Height = Size.Height - tabSelector.Top - statusStrip.Height;
         }
         #endregion
 

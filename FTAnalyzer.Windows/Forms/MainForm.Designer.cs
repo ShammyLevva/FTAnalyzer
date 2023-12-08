@@ -41,4432 +41,4432 @@ namespace FTAnalyzer
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = (new global::System.ComponentModel.Container());
-            global::System.ComponentModel.ComponentResourceManager resources = new global::System.ComponentModel.ComponentResourceManager(typeof(global::FTAnalyzer.MainForm));
-            global::System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new global::System.Windows.Forms.DataGridViewCellStyle();
-            global::System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new global::System.Windows.Forms.DataGridViewCellStyle();
-            this.openGedcom = (new global::System.Windows.Forms.OpenFileDialog());
-            this.menuStrip1 = (new global::System.Windows.Forms.MenuStrip());
-            this.fileToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.openToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuReload = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuPrint = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.toolStripSeparator6 = (new global::System.Windows.Forms.ToolStripSeparator());
-            this.mnuRecent = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuRecent1 = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuRecent2 = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuRecent3 = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuRecent4 = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuRecent5 = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.toolStripSeparator7 = (new global::System.Windows.Forms.ToolStripSeparator());
-            this.clearRecentFileListToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.toolStripSeparator3 = (new global::System.Windows.Forms.ToolStripSeparator());
-            this.databaseToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.backupToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuRestore = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.toolStripSeparator11 = (new global::System.Windows.Forms.ToolStripSeparator());
-            this.mnuLoadLocationsCSV = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuLoadLocationsTNG = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.toolStripSeparator5 = (new global::System.Windows.Forms.ToolStripSeparator());
-            this.mnuCloseGEDCOM = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.exitToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuReports = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuChildAgeProfiles = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuOlderParents = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuPossibleCensusFacts = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuCousinsCountReport = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuHowManyGreats = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuBirthdayEffect = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuPossiblyMissingChildReport = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.MnuAgedOver99Report = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.MnuSingleParentsReport = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuExport = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuIndividualsToExcel = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuFamiliesToExcel = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuFactsToExcel = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.MnuExportLocations = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuSourcesToExcel = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.MnuCustomFactsToExcel = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.toolStripSeparator12 = (new global::System.Windows.Forms.ToolStripSeparator());
-            this.mnuDataErrorsToExcel = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuSurnamesToExcel = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.toolStripSeparator8 = (new global::System.Windows.Forms.ToolStripSeparator());
-            this.mnuLooseBirthsToExcel = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuLooseDeathsToExcel = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.toolStripSeparator9 = (new global::System.Windows.Forms.ToolStripSeparator());
-            this.mnuTreetopsToExcel = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuWorldWarsToExcel = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.toolStripSeparator13 = (new global::System.Windows.Forms.ToolStripSeparator());
-            this.mnuDNA_GEDCOM = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.toolStripSeparator15 = (new global::System.Windows.Forms.ToolStripSeparator());
-            this.mnuJSON = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.toolsToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.optionsToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.toolStripSeparator2 = (new global::System.Windows.Forms.ToolStripSeparator());
-            this.displayOptionsOnLoadToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.resetToDefaultFormSizeToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuMaps = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuShowTimeline = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuLifelines = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuPlaces = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.toolStripSeparator4 = (new global::System.Windows.Forms.ToolStripSeparator());
-            this.mnuLocationsGeocodeReport = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.toolStripSeparator10 = (new global::System.Windows.Forms.ToolStripSeparator());
-            this.mnuGeocodeLocations = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuOSGeocoder = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuLookupBlankFoundLocations = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.toolStripSeparator16 = (new global::System.Windows.Forms.ToolStripSeparator());
-            this.mnuGoogleMyMaps = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.helpToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.viewOnlineManualToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.reportAnIssueToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.facebookSupportGroupToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.facebookUserGroupToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.toolStripSeparator1 = (new global::System.Windows.Forms.ToolStripSeparator());
-            this.getGoogleAPIKeyToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.googleAPISetupGuideToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.toolStripSeparator14 = (new global::System.Windows.Forms.ToolStripSeparator());
-            this.privacyPolicyToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.whatsNewToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.aboutToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.mnuSetRoot = (new global::System.Windows.Forms.ContextMenuStrip(this.components));
-            this.setAsRootToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.viewNotesToolStripMenuItem = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.tsCount = (new global::System.Windows.Forms.ToolStripStatusLabel());
-            this.statusStrip = (new global::System.Windows.Forms.StatusStrip());
-            this.tsCountLabel = (new global::System.Windows.Forms.ToolStripStatusLabel());
-            this.tsHintsLabel = (new global::System.Windows.Forms.ToolStripStatusLabel());
-            this.tspbTabProgress = (new global::System.Windows.Forms.ToolStripProgressBar());
-            this.tsStatusLabel = (new global::System.Windows.Forms.ToolStripStatusLabel());
-            this.toolTips = (new global::System.Windows.Forms.ToolTip(this.components));
-            this.cmbColourFamily = (new global::System.Windows.Forms.ComboBox());
-            this.btnRandomSurnameColour = (new global::System.Windows.Forms.Button());
-            this.ckbFactExclude = (new global::System.Windows.Forms.CheckedListBox());
-            this.btnShowExclusions = (new global::System.Windows.Forms.Button());
-            this.tbDuplicateScore = (new global::System.Windows.Forms.TrackBar());
-            this.chkLCRootPersonConfirm = (new global::System.Windows.Forms.CheckBox());
-            this.dgCheckAncestors = (new global::System.Windows.Forms.DataGridView());
-            this.label13 = (new global::System.Windows.Forms.Label());
-            this.label12 = (new global::System.Windows.Forms.Label());
-            this.chkIgnoreUnnamedTwins = (new global::System.Windows.Forms.CheckBox());
-            this.radioOnlyPreferred = (new global::System.Windows.Forms.RadioButton());
-            this.radioOnlyAlternate = (new global::System.Windows.Forms.RadioButton());
-            this.dgDataErrors = (new global::FTAnalyzer.Forms.Controls.VirtualDGVDataErrors());
-            this.dgCountries = (new global::FTAnalyzer.Forms.Controls.VirtualDGVLocations());
-            this.dgRegions = (new global::FTAnalyzer.Forms.Controls.VirtualDGVLocations());
-            this.btnUpdateLostCousinsWebsite = (new global::System.Windows.Forms.Button());
-            this.printPreviewDialog = (new global::System.Windows.Forms.PrintPreviewDialog());
-            this.printDialog = (new global::System.Windows.Forms.PrintDialog());
-            this.printDocument = (new global::System.Drawing.Printing.PrintDocument());
-            this.tabWorldWars = (new global::System.Windows.Forms.TabPage());
-            this.ckbMilitaryOnly = (new global::System.Windows.Forms.CheckBox());
-            this.ckbWDIgnoreLocations = (new global::System.Windows.Forms.CheckBox());
-            this.btnWWII = (new global::System.Windows.Forms.Button());
-            this.btnWWI = (new global::System.Windows.Forms.Button());
-            this.label9 = (new global::System.Windows.Forms.Label());
-            this.txtWorldWarsSurname = (new global::System.Windows.Forms.TextBox());
-            this.dgWorldWars = (new global::FTAnalyzer.Forms.Controls.VirtualDGVIndividuals());
-            this.wardeadRelation = (new global::FTAnalyzer.Forms.Controls.RelationTypes());
-            this.wardeadCountry = (new global::FTAnalyzer.Forms.Controls.CensusCountry());
-            this.ctxViewNotes = (new global::System.Windows.Forms.ContextMenuStrip(this.components));
-            this.mnuViewNotes = (new global::System.Windows.Forms.ToolStripMenuItem());
-            this.tabTreetops = (new global::System.Windows.Forms.TabPage());
-            this.ckbTTIncludeOnlyOneParent = (new global::System.Windows.Forms.CheckBox());
-            this.ckbTTIgnoreLocations = (new global::System.Windows.Forms.CheckBox());
-            this.btnTreeTops = (new global::System.Windows.Forms.Button());
-            this.label8 = (new global::System.Windows.Forms.Label());
-            this.txtTreetopsSurname = (new global::System.Windows.Forms.TextBox());
-            this.dgTreeTops = (new global::FTAnalyzer.Forms.Controls.VirtualDGVIndividuals());
-            this.treetopsRelation = (new global::FTAnalyzer.Forms.Controls.RelationTypes());
-            this.treetopsCountry = (new global::FTAnalyzer.Forms.Controls.CensusCountry());
-            this.tabColourReports = (new global::System.Windows.Forms.TabPage());
-            this.groupBox7 = (new global::System.Windows.Forms.GroupBox());
-            this.btnAdvancedMissingData = (new global::System.Windows.Forms.Button());
-            this.btnStandardMissingData = (new global::System.Windows.Forms.Button());
-            this.label14 = (new global::System.Windows.Forms.Label());
-            this.groupBox3 = (new global::System.Windows.Forms.GroupBox());
-            this.ckbIgnoreNoDeathDate = (new global::System.Windows.Forms.CheckBox());
-            this.ckbIgnoreNoBirthDate = (new global::System.Windows.Forms.CheckBox());
-            this.btnIrishColourCensus = (new global::System.Windows.Forms.Button());
-            this.btnCanadianColourCensus = (new global::System.Windows.Forms.Button());
-            this.btnUKColourCensus = (new global::System.Windows.Forms.Button());
-            this.btnUSColourCensus = (new global::System.Windows.Forms.Button());
-            this.btnColourBMD = (new global::System.Windows.Forms.Button());
-            this.label10 = (new global::System.Windows.Forms.Label());
-            this.txtColouredSurname = (new global::System.Windows.Forms.TextBox());
-            this.relTypesColoured = (new global::FTAnalyzer.Forms.Controls.RelationTypes());
-            this.tabLostCousins = (new global::System.Windows.Forms.TabPage());
-            this.LCSubTabs = (new global::System.Windows.Forms.TabControl());
-            this.LCReportsTab = (new global::System.Windows.Forms.TabPage());
-            this.Referrals = (new global::System.Windows.Forms.GroupBox());
-            this.ckbReferralInCommon = (new global::System.Windows.Forms.CheckBox());
-            this.btnReferrals = (new global::System.Windows.Forms.Button());
-            this.cmbReferrals = (new global::System.Windows.Forms.ComboBox());
-            this.label11 = (new global::System.Windows.Forms.Label());
-            this.btnLCnoCensus = (new global::System.Windows.Forms.Button());
-            this.btnLCDuplicates = (new global::System.Windows.Forms.Button());
-            this.btnLCMissingCountry = (new global::System.Windows.Forms.Button());
-            this.btnLC1940USA = (new global::System.Windows.Forms.Button());
-            this.rtbLostCousins = (new global::System.Windows.Forms.RichTextBox());
-            this.linkLabel2 = (new global::System.Windows.Forms.LinkLabel());
-            this.btnLC1911EW = (new global::System.Windows.Forms.Button());
-            this.LabLostCousinsWeb = (new global::System.Windows.Forms.LinkLabel());
-            this.ckbShowLCEntered = (new global::System.Windows.Forms.CheckBox());
-            this.btnLC1841EW = (new global::System.Windows.Forms.Button());
-            this.btnLC1911Ireland = (new global::System.Windows.Forms.Button());
-            this.btnLC1880USA = (new global::System.Windows.Forms.Button());
-            this.btnLC1881EW = (new global::System.Windows.Forms.Button());
-            this.btnLC1881Canada = (new global::System.Windows.Forms.Button());
-            this.btnLC1881Scot = (new global::System.Windows.Forms.Button());
-            this.relTypesLC = (new global::FTAnalyzer.Forms.Controls.RelationTypes());
-            this.LCUpdatesTab = (new global::System.Windows.Forms.TabPage());
-            this.rtbLCoutput = (new global::FTAnalyzer.Utilities.ScrollingRichTextBox());
-            this.btnViewInvalidRefs = (new global::System.Windows.Forms.Button());
-            this.btnLCPotentialUploads = (new global::System.Windows.Forms.Button());
-            this.label21 = (new global::System.Windows.Forms.Label());
-            this.rtbLCUpdateData = (new global::System.Windows.Forms.RichTextBox());
-            this.groupBox8 = (new global::System.Windows.Forms.GroupBox());
-            this.btnLCLogin = (new global::System.Windows.Forms.Button());
-            this.label20 = (new global::System.Windows.Forms.Label());
-            this.label19 = (new global::System.Windows.Forms.Label());
-            this.txtLCEmail = (new global::System.Windows.Forms.TextBox());
-            this.txtLCPassword = (new global::System.Windows.Forms.MaskedTextBox());
-            this.LCVerifyTab = (new global::System.Windows.Forms.TabPage());
-            this.rtbCheckAncestors = (new global::FTAnalyzer.Utilities.ScrollingRichTextBox());
-            this.btnCheckMyAncestors = (new global::System.Windows.Forms.Button());
-            this.lblCheckAncestors = (new global::System.Windows.Forms.Label());
-            this.tabCensus = (new global::System.Windows.Forms.TabPage());
-            this.groupBox2 = (new global::System.Windows.Forms.GroupBox());
-            this.btnAliveOnDate = (new global::System.Windows.Forms.Button());
-            this.txtAliveDates = (new global::System.Windows.Forms.TextBox());
-            this.label22 = (new global::System.Windows.Forms.Label());
-            this.chkAnyCensusYear = (new global::System.Windows.Forms.CheckBox());
-            this.groupBox10 = (new global::System.Windows.Forms.GroupBox());
-            this.btnShowCensusMissing = (new global::System.Windows.Forms.Button());
-            this.btnShowCensusEntered = (new global::System.Windows.Forms.Button());
-            this.btnRandomSurnameEntered = (new global::System.Windows.Forms.Button());
-            this.btnRandomSurnameMissing = (new global::System.Windows.Forms.Button());
-            this.groupBox4 = (new global::System.Windows.Forms.GroupBox());
-            this.btnInconsistentLocations = (new global::System.Windows.Forms.Button());
-            this.btnUnrecognisedCensusRef = (new global::System.Windows.Forms.Button());
-            this.btnIncompleteCensusRef = (new global::System.Windows.Forms.Button());
-            this.btnMissingCensusRefs = (new global::System.Windows.Forms.Button());
-            this.btnCensusRefs = (new global::System.Windows.Forms.Button());
-            this.chkExcludeUnknownBirths = (new global::System.Windows.Forms.CheckBox());
-            this.label1 = (new global::System.Windows.Forms.Label());
-            this.txtCensusSurname = (new global::System.Windows.Forms.TextBox());
-            this.label2 = (new global::System.Windows.Forms.Label());
-            this.udAgeFilter = (new global::System.Windows.Forms.NumericUpDown());
-            this.cenDate = (new global::FTAnalyzer.Forms.Controls.CensusDateSelector());
-            this.relTypesCensus = (new global::FTAnalyzer.Forms.Controls.RelationTypes());
-            this.groupBox9 = (new global::System.Windows.Forms.GroupBox());
-            this.groupBox11 = (new global::System.Windows.Forms.GroupBox());
-            this.BtnAutoCreatedCensusFacts = (new global::System.Windows.Forms.Button());
-            this.BtnProblemCensusFacts = (new global::System.Windows.Forms.Button());
-            this.groupBox1 = (new global::System.Windows.Forms.GroupBox());
-            this.btnDuplicateCensus = (new global::System.Windows.Forms.Button());
-            this.btnMissingCensusLocation = (new global::System.Windows.Forms.Button());
-            this.groupBox5 = (new global::System.Windows.Forms.GroupBox());
-            this.btnMismatchedChildrenStatus = (new global::System.Windows.Forms.Button());
-            this.btnNoChildrenStatus = (new global::System.Windows.Forms.Button());
-            this.groupBox6 = (new global::System.Windows.Forms.GroupBox());
-            this.btnReportUnrecognised = (new global::System.Windows.Forms.Button());
-            this.tabLocations = (new global::System.Windows.Forms.TabPage());
-            this.btnOldOSMap = (new global::System.Windows.Forms.Button());
-            this.btnModernOSMap = (new global::System.Windows.Forms.Button());
-            this.btnShowMap = (new global::System.Windows.Forms.Button());
-            this.tabCtrlLocations = (new global::System.Windows.Forms.TabControl());
-            this.tabTreeView = (new global::System.Windows.Forms.TabPage());
-            this.treeViewLocations = (new global::System.Windows.Forms.TreeView());
-            this.imageList = (new global::System.Windows.Forms.ImageList(this.components));
-            this.tabCountries = (new global::System.Windows.Forms.TabPage());
-            this.tabRegions = (new global::System.Windows.Forms.TabPage());
-            this.tabSubRegions = (new global::System.Windows.Forms.TabPage());
-            this.dgSubRegions = (new global::FTAnalyzer.Forms.Controls.VirtualDGVLocations());
-            this.tabAddresses = (new global::System.Windows.Forms.TabPage());
-            this.dgAddresses = (new global::FTAnalyzer.Forms.Controls.VirtualDGVLocations());
-            this.tabPlaces = (new global::System.Windows.Forms.TabPage());
-            this.dgPlaces = (new global::FTAnalyzer.Forms.Controls.VirtualDGVLocations());
-            this.tabDisplayProgress = (new global::System.Windows.Forms.TabPage());
-            this.splitGedcom = (new global::System.Windows.Forms.SplitContainer());
-            this.panel2 = (new global::System.Windows.Forms.Panel());
-            this.pictureBox1 = (new global::System.Windows.Forms.PictureBox());
-            this.LbProgramName = (new global::System.Windows.Forms.Label());
-            this.labRelationships = (new global::System.Windows.Forms.Label());
-            this.pbRelationships = (new global::System.Windows.Forms.ProgressBar());
-            this.labFamilies = (new global::System.Windows.Forms.Label());
-            this.pbFamilies = (new global::System.Windows.Forms.ProgressBar());
-            this.labIndividuals = (new global::System.Windows.Forms.Label());
-            this.pbIndividuals = (new global::System.Windows.Forms.ProgressBar());
-            this.labSources = (new global::System.Windows.Forms.Label());
-            this.pbSources = (new global::System.Windows.Forms.ProgressBar());
-            this.rtbOutput = (new global::FTAnalyzer.Utilities.ScrollingRichTextBox());
-            this.tabSelector = (new global::System.Windows.Forms.TabControl());
-            this.tabMainLists = (new global::System.Windows.Forms.TabPage());
-            this.tabMainListsSelector = (new global::System.Windows.Forms.TabControl());
-            this.tabIndividuals = (new global::System.Windows.Forms.TabPage());
-            this.dgIndividuals = (new global::FTAnalyzer.Forms.Controls.VirtualDGVIndividuals());
-            this.tabFamilies = (new global::System.Windows.Forms.TabPage());
-            this.dgFamilies = (new global::FTAnalyzer.Forms.Controls.VirtualDGVFamily());
-            this.tabSources = (new global::System.Windows.Forms.TabPage());
-            this.dgSources = (new global::FTAnalyzer.Forms.Controls.VirtualDGVSources());
-            this.tabOccupations = (new global::System.Windows.Forms.TabPage());
-            this.dgOccupations = (new global::FTAnalyzer.Forms.Controls.VirtualDGVOccupations());
-            this.tabCustomFacts = (new global::System.Windows.Forms.TabPage());
-            this.dgCustomFacts = (new global::FTAnalyzer.Forms.Controls.VirtualDGVCustomFacts());
-            this.tabErrorsFixes = (new global::System.Windows.Forms.TabPage());
-            this.tabErrorFixSelector = (new global::System.Windows.Forms.TabControl());
-            this.tabDataErrors = (new global::System.Windows.Forms.TabPage());
-            this.gbDataErrorTypes = (new global::System.Windows.Forms.GroupBox());
-            this.ckbDataErrors = (new global::System.Windows.Forms.CheckedListBox());
-            this.btnSelectAll = (new global::System.Windows.Forms.Button());
-            this.btnClearAll = (new global::System.Windows.Forms.Button());
-            this.tabDuplicates = (new global::System.Windows.Forms.TabPage());
-            this.labDuplicateSlider = (new global::System.Windows.Forms.Label());
-            this.labCompletion = (new global::System.Windows.Forms.Label());
-            this.ckbHideIgnoredDuplicates = (new global::System.Windows.Forms.CheckBox());
-            this.label16 = (new global::System.Windows.Forms.Label());
-            this.labCalcDuplicates = (new global::System.Windows.Forms.Label());
-            this.pbDuplicates = (new global::System.Windows.Forms.ProgressBar());
-            this.btnCancelDuplicates = (new global::System.Windows.Forms.Button());
-            this.dgDuplicates = (new global::FTAnalyzer.Forms.Controls.VirtualDGVDuplicates());
-            this.tabLooseBirths = (new global::System.Windows.Forms.TabPage());
-            this.dgLooseBirths = (new global::FTAnalyzer.Forms.Controls.VirtualDGVLooseBirths());
-            this.tabLooseDeaths = (new global::System.Windows.Forms.TabPage());
-            this.dgLooseDeaths = (new global::FTAnalyzer.Forms.Controls.VirtualDGVLooseDeaths());
-            this.tabLooseInfo = (new global::System.Windows.Forms.TabPage());
-            this.dgLooseInfo = (new global::FTAnalyzer.Forms.Controls.VirtualDGVLooseInfo());
-            this.tabSurnames = (new global::System.Windows.Forms.TabPage());
-            this.chkSurnamesIgnoreCase = (new global::System.Windows.Forms.CheckBox());
-            this.btnShowSurnames = (new global::System.Windows.Forms.Button());
-            this.dgSurnames = (new global::FTAnalyzer.Forms.Controls.VirtualDGVSurnames());
-            this.Surname = (new global::System.Windows.Forms.DataGridViewTextBoxColumn());
-            this.URI = (new global::System.Windows.Forms.DataGridViewLinkColumn());
-            this.Individuals = (new global::System.Windows.Forms.DataGridViewTextBoxColumn());
-            this.Families = (new global::System.Windows.Forms.DataGridViewTextBoxColumn());
-            this.Marriages = (new global::System.Windows.Forms.DataGridViewTextBoxColumn());
-            this.reltypesSurnames = (new global::FTAnalyzer.Forms.Controls.RelationTypes());
-            this.tabFacts = (new global::System.Windows.Forms.TabPage());
-            this.panel1 = (new global::System.Windows.Forms.Panel());
-            this.radioAllFacts = (new global::System.Windows.Forms.RadioButton());
-            this.btnDuplicateFacts = (new global::System.Windows.Forms.Button());
-            this.lblExclude = (new global::System.Windows.Forms.Label());
-            this.label15 = (new global::System.Windows.Forms.Label());
-            this.btnDeselectExcludeAllFactTypes = (new global::System.Windows.Forms.Button());
-            this.btnExcludeAllFactTypes = (new global::System.Windows.Forms.Button());
-            this.btnDeselectAllFactTypes = (new global::System.Windows.Forms.Button());
-            this.btnSelectAllFactTypes = (new global::System.Windows.Forms.Button());
-            this.ckbFactSelect = (new global::System.Windows.Forms.CheckedListBox());
-            this.btnShowFacts = (new global::System.Windows.Forms.Button());
-            this.label3 = (new global::System.Windows.Forms.Label());
-            this.txtFactsSurname = (new global::System.Windows.Forms.TextBox());
-            this.relTypesFacts = (new global::FTAnalyzer.Forms.Controls.RelationTypes());
-            this.tabToday = (new global::System.Windows.Forms.TabPage());
-            this.rtbToday = (new global::FTAnalyzer.Utilities.ScrollingRichTextBox());
-            this.label18 = (new global::System.Windows.Forms.Label());
-            this.nudToday = (new global::System.Windows.Forms.NumericUpDown());
-            this.btnUpdateTodaysEvents = (new global::System.Windows.Forms.Button());
-            this.labToday = (new global::System.Windows.Forms.Label());
-            this.pbToday = (new global::System.Windows.Forms.ProgressBar());
-            this.rbTodayMonth = (new global::System.Windows.Forms.RadioButton());
-            this.rbTodaySingle = (new global::System.Windows.Forms.RadioButton());
-            this.label17 = (new global::System.Windows.Forms.Label());
-            this.dpToday = (new global::System.Windows.Forms.DateTimePicker());
-            this.NonDuplicate = (new global::System.Windows.Forms.DataGridViewCheckBoxColumn());
-            this.Score = (new global::System.Windows.Forms.DataGridViewTextBoxColumn());
-            this.DuplicateIndividualID = (new global::System.Windows.Forms.DataGridViewTextBoxColumn());
-            this.DuplicateName = (new global::System.Windows.Forms.DataGridViewTextBoxColumn());
-            this.DuplicateForenames = (new global::System.Windows.Forms.DataGridViewTextBoxColumn());
-            this.DuplicateSurname = (new global::System.Windows.Forms.DataGridViewTextBoxColumn());
-            this.DuplicateBirthDate = (new global::System.Windows.Forms.DataGridViewTextBoxColumn());
-            this.DuplicateBirthLocation = (new global::System.Windows.Forms.DataGridViewTextBoxColumn());
-            this.MatchIndividualID = (new global::System.Windows.Forms.DataGridViewTextBoxColumn());
-            this.MatchName = (new global::System.Windows.Forms.DataGridViewTextBoxColumn());
-            this.MatchBirthDate = (new global::System.Windows.Forms.DataGridViewTextBoxColumn());
-            this.MatchBirthLocation = (new global::System.Windows.Forms.DataGridViewTextBoxColumn());
-            this.saveDatabase = (new global::System.Windows.Forms.SaveFileDialog());
-            this.restoreDatabase = (new global::System.Windows.Forms.OpenFileDialog());
-            this.imageList1 = (new global::System.Windows.Forms.ImageList(this.components));
-            this.menuStrip1.SuspendLayout();
-            this.mnuSetRoot.SuspendLayout();
-            this.statusStrip.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbDuplicateScore)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgCheckAncestors)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgDataErrors)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgCountries)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgRegions)).BeginInit();
-            this.tabWorldWars.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgWorldWars)).BeginInit();
-            this.ctxViewNotes.SuspendLayout();
-            this.tabTreetops.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).BeginInit();
-            this.tabColourReports.SuspendLayout();
-            this.groupBox7.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.tabLostCousins.SuspendLayout();
-            this.LCSubTabs.SuspendLayout();
-            this.LCReportsTab.SuspendLayout();
-            this.Referrals.SuspendLayout();
-            this.LCUpdatesTab.SuspendLayout();
-            this.groupBox8.SuspendLayout();
-            this.LCVerifyTab.SuspendLayout();
-            this.tabCensus.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox10.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).BeginInit();
-            this.groupBox9.SuspendLayout();
-            this.groupBox11.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.tabLocations.SuspendLayout();
-            this.tabCtrlLocations.SuspendLayout();
-            this.tabTreeView.SuspendLayout();
-            this.tabCountries.SuspendLayout();
-            this.tabRegions.SuspendLayout();
-            this.tabSubRegions.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgSubRegions)).BeginInit();
-            this.tabAddresses.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgAddresses)).BeginInit();
-            this.tabPlaces.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgPlaces)).BeginInit();
-            this.tabDisplayProgress.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.splitGedcom)).BeginInit();
-            this.splitGedcom.Panel1.SuspendLayout();
-            this.splitGedcom.Panel2.SuspendLayout();
-            this.splitGedcom.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.tabSelector.SuspendLayout();
-            this.tabMainLists.SuspendLayout();
-            this.tabMainListsSelector.SuspendLayout();
-            this.tabIndividuals.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).BeginInit();
-            this.tabFamilies.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgFamilies)).BeginInit();
-            this.tabSources.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgSources)).BeginInit();
-            this.tabOccupations.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgOccupations)).BeginInit();
-            this.tabCustomFacts.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgCustomFacts)).BeginInit();
-            this.tabErrorsFixes.SuspendLayout();
-            this.tabErrorFixSelector.SuspendLayout();
-            this.tabDataErrors.SuspendLayout();
-            this.gbDataErrorTypes.SuspendLayout();
-            this.tabDuplicates.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgDuplicates)).BeginInit();
-            this.tabLooseBirths.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgLooseBirths)).BeginInit();
-            this.tabLooseDeaths.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).BeginInit();
-            this.tabLooseInfo.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgLooseInfo)).BeginInit();
-            this.tabSurnames.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgSurnames)).BeginInit();
-            this.tabFacts.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.tabToday.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.nudToday)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            openGedcom = new OpenFileDialog();
+            menuStrip1 = new MenuStrip();
+            fileToolStripMenuItem = new ToolStripMenuItem();
+            openToolStripMenuItem = new ToolStripMenuItem();
+            mnuReload = new ToolStripMenuItem();
+            mnuPrint = new ToolStripMenuItem();
+            toolStripSeparator6 = new ToolStripSeparator();
+            mnuRecent = new ToolStripMenuItem();
+            mnuRecent1 = new ToolStripMenuItem();
+            mnuRecent2 = new ToolStripMenuItem();
+            mnuRecent3 = new ToolStripMenuItem();
+            mnuRecent4 = new ToolStripMenuItem();
+            mnuRecent5 = new ToolStripMenuItem();
+            toolStripSeparator7 = new ToolStripSeparator();
+            clearRecentFileListToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator3 = new ToolStripSeparator();
+            databaseToolStripMenuItem = new ToolStripMenuItem();
+            backupToolStripMenuItem = new ToolStripMenuItem();
+            mnuRestore = new ToolStripMenuItem();
+            toolStripSeparator11 = new ToolStripSeparator();
+            mnuLoadLocationsCSV = new ToolStripMenuItem();
+            mnuLoadLocationsTNG = new ToolStripMenuItem();
+            toolStripSeparator5 = new ToolStripSeparator();
+            mnuCloseGEDCOM = new ToolStripMenuItem();
+            exitToolStripMenuItem = new ToolStripMenuItem();
+            mnuReports = new ToolStripMenuItem();
+            mnuChildAgeProfiles = new ToolStripMenuItem();
+            mnuOlderParents = new ToolStripMenuItem();
+            mnuPossibleCensusFacts = new ToolStripMenuItem();
+            mnuCousinsCountReport = new ToolStripMenuItem();
+            mnuHowManyGreats = new ToolStripMenuItem();
+            mnuBirthdayEffect = new ToolStripMenuItem();
+            mnuPossiblyMissingChildReport = new ToolStripMenuItem();
+            MnuAgedOver99Report = new ToolStripMenuItem();
+            MnuSingleParentsReport = new ToolStripMenuItem();
+            mnuExport = new ToolStripMenuItem();
+            mnuIndividualsToExcel = new ToolStripMenuItem();
+            mnuFamiliesToExcel = new ToolStripMenuItem();
+            mnuFactsToExcel = new ToolStripMenuItem();
+            MnuExportLocations = new ToolStripMenuItem();
+            mnuSourcesToExcel = new ToolStripMenuItem();
+            MnuCustomFactsToExcel = new ToolStripMenuItem();
+            toolStripSeparator12 = new ToolStripSeparator();
+            mnuDataErrorsToExcel = new ToolStripMenuItem();
+            mnuSurnamesToExcel = new ToolStripMenuItem();
+            toolStripSeparator8 = new ToolStripSeparator();
+            mnuLooseBirthsToExcel = new ToolStripMenuItem();
+            mnuLooseDeathsToExcel = new ToolStripMenuItem();
+            toolStripSeparator9 = new ToolStripSeparator();
+            mnuTreetopsToExcel = new ToolStripMenuItem();
+            mnuWorldWarsToExcel = new ToolStripMenuItem();
+            toolStripSeparator13 = new ToolStripSeparator();
+            mnuDNA_GEDCOM = new ToolStripMenuItem();
+            toolStripSeparator15 = new ToolStripSeparator();
+            mnuJSON = new ToolStripMenuItem();
+            toolsToolStripMenuItem = new ToolStripMenuItem();
+            optionsToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator2 = new ToolStripSeparator();
+            displayOptionsOnLoadToolStripMenuItem = new ToolStripMenuItem();
+            resetToDefaultFormSizeToolStripMenuItem = new ToolStripMenuItem();
+            mnuMaps = new ToolStripMenuItem();
+            mnuShowTimeline = new ToolStripMenuItem();
+            mnuLifelines = new ToolStripMenuItem();
+            mnuPlaces = new ToolStripMenuItem();
+            toolStripSeparator4 = new ToolStripSeparator();
+            mnuLocationsGeocodeReport = new ToolStripMenuItem();
+            toolStripSeparator10 = new ToolStripSeparator();
+            mnuGeocodeLocations = new ToolStripMenuItem();
+            mnuOSGeocoder = new ToolStripMenuItem();
+            mnuLookupBlankFoundLocations = new ToolStripMenuItem();
+            toolStripSeparator16 = new ToolStripSeparator();
+            mnuGoogleMyMaps = new ToolStripMenuItem();
+            helpToolStripMenuItem = new ToolStripMenuItem();
+            viewOnlineManualToolStripMenuItem = new ToolStripMenuItem();
+            onlineGuidesToUsingFTAnalyzerToolStripMenuItem = new ToolStripMenuItem();
+            reportAnIssueToolStripMenuItem = new ToolStripMenuItem();
+            facebookSupportGroupToolStripMenuItem = new ToolStripMenuItem();
+            facebookUserGroupToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
+            getGoogleAPIKeyToolStripMenuItem = new ToolStripMenuItem();
+            googleAPISetupGuideToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator14 = new ToolStripSeparator();
+            privacyPolicyToolStripMenuItem = new ToolStripMenuItem();
+            whatsNewToolStripMenuItem = new ToolStripMenuItem();
+            aboutToolStripMenuItem = new ToolStripMenuItem();
+            mnuSetRoot = new ContextMenuStrip(components);
+            setAsRootToolStripMenuItem = new ToolStripMenuItem();
+            viewNotesToolStripMenuItem = new ToolStripMenuItem();
+            tsCount = new ToolStripStatusLabel();
+            statusStrip = new StatusStrip();
+            tsCountLabel = new ToolStripStatusLabel();
+            tsHintsLabel = new ToolStripStatusLabel();
+            tspbTabProgress = new ToolStripProgressBar();
+            tsStatusLabel = new ToolStripStatusLabel();
+            toolTips = new ToolTip(components);
+            cmbColourFamily = new ComboBox();
+            btnRandomSurnameColour = new Button();
+            ckbFactExclude = new CheckedListBox();
+            btnShowExclusions = new Button();
+            tbDuplicateScore = new TrackBar();
+            chkLCRootPersonConfirm = new CheckBox();
+            dgCheckAncestors = new DataGridView();
+            label13 = new Label();
+            label12 = new Label();
+            chkIgnoreUnnamedTwins = new CheckBox();
+            radioOnlyPreferred = new RadioButton();
+            radioOnlyAlternate = new RadioButton();
+            dgDataErrors = new Forms.Controls.VirtualDGVDataErrors();
+            dgCountries = new Forms.Controls.VirtualDGVLocations();
+            dgRegions = new Forms.Controls.VirtualDGVLocations();
+            btnUpdateLostCousinsWebsite = new Button();
+            printPreviewDialog = new PrintPreviewDialog();
+            printDialog = new PrintDialog();
+            printDocument = new System.Drawing.Printing.PrintDocument();
+            tabWorldWars = new TabPage();
+            ckbMilitaryOnly = new CheckBox();
+            ckbWDIgnoreLocations = new CheckBox();
+            btnWWII = new Button();
+            btnWWI = new Button();
+            label9 = new Label();
+            txtWorldWarsSurname = new TextBox();
+            dgWorldWars = new Forms.Controls.VirtualDGVIndividuals();
+            wardeadRelation = new Forms.Controls.RelationTypes();
+            wardeadCountry = new Forms.Controls.CensusCountry();
+            ctxViewNotes = new ContextMenuStrip(components);
+            mnuViewNotes = new ToolStripMenuItem();
+            tabTreetops = new TabPage();
+            ckbTTIncludeOnlyOneParent = new CheckBox();
+            ckbTTIgnoreLocations = new CheckBox();
+            btnTreeTops = new Button();
+            label8 = new Label();
+            txtTreetopsSurname = new TextBox();
+            dgTreeTops = new Forms.Controls.VirtualDGVIndividuals();
+            treetopsRelation = new Forms.Controls.RelationTypes();
+            treetopsCountry = new Forms.Controls.CensusCountry();
+            tabColourReports = new TabPage();
+            groupBox7 = new GroupBox();
+            btnAdvancedMissingData = new Button();
+            btnStandardMissingData = new Button();
+            label14 = new Label();
+            groupBox3 = new GroupBox();
+            ckbIgnoreNoDeathDate = new CheckBox();
+            ckbIgnoreNoBirthDate = new CheckBox();
+            btnIrishColourCensus = new Button();
+            btnCanadianColourCensus = new Button();
+            btnUKColourCensus = new Button();
+            btnUSColourCensus = new Button();
+            btnColourBMD = new Button();
+            label10 = new Label();
+            txtColouredSurname = new TextBox();
+            relTypesColoured = new Forms.Controls.RelationTypes();
+            tabLostCousins = new TabPage();
+            LCSubTabs = new TabControl();
+            LCReportsTab = new TabPage();
+            Referrals = new GroupBox();
+            ckbReferralInCommon = new CheckBox();
+            btnReferrals = new Button();
+            cmbReferrals = new ComboBox();
+            label11 = new Label();
+            btnLCnoCensus = new Button();
+            btnLCDuplicates = new Button();
+            btnLCMissingCountry = new Button();
+            btnLC1940USA = new Button();
+            rtbLostCousins = new RichTextBox();
+            linkLabel2 = new LinkLabel();
+            btnLC1911EW = new Button();
+            LabLostCousinsWeb = new LinkLabel();
+            ckbShowLCEntered = new CheckBox();
+            btnLC1841EW = new Button();
+            btnLC1911Ireland = new Button();
+            btnLC1880USA = new Button();
+            btnLC1881EW = new Button();
+            btnLC1881Canada = new Button();
+            btnLC1881Scot = new Button();
+            relTypesLC = new Forms.Controls.RelationTypes();
+            LCUpdatesTab = new TabPage();
+            rtbLCoutput = new Utilities.ScrollingRichTextBox();
+            btnViewInvalidRefs = new Button();
+            btnLCPotentialUploads = new Button();
+            label21 = new Label();
+            rtbLCUpdateData = new RichTextBox();
+            groupBox8 = new GroupBox();
+            btnLCLogin = new Button();
+            label20 = new Label();
+            label19 = new Label();
+            txtLCEmail = new TextBox();
+            txtLCPassword = new MaskedTextBox();
+            LCVerifyTab = new TabPage();
+            rtbCheckAncestors = new Utilities.ScrollingRichTextBox();
+            btnCheckMyAncestors = new Button();
+            lblCheckAncestors = new Label();
+            tabCensus = new TabPage();
+            groupBox2 = new GroupBox();
+            btnAliveOnDate = new Button();
+            txtAliveDates = new TextBox();
+            label22 = new Label();
+            chkAnyCensusYear = new CheckBox();
+            groupBox10 = new GroupBox();
+            btnShowCensusMissing = new Button();
+            btnShowCensusEntered = new Button();
+            btnRandomSurnameEntered = new Button();
+            btnRandomSurnameMissing = new Button();
+            groupBox4 = new GroupBox();
+            btnInconsistentLocations = new Button();
+            btnUnrecognisedCensusRef = new Button();
+            btnIncompleteCensusRef = new Button();
+            btnMissingCensusRefs = new Button();
+            btnCensusRefs = new Button();
+            chkExcludeUnknownBirths = new CheckBox();
+            label1 = new Label();
+            txtCensusSurname = new TextBox();
+            label2 = new Label();
+            udAgeFilter = new NumericUpDown();
+            cenDate = new Forms.Controls.CensusDateSelector();
+            relTypesCensus = new Forms.Controls.RelationTypes();
+            groupBox9 = new GroupBox();
+            groupBox11 = new GroupBox();
+            BtnAutoCreatedCensusFacts = new Button();
+            BtnProblemCensusFacts = new Button();
+            groupBox1 = new GroupBox();
+            btnDuplicateCensus = new Button();
+            btnMissingCensusLocation = new Button();
+            groupBox5 = new GroupBox();
+            btnMismatchedChildrenStatus = new Button();
+            btnNoChildrenStatus = new Button();
+            groupBox6 = new GroupBox();
+            btnReportUnrecognised = new Button();
+            tabLocations = new TabPage();
+            btnOldOSMap = new Button();
+            btnModernOSMap = new Button();
+            btnShowMap = new Button();
+            tabCtrlLocations = new TabControl();
+            tabTreeView = new TabPage();
+            treeViewLocations = new TreeView();
+            imageList = new ImageList(components);
+            tabCountries = new TabPage();
+            tabRegions = new TabPage();
+            tabSubRegions = new TabPage();
+            dgSubRegions = new Forms.Controls.VirtualDGVLocations();
+            tabAddresses = new TabPage();
+            dgAddresses = new Forms.Controls.VirtualDGVLocations();
+            tabPlaces = new TabPage();
+            dgPlaces = new Forms.Controls.VirtualDGVLocations();
+            tabDisplayProgress = new TabPage();
+            splitGedcom = new SplitContainer();
+            panel2 = new Panel();
+            pictureBox1 = new PictureBox();
+            LbProgramName = new Label();
+            labRelationships = new Label();
+            pbRelationships = new ProgressBar();
+            labFamilies = new Label();
+            pbFamilies = new ProgressBar();
+            labIndividuals = new Label();
+            pbIndividuals = new ProgressBar();
+            labSources = new Label();
+            pbSources = new ProgressBar();
+            rtbOutput = new Utilities.ScrollingRichTextBox();
+            tabSelector = new TabControl();
+            tabMainLists = new TabPage();
+            tabMainListsSelector = new TabControl();
+            tabIndividuals = new TabPage();
+            dgIndividuals = new Forms.Controls.VirtualDGVIndividuals();
+            tabFamilies = new TabPage();
+            dgFamilies = new Forms.Controls.VirtualDGVFamily();
+            tabSources = new TabPage();
+            dgSources = new Forms.Controls.VirtualDGVSources();
+            tabOccupations = new TabPage();
+            dgOccupations = new Forms.Controls.VirtualDGVOccupations();
+            tabCustomFacts = new TabPage();
+            dgCustomFacts = new Forms.Controls.VirtualDGVCustomFacts();
+            tabErrorsFixes = new TabPage();
+            tabErrorFixSelector = new TabControl();
+            tabDataErrors = new TabPage();
+            gbDataErrorTypes = new GroupBox();
+            ckbDataErrors = new CheckedListBox();
+            btnSelectAll = new Button();
+            btnClearAll = new Button();
+            tabDuplicates = new TabPage();
+            labDuplicateSlider = new Label();
+            labCompletion = new Label();
+            ckbHideIgnoredDuplicates = new CheckBox();
+            label16 = new Label();
+            labCalcDuplicates = new Label();
+            pbDuplicates = new ProgressBar();
+            btnCancelDuplicates = new Button();
+            dgDuplicates = new Forms.Controls.VirtualDGVDuplicates();
+            tabLooseBirths = new TabPage();
+            dgLooseBirths = new Forms.Controls.VirtualDGVLooseBirths();
+            tabLooseDeaths = new TabPage();
+            dgLooseDeaths = new Forms.Controls.VirtualDGVLooseDeaths();
+            tabLooseInfo = new TabPage();
+            dgLooseInfo = new Forms.Controls.VirtualDGVLooseInfo();
+            tabSurnames = new TabPage();
+            chkSurnamesIgnoreCase = new CheckBox();
+            btnShowSurnames = new Button();
+            dgSurnames = new Forms.Controls.VirtualDGVSurnames();
+            Surname = new DataGridViewTextBoxColumn();
+            URI = new DataGridViewLinkColumn();
+            Individuals = new DataGridViewTextBoxColumn();
+            Families = new DataGridViewTextBoxColumn();
+            Marriages = new DataGridViewTextBoxColumn();
+            reltypesSurnames = new Forms.Controls.RelationTypes();
+            tabFacts = new TabPage();
+            panel1 = new Panel();
+            radioAllFacts = new RadioButton();
+            btnDuplicateFacts = new Button();
+            lblExclude = new Label();
+            label15 = new Label();
+            btnDeselectExcludeAllFactTypes = new Button();
+            btnExcludeAllFactTypes = new Button();
+            btnDeselectAllFactTypes = new Button();
+            btnSelectAllFactTypes = new Button();
+            ckbFactSelect = new CheckedListBox();
+            btnShowFacts = new Button();
+            label3 = new Label();
+            txtFactsSurname = new TextBox();
+            relTypesFacts = new Forms.Controls.RelationTypes();
+            tabToday = new TabPage();
+            rtbToday = new Utilities.ScrollingRichTextBox();
+            label18 = new Label();
+            nudToday = new NumericUpDown();
+            btnUpdateTodaysEvents = new Button();
+            labToday = new Label();
+            pbToday = new ProgressBar();
+            rbTodayMonth = new RadioButton();
+            rbTodaySingle = new RadioButton();
+            label17 = new Label();
+            dpToday = new DateTimePicker();
+            NonDuplicate = new DataGridViewCheckBoxColumn();
+            Score = new DataGridViewTextBoxColumn();
+            DuplicateIndividualID = new DataGridViewTextBoxColumn();
+            DuplicateName = new DataGridViewTextBoxColumn();
+            DuplicateForenames = new DataGridViewTextBoxColumn();
+            DuplicateSurname = new DataGridViewTextBoxColumn();
+            DuplicateBirthDate = new DataGridViewTextBoxColumn();
+            DuplicateBirthLocation = new DataGridViewTextBoxColumn();
+            MatchIndividualID = new DataGridViewTextBoxColumn();
+            MatchName = new DataGridViewTextBoxColumn();
+            MatchBirthDate = new DataGridViewTextBoxColumn();
+            MatchBirthLocation = new DataGridViewTextBoxColumn();
+            saveDatabase = new SaveFileDialog();
+            restoreDatabase = new OpenFileDialog();
+            imageList1 = new ImageList(components);
+            menuStrip1.SuspendLayout();
+            mnuSetRoot.SuspendLayout();
+            statusStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbDuplicateScore).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgCheckAncestors).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgDataErrors).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgCountries).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgRegions).BeginInit();
+            tabWorldWars.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgWorldWars).BeginInit();
+            ctxViewNotes.SuspendLayout();
+            tabTreetops.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgTreeTops).BeginInit();
+            tabColourReports.SuspendLayout();
+            groupBox7.SuspendLayout();
+            groupBox3.SuspendLayout();
+            tabLostCousins.SuspendLayout();
+            LCSubTabs.SuspendLayout();
+            LCReportsTab.SuspendLayout();
+            Referrals.SuspendLayout();
+            LCUpdatesTab.SuspendLayout();
+            groupBox8.SuspendLayout();
+            LCVerifyTab.SuspendLayout();
+            tabCensus.SuspendLayout();
+            groupBox2.SuspendLayout();
+            groupBox10.SuspendLayout();
+            groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)udAgeFilter).BeginInit();
+            groupBox9.SuspendLayout();
+            groupBox11.SuspendLayout();
+            groupBox1.SuspendLayout();
+            groupBox5.SuspendLayout();
+            groupBox6.SuspendLayout();
+            tabLocations.SuspendLayout();
+            tabCtrlLocations.SuspendLayout();
+            tabTreeView.SuspendLayout();
+            tabCountries.SuspendLayout();
+            tabRegions.SuspendLayout();
+            tabSubRegions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgSubRegions).BeginInit();
+            tabAddresses.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgAddresses).BeginInit();
+            tabPlaces.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgPlaces).BeginInit();
+            tabDisplayProgress.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitGedcom).BeginInit();
+            splitGedcom.Panel1.SuspendLayout();
+            splitGedcom.Panel2.SuspendLayout();
+            splitGedcom.SuspendLayout();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            tabSelector.SuspendLayout();
+            tabMainLists.SuspendLayout();
+            tabMainListsSelector.SuspendLayout();
+            tabIndividuals.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgIndividuals).BeginInit();
+            tabFamilies.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgFamilies).BeginInit();
+            tabSources.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgSources).BeginInit();
+            tabOccupations.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgOccupations).BeginInit();
+            tabCustomFacts.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgCustomFacts).BeginInit();
+            tabErrorsFixes.SuspendLayout();
+            tabErrorFixSelector.SuspendLayout();
+            tabDataErrors.SuspendLayout();
+            gbDataErrorTypes.SuspendLayout();
+            tabDuplicates.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgDuplicates).BeginInit();
+            tabLooseBirths.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgLooseBirths).BeginInit();
+            tabLooseDeaths.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgLooseDeaths).BeginInit();
+            tabLooseInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgLooseInfo).BeginInit();
+            tabSurnames.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgSurnames).BeginInit();
+            tabFacts.SuspendLayout();
+            panel1.SuspendLayout();
+            tabToday.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudToday).BeginInit();
+            SuspendLayout();
             // 
             // openGedcom
             // 
-            this.openGedcom.FileName = ("openFileDialog1");
+            openGedcom.FileName = "openFileDialog1";
             // 
             // menuStrip1
             // 
-            this.menuStrip1.ImageScalingSize = (new global::System.Drawing.Size(32, 32));
-            this.menuStrip1.Items.AddRange(new global::System.Windows.Forms.ToolStripItem[] { this.fileToolStripMenuItem, this.mnuReports, this.mnuExport, this.toolsToolStripMenuItem, this.mnuMaps, this.helpToolStripMenuItem });
-            this.menuStrip1.Location = (new global::System.Drawing.Point(0, 0));
-            this.menuStrip1.Name = ("menuStrip1");
-            this.menuStrip1.Padding = (new global::System.Windows.Forms.Padding(7, 2, 0, 2));
-            this.menuStrip1.Size = (new global::System.Drawing.Size(2136, 38));
-            this.menuStrip1.TabIndex = (1);
-            this.menuStrip1.Text = ("menuStrip1");
+            menuStrip1.ImageScalingSize = new Size(32, 32);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, mnuReports, mnuExport, toolsToolStripMenuItem, mnuMaps, helpToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Padding = new Padding(8, 2, 0, 2);
+            menuStrip1.Size = new Size(2314, 40);
+            menuStrip1.TabIndex = 1;
+            menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new global::System.Windows.Forms.ToolStripItem[] { this.openToolStripMenuItem, this.mnuReload, this.mnuPrint, this.toolStripSeparator6, this.mnuRecent, this.toolStripSeparator3, this.databaseToolStripMenuItem, this.toolStripSeparator5, this.mnuCloseGEDCOM, this.exitToolStripMenuItem });
-            this.fileToolStripMenuItem.Name = ("fileToolStripMenuItem");
-            this.fileToolStripMenuItem.Size = (new global::System.Drawing.Size(62, 34));
-            this.fileToolStripMenuItem.Text = ("File");
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem, mnuReload, mnuPrint, toolStripSeparator6, mnuRecent, toolStripSeparator3, databaseToolStripMenuItem, toolStripSeparator5, mnuCloseGEDCOM, exitToolStripMenuItem });
+            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            fileToolStripMenuItem.Size = new Size(71, 36);
+            fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
             // 
-            this.openToolStripMenuItem.Name = ("openToolStripMenuItem");
-            this.openToolStripMenuItem.Size = (new global::System.Drawing.Size(324, 40));
-            this.openToolStripMenuItem.Text = ("Open GEDCOM file...");
-            this.openToolStripMenuItem.Click += (this.OpenToolStripMenuItem_Click);
+            openToolStripMenuItem.Name = "openToolStripMenuItem";
+            openToolStripMenuItem.Size = new Size(367, 44);
+            openToolStripMenuItem.Text = "Open GEDCOM file...";
+            openToolStripMenuItem.Click += OpenToolStripMenuItem_Click;
             // 
             // mnuReload
             // 
-            this.mnuReload.Enabled = (false);
-            this.mnuReload.Name = ("mnuReload");
-            this.mnuReload.Size = (new global::System.Drawing.Size(324, 40));
-            this.mnuReload.Text = ("Reload");
-            this.mnuReload.Click += (this.ReloadToolStripMenuItem_Click);
+            mnuReload.Enabled = false;
+            mnuReload.Name = "mnuReload";
+            mnuReload.Size = new Size(367, 44);
+            mnuReload.Text = "Reload";
+            mnuReload.Click += ReloadToolStripMenuItem_Click;
             // 
             // mnuPrint
             // 
-            this.mnuPrint.Enabled = (false);
-            this.mnuPrint.Name = ("mnuPrint");
-            this.mnuPrint.Size = (new global::System.Drawing.Size(324, 40));
-            this.mnuPrint.Text = ("Print");
-            this.mnuPrint.Click += (this.MnuPrint_Click);
+            mnuPrint.Enabled = false;
+            mnuPrint.Name = "mnuPrint";
+            mnuPrint.Size = new Size(367, 44);
+            mnuPrint.Text = "Print";
+            mnuPrint.Click += MnuPrint_Click;
             // 
             // toolStripSeparator6
             // 
-            this.toolStripSeparator6.Name = ("toolStripSeparator6");
-            this.toolStripSeparator6.Size = (new global::System.Drawing.Size(321, 6));
+            toolStripSeparator6.Name = "toolStripSeparator6";
+            toolStripSeparator6.Size = new Size(364, 6);
             // 
             // mnuRecent
             // 
-            this.mnuRecent.DropDownItems.AddRange(new global::System.Windows.Forms.ToolStripItem[] { this.mnuRecent1, this.mnuRecent2, this.mnuRecent3, this.mnuRecent4, this.mnuRecent5, this.toolStripSeparator7, this.clearRecentFileListToolStripMenuItem });
-            this.mnuRecent.Name = ("mnuRecent");
-            this.mnuRecent.Size = (new global::System.Drawing.Size(324, 40));
-            this.mnuRecent.Text = ("Recent Files");
-            this.mnuRecent.DropDownOpening += (this.MnuRecent_DropDownOpening);
+            mnuRecent.DropDownItems.AddRange(new ToolStripItem[] { mnuRecent1, mnuRecent2, mnuRecent3, mnuRecent4, mnuRecent5, toolStripSeparator7, clearRecentFileListToolStripMenuItem });
+            mnuRecent.Name = "mnuRecent";
+            mnuRecent.Size = new Size(367, 44);
+            mnuRecent.Text = "Recent Files";
+            mnuRecent.DropDownOpening += MnuRecent_DropDownOpening;
             // 
             // mnuRecent1
             // 
-            this.mnuRecent1.Name = ("mnuRecent1");
-            this.mnuRecent1.Size = (new global::System.Drawing.Size(321, 40));
-            this.mnuRecent1.Text = ("1.");
-            this.mnuRecent1.Click += (this.OpenRecentFile_Click);
+            mnuRecent1.Name = "mnuRecent1";
+            mnuRecent1.Size = new Size(366, 44);
+            mnuRecent1.Text = "1.";
+            mnuRecent1.Click += OpenRecentFile_Click;
             // 
             // mnuRecent2
             // 
-            this.mnuRecent2.Name = ("mnuRecent2");
-            this.mnuRecent2.Size = (new global::System.Drawing.Size(321, 40));
-            this.mnuRecent2.Text = ("2.");
-            this.mnuRecent2.Click += (this.OpenRecentFile_Click);
+            mnuRecent2.Name = "mnuRecent2";
+            mnuRecent2.Size = new Size(366, 44);
+            mnuRecent2.Text = "2.";
+            mnuRecent2.Click += OpenRecentFile_Click;
             // 
             // mnuRecent3
             // 
-            this.mnuRecent3.Name = ("mnuRecent3");
-            this.mnuRecent3.Size = (new global::System.Drawing.Size(321, 40));
-            this.mnuRecent3.Text = ("3.");
-            this.mnuRecent3.Click += (this.OpenRecentFile_Click);
+            mnuRecent3.Name = "mnuRecent3";
+            mnuRecent3.Size = new Size(366, 44);
+            mnuRecent3.Text = "3.";
+            mnuRecent3.Click += OpenRecentFile_Click;
             // 
             // mnuRecent4
             // 
-            this.mnuRecent4.Name = ("mnuRecent4");
-            this.mnuRecent4.Size = (new global::System.Drawing.Size(321, 40));
-            this.mnuRecent4.Text = ("4.");
-            this.mnuRecent4.Click += (this.OpenRecentFile_Click);
+            mnuRecent4.Name = "mnuRecent4";
+            mnuRecent4.Size = new Size(366, 44);
+            mnuRecent4.Text = "4.";
+            mnuRecent4.Click += OpenRecentFile_Click;
             // 
             // mnuRecent5
             // 
-            this.mnuRecent5.Name = ("mnuRecent5");
-            this.mnuRecent5.Size = (new global::System.Drawing.Size(321, 40));
-            this.mnuRecent5.Text = ("5.");
-            this.mnuRecent5.Click += (this.OpenRecentFile_Click);
+            mnuRecent5.Name = "mnuRecent5";
+            mnuRecent5.Size = new Size(366, 44);
+            mnuRecent5.Text = "5.";
+            mnuRecent5.Click += OpenRecentFile_Click;
             // 
             // toolStripSeparator7
             // 
-            this.toolStripSeparator7.Name = ("toolStripSeparator7");
-            this.toolStripSeparator7.Size = (new global::System.Drawing.Size(318, 6));
+            toolStripSeparator7.Name = "toolStripSeparator7";
+            toolStripSeparator7.Size = new Size(363, 6);
             // 
             // clearRecentFileListToolStripMenuItem
             // 
-            this.clearRecentFileListToolStripMenuItem.Image = ((global::System.Drawing.Image)(resources.GetObject("clearRecentFileListToolStripMenuItem.Image")));
-            this.clearRecentFileListToolStripMenuItem.Name = ("clearRecentFileListToolStripMenuItem");
-            this.clearRecentFileListToolStripMenuItem.Size = (new global::System.Drawing.Size(321, 40));
-            this.clearRecentFileListToolStripMenuItem.Text = ("Clear Recent File List");
-            this.clearRecentFileListToolStripMenuItem.Click += (this.ClearRecentFileListToolStripMenuItem_Click);
+            clearRecentFileListToolStripMenuItem.Image = (Image)resources.GetObject("clearRecentFileListToolStripMenuItem.Image");
+            clearRecentFileListToolStripMenuItem.Name = "clearRecentFileListToolStripMenuItem";
+            clearRecentFileListToolStripMenuItem.Size = new Size(366, 44);
+            clearRecentFileListToolStripMenuItem.Text = "Clear Recent File List";
+            clearRecentFileListToolStripMenuItem.Click += ClearRecentFileListToolStripMenuItem_Click;
             // 
             // toolStripSeparator3
             // 
-            this.toolStripSeparator3.Name = ("toolStripSeparator3");
-            this.toolStripSeparator3.Size = (new global::System.Drawing.Size(321, 6));
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new Size(364, 6);
             // 
             // databaseToolStripMenuItem
             // 
-            this.databaseToolStripMenuItem.DropDownItems.AddRange(new global::System.Windows.Forms.ToolStripItem[] { this.backupToolStripMenuItem, this.mnuRestore, this.toolStripSeparator11, this.mnuLoadLocationsCSV, this.mnuLoadLocationsTNG });
-            this.databaseToolStripMenuItem.Name = ("databaseToolStripMenuItem");
-            this.databaseToolStripMenuItem.Size = (new global::System.Drawing.Size(324, 40));
-            this.databaseToolStripMenuItem.Text = ("Geocode Database");
+            databaseToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { backupToolStripMenuItem, mnuRestore, toolStripSeparator11, mnuLoadLocationsCSV, mnuLoadLocationsTNG });
+            databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
+            databaseToolStripMenuItem.Size = new Size(367, 44);
+            databaseToolStripMenuItem.Text = "Geocode Database";
             // 
             // backupToolStripMenuItem
             // 
-            this.backupToolStripMenuItem.Name = ("backupToolStripMenuItem");
-            this.backupToolStripMenuItem.Size = (new global::System.Drawing.Size(417, 40));
-            this.backupToolStripMenuItem.Text = ("Backup");
-            this.backupToolStripMenuItem.Click += (this.BackupToolStripMenuItem_Click);
+            backupToolStripMenuItem.Name = "backupToolStripMenuItem";
+            backupToolStripMenuItem.Size = new Size(475, 44);
+            backupToolStripMenuItem.Text = "Backup";
+            backupToolStripMenuItem.Click += BackupToolStripMenuItem_Click;
             // 
             // mnuRestore
             // 
-            this.mnuRestore.Name = ("mnuRestore");
-            this.mnuRestore.Size = (new global::System.Drawing.Size(417, 40));
-            this.mnuRestore.Text = ("Restore");
-            this.mnuRestore.ToolTipText = ("Restore is only available prior to loading GEDCOM");
-            this.mnuRestore.Click += (this.RestoreToolStripMenuItem_Click);
+            mnuRestore.Name = "mnuRestore";
+            mnuRestore.Size = new Size(475, 44);
+            mnuRestore.Text = "Restore";
+            mnuRestore.ToolTipText = "Restore is only available prior to loading GEDCOM";
+            mnuRestore.Click += RestoreToolStripMenuItem_Click;
             // 
             // toolStripSeparator11
             // 
-            this.toolStripSeparator11.Name = ("toolStripSeparator11");
-            this.toolStripSeparator11.Size = (new global::System.Drawing.Size(414, 6));
+            toolStripSeparator11.Name = "toolStripSeparator11";
+            toolStripSeparator11.Size = new Size(472, 6);
             // 
             // mnuLoadLocationsCSV
             // 
-            this.mnuLoadLocationsCSV.Name = ("mnuLoadLocationsCSV");
-            this.mnuLoadLocationsCSV.Size = (new global::System.Drawing.Size(417, 40));
-            this.mnuLoadLocationsCSV.Text = ("Load Geocoded Locations CSV");
-            this.mnuLoadLocationsCSV.Click += (this.MnuLoadLocationsCSV_Click);
+            mnuLoadLocationsCSV.Name = "mnuLoadLocationsCSV";
+            mnuLoadLocationsCSV.Size = new Size(475, 44);
+            mnuLoadLocationsCSV.Text = "Load Geocoded Locations CSV";
+            mnuLoadLocationsCSV.Click += MnuLoadLocationsCSV_Click;
             // 
             // mnuLoadLocationsTNG
             // 
-            this.mnuLoadLocationsTNG.Name = ("mnuLoadLocationsTNG");
-            this.mnuLoadLocationsTNG.Size = (new global::System.Drawing.Size(417, 40));
-            this.mnuLoadLocationsTNG.Text = ("Load Geocoded Locations TNG");
-            this.mnuLoadLocationsTNG.Click += (this.MnuLoadLocationsTNG_Click);
+            mnuLoadLocationsTNG.Name = "mnuLoadLocationsTNG";
+            mnuLoadLocationsTNG.Size = new Size(475, 44);
+            mnuLoadLocationsTNG.Text = "Load Geocoded Locations TNG";
+            mnuLoadLocationsTNG.Click += MnuLoadLocationsTNG_Click;
             // 
             // toolStripSeparator5
             // 
-            this.toolStripSeparator5.Name = ("toolStripSeparator5");
-            this.toolStripSeparator5.Size = (new global::System.Drawing.Size(321, 6));
+            toolStripSeparator5.Name = "toolStripSeparator5";
+            toolStripSeparator5.Size = new Size(364, 6);
             // 
             // mnuCloseGEDCOM
             // 
-            this.mnuCloseGEDCOM.Name = ("mnuCloseGEDCOM");
-            this.mnuCloseGEDCOM.Size = (new global::System.Drawing.Size(324, 40));
-            this.mnuCloseGEDCOM.Text = ("Close GEDCOM file");
-            this.mnuCloseGEDCOM.Click += (this.MnuCloseGEDCOM_Click);
+            mnuCloseGEDCOM.Name = "mnuCloseGEDCOM";
+            mnuCloseGEDCOM.Size = new Size(367, 44);
+            mnuCloseGEDCOM.Text = "Close GEDCOM file";
+            mnuCloseGEDCOM.Click += MnuCloseGEDCOM_Click;
             // 
             // exitToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Name = ("exitToolStripMenuItem");
-            this.exitToolStripMenuItem.Size = (new global::System.Drawing.Size(324, 40));
-            this.exitToolStripMenuItem.Text = ("Exit");
-            this.exitToolStripMenuItem.Click += (this.ExitToolStripMenuItem_Click);
+            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            exitToolStripMenuItem.Size = new Size(367, 44);
+            exitToolStripMenuItem.Text = "Exit";
+            exitToolStripMenuItem.Click += ExitToolStripMenuItem_Click;
             // 
             // mnuReports
             // 
-            this.mnuReports.DropDownItems.AddRange(new global::System.Windows.Forms.ToolStripItem[] { this.mnuChildAgeProfiles, this.mnuOlderParents, this.mnuPossibleCensusFacts, this.mnuCousinsCountReport, this.mnuHowManyGreats, this.mnuBirthdayEffect, this.mnuPossiblyMissingChildReport, this.MnuAgedOver99Report, this.MnuSingleParentsReport });
-            this.mnuReports.Name = ("mnuReports");
-            this.mnuReports.Size = (new global::System.Drawing.Size(101, 34));
-            this.mnuReports.Text = ("Reports");
+            mnuReports.DropDownItems.AddRange(new ToolStripItem[] { mnuChildAgeProfiles, mnuOlderParents, mnuPossibleCensusFacts, mnuCousinsCountReport, mnuHowManyGreats, mnuBirthdayEffect, mnuPossiblyMissingChildReport, MnuAgedOver99Report, MnuSingleParentsReport });
+            mnuReports.Name = "mnuReports";
+            mnuReports.Size = new Size(114, 36);
+            mnuReports.Text = "Reports";
             // 
             // mnuChildAgeProfiles
             // 
-            this.mnuChildAgeProfiles.Name = ("mnuChildAgeProfiles");
-            this.mnuChildAgeProfiles.Size = (new global::System.Drawing.Size(401, 40));
-            this.mnuChildAgeProfiles.Text = ("Parent Age Report");
-            this.mnuChildAgeProfiles.Click += (this.ChildAgeProfilesToolStripMenuItem_Click);
+            mnuChildAgeProfiles.Name = "mnuChildAgeProfiles";
+            mnuChildAgeProfiles.Size = new Size(459, 44);
+            mnuChildAgeProfiles.Text = "Parent Age Report";
+            mnuChildAgeProfiles.Click += ChildAgeProfilesToolStripMenuItem_Click;
             // 
             // mnuOlderParents
             // 
-            this.mnuOlderParents.Name = ("mnuOlderParents");
-            this.mnuOlderParents.Size = (new global::System.Drawing.Size(401, 40));
-            this.mnuOlderParents.Text = ("Older Parents");
-            this.mnuOlderParents.Click += (this.OlderParentsToolStripMenuItem_Click);
+            mnuOlderParents.Name = "mnuOlderParents";
+            mnuOlderParents.Size = new Size(459, 44);
+            mnuOlderParents.Text = "Older Parents";
+            mnuOlderParents.Click += OlderParentsToolStripMenuItem_Click;
             // 
             // mnuPossibleCensusFacts
             // 
-            this.mnuPossibleCensusFacts.Name = ("mnuPossibleCensusFacts");
-            this.mnuPossibleCensusFacts.Size = (new global::System.Drawing.Size(401, 40));
-            this.mnuPossibleCensusFacts.Text = ("Possible Census Facts");
-            this.mnuPossibleCensusFacts.ToolTipText = ("This report aims to find census facts that have been incorrectly recorded as notes");
-            this.mnuPossibleCensusFacts.Click += (this.PossibleCensusFactsToolStripMenuItem_Click);
+            mnuPossibleCensusFacts.Name = "mnuPossibleCensusFacts";
+            mnuPossibleCensusFacts.Size = new Size(459, 44);
+            mnuPossibleCensusFacts.Text = "Possible Census Facts";
+            mnuPossibleCensusFacts.ToolTipText = "This report aims to find census facts that have been incorrectly recorded as notes";
+            mnuPossibleCensusFacts.Click += PossibleCensusFactsToolStripMenuItem_Click;
             // 
             // mnuCousinsCountReport
             // 
-            this.mnuCousinsCountReport.Name = ("mnuCousinsCountReport");
-            this.mnuCousinsCountReport.Size = (new global::System.Drawing.Size(401, 40));
-            this.mnuCousinsCountReport.Text = ("Cousins Count Report");
-            this.mnuCousinsCountReport.Click += (this.CousinsCountReportToolStripMenuItem_Click);
+            mnuCousinsCountReport.Name = "mnuCousinsCountReport";
+            mnuCousinsCountReport.Size = new Size(459, 44);
+            mnuCousinsCountReport.Text = "Cousins Count Report";
+            mnuCousinsCountReport.Click += CousinsCountReportToolStripMenuItem_Click;
             // 
             // mnuHowManyGreats
             // 
-            this.mnuHowManyGreats.Name = ("mnuHowManyGreats");
-            this.mnuHowManyGreats.Size = (new global::System.Drawing.Size(401, 40));
-            this.mnuHowManyGreats.Text = ("How Many Directs Report");
-            this.mnuHowManyGreats.Click += (this.HowManyDirectsReportToolStripMenuItem_Click);
+            mnuHowManyGreats.Name = "mnuHowManyGreats";
+            mnuHowManyGreats.Size = new Size(459, 44);
+            mnuHowManyGreats.Text = "How Many Directs Report";
+            mnuHowManyGreats.Click += HowManyDirectsReportToolStripMenuItem_Click;
             // 
             // mnuBirthdayEffect
             // 
-            this.mnuBirthdayEffect.Name = ("mnuBirthdayEffect");
-            this.mnuBirthdayEffect.Size = (new global::System.Drawing.Size(401, 40));
-            this.mnuBirthdayEffect.Text = ("Birthday Effect Report");
-            this.mnuBirthdayEffect.Click += (this.BirthdayEffectReportToolStripMenuItem_Click);
+            mnuBirthdayEffect.Name = "mnuBirthdayEffect";
+            mnuBirthdayEffect.Size = new Size(459, 44);
+            mnuBirthdayEffect.Text = "Birthday Effect Report";
+            mnuBirthdayEffect.Click += BirthdayEffectReportToolStripMenuItem_Click;
             // 
             // mnuPossiblyMissingChildReport
             // 
-            this.mnuPossiblyMissingChildReport.Name = ("mnuPossiblyMissingChildReport");
-            this.mnuPossiblyMissingChildReport.Size = (new global::System.Drawing.Size(401, 40));
-            this.mnuPossiblyMissingChildReport.Text = ("Possibly Missing Child Report");
-            this.mnuPossiblyMissingChildReport.Click += (this.PossiblyMissingChildReportToolStripMenuItem_Click);
+            mnuPossiblyMissingChildReport.Name = "mnuPossiblyMissingChildReport";
+            mnuPossiblyMissingChildReport.Size = new Size(459, 44);
+            mnuPossiblyMissingChildReport.Text = "Possibly Missing Child Report";
+            mnuPossiblyMissingChildReport.Click += PossiblyMissingChildReportToolStripMenuItem_Click;
             // 
             // MnuAgedOver99Report
             // 
-            this.MnuAgedOver99Report.Name = ("MnuAgedOver99Report");
-            this.MnuAgedOver99Report.Size = (new global::System.Drawing.Size(401, 40));
-            this.MnuAgedOver99Report.Text = ("Aged over 99 Report");
-            this.MnuAgedOver99Report.Click += (this.MnuAgedOver99Report_Click);
+            MnuAgedOver99Report.Name = "MnuAgedOver99Report";
+            MnuAgedOver99Report.Size = new Size(459, 44);
+            MnuAgedOver99Report.Text = "Aged over 99 Report";
+            MnuAgedOver99Report.Click += MnuAgedOver99Report_Click;
             // 
             // MnuSingleParentsReport
             // 
-            this.MnuSingleParentsReport.Name = ("MnuSingleParentsReport");
-            this.MnuSingleParentsReport.Size = (new global::System.Drawing.Size(401, 40));
-            this.MnuSingleParentsReport.Text = ("Single Parents Report");
-            this.MnuSingleParentsReport.Click += (this.MnuSingleParentsReport_Click);
+            MnuSingleParentsReport.Name = "MnuSingleParentsReport";
+            MnuSingleParentsReport.Size = new Size(459, 44);
+            MnuSingleParentsReport.Text = "Single Parents Report";
+            MnuSingleParentsReport.Click += MnuSingleParentsReport_Click;
             // 
             // mnuExport
             // 
-            this.mnuExport.DropDownItems.AddRange(new global::System.Windows.Forms.ToolStripItem[] { this.mnuIndividualsToExcel, this.mnuFamiliesToExcel, this.mnuFactsToExcel, this.MnuExportLocations, this.mnuSourcesToExcel, this.MnuCustomFactsToExcel, this.toolStripSeparator12, this.mnuDataErrorsToExcel, this.mnuSurnamesToExcel, this.toolStripSeparator8, this.mnuLooseBirthsToExcel, this.mnuLooseDeathsToExcel, this.toolStripSeparator9, this.mnuTreetopsToExcel, this.mnuWorldWarsToExcel, this.toolStripSeparator13, this.mnuDNA_GEDCOM, this.toolStripSeparator15, this.mnuJSON });
-            this.mnuExport.Name = ("mnuExport");
-            this.mnuExport.Size = (new global::System.Drawing.Size(90, 34));
-            this.mnuExport.Text = ("Export");
+            mnuExport.DropDownItems.AddRange(new ToolStripItem[] { mnuIndividualsToExcel, mnuFamiliesToExcel, mnuFactsToExcel, MnuExportLocations, mnuSourcesToExcel, MnuCustomFactsToExcel, toolStripSeparator12, mnuDataErrorsToExcel, mnuSurnamesToExcel, toolStripSeparator8, mnuLooseBirthsToExcel, mnuLooseDeathsToExcel, toolStripSeparator9, mnuTreetopsToExcel, mnuWorldWarsToExcel, toolStripSeparator13, mnuDNA_GEDCOM, toolStripSeparator15, mnuJSON });
+            mnuExport.Name = "mnuExport";
+            mnuExport.Size = new Size(101, 36);
+            mnuExport.Text = "Export";
             // 
             // mnuIndividualsToExcel
             // 
-            this.mnuIndividualsToExcel.Name = ("mnuIndividualsToExcel");
-            this.mnuIndividualsToExcel.Size = (new global::System.Drawing.Size(391, 40));
-            this.mnuIndividualsToExcel.Text = ("Individuals to Excel");
-            this.mnuIndividualsToExcel.Click += (this.IndividualsToExcelToolStripMenuItem_Click);
+            mnuIndividualsToExcel.Name = "mnuIndividualsToExcel";
+            mnuIndividualsToExcel.Size = new Size(444, 44);
+            mnuIndividualsToExcel.Text = "Individuals to Excel";
+            mnuIndividualsToExcel.Click += IndividualsToExcelToolStripMenuItem_Click;
             // 
             // mnuFamiliesToExcel
             // 
-            this.mnuFamiliesToExcel.Name = ("mnuFamiliesToExcel");
-            this.mnuFamiliesToExcel.Size = (new global::System.Drawing.Size(391, 40));
-            this.mnuFamiliesToExcel.Text = ("Families to Excel");
-            this.mnuFamiliesToExcel.Click += (this.FamiliesToExcelToolStripMenuItem_Click);
+            mnuFamiliesToExcel.Name = "mnuFamiliesToExcel";
+            mnuFamiliesToExcel.Size = new Size(444, 44);
+            mnuFamiliesToExcel.Text = "Families to Excel";
+            mnuFamiliesToExcel.Click += FamiliesToExcelToolStripMenuItem_Click;
             // 
             // mnuFactsToExcel
             // 
-            this.mnuFactsToExcel.Name = ("mnuFactsToExcel");
-            this.mnuFactsToExcel.Size = (new global::System.Drawing.Size(391, 40));
-            this.mnuFactsToExcel.Text = ("Facts to Excel");
-            this.mnuFactsToExcel.Click += (this.FactsToExcelToolStripMenuItem_Click);
+            mnuFactsToExcel.Name = "mnuFactsToExcel";
+            mnuFactsToExcel.Size = new Size(444, 44);
+            mnuFactsToExcel.Text = "Facts to Excel";
+            mnuFactsToExcel.Click += FactsToExcelToolStripMenuItem_Click;
             // 
             // MnuExportLocations
             // 
-            this.MnuExportLocations.Name = ("MnuExportLocations");
-            this.MnuExportLocations.Size = (new global::System.Drawing.Size(391, 40));
-            this.MnuExportLocations.Text = ("Locations to Excel");
-            this.MnuExportLocations.Click += (this.MnuExportLocations_Click);
+            MnuExportLocations.Name = "MnuExportLocations";
+            MnuExportLocations.Size = new Size(444, 44);
+            MnuExportLocations.Text = "Locations to Excel";
+            MnuExportLocations.Click += MnuExportLocations_Click;
             // 
             // mnuSourcesToExcel
             // 
-            this.mnuSourcesToExcel.Name = ("mnuSourcesToExcel");
-            this.mnuSourcesToExcel.Size = (new global::System.Drawing.Size(391, 40));
-            this.mnuSourcesToExcel.Text = ("Sources to Excel");
-            this.mnuSourcesToExcel.Click += (this.MnuSourcesToExcel_Click);
+            mnuSourcesToExcel.Name = "mnuSourcesToExcel";
+            mnuSourcesToExcel.Size = new Size(444, 44);
+            mnuSourcesToExcel.Text = "Sources to Excel";
+            mnuSourcesToExcel.Click += MnuSourcesToExcel_Click;
             // 
             // MnuCustomFactsToExcel
             // 
-            this.MnuCustomFactsToExcel.Name = ("MnuCustomFactsToExcel");
-            this.MnuCustomFactsToExcel.Size = (new global::System.Drawing.Size(391, 40));
-            this.MnuCustomFactsToExcel.Text = ("Custom Facts to Excel");
-            this.MnuCustomFactsToExcel.Click += (this.MnuCustomFactsToExcel_Click);
+            MnuCustomFactsToExcel.Name = "MnuCustomFactsToExcel";
+            MnuCustomFactsToExcel.Size = new Size(444, 44);
+            MnuCustomFactsToExcel.Text = "Custom Facts to Excel";
+            MnuCustomFactsToExcel.Click += MnuCustomFactsToExcel_Click;
             // 
             // toolStripSeparator12
             // 
-            this.toolStripSeparator12.Name = ("toolStripSeparator12");
-            this.toolStripSeparator12.Size = (new global::System.Drawing.Size(388, 6));
+            toolStripSeparator12.Name = "toolStripSeparator12";
+            toolStripSeparator12.Size = new Size(441, 6);
             // 
             // mnuDataErrorsToExcel
             // 
-            this.mnuDataErrorsToExcel.Name = ("mnuDataErrorsToExcel");
-            this.mnuDataErrorsToExcel.Size = (new global::System.Drawing.Size(391, 40));
-            this.mnuDataErrorsToExcel.Text = ("Data Errors to Excel");
-            this.mnuDataErrorsToExcel.Click += (this.MnuDataErrorsToExcel_Click);
+            mnuDataErrorsToExcel.Name = "mnuDataErrorsToExcel";
+            mnuDataErrorsToExcel.Size = new Size(444, 44);
+            mnuDataErrorsToExcel.Text = "Data Errors to Excel";
+            mnuDataErrorsToExcel.Click += MnuDataErrorsToExcel_Click;
             // 
             // mnuSurnamesToExcel
             // 
-            this.mnuSurnamesToExcel.Name = ("mnuSurnamesToExcel");
-            this.mnuSurnamesToExcel.Size = (new global::System.Drawing.Size(391, 40));
-            this.mnuSurnamesToExcel.Text = ("Surnames to Excel");
-            this.mnuSurnamesToExcel.Click += (this.MnuSurnamesToExcel_Click);
+            mnuSurnamesToExcel.Name = "mnuSurnamesToExcel";
+            mnuSurnamesToExcel.Size = new Size(444, 44);
+            mnuSurnamesToExcel.Text = "Surnames to Excel";
+            mnuSurnamesToExcel.Click += MnuSurnamesToExcel_Click;
             // 
             // toolStripSeparator8
             // 
-            this.toolStripSeparator8.Name = ("toolStripSeparator8");
-            this.toolStripSeparator8.Size = (new global::System.Drawing.Size(388, 6));
+            toolStripSeparator8.Name = "toolStripSeparator8";
+            toolStripSeparator8.Size = new Size(441, 6);
             // 
             // mnuLooseBirthsToExcel
             // 
-            this.mnuLooseBirthsToExcel.Name = ("mnuLooseBirthsToExcel");
-            this.mnuLooseBirthsToExcel.Size = (new global::System.Drawing.Size(391, 40));
-            this.mnuLooseBirthsToExcel.Text = ("Loose Births to Excel");
-            this.mnuLooseBirthsToExcel.Click += (this.LooseBirthsToExcelToolStripMenuItem_Click);
+            mnuLooseBirthsToExcel.Name = "mnuLooseBirthsToExcel";
+            mnuLooseBirthsToExcel.Size = new Size(444, 44);
+            mnuLooseBirthsToExcel.Text = "Loose Births to Excel";
+            mnuLooseBirthsToExcel.Click += LooseBirthsToExcelToolStripMenuItem_Click;
             // 
             // mnuLooseDeathsToExcel
             // 
-            this.mnuLooseDeathsToExcel.Name = ("mnuLooseDeathsToExcel");
-            this.mnuLooseDeathsToExcel.Size = (new global::System.Drawing.Size(391, 40));
-            this.mnuLooseDeathsToExcel.Text = ("Loose Deaths to Excel");
-            this.mnuLooseDeathsToExcel.Click += (this.LooseDeathsToExcelToolStripMenuItem_Click);
+            mnuLooseDeathsToExcel.Name = "mnuLooseDeathsToExcel";
+            mnuLooseDeathsToExcel.Size = new Size(444, 44);
+            mnuLooseDeathsToExcel.Text = "Loose Deaths to Excel";
+            mnuLooseDeathsToExcel.Click += LooseDeathsToExcelToolStripMenuItem_Click;
             // 
             // toolStripSeparator9
             // 
-            this.toolStripSeparator9.Name = ("toolStripSeparator9");
-            this.toolStripSeparator9.Size = (new global::System.Drawing.Size(388, 6));
+            toolStripSeparator9.Name = "toolStripSeparator9";
+            toolStripSeparator9.Size = new Size(441, 6);
             // 
             // mnuTreetopsToExcel
             // 
-            this.mnuTreetopsToExcel.Name = ("mnuTreetopsToExcel");
-            this.mnuTreetopsToExcel.Size = (new global::System.Drawing.Size(391, 40));
-            this.mnuTreetopsToExcel.Text = ("Current Treetops to Excel");
-            this.mnuTreetopsToExcel.Click += (this.MnuTreetopsToExcel_Click);
+            mnuTreetopsToExcel.Name = "mnuTreetopsToExcel";
+            mnuTreetopsToExcel.Size = new Size(444, 44);
+            mnuTreetopsToExcel.Text = "Current Treetops to Excel";
+            mnuTreetopsToExcel.Click += MnuTreetopsToExcel_Click;
             // 
             // mnuWorldWarsToExcel
             // 
-            this.mnuWorldWarsToExcel.Name = ("mnuWorldWarsToExcel");
-            this.mnuWorldWarsToExcel.Size = (new global::System.Drawing.Size(391, 40));
-            this.mnuWorldWarsToExcel.Text = ("Current World Wars to Excel");
-            this.mnuWorldWarsToExcel.Click += (this.MnuWorldWarsToExcel_Click);
+            mnuWorldWarsToExcel.Name = "mnuWorldWarsToExcel";
+            mnuWorldWarsToExcel.Size = new Size(444, 44);
+            mnuWorldWarsToExcel.Text = "Current World Wars to Excel";
+            mnuWorldWarsToExcel.Click += MnuWorldWarsToExcel_Click;
             // 
             // toolStripSeparator13
             // 
-            this.toolStripSeparator13.Name = ("toolStripSeparator13");
-            this.toolStripSeparator13.Size = (new global::System.Drawing.Size(388, 6));
+            toolStripSeparator13.Name = "toolStripSeparator13";
+            toolStripSeparator13.Size = new Size(441, 6);
             // 
             // mnuDNA_GEDCOM
             // 
-            this.mnuDNA_GEDCOM.Name = ("mnuDNA_GEDCOM");
-            this.mnuDNA_GEDCOM.Size = (new global::System.Drawing.Size(391, 40));
-            this.mnuDNA_GEDCOM.Text = ("Minimalist DNA GEDCOM");
-            this.mnuDNA_GEDCOM.Click += (this.MnuDNA_GEDCOM_Click);
+            mnuDNA_GEDCOM.Name = "mnuDNA_GEDCOM";
+            mnuDNA_GEDCOM.Size = new Size(444, 44);
+            mnuDNA_GEDCOM.Text = "Minimalist DNA GEDCOM";
+            mnuDNA_GEDCOM.Click += MnuDNA_GEDCOM_Click;
             // 
             // toolStripSeparator15
             // 
-            this.toolStripSeparator15.Name = ("toolStripSeparator15");
-            this.toolStripSeparator15.Size = (new global::System.Drawing.Size(388, 6));
-            this.toolStripSeparator15.Visible = (false);
+            toolStripSeparator15.Name = "toolStripSeparator15";
+            toolStripSeparator15.Size = new Size(441, 6);
+            toolStripSeparator15.Visible = false;
             // 
             // mnuJSON
             // 
-            this.mnuJSON.Name = ("mnuJSON");
-            this.mnuJSON.Size = (new global::System.Drawing.Size(391, 40));
-            this.mnuJSON.Text = ("JSON for Visualisations");
-            this.mnuJSON.Visible = (false);
-            this.mnuJSON.Click += (this.MnuJSON_Click);
+            mnuJSON.Name = "mnuJSON";
+            mnuJSON.Size = new Size(444, 44);
+            mnuJSON.Text = "JSON for Visualisations";
+            mnuJSON.Visible = false;
+            mnuJSON.Click += MnuJSON_Click;
             // 
             // toolsToolStripMenuItem
             // 
-            this.toolsToolStripMenuItem.DropDownItems.AddRange(new global::System.Windows.Forms.ToolStripItem[] { this.optionsToolStripMenuItem, this.toolStripSeparator2, this.displayOptionsOnLoadToolStripMenuItem, this.resetToDefaultFormSizeToolStripMenuItem });
-            this.toolsToolStripMenuItem.Name = ("toolsToolStripMenuItem");
-            this.toolsToolStripMenuItem.Size = (new global::System.Drawing.Size(78, 34));
-            this.toolsToolStripMenuItem.Text = ("Tools");
+            toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { optionsToolStripMenuItem, toolStripSeparator2, displayOptionsOnLoadToolStripMenuItem, resetToDefaultFormSizeToolStripMenuItem });
+            toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            toolsToolStripMenuItem.Size = new Size(89, 36);
+            toolsToolStripMenuItem.Text = "Tools";
             // 
             // optionsToolStripMenuItem
             // 
-            this.optionsToolStripMenuItem.Name = ("optionsToolStripMenuItem");
-            this.optionsToolStripMenuItem.Size = (new global::System.Drawing.Size(371, 40));
-            this.optionsToolStripMenuItem.Text = ("Options");
-            this.optionsToolStripMenuItem.Click += (this.OptionsToolStripMenuItem_Click);
+            optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            optionsToolStripMenuItem.Size = new Size(423, 44);
+            optionsToolStripMenuItem.Text = "Options";
+            optionsToolStripMenuItem.Click += OptionsToolStripMenuItem_Click;
             // 
             // toolStripSeparator2
             // 
-            this.toolStripSeparator2.Name = ("toolStripSeparator2");
-            this.toolStripSeparator2.Size = (new global::System.Drawing.Size(368, 6));
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(420, 6);
             // 
             // displayOptionsOnLoadToolStripMenuItem
             // 
-            this.displayOptionsOnLoadToolStripMenuItem.CheckOnClick = (true);
-            this.displayOptionsOnLoadToolStripMenuItem.Name = ("displayOptionsOnLoadToolStripMenuItem");
-            this.displayOptionsOnLoadToolStripMenuItem.Size = (new global::System.Drawing.Size(371, 40));
-            this.displayOptionsOnLoadToolStripMenuItem.Text = ("Display Options on Load");
-            this.displayOptionsOnLoadToolStripMenuItem.Click += (this.DisplayOptionsOnLoadToolStripMenuItem_Click);
+            displayOptionsOnLoadToolStripMenuItem.CheckOnClick = true;
+            displayOptionsOnLoadToolStripMenuItem.Name = "displayOptionsOnLoadToolStripMenuItem";
+            displayOptionsOnLoadToolStripMenuItem.Size = new Size(423, 44);
+            displayOptionsOnLoadToolStripMenuItem.Text = "Display Options on Load";
+            displayOptionsOnLoadToolStripMenuItem.Click += DisplayOptionsOnLoadToolStripMenuItem_Click;
             // 
             // resetToDefaultFormSizeToolStripMenuItem
             // 
-            this.resetToDefaultFormSizeToolStripMenuItem.Name = ("resetToDefaultFormSizeToolStripMenuItem");
-            this.resetToDefaultFormSizeToolStripMenuItem.Size = (new global::System.Drawing.Size(371, 40));
-            this.resetToDefaultFormSizeToolStripMenuItem.Text = ("Reset to Default form size");
-            this.resetToDefaultFormSizeToolStripMenuItem.Click += (this.ResetToDefaultFormSizeToolStripMenuItem_Click);
+            resetToDefaultFormSizeToolStripMenuItem.Name = "resetToDefaultFormSizeToolStripMenuItem";
+            resetToDefaultFormSizeToolStripMenuItem.Size = new Size(423, 44);
+            resetToDefaultFormSizeToolStripMenuItem.Text = "Reset to Default form size";
+            resetToDefaultFormSizeToolStripMenuItem.Click += ResetToDefaultFormSizeToolStripMenuItem_Click;
             // 
             // mnuMaps
             // 
-            this.mnuMaps.DropDownItems.AddRange(new global::System.Windows.Forms.ToolStripItem[] { this.mnuShowTimeline, this.mnuLifelines, this.mnuPlaces, this.toolStripSeparator4, this.mnuLocationsGeocodeReport, this.toolStripSeparator10, this.mnuGeocodeLocations, this.mnuOSGeocoder, this.mnuLookupBlankFoundLocations, this.toolStripSeparator16, this.mnuGoogleMyMaps });
-            this.mnuMaps.Name = ("mnuMaps");
-            this.mnuMaps.Size = (new global::System.Drawing.Size(82, 34));
-            this.mnuMaps.Text = ("Maps");
+            mnuMaps.DropDownItems.AddRange(new ToolStripItem[] { mnuShowTimeline, mnuLifelines, mnuPlaces, toolStripSeparator4, mnuLocationsGeocodeReport, toolStripSeparator10, mnuGeocodeLocations, mnuOSGeocoder, mnuLookupBlankFoundLocations, toolStripSeparator16, mnuGoogleMyMaps });
+            mnuMaps.Name = "mnuMaps";
+            mnuMaps.Size = new Size(92, 36);
+            mnuMaps.Text = "Maps";
             // 
             // mnuShowTimeline
             // 
-            this.mnuShowTimeline.Name = ("mnuShowTimeline");
-            this.mnuShowTimeline.Size = (new global::System.Drawing.Size(499, 40));
-            this.mnuShowTimeline.Text = ("Show Timeline");
-            this.mnuShowTimeline.Click += (this.MnuShowTimeline_Click);
+            mnuShowTimeline.Name = "mnuShowTimeline";
+            mnuShowTimeline.Size = new Size(572, 44);
+            mnuShowTimeline.Text = "Show Timeline";
+            mnuShowTimeline.Click += MnuShowTimeline_Click;
             // 
             // mnuLifelines
             // 
-            this.mnuLifelines.Name = ("mnuLifelines");
-            this.mnuLifelines.Size = (new global::System.Drawing.Size(499, 40));
-            this.mnuLifelines.Text = ("Show Lifelines");
-            this.mnuLifelines.Click += (this.MnuLifelines_Click);
+            mnuLifelines.Name = "mnuLifelines";
+            mnuLifelines.Size = new Size(572, 44);
+            mnuLifelines.Text = "Show Lifelines";
+            mnuLifelines.Click += MnuLifelines_Click;
             // 
             // mnuPlaces
             // 
-            this.mnuPlaces.Name = ("mnuPlaces");
-            this.mnuPlaces.Size = (new global::System.Drawing.Size(499, 40));
-            this.mnuPlaces.Text = ("Show Places");
-            this.mnuPlaces.Click += (this.MnuPlaces_Click);
+            mnuPlaces.Name = "mnuPlaces";
+            mnuPlaces.Size = new Size(572, 44);
+            mnuPlaces.Text = "Show Places";
+            mnuPlaces.Click += MnuPlaces_Click;
             // 
             // toolStripSeparator4
             // 
-            this.toolStripSeparator4.Name = ("toolStripSeparator4");
-            this.toolStripSeparator4.Size = (new global::System.Drawing.Size(496, 6));
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new Size(569, 6);
             // 
             // mnuLocationsGeocodeReport
             // 
-            this.mnuLocationsGeocodeReport.Name = ("mnuLocationsGeocodeReport");
-            this.mnuLocationsGeocodeReport.Size = (new global::System.Drawing.Size(499, 40));
-            this.mnuLocationsGeocodeReport.Text = ("Display Geocoded Locations");
-            this.mnuLocationsGeocodeReport.Click += (this.LocationsGeocodeReportToolStripMenuItem_Click);
+            mnuLocationsGeocodeReport.Name = "mnuLocationsGeocodeReport";
+            mnuLocationsGeocodeReport.Size = new Size(572, 44);
+            mnuLocationsGeocodeReport.Text = "Display Geocoded Locations";
+            mnuLocationsGeocodeReport.Click += LocationsGeocodeReportToolStripMenuItem_Click;
             // 
             // toolStripSeparator10
             // 
-            this.toolStripSeparator10.Name = ("toolStripSeparator10");
-            this.toolStripSeparator10.Size = (new global::System.Drawing.Size(496, 6));
+            toolStripSeparator10.Name = "toolStripSeparator10";
+            toolStripSeparator10.Size = new Size(569, 6);
             // 
             // mnuGeocodeLocations
             // 
-            this.mnuGeocodeLocations.Name = ("mnuGeocodeLocations");
-            this.mnuGeocodeLocations.Size = (new global::System.Drawing.Size(499, 40));
-            this.mnuGeocodeLocations.Text = ("Run Google Geocoder to Find Locations");
-            this.mnuGeocodeLocations.Click += (this.MnuGeocodeLocations_Click);
+            mnuGeocodeLocations.Name = "mnuGeocodeLocations";
+            mnuGeocodeLocations.Size = new Size(572, 44);
+            mnuGeocodeLocations.Text = "Run Google Geocoder to Find Locations";
+            mnuGeocodeLocations.Click += MnuGeocodeLocations_Click;
             // 
             // mnuOSGeocoder
             // 
-            this.mnuOSGeocoder.Name = ("mnuOSGeocoder");
-            this.mnuOSGeocoder.Size = (new global::System.Drawing.Size(499, 40));
-            this.mnuOSGeocoder.Text = ("Run OS Geocoder to Find Locations");
-            this.mnuOSGeocoder.Click += (this.MnuOSGeocoder_Click);
+            mnuOSGeocoder.Name = "mnuOSGeocoder";
+            mnuOSGeocoder.Size = new Size(572, 44);
+            mnuOSGeocoder.Text = "Run OS Geocoder to Find Locations";
+            mnuOSGeocoder.Click += MnuOSGeocoder_Click;
             // 
             // mnuLookupBlankFoundLocations
             // 
-            this.mnuLookupBlankFoundLocations.Name = ("mnuLookupBlankFoundLocations");
-            this.mnuLookupBlankFoundLocations.Size = (new global::System.Drawing.Size(499, 40));
-            this.mnuLookupBlankFoundLocations.Text = ("Lookup Blank Google Locations");
-            this.mnuLookupBlankFoundLocations.Click += (this.MnuLookupBlankFoundLocations_Click);
+            mnuLookupBlankFoundLocations.Name = "mnuLookupBlankFoundLocations";
+            mnuLookupBlankFoundLocations.Size = new Size(572, 44);
+            mnuLookupBlankFoundLocations.Text = "Lookup Blank Google Locations";
+            mnuLookupBlankFoundLocations.Click += MnuLookupBlankFoundLocations_Click;
             // 
             // toolStripSeparator16
             // 
-            this.toolStripSeparator16.Name = ("toolStripSeparator16");
-            this.toolStripSeparator16.Size = (new global::System.Drawing.Size(496, 6));
+            toolStripSeparator16.Name = "toolStripSeparator16";
+            toolStripSeparator16.Size = new Size(569, 6);
             // 
             // mnuGoogleMyMaps
             // 
-            this.mnuGoogleMyMaps.Name = ("mnuGoogleMyMaps");
-            this.mnuGoogleMyMaps.Size = (new global::System.Drawing.Size(499, 40));
-            this.mnuGoogleMyMaps.Text = ("Export to Google MyMaps");
-            this.mnuGoogleMyMaps.Click += (this.MnuGoogleMyMaps_Click);
+            mnuGoogleMyMaps.Name = "mnuGoogleMyMaps";
+            mnuGoogleMyMaps.Size = new Size(572, 44);
+            mnuGoogleMyMaps.Text = "Export to Google MyMaps";
+            mnuGoogleMyMaps.Click += MnuGoogleMyMaps_Click;
             // 
             // helpToolStripMenuItem
             // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new global::System.Windows.Forms.ToolStripItem[] { this.viewOnlineManualToolStripMenuItem, this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem, this.reportAnIssueToolStripMenuItem, this.facebookSupportGroupToolStripMenuItem, this.facebookUserGroupToolStripMenuItem, this.toolStripSeparator1, this.getGoogleAPIKeyToolStripMenuItem, this.googleAPISetupGuideToolStripMenuItem, this.toolStripSeparator14, this.privacyPolicyToolStripMenuItem, this.whatsNewToolStripMenuItem, this.aboutToolStripMenuItem });
-            this.helpToolStripMenuItem.Name = ("helpToolStripMenuItem");
-            this.helpToolStripMenuItem.Size = (new global::System.Drawing.Size(74, 34));
-            this.helpToolStripMenuItem.Text = ("Help");
+            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { viewOnlineManualToolStripMenuItem, onlineGuidesToUsingFTAnalyzerToolStripMenuItem, reportAnIssueToolStripMenuItem, facebookSupportGroupToolStripMenuItem, facebookUserGroupToolStripMenuItem, toolStripSeparator1, getGoogleAPIKeyToolStripMenuItem, googleAPISetupGuideToolStripMenuItem, toolStripSeparator14, privacyPolicyToolStripMenuItem, whatsNewToolStripMenuItem, aboutToolStripMenuItem });
+            helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            helpToolStripMenuItem.Size = new Size(84, 36);
+            helpToolStripMenuItem.Text = "Help";
             // 
             // viewOnlineManualToolStripMenuItem
             // 
-            this.viewOnlineManualToolStripMenuItem.Name = ("viewOnlineManualToolStripMenuItem");
-            this.viewOnlineManualToolStripMenuItem.Size = (new global::System.Drawing.Size(450, 40));
-            this.viewOnlineManualToolStripMenuItem.Text = ("View Online Manual");
-            this.viewOnlineManualToolStripMenuItem.Click += (this.ViewOnlineManualToolStripMenuItem_Click);
+            viewOnlineManualToolStripMenuItem.Name = "viewOnlineManualToolStripMenuItem";
+            viewOnlineManualToolStripMenuItem.Size = new Size(515, 44);
+            viewOnlineManualToolStripMenuItem.Text = "View Online Manual";
+            viewOnlineManualToolStripMenuItem.Click += ViewOnlineManualToolStripMenuItem_Click;
             // 
             // onlineGuidesToUsingFTAnalyzerToolStripMenuItem
             // 
-            this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Name = ("onlineGuidesToUsingFTAnalyzerToolStripMenuItem");
-            this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Size = (new global::System.Drawing.Size(450, 40));
-            this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Text = ("Online Guides to Using FTAnalyzer");
-            this.onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Click += (this.OnlineGuidesToUsingFTAnalyzerToolStripMenuItem_Click);
+            onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Name = "onlineGuidesToUsingFTAnalyzerToolStripMenuItem";
+            onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Size = new Size(515, 44);
+            onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Text = "Online Guides to Using FTAnalyzer";
+            onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Click += OnlineGuidesToUsingFTAnalyzerToolStripMenuItem_Click;
             // 
             // reportAnIssueToolStripMenuItem
             // 
-            this.reportAnIssueToolStripMenuItem.Name = ("reportAnIssueToolStripMenuItem");
-            this.reportAnIssueToolStripMenuItem.Size = (new global::System.Drawing.Size(450, 40));
-            this.reportAnIssueToolStripMenuItem.Text = ("Report an Issue");
-            this.reportAnIssueToolStripMenuItem.Click += (this.ReportAnIssueToolStripMenuItem_Click);
+            reportAnIssueToolStripMenuItem.Name = "reportAnIssueToolStripMenuItem";
+            reportAnIssueToolStripMenuItem.Size = new Size(515, 44);
+            reportAnIssueToolStripMenuItem.Text = "Report an Issue";
+            reportAnIssueToolStripMenuItem.Click += ReportAnIssueToolStripMenuItem_Click;
             // 
             // facebookSupportGroupToolStripMenuItem
             // 
-            this.facebookSupportGroupToolStripMenuItem.Image = (global::FTAnalyzer.Properties.Resources.flogo_rgb_hex_brc_site_250);
-            this.facebookSupportGroupToolStripMenuItem.Name = ("facebookSupportGroupToolStripMenuItem");
-            this.facebookSupportGroupToolStripMenuItem.Size = (new global::System.Drawing.Size(450, 40));
-            this.facebookSupportGroupToolStripMenuItem.Text = ("Facebook Support Page");
-            this.facebookSupportGroupToolStripMenuItem.Click += (this.FacebookSupportGroupToolStripMenuItem_Click);
+            facebookSupportGroupToolStripMenuItem.Image = Properties.Resources.flogo_rgb_hex_brc_site_250;
+            facebookSupportGroupToolStripMenuItem.Name = "facebookSupportGroupToolStripMenuItem";
+            facebookSupportGroupToolStripMenuItem.Size = new Size(515, 44);
+            facebookSupportGroupToolStripMenuItem.Text = "Facebook Support Page";
+            facebookSupportGroupToolStripMenuItem.Click += FacebookSupportGroupToolStripMenuItem_Click;
             // 
             // facebookUserGroupToolStripMenuItem
             // 
-            this.facebookUserGroupToolStripMenuItem.Image = (global::FTAnalyzer.Properties.Resources.flogo_rgb_hex_brc_site_250);
-            this.facebookUserGroupToolStripMenuItem.Name = ("facebookUserGroupToolStripMenuItem");
-            this.facebookUserGroupToolStripMenuItem.Size = (new global::System.Drawing.Size(450, 40));
-            this.facebookUserGroupToolStripMenuItem.Text = ("Facebook User Group");
-            this.facebookUserGroupToolStripMenuItem.Click += (this.FacebookUserGroupToolStripMenuItem_Click);
+            facebookUserGroupToolStripMenuItem.Image = Properties.Resources.flogo_rgb_hex_brc_site_250;
+            facebookUserGroupToolStripMenuItem.Name = "facebookUserGroupToolStripMenuItem";
+            facebookUserGroupToolStripMenuItem.Size = new Size(515, 44);
+            facebookUserGroupToolStripMenuItem.Text = "Facebook User Group";
+            facebookUserGroupToolStripMenuItem.Click += FacebookUserGroupToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
-            this.toolStripSeparator1.Name = ("toolStripSeparator1");
-            this.toolStripSeparator1.Size = (new global::System.Drawing.Size(447, 6));
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(512, 6);
             // 
             // getGoogleAPIKeyToolStripMenuItem
             // 
-            this.getGoogleAPIKeyToolStripMenuItem.Image = (global::FTAnalyzer.Properties.Resources.GoogleMapsAPI);
-            this.getGoogleAPIKeyToolStripMenuItem.Name = ("getGoogleAPIKeyToolStripMenuItem");
-            this.getGoogleAPIKeyToolStripMenuItem.Size = (new global::System.Drawing.Size(450, 40));
-            this.getGoogleAPIKeyToolStripMenuItem.Text = ("Get Google API Key");
-            this.getGoogleAPIKeyToolStripMenuItem.Click += (this.GetGoogleAPIKeyToolStripMenuItem_Click);
+            getGoogleAPIKeyToolStripMenuItem.Image = Properties.Resources.GoogleMapsAPI;
+            getGoogleAPIKeyToolStripMenuItem.Name = "getGoogleAPIKeyToolStripMenuItem";
+            getGoogleAPIKeyToolStripMenuItem.Size = new Size(515, 44);
+            getGoogleAPIKeyToolStripMenuItem.Text = "Get Google API Key";
+            getGoogleAPIKeyToolStripMenuItem.Click += GetGoogleAPIKeyToolStripMenuItem_Click;
             // 
             // googleAPISetupGuideToolStripMenuItem
             // 
-            this.googleAPISetupGuideToolStripMenuItem.Image = (global::FTAnalyzer.Properties.Resources.GoogleMapsAPI);
-            this.googleAPISetupGuideToolStripMenuItem.Name = ("googleAPISetupGuideToolStripMenuItem");
-            this.googleAPISetupGuideToolStripMenuItem.Size = (new global::System.Drawing.Size(450, 40));
-            this.googleAPISetupGuideToolStripMenuItem.Text = ("Google API Setup Guide");
-            this.googleAPISetupGuideToolStripMenuItem.Click += (this.GoogleAPISetupGuideToolStripMenuItem_Click);
+            googleAPISetupGuideToolStripMenuItem.Image = Properties.Resources.GoogleMapsAPI;
+            googleAPISetupGuideToolStripMenuItem.Name = "googleAPISetupGuideToolStripMenuItem";
+            googleAPISetupGuideToolStripMenuItem.Size = new Size(515, 44);
+            googleAPISetupGuideToolStripMenuItem.Text = "Google API Setup Guide";
+            googleAPISetupGuideToolStripMenuItem.Click += GoogleAPISetupGuideToolStripMenuItem_Click;
             // 
             // toolStripSeparator14
             // 
-            this.toolStripSeparator14.Name = ("toolStripSeparator14");
-            this.toolStripSeparator14.Size = (new global::System.Drawing.Size(447, 6));
+            toolStripSeparator14.Name = "toolStripSeparator14";
+            toolStripSeparator14.Size = new Size(512, 6);
             // 
             // privacyPolicyToolStripMenuItem
             // 
-            this.privacyPolicyToolStripMenuItem.Name = ("privacyPolicyToolStripMenuItem");
-            this.privacyPolicyToolStripMenuItem.Size = (new global::System.Drawing.Size(450, 40));
-            this.privacyPolicyToolStripMenuItem.Text = ("Privacy Policy");
-            this.privacyPolicyToolStripMenuItem.Click += (this.PrivacyPolicyToolStripMenuItem_Click);
+            privacyPolicyToolStripMenuItem.Name = "privacyPolicyToolStripMenuItem";
+            privacyPolicyToolStripMenuItem.Size = new Size(515, 44);
+            privacyPolicyToolStripMenuItem.Text = "Privacy Policy";
+            privacyPolicyToolStripMenuItem.Click += PrivacyPolicyToolStripMenuItem_Click;
             // 
             // whatsNewToolStripMenuItem
             // 
-            this.whatsNewToolStripMenuItem.Name = ("whatsNewToolStripMenuItem");
-            this.whatsNewToolStripMenuItem.Size = (new global::System.Drawing.Size(450, 40));
-            this.whatsNewToolStripMenuItem.Text = ("What's New");
-            this.whatsNewToolStripMenuItem.Click += (this.WhatsNewToolStripMenuItem_Click);
+            whatsNewToolStripMenuItem.Name = "whatsNewToolStripMenuItem";
+            whatsNewToolStripMenuItem.Size = new Size(515, 44);
+            whatsNewToolStripMenuItem.Text = "What's New";
+            whatsNewToolStripMenuItem.Click += WhatsNewToolStripMenuItem_Click;
             // 
             // aboutToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.Name = ("aboutToolStripMenuItem");
-            this.aboutToolStripMenuItem.Size = (new global::System.Drawing.Size(450, 40));
-            this.aboutToolStripMenuItem.Text = ("About");
-            this.aboutToolStripMenuItem.Click += (this.AboutToolStripMenuItem_Click);
+            aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            aboutToolStripMenuItem.Size = new Size(515, 44);
+            aboutToolStripMenuItem.Text = "About";
+            aboutToolStripMenuItem.Click += AboutToolStripMenuItem_Click;
             // 
             // mnuSetRoot
             // 
-            this.mnuSetRoot.ImageScalingSize = (new global::System.Drawing.Size(32, 32));
-            this.mnuSetRoot.Items.AddRange(new global::System.Windows.Forms.ToolStripItem[] { this.setAsRootToolStripMenuItem, this.viewNotesToolStripMenuItem });
-            this.mnuSetRoot.Name = ("mnuSetRoot");
-            this.mnuSetRoot.Size = (new global::System.Drawing.Size(262, 76));
-            this.mnuSetRoot.Opened += (this.MnuSetRoot_Opened);
+            mnuSetRoot.ImageScalingSize = new Size(32, 32);
+            mnuSetRoot.Items.AddRange(new ToolStripItem[] { setAsRootToolStripMenuItem, viewNotesToolStripMenuItem });
+            mnuSetRoot.Name = "mnuSetRoot";
+            mnuSetRoot.Size = new Size(289, 80);
+            mnuSetRoot.Opened += MnuSetRoot_Opened;
             // 
             // setAsRootToolStripMenuItem
             // 
-            this.setAsRootToolStripMenuItem.Name = ("setAsRootToolStripMenuItem");
-            this.setAsRootToolStripMenuItem.Size = (new global::System.Drawing.Size(261, 36));
-            this.setAsRootToolStripMenuItem.Text = ("Set As Root Person");
-            this.setAsRootToolStripMenuItem.Click += (this.SetAsRootToolStripMenuItem_Click);
+            setAsRootToolStripMenuItem.Name = "setAsRootToolStripMenuItem";
+            setAsRootToolStripMenuItem.Size = new Size(288, 38);
+            setAsRootToolStripMenuItem.Text = "Set As Root Person";
+            setAsRootToolStripMenuItem.Click += SetAsRootToolStripMenuItem_Click;
             // 
             // viewNotesToolStripMenuItem
             // 
-            this.viewNotesToolStripMenuItem.Name = ("viewNotesToolStripMenuItem");
-            this.viewNotesToolStripMenuItem.Size = (new global::System.Drawing.Size(261, 36));
-            this.viewNotesToolStripMenuItem.Text = ("View Notes");
-            this.viewNotesToolStripMenuItem.Click += (this.ViewNotesToolStripMenuItem_Click);
+            viewNotesToolStripMenuItem.Name = "viewNotesToolStripMenuItem";
+            viewNotesToolStripMenuItem.Size = new Size(288, 38);
+            viewNotesToolStripMenuItem.Text = "View Notes";
+            viewNotesToolStripMenuItem.Click += ViewNotesToolStripMenuItem_Click;
             // 
             // tsCount
             // 
-            this.tsCount.Margin = (new global::System.Windows.Forms.Padding(0, 3, 0, 2));
-            this.tsCount.Name = ("tsCount");
-            this.tsCount.Size = (new global::System.Drawing.Size(52, 17));
-            this.tsCount.Text = ("Count: 0");
+            tsCount.Margin = new Padding(0, 3, 0, 2);
+            tsCount.Name = "tsCount";
+            tsCount.Size = new Size(52, 17);
+            tsCount.Text = "Count: 0";
             // 
             // statusStrip
             // 
-            this.statusStrip.ImageScalingSize = (new global::System.Drawing.Size(32, 32));
-            this.statusStrip.Items.AddRange(new global::System.Windows.Forms.ToolStripItem[] { this.tsCountLabel, this.tsHintsLabel, this.tspbTabProgress, this.tsStatusLabel });
-            this.statusStrip.Location = (new global::System.Drawing.Point(0, 1156));
-            this.statusStrip.Name = ("statusStrip");
-            this.statusStrip.Padding = (new global::System.Windows.Forms.Padding(2, 0, 28, 0));
-            this.statusStrip.Size = (new global::System.Drawing.Size(2136, 22));
-            this.statusStrip.TabIndex = (10);
-            this.statusStrip.Text = ("statusStrip1");
+            statusStrip.ImageScalingSize = new Size(32, 32);
+            statusStrip.Items.AddRange(new ToolStripItem[] { tsCountLabel, tsHintsLabel, tspbTabProgress, tsStatusLabel });
+            statusStrip.Location = new Point(0, 1235);
+            statusStrip.Name = "statusStrip";
+            statusStrip.Padding = new Padding(2, 0, 30, 0);
+            statusStrip.Size = new Size(2314, 22);
+            statusStrip.TabIndex = 10;
+            statusStrip.Text = "statusStrip1";
             // 
             // tsCountLabel
             // 
-            this.tsCountLabel.Name = ("tsCountLabel");
-            this.tsCountLabel.Size = (new global::System.Drawing.Size(0, 13));
+            tsCountLabel.Name = "tsCountLabel";
+            tsCountLabel.Size = new Size(0, 12);
             // 
             // tsHintsLabel
             // 
-            this.tsHintsLabel.Name = ("tsHintsLabel");
-            this.tsHintsLabel.Size = (new global::System.Drawing.Size(0, 13));
+            tsHintsLabel.Name = "tsHintsLabel";
+            tsHintsLabel.Size = new Size(0, 12);
             // 
             // tspbTabProgress
             // 
-            this.tspbTabProgress.Name = ("tspbTabProgress");
-            this.tspbTabProgress.Size = (new global::System.Drawing.Size(400, 15));
-            this.tspbTabProgress.Visible = (false);
+            tspbTabProgress.Name = "tspbTabProgress";
+            tspbTabProgress.Size = new Size(433, 11);
+            tspbTabProgress.Visible = false;
             // 
             // tsStatusLabel
             // 
-            this.tsStatusLabel.Name = ("tsStatusLabel");
-            this.tsStatusLabel.Size = (new global::System.Drawing.Size(0, 13));
+            tsStatusLabel.Name = "tsStatusLabel";
+            tsStatusLabel.Size = new Size(0, 12);
             // 
             // cmbColourFamily
             // 
-            this.cmbColourFamily.Anchor = ((global::System.Windows.Forms.AnchorStyles)(((global::System.Windows.Forms.AnchorStyles.Top) | (global::System.Windows.Forms.AnchorStyles.Left)) | (global::System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbColourFamily.FormattingEnabled = (true);
-            this.cmbColourFamily.Location = (new global::System.Drawing.Point(812, 112));
-            this.cmbColourFamily.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.cmbColourFamily.Name = ("cmbColourFamily");
-            this.cmbColourFamily.Size = (new global::System.Drawing.Size(1136, 38));
-            this.cmbColourFamily.TabIndex = (60);
-            this.toolTips.SetToolTip(this.cmbColourFamily, "Select a family to limit the reports to just that family");
-            this.cmbColourFamily.Click += (this.CmbColourFamily_Click);
+            cmbColourFamily.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            cmbColourFamily.FormattingEnabled = true;
+            cmbColourFamily.Location = new Point(880, 119);
+            cmbColourFamily.Margin = new Padding(8, 9, 8, 9);
+            cmbColourFamily.Name = "cmbColourFamily";
+            cmbColourFamily.Size = new Size(1230, 40);
+            cmbColourFamily.TabIndex = 60;
+            toolTips.SetToolTip(cmbColourFamily, "Select a family to limit the reports to just that family");
+            cmbColourFamily.Click += CmbColourFamily_Click;
             // 
             // btnRandomSurnameColour
             // 
-            this.btnRandomSurnameColour.Location = (new global::System.Drawing.Point(1244, 30));
-            this.btnRandomSurnameColour.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnRandomSurnameColour.Name = ("btnRandomSurnameColour");
-            this.btnRandomSurnameColour.Size = (new global::System.Drawing.Size(586, 58));
-            this.btnRandomSurnameColour.TabIndex = (62);
-            this.btnRandomSurnameColour.Text = ("Select Random Surname from Direct Ancestor's Surnames");
-            this.toolTips.SetToolTip(this.btnRandomSurnameColour, "Once selected click the appropriate report button to view the report. eg: UK Colour Census Report.");
-            this.btnRandomSurnameColour.UseVisualStyleBackColor = (true);
-            this.btnRandomSurnameColour.Click += (this.BtnRandomSurnameColour_Click);
+            btnRandomSurnameColour.Location = new Point(1348, 32);
+            btnRandomSurnameColour.Margin = new Padding(8, 9, 8, 9);
+            btnRandomSurnameColour.Name = "btnRandomSurnameColour";
+            btnRandomSurnameColour.Size = new Size(635, 62);
+            btnRandomSurnameColour.TabIndex = 62;
+            btnRandomSurnameColour.Text = "Select Random Surname from Direct Ancestor's Surnames";
+            toolTips.SetToolTip(btnRandomSurnameColour, "Once selected click the appropriate report button to view the report. eg: UK Colour Census Report.");
+            btnRandomSurnameColour.UseVisualStyleBackColor = true;
+            btnRandomSurnameColour.Click += BtnRandomSurnameColour_Click;
             // 
             // ckbFactExclude
             // 
-            this.ckbFactExclude.Anchor = ((global::System.Windows.Forms.AnchorStyles)(((global::System.Windows.Forms.AnchorStyles.Top) | (global::System.Windows.Forms.AnchorStyles.Bottom)) | (global::System.Windows.Forms.AnchorStyles.Left)));
-            this.ckbFactExclude.FormattingEnabled = (true);
-            this.ckbFactExclude.Location = (new global::System.Drawing.Point(722, 316));
-            this.ckbFactExclude.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.ckbFactExclude.Name = ("ckbFactExclude");
-            this.ckbFactExclude.ScrollAlwaysVisible = (true);
-            this.ckbFactExclude.SelectionMode = (global::System.Windows.Forms.SelectionMode.None);
-            this.ckbFactExclude.Size = (new global::System.Drawing.Size(623, 484));
-            this.ckbFactExclude.TabIndex = (28);
-            this.toolTips.SetToolTip(this.ckbFactExclude, "Any fact types selected in this box excludes people who have this fact type from report");
-            this.ckbFactExclude.Visible = (false);
-            this.ckbFactExclude.MouseClick += (this.CkbFactExclude_MouseClick);
+            ckbFactExclude.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            ckbFactExclude.FormattingEnabled = true;
+            ckbFactExclude.Location = new Point(782, 337);
+            ckbFactExclude.Margin = new Padding(8, 9, 8, 9);
+            ckbFactExclude.Name = "ckbFactExclude";
+            ckbFactExclude.ScrollAlwaysVisible = true;
+            ckbFactExclude.SelectionMode = SelectionMode.None;
+            ckbFactExclude.Size = new Size(675, 508);
+            ckbFactExclude.TabIndex = 28;
+            toolTips.SetToolTip(ckbFactExclude, "Any fact types selected in this box excludes people who have this fact type from report");
+            ckbFactExclude.Visible = false;
+            ckbFactExclude.MouseClick += CkbFactExclude_MouseClick;
             // 
             // btnShowExclusions
             // 
-            this.btnShowExclusions.Location = (new global::System.Drawing.Point(655, 549));
-            this.btnShowExclusions.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnShowExclusions.Name = ("btnShowExclusions");
-            this.btnShowExclusions.Size = (new global::System.Drawing.Size(56, 118));
-            this.btnShowExclusions.TabIndex = (33);
-            this.btnShowExclusions.Text = ("=>");
-            this.toolTips.SetToolTip(this.btnShowExclusions, "Show Exclusions");
-            this.btnShowExclusions.UseVisualStyleBackColor = (true);
-            this.btnShowExclusions.Click += (this.BtnShowExclusions_Click);
+            btnShowExclusions.Location = new Point(710, 586);
+            btnShowExclusions.Margin = new Padding(8, 9, 8, 9);
+            btnShowExclusions.Name = "btnShowExclusions";
+            btnShowExclusions.Size = new Size(61, 126);
+            btnShowExclusions.TabIndex = 33;
+            btnShowExclusions.Text = "=>";
+            toolTips.SetToolTip(btnShowExclusions, "Show Exclusions");
+            btnShowExclusions.UseVisualStyleBackColor = true;
+            btnShowExclusions.Click += BtnShowExclusions_Click;
             // 
             // tbDuplicateScore
             // 
-            this.tbDuplicateScore.Anchor = ((global::System.Windows.Forms.AnchorStyles)(((global::System.Windows.Forms.AnchorStyles.Top) | (global::System.Windows.Forms.AnchorStyles.Left)) | (global::System.Windows.Forms.AnchorStyles.Right)));
-            this.tbDuplicateScore.BackColor = (global::System.Drawing.SystemColors.ControlLightLight);
-            this.tbDuplicateScore.Location = (new global::System.Drawing.Point(895, 8));
-            this.tbDuplicateScore.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tbDuplicateScore.Minimum = (1);
-            this.tbDuplicateScore.Name = ("tbDuplicateScore");
-            this.tbDuplicateScore.Size = (new global::System.Drawing.Size(1206, 80));
-            this.tbDuplicateScore.TabIndex = (22);
-            this.tbDuplicateScore.TickFrequency = (5);
-            this.toolTips.SetToolTip(this.tbDuplicateScore, "Adjust Slider to right to limit results to more likely matches");
-            this.tbDuplicateScore.Value = (1);
-            this.tbDuplicateScore.Scroll += (this.TbDuplicateScore_Scroll);
+            tbDuplicateScore.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tbDuplicateScore.BackColor = SystemColors.ControlLightLight;
+            tbDuplicateScore.Location = new Point(970, 9);
+            tbDuplicateScore.Margin = new Padding(8, 9, 8, 9);
+            tbDuplicateScore.Minimum = 1;
+            tbDuplicateScore.Name = "tbDuplicateScore";
+            tbDuplicateScore.Size = new Size(1291, 90);
+            tbDuplicateScore.TabIndex = 22;
+            tbDuplicateScore.TickFrequency = 5;
+            toolTips.SetToolTip(tbDuplicateScore, "Adjust Slider to right to limit results to more likely matches");
+            tbDuplicateScore.Value = 1;
+            tbDuplicateScore.Scroll += TbDuplicateScore_Scroll;
             // 
             // chkLCRootPersonConfirm
             // 
-            this.chkLCRootPersonConfirm.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 8.25F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            this.chkLCRootPersonConfirm.Location = (new global::System.Drawing.Point(60, 339));
-            this.chkLCRootPersonConfirm.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.chkLCRootPersonConfirm.Name = ("chkLCRootPersonConfirm");
-            this.chkLCRootPersonConfirm.RightToLeft = (global::System.Windows.Forms.RightToLeft.Yes);
-            this.chkLCRootPersonConfirm.Size = (new global::System.Drawing.Size(814, 55));
-            this.chkLCRootPersonConfirm.TabIndex = (4);
-            this.chkLCRootPersonConfirm.Text = ("rootperson");
-            this.chkLCRootPersonConfirm.TextAlign = (global::System.Drawing.ContentAlignment.MiddleRight);
-            this.toolTips.SetToolTip(this.chkLCRootPersonConfirm, "The Lost Cousins Data includes a relationship field please make sure the root person relates to the root person on the Lost Cousins website.");
-            this.chkLCRootPersonConfirm.UseVisualStyleBackColor = (true);
-            this.chkLCRootPersonConfirm.CheckedChanged += (this.ChkLCRootPersonConfirm_CheckedChanged);
+            chkLCRootPersonConfirm.Font = new Font("Microsoft Sans Serif", 8.25F);
+            chkLCRootPersonConfirm.Location = new Point(65, 362);
+            chkLCRootPersonConfirm.Margin = new Padding(8, 9, 8, 9);
+            chkLCRootPersonConfirm.Name = "chkLCRootPersonConfirm";
+            chkLCRootPersonConfirm.RightToLeft = RightToLeft.Yes;
+            chkLCRootPersonConfirm.Size = new Size(882, 59);
+            chkLCRootPersonConfirm.TabIndex = 4;
+            chkLCRootPersonConfirm.Text = "rootperson";
+            chkLCRootPersonConfirm.TextAlign = ContentAlignment.MiddleRight;
+            toolTips.SetToolTip(chkLCRootPersonConfirm, "The Lost Cousins Data includes a relationship field please make sure the root person relates to the root person on the Lost Cousins website.");
+            chkLCRootPersonConfirm.UseVisualStyleBackColor = true;
+            chkLCRootPersonConfirm.CheckedChanged += ChkLCRootPersonConfirm_CheckedChanged;
             // 
             // dgCheckAncestors
             // 
-            this.dgCheckAncestors.AllowUserToAddRows = (false);
-            this.dgCheckAncestors.AllowUserToDeleteRows = (false);
-            this.dgCheckAncestors.Anchor = ((global::System.Windows.Forms.AnchorStyles)((((global::System.Windows.Forms.AnchorStyles.Top) | (global::System.Windows.Forms.AnchorStyles.Bottom)) | (global::System.Windows.Forms.AnchorStyles.Left)) | (global::System.Windows.Forms.AnchorStyles.Right)));
-            this.dgCheckAncestors.ColumnHeadersHeight = (40);
-            dataGridViewCellStyle3.Alignment = (global::System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft);
-            dataGridViewCellStyle3.BackColor = (global::System.Drawing.SystemColors.Window);
-            dataGridViewCellStyle3.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 8.25F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            dataGridViewCellStyle3.ForeColor = (global::System.Drawing.SystemColors.ControlText);
-            dataGridViewCellStyle3.SelectionBackColor = (global::System.Drawing.SystemColors.Highlight);
-            dataGridViewCellStyle3.SelectionForeColor = (global::System.Drawing.SystemColors.HighlightText);
-            dataGridViewCellStyle3.WrapMode = (global::System.Windows.Forms.DataGridViewTriState.False);
-            this.dgCheckAncestors.DefaultCellStyle = (dataGridViewCellStyle3);
-            this.dgCheckAncestors.Location = (new global::System.Drawing.Point(7, 196));
-            this.dgCheckAncestors.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.dgCheckAncestors.Name = ("dgCheckAncestors");
-            this.dgCheckAncestors.ReadOnly = (true);
-            this.dgCheckAncestors.RowHeadersWidth = (82);
-            this.dgCheckAncestors.SelectionMode = (global::System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect);
-            this.dgCheckAncestors.ShowCellToolTips = (false);
-            this.dgCheckAncestors.ShowEditingIcon = (false);
-            this.dgCheckAncestors.Size = (new global::System.Drawing.Size(2092, 780));
-            this.dgCheckAncestors.TabIndex = (7);
-            this.toolTips.SetToolTip(this.dgCheckAncestors, "Double click to see list of facts for that individual");
+            dgCheckAncestors.AllowUserToAddRows = false;
+            dgCheckAncestors.AllowUserToDeleteRows = false;
+            dgCheckAncestors.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgCheckAncestors.ColumnHeadersHeight = 40;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle1;
+            dgCheckAncestors.Location = new Point(8, 209);
+            dgCheckAncestors.Margin = new Padding(8, 9, 8, 9);
+            dgCheckAncestors.Name = "dgCheckAncestors";
+            dgCheckAncestors.ReadOnly = true;
+            dgCheckAncestors.RowHeadersWidth = 82;
+            dgCheckAncestors.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgCheckAncestors.ShowCellToolTips = false;
+            dgCheckAncestors.ShowEditingIcon = false;
+            dgCheckAncestors.Size = new Size(2250, 811);
+            dgCheckAncestors.TabIndex = 7;
+            toolTips.SetToolTip(dgCheckAncestors, "Double click to see list of facts for that individual");
             // 
             // label13
             // 
-            this.label13.Anchor = ((global::System.Windows.Forms.AnchorStyles)((global::System.Windows.Forms.AnchorStyles.Top) | (global::System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.AutoSize = (true);
-            this.label13.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 8.25F, global::System.Drawing.FontStyle.Bold, global::System.Drawing.GraphicsUnit.Point));
-            this.label13.Location = (new global::System.Drawing.Point(1888, 55));
-            this.label13.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.label13.Name = ("label13");
-            this.label13.Size = (new global::System.Drawing.Size(185, 25));
-            this.label13.TabIndex = (24);
-            this.label13.Text = ("Aggressive Match");
-            this.toolTips.SetToolTip(this.label13, "Will produce duplicates in list when the two individuals are a very close match to each other - only those with highest duplicate match score");
+            label13.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label13.AutoSize = true;
+            label13.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
+            label13.Location = new Point(2030, 59);
+            label13.Margin = new Padding(8, 0, 8, 0);
+            label13.Name = "label13";
+            label13.Size = new Size(201, 26);
+            label13.TabIndex = 24;
+            label13.Text = "Aggressive Match";
+            toolTips.SetToolTip(label13, "Will produce duplicates in list when the two individuals are a very close match to each other - only those with highest duplicate match score");
             // 
             // label12
             // 
-            this.label12.AutoSize = (true);
-            this.label12.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 8.25F, global::System.Drawing.FontStyle.Bold, global::System.Drawing.GraphicsUnit.Point));
-            this.label12.Location = (new global::System.Drawing.Point(888, 55));
-            this.label12.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.label12.Name = ("label12");
-            this.label12.Size = (new global::System.Drawing.Size(136, 25));
-            this.label12.TabIndex = (23);
-            this.label12.Text = ("Loose Match");
-            this.toolTips.SetToolTip(this.label12, "Will produce duplicates in list when the two individuals decent but vague match to each other - Lowest duplicate match score");
+            label12.AutoSize = true;
+            label12.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
+            label12.Location = new Point(962, 59);
+            label12.Margin = new Padding(8, 0, 8, 0);
+            label12.Name = "label12";
+            label12.Size = new Size(147, 26);
+            label12.TabIndex = 23;
+            label12.Text = "Loose Match";
+            toolTips.SetToolTip(label12, "Will produce duplicates in list when the two individuals decent but vague match to each other - Lowest duplicate match score");
             // 
             // chkIgnoreUnnamedTwins
             // 
-            this.chkIgnoreUnnamedTwins.AutoSize = (true);
-            this.chkIgnoreUnnamedTwins.Checked = (true);
-            this.chkIgnoreUnnamedTwins.CheckState = (global::System.Windows.Forms.CheckState.Checked);
-            this.chkIgnoreUnnamedTwins.Location = (new global::System.Drawing.Point(492, 148));
-            this.chkIgnoreUnnamedTwins.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.chkIgnoreUnnamedTwins.Name = ("chkIgnoreUnnamedTwins");
-            this.chkIgnoreUnnamedTwins.Size = (new global::System.Drawing.Size(156, 34));
-            this.chkIgnoreUnnamedTwins.TabIndex = (29);
-            this.chkIgnoreUnnamedTwins.Text = ("Ignore Twins");
-            this.toolTips.SetToolTip(this.chkIgnoreUnnamedTwins, "Ignores duplicates where forename is unknown");
-            this.chkIgnoreUnnamedTwins.UseVisualStyleBackColor = (true);
-            this.chkIgnoreUnnamedTwins.Visible = (false);
+            chkIgnoreUnnamedTwins.AutoSize = true;
+            chkIgnoreUnnamedTwins.Checked = true;
+            chkIgnoreUnnamedTwins.CheckState = CheckState.Checked;
+            chkIgnoreUnnamedTwins.Location = new Point(533, 158);
+            chkIgnoreUnnamedTwins.Margin = new Padding(8, 9, 8, 9);
+            chkIgnoreUnnamedTwins.Name = "chkIgnoreUnnamedTwins";
+            chkIgnoreUnnamedTwins.Size = new Size(181, 36);
+            chkIgnoreUnnamedTwins.TabIndex = 29;
+            chkIgnoreUnnamedTwins.Text = "Ignore Twins";
+            toolTips.SetToolTip(chkIgnoreUnnamedTwins, "Ignores duplicates where forename is unknown");
+            chkIgnoreUnnamedTwins.UseVisualStyleBackColor = true;
+            chkIgnoreUnnamedTwins.Visible = false;
             // 
             // radioOnlyPreferred
             // 
-            this.radioOnlyPreferred.AutoSize = (true);
-            this.radioOnlyPreferred.Location = (new global::System.Drawing.Point(204, 5));
-            this.radioOnlyPreferred.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.radioOnlyPreferred.Name = ("radioOnlyPreferred");
-            this.radioOnlyPreferred.Size = (new global::System.Drawing.Size(224, 34));
-            this.radioOnlyPreferred.TabIndex = (39);
-            this.radioOnlyPreferred.Text = ("Show only Preferred");
-            this.toolTips.SetToolTip(this.radioOnlyPreferred, "Select this option to only show Preferred facts when you click one of the display buttons");
-            this.radioOnlyPreferred.UseVisualStyleBackColor = (true);
-            this.radioOnlyPreferred.CheckedChanged += (this.RadioFacts_CheckedChanged);
+            radioOnlyPreferred.AutoSize = true;
+            radioOnlyPreferred.Location = new Point(221, 5);
+            radioOnlyPreferred.Margin = new Padding(4, 5, 4, 5);
+            radioOnlyPreferred.Name = "radioOnlyPreferred";
+            radioOnlyPreferred.Size = new Size(261, 36);
+            radioOnlyPreferred.TabIndex = 39;
+            radioOnlyPreferred.Text = "Show only Preferred";
+            toolTips.SetToolTip(radioOnlyPreferred, "Select this option to only show Preferred facts when you click one of the display buttons");
+            radioOnlyPreferred.UseVisualStyleBackColor = true;
+            radioOnlyPreferred.CheckedChanged += RadioFacts_CheckedChanged;
             // 
             // radioOnlyAlternate
             // 
-            this.radioOnlyAlternate.AutoSize = (true);
-            this.radioOnlyAlternate.Location = (new global::System.Drawing.Point(456, 8));
-            this.radioOnlyAlternate.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.radioOnlyAlternate.Name = ("radioOnlyAlternate");
-            this.radioOnlyAlternate.Size = (new global::System.Drawing.Size(239, 34));
-            this.radioOnlyAlternate.TabIndex = (40);
-            this.radioOnlyAlternate.Text = ("Show only Alternative");
-            this.toolTips.SetToolTip(this.radioOnlyAlternate, "Select this option to only show Alternative facts when you click one of the display buttons");
-            this.radioOnlyAlternate.UseVisualStyleBackColor = (true);
-            this.radioOnlyAlternate.CheckedChanged += (this.RadioFacts_CheckedChanged);
+            radioOnlyAlternate.AutoSize = true;
+            radioOnlyAlternate.Location = new Point(494, 9);
+            radioOnlyAlternate.Margin = new Padding(4, 5, 4, 5);
+            radioOnlyAlternate.Name = "radioOnlyAlternate";
+            radioOnlyAlternate.Size = new Size(278, 36);
+            radioOnlyAlternate.TabIndex = 40;
+            radioOnlyAlternate.Text = "Show only Alternative";
+            toolTips.SetToolTip(radioOnlyAlternate, "Select this option to only show Alternative facts when you click one of the display buttons");
+            radioOnlyAlternate.UseVisualStyleBackColor = true;
+            radioOnlyAlternate.CheckedChanged += RadioFacts_CheckedChanged;
             // 
             // dgDataErrors
             // 
-            this.dgDataErrors.AllowUserToAddRows = (false);
-            this.dgDataErrors.AllowUserToDeleteRows = (false);
-            this.dgDataErrors.AllowUserToOrderColumns = (true);
-            this.dgDataErrors.Anchor = ((global::System.Windows.Forms.AnchorStyles)((((global::System.Windows.Forms.AnchorStyles.Top) | (global::System.Windows.Forms.AnchorStyles.Bottom)) | (global::System.Windows.Forms.AnchorStyles.Left)) | (global::System.Windows.Forms.AnchorStyles.Right)));
-            this.dgDataErrors.AutoSizeColumnsMode = (global::System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            this.dgDataErrors.AutoSizeRowsMode = (global::System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells);
-            this.dgDataErrors.ColumnHeadersHeightSizeMode = (global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize);
-            dataGridViewCellStyle4.Alignment = (global::System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft);
-            dataGridViewCellStyle4.BackColor = (global::System.Drawing.SystemColors.Window);
-            dataGridViewCellStyle4.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 8.25F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            dataGridViewCellStyle4.ForeColor = (global::System.Drawing.SystemColors.ControlText);
-            dataGridViewCellStyle4.SelectionBackColor = (global::System.Drawing.SystemColors.Highlight);
-            dataGridViewCellStyle4.SelectionForeColor = (global::System.Drawing.SystemColors.HighlightText);
-            dataGridViewCellStyle4.WrapMode = (global::System.Windows.Forms.DataGridViewTriState.False);
-            this.dgDataErrors.DefaultCellStyle = (dataGridViewCellStyle4);
-            this.dgDataErrors.FilterAndSortEnabled = (true);
-            this.dgDataErrors.FilterStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgDataErrors.Location = (new global::System.Drawing.Point(16, 390));
-            this.dgDataErrors.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.dgDataErrors.MultiSelect = (false);
-            this.dgDataErrors.Name = ("dgDataErrors");
-            this.dgDataErrors.ReadOnly = (true);
-            this.dgDataErrors.RightToLeft = (global::System.Windows.Forms.RightToLeft.No);
-            this.dgDataErrors.RowHeadersVisible = (false);
-            this.dgDataErrors.RowHeadersWidth = (50);
-            this.dgDataErrors.SelectionMode = (global::System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect);
-            this.dgDataErrors.ShowCellToolTips = (false);
-            this.dgDataErrors.ShowEditingIcon = (false);
-            this.dgDataErrors.Size = (new global::System.Drawing.Size(2104, 610));
-            this.dgDataErrors.SortStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgDataErrors.TabIndex = (7);
-            this.toolTips.SetToolTip(this.dgDataErrors, "Double click to see list of facts for that individual");
-            this.dgDataErrors.VirtualMode = (true);
-            this.dgDataErrors.CellDoubleClick += (this.DgDataErrors_CellDoubleClick);
+            dgDataErrors.AllowUserToAddRows = false;
+            dgDataErrors.AllowUserToDeleteRows = false;
+            dgDataErrors.AllowUserToOrderColumns = true;
+            dgDataErrors.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgDataErrors.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgDataErrors.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dgDataErrors.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
+            dgDataErrors.FilterAndSortEnabled = true;
+            dgDataErrors.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgDataErrors.Location = new Point(17, 416);
+            dgDataErrors.Margin = new Padding(13, 15, 13, 15);
+            dgDataErrors.MultiSelect = false;
+            dgDataErrors.Name = "dgDataErrors";
+            dgDataErrors.ReadOnly = true;
+            dgDataErrors.RightToLeft = RightToLeft.No;
+            dgDataErrors.RowHeadersVisible = false;
+            dgDataErrors.RowHeadersWidth = 50;
+            dgDataErrors.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgDataErrors.ShowCellToolTips = false;
+            dgDataErrors.ShowEditingIcon = false;
+            dgDataErrors.Size = new Size(2265, 604);
+            dgDataErrors.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgDataErrors.TabIndex = 7;
+            toolTips.SetToolTip(dgDataErrors, "Double click to see list of facts for that individual");
+            dgDataErrors.VirtualMode = true;
+            dgDataErrors.CellDoubleClick += DgDataErrors_CellDoubleClick;
             // 
             // dgCountries
             // 
-            this.dgCountries.AllowUserToAddRows = (false);
-            this.dgCountries.AllowUserToDeleteRows = (false);
-            this.dgCountries.AllowUserToOrderColumns = (true);
-            this.dgCountries.AutoSizeColumnsMode = (global::System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            this.dgCountries.AutoSizeRowsMode = (global::System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells);
-            this.dgCountries.ColumnHeadersHeightSizeMode = (global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize);
-            this.dgCountries.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.dgCountries.FilterAndSortEnabled = (true);
-            this.dgCountries.FilterStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgCountries.Location = (new global::System.Drawing.Point(7, 8));
-            this.dgCountries.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.dgCountries.MultiSelect = (false);
-            this.dgCountries.Name = ("dgCountries");
-            this.dgCountries.ReadOnly = (true);
-            this.dgCountries.RightToLeft = (global::System.Windows.Forms.RightToLeft.No);
-            this.dgCountries.RowHeadersVisible = (false);
-            this.dgCountries.RowHeadersWidth = (50);
-            this.dgCountries.SelectionMode = (global::System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect);
-            this.dgCountries.Size = (new global::System.Drawing.Size(2099, 976));
-            this.dgCountries.SortStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgCountries.TabIndex = (1);
-            this.toolTips.SetToolTip(this.dgCountries, "Double click on Country name to see list of individuals with that Country.");
-            this.dgCountries.VirtualMode = (true);
+            dgCountries.AllowUserToAddRows = false;
+            dgCountries.AllowUserToDeleteRows = false;
+            dgCountries.AllowUserToOrderColumns = true;
+            dgCountries.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgCountries.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dgCountries.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgCountries.Dock = DockStyle.Fill;
+            dgCountries.FilterAndSortEnabled = true;
+            dgCountries.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgCountries.Location = new Point(8, 9);
+            dgCountries.Margin = new Padding(13, 15, 13, 15);
+            dgCountries.MultiSelect = false;
+            dgCountries.Name = "dgCountries";
+            dgCountries.ReadOnly = true;
+            dgCountries.RightToLeft = RightToLeft.No;
+            dgCountries.RowHeadersVisible = false;
+            dgCountries.RowHeadersWidth = 50;
+            dgCountries.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgCountries.Size = new Size(2258, 1023);
+            dgCountries.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgCountries.TabIndex = 1;
+            toolTips.SetToolTip(dgCountries, "Double click on Country name to see list of individuals with that Country.");
+            dgCountries.VirtualMode = true;
             // 
             // dgRegions
             // 
-            this.dgRegions.AllowUserToAddRows = (false);
-            this.dgRegions.AllowUserToDeleteRows = (false);
-            this.dgRegions.AllowUserToOrderColumns = (true);
-            this.dgRegions.AutoSizeColumnsMode = (global::System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            this.dgRegions.AutoSizeRowsMode = (global::System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells);
-            this.dgRegions.ColumnHeadersHeightSizeMode = (global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize);
-            this.dgRegions.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.dgRegions.FilterAndSortEnabled = (true);
-            this.dgRegions.FilterStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgRegions.Location = (new global::System.Drawing.Point(7, 8));
-            this.dgRegions.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.dgRegions.MultiSelect = (false);
-            this.dgRegions.Name = ("dgRegions");
-            this.dgRegions.ReadOnly = (true);
-            this.dgRegions.RightToLeft = (global::System.Windows.Forms.RightToLeft.No);
-            this.dgRegions.RowHeadersVisible = (false);
-            this.dgRegions.RowHeadersWidth = (50);
-            this.dgRegions.SelectionMode = (global::System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect);
-            this.dgRegions.Size = (new global::System.Drawing.Size(2099, 976));
-            this.dgRegions.SortStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgRegions.TabIndex = (2);
-            this.toolTips.SetToolTip(this.dgRegions, "Double click on Region name to see list of individuals with that Region.");
-            this.dgRegions.VirtualMode = (true);
+            dgRegions.AllowUserToAddRows = false;
+            dgRegions.AllowUserToDeleteRows = false;
+            dgRegions.AllowUserToOrderColumns = true;
+            dgRegions.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgRegions.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dgRegions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgRegions.Dock = DockStyle.Fill;
+            dgRegions.FilterAndSortEnabled = true;
+            dgRegions.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgRegions.Location = new Point(8, 9);
+            dgRegions.Margin = new Padding(13, 15, 13, 15);
+            dgRegions.MultiSelect = false;
+            dgRegions.Name = "dgRegions";
+            dgRegions.ReadOnly = true;
+            dgRegions.RightToLeft = RightToLeft.No;
+            dgRegions.RowHeadersVisible = false;
+            dgRegions.RowHeadersWidth = 50;
+            dgRegions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgRegions.Size = new Size(2258, 1023);
+            dgRegions.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgRegions.TabIndex = 2;
+            toolTips.SetToolTip(dgRegions, "Double click on Region name to see list of individuals with that Region.");
+            dgRegions.VirtualMode = true;
             // 
             // btnUpdateLostCousinsWebsite
             // 
-            this.btnUpdateLostCousinsWebsite.Enabled = (false);
-            this.btnUpdateLostCousinsWebsite.Location = (new global::System.Drawing.Point(598, 401));
-            this.btnUpdateLostCousinsWebsite.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnUpdateLostCousinsWebsite.Name = ("btnUpdateLostCousinsWebsite");
-            this.btnUpdateLostCousinsWebsite.Size = (new global::System.Drawing.Size(276, 52));
-            this.btnUpdateLostCousinsWebsite.TabIndex = (5);
-            this.btnUpdateLostCousinsWebsite.Text = ("Update Lost Cousins site");
-            this.btnUpdateLostCousinsWebsite.UseVisualStyleBackColor = (true);
-            this.btnUpdateLostCousinsWebsite.Visible = (false);
-            this.btnUpdateLostCousinsWebsite.Click += (this.BtnUpdateLostCousinsWebsite_Click);
+            btnUpdateLostCousinsWebsite.Enabled = false;
+            btnUpdateLostCousinsWebsite.Location = new Point(648, 428);
+            btnUpdateLostCousinsWebsite.Margin = new Padding(8, 9, 8, 9);
+            btnUpdateLostCousinsWebsite.Name = "btnUpdateLostCousinsWebsite";
+            btnUpdateLostCousinsWebsite.Size = new Size(299, 55);
+            btnUpdateLostCousinsWebsite.TabIndex = 5;
+            btnUpdateLostCousinsWebsite.Text = "Update Lost Cousins site";
+            btnUpdateLostCousinsWebsite.UseVisualStyleBackColor = true;
+            btnUpdateLostCousinsWebsite.Visible = false;
+            btnUpdateLostCousinsWebsite.Click += BtnUpdateLostCousinsWebsite_Click;
             // 
             // printPreviewDialog
             // 
-            this.printPreviewDialog.AutoScrollMargin = (new global::System.Drawing.Size(0, 0));
-            this.printPreviewDialog.AutoScrollMinSize = (new global::System.Drawing.Size(0, 0));
-            this.printPreviewDialog.ClientSize = (new global::System.Drawing.Size(400, 300));
-            this.printPreviewDialog.Enabled = (true);
-            this.printPreviewDialog.Icon = ((global::System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
-            this.printPreviewDialog.Name = ("printPreviewDialog");
-            this.printPreviewDialog.Visible = (false);
+            printPreviewDialog.AutoScrollMargin = new Size(0, 0);
+            printPreviewDialog.AutoScrollMinSize = new Size(0, 0);
+            printPreviewDialog.ClientSize = new Size(400, 300);
+            printPreviewDialog.Enabled = true;
+            printPreviewDialog.Icon = (Icon)resources.GetObject("printPreviewDialog.Icon");
+            printPreviewDialog.Name = "printPreviewDialog";
+            printPreviewDialog.Visible = false;
             // 
             // printDialog
             // 
-            this.printDialog.AllowSelection = (true);
-            this.printDialog.AllowSomePages = (true);
-            this.printDialog.UseEXDialog = (true);
+            printDialog.AllowSelection = true;
+            printDialog.AllowSomePages = true;
+            printDialog.UseEXDialog = true;
             // 
             // tabWorldWars
             // 
-            this.tabWorldWars.Controls.Add(this.ckbMilitaryOnly);
-            this.tabWorldWars.Controls.Add(this.ckbWDIgnoreLocations);
-            this.tabWorldWars.Controls.Add(this.btnWWII);
-            this.tabWorldWars.Controls.Add(this.btnWWI);
-            this.tabWorldWars.Controls.Add(this.label9);
-            this.tabWorldWars.Controls.Add(this.txtWorldWarsSurname);
-            this.tabWorldWars.Controls.Add(this.dgWorldWars);
-            this.tabWorldWars.Controls.Add(this.wardeadRelation);
-            this.tabWorldWars.Controls.Add(this.wardeadCountry);
-            this.tabWorldWars.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabWorldWars.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabWorldWars.Name = ("tabWorldWars");
-            this.tabWorldWars.Size = (new global::System.Drawing.Size(2128, 1043));
-            this.tabWorldWars.TabIndex = (8);
-            this.tabWorldWars.Text = ("World Wars");
-            this.tabWorldWars.ToolTipText = ("Find men of fighting age during WWI & WWII");
-            this.tabWorldWars.UseVisualStyleBackColor = (true);
+            tabWorldWars.Controls.Add(ckbMilitaryOnly);
+            tabWorldWars.Controls.Add(ckbWDIgnoreLocations);
+            tabWorldWars.Controls.Add(btnWWII);
+            tabWorldWars.Controls.Add(btnWWI);
+            tabWorldWars.Controls.Add(label9);
+            tabWorldWars.Controls.Add(txtWorldWarsSurname);
+            tabWorldWars.Controls.Add(dgWorldWars);
+            tabWorldWars.Controls.Add(wardeadRelation);
+            tabWorldWars.Controls.Add(wardeadCountry);
+            tabWorldWars.Location = new Point(8, 46);
+            tabWorldWars.Margin = new Padding(8, 9, 8, 9);
+            tabWorldWars.Name = "tabWorldWars";
+            tabWorldWars.Size = new Size(2298, 1074);
+            tabWorldWars.TabIndex = 8;
+            tabWorldWars.Text = "World Wars";
+            tabWorldWars.ToolTipText = "Find men of fighting age during WWI & WWII";
+            tabWorldWars.UseVisualStyleBackColor = true;
             // 
             // ckbMilitaryOnly
             // 
-            this.ckbMilitaryOnly.AutoSize = (true);
-            this.ckbMilitaryOnly.Location = (new global::System.Drawing.Point(559, 242));
-            this.ckbMilitaryOnly.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.ckbMilitaryOnly.Name = ("ckbMilitaryOnly");
-            this.ckbMilitaryOnly.Size = (new global::System.Drawing.Size(501, 34));
-            this.ckbMilitaryOnly.TabIndex = (33);
-            this.ckbMilitaryOnly.Text = ("Limit Results to only those men with Military Facts");
-            this.ckbMilitaryOnly.UseVisualStyleBackColor = (true);
+            ckbMilitaryOnly.AutoSize = true;
+            ckbMilitaryOnly.Location = new Point(606, 258);
+            ckbMilitaryOnly.Margin = new Padding(8, 9, 8, 9);
+            ckbMilitaryOnly.Name = "ckbMilitaryOnly";
+            ckbMilitaryOnly.Size = new Size(580, 36);
+            ckbMilitaryOnly.TabIndex = 33;
+            ckbMilitaryOnly.Text = "Limit Results to only those men with Military Facts";
+            ckbMilitaryOnly.UseVisualStyleBackColor = true;
             // 
             // ckbWDIgnoreLocations
             // 
-            this.ckbWDIgnoreLocations.AutoSize = (true);
-            this.ckbWDIgnoreLocations.Checked = (true);
-            this.ckbWDIgnoreLocations.CheckState = (global::System.Windows.Forms.CheckState.Checked);
-            this.ckbWDIgnoreLocations.Location = (new global::System.Drawing.Point(16, 242));
-            this.ckbWDIgnoreLocations.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.ckbWDIgnoreLocations.Name = ("ckbWDIgnoreLocations");
-            this.ckbWDIgnoreLocations.Size = (new global::System.Drawing.Size(481, 34));
-            this.ckbWDIgnoreLocations.TabIndex = (32);
-            this.ckbWDIgnoreLocations.Text = ("Include Unknown Countries in World Wars Filter");
-            this.ckbWDIgnoreLocations.UseVisualStyleBackColor = (true);
-            this.ckbWDIgnoreLocations.CheckedChanged += (this.CkbWDIgnoreLocations_CheckedChanged);
+            ckbWDIgnoreLocations.AutoSize = true;
+            ckbWDIgnoreLocations.Checked = true;
+            ckbWDIgnoreLocations.CheckState = CheckState.Checked;
+            ckbWDIgnoreLocations.Location = new Point(17, 258);
+            ckbWDIgnoreLocations.Margin = new Padding(8, 9, 8, 9);
+            ckbWDIgnoreLocations.Name = "ckbWDIgnoreLocations";
+            ckbWDIgnoreLocations.Size = new Size(556, 36);
+            ckbWDIgnoreLocations.TabIndex = 32;
+            ckbWDIgnoreLocations.Text = "Include Unknown Countries in World Wars Filter";
+            ckbWDIgnoreLocations.UseVisualStyleBackColor = true;
+            ckbWDIgnoreLocations.CheckedChanged += CkbWDIgnoreLocations_CheckedChanged;
             // 
             // btnWWII
             // 
-            this.btnWWII.Location = (new global::System.Drawing.Point(1516, 134));
-            this.btnWWII.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnWWII.Name = ("btnWWII");
-            this.btnWWII.Size = (new global::System.Drawing.Size(190, 58));
-            this.btnWWII.TabIndex = (31);
-            this.btnWWII.Text = ("World War II");
-            this.btnWWII.UseVisualStyleBackColor = (true);
-            this.btnWWII.Click += (this.BtnWWII_Click);
+            btnWWII.Location = new Point(1642, 143);
+            btnWWII.Margin = new Padding(8, 9, 8, 9);
+            btnWWII.Name = "btnWWII";
+            btnWWII.Size = new Size(206, 62);
+            btnWWII.TabIndex = 31;
+            btnWWII.Text = "World War II";
+            btnWWII.UseVisualStyleBackColor = true;
+            btnWWII.Click += BtnWWII_Click;
             // 
             // btnWWI
             // 
-            this.btnWWI.Location = (new global::System.Drawing.Point(1300, 134));
-            this.btnWWI.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnWWI.Name = ("btnWWI");
-            this.btnWWI.Size = (new global::System.Drawing.Size(190, 58));
-            this.btnWWI.TabIndex = (30);
-            this.btnWWI.Text = ("World War I");
-            this.btnWWI.UseVisualStyleBackColor = (true);
-            this.btnWWI.Click += (this.BtnWWI_Click);
+            btnWWI.Location = new Point(1408, 143);
+            btnWWI.Margin = new Padding(8, 9, 8, 9);
+            btnWWI.Name = "btnWWI";
+            btnWWI.Size = new Size(206, 62);
+            btnWWI.TabIndex = 30;
+            btnWWI.Text = "World War I";
+            btnWWI.UseVisualStyleBackColor = true;
+            btnWWI.Click += BtnWWI_Click;
             // 
             // label9
             // 
-            this.label9.AutoSize = (true);
-            this.label9.Location = (new global::System.Drawing.Point(1190, 58));
-            this.label9.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.label9.Name = ("label9");
-            this.label9.Size = (new global::System.Drawing.Size(95, 30));
-            this.label9.TabIndex = (28);
-            this.label9.Text = ("Surname");
+            label9.AutoSize = true;
+            label9.Location = new Point(1289, 62);
+            label9.Margin = new Padding(8, 0, 8, 0);
+            label9.Name = "label9";
+            label9.Size = new Size(109, 32);
+            label9.TabIndex = 28;
+            label9.Text = "Surname";
             // 
             // txtWorldWarsSurname
             // 
-            this.txtWorldWarsSurname.Location = (new global::System.Drawing.Point(1300, 51));
-            this.txtWorldWarsSurname.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.txtWorldWarsSurname.Name = ("txtWorldWarsSurname");
-            this.txtWorldWarsSurname.Size = (new global::System.Drawing.Size(398, 35));
-            this.txtWorldWarsSurname.TabIndex = (27);
+            txtWorldWarsSurname.Location = new Point(1408, 54);
+            txtWorldWarsSurname.Margin = new Padding(8, 9, 8, 9);
+            txtWorldWarsSurname.Name = "txtWorldWarsSurname";
+            txtWorldWarsSurname.Size = new Size(431, 39);
+            txtWorldWarsSurname.TabIndex = 27;
             // 
             // dgWorldWars
             // 
-            this.dgWorldWars.AllowUserToAddRows = (false);
-            this.dgWorldWars.AllowUserToDeleteRows = (false);
-            this.dgWorldWars.AllowUserToOrderColumns = (true);
-            this.dgWorldWars.AutoSizeColumnsMode = (global::System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            this.dgWorldWars.AutoSizeRowsMode = (global::System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells);
-            this.dgWorldWars.ColumnHeadersHeightSizeMode = (global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize);
-            this.dgWorldWars.Dock = (global::System.Windows.Forms.DockStyle.Bottom);
-            this.dgWorldWars.FilterAndSortEnabled = (true);
-            this.dgWorldWars.FilterStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgWorldWars.Location = (new global::System.Drawing.Point(0, 323));
-            this.dgWorldWars.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.dgWorldWars.MultiSelect = (false);
-            this.dgWorldWars.Name = ("dgWorldWars");
-            this.dgWorldWars.ReadOnly = (true);
-            this.dgWorldWars.RightToLeft = (global::System.Windows.Forms.RightToLeft.No);
-            this.dgWorldWars.RowHeadersVisible = (false);
-            this.dgWorldWars.RowHeadersWidth = (50);
-            this.dgWorldWars.SelectionMode = (global::System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect);
-            this.dgWorldWars.Size = (new global::System.Drawing.Size(2128, 720));
-            this.dgWorldWars.SortStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgWorldWars.TabIndex = (29);
-            this.dgWorldWars.VirtualMode = (true);
-            this.dgWorldWars.CellDoubleClick += (this.DgWorldWars_CellDoubleClick);
-            this.dgWorldWars.MouseDown += (this.DgWorldWars_MouseDown);
+            dgWorldWars.AllowUserToAddRows = false;
+            dgWorldWars.AllowUserToDeleteRows = false;
+            dgWorldWars.AllowUserToOrderColumns = true;
+            dgWorldWars.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgWorldWars.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dgWorldWars.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgWorldWars.Dock = DockStyle.Bottom;
+            dgWorldWars.FilterAndSortEnabled = true;
+            dgWorldWars.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgWorldWars.Location = new Point(0, 315);
+            dgWorldWars.Margin = new Padding(13, 15, 13, 15);
+            dgWorldWars.MultiSelect = false;
+            dgWorldWars.Name = "dgWorldWars";
+            dgWorldWars.ReadOnly = true;
+            dgWorldWars.RightToLeft = RightToLeft.No;
+            dgWorldWars.RowHeadersVisible = false;
+            dgWorldWars.RowHeadersWidth = 50;
+            dgWorldWars.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgWorldWars.Size = new Size(2298, 759);
+            dgWorldWars.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgWorldWars.TabIndex = 29;
+            dgWorldWars.VirtualMode = true;
+            dgWorldWars.CellDoubleClick += DgWorldWars_CellDoubleClick;
+            dgWorldWars.MouseDown += DgWorldWars_MouseDown;
             // 
             // wardeadRelation
             // 
-            this.wardeadRelation.Location = (new global::System.Drawing.Point(540, 8));
-            this.wardeadRelation.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.wardeadRelation.MarriedToDB = (true);
-            this.wardeadRelation.Name = ("wardeadRelation");
-            this.wardeadRelation.Size = (new global::System.Drawing.Size(644, 231));
-            this.wardeadRelation.TabIndex = (26);
+            wardeadRelation.Location = new Point(585, 9);
+            wardeadRelation.Margin = new Padding(13, 15, 13, 15);
+            wardeadRelation.MarriedToDB = true;
+            wardeadRelation.Name = "wardeadRelation";
+            wardeadRelation.Size = new Size(698, 246);
+            wardeadRelation.TabIndex = 26;
             // 
             // wardeadCountry
             // 
-            this.wardeadCountry.Location = (new global::System.Drawing.Point(16, 58));
-            this.wardeadCountry.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.wardeadCountry.Name = ("wardeadCountry");
-            this.wardeadCountry.Size = (new global::System.Drawing.Size(512, 171));
-            this.wardeadCountry.TabIndex = (25);
-            this.wardeadCountry.Title = ("Default Country");
-            this.wardeadCountry.UKEnabled = (true);
+            wardeadCountry.Location = new Point(17, 62);
+            wardeadCountry.Margin = new Padding(13, 15, 13, 15);
+            wardeadCountry.Name = "wardeadCountry";
+            wardeadCountry.Size = new Size(555, 182);
+            wardeadCountry.TabIndex = 25;
+            wardeadCountry.Title = "Default Country";
+            wardeadCountry.UKEnabled = true;
             // 
             // ctxViewNotes
             // 
-            this.ctxViewNotes.ImageScalingSize = (new global::System.Drawing.Size(32, 32));
-            this.ctxViewNotes.Items.AddRange(new global::System.Windows.Forms.ToolStripItem[] { this.mnuViewNotes });
-            this.ctxViewNotes.Name = ("contextMenuStrip1");
-            this.ctxViewNotes.Size = (new global::System.Drawing.Size(192, 40));
-            this.ctxViewNotes.Opening += (this.CtxViewNotes_Opening);
+            ctxViewNotes.ImageScalingSize = new Size(32, 32);
+            ctxViewNotes.Items.AddRange(new ToolStripItem[] { mnuViewNotes });
+            ctxViewNotes.Name = "contextMenuStrip1";
+            ctxViewNotes.Size = new Size(210, 42);
+            ctxViewNotes.Opening += CtxViewNotes_Opening;
             // 
             // mnuViewNotes
             // 
-            this.mnuViewNotes.Name = ("mnuViewNotes");
-            this.mnuViewNotes.Size = (new global::System.Drawing.Size(191, 36));
-            this.mnuViewNotes.Text = ("View Notes");
-            this.mnuViewNotes.Click += (this.MnuViewNotes_Click);
+            mnuViewNotes.Name = "mnuViewNotes";
+            mnuViewNotes.Size = new Size(209, 38);
+            mnuViewNotes.Text = "View Notes";
+            mnuViewNotes.Click += MnuViewNotes_Click;
             // 
             // tabTreetops
             // 
-            this.tabTreetops.Controls.Add(this.ckbTTIncludeOnlyOneParent);
-            this.tabTreetops.Controls.Add(this.ckbTTIgnoreLocations);
-            this.tabTreetops.Controls.Add(this.btnTreeTops);
-            this.tabTreetops.Controls.Add(this.label8);
-            this.tabTreetops.Controls.Add(this.txtTreetopsSurname);
-            this.tabTreetops.Controls.Add(this.dgTreeTops);
-            this.tabTreetops.Controls.Add(this.treetopsRelation);
-            this.tabTreetops.Controls.Add(this.treetopsCountry);
-            this.tabTreetops.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabTreetops.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabTreetops.Name = ("tabTreetops");
-            this.tabTreetops.Size = (new global::System.Drawing.Size(2128, 1043));
-            this.tabTreetops.TabIndex = (7);
-            this.tabTreetops.Text = ("Treetops");
-            this.tabTreetops.UseVisualStyleBackColor = (true);
+            tabTreetops.Controls.Add(ckbTTIncludeOnlyOneParent);
+            tabTreetops.Controls.Add(ckbTTIgnoreLocations);
+            tabTreetops.Controls.Add(btnTreeTops);
+            tabTreetops.Controls.Add(label8);
+            tabTreetops.Controls.Add(txtTreetopsSurname);
+            tabTreetops.Controls.Add(dgTreeTops);
+            tabTreetops.Controls.Add(treetopsRelation);
+            tabTreetops.Controls.Add(treetopsCountry);
+            tabTreetops.Location = new Point(8, 46);
+            tabTreetops.Margin = new Padding(8, 9, 8, 9);
+            tabTreetops.Name = "tabTreetops";
+            tabTreetops.Size = new Size(2298, 1074);
+            tabTreetops.TabIndex = 7;
+            tabTreetops.Text = "Treetops";
+            tabTreetops.UseVisualStyleBackColor = true;
             // 
             // ckbTTIncludeOnlyOneParent
             // 
-            this.ckbTTIncludeOnlyOneParent.AutoSize = (true);
-            this.ckbTTIncludeOnlyOneParent.Checked = (true);
-            this.ckbTTIncludeOnlyOneParent.CheckState = (global::System.Windows.Forms.CheckState.Checked);
-            this.ckbTTIncludeOnlyOneParent.Location = (new global::System.Drawing.Point(559, 242));
-            this.ckbTTIncludeOnlyOneParent.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.ckbTTIncludeOnlyOneParent.Name = ("ckbTTIncludeOnlyOneParent");
-            this.ckbTTIncludeOnlyOneParent.Size = (new global::System.Drawing.Size(524, 34));
-            this.ckbTTIncludeOnlyOneParent.TabIndex = (29);
-            this.ckbTTIncludeOnlyOneParent.Text = ("Include Individuals that have only one parent known");
-            this.ckbTTIncludeOnlyOneParent.UseVisualStyleBackColor = (true);
+            ckbTTIncludeOnlyOneParent.AutoSize = true;
+            ckbTTIncludeOnlyOneParent.Checked = true;
+            ckbTTIncludeOnlyOneParent.CheckState = CheckState.Checked;
+            ckbTTIncludeOnlyOneParent.Location = new Point(606, 258);
+            ckbTTIncludeOnlyOneParent.Margin = new Padding(8, 9, 8, 9);
+            ckbTTIncludeOnlyOneParent.Name = "ckbTTIncludeOnlyOneParent";
+            ckbTTIncludeOnlyOneParent.Size = new Size(607, 36);
+            ckbTTIncludeOnlyOneParent.TabIndex = 29;
+            ckbTTIncludeOnlyOneParent.Text = "Include Individuals that have only one parent known";
+            ckbTTIncludeOnlyOneParent.UseVisualStyleBackColor = true;
             // 
             // ckbTTIgnoreLocations
             // 
-            this.ckbTTIgnoreLocations.AutoSize = (true);
-            this.ckbTTIgnoreLocations.Checked = (true);
-            this.ckbTTIgnoreLocations.CheckState = (global::System.Windows.Forms.CheckState.Checked);
-            this.ckbTTIgnoreLocations.Location = (new global::System.Drawing.Point(16, 242));
-            this.ckbTTIgnoreLocations.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.ckbTTIgnoreLocations.Name = ("ckbTTIgnoreLocations");
-            this.ckbTTIgnoreLocations.Size = (new global::System.Drawing.Size(452, 34));
-            this.ckbTTIgnoreLocations.TabIndex = (27);
-            this.ckbTTIgnoreLocations.Text = ("Include Unknown Countries in Treetops Filter");
-            this.ckbTTIgnoreLocations.UseVisualStyleBackColor = (true);
-            this.ckbTTIgnoreLocations.CheckedChanged += (this.CkbTTIgnoreLocations_CheckedChanged);
+            ckbTTIgnoreLocations.AutoSize = true;
+            ckbTTIgnoreLocations.Checked = true;
+            ckbTTIgnoreLocations.CheckState = CheckState.Checked;
+            ckbTTIgnoreLocations.Location = new Point(17, 258);
+            ckbTTIgnoreLocations.Margin = new Padding(8, 9, 8, 9);
+            ckbTTIgnoreLocations.Name = "ckbTTIgnoreLocations";
+            ckbTTIgnoreLocations.Size = new Size(526, 36);
+            ckbTTIgnoreLocations.TabIndex = 27;
+            ckbTTIgnoreLocations.Text = "Include Unknown Countries in Treetops Filter";
+            ckbTTIgnoreLocations.UseVisualStyleBackColor = true;
+            ckbTTIgnoreLocations.CheckedChanged += CkbTTIgnoreLocations_CheckedChanged;
             // 
             // btnTreeTops
             // 
-            this.btnTreeTops.Location = (new global::System.Drawing.Point(1300, 134));
-            this.btnTreeTops.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnTreeTops.Name = ("btnTreeTops");
-            this.btnTreeTops.Size = (new global::System.Drawing.Size(403, 58));
-            this.btnTreeTops.TabIndex = (25);
-            this.btnTreeTops.Text = ("Show People at top of tree");
-            this.btnTreeTops.UseVisualStyleBackColor = (true);
-            this.btnTreeTops.Click += (this.BtnTreeTops_Click);
+            btnTreeTops.Location = new Point(1408, 143);
+            btnTreeTops.Margin = new Padding(8, 9, 8, 9);
+            btnTreeTops.Name = "btnTreeTops";
+            btnTreeTops.Size = new Size(437, 62);
+            btnTreeTops.TabIndex = 25;
+            btnTreeTops.Text = "Show People at top of tree";
+            btnTreeTops.UseVisualStyleBackColor = true;
+            btnTreeTops.Click += BtnTreeTops_Click;
             // 
             // label8
             // 
-            this.label8.AutoSize = (true);
-            this.label8.Location = (new global::System.Drawing.Point(1190, 58));
-            this.label8.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.label8.Name = ("label8");
-            this.label8.Size = (new global::System.Drawing.Size(95, 30));
-            this.label8.TabIndex = (24);
-            this.label8.Text = ("Surname");
+            label8.AutoSize = true;
+            label8.Location = new Point(1289, 62);
+            label8.Margin = new Padding(8, 0, 8, 0);
+            label8.Name = "label8";
+            label8.Size = new Size(109, 32);
+            label8.TabIndex = 24;
+            label8.Text = "Surname";
             // 
             // txtTreetopsSurname
             // 
-            this.txtTreetopsSurname.Location = (new global::System.Drawing.Point(1300, 51));
-            this.txtTreetopsSurname.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.txtTreetopsSurname.Name = ("txtTreetopsSurname");
-            this.txtTreetopsSurname.Size = (new global::System.Drawing.Size(398, 35));
-            this.txtTreetopsSurname.TabIndex = (23);
+            txtTreetopsSurname.Location = new Point(1408, 54);
+            txtTreetopsSurname.Margin = new Padding(8, 9, 8, 9);
+            txtTreetopsSurname.Name = "txtTreetopsSurname";
+            txtTreetopsSurname.Size = new Size(431, 39);
+            txtTreetopsSurname.TabIndex = 23;
             // 
             // dgTreeTops
             // 
-            this.dgTreeTops.AllowUserToAddRows = (false);
-            this.dgTreeTops.AllowUserToDeleteRows = (false);
-            this.dgTreeTops.AllowUserToOrderColumns = (true);
-            this.dgTreeTops.AutoSizeColumnsMode = (global::System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            this.dgTreeTops.AutoSizeRowsMode = (global::System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells);
-            this.dgTreeTops.ColumnHeadersHeightSizeMode = (global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize);
-            this.dgTreeTops.Dock = (global::System.Windows.Forms.DockStyle.Bottom);
-            this.dgTreeTops.FilterAndSortEnabled = (true);
-            this.dgTreeTops.FilterStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgTreeTops.Location = (new global::System.Drawing.Point(0, 323));
-            this.dgTreeTops.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.dgTreeTops.MultiSelect = (false);
-            this.dgTreeTops.Name = ("dgTreeTops");
-            this.dgTreeTops.ReadOnly = (true);
-            this.dgTreeTops.RightToLeft = (global::System.Windows.Forms.RightToLeft.No);
-            this.dgTreeTops.RowHeadersVisible = (false);
-            this.dgTreeTops.RowHeadersWidth = (50);
-            this.dgTreeTops.SelectionMode = (global::System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect);
-            this.dgTreeTops.Size = (new global::System.Drawing.Size(2128, 720));
-            this.dgTreeTops.SortStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgTreeTops.TabIndex = (28);
-            this.dgTreeTops.VirtualMode = (true);
-            this.dgTreeTops.CellDoubleClick += (this.DgTreeTops_CellDoubleClick);
-            this.dgTreeTops.MouseDown += (this.DgTreeTops_MouseDown);
+            dgTreeTops.AllowUserToAddRows = false;
+            dgTreeTops.AllowUserToDeleteRows = false;
+            dgTreeTops.AllowUserToOrderColumns = true;
+            dgTreeTops.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgTreeTops.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dgTreeTops.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgTreeTops.Dock = DockStyle.Bottom;
+            dgTreeTops.FilterAndSortEnabled = true;
+            dgTreeTops.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgTreeTops.Location = new Point(0, 315);
+            dgTreeTops.Margin = new Padding(13, 15, 13, 15);
+            dgTreeTops.MultiSelect = false;
+            dgTreeTops.Name = "dgTreeTops";
+            dgTreeTops.ReadOnly = true;
+            dgTreeTops.RightToLeft = RightToLeft.No;
+            dgTreeTops.RowHeadersVisible = false;
+            dgTreeTops.RowHeadersWidth = 50;
+            dgTreeTops.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgTreeTops.Size = new Size(2298, 759);
+            dgTreeTops.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgTreeTops.TabIndex = 28;
+            dgTreeTops.VirtualMode = true;
+            dgTreeTops.CellDoubleClick += DgTreeTops_CellDoubleClick;
+            dgTreeTops.MouseDown += DgTreeTops_MouseDown;
             // 
             // treetopsRelation
             // 
-            this.treetopsRelation.Location = (new global::System.Drawing.Point(540, 8));
-            this.treetopsRelation.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.treetopsRelation.MarriedToDB = (true);
-            this.treetopsRelation.Name = ("treetopsRelation");
-            this.treetopsRelation.Size = (new global::System.Drawing.Size(644, 221));
-            this.treetopsRelation.TabIndex = (12);
+            treetopsRelation.Location = new Point(585, 9);
+            treetopsRelation.Margin = new Padding(13, 15, 13, 15);
+            treetopsRelation.MarriedToDB = true;
+            treetopsRelation.Name = "treetopsRelation";
+            treetopsRelation.Size = new Size(698, 236);
+            treetopsRelation.TabIndex = 12;
             // 
             // treetopsCountry
             // 
-            this.treetopsCountry.Location = (new global::System.Drawing.Point(16, 58));
-            this.treetopsCountry.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.treetopsCountry.Name = ("treetopsCountry");
-            this.treetopsCountry.Size = (new global::System.Drawing.Size(512, 171));
-            this.treetopsCountry.TabIndex = (11);
-            this.treetopsCountry.Title = ("Default Country");
-            this.treetopsCountry.UKEnabled = (true);
+            treetopsCountry.Location = new Point(17, 62);
+            treetopsCountry.Margin = new Padding(13, 15, 13, 15);
+            treetopsCountry.Name = "treetopsCountry";
+            treetopsCountry.Size = new Size(555, 182);
+            treetopsCountry.TabIndex = 11;
+            treetopsCountry.Title = "Default Country";
+            treetopsCountry.UKEnabled = true;
             // 
             // tabColourReports
             // 
-            this.tabColourReports.Controls.Add(this.groupBox7);
-            this.tabColourReports.Controls.Add(this.btnRandomSurnameColour);
-            this.tabColourReports.Controls.Add(this.label14);
-            this.tabColourReports.Controls.Add(this.cmbColourFamily);
-            this.tabColourReports.Controls.Add(this.groupBox3);
-            this.tabColourReports.Controls.Add(this.btnColourBMD);
-            this.tabColourReports.Controls.Add(this.label10);
-            this.tabColourReports.Controls.Add(this.txtColouredSurname);
-            this.tabColourReports.Controls.Add(this.relTypesColoured);
-            this.tabColourReports.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabColourReports.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabColourReports.Name = ("tabColourReports");
-            this.tabColourReports.Size = (new global::System.Drawing.Size(2128, 1043));
-            this.tabColourReports.TabIndex = (12);
-            this.tabColourReports.Text = ("Research Suggestions");
-            this.tabColourReports.UseVisualStyleBackColor = (true);
+            tabColourReports.Controls.Add(groupBox7);
+            tabColourReports.Controls.Add(btnRandomSurnameColour);
+            tabColourReports.Controls.Add(label14);
+            tabColourReports.Controls.Add(cmbColourFamily);
+            tabColourReports.Controls.Add(groupBox3);
+            tabColourReports.Controls.Add(btnColourBMD);
+            tabColourReports.Controls.Add(label10);
+            tabColourReports.Controls.Add(txtColouredSurname);
+            tabColourReports.Controls.Add(relTypesColoured);
+            tabColourReports.Location = new Point(8, 46);
+            tabColourReports.Margin = new Padding(8, 9, 8, 9);
+            tabColourReports.Name = "tabColourReports";
+            tabColourReports.Size = new Size(2298, 1074);
+            tabColourReports.TabIndex = 12;
+            tabColourReports.Text = "Research Suggestions";
+            tabColourReports.UseVisualStyleBackColor = true;
             // 
             // groupBox7
             // 
-            this.groupBox7.Controls.Add(this.btnAdvancedMissingData);
-            this.groupBox7.Controls.Add(this.btnStandardMissingData);
-            this.groupBox7.Location = (new global::System.Drawing.Point(847, 268));
-            this.groupBox7.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox7.Name = ("groupBox7");
-            this.groupBox7.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox7.Size = (new global::System.Drawing.Size(818, 251));
-            this.groupBox7.TabIndex = (63);
-            this.groupBox7.TabStop = (false);
-            this.groupBox7.Text = ("Missing Data Reports");
-            this.groupBox7.Visible = (false);
+            groupBox7.Controls.Add(btnAdvancedMissingData);
+            groupBox7.Controls.Add(btnStandardMissingData);
+            groupBox7.Location = new Point(918, 286);
+            groupBox7.Margin = new Padding(8, 9, 8, 9);
+            groupBox7.Name = "groupBox7";
+            groupBox7.Padding = new Padding(8, 9, 8, 9);
+            groupBox7.Size = new Size(886, 268);
+            groupBox7.TabIndex = 63;
+            groupBox7.TabStop = false;
+            groupBox7.Text = "Missing Data Reports";
+            groupBox7.Visible = false;
             // 
             // btnAdvancedMissingData
             // 
-            this.btnAdvancedMissingData.Location = (new global::System.Drawing.Point(415, 44));
-            this.btnAdvancedMissingData.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnAdvancedMissingData.Name = ("btnAdvancedMissingData");
-            this.btnAdvancedMissingData.Size = (new global::System.Drawing.Size(391, 52));
-            this.btnAdvancedMissingData.TabIndex = (40);
-            this.btnAdvancedMissingData.Text = ("Advanced Missing Data Report");
-            this.btnAdvancedMissingData.UseVisualStyleBackColor = (true);
-            this.btnAdvancedMissingData.Click += (this.BtnAdvancedMissingData_Click);
+            btnAdvancedMissingData.Location = new Point(450, 47);
+            btnAdvancedMissingData.Margin = new Padding(8, 9, 8, 9);
+            btnAdvancedMissingData.Name = "btnAdvancedMissingData";
+            btnAdvancedMissingData.Size = new Size(424, 55);
+            btnAdvancedMissingData.TabIndex = 40;
+            btnAdvancedMissingData.Text = "Advanced Missing Data Report";
+            btnAdvancedMissingData.UseVisualStyleBackColor = true;
+            btnAdvancedMissingData.Click += BtnAdvancedMissingData_Click;
             // 
             // btnStandardMissingData
             // 
-            this.btnStandardMissingData.Location = (new global::System.Drawing.Point(12, 44));
-            this.btnStandardMissingData.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnStandardMissingData.Name = ("btnStandardMissingData");
-            this.btnStandardMissingData.Size = (new global::System.Drawing.Size(391, 52));
-            this.btnStandardMissingData.TabIndex = (39);
-            this.btnStandardMissingData.Text = ("Standard Missing Data Report");
-            this.btnStandardMissingData.UseVisualStyleBackColor = (true);
-            this.btnStandardMissingData.Click += (this.BtnStandardMissingData_Click);
+            btnStandardMissingData.Location = new Point(13, 47);
+            btnStandardMissingData.Margin = new Padding(8, 9, 8, 9);
+            btnStandardMissingData.Name = "btnStandardMissingData";
+            btnStandardMissingData.Size = new Size(424, 55);
+            btnStandardMissingData.TabIndex = 39;
+            btnStandardMissingData.Text = "Standard Missing Data Report";
+            btnStandardMissingData.UseVisualStyleBackColor = true;
+            btnStandardMissingData.Click += BtnStandardMissingData_Click;
             // 
             // label14
             // 
-            this.label14.AutoSize = (true);
-            this.label14.Location = (new global::System.Drawing.Point(679, 120));
-            this.label14.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.label14.Name = ("label14");
-            this.label14.Size = (new global::System.Drawing.Size(122, 30));
-            this.label14.TabIndex = (61);
-            this.label14.Text = ("Family Filter");
+            label14.AutoSize = true;
+            label14.Location = new Point(736, 128);
+            label14.Margin = new Padding(8, 0, 8, 0);
+            label14.Name = "label14";
+            label14.Size = new Size(142, 32);
+            label14.TabIndex = 61;
+            label14.Text = "Family Filter";
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.ckbIgnoreNoDeathDate);
-            this.groupBox3.Controls.Add(this.ckbIgnoreNoBirthDate);
-            this.groupBox3.Controls.Add(this.btnIrishColourCensus);
-            this.groupBox3.Controls.Add(this.btnCanadianColourCensus);
-            this.groupBox3.Controls.Add(this.btnUKColourCensus);
-            this.groupBox3.Controls.Add(this.btnUSColourCensus);
-            this.groupBox3.Location = (new global::System.Drawing.Point(16, 268));
-            this.groupBox3.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox3.Name = ("groupBox3");
-            this.groupBox3.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox3.Size = (new global::System.Drawing.Size(818, 251));
-            this.groupBox3.TabIndex = (36);
-            this.groupBox3.TabStop = (false);
-            this.groupBox3.Text = ("Census Suggestions Reports");
+            groupBox3.Controls.Add(ckbIgnoreNoDeathDate);
+            groupBox3.Controls.Add(ckbIgnoreNoBirthDate);
+            groupBox3.Controls.Add(btnIrishColourCensus);
+            groupBox3.Controls.Add(btnCanadianColourCensus);
+            groupBox3.Controls.Add(btnUKColourCensus);
+            groupBox3.Controls.Add(btnUSColourCensus);
+            groupBox3.Location = new Point(17, 286);
+            groupBox3.Margin = new Padding(8, 9, 8, 9);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Padding = new Padding(8, 9, 8, 9);
+            groupBox3.Size = new Size(886, 268);
+            groupBox3.TabIndex = 36;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Census Suggestions Reports";
             // 
             // ckbIgnoreNoDeathDate
             // 
-            this.ckbIgnoreNoDeathDate.AutoSize = (true);
-            this.ckbIgnoreNoDeathDate.Location = (new global::System.Drawing.Point(416, 178));
-            this.ckbIgnoreNoDeathDate.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.ckbIgnoreNoDeathDate.Name = ("ckbIgnoreNoDeathDate");
-            this.ckbIgnoreNoDeathDate.Size = (new global::System.Drawing.Size(385, 34));
-            this.ckbIgnoreNoDeathDate.TabIndex = (67);
-            this.ckbIgnoreNoDeathDate.Text = ("Ignore Individuals with no death date");
-            this.ckbIgnoreNoDeathDate.UseVisualStyleBackColor = (true);
+            ckbIgnoreNoDeathDate.AutoSize = true;
+            ckbIgnoreNoDeathDate.Location = new Point(451, 190);
+            ckbIgnoreNoDeathDate.Margin = new Padding(8, 9, 8, 9);
+            ckbIgnoreNoDeathDate.Name = "ckbIgnoreNoDeathDate";
+            ckbIgnoreNoDeathDate.Size = new Size(445, 36);
+            ckbIgnoreNoDeathDate.TabIndex = 67;
+            ckbIgnoreNoDeathDate.Text = "Ignore Individuals with no death date";
+            ckbIgnoreNoDeathDate.UseVisualStyleBackColor = true;
             // 
             // ckbIgnoreNoBirthDate
             // 
-            this.ckbIgnoreNoBirthDate.AutoSize = (true);
-            this.ckbIgnoreNoBirthDate.Location = (new global::System.Drawing.Point(12, 178));
-            this.ckbIgnoreNoBirthDate.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.ckbIgnoreNoBirthDate.Name = ("ckbIgnoreNoBirthDate");
-            this.ckbIgnoreNoBirthDate.Size = (new global::System.Drawing.Size(375, 34));
-            this.ckbIgnoreNoBirthDate.TabIndex = (66);
-            this.ckbIgnoreNoBirthDate.Text = ("Ignore Individuals with no birth date");
-            this.ckbIgnoreNoBirthDate.UseVisualStyleBackColor = (true);
+            ckbIgnoreNoBirthDate.AutoSize = true;
+            ckbIgnoreNoBirthDate.Location = new Point(13, 190);
+            ckbIgnoreNoBirthDate.Margin = new Padding(8, 9, 8, 9);
+            ckbIgnoreNoBirthDate.Name = "ckbIgnoreNoBirthDate";
+            ckbIgnoreNoBirthDate.Size = new Size(434, 36);
+            ckbIgnoreNoBirthDate.TabIndex = 66;
+            ckbIgnoreNoBirthDate.Text = "Ignore Individuals with no birth date";
+            ckbIgnoreNoBirthDate.UseVisualStyleBackColor = true;
             // 
             // btnIrishColourCensus
             // 
-            this.btnIrishColourCensus.Location = (new global::System.Drawing.Point(415, 44));
-            this.btnIrishColourCensus.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnIrishColourCensus.Name = ("btnIrishColourCensus");
-            this.btnIrishColourCensus.Size = (new global::System.Drawing.Size(391, 52));
-            this.btnIrishColourCensus.TabIndex = (39);
-            this.btnIrishColourCensus.Text = ("View Irish Colour Census Report");
-            this.btnIrishColourCensus.UseVisualStyleBackColor = (true);
-            this.btnIrishColourCensus.Click += (this.BtnIrishColourCensus_Click);
+            btnIrishColourCensus.Location = new Point(450, 47);
+            btnIrishColourCensus.Margin = new Padding(8, 9, 8, 9);
+            btnIrishColourCensus.Name = "btnIrishColourCensus";
+            btnIrishColourCensus.Size = new Size(424, 55);
+            btnIrishColourCensus.TabIndex = 39;
+            btnIrishColourCensus.Text = "View Irish Colour Census Report";
+            btnIrishColourCensus.UseVisualStyleBackColor = true;
+            btnIrishColourCensus.Click += BtnIrishColourCensus_Click;
             // 
             // btnCanadianColourCensus
             // 
-            this.btnCanadianColourCensus.Location = (new global::System.Drawing.Point(415, 111));
-            this.btnCanadianColourCensus.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnCanadianColourCensus.Name = ("btnCanadianColourCensus");
-            this.btnCanadianColourCensus.Size = (new global::System.Drawing.Size(391, 52));
-            this.btnCanadianColourCensus.TabIndex = (41);
-            this.btnCanadianColourCensus.Text = ("View Canadian Colour Census Report");
-            this.btnCanadianColourCensus.UseVisualStyleBackColor = (true);
-            this.btnCanadianColourCensus.Click += (this.BtnCanadianColourCensus_Click);
+            btnCanadianColourCensus.Location = new Point(450, 118);
+            btnCanadianColourCensus.Margin = new Padding(8, 9, 8, 9);
+            btnCanadianColourCensus.Name = "btnCanadianColourCensus";
+            btnCanadianColourCensus.Size = new Size(424, 55);
+            btnCanadianColourCensus.TabIndex = 41;
+            btnCanadianColourCensus.Text = "View Canadian Colour Census Report";
+            btnCanadianColourCensus.UseVisualStyleBackColor = true;
+            btnCanadianColourCensus.Click += BtnCanadianColourCensus_Click;
             // 
             // btnUKColourCensus
             // 
-            this.btnUKColourCensus.Location = (new global::System.Drawing.Point(12, 44));
-            this.btnUKColourCensus.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnUKColourCensus.Name = ("btnUKColourCensus");
-            this.btnUKColourCensus.Size = (new global::System.Drawing.Size(391, 52));
-            this.btnUKColourCensus.TabIndex = (38);
-            this.btnUKColourCensus.Text = ("View UK Colour Census Report");
-            this.btnUKColourCensus.UseVisualStyleBackColor = (true);
-            this.btnUKColourCensus.Click += (this.BtnUKColourCensus_Click);
+            btnUKColourCensus.Location = new Point(13, 47);
+            btnUKColourCensus.Margin = new Padding(8, 9, 8, 9);
+            btnUKColourCensus.Name = "btnUKColourCensus";
+            btnUKColourCensus.Size = new Size(424, 55);
+            btnUKColourCensus.TabIndex = 38;
+            btnUKColourCensus.Text = "View UK Colour Census Report";
+            btnUKColourCensus.UseVisualStyleBackColor = true;
+            btnUKColourCensus.Click += BtnUKColourCensus_Click;
             // 
             // btnUSColourCensus
             // 
-            this.btnUSColourCensus.Location = (new global::System.Drawing.Point(12, 111));
-            this.btnUSColourCensus.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnUSColourCensus.Name = ("btnUSColourCensus");
-            this.btnUSColourCensus.Size = (new global::System.Drawing.Size(391, 52));
-            this.btnUSColourCensus.TabIndex = (40);
-            this.btnUSColourCensus.Text = ("View US Colour Census Report");
-            this.btnUSColourCensus.UseVisualStyleBackColor = (true);
-            this.btnUSColourCensus.Click += (this.BtnUSColourCensus_Click);
+            btnUSColourCensus.Location = new Point(13, 118);
+            btnUSColourCensus.Margin = new Padding(8, 9, 8, 9);
+            btnUSColourCensus.Name = "btnUSColourCensus";
+            btnUSColourCensus.Size = new Size(424, 55);
+            btnUSColourCensus.TabIndex = 40;
+            btnUSColourCensus.Text = "View US Colour Census Report";
+            btnUSColourCensus.UseVisualStyleBackColor = true;
+            btnUSColourCensus.Click += BtnUSColourCensus_Click;
             // 
             // btnColourBMD
             // 
-            this.btnColourBMD.Location = (new global::System.Drawing.Point(116, 532));
-            this.btnColourBMD.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnColourBMD.Name = ("btnColourBMD");
-            this.btnColourBMD.Size = (new global::System.Drawing.Size(614, 52));
-            this.btnColourBMD.TabIndex = (42);
-            this.btnColourBMD.Text = ("View Colour Birth/Marriage/Death Report");
-            this.btnColourBMD.UseVisualStyleBackColor = (true);
-            this.btnColourBMD.Click += (this.BtnColourBMD_Click);
+            btnColourBMD.Location = new Point(126, 567);
+            btnColourBMD.Margin = new Padding(8, 9, 8, 9);
+            btnColourBMD.Name = "btnColourBMD";
+            btnColourBMD.Size = new Size(665, 55);
+            btnColourBMD.TabIndex = 42;
+            btnColourBMD.Text = "View Colour Birth/Marriage/Death Report";
+            btnColourBMD.UseVisualStyleBackColor = true;
+            btnColourBMD.Click += BtnColourBMD_Click;
             // 
             // label10
             // 
-            this.label10.AutoSize = (true);
-            this.label10.Location = (new global::System.Drawing.Point(679, 44));
-            this.label10.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.label10.Name = ("label10");
-            this.label10.Size = (new global::System.Drawing.Size(95, 30));
-            this.label10.TabIndex = (59);
-            this.label10.Text = ("Surname");
+            label10.AutoSize = true;
+            label10.Location = new Point(736, 47);
+            label10.Margin = new Padding(8, 0, 8, 0);
+            label10.Name = "label10";
+            label10.Size = new Size(109, 32);
+            label10.TabIndex = 59;
+            label10.Text = "Surname";
             // 
             // txtColouredSurname
             // 
-            this.txtColouredSurname.Location = (new global::System.Drawing.Point(812, 38));
-            this.txtColouredSurname.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.txtColouredSurname.Name = ("txtColouredSurname");
-            this.txtColouredSurname.Size = (new global::System.Drawing.Size(398, 35));
-            this.txtColouredSurname.TabIndex = (30);
-            this.txtColouredSurname.TextChanged += (this.TxtColouredSurname_TextChanged);
+            txtColouredSurname.Location = new Point(880, 41);
+            txtColouredSurname.Margin = new Padding(8, 9, 8, 9);
+            txtColouredSurname.Name = "txtColouredSurname";
+            txtColouredSurname.Size = new Size(431, 39);
+            txtColouredSurname.TabIndex = 30;
+            txtColouredSurname.TextChanged += TxtColouredSurname_TextChanged;
             // 
             // relTypesColoured
             // 
-            this.relTypesColoured.Location = (new global::System.Drawing.Point(16, 19));
-            this.relTypesColoured.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.relTypesColoured.MarriedToDB = (true);
-            this.relTypesColoured.Name = ("relTypesColoured");
-            this.relTypesColoured.Size = (new global::System.Drawing.Size(650, 235));
-            this.relTypesColoured.TabIndex = (26);
-            this.relTypesColoured.RelationTypesChanged += (this.RelTypesColoured_RelationTypesChanged);
+            relTypesColoured.Location = new Point(17, 20);
+            relTypesColoured.Margin = new Padding(13, 15, 13, 15);
+            relTypesColoured.MarriedToDB = true;
+            relTypesColoured.Name = "relTypesColoured";
+            relTypesColoured.Size = new Size(704, 251);
+            relTypesColoured.TabIndex = 26;
+            relTypesColoured.RelationTypesChanged += RelTypesColoured_RelationTypesChanged;
             // 
             // tabLostCousins
             // 
-            this.tabLostCousins.Controls.Add(this.LCSubTabs);
-            this.tabLostCousins.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabLostCousins.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabLostCousins.Name = ("tabLostCousins");
-            this.tabLostCousins.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabLostCousins.Size = (new global::System.Drawing.Size(2128, 1043));
-            this.tabLostCousins.TabIndex = (5);
-            this.tabLostCousins.Text = ("Lost Cousins");
-            this.tabLostCousins.UseVisualStyleBackColor = (true);
+            tabLostCousins.Controls.Add(LCSubTabs);
+            tabLostCousins.Location = new Point(8, 46);
+            tabLostCousins.Margin = new Padding(8, 9, 8, 9);
+            tabLostCousins.Name = "tabLostCousins";
+            tabLostCousins.Padding = new Padding(8, 9, 8, 9);
+            tabLostCousins.Size = new Size(2298, 1074);
+            tabLostCousins.TabIndex = 5;
+            tabLostCousins.Text = "Lost Cousins";
+            tabLostCousins.UseVisualStyleBackColor = true;
             // 
             // LCSubTabs
             // 
-            this.LCSubTabs.Controls.Add(this.LCReportsTab);
-            this.LCSubTabs.Controls.Add(this.LCUpdatesTab);
-            this.LCSubTabs.Controls.Add(this.LCVerifyTab);
-            this.LCSubTabs.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.LCSubTabs.Location = (new global::System.Drawing.Point(7, 8));
-            this.LCSubTabs.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.LCSubTabs.Name = ("LCSubTabs");
-            this.LCSubTabs.SelectedIndex = (0);
-            this.LCSubTabs.Size = (new global::System.Drawing.Size(2114, 1027));
-            this.LCSubTabs.TabIndex = (0);
+            LCSubTabs.Controls.Add(LCReportsTab);
+            LCSubTabs.Controls.Add(LCUpdatesTab);
+            LCSubTabs.Controls.Add(LCVerifyTab);
+            LCSubTabs.Dock = DockStyle.Fill;
+            LCSubTabs.Location = new Point(8, 9);
+            LCSubTabs.Margin = new Padding(8, 9, 8, 9);
+            LCSubTabs.Name = "LCSubTabs";
+            LCSubTabs.SelectedIndex = 0;
+            LCSubTabs.Size = new Size(2282, 1056);
+            LCSubTabs.TabIndex = 0;
             // 
             // LCReportsTab
             // 
-            this.LCReportsTab.Controls.Add(this.Referrals);
-            this.LCReportsTab.Controls.Add(this.btnLCnoCensus);
-            this.LCReportsTab.Controls.Add(this.btnLCDuplicates);
-            this.LCReportsTab.Controls.Add(this.btnLCMissingCountry);
-            this.LCReportsTab.Controls.Add(this.btnLC1940USA);
-            this.LCReportsTab.Controls.Add(this.rtbLostCousins);
-            this.LCReportsTab.Controls.Add(this.linkLabel2);
-            this.LCReportsTab.Controls.Add(this.btnLC1911EW);
-            this.LCReportsTab.Controls.Add(this.LabLostCousinsWeb);
-            this.LCReportsTab.Controls.Add(this.ckbShowLCEntered);
-            this.LCReportsTab.Controls.Add(this.btnLC1841EW);
-            this.LCReportsTab.Controls.Add(this.btnLC1911Ireland);
-            this.LCReportsTab.Controls.Add(this.btnLC1880USA);
-            this.LCReportsTab.Controls.Add(this.btnLC1881EW);
-            this.LCReportsTab.Controls.Add(this.btnLC1881Canada);
-            this.LCReportsTab.Controls.Add(this.btnLC1881Scot);
-            this.LCReportsTab.Controls.Add(this.relTypesLC);
-            this.LCReportsTab.Location = (new global::System.Drawing.Point(4, 39));
-            this.LCReportsTab.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.LCReportsTab.Name = ("LCReportsTab");
-            this.LCReportsTab.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.LCReportsTab.Size = (new global::System.Drawing.Size(2106, 984));
-            this.LCReportsTab.TabIndex = (0);
-            this.LCReportsTab.Text = ("Reports");
-            this.LCReportsTab.UseVisualStyleBackColor = (true);
+            LCReportsTab.Controls.Add(Referrals);
+            LCReportsTab.Controls.Add(btnLCnoCensus);
+            LCReportsTab.Controls.Add(btnLCDuplicates);
+            LCReportsTab.Controls.Add(btnLCMissingCountry);
+            LCReportsTab.Controls.Add(btnLC1940USA);
+            LCReportsTab.Controls.Add(rtbLostCousins);
+            LCReportsTab.Controls.Add(linkLabel2);
+            LCReportsTab.Controls.Add(btnLC1911EW);
+            LCReportsTab.Controls.Add(LabLostCousinsWeb);
+            LCReportsTab.Controls.Add(ckbShowLCEntered);
+            LCReportsTab.Controls.Add(btnLC1841EW);
+            LCReportsTab.Controls.Add(btnLC1911Ireland);
+            LCReportsTab.Controls.Add(btnLC1880USA);
+            LCReportsTab.Controls.Add(btnLC1881EW);
+            LCReportsTab.Controls.Add(btnLC1881Canada);
+            LCReportsTab.Controls.Add(btnLC1881Scot);
+            LCReportsTab.Controls.Add(relTypesLC);
+            LCReportsTab.Location = new Point(8, 46);
+            LCReportsTab.Margin = new Padding(8, 9, 8, 9);
+            LCReportsTab.Name = "LCReportsTab";
+            LCReportsTab.Padding = new Padding(8, 9, 8, 9);
+            LCReportsTab.Size = new Size(2266, 1002);
+            LCReportsTab.TabIndex = 0;
+            LCReportsTab.Text = "Reports";
+            LCReportsTab.UseVisualStyleBackColor = true;
             // 
             // Referrals
             // 
-            this.Referrals.Controls.Add(this.ckbReferralInCommon);
-            this.Referrals.Controls.Add(this.btnReferrals);
-            this.Referrals.Controls.Add(this.cmbReferrals);
-            this.Referrals.Controls.Add(this.label11);
-            this.Referrals.Location = (new global::System.Drawing.Point(12, 671));
-            this.Referrals.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.Referrals.Name = ("Referrals");
-            this.Referrals.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.Referrals.Size = (new global::System.Drawing.Size(996, 191));
-            this.Referrals.TabIndex = (40);
-            this.Referrals.TabStop = (false);
-            this.Referrals.Text = ("Referrals");
+            Referrals.Controls.Add(ckbReferralInCommon);
+            Referrals.Controls.Add(btnReferrals);
+            Referrals.Controls.Add(cmbReferrals);
+            Referrals.Controls.Add(label11);
+            Referrals.Location = new Point(13, 716);
+            Referrals.Margin = new Padding(8, 9, 8, 9);
+            Referrals.Name = "Referrals";
+            Referrals.Padding = new Padding(8, 9, 8, 9);
+            Referrals.Size = new Size(1079, 204);
+            Referrals.TabIndex = 40;
+            Referrals.TabStop = false;
+            Referrals.Text = "Referrals";
             // 
             // ckbReferralInCommon
             // 
-            this.ckbReferralInCommon.AutoSize = (true);
-            this.ckbReferralInCommon.Location = (new global::System.Drawing.Point(22, 112));
-            this.ckbReferralInCommon.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.ckbReferralInCommon.Name = ("ckbReferralInCommon");
-            this.ckbReferralInCommon.Size = (new global::System.Drawing.Size(287, 34));
-            this.ckbReferralInCommon.TabIndex = (3);
-            this.ckbReferralInCommon.Text = ("Limit to Common Relatives");
-            this.ckbReferralInCommon.UseVisualStyleBackColor = (true);
+            ckbReferralInCommon.AutoSize = true;
+            ckbReferralInCommon.Location = new Point(24, 119);
+            ckbReferralInCommon.Margin = new Padding(8, 9, 8, 9);
+            ckbReferralInCommon.Name = "ckbReferralInCommon";
+            ckbReferralInCommon.Size = new Size(333, 36);
+            ckbReferralInCommon.TabIndex = 3;
+            ckbReferralInCommon.Text = "Limit to Common Relatives";
+            ckbReferralInCommon.UseVisualStyleBackColor = true;
             // 
             // btnReferrals
             // 
-            this.btnReferrals.Location = (new global::System.Drawing.Point(544, 104));
-            this.btnReferrals.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnReferrals.Name = ("btnReferrals");
-            this.btnReferrals.Size = (new global::System.Drawing.Size(440, 52));
-            this.btnReferrals.TabIndex = (2);
-            this.btnReferrals.Text = ("Generate Referral Report for this Individual");
-            this.btnReferrals.UseVisualStyleBackColor = (true);
-            this.btnReferrals.Click += (this.BtnReferrals_Click);
+            btnReferrals.Location = new Point(589, 111);
+            btnReferrals.Margin = new Padding(8, 9, 8, 9);
+            btnReferrals.Name = "btnReferrals";
+            btnReferrals.Size = new Size(477, 55);
+            btnReferrals.TabIndex = 2;
+            btnReferrals.Text = "Generate Referral Report for this Individual";
+            btnReferrals.UseVisualStyleBackColor = true;
+            btnReferrals.Click += BtnReferrals_Click;
             // 
             // cmbReferrals
             // 
-            this.cmbReferrals.FormattingEnabled = (true);
-            this.cmbReferrals.Location = (new global::System.Drawing.Point(194, 41));
-            this.cmbReferrals.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.cmbReferrals.Name = ("cmbReferrals");
-            this.cmbReferrals.Size = (new global::System.Drawing.Size(786, 38));
-            this.cmbReferrals.TabIndex = (1);
-            this.cmbReferrals.Click += (this.CmbReferrals_Click);
+            cmbReferrals.FormattingEnabled = true;
+            cmbReferrals.Location = new Point(210, 44);
+            cmbReferrals.Margin = new Padding(8, 9, 8, 9);
+            cmbReferrals.Name = "cmbReferrals";
+            cmbReferrals.Size = new Size(851, 40);
+            cmbReferrals.TabIndex = 1;
+            cmbReferrals.Click += CmbReferrals_Click;
             // 
             // label11
             // 
-            this.label11.AutoSize = (true);
-            this.label11.Location = (new global::System.Drawing.Point(12, 49));
-            this.label11.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.label11.Name = ("label11");
-            this.label11.Size = (new global::System.Drawing.Size(164, 30));
-            this.label11.TabIndex = (0);
-            this.label11.Text = ("Select Individual");
+            label11.AutoSize = true;
+            label11.Location = new Point(13, 52);
+            label11.Margin = new Padding(8, 0, 8, 0);
+            label11.Name = "label11";
+            label11.Size = new Size(189, 32);
+            label11.TabIndex = 0;
+            label11.Text = "Select Individual";
             // 
             // btnLCnoCensus
             // 
-            this.btnLCnoCensus.Location = (new global::System.Drawing.Point(684, 568));
-            this.btnLCnoCensus.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnLCnoCensus.Name = ("btnLCnoCensus");
-            this.btnLCnoCensus.Size = (new global::System.Drawing.Size(324, 62));
-            this.btnLCnoCensus.TabIndex = (39);
-            this.btnLCnoCensus.Text = ("Lost Cousins w/bad Census");
-            this.btnLCnoCensus.UseVisualStyleBackColor = (true);
-            this.btnLCnoCensus.Click += (this.BtnLCnoCensus_Click);
+            btnLCnoCensus.Location = new Point(741, 606);
+            btnLCnoCensus.Margin = new Padding(8, 9, 8, 9);
+            btnLCnoCensus.Name = "btnLCnoCensus";
+            btnLCnoCensus.Size = new Size(351, 66);
+            btnLCnoCensus.TabIndex = 39;
+            btnLCnoCensus.Text = "Lost Cousins w/bad Census";
+            btnLCnoCensus.UseVisualStyleBackColor = true;
+            btnLCnoCensus.Click += BtnLCnoCensus_Click;
             // 
             // btnLCDuplicates
             // 
-            this.btnLCDuplicates.Location = (new global::System.Drawing.Point(348, 568));
-            this.btnLCDuplicates.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnLCDuplicates.Name = ("btnLCDuplicates");
-            this.btnLCDuplicates.Size = (new global::System.Drawing.Size(324, 62));
-            this.btnLCDuplicates.TabIndex = (38);
-            this.btnLCDuplicates.Text = ("Lost Cousins Duplicate Facts");
-            this.btnLCDuplicates.UseVisualStyleBackColor = (true);
-            this.btnLCDuplicates.Click += (this.BtnLCDuplicates_Click);
+            btnLCDuplicates.Location = new Point(377, 606);
+            btnLCDuplicates.Margin = new Padding(8, 9, 8, 9);
+            btnLCDuplicates.Name = "btnLCDuplicates";
+            btnLCDuplicates.Size = new Size(351, 66);
+            btnLCDuplicates.TabIndex = 38;
+            btnLCDuplicates.Text = "Lost Cousins Duplicate Facts";
+            btnLCDuplicates.UseVisualStyleBackColor = true;
+            btnLCDuplicates.Click += BtnLCDuplicates_Click;
             // 
             // btnLCMissingCountry
             // 
-            this.btnLCMissingCountry.Location = (new global::System.Drawing.Point(12, 568));
-            this.btnLCMissingCountry.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnLCMissingCountry.Name = ("btnLCMissingCountry");
-            this.btnLCMissingCountry.Size = (new global::System.Drawing.Size(324, 62));
-            this.btnLCMissingCountry.TabIndex = (37);
-            this.btnLCMissingCountry.Text = ("Lost Cousins with no Country");
-            this.btnLCMissingCountry.UseVisualStyleBackColor = (true);
-            this.btnLCMissingCountry.Click += (this.BtnLCMissingCountry_Click);
+            btnLCMissingCountry.Location = new Point(13, 606);
+            btnLCMissingCountry.Margin = new Padding(8, 9, 8, 9);
+            btnLCMissingCountry.Name = "btnLCMissingCountry";
+            btnLCMissingCountry.Size = new Size(351, 66);
+            btnLCMissingCountry.TabIndex = 37;
+            btnLCMissingCountry.Text = "Lost Cousins with no Country";
+            btnLCMissingCountry.UseVisualStyleBackColor = true;
+            btnLCMissingCountry.Click += BtnLCMissingCountry_Click;
             // 
             // btnLC1940USA
             // 
-            this.btnLC1940USA.Location = (new global::System.Drawing.Point(684, 418));
-            this.btnLC1940USA.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnLC1940USA.Name = ("btnLC1940USA");
-            this.btnLC1940USA.Size = (new global::System.Drawing.Size(324, 62));
-            this.btnLC1940USA.TabIndex = (35);
-            this.btnLC1940USA.Text = ("1940 US Census");
-            this.btnLC1940USA.UseVisualStyleBackColor = (true);
-            this.btnLC1940USA.Click += (this.BtnLC1940USA_Click);
+            btnLC1940USA.Location = new Point(741, 446);
+            btnLC1940USA.Margin = new Padding(8, 9, 8, 9);
+            btnLC1940USA.Name = "btnLC1940USA";
+            btnLC1940USA.Size = new Size(351, 66);
+            btnLC1940USA.TabIndex = 35;
+            btnLC1940USA.Text = "1940 US Census";
+            btnLC1940USA.UseVisualStyleBackColor = true;
+            btnLC1940USA.Click += BtnLC1940USA_Click;
             // 
             // rtbLostCousins
             // 
-            this.rtbLostCousins.BackColor = (global::System.Drawing.Color.White);
-            this.rtbLostCousins.BorderStyle = (global::System.Windows.Forms.BorderStyle.None);
-            this.rtbLostCousins.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 9F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            this.rtbLostCousins.Location = (new global::System.Drawing.Point(1072, 14));
-            this.rtbLostCousins.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.rtbLostCousins.Name = ("rtbLostCousins");
-            this.rtbLostCousins.ReadOnly = (true);
-            this.rtbLostCousins.Size = (new global::System.Drawing.Size(1046, 791));
-            this.rtbLostCousins.TabIndex = (34);
-            this.rtbLostCousins.TabStop = (false);
-            this.rtbLostCousins.Text = ("");
+            rtbLostCousins.BackColor = Color.White;
+            rtbLostCousins.BorderStyle = BorderStyle.None;
+            rtbLostCousins.Font = new Font("Microsoft Sans Serif", 9F);
+            rtbLostCousins.Location = new Point(1161, 15);
+            rtbLostCousins.Margin = new Padding(8, 9, 8, 9);
+            rtbLostCousins.Name = "rtbLostCousins";
+            rtbLostCousins.ReadOnly = true;
+            rtbLostCousins.Size = new Size(1133, 844);
+            rtbLostCousins.TabIndex = 34;
+            rtbLostCousins.TabStop = false;
+            rtbLostCousins.Text = "";
             // 
             // linkLabel2
             // 
-            this.linkLabel2.AutoSize = (true);
-            this.linkLabel2.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 9.75F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            this.linkLabel2.Location = (new global::System.Drawing.Point(1452, 819));
-            this.linkLabel2.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.linkLabel2.Name = ("linkLabel2");
-            this.linkLabel2.Size = (new global::System.Drawing.Size(317, 29));
-            this.linkLabel2.TabIndex = (33);
-            this.linkLabel2.TabStop = (true);
-            this.linkLabel2.Text = ("Visit the Lost Cousins Forum");
-            this.linkLabel2.LinkClicked += (this.LinkLabel2_LinkClicked);
+            linkLabel2.AutoSize = true;
+            linkLabel2.Font = new Font("Microsoft Sans Serif", 9.75F);
+            linkLabel2.Location = new Point(1573, 874);
+            linkLabel2.Margin = new Padding(8, 0, 8, 0);
+            linkLabel2.Name = "linkLabel2";
+            linkLabel2.Size = new Size(341, 30);
+            linkLabel2.TabIndex = 33;
+            linkLabel2.TabStop = true;
+            linkLabel2.Text = "Visit the Lost Cousins Forum";
+            linkLabel2.LinkClicked += LinkLabel2_LinkClicked;
             // 
             // btnLC1911EW
             // 
-            this.btnLC1911EW.Location = (new global::System.Drawing.Point(12, 418));
-            this.btnLC1911EW.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnLC1911EW.Name = ("btnLC1911EW");
-            this.btnLC1911EW.Size = (new global::System.Drawing.Size(324, 62));
-            this.btnLC1911EW.TabIndex = (32);
-            this.btnLC1911EW.Text = ("1911 England && Wales Census");
-            this.btnLC1911EW.UseVisualStyleBackColor = (true);
-            this.btnLC1911EW.Click += (this.BtnLC1911EW_Click);
+            btnLC1911EW.Location = new Point(13, 446);
+            btnLC1911EW.Margin = new Padding(8, 9, 8, 9);
+            btnLC1911EW.Name = "btnLC1911EW";
+            btnLC1911EW.Size = new Size(351, 66);
+            btnLC1911EW.TabIndex = 32;
+            btnLC1911EW.Text = "1911 England && Wales Census";
+            btnLC1911EW.UseVisualStyleBackColor = true;
+            btnLC1911EW.Click += BtnLC1911EW_Click;
             // 
             // LabLostCousinsWeb
             // 
-            this.LabLostCousinsWeb.AutoSize = (true);
-            this.LabLostCousinsWeb.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 9.75F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            this.LabLostCousinsWeb.Location = (new global::System.Drawing.Point(1068, 819));
-            this.LabLostCousinsWeb.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.LabLostCousinsWeb.Name = ("LabLostCousinsWeb");
-            this.LabLostCousinsWeb.Size = (new global::System.Drawing.Size(335, 29));
-            this.LabLostCousinsWeb.TabIndex = (31);
-            this.LabLostCousinsWeb.TabStop = (true);
-            this.LabLostCousinsWeb.Text = ("Visit the Lost Cousins Website");
-            this.LabLostCousinsWeb.LinkClicked += (this.LabLostCousinsWeb_Click);
-            this.LabLostCousinsWeb.Click += (this.LabLostCousinsWeb_Click);
+            LabLostCousinsWeb.AutoSize = true;
+            LabLostCousinsWeb.Font = new Font("Microsoft Sans Serif", 9.75F);
+            LabLostCousinsWeb.Location = new Point(1157, 874);
+            LabLostCousinsWeb.Margin = new Padding(8, 0, 8, 0);
+            LabLostCousinsWeb.Name = "LabLostCousinsWeb";
+            LabLostCousinsWeb.Size = new Size(359, 30);
+            LabLostCousinsWeb.TabIndex = 31;
+            LabLostCousinsWeb.TabStop = true;
+            LabLostCousinsWeb.Text = "Visit the Lost Cousins Website";
+            LabLostCousinsWeb.LinkClicked += LabLostCousinsWeb_Click;
+            LabLostCousinsWeb.Click += LabLostCousinsWeb_Click;
             // 
             // ckbShowLCEntered
             // 
-            this.ckbShowLCEntered.AutoSize = (true);
-            this.ckbShowLCEntered.Location = (new global::System.Drawing.Point(12, 494));
-            this.ckbShowLCEntered.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.ckbShowLCEntered.Name = ("ckbShowLCEntered");
-            this.ckbShowLCEntered.Size = (new global::System.Drawing.Size(804, 34));
-            this.ckbShowLCEntered.TabIndex = (30);
-            this.ckbShowLCEntered.Text = ("Show already entered to Lost Cousins (unticked = show those to yet to be entered)");
-            this.ckbShowLCEntered.UseVisualStyleBackColor = (true);
+            ckbShowLCEntered.AutoSize = true;
+            ckbShowLCEntered.Location = new Point(13, 527);
+            ckbShowLCEntered.Margin = new Padding(8, 9, 8, 9);
+            ckbShowLCEntered.Name = "ckbShowLCEntered";
+            ckbShowLCEntered.Size = new Size(933, 36);
+            ckbShowLCEntered.TabIndex = 30;
+            ckbShowLCEntered.Text = "Show already entered to Lost Cousins (unticked = show those to yet to be entered)";
+            ckbShowLCEntered.UseVisualStyleBackColor = true;
             // 
             // btnLC1841EW
             // 
-            this.btnLC1841EW.Location = (new global::System.Drawing.Point(12, 341));
-            this.btnLC1841EW.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnLC1841EW.Name = ("btnLC1841EW");
-            this.btnLC1841EW.Size = (new global::System.Drawing.Size(324, 62));
-            this.btnLC1841EW.TabIndex = (29);
-            this.btnLC1841EW.Text = ("1841 England && Wales Census");
-            this.btnLC1841EW.UseVisualStyleBackColor = (true);
-            this.btnLC1841EW.Click += (this.BtnLC1841EW_Click);
+            btnLC1841EW.Location = new Point(13, 364);
+            btnLC1841EW.Margin = new Padding(8, 9, 8, 9);
+            btnLC1841EW.Name = "btnLC1841EW";
+            btnLC1841EW.Size = new Size(351, 66);
+            btnLC1841EW.TabIndex = 29;
+            btnLC1841EW.Text = "1841 England && Wales Census";
+            btnLC1841EW.UseVisualStyleBackColor = true;
+            btnLC1841EW.Click += BtnLC1841EW_Click;
             // 
             // btnLC1911Ireland
             // 
-            this.btnLC1911Ireland.Location = (new global::System.Drawing.Point(348, 341));
-            this.btnLC1911Ireland.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnLC1911Ireland.Name = ("btnLC1911Ireland");
-            this.btnLC1911Ireland.Size = (new global::System.Drawing.Size(324, 62));
-            this.btnLC1911Ireland.TabIndex = (28);
-            this.btnLC1911Ireland.Text = ("1911 Ireland Census");
-            this.btnLC1911Ireland.UseVisualStyleBackColor = (true);
-            this.btnLC1911Ireland.Click += (this.BtnLC1911Ireland_Click);
+            btnLC1911Ireland.Location = new Point(377, 364);
+            btnLC1911Ireland.Margin = new Padding(8, 9, 8, 9);
+            btnLC1911Ireland.Name = "btnLC1911Ireland";
+            btnLC1911Ireland.Size = new Size(351, 66);
+            btnLC1911Ireland.TabIndex = 28;
+            btnLC1911Ireland.Text = "1911 Ireland Census";
+            btnLC1911Ireland.UseVisualStyleBackColor = true;
+            btnLC1911Ireland.Click += BtnLC1911Ireland_Click;
             // 
             // btnLC1880USA
             // 
-            this.btnLC1880USA.Location = (new global::System.Drawing.Point(684, 341));
-            this.btnLC1880USA.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnLC1880USA.Name = ("btnLC1880USA");
-            this.btnLC1880USA.Size = (new global::System.Drawing.Size(324, 62));
-            this.btnLC1880USA.TabIndex = (27);
-            this.btnLC1880USA.Text = ("1880 US Census");
-            this.btnLC1880USA.UseVisualStyleBackColor = (true);
-            this.btnLC1880USA.Click += (this.BtnLC1880USA_Click);
+            btnLC1880USA.Location = new Point(741, 364);
+            btnLC1880USA.Margin = new Padding(8, 9, 8, 9);
+            btnLC1880USA.Name = "btnLC1880USA";
+            btnLC1880USA.Size = new Size(351, 66);
+            btnLC1880USA.TabIndex = 27;
+            btnLC1880USA.Text = "1880 US Census";
+            btnLC1880USA.UseVisualStyleBackColor = true;
+            btnLC1880USA.Click += BtnLC1880USA_Click;
             // 
             // btnLC1881EW
             // 
-            this.btnLC1881EW.Location = (new global::System.Drawing.Point(12, 265));
-            this.btnLC1881EW.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnLC1881EW.Name = ("btnLC1881EW");
-            this.btnLC1881EW.Size = (new global::System.Drawing.Size(324, 62));
-            this.btnLC1881EW.TabIndex = (26);
-            this.btnLC1881EW.Text = ("1881 England && Wales Census");
-            this.btnLC1881EW.UseVisualStyleBackColor = (true);
-            this.btnLC1881EW.Click += (this.BtnLC1881EW_Click);
+            btnLC1881EW.Location = new Point(13, 283);
+            btnLC1881EW.Margin = new Padding(8, 9, 8, 9);
+            btnLC1881EW.Name = "btnLC1881EW";
+            btnLC1881EW.Size = new Size(351, 66);
+            btnLC1881EW.TabIndex = 26;
+            btnLC1881EW.Text = "1881 England && Wales Census";
+            btnLC1881EW.UseVisualStyleBackColor = true;
+            btnLC1881EW.Click += BtnLC1881EW_Click;
             // 
             // btnLC1881Canada
             // 
-            this.btnLC1881Canada.Location = (new global::System.Drawing.Point(348, 418));
-            this.btnLC1881Canada.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnLC1881Canada.Name = ("btnLC1881Canada");
-            this.btnLC1881Canada.Size = (new global::System.Drawing.Size(324, 62));
-            this.btnLC1881Canada.TabIndex = (25);
-            this.btnLC1881Canada.Text = ("1881 Canada Census");
-            this.btnLC1881Canada.UseVisualStyleBackColor = (true);
-            this.btnLC1881Canada.Click += (this.BtnLC1881Canada_Click);
+            btnLC1881Canada.Location = new Point(377, 446);
+            btnLC1881Canada.Margin = new Padding(8, 9, 8, 9);
+            btnLC1881Canada.Name = "btnLC1881Canada";
+            btnLC1881Canada.Size = new Size(351, 66);
+            btnLC1881Canada.TabIndex = 25;
+            btnLC1881Canada.Text = "1881 Canada Census";
+            btnLC1881Canada.UseVisualStyleBackColor = true;
+            btnLC1881Canada.Click += BtnLC1881Canada_Click;
             // 
             // btnLC1881Scot
             // 
-            this.btnLC1881Scot.Location = (new global::System.Drawing.Point(348, 265));
-            this.btnLC1881Scot.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnLC1881Scot.Name = ("btnLC1881Scot");
-            this.btnLC1881Scot.Size = (new global::System.Drawing.Size(324, 62));
-            this.btnLC1881Scot.TabIndex = (24);
-            this.btnLC1881Scot.Text = ("1881 Scotland Census");
-            this.btnLC1881Scot.UseVisualStyleBackColor = (true);
-            this.btnLC1881Scot.Click += (this.BtnLC1881Scot_Click);
+            btnLC1881Scot.Location = new Point(377, 283);
+            btnLC1881Scot.Margin = new Padding(8, 9, 8, 9);
+            btnLC1881Scot.Name = "btnLC1881Scot";
+            btnLC1881Scot.Size = new Size(351, 66);
+            btnLC1881Scot.TabIndex = 24;
+            btnLC1881Scot.Text = "1881 Scotland Census";
+            btnLC1881Scot.UseVisualStyleBackColor = true;
+            btnLC1881Scot.Click += BtnLC1881Scot_Click;
             // 
             // relTypesLC
             // 
-            this.relTypesLC.Location = (new global::System.Drawing.Point(12, 14));
-            this.relTypesLC.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.relTypesLC.MarriedToDB = (true);
-            this.relTypesLC.Name = ("relTypesLC");
-            this.relTypesLC.Size = (new global::System.Drawing.Size(650, 238));
-            this.relTypesLC.TabIndex = (36);
-            this.relTypesLC.RelationTypesChanged += (this.RelTypesLC_RelationTypesChanged);
+            relTypesLC.Location = new Point(13, 15);
+            relTypesLC.Margin = new Padding(13, 15, 13, 15);
+            relTypesLC.MarriedToDB = true;
+            relTypesLC.Name = "relTypesLC";
+            relTypesLC.Size = new Size(704, 254);
+            relTypesLC.TabIndex = 36;
+            relTypesLC.RelationTypesChanged += RelTypesLC_RelationTypesChanged;
             // 
             // LCUpdatesTab
             // 
-            this.LCUpdatesTab.Controls.Add(this.rtbLCoutput);
-            this.LCUpdatesTab.Controls.Add(this.btnViewInvalidRefs);
-            this.LCUpdatesTab.Controls.Add(this.btnLCPotentialUploads);
-            this.LCUpdatesTab.Controls.Add(this.chkLCRootPersonConfirm);
-            this.LCUpdatesTab.Controls.Add(this.label21);
-            this.LCUpdatesTab.Controls.Add(this.rtbLCUpdateData);
-            this.LCUpdatesTab.Controls.Add(this.groupBox8);
-            this.LCUpdatesTab.Controls.Add(this.btnUpdateLostCousinsWebsite);
-            this.LCUpdatesTab.Location = (new global::System.Drawing.Point(4, 39));
-            this.LCUpdatesTab.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.LCUpdatesTab.Name = ("LCUpdatesTab");
-            this.LCUpdatesTab.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.LCUpdatesTab.Size = (new global::System.Drawing.Size(2106, 984));
-            this.LCUpdatesTab.TabIndex = (1);
-            this.LCUpdatesTab.Text = ("Updates");
-            this.LCUpdatesTab.UseVisualStyleBackColor = (true);
+            LCUpdatesTab.Controls.Add(rtbLCoutput);
+            LCUpdatesTab.Controls.Add(btnViewInvalidRefs);
+            LCUpdatesTab.Controls.Add(btnLCPotentialUploads);
+            LCUpdatesTab.Controls.Add(chkLCRootPersonConfirm);
+            LCUpdatesTab.Controls.Add(label21);
+            LCUpdatesTab.Controls.Add(rtbLCUpdateData);
+            LCUpdatesTab.Controls.Add(groupBox8);
+            LCUpdatesTab.Controls.Add(btnUpdateLostCousinsWebsite);
+            LCUpdatesTab.Location = new Point(8, 46);
+            LCUpdatesTab.Margin = new Padding(8, 9, 8, 9);
+            LCUpdatesTab.Name = "LCUpdatesTab";
+            LCUpdatesTab.Padding = new Padding(8, 9, 8, 9);
+            LCUpdatesTab.Size = new Size(2266, 1032);
+            LCUpdatesTab.TabIndex = 1;
+            LCUpdatesTab.Text = "Updates";
+            LCUpdatesTab.UseVisualStyleBackColor = true;
             // 
             // rtbLCoutput
             // 
-            this.rtbLCoutput.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.rtbLCoutput.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 9F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            this.rtbLCoutput.Location = (new global::System.Drawing.Point(7, 469));
-            this.rtbLCoutput.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.rtbLCoutput.Name = ("rtbLCoutput");
-            this.rtbLCoutput.ReadOnly = (true);
-            this.rtbLCoutput.Size = (new global::System.Drawing.Size(2092, 511));
-            this.rtbLCoutput.TabIndex = (41);
-            this.rtbLCoutput.TabStop = (false);
-            this.rtbLCoutput.Text = (resources.GetString("rtbLCoutput.Text"));
-            this.rtbLCoutput.TextChanged += (this.RtbLCoutput_TextChanged);
+            rtbLCoutput.BackColor = SystemColors.Window;
+            rtbLCoutput.Font = new Font("Microsoft Sans Serif", 9F);
+            rtbLCoutput.Location = new Point(8, 500);
+            rtbLCoutput.Margin = new Padding(8, 9, 8, 9);
+            rtbLCoutput.Name = "rtbLCoutput";
+            rtbLCoutput.ReadOnly = true;
+            rtbLCoutput.Size = new Size(2266, 545);
+            rtbLCoutput.TabIndex = 41;
+            rtbLCoutput.TabStop = false;
+            rtbLCoutput.Text = resources.GetString("rtbLCoutput.Text");
+            rtbLCoutput.TextChanged += RtbLCoutput_TextChanged;
             // 
             // btnViewInvalidRefs
             // 
-            this.btnViewInvalidRefs.Location = (new global::System.Drawing.Point(304, 401));
-            this.btnViewInvalidRefs.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnViewInvalidRefs.Name = ("btnViewInvalidRefs");
-            this.btnViewInvalidRefs.Size = (new global::System.Drawing.Size(276, 52));
-            this.btnViewInvalidRefs.TabIndex = (40);
-            this.btnViewInvalidRefs.Text = ("View Invalid Census Refs");
-            this.btnViewInvalidRefs.UseVisualStyleBackColor = (true);
-            this.btnViewInvalidRefs.Click += (this.BtnViewInvalidRefs_Click);
+            btnViewInvalidRefs.Location = new Point(329, 428);
+            btnViewInvalidRefs.Margin = new Padding(8, 9, 8, 9);
+            btnViewInvalidRefs.Name = "btnViewInvalidRefs";
+            btnViewInvalidRefs.Size = new Size(299, 55);
+            btnViewInvalidRefs.TabIndex = 40;
+            btnViewInvalidRefs.Text = "View Invalid Census Refs";
+            btnViewInvalidRefs.UseVisualStyleBackColor = true;
+            btnViewInvalidRefs.Click += BtnViewInvalidRefs_Click;
             // 
             // btnLCPotentialUploads
             // 
-            this.btnLCPotentialUploads.Location = (new global::System.Drawing.Point(12, 401));
-            this.btnLCPotentialUploads.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnLCPotentialUploads.Name = ("btnLCPotentialUploads");
-            this.btnLCPotentialUploads.Size = (new global::System.Drawing.Size(276, 52));
-            this.btnLCPotentialUploads.TabIndex = (39);
-            this.btnLCPotentialUploads.Text = ("View Potential Uploads");
-            this.btnLCPotentialUploads.UseVisualStyleBackColor = (true);
-            this.btnLCPotentialUploads.Click += (this.BtnLCPotentialUploads_Click);
+            btnLCPotentialUploads.Location = new Point(13, 428);
+            btnLCPotentialUploads.Margin = new Padding(8, 9, 8, 9);
+            btnLCPotentialUploads.Name = "btnLCPotentialUploads";
+            btnLCPotentialUploads.Size = new Size(299, 55);
+            btnLCPotentialUploads.TabIndex = 39;
+            btnLCPotentialUploads.Text = "View Potential Uploads";
+            btnLCPotentialUploads.UseVisualStyleBackColor = true;
+            btnLCPotentialUploads.Click += BtnLCPotentialUploads_Click;
             // 
             // label21
             // 
-            this.label21.AutoSize = (true);
-            this.label21.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 9.75F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            this.label21.Location = (new global::System.Drawing.Point(936, 28));
-            this.label21.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.label21.Name = ("label21");
-            this.label21.Size = (new global::System.Drawing.Size(690, 29));
-            this.label21.TabIndex = (37);
-            this.label21.Text = ("Census Records with valid Reference to upload to Lost Cousins");
+            label21.AutoSize = true;
+            label21.Font = new Font("Microsoft Sans Serif", 9.75F);
+            label21.Location = new Point(1014, 30);
+            label21.Margin = new Padding(8, 0, 8, 0);
+            label21.Name = "label21";
+            label21.Size = new Size(735, 30);
+            label21.TabIndex = 37;
+            label21.Text = "Census Records with valid Reference to upload to Lost Cousins";
             // 
             // rtbLCUpdateData
             // 
-            this.rtbLCUpdateData.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.rtbLCUpdateData.BorderStyle = (global::System.Windows.Forms.BorderStyle.None);
-            this.rtbLCUpdateData.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 9F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            this.rtbLCUpdateData.ForeColor = (global::System.Drawing.Color.Red);
-            this.rtbLCUpdateData.Location = (new global::System.Drawing.Point(943, 71));
-            this.rtbLCUpdateData.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.rtbLCUpdateData.Name = ("rtbLCUpdateData");
-            this.rtbLCUpdateData.ReadOnly = (true);
-            this.rtbLCUpdateData.Size = (new global::System.Drawing.Size(782, 390));
-            this.rtbLCUpdateData.TabIndex = (36);
-            this.rtbLCUpdateData.TabStop = (false);
-            this.rtbLCUpdateData.Text = ("Please Login to see data to update");
+            rtbLCUpdateData.BackColor = SystemColors.Window;
+            rtbLCUpdateData.BorderStyle = BorderStyle.None;
+            rtbLCUpdateData.Font = new Font("Microsoft Sans Serif", 9F);
+            rtbLCUpdateData.ForeColor = Color.Red;
+            rtbLCUpdateData.Location = new Point(1022, 76);
+            rtbLCUpdateData.Margin = new Padding(8, 9, 8, 9);
+            rtbLCUpdateData.Name = "rtbLCUpdateData";
+            rtbLCUpdateData.ReadOnly = true;
+            rtbLCUpdateData.Size = new Size(847, 416);
+            rtbLCUpdateData.TabIndex = 36;
+            rtbLCUpdateData.TabStop = false;
+            rtbLCUpdateData.Text = "Please Login to see data to update";
             // 
             // groupBox8
             // 
-            this.groupBox8.Controls.Add(this.btnLCLogin);
-            this.groupBox8.Controls.Add(this.label20);
-            this.groupBox8.Controls.Add(this.label19);
-            this.groupBox8.Controls.Add(this.txtLCEmail);
-            this.groupBox8.Controls.Add(this.txtLCPassword);
-            this.groupBox8.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 9.75F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            this.groupBox8.Location = (new global::System.Drawing.Point(60, 51));
-            this.groupBox8.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox8.Name = ("groupBox8");
-            this.groupBox8.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox8.Size = (new global::System.Drawing.Size(814, 272));
-            this.groupBox8.TabIndex = (1);
-            this.groupBox8.TabStop = (false);
-            this.groupBox8.Text = ("Lost Cousins Login Details");
+            groupBox8.Controls.Add(btnLCLogin);
+            groupBox8.Controls.Add(label20);
+            groupBox8.Controls.Add(label19);
+            groupBox8.Controls.Add(txtLCEmail);
+            groupBox8.Controls.Add(txtLCPassword);
+            groupBox8.Font = new Font("Microsoft Sans Serif", 9.75F);
+            groupBox8.Location = new Point(65, 54);
+            groupBox8.Margin = new Padding(8, 9, 8, 9);
+            groupBox8.Name = "groupBox8";
+            groupBox8.Padding = new Padding(8, 9, 8, 9);
+            groupBox8.Size = new Size(882, 290);
+            groupBox8.TabIndex = 1;
+            groupBox8.TabStop = false;
+            groupBox8.Text = "Lost Cousins Login Details";
             // 
             // btnLCLogin
             // 
-            this.btnLCLogin.BackColor = (global::System.Drawing.Color.Red);
-            this.btnLCLogin.Location = (new global::System.Drawing.Point(620, 158));
-            this.btnLCLogin.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnLCLogin.Name = ("btnLCLogin");
-            this.btnLCLogin.Size = (new global::System.Drawing.Size(151, 58));
-            this.btnLCLogin.TabIndex = (3);
-            this.btnLCLogin.Text = ("Login");
-            this.btnLCLogin.UseVisualStyleBackColor = (false);
-            this.btnLCLogin.Click += (this.BtnLCLogin_Click);
+            btnLCLogin.BackColor = Color.Red;
+            btnLCLogin.Location = new Point(672, 169);
+            btnLCLogin.Margin = new Padding(8, 9, 8, 9);
+            btnLCLogin.Name = "btnLCLogin";
+            btnLCLogin.Size = new Size(164, 62);
+            btnLCLogin.TabIndex = 3;
+            btnLCLogin.Text = "Login";
+            btnLCLogin.UseVisualStyleBackColor = false;
+            btnLCLogin.Click += BtnLCLogin_Click;
             // 
             // label20
             // 
-            this.label20.AutoSize = (true);
-            this.label20.Location = (new global::System.Drawing.Point(68, 166));
-            this.label20.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.label20.Name = ("label20");
-            this.label20.Size = (new global::System.Drawing.Size(120, 29));
-            this.label20.TabIndex = (3);
-            this.label20.Text = ("Password");
-            this.label20.TextAlign = (global::System.Drawing.ContentAlignment.TopRight);
+            label20.AutoSize = true;
+            label20.Location = new Point(74, 177);
+            label20.Margin = new Padding(8, 0, 8, 0);
+            label20.Name = "label20";
+            label20.Size = new Size(126, 30);
+            label20.TabIndex = 3;
+            label20.Text = "Password";
+            label20.TextAlign = ContentAlignment.TopRight;
             // 
             // label19
             // 
-            this.label19.AutoSize = (true);
-            this.label19.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 9.75F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            this.label19.Location = (new global::System.Drawing.Point(12, 71));
-            this.label19.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.label19.Name = ("label19");
-            this.label19.Size = (new global::System.Drawing.Size(169, 29));
-            this.label19.TabIndex = (2);
-            this.label19.Text = ("Email Address");
-            this.label19.TextAlign = (global::System.Drawing.ContentAlignment.TopRight);
+            label19.AutoSize = true;
+            label19.Font = new Font("Microsoft Sans Serif", 9.75F);
+            label19.Location = new Point(13, 76);
+            label19.Margin = new Padding(8, 0, 8, 0);
+            label19.Name = "label19";
+            label19.Size = new Size(179, 30);
+            label19.TabIndex = 2;
+            label19.Text = "Email Address";
+            label19.TextAlign = ContentAlignment.TopRight;
             // 
             // txtLCEmail
             // 
-            this.txtLCEmail.Location = (new global::System.Drawing.Point(216, 65));
-            this.txtLCEmail.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.txtLCEmail.Name = ("txtLCEmail");
-            this.txtLCEmail.Size = (new global::System.Drawing.Size(551, 33));
-            this.txtLCEmail.TabIndex = (1);
-            this.txtLCEmail.TextChanged += (this.TxtLCEmail_TextChanged);
+            txtLCEmail.Location = new Point(234, 69);
+            txtLCEmail.Margin = new Padding(8, 9, 8, 9);
+            txtLCEmail.Name = "txtLCEmail";
+            txtLCEmail.Size = new Size(597, 37);
+            txtLCEmail.TabIndex = 1;
+            txtLCEmail.TextChanged += TxtLCEmail_TextChanged;
             // 
             // txtLCPassword
             // 
-            this.txtLCPassword.Location = (new global::System.Drawing.Point(216, 159));
-            this.txtLCPassword.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.txtLCPassword.Name = ("txtLCPassword");
-            this.txtLCPassword.PasswordChar = ('*');
-            this.txtLCPassword.Size = (new global::System.Drawing.Size(388, 33));
-            this.txtLCPassword.TabIndex = (2);
-            this.txtLCPassword.TextChanged += (this.TxtLCPassword_TextChanged);
+            txtLCPassword.Location = new Point(234, 170);
+            txtLCPassword.Margin = new Padding(8, 9, 8, 9);
+            txtLCPassword.Name = "txtLCPassword";
+            txtLCPassword.PasswordChar = '*';
+            txtLCPassword.Size = new Size(420, 37);
+            txtLCPassword.TabIndex = 2;
+            txtLCPassword.TextChanged += TxtLCPassword_TextChanged;
             // 
             // LCVerifyTab
             // 
-            this.LCVerifyTab.Controls.Add(this.rtbCheckAncestors);
-            this.LCVerifyTab.Controls.Add(this.dgCheckAncestors);
-            this.LCVerifyTab.Controls.Add(this.btnCheckMyAncestors);
-            this.LCVerifyTab.Controls.Add(this.lblCheckAncestors);
-            this.LCVerifyTab.Location = (new global::System.Drawing.Point(4, 39));
-            this.LCVerifyTab.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.LCVerifyTab.Name = ("LCVerifyTab");
-            this.LCVerifyTab.Size = (new global::System.Drawing.Size(2106, 984));
-            this.LCVerifyTab.TabIndex = (2);
-            this.LCVerifyTab.Text = ("Verification");
-            this.LCVerifyTab.UseVisualStyleBackColor = (true);
+            LCVerifyTab.Controls.Add(rtbCheckAncestors);
+            LCVerifyTab.Controls.Add(dgCheckAncestors);
+            LCVerifyTab.Controls.Add(btnCheckMyAncestors);
+            LCVerifyTab.Controls.Add(lblCheckAncestors);
+            LCVerifyTab.Location = new Point(8, 46);
+            LCVerifyTab.Margin = new Padding(8, 9, 8, 9);
+            LCVerifyTab.Name = "LCVerifyTab";
+            LCVerifyTab.Size = new Size(2266, 1032);
+            LCVerifyTab.TabIndex = 2;
+            LCVerifyTab.Text = "Verification";
+            LCVerifyTab.UseVisualStyleBackColor = true;
             // 
             // rtbCheckAncestors
             // 
-            this.rtbCheckAncestors.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.rtbCheckAncestors.BorderStyle = (global::System.Windows.Forms.BorderStyle.None);
-            this.rtbCheckAncestors.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 9F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            this.rtbCheckAncestors.ForeColor = (global::System.Drawing.Color.Red);
-            this.rtbCheckAncestors.Location = (new global::System.Drawing.Point(668, 28));
-            this.rtbCheckAncestors.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.rtbCheckAncestors.Name = ("rtbCheckAncestors");
-            this.rtbCheckAncestors.ReadOnly = (true);
-            this.rtbCheckAncestors.Size = (new global::System.Drawing.Size(1431, 152));
-            this.rtbCheckAncestors.TabIndex = (37);
-            this.rtbCheckAncestors.TabStop = (false);
-            this.rtbCheckAncestors.Text = ("Please Login to see data to update");
-            this.rtbCheckAncestors.TextChanged += (this.RtbCheckAncestors_TextChanged);
+            rtbCheckAncestors.BackColor = SystemColors.Window;
+            rtbCheckAncestors.BorderStyle = BorderStyle.None;
+            rtbCheckAncestors.Font = new Font("Microsoft Sans Serif", 9F);
+            rtbCheckAncestors.ForeColor = Color.Red;
+            rtbCheckAncestors.Location = new Point(724, 30);
+            rtbCheckAncestors.Margin = new Padding(8, 9, 8, 9);
+            rtbCheckAncestors.Name = "rtbCheckAncestors";
+            rtbCheckAncestors.ReadOnly = true;
+            rtbCheckAncestors.Size = new Size(1550, 162);
+            rtbCheckAncestors.TabIndex = 37;
+            rtbCheckAncestors.TabStop = false;
+            rtbCheckAncestors.Text = "Please Login to see data to update";
+            rtbCheckAncestors.TextChanged += RtbCheckAncestors_TextChanged;
             // 
             // btnCheckMyAncestors
             // 
-            this.btnCheckMyAncestors.BackColor = (global::System.Drawing.Color.Red);
-            this.btnCheckMyAncestors.Location = (new global::System.Drawing.Point(31, 92));
-            this.btnCheckMyAncestors.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnCheckMyAncestors.Name = ("btnCheckMyAncestors");
-            this.btnCheckMyAncestors.Size = (new global::System.Drawing.Size(494, 52));
-            this.btnCheckMyAncestors.TabIndex = (1);
-            this.btnCheckMyAncestors.Text = ("Load My Ancestors Page to check for Errors");
-            this.btnCheckMyAncestors.UseVisualStyleBackColor = (false);
-            this.btnCheckMyAncestors.Click += (this.BtnCheckMyAncestors_Click);
+            btnCheckMyAncestors.BackColor = Color.Red;
+            btnCheckMyAncestors.Location = new Point(34, 98);
+            btnCheckMyAncestors.Margin = new Padding(8, 9, 8, 9);
+            btnCheckMyAncestors.Name = "btnCheckMyAncestors";
+            btnCheckMyAncestors.Size = new Size(535, 55);
+            btnCheckMyAncestors.TabIndex = 1;
+            btnCheckMyAncestors.Text = "Load My Ancestors Page to check for Errors";
+            btnCheckMyAncestors.UseVisualStyleBackColor = false;
+            btnCheckMyAncestors.Click += BtnCheckMyAncestors_Click;
             // 
             // lblCheckAncestors
             // 
-            this.lblCheckAncestors.AutoSize = (true);
-            this.lblCheckAncestors.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 9.75F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            this.lblCheckAncestors.Location = (new global::System.Drawing.Point(24, 28));
-            this.lblCheckAncestors.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.lblCheckAncestors.Name = ("lblCheckAncestors");
-            this.lblCheckAncestors.Size = (new global::System.Drawing.Size(567, 29));
-            this.lblCheckAncestors.TabIndex = (0);
-            this.lblCheckAncestors.Text = ("Not Currently Logged in Use Updates Page to Login");
+            lblCheckAncestors.AutoSize = true;
+            lblCheckAncestors.Font = new Font("Microsoft Sans Serif", 9.75F);
+            lblCheckAncestors.Location = new Point(26, 30);
+            lblCheckAncestors.Margin = new Padding(8, 0, 8, 0);
+            lblCheckAncestors.Name = "lblCheckAncestors";
+            lblCheckAncestors.Size = new Size(601, 30);
+            lblCheckAncestors.TabIndex = 0;
+            lblCheckAncestors.Text = "Not Currently Logged in Use Updates Page to Login";
             // 
             // tabCensus
             // 
-            this.tabCensus.Controls.Add(this.groupBox2);
-            this.tabCensus.Controls.Add(this.groupBox9);
-            this.tabCensus.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabCensus.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabCensus.Name = ("tabCensus");
-            this.tabCensus.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabCensus.Size = (new global::System.Drawing.Size(2128, 1043));
-            this.tabCensus.TabIndex = (0);
-            this.tabCensus.Text = ("Census");
-            this.tabCensus.UseVisualStyleBackColor = (true);
+            tabCensus.Controls.Add(groupBox2);
+            tabCensus.Controls.Add(groupBox9);
+            tabCensus.Location = new Point(8, 46);
+            tabCensus.Margin = new Padding(8, 9, 8, 9);
+            tabCensus.Name = "tabCensus";
+            tabCensus.Padding = new Padding(8, 9, 8, 9);
+            tabCensus.Size = new Size(2298, 1074);
+            tabCensus.TabIndex = 0;
+            tabCensus.Text = "Census";
+            tabCensus.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.btnAliveOnDate);
-            this.groupBox2.Controls.Add(this.txtAliveDates);
-            this.groupBox2.Controls.Add(this.label22);
-            this.groupBox2.Controls.Add(this.chkAnyCensusYear);
-            this.groupBox2.Controls.Add(this.groupBox10);
-            this.groupBox2.Controls.Add(this.groupBox4);
-            this.groupBox2.Controls.Add(this.chkExcludeUnknownBirths);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.txtCensusSurname);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.udAgeFilter);
-            this.groupBox2.Controls.Add(this.cenDate);
-            this.groupBox2.Controls.Add(this.relTypesCensus);
-            this.groupBox2.Location = (new global::System.Drawing.Point(16, 14));
-            this.groupBox2.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox2.Name = ("groupBox2");
-            this.groupBox2.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox2.Size = (new global::System.Drawing.Size(1927, 669));
-            this.groupBox2.TabIndex = (23);
-            this.groupBox2.TabStop = (false);
-            this.groupBox2.Text = ("Census Search Reports");
+            groupBox2.Controls.Add(btnAliveOnDate);
+            groupBox2.Controls.Add(txtAliveDates);
+            groupBox2.Controls.Add(label22);
+            groupBox2.Controls.Add(chkAnyCensusYear);
+            groupBox2.Controls.Add(groupBox10);
+            groupBox2.Controls.Add(groupBox4);
+            groupBox2.Controls.Add(chkExcludeUnknownBirths);
+            groupBox2.Controls.Add(label1);
+            groupBox2.Controls.Add(txtCensusSurname);
+            groupBox2.Controls.Add(label2);
+            groupBox2.Controls.Add(udAgeFilter);
+            groupBox2.Controls.Add(cenDate);
+            groupBox2.Controls.Add(relTypesCensus);
+            groupBox2.Location = new Point(17, 15);
+            groupBox2.Margin = new Padding(8, 9, 8, 9);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new Padding(8, 9, 8, 9);
+            groupBox2.Size = new Size(2088, 714);
+            groupBox2.TabIndex = 23;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Census Search Reports";
             // 
             // btnAliveOnDate
             // 
-            this.btnAliveOnDate.Location = (new global::System.Drawing.Point(1286, 286));
-            this.btnAliveOnDate.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnAliveOnDate.Name = ("btnAliveOnDate");
-            this.btnAliveOnDate.Size = (new global::System.Drawing.Size(600, 58));
-            this.btnAliveOnDate.TabIndex = (41);
-            this.btnAliveOnDate.Text = ("Show Individuals possibly alive on above date(s)");
-            this.btnAliveOnDate.UseVisualStyleBackColor = (true);
-            this.btnAliveOnDate.Click += (this.BtnAliveOnDate_Click);
+            btnAliveOnDate.Location = new Point(1393, 305);
+            btnAliveOnDate.Margin = new Padding(8, 9, 8, 9);
+            btnAliveOnDate.Name = "btnAliveOnDate";
+            btnAliveOnDate.Size = new Size(650, 62);
+            btnAliveOnDate.TabIndex = 41;
+            btnAliveOnDate.Text = "Show Individuals possibly alive on above date(s)";
+            btnAliveOnDate.UseVisualStyleBackColor = true;
+            btnAliveOnDate.Click += BtnAliveOnDate_Click;
             // 
             // txtAliveDates
             // 
-            this.txtAliveDates.Location = (new global::System.Drawing.Point(1423, 194));
-            this.txtAliveDates.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.txtAliveDates.Name = ("txtAliveDates");
-            this.txtAliveDates.Size = (new global::System.Drawing.Size(460, 35));
-            this.txtAliveDates.TabIndex = (40);
-            this.txtAliveDates.Text = ("Enter valid GEDCOM date/date range");
-            this.txtAliveDates.Enter += (this.TxtAliveDates_Enter);
-            this.txtAliveDates.Validating += (this.TxtAliveDates_Validating);
+            txtAliveDates.Location = new Point(1542, 207);
+            txtAliveDates.Margin = new Padding(8, 9, 8, 9);
+            txtAliveDates.Name = "txtAliveDates";
+            txtAliveDates.Size = new Size(498, 39);
+            txtAliveDates.TabIndex = 40;
+            txtAliveDates.Text = "Enter valid GEDCOM date/date range";
+            txtAliveDates.Enter += TxtAliveDates_Enter;
+            txtAliveDates.Validating += TxtAliveDates_Validating;
             // 
             // label22
             // 
-            this.label22.AutoSize = (true);
-            this.label22.Location = (new global::System.Drawing.Point(1280, 201));
-            this.label22.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.label22.Name = ("label22");
-            this.label22.Size = (new global::System.Drawing.Size(128, 30));
-            this.label22.TabIndex = (39);
-            this.label22.Text = ("Alive Dates: ");
+            label22.AutoSize = true;
+            label22.Location = new Point(1387, 214);
+            label22.Margin = new Padding(8, 0, 8, 0);
+            label22.Name = "label22";
+            label22.Size = new Size(145, 32);
+            label22.TabIndex = 39;
+            label22.Text = "Alive Dates: ";
             // 
             // chkAnyCensusYear
             // 
-            this.chkAnyCensusYear.AutoSize = (true);
-            this.chkAnyCensusYear.Checked = (true);
-            this.chkAnyCensusYear.CheckState = (global::System.Windows.Forms.CheckState.Checked);
-            this.chkAnyCensusYear.Location = (new global::System.Drawing.Point(679, 298));
-            this.chkAnyCensusYear.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.chkAnyCensusYear.Name = ("chkAnyCensusYear");
-            this.chkAnyCensusYear.RightToLeft = (global::System.Windows.Forms.RightToLeft.Yes);
-            this.chkAnyCensusYear.Size = (new global::System.Drawing.Size(549, 34));
-            this.chkAnyCensusYear.TabIndex = (36);
-            this.chkAnyCensusYear.Text = ("Include ALL census years for Census Reference reports ");
-            this.chkAnyCensusYear.UseVisualStyleBackColor = (true);
+            chkAnyCensusYear.AutoSize = true;
+            chkAnyCensusYear.Checked = true;
+            chkAnyCensusYear.CheckState = CheckState.Checked;
+            chkAnyCensusYear.Location = new Point(736, 318);
+            chkAnyCensusYear.Margin = new Padding(8, 9, 8, 9);
+            chkAnyCensusYear.Name = "chkAnyCensusYear";
+            chkAnyCensusYear.RightToLeft = RightToLeft.Yes;
+            chkAnyCensusYear.Size = new Size(631, 36);
+            chkAnyCensusYear.TabIndex = 36;
+            chkAnyCensusYear.Text = "Include ALL census years for Census Reference reports ";
+            chkAnyCensusYear.UseVisualStyleBackColor = true;
             // 
             // groupBox10
             // 
-            this.groupBox10.Controls.Add(this.btnShowCensusMissing);
-            this.groupBox10.Controls.Add(this.btnShowCensusEntered);
-            this.groupBox10.Controls.Add(this.btnRandomSurnameEntered);
-            this.groupBox10.Controls.Add(this.btnRandomSurnameMissing);
-            this.groupBox10.Location = (new global::System.Drawing.Point(19, 362));
-            this.groupBox10.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox10.Name = ("groupBox10");
-            this.groupBox10.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox10.Size = (new global::System.Drawing.Size(1896, 145));
-            this.groupBox10.TabIndex = (35);
-            this.groupBox10.TabStop = (false);
-            this.groupBox10.Text = ("Census Record Reports");
+            groupBox10.Controls.Add(btnShowCensusMissing);
+            groupBox10.Controls.Add(btnShowCensusEntered);
+            groupBox10.Controls.Add(btnRandomSurnameEntered);
+            groupBox10.Controls.Add(btnRandomSurnameMissing);
+            groupBox10.Location = new Point(21, 386);
+            groupBox10.Margin = new Padding(8, 9, 8, 9);
+            groupBox10.Name = "groupBox10";
+            groupBox10.Padding = new Padding(8, 9, 8, 9);
+            groupBox10.Size = new Size(2054, 155);
+            groupBox10.TabIndex = 35;
+            groupBox10.TabStop = false;
+            groupBox10.Text = "Census Record Reports";
             // 
             // btnShowCensusMissing
             // 
-            this.btnShowCensusMissing.Location = (new global::System.Drawing.Point(12, 51));
-            this.btnShowCensusMissing.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnShowCensusMissing.Name = ("btnShowCensusMissing");
-            this.btnShowCensusMissing.Size = (new global::System.Drawing.Size(300, 58));
-            this.btnShowCensusMissing.TabIndex = (39);
-            this.btnShowCensusMissing.Text = ("Show Not Found on Census");
-            this.btnShowCensusMissing.UseVisualStyleBackColor = (true);
-            this.btnShowCensusMissing.Click += (this.BtnShowCensus_Click);
+            btnShowCensusMissing.Location = new Point(13, 54);
+            btnShowCensusMissing.Margin = new Padding(8, 9, 8, 9);
+            btnShowCensusMissing.Name = "btnShowCensusMissing";
+            btnShowCensusMissing.Size = new Size(325, 62);
+            btnShowCensusMissing.TabIndex = 39;
+            btnShowCensusMissing.Text = "Show Not Found on Census";
+            btnShowCensusMissing.UseVisualStyleBackColor = true;
+            btnShowCensusMissing.Click += BtnShowCensus_Click;
             // 
             // btnShowCensusEntered
             // 
-            this.btnShowCensusEntered.Location = (new global::System.Drawing.Point(324, 51));
-            this.btnShowCensusEntered.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnShowCensusEntered.Name = ("btnShowCensusEntered");
-            this.btnShowCensusEntered.Size = (new global::System.Drawing.Size(308, 58));
-            this.btnShowCensusEntered.TabIndex = (38);
-            this.btnShowCensusEntered.Text = ("Show Found on Census");
-            this.btnShowCensusEntered.UseVisualStyleBackColor = (true);
-            this.btnShowCensusEntered.Click += (this.BtnShowCensus_Click);
+            btnShowCensusEntered.Location = new Point(351, 54);
+            btnShowCensusEntered.Margin = new Padding(8, 9, 8, 9);
+            btnShowCensusEntered.Name = "btnShowCensusEntered";
+            btnShowCensusEntered.Size = new Size(334, 62);
+            btnShowCensusEntered.TabIndex = 38;
+            btnShowCensusEntered.Text = "Show Found on Census";
+            btnShowCensusEntered.UseVisualStyleBackColor = true;
+            btnShowCensusEntered.Click += BtnShowCensus_Click;
             // 
             // btnRandomSurnameEntered
             // 
-            this.btnRandomSurnameEntered.Location = (new global::System.Drawing.Point(644, 51));
-            this.btnRandomSurnameEntered.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnRandomSurnameEntered.Name = ("btnRandomSurnameEntered");
-            this.btnRandomSurnameEntered.Size = (new global::System.Drawing.Size(600, 58));
-            this.btnRandomSurnameEntered.TabIndex = (37);
-            this.btnRandomSurnameEntered.Text = ("Show Found Random Surname from Direct Ancestors");
-            this.btnRandomSurnameEntered.UseVisualStyleBackColor = (true);
-            this.btnRandomSurnameEntered.Click += (this.BtnRandomSurname_Click);
+            btnRandomSurnameEntered.Location = new Point(698, 54);
+            btnRandomSurnameEntered.Margin = new Padding(8, 9, 8, 9);
+            btnRandomSurnameEntered.Name = "btnRandomSurnameEntered";
+            btnRandomSurnameEntered.Size = new Size(650, 62);
+            btnRandomSurnameEntered.TabIndex = 37;
+            btnRandomSurnameEntered.Text = "Show Found Random Surname from Direct Ancestors";
+            btnRandomSurnameEntered.UseVisualStyleBackColor = true;
+            btnRandomSurnameEntered.Click += BtnRandomSurname_Click;
             // 
             // btnRandomSurnameMissing
             // 
-            this.btnRandomSurnameMissing.Location = (new global::System.Drawing.Point(1268, 51));
-            this.btnRandomSurnameMissing.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnRandomSurnameMissing.Name = ("btnRandomSurnameMissing");
-            this.btnRandomSurnameMissing.Size = (new global::System.Drawing.Size(602, 58));
-            this.btnRandomSurnameMissing.TabIndex = (36);
-            this.btnRandomSurnameMissing.Text = ("Show Not Found Random Surname from Direct Ancestors");
-            this.btnRandomSurnameMissing.UseVisualStyleBackColor = (true);
-            this.btnRandomSurnameMissing.Click += (this.BtnRandomSurname_Click);
+            btnRandomSurnameMissing.Location = new Point(1374, 54);
+            btnRandomSurnameMissing.Margin = new Padding(8, 9, 8, 9);
+            btnRandomSurnameMissing.Name = "btnRandomSurnameMissing";
+            btnRandomSurnameMissing.Size = new Size(652, 62);
+            btnRandomSurnameMissing.TabIndex = 36;
+            btnRandomSurnameMissing.Text = "Show Not Found Random Surname from Direct Ancestors";
+            btnRandomSurnameMissing.UseVisualStyleBackColor = true;
+            btnRandomSurnameMissing.Click += BtnRandomSurname_Click;
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.btnInconsistentLocations);
-            this.groupBox4.Controls.Add(this.btnUnrecognisedCensusRef);
-            this.groupBox4.Controls.Add(this.btnIncompleteCensusRef);
-            this.groupBox4.Controls.Add(this.btnMissingCensusRefs);
-            this.groupBox4.Controls.Add(this.btnCensusRefs);
-            this.groupBox4.Location = (new global::System.Drawing.Point(19, 521));
-            this.groupBox4.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox4.Name = ("groupBox4");
-            this.groupBox4.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox4.Size = (new global::System.Drawing.Size(1896, 122));
-            this.groupBox4.TabIndex = (34);
-            this.groupBox4.TabStop = (false);
-            this.groupBox4.Text = ("Census Reference Reports");
+            groupBox4.Controls.Add(btnInconsistentLocations);
+            groupBox4.Controls.Add(btnUnrecognisedCensusRef);
+            groupBox4.Controls.Add(btnIncompleteCensusRef);
+            groupBox4.Controls.Add(btnMissingCensusRefs);
+            groupBox4.Controls.Add(btnCensusRefs);
+            groupBox4.Location = new Point(21, 556);
+            groupBox4.Margin = new Padding(8, 9, 8, 9);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Padding = new Padding(8, 9, 8, 9);
+            groupBox4.Size = new Size(2054, 130);
+            groupBox4.TabIndex = 34;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Census Reference Reports";
             // 
             // btnInconsistentLocations
             // 
-            this.btnInconsistentLocations.Location = (new global::System.Drawing.Point(1268, 44));
-            this.btnInconsistentLocations.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnInconsistentLocations.Name = ("btnInconsistentLocations");
-            this.btnInconsistentLocations.Size = (new global::System.Drawing.Size(602, 58));
-            this.btnInconsistentLocations.TabIndex = (29);
-            this.btnInconsistentLocations.Text = ("Inconsistent census locations for families with same census ref");
-            this.btnInconsistentLocations.UseVisualStyleBackColor = (true);
-            this.btnInconsistentLocations.Click += (this.BtnInconsistentLocations_Click);
+            btnInconsistentLocations.Location = new Point(1374, 47);
+            btnInconsistentLocations.Margin = new Padding(8, 9, 8, 9);
+            btnInconsistentLocations.Name = "btnInconsistentLocations";
+            btnInconsistentLocations.Size = new Size(652, 62);
+            btnInconsistentLocations.TabIndex = 29;
+            btnInconsistentLocations.Text = "Inconsistent census locations for families with same census ref";
+            btnInconsistentLocations.UseVisualStyleBackColor = true;
+            btnInconsistentLocations.Click += BtnInconsistentLocations_Click;
             // 
             // btnUnrecognisedCensusRef
             // 
-            this.btnUnrecognisedCensusRef.Location = (new global::System.Drawing.Point(644, 44));
-            this.btnUnrecognisedCensusRef.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnUnrecognisedCensusRef.Name = ("btnUnrecognisedCensusRef");
-            this.btnUnrecognisedCensusRef.Size = (new global::System.Drawing.Size(288, 58));
-            this.btnUnrecognisedCensusRef.TabIndex = (8);
-            this.btnUnrecognisedCensusRef.Text = ("Unrecognised Census Refs");
-            this.btnUnrecognisedCensusRef.UseVisualStyleBackColor = (true);
-            this.btnUnrecognisedCensusRef.Click += (this.BtnUnrecognisedCensusRef_Click);
+            btnUnrecognisedCensusRef.Location = new Point(698, 47);
+            btnUnrecognisedCensusRef.Margin = new Padding(8, 9, 8, 9);
+            btnUnrecognisedCensusRef.Name = "btnUnrecognisedCensusRef";
+            btnUnrecognisedCensusRef.Size = new Size(312, 62);
+            btnUnrecognisedCensusRef.TabIndex = 8;
+            btnUnrecognisedCensusRef.Text = "Unrecognised Census Refs";
+            btnUnrecognisedCensusRef.UseVisualStyleBackColor = true;
+            btnUnrecognisedCensusRef.Click += BtnUnrecognisedCensusRef_Click;
             // 
             // btnIncompleteCensusRef
             // 
-            this.btnIncompleteCensusRef.Location = (new global::System.Drawing.Point(324, 44));
-            this.btnIncompleteCensusRef.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnIncompleteCensusRef.Name = ("btnIncompleteCensusRef");
-            this.btnIncompleteCensusRef.Size = (new global::System.Drawing.Size(308, 58));
-            this.btnIncompleteCensusRef.TabIndex = (7);
-            this.btnIncompleteCensusRef.Text = ("Incomplete Census Refs");
-            this.btnIncompleteCensusRef.UseVisualStyleBackColor = (true);
-            this.btnIncompleteCensusRef.Click += (this.BtnIncompleteCensusRef_Click);
+            btnIncompleteCensusRef.Location = new Point(351, 47);
+            btnIncompleteCensusRef.Margin = new Padding(8, 9, 8, 9);
+            btnIncompleteCensusRef.Name = "btnIncompleteCensusRef";
+            btnIncompleteCensusRef.Size = new Size(334, 62);
+            btnIncompleteCensusRef.TabIndex = 7;
+            btnIncompleteCensusRef.Text = "Incomplete Census Refs";
+            btnIncompleteCensusRef.UseVisualStyleBackColor = true;
+            btnIncompleteCensusRef.Click += BtnIncompleteCensusRef_Click;
             // 
             // btnMissingCensusRefs
             // 
-            this.btnMissingCensusRefs.Location = (new global::System.Drawing.Point(944, 44));
-            this.btnMissingCensusRefs.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnMissingCensusRefs.Name = ("btnMissingCensusRefs");
-            this.btnMissingCensusRefs.Size = (new global::System.Drawing.Size(300, 58));
-            this.btnMissingCensusRefs.TabIndex = (6);
-            this.btnMissingCensusRefs.Text = ("Missing Census Refs");
-            this.btnMissingCensusRefs.UseVisualStyleBackColor = (true);
-            this.btnMissingCensusRefs.Click += (this.BtnMissingCensusRefs_Click);
+            btnMissingCensusRefs.Location = new Point(1023, 47);
+            btnMissingCensusRefs.Margin = new Padding(8, 9, 8, 9);
+            btnMissingCensusRefs.Name = "btnMissingCensusRefs";
+            btnMissingCensusRefs.Size = new Size(325, 62);
+            btnMissingCensusRefs.TabIndex = 6;
+            btnMissingCensusRefs.Text = "Missing Census Refs";
+            btnMissingCensusRefs.UseVisualStyleBackColor = true;
+            btnMissingCensusRefs.Click += BtnMissingCensusRefs_Click;
             // 
             // btnCensusRefs
             // 
-            this.btnCensusRefs.Location = (new global::System.Drawing.Point(12, 44));
-            this.btnCensusRefs.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnCensusRefs.Name = ("btnCensusRefs");
-            this.btnCensusRefs.Size = (new global::System.Drawing.Size(300, 58));
-            this.btnCensusRefs.TabIndex = (5);
-            this.btnCensusRefs.Text = ("Good Census Refs");
-            this.btnCensusRefs.UseVisualStyleBackColor = (true);
-            this.btnCensusRefs.Click += (this.BtnCensusRefs_Click);
+            btnCensusRefs.Location = new Point(13, 47);
+            btnCensusRefs.Margin = new Padding(8, 9, 8, 9);
+            btnCensusRefs.Name = "btnCensusRefs";
+            btnCensusRefs.Size = new Size(325, 62);
+            btnCensusRefs.TabIndex = 5;
+            btnCensusRefs.Text = "Good Census Refs";
+            btnCensusRefs.UseVisualStyleBackColor = true;
+            btnCensusRefs.Click += BtnCensusRefs_Click;
             // 
             // chkExcludeUnknownBirths
             // 
-            this.chkExcludeUnknownBirths.AutoSize = (true);
-            this.chkExcludeUnknownBirths.Location = (new global::System.Drawing.Point(680, 145));
-            this.chkExcludeUnknownBirths.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.chkExcludeUnknownBirths.Name = ("chkExcludeUnknownBirths");
-            this.chkExcludeUnknownBirths.RightToLeft = (global::System.Windows.Forms.RightToLeft.Yes);
-            this.chkExcludeUnknownBirths.Size = (new global::System.Drawing.Size(456, 34));
-            this.chkExcludeUnknownBirths.TabIndex = (31);
-            this.chkExcludeUnknownBirths.Text = ("Exclude Individuals with unknown birth dates");
-            this.chkExcludeUnknownBirths.UseVisualStyleBackColor = (true);
+            chkExcludeUnknownBirths.AutoSize = true;
+            chkExcludeUnknownBirths.Location = new Point(737, 155);
+            chkExcludeUnknownBirths.Margin = new Padding(8, 9, 8, 9);
+            chkExcludeUnknownBirths.Name = "chkExcludeUnknownBirths";
+            chkExcludeUnknownBirths.RightToLeft = RightToLeft.Yes;
+            chkExcludeUnknownBirths.Size = new Size(527, 36);
+            chkExcludeUnknownBirths.TabIndex = 31;
+            chkExcludeUnknownBirths.Text = "Exclude Individuals with unknown birth dates";
+            chkExcludeUnknownBirths.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
-            this.label1.AutoSize = (true);
-            this.label1.Location = (new global::System.Drawing.Point(1280, 90));
-            this.label1.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.label1.Name = ("label1");
-            this.label1.Size = (new global::System.Drawing.Size(95, 30));
-            this.label1.TabIndex = (30);
-            this.label1.Text = ("Surname");
+            label1.AutoSize = true;
+            label1.Location = new Point(1387, 96);
+            label1.Margin = new Padding(8, 0, 8, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(109, 32);
+            label1.TabIndex = 30;
+            label1.Text = "Surname";
             // 
             // txtCensusSurname
             // 
-            this.txtCensusSurname.Location = (new global::System.Drawing.Point(1423, 82));
-            this.txtCensusSurname.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.txtCensusSurname.Name = ("txtCensusSurname");
-            this.txtCensusSurname.Size = (new global::System.Drawing.Size(460, 35));
-            this.txtCensusSurname.TabIndex = (29);
+            txtCensusSurname.Location = new Point(1542, 87);
+            txtCensusSurname.Margin = new Padding(8, 9, 8, 9);
+            txtCensusSurname.Name = "txtCensusSurname";
+            txtCensusSurname.Size = new Size(498, 39);
+            txtCensusSurname.TabIndex = 29;
             // 
             // label2
             // 
-            this.label2.AutoSize = (true);
-            this.label2.Location = (new global::System.Drawing.Point(680, 90));
-            this.label2.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.label2.Name = ("label2");
-            this.label2.Size = (new global::System.Drawing.Size(341, 30));
-            this.label2.TabIndex = (26);
-            this.label2.Text = ("Exclude individuals over the age of ");
+            label2.AutoSize = true;
+            label2.Location = new Point(737, 96);
+            label2.Margin = new Padding(8, 0, 8, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(394, 32);
+            label2.TabIndex = 26;
+            label2.Text = "Exclude individuals over the age of ";
             // 
             // udAgeFilter
             // 
-            this.udAgeFilter.Location = (new global::System.Drawing.Point(1042, 82));
-            this.udAgeFilter.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.udAgeFilter.Maximum = (new global::System.Decimal(new global::System.Int32[] { 110, 0, 0, 0 }));
-            this.udAgeFilter.Minimum = (new global::System.Decimal(new global::System.Int32[] { 60, 0, 0, 0 }));
-            this.udAgeFilter.Name = ("udAgeFilter");
-            this.udAgeFilter.Size = (new global::System.Drawing.Size(86, 35));
-            this.udAgeFilter.TabIndex = (25);
-            this.udAgeFilter.Value = (new global::System.Decimal(new global::System.Int32[] { 90, 0, 0, 0 }));
+            udAgeFilter.Location = new Point(1129, 87);
+            udAgeFilter.Margin = new Padding(8, 9, 8, 9);
+            udAgeFilter.Maximum = new decimal(new int[] { 110, 0, 0, 0 });
+            udAgeFilter.Minimum = new decimal(new int[] { 60, 0, 0, 0 });
+            udAgeFilter.Name = "udAgeFilter";
+            udAgeFilter.Size = new Size(93, 39);
+            udAgeFilter.TabIndex = 25;
+            udAgeFilter.Value = new decimal(new int[] { 90, 0, 0, 0 });
             // 
             // cenDate
             // 
-            this.cenDate.AutoSize = (true);
-            this.cenDate.AutoSizeMode = (global::System.Windows.Forms.AutoSizeMode.GrowAndShrink);
-            this.cenDate.Country = ("Scotland");
-            this.cenDate.Location = (new global::System.Drawing.Point(25, 280));
-            this.cenDate.Margin = (new global::System.Windows.Forms.Padding(11));
-            this.cenDate.Name = ("cenDate");
-            this.cenDate.Size = (new global::System.Drawing.Size(254, 52));
-            this.cenDate.TabIndex = (28);
+            cenDate.AutoSize = true;
+            cenDate.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            cenDate.Country = "Scotland";
+            cenDate.Location = new Point(27, 299);
+            cenDate.Margin = new Padding(12);
+            cenDate.Name = "cenDate";
+            cenDate.Size = new Size(275, 54);
+            cenDate.TabIndex = 28;
             // 
             // relTypesCensus
             // 
-            this.relTypesCensus.Location = (new global::System.Drawing.Point(19, 44));
-            this.relTypesCensus.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.relTypesCensus.MarriedToDB = (true);
-            this.relTypesCensus.Name = ("relTypesCensus");
-            this.relTypesCensus.Size = (new global::System.Drawing.Size(650, 229));
-            this.relTypesCensus.TabIndex = (27);
+            relTypesCensus.Location = new Point(21, 47);
+            relTypesCensus.Margin = new Padding(13, 15, 13, 15);
+            relTypesCensus.MarriedToDB = true;
+            relTypesCensus.Name = "relTypesCensus";
+            relTypesCensus.Size = new Size(704, 244);
+            relTypesCensus.TabIndex = 27;
             // 
             // groupBox9
             // 
-            this.groupBox9.Controls.Add(this.groupBox11);
-            this.groupBox9.Controls.Add(this.groupBox1);
-            this.groupBox9.Controls.Add(this.groupBox5);
-            this.groupBox9.Controls.Add(this.groupBox6);
-            this.groupBox9.Location = (new global::System.Drawing.Point(16, 739));
-            this.groupBox9.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox9.Name = ("groupBox9");
-            this.groupBox9.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox9.Size = (new global::System.Drawing.Size(1927, 185));
-            this.groupBox9.TabIndex = (32);
-            this.groupBox9.TabStop = (false);
-            this.groupBox9.Text = ("Census Reports that don't use filters above");
+            groupBox9.Controls.Add(groupBox11);
+            groupBox9.Controls.Add(groupBox1);
+            groupBox9.Controls.Add(groupBox5);
+            groupBox9.Controls.Add(groupBox6);
+            groupBox9.Location = new Point(17, 788);
+            groupBox9.Margin = new Padding(8, 9, 8, 9);
+            groupBox9.Name = "groupBox9";
+            groupBox9.Padding = new Padding(8, 9, 8, 9);
+            groupBox9.Size = new Size(2088, 197);
+            groupBox9.TabIndex = 32;
+            groupBox9.TabStop = false;
+            groupBox9.Text = "Census Reports that don't use filters above";
             // 
             // groupBox11
             // 
-            this.groupBox11.Controls.Add(this.BtnAutoCreatedCensusFacts);
-            this.groupBox11.Controls.Add(this.BtnProblemCensusFacts);
-            this.groupBox11.Location = (new global::System.Drawing.Point(1274, 44));
-            this.groupBox11.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox11.Name = ("groupBox11");
-            this.groupBox11.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox11.Size = (new global::System.Drawing.Size(640, 136));
-            this.groupBox11.TabIndex = (33);
-            this.groupBox11.TabStop = (false);
-            this.groupBox11.Text = ("Census Facts");
+            groupBox11.Controls.Add(BtnAutoCreatedCensusFacts);
+            groupBox11.Controls.Add(BtnProblemCensusFacts);
+            groupBox11.Location = new Point(1380, 47);
+            groupBox11.Margin = new Padding(8, 9, 8, 9);
+            groupBox11.Name = "groupBox11";
+            groupBox11.Padding = new Padding(8, 9, 8, 9);
+            groupBox11.Size = new Size(693, 145);
+            groupBox11.TabIndex = 33;
+            groupBox11.TabStop = false;
+            groupBox11.Text = "Census Facts";
             // 
             // BtnAutoCreatedCensusFacts
             // 
-            this.BtnAutoCreatedCensusFacts.Location = (new global::System.Drawing.Point(328, 49));
-            this.BtnAutoCreatedCensusFacts.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.BtnAutoCreatedCensusFacts.Name = ("BtnAutoCreatedCensusFacts");
-            this.BtnAutoCreatedCensusFacts.Size = (new global::System.Drawing.Size(300, 52));
-            this.BtnAutoCreatedCensusFacts.TabIndex = (39);
-            this.BtnAutoCreatedCensusFacts.Text = ("Auto Created Census Facts");
-            this.BtnAutoCreatedCensusFacts.UseVisualStyleBackColor = (true);
-            this.BtnAutoCreatedCensusFacts.Click += (this.BtnCensusAutoCreatedFacts_Click);
+            BtnAutoCreatedCensusFacts.Location = new Point(355, 52);
+            BtnAutoCreatedCensusFacts.Margin = new Padding(8, 9, 8, 9);
+            BtnAutoCreatedCensusFacts.Name = "BtnAutoCreatedCensusFacts";
+            BtnAutoCreatedCensusFacts.Size = new Size(325, 55);
+            BtnAutoCreatedCensusFacts.TabIndex = 39;
+            BtnAutoCreatedCensusFacts.Text = "Auto Created Census Facts";
+            BtnAutoCreatedCensusFacts.UseVisualStyleBackColor = true;
+            BtnAutoCreatedCensusFacts.Click += BtnCensusAutoCreatedFacts_Click;
             // 
             // BtnProblemCensusFacts
             // 
-            this.BtnProblemCensusFacts.Location = (new global::System.Drawing.Point(12, 49));
-            this.BtnProblemCensusFacts.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.BtnProblemCensusFacts.Name = ("BtnProblemCensusFacts");
-            this.BtnProblemCensusFacts.Size = (new global::System.Drawing.Size(300, 52));
-            this.BtnProblemCensusFacts.TabIndex = (38);
-            this.BtnProblemCensusFacts.Text = ("Problem Census Facts");
-            this.BtnProblemCensusFacts.UseVisualStyleBackColor = (true);
-            this.BtnProblemCensusFacts.Click += (this.BtnCensusProblemFacts_Click);
+            BtnProblemCensusFacts.Location = new Point(13, 52);
+            BtnProblemCensusFacts.Margin = new Padding(8, 9, 8, 9);
+            BtnProblemCensusFacts.Name = "BtnProblemCensusFacts";
+            BtnProblemCensusFacts.Size = new Size(325, 55);
+            BtnProblemCensusFacts.TabIndex = 38;
+            BtnProblemCensusFacts.Text = "Problem Census Facts";
+            BtnProblemCensusFacts.UseVisualStyleBackColor = true;
+            BtnProblemCensusFacts.Click += BtnCensusProblemFacts_Click;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnDuplicateCensus);
-            this.groupBox1.Controls.Add(this.btnMissingCensusLocation);
-            this.groupBox1.Location = (new global::System.Drawing.Point(16, 478));
-            this.groupBox1.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox1.Name = ("groupBox1");
-            this.groupBox1.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox1.Size = (new global::System.Drawing.Size(650, 202));
-            this.groupBox1.TabIndex = (22);
-            this.groupBox1.TabStop = (false);
-            this.groupBox1.Text = ("Potential Census Fact Problems");
+            groupBox1.Controls.Add(btnDuplicateCensus);
+            groupBox1.Controls.Add(btnMissingCensusLocation);
+            groupBox1.Location = new Point(17, 510);
+            groupBox1.Margin = new Padding(8, 9, 8, 9);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new Padding(8, 9, 8, 9);
+            groupBox1.Size = new Size(704, 215);
+            groupBox1.TabIndex = 22;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Potential Census Fact Problems";
             // 
             // btnDuplicateCensus
             // 
-            this.btnDuplicateCensus.Location = (new global::System.Drawing.Point(331, 44));
-            this.btnDuplicateCensus.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnDuplicateCensus.Name = ("btnDuplicateCensus");
-            this.btnDuplicateCensus.Size = (new global::System.Drawing.Size(300, 58));
-            this.btnDuplicateCensus.TabIndex = (6);
-            this.btnDuplicateCensus.Text = ("Duplicate Census Facts");
-            this.btnDuplicateCensus.UseVisualStyleBackColor = (true);
-            this.btnDuplicateCensus.Click += (this.BtnDuplicateCensus_Click);
+            btnDuplicateCensus.Location = new Point(359, 47);
+            btnDuplicateCensus.Margin = new Padding(8, 9, 8, 9);
+            btnDuplicateCensus.Name = "btnDuplicateCensus";
+            btnDuplicateCensus.Size = new Size(325, 62);
+            btnDuplicateCensus.TabIndex = 6;
+            btnDuplicateCensus.Text = "Duplicate Census Facts";
+            btnDuplicateCensus.UseVisualStyleBackColor = true;
+            btnDuplicateCensus.Click += BtnDuplicateCensus_Click;
             // 
             // btnMissingCensusLocation
             // 
-            this.btnMissingCensusLocation.Location = (new global::System.Drawing.Point(19, 44));
-            this.btnMissingCensusLocation.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnMissingCensusLocation.Name = ("btnMissingCensusLocation");
-            this.btnMissingCensusLocation.Size = (new global::System.Drawing.Size(300, 58));
-            this.btnMissingCensusLocation.TabIndex = (5);
-            this.btnMissingCensusLocation.Text = ("Missing Census Locations");
-            this.btnMissingCensusLocation.UseVisualStyleBackColor = (true);
-            this.btnMissingCensusLocation.Click += (this.BtnMissingCensusLocation_Click);
+            btnMissingCensusLocation.Location = new Point(21, 47);
+            btnMissingCensusLocation.Margin = new Padding(8, 9, 8, 9);
+            btnMissingCensusLocation.Name = "btnMissingCensusLocation";
+            btnMissingCensusLocation.Size = new Size(325, 62);
+            btnMissingCensusLocation.TabIndex = 5;
+            btnMissingCensusLocation.Text = "Missing Census Locations";
+            btnMissingCensusLocation.UseVisualStyleBackColor = true;
+            btnMissingCensusLocation.Click += BtnMissingCensusLocation_Click;
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.btnMismatchedChildrenStatus);
-            this.groupBox5.Controls.Add(this.btnNoChildrenStatus);
-            this.groupBox5.Location = (new global::System.Drawing.Point(12, 44));
-            this.groupBox5.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox5.Name = ("groupBox5");
-            this.groupBox5.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox5.Size = (new global::System.Drawing.Size(655, 136));
-            this.groupBox5.TabIndex = (32);
-            this.groupBox5.TabStop = (false);
-            this.groupBox5.Text = ("1911 UK Census");
+            groupBox5.Controls.Add(btnMismatchedChildrenStatus);
+            groupBox5.Controls.Add(btnNoChildrenStatus);
+            groupBox5.Location = new Point(13, 47);
+            groupBox5.Margin = new Padding(8, 9, 8, 9);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Padding = new Padding(8, 9, 8, 9);
+            groupBox5.Size = new Size(710, 145);
+            groupBox5.TabIndex = 32;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "1911 UK Census";
             // 
             // btnMismatchedChildrenStatus
             // 
-            this.btnMismatchedChildrenStatus.Location = (new global::System.Drawing.Point(331, 44));
-            this.btnMismatchedChildrenStatus.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnMismatchedChildrenStatus.Name = ("btnMismatchedChildrenStatus");
-            this.btnMismatchedChildrenStatus.Size = (new global::System.Drawing.Size(308, 58));
-            this.btnMismatchedChildrenStatus.TabIndex = (7);
-            this.btnMismatchedChildrenStatus.Text = ("Mismatched Children Status");
-            this.btnMismatchedChildrenStatus.UseVisualStyleBackColor = (true);
-            this.btnMismatchedChildrenStatus.Click += (this.BtnMismatchedChildrenStatus_Click);
+            btnMismatchedChildrenStatus.Location = new Point(359, 47);
+            btnMismatchedChildrenStatus.Margin = new Padding(8, 9, 8, 9);
+            btnMismatchedChildrenStatus.Name = "btnMismatchedChildrenStatus";
+            btnMismatchedChildrenStatus.Size = new Size(334, 62);
+            btnMismatchedChildrenStatus.TabIndex = 7;
+            btnMismatchedChildrenStatus.Text = "Mismatched Children Status";
+            btnMismatchedChildrenStatus.UseVisualStyleBackColor = true;
+            btnMismatchedChildrenStatus.Click += BtnMismatchedChildrenStatus_Click;
             // 
             // btnNoChildrenStatus
             // 
-            this.btnNoChildrenStatus.Location = (new global::System.Drawing.Point(19, 44));
-            this.btnNoChildrenStatus.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnNoChildrenStatus.Name = ("btnNoChildrenStatus");
-            this.btnNoChildrenStatus.Size = (new global::System.Drawing.Size(300, 58));
-            this.btnNoChildrenStatus.TabIndex = (6);
-            this.btnNoChildrenStatus.Text = ("Missing Children Status");
-            this.btnNoChildrenStatus.UseVisualStyleBackColor = (true);
-            this.btnNoChildrenStatus.Click += (this.BtnNoChildrenStatus_Click);
+            btnNoChildrenStatus.Location = new Point(21, 47);
+            btnNoChildrenStatus.Margin = new Padding(8, 9, 8, 9);
+            btnNoChildrenStatus.Name = "btnNoChildrenStatus";
+            btnNoChildrenStatus.Size = new Size(325, 62);
+            btnNoChildrenStatus.TabIndex = 6;
+            btnNoChildrenStatus.Text = "Missing Children Status";
+            btnNoChildrenStatus.UseVisualStyleBackColor = true;
+            btnNoChildrenStatus.Click += BtnNoChildrenStatus_Click;
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.btnReportUnrecognised);
-            this.groupBox6.Location = (new global::System.Drawing.Point(727, 44));
-            this.groupBox6.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox6.Name = ("groupBox6");
-            this.groupBox6.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.groupBox6.Size = (new global::System.Drawing.Size(488, 136));
-            this.groupBox6.TabIndex = (31);
-            this.groupBox6.TabStop = (false);
-            this.groupBox6.Text = ("Export Missing/Unrecognised data to File");
+            groupBox6.Controls.Add(btnReportUnrecognised);
+            groupBox6.Location = new Point(788, 47);
+            groupBox6.Margin = new Padding(8, 9, 8, 9);
+            groupBox6.Name = "groupBox6";
+            groupBox6.Padding = new Padding(8, 9, 8, 9);
+            groupBox6.Size = new Size(529, 145);
+            groupBox6.TabIndex = 31;
+            groupBox6.TabStop = false;
+            groupBox6.Text = "Export Missing/Unrecognised data to File";
             // 
             // btnReportUnrecognised
             // 
-            this.btnReportUnrecognised.Anchor = (global::System.Windows.Forms.AnchorStyles.Left);
-            this.btnReportUnrecognised.Location = (new global::System.Drawing.Point(12, 44));
-            this.btnReportUnrecognised.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnReportUnrecognised.Name = ("btnReportUnrecognised");
-            this.btnReportUnrecognised.Size = (new global::System.Drawing.Size(448, 58));
-            this.btnReportUnrecognised.TabIndex = (30);
-            this.btnReportUnrecognised.Text = ("Export Unrecognised/Missing Census Refs");
-            this.btnReportUnrecognised.UseVisualStyleBackColor = (true);
-            this.btnReportUnrecognised.Click += (this.BtnReportUnrecognised_Click);
+            btnReportUnrecognised.Anchor = AnchorStyles.Left;
+            btnReportUnrecognised.Location = new Point(13, 47);
+            btnReportUnrecognised.Margin = new Padding(8, 9, 8, 9);
+            btnReportUnrecognised.Name = "btnReportUnrecognised";
+            btnReportUnrecognised.Size = new Size(485, 62);
+            btnReportUnrecognised.TabIndex = 30;
+            btnReportUnrecognised.Text = "Export Unrecognised/Missing Census Refs";
+            btnReportUnrecognised.UseVisualStyleBackColor = true;
+            btnReportUnrecognised.Click += BtnReportUnrecognised_Click;
             // 
             // tabLocations
             // 
-            this.tabLocations.Controls.Add(this.btnOldOSMap);
-            this.tabLocations.Controls.Add(this.btnModernOSMap);
-            this.tabLocations.Controls.Add(this.btnShowMap);
-            this.tabLocations.Controls.Add(this.tabCtrlLocations);
-            this.tabLocations.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabLocations.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabLocations.Name = ("tabLocations");
-            this.tabLocations.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabLocations.Size = (new global::System.Drawing.Size(2128, 1043));
-            this.tabLocations.TabIndex = (4);
-            this.tabLocations.Text = ("Locations");
-            this.tabLocations.UseVisualStyleBackColor = (true);
+            tabLocations.Controls.Add(btnOldOSMap);
+            tabLocations.Controls.Add(btnModernOSMap);
+            tabLocations.Controls.Add(btnShowMap);
+            tabLocations.Controls.Add(tabCtrlLocations);
+            tabLocations.Location = new Point(8, 46);
+            tabLocations.Margin = new Padding(8, 9, 8, 9);
+            tabLocations.Name = "tabLocations";
+            tabLocations.Padding = new Padding(8, 9, 8, 9);
+            tabLocations.Size = new Size(2298, 1074);
+            tabLocations.TabIndex = 4;
+            tabLocations.Text = "Locations";
+            tabLocations.UseVisualStyleBackColor = true;
             // 
             // btnOldOSMap
             // 
-            this.btnOldOSMap.Anchor = ((global::System.Windows.Forms.AnchorStyles)((global::System.Windows.Forms.AnchorStyles.Top) | (global::System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOldOSMap.Location = (new global::System.Drawing.Point(1700, 5));
-            this.btnOldOSMap.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnOldOSMap.Name = ("btnOldOSMap");
-            this.btnOldOSMap.Size = (new global::System.Drawing.Size(208, 46));
-            this.btnOldOSMap.TabIndex = (3);
-            this.btnOldOSMap.Text = ("Show Old OS Map");
-            this.btnOldOSMap.UseVisualStyleBackColor = (true);
-            this.btnOldOSMap.Click += (this.BtnOSMap_Click);
+            btnOldOSMap.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnOldOSMap.Location = new Point(1842, 5);
+            btnOldOSMap.Margin = new Padding(8, 9, 8, 9);
+            btnOldOSMap.Name = "btnOldOSMap";
+            btnOldOSMap.Size = new Size(225, 49);
+            btnOldOSMap.TabIndex = 3;
+            btnOldOSMap.Text = "Show Old OS Map";
+            btnOldOSMap.UseVisualStyleBackColor = true;
+            btnOldOSMap.Click += BtnOSMap_Click;
             // 
             // btnModernOSMap
             // 
-            this.btnModernOSMap.Anchor = ((global::System.Windows.Forms.AnchorStyles)((global::System.Windows.Forms.AnchorStyles.Top) | (global::System.Windows.Forms.AnchorStyles.Right)));
-            this.btnModernOSMap.Location = (new global::System.Drawing.Point(1450, 5));
-            this.btnModernOSMap.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnModernOSMap.Name = ("btnModernOSMap");
-            this.btnModernOSMap.Size = (new global::System.Drawing.Size(250, 46));
-            this.btnModernOSMap.TabIndex = (5);
-            this.btnModernOSMap.Text = ("Show Modern OS Map");
-            this.btnModernOSMap.UseVisualStyleBackColor = (true);
-            this.btnModernOSMap.Visible = (false);
-            this.btnModernOSMap.Click += (this.BtnOSMap_Click);
+            btnModernOSMap.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnModernOSMap.Location = new Point(1571, 5);
+            btnModernOSMap.Margin = new Padding(8, 9, 8, 9);
+            btnModernOSMap.Name = "btnModernOSMap";
+            btnModernOSMap.Size = new Size(271, 49);
+            btnModernOSMap.TabIndex = 5;
+            btnModernOSMap.Text = "Show Modern OS Map";
+            btnModernOSMap.UseVisualStyleBackColor = true;
+            btnModernOSMap.Visible = false;
+            btnModernOSMap.Click += BtnOSMap_Click;
             // 
             // btnShowMap
             // 
-            this.btnShowMap.Anchor = ((global::System.Windows.Forms.AnchorStyles)((global::System.Windows.Forms.AnchorStyles.Top) | (global::System.Windows.Forms.AnchorStyles.Right)));
-            this.btnShowMap.Location = (new global::System.Drawing.Point(1910, 5));
-            this.btnShowMap.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnShowMap.Name = ("btnShowMap");
-            this.btnShowMap.Size = (new global::System.Drawing.Size(208, 46));
-            this.btnShowMap.TabIndex = (2);
-            this.btnShowMap.Text = ("Show Google Map");
-            this.btnShowMap.UseVisualStyleBackColor = (true);
-            this.btnShowMap.Click += (this.BtnShowMap_Click);
+            btnShowMap.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnShowMap.Location = new Point(2062, 5);
+            btnShowMap.Margin = new Padding(8, 9, 8, 9);
+            btnShowMap.Name = "btnShowMap";
+            btnShowMap.Size = new Size(225, 49);
+            btnShowMap.TabIndex = 2;
+            btnShowMap.Text = "Show Google Map";
+            btnShowMap.UseVisualStyleBackColor = true;
+            btnShowMap.Click += BtnShowMap_Click;
             // 
             // tabCtrlLocations
             // 
-            this.tabCtrlLocations.Controls.Add(this.tabTreeView);
-            this.tabCtrlLocations.Controls.Add(this.tabCountries);
-            this.tabCtrlLocations.Controls.Add(this.tabRegions);
-            this.tabCtrlLocations.Controls.Add(this.tabSubRegions);
-            this.tabCtrlLocations.Controls.Add(this.tabAddresses);
-            this.tabCtrlLocations.Controls.Add(this.tabPlaces);
-            this.tabCtrlLocations.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.tabCtrlLocations.Location = (new global::System.Drawing.Point(7, 8));
-            this.tabCtrlLocations.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabCtrlLocations.Name = ("tabCtrlLocations");
-            this.tabCtrlLocations.SelectedIndex = (0);
-            this.tabCtrlLocations.Size = (new global::System.Drawing.Size(2114, 1027));
-            this.tabCtrlLocations.TabIndex = (0);
-            this.tabCtrlLocations.SelectedIndexChanged += (this.TabCtrlLocations_SelectedIndexChanged);
-            this.tabCtrlLocations.Selecting += (this.TabCtrlLocations_Selecting);
+            tabCtrlLocations.Controls.Add(tabTreeView);
+            tabCtrlLocations.Controls.Add(tabCountries);
+            tabCtrlLocations.Controls.Add(tabRegions);
+            tabCtrlLocations.Controls.Add(tabSubRegions);
+            tabCtrlLocations.Controls.Add(tabAddresses);
+            tabCtrlLocations.Controls.Add(tabPlaces);
+            tabCtrlLocations.Dock = DockStyle.Fill;
+            tabCtrlLocations.Location = new Point(8, 9);
+            tabCtrlLocations.Margin = new Padding(8, 9, 8, 9);
+            tabCtrlLocations.Name = "tabCtrlLocations";
+            tabCtrlLocations.SelectedIndex = 0;
+            tabCtrlLocations.Size = new Size(2282, 1056);
+            tabCtrlLocations.TabIndex = 0;
+            tabCtrlLocations.SelectedIndexChanged += TabCtrlLocations_SelectedIndexChanged;
+            tabCtrlLocations.Selecting += TabCtrlLocations_Selecting;
             // 
             // tabTreeView
             // 
-            this.tabTreeView.Controls.Add(this.treeViewLocations);
-            this.tabTreeView.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabTreeView.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabTreeView.Name = ("tabTreeView");
-            this.tabTreeView.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabTreeView.Size = (new global::System.Drawing.Size(2106, 984));
-            this.tabTreeView.TabIndex = (5);
-            this.tabTreeView.Text = ("Tree View");
-            this.tabTreeView.UseVisualStyleBackColor = (true);
+            tabTreeView.Controls.Add(treeViewLocations);
+            tabTreeView.Location = new Point(8, 46);
+            tabTreeView.Margin = new Padding(8, 9, 8, 9);
+            tabTreeView.Name = "tabTreeView";
+            tabTreeView.Padding = new Padding(8, 9, 8, 9);
+            tabTreeView.Size = new Size(2266, 1002);
+            tabTreeView.TabIndex = 5;
+            tabTreeView.Text = "Tree View";
+            tabTreeView.UseVisualStyleBackColor = true;
             // 
             // treeViewLocations
             // 
-            this.treeViewLocations.CausesValidation = (false);
-            this.treeViewLocations.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.treeViewLocations.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 8.25F, global::System.Drawing.FontStyle.Bold, global::System.Drawing.GraphicsUnit.Point));
-            this.treeViewLocations.ImageIndex = (0);
-            this.treeViewLocations.ImageList = (this.imageList);
-            this.treeViewLocations.Location = (new global::System.Drawing.Point(7, 8));
-            this.treeViewLocations.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.treeViewLocations.Name = ("treeViewLocations");
-            this.treeViewLocations.SelectedImageIndex = (0);
-            this.treeViewLocations.ShowNodeToolTips = (true);
-            this.treeViewLocations.Size = (new global::System.Drawing.Size(2092, 968));
-            this.treeViewLocations.TabIndex = (0);
-            this.treeViewLocations.BeforeCollapse += (this.TreeViewLocations_BeforeCollapse);
-            this.treeViewLocations.BeforeExpand += (this.TreeViewLocations_BeforeExpand);
-            this.treeViewLocations.AfterSelect += (this.TreeViewLocations_AfterSelect);
-            this.treeViewLocations.NodeMouseClick += (this.TreeViewLocations_NodeMouseClick);
-            this.treeViewLocations.NodeMouseDoubleClick += (this.TreeViewLocations_NodeMouseDoubleClick);
-            this.treeViewLocations.MouseDown += (this.TreeViewLocations_MouseDown);
+            treeViewLocations.CausesValidation = false;
+            treeViewLocations.Dock = DockStyle.Fill;
+            treeViewLocations.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
+            treeViewLocations.ImageIndex = 0;
+            treeViewLocations.ImageList = imageList;
+            treeViewLocations.Location = new Point(8, 9);
+            treeViewLocations.Margin = new Padding(8, 9, 8, 9);
+            treeViewLocations.Name = "treeViewLocations";
+            treeViewLocations.SelectedImageIndex = 0;
+            treeViewLocations.ShowNodeToolTips = true;
+            treeViewLocations.Size = new Size(2250, 984);
+            treeViewLocations.TabIndex = 0;
+            treeViewLocations.BeforeCollapse += TreeViewLocations_BeforeCollapse;
+            treeViewLocations.BeforeExpand += TreeViewLocations_BeforeExpand;
+            treeViewLocations.AfterSelect += TreeViewLocations_AfterSelect;
+            treeViewLocations.NodeMouseClick += TreeViewLocations_NodeMouseClick;
+            treeViewLocations.NodeMouseDoubleClick += TreeViewLocations_NodeMouseDoubleClick;
+            treeViewLocations.MouseDown += TreeViewLocations_MouseDown;
             // 
             // imageList
             // 
-            this.imageList.ColorDepth = (global::System.Windows.Forms.ColorDepth.Depth8Bit);
-            this.imageList.ImageStream = ((global::System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
-            this.imageList.TransparentColor = (global::System.Drawing.Color.Transparent);
-            this.imageList.Images.SetKeyName(0, "QuestionMark.png");
-            this.imageList.Images.SetKeyName(1, "GoogleMatch.png");
-            this.imageList.Images.SetKeyName(2, "GooglePartial.png");
-            this.imageList.Images.SetKeyName(3, "Complete_OK.png");
-            this.imageList.Images.SetKeyName(4, "CriticalError.png");
-            this.imageList.Images.SetKeyName(5, "Flagged.png");
-            this.imageList.Images.SetKeyName(6, "OutOfBounds.png");
-            this.imageList.Images.SetKeyName(7, "Warning.png");
+            imageList.ColorDepth = ColorDepth.Depth8Bit;
+            imageList.ImageStream = (ImageListStreamer)resources.GetObject("imageList.ImageStream");
+            imageList.TransparentColor = Color.Transparent;
+            imageList.Images.SetKeyName(0, "QuestionMark.png");
+            imageList.Images.SetKeyName(1, "GoogleMatch.png");
+            imageList.Images.SetKeyName(2, "GooglePartial.png");
+            imageList.Images.SetKeyName(3, "Complete_OK.png");
+            imageList.Images.SetKeyName(4, "CriticalError.png");
+            imageList.Images.SetKeyName(5, "Flagged.png");
+            imageList.Images.SetKeyName(6, "OutOfBounds.png");
+            imageList.Images.SetKeyName(7, "Warning.png");
             // 
             // tabCountries
             // 
-            this.tabCountries.Controls.Add(this.dgCountries);
-            this.tabCountries.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabCountries.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabCountries.Name = ("tabCountries");
-            this.tabCountries.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabCountries.Size = (new global::System.Drawing.Size(2106, 984));
-            this.tabCountries.TabIndex = (0);
-            this.tabCountries.Text = ("Countries");
-            this.tabCountries.ToolTipText = ("Double click on Country name to see list of individuals with that Country.");
-            this.tabCountries.UseVisualStyleBackColor = (true);
+            tabCountries.Controls.Add(dgCountries);
+            tabCountries.Location = new Point(8, 46);
+            tabCountries.Margin = new Padding(8, 9, 8, 9);
+            tabCountries.Name = "tabCountries";
+            tabCountries.Padding = new Padding(8, 9, 8, 9);
+            tabCountries.Size = new Size(2266, 1032);
+            tabCountries.TabIndex = 0;
+            tabCountries.Text = "Countries";
+            tabCountries.ToolTipText = "Double click on Country name to see list of individuals with that Country.";
+            tabCountries.UseVisualStyleBackColor = true;
             // 
             // tabRegions
             // 
-            this.tabRegions.Controls.Add(this.dgRegions);
-            this.tabRegions.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabRegions.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabRegions.Name = ("tabRegions");
-            this.tabRegions.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabRegions.Size = (new global::System.Drawing.Size(2106, 984));
-            this.tabRegions.TabIndex = (1);
-            this.tabRegions.Text = ("Regions");
-            this.tabRegions.ToolTipText = ("Double click on Region name to see list of individuals with that Region.");
-            this.tabRegions.UseVisualStyleBackColor = (true);
+            tabRegions.Controls.Add(dgRegions);
+            tabRegions.Location = new Point(8, 46);
+            tabRegions.Margin = new Padding(8, 9, 8, 9);
+            tabRegions.Name = "tabRegions";
+            tabRegions.Padding = new Padding(8, 9, 8, 9);
+            tabRegions.Size = new Size(2266, 1032);
+            tabRegions.TabIndex = 1;
+            tabRegions.Text = "Regions";
+            tabRegions.ToolTipText = "Double click on Region name to see list of individuals with that Region.";
+            tabRegions.UseVisualStyleBackColor = true;
             // 
             // tabSubRegions
             // 
-            this.tabSubRegions.Controls.Add(this.dgSubRegions);
-            this.tabSubRegions.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabSubRegions.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabSubRegions.Name = ("tabSubRegions");
-            this.tabSubRegions.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabSubRegions.Size = (new global::System.Drawing.Size(2106, 984));
-            this.tabSubRegions.TabIndex = (2);
-            this.tabSubRegions.Text = ("SubRegions");
-            this.tabSubRegions.ToolTipText = ("Double click on 'Parish' name to see list of individuals with that parish/area.");
-            this.tabSubRegions.UseVisualStyleBackColor = (true);
+            tabSubRegions.Controls.Add(dgSubRegions);
+            tabSubRegions.Location = new Point(8, 46);
+            tabSubRegions.Margin = new Padding(8, 9, 8, 9);
+            tabSubRegions.Name = "tabSubRegions";
+            tabSubRegions.Padding = new Padding(8, 9, 8, 9);
+            tabSubRegions.Size = new Size(2266, 1032);
+            tabSubRegions.TabIndex = 2;
+            tabSubRegions.Text = "SubRegions";
+            tabSubRegions.ToolTipText = "Double click on 'Parish' name to see list of individuals with that parish/area.";
+            tabSubRegions.UseVisualStyleBackColor = true;
             // 
             // dgSubRegions
             // 
-            this.dgSubRegions.AllowUserToAddRows = (false);
-            this.dgSubRegions.AllowUserToDeleteRows = (false);
-            this.dgSubRegions.AllowUserToOrderColumns = (true);
-            this.dgSubRegions.AutoSizeColumnsMode = (global::System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            this.dgSubRegions.AutoSizeRowsMode = (global::System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells);
-            this.dgSubRegions.ColumnHeadersHeightSizeMode = (global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize);
-            this.dgSubRegions.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.dgSubRegions.FilterAndSortEnabled = (true);
-            this.dgSubRegions.FilterStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgSubRegions.Location = (new global::System.Drawing.Point(7, 8));
-            this.dgSubRegions.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.dgSubRegions.MultiSelect = (false);
-            this.dgSubRegions.Name = ("dgSubRegions");
-            this.dgSubRegions.ReadOnly = (true);
-            this.dgSubRegions.RightToLeft = (global::System.Windows.Forms.RightToLeft.No);
-            this.dgSubRegions.RowHeadersVisible = (false);
-            this.dgSubRegions.RowHeadersWidth = (50);
-            this.dgSubRegions.SelectionMode = (global::System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect);
-            this.dgSubRegions.Size = (new global::System.Drawing.Size(2099, 976));
-            this.dgSubRegions.SortStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgSubRegions.TabIndex = (1);
-            this.dgSubRegions.VirtualMode = (true);
-            this.dgSubRegions.CellDoubleClick += (this.DgSubRegions_CellDoubleClick);
-            this.dgSubRegions.CellFormatting += (this.DgSubRegions_CellFormatting);
+            dgSubRegions.AllowUserToAddRows = false;
+            dgSubRegions.AllowUserToDeleteRows = false;
+            dgSubRegions.AllowUserToOrderColumns = true;
+            dgSubRegions.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgSubRegions.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dgSubRegions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgSubRegions.Dock = DockStyle.Fill;
+            dgSubRegions.FilterAndSortEnabled = true;
+            dgSubRegions.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgSubRegions.Location = new Point(8, 9);
+            dgSubRegions.Margin = new Padding(13, 15, 13, 15);
+            dgSubRegions.MultiSelect = false;
+            dgSubRegions.Name = "dgSubRegions";
+            dgSubRegions.ReadOnly = true;
+            dgSubRegions.RightToLeft = RightToLeft.No;
+            dgSubRegions.RowHeadersVisible = false;
+            dgSubRegions.RowHeadersWidth = 50;
+            dgSubRegions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgSubRegions.Size = new Size(2258, 1023);
+            dgSubRegions.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgSubRegions.TabIndex = 1;
+            dgSubRegions.VirtualMode = true;
+            dgSubRegions.CellDoubleClick += DgSubRegions_CellDoubleClick;
+            dgSubRegions.CellFormatting += DgSubRegions_CellFormatting;
             // 
             // tabAddresses
             // 
-            this.tabAddresses.Controls.Add(this.dgAddresses);
-            this.tabAddresses.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabAddresses.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabAddresses.Name = ("tabAddresses");
-            this.tabAddresses.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabAddresses.Size = (new global::System.Drawing.Size(2106, 984));
-            this.tabAddresses.TabIndex = (3);
-            this.tabAddresses.Text = ("Addresses");
-            this.tabAddresses.ToolTipText = ("Double click on Address name to see list of individuals with that Address.");
-            this.tabAddresses.UseVisualStyleBackColor = (true);
+            tabAddresses.Controls.Add(dgAddresses);
+            tabAddresses.Location = new Point(8, 46);
+            tabAddresses.Margin = new Padding(8, 9, 8, 9);
+            tabAddresses.Name = "tabAddresses";
+            tabAddresses.Padding = new Padding(8, 9, 8, 9);
+            tabAddresses.Size = new Size(2266, 1032);
+            tabAddresses.TabIndex = 3;
+            tabAddresses.Text = "Addresses";
+            tabAddresses.ToolTipText = "Double click on Address name to see list of individuals with that Address.";
+            tabAddresses.UseVisualStyleBackColor = true;
             // 
             // dgAddresses
             // 
-            this.dgAddresses.AllowUserToAddRows = (false);
-            this.dgAddresses.AllowUserToDeleteRows = (false);
-            this.dgAddresses.AllowUserToOrderColumns = (true);
-            this.dgAddresses.AutoSizeColumnsMode = (global::System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            this.dgAddresses.AutoSizeRowsMode = (global::System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells);
-            this.dgAddresses.ColumnHeadersHeightSizeMode = (global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize);
-            this.dgAddresses.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.dgAddresses.FilterAndSortEnabled = (true);
-            this.dgAddresses.FilterStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgAddresses.Location = (new global::System.Drawing.Point(7, 8));
-            this.dgAddresses.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.dgAddresses.MultiSelect = (false);
-            this.dgAddresses.Name = ("dgAddresses");
-            this.dgAddresses.ReadOnly = (true);
-            this.dgAddresses.RightToLeft = (global::System.Windows.Forms.RightToLeft.No);
-            this.dgAddresses.RowHeadersVisible = (false);
-            this.dgAddresses.RowHeadersWidth = (50);
-            this.dgAddresses.SelectionMode = (global::System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect);
-            this.dgAddresses.Size = (new global::System.Drawing.Size(2099, 976));
-            this.dgAddresses.SortStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgAddresses.TabIndex = (1);
-            this.dgAddresses.VirtualMode = (true);
-            this.dgAddresses.CellDoubleClick += (this.DgAddresses_CellDoubleClick);
-            this.dgAddresses.CellFormatting += (this.DgAddresses_CellFormatting);
+            dgAddresses.AllowUserToAddRows = false;
+            dgAddresses.AllowUserToDeleteRows = false;
+            dgAddresses.AllowUserToOrderColumns = true;
+            dgAddresses.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgAddresses.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dgAddresses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgAddresses.Dock = DockStyle.Fill;
+            dgAddresses.FilterAndSortEnabled = true;
+            dgAddresses.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgAddresses.Location = new Point(8, 9);
+            dgAddresses.Margin = new Padding(13, 15, 13, 15);
+            dgAddresses.MultiSelect = false;
+            dgAddresses.Name = "dgAddresses";
+            dgAddresses.ReadOnly = true;
+            dgAddresses.RightToLeft = RightToLeft.No;
+            dgAddresses.RowHeadersVisible = false;
+            dgAddresses.RowHeadersWidth = 50;
+            dgAddresses.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgAddresses.Size = new Size(2258, 1023);
+            dgAddresses.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgAddresses.TabIndex = 1;
+            dgAddresses.VirtualMode = true;
+            dgAddresses.CellDoubleClick += DgAddresses_CellDoubleClick;
+            dgAddresses.CellFormatting += DgAddresses_CellFormatting;
             // 
             // tabPlaces
             // 
-            this.tabPlaces.Controls.Add(this.dgPlaces);
-            this.tabPlaces.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabPlaces.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabPlaces.Name = ("tabPlaces");
-            this.tabPlaces.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabPlaces.Size = (new global::System.Drawing.Size(2106, 984));
-            this.tabPlaces.TabIndex = (4);
-            this.tabPlaces.Text = ("Places");
-            this.tabPlaces.ToolTipText = ("Double click on Address name to see list of individuals with that Place");
-            this.tabPlaces.UseVisualStyleBackColor = (true);
+            tabPlaces.Controls.Add(dgPlaces);
+            tabPlaces.Location = new Point(8, 46);
+            tabPlaces.Margin = new Padding(8, 9, 8, 9);
+            tabPlaces.Name = "tabPlaces";
+            tabPlaces.Padding = new Padding(8, 9, 8, 9);
+            tabPlaces.Size = new Size(2266, 1032);
+            tabPlaces.TabIndex = 4;
+            tabPlaces.Text = "Places";
+            tabPlaces.ToolTipText = "Double click on Address name to see list of individuals with that Place";
+            tabPlaces.UseVisualStyleBackColor = true;
             // 
             // dgPlaces
             // 
-            this.dgPlaces.AllowUserToAddRows = (false);
-            this.dgPlaces.AllowUserToDeleteRows = (false);
-            this.dgPlaces.AllowUserToOrderColumns = (true);
-            this.dgPlaces.AutoSizeColumnsMode = (global::System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            this.dgPlaces.AutoSizeRowsMode = (global::System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells);
-            this.dgPlaces.ColumnHeadersHeightSizeMode = (global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize);
-            this.dgPlaces.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.dgPlaces.FilterAndSortEnabled = (true);
-            this.dgPlaces.FilterStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgPlaces.Location = (new global::System.Drawing.Point(7, 8));
-            this.dgPlaces.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.dgPlaces.MultiSelect = (false);
-            this.dgPlaces.Name = ("dgPlaces");
-            this.dgPlaces.ReadOnly = (true);
-            this.dgPlaces.RightToLeft = (global::System.Windows.Forms.RightToLeft.No);
-            this.dgPlaces.RowHeadersVisible = (false);
-            this.dgPlaces.RowHeadersWidth = (50);
-            this.dgPlaces.SelectionMode = (global::System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect);
-            this.dgPlaces.Size = (new global::System.Drawing.Size(2099, 976));
-            this.dgPlaces.SortStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgPlaces.TabIndex = (2);
-            this.dgPlaces.VirtualMode = (true);
-            this.dgPlaces.CellDoubleClick += (this.DgPlaces_CellDoubleClick);
-            this.dgPlaces.CellFormatting += (this.DgPlaces_CellFormatting);
+            dgPlaces.AllowUserToAddRows = false;
+            dgPlaces.AllowUserToDeleteRows = false;
+            dgPlaces.AllowUserToOrderColumns = true;
+            dgPlaces.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgPlaces.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dgPlaces.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgPlaces.Dock = DockStyle.Fill;
+            dgPlaces.FilterAndSortEnabled = true;
+            dgPlaces.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgPlaces.Location = new Point(8, 9);
+            dgPlaces.Margin = new Padding(13, 15, 13, 15);
+            dgPlaces.MultiSelect = false;
+            dgPlaces.Name = "dgPlaces";
+            dgPlaces.ReadOnly = true;
+            dgPlaces.RightToLeft = RightToLeft.No;
+            dgPlaces.RowHeadersVisible = false;
+            dgPlaces.RowHeadersWidth = 50;
+            dgPlaces.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgPlaces.Size = new Size(2258, 1023);
+            dgPlaces.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgPlaces.TabIndex = 2;
+            dgPlaces.VirtualMode = true;
+            dgPlaces.CellDoubleClick += DgPlaces_CellDoubleClick;
+            dgPlaces.CellFormatting += DgPlaces_CellFormatting;
             // 
             // tabDisplayProgress
             // 
-            this.tabDisplayProgress.Controls.Add(this.splitGedcom);
-            this.tabDisplayProgress.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabDisplayProgress.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabDisplayProgress.Name = ("tabDisplayProgress");
-            this.tabDisplayProgress.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabDisplayProgress.Size = (new global::System.Drawing.Size(2128, 1043));
-            this.tabDisplayProgress.TabIndex = (1);
-            this.tabDisplayProgress.Text = ("Gedcom Stats");
-            this.tabDisplayProgress.UseVisualStyleBackColor = (true);
+            tabDisplayProgress.Controls.Add(splitGedcom);
+            tabDisplayProgress.Location = new Point(8, 46);
+            tabDisplayProgress.Margin = new Padding(8, 9, 8, 9);
+            tabDisplayProgress.Name = "tabDisplayProgress";
+            tabDisplayProgress.Padding = new Padding(8, 9, 8, 9);
+            tabDisplayProgress.Size = new Size(2298, 1084);
+            tabDisplayProgress.TabIndex = 1;
+            tabDisplayProgress.Text = "Gedcom Stats";
+            tabDisplayProgress.UseVisualStyleBackColor = true;
             // 
             // splitGedcom
             // 
-            this.splitGedcom.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.splitGedcom.FixedPanel = (global::System.Windows.Forms.FixedPanel.Panel1);
-            this.splitGedcom.Location = (new global::System.Drawing.Point(7, 8));
-            this.splitGedcom.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.splitGedcom.Name = ("splitGedcom");
-            this.splitGedcom.Orientation = (global::System.Windows.Forms.Orientation.Horizontal);
+            splitGedcom.Dock = DockStyle.Fill;
+            splitGedcom.FixedPanel = FixedPanel.Panel1;
+            splitGedcom.Location = new Point(8, 9);
+            splitGedcom.Margin = new Padding(8, 9, 8, 9);
+            splitGedcom.Name = "splitGedcom";
+            splitGedcom.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitGedcom.Panel1
             // 
-            this.splitGedcom.Panel1.Controls.Add(this.panel2);
-            this.splitGedcom.Panel1MinSize = (110);
+            splitGedcom.Panel1.Controls.Add(panel2);
+            splitGedcom.Panel1MinSize = 110;
             // 
             // splitGedcom.Panel2
             // 
-            this.splitGedcom.Panel2.Controls.Add(this.rtbOutput);
-            this.splitGedcom.Size = (new global::System.Drawing.Size(2114, 1027));
-            this.splitGedcom.SplitterDistance = (110);
-            this.splitGedcom.SplitterWidth = (9);
-            this.splitGedcom.TabIndex = (15);
+            splitGedcom.Panel2.Controls.Add(rtbOutput);
+            splitGedcom.Size = new Size(2282, 1066);
+            splitGedcom.SplitterDistance = 110;
+            splitGedcom.SplitterWidth = 10;
+            splitGedcom.TabIndex = 15;
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Controls.Add(this.LbProgramName);
-            this.panel2.Controls.Add(this.labRelationships);
-            this.panel2.Controls.Add(this.pbRelationships);
-            this.panel2.Controls.Add(this.labFamilies);
-            this.panel2.Controls.Add(this.pbFamilies);
-            this.panel2.Controls.Add(this.labIndividuals);
-            this.panel2.Controls.Add(this.pbIndividuals);
-            this.panel2.Controls.Add(this.labSources);
-            this.panel2.Controls.Add(this.pbSources);
-            this.panel2.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.panel2.Location = (new global::System.Drawing.Point(0, 0));
-            this.panel2.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.panel2.Name = ("panel2");
-            this.panel2.Size = (new global::System.Drawing.Size(2114, 110));
-            this.panel2.TabIndex = (14);
+            panel2.Controls.Add(pictureBox1);
+            panel2.Controls.Add(LbProgramName);
+            panel2.Controls.Add(labRelationships);
+            panel2.Controls.Add(pbRelationships);
+            panel2.Controls.Add(labFamilies);
+            panel2.Controls.Add(pbFamilies);
+            panel2.Controls.Add(labIndividuals);
+            panel2.Controls.Add(pbIndividuals);
+            panel2.Controls.Add(labSources);
+            panel2.Controls.Add(pbSources);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(0, 0);
+            panel2.Margin = new Padding(8, 9, 8, 9);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(2282, 110);
+            panel2.TabIndex = 14;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = (global::FTAnalyzer.Properties.Resources._256);
-            this.pictureBox1.Location = (new global::System.Drawing.Point(1886, 8));
-            this.pictureBox1.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.pictureBox1.Name = ("pictureBox1");
-            this.pictureBox1.Size = (new global::System.Drawing.Size(200, 231));
-            this.pictureBox1.SizeMode = (global::System.Windows.Forms.PictureBoxSizeMode.Zoom);
-            this.pictureBox1.TabIndex = (19);
-            this.pictureBox1.TabStop = (false);
+            pictureBox1.Image = Properties.Resources._256;
+            pictureBox1.Location = new Point(2043, 9);
+            pictureBox1.Margin = new Padding(8, 9, 8, 9);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(217, 246);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 19;
+            pictureBox1.TabStop = false;
             // 
             // LbProgramName
             // 
-            this.LbProgramName.AutoSize = (true);
-            this.LbProgramName.Font = (new global::System.Drawing.Font("Kunstler Script", 52F, global::System.Drawing.FontStyle.Bold, global::System.Drawing.GraphicsUnit.Point));
-            this.LbProgramName.Location = (new global::System.Drawing.Point(830, 30));
-            this.LbProgramName.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.LbProgramName.Name = ("LbProgramName");
-            this.LbProgramName.Size = (new global::System.Drawing.Size(889, 132));
-            this.LbProgramName.TabIndex = (17);
-            this.LbProgramName.Text = ("Family Tree Analyzer");
+            LbProgramName.AutoSize = true;
+            LbProgramName.Font = new Font("Kunstler Script", 52F, FontStyle.Bold);
+            LbProgramName.Location = new Point(899, 32);
+            LbProgramName.Margin = new Padding(8, 0, 8, 0);
+            LbProgramName.Name = "LbProgramName";
+            LbProgramName.Size = new Size(1005, 150);
+            LbProgramName.TabIndex = 17;
+            LbProgramName.Text = "Family Tree Analyzer";
             // 
             // labRelationships
             // 
-            this.labRelationships.AutoSize = (true);
-            this.labRelationships.Location = (new global::System.Drawing.Point(7, 182));
-            this.labRelationships.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.labRelationships.Name = ("labRelationships");
-            this.labRelationships.Size = (new global::System.Drawing.Size(252, 30));
-            this.labRelationships.TabIndex = (16);
-            this.labRelationships.Text = ("Relationships && Locations");
+            labRelationships.AutoSize = true;
+            labRelationships.Location = new Point(8, 194);
+            labRelationships.Margin = new Padding(8, 0, 8, 0);
+            labRelationships.Name = "labRelationships";
+            labRelationships.Size = new Size(287, 32);
+            labRelationships.TabIndex = 16;
+            labRelationships.Text = "Relationships && Locations";
             // 
             // pbRelationships
             // 
-            this.pbRelationships.Location = (new global::System.Drawing.Point(268, 175));
-            this.pbRelationships.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.pbRelationships.Name = ("pbRelationships");
-            this.pbRelationships.Size = (new global::System.Drawing.Size(550, 38));
-            this.pbRelationships.TabIndex = (15);
+            pbRelationships.Location = new Point(290, 187);
+            pbRelationships.Margin = new Padding(8, 9, 8, 9);
+            pbRelationships.Name = "pbRelationships";
+            pbRelationships.Size = new Size(596, 41);
+            pbRelationships.TabIndex = 15;
             // 
             // labFamilies
             // 
-            this.labFamilies.AutoSize = (true);
-            this.labFamilies.Location = (new global::System.Drawing.Point(7, 131));
-            this.labFamilies.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.labFamilies.Name = ("labFamilies");
-            this.labFamilies.Size = (new global::System.Drawing.Size(166, 30));
-            this.labFamilies.TabIndex = (14);
-            this.labFamilies.Text = ("Loading Families");
+            labFamilies.AutoSize = true;
+            labFamilies.Location = new Point(8, 140);
+            labFamilies.Margin = new Padding(8, 0, 8, 0);
+            labFamilies.Name = "labFamilies";
+            labFamilies.Size = new Size(191, 32);
+            labFamilies.TabIndex = 14;
+            labFamilies.Text = "Loading Families";
             // 
             // pbFamilies
             // 
-            this.pbFamilies.Location = (new global::System.Drawing.Point(268, 125));
-            this.pbFamilies.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.pbFamilies.Name = ("pbFamilies");
-            this.pbFamilies.Size = (new global::System.Drawing.Size(550, 38));
-            this.pbFamilies.TabIndex = (13);
+            pbFamilies.Location = new Point(290, 133);
+            pbFamilies.Margin = new Padding(8, 9, 8, 9);
+            pbFamilies.Name = "pbFamilies";
+            pbFamilies.Size = new Size(596, 41);
+            pbFamilies.TabIndex = 13;
             // 
             // labIndividuals
             // 
-            this.labIndividuals.AutoSize = (true);
-            this.labIndividuals.Location = (new global::System.Drawing.Point(7, 81));
-            this.labIndividuals.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.labIndividuals.Name = ("labIndividuals");
-            this.labIndividuals.Size = (new global::System.Drawing.Size(192, 30));
-            this.labIndividuals.TabIndex = (12);
-            this.labIndividuals.Text = ("Loading Individuals");
+            labIndividuals.AutoSize = true;
+            labIndividuals.Location = new Point(8, 86);
+            labIndividuals.Margin = new Padding(8, 0, 8, 0);
+            labIndividuals.Name = "labIndividuals";
+            labIndividuals.Size = new Size(220, 32);
+            labIndividuals.TabIndex = 12;
+            labIndividuals.Text = "Loading Individuals";
             // 
             // pbIndividuals
             // 
-            this.pbIndividuals.Location = (new global::System.Drawing.Point(268, 74));
-            this.pbIndividuals.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.pbIndividuals.Name = ("pbIndividuals");
-            this.pbIndividuals.Size = (new global::System.Drawing.Size(550, 38));
-            this.pbIndividuals.TabIndex = (11);
+            pbIndividuals.Location = new Point(290, 79);
+            pbIndividuals.Margin = new Padding(8, 9, 8, 9);
+            pbIndividuals.Name = "pbIndividuals";
+            pbIndividuals.Size = new Size(596, 41);
+            pbIndividuals.TabIndex = 11;
             // 
             // labSources
             // 
-            this.labSources.AutoSize = (true);
-            this.labSources.Location = (new global::System.Drawing.Point(7, 30));
-            this.labSources.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.labSources.Name = ("labSources");
-            this.labSources.Size = (new global::System.Drawing.Size(165, 30));
-            this.labSources.TabIndex = (10);
-            this.labSources.Text = ("Loading Sources");
+            labSources.AutoSize = true;
+            labSources.Location = new Point(8, 32);
+            labSources.Margin = new Padding(8, 0, 8, 0);
+            labSources.Name = "labSources";
+            labSources.Size = new Size(189, 32);
+            labSources.TabIndex = 10;
+            labSources.Text = "Loading Sources";
             // 
             // pbSources
             // 
-            this.pbSources.Location = (new global::System.Drawing.Point(268, 22));
-            this.pbSources.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.pbSources.Name = ("pbSources");
-            this.pbSources.Size = (new global::System.Drawing.Size(550, 38));
-            this.pbSources.TabIndex = (9);
+            pbSources.Location = new Point(290, 23);
+            pbSources.Margin = new Padding(8, 9, 8, 9);
+            pbSources.Name = "pbSources";
+            pbSources.Size = new Size(596, 41);
+            pbSources.TabIndex = 9;
             // 
             // rtbOutput
             // 
-            this.rtbOutput.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.rtbOutput.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 9F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            this.rtbOutput.Location = (new global::System.Drawing.Point(0, 0));
-            this.rtbOutput.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.rtbOutput.Name = ("rtbOutput");
-            this.rtbOutput.ReadOnly = (true);
-            this.rtbOutput.Size = (new global::System.Drawing.Size(2114, 908));
-            this.rtbOutput.TabIndex = (14);
-            this.rtbOutput.Text = ("");
-            this.rtbOutput.TextChanged += (this.RtbOutput_TextChanged);
+            rtbOutput.Dock = DockStyle.Fill;
+            rtbOutput.Font = new Font("Microsoft Sans Serif", 9F);
+            rtbOutput.Location = new Point(0, 0);
+            rtbOutput.Margin = new Padding(8, 9, 8, 9);
+            rtbOutput.Name = "rtbOutput";
+            rtbOutput.ReadOnly = true;
+            rtbOutput.Size = new Size(2282, 946);
+            rtbOutput.TabIndex = 14;
+            rtbOutput.Text = "";
+            rtbOutput.TextChanged += RtbOutput_TextChanged;
             // 
             // tabSelector
             // 
-            this.tabSelector.Anchor = ((global::System.Windows.Forms.AnchorStyles)((((global::System.Windows.Forms.AnchorStyles.Top) | (global::System.Windows.Forms.AnchorStyles.Bottom)) | (global::System.Windows.Forms.AnchorStyles.Left)) | (global::System.Windows.Forms.AnchorStyles.Right)));
-            this.tabSelector.Controls.Add(this.tabDisplayProgress);
-            this.tabSelector.Controls.Add(this.tabMainLists);
-            this.tabSelector.Controls.Add(this.tabErrorsFixes);
-            this.tabSelector.Controls.Add(this.tabSurnames);
-            this.tabSelector.Controls.Add(this.tabLocations);
-            this.tabSelector.Controls.Add(this.tabFacts);
-            this.tabSelector.Controls.Add(this.tabCensus);
-            this.tabSelector.Controls.Add(this.tabLostCousins);
-            this.tabSelector.Controls.Add(this.tabColourReports);
-            this.tabSelector.Controls.Add(this.tabTreetops);
-            this.tabSelector.Controls.Add(this.tabWorldWars);
-            this.tabSelector.Controls.Add(this.tabToday);
-            this.tabSelector.Location = (new global::System.Drawing.Point(0, 62));
-            this.tabSelector.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabSelector.Name = ("tabSelector");
-            this.tabSelector.SelectedIndex = (0);
-            this.tabSelector.Size = (new global::System.Drawing.Size(2136, 1086));
-            this.tabSelector.TabIndex = (9);
-            this.tabSelector.SelectedIndexChanged += (this.TabControl_SelectedIndexChanged);
+            tabSelector.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tabSelector.Controls.Add(tabDisplayProgress);
+            tabSelector.Controls.Add(tabMainLists);
+            tabSelector.Controls.Add(tabErrorsFixes);
+            tabSelector.Controls.Add(tabSurnames);
+            tabSelector.Controls.Add(tabLocations);
+            tabSelector.Controls.Add(tabFacts);
+            tabSelector.Controls.Add(tabCensus);
+            tabSelector.Controls.Add(tabLostCousins);
+            tabSelector.Controls.Add(tabColourReports);
+            tabSelector.Controls.Add(tabTreetops);
+            tabSelector.Controls.Add(tabWorldWars);
+            tabSelector.Controls.Add(tabToday);
+            tabSelector.Location = new Point(0, 66);
+            tabSelector.Margin = new Padding(8, 9, 8, 9);
+            tabSelector.Name = "tabSelector";
+            tabSelector.SelectedIndex = 0;
+            tabSelector.Size = new Size(2314, 1138);
+            tabSelector.TabIndex = 9;
+            tabSelector.SelectedIndexChanged += TabControl_SelectedIndexChanged;
             // 
             // tabMainLists
             // 
-            this.tabMainLists.Controls.Add(this.tabMainListsSelector);
-            this.tabMainLists.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabMainLists.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabMainLists.Name = ("tabMainLists");
-            this.tabMainLists.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabMainLists.Size = (new global::System.Drawing.Size(2128, 1043));
-            this.tabMainLists.TabIndex = (18);
-            this.tabMainLists.Text = ("Main Lists");
-            this.tabMainLists.UseVisualStyleBackColor = (true);
+            tabMainLists.Controls.Add(tabMainListsSelector);
+            tabMainLists.Location = new Point(8, 46);
+            tabMainLists.Margin = new Padding(8, 9, 8, 9);
+            tabMainLists.Name = "tabMainLists";
+            tabMainLists.Padding = new Padding(8, 9, 8, 9);
+            tabMainLists.Size = new Size(2298, 1074);
+            tabMainLists.TabIndex = 18;
+            tabMainLists.Text = "Main Lists";
+            tabMainLists.UseVisualStyleBackColor = true;
             // 
             // tabMainListsSelector
             // 
-            this.tabMainListsSelector.Controls.Add(this.tabIndividuals);
-            this.tabMainListsSelector.Controls.Add(this.tabFamilies);
-            this.tabMainListsSelector.Controls.Add(this.tabSources);
-            this.tabMainListsSelector.Controls.Add(this.tabOccupations);
-            this.tabMainListsSelector.Controls.Add(this.tabCustomFacts);
-            this.tabMainListsSelector.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.tabMainListsSelector.Location = (new global::System.Drawing.Point(7, 8));
-            this.tabMainListsSelector.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabMainListsSelector.Name = ("tabMainListsSelector");
-            this.tabMainListsSelector.SelectedIndex = (0);
-            this.tabMainListsSelector.Size = (new global::System.Drawing.Size(2114, 1027));
-            this.tabMainListsSelector.TabIndex = (0);
-            this.tabMainListsSelector.SelectedIndexChanged += (this.TabMainListSelector_SelectedIndexChanged);
+            tabMainListsSelector.Controls.Add(tabIndividuals);
+            tabMainListsSelector.Controls.Add(tabFamilies);
+            tabMainListsSelector.Controls.Add(tabSources);
+            tabMainListsSelector.Controls.Add(tabOccupations);
+            tabMainListsSelector.Controls.Add(tabCustomFacts);
+            tabMainListsSelector.Dock = DockStyle.Fill;
+            tabMainListsSelector.Location = new Point(8, 9);
+            tabMainListsSelector.Margin = new Padding(8, 9, 8, 9);
+            tabMainListsSelector.Name = "tabMainListsSelector";
+            tabMainListsSelector.SelectedIndex = 0;
+            tabMainListsSelector.Size = new Size(2282, 1056);
+            tabMainListsSelector.TabIndex = 0;
+            tabMainListsSelector.SelectedIndexChanged += TabMainListSelector_SelectedIndexChanged;
             // 
             // tabIndividuals
             // 
-            this.tabIndividuals.Controls.Add(this.dgIndividuals);
-            this.tabIndividuals.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabIndividuals.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabIndividuals.Name = ("tabIndividuals");
-            this.tabIndividuals.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabIndividuals.Size = (new global::System.Drawing.Size(2106, 984));
-            this.tabIndividuals.TabIndex = (0);
-            this.tabIndividuals.Text = ("Individuals");
-            this.tabIndividuals.UseVisualStyleBackColor = (true);
+            tabIndividuals.Controls.Add(dgIndividuals);
+            tabIndividuals.Location = new Point(8, 46);
+            tabIndividuals.Margin = new Padding(8, 9, 8, 9);
+            tabIndividuals.Name = "tabIndividuals";
+            tabIndividuals.Padding = new Padding(8, 9, 8, 9);
+            tabIndividuals.Size = new Size(2266, 1002);
+            tabIndividuals.TabIndex = 0;
+            tabIndividuals.Text = "Individuals";
+            tabIndividuals.UseVisualStyleBackColor = true;
             // 
             // dgIndividuals
             // 
-            this.dgIndividuals.AllowUserToAddRows = (false);
-            this.dgIndividuals.AllowUserToDeleteRows = (false);
-            this.dgIndividuals.AllowUserToOrderColumns = (true);
-            this.dgIndividuals.AutoSizeColumnsMode = (global::System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            this.dgIndividuals.AutoSizeRowsMode = (global::System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells);
-            this.dgIndividuals.ColumnHeadersHeightSizeMode = (global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize);
-            this.dgIndividuals.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.dgIndividuals.FilterAndSortEnabled = (true);
-            this.dgIndividuals.FilterStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgIndividuals.Location = (new global::System.Drawing.Point(7, 8));
-            this.dgIndividuals.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.dgIndividuals.MultiSelect = (false);
-            this.dgIndividuals.Name = ("dgIndividuals");
-            this.dgIndividuals.ReadOnly = (true);
-            this.dgIndividuals.RightToLeft = (global::System.Windows.Forms.RightToLeft.No);
-            this.dgIndividuals.RowHeadersVisible = (false);
-            this.dgIndividuals.RowHeadersWidth = (50);
-            this.dgIndividuals.SelectionMode = (global::System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect);
-            this.dgIndividuals.Size = (new global::System.Drawing.Size(2099, 976));
-            this.dgIndividuals.SortStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgIndividuals.TabIndex = (1);
-            this.dgIndividuals.VirtualMode = (true);
-            this.dgIndividuals.CellDoubleClick += (this.DgIndividuals_CellDoubleClick);
-            this.dgIndividuals.MouseDown += (this.DgIndividuals_MouseDown);
+            dgIndividuals.AllowUserToAddRows = false;
+            dgIndividuals.AllowUserToDeleteRows = false;
+            dgIndividuals.AllowUserToOrderColumns = true;
+            dgIndividuals.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgIndividuals.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dgIndividuals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgIndividuals.Dock = DockStyle.Fill;
+            dgIndividuals.FilterAndSortEnabled = true;
+            dgIndividuals.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgIndividuals.Location = new Point(8, 9);
+            dgIndividuals.Margin = new Padding(13, 15, 13, 15);
+            dgIndividuals.MultiSelect = false;
+            dgIndividuals.Name = "dgIndividuals";
+            dgIndividuals.ReadOnly = true;
+            dgIndividuals.RightToLeft = RightToLeft.No;
+            dgIndividuals.RowHeadersVisible = false;
+            dgIndividuals.RowHeadersWidth = 50;
+            dgIndividuals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgIndividuals.Size = new Size(2258, 993);
+            dgIndividuals.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgIndividuals.TabIndex = 1;
+            dgIndividuals.VirtualMode = true;
+            dgIndividuals.CellDoubleClick += DgIndividuals_CellDoubleClick;
+            dgIndividuals.MouseDown += DgIndividuals_MouseDown;
             // 
             // tabFamilies
             // 
-            this.tabFamilies.Controls.Add(this.dgFamilies);
-            this.tabFamilies.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabFamilies.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabFamilies.Name = ("tabFamilies");
-            this.tabFamilies.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabFamilies.Size = (new global::System.Drawing.Size(2106, 984));
-            this.tabFamilies.TabIndex = (1);
-            this.tabFamilies.Text = ("Families");
-            this.tabFamilies.UseVisualStyleBackColor = (true);
+            tabFamilies.Controls.Add(dgFamilies);
+            tabFamilies.Location = new Point(8, 46);
+            tabFamilies.Margin = new Padding(8, 9, 8, 9);
+            tabFamilies.Name = "tabFamilies";
+            tabFamilies.Padding = new Padding(8, 9, 8, 9);
+            tabFamilies.Size = new Size(2266, 1032);
+            tabFamilies.TabIndex = 1;
+            tabFamilies.Text = "Families";
+            tabFamilies.UseVisualStyleBackColor = true;
             // 
             // dgFamilies
             // 
-            this.dgFamilies.AllowUserToAddRows = (false);
-            this.dgFamilies.AllowUserToDeleteRows = (false);
-            this.dgFamilies.AllowUserToOrderColumns = (true);
-            this.dgFamilies.AutoSizeColumnsMode = (global::System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            this.dgFamilies.AutoSizeRowsMode = (global::System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells);
-            this.dgFamilies.ColumnHeadersHeightSizeMode = (global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize);
-            this.dgFamilies.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.dgFamilies.FilterAndSortEnabled = (true);
-            this.dgFamilies.FilterStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgFamilies.Location = (new global::System.Drawing.Point(7, 8));
-            this.dgFamilies.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.dgFamilies.MultiSelect = (false);
-            this.dgFamilies.Name = ("dgFamilies");
-            this.dgFamilies.ReadOnly = (true);
-            this.dgFamilies.RightToLeft = (global::System.Windows.Forms.RightToLeft.No);
-            this.dgFamilies.RowHeadersVisible = (false);
-            this.dgFamilies.RowHeadersWidth = (50);
-            this.dgFamilies.SelectionMode = (global::System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect);
-            this.dgFamilies.Size = (new global::System.Drawing.Size(2099, 976));
-            this.dgFamilies.SortStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgFamilies.TabIndex = (2);
-            this.dgFamilies.VirtualMode = (true);
-            this.dgFamilies.CellDoubleClick += (this.DgFamilies_CellDoubleClick);
+            dgFamilies.AllowUserToAddRows = false;
+            dgFamilies.AllowUserToDeleteRows = false;
+            dgFamilies.AllowUserToOrderColumns = true;
+            dgFamilies.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgFamilies.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dgFamilies.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgFamilies.Dock = DockStyle.Fill;
+            dgFamilies.FilterAndSortEnabled = true;
+            dgFamilies.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgFamilies.Location = new Point(8, 9);
+            dgFamilies.Margin = new Padding(13, 15, 13, 15);
+            dgFamilies.MultiSelect = false;
+            dgFamilies.Name = "dgFamilies";
+            dgFamilies.ReadOnly = true;
+            dgFamilies.RightToLeft = RightToLeft.No;
+            dgFamilies.RowHeadersVisible = false;
+            dgFamilies.RowHeadersWidth = 50;
+            dgFamilies.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgFamilies.Size = new Size(2258, 1023);
+            dgFamilies.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgFamilies.TabIndex = 2;
+            dgFamilies.VirtualMode = true;
+            dgFamilies.CellDoubleClick += DgFamilies_CellDoubleClick;
             // 
             // tabSources
             // 
-            this.tabSources.Controls.Add(this.dgSources);
-            this.tabSources.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabSources.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabSources.Name = ("tabSources");
-            this.tabSources.Size = (new global::System.Drawing.Size(2106, 984));
-            this.tabSources.TabIndex = (2);
-            this.tabSources.Text = ("Sources");
-            this.tabSources.UseVisualStyleBackColor = (true);
+            tabSources.Controls.Add(dgSources);
+            tabSources.Location = new Point(8, 46);
+            tabSources.Margin = new Padding(8, 9, 8, 9);
+            tabSources.Name = "tabSources";
+            tabSources.Size = new Size(2266, 1032);
+            tabSources.TabIndex = 2;
+            tabSources.Text = "Sources";
+            tabSources.UseVisualStyleBackColor = true;
             // 
             // dgSources
             // 
-            this.dgSources.AllowUserToAddRows = (false);
-            this.dgSources.AllowUserToDeleteRows = (false);
-            this.dgSources.AllowUserToOrderColumns = (true);
-            this.dgSources.AutoSizeColumnsMode = (global::System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            this.dgSources.AutoSizeRowsMode = (global::System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells);
-            this.dgSources.ColumnHeadersHeightSizeMode = (global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize);
-            this.dgSources.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.dgSources.FilterAndSortEnabled = (true);
-            this.dgSources.FilterStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgSources.Location = (new global::System.Drawing.Point(0, 0));
-            this.dgSources.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.dgSources.MultiSelect = (false);
-            this.dgSources.Name = ("dgSources");
-            this.dgSources.ReadOnly = (true);
-            this.dgSources.RightToLeft = (global::System.Windows.Forms.RightToLeft.No);
-            this.dgSources.RowHeadersVisible = (false);
-            this.dgSources.RowHeadersWidth = (50);
-            this.dgSources.SelectionMode = (global::System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect);
-            this.dgSources.Size = (new global::System.Drawing.Size(2106, 984));
-            this.dgSources.SortStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgSources.TabIndex = (2);
-            this.dgSources.VirtualMode = (true);
-            this.dgSources.CellDoubleClick += (this.DgSources_CellDoubleClick);
+            dgSources.AllowUserToAddRows = false;
+            dgSources.AllowUserToDeleteRows = false;
+            dgSources.AllowUserToOrderColumns = true;
+            dgSources.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgSources.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dgSources.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgSources.Dock = DockStyle.Fill;
+            dgSources.FilterAndSortEnabled = true;
+            dgSources.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgSources.Location = new Point(0, 0);
+            dgSources.Margin = new Padding(13, 15, 13, 15);
+            dgSources.MultiSelect = false;
+            dgSources.Name = "dgSources";
+            dgSources.ReadOnly = true;
+            dgSources.RightToLeft = RightToLeft.No;
+            dgSources.RowHeadersVisible = false;
+            dgSources.RowHeadersWidth = 50;
+            dgSources.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgSources.Size = new Size(2266, 1032);
+            dgSources.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgSources.TabIndex = 2;
+            dgSources.VirtualMode = true;
+            dgSources.CellDoubleClick += DgSources_CellDoubleClick;
             // 
             // tabOccupations
             // 
-            this.tabOccupations.Controls.Add(this.dgOccupations);
-            this.tabOccupations.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabOccupations.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabOccupations.Name = ("tabOccupations");
-            this.tabOccupations.Size = (new global::System.Drawing.Size(2106, 984));
-            this.tabOccupations.TabIndex = (3);
-            this.tabOccupations.Text = ("Occupations");
-            this.tabOccupations.UseVisualStyleBackColor = (true);
+            tabOccupations.Controls.Add(dgOccupations);
+            tabOccupations.Location = new Point(8, 46);
+            tabOccupations.Margin = new Padding(8, 9, 8, 9);
+            tabOccupations.Name = "tabOccupations";
+            tabOccupations.Size = new Size(2266, 1032);
+            tabOccupations.TabIndex = 3;
+            tabOccupations.Text = "Occupations";
+            tabOccupations.UseVisualStyleBackColor = true;
             // 
             // dgOccupations
             // 
-            this.dgOccupations.AllowUserToAddRows = (false);
-            this.dgOccupations.AllowUserToDeleteRows = (false);
-            this.dgOccupations.AllowUserToOrderColumns = (true);
-            this.dgOccupations.AutoSizeColumnsMode = (global::System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            this.dgOccupations.AutoSizeRowsMode = (global::System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells);
-            this.dgOccupations.ColumnHeadersHeightSizeMode = (global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize);
-            this.dgOccupations.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.dgOccupations.FilterAndSortEnabled = (true);
-            this.dgOccupations.FilterStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgOccupations.Location = (new global::System.Drawing.Point(0, 0));
-            this.dgOccupations.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.dgOccupations.MultiSelect = (false);
-            this.dgOccupations.Name = ("dgOccupations");
-            this.dgOccupations.ReadOnly = (true);
-            this.dgOccupations.RightToLeft = (global::System.Windows.Forms.RightToLeft.No);
-            this.dgOccupations.RowHeadersVisible = (false);
-            this.dgOccupations.RowHeadersWidth = (50);
-            this.dgOccupations.SelectionMode = (global::System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect);
-            this.dgOccupations.Size = (new global::System.Drawing.Size(2106, 984));
-            this.dgOccupations.SortStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgOccupations.TabIndex = (3);
-            this.dgOccupations.VirtualMode = (true);
-            this.dgOccupations.CellDoubleClick += (this.DgOccupations_CellDoubleClick);
+            dgOccupations.AllowUserToAddRows = false;
+            dgOccupations.AllowUserToDeleteRows = false;
+            dgOccupations.AllowUserToOrderColumns = true;
+            dgOccupations.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgOccupations.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dgOccupations.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgOccupations.Dock = DockStyle.Fill;
+            dgOccupations.FilterAndSortEnabled = true;
+            dgOccupations.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgOccupations.Location = new Point(0, 0);
+            dgOccupations.Margin = new Padding(13, 15, 13, 15);
+            dgOccupations.MultiSelect = false;
+            dgOccupations.Name = "dgOccupations";
+            dgOccupations.ReadOnly = true;
+            dgOccupations.RightToLeft = RightToLeft.No;
+            dgOccupations.RowHeadersVisible = false;
+            dgOccupations.RowHeadersWidth = 50;
+            dgOccupations.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgOccupations.Size = new Size(2266, 1032);
+            dgOccupations.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgOccupations.TabIndex = 3;
+            dgOccupations.VirtualMode = true;
+            dgOccupations.CellDoubleClick += DgOccupations_CellDoubleClick;
             // 
             // tabCustomFacts
             // 
-            this.tabCustomFacts.Controls.Add(this.dgCustomFacts);
-            this.tabCustomFacts.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabCustomFacts.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabCustomFacts.Name = ("tabCustomFacts");
-            this.tabCustomFacts.Size = (new global::System.Drawing.Size(2106, 984));
-            this.tabCustomFacts.TabIndex = (4);
-            this.tabCustomFacts.Text = ("Custom Facts");
-            this.tabCustomFacts.UseVisualStyleBackColor = (true);
+            tabCustomFacts.Controls.Add(dgCustomFacts);
+            tabCustomFacts.Location = new Point(8, 46);
+            tabCustomFacts.Margin = new Padding(8, 9, 8, 9);
+            tabCustomFacts.Name = "tabCustomFacts";
+            tabCustomFacts.Size = new Size(2266, 1032);
+            tabCustomFacts.TabIndex = 4;
+            tabCustomFacts.Text = "Custom Facts";
+            tabCustomFacts.UseVisualStyleBackColor = true;
             // 
             // dgCustomFacts
             // 
-            this.dgCustomFacts.AllowUserToAddRows = (false);
-            this.dgCustomFacts.AllowUserToDeleteRows = (false);
-            this.dgCustomFacts.AllowUserToOrderColumns = (true);
-            this.dgCustomFacts.AutoSizeColumnsMode = (global::System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            this.dgCustomFacts.AutoSizeRowsMode = (global::System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells);
-            this.dgCustomFacts.ColumnHeadersHeightSizeMode = (global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize);
-            this.dgCustomFacts.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.dgCustomFacts.FilterAndSortEnabled = (true);
-            this.dgCustomFacts.FilterStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgCustomFacts.Location = (new global::System.Drawing.Point(0, 0));
-            this.dgCustomFacts.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.dgCustomFacts.MultiSelect = (false);
-            this.dgCustomFacts.Name = ("dgCustomFacts");
-            this.dgCustomFacts.ReadOnly = (true);
-            this.dgCustomFacts.RightToLeft = (global::System.Windows.Forms.RightToLeft.No);
-            this.dgCustomFacts.RowHeadersVisible = (false);
-            this.dgCustomFacts.RowHeadersWidth = (50);
-            this.dgCustomFacts.SelectionMode = (global::System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect);
-            this.dgCustomFacts.Size = (new global::System.Drawing.Size(2106, 984));
-            this.dgCustomFacts.SortStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgCustomFacts.TabIndex = (4);
-            this.dgCustomFacts.VirtualMode = (true);
-            this.dgCustomFacts.CellDoubleClick += (this.DgCustomFacts_CellDoubleClick);
-            this.dgCustomFacts.CellValueChanged += (this.DgCustomFacts_CellValueChanged);
+            dgCustomFacts.AllowUserToAddRows = false;
+            dgCustomFacts.AllowUserToDeleteRows = false;
+            dgCustomFacts.AllowUserToOrderColumns = true;
+            dgCustomFacts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgCustomFacts.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dgCustomFacts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgCustomFacts.Dock = DockStyle.Fill;
+            dgCustomFacts.FilterAndSortEnabled = true;
+            dgCustomFacts.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgCustomFacts.Location = new Point(0, 0);
+            dgCustomFacts.Margin = new Padding(13, 15, 13, 15);
+            dgCustomFacts.MultiSelect = false;
+            dgCustomFacts.Name = "dgCustomFacts";
+            dgCustomFacts.ReadOnly = true;
+            dgCustomFacts.RightToLeft = RightToLeft.No;
+            dgCustomFacts.RowHeadersVisible = false;
+            dgCustomFacts.RowHeadersWidth = 50;
+            dgCustomFacts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgCustomFacts.Size = new Size(2266, 1032);
+            dgCustomFacts.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgCustomFacts.TabIndex = 4;
+            dgCustomFacts.VirtualMode = true;
+            dgCustomFacts.CellDoubleClick += DgCustomFacts_CellDoubleClick;
+            dgCustomFacts.CellValueChanged += DgCustomFacts_CellValueChanged;
             // 
             // tabErrorsFixes
             // 
-            this.tabErrorsFixes.Controls.Add(this.tabErrorFixSelector);
-            this.tabErrorsFixes.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabErrorsFixes.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabErrorsFixes.Name = ("tabErrorsFixes");
-            this.tabErrorsFixes.Size = (new global::System.Drawing.Size(2128, 1043));
-            this.tabErrorsFixes.TabIndex = (19);
-            this.tabErrorsFixes.Text = ("Errors/Fixes");
-            this.tabErrorsFixes.UseVisualStyleBackColor = (true);
+            tabErrorsFixes.Controls.Add(tabErrorFixSelector);
+            tabErrorsFixes.Location = new Point(8, 46);
+            tabErrorsFixes.Margin = new Padding(8, 9, 8, 9);
+            tabErrorsFixes.Name = "tabErrorsFixes";
+            tabErrorsFixes.Size = new Size(2298, 1074);
+            tabErrorsFixes.TabIndex = 19;
+            tabErrorsFixes.Text = "Errors/Fixes";
+            tabErrorsFixes.UseVisualStyleBackColor = true;
             // 
             // tabErrorFixSelector
             // 
-            this.tabErrorFixSelector.Controls.Add(this.tabDataErrors);
-            this.tabErrorFixSelector.Controls.Add(this.tabDuplicates);
-            this.tabErrorFixSelector.Controls.Add(this.tabLooseBirths);
-            this.tabErrorFixSelector.Controls.Add(this.tabLooseDeaths);
-            this.tabErrorFixSelector.Controls.Add(this.tabLooseInfo);
-            this.tabErrorFixSelector.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.tabErrorFixSelector.Location = (new global::System.Drawing.Point(0, 0));
-            this.tabErrorFixSelector.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabErrorFixSelector.Name = ("tabErrorFixSelector");
-            this.tabErrorFixSelector.SelectedIndex = (0);
-            this.tabErrorFixSelector.ShowToolTips = (true);
-            this.tabErrorFixSelector.Size = (new global::System.Drawing.Size(2128, 1043));
-            this.tabErrorFixSelector.TabIndex = (0);
-            this.tabErrorFixSelector.SelectedIndexChanged += (this.TabErrorFixSelector_SelectedIndexChanged);
+            tabErrorFixSelector.Controls.Add(tabDataErrors);
+            tabErrorFixSelector.Controls.Add(tabDuplicates);
+            tabErrorFixSelector.Controls.Add(tabLooseBirths);
+            tabErrorFixSelector.Controls.Add(tabLooseDeaths);
+            tabErrorFixSelector.Controls.Add(tabLooseInfo);
+            tabErrorFixSelector.Dock = DockStyle.Fill;
+            tabErrorFixSelector.Location = new Point(0, 0);
+            tabErrorFixSelector.Margin = new Padding(8, 9, 8, 9);
+            tabErrorFixSelector.Name = "tabErrorFixSelector";
+            tabErrorFixSelector.SelectedIndex = 0;
+            tabErrorFixSelector.ShowToolTips = true;
+            tabErrorFixSelector.Size = new Size(2298, 1074);
+            tabErrorFixSelector.TabIndex = 0;
+            tabErrorFixSelector.SelectedIndexChanged += TabErrorFixSelector_SelectedIndexChanged;
             // 
             // tabDataErrors
             // 
-            this.tabDataErrors.Controls.Add(this.dgDataErrors);
-            this.tabDataErrors.Controls.Add(this.gbDataErrorTypes);
-            this.tabDataErrors.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabDataErrors.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabDataErrors.Name = ("tabDataErrors");
-            this.tabDataErrors.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabDataErrors.Size = (new global::System.Drawing.Size(2120, 1000));
-            this.tabDataErrors.TabIndex = (0);
-            this.tabDataErrors.Text = ("Data Errors");
-            this.tabDataErrors.UseVisualStyleBackColor = (true);
+            tabDataErrors.Controls.Add(dgDataErrors);
+            tabDataErrors.Controls.Add(gbDataErrorTypes);
+            tabDataErrors.Location = new Point(8, 46);
+            tabDataErrors.Margin = new Padding(8, 9, 8, 9);
+            tabDataErrors.Name = "tabDataErrors";
+            tabDataErrors.Padding = new Padding(8, 9, 8, 9);
+            tabDataErrors.Size = new Size(2282, 1020);
+            tabDataErrors.TabIndex = 0;
+            tabDataErrors.Text = "Data Errors";
+            tabDataErrors.UseVisualStyleBackColor = true;
             // 
             // gbDataErrorTypes
             // 
-            this.gbDataErrorTypes.Controls.Add(this.ckbDataErrors);
-            this.gbDataErrorTypes.Controls.Add(this.btnSelectAll);
-            this.gbDataErrorTypes.Controls.Add(this.btnClearAll);
-            this.gbDataErrorTypes.Dock = (global::System.Windows.Forms.DockStyle.Top);
-            this.gbDataErrorTypes.Location = (new global::System.Drawing.Point(7, 8));
-            this.gbDataErrorTypes.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.gbDataErrorTypes.Name = ("gbDataErrorTypes");
-            this.gbDataErrorTypes.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.gbDataErrorTypes.Size = (new global::System.Drawing.Size(2106, 369));
-            this.gbDataErrorTypes.TabIndex = (1);
-            this.gbDataErrorTypes.TabStop = (false);
-            this.gbDataErrorTypes.Text = ("Types of Data Error to display");
+            gbDataErrorTypes.Controls.Add(ckbDataErrors);
+            gbDataErrorTypes.Controls.Add(btnSelectAll);
+            gbDataErrorTypes.Controls.Add(btnClearAll);
+            gbDataErrorTypes.Dock = DockStyle.Top;
+            gbDataErrorTypes.Location = new Point(8, 9);
+            gbDataErrorTypes.Margin = new Padding(8, 9, 8, 9);
+            gbDataErrorTypes.Name = "gbDataErrorTypes";
+            gbDataErrorTypes.Padding = new Padding(8, 9, 8, 9);
+            gbDataErrorTypes.Size = new Size(2266, 394);
+            gbDataErrorTypes.TabIndex = 1;
+            gbDataErrorTypes.TabStop = false;
+            gbDataErrorTypes.Text = "Types of Data Error to display";
             // 
             // ckbDataErrors
             // 
-            this.ckbDataErrors.CheckOnClick = (true);
-            this.ckbDataErrors.ColumnWidth = (300);
-            this.ckbDataErrors.Dock = (global::System.Windows.Forms.DockStyle.Top);
-            this.ckbDataErrors.FormattingEnabled = (true);
-            this.ckbDataErrors.Location = (new global::System.Drawing.Point(7, 36));
-            this.ckbDataErrors.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.ckbDataErrors.MultiColumn = (true);
-            this.ckbDataErrors.Name = ("ckbDataErrors");
-            this.ckbDataErrors.ScrollAlwaysVisible = (true);
-            this.ckbDataErrors.Size = (new global::System.Drawing.Size(2092, 260));
-            this.ckbDataErrors.TabIndex = (8);
-            this.ckbDataErrors.SelectedIndexChanged += (this.CkbDataErrors_SelectedIndexChanged);
+            ckbDataErrors.CheckOnClick = true;
+            ckbDataErrors.ColumnWidth = 300;
+            ckbDataErrors.Dock = DockStyle.Top;
+            ckbDataErrors.FormattingEnabled = true;
+            ckbDataErrors.Location = new Point(8, 41);
+            ckbDataErrors.Margin = new Padding(8, 9, 8, 9);
+            ckbDataErrors.MultiColumn = true;
+            ckbDataErrors.Name = "ckbDataErrors";
+            ckbDataErrors.ScrollAlwaysVisible = true;
+            ckbDataErrors.Size = new Size(2250, 256);
+            ckbDataErrors.TabIndex = 8;
+            ckbDataErrors.SelectedIndexChanged += CkbDataErrors_SelectedIndexChanged;
             // 
             // btnSelectAll
             // 
-            this.btnSelectAll.Location = (new global::System.Drawing.Point(16, 309));
-            this.btnSelectAll.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnSelectAll.Name = ("btnSelectAll");
-            this.btnSelectAll.Size = (new global::System.Drawing.Size(151, 52));
-            this.btnSelectAll.TabIndex = (7);
-            this.btnSelectAll.Text = ("Select All");
-            this.btnSelectAll.UseVisualStyleBackColor = (true);
-            this.btnSelectAll.Click += (this.BtnSelectAll_Click);
+            btnSelectAll.Location = new Point(17, 330);
+            btnSelectAll.Margin = new Padding(8, 9, 8, 9);
+            btnSelectAll.Name = "btnSelectAll";
+            btnSelectAll.Size = new Size(164, 55);
+            btnSelectAll.TabIndex = 7;
+            btnSelectAll.Text = "Select All";
+            btnSelectAll.UseVisualStyleBackColor = true;
+            btnSelectAll.Click += BtnSelectAll_Click;
             // 
             // btnClearAll
             // 
-            this.btnClearAll.Location = (new global::System.Drawing.Point(178, 309));
-            this.btnClearAll.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnClearAll.Name = ("btnClearAll");
-            this.btnClearAll.Size = (new global::System.Drawing.Size(151, 52));
-            this.btnClearAll.TabIndex = (6);
-            this.btnClearAll.Text = ("Clear All");
-            this.btnClearAll.UseVisualStyleBackColor = (true);
-            this.btnClearAll.Click += (this.BtnClearAll_Click);
+            btnClearAll.Location = new Point(193, 330);
+            btnClearAll.Margin = new Padding(8, 9, 8, 9);
+            btnClearAll.Name = "btnClearAll";
+            btnClearAll.Size = new Size(164, 55);
+            btnClearAll.TabIndex = 6;
+            btnClearAll.Text = "Clear All";
+            btnClearAll.UseVisualStyleBackColor = true;
+            btnClearAll.Click += BtnClearAll_Click;
             // 
             // tabDuplicates
             // 
-            this.tabDuplicates.Controls.Add(this.labDuplicateSlider);
-            this.tabDuplicates.Controls.Add(this.labCompletion);
-            this.tabDuplicates.Controls.Add(this.chkIgnoreUnnamedTwins);
-            this.tabDuplicates.Controls.Add(this.ckbHideIgnoredDuplicates);
-            this.tabDuplicates.Controls.Add(this.label16);
-            this.tabDuplicates.Controls.Add(this.label13);
-            this.tabDuplicates.Controls.Add(this.label12);
-            this.tabDuplicates.Controls.Add(this.tbDuplicateScore);
-            this.tabDuplicates.Controls.Add(this.labCalcDuplicates);
-            this.tabDuplicates.Controls.Add(this.pbDuplicates);
-            this.tabDuplicates.Controls.Add(this.btnCancelDuplicates);
-            this.tabDuplicates.Controls.Add(this.dgDuplicates);
-            this.tabDuplicates.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabDuplicates.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabDuplicates.Name = ("tabDuplicates");
-            this.tabDuplicates.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabDuplicates.Size = (new global::System.Drawing.Size(2120, 1000));
-            this.tabDuplicates.TabIndex = (1);
-            this.tabDuplicates.Text = ("Duplicates?");
-            this.tabDuplicates.UseVisualStyleBackColor = (true);
+            tabDuplicates.Controls.Add(labDuplicateSlider);
+            tabDuplicates.Controls.Add(labCompletion);
+            tabDuplicates.Controls.Add(chkIgnoreUnnamedTwins);
+            tabDuplicates.Controls.Add(ckbHideIgnoredDuplicates);
+            tabDuplicates.Controls.Add(label16);
+            tabDuplicates.Controls.Add(label13);
+            tabDuplicates.Controls.Add(label12);
+            tabDuplicates.Controls.Add(tbDuplicateScore);
+            tabDuplicates.Controls.Add(labCalcDuplicates);
+            tabDuplicates.Controls.Add(pbDuplicates);
+            tabDuplicates.Controls.Add(btnCancelDuplicates);
+            tabDuplicates.Controls.Add(dgDuplicates);
+            tabDuplicates.Location = new Point(8, 46);
+            tabDuplicates.Margin = new Padding(8, 9, 8, 9);
+            tabDuplicates.Name = "tabDuplicates";
+            tabDuplicates.Padding = new Padding(8, 9, 8, 9);
+            tabDuplicates.Size = new Size(2282, 1050);
+            tabDuplicates.TabIndex = 1;
+            tabDuplicates.Text = "Duplicates?";
+            tabDuplicates.UseVisualStyleBackColor = true;
             // 
             // labDuplicateSlider
             // 
-            this.labDuplicateSlider.Anchor = (global::System.Windows.Forms.AnchorStyles.Top);
-            this.labDuplicateSlider.AutoSize = (true);
-            this.labDuplicateSlider.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 8.25F, global::System.Drawing.FontStyle.Bold, global::System.Drawing.GraphicsUnit.Point));
-            this.labDuplicateSlider.Location = (new global::System.Drawing.Point(1385, 55));
-            this.labDuplicateSlider.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.labDuplicateSlider.Name = ("labDuplicateSlider");
-            this.labDuplicateSlider.Size = (new global::System.Drawing.Size(176, 25));
-            this.labDuplicateSlider.TabIndex = (32);
-            this.labDuplicateSlider.Text = ("Match Quality : 1");
+            labDuplicateSlider.Anchor = AnchorStyles.Top;
+            labDuplicateSlider.AutoSize = true;
+            labDuplicateSlider.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
+            labDuplicateSlider.Location = new Point(1493, 59);
+            labDuplicateSlider.Margin = new Padding(8, 0, 8, 0);
+            labDuplicateSlider.Name = "labDuplicateSlider";
+            labDuplicateSlider.Size = new Size(192, 26);
+            labDuplicateSlider.TabIndex = 32;
+            labDuplicateSlider.Text = "Match Quality : 1";
             // 
             // labCompletion
             // 
-            this.labCompletion.AutoSize = (true);
-            this.labCompletion.Location = (new global::System.Drawing.Point(244, 81));
-            this.labCompletion.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.labCompletion.Name = ("labCompletion");
-            this.labCompletion.Size = (new global::System.Drawing.Size(0, 30));
-            this.labCompletion.TabIndex = (30);
+            labCompletion.AutoSize = true;
+            labCompletion.Location = new Point(264, 86);
+            labCompletion.Margin = new Padding(8, 0, 8, 0);
+            labCompletion.Name = "labCompletion";
+            labCompletion.Size = new Size(0, 32);
+            labCompletion.TabIndex = 30;
             // 
             // ckbHideIgnoredDuplicates
             // 
-            this.ckbHideIgnoredDuplicates.AutoSize = (true);
-            this.ckbHideIgnoredDuplicates.Checked = (true);
-            this.ckbHideIgnoredDuplicates.CheckState = (global::System.Windows.Forms.CheckState.Checked);
-            this.ckbHideIgnoredDuplicates.Location = (new global::System.Drawing.Point(24, 148));
-            this.ckbHideIgnoredDuplicates.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.ckbHideIgnoredDuplicates.Name = ("ckbHideIgnoredDuplicates");
-            this.ckbHideIgnoredDuplicates.Size = (new global::System.Drawing.Size(432, 34));
-            this.ckbHideIgnoredDuplicates.TabIndex = (28);
-            this.ckbHideIgnoredDuplicates.Text = ("Hide Possible Duplicates marked as Ignore");
-            this.ckbHideIgnoredDuplicates.UseVisualStyleBackColor = (true);
-            this.ckbHideIgnoredDuplicates.CheckedChanged += (this.CkbHideIgnoredDuplicates_CheckedChanged);
+            ckbHideIgnoredDuplicates.AutoSize = true;
+            ckbHideIgnoredDuplicates.Checked = true;
+            ckbHideIgnoredDuplicates.CheckState = CheckState.Checked;
+            ckbHideIgnoredDuplicates.Location = new Point(26, 158);
+            ckbHideIgnoredDuplicates.Margin = new Padding(8, 9, 8, 9);
+            ckbHideIgnoredDuplicates.Name = "ckbHideIgnoredDuplicates";
+            ckbHideIgnoredDuplicates.Size = new Size(498, 36);
+            ckbHideIgnoredDuplicates.TabIndex = 28;
+            ckbHideIgnoredDuplicates.Text = "Hide Possible Duplicates marked as Ignore";
+            ckbHideIgnoredDuplicates.UseVisualStyleBackColor = true;
+            ckbHideIgnoredDuplicates.CheckedChanged += CkbHideIgnoredDuplicates_CheckedChanged;
             // 
             // label16
             // 
-            this.label16.Anchor = ((global::System.Windows.Forms.AnchorStyles)(((global::System.Windows.Forms.AnchorStyles.Top) | (global::System.Windows.Forms.AnchorStyles.Left)) | (global::System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.AutoSize = (true);
-            this.label16.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 11.25F, global::System.Drawing.FontStyle.Bold, global::System.Drawing.GraphicsUnit.Point));
-            this.label16.Location = (new global::System.Drawing.Point(823, 145));
-            this.label16.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.label16.Name = ("label16");
-            this.label16.Size = (new global::System.Drawing.Size(348, 31));
-            this.label16.TabIndex = (26);
-            this.label16.Text = ("Candidate Duplicates List");
+            label16.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            label16.AutoSize = true;
+            label16.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
+            label16.Location = new Point(892, 155);
+            label16.Margin = new Padding(8, 0, 8, 0);
+            label16.Name = "label16";
+            label16.Size = new Size(377, 36);
+            label16.TabIndex = 26;
+            label16.Text = "Candidate Duplicates List";
             // 
             // labCalcDuplicates
             // 
-            this.labCalcDuplicates.AutoSize = (true);
-            this.labCalcDuplicates.Location = (new global::System.Drawing.Point(14, 22));
-            this.labCalcDuplicates.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.labCalcDuplicates.Name = ("labCalcDuplicates");
-            this.labCalcDuplicates.Size = (new global::System.Drawing.Size(219, 30));
-            this.labCalcDuplicates.TabIndex = (21);
-            this.labCalcDuplicates.Text = ("Calculating Duplicates");
+            labCalcDuplicates.AutoSize = true;
+            labCalcDuplicates.Location = new Point(15, 23);
+            labCalcDuplicates.Margin = new Padding(8, 0, 8, 0);
+            labCalcDuplicates.Name = "labCalcDuplicates";
+            labCalcDuplicates.Size = new Size(250, 32);
+            labCalcDuplicates.TabIndex = 21;
+            labCalcDuplicates.Text = "Calculating Duplicates";
             // 
             // pbDuplicates
             // 
-            this.pbDuplicates.Location = (new global::System.Drawing.Point(250, 14));
-            this.pbDuplicates.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.pbDuplicates.Name = ("pbDuplicates");
-            this.pbDuplicates.Size = (new global::System.Drawing.Size(566, 52));
-            this.pbDuplicates.TabIndex = (20);
+            pbDuplicates.Location = new Point(271, 15);
+            pbDuplicates.Margin = new Padding(8, 9, 8, 9);
+            pbDuplicates.Name = "pbDuplicates";
+            pbDuplicates.Size = new Size(613, 55);
+            pbDuplicates.TabIndex = 20;
             // 
             // btnCancelDuplicates
             // 
-            this.btnCancelDuplicates.Image = ((global::System.Drawing.Image)(resources.GetObject("btnCancelDuplicates.Image")));
-            this.btnCancelDuplicates.Location = (new global::System.Drawing.Point(828, 14));
-            this.btnCancelDuplicates.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnCancelDuplicates.Name = ("btnCancelDuplicates");
-            this.btnCancelDuplicates.Size = (new global::System.Drawing.Size(46, 52));
-            this.btnCancelDuplicates.TabIndex = (27);
-            this.btnCancelDuplicates.TextImageRelation = (global::System.Windows.Forms.TextImageRelation.ImageBeforeText);
-            this.btnCancelDuplicates.UseVisualStyleBackColor = (true);
-            this.btnCancelDuplicates.Visible = (false);
-            this.btnCancelDuplicates.Click += (this.BtnCancelDuplicates_Click);
+            btnCancelDuplicates.Image = (Image)resources.GetObject("btnCancelDuplicates.Image");
+            btnCancelDuplicates.Location = new Point(897, 15);
+            btnCancelDuplicates.Margin = new Padding(8, 9, 8, 9);
+            btnCancelDuplicates.Name = "btnCancelDuplicates";
+            btnCancelDuplicates.Size = new Size(50, 55);
+            btnCancelDuplicates.TabIndex = 27;
+            btnCancelDuplicates.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnCancelDuplicates.UseVisualStyleBackColor = true;
+            btnCancelDuplicates.Visible = false;
+            btnCancelDuplicates.Click += BtnCancelDuplicates_Click;
             // 
             // dgDuplicates
             // 
-            this.dgDuplicates.AllowUserToAddRows = (false);
-            this.dgDuplicates.AllowUserToDeleteRows = (false);
-            this.dgDuplicates.AllowUserToOrderColumns = (true);
-            this.dgDuplicates.Anchor = ((global::System.Windows.Forms.AnchorStyles)((((global::System.Windows.Forms.AnchorStyles.Top) | (global::System.Windows.Forms.AnchorStyles.Bottom)) | (global::System.Windows.Forms.AnchorStyles.Left)) | (global::System.Windows.Forms.AnchorStyles.Right)));
-            this.dgDuplicates.AutoSizeColumnsMode = (global::System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            this.dgDuplicates.AutoSizeRowsMode = (global::System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells);
-            this.dgDuplicates.ColumnHeadersHeightSizeMode = (global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize);
-            this.dgDuplicates.FilterAndSortEnabled = (true);
-            this.dgDuplicates.FilterStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgDuplicates.Location = (new global::System.Drawing.Point(-2, 201));
-            this.dgDuplicates.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.dgDuplicates.MultiSelect = (false);
-            this.dgDuplicates.Name = ("dgDuplicates");
-            this.dgDuplicates.ReadOnly = (true);
-            this.dgDuplicates.RightToLeft = (global::System.Windows.Forms.RightToLeft.No);
-            this.dgDuplicates.RowHeadersVisible = (false);
-            this.dgDuplicates.RowHeadersWidth = (50);
-            this.dgDuplicates.SelectionMode = (global::System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect);
-            this.dgDuplicates.Size = (new global::System.Drawing.Size(2122, 799));
-            this.dgDuplicates.SortStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgDuplicates.TabIndex = (19);
-            this.dgDuplicates.VirtualMode = (true);
-            this.dgDuplicates.CellContentClick += (this.DgDuplicates_CellContentClick);
-            this.dgDuplicates.CellDoubleClick += (this.DgDuplicates_CellDoubleClick);
+            dgDuplicates.AllowUserToAddRows = false;
+            dgDuplicates.AllowUserToDeleteRows = false;
+            dgDuplicates.AllowUserToOrderColumns = true;
+            dgDuplicates.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgDuplicates.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgDuplicates.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dgDuplicates.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgDuplicates.FilterAndSortEnabled = true;
+            dgDuplicates.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgDuplicates.Location = new Point(-2, 214);
+            dgDuplicates.Margin = new Padding(13, 15, 13, 15);
+            dgDuplicates.MultiSelect = false;
+            dgDuplicates.Name = "dgDuplicates";
+            dgDuplicates.ReadOnly = true;
+            dgDuplicates.RightToLeft = RightToLeft.No;
+            dgDuplicates.RowHeadersVisible = false;
+            dgDuplicates.RowHeadersWidth = 50;
+            dgDuplicates.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgDuplicates.Size = new Size(2284, 836);
+            dgDuplicates.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgDuplicates.TabIndex = 19;
+            dgDuplicates.VirtualMode = true;
+            dgDuplicates.CellContentClick += DgDuplicates_CellContentClick;
+            dgDuplicates.CellDoubleClick += DgDuplicates_CellDoubleClick;
             // 
             // tabLooseBirths
             // 
-            this.tabLooseBirths.Controls.Add(this.dgLooseBirths);
-            this.tabLooseBirths.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabLooseBirths.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabLooseBirths.Name = ("tabLooseBirths");
-            this.tabLooseBirths.Size = (new global::System.Drawing.Size(2120, 1000));
-            this.tabLooseBirths.TabIndex = (2);
-            this.tabLooseBirths.Text = ("Loose Births");
-            this.tabLooseBirths.UseVisualStyleBackColor = (true);
+            tabLooseBirths.Controls.Add(dgLooseBirths);
+            tabLooseBirths.Location = new Point(8, 46);
+            tabLooseBirths.Margin = new Padding(8, 9, 8, 9);
+            tabLooseBirths.Name = "tabLooseBirths";
+            tabLooseBirths.Size = new Size(2282, 1050);
+            tabLooseBirths.TabIndex = 2;
+            tabLooseBirths.Text = "Loose Births";
+            tabLooseBirths.UseVisualStyleBackColor = true;
             // 
             // dgLooseBirths
             // 
-            this.dgLooseBirths.AllowUserToAddRows = (false);
-            this.dgLooseBirths.AllowUserToDeleteRows = (false);
-            this.dgLooseBirths.AllowUserToOrderColumns = (true);
-            this.dgLooseBirths.AutoSizeColumnsMode = (global::System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            this.dgLooseBirths.AutoSizeRowsMode = (global::System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells);
-            this.dgLooseBirths.ColumnHeadersHeightSizeMode = (global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize);
-            this.dgLooseBirths.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.dgLooseBirths.FilterAndSortEnabled = (true);
-            this.dgLooseBirths.FilterStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgLooseBirths.Location = (new global::System.Drawing.Point(0, 0));
-            this.dgLooseBirths.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.dgLooseBirths.MultiSelect = (false);
-            this.dgLooseBirths.Name = ("dgLooseBirths");
-            this.dgLooseBirths.ReadOnly = (true);
-            this.dgLooseBirths.RightToLeft = (global::System.Windows.Forms.RightToLeft.No);
-            this.dgLooseBirths.RowHeadersVisible = (false);
-            this.dgLooseBirths.RowHeadersWidth = (50);
-            this.dgLooseBirths.SelectionMode = (global::System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect);
-            this.dgLooseBirths.Size = (new global::System.Drawing.Size(2120, 1000));
-            this.dgLooseBirths.SortStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgLooseBirths.TabIndex = (3);
-            this.dgLooseBirths.VirtualMode = (true);
-            this.dgLooseBirths.CellDoubleClick += (this.DgLooseBirths_CellDoubleClick);
+            dgLooseBirths.AllowUserToAddRows = false;
+            dgLooseBirths.AllowUserToDeleteRows = false;
+            dgLooseBirths.AllowUserToOrderColumns = true;
+            dgLooseBirths.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgLooseBirths.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dgLooseBirths.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgLooseBirths.Dock = DockStyle.Fill;
+            dgLooseBirths.FilterAndSortEnabled = true;
+            dgLooseBirths.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgLooseBirths.Location = new Point(0, 0);
+            dgLooseBirths.Margin = new Padding(13, 15, 13, 15);
+            dgLooseBirths.MultiSelect = false;
+            dgLooseBirths.Name = "dgLooseBirths";
+            dgLooseBirths.ReadOnly = true;
+            dgLooseBirths.RightToLeft = RightToLeft.No;
+            dgLooseBirths.RowHeadersVisible = false;
+            dgLooseBirths.RowHeadersWidth = 50;
+            dgLooseBirths.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgLooseBirths.Size = new Size(2282, 1050);
+            dgLooseBirths.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgLooseBirths.TabIndex = 3;
+            dgLooseBirths.VirtualMode = true;
+            dgLooseBirths.CellDoubleClick += DgLooseBirths_CellDoubleClick;
             // 
             // tabLooseDeaths
             // 
-            this.tabLooseDeaths.Controls.Add(this.dgLooseDeaths);
-            this.tabLooseDeaths.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabLooseDeaths.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabLooseDeaths.Name = ("tabLooseDeaths");
-            this.tabLooseDeaths.Size = (new global::System.Drawing.Size(2120, 1000));
-            this.tabLooseDeaths.TabIndex = (3);
-            this.tabLooseDeaths.Text = ("Loose Deaths");
-            this.tabLooseDeaths.UseVisualStyleBackColor = (true);
+            tabLooseDeaths.Controls.Add(dgLooseDeaths);
+            tabLooseDeaths.Location = new Point(8, 46);
+            tabLooseDeaths.Margin = new Padding(8, 9, 8, 9);
+            tabLooseDeaths.Name = "tabLooseDeaths";
+            tabLooseDeaths.Size = new Size(2282, 1050);
+            tabLooseDeaths.TabIndex = 3;
+            tabLooseDeaths.Text = "Loose Deaths";
+            tabLooseDeaths.UseVisualStyleBackColor = true;
             // 
             // dgLooseDeaths
             // 
-            this.dgLooseDeaths.AllowUserToAddRows = (false);
-            this.dgLooseDeaths.AllowUserToDeleteRows = (false);
-            this.dgLooseDeaths.AllowUserToOrderColumns = (true);
-            this.dgLooseDeaths.AutoSizeColumnsMode = (global::System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            this.dgLooseDeaths.AutoSizeRowsMode = (global::System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells);
-            this.dgLooseDeaths.ColumnHeadersHeightSizeMode = (global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize);
-            this.dgLooseDeaths.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.dgLooseDeaths.FilterAndSortEnabled = (true);
-            this.dgLooseDeaths.FilterStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgLooseDeaths.Location = (new global::System.Drawing.Point(0, 0));
-            this.dgLooseDeaths.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.dgLooseDeaths.MultiSelect = (false);
-            this.dgLooseDeaths.Name = ("dgLooseDeaths");
-            this.dgLooseDeaths.ReadOnly = (true);
-            this.dgLooseDeaths.RightToLeft = (global::System.Windows.Forms.RightToLeft.No);
-            this.dgLooseDeaths.RowHeadersVisible = (false);
-            this.dgLooseDeaths.RowHeadersWidth = (50);
-            this.dgLooseDeaths.SelectionMode = (global::System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect);
-            this.dgLooseDeaths.Size = (new global::System.Drawing.Size(2120, 1000));
-            this.dgLooseDeaths.SortStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgLooseDeaths.TabIndex = (2);
-            this.dgLooseDeaths.VirtualMode = (true);
-            this.dgLooseDeaths.CellDoubleClick += (this.DgLooseDeaths_CellDoubleClick);
+            dgLooseDeaths.AllowUserToAddRows = false;
+            dgLooseDeaths.AllowUserToDeleteRows = false;
+            dgLooseDeaths.AllowUserToOrderColumns = true;
+            dgLooseDeaths.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgLooseDeaths.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dgLooseDeaths.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgLooseDeaths.Dock = DockStyle.Fill;
+            dgLooseDeaths.FilterAndSortEnabled = true;
+            dgLooseDeaths.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgLooseDeaths.Location = new Point(0, 0);
+            dgLooseDeaths.Margin = new Padding(13, 15, 13, 15);
+            dgLooseDeaths.MultiSelect = false;
+            dgLooseDeaths.Name = "dgLooseDeaths";
+            dgLooseDeaths.ReadOnly = true;
+            dgLooseDeaths.RightToLeft = RightToLeft.No;
+            dgLooseDeaths.RowHeadersVisible = false;
+            dgLooseDeaths.RowHeadersWidth = 50;
+            dgLooseDeaths.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgLooseDeaths.Size = new Size(2282, 1050);
+            dgLooseDeaths.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgLooseDeaths.TabIndex = 2;
+            dgLooseDeaths.VirtualMode = true;
+            dgLooseDeaths.CellDoubleClick += DgLooseDeaths_CellDoubleClick;
             // 
             // tabLooseInfo
             // 
-            this.tabLooseInfo.Controls.Add(this.dgLooseInfo);
-            this.tabLooseInfo.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabLooseInfo.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabLooseInfo.Name = ("tabLooseInfo");
-            this.tabLooseInfo.Size = (new global::System.Drawing.Size(2120, 1000));
-            this.tabLooseInfo.TabIndex = (4);
-            this.tabLooseInfo.Text = ("All Loose Info");
-            this.tabLooseInfo.UseVisualStyleBackColor = (true);
+            tabLooseInfo.Controls.Add(dgLooseInfo);
+            tabLooseInfo.Location = new Point(8, 46);
+            tabLooseInfo.Margin = new Padding(8, 9, 8, 9);
+            tabLooseInfo.Name = "tabLooseInfo";
+            tabLooseInfo.Size = new Size(2282, 1050);
+            tabLooseInfo.TabIndex = 4;
+            tabLooseInfo.Text = "All Loose Info";
+            tabLooseInfo.UseVisualStyleBackColor = true;
             // 
             // dgLooseInfo
             // 
-            this.dgLooseInfo.AllowUserToAddRows = (false);
-            this.dgLooseInfo.AllowUserToDeleteRows = (false);
-            this.dgLooseInfo.AllowUserToOrderColumns = (true);
-            this.dgLooseInfo.AutoSizeColumnsMode = (global::System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            this.dgLooseInfo.AutoSizeRowsMode = (global::System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells);
-            this.dgLooseInfo.ColumnHeadersHeightSizeMode = (global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize);
-            this.dgLooseInfo.Dock = (global::System.Windows.Forms.DockStyle.Fill);
-            this.dgLooseInfo.FilterAndSortEnabled = (true);
-            this.dgLooseInfo.FilterStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgLooseInfo.Location = (new global::System.Drawing.Point(0, 0));
-            this.dgLooseInfo.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.dgLooseInfo.MultiSelect = (false);
-            this.dgLooseInfo.Name = ("dgLooseInfo");
-            this.dgLooseInfo.ReadOnly = (true);
-            this.dgLooseInfo.RightToLeft = (global::System.Windows.Forms.RightToLeft.No);
-            this.dgLooseInfo.RowHeadersVisible = (false);
-            this.dgLooseInfo.RowHeadersWidth = (50);
-            this.dgLooseInfo.SelectionMode = (global::System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect);
-            this.dgLooseInfo.Size = (new global::System.Drawing.Size(2120, 1000));
-            this.dgLooseInfo.SortStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgLooseInfo.TabIndex = (4);
-            this.dgLooseInfo.VirtualMode = (true);
-            this.dgLooseInfo.CellDoubleClick += (this.DgLooseInfo_CellDoubleClick);
+            dgLooseInfo.AllowUserToAddRows = false;
+            dgLooseInfo.AllowUserToDeleteRows = false;
+            dgLooseInfo.AllowUserToOrderColumns = true;
+            dgLooseInfo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgLooseInfo.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dgLooseInfo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgLooseInfo.Dock = DockStyle.Fill;
+            dgLooseInfo.FilterAndSortEnabled = true;
+            dgLooseInfo.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgLooseInfo.Location = new Point(0, 0);
+            dgLooseInfo.Margin = new Padding(13, 15, 13, 15);
+            dgLooseInfo.MultiSelect = false;
+            dgLooseInfo.Name = "dgLooseInfo";
+            dgLooseInfo.ReadOnly = true;
+            dgLooseInfo.RightToLeft = RightToLeft.No;
+            dgLooseInfo.RowHeadersVisible = false;
+            dgLooseInfo.RowHeadersWidth = 50;
+            dgLooseInfo.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgLooseInfo.Size = new Size(2282, 1050);
+            dgLooseInfo.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgLooseInfo.TabIndex = 4;
+            dgLooseInfo.VirtualMode = true;
+            dgLooseInfo.CellDoubleClick += DgLooseInfo_CellDoubleClick;
             // 
             // tabSurnames
             // 
-            this.tabSurnames.Controls.Add(this.chkSurnamesIgnoreCase);
-            this.tabSurnames.Controls.Add(this.btnShowSurnames);
-            this.tabSurnames.Controls.Add(this.dgSurnames);
-            this.tabSurnames.Controls.Add(this.reltypesSurnames);
-            this.tabSurnames.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabSurnames.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabSurnames.Name = ("tabSurnames");
-            this.tabSurnames.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabSurnames.Size = (new global::System.Drawing.Size(2128, 1043));
-            this.tabSurnames.TabIndex = (14);
-            this.tabSurnames.Text = ("Surnames");
-            this.tabSurnames.UseVisualStyleBackColor = (true);
+            tabSurnames.Controls.Add(chkSurnamesIgnoreCase);
+            tabSurnames.Controls.Add(btnShowSurnames);
+            tabSurnames.Controls.Add(dgSurnames);
+            tabSurnames.Controls.Add(reltypesSurnames);
+            tabSurnames.Location = new Point(8, 46);
+            tabSurnames.Margin = new Padding(8, 9, 8, 9);
+            tabSurnames.Name = "tabSurnames";
+            tabSurnames.Padding = new Padding(8, 9, 8, 9);
+            tabSurnames.Size = new Size(2298, 1074);
+            tabSurnames.TabIndex = 14;
+            tabSurnames.Text = "Surnames";
+            tabSurnames.UseVisualStyleBackColor = true;
             // 
             // chkSurnamesIgnoreCase
             // 
-            this.chkSurnamesIgnoreCase.AutoSize = (true);
-            this.chkSurnamesIgnoreCase.Checked = (true);
-            this.chkSurnamesIgnoreCase.CheckState = (global::System.Windows.Forms.CheckState.Checked);
-            this.chkSurnamesIgnoreCase.Location = (new global::System.Drawing.Point(994, 180));
-            this.chkSurnamesIgnoreCase.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.chkSurnamesIgnoreCase.Name = ("chkSurnamesIgnoreCase");
-            this.chkSurnamesIgnoreCase.Size = (new global::System.Drawing.Size(149, 34));
-            this.chkSurnamesIgnoreCase.TabIndex = (24);
-            this.chkSurnamesIgnoreCase.Text = ("Ignore Case");
-            this.chkSurnamesIgnoreCase.UseVisualStyleBackColor = (true);
+            chkSurnamesIgnoreCase.AutoSize = true;
+            chkSurnamesIgnoreCase.Checked = true;
+            chkSurnamesIgnoreCase.CheckState = CheckState.Checked;
+            chkSurnamesIgnoreCase.Location = new Point(1077, 192);
+            chkSurnamesIgnoreCase.Margin = new Padding(8, 9, 8, 9);
+            chkSurnamesIgnoreCase.Name = "chkSurnamesIgnoreCase";
+            chkSurnamesIgnoreCase.Size = new Size(172, 36);
+            chkSurnamesIgnoreCase.TabIndex = 24;
+            chkSurnamesIgnoreCase.Text = "Ignore Case";
+            chkSurnamesIgnoreCase.UseVisualStyleBackColor = true;
             // 
             // btnShowSurnames
             // 
-            this.btnShowSurnames.Location = (new global::System.Drawing.Point(674, 171));
-            this.btnShowSurnames.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnShowSurnames.Name = ("btnShowSurnames");
-            this.btnShowSurnames.Size = (new global::System.Drawing.Size(308, 52));
-            this.btnShowSurnames.TabIndex = (23);
-            this.btnShowSurnames.Text = ("Show Surnames");
-            this.btnShowSurnames.UseVisualStyleBackColor = (true);
-            this.btnShowSurnames.Click += (this.BtnShowSurnames_Click);
+            btnShowSurnames.Location = new Point(730, 182);
+            btnShowSurnames.Margin = new Padding(8, 9, 8, 9);
+            btnShowSurnames.Name = "btnShowSurnames";
+            btnShowSurnames.Size = new Size(334, 55);
+            btnShowSurnames.TabIndex = 23;
+            btnShowSurnames.Text = "Show Surnames";
+            btnShowSurnames.UseVisualStyleBackColor = true;
+            btnShowSurnames.Click += BtnShowSurnames_Click;
             // 
             // dgSurnames
             // 
-            this.dgSurnames.AllowUserToAddRows = (false);
-            this.dgSurnames.AllowUserToDeleteRows = (false);
-            this.dgSurnames.AllowUserToOrderColumns = (true);
-            this.dgSurnames.Anchor = ((global::System.Windows.Forms.AnchorStyles)((((global::System.Windows.Forms.AnchorStyles.Top) | (global::System.Windows.Forms.AnchorStyles.Bottom)) | (global::System.Windows.Forms.AnchorStyles.Left)) | (global::System.Windows.Forms.AnchorStyles.Right)));
-            this.dgSurnames.AutoSizeColumnsMode = (global::System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            this.dgSurnames.AutoSizeRowsMode = (global::System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells);
-            this.dgSurnames.ColumnHeadersHeightSizeMode = (global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize);
-            this.dgSurnames.Columns.AddRange(new global::System.Windows.Forms.DataGridViewColumn[] { this.Surname, this.URI, this.Individuals, this.Families, this.Marriages });
-            this.dgSurnames.FilterAndSortEnabled = (true);
-            this.dgSurnames.FilterStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgSurnames.Location = (new global::System.Drawing.Point(7, 238));
-            this.dgSurnames.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.dgSurnames.MultiSelect = (false);
-            this.dgSurnames.Name = ("dgSurnames");
-            this.dgSurnames.ReadOnly = (true);
-            this.dgSurnames.RightToLeft = (global::System.Windows.Forms.RightToLeft.No);
-            this.dgSurnames.RowHeadersVisible = (false);
-            this.dgSurnames.RowHeadersWidth = (50);
-            this.dgSurnames.SelectionMode = (global::System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect);
-            this.dgSurnames.Size = (new global::System.Drawing.Size(2121, 777));
-            this.dgSurnames.SortStringChangedInvokeBeforeDatasourceUpdate = (true);
-            this.dgSurnames.TabIndex = (1);
-            this.dgSurnames.VirtualMode = (true);
-            this.dgSurnames.CellContentClick += (this.DgSurnames_CellContentClick);
-            this.dgSurnames.CellDoubleClick += (this.DgSurnames_CellDoubleClick);
+            dgSurnames.AllowUserToAddRows = false;
+            dgSurnames.AllowUserToDeleteRows = false;
+            dgSurnames.AllowUserToOrderColumns = true;
+            dgSurnames.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgSurnames.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgSurnames.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dgSurnames.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgSurnames.Columns.AddRange(new DataGridViewColumn[] { Surname, URI, Individuals, Families, Marriages });
+            dgSurnames.FilterAndSortEnabled = true;
+            dgSurnames.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgSurnames.Location = new Point(8, 254);
+            dgSurnames.Margin = new Padding(13, 15, 13, 15);
+            dgSurnames.MultiSelect = false;
+            dgSurnames.Name = "dgSurnames";
+            dgSurnames.ReadOnly = true;
+            dgSurnames.RightToLeft = RightToLeft.No;
+            dgSurnames.RowHeadersVisible = false;
+            dgSurnames.RowHeadersWidth = 50;
+            dgSurnames.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgSurnames.Size = new Size(2290, 850);
+            dgSurnames.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            dgSurnames.TabIndex = 1;
+            dgSurnames.VirtualMode = true;
+            dgSurnames.CellContentClick += DgSurnames_CellContentClick;
+            dgSurnames.CellDoubleClick += DgSurnames_CellDoubleClick;
             // 
             // Surname
             // 
-            this.Surname.DataPropertyName = ("Surname");
-            this.Surname.HeaderText = ("Surname");
-            this.Surname.MinimumWidth = (22);
-            this.Surname.Name = ("Surname");
-            this.Surname.ReadOnly = (true);
-            this.Surname.SortMode = (global::System.Windows.Forms.DataGridViewColumnSortMode.Programmatic);
-            this.Surname.Width = (136);
+            Surname.DataPropertyName = "Surname";
+            Surname.HeaderText = "Surname";
+            Surname.MinimumWidth = 22;
+            Surname.Name = "Surname";
+            Surname.ReadOnly = true;
+            Surname.SortMode = DataGridViewColumnSortMode.Programmatic;
+            Surname.Width = 154;
             // 
             // URI
             // 
-            this.URI.DataPropertyName = ("URI");
-            this.URI.HeaderText = ("Link");
-            this.URI.MinimumWidth = (22);
-            this.URI.Name = ("URI");
-            this.URI.ReadOnly = (true);
-            this.URI.Resizable = (global::System.Windows.Forms.DataGridViewTriState.True);
-            this.URI.SortMode = (global::System.Windows.Forms.DataGridViewColumnSortMode.Programmatic);
-            this.URI.Visible = (false);
-            this.URI.Width = (200);
+            URI.DataPropertyName = "URI";
+            URI.HeaderText = "Link";
+            URI.MinimumWidth = 22;
+            URI.Name = "URI";
+            URI.ReadOnly = true;
+            URI.Resizable = DataGridViewTriState.True;
+            URI.SortMode = DataGridViewColumnSortMode.Programmatic;
+            URI.Visible = false;
+            URI.Width = 200;
             // 
             // Individuals
             // 
-            this.Individuals.DataPropertyName = ("Individuals");
-            this.Individuals.HeaderText = ("Individuals");
-            this.Individuals.MinimumWidth = (22);
-            this.Individuals.Name = ("Individuals");
-            this.Individuals.ReadOnly = (true);
-            this.Individuals.SortMode = (global::System.Windows.Forms.DataGridViewColumnSortMode.Programmatic);
-            this.Individuals.Width = (153);
+            Individuals.DataPropertyName = "Individuals";
+            Individuals.HeaderText = "Individuals";
+            Individuals.MinimumWidth = 22;
+            Individuals.Name = "Individuals";
+            Individuals.ReadOnly = true;
+            Individuals.SortMode = DataGridViewColumnSortMode.Programmatic;
+            Individuals.Width = 173;
             // 
             // Families
             // 
-            this.Families.DataPropertyName = ("Families");
-            this.Families.HeaderText = ("Families");
-            this.Families.MinimumWidth = (22);
-            this.Families.Name = ("Families");
-            this.Families.ReadOnly = (true);
-            this.Families.SortMode = (global::System.Windows.Forms.DataGridViewColumnSortMode.Programmatic);
-            this.Families.Width = (127);
+            Families.DataPropertyName = "Families";
+            Families.HeaderText = "Families";
+            Families.MinimumWidth = 22;
+            Families.Name = "Families";
+            Families.ReadOnly = true;
+            Families.SortMode = DataGridViewColumnSortMode.Programmatic;
+            Families.Width = 144;
             // 
             // Marriages
             // 
-            this.Marriages.DataPropertyName = ("Marriages");
-            this.Marriages.HeaderText = ("Marriages");
-            this.Marriages.MinimumWidth = (22);
-            this.Marriages.Name = ("Marriages");
-            this.Marriages.ReadOnly = (true);
-            this.Marriages.SortMode = (global::System.Windows.Forms.DataGridViewColumnSortMode.Programmatic);
-            this.Marriages.Width = (146);
+            Marriages.DataPropertyName = "Marriages";
+            Marriages.HeaderText = "Marriages";
+            Marriages.MinimumWidth = 22;
+            Marriages.Name = "Marriages";
+            Marriages.ReadOnly = true;
+            Marriages.SortMode = DataGridViewColumnSortMode.Programmatic;
+            Marriages.Width = 164;
             // 
             // reltypesSurnames
             // 
-            this.reltypesSurnames.Location = (new global::System.Drawing.Point(12, 8));
-            this.reltypesSurnames.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.reltypesSurnames.MarriedToDB = (true);
-            this.reltypesSurnames.Name = ("reltypesSurnames");
-            this.reltypesSurnames.Size = (new global::System.Drawing.Size(650, 229));
-            this.reltypesSurnames.TabIndex = (22);
+            reltypesSurnames.Location = new Point(13, 9);
+            reltypesSurnames.Margin = new Padding(13, 15, 13, 15);
+            reltypesSurnames.MarriedToDB = true;
+            reltypesSurnames.Name = "reltypesSurnames";
+            reltypesSurnames.Size = new Size(704, 244);
+            reltypesSurnames.TabIndex = 22;
             // 
             // tabFacts
             // 
-            this.tabFacts.Controls.Add(this.panel1);
-            this.tabFacts.Controls.Add(this.btnDuplicateFacts);
-            this.tabFacts.Controls.Add(this.btnShowExclusions);
-            this.tabFacts.Controls.Add(this.lblExclude);
-            this.tabFacts.Controls.Add(this.label15);
-            this.tabFacts.Controls.Add(this.btnDeselectExcludeAllFactTypes);
-            this.tabFacts.Controls.Add(this.btnExcludeAllFactTypes);
-            this.tabFacts.Controls.Add(this.ckbFactExclude);
-            this.tabFacts.Controls.Add(this.btnDeselectAllFactTypes);
-            this.tabFacts.Controls.Add(this.btnSelectAllFactTypes);
-            this.tabFacts.Controls.Add(this.ckbFactSelect);
-            this.tabFacts.Controls.Add(this.btnShowFacts);
-            this.tabFacts.Controls.Add(this.label3);
-            this.tabFacts.Controls.Add(this.txtFactsSurname);
-            this.tabFacts.Controls.Add(this.relTypesFacts);
-            this.tabFacts.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabFacts.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabFacts.Name = ("tabFacts");
-            this.tabFacts.Size = (new global::System.Drawing.Size(2128, 1043));
-            this.tabFacts.TabIndex = (13);
-            this.tabFacts.Text = ("Facts");
-            this.tabFacts.UseVisualStyleBackColor = (true);
+            tabFacts.Controls.Add(panel1);
+            tabFacts.Controls.Add(btnDuplicateFacts);
+            tabFacts.Controls.Add(btnShowExclusions);
+            tabFacts.Controls.Add(lblExclude);
+            tabFacts.Controls.Add(label15);
+            tabFacts.Controls.Add(btnDeselectExcludeAllFactTypes);
+            tabFacts.Controls.Add(btnExcludeAllFactTypes);
+            tabFacts.Controls.Add(ckbFactExclude);
+            tabFacts.Controls.Add(btnDeselectAllFactTypes);
+            tabFacts.Controls.Add(btnSelectAllFactTypes);
+            tabFacts.Controls.Add(ckbFactSelect);
+            tabFacts.Controls.Add(btnShowFacts);
+            tabFacts.Controls.Add(label3);
+            tabFacts.Controls.Add(txtFactsSurname);
+            tabFacts.Controls.Add(relTypesFacts);
+            tabFacts.Location = new Point(8, 46);
+            tabFacts.Margin = new Padding(8, 9, 8, 9);
+            tabFacts.Name = "tabFacts";
+            tabFacts.Size = new Size(2298, 1074);
+            tabFacts.TabIndex = 13;
+            tabFacts.Text = "Facts";
+            tabFacts.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((global::System.Windows.Forms.AnchorStyles)(((global::System.Windows.Forms.AnchorStyles.Bottom) | (global::System.Windows.Forms.AnchorStyles.Left)) | (global::System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.radioOnlyAlternate);
-            this.panel1.Controls.Add(this.radioOnlyPreferred);
-            this.panel1.Controls.Add(this.radioAllFacts);
-            this.panel1.Location = (new global::System.Drawing.Point(349, 959));
-            this.panel1.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.panel1.Name = ("panel1");
-            this.panel1.Size = (new global::System.Drawing.Size(706, 51));
-            this.panel1.TabIndex = (38);
+            panel1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.Controls.Add(radioOnlyAlternate);
+            panel1.Controls.Add(radioOnlyPreferred);
+            panel1.Controls.Add(radioAllFacts);
+            panel1.Location = new Point(378, 993);
+            panel1.Margin = new Padding(4, 5, 4, 5);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(765, 54);
+            panel1.TabIndex = 38;
             // 
             // radioAllFacts
             // 
-            this.radioAllFacts.AutoSize = (true);
-            this.radioAllFacts.Checked = (true);
-            this.radioAllFacts.Location = (new global::System.Drawing.Point(0, 5));
-            this.radioAllFacts.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.radioAllFacts.Name = ("radioAllFacts");
-            this.radioAllFacts.Size = (new global::System.Drawing.Size(170, 34));
-            this.radioAllFacts.TabIndex = (38);
-            this.radioAllFacts.TabStop = (true);
-            this.radioAllFacts.Text = ("Show All Facts");
-            this.radioAllFacts.UseVisualStyleBackColor = (true);
-            this.radioAllFacts.CheckedChanged += (this.RadioFacts_CheckedChanged);
+            radioAllFacts.AutoSize = true;
+            radioAllFacts.Checked = true;
+            radioAllFacts.Location = new Point(0, 5);
+            radioAllFacts.Margin = new Padding(4, 5, 4, 5);
+            radioAllFacts.Name = "radioAllFacts";
+            radioAllFacts.Size = new Size(196, 36);
+            radioAllFacts.TabIndex = 38;
+            radioAllFacts.TabStop = true;
+            radioAllFacts.Text = "Show All Facts";
+            radioAllFacts.UseVisualStyleBackColor = true;
+            radioAllFacts.CheckedChanged += RadioFacts_CheckedChanged;
             // 
             // btnDuplicateFacts
             // 
-            this.btnDuplicateFacts.Location = (new global::System.Drawing.Point(1363, 98));
-            this.btnDuplicateFacts.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnDuplicateFacts.Name = ("btnDuplicateFacts");
-            this.btnDuplicateFacts.Size = (new global::System.Drawing.Size(324, 88));
-            this.btnDuplicateFacts.TabIndex = (34);
-            this.btnDuplicateFacts.Text = ("Show Duplicate Facts of Selected Fact Type");
-            this.btnDuplicateFacts.UseVisualStyleBackColor = (true);
-            this.btnDuplicateFacts.Click += (this.BtnDuplicateFacts_Click);
+            btnDuplicateFacts.Location = new Point(1477, 105);
+            btnDuplicateFacts.Margin = new Padding(8, 9, 8, 9);
+            btnDuplicateFacts.Name = "btnDuplicateFacts";
+            btnDuplicateFacts.Size = new Size(351, 94);
+            btnDuplicateFacts.TabIndex = 34;
+            btnDuplicateFacts.Text = "Show Duplicate Facts of Selected Fact Type";
+            btnDuplicateFacts.UseVisualStyleBackColor = true;
+            btnDuplicateFacts.Click += BtnDuplicateFacts_Click;
             // 
             // lblExclude
             // 
-            this.lblExclude.Anchor = ((global::System.Windows.Forms.AnchorStyles)((global::System.Windows.Forms.AnchorStyles.Bottom) | (global::System.Windows.Forms.AnchorStyles.Left)));
-            this.lblExclude.Location = (new global::System.Drawing.Point(626, 1099));
-            this.lblExclude.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.lblExclude.Name = ("lblExclude");
-            this.lblExclude.Size = (new global::System.Drawing.Size(586, 30));
-            this.lblExclude.TabIndex = (32);
-            this.lblExclude.Text = ("Select Facts to Exclude from Report");
-            this.lblExclude.TextAlign = (global::System.Drawing.ContentAlignment.TopCenter);
-            this.lblExclude.Visible = (false);
+            lblExclude.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lblExclude.Location = new Point(678, 1172);
+            lblExclude.Margin = new Padding(8, 0, 8, 0);
+            lblExclude.Name = "lblExclude";
+            lblExclude.Size = new Size(635, 32);
+            lblExclude.TabIndex = 32;
+            lblExclude.Text = "Select Facts to Exclude from Report";
+            lblExclude.TextAlign = ContentAlignment.TopCenter;
+            lblExclude.Visible = false;
             // 
             // label15
             // 
-            this.label15.Anchor = ((global::System.Windows.Forms.AnchorStyles)((global::System.Windows.Forms.AnchorStyles.Bottom) | (global::System.Windows.Forms.AnchorStyles.Left)));
-            this.label15.Location = (new global::System.Drawing.Point(14, 1099));
-            this.label15.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.label15.Name = ("label15");
-            this.label15.Size = (new global::System.Drawing.Size(586, 30));
-            this.label15.TabIndex = (31);
-            this.label15.Text = ("Select Facts to Include in Report");
-            this.label15.TextAlign = (global::System.Drawing.ContentAlignment.TopCenter);
+            label15.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label15.Location = new Point(15, 1172);
+            label15.Margin = new Padding(8, 0, 8, 0);
+            label15.Name = "label15";
+            label15.Size = new Size(635, 32);
+            label15.TabIndex = 31;
+            label15.Text = "Select Facts to Include in Report";
+            label15.TextAlign = ContentAlignment.TopCenter;
             // 
             // btnDeselectExcludeAllFactTypes
             // 
-            this.btnDeselectExcludeAllFactTypes.Location = (new global::System.Drawing.Point(1076, 251));
-            this.btnDeselectExcludeAllFactTypes.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnDeselectExcludeAllFactTypes.Name = ("btnDeselectExcludeAllFactTypes");
-            this.btnDeselectExcludeAllFactTypes.Size = (new global::System.Drawing.Size(272, 52));
-            this.btnDeselectExcludeAllFactTypes.TabIndex = (30);
-            this.btnDeselectExcludeAllFactTypes.Text = ("De-select all Fact Types");
-            this.btnDeselectExcludeAllFactTypes.UseVisualStyleBackColor = (true);
-            this.btnDeselectExcludeAllFactTypes.Visible = (false);
-            this.btnDeselectExcludeAllFactTypes.Click += (this.BtnDeselectExcludeAllFactTypes_Click);
+            btnDeselectExcludeAllFactTypes.Location = new Point(1166, 268);
+            btnDeselectExcludeAllFactTypes.Margin = new Padding(8, 9, 8, 9);
+            btnDeselectExcludeAllFactTypes.Name = "btnDeselectExcludeAllFactTypes";
+            btnDeselectExcludeAllFactTypes.Size = new Size(295, 55);
+            btnDeselectExcludeAllFactTypes.TabIndex = 30;
+            btnDeselectExcludeAllFactTypes.Text = "De-select all Fact Types";
+            btnDeselectExcludeAllFactTypes.UseVisualStyleBackColor = true;
+            btnDeselectExcludeAllFactTypes.Visible = false;
+            btnDeselectExcludeAllFactTypes.Click += BtnDeselectExcludeAllFactTypes_Click;
             // 
             // btnExcludeAllFactTypes
             // 
-            this.btnExcludeAllFactTypes.Location = (new global::System.Drawing.Point(722, 249));
-            this.btnExcludeAllFactTypes.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnExcludeAllFactTypes.Name = ("btnExcludeAllFactTypes");
-            this.btnExcludeAllFactTypes.Size = (new global::System.Drawing.Size(272, 52));
-            this.btnExcludeAllFactTypes.TabIndex = (29);
-            this.btnExcludeAllFactTypes.Text = ("Select all Fact Types");
-            this.btnExcludeAllFactTypes.UseVisualStyleBackColor = (true);
-            this.btnExcludeAllFactTypes.Visible = (false);
-            this.btnExcludeAllFactTypes.Click += (this.BtnExcludeAllFactTypes_Click);
+            btnExcludeAllFactTypes.Location = new Point(782, 266);
+            btnExcludeAllFactTypes.Margin = new Padding(8, 9, 8, 9);
+            btnExcludeAllFactTypes.Name = "btnExcludeAllFactTypes";
+            btnExcludeAllFactTypes.Size = new Size(295, 55);
+            btnExcludeAllFactTypes.TabIndex = 29;
+            btnExcludeAllFactTypes.Text = "Select all Fact Types";
+            btnExcludeAllFactTypes.UseVisualStyleBackColor = true;
+            btnExcludeAllFactTypes.Visible = false;
+            btnExcludeAllFactTypes.Click += BtnExcludeAllFactTypes_Click;
             // 
             // btnDeselectAllFactTypes
             // 
-            this.btnDeselectAllFactTypes.Location = (new global::System.Drawing.Point(370, 251));
-            this.btnDeselectAllFactTypes.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnDeselectAllFactTypes.Name = ("btnDeselectAllFactTypes");
-            this.btnDeselectAllFactTypes.Size = (new global::System.Drawing.Size(272, 52));
-            this.btnDeselectAllFactTypes.TabIndex = (27);
-            this.btnDeselectAllFactTypes.Text = ("De-select all Fact Types");
-            this.btnDeselectAllFactTypes.UseVisualStyleBackColor = (true);
-            this.btnDeselectAllFactTypes.Click += (this.BtnDeselectAllFactTypes_Click);
+            btnDeselectAllFactTypes.Location = new Point(401, 268);
+            btnDeselectAllFactTypes.Margin = new Padding(8, 9, 8, 9);
+            btnDeselectAllFactTypes.Name = "btnDeselectAllFactTypes";
+            btnDeselectAllFactTypes.Size = new Size(295, 55);
+            btnDeselectAllFactTypes.TabIndex = 27;
+            btnDeselectAllFactTypes.Text = "De-select all Fact Types";
+            btnDeselectAllFactTypes.UseVisualStyleBackColor = true;
+            btnDeselectAllFactTypes.Click += BtnDeselectAllFactTypes_Click;
             // 
             // btnSelectAllFactTypes
             // 
-            this.btnSelectAllFactTypes.Location = (new global::System.Drawing.Point(16, 249));
-            this.btnSelectAllFactTypes.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnSelectAllFactTypes.Name = ("btnSelectAllFactTypes");
-            this.btnSelectAllFactTypes.Size = (new global::System.Drawing.Size(272, 52));
-            this.btnSelectAllFactTypes.TabIndex = (26);
-            this.btnSelectAllFactTypes.Text = ("Select all Fact Types");
-            this.btnSelectAllFactTypes.UseVisualStyleBackColor = (true);
-            this.btnSelectAllFactTypes.Click += (this.BtnSelectAllFactTypes_Click);
+            btnSelectAllFactTypes.Location = new Point(17, 266);
+            btnSelectAllFactTypes.Margin = new Padding(8, 9, 8, 9);
+            btnSelectAllFactTypes.Name = "btnSelectAllFactTypes";
+            btnSelectAllFactTypes.Size = new Size(295, 55);
+            btnSelectAllFactTypes.TabIndex = 26;
+            btnSelectAllFactTypes.Text = "Select all Fact Types";
+            btnSelectAllFactTypes.UseVisualStyleBackColor = true;
+            btnSelectAllFactTypes.Click += BtnSelectAllFactTypes_Click;
             // 
             // ckbFactSelect
             // 
-            this.ckbFactSelect.Anchor = ((global::System.Windows.Forms.AnchorStyles)(((global::System.Windows.Forms.AnchorStyles.Top) | (global::System.Windows.Forms.AnchorStyles.Bottom)) | (global::System.Windows.Forms.AnchorStyles.Left)));
-            this.ckbFactSelect.FormattingEnabled = (true);
-            this.ckbFactSelect.Location = (new global::System.Drawing.Point(16, 316));
-            this.ckbFactSelect.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.ckbFactSelect.Name = ("ckbFactSelect");
-            this.ckbFactSelect.ScrollAlwaysVisible = (true);
-            this.ckbFactSelect.SelectionMode = (global::System.Windows.Forms.SelectionMode.None);
-            this.ckbFactSelect.Size = (new global::System.Drawing.Size(624, 484));
-            this.ckbFactSelect.TabIndex = (25);
-            this.ckbFactSelect.MouseClick += (this.CkbFactSelect_MouseClick);
+            ckbFactSelect.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            ckbFactSelect.FormattingEnabled = true;
+            ckbFactSelect.Location = new Point(17, 337);
+            ckbFactSelect.Margin = new Padding(8, 9, 8, 9);
+            ckbFactSelect.Name = "ckbFactSelect";
+            ckbFactSelect.ScrollAlwaysVisible = true;
+            ckbFactSelect.SelectionMode = SelectionMode.None;
+            ckbFactSelect.Size = new Size(676, 508);
+            ckbFactSelect.TabIndex = 25;
+            ckbFactSelect.MouseClick += CkbFactSelect_MouseClick;
             // 
             // btnShowFacts
             // 
-            this.btnShowFacts.Location = (new global::System.Drawing.Point(722, 98));
-            this.btnShowFacts.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnShowFacts.Name = ("btnShowFacts");
-            this.btnShowFacts.Size = (new global::System.Drawing.Size(626, 88));
-            this.btnShowFacts.TabIndex = (24);
-            this.btnShowFacts.Text = ("Show Facts for Individuals with Selected Fact Types");
-            this.btnShowFacts.UseVisualStyleBackColor = (true);
-            this.btnShowFacts.Click += (this.BtnShowFacts_Click);
+            btnShowFacts.Location = new Point(782, 105);
+            btnShowFacts.Margin = new Padding(8, 9, 8, 9);
+            btnShowFacts.Name = "btnShowFacts";
+            btnShowFacts.Size = new Size(678, 94);
+            btnShowFacts.TabIndex = 24;
+            btnShowFacts.Text = "Show Facts for Individuals with Selected Fact Types";
+            btnShowFacts.UseVisualStyleBackColor = true;
+            btnShowFacts.Click += BtnShowFacts_Click;
             // 
             // label3
             // 
-            this.label3.AutoSize = (true);
-            this.label3.Location = (new global::System.Drawing.Point(727, 44));
-            this.label3.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.label3.Name = ("label3");
-            this.label3.Size = (new global::System.Drawing.Size(95, 30));
-            this.label3.TabIndex = (23);
-            this.label3.Text = ("Surname");
+            label3.AutoSize = true;
+            label3.Location = new Point(788, 47);
+            label3.Margin = new Padding(8, 0, 8, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(109, 32);
+            label3.TabIndex = 23;
+            label3.Text = "Surname";
             // 
             // txtFactsSurname
             // 
-            this.txtFactsSurname.Location = (new global::System.Drawing.Point(836, 38));
-            this.txtFactsSurname.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.txtFactsSurname.Name = ("txtFactsSurname");
-            this.txtFactsSurname.Size = (new global::System.Drawing.Size(508, 35));
-            this.txtFactsSurname.TabIndex = (22);
-            this.txtFactsSurname.TextChanged += (this.TxtFactsSurname_TextChanged);
+            txtFactsSurname.Location = new Point(906, 41);
+            txtFactsSurname.Margin = new Padding(8, 9, 8, 9);
+            txtFactsSurname.Name = "txtFactsSurname";
+            txtFactsSurname.Size = new Size(550, 39);
+            txtFactsSurname.TabIndex = 22;
+            txtFactsSurname.TextChanged += TxtFactsSurname_TextChanged;
             // 
             // relTypesFacts
             // 
-            this.relTypesFacts.Location = (new global::System.Drawing.Point(16, 8));
-            this.relTypesFacts.Margin = (new global::System.Windows.Forms.Padding(12, 14, 12, 14));
-            this.relTypesFacts.MarriedToDB = (true);
-            this.relTypesFacts.Name = ("relTypesFacts");
-            this.relTypesFacts.Size = (new global::System.Drawing.Size(650, 231));
-            this.relTypesFacts.TabIndex = (21);
-            this.relTypesFacts.RelationTypesChanged += (this.RelTypesFacts_RelationTypesChanged);
+            relTypesFacts.Location = new Point(17, 9);
+            relTypesFacts.Margin = new Padding(13, 15, 13, 15);
+            relTypesFacts.MarriedToDB = true;
+            relTypesFacts.Name = "relTypesFacts";
+            relTypesFacts.Size = new Size(704, 246);
+            relTypesFacts.TabIndex = 21;
+            relTypesFacts.RelationTypesChanged += RelTypesFacts_RelationTypesChanged;
             // 
             // tabToday
             // 
-            this.tabToday.Controls.Add(this.rtbToday);
-            this.tabToday.Controls.Add(this.label18);
-            this.tabToday.Controls.Add(this.nudToday);
-            this.tabToday.Controls.Add(this.btnUpdateTodaysEvents);
-            this.tabToday.Controls.Add(this.labToday);
-            this.tabToday.Controls.Add(this.pbToday);
-            this.tabToday.Controls.Add(this.rbTodayMonth);
-            this.tabToday.Controls.Add(this.rbTodaySingle);
-            this.tabToday.Controls.Add(this.label17);
-            this.tabToday.Controls.Add(this.dpToday);
-            this.tabToday.Location = (new global::System.Drawing.Point(4, 39));
-            this.tabToday.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabToday.Name = ("tabToday");
-            this.tabToday.Padding = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.tabToday.Size = (new global::System.Drawing.Size(2128, 1043));
-            this.tabToday.TabIndex = (17);
-            this.tabToday.Text = ("On This Day");
-            this.tabToday.UseVisualStyleBackColor = (true);
+            tabToday.Controls.Add(rtbToday);
+            tabToday.Controls.Add(label18);
+            tabToday.Controls.Add(nudToday);
+            tabToday.Controls.Add(btnUpdateTodaysEvents);
+            tabToday.Controls.Add(labToday);
+            tabToday.Controls.Add(pbToday);
+            tabToday.Controls.Add(rbTodayMonth);
+            tabToday.Controls.Add(rbTodaySingle);
+            tabToday.Controls.Add(label17);
+            tabToday.Controls.Add(dpToday);
+            tabToday.Location = new Point(8, 46);
+            tabToday.Margin = new Padding(8, 9, 8, 9);
+            tabToday.Name = "tabToday";
+            tabToday.Padding = new Padding(8, 9, 8, 9);
+            tabToday.Size = new Size(2298, 1074);
+            tabToday.TabIndex = 17;
+            tabToday.Text = "On This Day";
+            tabToday.UseVisualStyleBackColor = true;
             // 
             // rtbToday
             // 
-            this.rtbToday.Dock = (global::System.Windows.Forms.DockStyle.Bottom);
-            this.rtbToday.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 9F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            this.rtbToday.Location = (new global::System.Drawing.Point(7, 149));
-            this.rtbToday.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.rtbToday.Name = ("rtbToday");
-            this.rtbToday.ReadOnly = (true);
-            this.rtbToday.Size = (new global::System.Drawing.Size(2114, 886));
-            this.rtbToday.TabIndex = (17);
-            this.rtbToday.Text = ("");
+            rtbToday.Dock = DockStyle.Bottom;
+            rtbToday.Font = new Font("Microsoft Sans Serif", 9F);
+            rtbToday.Location = new Point(8, 120);
+            rtbToday.Margin = new Padding(8, 9, 8, 9);
+            rtbToday.Name = "rtbToday";
+            rtbToday.ReadOnly = true;
+            rtbToday.Size = new Size(2282, 945);
+            rtbToday.TabIndex = 17;
+            rtbToday.Text = "";
             // 
             // label18
             // 
-            this.label18.AutoSize = (true);
-            this.label18.Location = (new global::System.Drawing.Point(1106, 52));
-            this.label18.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.label18.Name = ("label18");
-            this.label18.Size = (new global::System.Drawing.Size(109, 30));
-            this.label18.TabIndex = (16);
-            this.label18.Text = ("Year Step :");
+            label18.AutoSize = true;
+            label18.Location = new Point(1198, 55);
+            label18.Margin = new Padding(8, 0, 8, 0);
+            label18.Name = "label18";
+            label18.Size = new Size(124, 32);
+            label18.TabIndex = 16;
+            label18.Text = "Year Step :";
             // 
             // nudToday
             // 
-            this.nudToday.Location = (new global::System.Drawing.Point(1238, 49));
-            this.nudToday.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.nudToday.Maximum = (new global::System.Decimal(new global::System.Int32[] { 10, 0, 0, 0 }));
-            this.nudToday.Minimum = (new global::System.Decimal(new global::System.Int32[] { 1, 0, 0, 0 }));
-            this.nudToday.Name = ("nudToday");
-            this.nudToday.Size = (new global::System.Drawing.Size(84, 35));
-            this.nudToday.TabIndex = (15);
-            this.nudToday.Value = (new global::System.Decimal(new global::System.Int32[] { 5, 0, 0, 0 }));
-            this.nudToday.ValueChanged += (this.NudToday_ValueChanged);
+            nudToday.Location = new Point(1341, 52);
+            nudToday.Margin = new Padding(8, 9, 8, 9);
+            nudToday.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            nudToday.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            nudToday.Name = "nudToday";
+            nudToday.Size = new Size(91, 39);
+            nudToday.TabIndex = 15;
+            nudToday.Value = new decimal(new int[] { 5, 0, 0, 0 });
+            nudToday.ValueChanged += NudToday_ValueChanged;
             // 
             // btnUpdateTodaysEvents
             // 
-            this.btnUpdateTodaysEvents.Location = (new global::System.Drawing.Point(511, 41));
-            this.btnUpdateTodaysEvents.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.btnUpdateTodaysEvents.Name = ("btnUpdateTodaysEvents");
-            this.btnUpdateTodaysEvents.Size = (new global::System.Drawing.Size(230, 52));
-            this.btnUpdateTodaysEvents.TabIndex = (14);
-            this.btnUpdateTodaysEvents.Text = ("Update list of Events");
-            this.btnUpdateTodaysEvents.UseVisualStyleBackColor = (true);
-            this.btnUpdateTodaysEvents.Click += (this.BtnUpdateTodaysEvents_Click);
+            btnUpdateTodaysEvents.Location = new Point(554, 44);
+            btnUpdateTodaysEvents.Margin = new Padding(8, 9, 8, 9);
+            btnUpdateTodaysEvents.Name = "btnUpdateTodaysEvents";
+            btnUpdateTodaysEvents.Size = new Size(249, 55);
+            btnUpdateTodaysEvents.TabIndex = 14;
+            btnUpdateTodaysEvents.Text = "Update list of Events";
+            btnUpdateTodaysEvents.UseVisualStyleBackColor = true;
+            btnUpdateTodaysEvents.Click += BtnUpdateTodaysEvents_Click;
             // 
             // labToday
             // 
-            this.labToday.AutoSize = (true);
-            this.labToday.Location = (new global::System.Drawing.Point(1363, 52));
-            this.labToday.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.labToday.Name = ("labToday");
-            this.labToday.Size = (new global::System.Drawing.Size(214, 30));
-            this.labToday.TabIndex = (13);
-            this.labToday.Text = ("Loading World Events");
+            labToday.AutoSize = true;
+            labToday.Location = new Point(1477, 55);
+            labToday.Margin = new Padding(8, 0, 8, 0);
+            labToday.Name = "labToday";
+            labToday.Size = new Size(245, 32);
+            labToday.TabIndex = 13;
+            labToday.Text = "Loading World Events";
             // 
             // pbToday
             // 
-            this.pbToday.Location = (new global::System.Drawing.Point(1598, 49));
-            this.pbToday.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.pbToday.Name = ("pbToday");
-            this.pbToday.Size = (new global::System.Drawing.Size(340, 46));
-            this.pbToday.TabIndex = (12);
+            pbToday.Location = new Point(1731, 52);
+            pbToday.Margin = new Padding(8, 9, 8, 9);
+            pbToday.Name = "pbToday";
+            pbToday.Size = new Size(368, 49);
+            pbToday.TabIndex = 12;
             // 
             // rbTodayMonth
             // 
-            this.rbTodayMonth.AutoSize = (true);
-            this.rbTodayMonth.Location = (new global::System.Drawing.Point(916, 49));
-            this.rbTodayMonth.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.rbTodayMonth.Name = ("rbTodayMonth");
-            this.rbTodayMonth.Size = (new global::System.Drawing.Size(166, 34));
-            this.rbTodayMonth.TabIndex = (11);
-            this.rbTodayMonth.Text = ("Whole Month");
-            this.rbTodayMonth.UseVisualStyleBackColor = (true);
-            this.rbTodayMonth.CheckedChanged += (this.RbTodayMonth_CheckedChanged);
+            rbTodayMonth.AutoSize = true;
+            rbTodayMonth.Location = new Point(992, 52);
+            rbTodayMonth.Margin = new Padding(8, 9, 8, 9);
+            rbTodayMonth.Name = "rbTodayMonth";
+            rbTodayMonth.Size = new Size(193, 36);
+            rbTodayMonth.TabIndex = 11;
+            rbTodayMonth.Text = "Whole Month";
+            rbTodayMonth.UseVisualStyleBackColor = true;
+            rbTodayMonth.CheckedChanged += RbTodayMonth_CheckedChanged;
             // 
             // rbTodaySingle
             // 
-            this.rbTodaySingle.AutoSize = (true);
-            this.rbTodaySingle.Checked = (true);
-            this.rbTodaySingle.Location = (new global::System.Drawing.Point(752, 49));
-            this.rbTodaySingle.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.rbTodaySingle.Name = ("rbTodaySingle");
-            this.rbTodaySingle.Size = (new global::System.Drawing.Size(136, 34));
-            this.rbTodaySingle.TabIndex = (10);
-            this.rbTodaySingle.TabStop = (true);
-            this.rbTodaySingle.Text = ("Single Day");
-            this.rbTodaySingle.UseVisualStyleBackColor = (true);
-            this.rbTodaySingle.CheckedChanged += (this.RbTodaySingle_CheckedChanged);
+            rbTodaySingle.AutoSize = true;
+            rbTodaySingle.Checked = true;
+            rbTodaySingle.Location = new Point(815, 52);
+            rbTodaySingle.Margin = new Padding(8, 9, 8, 9);
+            rbTodaySingle.Name = "rbTodaySingle";
+            rbTodaySingle.Size = new Size(159, 36);
+            rbTodaySingle.TabIndex = 10;
+            rbTodaySingle.TabStop = true;
+            rbTodaySingle.Text = "Single Day";
+            rbTodaySingle.UseVisualStyleBackColor = true;
+            rbTodaySingle.CheckedChanged += RbTodaySingle_CheckedChanged;
             // 
             // label17
             // 
-            this.label17.AutoSize = (true);
-            this.label17.Location = (new global::System.Drawing.Point(7, 52));
-            this.label17.Margin = (new global::System.Windows.Forms.Padding(7, 0, 7, 0));
-            this.label17.Name = ("label17");
-            this.label17.Size = (new global::System.Drawing.Size(129, 30));
-            this.label17.TabIndex = (9);
-            this.label17.Text = ("Select Date :");
+            label17.AutoSize = true;
+            label17.Location = new Point(8, 55);
+            label17.Margin = new Padding(8, 0, 8, 0);
+            label17.Name = "label17";
+            label17.Size = new Size(147, 32);
+            label17.TabIndex = 9;
+            label17.Text = "Select Date :";
             // 
             // dpToday
             // 
-            this.dpToday.Location = (new global::System.Drawing.Point(156, 49));
-            this.dpToday.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.dpToday.Name = ("dpToday");
-            this.dpToday.Size = (new global::System.Drawing.Size(338, 35));
-            this.dpToday.TabIndex = (8);
+            dpToday.Location = new Point(169, 52);
+            dpToday.Margin = new Padding(8, 9, 8, 9);
+            dpToday.Name = "dpToday";
+            dpToday.Size = new Size(366, 39);
+            dpToday.TabIndex = 8;
             // 
             // NonDuplicate
             // 
-            this.NonDuplicate.DataPropertyName = ("IgnoreNonDuplicate");
-            this.NonDuplicate.FalseValue = ("False");
-            this.NonDuplicate.HeaderText = ("Ignore");
-            this.NonDuplicate.MinimumWidth = (40);
-            this.NonDuplicate.Name = ("NonDuplicate");
-            this.NonDuplicate.ReadOnly = (true);
-            this.NonDuplicate.TrueValue = ("True");
-            this.NonDuplicate.Width = (40);
+            NonDuplicate.DataPropertyName = "IgnoreNonDuplicate";
+            NonDuplicate.FalseValue = "False";
+            NonDuplicate.HeaderText = "Ignore";
+            NonDuplicate.MinimumWidth = 40;
+            NonDuplicate.Name = "NonDuplicate";
+            NonDuplicate.ReadOnly = true;
+            NonDuplicate.TrueValue = "True";
+            NonDuplicate.Width = 40;
             // 
             // Score
             // 
-            this.Score.DataPropertyName = ("Score");
-            this.Score.HeaderText = ("Score");
-            this.Score.MinimumWidth = (10);
-            this.Score.Name = ("Score");
-            this.Score.ReadOnly = (true);
-            this.Score.Width = (200);
+            Score.DataPropertyName = "Score";
+            Score.HeaderText = "Score";
+            Score.MinimumWidth = 10;
+            Score.Name = "Score";
+            Score.ReadOnly = true;
+            Score.Width = 200;
             // 
             // DuplicateIndividualID
             // 
-            this.DuplicateIndividualID.DataPropertyName = ("IndividualID");
-            this.DuplicateIndividualID.HeaderText = ("ID");
-            this.DuplicateIndividualID.MinimumWidth = (10);
-            this.DuplicateIndividualID.Name = ("DuplicateIndividualID");
-            this.DuplicateIndividualID.ReadOnly = (true);
-            this.DuplicateIndividualID.Width = (200);
+            DuplicateIndividualID.DataPropertyName = "IndividualID";
+            DuplicateIndividualID.HeaderText = "ID";
+            DuplicateIndividualID.MinimumWidth = 10;
+            DuplicateIndividualID.Name = "DuplicateIndividualID";
+            DuplicateIndividualID.ReadOnly = true;
+            DuplicateIndividualID.Width = 200;
             // 
             // DuplicateName
             // 
-            this.DuplicateName.DataPropertyName = ("Name");
-            this.DuplicateName.HeaderText = ("Name");
-            this.DuplicateName.MinimumWidth = (50);
-            this.DuplicateName.Name = ("DuplicateName");
-            this.DuplicateName.ReadOnly = (true);
-            this.DuplicateName.Width = (150);
+            DuplicateName.DataPropertyName = "Name";
+            DuplicateName.HeaderText = "Name";
+            DuplicateName.MinimumWidth = 50;
+            DuplicateName.Name = "DuplicateName";
+            DuplicateName.ReadOnly = true;
+            DuplicateName.Width = 150;
             // 
             // DuplicateForenames
             // 
-            this.DuplicateForenames.DataPropertyName = ("Forenames");
-            this.DuplicateForenames.HeaderText = ("Forenames");
-            this.DuplicateForenames.MinimumWidth = (10);
-            this.DuplicateForenames.Name = ("DuplicateForenames");
-            this.DuplicateForenames.ReadOnly = (true);
-            this.DuplicateForenames.Visible = (false);
-            this.DuplicateForenames.Width = (200);
+            DuplicateForenames.DataPropertyName = "Forenames";
+            DuplicateForenames.HeaderText = "Forenames";
+            DuplicateForenames.MinimumWidth = 10;
+            DuplicateForenames.Name = "DuplicateForenames";
+            DuplicateForenames.ReadOnly = true;
+            DuplicateForenames.Visible = false;
+            DuplicateForenames.Width = 200;
             // 
             // DuplicateSurname
             // 
-            this.DuplicateSurname.DataPropertyName = ("Surname");
-            this.DuplicateSurname.HeaderText = ("Surname");
-            this.DuplicateSurname.MinimumWidth = (10);
-            this.DuplicateSurname.Name = ("DuplicateSurname");
-            this.DuplicateSurname.ReadOnly = (true);
-            this.DuplicateSurname.Visible = (false);
-            this.DuplicateSurname.Width = (200);
+            DuplicateSurname.DataPropertyName = "Surname";
+            DuplicateSurname.HeaderText = "Surname";
+            DuplicateSurname.MinimumWidth = 10;
+            DuplicateSurname.Name = "DuplicateSurname";
+            DuplicateSurname.ReadOnly = true;
+            DuplicateSurname.Visible = false;
+            DuplicateSurname.Width = 200;
             // 
             // DuplicateBirthDate
             // 
-            this.DuplicateBirthDate.DataPropertyName = ("BirthDate");
-            this.DuplicateBirthDate.HeaderText = ("Birthdate");
-            this.DuplicateBirthDate.MinimumWidth = (50);
-            this.DuplicateBirthDate.Name = ("DuplicateBirthDate");
-            this.DuplicateBirthDate.ReadOnly = (true);
-            this.DuplicateBirthDate.Width = (150);
+            DuplicateBirthDate.DataPropertyName = "BirthDate";
+            DuplicateBirthDate.HeaderText = "Birthdate";
+            DuplicateBirthDate.MinimumWidth = 50;
+            DuplicateBirthDate.Name = "DuplicateBirthDate";
+            DuplicateBirthDate.ReadOnly = true;
+            DuplicateBirthDate.Width = 150;
             // 
             // DuplicateBirthLocation
             // 
-            this.DuplicateBirthLocation.DataPropertyName = ("BirthLocation");
-            this.DuplicateBirthLocation.HeaderText = ("Birth Location");
-            this.DuplicateBirthLocation.MinimumWidth = (100);
-            this.DuplicateBirthLocation.Name = ("DuplicateBirthLocation");
-            this.DuplicateBirthLocation.ReadOnly = (true);
-            this.DuplicateBirthLocation.Width = (175);
+            DuplicateBirthLocation.DataPropertyName = "BirthLocation";
+            DuplicateBirthLocation.HeaderText = "Birth Location";
+            DuplicateBirthLocation.MinimumWidth = 100;
+            DuplicateBirthLocation.Name = "DuplicateBirthLocation";
+            DuplicateBirthLocation.ReadOnly = true;
+            DuplicateBirthLocation.Width = 175;
             // 
             // MatchIndividualID
             // 
-            this.MatchIndividualID.DataPropertyName = ("MatchIndividualID");
-            this.MatchIndividualID.HeaderText = ("Match ID");
-            this.MatchIndividualID.MinimumWidth = (10);
-            this.MatchIndividualID.Name = ("MatchIndividualID");
-            this.MatchIndividualID.ReadOnly = (true);
-            this.MatchIndividualID.Width = (50);
+            MatchIndividualID.DataPropertyName = "MatchIndividualID";
+            MatchIndividualID.HeaderText = "Match ID";
+            MatchIndividualID.MinimumWidth = 10;
+            MatchIndividualID.Name = "MatchIndividualID";
+            MatchIndividualID.ReadOnly = true;
+            MatchIndividualID.Width = 50;
             // 
             // MatchName
             // 
-            this.MatchName.DataPropertyName = ("MatchName");
-            this.MatchName.HeaderText = ("Match Name");
-            this.MatchName.MinimumWidth = (50);
-            this.MatchName.Name = ("MatchName");
-            this.MatchName.ReadOnly = (true);
-            this.MatchName.Width = (150);
+            MatchName.DataPropertyName = "MatchName";
+            MatchName.HeaderText = "Match Name";
+            MatchName.MinimumWidth = 50;
+            MatchName.Name = "MatchName";
+            MatchName.ReadOnly = true;
+            MatchName.Width = 150;
             // 
             // MatchBirthDate
             // 
-            this.MatchBirthDate.DataPropertyName = ("MatchBirthDate");
-            this.MatchBirthDate.HeaderText = ("Match Birthdate");
-            this.MatchBirthDate.MinimumWidth = (50);
-            this.MatchBirthDate.Name = ("MatchBirthDate");
-            this.MatchBirthDate.ReadOnly = (true);
-            this.MatchBirthDate.Width = (150);
+            MatchBirthDate.DataPropertyName = "MatchBirthDate";
+            MatchBirthDate.HeaderText = "Match Birthdate";
+            MatchBirthDate.MinimumWidth = 50;
+            MatchBirthDate.Name = "MatchBirthDate";
+            MatchBirthDate.ReadOnly = true;
+            MatchBirthDate.Width = 150;
             // 
             // MatchBirthLocation
             // 
-            this.MatchBirthLocation.DataPropertyName = ("MatchBirthLocation");
-            this.MatchBirthLocation.HeaderText = ("Match Birth Location");
-            this.MatchBirthLocation.MinimumWidth = (100);
-            this.MatchBirthLocation.Name = ("MatchBirthLocation");
-            this.MatchBirthLocation.ReadOnly = (true);
-            this.MatchBirthLocation.Width = (175);
+            MatchBirthLocation.DataPropertyName = "MatchBirthLocation";
+            MatchBirthLocation.HeaderText = "Match Birth Location";
+            MatchBirthLocation.MinimumWidth = 100;
+            MatchBirthLocation.Name = "MatchBirthLocation";
+            MatchBirthLocation.ReadOnly = true;
+            MatchBirthLocation.Width = 175;
             // 
             // saveDatabase
             // 
-            this.saveDatabase.DefaultExt = ("zip");
-            this.saveDatabase.Filter = ("Zip Files | *.zip");
+            saveDatabase.DefaultExt = "zip";
+            saveDatabase.Filter = "Zip Files | *.zip";
             // 
             // restoreDatabase
             // 
-            this.restoreDatabase.FileName = ("*.zip");
-            this.restoreDatabase.Filter = ("Gecode Databases | *.s3db | Zip Files | *.zip");
+            restoreDatabase.FileName = "*.zip";
+            restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
             // imageList1
             // 
-            this.imageList1.ColorDepth = (global::System.Windows.Forms.ColorDepth.Depth8Bit);
-            this.imageList1.ImageSize = (new global::System.Drawing.Size(16, 16));
-            this.imageList1.TransparentColor = (global::System.Drawing.Color.Transparent);
+            imageList1.ColorDepth = ColorDepth.Depth8Bit;
+            imageList1.ImageSize = new Size(16, 16);
+            imageList1.TransparentColor = Color.Transparent;
             // 
             // MainForm
             // 
-            this.AllowDrop = (true);
-            this.AutoScaleDimensions = (new global::System.Drawing.SizeF(12F, 30F));
-            this.AutoScaleMode = (global::System.Windows.Forms.AutoScaleMode.Font);
-            this.ClientSize = (new global::System.Drawing.Size(2136, 1178));
-            this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.tabSelector);
-            this.Icon = ((global::System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = (this.menuStrip1);
-            this.Margin = (new global::System.Windows.Forms.Padding(7, 8, 7, 8));
-            this.MinimumSize = (new global::System.Drawing.Size(1120, 855));
-            this.Name = ("MainForm");
-            this.Text = ("Family Tree Analyzer");
-            this.FormClosing += (this.MainForm_FormClosing);
-            this.Load += (this.MainForm_Load);
-            this.DragDrop += (this.MainForm_DragDrop);
-            this.DragEnter += (this.MainForm_DragEnter);
-            this.Move += (this.MainForm_Move);
-            this.Resize += (this.MainForm_Resize);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.mnuSetRoot.ResumeLayout(false);
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbDuplicateScore)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgCheckAncestors)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgDataErrors)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgCountries)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgRegions)).EndInit();
-            this.tabWorldWars.ResumeLayout(false);
-            this.tabWorldWars.PerformLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgWorldWars)).EndInit();
-            this.ctxViewNotes.ResumeLayout(false);
-            this.tabTreetops.ResumeLayout(false);
-            this.tabTreetops.PerformLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgTreeTops)).EndInit();
-            this.tabColourReports.ResumeLayout(false);
-            this.tabColourReports.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.tabLostCousins.ResumeLayout(false);
-            this.LCSubTabs.ResumeLayout(false);
-            this.LCReportsTab.ResumeLayout(false);
-            this.LCReportsTab.PerformLayout();
-            this.Referrals.ResumeLayout(false);
-            this.Referrals.PerformLayout();
-            this.LCUpdatesTab.ResumeLayout(false);
-            this.LCUpdatesTab.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
-            this.LCVerifyTab.ResumeLayout(false);
-            this.LCVerifyTab.PerformLayout();
-            this.tabCensus.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            ((global::System.ComponentModel.ISupportInitialize)(this.udAgeFilter)).EndInit();
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox11.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox6.ResumeLayout(false);
-            this.tabLocations.ResumeLayout(false);
-            this.tabCtrlLocations.ResumeLayout(false);
-            this.tabTreeView.ResumeLayout(false);
-            this.tabCountries.ResumeLayout(false);
-            this.tabRegions.ResumeLayout(false);
-            this.tabSubRegions.ResumeLayout(false);
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgSubRegions)).EndInit();
-            this.tabAddresses.ResumeLayout(false);
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgAddresses)).EndInit();
-            this.tabPlaces.ResumeLayout(false);
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgPlaces)).EndInit();
-            this.tabDisplayProgress.ResumeLayout(false);
-            this.splitGedcom.Panel1.ResumeLayout(false);
-            this.splitGedcom.Panel2.ResumeLayout(false);
-            ((global::System.ComponentModel.ISupportInitialize)(this.splitGedcom)).EndInit();
-            this.splitGedcom.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.tabSelector.ResumeLayout(false);
-            this.tabMainLists.ResumeLayout(false);
-            this.tabMainListsSelector.ResumeLayout(false);
-            this.tabIndividuals.ResumeLayout(false);
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgIndividuals)).EndInit();
-            this.tabFamilies.ResumeLayout(false);
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgFamilies)).EndInit();
-            this.tabSources.ResumeLayout(false);
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgSources)).EndInit();
-            this.tabOccupations.ResumeLayout(false);
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgOccupations)).EndInit();
-            this.tabCustomFacts.ResumeLayout(false);
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgCustomFacts)).EndInit();
-            this.tabErrorsFixes.ResumeLayout(false);
-            this.tabErrorFixSelector.ResumeLayout(false);
-            this.tabDataErrors.ResumeLayout(false);
-            this.gbDataErrorTypes.ResumeLayout(false);
-            this.tabDuplicates.ResumeLayout(false);
-            this.tabDuplicates.PerformLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgDuplicates)).EndInit();
-            this.tabLooseBirths.ResumeLayout(false);
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgLooseBirths)).EndInit();
-            this.tabLooseDeaths.ResumeLayout(false);
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgLooseDeaths)).EndInit();
-            this.tabLooseInfo.ResumeLayout(false);
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgLooseInfo)).EndInit();
-            this.tabSurnames.ResumeLayout(false);
-            this.tabSurnames.PerformLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.dgSurnames)).EndInit();
-            this.tabFacts.ResumeLayout(false);
-            this.tabFacts.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.tabToday.ResumeLayout(false);
-            this.tabToday.PerformLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.nudToday)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AllowDrop = true;
+            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(2314, 1257);
+            Controls.Add(statusStrip);
+            Controls.Add(menuStrip1);
+            Controls.Add(tabSelector);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MainMenuStrip = menuStrip1;
+            Margin = new Padding(8, 9, 8, 9);
+            MinimumSize = new Size(1211, 907);
+            Name = "MainForm";
+            Text = "Family Tree Analyzer";
+            FormClosing += MainForm_FormClosing;
+            Load += MainForm_Load;
+            DragDrop += MainForm_DragDrop;
+            DragEnter += MainForm_DragEnter;
+            Move += MainForm_Move;
+            Resize += MainForm_Resize;
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
+            mnuSetRoot.ResumeLayout(false);
+            statusStrip.ResumeLayout(false);
+            statusStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbDuplicateScore).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgCheckAncestors).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgDataErrors).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgCountries).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgRegions).EndInit();
+            tabWorldWars.ResumeLayout(false);
+            tabWorldWars.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgWorldWars).EndInit();
+            ctxViewNotes.ResumeLayout(false);
+            tabTreetops.ResumeLayout(false);
+            tabTreetops.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgTreeTops).EndInit();
+            tabColourReports.ResumeLayout(false);
+            tabColourReports.PerformLayout();
+            groupBox7.ResumeLayout(false);
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
+            tabLostCousins.ResumeLayout(false);
+            LCSubTabs.ResumeLayout(false);
+            LCReportsTab.ResumeLayout(false);
+            LCReportsTab.PerformLayout();
+            Referrals.ResumeLayout(false);
+            Referrals.PerformLayout();
+            LCUpdatesTab.ResumeLayout(false);
+            LCUpdatesTab.PerformLayout();
+            groupBox8.ResumeLayout(false);
+            groupBox8.PerformLayout();
+            LCVerifyTab.ResumeLayout(false);
+            LCVerifyTab.PerformLayout();
+            tabCensus.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            groupBox10.ResumeLayout(false);
+            groupBox4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)udAgeFilter).EndInit();
+            groupBox9.ResumeLayout(false);
+            groupBox11.ResumeLayout(false);
+            groupBox1.ResumeLayout(false);
+            groupBox5.ResumeLayout(false);
+            groupBox6.ResumeLayout(false);
+            tabLocations.ResumeLayout(false);
+            tabCtrlLocations.ResumeLayout(false);
+            tabTreeView.ResumeLayout(false);
+            tabCountries.ResumeLayout(false);
+            tabRegions.ResumeLayout(false);
+            tabSubRegions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgSubRegions).EndInit();
+            tabAddresses.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgAddresses).EndInit();
+            tabPlaces.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgPlaces).EndInit();
+            tabDisplayProgress.ResumeLayout(false);
+            splitGedcom.Panel1.ResumeLayout(false);
+            splitGedcom.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitGedcom).EndInit();
+            splitGedcom.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            tabSelector.ResumeLayout(false);
+            tabMainLists.ResumeLayout(false);
+            tabMainListsSelector.ResumeLayout(false);
+            tabIndividuals.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgIndividuals).EndInit();
+            tabFamilies.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgFamilies).EndInit();
+            tabSources.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgSources).EndInit();
+            tabOccupations.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgOccupations).EndInit();
+            tabCustomFacts.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgCustomFacts).EndInit();
+            tabErrorsFixes.ResumeLayout(false);
+            tabErrorFixSelector.ResumeLayout(false);
+            tabDataErrors.ResumeLayout(false);
+            gbDataErrorTypes.ResumeLayout(false);
+            tabDuplicates.ResumeLayout(false);
+            tabDuplicates.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgDuplicates).EndInit();
+            tabLooseBirths.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgLooseBirths).EndInit();
+            tabLooseDeaths.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgLooseDeaths).EndInit();
+            tabLooseInfo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgLooseInfo).EndInit();
+            tabSurnames.ResumeLayout(false);
+            tabSurnames.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgSurnames).EndInit();
+            tabFacts.ResumeLayout(false);
+            tabFacts.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            tabToday.ResumeLayout(false);
+            tabToday.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudToday).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
