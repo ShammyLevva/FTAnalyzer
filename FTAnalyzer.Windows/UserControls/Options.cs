@@ -83,10 +83,10 @@ namespace FTAnalyzer.UserControls
 		void AddNodesToTree(string treeNodePosition)
 		{
 			string[] splitPosition = treeNodePosition.Split(MENU_DELIMETER);
-			SearchAndAddToSubTree(splitPosition, 0, treeView1.Nodes, treeNodePosition);
+            SearchAndAddToSubTree(splitPosition, 0, treeView1.Nodes, treeNodePosition);
 		}
 
-		void SearchAndAddToSubTree(string[] splitPosition,int startPositon, TreeNodeCollection nodes, string key)
+        static void SearchAndAddToSubTree(string[] splitPosition,int startPositon, TreeNodeCollection nodes, string key)
 		{
 			TreeNode? tempNode = null;
 			if (splitPosition.Length > startPositon)
@@ -114,7 +114,7 @@ namespace FTAnalyzer.UserControls
                     };
                     nodes.Add(tempNode);
 				}
-				SearchAndAddToSubTree(splitPosition, startPositon + 1, tempNode.Nodes, key);
+                SearchAndAddToSubTree(splitPosition, startPositon + 1, tempNode.Nodes, key);
 			}
 		}
 
