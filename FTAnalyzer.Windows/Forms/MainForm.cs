@@ -195,6 +195,7 @@ namespace FTAnalyzer
             splitGedcom.Refresh();
             menuStrip1.Font = normalFont;
             SetStatusBar();
+            CheckMaxWindowSizes(new Point(0,0)); 
             Refresh();
         }
 
@@ -231,13 +232,13 @@ namespace FTAnalyzer
             string maxState = (WindowState == FormWindowState.Maximized).ToString();
             string maximised = Application.UserAppDataRegistry.GetValue("Mainform maximised", maxState).ToString() ?? maxState;
             Point leftTop = ReportFormHelper.CheckIsOnScreen(Top, Left);
-            CheckMaxWindowSizes(leftTop);
             if (leftTop.X < 0) leftTop.X = 0;
             if (leftTop.Y < 0) leftTop.Y = 0;
             mainForm.Width = Width;
             mainForm.Height = Height;
             mainForm.Top = leftTop.Y;
             mainForm.Left = leftTop.X;
+            CheckMaxWindowSizes(leftTop);
             if (maximised == "True")
                 WindowState = FormWindowState.Maximized;
         }
@@ -2647,8 +2648,8 @@ namespace FTAnalyzer
 
         void CheckMaxWindowSizes(Point topleft)
         {
-            int boundaryWidth = 26;
-            int boundaryHeight = panel2.Height - statusStrip.Height - menuStrip1.Height;
+            int boundaryWidth = rtbOutput.Margin.Left + tabSelector.Margin.Left + tabSelector.Margin.Right;
+            int boundaryHeight = panel2.Height - statusStrip.Height - menuStrip1.Height - tabSelector.Location.Y + tabSelector.Margin.Top + tabSelector.Margin.Bottom;
             Rectangle workarea = Screen.GetWorkingArea(topleft);
             if (Width > workarea.Width)
                 Width = workarea.Width;
