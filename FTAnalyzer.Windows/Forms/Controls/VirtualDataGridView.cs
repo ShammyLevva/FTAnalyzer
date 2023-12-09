@@ -1,11 +1,6 @@
 ﻿using FTAnalyzer.Utilities;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Drawing;
 using System.Reflection;
-using System.Windows.Forms;
 using Zuby.ADGV;
 using System.Diagnostics;
 
@@ -16,12 +11,14 @@ namespace FTAnalyzer.Forms.Controls
     {
         internal SortableBindingList<T> _dataSource;
         internal SortableBindingList<T> _fulllist;
+        internal Dictionary<DataGridViewColumn, SortOrder> _sortOrders;
         public string FilterCountText { get; private set; }
 
         public VirtualDataGridView()
         {
             _dataSource = new SortableBindingList<T>();
             _fulllist = new SortableBindingList<T>();
+            _sortOrders = new();
             VirtualMode = true;
             AllowUserToAddRows = false;
             AllowUserToDeleteRows = false;
@@ -209,31 +206,29 @@ namespace FTAnalyzer.Forms.Controls
 
         public override void Sort(DataGridViewColumn dgvColumn, ListSortDirection direction)
         {
-            if (dgvColumn is null || dgvColumn.SortMode == DataGridViewColumnSortMode.NotSortable)
+            if (_dataSource is null || dgvColumn is null || dgvColumn.SortMode == DataGridViewColumnSortMode.NotSortable)
                 return;
-            // needs to implemt the column sorting depending on column clicked
-            // add comparers
+
+            PropertyComparer comparer = new(dgvColumn.DataPropertyName, direction);
+            _dataSource.Sort(comparer);
+            Refresh();
+            _sortOrders.Clear();
             foreach (DataGridViewColumn column in Columns)
             {
                 if (column == dgvColumn)
-                    column.HeaderCell.SortGlyphDirection = direction == ListSortDirection.Ascending ? SortOrder.Ascending : SortOrder.Descending;
+                    _sortOrders.Add(column, direction == ListSortDirection.Ascending ? SortOrder.Ascending : SortOrder.Descending);
                 else
-                    column.HeaderCell.SortGlyphDirection = SortOrder.None;
+                    _sortOrders.Add(column, SortOrder.None);
             }
-            if (_dataSource is null) return;
-
-            var comparer = new PropertyComparer(dgvColumn.DataPropertyName, direction);
-            _dataSource.Sort(comparer);
-
-            Refresh();
         }
 
         void OnResizeChanged(object? sender, EventArgs e) => ForceToParent();
 
         void OnColumnHeaderMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
         {
-            //sortedDirection = Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
-            //Sort(Columns[e.ColumnIndex], sortedDirection);
+            ListSortDirection sortedDirection = _sortOrders[Columns[e.ColumnIndex]] == SortOrder.Ascending 
+                ? ListSortDirection.Descending : ListSortDirection.Ascending;
+            Sort(Columns[e.ColumnIndex], sortedDirection);
         }
 
         void OnCellValueNeeded(object? sender, DataGridViewCellValueEventArgs e)
