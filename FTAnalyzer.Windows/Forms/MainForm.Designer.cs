@@ -1102,7 +1102,7 @@ namespace FTAnalyzer
             // tspbTabProgress
             // 
             tspbTabProgress.Name = "tspbTabProgress";
-            tspbTabProgress.Size = new Size(433, 11);
+            tspbTabProgress.Size = new Size(433, 26);
             tspbTabProgress.Visible = false;
             // 
             // tsStatusLabel
@@ -1213,7 +1213,7 @@ namespace FTAnalyzer
             dgCheckAncestors.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgCheckAncestors.ShowCellToolTips = false;
             dgCheckAncestors.ShowEditingIcon = false;
-            dgCheckAncestors.Size = new Size(2250, 811);
+            dgCheckAncestors.Size = new Size(2250, 791);
             dgCheckAncestors.TabIndex = 7;
             toolTips.SetToolTip(dgCheckAncestors, "Double click to see list of facts for that individual");
             // 
@@ -1313,7 +1313,7 @@ namespace FTAnalyzer
             dgDataErrors.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgDataErrors.ShowCellToolTips = false;
             dgDataErrors.ShowEditingIcon = false;
-            dgDataErrors.Size = new Size(2265, 604);
+            dgDataErrors.Size = new Size(2265, 636);
             dgDataErrors.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgDataErrors.TabIndex = 7;
             toolTips.SetToolTip(dgDataErrors, "Double click to see list of facts for that individual");
@@ -1340,7 +1340,7 @@ namespace FTAnalyzer
             dgCountries.RowHeadersVisible = false;
             dgCountries.RowHeadersWidth = 50;
             dgCountries.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgCountries.Size = new Size(2258, 1023);
+            dgCountries.Size = new Size(2258, 1003);
             dgCountries.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgCountries.TabIndex = 1;
             toolTips.SetToolTip(dgCountries, "Double click on Country name to see list of individuals with that Country.");
@@ -1366,7 +1366,7 @@ namespace FTAnalyzer
             dgRegions.RowHeadersVisible = false;
             dgRegions.RowHeadersWidth = 50;
             dgRegions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgRegions.Size = new Size(2258, 1023);
+            dgRegions.Size = new Size(2258, 1003);
             dgRegions.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgRegions.TabIndex = 2;
             toolTips.SetToolTip(dgRegions, "Double click on Region name to see list of individuals with that Region.");
@@ -1415,7 +1415,7 @@ namespace FTAnalyzer
             tabWorldWars.Location = new Point(8, 46);
             tabWorldWars.Margin = new Padding(8, 9, 8, 9);
             tabWorldWars.Name = "tabWorldWars";
-            tabWorldWars.Size = new Size(2298, 1074);
+            tabWorldWars.Size = new Size(2298, 1106);
             tabWorldWars.TabIndex = 8;
             tabWorldWars.Text = "World Wars";
             tabWorldWars.ToolTipText = "Find men of fighting age during WWI & WWII";
@@ -1497,7 +1497,7 @@ namespace FTAnalyzer
             dgWorldWars.Dock = DockStyle.Bottom;
             dgWorldWars.FilterAndSortEnabled = true;
             dgWorldWars.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
-            dgWorldWars.Location = new Point(0, 315);
+            dgWorldWars.Location = new Point(0, 347);
             dgWorldWars.Margin = new Padding(13, 15, 13, 15);
             dgWorldWars.MultiSelect = false;
             dgWorldWars.Name = "dgWorldWars";
@@ -1560,7 +1560,7 @@ namespace FTAnalyzer
             tabTreetops.Location = new Point(8, 46);
             tabTreetops.Margin = new Padding(8, 9, 8, 9);
             tabTreetops.Name = "tabTreetops";
-            tabTreetops.Size = new Size(2298, 1074);
+            tabTreetops.Size = new Size(2298, 1106);
             tabTreetops.TabIndex = 7;
             tabTreetops.Text = "Treetops";
             tabTreetops.UseVisualStyleBackColor = true;
@@ -1632,7 +1632,7 @@ namespace FTAnalyzer
             dgTreeTops.Dock = DockStyle.Bottom;
             dgTreeTops.FilterAndSortEnabled = true;
             dgTreeTops.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
-            dgTreeTops.Location = new Point(0, 315);
+            dgTreeTops.Location = new Point(0, 347);
             dgTreeTops.Margin = new Padding(13, 15, 13, 15);
             dgTreeTops.MultiSelect = false;
             dgTreeTops.Name = "dgTreeTops";
@@ -1681,7 +1681,7 @@ namespace FTAnalyzer
             tabColourReports.Location = new Point(8, 46);
             tabColourReports.Margin = new Padding(8, 9, 8, 9);
             tabColourReports.Name = "tabColourReports";
-            tabColourReports.Size = new Size(2298, 1074);
+            tabColourReports.Size = new Size(2298, 1106);
             tabColourReports.TabIndex = 12;
             tabColourReports.Text = "Research Suggestions";
             tabColourReports.UseVisualStyleBackColor = true;
@@ -1862,7 +1862,7 @@ namespace FTAnalyzer
             tabLostCousins.Margin = new Padding(8, 9, 8, 9);
             tabLostCousins.Name = "tabLostCousins";
             tabLostCousins.Padding = new Padding(8, 9, 8, 9);
-            tabLostCousins.Size = new Size(2298, 1074);
+            tabLostCousins.Size = new Size(2298, 1106);
             tabLostCousins.TabIndex = 5;
             tabLostCousins.Text = "Lost Cousins";
             tabLostCousins.UseVisualStyleBackColor = true;
@@ -1877,7 +1877,7 @@ namespace FTAnalyzer
             LCSubTabs.Margin = new Padding(8, 9, 8, 9);
             LCSubTabs.Name = "LCSubTabs";
             LCSubTabs.SelectedIndex = 0;
-            LCSubTabs.Size = new Size(2282, 1056);
+            LCSubTabs.Size = new Size(2282, 1088);
             LCSubTabs.TabIndex = 0;
             // 
             // LCReportsTab
@@ -1903,7 +1903,7 @@ namespace FTAnalyzer
             LCReportsTab.Margin = new Padding(8, 9, 8, 9);
             LCReportsTab.Name = "LCReportsTab";
             LCReportsTab.Padding = new Padding(8, 9, 8, 9);
-            LCReportsTab.Size = new Size(2266, 1002);
+            LCReportsTab.Size = new Size(2266, 1034);
             LCReportsTab.TabIndex = 0;
             LCReportsTab.Text = "Reports";
             LCReportsTab.UseVisualStyleBackColor = true;
@@ -2162,7 +2162,7 @@ namespace FTAnalyzer
             LCUpdatesTab.Margin = new Padding(8, 9, 8, 9);
             LCUpdatesTab.Name = "LCUpdatesTab";
             LCUpdatesTab.Padding = new Padding(8, 9, 8, 9);
-            LCUpdatesTab.Size = new Size(2266, 1032);
+            LCUpdatesTab.Size = new Size(2266, 1012);
             LCUpdatesTab.TabIndex = 1;
             LCUpdatesTab.Text = "Updates";
             LCUpdatesTab.UseVisualStyleBackColor = true;
@@ -2309,7 +2309,7 @@ namespace FTAnalyzer
             LCVerifyTab.Location = new Point(8, 46);
             LCVerifyTab.Margin = new Padding(8, 9, 8, 9);
             LCVerifyTab.Name = "LCVerifyTab";
-            LCVerifyTab.Size = new Size(2266, 1032);
+            LCVerifyTab.Size = new Size(2266, 1012);
             LCVerifyTab.TabIndex = 2;
             LCVerifyTab.Text = "Verification";
             LCVerifyTab.UseVisualStyleBackColor = true;
@@ -2361,7 +2361,7 @@ namespace FTAnalyzer
             tabCensus.Margin = new Padding(8, 9, 8, 9);
             tabCensus.Name = "tabCensus";
             tabCensus.Padding = new Padding(8, 9, 8, 9);
-            tabCensus.Size = new Size(2298, 1074);
+            tabCensus.Size = new Size(2298, 1106);
             tabCensus.TabIndex = 0;
             tabCensus.Text = "Census";
             tabCensus.UseVisualStyleBackColor = true;
@@ -2791,7 +2791,7 @@ namespace FTAnalyzer
             tabLocations.Margin = new Padding(8, 9, 8, 9);
             tabLocations.Name = "tabLocations";
             tabLocations.Padding = new Padding(8, 9, 8, 9);
-            tabLocations.Size = new Size(2298, 1074);
+            tabLocations.Size = new Size(2298, 1106);
             tabLocations.TabIndex = 4;
             tabLocations.Text = "Locations";
             tabLocations.UseVisualStyleBackColor = true;
@@ -2846,7 +2846,7 @@ namespace FTAnalyzer
             tabCtrlLocations.Margin = new Padding(8, 9, 8, 9);
             tabCtrlLocations.Name = "tabCtrlLocations";
             tabCtrlLocations.SelectedIndex = 0;
-            tabCtrlLocations.Size = new Size(2282, 1056);
+            tabCtrlLocations.Size = new Size(2282, 1088);
             tabCtrlLocations.TabIndex = 0;
             tabCtrlLocations.SelectedIndexChanged += TabCtrlLocations_SelectedIndexChanged;
             tabCtrlLocations.Selecting += TabCtrlLocations_Selecting;
@@ -2858,7 +2858,7 @@ namespace FTAnalyzer
             tabTreeView.Margin = new Padding(8, 9, 8, 9);
             tabTreeView.Name = "tabTreeView";
             tabTreeView.Padding = new Padding(8, 9, 8, 9);
-            tabTreeView.Size = new Size(2266, 1002);
+            tabTreeView.Size = new Size(2266, 1034);
             tabTreeView.TabIndex = 5;
             tabTreeView.Text = "Tree View";
             tabTreeView.UseVisualStyleBackColor = true;
@@ -2875,7 +2875,7 @@ namespace FTAnalyzer
             treeViewLocations.Name = "treeViewLocations";
             treeViewLocations.SelectedImageIndex = 0;
             treeViewLocations.ShowNodeToolTips = true;
-            treeViewLocations.Size = new Size(2250, 984);
+            treeViewLocations.Size = new Size(2250, 1016);
             treeViewLocations.TabIndex = 0;
             treeViewLocations.BeforeCollapse += TreeViewLocations_BeforeCollapse;
             treeViewLocations.BeforeExpand += TreeViewLocations_BeforeExpand;
@@ -2905,7 +2905,7 @@ namespace FTAnalyzer
             tabCountries.Margin = new Padding(8, 9, 8, 9);
             tabCountries.Name = "tabCountries";
             tabCountries.Padding = new Padding(8, 9, 8, 9);
-            tabCountries.Size = new Size(2266, 1032);
+            tabCountries.Size = new Size(2266, 1012);
             tabCountries.TabIndex = 0;
             tabCountries.Text = "Countries";
             tabCountries.ToolTipText = "Double click on Country name to see list of individuals with that Country.";
@@ -2918,7 +2918,7 @@ namespace FTAnalyzer
             tabRegions.Margin = new Padding(8, 9, 8, 9);
             tabRegions.Name = "tabRegions";
             tabRegions.Padding = new Padding(8, 9, 8, 9);
-            tabRegions.Size = new Size(2266, 1032);
+            tabRegions.Size = new Size(2266, 1012);
             tabRegions.TabIndex = 1;
             tabRegions.Text = "Regions";
             tabRegions.ToolTipText = "Double click on Region name to see list of individuals with that Region.";
@@ -2931,7 +2931,7 @@ namespace FTAnalyzer
             tabSubRegions.Margin = new Padding(8, 9, 8, 9);
             tabSubRegions.Name = "tabSubRegions";
             tabSubRegions.Padding = new Padding(8, 9, 8, 9);
-            tabSubRegions.Size = new Size(2266, 1032);
+            tabSubRegions.Size = new Size(2266, 1012);
             tabSubRegions.TabIndex = 2;
             tabSubRegions.Text = "SubRegions";
             tabSubRegions.ToolTipText = "Double click on 'Parish' name to see list of individuals with that parish/area.";
@@ -2957,7 +2957,7 @@ namespace FTAnalyzer
             dgSubRegions.RowHeadersVisible = false;
             dgSubRegions.RowHeadersWidth = 50;
             dgSubRegions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgSubRegions.Size = new Size(2258, 1023);
+            dgSubRegions.Size = new Size(2258, 1003);
             dgSubRegions.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgSubRegions.TabIndex = 1;
             dgSubRegions.VirtualMode = true;
@@ -2971,7 +2971,7 @@ namespace FTAnalyzer
             tabAddresses.Margin = new Padding(8, 9, 8, 9);
             tabAddresses.Name = "tabAddresses";
             tabAddresses.Padding = new Padding(8, 9, 8, 9);
-            tabAddresses.Size = new Size(2266, 1032);
+            tabAddresses.Size = new Size(2266, 1012);
             tabAddresses.TabIndex = 3;
             tabAddresses.Text = "Addresses";
             tabAddresses.ToolTipText = "Double click on Address name to see list of individuals with that Address.";
@@ -2997,7 +2997,7 @@ namespace FTAnalyzer
             dgAddresses.RowHeadersVisible = false;
             dgAddresses.RowHeadersWidth = 50;
             dgAddresses.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgAddresses.Size = new Size(2258, 1023);
+            dgAddresses.Size = new Size(2258, 1003);
             dgAddresses.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgAddresses.TabIndex = 1;
             dgAddresses.VirtualMode = true;
@@ -3011,7 +3011,7 @@ namespace FTAnalyzer
             tabPlaces.Margin = new Padding(8, 9, 8, 9);
             tabPlaces.Name = "tabPlaces";
             tabPlaces.Padding = new Padding(8, 9, 8, 9);
-            tabPlaces.Size = new Size(2266, 1032);
+            tabPlaces.Size = new Size(2266, 1012);
             tabPlaces.TabIndex = 4;
             tabPlaces.Text = "Places";
             tabPlaces.ToolTipText = "Double click on Address name to see list of individuals with that Place";
@@ -3037,7 +3037,7 @@ namespace FTAnalyzer
             dgPlaces.RowHeadersVisible = false;
             dgPlaces.RowHeadersWidth = 50;
             dgPlaces.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgPlaces.Size = new Size(2258, 1023);
+            dgPlaces.Size = new Size(2258, 1003);
             dgPlaces.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgPlaces.TabIndex = 2;
             dgPlaces.VirtualMode = true;
@@ -3051,7 +3051,7 @@ namespace FTAnalyzer
             tabDisplayProgress.Margin = new Padding(8, 9, 8, 9);
             tabDisplayProgress.Name = "tabDisplayProgress";
             tabDisplayProgress.Padding = new Padding(8, 9, 8, 9);
-            tabDisplayProgress.Size = new Size(2298, 1084);
+            tabDisplayProgress.Size = new Size(2298, 1137);
             tabDisplayProgress.TabIndex = 1;
             tabDisplayProgress.Text = "Gedcom Stats";
             tabDisplayProgress.UseVisualStyleBackColor = true;
@@ -3073,7 +3073,7 @@ namespace FTAnalyzer
             // splitGedcom.Panel2
             // 
             splitGedcom.Panel2.Controls.Add(rtbOutput);
-            splitGedcom.Size = new Size(2282, 1066);
+            splitGedcom.Size = new Size(2282, 1119);
             splitGedcom.SplitterDistance = 110;
             splitGedcom.SplitterWidth = 10;
             splitGedcom.TabIndex = 15;
@@ -3199,7 +3199,7 @@ namespace FTAnalyzer
             rtbOutput.Margin = new Padding(8, 9, 8, 9);
             rtbOutput.Name = "rtbOutput";
             rtbOutput.ReadOnly = true;
-            rtbOutput.Size = new Size(2282, 946);
+            rtbOutput.Size = new Size(2282, 999);
             rtbOutput.TabIndex = 14;
             rtbOutput.Text = "";
             rtbOutput.TextChanged += RtbOutput_TextChanged;
@@ -3223,7 +3223,7 @@ namespace FTAnalyzer
             tabSelector.Margin = new Padding(8, 9, 8, 9);
             tabSelector.Name = "tabSelector";
             tabSelector.SelectedIndex = 0;
-            tabSelector.Size = new Size(2314, 1138);
+            tabSelector.Size = new Size(2314, 1191);
             tabSelector.TabIndex = 9;
             tabSelector.SelectedIndexChanged += TabControl_SelectedIndexChanged;
             // 
@@ -3234,7 +3234,7 @@ namespace FTAnalyzer
             tabMainLists.Margin = new Padding(8, 9, 8, 9);
             tabMainLists.Name = "tabMainLists";
             tabMainLists.Padding = new Padding(8, 9, 8, 9);
-            tabMainLists.Size = new Size(2298, 1074);
+            tabMainLists.Size = new Size(2298, 1106);
             tabMainLists.TabIndex = 18;
             tabMainLists.Text = "Main Lists";
             tabMainLists.UseVisualStyleBackColor = true;
@@ -3251,7 +3251,7 @@ namespace FTAnalyzer
             tabMainListsSelector.Margin = new Padding(8, 9, 8, 9);
             tabMainListsSelector.Name = "tabMainListsSelector";
             tabMainListsSelector.SelectedIndex = 0;
-            tabMainListsSelector.Size = new Size(2282, 1056);
+            tabMainListsSelector.Size = new Size(2282, 1088);
             tabMainListsSelector.TabIndex = 0;
             tabMainListsSelector.SelectedIndexChanged += TabMainListSelector_SelectedIndexChanged;
             // 
@@ -3262,7 +3262,7 @@ namespace FTAnalyzer
             tabIndividuals.Margin = new Padding(8, 9, 8, 9);
             tabIndividuals.Name = "tabIndividuals";
             tabIndividuals.Padding = new Padding(8, 9, 8, 9);
-            tabIndividuals.Size = new Size(2266, 1002);
+            tabIndividuals.Size = new Size(2266, 1034);
             tabIndividuals.TabIndex = 0;
             tabIndividuals.Text = "Individuals";
             tabIndividuals.UseVisualStyleBackColor = true;
@@ -3287,7 +3287,7 @@ namespace FTAnalyzer
             dgIndividuals.RowHeadersVisible = false;
             dgIndividuals.RowHeadersWidth = 50;
             dgIndividuals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgIndividuals.Size = new Size(2258, 993);
+            dgIndividuals.Size = new Size(2258, 1025);
             dgIndividuals.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgIndividuals.TabIndex = 1;
             dgIndividuals.VirtualMode = true;
@@ -3301,7 +3301,7 @@ namespace FTAnalyzer
             tabFamilies.Margin = new Padding(8, 9, 8, 9);
             tabFamilies.Name = "tabFamilies";
             tabFamilies.Padding = new Padding(8, 9, 8, 9);
-            tabFamilies.Size = new Size(2266, 1032);
+            tabFamilies.Size = new Size(2266, 1012);
             tabFamilies.TabIndex = 1;
             tabFamilies.Text = "Families";
             tabFamilies.UseVisualStyleBackColor = true;
@@ -3326,7 +3326,7 @@ namespace FTAnalyzer
             dgFamilies.RowHeadersVisible = false;
             dgFamilies.RowHeadersWidth = 50;
             dgFamilies.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgFamilies.Size = new Size(2258, 1023);
+            dgFamilies.Size = new Size(2258, 1003);
             dgFamilies.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgFamilies.TabIndex = 2;
             dgFamilies.VirtualMode = true;
@@ -3338,7 +3338,7 @@ namespace FTAnalyzer
             tabSources.Location = new Point(8, 46);
             tabSources.Margin = new Padding(8, 9, 8, 9);
             tabSources.Name = "tabSources";
-            tabSources.Size = new Size(2266, 1032);
+            tabSources.Size = new Size(2266, 1012);
             tabSources.TabIndex = 2;
             tabSources.Text = "Sources";
             tabSources.UseVisualStyleBackColor = true;
@@ -3363,7 +3363,7 @@ namespace FTAnalyzer
             dgSources.RowHeadersVisible = false;
             dgSources.RowHeadersWidth = 50;
             dgSources.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgSources.Size = new Size(2266, 1032);
+            dgSources.Size = new Size(2266, 1012);
             dgSources.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgSources.TabIndex = 2;
             dgSources.VirtualMode = true;
@@ -3375,7 +3375,7 @@ namespace FTAnalyzer
             tabOccupations.Location = new Point(8, 46);
             tabOccupations.Margin = new Padding(8, 9, 8, 9);
             tabOccupations.Name = "tabOccupations";
-            tabOccupations.Size = new Size(2266, 1032);
+            tabOccupations.Size = new Size(2266, 1012);
             tabOccupations.TabIndex = 3;
             tabOccupations.Text = "Occupations";
             tabOccupations.UseVisualStyleBackColor = true;
@@ -3400,7 +3400,7 @@ namespace FTAnalyzer
             dgOccupations.RowHeadersVisible = false;
             dgOccupations.RowHeadersWidth = 50;
             dgOccupations.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgOccupations.Size = new Size(2266, 1032);
+            dgOccupations.Size = new Size(2266, 1012);
             dgOccupations.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgOccupations.TabIndex = 3;
             dgOccupations.VirtualMode = true;
@@ -3412,7 +3412,7 @@ namespace FTAnalyzer
             tabCustomFacts.Location = new Point(8, 46);
             tabCustomFacts.Margin = new Padding(8, 9, 8, 9);
             tabCustomFacts.Name = "tabCustomFacts";
-            tabCustomFacts.Size = new Size(2266, 1032);
+            tabCustomFacts.Size = new Size(2266, 1012);
             tabCustomFacts.TabIndex = 4;
             tabCustomFacts.Text = "Custom Facts";
             tabCustomFacts.UseVisualStyleBackColor = true;
@@ -3437,7 +3437,7 @@ namespace FTAnalyzer
             dgCustomFacts.RowHeadersVisible = false;
             dgCustomFacts.RowHeadersWidth = 50;
             dgCustomFacts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgCustomFacts.Size = new Size(2266, 1032);
+            dgCustomFacts.Size = new Size(2266, 1012);
             dgCustomFacts.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgCustomFacts.TabIndex = 4;
             dgCustomFacts.VirtualMode = true;
@@ -3450,7 +3450,7 @@ namespace FTAnalyzer
             tabErrorsFixes.Location = new Point(8, 46);
             tabErrorsFixes.Margin = new Padding(8, 9, 8, 9);
             tabErrorsFixes.Name = "tabErrorsFixes";
-            tabErrorsFixes.Size = new Size(2298, 1074);
+            tabErrorsFixes.Size = new Size(2298, 1106);
             tabErrorsFixes.TabIndex = 19;
             tabErrorsFixes.Text = "Errors/Fixes";
             tabErrorsFixes.UseVisualStyleBackColor = true;
@@ -3468,7 +3468,7 @@ namespace FTAnalyzer
             tabErrorFixSelector.Name = "tabErrorFixSelector";
             tabErrorFixSelector.SelectedIndex = 0;
             tabErrorFixSelector.ShowToolTips = true;
-            tabErrorFixSelector.Size = new Size(2298, 1074);
+            tabErrorFixSelector.Size = new Size(2298, 1106);
             tabErrorFixSelector.TabIndex = 0;
             tabErrorFixSelector.SelectedIndexChanged += TabErrorFixSelector_SelectedIndexChanged;
             // 
@@ -3480,7 +3480,7 @@ namespace FTAnalyzer
             tabDataErrors.Margin = new Padding(8, 9, 8, 9);
             tabDataErrors.Name = "tabDataErrors";
             tabDataErrors.Padding = new Padding(8, 9, 8, 9);
-            tabDataErrors.Size = new Size(2282, 1020);
+            tabDataErrors.Size = new Size(2282, 1052);
             tabDataErrors.TabIndex = 0;
             tabDataErrors.Text = "Data Errors";
             tabDataErrors.UseVisualStyleBackColor = true;
@@ -3555,7 +3555,7 @@ namespace FTAnalyzer
             tabDuplicates.Margin = new Padding(8, 9, 8, 9);
             tabDuplicates.Name = "tabDuplicates";
             tabDuplicates.Padding = new Padding(8, 9, 8, 9);
-            tabDuplicates.Size = new Size(2282, 1050);
+            tabDuplicates.Size = new Size(2282, 1030);
             tabDuplicates.TabIndex = 1;
             tabDuplicates.Text = "Duplicates?";
             tabDuplicates.UseVisualStyleBackColor = true;
@@ -3658,7 +3658,7 @@ namespace FTAnalyzer
             dgDuplicates.RowHeadersVisible = false;
             dgDuplicates.RowHeadersWidth = 50;
             dgDuplicates.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgDuplicates.Size = new Size(2284, 836);
+            dgDuplicates.Size = new Size(2284, 816);
             dgDuplicates.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgDuplicates.TabIndex = 19;
             dgDuplicates.VirtualMode = true;
@@ -3671,7 +3671,7 @@ namespace FTAnalyzer
             tabLooseBirths.Location = new Point(8, 46);
             tabLooseBirths.Margin = new Padding(8, 9, 8, 9);
             tabLooseBirths.Name = "tabLooseBirths";
-            tabLooseBirths.Size = new Size(2282, 1050);
+            tabLooseBirths.Size = new Size(2282, 1030);
             tabLooseBirths.TabIndex = 2;
             tabLooseBirths.Text = "Loose Births";
             tabLooseBirths.UseVisualStyleBackColor = true;
@@ -3696,7 +3696,7 @@ namespace FTAnalyzer
             dgLooseBirths.RowHeadersVisible = false;
             dgLooseBirths.RowHeadersWidth = 50;
             dgLooseBirths.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgLooseBirths.Size = new Size(2282, 1050);
+            dgLooseBirths.Size = new Size(2282, 1030);
             dgLooseBirths.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgLooseBirths.TabIndex = 3;
             dgLooseBirths.VirtualMode = true;
@@ -3708,7 +3708,7 @@ namespace FTAnalyzer
             tabLooseDeaths.Location = new Point(8, 46);
             tabLooseDeaths.Margin = new Padding(8, 9, 8, 9);
             tabLooseDeaths.Name = "tabLooseDeaths";
-            tabLooseDeaths.Size = new Size(2282, 1050);
+            tabLooseDeaths.Size = new Size(2282, 1030);
             tabLooseDeaths.TabIndex = 3;
             tabLooseDeaths.Text = "Loose Deaths";
             tabLooseDeaths.UseVisualStyleBackColor = true;
@@ -3733,7 +3733,7 @@ namespace FTAnalyzer
             dgLooseDeaths.RowHeadersVisible = false;
             dgLooseDeaths.RowHeadersWidth = 50;
             dgLooseDeaths.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgLooseDeaths.Size = new Size(2282, 1050);
+            dgLooseDeaths.Size = new Size(2282, 1030);
             dgLooseDeaths.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgLooseDeaths.TabIndex = 2;
             dgLooseDeaths.VirtualMode = true;
@@ -3745,7 +3745,7 @@ namespace FTAnalyzer
             tabLooseInfo.Location = new Point(8, 46);
             tabLooseInfo.Margin = new Padding(8, 9, 8, 9);
             tabLooseInfo.Name = "tabLooseInfo";
-            tabLooseInfo.Size = new Size(2282, 1050);
+            tabLooseInfo.Size = new Size(2282, 1030);
             tabLooseInfo.TabIndex = 4;
             tabLooseInfo.Text = "All Loose Info";
             tabLooseInfo.UseVisualStyleBackColor = true;
@@ -3770,7 +3770,7 @@ namespace FTAnalyzer
             dgLooseInfo.RowHeadersVisible = false;
             dgLooseInfo.RowHeadersWidth = 50;
             dgLooseInfo.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgLooseInfo.Size = new Size(2282, 1050);
+            dgLooseInfo.Size = new Size(2282, 1030);
             dgLooseInfo.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgLooseInfo.TabIndex = 4;
             dgLooseInfo.VirtualMode = true;
@@ -3786,7 +3786,7 @@ namespace FTAnalyzer
             tabSurnames.Margin = new Padding(8, 9, 8, 9);
             tabSurnames.Name = "tabSurnames";
             tabSurnames.Padding = new Padding(8, 9, 8, 9);
-            tabSurnames.Size = new Size(2298, 1074);
+            tabSurnames.Size = new Size(2298, 1106);
             tabSurnames.TabIndex = 14;
             tabSurnames.Text = "Surnames";
             tabSurnames.UseVisualStyleBackColor = true;
@@ -3924,7 +3924,7 @@ namespace FTAnalyzer
             tabFacts.Location = new Point(8, 46);
             tabFacts.Margin = new Padding(8, 9, 8, 9);
             tabFacts.Name = "tabFacts";
-            tabFacts.Size = new Size(2298, 1074);
+            tabFacts.Size = new Size(2298, 1106);
             tabFacts.TabIndex = 13;
             tabFacts.Text = "Facts";
             tabFacts.UseVisualStyleBackColor = true;
@@ -4104,7 +4104,7 @@ namespace FTAnalyzer
             tabToday.Margin = new Padding(8, 9, 8, 9);
             tabToday.Name = "tabToday";
             tabToday.Padding = new Padding(8, 9, 8, 9);
-            tabToday.Size = new Size(2298, 1074);
+            tabToday.Size = new Size(2298, 1106);
             tabToday.TabIndex = 17;
             tabToday.Text = "On This Day";
             tabToday.UseVisualStyleBackColor = true;
@@ -4113,7 +4113,7 @@ namespace FTAnalyzer
             // 
             rtbToday.Dock = DockStyle.Bottom;
             rtbToday.Font = new Font("Microsoft Sans Serif", 9F);
-            rtbToday.Location = new Point(8, 120);
+            rtbToday.Location = new Point(8, 152);
             rtbToday.Margin = new Padding(8, 9, 8, 9);
             rtbToday.Name = "rtbToday";
             rtbToday.ReadOnly = true;

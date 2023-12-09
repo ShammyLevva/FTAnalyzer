@@ -2647,15 +2647,17 @@ namespace FTAnalyzer
 
         void CheckMaxWindowSizes(Point topleft)
         {
+            int boundaryWidth = 26;
+            int boundaryHeight = panel2.Height - statusStrip.Height - menuStrip1.Height;
             Rectangle workarea = Screen.GetWorkingArea(topleft);
             if (Width > workarea.Width)
                 Width = workarea.Width;
             if (Height > workarea.Height)
                 Height = workarea.Height;
-            if (tabSelector.Left + tabSelector.Width > Size.Width)
-                tabSelector.Width = Size.Width - tabSelector.Left;
-            if (tabSelector.Top + tabSelector.Height > Size.Height - statusStrip.Height)
-                tabSelector.Height = Size.Height - tabSelector.Top - statusStrip.Height;
+            if (tabSelector.Left + tabSelector.Width + boundaryWidth > Size.Width)
+                tabSelector.Width = Size.Width - tabSelector.Left - boundaryWidth;
+            if (tabSelector.Top + tabSelector.Height + boundaryHeight > Size.Height)
+                tabSelector.Height = Size.Height - tabSelector.Top - boundaryHeight;
         }
         #endregion
 
