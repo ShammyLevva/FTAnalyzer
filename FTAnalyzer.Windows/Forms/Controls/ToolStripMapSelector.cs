@@ -1,8 +1,5 @@
-﻿using System;
-using System.Windows.Forms;
-using SharpMap.Layers;
+﻿using SharpMap.Layers;
 using SharpMap.Forms;
-using System.Drawing;
 using FTAnalyzer.Mapping;
 
 namespace FTAnalyzer.Forms.Controls
@@ -38,7 +35,7 @@ namespace FTAnalyzer.Forms.Controls
         public void GetCurrentMapPreference()
         {
             string mapPreference = Application.UserAppDataRegistry.GetValue("Default Map Background", defaultMap).ToString() ?? defaultMap;
-            foreach (ToolStripMenuItem menu in this.DropDownItems)
+            foreach (ToolStripMenuItem menu in DropDownItems)
             {
                 if (mapPreference.Equals(menu.Name))
                 {
