@@ -896,7 +896,7 @@ namespace FTAnalyzer
 
         public static SortableBindingList<IDisplayDataError> DataErrors(CheckedListBox list)
         {
-            var errors = new List<IDisplayDataError>();
+            List<IDisplayDataError> errors = new();
             foreach (int indexChecked in list.CheckedIndices)
             {
                 DataErrorGroup item = (DataErrorGroup)list.Items[indexChecked];
