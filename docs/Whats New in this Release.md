@@ -1,6 +1,38 @@
+## BETA RELEASE Version 10.0.0.0-beta 4 - 10th December 2023  
+**Updates**  
+Now runs on .Net Core 7.0  
+Added Born During Census flag on colour census report  
+
+**Bugfixes**  
+Added in forcing size changes to attempt to finally fix the scroll bar issues on certain resolutions and scalings  
+Fix clicking on sort columns sorting ascending then descending  
+Fix default folder for opening files  
+
+**Known Issues**  
+Filtering on grids still needs work  
+Previously ignored duplicates may return due to revised way of storing changes.  
+
+## BETA RELEASE Version 10.0.0.0-beta 3 - 24th April 2023    
+**Updates**
+Changed Lost Cousins web interface to use modern HttpClient  
+Cope with dates with double tags eg: TO BEF, TO AFT and similar  
+Added extra census reference discovery  
+Cope with changed Ancestry GEDCOM format that moved fact description from fact to note  
+Now avoids showing date errors if Census Fact has text of State Census  
+Showing Individual or Family Facts all now use same routine  
+
+**Bugfixes**
+Set RowTemplates to use font height scaling  
+Fix font height in census view  
+Fix data error check boxes not showing  
+Double clicking displayed error once again opens facts for individual  
+Fixed missing installer icons  
+Fixed data errors checkboxes not updating list  
+Added a bunch of nullability check fixes  
+Changed over to using newer HttpClient software to load web data  
+
 ### BETA RELEASE Version 10.0.0.0-beta 1 - 16th October 2022  
 **Updates**
-
 Migrated project to .Net Core 6.0 from old .Net Framework  
 - This allows greater support of modern features  
 - It gives greater long term support moving off an old framework designed for Windows XP  
