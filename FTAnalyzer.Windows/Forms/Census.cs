@@ -33,9 +33,9 @@ namespace FTAnalyzer.Forms
             censusCountry = CensusDate.Country;
             RecordCount = 0;
             CensusDone = censusDone;
-            string defaultProvider = Application.UserAppDataRegistry.GetValue("Default Search Provider").ToString() ?? string.Empty;
+            string defaultProvider = Application.UserAppDataRegistry.GetValue("Default Search Provider", DEFAULT_PROVIDER).ToString() ?? DEFAULT_PROVIDER;
             defaultProvider ??= DEFAULT_PROVIDER;
-            string defaultRegion = Application.UserAppDataRegistry.GetValue("Default Region").ToString() ?? string.Empty;
+            string defaultRegion = Application.UserAppDataRegistry.GetValue("Default Region", DEFAULT_REGION).ToString() ?? DEFAULT_REGION;
             defaultRegion ??= DEFAULT_REGION;
             cbCensusSearchProvider.Text = defaultProvider;
             cbRegion.Text = defaultRegion;

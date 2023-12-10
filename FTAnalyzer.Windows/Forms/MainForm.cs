@@ -2107,8 +2107,8 @@ namespace FTAnalyzer
                 MessageBox.Show("You need to stop Geocoding before you can import the database", "FTAnalyzer");
             else
             {
-                string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString()
-                                                                        ?? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", myDocuments).ToString() ?? myDocuments;
                 restoreDatabase.FileName = "*.zip";
                 restoreDatabase.InitialDirectory = directory;
                 DialogResult result = restoreDatabase.ShowDialog();
@@ -2916,9 +2916,10 @@ namespace FTAnalyzer
         {
             try
             {
+                string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 using SaveFileDialog saveFileDialog = new();
-                string initialDir = Application.UserAppDataRegistry.GetValue("Report Unrecognised Census References Path").ToString() ?? string.Empty;
-                saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
+                string initialDir = Application.UserAppDataRegistry.GetValue("Report Unrecognised Census References Path", myDocuments).ToString() ?? string.Empty;
+                saveFileDialog.InitialDirectory = initialDir ?? myDocuments;
                 saveFileDialog.FileName = unrecognisedFilename;
                 saveFileDialog.Filter = "Report File (*.txt)|*.txt";
                 saveFileDialog.FilterIndex = 1;
@@ -3493,9 +3494,10 @@ namespace FTAnalyzer
             pb.Visible = true;
             try
             {
+                string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 using OpenFileDialog openFileDialog = new();
-                string initialDir = Application.UserAppDataRegistry.GetValue("Excel Export Individual Path").ToString() ?? string.Empty;
-                openFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
+                string initialDir = Application.UserAppDataRegistry.GetValue("Excel Export Individual Path", myDocuments).ToString() ?? string.Empty;
+                openFileDialog.InitialDirectory = initialDir ?? myDocuments;
                 openFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv|TNG format (*.tng)|*.tng";
                 openFileDialog.FilterIndex = defaultIndex;
 
@@ -3707,9 +3709,10 @@ namespace FTAnalyzer
             HourGlass(true);
             try
             {
+                string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 using SaveFileDialog saveFileDialog = new();
-                string initialDir = Application.UserAppDataRegistry.GetValue("JSON Export Path").ToString() ?? string.Empty;
-                saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
+                string initialDir = Application.UserAppDataRegistry.GetValue("JSON Export Path", myDocuments).ToString() ?? string.Empty;
+                saveFileDialog.InitialDirectory = initialDir ?? myDocuments;
                 saveFileDialog.Filter = "JavaScript Object Notation (*.json)|*.json";
                 saveFileDialog.FilterIndex = 1;
                 DialogResult dr = saveFileDialog.ShowDialog();
@@ -3792,10 +3795,11 @@ namespace FTAnalyzer
         {
             try
             {
+                string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 using SaveFileDialog saveFileDialog = new();
-                string initialDir = Application.UserAppDataRegistry.GetValue("Google MyMaps Path").ToString() ?? string.Empty;
-                string initialFile = Application.UserAppDataRegistry.GetValue("Google MyMaps Filename").ToString() ?? string.Empty;
-                saveFileDialog.InitialDirectory = initialDir ?? Environment.SpecialFolder.MyDocuments.ToString();
+                string initialDir = Application.UserAppDataRegistry.GetValue("Google MyMaps Path", myDocuments).ToString() ?? string.Empty;
+                string initialFile = Application.UserAppDataRegistry.GetValue("Google MyMaps Filename", myDocuments).ToString() ?? string.Empty;
+                saveFileDialog.InitialDirectory = initialDir ?? myDocuments;
                 saveFileDialog.FileName = initialFile ?? string.Empty;
                 saveFileDialog.Filter = "Keyhole Markup Language (*.kml)|*.kml";
                 saveFileDialog.FilterIndex = 1;

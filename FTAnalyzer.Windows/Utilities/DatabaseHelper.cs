@@ -135,8 +135,8 @@ namespace FTAnalyzer.Utilities
         {
             try
             {
-                string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).ToString() 
-                                                                            ?? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", myDocuments).ToString() ?? myDocuments;
                 saveDatabase.FileName = $"FTAnalyzer-Geocodes-{DateTime.Now:yyyy-MM-dd}-v{MainForm.VERSION}.zip";
                 saveDatabase.InitialDirectory = directory;
                 DialogResult result = saveDatabase.ShowDialog();

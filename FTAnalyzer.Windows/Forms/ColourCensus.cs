@@ -15,7 +15,9 @@ namespace FTAnalyzer.Forms
         readonly Font boldFont;
         readonly string _country;
         bool settingSelections;
-        
+        readonly string DEFAULT_PROVIDER = "FamilySearch";
+        readonly string DEFAULT_REGION = ".co.uk";
+
         public ColourCensus(string country, List<IDisplayColourCensus> reportList)
         {
             try
@@ -61,16 +63,19 @@ namespace FTAnalyzer.Forms
                 DataGridViewCellStyle diedInCensusRange = new();
                 diedInCensusRange.BackColor = diedInCensusRange.ForeColor = CensusColourValues[(int)CensusColours.DIED_DURING_CENSUS];
                 styles.Add(9, diedInCensusRange);
+                DataGridViewCellStyle bornInCensusRange = new();
+                bornInCensusRange.BackColor = diedInCensusRange.ForeColor = CensusColourValues[(int)CensusColours.BORN_DURING_CENSUS];
+                styles.Add(10, bornInCensusRange);
                 SetColumns(country);
                 dgReportSheet.DataSource = _reportList;
                 dgReportSheet.RowTemplate.Height = (int)(FontSettings.Default.FontHeight * GraphicsUtilities.GetCurrentScaling());
                 dgReportSheet.AllowUserToResizeColumns = true;
                 reportFormHelper.LoadColumnLayout("ColourCensusLayout.xml");
                 tsRecords.Text = $"{Messages.Count}{reportList.Count} records listed.";
-                string defaultProvider = Application.UserAppDataRegistry.GetValue("Default Search Provider").ToString() ?? string.Empty;
-                defaultProvider ??= "FamilySearch";
-                string defaultRegion = Application.UserAppDataRegistry.GetValue("Default Region").ToString() ?? string.Empty;
-                defaultRegion ??= ".co.uk";
+                string defaultProvider = Application.UserAppDataRegistry.GetValue("Default Search Provider", DEFAULT_PROVIDER).ToString() ?? DEFAULT_PROVIDER;
+                defaultProvider ??= DEFAULT_PROVIDER;
+                string defaultRegion = Application.UserAppDataRegistry.GetValue("Default Region", DEFAULT_REGION).ToString() ?? DEFAULT_REGION;
+                defaultRegion ??= DEFAULT_REGION;
                 cbCensusSearchProvider.Text = defaultProvider;
                 cbRegion.Text = defaultRegion;
                 cbFilter.Text = "All Individuals";

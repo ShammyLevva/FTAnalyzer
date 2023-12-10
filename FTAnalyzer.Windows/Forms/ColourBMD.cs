@@ -14,6 +14,8 @@ namespace FTAnalyzer.Forms
         readonly SortableBindingList<IDisplayColourBMD> _reportList;
         readonly Font boldFont;
         bool settingSelections;
+        readonly string DEFAULT_PROVIDER = "FamilySearch";
+        readonly string DEFAULT_REGION = ".co.uk";
 
         public ColourBMD(List<IDisplayColourBMD> reportList)
         {
@@ -78,13 +80,13 @@ namespace FTAnalyzer.Forms
                 dgBMDReportSheet.RowTemplate.Height = (int)(FontSettings.Default.SelectedFont.Height * GraphicsUtilities.GetCurrentScaling()); 
                 reportFormHelper.LoadColumnLayout("ColourBMDColumns.xml");
                 tsRecords.Text = $"{Messages.Count}{reportList.Count} records listed.";
-                string defaultProvider = Application.UserAppDataRegistry.GetValue("Default Search Provider").ToString() ?? string.Empty;
-                defaultProvider ??= "FamilySearch";
+                string defaultProvider = Application.UserAppDataRegistry.GetValue("Default Search Provider", DEFAULT_PROVIDER).ToString() ?? DEFAULT_PROVIDER;
+                defaultProvider ??= DEFAULT_PROVIDER;
                 if (defaultProvider.Equals("FreeCen"))
                     defaultProvider = "FreeBMD";
                 cbBMDSearchProvider.Text = defaultProvider;
-                string defaultRegion = Application.UserAppDataRegistry.GetValue("Default Region").ToString() ?? string.Empty;
-                defaultRegion ??= ".co.uk";
+                string defaultRegion = Application.UserAppDataRegistry.GetValue("Default Region", DEFAULT_REGION).ToString() ?? DEFAULT_REGION;
+                defaultRegion ??= DEFAULT_REGION;
                 cbRegion.Text = defaultRegion;
                 cbFilter.Text = "All Individuals";
                 cbApplyTo.Text = "All BMD Records";
