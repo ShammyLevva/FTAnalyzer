@@ -43,8 +43,8 @@ namespace FTAnalyzer
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             openGedcom = new OpenFileDialog();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
@@ -1143,7 +1143,7 @@ namespace FTAnalyzer
             ckbFactExclude.Name = "ckbFactExclude";
             ckbFactExclude.ScrollAlwaysVisible = true;
             ckbFactExclude.SelectionMode = SelectionMode.None;
-            ckbFactExclude.Size = new Size(675, 508);
+            ckbFactExclude.Size = new Size(675, 580);
             ckbFactExclude.TabIndex = 28;
             toolTips.SetToolTip(ckbFactExclude, "Any fact types selected in this box excludes people who have this fact type from report");
             ckbFactExclude.Visible = false;
@@ -1197,14 +1197,14 @@ namespace FTAnalyzer
             dgCheckAncestors.AllowUserToDeleteRows = false;
             dgCheckAncestors.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgCheckAncestors.ColumnHeadersHeight = 40;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle3;
             dgCheckAncestors.Location = new Point(8, 209);
             dgCheckAncestors.Margin = new Padding(8, 9, 8, 9);
             dgCheckAncestors.Name = "dgCheckAncestors";
@@ -1292,14 +1292,14 @@ namespace FTAnalyzer
             dgDataErrors.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgDataErrors.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgDataErrors.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Window;
+            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dgDataErrors.DefaultCellStyle = dataGridViewCellStyle4;
             dgDataErrors.FilterAndSortEnabled = true;
             dgDataErrors.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgDataErrors.Location = new Point(17, 416);
@@ -2608,7 +2608,7 @@ namespace FTAnalyzer
             // 
             // udAgeFilter
             // 
-            udAgeFilter.Location = new Point(1129, 87);
+            udAgeFilter.Location = new Point(1171, 94);
             udAgeFilter.Margin = new Padding(8, 9, 8, 9);
             udAgeFilter.Maximum = new decimal(new int[] { 110, 0, 0, 0 });
             udAgeFilter.Minimum = new decimal(new int[] { 60, 0, 0, 0 });
@@ -3980,11 +3980,10 @@ namespace FTAnalyzer
             // 
             // label15
             // 
-            label15.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            label15.Location = new Point(15, 1172);
+            label15.Location = new Point(17, 937);
             label15.Margin = new Padding(8, 0, 8, 0);
             label15.Name = "label15";
-            label15.Size = new Size(635, 32);
+            label15.Size = new Size(635, 40);
             label15.TabIndex = 31;
             label15.Text = "Select Facts to Include in Report";
             label15.TextAlign = ContentAlignment.TopCenter;
@@ -4044,7 +4043,7 @@ namespace FTAnalyzer
             ckbFactSelect.Name = "ckbFactSelect";
             ckbFactSelect.ScrollAlwaysVisible = true;
             ckbFactSelect.SelectionMode = SelectionMode.None;
-            ckbFactSelect.Size = new Size(676, 508);
+            ckbFactSelect.Size = new Size(676, 580);
             ckbFactSelect.TabIndex = 25;
             ckbFactSelect.MouseClick += CkbFactSelect_MouseClick;
             // 
