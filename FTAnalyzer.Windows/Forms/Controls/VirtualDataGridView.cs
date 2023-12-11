@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Reflection;
 using Zuby.ADGV;
 using System.Diagnostics;
+using System.Data;
 
 namespace FTAnalyzer.Forms.Controls
 {
@@ -68,7 +69,7 @@ namespace FTAnalyzer.Forms.Controls
         public void OnFilterStringChanged(object? sender, FilterEventArgs e)
         {
             if (e.Cancel)
-                _dataSource = _fulllist;
+                DataSource = _fulllist;
             else
             {
                 SortableBindingList<T> filter = _fulllist;
@@ -77,7 +78,7 @@ namespace FTAnalyzer.Forms.Controls
                     List<string> filteredValues = VirtualDataGridView<T>.GetFilteredValues(filteredColumn, e.FilterString);
                     filter = new SortableBindingList<T>(filter.Where(x => filteredValues.Contains(x.GetType().GetProperty(filteredColumn).GetValue(x, null))));
                 }
-                _dataSource = filter;
+                DataSource = filter;
                 FilterCountText = $"Showing {filter.Count} of {_fulllist.Count}";
                 OnVirtualGridFiltered();
             }
@@ -144,15 +145,55 @@ namespace FTAnalyzer.Forms.Controls
                 CreateGridColumns();
                 _dataSource = value;
                 _fulllist = value;
-                base.DataSource = value;
-                //RowCount = value?.Count ?? 1;
+                if (_dataSource is not null)
+                {
+                    DataView dataView = BuildDataTable(_dataSource).DefaultView;
+                    base.DataSource = dataView;
+                }
+                else
+                    base.DataSource = null;
             }
         }
 
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public T CurrentRowDataBoundItem => _dataSource[CurrentRow.Index];
+        static DataTable BuildDataTable(IList<T> lst)
+        {
+            //create DataTable Structure
+            DataTable tbl = CreateTable();
+            Type entType = typeof(T);
+            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(entType);
+            //get the list item and add into the list
+            foreach (T item in lst)
+            {
+                DataRow row = tbl.NewRow();
+                foreach (PropertyDescriptor prop in properties)
+                {
+                    row[prop.Name] = prop.GetValue(item);
+                }
+                tbl.Rows.Add(row);
+            }
+            return tbl;
+        }
 
-        public T DataBoundItem(int rowIndex) => _dataSource[rowIndex];
+        static DataTable CreateTable()
+        {
+            //T –> ClassName
+            Type entType = typeof(T);
+            //set the datatable name as class name
+            DataTable tbl = new DataTable(entType.Name);
+            //get the property list
+            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(entType);
+            foreach (PropertyDescriptor prop in properties)
+            {
+                //add property as column
+                tbl.Columns.Add(prop.Name, prop.PropertyType);
+            }
+            return tbl;
+        }
+
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public T CurrentRowDataBoundItem => DataSource[CurrentRow.Index];
+
+        public T DataBoundItem(int rowIndex) => DataSource[rowIndex];
 
         void CreateGridColumns()
         {
@@ -206,11 +247,11 @@ namespace FTAnalyzer.Forms.Controls
 
         public override void Sort(DataGridViewColumn dgvColumn, ListSortDirection direction)
         {
-            if (_dataSource is null || dgvColumn is null || dgvColumn.SortMode == DataGridViewColumnSortMode.NotSortable)
+            if (DataSource is null || dgvColumn is null || dgvColumn.SortMode == DataGridViewColumnSortMode.NotSortable)
                 return;
 
             PropertyComparer comparer = new(dgvColumn.DataPropertyName, direction);
-            _dataSource.Sort(comparer);
+            DataSource.Sort(comparer);
             Refresh();
             _sortOrders.Clear();
             foreach (DataGridViewColumn column in Columns)
@@ -226,16 +267,19 @@ namespace FTAnalyzer.Forms.Controls
 
         void OnColumnHeaderMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
         {
-            ListSortDirection sortedDirection = _sortOrders[Columns[e.ColumnIndex]] == SortOrder.Ascending 
-                ? ListSortDirection.Descending : ListSortDirection.Ascending;
-            Sort(Columns[e.ColumnIndex], sortedDirection);
+            if (_sortOrders.ContainsKey(Columns[e.ColumnIndex]))
+            {
+                ListSortDirection sortedDirection = _sortOrders[Columns[e.ColumnIndex]] == SortOrder.Ascending
+                    ? ListSortDirection.Descending : ListSortDirection.Ascending;
+                Sort(Columns[e.ColumnIndex], sortedDirection);
+            }
         }
 
         void OnCellValueNeeded(object? sender, DataGridViewCellValueEventArgs e)
         {
-            if (_dataSource is null || _dataSource.Count == 0 || e.RowIndex > _dataSource.Count -1)
+            if (DataSource is null || DataSource.Count == 0 || e.RowIndex > DataSource.Count - 1)
                 return;
-            var data = _dataSource[e.RowIndex];
+            var data = DataSource[e.RowIndex];
             e.Value = GetValueFor(data, Columns[e.ColumnIndex].DataPropertyName);
         }
 
