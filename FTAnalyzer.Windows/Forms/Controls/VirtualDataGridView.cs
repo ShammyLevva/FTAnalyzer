@@ -12,14 +12,12 @@ namespace FTAnalyzer.Forms.Controls
     {
         internal SortableBindingList<T> _dataSource;
         internal SortableBindingList<T> _fulllist;
-        internal Dictionary<DataGridViewColumn, SortOrder> _sortOrders;
         public string FilterCountText { get; private set; }
 
         public VirtualDataGridView()
         {
             _dataSource = new SortableBindingList<T>();
             _fulllist = new SortableBindingList<T>();
-            _sortOrders = new();
             VirtualMode = true;
             AllowUserToAddRows = false;
             AllowUserToDeleteRows = false;
@@ -38,10 +36,10 @@ namespace FTAnalyzer.Forms.Controls
             ResizeRedraw = true;
             RowHeadersVisible = false;
             RowHeadersWidth = 50;
+            FilterAndSortEnabled = true;
             SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             ScrollBars = ScrollBars.Both;
             CellValueNeeded += OnCellValueNeeded;
-            ColumnHeaderMouseClick += OnColumnHeaderMouseClick;
             ColumnWidthChanged += OnColumnWidthChanged; // for debugging purposes
             Resize += OnResizeChanged;
 
@@ -69,7 +67,7 @@ namespace FTAnalyzer.Forms.Controls
         public void OnFilterStringChanged(object? sender, FilterEventArgs e)
         {
             if (e.Cancel)
-                DataSource = _fulllist;
+                _dataSource = _fulllist;
             else
             {
                 SortableBindingList<T> filter = _fulllist;
@@ -78,7 +76,9 @@ namespace FTAnalyzer.Forms.Controls
                     List<string> filteredValues = VirtualDataGridView<T>.GetFilteredValues(filteredColumn, e.FilterString);
                     filter = new SortableBindingList<T>(filter.Where(x => filteredValues.Contains(x.GetType().GetProperty(filteredColumn).GetValue(x, null))));
                 }
-                DataSource = filter;
+                _dataSource = filter;
+                DataView dataView = BuildDataTable(_dataSource).DefaultView;
+                base.DataSource = dataView;
                 FilterCountText = $"Showing {filter.Count} of {_fulllist.Count}";
                 OnVirtualGridFiltered();
             }
@@ -185,15 +185,16 @@ namespace FTAnalyzer.Forms.Controls
             foreach (PropertyDescriptor prop in properties)
             {
                 //add property as column
-                tbl.Columns.Add(prop.Name, prop.PropertyType);
+                tbl.Columns.Add(prop.Name, IsNullableType(prop.PropertyType) ? Nullable.GetUnderlyingType(prop.PropertyType) : prop.PropertyType);
             }
             return tbl;
         }
+        static bool IsNullableType(Type type) => type.IsGenericType && type.GetGenericTypeDefinition().Equals(typeof(Nullable<>));
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public T CurrentRowDataBoundItem => DataSource[CurrentRow.Index];
+        public T CurrentRowDataBoundItem => _dataSource[CurrentRow.Index];
 
-        public T DataBoundItem(int rowIndex) => DataSource[rowIndex];
+        public T DataBoundItem(int rowIndex) => _dataSource[rowIndex];
 
         void CreateGridColumns()
         {
@@ -247,39 +248,23 @@ namespace FTAnalyzer.Forms.Controls
 
         public override void Sort(DataGridViewColumn dgvColumn, ListSortDirection direction)
         {
-            if (DataSource is null || dgvColumn is null || dgvColumn.SortMode == DataGridViewColumnSortMode.NotSortable)
+            if (_dataSource is null || dgvColumn is null || dgvColumn.SortMode == DataGridViewColumnSortMode.NotSortable)
                 return;
 
             PropertyComparer comparer = new(dgvColumn.DataPropertyName, direction);
-            DataSource.Sort(comparer);
+            _dataSource.Sort(comparer);
+            DataView dataView = BuildDataTable(_dataSource).DefaultView;
+            base.DataSource = dataView;
             Refresh();
-            _sortOrders.Clear();
-            foreach (DataGridViewColumn column in Columns)
-            {
-                if (column == dgvColumn)
-                    _sortOrders.Add(column, direction == ListSortDirection.Ascending ? SortOrder.Ascending : SortOrder.Descending);
-                else
-                    _sortOrders.Add(column, SortOrder.None);
-            }
         }
 
         void OnResizeChanged(object? sender, EventArgs e) => ForceToParent();
 
-        void OnColumnHeaderMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (_sortOrders.ContainsKey(Columns[e.ColumnIndex]))
-            {
-                ListSortDirection sortedDirection = _sortOrders[Columns[e.ColumnIndex]] == SortOrder.Ascending
-                    ? ListSortDirection.Descending : ListSortDirection.Ascending;
-                Sort(Columns[e.ColumnIndex], sortedDirection);
-            }
-        }
-
         void OnCellValueNeeded(object? sender, DataGridViewCellValueEventArgs e)
         {
-            if (DataSource is null || DataSource.Count == 0 || e.RowIndex > DataSource.Count - 1)
+            if (_dataSource is null || _dataSource.Count == 0 || e.RowIndex > _dataSource.Count - 1)
                 return;
-            var data = DataSource[e.RowIndex];
+            var data = _dataSource[e.RowIndex];
             e.Value = GetValueFor(data, Columns[e.ColumnIndex].DataPropertyName);
         }
 
