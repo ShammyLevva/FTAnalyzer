@@ -1,3 +1,7 @@
+## BETA RELEASE Version 10.0.0.0-beta 5 - 11th December 2023  
+**Bugfixes**  
+Fixed Sort & Filter on data grids  
+
 ## BETA RELEASE Version 10.0.0.0-beta 4 - 10th December 2023  
 **Updates**  
 Now runs on .Net Core 7.0  
