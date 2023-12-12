@@ -1,4 +1,11 @@
+## BETA RELEASE Version 10.0.0.0-beta 6 - Not yet released  
+**Bugfixes**  
+Rework Title, Alias & Suffix to pickup extra ways of appearing in GEDCOM  
+
 ## BETA RELEASE Version 10.0.0.0-beta 5 - 11th December 2023  
+**Updates**  
+Analytics recognises Windows 11 23H2  
+
 **Bugfixes**  
 Fixed Sort & Filter on data grids  
 
