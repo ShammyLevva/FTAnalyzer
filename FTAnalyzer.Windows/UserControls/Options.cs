@@ -2,6 +2,7 @@
 using System.Reflection;
 using FTAnalyzer.Properties;
 using System.Diagnostics;
+using FTAnalyzer.Utilities;
 
 //TODO: Load option controls dynamically
 //TODO: Add ability for option controls to have an icon next to their display name in tree view
@@ -137,7 +138,7 @@ namespace FTAnalyzer.UserControls
 					sb.Append(controlErrors[i]);
 					sb.Append(Environment.NewLine);
 				}
-				MessageBox.Show(sb.ToString(), "Validation Errors", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				UIHelpers.ShowMessage(sb.ToString(), "Validation Errors", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			else
 			{

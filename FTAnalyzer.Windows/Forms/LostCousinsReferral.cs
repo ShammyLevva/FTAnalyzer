@@ -59,7 +59,7 @@ namespace FTAnalyzer.Forms
         void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("LCReferralsColumns.xml");
-            MessageBox.Show("Form Settings Saved", "Lost Cousins Referrals");
+            UIHelpers.ShowMessage("Form Settings Saved", "Lost Cousins Referrals");
         }
 
         void MnuResetColumns_Click(object sender, EventArgs e) => reportFormHelper.ResetColumnLayout("LCReferralsColumns.xml");

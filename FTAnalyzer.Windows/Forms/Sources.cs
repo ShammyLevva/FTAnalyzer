@@ -50,7 +50,7 @@ namespace FTAnalyzer.Forms
         void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("SourcesColumns.xml");
-            MessageBox.Show("Form Settings Saved", "Sources");
+            UIHelpers.ShowMessage("Form Settings Saved", "Sources");
         }
 
         void Sources_FormClosed(object sender, FormClosedEventArgs e) => Dispose();

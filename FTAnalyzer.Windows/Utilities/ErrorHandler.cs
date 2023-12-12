@@ -10,7 +10,7 @@ namespace FTAnalyzer.Utilities
         {
             string message = ErrorMessages.ResourceManager.GetString(errorNum) ?? string.Empty;
             _ = int.TryParse(errorNum[4..], out _);
-            MessageBox.Show($"{message}\n{ex.Message}", $"Error: {errorNum}", MessageBoxButtons.OK, icon);
+            UIHelpers.ShowMessage($"{message}\n{ex.Message}", $"Error: {errorNum}", MessageBoxButtons.OK, icon);
         }
     }
 }

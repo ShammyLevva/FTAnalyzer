@@ -64,7 +64,7 @@ namespace FTAnalyzer.Forms
                 diedInCensusRange.BackColor = diedInCensusRange.ForeColor = CensusColourValues[(int)CensusColours.DIED_DURING_CENSUS];
                 styles.Add(9, diedInCensusRange);
                 DataGridViewCellStyle bornInCensusRange = new();
-                bornInCensusRange.BackColor = diedInCensusRange.ForeColor = CensusColourValues[(int)CensusColours.BORN_DURING_CENSUS];
+                bornInCensusRange.BackColor = bornInCensusRange.ForeColor = CensusColourValues[(int)CensusColours.BORN_DURING_CENSUS];
                 styles.Add(10, bornInCensusRange);
                 SetColumns(country);
                 dgReportSheet.DataSource = _reportList;
@@ -244,7 +244,7 @@ namespace FTAnalyzer.Forms
                         if (censusYear == 1939 && 
                             !cbCensusSearchProvider.SelectedItem.Equals("Find My Past") && 
                             !cbCensusSearchProvider.SelectedItem.Equals("Ancestry"))
-                            MessageBox.Show($"Unable to search the 1939 National Register on {cbCensusSearchProvider.SelectedItem}.", "FTAnalyzer");
+                            UIHelpers.ShowMessage($"Unable to search the 1939 National Register on {cbCensusSearchProvider.SelectedItem}.", "FTAnalyzer");
                         else
                         {
                             try
@@ -253,7 +253,7 @@ namespace FTAnalyzer.Forms
                             }
                             catch (CensusSearchException ex)
                             {
-                                MessageBox.Show(ex.Message);
+                                UIHelpers.ShowMessage(ex.Message);
                             }
                         }
                     }
@@ -385,7 +385,7 @@ namespace FTAnalyzer.Forms
         void MnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("ColourCensusLayout.xml");
-            MessageBox.Show("Form Settings Saved", "Colour Census");
+            UIHelpers.ShowMessage("Form Settings Saved", "Colour Census");
         }
 
         void MnuResetCensusColumns_Click(object sender, EventArgs e) => reportFormHelper.ResetColumnLayout("ColourCensusLayout.xml");

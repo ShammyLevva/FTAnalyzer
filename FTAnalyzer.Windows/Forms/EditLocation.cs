@@ -108,7 +108,7 @@ namespace FTAnalyzer.Forms
                 DialogResult result = DialogResult.Yes;
                 if (Application.UserAppDataRegistry.GetValue("Ask to update database", "True").Equals("True"))
                 {
-                    result = MessageBox.Show("Do you want to save this new position", "Save changes",
+                    result = UIHelpers.ShowMessage("Do you want to save this new position", "Save changes",
                         MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 }
                 if (result == DialogResult.Cancel)
@@ -155,7 +155,7 @@ namespace FTAnalyzer.Forms
             UpdateDatabase();
             UserSavedPoint = true;
             TreeViewHandler.Instance.RefreshTreeNodeIcon(location);
-            MessageBox.Show($"Data for {location} updated.", "Save new location");
+            UIHelpers.ShowMessage($"Data for {location} updated.", "Save new location");
         }
 
         void BtnSaveExit_Click(object sender, EventArgs e)
@@ -232,7 +232,7 @@ namespace FTAnalyzer.Forms
                         pointUpdated = true;
                     }
                     else
-                        MessageBox.Show($"Google didn't find {txtSearch.Text}", "Failed Google Lookup");
+                        UIHelpers.ShowMessage($"Google didn't find {txtSearch.Text}", "Failed Google Lookup");
                 }
             }
         }

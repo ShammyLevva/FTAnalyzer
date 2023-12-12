@@ -206,7 +206,7 @@ namespace FTAnalyzer.Utilities
                     {
                         cmd.ExecuteNonQuery();
                     }
-                    MessageBox.Show("Please note that due to fixes in the way Google reports\nlocations your 'Google Matched' geocodes have been reset.", "FTAnalyzer");
+                    UIHelpers.ShowMessage("Please note that due to fixes in the way Google reports\nlocations your 'Google Matched' geocodes have been reset.", "FTAnalyzer");
                 }
                 if (dbVersion < v3_1_2_0)
                 {
@@ -215,7 +215,7 @@ namespace FTAnalyzer.Utilities
                         proceed = true;
                     else
                     {
-                        DialogResult result = MessageBox.Show("In order to improve speed of the maps a database upgrade is needed.\nThis may take several minutes and must be allowed to complete.\nYou must backup your database first. Ok to proceed?", "Database upgrading", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        DialogResult result = UIHelpers.ShowMessage("In order to improve speed of the maps a database upgrade is needed.\nThis may take several minutes and must be allowed to complete.\nYou must backup your database first. Ok to proceed?", "Database upgrading", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         Application.UseWaitCursor = true;
                         if (result == DialogResult.Yes)
                         {
@@ -260,11 +260,11 @@ namespace FTAnalyzer.Utilities
                         {
                             cmd.ExecuteNonQuery();
                         }
-                        MessageBox.Show("Database lat/long upgrade complete", "FTAnalyzer");
+                        UIHelpers.ShowMessage("Database lat/long upgrade complete", "FTAnalyzer");
                     }
                     else
                     {
-                        MessageBox.Show("Database not backed up we cannot proceed to update maps without a safe database backup.\nMapping features will not work correctly.", "Database backup Required");
+                        UIHelpers.ShowMessage("Database not backed up we cannot proceed to update maps without a safe database backup.\nMapping features will not work correctly.", "Database backup Required");
                     }
                 }
                 if (dbVersion < v3_3_2_5)

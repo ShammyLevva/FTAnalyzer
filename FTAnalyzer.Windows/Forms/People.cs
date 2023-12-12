@@ -330,7 +330,7 @@ namespace FTAnalyzer.Forms
             }
             else
             {
-                MessageBox.Show($"You have no parents older than {minAge} at time of children's birth.", "FTAnalyzer");
+                UIHelpers.ShowMessage($"You have no parents older than {minAge} at time of children's birth.", "FTAnalyzer");
                 return false;
             }
         }
@@ -494,7 +494,7 @@ namespace FTAnalyzer.Forms
                     indReportFormHelper.SaveColumnLayout("ChildrenStatusIndColumns.xml");
                 if (!splitContainer.Panel2Collapsed)
                     famReportFormHelper.SaveColumnLayout("ChildrenStatusFamColumns.xml");
-                MessageBox.Show("Form Settings Saved", "People");
+                UIHelpers.ShowMessage("Form Settings Saved", "People");
             }
         }
 

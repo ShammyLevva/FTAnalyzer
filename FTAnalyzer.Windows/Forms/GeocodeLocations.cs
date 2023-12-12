@@ -246,13 +246,15 @@ namespace FTAnalyzer.Forms
                     foreach (string part in parts)
                     {
                         string key = part.Trim();
-                        if (!results.ContainsKey(key))
+                        if (!results.TryGetValue(key, out List<IDisplayGeocodedLocation>? value))
                         {
-                            results[key] = new List<IDisplayGeocodedLocation>();
+                            value = new List<IDisplayGeocodedLocation>();
+                            results[key] = value;
                             if (!GoogleMap.RESULT_TYPES.Contains(key))
                                 noneOfTheAbove.Add(key);
                         }
-                        results[key].Add(loc);
+
+                        value.Add(loc);
                     }
                 }
             }
@@ -364,7 +366,7 @@ namespace FTAnalyzer.Forms
         void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("GeocodeLocationsColumns.xml");
-            MessageBox.Show("Form Settings Saved", "Geocode Locations");
+            UIHelpers.ShowMessage("Form Settings Saved", "Geocode Locations");
         }
 
         void DgLocations_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
@@ -517,7 +519,7 @@ namespace FTAnalyzer.Forms
             {
                 if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy || EmptyViewPortsBackgroundWorker.IsBusy)
                 {
-                    MessageBox.Show(new Form() { TopMost = true }, "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
+                    UIHelpers.ShowMessage(new Form() { TopMost = true }, "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
                 }
                 else
                 {
@@ -551,7 +553,7 @@ namespace FTAnalyzer.Forms
             {
                 if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy || EmptyViewPortsBackgroundWorker.IsBusy)
                 {
-                    MessageBox.Show(new Form() { TopMost = true }, "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
+                    UIHelpers.ShowMessage(new Form() { TopMost = true }, "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
                 }
                 else
                 {
@@ -630,7 +632,7 @@ namespace FTAnalyzer.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(new Form() { TopMost = true }, $"Error Google Geocoding: {ex.Message}", "FTAnalyzer Geocoding");
+                UIHelpers.ShowMessage(new Form() { TopMost = true }, $"Error Google Geocoding: {ex.Message}", "FTAnalyzer Geocoding");
             }
         }
 
@@ -770,13 +772,13 @@ namespace FTAnalyzer.Forms
                 }
                 ft.ClearLocations(); // Locations tab needs to be invalidated so it refreshes
                 if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max"))
-                    MessageBox.Show(new Form() { TopMost = true }, $"Finished Google Geocoding.\n{txtGoogleWait.Text}\nPlease wait 24hrs before trying again as Google\nwill not allow further geocoding before then.", "FTAnalyzer Geocoding");
+                    UIHelpers.ShowMessage(new Form() { TopMost = true }, $"Finished Google Geocoding.\n{txtGoogleWait.Text}\nPlease wait 24hrs before trying again as Google\nwill not allow further geocoding before then.", "FTAnalyzer Geocoding");
                 else
-                    MessageBox.Show(new Form() { TopMost = true }, "Finished Google Geocoding.", "FTAnalyzer Geocoding");
+                    UIHelpers.ShowMessage(new Form() { TopMost = true }, "Finished Google Geocoding.", "FTAnalyzer Geocoding");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(new Form() { TopMost = true }, $"Error Google Geocoding: {ex.Message}", "FTAnalyzer Geocoding");
+                UIHelpers.ShowMessage(new Form() { TopMost = true }, $"Error Google Geocoding: {ex.Message}", "FTAnalyzer Geocoding");
             }
         }
 
@@ -887,7 +889,7 @@ namespace FTAnalyzer.Forms
         {
             if (reverseGeocodeBackgroundWorker.IsBusy)
             {
-                MessageBox.Show(new Form() { TopMost = true }, "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
+                UIHelpers.ShowMessage(new Form() { TopMost = true }, "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
             }
             else
             {
@@ -925,10 +927,10 @@ namespace FTAnalyzer.Forms
                             double latitude = loc.Latitude;
                             double longitude = loc.Longitude;
                             string hashkey = DatabaseHelper.LatLongHashKey(latitude, longitude);
-                            if (LatLongIndex.ContainsKey(hashkey))
+                            if (LatLongIndex.TryGetValue(hashkey, out Tuple<string, string>? value))
                             {
-                                loc.FoundLocation = LatLongIndex[hashkey].Item1;
-                                loc.FoundResultType = LatLongIndex[hashkey].Item2;
+                                loc.FoundLocation = value.Item1;
+                                loc.FoundResultType = value.Item2;
                                 UpdateDatabase(loc, true);
                             }
                             else
@@ -963,13 +965,13 @@ namespace FTAnalyzer.Forms
                 }
                 ft.ClearLocations(); // Locations tab needs to be invalidated so it refreshes
                 if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max"))
-                    MessageBox.Show(new Form() { TopMost = true }, $"Finished Reverse Geocoding.\n{txtGoogleWait.Text}\nPlease wait 24hrs before trying again as Google\nwill not allow further reverse geocoding before then.", "FTAnalyzer Geocoding");
+                    UIHelpers.ShowMessage(new Form() { TopMost = true }, $"Finished Reverse Geocoding.\n{txtGoogleWait.Text}\nPlease wait 24hrs before trying again as Google\nwill not allow further reverse geocoding before then.", "FTAnalyzer Geocoding");
                 else
-                    MessageBox.Show(new Form() { TopMost = true }, "Finished Reverse Geocoding.", "FTAnalyzer Geocoding");
+                    UIHelpers.ShowMessage(new Form() { TopMost = true }, "Finished Reverse Geocoding.", "FTAnalyzer Geocoding");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(new Form() { TopMost = true }, "Error Reverse Geocoding : " + ex.Message, "FTAnalyzer Geocoding");
+                UIHelpers.ShowMessage(new Form() { TopMost = true }, "Error Reverse Geocoding : " + ex.Message, "FTAnalyzer Geocoding");
             }
         }
 
@@ -1038,7 +1040,7 @@ namespace FTAnalyzer.Forms
 
         void ResetAllPartialMatchesToNotSearchedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to reset all Partial Matches (Google, Level and Ord Surv) to not searched?",
+            DialogResult result = UIHelpers.ShowMessage("Are you sure you want to reset all Partial Matches (Google, Level and Ord Surv) to not searched?",
                 "Reset ALL Partials", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
@@ -1046,11 +1048,11 @@ namespace FTAnalyzer.Forms
                 if (FamilyTree.LoadGeoLocationsFromDataBase(outputText))
                 {
                     FamilyTree.WriteGeocodeStatstoRTB("Geocoding status after reset partials:", outputText);
-                    MessageBox.Show("Partials have been reset", "FTAnalyzer");
+                    UIHelpers.ShowMessage("Partials have been reset", "FTAnalyzer");
                 }
                 else
                 {
-                    MessageBox.Show("Problem loading Geocoded Locations from Database.", "FTAnalyzer");
+                    UIHelpers.ShowMessage("Problem loading Geocoded Locations from Database.", "FTAnalyzer");
                 }
             }
         }
@@ -1077,7 +1079,7 @@ namespace FTAnalyzer.Forms
         {
             if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy)
             {
-                MessageBox.Show(new Form() { TopMost = true }, "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
+                UIHelpers.ShowMessage(new Form() { TopMost = true }, "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
             }
             else
             {
@@ -1098,7 +1100,7 @@ namespace FTAnalyzer.Forms
             if (LoadOS50kGazetteer())
             {
                 ProcessOS50kGazetteerData(worker, e);
-                MessageBox.Show(new Form() { TopMost = true }, "Finished Ordnance Survey Geocoding", "FTAnalyzer Geocoding");
+                UIHelpers.ShowMessage(new Form() { TopMost = true }, "Finished Ordnance Survey Geocoding", "FTAnalyzer Geocoding");
             }
         }
 
@@ -1123,7 +1125,7 @@ namespace FTAnalyzer.Forms
             catch (Exception e)
             {
                 //log.Warn("Failed to load OS50k Gazetteer error was : " + e.Message);
-                MessageBox.Show(new Form() { TopMost = true }, $"Failed to load OS50k Gazetteer error was : {e.Message}");
+                UIHelpers.ShowMessage(new Form() { TopMost = true }, $"Failed to load OS50k Gazetteer error was : {e.Message}");
             }
             OS50kDictionary = null; // only reach here on exception so discard partially loaded file
             OS50k = null;

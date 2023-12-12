@@ -83,7 +83,7 @@ namespace FTAnalyzer
         {
             OperatingSystem os = Environment.OSVersion;
             if (os.Version.Major == 6 && os.Version.Minor < 2)
-                MessageBox.Show("Please note Microsoft has ended Windows 7 support as such it is no longer advisable to be connected to the internet using it. Any security flaws that are unpatched may be being actively exploited by hackers. You should upgrade as soon as possible.\n\nPlease be aware that FTAnalyzer may be unstable on an outdated unsupported Operating System.");
+                UIHelpers.ShowMessage("Please note Microsoft has ended Windows 7 support as such it is no longer advisable to be connected to the internet using it. Any security flaws that are unpatched may be being actively exploited by hackers. You should upgrade as soon as possible.\n\nPlease be aware that FTAnalyzer may be unstable on an outdated unsupported Operating System.");
         }
 
         static async void CheckWebVersion()
@@ -109,7 +109,7 @@ namespace FTAnalyzer
                 if (web > local)
                 {
                     string text = $"Version installed: {VERSION}, Web version available: {webVersion}\nDo you want to go to website to download the latest version?\nSelect Cancel to visit release website for older machines.";
-                    DialogResult download = MessageBox.Show(text, "FTAnalyzer", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    DialogResult download = UIHelpers.ShowMessage(text, "FTAnalyzer", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                     if (download == DialogResult.Yes)
                         SpecialMethods.VisitWebsite("https://www.microsoft.com/en-gb/p/ftanalyzer/9pmjl9hvpl7x?cid=clickonceappupgrade");
                     if (download == DialogResult.Cancel)
@@ -121,7 +121,7 @@ namespace FTAnalyzer
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
-                MessageBox.Show("Unable to check website for new version please check https://github.com/ShammyLevva/FTAnalyzer/releases to see if you are running the latest version.", "FTAnalyzer");
+                UIHelpers.ShowMessage("Unable to check website for new version please check https://github.com/ShammyLevva/FTAnalyzer/releases to see if you are running the latest version.", "FTAnalyzer");
             }
         }
 
@@ -264,7 +264,7 @@ namespace FTAnalyzer
                         mnuCloseGEDCOM.Enabled = true;
                         EnableLoadMenus();
                         ShowMenus(true);
-                        MessageBox.Show($"Gedcom File {filename} Loaded", "FTAnalyzer");
+                        UIHelpers.ShowMessage($"Gedcom File {filename} Loaded", "FTAnalyzer");
                     }
                     else
                         CleanUp(true);
@@ -272,12 +272,12 @@ namespace FTAnalyzer
             }
             catch (IOException ex)
             {
-                MessageBox.Show($"Error: Could not read file from disk. Original error: {ex.Message}", "FTAnalyzer");
+                UIHelpers.ShowMessage($"Error: Could not read file from disk. Original error: {ex.Message}", "FTAnalyzer");
             }
             catch (Exception ex2)
             {
                 string message = ex2.Message + "\n" + (ex2.InnerException is not null ? ex2.InnerException.Message : string.Empty);
-                MessageBox.Show($"Error: Problem processing your file. Please try again.\n" +
+                UIHelpers.ShowMessage($"Error: Problem processing your file. Please try again.\n" +
                     $"If this problem persists please report this at https://www.ftanalyzer.com/issues. Error was: {message}\n{ex2.InnerException}", "FTAnalyzer");
                 CleanUp(true);
             }
@@ -433,7 +433,7 @@ namespace FTAnalyzer
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Found a problem starting up.\nPlease report this at https://www.ftanalyzer.com/issues\nThe error was :{ex.Message}", "FTAnalyzer");
+                UIHelpers.ShowMessage($"Found a problem starting up.\nPlease report this at https://www.ftanalyzer.com/issues\nThe error was :{ex.Message}", "FTAnalyzer");
             }
         }
 
@@ -715,7 +715,7 @@ namespace FTAnalyzer
                 var outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
                 ft.UpdateRootIndividual(ind.IndividualID, null, outputText);
                 dgIndividuals.Refresh();
-                MessageBox.Show($"Root person set as {ind.Name}\n\n{ft.PrintRelationCount()}", "FTAnalyzer");
+                UIHelpers.ShowMessage($"Root person set as {ind.Name}\n\n{ft.PrintRelationCount()}", "FTAnalyzer");
             }
             HourGlass(false);
         }
@@ -748,7 +748,7 @@ namespace FTAnalyzer
                 SpecialMethods.VisitWebsite(URL);
             }
             else
-                MessageBox.Show($"{loc} is not yet geocoded so can't be displayed.");
+                UIHelpers.ShowMessage($"{loc} is not yet geocoded so can't be displayed.");
         }
 
         void BtnOSMap_Click(object sender, EventArgs e)
@@ -767,10 +767,10 @@ namespace FTAnalyzer
                         }
                     }
                     else
-                        MessageBox.Show($"{loc} is outwith the UK so cannot be shown on a UK OS Map.");
+                        UIHelpers.ShowMessage($"{loc} is outwith the UK so cannot be shown on a UK OS Map.");
                 }
                 else
-                    MessageBox.Show($"{loc} is not yet geocoded so can't be displayed.");
+                    UIHelpers.ShowMessage($"{loc} is not yet geocoded so can't be displayed.");
             }
         }
 
@@ -806,9 +806,9 @@ namespace FTAnalyzer
                 if (loc is null)
                 {
                     if (tabCtrlLocations.SelectedTab.Text == "Tree View")
-                        MessageBox.Show("Location selected isn't valid to show on the map.", "FTAnalyzer");
+                        UIHelpers.ShowMessage("Location selected isn't valid to show on the map.", "FTAnalyzer");
                     else
-                        MessageBox.Show("Nothing selected. Please select a location to show on the map.", "FTAnalyzer");
+                        UIHelpers.ShowMessage("Nothing selected. Please select a location to show on the map.", "FTAnalyzer");
                     return 0f;
                 }
                 return loc.ZoomLevel;
@@ -908,7 +908,7 @@ namespace FTAnalyzer
 
         void ChildAgeProfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Sorry this report is currently Unavailable.");
+            UIHelpers.ShowMessage("Sorry this report is currently Unavailable.");
             //Statistics s = Statistics.Instance;
             //Chart chart = new Chart();
             //int[,,] stats = s.ChildrenBirthProfiles();
@@ -916,7 +916,7 @@ namespace FTAnalyzer
             //DisposeDuplicateForms(chart);
             //chart.Show();
             //Analytics.TrackAction(Analytics.MainFormAction, Analytics.BirthProfileEvent);
-            //MessageBox.Show(s.BuildOutput(stats), "Birth Profile Information");
+            //UIHelpers.ShowMessage(s.BuildOutput(stats), "Birth Profile Information");
         }
 
         void ViewOnlineManualToolStripMenuItem_Click(object sender, EventArgs e)
@@ -954,10 +954,10 @@ namespace FTAnalyzer
                 catch (Exception)
                 {
                     if (result != DialogResult.Cancel)
-                        MessageBox.Show("Invalid Age entered", "FTAnalyzer");
+                        UIHelpers.ShowMessage("Invalid Age entered", "FTAnalyzer");
                 }
                 if (age < 13 || age > 90)
-                    MessageBox.Show("Please enter an age between 13 and 90", "FTAnalyzer");
+                    UIHelpers.ShowMessage("Please enter an age between 13 and 90", "FTAnalyzer");
             } while ((result != DialogResult.Cancel) && (age < 13 || age > 90));
             if (result == DialogResult.OK)
             {
@@ -1114,7 +1114,7 @@ namespace FTAnalyzer
         {
             if (GeneralSettings.Default.ReloadRequired && ft.DataLoaded)
             {
-                DialogResult dr = MessageBox.Show("This option requires the data to be refreshed.\n\nDo you want to reload now?\n\nClicking no will keep the data with the old option.", "Reload GEDCOM File", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = UIHelpers.ShowMessage("This option requires the data to be refreshed.\n\nDo you want to reload now?\n\nClicking no will keep the data with the old option.", "Reload GEDCOM File", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 GeneralSettings.Default.ReloadRequired = false;
                 GeneralSettings.Default.Save();
                 if (dr == DialogResult.Yes)
@@ -1363,7 +1363,7 @@ namespace FTAnalyzer
                             tabSelector.SelectedTab = tabDisplayProgress;
                             mnuRestore.Enabled = true;
                             mnuLoadLocationsCSV.Enabled = true;
-                            MessageBox.Show(ErrorMessages.FTA_0002, "FTAnalyzer Error : FTA_0002");
+                            UIHelpers.ShowMessage(ErrorMessages.FTA_0002, "FTAnalyzer Error : FTA_0002");
                         }
                         return;
                     }
@@ -1786,7 +1786,7 @@ namespace FTAnalyzer
             if (LCUpdates?.Count > 0)
             {
                 rtbLCoutput.Text = string.Empty;
-                int response = UIHelpers.ShowYesNo($"You have {LCUpdates.Count} possible records to add to Lost Cousins. Proceed?");
+                int response = UIHelpers.ShowYesNo($"You have {LCUpdates.Count} possible records to add to Lost Cousins. Proceed?", "Lost Cousins");
                 if (response == UIHelpers.Yes)
                 {
                     rtbLCoutput.Text = "Started Processing Lost Cousins entries.\n\n";
@@ -1922,7 +1922,7 @@ namespace FTAnalyzer
         #endregion
 
         #region ToolStrip Clicks
-        void AboutToolStripMenuItem_Click(object sender, EventArgs e) => MessageBox.Show($"This is Family Tree Analyzer version {VERSION}", "FTAnalyzer");
+        void AboutToolStripMenuItem_Click(object sender, EventArgs e) => UIHelpers.ShowMessage($"This is Family Tree Analyzer version {VERSION}", "FTAnalyzer");
 
         void OptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -2009,7 +2009,7 @@ namespace FTAnalyzer
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error Printing : {ex.Message}");
+                UIHelpers.ShowMessage($"Error Printing : {ex.Message}");
             }
         }
 
@@ -2092,7 +2092,7 @@ namespace FTAnalyzer
         void BackupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ft.Geocoding)
-                MessageBox.Show("You need to stop Geocoding before you can export the database", "FTAnalyzer");
+                UIHelpers.ShowMessage("You need to stop Geocoding before you can export the database", "FTAnalyzer");
             else
             {
                 DatabaseHelper.Instance.BackupDatabase(saveDatabase, $"FTAnalyzer zip file created by v{VERSION}");
@@ -2104,7 +2104,7 @@ namespace FTAnalyzer
         void RestoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ft.Geocoding)
-                MessageBox.Show("You need to stop Geocoding before you can import the database", "FTAnalyzer");
+                UIHelpers.ShowMessage("You need to stop Geocoding before you can import the database", "FTAnalyzer");
             else
             {
                 string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -2126,7 +2126,7 @@ namespace FTAnalyzer
                                 File.Copy(dbh.DatabaseFile, dbh.CurrentFilename, true); // copy exisiting file to safety
                                 zip.ExtractAll(dbh.DatabasePath, ExtractExistingFileAction.OverwriteSilently);
                                 if (dbh.RestoreDatabase(new Progress<string>(value => { rtbOutput.AppendText(value); })))
-                                    MessageBox.Show("Database restored from " + restoreDatabase.FileName, "FTAnalyzer Database Restore Complete");
+                                    UIHelpers.ShowMessage("Database restored from " + restoreDatabase.FileName, "FTAnalyzer Database Restore Complete");
                                 else
                                 {
                                     File.Copy(dbh.CurrentFilename, dbh.DatabaseFile, true);
@@ -2135,14 +2135,14 @@ namespace FTAnalyzer
                                 }
                             }
                             else
-                                MessageBox.Show("Database file could not be extracted", "FTAnalyzer Database Restore Error");
+                                UIHelpers.ShowMessage("Database file could not be extracted", "FTAnalyzer Database Restore Error");
                         }
                         else
                         {
                             failed = true;
                         }
                         if (failed)
-                            MessageBox.Show(restoreDatabase.FileName + " doesn't appear to be an FTAnalyzer database", "FTAnalyzer Database Restore Error");
+                            UIHelpers.ShowMessage(restoreDatabase.FileName + " doesn't appear to be an FTAnalyzer database", "FTAnalyzer Database Restore Error");
                         else
                             Analytics.TrackAction(Analytics.MainFormAction, Analytics.DBRestoreEvent);
                     }
@@ -2579,9 +2579,9 @@ namespace FTAnalyzer
                 }
                 if (!fileLoaded)
                     if (files.Length > 1)
-                        MessageBox.Show("Unable to load File. None of the files dragged and dropped were *.ged files", "FTAnalyzer");
+                        UIHelpers.ShowMessage("Unable to load File. None of the files dragged and dropped were *.ged files", "FTAnalyzer");
                     else
-                        MessageBox.Show("Unable to load File. The file dragged and dropped wasn't a *.ged file", "FTAnalyzer");
+                        UIHelpers.ShowMessage("Unable to load File. The file dragged and dropped wasn't a *.ged file", "FTAnalyzer");
             }
         }
 
@@ -2734,7 +2734,7 @@ namespace FTAnalyzer
             if (cts is not null)
             {
                 cts.Cancel();
-                MessageBox.Show("Possible Duplicate Search Cancelled", "FTAnalyzer");
+                UIHelpers.ShowMessage("Possible Duplicate Search Cancelled", "FTAnalyzer");
             }
         }
 
@@ -2907,7 +2907,7 @@ namespace FTAnalyzer
                 SaveUnrecognisedDataFile(unrecognisedResults, missingResults, notesResults, $"Unrecognised & Missing Census References for {Path.GetFileNameWithoutExtension(filename)}.txt",
                     "\n\nPlease check the file and remove any private notes information before posting");
             else
-                MessageBox.Show("No unrecognised census references found.", "FTAnalyzer");
+                UIHelpers.ShowMessage("No unrecognised census references found.", "FTAnalyzer");
         }
 
         [SupportedOSPlatform("windows10.0.17763")]
@@ -2930,12 +2930,12 @@ namespace FTAnalyzer
                     Application.UserAppDataRegistry.SetValue("Report Unrecognised Census References Path", path);
                     FamilyTree.WriteUnrecognisedReferencesFile(unrecognisedResults, missingResults, notesResults, saveFileDialog.FileName);
                     Analytics.TrackAction(Analytics.ReportsAction, Analytics.UnrecognisedCensusEvent);
-                    MessageBox.Show("File written to " + saveFileDialog.FileName + "\n\nPlease create an issue at https://www.ftanalyzer.com/issues in issues section and upload your file, if you feel you have standard census references that should be recognised." + privateWarning, "FTAnalyzer");
+                    UIHelpers.ShowMessage("File written to " + saveFileDialog.FileName + "\n\nPlease create an issue at https://www.ftanalyzer.com/issues in issues section and upload your file, if you feel you have standard census references that should be recognised." + privateWarning, "FTAnalyzer");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "FTAnalyzer");
+                UIHelpers.ShowMessage(ex.Message, "FTAnalyzer");
             }
         }
 
@@ -3026,7 +3026,7 @@ namespace FTAnalyzer
 
         void BtnStandardMissingData_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Not Implemented Yet", "FTAnalyzer");
+            UIHelpers.ShowMessage("Not Implemented Yet", "FTAnalyzer");
         }
 
         void BtnAdvancedMissingData_Click(object sender, EventArgs e)
@@ -3108,7 +3108,7 @@ namespace FTAnalyzer
             }
             catch (LooseDataException ex)
             {
-                MessageBox.Show(ex.Message, "FTAnalyzer");
+                UIHelpers.ShowMessage(ex.Message, "FTAnalyzer");
             }
         }
 
@@ -3128,7 +3128,7 @@ namespace FTAnalyzer
             }
             catch (LooseDataException ex)
             {
-                MessageBox.Show(ex.Message, "FTAnalyzer");
+                UIHelpers.ShowMessage(ex.Message, "FTAnalyzer");
             }
         }
 
@@ -3148,7 +3148,7 @@ namespace FTAnalyzer
             }
             catch (LooseDataException ex)
             {
-                MessageBox.Show(ex.Message, "FTAnalyzer");
+                UIHelpers.ShowMessage(ex.Message, "FTAnalyzer");
             }
         }
 
@@ -3287,7 +3287,7 @@ namespace FTAnalyzer
             }
             catch (LooseDataException ex)
             {
-                MessageBox.Show(ex.Message, "FTAnalyzer");
+                UIHelpers.ShowMessage(ex.Message, "FTAnalyzer");
             }
             HourGlass(false);
         }
@@ -3305,7 +3305,7 @@ namespace FTAnalyzer
             }
             catch (LooseDataException ex)
             {
-                MessageBox.Show(ex.Message, "FTAnalyzer");
+                UIHelpers.ShowMessage(ex.Message, "FTAnalyzer");
             }
             HourGlass(false);
         }
@@ -3515,7 +3515,7 @@ namespace FTAnalyzer
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading CSV location data from {csvFilename}\nError was {ex.Message}", "FTAnalyzer");
+                UIHelpers.ShowMessage($"Error loading CSV location data from {csvFilename}\nError was {ex.Message}", "FTAnalyzer");
             }
             pb.Visible = false;
             label.Text = string.Empty;
@@ -3541,7 +3541,7 @@ namespace FTAnalyzer
                 if (pb.Value % 10 == 0)
                     Application.DoEvents();
             }
-            MessageBox.Show($"Loaded {rowCount} locations from TNG file {tngFilename}", "FTAnalyzer");
+            UIHelpers.ShowMessage($"Loaded {rowCount} locations from TNG file {tngFilename}", "FTAnalyzer");
         }
 
         public static void ReadCSVdata(ToolStripProgressBar pb, string csvFilename)
@@ -3577,14 +3577,15 @@ namespace FTAnalyzer
                         Application.DoEvents();
                 }
             }
-            MessageBox.Show($"Loaded {rowCount} locations from file {csvFilename}", "FTAnalyzer");
+            UIHelpers.ShowMessage($"Loaded {rowCount} locations from file {csvFilename}", "FTAnalyzer");
         }
         #endregion
 
         [SupportedOSPlatform("windows10.0.17763")]
         void LoadLocations(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
         {
-            DialogResult result = MessageBox.Show("It is recommended you backup your Geocoding database first.\nDo you want to backup now?", "FTAnalyzer", MessageBoxButtons.YesNoCancel);
+            DialogResult result = UIHelpers.ShowMessage("It is recommended you backup your Geocoding database first.\nDo you want to backup now?", "FTAnalyzer",
+                                                         MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
                 DatabaseHelper.Instance.BackupDatabase(saveDatabase, "FTAnalyzer zip file created by v" + VERSION);
             if (result != DialogResult.Cancel)
@@ -3758,7 +3759,7 @@ namespace FTAnalyzer
             if (aliveDate == FactDate.UNKNOWN_DATE)
             {
                 e.Cancel = true;
-                MessageBox.Show($"{txtAliveDates.Text} is not a valid GEDCOM date.", "FTAnalyzer");
+                UIHelpers.ShowMessage($"{txtAliveDates.Text} is not a valid GEDCOM date.", "FTAnalyzer");
                 return;
             }
             AliveDate = aliveDate;

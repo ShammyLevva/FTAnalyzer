@@ -228,7 +228,7 @@ namespace FTAnalyzer.Forms
                 if (frmBingMap.SetLocation(loc, loc.Level))
                     frmBingMap.Show();
                 else
-                    MessageBox.Show($"Unable to find location : {loc}", "FTAnalyzer");
+                    UIHelpers.ShowMessage($"Unable to find location : {loc}", "FTAnalyzer");
             }
             Cursor = Cursors.Default;
         }
@@ -255,7 +255,7 @@ namespace FTAnalyzer.Forms
                     }
                     catch (CensusSearchException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        UIHelpers.ShowMessage(ex.Message);
                     }
                 }
             }
@@ -281,7 +281,7 @@ namespace FTAnalyzer.Forms
         void MnuSaveCensusColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("CensusColumns.xml");
-            MessageBox.Show("Form Settings Saved", "Census");
+            UIHelpers.ShowMessage("Form Settings Saved", "Census");
         }
 
         void MnuResetCensusColumns_Click(object sender, EventArgs e) => reportFormHelper.ResetColumnLayout("CensusColumns.xml");

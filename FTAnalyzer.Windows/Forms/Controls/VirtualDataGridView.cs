@@ -179,7 +179,7 @@ namespace FTAnalyzer.Forms.Controls
             //T –> ClassName
             Type entType = typeof(T);
             //set the datatable name as class name
-            DataTable tbl = new DataTable(entType.Name);
+            DataTable tbl = new(entType.Name);
             //get the property list
             PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(entType);
             foreach (PropertyDescriptor prop in properties)

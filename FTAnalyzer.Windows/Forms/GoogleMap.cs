@@ -102,7 +102,7 @@ namespace FTAnalyzer.Forms
                 SpecialMethods.VisitWebsite(URL);
             }
             else
-                MessageBox.Show($"{loc} is not yet geocoded so can't be displayed.");
+                UIHelpers.ShowMessage($"{loc} is not yet geocoded so can't be displayed.");
         }
 
         public static string LocationText(GeoResponse res, FactLocation loc, int level)
@@ -217,7 +217,7 @@ namespace FTAnalyzer.Forms
                 if (ex.Status == WebExceptionStatus.Timeout)
                     Debug.WriteLine($"Timeout with {url}\n");
                 else
-                    MessageBox.Show($"Unable to contact https://maps.googleapis.com error was: {ex.Message}\nWhen trying to look for {text}", "FTAnalyzer");
+                    UIHelpers.ShowMessage($"Unable to contact https://maps.googleapis.com error was: {ex.Message}\nWhen trying to look for {text}", "FTAnalyzer");
                 res = null;
             }
             if (res is not null && res.Status == "REQUEST_DENIED")

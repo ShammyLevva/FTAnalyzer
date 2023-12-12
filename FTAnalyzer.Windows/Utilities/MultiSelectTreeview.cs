@@ -621,7 +621,7 @@ namespace FTAnalyzer.Utilities
         {
             // Perform some error handling here.
             // We don't want to bubble errors to the CLR. 
-            MessageBox.Show(ex.Message);
+            UIHelpers.ShowMessage(ex.Message);
         }
 
         #endregion

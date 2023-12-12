@@ -58,7 +58,7 @@ namespace FTAnalyzer
         void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
             reportFormHelper.SaveColumnLayout("MapIndividualColumns.xml");
-            MessageBox.Show("Form Settings Saved", "Map Individuals");
+            UIHelpers.ShowMessage("Form Settings Saved", "Map Individuals");
         }
 
         void DgIndividuals_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
