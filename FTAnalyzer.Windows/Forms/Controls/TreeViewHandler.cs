@@ -37,8 +37,6 @@ namespace FTAnalyzer.Forms.Controls
                 progressBar.Maximum = FamilyTree.Instance.AllDisplayPlaces.Count;
                 mainformTreeRootNode = new TreeNode();
                 placesTreeRootNode = new TreeNode();
-                using Font regularFont = new(defaultFont, FontStyle.Regular);
-                using Font boldFont = new(defaultFont, FontStyle.Bold);
                 foreach (FactLocation location in FamilyTree.Instance.AllDisplayPlaces.Cast<FactLocation>())
                 {
                     string[] parts = location.GetParts();
@@ -61,9 +59,9 @@ namespace FTAnalyzer.Forms.Controls
                             // Set everything other than known countries and known regions to regular
                             if ((currentM.Level == 0 && Countries.IsKnownCountry(part)) ||
                                 (currentM.Level == 1 && Regions.IsKnownRegion(part)))
-                                child.NodeFont = boldFont;
+                                child.ForeColor = Color.Green;
                             else
-                                child.NodeFont = regularFont;
+                                child.ForeColor = Color.Black;
                             childM = child;
                             childP = (TreeNode)child.Clone();
                             currentM.Nodes.Add(childM);

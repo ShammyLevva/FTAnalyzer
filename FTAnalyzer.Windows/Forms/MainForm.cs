@@ -249,7 +249,7 @@ namespace FTAnalyzer
         {
             try
             {
-                HourGlass(true);
+                HourGlass(this,true);
                 this.filename = filename;
                 CloseGEDCOM(false);
                 if (!stopProcessing)
@@ -283,7 +283,7 @@ namespace FTAnalyzer
             }
             finally
             {
-                HourGlass(false);
+                HourGlass(this,false);
             }
         }
 
@@ -514,23 +514,19 @@ namespace FTAnalyzer
             MnuCustomFactsToExcel.Enabled = enabled;
         }
 
-        void HourGlass(bool on)
-        {
-            Cursor = on ? Cursors.WaitCursor : Cursors.Default;
-            Application.DoEvents();
-        }
+        static void HourGlass(Form form, bool on) => form.UseWaitCursor = on;
 
         void DgCountries_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                HourGlass(true);
+                HourGlass(this,true);
                 var loc = (FactLocation)dgCountries.CurrentRowDataBoundItem;
                 var frmInd = new People();
                 frmInd.SetLocation(loc, FactLocation.COUNTRY);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
-                HourGlass(false);
+                HourGlass(this,false);
             }
         }
 
@@ -538,13 +534,13 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                HourGlass(true);
+                HourGlass(this,true);
                 var loc = dgRegions.CurrentRow is null ? FactLocation.BLANK_LOCATION : (FactLocation)dgRegions.CurrentRowDataBoundItem;
                 var frmInd = new People();
                 frmInd.SetLocation(loc, FactLocation.REGION);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
-                HourGlass(false);
+                HourGlass(this,false);
             }
         }
 
@@ -552,13 +548,13 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                HourGlass(true);
+                HourGlass(this,true);
                 var loc = (FactLocation)dgSubRegions.CurrentRowDataBoundItem;
                 var frmInd = new People();
                 frmInd.SetLocation(loc, FactLocation.SUBREGION);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
-                HourGlass(false);
+                HourGlass(this,false);
             }
         }
 
@@ -566,13 +562,13 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                HourGlass(true);
+                HourGlass(this,true);
                 var loc = (FactLocation)dgAddresses.CurrentRowDataBoundItem;
                 var frmInd = new People();
                 frmInd.SetLocation(loc, FactLocation.ADDRESS);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
-                HourGlass(false);
+                HourGlass(this,false);
             }
         }
 
@@ -580,13 +576,13 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                HourGlass(true);
+                HourGlass(this,true);
                 var loc = (FactLocation)dgPlaces.CurrentRowDataBoundItem;
                 var frmInd = new People();
                 frmInd.SetLocation(loc, FactLocation.PLACE);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
-                HourGlass(false);
+                HourGlass(this,false);
             }
         }
 
@@ -611,7 +607,7 @@ namespace FTAnalyzer
 
         void BtnTreeTops_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             Predicate<Individual> filter = CreateTreeTopsIndividualFilter();
             List<IDisplayIndividual> treeTopsList = ft.GetTreeTops(filter).ToList();
             treeTopsList.Sort(new BirthDateComparer());
@@ -624,7 +620,7 @@ namespace FTAnalyzer
             mnuPrint.Enabled = true;
             dgTreeTops.VirtualGridFiltered += VirtualGridFiltered;
             ShowMenus(true);
-            HourGlass(false);
+            HourGlass(this,false);
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.TreetopsEvent);
         }
 
@@ -632,7 +628,7 @@ namespace FTAnalyzer
 
         void BtnWWI_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             WWI = true;
             warDeadFilter = CreateWardeadIndividualFilter(new FactDate("BET 1869 AND 1904"), new FactDate("FROM 28 JUL 1914"));
             List<IDisplayIndividual> warDeadList = ft.GetWorldWars(warDeadFilter).ToList();
@@ -646,13 +642,13 @@ namespace FTAnalyzer
             dgWorldWars.VirtualGridFiltered += VirtualGridFiltered;
             mnuPrint.Enabled = true;
             ShowMenus(true);
-            HourGlass(false);
+            HourGlass(this,false);
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.WWIReportEvent);
         }
 
         void BtnWWII_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             WWI = false;
             warDeadFilter = CreateWardeadIndividualFilter(new FactDate("BET 1894 AND 1931"), new FactDate("FROM 1 SEP 1939"));
             List<IDisplayIndividual> warDeadList = ft.GetWorldWars(warDeadFilter).ToList();
@@ -666,7 +662,7 @@ namespace FTAnalyzer
             dgWorldWars.VirtualGridFiltered += VirtualGridFiltered;
             mnuPrint.Enabled = true;
             ShowMenus(true);
-            HourGlass(false);
+            HourGlass(this,false);
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.WWIIReportEvent);
         }
 
@@ -676,13 +672,13 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                HourGlass(true);
+                HourGlass(this,true);
                 var occ = (DisplayOccupation)dgOccupations.CurrentRowDataBoundItem;
                 var frmInd = new People();
                 frmInd.SetWorkers(occ.Occupation, ft.AllWorkers(occ.Occupation));
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
-                HourGlass(false);
+                HourGlass(this,false);
             }
         }
 
@@ -690,13 +686,13 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                HourGlass(true);
+                HourGlass(this,true);
                 var customFacts = (DisplayCustomFact)dgCustomFacts.CurrentRowDataBoundItem;
                 var frmCustomFacts = new People();
                 frmCustomFacts.SetCustomFacts(customFacts.CustomFactName, ft.AllCustomFactIndividuals(customFacts.CustomFactName), ft.AllCustomFactFamilies(customFacts.CustomFactName));
                 DisposeDuplicateForms(frmCustomFacts);
                 frmCustomFacts.Show();
-                HourGlass(false);
+                HourGlass(this,false);
             }
         }
 
@@ -708,7 +704,7 @@ namespace FTAnalyzer
 
         void SetAsRootToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             var ind = (Individual)dgIndividuals.CurrentRowDataBoundItem;
             if (ind is not null)
             {
@@ -717,7 +713,7 @@ namespace FTAnalyzer
                 dgIndividuals.Refresh();
                 UIHelpers.ShowMessage($"Root person set as {ind.Name}\n\n{ft.PrintRelationCount()}", "FTAnalyzer");
             }
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void MnuSetRoot_Opened(object sender, EventArgs e)
@@ -729,14 +725,14 @@ namespace FTAnalyzer
 
         void ViewNotesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             Individual ind = (Individual)dgIndividuals.CurrentRowDataBoundItem;
             if (ind is not null)
             {
                 Notes notes = new(ind);
                 notes.Show();
             }
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void BtnShowMap_Click(object sender, EventArgs e)
@@ -825,7 +821,7 @@ namespace FTAnalyzer
         [SupportedOSPlatform("windows10.0.17763")]
         void UpdateDataErrorsDisplay()
         {
-            HourGlass(true);
+            HourGlass(this,true);
             SortableBindingList<IDisplayDataError> errors = DataErrors(ckbDataErrors);
             dgDataErrors.DataSource = errors;
             tsCountLabel.Text = Messages.Count + errors.Count;
@@ -849,7 +845,7 @@ namespace FTAnalyzer
             }
             var scaling = GraphicsUtilities.GetCurrentScaling();
             ckbDataErrors.ColumnWidth = (int)(maxwidth * FontSettings.Default.FontWidth * scaling);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         [SupportedOSPlatform("windows10.0.17763")]
@@ -939,7 +935,7 @@ namespace FTAnalyzer
 
         void OlderParentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             People frmInd = new();
             string inputAge = "50";
             DialogResult result = DialogResult.Cancel;
@@ -968,7 +964,7 @@ namespace FTAnalyzer
                     Analytics.TrackAction(Analytics.MainFormAction, Analytics.OlderParentsEvent);
                 }
             }
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void CkbTTIgnoreLocations_CheckedChanged(object sender, EventArgs e) => treetopsCountry.Enabled = !ckbTTIgnoreLocations.Checked;
@@ -985,7 +981,7 @@ namespace FTAnalyzer
         {
             try
             {
-                HourGlass(true); // turn on when tab selected so all the formatting gets hourglass
+                HourGlass(this,true); // turn on when tab selected so all the formatting gets hourglass
             }
             catch (Exception) // attempt to fix font issue
             { }
@@ -995,7 +991,7 @@ namespace FTAnalyzer
         {
             try
             {
-                HourGlass(true);
+                HourGlass(this,true);
                 Application.DoEvents();
                 TabPage current = tabCtrlLocations.SelectedTab;
                 Control control = current.Controls[0];
@@ -1012,7 +1008,7 @@ namespace FTAnalyzer
                     mnuPrint.Enabled = false;
                 }
                 tsHintsLabel.Text = Messages.Hints_Location;
-                HourGlass(false);
+                HourGlass(this,false);
             }
             catch (Exception) // attempt to fix font issue
             { }
@@ -1102,9 +1098,9 @@ namespace FTAnalyzer
         [SupportedOSPlatform("windows10.0.17763")]
         void Options_GlobalFontChanged(object? sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             SetupFonts();
-            HourGlass(false);
+            HourGlass(this,false);
         }
         #endregion
 
@@ -1137,7 +1133,7 @@ namespace FTAnalyzer
 
         void TreeViewLocations_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             var location = e.Node.Tag as FactLocation;
             if (location is not null)
             {
@@ -1151,7 +1147,7 @@ namespace FTAnalyzer
                     frmInd.Show();
                 }
             }
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void TreeViewLocations_BeforeCollapse(object sender, TreeViewCancelEventArgs e) => e.Cancel = preventExpand && e.Action == TreeViewAction.Collapse;
@@ -1180,11 +1176,11 @@ namespace FTAnalyzer
 
         void MnuShowTimeline_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             TimeLine tl = new(new Progress<string>(value => { rtbOutput.AppendText(value); }));
             DisposeDuplicateForms(tl);
             tl.Show();
-            HourGlass(false);
+            HourGlass(this,false);
             Analytics.TrackAction(Analytics.MapsAction, Analytics.ShowTimelinesEvent);
         }
 
@@ -1214,7 +1210,7 @@ namespace FTAnalyzer
             {
                 try
                 {
-                    HourGlass(true);
+                    HourGlass(this,true);
                     GeocodeLocations? geo = null;
                     foreach (Form f in Application.OpenForms)
                     {
@@ -1240,7 +1236,7 @@ namespace FTAnalyzer
                             geo.StartReverseGeoCoding();
                             break;
                     }
-                    HourGlass(false);
+                    HourGlass(this,false);
                 }
                 catch (Exception) { }
             }
@@ -1248,11 +1244,11 @@ namespace FTAnalyzer
 
         void LocationsGeocodeReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             GeocodeLocations geo = new(new Progress<string>(value => { rtbOutput.AppendText(value); }));
             DisposeDuplicateForms(geo);
             geo.Show();
-            HourGlass(false);
+            HourGlass(this,false);
             Analytics.TrackAction(Analytics.MapsAction, Analytics.GeocodesEvent);
         }
 
@@ -1277,21 +1273,21 @@ namespace FTAnalyzer
 
         void MnuLifelines_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             LifeLine l = new(new Progress<string>(value => { rtbOutput.AppendText(value); }));
             DisposeDuplicateForms(l);
             l.Show();
-            HourGlass(false);
+            HourGlass(this,false);
             Analytics.TrackAction(Analytics.MapsAction, Analytics.LifelinesEvent);
         }
 
         void MnuPlaces_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             Places p = new(new Progress<string>(value => { rtbOutput.AppendText(value); }));
             DisposeDuplicateForms(p);
             p.Show();
-            HourGlass(false);
+            HourGlass(this,false);
             Analytics.TrackAction(Analytics.MapsAction, Analytics.ShowPlacesEvent);
         }
 
@@ -1299,7 +1295,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                HourGlass(true);
+                HourGlass(this,true);
                 IDisplaySurnames stat = dgSurnames.CurrentRowDataBoundItem;
                 People frmInd = new();
                 Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => x.RelationType);
@@ -1307,7 +1303,7 @@ namespace FTAnalyzer
                 frmInd.SetSurnameStats(stat, indFilter, famFilter, chkSurnamesIgnoreCase.Checked);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
-                HourGlass(false);
+                HourGlass(this,false);
                 Analytics.TrackAction(Analytics.MainFormAction, Analytics.ViewAllSurnameEvent);
             }
         }
@@ -1319,24 +1315,24 @@ namespace FTAnalyzer
                 DataGridViewCell cell = dgSurnames.Rows[e.RowIndex].Cells[nameof(IDisplaySurnames.Surname)];
                 if (cell.Value.ToString() is not null)
                 {
-                    HourGlass(true);
+                    HourGlass(this,true);
                     Statistics.DisplayGOONSpage(cell.Value.ToString());
                     Analytics.TrackAction(Analytics.MainFormAction, Analytics.GOONSEvent);
-                    HourGlass(false);
+                    HourGlass(this,false);
                 }
             }
         }
 
         void PossibleCensusFactsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             var predicate = new Predicate<Individual>(x => x.Notes.ToLower().Contains("census"));
             var censusNotes = ft.AllIndividuals.Filter(predicate).ToList();
             var people = new People();
             people.SetIndividuals(censusNotes, "List of Possible Census records incorrectly recorded as notes");
             DisposeDuplicateForms(people);
             people.Show();
-            HourGlass(false);
+            HourGlass(this,false);
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.PossibleCensusEvent);
         }
 
@@ -1367,7 +1363,7 @@ namespace FTAnalyzer
                         }
                         return;
                     }
-                    HourGlass(true);
+                    HourGlass(this,true);
                     if (tabSelector.SelectedTab == tabDisplayProgress)
                     {
                         mnuPrint.Enabled = true;
@@ -1417,7 +1413,7 @@ namespace FTAnalyzer
                     }
                     else if (tabSelector.SelectedTab == tabLostCousins)
                     {
-                        HourGlass(true);
+                        HourGlass(this,true);
                         btnLC1881EW.Enabled = btnLC1881Scot.Enabled = btnLC1841EW.Enabled =
                             btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled =
                             btnLC1911EW.Enabled = ft.IndividualCount > 0;
@@ -1427,7 +1423,7 @@ namespace FTAnalyzer
                         chkLCRootPersonConfirm.Text = $"Confirm {ft.RootPerson} as root Person";
                         tabLostCousins.Refresh();
                         Analytics.TrackAction(Analytics.MainFormAction, Analytics.LostCousinsTabEvent);
-                        HourGlass(false);
+                        HourGlass(this,false);
                     }
                     else if (tabSelector.SelectedTab == tabToday)
                     {
@@ -1439,35 +1435,39 @@ namespace FTAnalyzer
                     }
                     else if (tabSelector.SelectedTab == tabLocations)
                     {
-                        HourGlass(true);
-                        tabCtrlLocations.SelectedIndex = 0;
-                        tsCountLabel.Text = string.Empty;
-                        tsHintsLabel.Text = Messages.Hints_Location;
-                        tspbTabProgress.Visible = true;
-                        treeViewLocations.Nodes.Clear();
-                        Application.DoEvents();
-                        TreeNode[] nodes = TreeViewHandler.Instance.GetAllLocationsTreeNodes(treeViewLocations.Font, true, tspbTabProgress);
-                        try
-                        {
-                            treeViewLocations.Nodes.AddRange(nodes);
-                        }
-                        catch (ArgumentException fEx)
-                        {
-                            Debug.WriteLine(fEx.Message); // typically font loading error
-                        }
-                        mnuPrint.Enabled = false;
-                        dgCountries.DataSource = ft.AllDisplayCountries;
-                        dgRegions.DataSource = ft.AllDisplayRegions;
-                        dgSubRegions.DataSource = ft.AllDisplaySubRegions;
-                        dgAddresses.DataSource = ft.AllDisplayAddresses;
-                        dgPlaces.DataSource = ft.AllDisplayPlaces;
-                        tspbTabProgress.Visible = false;
-                        Analytics.TrackAction(Analytics.MainFormAction, Analytics.LocationTabViewed);
+                        HourGlass(this,true);
+                        LoadLocations();
                     }
-                    HourGlass(false);
+                    HourGlass(this,false);
                 }
             }
             catch (Exception) { }
+        }
+
+        void LoadLocations()
+        {
+            tabCtrlLocations.SelectedIndex = 0;
+            tsCountLabel.Text = string.Empty;
+            tsHintsLabel.Text = Messages.Hints_Location;
+            tspbTabProgress.Visible = true;
+            treeViewLocations.Nodes.Clear();
+            TreeNode[] nodes = TreeViewHandler.Instance.GetAllLocationsTreeNodes(treeViewLocations.Font, true, tspbTabProgress);
+            try
+            {
+                treeViewLocations.Nodes.AddRange(nodes);
+            }
+            catch (ArgumentException fEx)
+            {
+                Debug.WriteLine(fEx.Message); // typically font loading error
+            }
+            mnuPrint.Enabled = false;
+            dgCountries.DataSource = ft.AllDisplayCountries;
+            dgRegions.DataSource = ft.AllDisplayRegions;
+            dgSubRegions.DataSource = ft.AllDisplaySubRegions;
+            dgAddresses.DataSource = ft.AllDisplayAddresses;
+            dgPlaces.DataSource = ft.AllDisplayPlaces;
+            tspbTabProgress.Visible = false;
+            Analytics.TrackAction(Analytics.MainFormAction, Analytics.LocationTabViewed);
         }
 
         void TabMainListSelector_SelectedIndexChanged(object sender, EventArgs e)
@@ -1713,7 +1713,7 @@ namespace FTAnalyzer
 
         void LostCousinsCensus(CensusDate censusDate, string reportTitle)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             Census census = new(censusDate, true);
             Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType);
             Predicate<Individual> individualRelationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
@@ -1725,13 +1725,13 @@ namespace FTAnalyzer
             DisposeDuplicateForms(census);
             census.Show();
             Task.Run(() => Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.LCReportYearEvent, censusDate.BestYear.ToString()));
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         [SupportedOSPlatform("windows10.0.17763")]
         async void BtnLCLogin_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             try
             {
                 Application.UserAppDataRegistry.SetValue("LostCousinsEmail", txtLCEmail.Text);
@@ -1746,7 +1746,7 @@ namespace FTAnalyzer
             btnUpdateLostCousinsWebsite.Visible = websiteAvailable;
             btnCheckMyAncestors.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
             lblCheckAncestors.Text = websiteAvailable ? "Logged into Lost Cousins" : "Not Currently Logged in Use Updates Page to Login";
-            HourGlass(false);
+            HourGlass(this,false);
             if (websiteAvailable)
                 UIHelpers.ShowMessage("Lost Cousins login succeeded.");
             else
@@ -1758,26 +1758,26 @@ namespace FTAnalyzer
 
         void BtnLCPotentialUploads_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             Census census = new(CensusDate.ANYCENSUS, true);
             census.SetupLCupdateList(LCUpdates);
             census.Text = $"Potential Records to upload to Lost Cousins Website";
             DisposeDuplicateForms(census);
             Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.PreviewLostCousins);
             census.Show();
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void BtnViewInvalidRefs_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             Census census = new(CensusDate.ANYCENSUS, true);
             census.SetupLCupdateList(LCInvalidReferences);
             census.Text = $"Incompatible Census References in Records to upload to Lost Cousins Website";
             DisposeDuplicateForms(census);
             Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.PreviewLostCousins);
             census.Show();
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         async void BtnUpdateLostCousinsWebsite_Click(object sender, EventArgs e)
@@ -1805,10 +1805,10 @@ namespace FTAnalyzer
 
         void UpdateLCReports()
         {
-            HourGlass(true);
+            HourGlass(this,true);
             UpdateLostCousinsReport();
             UpdateLCOutput();
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void UpdateLCOutput()
@@ -1833,14 +1833,14 @@ namespace FTAnalyzer
 
         void BtnLCMissingCountry_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
             People people = new();
             people.SetupLCNoCountry(relationFilter);
             DisposeDuplicateForms(people);
             people.Show();
             Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.NoLCCountryEvent);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void RelTypesLC_RelationTypesChanged(object sender, EventArgs e) => UpdateLCReports();
@@ -1862,26 +1862,26 @@ namespace FTAnalyzer
 
         void BtnLCDuplicates_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
             People people = new();
             people.SetupLCDuplicates(relationFilter);
             DisposeDuplicateForms(people);
             people.Show();
             Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.LCDuplicatesEvent);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void BtnLCnoCensus_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
             People people = new();
             people.SetupLCnoCensus(relationFilter);
             DisposeDuplicateForms(people);
             people.Show();
             Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.NoLCCensusEvent);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void ChkLCRootPersonConfirm_CheckedChanged(object sender, EventArgs e)
@@ -2114,7 +2114,7 @@ namespace FTAnalyzer
                 DialogResult result = restoreDatabase.ShowDialog();
                 if (result == DialogResult.OK && File.Exists(restoreDatabase.FileName))
                 {
-                    HourGlass(true);
+                    HourGlass(this,true);
                     bool failed = false;
                     using (ZipFile zip = new(restoreDatabase.FileName))
                     {
@@ -2146,7 +2146,7 @@ namespace FTAnalyzer
                         else
                             Analytics.TrackAction(Analytics.MainFormAction, Analytics.DBRestoreEvent);
                     }
-                    HourGlass(false);
+                    HourGlass(this,false);
                 }
             }
         }
@@ -2417,7 +2417,7 @@ namespace FTAnalyzer
 
         void BtnShowFacts_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             Predicate<Individual> filter = relTypesFacts.BuildFilter<Individual>(x => x.RelationType);
             if (txtFactsSurname.Text.Length > 0)
             {
@@ -2432,7 +2432,7 @@ namespace FTAnalyzer
             else
                 facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, true), BuildFactTypeList(ckbFactExclude, true), Facts.AlternateFacts.AllFacts);
             facts.Show();
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         List<string> BuildFactTypeList(CheckedListBox list, bool includeCreated)
@@ -2547,7 +2547,7 @@ namespace FTAnalyzer
 
         void BtnDuplicateFacts_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             Predicate<Individual> filter = relTypesFacts.BuildFilter<Individual>(x => x.RelationType);
             if (txtFactsSurname.Text.Length > 0)
             {
@@ -2556,7 +2556,7 @@ namespace FTAnalyzer
             }
             Facts facts = new(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, false));
             facts.Show();
-            HourGlass(false);
+            HourGlass(this,false);
         }
         #endregion
 
@@ -2701,7 +2701,7 @@ namespace FTAnalyzer
                 dgDuplicates.UseWaitCursor = false;
             }
             SetDuplicateControlsVisibility(false);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void SetDuplicateControlsVisibility(bool visible)
@@ -2833,55 +2833,55 @@ namespace FTAnalyzer
 
         void BtnMissingCensusLocation_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             People people = new();
             people.SetupMissingCensusLocation();
             DisposeDuplicateForms(people);
             people.Show();
             Analytics.TrackAction(Analytics.CensusTabAction, Analytics.MissingCensusLocationEvent);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void BtnDuplicateCensus_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             People people = new();
             people.SetupDuplicateCensus();
             DisposeDuplicateForms(people);
             people.Show();
             Analytics.TrackAction(Analytics.CensusTabAction, Analytics.DuplicateCensusEvent);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void BtnNoChildrenStatus_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             People people = new();
             people.SetupNoChildrenStatus();
             DisposeDuplicateForms(people);
             people.Show();
             Analytics.TrackAction(Analytics.CensusTabAction, Analytics.NoChildrenStatusEvent);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void BtnMismatchedChildrenStatus_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             People people = new();
             people.SetupChildrenStatusReport();
             DisposeDuplicateForms(people);
             people.Show();
             Analytics.TrackAction(Analytics.CensusTabAction, Analytics.MisMatchedEvent);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void ShowCensusRefFacts(CensusReference.ReferenceStatus status, Predicate<Individual> filter)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             CensusDate date = chkAnyCensusYear.Checked ? CensusDate.ANYCENSUS : cenDate.SelectedDate;
             Facts facts = new(status, filter, date);
             facts.Show();
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void BtnCensusRefs_Click(object sender, EventArgs e) =>
@@ -2941,7 +2941,7 @@ namespace FTAnalyzer
 
         void BtnInconsistentLocations_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             List<DisplayFact> results = new();
             List<DisplayFact> censusRefs = new();
             Predicate<Individual> filter = CreateIndividualCensusFilter(true, txtCensusSurname.Text, chkAnyCensusYear.Checked);
@@ -2967,31 +2967,31 @@ namespace FTAnalyzer
             DisposeDuplicateForms(factForm);
             factForm.Show();
             factForm.ShowHideFactRows();
-            HourGlass(false);
+            HourGlass(this,false);
         }
         void BtnCensusProblemFacts_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             Predicate<Individual> filter = new(x => x.ErrorFacts.Count > 0);
             Facts facts = new(filter, true);
             facts.Show();
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void BtnCensusAutoCreatedFacts_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             Predicate<Individual> filter = new(x => x.FactCount(Fact.CENSUS_FTA) > 0);
             Facts facts = new(filter, false);
             facts.Show();
-            HourGlass(false);
+            HourGlass(this,false);
         }
         #endregion
 
         #region Colour Reports Tab
         void BtnColourBMD_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             Predicate<Individual> relTypeFilter = relTypesColoured.BuildFilter<Individual>(x => x.RelationType);
             List<IDisplayColourBMD> list = ft.ColourBMD(relTypeFilter, txtColouredSurname.Text, (ComboBoxFamily)cmbColourFamily.SelectedItem);
             ColourBMD rs = new(list);
@@ -2999,12 +2999,12 @@ namespace FTAnalyzer
             rs.Show();
             rs.Focus();
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.ColourBMDEvent);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         async void DisplayColourCensus(string country)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             Predicate<Individual> relTypeFilter = relTypesColoured.BuildFilter<Individual>(x => x.RelationType);
             List<IDisplayColourCensus> list =
                 ft.ColourCensus(country, relTypeFilter, txtColouredSurname.Text, (ComboBoxFamily)cmbColourFamily.SelectedItem, ckbIgnoreNoBirthDate.Checked, ckbIgnoreNoDeathDate.Checked);
@@ -3013,7 +3013,7 @@ namespace FTAnalyzer
             rs.Show();
             rs.Focus();
             await Analytics.TrackActionAsync(Analytics.MainFormAction, Analytics.ColourCensusEvent, country).ConfigureAwait(true);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void BtnUKColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.UNITED_KINGDOM);
@@ -3031,13 +3031,13 @@ namespace FTAnalyzer
 
         void BtnAdvancedMissingData_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             //List<IDisplayMissingData> list = ft.MissingData(relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily);
             MissingData rs = new();
             DisposeDuplicateForms(rs);
             rs.Show();
             rs.Focus();
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void CmbColourFamily_Click(object sender, EventArgs e) => UpdateColourFamilyComboBox(null);
@@ -3068,7 +3068,7 @@ namespace FTAnalyzer
             bool stillThere = false;
             if (cmbColourFamily.Items.Count == 0)
             {
-                HourGlass(true);
+                HourGlass(this,true);
                 IEnumerable<Family> candidates = ft.AllFamilies;
                 Predicate<Family> relationFilter = relTypesColoured.BuildFamilyFilter<Family>(x => x.RelationTypes);
                 if (txtColouredSurname.Text.Length > 0)
@@ -3083,7 +3083,7 @@ namespace FTAnalyzer
                         stillThere = true;
                 }
                 btnReferrals.Enabled = true;
-                HourGlass(false);
+                HourGlass(this,false);
             }
             return stillThere;
         }
@@ -3179,14 +3179,14 @@ namespace FTAnalyzer
 
         void MnuViewNotes_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             Individual? ind = GetContextIndividual(sender);
             if (ind is not null)
             {
                 Notes notes = new(ind);
                 notes.Show();
             }
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void DgTreeTops_MouseDown(object sender, MouseEventArgs e) => ShowViewNotesMenu(dgTreeTops, e);
@@ -3220,13 +3220,13 @@ namespace FTAnalyzer
         {
             if (cmbReferrals.Items.Count == 0)
             {
-                HourGlass(true);
+                HourGlass(this,true);
                 List<Individual> list = ft.AllIndividuals.ToList();
                 list.Sort(new NameComparer<Individual>(true, false));
                 foreach (Individual ind in list)
                     cmbReferrals.Items.Add(ind);
                 btnReferrals.Enabled = true;
-                HourGlass(false);
+                HourGlass(this,false);
             }
         }
 
@@ -3234,14 +3234,14 @@ namespace FTAnalyzer
         {
             if (cmbReferrals.SelectedItem is Individual selected)
             {
-                HourGlass(true);
+                HourGlass(this,true);
                 Individual root = ft.RootPerson;
                 ft.SetRelations(selected.IndividualID, null);
                 LostCousinsReferral lcr = new(selected, ckbReferralInCommon.Checked);
                 DisposeDuplicateForms(lcr);
                 lcr.Show();
                 ft.SetRelations(root.IndividualID, null);
-                HourGlass(false);
+                HourGlass(this,false);
             }
         }
         #endregion
@@ -3249,34 +3249,34 @@ namespace FTAnalyzer
         #region Export To Excel
         void IndividualsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IExportIndividual>(ft.AllIndividuals)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportIndEvent);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void FamiliesToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplayFamily>(ft.AllFamilies)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportFamEvent);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void FactsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<ExportFact>(ft.AllExportFacts)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportFactsEvent);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void LooseBirthsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             try
             {
                 List<IDisplayLooseBirth> list = ft.LooseBirths().ToList();
@@ -3289,12 +3289,12 @@ namespace FTAnalyzer
             {
                 UIHelpers.ShowMessage(ex.Message, "FTAnalyzer");
             }
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void LooseDeathsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             try
             {
                 List<IDisplayLooseDeath> list = ft.LooseDeaths().ToList();
@@ -3307,48 +3307,48 @@ namespace FTAnalyzer
             {
                 UIHelpers.ShowMessage(ex.Message, "FTAnalyzer");
             }
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void MnuExportLocations_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplayLocation>(ft.AllDisplayPlaces)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportLocationsEvent);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void MnuSourcesToExcel_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplaySource>(ft.AllSources)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportSourcesEvent);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void MnuCustomFactsToExcel_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplayCustomFact>(ft.AllCustomFacts)))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportCustomFactEvent);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void MnuDataErrorsToExcel_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplayDataError>(DataErrors(ckbDataErrors))))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportDataErrorsEvent);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void MnuTreetopsToExcel_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             Predicate<Individual> filter = CreateTreeTopsIndividualFilter();
             List<IExportIndividual> treeTopsList = ft.GetExportTreeTops(filter).ToList();
             treeTopsList.Sort(new BirthDateComparer());
@@ -3356,12 +3356,12 @@ namespace FTAnalyzer
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list.ToList()))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportTreeTopsEvent);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void MnuWorldWarsToExcel_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             if (warDeadFilter is not null)
             {
                 ListtoDataTableConvertor convertor = new();
@@ -3372,12 +3372,12 @@ namespace FTAnalyzer
                     ExportToExcel.Export(dt);
                 Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportWorldWarsEvent);
             }
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         async void MnuSurnamesToExcel_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             ListtoDataTableConvertor convertor = new();
             SortableBindingList<IDisplaySurnames> stats;
             if (dgSurnames.DataSource is not null)
@@ -3396,7 +3396,7 @@ namespace FTAnalyzer
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list))
                 ExportToExcel.Export(dt);
             await Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportSurnamesEvent);
-            HourGlass(false);
+            HourGlass(this,false);
         }
         #endregion
 
@@ -3594,7 +3594,7 @@ namespace FTAnalyzer
 
         async void BtnShowSurnames_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             tsCountLabel.Text = string.Empty;
             tsHintsLabel.Text = string.Empty;
             tspbTabProgress.Visible = true;
@@ -3610,27 +3610,27 @@ namespace FTAnalyzer
             tsCountLabel.Text = $"{Messages.Count}{list.Count} Surnames.";
             tsHintsLabel.Text = Messages.Hints_Surname;
             dgSurnames.VirtualGridFiltered += VirtualGridFiltered;
-            HourGlass(false);
+            HourGlass(this,false);
             await Analytics.TrackAction(Analytics.MainFormAction, Analytics.ShowSurnamesEvent).ConfigureAwait(true);
         }
 
         void CousinsCountReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             StatisticsForm f = new(StatisticsForm.StatisticType.CousinCount);
             DisposeDuplicateForms(f);
             f.Show();
-            HourGlass(false);
+            HourGlass(this,false);
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.CousinCountEvent);
         }
 
         void HowManyDirectsReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             StatisticsForm f = new(StatisticsForm.StatisticType.HowManyDirects);
             DisposeDuplicateForms(f);
             f.Show();
-            HourGlass(false);
+            HourGlass(this,false);
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.DirectsReportEvent);
         }
 
@@ -3648,9 +3648,9 @@ namespace FTAnalyzer
 
         void MnuDNA_GEDCOM_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             DNA_GEDCOM.Export();
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void GetGoogleAPIKeyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3663,51 +3663,51 @@ namespace FTAnalyzer
 
         void BirthdayEffectReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             StatisticsForm f = new(StatisticsForm.StatisticType.BirthdayEffect);
             DisposeDuplicateForms(f);
             f.Show();
-            HourGlass(false);
+            HourGlass(this,false);
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.BirthdayEffectEvent);
         }
 
         void PossiblyMissingChildReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             People people = new();
             people.SetupPossiblyMissingChildrenReport();
             DisposeDuplicateForms(people);
             people.Show();
             Analytics.TrackAction(Analytics.ReportsAction, Analytics.PossiblyMissingChildren);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void MnuAgedOver99Report_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             People people = new();
             people.SetupAgedOver99Report();
             DisposeDuplicateForms(people);
             people.Show();
             Analytics.TrackAction(Analytics.ReportsAction, Analytics.AgedOver99Report);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         void MnuSingleParentsReport_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             People people = new();
             people.SingleParents();
             DisposeDuplicateForms(people);
             people.Show();
             Analytics.TrackAction(Analytics.ReportsAction, Analytics.AgedOver99Report);
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         [SupportedOSPlatform("windows10.0.17763")]
         void MnuJSON_Click(object sender, EventArgs e)
         {
-            HourGlass(true);
+            HourGlass(this,true);
             try
             {
                 string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -3733,7 +3733,7 @@ namespace FTAnalyzer
             {
                 UIHelpers.ShowMessage(ex.Message, "FTAnalyzer");
             }
-            HourGlass(false);
+            HourGlass(this,false);
         }
 
         FactDate AliveDate { get; set; }
@@ -3746,7 +3746,7 @@ namespace FTAnalyzer
                 return;
             }
             FactDate aliveDate;
-            HourGlass(true);
+            HourGlass(this,true);
             try
             {
                 aliveDate = new FactDate(txtAliveDates.Text);
@@ -3755,7 +3755,7 @@ namespace FTAnalyzer
             {
                 aliveDate = FactDate.UNKNOWN_DATE;
             }
-            HourGlass(false);
+            HourGlass(this,false);
             if (aliveDate == FactDate.UNKNOWN_DATE)
             {
                 e.Cancel = true;
@@ -3775,14 +3775,14 @@ namespace FTAnalyzer
         {
             if (AliveDate != FactDate.UNKNOWN_DATE)
             {
-                HourGlass(true);
+                HourGlass(this,true);
                 People people = new();
                 Predicate<Individual> filter = CreateAliveatDateFilter(AliveDate, txtCensusSurname.Text);
                 people.SetupAliveAtDate(AliveDate, filter);
                 DisposeDuplicateForms(people);
                 people.Show();
                 Analytics.TrackAction(Analytics.CensusTabAction, Analytics.AliveAtDate);
-                HourGlass(false);
+                HourGlass(this,false);
             }
         }
 
