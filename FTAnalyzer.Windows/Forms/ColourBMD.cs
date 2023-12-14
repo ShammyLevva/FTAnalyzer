@@ -274,7 +274,7 @@ namespace FTAnalyzer.Forms
 
         void CbRegion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Application.UserAppDataRegistry.SetValue("Default Region", cbRegion.SelectedItem.ToString());
+            Application.UserAppDataRegistry.SetValue("Default Region", cbRegion.SelectedItem.ToString() ?? string.Empty);
             Settings.Default.defaultURLRegion = cbRegion.SelectedItem.ToString();
             Settings.Default.Save();
             dgBMDReportSheet.Refresh(); // forces refresh of tooltips
