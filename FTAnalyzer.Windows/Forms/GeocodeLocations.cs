@@ -55,7 +55,7 @@ namespace FTAnalyzer.Forms
                 SetupFilterMenu();
                 SetStatusText();
                 CheckGoogleStatusCodes(locations);
-                UpdateGridWithFilters(false);
+                UpdateGridWithFilters();
             }
             catch (Exception) { }
         }
@@ -167,7 +167,7 @@ namespace FTAnalyzer.Forms
             return count == menus;
         }
 
-        void UpdateGridWithFilters(bool keepCurrentLocation)
+        void UpdateGridWithFilters()
         {
             Cursor = Cursors.WaitCursor;
             FactLocation? loc = dgLocations.CurrentRow is not null ? dgLocations.CurrentRow.DataBoundItem as FactLocation : null;
@@ -286,7 +286,7 @@ namespace FTAnalyzer.Forms
             {
                 Application.UserAppDataRegistry.SetValue(menu.Name, menu.Checked.ToString()); // remember checked state for next time
             }
-            UpdateGridWithFilters(false);
+            UpdateGridWithFilters();
         }
 
         void MenuResultType_CheckedChanged(object? sender, EventArgs e)
@@ -301,7 +301,7 @@ namespace FTAnalyzer.Forms
             {
                 Application.UserAppDataRegistry.SetValue(menu.Name, menu.Checked.ToString()); // remember checked state for next time
             }
-            UpdateGridWithFilters(false);
+            UpdateGridWithFilters();
         }
 
         void MnuSelectClear_Click(object sender, EventArgs e)
@@ -462,7 +462,7 @@ namespace FTAnalyzer.Forms
             if (formClosing)
                 Close();
             else
-                UpdateGridWithFilters(true);
+                UpdateGridWithFilters();
         }
 
         void GeocodeLocations_FormClosing(object sender, FormClosingEventArgs e)

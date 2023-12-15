@@ -161,7 +161,7 @@ namespace FTAnalyzer.Forms
         {
             try
             {
-                TreeNode[] nodes = TreeViewHandler.Instance.GetAllLocationsTreeNodes(tvPlaces.Font, false, pbPlaces);
+                TreeNode[] nodes = TreeViewHandler.Instance.GetAllLocationsTreeNodes(false, pbPlaces);
                 tvPlaces.Nodes.AddRange(nodes);
                 int Width = (int)Application.UserAppDataRegistry.GetValue("Places size - width", this.Width);
                 int Height = (int)Application.UserAppDataRegistry.GetValue("Places size - height", this.Height);

@@ -431,8 +431,13 @@ namespace FTAnalyzer.Forms
                 DisplayFact f = (DisplayFact)dgFacts.Rows[e.RowIndex].DataBoundItem;
                 if (f.Fact.FactType == Fact.REPORT)
                 {
-                    Facts person = new(f.Ind);
-                    person.Show();
+                    if (f.Ind is null)
+                        UIHelpers.ShowMessage("Unable to display facts for Empty Individual");
+                    else
+                    {
+                        Facts person = new(f.Ind);
+                        person.Show();
+                    }
                 }
                 else
                 {

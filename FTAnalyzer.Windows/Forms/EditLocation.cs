@@ -176,7 +176,7 @@ namespace FTAnalyzer.Forms
             UserSavedPoint = false;
         }
 
-        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite(e.Link.LinkData as string);
+        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite(e.Link?.LinkData as string ?? string.Empty);
 
         void MapBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {

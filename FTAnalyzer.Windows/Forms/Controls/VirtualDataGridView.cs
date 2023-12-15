@@ -185,7 +185,8 @@ namespace FTAnalyzer.Forms.Controls
             foreach (PropertyDescriptor prop in properties)
             {
                 //add property as column
-                tbl.Columns.Add(prop.Name, IsNullableType(prop.PropertyType) ? Nullable.GetUnderlyingType(prop.PropertyType) : prop.PropertyType);
+                Type type = (IsNullableType(prop.PropertyType) ? Nullable.GetUnderlyingType(prop.PropertyType) : prop.PropertyType) ?? typeof(string);
+                tbl.Columns.Add(prop.Name, type);
             }
             return tbl;
         }

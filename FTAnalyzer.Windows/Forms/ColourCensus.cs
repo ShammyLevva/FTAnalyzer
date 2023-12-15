@@ -249,7 +249,9 @@ namespace FTAnalyzer.Forms
                         {
                             try
                             {
-                                FamilyTree.SearchCensus(censusCountry, censusYear, ft.GetIndividual(person.IndividualID), cbCensusSearchProvider.SelectedIndex, cbRegion.Text);
+                                Individual? ind = ft.GetIndividual(person.IndividualID);
+                                if (ind is not null)
+                                    FamilyTree.SearchCensus(censusCountry, censusYear, ind, cbCensusSearchProvider.SelectedIndex, cbRegion.Text);
                             }
                             catch (CensusSearchException ex)
                             {
@@ -268,14 +270,16 @@ namespace FTAnalyzer.Forms
 
         void CbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Application.UserAppDataRegistry.SetValue("Default Search Provider", cbCensusSearchProvider.SelectedItem.ToString());
+            string provider = cbCensusSearchProvider.SelectedItem.ToString() ?? string.Empty;
+            Application.UserAppDataRegistry.SetValue("Default Search Provider", provider);
             dgReportSheet.Refresh(); // forces update of tooltips
             dgReportSheet.Focus();
         }
 
         void CbRegion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Application.UserAppDataRegistry.SetValue("Default Region", cbRegion.SelectedItem.ToString());
+            string region = cbRegion.SelectedItem.ToString() ?? string.Empty;
+            Application.UserAppDataRegistry.SetValue("Default Region", region);
             Settings.Default.defaultURLRegion = cbRegion.SelectedItem.ToString();
             Settings.Default.Save();
             dgReportSheet.Refresh(); // forces update of tooltips

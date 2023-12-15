@@ -26,7 +26,7 @@ namespace FTAnalyzer.Forms.Controls
         }
 
         #region Location Tree Building
-        public TreeNode[] GetAllLocationsTreeNodes(Font defaultFont, bool mainform, ToolStripProgressBar progressBar)
+        public TreeNode[] GetAllLocationsTreeNodes(bool mainform, ToolStripProgressBar progressBar)
         {
             try
             {

@@ -30,11 +30,11 @@ namespace FTAnalyzer.UserControls
 				Type[] types = Assembly.GetExecutingAssembly().GetTypes();
 				for (int i = 0; i < types.Length; i++)
 				{
-					if (types[i].GetInterface(typeof(IOptions).FullName) is not null && types[i].BaseType == typeof(UserControl)) 
+                    if (types[i].GetInterface(typeof(IOptions).FullName ?? string.Empty) is not null && types[i].BaseType == typeof(UserControl)) 
 					{
 						if (Activator.CreateInstance(types[i]) is UserControl userControl && userControl is IOptions optionCast)
 						{
-							userControl.Anchor = (((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right);
+							userControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 							userControl.Location = new Point(3, 3);
 							userControl.Name = optionCast.TreePosition;
 							userControl.Size = new Size(243, 356);

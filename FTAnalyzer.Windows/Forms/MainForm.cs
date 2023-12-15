@@ -1451,7 +1451,7 @@ namespace FTAnalyzer
             tsHintsLabel.Text = Messages.Hints_Location;
             tspbTabProgress.Visible = true;
             treeViewLocations.Nodes.Clear();
-            TreeNode[] nodes = TreeViewHandler.Instance.GetAllLocationsTreeNodes(treeViewLocations.Font, true, tspbTabProgress);
+            TreeNode[] nodes = TreeViewHandler.Instance.GetAllLocationsTreeNodes(true, tspbTabProgress);
             try
             {
                 treeViewLocations.Nodes.AddRange(nodes);
@@ -2359,14 +2359,19 @@ namespace FTAnalyzer
             }
             else
             {
-                List<Individual> dupInd = new()
+                Individual? a = ft.GetIndividual(indA_ID);
+                Individual? b = ft.GetIndividual(indB_ID);
+                if (a is null)
+                    UIHelpers.ShowMessage($"Couldn't find details for Individual with ID: {indA_ID}");
+                else if(b is null)
+                    UIHelpers.ShowMessage($"Couldn't find details for Individual with ID: {indB_ID}");
+                else
                 {
-                    ft.GetIndividual(indA_ID),
-                    ft.GetIndividual(indB_ID)
-                };
-                Facts f = new(dupInd, null, null, Facts.AlternateFacts.AllFacts);
-                DisposeDuplicateForms(f);
-                f.Show();
+                    List<Individual> dupInd = new() { a, b };
+                    Facts f = new(dupInd, null, null, Facts.AlternateFacts.AllFacts);
+                    DisposeDuplicateForms(f);
+                    f.Show();
+                }
             }
         }
 
@@ -2659,6 +2664,11 @@ namespace FTAnalyzer
                 tabSelector.Width = Size.Width - tabSelector.Left - boundaryWidth;
             if (tabSelector.Top + tabSelector.Height + boundaryHeight > Size.Height)
                 tabSelector.Height = Size.Height - tabSelector.Top - boundaryHeight;
+            int gap = dgWorldWars.Location.Y - ckbWDIgnoreLocations.Location.Y - ckbWDIgnoreLocations.Height;
+            if (gap > ckbWDIgnoreLocations.Height)
+            {
+                dgWorldWars.Location = new Point(dgWorldWars.Location.X, ckbWDIgnoreLocations.Location.Y + ckbWDIgnoreLocations.Height);
+            }
         }
         #endregion
 
