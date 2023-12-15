@@ -28,7 +28,7 @@ namespace FTAnalyzer.Utilities
                     PrintFont = new(PrintFont.FontFamily, 11f);
                 int maxWidth = e.MarginBounds.Right - e.MarginBounds.Left;
                 int maxHeight = e.MarginBounds.Bottom - e.MarginBounds.Top;
-                float fontHeight = PrintFont.GetHeight(e.Graphics);
+                float fontHeight = e.Graphics is null ? 0 : PrintFont.GetHeight(e.Graphics);
                 using SolidBrush PrintBrush = new(Color.Black);
                 float YPosition = TopMargin;
                 while (YPosition < maxHeight && ((Line = reader.ReadLine()) is not null))

@@ -11,7 +11,7 @@ namespace FTAnalyzer.Forms.Controls
             base.OnRenderButtonBackground(e);
 
             Graphics g = e.Graphics;
-            ToolStrip gs = e.ToolStrip;
+            ToolStrip? gs = e.ToolStrip;
             ToolStripButton gsb = (ToolStripButton)e.Item;
 
             if (gsb.Checked)
