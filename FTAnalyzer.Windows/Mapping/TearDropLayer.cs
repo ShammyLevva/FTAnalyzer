@@ -97,12 +97,15 @@ namespace FTAnalyzer.Mapping
             foreach (DataGridViewRow row in rows)
             {
                 DisplayFact dispFact = (DisplayFact)row.DataBoundItem;
-                MapLocation ml = new(dispFact.Ind, dispFact.Fact, dispFact.FactDate);
-                AddFeatureDataRow(dispFact, ml, LIGHT_GREEN);
+                if (dispFact.Ind is not null)
+                {
+                    MapLocation ml = new(dispFact.Ind, dispFact.Fact, dispFact.FactDate);
+                    AddFeatureDataRow(dispFact, ml, LIGHT_GREEN);
+                }
             }
         }
 
-        private FeatureDataRow AddFeatureDataRow(DisplayFact dispfact, MapLocation loc, string colour)
+        FeatureDataRow AddFeatureDataRow(DisplayFact dispfact, MapLocation loc, string colour)
         {
             GeoResponse.CResult.CGeometry.CViewPort vp = loc.Location.ViewPort;
             FeatureDataRow r = TearDropLocations.NewRow();
