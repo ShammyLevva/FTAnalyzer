@@ -1,16 +1,29 @@
-using FTAnalyzer.Utilities;
 using FTAnalyzer.Exports;
 using SharpMap;
+using System.Runtime.InteropServices;
 using FTAnalyzer.Mapping;
 
 namespace FTAnalyzer.Windows
 {
-    internal static class Program
+    internal static partial class Program
     {
         public static HttpClient Client = new();
         public static LostCousinsClient LCClient = new();
         public static GoogleClient GoogleClient = new();
-        
+
+        /// <summary>
+        /// Enable high DPI
+        /// </summary>
+        static readonly bool HighDPIEnabled = true;
+
+        /// <summary>
+        /// Load for high DPI
+        /// </summary>
+        /// <returns></returns>
+        [LibraryImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static partial bool SetProcessDPIAware();
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -20,12 +33,16 @@ namespace FTAnalyzer.Windows
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            if (Environment.OSVersion.Version.Major >= 10) 
-                NativeMethods.SetProcessDpiAwarenessContext((int)NativeMethods.DPI_AWARENESS_CONTEXT.DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+            if (Environment.OSVersion.Version.Major >= 10)
+                SetProcessDPIAware();
             SharpMapUtility.Configure();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+
+            MainForm formMain = new();
+            if (HighDPIEnabled)
+                formMain.AutoScaleMode = AutoScaleMode.Dpi;
+            Application.Run(formMain);
         }
     }
 }

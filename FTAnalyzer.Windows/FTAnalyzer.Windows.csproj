@@ -11,6 +11,7 @@
     <RootNamespace>FTAnalyzer</RootNamespace>
     <NeutralLanguage>en-GB</NeutralLanguage>
     <StartupObject>FTAnalyzer.Windows.Program</StartupObject>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
