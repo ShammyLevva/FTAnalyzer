@@ -103,7 +103,7 @@ namespace FTAnalyzer
                 string webVersion = versionNode.InnerText.ToUpper().Replace("VERSION", "").Trim();
                 string thisVersion = VERSION;
                 if (VERSION.Contains("-beta"))
-                    thisVersion = VERSION[..VERSION.IndexOf("-")];
+                    thisVersion = VERSION[..VERSION.IndexOf('-')];
                 Version web = new(webVersion);
                 Version local = new(thisVersion);
                 if (web > local)
@@ -1326,7 +1326,7 @@ namespace FTAnalyzer
         void PossibleCensusFactsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(this,true);
-            var predicate = new Predicate<Individual>(x => x.Notes.ToLower().Contains("census"));
+            var predicate = new Predicate<Individual>(x => x.Notes.Contains("census", StringComparison.CurrentCultureIgnoreCase));
             var censusNotes = ft.AllIndividuals.Filter(predicate).ToList();
             var people = new People();
             people.SetIndividuals(censusNotes, "List of Possible Census records incorrectly recorded as notes");
