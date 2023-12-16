@@ -2237,7 +2237,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 string famID = (string)dgFamilies.CurrentRow.Cells[nameof(IDisplayFamily.FamilyID)].Value;
-                MainForm.ShowFamilyFacts(famID);
+                ShowFamilyFacts(famID);
             }
         }
 
@@ -2670,15 +2670,6 @@ namespace FTAnalyzer
                 tabSelector.Width = Size.Width - tabSelector.Left - boundaryWidth;
             if (tabSelector.Top + tabSelector.Height + boundaryHeight > Size.Height)
                 tabSelector.Height = Size.Height - tabSelector.Top - boundaryHeight;
-            int gap = dgWorldWars.Location.Y - ckbWDIgnoreLocations.Location.Y - ckbWDIgnoreLocations.Height;
-            if (gap > ckbWDIgnoreLocations.Height)
-                dgWorldWars.Location = new Point(dgWorldWars.Location.X, ckbWDIgnoreLocations.Location.Y + ckbWDIgnoreLocations.Height);
-            gap = dgTreeTops.Location.Y - ckbTTIgnoreLocations.Location.Y - ckbTTIgnoreLocations.Height;
-            if (gap > ckbTTIgnoreLocations.Height)
-                dgTreeTops.Location = new Point(dgTreeTops.Location.X, ckbTTIgnoreLocations.Location.Y + ckbTTIgnoreLocations.Height);
-            gap = rtbToday.Location.Y - dpToday.Location.Y - dpToday.Height;
-            if (gap > dpToday.Height)
-                rtbToday.Location = new Point(dpToday.Location.X, dpToday.Location.Y + dpToday.Height);
         }
         #endregion
 
