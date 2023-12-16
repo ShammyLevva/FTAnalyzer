@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows10.0.17763.0</TargetFramework>
+    <TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -212,7 +212,7 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.55" />
     <PackageReference Include="log4net" Version="2.0.15" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Printing.DataGridViewPrint" Version="2.1.0" />
+    <PackageReference Include="Printing.DataGridViewPrint" Version="3.0.0" />
     <PackageReference Include="ProjNET" Version="2.0.0" />
     <PackageReference Include="SharpMap.Extensions" Version="3.0.0" />
     <PackageReference Include="SharpMap.Layers.BruTile" Version="3.0.0" />

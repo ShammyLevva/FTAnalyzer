@@ -892,7 +892,7 @@ namespace FTAnalyzer
 
         public static SortableBindingList<IDisplayDataError> DataErrors(CheckedListBox list)
         {
-            List<IDisplayDataError> errors = new();
+            List<IDisplayDataError> errors = [];
             foreach (int indexChecked in list.CheckedIndices)
             {
                 DataErrorGroup item = (DataErrorGroup)list.Items[indexChecked];
@@ -993,7 +993,7 @@ namespace FTAnalyzer
             {
                 HourGlass(this,true);
                 Application.DoEvents();
-                TabPage current = tabCtrlLocations.SelectedTab;
+                TabPage current = tabCtrlLocations.SelectedTab ?? tabCtrlLocations.TabPages[0];
                 Control control = current.Controls[0];
                 control.Focus();
                 if (control is VirtualDGVLocations dg)
@@ -1815,8 +1815,8 @@ namespace FTAnalyzer
         {
             rtbLCUpdateData.ForeColor = Color.Black;
             Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType, true);
-            LCUpdates = new List<CensusIndividual>();
-            LCInvalidReferences = new List<CensusIndividual>();
+            LCUpdates = [];
+            LCInvalidReferences = [];
             rtbLCUpdateData.Text = ft.LCOutput(LCUpdates, LCInvalidReferences, relationFilter);
         }
 
@@ -1824,7 +1824,7 @@ namespace FTAnalyzer
         {
             if (btnCheckMyAncestors.BackColor == Color.LightGreen)
             {
-                Progress<string> outputText = new(value => { rtbCheckAncestors.AppendText(value); });
+                Progress<string> outputText = new(rtbCheckAncestors.AppendText);
                 dgCheckAncestors.DataSource = ExportToLostCousins.VerifyAncestorsAsync(outputText);
                 dgCheckAncestors.Refresh();
 
@@ -2038,7 +2038,7 @@ namespace FTAnalyzer
         {
             try
             {
-                List<Form> toDispose = new();
+                List<Form> toDispose = [];
                 foreach (Form f in Application.OpenForms)
                 {
                     if (!ReferenceEquals(f, this))
@@ -2054,7 +2054,7 @@ namespace FTAnalyzer
         {
             try
             {
-                List<Form> toDispose = new();
+                List<Form> toDispose = [];
                 foreach (Form f in Application.OpenForms)
                 {
                     if (!ReferenceEquals(f, form) && f.GetType() == form.GetType())
@@ -2211,8 +2211,7 @@ namespace FTAnalyzer
             }
 
             recent[0] = filename;
-            Settings.Default.RecentFiles = new StringCollection();
-            Settings.Default.RecentFiles.AddRange(recent);
+            Settings.Default.RecentFiles = [.. recent];
             Settings.Default.Save();
 
             BuildRecentList();
@@ -2221,8 +2220,12 @@ namespace FTAnalyzer
         [SupportedOSPlatform("windows10.0.17763")]
         async void OpenRecentFile_Click(object sender, EventArgs e)
         {
-            string filename = (string)(sender as ToolStripMenuItem).Tag;
-            await LoadFileAsync(filename).ConfigureAwait(true);
+            ToolStripMenuItem? item = sender as ToolStripMenuItem;
+            if (item?.Tag is not null)
+            {
+                string filename = (string)item.Tag ?? string.Empty;
+                await LoadFileAsync(filename).ConfigureAwait(true);
+            }
         }
 
         void MnuRecent_DropDownOpening(object sender, EventArgs e) => BuildRecentList();
@@ -2367,7 +2370,7 @@ namespace FTAnalyzer
                     UIHelpers.ShowMessage($"Couldn't find details for Individual with ID: {indB_ID}");
                 else
                 {
-                    List<Individual> dupInd = new() { a, b };
+                    List<Individual> dupInd = [a, b];
                     Facts f = new(dupInd, null, null, Facts.AlternateFacts.AllFacts);
                     DisposeDuplicateForms(f);
                     f.Show();
@@ -2442,7 +2445,7 @@ namespace FTAnalyzer
 
         List<string> BuildFactTypeList(CheckedListBox list, bool includeCreated)
         {
-            List<string> result = new();
+            List<string> result = [];
             if (list == ckbFactExclude && ckbFactExclude.Visible == false)
                 return result; // if we aren't looking to exclude facts don't pass anything to list of exclusions
             int index = 0;
@@ -2958,8 +2961,8 @@ namespace FTAnalyzer
         void BtnInconsistentLocations_Click(object sender, EventArgs e)
         {
             HourGlass(this,true);
-            List<DisplayFact> results = new();
-            List<DisplayFact> censusRefs = new();
+            List<DisplayFact> results = [];
+            List<DisplayFact> censusRefs = [];
             Predicate<Individual> filter = CreateIndividualCensusFilter(true, txtCensusSurname.Text, chkAnyCensusYear.Checked);
             foreach (Individual ind in ft.AllIndividuals.Filter(filter))
                 foreach (Fact f in ind.AllFacts)
@@ -3295,7 +3298,7 @@ namespace FTAnalyzer
             HourGlass(this,true);
             try
             {
-                List<IDisplayLooseBirth> list = ft.LooseBirths().ToList();
+                List<IDisplayLooseBirth> list = [.. ft.LooseBirths()];
                 list.Sort(new LooseBirthComparer());
                 using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list))
                     ExportToExcel.Export(dt);
@@ -3313,7 +3316,7 @@ namespace FTAnalyzer
             HourGlass(this,true);
             try
             {
-                List<IDisplayLooseDeath> list = ft.LooseDeaths().ToList();
+                List<IDisplayLooseDeath> list = [.. ft.LooseDeaths()];
                 list.Sort(new LooseDeathComparer());
                 using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list))
                     ExportToExcel.Export(dt);
@@ -3545,7 +3548,7 @@ namespace FTAnalyzer
             pb.Minimum = 0;
             pb.Value = rowCount;
             using CsvFileReader reader = new(tngFilename, ';');
-            CsvRow row = new();
+            CsvRow row = [];
             while (reader.ReadRow(row))
             {
                 if (row.Count == 4)
@@ -3569,8 +3572,8 @@ namespace FTAnalyzer
             pb.Value = rowCount;
             using (CsvFileReader reader = new(csvFilename))
             {
-                CsvRow headerRow = new();
-                CsvRow row = new();
+                CsvRow headerRow = [];
+                CsvRow row = [];
 
                 reader.ReadRow(headerRow);
                 if (headerRow.Count != 3)
