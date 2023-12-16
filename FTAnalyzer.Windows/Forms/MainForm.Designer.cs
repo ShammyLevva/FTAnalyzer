@@ -43,8 +43,8 @@ namespace FTAnalyzer
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             openGedcom = new OpenFileDialog();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
@@ -153,6 +153,8 @@ namespace FTAnalyzer
             dgDataErrors = new Forms.Controls.VirtualDGVDataErrors();
             dgCountries = new Forms.Controls.VirtualDGVLocations();
             dgRegions = new Forms.Controls.VirtualDGVLocations();
+            btnShowExclusions = new Button();
+            ckbFactExclude = new CheckedListBox();
             btnUpdateLostCousinsWebsite = new Button();
             printPreviewDialog = new PrintPreviewDialog();
             printDialog = new PrintDialog();
@@ -289,8 +291,8 @@ namespace FTAnalyzer
             tabDisplayProgress = new TabPage();
             splitGedcom = new SplitContainer();
             panel2 = new Panel();
-            pictureBox1 = new PictureBox();
             LbProgramName = new Label();
+            pictureBox1 = new PictureBox();
             labRelationships = new Label();
             pbRelationships = new ProgressBar();
             labFamilies = new Label();
@@ -346,12 +348,19 @@ namespace FTAnalyzer
             Marriages = new DataGridViewTextBoxColumn();
             reltypesSurnames = new Forms.Controls.RelationTypes();
             tabFacts = new TabPage();
+            btnDuplicateFacts = new Button();
+            label15 = new Label();
             panel1 = new Panel();
             radioAllFacts = new RadioButton();
+            btnDeselectExcludeAllFactTypes = new Button();
             lblExclude = new Label();
+            btnExcludeAllFactTypes = new Button();
             btnDeselectAllFactTypes = new Button();
+            btnShowFacts = new Button();
             btnSelectAllFactTypes = new Button();
+            label3 = new Label();
             ckbFactSelect = new CheckedListBox();
+            txtFactsSurname = new TextBox();
             relTypesFacts = new Forms.Controls.RelationTypes();
             tabToday = new TabPage();
             rtbToday = new Utilities.ScrollingRichTextBox();
@@ -379,15 +388,6 @@ namespace FTAnalyzer
             saveDatabase = new SaveFileDialog();
             restoreDatabase = new OpenFileDialog();
             imageList1 = new ImageList(components);
-            label15 = new Label();
-            btnDuplicateFacts = new Button();
-            btnShowExclusions = new Button();
-            btnDeselectExcludeAllFactTypes = new Button();
-            btnExcludeAllFactTypes = new Button();
-            ckbFactExclude = new CheckedListBox();
-            btnShowFacts = new Button();
-            label3 = new Label();
-            txtFactsSurname = new TextBox();
             menuStrip1.SuspendLayout();
             mnuSetRoot.SuspendLayout();
             statusStrip.SuspendLayout();
@@ -482,8 +482,8 @@ namespace FTAnalyzer
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, mnuReports, mnuExport, toolsToolStripMenuItem, mnuMaps, helpToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(8, 2, 0, 2);
-            menuStrip1.Size = new Size(2314, 40);
+            menuStrip1.Padding = new Padding(4, 1, 0, 1);
+            menuStrip1.Size = new Size(1246, 24);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -491,13 +491,13 @@ namespace FTAnalyzer
             // 
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem, mnuReload, mnuPrint, toolStripSeparator6, mnuRecent, toolStripSeparator3, databaseToolStripMenuItem, toolStripSeparator5, mnuCloseGEDCOM, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(71, 36);
+            fileToolStripMenuItem.Size = new Size(37, 22);
             fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(367, 44);
+            openToolStripMenuItem.Size = new Size(184, 22);
             openToolStripMenuItem.Text = "Open GEDCOM file...";
             openToolStripMenuItem.Click += OpenToolStripMenuItem_Click;
             // 
@@ -505,7 +505,7 @@ namespace FTAnalyzer
             // 
             mnuReload.Enabled = false;
             mnuReload.Name = "mnuReload";
-            mnuReload.Size = new Size(367, 44);
+            mnuReload.Size = new Size(184, 22);
             mnuReload.Text = "Reload";
             mnuReload.Click += ReloadToolStripMenuItem_Click;
             // 
@@ -513,94 +513,94 @@ namespace FTAnalyzer
             // 
             mnuPrint.Enabled = false;
             mnuPrint.Name = "mnuPrint";
-            mnuPrint.Size = new Size(367, 44);
+            mnuPrint.Size = new Size(184, 22);
             mnuPrint.Text = "Print";
             mnuPrint.Click += MnuPrint_Click;
             // 
             // toolStripSeparator6
             // 
             toolStripSeparator6.Name = "toolStripSeparator6";
-            toolStripSeparator6.Size = new Size(364, 6);
+            toolStripSeparator6.Size = new Size(181, 6);
             // 
             // mnuRecent
             // 
             mnuRecent.DropDownItems.AddRange(new ToolStripItem[] { mnuRecent1, mnuRecent2, mnuRecent3, mnuRecent4, mnuRecent5, toolStripSeparator7, clearRecentFileListToolStripMenuItem });
             mnuRecent.Name = "mnuRecent";
-            mnuRecent.Size = new Size(367, 44);
+            mnuRecent.Size = new Size(184, 22);
             mnuRecent.Text = "Recent Files";
             mnuRecent.DropDownOpening += MnuRecent_DropDownOpening;
             // 
             // mnuRecent1
             // 
             mnuRecent1.Name = "mnuRecent1";
-            mnuRecent1.Size = new Size(366, 44);
+            mnuRecent1.Size = new Size(182, 22);
             mnuRecent1.Text = "1.";
             mnuRecent1.Click += OpenRecentFile_Click;
             // 
             // mnuRecent2
             // 
             mnuRecent2.Name = "mnuRecent2";
-            mnuRecent2.Size = new Size(366, 44);
+            mnuRecent2.Size = new Size(182, 22);
             mnuRecent2.Text = "2.";
             mnuRecent2.Click += OpenRecentFile_Click;
             // 
             // mnuRecent3
             // 
             mnuRecent3.Name = "mnuRecent3";
-            mnuRecent3.Size = new Size(366, 44);
+            mnuRecent3.Size = new Size(182, 22);
             mnuRecent3.Text = "3.";
             mnuRecent3.Click += OpenRecentFile_Click;
             // 
             // mnuRecent4
             // 
             mnuRecent4.Name = "mnuRecent4";
-            mnuRecent4.Size = new Size(366, 44);
+            mnuRecent4.Size = new Size(182, 22);
             mnuRecent4.Text = "4.";
             mnuRecent4.Click += OpenRecentFile_Click;
             // 
             // mnuRecent5
             // 
             mnuRecent5.Name = "mnuRecent5";
-            mnuRecent5.Size = new Size(366, 44);
+            mnuRecent5.Size = new Size(182, 22);
             mnuRecent5.Text = "5.";
             mnuRecent5.Click += OpenRecentFile_Click;
             // 
             // toolStripSeparator7
             // 
             toolStripSeparator7.Name = "toolStripSeparator7";
-            toolStripSeparator7.Size = new Size(363, 6);
+            toolStripSeparator7.Size = new Size(179, 6);
             // 
             // clearRecentFileListToolStripMenuItem
             // 
             clearRecentFileListToolStripMenuItem.Image = (Image)resources.GetObject("clearRecentFileListToolStripMenuItem.Image");
             clearRecentFileListToolStripMenuItem.Name = "clearRecentFileListToolStripMenuItem";
-            clearRecentFileListToolStripMenuItem.Size = new Size(366, 44);
+            clearRecentFileListToolStripMenuItem.Size = new Size(182, 22);
             clearRecentFileListToolStripMenuItem.Text = "Clear Recent File List";
             clearRecentFileListToolStripMenuItem.Click += ClearRecentFileListToolStripMenuItem_Click;
             // 
             // toolStripSeparator3
             // 
             toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new Size(364, 6);
+            toolStripSeparator3.Size = new Size(181, 6);
             // 
             // databaseToolStripMenuItem
             // 
             databaseToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { backupToolStripMenuItem, mnuRestore, toolStripSeparator11, mnuLoadLocationsCSV, mnuLoadLocationsTNG });
             databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
-            databaseToolStripMenuItem.Size = new Size(367, 44);
+            databaseToolStripMenuItem.Size = new Size(184, 22);
             databaseToolStripMenuItem.Text = "Geocode Database";
             // 
             // backupToolStripMenuItem
             // 
             backupToolStripMenuItem.Name = "backupToolStripMenuItem";
-            backupToolStripMenuItem.Size = new Size(475, 44);
+            backupToolStripMenuItem.Size = new Size(237, 22);
             backupToolStripMenuItem.Text = "Backup";
             backupToolStripMenuItem.Click += BackupToolStripMenuItem_Click;
             // 
             // mnuRestore
             // 
             mnuRestore.Name = "mnuRestore";
-            mnuRestore.Size = new Size(475, 44);
+            mnuRestore.Size = new Size(237, 22);
             mnuRestore.Text = "Restore";
             mnuRestore.ToolTipText = "Restore is only available prior to loading GEDCOM";
             mnuRestore.Click += RestoreToolStripMenuItem_Click;
@@ -608,38 +608,38 @@ namespace FTAnalyzer
             // toolStripSeparator11
             // 
             toolStripSeparator11.Name = "toolStripSeparator11";
-            toolStripSeparator11.Size = new Size(472, 6);
+            toolStripSeparator11.Size = new Size(234, 6);
             // 
             // mnuLoadLocationsCSV
             // 
             mnuLoadLocationsCSV.Name = "mnuLoadLocationsCSV";
-            mnuLoadLocationsCSV.Size = new Size(475, 44);
+            mnuLoadLocationsCSV.Size = new Size(237, 22);
             mnuLoadLocationsCSV.Text = "Load Geocoded Locations CSV";
             mnuLoadLocationsCSV.Click += MnuLoadLocationsCSV_Click;
             // 
             // mnuLoadLocationsTNG
             // 
             mnuLoadLocationsTNG.Name = "mnuLoadLocationsTNG";
-            mnuLoadLocationsTNG.Size = new Size(475, 44);
+            mnuLoadLocationsTNG.Size = new Size(237, 22);
             mnuLoadLocationsTNG.Text = "Load Geocoded Locations TNG";
             mnuLoadLocationsTNG.Click += MnuLoadLocationsTNG_Click;
             // 
             // toolStripSeparator5
             // 
             toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new Size(364, 6);
+            toolStripSeparator5.Size = new Size(181, 6);
             // 
             // mnuCloseGEDCOM
             // 
             mnuCloseGEDCOM.Name = "mnuCloseGEDCOM";
-            mnuCloseGEDCOM.Size = new Size(367, 44);
+            mnuCloseGEDCOM.Size = new Size(184, 22);
             mnuCloseGEDCOM.Text = "Close GEDCOM file";
             mnuCloseGEDCOM.Click += MnuCloseGEDCOM_Click;
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(367, 44);
+            exitToolStripMenuItem.Size = new Size(184, 22);
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += ExitToolStripMenuItem_Click;
             // 
@@ -647,27 +647,27 @@ namespace FTAnalyzer
             // 
             mnuReports.DropDownItems.AddRange(new ToolStripItem[] { mnuChildAgeProfiles, mnuOlderParents, mnuPossibleCensusFacts, mnuCousinsCountReport, mnuHowManyGreats, mnuBirthdayEffect, mnuPossiblyMissingChildReport, MnuAgedOver99Report, MnuSingleParentsReport });
             mnuReports.Name = "mnuReports";
-            mnuReports.Size = new Size(114, 36);
+            mnuReports.Size = new Size(59, 22);
             mnuReports.Text = "Reports";
             // 
             // mnuChildAgeProfiles
             // 
             mnuChildAgeProfiles.Name = "mnuChildAgeProfiles";
-            mnuChildAgeProfiles.Size = new Size(459, 44);
+            mnuChildAgeProfiles.Size = new Size(230, 22);
             mnuChildAgeProfiles.Text = "Parent Age Report";
             mnuChildAgeProfiles.Click += ChildAgeProfilesToolStripMenuItem_Click;
             // 
             // mnuOlderParents
             // 
             mnuOlderParents.Name = "mnuOlderParents";
-            mnuOlderParents.Size = new Size(459, 44);
+            mnuOlderParents.Size = new Size(230, 22);
             mnuOlderParents.Text = "Older Parents";
             mnuOlderParents.Click += OlderParentsToolStripMenuItem_Click;
             // 
             // mnuPossibleCensusFacts
             // 
             mnuPossibleCensusFacts.Name = "mnuPossibleCensusFacts";
-            mnuPossibleCensusFacts.Size = new Size(459, 44);
+            mnuPossibleCensusFacts.Size = new Size(230, 22);
             mnuPossibleCensusFacts.Text = "Possible Census Facts";
             mnuPossibleCensusFacts.ToolTipText = "This report aims to find census facts that have been incorrectly recorded as notes";
             mnuPossibleCensusFacts.Click += PossibleCensusFactsToolStripMenuItem_Click;
@@ -675,42 +675,42 @@ namespace FTAnalyzer
             // mnuCousinsCountReport
             // 
             mnuCousinsCountReport.Name = "mnuCousinsCountReport";
-            mnuCousinsCountReport.Size = new Size(459, 44);
+            mnuCousinsCountReport.Size = new Size(230, 22);
             mnuCousinsCountReport.Text = "Cousins Count Report";
             mnuCousinsCountReport.Click += CousinsCountReportToolStripMenuItem_Click;
             // 
             // mnuHowManyGreats
             // 
             mnuHowManyGreats.Name = "mnuHowManyGreats";
-            mnuHowManyGreats.Size = new Size(459, 44);
+            mnuHowManyGreats.Size = new Size(230, 22);
             mnuHowManyGreats.Text = "How Many Directs Report";
             mnuHowManyGreats.Click += HowManyDirectsReportToolStripMenuItem_Click;
             // 
             // mnuBirthdayEffect
             // 
             mnuBirthdayEffect.Name = "mnuBirthdayEffect";
-            mnuBirthdayEffect.Size = new Size(459, 44);
+            mnuBirthdayEffect.Size = new Size(230, 22);
             mnuBirthdayEffect.Text = "Birthday Effect Report";
             mnuBirthdayEffect.Click += BirthdayEffectReportToolStripMenuItem_Click;
             // 
             // mnuPossiblyMissingChildReport
             // 
             mnuPossiblyMissingChildReport.Name = "mnuPossiblyMissingChildReport";
-            mnuPossiblyMissingChildReport.Size = new Size(459, 44);
+            mnuPossiblyMissingChildReport.Size = new Size(230, 22);
             mnuPossiblyMissingChildReport.Text = "Possibly Missing Child Report";
             mnuPossiblyMissingChildReport.Click += PossiblyMissingChildReportToolStripMenuItem_Click;
             // 
             // MnuAgedOver99Report
             // 
             MnuAgedOver99Report.Name = "MnuAgedOver99Report";
-            MnuAgedOver99Report.Size = new Size(459, 44);
+            MnuAgedOver99Report.Size = new Size(230, 22);
             MnuAgedOver99Report.Text = "Aged over 99 Report";
             MnuAgedOver99Report.Click += MnuAgedOver99Report_Click;
             // 
             // MnuSingleParentsReport
             // 
             MnuSingleParentsReport.Name = "MnuSingleParentsReport";
-            MnuSingleParentsReport.Size = new Size(459, 44);
+            MnuSingleParentsReport.Size = new Size(230, 22);
             MnuSingleParentsReport.Text = "Single Parents Report";
             MnuSingleParentsReport.Click += MnuSingleParentsReport_Click;
             // 
@@ -718,130 +718,130 @@ namespace FTAnalyzer
             // 
             mnuExport.DropDownItems.AddRange(new ToolStripItem[] { mnuIndividualsToExcel, mnuFamiliesToExcel, mnuFactsToExcel, MnuExportLocations, mnuSourcesToExcel, MnuCustomFactsToExcel, toolStripSeparator12, mnuDataErrorsToExcel, mnuSurnamesToExcel, toolStripSeparator8, mnuLooseBirthsToExcel, mnuLooseDeathsToExcel, toolStripSeparator9, mnuTreetopsToExcel, mnuWorldWarsToExcel, toolStripSeparator13, mnuDNA_GEDCOM, toolStripSeparator15, mnuJSON });
             mnuExport.Name = "mnuExport";
-            mnuExport.Size = new Size(101, 36);
+            mnuExport.Size = new Size(53, 22);
             mnuExport.Text = "Export";
             // 
             // mnuIndividualsToExcel
             // 
             mnuIndividualsToExcel.Name = "mnuIndividualsToExcel";
-            mnuIndividualsToExcel.Size = new Size(444, 44);
+            mnuIndividualsToExcel.Size = new Size(222, 22);
             mnuIndividualsToExcel.Text = "Individuals to Excel";
             mnuIndividualsToExcel.Click += IndividualsToExcelToolStripMenuItem_Click;
             // 
             // mnuFamiliesToExcel
             // 
             mnuFamiliesToExcel.Name = "mnuFamiliesToExcel";
-            mnuFamiliesToExcel.Size = new Size(444, 44);
+            mnuFamiliesToExcel.Size = new Size(222, 22);
             mnuFamiliesToExcel.Text = "Families to Excel";
             mnuFamiliesToExcel.Click += FamiliesToExcelToolStripMenuItem_Click;
             // 
             // mnuFactsToExcel
             // 
             mnuFactsToExcel.Name = "mnuFactsToExcel";
-            mnuFactsToExcel.Size = new Size(444, 44);
+            mnuFactsToExcel.Size = new Size(222, 22);
             mnuFactsToExcel.Text = "Facts to Excel";
             mnuFactsToExcel.Click += FactsToExcelToolStripMenuItem_Click;
             // 
             // MnuExportLocations
             // 
             MnuExportLocations.Name = "MnuExportLocations";
-            MnuExportLocations.Size = new Size(444, 44);
+            MnuExportLocations.Size = new Size(222, 22);
             MnuExportLocations.Text = "Locations to Excel";
             MnuExportLocations.Click += MnuExportLocations_Click;
             // 
             // mnuSourcesToExcel
             // 
             mnuSourcesToExcel.Name = "mnuSourcesToExcel";
-            mnuSourcesToExcel.Size = new Size(444, 44);
+            mnuSourcesToExcel.Size = new Size(222, 22);
             mnuSourcesToExcel.Text = "Sources to Excel";
             mnuSourcesToExcel.Click += MnuSourcesToExcel_Click;
             // 
             // MnuCustomFactsToExcel
             // 
             MnuCustomFactsToExcel.Name = "MnuCustomFactsToExcel";
-            MnuCustomFactsToExcel.Size = new Size(444, 44);
+            MnuCustomFactsToExcel.Size = new Size(222, 22);
             MnuCustomFactsToExcel.Text = "Custom Facts to Excel";
             MnuCustomFactsToExcel.Click += MnuCustomFactsToExcel_Click;
             // 
             // toolStripSeparator12
             // 
             toolStripSeparator12.Name = "toolStripSeparator12";
-            toolStripSeparator12.Size = new Size(441, 6);
+            toolStripSeparator12.Size = new Size(219, 6);
             // 
             // mnuDataErrorsToExcel
             // 
             mnuDataErrorsToExcel.Name = "mnuDataErrorsToExcel";
-            mnuDataErrorsToExcel.Size = new Size(444, 44);
+            mnuDataErrorsToExcel.Size = new Size(222, 22);
             mnuDataErrorsToExcel.Text = "Data Errors to Excel";
             mnuDataErrorsToExcel.Click += MnuDataErrorsToExcel_Click;
             // 
             // mnuSurnamesToExcel
             // 
             mnuSurnamesToExcel.Name = "mnuSurnamesToExcel";
-            mnuSurnamesToExcel.Size = new Size(444, 44);
+            mnuSurnamesToExcel.Size = new Size(222, 22);
             mnuSurnamesToExcel.Text = "Surnames to Excel";
             mnuSurnamesToExcel.Click += MnuSurnamesToExcel_Click;
             // 
             // toolStripSeparator8
             // 
             toolStripSeparator8.Name = "toolStripSeparator8";
-            toolStripSeparator8.Size = new Size(441, 6);
+            toolStripSeparator8.Size = new Size(219, 6);
             // 
             // mnuLooseBirthsToExcel
             // 
             mnuLooseBirthsToExcel.Name = "mnuLooseBirthsToExcel";
-            mnuLooseBirthsToExcel.Size = new Size(444, 44);
+            mnuLooseBirthsToExcel.Size = new Size(222, 22);
             mnuLooseBirthsToExcel.Text = "Loose Births to Excel";
             mnuLooseBirthsToExcel.Click += LooseBirthsToExcelToolStripMenuItem_Click;
             // 
             // mnuLooseDeathsToExcel
             // 
             mnuLooseDeathsToExcel.Name = "mnuLooseDeathsToExcel";
-            mnuLooseDeathsToExcel.Size = new Size(444, 44);
+            mnuLooseDeathsToExcel.Size = new Size(222, 22);
             mnuLooseDeathsToExcel.Text = "Loose Deaths to Excel";
             mnuLooseDeathsToExcel.Click += LooseDeathsToExcelToolStripMenuItem_Click;
             // 
             // toolStripSeparator9
             // 
             toolStripSeparator9.Name = "toolStripSeparator9";
-            toolStripSeparator9.Size = new Size(441, 6);
+            toolStripSeparator9.Size = new Size(219, 6);
             // 
             // mnuTreetopsToExcel
             // 
             mnuTreetopsToExcel.Name = "mnuTreetopsToExcel";
-            mnuTreetopsToExcel.Size = new Size(444, 44);
+            mnuTreetopsToExcel.Size = new Size(222, 22);
             mnuTreetopsToExcel.Text = "Current Treetops to Excel";
             mnuTreetopsToExcel.Click += MnuTreetopsToExcel_Click;
             // 
             // mnuWorldWarsToExcel
             // 
             mnuWorldWarsToExcel.Name = "mnuWorldWarsToExcel";
-            mnuWorldWarsToExcel.Size = new Size(444, 44);
+            mnuWorldWarsToExcel.Size = new Size(222, 22);
             mnuWorldWarsToExcel.Text = "Current World Wars to Excel";
             mnuWorldWarsToExcel.Click += MnuWorldWarsToExcel_Click;
             // 
             // toolStripSeparator13
             // 
             toolStripSeparator13.Name = "toolStripSeparator13";
-            toolStripSeparator13.Size = new Size(441, 6);
+            toolStripSeparator13.Size = new Size(219, 6);
             // 
             // mnuDNA_GEDCOM
             // 
             mnuDNA_GEDCOM.Name = "mnuDNA_GEDCOM";
-            mnuDNA_GEDCOM.Size = new Size(444, 44);
+            mnuDNA_GEDCOM.Size = new Size(222, 22);
             mnuDNA_GEDCOM.Text = "Minimalist DNA GEDCOM";
             mnuDNA_GEDCOM.Click += MnuDNA_GEDCOM_Click;
             // 
             // toolStripSeparator15
             // 
             toolStripSeparator15.Name = "toolStripSeparator15";
-            toolStripSeparator15.Size = new Size(441, 6);
+            toolStripSeparator15.Size = new Size(219, 6);
             toolStripSeparator15.Visible = false;
             // 
             // mnuJSON
             // 
             mnuJSON.Name = "mnuJSON";
-            mnuJSON.Size = new Size(444, 44);
+            mnuJSON.Size = new Size(222, 22);
             mnuJSON.Text = "JSON for Visualisations";
             mnuJSON.Visible = false;
             mnuJSON.Click += MnuJSON_Click;
@@ -850,33 +850,33 @@ namespace FTAnalyzer
             // 
             toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { optionsToolStripMenuItem, toolStripSeparator2, displayOptionsOnLoadToolStripMenuItem, resetToDefaultFormSizeToolStripMenuItem });
             toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            toolsToolStripMenuItem.Size = new Size(89, 36);
+            toolsToolStripMenuItem.Size = new Size(46, 22);
             toolsToolStripMenuItem.Text = "Tools";
             // 
             // optionsToolStripMenuItem
             // 
             optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            optionsToolStripMenuItem.Size = new Size(423, 44);
+            optionsToolStripMenuItem.Size = new Size(208, 22);
             optionsToolStripMenuItem.Text = "Options";
             optionsToolStripMenuItem.Click += OptionsToolStripMenuItem_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(420, 6);
+            toolStripSeparator2.Size = new Size(205, 6);
             // 
             // displayOptionsOnLoadToolStripMenuItem
             // 
             displayOptionsOnLoadToolStripMenuItem.CheckOnClick = true;
             displayOptionsOnLoadToolStripMenuItem.Name = "displayOptionsOnLoadToolStripMenuItem";
-            displayOptionsOnLoadToolStripMenuItem.Size = new Size(423, 44);
+            displayOptionsOnLoadToolStripMenuItem.Size = new Size(208, 22);
             displayOptionsOnLoadToolStripMenuItem.Text = "Display Options on Load";
             displayOptionsOnLoadToolStripMenuItem.Click += DisplayOptionsOnLoadToolStripMenuItem_Click;
             // 
             // resetToDefaultFormSizeToolStripMenuItem
             // 
             resetToDefaultFormSizeToolStripMenuItem.Name = "resetToDefaultFormSizeToolStripMenuItem";
-            resetToDefaultFormSizeToolStripMenuItem.Size = new Size(423, 44);
+            resetToDefaultFormSizeToolStripMenuItem.Size = new Size(208, 22);
             resetToDefaultFormSizeToolStripMenuItem.Text = "Reset to Default form size";
             resetToDefaultFormSizeToolStripMenuItem.Click += ResetToDefaultFormSizeToolStripMenuItem_Click;
             // 
@@ -884,77 +884,77 @@ namespace FTAnalyzer
             // 
             mnuMaps.DropDownItems.AddRange(new ToolStripItem[] { mnuShowTimeline, mnuLifelines, mnuPlaces, toolStripSeparator4, mnuLocationsGeocodeReport, toolStripSeparator10, mnuGeocodeLocations, mnuOSGeocoder, mnuLookupBlankFoundLocations, toolStripSeparator16, mnuGoogleMyMaps });
             mnuMaps.Name = "mnuMaps";
-            mnuMaps.Size = new Size(92, 36);
+            mnuMaps.Size = new Size(48, 22);
             mnuMaps.Text = "Maps";
             // 
             // mnuShowTimeline
             // 
             mnuShowTimeline.Name = "mnuShowTimeline";
-            mnuShowTimeline.Size = new Size(572, 44);
+            mnuShowTimeline.Size = new Size(284, 22);
             mnuShowTimeline.Text = "Show Timeline";
             mnuShowTimeline.Click += MnuShowTimeline_Click;
             // 
             // mnuLifelines
             // 
             mnuLifelines.Name = "mnuLifelines";
-            mnuLifelines.Size = new Size(572, 44);
+            mnuLifelines.Size = new Size(284, 22);
             mnuLifelines.Text = "Show Lifelines";
             mnuLifelines.Click += MnuLifelines_Click;
             // 
             // mnuPlaces
             // 
             mnuPlaces.Name = "mnuPlaces";
-            mnuPlaces.Size = new Size(572, 44);
+            mnuPlaces.Size = new Size(284, 22);
             mnuPlaces.Text = "Show Places";
             mnuPlaces.Click += MnuPlaces_Click;
             // 
             // toolStripSeparator4
             // 
             toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new Size(569, 6);
+            toolStripSeparator4.Size = new Size(281, 6);
             // 
             // mnuLocationsGeocodeReport
             // 
             mnuLocationsGeocodeReport.Name = "mnuLocationsGeocodeReport";
-            mnuLocationsGeocodeReport.Size = new Size(572, 44);
+            mnuLocationsGeocodeReport.Size = new Size(284, 22);
             mnuLocationsGeocodeReport.Text = "Display Geocoded Locations";
             mnuLocationsGeocodeReport.Click += LocationsGeocodeReportToolStripMenuItem_Click;
             // 
             // toolStripSeparator10
             // 
             toolStripSeparator10.Name = "toolStripSeparator10";
-            toolStripSeparator10.Size = new Size(569, 6);
+            toolStripSeparator10.Size = new Size(281, 6);
             // 
             // mnuGeocodeLocations
             // 
             mnuGeocodeLocations.Name = "mnuGeocodeLocations";
-            mnuGeocodeLocations.Size = new Size(572, 44);
+            mnuGeocodeLocations.Size = new Size(284, 22);
             mnuGeocodeLocations.Text = "Run Google Geocoder to Find Locations";
             mnuGeocodeLocations.Click += MnuGeocodeLocations_Click;
             // 
             // mnuOSGeocoder
             // 
             mnuOSGeocoder.Name = "mnuOSGeocoder";
-            mnuOSGeocoder.Size = new Size(572, 44);
+            mnuOSGeocoder.Size = new Size(284, 22);
             mnuOSGeocoder.Text = "Run OS Geocoder to Find Locations";
             mnuOSGeocoder.Click += MnuOSGeocoder_Click;
             // 
             // mnuLookupBlankFoundLocations
             // 
             mnuLookupBlankFoundLocations.Name = "mnuLookupBlankFoundLocations";
-            mnuLookupBlankFoundLocations.Size = new Size(572, 44);
+            mnuLookupBlankFoundLocations.Size = new Size(284, 22);
             mnuLookupBlankFoundLocations.Text = "Lookup Blank Google Locations";
             mnuLookupBlankFoundLocations.Click += MnuLookupBlankFoundLocations_Click;
             // 
             // toolStripSeparator16
             // 
             toolStripSeparator16.Name = "toolStripSeparator16";
-            toolStripSeparator16.Size = new Size(569, 6);
+            toolStripSeparator16.Size = new Size(281, 6);
             // 
             // mnuGoogleMyMaps
             // 
             mnuGoogleMyMaps.Name = "mnuGoogleMyMaps";
-            mnuGoogleMyMaps.Size = new Size(572, 44);
+            mnuGoogleMyMaps.Size = new Size(284, 22);
             mnuGoogleMyMaps.Text = "Export to Google MyMaps";
             mnuGoogleMyMaps.Click += MnuGoogleMyMaps_Click;
             // 
@@ -962,27 +962,27 @@ namespace FTAnalyzer
             // 
             helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { viewOnlineManualToolStripMenuItem, onlineGuidesToUsingFTAnalyzerToolStripMenuItem, reportAnIssueToolStripMenuItem, facebookSupportGroupToolStripMenuItem, facebookUserGroupToolStripMenuItem, toolStripSeparator1, getGoogleAPIKeyToolStripMenuItem, googleAPISetupGuideToolStripMenuItem, toolStripSeparator14, privacyPolicyToolStripMenuItem, whatsNewToolStripMenuItem, aboutToolStripMenuItem });
             helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            helpToolStripMenuItem.Size = new Size(84, 36);
+            helpToolStripMenuItem.Size = new Size(44, 22);
             helpToolStripMenuItem.Text = "Help";
             // 
             // viewOnlineManualToolStripMenuItem
             // 
             viewOnlineManualToolStripMenuItem.Name = "viewOnlineManualToolStripMenuItem";
-            viewOnlineManualToolStripMenuItem.Size = new Size(515, 44);
+            viewOnlineManualToolStripMenuItem.Size = new Size(254, 22);
             viewOnlineManualToolStripMenuItem.Text = "View Online Manual";
             viewOnlineManualToolStripMenuItem.Click += ViewOnlineManualToolStripMenuItem_Click;
             // 
             // onlineGuidesToUsingFTAnalyzerToolStripMenuItem
             // 
             onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Name = "onlineGuidesToUsingFTAnalyzerToolStripMenuItem";
-            onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Size = new Size(515, 44);
+            onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Size = new Size(254, 22);
             onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Text = "Online Guides to Using FTAnalyzer";
             onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Click += OnlineGuidesToUsingFTAnalyzerToolStripMenuItem_Click;
             // 
             // reportAnIssueToolStripMenuItem
             // 
             reportAnIssueToolStripMenuItem.Name = "reportAnIssueToolStripMenuItem";
-            reportAnIssueToolStripMenuItem.Size = new Size(515, 44);
+            reportAnIssueToolStripMenuItem.Size = new Size(254, 22);
             reportAnIssueToolStripMenuItem.Text = "Report an Issue";
             reportAnIssueToolStripMenuItem.Click += ReportAnIssueToolStripMenuItem_Click;
             // 
@@ -990,7 +990,7 @@ namespace FTAnalyzer
             // 
             facebookSupportGroupToolStripMenuItem.Image = Properties.Resources.flogo_rgb_hex_brc_site_250;
             facebookSupportGroupToolStripMenuItem.Name = "facebookSupportGroupToolStripMenuItem";
-            facebookSupportGroupToolStripMenuItem.Size = new Size(515, 44);
+            facebookSupportGroupToolStripMenuItem.Size = new Size(254, 22);
             facebookSupportGroupToolStripMenuItem.Text = "Facebook Support Page";
             facebookSupportGroupToolStripMenuItem.Click += FacebookSupportGroupToolStripMenuItem_Click;
             // 
@@ -998,20 +998,20 @@ namespace FTAnalyzer
             // 
             facebookUserGroupToolStripMenuItem.Image = Properties.Resources.flogo_rgb_hex_brc_site_250;
             facebookUserGroupToolStripMenuItem.Name = "facebookUserGroupToolStripMenuItem";
-            facebookUserGroupToolStripMenuItem.Size = new Size(515, 44);
+            facebookUserGroupToolStripMenuItem.Size = new Size(254, 22);
             facebookUserGroupToolStripMenuItem.Text = "Facebook User Group";
             facebookUserGroupToolStripMenuItem.Click += FacebookUserGroupToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(512, 6);
+            toolStripSeparator1.Size = new Size(251, 6);
             // 
             // getGoogleAPIKeyToolStripMenuItem
             // 
             getGoogleAPIKeyToolStripMenuItem.Image = Properties.Resources.GoogleMapsAPI;
             getGoogleAPIKeyToolStripMenuItem.Name = "getGoogleAPIKeyToolStripMenuItem";
-            getGoogleAPIKeyToolStripMenuItem.Size = new Size(515, 44);
+            getGoogleAPIKeyToolStripMenuItem.Size = new Size(254, 22);
             getGoogleAPIKeyToolStripMenuItem.Text = "Get Google API Key";
             getGoogleAPIKeyToolStripMenuItem.Click += GetGoogleAPIKeyToolStripMenuItem_Click;
             // 
@@ -1019,33 +1019,33 @@ namespace FTAnalyzer
             // 
             googleAPISetupGuideToolStripMenuItem.Image = Properties.Resources.GoogleMapsAPI;
             googleAPISetupGuideToolStripMenuItem.Name = "googleAPISetupGuideToolStripMenuItem";
-            googleAPISetupGuideToolStripMenuItem.Size = new Size(515, 44);
+            googleAPISetupGuideToolStripMenuItem.Size = new Size(254, 22);
             googleAPISetupGuideToolStripMenuItem.Text = "Google API Setup Guide";
             googleAPISetupGuideToolStripMenuItem.Click += GoogleAPISetupGuideToolStripMenuItem_Click;
             // 
             // toolStripSeparator14
             // 
             toolStripSeparator14.Name = "toolStripSeparator14";
-            toolStripSeparator14.Size = new Size(512, 6);
+            toolStripSeparator14.Size = new Size(251, 6);
             // 
             // privacyPolicyToolStripMenuItem
             // 
             privacyPolicyToolStripMenuItem.Name = "privacyPolicyToolStripMenuItem";
-            privacyPolicyToolStripMenuItem.Size = new Size(515, 44);
+            privacyPolicyToolStripMenuItem.Size = new Size(254, 22);
             privacyPolicyToolStripMenuItem.Text = "Privacy Policy";
             privacyPolicyToolStripMenuItem.Click += PrivacyPolicyToolStripMenuItem_Click;
             // 
             // whatsNewToolStripMenuItem
             // 
             whatsNewToolStripMenuItem.Name = "whatsNewToolStripMenuItem";
-            whatsNewToolStripMenuItem.Size = new Size(515, 44);
+            whatsNewToolStripMenuItem.Size = new Size(254, 22);
             whatsNewToolStripMenuItem.Text = "What's New";
             whatsNewToolStripMenuItem.Click += WhatsNewToolStripMenuItem_Click;
             // 
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(515, 44);
+            aboutToolStripMenuItem.Size = new Size(254, 22);
             aboutToolStripMenuItem.Text = "About";
             aboutToolStripMenuItem.Click += AboutToolStripMenuItem_Click;
             // 
@@ -1054,26 +1054,25 @@ namespace FTAnalyzer
             mnuSetRoot.ImageScalingSize = new Size(32, 32);
             mnuSetRoot.Items.AddRange(new ToolStripItem[] { setAsRootToolStripMenuItem, viewNotesToolStripMenuItem });
             mnuSetRoot.Name = "mnuSetRoot";
-            mnuSetRoot.Size = new Size(289, 80);
+            mnuSetRoot.Size = new Size(174, 48);
             mnuSetRoot.Opened += MnuSetRoot_Opened;
             // 
             // setAsRootToolStripMenuItem
             // 
             setAsRootToolStripMenuItem.Name = "setAsRootToolStripMenuItem";
-            setAsRootToolStripMenuItem.Size = new Size(288, 38);
+            setAsRootToolStripMenuItem.Size = new Size(173, 22);
             setAsRootToolStripMenuItem.Text = "Set As Root Person";
             setAsRootToolStripMenuItem.Click += SetAsRootToolStripMenuItem_Click;
             // 
             // viewNotesToolStripMenuItem
             // 
             viewNotesToolStripMenuItem.Name = "viewNotesToolStripMenuItem";
-            viewNotesToolStripMenuItem.Size = new Size(288, 38);
+            viewNotesToolStripMenuItem.Size = new Size(173, 22);
             viewNotesToolStripMenuItem.Text = "View Notes";
             viewNotesToolStripMenuItem.Click += ViewNotesToolStripMenuItem_Click;
             // 
             // tsCount
             // 
-            tsCount.Margin = new Padding(0, 3, 0, 2);
             tsCount.Name = "tsCount";
             tsCount.Size = new Size(52, 17);
             tsCount.Text = "Count: 0";
@@ -1082,52 +1081,52 @@ namespace FTAnalyzer
             // 
             statusStrip.ImageScalingSize = new Size(32, 32);
             statusStrip.Items.AddRange(new ToolStripItem[] { tsCountLabel, tsHintsLabel, tspbTabProgress, tsStatusLabel });
-            statusStrip.Location = new Point(0, 1235);
+            statusStrip.Location = new Point(0, 475);
             statusStrip.Name = "statusStrip";
-            statusStrip.Padding = new Padding(2, 0, 30, 0);
-            statusStrip.Size = new Size(2314, 22);
+            statusStrip.Padding = new Padding(1, 0, 16, 0);
+            statusStrip.Size = new Size(1246, 22);
             statusStrip.TabIndex = 10;
             statusStrip.Text = "statusStrip1";
             // 
             // tsCountLabel
             // 
             tsCountLabel.Name = "tsCountLabel";
-            tsCountLabel.Size = new Size(0, 12);
+            tsCountLabel.Size = new Size(0, 17);
             // 
             // tsHintsLabel
             // 
             tsHintsLabel.Name = "tsHintsLabel";
-            tsHintsLabel.Size = new Size(0, 12);
+            tsHintsLabel.Size = new Size(0, 17);
             // 
             // tspbTabProgress
             // 
             tspbTabProgress.Name = "tspbTabProgress";
-            tspbTabProgress.Size = new Size(433, 26);
+            tspbTabProgress.Size = new Size(233, 16);
             tspbTabProgress.Visible = false;
             // 
             // tsStatusLabel
             // 
             tsStatusLabel.Name = "tsStatusLabel";
-            tsStatusLabel.Size = new Size(0, 12);
+            tsStatusLabel.Size = new Size(0, 17);
             // 
             // cmbColourFamily
             // 
             cmbColourFamily.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             cmbColourFamily.FormattingEnabled = true;
-            cmbColourFamily.Location = new Point(880, 119);
-            cmbColourFamily.Margin = new Padding(8, 9, 8, 9);
+            cmbColourFamily.Location = new Point(474, 56);
+            cmbColourFamily.Margin = new Padding(4);
             cmbColourFamily.Name = "cmbColourFamily";
-            cmbColourFamily.Size = new Size(1230, 40);
+            cmbColourFamily.Size = new Size(664, 23);
             cmbColourFamily.TabIndex = 60;
             toolTips.SetToolTip(cmbColourFamily, "Select a family to limit the reports to just that family");
             cmbColourFamily.Click += CmbColourFamily_Click;
             // 
             // btnRandomSurnameColour
             // 
-            btnRandomSurnameColour.Location = new Point(1348, 32);
-            btnRandomSurnameColour.Margin = new Padding(8, 9, 8, 9);
+            btnRandomSurnameColour.Location = new Point(726, 15);
+            btnRandomSurnameColour.Margin = new Padding(4);
             btnRandomSurnameColour.Name = "btnRandomSurnameColour";
-            btnRandomSurnameColour.Size = new Size(635, 62);
+            btnRandomSurnameColour.Size = new Size(342, 29);
             btnRandomSurnameColour.TabIndex = 62;
             btnRandomSurnameColour.Text = "Select Random Surname from Direct Ancestor's Surnames";
             toolTips.SetToolTip(btnRandomSurnameColour, "Once selected click the appropriate report button to view the report. eg: UK Colour Census Report.");
@@ -1138,11 +1137,11 @@ namespace FTAnalyzer
             // 
             tbDuplicateScore.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tbDuplicateScore.BackColor = SystemColors.ControlLightLight;
-            tbDuplicateScore.Location = new Point(970, 9);
-            tbDuplicateScore.Margin = new Padding(8, 9, 8, 9);
+            tbDuplicateScore.Location = new Point(522, 4);
+            tbDuplicateScore.Margin = new Padding(4);
             tbDuplicateScore.Minimum = 1;
             tbDuplicateScore.Name = "tbDuplicateScore";
-            tbDuplicateScore.Size = new Size(1291, 90);
+            tbDuplicateScore.Size = new Size(700, 45);
             tbDuplicateScore.TabIndex = 22;
             tbDuplicateScore.TickFrequency = 5;
             toolTips.SetToolTip(tbDuplicateScore, "Adjust Slider to right to limit results to more likely matches");
@@ -1152,11 +1151,11 @@ namespace FTAnalyzer
             // chkLCRootPersonConfirm
             // 
             chkLCRootPersonConfirm.Font = new Font("Microsoft Sans Serif", 8.25F);
-            chkLCRootPersonConfirm.Location = new Point(65, 362);
-            chkLCRootPersonConfirm.Margin = new Padding(8, 9, 8, 9);
+            chkLCRootPersonConfirm.Location = new Point(35, 170);
+            chkLCRootPersonConfirm.Margin = new Padding(4);
             chkLCRootPersonConfirm.Name = "chkLCRootPersonConfirm";
             chkLCRootPersonConfirm.RightToLeft = RightToLeft.Yes;
-            chkLCRootPersonConfirm.Size = new Size(882, 59);
+            chkLCRootPersonConfirm.Size = new Size(475, 28);
             chkLCRootPersonConfirm.TabIndex = 4;
             chkLCRootPersonConfirm.Text = "rootperson";
             chkLCRootPersonConfirm.TextAlign = ContentAlignment.MiddleRight;
@@ -1170,23 +1169,23 @@ namespace FTAnalyzer
             dgCheckAncestors.AllowUserToDeleteRows = false;
             dgCheckAncestors.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgCheckAncestors.ColumnHeadersHeight = 40;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle1;
-            dgCheckAncestors.Location = new Point(8, 209);
-            dgCheckAncestors.Margin = new Padding(8, 9, 8, 9);
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle3;
+            dgCheckAncestors.Location = new Point(4, 98);
+            dgCheckAncestors.Margin = new Padding(4);
             dgCheckAncestors.Name = "dgCheckAncestors";
             dgCheckAncestors.ReadOnly = true;
             dgCheckAncestors.RowHeadersWidth = 82;
             dgCheckAncestors.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgCheckAncestors.ShowCellToolTips = false;
             dgCheckAncestors.ShowEditingIcon = false;
-            dgCheckAncestors.Size = new Size(2250, 844);
+            dgCheckAncestors.Size = new Size(1217, 405);
             dgCheckAncestors.TabIndex = 7;
             toolTips.SetToolTip(dgCheckAncestors, "Double click to see list of facts for that individual");
             // 
@@ -1195,10 +1194,10 @@ namespace FTAnalyzer
             label13.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label13.AutoSize = true;
             label13.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
-            label13.Location = new Point(2030, 59);
-            label13.Margin = new Padding(8, 0, 8, 0);
+            label13.Location = new Point(1098, 28);
+            label13.Margin = new Padding(4, 0, 4, 0);
             label13.Name = "label13";
-            label13.Size = new Size(201, 26);
+            label13.Size = new Size(108, 13);
             label13.TabIndex = 24;
             label13.Text = "Aggressive Match";
             toolTips.SetToolTip(label13, "Will produce duplicates in list when the two individuals are a very close match to each other - only those with highest duplicate match score");
@@ -1207,10 +1206,10 @@ namespace FTAnalyzer
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
-            label12.Location = new Point(962, 59);
-            label12.Margin = new Padding(8, 0, 8, 0);
+            label12.Location = new Point(518, 28);
+            label12.Margin = new Padding(4, 0, 4, 0);
             label12.Name = "label12";
-            label12.Size = new Size(147, 26);
+            label12.Size = new Size(80, 13);
             label12.TabIndex = 23;
             label12.Text = "Loose Match";
             toolTips.SetToolTip(label12, "Will produce duplicates in list when the two individuals decent but vague match to each other - Lowest duplicate match score");
@@ -1220,10 +1219,10 @@ namespace FTAnalyzer
             chkIgnoreUnnamedTwins.AutoSize = true;
             chkIgnoreUnnamedTwins.Checked = true;
             chkIgnoreUnnamedTwins.CheckState = CheckState.Checked;
-            chkIgnoreUnnamedTwins.Location = new Point(533, 158);
-            chkIgnoreUnnamedTwins.Margin = new Padding(8, 9, 8, 9);
+            chkIgnoreUnnamedTwins.Location = new Point(287, 74);
+            chkIgnoreUnnamedTwins.Margin = new Padding(4);
             chkIgnoreUnnamedTwins.Name = "chkIgnoreUnnamedTwins";
-            chkIgnoreUnnamedTwins.Size = new Size(181, 36);
+            chkIgnoreUnnamedTwins.Size = new Size(92, 19);
             chkIgnoreUnnamedTwins.TabIndex = 29;
             chkIgnoreUnnamedTwins.Text = "Ignore Twins";
             toolTips.SetToolTip(chkIgnoreUnnamedTwins, "Ignores duplicates where forename is unknown");
@@ -1233,10 +1232,10 @@ namespace FTAnalyzer
             // radioOnlyPreferred
             // 
             radioOnlyPreferred.AutoSize = true;
-            radioOnlyPreferred.Location = new Point(221, 5);
-            radioOnlyPreferred.Margin = new Padding(4, 5, 4, 5);
+            radioOnlyPreferred.Location = new Point(119, 2);
+            radioOnlyPreferred.Margin = new Padding(2);
             radioOnlyPreferred.Name = "radioOnlyPreferred";
-            radioOnlyPreferred.Size = new Size(261, 36);
+            radioOnlyPreferred.Size = new Size(131, 19);
             radioOnlyPreferred.TabIndex = 39;
             radioOnlyPreferred.Text = "Show only Preferred";
             toolTips.SetToolTip(radioOnlyPreferred, "Select this option to only show Preferred facts when you click one of the display buttons");
@@ -1246,10 +1245,10 @@ namespace FTAnalyzer
             // radioOnlyAlternate
             // 
             radioOnlyAlternate.AutoSize = true;
-            radioOnlyAlternate.Location = new Point(494, 9);
-            radioOnlyAlternate.Margin = new Padding(4, 5, 4, 5);
+            radioOnlyAlternate.Location = new Point(266, 4);
+            radioOnlyAlternate.Margin = new Padding(2);
             radioOnlyAlternate.Name = "radioOnlyAlternate";
-            radioOnlyAlternate.Size = new Size(278, 36);
+            radioOnlyAlternate.Size = new Size(140, 19);
             radioOnlyAlternate.TabIndex = 40;
             radioOnlyAlternate.Text = "Show only Alternative";
             toolTips.SetToolTip(radioOnlyAlternate, "Select this option to only show Alternative facts when you click one of the display buttons");
@@ -1265,18 +1264,18 @@ namespace FTAnalyzer
             dgDataErrors.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgDataErrors.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgDataErrors.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Window;
+            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dgDataErrors.DefaultCellStyle = dataGridViewCellStyle4;
             dgDataErrors.FilterAndSortEnabled = true;
             dgDataErrors.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
-            dgDataErrors.Location = new Point(17, 416);
-            dgDataErrors.Margin = new Padding(13, 15, 13, 15);
+            dgDataErrors.Location = new Point(9, 195);
+            dgDataErrors.Margin = new Padding(7);
             dgDataErrors.MultiSelect = false;
             dgDataErrors.Name = "dgDataErrors";
             dgDataErrors.ReadOnly = true;
@@ -1286,7 +1285,7 @@ namespace FTAnalyzer
             dgDataErrors.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgDataErrors.ShowCellToolTips = false;
             dgDataErrors.ShowEditingIcon = false;
-            dgDataErrors.Size = new Size(2265, 667);
+            dgDataErrors.Size = new Size(1221, 307);
             dgDataErrors.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgDataErrors.TabIndex = 7;
             toolTips.SetToolTip(dgDataErrors, "Double click to see list of facts for that individual");
@@ -1304,8 +1303,8 @@ namespace FTAnalyzer
             dgCountries.Dock = DockStyle.Fill;
             dgCountries.FilterAndSortEnabled = true;
             dgCountries.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
-            dgCountries.Location = new Point(8, 9);
-            dgCountries.Margin = new Padding(13, 15, 13, 15);
+            dgCountries.Location = new Point(4, 4);
+            dgCountries.Margin = new Padding(7);
             dgCountries.MultiSelect = false;
             dgCountries.Name = "dgCountries";
             dgCountries.ReadOnly = true;
@@ -1313,7 +1312,7 @@ namespace FTAnalyzer
             dgCountries.RowHeadersVisible = false;
             dgCountries.RowHeadersWidth = 50;
             dgCountries.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgCountries.Size = new Size(2258, 1056);
+            dgCountries.Size = new Size(1218, 490);
             dgCountries.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgCountries.TabIndex = 1;
             toolTips.SetToolTip(dgCountries, "Double click on Country name to see list of individuals with that Country.");
@@ -1330,8 +1329,8 @@ namespace FTAnalyzer
             dgRegions.Dock = DockStyle.Fill;
             dgRegions.FilterAndSortEnabled = true;
             dgRegions.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
-            dgRegions.Location = new Point(8, 9);
-            dgRegions.Margin = new Padding(13, 15, 13, 15);
+            dgRegions.Location = new Point(4, 4);
+            dgRegions.Margin = new Padding(7);
             dgRegions.MultiSelect = false;
             dgRegions.Name = "dgRegions";
             dgRegions.ReadOnly = true;
@@ -1339,19 +1338,44 @@ namespace FTAnalyzer
             dgRegions.RowHeadersVisible = false;
             dgRegions.RowHeadersWidth = 50;
             dgRegions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgRegions.Size = new Size(2258, 1056);
+            dgRegions.Size = new Size(1218, 490);
             dgRegions.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgRegions.TabIndex = 2;
             toolTips.SetToolTip(dgRegions, "Double click on Region name to see list of individuals with that Region.");
             dgRegions.VirtualMode = true;
             // 
+            // btnShowExclusions
+            // 
+            btnShowExclusions.Location = new Point(381, 275);
+            btnShowExclusions.Margin = new Padding(4);
+            btnShowExclusions.Name = "btnShowExclusions";
+            btnShowExclusions.Size = new Size(33, 59);
+            btnShowExclusions.TabIndex = 41;
+            btnShowExclusions.Text = "=>";
+            toolTips.SetToolTip(btnShowExclusions, "Show Exclusions");
+            btnShowExclusions.UseVisualStyleBackColor = true;
+            // 
+            // ckbFactExclude
+            // 
+            ckbFactExclude.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            ckbFactExclude.FormattingEnabled = true;
+            ckbFactExclude.Location = new Point(419, 158);
+            ckbFactExclude.Margin = new Padding(4);
+            ckbFactExclude.Name = "ckbFactExclude";
+            ckbFactExclude.ScrollAlwaysVisible = true;
+            ckbFactExclude.SelectionMode = SelectionMode.None;
+            ckbFactExclude.Size = new Size(365, 274);
+            ckbFactExclude.TabIndex = 38;
+            toolTips.SetToolTip(ckbFactExclude, "Any fact types selected in this box excludes people who have this fact type from report");
+            ckbFactExclude.Visible = false;
+            // 
             // btnUpdateLostCousinsWebsite
             // 
             btnUpdateLostCousinsWebsite.Enabled = false;
-            btnUpdateLostCousinsWebsite.Location = new Point(648, 428);
-            btnUpdateLostCousinsWebsite.Margin = new Padding(8, 9, 8, 9);
+            btnUpdateLostCousinsWebsite.Location = new Point(349, 201);
+            btnUpdateLostCousinsWebsite.Margin = new Padding(4);
             btnUpdateLostCousinsWebsite.Name = "btnUpdateLostCousinsWebsite";
-            btnUpdateLostCousinsWebsite.Size = new Size(299, 55);
+            btnUpdateLostCousinsWebsite.Size = new Size(161, 26);
             btnUpdateLostCousinsWebsite.TabIndex = 5;
             btnUpdateLostCousinsWebsite.Text = "Update Lost Cousins site";
             btnUpdateLostCousinsWebsite.UseVisualStyleBackColor = true;
@@ -1385,10 +1409,10 @@ namespace FTAnalyzer
             tabWorldWars.Controls.Add(dgWorldWars);
             tabWorldWars.Controls.Add(wardeadRelation);
             tabWorldWars.Controls.Add(wardeadCountry);
-            tabWorldWars.Location = new Point(8, 46);
-            tabWorldWars.Margin = new Padding(8, 9, 8, 9);
+            tabWorldWars.Location = new Point(4, 24);
+            tabWorldWars.Margin = new Padding(4);
             tabWorldWars.Name = "tabWorldWars";
-            tabWorldWars.Size = new Size(2298, 1137);
+            tabWorldWars.Size = new Size(1238, 530);
             tabWorldWars.TabIndex = 8;
             tabWorldWars.Text = "World Wars";
             tabWorldWars.ToolTipText = "Find men of fighting age during WWI & WWII";
@@ -1397,10 +1421,10 @@ namespace FTAnalyzer
             // ckbMilitaryOnly
             // 
             ckbMilitaryOnly.AutoSize = true;
-            ckbMilitaryOnly.Location = new Point(606, 258);
-            ckbMilitaryOnly.Margin = new Padding(8, 9, 8, 9);
+            ckbMilitaryOnly.Location = new Point(326, 121);
+            ckbMilitaryOnly.Margin = new Padding(4);
             ckbMilitaryOnly.Name = "ckbMilitaryOnly";
-            ckbMilitaryOnly.Size = new Size(580, 36);
+            ckbMilitaryOnly.Size = new Size(291, 19);
             ckbMilitaryOnly.TabIndex = 33;
             ckbMilitaryOnly.Text = "Limit Results to only those men with Military Facts";
             ckbMilitaryOnly.UseVisualStyleBackColor = true;
@@ -1410,10 +1434,10 @@ namespace FTAnalyzer
             ckbWDIgnoreLocations.AutoSize = true;
             ckbWDIgnoreLocations.Checked = true;
             ckbWDIgnoreLocations.CheckState = CheckState.Checked;
-            ckbWDIgnoreLocations.Location = new Point(17, 258);
-            ckbWDIgnoreLocations.Margin = new Padding(8, 9, 8, 9);
+            ckbWDIgnoreLocations.Location = new Point(9, 121);
+            ckbWDIgnoreLocations.Margin = new Padding(4);
             ckbWDIgnoreLocations.Name = "ckbWDIgnoreLocations";
-            ckbWDIgnoreLocations.Size = new Size(556, 36);
+            ckbWDIgnoreLocations.Size = new Size(279, 19);
             ckbWDIgnoreLocations.TabIndex = 32;
             ckbWDIgnoreLocations.Text = "Include Unknown Countries in World Wars Filter";
             ckbWDIgnoreLocations.UseVisualStyleBackColor = true;
@@ -1421,10 +1445,10 @@ namespace FTAnalyzer
             // 
             // btnWWII
             // 
-            btnWWII.Location = new Point(1642, 143);
-            btnWWII.Margin = new Padding(8, 9, 8, 9);
+            btnWWII.Location = new Point(884, 67);
+            btnWWII.Margin = new Padding(4);
             btnWWII.Name = "btnWWII";
-            btnWWII.Size = new Size(206, 62);
+            btnWWII.Size = new Size(111, 29);
             btnWWII.TabIndex = 31;
             btnWWII.Text = "World War II";
             btnWWII.UseVisualStyleBackColor = true;
@@ -1432,10 +1456,10 @@ namespace FTAnalyzer
             // 
             // btnWWI
             // 
-            btnWWI.Location = new Point(1408, 143);
-            btnWWI.Margin = new Padding(8, 9, 8, 9);
+            btnWWI.Location = new Point(758, 67);
+            btnWWI.Margin = new Padding(4);
             btnWWI.Name = "btnWWI";
-            btnWWI.Size = new Size(206, 62);
+            btnWWI.Size = new Size(111, 29);
             btnWWI.TabIndex = 30;
             btnWWI.Text = "World War I";
             btnWWI.UseVisualStyleBackColor = true;
@@ -1444,19 +1468,19 @@ namespace FTAnalyzer
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(1289, 62);
-            label9.Margin = new Padding(8, 0, 8, 0);
+            label9.Location = new Point(694, 29);
+            label9.Margin = new Padding(4, 0, 4, 0);
             label9.Name = "label9";
-            label9.Size = new Size(109, 32);
+            label9.Size = new Size(54, 15);
             label9.TabIndex = 28;
             label9.Text = "Surname";
             // 
             // txtWorldWarsSurname
             // 
-            txtWorldWarsSurname.Location = new Point(1408, 54);
-            txtWorldWarsSurname.Margin = new Padding(8, 9, 8, 9);
+            txtWorldWarsSurname.Location = new Point(758, 25);
+            txtWorldWarsSurname.Margin = new Padding(4);
             txtWorldWarsSurname.Name = "txtWorldWarsSurname";
-            txtWorldWarsSurname.Size = new Size(431, 39);
+            txtWorldWarsSurname.Size = new Size(234, 23);
             txtWorldWarsSurname.TabIndex = 27;
             // 
             // dgWorldWars
@@ -1470,8 +1494,8 @@ namespace FTAnalyzer
             dgWorldWars.Dock = DockStyle.Bottom;
             dgWorldWars.FilterAndSortEnabled = true;
             dgWorldWars.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
-            dgWorldWars.Location = new Point(0, 378);
-            dgWorldWars.Margin = new Padding(13, 15, 13, 15);
+            dgWorldWars.Location = new Point(0, 177);
+            dgWorldWars.Margin = new Padding(7);
             dgWorldWars.MultiSelect = false;
             dgWorldWars.Name = "dgWorldWars";
             dgWorldWars.ReadOnly = true;
@@ -1479,7 +1503,7 @@ namespace FTAnalyzer
             dgWorldWars.RowHeadersVisible = false;
             dgWorldWars.RowHeadersWidth = 50;
             dgWorldWars.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgWorldWars.Size = new Size(2298, 759);
+            dgWorldWars.Size = new Size(1238, 353);
             dgWorldWars.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgWorldWars.TabIndex = 29;
             dgWorldWars.VirtualMode = true;
@@ -1488,19 +1512,19 @@ namespace FTAnalyzer
             // 
             // wardeadRelation
             // 
-            wardeadRelation.Location = new Point(585, 9);
-            wardeadRelation.Margin = new Padding(13, 15, 13, 15);
+            wardeadRelation.Location = new Point(315, 4);
+            wardeadRelation.Margin = new Padding(7);
             wardeadRelation.MarriedToDB = true;
             wardeadRelation.Name = "wardeadRelation";
-            wardeadRelation.Size = new Size(698, 246);
+            wardeadRelation.Size = new Size(376, 115);
             wardeadRelation.TabIndex = 26;
             // 
             // wardeadCountry
             // 
-            wardeadCountry.Location = new Point(17, 62);
-            wardeadCountry.Margin = new Padding(13, 15, 13, 15);
+            wardeadCountry.Location = new Point(9, 29);
+            wardeadCountry.Margin = new Padding(7);
             wardeadCountry.Name = "wardeadCountry";
-            wardeadCountry.Size = new Size(555, 182);
+            wardeadCountry.Size = new Size(299, 85);
             wardeadCountry.TabIndex = 25;
             wardeadCountry.Title = "Default Country";
             wardeadCountry.UKEnabled = true;
@@ -1510,13 +1534,13 @@ namespace FTAnalyzer
             ctxViewNotes.ImageScalingSize = new Size(32, 32);
             ctxViewNotes.Items.AddRange(new ToolStripItem[] { mnuViewNotes });
             ctxViewNotes.Name = "contextMenuStrip1";
-            ctxViewNotes.Size = new Size(210, 42);
+            ctxViewNotes.Size = new Size(134, 26);
             ctxViewNotes.Opening += CtxViewNotes_Opening;
             // 
             // mnuViewNotes
             // 
             mnuViewNotes.Name = "mnuViewNotes";
-            mnuViewNotes.Size = new Size(209, 38);
+            mnuViewNotes.Size = new Size(133, 22);
             mnuViewNotes.Text = "View Notes";
             mnuViewNotes.Click += MnuViewNotes_Click;
             // 
@@ -1530,10 +1554,10 @@ namespace FTAnalyzer
             tabTreetops.Controls.Add(dgTreeTops);
             tabTreetops.Controls.Add(treetopsRelation);
             tabTreetops.Controls.Add(treetopsCountry);
-            tabTreetops.Location = new Point(8, 46);
-            tabTreetops.Margin = new Padding(8, 9, 8, 9);
+            tabTreetops.Location = new Point(4, 24);
+            tabTreetops.Margin = new Padding(4);
             tabTreetops.Name = "tabTreetops";
-            tabTreetops.Size = new Size(2298, 1137);
+            tabTreetops.Size = new Size(1238, 530);
             tabTreetops.TabIndex = 7;
             tabTreetops.Text = "Treetops";
             tabTreetops.UseVisualStyleBackColor = true;
@@ -1543,10 +1567,10 @@ namespace FTAnalyzer
             ckbTTIncludeOnlyOneParent.AutoSize = true;
             ckbTTIncludeOnlyOneParent.Checked = true;
             ckbTTIncludeOnlyOneParent.CheckState = CheckState.Checked;
-            ckbTTIncludeOnlyOneParent.Location = new Point(606, 258);
-            ckbTTIncludeOnlyOneParent.Margin = new Padding(8, 9, 8, 9);
+            ckbTTIncludeOnlyOneParent.Location = new Point(326, 121);
+            ckbTTIncludeOnlyOneParent.Margin = new Padding(4);
             ckbTTIncludeOnlyOneParent.Name = "ckbTTIncludeOnlyOneParent";
-            ckbTTIncludeOnlyOneParent.Size = new Size(607, 36);
+            ckbTTIncludeOnlyOneParent.Size = new Size(302, 19);
             ckbTTIncludeOnlyOneParent.TabIndex = 29;
             ckbTTIncludeOnlyOneParent.Text = "Include Individuals that have only one parent known";
             ckbTTIncludeOnlyOneParent.UseVisualStyleBackColor = true;
@@ -1556,10 +1580,10 @@ namespace FTAnalyzer
             ckbTTIgnoreLocations.AutoSize = true;
             ckbTTIgnoreLocations.Checked = true;
             ckbTTIgnoreLocations.CheckState = CheckState.Checked;
-            ckbTTIgnoreLocations.Location = new Point(17, 258);
-            ckbTTIgnoreLocations.Margin = new Padding(8, 9, 8, 9);
+            ckbTTIgnoreLocations.Location = new Point(9, 121);
+            ckbTTIgnoreLocations.Margin = new Padding(4);
             ckbTTIgnoreLocations.Name = "ckbTTIgnoreLocations";
-            ckbTTIgnoreLocations.Size = new Size(526, 36);
+            ckbTTIgnoreLocations.Size = new Size(262, 19);
             ckbTTIgnoreLocations.TabIndex = 27;
             ckbTTIgnoreLocations.Text = "Include Unknown Countries in Treetops Filter";
             ckbTTIgnoreLocations.UseVisualStyleBackColor = true;
@@ -1567,10 +1591,10 @@ namespace FTAnalyzer
             // 
             // btnTreeTops
             // 
-            btnTreeTops.Location = new Point(1408, 143);
-            btnTreeTops.Margin = new Padding(8, 9, 8, 9);
+            btnTreeTops.Location = new Point(758, 67);
+            btnTreeTops.Margin = new Padding(4);
             btnTreeTops.Name = "btnTreeTops";
-            btnTreeTops.Size = new Size(437, 62);
+            btnTreeTops.Size = new Size(235, 29);
             btnTreeTops.TabIndex = 25;
             btnTreeTops.Text = "Show People at top of tree";
             btnTreeTops.UseVisualStyleBackColor = true;
@@ -1579,19 +1603,19 @@ namespace FTAnalyzer
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(1289, 62);
-            label8.Margin = new Padding(8, 0, 8, 0);
+            label8.Location = new Point(694, 29);
+            label8.Margin = new Padding(4, 0, 4, 0);
             label8.Name = "label8";
-            label8.Size = new Size(109, 32);
+            label8.Size = new Size(54, 15);
             label8.TabIndex = 24;
             label8.Text = "Surname";
             // 
             // txtTreetopsSurname
             // 
-            txtTreetopsSurname.Location = new Point(1408, 54);
-            txtTreetopsSurname.Margin = new Padding(8, 9, 8, 9);
+            txtTreetopsSurname.Location = new Point(758, 25);
+            txtTreetopsSurname.Margin = new Padding(4);
             txtTreetopsSurname.Name = "txtTreetopsSurname";
-            txtTreetopsSurname.Size = new Size(431, 39);
+            txtTreetopsSurname.Size = new Size(234, 23);
             txtTreetopsSurname.TabIndex = 23;
             // 
             // dgTreeTops
@@ -1605,8 +1629,8 @@ namespace FTAnalyzer
             dgTreeTops.Dock = DockStyle.Bottom;
             dgTreeTops.FilterAndSortEnabled = true;
             dgTreeTops.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
-            dgTreeTops.Location = new Point(0, 378);
-            dgTreeTops.Margin = new Padding(13, 15, 13, 15);
+            dgTreeTops.Location = new Point(0, 177);
+            dgTreeTops.Margin = new Padding(7);
             dgTreeTops.MultiSelect = false;
             dgTreeTops.Name = "dgTreeTops";
             dgTreeTops.ReadOnly = true;
@@ -1614,7 +1638,7 @@ namespace FTAnalyzer
             dgTreeTops.RowHeadersVisible = false;
             dgTreeTops.RowHeadersWidth = 50;
             dgTreeTops.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgTreeTops.Size = new Size(2298, 759);
+            dgTreeTops.Size = new Size(1238, 353);
             dgTreeTops.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgTreeTops.TabIndex = 28;
             dgTreeTops.VirtualMode = true;
@@ -1623,19 +1647,19 @@ namespace FTAnalyzer
             // 
             // treetopsRelation
             // 
-            treetopsRelation.Location = new Point(585, 9);
-            treetopsRelation.Margin = new Padding(13, 15, 13, 15);
+            treetopsRelation.Location = new Point(315, 4);
+            treetopsRelation.Margin = new Padding(7);
             treetopsRelation.MarriedToDB = true;
             treetopsRelation.Name = "treetopsRelation";
-            treetopsRelation.Size = new Size(698, 236);
+            treetopsRelation.Size = new Size(376, 111);
             treetopsRelation.TabIndex = 12;
             // 
             // treetopsCountry
             // 
-            treetopsCountry.Location = new Point(17, 62);
-            treetopsCountry.Margin = new Padding(13, 15, 13, 15);
+            treetopsCountry.Location = new Point(9, 29);
+            treetopsCountry.Margin = new Padding(7);
             treetopsCountry.Name = "treetopsCountry";
-            treetopsCountry.Size = new Size(555, 182);
+            treetopsCountry.Size = new Size(299, 85);
             treetopsCountry.TabIndex = 11;
             treetopsCountry.Title = "Default Country";
             treetopsCountry.UKEnabled = true;
@@ -1651,10 +1675,10 @@ namespace FTAnalyzer
             tabColourReports.Controls.Add(label10);
             tabColourReports.Controls.Add(txtColouredSurname);
             tabColourReports.Controls.Add(relTypesColoured);
-            tabColourReports.Location = new Point(8, 46);
-            tabColourReports.Margin = new Padding(8, 9, 8, 9);
+            tabColourReports.Location = new Point(4, 24);
+            tabColourReports.Margin = new Padding(4);
             tabColourReports.Name = "tabColourReports";
-            tabColourReports.Size = new Size(2298, 1137);
+            tabColourReports.Size = new Size(1238, 530);
             tabColourReports.TabIndex = 12;
             tabColourReports.Text = "Research Suggestions";
             tabColourReports.UseVisualStyleBackColor = true;
@@ -1663,11 +1687,11 @@ namespace FTAnalyzer
             // 
             groupBox7.Controls.Add(btnAdvancedMissingData);
             groupBox7.Controls.Add(btnStandardMissingData);
-            groupBox7.Location = new Point(918, 286);
-            groupBox7.Margin = new Padding(8, 9, 8, 9);
+            groupBox7.Location = new Point(494, 134);
+            groupBox7.Margin = new Padding(4);
             groupBox7.Name = "groupBox7";
-            groupBox7.Padding = new Padding(8, 9, 8, 9);
-            groupBox7.Size = new Size(886, 268);
+            groupBox7.Padding = new Padding(4);
+            groupBox7.Size = new Size(477, 126);
             groupBox7.TabIndex = 63;
             groupBox7.TabStop = false;
             groupBox7.Text = "Missing Data Reports";
@@ -1675,10 +1699,10 @@ namespace FTAnalyzer
             // 
             // btnAdvancedMissingData
             // 
-            btnAdvancedMissingData.Location = new Point(450, 47);
-            btnAdvancedMissingData.Margin = new Padding(8, 9, 8, 9);
+            btnAdvancedMissingData.Location = new Point(242, 22);
+            btnAdvancedMissingData.Margin = new Padding(4);
             btnAdvancedMissingData.Name = "btnAdvancedMissingData";
-            btnAdvancedMissingData.Size = new Size(424, 55);
+            btnAdvancedMissingData.Size = new Size(228, 26);
             btnAdvancedMissingData.TabIndex = 40;
             btnAdvancedMissingData.Text = "Advanced Missing Data Report";
             btnAdvancedMissingData.UseVisualStyleBackColor = true;
@@ -1686,10 +1710,10 @@ namespace FTAnalyzer
             // 
             // btnStandardMissingData
             // 
-            btnStandardMissingData.Location = new Point(13, 47);
-            btnStandardMissingData.Margin = new Padding(8, 9, 8, 9);
+            btnStandardMissingData.Location = new Point(7, 22);
+            btnStandardMissingData.Margin = new Padding(4);
             btnStandardMissingData.Name = "btnStandardMissingData";
-            btnStandardMissingData.Size = new Size(424, 55);
+            btnStandardMissingData.Size = new Size(228, 26);
             btnStandardMissingData.TabIndex = 39;
             btnStandardMissingData.Text = "Standard Missing Data Report";
             btnStandardMissingData.UseVisualStyleBackColor = true;
@@ -1698,10 +1722,10 @@ namespace FTAnalyzer
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new Point(736, 128);
-            label14.Margin = new Padding(8, 0, 8, 0);
+            label14.Location = new Point(396, 60);
+            label14.Margin = new Padding(4, 0, 4, 0);
             label14.Name = "label14";
-            label14.Size = new Size(142, 32);
+            label14.Size = new Size(71, 15);
             label14.TabIndex = 61;
             label14.Text = "Family Filter";
             // 
@@ -1713,11 +1737,11 @@ namespace FTAnalyzer
             groupBox3.Controls.Add(btnCanadianColourCensus);
             groupBox3.Controls.Add(btnUKColourCensus);
             groupBox3.Controls.Add(btnUSColourCensus);
-            groupBox3.Location = new Point(17, 286);
-            groupBox3.Margin = new Padding(8, 9, 8, 9);
+            groupBox3.Location = new Point(9, 134);
+            groupBox3.Margin = new Padding(4);
             groupBox3.Name = "groupBox3";
-            groupBox3.Padding = new Padding(8, 9, 8, 9);
-            groupBox3.Size = new Size(886, 268);
+            groupBox3.Padding = new Padding(4);
+            groupBox3.Size = new Size(477, 126);
             groupBox3.TabIndex = 36;
             groupBox3.TabStop = false;
             groupBox3.Text = "Census Suggestions Reports";
@@ -1725,10 +1749,10 @@ namespace FTAnalyzer
             // ckbIgnoreNoDeathDate
             // 
             ckbIgnoreNoDeathDate.AutoSize = true;
-            ckbIgnoreNoDeathDate.Location = new Point(451, 190);
-            ckbIgnoreNoDeathDate.Margin = new Padding(8, 9, 8, 9);
+            ckbIgnoreNoDeathDate.Location = new Point(243, 89);
+            ckbIgnoreNoDeathDate.Margin = new Padding(4);
             ckbIgnoreNoDeathDate.Name = "ckbIgnoreNoDeathDate";
-            ckbIgnoreNoDeathDate.Size = new Size(445, 36);
+            ckbIgnoreNoDeathDate.Size = new Size(222, 19);
             ckbIgnoreNoDeathDate.TabIndex = 67;
             ckbIgnoreNoDeathDate.Text = "Ignore Individuals with no death date";
             ckbIgnoreNoDeathDate.UseVisualStyleBackColor = true;
@@ -1736,20 +1760,20 @@ namespace FTAnalyzer
             // ckbIgnoreNoBirthDate
             // 
             ckbIgnoreNoBirthDate.AutoSize = true;
-            ckbIgnoreNoBirthDate.Location = new Point(13, 190);
-            ckbIgnoreNoBirthDate.Margin = new Padding(8, 9, 8, 9);
+            ckbIgnoreNoBirthDate.Location = new Point(7, 89);
+            ckbIgnoreNoBirthDate.Margin = new Padding(4);
             ckbIgnoreNoBirthDate.Name = "ckbIgnoreNoBirthDate";
-            ckbIgnoreNoBirthDate.Size = new Size(434, 36);
+            ckbIgnoreNoBirthDate.Size = new Size(217, 19);
             ckbIgnoreNoBirthDate.TabIndex = 66;
             ckbIgnoreNoBirthDate.Text = "Ignore Individuals with no birth date";
             ckbIgnoreNoBirthDate.UseVisualStyleBackColor = true;
             // 
             // btnIrishColourCensus
             // 
-            btnIrishColourCensus.Location = new Point(450, 47);
-            btnIrishColourCensus.Margin = new Padding(8, 9, 8, 9);
+            btnIrishColourCensus.Location = new Point(242, 22);
+            btnIrishColourCensus.Margin = new Padding(4);
             btnIrishColourCensus.Name = "btnIrishColourCensus";
-            btnIrishColourCensus.Size = new Size(424, 55);
+            btnIrishColourCensus.Size = new Size(228, 26);
             btnIrishColourCensus.TabIndex = 39;
             btnIrishColourCensus.Text = "View Irish Colour Census Report";
             btnIrishColourCensus.UseVisualStyleBackColor = true;
@@ -1757,10 +1781,10 @@ namespace FTAnalyzer
             // 
             // btnCanadianColourCensus
             // 
-            btnCanadianColourCensus.Location = new Point(450, 118);
-            btnCanadianColourCensus.Margin = new Padding(8, 9, 8, 9);
+            btnCanadianColourCensus.Location = new Point(242, 55);
+            btnCanadianColourCensus.Margin = new Padding(4);
             btnCanadianColourCensus.Name = "btnCanadianColourCensus";
-            btnCanadianColourCensus.Size = new Size(424, 55);
+            btnCanadianColourCensus.Size = new Size(228, 26);
             btnCanadianColourCensus.TabIndex = 41;
             btnCanadianColourCensus.Text = "View Canadian Colour Census Report";
             btnCanadianColourCensus.UseVisualStyleBackColor = true;
@@ -1768,10 +1792,10 @@ namespace FTAnalyzer
             // 
             // btnUKColourCensus
             // 
-            btnUKColourCensus.Location = new Point(13, 47);
-            btnUKColourCensus.Margin = new Padding(8, 9, 8, 9);
+            btnUKColourCensus.Location = new Point(7, 22);
+            btnUKColourCensus.Margin = new Padding(4);
             btnUKColourCensus.Name = "btnUKColourCensus";
-            btnUKColourCensus.Size = new Size(424, 55);
+            btnUKColourCensus.Size = new Size(228, 26);
             btnUKColourCensus.TabIndex = 38;
             btnUKColourCensus.Text = "View UK Colour Census Report";
             btnUKColourCensus.UseVisualStyleBackColor = true;
@@ -1779,10 +1803,10 @@ namespace FTAnalyzer
             // 
             // btnUSColourCensus
             // 
-            btnUSColourCensus.Location = new Point(13, 118);
-            btnUSColourCensus.Margin = new Padding(8, 9, 8, 9);
+            btnUSColourCensus.Location = new Point(7, 55);
+            btnUSColourCensus.Margin = new Padding(4);
             btnUSColourCensus.Name = "btnUSColourCensus";
-            btnUSColourCensus.Size = new Size(424, 55);
+            btnUSColourCensus.Size = new Size(228, 26);
             btnUSColourCensus.TabIndex = 40;
             btnUSColourCensus.Text = "View US Colour Census Report";
             btnUSColourCensus.UseVisualStyleBackColor = true;
@@ -1790,10 +1814,10 @@ namespace FTAnalyzer
             // 
             // btnColourBMD
             // 
-            btnColourBMD.Location = new Point(126, 567);
-            btnColourBMD.Margin = new Padding(8, 9, 8, 9);
+            btnColourBMD.Location = new Point(68, 266);
+            btnColourBMD.Margin = new Padding(4);
             btnColourBMD.Name = "btnColourBMD";
-            btnColourBMD.Size = new Size(665, 55);
+            btnColourBMD.Size = new Size(358, 26);
             btnColourBMD.TabIndex = 42;
             btnColourBMD.Text = "View Colour Birth/Marriage/Death Report";
             btnColourBMD.UseVisualStyleBackColor = true;
@@ -1802,40 +1826,40 @@ namespace FTAnalyzer
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(736, 47);
-            label10.Margin = new Padding(8, 0, 8, 0);
+            label10.Location = new Point(396, 22);
+            label10.Margin = new Padding(4, 0, 4, 0);
             label10.Name = "label10";
-            label10.Size = new Size(109, 32);
+            label10.Size = new Size(54, 15);
             label10.TabIndex = 59;
             label10.Text = "Surname";
             // 
             // txtColouredSurname
             // 
-            txtColouredSurname.Location = new Point(880, 41);
-            txtColouredSurname.Margin = new Padding(8, 9, 8, 9);
+            txtColouredSurname.Location = new Point(474, 19);
+            txtColouredSurname.Margin = new Padding(4);
             txtColouredSurname.Name = "txtColouredSurname";
-            txtColouredSurname.Size = new Size(431, 39);
+            txtColouredSurname.Size = new Size(234, 23);
             txtColouredSurname.TabIndex = 30;
             txtColouredSurname.TextChanged += TxtColouredSurname_TextChanged;
             // 
             // relTypesColoured
             // 
-            relTypesColoured.Location = new Point(17, 20);
-            relTypesColoured.Margin = new Padding(13, 15, 13, 15);
+            relTypesColoured.Location = new Point(9, 9);
+            relTypesColoured.Margin = new Padding(7);
             relTypesColoured.MarriedToDB = true;
             relTypesColoured.Name = "relTypesColoured";
-            relTypesColoured.Size = new Size(704, 251);
+            relTypesColoured.Size = new Size(379, 118);
             relTypesColoured.TabIndex = 26;
             relTypesColoured.RelationTypesChanged += RelTypesColoured_RelationTypesChanged;
             // 
             // tabLostCousins
             // 
             tabLostCousins.Controls.Add(LCSubTabs);
-            tabLostCousins.Location = new Point(8, 46);
-            tabLostCousins.Margin = new Padding(8, 9, 8, 9);
+            tabLostCousins.Location = new Point(4, 24);
+            tabLostCousins.Margin = new Padding(4);
             tabLostCousins.Name = "tabLostCousins";
-            tabLostCousins.Padding = new Padding(8, 9, 8, 9);
-            tabLostCousins.Size = new Size(2298, 1137);
+            tabLostCousins.Padding = new Padding(4);
+            tabLostCousins.Size = new Size(1238, 530);
             tabLostCousins.TabIndex = 5;
             tabLostCousins.Text = "Lost Cousins";
             tabLostCousins.UseVisualStyleBackColor = true;
@@ -1846,11 +1870,11 @@ namespace FTAnalyzer
             LCSubTabs.Controls.Add(LCUpdatesTab);
             LCSubTabs.Controls.Add(LCVerifyTab);
             LCSubTabs.Dock = DockStyle.Fill;
-            LCSubTabs.Location = new Point(8, 9);
-            LCSubTabs.Margin = new Padding(8, 9, 8, 9);
+            LCSubTabs.Location = new Point(4, 4);
+            LCSubTabs.Margin = new Padding(4);
             LCSubTabs.Name = "LCSubTabs";
             LCSubTabs.SelectedIndex = 0;
-            LCSubTabs.Size = new Size(2282, 1119);
+            LCSubTabs.Size = new Size(1230, 522);
             LCSubTabs.TabIndex = 0;
             // 
             // LCReportsTab
@@ -1872,11 +1896,11 @@ namespace FTAnalyzer
             LCReportsTab.Controls.Add(btnLC1881Canada);
             LCReportsTab.Controls.Add(btnLC1881Scot);
             LCReportsTab.Controls.Add(relTypesLC);
-            LCReportsTab.Location = new Point(8, 46);
-            LCReportsTab.Margin = new Padding(8, 9, 8, 9);
+            LCReportsTab.Location = new Point(4, 24);
+            LCReportsTab.Margin = new Padding(4);
             LCReportsTab.Name = "LCReportsTab";
-            LCReportsTab.Padding = new Padding(8, 9, 8, 9);
-            LCReportsTab.Size = new Size(2266, 1065);
+            LCReportsTab.Padding = new Padding(4);
+            LCReportsTab.Size = new Size(1222, 494);
             LCReportsTab.TabIndex = 0;
             LCReportsTab.Text = "Reports";
             LCReportsTab.UseVisualStyleBackColor = true;
@@ -1887,11 +1911,11 @@ namespace FTAnalyzer
             Referrals.Controls.Add(btnReferrals);
             Referrals.Controls.Add(cmbReferrals);
             Referrals.Controls.Add(label11);
-            Referrals.Location = new Point(13, 716);
-            Referrals.Margin = new Padding(8, 9, 8, 9);
+            Referrals.Location = new Point(7, 336);
+            Referrals.Margin = new Padding(4);
             Referrals.Name = "Referrals";
-            Referrals.Padding = new Padding(8, 9, 8, 9);
-            Referrals.Size = new Size(1079, 204);
+            Referrals.Padding = new Padding(4);
+            Referrals.Size = new Size(581, 96);
             Referrals.TabIndex = 40;
             Referrals.TabStop = false;
             Referrals.Text = "Referrals";
@@ -1899,20 +1923,20 @@ namespace FTAnalyzer
             // ckbReferralInCommon
             // 
             ckbReferralInCommon.AutoSize = true;
-            ckbReferralInCommon.Location = new Point(24, 119);
-            ckbReferralInCommon.Margin = new Padding(8, 9, 8, 9);
+            ckbReferralInCommon.Location = new Point(13, 56);
+            ckbReferralInCommon.Margin = new Padding(4);
             ckbReferralInCommon.Name = "ckbReferralInCommon";
-            ckbReferralInCommon.Size = new Size(333, 36);
+            ckbReferralInCommon.Size = new Size(170, 19);
             ckbReferralInCommon.TabIndex = 3;
             ckbReferralInCommon.Text = "Limit to Common Relatives";
             ckbReferralInCommon.UseVisualStyleBackColor = true;
             // 
             // btnReferrals
             // 
-            btnReferrals.Location = new Point(589, 111);
-            btnReferrals.Margin = new Padding(8, 9, 8, 9);
+            btnReferrals.Location = new Point(317, 52);
+            btnReferrals.Margin = new Padding(4);
             btnReferrals.Name = "btnReferrals";
-            btnReferrals.Size = new Size(477, 55);
+            btnReferrals.Size = new Size(257, 26);
             btnReferrals.TabIndex = 2;
             btnReferrals.Text = "Generate Referral Report for this Individual";
             btnReferrals.UseVisualStyleBackColor = true;
@@ -1921,29 +1945,29 @@ namespace FTAnalyzer
             // cmbReferrals
             // 
             cmbReferrals.FormattingEnabled = true;
-            cmbReferrals.Location = new Point(210, 44);
-            cmbReferrals.Margin = new Padding(8, 9, 8, 9);
+            cmbReferrals.Location = new Point(113, 21);
+            cmbReferrals.Margin = new Padding(4);
             cmbReferrals.Name = "cmbReferrals";
-            cmbReferrals.Size = new Size(851, 40);
+            cmbReferrals.Size = new Size(460, 23);
             cmbReferrals.TabIndex = 1;
             cmbReferrals.Click += CmbReferrals_Click;
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(13, 52);
-            label11.Margin = new Padding(8, 0, 8, 0);
+            label11.Location = new Point(7, 24);
+            label11.Margin = new Padding(4, 0, 4, 0);
             label11.Name = "label11";
-            label11.Size = new Size(189, 32);
+            label11.Size = new Size(93, 15);
             label11.TabIndex = 0;
             label11.Text = "Select Individual";
             // 
             // btnLCnoCensus
             // 
-            btnLCnoCensus.Location = new Point(741, 606);
-            btnLCnoCensus.Margin = new Padding(8, 9, 8, 9);
+            btnLCnoCensus.Location = new Point(399, 284);
+            btnLCnoCensus.Margin = new Padding(4);
             btnLCnoCensus.Name = "btnLCnoCensus";
-            btnLCnoCensus.Size = new Size(351, 66);
+            btnLCnoCensus.Size = new Size(189, 31);
             btnLCnoCensus.TabIndex = 39;
             btnLCnoCensus.Text = "Lost Cousins w/bad Census";
             btnLCnoCensus.UseVisualStyleBackColor = true;
@@ -1951,10 +1975,10 @@ namespace FTAnalyzer
             // 
             // btnLCDuplicates
             // 
-            btnLCDuplicates.Location = new Point(377, 606);
-            btnLCDuplicates.Margin = new Padding(8, 9, 8, 9);
+            btnLCDuplicates.Location = new Point(203, 284);
+            btnLCDuplicates.Margin = new Padding(4);
             btnLCDuplicates.Name = "btnLCDuplicates";
-            btnLCDuplicates.Size = new Size(351, 66);
+            btnLCDuplicates.Size = new Size(189, 31);
             btnLCDuplicates.TabIndex = 38;
             btnLCDuplicates.Text = "Lost Cousins Duplicate Facts";
             btnLCDuplicates.UseVisualStyleBackColor = true;
@@ -1962,10 +1986,10 @@ namespace FTAnalyzer
             // 
             // btnLCMissingCountry
             // 
-            btnLCMissingCountry.Location = new Point(13, 606);
-            btnLCMissingCountry.Margin = new Padding(8, 9, 8, 9);
+            btnLCMissingCountry.Location = new Point(7, 284);
+            btnLCMissingCountry.Margin = new Padding(4);
             btnLCMissingCountry.Name = "btnLCMissingCountry";
-            btnLCMissingCountry.Size = new Size(351, 66);
+            btnLCMissingCountry.Size = new Size(189, 31);
             btnLCMissingCountry.TabIndex = 37;
             btnLCMissingCountry.Text = "Lost Cousins with no Country";
             btnLCMissingCountry.UseVisualStyleBackColor = true;
@@ -1973,10 +1997,10 @@ namespace FTAnalyzer
             // 
             // btnLC1940USA
             // 
-            btnLC1940USA.Location = new Point(741, 446);
-            btnLC1940USA.Margin = new Padding(8, 9, 8, 9);
+            btnLC1940USA.Location = new Point(399, 209);
+            btnLC1940USA.Margin = new Padding(4);
             btnLC1940USA.Name = "btnLC1940USA";
-            btnLC1940USA.Size = new Size(351, 66);
+            btnLC1940USA.Size = new Size(189, 31);
             btnLC1940USA.TabIndex = 35;
             btnLC1940USA.Text = "1940 US Census";
             btnLC1940USA.UseVisualStyleBackColor = true;
@@ -1987,11 +2011,11 @@ namespace FTAnalyzer
             rtbLostCousins.BackColor = Color.White;
             rtbLostCousins.BorderStyle = BorderStyle.None;
             rtbLostCousins.Font = new Font("Microsoft Sans Serif", 9F);
-            rtbLostCousins.Location = new Point(1161, 15);
-            rtbLostCousins.Margin = new Padding(8, 9, 8, 9);
+            rtbLostCousins.Location = new Point(625, 7);
+            rtbLostCousins.Margin = new Padding(4);
             rtbLostCousins.Name = "rtbLostCousins";
             rtbLostCousins.ReadOnly = true;
-            rtbLostCousins.Size = new Size(1133, 844);
+            rtbLostCousins.Size = new Size(610, 396);
             rtbLostCousins.TabIndex = 34;
             rtbLostCousins.TabStop = false;
             rtbLostCousins.Text = "";
@@ -2000,10 +2024,10 @@ namespace FTAnalyzer
             // 
             linkLabel2.AutoSize = true;
             linkLabel2.Font = new Font("Microsoft Sans Serif", 9.75F);
-            linkLabel2.Location = new Point(1573, 874);
-            linkLabel2.Margin = new Padding(8, 0, 8, 0);
+            linkLabel2.Location = new Point(847, 410);
+            linkLabel2.Margin = new Padding(4, 0, 4, 0);
             linkLabel2.Name = "linkLabel2";
-            linkLabel2.Size = new Size(341, 30);
+            linkLabel2.Size = new Size(173, 16);
             linkLabel2.TabIndex = 33;
             linkLabel2.TabStop = true;
             linkLabel2.Text = "Visit the Lost Cousins Forum";
@@ -2011,10 +2035,10 @@ namespace FTAnalyzer
             // 
             // btnLC1911EW
             // 
-            btnLC1911EW.Location = new Point(13, 446);
-            btnLC1911EW.Margin = new Padding(8, 9, 8, 9);
+            btnLC1911EW.Location = new Point(7, 209);
+            btnLC1911EW.Margin = new Padding(4);
             btnLC1911EW.Name = "btnLC1911EW";
-            btnLC1911EW.Size = new Size(351, 66);
+            btnLC1911EW.Size = new Size(189, 31);
             btnLC1911EW.TabIndex = 32;
             btnLC1911EW.Text = "1911 England && Wales Census";
             btnLC1911EW.UseVisualStyleBackColor = true;
@@ -2024,10 +2048,10 @@ namespace FTAnalyzer
             // 
             LabLostCousinsWeb.AutoSize = true;
             LabLostCousinsWeb.Font = new Font("Microsoft Sans Serif", 9.75F);
-            LabLostCousinsWeb.Location = new Point(1157, 874);
-            LabLostCousinsWeb.Margin = new Padding(8, 0, 8, 0);
+            LabLostCousinsWeb.Location = new Point(623, 410);
+            LabLostCousinsWeb.Margin = new Padding(4, 0, 4, 0);
             LabLostCousinsWeb.Name = "LabLostCousinsWeb";
-            LabLostCousinsWeb.Size = new Size(359, 30);
+            LabLostCousinsWeb.Size = new Size(185, 16);
             LabLostCousinsWeb.TabIndex = 31;
             LabLostCousinsWeb.TabStop = true;
             LabLostCousinsWeb.Text = "Visit the Lost Cousins Website";
@@ -2037,20 +2061,20 @@ namespace FTAnalyzer
             // ckbShowLCEntered
             // 
             ckbShowLCEntered.AutoSize = true;
-            ckbShowLCEntered.Location = new Point(13, 527);
-            ckbShowLCEntered.Margin = new Padding(8, 9, 8, 9);
+            ckbShowLCEntered.Location = new Point(7, 247);
+            ckbShowLCEntered.Margin = new Padding(4);
             ckbShowLCEntered.Name = "ckbShowLCEntered";
-            ckbShowLCEntered.Size = new Size(933, 36);
+            ckbShowLCEntered.Size = new Size(460, 19);
             ckbShowLCEntered.TabIndex = 30;
             ckbShowLCEntered.Text = "Show already entered to Lost Cousins (unticked = show those to yet to be entered)";
             ckbShowLCEntered.UseVisualStyleBackColor = true;
             // 
             // btnLC1841EW
             // 
-            btnLC1841EW.Location = new Point(13, 364);
-            btnLC1841EW.Margin = new Padding(8, 9, 8, 9);
+            btnLC1841EW.Location = new Point(7, 171);
+            btnLC1841EW.Margin = new Padding(4);
             btnLC1841EW.Name = "btnLC1841EW";
-            btnLC1841EW.Size = new Size(351, 66);
+            btnLC1841EW.Size = new Size(189, 31);
             btnLC1841EW.TabIndex = 29;
             btnLC1841EW.Text = "1841 England && Wales Census";
             btnLC1841EW.UseVisualStyleBackColor = true;
@@ -2058,10 +2082,10 @@ namespace FTAnalyzer
             // 
             // btnLC1911Ireland
             // 
-            btnLC1911Ireland.Location = new Point(377, 364);
-            btnLC1911Ireland.Margin = new Padding(8, 9, 8, 9);
+            btnLC1911Ireland.Location = new Point(203, 171);
+            btnLC1911Ireland.Margin = new Padding(4);
             btnLC1911Ireland.Name = "btnLC1911Ireland";
-            btnLC1911Ireland.Size = new Size(351, 66);
+            btnLC1911Ireland.Size = new Size(189, 31);
             btnLC1911Ireland.TabIndex = 28;
             btnLC1911Ireland.Text = "1911 Ireland Census";
             btnLC1911Ireland.UseVisualStyleBackColor = true;
@@ -2069,10 +2093,10 @@ namespace FTAnalyzer
             // 
             // btnLC1880USA
             // 
-            btnLC1880USA.Location = new Point(741, 364);
-            btnLC1880USA.Margin = new Padding(8, 9, 8, 9);
+            btnLC1880USA.Location = new Point(399, 171);
+            btnLC1880USA.Margin = new Padding(4);
             btnLC1880USA.Name = "btnLC1880USA";
-            btnLC1880USA.Size = new Size(351, 66);
+            btnLC1880USA.Size = new Size(189, 31);
             btnLC1880USA.TabIndex = 27;
             btnLC1880USA.Text = "1880 US Census";
             btnLC1880USA.UseVisualStyleBackColor = true;
@@ -2080,10 +2104,10 @@ namespace FTAnalyzer
             // 
             // btnLC1881EW
             // 
-            btnLC1881EW.Location = new Point(13, 283);
-            btnLC1881EW.Margin = new Padding(8, 9, 8, 9);
+            btnLC1881EW.Location = new Point(7, 133);
+            btnLC1881EW.Margin = new Padding(4);
             btnLC1881EW.Name = "btnLC1881EW";
-            btnLC1881EW.Size = new Size(351, 66);
+            btnLC1881EW.Size = new Size(189, 31);
             btnLC1881EW.TabIndex = 26;
             btnLC1881EW.Text = "1881 England && Wales Census";
             btnLC1881EW.UseVisualStyleBackColor = true;
@@ -2091,10 +2115,10 @@ namespace FTAnalyzer
             // 
             // btnLC1881Canada
             // 
-            btnLC1881Canada.Location = new Point(377, 446);
-            btnLC1881Canada.Margin = new Padding(8, 9, 8, 9);
+            btnLC1881Canada.Location = new Point(203, 209);
+            btnLC1881Canada.Margin = new Padding(4);
             btnLC1881Canada.Name = "btnLC1881Canada";
-            btnLC1881Canada.Size = new Size(351, 66);
+            btnLC1881Canada.Size = new Size(189, 31);
             btnLC1881Canada.TabIndex = 25;
             btnLC1881Canada.Text = "1881 Canada Census";
             btnLC1881Canada.UseVisualStyleBackColor = true;
@@ -2102,10 +2126,10 @@ namespace FTAnalyzer
             // 
             // btnLC1881Scot
             // 
-            btnLC1881Scot.Location = new Point(377, 283);
-            btnLC1881Scot.Margin = new Padding(8, 9, 8, 9);
+            btnLC1881Scot.Location = new Point(203, 133);
+            btnLC1881Scot.Margin = new Padding(4);
             btnLC1881Scot.Name = "btnLC1881Scot";
-            btnLC1881Scot.Size = new Size(351, 66);
+            btnLC1881Scot.Size = new Size(189, 31);
             btnLC1881Scot.TabIndex = 24;
             btnLC1881Scot.Text = "1881 Scotland Census";
             btnLC1881Scot.UseVisualStyleBackColor = true;
@@ -2113,11 +2137,11 @@ namespace FTAnalyzer
             // 
             // relTypesLC
             // 
-            relTypesLC.Location = new Point(13, 15);
-            relTypesLC.Margin = new Padding(13, 15, 13, 15);
+            relTypesLC.Location = new Point(7, 7);
+            relTypesLC.Margin = new Padding(7);
             relTypesLC.MarriedToDB = true;
             relTypesLC.Name = "relTypesLC";
-            relTypesLC.Size = new Size(704, 254);
+            relTypesLC.Size = new Size(379, 119);
             relTypesLC.TabIndex = 36;
             relTypesLC.RelationTypesChanged += RelTypesLC_RelationTypesChanged;
             // 
@@ -2131,11 +2155,11 @@ namespace FTAnalyzer
             LCUpdatesTab.Controls.Add(rtbLCUpdateData);
             LCUpdatesTab.Controls.Add(groupBox8);
             LCUpdatesTab.Controls.Add(btnUpdateLostCousinsWebsite);
-            LCUpdatesTab.Location = new Point(8, 46);
-            LCUpdatesTab.Margin = new Padding(8, 9, 8, 9);
+            LCUpdatesTab.Location = new Point(4, 24);
+            LCUpdatesTab.Margin = new Padding(4);
             LCUpdatesTab.Name = "LCUpdatesTab";
-            LCUpdatesTab.Padding = new Padding(8, 9, 8, 9);
-            LCUpdatesTab.Size = new Size(2266, 1065);
+            LCUpdatesTab.Padding = new Padding(4);
+            LCUpdatesTab.Size = new Size(1222, 494);
             LCUpdatesTab.TabIndex = 1;
             LCUpdatesTab.Text = "Updates";
             LCUpdatesTab.UseVisualStyleBackColor = true;
@@ -2144,11 +2168,11 @@ namespace FTAnalyzer
             // 
             rtbLCoutput.BackColor = SystemColors.Window;
             rtbLCoutput.Font = new Font("Microsoft Sans Serif", 9F);
-            rtbLCoutput.Location = new Point(8, 500);
-            rtbLCoutput.Margin = new Padding(8, 9, 8, 9);
+            rtbLCoutput.Location = new Point(4, 234);
+            rtbLCoutput.Margin = new Padding(4);
             rtbLCoutput.Name = "rtbLCoutput";
             rtbLCoutput.ReadOnly = true;
-            rtbLCoutput.Size = new Size(2266, 545);
+            rtbLCoutput.Size = new Size(1222, 258);
             rtbLCoutput.TabIndex = 41;
             rtbLCoutput.TabStop = false;
             rtbLCoutput.Text = resources.GetString("rtbLCoutput.Text");
@@ -2156,10 +2180,10 @@ namespace FTAnalyzer
             // 
             // btnViewInvalidRefs
             // 
-            btnViewInvalidRefs.Location = new Point(329, 428);
-            btnViewInvalidRefs.Margin = new Padding(8, 9, 8, 9);
+            btnViewInvalidRefs.Location = new Point(177, 201);
+            btnViewInvalidRefs.Margin = new Padding(4);
             btnViewInvalidRefs.Name = "btnViewInvalidRefs";
-            btnViewInvalidRefs.Size = new Size(299, 55);
+            btnViewInvalidRefs.Size = new Size(161, 26);
             btnViewInvalidRefs.TabIndex = 40;
             btnViewInvalidRefs.Text = "View Invalid Census Refs";
             btnViewInvalidRefs.UseVisualStyleBackColor = true;
@@ -2167,10 +2191,10 @@ namespace FTAnalyzer
             // 
             // btnLCPotentialUploads
             // 
-            btnLCPotentialUploads.Location = new Point(13, 428);
-            btnLCPotentialUploads.Margin = new Padding(8, 9, 8, 9);
+            btnLCPotentialUploads.Location = new Point(7, 201);
+            btnLCPotentialUploads.Margin = new Padding(4);
             btnLCPotentialUploads.Name = "btnLCPotentialUploads";
-            btnLCPotentialUploads.Size = new Size(299, 55);
+            btnLCPotentialUploads.Size = new Size(161, 26);
             btnLCPotentialUploads.TabIndex = 39;
             btnLCPotentialUploads.Text = "View Potential Uploads";
             btnLCPotentialUploads.UseVisualStyleBackColor = true;
@@ -2180,10 +2204,10 @@ namespace FTAnalyzer
             // 
             label21.AutoSize = true;
             label21.Font = new Font("Microsoft Sans Serif", 9.75F);
-            label21.Location = new Point(1014, 30);
-            label21.Margin = new Padding(8, 0, 8, 0);
+            label21.Location = new Point(546, 14);
+            label21.Margin = new Padding(4, 0, 4, 0);
             label21.Name = "label21";
-            label21.Size = new Size(735, 30);
+            label21.Size = new Size(382, 16);
             label21.TabIndex = 37;
             label21.Text = "Census Records with valid Reference to upload to Lost Cousins";
             // 
@@ -2193,11 +2217,11 @@ namespace FTAnalyzer
             rtbLCUpdateData.BorderStyle = BorderStyle.None;
             rtbLCUpdateData.Font = new Font("Microsoft Sans Serif", 9F);
             rtbLCUpdateData.ForeColor = Color.Red;
-            rtbLCUpdateData.Location = new Point(1022, 76);
-            rtbLCUpdateData.Margin = new Padding(8, 9, 8, 9);
+            rtbLCUpdateData.Location = new Point(550, 36);
+            rtbLCUpdateData.Margin = new Padding(4);
             rtbLCUpdateData.Name = "rtbLCUpdateData";
             rtbLCUpdateData.ReadOnly = true;
-            rtbLCUpdateData.Size = new Size(847, 416);
+            rtbLCUpdateData.Size = new Size(456, 195);
             rtbLCUpdateData.TabIndex = 36;
             rtbLCUpdateData.TabStop = false;
             rtbLCUpdateData.Text = "Please Login to see data to update";
@@ -2210,11 +2234,11 @@ namespace FTAnalyzer
             groupBox8.Controls.Add(txtLCEmail);
             groupBox8.Controls.Add(txtLCPassword);
             groupBox8.Font = new Font("Microsoft Sans Serif", 9.75F);
-            groupBox8.Location = new Point(65, 54);
-            groupBox8.Margin = new Padding(8, 9, 8, 9);
+            groupBox8.Location = new Point(35, 25);
+            groupBox8.Margin = new Padding(4);
             groupBox8.Name = "groupBox8";
-            groupBox8.Padding = new Padding(8, 9, 8, 9);
-            groupBox8.Size = new Size(882, 290);
+            groupBox8.Padding = new Padding(4);
+            groupBox8.Size = new Size(475, 136);
             groupBox8.TabIndex = 1;
             groupBox8.TabStop = false;
             groupBox8.Text = "Lost Cousins Login Details";
@@ -2222,10 +2246,10 @@ namespace FTAnalyzer
             // btnLCLogin
             // 
             btnLCLogin.BackColor = Color.Red;
-            btnLCLogin.Location = new Point(672, 169);
-            btnLCLogin.Margin = new Padding(8, 9, 8, 9);
+            btnLCLogin.Location = new Point(362, 79);
+            btnLCLogin.Margin = new Padding(4);
             btnLCLogin.Name = "btnLCLogin";
-            btnLCLogin.Size = new Size(164, 62);
+            btnLCLogin.Size = new Size(88, 29);
             btnLCLogin.TabIndex = 3;
             btnLCLogin.Text = "Login";
             btnLCLogin.UseVisualStyleBackColor = false;
@@ -2234,10 +2258,10 @@ namespace FTAnalyzer
             // label20
             // 
             label20.AutoSize = true;
-            label20.Location = new Point(74, 177);
-            label20.Margin = new Padding(8, 0, 8, 0);
+            label20.Location = new Point(40, 83);
+            label20.Margin = new Padding(4, 0, 4, 0);
             label20.Name = "label20";
-            label20.Size = new Size(126, 30);
+            label20.Size = new Size(67, 16);
             label20.TabIndex = 3;
             label20.Text = "Password";
             label20.TextAlign = ContentAlignment.TopRight;
@@ -2246,30 +2270,30 @@ namespace FTAnalyzer
             // 
             label19.AutoSize = true;
             label19.Font = new Font("Microsoft Sans Serif", 9.75F);
-            label19.Location = new Point(13, 76);
-            label19.Margin = new Padding(8, 0, 8, 0);
+            label19.Location = new Point(7, 36);
+            label19.Margin = new Padding(4, 0, 4, 0);
             label19.Name = "label19";
-            label19.Size = new Size(179, 30);
+            label19.Size = new Size(95, 16);
             label19.TabIndex = 2;
             label19.Text = "Email Address";
             label19.TextAlign = ContentAlignment.TopRight;
             // 
             // txtLCEmail
             // 
-            txtLCEmail.Location = new Point(234, 69);
-            txtLCEmail.Margin = new Padding(8, 9, 8, 9);
+            txtLCEmail.Location = new Point(126, 32);
+            txtLCEmail.Margin = new Padding(4);
             txtLCEmail.Name = "txtLCEmail";
-            txtLCEmail.Size = new Size(597, 37);
+            txtLCEmail.Size = new Size(323, 22);
             txtLCEmail.TabIndex = 1;
             txtLCEmail.TextChanged += TxtLCEmail_TextChanged;
             // 
             // txtLCPassword
             // 
-            txtLCPassword.Location = new Point(234, 170);
-            txtLCPassword.Margin = new Padding(8, 9, 8, 9);
+            txtLCPassword.Location = new Point(126, 80);
+            txtLCPassword.Margin = new Padding(4);
             txtLCPassword.Name = "txtLCPassword";
             txtLCPassword.PasswordChar = '*';
-            txtLCPassword.Size = new Size(420, 37);
+            txtLCPassword.Size = new Size(228, 22);
             txtLCPassword.TabIndex = 2;
             txtLCPassword.TextChanged += TxtLCPassword_TextChanged;
             // 
@@ -2279,10 +2303,10 @@ namespace FTAnalyzer
             LCVerifyTab.Controls.Add(dgCheckAncestors);
             LCVerifyTab.Controls.Add(btnCheckMyAncestors);
             LCVerifyTab.Controls.Add(lblCheckAncestors);
-            LCVerifyTab.Location = new Point(8, 46);
-            LCVerifyTab.Margin = new Padding(8, 9, 8, 9);
+            LCVerifyTab.Location = new Point(4, 24);
+            LCVerifyTab.Margin = new Padding(4);
             LCVerifyTab.Name = "LCVerifyTab";
-            LCVerifyTab.Size = new Size(2266, 1065);
+            LCVerifyTab.Size = new Size(1222, 494);
             LCVerifyTab.TabIndex = 2;
             LCVerifyTab.Text = "Verification";
             LCVerifyTab.UseVisualStyleBackColor = true;
@@ -2293,11 +2317,11 @@ namespace FTAnalyzer
             rtbCheckAncestors.BorderStyle = BorderStyle.None;
             rtbCheckAncestors.Font = new Font("Microsoft Sans Serif", 9F);
             rtbCheckAncestors.ForeColor = Color.Red;
-            rtbCheckAncestors.Location = new Point(724, 30);
-            rtbCheckAncestors.Margin = new Padding(8, 9, 8, 9);
+            rtbCheckAncestors.Location = new Point(390, 14);
+            rtbCheckAncestors.Margin = new Padding(4);
             rtbCheckAncestors.Name = "rtbCheckAncestors";
             rtbCheckAncestors.ReadOnly = true;
-            rtbCheckAncestors.Size = new Size(1550, 162);
+            rtbCheckAncestors.Size = new Size(835, 76);
             rtbCheckAncestors.TabIndex = 37;
             rtbCheckAncestors.TabStop = false;
             rtbCheckAncestors.Text = "Please Login to see data to update";
@@ -2306,10 +2330,10 @@ namespace FTAnalyzer
             // btnCheckMyAncestors
             // 
             btnCheckMyAncestors.BackColor = Color.Red;
-            btnCheckMyAncestors.Location = new Point(34, 98);
-            btnCheckMyAncestors.Margin = new Padding(8, 9, 8, 9);
+            btnCheckMyAncestors.Location = new Point(18, 46);
+            btnCheckMyAncestors.Margin = new Padding(4);
             btnCheckMyAncestors.Name = "btnCheckMyAncestors";
-            btnCheckMyAncestors.Size = new Size(535, 55);
+            btnCheckMyAncestors.Size = new Size(288, 26);
             btnCheckMyAncestors.TabIndex = 1;
             btnCheckMyAncestors.Text = "Load My Ancestors Page to check for Errors";
             btnCheckMyAncestors.UseVisualStyleBackColor = false;
@@ -2319,10 +2343,10 @@ namespace FTAnalyzer
             // 
             lblCheckAncestors.AutoSize = true;
             lblCheckAncestors.Font = new Font("Microsoft Sans Serif", 9.75F);
-            lblCheckAncestors.Location = new Point(26, 30);
-            lblCheckAncestors.Margin = new Padding(8, 0, 8, 0);
+            lblCheckAncestors.Location = new Point(14, 14);
+            lblCheckAncestors.Margin = new Padding(4, 0, 4, 0);
             lblCheckAncestors.Name = "lblCheckAncestors";
-            lblCheckAncestors.Size = new Size(601, 30);
+            lblCheckAncestors.Size = new Size(315, 16);
             lblCheckAncestors.TabIndex = 0;
             lblCheckAncestors.Text = "Not Currently Logged in Use Updates Page to Login";
             // 
@@ -2330,11 +2354,11 @@ namespace FTAnalyzer
             // 
             tabCensus.Controls.Add(groupBox2);
             tabCensus.Controls.Add(groupBox9);
-            tabCensus.Location = new Point(8, 46);
-            tabCensus.Margin = new Padding(8, 9, 8, 9);
+            tabCensus.Location = new Point(4, 24);
+            tabCensus.Margin = new Padding(4);
             tabCensus.Name = "tabCensus";
-            tabCensus.Padding = new Padding(8, 9, 8, 9);
-            tabCensus.Size = new Size(2298, 1137);
+            tabCensus.Padding = new Padding(4);
+            tabCensus.Size = new Size(1238, 530);
             tabCensus.TabIndex = 0;
             tabCensus.Text = "Census";
             tabCensus.UseVisualStyleBackColor = true;
@@ -2354,21 +2378,21 @@ namespace FTAnalyzer
             groupBox2.Controls.Add(udAgeFilter);
             groupBox2.Controls.Add(cenDate);
             groupBox2.Controls.Add(relTypesCensus);
-            groupBox2.Location = new Point(17, 15);
-            groupBox2.Margin = new Padding(8, 9, 8, 9);
+            groupBox2.Location = new Point(9, 7);
+            groupBox2.Margin = new Padding(4);
             groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(8, 9, 8, 9);
-            groupBox2.Size = new Size(2088, 714);
+            groupBox2.Padding = new Padding(4);
+            groupBox2.Size = new Size(1124, 335);
             groupBox2.TabIndex = 23;
             groupBox2.TabStop = false;
             groupBox2.Text = "Census Search Reports";
             // 
             // btnAliveOnDate
             // 
-            btnAliveOnDate.Location = new Point(1393, 305);
-            btnAliveOnDate.Margin = new Padding(8, 9, 8, 9);
+            btnAliveOnDate.Location = new Point(750, 143);
+            btnAliveOnDate.Margin = new Padding(4);
             btnAliveOnDate.Name = "btnAliveOnDate";
-            btnAliveOnDate.Size = new Size(650, 62);
+            btnAliveOnDate.Size = new Size(350, 29);
             btnAliveOnDate.TabIndex = 41;
             btnAliveOnDate.Text = "Show Individuals possibly alive on above date(s)";
             btnAliveOnDate.UseVisualStyleBackColor = true;
@@ -2376,10 +2400,10 @@ namespace FTAnalyzer
             // 
             // txtAliveDates
             // 
-            txtAliveDates.Location = new Point(1542, 207);
-            txtAliveDates.Margin = new Padding(8, 9, 8, 9);
+            txtAliveDates.Location = new Point(830, 97);
+            txtAliveDates.Margin = new Padding(4);
             txtAliveDates.Name = "txtAliveDates";
-            txtAliveDates.Size = new Size(498, 39);
+            txtAliveDates.Size = new Size(270, 23);
             txtAliveDates.TabIndex = 40;
             txtAliveDates.Text = "Enter valid GEDCOM date/date range";
             txtAliveDates.Enter += TxtAliveDates_Enter;
@@ -2388,10 +2412,10 @@ namespace FTAnalyzer
             // label22
             // 
             label22.AutoSize = true;
-            label22.Location = new Point(1387, 214);
-            label22.Margin = new Padding(8, 0, 8, 0);
+            label22.Location = new Point(747, 100);
+            label22.Margin = new Padding(4, 0, 4, 0);
             label22.Name = "label22";
-            label22.Size = new Size(145, 32);
+            label22.Size = new Size(71, 15);
             label22.TabIndex = 39;
             label22.Text = "Alive Dates: ";
             // 
@@ -2400,11 +2424,11 @@ namespace FTAnalyzer
             chkAnyCensusYear.AutoSize = true;
             chkAnyCensusYear.Checked = true;
             chkAnyCensusYear.CheckState = CheckState.Checked;
-            chkAnyCensusYear.Location = new Point(736, 318);
-            chkAnyCensusYear.Margin = new Padding(8, 9, 8, 9);
+            chkAnyCensusYear.Location = new Point(396, 149);
+            chkAnyCensusYear.Margin = new Padding(4);
             chkAnyCensusYear.Name = "chkAnyCensusYear";
             chkAnyCensusYear.RightToLeft = RightToLeft.Yes;
-            chkAnyCensusYear.Size = new Size(631, 36);
+            chkAnyCensusYear.Size = new Size(314, 19);
             chkAnyCensusYear.TabIndex = 36;
             chkAnyCensusYear.Text = "Include ALL census years for Census Reference reports ";
             chkAnyCensusYear.UseVisualStyleBackColor = true;
@@ -2415,21 +2439,21 @@ namespace FTAnalyzer
             groupBox10.Controls.Add(btnShowCensusEntered);
             groupBox10.Controls.Add(btnRandomSurnameEntered);
             groupBox10.Controls.Add(btnRandomSurnameMissing);
-            groupBox10.Location = new Point(21, 386);
-            groupBox10.Margin = new Padding(8, 9, 8, 9);
+            groupBox10.Location = new Point(11, 181);
+            groupBox10.Margin = new Padding(4);
             groupBox10.Name = "groupBox10";
-            groupBox10.Padding = new Padding(8, 9, 8, 9);
-            groupBox10.Size = new Size(2054, 155);
+            groupBox10.Padding = new Padding(4);
+            groupBox10.Size = new Size(1106, 73);
             groupBox10.TabIndex = 35;
             groupBox10.TabStop = false;
             groupBox10.Text = "Census Record Reports";
             // 
             // btnShowCensusMissing
             // 
-            btnShowCensusMissing.Location = new Point(13, 54);
-            btnShowCensusMissing.Margin = new Padding(8, 9, 8, 9);
+            btnShowCensusMissing.Location = new Point(7, 25);
+            btnShowCensusMissing.Margin = new Padding(4);
             btnShowCensusMissing.Name = "btnShowCensusMissing";
-            btnShowCensusMissing.Size = new Size(325, 62);
+            btnShowCensusMissing.Size = new Size(175, 29);
             btnShowCensusMissing.TabIndex = 39;
             btnShowCensusMissing.Text = "Show Not Found on Census";
             btnShowCensusMissing.UseVisualStyleBackColor = true;
@@ -2437,10 +2461,10 @@ namespace FTAnalyzer
             // 
             // btnShowCensusEntered
             // 
-            btnShowCensusEntered.Location = new Point(351, 54);
-            btnShowCensusEntered.Margin = new Padding(8, 9, 8, 9);
+            btnShowCensusEntered.Location = new Point(189, 25);
+            btnShowCensusEntered.Margin = new Padding(4);
             btnShowCensusEntered.Name = "btnShowCensusEntered";
-            btnShowCensusEntered.Size = new Size(334, 62);
+            btnShowCensusEntered.Size = new Size(180, 29);
             btnShowCensusEntered.TabIndex = 38;
             btnShowCensusEntered.Text = "Show Found on Census";
             btnShowCensusEntered.UseVisualStyleBackColor = true;
@@ -2448,10 +2472,10 @@ namespace FTAnalyzer
             // 
             // btnRandomSurnameEntered
             // 
-            btnRandomSurnameEntered.Location = new Point(698, 54);
-            btnRandomSurnameEntered.Margin = new Padding(8, 9, 8, 9);
+            btnRandomSurnameEntered.Location = new Point(376, 25);
+            btnRandomSurnameEntered.Margin = new Padding(4);
             btnRandomSurnameEntered.Name = "btnRandomSurnameEntered";
-            btnRandomSurnameEntered.Size = new Size(650, 62);
+            btnRandomSurnameEntered.Size = new Size(350, 29);
             btnRandomSurnameEntered.TabIndex = 37;
             btnRandomSurnameEntered.Text = "Show Found Random Surname from Direct Ancestors";
             btnRandomSurnameEntered.UseVisualStyleBackColor = true;
@@ -2459,10 +2483,10 @@ namespace FTAnalyzer
             // 
             // btnRandomSurnameMissing
             // 
-            btnRandomSurnameMissing.Location = new Point(1374, 54);
-            btnRandomSurnameMissing.Margin = new Padding(8, 9, 8, 9);
+            btnRandomSurnameMissing.Location = new Point(740, 25);
+            btnRandomSurnameMissing.Margin = new Padding(4);
             btnRandomSurnameMissing.Name = "btnRandomSurnameMissing";
-            btnRandomSurnameMissing.Size = new Size(652, 62);
+            btnRandomSurnameMissing.Size = new Size(351, 29);
             btnRandomSurnameMissing.TabIndex = 36;
             btnRandomSurnameMissing.Text = "Show Not Found Random Surname from Direct Ancestors";
             btnRandomSurnameMissing.UseVisualStyleBackColor = true;
@@ -2475,21 +2499,21 @@ namespace FTAnalyzer
             groupBox4.Controls.Add(btnIncompleteCensusRef);
             groupBox4.Controls.Add(btnMissingCensusRefs);
             groupBox4.Controls.Add(btnCensusRefs);
-            groupBox4.Location = new Point(21, 556);
-            groupBox4.Margin = new Padding(8, 9, 8, 9);
+            groupBox4.Location = new Point(11, 261);
+            groupBox4.Margin = new Padding(4);
             groupBox4.Name = "groupBox4";
-            groupBox4.Padding = new Padding(8, 9, 8, 9);
-            groupBox4.Size = new Size(2054, 130);
+            groupBox4.Padding = new Padding(4);
+            groupBox4.Size = new Size(1106, 61);
             groupBox4.TabIndex = 34;
             groupBox4.TabStop = false;
             groupBox4.Text = "Census Reference Reports";
             // 
             // btnInconsistentLocations
             // 
-            btnInconsistentLocations.Location = new Point(1374, 47);
-            btnInconsistentLocations.Margin = new Padding(8, 9, 8, 9);
+            btnInconsistentLocations.Location = new Point(740, 22);
+            btnInconsistentLocations.Margin = new Padding(4);
             btnInconsistentLocations.Name = "btnInconsistentLocations";
-            btnInconsistentLocations.Size = new Size(652, 62);
+            btnInconsistentLocations.Size = new Size(351, 29);
             btnInconsistentLocations.TabIndex = 29;
             btnInconsistentLocations.Text = "Inconsistent census locations for families with same census ref";
             btnInconsistentLocations.UseVisualStyleBackColor = true;
@@ -2497,10 +2521,10 @@ namespace FTAnalyzer
             // 
             // btnUnrecognisedCensusRef
             // 
-            btnUnrecognisedCensusRef.Location = new Point(698, 47);
-            btnUnrecognisedCensusRef.Margin = new Padding(8, 9, 8, 9);
+            btnUnrecognisedCensusRef.Location = new Point(376, 22);
+            btnUnrecognisedCensusRef.Margin = new Padding(4);
             btnUnrecognisedCensusRef.Name = "btnUnrecognisedCensusRef";
-            btnUnrecognisedCensusRef.Size = new Size(312, 62);
+            btnUnrecognisedCensusRef.Size = new Size(168, 29);
             btnUnrecognisedCensusRef.TabIndex = 8;
             btnUnrecognisedCensusRef.Text = "Unrecognised Census Refs";
             btnUnrecognisedCensusRef.UseVisualStyleBackColor = true;
@@ -2508,10 +2532,10 @@ namespace FTAnalyzer
             // 
             // btnIncompleteCensusRef
             // 
-            btnIncompleteCensusRef.Location = new Point(351, 47);
-            btnIncompleteCensusRef.Margin = new Padding(8, 9, 8, 9);
+            btnIncompleteCensusRef.Location = new Point(189, 22);
+            btnIncompleteCensusRef.Margin = new Padding(4);
             btnIncompleteCensusRef.Name = "btnIncompleteCensusRef";
-            btnIncompleteCensusRef.Size = new Size(334, 62);
+            btnIncompleteCensusRef.Size = new Size(180, 29);
             btnIncompleteCensusRef.TabIndex = 7;
             btnIncompleteCensusRef.Text = "Incomplete Census Refs";
             btnIncompleteCensusRef.UseVisualStyleBackColor = true;
@@ -2519,10 +2543,10 @@ namespace FTAnalyzer
             // 
             // btnMissingCensusRefs
             // 
-            btnMissingCensusRefs.Location = new Point(1023, 47);
-            btnMissingCensusRefs.Margin = new Padding(8, 9, 8, 9);
+            btnMissingCensusRefs.Location = new Point(551, 22);
+            btnMissingCensusRefs.Margin = new Padding(4);
             btnMissingCensusRefs.Name = "btnMissingCensusRefs";
-            btnMissingCensusRefs.Size = new Size(325, 62);
+            btnMissingCensusRefs.Size = new Size(175, 29);
             btnMissingCensusRefs.TabIndex = 6;
             btnMissingCensusRefs.Text = "Missing Census Refs";
             btnMissingCensusRefs.UseVisualStyleBackColor = true;
@@ -2530,10 +2554,10 @@ namespace FTAnalyzer
             // 
             // btnCensusRefs
             // 
-            btnCensusRefs.Location = new Point(13, 47);
-            btnCensusRefs.Margin = new Padding(8, 9, 8, 9);
+            btnCensusRefs.Location = new Point(7, 22);
+            btnCensusRefs.Margin = new Padding(4);
             btnCensusRefs.Name = "btnCensusRefs";
-            btnCensusRefs.Size = new Size(325, 62);
+            btnCensusRefs.Size = new Size(175, 29);
             btnCensusRefs.TabIndex = 5;
             btnCensusRefs.Text = "Good Census Refs";
             btnCensusRefs.UseVisualStyleBackColor = true;
@@ -2542,11 +2566,11 @@ namespace FTAnalyzer
             // chkExcludeUnknownBirths
             // 
             chkExcludeUnknownBirths.AutoSize = true;
-            chkExcludeUnknownBirths.Location = new Point(737, 155);
-            chkExcludeUnknownBirths.Margin = new Padding(8, 9, 8, 9);
+            chkExcludeUnknownBirths.Location = new Point(397, 73);
+            chkExcludeUnknownBirths.Margin = new Padding(4);
             chkExcludeUnknownBirths.Name = "chkExcludeUnknownBirths";
             chkExcludeUnknownBirths.RightToLeft = RightToLeft.Yes;
-            chkExcludeUnknownBirths.Size = new Size(527, 36);
+            chkExcludeUnknownBirths.Size = new Size(265, 19);
             chkExcludeUnknownBirths.TabIndex = 31;
             chkExcludeUnknownBirths.Text = "Exclude Individuals with unknown birth dates";
             chkExcludeUnknownBirths.UseVisualStyleBackColor = true;
@@ -2554,39 +2578,39 @@ namespace FTAnalyzer
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(1387, 96);
-            label1.Margin = new Padding(8, 0, 8, 0);
+            label1.Location = new Point(747, 45);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(109, 32);
+            label1.Size = new Size(54, 15);
             label1.TabIndex = 30;
             label1.Text = "Surname";
             // 
             // txtCensusSurname
             // 
-            txtCensusSurname.Location = new Point(1542, 87);
-            txtCensusSurname.Margin = new Padding(8, 9, 8, 9);
+            txtCensusSurname.Location = new Point(830, 41);
+            txtCensusSurname.Margin = new Padding(4);
             txtCensusSurname.Name = "txtCensusSurname";
-            txtCensusSurname.Size = new Size(498, 39);
+            txtCensusSurname.Size = new Size(270, 23);
             txtCensusSurname.TabIndex = 29;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(737, 96);
-            label2.Margin = new Padding(8, 0, 8, 0);
+            label2.Location = new Point(397, 45);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(394, 32);
+            label2.Size = new Size(193, 15);
             label2.TabIndex = 26;
             label2.Text = "Exclude individuals over the age of ";
             // 
             // udAgeFilter
             // 
-            udAgeFilter.Location = new Point(1171, 94);
-            udAgeFilter.Margin = new Padding(8, 9, 8, 9);
+            udAgeFilter.Location = new Point(631, 44);
+            udAgeFilter.Margin = new Padding(4);
             udAgeFilter.Maximum = new decimal(new int[] { 110, 0, 0, 0 });
             udAgeFilter.Minimum = new decimal(new int[] { 60, 0, 0, 0 });
             udAgeFilter.Name = "udAgeFilter";
-            udAgeFilter.Size = new Size(93, 39);
+            udAgeFilter.Size = new Size(50, 23);
             udAgeFilter.TabIndex = 25;
             udAgeFilter.Value = new decimal(new int[] { 90, 0, 0, 0 });
             // 
@@ -2595,19 +2619,19 @@ namespace FTAnalyzer
             cenDate.AutoSize = true;
             cenDate.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             cenDate.Country = "Scotland";
-            cenDate.Location = new Point(27, 299);
-            cenDate.Margin = new Padding(12);
+            cenDate.Location = new Point(15, 140);
+            cenDate.Margin = new Padding(6);
             cenDate.Name = "cenDate";
-            cenDate.Size = new Size(275, 54);
+            cenDate.Size = new Size(150, 31);
             cenDate.TabIndex = 28;
             // 
             // relTypesCensus
             // 
-            relTypesCensus.Location = new Point(21, 47);
-            relTypesCensus.Margin = new Padding(13, 15, 13, 15);
+            relTypesCensus.Location = new Point(11, 22);
+            relTypesCensus.Margin = new Padding(7);
             relTypesCensus.MarriedToDB = true;
             relTypesCensus.Name = "relTypesCensus";
-            relTypesCensus.Size = new Size(704, 244);
+            relTypesCensus.Size = new Size(379, 114);
             relTypesCensus.TabIndex = 27;
             // 
             // groupBox9
@@ -2616,11 +2640,11 @@ namespace FTAnalyzer
             groupBox9.Controls.Add(groupBox1);
             groupBox9.Controls.Add(groupBox5);
             groupBox9.Controls.Add(groupBox6);
-            groupBox9.Location = new Point(17, 788);
-            groupBox9.Margin = new Padding(8, 9, 8, 9);
+            groupBox9.Location = new Point(9, 369);
+            groupBox9.Margin = new Padding(4);
             groupBox9.Name = "groupBox9";
-            groupBox9.Padding = new Padding(8, 9, 8, 9);
-            groupBox9.Size = new Size(2088, 197);
+            groupBox9.Padding = new Padding(4);
+            groupBox9.Size = new Size(1124, 92);
             groupBox9.TabIndex = 32;
             groupBox9.TabStop = false;
             groupBox9.Text = "Census Reports that don't use filters above";
@@ -2629,21 +2653,21 @@ namespace FTAnalyzer
             // 
             groupBox11.Controls.Add(BtnAutoCreatedCensusFacts);
             groupBox11.Controls.Add(BtnProblemCensusFacts);
-            groupBox11.Location = new Point(1380, 47);
-            groupBox11.Margin = new Padding(8, 9, 8, 9);
+            groupBox11.Location = new Point(743, 22);
+            groupBox11.Margin = new Padding(4);
             groupBox11.Name = "groupBox11";
-            groupBox11.Padding = new Padding(8, 9, 8, 9);
-            groupBox11.Size = new Size(693, 145);
+            groupBox11.Padding = new Padding(4);
+            groupBox11.Size = new Size(373, 68);
             groupBox11.TabIndex = 33;
             groupBox11.TabStop = false;
             groupBox11.Text = "Census Facts";
             // 
             // BtnAutoCreatedCensusFacts
             // 
-            BtnAutoCreatedCensusFacts.Location = new Point(355, 52);
-            BtnAutoCreatedCensusFacts.Margin = new Padding(8, 9, 8, 9);
+            BtnAutoCreatedCensusFacts.Location = new Point(191, 24);
+            BtnAutoCreatedCensusFacts.Margin = new Padding(4);
             BtnAutoCreatedCensusFacts.Name = "BtnAutoCreatedCensusFacts";
-            BtnAutoCreatedCensusFacts.Size = new Size(325, 55);
+            BtnAutoCreatedCensusFacts.Size = new Size(175, 26);
             BtnAutoCreatedCensusFacts.TabIndex = 39;
             BtnAutoCreatedCensusFacts.Text = "Auto Created Census Facts";
             BtnAutoCreatedCensusFacts.UseVisualStyleBackColor = true;
@@ -2651,10 +2675,10 @@ namespace FTAnalyzer
             // 
             // BtnProblemCensusFacts
             // 
-            BtnProblemCensusFacts.Location = new Point(13, 52);
-            BtnProblemCensusFacts.Margin = new Padding(8, 9, 8, 9);
+            BtnProblemCensusFacts.Location = new Point(7, 24);
+            BtnProblemCensusFacts.Margin = new Padding(4);
             BtnProblemCensusFacts.Name = "BtnProblemCensusFacts";
-            BtnProblemCensusFacts.Size = new Size(325, 55);
+            BtnProblemCensusFacts.Size = new Size(175, 26);
             BtnProblemCensusFacts.TabIndex = 38;
             BtnProblemCensusFacts.Text = "Problem Census Facts";
             BtnProblemCensusFacts.UseVisualStyleBackColor = true;
@@ -2664,21 +2688,21 @@ namespace FTAnalyzer
             // 
             groupBox1.Controls.Add(btnDuplicateCensus);
             groupBox1.Controls.Add(btnMissingCensusLocation);
-            groupBox1.Location = new Point(17, 510);
-            groupBox1.Margin = new Padding(8, 9, 8, 9);
+            groupBox1.Location = new Point(9, 239);
+            groupBox1.Margin = new Padding(4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(8, 9, 8, 9);
-            groupBox1.Size = new Size(704, 215);
+            groupBox1.Padding = new Padding(4);
+            groupBox1.Size = new Size(379, 101);
             groupBox1.TabIndex = 22;
             groupBox1.TabStop = false;
             groupBox1.Text = "Potential Census Fact Problems";
             // 
             // btnDuplicateCensus
             // 
-            btnDuplicateCensus.Location = new Point(359, 47);
-            btnDuplicateCensus.Margin = new Padding(8, 9, 8, 9);
+            btnDuplicateCensus.Location = new Point(193, 22);
+            btnDuplicateCensus.Margin = new Padding(4);
             btnDuplicateCensus.Name = "btnDuplicateCensus";
-            btnDuplicateCensus.Size = new Size(325, 62);
+            btnDuplicateCensus.Size = new Size(175, 29);
             btnDuplicateCensus.TabIndex = 6;
             btnDuplicateCensus.Text = "Duplicate Census Facts";
             btnDuplicateCensus.UseVisualStyleBackColor = true;
@@ -2686,10 +2710,10 @@ namespace FTAnalyzer
             // 
             // btnMissingCensusLocation
             // 
-            btnMissingCensusLocation.Location = new Point(21, 47);
-            btnMissingCensusLocation.Margin = new Padding(8, 9, 8, 9);
+            btnMissingCensusLocation.Location = new Point(11, 22);
+            btnMissingCensusLocation.Margin = new Padding(4);
             btnMissingCensusLocation.Name = "btnMissingCensusLocation";
-            btnMissingCensusLocation.Size = new Size(325, 62);
+            btnMissingCensusLocation.Size = new Size(175, 29);
             btnMissingCensusLocation.TabIndex = 5;
             btnMissingCensusLocation.Text = "Missing Census Locations";
             btnMissingCensusLocation.UseVisualStyleBackColor = true;
@@ -2699,21 +2723,21 @@ namespace FTAnalyzer
             // 
             groupBox5.Controls.Add(btnMismatchedChildrenStatus);
             groupBox5.Controls.Add(btnNoChildrenStatus);
-            groupBox5.Location = new Point(13, 47);
-            groupBox5.Margin = new Padding(8, 9, 8, 9);
+            groupBox5.Location = new Point(7, 22);
+            groupBox5.Margin = new Padding(4);
             groupBox5.Name = "groupBox5";
-            groupBox5.Padding = new Padding(8, 9, 8, 9);
-            groupBox5.Size = new Size(710, 145);
+            groupBox5.Padding = new Padding(4);
+            groupBox5.Size = new Size(382, 68);
             groupBox5.TabIndex = 32;
             groupBox5.TabStop = false;
             groupBox5.Text = "1911 UK Census";
             // 
             // btnMismatchedChildrenStatus
             // 
-            btnMismatchedChildrenStatus.Location = new Point(359, 47);
-            btnMismatchedChildrenStatus.Margin = new Padding(8, 9, 8, 9);
+            btnMismatchedChildrenStatus.Location = new Point(193, 22);
+            btnMismatchedChildrenStatus.Margin = new Padding(4);
             btnMismatchedChildrenStatus.Name = "btnMismatchedChildrenStatus";
-            btnMismatchedChildrenStatus.Size = new Size(334, 62);
+            btnMismatchedChildrenStatus.Size = new Size(180, 29);
             btnMismatchedChildrenStatus.TabIndex = 7;
             btnMismatchedChildrenStatus.Text = "Mismatched Children Status";
             btnMismatchedChildrenStatus.UseVisualStyleBackColor = true;
@@ -2721,10 +2745,10 @@ namespace FTAnalyzer
             // 
             // btnNoChildrenStatus
             // 
-            btnNoChildrenStatus.Location = new Point(21, 47);
-            btnNoChildrenStatus.Margin = new Padding(8, 9, 8, 9);
+            btnNoChildrenStatus.Location = new Point(11, 22);
+            btnNoChildrenStatus.Margin = new Padding(4);
             btnNoChildrenStatus.Name = "btnNoChildrenStatus";
-            btnNoChildrenStatus.Size = new Size(325, 62);
+            btnNoChildrenStatus.Size = new Size(175, 29);
             btnNoChildrenStatus.TabIndex = 6;
             btnNoChildrenStatus.Text = "Missing Children Status";
             btnNoChildrenStatus.UseVisualStyleBackColor = true;
@@ -2733,11 +2757,11 @@ namespace FTAnalyzer
             // groupBox6
             // 
             groupBox6.Controls.Add(btnReportUnrecognised);
-            groupBox6.Location = new Point(788, 47);
-            groupBox6.Margin = new Padding(8, 9, 8, 9);
+            groupBox6.Location = new Point(424, 22);
+            groupBox6.Margin = new Padding(4);
             groupBox6.Name = "groupBox6";
-            groupBox6.Padding = new Padding(8, 9, 8, 9);
-            groupBox6.Size = new Size(529, 145);
+            groupBox6.Padding = new Padding(4);
+            groupBox6.Size = new Size(285, 68);
             groupBox6.TabIndex = 31;
             groupBox6.TabStop = false;
             groupBox6.Text = "Export Missing/Unrecognised data to File";
@@ -2745,10 +2769,10 @@ namespace FTAnalyzer
             // btnReportUnrecognised
             // 
             btnReportUnrecognised.Anchor = AnchorStyles.Left;
-            btnReportUnrecognised.Location = new Point(13, 47);
-            btnReportUnrecognised.Margin = new Padding(8, 9, 8, 9);
+            btnReportUnrecognised.Location = new Point(7, 22);
+            btnReportUnrecognised.Margin = new Padding(4);
             btnReportUnrecognised.Name = "btnReportUnrecognised";
-            btnReportUnrecognised.Size = new Size(485, 62);
+            btnReportUnrecognised.Size = new Size(261, 29);
             btnReportUnrecognised.TabIndex = 30;
             btnReportUnrecognised.Text = "Export Unrecognised/Missing Census Refs";
             btnReportUnrecognised.UseVisualStyleBackColor = true;
@@ -2760,11 +2784,11 @@ namespace FTAnalyzer
             tabLocations.Controls.Add(btnModernOSMap);
             tabLocations.Controls.Add(btnShowMap);
             tabLocations.Controls.Add(tabCtrlLocations);
-            tabLocations.Location = new Point(8, 46);
-            tabLocations.Margin = new Padding(8, 9, 8, 9);
+            tabLocations.Location = new Point(4, 24);
+            tabLocations.Margin = new Padding(4);
             tabLocations.Name = "tabLocations";
-            tabLocations.Padding = new Padding(8, 9, 8, 9);
-            tabLocations.Size = new Size(2298, 1137);
+            tabLocations.Padding = new Padding(4);
+            tabLocations.Size = new Size(1238, 530);
             tabLocations.TabIndex = 4;
             tabLocations.Text = "Locations";
             tabLocations.UseVisualStyleBackColor = true;
@@ -2772,10 +2796,10 @@ namespace FTAnalyzer
             // btnOldOSMap
             // 
             btnOldOSMap.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnOldOSMap.Location = new Point(1842, 5);
-            btnOldOSMap.Margin = new Padding(8, 9, 8, 9);
+            btnOldOSMap.Location = new Point(992, 2);
+            btnOldOSMap.Margin = new Padding(4);
             btnOldOSMap.Name = "btnOldOSMap";
-            btnOldOSMap.Size = new Size(225, 49);
+            btnOldOSMap.Size = new Size(121, 23);
             btnOldOSMap.TabIndex = 3;
             btnOldOSMap.Text = "Show Old OS Map";
             btnOldOSMap.UseVisualStyleBackColor = true;
@@ -2784,10 +2808,10 @@ namespace FTAnalyzer
             // btnModernOSMap
             // 
             btnModernOSMap.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnModernOSMap.Location = new Point(1571, 5);
-            btnModernOSMap.Margin = new Padding(8, 9, 8, 9);
+            btnModernOSMap.Location = new Point(846, 2);
+            btnModernOSMap.Margin = new Padding(4);
             btnModernOSMap.Name = "btnModernOSMap";
-            btnModernOSMap.Size = new Size(271, 49);
+            btnModernOSMap.Size = new Size(146, 23);
             btnModernOSMap.TabIndex = 5;
             btnModernOSMap.Text = "Show Modern OS Map";
             btnModernOSMap.UseVisualStyleBackColor = true;
@@ -2797,10 +2821,10 @@ namespace FTAnalyzer
             // btnShowMap
             // 
             btnShowMap.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnShowMap.Location = new Point(2062, 5);
-            btnShowMap.Margin = new Padding(8, 9, 8, 9);
+            btnShowMap.Location = new Point(1110, 2);
+            btnShowMap.Margin = new Padding(4);
             btnShowMap.Name = "btnShowMap";
-            btnShowMap.Size = new Size(225, 49);
+            btnShowMap.Size = new Size(121, 23);
             btnShowMap.TabIndex = 2;
             btnShowMap.Text = "Show Google Map";
             btnShowMap.UseVisualStyleBackColor = true;
@@ -2815,11 +2839,11 @@ namespace FTAnalyzer
             tabCtrlLocations.Controls.Add(tabAddresses);
             tabCtrlLocations.Controls.Add(tabPlaces);
             tabCtrlLocations.Dock = DockStyle.Fill;
-            tabCtrlLocations.Location = new Point(8, 9);
-            tabCtrlLocations.Margin = new Padding(8, 9, 8, 9);
+            tabCtrlLocations.Location = new Point(4, 4);
+            tabCtrlLocations.Margin = new Padding(4);
             tabCtrlLocations.Name = "tabCtrlLocations";
             tabCtrlLocations.SelectedIndex = 0;
-            tabCtrlLocations.Size = new Size(2282, 1119);
+            tabCtrlLocations.Size = new Size(1230, 522);
             tabCtrlLocations.TabIndex = 0;
             tabCtrlLocations.SelectedIndexChanged += TabCtrlLocations_SelectedIndexChanged;
             tabCtrlLocations.Selecting += TabCtrlLocations_Selecting;
@@ -2827,11 +2851,11 @@ namespace FTAnalyzer
             // tabTreeView
             // 
             tabTreeView.Controls.Add(treeViewLocations);
-            tabTreeView.Location = new Point(8, 46);
-            tabTreeView.Margin = new Padding(8, 9, 8, 9);
+            tabTreeView.Location = new Point(4, 24);
+            tabTreeView.Margin = new Padding(4);
             tabTreeView.Name = "tabTreeView";
-            tabTreeView.Padding = new Padding(8, 9, 8, 9);
-            tabTreeView.Size = new Size(2266, 1065);
+            tabTreeView.Padding = new Padding(4);
+            tabTreeView.Size = new Size(1222, 494);
             tabTreeView.TabIndex = 5;
             tabTreeView.Text = "Tree View";
             tabTreeView.UseVisualStyleBackColor = true;
@@ -2843,12 +2867,12 @@ namespace FTAnalyzer
             treeViewLocations.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
             treeViewLocations.ImageIndex = 0;
             treeViewLocations.ImageList = imageList;
-            treeViewLocations.Location = new Point(8, 9);
-            treeViewLocations.Margin = new Padding(8, 9, 8, 9);
+            treeViewLocations.Location = new Point(4, 4);
+            treeViewLocations.Margin = new Padding(4);
             treeViewLocations.Name = "treeViewLocations";
             treeViewLocations.SelectedImageIndex = 0;
             treeViewLocations.ShowNodeToolTips = true;
-            treeViewLocations.Size = new Size(2250, 1047);
+            treeViewLocations.Size = new Size(1214, 486);
             treeViewLocations.TabIndex = 0;
             treeViewLocations.BeforeCollapse += TreeViewLocations_BeforeCollapse;
             treeViewLocations.BeforeExpand += TreeViewLocations_BeforeExpand;
@@ -2874,11 +2898,11 @@ namespace FTAnalyzer
             // tabCountries
             // 
             tabCountries.Controls.Add(dgCountries);
-            tabCountries.Location = new Point(8, 46);
-            tabCountries.Margin = new Padding(8, 9, 8, 9);
+            tabCountries.Location = new Point(4, 24);
+            tabCountries.Margin = new Padding(4);
             tabCountries.Name = "tabCountries";
-            tabCountries.Padding = new Padding(8, 9, 8, 9);
-            tabCountries.Size = new Size(2266, 1065);
+            tabCountries.Padding = new Padding(4);
+            tabCountries.Size = new Size(1222, 494);
             tabCountries.TabIndex = 0;
             tabCountries.Text = "Countries";
             tabCountries.ToolTipText = "Double click on Country name to see list of individuals with that Country.";
@@ -2887,11 +2911,11 @@ namespace FTAnalyzer
             // tabRegions
             // 
             tabRegions.Controls.Add(dgRegions);
-            tabRegions.Location = new Point(8, 46);
-            tabRegions.Margin = new Padding(8, 9, 8, 9);
+            tabRegions.Location = new Point(4, 24);
+            tabRegions.Margin = new Padding(4);
             tabRegions.Name = "tabRegions";
-            tabRegions.Padding = new Padding(8, 9, 8, 9);
-            tabRegions.Size = new Size(2266, 1065);
+            tabRegions.Padding = new Padding(4);
+            tabRegions.Size = new Size(1222, 494);
             tabRegions.TabIndex = 1;
             tabRegions.Text = "Regions";
             tabRegions.ToolTipText = "Double click on Region name to see list of individuals with that Region.";
@@ -2900,11 +2924,11 @@ namespace FTAnalyzer
             // tabSubRegions
             // 
             tabSubRegions.Controls.Add(dgSubRegions);
-            tabSubRegions.Location = new Point(8, 46);
-            tabSubRegions.Margin = new Padding(8, 9, 8, 9);
+            tabSubRegions.Location = new Point(4, 24);
+            tabSubRegions.Margin = new Padding(4);
             tabSubRegions.Name = "tabSubRegions";
-            tabSubRegions.Padding = new Padding(8, 9, 8, 9);
-            tabSubRegions.Size = new Size(2266, 1065);
+            tabSubRegions.Padding = new Padding(4);
+            tabSubRegions.Size = new Size(1222, 494);
             tabSubRegions.TabIndex = 2;
             tabSubRegions.Text = "SubRegions";
             tabSubRegions.ToolTipText = "Double click on 'Parish' name to see list of individuals with that parish/area.";
@@ -2921,8 +2945,8 @@ namespace FTAnalyzer
             dgSubRegions.Dock = DockStyle.Fill;
             dgSubRegions.FilterAndSortEnabled = true;
             dgSubRegions.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
-            dgSubRegions.Location = new Point(8, 9);
-            dgSubRegions.Margin = new Padding(13, 15, 13, 15);
+            dgSubRegions.Location = new Point(4, 4);
+            dgSubRegions.Margin = new Padding(7);
             dgSubRegions.MultiSelect = false;
             dgSubRegions.Name = "dgSubRegions";
             dgSubRegions.ReadOnly = true;
@@ -2930,7 +2954,7 @@ namespace FTAnalyzer
             dgSubRegions.RowHeadersVisible = false;
             dgSubRegions.RowHeadersWidth = 50;
             dgSubRegions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgSubRegions.Size = new Size(2258, 1056);
+            dgSubRegions.Size = new Size(1218, 490);
             dgSubRegions.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgSubRegions.TabIndex = 1;
             dgSubRegions.VirtualMode = true;
@@ -2940,11 +2964,11 @@ namespace FTAnalyzer
             // tabAddresses
             // 
             tabAddresses.Controls.Add(dgAddresses);
-            tabAddresses.Location = new Point(8, 46);
-            tabAddresses.Margin = new Padding(8, 9, 8, 9);
+            tabAddresses.Location = new Point(4, 24);
+            tabAddresses.Margin = new Padding(4);
             tabAddresses.Name = "tabAddresses";
-            tabAddresses.Padding = new Padding(8, 9, 8, 9);
-            tabAddresses.Size = new Size(2266, 1065);
+            tabAddresses.Padding = new Padding(4);
+            tabAddresses.Size = new Size(1222, 494);
             tabAddresses.TabIndex = 3;
             tabAddresses.Text = "Addresses";
             tabAddresses.ToolTipText = "Double click on Address name to see list of individuals with that Address.";
@@ -2961,8 +2985,8 @@ namespace FTAnalyzer
             dgAddresses.Dock = DockStyle.Fill;
             dgAddresses.FilterAndSortEnabled = true;
             dgAddresses.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
-            dgAddresses.Location = new Point(8, 9);
-            dgAddresses.Margin = new Padding(13, 15, 13, 15);
+            dgAddresses.Location = new Point(4, 4);
+            dgAddresses.Margin = new Padding(7);
             dgAddresses.MultiSelect = false;
             dgAddresses.Name = "dgAddresses";
             dgAddresses.ReadOnly = true;
@@ -2970,7 +2994,7 @@ namespace FTAnalyzer
             dgAddresses.RowHeadersVisible = false;
             dgAddresses.RowHeadersWidth = 50;
             dgAddresses.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgAddresses.Size = new Size(2258, 1056);
+            dgAddresses.Size = new Size(1218, 490);
             dgAddresses.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgAddresses.TabIndex = 1;
             dgAddresses.VirtualMode = true;
@@ -2980,11 +3004,11 @@ namespace FTAnalyzer
             // tabPlaces
             // 
             tabPlaces.Controls.Add(dgPlaces);
-            tabPlaces.Location = new Point(8, 46);
-            tabPlaces.Margin = new Padding(8, 9, 8, 9);
+            tabPlaces.Location = new Point(4, 24);
+            tabPlaces.Margin = new Padding(4);
             tabPlaces.Name = "tabPlaces";
-            tabPlaces.Padding = new Padding(8, 9, 8, 9);
-            tabPlaces.Size = new Size(2266, 1065);
+            tabPlaces.Padding = new Padding(4);
+            tabPlaces.Size = new Size(1222, 494);
             tabPlaces.TabIndex = 4;
             tabPlaces.Text = "Places";
             tabPlaces.ToolTipText = "Double click on Address name to see list of individuals with that Place";
@@ -3001,8 +3025,8 @@ namespace FTAnalyzer
             dgPlaces.Dock = DockStyle.Fill;
             dgPlaces.FilterAndSortEnabled = true;
             dgPlaces.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
-            dgPlaces.Location = new Point(8, 9);
-            dgPlaces.Margin = new Padding(13, 15, 13, 15);
+            dgPlaces.Location = new Point(4, 4);
+            dgPlaces.Margin = new Padding(7);
             dgPlaces.MultiSelect = false;
             dgPlaces.Name = "dgPlaces";
             dgPlaces.ReadOnly = true;
@@ -3010,7 +3034,7 @@ namespace FTAnalyzer
             dgPlaces.RowHeadersVisible = false;
             dgPlaces.RowHeadersWidth = 50;
             dgPlaces.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgPlaces.Size = new Size(2258, 1056);
+            dgPlaces.Size = new Size(1218, 490);
             dgPlaces.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgPlaces.TabIndex = 2;
             dgPlaces.VirtualMode = true;
@@ -3020,11 +3044,11 @@ namespace FTAnalyzer
             // tabDisplayProgress
             // 
             tabDisplayProgress.Controls.Add(splitGedcom);
-            tabDisplayProgress.Location = new Point(8, 46);
-            tabDisplayProgress.Margin = new Padding(8, 9, 8, 9);
+            tabDisplayProgress.Location = new Point(4, 24);
+            tabDisplayProgress.Margin = new Padding(4);
             tabDisplayProgress.Name = "tabDisplayProgress";
-            tabDisplayProgress.Padding = new Padding(8, 9, 8, 9);
-            tabDisplayProgress.Size = new Size(2298, 1137);
+            tabDisplayProgress.Padding = new Padding(4);
+            tabDisplayProgress.Size = new Size(1238, 412);
             tabDisplayProgress.TabIndex = 1;
             tabDisplayProgress.Text = "Gedcom Stats";
             tabDisplayProgress.UseVisualStyleBackColor = true;
@@ -3033,8 +3057,8 @@ namespace FTAnalyzer
             // 
             splitGedcom.Dock = DockStyle.Fill;
             splitGedcom.FixedPanel = FixedPanel.Panel1;
-            splitGedcom.Location = new Point(8, 9);
-            splitGedcom.Margin = new Padding(8, 9, 8, 9);
+            splitGedcom.Location = new Point(4, 4);
+            splitGedcom.Margin = new Padding(4);
             splitGedcom.Name = "splitGedcom";
             splitGedcom.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -3046,15 +3070,15 @@ namespace FTAnalyzer
             // splitGedcom.Panel2
             // 
             splitGedcom.Panel2.Controls.Add(rtbOutput);
-            splitGedcom.Size = new Size(2282, 1119);
+            splitGedcom.Size = new Size(1230, 404);
             splitGedcom.SplitterDistance = 110;
-            splitGedcom.SplitterWidth = 10;
+            splitGedcom.SplitterWidth = 5;
             splitGedcom.TabIndex = 15;
             // 
             // panel2
             // 
-            panel2.Controls.Add(pictureBox1);
             panel2.Controls.Add(LbProgramName);
+            panel2.Controls.Add(pictureBox1);
             panel2.Controls.Add(labRelationships);
             panel2.Controls.Add(pbRelationships);
             panel2.Controls.Add(labFamilies);
@@ -3065,103 +3089,103 @@ namespace FTAnalyzer
             panel2.Controls.Add(pbSources);
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 0);
-            panel2.Margin = new Padding(8, 9, 8, 9);
+            panel2.Margin = new Padding(4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(2282, 110);
+            panel2.Size = new Size(1230, 110);
             panel2.TabIndex = 14;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources._256;
-            pictureBox1.Location = new Point(2043, 9);
-            pictureBox1.Margin = new Padding(8, 9, 8, 9);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(217, 246);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 19;
-            pictureBox1.TabStop = false;
             // 
             // LbProgramName
             // 
             LbProgramName.AutoSize = true;
             LbProgramName.Font = new Font("Kunstler Script", 52F, FontStyle.Bold);
-            LbProgramName.Location = new Point(899, 32);
-            LbProgramName.Margin = new Padding(8, 0, 8, 0);
+            LbProgramName.Location = new Point(485, 22);
+            LbProgramName.Margin = new Padding(4, 0, 4, 0);
             LbProgramName.Name = "LbProgramName";
-            LbProgramName.Size = new Size(1005, 150);
+            LbProgramName.Size = new Size(521, 76);
             LbProgramName.TabIndex = 17;
             LbProgramName.Text = "Family Tree Analyzer";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources._256;
+            pictureBox1.Location = new Point(1100, 4);
+            pictureBox1.Margin = new Padding(4);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(117, 115);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 19;
+            pictureBox1.TabStop = false;
             // 
             // labRelationships
             // 
             labRelationships.AutoSize = true;
-            labRelationships.Location = new Point(8, 194);
-            labRelationships.Margin = new Padding(8, 0, 8, 0);
+            labRelationships.Location = new Point(4, 91);
+            labRelationships.Margin = new Padding(4, 0, 4, 0);
             labRelationships.Name = "labRelationships";
-            labRelationships.Size = new Size(287, 32);
+            labRelationships.Size = new Size(144, 15);
             labRelationships.TabIndex = 16;
             labRelationships.Text = "Relationships && Locations";
             // 
             // pbRelationships
             // 
-            pbRelationships.Location = new Point(290, 187);
-            pbRelationships.Margin = new Padding(8, 9, 8, 9);
+            pbRelationships.Location = new Point(156, 88);
+            pbRelationships.Margin = new Padding(4);
             pbRelationships.Name = "pbRelationships";
-            pbRelationships.Size = new Size(596, 41);
+            pbRelationships.Size = new Size(321, 19);
             pbRelationships.TabIndex = 15;
             // 
             // labFamilies
             // 
             labFamilies.AutoSize = true;
-            labFamilies.Location = new Point(8, 140);
-            labFamilies.Margin = new Padding(8, 0, 8, 0);
+            labFamilies.Location = new Point(4, 66);
+            labFamilies.Margin = new Padding(4, 0, 4, 0);
             labFamilies.Name = "labFamilies";
-            labFamilies.Size = new Size(191, 32);
+            labFamilies.Size = new Size(96, 15);
             labFamilies.TabIndex = 14;
             labFamilies.Text = "Loading Families";
             // 
             // pbFamilies
             // 
-            pbFamilies.Location = new Point(290, 133);
-            pbFamilies.Margin = new Padding(8, 9, 8, 9);
+            pbFamilies.Location = new Point(156, 62);
+            pbFamilies.Margin = new Padding(4);
             pbFamilies.Name = "pbFamilies";
-            pbFamilies.Size = new Size(596, 41);
+            pbFamilies.Size = new Size(321, 19);
             pbFamilies.TabIndex = 13;
             // 
             // labIndividuals
             // 
             labIndividuals.AutoSize = true;
-            labIndividuals.Location = new Point(8, 86);
-            labIndividuals.Margin = new Padding(8, 0, 8, 0);
+            labIndividuals.Location = new Point(4, 40);
+            labIndividuals.Margin = new Padding(4, 0, 4, 0);
             labIndividuals.Name = "labIndividuals";
-            labIndividuals.Size = new Size(220, 32);
+            labIndividuals.Size = new Size(110, 15);
             labIndividuals.TabIndex = 12;
             labIndividuals.Text = "Loading Individuals";
             // 
             // pbIndividuals
             // 
-            pbIndividuals.Location = new Point(290, 79);
-            pbIndividuals.Margin = new Padding(8, 9, 8, 9);
+            pbIndividuals.Location = new Point(156, 37);
+            pbIndividuals.Margin = new Padding(4);
             pbIndividuals.Name = "pbIndividuals";
-            pbIndividuals.Size = new Size(596, 41);
+            pbIndividuals.Size = new Size(321, 19);
             pbIndividuals.TabIndex = 11;
             // 
             // labSources
             // 
             labSources.AutoSize = true;
-            labSources.Location = new Point(8, 32);
-            labSources.Margin = new Padding(8, 0, 8, 0);
+            labSources.Location = new Point(4, 15);
+            labSources.Margin = new Padding(4, 0, 4, 0);
             labSources.Name = "labSources";
-            labSources.Size = new Size(189, 32);
+            labSources.Size = new Size(94, 15);
             labSources.TabIndex = 10;
             labSources.Text = "Loading Sources";
             // 
             // pbSources
             // 
-            pbSources.Location = new Point(290, 23);
-            pbSources.Margin = new Padding(8, 9, 8, 9);
+            pbSources.Location = new Point(156, 11);
+            pbSources.Margin = new Padding(4);
             pbSources.Name = "pbSources";
-            pbSources.Size = new Size(596, 41);
+            pbSources.Size = new Size(321, 19);
             pbSources.TabIndex = 9;
             // 
             // rtbOutput
@@ -3169,10 +3193,10 @@ namespace FTAnalyzer
             rtbOutput.Dock = DockStyle.Fill;
             rtbOutput.Font = new Font("Microsoft Sans Serif", 9F);
             rtbOutput.Location = new Point(0, 0);
-            rtbOutput.Margin = new Padding(8, 9, 8, 9);
+            rtbOutput.Margin = new Padding(4);
             rtbOutput.Name = "rtbOutput";
             rtbOutput.ReadOnly = true;
-            rtbOutput.Size = new Size(2282, 999);
+            rtbOutput.Size = new Size(1230, 289);
             rtbOutput.TabIndex = 14;
             rtbOutput.Text = "";
             rtbOutput.TextChanged += RtbOutput_TextChanged;
@@ -3192,22 +3216,22 @@ namespace FTAnalyzer
             tabSelector.Controls.Add(tabTreetops);
             tabSelector.Controls.Add(tabWorldWars);
             tabSelector.Controls.Add(tabToday);
-            tabSelector.Location = new Point(0, 66);
-            tabSelector.Margin = new Padding(8, 9, 8, 9);
+            tabSelector.Location = new Point(0, 31);
+            tabSelector.Margin = new Padding(4);
             tabSelector.Name = "tabSelector";
             tabSelector.SelectedIndex = 0;
-            tabSelector.Size = new Size(2314, 1191);
+            tabSelector.Size = new Size(1246, 440);
             tabSelector.TabIndex = 9;
             tabSelector.SelectedIndexChanged += TabControl_SelectedIndexChanged;
             // 
             // tabMainLists
             // 
             tabMainLists.Controls.Add(tabMainListsSelector);
-            tabMainLists.Location = new Point(8, 46);
-            tabMainLists.Margin = new Padding(8, 9, 8, 9);
+            tabMainLists.Location = new Point(4, 24);
+            tabMainLists.Margin = new Padding(4);
             tabMainLists.Name = "tabMainLists";
-            tabMainLists.Padding = new Padding(8, 9, 8, 9);
-            tabMainLists.Size = new Size(2298, 1137);
+            tabMainLists.Padding = new Padding(4);
+            tabMainLists.Size = new Size(1238, 530);
             tabMainLists.TabIndex = 18;
             tabMainLists.Text = "Main Lists";
             tabMainLists.UseVisualStyleBackColor = true;
@@ -3220,22 +3244,22 @@ namespace FTAnalyzer
             tabMainListsSelector.Controls.Add(tabOccupations);
             tabMainListsSelector.Controls.Add(tabCustomFacts);
             tabMainListsSelector.Dock = DockStyle.Fill;
-            tabMainListsSelector.Location = new Point(8, 9);
-            tabMainListsSelector.Margin = new Padding(8, 9, 8, 9);
+            tabMainListsSelector.Location = new Point(4, 4);
+            tabMainListsSelector.Margin = new Padding(4);
             tabMainListsSelector.Name = "tabMainListsSelector";
             tabMainListsSelector.SelectedIndex = 0;
-            tabMainListsSelector.Size = new Size(2282, 1119);
+            tabMainListsSelector.Size = new Size(1230, 522);
             tabMainListsSelector.TabIndex = 0;
             tabMainListsSelector.SelectedIndexChanged += TabMainListSelector_SelectedIndexChanged;
             // 
             // tabIndividuals
             // 
             tabIndividuals.Controls.Add(dgIndividuals);
-            tabIndividuals.Location = new Point(8, 46);
-            tabIndividuals.Margin = new Padding(8, 9, 8, 9);
+            tabIndividuals.Location = new Point(4, 24);
+            tabIndividuals.Margin = new Padding(4);
             tabIndividuals.Name = "tabIndividuals";
-            tabIndividuals.Padding = new Padding(8, 9, 8, 9);
-            tabIndividuals.Size = new Size(2266, 1065);
+            tabIndividuals.Padding = new Padding(4);
+            tabIndividuals.Size = new Size(1222, 494);
             tabIndividuals.TabIndex = 0;
             tabIndividuals.Text = "Individuals";
             tabIndividuals.UseVisualStyleBackColor = true;
@@ -3251,8 +3275,8 @@ namespace FTAnalyzer
             dgIndividuals.Dock = DockStyle.Fill;
             dgIndividuals.FilterAndSortEnabled = true;
             dgIndividuals.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
-            dgIndividuals.Location = new Point(8, 9);
-            dgIndividuals.Margin = new Padding(13, 15, 13, 15);
+            dgIndividuals.Location = new Point(4, 4);
+            dgIndividuals.Margin = new Padding(7);
             dgIndividuals.MultiSelect = false;
             dgIndividuals.Name = "dgIndividuals";
             dgIndividuals.ReadOnly = true;
@@ -3260,7 +3284,7 @@ namespace FTAnalyzer
             dgIndividuals.RowHeadersVisible = false;
             dgIndividuals.RowHeadersWidth = 50;
             dgIndividuals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgIndividuals.Size = new Size(2258, 1056);
+            dgIndividuals.Size = new Size(1218, 490);
             dgIndividuals.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgIndividuals.TabIndex = 1;
             dgIndividuals.VirtualMode = true;
@@ -3270,11 +3294,11 @@ namespace FTAnalyzer
             // tabFamilies
             // 
             tabFamilies.Controls.Add(dgFamilies);
-            tabFamilies.Location = new Point(8, 46);
-            tabFamilies.Margin = new Padding(8, 9, 8, 9);
+            tabFamilies.Location = new Point(4, 24);
+            tabFamilies.Margin = new Padding(4);
             tabFamilies.Name = "tabFamilies";
-            tabFamilies.Padding = new Padding(8, 9, 8, 9);
-            tabFamilies.Size = new Size(2266, 1065);
+            tabFamilies.Padding = new Padding(4);
+            tabFamilies.Size = new Size(1222, 494);
             tabFamilies.TabIndex = 1;
             tabFamilies.Text = "Families";
             tabFamilies.UseVisualStyleBackColor = true;
@@ -3290,8 +3314,8 @@ namespace FTAnalyzer
             dgFamilies.Dock = DockStyle.Fill;
             dgFamilies.FilterAndSortEnabled = true;
             dgFamilies.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
-            dgFamilies.Location = new Point(8, 9);
-            dgFamilies.Margin = new Padding(13, 15, 13, 15);
+            dgFamilies.Location = new Point(4, 4);
+            dgFamilies.Margin = new Padding(7);
             dgFamilies.MultiSelect = false;
             dgFamilies.Name = "dgFamilies";
             dgFamilies.ReadOnly = true;
@@ -3299,7 +3323,7 @@ namespace FTAnalyzer
             dgFamilies.RowHeadersVisible = false;
             dgFamilies.RowHeadersWidth = 50;
             dgFamilies.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgFamilies.Size = new Size(2258, 1056);
+            dgFamilies.Size = new Size(1218, 490);
             dgFamilies.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgFamilies.TabIndex = 2;
             dgFamilies.VirtualMode = true;
@@ -3308,10 +3332,10 @@ namespace FTAnalyzer
             // tabSources
             // 
             tabSources.Controls.Add(dgSources);
-            tabSources.Location = new Point(8, 46);
-            tabSources.Margin = new Padding(8, 9, 8, 9);
+            tabSources.Location = new Point(4, 24);
+            tabSources.Margin = new Padding(4);
             tabSources.Name = "tabSources";
-            tabSources.Size = new Size(2266, 1065);
+            tabSources.Size = new Size(1222, 494);
             tabSources.TabIndex = 2;
             tabSources.Text = "Sources";
             tabSources.UseVisualStyleBackColor = true;
@@ -3328,7 +3352,7 @@ namespace FTAnalyzer
             dgSources.FilterAndSortEnabled = true;
             dgSources.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgSources.Location = new Point(0, 0);
-            dgSources.Margin = new Padding(13, 15, 13, 15);
+            dgSources.Margin = new Padding(7);
             dgSources.MultiSelect = false;
             dgSources.Name = "dgSources";
             dgSources.ReadOnly = true;
@@ -3336,7 +3360,7 @@ namespace FTAnalyzer
             dgSources.RowHeadersVisible = false;
             dgSources.RowHeadersWidth = 50;
             dgSources.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgSources.Size = new Size(2266, 1065);
+            dgSources.Size = new Size(1222, 494);
             dgSources.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgSources.TabIndex = 2;
             dgSources.VirtualMode = true;
@@ -3345,10 +3369,10 @@ namespace FTAnalyzer
             // tabOccupations
             // 
             tabOccupations.Controls.Add(dgOccupations);
-            tabOccupations.Location = new Point(8, 46);
-            tabOccupations.Margin = new Padding(8, 9, 8, 9);
+            tabOccupations.Location = new Point(4, 24);
+            tabOccupations.Margin = new Padding(4);
             tabOccupations.Name = "tabOccupations";
-            tabOccupations.Size = new Size(2266, 1065);
+            tabOccupations.Size = new Size(1222, 494);
             tabOccupations.TabIndex = 3;
             tabOccupations.Text = "Occupations";
             tabOccupations.UseVisualStyleBackColor = true;
@@ -3365,7 +3389,7 @@ namespace FTAnalyzer
             dgOccupations.FilterAndSortEnabled = true;
             dgOccupations.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgOccupations.Location = new Point(0, 0);
-            dgOccupations.Margin = new Padding(13, 15, 13, 15);
+            dgOccupations.Margin = new Padding(7);
             dgOccupations.MultiSelect = false;
             dgOccupations.Name = "dgOccupations";
             dgOccupations.ReadOnly = true;
@@ -3373,7 +3397,7 @@ namespace FTAnalyzer
             dgOccupations.RowHeadersVisible = false;
             dgOccupations.RowHeadersWidth = 50;
             dgOccupations.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgOccupations.Size = new Size(2266, 1065);
+            dgOccupations.Size = new Size(1222, 494);
             dgOccupations.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgOccupations.TabIndex = 3;
             dgOccupations.VirtualMode = true;
@@ -3382,10 +3406,10 @@ namespace FTAnalyzer
             // tabCustomFacts
             // 
             tabCustomFacts.Controls.Add(dgCustomFacts);
-            tabCustomFacts.Location = new Point(8, 46);
-            tabCustomFacts.Margin = new Padding(8, 9, 8, 9);
+            tabCustomFacts.Location = new Point(4, 24);
+            tabCustomFacts.Margin = new Padding(4);
             tabCustomFacts.Name = "tabCustomFacts";
-            tabCustomFacts.Size = new Size(2266, 1065);
+            tabCustomFacts.Size = new Size(1222, 494);
             tabCustomFacts.TabIndex = 4;
             tabCustomFacts.Text = "Custom Facts";
             tabCustomFacts.UseVisualStyleBackColor = true;
@@ -3402,7 +3426,7 @@ namespace FTAnalyzer
             dgCustomFacts.FilterAndSortEnabled = true;
             dgCustomFacts.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgCustomFacts.Location = new Point(0, 0);
-            dgCustomFacts.Margin = new Padding(13, 15, 13, 15);
+            dgCustomFacts.Margin = new Padding(7);
             dgCustomFacts.MultiSelect = false;
             dgCustomFacts.Name = "dgCustomFacts";
             dgCustomFacts.ReadOnly = true;
@@ -3410,7 +3434,7 @@ namespace FTAnalyzer
             dgCustomFacts.RowHeadersVisible = false;
             dgCustomFacts.RowHeadersWidth = 50;
             dgCustomFacts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgCustomFacts.Size = new Size(2266, 1065);
+            dgCustomFacts.Size = new Size(1222, 494);
             dgCustomFacts.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgCustomFacts.TabIndex = 4;
             dgCustomFacts.VirtualMode = true;
@@ -3420,10 +3444,10 @@ namespace FTAnalyzer
             // tabErrorsFixes
             // 
             tabErrorsFixes.Controls.Add(tabErrorFixSelector);
-            tabErrorsFixes.Location = new Point(8, 46);
-            tabErrorsFixes.Margin = new Padding(8, 9, 8, 9);
+            tabErrorsFixes.Location = new Point(4, 24);
+            tabErrorsFixes.Margin = new Padding(4);
             tabErrorsFixes.Name = "tabErrorsFixes";
-            tabErrorsFixes.Size = new Size(2298, 1137);
+            tabErrorsFixes.Size = new Size(1238, 530);
             tabErrorsFixes.TabIndex = 19;
             tabErrorsFixes.Text = "Errors/Fixes";
             tabErrorsFixes.UseVisualStyleBackColor = true;
@@ -3437,11 +3461,11 @@ namespace FTAnalyzer
             tabErrorFixSelector.Controls.Add(tabLooseInfo);
             tabErrorFixSelector.Dock = DockStyle.Fill;
             tabErrorFixSelector.Location = new Point(0, 0);
-            tabErrorFixSelector.Margin = new Padding(8, 9, 8, 9);
+            tabErrorFixSelector.Margin = new Padding(4);
             tabErrorFixSelector.Name = "tabErrorFixSelector";
             tabErrorFixSelector.SelectedIndex = 0;
             tabErrorFixSelector.ShowToolTips = true;
-            tabErrorFixSelector.Size = new Size(2298, 1137);
+            tabErrorFixSelector.Size = new Size(1238, 530);
             tabErrorFixSelector.TabIndex = 0;
             tabErrorFixSelector.SelectedIndexChanged += TabErrorFixSelector_SelectedIndexChanged;
             // 
@@ -3449,11 +3473,11 @@ namespace FTAnalyzer
             // 
             tabDataErrors.Controls.Add(dgDataErrors);
             tabDataErrors.Controls.Add(gbDataErrorTypes);
-            tabDataErrors.Location = new Point(8, 46);
-            tabDataErrors.Margin = new Padding(8, 9, 8, 9);
+            tabDataErrors.Location = new Point(4, 24);
+            tabDataErrors.Margin = new Padding(4);
             tabDataErrors.Name = "tabDataErrors";
-            tabDataErrors.Padding = new Padding(8, 9, 8, 9);
-            tabDataErrors.Size = new Size(2282, 1083);
+            tabDataErrors.Padding = new Padding(4);
+            tabDataErrors.Size = new Size(1230, 502);
             tabDataErrors.TabIndex = 0;
             tabDataErrors.Text = "Data Errors";
             tabDataErrors.UseVisualStyleBackColor = true;
@@ -3464,11 +3488,11 @@ namespace FTAnalyzer
             gbDataErrorTypes.Controls.Add(btnSelectAll);
             gbDataErrorTypes.Controls.Add(btnClearAll);
             gbDataErrorTypes.Dock = DockStyle.Top;
-            gbDataErrorTypes.Location = new Point(8, 9);
-            gbDataErrorTypes.Margin = new Padding(8, 9, 8, 9);
+            gbDataErrorTypes.Location = new Point(4, 4);
+            gbDataErrorTypes.Margin = new Padding(4);
             gbDataErrorTypes.Name = "gbDataErrorTypes";
-            gbDataErrorTypes.Padding = new Padding(8, 9, 8, 9);
-            gbDataErrorTypes.Size = new Size(2266, 394);
+            gbDataErrorTypes.Padding = new Padding(4);
+            gbDataErrorTypes.Size = new Size(1222, 185);
             gbDataErrorTypes.TabIndex = 1;
             gbDataErrorTypes.TabStop = false;
             gbDataErrorTypes.Text = "Types of Data Error to display";
@@ -3479,21 +3503,21 @@ namespace FTAnalyzer
             ckbDataErrors.ColumnWidth = 300;
             ckbDataErrors.Dock = DockStyle.Top;
             ckbDataErrors.FormattingEnabled = true;
-            ckbDataErrors.Location = new Point(8, 41);
-            ckbDataErrors.Margin = new Padding(8, 9, 8, 9);
+            ckbDataErrors.Location = new Point(4, 20);
+            ckbDataErrors.Margin = new Padding(4);
             ckbDataErrors.MultiColumn = true;
             ckbDataErrors.Name = "ckbDataErrors";
             ckbDataErrors.ScrollAlwaysVisible = true;
-            ckbDataErrors.Size = new Size(2250, 256);
+            ckbDataErrors.Size = new Size(1214, 112);
             ckbDataErrors.TabIndex = 8;
             ckbDataErrors.SelectedIndexChanged += CkbDataErrors_SelectedIndexChanged;
             // 
             // btnSelectAll
             // 
-            btnSelectAll.Location = new Point(17, 330);
-            btnSelectAll.Margin = new Padding(8, 9, 8, 9);
+            btnSelectAll.Location = new Point(9, 155);
+            btnSelectAll.Margin = new Padding(4);
             btnSelectAll.Name = "btnSelectAll";
-            btnSelectAll.Size = new Size(164, 55);
+            btnSelectAll.Size = new Size(88, 26);
             btnSelectAll.TabIndex = 7;
             btnSelectAll.Text = "Select All";
             btnSelectAll.UseVisualStyleBackColor = true;
@@ -3501,10 +3525,10 @@ namespace FTAnalyzer
             // 
             // btnClearAll
             // 
-            btnClearAll.Location = new Point(193, 330);
-            btnClearAll.Margin = new Padding(8, 9, 8, 9);
+            btnClearAll.Location = new Point(104, 155);
+            btnClearAll.Margin = new Padding(4);
             btnClearAll.Name = "btnClearAll";
-            btnClearAll.Size = new Size(164, 55);
+            btnClearAll.Size = new Size(88, 26);
             btnClearAll.TabIndex = 6;
             btnClearAll.Text = "Clear All";
             btnClearAll.UseVisualStyleBackColor = true;
@@ -3524,11 +3548,11 @@ namespace FTAnalyzer
             tabDuplicates.Controls.Add(pbDuplicates);
             tabDuplicates.Controls.Add(btnCancelDuplicates);
             tabDuplicates.Controls.Add(dgDuplicates);
-            tabDuplicates.Location = new Point(8, 46);
-            tabDuplicates.Margin = new Padding(8, 9, 8, 9);
+            tabDuplicates.Location = new Point(4, 24);
+            tabDuplicates.Margin = new Padding(4);
             tabDuplicates.Name = "tabDuplicates";
-            tabDuplicates.Padding = new Padding(8, 9, 8, 9);
-            tabDuplicates.Size = new Size(2282, 1083);
+            tabDuplicates.Padding = new Padding(4);
+            tabDuplicates.Size = new Size(1230, 502);
             tabDuplicates.TabIndex = 1;
             tabDuplicates.Text = "Duplicates?";
             tabDuplicates.UseVisualStyleBackColor = true;
@@ -3538,20 +3562,20 @@ namespace FTAnalyzer
             labDuplicateSlider.Anchor = AnchorStyles.Top;
             labDuplicateSlider.AutoSize = true;
             labDuplicateSlider.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
-            labDuplicateSlider.Location = new Point(1493, 59);
-            labDuplicateSlider.Margin = new Padding(8, 0, 8, 0);
+            labDuplicateSlider.Location = new Point(807, 28);
+            labDuplicateSlider.Margin = new Padding(4, 0, 4, 0);
             labDuplicateSlider.Name = "labDuplicateSlider";
-            labDuplicateSlider.Size = new Size(192, 26);
+            labDuplicateSlider.Size = new Size(104, 13);
             labDuplicateSlider.TabIndex = 32;
             labDuplicateSlider.Text = "Match Quality : 1";
             // 
             // labCompletion
             // 
             labCompletion.AutoSize = true;
-            labCompletion.Location = new Point(264, 86);
-            labCompletion.Margin = new Padding(8, 0, 8, 0);
+            labCompletion.Location = new Point(142, 40);
+            labCompletion.Margin = new Padding(4, 0, 4, 0);
             labCompletion.Name = "labCompletion";
-            labCompletion.Size = new Size(0, 32);
+            labCompletion.Size = new Size(0, 15);
             labCompletion.TabIndex = 30;
             // 
             // ckbHideIgnoredDuplicates
@@ -3559,10 +3583,10 @@ namespace FTAnalyzer
             ckbHideIgnoredDuplicates.AutoSize = true;
             ckbHideIgnoredDuplicates.Checked = true;
             ckbHideIgnoredDuplicates.CheckState = CheckState.Checked;
-            ckbHideIgnoredDuplicates.Location = new Point(26, 158);
-            ckbHideIgnoredDuplicates.Margin = new Padding(8, 9, 8, 9);
+            ckbHideIgnoredDuplicates.Location = new Point(14, 74);
+            ckbHideIgnoredDuplicates.Margin = new Padding(4);
             ckbHideIgnoredDuplicates.Name = "ckbHideIgnoredDuplicates";
-            ckbHideIgnoredDuplicates.Size = new Size(498, 36);
+            ckbHideIgnoredDuplicates.Size = new Size(249, 19);
             ckbHideIgnoredDuplicates.TabIndex = 28;
             ckbHideIgnoredDuplicates.Text = "Hide Possible Duplicates marked as Ignore";
             ckbHideIgnoredDuplicates.UseVisualStyleBackColor = true;
@@ -3573,38 +3597,38 @@ namespace FTAnalyzer
             label16.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             label16.AutoSize = true;
             label16.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
-            label16.Location = new Point(892, 155);
-            label16.Margin = new Padding(8, 0, 8, 0);
+            label16.Location = new Point(480, 73);
+            label16.Margin = new Padding(4, 0, 4, 0);
             label16.Name = "label16";
-            label16.Size = new Size(377, 36);
+            label16.Size = new Size(199, 18);
             label16.TabIndex = 26;
             label16.Text = "Candidate Duplicates List";
             // 
             // labCalcDuplicates
             // 
             labCalcDuplicates.AutoSize = true;
-            labCalcDuplicates.Location = new Point(15, 23);
-            labCalcDuplicates.Margin = new Padding(8, 0, 8, 0);
+            labCalcDuplicates.Location = new Point(8, 11);
+            labCalcDuplicates.Margin = new Padding(4, 0, 4, 0);
             labCalcDuplicates.Name = "labCalcDuplicates";
-            labCalcDuplicates.Size = new Size(250, 32);
+            labCalcDuplicates.Size = new Size(125, 15);
             labCalcDuplicates.TabIndex = 21;
             labCalcDuplicates.Text = "Calculating Duplicates";
             // 
             // pbDuplicates
             // 
-            pbDuplicates.Location = new Point(271, 15);
-            pbDuplicates.Margin = new Padding(8, 9, 8, 9);
+            pbDuplicates.Location = new Point(146, 7);
+            pbDuplicates.Margin = new Padding(4);
             pbDuplicates.Name = "pbDuplicates";
-            pbDuplicates.Size = new Size(613, 55);
+            pbDuplicates.Size = new Size(330, 26);
             pbDuplicates.TabIndex = 20;
             // 
             // btnCancelDuplicates
             // 
             btnCancelDuplicates.Image = (Image)resources.GetObject("btnCancelDuplicates.Image");
-            btnCancelDuplicates.Location = new Point(897, 15);
-            btnCancelDuplicates.Margin = new Padding(8, 9, 8, 9);
+            btnCancelDuplicates.Location = new Point(483, 7);
+            btnCancelDuplicates.Margin = new Padding(4);
             btnCancelDuplicates.Name = "btnCancelDuplicates";
-            btnCancelDuplicates.Size = new Size(50, 55);
+            btnCancelDuplicates.Size = new Size(27, 26);
             btnCancelDuplicates.TabIndex = 27;
             btnCancelDuplicates.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnCancelDuplicates.UseVisualStyleBackColor = true;
@@ -3622,8 +3646,8 @@ namespace FTAnalyzer
             dgDuplicates.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgDuplicates.FilterAndSortEnabled = true;
             dgDuplicates.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
-            dgDuplicates.Location = new Point(-2, 214);
-            dgDuplicates.Margin = new Padding(13, 15, 13, 15);
+            dgDuplicates.Location = new Point(-1, 100);
+            dgDuplicates.Margin = new Padding(7);
             dgDuplicates.MultiSelect = false;
             dgDuplicates.Name = "dgDuplicates";
             dgDuplicates.ReadOnly = true;
@@ -3631,7 +3655,7 @@ namespace FTAnalyzer
             dgDuplicates.RowHeadersVisible = false;
             dgDuplicates.RowHeadersWidth = 50;
             dgDuplicates.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgDuplicates.Size = new Size(2284, 869);
+            dgDuplicates.Size = new Size(1231, 402);
             dgDuplicates.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgDuplicates.TabIndex = 19;
             dgDuplicates.VirtualMode = true;
@@ -3641,10 +3665,10 @@ namespace FTAnalyzer
             // tabLooseBirths
             // 
             tabLooseBirths.Controls.Add(dgLooseBirths);
-            tabLooseBirths.Location = new Point(8, 46);
-            tabLooseBirths.Margin = new Padding(8, 9, 8, 9);
+            tabLooseBirths.Location = new Point(4, 24);
+            tabLooseBirths.Margin = new Padding(4);
             tabLooseBirths.Name = "tabLooseBirths";
-            tabLooseBirths.Size = new Size(2282, 1083);
+            tabLooseBirths.Size = new Size(1230, 502);
             tabLooseBirths.TabIndex = 2;
             tabLooseBirths.Text = "Loose Births";
             tabLooseBirths.UseVisualStyleBackColor = true;
@@ -3661,7 +3685,7 @@ namespace FTAnalyzer
             dgLooseBirths.FilterAndSortEnabled = true;
             dgLooseBirths.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgLooseBirths.Location = new Point(0, 0);
-            dgLooseBirths.Margin = new Padding(13, 15, 13, 15);
+            dgLooseBirths.Margin = new Padding(7);
             dgLooseBirths.MultiSelect = false;
             dgLooseBirths.Name = "dgLooseBirths";
             dgLooseBirths.ReadOnly = true;
@@ -3669,7 +3693,7 @@ namespace FTAnalyzer
             dgLooseBirths.RowHeadersVisible = false;
             dgLooseBirths.RowHeadersWidth = 50;
             dgLooseBirths.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgLooseBirths.Size = new Size(2282, 1083);
+            dgLooseBirths.Size = new Size(1230, 502);
             dgLooseBirths.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgLooseBirths.TabIndex = 3;
             dgLooseBirths.VirtualMode = true;
@@ -3678,10 +3702,10 @@ namespace FTAnalyzer
             // tabLooseDeaths
             // 
             tabLooseDeaths.Controls.Add(dgLooseDeaths);
-            tabLooseDeaths.Location = new Point(8, 46);
-            tabLooseDeaths.Margin = new Padding(8, 9, 8, 9);
+            tabLooseDeaths.Location = new Point(4, 24);
+            tabLooseDeaths.Margin = new Padding(4);
             tabLooseDeaths.Name = "tabLooseDeaths";
-            tabLooseDeaths.Size = new Size(2282, 1083);
+            tabLooseDeaths.Size = new Size(1230, 502);
             tabLooseDeaths.TabIndex = 3;
             tabLooseDeaths.Text = "Loose Deaths";
             tabLooseDeaths.UseVisualStyleBackColor = true;
@@ -3698,7 +3722,7 @@ namespace FTAnalyzer
             dgLooseDeaths.FilterAndSortEnabled = true;
             dgLooseDeaths.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgLooseDeaths.Location = new Point(0, 0);
-            dgLooseDeaths.Margin = new Padding(13, 15, 13, 15);
+            dgLooseDeaths.Margin = new Padding(7);
             dgLooseDeaths.MultiSelect = false;
             dgLooseDeaths.Name = "dgLooseDeaths";
             dgLooseDeaths.ReadOnly = true;
@@ -3706,7 +3730,7 @@ namespace FTAnalyzer
             dgLooseDeaths.RowHeadersVisible = false;
             dgLooseDeaths.RowHeadersWidth = 50;
             dgLooseDeaths.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgLooseDeaths.Size = new Size(2282, 1083);
+            dgLooseDeaths.Size = new Size(1230, 502);
             dgLooseDeaths.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgLooseDeaths.TabIndex = 2;
             dgLooseDeaths.VirtualMode = true;
@@ -3715,10 +3739,10 @@ namespace FTAnalyzer
             // tabLooseInfo
             // 
             tabLooseInfo.Controls.Add(dgLooseInfo);
-            tabLooseInfo.Location = new Point(8, 46);
-            tabLooseInfo.Margin = new Padding(8, 9, 8, 9);
+            tabLooseInfo.Location = new Point(4, 24);
+            tabLooseInfo.Margin = new Padding(4);
             tabLooseInfo.Name = "tabLooseInfo";
-            tabLooseInfo.Size = new Size(2282, 1083);
+            tabLooseInfo.Size = new Size(1230, 502);
             tabLooseInfo.TabIndex = 4;
             tabLooseInfo.Text = "All Loose Info";
             tabLooseInfo.UseVisualStyleBackColor = true;
@@ -3735,7 +3759,7 @@ namespace FTAnalyzer
             dgLooseInfo.FilterAndSortEnabled = true;
             dgLooseInfo.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgLooseInfo.Location = new Point(0, 0);
-            dgLooseInfo.Margin = new Padding(13, 15, 13, 15);
+            dgLooseInfo.Margin = new Padding(7);
             dgLooseInfo.MultiSelect = false;
             dgLooseInfo.Name = "dgLooseInfo";
             dgLooseInfo.ReadOnly = true;
@@ -3743,7 +3767,7 @@ namespace FTAnalyzer
             dgLooseInfo.RowHeadersVisible = false;
             dgLooseInfo.RowHeadersWidth = 50;
             dgLooseInfo.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgLooseInfo.Size = new Size(2282, 1083);
+            dgLooseInfo.Size = new Size(1230, 502);
             dgLooseInfo.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgLooseInfo.TabIndex = 4;
             dgLooseInfo.VirtualMode = true;
@@ -3755,11 +3779,11 @@ namespace FTAnalyzer
             tabSurnames.Controls.Add(btnShowSurnames);
             tabSurnames.Controls.Add(dgSurnames);
             tabSurnames.Controls.Add(reltypesSurnames);
-            tabSurnames.Location = new Point(8, 46);
-            tabSurnames.Margin = new Padding(8, 9, 8, 9);
+            tabSurnames.Location = new Point(4, 24);
+            tabSurnames.Margin = new Padding(4);
             tabSurnames.Name = "tabSurnames";
-            tabSurnames.Padding = new Padding(8, 9, 8, 9);
-            tabSurnames.Size = new Size(2298, 1137);
+            tabSurnames.Padding = new Padding(4);
+            tabSurnames.Size = new Size(1238, 530);
             tabSurnames.TabIndex = 14;
             tabSurnames.Text = "Surnames";
             tabSurnames.UseVisualStyleBackColor = true;
@@ -3769,20 +3793,20 @@ namespace FTAnalyzer
             chkSurnamesIgnoreCase.AutoSize = true;
             chkSurnamesIgnoreCase.Checked = true;
             chkSurnamesIgnoreCase.CheckState = CheckState.Checked;
-            chkSurnamesIgnoreCase.Location = new Point(1077, 192);
-            chkSurnamesIgnoreCase.Margin = new Padding(8, 9, 8, 9);
+            chkSurnamesIgnoreCase.Location = new Point(580, 90);
+            chkSurnamesIgnoreCase.Margin = new Padding(4);
             chkSurnamesIgnoreCase.Name = "chkSurnamesIgnoreCase";
-            chkSurnamesIgnoreCase.Size = new Size(172, 36);
+            chkSurnamesIgnoreCase.Size = new Size(88, 19);
             chkSurnamesIgnoreCase.TabIndex = 24;
             chkSurnamesIgnoreCase.Text = "Ignore Case";
             chkSurnamesIgnoreCase.UseVisualStyleBackColor = true;
             // 
             // btnShowSurnames
             // 
-            btnShowSurnames.Location = new Point(730, 182);
-            btnShowSurnames.Margin = new Padding(8, 9, 8, 9);
+            btnShowSurnames.Location = new Point(393, 85);
+            btnShowSurnames.Margin = new Padding(4);
             btnShowSurnames.Name = "btnShowSurnames";
-            btnShowSurnames.Size = new Size(334, 55);
+            btnShowSurnames.Size = new Size(180, 26);
             btnShowSurnames.TabIndex = 23;
             btnShowSurnames.Text = "Show Surnames";
             btnShowSurnames.UseVisualStyleBackColor = true;
@@ -3800,8 +3824,8 @@ namespace FTAnalyzer
             dgSurnames.Columns.AddRange(new DataGridViewColumn[] { Surname, URI, Individuals, Families, Marriages });
             dgSurnames.FilterAndSortEnabled = true;
             dgSurnames.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
-            dgSurnames.Location = new Point(8, 254);
-            dgSurnames.Margin = new Padding(13, 15, 13, 15);
+            dgSurnames.Location = new Point(4, 119);
+            dgSurnames.Margin = new Padding(7);
             dgSurnames.MultiSelect = false;
             dgSurnames.Name = "dgSurnames";
             dgSurnames.ReadOnly = true;
@@ -3809,7 +3833,7 @@ namespace FTAnalyzer
             dgSurnames.RowHeadersVisible = false;
             dgSurnames.RowHeadersWidth = 50;
             dgSurnames.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgSurnames.Size = new Size(2290, 850);
+            dgSurnames.Size = new Size(1234, 411);
             dgSurnames.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgSurnames.TabIndex = 1;
             dgSurnames.VirtualMode = true;
@@ -3824,7 +3848,7 @@ namespace FTAnalyzer
             Surname.Name = "Surname";
             Surname.ReadOnly = true;
             Surname.SortMode = DataGridViewColumnSortMode.Programmatic;
-            Surname.Width = 154;
+            Surname.Width = 79;
             // 
             // URI
             // 
@@ -3846,7 +3870,7 @@ namespace FTAnalyzer
             Individuals.Name = "Individuals";
             Individuals.ReadOnly = true;
             Individuals.SortMode = DataGridViewColumnSortMode.Programmatic;
-            Individuals.Width = 173;
+            Individuals.Width = 89;
             // 
             // Families
             // 
@@ -3856,7 +3880,7 @@ namespace FTAnalyzer
             Families.Name = "Families";
             Families.ReadOnly = true;
             Families.SortMode = DataGridViewColumnSortMode.Programmatic;
-            Families.Width = 144;
+            Families.Width = 75;
             // 
             // Marriages
             // 
@@ -3866,15 +3890,15 @@ namespace FTAnalyzer
             Marriages.Name = "Marriages";
             Marriages.ReadOnly = true;
             Marriages.SortMode = DataGridViewColumnSortMode.Programmatic;
-            Marriages.Width = 164;
+            Marriages.Width = 84;
             // 
             // reltypesSurnames
             // 
-            reltypesSurnames.Location = new Point(13, 9);
-            reltypesSurnames.Margin = new Padding(13, 15, 13, 15);
+            reltypesSurnames.Location = new Point(7, 4);
+            reltypesSurnames.Margin = new Padding(7);
             reltypesSurnames.MarriedToDB = true;
             reltypesSurnames.Name = "reltypesSurnames";
-            reltypesSurnames.Size = new Size(704, 244);
+            reltypesSurnames.Size = new Size(379, 114);
             reltypesSurnames.TabIndex = 22;
             // 
             // tabFacts
@@ -3894,13 +3918,33 @@ namespace FTAnalyzer
             tabFacts.Controls.Add(ckbFactSelect);
             tabFacts.Controls.Add(txtFactsSurname);
             tabFacts.Controls.Add(relTypesFacts);
-            tabFacts.Location = new Point(8, 46);
-            tabFacts.Margin = new Padding(8, 9, 8, 9);
+            tabFacts.Location = new Point(4, 24);
+            tabFacts.Margin = new Padding(4);
             tabFacts.Name = "tabFacts";
-            tabFacts.Size = new Size(2298, 1137);
+            tabFacts.Size = new Size(1238, 530);
             tabFacts.TabIndex = 13;
             tabFacts.Text = "Facts";
             tabFacts.UseVisualStyleBackColor = true;
+            // 
+            // btnDuplicateFacts
+            // 
+            btnDuplicateFacts.Location = new Point(794, 49);
+            btnDuplicateFacts.Margin = new Padding(4);
+            btnDuplicateFacts.Name = "btnDuplicateFacts";
+            btnDuplicateFacts.Size = new Size(189, 44);
+            btnDuplicateFacts.TabIndex = 42;
+            btnDuplicateFacts.Text = "Show Duplicate Facts of Selected Fact Type";
+            btnDuplicateFacts.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            label15.Location = new Point(9, 434);
+            label15.Margin = new Padding(4, 0, 4, 0);
+            label15.Name = "label15";
+            label15.Size = new Size(344, 19);
+            label15.TabIndex = 39;
+            label15.Text = "Select Facts to Include in Report";
+            label15.TextAlign = ContentAlignment.TopCenter;
             // 
             // panel1
             // 
@@ -3908,80 +3952,130 @@ namespace FTAnalyzer
             panel1.Controls.Add(radioOnlyAlternate);
             panel1.Controls.Add(radioOnlyPreferred);
             panel1.Controls.Add(radioAllFacts);
-            panel1.Location = new Point(378, 993);
-            panel1.Margin = new Padding(4, 5, 4, 5);
+            panel1.Location = new Point(204, 465);
+            panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(765, 54);
+            panel1.Size = new Size(412, 25);
             panel1.TabIndex = 38;
             // 
             // radioAllFacts
             // 
             radioAllFacts.AutoSize = true;
             radioAllFacts.Checked = true;
-            radioAllFacts.Location = new Point(0, 5);
-            radioAllFacts.Margin = new Padding(4, 5, 4, 5);
+            radioAllFacts.Location = new Point(0, 2);
+            radioAllFacts.Margin = new Padding(2);
             radioAllFacts.Name = "radioAllFacts";
-            radioAllFacts.Size = new Size(196, 36);
+            radioAllFacts.Size = new Size(101, 19);
             radioAllFacts.TabIndex = 38;
             radioAllFacts.TabStop = true;
             radioAllFacts.Text = "Show All Facts";
             radioAllFacts.UseVisualStyleBackColor = true;
             radioAllFacts.CheckedChanged += RadioFacts_CheckedChanged;
             // 
+            // btnDeselectExcludeAllFactTypes
+            // 
+            btnDeselectExcludeAllFactTypes.Location = new Point(626, 126);
+            btnDeselectExcludeAllFactTypes.Margin = new Padding(4);
+            btnDeselectExcludeAllFactTypes.Name = "btnDeselectExcludeAllFactTypes";
+            btnDeselectExcludeAllFactTypes.Size = new Size(159, 26);
+            btnDeselectExcludeAllFactTypes.TabIndex = 40;
+            btnDeselectExcludeAllFactTypes.Text = "De-select all Fact Types";
+            btnDeselectExcludeAllFactTypes.UseVisualStyleBackColor = true;
+            btnDeselectExcludeAllFactTypes.Visible = false;
+            // 
             // lblExclude
             // 
             lblExclude.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            lblExclude.Location = new Point(678, 1172);
-            lblExclude.Margin = new Padding(8, 0, 8, 0);
+            lblExclude.Location = new Point(365, 549);
+            lblExclude.Margin = new Padding(4, 0, 4, 0);
             lblExclude.Name = "lblExclude";
-            lblExclude.Size = new Size(635, 32);
+            lblExclude.Size = new Size(342, 15);
             lblExclude.TabIndex = 32;
             lblExclude.Text = "Select Facts to Exclude from Report";
             lblExclude.TextAlign = ContentAlignment.TopCenter;
             lblExclude.Visible = false;
             // 
+            // btnExcludeAllFactTypes
+            // 
+            btnExcludeAllFactTypes.Location = new Point(419, 125);
+            btnExcludeAllFactTypes.Margin = new Padding(4);
+            btnExcludeAllFactTypes.Name = "btnExcludeAllFactTypes";
+            btnExcludeAllFactTypes.Size = new Size(159, 26);
+            btnExcludeAllFactTypes.TabIndex = 39;
+            btnExcludeAllFactTypes.Text = "Select all Fact Types";
+            btnExcludeAllFactTypes.UseVisualStyleBackColor = true;
+            btnExcludeAllFactTypes.Visible = false;
+            // 
             // btnDeselectAllFactTypes
             // 
-            btnDeselectAllFactTypes.Location = new Point(401, 268);
-            btnDeselectAllFactTypes.Margin = new Padding(8, 9, 8, 9);
+            btnDeselectAllFactTypes.Location = new Point(216, 126);
+            btnDeselectAllFactTypes.Margin = new Padding(4);
             btnDeselectAllFactTypes.Name = "btnDeselectAllFactTypes";
-            btnDeselectAllFactTypes.Size = new Size(295, 55);
+            btnDeselectAllFactTypes.Size = new Size(159, 26);
             btnDeselectAllFactTypes.TabIndex = 27;
             btnDeselectAllFactTypes.Text = "De-select all Fact Types";
             btnDeselectAllFactTypes.UseVisualStyleBackColor = true;
             btnDeselectAllFactTypes.Click += BtnDeselectAllFactTypes_Click;
             // 
+            // btnShowFacts
+            // 
+            btnShowFacts.Location = new Point(419, 49);
+            btnShowFacts.Margin = new Padding(4);
+            btnShowFacts.Name = "btnShowFacts";
+            btnShowFacts.Size = new Size(365, 44);
+            btnShowFacts.TabIndex = 37;
+            btnShowFacts.Text = "Show Facts for Individuals with Selected Fact Types";
+            btnShowFacts.UseVisualStyleBackColor = true;
+            // 
             // btnSelectAllFactTypes
             // 
-            btnSelectAllFactTypes.Location = new Point(17, 266);
-            btnSelectAllFactTypes.Margin = new Padding(8, 9, 8, 9);
+            btnSelectAllFactTypes.Location = new Point(9, 125);
+            btnSelectAllFactTypes.Margin = new Padding(4);
             btnSelectAllFactTypes.Name = "btnSelectAllFactTypes";
-            btnSelectAllFactTypes.Size = new Size(295, 55);
+            btnSelectAllFactTypes.Size = new Size(159, 26);
             btnSelectAllFactTypes.TabIndex = 26;
             btnSelectAllFactTypes.Text = "Select all Fact Types";
             btnSelectAllFactTypes.UseVisualStyleBackColor = true;
             btnSelectAllFactTypes.Click += BtnSelectAllFactTypes_Click;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(423, 22);
+            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(54, 15);
+            label3.TabIndex = 36;
+            label3.Text = "Surname";
+            // 
             // ckbFactSelect
             // 
             ckbFactSelect.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             ckbFactSelect.FormattingEnabled = true;
-            ckbFactSelect.Location = new Point(17, 337);
-            ckbFactSelect.Margin = new Padding(8, 9, 8, 9);
+            ckbFactSelect.Location = new Point(9, 158);
+            ckbFactSelect.Margin = new Padding(4);
             ckbFactSelect.Name = "ckbFactSelect";
             ckbFactSelect.ScrollAlwaysVisible = true;
             ckbFactSelect.SelectionMode = SelectionMode.None;
-            ckbFactSelect.Size = new Size(676, 580);
+            ckbFactSelect.Size = new Size(366, 274);
             ckbFactSelect.TabIndex = 25;
             ckbFactSelect.MouseClick += CkbFactSelect_MouseClick;
             // 
+            // txtFactsSurname
+            // 
+            txtFactsSurname.Location = new Point(486, 19);
+            txtFactsSurname.Margin = new Padding(4);
+            txtFactsSurname.Name = "txtFactsSurname";
+            txtFactsSurname.Size = new Size(298, 23);
+            txtFactsSurname.TabIndex = 35;
+            // 
             // relTypesFacts
             // 
-            relTypesFacts.Location = new Point(17, 9);
-            relTypesFacts.Margin = new Padding(13, 15, 13, 15);
+            relTypesFacts.Location = new Point(9, 4);
+            relTypesFacts.Margin = new Padding(7);
             relTypesFacts.MarriedToDB = true;
             relTypesFacts.Name = "relTypesFacts";
-            relTypesFacts.Size = new Size(704, 246);
+            relTypesFacts.Size = new Size(379, 115);
             relTypesFacts.TabIndex = 21;
             relTypesFacts.RelationTypesChanged += RelTypesFacts_RelationTypesChanged;
             // 
@@ -3997,11 +4091,11 @@ namespace FTAnalyzer
             tabToday.Controls.Add(rbTodaySingle);
             tabToday.Controls.Add(label17);
             tabToday.Controls.Add(dpToday);
-            tabToday.Location = new Point(8, 46);
-            tabToday.Margin = new Padding(8, 9, 8, 9);
+            tabToday.Location = new Point(4, 24);
+            tabToday.Margin = new Padding(4);
             tabToday.Name = "tabToday";
-            tabToday.Padding = new Padding(8, 9, 8, 9);
-            tabToday.Size = new Size(2298, 1137);
+            tabToday.Padding = new Padding(4);
+            tabToday.Size = new Size(1238, 530);
             tabToday.TabIndex = 17;
             tabToday.Text = "On This Day";
             tabToday.UseVisualStyleBackColor = true;
@@ -4010,42 +4104,42 @@ namespace FTAnalyzer
             // 
             rtbToday.Dock = DockStyle.Bottom;
             rtbToday.Font = new Font("Microsoft Sans Serif", 9F);
-            rtbToday.Location = new Point(8, 183);
-            rtbToday.Margin = new Padding(8, 9, 8, 9);
+            rtbToday.Location = new Point(4, 81);
+            rtbToday.Margin = new Padding(4);
             rtbToday.Name = "rtbToday";
             rtbToday.ReadOnly = true;
-            rtbToday.Size = new Size(2282, 945);
+            rtbToday.Size = new Size(1230, 445);
             rtbToday.TabIndex = 17;
             rtbToday.Text = "";
             // 
             // label18
             // 
             label18.AutoSize = true;
-            label18.Location = new Point(1198, 55);
-            label18.Margin = new Padding(8, 0, 8, 0);
+            label18.Location = new Point(645, 26);
+            label18.Margin = new Padding(4, 0, 4, 0);
             label18.Name = "label18";
-            label18.Size = new Size(124, 32);
+            label18.Size = new Size(61, 15);
             label18.TabIndex = 16;
             label18.Text = "Year Step :";
             // 
             // nudToday
             // 
-            nudToday.Location = new Point(1341, 52);
-            nudToday.Margin = new Padding(8, 9, 8, 9);
+            nudToday.Location = new Point(722, 24);
+            nudToday.Margin = new Padding(4);
             nudToday.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
             nudToday.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudToday.Name = "nudToday";
-            nudToday.Size = new Size(91, 39);
+            nudToday.Size = new Size(49, 23);
             nudToday.TabIndex = 15;
             nudToday.Value = new decimal(new int[] { 5, 0, 0, 0 });
             nudToday.ValueChanged += NudToday_ValueChanged;
             // 
             // btnUpdateTodaysEvents
             // 
-            btnUpdateTodaysEvents.Location = new Point(554, 44);
-            btnUpdateTodaysEvents.Margin = new Padding(8, 9, 8, 9);
+            btnUpdateTodaysEvents.Location = new Point(298, 21);
+            btnUpdateTodaysEvents.Margin = new Padding(4);
             btnUpdateTodaysEvents.Name = "btnUpdateTodaysEvents";
-            btnUpdateTodaysEvents.Size = new Size(249, 55);
+            btnUpdateTodaysEvents.Size = new Size(134, 26);
             btnUpdateTodaysEvents.TabIndex = 14;
             btnUpdateTodaysEvents.Text = "Update list of Events";
             btnUpdateTodaysEvents.UseVisualStyleBackColor = true;
@@ -4054,28 +4148,28 @@ namespace FTAnalyzer
             // labToday
             // 
             labToday.AutoSize = true;
-            labToday.Location = new Point(1477, 55);
-            labToday.Margin = new Padding(8, 0, 8, 0);
+            labToday.Location = new Point(795, 26);
+            labToday.Margin = new Padding(4, 0, 4, 0);
             labToday.Name = "labToday";
-            labToday.Size = new Size(245, 32);
+            labToday.Size = new Size(122, 15);
             labToday.TabIndex = 13;
             labToday.Text = "Loading World Events";
             // 
             // pbToday
             // 
-            pbToday.Location = new Point(1731, 52);
-            pbToday.Margin = new Padding(8, 9, 8, 9);
+            pbToday.Location = new Point(932, 24);
+            pbToday.Margin = new Padding(4);
             pbToday.Name = "pbToday";
-            pbToday.Size = new Size(368, 49);
+            pbToday.Size = new Size(198, 23);
             pbToday.TabIndex = 12;
             // 
             // rbTodayMonth
             // 
             rbTodayMonth.AutoSize = true;
-            rbTodayMonth.Location = new Point(992, 52);
-            rbTodayMonth.Margin = new Padding(8, 9, 8, 9);
+            rbTodayMonth.Location = new Point(534, 24);
+            rbTodayMonth.Margin = new Padding(4);
             rbTodayMonth.Name = "rbTodayMonth";
-            rbTodayMonth.Size = new Size(193, 36);
+            rbTodayMonth.Size = new Size(98, 19);
             rbTodayMonth.TabIndex = 11;
             rbTodayMonth.Text = "Whole Month";
             rbTodayMonth.UseVisualStyleBackColor = true;
@@ -4085,10 +4179,10 @@ namespace FTAnalyzer
             // 
             rbTodaySingle.AutoSize = true;
             rbTodaySingle.Checked = true;
-            rbTodaySingle.Location = new Point(815, 52);
-            rbTodaySingle.Margin = new Padding(8, 9, 8, 9);
+            rbTodaySingle.Location = new Point(439, 24);
+            rbTodaySingle.Margin = new Padding(4);
             rbTodaySingle.Name = "rbTodaySingle";
-            rbTodaySingle.Size = new Size(159, 36);
+            rbTodaySingle.Size = new Size(80, 19);
             rbTodaySingle.TabIndex = 10;
             rbTodaySingle.TabStop = true;
             rbTodaySingle.Text = "Single Day";
@@ -4098,19 +4192,19 @@ namespace FTAnalyzer
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new Point(8, 55);
-            label17.Margin = new Padding(8, 0, 8, 0);
+            label17.Location = new Point(4, 26);
+            label17.Margin = new Padding(4, 0, 4, 0);
             label17.Name = "label17";
-            label17.Size = new Size(147, 32);
+            label17.Size = new Size(71, 15);
             label17.TabIndex = 9;
             label17.Text = "Select Date :";
             // 
             // dpToday
             // 
-            dpToday.Location = new Point(169, 52);
-            dpToday.Margin = new Padding(8, 9, 8, 9);
+            dpToday.Location = new Point(91, 24);
+            dpToday.Margin = new Padding(4);
             dpToday.Name = "dpToday";
-            dpToday.Size = new Size(366, 39);
+            dpToday.Size = new Size(199, 23);
             dpToday.TabIndex = 8;
             // 
             // NonDuplicate
@@ -4241,114 +4335,19 @@ namespace FTAnalyzer
             imageList1.ImageSize = new Size(16, 16);
             imageList1.TransparentColor = Color.Transparent;
             // 
-            // label15
-            // 
-            label15.Location = new Point(17, 926);
-            label15.Margin = new Padding(8, 0, 8, 0);
-            label15.Name = "label15";
-            label15.Size = new Size(639, 40);
-            label15.TabIndex = 39;
-            label15.Text = "Select Facts to Include in Report";
-            label15.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // btnDuplicateFacts
-            // 
-            btnDuplicateFacts.Location = new Point(1474, 105);
-            btnDuplicateFacts.Margin = new Padding(8, 9, 8, 9);
-            btnDuplicateFacts.Name = "btnDuplicateFacts";
-            btnDuplicateFacts.Size = new Size(351, 94);
-            btnDuplicateFacts.TabIndex = 42;
-            btnDuplicateFacts.Text = "Show Duplicate Facts of Selected Fact Type";
-            btnDuplicateFacts.UseVisualStyleBackColor = true;
-            // 
-            // btnShowExclusions
-            // 
-            btnShowExclusions.Location = new Point(707, 586);
-            btnShowExclusions.Margin = new Padding(8, 9, 8, 9);
-            btnShowExclusions.Name = "btnShowExclusions";
-            btnShowExclusions.Size = new Size(61, 126);
-            btnShowExclusions.TabIndex = 41;
-            btnShowExclusions.Text = "=>";
-            toolTips.SetToolTip(btnShowExclusions, "Show Exclusions");
-            btnShowExclusions.UseVisualStyleBackColor = true;
-            // 
-            // btnDeselectExcludeAllFactTypes
-            // 
-            btnDeselectExcludeAllFactTypes.Location = new Point(1163, 268);
-            btnDeselectExcludeAllFactTypes.Margin = new Padding(8, 9, 8, 9);
-            btnDeselectExcludeAllFactTypes.Name = "btnDeselectExcludeAllFactTypes";
-            btnDeselectExcludeAllFactTypes.Size = new Size(295, 55);
-            btnDeselectExcludeAllFactTypes.TabIndex = 40;
-            btnDeselectExcludeAllFactTypes.Text = "De-select all Fact Types";
-            btnDeselectExcludeAllFactTypes.UseVisualStyleBackColor = true;
-            btnDeselectExcludeAllFactTypes.Visible = false;
-            // 
-            // btnExcludeAllFactTypes
-            // 
-            btnExcludeAllFactTypes.Location = new Point(779, 266);
-            btnExcludeAllFactTypes.Margin = new Padding(8, 9, 8, 9);
-            btnExcludeAllFactTypes.Name = "btnExcludeAllFactTypes";
-            btnExcludeAllFactTypes.Size = new Size(295, 55);
-            btnExcludeAllFactTypes.TabIndex = 39;
-            btnExcludeAllFactTypes.Text = "Select all Fact Types";
-            btnExcludeAllFactTypes.UseVisualStyleBackColor = true;
-            btnExcludeAllFactTypes.Visible = false;
-            // 
-            // ckbFactExclude
-            // 
-            ckbFactExclude.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            ckbFactExclude.FormattingEnabled = true;
-            ckbFactExclude.Location = new Point(779, 337);
-            ckbFactExclude.Margin = new Padding(8, 9, 8, 9);
-            ckbFactExclude.Name = "ckbFactExclude";
-            ckbFactExclude.ScrollAlwaysVisible = true;
-            ckbFactExclude.SelectionMode = SelectionMode.None;
-            ckbFactExclude.Size = new Size(675, 580);
-            ckbFactExclude.TabIndex = 38;
-            toolTips.SetToolTip(ckbFactExclude, "Any fact types selected in this box excludes people who have this fact type from report");
-            ckbFactExclude.Visible = false;
-            // 
-            // btnShowFacts
-            // 
-            btnShowFacts.Location = new Point(779, 105);
-            btnShowFacts.Margin = new Padding(8, 9, 8, 9);
-            btnShowFacts.Name = "btnShowFacts";
-            btnShowFacts.Size = new Size(678, 94);
-            btnShowFacts.TabIndex = 37;
-            btnShowFacts.Text = "Show Facts for Individuals with Selected Fact Types";
-            btnShowFacts.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(785, 47);
-            label3.Margin = new Padding(8, 0, 8, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(109, 32);
-            label3.TabIndex = 36;
-            label3.Text = "Surname";
-            // 
-            // txtFactsSurname
-            // 
-            txtFactsSurname.Location = new Point(903, 41);
-            txtFactsSurname.Margin = new Padding(8, 9, 8, 9);
-            txtFactsSurname.Name = "txtFactsSurname";
-            txtFactsSurname.Size = new Size(550, 39);
-            txtFactsSurname.TabIndex = 35;
-            // 
             // MainForm
             // 
             AllowDrop = true;
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(2314, 1257);
+            ClientSize = new Size(1246, 497);
             Controls.Add(statusStrip);
             Controls.Add(menuStrip1);
             Controls.Add(tabSelector);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
-            Margin = new Padding(8, 9, 8, 9);
-            MinimumSize = new Size(1211, 907);
+            Margin = new Padding(4);
+            MinimumSize = new Size(659, 446);
             Name = "MainForm";
             Text = "Family Tree Analyzer";
             FormClosing += MainForm_FormClosing;

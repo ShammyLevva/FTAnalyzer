@@ -20,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FTAnalyzer.Windows", "FTAna
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{B1B55881-8582-4121-A09D-EE0D29B859DE}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer.Net7", "Installer.Net7\Installer.Net7.vdproj", "{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer.Net8", "Installer.Net8\Installer.Net8.vdproj", "{00363CB7-B6C0-45BA-8D8E-2D2C45EC2A68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
