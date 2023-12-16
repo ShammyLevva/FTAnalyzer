@@ -88,7 +88,7 @@ namespace FTAnalyzer.Forms
                     Style = linestyle
                 };
 
-                Dictionary<string, IStyle> styles = new();
+                Dictionary<string, IStyle> styles = [];
                 VectorStyle line = new()
                 {
                     PointColor = new SolidBrush(Color.Green),
@@ -165,7 +165,7 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.WaitCursor;
             lifelines.Clear();
             points.Clear();
-            List<IDisplayFact> displayFacts = new();
+            List<IDisplayFact> displayFacts = [];
             foreach (DataGridViewRow row in dgIndividuals.SelectedRows)
             {
                 Individual ind = (Individual)row.DataBoundItem;
@@ -192,7 +192,7 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.Default;
         }
 
-        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite((string)e.Link.LinkData);
+        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite(e.Link?.LinkData?.ToString() ?? string.Empty);
 
         void DgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

@@ -18,6 +18,7 @@ using HtmlAgilityPack;
 using System.Diagnostics;
 using System.Runtime.Versioning;
 using FTAnalyzer.Windows;
+using BruTile.Tms;
 
 namespace FTAnalyzer
 {
@@ -3012,12 +3013,16 @@ namespace FTAnalyzer
         {
             HourGlass(this,true);
             Predicate<Individual> relTypeFilter = relTypesColoured.BuildFilter<Individual>(x => x.RelationType);
-            List<IDisplayColourBMD> list = ft.ColourBMD(relTypeFilter, txtColouredSurname.Text, (ComboBoxFamily)cmbColourFamily.SelectedItem);
-            ColourBMD rs = new(list);
-            DisposeDuplicateForms(rs);
-            rs.Show();
-            rs.Focus();
-            Analytics.TrackAction(Analytics.MainFormAction, Analytics.ColourBMDEvent);
+            ComboBoxFamily? cbFamily = cmbColourFamily.SelectedItem as ComboBoxFamily;
+            if (cbFamily is not null)
+            {
+                List<IDisplayColourBMD> list = ft.ColourBMD(relTypeFilter, txtColouredSurname.Text, cbFamily);
+                ColourBMD rs = new(list);
+                DisposeDuplicateForms(rs);
+                rs.Show();
+                rs.Focus();
+                Analytics.TrackAction(Analytics.MainFormAction, Analytics.ColourBMDEvent);
+            }
             HourGlass(this,false);
         }
 
@@ -3025,13 +3030,17 @@ namespace FTAnalyzer
         {
             HourGlass(this,true);
             Predicate<Individual> relTypeFilter = relTypesColoured.BuildFilter<Individual>(x => x.RelationType);
-            List<IDisplayColourCensus> list =
-                ft.ColourCensus(country, relTypeFilter, txtColouredSurname.Text, (ComboBoxFamily)cmbColourFamily.SelectedItem, ckbIgnoreNoBirthDate.Checked, ckbIgnoreNoDeathDate.Checked);
-            ColourCensus rs = new(country, list);
-            DisposeDuplicateForms(rs);
-            rs.Show();
-            rs.Focus();
-            await Analytics.TrackActionAsync(Analytics.MainFormAction, Analytics.ColourCensusEvent, country).ConfigureAwait(true);
+            ComboBoxFamily? cbFamily = cmbColourFamily.SelectedItem as ComboBoxFamily;
+            if (cbFamily is not null)
+            {
+                List<IDisplayColourCensus> list =
+                    ft.ColourCensus(country, relTypeFilter, txtColouredSurname.Text, cbFamily, ckbIgnoreNoBirthDate.Checked, ckbIgnoreNoDeathDate.Checked);
+                ColourCensus rs = new(country, list);
+                DisposeDuplicateForms(rs);
+                rs.Show();
+                rs.Focus();
+                await Analytics.TrackActionAsync(Analytics.MainFormAction, Analytics.ColourCensusEvent, country).ConfigureAwait(true);
+            }
             HourGlass(this,false);
         }
 
@@ -3069,7 +3078,7 @@ namespace FTAnalyzer
         {
             ComboBoxFamily? f = null;
             if (cmbColourFamily.Text != "All Families")
-                f = (ComboBoxFamily)cmbColourFamily.SelectedItem; // store the previous value to set it again after
+                f = cmbColourFamily.SelectedItem as ComboBoxFamily; // store the previous value to set it again after
             ClearColourFamilyCombo();
             bool stillThere = UpdateColourFamilyComboBox(f);
             if (f is not null && stillThere)  // the previously selected value is still present so select it
@@ -3189,7 +3198,7 @@ namespace FTAnalyzer
             ContextMenuStrip? cms = null;
             if (sender is ContextMenuStrip strip)
                 cms = strip;
-            if (sender is ToolStripMenuItem tsmi)
+            if (sender is ToolStripMenuItem tsmi && tsmi.Owner is not null)
                 cms = (ContextMenuStrip)tsmi.Owner;
             if (cms is not null && cms.Tag is not null)
                 ind = (Individual)cms.Tag;

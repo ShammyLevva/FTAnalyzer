@@ -127,7 +127,7 @@ namespace FTAnalyzer.Forms
 
         List<MapLocation> FilterToRelationsIncluded(List<MapLocation> locations)
         {
-            List<MapLocation> result = new();
+            List<MapLocation> result = [];
             foreach (MapLocation ml in locations)
                 if (RelationIncluded(ml.Individual.RelationType))
                     result.Add(ml);
@@ -216,7 +216,7 @@ namespace FTAnalyzer.Forms
         void MapBox1_MapQueried(FeatureDataTable data)
         {
             Cursor = Cursors.WaitCursor;
-            List<MapLocation> locations = new();
+            List<MapLocation> locations = [];
             foreach (FeatureDataRow row in data)
             {
                 IList<FeatureDataRow> features = (List<FeatureDataRow>)row["Features"];
@@ -389,7 +389,7 @@ namespace FTAnalyzer.Forms
 
         void MnuHideScaleBar_Click(object sender, EventArgs e) => MapHelper.MnuHideScaleBar_Click(mnuHideScaleBar, mapBox1);
 
-        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite((string)e.Link.LinkData);
+        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite(e.Link?.LinkData?.ToString() ?? string.Empty);
 
         void TimeLine_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 

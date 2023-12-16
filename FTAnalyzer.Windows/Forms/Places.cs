@@ -73,9 +73,9 @@ namespace FTAnalyzer.Forms
             {
                 clusters.Clear();
                 dgFacts.DataSource = null;
-                List<IDisplayFact> displayFacts = new();
-                List<Individual> list = new();
-                List<Tuple<FactLocation, int>> locations = new();
+                List<IDisplayFact> displayFacts = [];
+                List<Individual> list = [];
+                List<Tuple<FactLocation, int>> locations = [];
                 foreach (TreeNode node in tvPlaces.SelectedNodes)
                 {
                     Tuple<FactLocation, int> location = new((FactLocation)node.Tag, node.Level);
@@ -125,7 +125,7 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.Default;
         }
 
-        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite((string)e.Link.LinkData);
+        void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite(e.Link?.LinkData?.ToString() ?? string.Empty);
 
         void DgFacts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -272,7 +272,7 @@ namespace FTAnalyzer.Forms
         void MapBox1_MapQueried(FeatureDataTable data)
         {
             Cursor = Cursors.WaitCursor;
-            List<MapLocation> locations = new();
+            List<MapLocation> locations = [];
             foreach (FeatureDataRow row in data)
             {
                 IList<FeatureDataRow> features = (List<FeatureDataRow>)row["Features"];

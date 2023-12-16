@@ -22,11 +22,11 @@ namespace FTAnalyzer.Forms
         bool formClosing;
         string statusText;
         bool refreshingMenus;
-        ISet<string> noneOfTheAbove;
+        HashSet<string> noneOfTheAbove;
         ToolStripMenuItem[] noneOfTheAboveMenus;
         readonly ConcurrentQueue<FactLocation> queue;
-        IDictionary<string, IList<OS50kGazetteer>> OS50kDictionary;
-        IList<OS50kGazetteer> OS50k;
+        Dictionary<string, IList<OS50kGazetteer>> OS50kDictionary;
+        List<OS50kGazetteer> OS50k;
         readonly IProgress<string> outputText;
 
         FactLocation CopyLocation;
@@ -154,14 +154,17 @@ namespace FTAnalyzer.Forms
                         count++;
                 }
             }
-            ToolStripMenuItem places = (ToolStripMenuItem)mnuFoundResultType.DropDownItems["Places"];
-            foreach (ToolStripMenuItem menu in places.DropDownItems)
+            ToolStripMenuItem? places = mnuFoundResultType.DropDownItems["Places"] as ToolStripMenuItem;
+            if (places is not null)
             {
-                if (menu.Text != "Select All" && menu.Text != "Clear All")
+                foreach (ToolStripMenuItem menu in places.DropDownItems)
                 {
-                    menus++;
-                    if (menu.Checked)
-                        count++;
+                    if (menu.Text != "Select All" && menu.Text != "Clear All")
+                    {
+                        menus++;
+                        if (menu.Checked)
+                            count++;
+                    }
                 }
             }
             return count == menus;
@@ -205,8 +208,8 @@ namespace FTAnalyzer.Forms
         {
             if (AllFiltersActive(false))
                 return new SortableBindingList<IDisplayGeocodedLocation>(locations);
-            List<IDisplayGeocodedLocation> results = new();
-            ToolStripMenuItem places = (ToolStripMenuItem)mnuFoundResultType.DropDownItems["Places"];
+            List<IDisplayGeocodedLocation> results = [];
+            ToolStripMenuItem? places = mnuFoundResultType.DropDownItems["Places"] as ToolStripMenuItem;
             ToolStripMenuItem[] list = new ToolStripMenuItem[places.DropDownItems.Count + mnuFoundResultType.DropDownItems.Count + noneOfTheAboveMenus.Length];
             mnuFoundResultType.DropDownItems.CopyTo(list, 0);
             places.DropDownItems.CopyTo(list, mnuFoundResultType.DropDownItems.Count);
@@ -222,7 +225,7 @@ namespace FTAnalyzer.Forms
                         foreach (ToolStripMenuItem menu in list)
                         {
                             // filter locations on menu items that are ticked
-                            if (menu.Checked && loc.FoundResultType.Contains(menu.Name))
+                            if (menu.Checked && loc.FoundResultType.Contains(menu.Name ?? string.Empty))
                             {
                                 results.Add(loc);
                                 break;
@@ -236,8 +239,8 @@ namespace FTAnalyzer.Forms
 
         void CheckGoogleStatusCodes(List<IDisplayGeocodedLocation> input)
         {
-            noneOfTheAbove = new HashSet<string>();
-            Dictionary<string, List<IDisplayGeocodedLocation>> results = new();
+            noneOfTheAbove = [];
+            Dictionary<string, List<IDisplayGeocodedLocation>> results = [];
             foreach (IDisplayGeocodedLocation loc in input)
             {
                 if (loc.FoundResultType.Length > 0)
@@ -248,7 +251,7 @@ namespace FTAnalyzer.Forms
                         string key = part.Trim();
                         if (!results.TryGetValue(key, out List<IDisplayGeocodedLocation>? value))
                         {
-                            value = new List<IDisplayGeocodedLocation>();
+                            value = [];
                             results[key] = value;
                             if (!GoogleMap.RESULT_TYPES.Contains(key))
                                 noneOfTheAbove.Add(key);
@@ -307,7 +310,7 @@ namespace FTAnalyzer.Forms
         void MnuSelectClear_Click(object sender, EventArgs e)
         {
             refreshingMenus = true;
-            ToolStripMenuItem places = (ToolStripMenuItem)mnuFoundResultType.DropDownItems["Places"];
+            ToolStripMenuItem? places = mnuFoundResultType.DropDownItems["Places"] as ToolStripMenuItem;
             if (mnuSelectClear.Text.Equals("Clear All"))
             {
                 mnuSelectClear.Text = "Select All";
@@ -1108,8 +1111,8 @@ namespace FTAnalyzer.Forms
         {
             if (OS50kDictionary is not null)
                 return true; // already loaded
-            OS50kDictionary = new Dictionary<string, IList<OS50kGazetteer>>();
-            OS50k = new List<OS50kGazetteer>();
+            OS50kDictionary = [];
+            OS50k = [];
             try
             {
                 string startPath;
@@ -1157,16 +1160,16 @@ namespace FTAnalyzer.Forms
 
         public void CheckGazetteer()
         {
-            List<string> endings = new();
+            List<string> endings = [];
             using StreamWriter sw = new(@"C:\Maps\FTAnalyzer\endings.csv", false);
             sw.WriteLine("Ending,PlaceName,CountyCode,CountyName,FeatureCode,Latitude,Longitude,ParishName");
             foreach (KeyValuePair<string, IList<OS50kGazetteer>> kvp in OS50kDictionary)
             {
                 string name = kvp.Key;
                 OS50kGazetteer gaz = kvp.Value[0];
-                if (name.LastIndexOf(" ") > 0 && name.LastIndexOf(" ") + 4 >= name.ToString().Length)
+                if (name.LastIndexOf(' ') > 0 && name.LastIndexOf(' ') + 4 >= name.ToString().Length)
                 {
-                    string ending = name[(name.LastIndexOf(" ") + 1)..].Trim();
+                    string ending = name[(name.LastIndexOf(' ') + 1)..].Trim();
                     if (ending != "tor" && ending != "bay" && ending != "way" && ending != "law" && ending != "fen" && ending != "row" && ending != "lea"
                          && ending != "top" && ending != "ure" && ending != "end" && ending != "oak" && ending != "den" && ending != "dun" && ending != "lee"
                          && ending != "dam" && ending != "gap" && ending != "sea" && ending != "dee" && ending != "don" && ending != "dye" && ending != "bog"
@@ -1187,8 +1190,8 @@ namespace FTAnalyzer.Forms
         public void ProcessOS50kGazetteerData(BackgroundWorker worker, DoWorkEventArgs e)
         {
             IEnumerable<FactLocation> toSearch = FactLocation.AllLocations;
-            List<FactLocation> failedToFind = new();
-            noCounty = new Dictionary<FactLocation, IList<OS50kGazetteer>>();
+            List<FactLocation> failedToFind = [];
+            noCounty = [];
             int total = FactLocation.LocationsCount;
             int count = 0;
             int matched = 0;
@@ -1337,8 +1340,7 @@ namespace FTAnalyzer.Forms
                     return ProcessOS50kMatches(placeMatches, loc, FactLocation.PLACE);
                 else
                 {
-                    if (!noCounty.ContainsKey(loc))
-                        noCounty.Add(loc, results);
+                    noCounty.TryAdd(loc, results);
                 }
             }
             return false;
