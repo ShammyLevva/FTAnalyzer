@@ -36,590 +36,524 @@ namespace FTAnalyzer.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColourBMD));
-            this.dgBMDReportSheet = new System.Windows.Forms.DataGridView();
-            this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Forenames = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Relation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Birth = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BaptChri = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Marriage1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Marriage2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Marriage3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Death = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CremBuri = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DeathDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FirstMarriage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SecondMarriage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ThirdMarriage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BirthLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DeathLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.mnuSaveCensusColumnLayout = new System.Windows.Forms.ToolStripButton();
-            this.mnuResetCensusColumns = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuExportToExcel = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.cbBMDSearchProvider = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-            this.cbRegion = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.cbFilter = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
-            this.cbApplyTo = new System.Windows.Forms.ToolStripComboBox();
-            this.printDocument = new System.Drawing.Printing.PrintDocument();
-            this.printDialog = new System.Windows.Forms.PrintDialog();
-            this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnuViewFacts = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.dgBMDReportSheet)).BeginInit();
-            this.statusStrip.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
-            this.contextMenuStrip.SuspendLayout();
-            this.SuspendLayout();
+            dgBMDReportSheet = new DataGridView();
+            IndividualID = new DataGridViewTextBoxColumn();
+            Forenames = new DataGridViewTextBoxColumn();
+            Surname = new DataGridViewTextBoxColumn();
+            Relation = new DataGridViewTextBoxColumn();
+            RelationToRoot = new DataGridViewTextBoxColumn();
+            Birth = new DataGridViewTextBoxColumn();
+            BaptChri = new DataGridViewTextBoxColumn();
+            Marriage1 = new DataGridViewTextBoxColumn();
+            Marriage2 = new DataGridViewTextBoxColumn();
+            Marriage3 = new DataGridViewTextBoxColumn();
+            Death = new DataGridViewTextBoxColumn();
+            CremBuri = new DataGridViewTextBoxColumn();
+            BirthDate = new DataGridViewTextBoxColumn();
+            DeathDate = new DataGridViewTextBoxColumn();
+            FirstMarriage = new DataGridViewTextBoxColumn();
+            SecondMarriage = new DataGridViewTextBoxColumn();
+            ThirdMarriage = new DataGridViewTextBoxColumn();
+            BirthLocation = new DataGridViewTextBoxColumn();
+            DeathLocation = new DataGridViewTextBoxColumn();
+            Ahnentafel = new DataGridViewTextBoxColumn();
+            statusStrip = new StatusStrip();
+            tsRecords = new ToolStripStatusLabel();
+            toolStrip1 = new ToolStrip();
+            mnuSaveCensusColumnLayout = new ToolStripButton();
+            mnuResetCensusColumns = new ToolStripButton();
+            toolStripSeparator3 = new ToolStripSeparator();
+            printToolStripButton = new ToolStripButton();
+            printPreviewToolStripButton = new ToolStripButton();
+            toolStripSeparator1 = new ToolStripSeparator();
+            mnuExportToExcel = new ToolStripButton();
+            toolStripSeparator2 = new ToolStripSeparator();
+            toolStripLabel1 = new ToolStripLabel();
+            cbBMDSearchProvider = new ToolStripComboBox();
+            toolStripLabel3 = new ToolStripLabel();
+            cbRegion = new ToolStripComboBox();
+            toolStripLabel2 = new ToolStripLabel();
+            cbFilter = new ToolStripComboBox();
+            tsApplyToLabel = new ToolStripLabel();
+            cbApplyTo = new ToolStripComboBox();
+            printDocument = new System.Drawing.Printing.PrintDocument();
+            printDialog = new PrintDialog();
+            printPreviewDialog = new PrintPreviewDialog();
+            contextMenuStrip = new ContextMenuStrip(components);
+            mnuViewFacts = new ToolStripMenuItem();
+            ((System.ComponentModel.ISupportInitialize)dgBMDReportSheet).BeginInit();
+            statusStrip.SuspendLayout();
+            toolStrip1.SuspendLayout();
+            contextMenuStrip.SuspendLayout();
+            SuspendLayout();
             // 
             // dgBMDReportSheet
             // 
-            this.dgBMDReportSheet.AccessibleDescription = "";
-            this.dgBMDReportSheet.AllowUserToAddRows = false;
-            this.dgBMDReportSheet.AllowUserToDeleteRows = false;
-            this.dgBMDReportSheet.AllowUserToOrderColumns = true;
-            this.dgBMDReportSheet.AllowUserToResizeRows = false;
-            this.dgBMDReportSheet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgBMDReportSheet.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.142858F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgBMDReportSheet.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgBMDReportSheet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgBMDReportSheet.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IndividualID,
-            this.Forenames,
-            this.Surname,
-            this.Relation,
-            this.RelationToRoot,
-            this.Birth,
-            this.BaptChri,
-            this.Marriage1,
-            this.Marriage2,
-            this.Marriage3,
-            this.Death,
-            this.CremBuri,
-            this.BirthDate,
-            this.DeathDate,
-            this.FirstMarriage,
-            this.SecondMarriage,
-            this.ThirdMarriage,
-            this.BirthLocation,
-            this.DeathLocation,
-            this.Ahnentafel});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.142858F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgBMDReportSheet.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgBMDReportSheet.Location = new System.Drawing.Point(0, 24);
-            this.dgBMDReportSheet.Name = "dgBMDReportSheet";
-            this.dgBMDReportSheet.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.142858F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgBMDReportSheet.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgBMDReportSheet.RowHeadersWidth = 20;
-            this.dgBMDReportSheet.Size = new System.Drawing.Size(1038, 534);
-            this.dgBMDReportSheet.TabIndex = 1;
-            this.dgBMDReportSheet.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.DgBMDReportSheet_CellContextMenuStripNeeded);
-            this.dgBMDReportSheet.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgReportSheet_CellDoubleClick);
-            this.dgBMDReportSheet.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgReportSheet_CellFormatting);
-            this.dgBMDReportSheet.SelectionChanged += new System.EventHandler(this.DgBMDReportSheet_SelectionChanged);
+            dgBMDReportSheet.AccessibleDescription = "";
+            dgBMDReportSheet.AllowUserToAddRows = false;
+            dgBMDReportSheet.AllowUserToDeleteRows = false;
+            dgBMDReportSheet.AllowUserToOrderColumns = true;
+            dgBMDReportSheet.AllowUserToResizeRows = false;
+            dgBMDReportSheet.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgBMDReportSheet.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Control;
+            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 8.142858F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dgBMDReportSheet.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dgBMDReportSheet.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgBMDReportSheet.Columns.AddRange(new DataGridViewColumn[] { IndividualID, Forenames, Surname, Relation, RelationToRoot, Birth, BaptChri, Marriage1, Marriage2, Marriage3, Death, CremBuri, BirthDate, DeathDate, FirstMarriage, SecondMarriage, ThirdMarriage, BirthLocation, DeathLocation, Ahnentafel });
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = SystemColors.Window;
+            dataGridViewCellStyle5.Font = new Font("Microsoft Sans Serif", 8.142858F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle5.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
+            dgBMDReportSheet.DefaultCellStyle = dataGridViewCellStyle5;
+            dgBMDReportSheet.Location = new Point(0, 59);
+            dgBMDReportSheet.Margin = new Padding(6, 7, 6, 7);
+            dgBMDReportSheet.Name = "dgBMDReportSheet";
+            dgBMDReportSheet.ReadOnly = true;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = SystemColors.Control;
+            dataGridViewCellStyle6.Font = new Font("Microsoft Sans Serif", 8.142858F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle6.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            dgBMDReportSheet.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dgBMDReportSheet.RowHeadersWidth = 20;
+            dgBMDReportSheet.Size = new Size(2249, 1314);
+            dgBMDReportSheet.TabIndex = 1;
+            dgBMDReportSheet.CellContextMenuStripNeeded += DgBMDReportSheet_CellContextMenuStripNeeded;
+            dgBMDReportSheet.CellDoubleClick += DgReportSheet_CellDoubleClick;
+            dgBMDReportSheet.CellFormatting += DgReportSheet_CellFormatting;
+            dgBMDReportSheet.SelectionChanged += DgBMDReportSheet_SelectionChanged;
             // 
             // IndividualID
             // 
-            this.IndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.IndividualID.DataPropertyName = "IndividualID";
-            this.IndividualID.HeaderText = "Ind. ID";
-            this.IndividualID.MinimumWidth = 50;
-            this.IndividualID.Name = "IndividualID";
-            this.IndividualID.ReadOnly = true;
-            this.IndividualID.Width = 50;
+            IndividualID.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            IndividualID.DataPropertyName = "IndividualID";
+            IndividualID.HeaderText = "Ind. ID";
+            IndividualID.MinimumWidth = 50;
+            IndividualID.Name = "IndividualID";
+            IndividualID.ReadOnly = true;
+            IndividualID.Width = 93;
             // 
             // Forenames
             // 
-            this.Forenames.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Forenames.DataPropertyName = "Forenames";
-            this.Forenames.HeaderText = "Forenames";
-            this.Forenames.MinimumWidth = 100;
-            this.Forenames.Name = "Forenames";
-            this.Forenames.ReadOnly = true;
+            Forenames.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            Forenames.DataPropertyName = "Forenames";
+            Forenames.HeaderText = "Forenames";
+            Forenames.MinimumWidth = 100;
+            Forenames.Name = "Forenames";
+            Forenames.ReadOnly = true;
+            Forenames.Width = 167;
             // 
             // Surname
             // 
-            this.Surname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Surname.DataPropertyName = "Surname";
-            this.Surname.HeaderText = "Surname";
-            this.Surname.MinimumWidth = 75;
-            this.Surname.Name = "Surname";
-            this.Surname.ReadOnly = true;
-            this.Surname.Width = 75;
+            Surname.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            Surname.DataPropertyName = "Surname";
+            Surname.HeaderText = "Surname";
+            Surname.MinimumWidth = 75;
+            Surname.Name = "Surname";
+            Surname.ReadOnly = true;
+            Surname.Width = 146;
             // 
             // Relation
             // 
-            this.Relation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Relation.DataPropertyName = "Relation";
-            this.Relation.HeaderText = "Relation";
-            this.Relation.MinimumWidth = 105;
-            this.Relation.Name = "Relation";
-            this.Relation.ReadOnly = true;
-            this.Relation.Width = 105;
+            Relation.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            Relation.DataPropertyName = "Relation";
+            Relation.HeaderText = "Relation";
+            Relation.MinimumWidth = 105;
+            Relation.Name = "Relation";
+            Relation.ReadOnly = true;
+            Relation.Width = 137;
             // 
             // RelationToRoot
             // 
-            this.RelationToRoot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.RelationToRoot.DataPropertyName = "RelationToRoot";
-            this.RelationToRoot.HeaderText = "Relation To Root";
-            this.RelationToRoot.MinimumWidth = 100;
-            this.RelationToRoot.Name = "RelationToRoot";
-            this.RelationToRoot.ReadOnly = true;
+            RelationToRoot.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            RelationToRoot.DataPropertyName = "RelationToRoot";
+            RelationToRoot.HeaderText = "Relation To Root";
+            RelationToRoot.MinimumWidth = 100;
+            RelationToRoot.Name = "RelationToRoot";
+            RelationToRoot.ReadOnly = true;
+            RelationToRoot.Width = 160;
             // 
             // Birth
             // 
-            this.Birth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Birth.DataPropertyName = "Birth";
-            this.Birth.HeaderText = "Birth";
-            this.Birth.MinimumWidth = 60;
-            this.Birth.Name = "Birth";
-            this.Birth.ReadOnly = true;
-            this.Birth.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Birth.Width = 60;
+            Birth.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            Birth.DataPropertyName = "Birth";
+            Birth.HeaderText = "Birth";
+            Birth.MinimumWidth = 60;
+            Birth.Name = "Birth";
+            Birth.ReadOnly = true;
+            Birth.Resizable = DataGridViewTriState.False;
+            Birth.Width = 102;
             // 
             // BaptChri
             // 
-            this.BaptChri.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.BaptChri.DataPropertyName = "BaptChri";
-            this.BaptChri.HeaderText = "Baptism Christening";
-            this.BaptChri.MinimumWidth = 62;
-            this.BaptChri.Name = "BaptChri";
-            this.BaptChri.ReadOnly = true;
-            this.BaptChri.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.BaptChri.Width = 114;
+            BaptChri.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            BaptChri.DataPropertyName = "BaptChri";
+            BaptChri.HeaderText = "Baptism Christening";
+            BaptChri.MinimumWidth = 62;
+            BaptChri.Name = "BaptChri";
+            BaptChri.ReadOnly = true;
+            BaptChri.Resizable = DataGridViewTriState.False;
+            BaptChri.Width = 232;
             // 
             // Marriage1
             // 
-            this.Marriage1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Marriage1.DataPropertyName = "Marriage1";
-            this.Marriage1.HeaderText = "Marriage No. 1";
-            this.Marriage1.MinimumWidth = 60;
-            this.Marriage1.Name = "Marriage1";
-            this.Marriage1.ReadOnly = true;
-            this.Marriage1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Marriage1.Width = 86;
+            Marriage1.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            Marriage1.DataPropertyName = "Marriage1";
+            Marriage1.HeaderText = "Marriage No. 1";
+            Marriage1.MinimumWidth = 60;
+            Marriage1.Name = "Marriage1";
+            Marriage1.ReadOnly = true;
+            Marriage1.Resizable = DataGridViewTriState.False;
+            Marriage1.Width = 168;
             // 
             // Marriage2
             // 
-            this.Marriage2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Marriage2.DataPropertyName = "Marriage2";
-            this.Marriage2.HeaderText = "Marriage No. 2";
-            this.Marriage2.MinimumWidth = 60;
-            this.Marriage2.Name = "Marriage2";
-            this.Marriage2.ReadOnly = true;
-            this.Marriage2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Marriage2.Width = 86;
+            Marriage2.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            Marriage2.DataPropertyName = "Marriage2";
+            Marriage2.HeaderText = "Marriage No. 2";
+            Marriage2.MinimumWidth = 60;
+            Marriage2.Name = "Marriage2";
+            Marriage2.ReadOnly = true;
+            Marriage2.Resizable = DataGridViewTriState.False;
+            Marriage2.Width = 168;
             // 
             // Marriage3
             // 
-            this.Marriage3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Marriage3.DataPropertyName = "Marriage3";
-            this.Marriage3.HeaderText = "Marriage No. 3";
-            this.Marriage3.MinimumWidth = 60;
-            this.Marriage3.Name = "Marriage3";
-            this.Marriage3.ReadOnly = true;
-            this.Marriage3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Marriage3.Width = 86;
+            Marriage3.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            Marriage3.DataPropertyName = "Marriage3";
+            Marriage3.HeaderText = "Marriage No. 3";
+            Marriage3.MinimumWidth = 60;
+            Marriage3.Name = "Marriage3";
+            Marriage3.ReadOnly = true;
+            Marriage3.Resizable = DataGridViewTriState.False;
+            Marriage3.Width = 168;
             // 
             // Death
             // 
-            this.Death.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Death.DataPropertyName = "Death";
-            this.Death.HeaderText = "Death";
-            this.Death.MinimumWidth = 60;
-            this.Death.Name = "Death";
-            this.Death.ReadOnly = true;
-            this.Death.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Death.Width = 61;
+            Death.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            Death.DataPropertyName = "Death";
+            Death.HeaderText = "Death";
+            Death.MinimumWidth = 60;
+            Death.Name = "Death";
+            Death.ReadOnly = true;
+            Death.Resizable = DataGridViewTriState.False;
+            Death.Width = 115;
             // 
             // CremBuri
             // 
-            this.CremBuri.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.CremBuri.DataPropertyName = "CremBuri";
-            this.CremBuri.HeaderText = "Burial Cremation";
-            this.CremBuri.MinimumWidth = 60;
-            this.CremBuri.Name = "CremBuri";
-            this.CremBuri.ReadOnly = true;
-            this.CremBuri.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.CremBuri.Width = 99;
+            CremBuri.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            CremBuri.DataPropertyName = "CremBuri";
+            CremBuri.HeaderText = "Burial Cremation";
+            CremBuri.MinimumWidth = 60;
+            CremBuri.Name = "CremBuri";
+            CremBuri.ReadOnly = true;
+            CremBuri.Resizable = DataGridViewTriState.False;
+            CremBuri.Width = 202;
             // 
             // BirthDate
             // 
-            this.BirthDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.BirthDate.DataPropertyName = "BirthDate";
-            this.BirthDate.HeaderText = "Birth Date";
-            this.BirthDate.MinimumWidth = 50;
-            this.BirthDate.Name = "BirthDate";
-            this.BirthDate.ReadOnly = true;
-            this.BirthDate.Width = 73;
+            BirthDate.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            BirthDate.DataPropertyName = "BirthDate";
+            BirthDate.HeaderText = "Birth Date";
+            BirthDate.MinimumWidth = 50;
+            BirthDate.Name = "BirthDate";
+            BirthDate.ReadOnly = true;
+            BirthDate.Width = 143;
             // 
             // DeathDate
             // 
-            this.DeathDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.DeathDate.DataPropertyName = "DeathDate";
-            this.DeathDate.HeaderText = "Death Date";
-            this.DeathDate.MinimumWidth = 50;
-            this.DeathDate.Name = "DeathDate";
-            this.DeathDate.ReadOnly = true;
-            this.DeathDate.Width = 80;
+            DeathDate.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            DeathDate.DataPropertyName = "DeathDate";
+            DeathDate.HeaderText = "Death Date";
+            DeathDate.MinimumWidth = 50;
+            DeathDate.Name = "DeathDate";
+            DeathDate.ReadOnly = true;
+            DeathDate.Width = 154;
             // 
             // FirstMarriage
             // 
-            this.FirstMarriage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.FirstMarriage.DataPropertyName = "FirstMarriage";
-            this.FirstMarriage.HeaderText = "First Marriage";
-            this.FirstMarriage.MinimumWidth = 100;
-            this.FirstMarriage.Name = "FirstMarriage";
-            this.FirstMarriage.ReadOnly = true;
+            FirstMarriage.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            FirstMarriage.DataPropertyName = "FirstMarriage";
+            FirstMarriage.HeaderText = "First Marriage";
+            FirstMarriage.MinimumWidth = 100;
+            FirstMarriage.Name = "FirstMarriage";
+            FirstMarriage.ReadOnly = true;
+            FirstMarriage.Width = 175;
             // 
             // SecondMarriage
             // 
-            this.SecondMarriage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.SecondMarriage.DataPropertyName = "SecondMarriage";
-            this.SecondMarriage.HeaderText = "Second Marriage";
-            this.SecondMarriage.MinimumWidth = 100;
-            this.SecondMarriage.Name = "SecondMarriage";
-            this.SecondMarriage.ReadOnly = true;
-            this.SecondMarriage.Width = 104;
+            SecondMarriage.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            SecondMarriage.DataPropertyName = "SecondMarriage";
+            SecondMarriage.HeaderText = "Second Marriage";
+            SecondMarriage.MinimumWidth = 100;
+            SecondMarriage.Name = "SecondMarriage";
+            SecondMarriage.ReadOnly = true;
+            SecondMarriage.Width = 204;
             // 
             // ThirdMarriage
             // 
-            this.ThirdMarriage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ThirdMarriage.DataPropertyName = "ThirdMarriage";
-            this.ThirdMarriage.HeaderText = "Third Marriage";
-            this.ThirdMarriage.MinimumWidth = 100;
-            this.ThirdMarriage.Name = "ThirdMarriage";
-            this.ThirdMarriage.ReadOnly = true;
+            ThirdMarriage.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            ThirdMarriage.DataPropertyName = "ThirdMarriage";
+            ThirdMarriage.HeaderText = "Third Marriage";
+            ThirdMarriage.MinimumWidth = 100;
+            ThirdMarriage.Name = "ThirdMarriage";
+            ThirdMarriage.ReadOnly = true;
+            ThirdMarriage.Width = 180;
             // 
             // BirthLocation
             // 
-            this.BirthLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.BirthLocation.DataPropertyName = "BirthLocation";
-            this.BirthLocation.HeaderText = "Birth Location";
-            this.BirthLocation.MinimumWidth = 120;
-            this.BirthLocation.Name = "BirthLocation";
-            this.BirthLocation.ReadOnly = true;
-            this.BirthLocation.Width = 120;
+            BirthLocation.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            BirthLocation.DataPropertyName = "BirthLocation";
+            BirthLocation.HeaderText = "Birth Location";
+            BirthLocation.MinimumWidth = 120;
+            BirthLocation.Name = "BirthLocation";
+            BirthLocation.ReadOnly = true;
+            BirthLocation.Width = 175;
             // 
             // DeathLocation
             // 
-            this.DeathLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.DeathLocation.DataPropertyName = "DeathLocation";
-            this.DeathLocation.HeaderText = "Death Location";
-            this.DeathLocation.MinimumWidth = 120;
-            this.DeathLocation.Name = "DeathLocation";
-            this.DeathLocation.ReadOnly = true;
-            this.DeathLocation.Width = 120;
+            DeathLocation.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            DeathLocation.DataPropertyName = "DeathLocation";
+            DeathLocation.HeaderText = "Death Location";
+            DeathLocation.MinimumWidth = 120;
+            DeathLocation.Name = "DeathLocation";
+            DeathLocation.ReadOnly = true;
+            DeathLocation.Width = 187;
             // 
             // Ahnentafel
             // 
-            this.Ahnentafel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Ahnentafel.DataPropertyName = "Ahnentafel";
-            this.Ahnentafel.HeaderText = "Ahnentafel";
-            this.Ahnentafel.MinimumWidth = 20;
-            this.Ahnentafel.Name = "Ahnentafel";
-            this.Ahnentafel.ReadOnly = true;
-            this.Ahnentafel.Width = 83;
+            Ahnentafel.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            Ahnentafel.DataPropertyName = "Ahnentafel";
+            Ahnentafel.HeaderText = "Ahnentafel";
+            Ahnentafel.MinimumWidth = 20;
+            Ahnentafel.Name = "Ahnentafel";
+            Ahnentafel.ReadOnly = true;
+            Ahnentafel.Width = 161;
             // 
             // statusStrip
             // 
-            this.statusStrip.ImageScalingSize = new System.Drawing.Size(28, 28);
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsRecords});
-            this.statusStrip.Location = new System.Drawing.Point(0, 553);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1038, 22);
-            this.statusStrip.TabIndex = 2;
-            this.statusStrip.Text = "statusStrip1";
+            statusStrip.ImageScalingSize = new Size(28, 28);
+            statusStrip.Items.AddRange(new ToolStripItem[] { tsRecords });
+            statusStrip.Location = new Point(0, 1373);
+            statusStrip.Name = "statusStrip";
+            statusStrip.Padding = new Padding(2, 0, 30, 0);
+            statusStrip.Size = new Size(2249, 42);
+            statusStrip.TabIndex = 2;
+            statusStrip.Text = "statusStrip1";
             // 
             // tsRecords
             // 
-            this.tsRecords.Name = "tsRecords";
-            this.tsRecords.Size = new System.Drawing.Size(118, 17);
-            this.tsRecords.Text = "toolStripStatusLabel1";
+            tsRecords.Name = "tsRecords";
+            tsRecords.Size = new Size(237, 32);
+            tsRecords.Text = "toolStripStatusLabel1";
             // 
             // toolStrip1
             // 
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(28, 28);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuSaveCensusColumnLayout,
-            this.mnuResetCensusColumns,
-            this.toolStripSeparator3,
-            this.printToolStripButton,
-            this.printPreviewToolStripButton,
-            this.toolStripSeparator1,
-            this.mnuExportToExcel,
-            this.toolStripSeparator2,
-            this.toolStripLabel1,
-            this.cbBMDSearchProvider,
-            this.toolStripLabel3,
-            this.cbRegion,
-            this.toolStripLabel2,
-            this.cbFilter,
-            this.toolStripLabel4,
-            this.cbApplyTo});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1038, 35);
-            this.toolStrip1.TabIndex = 3;
-            this.toolStrip1.Text = "toolStrip1";
+            toolStrip1.GripStyle = ToolStripGripStyle.Hidden;
+            toolStrip1.ImageScalingSize = new Size(28, 28);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { mnuSaveCensusColumnLayout, mnuResetCensusColumns, toolStripSeparator3, printToolStripButton, printPreviewToolStripButton, toolStripSeparator1, mnuExportToExcel, toolStripSeparator2, toolStripLabel1, cbBMDSearchProvider, toolStripLabel3, cbRegion, toolStripLabel2, cbFilter, tsApplyToLabel, cbApplyTo });
+            toolStrip1.Location = new Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Padding = new Padding(0, 0, 4, 0);
+            toolStrip1.Size = new Size(2249, 40);
+            toolStrip1.TabIndex = 3;
+            toolStrip1.Text = "toolStrip1";
             // 
             // mnuSaveCensusColumnLayout
             // 
-            this.mnuSaveCensusColumnLayout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mnuSaveCensusColumnLayout.Image = ((System.Drawing.Image)(resources.GetObject("mnuSaveCensusColumnLayout.Image")));
-            this.mnuSaveCensusColumnLayout.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuSaveCensusColumnLayout.Name = "mnuSaveCensusColumnLayout";
-            this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(32, 32);
-            this.mnuSaveCensusColumnLayout.Text = "Save Census Column Sort Order";
-            this.mnuSaveCensusColumnLayout.Click += new System.EventHandler(this.MnuSaveCensusColumnLayout_Click);
+            mnuSaveCensusColumnLayout.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            mnuSaveCensusColumnLayout.Image = (Image)resources.GetObject("mnuSaveCensusColumnLayout.Image");
+            mnuSaveCensusColumnLayout.ImageTransparentColor = Color.Magenta;
+            mnuSaveCensusColumnLayout.Name = "mnuSaveCensusColumnLayout";
+            mnuSaveCensusColumnLayout.Size = new Size(46, 34);
+            mnuSaveCensusColumnLayout.Text = "Save Census Column Sort Order";
+            mnuSaveCensusColumnLayout.Click += MnuSaveCensusColumnLayout_Click;
             // 
             // mnuResetCensusColumns
             // 
-            this.mnuResetCensusColumns.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mnuResetCensusColumns.Image = ((System.Drawing.Image)(resources.GetObject("mnuResetCensusColumns.Image")));
-            this.mnuResetCensusColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuResetCensusColumns.Name = "mnuResetCensusColumns";
-            this.mnuResetCensusColumns.Size = new System.Drawing.Size(32, 32);
-            this.mnuResetCensusColumns.Text = "Reset Census Column Sort Order to Default";
-            this.mnuResetCensusColumns.Click += new System.EventHandler(this.MnuResetCensusColumns_Click);
+            mnuResetCensusColumns.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            mnuResetCensusColumns.Image = (Image)resources.GetObject("mnuResetCensusColumns.Image");
+            mnuResetCensusColumns.ImageTransparentColor = Color.Magenta;
+            mnuResetCensusColumns.Name = "mnuResetCensusColumns";
+            mnuResetCensusColumns.Size = new Size(46, 34);
+            mnuResetCensusColumns.Text = "Reset Census Column Sort Order to Default";
+            mnuResetCensusColumns.Click += MnuResetCensusColumns_Click;
             // 
             // toolStripSeparator3
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 35);
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new Size(6, 40);
             // 
             // printToolStripButton
             // 
-            this.printToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
-            this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printToolStripButton.Name = "printToolStripButton";
-            this.printToolStripButton.Size = new System.Drawing.Size(32, 32);
-            this.printToolStripButton.Text = "&Print";
-            this.printToolStripButton.Click += new System.EventHandler(this.PrintToolStripButton_Click);
+            printToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            printToolStripButton.Image = (Image)resources.GetObject("printToolStripButton.Image");
+            printToolStripButton.ImageTransparentColor = Color.Magenta;
+            printToolStripButton.Name = "printToolStripButton";
+            printToolStripButton.Size = new Size(46, 34);
+            printToolStripButton.Text = "&Print";
+            printToolStripButton.Click += PrintToolStripButton_Click;
             // 
             // printPreviewToolStripButton
             // 
-            this.printPreviewToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.printPreviewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripButton.Image")));
-            this.printPreviewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
-            this.printPreviewToolStripButton.Size = new System.Drawing.Size(32, 32);
-            this.printPreviewToolStripButton.Text = "Print Preview...";
-            this.printPreviewToolStripButton.Click += new System.EventHandler(this.PrintPreviewToolStripButton_Click);
+            printPreviewToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            printPreviewToolStripButton.Image = (Image)resources.GetObject("printPreviewToolStripButton.Image");
+            printPreviewToolStripButton.ImageTransparentColor = Color.Magenta;
+            printPreviewToolStripButton.Name = "printPreviewToolStripButton";
+            printPreviewToolStripButton.Size = new Size(46, 34);
+            printPreviewToolStripButton.Text = "Print Preview...";
+            printPreviewToolStripButton.Click += PrintPreviewToolStripButton_Click;
             // 
             // toolStripSeparator1
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 35);
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(6, 40);
             // 
             // mnuExportToExcel
             // 
-            this.mnuExportToExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
-            this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuExportToExcel.Name = "mnuExportToExcel";
-            this.mnuExportToExcel.Size = new System.Drawing.Size(32, 32);
-            this.mnuExportToExcel.Text = "Export to Excel";
-            this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
+            mnuExportToExcel.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            mnuExportToExcel.Image = (Image)resources.GetObject("mnuExportToExcel.Image");
+            mnuExportToExcel.ImageTransparentColor = Color.Magenta;
+            mnuExportToExcel.Name = "mnuExportToExcel";
+            mnuExportToExcel.Size = new Size(46, 34);
+            mnuExportToExcel.Text = "Export to Excel";
+            mnuExportToExcel.Click += MnuExportToExcel_Click;
             // 
             // toolStripSeparator2
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 35);
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(6, 40);
             // 
             // toolStripLabel1
             // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(106, 32);
-            this.toolStripLabel1.Text = "BMD Search using:";
+            toolStripLabel1.Name = "toolStripLabel1";
+            toolStripLabel1.Size = new Size(215, 34);
+            toolStripLabel1.Text = "BMD Search using:";
             // 
             // cbBMDSearchProvider
             // 
-            this.cbBMDSearchProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbBMDSearchProvider.Items.AddRange(new object[] {
-            "Ancestry",
-            "Find My Past",
-            "FreeBMD",
-            "FamilySearch",
-            "Scotlands People"});
-            this.cbBMDSearchProvider.Name = "cbBMDSearchProvider";
-            this.cbBMDSearchProvider.Size = new System.Drawing.Size(121, 35);
-            this.cbBMDSearchProvider.SelectedIndexChanged += new System.EventHandler(this.CbCensusSearchProvider_SelectedIndexChanged);
+            cbBMDSearchProvider.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbBMDSearchProvider.Items.AddRange(new object[] { "Ancestry", "Find My Past", "FreeBMD", "FamilySearch", "Scotlands People" });
+            cbBMDSearchProvider.Name = "cbBMDSearchProvider";
+            cbBMDSearchProvider.Size = new Size(258, 40);
+            cbBMDSearchProvider.SelectedIndexChanged += CbCensusSearchProvider_SelectedIndexChanged;
             // 
             // toolStripLabel3
             // 
-            this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(47, 32);
-            this.toolStripLabel3.Text = "Region:";
+            toolStripLabel3.Name = "toolStripLabel3";
+            toolStripLabel3.Size = new Size(93, 34);
+            toolStripLabel3.Text = "Region:";
             // 
             // cbRegion
             // 
-            this.cbRegion.AutoCompleteCustomSource.AddRange(new string[] {
-            ".com",
-            ".co.uk",
-            ".ca",
-            ".com.au"});
-            this.cbRegion.Items.AddRange(new object[] {
-            ".com",
-            ".co.uk",
-            ".ca",
-            ".com.au"});
-            this.cbRegion.Name = "cbRegion";
-            this.cbRegion.Size = new System.Drawing.Size(121, 35);
-            this.cbRegion.Text = ".co.uk";
-            this.cbRegion.SelectedIndexChanged += new System.EventHandler(this.CbRegion_SelectedIndexChanged);
+            cbRegion.AutoCompleteCustomSource.AddRange(new string[] { ".com", ".co.uk", ".ca", ".com.au" });
+            cbRegion.Items.AddRange(new object[] { ".com", ".co.uk", ".ca", ".com.au" });
+            cbRegion.Name = "cbRegion";
+            cbRegion.Size = new Size(258, 40);
+            cbRegion.Text = ".co.uk";
+            cbRegion.SelectedIndexChanged += CbRegion_SelectedIndexChanged;
             // 
             // toolStripLabel2
             // 
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(39, 32);
-            this.toolStripLabel2.Text = "Filter :";
+            toolStripLabel2.Name = "toolStripLabel2";
+            toolStripLabel2.Size = new Size(79, 34);
+            toolStripLabel2.Text = "Filter :";
             // 
             // cbFilter
             // 
-            this.cbFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFilter.DropDownWidth = 220;
-            this.cbFilter.Items.AddRange(new object[] {
-            "All Individuals",
-            "Date Missing (Red)",
-            "Date Found (Green)",
-            "Open Ended Date Range (Orange Red)",
-            "Very Wide Date Range (Light Red)",
-            "Wide Date Range (Orange)",
-            "Narrow Date Range (Yellow)",
-            "Just Year Date (Yellow Green)",
-            "Approx Date Range (Light Green)",
-            "Of Marrying Age no partner (Pink)",
-            "No Partner shared fact/children (Coral)",
-            "Partner but no marriage (Red Brown)"});
-            this.cbFilter.Name = "cbFilter";
-            this.cbFilter.Size = new System.Drawing.Size(130, 35);
-            this.cbFilter.SelectedIndexChanged += new System.EventHandler(this.CbFilter_SelectedIndexChanged);
+            cbFilter.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbFilter.DropDownWidth = 220;
+            cbFilter.Items.AddRange(new object[] { "All Individuals", "Date Missing (Red)", "Date Found (Green)", "Open Ended Date Range (Orange Red)", "Very Wide Date Range (Light Red)", "Wide Date Range (Orange)", "Narrow Date Range (Yellow)", "Just Year Date (Yellow Green)", "Approx Date Range (Light Green)", "Of Marrying Age no partner (Pink)", "No Partner shared fact/children (Coral)", "Partner but no marriage (Red Brown)" });
+            cbFilter.Name = "cbFilter";
+            cbFilter.Size = new Size(130, 40);
+            cbFilter.SelectedIndexChanged += CbFilter_SelectedIndexChanged;
             // 
-            // toolStripLabel4
+            // tsApplyToLabel
             // 
-            this.toolStripLabel4.AccessibleDescription = "";
-            this.toolStripLabel4.Name = "toolStripLabel4";
-            this.toolStripLabel4.Size = new System.Drawing.Size(56, 32);
-            this.toolStripLabel4.Text = "Apply To:";
+            tsApplyToLabel.AccessibleDescription = "";
+            tsApplyToLabel.Name = "tsApplyToLabel";
+            tsApplyToLabel.Size = new Size(112, 34);
+            tsApplyToLabel.Text = "Apply To:";
             // 
             // cbApplyTo
             // 
-            this.cbApplyTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbApplyTo.DropDownWidth = 121;
-            this.cbApplyTo.Items.AddRange(new object[] {
-            "All BMD Records",
-            "Births Only",
-            "Marriages Only",
-            "Deaths Only",
-            "Births & Deaths",
-            "Births & Marriages",
-            "Marriages & Deaths"});
-            this.cbApplyTo.Name = "cbApplyTo";
-            this.cbApplyTo.Size = new System.Drawing.Size(75, 35);
-            this.cbApplyTo.SelectedIndexChanged += new System.EventHandler(this.CbApplyTo_SelectedIndexChanged);
+            cbApplyTo.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbApplyTo.DropDownWidth = 121;
+            cbApplyTo.Items.AddRange(new object[] { "All BMD Records", "Births Only", "Marriages Only", "Deaths Only", "Births & Deaths", "Births & Marriages", "Marriages & Deaths" });
+            cbApplyTo.Name = "cbApplyTo";
+            cbApplyTo.Size = new Size(75, 40);
+            cbApplyTo.SelectedIndexChanged += CbApplyTo_SelectedIndexChanged;
             // 
             // printDialog
             // 
-            this.printDialog.AllowSelection = true;
-            this.printDialog.AllowSomePages = true;
-            this.printDialog.Document = this.printDocument;
-            this.printDialog.UseEXDialog = true;
+            printDialog.AllowSelection = true;
+            printDialog.AllowSomePages = true;
+            printDialog.Document = printDocument;
+            printDialog.UseEXDialog = true;
             // 
             // printPreviewDialog
             // 
-            this.printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog.Document = this.printDocument;
-            this.printPreviewDialog.Enabled = true;
-            this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
-            this.printPreviewDialog.Name = "printPreviewDialog";
-            this.printPreviewDialog.Visible = false;
+            printPreviewDialog.AutoScrollMargin = new Size(0, 0);
+            printPreviewDialog.AutoScrollMinSize = new Size(0, 0);
+            printPreviewDialog.ClientSize = new Size(400, 300);
+            printPreviewDialog.Document = printDocument;
+            printPreviewDialog.Enabled = true;
+            printPreviewDialog.Icon = (Icon)resources.GetObject("printPreviewDialog.Icon");
+            printPreviewDialog.Name = "printPreviewDialog";
+            printPreviewDialog.Visible = false;
             // 
             // contextMenuStrip
             // 
-            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(28, 28);
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuViewFacts});
-            this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(190, 26);
+            contextMenuStrip.ImageScalingSize = new Size(28, 28);
+            contextMenuStrip.Items.AddRange(new ToolStripItem[] { mnuViewFacts });
+            contextMenuStrip.Name = "contextMenuStrip";
+            contextMenuStrip.Size = new Size(320, 42);
             // 
             // mnuViewFacts
             // 
-            this.mnuViewFacts.Name = "mnuViewFacts";
-            this.mnuViewFacts.Size = new System.Drawing.Size(189, 22);
-            this.mnuViewFacts.Text = "View Individuals Facts";
-            this.mnuViewFacts.Click += new System.EventHandler(this.MnuViewFacts_Click);
+            mnuViewFacts.Name = "mnuViewFacts";
+            mnuViewFacts.Size = new Size(319, 38);
+            mnuViewFacts.Text = "View Individuals Facts";
+            mnuViewFacts.Click += MnuViewFacts_Click;
             // 
             // ColourBMD
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1038, 575);
-            this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.dgBMDReportSheet);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "ColourBMD";
-            this.Text = "Colour BMD Report Result";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ColourBMD_FormClosed);
-            this.Load += new System.EventHandler(this.ColourBMD_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgBMDReportSheet)).EndInit();
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.contextMenuStrip.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(2249, 1415);
+            Controls.Add(toolStrip1);
+            Controls.Add(statusStrip);
+            Controls.Add(dgBMDReportSheet);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(6, 7, 6, 7);
+            Name = "ColourBMD";
+            Text = "Colour BMD Report Result";
+            FormClosed += ColourBMD_FormClosed;
+            Load += ColourBMD_Load;
+            ((System.ComponentModel.ISupportInitialize)dgBMDReportSheet).EndInit();
+            statusStrip.ResumeLayout(false);
+            statusStrip.PerformLayout();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
+            contextMenuStrip.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -647,7 +581,7 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripMenuItem mnuViewFacts;
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
         private System.Windows.Forms.ToolStripComboBox cbRegion;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel4;
+        private System.Windows.Forms.ToolStripLabel tsApplyToLabel;
         private System.Windows.Forms.ToolStripComboBox cbApplyTo;
         private System.Windows.Forms.DataGridViewTextBoxColumn IndividualID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Forenames;

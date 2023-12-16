@@ -299,7 +299,8 @@ namespace FTAnalyzer.Forms
         void CbFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateBMDFilter();
-            cbApplyTo.Enabled = cbFilter.SelectedIndex != 0;
+            cbApplyTo.Visible = cbFilter.SelectedIndex != 0;
+            tsApplyToLabel.Visible = cbFilter.SelectedIndex != 0;
         }
 
         void CbApplyTo_SelectedIndexChanged(object sender, EventArgs e) => UpdateBMDFilter();
