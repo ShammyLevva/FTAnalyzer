@@ -43,8 +43,8 @@ namespace FTAnalyzer
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             openGedcom = new OpenFileDialog();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
@@ -142,8 +142,6 @@ namespace FTAnalyzer
             toolTips = new ToolTip(components);
             cmbColourFamily = new ComboBox();
             btnRandomSurnameColour = new Button();
-            ckbFactExclude = new CheckedListBox();
-            btnShowExclusions = new Button();
             tbDuplicateScore = new TrackBar();
             chkLCRootPersonConfirm = new CheckBox();
             dgCheckAncestors = new DataGridView();
@@ -350,17 +348,10 @@ namespace FTAnalyzer
             tabFacts = new TabPage();
             panel1 = new Panel();
             radioAllFacts = new RadioButton();
-            btnDuplicateFacts = new Button();
             lblExclude = new Label();
-            label15 = new Label();
-            btnDeselectExcludeAllFactTypes = new Button();
-            btnExcludeAllFactTypes = new Button();
             btnDeselectAllFactTypes = new Button();
             btnSelectAllFactTypes = new Button();
             ckbFactSelect = new CheckedListBox();
-            btnShowFacts = new Button();
-            label3 = new Label();
-            txtFactsSurname = new TextBox();
             relTypesFacts = new Forms.Controls.RelationTypes();
             tabToday = new TabPage();
             rtbToday = new Utilities.ScrollingRichTextBox();
@@ -388,6 +379,15 @@ namespace FTAnalyzer
             saveDatabase = new SaveFileDialog();
             restoreDatabase = new OpenFileDialog();
             imageList1 = new ImageList(components);
+            label15 = new Label();
+            btnDuplicateFacts = new Button();
+            btnShowExclusions = new Button();
+            btnDeselectExcludeAllFactTypes = new Button();
+            btnExcludeAllFactTypes = new Button();
+            ckbFactExclude = new CheckedListBox();
+            btnShowFacts = new Button();
+            label3 = new Label();
+            txtFactsSurname = new TextBox();
             menuStrip1.SuspendLayout();
             mnuSetRoot.SuspendLayout();
             statusStrip.SuspendLayout();
@@ -1134,33 +1134,6 @@ namespace FTAnalyzer
             btnRandomSurnameColour.UseVisualStyleBackColor = true;
             btnRandomSurnameColour.Click += BtnRandomSurnameColour_Click;
             // 
-            // ckbFactExclude
-            // 
-            ckbFactExclude.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            ckbFactExclude.FormattingEnabled = true;
-            ckbFactExclude.Location = new Point(782, 337);
-            ckbFactExclude.Margin = new Padding(8, 9, 8, 9);
-            ckbFactExclude.Name = "ckbFactExclude";
-            ckbFactExclude.ScrollAlwaysVisible = true;
-            ckbFactExclude.SelectionMode = SelectionMode.None;
-            ckbFactExclude.Size = new Size(675, 580);
-            ckbFactExclude.TabIndex = 28;
-            toolTips.SetToolTip(ckbFactExclude, "Any fact types selected in this box excludes people who have this fact type from report");
-            ckbFactExclude.Visible = false;
-            ckbFactExclude.MouseClick += CkbFactExclude_MouseClick;
-            // 
-            // btnShowExclusions
-            // 
-            btnShowExclusions.Location = new Point(710, 586);
-            btnShowExclusions.Margin = new Padding(8, 9, 8, 9);
-            btnShowExclusions.Name = "btnShowExclusions";
-            btnShowExclusions.Size = new Size(61, 126);
-            btnShowExclusions.TabIndex = 33;
-            btnShowExclusions.Text = "=>";
-            toolTips.SetToolTip(btnShowExclusions, "Show Exclusions");
-            btnShowExclusions.UseVisualStyleBackColor = true;
-            btnShowExclusions.Click += BtnShowExclusions_Click;
-            // 
             // tbDuplicateScore
             // 
             tbDuplicateScore.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
@@ -1197,14 +1170,14 @@ namespace FTAnalyzer
             dgCheckAncestors.AllowUserToDeleteRows = false;
             dgCheckAncestors.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgCheckAncestors.ColumnHeadersHeight = 40;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Window;
-            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle1;
             dgCheckAncestors.Location = new Point(8, 209);
             dgCheckAncestors.Margin = new Padding(8, 9, 8, 9);
             dgCheckAncestors.Name = "dgCheckAncestors";
@@ -1292,14 +1265,14 @@ namespace FTAnalyzer
             dgDataErrors.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgDataErrors.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgDataErrors.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.Window;
-            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            dgDataErrors.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgDataErrors.DefaultCellStyle = dataGridViewCellStyle2;
             dgDataErrors.FilterAndSortEnabled = true;
             dgDataErrors.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgDataErrors.Location = new Point(17, 416);
@@ -3906,19 +3879,19 @@ namespace FTAnalyzer
             // 
             // tabFacts
             // 
-            tabFacts.Controls.Add(panel1);
             tabFacts.Controls.Add(btnDuplicateFacts);
-            tabFacts.Controls.Add(btnShowExclusions);
-            tabFacts.Controls.Add(lblExclude);
             tabFacts.Controls.Add(label15);
+            tabFacts.Controls.Add(btnShowExclusions);
+            tabFacts.Controls.Add(panel1);
             tabFacts.Controls.Add(btnDeselectExcludeAllFactTypes);
+            tabFacts.Controls.Add(lblExclude);
             tabFacts.Controls.Add(btnExcludeAllFactTypes);
-            tabFacts.Controls.Add(ckbFactExclude);
             tabFacts.Controls.Add(btnDeselectAllFactTypes);
-            tabFacts.Controls.Add(btnSelectAllFactTypes);
-            tabFacts.Controls.Add(ckbFactSelect);
+            tabFacts.Controls.Add(ckbFactExclude);
             tabFacts.Controls.Add(btnShowFacts);
+            tabFacts.Controls.Add(btnSelectAllFactTypes);
             tabFacts.Controls.Add(label3);
+            tabFacts.Controls.Add(ckbFactSelect);
             tabFacts.Controls.Add(txtFactsSurname);
             tabFacts.Controls.Add(relTypesFacts);
             tabFacts.Location = new Point(8, 46);
@@ -3955,17 +3928,6 @@ namespace FTAnalyzer
             radioAllFacts.UseVisualStyleBackColor = true;
             radioAllFacts.CheckedChanged += RadioFacts_CheckedChanged;
             // 
-            // btnDuplicateFacts
-            // 
-            btnDuplicateFacts.Location = new Point(1477, 105);
-            btnDuplicateFacts.Margin = new Padding(8, 9, 8, 9);
-            btnDuplicateFacts.Name = "btnDuplicateFacts";
-            btnDuplicateFacts.Size = new Size(351, 94);
-            btnDuplicateFacts.TabIndex = 34;
-            btnDuplicateFacts.Text = "Show Duplicate Facts of Selected Fact Type";
-            btnDuplicateFacts.UseVisualStyleBackColor = true;
-            btnDuplicateFacts.Click += BtnDuplicateFacts_Click;
-            // 
             // lblExclude
             // 
             lblExclude.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
@@ -3977,40 +3939,6 @@ namespace FTAnalyzer
             lblExclude.Text = "Select Facts to Exclude from Report";
             lblExclude.TextAlign = ContentAlignment.TopCenter;
             lblExclude.Visible = false;
-            // 
-            // label15
-            // 
-            label15.Location = new Point(17, 937);
-            label15.Margin = new Padding(8, 0, 8, 0);
-            label15.Name = "label15";
-            label15.Size = new Size(635, 40);
-            label15.TabIndex = 31;
-            label15.Text = "Select Facts to Include in Report";
-            label15.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // btnDeselectExcludeAllFactTypes
-            // 
-            btnDeselectExcludeAllFactTypes.Location = new Point(1166, 268);
-            btnDeselectExcludeAllFactTypes.Margin = new Padding(8, 9, 8, 9);
-            btnDeselectExcludeAllFactTypes.Name = "btnDeselectExcludeAllFactTypes";
-            btnDeselectExcludeAllFactTypes.Size = new Size(295, 55);
-            btnDeselectExcludeAllFactTypes.TabIndex = 30;
-            btnDeselectExcludeAllFactTypes.Text = "De-select all Fact Types";
-            btnDeselectExcludeAllFactTypes.UseVisualStyleBackColor = true;
-            btnDeselectExcludeAllFactTypes.Visible = false;
-            btnDeselectExcludeAllFactTypes.Click += BtnDeselectExcludeAllFactTypes_Click;
-            // 
-            // btnExcludeAllFactTypes
-            // 
-            btnExcludeAllFactTypes.Location = new Point(782, 266);
-            btnExcludeAllFactTypes.Margin = new Padding(8, 9, 8, 9);
-            btnExcludeAllFactTypes.Name = "btnExcludeAllFactTypes";
-            btnExcludeAllFactTypes.Size = new Size(295, 55);
-            btnExcludeAllFactTypes.TabIndex = 29;
-            btnExcludeAllFactTypes.Text = "Select all Fact Types";
-            btnExcludeAllFactTypes.UseVisualStyleBackColor = true;
-            btnExcludeAllFactTypes.Visible = false;
-            btnExcludeAllFactTypes.Click += BtnExcludeAllFactTypes_Click;
             // 
             // btnDeselectAllFactTypes
             // 
@@ -4046,36 +3974,6 @@ namespace FTAnalyzer
             ckbFactSelect.Size = new Size(676, 580);
             ckbFactSelect.TabIndex = 25;
             ckbFactSelect.MouseClick += CkbFactSelect_MouseClick;
-            // 
-            // btnShowFacts
-            // 
-            btnShowFacts.Location = new Point(782, 105);
-            btnShowFacts.Margin = new Padding(8, 9, 8, 9);
-            btnShowFacts.Name = "btnShowFacts";
-            btnShowFacts.Size = new Size(678, 94);
-            btnShowFacts.TabIndex = 24;
-            btnShowFacts.Text = "Show Facts for Individuals with Selected Fact Types";
-            btnShowFacts.UseVisualStyleBackColor = true;
-            btnShowFacts.Click += BtnShowFacts_Click;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(788, 47);
-            label3.Margin = new Padding(8, 0, 8, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(109, 32);
-            label3.TabIndex = 23;
-            label3.Text = "Surname";
-            // 
-            // txtFactsSurname
-            // 
-            txtFactsSurname.Location = new Point(906, 41);
-            txtFactsSurname.Margin = new Padding(8, 9, 8, 9);
-            txtFactsSurname.Name = "txtFactsSurname";
-            txtFactsSurname.Size = new Size(550, 39);
-            txtFactsSurname.TabIndex = 22;
-            txtFactsSurname.TextChanged += TxtFactsSurname_TextChanged;
             // 
             // relTypesFacts
             // 
@@ -4343,6 +4241,101 @@ namespace FTAnalyzer
             imageList1.ImageSize = new Size(16, 16);
             imageList1.TransparentColor = Color.Transparent;
             // 
+            // label15
+            // 
+            label15.Location = new Point(17, 926);
+            label15.Margin = new Padding(8, 0, 8, 0);
+            label15.Name = "label15";
+            label15.Size = new Size(639, 40);
+            label15.TabIndex = 39;
+            label15.Text = "Select Facts to Include in Report";
+            label15.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // btnDuplicateFacts
+            // 
+            btnDuplicateFacts.Location = new Point(1474, 105);
+            btnDuplicateFacts.Margin = new Padding(8, 9, 8, 9);
+            btnDuplicateFacts.Name = "btnDuplicateFacts";
+            btnDuplicateFacts.Size = new Size(351, 94);
+            btnDuplicateFacts.TabIndex = 42;
+            btnDuplicateFacts.Text = "Show Duplicate Facts of Selected Fact Type";
+            btnDuplicateFacts.UseVisualStyleBackColor = true;
+            // 
+            // btnShowExclusions
+            // 
+            btnShowExclusions.Location = new Point(707, 586);
+            btnShowExclusions.Margin = new Padding(8, 9, 8, 9);
+            btnShowExclusions.Name = "btnShowExclusions";
+            btnShowExclusions.Size = new Size(61, 126);
+            btnShowExclusions.TabIndex = 41;
+            btnShowExclusions.Text = "=>";
+            toolTips.SetToolTip(btnShowExclusions, "Show Exclusions");
+            btnShowExclusions.UseVisualStyleBackColor = true;
+            // 
+            // btnDeselectExcludeAllFactTypes
+            // 
+            btnDeselectExcludeAllFactTypes.Location = new Point(1163, 268);
+            btnDeselectExcludeAllFactTypes.Margin = new Padding(8, 9, 8, 9);
+            btnDeselectExcludeAllFactTypes.Name = "btnDeselectExcludeAllFactTypes";
+            btnDeselectExcludeAllFactTypes.Size = new Size(295, 55);
+            btnDeselectExcludeAllFactTypes.TabIndex = 40;
+            btnDeselectExcludeAllFactTypes.Text = "De-select all Fact Types";
+            btnDeselectExcludeAllFactTypes.UseVisualStyleBackColor = true;
+            btnDeselectExcludeAllFactTypes.Visible = false;
+            // 
+            // btnExcludeAllFactTypes
+            // 
+            btnExcludeAllFactTypes.Location = new Point(779, 266);
+            btnExcludeAllFactTypes.Margin = new Padding(8, 9, 8, 9);
+            btnExcludeAllFactTypes.Name = "btnExcludeAllFactTypes";
+            btnExcludeAllFactTypes.Size = new Size(295, 55);
+            btnExcludeAllFactTypes.TabIndex = 39;
+            btnExcludeAllFactTypes.Text = "Select all Fact Types";
+            btnExcludeAllFactTypes.UseVisualStyleBackColor = true;
+            btnExcludeAllFactTypes.Visible = false;
+            // 
+            // ckbFactExclude
+            // 
+            ckbFactExclude.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            ckbFactExclude.FormattingEnabled = true;
+            ckbFactExclude.Location = new Point(779, 337);
+            ckbFactExclude.Margin = new Padding(8, 9, 8, 9);
+            ckbFactExclude.Name = "ckbFactExclude";
+            ckbFactExclude.ScrollAlwaysVisible = true;
+            ckbFactExclude.SelectionMode = SelectionMode.None;
+            ckbFactExclude.Size = new Size(675, 580);
+            ckbFactExclude.TabIndex = 38;
+            toolTips.SetToolTip(ckbFactExclude, "Any fact types selected in this box excludes people who have this fact type from report");
+            ckbFactExclude.Visible = false;
+            // 
+            // btnShowFacts
+            // 
+            btnShowFacts.Location = new Point(779, 105);
+            btnShowFacts.Margin = new Padding(8, 9, 8, 9);
+            btnShowFacts.Name = "btnShowFacts";
+            btnShowFacts.Size = new Size(678, 94);
+            btnShowFacts.TabIndex = 37;
+            btnShowFacts.Text = "Show Facts for Individuals with Selected Fact Types";
+            btnShowFacts.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(785, 47);
+            label3.Margin = new Padding(8, 0, 8, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(109, 32);
+            label3.TabIndex = 36;
+            label3.Text = "Surname";
+            // 
+            // txtFactsSurname
+            // 
+            txtFactsSurname.Location = new Point(903, 41);
+            txtFactsSurname.Margin = new Padding(8, 9, 8, 9);
+            txtFactsSurname.Name = "txtFactsSurname";
+            txtFactsSurname.Size = new Size(550, 39);
+            txtFactsSurname.TabIndex = 35;
+            // 
             // MainForm
             // 
             AllowDrop = true;
@@ -4569,9 +4562,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem mnuLifelines;
         private System.Windows.Forms.ToolStripMenuItem resetToDefaultFormSizeToolStripMenuItem;
         private System.Windows.Forms.TabPage tabFacts;
-        private System.Windows.Forms.Button btnShowFacts;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtFactsSurname;
         private FTAnalyzer.Forms.Controls.RelationTypes relTypesFacts;
         private System.Windows.Forms.ToolStripMenuItem mnuPlaces;
         private System.Windows.Forms.TabPage tabSurnames;
@@ -4611,14 +4601,8 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem mnuLookupBlankFoundLocations;
         private System.Windows.Forms.CheckBox ckbMilitaryOnly;
         private System.Windows.Forms.Button btnRandomSurnameColour;
-        private System.Windows.Forms.CheckedListBox ckbFactExclude;
-        private System.Windows.Forms.Button btnShowExclusions;
         private System.Windows.Forms.Label lblExclude;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Button btnDeselectExcludeAllFactTypes;
-        private System.Windows.Forms.Button btnExcludeAllFactTypes;
         private System.Windows.Forms.ToolStripMenuItem mnuCloseGEDCOM;
-        private System.Windows.Forms.Button btnDuplicateFacts;
         private System.Windows.Forms.TabPage tabToday;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.DateTimePicker dpToday;
@@ -4814,6 +4798,15 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem MnuCustomFactsToExcel;
         private global::System.Windows.Forms.CheckedListBox ckbDataErrors;
         private global::FTAnalyzer.Utilities.ScrollingRichTextBox rtbLCoutput;
+        private Button btnDuplicateFacts;
+        private Label label15;
+        private Button btnShowExclusions;
+        private Button btnDeselectExcludeAllFactTypes;
+        private Button btnExcludeAllFactTypes;
+        private CheckedListBox ckbFactExclude;
+        private Button btnShowFacts;
+        private Label label3;
+        private TextBox txtFactsSurname;
     }
 }
 

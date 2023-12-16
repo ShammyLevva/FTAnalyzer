@@ -23,7 +23,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static readonly string VERSION = "10.0.0.0-beta 6";
+        public static readonly string VERSION = "10.0.0.0-beta 7";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         Cursor storedCursor = Cursors.Default;
@@ -2656,6 +2656,8 @@ namespace FTAnalyzer
             int boundaryWidth = rtbOutput.Margin.Left + tabSelector.Margin.Left + tabSelector.Margin.Right;
             int boundaryHeight = panel2.Height - statusStrip.Height - menuStrip1.Height - tabSelector.Location.Y + tabSelector.Margin.Top + tabSelector.Margin.Bottom;
             Rectangle workarea = Screen.GetWorkingArea(topleft);
+            log.Debug($"CheckMaxWindowSizes: boundaryWidth:{boundaryWidth}, boundaryHeight: {boundaryHeight}");
+            log.Debug($"tabselector- X: {tabSelector.Location.X} Y: {tabSelector.Location.Y}");
             if (Width > workarea.Width)
                 Width = workarea.Width;
             if (Height > workarea.Height)
@@ -2666,9 +2668,13 @@ namespace FTAnalyzer
                 tabSelector.Height = Size.Height - tabSelector.Top - boundaryHeight;
             int gap = dgWorldWars.Location.Y - ckbWDIgnoreLocations.Location.Y - ckbWDIgnoreLocations.Height;
             if (gap > ckbWDIgnoreLocations.Height)
-            {
                 dgWorldWars.Location = new Point(dgWorldWars.Location.X, ckbWDIgnoreLocations.Location.Y + ckbWDIgnoreLocations.Height);
-            }
+            gap = dgTreeTops.Location.Y - ckbTTIgnoreLocations.Location.Y - ckbTTIgnoreLocations.Height;
+            if (gap > ckbTTIgnoreLocations.Height)
+                dgTreeTops.Location = new Point(dgTreeTops.Location.X, ckbTTIgnoreLocations.Location.Y + ckbTTIgnoreLocations.Height);
+            gap = rtbToday.Location.Y - dpToday.Location.Y - dpToday.Height;
+            if (gap > dpToday.Height)
+                rtbToday.Location = new Point(dpToday.Location.X, dpToday.Location.Y + dpToday.Height);
         }
         #endregion
 
