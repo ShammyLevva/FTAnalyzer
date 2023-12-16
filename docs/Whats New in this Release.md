@@ -1,3 +1,19 @@
+## BETA RELEASE Version 10.0.0.0-beta 6 - 16th December 2023  
+**Updates**  
+Added suffix recognition from name fact
+Updated Alias handling to recognise more GEDCOM flavours  
+
+**Bugfixes**  
+Fixed Title recognition from name fact  
+Various null reference fixes using new c# features
+Changed all messageboxes to load on top of parent form which solves issue of appearing on a different monitor  
+Don't export to Excel if nothing to export.
+Apply to selector in Colour BMD hidden if filter has all individuals selected  
+
+**Known Issues**  
+Previously ignored duplicates may return due to revised way of storing changes.  
+Child Birth Profile chart unavailable needs re-written to work with .Net Core 7 
+
 ## BETA RELEASE Version 10.0.0.0-beta 6 - Not yet released  
 **Bugfixes**  
 Rework Title, Alias & Suffix to pickup extra ways of appearing in GEDCOM  
