@@ -3424,12 +3424,12 @@ namespace FTAnalyzer
         async Task ShowTodaysEvents()
         {
             pbToday.Visible = true;
-            labToday.Visible = true;
+            labTodayLoadWorldEvents.Visible = true;
             rtbToday.ResetText();
             Progress<int> progress = new(value => { pbToday.Value = value; });
             Progress<string> outputText = new(text => { rtbToday.Rtf = text; });
             await Task.Run(() => ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, (int)nudToday.Value, progress, outputText)).ConfigureAwait(true);
-            labToday.Visible = false;
+            labTodayLoadWorldEvents.Visible = false;
             pbToday.Visible = false;
             await Analytics.TrackAction(Analytics.MainFormAction, Analytics.TodayClickedEvent).ConfigureAwait(true);
         }
