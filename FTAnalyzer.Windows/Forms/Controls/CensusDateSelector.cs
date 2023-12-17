@@ -125,7 +125,19 @@ namespace FTAnalyzer.Forms.Controls
 
         #region Properties
 
-        public CensusDate SelectedDate => (CensusDate)cbCensusDate.SelectedItem;
+        public CensusDate SelectedDate
+        {
+            get
+            {
+                if (cbCensusDate.SelectedItem is CensusDate selected)
+                    return selected;
+                else
+                {
+                    CensusDate? first = cbCensusDate.Items[0] as CensusDate;
+                    return first ?? CensusDate.EWCENSUS1881;
+                }   
+            }
+        }
 
         public FactDate DefaultDate => defaultDate;
 
@@ -159,7 +171,7 @@ namespace FTAnalyzer.Forms.Controls
             if (CensusChanged is not null)
             {
                 CensusChanged(this, e);
-                previousDate = (CensusDate)cbCensusDate.SelectedItem;
+                previousDate = (cbCensusDate.SelectedItem ?? cbCensusDate.Items[0]) as CensusDate;
             }
         }
 

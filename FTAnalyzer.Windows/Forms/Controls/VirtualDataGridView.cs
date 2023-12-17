@@ -16,8 +16,8 @@ namespace FTAnalyzer.Forms.Controls
 
         public VirtualDataGridView()
         {
-            _dataSource = new SortableBindingList<T>();
-            _fulllist = new SortableBindingList<T>();
+            _dataSource = [];
+            _fulllist = [];
             VirtualMode = true;
             AllowUserToAddRows = false;
             AllowUserToDeleteRows = false;
@@ -25,7 +25,7 @@ namespace FTAnalyzer.Forms.Controls
             AllowUserToResizeColumns = true;
             AllowUserToResizeRows = true;
             AutoGenerateColumns = false;
-
+            
             AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
             ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -88,14 +88,14 @@ namespace FTAnalyzer.Forms.Controls
 
         internal static List<string> GetFilteredColumns(string filterString)
         {
-            List<string> result = new();
-            List<string> clauses = filterString.Split(new string[] { " AND " }, StringSplitOptions.None).ToList();
+            List<string> result = [];
+            List<string> clauses = [.. filterString.Split(separator, StringSplitOptions.None)];
             foreach (string clause in clauses)
             {
-                int pos = clause.IndexOf("[");
+                int pos = clause.IndexOf('[');
                 if (pos > 0)
                 {
-                    int endpos = clause.IndexOf("]");
+                    int endpos = clause.IndexOf(']');
                     if (endpos > 0 && pos < endpos)
                         result.Add(clause.Substring(pos + 1, endpos - pos - 1));
                 }
@@ -108,7 +108,7 @@ namespace FTAnalyzer.Forms.Controls
         // deal with updating count in statusbar
         internal static List<string> GetFilteredValues(string filterColumn, string filterString)
         {
-            List<string> result = new();
+            List<string> result = [];
             int startclausepos = filterString.IndexOf(filterColumn);
             if (startclausepos > 0)
             {
@@ -117,7 +117,7 @@ namespace FTAnalyzer.Forms.Controls
                 int pos = clause.IndexOf("IN (");
                 if (pos >= 0 && pos < clause.Length - 6)
                 {
-                    int endpos = clause.IndexOf(")", pos);
+                    int endpos = clause.IndexOf(')', pos);
                     string values = clause.Substring(pos + 4, endpos - pos - 4);
                     foreach (string value in values.Split(','))
                         result.Add(value.Replace("\'", "").Trim());
@@ -195,6 +195,8 @@ namespace FTAnalyzer.Forms.Controls
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public T CurrentRowDataBoundItem => _dataSource[CurrentRow.Index];
+
+        internal static readonly string[] separator = [" AND "];
 
         public T DataBoundItem(int rowIndex) => _dataSource[rowIndex];
 
@@ -277,16 +279,10 @@ namespace FTAnalyzer.Forms.Controls
 
         protected abstract object GetValueFor(T data, string propertyName);
 
-        class PropertyComparer : IComparer<T>
+        class PropertyComparer(string propertyName, ListSortDirection direction) : IComparer<T>
         {
-            readonly PropertyInfo _accessor;
-            readonly int _direction;
-
-            public PropertyComparer(string propertyName, ListSortDirection direction)
-            {
-                _accessor = typeof(T).GetProperty(propertyName);
-                _direction = direction == ListSortDirection.Ascending ? 1 : -1;
-            }
+            readonly PropertyInfo _accessor = typeof(T).GetProperty(propertyName);
+            readonly int _direction = direction == ListSortDirection.Ascending ? 1 : -1;
 
             public int Compare(T? ind1, T? ind2)
             {

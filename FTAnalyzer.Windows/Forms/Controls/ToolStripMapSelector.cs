@@ -120,8 +120,8 @@ namespace FTAnalyzer.Forms.Controls
                 mapbox.Map.BackgroundLayer.RemoveAt(0);
             if (sender is MapToolStripMenuItem selectedOption)
             {
-                mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(mnuOpenStreetMap.TileSource, mnuOpenStreetMap.Name));
-                TileAsyncLayer mapLayer = new(selectedOption.TileSource, selectedOption.Name)
+                mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(mnuOpenStreetMap.TileSource, mnuOpenStreetMap.Name ?? string.Empty));
+                TileAsyncLayer mapLayer = new(selectedOption.TileSource, selectedOption.Name ?? string.Empty)
                 {
                     OnlyRedrawWhenComplete = true,
                 };
