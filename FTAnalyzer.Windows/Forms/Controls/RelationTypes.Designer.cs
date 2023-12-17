@@ -34,129 +34,141 @@ namespace FTAnalyzer.Forms.Controls
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.ckbLinked = new System.Windows.Forms.CheckBox();
-            this.ckbDescendants = new System.Windows.Forms.CheckBox();
-            this.ckbUnknown = new System.Windows.Forms.CheckBox();
-            this.ckbMarriageDB = new System.Windows.Forms.CheckBox();
-            this.ckbMarriage = new System.Windows.Forms.CheckBox();
-            this.ckbBlood = new System.Windows.Forms.CheckBox();
-            this.ckbDirects = new System.Windows.Forms.CheckBox();
-            this.groupBox2.SuspendLayout();
-            this.SuspendLayout();
+            groupBox2 = new GroupBox();
+            ckbLinked = new CheckBox();
+            ckbDescendants = new CheckBox();
+            ckbUnknown = new CheckBox();
+            ckbMarriageDB = new CheckBox();
+            ckbMarriage = new CheckBox();
+            ckbBlood = new CheckBox();
+            ckbDirects = new CheckBox();
+            groupBox2.SuspendLayout();
+            SuspendLayout();
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.ckbLinked);
-            this.groupBox2.Controls.Add(this.ckbDescendants);
-            this.groupBox2.Controls.Add(this.ckbUnknown);
-            this.groupBox2.Controls.Add(this.ckbMarriageDB);
-            this.groupBox2.Controls.Add(this.ckbMarriage);
-            this.groupBox2.Controls.Add(this.ckbBlood);
-            this.groupBox2.Controls.Add(this.ckbDirects);
-            this.groupBox2.Location = new System.Drawing.Point(3, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(314, 93);
-            this.groupBox2.TabIndex = 5;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Relationship Types";
+            groupBox2.AutoSize = true;
+            groupBox2.Controls.Add(ckbLinked);
+            groupBox2.Controls.Add(ckbDescendants);
+            groupBox2.Controls.Add(ckbUnknown);
+            groupBox2.Controls.Add(ckbMarriageDB);
+            groupBox2.Controls.Add(ckbMarriage);
+            groupBox2.Controls.Add(ckbBlood);
+            groupBox2.Controls.Add(ckbDirects);
+            groupBox2.Location = new Point(4, 3);
+            groupBox2.Margin = new Padding(4, 3, 4, 3);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new Padding(4, 3, 4, 3);
+            groupBox2.Size = new Size(369, 117);
+            groupBox2.TabIndex = 5;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Relationship Types";
             // 
             // ckbLinked
             // 
-            this.ckbLinked.AutoSize = true;
-            this.ckbLinked.Location = new System.Drawing.Point(158, 66);
-            this.ckbLinked.Name = "ckbLinked";
-            this.ckbLinked.Size = new System.Drawing.Size(146, 17);
-            this.ckbLinked.TabIndex = 6;
-            this.ckbLinked.Text = "Linked through Marriages";
-            this.ckbLinked.UseVisualStyleBackColor = true;
-            this.ckbLinked.CheckStateChanged += new System.EventHandler(this.Tickbox_CheckedChanged);
+            ckbLinked.AutoSize = true;
+            ckbLinked.Location = new Point(184, 76);
+            ckbLinked.Margin = new Padding(4, 3, 4, 3);
+            ckbLinked.Name = "ckbLinked";
+            ckbLinked.Size = new Size(162, 19);
+            ckbLinked.TabIndex = 6;
+            ckbLinked.Text = "Linked through Marriages";
+            ckbLinked.UseVisualStyleBackColor = true;
+            ckbLinked.CheckStateChanged += Tickbox_CheckedChanged;
             // 
             // ckbDescendants
             // 
-            this.ckbDescendants.AutoSize = true;
-            this.ckbDescendants.Checked = true;
-            this.ckbDescendants.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbDescendants.Location = new System.Drawing.Point(116, 43);
-            this.ckbDescendants.Name = "ckbDescendants";
-            this.ckbDescendants.Size = new System.Drawing.Size(89, 17);
-            this.ckbDescendants.TabIndex = 5;
-            this.ckbDescendants.Text = "Descendants";
-            this.ckbDescendants.UseVisualStyleBackColor = true;
-            this.ckbDescendants.CheckedChanged += new System.EventHandler(this.Tickbox_CheckedChanged);
+            ckbDescendants.AutoSize = true;
+            ckbDescendants.Checked = true;
+            ckbDescendants.CheckState = CheckState.Checked;
+            ckbDescendants.Location = new Point(135, 50);
+            ckbDescendants.Margin = new Padding(4, 3, 4, 3);
+            ckbDescendants.Name = "ckbDescendants";
+            ckbDescendants.Size = new Size(93, 19);
+            ckbDescendants.TabIndex = 5;
+            ckbDescendants.Text = "Descendants";
+            ckbDescendants.UseVisualStyleBackColor = true;
+            ckbDescendants.CheckedChanged += Tickbox_CheckedChanged;
             // 
             // ckbUnknown
             // 
-            this.ckbUnknown.AutoSize = true;
-            this.ckbUnknown.Location = new System.Drawing.Point(243, 20);
-            this.ckbUnknown.Name = "ckbUnknown";
-            this.ckbUnknown.Size = new System.Drawing.Size(72, 17);
-            this.ckbUnknown.TabIndex = 4;
-            this.ckbUnknown.Text = "Unknown";
-            this.ckbUnknown.UseVisualStyleBackColor = true;
-            this.ckbUnknown.CheckedChanged += new System.EventHandler(this.Tickbox_CheckedChanged);
+            ckbUnknown.AutoSize = true;
+            ckbUnknown.Location = new Point(284, 23);
+            ckbUnknown.Margin = new Padding(4, 3, 4, 3);
+            ckbUnknown.Name = "ckbUnknown";
+            ckbUnknown.Size = new Size(77, 19);
+            ckbUnknown.TabIndex = 4;
+            ckbUnknown.Text = "Unknown";
+            ckbUnknown.UseVisualStyleBackColor = true;
+            ckbUnknown.CheckedChanged += Tickbox_CheckedChanged;
             // 
             // ckbMarriageDB
             // 
-            this.ckbMarriageDB.AutoSize = true;
-            this.ckbMarriageDB.Checked = true;
-            this.ckbMarriageDB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbMarriageDB.Location = new System.Drawing.Point(6, 66);
-            this.ckbMarriageDB.Name = "ckbMarriageDB";
-            this.ckbMarriageDB.Size = new System.Drawing.Size(146, 17);
-            this.ckbMarriageDB.TabIndex = 3;
-            this.ckbMarriageDB.Text = "Married to Blood or Direct";
-            this.ckbMarriageDB.UseVisualStyleBackColor = true;
-            this.ckbMarriageDB.CheckedChanged += new System.EventHandler(this.Tickbox_CheckedChanged);
+            ckbMarriageDB.AutoSize = true;
+            ckbMarriageDB.Checked = true;
+            ckbMarriageDB.CheckState = CheckState.Checked;
+            ckbMarriageDB.Location = new Point(7, 76);
+            ckbMarriageDB.Margin = new Padding(4, 3, 4, 3);
+            ckbMarriageDB.Name = "ckbMarriageDB";
+            ckbMarriageDB.Size = new Size(163, 19);
+            ckbMarriageDB.TabIndex = 3;
+            ckbMarriageDB.Text = "Married to Blood or Direct";
+            ckbMarriageDB.UseVisualStyleBackColor = true;
+            ckbMarriageDB.CheckedChanged += Tickbox_CheckedChanged;
             // 
             // ckbMarriage
             // 
-            this.ckbMarriage.AutoSize = true;
-            this.ckbMarriage.Location = new System.Drawing.Point(116, 19);
-            this.ckbMarriage.Name = "ckbMarriage";
-            this.ckbMarriage.Size = new System.Drawing.Size(121, 17);
-            this.ckbMarriage.TabIndex = 2;
-            this.ckbMarriage.Text = "Related by Marriage";
-            this.ckbMarriage.UseVisualStyleBackColor = true;
-            this.ckbMarriage.CheckedChanged += new System.EventHandler(this.Tickbox_CheckedChanged);
+            ckbMarriage.AutoSize = true;
+            ckbMarriage.Location = new Point(135, 22);
+            ckbMarriage.Margin = new Padding(4, 3, 4, 3);
+            ckbMarriage.Name = "ckbMarriage";
+            ckbMarriage.Size = new Size(131, 19);
+            ckbMarriage.TabIndex = 2;
+            ckbMarriage.Text = "Related by Marriage";
+            ckbMarriage.UseVisualStyleBackColor = true;
+            ckbMarriage.CheckedChanged += Tickbox_CheckedChanged;
             // 
             // ckbBlood
             // 
-            this.ckbBlood.AutoSize = true;
-            this.ckbBlood.Checked = true;
-            this.ckbBlood.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbBlood.Location = new System.Drawing.Point(6, 43);
-            this.ckbBlood.Name = "ckbBlood";
-            this.ckbBlood.Size = new System.Drawing.Size(100, 17);
-            this.ckbBlood.TabIndex = 1;
-            this.ckbBlood.Text = "Blood Relations";
-            this.ckbBlood.UseVisualStyleBackColor = true;
-            this.ckbBlood.CheckedChanged += new System.EventHandler(this.Tickbox_CheckedChanged);
+            ckbBlood.AutoSize = true;
+            ckbBlood.Checked = true;
+            ckbBlood.CheckState = CheckState.Checked;
+            ckbBlood.Location = new Point(7, 50);
+            ckbBlood.Margin = new Padding(4, 3, 4, 3);
+            ckbBlood.Name = "ckbBlood";
+            ckbBlood.Size = new Size(108, 19);
+            ckbBlood.TabIndex = 1;
+            ckbBlood.Text = "Blood Relations";
+            ckbBlood.UseVisualStyleBackColor = true;
+            ckbBlood.CheckedChanged += Tickbox_CheckedChanged;
             // 
             // ckbDirects
             // 
-            this.ckbDirects.AutoSize = true;
-            this.ckbDirects.Checked = true;
-            this.ckbDirects.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbDirects.Location = new System.Drawing.Point(6, 20);
-            this.ckbDirects.Name = "ckbDirects";
-            this.ckbDirects.Size = new System.Drawing.Size(104, 17);
-            this.ckbDirects.TabIndex = 0;
-            this.ckbDirects.Text = "Direct Ancestors";
-            this.ckbDirects.UseVisualStyleBackColor = true;
-            this.ckbDirects.CheckedChanged += new System.EventHandler(this.Tickbox_CheckedChanged);
+            ckbDirects.AutoSize = true;
+            ckbDirects.Checked = true;
+            ckbDirects.CheckState = CheckState.Checked;
+            ckbDirects.Location = new Point(7, 23);
+            ckbDirects.Margin = new Padding(4, 3, 4, 3);
+            ckbDirects.Name = "ckbDirects";
+            ckbDirects.Size = new Size(112, 19);
+            ckbDirects.TabIndex = 0;
+            ckbDirects.Text = "Direct Ancestors";
+            ckbDirects.UseVisualStyleBackColor = true;
+            ckbDirects.CheckedChanged += Tickbox_CheckedChanged;
             // 
             // RelationTypes
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox2);
-            this.Name = "RelationTypes";
-            this.Size = new System.Drawing.Size(320, 99);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleMode = AutoScaleMode.Inherit;
+            AutoSize = true;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            Controls.Add(groupBox2);
+            Margin = new Padding(4, 3, 4, 3);
+            Name = "RelationTypes";
+            Size = new Size(377, 123);
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

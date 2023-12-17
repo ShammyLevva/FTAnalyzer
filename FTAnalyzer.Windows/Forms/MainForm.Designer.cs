@@ -43,8 +43,7 @@ namespace FTAnalyzer
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             openGedcom = new OpenFileDialog();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
@@ -1112,17 +1111,17 @@ namespace FTAnalyzer
             // 
             cmbColourFamily.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             cmbColourFamily.FormattingEnabled = true;
-            cmbColourFamily.Location = new Point(474, 56);
+            cmbColourFamily.Location = new Point(494, 67);
             cmbColourFamily.Margin = new Padding(4);
             cmbColourFamily.Name = "cmbColourFamily";
-            cmbColourFamily.Size = new Size(664, 23);
+            cmbColourFamily.Size = new Size(603, 23);
             cmbColourFamily.TabIndex = 60;
             toolTips.SetToolTip(cmbColourFamily, "Select a family to limit the reports to just that family");
             cmbColourFamily.Click += CmbColourFamily_Click;
             // 
             // btnRandomSurnameColour
             // 
-            btnRandomSurnameColour.Location = new Point(726, 15);
+            btnRandomSurnameColour.Location = new Point(755, 25);
             btnRandomSurnameColour.Margin = new Padding(4);
             btnRandomSurnameColour.Name = "btnRandomSurnameColour";
             btnRandomSurnameColour.Size = new Size(342, 29);
@@ -1168,14 +1167,14 @@ namespace FTAnalyzer
             dgCheckAncestors.AllowUserToDeleteRows = false;
             dgCheckAncestors.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgCheckAncestors.ColumnHeadersHeight = 40;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle3;
             dgCheckAncestors.Location = new Point(4, 98);
             dgCheckAncestors.Margin = new Padding(4);
             dgCheckAncestors.Name = "dgCheckAncestors";
@@ -1505,11 +1504,13 @@ namespace FTAnalyzer
             // 
             // wardeadRelation
             // 
+            wardeadRelation.AutoSize = true;
+            wardeadRelation.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             wardeadRelation.Location = new Point(315, 4);
             wardeadRelation.Margin = new Padding(7);
             wardeadRelation.MarriedToDB = true;
             wardeadRelation.Name = "wardeadRelation";
-            wardeadRelation.Size = new Size(376, 115);
+            wardeadRelation.Size = new Size(377, 123);
             wardeadRelation.TabIndex = 26;
             // 
             // wardeadCountry
@@ -1640,11 +1641,13 @@ namespace FTAnalyzer
             // 
             // treetopsRelation
             // 
+            treetopsRelation.AutoSize = true;
+            treetopsRelation.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             treetopsRelation.Location = new Point(315, 4);
             treetopsRelation.Margin = new Padding(7);
             treetopsRelation.MarriedToDB = true;
             treetopsRelation.Name = "treetopsRelation";
-            treetopsRelation.Size = new Size(376, 111);
+            treetopsRelation.Size = new Size(377, 123);
             treetopsRelation.TabIndex = 12;
             // 
             // treetopsCountry
@@ -1715,7 +1718,7 @@ namespace FTAnalyzer
             // labResearchTabFamilyFilter
             // 
             labResearchTabFamilyFilter.AutoSize = true;
-            labResearchTabFamilyFilter.Location = new Point(396, 60);
+            labResearchTabFamilyFilter.Location = new Point(415, 70);
             labResearchTabFamilyFilter.Margin = new Padding(4, 0, 4, 0);
             labResearchTabFamilyFilter.Name = "labResearchTabFamilyFilter";
             labResearchTabFamilyFilter.Size = new Size(71, 15);
@@ -1819,7 +1822,7 @@ namespace FTAnalyzer
             // labResearchTabSurname
             // 
             labResearchTabSurname.AutoSize = true;
-            labResearchTabSurname.Location = new Point(396, 22);
+            labResearchTabSurname.Location = new Point(415, 32);
             labResearchTabSurname.Margin = new Padding(4, 0, 4, 0);
             labResearchTabSurname.Name = "labResearchTabSurname";
             labResearchTabSurname.Size = new Size(54, 15);
@@ -1828,7 +1831,7 @@ namespace FTAnalyzer
             // 
             // txtColouredSurname
             // 
-            txtColouredSurname.Location = new Point(474, 19);
+            txtColouredSurname.Location = new Point(494, 29);
             txtColouredSurname.Margin = new Padding(4);
             txtColouredSurname.Name = "txtColouredSurname";
             txtColouredSurname.Size = new Size(234, 23);
@@ -1837,11 +1840,13 @@ namespace FTAnalyzer
             // 
             // relTypesColoured
             // 
+            relTypesColoured.AutoSize = true;
+            relTypesColoured.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             relTypesColoured.Location = new Point(9, 9);
             relTypesColoured.Margin = new Padding(7);
             relTypesColoured.MarriedToDB = true;
             relTypesColoured.Name = "relTypesColoured";
-            relTypesColoured.Size = new Size(379, 118);
+            relTypesColoured.Size = new Size(377, 123);
             relTypesColoured.TabIndex = 26;
             relTypesColoured.RelationTypesChanged += RelTypesColoured_RelationTypesChanged;
             // 
@@ -2130,11 +2135,13 @@ namespace FTAnalyzer
             // 
             // relTypesLC
             // 
+            relTypesLC.AutoSize = true;
+            relTypesLC.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             relTypesLC.Location = new Point(7, 7);
             relTypesLC.Margin = new Padding(7);
             relTypesLC.MarriedToDB = true;
             relTypesLC.Name = "relTypesLC";
-            relTypesLC.Size = new Size(379, 119);
+            relTypesLC.Size = new Size(377, 123);
             relTypesLC.TabIndex = 36;
             relTypesLC.RelationTypesChanged += RelTypesLC_RelationTypesChanged;
             // 
@@ -2620,11 +2627,13 @@ namespace FTAnalyzer
             // 
             // relTypesCensus
             // 
+            relTypesCensus.AutoSize = true;
+            relTypesCensus.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             relTypesCensus.Location = new Point(11, 22);
             relTypesCensus.Margin = new Padding(7);
             relTypesCensus.MarriedToDB = true;
             relTypesCensus.Name = "relTypesCensus";
-            relTypesCensus.Size = new Size(379, 114);
+            relTypesCensus.Size = new Size(377, 123);
             relTypesCensus.TabIndex = 27;
             // 
             // groupBox9
@@ -3101,7 +3110,7 @@ namespace FTAnalyzer
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources._256;
-            pictureBox1.Location = new Point(1100, 4);
+            pictureBox1.Location = new Point(1108, 1);
             pictureBox1.Margin = new Padding(4);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(117, 106);
@@ -3887,11 +3896,13 @@ namespace FTAnalyzer
             // 
             // reltypesSurnames
             // 
+            reltypesSurnames.AutoSize = true;
+            reltypesSurnames.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             reltypesSurnames.Location = new Point(7, 4);
             reltypesSurnames.Margin = new Padding(7);
             reltypesSurnames.MarriedToDB = true;
             reltypesSurnames.Name = "reltypesSurnames";
-            reltypesSurnames.Size = new Size(379, 114);
+            reltypesSurnames.Size = new Size(377, 123);
             reltypesSurnames.TabIndex = 22;
             // 
             // tabFacts
@@ -4057,11 +4068,13 @@ namespace FTAnalyzer
             // 
             // relTypesFacts
             // 
+            relTypesFacts.AutoSize = true;
+            relTypesFacts.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             relTypesFacts.Location = new Point(9, 4);
             relTypesFacts.Margin = new Padding(7);
             relTypesFacts.MarriedToDB = true;
             relTypesFacts.Name = "relTypesFacts";
-            relTypesFacts.Size = new Size(379, 115);
+            relTypesFacts.Size = new Size(377, 123);
             relTypesFacts.TabIndex = 21;
             relTypesFacts.RelationTypesChanged += RelTypesFacts_RelationTypesChanged;
             // 

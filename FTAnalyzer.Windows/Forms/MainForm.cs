@@ -2989,7 +2989,7 @@ namespace FTAnalyzer
                 int count = result.Select(x => x.Location).Distinct().Count();
                 if (count > 1)
                     results.AddRange(result);
-                int progress = Math.Min(100*records++ / maxRecords, 100);
+                int progress = Math.Min(100 * records++ / maxRecords, 100);
                 Debug.Print($"Record: {records} progress: {progress}");
                 if (progress != currentProgress)
                 {
@@ -3025,15 +3025,12 @@ namespace FTAnalyzer
             HourGlass(this, true);
             Predicate<Individual> relTypeFilter = relTypesColoured.BuildFilter<Individual>(x => x.RelationType);
             ComboBoxFamily? cbFamily = cmbColourFamily.SelectedItem as ComboBoxFamily;
-            if (cbFamily is not null)
-            {
-                List<IDisplayColourBMD> list = ft.ColourBMD(relTypeFilter, txtColouredSurname.Text, cbFamily);
-                ColourBMD rs = new(list);
-                DisposeDuplicateForms(rs);
-                rs.Show();
-                rs.Focus();
-                Analytics.TrackAction(Analytics.MainFormAction, Analytics.ColourBMDEvent);
-            }
+            List<IDisplayColourBMD> list = ft.ColourBMD(relTypeFilter, txtColouredSurname.Text, cbFamily);
+            ColourBMD rs = new(list);
+            DisposeDuplicateForms(rs);
+            rs.Show();
+            rs.Focus();
+            Analytics.TrackAction(Analytics.MainFormAction, Analytics.ColourBMDEvent);
             HourGlass(this, false);
         }
 
@@ -3042,16 +3039,13 @@ namespace FTAnalyzer
             HourGlass(this, true);
             Predicate<Individual> relTypeFilter = relTypesColoured.BuildFilter<Individual>(x => x.RelationType);
             ComboBoxFamily? cbFamily = cmbColourFamily.SelectedItem as ComboBoxFamily;
-            if (cbFamily is not null)
-            {
-                List<IDisplayColourCensus> list =
+            List<IDisplayColourCensus> list =
                     ft.ColourCensus(country, relTypeFilter, txtColouredSurname.Text, cbFamily, ckbIgnoreNoBirthDate.Checked, ckbIgnoreNoDeathDate.Checked);
-                ColourCensus rs = new(country, list);
-                DisposeDuplicateForms(rs);
-                rs.Show();
-                rs.Focus();
-                await Analytics.TrackActionAsync(Analytics.MainFormAction, Analytics.ColourCensusEvent, country).ConfigureAwait(true);
-            }
+            ColourCensus rs = new(country, list);
+            DisposeDuplicateForms(rs);
+            rs.Show();
+            rs.Focus();
+            await Analytics.TrackActionAsync(Analytics.MainFormAction, Analytics.ColourCensusEvent, country).ConfigureAwait(true);
             HourGlass(this, false);
         }
 
@@ -3063,16 +3057,15 @@ namespace FTAnalyzer
 
         void BtnCanadianColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.CANADA);
 
-        void BtnStandardMissingData_Click(object sender, EventArgs e)
-        {
-            UIHelpers.ShowMessage("Not Implemented Yet", "FTAnalyzer");
-        }
+        void BtnStandardMissingData_Click(object sender, EventArgs e) => UIHelpers.ShowMessage("Not Implemented Yet", "FTAnalyzer");
 
         void BtnAdvancedMissingData_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            //List<IDisplayMissingData> list = ft.MissingData(relTypesColoured, txtColouredSurname.Text, cmbColourFamily.SelectedItem as ComboBoxFamily);
-            MissingData rs = new();
+            Predicate<Individual> relTypeFilter = relTypesColoured.BuildFilter<Individual>(x => x.RelationType);
+            ComboBoxFamily? cbFamily = cmbColourFamily.SelectedItem as ComboBoxFamily;
+            List<IDisplayMissingData> list = ft.MissingData(relTypeFilter, txtColouredSurname.Text, cbFamily);
+            MissingData rs = new(list);
             DisposeDuplicateForms(rs);
             rs.Show();
             rs.Focus();

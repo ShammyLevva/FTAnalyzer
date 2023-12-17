@@ -34,45 +34,44 @@ namespace FTAnalyzer.Forms.Controls
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbCensusDate = new System.Windows.Forms.ComboBox();
-            this.SuspendLayout();
+            label1 = new Label();
+            cbCensusDate = new ComboBox();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 10);
-            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(129, 30);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Census Date";
+            label1.AutoSize = true;
+            label1.Location = new Point(4, 7);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(72, 15);
+            label1.TabIndex = 4;
+            label1.Text = "Census Date";
             // 
             // cbCensusDate
             // 
-            this.cbCensusDate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCensusDate.FormattingEnabled = true;
-            this.cbCensusDate.Location = new System.Drawing.Point(154, 7);
-            this.cbCensusDate.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.cbCensusDate.Name = "cbCensusDate";
-            this.cbCensusDate.Size = new System.Drawing.Size(94, 38);
-            this.cbCensusDate.TabIndex = 3;
-            this.cbCensusDate.SelectedIndexChanged += new System.EventHandler(this.CbCensusDate_SelectedIndexChanged);
+            cbCensusDate.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbCensusDate.FormattingEnabled = true;
+            cbCensusDate.Location = new Point(90, 4);
+            cbCensusDate.Margin = new Padding(4, 4, 4, 4);
+            cbCensusDate.Name = "cbCensusDate";
+            cbCensusDate.Size = new Size(56, 23);
+            cbCensusDate.TabIndex = 3;
+            cbCensusDate.SelectedIndexChanged += CbCensusDate_SelectedIndexChanged;
             // 
             // CensusDateSelector
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.cbCensusDate);
-            this.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.Name = "CensusDateSelector";
-            this.Size = new System.Drawing.Size(254, 52);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            Controls.Add(label1);
+            Controls.Add(cbCensusDate);
+            Margin = new Padding(4, 4, 4, 4);
+            Name = "CensusDateSelector";
+            Size = new Size(150, 31);
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

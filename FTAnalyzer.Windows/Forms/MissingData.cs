@@ -1,12 +1,11 @@
 ﻿using FTAnalyzer.Utilities;
-using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms
 {
     public partial class MissingData : Form
     {
 
-        public MissingData()
+        public MissingData(List<IDisplayMissingData> list)
         {
             InitializeComponent();
             Top += NativeMethods.TopTaskbarOffset;
@@ -24,6 +23,6 @@ namespace FTAnalyzer.Forms
             //dsBirth.Scores.ExactDate = 0;
         }
 
-        void MissingData_Load(object sender, System.EventArgs e) => SpecialMethods.SetFonts(this);
+        void MissingData_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }
 }
