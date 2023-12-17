@@ -1368,6 +1368,7 @@ namespace FTAnalyzer
             ckbFactExclude.TabIndex = 38;
             toolTips.SetToolTip(ckbFactExclude, "Any fact types selected in this box excludes people who have this fact type from report");
             ckbFactExclude.Visible = false;
+            ckbFactExclude.MouseClick += CkbFactExclude_MouseClick;
             // 
             // btnUpdateLostCousinsWebsite
             // 
@@ -4101,7 +4102,7 @@ namespace FTAnalyzer
             rtbToday.Margin = new Padding(4);
             rtbToday.Name = "rtbToday";
             rtbToday.ReadOnly = true;
-            rtbToday.Size = new Size(1230, 353);
+            rtbToday.Size = new Size(1230, 361);
             rtbToday.TabIndex = 17;
             rtbToday.Text = "";
             // 

@@ -17,8 +17,6 @@ using HtmlAgilityPack;
 using System.Diagnostics;
 using System.Runtime.Versioning;
 using FTAnalyzer.Windows;
-using System.Collections.Generic;
-using static FTAnalyzer.Mapping.GeoResponse;
 
 namespace FTAnalyzer
 {
@@ -3822,10 +3820,7 @@ namespace FTAnalyzer
             }
         }
 
-        void RadioFacts_CheckedChanged(object sender, EventArgs e)
-        {
-            SetShowFactsButton();
-        }
+        void RadioFacts_CheckedChanged(object sender, EventArgs e) => SetShowFactsButton();
 
         [SupportedOSPlatform("windows10.0.17763")]
         async void MnuGoogleMyMaps_Click(object sender, EventArgs e)
