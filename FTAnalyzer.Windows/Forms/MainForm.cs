@@ -7,7 +7,6 @@ using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
 using Ionic.Zip;
 using Printing.DataGridViewPrint.Tools;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing.Printing;
@@ -18,13 +17,12 @@ using HtmlAgilityPack;
 using System.Diagnostics;
 using System.Runtime.Versioning;
 using FTAnalyzer.Windows;
-using BruTile.Tms;
 
 namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static readonly string VERSION = "10.0.0.0-beta 7";
+        public static readonly string VERSION = "10.0.0.0-beta 8";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         Cursor storedCursor = Cursors.Default;
