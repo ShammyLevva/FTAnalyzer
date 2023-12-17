@@ -192,10 +192,10 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        class IDisplayCensusComparerWrapper : Comparer<IDisplayCensus>
+        class IDisplayCensusComparerWrapper(Comparer<CensusIndividual> comp) : Comparer<IDisplayCensus>
         {
-            readonly Comparer<CensusIndividual> comparer;
-            public IDisplayCensusComparerWrapper(Comparer<CensusIndividual> comp) => comparer = comp;
+            readonly Comparer<CensusIndividual> comparer = comp;
+
             public override int Compare(IDisplayCensus? x, IDisplayCensus? y) => comparer.Compare((CensusIndividual?)x, (CensusIndividual?)y);
         }
 

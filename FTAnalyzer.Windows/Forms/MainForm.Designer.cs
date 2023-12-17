@@ -43,7 +43,6 @@ namespace FTAnalyzer
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             openGedcom = new OpenFileDialog();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
@@ -139,21 +138,21 @@ namespace FTAnalyzer
             tspbTabProgress = new ToolStripProgressBar();
             tsStatusLabel = new ToolStripStatusLabel();
             toolTips = new ToolTip(components);
-            cmbColourFamily = new ComboBox();
-            btnRandomSurnameColour = new Button();
             tbDuplicateScore = new TrackBar();
             chkLCRootPersonConfirm = new CheckBox();
             dgCheckAncestors = new DataGridView();
             labErrorTabAggrMatch = new Label();
             labErrorTabLooseMatch = new Label();
             chkIgnoreUnnamedTwins = new CheckBox();
-            radioOnlyPreferred = new RadioButton();
-            radioOnlyAlternate = new RadioButton();
             dgDataErrors = new Forms.Controls.VirtualDGVDataErrors();
             dgCountries = new Forms.Controls.VirtualDGVLocations();
             dgRegions = new Forms.Controls.VirtualDGVLocations();
-            btnShowExclusions = new Button();
+            btnRandomSurnameColour = new Button();
+            cmbColourFamily = new ComboBox();
             ckbFactExclude = new CheckedListBox();
+            radioOnlyPreferred = new RadioButton();
+            radioOnlyAlternate = new RadioButton();
+            btnShowExclusions = new Button();
             btnUpdateLostCousinsWebsite = new Button();
             printPreviewDialog = new PrintPreviewDialog();
             printDialog = new PrintDialog();
@@ -163,7 +162,7 @@ namespace FTAnalyzer
             ckbWDIgnoreLocations = new CheckBox();
             btnWWII = new Button();
             btnWWI = new Button();
-            label9 = new Label();
+            labWorldWarsSurname = new Label();
             txtWorldWarsSurname = new TextBox();
             dgWorldWars = new Forms.Controls.VirtualDGVIndividuals();
             wardeadRelation = new Forms.Controls.RelationTypes();
@@ -174,16 +173,19 @@ namespace FTAnalyzer
             ckbTTIncludeOnlyOneParent = new CheckBox();
             ckbTTIgnoreLocations = new CheckBox();
             btnTreeTops = new Button();
-            label8 = new Label();
+            labTreeTopsSurname = new Label();
             txtTreetopsSurname = new TextBox();
             dgTreeTops = new Forms.Controls.VirtualDGVIndividuals();
             treetopsRelation = new Forms.Controls.RelationTypes();
             treetopsCountry = new Forms.Controls.CensusCountry();
-            tabColourReports = new TabPage();
+            tabResearchSuggestions = new TabPage();
+            gbFilters = new GroupBox();
+            labResearchTabFamilyFilter = new Label();
+            labResearchTabSurname = new Label();
+            txtColouredSurname = new TextBox();
             groupBox7 = new GroupBox();
             btnAdvancedMissingData = new Button();
             btnStandardMissingData = new Button();
-            labResearchTabFamilyFilter = new Label();
             groupBox3 = new GroupBox();
             ckbIgnoreNoDeathDate = new CheckBox();
             ckbIgnoreNoBirthDate = new CheckBox();
@@ -192,9 +194,7 @@ namespace FTAnalyzer
             btnUKColourCensus = new Button();
             btnUSColourCensus = new Button();
             btnColourBMD = new Button();
-            labResearchTabSurname = new Label();
-            txtColouredSurname = new TextBox();
-            relTypesColoured = new Forms.Controls.RelationTypes();
+            relTypesResearchSuggest = new Forms.Controls.RelationTypes();
             tabLostCousins = new TabPage();
             LCSubTabs = new TabControl();
             LCReportsTab = new TabPage();
@@ -223,11 +223,11 @@ namespace FTAnalyzer
             rtbLCoutput = new Utilities.ScrollingRichTextBox();
             btnViewInvalidRefs = new Button();
             btnLCPotentialUploads = new Button();
-            label21 = new Label();
+            labLCUpdatesCensusRec = new Label();
             rtbLCUpdateData = new RichTextBox();
             groupBox8 = new GroupBox();
             btnLCLogin = new Button();
-            label20 = new Label();
+            labLCUpdatesPassword = new Label();
             labLCUpdatesEmail = new Label();
             txtLCEmail = new TextBox();
             txtLCPassword = new MaskedTextBox();
@@ -239,7 +239,7 @@ namespace FTAnalyzer
             groupBox2 = new GroupBox();
             btnAliveOnDate = new Button();
             txtAliveDates = new TextBox();
-            label22 = new Label();
+            labCensusAliveDates = new Label();
             chkAnyCensusYear = new CheckBox();
             groupBox10 = new GroupBox();
             btnShowCensusMissing = new Button();
@@ -347,18 +347,20 @@ namespace FTAnalyzer
             Marriages = new DataGridViewTextBoxColumn();
             reltypesSurnames = new Forms.Controls.RelationTypes();
             tabFacts = new TabPage();
+            label1 = new Label();
+            panelFactsSurname = new Panel();
             btnDuplicateFacts = new Button();
+            btnShowFacts = new Button();
+            labFactsSurname = new Label();
+            txtFactsSurname = new TextBox();
             panel1 = new Panel();
             radioAllFacts = new RadioButton();
             btnDeselectExcludeAllFactTypes = new Button();
             lblExclude = new Label();
             btnExcludeAllFactTypes = new Button();
             btnDeselectAllFactTypes = new Button();
-            btnShowFacts = new Button();
             btnSelectAllFactTypes = new Button();
-            label3 = new Label();
             ckbFactSelect = new CheckedListBox();
-            txtFactsSurname = new TextBox();
             relTypesFacts = new Forms.Controls.RelationTypes();
             tabToday = new TabPage();
             rtbToday = new Utilities.ScrollingRichTextBox();
@@ -385,7 +387,6 @@ namespace FTAnalyzer
             MatchBirthLocation = new DataGridViewTextBoxColumn();
             saveDatabase = new SaveFileDialog();
             restoreDatabase = new OpenFileDialog();
-            imageList1 = new ImageList(components);
             menuStrip1.SuspendLayout();
             mnuSetRoot.SuspendLayout();
             statusStrip.SuspendLayout();
@@ -399,7 +400,8 @@ namespace FTAnalyzer
             ctxViewNotes.SuspendLayout();
             tabTreetops.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgTreeTops).BeginInit();
-            tabColourReports.SuspendLayout();
+            tabResearchSuggestions.SuspendLayout();
+            gbFilters.SuspendLayout();
             groupBox7.SuspendLayout();
             groupBox3.SuspendLayout();
             tabLostCousins.SuspendLayout();
@@ -465,6 +467,7 @@ namespace FTAnalyzer
             tabSurnames.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgSurnames).BeginInit();
             tabFacts.SuspendLayout();
+            panelFactsSurname.SuspendLayout();
             panel1.SuspendLayout();
             tabToday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudToday).BeginInit();
@@ -1107,30 +1110,6 @@ namespace FTAnalyzer
             tsStatusLabel.Name = "tsStatusLabel";
             tsStatusLabel.Size = new Size(0, 17);
             // 
-            // cmbColourFamily
-            // 
-            cmbColourFamily.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            cmbColourFamily.FormattingEnabled = true;
-            cmbColourFamily.Location = new Point(494, 67);
-            cmbColourFamily.Margin = new Padding(4);
-            cmbColourFamily.Name = "cmbColourFamily";
-            cmbColourFamily.Size = new Size(603, 23);
-            cmbColourFamily.TabIndex = 60;
-            toolTips.SetToolTip(cmbColourFamily, "Select a family to limit the reports to just that family");
-            cmbColourFamily.Click += CmbColourFamily_Click;
-            // 
-            // btnRandomSurnameColour
-            // 
-            btnRandomSurnameColour.Location = new Point(755, 25);
-            btnRandomSurnameColour.Margin = new Padding(4);
-            btnRandomSurnameColour.Name = "btnRandomSurnameColour";
-            btnRandomSurnameColour.Size = new Size(342, 29);
-            btnRandomSurnameColour.TabIndex = 62;
-            btnRandomSurnameColour.Text = "Select Random Surname from Direct Ancestor's Surnames";
-            toolTips.SetToolTip(btnRandomSurnameColour, "Once selected click the appropriate report button to view the report. eg: UK Colour Census Report.");
-            btnRandomSurnameColour.UseVisualStyleBackColor = true;
-            btnRandomSurnameColour.Click += BtnRandomSurnameColour_Click;
-            // 
             // tbDuplicateScore
             // 
             tbDuplicateScore.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
@@ -1167,14 +1146,6 @@ namespace FTAnalyzer
             dgCheckAncestors.AllowUserToDeleteRows = false;
             dgCheckAncestors.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgCheckAncestors.ColumnHeadersHeight = 40;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Window;
-            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle3;
             dgCheckAncestors.Location = new Point(4, 98);
             dgCheckAncestors.Margin = new Padding(4);
             dgCheckAncestors.Name = "dgCheckAncestors";
@@ -1226,32 +1197,6 @@ namespace FTAnalyzer
             toolTips.SetToolTip(chkIgnoreUnnamedTwins, "Ignores duplicates where forename is unknown");
             chkIgnoreUnnamedTwins.UseVisualStyleBackColor = true;
             chkIgnoreUnnamedTwins.Visible = false;
-            // 
-            // radioOnlyPreferred
-            // 
-            radioOnlyPreferred.AutoSize = true;
-            radioOnlyPreferred.Location = new Point(119, 2);
-            radioOnlyPreferred.Margin = new Padding(2);
-            radioOnlyPreferred.Name = "radioOnlyPreferred";
-            radioOnlyPreferred.Size = new Size(131, 19);
-            radioOnlyPreferred.TabIndex = 39;
-            radioOnlyPreferred.Text = "Show only Preferred";
-            toolTips.SetToolTip(radioOnlyPreferred, "Select this option to only show Preferred facts when you click one of the display buttons");
-            radioOnlyPreferred.UseVisualStyleBackColor = true;
-            radioOnlyPreferred.CheckedChanged += RadioFacts_CheckedChanged;
-            // 
-            // radioOnlyAlternate
-            // 
-            radioOnlyAlternate.AutoSize = true;
-            radioOnlyAlternate.Location = new Point(266, 4);
-            radioOnlyAlternate.Margin = new Padding(2);
-            radioOnlyAlternate.Name = "radioOnlyAlternate";
-            radioOnlyAlternate.Size = new Size(140, 19);
-            radioOnlyAlternate.TabIndex = 40;
-            radioOnlyAlternate.Text = "Show only Alternative";
-            toolTips.SetToolTip(radioOnlyAlternate, "Select this option to only show Alternative facts when you click one of the display buttons");
-            radioOnlyAlternate.UseVisualStyleBackColor = true;
-            radioOnlyAlternate.CheckedChanged += RadioFacts_CheckedChanged;
             // 
             // dgDataErrors
             // 
@@ -1334,6 +1279,71 @@ namespace FTAnalyzer
             toolTips.SetToolTip(dgRegions, "Double click on Region name to see list of individuals with that Region.");
             dgRegions.VirtualMode = true;
             // 
+            // btnRandomSurnameColour
+            // 
+            btnRandomSurnameColour.Location = new Point(352, 20);
+            btnRandomSurnameColour.Margin = new Padding(4);
+            btnRandomSurnameColour.Name = "btnRandomSurnameColour";
+            btnRandomSurnameColour.Size = new Size(342, 29);
+            btnRandomSurnameColour.TabIndex = 67;
+            btnRandomSurnameColour.Text = "Select Random Surname from Direct Ancestor's Surnames";
+            toolTips.SetToolTip(btnRandomSurnameColour, "Once selected click the appropriate report button to view the report. eg: UK Colour Census Report.");
+            btnRandomSurnameColour.UseVisualStyleBackColor = true;
+            btnRandomSurnameColour.Click += BtnRandomSurnameColour_Click;
+            // 
+            // cmbColourFamily
+            // 
+            cmbColourFamily.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            cmbColourFamily.FormattingEnabled = true;
+            cmbColourFamily.Location = new Point(91, 62);
+            cmbColourFamily.Margin = new Padding(4);
+            cmbColourFamily.Name = "cmbColourFamily";
+            cmbColourFamily.Size = new Size(472, 23);
+            cmbColourFamily.TabIndex = 65;
+            toolTips.SetToolTip(cmbColourFamily, "Select a family to limit the reports to just that family");
+            cmbColourFamily.Click += CmbColourFamily_Click;
+            // 
+            // ckbFactExclude
+            // 
+            ckbFactExclude.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            ckbFactExclude.FormattingEnabled = true;
+            ckbFactExclude.Location = new Point(424, 158);
+            ckbFactExclude.Margin = new Padding(4);
+            ckbFactExclude.Name = "ckbFactExclude";
+            ckbFactExclude.ScrollAlwaysVisible = true;
+            ckbFactExclude.SelectionMode = SelectionMode.None;
+            ckbFactExclude.Size = new Size(365, 202);
+            ckbFactExclude.TabIndex = 38;
+            toolTips.SetToolTip(ckbFactExclude, "Any fact types selected in this box excludes people who have this fact type from report");
+            ckbFactExclude.Visible = false;
+            ckbFactExclude.MouseClick += CkbFactExclude_MouseClick;
+            // 
+            // radioOnlyPreferred
+            // 
+            radioOnlyPreferred.AutoSize = true;
+            radioOnlyPreferred.Location = new Point(119, 2);
+            radioOnlyPreferred.Margin = new Padding(2);
+            radioOnlyPreferred.Name = "radioOnlyPreferred";
+            radioOnlyPreferred.Size = new Size(131, 19);
+            radioOnlyPreferred.TabIndex = 39;
+            radioOnlyPreferred.Text = "Show only Preferred";
+            toolTips.SetToolTip(radioOnlyPreferred, "Select this option to only show Preferred facts when you click one of the display buttons");
+            radioOnlyPreferred.UseVisualStyleBackColor = true;
+            radioOnlyPreferred.CheckedChanged += RadioFacts_CheckedChanged;
+            // 
+            // radioOnlyAlternate
+            // 
+            radioOnlyAlternate.AutoSize = true;
+            radioOnlyAlternate.Location = new Point(266, 4);
+            radioOnlyAlternate.Margin = new Padding(2);
+            radioOnlyAlternate.Name = "radioOnlyAlternate";
+            radioOnlyAlternate.Size = new Size(140, 19);
+            radioOnlyAlternate.TabIndex = 40;
+            radioOnlyAlternate.Text = "Show only Alternative";
+            toolTips.SetToolTip(radioOnlyAlternate, "Select this option to only show Alternative facts when you click one of the display buttons");
+            radioOnlyAlternate.UseVisualStyleBackColor = true;
+            radioOnlyAlternate.CheckedChanged += RadioFacts_CheckedChanged;
+            // 
             // btnShowExclusions
             // 
             btnShowExclusions.Location = new Point(383, 246);
@@ -1345,21 +1355,6 @@ namespace FTAnalyzer
             toolTips.SetToolTip(btnShowExclusions, "Show Exclusions");
             btnShowExclusions.UseVisualStyleBackColor = true;
             btnShowExclusions.Click += BtnShowExclusions_Click;
-            // 
-            // ckbFactExclude
-            // 
-            ckbFactExclude.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            ckbFactExclude.FormattingEnabled = true;
-            ckbFactExclude.Location = new Point(424, 158);
-            ckbFactExclude.Margin = new Padding(4);
-            ckbFactExclude.Name = "ckbFactExclude";
-            ckbFactExclude.ScrollAlwaysVisible = true;
-            ckbFactExclude.SelectionMode = SelectionMode.None;
-            ckbFactExclude.Size = new Size(365, 220);
-            ckbFactExclude.TabIndex = 38;
-            toolTips.SetToolTip(ckbFactExclude, "Any fact types selected in this box excludes people who have this fact type from report");
-            ckbFactExclude.Visible = false;
-            ckbFactExclude.MouseClick += CkbFactExclude_MouseClick;
             // 
             // btnUpdateLostCousinsWebsite
             // 
@@ -1396,7 +1391,7 @@ namespace FTAnalyzer
             tabWorldWars.Controls.Add(ckbWDIgnoreLocations);
             tabWorldWars.Controls.Add(btnWWII);
             tabWorldWars.Controls.Add(btnWWI);
-            tabWorldWars.Controls.Add(label9);
+            tabWorldWars.Controls.Add(labWorldWarsSurname);
             tabWorldWars.Controls.Add(txtWorldWarsSurname);
             tabWorldWars.Controls.Add(dgWorldWars);
             tabWorldWars.Controls.Add(wardeadRelation);
@@ -1413,7 +1408,7 @@ namespace FTAnalyzer
             // ckbMilitaryOnly
             // 
             ckbMilitaryOnly.AutoSize = true;
-            ckbMilitaryOnly.Location = new Point(326, 121);
+            ckbMilitaryOnly.Location = new Point(351, 121);
             ckbMilitaryOnly.Margin = new Padding(4);
             ckbMilitaryOnly.Name = "ckbMilitaryOnly";
             ckbMilitaryOnly.Size = new Size(291, 19);
@@ -1457,15 +1452,15 @@ namespace FTAnalyzer
             btnWWI.UseVisualStyleBackColor = true;
             btnWWI.Click += BtnWWI_Click;
             // 
-            // label9
+            // labWorldWarsSurname
             // 
-            label9.AutoSize = true;
-            label9.Location = new Point(694, 29);
-            label9.Margin = new Padding(4, 0, 4, 0);
-            label9.Name = "label9";
-            label9.Size = new Size(54, 15);
-            label9.TabIndex = 28;
-            label9.Text = "Surname";
+            labWorldWarsSurname.AutoSize = true;
+            labWorldWarsSurname.Location = new Point(694, 29);
+            labWorldWarsSurname.Margin = new Padding(4, 0, 4, 0);
+            labWorldWarsSurname.Name = "labWorldWarsSurname";
+            labWorldWarsSurname.Size = new Size(54, 15);
+            labWorldWarsSurname.TabIndex = 28;
+            labWorldWarsSurname.Text = "Surname";
             // 
             // txtWorldWarsSurname
             // 
@@ -1515,7 +1510,7 @@ namespace FTAnalyzer
             // 
             // wardeadCountry
             // 
-            wardeadCountry.Location = new Point(9, 29);
+            wardeadCountry.Location = new Point(7, 11);
             wardeadCountry.Margin = new Padding(7);
             wardeadCountry.Name = "wardeadCountry";
             wardeadCountry.Size = new Size(299, 85);
@@ -1543,7 +1538,7 @@ namespace FTAnalyzer
             tabTreetops.Controls.Add(ckbTTIncludeOnlyOneParent);
             tabTreetops.Controls.Add(ckbTTIgnoreLocations);
             tabTreetops.Controls.Add(btnTreeTops);
-            tabTreetops.Controls.Add(label8);
+            tabTreetops.Controls.Add(labTreeTopsSurname);
             tabTreetops.Controls.Add(txtTreetopsSurname);
             tabTreetops.Controls.Add(dgTreeTops);
             tabTreetops.Controls.Add(treetopsRelation);
@@ -1594,15 +1589,15 @@ namespace FTAnalyzer
             btnTreeTops.UseVisualStyleBackColor = true;
             btnTreeTops.Click += BtnTreeTops_Click;
             // 
-            // label8
+            // labTreeTopsSurname
             // 
-            label8.AutoSize = true;
-            label8.Location = new Point(694, 29);
-            label8.Margin = new Padding(4, 0, 4, 0);
-            label8.Name = "label8";
-            label8.Size = new Size(54, 15);
-            label8.TabIndex = 24;
-            label8.Text = "Surname";
+            labTreeTopsSurname.AutoSize = true;
+            labTreeTopsSurname.Location = new Point(694, 29);
+            labTreeTopsSurname.Margin = new Padding(4, 0, 4, 0);
+            labTreeTopsSurname.Name = "labTreeTopsSurname";
+            labTreeTopsSurname.Size = new Size(54, 15);
+            labTreeTopsSurname.TabIndex = 24;
+            labTreeTopsSurname.Text = "Surname";
             // 
             // txtTreetopsSurname
             // 
@@ -1660,34 +1655,74 @@ namespace FTAnalyzer
             treetopsCountry.Title = "Default Country";
             treetopsCountry.UKEnabled = true;
             // 
-            // tabColourReports
+            // tabResearchSuggestions
             // 
-            tabColourReports.Controls.Add(groupBox7);
-            tabColourReports.Controls.Add(btnRandomSurnameColour);
-            tabColourReports.Controls.Add(labResearchTabFamilyFilter);
-            tabColourReports.Controls.Add(cmbColourFamily);
-            tabColourReports.Controls.Add(groupBox3);
-            tabColourReports.Controls.Add(btnColourBMD);
-            tabColourReports.Controls.Add(labResearchTabSurname);
-            tabColourReports.Controls.Add(txtColouredSurname);
-            tabColourReports.Controls.Add(relTypesColoured);
-            tabColourReports.Location = new Point(4, 24);
-            tabColourReports.Margin = new Padding(4);
-            tabColourReports.Name = "tabColourReports";
-            tabColourReports.Size = new Size(1238, 412);
-            tabColourReports.TabIndex = 12;
-            tabColourReports.Text = "Research Suggestions";
-            tabColourReports.UseVisualStyleBackColor = true;
+            tabResearchSuggestions.Controls.Add(gbFilters);
+            tabResearchSuggestions.Controls.Add(groupBox7);
+            tabResearchSuggestions.Controls.Add(groupBox3);
+            tabResearchSuggestions.Controls.Add(btnColourBMD);
+            tabResearchSuggestions.Controls.Add(relTypesResearchSuggest);
+            tabResearchSuggestions.Location = new Point(4, 24);
+            tabResearchSuggestions.Margin = new Padding(4);
+            tabResearchSuggestions.Name = "tabResearchSuggestions";
+            tabResearchSuggestions.Size = new Size(1238, 412);
+            tabResearchSuggestions.TabIndex = 12;
+            tabResearchSuggestions.Text = "Research Suggestions";
+            tabResearchSuggestions.UseVisualStyleBackColor = true;
+            // 
+            // gbFilters
+            // 
+            gbFilters.AutoSize = true;
+            gbFilters.Controls.Add(btnRandomSurnameColour);
+            gbFilters.Controls.Add(labResearchTabFamilyFilter);
+            gbFilters.Controls.Add(cmbColourFamily);
+            gbFilters.Controls.Add(labResearchTabSurname);
+            gbFilters.Controls.Add(txtColouredSurname);
+            gbFilters.Location = new Point(396, 14);
+            gbFilters.Name = "gbFilters";
+            gbFilters.Size = new Size(703, 118);
+            gbFilters.TabIndex = 64;
+            gbFilters.TabStop = false;
+            gbFilters.Text = "Filters";
+            // 
+            // labResearchTabFamilyFilter
+            // 
+            labResearchTabFamilyFilter.AutoSize = true;
+            labResearchTabFamilyFilter.Location = new Point(12, 65);
+            labResearchTabFamilyFilter.Margin = new Padding(4, 0, 4, 0);
+            labResearchTabFamilyFilter.Name = "labResearchTabFamilyFilter";
+            labResearchTabFamilyFilter.Size = new Size(71, 15);
+            labResearchTabFamilyFilter.TabIndex = 66;
+            labResearchTabFamilyFilter.Text = "Family Filter";
+            // 
+            // labResearchTabSurname
+            // 
+            labResearchTabSurname.AutoSize = true;
+            labResearchTabSurname.Location = new Point(12, 27);
+            labResearchTabSurname.Margin = new Padding(4, 0, 4, 0);
+            labResearchTabSurname.Name = "labResearchTabSurname";
+            labResearchTabSurname.Size = new Size(54, 15);
+            labResearchTabSurname.TabIndex = 64;
+            labResearchTabSurname.Text = "Surname";
+            // 
+            // txtColouredSurname
+            // 
+            txtColouredSurname.Location = new Point(91, 24);
+            txtColouredSurname.Margin = new Padding(4);
+            txtColouredSurname.Name = "txtColouredSurname";
+            txtColouredSurname.Size = new Size(234, 23);
+            txtColouredSurname.TabIndex = 63;
             // 
             // groupBox7
             // 
+            groupBox7.AutoSize = true;
             groupBox7.Controls.Add(btnAdvancedMissingData);
             groupBox7.Controls.Add(btnStandardMissingData);
             groupBox7.Location = new Point(494, 134);
             groupBox7.Margin = new Padding(4);
             groupBox7.Name = "groupBox7";
             groupBox7.Padding = new Padding(4);
-            groupBox7.Size = new Size(477, 126);
+            groupBox7.Size = new Size(478, 126);
             groupBox7.TabIndex = 63;
             groupBox7.TabStop = false;
             groupBox7.Text = "Missing Data Reports";
@@ -1715,18 +1750,9 @@ namespace FTAnalyzer
             btnStandardMissingData.UseVisualStyleBackColor = true;
             btnStandardMissingData.Click += BtnStandardMissingData_Click;
             // 
-            // labResearchTabFamilyFilter
-            // 
-            labResearchTabFamilyFilter.AutoSize = true;
-            labResearchTabFamilyFilter.Location = new Point(415, 70);
-            labResearchTabFamilyFilter.Margin = new Padding(4, 0, 4, 0);
-            labResearchTabFamilyFilter.Name = "labResearchTabFamilyFilter";
-            labResearchTabFamilyFilter.Size = new Size(71, 15);
-            labResearchTabFamilyFilter.TabIndex = 61;
-            labResearchTabFamilyFilter.Text = "Family Filter";
-            // 
             // groupBox3
             // 
+            groupBox3.AutoSize = true;
             groupBox3.Controls.Add(ckbIgnoreNoDeathDate);
             groupBox3.Controls.Add(ckbIgnoreNoBirthDate);
             groupBox3.Controls.Add(btnIrishColourCensus);
@@ -1737,20 +1763,22 @@ namespace FTAnalyzer
             groupBox3.Margin = new Padding(4);
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new Padding(4);
-            groupBox3.Size = new Size(477, 126);
+            groupBox3.Size = new Size(478, 132);
             groupBox3.TabIndex = 36;
             groupBox3.TabStop = false;
             groupBox3.Text = "Census Suggestions Reports";
             // 
             // ckbIgnoreNoDeathDate
             // 
+            ckbIgnoreNoDeathDate.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ckbIgnoreNoDeathDate.AutoSize = true;
-            ckbIgnoreNoDeathDate.Location = new Point(243, 89);
+            ckbIgnoreNoDeathDate.Location = new Point(248, 89);
             ckbIgnoreNoDeathDate.Margin = new Padding(4);
             ckbIgnoreNoDeathDate.Name = "ckbIgnoreNoDeathDate";
             ckbIgnoreNoDeathDate.Size = new Size(222, 19);
             ckbIgnoreNoDeathDate.TabIndex = 67;
             ckbIgnoreNoDeathDate.Text = "Ignore Individuals with no death date";
+            ckbIgnoreNoDeathDate.TextAlign = ContentAlignment.MiddleRight;
             ckbIgnoreNoDeathDate.UseVisualStyleBackColor = true;
             // 
             // ckbIgnoreNoBirthDate
@@ -1766,6 +1794,7 @@ namespace FTAnalyzer
             // 
             // btnIrishColourCensus
             // 
+            btnIrishColourCensus.AutoSize = true;
             btnIrishColourCensus.Location = new Point(242, 22);
             btnIrishColourCensus.Margin = new Padding(4);
             btnIrishColourCensus.Name = "btnIrishColourCensus";
@@ -1777,6 +1806,7 @@ namespace FTAnalyzer
             // 
             // btnCanadianColourCensus
             // 
+            btnCanadianColourCensus.AutoSize = true;
             btnCanadianColourCensus.Location = new Point(242, 55);
             btnCanadianColourCensus.Margin = new Padding(4);
             btnCanadianColourCensus.Name = "btnCanadianColourCensus";
@@ -1788,6 +1818,7 @@ namespace FTAnalyzer
             // 
             // btnUKColourCensus
             // 
+            btnUKColourCensus.AutoSize = true;
             btnUKColourCensus.Location = new Point(7, 22);
             btnUKColourCensus.Margin = new Padding(4);
             btnUKColourCensus.Name = "btnUKColourCensus";
@@ -1799,6 +1830,7 @@ namespace FTAnalyzer
             // 
             // btnUSColourCensus
             // 
+            btnUSColourCensus.AutoSize = true;
             btnUSColourCensus.Location = new Point(7, 55);
             btnUSColourCensus.Margin = new Padding(4);
             btnUSColourCensus.Name = "btnUSColourCensus";
@@ -1810,6 +1842,7 @@ namespace FTAnalyzer
             // 
             // btnColourBMD
             // 
+            btnColourBMD.AutoSize = true;
             btnColourBMD.Location = new Point(68, 266);
             btnColourBMD.Margin = new Padding(4);
             btnColourBMD.Name = "btnColourBMD";
@@ -1819,36 +1852,17 @@ namespace FTAnalyzer
             btnColourBMD.UseVisualStyleBackColor = true;
             btnColourBMD.Click += BtnColourBMD_Click;
             // 
-            // labResearchTabSurname
+            // relTypesResearchSuggest
             // 
-            labResearchTabSurname.AutoSize = true;
-            labResearchTabSurname.Location = new Point(415, 32);
-            labResearchTabSurname.Margin = new Padding(4, 0, 4, 0);
-            labResearchTabSurname.Name = "labResearchTabSurname";
-            labResearchTabSurname.Size = new Size(54, 15);
-            labResearchTabSurname.TabIndex = 59;
-            labResearchTabSurname.Text = "Surname";
-            // 
-            // txtColouredSurname
-            // 
-            txtColouredSurname.Location = new Point(494, 29);
-            txtColouredSurname.Margin = new Padding(4);
-            txtColouredSurname.Name = "txtColouredSurname";
-            txtColouredSurname.Size = new Size(234, 23);
-            txtColouredSurname.TabIndex = 30;
-            txtColouredSurname.TextChanged += TxtColouredSurname_TextChanged;
-            // 
-            // relTypesColoured
-            // 
-            relTypesColoured.AutoSize = true;
-            relTypesColoured.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            relTypesColoured.Location = new Point(9, 9);
-            relTypesColoured.Margin = new Padding(7);
-            relTypesColoured.MarriedToDB = true;
-            relTypesColoured.Name = "relTypesColoured";
-            relTypesColoured.Size = new Size(377, 123);
-            relTypesColoured.TabIndex = 26;
-            relTypesColoured.RelationTypesChanged += RelTypesColoured_RelationTypesChanged;
+            relTypesResearchSuggest.AutoSize = true;
+            relTypesResearchSuggest.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            relTypesResearchSuggest.Location = new Point(9, 9);
+            relTypesResearchSuggest.Margin = new Padding(7);
+            relTypesResearchSuggest.MarriedToDB = true;
+            relTypesResearchSuggest.Name = "relTypesResearchSuggest";
+            relTypesResearchSuggest.Size = new Size(377, 123);
+            relTypesResearchSuggest.TabIndex = 26;
+            relTypesResearchSuggest.RelationTypesChanged += RelTypesColoured_RelationTypesChanged;
             // 
             // tabLostCousins
             // 
@@ -2151,7 +2165,7 @@ namespace FTAnalyzer
             LCUpdatesTab.Controls.Add(btnViewInvalidRefs);
             LCUpdatesTab.Controls.Add(btnLCPotentialUploads);
             LCUpdatesTab.Controls.Add(chkLCRootPersonConfirm);
-            LCUpdatesTab.Controls.Add(label21);
+            LCUpdatesTab.Controls.Add(labLCUpdatesCensusRec);
             LCUpdatesTab.Controls.Add(rtbLCUpdateData);
             LCUpdatesTab.Controls.Add(groupBox8);
             LCUpdatesTab.Controls.Add(btnUpdateLostCousinsWebsite);
@@ -2200,16 +2214,16 @@ namespace FTAnalyzer
             btnLCPotentialUploads.UseVisualStyleBackColor = true;
             btnLCPotentialUploads.Click += BtnLCPotentialUploads_Click;
             // 
-            // label21
+            // labLCUpdatesCensusRec
             // 
-            label21.AutoSize = true;
-            label21.Font = new Font("Microsoft Sans Serif", 9.75F);
-            label21.Location = new Point(546, 14);
-            label21.Margin = new Padding(4, 0, 4, 0);
-            label21.Name = "label21";
-            label21.Size = new Size(382, 16);
-            label21.TabIndex = 37;
-            label21.Text = "Census Records with valid Reference to upload to Lost Cousins";
+            labLCUpdatesCensusRec.AutoSize = true;
+            labLCUpdatesCensusRec.Font = new Font("Microsoft Sans Serif", 9.75F);
+            labLCUpdatesCensusRec.Location = new Point(546, 14);
+            labLCUpdatesCensusRec.Margin = new Padding(4, 0, 4, 0);
+            labLCUpdatesCensusRec.Name = "labLCUpdatesCensusRec";
+            labLCUpdatesCensusRec.Size = new Size(382, 16);
+            labLCUpdatesCensusRec.TabIndex = 37;
+            labLCUpdatesCensusRec.Text = "Census Records with valid Reference to upload to Lost Cousins";
             // 
             // rtbLCUpdateData
             // 
@@ -2229,7 +2243,7 @@ namespace FTAnalyzer
             // groupBox8
             // 
             groupBox8.Controls.Add(btnLCLogin);
-            groupBox8.Controls.Add(label20);
+            groupBox8.Controls.Add(labLCUpdatesPassword);
             groupBox8.Controls.Add(labLCUpdatesEmail);
             groupBox8.Controls.Add(txtLCEmail);
             groupBox8.Controls.Add(txtLCPassword);
@@ -2255,16 +2269,16 @@ namespace FTAnalyzer
             btnLCLogin.UseVisualStyleBackColor = false;
             btnLCLogin.Click += BtnLCLogin_Click;
             // 
-            // label20
+            // labLCUpdatesPassword
             // 
-            label20.AutoSize = true;
-            label20.Location = new Point(40, 83);
-            label20.Margin = new Padding(4, 0, 4, 0);
-            label20.Name = "label20";
-            label20.Size = new Size(67, 16);
-            label20.TabIndex = 3;
-            label20.Text = "Password";
-            label20.TextAlign = ContentAlignment.TopRight;
+            labLCUpdatesPassword.AutoSize = true;
+            labLCUpdatesPassword.Location = new Point(40, 83);
+            labLCUpdatesPassword.Margin = new Padding(4, 0, 4, 0);
+            labLCUpdatesPassword.Name = "labLCUpdatesPassword";
+            labLCUpdatesPassword.Size = new Size(67, 16);
+            labLCUpdatesPassword.TabIndex = 3;
+            labLCUpdatesPassword.Text = "Password";
+            labLCUpdatesPassword.TextAlign = ContentAlignment.TopRight;
             // 
             // labLCUpdatesEmail
             // 
@@ -2367,7 +2381,7 @@ namespace FTAnalyzer
             // 
             groupBox2.Controls.Add(btnAliveOnDate);
             groupBox2.Controls.Add(txtAliveDates);
-            groupBox2.Controls.Add(label22);
+            groupBox2.Controls.Add(labCensusAliveDates);
             groupBox2.Controls.Add(chkAnyCensusYear);
             groupBox2.Controls.Add(groupBox10);
             groupBox2.Controls.Add(groupBox4);
@@ -2409,15 +2423,15 @@ namespace FTAnalyzer
             txtAliveDates.Enter += TxtAliveDates_Enter;
             txtAliveDates.Validating += TxtAliveDates_Validating;
             // 
-            // label22
+            // labCensusAliveDates
             // 
-            label22.AutoSize = true;
-            label22.Location = new Point(747, 100);
-            label22.Margin = new Padding(4, 0, 4, 0);
-            label22.Name = "label22";
-            label22.Size = new Size(71, 15);
-            label22.TabIndex = 39;
-            label22.Text = "Alive Dates: ";
+            labCensusAliveDates.AutoSize = true;
+            labCensusAliveDates.Location = new Point(747, 100);
+            labCensusAliveDates.Margin = new Padding(4, 0, 4, 0);
+            labCensusAliveDates.Name = "labCensusAliveDates";
+            labCensusAliveDates.Size = new Size(71, 15);
+            labCensusAliveDates.TabIndex = 39;
+            labCensusAliveDates.Text = "Alive Dates: ";
             // 
             // chkAnyCensusYear
             // 
@@ -3214,12 +3228,13 @@ namespace FTAnalyzer
             tabSelector.Controls.Add(tabFacts);
             tabSelector.Controls.Add(tabCensus);
             tabSelector.Controls.Add(tabLostCousins);
-            tabSelector.Controls.Add(tabColourReports);
+            tabSelector.Controls.Add(tabResearchSuggestions);
             tabSelector.Controls.Add(tabTreetops);
             tabSelector.Controls.Add(tabWorldWars);
             tabSelector.Controls.Add(tabToday);
             tabSelector.Location = new Point(0, 31);
             tabSelector.Margin = new Padding(4);
+            tabSelector.Multiline = true;
             tabSelector.Name = "tabSelector";
             tabSelector.SelectedIndex = 0;
             tabSelector.Size = new Size(1246, 440);
@@ -3907,7 +3922,8 @@ namespace FTAnalyzer
             // 
             // tabFacts
             // 
-            tabFacts.Controls.Add(btnDuplicateFacts);
+            tabFacts.Controls.Add(label1);
+            tabFacts.Controls.Add(panelFactsSurname);
             tabFacts.Controls.Add(btnShowExclusions);
             tabFacts.Controls.Add(panel1);
             tabFacts.Controls.Add(btnDeselectExcludeAllFactTypes);
@@ -3915,11 +3931,8 @@ namespace FTAnalyzer
             tabFacts.Controls.Add(btnExcludeAllFactTypes);
             tabFacts.Controls.Add(btnDeselectAllFactTypes);
             tabFacts.Controls.Add(ckbFactExclude);
-            tabFacts.Controls.Add(btnShowFacts);
             tabFacts.Controls.Add(btnSelectAllFactTypes);
-            tabFacts.Controls.Add(label3);
             tabFacts.Controls.Add(ckbFactSelect);
-            tabFacts.Controls.Add(txtFactsSurname);
             tabFacts.Controls.Add(relTypesFacts);
             tabFacts.Location = new Point(4, 24);
             tabFacts.Margin = new Padding(4);
@@ -3929,16 +3942,65 @@ namespace FTAnalyzer
             tabFacts.Text = "Facts";
             tabFacts.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label1.Location = new Point(9, 364);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(342, 15);
+            label1.TabIndex = 44;
+            label1.Text = "Select Facts to Include in Report";
+            label1.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // panelFactsSurname
+            // 
+            panelFactsSurname.Controls.Add(btnDuplicateFacts);
+            panelFactsSurname.Controls.Add(btnShowFacts);
+            panelFactsSurname.Controls.Add(labFactsSurname);
+            panelFactsSurname.Controls.Add(txtFactsSurname);
+            panelFactsSurname.Location = new Point(424, 13);
+            panelFactsSurname.Name = "panelFactsSurname";
+            panelFactsSurname.Size = new Size(585, 106);
+            panelFactsSurname.TabIndex = 43;
+            // 
             // btnDuplicateFacts
             // 
-            btnDuplicateFacts.Location = new Point(799, 49);
+            btnDuplicateFacts.Location = new Point(384, 43);
             btnDuplicateFacts.Margin = new Padding(4);
             btnDuplicateFacts.Name = "btnDuplicateFacts";
             btnDuplicateFacts.Size = new Size(189, 44);
-            btnDuplicateFacts.TabIndex = 42;
+            btnDuplicateFacts.TabIndex = 50;
             btnDuplicateFacts.Text = "Show Duplicate Facts of Selected Fact Type";
             btnDuplicateFacts.UseVisualStyleBackColor = true;
-            btnDuplicateFacts.Click += BtnDuplicateFacts_Click;
+            // 
+            // btnShowFacts
+            // 
+            btnShowFacts.Location = new Point(9, 43);
+            btnShowFacts.Margin = new Padding(4);
+            btnShowFacts.Name = "btnShowFacts";
+            btnShowFacts.Size = new Size(365, 44);
+            btnShowFacts.TabIndex = 49;
+            btnShowFacts.Text = "Show Facts for Individuals with Selected Fact Types";
+            btnShowFacts.UseVisualStyleBackColor = true;
+            // 
+            // labFactsSurname
+            // 
+            labFactsSurname.AutoSize = true;
+            labFactsSurname.Location = new Point(13, 16);
+            labFactsSurname.Margin = new Padding(4, 0, 4, 0);
+            labFactsSurname.Name = "labFactsSurname";
+            labFactsSurname.Size = new Size(54, 15);
+            labFactsSurname.TabIndex = 48;
+            labFactsSurname.Text = "Surname";
+            // 
+            // txtFactsSurname
+            // 
+            txtFactsSurname.Location = new Point(76, 13);
+            txtFactsSurname.Margin = new Padding(4);
+            txtFactsSurname.Name = "txtFactsSurname";
+            txtFactsSurname.Size = new Size(298, 23);
+            txtFactsSurname.TabIndex = 47;
             // 
             // panel1
             // 
@@ -3981,7 +4043,7 @@ namespace FTAnalyzer
             // lblExclude
             // 
             lblExclude.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            lblExclude.Location = new Point(365, 431);
+            lblExclude.Location = new Point(424, 363);
             lblExclude.Margin = new Padding(4, 0, 4, 0);
             lblExclude.Name = "lblExclude";
             lblExclude.Size = new Size(342, 15);
@@ -4013,17 +4075,6 @@ namespace FTAnalyzer
             btnDeselectAllFactTypes.UseVisualStyleBackColor = true;
             btnDeselectAllFactTypes.Click += BtnDeselectAllFactTypes_Click;
             // 
-            // btnShowFacts
-            // 
-            btnShowFacts.Location = new Point(424, 49);
-            btnShowFacts.Margin = new Padding(4);
-            btnShowFacts.Name = "btnShowFacts";
-            btnShowFacts.Size = new Size(365, 44);
-            btnShowFacts.TabIndex = 37;
-            btnShowFacts.Text = "Show Facts for Individuals with Selected Fact Types";
-            btnShowFacts.UseVisualStyleBackColor = true;
-            btnShowFacts.Click += BtnShowFacts_Click;
-            // 
             // btnSelectAllFactTypes
             // 
             btnSelectAllFactTypes.Location = new Point(9, 125);
@@ -4035,16 +4086,6 @@ namespace FTAnalyzer
             btnSelectAllFactTypes.UseVisualStyleBackColor = true;
             btnSelectAllFactTypes.Click += BtnSelectAllFactTypes_Click;
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(428, 22);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(54, 15);
-            label3.TabIndex = 36;
-            label3.Text = "Surname";
-            // 
             // ckbFactSelect
             // 
             ckbFactSelect.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
@@ -4054,17 +4095,9 @@ namespace FTAnalyzer
             ckbFactSelect.Name = "ckbFactSelect";
             ckbFactSelect.ScrollAlwaysVisible = true;
             ckbFactSelect.SelectionMode = SelectionMode.None;
-            ckbFactSelect.Size = new Size(366, 220);
+            ckbFactSelect.Size = new Size(366, 202);
             ckbFactSelect.TabIndex = 25;
             ckbFactSelect.MouseClick += CkbFactSelect_MouseClick;
-            // 
-            // txtFactsSurname
-            // 
-            txtFactsSurname.Location = new Point(491, 19);
-            txtFactsSurname.Margin = new Padding(4);
-            txtFactsSurname.Name = "txtFactsSurname";
-            txtFactsSurname.Size = new Size(298, 23);
-            txtFactsSurname.TabIndex = 35;
             // 
             // relTypesFacts
             // 
@@ -4328,12 +4361,6 @@ namespace FTAnalyzer
             restoreDatabase.FileName = "*.zip";
             restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
-            // imageList1
-            // 
-            imageList1.ColorDepth = ColorDepth.Depth8Bit;
-            imageList1.ImageSize = new Size(16, 16);
-            imageList1.TransparentColor = Color.Transparent;
-            // 
             // MainForm
             // 
             AllowDrop = true;
@@ -4372,8 +4399,10 @@ namespace FTAnalyzer
             tabTreetops.ResumeLayout(false);
             tabTreetops.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgTreeTops).EndInit();
-            tabColourReports.ResumeLayout(false);
-            tabColourReports.PerformLayout();
+            tabResearchSuggestions.ResumeLayout(false);
+            tabResearchSuggestions.PerformLayout();
+            gbFilters.ResumeLayout(false);
+            gbFilters.PerformLayout();
             groupBox7.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
@@ -4450,6 +4479,8 @@ namespace FTAnalyzer
             ((System.ComponentModel.ISupportInitialize)dgSurnames).EndInit();
             tabFacts.ResumeLayout(false);
             tabFacts.PerformLayout();
+            panelFactsSurname.ResumeLayout(false);
+            panelFactsSurname.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             tabToday.ResumeLayout(false);
@@ -4501,7 +4532,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.Button btnWWII;
         private System.Windows.Forms.Button btnWWI;
         private FTAnalyzer.Forms.Controls.VirtualDGVIndividuals dgWorldWars;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label labWorldWarsSurname;
         private System.Windows.Forms.TextBox txtWorldWarsSurname;
         private FTAnalyzer.Forms.Controls.RelationTypes wardeadRelation;
         private FTAnalyzer.Forms.Controls.CensusCountry wardeadCountry;
@@ -4509,14 +4540,12 @@ namespace FTAnalyzer
         private FTAnalyzer.Forms.Controls.VirtualDGVIndividuals dgTreeTops;
         private System.Windows.Forms.CheckBox ckbTTIgnoreLocations;
         private System.Windows.Forms.Button btnTreeTops;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label labTreeTopsSurname;
         private System.Windows.Forms.TextBox txtTreetopsSurname;
         private FTAnalyzer.Forms.Controls.RelationTypes treetopsRelation;
         private FTAnalyzer.Forms.Controls.CensusCountry treetopsCountry;
-        private System.Windows.Forms.TabPage tabColourReports;
-        private System.Windows.Forms.Label labResearchTabSurname;
-        private System.Windows.Forms.TextBox txtColouredSurname;
-        private FTAnalyzer.Forms.Controls.RelationTypes relTypesColoured;
+        private System.Windows.Forms.TabPage tabResearchSuggestions;
+        private FTAnalyzer.Forms.Controls.RelationTypes relTypesResearchSuggest;
         private System.Windows.Forms.TabPage tabLostCousins;
         private System.Windows.Forms.TabPage tabCensus;
         private System.Windows.Forms.TabPage tabLocations;
@@ -4559,8 +4588,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ToolStripMenuItem mnuLifelines;
         private System.Windows.Forms.ToolStripMenuItem resetToDefaultFormSizeToolStripMenuItem;
-        private System.Windows.Forms.TabPage tabFacts;
-        private FTAnalyzer.Forms.Controls.RelationTypes relTypesFacts;
         private System.Windows.Forms.ToolStripMenuItem mnuPlaces;
         private System.Windows.Forms.TabPage tabSurnames;
         private FTAnalyzer.Forms.Controls.VirtualDGVSurnames dgSurnames;
@@ -4569,9 +4596,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.DataGridViewTextBoxColumn Individuals;
         private System.Windows.Forms.DataGridViewTextBoxColumn Families;
         private System.Windows.Forms.DataGridViewTextBoxColumn Marriages;
-        private System.Windows.Forms.CheckedListBox ckbFactSelect;
-        private System.Windows.Forms.Button btnDeselectAllFactTypes;
-        private System.Windows.Forms.Button btnSelectAllFactTypes;
         private System.Windows.Forms.ToolStripMenuItem mnuPossibleCensusFacts;
         private System.Windows.Forms.ToolStripMenuItem viewNotesToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip ctxViewNotes;
@@ -4590,16 +4614,12 @@ namespace FTAnalyzer
         private System.Windows.Forms.NumericUpDown udAgeFilter;
         private FTAnalyzer.Forms.Controls.CensusDateSelector cenDate;
         private FTAnalyzer.Forms.Controls.RelationTypes relTypesCensus;
-        private System.Windows.Forms.Label labResearchTabFamilyFilter;
-        private System.Windows.Forms.ComboBox cmbColourFamily;
         private System.Windows.Forms.ToolStripMenuItem onlineGuidesToUsingFTAnalyzerToolStripMenuItem;
         private System.Windows.Forms.ToolStripProgressBar tspbTabProgress;
         private System.Windows.Forms.ToolStripMenuItem mnuOSGeocoder;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripMenuItem mnuLookupBlankFoundLocations;
         private System.Windows.Forms.CheckBox ckbMilitaryOnly;
-        private System.Windows.Forms.Button btnRandomSurnameColour;
-        private System.Windows.Forms.Label lblExclude;
         private System.Windows.Forms.ToolStripMenuItem mnuCloseGEDCOM;
         private System.Windows.Forms.TabPage tabToday;
         private System.Windows.Forms.Label labTodaySelectDate;
@@ -4700,12 +4720,12 @@ namespace FTAnalyzer
         private System.Windows.Forms.Button btnUpdateLostCousinsWebsite;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.Button btnLCLogin;
-        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label labLCUpdatesPassword;
         private System.Windows.Forms.Label labLCUpdatesEmail;
         private System.Windows.Forms.TextBox txtLCEmail;
         private System.Windows.Forms.MaskedTextBox txtLCPassword;
         private System.Windows.Forms.CheckBox chkLCRootPersonConfirm;
-        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label labLCUpdatesCensusRec;
         private System.Windows.Forms.RichTextBox rtbLCUpdateData;
         private System.Windows.Forms.CheckBox chkSurnamesIgnoreCase;
         private System.Windows.Forms.Button btnLCPotentialUploads;
@@ -4749,9 +4769,8 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem MnuSingleParentsReport;
         private System.Windows.Forms.TabPage tabCustomFacts;
         private FTAnalyzer.Forms.Controls.VirtualDGVCustomFacts dgCustomFacts;
-        private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.TextBox txtAliveDates;
-        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label labCensusAliveDates;
         private System.Windows.Forms.Button btnAliveOnDate;
         private System.Windows.Forms.ToolStripMenuItem mnuSurnamesToExcel;
         private System.Windows.Forms.CheckBox chkIgnoreUnnamedTwins;
@@ -4769,10 +4788,6 @@ namespace FTAnalyzer
         private System.Windows.Forms.DataGridViewTextBoxColumn MatchBirthDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn MatchBirthLocation;
         private System.Windows.Forms.Label labDuplicateSlider;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton radioOnlyAlternate;
-        private System.Windows.Forms.RadioButton radioOnlyPreferred;
-        private System.Windows.Forms.RadioButton radioAllFacts;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
         private System.Windows.Forms.ToolStripMenuItem mnuGoogleMyMaps;
         private Forms.Controls.VirtualDGVDataErrors dgDataErrors;
@@ -4796,14 +4811,32 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem MnuCustomFactsToExcel;
         private global::System.Windows.Forms.CheckedListBox ckbDataErrors;
         private global::FTAnalyzer.Utilities.ScrollingRichTextBox rtbLCoutput;
+        private GroupBox gbFilters;
+        private Button btnRandomSurnameColour;
+        private Label labResearchTabFamilyFilter;
+        private ComboBox cmbColourFamily;
+        private Label labResearchTabSurname;
+        private TextBox txtColouredSurname;
+        private TabPage tabFacts;
+        private Panel panelFactsSurname;
         private Button btnDuplicateFacts;
-        private Button btnShowExclusions;
-        private Button btnDeselectExcludeAllFactTypes;
-        private Button btnExcludeAllFactTypes;
-        private CheckedListBox ckbFactExclude;
         private Button btnShowFacts;
-        private Label label3;
+        private Label labFactsSurname;
         private TextBox txtFactsSurname;
+        private Button btnShowExclusions;
+        private Panel panel1;
+        private RadioButton radioOnlyAlternate;
+        private RadioButton radioOnlyPreferred;
+        private RadioButton radioAllFacts;
+        private Button btnDeselectExcludeAllFactTypes;
+        private Label lblExclude;
+        private Button btnExcludeAllFactTypes;
+        private Button btnDeselectAllFactTypes;
+        private CheckedListBox ckbFactExclude;
+        private Button btnSelectAllFactTypes;
+        private CheckedListBox ckbFactSelect;
+        private Forms.Controls.RelationTypes relTypesFacts;
+        private Label label1;
     }
 }
 

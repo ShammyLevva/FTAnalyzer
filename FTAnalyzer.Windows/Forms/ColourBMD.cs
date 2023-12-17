@@ -30,7 +30,7 @@ namespace FTAnalyzer.Forms
                 ExtensionMethods.DoubleBuffered(dgBMDReportSheet, true);
                 settingSelections = false;
                 boldFont = new(dgBMDReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
-                styles = new Dictionary<BMDColours, DataGridViewCellStyle>();
+                styles = [];
                 DataGridViewCellStyle notRequired = new();
                 notRequired.BackColor = notRequired.ForeColor = BMDColourValues[(int)BMDColours.EMPTY];
                 styles.Add(BMDColours.EMPTY, notRequired);

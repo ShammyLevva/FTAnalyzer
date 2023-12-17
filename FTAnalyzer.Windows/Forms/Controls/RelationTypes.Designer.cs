@@ -63,11 +63,14 @@ namespace FTAnalyzer.Forms.Controls
             groupBox2.TabIndex = 5;
             groupBox2.TabStop = false;
             groupBox2.Text = "Relationship Types";
+            groupBox2.FontChanged += GroupBox2_FontChanged;
             // 
             // ckbLinked
             // 
+            ckbLinked.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ckbLinked.AutoSize = true;
-            ckbLinked.Location = new Point(184, 76);
+            ckbLinked.ImageAlign = ContentAlignment.MiddleRight;
+            ckbLinked.Location = new Point(178, 76);
             ckbLinked.Margin = new Padding(4, 3, 4, 3);
             ckbLinked.Name = "ckbLinked";
             ckbLinked.Size = new Size(162, 19);

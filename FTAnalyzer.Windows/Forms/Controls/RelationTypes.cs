@@ -81,5 +81,16 @@ namespace FTAnalyzer.Forms.Controls
         protected void OnRelationTypesChanged() => RelationTypesChanged?.Invoke(this, EventArgs.Empty);
 
         void Tickbox_CheckedChanged(object sender, EventArgs e) => OnRelationTypesChanged();
+
+        void GroupBox2_FontChanged(object sender, EventArgs e)
+        {
+            int marriageCtrlwidth = ckbMarriageDB.Width + ckbMarriageDB.Margin.Left + ckbMarriageDB.Margin.Right;
+            if (ckbLinked.Left < marriageCtrlwidth + ckbLinked.Margin.Left)
+                ckbLinked.Left = marriageCtrlwidth + ckbLinked.Margin.Left;
+            int linkedCtrlWidth = ckbLinked.Width + ckbLinked.Margin.Left + ckbLinked.Margin.Right;
+            int width = marriageCtrlwidth + linkedCtrlWidth;
+            if(width > groupBox2.Width) 
+                groupBox2.Width = width;
+        }
     }
 }

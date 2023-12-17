@@ -1389,11 +1389,14 @@ namespace FTAnalyzer
                         // already cleared text just set preferred facts button
                         radioAllFacts.Checked = true;
                         radioOnlyAlternate.Enabled = GeneralSettings.Default.IncludeAlternateFacts;
+                        panelFactsSurname.Left = relTypesFacts.Right + relTypesFacts.Margin.Right + panelFactsSurname.Margin.Left;
                         Analytics.TrackAction(Analytics.MainFormAction, Analytics.FactsTabEvent);
                     }
                     else if (tabSelector.SelectedTab == tabSurnames)
                     {
                         // show empty form click button to load
+                        btnShowSurnames.Left = reltypesSurnames.Width + btnShowSurnames.Margin.Left;
+                        chkSurnamesIgnoreCase.Left = btnShowSurnames.Left + btnShowSurnames.Width + btnShowSurnames.Margin.Right;
                         Analytics.TrackAction(Analytics.MainFormAction, Analytics.SurnamesTabEvent);
                     }
                     else if (tabSelector.SelectedTab == tabCensus)
@@ -1402,6 +1405,10 @@ namespace FTAnalyzer
                         btnShowCensusMissing.Enabled = ft.IndividualCount > 0;
                         cenDate.AddAllCensusItems();
                         Analytics.TrackAction(Analytics.MainFormAction, Analytics.CensusTabEvent);
+                    }
+                    else if(tabSelector.SelectedTab == tabResearchSuggestions)
+                    {
+                        gbFilters.Left = relTypesResearchSuggest.Right + relTypesResearchSuggest.Margin.Right + gbFilters.Margin.Left;
                     }
                     else if (tabSelector.SelectedTab == tabTreetops)
                     {
@@ -3023,7 +3030,7 @@ namespace FTAnalyzer
         void BtnColourBMD_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            Predicate<Individual> relTypeFilter = relTypesColoured.BuildFilter<Individual>(x => x.RelationType);
+            Predicate<Individual> relTypeFilter = relTypesResearchSuggest.BuildFilter<Individual>(x => x.RelationType);
             ComboBoxFamily? cbFamily = cmbColourFamily.SelectedItem as ComboBoxFamily;
             List<IDisplayColourBMD> list = ft.ColourBMD(relTypeFilter, txtColouredSurname.Text, cbFamily);
             ColourBMD rs = new(list);
@@ -3037,7 +3044,7 @@ namespace FTAnalyzer
         async void DisplayColourCensus(string country)
         {
             HourGlass(this, true);
-            Predicate<Individual> relTypeFilter = relTypesColoured.BuildFilter<Individual>(x => x.RelationType);
+            Predicate<Individual> relTypeFilter = relTypesResearchSuggest.BuildFilter<Individual>(x => x.RelationType);
             ComboBoxFamily? cbFamily = cmbColourFamily.SelectedItem as ComboBoxFamily;
             List<IDisplayColourCensus> list =
                     ft.ColourCensus(country, relTypeFilter, txtColouredSurname.Text, cbFamily, ckbIgnoreNoBirthDate.Checked, ckbIgnoreNoDeathDate.Checked);
@@ -3062,7 +3069,7 @@ namespace FTAnalyzer
         void BtnAdvancedMissingData_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            Predicate<Individual> relTypeFilter = relTypesColoured.BuildFilter<Individual>(x => x.RelationType);
+            Predicate<Individual> relTypeFilter = relTypesResearchSuggest.BuildFilter<Individual>(x => x.RelationType);
             ComboBoxFamily? cbFamily = cmbColourFamily.SelectedItem as ComboBoxFamily;
             List<IDisplayMissingData> list = ft.MissingData(relTypeFilter, txtColouredSurname.Text, cbFamily);
             MissingData rs = new(list);
@@ -3102,7 +3109,7 @@ namespace FTAnalyzer
             {
                 HourGlass(this, true);
                 IEnumerable<Family> candidates = ft.AllFamilies;
-                Predicate<Family> relationFilter = relTypesColoured.BuildFamilyFilter<Family>(x => x.RelationTypes);
+                Predicate<Family> relationFilter = relTypesResearchSuggest.BuildFamilyFilter<Family>(x => x.RelationTypes);
                 if (txtColouredSurname.Text.Length > 0)
                     candidates = candidates.Filter(x => x.ContainsSurname(txtColouredSurname.Text, true));
                 List<Family> list = candidates.Filter(relationFilter).ToList();
