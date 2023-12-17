@@ -193,6 +193,8 @@ namespace FTAnalyzer
             splitGedcom.SplitterDistance = Math.Max(pbRelationships.Bottom + 18, 110);
             splitGedcom.Refresh();
             menuStrip1.Font = normalFont;
+            rtbOutput.Font = normalFont;
+            rtbToday.Font = normalFont;
             SetStatusBar();
             CheckMaxWindowSizes(new Point(0, 0));
             Refresh();
@@ -384,7 +386,8 @@ namespace FTAnalyzer
 
         void SetupGridControls()
         {
-            dgPlaces.DataSource = null; // set datasources for locations in reverse order to avoid null pointer cell formatting race condition
+            // set datasources for locations in reverse order to avoid null pointer cell formatting race condition
+            dgPlaces.DataSource = null;
             dgAddresses.DataSource = null;
             dgSubRegions.DataSource = null;
             dgRegions.DataSource = null;
@@ -402,6 +405,7 @@ namespace FTAnalyzer
             dgDuplicates.DataSource = null;
             dgSources.DataSource = null;
             dgCustomFacts.DataSource = null;
+            dgCheckAncestors.DataSource = null;
             ExtensionMethods.DoubleBuffered(dgPlaces, true);
             ExtensionMethods.DoubleBuffered(dgAddresses, true);
             ExtensionMethods.DoubleBuffered(dgSubRegions, true);
@@ -420,6 +424,7 @@ namespace FTAnalyzer
             ExtensionMethods.DoubleBuffered(dgDuplicates, true);
             ExtensionMethods.DoubleBuffered(dgSources, true);
             ExtensionMethods.DoubleBuffered(dgCustomFacts, true);
+            ExtensionMethods.DoubleBuffered(dgCheckAncestors, true);
         }
 
         static void SetSavePath()

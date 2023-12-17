@@ -43,8 +43,8 @@ namespace FTAnalyzer
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             openGedcom = new OpenFileDialog();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
@@ -1168,14 +1168,14 @@ namespace FTAnalyzer
             dgCheckAncestors.AllowUserToDeleteRows = false;
             dgCheckAncestors.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgCheckAncestors.ColumnHeadersHeight = 40;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = SystemColors.Window;
-            dataGridViewCellStyle5.Font = new Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewCellStyle5.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
-            dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgCheckAncestors.DefaultCellStyle = dataGridViewCellStyle1;
             dgCheckAncestors.Location = new Point(4, 98);
             dgCheckAncestors.Margin = new Padding(4);
             dgCheckAncestors.Name = "dgCheckAncestors";
@@ -1263,14 +1263,6 @@ namespace FTAnalyzer
             dgDataErrors.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgDataErrors.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgDataErrors.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = SystemColors.Window;
-            dataGridViewCellStyle6.Font = new Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewCellStyle6.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            dgDataErrors.DefaultCellStyle = dataGridViewCellStyle6;
             dgDataErrors.FilterAndSortEnabled = true;
             dgDataErrors.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgDataErrors.Location = new Point(9, 195);
@@ -3509,7 +3501,7 @@ namespace FTAnalyzer
             ckbDataErrors.MultiColumn = true;
             ckbDataErrors.Name = "ckbDataErrors";
             ckbDataErrors.ScrollAlwaysVisible = true;
-            ckbDataErrors.Size = new Size(1214, 112);
+            ckbDataErrors.Size = new Size(1214, 130);
             ckbDataErrors.TabIndex = 8;
             ckbDataErrors.SelectedIndexChanged += CkbDataErrors_SelectedIndexChanged;
             // 
