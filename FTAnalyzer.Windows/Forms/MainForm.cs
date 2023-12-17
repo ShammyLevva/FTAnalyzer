@@ -404,24 +404,24 @@ namespace FTAnalyzer
             dgDuplicates.DataSource = null;
             dgSources.DataSource = null;
             dgCustomFacts.DataSource = null;
-            ExtensionMethods.DoubleBuffered(dgPlaces, true);
-            ExtensionMethods.DoubleBuffered(dgAddresses, true);
-            ExtensionMethods.DoubleBuffered(dgSubRegions, true);
-            ExtensionMethods.DoubleBuffered(dgRegions, true);
-            ExtensionMethods.DoubleBuffered(dgCountries, true);
-            ExtensionMethods.DoubleBuffered(dgIndividuals, true);
-            ExtensionMethods.DoubleBuffered(dgFamilies, true);
-            ExtensionMethods.DoubleBuffered(dgTreeTops, true);
-            ExtensionMethods.DoubleBuffered(dgWorldWars, true);
-            ExtensionMethods.DoubleBuffered(dgLooseBirths, true);
-            ExtensionMethods.DoubleBuffered(dgLooseDeaths, true);
-            ExtensionMethods.DoubleBuffered(dgLooseInfo, true);
-            ExtensionMethods.DoubleBuffered(dgDataErrors, true);
-            ExtensionMethods.DoubleBuffered(dgOccupations, true);
-            ExtensionMethods.DoubleBuffered(dgSurnames, true);
-            ExtensionMethods.DoubleBuffered(dgDuplicates, true);
-            ExtensionMethods.DoubleBuffered(dgSources, true);
-            ExtensionMethods.DoubleBuffered(dgCustomFacts, true);
+            //ExtensionMethods.DoubleBuffered(dgPlaces, true);
+            //ExtensionMethods.DoubleBuffered(dgAddresses, true);
+            //ExtensionMethods.DoubleBuffered(dgSubRegions, true);
+            //ExtensionMethods.DoubleBuffered(dgRegions, true);
+            //ExtensionMethods.DoubleBuffered(dgCountries, true);
+            //ExtensionMethods.DoubleBuffered(dgIndividuals, true);
+            //ExtensionMethods.DoubleBuffered(dgFamilies, true);
+            //ExtensionMethods.DoubleBuffered(dgTreeTops, true);
+            //ExtensionMethods.DoubleBuffered(dgWorldWars, true);
+            //ExtensionMethods.DoubleBuffered(dgLooseBirths, true);
+            //ExtensionMethods.DoubleBuffered(dgLooseDeaths, true);
+            //ExtensionMethods.DoubleBuffered(dgLooseInfo, true);
+            //ExtensionMethods.DoubleBuffered(dgDataErrors, true);
+            //ExtensionMethods.DoubleBuffered(dgOccupations, true);
+            //ExtensionMethods.DoubleBuffered(dgSurnames, true);
+            //ExtensionMethods.DoubleBuffered(dgDuplicates, true);
+            //ExtensionMethods.DoubleBuffered(dgSources, true);
+            //ExtensionMethods.DoubleBuffered(dgCustomFacts, true);
         }
 
         static void SetSavePath()
@@ -3845,7 +3845,6 @@ namespace FTAnalyzer
             {
                 UIHelpers.ShowMessage(ex.Message, "FTAnalyzer");
             }
-
         }
     }
 }
