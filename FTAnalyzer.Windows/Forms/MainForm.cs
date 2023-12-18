@@ -22,7 +22,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static readonly string VERSION = "10.0.0.0-beta 8";
+        public static readonly string VERSION = "10.0.0.0-beta 9";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         Cursor storedCursor = Cursors.Default;
@@ -1408,7 +1408,7 @@ namespace FTAnalyzer
                         cenDate.AddAllCensusItems();
                         Analytics.TrackAction(Analytics.MainFormAction, Analytics.CensusTabEvent);
                     }
-                    else if(tabSelector.SelectedTab == tabResearchSuggestions)
+                    else if (tabSelector.SelectedTab == tabResearchSuggestions)
                     {
                         gbFilters.Left = relTypesResearchSuggest.Right + relTypesResearchSuggest.Margin.Right + gbFilters.Margin.Left;
                     }
@@ -3864,6 +3864,46 @@ namespace FTAnalyzer
             {
                 UIHelpers.ShowMessage(ex.Message, "FTAnalyzer");
             }
+        }
+
+        void TabSurnames_Layout(object sender, LayoutEventArgs e)
+        {
+
+        }
+
+        void TabFacts_Layout(object sender, LayoutEventArgs e)
+        {
+
+        }
+
+        void TabCensus_Layout(object sender, LayoutEventArgs e)
+        {
+
+        }
+
+        void TabLostCousins_Layout(object sender, LayoutEventArgs e)
+        {
+
+        }
+
+        void TabResearchSuggestions_Layout(object sender, LayoutEventArgs e)
+        {
+
+        }
+
+        void TabTreetops_Layout(object sender, LayoutEventArgs e)
+        {
+
+        }
+
+        void TabWorldWars_Layout(object sender, LayoutEventArgs e)
+        {
+
+        }
+
+        void TabToday_Layout(object sender, LayoutEventArgs e)
+        {
+
         }
     }
 }

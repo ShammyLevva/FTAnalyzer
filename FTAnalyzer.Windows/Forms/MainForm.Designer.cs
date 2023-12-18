@@ -1409,6 +1409,7 @@ namespace FTAnalyzer
             tabWorldWars.Text = " World Wars ";
             tabWorldWars.ToolTipText = "Find men of fighting age during WWI & WWII";
             tabWorldWars.UseVisualStyleBackColor = true;
+            tabWorldWars.Layout += TabWorldWars_Layout;
             // 
             // ckbMilitaryOnly
             // 
@@ -1555,6 +1556,7 @@ namespace FTAnalyzer
             tabTreetops.TabIndex = 7;
             tabTreetops.Text = " Treetops ";
             tabTreetops.UseVisualStyleBackColor = true;
+            tabTreetops.Layout += TabTreetops_Layout;
             // 
             // ckbTTIncludeOnlyOneParent
             // 
@@ -1674,6 +1676,7 @@ namespace FTAnalyzer
             tabResearchSuggestions.TabIndex = 12;
             tabResearchSuggestions.Text = " Research Suggestions ";
             tabResearchSuggestions.UseVisualStyleBackColor = true;
+            tabResearchSuggestions.Layout += TabResearchSuggestions_Layout;
             // 
             // gbFilters
             // 
@@ -1880,6 +1883,7 @@ namespace FTAnalyzer
             tabLostCousins.TabIndex = 5;
             tabLostCousins.Text = " Lost Cousins ";
             tabLostCousins.UseVisualStyleBackColor = true;
+            tabLostCousins.Layout += TabLostCousins_Layout;
             // 
             // LCSubTabs
             // 
@@ -2181,8 +2185,8 @@ namespace FTAnalyzer
             LabLostCousinsWeb.TabIndex = 35;
             LabLostCousinsWeb.TabStop = true;
             LabLostCousinsWeb.Text = "Visit the Lost Cousins Website";
-            LabLostCousinsWeb.Click += LabLostCousinsWeb_Click;
             LabLostCousinsWeb.LinkClicked += LabLostCousinsWeb_Click;
+            LabLostCousinsWeb.Click += LabLostCousinsWeb_Click;
             // 
             // btnLCnoCensus
             // 
@@ -2413,6 +2417,7 @@ namespace FTAnalyzer
             tabCensus.TabIndex = 0;
             tabCensus.Text = " Census ";
             tabCensus.UseVisualStyleBackColor = true;
+            tabCensus.Layout += TabCensus_Layout;
             // 
             // groupBox2
             // 
@@ -3844,6 +3849,7 @@ namespace FTAnalyzer
             tabSurnames.TabIndex = 14;
             tabSurnames.Text = " Surnames ";
             tabSurnames.UseVisualStyleBackColor = true;
+            tabSurnames.Layout += TabSurnames_Layout;
             // 
             // chkSurnamesIgnoreCase
             // 
@@ -3890,7 +3896,7 @@ namespace FTAnalyzer
             dgSurnames.RowHeadersVisible = false;
             dgSurnames.RowHeadersWidth = 50;
             dgSurnames.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgSurnames.Size = new Size(1234, 293);
+            dgSurnames.Size = new Size(1234, 347);
             dgSurnames.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgSurnames.TabIndex = 1;
             dgSurnames.VirtualMode = true;
@@ -3981,6 +3987,7 @@ namespace FTAnalyzer
             tabFacts.TabIndex = 13;
             tabFacts.Text = " Facts ";
             tabFacts.UseVisualStyleBackColor = true;
+            tabFacts.Layout += TabFacts_Layout;
             // 
             // label1
             // 
@@ -4171,6 +4178,7 @@ namespace FTAnalyzer
             tabToday.TabIndex = 17;
             tabToday.Text = " On This Day ";
             tabToday.UseVisualStyleBackColor = true;
+            tabToday.Layout += TabToday_Layout;
             // 
             // rtbToday
             // 
