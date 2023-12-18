@@ -3114,7 +3114,7 @@ namespace FTAnalyzer
             // 
             LbProgramName.AutoSize = true;
             LbProgramName.Font = new Font("Kunstler Script", 52F, FontStyle.Bold);
-            LbProgramName.Location = new Point(485, 22);
+            LbProgramName.Location = new Point(485, 15);
             LbProgramName.Margin = new Padding(4, 0, 4, 0);
             LbProgramName.Name = "LbProgramName";
             LbProgramName.Size = new Size(521, 76);
@@ -3135,7 +3135,7 @@ namespace FTAnalyzer
             // labRelationships
             // 
             labRelationships.AutoSize = true;
-            labRelationships.Location = new Point(4, 91);
+            labRelationships.Location = new Point(4, 88);
             labRelationships.Margin = new Padding(4, 0, 4, 0);
             labRelationships.Name = "labRelationships";
             labRelationships.Size = new Size(144, 15);
@@ -3153,7 +3153,7 @@ namespace FTAnalyzer
             // labFamilies
             // 
             labFamilies.AutoSize = true;
-            labFamilies.Location = new Point(4, 66);
+            labFamilies.Location = new Point(4, 62);
             labFamilies.Margin = new Padding(4, 0, 4, 0);
             labFamilies.Name = "labFamilies";
             labFamilies.Size = new Size(96, 15);
@@ -3171,7 +3171,7 @@ namespace FTAnalyzer
             // labIndividuals
             // 
             labIndividuals.AutoSize = true;
-            labIndividuals.Location = new Point(4, 40);
+            labIndividuals.Location = new Point(4, 37);
             labIndividuals.Margin = new Padding(4, 0, 4, 0);
             labIndividuals.Name = "labIndividuals";
             labIndividuals.Size = new Size(110, 15);
@@ -3189,7 +3189,7 @@ namespace FTAnalyzer
             // labSources
             // 
             labSources.AutoSize = true;
-            labSources.Location = new Point(4, 15);
+            labSources.Location = new Point(6, 11);
             labSources.Margin = new Padding(4, 0, 4, 0);
             labSources.Name = "labSources";
             labSources.Size = new Size(94, 15);

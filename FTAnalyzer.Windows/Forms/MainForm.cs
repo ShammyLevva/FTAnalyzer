@@ -146,19 +146,19 @@ namespace FTAnalyzer
                         FontSettings.Default.FontHeight = 22;
                         break;
                     case 2:
-                        handwritingFont = new(fonts.Families[0], 68.0F, FontStyle.Bold);
+                        handwritingFont = new(fonts.Families[0], 60.0F, FontStyle.Bold);
                         boldFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 10F, FontStyle.Bold);
                         normalFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 10F, FontStyle.Regular);
                         FontSettings.Default.FontHeight = 27;
                         break;
                     case 3:
-                        handwritingFont = new(fonts.Families[0], 72.0F, FontStyle.Bold);
+                        handwritingFont = new(fonts.Families[0], 68.0F, FontStyle.Bold);
                         boldFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 12F, FontStyle.Bold);
                         normalFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 12F, FontStyle.Regular);
                         FontSettings.Default.FontHeight = 32;
                         break;
                     case 4:
-                        handwritingFont = new(fonts.Families[0], 90.0F, FontStyle.Bold);
+                        handwritingFont = new(fonts.Families[0], 76.0F, FontStyle.Bold);
                         boldFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 14F, FontStyle.Bold);
                         normalFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 14F, FontStyle.Regular);
                         FontSettings.Default.FontHeight = 37;
@@ -196,6 +196,7 @@ namespace FTAnalyzer
             rtbOutput.Font = normalFont;
             rtbToday.Font = normalFont;
             rtbLostCousins.Font = normalFont;
+            treeViewLocations.Font = normalFont;
             SetStatusBar();
             CheckMaxWindowSizes(new Point(0, 0));
             Refresh();
