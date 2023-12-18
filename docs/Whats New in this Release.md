@@ -1,3 +1,13 @@
+## BETA RELEASE Version 10.0.0.0-beta 8 - 16th December 2023  
+**Bugfixes**  
+Lots of minor control tweaks to fix positioning with different font sizes  
+Facts reports weren't working after update to .Net 8  
+Inconsistent location report crash fixed  
+
+## BETA RELEASE Version 10.0.0.0-beta 7 - 16th December 2023  
+**Updates**  
+Updated to .Net 8 & refactor to fix a lot of layout issues with high DPI  
+
 ## BETA RELEASE Version 10.0.0.0-beta 6 - 16th December 2023  
 **Updates**  
 Added suffix recognition from name fact

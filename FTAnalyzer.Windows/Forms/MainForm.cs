@@ -195,6 +195,7 @@ namespace FTAnalyzer
             menuStrip1.Font = normalFont;
             rtbOutput.Font = normalFont;
             rtbToday.Font = normalFont;
+            rtbLostCousins.Font = normalFont;
             SetStatusBar();
             CheckMaxWindowSizes(new Point(0, 0));
             Refresh();

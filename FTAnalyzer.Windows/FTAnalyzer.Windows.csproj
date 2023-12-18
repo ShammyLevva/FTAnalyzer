@@ -208,7 +208,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DG.AdvancedDataGridView" Version="1.2.28405.11" />
+    <PackageReference Include="AdvancedDataGridView" Version="3.0.0" />
     <PackageReference Include="DotNetZip" Version="1.16.0" />
     <PackageReference Include="GoogleAnalyticsTracker.Simple" Version="7.0.1" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.55" />
