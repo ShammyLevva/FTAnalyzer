@@ -1,4 +1,5 @@
 ﻿using FTAnalyzer.Filters;
+using FTAnalyzer.Utilities;
 
 namespace FTAnalyzer.Forms.Controls
 {
@@ -82,15 +83,18 @@ namespace FTAnalyzer.Forms.Controls
 
         void Tickbox_CheckedChanged(object sender, EventArgs e) => OnRelationTypesChanged();
 
-        void GroupBox2_FontChanged(object sender, EventArgs e)
+         void RelationTypes_Layout(object sender, LayoutEventArgs e)
         {
-            int marriageCtrlwidth = ckbMarriageDB.Width + ckbMarriageDB.Margin.Left + ckbMarriageDB.Margin.Right;
-            if (ckbLinked.Left < marriageCtrlwidth + ckbLinked.Margin.Left)
-                ckbLinked.Left = marriageCtrlwidth + ckbLinked.Margin.Left;
-            int linkedCtrlWidth = ckbLinked.Width + ckbLinked.Margin.Left + ckbLinked.Margin.Right;
-            int width = marriageCtrlwidth + linkedCtrlWidth;
-            if(width > groupBox2.Width) 
-                groupBox2.Width = width;
+            UIHelpers.MoveControl(ckbMarriage, ckbDirects, UIHelpers.Direction.RIGHT);
+            UIHelpers.MoveControl(ckbUnknown, ckbMarriage, UIHelpers.Direction.RIGHT);
+            UIHelpers.MoveControl(ckbBlood, ckbDirects, UIHelpers.Direction.BELOW);
+            UIHelpers.MoveControl(ckbDescendants, ckbBlood, UIHelpers.Direction.RIGHT);
+            UIHelpers.MoveControl(ckbMarriageDB, ckbBlood, UIHelpers.Direction.BELOW);
+            UIHelpers.MoveControl(ckbLinked, ckbMarriageDB, UIHelpers.Direction.RIGHT);
+            if (ckbUnknown.Right + ckbUnknown.Margin.Right > Width)
+                Width = ckbUnknown.Right + ckbUnknown.Margin.Right;
+            if (ckbLinked.Bottom + ckbLinked.Margin.Bottom > Height)
+                Height = ckbLinked.Bottom + ckbLinked.Margin.Bottom;
         }
     }
 }

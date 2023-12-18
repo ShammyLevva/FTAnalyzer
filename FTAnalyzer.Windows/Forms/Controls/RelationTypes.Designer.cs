@@ -63,7 +63,6 @@ namespace FTAnalyzer.Forms.Controls
             groupBox2.TabIndex = 5;
             groupBox2.TabStop = false;
             groupBox2.Text = "Relationship Types";
-            groupBox2.FontChanged += GroupBox2_FontChanged;
             // 
             // ckbLinked
             // 
@@ -168,6 +167,7 @@ namespace FTAnalyzer.Forms.Controls
             Margin = new Padding(4, 3, 4, 3);
             Name = "RelationTypes";
             Size = new Size(377, 123);
+            Layout += RelationTypes_Layout;
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ResumeLayout(false);

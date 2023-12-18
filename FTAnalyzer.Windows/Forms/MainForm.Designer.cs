@@ -2812,10 +2812,11 @@ namespace FTAnalyzer
             // btnOldOSMap
             // 
             btnOldOSMap.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnOldOSMap.AutoSize = true;
             btnOldOSMap.Location = new Point(992, 2);
             btnOldOSMap.Margin = new Padding(4);
             btnOldOSMap.Name = "btnOldOSMap";
-            btnOldOSMap.Size = new Size(121, 23);
+            btnOldOSMap.Size = new Size(121, 25);
             btnOldOSMap.TabIndex = 3;
             btnOldOSMap.Text = "Show Old OS Map";
             btnOldOSMap.UseVisualStyleBackColor = true;
@@ -2824,10 +2825,11 @@ namespace FTAnalyzer
             // btnModernOSMap
             // 
             btnModernOSMap.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnModernOSMap.AutoSize = true;
             btnModernOSMap.Location = new Point(846, 2);
             btnModernOSMap.Margin = new Padding(4);
             btnModernOSMap.Name = "btnModernOSMap";
-            btnModernOSMap.Size = new Size(146, 23);
+            btnModernOSMap.Size = new Size(146, 25);
             btnModernOSMap.TabIndex = 5;
             btnModernOSMap.Text = "Show Modern OS Map";
             btnModernOSMap.UseVisualStyleBackColor = true;
@@ -2837,10 +2839,11 @@ namespace FTAnalyzer
             // btnShowMap
             // 
             btnShowMap.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnShowMap.AutoSize = true;
             btnShowMap.Location = new Point(1110, 2);
             btnShowMap.Margin = new Padding(4);
             btnShowMap.Name = "btnShowMap";
-            btnShowMap.Size = new Size(121, 23);
+            btnShowMap.Size = new Size(121, 25);
             btnShowMap.TabIndex = 2;
             btnShowMap.Text = "Show Google Map";
             btnShowMap.UseVisualStyleBackColor = true;
@@ -4430,6 +4433,7 @@ namespace FTAnalyzer
             groupBox5.ResumeLayout(false);
             groupBox6.ResumeLayout(false);
             tabLocations.ResumeLayout(false);
+            tabLocations.PerformLayout();
             tabCtrlLocations.ResumeLayout(false);
             tabTreeView.ResumeLayout(false);
             tabCountries.ResumeLayout(false);
