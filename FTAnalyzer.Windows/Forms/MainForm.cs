@@ -115,7 +115,7 @@ namespace FTAnalyzer
                         SpecialMethods.VisitWebsite("https://github.com/ShammyLevva/FTAnalyzer/releases");
                 }
 
-                await Analytics.CheckProgramUsageAsync().ConfigureAwait(true);
+                await Analytics.CheckProgramUsageAsync();
             }
             catch (Exception e)
             {

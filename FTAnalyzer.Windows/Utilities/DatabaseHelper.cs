@@ -481,7 +481,7 @@ namespace FTAnalyzer.Utilities
         {
             get
             {
-                Dictionary<string, Tuple<string, string>> results = new();
+                Dictionary<string, Tuple<string, string>> results = [];
 
                 if (InstanceConnection.State != ConnectionState.Open)
                     InstanceConnection.Open();
