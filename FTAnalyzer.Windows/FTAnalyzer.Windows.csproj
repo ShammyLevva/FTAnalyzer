@@ -211,8 +211,8 @@
     <PackageReference Include="AdvancedDataGridView" Version="3.0.0" />
     <PackageReference Include="DotNetZip" Version="1.16.0" />
     <PackageReference Include="GoogleAnalyticsTracker.Simple" Version="7.0.1" />
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.59" />
-    <PackageReference Include="log4net" Version="2.0.16" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.60" />
+    <PackageReference Include="log4net" Version="2.0.17" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Printing.DataGridViewPrint" Version="3.0.0" />
     <PackageReference Include="ProjNET" Version="2.0.0" />
