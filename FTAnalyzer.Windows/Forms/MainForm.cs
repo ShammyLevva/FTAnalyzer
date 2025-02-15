@@ -5,7 +5,6 @@ using FTAnalyzer.Forms;
 using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
-using Ionic.Zip;
 using Printing.DataGridViewPrint.Tools;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +16,7 @@ using HtmlAgilityPack;
 using System.Diagnostics;
 using System.Runtime.Versioning;
 using FTAnalyzer.Windows;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace FTAnalyzer
 {
@@ -2131,21 +2131,22 @@ namespace FTAnalyzer
                     bool failed = false;
                     using (ZipFile zip = new(restoreDatabase.FileName))
                     {
-                        if (zip.Count == 1 && zip.ContainsEntry("Geocodes.s3db"))
+                        if (zip.Count == 1 && zip.FindEntry("Geocodes.s3db", true) > 0)
                         {
                             DatabaseHelper dbh = DatabaseHelper.Instance;
                             if (DatabaseHelper.StartBackupRestoreDatabase())
                             {
                                 File.Copy(dbh.DatabaseFile, dbh.CurrentFilename, true); // copy exisiting file to safety
-                                zip.ExtractAll(dbh.DatabasePath, ExtractExistingFileAction.OverwriteSilently);
-                                if (dbh.RestoreDatabase(new Progress<string>(value => { rtbOutput.AppendText(value); })))
-                                    UIHelpers.ShowMessage("Database restored from " + restoreDatabase.FileName, "FTAnalyzer Database Restore Complete");
-                                else
-                                {
-                                    File.Copy(dbh.CurrentFilename, dbh.DatabaseFile, true);
-                                    dbh.RestoreDatabase(new Progress<string>(value => { rtbOutput.AppendText(value); })); // restore original database
-                                    failed = true;
-                                }
+                                ZipHelper.ExtractZipFile(restoreDatabase.FileName, null, dbh.DatabasePath);
+                                if (dbh.RestoreDatabase(new Progress<string>(rtbOutput.AppendText)))
+                                    if (dbh.RestoreDatabase(new Progress<string>(rtbOutput.AppendText)))
+                                        UIHelpers.ShowMessage("Database restored from " + restoreDatabase.FileName, "FTAnalyzer Database Restore Complete");
+                                    else
+                                    {
+                                        File.Copy(dbh.CurrentFilename, dbh.DatabaseFile, true);
+                                        dbh.RestoreDatabase(new Progress<string>(value => { rtbOutput.AppendText(value); })); // restore original database
+                                        failed = true;
+                                    }
                             }
                             else
                                 UIHelpers.ShowMessage("Database file could not be extracted", "FTAnalyzer Database Restore Error");
@@ -2155,7 +2156,7 @@ namespace FTAnalyzer
                             failed = true;
                         }
                         if (failed)
-                            UIHelpers.ShowMessage(restoreDatabase.FileName + " doesn't appear to be an FTAnalyzer database", "FTAnalyzer Database Restore Error");
+                            UIHelpers.ShowMessage($"{restoreDatabase.FileName} doesn't appear to be an FTAnalyzer database", "FTAnalyzer Database Restore Error");
                         else
                             Analytics.TrackAction(Analytics.MainFormAction, Analytics.DBRestoreEvent);
                     }

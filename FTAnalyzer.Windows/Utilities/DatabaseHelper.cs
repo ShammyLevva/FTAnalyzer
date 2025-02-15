@@ -1,7 +1,7 @@
 ﻿using FTAnalyzer.Forms;
 using FTAnalyzer.Mapping;
 using NetTopologySuite.Geometries;
-using Ionic.Zip;
+using ICSharpCode.SharpZipLib.Zip;
 using System.Collections.Concurrent;
 using System.Data;
 using System.Data.SQLite;
@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace FTAnalyzer.Utilities
 {
-    public class DatabaseHelper : IDisposable
+    public partial class DatabaseHelper : IDisposable
     {
         public string DatabaseFile { get; private set; }
         public string CurrentFilename { get; private set; }
@@ -145,14 +145,15 @@ namespace FTAnalyzer.Utilities
                     StartBackupRestoreDatabase();
                     if (File.Exists(saveDatabase.FileName))
                         File.Delete(saveDatabase.FileName);
-                    ZipFile zip = new(saveDatabase.FileName);
-                    zip.AddFile(DatabaseFile, string.Empty);
-                    zip.Comment = comment + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm");
-                    zip.Save();
+                    ZipFile zip = new(saveDatabase.FileName)
+                    {
+                        { DatabaseFile, string.Empty }
+                    };
+                    zip.SetComment(comment + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm"));
+                    zip.CommitUpdate();
                     //EndBackupDatabase();
                     Application.UserAppDataRegistry.SetValue("Geocode Backup Directory", Path.GetDirectoryName(saveDatabase.FileName) ?? string.Empty);
                     UIHelpers.ShowMessage($"Database exported to {saveDatabase.FileName}", "FTAnalyzer Database Export Complete");
-                    zip.Dispose();
                     return true;
                 }
             }

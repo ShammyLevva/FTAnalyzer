@@ -2,13 +2,13 @@
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
 using FTAnalyzer.Properties;
-using Ionic.Zip;
 using System.Diagnostics;
 using System.Net;
 using System.Text;
 using System.Web;
 using FTAnalyzer.Windows;
 using Newtonsoft.Json;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace FTAnalyzer.Forms
 {
@@ -60,7 +60,7 @@ namespace FTAnalyzer.Forms
         public static readonly string UNIVERSITY = "university";
         public static readonly string VETERINARY_CARE = "veterinary_care";
 
-        public static readonly ISet<string> RESULT_TYPES = new HashSet<string>(new string[] {
+        public static readonly ISet<string> RESULT_TYPES = new HashSet<string>([
             STREET_ADDRESS, ROUTE, COUNTRY, ESTABLISHMENT, ADMIN1, ADMIN2, ADMIN3, LOCALITY,
             SUBLOCALITY, NEIGHBOURHOOD, PREMISE, SUBPREMISE, CEMETERY, HOSPITAL, PLACE_OF_WORSHIP,
             INTERSECTION, POLITICAL, POSTALCODE, POSTALTOWN, POSTALCODEPREFIX, NATURALFEATURE,
@@ -68,16 +68,16 @@ namespace FTAnalyzer.Forms
             CHURCH, SUBWAY_STATION, TRAIN_STATION, UNIVERSITY, POLICE, MUSEUM, POST_OFFICE,
             COURTHOUSE, FINANCE, COLLOQUIAL_AREA, LIBRARY, AQUARIUM, FIRE_STATION,
             CAMPGROUND, LODGING, VETERINARY_CARE, AMUSEMENT_PARK, OS_FEATURE
-        });
+        ]);
 
-        public static readonly ISet<string> PLACES = new HashSet<string>(new string[] {
+        public static readonly ISet<string> PLACES = new HashSet<string>([
             PREMISE, STREET_ADDRESS, CEMETERY, HOSPITAL, PLACE_OF_WORSHIP, ROUTE,
             INTERSECTION, ESTABLISHMENT, SUBPREMISE, NATURALFEATURE,PARK, AIRPORT,
             POINT_OF_INTEREST, STREET_NUMBER, BUS_STATION, CHURCH, TRANSIT_STATION,
             SUBWAY_STATION, TRAIN_STATION, UNIVERSITY, POLICE, MUSEUM, POST_OFFICE,
             COURTHOUSE, FINANCE, LIBRARY, AQUARIUM, FIRE_STATION, CAMPGROUND, LODGING,
             VETERINARY_CARE, AMUSEMENT_PARK
-        });
+        ]);
 
         public delegate void GoogleEventHandler(object sender, GoogleWaitingEventArgs e);
         public static event GoogleEventHandler WaitingForGoogle;
@@ -367,9 +367,11 @@ namespace FTAnalyzer.Forms
             if (length > 5000000)
             {
                 string zipFilename = filename.Replace(".kml", ".kmz");
-                ZipFile zip = new(zipFilename);
-                zip.AddFile(filename);
-                zip.Save();
+                ZipFile zip = new(zipFilename)
+                {
+                    filename
+                };
+                zip.CommitUpdate();
             }
         }
 
