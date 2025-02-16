@@ -1,10 +1,8 @@
-﻿using System.Windows.Forms;
-
-namespace FTAnalyzer.Utilities
+﻿namespace FTAnalyzer.Utilities
 {
     static class ScrollBarDebug
     {
-        static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(ScrollBarDebug));
 
         static public void LogScreenData(Form mainform, DataGridView gridView, string routine)
         {
