@@ -77,7 +77,7 @@ namespace FTAnalyzer
             toolStrip1.Items.AddRange(new ToolStripItem[] { mnuSaveColumnLayout, mnuResetColumns, toolStripSeparator2, printToolStripButton, printPreviewToolStripButton, toolStripSeparator, mnuExportToExcel, toolStripSeparator1, mnuEditLocation });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(993, 25);
+            toolStrip1.Size = new Size(1158, 25);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -174,14 +174,15 @@ namespace FTAnalyzer
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgIndividuals.DefaultCellStyle = dataGridViewCellStyle1;
-            dgIndividuals.Location = new Point(0, 25);
+            dgIndividuals.Location = new Point(0, 29);
+            dgIndividuals.Margin = new Padding(4, 3, 4, 3);
             dgIndividuals.Name = "dgIndividuals";
             dgIndividuals.ReadOnly = true;
             dgIndividuals.RowHeadersVisible = false;
             dgIndividuals.RowHeadersWidth = 21;
             dgIndividuals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgIndividuals.ShowEditingIcon = false;
-            dgIndividuals.Size = new Size(993, 337);
+            dgIndividuals.Size = new Size(1168, 393);
             dgIndividuals.TabIndex = 2;
             dgIndividuals.CellContextMenuStripNeeded += DgIndividuals_CellContextMenuStripNeeded;
             dgIndividuals.CellDoubleClick += DgIndividuals_CellDoubleClick;
@@ -318,9 +319,10 @@ namespace FTAnalyzer
             // statusStrip
             // 
             statusStrip.Items.AddRange(new ToolStripItem[] { tsRecords });
-            statusStrip.Location = new Point(0, 365);
+            statusStrip.Location = new Point(0, 425);
             statusStrip.Name = "statusStrip";
-            statusStrip.Size = new Size(993, 22);
+            statusStrip.Padding = new Padding(1, 0, 16, 0);
+            statusStrip.Size = new Size(1158, 22);
             statusStrip.TabIndex = 3;
             statusStrip.Text = "statusStrip1";
             // 
@@ -331,13 +333,14 @@ namespace FTAnalyzer
             // 
             // MapIndividuals
             // 
-            AutoScaleDimensions = new SizeF(6F, 13F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(993, 387);
+            ClientSize = new Size(1158, 447);
             Controls.Add(statusStrip);
             Controls.Add(dgIndividuals);
             Controls.Add(toolStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(4, 3, 4, 3);
             Name = "MapIndividuals";
             Text = "Individuals";
             FormClosed += MapIndividuals_FormClosed;

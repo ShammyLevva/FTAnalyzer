@@ -35,61 +35,64 @@ namespace FTAnalyzer.Forms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BingOSMap));
-            this.webBrowser = new System.Windows.Forms.WebBrowser();
-            this.labMapLevel = new System.Windows.Forms.Label();
-            this.labTOU = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            webBrowser = new WebBrowser();
+            labMapLevel = new Label();
+            labTOU = new Label();
+            SuspendLayout();
             // 
             // webBrowser
             // 
-            this.webBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser.Location = new System.Drawing.Point(0, 0);
-            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser.Name = "webBrowser";
-            this.webBrowser.ScrollBarsEnabled = false;
-            this.webBrowser.Size = new System.Drawing.Size(886, 506);
-            this.webBrowser.TabIndex = 0;
-            this.webBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.WebBrowser_DocumentCompleted);
+            webBrowser.Dock = DockStyle.Fill;
+            webBrowser.Location = new Point(0, 0);
+            webBrowser.Margin = new Padding(4, 3, 4, 3);
+            webBrowser.MinimumSize = new Size(23, 23);
+            webBrowser.Name = "webBrowser";
+            webBrowser.ScrollBarsEnabled = false;
+            webBrowser.Size = new Size(1034, 584);
+            webBrowser.TabIndex = 0;
+            webBrowser.DocumentCompleted += WebBrowser_DocumentCompleted;
             // 
             // labMapLevel
             // 
-            this.labMapLevel.AutoSize = true;
-            this.labMapLevel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.labMapLevel.Location = new System.Drawing.Point(0, 493);
-            this.labMapLevel.Name = "labMapLevel";
-            this.labMapLevel.Size = new System.Drawing.Size(29, 13);
-            this.labMapLevel.TabIndex = 1;
-            this.labMapLevel.Text = "label";
+            labMapLevel.AutoSize = true;
+            labMapLevel.Dock = DockStyle.Bottom;
+            labMapLevel.Location = new Point(0, 569);
+            labMapLevel.Margin = new Padding(4, 0, 4, 0);
+            labMapLevel.Name = "labMapLevel";
+            labMapLevel.Size = new Size(32, 15);
+            labMapLevel.TabIndex = 1;
+            labMapLevel.Text = "label";
             // 
             // labTOU
             // 
-            this.labTOU.AutoSize = true;
-            this.labTOU.Dock = System.Windows.Forms.DockStyle.Right;
-            this.labTOU.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labTOU.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.labTOU.Location = new System.Drawing.Point(632, 0);
-            this.labTOU.Name = "labTOU";
-            this.labTOU.Size = new System.Drawing.Size(254, 13);
-            this.labTOU.TabIndex = 2;
-            this.labTOU.Text = "https://www.microsoft.com/Maps/product/terms.html";
-            this.labTOU.Click += new System.EventHandler(this.LabTOU_Click);
+            labTOU.AutoSize = true;
+            labTOU.Dock = DockStyle.Right;
+            labTOU.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Underline, GraphicsUnit.Point, 0);
+            labTOU.ForeColor = SystemColors.Highlight;
+            labTOU.Location = new Point(775, 0);
+            labTOU.Margin = new Padding(4, 0, 4, 0);
+            labTOU.Name = "labTOU";
+            labTOU.Size = new Size(259, 13);
+            labTOU.TabIndex = 2;
+            labTOU.Text = "https://www.microsoft.com/Maps/product/terms.html";
+            labTOU.Click += LabTOU_Click;
             // 
             // BingOSMap
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(886, 506);
-            this.Controls.Add(this.labTOU);
-            this.Controls.Add(this.labMapLevel);
-            this.Controls.Add(this.webBrowser);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "BingOSMap";
-            this.Text = "Bing OS Map";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BingOSMap_FormClosed);
-            this.Load += new System.EventHandler(this.BingOSMap_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1034, 584);
+            Controls.Add(labTOU);
+            Controls.Add(labMapLevel);
+            Controls.Add(webBrowser);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(4, 3, 4, 3);
+            Name = "BingOSMap";
+            Text = "Bing OS Map";
+            FormClosed += BingOSMap_FormClosed;
+            Load += BingOSMap_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

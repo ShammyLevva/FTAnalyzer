@@ -37,888 +37,799 @@ namespace FTAnalyzer.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColourCensus));
-            this.dgReportSheet = new System.Windows.Forms.DataGridView();
-            this.IndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Forenames = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Relation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RelationToRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C1841 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C1851 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C1861 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C1871 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C1881 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C1891 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C1901 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C1911 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C1921 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C1939 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.US1790 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.US1800 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.US1810 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.US1820 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.US1830 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.US1840 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.US1850 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.US1860 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.US1870 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.US1880 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.US1890 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.US1900 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.US1910 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.US1920 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.US1930 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.US1940 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.US1950 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Can1851 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Can1861 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Can1871 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Can1881 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Can1891 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Can1901 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Can1906 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Can1911 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Can1916 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Can1921 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ire1901 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ire1911 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BirthLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DeathDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DeathLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BestLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ahnentafel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnuViewFacts = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.tsRecords = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.mnuSaveCensusColumnLayout = new System.Windows.Forms.ToolStripButton();
-            this.mnuResetCensusColumns = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuExportToExcel = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.cbCensusSearchProvider = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-            this.cbRegion = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.cbFilter = new System.Windows.Forms.ToolStripComboBox();
-            this.printDocument = new System.Drawing.Printing.PrintDocument();
-            this.printDialog = new System.Windows.Forms.PrintDialog();
-            this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
-            ((System.ComponentModel.ISupportInitialize)(this.dgReportSheet)).BeginInit();
-            this.contextMenuStrip.SuspendLayout();
-            this.statusStrip.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
-            this.SuspendLayout();
+            dgReportSheet = new DataGridView();
+            IndividualID = new DataGridViewTextBoxColumn();
+            Forenames = new DataGridViewTextBoxColumn();
+            Surname = new DataGridViewTextBoxColumn();
+            Relation = new DataGridViewTextBoxColumn();
+            RelationToRoot = new DataGridViewTextBoxColumn();
+            C1841 = new DataGridViewTextBoxColumn();
+            C1851 = new DataGridViewTextBoxColumn();
+            C1861 = new DataGridViewTextBoxColumn();
+            C1871 = new DataGridViewTextBoxColumn();
+            C1881 = new DataGridViewTextBoxColumn();
+            C1891 = new DataGridViewTextBoxColumn();
+            C1901 = new DataGridViewTextBoxColumn();
+            C1911 = new DataGridViewTextBoxColumn();
+            C1921 = new DataGridViewTextBoxColumn();
+            C1939 = new DataGridViewTextBoxColumn();
+            US1790 = new DataGridViewTextBoxColumn();
+            US1800 = new DataGridViewTextBoxColumn();
+            US1810 = new DataGridViewTextBoxColumn();
+            US1820 = new DataGridViewTextBoxColumn();
+            US1830 = new DataGridViewTextBoxColumn();
+            US1840 = new DataGridViewTextBoxColumn();
+            US1850 = new DataGridViewTextBoxColumn();
+            US1860 = new DataGridViewTextBoxColumn();
+            US1870 = new DataGridViewTextBoxColumn();
+            US1880 = new DataGridViewTextBoxColumn();
+            US1890 = new DataGridViewTextBoxColumn();
+            US1900 = new DataGridViewTextBoxColumn();
+            US1910 = new DataGridViewTextBoxColumn();
+            US1920 = new DataGridViewTextBoxColumn();
+            US1930 = new DataGridViewTextBoxColumn();
+            US1940 = new DataGridViewTextBoxColumn();
+            US1950 = new DataGridViewTextBoxColumn();
+            Can1851 = new DataGridViewTextBoxColumn();
+            Can1861 = new DataGridViewTextBoxColumn();
+            Can1871 = new DataGridViewTextBoxColumn();
+            Can1881 = new DataGridViewTextBoxColumn();
+            Can1891 = new DataGridViewTextBoxColumn();
+            Can1901 = new DataGridViewTextBoxColumn();
+            Can1906 = new DataGridViewTextBoxColumn();
+            Can1911 = new DataGridViewTextBoxColumn();
+            Can1916 = new DataGridViewTextBoxColumn();
+            Can1921 = new DataGridViewTextBoxColumn();
+            Ire1901 = new DataGridViewTextBoxColumn();
+            Ire1911 = new DataGridViewTextBoxColumn();
+            BirthDate = new DataGridViewTextBoxColumn();
+            BirthLocation = new DataGridViewTextBoxColumn();
+            DeathDate = new DataGridViewTextBoxColumn();
+            DeathLocation = new DataGridViewTextBoxColumn();
+            BestLocation = new DataGridViewTextBoxColumn();
+            Ahnentafel = new DataGridViewTextBoxColumn();
+            contextMenuStrip = new ContextMenuStrip(components);
+            mnuViewFacts = new ToolStripMenuItem();
+            statusStrip = new StatusStrip();
+            tsRecords = new ToolStripStatusLabel();
+            toolStrip1 = new ToolStrip();
+            mnuSaveCensusColumnLayout = new ToolStripButton();
+            mnuResetCensusColumns = new ToolStripButton();
+            toolStripSeparator3 = new ToolStripSeparator();
+            printToolStripButton = new ToolStripButton();
+            printPreviewToolStripButton = new ToolStripButton();
+            toolStripSeparator1 = new ToolStripSeparator();
+            mnuExportToExcel = new ToolStripButton();
+            toolStripSeparator2 = new ToolStripSeparator();
+            toolStripLabel1 = new ToolStripLabel();
+            cbCensusSearchProvider = new ToolStripComboBox();
+            toolStripLabel3 = new ToolStripLabel();
+            cbRegion = new ToolStripComboBox();
+            toolStripLabel2 = new ToolStripLabel();
+            cbFilter = new ToolStripComboBox();
+            printDocument = new System.Drawing.Printing.PrintDocument();
+            printDialog = new PrintDialog();
+            printPreviewDialog = new PrintPreviewDialog();
+            ((System.ComponentModel.ISupportInitialize)dgReportSheet).BeginInit();
+            contextMenuStrip.SuspendLayout();
+            statusStrip.SuspendLayout();
+            toolStrip1.SuspendLayout();
+            SuspendLayout();
             // 
             // dgReportSheet
             // 
-            this.dgReportSheet.AllowUserToAddRows = false;
-            this.dgReportSheet.AllowUserToDeleteRows = false;
-            this.dgReportSheet.AllowUserToOrderColumns = true;
-            this.dgReportSheet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgReportSheet.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgReportSheet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgReportSheet.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IndividualID,
-            this.Forenames,
-            this.Surname,
-            this.Relation,
-            this.RelationToRoot,
-            this.C1841,
-            this.C1851,
-            this.C1861,
-            this.C1871,
-            this.C1881,
-            this.C1891,
-            this.C1901,
-            this.C1911,
-            this.C1921,
-            this.C1939,
-            this.US1790,
-            this.US1800,
-            this.US1810,
-            this.US1820,
-            this.US1830,
-            this.US1840,
-            this.US1850,
-            this.US1860,
-            this.US1870,
-            this.US1880,
-            this.US1890,
-            this.US1900,
-            this.US1910,
-            this.US1920,
-            this.US1930,
-            this.US1940,
-            this.US1950,
-            this.Can1851,
-            this.Can1861,
-            this.Can1871,
-            this.Can1881,
-            this.Can1891,
-            this.Can1901,
-            this.Can1906,
-            this.Can1911,
-            this.Can1916,
-            this.Can1921,
-            this.Ire1901,
-            this.Ire1911,
-            this.BirthDate,
-            this.BirthLocation,
-            this.DeathDate,
-            this.DeathLocation,
-            this.BestLocation,
-            this.Ahnentafel});
-            this.dgReportSheet.ContextMenuStrip = this.contextMenuStrip;
-            this.dgReportSheet.Location = new System.Drawing.Point(0, 48);
-            this.dgReportSheet.Margin = new System.Windows.Forms.Padding(6);
-            this.dgReportSheet.Name = "dgReportSheet";
-            this.dgReportSheet.ReadOnly = true;
-            this.dgReportSheet.RowHeadersWidth = 20;
-            this.dgReportSheet.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgReportSheet.Size = new System.Drawing.Size(1903, 978);
-            this.dgReportSheet.TabIndex = 1;
-            this.dgReportSheet.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.DgReportSheet_CellContextMenuStripNeeded);
-            this.dgReportSheet.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgReportSheet_CellDoubleClick);
-            this.dgReportSheet.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgReportSheet_CellFormatting);
-            this.dgReportSheet.SelectionChanged += new System.EventHandler(this.DgReportSheet_SelectionChanged);
+            dgReportSheet.AllowUserToAddRows = false;
+            dgReportSheet.AllowUserToDeleteRows = false;
+            dgReportSheet.AllowUserToOrderColumns = true;
+            dgReportSheet.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgReportSheet.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgReportSheet.Columns.AddRange(new DataGridViewColumn[] { IndividualID, Forenames, Surname, Relation, RelationToRoot, C1841, C1851, C1861, C1871, C1881, C1891, C1901, C1911, C1921, C1939, US1790, US1800, US1810, US1820, US1830, US1840, US1850, US1860, US1870, US1880, US1890, US1900, US1910, US1920, US1930, US1940, US1950, Can1851, Can1861, Can1871, Can1881, Can1891, Can1901, Can1906, Can1911, Can1916, Can1921, Ire1901, Ire1911, BirthDate, BirthLocation, DeathDate, DeathLocation, BestLocation, Ahnentafel });
+            dgReportSheet.ContextMenuStrip = contextMenuStrip;
+            dgReportSheet.Location = new Point(0, 30);
+            dgReportSheet.Margin = new Padding(4, 4, 4, 4);
+            dgReportSheet.Name = "dgReportSheet";
+            dgReportSheet.ReadOnly = true;
+            dgReportSheet.RowHeadersWidth = 20;
+            dgReportSheet.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            dgReportSheet.Size = new Size(1211, 607);
+            dgReportSheet.TabIndex = 1;
+            dgReportSheet.CellContextMenuStripNeeded += DgReportSheet_CellContextMenuStripNeeded;
+            dgReportSheet.CellDoubleClick += DgReportSheet_CellDoubleClick;
+            dgReportSheet.CellFormatting += DgReportSheet_CellFormatting;
+            dgReportSheet.SelectionChanged += DgReportSheet_SelectionChanged;
             // 
             // IndividualID
             // 
-            this.IndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.IndividualID.DataPropertyName = "IndividualID";
-            this.IndividualID.HeaderText = "Ind. ID";
-            this.IndividualID.MinimumWidth = 60;
-            this.IndividualID.Name = "IndividualID";
-            this.IndividualID.ReadOnly = true;
-            this.IndividualID.Width = 60;
+            IndividualID.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            IndividualID.DataPropertyName = "IndividualID";
+            IndividualID.HeaderText = "Ind. ID";
+            IndividualID.MinimumWidth = 60;
+            IndividualID.Name = "IndividualID";
+            IndividualID.ReadOnly = true;
+            IndividualID.Width = 60;
             // 
             // Forenames
             // 
-            this.Forenames.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Forenames.DataPropertyName = "Forenames";
-            this.Forenames.HeaderText = "Forenames";
-            this.Forenames.MinimumWidth = 100;
-            this.Forenames.Name = "Forenames";
-            this.Forenames.ReadOnly = true;
-            this.Forenames.Width = 200;
+            Forenames.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Forenames.DataPropertyName = "Forenames";
+            Forenames.HeaderText = "Forenames";
+            Forenames.MinimumWidth = 100;
+            Forenames.Name = "Forenames";
+            Forenames.ReadOnly = true;
+            Forenames.Width = 200;
             // 
             // Surname
             // 
-            this.Surname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Surname.DataPropertyName = "Surname";
-            this.Surname.HeaderText = "Surname";
-            this.Surname.MinimumWidth = 120;
-            this.Surname.Name = "Surname";
-            this.Surname.ReadOnly = true;
-            this.Surname.Width = 120;
+            Surname.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Surname.DataPropertyName = "Surname";
+            Surname.HeaderText = "Surname";
+            Surname.MinimumWidth = 120;
+            Surname.Name = "Surname";
+            Surname.ReadOnly = true;
+            Surname.Width = 120;
             // 
             // Relation
             // 
-            this.Relation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Relation.DataPropertyName = "Relation";
-            this.Relation.HeaderText = "Relation";
-            this.Relation.MinimumWidth = 120;
-            this.Relation.Name = "Relation";
-            this.Relation.ReadOnly = true;
-            this.Relation.Width = 120;
+            Relation.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Relation.DataPropertyName = "Relation";
+            Relation.HeaderText = "Relation";
+            Relation.MinimumWidth = 120;
+            Relation.Name = "Relation";
+            Relation.ReadOnly = true;
+            Relation.Width = 120;
             // 
             // RelationToRoot
             // 
-            this.RelationToRoot.DataPropertyName = "RelationToRoot";
-            this.RelationToRoot.HeaderText = "Relation To Root";
-            this.RelationToRoot.MinimumWidth = 100;
-            this.RelationToRoot.Name = "RelationToRoot";
-            this.RelationToRoot.ReadOnly = true;
-            this.RelationToRoot.Width = 145;
+            RelationToRoot.DataPropertyName = "RelationToRoot";
+            RelationToRoot.HeaderText = "Relation To Root";
+            RelationToRoot.MinimumWidth = 100;
+            RelationToRoot.Name = "RelationToRoot";
+            RelationToRoot.ReadOnly = true;
             // 
             // C1841
             // 
-            this.C1841.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.C1841.DataPropertyName = "C1841";
-            this.C1841.HeaderText = "1841 Census";
-            this.C1841.MinimumWidth = 80;
-            this.C1841.Name = "C1841";
-            this.C1841.ReadOnly = true;
-            this.C1841.Width = 80;
+            C1841.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            C1841.DataPropertyName = "C1841";
+            C1841.HeaderText = "1841 Census";
+            C1841.MinimumWidth = 80;
+            C1841.Name = "C1841";
+            C1841.ReadOnly = true;
+            C1841.Width = 80;
             // 
             // C1851
             // 
-            this.C1851.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.C1851.DataPropertyName = "C1851";
-            this.C1851.HeaderText = "1851 Census";
-            this.C1851.MinimumWidth = 80;
-            this.C1851.Name = "C1851";
-            this.C1851.ReadOnly = true;
-            this.C1851.Width = 80;
+            C1851.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            C1851.DataPropertyName = "C1851";
+            C1851.HeaderText = "1851 Census";
+            C1851.MinimumWidth = 80;
+            C1851.Name = "C1851";
+            C1851.ReadOnly = true;
+            C1851.Width = 80;
             // 
             // C1861
             // 
-            this.C1861.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.C1861.DataPropertyName = "C1861";
-            this.C1861.HeaderText = "1861 Census";
-            this.C1861.MinimumWidth = 80;
-            this.C1861.Name = "C1861";
-            this.C1861.ReadOnly = true;
-            this.C1861.Width = 80;
+            C1861.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            C1861.DataPropertyName = "C1861";
+            C1861.HeaderText = "1861 Census";
+            C1861.MinimumWidth = 80;
+            C1861.Name = "C1861";
+            C1861.ReadOnly = true;
+            C1861.Width = 80;
             // 
             // C1871
             // 
-            this.C1871.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.C1871.DataPropertyName = "C1871";
-            this.C1871.HeaderText = "1871 Census";
-            this.C1871.MinimumWidth = 80;
-            this.C1871.Name = "C1871";
-            this.C1871.ReadOnly = true;
-            this.C1871.Width = 80;
+            C1871.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            C1871.DataPropertyName = "C1871";
+            C1871.HeaderText = "1871 Census";
+            C1871.MinimumWidth = 80;
+            C1871.Name = "C1871";
+            C1871.ReadOnly = true;
+            C1871.Width = 80;
             // 
             // C1881
             // 
-            this.C1881.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.C1881.DataPropertyName = "C1881";
-            this.C1881.HeaderText = "1881 Census";
-            this.C1881.MinimumWidth = 80;
-            this.C1881.Name = "C1881";
-            this.C1881.ReadOnly = true;
-            this.C1881.Width = 80;
+            C1881.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            C1881.DataPropertyName = "C1881";
+            C1881.HeaderText = "1881 Census";
+            C1881.MinimumWidth = 80;
+            C1881.Name = "C1881";
+            C1881.ReadOnly = true;
+            C1881.Width = 80;
             // 
             // C1891
             // 
-            this.C1891.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.C1891.DataPropertyName = "C1891";
-            this.C1891.HeaderText = "1891 Census";
-            this.C1891.MinimumWidth = 80;
-            this.C1891.Name = "C1891";
-            this.C1891.ReadOnly = true;
-            this.C1891.Width = 80;
+            C1891.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            C1891.DataPropertyName = "C1891";
+            C1891.HeaderText = "1891 Census";
+            C1891.MinimumWidth = 80;
+            C1891.Name = "C1891";
+            C1891.ReadOnly = true;
+            C1891.Width = 80;
             // 
             // C1901
             // 
-            this.C1901.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.C1901.DataPropertyName = "C1901";
-            this.C1901.HeaderText = "1901 Census";
-            this.C1901.MinimumWidth = 80;
-            this.C1901.Name = "C1901";
-            this.C1901.ReadOnly = true;
-            this.C1901.Width = 80;
+            C1901.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            C1901.DataPropertyName = "C1901";
+            C1901.HeaderText = "1901 Census";
+            C1901.MinimumWidth = 80;
+            C1901.Name = "C1901";
+            C1901.ReadOnly = true;
+            C1901.Width = 80;
             // 
             // C1911
             // 
-            this.C1911.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.C1911.DataPropertyName = "C1911";
-            this.C1911.HeaderText = "1911 Census";
-            this.C1911.MinimumWidth = 80;
-            this.C1911.Name = "C1911";
-            this.C1911.ReadOnly = true;
-            this.C1911.Width = 80;
+            C1911.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            C1911.DataPropertyName = "C1911";
+            C1911.HeaderText = "1911 Census";
+            C1911.MinimumWidth = 80;
+            C1911.Name = "C1911";
+            C1911.ReadOnly = true;
+            C1911.Width = 80;
             // 
             // C1921
             // 
-            this.C1921.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.C1921.DataPropertyName = "C1921";
-            this.C1921.HeaderText = "1921 Census";
-            this.C1921.MinimumWidth = 80;
-            this.C1921.Name = "C1921";
-            this.C1921.ReadOnly = true;
-            this.C1921.Width = 80;
+            C1921.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            C1921.DataPropertyName = "C1921";
+            C1921.HeaderText = "1921 Census";
+            C1921.MinimumWidth = 80;
+            C1921.Name = "C1921";
+            C1921.ReadOnly = true;
+            C1921.Width = 80;
             // 
             // C1939
             // 
-            this.C1939.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.C1939.DataPropertyName = "C1939";
-            this.C1939.HeaderText = "1939 National Register";
-            this.C1939.MinimumWidth = 100;
-            this.C1939.Name = "C1939";
-            this.C1939.ReadOnly = true;
-            this.C1939.Width = 175;
+            C1939.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            C1939.DataPropertyName = "C1939";
+            C1939.HeaderText = "1939 National Register";
+            C1939.MinimumWidth = 100;
+            C1939.Name = "C1939";
+            C1939.ReadOnly = true;
+            C1939.Width = 175;
             // 
             // US1790
             // 
-            this.US1790.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.US1790.DataPropertyName = "US1790";
-            this.US1790.HeaderText = "1790 US Census";
-            this.US1790.MinimumWidth = 80;
-            this.US1790.Name = "US1790";
-            this.US1790.ReadOnly = true;
-            this.US1790.Width = 80;
+            US1790.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            US1790.DataPropertyName = "US1790";
+            US1790.HeaderText = "1790 US Census";
+            US1790.MinimumWidth = 80;
+            US1790.Name = "US1790";
+            US1790.ReadOnly = true;
+            US1790.Width = 80;
             // 
             // US1800
             // 
-            this.US1800.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.US1800.DataPropertyName = "US1800";
-            this.US1800.HeaderText = "1800 US Census";
-            this.US1800.MinimumWidth = 80;
-            this.US1800.Name = "US1800";
-            this.US1800.ReadOnly = true;
-            this.US1800.Width = 80;
+            US1800.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            US1800.DataPropertyName = "US1800";
+            US1800.HeaderText = "1800 US Census";
+            US1800.MinimumWidth = 80;
+            US1800.Name = "US1800";
+            US1800.ReadOnly = true;
+            US1800.Width = 80;
             // 
             // US1810
             // 
-            this.US1810.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.US1810.DataPropertyName = "US1810";
-            this.US1810.HeaderText = "1810 US Census";
-            this.US1810.MinimumWidth = 80;
-            this.US1810.Name = "US1810";
-            this.US1810.ReadOnly = true;
-            this.US1810.Width = 80;
+            US1810.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            US1810.DataPropertyName = "US1810";
+            US1810.HeaderText = "1810 US Census";
+            US1810.MinimumWidth = 80;
+            US1810.Name = "US1810";
+            US1810.ReadOnly = true;
+            US1810.Width = 80;
             // 
             // US1820
             // 
-            this.US1820.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.US1820.DataPropertyName = "US1820";
-            this.US1820.HeaderText = "1820 US Census";
-            this.US1820.MinimumWidth = 80;
-            this.US1820.Name = "US1820";
-            this.US1820.ReadOnly = true;
-            this.US1820.Width = 80;
+            US1820.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            US1820.DataPropertyName = "US1820";
+            US1820.HeaderText = "1820 US Census";
+            US1820.MinimumWidth = 80;
+            US1820.Name = "US1820";
+            US1820.ReadOnly = true;
+            US1820.Width = 80;
             // 
             // US1830
             // 
-            this.US1830.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.US1830.DataPropertyName = "US1830";
-            this.US1830.HeaderText = "1830 US Census";
-            this.US1830.MinimumWidth = 80;
-            this.US1830.Name = "US1830";
-            this.US1830.ReadOnly = true;
-            this.US1830.Width = 80;
+            US1830.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            US1830.DataPropertyName = "US1830";
+            US1830.HeaderText = "1830 US Census";
+            US1830.MinimumWidth = 80;
+            US1830.Name = "US1830";
+            US1830.ReadOnly = true;
+            US1830.Width = 80;
             // 
             // US1840
             // 
-            this.US1840.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.US1840.DataPropertyName = "US1840";
-            this.US1840.HeaderText = "1840 US Census";
-            this.US1840.MinimumWidth = 80;
-            this.US1840.Name = "US1840";
-            this.US1840.ReadOnly = true;
-            this.US1840.Width = 80;
+            US1840.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            US1840.DataPropertyName = "US1840";
+            US1840.HeaderText = "1840 US Census";
+            US1840.MinimumWidth = 80;
+            US1840.Name = "US1840";
+            US1840.ReadOnly = true;
+            US1840.Width = 80;
             // 
             // US1850
             // 
-            this.US1850.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.US1850.DataPropertyName = "US1850";
-            this.US1850.HeaderText = "1850 US Census";
-            this.US1850.MinimumWidth = 80;
-            this.US1850.Name = "US1850";
-            this.US1850.ReadOnly = true;
-            this.US1850.Width = 80;
+            US1850.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            US1850.DataPropertyName = "US1850";
+            US1850.HeaderText = "1850 US Census";
+            US1850.MinimumWidth = 80;
+            US1850.Name = "US1850";
+            US1850.ReadOnly = true;
+            US1850.Width = 80;
             // 
             // US1860
             // 
-            this.US1860.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.US1860.DataPropertyName = "US1860";
-            this.US1860.HeaderText = "1860 US Census";
-            this.US1860.MinimumWidth = 80;
-            this.US1860.Name = "US1860";
-            this.US1860.ReadOnly = true;
-            this.US1860.Width = 80;
+            US1860.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            US1860.DataPropertyName = "US1860";
+            US1860.HeaderText = "1860 US Census";
+            US1860.MinimumWidth = 80;
+            US1860.Name = "US1860";
+            US1860.ReadOnly = true;
+            US1860.Width = 80;
             // 
             // US1870
             // 
-            this.US1870.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.US1870.DataPropertyName = "US1870";
-            this.US1870.HeaderText = "1870 US Census";
-            this.US1870.MinimumWidth = 80;
-            this.US1870.Name = "US1870";
-            this.US1870.ReadOnly = true;
-            this.US1870.Width = 80;
+            US1870.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            US1870.DataPropertyName = "US1870";
+            US1870.HeaderText = "1870 US Census";
+            US1870.MinimumWidth = 80;
+            US1870.Name = "US1870";
+            US1870.ReadOnly = true;
+            US1870.Width = 80;
             // 
             // US1880
             // 
-            this.US1880.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.US1880.DataPropertyName = "US1880";
-            this.US1880.HeaderText = "1880 US Census";
-            this.US1880.MinimumWidth = 80;
-            this.US1880.Name = "US1880";
-            this.US1880.ReadOnly = true;
-            this.US1880.Width = 80;
+            US1880.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            US1880.DataPropertyName = "US1880";
+            US1880.HeaderText = "1880 US Census";
+            US1880.MinimumWidth = 80;
+            US1880.Name = "US1880";
+            US1880.ReadOnly = true;
+            US1880.Width = 80;
             // 
             // US1890
             // 
-            this.US1890.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.US1890.DataPropertyName = "US1890";
-            this.US1890.HeaderText = "1890 US Census";
-            this.US1890.MinimumWidth = 80;
-            this.US1890.Name = "US1890";
-            this.US1890.ReadOnly = true;
-            this.US1890.Width = 80;
+            US1890.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            US1890.DataPropertyName = "US1890";
+            US1890.HeaderText = "1890 US Census";
+            US1890.MinimumWidth = 80;
+            US1890.Name = "US1890";
+            US1890.ReadOnly = true;
+            US1890.Width = 80;
             // 
             // US1900
             // 
-            this.US1900.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.US1900.DataPropertyName = "US1900";
-            this.US1900.HeaderText = "1900 US Census";
-            this.US1900.MinimumWidth = 80;
-            this.US1900.Name = "US1900";
-            this.US1900.ReadOnly = true;
-            this.US1900.Width = 80;
+            US1900.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            US1900.DataPropertyName = "US1900";
+            US1900.HeaderText = "1900 US Census";
+            US1900.MinimumWidth = 80;
+            US1900.Name = "US1900";
+            US1900.ReadOnly = true;
+            US1900.Width = 80;
             // 
             // US1910
             // 
-            this.US1910.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.US1910.DataPropertyName = "US1910";
-            this.US1910.HeaderText = "1910 US Census";
-            this.US1910.MinimumWidth = 80;
-            this.US1910.Name = "US1910";
-            this.US1910.ReadOnly = true;
-            this.US1910.Width = 80;
+            US1910.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            US1910.DataPropertyName = "US1910";
+            US1910.HeaderText = "1910 US Census";
+            US1910.MinimumWidth = 80;
+            US1910.Name = "US1910";
+            US1910.ReadOnly = true;
+            US1910.Width = 80;
             // 
             // US1920
             // 
-            this.US1920.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.US1920.DataPropertyName = "US1920";
-            this.US1920.HeaderText = "1920 US Census";
-            this.US1920.MinimumWidth = 80;
-            this.US1920.Name = "US1920";
-            this.US1920.ReadOnly = true;
-            this.US1920.Width = 80;
+            US1920.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            US1920.DataPropertyName = "US1920";
+            US1920.HeaderText = "1920 US Census";
+            US1920.MinimumWidth = 80;
+            US1920.Name = "US1920";
+            US1920.ReadOnly = true;
+            US1920.Width = 80;
             // 
             // US1930
             // 
-            this.US1930.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.US1930.DataPropertyName = "US1930";
-            this.US1930.HeaderText = "1930 US Census";
-            this.US1930.MinimumWidth = 80;
-            this.US1930.Name = "US1930";
-            this.US1930.ReadOnly = true;
-            this.US1930.Width = 80;
+            US1930.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            US1930.DataPropertyName = "US1930";
+            US1930.HeaderText = "1930 US Census";
+            US1930.MinimumWidth = 80;
+            US1930.Name = "US1930";
+            US1930.ReadOnly = true;
+            US1930.Width = 80;
             // 
             // US1940
             // 
-            this.US1940.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.US1940.DataPropertyName = "US1940";
-            this.US1940.HeaderText = "1940 US Census";
-            this.US1940.MinimumWidth = 80;
-            this.US1940.Name = "US1940";
-            this.US1940.ReadOnly = true;
-            this.US1940.Width = 80;
+            US1940.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            US1940.DataPropertyName = "US1940";
+            US1940.HeaderText = "1940 US Census";
+            US1940.MinimumWidth = 80;
+            US1940.Name = "US1940";
+            US1940.ReadOnly = true;
+            US1940.Width = 80;
             // 
             // US1950
             // 
-            this.US1950.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.US1950.DataPropertyName = "US1950";
-            this.US1950.HeaderText = "1950 US Census";
-            this.US1950.MinimumWidth = 80;
-            this.US1950.Name = "US1950";
-            this.US1950.ReadOnly = true;
-            this.US1950.Width = 80;
+            US1950.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            US1950.DataPropertyName = "US1950";
+            US1950.HeaderText = "1950 US Census";
+            US1950.MinimumWidth = 80;
+            US1950.Name = "US1950";
+            US1950.ReadOnly = true;
+            US1950.Width = 80;
             // 
             // Can1851
             // 
-            this.Can1851.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Can1851.DataPropertyName = "Can1851";
-            this.Can1851.HeaderText = "1851/2 Canada Census";
-            this.Can1851.MinimumWidth = 80;
-            this.Can1851.Name = "Can1851";
-            this.Can1851.ReadOnly = true;
-            this.Can1851.Width = 80;
+            Can1851.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Can1851.DataPropertyName = "Can1851";
+            Can1851.HeaderText = "1851/2 Canada Census";
+            Can1851.MinimumWidth = 80;
+            Can1851.Name = "Can1851";
+            Can1851.ReadOnly = true;
+            Can1851.Width = 80;
             // 
             // Can1861
             // 
-            this.Can1861.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Can1861.DataPropertyName = "Can1861";
-            this.Can1861.HeaderText = "1861 Canada Census";
-            this.Can1861.MinimumWidth = 80;
-            this.Can1861.Name = "Can1861";
-            this.Can1861.ReadOnly = true;
-            this.Can1861.Width = 80;
+            Can1861.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Can1861.DataPropertyName = "Can1861";
+            Can1861.HeaderText = "1861 Canada Census";
+            Can1861.MinimumWidth = 80;
+            Can1861.Name = "Can1861";
+            Can1861.ReadOnly = true;
+            Can1861.Width = 80;
             // 
             // Can1871
             // 
-            this.Can1871.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Can1871.DataPropertyName = "Can1871";
-            this.Can1871.HeaderText = "1871 Canada Census";
-            this.Can1871.MinimumWidth = 80;
-            this.Can1871.Name = "Can1871";
-            this.Can1871.ReadOnly = true;
-            this.Can1871.Width = 80;
+            Can1871.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Can1871.DataPropertyName = "Can1871";
+            Can1871.HeaderText = "1871 Canada Census";
+            Can1871.MinimumWidth = 80;
+            Can1871.Name = "Can1871";
+            Can1871.ReadOnly = true;
+            Can1871.Width = 80;
             // 
             // Can1881
             // 
-            this.Can1881.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Can1881.DataPropertyName = "Can1881";
-            this.Can1881.HeaderText = "1881 Canada Census";
-            this.Can1881.MinimumWidth = 80;
-            this.Can1881.Name = "Can1881";
-            this.Can1881.ReadOnly = true;
-            this.Can1881.Width = 80;
+            Can1881.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Can1881.DataPropertyName = "Can1881";
+            Can1881.HeaderText = "1881 Canada Census";
+            Can1881.MinimumWidth = 80;
+            Can1881.Name = "Can1881";
+            Can1881.ReadOnly = true;
+            Can1881.Width = 80;
             // 
             // Can1891
             // 
-            this.Can1891.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Can1891.DataPropertyName = "Can1891";
-            this.Can1891.HeaderText = "1891 Canada Census";
-            this.Can1891.MinimumWidth = 80;
-            this.Can1891.Name = "Can1891";
-            this.Can1891.ReadOnly = true;
-            this.Can1891.Width = 80;
+            Can1891.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Can1891.DataPropertyName = "Can1891";
+            Can1891.HeaderText = "1891 Canada Census";
+            Can1891.MinimumWidth = 80;
+            Can1891.Name = "Can1891";
+            Can1891.ReadOnly = true;
+            Can1891.Width = 80;
             // 
             // Can1901
             // 
-            this.Can1901.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Can1901.DataPropertyName = "Can1901";
-            this.Can1901.HeaderText = "1901 Canada Census";
-            this.Can1901.MinimumWidth = 80;
-            this.Can1901.Name = "Can1901";
-            this.Can1901.ReadOnly = true;
-            this.Can1901.Width = 80;
+            Can1901.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Can1901.DataPropertyName = "Can1901";
+            Can1901.HeaderText = "1901 Canada Census";
+            Can1901.MinimumWidth = 80;
+            Can1901.Name = "Can1901";
+            Can1901.ReadOnly = true;
+            Can1901.Width = 80;
             // 
             // Can1906
             // 
-            this.Can1906.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Can1906.DataPropertyName = "Can1906";
-            this.Can1906.HeaderText = "1906 Canada Census";
-            this.Can1906.MinimumWidth = 80;
-            this.Can1906.Name = "Can1906";
-            this.Can1906.ReadOnly = true;
-            this.Can1906.Width = 80;
+            Can1906.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Can1906.DataPropertyName = "Can1906";
+            Can1906.HeaderText = "1906 Canada Census";
+            Can1906.MinimumWidth = 80;
+            Can1906.Name = "Can1906";
+            Can1906.ReadOnly = true;
+            Can1906.Width = 80;
             // 
             // Can1911
             // 
-            this.Can1911.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Can1911.DataPropertyName = "Can1911";
-            this.Can1911.HeaderText = "1911 Canada Census";
-            this.Can1911.MinimumWidth = 80;
-            this.Can1911.Name = "Can1911";
-            this.Can1911.ReadOnly = true;
-            this.Can1911.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Can1911.Width = 80;
+            Can1911.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Can1911.DataPropertyName = "Can1911";
+            Can1911.HeaderText = "1911 Canada Census";
+            Can1911.MinimumWidth = 80;
+            Can1911.Name = "Can1911";
+            Can1911.ReadOnly = true;
+            Can1911.Resizable = DataGridViewTriState.False;
+            Can1911.Width = 80;
             // 
             // Can1916
             // 
-            this.Can1916.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Can1916.DataPropertyName = "Can1916";
-            this.Can1916.HeaderText = "1916 Canada Census";
-            this.Can1916.MinimumWidth = 80;
-            this.Can1916.Name = "Can1916";
-            this.Can1916.ReadOnly = true;
-            this.Can1916.Width = 80;
+            Can1916.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Can1916.DataPropertyName = "Can1916";
+            Can1916.HeaderText = "1916 Canada Census";
+            Can1916.MinimumWidth = 80;
+            Can1916.Name = "Can1916";
+            Can1916.ReadOnly = true;
+            Can1916.Width = 80;
             // 
             // Can1921
             // 
-            this.Can1921.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Can1921.DataPropertyName = "Can1921";
-            this.Can1921.HeaderText = "1921 Canada Census";
-            this.Can1921.MinimumWidth = 80;
-            this.Can1921.Name = "Can1921";
-            this.Can1921.ReadOnly = true;
-            this.Can1921.Width = 80;
+            Can1921.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Can1921.DataPropertyName = "Can1921";
+            Can1921.HeaderText = "1921 Canada Census";
+            Can1921.MinimumWidth = 80;
+            Can1921.Name = "Can1921";
+            Can1921.ReadOnly = true;
+            Can1921.Width = 80;
             // 
             // Ire1901
             // 
-            this.Ire1901.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Ire1901.DataPropertyName = "Ire1901";
-            this.Ire1901.HeaderText = "1901 Irish Census";
-            this.Ire1901.MinimumWidth = 80;
-            this.Ire1901.Name = "Ire1901";
-            this.Ire1901.ReadOnly = true;
-            this.Ire1901.Width = 80;
+            Ire1901.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Ire1901.DataPropertyName = "Ire1901";
+            Ire1901.HeaderText = "1901 Irish Census";
+            Ire1901.MinimumWidth = 80;
+            Ire1901.Name = "Ire1901";
+            Ire1901.ReadOnly = true;
+            Ire1901.Width = 80;
             // 
             // Ire1911
             // 
-            this.Ire1911.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Ire1911.DataPropertyName = "Ire1911";
-            this.Ire1911.HeaderText = "1911 Irish Census";
-            this.Ire1911.MinimumWidth = 80;
-            this.Ire1911.Name = "Ire1911";
-            this.Ire1911.ReadOnly = true;
-            this.Ire1911.Width = 80;
+            Ire1911.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Ire1911.DataPropertyName = "Ire1911";
+            Ire1911.HeaderText = "1911 Irish Census";
+            Ire1911.MinimumWidth = 80;
+            Ire1911.Name = "Ire1911";
+            Ire1911.ReadOnly = true;
+            Ire1911.Width = 80;
             // 
             // BirthDate
             // 
-            this.BirthDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.BirthDate.DataPropertyName = "BirthDate";
-            this.BirthDate.HeaderText = "Birth Date";
-            this.BirthDate.MinimumWidth = 100;
-            this.BirthDate.Name = "BirthDate";
-            this.BirthDate.ReadOnly = true;
-            this.BirthDate.Width = 200;
+            BirthDate.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            BirthDate.DataPropertyName = "BirthDate";
+            BirthDate.HeaderText = "Birth Date";
+            BirthDate.MinimumWidth = 100;
+            BirthDate.Name = "BirthDate";
+            BirthDate.ReadOnly = true;
+            BirthDate.Width = 200;
             // 
             // BirthLocation
             // 
-            this.BirthLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.BirthLocation.DataPropertyName = "BirthLocation";
-            this.BirthLocation.HeaderText = "Birth Location";
-            this.BirthLocation.MinimumWidth = 120;
-            this.BirthLocation.Name = "BirthLocation";
-            this.BirthLocation.ReadOnly = true;
-            this.BirthLocation.Width = 200;
+            BirthLocation.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            BirthLocation.DataPropertyName = "BirthLocation";
+            BirthLocation.HeaderText = "Birth Location";
+            BirthLocation.MinimumWidth = 120;
+            BirthLocation.Name = "BirthLocation";
+            BirthLocation.ReadOnly = true;
+            BirthLocation.Width = 200;
             // 
             // DeathDate
             // 
-            this.DeathDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.DeathDate.DataPropertyName = "DeathDate";
-            this.DeathDate.HeaderText = "Death Date";
-            this.DeathDate.MinimumWidth = 100;
-            this.DeathDate.Name = "DeathDate";
-            this.DeathDate.ReadOnly = true;
-            this.DeathDate.Width = 200;
+            DeathDate.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            DeathDate.DataPropertyName = "DeathDate";
+            DeathDate.HeaderText = "Death Date";
+            DeathDate.MinimumWidth = 100;
+            DeathDate.Name = "DeathDate";
+            DeathDate.ReadOnly = true;
+            DeathDate.Width = 200;
             // 
             // DeathLocation
             // 
-            this.DeathLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.DeathLocation.DataPropertyName = "DeathLocation";
-            this.DeathLocation.HeaderText = "Death Location";
-            this.DeathLocation.MinimumWidth = 120;
-            this.DeathLocation.Name = "DeathLocation";
-            this.DeathLocation.ReadOnly = true;
-            this.DeathLocation.Width = 200;
+            DeathLocation.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            DeathLocation.DataPropertyName = "DeathLocation";
+            DeathLocation.HeaderText = "Death Location";
+            DeathLocation.MinimumWidth = 120;
+            DeathLocation.Name = "DeathLocation";
+            DeathLocation.ReadOnly = true;
+            DeathLocation.Width = 200;
             // 
             // BestLocation
             // 
-            this.BestLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.BestLocation.DataPropertyName = "BestLocation";
-            this.BestLocation.HeaderText = "Best Location";
-            this.BestLocation.MinimumWidth = 120;
-            this.BestLocation.Name = "BestLocation";
-            this.BestLocation.ReadOnly = true;
-            this.BestLocation.Width = 200;
+            BestLocation.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            BestLocation.DataPropertyName = "BestLocation";
+            BestLocation.HeaderText = "Best Location";
+            BestLocation.MinimumWidth = 120;
+            BestLocation.Name = "BestLocation";
+            BestLocation.ReadOnly = true;
+            BestLocation.Width = 200;
             // 
             // Ahnentafel
             // 
-            this.Ahnentafel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Ahnentafel.DataPropertyName = "Ahnentafel";
-            this.Ahnentafel.HeaderText = "Ahnentafel";
-            this.Ahnentafel.MinimumWidth = 50;
-            this.Ahnentafel.Name = "Ahnentafel";
-            this.Ahnentafel.ReadOnly = true;
-            this.Ahnentafel.Width = 147;
+            Ahnentafel.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            Ahnentafel.DataPropertyName = "Ahnentafel";
+            Ahnentafel.HeaderText = "Ahnentafel";
+            Ahnentafel.MinimumWidth = 50;
+            Ahnentafel.Name = "Ahnentafel";
+            Ahnentafel.ReadOnly = true;
+            Ahnentafel.Width = 90;
             // 
             // contextMenuStrip
             // 
-            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuViewFacts});
-            this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(288, 40);
+            contextMenuStrip.ImageScalingSize = new Size(32, 32);
+            contextMenuStrip.Items.AddRange(new ToolStripItem[] { mnuViewFacts });
+            contextMenuStrip.Name = "contextMenuStrip";
+            contextMenuStrip.Size = new Size(190, 26);
             // 
             // mnuViewFacts
             // 
-            this.mnuViewFacts.Name = "mnuViewFacts";
-            this.mnuViewFacts.Size = new System.Drawing.Size(287, 36);
-            this.mnuViewFacts.Text = "View Individuals Facts";
-            this.mnuViewFacts.Click += new System.EventHandler(this.MnuViewFacts_Click);
+            mnuViewFacts.Name = "mnuViewFacts";
+            mnuViewFacts.Size = new Size(189, 22);
+            mnuViewFacts.Text = "View Individuals Facts";
+            mnuViewFacts.Click += MnuViewFacts_Click;
             // 
             // statusStrip
             // 
-            this.statusStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsRecords});
-            this.statusStrip.Location = new System.Drawing.Point(0, 1037);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 26, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1903, 39);
-            this.statusStrip.TabIndex = 2;
-            this.statusStrip.Text = "statusStrip1";
+            statusStrip.ImageScalingSize = new Size(32, 32);
+            statusStrip.Items.AddRange(new ToolStripItem[] { tsRecords });
+            statusStrip.Location = new Point(0, 641);
+            statusStrip.Name = "statusStrip";
+            statusStrip.Padding = new Padding(1, 0, 17, 0);
+            statusStrip.Size = new Size(1211, 22);
+            statusStrip.TabIndex = 2;
+            statusStrip.Text = "statusStrip1";
             // 
             // tsRecords
             // 
-            this.tsRecords.Name = "tsRecords";
-            this.tsRecords.Size = new System.Drawing.Size(206, 30);
-            this.tsRecords.Text = "toolStripStatusLabel1";
+            tsRecords.Name = "tsRecords";
+            tsRecords.Size = new Size(118, 17);
+            tsRecords.Text = "toolStripStatusLabel1";
             // 
             // toolStrip1
             // 
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuSaveCensusColumnLayout,
-            this.mnuResetCensusColumns,
-            this.toolStripSeparator3,
-            this.printToolStripButton,
-            this.printPreviewToolStripButton,
-            this.toolStripSeparator1,
-            this.mnuExportToExcel,
-            this.toolStripSeparator2,
-            this.toolStripLabel1,
-            this.cbCensusSearchProvider,
-            this.toolStripLabel3,
-            this.cbRegion,
-            this.toolStripLabel2,
-            this.cbFilter});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1903, 44);
-            this.toolStrip1.TabIndex = 3;
-            this.toolStrip1.Text = "toolStrip1";
+            toolStrip1.GripStyle = ToolStripGripStyle.Hidden;
+            toolStrip1.ImageScalingSize = new Size(32, 32);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { mnuSaveCensusColumnLayout, mnuResetCensusColumns, toolStripSeparator3, printToolStripButton, printPreviewToolStripButton, toolStripSeparator1, mnuExportToExcel, toolStripSeparator2, toolStripLabel1, cbCensusSearchProvider, toolStripLabel3, cbRegion, toolStripLabel2, cbFilter });
+            toolStrip1.Location = new Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Padding = new Padding(0, 0, 3, 0);
+            toolStrip1.Size = new Size(1211, 39);
+            toolStrip1.TabIndex = 3;
+            toolStrip1.Text = "toolStrip1";
             // 
             // mnuSaveCensusColumnLayout
             // 
-            this.mnuSaveCensusColumnLayout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mnuSaveCensusColumnLayout.Image = ((System.Drawing.Image)(resources.GetObject("mnuSaveCensusColumnLayout.Image")));
-            this.mnuSaveCensusColumnLayout.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuSaveCensusColumnLayout.Name = "mnuSaveCensusColumnLayout";
-            this.mnuSaveCensusColumnLayout.Size = new System.Drawing.Size(40, 38);
-            this.mnuSaveCensusColumnLayout.Text = "Save Census Column Sort Order";
-            this.mnuSaveCensusColumnLayout.Click += new System.EventHandler(this.MnuSaveCensusColumnLayout_Click);
+            mnuSaveCensusColumnLayout.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            mnuSaveCensusColumnLayout.Image = (Image)resources.GetObject("mnuSaveCensusColumnLayout.Image");
+            mnuSaveCensusColumnLayout.ImageTransparentColor = Color.Magenta;
+            mnuSaveCensusColumnLayout.Name = "mnuSaveCensusColumnLayout";
+            mnuSaveCensusColumnLayout.Size = new Size(36, 36);
+            mnuSaveCensusColumnLayout.Text = "Save Census Column Sort Order";
+            mnuSaveCensusColumnLayout.Click += MnuSaveCensusColumnLayout_Click;
             // 
             // mnuResetCensusColumns
             // 
-            this.mnuResetCensusColumns.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mnuResetCensusColumns.Image = ((System.Drawing.Image)(resources.GetObject("mnuResetCensusColumns.Image")));
-            this.mnuResetCensusColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuResetCensusColumns.Name = "mnuResetCensusColumns";
-            this.mnuResetCensusColumns.Size = new System.Drawing.Size(40, 38);
-            this.mnuResetCensusColumns.Text = "Reset Census Column Sort Order to Default";
-            this.mnuResetCensusColumns.Click += new System.EventHandler(this.MnuResetCensusColumns_Click);
+            mnuResetCensusColumns.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            mnuResetCensusColumns.Image = (Image)resources.GetObject("mnuResetCensusColumns.Image");
+            mnuResetCensusColumns.ImageTransparentColor = Color.Magenta;
+            mnuResetCensusColumns.Name = "mnuResetCensusColumns";
+            mnuResetCensusColumns.Size = new Size(36, 36);
+            mnuResetCensusColumns.Text = "Reset Census Column Sort Order to Default";
+            mnuResetCensusColumns.Click += MnuResetCensusColumns_Click;
             // 
             // toolStripSeparator3
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 44);
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new Size(6, 39);
             // 
             // printToolStripButton
             // 
-            this.printToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
-            this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printToolStripButton.Name = "printToolStripButton";
-            this.printToolStripButton.Size = new System.Drawing.Size(40, 38);
-            this.printToolStripButton.Text = "&Print";
-            this.printToolStripButton.Click += new System.EventHandler(this.PrintToolStripButton_Click);
+            printToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            printToolStripButton.Image = (Image)resources.GetObject("printToolStripButton.Image");
+            printToolStripButton.ImageTransparentColor = Color.Magenta;
+            printToolStripButton.Name = "printToolStripButton";
+            printToolStripButton.Size = new Size(36, 36);
+            printToolStripButton.Text = "&Print";
+            printToolStripButton.Click += PrintToolStripButton_Click;
             // 
             // printPreviewToolStripButton
             // 
-            this.printPreviewToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.printPreviewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripButton.Image")));
-            this.printPreviewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
-            this.printPreviewToolStripButton.Size = new System.Drawing.Size(40, 38);
-            this.printPreviewToolStripButton.Text = "Print Preview...";
-            this.printPreviewToolStripButton.Click += new System.EventHandler(this.PrintPreviewToolStripButton_Click);
+            printPreviewToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            printPreviewToolStripButton.Image = (Image)resources.GetObject("printPreviewToolStripButton.Image");
+            printPreviewToolStripButton.ImageTransparentColor = Color.Magenta;
+            printPreviewToolStripButton.Name = "printPreviewToolStripButton";
+            printPreviewToolStripButton.Size = new Size(36, 36);
+            printPreviewToolStripButton.Text = "Print Preview...";
+            printPreviewToolStripButton.Click += PrintPreviewToolStripButton_Click;
             // 
             // toolStripSeparator1
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 44);
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(6, 39);
             // 
             // mnuExportToExcel
             // 
-            this.mnuExportToExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mnuExportToExcel.Image = ((System.Drawing.Image)(resources.GetObject("mnuExportToExcel.Image")));
-            this.mnuExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuExportToExcel.Name = "mnuExportToExcel";
-            this.mnuExportToExcel.Size = new System.Drawing.Size(40, 38);
-            this.mnuExportToExcel.Text = "Export to Excel";
-            this.mnuExportToExcel.Click += new System.EventHandler(this.MnuExportToExcel_Click);
+            mnuExportToExcel.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            mnuExportToExcel.Image = (Image)resources.GetObject("mnuExportToExcel.Image");
+            mnuExportToExcel.ImageTransparentColor = Color.Magenta;
+            mnuExportToExcel.Name = "mnuExportToExcel";
+            mnuExportToExcel.Size = new Size(36, 36);
+            mnuExportToExcel.Text = "Export to Excel";
+            mnuExportToExcel.Click += MnuExportToExcel_Click;
             // 
             // toolStripSeparator2
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 44);
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(6, 39);
             // 
             // toolStripLabel1
             // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(206, 38);
-            this.toolStripLabel1.Text = "Census search using:";
+            toolStripLabel1.Name = "toolStripLabel1";
+            toolStripLabel1.Size = new Size(117, 36);
+            toolStripLabel1.Text = "Census search using:";
             // 
             // cbCensusSearchProvider
             // 
-            this.cbCensusSearchProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCensusSearchProvider.Items.AddRange(new object[] {
-            "Ancestry",
-            "Find My Past",
-            "FreeCen",
-            "FamilySearch",
-            "Scotlands People"});
-            this.cbCensusSearchProvider.Name = "cbCensusSearchProvider";
-            this.cbCensusSearchProvider.Size = new System.Drawing.Size(219, 44);
-            this.cbCensusSearchProvider.SelectedIndexChanged += new System.EventHandler(this.CbCensusSearchProvider_SelectedIndexChanged);
+            cbCensusSearchProvider.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbCensusSearchProvider.Items.AddRange(new object[] { "Ancestry", "Find My Past", "FreeCen", "FamilySearch", "Scotlands People" });
+            cbCensusSearchProvider.Name = "cbCensusSearchProvider";
+            cbCensusSearchProvider.Size = new Size(141, 39);
+            cbCensusSearchProvider.SelectedIndexChanged += CbCensusSearchProvider_SelectedIndexChanged;
             // 
             // toolStripLabel3
             // 
-            this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(82, 38);
-            this.toolStripLabel3.Text = "Region:";
+            toolStripLabel3.Name = "toolStripLabel3";
+            toolStripLabel3.Size = new Size(47, 36);
+            toolStripLabel3.Text = "Region:";
             // 
             // cbRegion
             // 
-            this.cbRegion.Items.AddRange(new object[] {
-            ".com",
-            ".co.uk",
-            ".ca",
-            ".com.au"});
-            this.cbRegion.Name = "cbRegion";
-            this.cbRegion.Size = new System.Drawing.Size(219, 44);
-            this.cbRegion.Text = ".co.uk";
-            this.cbRegion.SelectedIndexChanged += new System.EventHandler(this.CbRegion_SelectedIndexChanged);
+            cbRegion.Items.AddRange(new object[] { ".com", ".co.uk", ".ca", ".com.au" });
+            cbRegion.Name = "cbRegion";
+            cbRegion.Size = new Size(141, 39);
+            cbRegion.Text = ".co.uk";
+            cbRegion.SelectedIndexChanged += CbRegion_SelectedIndexChanged;
             // 
             // toolStripLabel2
             // 
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(69, 38);
-            this.toolStripLabel2.Text = "Filter :";
+            toolStripLabel2.Name = "toolStripLabel2";
+            toolStripLabel2.Size = new Size(39, 36);
+            toolStripLabel2.Text = "Filter :";
             // 
             // cbFilter
             // 
-            this.cbFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFilter.DropDownWidth = 170;
-            this.cbFilter.Items.AddRange(new object[] {
-            "All Individuals",
-            "None Found (All Red)",
-            "All Found (All Green)",
-            "Lost Cousins Missing (Yellow)",
-            "Lost Cousins Present (Orange)",
-            "Outside UK (Dark Grey)",
-            "Some Missing (Some Red)",
-            "Some Found (Some Green)",
-            "Known Missing (Mid Green)"});
-            this.cbFilter.Name = "cbFilter";
-            this.cbFilter.Size = new System.Drawing.Size(170, 44);
-            this.cbFilter.SelectedIndexChanged += new System.EventHandler(this.CbFilter_SelectedIndexChanged);
+            cbFilter.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbFilter.DropDownWidth = 170;
+            cbFilter.Items.AddRange(new object[] { "All Individuals", "None Found (All Red)", "All Found (All Green)", "Lost Cousins Missing (Yellow)", "Lost Cousins Present (Orange)", "Outside UK (Dark Grey)", "Some Missing (Some Red)", "Some Found (Some Green)", "Known Missing (Mid Green)" });
+            cbFilter.Name = "cbFilter";
+            cbFilter.Size = new Size(110, 39);
+            cbFilter.SelectedIndexChanged += CbFilter_SelectedIndexChanged;
             // 
             // printDialog
             // 
-            this.printDialog.AllowSelection = true;
-            this.printDialog.AllowSomePages = true;
-            this.printDialog.Document = this.printDocument;
-            this.printDialog.UseEXDialog = true;
+            printDialog.AllowSelection = true;
+            printDialog.AllowSomePages = true;
+            printDialog.Document = printDocument;
+            printDialog.UseEXDialog = true;
             // 
             // printPreviewDialog
             // 
-            this.printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog.Document = this.printDocument;
-            this.printPreviewDialog.Enabled = true;
-            this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
-            this.printPreviewDialog.Name = "printPreviewDialog";
-            this.printPreviewDialog.Visible = false;
+            printPreviewDialog.AutoScrollMargin = new Size(0, 0);
+            printPreviewDialog.AutoScrollMinSize = new Size(0, 0);
+            printPreviewDialog.ClientSize = new Size(400, 300);
+            printPreviewDialog.Document = printDocument;
+            printPreviewDialog.Enabled = true;
+            printPreviewDialog.Icon = (Icon)resources.GetObject("printPreviewDialog.Icon");
+            printPreviewDialog.Name = "printPreviewDialog";
+            printPreviewDialog.Visible = false;
             // 
             // ColourCensus
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1903, 1076);
-            this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.dgReportSheet);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6);
-            this.Name = "ColourCensus";
-            this.Text = "Colour Census Report Result";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ColourCensus_FormClosed);
-            this.Load += new System.EventHandler(this.ColourCensus_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgReportSheet)).EndInit();
-            this.contextMenuStrip.ResumeLayout(false);
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1211, 663);
+            Controls.Add(toolStrip1);
+            Controls.Add(statusStrip);
+            Controls.Add(dgReportSheet);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(4, 4, 4, 4);
+            Name = "ColourCensus";
+            Text = "Colour Census Report Result";
+            FormClosed += ColourCensus_FormClosed;
+            Load += ColourCensus_Load;
+            ((System.ComponentModel.ISupportInitialize)dgReportSheet).EndInit();
+            contextMenuStrip.ResumeLayout(false);
+            statusStrip.ResumeLayout(false);
+            statusStrip.PerformLayout();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

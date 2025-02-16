@@ -599,14 +599,14 @@ namespace FTAnalyzer
             // backupToolStripMenuItem
             // 
             backupToolStripMenuItem.Name = "backupToolStripMenuItem";
-            backupToolStripMenuItem.Size = new Size(237, 22);
+            backupToolStripMenuItem.Size = new Size(238, 22);
             backupToolStripMenuItem.Text = "Backup";
             backupToolStripMenuItem.Click += BackupToolStripMenuItem_Click;
             // 
             // mnuRestore
             // 
             mnuRestore.Name = "mnuRestore";
-            mnuRestore.Size = new Size(237, 22);
+            mnuRestore.Size = new Size(238, 22);
             mnuRestore.Text = "Restore";
             mnuRestore.ToolTipText = "Restore is only available prior to loading GEDCOM";
             mnuRestore.Click += RestoreToolStripMenuItem_Click;
@@ -614,19 +614,19 @@ namespace FTAnalyzer
             // toolStripSeparator11
             // 
             toolStripSeparator11.Name = "toolStripSeparator11";
-            toolStripSeparator11.Size = new Size(234, 6);
+            toolStripSeparator11.Size = new Size(235, 6);
             // 
             // mnuLoadLocationsCSV
             // 
             mnuLoadLocationsCSV.Name = "mnuLoadLocationsCSV";
-            mnuLoadLocationsCSV.Size = new Size(237, 22);
+            mnuLoadLocationsCSV.Size = new Size(238, 22);
             mnuLoadLocationsCSV.Text = "Load Geocoded Locations CSV";
             mnuLoadLocationsCSV.Click += MnuLoadLocationsCSV_Click;
             // 
             // mnuLoadLocationsTNG
             // 
             mnuLoadLocationsTNG.Name = "mnuLoadLocationsTNG";
-            mnuLoadLocationsTNG.Size = new Size(237, 22);
+            mnuLoadLocationsTNG.Size = new Size(238, 22);
             mnuLoadLocationsTNG.Text = "Load Geocoded Locations TNG";
             mnuLoadLocationsTNG.Click += MnuLoadLocationsTNG_Click;
             // 
@@ -724,130 +724,130 @@ namespace FTAnalyzer
             // 
             mnuExport.DropDownItems.AddRange(new ToolStripItem[] { mnuIndividualsToExcel, mnuFamiliesToExcel, mnuFactsToExcel, MnuExportLocations, mnuSourcesToExcel, MnuCustomFactsToExcel, toolStripSeparator12, mnuDataErrorsToExcel, mnuSurnamesToExcel, toolStripSeparator8, mnuLooseBirthsToExcel, mnuLooseDeathsToExcel, toolStripSeparator9, mnuTreetopsToExcel, mnuWorldWarsToExcel, toolStripSeparator13, mnuDNA_GEDCOM, toolStripSeparator15, mnuJSON });
             mnuExport.Name = "mnuExport";
-            mnuExport.Size = new Size(53, 22);
+            mnuExport.Size = new Size(52, 22);
             mnuExport.Text = "Export";
             // 
             // mnuIndividualsToExcel
             // 
             mnuIndividualsToExcel.Name = "mnuIndividualsToExcel";
-            mnuIndividualsToExcel.Size = new Size(222, 22);
+            mnuIndividualsToExcel.Size = new Size(221, 22);
             mnuIndividualsToExcel.Text = "Individuals to Excel";
             mnuIndividualsToExcel.Click += IndividualsToExcelToolStripMenuItem_Click;
             // 
             // mnuFamiliesToExcel
             // 
             mnuFamiliesToExcel.Name = "mnuFamiliesToExcel";
-            mnuFamiliesToExcel.Size = new Size(222, 22);
+            mnuFamiliesToExcel.Size = new Size(221, 22);
             mnuFamiliesToExcel.Text = "Families to Excel";
             mnuFamiliesToExcel.Click += FamiliesToExcelToolStripMenuItem_Click;
             // 
             // mnuFactsToExcel
             // 
             mnuFactsToExcel.Name = "mnuFactsToExcel";
-            mnuFactsToExcel.Size = new Size(222, 22);
+            mnuFactsToExcel.Size = new Size(221, 22);
             mnuFactsToExcel.Text = "Facts to Excel";
             mnuFactsToExcel.Click += FactsToExcelToolStripMenuItem_Click;
             // 
             // MnuExportLocations
             // 
             MnuExportLocations.Name = "MnuExportLocations";
-            MnuExportLocations.Size = new Size(222, 22);
+            MnuExportLocations.Size = new Size(221, 22);
             MnuExportLocations.Text = "Locations to Excel";
             MnuExportLocations.Click += MnuExportLocations_Click;
             // 
             // mnuSourcesToExcel
             // 
             mnuSourcesToExcel.Name = "mnuSourcesToExcel";
-            mnuSourcesToExcel.Size = new Size(222, 22);
+            mnuSourcesToExcel.Size = new Size(221, 22);
             mnuSourcesToExcel.Text = "Sources to Excel";
             mnuSourcesToExcel.Click += MnuSourcesToExcel_Click;
             // 
             // MnuCustomFactsToExcel
             // 
             MnuCustomFactsToExcel.Name = "MnuCustomFactsToExcel";
-            MnuCustomFactsToExcel.Size = new Size(222, 22);
+            MnuCustomFactsToExcel.Size = new Size(221, 22);
             MnuCustomFactsToExcel.Text = "Custom Facts to Excel";
             MnuCustomFactsToExcel.Click += MnuCustomFactsToExcel_Click;
             // 
             // toolStripSeparator12
             // 
             toolStripSeparator12.Name = "toolStripSeparator12";
-            toolStripSeparator12.Size = new Size(219, 6);
+            toolStripSeparator12.Size = new Size(218, 6);
             // 
             // mnuDataErrorsToExcel
             // 
             mnuDataErrorsToExcel.Name = "mnuDataErrorsToExcel";
-            mnuDataErrorsToExcel.Size = new Size(222, 22);
+            mnuDataErrorsToExcel.Size = new Size(221, 22);
             mnuDataErrorsToExcel.Text = "Data Errors to Excel";
             mnuDataErrorsToExcel.Click += MnuDataErrorsToExcel_Click;
             // 
             // mnuSurnamesToExcel
             // 
             mnuSurnamesToExcel.Name = "mnuSurnamesToExcel";
-            mnuSurnamesToExcel.Size = new Size(222, 22);
+            mnuSurnamesToExcel.Size = new Size(221, 22);
             mnuSurnamesToExcel.Text = "Surnames to Excel";
             mnuSurnamesToExcel.Click += MnuSurnamesToExcel_Click;
             // 
             // toolStripSeparator8
             // 
             toolStripSeparator8.Name = "toolStripSeparator8";
-            toolStripSeparator8.Size = new Size(219, 6);
+            toolStripSeparator8.Size = new Size(218, 6);
             // 
             // mnuLooseBirthsToExcel
             // 
             mnuLooseBirthsToExcel.Name = "mnuLooseBirthsToExcel";
-            mnuLooseBirthsToExcel.Size = new Size(222, 22);
+            mnuLooseBirthsToExcel.Size = new Size(221, 22);
             mnuLooseBirthsToExcel.Text = "Loose Births to Excel";
             mnuLooseBirthsToExcel.Click += LooseBirthsToExcelToolStripMenuItem_Click;
             // 
             // mnuLooseDeathsToExcel
             // 
             mnuLooseDeathsToExcel.Name = "mnuLooseDeathsToExcel";
-            mnuLooseDeathsToExcel.Size = new Size(222, 22);
+            mnuLooseDeathsToExcel.Size = new Size(221, 22);
             mnuLooseDeathsToExcel.Text = "Loose Deaths to Excel";
             mnuLooseDeathsToExcel.Click += LooseDeathsToExcelToolStripMenuItem_Click;
             // 
             // toolStripSeparator9
             // 
             toolStripSeparator9.Name = "toolStripSeparator9";
-            toolStripSeparator9.Size = new Size(219, 6);
+            toolStripSeparator9.Size = new Size(218, 6);
             // 
             // mnuTreetopsToExcel
             // 
             mnuTreetopsToExcel.Name = "mnuTreetopsToExcel";
-            mnuTreetopsToExcel.Size = new Size(222, 22);
+            mnuTreetopsToExcel.Size = new Size(221, 22);
             mnuTreetopsToExcel.Text = "Current Treetops to Excel";
             mnuTreetopsToExcel.Click += MnuTreetopsToExcel_Click;
             // 
             // mnuWorldWarsToExcel
             // 
             mnuWorldWarsToExcel.Name = "mnuWorldWarsToExcel";
-            mnuWorldWarsToExcel.Size = new Size(222, 22);
+            mnuWorldWarsToExcel.Size = new Size(221, 22);
             mnuWorldWarsToExcel.Text = "Current World Wars to Excel";
             mnuWorldWarsToExcel.Click += MnuWorldWarsToExcel_Click;
             // 
             // toolStripSeparator13
             // 
             toolStripSeparator13.Name = "toolStripSeparator13";
-            toolStripSeparator13.Size = new Size(219, 6);
+            toolStripSeparator13.Size = new Size(218, 6);
             // 
             // mnuDNA_GEDCOM
             // 
             mnuDNA_GEDCOM.Name = "mnuDNA_GEDCOM";
-            mnuDNA_GEDCOM.Size = new Size(222, 22);
+            mnuDNA_GEDCOM.Size = new Size(221, 22);
             mnuDNA_GEDCOM.Text = "Minimalist DNA GEDCOM";
             mnuDNA_GEDCOM.Click += MnuDNA_GEDCOM_Click;
             // 
             // toolStripSeparator15
             // 
             toolStripSeparator15.Name = "toolStripSeparator15";
-            toolStripSeparator15.Size = new Size(219, 6);
+            toolStripSeparator15.Size = new Size(218, 6);
             toolStripSeparator15.Visible = false;
             // 
             // mnuJSON
             // 
             mnuJSON.Name = "mnuJSON";
-            mnuJSON.Size = new Size(222, 22);
+            mnuJSON.Size = new Size(221, 22);
             mnuJSON.Text = "JSON for Visualisations";
             mnuJSON.Visible = false;
             mnuJSON.Click += MnuJSON_Click;
@@ -856,7 +856,7 @@ namespace FTAnalyzer
             // 
             toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { optionsToolStripMenuItem, toolStripSeparator2, displayOptionsOnLoadToolStripMenuItem, resetToDefaultFormSizeToolStripMenuItem });
             toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            toolsToolStripMenuItem.Size = new Size(46, 22);
+            toolsToolStripMenuItem.Size = new Size(47, 22);
             toolsToolStripMenuItem.Text = "Tools";
             // 
             // optionsToolStripMenuItem
@@ -974,21 +974,21 @@ namespace FTAnalyzer
             // viewOnlineManualToolStripMenuItem
             // 
             viewOnlineManualToolStripMenuItem.Name = "viewOnlineManualToolStripMenuItem";
-            viewOnlineManualToolStripMenuItem.Size = new Size(254, 22);
+            viewOnlineManualToolStripMenuItem.Size = new Size(255, 22);
             viewOnlineManualToolStripMenuItem.Text = "View Online Manual";
             viewOnlineManualToolStripMenuItem.Click += ViewOnlineManualToolStripMenuItem_Click;
             // 
             // onlineGuidesToUsingFTAnalyzerToolStripMenuItem
             // 
             onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Name = "onlineGuidesToUsingFTAnalyzerToolStripMenuItem";
-            onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Size = new Size(254, 22);
+            onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Size = new Size(255, 22);
             onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Text = "Online Guides to Using FTAnalyzer";
             onlineGuidesToUsingFTAnalyzerToolStripMenuItem.Click += OnlineGuidesToUsingFTAnalyzerToolStripMenuItem_Click;
             // 
             // reportAnIssueToolStripMenuItem
             // 
             reportAnIssueToolStripMenuItem.Name = "reportAnIssueToolStripMenuItem";
-            reportAnIssueToolStripMenuItem.Size = new Size(254, 22);
+            reportAnIssueToolStripMenuItem.Size = new Size(255, 22);
             reportAnIssueToolStripMenuItem.Text = "Report an Issue";
             reportAnIssueToolStripMenuItem.Click += ReportAnIssueToolStripMenuItem_Click;
             // 
@@ -996,7 +996,7 @@ namespace FTAnalyzer
             // 
             facebookSupportGroupToolStripMenuItem.Image = Properties.Resources.flogo_rgb_hex_brc_site_250;
             facebookSupportGroupToolStripMenuItem.Name = "facebookSupportGroupToolStripMenuItem";
-            facebookSupportGroupToolStripMenuItem.Size = new Size(254, 22);
+            facebookSupportGroupToolStripMenuItem.Size = new Size(255, 22);
             facebookSupportGroupToolStripMenuItem.Text = "Facebook Support Page";
             facebookSupportGroupToolStripMenuItem.Click += FacebookSupportGroupToolStripMenuItem_Click;
             // 
@@ -1004,20 +1004,20 @@ namespace FTAnalyzer
             // 
             facebookUserGroupToolStripMenuItem.Image = Properties.Resources.flogo_rgb_hex_brc_site_250;
             facebookUserGroupToolStripMenuItem.Name = "facebookUserGroupToolStripMenuItem";
-            facebookUserGroupToolStripMenuItem.Size = new Size(254, 22);
+            facebookUserGroupToolStripMenuItem.Size = new Size(255, 22);
             facebookUserGroupToolStripMenuItem.Text = "Facebook User Group";
             facebookUserGroupToolStripMenuItem.Click += FacebookUserGroupToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(251, 6);
+            toolStripSeparator1.Size = new Size(252, 6);
             // 
             // getGoogleAPIKeyToolStripMenuItem
             // 
             getGoogleAPIKeyToolStripMenuItem.Image = Properties.Resources.GoogleMapsAPI;
             getGoogleAPIKeyToolStripMenuItem.Name = "getGoogleAPIKeyToolStripMenuItem";
-            getGoogleAPIKeyToolStripMenuItem.Size = new Size(254, 22);
+            getGoogleAPIKeyToolStripMenuItem.Size = new Size(255, 22);
             getGoogleAPIKeyToolStripMenuItem.Text = "Get Google API Key";
             getGoogleAPIKeyToolStripMenuItem.Click += GetGoogleAPIKeyToolStripMenuItem_Click;
             // 
@@ -1025,33 +1025,33 @@ namespace FTAnalyzer
             // 
             googleAPISetupGuideToolStripMenuItem.Image = Properties.Resources.GoogleMapsAPI;
             googleAPISetupGuideToolStripMenuItem.Name = "googleAPISetupGuideToolStripMenuItem";
-            googleAPISetupGuideToolStripMenuItem.Size = new Size(254, 22);
+            googleAPISetupGuideToolStripMenuItem.Size = new Size(255, 22);
             googleAPISetupGuideToolStripMenuItem.Text = "Google API Setup Guide";
             googleAPISetupGuideToolStripMenuItem.Click += GoogleAPISetupGuideToolStripMenuItem_Click;
             // 
             // toolStripSeparator14
             // 
             toolStripSeparator14.Name = "toolStripSeparator14";
-            toolStripSeparator14.Size = new Size(251, 6);
+            toolStripSeparator14.Size = new Size(252, 6);
             // 
             // privacyPolicyToolStripMenuItem
             // 
             privacyPolicyToolStripMenuItem.Name = "privacyPolicyToolStripMenuItem";
-            privacyPolicyToolStripMenuItem.Size = new Size(254, 22);
+            privacyPolicyToolStripMenuItem.Size = new Size(255, 22);
             privacyPolicyToolStripMenuItem.Text = "Privacy Policy";
             privacyPolicyToolStripMenuItem.Click += PrivacyPolicyToolStripMenuItem_Click;
             // 
             // whatsNewToolStripMenuItem
             // 
             whatsNewToolStripMenuItem.Name = "whatsNewToolStripMenuItem";
-            whatsNewToolStripMenuItem.Size = new Size(254, 22);
+            whatsNewToolStripMenuItem.Size = new Size(255, 22);
             whatsNewToolStripMenuItem.Text = "What's New";
             whatsNewToolStripMenuItem.Click += WhatsNewToolStripMenuItem_Click;
             // 
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(254, 22);
+            aboutToolStripMenuItem.Size = new Size(255, 22);
             aboutToolStripMenuItem.Text = "About";
             aboutToolStripMenuItem.Click += AboutToolStripMenuItem_Click;
             // 
@@ -1196,7 +1196,7 @@ namespace FTAnalyzer
             chkIgnoreUnnamedTwins.Location = new Point(287, 74);
             chkIgnoreUnnamedTwins.Margin = new Padding(4);
             chkIgnoreUnnamedTwins.Name = "chkIgnoreUnnamedTwins";
-            chkIgnoreUnnamedTwins.Size = new Size(92, 19);
+            chkIgnoreUnnamedTwins.Size = new Size(93, 19);
             chkIgnoreUnnamedTwins.TabIndex = 29;
             chkIgnoreUnnamedTwins.Text = "Ignore Twins";
             toolTips.SetToolTip(chkIgnoreUnnamedTwins, "Ignores duplicates where forename is unknown");
@@ -1496,7 +1496,7 @@ namespace FTAnalyzer
             dgWorldWars.RowHeadersVisible = false;
             dgWorldWars.RowHeadersWidth = 50;
             dgWorldWars.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgWorldWars.Size = new Size(1238, 261);
+            dgWorldWars.Size = new Size(1238, 315);
             dgWorldWars.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgWorldWars.TabIndex = 29;
             dgWorldWars.VirtualMode = true;
@@ -1579,7 +1579,7 @@ namespace FTAnalyzer
             ckbTTIgnoreLocations.Location = new Point(9, 121);
             ckbTTIgnoreLocations.Margin = new Padding(4);
             ckbTTIgnoreLocations.Name = "ckbTTIgnoreLocations";
-            ckbTTIgnoreLocations.Size = new Size(262, 19);
+            ckbTTIgnoreLocations.Size = new Size(263, 19);
             ckbTTIgnoreLocations.TabIndex = 27;
             ckbTTIgnoreLocations.Text = "Include Unknown Countries in Treetops Filter";
             ckbTTIgnoreLocations.UseVisualStyleBackColor = true;
@@ -1634,7 +1634,7 @@ namespace FTAnalyzer
             dgTreeTops.RowHeadersVisible = false;
             dgTreeTops.RowHeadersWidth = 50;
             dgTreeTops.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgTreeTops.Size = new Size(1238, 261);
+            dgTreeTops.Size = new Size(1238, 315);
             dgTreeTops.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgTreeTops.TabIndex = 28;
             dgTreeTops.VirtualMode = true;
@@ -2626,7 +2626,7 @@ namespace FTAnalyzer
             chkExcludeUnknownBirths.Margin = new Padding(4);
             chkExcludeUnknownBirths.Name = "chkExcludeUnknownBirths";
             chkExcludeUnknownBirths.RightToLeft = RightToLeft.Yes;
-            chkExcludeUnknownBirths.Size = new Size(265, 19);
+            chkExcludeUnknownBirths.Size = new Size(264, 19);
             chkExcludeUnknownBirths.TabIndex = 31;
             chkExcludeUnknownBirths.Text = "Exclude Individuals with unknown birth dates";
             chkExcludeUnknownBirths.UseVisualStyleBackColor = true;
@@ -2655,7 +2655,7 @@ namespace FTAnalyzer
             labCensusExcludeOverAge.Location = new Point(397, 45);
             labCensusExcludeOverAge.Margin = new Padding(4, 0, 4, 0);
             labCensusExcludeOverAge.Name = "labCensusExcludeOverAge";
-            labCensusExcludeOverAge.Size = new Size(193, 15);
+            labCensusExcludeOverAge.Size = new Size(192, 15);
             labCensusExcludeOverAge.TabIndex = 26;
             labCensusExcludeOverAge.Text = "Exclude individuals over the age of ";
             // 
@@ -4188,7 +4188,7 @@ namespace FTAnalyzer
             rtbToday.Margin = new Padding(4);
             rtbToday.Name = "rtbToday";
             rtbToday.ReadOnly = true;
-            rtbToday.Size = new Size(1230, 361);
+            rtbToday.Size = new Size(1230, 403);
             rtbToday.TabIndex = 17;
             rtbToday.Text = "";
             // 
