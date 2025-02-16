@@ -171,7 +171,7 @@ namespace FTAnalyzer.Core.Displays
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "AboutBox1";
-            Padding = new Padding(10, 10, 10, 10);
+            Padding = new Padding(10);
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterParent;
             Text = "AboutBox1";

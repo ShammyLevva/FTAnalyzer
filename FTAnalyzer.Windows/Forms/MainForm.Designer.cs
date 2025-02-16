@@ -2506,6 +2506,7 @@ namespace FTAnalyzer
             // 
             // btnShowCensusMissing
             // 
+            btnShowCensusMissing.FlatStyle = FlatStyle.System;
             btnShowCensusMissing.Location = new Point(7, 25);
             btnShowCensusMissing.Margin = new Padding(4);
             btnShowCensusMissing.Name = "btnShowCensusMissing";
@@ -2675,6 +2676,7 @@ namespace FTAnalyzer
             cenDate.AutoSize = true;
             cenDate.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             cenDate.Country = "Scotland";
+            cenDate.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cenDate.Location = new Point(15, 140);
             cenDate.Margin = new Padding(6);
             cenDate.Name = "cenDate";
