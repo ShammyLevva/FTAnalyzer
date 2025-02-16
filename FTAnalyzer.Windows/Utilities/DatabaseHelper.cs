@@ -145,12 +145,12 @@ namespace FTAnalyzer.Utilities
                     StartBackupRestoreDatabase();
                     if (File.Exists(saveDatabase.FileName))
                         File.Delete(saveDatabase.FileName);
-                    ZipFile zip = new(saveDatabase.FileName)
-                    {
-                        { DatabaseFile, string.Empty }
-                    };
-                    zip.SetComment(comment + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm"));
-                    zip.CommitUpdate();
+                    FastZip zip = new();
+                    string? path = Path.GetDirectoryName(DatabaseFile);
+                    if (path is null)
+                        throw new OpenDatabaseException("Could not identify existing database path");
+                    zip.CreateZip(saveDatabase.FileName, path, false, "Geocodes.s3db");
+                    //zip.SetComment(comment + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm"));
                     //EndBackupDatabase();
                     Application.UserAppDataRegistry.SetValue("Geocode Backup Directory", Path.GetDirectoryName(saveDatabase.FileName) ?? string.Empty);
                     UIHelpers.ShowMessage($"Database exported to {saveDatabase.FileName}", "FTAnalyzer Database Export Complete");
