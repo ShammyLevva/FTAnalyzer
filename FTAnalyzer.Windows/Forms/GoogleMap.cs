@@ -128,7 +128,7 @@ namespace FTAnalyzer.Forms
         {
             if (loc is null) return FactLocation.UNKNOWN;
             bool UK = loc.IsUnitedKingdom;
-            HashSet<string> types = new(locationTypes);
+            HashSet<string> types = [.. locationTypes];
             foreach (string type in types)
                 if (PLACES.Contains(type))
                     return FactLocation.PLACE;

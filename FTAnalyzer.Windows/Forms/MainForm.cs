@@ -615,9 +615,9 @@ namespace FTAnalyzer
         {
             HourGlass(this, true);
             Predicate<Individual> filter = CreateTreeTopsIndividualFilter();
-            List<IDisplayIndividual> treeTopsList = ft.GetTreeTops(filter).ToList();
+            List<IDisplayIndividual> treeTopsList = [.. ft.GetTreeTops(filter)];
             treeTopsList.Sort(new BirthDateComparer());
-            dgTreeTops.DataSource = new SortableBindingList<IDisplayIndividual>(treeTopsList);
+            dgTreeTops.DataSource = [.. treeTopsList];
             dgTreeTops.Focus();
             foreach (DataGridViewColumn c in dgTreeTops.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
@@ -637,9 +637,9 @@ namespace FTAnalyzer
             HourGlass(this, true);
             WWI = true;
             warDeadFilter = CreateWardeadIndividualFilter(new FactDate("BET 1869 AND 1904"), new FactDate("FROM 28 JUL 1914"));
-            List<IDisplayIndividual> warDeadList = ft.GetWorldWars(warDeadFilter).ToList();
+            List<IDisplayIndividual> warDeadList = [.. ft.GetWorldWars(warDeadFilter)];
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
-            dgWorldWars.DataSource = new SortableBindingList<IDisplayIndividual>(warDeadList);
+            dgWorldWars.DataSource = [.. warDeadList];
             dgWorldWars.Focus();
             foreach (DataGridViewColumn c in dgWorldWars.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
@@ -657,9 +657,9 @@ namespace FTAnalyzer
             HourGlass(this, true);
             WWI = false;
             warDeadFilter = CreateWardeadIndividualFilter(new FactDate("BET 1894 AND 1931"), new FactDate("FROM 1 SEP 1939"));
-            List<IDisplayIndividual> warDeadList = ft.GetWorldWars(warDeadFilter).ToList();
+            List<IDisplayIndividual> warDeadList = [.. ft.GetWorldWars(warDeadFilter)];
             warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
-            dgWorldWars.DataSource = new SortableBindingList<IDisplayIndividual>(warDeadList);
+            dgWorldWars.DataSource = [.. warDeadList];
             dgWorldWars.Focus();
             foreach (DataGridViewColumn c in dgWorldWars.Columns)
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
@@ -904,7 +904,7 @@ namespace FTAnalyzer
                 DataErrorGroup item = (DataErrorGroup)list.Items[indexChecked];
                 errors.AddRange(item.Errors);
             }
-            return new SortableBindingList<IDisplayDataError>(errors);
+            return [.. errors];
         }
         #endregion
 
@@ -2844,7 +2844,7 @@ namespace FTAnalyzer
         string GetRandomSurname()
         {
             IEnumerable<Individual> directs = ft.AllIndividuals.Filter(x => x.RelationType == Individual.DIRECT || x.RelationType == Individual.DESCENDANT);
-            List<string> surnames = directs.Select(x => x.Surname).Distinct().ToList();
+            List<string> surnames = [.. directs.Select(x => x.Surname).Distinct()];
             Random rnd = new();
             string surname;
             do
@@ -3115,7 +3115,7 @@ namespace FTAnalyzer
                 Predicate<Family> relationFilter = relTypesResearchSuggest.BuildFamilyFilter<Family>(x => x.RelationTypes);
                 if (txtColouredSurname.Text.Length > 0)
                     candidates = candidates.Filter(x => x.ContainsSurname(txtColouredSurname.Text, true));
-                List<Family> list = candidates.Filter(relationFilter).ToList();
+                List<Family> list = [.. candidates.Filter(relationFilter)];
                 list.Sort(new DefaultFamilyComparer());
                 foreach (Family family in list)
                 {
@@ -3263,7 +3263,7 @@ namespace FTAnalyzer
             if (cmbReferrals.Items.Count == 0)
             {
                 HourGlass(this, true);
-                List<Individual> list = ft.AllIndividuals.ToList();
+                List<Individual> list = [.. ft.AllIndividuals];
                 list.Sort(new NameComparer<Individual>(true, false));
                 foreach (Individual ind in list)
                     cmbReferrals.Items.Add(ind);
@@ -3292,7 +3292,7 @@ namespace FTAnalyzer
         void IndividualsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IExportIndividual>(ft.AllIndividuals)))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable([.. ft.AllIndividuals]))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportIndEvent);
             HourGlass(this, false);
@@ -3301,7 +3301,7 @@ namespace FTAnalyzer
         void FamiliesToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplayFamily>(ft.AllFamilies)))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable([.. ft.AllFamilies]))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportFamEvent);
             HourGlass(this, false);
@@ -3310,7 +3310,7 @@ namespace FTAnalyzer
         void FactsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<ExportFact>(ft.AllExportFacts)))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable([.. ft.AllExportFacts]))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportFactsEvent);
             HourGlass(this, false);
@@ -3355,7 +3355,7 @@ namespace FTAnalyzer
         void MnuExportLocations_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplayLocation>(ft.AllDisplayPlaces)))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable([.. ft.AllDisplayPlaces]))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportLocationsEvent);
             HourGlass(this, false);
@@ -3364,7 +3364,7 @@ namespace FTAnalyzer
         void MnuSourcesToExcel_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplaySource>(ft.AllSources)))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable([.. ft.AllSources]))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportSourcesEvent);
             HourGlass(this, false);
@@ -3373,7 +3373,7 @@ namespace FTAnalyzer
         void MnuCustomFactsToExcel_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplayCustomFact>(ft.AllCustomFacts)))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable([.. ft.AllCustomFacts]))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportCustomFactEvent);
             HourGlass(this, false);
@@ -3382,7 +3382,7 @@ namespace FTAnalyzer
         void MnuDataErrorsToExcel_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(new List<IDisplayDataError>(DataErrors(ckbDataErrors))))
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable([.. DataErrors(ckbDataErrors)]))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportDataErrorsEvent);
             HourGlass(this, false);
@@ -3392,9 +3392,9 @@ namespace FTAnalyzer
         {
             HourGlass(this, true);
             Predicate<Individual> filter = CreateTreeTopsIndividualFilter();
-            List<IExportIndividual> treeTopsList = ft.GetExportTreeTops(filter).ToList();
+            List<IExportIndividual> treeTopsList = [.. ft.GetExportTreeTops(filter)];
             treeTopsList.Sort(new BirthDateComparer());
-            SortableBindingList<IExportIndividual> list = new(treeTopsList);
+            SortableBindingList<IExportIndividual> list = [.. treeTopsList];
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list.ToList()))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportTreeTopsEvent);
@@ -3407,9 +3407,9 @@ namespace FTAnalyzer
             if (warDeadFilter is not null)
             {
                 ListtoDataTableConvertor convertor = new();
-                List<IExportIndividual> warDeadList = ft.GetExportWorldWars(warDeadFilter).ToList();
+                List<IExportIndividual> warDeadList = [.. ft.GetExportWorldWars(warDeadFilter)];
                 warDeadList.Sort(new BirthDateComparer(BirthDateComparer.ASCENDING));
-                SortableBindingList<IExportIndividual> list = new(warDeadList);
+                SortableBindingList<IExportIndividual> list = [.. warDeadList];
                 using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list.ToList()))
                     ExportToExcel.Export(dt);
                 Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportWorldWarsEvent);
@@ -3434,7 +3434,7 @@ namespace FTAnalyzer
                     new SortableBindingList<IDisplaySurnames>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked))).ConfigureAwait(true);
                 tspbTabProgress.Visible = false;
             }
-            List<IDisplaySurnames> list = new(stats);
+            List<IDisplaySurnames> list = [.. stats];
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(list))
                 ExportToExcel.Export(dt);
             await Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportSurnamesEvent);
@@ -3502,7 +3502,7 @@ namespace FTAnalyzer
         [SupportedOSPlatform("windows10.0.17763")]
         public void SetFactTypeList(CheckedListBox ckbFactSelect, CheckedListBox ckbFactExclude, Predicate<ExportFact> filter)
         {
-            List<string> factTypes = ft.AllExportFacts.Filter(filter).Select(x => x.FactType).Distinct().ToList();
+            List<string> factTypes = [.. ft.AllExportFacts.Filter(filter).Select(x => x.FactType).Distinct()];
             factTypes.Sort();
             ckbFactSelect.Items.Clear();
             ckbFactExclude.Items.Clear();

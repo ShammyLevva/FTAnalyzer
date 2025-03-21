@@ -146,9 +146,7 @@ namespace FTAnalyzer.Utilities
                     if (File.Exists(saveDatabase.FileName))
                         File.Delete(saveDatabase.FileName);
                     FastZip zip = new();
-                    string? path = Path.GetDirectoryName(DatabaseFile);
-                    if (path is null)
-                        throw new OpenDatabaseException("Could not identify existing database path");
+                    string? path = Path.GetDirectoryName(DatabaseFile) ?? throw new OpenDatabaseException("Could not identify existing database path");
                     zip.CreateZip(saveDatabase.FileName, path, false, "Geocodes.s3db");
                     //zip.SetComment(comment + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm"));
                     //EndBackupDatabase();

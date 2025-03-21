@@ -28,11 +28,11 @@ namespace FTAnalyzer.Forms
                 ExtensionMethods.DoubleBuffered(dgReportSheet, true);
                 settingSelections = false;
                 _country = country;
-                _reportList = new SortableBindingList<IDisplayColourCensus>(reportList);
+                _reportList = [.. reportList];
                 reportFormHelper = new ReportFormHelper(this, "Colour Census Report", dgReportSheet, ResetTable, "Colour Census");
 
                 boldFont = new(dgReportSheet.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
-                styles = new Dictionary<int, DataGridViewCellStyle>();
+                styles = [];
                 DataGridViewCellStyle notAlive = new();
                 notAlive.BackColor = notAlive.ForeColor = CensusColourValues[(int)CensusColours.NOT_ALIVE];
                 styles.Add(0, notAlive);
@@ -288,7 +288,7 @@ namespace FTAnalyzer.Forms
 
         List<IDisplayColourCensus> BuildFilter(CensusColours toFind, bool all)
         {
-            List<IDisplayColourCensus> result = new();
+            List<IDisplayColourCensus> result = [];
             foreach (IDisplayColourCensus row in _reportList)
             {
                 if (all)
@@ -348,10 +348,12 @@ namespace FTAnalyzer.Forms
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(CensusColours.NO_CENSUS, true));
                     break;
                 case 2: // All Found (All Green)
-                    list = new List<IDisplayColourCensus>();
-                    list.AddRange(BuildFilter(CensusColours.CENSUS_PRESENT_NOT_LC_YEAR, true));
-                    list.AddRange(BuildFilter(CensusColours.CENSUS_PRESENT_LC_PRESENT, true));
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list.Distinct().ToList<IDisplayColourCensus>());
+                    list =
+                    [
+                        .. BuildFilter(CensusColours.CENSUS_PRESENT_NOT_LC_YEAR, true),
+                        .. BuildFilter(CensusColours.CENSUS_PRESENT_LC_PRESENT, true),
+                    ];
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>([.. list.Distinct()]);
                     break;
                 case 3: // Lost Cousins Missing (Yellows)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(CensusColours.CENSUS_PRESENT_LC_MISSING, false));
@@ -360,19 +362,23 @@ namespace FTAnalyzer.Forms
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(CensusColours.LC_PRESENT_NO_CENSUS, false));
                     break;
                 case 5: // Some Outside UK (Some Dark Grey)
-                    list = new List<IDisplayColourCensus>();
-                    list.AddRange(BuildFilter(CensusColours.OVERSEAS_CENSUS, false));
-                    list.AddRange(BuildFilter(CensusColours.OUT_OF_COUNTRY, false));
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list.Distinct().ToList<IDisplayColourCensus>());
+                    list =
+                    [
+                        .. BuildFilter(CensusColours.OVERSEAS_CENSUS, false),
+                        .. BuildFilter(CensusColours.OUT_OF_COUNTRY, false),
+                    ];
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>([.. list.Distinct()]);
                     break;
                 case 6: // Some Missing (Some Red)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(CensusColours.NO_CENSUS, false));
                     break;
                 case 7: // Some Found (Some Green)
-                    list = new List<IDisplayColourCensus>();
-                    list.AddRange(BuildFilter(CensusColours.CENSUS_PRESENT_NOT_LC_YEAR, false));
-                    list.AddRange(BuildFilter(CensusColours.CENSUS_PRESENT_LC_PRESENT, false));
-                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(list.Distinct().ToList<IDisplayColourCensus>());
+                    list =
+                    [
+                        .. BuildFilter(CensusColours.CENSUS_PRESENT_NOT_LC_YEAR, false),
+                        .. BuildFilter(CensusColours.CENSUS_PRESENT_LC_PRESENT, false),
+                    ];
+                    dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>([.. list.Distinct()]);
                     break;
                 case 8: // Known Missing (Mid Green)
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(CensusColours.KNOWN_MISSING, false));
