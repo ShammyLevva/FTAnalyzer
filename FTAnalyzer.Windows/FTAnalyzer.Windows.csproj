@@ -210,7 +210,7 @@
   <ItemGroup>
     <PackageReference Include="AdvancedDataGridView" Version="3.0.0" />
     <PackageReference Include="GoogleAnalyticsTracker.Simple" Version="7.0.1" />
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.72" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.12.0" />
     <PackageReference Include="log4net" Version="3.0.4" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Printing.DataGridViewPrint" Version="3.0.0" />
@@ -219,10 +219,10 @@
     <PackageReference Include="SharpMap.Layers.BruTile" Version="3.0.0" />
     <PackageReference Include="SharpMap.UI" Version="3.0.0" />
     <PackageReference Include="SharpZipLib" Version="1.4.2" />
-    <PackageReference Include="System.Buffers" Version="4.6.0" />
-    <PackageReference Include="System.Memory" Version="4.6.0" />
-    <PackageReference Include="System.Numerics.Vectors" Version="4.6.0" />
-    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.6.0" />
+    <PackageReference Include="System.Buffers" Version="4.6.1" />
+    <PackageReference Include="System.Memory" Version="4.6.2" />
+    <PackageReference Include="System.Numerics.Vectors" Version="4.6.1" />
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.6.2" />
   </ItemGroup>
 
   <ItemGroup>
