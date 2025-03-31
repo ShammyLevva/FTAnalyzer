@@ -144,9 +144,9 @@ namespace FTAnalyzer
             labErrorTabAggrMatch = new Label();
             labErrorTabLooseMatch = new Label();
             chkIgnoreUnnamedTwins = new CheckBox();
-            dgDataErrors = new Forms.Controls.VirtualDGVDataErrors();
-            dgCountries = new Forms.Controls.VirtualDGVLocations();
-            dgRegions = new Forms.Controls.VirtualDGVLocations();
+            dgDataErrors = new FTAnalyzer.Forms.Controls.VirtualDGVDataErrors();
+            dgCountries = new FTAnalyzer.Forms.Controls.VirtualDGVLocations();
+            dgRegions = new FTAnalyzer.Forms.Controls.VirtualDGVLocations();
             btnRandomSurnameColour = new Button();
             cmbColourFamily = new ComboBox();
             ckbFactExclude = new CheckedListBox();
@@ -164,9 +164,9 @@ namespace FTAnalyzer
             btnWWI = new Button();
             labWorldWarsSurname = new Label();
             txtWorldWarsSurname = new TextBox();
-            dgWorldWars = new Forms.Controls.VirtualDGVIndividuals();
-            wardeadRelation = new Forms.Controls.RelationTypes();
-            wardeadCountry = new Forms.Controls.CensusCountry();
+            dgWorldWars = new FTAnalyzer.Forms.Controls.VirtualDGVIndividuals();
+            wardeadRelation = new FTAnalyzer.Forms.Controls.RelationTypes();
+            wardeadCountry = new FTAnalyzer.Forms.Controls.CensusCountry();
             ctxViewNotes = new ContextMenuStrip(components);
             mnuViewNotes = new ToolStripMenuItem();
             tabTreetops = new TabPage();
@@ -175,9 +175,9 @@ namespace FTAnalyzer
             btnTreeTops = new Button();
             labTreeTopsSurname = new Label();
             txtTreetopsSurname = new TextBox();
-            dgTreeTops = new Forms.Controls.VirtualDGVIndividuals();
-            treetopsRelation = new Forms.Controls.RelationTypes();
-            treetopsCountry = new Forms.Controls.CensusCountry();
+            dgTreeTops = new FTAnalyzer.Forms.Controls.VirtualDGVIndividuals();
+            treetopsRelation = new FTAnalyzer.Forms.Controls.RelationTypes();
+            treetopsCountry = new FTAnalyzer.Forms.Controls.CensusCountry();
             tabResearchSuggestions = new TabPage();
             gbFilters = new GroupBox();
             labResearchTabFamilyFilter = new Label();
@@ -194,7 +194,7 @@ namespace FTAnalyzer
             btnUKColourCensus = new Button();
             btnUSColourCensus = new Button();
             btnColourBMD = new Button();
-            relTypesResearchSuggest = new Forms.Controls.RelationTypes();
+            relTypesResearchSuggest = new FTAnalyzer.Forms.Controls.RelationTypes();
             tabLostCousins = new TabPage();
             LCSubTabs = new TabControl();
             LCReportsTab = new TabPage();
@@ -215,13 +215,13 @@ namespace FTAnalyzer
             btnLC1881EW = new Button();
             btnLC1881Canada = new Button();
             btnLC1881Scot = new Button();
-            relTypesLC = new Forms.Controls.RelationTypes();
+            relTypesLC = new FTAnalyzer.Forms.Controls.RelationTypes();
             rtbLostCousins = new RichTextBox();
             linkLabel2 = new LinkLabel();
             LabLostCousinsWeb = new LinkLabel();
             btnLCnoCensus = new Button();
             LCUpdatesTab = new TabPage();
-            rtbLCoutput = new Utilities.ScrollingRichTextBox();
+            rtbLCoutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             btnViewInvalidRefs = new Button();
             btnLCPotentialUploads = new Button();
             labLCUpdatesCensusRec = new Label();
@@ -233,7 +233,7 @@ namespace FTAnalyzer
             txtLCEmail = new TextBox();
             txtLCPassword = new MaskedTextBox();
             LCVerifyTab = new TabPage();
-            rtbCheckAncestors = new Utilities.ScrollingRichTextBox();
+            rtbCheckAncestors = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             btnCheckMyAncestors = new Button();
             lblCheckAncestors = new Label();
             tabCensus = new TabPage();
@@ -258,8 +258,8 @@ namespace FTAnalyzer
             txtCensusSurname = new TextBox();
             labCensusExcludeOverAge = new Label();
             udAgeFilter = new NumericUpDown();
-            cenDate = new Forms.Controls.CensusDateSelector();
-            relTypesCensus = new Forms.Controls.RelationTypes();
+            cenDate = new FTAnalyzer.Forms.Controls.CensusDateSelector();
+            relTypesCensus = new FTAnalyzer.Forms.Controls.RelationTypes();
             groupBox9 = new GroupBox();
             groupBox11 = new GroupBox();
             BtnAutoCreatedCensusFacts = new Button();
@@ -283,11 +283,11 @@ namespace FTAnalyzer
             tabCountries = new TabPage();
             tabRegions = new TabPage();
             tabSubRegions = new TabPage();
-            dgSubRegions = new Forms.Controls.VirtualDGVLocations();
+            dgSubRegions = new FTAnalyzer.Forms.Controls.VirtualDGVLocations();
             tabAddresses = new TabPage();
-            dgAddresses = new Forms.Controls.VirtualDGVLocations();
+            dgAddresses = new FTAnalyzer.Forms.Controls.VirtualDGVLocations();
             tabPlaces = new TabPage();
-            dgPlaces = new Forms.Controls.VirtualDGVLocations();
+            dgPlaces = new FTAnalyzer.Forms.Controls.VirtualDGVLocations();
             tabDisplayProgress = new TabPage();
             splitGedcom = new SplitContainer();
             panel2 = new Panel();
@@ -301,20 +301,20 @@ namespace FTAnalyzer
             pbIndividuals = new ProgressBar();
             labSources = new Label();
             pbSources = new ProgressBar();
-            rtbOutput = new Utilities.ScrollingRichTextBox();
+            rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             tabSelector = new TabControl();
             tabMainLists = new TabPage();
             tabMainListsSelector = new TabControl();
             tabIndividuals = new TabPage();
-            dgIndividuals = new Forms.Controls.VirtualDGVIndividuals();
+            dgIndividuals = new FTAnalyzer.Forms.Controls.VirtualDGVIndividuals();
             tabFamilies = new TabPage();
-            dgFamilies = new Forms.Controls.VirtualDGVFamily();
+            dgFamilies = new FTAnalyzer.Forms.Controls.VirtualDGVFamily();
             tabSources = new TabPage();
-            dgSources = new Forms.Controls.VirtualDGVSources();
+            dgSources = new FTAnalyzer.Forms.Controls.VirtualDGVSources();
             tabOccupations = new TabPage();
-            dgOccupations = new Forms.Controls.VirtualDGVOccupations();
+            dgOccupations = new FTAnalyzer.Forms.Controls.VirtualDGVOccupations();
             tabCustomFacts = new TabPage();
-            dgCustomFacts = new Forms.Controls.VirtualDGVCustomFacts();
+            dgCustomFacts = new FTAnalyzer.Forms.Controls.VirtualDGVCustomFacts();
             tabErrorsFixes = new TabPage();
             tabErrorFixSelector = new TabControl();
             tabDataErrors = new TabPage();
@@ -330,23 +330,23 @@ namespace FTAnalyzer
             labCalcDuplicates = new Label();
             pbDuplicates = new ProgressBar();
             btnCancelDuplicates = new Button();
-            dgDuplicates = new Forms.Controls.VirtualDGVDuplicates();
+            dgDuplicates = new FTAnalyzer.Forms.Controls.VirtualDGVDuplicates();
             tabLooseBirths = new TabPage();
-            dgLooseBirths = new Forms.Controls.VirtualDGVLooseBirths();
+            dgLooseBirths = new FTAnalyzer.Forms.Controls.VirtualDGVLooseBirths();
             tabLooseDeaths = new TabPage();
-            dgLooseDeaths = new Forms.Controls.VirtualDGVLooseDeaths();
+            dgLooseDeaths = new FTAnalyzer.Forms.Controls.VirtualDGVLooseDeaths();
             tabLooseInfo = new TabPage();
-            dgLooseInfo = new Forms.Controls.VirtualDGVLooseInfo();
+            dgLooseInfo = new FTAnalyzer.Forms.Controls.VirtualDGVLooseInfo();
             tabSurnames = new TabPage();
             chkSurnamesIgnoreCase = new CheckBox();
             btnShowSurnames = new Button();
-            dgSurnames = new Forms.Controls.VirtualDGVSurnames();
+            dgSurnames = new FTAnalyzer.Forms.Controls.VirtualDGVSurnames();
             Surname = new DataGridViewTextBoxColumn();
             URI = new DataGridViewLinkColumn();
             Individuals = new DataGridViewTextBoxColumn();
             Families = new DataGridViewTextBoxColumn();
             Marriages = new DataGridViewTextBoxColumn();
-            reltypesSurnames = new Forms.Controls.RelationTypes();
+            reltypesSurnames = new FTAnalyzer.Forms.Controls.RelationTypes();
             tabFacts = new TabPage();
             label1 = new Label();
             panelFactsSurname = new Panel();
@@ -362,9 +362,9 @@ namespace FTAnalyzer
             btnDeselectAllFactTypes = new Button();
             btnSelectAllFactTypes = new Button();
             ckbFactSelect = new CheckedListBox();
-            relTypesFacts = new Forms.Controls.RelationTypes();
+            relTypesFacts = new FTAnalyzer.Forms.Controls.RelationTypes();
             tabToday = new TabPage();
-            rtbToday = new Utilities.ScrollingRichTextBox();
+            rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             labTodayYearStep = new Label();
             nudToday = new NumericUpDown();
             btnUpdateTodaysEvents = new Button();
@@ -4022,6 +4022,7 @@ namespace FTAnalyzer
             btnDuplicateFacts.TabIndex = 50;
             btnDuplicateFacts.Text = "Show Duplicate Facts of Selected Fact Type";
             btnDuplicateFacts.UseVisualStyleBackColor = true;
+            btnDuplicateFacts.Click += BtnDuplicateFacts_Click;
             // 
             // btnShowFacts
             // 
@@ -4032,6 +4033,7 @@ namespace FTAnalyzer
             btnShowFacts.TabIndex = 49;
             btnShowFacts.Text = "Show Facts for Individuals with Selected Fact Types";
             btnShowFacts.UseVisualStyleBackColor = true;
+            btnShowFacts.Click += BtnShowFacts_Click;
             // 
             // labFactsSurname
             // 
