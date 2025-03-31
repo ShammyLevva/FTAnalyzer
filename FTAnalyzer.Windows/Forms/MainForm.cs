@@ -478,6 +478,7 @@ namespace FTAnalyzer
             mnuRestore.Enabled = true;
             mnuLoadLocationsCSV.Enabled = true;
             mnuCloseGEDCOM.Enabled = false;
+            mnuDuplicatesToExcel.Enabled = false;
             BuildRecentList();
         }
         #endregion
@@ -2734,6 +2735,7 @@ namespace FTAnalyzer
             labCalcDuplicates.Visible = visible;
             pbDuplicates.Visible = visible;
             labCompletion.Visible = visible;
+            mnuDuplicatesToExcel.Enabled = !visible; // hide whilst setting up make visible when done
         }
 
         void ResetDuplicatesTable()
@@ -3388,6 +3390,18 @@ namespace FTAnalyzer
             HourGlass(this, false);
         }
 
+        void MnuDuplicatesToExcel_Click(object sender, EventArgs e)
+        {
+            HourGlass(this, true);
+            if (duplicateData is not null)
+            {
+                using (DataTable dt = ListtoDataTableConvertor.ToDataTable([.. duplicateData]))
+                    ExportToExcel.Export(dt);
+                Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportDuplicatesEvent);
+            }
+            HourGlass(this, false);
+        }
+
         void MnuTreetopsToExcel_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
@@ -3865,46 +3879,6 @@ namespace FTAnalyzer
             {
                 UIHelpers.ShowMessage(ex.Message, "FTAnalyzer");
             }
-        }
-
-        void TabSurnames_Layout(object sender, LayoutEventArgs e)
-        {
-
-        }
-
-        void TabFacts_Layout(object sender, LayoutEventArgs e)
-        {
-
-        }
-
-        void TabCensus_Layout(object sender, LayoutEventArgs e)
-        {
-
-        }
-
-        void TabLostCousins_Layout(object sender, LayoutEventArgs e)
-        {
-
-        }
-
-        void TabResearchSuggestions_Layout(object sender, LayoutEventArgs e)
-        {
-
-        }
-
-        void TabTreetops_Layout(object sender, LayoutEventArgs e)
-        {
-
-        }
-
-        void TabWorldWars_Layout(object sender, LayoutEventArgs e)
-        {
-
-        }
-
-        void TabToday_Layout(object sender, LayoutEventArgs e)
-        {
-
         }
     }
 }

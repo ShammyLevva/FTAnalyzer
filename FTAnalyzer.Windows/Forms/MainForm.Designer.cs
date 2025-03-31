@@ -87,6 +87,7 @@ namespace FTAnalyzer
             MnuCustomFactsToExcel = new ToolStripMenuItem();
             toolStripSeparator12 = new ToolStripSeparator();
             mnuDataErrorsToExcel = new ToolStripMenuItem();
+            mnuDuplicatesToExcel = new ToolStripMenuItem();
             mnuSurnamesToExcel = new ToolStripMenuItem();
             toolStripSeparator8 = new ToolStripSeparator();
             mnuLooseBirthsToExcel = new ToolStripMenuItem();
@@ -722,7 +723,7 @@ namespace FTAnalyzer
             // 
             // mnuExport
             // 
-            mnuExport.DropDownItems.AddRange(new ToolStripItem[] { mnuIndividualsToExcel, mnuFamiliesToExcel, mnuFactsToExcel, MnuExportLocations, mnuSourcesToExcel, MnuCustomFactsToExcel, toolStripSeparator12, mnuDataErrorsToExcel, mnuSurnamesToExcel, toolStripSeparator8, mnuLooseBirthsToExcel, mnuLooseDeathsToExcel, toolStripSeparator9, mnuTreetopsToExcel, mnuWorldWarsToExcel, toolStripSeparator13, mnuDNA_GEDCOM, toolStripSeparator15, mnuJSON });
+            mnuExport.DropDownItems.AddRange(new ToolStripItem[] { mnuIndividualsToExcel, mnuFamiliesToExcel, mnuFactsToExcel, MnuExportLocations, mnuSourcesToExcel, MnuCustomFactsToExcel, toolStripSeparator12, mnuDataErrorsToExcel, mnuDuplicatesToExcel, mnuSurnamesToExcel, toolStripSeparator8, mnuLooseBirthsToExcel, mnuLooseDeathsToExcel, toolStripSeparator9, mnuTreetopsToExcel, mnuWorldWarsToExcel, toolStripSeparator13, mnuDNA_GEDCOM, toolStripSeparator15, mnuJSON });
             mnuExport.Name = "mnuExport";
             mnuExport.Size = new Size(52, 22);
             mnuExport.Text = "Export";
@@ -780,6 +781,14 @@ namespace FTAnalyzer
             mnuDataErrorsToExcel.Size = new Size(221, 22);
             mnuDataErrorsToExcel.Text = "Data Errors to Excel";
             mnuDataErrorsToExcel.Click += MnuDataErrorsToExcel_Click;
+            // 
+            // mnuDuplicatesToExcel
+            // 
+            mnuDuplicatesToExcel.Enabled = false;
+            mnuDuplicatesToExcel.Name = "mnuDuplicatesToExcel";
+            mnuDuplicatesToExcel.Size = new Size(221, 22);
+            mnuDuplicatesToExcel.Text = "Duplicates to Excel";
+            mnuDuplicatesToExcel.Click += MnuDuplicatesToExcel_Click;
             // 
             // mnuSurnamesToExcel
             // 
@@ -1409,7 +1418,6 @@ namespace FTAnalyzer
             tabWorldWars.Text = " World Wars ";
             tabWorldWars.ToolTipText = "Find men of fighting age during WWI & WWII";
             tabWorldWars.UseVisualStyleBackColor = true;
-            tabWorldWars.Layout += TabWorldWars_Layout;
             // 
             // ckbMilitaryOnly
             // 
@@ -1556,7 +1564,6 @@ namespace FTAnalyzer
             tabTreetops.TabIndex = 7;
             tabTreetops.Text = " Treetops ";
             tabTreetops.UseVisualStyleBackColor = true;
-            tabTreetops.Layout += TabTreetops_Layout;
             // 
             // ckbTTIncludeOnlyOneParent
             // 
@@ -1676,7 +1683,6 @@ namespace FTAnalyzer
             tabResearchSuggestions.TabIndex = 12;
             tabResearchSuggestions.Text = " Research Suggestions ";
             tabResearchSuggestions.UseVisualStyleBackColor = true;
-            tabResearchSuggestions.Layout += TabResearchSuggestions_Layout;
             // 
             // gbFilters
             // 
@@ -1883,7 +1889,6 @@ namespace FTAnalyzer
             tabLostCousins.TabIndex = 5;
             tabLostCousins.Text = " Lost Cousins ";
             tabLostCousins.UseVisualStyleBackColor = true;
-            tabLostCousins.Layout += TabLostCousins_Layout;
             // 
             // LCSubTabs
             // 
@@ -2417,7 +2422,6 @@ namespace FTAnalyzer
             tabCensus.TabIndex = 0;
             tabCensus.Text = " Census ";
             tabCensus.UseVisualStyleBackColor = true;
-            tabCensus.Layout += TabCensus_Layout;
             // 
             // groupBox2
             // 
@@ -3851,7 +3855,6 @@ namespace FTAnalyzer
             tabSurnames.TabIndex = 14;
             tabSurnames.Text = " Surnames ";
             tabSurnames.UseVisualStyleBackColor = true;
-            tabSurnames.Layout += TabSurnames_Layout;
             // 
             // chkSurnamesIgnoreCase
             // 
@@ -3989,7 +3992,6 @@ namespace FTAnalyzer
             tabFacts.TabIndex = 13;
             tabFacts.Text = " Facts ";
             tabFacts.UseVisualStyleBackColor = true;
-            tabFacts.Layout += TabFacts_Layout;
             // 
             // label1
             // 
@@ -4182,7 +4184,6 @@ namespace FTAnalyzer
             tabToday.TabIndex = 17;
             tabToday.Text = " On This Day ";
             tabToday.UseVisualStyleBackColor = true;
-            tabToday.Layout += TabToday_Layout;
             // 
             // rtbToday
             // 
@@ -4912,6 +4913,7 @@ namespace FTAnalyzer
         private RichTextBox rtbLostCousins;
         private LinkLabel linkLabel2;
         private LinkLabel LabLostCousinsWeb;
+        private ToolStripMenuItem mnuDuplicatesToExcel;
     }
 }
 
