@@ -1,3 +1,18 @@
+## BETA RELEASE Version 10.0.0.0-beta 10 - 31st March 2025  
+**Updates**
+Added export duplicates to Excel option  
+
+**Bugfixes**  
+Fixed crash if child has no name at all  
+Fixed Facts tabs buttons not working  
+
+## BETA RELEASE Version 10.0.0.0-beta 9 - 1st March 2025  
+**Bugfixes**  
+Fixed crash if individual has no name at all  
+Fixed bounding boxes of frames should hopefully finally fix scroll bar issue caused by hiDPI setting  
+Updated packages to use new zip methods this may break loading old backups  
+Correct misspelling of SEYCHELLES
+
 ## BETA RELEASE Version 10.0.0.0-beta 8 - 16th December 2023  
 **Bugfixes**  
 Lots of minor control tweaks to fix positioning with different font sizes  
