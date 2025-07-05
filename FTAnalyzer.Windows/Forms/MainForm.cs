@@ -98,24 +98,26 @@ namespace FTAnalyzer
                     string webData = client.GetStringAsync("https://github.com/ShammyLevva/FTAnalyzer").Result;
                     doc.LoadHtml(webData);
                 }
-                HtmlNode versionNode = doc.DocumentNode.SelectSingleNode("//div[@class='d-flex']/span");
-                string webVersion = versionNode.InnerText.ToUpper().Replace("VERSION", "").Trim();
-                string thisVersion = VERSION;
-                if (VERSION.Contains("-beta"))
-                    thisVersion = VERSION[..VERSION.IndexOf('-')];
-                Version web = new(webVersion);
-                Version local = new(thisVersion);
-                if (web > local)
+                HtmlNode? versionNode = doc.DocumentNode.SelectSingleNode("//div[@class='d-flex']/span");
+                if (versionNode is not null)
                 {
-                    string text = $"Version installed: {VERSION}, Web version available: {webVersion}\nDo you want to go to website to download the latest version?\nSelect Cancel to visit release website for older machines.";
-                    DialogResult download = UIHelpers.ShowMessage(text, "FTAnalyzer", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                    if (download == DialogResult.Yes)
-                        SpecialMethods.VisitWebsite("https://www.microsoft.com/en-gb/p/ftanalyzer/9pmjl9hvpl7x?cid=clickonceappupgrade");
-                    if (download == DialogResult.Cancel)
-                        SpecialMethods.VisitWebsite("https://github.com/ShammyLevva/FTAnalyzer/releases");
+                    string webVersion = versionNode.InnerText.ToUpper().Replace("VERSION", "").Trim();
+                    string thisVersion = VERSION;
+                    if (VERSION.Contains("-beta"))
+                        thisVersion = VERSION[..VERSION.IndexOf('-')];
+                    Version web = new(webVersion);
+                    Version local = new(thisVersion);
+                    if (web > local)
+                    {
+                        string text = $"Version installed: {VERSION}, Web version available: {webVersion}\nDo you want to go to website to download the latest version?\nSelect Cancel to visit release website for older machines.";
+                        DialogResult download = UIHelpers.ShowMessage(text, "FTAnalyzer", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                        if (download == DialogResult.Yes)
+                            SpecialMethods.VisitWebsite("https://www.microsoft.com/en-gb/p/ftanalyzer/9pmjl9hvpl7x?cid=clickonceappupgrade");
+                        if (download == DialogResult.Cancel)
+                            SpecialMethods.VisitWebsite("https://github.com/ShammyLevva/FTAnalyzer/releases");
+                    }
+                    await Analytics.CheckProgramUsageAsync();
                 }
-
-                await Analytics.CheckProgramUsageAsync();
             }
             catch (Exception e)
             {
