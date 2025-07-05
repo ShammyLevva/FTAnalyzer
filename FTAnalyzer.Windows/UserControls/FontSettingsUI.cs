@@ -108,10 +108,10 @@ namespace FTAnalyzer.UserControls
                         fontHeight = 37;
                         break;
                     default:
-                        selectedFont = new(lbSample.Font.Name, 8.25f);
-                        fontWidth = 5.8f;
-                        fontSize = 8.25f;
-                        fontHeight = 22;
+                        selectedFont = new(lbSample.Font.Name, 10f);
+                        fontWidth = 6.6f;
+                        fontSize = 10f;
+                        fontHeight = 27;
                         break;
                 }
                 lbSample.Font = selectedFont;

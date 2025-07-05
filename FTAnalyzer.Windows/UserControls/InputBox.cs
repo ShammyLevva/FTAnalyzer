@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Text;
-using System.Drawing;
-
-namespace FTAnalyzer
+﻿namespace FTAnalyzer
 {
     public static class InputBox
     {
@@ -15,6 +9,7 @@ namespace FTAnalyzer
             TextBox textBox = new();
             Button buttonOk = new();
             Button buttonCancel = new();
+            float scale = Properties.FontSettings.Default.FontSize / 8f;
 
             form.Text = title;
             label.Text = promptText;
@@ -25,19 +20,19 @@ namespace FTAnalyzer
             buttonOk.DialogResult = DialogResult.OK;
             buttonCancel.DialogResult = DialogResult.Cancel;
 
-            label.SetBounds(9, 20, 372, 13);
-            textBox.SetBounds(12, 36, 372, 20);
-            buttonOk.SetBounds(228, 72, 75, 23);
-            buttonCancel.SetBounds(309, 72, 75, 23);
+            label.SetBounds((int)(9f * scale), (int)(20f * scale), (int)(372f * scale), (int)(13f * scale));
+            textBox.SetBounds((int)(12f * scale), (int)(36f * scale), (int)(372f * scale), (int)(23f * scale));
+            buttonOk.SetBounds((int)(228f * scale), (int)(72f * scale), (int)(75f * scale), (int)(23f * scale));
+            buttonCancel.SetBounds((int)(309f * scale), (int)(72f * scale), (int)(75f * scale), (int)(23f * scale));
 
             label.AutoSize = true;
             textBox.Anchor |= AnchorStyles.Right;
             buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
 
-            form.ClientSize = new Size(396, 107);
-            form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
-            form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
+            form.ClientSize = new Size((int)(396f * scale), (int)(140f * scale));
+            form.Controls.AddRange([label, textBox, buttonOk, buttonCancel]);
+            form.ClientSize = new Size(Math.Max((int)(300f * scale), label.Right + (int)(10f * scale)), form.ClientSize.Height);
             form.FormBorderStyle = FormBorderStyle.FixedDialog;
             form.StartPosition = FormStartPosition.CenterScreen;
             form.MinimizeBox = false;
