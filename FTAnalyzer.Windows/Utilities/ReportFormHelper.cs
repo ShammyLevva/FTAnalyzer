@@ -1,12 +1,11 @@
-﻿using FTAnalyzer.Utilities;
-using FTAnalyzer.Properties;
+﻿using FTAnalyzer.Properties;
 using Printing.DataGridViewPrint.Tools;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing.Printing;
 using System.Xml;
 
-namespace FTAnalyzer
+namespace FTAnalyzer.Utilities
 {
     public class ReportFormHelper : IDisposable
     {
@@ -14,7 +13,7 @@ namespace FTAnalyzer
         readonly PrintDocument printDocument;
         readonly PrintDialog printDialog;
         readonly PrintPreviewDialog printPreviewDialog;
-        readonly Form parent;
+        internal readonly Form parent;
         readonly Tuple<int, int> defaultLocation;
         readonly Tuple<int, int> defaultSize;
         readonly Action _resetTable;
@@ -22,6 +21,7 @@ namespace FTAnalyzer
         readonly bool _saveForm;
 
         public DataGridView ReportGrid { get; private set; }
+
         public string PrintTitle { get; set; }
 
         public ReportFormHelper(Form parent, string title, DataGridView report, Action resetTable, string registry, bool saveForm = true)
@@ -79,17 +79,19 @@ namespace FTAnalyzer
             printPreviewDialog.ShowDialog(parent);
         }
 
-        public void DoExportToExcel<T>(DataGridViewColumnCollection shown = null)
+        public virtual void DoExportToExcel<T>(DataGridViewColumnCollection shown = null)
         {
             if (ReportGrid.DataSource is null || ReportGrid.RowCount == 0)
                 return;
             parent.Cursor = Cursors.WaitCursor;
-            SortableBindingList<T> gridDatasource = ReportGrid.DataSource as SortableBindingList<T> ?? new();
-            if (gridDatasource.Count == 0)
-                return;
-            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(gridDatasource.ToList(), shown))
+            SortableBindingList<T> gridDatasource = ReportGrid.DataSource as SortableBindingList<T> ?? [];
+            if (gridDatasource.Count != 0)
+            {
+                using DataTable dt = ListtoDataTableConvertor.ToDataTable(gridDatasource.ToList(), shown);
                 ExportToExcel.Export(dt);
+            }
             parent.Cursor = Cursors.Default;
+            MessageBox.Show($"Excel Export of {gridDatasource.Count} rows completed");
         }
 
         public void DoExportToExcel(List<IExportReferrals> list)
