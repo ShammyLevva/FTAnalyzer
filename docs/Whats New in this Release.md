@@ -1,3 +1,8 @@
+## BETA RELEASE Version 10.0.0.0-beta 11 - 6th July 2025  
+**Bugfixes**  
+Fixed Exports to Excel not using virtual grid  
+Fixed size of input box  
+
 ## BETA RELEASE Version 10.0.0.0-beta 10 - 31st March 2025  
 **Updates**
 Added export duplicates to Excel option  
