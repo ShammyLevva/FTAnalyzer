@@ -1,4 +1,4 @@
-﻿namespace FTAnalyzer
+﻿namespace FTAnalyzer.UserControls
 {
     public static class InputBox
     {
@@ -30,16 +30,16 @@
             buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
 
-            form.ClientSize = new Size((int)(396f * scale), (int)(140f * scale));
+            form.Size = new Size((int)(396f * scale), (int)(160f * scale));
             form.Controls.AddRange([label, textBox, buttonOk, buttonCancel]);
-            form.ClientSize = new Size(Math.Max((int)(300f * scale), label.Right + (int)(10f * scale)), (int)(120f * scale));
+            form.ClientSize = new Size(Math.Max((int)(300f * scale), label.Right + (int)(10f * scale)), (int)(140f * scale));
             form.FormBorderStyle = FormBorderStyle.FixedDialog;
             form.StartPosition = FormStartPosition.CenterScreen;
             form.MinimizeBox = false;
             form.MaximizeBox = false;
             form.AcceptButton = buttonOk;
             form.CancelButton = buttonCancel;
-
+             
             DialogResult dialogResult = form.ShowDialog();
             value = textBox.Text;
             return dialogResult;
