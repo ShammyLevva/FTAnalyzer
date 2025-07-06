@@ -32,7 +32,7 @@
 
             form.ClientSize = new Size((int)(396f * scale), (int)(140f * scale));
             form.Controls.AddRange([label, textBox, buttonOk, buttonCancel]);
-            form.ClientSize = new Size(Math.Max((int)(300f * scale), label.Right + (int)(10f * scale)), form.ClientSize.Height);
+            form.ClientSize = new Size(Math.Max((int)(300f * scale), label.Right + (int)(10f * scale)), (int)(120f * scale));
             form.FormBorderStyle = FormBorderStyle.FixedDialog;
             form.StartPosition = FormStartPosition.CenterScreen;
             form.MinimizeBox = false;
