@@ -35,7 +35,7 @@ namespace FTAnalyzer
         Font normalFont;
         bool loading;
         bool WWI;
-        ReportFormHelper rfhDuplicates;
+        VirtualReportFormHelper<IDisplayDuplicateIndividual> rfhDuplicates;
 
         public MainForm()
         {
@@ -71,7 +71,7 @@ namespace FTAnalyzer
             RegisterEventHandlers();
             Text = $"Family Tree Analyzer v{VERSION}";
             SetHeightWidth();
-            rfhDuplicates = new ReportFormHelper(this, "Duplicates", dgDuplicates, ResetDuplicatesTable, "Duplicates", false);
+            rfhDuplicates = new(this, "Duplicates", dgDuplicates, ResetDuplicatesTable, "Duplicates", false);
             ft.LoadStandardisedNames(Application.StartupPath);
             tsCountLabel.Text = string.Empty;
             tsHintsLabel.Text = "Welcome to Family Tree Analyzer, if you have any questions please raise them on the User group - see help menu for details";
