@@ -17,7 +17,7 @@ namespace FTAnalyzer.Forms
             sources = new SortableBindingList<IDisplaySource>();
             dgSources.AutoGenerateColumns = false;
             ExtensionMethods.DoubleBuffered(dgSources, true);
-            reportFormHelper = new ReportFormHelper(this, this.Text, dgSources, this.ResetTable, "Sources");
+            reportFormHelper = new ReportFormHelper(this, Text, dgSources, ResetTable, "Sources");
             if (fact is not null) // checks for not null 
                 AddSources(fact);
         }
