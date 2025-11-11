@@ -210,9 +210,9 @@
   <ItemGroup>
     <PackageReference Include="AdvancedDataGridView" Version="3.0.0" />
     <PackageReference Include="GoogleAnalyticsTracker.Simple" Version="7.0.1" />
-    <PackageReference Include="HtmlAgilityPack" Version="1.12.2" />
-    <PackageReference Include="log4net" Version="3.1.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
+    <PackageReference Include="log4net" Version="3.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Printing.DataGridViewPrint" Version="3.0.0" />
     <PackageReference Include="ProjNET" Version="2.1.0" />
     <PackageReference Include="SharpMap.Extensions" Version="3.0.0" />
