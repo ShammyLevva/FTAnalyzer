@@ -68,7 +68,7 @@ namespace FTAnalyzer.Forms.Controls
             
             // Setup map selector menu
             DisplayStyle = ToolStripItemDisplayStyle.Text;
-            DropDownItems.AddRange(new ToolStripItem[] {
+            DropDownItems.AddRange([
             mnuOpenStreetMap,
             mnuOpenHistoricMap,
             mnuBingMapAerial,
@@ -77,7 +77,7 @@ namespace FTAnalyzer.Forms.Controls
             mnuNLS1843_1882,
             mnuNLS1885_1900,
             mnuNLS1921_1930
-            });
+            ]);
             ImageTransparentColor = Color.Magenta;
             Name = "mnuMapStyle";
             Size = new Size(71, 22);

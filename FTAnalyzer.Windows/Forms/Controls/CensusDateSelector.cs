@@ -1,6 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
 
 namespace FTAnalyzer.Forms.Controls
 {
@@ -67,6 +65,7 @@ namespace FTAnalyzer.Forms.Controls
             SetControlWidth();
         }
 
+        [DefaultValue(Countries.SCOTLAND)]
         public string Country
         {
             get { return country; }

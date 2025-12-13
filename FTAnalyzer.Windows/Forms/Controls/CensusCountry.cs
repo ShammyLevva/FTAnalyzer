@@ -1,5 +1,6 @@
 ﻿using FTAnalyzer.Filters;
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms.Controls
@@ -19,6 +20,7 @@ namespace FTAnalyzer.Forms.Controls
         public bool Canada { get { return rbCanada.Checked; } }
         public bool USA { get { return rbUSA.Checked; } }
 
+        [DefaultValue(false)]
         public bool UKEnabled
         {
             get { return rbUK.Enabled; }
@@ -39,6 +41,7 @@ namespace FTAnalyzer.Forms.Controls
             }
         }
 
+        [DefaultValue("Census Country")]
         public string Title {
             get { return groupBox1.Text; }
             set { 

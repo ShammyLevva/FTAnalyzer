@@ -1,5 +1,6 @@
 ﻿using FTAnalyzer.Filters;
 using FTAnalyzer.Utilities;
+using System.ComponentModel;
 
 namespace FTAnalyzer.Forms.Controls
 {
@@ -10,6 +11,7 @@ namespace FTAnalyzer.Forms.Controls
         public bool Directs => ckbDirects.Checked;
         public bool Blood => ckbBlood.Checked;
         public bool Marriage => ckbMarriage.Checked;
+        [DefaultValue(true)]
         public bool MarriedToDB { get => ckbMarriageDB.Checked; set => ckbMarriageDB.Checked = value; }
         public bool Unknown => ckbUnknown.Checked;
         public bool Descendant => ckbDescendants.Checked;
@@ -83,7 +85,7 @@ namespace FTAnalyzer.Forms.Controls
 
         void Tickbox_CheckedChanged(object sender, EventArgs e) => OnRelationTypesChanged();
 
-         void RelationTypes_Layout(object sender, LayoutEventArgs e)
+        void RelationTypes_Layout(object sender, LayoutEventArgs e)
         {
             UIHelpers.MoveControl(ckbMarriage, ckbDirects, UIHelpers.Direction.RIGHT);
             UIHelpers.MoveControl(ckbUnknown, ckbMarriage, UIHelpers.Direction.RIGHT);

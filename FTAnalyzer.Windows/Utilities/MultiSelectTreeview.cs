@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 namespace FTAnalyzer.Utilities
 {
     public class MultiSelectTreeview : TreeView
@@ -6,6 +8,7 @@ namespace FTAnalyzer.Utilities
         #region Selected Node(s) Properties
 
         readonly List<TreeNode> m_SelectedNodes;
+        [DefaultValue(null)]
         public List<TreeNode> SelectedNodes
         {
             get => m_SelectedNodes;
@@ -24,6 +27,7 @@ namespace FTAnalyzer.Utilities
 
         // Note we use the new keyword to Hide the native treeview's SelectedNode property.
         private TreeNode m_SelectedNode;
+        [DefaultValue(null)]
         public new TreeNode SelectedNode
         {
             get => m_SelectedNode;

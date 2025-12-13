@@ -137,7 +137,7 @@ namespace FTAnalyzer.Forms.Controls
             VirtualGridFiltered?.Invoke(null, args);
         }
 
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DefaultValue(null), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public new SortableBindingList<T> DataSource
         {
             get => _dataSource;

@@ -1,6 +1,5 @@
-﻿using System;
-using System.Windows.Forms;
-using BruTile.Web;
+﻿using BruTile.Web;
+using System.ComponentModel;
 using static FTAnalyzer.Forms.Controls.ToolStripMapSelector;
 
 namespace FTAnalyzer.Forms.Controls
@@ -22,7 +21,9 @@ namespace FTAnalyzer.Forms.Controls
             Click += eventHandler;
         }
 
+        [DefaultValue(null)]
         public HttpTileSource TileSource { get; set; }
+        [DefaultValue(null)]
         public LinkLabelType LinkLabelType { get; set; }
     }
 }
