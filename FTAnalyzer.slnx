@@ -1,0 +1,48 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="CD_ROM" />
+    <BuildType Name="Debug" />
+    <BuildType Name="DebugDSProjection" />
+    <BuildType Name="DVD-5" />
+    <BuildType Name="Release" />
+    <BuildType Name="ReleaseDSProjection" />
+    <BuildType Name="SingleImage" />
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/.nuget/">
+    <File Path=".nuget/NuGet.Config" />
+    <File Path=".nuget/NuGet.exe" />
+    <File Path=".nuget/NuGet.targets" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="../FTAnalyzer.Shared/FTAnalyzer.Shared/FTAnalyzer.Shared.shproj" />
+  <Project Path="FTAnalyzer.Windows/FTAnalyzer.Windows.csproj">
+    <BuildType Solution="CD_ROM|*" Project="Debug" />
+    <BuildType Solution="DebugDSProjection|*" Project="Debug" />
+    <BuildType Solution="DVD-5|*" Project="Debug" />
+    <BuildType Solution="ReleaseDSProjection|*" Project="Release" />
+    <BuildType Solution="SingleImage|*" Project="Debug" />
+  </Project>
+  <Project Path="Installer.Net8/Installer.Net8.vdproj" Type="Installer">
+    <BuildType Solution="CD_ROM|*" Project="Debug" />
+    <BuildType Solution="DebugDSProjection|*" Project="Debug" />
+    <BuildType Solution="DVD-5|*" Project="Debug" />
+    <BuildType Solution="ReleaseDSProjection|*" Project="Release" />
+    <BuildType Solution="SingleImage|*" Project="Debug" />
+  </Project>
+  <Project Path="UnitTests/UnitTests.csproj">
+    <BuildType Solution="CD_ROM|*" Project="Debug" />
+    <BuildType Solution="DebugDSProjection|*" Project="Debug" />
+    <BuildType Solution="DVD-5|*" Project="Debug" />
+    <BuildType Solution="ReleaseDSProjection|*" Project="Release" />
+    <BuildType Solution="SingleImage|*" Project="Debug" />
+    <Build Solution="Release|Any CPU" Project="false" />
+  </Project>
+  <Properties Name="TestCaseManagementSettings" Scope="PostLoad">
+    <Property Name="CategoryFile" Value="MultiSelectTreeView.vsmdi" />
+  </Properties>
+</Solution>
