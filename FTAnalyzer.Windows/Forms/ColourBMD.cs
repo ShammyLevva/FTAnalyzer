@@ -29,7 +29,7 @@ namespace FTAnalyzer.Forms
                 reportFormHelper = new(this, "Colour BMD Report", dgBMDReportSheet, ResetTable, "Colour BMD");
                 ExtensionMethods.DoubleBuffered(dgBMDReportSheet, true);
                 settingSelections = false;
-                boldFont = new(dgBMDReportSheet.DefaultCellStyle.Font, FontStyle.Bold);
+                boldFont = new(dgBMDReportSheet.DefaultCellStyle.Font ?? SystemFonts.DefaultFont, FontStyle.Bold);
                 styles = [];
                 DataGridViewCellStyle notRequired = new();
                 notRequired.BackColor = notRequired.ForeColor = BMDColourValues[(int)BMDColours.EMPTY];
