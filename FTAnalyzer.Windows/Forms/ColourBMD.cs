@@ -96,11 +96,17 @@ namespace FTAnalyzer.Forms
 
         void ResetTable()
         {
-            dgBMDReportSheet.Sort(dgBMDReportSheet.Columns["BirthDate"], ListSortDirection.Ascending);
-            dgBMDReportSheet.Sort(dgBMDReportSheet.Columns["Forenames"], ListSortDirection.Ascending);
-            dgBMDReportSheet.Sort(dgBMDReportSheet.Columns["Surname"], ListSortDirection.Ascending);
-            foreach (DataGridViewColumn column in dgBMDReportSheet.Columns)
-                column.Width = column.MinimumWidth;
+            DataGridViewColumn? birthdate = dgBMDReportSheet.Columns["BirthDate"];
+            DataGridViewColumn? forenames = dgBMDReportSheet.Columns["Forenames"];
+            DataGridViewColumn? surname = dgBMDReportSheet.Columns["Surname"];
+            if (birthdate is not null && forenames is not null && surname is not null)
+            {
+                dgBMDReportSheet.Sort(birthdate, ListSortDirection.Ascending);
+                dgBMDReportSheet.Sort(forenames, ListSortDirection.Ascending);
+                dgBMDReportSheet.Sort(surname, ListSortDirection.Ascending);
+                foreach (DataGridViewColumn column in dgBMDReportSheet.Columns)
+                    column.Width = column.MinimumWidth;
+            }
         }
 
         void DgReportSheet_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -117,7 +123,7 @@ namespace FTAnalyzer.Forms
                 // colors/formatting to work in print/preview.
                 DataGridViewCell thisCell = dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
 
-                string relation = (string)cell.Value;
+                string relation = (cell.Value?.ToString()) ?? string.Empty;
                 if (relation == "Direct Ancestor")
                 {
                     e.CellStyle.Font = boldFont;
@@ -133,10 +139,9 @@ namespace FTAnalyzer.Forms
             }
             else
             {
-                DataGridViewCellStyle? style = dgBMDReportSheet.DefaultCellStyle;
                 DataGridViewCell cell = dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 BMDColours value = (BMDColours)cell.Value;
-                styles.TryGetValue(value, out style);
+                styles.TryGetValue(value, out DataGridViewCellStyle? style);
                 if (style is not null)
                 {
                     e.CellStyle.BackColor = style.BackColor;
@@ -218,7 +223,8 @@ namespace FTAnalyzer.Forms
                 {
                     DataGridViewCell cell = dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
                     BMDColours value = (BMDColours)cell.Value;
-                    IDisplayColourBMD person = (IDisplayColourBMD)dgBMDReportSheet.Rows[e.RowIndex].DataBoundItem;
+                    IDisplayColourBMD? person = (IDisplayColourBMD?)dgBMDReportSheet.Rows[e.RowIndex].DataBoundItem;
+                    if (person is null) return;
                     Individual? ind = ft.GetIndividual(person.IndividualID);
                     if (e.ColumnIndex == birthColumnIndex || e.ColumnIndex == birthColumnIndex + 1)
                     {
@@ -256,8 +262,9 @@ namespace FTAnalyzer.Forms
                 }
                 else if (e.ColumnIndex >= 0)
                 {
-                    string indID = (string)dgBMDReportSheet.CurrentRow.Cells["IndividualID"].Value;
-                    MainForm.ShowIndividualsFacts(indID);
+                    string indID = dgBMDReportSheet.CurrentRow.Cells["IndividualID"].Value.ToString() ?? string.Empty;
+                    if(indID != string.Empty) 
+                        MainForm.ShowIndividualsFacts(indID);
                 }
             }
         }
@@ -402,8 +409,9 @@ namespace FTAnalyzer.Forms
         {
             if (dgBMDReportSheet.CurrentRow is not null)
             {
-                IDisplayColourBMD ds = (IDisplayColourBMD)dgBMDReportSheet.CurrentRow.DataBoundItem;
-                MainForm.ShowIndividualsFacts(ds.IndividualID);
+                IDisplayColourBMD? ds = (IDisplayColourBMD?)dgBMDReportSheet.CurrentRow.DataBoundItem;
+                if(ds is not null)
+                    MainForm.ShowIndividualsFacts(ds.IndividualID);
             }
         }
 

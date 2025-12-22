@@ -71,8 +71,6 @@ namespace FTAnalyzer.Forms
             Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsFamiliesEvent);
         }
 
-        public enum AlternateFacts { AllFacts, PreferredOnly, AlternateOnly }
-
         public Facts(IEnumerable<Individual> individuals, List<string> factTypes, List<string> excludedTypes, AlternateFacts alternateFacts)
             : this()
         {
@@ -189,13 +187,20 @@ namespace FTAnalyzer.Forms
             SetupFacts();
             //dgFacts.Columns["CensusReference"].Visible = true;
             dgFacts.Columns["IgnoreFact"].Visible = true;
-            dgFacts.Sort(dgFacts.Columns["DateofBirth"], ListSortDirection.Ascending);
-            dgFacts.Sort(dgFacts.Columns["CensusReference"], ListSortDirection.Ascending);
+            DataGridViewColumn? dateofbirth = dgFacts.Columns["DateofBirth"];
+            DataGridViewColumn? censusref = dgFacts.Columns["CensusReference"];
+            if (dateofbirth is not null && censusref is not null)
+            {
+                dgFacts.Sort(dateofbirth, ListSortDirection.Ascending);
+                dgFacts.Sort(censusref, ListSortDirection.Ascending);
+            }
             dgFacts.ReadOnly = false;
             sep1.Visible = true;
             btnShowHideFacts.Visible = true;
             Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsCensusRefIssueEvent);
         }
+        public enum AlternateFacts { AllFacts, PreferredOnly, AlternateOnly }
+
 
         #region IgnoreList
         public void SerializeIgnoreList()
@@ -249,7 +254,8 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == 1)
             {
-                DisplayFact ignoreFact = (DisplayFact)dgFacts.Rows[e.RowIndex].DataBoundItem;
+                DisplayFact? ignoreFact = (DisplayFact?)dgFacts.Rows[e.RowIndex].DataBoundItem;
+                if (ignoreFact is null) return;
                 ignoreFact.IgnoreFact = !(bool)dgFacts.Rows[e.RowIndex].Cells["IgnoreFact"].Value; // value will be value before click so invert it 
                 if (ignoreFact.IgnoreFact)
                 {  //ignoring this record so add it to the list if its not already present
@@ -262,8 +268,8 @@ namespace FTAnalyzer.Forms
             }
             if (e.RowIndex >= 0 && e.ColumnIndex == dgFacts.Columns["CensusReference"].Index)
             {
-                DisplayFact df = (DisplayFact)dgFacts.Rows[e.RowIndex].DataBoundItem;
-                if (df.CensusReference.URL.Length > 0)
+                DisplayFact? df = (DisplayFact?)dgFacts.Rows[e.RowIndex].DataBoundItem;
+                if (df is not null && df.CensusReference.URL.Length > 0)
                     SpecialMethods.VisitWebsite(df.CensusReference.URL);
             }
         }
@@ -278,8 +284,8 @@ namespace FTAnalyzer.Forms
             {
                 if (btnShowHideFacts.Checked)
                 {
-                    DisplayFact fact = (DisplayFact)row.DataBoundItem;
-                    row.Visible = !fact.IgnoreFact;
+                    DisplayFact? fact = (DisplayFact?)row.DataBoundItem;
+                    row.Visible = fact is null || !fact.IgnoreFact;
                 }
                 else
                     row.Visible = true;
@@ -391,8 +397,8 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == 0)
             {
-                DisplayFact f = (DisplayFact)dgFacts.Rows[e.RowIndex].DataBoundItem;
-                e.ToolTipText = f.Fact.FactErrorMessage;
+                DisplayFact? f = (DisplayFact?)dgFacts.Rows[e.RowIndex].DataBoundItem;
+                e.ToolTipText = f?.Fact.FactErrorMessage;
             }
         }
 
@@ -400,7 +406,8 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex > 0)
             {
-                DisplayFact f = (DisplayFact)dgFacts.Rows[e.RowIndex].DataBoundItem;
+                DisplayFact? f = (DisplayFact?)dgFacts.Rows[e.RowIndex].DataBoundItem;
+                if (f is null) return;
                 DataGridViewCell cell = dgFacts.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 if (f.Fact.FactErrorLevel != Fact.FactError.GOOD)
                 {
@@ -426,7 +433,8 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                DisplayFact f = (DisplayFact)dgFacts.Rows[e.RowIndex].DataBoundItem;
+                DisplayFact? f = (DisplayFact?)dgFacts.Rows[e.RowIndex].DataBoundItem;
+                if (f is null) return;
                 if (f.Fact.FactType == Fact.REPORT)
                 {
                     if (f.Ind is null)

@@ -176,7 +176,7 @@ namespace FTAnalyzer.Forms
             FactLocation? loc = dgLocations.CurrentRow is not null ? dgLocations.CurrentRow.DataBoundItem as FactLocation : null;
             SortableBindingList<IDisplayGeocodedLocation> filteredLocations = ApplyFilters(null);
             // store sort order
-            DataGridViewColumn sortCol = dgLocations.SortedColumn;
+            DataGridViewColumn? sortCol = dgLocations.SortedColumn;
             ListSortDirection sortOrder = dgLocations.SortOrder == SortOrder.Descending ? ListSortDirection.Descending : ListSortDirection.Ascending;
             dgLocations.DataSource = filteredLocations;
             //restore sort order
@@ -376,8 +376,8 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                IDisplayGeocodedLocation loc = (IDisplayGeocodedLocation)dgLocations.Rows[e.RowIndex].DataBoundItem;
-                e.ToolTipText = $"Geocoding status: {loc.Geocoded}";
+                IDisplayGeocodedLocation? loc = (IDisplayGeocodedLocation?)dgLocations.Rows[e.RowIndex].DataBoundItem;
+                e.ToolTipText = loc is null ? string.Empty : $"Geocoding status: {loc.Geocoded}";
             }
         }
 
@@ -386,8 +386,9 @@ namespace FTAnalyzer.Forms
             if (!ft.Geocoding && e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 Cursor = Cursors.WaitCursor;
-                FactLocation loc = (FactLocation)dgLocations.Rows[e.RowIndex].DataBoundItem;
-                EditLocation(loc);
+                FactLocation? loc = (FactLocation?)dgLocations.Rows[e.RowIndex].DataBoundItem;
+                if(loc is not null)
+                    EditLocation(loc);
             }
         }
 

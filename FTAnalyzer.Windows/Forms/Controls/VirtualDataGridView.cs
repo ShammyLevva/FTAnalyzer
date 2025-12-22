@@ -14,7 +14,7 @@ namespace FTAnalyzer.Forms.Controls
         internal SortableBindingList<T> _fulllist;
         public string FilterCountText { get; private set; }
 
-        public VirtualDataGridView()
+        protected VirtualDataGridView()
         {
             _dataSource = [];
             _fulllist = [];
@@ -60,7 +60,7 @@ namespace FTAnalyzer.Forms.Controls
                 int pos = lastsort.IndexOf("] ");
                 string direction = pos > 0 ? lastsort.Substring(pos + 2, 3) : "ASC";
                 ListSortDirection sortDirection = direction == "ASC" ? ListSortDirection.Ascending : ListSortDirection.Descending;
-                DataGridViewColumn sortColumn = Columns[column] is null ? Columns[0] : Columns[column];
+                DataGridViewColumn sortColumn = Columns[column] ?? Columns[0];
                 Sort(sortColumn, sortDirection);
             }
         }
@@ -134,7 +134,7 @@ namespace FTAnalyzer.Forms.Controls
             {
                 FilterText = FilterCountText
             };
-            VirtualGridFiltered?.Invoke(null, args);
+            VirtualGridFiltered?.Invoke(this, args);
         }
 
         [DefaultValue(null), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
@@ -250,12 +250,12 @@ namespace FTAnalyzer.Forms.Controls
             }
         }
 
-        public override void Sort(DataGridViewColumn dgvColumn, ListSortDirection direction)
+        public override void Sort(DataGridViewColumn dataGridViewColumn, ListSortDirection direction)
         {
-            if (_dataSource is null || dgvColumn is null || dgvColumn.SortMode == DataGridViewColumnSortMode.NotSortable)
+            if (_dataSource is null || dataGridViewColumn is null || dataGridViewColumn.SortMode == DataGridViewColumnSortMode.NotSortable)
                 return;
 
-            PropertyComparer comparer = new(dgvColumn.DataPropertyName, direction);
+            PropertyComparer comparer = new(dataGridViewColumn.DataPropertyName, direction);
             _dataSource.Sort(comparer);
             DataView dataView = BuildDataTable(_dataSource).DefaultView;
             base.DataSource = dataView;
@@ -272,7 +272,7 @@ namespace FTAnalyzer.Forms.Controls
             e.Value = GetValueFor(data, Columns[e.ColumnIndex].DataPropertyName);
         }
 
-        void OnColumnWidthChanged(object? sender, DataGridViewColumnEventArgs e)
+        static void OnColumnWidthChanged(object? sender, DataGridViewColumnEventArgs e)
         {
             Debug.WriteLine($"Column {e.Column.Name} changed width to {e.Column.Width}");
         }
@@ -284,11 +284,11 @@ namespace FTAnalyzer.Forms.Controls
             readonly PropertyInfo _accessor = typeof(T).GetProperty(propertyName);
             readonly int _direction = direction == ListSortDirection.Ascending ? 1 : -1;
 
-            public int Compare(T? ind1, T? ind2)
+            public int Compare(T? x, T? y)
             {
-                IComparable? val2 = _accessor?.GetValue(ind2) as IComparable;
+                IComparable? val2 = _accessor?.GetValue(y) as IComparable;
 
-                if (_accessor?.GetValue(ind1) is not IComparable val1)
+                if (_accessor?.GetValue(x) is not IComparable val1)
                     return val2 is null ? 0 : _direction * -1;
 
                 return _direction * val1.CompareTo(val2);

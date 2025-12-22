@@ -127,9 +127,15 @@ namespace FTAnalyzer.Forms
 
         void ApplyDefaultSort()
         {
-            dgReportSheet.Sort(dgReportSheet.Columns["BirthDate"], ListSortDirection.Ascending);
-            dgReportSheet.Sort(dgReportSheet.Columns["Forenames"], ListSortDirection.Ascending);
-            dgReportSheet.Sort(dgReportSheet.Columns["Surname"], ListSortDirection.Ascending);
+            DataGridViewColumn? birthdate = dgReportSheet.Columns["BirthDate"];
+            DataGridViewColumn? forenames = dgReportSheet.Columns["Forenames"];
+            DataGridViewColumn? surname = dgReportSheet.Columns["Surname"];
+            if (birthdate is not null && forenames is not null && surname is not null)
+            {
+                dgReportSheet.Sort(birthdate, ListSortDirection.Ascending);
+                dgReportSheet.Sort(forenames, ListSortDirection.Ascending);
+                dgReportSheet.Sort(surname, ListSortDirection.Ascending);
+            }
         }
 
         void DgReportSheet_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -141,7 +147,7 @@ namespace FTAnalyzer.Forms
             if (e.ColumnIndex < startColumnIndex || e.ColumnIndex > endColumnIndex)
             {
                 DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells["Relation"];
-                string relation = (string)cell.Value;
+                string relation = (cell.Value?.ToString()) ?? string.Empty;
                 if (relation == "Direct Ancestor")
                     e.CellStyle.Font = boldFont;
             }
@@ -222,7 +228,8 @@ namespace FTAnalyzer.Forms
                     int value = (int)cell.Value;
                     if (value >= 1 && value <= 7) // allows any type of record to search census
                     {
-                        IDisplayColourCensus person = (IDisplayColourCensus)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
+                        IDisplayColourCensus? person = (IDisplayColourCensus?)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
+                        if (person is null) return;
                         int censusYear;
                         if (_country.Equals(Countries.UNITED_STATES))
                             censusYear = 1790 + (e.ColumnIndex - startColumnIndex) * 10;
@@ -262,8 +269,9 @@ namespace FTAnalyzer.Forms
                 }
                 else if (e.ColumnIndex >= 0)
                 {
-                    string indID = (string)dgReportSheet.CurrentRow.Cells["IndividualID"].Value;
-                    MainForm.ShowIndividualsFacts(indID);
+                    string indID = (dgReportSheet.CurrentRow.Cells["IndividualID"].Value?.ToString()) ?? string.Empty;
+                    if(indID != string.Empty)
+                        MainForm.ShowIndividualsFacts(indID);
                 }
             }
         }
@@ -310,8 +318,7 @@ namespace FTAnalyzer.Forms
                               row.C1921 == CensusColours.NOT_ALIVE && row.C1939 == CensusColours.NOT_ALIVE && toFind != 0)) // exclude all greys
                             result.Add(row);
                     }
-                    else
-                        if ((row.C1841 == toFind || row.C1841 == CensusColours.NOT_ALIVE) && (row.C1851 == toFind || row.C1851 == CensusColours.NOT_ALIVE) &&
+                    else if ((row.C1841 == toFind || row.C1841 == CensusColours.NOT_ALIVE) && (row.C1851 == toFind || row.C1851 == CensusColours.NOT_ALIVE) &&
                             (row.C1861 == toFind || row.C1861 == CensusColours.NOT_ALIVE) && (row.C1871 == toFind || row.C1871 == CensusColours.NOT_ALIVE) &&
                             (row.C1881 == toFind || row.C1881 == CensusColours.NOT_ALIVE) && (row.C1891 == toFind || row.C1891 == CensusColours.NOT_ALIVE) &&
                             (row.C1901 == toFind || row.C1901 == CensusColours.NOT_ALIVE) && (row.C1911 == toFind || row.C1911 == CensusColours.NOT_ALIVE) &&
@@ -321,7 +328,9 @@ namespace FTAnalyzer.Forms
                               row.C1901 == CensusColours.NOT_ALIVE && row.C1911 == CensusColours.NOT_ALIVE && row.C1921 == CensusColours.NOT_ALIVE &&
                               row.C1939 == CensusColours.NOT_ALIVE &&
                               toFind != CensusColours.NOT_ALIVE)) // exclude all greys
+                    {
                         result.Add(row);
+                    }
                 }
                 else
                 {
@@ -404,8 +413,9 @@ namespace FTAnalyzer.Forms
         {
             if (dgReportSheet.CurrentRow is not null)
             {
-                IDisplayColourCensus ds = (IDisplayColourCensus)dgReportSheet.CurrentRow.DataBoundItem;
-                MainForm.ShowIndividualsFacts(ds.IndividualID);
+                IDisplayColourCensus? ds = (IDisplayColourCensus?)dgReportSheet.CurrentRow.DataBoundItem;
+                if(ds is not null)
+                    MainForm.ShowIndividualsFacts(ds.IndividualID);
             }
         }
 
