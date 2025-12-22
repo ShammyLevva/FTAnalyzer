@@ -125,10 +125,15 @@ namespace FTAnalyzer.Forms
 
         void ResetTable()
         {
-            dgCensus.Sort(dgCensus.Columns["Position"], ListSortDirection.Ascending);
-            dgCensus.Sort(dgCensus.Columns["FamilyID"], ListSortDirection.Ascending);
-            dgCensus.AutoResizeColumns();
-            StyleRows();
+            DataGridViewColumn? pos = dgCensus.Columns["Position"];
+            DataGridViewColumn? famID = dgCensus.Columns["FamilyID"];
+            if (pos is not null && famID is not null)
+            {
+                dgCensus.Sort(pos, ListSortDirection.Ascending);
+                dgCensus.Sort(famID, ListSortDirection.Ascending);
+                dgCensus.AutoResizeColumns();
+                StyleRows();
+            }
         }
 
         void StyleRows()
@@ -142,8 +147,9 @@ namespace FTAnalyzer.Forms
                 int sortColumn = dgCensus.SortedColumn.Index;
                 foreach (DataGridViewRow row in dgCensus.Rows)
                 {
-                    CensusIndividual cr = (CensusIndividual)row.DataBoundItem;
-                    if (row.Cells[sortColumn].Value.ToString() != currentRowText)
+                    CensusIndividual? cr = (CensusIndividual?)row.DataBoundItem;
+                    if (cr is null) return;
+                    if(row.Cells[sortColumn].Value.ToString() != currentRowText)
                     {
                         currentRowText = row.Cells[sortColumn].Value.ToString() ?? string.Empty;
                         highlighted = !highlighted;
@@ -291,10 +297,13 @@ namespace FTAnalyzer.Forms
         {
             if (dgCensus.CurrentRow is not null)
             {
-                CensusIndividual ds = (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
-                Facts factForm = new(ds);
-                MainForm.DisposeDuplicateForms(factForm);
-                factForm.Show();
+                CensusIndividual? ds = (CensusIndividual?)dgCensus.CurrentRow.DataBoundItem;
+                if (ds != null)
+                {
+                    Facts factForm = new(ds);
+                    MainForm.DisposeDuplicateForms(factForm);
+                    factForm.Show();
+                }
             }
         }
 
