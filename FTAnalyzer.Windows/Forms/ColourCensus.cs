@@ -241,8 +241,8 @@ namespace FTAnalyzer.Forms
                                 censusYear = 1841 + (e.ColumnIndex - startColumnIndex) * 10;
                         }
                         string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
-                        if (censusYear == 1939 && 
-                            !cbCensusSearchProvider.SelectedItem.Equals("Find My Past") && 
+                        if (censusYear == 1939 &&
+                            !cbCensusSearchProvider.SelectedItem.Equals("Find My Past") &&
                             !cbCensusSearchProvider.SelectedItem.Equals("Ancestry"))
                             UIHelpers.ShowMessage($"Unable to search the 1939 National Register on {cbCensusSearchProvider.SelectedItem}.", "FTAnalyzer");
                         else
@@ -318,7 +318,7 @@ namespace FTAnalyzer.Forms
                             (row.C1921 == toFind || row.C1921 == CensusColours.NOT_ALIVE) && (row.C1939 == toFind || row.C1939 == CensusColours.NOT_ALIVE) &&
                             !(row.C1841 == CensusColours.NOT_ALIVE && row.C1851 == CensusColours.NOT_ALIVE && row.C1861 == CensusColours.NOT_ALIVE &&
                               row.C1871 == CensusColours.NOT_ALIVE && row.C1881 == CensusColours.NOT_ALIVE && row.C1891 == CensusColours.NOT_ALIVE &&
-                              row.C1901 == CensusColours.NOT_ALIVE && row.C1911 == CensusColours.NOT_ALIVE && row.C1921 == CensusColours.NOT_ALIVE && 
+                              row.C1901 == CensusColours.NOT_ALIVE && row.C1911 == CensusColours.NOT_ALIVE && row.C1921 == CensusColours.NOT_ALIVE &&
                               row.C1939 == CensusColours.NOT_ALIVE &&
                               toFind != CensusColours.NOT_ALIVE)) // exclude all greys
                         result.Add(row);
@@ -426,7 +426,7 @@ namespace FTAnalyzer.Forms
                 settingSelections = true;
                 foreach (DataGridViewCell cell in dgReportSheet.CurrentRow.Cells)
                 {
-                    if(cell.Visible)
+                    if (cell.Visible)
                         cell.Selected = cell.ColumnIndex < startColumnIndex || cell.ColumnIndex > endColumnIndex;
                 }
                 settingSelections = false;

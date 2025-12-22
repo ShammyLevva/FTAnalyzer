@@ -1,7 +1,4 @@
-﻿using System.IO;
-#if !__MACOS__
-using System.Drawing;
-using System.Windows.Forms;
+﻿#if !__MACOS__
 #endif
 namespace FTAnalyzer
 {

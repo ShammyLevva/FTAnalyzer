@@ -12,8 +12,8 @@ namespace FTAnalyzer.Mapping
     {
         public FeatureDataTable TearDropLocations { get; private set; }
         public Image Icon { get; private set; }
-        
-        public static readonly string RED = "Teardrop_Red.png", BLACK = "Teardrop_Black.png", 
+
+        public static readonly string RED = "Teardrop_Red.png", BLACK = "Teardrop_Black.png",
                                       LIGHT_GREEN = "Teardrop_LightGreen.png", GREY = "Grey";
 
         public TearDropLayer(string title) : base(title)

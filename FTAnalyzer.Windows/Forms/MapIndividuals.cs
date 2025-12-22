@@ -1,8 +1,8 @@
 ﻿using FTAnalyzer.Filters;
 using FTAnalyzer.Forms;
 using FTAnalyzer.Mapping;
-using FTAnalyzer.Utilities;
 using FTAnalyzer.Properties;
+using FTAnalyzer.Utilities;
 using System.ComponentModel;
 
 namespace FTAnalyzer

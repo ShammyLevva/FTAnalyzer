@@ -1,14 +1,14 @@
-﻿using System.ComponentModel;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
-using FTAnalyzer.Mapping;
+﻿using FTAnalyzer.Mapping;
+using FTAnalyzer.Properties;
 using FTAnalyzer.Utilities;
 using NetTopologySuite.Geometries;
 using SharpMap.Data;
 using SharpMap.Data.Providers;
 using SharpMap.Layers;
 using SharpMap.Styles;
-using FTAnalyzer.Properties;
+using System.ComponentModel;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 
 namespace FTAnalyzer.Forms
 {
@@ -24,7 +24,7 @@ namespace FTAnalyzer.Forms
         TearDropLayer selections;
         bool isLoading;
         bool isQuerying;
-        
+
         public LifeLine(IProgress<string> _outputText)
         {
             InitializeComponent();
@@ -354,7 +354,7 @@ namespace FTAnalyzer.Forms
             foreach (DataGridViewRow row in dgFacts.Rows)
             {
                 DisplayFact rowFact = (DisplayFact)row.DataBoundItem;
-                if(rowFact.Equals(dispFact))
+                if (rowFact.Equals(dispFact))
                     dgFacts.Rows[row.Index].Selected = true;
             }
         }

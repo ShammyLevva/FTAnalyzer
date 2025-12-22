@@ -1,7 +1,5 @@
 ﻿using FTAnalyzer.Utilities;
-using System;
 using System.ComponentModel;
-using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms
 {
@@ -25,7 +23,7 @@ namespace FTAnalyzer.Forms
         void AddSources(DisplayFact fact)
         {
             foreach (FactSource s in fact.Sources)
-                if(!sources.Contains(s))
+                if (!sources.Contains(s))
                     sources.Add(s);
             dgSources.DataSource = sources;
             reportFormHelper.LoadColumnLayout("SourcesColumns.xml");
@@ -57,7 +55,7 @@ namespace FTAnalyzer.Forms
 
         void DgSources_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
                 FactSource source = (FactSource)dgSources.CurrentRow.DataBoundItem;
                 Facts factForm = new(source);

@@ -188,7 +188,7 @@ namespace FTAnalyzer.Utilities
             for (int i = 0; i < ReportGrid.Columns.Count; i++)
             {
                 ReportGrid.Columns[i].DisplayIndex = i;
-               // ReportGrid.Columns[i].Width = ReportGrid.Columns[i].MinimumWidth;
+                // ReportGrid.Columns[i].Width = ReportGrid.Columns[i].MinimumWidth;
             }
             SaveColumnLayout(filename);
         }

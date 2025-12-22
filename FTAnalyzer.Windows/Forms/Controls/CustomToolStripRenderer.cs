@@ -1,7 +1,4 @@
-﻿using System.Windows.Forms;
-using System.Drawing;
-
-namespace FTAnalyzer.Forms.Controls
+﻿namespace FTAnalyzer.Forms.Controls
 {
     class CustomToolStripRenderer : ToolStripProfessionalRenderer
     {

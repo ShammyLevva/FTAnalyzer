@@ -1,10 +1,6 @@
 ﻿using FTAnalyzer.Filters;
 using FTAnalyzer.Utilities;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms
 {
@@ -20,7 +16,7 @@ namespace FTAnalyzer.Forms
             Top += NativeMethods.TopTaskbarOffset;
             StatType = type;
             tsStatusLabel.Text = string.Empty;
-            switch(type)
+            switch (type)
             {
                 case StatisticType.CousinCount:
                     CousinsCountReport();
@@ -36,7 +32,7 @@ namespace FTAnalyzer.Forms
 
         void CousinsCountReport()
         {
-            IEnumerable<Tuple<string,int>> relations = FamilyTree.Instance.AllIndividuals.Where(x => x.RelationToRoot.Length > 0).GroupBy(i => i.RelationToRoot)
+            IEnumerable<Tuple<string, int>> relations = FamilyTree.Instance.AllIndividuals.Where(x => x.RelationToRoot.Length > 0).GroupBy(i => i.RelationToRoot)
                 .Select(r => new Tuple<string, int>(r.Key, r.Count()));
             var list = new SortableBindingList<Tuple<string, int>>(relations.ToList());
             dgStatistics.DataSource = list;
@@ -58,7 +54,7 @@ namespace FTAnalyzer.Forms
         {
             IEnumerable<DisplayGreatStats> relations = FamilyTree.Instance.AllIndividuals.Where(x => x.RelationToRoot.Length > 0 && (x.RelationType == Individual.DIRECT || x.RelationType == Individual.DESCENDANT))
                 .GroupBy(i => (i.RelationToRoot, i.RelationSort))
-                .Select(r => new DisplayGreatStats(r.Key.RelationToRoot, r.Key.RelationSort ,r.Count()));
+                .Select(r => new DisplayGreatStats(r.Key.RelationToRoot, r.Key.RelationSort, r.Count()));
             var list = new SortableBindingList<DisplayGreatStats>(relations.ToList());
             dgStatistics.DataSource = list;
             dgStatistics.Columns[0].Width = 180;
@@ -119,7 +115,8 @@ namespace FTAnalyzer.Forms
                 Text = "Birthday Effect Report";
                 tsStatusLabel.Text = "Double click shows those born who died within 15 days of birthday.";
                 tsStatusLabel.Visible = true;
-            } catch(ArgumentException e)
+            }
+            catch (ArgumentException e)
             {
                 UIHelpers.ShowMessage($"Sorry there's a problem with generating Birthday report.\nMessage is:{e.Message}");
             }
@@ -147,7 +144,7 @@ namespace FTAnalyzer.Forms
                         form.Show();
                     }
                 }
-                else if(StatType == StatisticType.BirthdayEffect)
+                else if (StatType == StatisticType.BirthdayEffect)
                 {
                     if (dgStatistics.Rows[e.RowIndex].DataBoundItem is Tuple<string, string, string> row)
                     {

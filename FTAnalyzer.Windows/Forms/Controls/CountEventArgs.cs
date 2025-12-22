@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FTAnalyzer.Forms.Controls
+﻿namespace FTAnalyzer.Forms.Controls
 {
     public class CountEventArgs : EventArgs
     {

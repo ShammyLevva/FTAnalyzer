@@ -1,6 +1,5 @@
 ﻿using FTAnalyzer.Utilities;
 using System.Reflection;
-using System.Windows.Forms;
 
 namespace FTAnalyzer.Core.Displays
 {

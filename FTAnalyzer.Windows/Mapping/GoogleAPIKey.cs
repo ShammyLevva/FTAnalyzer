@@ -1,6 +1,5 @@
-﻿using FTAnalyzer.Utilities;
-using FTAnalyzer.Properties;
-using System;
+﻿using FTAnalyzer.Properties;
+using FTAnalyzer.Utilities;
 
 namespace FTAnalyzer.Mapping
 {
@@ -21,7 +20,7 @@ namespace FTAnalyzer.Mapping
                         else
                         {
                             APIkeyValue = MappingSettings.Default.GoogleAPI;
-                          UIHelpers.ShowMessage("Using your private Google API Key.\nPlease observe monthly usage limits to avoid a large bill from Google.");
+                            UIHelpers.ShowMessage("Using your private Google API Key.\nPlease observe monthly usage limits to avoid a large bill from Google.");
                         }
                     }
                     catch (Exception)

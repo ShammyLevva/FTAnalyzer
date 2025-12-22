@@ -1,15 +1,15 @@
-﻿using System.Collections.Concurrent;
-using System.ComponentModel;
-using FTAnalyzer.Events;
+﻿using FTAnalyzer.Events;
 using FTAnalyzer.Filters;
+using FTAnalyzer.Forms.Controls;
 using FTAnalyzer.Mapping;
+using FTAnalyzer.Properties;
 using FTAnalyzer.Utilities;
 using NetTopologySuite.Geometries;
-using System.Text;
 using SharpMap.Utilities;
-using FTAnalyzer.Forms.Controls;
-using FTAnalyzer.Properties;
+using System.Collections.Concurrent;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Text;
 
 namespace FTAnalyzer.Forms
 {
@@ -185,7 +185,7 @@ namespace FTAnalyzer.Forms
             dgLocations.Refresh();
             SetStatusText();
             txtLocations.Text = $"{statusText} Displaying: {dgLocations.RowCount}. ";
-            if(loc is not null) 
+            if (loc is not null)
                 SelectLocation(loc);
             Cursor = Cursors.Default;
         }
@@ -490,7 +490,7 @@ namespace FTAnalyzer.Forms
                 e.Cancel = true;
                 formClosing = true;
             }
-            if(EmptyViewPortsBackgroundWorker.IsBusy)
+            if (EmptyViewPortsBackgroundWorker.IsBusy)
             {
                 EmptyViewPortsBackgroundWorker.CancelAsync();
                 e.Cancel = true;
@@ -537,14 +537,15 @@ namespace FTAnalyzer.Forms
                         mnuCheckEmptyViewPorts.Enabled = false;
                         ft.Geocoding = true;
                     }
-                    catch(ArgumentException)
+                    catch (ArgumentException)
                     {
                         Debug.WriteLine("Race condition gets here sometimes");
                     }
                     googleGeocodeBackgroundWorker.RunWorkerAsync(retryPartials);
                     Cursor = Cursors.Default;
                 }
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message); // sometimes setting pbGeocoding.Visible triggers font error for resizing fonts
             }
@@ -622,7 +623,7 @@ namespace FTAnalyzer.Forms
                             }
                         }
                     }
-                    int percent = (int) Math.Truncate(100.0 * vpchecked / maxtoCheck);
+                    int percent = (int)Math.Truncate(100.0 * vpchecked / maxtoCheck);
                     string status = $"Googled empty ViewPorts and have updated {updated}. Done {vpchecked} of {maxtoCheck}.  ";
                     worker.ReportProgress(percent, status);
                     if (worker.CancellationPending ||
@@ -671,7 +672,7 @@ namespace FTAnalyzer.Forms
                                      loc.GeocodeStatus == FactLocation.Geocode.LEVEL_MISMATCH ||
                                      loc.GeocodeStatus == FactLocation.Geocode.OS_50KPARTIAL)))
                             {
-//                                log.Info("Searching Google for '" + loc.GoogleFixed + "' original text was '" + loc.GEDCOMLocation + "'.");
+                                //                                log.Info("Searching Google for '" + loc.GoogleFixed + "' original text was '" + loc.GEDCOMLocation + "'.");
                                 res = SearchGoogle(loc, loc.GoogleFixed);
                             }
                             if (res is not null && ((res.Status == "OK" && res.Results.Length > 0) || res.Status == "ZERO_RESULTS"))
@@ -705,7 +706,7 @@ namespace FTAnalyzer.Forms
                                                 if (!result.PartialMatch)
                                                 {
                                                     //if (checkresultsPass == 2)
-                                                        //log.Info("Geocoding found a match with " + loc.GEDCOMLocation + " previously failed with " + loc.GoogleFixed);
+                                                    //log.Info("Geocoding found a match with " + loc.GEDCOMLocation + " previously failed with " + loc.GoogleFixed);
                                                     checkresultsPass = 3; // force exit
                                                     break; // we've got a good match so exit
                                                 }
@@ -1029,14 +1030,14 @@ namespace FTAnalyzer.Forms
             }
         }
 
-//      static void LogResults(FactLocation loc, GeoResponse res)
-//        {
-            //log.Info("Pixelsize: " + loc.PixelSize + ", Found " + res.Results.Count() + " results for " + loc.ToString());
-            //foreach (GeoResponse.CResult result in res.Results)
-            //{
-            //    log.Info("Level: " + GoogleMap.GetFactLocationType(result.Types, loc) + "=" + result.ReturnAddress + ". Type: " + EnhancedTextInfo.ConvertStringArrayToString(result.Types));
-            //}
-//      }
+        //      static void LogResults(FactLocation loc, GeoResponse res)
+        //        {
+        //log.Info("Pixelsize: " + loc.PixelSize + ", Found " + res.Results.Count() + " results for " + loc.ToString());
+        //foreach (GeoResponse.CResult result in res.Results)
+        //{
+        //    log.Info("Level: " + GoogleMap.GetFactLocationType(result.Types, loc) + "=" + result.ReturnAddress + ". Type: " + EnhancedTextInfo.ConvertStringArrayToString(result.Types));
+        //}
+        //      }
         #endregion
 
         void MnuRetryPartial_Click(object sender, EventArgs e) => StartGoogleGeoCoding(true);
@@ -1293,7 +1294,7 @@ namespace FTAnalyzer.Forms
                 List<OS50kGazetteer> results = OS50k.Filter(match).ToList<OS50kGazetteer>();
                 if (results.Count > 0)
                 {
-                    if(loc.GeocodeStatus == FactLocation.Geocode.PARTIAL_MATCH || loc.GeocodeStatus == FactLocation.Geocode.LEVEL_MISMATCH)
+                    if (loc.GeocodeStatus == FactLocation.Geocode.PARTIAL_MATCH || loc.GeocodeStatus == FactLocation.Geocode.LEVEL_MISMATCH)
                         return CheckNearest(loc, results);
                     else
                         SetOSGeocoding(loc, results[0], FactLocation.ADDRESS, true);
@@ -1309,7 +1310,7 @@ namespace FTAnalyzer.Forms
             double minDistance = double.MaxValue;
             OS50kGazetteer? selected = null;
             int foundLevel = loc.FoundLevel >= 0 ? loc.FoundLevel : loc.Level;
-            foreach(OS50kGazetteer gaz in results)
+            foreach (OS50kGazetteer gaz in results)
             {
                 double distance = GeoSpatialMath.GreatCircleDistance(loc.Longitude, loc.Latitude, gaz.Longitude, gaz.Latitude);
                 if (distance < minDistance &&
@@ -1317,7 +1318,7 @@ namespace FTAnalyzer.Forms
                     foundLevel == FactLocation.ADDRESS && distance < 5000 ||
                     foundLevel == FactLocation.SUBREGION && distance < 10000 ||
                     foundLevel == FactLocation.REGION && distance < 50000 ||
-                    foundLevel == FactLocation.COUNTRY)) 
+                    foundLevel == FactLocation.COUNTRY))
                 {
                     selected = gaz;
                     minDistance = distance;

@@ -77,7 +77,7 @@ namespace FTAnalyzer.Forms
                 birthColumnIndex = dgBMDReportSheet.Columns["Birth"].Index;
                 burialColumnIndex = dgBMDReportSheet.Columns["CremBuri"].Index;
                 dgBMDReportSheet.DataSource = _reportList;
-                dgBMDReportSheet.RowTemplate.Height = (int)(FontSettings.Default.SelectedFont.Height * GraphicsUtilities.GetCurrentScaling()); 
+                dgBMDReportSheet.RowTemplate.Height = (int)(FontSettings.Default.SelectedFont.Height * GraphicsUtilities.GetCurrentScaling());
                 reportFormHelper.LoadColumnLayout("ColourBMDColumns.xml");
                 tsRecords.Text = $"{Messages.Count}{reportList.Count} records listed.";
                 string defaultProvider = Application.UserAppDataRegistry.GetValue("Default Search Provider", DEFAULT_PROVIDER).ToString() ?? DEFAULT_PROVIDER;

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
-using System.IO;
-using System.Windows.Forms;
+﻿using NetTopologySuite.Geometries;
 using SharpMap;
 using SharpMap.Data;
 using SharpMap.Data.Providers;
 using SharpMap.Layers;
 using SharpMap.Styles;
-using NetTopologySuite.Geometries;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 
 namespace FTAnalyzer.Mapping
 {

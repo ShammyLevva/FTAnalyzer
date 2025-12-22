@@ -1,7 +1,7 @@
 ﻿using FTAnalyzer.Forms;
 using FTAnalyzer.Mapping;
-using NetTopologySuite.Geometries;
 using ICSharpCode.SharpZipLib.Zip;
+using NetTopologySuite.Geometries;
 using System.Collections.Concurrent;
 using System.Data;
 using System.Data.SQLite;
@@ -155,14 +155,14 @@ namespace FTAnalyzer.Utilities
                     return true;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 UIHelpers.ShowMessage($"Problem exporting database. Error was {ex.Message}");
             }
             return false;
-            }
+        }
 
-            void UpgradeDatabase(Version dbVersion)
+        void UpgradeDatabase(Version dbVersion)
         {
             try
             {
@@ -339,7 +339,7 @@ namespace FTAnalyzer.Utilities
 
                     using (SQLiteCommand cmd = new("drop table versions", InstanceConnection))
                     {
-                            cmd.ExecuteNonQuery();
+                        cmd.ExecuteNonQuery();
                     }
                     using (SQLiteCommand cmd = new("CREATE TABLE IF NOT EXISTS Versions(Platform VARCHAR(10) PRIMARY KEY, [Database] VARCHAR(10));", InstanceConnection))
                     {
@@ -354,7 +354,7 @@ namespace FTAnalyzer.Utilities
                         cmd.ExecuteNonQuery();
                     }
                 }
-                if(dbVersion < v8_0_0_0)
+                if (dbVersion < v8_0_0_0)
                 {
                     using (SQLiteCommand cmd = new("CREATE TABLE IF NOT EXISTS CustomFacts (FactType STRING(60) PRIMARY KEY, [Ignore] BOOLEAN)", InstanceConnection))
                     {
@@ -583,10 +583,10 @@ namespace FTAnalyzer.Utilities
                     location.LatitudeM = latm;
                     location.LongitudeM = longm;
                     location.ViewPort ??= new GeoResponse.CResult.CGeometry.CViewPort
-                        {
-                            NorthEast = new GeoResponse.CResult.CGeometry.CLocation(),
-                            SouthWest = new GeoResponse.CResult.CGeometry.CLocation()
-                        };
+                    {
+                        NorthEast = new GeoResponse.CResult.CGeometry.CLocation(),
+                        SouthWest = new GeoResponse.CResult.CGeometry.CLocation()
+                    };
                     location.ViewPort.NorthEast.Lat = viewport_y_ne;
                     location.ViewPort.NorthEast.Long = viewport_x_ne;
                     location.ViewPort.SouthWest.Lat = viewport_y_sw;
@@ -963,11 +963,11 @@ namespace FTAnalyzer.Utilities
             int rowsaffected = cmd.ExecuteNonQuery();
         }
 
-            #endregion
+        #endregion
 
-            #region Cursor Queries
+        #region Cursor Queries
 
-            public static void AddEmptyLocationsToQueue(ConcurrentQueue<FactLocation> queue)
+        public static void AddEmptyLocationsToQueue(ConcurrentQueue<FactLocation> queue)
         {
             if (queue is null) return;
             if (InstanceConnection.State != ConnectionState.Open)

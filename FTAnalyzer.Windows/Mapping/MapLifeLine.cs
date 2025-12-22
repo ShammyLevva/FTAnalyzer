@@ -1,6 +1,5 @@
 ﻿using NetTopologySuite.Geometries;
 using SharpMap.Data;
-using System.Collections.Generic;
 
 namespace FTAnalyzer.Mapping
 {
@@ -61,7 +60,7 @@ namespace FTAnalyzer.Mapping
             r["MapLifeLine"] = this;
             r["LineCap"] = Count > 1 ? START : LINE;
             r["ViewPort"] = Viewport;
-            if(Count == 1)
+            if (Count == 1)
                 r["Label"] = ind.Name;
             r.Geometry = StartPoint;
             table.AddRow(r);

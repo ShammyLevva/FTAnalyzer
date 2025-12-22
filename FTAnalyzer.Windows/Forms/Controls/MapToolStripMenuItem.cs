@@ -6,7 +6,7 @@ namespace FTAnalyzer.Forms.Controls
 {
     public class MapToolStripMenuItem : ToolStripMenuItem
     {
-        public MapToolStripMenuItem(HttpTileSource tileSource, LinkLabelType linkLabelType) 
+        public MapToolStripMenuItem(HttpTileSource tileSource, LinkLabelType linkLabelType)
             : base()
         {
             TileSource = tileSource;

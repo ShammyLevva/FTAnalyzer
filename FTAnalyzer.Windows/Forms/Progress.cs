@@ -1,6 +1,4 @@
 ﻿using FTAnalyzer.Utilities;
-using System;
-using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms
 {

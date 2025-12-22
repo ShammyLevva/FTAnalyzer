@@ -134,7 +134,7 @@ namespace FTAnalyzer.Forms.Controls
                 {
                     CensusDate? first = cbCensusDate.Items[0] as CensusDate;
                     return first ?? CensusDate.EWCENSUS1881;
-                }   
+                }
             }
         }
 

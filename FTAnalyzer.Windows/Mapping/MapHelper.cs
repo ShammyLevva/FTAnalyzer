@@ -1,6 +1,6 @@
 ﻿using FTAnalyzer.Forms;
-using FTAnalyzer.Utilities;
 using FTAnalyzer.Properties;
+using FTAnalyzer.Utilities;
 using NetTopologySuite.Geometries;
 using SharpMap;
 using SharpMap.Data;
@@ -205,7 +205,7 @@ namespace FTAnalyzer.Mapping
                 }
                 var x = (Envelope)row["ViewPort"];
                 Debug.WriteLine(x.ToString());
-                if (x.MaxX == 0 && x.MaxY == 0 )
+                if (x.MaxX == 0 && x.MaxY == 0)
                     Debug.WriteLine("we have zeos");
                 else
                     bbox.ExpandToInclude(x);

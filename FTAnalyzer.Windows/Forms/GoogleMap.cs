@@ -1,14 +1,14 @@
 ﻿using FTAnalyzer.Events;
 using FTAnalyzer.Mapping;
-using FTAnalyzer.Utilities;
 using FTAnalyzer.Properties;
+using FTAnalyzer.Utilities;
+using FTAnalyzer.Windows;
+using ICSharpCode.SharpZipLib.Zip;
+using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Net;
 using System.Text;
 using System.Web;
-using FTAnalyzer.Windows;
-using Newtonsoft.Json;
-using ICSharpCode.SharpZipLib.Zip;
 
 namespace FTAnalyzer.Forms
 {
@@ -192,7 +192,7 @@ namespace FTAnalyzer.Forms
         static async Task<GeoResponse?> GetGeoResponseAsync(string url, string text)
         {
             GeoResponse? res;
-            HttpRequestMessage request= new();
+            HttpRequestMessage request = new();
             try
             {
                 request.Headers.Add("Accept-Encoding", "gzip,deflate");
@@ -329,12 +329,12 @@ namespace FTAnalyzer.Forms
 
         public static void GenerateKML(string filename, List<ExportFactsAtLocation> locations)
         {
-            using(StreamWriter output = new(new FileStream(filename, FileMode.Create, FileAccess.Write), Encoding.UTF8))
+            using (StreamWriter output = new(new FileStream(filename, FileMode.Create, FileAccess.Write), Encoding.UTF8))
             {
                 output.WriteLine(@"<?xml version=""1.0"" encoding=""UTF-8""?>");
                 output.WriteLine(@"<kml xmlns=""http://www.opengis.net/kml/2.2"">");
                 output.WriteLine("<Document>");
-                foreach(ExportFactsAtLocation loc in locations)
+                foreach (ExportFactsAtLocation loc in locations)
                 {
                     if (loc.FactsAtLocation?.Count > 0)
                     {
@@ -344,7 +344,7 @@ namespace FTAnalyzer.Forms
                         int placecount = 0;
                         foreach (string factAtLocation in loc.FactsAtLocation)
                         {
-                            if(placecount++ <= 100)
+                            if (placecount++ <= 100)
                                 output.WriteLine($"{factAtLocation}"); // eg: John Smith born here XX XXX XXXX
                             else
                             {

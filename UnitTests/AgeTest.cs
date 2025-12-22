@@ -1,5 +1,4 @@
 ﻿using FTAnalyzer;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Testing
 {

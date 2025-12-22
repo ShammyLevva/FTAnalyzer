@@ -49,8 +49,8 @@ namespace Testing
         {
             FactLocation.LoadConversions(Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\..\\FTAnalyzer.Shared\\FTAnalyzer.Shared"));
             FactLocation factLocation;
-//            factLocation = FactLocation.GetLocation("Aberdeen, Scotland");
-//            Assert.IsTrue(factLocation.ToString().Equals("Aberdeen, Aberdeenshire, Scotland"));
+            //            factLocation = FactLocation.GetLocation("Aberdeen, Scotland");
+            //            Assert.IsTrue(factLocation.ToString().Equals("Aberdeen, Aberdeenshire, Scotland"));
 
             factLocation = FactLocation.GetLocation("America");
             Assert.IsTrue(factLocation.ToString().Equals("United States"));

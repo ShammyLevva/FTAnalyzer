@@ -1,7 +1,5 @@
-﻿using System.Drawing;
-using System.Drawing.Drawing2D;
+﻿using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Windows.Forms;
 
 namespace FTAnalyzer
 {
@@ -54,7 +52,7 @@ namespace FTAnalyzer
                 dx = g.DpiX;
                 dy = g.DpiY;
             }
-            return dx/96;
+            return dx / 96;
         }
 
     }

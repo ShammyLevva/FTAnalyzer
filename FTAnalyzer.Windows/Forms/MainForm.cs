@@ -1,21 +1,21 @@
-﻿using FTAnalyzer.Forms.Controls;
-using FTAnalyzer.Exports;
+﻿using FTAnalyzer.Exports;
 using FTAnalyzer.Filters;
 using FTAnalyzer.Forms;
+using FTAnalyzer.Forms.Controls;
 using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
+using FTAnalyzer.Windows;
+using HtmlAgilityPack;
+using ICSharpCode.SharpZipLib.Zip;
 using Printing.DataGridViewPrint.Tools;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing.Printing;
 using System.Drawing.Text;
 using System.Text;
 using System.Xml;
-using HtmlAgilityPack;
-using System.Diagnostics;
-using FTAnalyzer.Windows;
-using ICSharpCode.SharpZipLib.Zip;
 
 namespace FTAnalyzer
 {

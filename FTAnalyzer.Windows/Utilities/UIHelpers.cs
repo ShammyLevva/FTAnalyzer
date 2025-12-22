@@ -1,6 +1,4 @@
-﻿using System.Windows.Forms;
-
-namespace FTAnalyzer.Utilities
+﻿namespace FTAnalyzer.Utilities
 {
     public static class UIHelpers
     {

@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using NetTopologySuite.Geometries;
 using ProjNet.CoordinateSystems;
 using ProjNet.CoordinateSystems.Transformations;
-using NetTopologySuite.Geometries;
 
 namespace FTAnalyzer.Mapping
 {
@@ -98,7 +97,7 @@ namespace FTAnalyzer.Mapping
             result.NorthEast.Lat = mNorthEast.Y;
             result.SouthWest.Long = mSouthWest.X;
             result.SouthWest.Lat = mSouthWest.Y;
-            return result;                        
+            return result;
         }
 
         public static GeoResponse.CResult.CGeometry.CViewPort ReverseTransformViewport(GeoResponse.CResult.CGeometry.CViewPort viewport)
@@ -115,13 +114,13 @@ namespace FTAnalyzer.Mapping
 
         public static Coordinate TransformCoordinate(Coordinate point)
         {
-            var (x,y) = Transform().MathTransform.Transform(point.X,point.Y);
+            var (x, y) = Transform().MathTransform.Transform(point.X, point.Y);
             return new Coordinate(x, y);
         }
 
         public static Coordinate ReverseTransformCoordinate(Coordinate point)
         {
-            var (x,y) = ReverseTransform().MathTransform.Transform(point.X, point.Y);
+            var (x, y) = ReverseTransform().MathTransform.Transform(point.X, point.Y);
             return new Coordinate(x, y);
         }
     }

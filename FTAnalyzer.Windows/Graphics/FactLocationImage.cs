@@ -5,11 +5,11 @@
         public FactLocation.Geocode ErrorLevel { get; private set; }
         public Bitmap Icon { get; private set; }
 
-        static readonly FactLocationImage IMG_NOT_SEARCHED = new (FactLocation.Geocode.NOT_SEARCHED,
+        static readonly FactLocationImage IMG_NOT_SEARCHED = new(FactLocation.Geocode.NOT_SEARCHED,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\QuestionMark.png")));
-        static readonly FactLocationImage IMG_MATCHED = new (FactLocation.Geocode.MATCHED,
+        static readonly FactLocationImage IMG_MATCHED = new(FactLocation.Geocode.MATCHED,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\GoogleMatch.png")));
-        static readonly FactLocationImage IMG_PARTIAL_MATCH = new (FactLocation.Geocode.PARTIAL_MATCH,
+        static readonly FactLocationImage IMG_PARTIAL_MATCH = new(FactLocation.Geocode.PARTIAL_MATCH,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\GooglePartial.png")));
         static readonly FactLocationImage IMG_GEDCOM_USER = new(FactLocation.Geocode.GEDCOM_USER,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Complete_OK.png")));

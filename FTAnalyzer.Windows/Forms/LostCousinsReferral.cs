@@ -1,7 +1,7 @@
 ﻿using FTAnalyzer.Filters;
+using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
-using FTAnalyzer.Properties;
 
 namespace FTAnalyzer.Forms
 {

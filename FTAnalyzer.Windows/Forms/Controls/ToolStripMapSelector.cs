@@ -1,6 +1,6 @@
-﻿using SharpMap.Layers;
+﻿using FTAnalyzer.Mapping;
 using SharpMap.Forms;
-using FTAnalyzer.Mapping;
+using SharpMap.Layers;
 
 namespace FTAnalyzer.Forms.Controls
 {
@@ -52,7 +52,7 @@ namespace FTAnalyzer.Forms.Controls
             mnuOpenHistoricMap = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.OpenHistoricMap), LinkLabelType.OSM);
             mnuBingMapAerial = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.BingAerial), LinkLabelType.BING);
             mnuBingMapRoads = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.BingRoads), LinkLabelType.BING);
-            mnuBingMapHybrid = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.BingHybrid),  LinkLabelType.BING);
+            mnuBingMapHybrid = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.BingHybrid), LinkLabelType.BING);
             mnuNLS1843_1882 = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.NLS_1843_1882_OS_6in), LinkLabelType.NLS);
             mnuNLS1885_1900 = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.NLS_1885_1900_OS_1in), LinkLabelType.NLS);
             mnuNLS1921_1930 = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.NLS_1921_1930_OS_6in), LinkLabelType.NLS);
@@ -65,7 +65,7 @@ namespace FTAnalyzer.Forms.Controls
             mnuNLS1843_1882.SetupMapToolStripMenuItem("mnuNLS1843_1882", "NLS 1843-1882 OS 6in UK Map", new EventHandler(Ctrl_Click));
             mnuNLS1885_1900.SetupMapToolStripMenuItem("mnuNLS1885_1900", "NLS 1885-1900 OS 1in UK Map", new EventHandler(Ctrl_Click));
             mnuNLS1921_1930.SetupMapToolStripMenuItem("mnuNLS1921_1930", "NLS 1921-1930 OS 6in Scotland Map", new EventHandler(Ctrl_Click));
-            
+
             // Setup map selector menu
             DisplayStyle = ToolStripItemDisplayStyle.Text;
             DropDownItems.AddRange([
@@ -116,7 +116,7 @@ namespace FTAnalyzer.Forms.Controls
         {
             foreach (ToolStripMenuItem menu in DropDownItems)
                 menu.Checked = false;
-            while(mapbox.Map.BackgroundLayer.Count > 0)
+            while (mapbox.Map.BackgroundLayer.Count > 0)
                 mapbox.Map.BackgroundLayer.RemoveAt(0);
             if (sender is MapToolStripMenuItem selectedOption)
             {

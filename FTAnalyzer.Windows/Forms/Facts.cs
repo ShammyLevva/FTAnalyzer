@@ -1,11 +1,9 @@
 ﻿using FTAnalyzer.Filters;
-using FTAnalyzer.Utilities;
 using FTAnalyzer.Properties;
+using FTAnalyzer.Utilities;
 using System.ComponentModel;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text.Json;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace FTAnalyzer.Forms
 {

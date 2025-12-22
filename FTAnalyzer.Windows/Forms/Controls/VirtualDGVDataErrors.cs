@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace FTAnalyzer.Forms.Controls
+﻿namespace FTAnalyzer.Forms.Controls
 {
     class VirtualDGVDataErrors : VirtualDataGridView<IDisplayDataError>
     {

@@ -1,8 +1,5 @@
 ﻿using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
-using System;
-using System.IO;
-using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms
 {

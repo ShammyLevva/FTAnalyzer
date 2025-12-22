@@ -2,7 +2,7 @@
 {
     public static class InputBox
     {
-         public static DialogResult Show(string title, string promptText, ref string value)
+        public static DialogResult Show(string title, string promptText, ref string value)
         {
             Form form = new();
             Label label = new();
@@ -39,7 +39,7 @@
             form.MaximizeBox = false;
             form.AcceptButton = buttonOk;
             form.CancelButton = buttonCancel;
-             
+
             DialogResult dialogResult = form.ShowDialog();
             value = textBox.Text;
             return dialogResult;

@@ -1,9 +1,9 @@
 ﻿using FTAnalyzer.Utilities;
 using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
 using System.Reflection;
 using Zuby.ADGV;
-using System.Diagnostics;
-using System.Data;
 
 namespace FTAnalyzer.Forms.Controls
 {
@@ -25,7 +25,7 @@ namespace FTAnalyzer.Forms.Controls
             AllowUserToResizeColumns = true;
             AllowUserToResizeRows = true;
             AutoGenerateColumns = false;
-            
+
             AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
             ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;

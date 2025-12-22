@@ -1,7 +1,7 @@
 using FTAnalyzer.Exports;
+using FTAnalyzer.Mapping;
 using SharpMap;
 using System.Runtime.InteropServices;
-using FTAnalyzer.Mapping;
 
 namespace FTAnalyzer.Windows
 {

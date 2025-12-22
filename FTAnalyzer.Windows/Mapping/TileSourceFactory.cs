@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BruTile.Predefined;
+﻿using BruTile.Predefined;
 using BruTile.Web;
 
 namespace FTAnalyzer.Mapping
 {
-    public class TileSourceFactory 
+    public class TileSourceFactory
     {
         public enum TileType
         {

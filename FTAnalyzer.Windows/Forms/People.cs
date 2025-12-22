@@ -1,7 +1,7 @@
-﻿using System.ComponentModel;
-using FTAnalyzer.Utilities;
-using FTAnalyzer.Filters;
+﻿using FTAnalyzer.Filters;
 using FTAnalyzer.Properties;
+using FTAnalyzer.Utilities;
+using System.ComponentModel;
 
 namespace FTAnalyzer.Forms
 {

@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using NetTopologySuite.Geometries;
+﻿using NetTopologySuite.Geometries;
 using SharpMap.Data;
-using System;
 
 namespace FTAnalyzer.Mapping
 {

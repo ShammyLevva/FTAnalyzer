@@ -1,8 +1,6 @@
 ﻿using FTAnalyzer.Utilities;
 using NetTopologySuite.Geometries;
-using System.Linq;
 using System.Text.RegularExpressions;
-using System;
 
 namespace FTAnalyzer.Mapping
 {
@@ -74,7 +72,7 @@ namespace FTAnalyzer.Mapping
         {
             DefinitiveName = DefinitiveName.Replace(", The", ""); // strip out supurflous "the"
             int pos = DefinitiveName.IndexOf(",");
-            if(pos > 0)
+            if (pos > 0)
                 DefinitiveName = (string.Concat(DefinitiveName.AsSpan(pos + 1), " ", DefinitiveName.AsSpan(0, pos))).Trim();
         }
 
@@ -119,9 +117,9 @@ namespace FTAnalyzer.Mapping
                 DefinitiveName = DefinitiveName[^4..];
 
             if (DefinitiveName.Contains('('))
-            { 
+            {
                 Match match = slash.Match(DefinitiveName);
-                if(match.Success)
+                if (match.Success)
                     DefinitiveName = match.Groups[1].ToString().Trim();
             }
             if (ParishName.Contains('('))

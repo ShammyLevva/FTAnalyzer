@@ -406,7 +406,7 @@ namespace Testing
             Assert.AreEqual(new(1704, 2, 29), target.StartDate);
             Assert.AreEqual(new(1704, 2, 29), target.EndDate);
 
-            
+
             target = new("Bef 29 Feb 1611/12");
             Assert.AreEqual(MINDATE, target.StartDate);
             Assert.AreEqual(new(1612, 2, 28), target.EndDate);
@@ -520,7 +520,7 @@ namespace Testing
             target = new("AFT 19 Nov 1966");
             Assert.AreEqual(new(1966, 11, 20), target.StartDate);
             Assert.AreEqual(MAXDATE, target.EndDate);
-            
+
             target = new("AFT 19Ÿ©Nov 1966");
             Assert.AreEqual(new(1966, 11, 20), target.StartDate);
             Assert.AreEqual(MAXDATE, target.EndDate);

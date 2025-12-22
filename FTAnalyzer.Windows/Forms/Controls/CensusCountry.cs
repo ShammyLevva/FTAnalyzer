@@ -1,7 +1,5 @@
 ﻿using FTAnalyzer.Filters;
-using System;
 using System.ComponentModel;
-using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms.Controls
 {
@@ -42,12 +40,14 @@ namespace FTAnalyzer.Forms.Controls
         }
 
         [DefaultValue("Census Country")]
-        public string Title {
+        public string Title
+        {
             get { return groupBox1.Text; }
-            set { 
-                if(!string.IsNullOrEmpty(value))
-                    groupBox1.Text = value; 
-            } 
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                    groupBox1.Text = value;
+            }
         }
 
         public Predicate<T> BuildFilter<T>(FactDate when, Func<FactDate, T, FactLocation> location)
@@ -74,7 +74,8 @@ namespace FTAnalyzer.Forms.Controls
 
         public FactLocation? GetLocation
         {
-            get {
+            get
+            {
 
                 if (Scotland)
                     return FactLocation.GetLocation(Countries.SCOTLAND);
@@ -91,7 +92,7 @@ namespace FTAnalyzer.Forms.Controls
                 else
                     return null;
             }
-       }
+        }
 
         public event EventHandler CountryChanged;
 

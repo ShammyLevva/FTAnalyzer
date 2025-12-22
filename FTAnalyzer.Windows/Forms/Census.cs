@@ -76,7 +76,7 @@ namespace FTAnalyzer.Forms
                 individualPredicate = x => x.IsLostCousinsEntered(CensusDate, false);
             }
             else
-            { 
+            {
                 predicate = x => x.MissingLostCousins(CensusDate, false);
                 individualPredicate = x => x.MissingLostCousins(CensusDate, false);
             }
@@ -113,7 +113,7 @@ namespace FTAnalyzer.Forms
         void SetupDataGridView(bool censusDone, List<CensusIndividual> individuals)
         {
             dgCensus.DataSource = new SortableBindingList<IDisplayCensus>(individuals);
-            dgCensus.RowTemplate.Height = (int)(FontSettings.Default.FontHeight * GraphicsUtilities.GetCurrentScaling()); 
+            dgCensus.RowTemplate.Height = (int)(FontSettings.Default.FontHeight * GraphicsUtilities.GetCurrentScaling());
             dgCensus.AllowUserToResizeColumns = true;
             if (!censusDone)
                 dgCensus.Columns["CensusReference"].Visible = false;
