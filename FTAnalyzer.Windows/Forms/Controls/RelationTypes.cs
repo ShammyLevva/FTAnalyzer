@@ -42,7 +42,7 @@ namespace FTAnalyzer.Forms.Controls
 
         public Predicate<T> BuildFilter<T>(Func<T, int> relationType, bool excludeUnknown = false)
         {
-            List<Predicate<T>> relationFilters = new();
+            List<Predicate<T>> relationFilters = [];
             if (Blood)
                 relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.BLOOD));
             if (Directs)
@@ -62,7 +62,7 @@ namespace FTAnalyzer.Forms.Controls
 
         public Predicate<Family> BuildFamilyFilter<Family>(Func<Family, IEnumerable<int>> relationTypes)
         {
-            List<Predicate<Family>> relationFilters = new();
+            List<Predicate<Family>> relationFilters = [];
             if (Blood)
                 relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, Individual.BLOOD));
             if (Directs)

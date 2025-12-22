@@ -12,7 +12,7 @@ namespace FTAnalyzer.Forms
         {
             InitializeComponent();
             Top += NativeMethods.TopTaskbarOffset;
-            sources = new SortableBindingList<IDisplaySource>();
+            sources = [];
             dgSources.AutoGenerateColumns = false;
             ExtensionMethods.DoubleBuffered(dgSources, true);
             reportFormHelper = new ReportFormHelper(this, Text, dgSources, ResetTable, "Sources");

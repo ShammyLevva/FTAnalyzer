@@ -27,7 +27,7 @@ namespace FTAnalyzer.Forms
             {
                 InitializeComponent();
                 Top += NativeMethods.TopTaskbarOffset;
-                facts = new SortableBindingList<IDisplayFact>();
+                facts = [];
                 facts.SortFinished += new EventHandler(Grid_SortFinished);
                 allFacts = false;
                 CensusRefReport = false;
@@ -214,7 +214,7 @@ namespace FTAnalyzer.Forms
 
         public void DeserializeIgnoreList()
         {
-            IgnoreList = new List<string>();
+            IgnoreList = [];
             try
             {
                 string xmlfile = Path.Combine(GeneralSettings.Default.SavePath, "IgnoreList.xml");
@@ -224,12 +224,12 @@ namespace FTAnalyzer.Forms
                 if (File.Exists(jsonFile))
                     IgnoreList = JsonSerializer.Deserialize<List<string>>(File.ReadAllText(jsonFile));
                 else
-                    IgnoreList = new List<string>();
+                    IgnoreList = [];
             }
             catch (Exception ex)
             {
                 Debug.Print($"Error {ex.Message} reading IgnoreList file");
-                IgnoreList = new List<string>();
+                IgnoreList = [];
             }
         }
 

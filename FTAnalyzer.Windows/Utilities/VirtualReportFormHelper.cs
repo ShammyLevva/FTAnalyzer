@@ -3,14 +3,9 @@ using System.Data;
 
 namespace FTAnalyzer.Utilities
 {
-    internal class VirtualReportFormHelper<T> : ReportFormHelper
+    internal class VirtualReportFormHelper<T>(Form parent, string title, VirtualDataGridView<T> report, Action resetTable, string registry, bool saveForm = true) : ReportFormHelper(parent, title, report, resetTable, registry, saveForm)
     {
-        public new VirtualDataGridView<T> ReportGrid { get; private set; }
-        public VirtualReportFormHelper(Form parent, string title, VirtualDataGridView<T> report, Action resetTable, string registry, bool saveForm = true)
-            : base(parent, title, report, resetTable, registry, saveForm)
-        {
-            ReportGrid = report;
-        }
+        public new VirtualDataGridView<T> ReportGrid { get; private set; } = report;
 
         public override void DoExportToExcel<S>(DataGridViewColumnCollection shown = null)
         {

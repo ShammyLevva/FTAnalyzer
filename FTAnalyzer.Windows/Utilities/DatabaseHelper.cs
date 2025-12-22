@@ -593,7 +593,7 @@ namespace FTAnalyzer.Utilities
                     location.ViewPort.SouthWest.Long = viewport_x_sw;
                     string statusText = reader["geocodestatus"].ToString() ?? string.Empty;
                     location.GeocodeStatus = string.IsNullOrEmpty(statusText) ? FactLocation.Geocode.UNKNOWN :
-                                            (FactLocation.Geocode)Enum.Parse(typeof(FactLocation.Geocode), statusText);
+                                            Enum.Parse<FactLocation.Geocode>(statusText);
                     location.FoundLocation = reader["foundlocation"].ToString() ?? string.Empty;
                     location.FoundResultType = reader["foundresulttype"].ToString() ?? string.Empty;
                     _ = int.TryParse(reader["foundlevel"].ToString(), out int foundlevel);

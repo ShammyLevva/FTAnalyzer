@@ -22,12 +22,10 @@ namespace FTAnalyzer.Forms
             CensusSettingsUI.CompactCensusRefChanged += new EventHandler(RefreshCensusReferences);
             Predicate<Individual> lostCousinsFact = new(x => x.HasLostCousinsFact);
             List<Individual> lostCousinsFacts = ft.AllIndividuals.Filter(lostCousinsFact).ToList();
-            referrals = new List<ExportReferrals>();
+            referrals = [];
             foreach (Individual ind in lostCousinsFacts)
             {
-                List<Fact> indLCFacts = new();
-                indLCFacts.AddRange(ind.GetFacts(Fact.LOSTCOUSINS));
-                indLCFacts.AddRange(ind.GetFacts(Fact.LC_FTA));
+                List<Fact> indLCFacts = [.. ind.GetFacts(Fact.LOSTCOUSINS), .. ind.GetFacts(Fact.LC_FTA)];
                 foreach (Fact f in indLCFacts)
                 {
                     if ((onlyInCommon && ind.IsBloodDirect) || !onlyInCommon)
@@ -68,7 +66,7 @@ namespace FTAnalyzer.Forms
 
         void PrintPreviewToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintPreviewReport();
 
-        void MnuExportToExcel_Click(object sender, EventArgs e) => reportFormHelper.DoExportToExcel(referrals.ToList<IExportReferrals>());
+        void MnuExportToExcel_Click(object sender, EventArgs e) => reportFormHelper.DoExportToExcel([.. referrals]);
 
         void LostCousinsReferral_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 

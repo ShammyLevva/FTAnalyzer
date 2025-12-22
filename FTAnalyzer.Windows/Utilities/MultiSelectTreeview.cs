@@ -45,7 +45,7 @@ namespace FTAnalyzer.Utilities
 
         public MultiSelectTreeview()
         {
-            m_SelectedNodes = new List<TreeNode>();
+            m_SelectedNodes = [];
             base.SelectedNode = null;
         }
 
@@ -139,17 +139,14 @@ namespace FTAnalyzer.Utilities
             {
                 // Check to see if a node was clicked on 
                 TreeNode node = GetNodeAt(e.Location);
-                if (node is not null)
+                if (node is not null && ModifierKeys == Keys.None && m_SelectedNodes.Contains(node) && m_SelectedNodes.Count > 1)
                 {
-                    if (ModifierKeys == Keys.None && m_SelectedNodes.Contains(node) && m_SelectedNodes.Count > 1)
+                    int leftBound = node.Bounds.X; // -20; // Allow user to click on image
+                    int rightBound = node.Bounds.Right + 10; // Give a little extra room
+                    if (e.Location.X > leftBound && e.Location.X < rightBound)
                     {
-                        int leftBound = node.Bounds.X; // -20; // Allow user to click on image
-                        int rightBound = node.Bounds.Right + 10; // Give a little extra room
-                        if (e.Location.X > leftBound && e.Location.X < rightBound)
-                        {
 
-                            SelectNode(node);
-                        }
+                        SelectNode(node);
                     }
                 }
 

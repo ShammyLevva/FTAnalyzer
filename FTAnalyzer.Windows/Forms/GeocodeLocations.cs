@@ -1149,7 +1149,7 @@ namespace FTAnalyzer.Forms
                     string key = gaz.DefinitiveName.ToLower();
                     if (!OS50kDictionary.TryGetValue(key, out IList<OS50kGazetteer>? list))
                     {
-                        list = new List<OS50kGazetteer>();
+                        list = [];
                         OS50kDictionary.Add(key, list);
                     }
                     list.Add(gaz);
@@ -1291,7 +1291,7 @@ namespace FTAnalyzer.Forms
             if (loc.Level >= FactLocation.ADDRESS)
             {
                 bool match(OS50kGazetteer x) => (x.FuzzyMatch == loc.FuzzyMatch || x.FuzzyNoParishMatch == loc.FuzzyNoParishMatch) && x.IsCountyMatch(loc);
-                List<OS50kGazetteer> results = OS50k.Filter(match).ToList<OS50kGazetteer>();
+                List<OS50kGazetteer> results = [.. OS50k.Filter(match)];
                 if (results.Count > 0)
                 {
                     if (loc.GeocodeStatus == FactLocation.Geocode.PARTIAL_MATCH || loc.GeocodeStatus == FactLocation.Geocode.LEVEL_MISMATCH)
