@@ -3632,7 +3632,7 @@ namespace FTAnalyzer
             DialogResult result = UIHelpers.ShowMessage("It is recommended you backup your Geocoding database first.\nDo you want to backup now?", "FTAnalyzer",
                                                          MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
-                DatabaseHelper.Instance.BackupDatabase(saveDatabase, "FTAnalyzer zip file created by v" + VERSION);
+                DatabaseHelper.Instance.BackupDatabase(saveDatabase, $"FTAnalyzer zip file created by v{VERSION}");
             if (result != DialogResult.Cancel)
                 LoadLocationData(pb, label, defaultIndex);
         }

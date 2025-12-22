@@ -183,20 +183,13 @@ namespace FTAnalyzer.Forms
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 DataGridViewCell cell = dgCensus.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                CensusIndividual ind = (CensusIndividual)dgCensus.Rows[e.RowIndex].DataBoundItem;
-                if (ind.CellStyle is not null)
+                CensusIndividual? ind = (CensusIndividual?)dgCensus.Rows[e.RowIndex].DataBoundItem;
+                if (ind is not null || ind.CellStyle is not null)
                 {
                     e.CellStyle = ind.CellStyle;
                     cell.ToolTipText = GetTooltipText(ind.CellStyle);
                 }
             }
-        }
-
-        class IDisplayCensusComparerWrapper(Comparer<CensusIndividual> comp) : Comparer<IDisplayCensus>
-        {
-            readonly Comparer<CensusIndividual> comparer = comp;
-
-            public override int Compare(IDisplayCensus? x, IDisplayCensus? y) => comparer.Compare((CensusIndividual?)x, (CensusIndividual?)y);
         }
 
         void PrintToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintReport("Census Report");
@@ -208,7 +201,8 @@ namespace FTAnalyzer.Forms
         void TsBtnMapLocation_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
-            CensusIndividual? ds = dgCensus.CurrentRow is null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
+            CensusIndividual? ds = dgCensus.CurrentRow is null || dgCensus.CurrentRow.DataBoundItem is null ? null
+                : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
             FactLocation? loc = ds?.CensusLocation;
             if (loc is not null)
             {   // Do geo coding stuff
@@ -220,7 +214,7 @@ namespace FTAnalyzer.Forms
         void TsBtnMapOSLocation_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
-            CensusIndividual? ds = dgCensus.CurrentRow is null ? null : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
+            CensusIndividual? ds = (CensusIndividual?)dgCensus.CurrentRow.DataBoundItem;
             FactLocation? loc = ds?.CensusLocation;
             if (loc is not null)
             {   // Do geo coding stuff
@@ -237,7 +231,8 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && dgCensus.CurrentRow is not null && !CensusDate.VALUATIONROLLS.Contains(CensusDate))
             {
-                CensusIndividual ds = (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
+                CensusIndividual? ds = (CensusIndividual?)dgCensus.CurrentRow.DataBoundItem;
+                if (ds is null) return;
                 if (ModifierKeys.Equals(Keys.Shift))
                 {
                     Facts factForm = new(ds);
