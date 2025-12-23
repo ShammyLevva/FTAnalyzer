@@ -450,7 +450,9 @@ namespace FTAnalyzer.Forms
 
         void GoogleGeocodingBackgroundWorker_DoWork(object sender, DoWorkEventArgs e) => GoogleGeoCode(googleGeocodeBackgroundWorker, e);
 
-        void GoogleGeocodingBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        void GoogleGeocodingBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e) => GeoCodingProgressChanged(e);
+
+        void GeoCodingProgressChanged(ProgressChangedEventArgs e)
         {
             pbGeocoding.Visible = true;
             pbGeocoding.Value = (e.ProgressPercentage < 0) ? 1 : e.ProgressPercentage;
@@ -605,7 +607,7 @@ namespace FTAnalyzer.Forms
                 GoogleMap.ThreadCancelled = false;
                 int vpchecked = 0;
                 int updated = 0;
-                int maxtoCheck = FactLocation.AllLocations.Where(x => x.EmptyViewPort).Count();
+                int maxtoCheck = FactLocation.AllLocations.Count(x => x.EmptyViewPort);
                 foreach (FactLocation loc in FactLocation.AllLocations.Where(x => x.EmptyViewPort).OrderBy(x => x.Level))
                 {
                     if (loc != FactLocation.UNKNOWN_LOCATION && loc.Level <= FactLocation.REGION && loc.ToString().Length > 0)
@@ -892,8 +894,9 @@ namespace FTAnalyzer.Forms
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 dgLocations.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
-                FactLocation loc = (FactLocation)dgLocations.Rows[e.RowIndex].DataBoundItem;
-                mnuCopyLocation.Enabled = loc.IsGeoCoded(false);
+                FactLocation? loc = (FactLocation?)dgLocations.Rows[e.RowIndex].DataBoundItem;
+                if (loc is not null)
+                    mnuCopyLocation.Enabled = loc.IsGeoCoded(false);
             }
         }
 
@@ -1430,12 +1433,7 @@ namespace FTAnalyzer.Forms
         #region OS Geocoding Threading
         void OSGeocodeBackgroundWorker_DoWork(object sender, DoWorkEventArgs e) => OSGeoCode(OSGeocodeBackgroundWorker, e);
 
-        void OSGeocodeBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            pbGeocoding.Visible = true;
-            pbGeocoding.Value = (e.ProgressPercentage < 0) ? 1 : e.ProgressPercentage;
-            txtLocations.Text = e.UserState.ToString() ?? string.Empty;
-        }
+        void OSGeocodeBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e) => GeoCodingProgressChanged(e);
 
         void OSGeocodeBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) => WorkFinished(sender);
         #endregion

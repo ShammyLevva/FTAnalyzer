@@ -395,7 +395,6 @@ namespace FTAnalyzer.Utilities
         {
             Coordinate Point, NorthEast, SouthWest;
             Coordinate mPoint, mNorthEast, mSouthWest;
-            double latitude, longitude, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw;
 
             if (InstanceConnection.State != ConnectionState.Open)
                 InstanceConnection.Open();
@@ -445,12 +444,12 @@ namespace FTAnalyzer.Utilities
                 while (reader.Read())
                 {
                     string location = reader["location"].ToString() ?? string.Empty;
-                    _ = double.TryParse(reader["latitude"].ToString(), out latitude);
-                    _ = double.TryParse(reader["longitude"].ToString(), out longitude);
-                    _ = double.TryParse(reader["viewport_x_ne"].ToString(), out viewport_x_ne);
-                    _ = double.TryParse(reader["viewport_y_ne"].ToString(), out viewport_y_ne);
-                    _ = double.TryParse(reader["viewport_x_sw"].ToString(), out viewport_x_sw);
-                    _ = double.TryParse(reader["viewport_y_sw"].ToString(), out viewport_y_sw);
+                    _ = double.TryParse(reader["latitude"].ToString(), out double latitude);
+                    _ = double.TryParse(reader["longitude"].ToString(), out double longitude);
+                    _ = double.TryParse(reader["viewport_x_ne"].ToString(), out double viewport_x_ne);
+                    _ = double.TryParse(reader["viewport_y_ne"].ToString(), out double viewport_y_ne);
+                    _ = double.TryParse(reader["viewport_x_sw"].ToString(), out double viewport_x_sw);
+                    _ = double.TryParse(reader["viewport_y_sw"].ToString(), out double viewport_y_sw);
                     Point = new Coordinate(longitude, latitude);
                     NorthEast = new Coordinate(viewport_y_ne, viewport_x_ne); // old viewports had x & y wrong way round
                     SouthWest = new Coordinate(viewport_y_sw, viewport_x_sw); // x is stored as lat y as long
@@ -771,7 +770,7 @@ namespace FTAnalyzer.Utilities
             int rowsaffected = updateCmd.ExecuteNonQuery();
             if (rowsaffected != 1)
                 Debug.WriteLine("Problem updating");
-            OnGeoLocationUpdated(loc);
+            OnGeoLocationUpdated();
         }
         #endregion
 
@@ -1032,7 +1031,7 @@ namespace FTAnalyzer.Utilities
 
         #region EventHandler
         public static event EventHandler GeoLocationUpdated;
-        protected static void OnGeoLocationUpdated(FactLocation loc)
+        protected static void OnGeoLocationUpdated()
         {
             GeoLocationUpdated?.Invoke(null, EventArgs.Empty);
         }

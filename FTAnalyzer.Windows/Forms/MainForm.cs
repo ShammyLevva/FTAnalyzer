@@ -780,49 +780,42 @@ namespace FTAnalyzer
         {
             // get the tab
             loc = null;
-            try
+            switch (tabCtrlLocations.SelectedTab.Text)
             {
-                switch (tabCtrlLocations.SelectedTab.Text)
-                {
-                    case "Tree View":
-                        TreeNode? node = treeViewLocations.SelectedNode;
-                        if (node is not null)
-                        {
-                            FactLocation? tagLoc = (FactLocation?)node.Tag;
-                            if(tagLoc is not null)
-                                loc = node.Text == "<blank>" ? null : tagLoc.GetLocation(node.Level);
-                        }
-                        break;
-                    case "Countries":
-                        loc = dgCountries.CurrentRow is null ? null : (FactLocation)dgCountries.CurrentRowDataBoundItem;
-                        break;
-                    case "Regions":
-                        loc = dgRegions.CurrentRow is null ? null : (FactLocation)dgRegions.CurrentRowDataBoundItem;
-                        break;
-                    case "SubRegions":
-                        loc = dgSubRegions.CurrentRow is null ? null : (FactLocation)dgSubRegions.CurrentRowDataBoundItem;
-                        break;
-                    case "Addresses":
-                        loc = dgAddresses.CurrentRow is null ? null : (FactLocation)dgAddresses.CurrentRowDataBoundItem;
-                        break;
-                    case "Places":
-                        loc = dgPlaces.CurrentRow is null ? null : (FactLocation)dgPlaces.CurrentRowDataBoundItem;
-                        break;
-                }
-                if (loc is null)
-                {
-                    if (tabCtrlLocations.SelectedTab.Text == "Tree View")
-                        UIHelpers.ShowMessage("Location selected isn't valid to show on the map.", "FTAnalyzer");
-                    else
-                        UIHelpers.ShowMessage("Nothing selected. Please select a location to show on the map.", "FTAnalyzer");
-                    return 0f;
-                }
-                return loc.ZoomLevel;
+                case "Tree View":
+                    TreeNode? node = treeViewLocations.SelectedNode;
+                    if (node is not null)
+                    {
+                        FactLocation? tagLoc = (FactLocation?)node.Tag;
+                        if (tagLoc is not null)
+                            loc = node.Text == "<blank>" ? null : tagLoc.GetLocation(node.Level);
+                    }
+                    break;
+                case "Countries":
+                    loc = dgCountries.CurrentRow is null ? null : (FactLocation)dgCountries.CurrentRowDataBoundItem;
+                    break;
+                case "Regions":
+                    loc = dgRegions.CurrentRow is null ? null : (FactLocation)dgRegions.CurrentRowDataBoundItem;
+                    break;
+                case "SubRegions":
+                    loc = dgSubRegions.CurrentRow is null ? null : (FactLocation)dgSubRegions.CurrentRowDataBoundItem;
+                    break;
+                case "Addresses":
+                    loc = dgAddresses.CurrentRow is null ? null : (FactLocation)dgAddresses.CurrentRowDataBoundItem;
+                    break;
+                case "Places":
+                    loc = dgPlaces.CurrentRow is null ? null : (FactLocation)dgPlaces.CurrentRowDataBoundItem;
+                    break;
             }
-            catch (NullReferenceException)
+            if (loc is null)
             {
+                if (tabCtrlLocations.SelectedTab.Text == "Tree View")
+                    UIHelpers.ShowMessage("Location selected isn't valid to show on the map.", "FTAnalyzer");
+                else
+                    UIHelpers.ShowMessage("Nothing selected. Please select a location to show on the map.", "FTAnalyzer");
                 return 0f;
             }
+            return loc.ZoomLevel;
         }
 
         #region DataErrors
@@ -1028,16 +1021,16 @@ namespace FTAnalyzer
                 DataGridViewCell cell = grid.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 if (e.ColumnIndex == 0)
                 {
-                    string country = (string)cell.Value;
-                    if (Countries.IsKnownCountry(country))
+                    string? country = (string?)cell.Value;
+                    if (country is not null && Countries.IsKnownCountry(country))
                         e.CellStyle.Font = boldFont;
                     else
                         e.CellStyle.Font = normalFont;
                 }
                 else if (e.ColumnIndex == 1)
                 {
-                    string region = (string)cell.Value;
-                    if (region.Length > 0 && Regions.IsKnownRegion(region))
+                    string? region = (string?)cell.Value;
+                    if (region is not null && region.Length > 0 && Regions.IsKnownRegion(region))
                         e.CellStyle.Font = boldFont;
                     else
                         e.CellStyle.Font = normalFont;
