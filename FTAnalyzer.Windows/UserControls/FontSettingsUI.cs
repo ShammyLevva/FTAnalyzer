@@ -89,12 +89,6 @@ namespace FTAnalyzer.UserControls
                         fontSize = 8.25f;
                         fontHeight = 22;
                         break;
-                    case 2:
-                        selectedFont = new(lbSample.Font.Name, 10f);
-                        fontWidth = 6.6f;
-                        fontSize = 10f;
-                        fontHeight = 27;
-                        break;
                     case 3:
                         selectedFont = new(lbSample.Font.Name, 12f);
                         fontWidth = 8.0f;
@@ -107,7 +101,7 @@ namespace FTAnalyzer.UserControls
                         fontSize = 14f;
                         fontHeight = 37;
                         break;
-                    default:
+                    default: // also case 2
                         selectedFont = new(lbSample.Font.Name, 10f);
                         fontWidth = 6.6f;
                         fontSize = 10f;

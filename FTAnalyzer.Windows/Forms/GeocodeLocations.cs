@@ -1165,7 +1165,7 @@ namespace FTAnalyzer.Forms
             while (!reader.EndOfStream)
             {
                 string line = reader.ReadLine() ?? string.Empty;
-                if (line.IndexOf(':') >= 0)
+                if (line.Contains(':'))
                 {
                     OS50kGazetteer gaz = new(line);
                     string key = gaz.DefinitiveName.ToLower();

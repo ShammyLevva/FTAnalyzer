@@ -444,7 +444,6 @@ namespace FTAnalyzer.Utilities
                 using SQLiteDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    latitude = longitude = viewport_x_ne = viewport_x_sw = viewport_y_ne = viewport_y_sw = 0;
                     string location = reader["location"].ToString() ?? string.Empty;
                     _ = double.TryParse(reader["latitude"].ToString(), out latitude);
                     _ = double.TryParse(reader["longitude"].ToString(), out longitude);
@@ -600,7 +599,8 @@ namespace FTAnalyzer.Utilities
                     location.FoundLevel = foundlevel;
                 }
             }
-            if (location.ViewPort.NorthEast.Lat != 0 && location.ViewPort.NorthEast.Long != 0 &&
+            if (!ExtensionMethods.DoubleEquals(location.ViewPort.NorthEast.Lat,0) &&
+                !ExtensionMethods.DoubleEquals(location.ViewPort.NorthEast.Long,0) &&
                location.ViewPort.NorthEast.Long > -180 && location.ViewPort.NorthEast.Long < 180) // fix any ViewPorts stored as mPoints
             {
                 location.ViewPort = MapTransforms.TransformViewport(location.ViewPort);
@@ -937,7 +937,6 @@ namespace FTAnalyzer.Utilities
                 SQLiteParameter param = cmd.CreateParameter();
                 param.DbType = DbType.String;
                 cmd.Parameters.Add(param);
-                param = cmd.CreateParameter();
                 cmd.Prepare();
                 cmd.Parameters[0].Value = factType;
                 using SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
@@ -956,7 +955,6 @@ namespace FTAnalyzer.Utilities
             param = cmd.CreateParameter();
             param.DbType = DbType.Boolean;
             cmd.Parameters.Add(param);
-            param = cmd.CreateParameter();
             cmd.Prepare();
             cmd.Parameters[0].Value = factType;
             cmd.Parameters[1].Value = ignore;
@@ -978,8 +976,10 @@ namespace FTAnalyzer.Utilities
                 while (reader.Read())
                 {
                     FactLocation loc = FactLocation.LookupLocation(reader[0].ToString() ?? string.Empty);
-                    if (!queue.Contains(loc) && loc.Latitude != 0 && loc.Longitude != 0)
-                        queue.Enqueue(loc);
+                    if (!queue.Contains(loc) && 
+                        !ExtensionMethods.DoubleEquals(loc.Latitude,0) &&
+                        !ExtensionMethods.DoubleEquals(loc.Longitude,0))
+                            queue.Enqueue(loc);
                 }
             }
             InstanceConnection.Close();
@@ -1034,7 +1034,7 @@ namespace FTAnalyzer.Utilities
         public static event EventHandler GeoLocationUpdated;
         protected static void OnGeoLocationUpdated(FactLocation loc)
         {
-            GeoLocationUpdated?.Invoke(loc, EventArgs.Empty);
+            GeoLocationUpdated?.Invoke(null, EventArgs.Empty);
         }
         #endregion
     }

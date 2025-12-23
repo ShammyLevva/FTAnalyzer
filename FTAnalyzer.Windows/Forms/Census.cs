@@ -46,7 +46,7 @@ namespace FTAnalyzer.Forms
         public void SetupCensus(Predicate<CensusIndividual> filter)
         {
             IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, CensusDone, true);
-            List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Filter(filter).ToList();
+            List<CensusIndividual> individuals = [.. censusFamilies.SelectMany(f => f.Members).Filter(filter)];
             individuals = FilterDuplicateIndividuals(individuals);
             RecordCount = individuals.Count;
             SetupDataGridView(CensusDone, individuals);
@@ -54,7 +54,7 @@ namespace FTAnalyzer.Forms
 
         static List<CensusIndividual> FilterDuplicateIndividuals(List<CensusIndividual> individuals)
         {
-            List<CensusIndividual> result = individuals.Filter(i => i.FamilyMembersCount > 1).ToList();
+            List<CensusIndividual> result = [.. individuals.Filter(i => i.FamilyMembersCount > 1)];
             HashSet<string> ids = [.. result.Select(i => i.IndividualID)];
             foreach (CensusIndividual i in individuals.Filter(i => i.FamilyMembersCount == 1))
                 if (!ids.Contains(i.IndividualID))
@@ -83,9 +83,9 @@ namespace FTAnalyzer.Forms
             Predicate<CensusIndividual> filter = FilterUtils.AndFilter(relationFilter, predicate);
             Predicate<Individual> individualFilter = FilterUtils.AndFilter(individualRelationFilter, individualPredicate);
             IEnumerable<CensusFamily> censusFamilies = ft.GetAllCensusFamilies(CensusDate, true, false);
-            List<CensusIndividual> individuals = censusFamilies.SelectMany(f => f.Members).Filter(filter).ToList();
+            List<CensusIndividual> individuals = [.. censusFamilies.SelectMany(f => f.Members).Filter(filter)];
             individuals = FilterDuplicateIndividuals(individuals);
-            List<Individual> listToCheck = ft.AllIndividuals.Filter(individualFilter).ToList();
+            List<Individual> listToCheck = [.. ft.AllIndividuals.Filter(individualFilter)];
             //CompareLists(individuals, listToCheck);
             RecordCount = individuals.Count;
             SetupDataGridView(true, individuals);

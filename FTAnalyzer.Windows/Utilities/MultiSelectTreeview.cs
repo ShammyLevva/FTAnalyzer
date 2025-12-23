@@ -102,25 +102,22 @@ namespace FTAnalyzer.Utilities
             {
                 base.SelectedNode = null;
 
-                TreeNode node = GetNodeAt(e.Location);
-                if (node is not null)
+                TreeNode? node = GetNodeAt(e.Location);
+                if (node is null) return;
+                int leftBound = node.Bounds.X; // - 20; // Allow user to click on image
+                int rightBound = node.Bounds.Right + 10; // Give a little extra room
+                if (e.Location.X > leftBound && e.Location.X < rightBound)
                 {
-                    int leftBound = node.Bounds.X; // - 20; // Allow user to click on image
-                    int rightBound = node.Bounds.Right + 10; // Give a little extra room
-                    if (e.Location.X > leftBound && e.Location.X < rightBound)
+                    if (ModifierKeys == Keys.None && (m_SelectedNodes.Contains(node)))
                     {
-                        if (ModifierKeys == Keys.None && (m_SelectedNodes.Contains(node)))
-                        {
-                            // Potential Drag Operation
-                            // Let Mouse Up do select
-                        }
-                        else
-                        {
-                            SelectNode(node);
-                        }
+                        // Potential Drag Operation
+                        // Let Mouse Up do select
+                    }
+                    else
+                    {
+                        SelectNode(node);
                     }
                 }
-
                 base.OnMouseDown(e);
             }
             catch (Exception ex)
@@ -298,7 +295,8 @@ namespace FTAnalyzer.Utilities
                         else
                         {
                             // Select all of the nodes up to this point under this nodes parent
-                            SelectNode(m_SelectedNode.Parent.FirstNode);
+                            if (m_SelectedNode.Parent.FirstNode is not null)
+                                SelectNode(m_SelectedNode.Parent.FirstNode);
                         }
                     }
                     else
@@ -318,14 +316,13 @@ namespace FTAnalyzer.Utilities
                         {
                             // Select the last ROOT node in the tree
                             if (Nodes.Count > 0)
-                            {
                                 SelectNode(Nodes[^1]);
-                            }
                         }
                         else
                         {
                             // Select the last node in this branch
-                            SelectNode(m_SelectedNode.Parent.LastNode);
+                            if (m_SelectedNode.Parent.LastNode is not null)
+                                SelectNode(m_SelectedNode.Parent.LastNode);
                         }
                     }
                     else
@@ -334,7 +331,7 @@ namespace FTAnalyzer.Utilities
                         {
                             // Select the last node visible node in the tree.
                             // Don't expand branches incase the tree is virtual
-                            TreeNode ndLast = Nodes[0].LastNode;
+                            TreeNode? ndLast = Nodes[0].LastNode;
                             while (ndLast.IsExpanded && (ndLast.LastNode is not null))
                             {
                                 ndLast = ndLast.LastNode;
@@ -446,8 +443,8 @@ namespace FTAnalyzer.Utilities
                 else if (ModifierKeys == Keys.Shift)
                 {
                     // Shift+Click selects nodes between the selected node and here.
-                    TreeNode ndStart = m_SelectedNode;
-                    TreeNode ndEnd = node;
+                    TreeNode? ndStart = m_SelectedNode;
+                    TreeNode? ndEnd = node;
 
                     if (ndStart.Parent == ndEnd.Parent)
                     {
@@ -485,8 +482,8 @@ namespace FTAnalyzer.Utilities
                         // We need to find a common parent to determine if we need
                         // to walk down selecting, or walk up selecting.
 
-                        TreeNode ndStartP = ndStart;
-                        TreeNode ndEndP = ndEnd;
+                        TreeNode? ndStartP = ndStart;
+                        TreeNode? ndEndP = ndEnd;
                         int startDepth = Math.Min(ndStartP.Level, ndEndP.Level);
 
                         // Bring lower node up to common depth
@@ -584,13 +581,9 @@ namespace FTAnalyzer.Utilities
             }
         }
 
-        void SelectSingleNode(TreeNode node)
+        void SelectSingleNode(TreeNode? node)
         {
-            if (node is null)
-            {
-                return;
-            }
-
+            if (node is null) return;
             ClearSelectedNodes();
             ToggleNode(node, true);
             node.EnsureVisible();

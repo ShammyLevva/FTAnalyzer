@@ -166,7 +166,7 @@ namespace FTAnalyzer.Forms
         {
             bool lcFacts(Individual x) => x.LostCousinsFacts > 0;
             Predicate<Individual> filter = FilterUtils.AndFilter(relationFilter, lcFacts);
-            IEnumerable<Individual> listToCheck = ft.AllIndividuals.Filter(filter).ToList();
+            IEnumerable<Individual> listToCheck = [.. ft.AllIndividuals.Filter(filter)];
 
             bool missing(Individual x) => !x.IsLostCousinsEntered(CensusDate.EWCENSUS1841, false)
                                        && !x.IsLostCousinsEntered(CensusDate.EWCENSUS1881, false)

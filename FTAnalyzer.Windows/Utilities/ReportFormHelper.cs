@@ -167,7 +167,9 @@ namespace FTAnalyzer.Utilities
                             ListSortDirection direction = "Ascending".Equals(col.ExtendedProperties["Sort"]) ?
                                     ListSortDirection.Ascending :
                                     ListSortDirection.Descending;
-                            ReportGrid.Sort(ReportGrid.Columns[col.ColumnName], direction);
+                            DataGridViewColumn sortCol = ReportGrid.Columns[col.ColumnName];
+                            if(sortCol is not null)
+                                ReportGrid.Sort(sortCol, direction);
                         }
                         i++;
                     }
