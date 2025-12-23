@@ -327,7 +327,8 @@ namespace FTAnalyzer.Forms
         {
             if (selectRow && dgIndividuals.CurrentRow is not null)
             {
-                IDisplayIndividual ind = (IDisplayIndividual)dgIndividuals.CurrentRow.DataBoundItem;
+                IDisplayIndividual? ind = (IDisplayIndividual?)dgIndividuals.CurrentRow.DataBoundItem;
+                if (ind is null) return;
                 families.TryGetValue(ind, out IDisplayFamily? f);
                 if (f is not null)
                 {
@@ -347,8 +348,9 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string indID = (string)dgIndividuals.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
-                MainForm.ShowIndividualsFacts(indID);
+                string? indID = (string?)dgIndividuals.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
+                if(indID is not null)
+                    MainForm.ShowIndividualsFacts(indID);
             }
         }
 
@@ -356,9 +358,10 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string famID = sender == dgFamilies ?
-                    (string)dgFamilies.CurrentRow.Cells[nameof(IDisplayFamily.FamilyID)].Value :
-                    (string)dgChildrenStatus.CurrentRow.Cells[nameof(IDisplayFamily.FamilyID)].Value;
+                string? famID = sender == dgFamilies ?
+                    (string?)dgFamilies.CurrentRow.Cells[nameof(IDisplayFamily.FamilyID)].Value :
+                    (string?)dgChildrenStatus.CurrentRow.Cells[nameof(IDisplayFamily.FamilyID)].Value;
+                if (famID is null) return;
                 Family? fam = ft.GetFamily(famID);
                 if (fam is not null)
                 {
@@ -428,7 +431,8 @@ namespace FTAnalyzer.Forms
 
         void ContextMenuStrip1_Opened(object sender, EventArgs e)
         {
-            string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+            string? indID = (string?)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+            if (indID is null) return;
             Individual? ind = ft.GetIndividual(indID);
             if (ind is not null)
                 viewNotesToolStripMenuItem.Enabled = ind.HasNotes;
@@ -436,7 +440,8 @@ namespace FTAnalyzer.Forms
 
         void ViewNotesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string indID = (string)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+            string? indID = (string?)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+            if (indID is null) return; 
             Individual? ind = ft.GetIndividual(indID);
             if (ind is not null)
             {

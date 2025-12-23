@@ -2357,8 +2357,9 @@ namespace FTAnalyzer
         {
             if (pbDuplicates.Visible || e.RowIndex < 0 || e.ColumnIndex < 0)
                 return; // do nothing if progress bar still visible
-            string indA_ID = (string)dgDuplicates.CurrentRow.Cells[nameof(IDisplayDuplicateIndividual.IndividualID)].Value;
-            string indB_ID = (string)dgDuplicates.CurrentRow.Cells[nameof(IDisplayDuplicateIndividual.MatchIndividualID)].Value;
+            string? indA_ID = (string?)dgDuplicates.CurrentRow.Cells[nameof(IDisplayDuplicateIndividual.IndividualID)].Value;
+            string? indB_ID = (string?)dgDuplicates.CurrentRow.Cells[nameof(IDisplayDuplicateIndividual.MatchIndividualID)].Value;
+            if (indA_ID is null || indB_ID is null) return;
             if (GeneralSettings.Default.MultipleFactForms)
             {
                 ShowIndividualsFacts(indA_ID);
@@ -2450,7 +2451,7 @@ namespace FTAnalyzer
         List<string> BuildFactTypeList(CheckedListBox list, bool includeCreated)
         {
             List<string> result = [];
-            if (list == ckbFactExclude && ckbFactExclude.Visible == false)
+            if (list == ckbFactExclude && !ckbFactExclude.Visible)
                 return result; // if we aren't looking to exclude facts don't pass anything to list of exclusions
             int index = 0;
             foreach (string factType in list.Items)
@@ -2460,8 +2461,10 @@ namespace FTAnalyzer
                     if (includeCreated)
                         result.Add(factType);
                     else
+                    {
                         if (factType != Fact.GetFactTypeDescription(Fact.PARENT) && factType != Fact.GetFactTypeDescription(Fact.CHILDREN))
-                        result.Add(factType);
+                            result.Add(factType);
+                    }
                 }
             }
             return result;
@@ -2663,8 +2666,10 @@ namespace FTAnalyzer
             int boundaryWidth = rtbOutput.Margin.Left + tabSelector.Margin.Left + tabSelector.Margin.Right;
             int boundaryHeight = panel2.Height - statusStrip.Height - menuStrip1.Height - tabSelector.Location.Y + tabSelector.Margin.Top + tabSelector.Margin.Bottom;
             Rectangle workarea = Screen.GetWorkingArea(topleft);
-            log.Debug($"CheckMaxWindowSizes: boundaryWidth:{boundaryWidth}, boundaryHeight: {boundaryHeight}");
-            log.Debug($"tabselector- X: {tabSelector.Location.X} Y: {tabSelector.Location.Y}");
+            string message1 = $"CheckMaxWindowSizes: boundaryWidth:{boundaryWidth}, boundaryHeight: {boundaryHeight}";
+            string message2 = $"tabselector- X: {tabSelector.Location.X} Y: {tabSelector.Location.Y}";
+            log.Debug(message1);
+            log.Debug(message2);
             if (Width > workarea.Width)
                 Width = workarea.Width;
             if (Height > workarea.Height)
@@ -2731,9 +2736,13 @@ namespace FTAnalyzer
         {
             if (dgDuplicates.RowCount > 0)
             {
-                dgDuplicates.Sort(dgDuplicates.Columns[nameof(IDisplayDuplicateIndividual.Forenames)], ListSortDirection.Ascending);
-                dgDuplicates.Sort(dgDuplicates.Columns[nameof(IDisplayDuplicateIndividual.Surname)], ListSortDirection.Ascending);
-                dgDuplicates.Sort(dgDuplicates.Columns[nameof(IDisplayDuplicateIndividual.Score)], ListSortDirection.Descending);
+                DataGridViewColumn? forenames = dgDuplicates.Columns[nameof(IDisplayDuplicateIndividual.Forenames)];
+                DataGridViewColumn? surname = dgDuplicates.Columns[nameof(IDisplayDuplicateIndividual.Surname)];
+                DataGridViewColumn? score = dgDuplicates.Columns[nameof(IDisplayDuplicateIndividual.Score)];
+                if (forenames is null || surname is null || score is null) return;
+                dgDuplicates.Sort(forenames, ListSortDirection.Ascending);
+                dgDuplicates.Sort(surname, ListSortDirection.Ascending);
+                dgDuplicates.Sort(score, ListSortDirection.Descending);
             }
         }
 
@@ -2966,7 +2975,7 @@ namespace FTAnalyzer
             tspbTabProgress.Visible = false;
             Facts factForm = new(results);
             DisposeDuplicateForms(factForm);
-            factForm.Show();
+            await factForm.ShowAsync();
             factForm.ShowHideFactRows();
             HourGlass(this, false);
         }
@@ -3035,7 +3044,7 @@ namespace FTAnalyzer
             HourGlass(this, false);
         }
 
-        async void DisplayColourCensus(string country)
+        async Task DisplayColourCensus(string country)
         {
             HourGlass(this, true);
             Predicate<Individual> relTypeFilter = relTypesResearchSuggest.BuildFilter<Individual>(x => x.RelationType);
@@ -3044,7 +3053,7 @@ namespace FTAnalyzer
                     ft.ColourCensus(country, relTypeFilter, txtColouredSurname.Text, cbFamily, ckbIgnoreNoBirthDate.Checked, ckbIgnoreNoDeathDate.Checked);
             ColourCensus rs = new(country, list);
             DisposeDuplicateForms(rs);
-            rs.Show();
+            await rs.ShowAsync();
             rs.Focus();
             await Analytics.TrackActionAsync(Analytics.MainFormAction, Analytics.ColourCensusEvent, country).ConfigureAwait(true);
             HourGlass(this, false);

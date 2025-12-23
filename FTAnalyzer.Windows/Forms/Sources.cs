@@ -57,7 +57,8 @@ namespace FTAnalyzer.Forms
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
-                FactSource source = (FactSource)dgSources.CurrentRow.DataBoundItem;
+                FactSource? source = (FactSource?)dgSources.CurrentRow.DataBoundItem;
+                if (source is null) return;
                 Facts factForm = new(source);
                 MainForm.DisposeDuplicateForms(factForm);
                 factForm.Show();
