@@ -278,6 +278,7 @@ namespace FTAnalyzer.Forms
 
         public void ShowHideFactRows()
         {
+            if (dgFacts.DataSource is null) return;
             CurrencyManager cm = (CurrencyManager)BindingContext[dgFacts.DataSource];
             cm.SuspendBinding();
             foreach (DataGridViewRow row in dgFacts.Rows)
@@ -366,14 +367,19 @@ namespace FTAnalyzer.Forms
 
         void ResetTable()
         {
+            DataGridViewColumn? factdate = dgFacts.Columns["FactDate"];
+            DataGridViewColumn? forenames = dgFacts.Columns["Forenames"];
+            DataGridViewColumn? surname = dgFacts.Columns["Surname"];
+            if (factdate is null) return;
             if (allFacts)
             {
-                dgFacts.Sort(dgFacts.Columns["FactDate"], ListSortDirection.Ascending);
-                dgFacts.Sort(dgFacts.Columns["Forenames"], ListSortDirection.Ascending);
-                dgFacts.Sort(dgFacts.Columns["Surname"], ListSortDirection.Ascending);
+                if (forenames is null || surname is null) return;
+                dgFacts.Sort(factdate, ListSortDirection.Ascending);
+                dgFacts.Sort(forenames, ListSortDirection.Ascending);
+                dgFacts.Sort(surname, ListSortDirection.Ascending);
             }
             else
-                dgFacts.Sort(dgFacts.Columns["FactDate"], ListSortDirection.Ascending);
+                dgFacts.Sort(factdate, ListSortDirection.Ascending);
             SetBackColour();
         }
 

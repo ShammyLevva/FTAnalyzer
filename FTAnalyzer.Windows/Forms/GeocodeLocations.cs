@@ -354,7 +354,12 @@ namespace FTAnalyzer.Forms
             UpdateGeocodeStatusMenus();
         }
 
-        void ResetTable() => dgLocations.Sort(dgLocations.Columns["GeocodedLocation"], ListSortDirection.Ascending);
+        void ResetTable()
+        {
+            DataGridViewColumn? geoLocation = dgLocations.Columns["GeocodedLocation"];
+            if (geoLocation != null)
+                dgLocations.Sort(geoLocation, ListSortDirection.Ascending);
+        }
 
         void PrintToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintReport("Locations report");
 
@@ -387,7 +392,7 @@ namespace FTAnalyzer.Forms
             {
                 Cursor = Cursors.WaitCursor;
                 FactLocation? loc = (FactLocation?)dgLocations.Rows[e.RowIndex].DataBoundItem;
-                if(loc is not null)
+                if (loc is not null)
                     EditLocation(loc);
             }
         }
@@ -397,8 +402,9 @@ namespace FTAnalyzer.Forms
             if (!ft.Geocoding)
             {
                 Cursor = Cursors.WaitCursor;
-                FactLocation loc = (FactLocation)dgLocations.CurrentRow.DataBoundItem;
-                EditLocation(loc);
+                FactLocation? loc = (FactLocation?)dgLocations.CurrentRow.DataBoundItem;
+                if (loc is not null)
+                    EditLocation(loc);
             }
         }
 
@@ -430,10 +436,13 @@ namespace FTAnalyzer.Forms
         {
             if (CopyLocation.IsGeoCoded(false))
             {
-                FactLocation pasteLocation = (FactLocation)dgLocations.CurrentRow.DataBoundItem;
-                FactLocation.CopyLocationDetails(CopyLocation, pasteLocation);
-                UpdateDatabase(pasteLocation, true);
-                dgLocations.Refresh();
+                FactLocation? pasteLocation = (FactLocation?)dgLocations.CurrentRow.DataBoundItem;
+                if (pasteLocation is not null)
+                {
+                    FactLocation.CopyLocationDetails(CopyLocation, pasteLocation);
+                    UpdateDatabase(pasteLocation, true);
+                    dgLocations.Refresh();
+                }
             }
         }
 
@@ -769,7 +778,7 @@ namespace FTAnalyzer.Forms
                     worker.ReportProgress(percent, status);
 
                     if (worker.CancellationPending ||
-                        ((txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max"))))
+                        (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max")))
                     {
                         e.Cancel = true;
                         break;
@@ -836,37 +845,46 @@ namespace FTAnalyzer.Forms
 
         void MnuVerified_Click(object sender, EventArgs e)
         {
-            FactLocation loc = (FactLocation)dgLocations.CurrentRow.DataBoundItem;
-            loc.GeocodeStatus = FactLocation.Geocode.GEDCOM_USER;
-            UpdateDatabase(loc, true);
-            dgLocations.Refresh();
+            FactLocation? loc = (FactLocation?)dgLocations.CurrentRow.DataBoundItem;
+            if (loc is not null)
+            {
+                loc.GeocodeStatus = FactLocation.Geocode.GEDCOM_USER;
+                UpdateDatabase(loc, true);
+                dgLocations.Refresh();
+            }
         }
 
         void MnuIncorrect_Click(object sender, EventArgs e)
         {
-            FactLocation loc = (FactLocation)dgLocations.CurrentRow.DataBoundItem;
-            loc.GeocodeStatus = FactLocation.Geocode.INCORRECT;
-            UpdateDatabase(loc, true);
-            dgLocations.Refresh();
+            FactLocation? loc = (FactLocation?)dgLocations.CurrentRow.DataBoundItem;
+            if (loc is not null)
+            {
+                loc.GeocodeStatus = FactLocation.Geocode.INCORRECT;
+                UpdateDatabase(loc, true);
+                dgLocations.Refresh();
+            }
         }
 
         void MnuNotSearched_Click(object sender, EventArgs e)
         {
-            FactLocation loc = (FactLocation)dgLocations.CurrentRow.DataBoundItem;
-            loc.GeocodeStatus = FactLocation.Geocode.NOT_SEARCHED;
-            loc.FoundLocation = string.Empty;
-            loc.FoundResultType = string.Empty;
-            loc.Latitude = 0d;
-            loc.Longitude = 0d;
-            loc.LatitudeM = 0d;
-            loc.LongitudeM = 0d;
-            loc.ViewPort.NorthEast.Lat = 0d;
-            loc.ViewPort.NorthEast.Long = 0d;
-            loc.ViewPort.SouthWest.Lat = 0d;
-            loc.ViewPort.SouthWest.Long = 0d;
-            loc.FoundLevel = -2;
-            UpdateDatabase(loc, true);
-            dgLocations.Refresh();
+            FactLocation? loc = (FactLocation?)dgLocations.CurrentRow.DataBoundItem;
+            if (loc is not null)
+            {
+                loc.GeocodeStatus = FactLocation.Geocode.NOT_SEARCHED;
+                loc.FoundLocation = string.Empty;
+                loc.FoundResultType = string.Empty;
+                loc.Latitude = 0d;
+                loc.Longitude = 0d;
+                loc.LatitudeM = 0d;
+                loc.LongitudeM = 0d;
+                loc.ViewPort.NorthEast.Lat = 0d;
+                loc.ViewPort.NorthEast.Long = 0d;
+                loc.ViewPort.SouthWest.Lat = 0d;
+                loc.ViewPort.SouthWest.Long = 0d;
+                loc.FoundLevel = -2;
+                UpdateDatabase(loc, true);
+                dgLocations.Refresh();
+            }
         }
 
         void DgLocations_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
@@ -926,7 +944,10 @@ namespace FTAnalyzer.Forms
                 {
                     if (queue.TryDequeue(out FactLocation? loc))
                     {
-                        if (loc is not null && loc.ToString().Length > 0 && loc.Latitude != 0 && loc.Longitude != 0 && !loc.Country.Equals(Countries.AT_SEA))
+                        if (loc is not null && loc.ToString().Length > 0 &&
+                            !ExtensionMethods.DoubleEquals(loc.Latitude, 0) &&
+                            !ExtensionMethods.DoubleEquals(loc.Longitude, 0) &&
+                            !loc.Country.Equals(Countries.AT_SEA))
                         {
                             GeoResponse? res = null;
                             double latitude = loc.Latitude;
@@ -962,7 +983,7 @@ namespace FTAnalyzer.Forms
                     worker.ReportProgress(percent, status);
 
                     if (worker.CancellationPending ||
-                        ((txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max"))))
+                        (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max")))
                     {
                         e.Cancel = true;
                         break;
@@ -1144,7 +1165,7 @@ namespace FTAnalyzer.Forms
             while (!reader.EndOfStream)
             {
                 string line = reader.ReadLine() ?? string.Empty;
-                if (line.IndexOf(':') > 0)
+                if (line.IndexOf(':') >= 0)
                 {
                     OS50kGazetteer gaz = new(line);
                     string key = gaz.DefinitiveName.ToLower();
@@ -1169,7 +1190,7 @@ namespace FTAnalyzer.Forms
             {
                 string name = kvp.Key;
                 OS50kGazetteer gaz = kvp.Value[0];
-                if (name.LastIndexOf(' ') > 0 && name.LastIndexOf(' ') + 4 >= name.ToString().Length)
+                if (name.LastIndexOf(' ') >= 0 && name.LastIndexOf(' ') + 4 >= name.ToString().Length)
                 {
                     string ending = name[(name.LastIndexOf(' ') + 1)..].Trim();
                     if (ending != "tor" && ending != "bay" && ending != "way" && ending != "law" && ending != "fen" && ending != "row" && ending != "lea"
@@ -1246,7 +1267,7 @@ namespace FTAnalyzer.Forms
                 stream.WriteLine("0 HEAD");
                 stream.WriteLine("0 @I@ INDI");
                 stream.WriteLine("1 NAME Test /Person/");
-                DateTime date = new(1800, 1, 1);
+                DateTime date = new(1800, 1, 1, 0, 0, 0, DateTimeKind.Utc);
                 if (failedToFind is not null)
                 {
                     foreach (FactLocation loc in failedToFind)

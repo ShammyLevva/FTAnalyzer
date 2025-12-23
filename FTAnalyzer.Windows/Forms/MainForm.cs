@@ -126,7 +126,6 @@ namespace FTAnalyzer
             }
         }
 
-
         void SetupFonts()
         {
             try
@@ -759,24 +758,22 @@ namespace FTAnalyzer
         void BtnOSMap_Click(object sender, EventArgs e)
         {
             bool oldOSMap = (sender as Button).Name == "btnOldOSMap";
+            float zoom = GetMapZoomLevel(out FactLocation loc);
+            if (loc is not null && loc.IsGeoCoded(false))
             {
-                float zoom = GetMapZoomLevel(out FactLocation loc);
-                if (loc is not null && loc.IsGeoCoded(false))
+                if (loc.IsWithinUKBounds)
                 {
-                    if (loc.IsWithinUKBounds)
+                    if (oldOSMap)
                     {
-                        if (oldOSMap)
-                        {
-                            string URL = $"https://maps.nls.uk/geo/explore/#zoom={zoom}&lat={loc.Latitude}&lon={loc.Longitude}&layers=1&b=1";
-                            SpecialMethods.VisitWebsite(URL);
-                        }
+                        string URL = $"https://maps.nls.uk/geo/explore/#zoom={zoom}&lat={loc.Latitude}&lon={loc.Longitude}&layers=1&b=1";
+                        SpecialMethods.VisitWebsite(URL);
                     }
-                    else
-                        UIHelpers.ShowMessage($"{loc} is outwith the UK so cannot be shown on a UK OS Map.");
                 }
                 else
-                    UIHelpers.ShowMessage($"{loc} is not yet geocoded so can't be displayed.");
+                    UIHelpers.ShowMessage($"{loc} is outwith the UK so cannot be shown on a UK OS Map.");
             }
+            else
+                UIHelpers.ShowMessage($"{loc} is not yet geocoded so can't be displayed.");
         }
 
         float GetMapZoomLevel(out FactLocation loc)
@@ -788,9 +785,13 @@ namespace FTAnalyzer
                 switch (tabCtrlLocations.SelectedTab.Text)
                 {
                     case "Tree View":
-                        TreeNode node = treeViewLocations.SelectedNode;
+                        TreeNode? node = treeViewLocations.SelectedNode;
                         if (node is not null)
-                            loc = node.Text == "<blank>" ? null : ((FactLocation)node.Tag).GetLocation(node.Level);
+                        {
+                            FactLocation? tagLoc = (FactLocation?)node.Tag;
+                            if(tagLoc is not null)
+                                loc = node.Text == "<blank>" ? null : tagLoc.GetLocation(node.Level);
+                        }
                         break;
                     case "Countries":
                         loc = dgCountries.CurrentRow is null ? null : (FactLocation)dgCountries.CurrentRowDataBoundItem;
@@ -1444,7 +1445,7 @@ namespace FTAnalyzer
                     else if (tabSelector.SelectedTab == tabLocations)
                     {
                         HourGlass(this, true);
-                        LoadLocations();
+                        LoadLocationsTab();
                     }
                     HourGlass(this, false);
                 }
@@ -1452,7 +1453,7 @@ namespace FTAnalyzer
             catch (Exception) { }
         }
 
-        void LoadLocations()
+        void LoadLocationsTab()
         {
             tabCtrlLocations.SelectedIndex = 0;
             tsCountLabel.Text = string.Empty;
@@ -1679,8 +1680,7 @@ namespace FTAnalyzer
                 new(ind => ind.HasOnlyOneParent || !ind.HasParents) : new(ind => !ind.HasParents);
             Predicate<Individual> locationFilter = treetopsCountry.BuildFilter<Individual>(FactDate.UNKNOWN_DATE, (d, x) => x.BestLocation(d));
             Predicate<Individual> relationFilter = treetopsRelation.BuildFilter<Individual>(x => x.RelationType);
-            Predicate<Individual> filter = FilterUtils.AndFilter(locationFilter, relationFilter);
-            filter = ckbTTIgnoreLocations.Checked ? relationFilter : FilterUtils.AndFilter(locationFilter, relationFilter);
+            Predicate<Individual> filter = ckbTTIgnoreLocations.Checked ? relationFilter : FilterUtils.AndFilter(locationFilter, relationFilter);
 
             if (txtTreetopsSurname.Text.Length > 0)
             {
@@ -2227,8 +2227,8 @@ namespace FTAnalyzer
             ToolStripMenuItem? item = sender as ToolStripMenuItem;
             if (item?.Tag is not null)
             {
-                string filename = (string)item.Tag ?? string.Empty;
-                await LoadFileAsync(filename).ConfigureAwait(true);
+                string file = (string)item.Tag ?? string.Empty;
+                await LoadFileAsync(file).ConfigureAwait(true);
             }
         }
 

@@ -89,7 +89,6 @@ namespace FTAnalyzer.Forms
             {
                 InitializeComponent();
                 Top += NativeMethods.TopTaskbarOffset;
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12; // force TLS1.2
             }
             catch (Exception) { }
         }
@@ -231,7 +230,7 @@ namespace FTAnalyzer.Forms
         public static GeoResponse? GoogleGeocode(FactLocation address, string text, int badtries)
         {
             int maxInterval = 30000;
-            double seconds = sleepinterval / 1000;
+            double seconds = sleepinterval / 1000.0;
             if (sleepinterval > 500 && seconds > 0.1)
                 OnWaitingForGoogle($"Google Timeout. Waiting {seconds} seconds.");
             if (sleepinterval >= maxInterval)
@@ -276,7 +275,7 @@ namespace FTAnalyzer.Forms
         public static GeoResponse? GoogleReverseGeocode(double latitude, double longitude, int badtries)
         {
             int maxInterval = 30000;
-            double seconds = sleepinterval / 1000;
+            double seconds = sleepinterval / 1000.0;
             if (sleepinterval > 500 && seconds > 0.1)
                 OnWaitingForGoogle($"Over Google limit. Waiting {seconds} seconds.");
             if (sleepinterval >= maxInterval)
