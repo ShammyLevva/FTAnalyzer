@@ -27,7 +27,7 @@
     <BuildType Solution="ReleaseDSProjection|*" Project="Release" />
     <BuildType Solution="SingleImage|*" Project="Debug" />
   </Project>
-  <Project Path="Installer.Net8/Installer.Net8.vdproj" Type="Installer">
+  <Project Path="Installer.Net10/Installer.Net10.vdproj" Type="Installer">
     <BuildType Solution="CD_ROM|*" Project="Debug" />
     <BuildType Solution="DebugDSProjection|*" Project="Debug" />
     <BuildType Solution="DVD-5|*" Project="Debug" />
