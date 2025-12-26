@@ -168,13 +168,16 @@ namespace FTAnalyzer.Forms
             List<IDisplayFact> displayFacts = [];
             foreach (DataGridViewRow row in dgIndividuals.SelectedRows)
             {
-                Individual ind = (Individual)row.DataBoundItem;
-                if (ind.AllLifeLineFacts.Count > 0)
+                Individual? ind = (Individual?)row.DataBoundItem;
+                if (ind is not null)
                 {
-                    displayFacts.AddUnique(ind.AllLifeLineFacts);
-                    MapLifeLine line = new(ind);
-                    line.AddFeatureDataRow(lifelines);
-                    points.AddFeatureDataRows(ind);
+                    if (ind.AllLifeLineFacts.Count > 0)
+                    {
+                        displayFacts.AddUnique(ind.AllLifeLineFacts);
+                        MapLifeLine line = new(ind);
+                        line.AddFeatureDataRow(lifelines);
+                        points.AddFeatureDataRows(ind);
+                    }
                 }
             }
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
@@ -199,25 +202,31 @@ namespace FTAnalyzer.Forms
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 Cursor = Cursors.WaitCursor;
-                IDisplayFact fact = (IDisplayFact)dgFacts.CurrentRow.DataBoundItem;
-                MapHelper.OpenGeoLocations(fact.Location, outputText);
+                IDisplayFact? fact = (IDisplayFact?)dgFacts.CurrentRow.DataBoundItem;
+                if (fact is not null)
+                    MapHelper.OpenGeoLocations(fact.Location, outputText);
                 Cursor = Cursors.Default;
             }
         }
 
         void AddAllFamilyMembersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
-            isLoading = true;
-            foreach (Individual i in FamilyTree.GetFamily(ind))
-                SelectIndividual(i);
-            isLoading = false;
-            BuildMap();
+            Cursor = Cursors.WaitCursor;
+            Individual? ind = (Individual?)dgIndividuals.CurrentRow.DataBoundItem;
+            if (ind is not null)
+            {
+                isLoading = true;
+                foreach (Individual i in FamilyTree.GetFamily(ind))
+                    SelectIndividual(i);
+                isLoading = false;
+                BuildMap();
+            }
+            Cursor = Cursors.Default;
         }
 
         void SelectIndividual(Individual i)
         {
-            DataGridViewRow? row = dgIndividuals.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["IndividualID"].Value.ToString().Equals(i.IndividualID)).FirstOrDefault();
+            DataGridViewRow? row = dgIndividuals.Rows.Cast<DataGridViewRow>().FirstOrDefault(r => r.Cells["IndividualID"].Value.ToString().Equals(i.IndividualID));
             if (row is not null)
                 dgIndividuals.Rows[row.Index].Selected = true;
         }
@@ -225,12 +234,15 @@ namespace FTAnalyzer.Forms
         void SelectIndividuals(Func<Individual, List<Individual>> method)
         {
             Cursor = Cursors.WaitCursor;
-            isLoading = true;
-            Individual ind = (Individual)dgIndividuals.CurrentRow.DataBoundItem;
-            foreach (Individual i in method(ind))
-                SelectIndividual(i);
-            isLoading = false;
-            BuildMap();
+            Individual? ind = (Individual?)dgIndividuals.CurrentRow.DataBoundItem;
+            if (ind is not null)
+            {
+                isLoading = true;
+                foreach (Individual i in method(ind))
+                    SelectIndividual(i);
+                isLoading = false;
+                BuildMap();
+            }
             Cursor = Cursors.Default;
         }
 
@@ -250,11 +262,14 @@ namespace FTAnalyzer.Forms
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
-                Individual ind = (Individual)dgIndividuals.Rows[e.RowIndex].DataBoundItem;
-                if (ind.GeoLocationCount == 0)
-                    e.ToolTipText = $"{ind.Name} has no geolocated facts to show on map";
-                else
-                    e.ToolTipText = $"Click to display {ind.Name}'s geolocated facts on the map. Right click to add their relatives";
+                Individual? ind = (Individual?)dgIndividuals.Rows[e.RowIndex].DataBoundItem;
+                if (ind is not null)
+                {
+                    if (ind.GeoLocationCount == 0)
+                        e.ToolTipText = $"{ind.Name} has no geolocated facts to show on map";
+                    else
+                        e.ToolTipText = $"Click to display {ind.Name}'s geolocated facts on the map. Right click to add their relatives";
+                }
             }
         }
 
@@ -353,9 +368,12 @@ namespace FTAnalyzer.Forms
         {
             foreach (DataGridViewRow row in dgFacts.Rows)
             {
-                DisplayFact rowFact = (DisplayFact)row.DataBoundItem;
-                if (rowFact.Equals(dispFact))
-                    dgFacts.Rows[row.Index].Selected = true;
+                DisplayFact? rowFact = (DisplayFact?)row.DataBoundItem;
+                if (rowFact is not null)
+                {
+                    if (rowFact.Equals(dispFact))
+                        dgFacts.Rows[row.Index].Selected = true;
+                }
             }
         }
 
