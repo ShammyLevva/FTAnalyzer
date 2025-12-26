@@ -149,7 +149,7 @@ namespace FTAnalyzer.Forms
                 {
                     CensusIndividual? cr = (CensusIndividual?)row.DataBoundItem;
                     if (cr is null) return;
-                    if(row.Cells[sortColumn].Value.ToString() != currentRowText)
+                    if (row.Cells[sortColumn].Value.ToString() != currentRowText)
                     {
                         currentRowText = row.Cells[sortColumn].Value.ToString() ?? string.Empty;
                         highlighted = !highlighted;

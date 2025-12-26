@@ -66,7 +66,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 MapLocation? loc = (MapLocation?)dgIndividuals.Rows[e.RowIndex].DataBoundItem;
-                if(loc is not null)
+                if (loc is not null)
                     e.ToolTipText = "Geocoding status: " + loc.Location.Geocoded;
             }
         }
@@ -76,7 +76,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 string? indID = (string?)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
-                if(indID is not null)
+                if (indID is not null)
                     MainForm.ShowIndividualsFacts(indID);
             }
         }
@@ -120,7 +120,7 @@ namespace FTAnalyzer
             {
                 Cursor = Cursors.WaitCursor;
                 MapLocation? loc = (MapLocation?)dgIndividuals.CurrentRow.DataBoundItem;
-                if(loc is not null)
+                if (loc is not null)
                     EditLocation(loc.Location);
             }
         }

@@ -263,7 +263,7 @@ namespace FTAnalyzer.Forms
                 else if (e.ColumnIndex >= 0)
                 {
                     string indID = dgBMDReportSheet.CurrentRow.Cells["IndividualID"].Value.ToString() ?? string.Empty;
-                    if(indID != string.Empty) 
+                    if (indID != string.Empty)
                         MainForm.ShowIndividualsFacts(indID);
                 }
             }
@@ -410,7 +410,7 @@ namespace FTAnalyzer.Forms
             if (dgBMDReportSheet.CurrentRow is not null)
             {
                 IDisplayColourBMD? ds = (IDisplayColourBMD?)dgBMDReportSheet.CurrentRow.DataBoundItem;
-                if(ds is not null)
+                if (ds is not null)
                     MainForm.ShowIndividualsFacts(ds.IndividualID);
             }
         }
