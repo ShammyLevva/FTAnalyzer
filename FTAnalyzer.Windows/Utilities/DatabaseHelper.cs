@@ -19,6 +19,7 @@ namespace FTAnalyzer.Utilities
         static SQLiteConnection InstanceConnection { get; set; }
         Version ProgramVersion { get; set; }
         bool restoring;
+        const string APPNAME = "FTAnalyzer";
 
         #region Constructor/Destructor
         DatabaseHelper()
@@ -79,7 +80,7 @@ namespace FTAnalyzer.Utilities
             }
             catch (Exception ex)
             {
-                UIHelpers.ShowMessage($"Error opening database - Filename: {DatabaseFile}. Error is :{ex.Message}", "FTAnalyzer");
+                UIHelpers.ShowMessage($"Error opening database - Filename: {DatabaseFile}. Error is :{ex.Message}", APPNAME);
                 return false;
             }
         }
@@ -191,202 +192,252 @@ namespace FTAnalyzer.Utilities
                     InstanceConnection.Open();
                 if (dbVersion < v3_0_2_0)
                 {
-                    // Version v3.0.2.0 needs to reset Google Matches to not searched and set partials to level
-                    //SQLiteCommand cmd = new SQLiteCommand("alter table geocode add column GeocodeStatus integer default 0", conn);
-                    using (SQLiteCommand cmd = new("update geocode set geocodestatus=0 where geocodestatus=1", InstanceConnection))
-                    {
-                        cmd.ExecuteNonQuery(); // reset Google Match to Not Searched
-                    }
-                    using (SQLiteCommand cmd = new("update geocode set geocodestatus=7 where geocodestatus=2", InstanceConnection))
-                    {
-                        cmd.ExecuteNonQuery(); // set to level mismatch if partial
-                    }
-                    using (SQLiteCommand cmd = new("update versions set Database = '3.0.2.0'", InstanceConnection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    UIHelpers.ShowMessage("Please note that due to fixes in the way Google reports\nlocations your 'Google Matched' geocodes have been reset.", "FTAnalyzer");
+                    UpdateDB3_0_2_0();
                 }
                 if (dbVersion < v3_1_2_0)
                 {
-                    bool proceed = false;
-                    if (restoring)
-                        proceed = true;
-                    else
-                    {
-                        DialogResult result = UIHelpers.ShowMessage("In order to improve speed of the maps a database upgrade is needed.\nThis may take several minutes and must be allowed to complete.\nYou must backup your database first. Ok to proceed?", "Database upgrading", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        Application.UseWaitCursor = true;
-                        if (result == DialogResult.Yes)
-                        {
-                            SaveFileDialog sfd = new();
-                            proceed = BackupDatabase(sfd, "FTAnalyzer zip file created by Database upgrade for v3.2.1.0");
-                            sfd.Dispose();
-                        }
-                        Application.UseWaitCursor = false;
-                    }
-                    if (proceed)
-                    {
-                        bool latm = false;
-                        bool longm = false;
-                        using (SQLiteCommand cmd = new("PRAGMA table_info('geocode')", InstanceConnection))
-                        {
-                            using SQLiteDataReader reader = cmd.ExecuteReader();
-                            while (reader.Read())
-                            {
-                                string column = reader[1].ToString() ?? string.Empty;
-                                if (column.Equals("Latm"))
-                                    latm = true;
-                                if (column.Equals("Longm"))
-                                    longm = true;
-                            }
-                        }
-                        if (!latm)
-                        {
-                            using SQLiteCommand cmd = new("alter table geocode add column Latm real default 0.0", InstanceConnection);
-                            cmd.ExecuteNonQuery();
-                        }
-                        if (!longm)
-                        {
-                            using SQLiteCommand cmd = new("alter table geocode add column Longm real default 0.0", InstanceConnection);
-                            cmd.ExecuteNonQuery();
-                            ConvertLatLongs();
-                        }
-                        using (SQLiteCommand cmd = new("update geocode set foundlocation='', foundlevel=-2 where geocodestatus=3", InstanceConnection))
-                        {
-                            cmd.ExecuteNonQuery();
-                        }
-                        using (SQLiteCommand cmd = new("update versions set Database = '3.2.1.0'", InstanceConnection))
-                        {
-                            cmd.ExecuteNonQuery();
-                        }
-                        UIHelpers.ShowMessage("Database lat/long upgrade complete", "FTAnalyzer");
-                    }
-                    else
-                    {
-                        UIHelpers.ShowMessage("Database not backed up we cannot proceed to update maps without a safe database backup.\nMapping features will not work correctly.", "Database backup Required");
-                    }
+                    UpdateDB3_1_2_0();
                 }
                 if (dbVersion < v3_3_2_5)
                 {
-                    // mark all bad viewports as not searched
-                    using (SQLiteCommand cmd = new("update Geocode set latitude = 0, longitude = 0, founddate = date('now'), foundlocation = '', foundlevel = -2, viewport_x_ne = 0, viewport_y_ne = 0, viewport_x_sw = 0, viewport_y_sw = 0, geocodestatus = 0, foundresulttype = '' where latitude<>0 and longitude<>0 and abs(viewport_x_ne) <= 180", InstanceConnection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    using (SQLiteCommand cmd = new("update versions set Database = '3.3.2.5'", InstanceConnection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
+                    UpdateDB3_3_2_5();
                 }
                 if (dbVersion < v7_0_0_0)
                 {
-                    using (SQLiteCommand cmd = new("update Geocode set geocodestatus = 0 where latitude=0 and longitude=0 and geocodestatus=3", InstanceConnection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    using (SQLiteCommand cmd = new("update versions set Database = '7.0.0.0'", InstanceConnection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
+                    UpdateDB7_0_0_0();
                 }
                 if (dbVersion < v7_3_0_0)
                 {
-                    try
-                    {
-                        using (SQLiteCommand cmd = new("create table if not exists LostCousins (CensusYear INTEGER(4), CensusCountry STRING (20), CensusRef STRING(25), IndID STRING(10), FullName String(80), constraint pkLostCousins primary key (CensusYear, CensusCountry, CensusRef, IndID))", InstanceConnection))
-                        {
-                            cmd.ExecuteNonQuery();
-                        }
-                        using (SQLiteCommand cmd = new("update versions set Database = '7.3.0.0'", InstanceConnection))
-                        {
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
-                    catch (SQLiteException) { } // skip if table already exists.
+                    UpdateDB7_3_0_0();
                 }
                 if (dbVersion < v7_3_0_1)
                 {
-                    try
-                    {
-                        using SQLiteCommand cmd = new("update table LostCousins add column FullName Varchar(80)", InstanceConnection);
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch (SQLiteException) { } // don't complain if adding field already exists due to beta testing.
-                    using (SQLiteCommand cmd = new("update versions set Database = '7.3.0.1'", InstanceConnection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
+                    UpdateDB7_3_0_1();
                 }
                 if (dbVersion < v7_3_3_2)
                 {
-                    try
-                    {
-                        using SQLiteCommand cmd = new("SELECT count(*) FROM LostCousins", InstanceConnection);
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch (SQLiteException)
-                    {
-                        using SQLiteCommand cmd = new("create table IF NOT EXISTS LostCousins (CensusYear INTEGER(4), CensusCountry STRING (20), CensusRef STRING(25), IndID STRING(10), FullName String(80), constraint pkLostCousins primary key (CensusYear, CensusCountry, CensusRef, IndID))", InstanceConnection);
-                        cmd.ExecuteNonQuery();
-                    }
-                    using (SQLiteCommand cmd = new("update versions set Database = '7.3.3.2'", InstanceConnection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
+                    UpdateDB7_3_3_2();
                 }
                 if (dbVersion < v7_4_0_0)
                 {
-
-                    using (SQLiteCommand cmd = new("drop table versions", InstanceConnection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    using (SQLiteCommand cmd = new("CREATE TABLE IF NOT EXISTS Versions(Platform VARCHAR(10) PRIMARY KEY, [Database] VARCHAR(10));", InstanceConnection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    using (SQLiteCommand cmd = new("insert into Versions(platform, database) values('PC', '7.4.0.0')", InstanceConnection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    using (SQLiteCommand cmd = new("insert into Versions(platform, database) values('Mac', '1.2.0.42')", InstanceConnection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
+                    UpdateDB7_4_0_0();
                 }
                 if (dbVersion < v8_0_0_0)
                 {
-                    using (SQLiteCommand cmd = new("CREATE TABLE IF NOT EXISTS CustomFacts (FactType STRING(60) PRIMARY KEY, [Ignore] BOOLEAN)", InstanceConnection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    using (SQLiteCommand cmd = new("update Versions set database = '8.0.0.0' where platform = 'PC'", InstanceConnection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
+                    UpdateDB8_0_0_0();
                 }
                 if (dbVersion < v8_3_1_0)
                 {
-                    if (dbVersion < v8_3_1_0)
-                    {
-                        try
-                        {
-                            using SQLiteCommand cmd = new("alter table LostCousins add column FullName VARCHAR(80)", InstanceConnection);
-                            cmd.ExecuteNonQuery();
-                        }
-                        catch (SQLiteException) { } // don't complain if adding field already exists due to beta testing.
-                        using (SQLiteCommand cmd = new("update versions set Database = '8.3.1.0'", InstanceConnection))
-                        {
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
+                    UpdateDB8_3_1_0();
                 }
                 InstanceConnection.Close();
             }
             catch (Exception ex)
             {
-                UIHelpers.ShowMessage($"Error upgrading database. Error is :{ex.Message}", "FTAnalyzer");
+                UIHelpers.ShowMessage($"Error upgrading database. Error is :{ex.Message}", APPNAME);
             }
+        }
+
+        static void UpdateDB8_3_1_0()
+        {
+            try
+            {
+                using SQLiteCommand cmd = new("alter table LostCousins add column FullName VARCHAR(80)", InstanceConnection);
+                cmd.ExecuteNonQuery();
+            }
+            catch (SQLiteException) { } // don't complain if adding field already exists due to beta testing.
+            using (SQLiteCommand cmd = new("update versions set Database = '8.3.1.0'", InstanceConnection))
+            {
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        static void UpdateDB8_0_0_0()
+        {
+            using (SQLiteCommand cmd = new("CREATE TABLE IF NOT EXISTS CustomFacts (FactType STRING(60) PRIMARY KEY, [Ignore] BOOLEAN)", InstanceConnection))
+            {
+                cmd.ExecuteNonQuery();
+            }
+            using (SQLiteCommand cmd = new("update Versions set database = '8.0.0.0' where platform = 'PC'", InstanceConnection))
+            {
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        static void UpdateDB7_4_0_0()
+        {
+            using (SQLiteCommand cmd = new("drop table versions", InstanceConnection))
+            {
+                cmd.ExecuteNonQuery();
+            }
+            using (SQLiteCommand cmd = new("CREATE TABLE IF NOT EXISTS Versions(Platform VARCHAR(10) PRIMARY KEY, [Database] VARCHAR(10));", InstanceConnection))
+            {
+                cmd.ExecuteNonQuery();
+            }
+            using (SQLiteCommand cmd = new("insert into Versions(platform, database) values('PC', '7.4.0.0')", InstanceConnection))
+            {
+                cmd.ExecuteNonQuery();
+            }
+            using (SQLiteCommand cmd = new("insert into Versions(platform, database) values('Mac', '1.2.0.42')", InstanceConnection))
+            {
+                cmd.ExecuteNonQuery();
+            }
+        }
+        static void UpdateDB7_3_3_2()
+        {
+            try
+            {
+                using SQLiteCommand cmd = new("SELECT count(*) FROM LostCousins", InstanceConnection);
+                cmd.ExecuteNonQuery();
+            }
+            catch (SQLiteException)
+            {
+                using SQLiteCommand cmd = new("create table IF NOT EXISTS LostCousins (CensusYear INTEGER(4), CensusCountry STRING (20), CensusRef STRING(25), IndID STRING(10), FullName String(80), constraint pkLostCousins primary key (CensusYear, CensusCountry, CensusRef, IndID))", InstanceConnection);
+                cmd.ExecuteNonQuery();
+            }
+            using (SQLiteCommand cmd = new("update versions set Database = '7.3.3.2'", InstanceConnection))
+            {
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        static void UpdateDB7_3_0_1()
+        {
+            try
+            {
+                using SQLiteCommand cmd = new("update table LostCousins add column FullName Varchar(80)", InstanceConnection);
+                cmd.ExecuteNonQuery();
+            }
+            catch (SQLiteException) { } // don't complain if adding field already exists due to beta testing.
+            using (SQLiteCommand cmd = new("update versions set Database = '7.3.0.1'", InstanceConnection))
+            {
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        static void UpdateDB7_3_0_0()
+        {
+            try
+            {
+                using (SQLiteCommand cmd = new("create table if not exists LostCousins (CensusYear INTEGER(4), CensusCountry STRING (20), CensusRef STRING(25), IndID STRING(10), FullName String(80), constraint pkLostCousins primary key (CensusYear, CensusCountry, CensusRef, IndID))", InstanceConnection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                using (SQLiteCommand cmd = new("update versions set Database = '7.3.0.0'", InstanceConnection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SQLiteException) { } // skip if table already exists.
+        }
+
+        static void UpdateDB7_0_0_0()
+        {
+            using (SQLiteCommand cmd = new("update Geocode set geocodestatus = 0 where latitude=0 and longitude=0 and geocodestatus=3", InstanceConnection))
+            {
+                cmd.ExecuteNonQuery();
+            }
+            using (SQLiteCommand cmd = new("update versions set Database = '7.0.0.0'", InstanceConnection))
+            {
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        static void UpdateDB3_3_2_5()
+        {
+            // mark all bad viewports as not searched
+            using (SQLiteCommand cmd = new("update Geocode set latitude = 0, longitude = 0, founddate = date('now'), foundlocation = '', foundlevel = -2, viewport_x_ne = 0, viewport_y_ne = 0, viewport_x_sw = 0, viewport_y_sw = 0, geocodestatus = 0, foundresulttype = '' where latitude<>0 and longitude<>0 and abs(viewport_x_ne) <= 180", InstanceConnection))
+            {
+                cmd.ExecuteNonQuery();
+            }
+            using (SQLiteCommand cmd = new("update versions set Database = '3.3.2.5'", InstanceConnection))
+            {
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        void UpdateDB3_1_2_0()
+        {
+            bool proceed = false;
+            if (restoring)
+                proceed = true;
+            else
+            {
+                DialogResult result = UIHelpers.ShowMessage("In order to improve speed of the maps a database upgrade is needed.\nThis may take several minutes and must be allowed to complete.\nYou must backup your database first. Ok to proceed?", "Database upgrading", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                Application.UseWaitCursor = true;
+                if (result == DialogResult.Yes)
+                {
+                    SaveFileDialog sfd = new();
+                    proceed = BackupDatabase(sfd, "FTAnalyzer zip file created by Database upgrade for v3.2.1.0");
+                    sfd.Dispose();
+                }
+                Application.UseWaitCursor = false;
+            }
+            if (proceed)
+            {
+                UpdateTo3_1_2_0();
+            }
+            else
+            {
+                UIHelpers.ShowMessage("Database not backed up we cannot proceed to update maps without a safe database backup.\nMapping features will not work correctly.", "Database backup Required");
+            }
+        }
+
+        static void UpdateTo3_1_2_0()
+        {
+            bool latm = false;
+            bool longm = false;
+            using (SQLiteCommand cmd = new("PRAGMA table_info('geocode')", InstanceConnection))
+            {
+                using SQLiteDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    string column = reader[1].ToString() ?? string.Empty;
+                    if (column.Equals("Latm"))
+                        latm = true;
+                    if (column.Equals("Longm"))
+                        longm = true;
+                }
+            }
+            if (!latm)
+            {
+                using SQLiteCommand cmd = new("alter table geocode add column Latm real default 0.0", InstanceConnection);
+                cmd.ExecuteNonQuery();
+            }
+            if (!longm)
+            {
+                using SQLiteCommand cmd = new("alter table geocode add column Longm real default 0.0", InstanceConnection);
+                cmd.ExecuteNonQuery();
+                ConvertLatLongs();
+            }
+            using (SQLiteCommand cmd = new("update geocode set foundlocation='', foundlevel=-2 where geocodestatus=3", InstanceConnection))
+            {
+                cmd.ExecuteNonQuery();
+            }
+            using (SQLiteCommand cmd = new("update versions set Database = '3.2.1.0'", InstanceConnection))
+            {
+                cmd.ExecuteNonQuery();
+            }
+            UIHelpers.ShowMessage("Database lat/long upgrade complete", APPNAME);
+        }
+
+        private static void UpdateDB3_0_2_0()
+        {
+            // Version v3.0.2.0 needs to reset Google Matches to not searched and set partials to level
+            //SQLiteCommand cmd = new SQLiteCommand("alter table geocode add column GeocodeStatus integer default 0", conn);
+            using (SQLiteCommand cmd = new("update geocode set geocodestatus=0 where geocodestatus=1", InstanceConnection))
+            {
+                cmd.ExecuteNonQuery(); // reset Google Match to Not Searched
+            }
+            using (SQLiteCommand cmd = new("update geocode set geocodestatus=7 where geocodestatus=2", InstanceConnection))
+            {
+                cmd.ExecuteNonQuery(); // set to level mismatch if partial
+            }
+            using (SQLiteCommand cmd = new("update versions set Database = '3.0.2.0'", InstanceConnection))
+            {
+                cmd.ExecuteNonQuery();
+            }
+            UIHelpers.ShowMessage("Please note that due to fixes in the way Google reports\nlocations your 'Google Matched' geocodes have been reset.", APPNAME);
         }
         #endregion
 
@@ -598,8 +649,8 @@ namespace FTAnalyzer.Utilities
                     location.FoundLevel = foundlevel;
                 }
             }
-            if (!ExtensionMethods.DoubleEquals(location.ViewPort.NorthEast.Lat,0) &&
-                !ExtensionMethods.DoubleEquals(location.ViewPort.NorthEast.Long,0) &&
+            if (!ExtensionMethods.DoubleEquals(location.ViewPort.NorthEast.Lat, 0) &&
+                !ExtensionMethods.DoubleEquals(location.ViewPort.NorthEast.Long, 0) &&
                location.ViewPort.NorthEast.Long > -180 && location.ViewPort.NorthEast.Long < 180) // fix any ViewPorts stored as mPoints
             {
                 location.ViewPort = MapTransforms.TransformViewport(location.ViewPort);
@@ -975,10 +1026,10 @@ namespace FTAnalyzer.Utilities
                 while (reader.Read())
                 {
                     FactLocation loc = FactLocation.LookupLocation(reader[0].ToString() ?? string.Empty);
-                    if (!queue.Contains(loc) && 
-                        !ExtensionMethods.DoubleEquals(loc.Latitude,0) &&
-                        !ExtensionMethods.DoubleEquals(loc.Longitude,0))
-                            queue.Enqueue(loc);
+                    if (!queue.Contains(loc) &&
+                        !ExtensionMethods.DoubleEquals(loc.Latitude, 0) &&
+                        !ExtensionMethods.DoubleEquals(loc.Longitude, 0))
+                        queue.Enqueue(loc);
                 }
             }
             InstanceConnection.Close();
