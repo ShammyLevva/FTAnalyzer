@@ -349,7 +349,7 @@ namespace FTAnalyzer.Forms
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 string? indID = (string?)dgIndividuals.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
-                if(indID is not null)
+                if (indID is not null)
                     MainForm.ShowIndividualsFacts(indID);
             }
         }
@@ -441,7 +441,7 @@ namespace FTAnalyzer.Forms
         void ViewNotesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string? indID = (string?)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
-            if (indID is null) return; 
+            if (indID is null) return;
             Individual? ind = ft.GetIndividual(indID);
             if (ind is not null)
             {

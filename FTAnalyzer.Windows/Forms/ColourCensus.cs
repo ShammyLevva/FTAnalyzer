@@ -270,7 +270,7 @@ namespace FTAnalyzer.Forms
                 else if (e.ColumnIndex >= 0)
                 {
                     string indID = (dgReportSheet.CurrentRow.Cells["IndividualID"].Value?.ToString()) ?? string.Empty;
-                    if(indID != string.Empty)
+                    if (indID != string.Empty)
                         MainForm.ShowIndividualsFacts(indID);
                 }
             }
@@ -414,7 +414,7 @@ namespace FTAnalyzer.Forms
             if (dgReportSheet.CurrentRow is not null)
             {
                 IDisplayColourCensus? ds = (IDisplayColourCensus?)dgReportSheet.CurrentRow.DataBoundItem;
-                if(ds is not null)
+                if (ds is not null)
                     MainForm.ShowIndividualsFacts(ds.IndividualID);
             }
         }

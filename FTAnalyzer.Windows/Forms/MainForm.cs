@@ -2232,50 +2232,74 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string famID = (string)dgFamilies.CurrentRow.Cells[nameof(IDisplayFamily.FamilyID)].Value;
-                ShowFamilyFacts(famID);
+                string? famID = (string?)dgFamilies.CurrentRow.Cells[nameof(IDisplayFamily.FamilyID)].Value;
+                if (famID is not null)
+                    ShowFamilyFacts(famID);
             }
         }
 
         void DgDataErrors_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowIndividualsFacts((string)dgDataErrors.CurrentRow.Cells[nameof(IDisplayDataError.Reference)].Value);
+            {
+                string? indID = (string?)dgDataErrors.CurrentRow.Cells[nameof(IDisplayDataError.Reference)].Value;
+                if (indID is not null)
+                    ShowIndividualsFacts(indID);
+            }
         }
 
         void DgLooseDeaths_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowIndividualsFacts((string)dgLooseDeaths.CurrentRow.Cells[nameof(IDisplayLooseDeath.IndividualID)].Value);
+            {
+                string? indID = (string?)dgLooseDeaths.CurrentRow.Cells[nameof(IDisplayLooseDeath.IndividualID)].Value;
+                if (indID is not null)
+                    ShowIndividualsFacts(indID);
+            }
         }
 
         void DgLooseBirths_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowIndividualsFacts((string)dgLooseBirths.CurrentRow.Cells[nameof(IDisplayLooseBirth.IndividualID)].Value);
+            {
+                string? indID = (string?)dgLooseBirths.CurrentRow.Cells[nameof(IDisplayLooseBirth.IndividualID)].Value;
+                if (indID is not null)
+                    ShowIndividualsFacts(indID);
+            }
         }
 
         void DgLooseInfo_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowIndividualsFacts((string)dgLooseInfo.CurrentRow.Cells[nameof(IDisplayLooseInfo.IndividualID)].Value);
+            {
+                string? indID = (string?)dgLooseInfo.CurrentRow.Cells[nameof(IDisplayLooseInfo.IndividualID)].Value;
+                if (indID is not null)
+                    ShowIndividualsFacts(indID);
+            }
         }
 
         void DgTreeTops_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                ShowIndividualsFacts((string)dgTreeTops.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value);
+            {
+                string? indID = (string?)dgTreeTops.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
+                if (indID is not null)
+                    ShowIndividualsFacts(indID);
+            }
         }
 
         void DgWorldWars_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string indID = (string)dgWorldWars.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
-                if (WWI && ModifierKeys.Equals(Keys.Shift))
-                    LivesOfFirstWorldWar(indID);
-                else
-                    ShowIndividualsFacts(indID);
+                string? indID = (string?)dgWorldWars.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
+                if (indID is not null)
+                {
+                    if (WWI && ModifierKeys.Equals(Keys.Shift))
+                        LivesOfFirstWorldWar(indID);
+                    else
+                        ShowIndividualsFacts(indID);
+                }
             }
         }
 
