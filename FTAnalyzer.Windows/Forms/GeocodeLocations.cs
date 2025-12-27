@@ -15,6 +15,7 @@ namespace FTAnalyzer.Forms
 {
     public partial class GeocodeLocations : Form
     {
+        const string PLACES = "Places";
         readonly FamilyTree ft;
         readonly Font italicFont;
         readonly ReportFormHelper reportFormHelper;
@@ -99,9 +100,9 @@ namespace FTAnalyzer.Forms
                 mnuGeocodeStatus.DropDownItems.Add(menu);
             }
 
-            ToolStripMenuItem placesMenu = new("Places")
+            ToolStripMenuItem placesMenu = new(PLACES)
             {
-                Name = "Places"
+                Name = PLACES
             };
 
             foreach (string resultType in GoogleMap.RESULT_TYPES)
@@ -147,14 +148,14 @@ namespace FTAnalyzer.Forms
             }
             foreach (ToolStripMenuItem menu in mnuFoundResultType.DropDownItems)
             {
-                if (menu.Text != "Places" && menu.Text != "Select All" && menu.Text != "Clear All")
+                if (menu.Text != PLACES && menu.Text != "Select All" && menu.Text != "Clear All")
                 {
                     menus++;
                     if (menu.Checked)
                         count++;
                 }
             }
-            ToolStripMenuItem? places = mnuFoundResultType.DropDownItems["Places"] as ToolStripMenuItem;
+            ToolStripMenuItem? places = mnuFoundResultType.DropDownItems[PLACES] as ToolStripMenuItem;
             if (places is not null)
             {
                 foreach (ToolStripMenuItem menu in places.DropDownItems)
@@ -209,7 +210,7 @@ namespace FTAnalyzer.Forms
             if (AllFiltersActive(false))
                 return new SortableBindingList<IDisplayGeocodedLocation>(locations);
             List<IDisplayGeocodedLocation> results = [];
-            ToolStripMenuItem? places = mnuFoundResultType.DropDownItems["Places"] as ToolStripMenuItem;
+            ToolStripMenuItem? places = mnuFoundResultType.DropDownItems[PLACES] as ToolStripMenuItem;
             ToolStripMenuItem[] list = new ToolStripMenuItem[places.DropDownItems.Count + mnuFoundResultType.DropDownItems.Count + noneOfTheAboveMenus.Length];
             mnuFoundResultType.DropDownItems.CopyTo(list, 0);
             places.DropDownItems.CopyTo(list, mnuFoundResultType.DropDownItems.Count);
@@ -310,7 +311,7 @@ namespace FTAnalyzer.Forms
         void MnuSelectClear_Click(object sender, EventArgs e)
         {
             refreshingMenus = true;
-            ToolStripMenuItem? places = mnuFoundResultType.DropDownItems["Places"] as ToolStripMenuItem;
+            ToolStripMenuItem? places = mnuFoundResultType.DropDownItems[PLACES] as ToolStripMenuItem;
             if (mnuSelectClear.Text.Equals("Clear All"))
             {
                 mnuSelectClear.Text = "Select All";

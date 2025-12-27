@@ -17,6 +17,7 @@ namespace FTAnalyzer.Forms
         readonly VirtualReportFormHelper<IDisplayIndividual> indReportFormHelper;
         readonly VirtualReportFormHelper<IDisplayFamily> famReportFormHelper;
         ReportType reportType = ReportType.People;
+        const string CHILDRENSTATUSFILE = "ChildrenStatusFamColumns.xml";
 
         public People()
         {
@@ -423,7 +424,7 @@ namespace FTAnalyzer.Forms
             dgFamilies.Visible = false;
             splitContainer.Panel1Collapsed = true;
             splitContainer.Panel2Collapsed = false;
-            famReportFormHelper.LoadColumnLayout("ChildrenStatusFamColumns.xml");
+            famReportFormHelper.LoadColumnLayout(CHILDRENSTATUSFILE);
             SetSaveButtonsStatus(true);
             Text = "1911 Census Families where the children status recorded doesn't match the children in tree";
             UpdateStatusCount();
@@ -486,7 +487,7 @@ namespace FTAnalyzer.Forms
                 if (!splitContainer.Panel1Collapsed)
                     indReportFormHelper.SaveColumnLayout("ChildrenStatusIndColumns.xml");
                 if (!splitContainer.Panel2Collapsed)
-                    famReportFormHelper.SaveColumnLayout("ChildrenStatusFamColumns.xml");
+                    famReportFormHelper.SaveColumnLayout(CHILDRENSTATUSFILE);
                 UIHelpers.ShowMessage("Form Settings Saved", "People");
             }
         }
@@ -498,7 +499,7 @@ namespace FTAnalyzer.Forms
                 if (!splitContainer.Panel1Collapsed)
                     indReportFormHelper.ResetColumnLayout("ChildrenStatusIndColumns.xml");
                 if (!splitContainer.Panel2Collapsed)
-                    famReportFormHelper.ResetColumnLayout("ChildrenStatusFamColumns.xml");
+                    famReportFormHelper.ResetColumnLayout(CHILDRENSTATUSFILE);
             }
         }
 
@@ -543,7 +544,7 @@ namespace FTAnalyzer.Forms
             dgChildrenStatus.Visible = false;
             splitContainer.Panel1Collapsed = true;
             splitContainer.Panel2Collapsed = false;
-            famReportFormHelper.LoadColumnLayout("ChildrenStatusFamColumns.xml");
+            famReportFormHelper.LoadColumnLayout(CHILDRENSTATUSFILE);
             SetSaveButtonsStatus(true);
             Text = "Families with a 1911 census record but no Children Status record showing Children Alive/Dead";
             UpdateStatusCount();
