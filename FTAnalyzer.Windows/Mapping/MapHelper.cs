@@ -186,7 +186,7 @@ namespace FTAnalyzer.Mapping
         }
 
         // alternate sizing function to fix bug in sharpmap v1.1
-        SizeF SizeOfString(Graphics graphics, string text, Font font)
+        static SizeF SizeOfString(System.Drawing.Graphics graphics, string text, Font font)
         {
             var s = TextRenderer.MeasureText(text, font);
             return new SizeF(s.Width + 1f, s.Height);
@@ -205,7 +205,7 @@ namespace FTAnalyzer.Mapping
                 }
                 var x = (Envelope)row["ViewPort"];
                 Debug.WriteLine(x.ToString());
-                if (x.MaxX == 0 && x.MaxY == 0)
+                if (ExtensionMethods.DoubleEquals(x.MaxX,0) && ExtensionMethods.DoubleEquals(x.MaxY,0))
                     Debug.WriteLine("we have zeos");
                 else
                     bbox.ExpandToInclude(x);
@@ -225,7 +225,7 @@ namespace FTAnalyzer.Mapping
         {
             get
             {
-                List<MapLocation> result = new();
+                List<MapLocation> result = [];
                 foreach (Individual ind in FamilyTree.Instance.AllIndividuals)
                 {
                     foreach (Fact f in ind.AllFacts)
@@ -238,7 +238,7 @@ namespace FTAnalyzer.Mapping
 
         public static List<MapLocation> YearMapLocations(FactDate when, int limit)
         {
-            List<MapLocation> result = new();
+            List<MapLocation> result = [];
             foreach (Individual ind in FamilyTree.Instance.AllIndividuals)
             {
                 if (ind.IsAlive(when) && ind.GetMaxAge(when) < FactDate.MAXYEARS)

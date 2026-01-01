@@ -7,7 +7,7 @@
         {
             base.OnRenderButtonBackground(e);
 
-            Graphics g = e.Graphics;
+            System.Drawing.Graphics g = e.Graphics;
             ToolStrip? gs = e.ToolStrip;
             ToolStripButton gsb = (ToolStripButton)e.Item;
 

@@ -6,7 +6,7 @@ namespace FTAnalyzer.Utilities
     {
         readonly Font font = new("Tahoma", 9, GraphicsUnit.Point);
 
-        public override SizeF GetSize(Graphics g, DocumentMetrics metrics) => g.MeasureString("Page X Of Y", font);
+        public override SizeF GetSize(System.Drawing.Graphics g, DocumentMetrics metrics) => g.MeasureString("Page X Of Y", font);
 
 
         public override void Draw(System.Drawing.Graphics g, Dictionary<CodeEnum, string> codes)
