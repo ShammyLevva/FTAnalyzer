@@ -1,6 +1,7 @@
 ﻿using FTAnalyzer.Forms.Controls;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Properties;
+using FTAnalyzer.Shared.Utilities;
 using FTAnalyzer.Utilities;
 using NetTopologySuite.Geometries;
 using SharpMap.Data;
@@ -26,7 +27,7 @@ namespace FTAnalyzer.Forms
         {
             InitializeComponent();
             Top += NativeMethods.TopTaskbarOffset;
-            customMapLayers = new List<GdalRasterLayer>();
+            customMapLayers = [];
             mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
@@ -106,7 +107,7 @@ namespace FTAnalyzer.Forms
             {
                 UserSavedPoint = false;
                 DialogResult result = DialogResult.Yes;
-                if (RegistrySettings.GetValue("Ask to update database", "True").Equals("True"))
+                if (RegistrySettings.GetRegistryValue("Ask to update database", "True").Equals("True"))
                 {
                     result = UIHelpers.ShowMessage("Do you want to save this new position", "Save changes",
                         MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
@@ -218,7 +219,9 @@ namespace FTAnalyzer.Forms
                 else
                 {
                     GeoResponse? res = GoogleMap.GoogleGeocode(null, txtSearch.Text, 8);
-                    if (res is not null && res.Status == "OK" && !(res.Results[0].Geometry.Location.Lat == 0 && res.Results[0].Geometry.Location.Long == 0))
+                    if (res is not null && res.Status == "OK" &&
+                        (!ExtensionMethods.DoubleEquals(res.Results[0].Geometry.Location.Lat,0) || 
+                         !ExtensionMethods.DoubleEquals(res.Results[0].Geometry.Location.Long,0)))
                     {
                         loc.Latitude = res.Results[0].Geometry.Location.Lat;
                         loc.Longitude = res.Results[0].Geometry.Location.Long;
@@ -244,7 +247,7 @@ namespace FTAnalyzer.Forms
 
             GeoResponse.CResult.CGeometry.CViewPort vp = location.ViewPort;
             Envelope expand;
-            if (vp.NorthEast.Lat == 0 && vp.NorthEast.Long == 0 && vp.SouthWest.Lat == 0 && vp.SouthWest.Long == 0)
+            if (SpecialMethods.LatLongIsZero(vp.NorthEast) && SpecialMethods.LatLongIsZero(vp.SouthWest))
                 expand = new Envelope(-25000000, 25000000, -17000000, 17000000);
             else
                 expand = new Envelope(vp.NorthEast.Long, vp.SouthWest.Long, vp.NorthEast.Lat, vp.SouthWest.Lat);
@@ -277,7 +280,7 @@ namespace FTAnalyzer.Forms
         {
             Cursor = Cursors.WaitCursor;
             RemoveCustomMapLayers();
-            customMapLayers = btnCustomMap.Checked ? LoadGeoReferencedImages() : new List<GdalRasterLayer>();
+            customMapLayers = btnCustomMap.Checked ? LoadGeoReferencedImages() : [];
             mapBox1.Refresh();
             Cursor = Cursors.Default;
         }
@@ -293,7 +296,7 @@ namespace FTAnalyzer.Forms
 
         private List<GdalRasterLayer> LoadGeoReferencedImages()
         {
-            List<GdalRasterLayer> layers = new();
+            List<GdalRasterLayer> layers = [];
             string[] files = Directory.GetFiles(MappingSettings.Default.CustomMapPath, "*.tif", SearchOption.TopDirectoryOnly);
             foreach (string filename in files)
             {

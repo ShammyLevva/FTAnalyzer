@@ -36,9 +36,9 @@ namespace FTAnalyzer.Forms
             censusCountry = CensusDate.Country;
             RecordCount = 0;
             CensusDone = censusDone;
-            string defaultProvider = RegistrySettings.GetValue("Default Search Provider", DEFAULT_PROVIDER).ToString() ?? DEFAULT_PROVIDER;
+            string defaultProvider = RegistrySettings.GetRegistryValue("Default Search Provider", DEFAULT_PROVIDER).ToString() ?? DEFAULT_PROVIDER;
             defaultProvider ??= DEFAULT_PROVIDER;
-            string defaultRegion = RegistrySettings.GetValue("Default Region", DEFAULT_REGION).ToString() ?? DEFAULT_REGION;
+            string defaultRegion = RegistrySettings.GetRegistryValue("Default Region", DEFAULT_REGION).ToString() ?? DEFAULT_REGION;
             defaultRegion ??= DEFAULT_REGION;
             cbCensusSearchProvider.Text = defaultProvider;
             cbRegion.Text = defaultRegion;
@@ -268,14 +268,14 @@ namespace FTAnalyzer.Forms
         void CbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
             string defaultProvider = cbCensusSearchProvider.SelectedItem.ToString() ?? DEFAULT_PROVIDER;
-            RegistrySettings.SetValue("Default Search Provider", defaultProvider, RegistryValueKind.String);
+            RegistrySettings.SetRegistryValue("Default Search Provider", defaultProvider, RegistryValueKind.String);
             dgCensus.Refresh(); // force update of tooltips
             dgCensus.Focus();
         }
 
         void CbRegion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            RegistrySettings.SetValue("Default Region", cbRegion.SelectedItem.ToString() ?? DEFAULT_REGION, RegistryValueKind.String);
+            RegistrySettings.SetRegistryValue("Default Region", cbRegion.SelectedItem.ToString() ?? DEFAULT_REGION, RegistryValueKind.String);
             Settings.Default.defaultURLRegion = cbRegion.SelectedItem.ToString();
             Settings.Default.Save();
             dgCensus.Refresh(); // force update of tooltips

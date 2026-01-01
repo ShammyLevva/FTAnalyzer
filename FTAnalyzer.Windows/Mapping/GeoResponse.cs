@@ -49,8 +49,8 @@ namespace FTAnalyzer.Mapping
 
                     public CViewPort()
                     {
-                        this.NorthEast = new CLocation();
-                        this.SouthWest = new CLocation();
+                        NorthEast = new CLocation();
+                        SouthWest = new CLocation();
                     }
                 }
             }

@@ -75,9 +75,9 @@ namespace FTAnalyzer.Forms
                 dgReportSheet.AllowUserToResizeColumns = true;
                 reportFormHelper.LoadColumnLayout("ColourCensusLayout.xml");
                 tsRecords.Text = $"{Messages.Count}{reportList.Count} records listed.";
-                string defaultProvider = RegistrySettings.GetValue("Default Search Provider", DEFAULT_PROVIDER).ToString() ?? DEFAULT_PROVIDER;
+                string defaultProvider = RegistrySettings.GetRegistryValue("Default Search Provider", DEFAULT_PROVIDER).ToString() ?? DEFAULT_PROVIDER;
                 defaultProvider ??= DEFAULT_PROVIDER;
-                string defaultRegion = RegistrySettings.GetValue("Default Region", DEFAULT_REGION).ToString() ?? DEFAULT_REGION;
+                string defaultRegion = RegistrySettings.GetRegistryValue("Default Region", DEFAULT_REGION).ToString() ?? DEFAULT_REGION;
                 defaultRegion ??= DEFAULT_REGION;
                 cbCensusSearchProvider.Text = defaultProvider;
                 cbRegion.Text = defaultRegion;
@@ -282,7 +282,7 @@ namespace FTAnalyzer.Forms
         void CbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
             string provider = cbCensusSearchProvider.SelectedItem.ToString() ?? string.Empty;
-            RegistrySettings.SetValue("Default Search Provider", provider, RegistryValueKind.String);
+            RegistrySettings.SetRegistryValue("Default Search Provider", provider, RegistryValueKind.String);
             dgReportSheet.Refresh(); // forces update of tooltips
             dgReportSheet.Focus();
         }
@@ -290,7 +290,7 @@ namespace FTAnalyzer.Forms
         void CbRegion_SelectedIndexChanged(object sender, EventArgs e)
         {
             string region = cbRegion.SelectedItem.ToString() ?? string.Empty;
-            RegistrySettings.SetValue("Default Region", region, RegistryValueKind.String);
+            RegistrySettings.SetRegistryValue("Default Region", region, RegistryValueKind.String);
             Settings.Default.defaultURLRegion = cbRegion.SelectedItem.ToString();
             Settings.Default.Save();
             dgReportSheet.Refresh(); // forces update of tooltips

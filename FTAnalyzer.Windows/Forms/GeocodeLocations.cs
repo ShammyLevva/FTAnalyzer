@@ -95,7 +95,7 @@ namespace FTAnalyzer.Forms
                 ToolStripMenuItem menu = new(geocode)
                 {
                     Name = geocode,
-                    Checked = RegistrySettings.GetValue(geocode, "True").Equals("True"),
+                    Checked = RegistrySettings.GetRegistryValue(geocode, "True").Equals("True"),
                     CheckOnClick = true
                 };
                 menu.CheckedChanged += new EventHandler(MenuGeocode_CheckedChanged);
@@ -114,7 +114,7 @@ namespace FTAnalyzer.Forms
                 ToolStripMenuItem menu = new(resultType)
                 {
                     Name = resultType,
-                    Checked = RegistrySettings.GetValue(resultType, "True").Equals("True"),
+                    Checked = RegistrySettings.GetRegistryValue(resultType, "True").Equals("True"),
                     CheckOnClick = true
                 };
                 menu.CheckedChanged += new EventHandler(MenuResultType_CheckedChanged);
@@ -293,7 +293,7 @@ namespace FTAnalyzer.Forms
             foreach (ToolStripMenuItem menu in mnuGeocodeStatus.DropDownItems)
             {
                 if(menu.Name is not null)
-                    RegistrySettings.SetValue(menu.Name, menu.Checked.ToString(), RegistryValueKind.String); // remember checked state for next time
+                    RegistrySettings.SetRegistryValue(menu.Name, menu.Checked.ToString(), RegistryValueKind.String); // remember checked state for next time
             }
             UpdateGridWithFilters();
         }
@@ -309,7 +309,7 @@ namespace FTAnalyzer.Forms
             foreach (ToolStripMenuItem menu in mnuFoundResultType.DropDownItems)
             {
                 if (menu.Name is not null)
-                    RegistrySettings.SetValue(menu.Name, menu.Checked.ToString(), RegistryValueKind.String); // remember checked state for next time
+                    RegistrySettings.SetRegistryValue(menu.Name, menu.Checked.ToString(), RegistryValueKind.String); // remember checked state for next time
             }
             UpdateGridWithFilters();
         }
@@ -841,7 +841,7 @@ namespace FTAnalyzer.Forms
         #endregion
 
         void UpdateChangesWithoutAskingToolStripMenuItem_Click(object sender, EventArgs e) =>
-            RegistrySettings.SetValue("Ask to update database", updateChangesWithoutAskingToolStripMenuItem.Checked, RegistryValueKind.String);
+            RegistrySettings.SetRegistryValue("Ask to update database", updateChangesWithoutAskingToolStripMenuItem.Checked, RegistryValueKind.String);
 
         void DgLocations_CellToolTipTextNeeded_1(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {

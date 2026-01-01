@@ -203,13 +203,13 @@ namespace FTAnalyzer.Utilities
             {
                 parent.WindowState = FormWindowState.Normal;
                 parent.StartPosition = FormStartPosition.Manual;
-                int top = (int)RegistrySettings.GetValue(_registry + " position - top", defaultLocation.Item1);
-                int left = (int)RegistrySettings.GetValue(_registry + " position - left", defaultLocation.Item2);
+                int top = (int)RegistrySettings.GetRegistryValue(_registry + " position - top", defaultLocation.Item1);
+                int left = (int)RegistrySettings.GetRegistryValue(_registry + " position - left", defaultLocation.Item2);
                 Point topLeft = CheckIsOnScreen(top, left);
                 parent.Top = topLeft.Y;
                 parent.Left = topLeft.X;
-                parent.Height = (int)RegistrySettings.GetValue(_registry + " size - height", defaultSize.Item1);
-                parent.Width = (int)RegistrySettings.GetValue(_registry + " size - width", defaultSize.Item2);
+                parent.Height = (int)RegistrySettings.GetRegistryValue(_registry + " size - height", defaultSize.Item1);
+                parent.Width = (int)RegistrySettings.GetRegistryValue(_registry + " size - width", defaultSize.Item2);
             }
         }
 
@@ -217,10 +217,10 @@ namespace FTAnalyzer.Utilities
         {
             if (_saveForm && parent.WindowState == FormWindowState.Normal)
             {  //only save window size if not maximised or minimised
-                RegistrySettings.SetValue(_registry + " position - top", parent.Top, RegistryValueKind.DWord);
-                RegistrySettings.SetValue(_registry + " position - left", parent.Left, RegistryValueKind.DWord);
-                RegistrySettings.SetValue(_registry + " size - height", parent.Height, RegistryValueKind.DWord);
-                RegistrySettings.SetValue(_registry + " size - width", parent.Width, RegistryValueKind.DWord);
+                RegistrySettings.SetRegistryValue(_registry + " position - top", parent.Top, RegistryValueKind.DWord);
+                RegistrySettings.SetRegistryValue(_registry + " position - left", parent.Left, RegistryValueKind.DWord);
+                RegistrySettings.SetRegistryValue(_registry + " size - height", parent.Height, RegistryValueKind.DWord);
+                RegistrySettings.SetRegistryValue(_registry + " size - width", parent.Width, RegistryValueKind.DWord);
             }
         }
 

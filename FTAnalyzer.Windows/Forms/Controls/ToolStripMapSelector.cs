@@ -36,7 +36,7 @@ namespace FTAnalyzer.Forms.Controls
 
         public void GetCurrentMapPreference()
         {
-            string mapPreference = RegistrySettings.GetValue("Default Map Background", defaultMap).ToString() ?? defaultMap;
+            string mapPreference = RegistrySettings.GetRegistryValue("Default Map Background", defaultMap).ToString() ?? defaultMap;
             foreach (ToolStripMenuItem menu in DropDownItems)
             {
                 if (mapPreference.Equals(menu.Name))
@@ -131,7 +131,7 @@ namespace FTAnalyzer.Forms.Controls
                 selectedOption.Checked = true;
                 opacitySlider.Visible = !selectedOption.Name.Equals(mnuOpenStreetMap.Name);
                 UpdateLinkLabel(selectedOption.LinkLabelType);
-                RegistrySettings.SetValue("Default Map Background", selectedOption.Name, RegistryValueKind.String);
+                RegistrySettings.SetRegistryValue("Default Map Background", selectedOption.Name, RegistryValueKind.String);
                 mapbox.Refresh();
             }
         }

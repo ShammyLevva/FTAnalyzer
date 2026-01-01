@@ -1,6 +1,8 @@
 ﻿using FTAnalyzer.Mapping;
 using FTAnalyzer.Properties;
+using FTAnalyzer.Shared.Utilities;
 using FTAnalyzer.Utilities;
+using Microsoft.Win32;
 using NetTopologySuite.Geometries;
 using SharpMap.Data;
 using SharpMap.Layers;
@@ -99,7 +101,6 @@ namespace FTAnalyzer.Forms
             if (year.Length == 4 && result != 0)
             {
                 List<MapLocation> locations;
-                var mh = MapHelper.Instance;
                 if (result == 9999)
                 {
                     locations = FilterToRelationsIncluded(MapHelper.AllMapLocations);
@@ -200,10 +201,10 @@ namespace FTAnalyzer.Forms
             SetupMap();
             DisplayLocationsForYear(labValue.Text);
             mh.CheckIfGeocodingNeeded(this, outputText);
-            int Width = (int)RegistrySettings.GetValue("Timeline size - width", this.Width);
-            int Height = (int)RegistrySettings.GetValue("Timeline size - height", this.Height);
-            int Top = (int)RegistrySettings.GetValue("Timeline position - top", this.Top);
-            int Left = (int)RegistrySettings.GetValue("Timeline position - left", this.Left);
+            int Width = (int)RegistrySettings.GetRegistryValue("Timeline size - width", this.Width);
+            int Height = (int)RegistrySettings.GetRegistryValue("Timeline size - height", this.Height);
+            int Top = (int)RegistrySettings.GetRegistryValue("Timeline position - top", this.Top);
+            int Left = (int)RegistrySettings.GetRegistryValue("Timeline position - left", this.Left);
             this.Width = Width;
             this.Height = Height;
             this.Top = Top + NativeMethods.TopTaskbarOffset;
@@ -401,10 +402,10 @@ namespace FTAnalyzer.Forms
         {
             if (!loading && WindowState == FormWindowState.Normal)
             {  //only save window size if not maximised or minimised
-                RegistrySettings.SetValue("Timeline size - width", Width);
-                RegistrySettings.SetValue("Timeline size - height", Height);
-                RegistrySettings.SetValue("Timeline position - top", Top);
-                RegistrySettings.SetValue("Timeline position - left", Left);
+                RegistrySettings.SetRegistryValue("Timeline size - width", Width, RegistryValueKind.DWord);
+                RegistrySettings.SetRegistryValue("Timeline size - height", Height, RegistryValueKind.DWord);
+                RegistrySettings.SetRegistryValue("Timeline position - top", Top, RegistryValueKind.DWord);
+                RegistrySettings.SetRegistryValue("Timeline position - left", Left, RegistryValueKind.DWord);
             }
         }
 
