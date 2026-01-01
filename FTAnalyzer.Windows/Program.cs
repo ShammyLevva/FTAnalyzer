@@ -7,9 +7,9 @@ namespace FTAnalyzer.Windows
 {
     internal static partial class Program
     {
-        public static HttpClient Client = new();
-        public static LostCousinsClient LCClient = new();
-        public static GoogleClient GoogleClient = new();
+        public static readonly HttpClient Client = new();
+        public static readonly LostCousinsClient LCClient = new();
+        public static readonly GoogleClient GoogleClient = new();
 
         /// <summary>
         /// Enable high DPI
