@@ -1,4 +1,6 @@
 ﻿using FTAnalyzer.Properties;
+using FTAnalyzer.Shared.Utilities;
+using Microsoft.Win32;
 using Printing.DataGridViewPrint.Tools;
 using System.ComponentModel;
 using System.Data;
@@ -201,13 +203,13 @@ namespace FTAnalyzer.Utilities
             {
                 parent.WindowState = FormWindowState.Normal;
                 parent.StartPosition = FormStartPosition.Manual;
-                int top = (int)Application.UserAppDataRegistry.GetValue(_registry + " position - top", defaultLocation.Item1);
-                int left = (int)Application.UserAppDataRegistry.GetValue(_registry + " position - left", defaultLocation.Item2);
+                int top = (int)RegistrySettings.GetValue(_registry + " position - top", defaultLocation.Item1);
+                int left = (int)RegistrySettings.GetValue(_registry + " position - left", defaultLocation.Item2);
                 Point topLeft = CheckIsOnScreen(top, left);
                 parent.Top = topLeft.Y;
                 parent.Left = topLeft.X;
-                parent.Height = (int)Application.UserAppDataRegistry.GetValue(_registry + " size - height", defaultSize.Item1);
-                parent.Width = (int)Application.UserAppDataRegistry.GetValue(_registry + " size - width", defaultSize.Item2);
+                parent.Height = (int)RegistrySettings.GetValue(_registry + " size - height", defaultSize.Item1);
+                parent.Width = (int)RegistrySettings.GetValue(_registry + " size - width", defaultSize.Item2);
             }
         }
 
@@ -215,10 +217,10 @@ namespace FTAnalyzer.Utilities
         {
             if (_saveForm && parent.WindowState == FormWindowState.Normal)
             {  //only save window size if not maximised or minimised
-                Application.UserAppDataRegistry.SetValue(_registry + " position - top", parent.Top);
-                Application.UserAppDataRegistry.SetValue(_registry + " position - left", parent.Left);
-                Application.UserAppDataRegistry.SetValue(_registry + " size - height", parent.Height);
-                Application.UserAppDataRegistry.SetValue(_registry + " size - width", parent.Width);
+                RegistrySettings.SetValue(_registry + " position - top", parent.Top, RegistryValueKind.DWord);
+                RegistrySettings.SetValue(_registry + " position - left", parent.Left, RegistryValueKind.DWord);
+                RegistrySettings.SetValue(_registry + " size - height", parent.Height, RegistryValueKind.DWord);
+                RegistrySettings.SetValue(_registry + " size - width", parent.Width, RegistryValueKind.DWord);
             }
         }
 

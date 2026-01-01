@@ -1,6 +1,8 @@
 ﻿using FTAnalyzer.Graphics;
 using FTAnalyzer.Properties;
+using FTAnalyzer.Shared.Utilities;
 using FTAnalyzer.Utilities;
+using Microsoft.Win32;
 using System.ComponentModel;
 using static FTAnalyzer.ColourValues;
 
@@ -81,12 +83,12 @@ namespace FTAnalyzer.Forms
                 dgBMDReportSheet.RowTemplate.Height = (int)(FontSettings.Default.SelectedFont.Height * GraphicsUtilities.GetCurrentScaling());
                 reportFormHelper.LoadColumnLayout("ColourBMDColumns.xml");
                 tsRecords.Text = $"{Messages.Count}{reportList.Count} records listed.";
-                string defaultProvider = Application.UserAppDataRegistry.GetValue("Default Search Provider", DEFAULT_PROVIDER).ToString() ?? DEFAULT_PROVIDER;
+                string defaultProvider = RegistrySettings.GetValue("Default Search Provider", DEFAULT_PROVIDER).ToString() ?? DEFAULT_PROVIDER;
                 defaultProvider ??= DEFAULT_PROVIDER;
                 if (defaultProvider.Equals("FreeCen"))
                     defaultProvider = "FreeBMD";
                 cbBMDSearchProvider.Text = defaultProvider;
-                string defaultRegion = Application.UserAppDataRegistry.GetValue("Default Region", DEFAULT_REGION).ToString() ?? DEFAULT_REGION;
+                string defaultRegion = RegistrySettings.GetValue("Default Region", DEFAULT_REGION).ToString() ?? DEFAULT_REGION;
                 defaultRegion ??= DEFAULT_REGION;
                 cbRegion.Text = defaultRegion;
                 cbFilter.Text = "All Individuals";
@@ -275,14 +277,14 @@ namespace FTAnalyzer.Forms
             string provider = cbBMDSearchProvider.SelectedItem.ToString() ?? string.Empty;
             if (provider.Equals("FreeBMD"))
                 provider = "FreeCen";
-            Application.UserAppDataRegistry.SetValue("Default Search Provider", provider);
+            RegistrySettings.SetValue("Default Search Provider", provider, RegistryValueKind.String);
             dgBMDReportSheet.Refresh(); // forces refresh of tooltips
             dgBMDReportSheet.Focus();
         }
 
         void CbRegion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Application.UserAppDataRegistry.SetValue("Default Region", cbRegion.SelectedItem.ToString() ?? string.Empty);
+            RegistrySettings.SetValue("Default Region", cbRegion.SelectedItem.ToString() ?? string.Empty, RegistryValueKind.String);
             Settings.Default.defaultURLRegion = cbRegion.SelectedItem.ToString();
             Settings.Default.Save();
             dgBMDReportSheet.Refresh(); // forces refresh of tooltips

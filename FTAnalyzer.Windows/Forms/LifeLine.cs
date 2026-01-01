@@ -1,6 +1,8 @@
 ﻿using FTAnalyzer.Mapping;
 using FTAnalyzer.Properties;
+using FTAnalyzer.Shared.Utilities;
 using FTAnalyzer.Utilities;
+using Microsoft.Win32;
 using NetTopologySuite.Geometries;
 using SharpMap.Data;
 using SharpMap.Data.Providers;
@@ -54,10 +56,10 @@ namespace FTAnalyzer.Forms
                 dgIndividuals.Sort(sortedname, ListSortDirection.Ascending);
             }
             DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
-            int splitheight = (int)Application.UserAppDataRegistry.GetValue("Lifeline Facts Splitter Distance", -1);
+            int splitheight = (int)RegistrySettings.GetValue("Lifeline Facts Splitter Distance", -1);
             if (splitheight != -1)
                 splitContainerFacts.SplitterDistance = Height - splitheight;
-            splitContainerMap.SplitterDistance = (int)Application.UserAppDataRegistry.GetValue("Lifeline Map Splitter Distance", splitContainerMap.SplitterDistance);
+            splitContainerMap.SplitterDistance = (int)RegistrySettings.GetValue("Lifeline Map Splitter Distance", splitContainerMap.SplitterDistance);
         }
 
         void DatabaseHelper_GeoLocationUpdated(object? location, EventArgs e)
@@ -288,10 +290,10 @@ namespace FTAnalyzer.Forms
 
         void LifeLine_Load(object sender, EventArgs e)
         {
-            int Width = (int)Application.UserAppDataRegistry.GetValue("Lifeline size - width", this.Width);
-            int Height = (int)Application.UserAppDataRegistry.GetValue("Lifeline size - height", this.Height);
-            int Top = (int)Application.UserAppDataRegistry.GetValue("Lifeline position - top", this.Top);
-            int Left = (int)Application.UserAppDataRegistry.GetValue("Lifeline position - left", this.Left);
+            int Width = (int)RegistrySettings.GetValue("Lifeline size - width", this.Width);
+            int Height = (int)RegistrySettings.GetValue("Lifeline size - height", this.Height);
+            int Top = (int)RegistrySettings.GetValue("Lifeline position - top", this.Top);
+            int Left = (int)RegistrySettings.GetValue("Lifeline position - left", this.Left);
             this.Width = Width;
             this.Height = Height;
             this.Top = Top;
@@ -319,13 +321,13 @@ namespace FTAnalyzer.Forms
         void SplitContainerFacts_SplitterMoved(object sender, SplitterEventArgs e)
         {
             SplitContainer splitter = (SplitContainer)sender;
-            Application.UserAppDataRegistry.SetValue("Lifeline Facts Splitter Distance", Height - splitter.SplitterDistance);
+            RegistrySettings.SetValue("Lifeline Facts Splitter Distance", Height - splitter.SplitterDistance, RegistryValueKind.String);
         }
 
         void SplitContainerMap_SplitterMoved(object sender, SplitterEventArgs e)
         {
             SplitContainer splitter = (SplitContainer)sender;
-            Application.UserAppDataRegistry.SetValue("Lifeline Map Splitter Distance", splitter.SplitterDistance);
+            RegistrySettings.SetValue("Lifeline Map Splitter Distance", splitter.SplitterDistance, RegistryValueKind.String);
         }
 
         void DgFacts_SelectionChanged(object sender, EventArgs e)
@@ -417,10 +419,10 @@ namespace FTAnalyzer.Forms
         {
             if (!isLoading && this.WindowState == FormWindowState.Normal)
             {  //only save window size if not maximised or minimised
-                Application.UserAppDataRegistry.SetValue("Lifeline size - width", Width);
-                Application.UserAppDataRegistry.SetValue("Lifeline size - height", Height);
-                Application.UserAppDataRegistry.SetValue("Lifeline position - top", Top);
-                Application.UserAppDataRegistry.SetValue("Lifeline position - left", Left);
+                RegistrySettings.SetValue("Lifeline size - width", Width, RegistryValueKind.DWord);
+                RegistrySettings.SetValue("Lifeline size - height", Height, RegistryValueKind.DWord);
+                RegistrySettings.SetValue("Lifeline position - top", Top, RegistryValueKind.DWord);
+                RegistrySettings.SetValue("Lifeline position - left", Left, RegistryValueKind.DWord);
             }
         }
 

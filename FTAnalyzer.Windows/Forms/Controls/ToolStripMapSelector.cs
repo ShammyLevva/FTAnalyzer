@@ -1,4 +1,6 @@
 ﻿using FTAnalyzer.Mapping;
+using FTAnalyzer.Shared.Utilities;
+using Microsoft.Win32;
 using SharpMap.Forms;
 using SharpMap.Layers;
 
@@ -34,7 +36,7 @@ namespace FTAnalyzer.Forms.Controls
 
         public void GetCurrentMapPreference()
         {
-            string mapPreference = Application.UserAppDataRegistry.GetValue("Default Map Background", defaultMap).ToString() ?? defaultMap;
+            string mapPreference = RegistrySettings.GetValue("Default Map Background", defaultMap).ToString() ?? defaultMap;
             foreach (ToolStripMenuItem menu in DropDownItems)
             {
                 if (mapPreference.Equals(menu.Name))
@@ -129,7 +131,7 @@ namespace FTAnalyzer.Forms.Controls
                 selectedOption.Checked = true;
                 opacitySlider.Visible = !selectedOption.Name.Equals(mnuOpenStreetMap.Name);
                 UpdateLinkLabel(selectedOption.LinkLabelType);
-                Application.UserAppDataRegistry.SetValue("Default Map Background", selectedOption.Name);
+                RegistrySettings.SetValue("Default Map Background", selectedOption.Name, RegistryValueKind.String);
                 mapbox.Refresh();
             }
         }

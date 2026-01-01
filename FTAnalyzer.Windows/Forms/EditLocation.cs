@@ -106,7 +106,7 @@ namespace FTAnalyzer.Forms
             {
                 UserSavedPoint = false;
                 DialogResult result = DialogResult.Yes;
-                if (Application.UserAppDataRegistry.GetValue("Ask to update database", "True").Equals("True"))
+                if (RegistrySettings.GetValue("Ask to update database", "True").Equals("True"))
                 {
                     result = UIHelpers.ShowMessage("Do you want to save this new position", "Save changes",
                         MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);

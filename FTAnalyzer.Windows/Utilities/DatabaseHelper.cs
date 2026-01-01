@@ -1,6 +1,8 @@
 ﻿using FTAnalyzer.Forms;
 using FTAnalyzer.Mapping;
+using FTAnalyzer.Shared.Utilities;
 using ICSharpCode.SharpZipLib.Zip;
+using Microsoft.Win32;
 using NetTopologySuite.Geometries;
 using System.Collections.Concurrent;
 using System.Data;
@@ -135,7 +137,7 @@ namespace FTAnalyzer.Utilities
             try
             {
                 string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", myDocuments).ToString() ?? myDocuments;
+                string directory = RegistrySettings.GetValue("Geocode Backup Directory", myDocuments).ToString() ?? myDocuments;
                 saveDatabase.FileName = $"FTAnalyzer-Geocodes-{DateTime.Now:yyyy-MM-dd}-v{MainForm.VERSION}.zip";
                 saveDatabase.InitialDirectory = directory;
                 DialogResult result = saveDatabase.ShowDialog();
@@ -149,7 +151,7 @@ namespace FTAnalyzer.Utilities
                     zip.CreateZip(saveDatabase.FileName, path, false, "Geocodes.s3db");
                     //zip.SetComment(comment + " on " + DateTime.Now.ToString("dd MMM yyyy HH:mm"));
                     //EndBackupDatabase();
-                    Application.UserAppDataRegistry.SetValue("Geocode Backup Directory", Path.GetDirectoryName(saveDatabase.FileName) ?? string.Empty);
+                    RegistrySettings.SetValue("Geocode Backup Directory", Path.GetDirectoryName(saveDatabase.FileName) ?? string.Empty, RegistryValueKind.String);
                     UIHelpers.ShowMessage($"Database exported to {saveDatabase.FileName}", "FTAnalyzer Database Export Complete");
                     return true;
                 }

@@ -4,11 +4,13 @@ using FTAnalyzer.Forms;
 using FTAnalyzer.Forms.Controls;
 using FTAnalyzer.Graphics;
 using FTAnalyzer.Properties;
+using FTAnalyzer.Shared.Utilities;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
 using FTAnalyzer.Windows;
 using HtmlAgilityPack;
 using ICSharpCode.SharpZipLib.Zip;
+using Microsoft.Win32;
 using Printing.DataGridViewPrint.Tools;
 using System.ComponentModel;
 using System.Data;
@@ -41,7 +43,6 @@ namespace FTAnalyzer
         public MainForm()
         {
             InitializeComponent();
-            string reg = Application.UserAppDataRegistry.ToString();
         }
 
         async void MainForm_Load(object sender, EventArgs e)
@@ -231,12 +232,12 @@ namespace FTAnalyzer
             MainForm mainForm = this;
             // load height & width from registry - note need to use temp variables as setting them causes form
             // to resize thus setting the values for both
-            int Width = (int)Application.UserAppDataRegistry.GetValue("Mainform size - width", mainForm.Width);
-            int Height = (int)Application.UserAppDataRegistry.GetValue("Mainform size - height", mainForm.Height);
-            int Top = (int)Application.UserAppDataRegistry.GetValue("Mainform position - top", mainForm.Top);
-            int Left = (int)Application.UserAppDataRegistry.GetValue("Mainform position - left", mainForm.Left);
+            int Width = (int)RegistrySettings.GetValue("Mainform size - width", mainForm.Width);
+            int Height = (int)RegistrySettings.GetValue("Mainform size - height", mainForm.Height);
+            int Top = (int)RegistrySettings.GetValue("Mainform position - top", mainForm.Top);
+            int Left = (int)RegistrySettings.GetValue("Mainform position - left", mainForm.Left);
             string maxState = (WindowState == FormWindowState.Maximized).ToString();
-            string maximised = Application.UserAppDataRegistry.GetValue("Mainform maximised", maxState).ToString() ?? maxState;
+            string maximised = RegistrySettings.GetValue("Mainform maximised", maxState).ToString() ?? maxState;
             Point leftTop = ReportFormHelper.CheckIsOnScreen(Top, Left);
             if (leftTop.X < 0) leftTop.X = 0;
             if (leftTop.Y < 0) leftTop.Y = 0;
@@ -841,7 +842,7 @@ namespace FTAnalyzer
                     if (dataError.ToString().Length > maxwidth)
                         maxwidth = dataError.ToString().Length;
                     bool itemChecked = ckbDataErrors.GetItemChecked(index++);
-                    Application.UserAppDataRegistry.SetValue(dataError.ToString(), itemChecked);
+                    RegistrySettings.SetValue(dataError.ToString(), itemChecked, RegistryValueKind.String);
                 }
             }
             catch (IOException)
@@ -859,7 +860,7 @@ namespace FTAnalyzer
             foreach (DataErrorGroup dataError in ft.DataErrorTypes)
             {
                 int index = list.Items.Add(dataError);
-                bool itemChecked = Application.UserAppDataRegistry.GetValue(dataError.ToString(), "True").Equals("True");
+                bool itemChecked = RegistrySettings.GetValue(dataError.ToString(), "True").Equals("True");
                 list.SetItemChecked(index, itemChecked);
             }
         }
@@ -1423,7 +1424,7 @@ namespace FTAnalyzer
                             btnLC1911EW.Enabled = ft.IndividualCount > 0;
                         LCSubTabs.TabPages.Remove(LCVerifyTab); // hide verification tab as it does nothing
                         UpdateLCReports();
-                        txtLCEmail.Text = Application.UserAppDataRegistry.GetValue("LostCousinsEmail", string.Empty).ToString();
+                        txtLCEmail.Text = RegistrySettings.GetValue("LostCousinsEmail", string.Empty).ToString();
                         chkLCRootPersonConfirm.Text = $"Confirm {ft.RootPerson} as root Person";
                         tabLostCousins.Refresh();
                         Analytics.TrackAction(Analytics.MainFormAction, Analytics.LostCousinsTabEvent);
@@ -1431,8 +1432,8 @@ namespace FTAnalyzer
                     }
                     else if (tabSelector.SelectedTab == tabToday)
                     {
-                        bool todaysMonth = Application.UserAppDataRegistry.GetValue("Todays Events Month", "False").Equals("True");
-                        int todaysStep = int.Parse(Application.UserAppDataRegistry.GetValue("Todays Events Step", "5").ToString() ?? "5");
+                        bool todaysMonth = RegistrySettings.GetValue("Todays Events Month", "False").Equals("True");
+                        int todaysStep = int.Parse(RegistrySettings.GetValue("Todays Events Step", "5").ToString() ?? "5");
                         rbTodayMonth.Checked = todaysMonth;
                         nudToday.Value = todaysStep;
                         Analytics.TrackAction(Analytics.MainFormAction, Analytics.TodayTabEvent);
@@ -1746,7 +1747,7 @@ namespace FTAnalyzer
             HourGlass(this, true);
             try
             {
-                Application.UserAppDataRegistry.SetValue("LostCousinsEmail", txtLCEmail.Text);
+                RegistrySettings.SetValue("LostCousinsEmail", txtLCEmail.Text, RegistryValueKind.String);
             }
             catch (IOException)
             {
@@ -2117,7 +2118,7 @@ namespace FTAnalyzer
             else
             {
                 string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                string directory = Application.UserAppDataRegistry.GetValue("Geocode Backup Directory", myDocuments).ToString() ?? myDocuments;
+                string directory = RegistrySettings.GetValue("Geocode Backup Directory", myDocuments).ToString() ?? myDocuments;
                 restoreDatabase.FileName = "*.zip";
                 restoreDatabase.InitialDirectory = directory;
                 DialogResult result = restoreDatabase.ShowDialog();
@@ -2514,7 +2515,7 @@ namespace FTAnalyzer
                 list.SetItemChecked(index, selected);
                 try
                 {
-                    Application.UserAppDataRegistry.SetValue(registryPrefix + factType, selected);
+                    RegistrySettings.SetValue(registryPrefix + factType, selected, RegistryValueKind.String);
                 }
                 catch (IOException)
                 {
@@ -2535,7 +2536,7 @@ namespace FTAnalyzer
                 ckbFactSelect.SetItemChecked(index, !selected);
                 try
                 {
-                    Application.UserAppDataRegistry.SetValue($"Fact: {factType}", !selected);
+                    RegistrySettings.SetValue($"Fact: {factType}", !selected, RegistryValueKind.String);
                 }
                 catch (IOException)
                 {
@@ -2582,7 +2583,7 @@ namespace FTAnalyzer
             ckbFactExclude.SetItemChecked(index, !selected);
             try
             {
-                Application.UserAppDataRegistry.SetValue($"Exclude Fact: {factType}", !selected);
+                RegistrySettings.SetValue($"Exclude Fact: {factType}", !selected, RegistryValueKind.String);
             }
             catch (IOException)
             {
@@ -2678,12 +2679,12 @@ namespace FTAnalyzer
                 try
                 {
                     CheckMaxWindowSizes(new Point(0, 0));
-                    Application.UserAppDataRegistry.SetValue("Mainform size - width", Width);
-                    Application.UserAppDataRegistry.SetValue("Mainform size - height", Height);
-                    Application.UserAppDataRegistry.SetValue("Mainform position - top", Top);
-                    Application.UserAppDataRegistry.SetValue("Mainform position - left", Left);
+                    RegistrySettings.SetValue("Mainform size - width", Width, RegistryValueKind.DWord);
+                    RegistrySettings.SetValue("Mainform size - height", Height, RegistryValueKind.DWord);
+                    RegistrySettings.SetValue("Mainform position - top", Top, RegistryValueKind.DWord);
+                    RegistrySettings.SetValue("Mainform position - left", Left, RegistryValueKind.DWord);
                     string maxState = (WindowState == FormWindowState.Maximized).ToString();
-                    Application.UserAppDataRegistry.SetValue("Mainform maximised", maxState);
+                    RegistrySettings.SetValue("Mainform maximised", maxState, RegistryValueKind.String);
                 }
                 catch (IOException)
                 {
@@ -2973,7 +2974,7 @@ namespace FTAnalyzer
             {
                 string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 using SaveFileDialog saveFileDialog = new();
-                string initialDir = Application.UserAppDataRegistry.GetValue("Report Unrecognised Census References Path", myDocuments).ToString() ?? string.Empty;
+                string initialDir = RegistrySettings.GetValue("Report Unrecognised Census References Path", myDocuments).ToString() ?? string.Empty;
                 saveFileDialog.InitialDirectory = initialDir ?? myDocuments;
                 saveFileDialog.FileName = unrecognisedFilename;
                 saveFileDialog.Filter = "Report File (*.txt)|*.txt";
@@ -2982,7 +2983,7 @@ namespace FTAnalyzer
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     string path = Path.GetDirectoryName(saveFileDialog.FileName) ?? string.Empty;
-                    Application.UserAppDataRegistry.SetValue("Report Unrecognised Census References Path", path);
+                    RegistrySettings.SetValue("Report Unrecognised Census References Path", path, RegistryValueKind.String);
                     FamilyTree.WriteUnrecognisedReferencesFile(unrecognisedResults, missingResults, notesResults, saveFileDialog.FileName);
                     Analytics.TrackAction(Analytics.ReportsAction, Analytics.UnrecognisedCensusEvent);
                     UIHelpers.ShowMessage("File written to " + saveFileDialog.FileName + "\n\nPlease create an issue at https://www.ftanalyzer.com/issues in issues section and upload your file, if you feel you have standard census references that should be recognised." + privateWarning, APPNAME);
@@ -3520,7 +3521,7 @@ namespace FTAnalyzer
         {
             try
             {
-                Application.UserAppDataRegistry.SetValue("Todays Events Month", rbTodayMonth.Checked);
+                RegistrySettings.SetValue("Todays Events Month", rbTodayMonth.Checked, RegistryValueKind.String);
             }
             catch (IOException)
             {
@@ -3533,7 +3534,7 @@ namespace FTAnalyzer
         {
             try
             {
-                Application.UserAppDataRegistry.SetValue("Todays Events Month", !rbTodaySingle.Checked);
+                RegistrySettings.SetValue("Todays Events Month", !rbTodaySingle.Checked, RegistryValueKind.String);
             }
             catch (IOException)
             {
@@ -3548,7 +3549,7 @@ namespace FTAnalyzer
         {
             try
             {
-                Application.UserAppDataRegistry.SetValue("Todays Events Step", nudToday.Value);
+                RegistrySettings.SetValue("Todays Events Step", nudToday.Value, RegistryValueKind.String);
             }
             catch (IOException)
             {
@@ -3569,13 +3570,13 @@ namespace FTAnalyzer
                 if (!ckbFactSelect.Items.Contains(factType))
                 {
                     int index = ckbFactSelect.Items.Add(factType);
-                    bool itemChecked = Application.UserAppDataRegistry.GetValue($"Fact: {factType}", "True").Equals("True");
+                    bool itemChecked = RegistrySettings.GetValue($"Fact: {factType}", "True").Equals("True");
                     ckbFactSelect.SetItemChecked(index, itemChecked);
                 }
                 if (!ckbFactExclude.Items.Contains(factType))
                 {
                     int index = ckbFactExclude.Items.Add(factType);
-                    bool itemChecked = Application.UserAppDataRegistry.GetValue($"Exlude Fact: {factType}", "False").Equals("True");
+                    bool itemChecked = RegistrySettings.GetValue($"Exlude Fact: {factType}", "False").Equals("True");
                     ckbFactExclude.SetItemChecked(index, itemChecked);
                 }
             }
@@ -3596,7 +3597,7 @@ namespace FTAnalyzer
             {
                 string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 using OpenFileDialog openFileDialog = new();
-                string initialDir = Application.UserAppDataRegistry.GetValue("Excel Export Individual Path", myDocuments).ToString() ?? string.Empty;
+                string initialDir = RegistrySettings.GetValue("Excel Export Individual Path", myDocuments).ToString() ?? string.Empty;
                 openFileDialog.InitialDirectory = initialDir ?? myDocuments;
                 openFileDialog.Filter = "Comma Separated Value (*.csv)|*.csv|TNG format (*.tng)|*.tng";
                 openFileDialog.FilterIndex = defaultIndex;
@@ -3606,7 +3607,7 @@ namespace FTAnalyzer
                     csvFilename = openFileDialog.FileName;
                     label.Text = "Loading " + csvFilename;
                     string path = Path.GetDirectoryName(csvFilename) ?? string.Empty;
-                    Application.UserAppDataRegistry.SetValue("Excel Export Individual Path", path);
+                    RegistrySettings.SetValue("Excel Export Individual Path", path, RegistryValueKind.String);
                     if (csvFilename.EndsWith("TNG", StringComparison.InvariantCultureIgnoreCase))
                         ReadTNGdata(pb, csvFilename);
                     else
@@ -3814,7 +3815,7 @@ namespace FTAnalyzer
             {
                 string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 using SaveFileDialog saveFileDialog = new();
-                string initialDir = Application.UserAppDataRegistry.GetValue("JSON Export Path", myDocuments).ToString() ?? string.Empty;
+                string initialDir = RegistrySettings.GetValue("JSON Export Path", myDocuments).ToString() ?? string.Empty;
                 saveFileDialog.InitialDirectory = initialDir ?? myDocuments;
                 saveFileDialog.Filter = "JavaScript Object Notation (*.json)|*.json";
                 saveFileDialog.FilterIndex = 1;
@@ -3822,7 +3823,7 @@ namespace FTAnalyzer
                 if (dr == DialogResult.OK)
                 {
                     string path = Path.GetDirectoryName(saveFileDialog.FileName) ?? string.Empty;
-                    Application.UserAppDataRegistry.SetValue("JSON Export Path", path);
+                    RegistrySettings.SetValue("JSON Export Path", path, RegistryValueKind.String);
                     using (StreamWriter output = new(new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write), Encoding.UTF8))
                     {
                         var data = new JsonExport(filename);
@@ -3897,8 +3898,8 @@ namespace FTAnalyzer
             {
                 string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 using SaveFileDialog saveFileDialog = new();
-                string initialDir = Application.UserAppDataRegistry.GetValue("Google MyMaps Path", myDocuments).ToString() ?? string.Empty;
-                string initialFile = Application.UserAppDataRegistry.GetValue("Google MyMaps Filename", myDocuments).ToString() ?? string.Empty;
+                string initialDir = RegistrySettings.GetValue("Google MyMaps Path", myDocuments).ToString() ?? string.Empty;
+                string initialFile = RegistrySettings.GetValue("Google MyMaps Filename", myDocuments).ToString() ?? string.Empty;
                 saveFileDialog.InitialDirectory = initialDir ?? myDocuments;
                 saveFileDialog.FileName = initialFile ?? string.Empty;
                 saveFileDialog.Filter = "Keyhole Markup Language (*.kml)|*.kml";
@@ -3910,8 +3911,8 @@ namespace FTAnalyzer
                         saveFileDialog.FileName += ".kml";
                     string path = Path.GetDirectoryName(saveFileDialog.FileName) ?? string.Empty;
                     string file = Path.GetFileName(saveFileDialog.FileName) ?? string.Empty;
-                    Application.UserAppDataRegistry.SetValue("Google MyMaps Path", path);
-                    Application.UserAppDataRegistry.SetValue("Google MyMaps Filename", file);
+                    RegistrySettings.SetValue("Google MyMaps Path", path, RegistryValueKind.String);
+                    RegistrySettings.SetValue("Google MyMaps Filename", file, RegistryValueKind.String);
                     Progress<int> progress = new(value => { tspbTabProgress.Value = value; });
                     tspbTabProgress.Visible = true;
                     tspbTabProgress.Maximum = 100;

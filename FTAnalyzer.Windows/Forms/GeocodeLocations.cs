@@ -4,7 +4,9 @@ using FTAnalyzer.Forms.Controls;
 using FTAnalyzer.Graphics;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Properties;
+using FTAnalyzer.Shared.Utilities;
 using FTAnalyzer.Utilities;
+using Microsoft.Win32;
 using NetTopologySuite.Geometries;
 using SharpMap.Utilities;
 using System.Collections.Concurrent;
@@ -93,7 +95,7 @@ namespace FTAnalyzer.Forms
                 ToolStripMenuItem menu = new(geocode)
                 {
                     Name = geocode,
-                    Checked = Application.UserAppDataRegistry.GetValue(geocode, "True").Equals("True"),
+                    Checked = RegistrySettings.GetValue(geocode, "True").Equals("True"),
                     CheckOnClick = true
                 };
                 menu.CheckedChanged += new EventHandler(MenuGeocode_CheckedChanged);
@@ -112,7 +114,7 @@ namespace FTAnalyzer.Forms
                 ToolStripMenuItem menu = new(resultType)
                 {
                     Name = resultType,
-                    Checked = Application.UserAppDataRegistry.GetValue(resultType, "True").Equals("True"),
+                    Checked = RegistrySettings.GetValue(resultType, "True").Equals("True"),
                     CheckOnClick = true
                 };
                 menu.CheckedChanged += new EventHandler(MenuResultType_CheckedChanged);
@@ -290,7 +292,8 @@ namespace FTAnalyzer.Forms
         {
             foreach (ToolStripMenuItem menu in mnuGeocodeStatus.DropDownItems)
             {
-                Application.UserAppDataRegistry.SetValue(menu.Name, menu.Checked.ToString()); // remember checked state for next time
+                if(menu.Name is not null)
+                    RegistrySettings.SetValue(menu.Name, menu.Checked.ToString(), RegistryValueKind.String); // remember checked state for next time
             }
             UpdateGridWithFilters();
         }
@@ -305,7 +308,8 @@ namespace FTAnalyzer.Forms
         {
             foreach (ToolStripMenuItem menu in mnuFoundResultType.DropDownItems)
             {
-                Application.UserAppDataRegistry.SetValue(menu.Name, menu.Checked.ToString()); // remember checked state for next time
+                if (menu.Name is not null)
+                    RegistrySettings.SetValue(menu.Name, menu.Checked.ToString(), RegistryValueKind.String); // remember checked state for next time
             }
             UpdateGridWithFilters();
         }
@@ -837,7 +841,7 @@ namespace FTAnalyzer.Forms
         #endregion
 
         void UpdateChangesWithoutAskingToolStripMenuItem_Click(object sender, EventArgs e) =>
-            Application.UserAppDataRegistry.SetValue("Ask to update database", updateChangesWithoutAskingToolStripMenuItem.Checked);
+            RegistrySettings.SetValue("Ask to update database", updateChangesWithoutAskingToolStripMenuItem.Checked, RegistryValueKind.String);
 
         void DgLocations_CellToolTipTextNeeded_1(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {

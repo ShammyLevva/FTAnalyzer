@@ -200,10 +200,10 @@ namespace FTAnalyzer.Forms
             SetupMap();
             DisplayLocationsForYear(labValue.Text);
             mh.CheckIfGeocodingNeeded(this, outputText);
-            int Width = (int)Application.UserAppDataRegistry.GetValue("Timeline size - width", this.Width);
-            int Height = (int)Application.UserAppDataRegistry.GetValue("Timeline size - height", this.Height);
-            int Top = (int)Application.UserAppDataRegistry.GetValue("Timeline position - top", this.Top);
-            int Left = (int)Application.UserAppDataRegistry.GetValue("Timeline position - left", this.Left);
+            int Width = (int)RegistrySettings.GetValue("Timeline size - width", this.Width);
+            int Height = (int)RegistrySettings.GetValue("Timeline size - height", this.Height);
+            int Top = (int)RegistrySettings.GetValue("Timeline position - top", this.Top);
+            int Left = (int)RegistrySettings.GetValue("Timeline position - left", this.Left);
             this.Width = Width;
             this.Height = Height;
             this.Top = Top + NativeMethods.TopTaskbarOffset;
@@ -401,10 +401,10 @@ namespace FTAnalyzer.Forms
         {
             if (!loading && WindowState == FormWindowState.Normal)
             {  //only save window size if not maximised or minimised
-                Application.UserAppDataRegistry.SetValue("Timeline size - width", Width);
-                Application.UserAppDataRegistry.SetValue("Timeline size - height", Height);
-                Application.UserAppDataRegistry.SetValue("Timeline position - top", Top);
-                Application.UserAppDataRegistry.SetValue("Timeline position - left", Left);
+                RegistrySettings.SetValue("Timeline size - width", Width);
+                RegistrySettings.SetValue("Timeline size - height", Height);
+                RegistrySettings.SetValue("Timeline position - top", Top);
+                RegistrySettings.SetValue("Timeline position - left", Left);
             }
         }
 

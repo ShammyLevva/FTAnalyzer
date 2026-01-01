@@ -37,10 +37,10 @@ namespace FTAnalyzer.Forms
             SetupMap();
             dgFacts.AutoGenerateColumns = false;
             DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
-            int splitheight = (int)Application.UserAppDataRegistry.GetValue("Places Facts Splitter Distance", -1);
+            int splitheight = (int)RegistrySettings.GetValue("Places Facts Splitter Distance", -1);
             if (splitheight != -1)
                 splitContainerFacts.SplitterDistance = Height - splitheight;
-            splitContainerMap.SplitterDistance = (int)Application.UserAppDataRegistry.GetValue("Places Map Splitter Distance", splitContainerMap.SplitterDistance);
+            splitContainerMap.SplitterDistance = (int)RegistrySettings.GetValue("Places Map Splitter Distance", splitContainerMap.SplitterDistance);
         }
 
         void DatabaseHelper_GeoLocationUpdated(object? location, EventArgs e)
@@ -163,10 +163,10 @@ namespace FTAnalyzer.Forms
             {
                 TreeNode[] nodes = TreeViewHandler.Instance.GetAllLocationsTreeNodes(false, pbPlaces);
                 tvPlaces.Nodes.AddRange(nodes);
-                int Width = (int)Application.UserAppDataRegistry.GetValue("Places size - width", this.Width);
-                int Height = (int)Application.UserAppDataRegistry.GetValue("Places size - height", this.Height);
-                int Top = (int)Application.UserAppDataRegistry.GetValue("Places position - top", this.Top);
-                int Left = (int)Application.UserAppDataRegistry.GetValue("Places position - left", this.Left);
+                int Width = (int)RegistrySettings.GetValue("Places size - width", this.Width);
+                int Height = (int)RegistrySettings.GetValue("Places size - height", this.Height);
+                int Top = (int)RegistrySettings.GetValue("Places position - top", this.Top);
+                int Left = (int)RegistrySettings.GetValue("Places position - left", this.Left);
                 this.Width = Width;
                 this.Height = Height;
                 this.Top = Top;
@@ -288,13 +288,13 @@ namespace FTAnalyzer.Forms
         void SplitContainerFacts_SplitterMoved(object sender, SplitterEventArgs e)
         {
             SplitContainer splitter = (SplitContainer)sender;
-            Application.UserAppDataRegistry.SetValue("Places Facts Splitter Distance", Height - splitter.SplitterDistance);
+            RegistrySettings.SetValue("Places Facts Splitter Distance", Height - splitter.SplitterDistance);
         }
 
         void SplitContainerMap_SplitterMoved(object sender, SplitterEventArgs e)
         {
             SplitContainer splitter = (SplitContainer)sender;
-            Application.UserAppDataRegistry.SetValue("Places Map Splitter Distance", splitter.SplitterDistance);
+            RegistrySettings.SetValue("Places Map Splitter Distance", splitter.SplitterDistance);
         }
 
         void ResetFormDefaultSizeAndPositionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -316,10 +316,10 @@ namespace FTAnalyzer.Forms
         {
             if (!isloading && WindowState == FormWindowState.Normal)
             {  //only save window size if not maximised or minimised
-                Application.UserAppDataRegistry.SetValue("Places size - width", Width);
-                Application.UserAppDataRegistry.SetValue("Places size - height", Height);
-                Application.UserAppDataRegistry.SetValue("Places position - top", Top);
-                Application.UserAppDataRegistry.SetValue("Places position - left", Left);
+                RegistrySettings.SetValue("Places size - width", Width);
+                RegistrySettings.SetValue("Places size - height", Height);
+                RegistrySettings.SetValue("Places position - top", Top);
+                RegistrySettings.SetValue("Places position - left", Left);
             }
         }
 
