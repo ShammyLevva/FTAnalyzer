@@ -21,7 +21,7 @@ namespace FTAnalyzer
         public FactImage(Fact.FactError errorLevel, Image img)
         {
             ErrorLevel = errorLevel;
-            Icon = img as Bitmap;
+            Icon = GraphicsUtilities.ResizeImageToCurrentScale(img);
         }
 
         public static FactImage ErrorIcon(Fact.FactError errorLevel)

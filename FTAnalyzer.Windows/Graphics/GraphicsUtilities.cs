@@ -50,7 +50,6 @@ namespace FTAnalyzer
             using (Graphics g = Application.OpenForms[0].CreateGraphics())
             {
                 dx = g.DpiX;
-                dy = g.DpiY;
             }
             return dx / 96;
         }

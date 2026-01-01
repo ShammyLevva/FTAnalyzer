@@ -30,8 +30,8 @@
 
         public FactLocationImage(FactLocation.Geocode errorLevel, Image img)
         {
-            this.ErrorLevel = errorLevel;
-            this.Icon = img as Bitmap;
+            ErrorLevel = errorLevel;
+            Icon = GraphicsUtilities.ResizeImageToCurrentScale(img);
         }
 
         public static FactLocationImage ErrorIcon(FactLocation.Geocode errorLevel)

@@ -43,11 +43,11 @@ namespace FTAnalyzer.Forms
             statusStrip1 = new StatusStrip();
             txtCount = new ToolStripStatusLabel();
             splitContainer = new SplitContainer();
-            dgIndividuals = new Controls.VirtualDGVIndividuals();
+            dgIndividuals = new Controls.VirtualDgvIndividuals();
             ctxViewNotes = new ContextMenuStrip(components);
             viewNotesToolStripMenuItem = new ToolStripMenuItem();
-            dgChildrenStatus = new Controls.VirtualDGVChildrenStatus();
-            dgFamilies = new Controls.VirtualDGVFamily();
+            dgChildrenStatus = new Controls.VirtualDgvChildrenStatus();
+            dgFamilies = new Controls.VirtualDgvFamily();
             toolStrip1 = new ToolStrip();
             mnuSaveColumnLayout = new ToolStripButton();
             mnuResetColumns = new ToolStripButton();
@@ -309,9 +309,9 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel txtCount;
         private System.Windows.Forms.SplitContainer splitContainer;
-        private FTAnalyzer.Forms.Controls.VirtualDGVIndividuals dgIndividuals;
-        private FTAnalyzer.Forms.Controls.VirtualDGVFamily dgFamilies;
-        private FTAnalyzer.Forms.Controls.VirtualDGVChildrenStatus dgChildrenStatus;
+        private FTAnalyzer.Forms.Controls.VirtualDgvIndividuals dgIndividuals;
+        private FTAnalyzer.Forms.Controls.VirtualDgvFamily dgFamilies;
+        private FTAnalyzer.Forms.Controls.VirtualDgvChildrenStatus dgChildrenStatus;
         private System.Windows.Forms.ContextMenuStrip ctxViewNotes;
         private System.Windows.Forms.ToolStripMenuItem viewNotesToolStripMenuItem;
         private System.Windows.Forms.ToolStrip toolStrip1;
