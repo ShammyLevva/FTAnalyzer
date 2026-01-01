@@ -1,6 +1,6 @@
 ﻿namespace FTAnalyzer.Forms.Controls
 {
-    class VirtualDGVLooseInfo : VirtualDataGridView<IDisplayLooseInfo>
+    class VirtualDgvLooseInfo : VirtualDataGridView<IDisplayLooseInfo>
     {
         protected override object GetValueFor(IDisplayLooseInfo ind, string propertyName)
         {

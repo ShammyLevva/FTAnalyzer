@@ -1,6 +1,6 @@
 ﻿namespace FTAnalyzer.Forms.Controls
 {
-    class VirtualDGVSurnames : VirtualDataGridView<IDisplaySurnames>
+    class VirtualDgvSurnames : VirtualDataGridView<IDisplaySurnames>
     {
         protected override object GetValueFor(IDisplaySurnames occ, string propertyName)
         {

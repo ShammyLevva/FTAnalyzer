@@ -1,6 +1,6 @@
 ﻿namespace FTAnalyzer.Forms.Controls
 {
-    class VirtualDGVCustomFacts : VirtualDataGridView<IDisplayCustomFact>
+    class VirtualDgvCustomFacts : VirtualDataGridView<IDisplayCustomFact>
     {
         protected override object GetValueFor(IDisplayCustomFact fact, string propertyName)
         {
