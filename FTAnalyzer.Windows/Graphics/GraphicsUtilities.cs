@@ -1,7 +1,7 @@
 ﻿using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
-namespace FTAnalyzer
+namespace FTAnalyzer.Graphics
 {
     public static class GraphicsUtilities
     {
@@ -19,7 +19,7 @@ namespace FTAnalyzer
 
             destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
 
-            using (var graphics = Graphics.FromImage(destImage))
+            using (var graphics = System.Drawing.Graphics.FromImage(destImage))
             {
                 graphics.CompositingMode = CompositingMode.SourceCopy;
                 graphics.CompositingQuality = CompositingQuality.HighQuality;
@@ -46,8 +46,8 @@ namespace FTAnalyzer
 
         public static float GetCurrentScaling()
         {
-            float dx, dy;
-            using (Graphics g = Application.OpenForms[0].CreateGraphics())
+            float dx;
+            using (System.Drawing.Graphics g = Application.OpenForms[0].CreateGraphics())
             {
                 dx = g.DpiX;
             }

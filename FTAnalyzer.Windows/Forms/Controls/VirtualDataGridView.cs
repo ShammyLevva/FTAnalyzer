@@ -88,6 +88,7 @@ namespace FTAnalyzer.Forms.Controls
 
         internal static List<string> GetFilteredColumns(string filterString)
         {
+            string[] separator = [" AND "];
             List<string> result = [];
             List<string> clauses = [.. filterString.Split(separator, StringSplitOptions.None)];
             foreach (string clause in clauses)
@@ -195,8 +196,6 @@ namespace FTAnalyzer.Forms.Controls
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public T CurrentRowDataBoundItem => _dataSource[CurrentRow.Index];
-
-        internal static readonly string[] separator = [" AND "];
 
         public T DataBoundItem(int rowIndex) => _dataSource[rowIndex];
 

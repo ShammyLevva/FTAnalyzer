@@ -1,6 +1,7 @@
 ﻿using FTAnalyzer.Events;
 using FTAnalyzer.Filters;
 using FTAnalyzer.Forms.Controls;
+using FTAnalyzer.Graphics;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Properties;
 using FTAnalyzer.Utilities;
@@ -16,6 +17,7 @@ namespace FTAnalyzer.Forms
     public partial class GeocodeLocations : Form
     {
         const string PLACES = "Places";
+        const string GEOCODINGERROR = "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.";
         readonly FamilyTree ft;
         readonly Font italicFont;
         readonly ReportFormHelper reportFormHelper;
@@ -535,7 +537,7 @@ namespace FTAnalyzer.Forms
             {
                 if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy || EmptyViewPortsBackgroundWorker.IsBusy)
                 {
-                    UIHelpers.ShowMessage(new Form() { TopMost = true }, "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
+                    UIHelpers.ShowMessage(new Form() { TopMost = true }, GEOCODINGERROR, "FTAnalyzer");
                 }
                 else
                 {
@@ -570,7 +572,7 @@ namespace FTAnalyzer.Forms
             {
                 if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy || EmptyViewPortsBackgroundWorker.IsBusy)
                 {
-                    UIHelpers.ShowMessage(new Form() { TopMost = true }, "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
+                    UIHelpers.ShowMessage(new Form() { TopMost = true }, GEOCODINGERROR, "FTAnalyzer");
                 }
                 else
                 {
@@ -916,7 +918,7 @@ namespace FTAnalyzer.Forms
         {
             if (reverseGeocodeBackgroundWorker.IsBusy)
             {
-                UIHelpers.ShowMessage(new Form() { TopMost = true }, "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
+                UIHelpers.ShowMessage(new Form() { TopMost = true }, GEOCODINGERROR, "FTAnalyzer");
             }
             else
             {
@@ -1109,7 +1111,7 @@ namespace FTAnalyzer.Forms
         {
             if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy)
             {
-                UIHelpers.ShowMessage(new Form() { TopMost = true }, "A previous Geocoding session didn't complete correctly.\nYou may need to wait or restart program to fix this.", "FTAnalyzer");
+                UIHelpers.ShowMessage(new Form() { TopMost = true }, GEOCODINGERROR, "FTAnalyzer");
             }
             else
             {

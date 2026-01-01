@@ -41,8 +41,12 @@ namespace FTAnalyzer
 
         void ResetTable()
         {
-            dgIndividuals.Sort(dgIndividuals.Columns["IndividualID"], ListSortDirection.Ascending);
-            dgIndividuals.AutoResizeColumns();
+            DataGridViewColumn? ind = dgIndividuals.Columns["IndividualID"];
+            if (ind is not null)
+            {
+                dgIndividuals.Sort(ind, ListSortDirection.Ascending);
+                dgIndividuals.AutoResizeColumns();
+            }
         }
 
         void PrintToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintReport("Map Individuals");

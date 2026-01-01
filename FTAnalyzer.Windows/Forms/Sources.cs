@@ -30,12 +30,14 @@ namespace FTAnalyzer.Forms
             tsRecords.Text = sources.Count + " Records";
         }
 
-        void ResetTable() => dgSources.Sort(dgSources.Columns["SourceTitle"], ListSortDirection.Ascending);
-
-        void PrintToolStripButton_Click(object sender, EventArgs e)
+        void ResetTable()
         {
-            reportFormHelper.PrintReport("Sources Report");
+            DataGridViewColumn? title = dgSources.Columns["SourceTitle"];
+            if (title is not null)
+                dgSources.Sort(title, ListSortDirection.Ascending);
         }
+
+        void PrintToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintReport("Sources Report");
 
         void PrintPreviewToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintPreviewReport();
 

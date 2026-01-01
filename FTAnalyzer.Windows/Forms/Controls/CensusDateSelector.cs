@@ -148,7 +148,7 @@ namespace FTAnalyzer.Forms.Controls
         void SetControlWidth()
         {
             cbCensusDate.Width = 10;
-            Graphics g = cbCensusDate.CreateGraphics();
+            System.Drawing.Graphics g = cbCensusDate.CreateGraphics();
             foreach (CensusDate cd in cbCensusDate.Items)
             {
                 // use s + "xxx" to add bit extra for drop down icon

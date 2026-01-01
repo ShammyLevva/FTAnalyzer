@@ -1,9 +1,9 @@
-﻿namespace FTAnalyzer
+﻿namespace FTAnalyzer.Graphics
 {
-    public class FactLocationImage
+    public class FactLocationImage(FactLocation.Geocode errorLevel, Image img)
     {
-        public FactLocation.Geocode ErrorLevel { get; private set; }
-        public Bitmap Icon { get; private set; }
+        public FactLocation.Geocode ErrorLevel { get; private set; } = errorLevel;
+        public Bitmap Icon { get; private set; } = GraphicsUtilities.ResizeImageToCurrentScale(img);
 
         static readonly FactLocationImage IMG_NOT_SEARCHED = new(FactLocation.Geocode.NOT_SEARCHED,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\QuestionMark.png")));
@@ -27,12 +27,6 @@
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\OS50kPartial.png")));
         static readonly FactLocationImage IMG_OS50k_FUZZY = new(FactLocation.Geocode.OS_50KFUZZY,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\OS50kFuzzy.png")));
-
-        public FactLocationImage(FactLocation.Geocode errorLevel, Image img)
-        {
-            ErrorLevel = errorLevel;
-            Icon = GraphicsUtilities.ResizeImageToCurrentScale(img);
-        }
 
         public static FactLocationImage ErrorIcon(FactLocation.Geocode errorLevel)
         {

@@ -31,7 +31,7 @@
             buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
 
             form.Size = new Size((int)(416f * scale), (int)(180f * scale));
-            form.Controls.AddRange([label, textBox, buttonOk, buttonCancel]);
+            form.Controls.AddRange(label, textBox, buttonOk, buttonCancel);
             form.ClientSize = new Size(Math.Max((int)(300f * scale), label.Right + (int)(30f * scale)), (int)(160f * scale));
             form.FormBorderStyle = FormBorderStyle.FixedDialog;
             form.StartPosition = FormStartPosition.CenterScreen;

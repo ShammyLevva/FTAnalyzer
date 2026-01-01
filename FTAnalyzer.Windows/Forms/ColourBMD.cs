@@ -1,4 +1,5 @@
-﻿using FTAnalyzer.Properties;
+﻿using FTAnalyzer.Graphics;
+using FTAnalyzer.Properties;
 using FTAnalyzer.Utilities;
 using System.ComponentModel;
 using static FTAnalyzer.ColourValues;

@@ -1,4 +1,5 @@
-﻿using NetTopologySuite.Geometries;
+﻿using FTAnalyzer.Graphics;
+using NetTopologySuite.Geometries;
 using SharpMap.Data;
 using System.Numerics;
 

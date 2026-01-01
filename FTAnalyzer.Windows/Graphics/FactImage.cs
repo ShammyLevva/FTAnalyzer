@@ -1,11 +1,11 @@
 ﻿#if !__MACOS__
 #endif
-namespace FTAnalyzer
+namespace FTAnalyzer.Graphics
 {
-    public class FactImage
+    public class FactImage(Fact.FactError errorLevel, Image img)
     {
-        public Fact.FactError ErrorLevel { get; private set; }
-        public Bitmap Icon { get; private set; }
+        public Fact.FactError ErrorLevel { get; private set; } = errorLevel;
+        public Bitmap Icon { get; private set; } = GraphicsUtilities.ResizeImageToCurrentScale(img);
 
         static readonly FactImage GOOD = new(Fact.FactError.GOOD,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Complete_OK.png")));
@@ -17,12 +17,6 @@ namespace FTAnalyzer
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\CriticalError.png")));
         static readonly FactImage QUESTIONABLE = new(Fact.FactError.QUESTIONABLE,
             Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\QuestionMark.png")));
-
-        public FactImage(Fact.FactError errorLevel, Image img)
-        {
-            ErrorLevel = errorLevel;
-            Icon = GraphicsUtilities.ResizeImageToCurrentScale(img);
-        }
 
         public static FactImage ErrorIcon(Fact.FactError errorLevel)
         {

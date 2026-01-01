@@ -135,7 +135,7 @@ namespace FTAnalyzer.Utilities
             try
             {
                 // Check to see if a node was clicked on 
-                TreeNode node = GetNodeAt(e.Location);
+                TreeNode? node = GetNodeAt(e.Location);
                 if (node is not null && ModifierKeys == Keys.None && m_SelectedNodes.Contains(node) && m_SelectedNodes.Count > 1)
                 {
                     int leftBound = node.Bounds.X; // -20; // Allow user to click on image

@@ -2,6 +2,7 @@
 using FTAnalyzer.Filters;
 using FTAnalyzer.Forms;
 using FTAnalyzer.Forms.Controls;
+using FTAnalyzer.Graphics;
 using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
@@ -55,7 +56,7 @@ namespace FTAnalyzer
                 DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
                 CheckSystemVersion();
                 if (!Application.ExecutablePath.Contains("WindowsApps"))
-                    CheckWebVersion(); // check for web version if not windows store app
+                    CheckWebVersion().RunSynchronously(); // check for web version if not windows store app
                 SetSavePath();
                 BuildRecentList();
             }
@@ -259,7 +260,7 @@ namespace FTAnalyzer
                 CloseGEDCOM(false);
                 if (!stopProcessing)
                 {
-                    if (await LoadTreeAsync(filename).ConfigureAwait(true))
+                    if (await LoadTreeAsync(filename))
                     {
                         SetDataErrorsCheckedDefaults(ckbDataErrors);
                         SetupFactsCheckboxes();
@@ -300,7 +301,7 @@ namespace FTAnalyzer
             timer.Start();
             using (FileStream stream = new(filename, FileMode.Open, FileAccess.Read))
             {
-                doc = await Task.Run(() => ft.LoadTreeHeader(filename, stream, outputText)).ConfigureAwait(true);
+                doc = await Task.Run(() => ft.LoadTreeHeader(filename, stream, outputText));
             }
             if (doc is null)
             {
@@ -315,11 +316,11 @@ namespace FTAnalyzer
             var individualProgress = new Progress<int>(value => { pbIndividuals.Value = value; });
             var familyProgress = new Progress<int>(value => { pbFamilies.Value = value; });
             var RelationshipProgress = new Progress<int>(value => { pbRelationships.Value = value; });
-            await Task.Run(() => ft.LoadTreeSources(doc, sourceProgress, outputText)).ConfigureAwait(true);
-            await Task.Run(() => ft.LoadTreeIndividuals(doc, individualProgress, outputText)).ConfigureAwait(true);
-            await Task.Run(() => ft.LoadTreeFamilies(doc, familyProgress, outputText)).ConfigureAwait(true);
-            await Task.Run(() => ft.LoadTreeRelationships(doc, RelationshipProgress, outputText)).ConfigureAwait(true);
-            await Task.Run(() => FamilyTree.CleanUpXML()).ConfigureAwait(true);
+            await Task.Run(() => ft.LoadTreeSources(doc, sourceProgress, outputText));
+            await Task.Run(() => ft.LoadTreeIndividuals(doc, individualProgress, outputText));
+            await Task.Run(() => ft.LoadTreeFamilies(doc, familyProgress, outputText));
+            await Task.Run(() => ft.LoadTreeRelationships(doc, RelationshipProgress, outputText));
+            await Task.Run(() => FamilyTree.CleanUpXML());
             doc = null;
             ft.DocumentLoaded = false;
             timer.Stop();
@@ -459,10 +460,10 @@ namespace FTAnalyzer
 
             if (openGedcom.ShowDialog() == DialogResult.OK)
             {
-                await LoadFileAsync(openGedcom.FileName).ConfigureAwait(true);
+                await LoadFileAsync(openGedcom.FileName);
                 Settings.Default.LoadLocation = Path.GetFullPath(openGedcom.FileName);
                 Settings.Default.Save();
-                await Analytics.TrackAction(Analytics.MainFormAction, Analytics.LoadGEDCOMEvent).ConfigureAwait(true);
+                await Analytics.TrackAction(Analytics.MainFormAction, Analytics.LoadGEDCOMEvent);
             }
         }
 
@@ -607,7 +608,7 @@ namespace FTAnalyzer
             {
                 shutdown = true;
                 e.Cancel = true;
-                await Analytics.EndProgramAsync().ConfigureAwait(true);
+                await Analytics.EndProgramAsync();
                 Close();
             }
             DatabaseHelper.Instance.Dispose();
@@ -996,7 +997,7 @@ namespace FTAnalyzer
                 TabPage current = tabCtrlLocations.SelectedTab ?? tabCtrlLocations.TabPages[0];
                 Control control = current.Controls[0];
                 control.Focus();
-                if (control is VirtualDGVLocations dg)
+                if (control is VirtualDgvLocations dg)
                 {
                     tsCountLabel.Text = $"{Messages.Count}{dg.RowCount} {dg.Name[2..]}";
                     mnuPrint.Enabled = true;
@@ -1015,7 +1016,7 @@ namespace FTAnalyzer
         }
 
         #region CellFormatting
-        void FormatCellLocations(VirtualDGVLocations grid, DataGridViewCellFormattingEventArgs e)
+        void FormatCellLocations(VirtualDgvLocations grid, DataGridViewCellFormattingEventArgs e)
         {
             try
             {
@@ -1082,7 +1083,7 @@ namespace FTAnalyzer
             // do anything that needs doing when option changes
         }
 
-        async void Options_ReloadData(object? sender, EventArgs e) => await QueryReloadData().ConfigureAwait(true);
+        async void Options_ReloadData(object? sender, EventArgs e) => await QueryReloadData();
 
         void Options_MinimumParentalAgeChanged(object? sender, EventArgs e)
         {
@@ -1113,7 +1114,7 @@ namespace FTAnalyzer
                 GeneralSettings.Default.Save();
                 if (dr == DialogResult.Yes)
                 {
-                    await LoadFileAsync(filename).ConfigureAwait(true);
+                    await LoadFileAsync(filename);
                 }
             }
         }
@@ -1122,7 +1123,7 @@ namespace FTAnalyzer
         {
             GeneralSettings.Default.ReloadRequired = false;
             GeneralSettings.Default.Save();
-            await LoadFileAsync(filename).ConfigureAwait(true);
+            await LoadFileAsync(filename);
         }
         #endregion
 
@@ -1489,7 +1490,9 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplaySource> list = ft.AllDisplaySources;
                 dgSources.DataSource = list;
-                dgSources.Sort(dgSources.Columns[nameof(IDisplaySource.SourceID)], ListSortDirection.Ascending);
+                DataGridViewColumn? sourceID = dgSources.Columns[nameof(IDisplaySource.SourceID)];
+                if (sourceID is not null)
+                    dgSources.Sort(sourceID, ListSortDirection.Ascending);
                 dgSources.Focus();
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
@@ -1501,7 +1504,9 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplayOccupation> list = ft.AllDisplayOccupations;
                 dgOccupations.DataSource = list;
-                dgOccupations.Sort(dgOccupations.Columns[nameof(IDisplayOccupation.Occupation)], ListSortDirection.Ascending);
+                DataGridViewColumn? occupation = dgOccupations.Columns[nameof(IDisplayOccupation.Occupation)];
+                if (occupation is not null)
+                    dgOccupations.Sort(occupation, ListSortDirection.Ascending);
                 dgOccupations.Focus();
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
@@ -1513,7 +1518,9 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplayCustomFact> list = ft.AllCustomFacts;
                 dgCustomFacts.DataSource = list;
-                dgCustomFacts.Sort(dgCustomFacts.Columns[nameof(IDisplayCustomFact.CustomFactName)], ListSortDirection.Ascending);
+                DataGridViewColumn? customFactName = dgCustomFacts.Columns[nameof(IDisplayCustomFact.CustomFactName)];
+                if (customFactName is not null)
+                    dgCustomFacts.Sort(customFactName, ListSortDirection.Ascending);
                 dgCustomFacts.Focus();
                 dgCustomFacts.Columns[nameof(IDisplayCustomFact.Ignore)].ReadOnly = false;
                 dgCustomFacts.Columns[nameof(IDisplayCustomFact.Ignore)].ToolTipText = "Tick box to ignore warnings for this custom fact type.";
@@ -1529,7 +1536,9 @@ namespace FTAnalyzer
         {
             SortableBindingList<IDisplayFamily> list = ft.AllDisplayFamilies;
             dgFamilies.DataSource = list;
-            dgFamilies.Sort(dgFamilies.Columns[nameof(IDisplayFamily.FamilyID)], ListSortDirection.Ascending);
+            DataGridViewColumn? famID = dgFamilies.Columns[nameof(IDisplayFamily.FamilyID)];
+            if (famID is not null)
+                dgFamilies.Sort(famID, ListSortDirection.Ascending);
             dgFamilies.Focus();
             mnuPrint.Enabled = true;
             tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
@@ -1541,7 +1550,9 @@ namespace FTAnalyzer
         {
             SortableBindingList<IDisplayIndividual> list = ft.AllDisplayIndividuals;
             dgIndividuals.DataSource = list;
-            dgIndividuals.Sort(dgIndividuals.Columns[nameof(IDisplayIndividual.IndividualID)], ListSortDirection.Ascending);
+            DataGridViewColumn? indID = dgIndividuals.Columns[nameof(IDisplayIndividual.IndividualID)];
+            if (indID is not null)
+                dgIndividuals.Sort(indID, ListSortDirection.Ascending);
             dgIndividuals.AllowUserToResizeColumns = true;
             dgIndividuals.Focus();
             mnuPrint.Enabled = true;
@@ -1561,28 +1572,28 @@ namespace FTAnalyzer
             {
                 rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
                 ckbHideIgnoredDuplicates.Checked = GeneralSettings.Default.HideIgnoredDuplicates;
-                await SetPossibleDuplicates().ConfigureAwait(true);
+                await SetPossibleDuplicates();
                 dgDuplicates.Focus();
                 mnuPrint.Enabled = true;
-                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.DuplicatesTabEvent).ConfigureAwait(true);
+                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.DuplicatesTabEvent);
             }
             if (tabErrorFixSelector.SelectedTab == tabLooseBirths)
             {
                 if (dgLooseBirths.DataSource is null)
                     SetupLooseBirths();
-                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseBirthsEvent).ConfigureAwait(true);
+                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseBirthsEvent);
             }
             else if (tabErrorFixSelector.SelectedTab == tabLooseDeaths)
             {
                 if (dgLooseDeaths.DataSource is null)
                     SetupLooseDeaths();
-                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseDeathsEvent).ConfigureAwait(true);
+                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseDeathsEvent);
             }
             else if (tabErrorFixSelector.SelectedTab == tabLooseInfo)
             {
                 if (dgLooseInfo.DataSource is null)
                     SetupLooseInfo();
-                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseInfoEvent).ConfigureAwait(true);
+                await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseInfoEvent);
             }
         }
 
@@ -1792,9 +1803,9 @@ namespace FTAnalyzer
                 {
                     rtbLCoutput.Text = "Started Processing Lost Cousins entries.\n\n";
                     Progress<string> outputText = new(value => { rtbLCoutput.AppendText(value); });
-                    int count = await Task.Run(() => ExportToLostCousins.ProcessListAsync(LCUpdates, outputText)).ConfigureAwait(true);
+                    int count = await Task.Run(() => ExportToLostCousins.ProcessListAsync(LCUpdates, outputText));
                     string resultText = $"{DateTime.Now.ToUniversalTime():yyyy-MM-dd HH:mm}: uploaded {count} records";
-                    await Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.UpdateLostCousins, resultText).ConfigureAwait(true);
+                    await Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.UpdateLostCousins, resultText);
                     SpecialMethods.VisitWebsite("https://www.lostcousins.com/pages/members/ancestors/");
                     UpdateLCReports();
                 }
@@ -2222,7 +2233,7 @@ namespace FTAnalyzer
             if (item?.Tag is not null)
             {
                 string file = (string)item.Tag ?? string.Empty;
-                await LoadFileAsync(file).ConfigureAwait(true);
+                await LoadFileAsync(file);
             }
         }
 
@@ -2345,8 +2356,9 @@ namespace FTAnalyzer
                 }
                 else if (e.Clicks == 2)
                 {
-                    string indID = (string)dgIndividuals.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
-                    ShowIndividualsFacts(indID);
+                    string? indID = (string?)dgIndividuals.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
+                    if (indID is not null)
+                        ShowIndividualsFacts(indID);
                 }
             }
         }
@@ -2355,8 +2367,9 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string indID = (string)dgIndividuals.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
-                ShowIndividualsFacts(indID);
+                string? indID = (string?)dgIndividuals.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
+                if (indID is not null)
+                    ShowIndividualsFacts(indID);
             }
         }
 
@@ -2601,12 +2614,12 @@ namespace FTAnalyzer
             string[]? files = e.Data.GetData(DataFormats.FileDrop) as string[];
             if (files is not null)
             {
-                foreach (string filename in files)
+                foreach (string draggedFilename in files)
                 {
-                    if (Path.GetExtension(filename.ToLower()) == ".ged")
+                    if (Path.GetExtension(draggedFilename.ToLower()) == ".ged")
                     {
                         fileLoaded = true;
-                        await LoadFileAsync(filename).ConfigureAwait(true);
+                        await LoadFileAsync(draggedFilename);
                         break;
                     }
                 }
@@ -2727,7 +2740,7 @@ namespace FTAnalyzer
             bool ignoreUnknownTwins = chkIgnoreUnnamedTwins.Checked;
             tsCountLabel.Text = "Calculating Duplicates this may take some considerable time";
             tsHintsLabel.Text = string.Empty;
-            duplicateData = await Task.Run(() => ft.GenerateDuplicatesList(score, ignoreUnknownTwins, progress, progressText, maxScore, cts.Token)).ConfigureAwait(true);
+            duplicateData = await Task.Run(() => ft.GenerateDuplicatesList(score, ignoreUnknownTwins, progress, progressText, maxScore, cts.Token));
             cts = null;
             if (duplicateData is not null)
             {
@@ -2768,7 +2781,7 @@ namespace FTAnalyzer
         {
             // do nothing if progress bar still visible
             if (!pbDuplicates.Visible)
-                await SetPossibleDuplicates().ConfigureAwait(true);
+                await SetPossibleDuplicates();
         }
 
         void BtnCancelDuplicates_Click(object sender, EventArgs e)
@@ -2807,7 +2820,7 @@ namespace FTAnalyzer
                 return; // do nothing if progress bar still visible
             GeneralSettings.Default.HideIgnoredDuplicates = ckbHideIgnoredDuplicates.Checked;
             GeneralSettings.Default.Save();
-            await SetPossibleDuplicates().ConfigureAwait(true);
+            await SetPossibleDuplicates();
         }
         #endregion
 
@@ -3073,17 +3086,17 @@ namespace FTAnalyzer
             DisposeDuplicateForms(rs);
             await rs.ShowAsync();
             rs.Focus();
-            await Analytics.TrackActionAsync(Analytics.MainFormAction, Analytics.ColourCensusEvent, country).ConfigureAwait(true);
+            await Analytics.TrackActionAsync(Analytics.MainFormAction, Analytics.ColourCensusEvent, country);
             HourGlass(this, false);
         }
 
-        void BtnUKColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.UNITED_KINGDOM);
+        void BtnUKColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.UNITED_KINGDOM).RunSynchronously();
 
-        void BtnIrishColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.IRELAND);
+        void BtnIrishColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.IRELAND).RunSynchronously();
 
-        void BtnUSColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.UNITED_STATES);
+        void BtnUSColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.UNITED_STATES).RunSynchronously();
 
-        void BtnCanadianColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.CANADA);
+        void BtnCanadianColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.CANADA).RunSynchronously();
 
         void BtnStandardMissingData_Click(object sender, EventArgs e) => UIHelpers.ShowMessage("Not Implemented Yet", APPNAME);
 
@@ -3158,8 +3171,13 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplayLooseBirth> looseBirthList = ft.LooseBirths();
                 dgLooseBirths.DataSource = looseBirthList;
-                dgLooseBirths.Sort(dgLooseBirths.Columns[nameof(IDisplayLooseBirth.Forenames)], ListSortDirection.Ascending);
-                dgLooseBirths.Sort(dgLooseBirths.Columns[nameof(IDisplayLooseBirth.Surname)], ListSortDirection.Ascending);
+                DataGridViewColumn? forenames = dgLooseBirths.Columns[nameof(IDisplayLooseBirth.Forenames)];
+                DataGridViewColumn? surname = dgLooseBirths.Columns[nameof(IDisplayLooseBirth.Surname)];
+                if (forenames is not null && surname is not null)
+                {
+                    dgLooseBirths.Sort(forenames, ListSortDirection.Ascending);
+                    dgLooseBirths.Sort(surname, ListSortDirection.Ascending);
+                }
                 dgLooseBirths.Focus();
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + looseBirthList.Count;
@@ -3178,8 +3196,13 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.LooseDeaths();
                 dgLooseDeaths.DataSource = looseDeathList;
-                dgLooseDeaths.Sort(dgLooseDeaths.Columns[nameof(IDisplayLooseDeath.Forenames)], ListSortDirection.Ascending);
-                dgLooseDeaths.Sort(dgLooseDeaths.Columns[nameof(IDisplayLooseDeath.Surname)], ListSortDirection.Ascending);
+                DataGridViewColumn? forenames = dgLooseDeaths.Columns[nameof(IDisplayLooseDeath.Forenames)];
+                DataGridViewColumn? surname = dgLooseDeaths.Columns[nameof(IDisplayLooseDeath.Surname)];
+                if (forenames is not null && surname is not null)
+                {
+                    dgLooseDeaths.Sort(forenames, ListSortDirection.Ascending);
+                    dgLooseDeaths.Sort(surname, ListSortDirection.Ascending);
+                }
                 dgLooseDeaths.Focus();
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + looseDeathList.Count;
@@ -3198,8 +3221,13 @@ namespace FTAnalyzer
             {
                 SortableBindingList<IDisplayLooseInfo> looseInfoList = ft.LooseInfo();
                 dgLooseInfo.DataSource = looseInfoList;
-                dgLooseInfo.Sort(dgLooseInfo.Columns[nameof(IDisplayLooseInfo.Forenames)], ListSortDirection.Ascending);
-                dgLooseInfo.Sort(dgLooseInfo.Columns[nameof(IDisplayLooseInfo.Surname)], ListSortDirection.Ascending);
+                DataGridViewColumn? forenames = dgLooseInfo.Columns[nameof(IDisplayLooseInfo.Forenames)];
+                DataGridViewColumn? surname = dgLooseInfo.Columns[nameof(IDisplayLooseInfo.Surname)];
+                if (forenames is not null && surname is not null)
+                {
+                    dgLooseInfo.Sort(forenames, ListSortDirection.Ascending);
+                    dgLooseInfo.Sort(surname, ListSortDirection.Ascending);
+                }
                 dgLooseInfo.Focus();
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + looseInfoList.Count;
@@ -3461,7 +3489,7 @@ namespace FTAnalyzer
                 Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
                 Progress<int> progress = new(value => { tspbTabProgress.Value = value; });
                 stats = await Task.Run(() =>
-                    new SortableBindingList<IDisplaySurnames>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked))).ConfigureAwait(true);
+                    new SortableBindingList<IDisplaySurnames>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked)));
                 tspbTabProgress.Visible = false;
             }
             List<IDisplaySurnames> list = [.. stats];
@@ -3481,10 +3509,10 @@ namespace FTAnalyzer
             rtbToday.ResetText();
             Progress<int> progress = new(value => { pbToday.Value = value; });
             Progress<string> outputText = new(text => { rtbToday.Rtf = text; });
-            await Task.Run(() => ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, (int)nudToday.Value, progress, outputText)).ConfigureAwait(true);
+            await Task.Run(() => ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, (int)nudToday.Value, progress, outputText));
             labTodayLoadWorldEvents.Visible = false;
             pbToday.Visible = false;
-            await Analytics.TrackAction(Analytics.MainFormAction, Analytics.TodayClickedEvent).ConfigureAwait(true);
+            await Analytics.TrackAction(Analytics.MainFormAction, Analytics.TodayClickedEvent);
         }
 
 
@@ -3513,7 +3541,7 @@ namespace FTAnalyzer
             }
         }
 
-        async void BtnUpdateTodaysEvents_Click(object sender, EventArgs e) => await ShowTodaysEvents().ConfigureAwait(true);
+        async void BtnUpdateTodaysEvents_Click(object sender, EventArgs e) => await ShowTodaysEvents();
 
 
         void NudToday_ValueChanged(object sender, EventArgs e)
@@ -3674,16 +3702,18 @@ namespace FTAnalyzer
             Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
             var progress = new Progress<int>(value => { tspbTabProgress.Value = value; });
             var list = await Task.Run(() =>
-                new SortableBindingList<IDisplaySurnames>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked))).ConfigureAwait(true);
+                new SortableBindingList<IDisplaySurnames>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked)));
             tspbTabProgress.Visible = false;
             dgSurnames.DataSource = list;
-            dgSurnames.Sort(dgSurnames.Columns[nameof(IDisplaySurnames.Surname)], ListSortDirection.Ascending);
+            DataGridViewColumn? surname = dgSurnames.Columns[nameof(IDisplaySurnames.Surname)];
+            if (surname is not null)
+                dgSurnames.Sort(surname, ListSortDirection.Ascending);
             dgSurnames.Focus();
             tsCountLabel.Text = $"{Messages.Count}{list.Count} Surnames.";
             tsHintsLabel.Text = Messages.Hints_Surname;
             dgSurnames.VirtualGridFiltered += VirtualGridFiltered;
             HourGlass(this, false);
-            await Analytics.TrackAction(Analytics.MainFormAction, Analytics.ShowSurnamesEvent).ConfigureAwait(true);
+            await Analytics.TrackAction(Analytics.MainFormAction, Analytics.ShowSurnamesEvent);
         }
 
         void CousinsCountReportToolStripMenuItem_Click(object sender, EventArgs e)

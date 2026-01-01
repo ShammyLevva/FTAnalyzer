@@ -15,7 +15,6 @@ namespace FTAnalyzer.Utilities
         public string CurrentFilename { get; private set; }
         public string DatabasePath { get; private set; }
         static DatabaseHelper instance;
-        static string connectionString;
         static SQLiteConnection InstanceConnection { get; set; }
         Version ProgramVersion { get; set; }
         bool restoring;
@@ -28,7 +27,7 @@ namespace FTAnalyzer.Utilities
             CurrentFilename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\FTA-RestoreTemp.s3db");
             if (CheckDatabaseConnection())
             {
-                InstanceConnection = new SQLiteConnection(connectionString);
+                InstanceConnection = new SQLiteConnection($"Data Source={DatabaseFile};Version=3;");
                 restoring = false;
             }
         }
@@ -75,7 +74,6 @@ namespace FTAnalyzer.Utilities
                         Directory.CreateDirectory(path);
                     File.Copy(Path.Combine(Application.StartupPath, @"Resources\Geocodes-Empty.s3db"), DatabaseFile);
                 }
-                connectionString = $"Data Source={DatabaseFile};Version=3;";
                 return true;
             }
             catch (Exception ex)
