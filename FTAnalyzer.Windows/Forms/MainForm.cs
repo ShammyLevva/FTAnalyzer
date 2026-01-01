@@ -40,10 +40,24 @@ namespace FTAnalyzer
 
         public MainForm()
         {
+            InitializeComponent();
+            string reg = Application.UserAppDataRegistry.ToString();
+        }
+
+        async void MainForm_Load(object sender, EventArgs e)
+        {
             try
             {
                 loading = true;
-                InitializeComponent();
+                SetupFonts();
+                SetHeightWidth();
+                RegisterEventHandlers();
+                Text = $"Family Tree Analyzer v{VERSION}";
+                rfhDuplicates = new(this, "Duplicates", dgDuplicates, ResetDuplicatesTable, "Duplicates", false);
+                ft.LoadStandardisedNames(Application.StartupPath);
+                tsCountLabel.Text = string.Empty;
+                tsHintsLabel.Text = "Welcome to Family Tree Analyzer, if you have any questions please raise them on the User group - see help menu for details";
+                loading = false;
                 FamilyTree.Instance.Version = $"v{VERSION}";
                 _ = NativeMethods.GetTaskBarPos(); // Sets taskbar offset
                 displayOptionsOnLoadToolStripMenuItem.Checked = GeneralSettings.Default.ReportOptions;
@@ -56,28 +70,14 @@ namespace FTAnalyzer
                 DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
                 CheckSystemVersion();
                 if (!Application.ExecutablePath.Contains("WindowsApps"))
-                    CheckWebVersion().RunSynchronously(); // check for web version if not windows store app
+                    await CheckWebVersion(); // check for web version if not windows store app
                 SetSavePath();
                 BuildRecentList();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                UIHelpers.ShowMessage($"FTAnalyzer encountered a problem whilst starting up error was : {e.Message}");
+                UIHelpers.ShowMessage($"FTAnalyzer encountered a problem whilst starting up error was : {ex.Message}");
             }
-        }
-
-
-        void MainForm_Load(object sender, EventArgs e)
-        {
-            SetupFonts();
-            RegisterEventHandlers();
-            Text = $"Family Tree Analyzer v{VERSION}";
-            SetHeightWidth();
-            rfhDuplicates = new(this, "Duplicates", dgDuplicates, ResetDuplicatesTable, "Duplicates", false);
-            ft.LoadStandardisedNames(Application.StartupPath);
-            tsCountLabel.Text = string.Empty;
-            tsHintsLabel.Text = "Welcome to Family Tree Analyzer, if you have any questions please raise them on the User group - see help menu for details";
-            loading = false;
         }
 
         static void CheckSystemVersion()
@@ -3090,13 +3090,13 @@ namespace FTAnalyzer
             HourGlass(this, false);
         }
 
-        void BtnUKColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.UNITED_KINGDOM).RunSynchronously();
+        void BtnUKColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.UNITED_KINGDOM);
 
-        void BtnIrishColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.IRELAND).RunSynchronously();
+        void BtnIrishColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.IRELAND);
 
-        void BtnUSColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.UNITED_STATES).RunSynchronously();
+        void BtnUSColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.UNITED_STATES);
 
-        void BtnCanadianColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.CANADA).RunSynchronously();
+        void BtnCanadianColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.CANADA);
 
         void BtnStandardMissingData_Click(object sender, EventArgs e) => UIHelpers.ShowMessage("Not Implemented Yet", APPNAME);
 
