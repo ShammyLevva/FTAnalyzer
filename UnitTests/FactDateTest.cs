@@ -69,29 +69,29 @@ namespace Testing
             Assert.AreEqual(target, UNKNOWN_DATE);
 
             target = new("C1914");
-            Assert.AreEqual(new(1913, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1914, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1913, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1914, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("ABT 966");
-            Assert.AreEqual(new(965, 1, 1), target.StartDate);
-            Assert.AreEqual(new(966, 12, 31), target.EndDate);
+            Assert.AreEqual(new(965, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(966, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("ABT1872");
-            Assert.AreEqual(new(1871, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1872, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1871, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1872, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("966");
-            Assert.AreEqual(new(966, 1, 1), target.StartDate);
-            Assert.AreEqual(new(966, 12, 31), target.EndDate);
+            Assert.AreEqual(new(966, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(966, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("BET 2 JAN AND 2 DEC 1743");
-            Assert.AreEqual(new(1743, 1, 2), target.StartDate);
-            Assert.AreEqual(new(1743, 12, 2), target.EndDate);
+            Assert.AreEqual(new(1743, 1, 2, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1743, 12, 2, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             // interpreted dates
             target = new("INT 4 OCT 1723 4DA 8MNTH 1723");
-            Assert.AreEqual(new(1723, 10, 4), target.StartDate);
-            Assert.AreEqual(new(1723, 10, 4), target.EndDate);
+            Assert.AreEqual(new(1723, 10, 4, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1723, 10, 4, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             // 29th Feb
             try
@@ -110,8 +110,8 @@ namespace Testing
         public void SpecialDates()
         {
             FactDate target = new("ABT @#DJULIAN@ 1567");
-            Assert.AreEqual(new(1566, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1567, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1566, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1567, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("605 BC");
             Assert.AreEqual(target, UNKNOWN_DATE);
@@ -138,12 +138,12 @@ namespace Testing
         {
             // French Dates
             FactDate target = new("4 janvier 1880");
-            Assert.AreEqual(new(1880, 1, 4), target.StartDate);
-            Assert.AreEqual(new(1880, 1, 4), target.EndDate);
+            Assert.AreEqual(new(1880, 1, 4, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1880, 1, 4, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("4 MAI 1880");
-            Assert.AreEqual(new(1880, 5, 4), target.StartDate);
-            Assert.AreEqual(new(1880, 5, 4), target.EndDate);
+            Assert.AreEqual(new(1880, 5, 4, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1880, 5, 4, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
         }
 
@@ -159,147 +159,147 @@ namespace Testing
             // invalid GEDCOM format dates
             test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.DD_MM_YYYY, "dd/mm/yyyy", "/");
             target = new("5/6/2018");
-            Assert.AreEqual(new(2018, 6, 5), target.StartDate);
-            Assert.AreEqual(new(2018, 6, 5), target.EndDate);
+            Assert.AreEqual(new(2018, 6, 5, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(2018, 6, 5, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("BET 5/6/2018 AND 7/6/2018");
-            Assert.AreEqual(new(2018, 6, 5), target.StartDate);
-            Assert.AreEqual(new(2018, 6, 7), target.EndDate);
+            Assert.AreEqual(new(2018, 6, 5, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(2018, 6, 7, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.MM_DD_YYYY, "mm/dd/yyyy", "/");
             target = new("5/6/2018");
-            Assert.AreEqual(new(2018, 5, 6), target.StartDate);
-            Assert.AreEqual(new(2018, 5, 6), target.EndDate);
+            Assert.AreEqual(new(2018, 5, 6, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(2018, 5, 6, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.DD_MM_YYYY, "dd/mm/yyyy", ".");
             target = new("5.6.2018");
-            Assert.AreEqual(new(2018, 6, 5), target.StartDate);
-            Assert.AreEqual(new(2018, 6, 5), target.EndDate);
+            Assert.AreEqual(new(2018, 6, 5, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(2018, 6, 5, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.MM_DD_YYYY, "mm/dd/yyyy", ".");
             target = new("5.6.2018");
-            Assert.AreEqual(new(2018, 5, 6), target.StartDate);
-            Assert.AreEqual(new(2018, 5, 6), target.EndDate);
+            Assert.AreEqual(new(2018, 5, 6, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(2018, 5, 6, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.DD_MM_YYYY, "dd/mm/yyyy", "-");
             target = new("5-6-2018");
-            Assert.AreEqual(new(2018, 6, 5), target.StartDate);
-            Assert.AreEqual(new(2018, 6, 5), target.EndDate);
+            Assert.AreEqual(new(2018, 6, 5, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(2018, 6, 5, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.MM_DD_YYYY, "mm/dd/yyyy", "-");
             target = new("5-6-2018");
-            Assert.AreEqual(new(2018, 5, 6), target.StartDate);
-            Assert.AreEqual(new(2018, 5, 6), target.EndDate);
+            Assert.AreEqual(new(2018, 5, 6, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(2018, 5, 6, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.DD_MM_YYYY, "dd/mm/yyyy", " ");
             target = new("5 6 2018");
-            Assert.AreEqual(new(2018, 6, 5), target.StartDate);
-            Assert.AreEqual(new(2018, 6, 5), target.EndDate);
+            Assert.AreEqual(new(2018, 6, 5, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(2018, 6, 5, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.MM_DD_YYYY, "mm/dd/yyyy", " ");
             target = new("5 6 2018");
-            Assert.AreEqual(new(2018, 5, 6), target.StartDate);
-            Assert.AreEqual(new(2018, 5, 6), target.EndDate);
+            Assert.AreEqual(new(2018, 5, 6, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(2018, 5, 6, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             test.SetNonGEDCOMDateSettings(NonGEDCOMFormatSelected.DD_MM_YYYY, "dd/mm/yyyy", "/");
             target = new("AFT 4/6/2018");
-            Assert.AreEqual(new(2018, 6, 5), target.StartDate);
+            Assert.AreEqual(new(2018, 6, 5, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
             Assert.AreEqual(MAXDATE, target.EndDate);
         }
 
         static FactDate MoreBetweens()
         {
             FactDate target = new("BTW 1914-1918");
-            Assert.AreEqual(new(1914, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1918, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1914, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1918, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("FROM 1915");
-            Assert.AreEqual(new(1915, 1, 1), target.StartDate);
+            Assert.AreEqual(new(1915, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
             Assert.AreEqual(MAXDATE, target.EndDate);
 
             target = new("TO 1915");
             Assert.AreEqual(MINDATE, target.StartDate);
-            Assert.AreEqual(new(1915, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1915, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("FROM 1914 TO 1918");
-            Assert.AreEqual(new(1914, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1918, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1914, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1918, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("APR 1914-APR 1918");
-            Assert.AreEqual(new(1914, 4, 1), target.StartDate);
-            Assert.AreEqual(new(1918, 4, 30), target.EndDate);
+            Assert.AreEqual(new(1914, 4, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1918, 4, 30, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("9-17 JUL 1824");
-            Assert.AreEqual(new(1824, 7, 9), target.StartDate);
-            Assert.AreEqual(new(1824, 7, 17), target.EndDate);
+            Assert.AreEqual(new(1824, 7, 9, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1824, 7, 17, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("10 APR 1914 - 15 APR 1918");
-            Assert.AreEqual(new(1914, 4, 10), target.StartDate);
-            Assert.AreEqual(new(1918, 4, 15), target.EndDate);
+            Assert.AreEqual(new(1914, 4, 10, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1918, 4, 15, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("10 APR 1914-15 APR 1918");
-            Assert.AreEqual(new(1914, 4, 10), target.StartDate);
-            Assert.AreEqual(new(1918, 4, 15), target.EndDate);
+            Assert.AreEqual(new(1914, 4, 10, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1918, 4, 15, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("10 APR-15 JUL 1918");
-            Assert.AreEqual(new(1918, 4, 10), target.StartDate);
-            Assert.AreEqual(new(1918, 7, 15), target.EndDate);
+            Assert.AreEqual(new(1918, 4, 10, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1918, 7, 15, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("APR 1914 - APR 1918");
-            Assert.AreEqual(new(1914, 4, 1), target.StartDate);
-            Assert.AreEqual(new(1918, 4, 30), target.EndDate);
+            Assert.AreEqual(new(1914, 4, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1918, 4, 30, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("1914 - 1918");
-            Assert.AreEqual(new(1914, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1918, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1914, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1918, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("Bet. 1914-1918");
-            Assert.AreEqual(new(1914, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1918, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1914, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1918, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("bet 1900 - 1910");
-            Assert.AreEqual(new(1900, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1910, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1900, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1910, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("1914 to 1918");
-            Assert.AreEqual(new(1914, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1918, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1914, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1918, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("1914 until 1918");
-            Assert.AreEqual(new(1914, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1918, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1914, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1918, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("Bet. 3 JAN 2001 AND 4 JAN 2001");
-            Assert.AreEqual(new(2001, 1, 3), target.StartDate);
-            Assert.AreEqual(new(2001, 1, 4), target.EndDate);
+            Assert.AreEqual(new(2001, 1, 3, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(2001, 1, 4, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("BET 3 AND 4 JAN 2001");
-            Assert.AreEqual(new(2001, 1, 3), target.StartDate);
-            Assert.AreEqual(new(2001, 1, 4), target.EndDate);
+            Assert.AreEqual(new(2001, 1, 3, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(2001, 1, 4, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("BET 9 AND 10 JAN 2001");
-            Assert.AreEqual(new(2001, 1, 9), target.StartDate);
-            Assert.AreEqual(new(2001, 1, 10), target.EndDate);
+            Assert.AreEqual(new(2001, 1, 9, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(2001, 1, 10, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("BET 11 AND 12 JAN 2001");
-            Assert.AreEqual(new(2001, 1, 11), target.StartDate);
-            Assert.AreEqual(new(2001, 1, 12), target.EndDate);
+            Assert.AreEqual(new(2001, 1, 11, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(2001, 1, 12, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("BET 997 AND 6 OCT 1014");
-            Assert.AreEqual(new(997, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1014, 10, 6), target.EndDate);
+            Assert.AreEqual(new(997, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1014, 10, 6, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("BET AFT 1858 AND BEF 1871");
-            Assert.AreEqual(new(1858, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1871, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1858, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1871, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("BET AFT MAR 1858 AND BEF FEB 1871");
-            Assert.AreEqual(new(1858, 3, 1), target.StartDate);
-            Assert.AreEqual(new(1871, 2, 28), target.EndDate);
+            Assert.AreEqual(new(1858, 3, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1871, 2, 28, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("TO BEF 1934");
             Assert.AreEqual(MINDATE, target.StartDate);
-            Assert.AreEqual(new(1933, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1933, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             return target;
         }
@@ -310,64 +310,64 @@ namespace Testing
 
             // test some alternative date formats
             FactDate target = new("Q3 1947");
-            Assert.AreEqual(new(1947, 6, 1), target.StartDate);
-            Assert.AreEqual(new(1947, 9, 30), target.EndDate);
+            Assert.AreEqual(new(1947, 6, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1947, 9, 30, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("3Q 1947");
-            Assert.AreEqual(new(1947, 6, 1), target.StartDate);
-            Assert.AreEqual(new(1947, 9, 30), target.EndDate);
+            Assert.AreEqual(new(1947, 6, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1947, 9, 30, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("ABT Q3 1947");
-            Assert.AreEqual(new(1947, 6, 1), target.StartDate);
-            Assert.AreEqual(new(1947, 9, 30), target.EndDate);
+            Assert.AreEqual(new(1947, 6, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1947, 9, 30, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("ABT QTR3 1947");
-            Assert.AreEqual(new(1947, 6, 1), target.StartDate);
-            Assert.AreEqual(new(1947, 9, 30), target.EndDate);
+            Assert.AreEqual(new(1947, 6, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1947, 9, 30, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("ABT QTR 3 1947");
-            Assert.AreEqual(new(1947, 6, 1), target.StartDate);
-            Assert.AreEqual(new(1947, 9, 30), target.EndDate);
+            Assert.AreEqual(new(1947, 6, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1947, 9, 30, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("SEP QTR 1947");
-            Assert.AreEqual(new(1947, 6, 1), target.StartDate);
-            Assert.AreEqual(new(1947, 9, 30), target.EndDate);
+            Assert.AreEqual(new(1947, 6, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1947, 9, 30, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("JAN FEB MAR 1966");
-            Assert.AreEqual(new(1965, 12, 1), target.StartDate);
-            Assert.AreEqual(new(1966, 3, 31), target.EndDate);
+            Assert.AreEqual(new(1965, 12, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1966, 3, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("JAN / FEB / MAR 1966");
-            Assert.AreEqual(new(1965, 12, 1), target.StartDate);
-            Assert.AreEqual(new(1966, 3, 31), target.EndDate);
+            Assert.AreEqual(new(1965, 12, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1966, 3, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("JAN/FEB/MAR 1966");
-            Assert.AreEqual(new(1965, 12, 1), target.StartDate);
-            Assert.AreEqual(new(1966, 3, 31), target.EndDate);
+            Assert.AreEqual(new(1965, 12, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1966, 3, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("BET JAN-MAR 1966");
-            Assert.AreEqual(new(1965, 12, 1), target.StartDate);
-            Assert.AreEqual(new(1966, 3, 31), target.EndDate);
+            Assert.AreEqual(new(1965, 12, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1966, 3, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("JAN-MAR 1966");
-            Assert.AreEqual(new(1965, 12, 1), target.StartDate);
-            Assert.AreEqual(new(1966, 3, 31), target.EndDate);
+            Assert.AreEqual(new(1965, 12, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1966, 3, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("Q1 1966");
-            Assert.AreEqual(new(1965, 12, 1), target.StartDate);
-            Assert.AreEqual(new(1966, 3, 31), target.EndDate);
+            Assert.AreEqual(new(1965, 12, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1966, 3, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("2 QTR 1870.");
-            Assert.AreEqual(new(1870, 3, 1), target.StartDate);
-            Assert.AreEqual(new(1870, 6, 30), target.EndDate);
+            Assert.AreEqual(new(1870, 3, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1870, 6, 30, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("2d 3m 1870");
-            Assert.AreEqual(new(1870, 5, 2), target.StartDate);
-            Assert.AreEqual(new(1870, 5, 2), target.EndDate);
+            Assert.AreEqual(new(1870, 5, 2, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1870, 5, 2, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("<1870>");
-            Assert.AreEqual(new(1870, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1870, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1870, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1870, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
             return target;
         }
 
@@ -375,41 +375,41 @@ namespace Testing
         {
             // Double dates
             FactDate target = new("11 Mar 1747/48");
-            Assert.AreEqual(new(1748, 3, 11), target.StartDate);
-            Assert.AreEqual(new(1748, 3, 11), target.EndDate);
+            Assert.AreEqual(new(1748, 3, 11, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1748, 3, 11, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("Mar 1747/48");
-            Assert.AreEqual(new(1748, 3, 1), target.StartDate);
-            Assert.AreEqual(new(1748, 3, 31), target.EndDate);
+            Assert.AreEqual(new(1748, 3, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1748, 3, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("1747/48");
-            Assert.AreEqual(new(1748, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1748, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1748, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1748, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("11 Mar 1747/1748");
-            Assert.AreEqual(new(1748, 3, 11), target.StartDate);
-            Assert.AreEqual(new(1748, 3, 11), target.EndDate);
+            Assert.AreEqual(new(1748, 3, 11, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1748, 3, 11, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("15 FEB 1599/00");
-            Assert.AreEqual(new(1600, 2, 15), target.StartDate);
-            Assert.AreEqual(new(1600, 2, 15), target.EndDate);
+            Assert.AreEqual(new(1600, 2, 15, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1600, 2, 15, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("1 MAR 922/23");
-            Assert.AreEqual(new(923, 3, 1), target.StartDate);
-            Assert.AreEqual(new(923, 3, 1), target.EndDate);
+            Assert.AreEqual(new(923, 3, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(923, 3, 1, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("1 MAR 922/923");
-            Assert.AreEqual(new(923, 3, 1), target.StartDate);
-            Assert.AreEqual(new(923, 3, 1), target.EndDate);
+            Assert.AreEqual(new(923, 3, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(923, 3, 1, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("29 Feb 1703/1704");
-            Assert.AreEqual(new(1704, 2, 29), target.StartDate);
-            Assert.AreEqual(new(1704, 2, 29), target.EndDate);
+            Assert.AreEqual(new(1704, 2, 29, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1704, 2, 29, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
 
             target = new("Bef 29 Feb 1611/12");
             Assert.AreEqual(MINDATE, target.StartDate);
-            Assert.AreEqual(new(1612, 2, 28), target.EndDate);
+            Assert.AreEqual(new(1612, 2, 28, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             return target;
         }
@@ -418,80 +418,80 @@ namespace Testing
         {
             // Betweens 
             FactDate target = new("BET 1983 AND 1986");
-            Assert.AreEqual(new(1983, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1986, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1983, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1986, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("BET SEP 1983 AND 1986");
-            Assert.AreEqual(new(1983, 9, 1), target.StartDate);
-            Assert.AreEqual(new(1986, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1983, 9, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1986, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("BET 28 SEP 1983 AND 1986");
-            Assert.AreEqual(new(1983, 9, 28), target.StartDate);
-            Assert.AreEqual(new(1986, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1983, 9, 28, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1986, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("BET 1983 AND JUN 1986");
-            Assert.AreEqual(new(1983, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1986, 6, 30), target.EndDate);
+            Assert.AreEqual(new(1983, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1986, 6, 30, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("BET SEP 1983 AND JUN 1986");
-            Assert.AreEqual(new(1983, 9, 1), target.StartDate);
-            Assert.AreEqual(new(1986, 6, 30), target.EndDate);
+            Assert.AreEqual(new(1983, 9, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1986, 6, 30, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("BET 28 SEP 1983 AND JUN 1986");
-            Assert.AreEqual(new(1983, 9, 28), target.StartDate);
-            Assert.AreEqual(new(1986, 6, 30), target.EndDate);
+            Assert.AreEqual(new(1983, 9, 28, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1986, 6, 30, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("BET 1983 AND 10 JUN 1986");
-            Assert.AreEqual(new(1983, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1986, 6, 10), target.EndDate);
+            Assert.AreEqual(new(1983, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1986, 6, 10, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("BET SEP 1983 AND 10 JUN 1986");
-            Assert.AreEqual(new(1983, 9, 1), target.StartDate);
-            Assert.AreEqual(new(1986, 6, 10), target.EndDate);
+            Assert.AreEqual(new(1983, 9, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1986, 6, 10, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("BET 28 SEP 1983 AND 10 JUN 1986");
-            Assert.AreEqual(new(1983, 9, 28), target.StartDate);
-            Assert.AreEqual(new(1986, 6, 10), target.EndDate);
+            Assert.AreEqual(new(1983, 9, 28, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1986, 6, 10, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
             return target;
         }
 
         static FactDate BasicDates()
         {
             FactDate target = new("1966");
-            Assert.AreEqual(new(1966, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1966, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1966, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1966, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("19 Nov");
-            Assert.AreEqual(new(1, 11, 19), target.StartDate);
-            Assert.AreEqual(new(9999, 11, 19), target.EndDate);
+            Assert.AreEqual(new(1, 11, 19, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(9999, 11, 19, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("Nov 1966");
-            Assert.AreEqual(new(1966, 11, 1), target.StartDate);
-            Assert.AreEqual(new(1966, 11, 30), target.EndDate);
+            Assert.AreEqual(new(1966, 11, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1966, 11, 30, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("19 Nov 1966");
-            Assert.AreEqual(new(1966, 11, 19), target.StartDate);
-            Assert.AreEqual(new(1966, 11, 19), target.EndDate);
+            Assert.AreEqual(new(1966, 11, 19, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1966, 11, 19, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("ABT 1966");
-            Assert.AreEqual(new(1965, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1966, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1965, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1966, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("About        1615");
-            Assert.AreEqual(new(1614, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1615, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1614, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1615, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("ABT NOV 1966");
-            Assert.AreEqual(new(1966, 10, 1), target.StartDate);
-            Assert.AreEqual(new(1966, 11, 30), target.EndDate);
+            Assert.AreEqual(new(1966, 10, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1966, 11, 30, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("ABT MAR 1966");
-            Assert.AreEqual(new(1965, 12, 1), target.StartDate);
-            Assert.AreEqual(new(1966, 3, 31), target.EndDate);
+            Assert.AreEqual(new(1965, 12, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1966, 3, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("ABT 19 NOV 1966");
-            Assert.AreEqual(new(1966, 11, 18), target.StartDate);
-            Assert.AreEqual(new(1966, 11, 19), target.EndDate);
+            Assert.AreEqual(new(1966, 11, 18, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1966, 11, 19, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("UNKNOWN");
             Assert.AreEqual(MINDATE, target.StartDate);
@@ -499,35 +499,35 @@ namespace Testing
 
             target = new("BEF 1966");
             Assert.AreEqual(MINDATE, target.StartDate);
-            Assert.AreEqual(new(1965, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1965, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("BEF NOV 1966");
             Assert.AreEqual(MINDATE, target.StartDate);
-            Assert.AreEqual(new(1966, 10, 31), target.EndDate);
+            Assert.AreEqual(new(1966, 10, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("BEF 19 Nov 1966");
             Assert.AreEqual(MINDATE, target.StartDate);
-            Assert.AreEqual(new(1966, 11, 18), target.EndDate);
+            Assert.AreEqual(new(1966, 11, 18, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("AFT 1966");
-            Assert.AreEqual(new(1967, 1, 1), target.StartDate);
+            Assert.AreEqual(new(1967, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
             Assert.AreEqual(MAXDATE, target.EndDate);
 
             target = new("AFT Nov 1966");
-            Assert.AreEqual(new(1966, 12, 01), target.StartDate);
+            Assert.AreEqual(new(1966, 12, 01, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
             Assert.AreEqual(MAXDATE, target.EndDate);
 
             target = new("AFT 19 Nov 1966");
-            Assert.AreEqual(new(1966, 11, 20), target.StartDate);
+            Assert.AreEqual(new(1966, 11, 20, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
             Assert.AreEqual(MAXDATE, target.EndDate);
 
             target = new("AFT 19Ÿ©Nov 1966");
-            Assert.AreEqual(new(1966, 11, 20), target.StartDate);
+            Assert.AreEqual(new(1966, 11, 20, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
             Assert.AreEqual(MAXDATE, target.EndDate);
 
             target = new("1881 census");
-            Assert.AreEqual(new(1881, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1881, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1881, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1881, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             return target;
         }
@@ -536,12 +536,12 @@ namespace Testing
         public void FactDatePhraseTest()
         {
             FactDate target = new("INT 17 APR 1917 (Easter Sunday 1917)");
-            Assert.AreEqual(new(1917, 4, 17), target.StartDate);
-            Assert.AreEqual(new(1917, 4, 17), target.EndDate);
+            Assert.AreEqual(new(1917, 4, 17, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1917, 4, 17, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             target = new("(1881 Census)");
-            Assert.AreEqual(new(1881, 1, 1), target.StartDate);
-            Assert.AreEqual(new(1881, 12, 31), target.EndDate);
+            Assert.AreEqual(new(1881, 1, 1, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1881, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
             //target = new("(Easter Sunday 1917)");
             //Assert.AreEqual(UNKNOWN_DATE, target.StartDate);
