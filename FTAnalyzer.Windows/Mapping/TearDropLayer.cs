@@ -11,7 +11,7 @@ namespace FTAnalyzer.Mapping
     public class TearDropLayer : VectorLayer
     {
         public FeatureDataTable TearDropLocations { get; private set; }
-        public Image Icon { get; private set; }
+        public Image Icon { get; }
 
         public static readonly string RED = "Teardrop_Red.png", BLACK = "Teardrop_Black.png",
                                       LIGHT_GREEN = "Teardrop_LightGreen.png", GREY = "Grey";
@@ -27,7 +27,7 @@ namespace FTAnalyzer.Mapping
             GeometryFeatureProvider TearDropLocationGFP = new(TearDropLocations);
             this.DataSource = TearDropLocationGFP;
 
-            Dictionary<string, IStyle> styles = new();
+            Dictionary<string, IStyle> styles = [];
             VectorStyle birth = new()
             {
                 PointColor = new SolidBrush(Color.Red),
@@ -96,7 +96,7 @@ namespace FTAnalyzer.Mapping
             Clear();
             foreach (DataGridViewRow row in rows)
             {
-                DisplayFact dispFact = (DisplayFact)row.DataBoundItem;
+                DisplayFact? dispFact = (DisplayFact?)row.DataBoundItem;
                 if (dispFact.Ind is not null)
                 {
                     MapLocation ml = new(dispFact.Ind, dispFact.Fact, dispFact.FactDate);
@@ -105,7 +105,7 @@ namespace FTAnalyzer.Mapping
             }
         }
 
-        FeatureDataRow AddFeatureDataRow(DisplayFact dispfact, MapLocation loc, string colour)
+        void AddFeatureDataRow(DisplayFact dispfact, MapLocation loc, string colour)
         {
             GeoResponse.CResult.CGeometry.CViewPort vp = loc.Location.ViewPort;
             FeatureDataRow r = TearDropLocations.NewRow();
@@ -115,7 +115,6 @@ namespace FTAnalyzer.Mapping
             r["Colour"] = colour;
             r.Geometry = loc.Geometry;
             TearDropLocations.AddRow(r);
-            return r;
         }
 
         protected virtual void Dispose(bool disposing)

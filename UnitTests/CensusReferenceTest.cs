@@ -1,6 +1,6 @@
 ﻿using FTAnalyzer;
 
-namespace Testing
+namespace UnitTests
 {
     /// <summary>
     /// Summary description for CensusReferenceTest
@@ -226,7 +226,7 @@ namespace Testing
         static void ScottishCensusTest(string reference, FactDate year, string parish, string ED, string page)
         {
             CensusReference censusRef = new("I1", reference, false);
-            Assert.IsTrue(censusRef.CensusYear.BestYear == year.BestYear);
+            Assert.AreEqual(year.BestYear, censusRef.CensusYear.BestYear);
             Assert.IsTrue(censusRef.Parish.Equals(parish));
             Assert.IsTrue(censusRef.ED.Equals(ED));
             Assert.IsTrue(censusRef.Page.Equals(page));
