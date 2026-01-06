@@ -4,7 +4,7 @@ using FTAnalyzer.Shared.Utilities;
 using FTAnalyzer.Utilities;
 using Microsoft.Win32;
 using System.ComponentModel;
-using static FTAnalyzer.Core.ColourValues;
+using static FTAnalyzer.ColourValues;
 
 namespace FTAnalyzer.Forms
 {
