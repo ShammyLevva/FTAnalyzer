@@ -3,7 +3,7 @@ using FTAnalyzer.Utilities;
 using System.Xml;
 using static FTAnalyzer.FactDate;
 
-namespace Testing
+namespace UnitTests
 {
 
 
