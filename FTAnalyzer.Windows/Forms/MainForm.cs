@@ -24,7 +24,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static readonly string VERSION = "10.0.0.0-beta 12";
+        public static readonly string VERSION = "10.0.0.0-RC1";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(MainForm));
         const string APPNAME = "FTAnalyzer";
 
@@ -106,7 +106,7 @@ namespace FTAnalyzer
                 {
                     string webVersion = versionNode.InnerText.ToUpper().Replace("VERSION", "").Trim();
                     string thisVersion = VERSION;
-                    if (VERSION.Contains("-beta"))
+                    if (VERSION.Contains("-beta") || VERSION.Contains("-RC"))
                         thisVersion = VERSION[..VERSION.IndexOf('-')];
                     Version web = new(webVersion);
                     Version local = new(thisVersion);
