@@ -733,7 +733,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_BBDED1BADB084889B3388EEB59CB4169"
             {
-            "SourcePath" = "8:..\\FTAnalyzer\\FTAnalyzer.Windows\\obj\\Debug\\net10.0-windows10.0.17763.0\\apphost.exe"
+            "SourcePath" = "8:"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_12249BAB9E7A4E32BADCCECC439D1E75"
@@ -755,6 +755,7 @@
             "OutputGroupCanonicalName" = "8:PublishItems"
             "OutputProjectGuid" = "8:{6C44AA02-02F3-A5D6-7F7B-5CBA20D77027}"
             "ShowKeyOutput" = "11:TRUE"
+            "PublishProfilePath" = "8:Properties\\PublishProfiles\\FolderProfile.pubxml"
                 "ExcludeFilters"
                 {
                 }
