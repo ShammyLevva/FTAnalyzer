@@ -19,6 +19,14 @@
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
   </Folder>
+  <Project Path="../FTAnalyzer.Installer.Net10/Installer.Net10.vdproj" Type="Installer">
+    <BuildType Solution="CD_ROM|*" Project="Release" />
+    <BuildType Solution="DebugDSProjection|*" Project="Debug" />
+    <BuildType Solution="DVD-5|*" Project="Release" />
+    <BuildType Solution="ReleaseDSProjection|*" Project="Release" />
+    <BuildType Solution="SingleImage|*" Project="Release" />
+    <Build />
+  </Project>
   <Project Path="../FTAnalyzer.Shared/FTAnalyzer.Shared/FTAnalyzer.Shared.shproj" />
   <Project Path="FTAnalyzer.Windows/FTAnalyzer.Windows.csproj">
     <BuildType Solution="CD_ROM|*" Project="Debug" />
