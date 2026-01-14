@@ -19,7 +19,7 @@
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
   </Folder>
-  <Project Path="../FTAnalyzer.Installer.Net10/Installer.Net10.vdproj" Type="Installer">
+  <Project Path="Installer.Net10/Installer.Net10.vdproj" Type="Installer">
     <BuildType Solution="CD_ROM|*" Project="Release" />
     <BuildType Solution="DebugDSProjection|*" Project="Debug" />
     <BuildType Solution="DVD-5|*" Project="Release" />

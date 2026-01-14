@@ -1,0 +1,1 @@
+# FTAnalyzer.Installer.Net10
