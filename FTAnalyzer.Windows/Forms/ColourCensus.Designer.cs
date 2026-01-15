@@ -127,13 +127,14 @@ namespace FTAnalyzer.Forms
             dgReportSheet.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgReportSheet.Columns.AddRange(new DataGridViewColumn[] { IndividualID, Forenames, Surname, Relation, RelationToRoot, C1841, C1851, C1861, C1871, C1881, C1891, C1901, C1911, C1921, C1939, US1790, US1800, US1810, US1820, US1830, US1840, US1850, US1860, US1870, US1880, US1890, US1900, US1910, US1920, US1930, US1940, US1950, Can1851, Can1861, Can1871, Can1881, Can1891, Can1901, Can1906, Can1911, Can1916, Can1921, Ire1901, Ire1911, BirthDate, BirthLocation, DeathDate, DeathLocation, BestLocation, Ahnentafel });
             dgReportSheet.ContextMenuStrip = contextMenuStrip;
-            dgReportSheet.Location = new Point(0, 30);
-            dgReportSheet.Margin = new Padding(4, 4, 4, 4);
+            dgReportSheet.Dock = DockStyle.Fill;
+            dgReportSheet.Location = new Point(0, 0);
+            dgReportSheet.Margin = new Padding(4);
             dgReportSheet.Name = "dgReportSheet";
             dgReportSheet.ReadOnly = true;
             dgReportSheet.RowHeadersWidth = 20;
             dgReportSheet.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            dgReportSheet.Size = new Size(1211, 607);
+            dgReportSheet.Size = new Size(1211, 663);
             dgReportSheet.TabIndex = 1;
             dgReportSheet.CellContextMenuStripNeeded += DgReportSheet_CellContextMenuStripNeeded;
             dgReportSheet.CellDoubleClick += DgReportSheet_CellDoubleClick;
@@ -817,7 +818,7 @@ namespace FTAnalyzer.Forms
             Controls.Add(statusStrip);
             Controls.Add(dgReportSheet);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "ColourCensus";
             Text = "Colour Census Report Result";
             FormClosed += ColourCensus_FormClosed;

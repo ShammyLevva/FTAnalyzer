@@ -118,7 +118,8 @@ namespace FTAnalyzer.Forms
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgBMDReportSheet.DefaultCellStyle = dataGridViewCellStyle2;
-            dgBMDReportSheet.Location = new Point(0, 28);
+            dgBMDReportSheet.Dock = DockStyle.Fill;
+            dgBMDReportSheet.Location = new Point(0, 0);
             dgBMDReportSheet.Name = "dgBMDReportSheet";
             dgBMDReportSheet.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -130,7 +131,7 @@ namespace FTAnalyzer.Forms
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
             dgBMDReportSheet.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgBMDReportSheet.RowHeadersWidth = 20;
-            dgBMDReportSheet.Size = new Size(1036, 444);
+            dgBMDReportSheet.Size = new Size(1036, 497);
             dgBMDReportSheet.TabIndex = 1;
             dgBMDReportSheet.CellContextMenuStripNeeded += DgBMDReportSheet_CellContextMenuStripNeeded;
             dgBMDReportSheet.CellDoubleClick += DgReportSheet_CellDoubleClick;
