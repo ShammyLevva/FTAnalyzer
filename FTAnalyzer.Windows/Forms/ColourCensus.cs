@@ -89,7 +89,7 @@ namespace FTAnalyzer.Forms
         void SetColumns(string country)
         {
             // make all census columns hidden
-            for (int index = dgReportSheet.Columns["C1841"].Index; index <= dgReportSheet.Columns["Ire1911"].Index; index++)
+            for (int index = dgReportSheet.Columns["C1841"].Index; index <= dgReportSheet.Columns["Ire1926"].Index; index++)
                 dgReportSheet.Columns[index].Visible = false;
 
             if (country.Equals(Countries.UNITED_STATES))
@@ -107,7 +107,7 @@ namespace FTAnalyzer.Forms
             else if (country.Equals(Countries.IRELAND))
             {
                 startColumnIndex = dgReportSheet.Columns["Ire1901"].Index;
-                endColumnIndex = dgReportSheet.Columns["Ire1911"].Index;
+                endColumnIndex = dgReportSheet.Columns["Ire1926"].Index;
                 cbFilter.Items[5] = "Outside Ireland (Dark Grey)";
             }
             else
@@ -242,7 +242,10 @@ namespace FTAnalyzer.Forms
                             else
                                 censusYear = 1901 + (e.ColumnIndex - dgReportSheet.Columns["Can1901"].Index) * 5;
                         else if (_country.Equals(Countries.IRELAND))
-                            censusYear = 1901 + (e.ColumnIndex - startColumnIndex) * 10;
+                            if(e.ColumnIndex <= dgReportSheet.Columns["Ire1911"].Index)
+                                censusYear = 1901 + (e.ColumnIndex - startColumnIndex) * 10;
+                            else
+                                censusYear = 1926;
                         else
                         {
                             if (e.ColumnIndex == C1939.Index)

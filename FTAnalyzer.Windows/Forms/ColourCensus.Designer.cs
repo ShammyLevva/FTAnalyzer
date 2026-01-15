@@ -40,6 +40,28 @@ namespace FTAnalyzer.Forms
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColourCensus));
             dgReportSheet = new DataGridView();
+            contextMenuStrip = new ContextMenuStrip(components);
+            mnuViewFacts = new ToolStripMenuItem();
+            statusStrip = new StatusStrip();
+            tsRecords = new ToolStripStatusLabel();
+            toolStrip1 = new ToolStrip();
+            mnuSaveCensusColumnLayout = new ToolStripButton();
+            mnuResetCensusColumns = new ToolStripButton();
+            toolStripSeparator3 = new ToolStripSeparator();
+            printToolStripButton = new ToolStripButton();
+            printPreviewToolStripButton = new ToolStripButton();
+            toolStripSeparator1 = new ToolStripSeparator();
+            mnuExportToExcel = new ToolStripButton();
+            toolStripSeparator2 = new ToolStripSeparator();
+            toolStripLabel1 = new ToolStripLabel();
+            cbCensusSearchProvider = new ToolStripComboBox();
+            toolStripLabel3 = new ToolStripLabel();
+            cbRegion = new ToolStripComboBox();
+            toolStripLabel2 = new ToolStripLabel();
+            cbFilter = new ToolStripComboBox();
+            printDocument = new System.Drawing.Printing.PrintDocument();
+            printDialog = new PrintDialog();
+            printPreviewDialog = new PrintPreviewDialog();
             IndividualID = new DataGridViewTextBoxColumn();
             Forenames = new DataGridViewTextBoxColumn();
             Surname = new DataGridViewTextBoxColumn();
@@ -84,34 +106,13 @@ namespace FTAnalyzer.Forms
             Can1921 = new DataGridViewTextBoxColumn();
             Ire1901 = new DataGridViewTextBoxColumn();
             Ire1911 = new DataGridViewTextBoxColumn();
+            Ire1926 = new DataGridViewTextBoxColumn();
             BirthDate = new DataGridViewTextBoxColumn();
             BirthLocation = new DataGridViewTextBoxColumn();
             DeathDate = new DataGridViewTextBoxColumn();
             DeathLocation = new DataGridViewTextBoxColumn();
             BestLocation = new DataGridViewTextBoxColumn();
             Ahnentafel = new DataGridViewTextBoxColumn();
-            contextMenuStrip = new ContextMenuStrip(components);
-            mnuViewFacts = new ToolStripMenuItem();
-            statusStrip = new StatusStrip();
-            tsRecords = new ToolStripStatusLabel();
-            toolStrip1 = new ToolStrip();
-            mnuSaveCensusColumnLayout = new ToolStripButton();
-            mnuResetCensusColumns = new ToolStripButton();
-            toolStripSeparator3 = new ToolStripSeparator();
-            printToolStripButton = new ToolStripButton();
-            printPreviewToolStripButton = new ToolStripButton();
-            toolStripSeparator1 = new ToolStripSeparator();
-            mnuExportToExcel = new ToolStripButton();
-            toolStripSeparator2 = new ToolStripSeparator();
-            toolStripLabel1 = new ToolStripLabel();
-            cbCensusSearchProvider = new ToolStripComboBox();
-            toolStripLabel3 = new ToolStripLabel();
-            cbRegion = new ToolStripComboBox();
-            toolStripLabel2 = new ToolStripLabel();
-            cbFilter = new ToolStripComboBox();
-            printDocument = new System.Drawing.Printing.PrintDocument();
-            printDialog = new PrintDialog();
-            printPreviewDialog = new PrintPreviewDialog();
             ((System.ComponentModel.ISupportInitialize)dgReportSheet).BeginInit();
             contextMenuStrip.SuspendLayout();
             statusStrip.SuspendLayout();
@@ -125,21 +126,190 @@ namespace FTAnalyzer.Forms
             dgReportSheet.AllowUserToOrderColumns = true;
             dgReportSheet.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgReportSheet.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgReportSheet.Columns.AddRange(new DataGridViewColumn[] { IndividualID, Forenames, Surname, Relation, RelationToRoot, C1841, C1851, C1861, C1871, C1881, C1891, C1901, C1911, C1921, C1939, US1790, US1800, US1810, US1820, US1830, US1840, US1850, US1860, US1870, US1880, US1890, US1900, US1910, US1920, US1930, US1940, US1950, Can1851, Can1861, Can1871, Can1881, Can1891, Can1901, Can1906, Can1911, Can1916, Can1921, Ire1901, Ire1911, BirthDate, BirthLocation, DeathDate, DeathLocation, BestLocation, Ahnentafel });
+            dgReportSheet.Columns.AddRange(new DataGridViewColumn[] { IndividualID, Forenames, Surname, Relation, RelationToRoot, C1841, C1851, C1861, C1871, C1881, C1891, C1901, C1911, C1921, C1939, US1790, US1800, US1810, US1820, US1830, US1840, US1850, US1860, US1870, US1880, US1890, US1900, US1910, US1920, US1930, US1940, US1950, Can1851, Can1861, Can1871, Can1881, Can1891, Can1901, Can1906, Can1911, Can1916, Can1921, Ire1901, Ire1911, Ire1926, BirthDate, BirthLocation, DeathDate, DeathLocation, BestLocation, Ahnentafel });
             dgReportSheet.ContextMenuStrip = contextMenuStrip;
             dgReportSheet.Dock = DockStyle.Fill;
-            dgReportSheet.Location = new Point(0, 0);
+            dgReportSheet.Location = new Point(0, 39);
             dgReportSheet.Margin = new Padding(4);
             dgReportSheet.Name = "dgReportSheet";
             dgReportSheet.ReadOnly = true;
             dgReportSheet.RowHeadersWidth = 20;
             dgReportSheet.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            dgReportSheet.Size = new Size(1211, 663);
+            dgReportSheet.Size = new Size(1211, 602);
             dgReportSheet.TabIndex = 1;
             dgReportSheet.CellContextMenuStripNeeded += DgReportSheet_CellContextMenuStripNeeded;
             dgReportSheet.CellDoubleClick += DgReportSheet_CellDoubleClick;
             dgReportSheet.CellFormatting += DgReportSheet_CellFormatting;
             dgReportSheet.SelectionChanged += DgReportSheet_SelectionChanged;
+            // 
+            // contextMenuStrip
+            // 
+            contextMenuStrip.ImageScalingSize = new Size(32, 32);
+            contextMenuStrip.Items.AddRange(new ToolStripItem[] { mnuViewFacts });
+            contextMenuStrip.Name = "contextMenuStrip";
+            contextMenuStrip.Size = new Size(190, 26);
+            // 
+            // mnuViewFacts
+            // 
+            mnuViewFacts.Name = "mnuViewFacts";
+            mnuViewFacts.Size = new Size(189, 22);
+            mnuViewFacts.Text = "View Individuals Facts";
+            mnuViewFacts.Click += MnuViewFacts_Click;
+            // 
+            // statusStrip
+            // 
+            statusStrip.ImageScalingSize = new Size(32, 32);
+            statusStrip.Items.AddRange(new ToolStripItem[] { tsRecords });
+            statusStrip.Location = new Point(0, 641);
+            statusStrip.Name = "statusStrip";
+            statusStrip.Padding = new Padding(1, 0, 17, 0);
+            statusStrip.Size = new Size(1211, 22);
+            statusStrip.TabIndex = 2;
+            statusStrip.Text = "statusStrip1";
+            // 
+            // tsRecords
+            // 
+            tsRecords.Name = "tsRecords";
+            tsRecords.Size = new Size(118, 17);
+            tsRecords.Text = "toolStripStatusLabel1";
+            // 
+            // toolStrip1
+            // 
+            toolStrip1.GripStyle = ToolStripGripStyle.Hidden;
+            toolStrip1.ImageScalingSize = new Size(32, 32);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { mnuSaveCensusColumnLayout, mnuResetCensusColumns, toolStripSeparator3, printToolStripButton, printPreviewToolStripButton, toolStripSeparator1, mnuExportToExcel, toolStripSeparator2, toolStripLabel1, cbCensusSearchProvider, toolStripLabel3, cbRegion, toolStripLabel2, cbFilter });
+            toolStrip1.Location = new Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Padding = new Padding(0, 0, 3, 0);
+            toolStrip1.Size = new Size(1211, 39);
+            toolStrip1.TabIndex = 3;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // mnuSaveCensusColumnLayout
+            // 
+            mnuSaveCensusColumnLayout.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            mnuSaveCensusColumnLayout.Image = (Image)resources.GetObject("mnuSaveCensusColumnLayout.Image");
+            mnuSaveCensusColumnLayout.ImageTransparentColor = Color.Magenta;
+            mnuSaveCensusColumnLayout.Name = "mnuSaveCensusColumnLayout";
+            mnuSaveCensusColumnLayout.Size = new Size(36, 36);
+            mnuSaveCensusColumnLayout.Text = "Save Census Column Sort Order";
+            mnuSaveCensusColumnLayout.Click += MnuSaveCensusColumnLayout_Click;
+            // 
+            // mnuResetCensusColumns
+            // 
+            mnuResetCensusColumns.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            mnuResetCensusColumns.Image = (Image)resources.GetObject("mnuResetCensusColumns.Image");
+            mnuResetCensusColumns.ImageTransparentColor = Color.Magenta;
+            mnuResetCensusColumns.Name = "mnuResetCensusColumns";
+            mnuResetCensusColumns.Size = new Size(36, 36);
+            mnuResetCensusColumns.Text = "Reset Census Column Sort Order to Default";
+            mnuResetCensusColumns.Click += MnuResetCensusColumns_Click;
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new Size(6, 39);
+            // 
+            // printToolStripButton
+            // 
+            printToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            printToolStripButton.Image = (Image)resources.GetObject("printToolStripButton.Image");
+            printToolStripButton.ImageTransparentColor = Color.Magenta;
+            printToolStripButton.Name = "printToolStripButton";
+            printToolStripButton.Size = new Size(36, 36);
+            printToolStripButton.Text = "&Print";
+            printToolStripButton.Click += PrintToolStripButton_Click;
+            // 
+            // printPreviewToolStripButton
+            // 
+            printPreviewToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            printPreviewToolStripButton.Image = (Image)resources.GetObject("printPreviewToolStripButton.Image");
+            printPreviewToolStripButton.ImageTransparentColor = Color.Magenta;
+            printPreviewToolStripButton.Name = "printPreviewToolStripButton";
+            printPreviewToolStripButton.Size = new Size(36, 36);
+            printPreviewToolStripButton.Text = "Print Preview...";
+            printPreviewToolStripButton.Click += PrintPreviewToolStripButton_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(6, 39);
+            // 
+            // mnuExportToExcel
+            // 
+            mnuExportToExcel.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            mnuExportToExcel.Image = (Image)resources.GetObject("mnuExportToExcel.Image");
+            mnuExportToExcel.ImageTransparentColor = Color.Magenta;
+            mnuExportToExcel.Name = "mnuExportToExcel";
+            mnuExportToExcel.Size = new Size(36, 36);
+            mnuExportToExcel.Text = "Export to Excel";
+            mnuExportToExcel.Click += MnuExportToExcel_Click;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(6, 39);
+            // 
+            // toolStripLabel1
+            // 
+            toolStripLabel1.Name = "toolStripLabel1";
+            toolStripLabel1.Size = new Size(117, 36);
+            toolStripLabel1.Text = "Census search using:";
+            // 
+            // cbCensusSearchProvider
+            // 
+            cbCensusSearchProvider.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbCensusSearchProvider.Items.AddRange(new object[] { "Ancestry", "Find My Past", "FreeCen", "FamilySearch", "Scotlands People" });
+            cbCensusSearchProvider.Name = "cbCensusSearchProvider";
+            cbCensusSearchProvider.Size = new Size(141, 39);
+            cbCensusSearchProvider.SelectedIndexChanged += CbCensusSearchProvider_SelectedIndexChanged;
+            // 
+            // toolStripLabel3
+            // 
+            toolStripLabel3.Name = "toolStripLabel3";
+            toolStripLabel3.Size = new Size(47, 36);
+            toolStripLabel3.Text = "Region:";
+            // 
+            // cbRegion
+            // 
+            cbRegion.Items.AddRange(new object[] { ".com", ".co.uk", ".ca", ".com.au" });
+            cbRegion.Name = "cbRegion";
+            cbRegion.Size = new Size(141, 39);
+            cbRegion.Text = ".co.uk";
+            cbRegion.SelectedIndexChanged += CbRegion_SelectedIndexChanged;
+            // 
+            // toolStripLabel2
+            // 
+            toolStripLabel2.Name = "toolStripLabel2";
+            toolStripLabel2.Size = new Size(39, 36);
+            toolStripLabel2.Text = "Filter :";
+            // 
+            // cbFilter
+            // 
+            cbFilter.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbFilter.DropDownWidth = 170;
+            cbFilter.Items.AddRange(new object[] { "All Individuals", "None Found (All Red)", "All Found (All Green)", "Lost Cousins Missing (Yellow)", "Lost Cousins Present (Orange)", "Outside UK (Dark Grey)", "Some Missing (Some Red)", "Some Found (Some Green)", "Known Missing (Mid Green)" });
+            cbFilter.Name = "cbFilter";
+            cbFilter.Size = new Size(110, 39);
+            cbFilter.SelectedIndexChanged += CbFilter_SelectedIndexChanged;
+            // 
+            // printDialog
+            // 
+            printDialog.AllowSelection = true;
+            printDialog.AllowSomePages = true;
+            printDialog.Document = printDocument;
+            printDialog.UseEXDialog = true;
+            // 
+            // printPreviewDialog
+            // 
+            printPreviewDialog.AutoScrollMargin = new Size(0, 0);
+            printPreviewDialog.AutoScrollMinSize = new Size(0, 0);
+            printPreviewDialog.ClientSize = new Size(400, 300);
+            printPreviewDialog.Document = printDocument;
+            printPreviewDialog.Enabled = true;
+            printPreviewDialog.Icon = (Icon)resources.GetObject("printPreviewDialog.Icon");
+            printPreviewDialog.Name = "printPreviewDialog";
+            printPreviewDialog.Visible = false;
             // 
             // IndividualID
             // 
@@ -580,6 +750,14 @@ namespace FTAnalyzer.Forms
             Ire1911.ReadOnly = true;
             Ire1911.Width = 80;
             // 
+            // Ire1926
+            // 
+            Ire1926.DataPropertyName = "Ire1926";
+            Ire1926.HeaderText = "1926 Irish Census";
+            Ire1926.Name = "Ire1926";
+            Ire1926.ReadOnly = true;
+            Ire1926.Width = 78;
+            // 
             // BirthDate
             // 
             BirthDate.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
@@ -640,177 +818,6 @@ namespace FTAnalyzer.Forms
             Ahnentafel.ReadOnly = true;
             Ahnentafel.Width = 90;
             // 
-            // contextMenuStrip
-            // 
-            contextMenuStrip.ImageScalingSize = new Size(32, 32);
-            contextMenuStrip.Items.AddRange(new ToolStripItem[] { mnuViewFacts });
-            contextMenuStrip.Name = "contextMenuStrip";
-            contextMenuStrip.Size = new Size(190, 26);
-            // 
-            // mnuViewFacts
-            // 
-            mnuViewFacts.Name = "mnuViewFacts";
-            mnuViewFacts.Size = new Size(189, 22);
-            mnuViewFacts.Text = "View Individuals Facts";
-            mnuViewFacts.Click += MnuViewFacts_Click;
-            // 
-            // statusStrip
-            // 
-            statusStrip.ImageScalingSize = new Size(32, 32);
-            statusStrip.Items.AddRange(new ToolStripItem[] { tsRecords });
-            statusStrip.Location = new Point(0, 641);
-            statusStrip.Name = "statusStrip";
-            statusStrip.Padding = new Padding(1, 0, 17, 0);
-            statusStrip.Size = new Size(1211, 22);
-            statusStrip.TabIndex = 2;
-            statusStrip.Text = "statusStrip1";
-            statusStrip.Dock = DockStyle.Bottom;
-            // 
-            // tsRecords
-            // 
-            tsRecords.Name = "tsRecords";
-            tsRecords.Size = new Size(118, 17);
-            tsRecords.Text = "toolStripStatusLabel1";
-            // 
-            // toolStrip1
-            // 
-            toolStrip1.GripStyle = ToolStripGripStyle.Hidden;
-            toolStrip1.ImageScalingSize = new Size(32, 32);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { mnuSaveCensusColumnLayout, mnuResetCensusColumns, toolStripSeparator3, printToolStripButton, printPreviewToolStripButton, toolStripSeparator1, mnuExportToExcel, toolStripSeparator2, toolStripLabel1, cbCensusSearchProvider, toolStripLabel3, cbRegion, toolStripLabel2, cbFilter });
-            toolStrip1.Location = new Point(0, 0);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.Padding = new Padding(0, 0, 3, 0);
-            toolStrip1.Size = new Size(1211, 39);
-            toolStrip1.TabIndex = 3;
-            toolStrip1.Text = "toolStrip1";
-            toolStrip1.Dock = DockStyle.Top;
-            // 
-            // mnuSaveCensusColumnLayout
-            // 
-            mnuSaveCensusColumnLayout.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            mnuSaveCensusColumnLayout.Image = (Image)resources.GetObject("mnuSaveCensusColumnLayout.Image");
-            mnuSaveCensusColumnLayout.ImageTransparentColor = Color.Magenta;
-            mnuSaveCensusColumnLayout.Name = "mnuSaveCensusColumnLayout";
-            mnuSaveCensusColumnLayout.Size = new Size(36, 36);
-            mnuSaveCensusColumnLayout.Text = "Save Census Column Sort Order";
-            mnuSaveCensusColumnLayout.Click += MnuSaveCensusColumnLayout_Click;
-            // 
-            // mnuResetCensusColumns
-            // 
-            mnuResetCensusColumns.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            mnuResetCensusColumns.Image = (Image)resources.GetObject("mnuResetCensusColumns.Image");
-            mnuResetCensusColumns.ImageTransparentColor = Color.Magenta;
-            mnuResetCensusColumns.Name = "mnuResetCensusColumns";
-            mnuResetCensusColumns.Size = new Size(36, 36);
-            mnuResetCensusColumns.Text = "Reset Census Column Sort Order to Default";
-            mnuResetCensusColumns.Click += MnuResetCensusColumns_Click;
-            // 
-            // toolStripSeparator3
-            // 
-            toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new Size(6, 39);
-            // 
-            // printToolStripButton
-            // 
-            printToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            printToolStripButton.Image = (Image)resources.GetObject("printToolStripButton.Image");
-            printToolStripButton.ImageTransparentColor = Color.Magenta;
-            printToolStripButton.Name = "printToolStripButton";
-            printToolStripButton.Size = new Size(36, 36);
-            printToolStripButton.Text = "&Print";
-            printToolStripButton.Click += PrintToolStripButton_Click;
-            // 
-            // printPreviewToolStripButton
-            // 
-            printPreviewToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            printPreviewToolStripButton.Image = (Image)resources.GetObject("printPreviewToolStripButton.Image");
-            printPreviewToolStripButton.ImageTransparentColor = Color.Magenta;
-            printPreviewToolStripButton.Name = "printPreviewToolStripButton";
-            printPreviewToolStripButton.Size = new Size(36, 36);
-            printPreviewToolStripButton.Text = "Print Preview...";
-            printPreviewToolStripButton.Click += PrintPreviewToolStripButton_Click;
-            // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(6, 39);
-            // 
-            // mnuExportToExcel
-            // 
-            mnuExportToExcel.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            mnuExportToExcel.Image = (Image)resources.GetObject("mnuExportToExcel.Image");
-            mnuExportToExcel.ImageTransparentColor = Color.Magenta;
-            mnuExportToExcel.Name = "mnuExportToExcel";
-            mnuExportToExcel.Size = new Size(36, 36);
-            mnuExportToExcel.Text = "Export to Excel";
-            mnuExportToExcel.Click += MnuExportToExcel_Click;
-            // 
-            // toolStripSeparator2
-            // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(6, 39);
-            // 
-            // toolStripLabel1
-            // 
-            toolStripLabel1.Name = "toolStripLabel1";
-            toolStripLabel1.Size = new Size(117, 36);
-            toolStripLabel1.Text = "Census search using:";
-            // 
-            // cbCensusSearchProvider
-            // 
-            cbCensusSearchProvider.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbCensusSearchProvider.Items.AddRange(new object[] { "Ancestry", "Find My Past", "FreeCen", "FamilySearch", "Scotlands People" });
-            cbCensusSearchProvider.Name = "cbCensusSearchProvider";
-            cbCensusSearchProvider.Size = new Size(141, 39);
-            cbCensusSearchProvider.SelectedIndexChanged += CbCensusSearchProvider_SelectedIndexChanged;
-            // 
-            // toolStripLabel3
-            // 
-            toolStripLabel3.Name = "toolStripLabel3";
-            toolStripLabel3.Size = new Size(47, 36);
-            toolStripLabel3.Text = "Region:";
-            // 
-            // cbRegion
-            // 
-            cbRegion.Items.AddRange(new object[] { ".com", ".co.uk", ".ca", ".com.au" });
-            cbRegion.Name = "cbRegion";
-            cbRegion.Size = new Size(141, 39);
-            cbRegion.Text = ".co.uk";
-            cbRegion.SelectedIndexChanged += CbRegion_SelectedIndexChanged;
-            // 
-            // toolStripLabel2
-            // 
-            toolStripLabel2.Name = "toolStripLabel2";
-            toolStripLabel2.Size = new Size(39, 36);
-            toolStripLabel2.Text = "Filter :";
-            // 
-            // cbFilter
-            // 
-            cbFilter.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbFilter.DropDownWidth = 170;
-            cbFilter.Items.AddRange(new object[] { "All Individuals", "None Found (All Red)", "All Found (All Green)", "Lost Cousins Missing (Yellow)", "Lost Cousins Present (Orange)", "Outside UK (Dark Grey)", "Some Missing (Some Red)", "Some Found (Some Green)", "Known Missing (Mid Green)" });
-            cbFilter.Name = "cbFilter";
-            cbFilter.Size = new Size(110, 39);
-            cbFilter.SelectedIndexChanged += CbFilter_SelectedIndexChanged;
-            // 
-            // printDialog
-            // 
-            printDialog.AllowSelection = true;
-            printDialog.AllowSomePages = true;
-            printDialog.Document = printDocument;
-            printDialog.UseEXDialog = true;
-            // 
-            // printPreviewDialog
-            // 
-            printPreviewDialog.AutoScrollMargin = new Size(0, 0);
-            printPreviewDialog.AutoScrollMinSize = new Size(0, 0);
-            printPreviewDialog.ClientSize = new Size(400, 300);
-            printPreviewDialog.Document = printDocument;
-            printPreviewDialog.Enabled = true;
-            printPreviewDialog.Icon = (Icon)resources.GetObject("printPreviewDialog.Icon");
-            printPreviewDialog.Name = "printPreviewDialog";
-            printPreviewDialog.Visible = false;
-            // 
             // ColourCensus
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -860,55 +867,56 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripMenuItem mnuViewFacts;
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
         private System.Windows.Forms.ToolStripComboBox cbRegion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IndividualID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Forenames;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Surname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Relation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RelationToRoot;
-        private System.Windows.Forms.DataGridViewTextBoxColumn C1841;
-        private System.Windows.Forms.DataGridViewTextBoxColumn C1851;
-        private System.Windows.Forms.DataGridViewTextBoxColumn C1861;
-        private System.Windows.Forms.DataGridViewTextBoxColumn C1871;
-        private System.Windows.Forms.DataGridViewTextBoxColumn C1881;
-        private System.Windows.Forms.DataGridViewTextBoxColumn C1891;
-        private System.Windows.Forms.DataGridViewTextBoxColumn C1901;
-        private System.Windows.Forms.DataGridViewTextBoxColumn C1911;
-        private System.Windows.Forms.DataGridViewTextBoxColumn C1921;
-        private System.Windows.Forms.DataGridViewTextBoxColumn C1939;
-        private System.Windows.Forms.DataGridViewTextBoxColumn US1790;
-        private System.Windows.Forms.DataGridViewTextBoxColumn US1800;
-        private System.Windows.Forms.DataGridViewTextBoxColumn US1810;
-        private System.Windows.Forms.DataGridViewTextBoxColumn US1820;
-        private System.Windows.Forms.DataGridViewTextBoxColumn US1830;
-        private System.Windows.Forms.DataGridViewTextBoxColumn US1840;
-        private System.Windows.Forms.DataGridViewTextBoxColumn US1850;
-        private System.Windows.Forms.DataGridViewTextBoxColumn US1860;
-        private System.Windows.Forms.DataGridViewTextBoxColumn US1870;
-        private System.Windows.Forms.DataGridViewTextBoxColumn US1880;
-        private System.Windows.Forms.DataGridViewTextBoxColumn US1890;
-        private System.Windows.Forms.DataGridViewTextBoxColumn US1900;
-        private System.Windows.Forms.DataGridViewTextBoxColumn US1910;
-        private System.Windows.Forms.DataGridViewTextBoxColumn US1920;
-        private System.Windows.Forms.DataGridViewTextBoxColumn US1930;
-        private System.Windows.Forms.DataGridViewTextBoxColumn US1940;
-        private System.Windows.Forms.DataGridViewTextBoxColumn US1950;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Can1851;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Can1861;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Can1871;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Can1881;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Can1891;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Can1901;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Can1906;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Can1911;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Can1916;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Can1921;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ire1901;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ire1911;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BirthDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BirthLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DeathDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DeathLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BestLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ahnentafel;
+        private DataGridViewTextBoxColumn IndividualID;
+        private DataGridViewTextBoxColumn Forenames;
+        private DataGridViewTextBoxColumn Surname;
+        private DataGridViewTextBoxColumn Relation;
+        private DataGridViewTextBoxColumn RelationToRoot;
+        private DataGridViewTextBoxColumn C1841;
+        private DataGridViewTextBoxColumn C1851;
+        private DataGridViewTextBoxColumn C1861;
+        private DataGridViewTextBoxColumn C1871;
+        private DataGridViewTextBoxColumn C1881;
+        private DataGridViewTextBoxColumn C1891;
+        private DataGridViewTextBoxColumn C1901;
+        private DataGridViewTextBoxColumn C1911;
+        private DataGridViewTextBoxColumn C1921;
+        private DataGridViewTextBoxColumn C1939;
+        private DataGridViewTextBoxColumn US1790;
+        private DataGridViewTextBoxColumn US1800;
+        private DataGridViewTextBoxColumn US1810;
+        private DataGridViewTextBoxColumn US1820;
+        private DataGridViewTextBoxColumn US1830;
+        private DataGridViewTextBoxColumn US1840;
+        private DataGridViewTextBoxColumn US1850;
+        private DataGridViewTextBoxColumn US1860;
+        private DataGridViewTextBoxColumn US1870;
+        private DataGridViewTextBoxColumn US1880;
+        private DataGridViewTextBoxColumn US1890;
+        private DataGridViewTextBoxColumn US1900;
+        private DataGridViewTextBoxColumn US1910;
+        private DataGridViewTextBoxColumn US1920;
+        private DataGridViewTextBoxColumn US1930;
+        private DataGridViewTextBoxColumn US1940;
+        private DataGridViewTextBoxColumn US1950;
+        private DataGridViewTextBoxColumn Can1851;
+        private DataGridViewTextBoxColumn Can1861;
+        private DataGridViewTextBoxColumn Can1871;
+        private DataGridViewTextBoxColumn Can1881;
+        private DataGridViewTextBoxColumn Can1891;
+        private DataGridViewTextBoxColumn Can1901;
+        private DataGridViewTextBoxColumn Can1906;
+        private DataGridViewTextBoxColumn Can1911;
+        private DataGridViewTextBoxColumn Can1916;
+        private DataGridViewTextBoxColumn Can1921;
+        private DataGridViewTextBoxColumn Ire1901;
+        private DataGridViewTextBoxColumn Ire1911;
+        private DataGridViewTextBoxColumn Ire1926;
+        private DataGridViewTextBoxColumn BirthDate;
+        private DataGridViewTextBoxColumn BirthLocation;
+        private DataGridViewTextBoxColumn DeathDate;
+        private DataGridViewTextBoxColumn DeathLocation;
+        private DataGridViewTextBoxColumn BestLocation;
+        private DataGridViewTextBoxColumn Ahnentafel;
     }
 }

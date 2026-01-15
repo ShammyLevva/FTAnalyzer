@@ -1517,7 +1517,6 @@ namespace FTAnalyzer
             wardeadRelation.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             wardeadRelation.Location = new Point(315, 4);
             wardeadRelation.Margin = new Padding(7);
-            wardeadRelation.MarriedToDB = true;
             wardeadRelation.Name = "wardeadRelation";
             wardeadRelation.Size = new Size(377, 123);
             wardeadRelation.TabIndex = 26;
@@ -1654,7 +1653,6 @@ namespace FTAnalyzer
             treetopsRelation.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             treetopsRelation.Location = new Point(315, 4);
             treetopsRelation.Margin = new Padding(7);
-            treetopsRelation.MarriedToDB = true;
             treetopsRelation.Name = "treetopsRelation";
             treetopsRelation.Size = new Size(377, 123);
             treetopsRelation.TabIndex = 12;
@@ -1732,7 +1730,7 @@ namespace FTAnalyzer
             groupBox7.AutoSize = true;
             groupBox7.Controls.Add(btnAdvancedMissingData);
             groupBox7.Controls.Add(btnStandardMissingData);
-            groupBox7.Location = new Point(494, 134);
+            groupBox7.Location = new Point(517, 134);
             groupBox7.Margin = new Padding(4);
             groupBox7.Name = "groupBox7";
             groupBox7.Padding = new Padding(4);
@@ -1777,7 +1775,7 @@ namespace FTAnalyzer
             groupBox3.Margin = new Padding(4);
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new Padding(4);
-            groupBox3.Size = new Size(478, 132);
+            groupBox3.Size = new Size(500, 132);
             groupBox3.TabIndex = 36;
             groupBox3.TabStop = false;
             groupBox3.Text = "Census Suggestions Reports";
@@ -1786,7 +1784,7 @@ namespace FTAnalyzer
             // 
             ckbIgnoreNoDeathDate.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ckbIgnoreNoDeathDate.AutoSize = true;
-            ckbIgnoreNoDeathDate.Location = new Point(248, 89);
+            ckbIgnoreNoDeathDate.Location = new Point(270, 89);
             ckbIgnoreNoDeathDate.Margin = new Padding(4);
             ckbIgnoreNoDeathDate.Name = "ckbIgnoreNoDeathDate";
             ckbIgnoreNoDeathDate.Size = new Size(222, 19);
@@ -1857,7 +1855,7 @@ namespace FTAnalyzer
             // btnColourBMD
             // 
             btnColourBMD.AutoSize = true;
-            btnColourBMD.Location = new Point(68, 266);
+            btnColourBMD.Location = new Point(70, 274);
             btnColourBMD.Margin = new Padding(4);
             btnColourBMD.Name = "btnColourBMD";
             btnColourBMD.Size = new Size(358, 26);
@@ -1872,7 +1870,6 @@ namespace FTAnalyzer
             relTypesResearchSuggest.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             relTypesResearchSuggest.Location = new Point(9, 9);
             relTypesResearchSuggest.Margin = new Padding(7);
-            relTypesResearchSuggest.MarriedToDB = true;
             relTypesResearchSuggest.Name = "relTypesResearchSuggest";
             relTypesResearchSuggest.Size = new Size(377, 123);
             relTypesResearchSuggest.TabIndex = 26;
@@ -2143,7 +2140,6 @@ namespace FTAnalyzer
             relTypesLC.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             relTypesLC.Location = new Point(3, 3);
             relTypesLC.Margin = new Padding(7);
-            relTypesLC.MarriedToDB = true;
             relTypesLC.Name = "relTypesLC";
             relTypesLC.Size = new Size(377, 123);
             relTypesLC.TabIndex = 48;
@@ -2679,7 +2675,6 @@ namespace FTAnalyzer
             // 
             cenDate.AutoSize = true;
             cenDate.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            cenDate.Country = "Scotland";
             cenDate.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cenDate.Location = new Point(15, 140);
             cenDate.Margin = new Padding(6);
@@ -2693,7 +2688,6 @@ namespace FTAnalyzer
             relTypesCensus.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             relTypesCensus.Location = new Point(11, 22);
             relTypesCensus.Margin = new Padding(7);
-            relTypesCensus.MarriedToDB = true;
             relTypesCensus.Name = "relTypesCensus";
             relTypesCensus.Size = new Size(377, 123);
             relTypesCensus.TabIndex = 27;
@@ -3966,7 +3960,6 @@ namespace FTAnalyzer
             reltypesSurnames.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             reltypesSurnames.Location = new Point(7, 4);
             reltypesSurnames.Margin = new Padding(7);
-            reltypesSurnames.MarriedToDB = true;
             reltypesSurnames.Name = "reltypesSurnames";
             reltypesSurnames.Size = new Size(377, 123);
             reltypesSurnames.TabIndex = 22;
@@ -4158,7 +4151,6 @@ namespace FTAnalyzer
             relTypesFacts.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             relTypesFacts.Location = new Point(9, 4);
             relTypesFacts.Margin = new Padding(7);
-            relTypesFacts.MarriedToDB = true;
             relTypesFacts.Name = "relTypesFacts";
             relTypesFacts.Size = new Size(377, 123);
             relTypesFacts.TabIndex = 21;
