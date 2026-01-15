@@ -1,3 +1,12 @@
+## Release Candidate Version 10.0.0.0-RC2 - 15th January 2026  
+**Updates**  
+Added support for 1926 Irish Census  
+
+**Bugfixes**  
+1921 Census references were not being recognised correctly  
+Maximising colour reports now works correctly  
+Added checks for saving settings to ensure file access issues are handled  
+
 ## Release Candidate Version 10.0.0.0-RC1 - 15th January 2026  
 **Updates**  
 Updated to use .Net10 which is on Long Term Support to 14 November 2028  
