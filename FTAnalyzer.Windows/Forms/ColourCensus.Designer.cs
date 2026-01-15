@@ -664,6 +664,7 @@ namespace FTAnalyzer.Forms
             statusStrip.Size = new Size(1211, 22);
             statusStrip.TabIndex = 2;
             statusStrip.Text = "statusStrip1";
+            statusStrip.Dock = DockStyle.Bottom;
             // 
             // tsRecords
             // 
@@ -682,6 +683,7 @@ namespace FTAnalyzer.Forms
             toolStrip1.Size = new Size(1211, 39);
             toolStrip1.TabIndex = 3;
             toolStrip1.Text = "toolStrip1";
+            toolStrip1.Dock = DockStyle.Top;
             // 
             // mnuSaveCensusColumnLayout
             // 
@@ -814,9 +816,9 @@ namespace FTAnalyzer.Forms
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1211, 663);
+            Controls.Add(dgReportSheet);
             Controls.Add(toolStrip1);
             Controls.Add(statusStrip);
-            Controls.Add(dgReportSheet);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "ColourCensus";
