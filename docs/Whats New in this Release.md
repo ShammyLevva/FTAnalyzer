@@ -1,10 +1,21 @@
+## Release Candidate Version 10.0.0.0-RC1 - 15th January 2026  
+**Updates**  
+Updated to use .Net10 which is on Long Term Support to 14 November 2028  
+Added recognition for Windows 11 24H2 & 25H2  
+
+**Bugfixes**  
+Code tidyups using .Net10 fixes  
+Fixed installer for .Net10 compatibility  
+Isolate code not needed in ANEFHS Burial Sites Project   
+Changed settings handing for registry  
+
 ## BETA RELEASE Version 10.0.0.0-beta 11 - 6th July 2025  
 **Bugfixes**  
 Fixed Exports to Excel not using virtual grid  
 Fixed size of input box  
 
 ## BETA RELEASE Version 10.0.0.0-beta 10 - 31st March 2025  
-**Updates**
+**Updates**  
 Added export duplicates to Excel option  
 
 **Bugfixes**  
