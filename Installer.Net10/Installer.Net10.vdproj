@@ -46,10 +46,10 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.NetCore.DesktopRuntime.8.0.x64"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.NetCore.DesktopRuntime.10.0.x64"
                     {
-                    "Name" = "8:.NET Desktop Runtime 8.0.0 (x64)"
-                    "ProductCode" = "8:Microsoft.NetCore.DesktopRuntime.8.0.x64"
+                    "Name" = "8:.NET Desktop Runtime 10.0.2 (x64)"
+                    "ProductCode" = "8:Microsoft.NetCore.DesktopRuntime.10.0.x64"
                     }
                 }
             }
@@ -78,10 +78,10 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.NetCore.DesktopRuntime.6.0.x64"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.NetCore.DesktopRuntime.10.0.x64"
                     {
-                    "Name" = "8:.NET Desktop Runtime 6.0.10 (x64)"
-                    "ProductCode" = "8:Microsoft.NetCore.DesktopRuntime.6.0.x64"
+                    "Name" = "8:.NET Desktop Runtime 10.0.2 (x64)"
+                    "ProductCode" = "8:Microsoft.NetCore.DesktopRuntime.10.0.x64"
                     }
                 }
             }
@@ -184,7 +184,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FTAnalyzer"
         "ProductCode" = "8:{0349D37F-0D59-4A19-9194-695B03AE1DD8}"
-        "PackageCode" = "8:{27ED7222-08BB-4753-BDBC-C214731217CA}"
+        "PackageCode" = "8:{8568B099-A762-4659-9AE9-E83E4020C870}"
         "UpgradeCode" = "8:{CF5B0FD6-7288-42B8-8C86-4C519D6ACFBB}"
         "AspNetVersion" = "8:"
         "RestartWWWService" = "11:FALSE"
@@ -304,23 +304,9 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_56836D1D9F5A4D8E8BAEAD74F02A2A44"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_5BA8EF59AD7A48A9B37A09BE5A63535C"
             {
-            "Name" = "8:Shortcut to %sFTAnalyzer.exe"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:"
-            "Folder" = "8:_8B23290EDD8F4F3DB11717BE856491F0"
-            "WorkingFolder" = "8:_12249BAB9E7A4E32BADCCECC439D1E75"
-            "Icon" = "8:"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_DDFA2EB48AD54C2F823DFEB4F4D8DE88"
-            {
-            "Name" = "8:Shortcut to %sFTAnalyzer.exe"
+            "Name" = "8:Shortcut to %sPrimary output from FTAnalyzer.Windows (Active)"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -328,6 +314,20 @@
             "Transitive" = "11:FALSE"
             "Target" = "8:"
             "Folder" = "8:_3F1898A45A2F43B0A8890BCFE778DE06"
+            "WorkingFolder" = "8:_12249BAB9E7A4E32BADCCECC439D1E75"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_ECC8292DF7964645A189E8EEF78857ED"
+            {
+            "Name" = "8:Shortcut to %sPrimary output from FTAnalyzer.Windows (Active)"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:"
+            "Folder" = "8:_8B23290EDD8F4F3DB11717BE856491F0"
             "WorkingFolder" = "8:_12249BAB9E7A4E32BADCCECC439D1E75"
             "Icon" = "8:"
             "Feature" = "8:"
@@ -733,7 +733,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_BBDED1BADB084889B3388EEB59CB4169"
             {
-            "SourcePath" = "8:"
+            "SourcePath" = "8:..\\FTAnalyzer.Windows\\obj\\Debug\\net10.0-windows10.0.17763.0\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_12249BAB9E7A4E32BADCCECC439D1E75"
