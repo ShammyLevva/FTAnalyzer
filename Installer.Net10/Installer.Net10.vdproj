@@ -15,7 +15,19 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_2FEB648931714DB4952118EB911AC712"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_BBDED1BADB084889B3388EEB59CB4169"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EE86240CCC35423FA6B829076FF84129"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -116,6 +128,46 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2FEB648931714DB4952118EB911AC712"
+            {
+            "SourcePath" = "8:..\\Publish\\FTAnalyzer.exe"
+            "TargetName" = "8:FTAnalyzer.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_12249BAB9E7A4E32BADCCECC439D1E75"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EE86240CCC35423FA6B829076FF84129"
+            {
+            "SourcePath" = "8:..\\Publish\\Resources\\Icons\\FTAnalyzer.ico"
+            "TargetName" = "8:FTAnalyzer.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_12249BAB9E7A4E32BADCCECC439D1E75"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -184,7 +236,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FTAnalyzer"
         "ProductCode" = "8:{0349D37F-0D59-4A19-9194-695B03AE1DD8}"
-        "PackageCode" = "8:{8568B099-A762-4659-9AE9-E83E4020C870}"
+        "PackageCode" = "8:{94BEA26B-B8DF-452E-84FF-81EC6D85BB23}"
         "UpgradeCode" = "8:{CF5B0FD6-7288-42B8-8C86-4C519D6ACFBB}"
         "AspNetVersion" = "8:"
         "RestartWWWService" = "11:FALSE"
@@ -201,7 +253,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:https://www.ftanalyzer.com"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_EE86240CCC35423FA6B829076FF84129"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -304,32 +356,32 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_5BA8EF59AD7A48A9B37A09BE5A63535C"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_2D43D11254B346A69CD084447E144E5A"
             {
-            "Name" = "8:Shortcut to %sPrimary output from FTAnalyzer.Windows (Active)"
+            "Name" = "8:FTAnalyzer"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:"
+            "Target" = "8:_2FEB648931714DB4952118EB911AC712"
             "Folder" = "8:_3F1898A45A2F43B0A8890BCFE778DE06"
             "WorkingFolder" = "8:_12249BAB9E7A4E32BADCCECC439D1E75"
-            "Icon" = "8:"
+            "Icon" = "8:_EE86240CCC35423FA6B829076FF84129"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_ECC8292DF7964645A189E8EEF78857ED"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_FE7C15B5A6A3466D998717A56A3763CE"
             {
-            "Name" = "8:Shortcut to %sPrimary output from FTAnalyzer.Windows (Active)"
+            "Name" = "8:FTAnalyzer"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:"
+            "Target" = "8:_2FEB648931714DB4952118EB911AC712"
             "Folder" = "8:_8B23290EDD8F4F3DB11717BE856491F0"
             "WorkingFolder" = "8:_12249BAB9E7A4E32BADCCECC439D1E75"
-            "Icon" = "8:"
+            "Icon" = "8:_EE86240CCC35423FA6B829076FF84129"
             "Feature" = "8:"
             }
         }
@@ -733,7 +785,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_BBDED1BADB084889B3388EEB59CB4169"
             {
-            "SourcePath" = "8:..\\FTAnalyzer.Windows\\obj\\Debug\\net10.0-windows10.0.17763.0\\apphost.exe"
+            "SourcePath" = "8:..\\FTAnalyzer.Windows\\obj\\Release\\net10.0-windows10.0.17763.0\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_12249BAB9E7A4E32BADCCECC439D1E75"
@@ -758,6 +810,7 @@
             "PublishProfilePath" = "8:Properties\\PublishProfiles\\FolderProfile.pubxml"
                 "ExcludeFilters"
                 {
+                "ExcludeFilter" = "8:FTAnalyzer.exe"
                 }
             }
         }
