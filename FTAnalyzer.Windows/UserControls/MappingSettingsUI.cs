@@ -25,7 +25,7 @@ namespace FTAnalyzer.UserControls
             MappingSettings.Default.HideScaleBar = ckbHideScaleBar.Checked;
             MappingSettings.Default.IncludePartials = chkIncludePartialGeocoded.Checked;
             MappingSettings.Default.GoogleAPI = txtGoogleAPI.Text;
-            MappingSettings.Default.Save();
+            Utilities.UIHelpers.SafeSaveSettings(MappingSettings.Default);
         }
 
         public void Cancel()

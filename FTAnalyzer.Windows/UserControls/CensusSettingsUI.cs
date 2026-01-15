@@ -33,7 +33,7 @@ namespace FTAnalyzer.UserControls
             GeneralSettings.Default.AddCreatedLocations = chkAddCreatedLocations.Checked;
             GeneralSettings.Default.SkipCensusReferences = chkSkipCensusReferences.Checked;
             GeneralSettings.Default.ConvertResidenceFacts = chkConvertResidenceFacts.Checked;
-            GeneralSettings.Default.Save();
+            Utilities.UIHelpers.SafeSaveSettings(GeneralSettings.Default);
             OnCompactCensusRefChanged();
         }
 

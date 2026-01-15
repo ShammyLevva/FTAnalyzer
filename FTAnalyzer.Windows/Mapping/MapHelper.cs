@@ -56,7 +56,7 @@ namespace FTAnalyzer.Mapping
         public static void MnuHideScaleBar_Click(ToolStripMenuItem mnuHideScaleBar, MapBox mapBox1)
         {
             MappingSettings.Default.HideScaleBar = mnuHideScaleBar.Checked;
-            MappingSettings.Default.Save();
+            Utilities.UIHelpers.SafeSaveSettings(MappingSettings.Default);
             SetScaleBar(mapBox1);
         }
 

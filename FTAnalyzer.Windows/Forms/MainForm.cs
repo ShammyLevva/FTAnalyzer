@@ -93,7 +93,7 @@ namespace FTAnalyzer
             try
             {
                 Settings.Default.StartTime = DateTime.Now;
-                Settings.Default.Save();
+                UIHelpers.SafeSaveSettings(Settings.Default, false); // Don't show error during startup
                 HtmlAgilityPack.HtmlDocument doc;
                 using (HttpClient client = new())
                 {
@@ -463,7 +463,7 @@ namespace FTAnalyzer
             {
                 await LoadFileAsync(openGedcom.FileName);
                 Settings.Default.LoadLocation = Path.GetFullPath(openGedcom.FileName);
-                Settings.Default.Save();
+                UIHelpers.SafeSaveSettings(Settings.Default);
                 await Analytics.TrackAction(Analytics.MainFormAction, Analytics.LoadGEDCOMEvent);
             }
         }
@@ -1112,7 +1112,7 @@ namespace FTAnalyzer
             {
                 DialogResult dr = UIHelpers.ShowMessage("This option requires the data to be refreshed.\n\nDo you want to reload now?\n\nClicking no will keep the data with the old option.", "Reload GEDCOM File", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 GeneralSettings.Default.ReloadRequired = false;
-                GeneralSettings.Default.Save();
+                UIHelpers.SafeSaveSettings(GeneralSettings.Default);
                 if (dr == DialogResult.Yes)
                 {
                     await LoadFileAsync(filename);
@@ -1123,7 +1123,7 @@ namespace FTAnalyzer
         async void ReloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GeneralSettings.Default.ReloadRequired = false;
-            GeneralSettings.Default.Save();
+            UIHelpers.SafeSaveSettings(GeneralSettings.Default);
             await LoadFileAsync(filename);
         }
         #endregion
@@ -1158,7 +1158,7 @@ namespace FTAnalyzer
         void DisplayOptionsOnLoadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GeneralSettings.Default.ReportOptions = displayOptionsOnLoadToolStripMenuItem.Checked;
-            GeneralSettings.Default.Save();
+            UIHelpers.SafeSaveSettings(GeneralSettings.Default);
         }
 
         void ReportAnIssueToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2177,7 +2177,7 @@ namespace FTAnalyzer
             {
                 Settings.Default.RecentFiles.Add(string.Empty);
             }
-            Settings.Default.Save();
+            UIHelpers.SafeSaveSettings(Settings.Default);
         }
 
         void BuildRecentList()
@@ -2223,7 +2223,7 @@ namespace FTAnalyzer
 
             recent[0] = filename;
             Settings.Default.RecentFiles = [.. recent];
-            Settings.Default.Save();
+            UIHelpers.SafeSaveSettings(Settings.Default);
 
             BuildRecentList();
         }
@@ -2820,7 +2820,7 @@ namespace FTAnalyzer
             if (pbDuplicates.Visible)
                 return; // do nothing if progress bar still visible
             GeneralSettings.Default.HideIgnoredDuplicates = ckbHideIgnoredDuplicates.Checked;
-            GeneralSettings.Default.Save();
+            UIHelpers.SafeSaveSettings(GeneralSettings.Default);
             await SetPossibleDuplicates();
         }
         #endregion
