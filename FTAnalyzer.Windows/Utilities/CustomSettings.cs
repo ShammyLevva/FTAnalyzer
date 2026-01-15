@@ -1,4 +1,5 @@
-﻿using static FTAnalyzer.FactDate;
+﻿using FTAnalyzer.Utilities;
+using static FTAnalyzer.FactDate;
 
 namespace FTAnalyzer.Utilities
 {
@@ -33,7 +34,11 @@ namespace FTAnalyzer.Utilities
             Save();
         }
 
-        public void Save() { _Settings.Save(); _NonGEDCOMDateSettings.Save(); }
+        public void Save() 
+        { 
+            UIHelpers.SafeSaveSettings(_Settings); 
+            UIHelpers.SafeSaveSettings(_NonGEDCOMDateSettings); 
+        }
 
         static string SetRegex(NonGEDCOMFormatSelected formatSelected, string regexSeparator)
         {

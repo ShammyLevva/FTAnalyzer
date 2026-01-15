@@ -43,7 +43,7 @@ namespace FTAnalyzer.UserControls
             GeneralSettings.Default.SkipFixingLocations = chkSkipFixingLocations.Checked;
             GeneralSettings.Default.HideIgnoredDuplicates = chkHideIgnoredDuplicates.Checked;
             GeneralSettings.Default.IncludeAlternateFacts = chkIncludeAlternateFacts.Checked;
-            GeneralSettings.Default.Save();
+            Utilities.UIHelpers.SafeSaveSettings(GeneralSettings.Default);
             OnMinParentalAgeChanged();
             OnAliasInNameChanged();
         }

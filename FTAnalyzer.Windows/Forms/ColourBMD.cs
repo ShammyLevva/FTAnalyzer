@@ -286,7 +286,7 @@ namespace FTAnalyzer.Forms
         {
             RegistrySettings.SetRegistryValue("Default Region", cbRegion.SelectedItem.ToString() ?? string.Empty, RegistryValueKind.String);
             Settings.Default.defaultURLRegion = cbRegion.SelectedItem.ToString();
-            Settings.Default.Save();
+            Utilities.UIHelpers.SafeSaveSettings(Settings.Default);
             dgBMDReportSheet.Refresh(); // forces refresh of tooltips
             dgBMDReportSheet.Focus();
         }

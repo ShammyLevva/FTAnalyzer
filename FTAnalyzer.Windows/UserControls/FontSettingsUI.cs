@@ -27,7 +27,7 @@ namespace FTAnalyzer.UserControls
             FontSettings.Default.FontWidth = fontWidth;
             FontSettings.Default.FontSize = fontSize;
             FontSettings.Default.FontHeight = fontHeight;
-            FontSettings.Default.Save();
+            Utilities.UIHelpers.SafeSaveSettings(FontSettings.Default);
             OnFontChanged();
         }
 

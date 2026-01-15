@@ -25,7 +25,7 @@ namespace FTAnalyzer.UserControls
 
         public void Save()
         {
-            NonGedcomDate.Default.Save();
+            Utilities.UIHelpers.SafeSaveSettings(NonGedcomDate.Default);
             NonGEDCOMDateFormatRegex = new Regex(NonGedcomDate.Default.Regex, RegexOptions.Compiled | RegexOptions.IgnoreCase);
         }
 
