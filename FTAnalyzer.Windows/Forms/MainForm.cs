@@ -3091,13 +3091,13 @@ namespace FTAnalyzer
             HourGlass(this, false);
         }
 
-        void BtnUKColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.UNITED_KINGDOM).GetAwaiter().GetResult();
+        async void BtnUKColourCensus_Click(object sender, EventArgs e) => await DisplayColourCensus(Countries.UNITED_KINGDOM);
 
-        void BtnIrishColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.IRELAND).GetAwaiter().GetResult();
+        async void BtnIrishColourCensus_Click(object sender, EventArgs e) => await DisplayColourCensus(Countries.IRELAND);
 
-        void BtnUSColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.UNITED_STATES).GetAwaiter().GetResult();
+        async void BtnUSColourCensus_Click(object sender, EventArgs e) => await DisplayColourCensus(Countries.UNITED_STATES);
 
-        void BtnCanadianColourCensus_Click(object sender, EventArgs e) => DisplayColourCensus(Countries.CANADA).GetAwaiter().GetResult();
+        async void BtnCanadianColourCensus_Click(object sender, EventArgs e) => await DisplayColourCensus(Countries.CANADA);
 
         void BtnStandardMissingData_Click(object sender, EventArgs e) => UIHelpers.ShowMessage("Not Implemented Yet", APPNAME);
 
