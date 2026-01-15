@@ -19,7 +19,7 @@ namespace FTAnalyzer.UserControls
         {
             FileHandling.Default.RetryFailedLines = chkRetryFailedLines.Checked;
             FileHandling.Default.ConvertDiacritics = chkConvertDiacritics.Checked;
-            FileHandling.Default.Save();
+            Utilities.UIHelpers.SafeSaveSettings(FileHandling.Default);
         }
 
         public void Cancel()
