@@ -33,7 +33,13 @@
     <BuildType Solution="DVD-5|*" Project="Release" />
     <BuildType Solution="ReleaseDSProjection|*" Project="Release" />
     <BuildType Solution="SingleImage|*" Project="Release" />
-    <Build />
+    <Build Solution="*|x64" />
+    <Build Solution="*|x86" />
+    <Build Solution="CD_ROM|Any CPU" />
+    <Build Solution="DebugDSProjection|Any CPU" />
+    <Build Solution="DVD-5|Any CPU" />
+    <Build Solution="ReleaseDSProjection|Any CPU" />
+    <Build Solution="SingleImage|Any CPU" />
   </Project>
   <Project Path="UnitTests/UnitTests.csproj">
     <BuildType Solution="CD_ROM|*" Project="Debug" />
