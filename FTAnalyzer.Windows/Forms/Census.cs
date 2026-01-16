@@ -220,7 +220,7 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.Default;
         }
 
-        void TsBtnMapOSLocation_Click(object sender, EventArgs e)
+        async void TsBtnMapOSLocation_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
             CensusIndividual? ds = (CensusIndividual?)dgCensus.CurrentRow.DataBoundItem;
@@ -228,7 +228,7 @@ namespace FTAnalyzer.Forms
             if (loc is not null)
             {   // Do geo coding stuff
                 BingOSMap frmBingMap = new();
-                if (frmBingMap.SetLocation(loc, loc.Level))
+                if (await frmBingMap.SetLocation(loc, loc.Level))
                     frmBingMap.Show();
                 else
                     UIHelpers.ShowMessage($"Unable to find location : {loc}", "FTAnalyzer");

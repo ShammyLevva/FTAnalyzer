@@ -1,6 +1,5 @@
 ﻿using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
-using System.Threading;
 
 namespace FTAnalyzer.Forms
 {
