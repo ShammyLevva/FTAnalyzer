@@ -14,6 +14,9 @@ namespace FTAnalyzer.Forms.Controls
         internal SortableBindingList<T> _fulllist;
         public string FilterCountText { get; private set; }
 
+        DataGridViewColumn? _lastSortedColumn;
+        ListSortDirection _lastSortDirection = ListSortDirection.Ascending;
+
         protected VirtualDataGridView()
         {
             _dataSource = [];
@@ -287,13 +290,27 @@ namespace FTAnalyzer.Forms.Controls
             if (column.SortMode == DataGridViewColumnSortMode.NotSortable)
                 return;
 
-            // Toggle sort direction using current SortOrder / SortedColumn
-            ListSortDirection direction = ListSortDirection.Ascending;
-            if (SortedColumn == column && SortOrder == SortOrder.Ascending)
-                direction = ListSortDirection.Descending;
+            // Decide direction based on our own remembered state, not ADGV's
+            ListSortDirection direction;
+            if (_lastSortedColumn != column)
+            {
+                // New column: always start ascending
+                direction = ListSortDirection.Ascending;
+            }
+            else
+            {
+                // Same column: toggle
+                direction = _lastSortDirection == ListSortDirection.Ascending
+                    ? ListSortDirection.Descending
+                    : ListSortDirection.Ascending;
+            }
 
-            // Use base.Sort so ADGV updates glyphs and state
+            // Perform the sort
             base.Sort(column, direction);
+
+            // Remember for next click
+            _lastSortedColumn = column;
+            _lastSortDirection = direction;
         }
     }
 }
