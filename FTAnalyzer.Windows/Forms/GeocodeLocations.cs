@@ -531,6 +531,12 @@ namespace FTAnalyzer.Forms
                 EmptyViewPortsBackgroundWorker.CancelAsync();
                 emptyViewPortsCts?.Cancel();
             }
+
+            // ensure global state is clean for next open
+            ft.Geocoding = false;
+            GoogleMap.ThreadCancelled = false;
+            pbGeocoding.Visible = false;
+            txtGoogleWait.Text = string.Empty;
         }
 
         public void GoogleMap_WaitingForGoogle(object sender, GoogleWaitingEventArgs args)
