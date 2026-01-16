@@ -1,6 +1,6 @@
-## Release Candidate Version 10.0.0.0-RC2 - 15th January 2026  
+## Release Candidate Version 10.0.0.0-RC2 - 16th January 2026  
 **Updates**  
-Added support for 1926 Irish Census  
+Added support for 1926 Irish Census due to be released on 18th April 2026  
 Use new precompiled methods for Census reference recognition speeding up processing  
 
 **Bugfixes**  
