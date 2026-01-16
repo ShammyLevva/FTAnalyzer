@@ -1,3 +1,11 @@
+## Release Candidate Version 10.0.0.0-RC3 - 17th January 2026  
+**Updates**  
+Added 1926 Irish Census fields to exports and reports  
+
+**Bugfixes**  
+Fixed sorting on grids when clicking column headers  
+Fixed grid cell formatting to ignore icon columns  
+
 ## Release Candidate Version 10.0.0.0-RC2 - 16th January 2026  
 **Updates**  
 Added support for 1926 Irish Census due to be released on 18th April 2026  
