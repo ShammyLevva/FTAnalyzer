@@ -37,7 +37,7 @@ namespace FTAnalyzer.Forms.Controls
             ResizeRedraw = true;
             RowHeadersVisible = false;
             RowHeadersWidth = 50;
-            FilterAndSortEnabled = true;
+            FilterAndSortEnabled = false; // we’ll handle sorting ourselves
             SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             ScrollBars = ScrollBars.Both;
             CellValueNeeded += OnCellValueNeeded;
@@ -55,17 +55,8 @@ namespace FTAnalyzer.Forms.Controls
 
         void OnSortStringChanged(object? sender, SortEventArgs e)
         {
-            int lastPos = e.SortString.LastIndexOf('[');
-            if (lastPos >= 0)
-            {
-                string lastsort = e.SortString.Right(e.SortString.Length - lastPos);
-                string column = lastsort.Between('[', ']');
-                int pos = lastsort.IndexOf("] ");
-                string direction = pos > 0 ? lastsort.Substring(pos + 2, 3) : "ASC";
-                ListSortDirection sortDirection = direction == "ASC" ? ListSortDirection.Ascending : ListSortDirection.Descending;
-                DataGridViewColumn sortColumn = Columns[column] ?? Columns[0];
-                base.Sort(sortColumn, sortDirection);
-            }
+            // Intentionally do nothing here.
+            // Header clicks and dropdown sorts are handled explicitly in OnColumnHeaderMouseClick.
         }
 
         public void OnFilterStringChanged(object? sender, FilterEventArgs e)
