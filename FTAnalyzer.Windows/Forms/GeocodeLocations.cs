@@ -37,6 +37,7 @@ namespace FTAnalyzer.Forms
 
         CancellationTokenSource? googleGeocodeCts;
         CancellationTokenSource? reverseGeocodeCts;
+        CancellationTokenSource? emptyViewPortsCts;
         
         public GeocodeLocations(IProgress<string> outputText)
         {
@@ -528,6 +529,7 @@ namespace FTAnalyzer.Forms
             if (EmptyViewPortsBackgroundWorker.IsBusy)
             {
                 EmptyViewPortsBackgroundWorker.CancelAsync();
+                emptyViewPortsCts?.Cancel();
             }
         }
 
@@ -556,7 +558,15 @@ namespace FTAnalyzer.Forms
 
         #region Google Geocoding
 
-        void EmptyViewPortsBackgroundWorker_DoWork(object sender, DoWorkEventArgs e) => CheckEmptyViewPorts(EmptyViewPortsBackgroundWorker, e);
+        void EmptyViewPortsBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            emptyViewPortsCts?.Cancel();
+            emptyViewPortsCts = new CancellationTokenSource();
+            var token = emptyViewPortsCts.Token;
+
+            // run async helper on worker thread; safe to block here
+            CheckEmptyViewPortsAsync(EmptyViewPortsBackgroundWorker, e, token).GetAwaiter().GetResult();
+        }
 
         public void StartGoogleGeoCoding(bool retryPartials)
         {
@@ -621,7 +631,9 @@ namespace FTAnalyzer.Forms
                     {
                         Debug.WriteLine("Race condition gets here sometimes");
                     }
-                    EmptyViewPortsBackgroundWorker.RunWorkerAsync();
+                    emptyViewPortsCts?.Cancel();
+                    emptyViewPortsCts = new CancellationTokenSource();
+                    EmptyViewPortsBackgroundWorker.RunWorkerAsync(emptyViewPortsCts.Token);
                     Cursor = Cursors.Default;
                 }
             }
@@ -631,7 +643,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        public void CheckEmptyViewPorts(BackgroundWorker worker, DoWorkEventArgs e)
+        public async Task CheckEmptyViewPortsAsync(BackgroundWorker worker, DoWorkEventArgs e, CancellationToken token)
         {
             try
             {
@@ -643,18 +655,32 @@ namespace FTAnalyzer.Forms
                 int maxtoCheck = FactLocation.AllLocations.Count(x => x.EmptyViewPort);
                 foreach (FactLocation loc in FactLocation.AllLocations.Where(x => x.EmptyViewPort).OrderBy(x => x.Level))
                 {
+                    if (token.IsCancellationRequested)
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
+
                     if (loc != FactLocation.UNKNOWN_LOCATION && loc.Level <= FactLocation.REGION && loc.ToString().Length > 0)
                     {
                         vpchecked++;
-                        // Use async Google lookup helper in a blocking manner within this worker loop
-                        GeoResponse? res = SearchGoogleAsync(loc, loc.ToString(), CancellationToken.None).GetAwaiter().GetResult();
+                        GeoResponse? res = null;
+                        try
+                        {
+                            res = await SearchGoogleAsync(loc, loc.ToString(), token).ConfigureAwait(false);
+                        }
+                        catch (OperationCanceledException)
+                        {
+                            e.Cancel = true;
+                            break;
+                        }
+
                         Envelope bbox = Countries.BoundingBox(loc.Country);
                         if (res is not null && res.Status == "OK" && res.Results.Length > 0)
                         {
                             foreach (GeoResponse.CResult result in res.Results)
                             {
                                 int foundLevel = GoogleMap.GetFactLocationType(result.Types, loc);
-                                string address = result.ReturnAddress;
                                 GeoResponse.CResult.CGeometry.CViewPort viewport = result.Geometry.ViewPort;
                                 if (foundLevel == loc.Level && bbox.Covers(new Coordinate(result.Geometry.Location.Long, result.Geometry.Location.Lat)) &&
                                     !result.PartialMatch)
