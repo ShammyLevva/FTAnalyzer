@@ -3342,7 +3342,8 @@ namespace FTAnalyzer
         void IndividualsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            using (DataTable dt = ListtoDataTableConvertor.ToDataTable([.. ft.AllIndividuals]))
+            List<IExportIndividual> individuals = [.. ft.AllIndividuals];
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(individuals))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportIndEvent);
             HourGlass(this, false);
@@ -3351,7 +3352,8 @@ namespace FTAnalyzer
         void FamiliesToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            using (DataTable dt = ListtoDataTableConvertor.ToDataTable([.. ft.AllFamilies]))
+            List<Family> families = [.. ft.AllFamilies];
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(families))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportFamEvent);
             HourGlass(this, false);
@@ -3360,7 +3362,8 @@ namespace FTAnalyzer
         void FactsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            using (DataTable dt = ListtoDataTableConvertor.ToDataTable([.. ft.AllExportFacts]))
+            List<ExportFact> facts = [.. ft.AllExportFacts];
+            using (DataTable dt = ListtoDataTableConvertor.ToDataTable(facts))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportFactsEvent);
             HourGlass(this, false);
