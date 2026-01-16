@@ -480,6 +480,8 @@ namespace FTAnalyzer.Forms
 
         void GeoCodingProgressChanged(ProgressChangedEventArgs e)
         {
+            if (IsDisposed || Disposing || pbGeocoding.IsDisposed || txtLocations.IsDisposed)
+                return;
             pbGeocoding.Visible = true;
             pbGeocoding.Value = (e.ProgressPercentage < 0) ? 1 : e.ProgressPercentage;
             txtLocations.Text = e.UserState.ToString() ?? string.Empty;
@@ -489,6 +491,8 @@ namespace FTAnalyzer.Forms
 
         void WorkFinished(object sender)
         {
+            if (IsDisposed)
+                return;
             pbGeocoding.Value = 100;
             pbGeocoding.Visible = false;
             txtGoogleWait.Text = string.Empty;
@@ -500,10 +504,7 @@ namespace FTAnalyzer.Forms
             string title = sender == OSGeocodeBackgroundWorker ? "OS Geocoding Results:" : "Google Geocoding Results:";
             FamilyTree.WriteGeocodeStatstoRTB(title, outputText);
             ft.Geocoding = false;
-            if (formClosing)
-                Close();
-            else
-                UpdateGridWithFilters();
+            UpdateGridWithFilters();
         }
 
         void GeocodeLocations_FormClosing(object sender, FormClosingEventArgs e)
@@ -512,27 +513,21 @@ namespace FTAnalyzer.Forms
             {
                 googleGeocodeBackgroundWorker.CancelAsync();
                 GoogleMap.ThreadCancelled = true;
-                e.Cancel = true;
-                formClosing = true;
+                googleGeocodeCts?.Cancel();
             }
             if (reverseGeocodeBackgroundWorker.IsBusy)
             {
                 reverseGeocodeBackgroundWorker.CancelAsync();
                 GoogleMap.ThreadCancelled = true;
-                e.Cancel = true;
-                formClosing = true;
+                // if you later add a CTS for reverse geocoding, cancel it here too
             }
             if (OSGeocodeBackgroundWorker.IsBusy)
             {
                 OSGeocodeBackgroundWorker.CancelAsync();
-                e.Cancel = true;
-                formClosing = true;
             }
             if (EmptyViewPortsBackgroundWorker.IsBusy)
             {
                 EmptyViewPortsBackgroundWorker.CancelAsync();
-                e.Cancel = true;
-                formClosing = true;
             }
         }
 
