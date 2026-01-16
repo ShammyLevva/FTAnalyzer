@@ -47,6 +47,9 @@ namespace FTAnalyzer.Forms.Controls
             FilterStringChanged += OnFilterStringChanged;
             SortStringChanged += OnSortStringChanged;
 
+            // handle header clicks directly
+            ColumnHeaderMouseClick += OnColumnHeaderMouseClick;
+
             SetDoubleBuffered();
         }
 
@@ -282,6 +285,24 @@ namespace FTAnalyzer.Forms.Controls
 
                 return _direction * val1.CompareTo(val2);
             }
+        }
+
+        void OnColumnHeaderMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left || e.ColumnIndex < 0)
+                return;
+
+            DataGridViewColumn column = Columns[e.ColumnIndex];
+            if (column.SortMode == DataGridViewColumnSortMode.NotSortable)
+                return;
+
+            // Toggle sort direction using current SortOrder / SortedColumn
+            ListSortDirection direction = ListSortDirection.Ascending;
+            if (SortedColumn == column && SortOrder == SortOrder.Ascending)
+                direction = ListSortDirection.Descending;
+
+            // Use base.Sort so ADGV updates glyphs and state
+            base.Sort(column, direction);
         }
     }
 }
