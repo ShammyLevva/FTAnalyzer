@@ -201,9 +201,9 @@ namespace FTAnalyzer.Forms
             //Debug.WriteLine("Pixel : " + mapBox1.Map.PixelSize);
         }
 
-        void BtnSearch_Click(object sender, EventArgs e) => GoogleLocationSearch();
+        void BtnSearch_Click(object sender, EventArgs e) => GoogleLocationSearchAsync();
 
-        void GoogleLocationSearch()
+        async void GoogleLocationSearchAsync()
         {
             if (txtSearch.Text.Length > 0)
             {
@@ -218,10 +218,11 @@ namespace FTAnalyzer.Forms
                 }
                 else
                 {
-                    GeoResponse? res = GoogleMap.GoogleGeocode(null, txtSearch.Text, 8);
+                    using var cts = new CancellationTokenSource();
+                    GeoResponse? res = await GoogleMap.GoogleGeocodeAsync(null, txtSearch.Text, 8, cts.Token).ConfigureAwait(false);
                     if (res is not null && res.Status == "OK" &&
-                        (!ExtensionMethods.DoubleEquals(res.Results[0].Geometry.Location.Lat,0) || 
-                         !ExtensionMethods.DoubleEquals(res.Results[0].Geometry.Location.Long,0)))
+                        (!ExtensionMethods.DoubleEquals(res.Results[0].Geometry.Location.Lat, 0) ||
+                         !ExtensionMethods.DoubleEquals(res.Results[0].Geometry.Location.Long, 0)))
                     {
                         loc.Latitude = res.Results[0].Geometry.Location.Lat;
                         loc.Longitude = res.Results[0].Geometry.Location.Long;
@@ -235,7 +236,9 @@ namespace FTAnalyzer.Forms
                         pointUpdated = true;
                     }
                     else
+                    {
                         UIHelpers.ShowMessage($"Google didn't find {txtSearch.Text}", "Failed Google Lookup");
+                    }
                 }
             }
         }
@@ -267,7 +270,7 @@ namespace FTAnalyzer.Forms
         void TxtSearch_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
-                GoogleLocationSearch();
+                GoogleLocationSearchAsync();
         }
 
         void BtnEdit_Click(object sender, EventArgs e)

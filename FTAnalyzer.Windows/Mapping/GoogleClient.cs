@@ -18,6 +18,6 @@ namespace FTAnalyzer.Mapping
             };
         }
 
-        public Task<HttpResponseMessage> SendAsync(HttpRequestMessage request) => Client.SendAsync(request);
+        public Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken) => Client.SendAsync(request, cancellationToken);
     }
 }

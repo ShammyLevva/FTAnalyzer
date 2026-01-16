@@ -36,6 +36,8 @@ namespace FTAnalyzer.Forms
 
         FactLocation CopyLocation;
 
+        CancellationTokenSource? googleGeocodeCts;
+        
         public GeocodeLocations(IProgress<string> outputText)
         {
             try
@@ -455,7 +457,24 @@ namespace FTAnalyzer.Forms
 
         #region Google Geocode Threading
 
-        void GoogleGeocodingBackgroundWorker_DoWork(object sender, DoWorkEventArgs e) => GoogleGeoCode(googleGeocodeBackgroundWorker, e);
+        void GoogleGeocodingBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var worker = (BackgroundWorker)sender;
+            bool retryPartials = false;
+            CancellationToken token = CancellationToken.None;
+            if (e.Argument is Tuple<bool, CancellationToken> tuple)
+            {
+                retryPartials = tuple.Item1;
+                token = tuple.Item2;
+            }
+            else if (e.Argument is bool b)
+            {
+                retryPartials = b;
+            }
+
+            // Run async geocoding on worker thread; safe to block here.
+            GoogleGeoCodeAsync(worker, e, retryPartials, token).GetAwaiter().GetResult();
+        }
 
         void GoogleGeocodingBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e) => GeoCodingProgressChanged(e);
 
@@ -560,7 +579,10 @@ namespace FTAnalyzer.Forms
                     {
                         Debug.WriteLine("Race condition gets here sometimes");
                     }
-                    googleGeocodeBackgroundWorker.RunWorkerAsync(retryPartials);
+                    googleGeocodeCts?.Cancel();
+                    googleGeocodeCts = new CancellationTokenSource();
+                    var args = new Tuple<bool, CancellationToken>(retryPartials, googleGeocodeCts.Token);
+                    googleGeocodeBackgroundWorker.RunWorkerAsync(args);
                     Cursor = Cursors.Default;
                 }
             }
@@ -620,7 +642,8 @@ namespace FTAnalyzer.Forms
                     if (loc != FactLocation.UNKNOWN_LOCATION && loc.Level <= FactLocation.REGION && loc.ToString().Length > 0)
                     {
                         vpchecked++;
-                        GeoResponse? res = SearchGoogle(loc, loc.ToString());
+                        // Use async Google lookup helper in a blocking manner within this worker loop
+                        GeoResponse? res = SearchGoogleAsync(loc, loc.ToString(), CancellationToken.None).GetAwaiter().GetResult();
                         Envelope bbox = Countries.BoundingBox(loc.Country);
                         if (res is not null && res.Status == "OK" && res.Results.Length > 0)
                         {
@@ -659,11 +682,10 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        public void GoogleGeoCode(BackgroundWorker worker, DoWorkEventArgs e)
+        async Task GoogleGeoCodeAsync(BackgroundWorker worker, DoWorkEventArgs e, bool retryPartial, CancellationToken token)
         {
             try
             {
-                bool retryPartial = (bool)e.Argument;
                 GoogleMap.WaitingForGoogle += new GoogleMap.GoogleEventHandler(GoogleMap_WaitingForGoogle);
                 DatabaseHelper dbh = DatabaseHelper.Instance;
 
@@ -675,6 +697,12 @@ namespace FTAnalyzer.Forms
                 GoogleMap.ThreadCancelled = false;
                 foreach (FactLocation loc in FactLocation.AllLocations.OrderBy(x => x.Level))
                 {
+                    if (token.IsCancellationRequested || GoogleMap.ThreadCancelled || worker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
+
                     if (loc == FactLocation.UNKNOWN_LOCATION || loc.IsGeoCoded(retryPartial))
                         geocoded++;
                     else if (loc.GeocodeStatus == FactLocation.Geocode.INCORRECT || loc.Country.Equals(Countries.AT_SEA))
@@ -691,8 +719,7 @@ namespace FTAnalyzer.Forms
                                      loc.GeocodeStatus == FactLocation.Geocode.LEVEL_MISMATCH ||
                                      loc.GeocodeStatus == FactLocation.Geocode.OS_50KPARTIAL)))
                             {
-                                //                                log.Info("Searching Google for '" + loc.GoogleFixed + "' original text was '" + loc.GEDCOMLocation + "'.");
-                                res = SearchGoogle(loc, loc.GoogleFixed);
+                                res = await SearchGoogleAsync(loc, loc.GoogleFixed, token).ConfigureAwait(false);
                             }
                             if (res is not null && ((res.Status == "OK" && res.Results.Length > 0) || res.Status == "ZERO_RESULTS"))
                             {
@@ -736,7 +763,7 @@ namespace FTAnalyzer.Forms
                                             if (loc.OriginalText == loc.GoogleFixed)
                                                 checkresultsPass++;  // if we have the same string skip checking Original Text location
                                             else
-                                                res = SearchGoogle(loc, loc.OriginalText);
+                                                res = await SearchGoogleAsync(loc, loc.OriginalText, token).ConfigureAwait(false);
                                         }
                                         checkresultsPass++;
                                     }
@@ -786,7 +813,7 @@ namespace FTAnalyzer.Forms
                     string status = $"Previously geocoded: {geocoded}, skipped: {skipped}, Googled: {googled}. Done {count - 1} of {total}.  ";
                     worker.ReportProgress(percent, status);
 
-                    if (worker.CancellationPending ||
+                    if (worker.CancellationPending || token.IsCancellationRequested ||
                         (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max")))
                     {
                         e.Cancel = true;
@@ -805,10 +832,10 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        GeoResponse? SearchGoogle(FactLocation location, string text)
+        async Task<GeoResponse?> SearchGoogleAsync(FactLocation location, string text, CancellationToken token)
         {
             // This call is the real workhorse that does the actual Google lookup
-            GeoResponse? res = GoogleMap.GoogleGeocode(location, text, 8);
+            GeoResponse? res = await GoogleMap.GoogleGeocodeAsync(location, text, 8, token).ConfigureAwait(false);
             if (res is not null && (res.Status == "Maxed" || res.Status == "REQUEST_DENIED"))
             {
                 googleGeocodeBackgroundWorker.CancelAsync();

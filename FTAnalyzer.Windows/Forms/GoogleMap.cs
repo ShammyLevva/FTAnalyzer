@@ -148,7 +148,7 @@ namespace FTAnalyzer.Forms
 
         public static void OnWaitingForGoogle(string message) => WaitingForGoogle?.Invoke(null, new GoogleWaitingEventArgs(message));
 
-        public static GeoResponse? CallGoogleGeocode(FactLocation address, string text)
+        public static Task<GeoResponse?> CallGoogleGeocodeAsync(FactLocation address, string text, CancellationToken cancellationToken)
         {
             string bounds = string.Empty;
             string tld = address.IsUnitedKingdom ? "&region=uk" : string.Empty;
@@ -175,28 +175,39 @@ namespace FTAnalyzer.Forms
             }
             string encodedAddress = HttpUtility.UrlEncode(text.Replace(" ", "+"));
             string url = $"https://maps.googleapis.com/maps/api/geocode/json?address={encodedAddress}{bounds}{tld}&key={GoogleAPIKey.KeyValue}";
-            return GetGeoResponseAsync(url, text).Result;
+            if (ThreadCancelled || cancellationToken.IsCancellationRequested)
+                return Task.FromResult<GeoResponse?>(null);
+
+            return GetGeoResponseAsync(url, text, cancellationToken);
         }
 
-        public static GeoResponse? CallGoogleReverseGeocode(double latitude, double longitude)
+        public static Task<GeoResponse?> CallGoogleReverseGeocodeAsync(double latitude, double longitude, CancellationToken cancellationToken)
         {
             string lat = HttpUtility.UrlEncode(latitude.ToString());
             string lng = HttpUtility.UrlEncode(longitude.ToString());
             string region = longitude >= -7.974074 && longitude <= 1.879409 && latitude >= 49.814376 && latitude <= 60.970872 ?
                 "&region=uk" : string.Empty;
             string url = $"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}{region}&key={GoogleAPIKey.KeyValue}";
-            return GetGeoResponseAsync(url, $"latlng={lat},{lng}{region}").Result;
+            if (ThreadCancelled || cancellationToken.IsCancellationRequested)
+                return Task.FromResult<GeoResponse?>(null);
+
+            return GetGeoResponseAsync(url, $"latlng={lat},{lng}{region}", cancellationToken);
         }
 
-        static async Task<GeoResponse?> GetGeoResponseAsync(string url, string text)
+        static async Task<GeoResponse?> GetGeoResponseAsync(string url, string text, CancellationToken cancellationToken)
         {
+            if (ThreadCancelled || cancellationToken.IsCancellationRequested)
+                return null;
+            using HttpRequestMessage request = new();
+
             GeoResponse? res;
-            HttpRequestMessage request = new();
             try
             {
                 request.Headers.Add("Accept-Encoding", "gzip,deflate");
                 request.RequestUri = new Uri(url);
-                HttpResponseMessage response = await Program.GoogleClient.SendAsync(request);
+                HttpResponseMessage response = await Program.GoogleClient
+                    .SendAsync(request, cancellationToken)
+                    .ConfigureAwait(false);
 
                 //if (request.Proxy is WebProxy proxy)
                 //{
@@ -208,8 +219,14 @@ namespace FTAnalyzer.Forms
                 //    };
                 //}
                 response.EnsureSuccessStatusCode();
-                string jsonString = await response.Content.ReadAsStringAsync();
+                string jsonString = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
                 res = JsonConvert.DeserializeObject<GeoResponse>(jsonString);
+            }
+            catch (OperationCanceledException)
+            {
+                if (!ThreadCancelled && !cancellationToken.IsCancellationRequested)
+                    Debug.WriteLine($"Request cancelled or timed out for {url}");
+                res = null;
             }
             catch (WebException ex)
             {
@@ -217,6 +234,11 @@ namespace FTAnalyzer.Forms
                     Debug.WriteLine($"Timeout with {url}\n");
                 else
                     UIHelpers.ShowMessage($"Unable to contact https://maps.googleapis.com error was: {ex.Message}\nWhen trying to look for {text}", "FTAnalyzer");
+                res = null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error calling Google: {ex.Message}");
                 res = null;
             }
             if (res is not null && res.Status == "REQUEST_DENIED")
@@ -227,7 +249,7 @@ namespace FTAnalyzer.Forms
         static int sleepinterval = 200;
 
         // Call geocoding routine but account for throttling by Google geocoding engine
-        public static GeoResponse? GoogleGeocode(FactLocation address, string text, int badtries)
+        public static async Task<GeoResponse?> GoogleGeocodeAsync(FactLocation address, string text, int badtries, CancellationToken cancellationToken)
         {
             int maxInterval = 30000;
             double seconds = sleepinterval / 1000.0;
@@ -235,26 +257,37 @@ namespace FTAnalyzer.Forms
                 OnWaitingForGoogle($"Google Timeout. Waiting {seconds} seconds.");
             if (sleepinterval >= maxInterval)
                 return MaxedOut();
-            for (int interval = 0; interval < sleepinterval; interval += 1000)
+            try
             {
-                Thread.Sleep(1000);
-                if (ThreadCancelled) return null;
+                await Task.Delay(sleepinterval, cancellationToken).ConfigureAwait(false);
             }
+            catch (OperationCanceledException)
+            {
+                return null;
+            }
+            if (ThreadCancelled || cancellationToken.IsCancellationRequested)
+                return null;
             GeoResponse? res;
             try
             {
-                res = CallGoogleGeocode(address, text);
+                res = await CallGoogleGeocodeAsync(address, text, cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                return null;
             }
             catch (Exception e)
             {
                 OnWaitingForGoogle($"Caught exception: {e}");
                 res = null;
             }
+            if (cancellationToken.IsCancellationRequested || ThreadCancelled)
+                return null;
             if (res is null || res.Status == "OVER_QUERY_LIMIT")
             {
                 // we're hitting Google too fast, increase interval
                 sleepinterval = Math.Min(sleepinterval + ++badtries * 750, maxInterval);
-                return GoogleGeocode(address, text, badtries);
+                return await GoogleGeocodeAsync(address, text, badtries, cancellationToken).ConfigureAwait(false);
             }
             else
             {
@@ -271,8 +304,39 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        // Call geocoding routine but account for throttling by Google geocoding engine
+        // Synchronous convenience wrappers for existing callers.
+        // These should only be used from background threads, not the UI thread.
+
+        public static GeoResponse? CallGoogleGeocode(FactLocation address, string text)
+        {
+            return CallGoogleGeocodeAsync(address, text, CancellationToken.None)
+                .GetAwaiter()
+                .GetResult();
+        }
+
+        public static GeoResponse? CallGoogleReverseGeocode(double latitude, double longitude)
+        {
+            return CallGoogleReverseGeocodeAsync(latitude, longitude, CancellationToken.None)
+                .GetAwaiter()
+                .GetResult();
+        }
+
+        public static GeoResponse? GoogleGeocode(FactLocation address, string text, int badtries)
+        {
+            return GoogleGeocodeAsync(address, text, badtries, CancellationToken.None)
+                .GetAwaiter()
+                .GetResult();
+        }
+
         public static GeoResponse? GoogleReverseGeocode(double latitude, double longitude, int badtries)
+        {
+            return GoogleReverseGeocodeAsync(latitude, longitude, badtries, CancellationToken.None)
+                .GetAwaiter()
+                .GetResult();
+        }
+
+        // Call geocoding routine but account for throttling by Google geocoding engine
+        public static async Task<GeoResponse?> GoogleReverseGeocodeAsync(double latitude, double longitude, int badtries, CancellationToken cancellationToken)
         {
             int maxInterval = 30000;
             double seconds = sleepinterval / 1000.0;
@@ -280,26 +344,37 @@ namespace FTAnalyzer.Forms
                 OnWaitingForGoogle($"Over Google limit. Waiting {seconds} seconds.");
             if (sleepinterval >= maxInterval)
                 return MaxedOut();
-            for (int interval = 0; interval < sleepinterval; interval += 1000)
+            try
             {
-                Thread.Sleep(1000);
-                if (ThreadCancelled) return null;
+                await Task.Delay(sleepinterval, cancellationToken).ConfigureAwait(false);
             }
+            catch (OperationCanceledException)
+            {
+                return null;
+            }
+            if (ThreadCancelled || cancellationToken.IsCancellationRequested)
+                return null;
             GeoResponse? res;
             try
             {
-                res = CallGoogleReverseGeocode(latitude, longitude);
+                res = await CallGoogleReverseGeocodeAsync(latitude, longitude, cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                return null;
             }
             catch (Exception e)
             {
                 OnWaitingForGoogle($"Caught exception: {e}");
                 res = null;
             }
+            if (cancellationToken.IsCancellationRequested || ThreadCancelled)
+                return null;
             if (res is null || res.Status == "OVER_QUERY_LIMIT")
             {
                 // we're hitting Google too fast, increase interval
                 sleepinterval = Math.Min(sleepinterval + ++badtries * 750, maxInterval);
-                return GoogleReverseGeocode(latitude, longitude, badtries);
+                return await GoogleReverseGeocodeAsync(latitude, longitude, badtries, cancellationToken).ConfigureAwait(false);
             }
             else
             {
