@@ -47,6 +47,9 @@ namespace FTAnalyzer.Forms.Controls
             FilterStringChanged += OnFilterStringChanged;
             SortStringChanged += OnSortStringChanged;
 
+            // Allow clicking column headers to trigger sorting
+            ColumnHeaderMouseClick += OnColumnHeaderMouseClick;
+
             SetDoubleBuffered();
         }
 
@@ -199,6 +202,23 @@ namespace FTAnalyzer.Forms.Controls
 
         public T DataBoundItem(int rowIndex) => _dataSource[rowIndex];
 
+        void OnColumnHeaderMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left || e.ColumnIndex < 0)
+                return;
+
+            DataGridViewColumn column = Columns[e.ColumnIndex];
+            if (column.SortMode == DataGridViewColumnSortMode.NotSortable)
+                return;
+
+            // Toggle sort direction if already sorted on this column
+            ListSortDirection direction = ListSortDirection.Ascending;
+            if (SortedColumn == column && SortOrder == SortOrder.Ascending)
+                direction = ListSortDirection.Descending;
+
+            Sort(column, direction);
+        }
+
         void CreateGridColumns()
         {
             if (DesignMode)
@@ -231,6 +251,7 @@ namespace FTAnalyzer.Forms.Controls
                 dgvc.Width = (int)(cd?.ColumnWidth ?? 100);
                 dgvc.MinimumWidth = (int)(cd?.ColumnWidth ?? 100);
                 dgvc.HeaderCell.Style.Alignment = cd?.Alignment ?? DataGridViewContentAlignment.MiddleLeft;
+                dgvc.SortMode = DataGridViewColumnSortMode.Programmatic;
                 DisableFilterCustom(dgvc);
                 Columns.Add(dgvc);
             }
