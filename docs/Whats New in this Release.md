@@ -1,11 +1,13 @@
 ## Release Candidate Version 10.0.0.0-RC2 - 15th January 2026  
 **Updates**  
 Added support for 1926 Irish Census  
+Use new precompiled methods for Census reference recognition speeding up processing  
 
 **Bugfixes**  
 1921 Census references were not being recognised correctly  
 Maximising colour reports now works correctly  
 Added checks for saving settings to ensure file access issues are handled  
+Fixed Google Geocoding not stopping immediately on closing form  
 
 ## Release Candidate Version 10.0.0.0-RC1 - 15th January 2026  
 **Updates**  
