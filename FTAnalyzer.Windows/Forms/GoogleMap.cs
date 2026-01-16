@@ -304,37 +304,6 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        // Synchronous convenience wrappers for existing callers.
-        // These should only be used from background threads, not the UI thread.
-
-        public static GeoResponse? CallGoogleGeocode(FactLocation address, string text)
-        {
-            return CallGoogleGeocodeAsync(address, text, CancellationToken.None)
-                .GetAwaiter()
-                .GetResult();
-        }
-
-        public static GeoResponse? CallGoogleReverseGeocode(double latitude, double longitude)
-        {
-            return CallGoogleReverseGeocodeAsync(latitude, longitude, CancellationToken.None)
-                .GetAwaiter()
-                .GetResult();
-        }
-
-        public static GeoResponse? GoogleGeocode(FactLocation address, string text, int badtries)
-        {
-            return GoogleGeocodeAsync(address, text, badtries, CancellationToken.None)
-                .GetAwaiter()
-                .GetResult();
-        }
-
-        public static GeoResponse? GoogleReverseGeocode(double latitude, double longitude, int badtries)
-        {
-            return GoogleReverseGeocodeAsync(latitude, longitude, badtries, CancellationToken.None)
-                .GetAwaiter()
-                .GetResult();
-        }
-
         // Call geocoding routine but account for throttling by Google geocoding engine
         public static async Task<GeoResponse?> GoogleReverseGeocodeAsync(double latitude, double longitude, int badtries, CancellationToken cancellationToken)
         {

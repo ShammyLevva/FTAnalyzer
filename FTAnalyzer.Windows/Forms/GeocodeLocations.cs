@@ -36,6 +36,7 @@ namespace FTAnalyzer.Forms
         FactLocation CopyLocation;
 
         CancellationTokenSource? googleGeocodeCts;
+        CancellationTokenSource? reverseGeocodeCts;
         
         public GeocodeLocations(IProgress<string> outputText)
         {
@@ -518,7 +519,7 @@ namespace FTAnalyzer.Forms
             {
                 reverseGeocodeBackgroundWorker.CancelAsync();
                 GoogleMap.ThreadCancelled = true;
-                // if you later add a CTS for reverse geocoding, cancel it here too
+                reverseGeocodeCts?.Cancel();
             }
             if (OSGeocodeBackgroundWorker.IsBusy)
             {
@@ -540,7 +541,16 @@ namespace FTAnalyzer.Forms
             txtGoogleWait.Text = args.Message;
         }
 
-        void ReverseGeocodeBackgroundWorker_DoWork(object sender, DoWorkEventArgs e) => ReverseGeoCode(reverseGeocodeBackgroundWorker, e);
+        void ReverseGeocodeBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // ensure we have a CTS for this reverse geocode run
+            reverseGeocodeCts?.Cancel();
+            reverseGeocodeCts = new CancellationTokenSource();
+            var token = reverseGeocodeCts.Token;
+
+            // run async helper on worker thread; safe to block here
+            ReverseGeoCodeAsync(reverseGeocodeBackgroundWorker, e, token).GetAwaiter().GetResult();
+        }
 
         #endregion
 
@@ -961,7 +971,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        public void ReverseGeoCode(BackgroundWorker worker, DoWorkEventArgs e)
+        public async Task ReverseGeoCodeAsync(BackgroundWorker worker, DoWorkEventArgs e, CancellationToken token)
         {
             try
             {
@@ -973,6 +983,12 @@ namespace FTAnalyzer.Forms
                 Dictionary<string, Tuple<string, string>> LatLongIndex = DatabaseHelper.LatLongIndex;
                 while (!queue.IsEmpty)
                 {
+                    if (token.IsCancellationRequested)
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
+
                     if (queue.TryDequeue(out FactLocation? loc))
                     {
                         if (loc is not null && loc.ToString().Length > 0 &&
@@ -992,7 +1008,16 @@ namespace FTAnalyzer.Forms
                             }
                             else
                             {
-                                res = GoogleMap.GoogleReverseGeocode(latitude, longitude, 8);
+                                try
+                                {
+                                    res = await GoogleMap.GoogleReverseGeocodeAsync(latitude, longitude, 8, token).ConfigureAwait(false);
+                                }
+                                catch (OperationCanceledException)
+                                {
+                                    e.Cancel = true;
+                                    break;
+                                }
+
                                 if (res is not null && res.Status == "Maxed")
                                 {
                                     googleGeocodeBackgroundWorker.CancelAsync();

@@ -1,5 +1,6 @@
 ﻿using FTAnalyzer.Mapping;
 using FTAnalyzer.Utilities;
+using System.Threading;
 
 namespace FTAnalyzer.Forms
 {
@@ -22,6 +23,7 @@ namespace FTAnalyzer.Forms
         public static readonly string INTERSECTION = "intersection";
 
         bool loaded;
+        CancellationTokenSource? _cts;
 
         public BingOSMap()
         {
@@ -33,7 +35,7 @@ namespace FTAnalyzer.Forms
             Top += NativeMethods.TopTaskbarOffset;
         }
 
-        public bool SetLocation(FactLocation loc, int level)
+        async public Task<bool> SetLocation(FactLocation loc, int level)
         {
             if (loc is null) return false;
             while (!loaded)
@@ -48,7 +50,20 @@ namespace FTAnalyzer.Forms
             }
             else
             {
-                GeoResponse? res = GoogleMap.CallGoogleGeocode(loc, loc.ToString());
+                // cancel any in-flight request before starting a new one
+                _cts?.Cancel();
+                _cts = new CancellationTokenSource();
+                var token = _cts.Token;
+
+                GeoResponse? res;
+                try
+                {
+                    res = await GoogleMap.CallGoogleGeocodeAsync(loc, loc.ToString(), token).ConfigureAwait(false);
+                }
+                catch (OperationCanceledException)
+                {
+                    return false;
+                }
                 if (res?.Status == "OK")
                 {
                     labMapLevel.Text = GoogleMap.LocationText(res, loc, level);
@@ -82,7 +97,11 @@ namespace FTAnalyzer.Forms
 
         void LabTOU_Click(object sender, EventArgs e) => webBrowser.Navigate(new Uri("https://www.microsoft.com/Maps/product/terms.html"));
 
-        void BingOSMap_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
+        void BingOSMap_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _cts?.Cancel();
+            Dispose();
+        }
 
         void BingOSMap_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }
