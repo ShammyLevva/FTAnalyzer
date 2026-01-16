@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace FTAnalyzer.Mapping
 {
-    public class OS50kGazetteer
+    public partial class OS50kGazetteer
     {
         public int SequenceNumber { get; private set; }
         public string DefinitiveName { get; private set; }
@@ -76,8 +76,6 @@ namespace FTAnalyzer.Mapping
                 DefinitiveName = (string.Concat(DefinitiveName.AsSpan(pos + 1), " ", DefinitiveName.AsSpan(0, pos))).Trim();
         }
 
-        static readonly Regex slash = new(@"(.*)\(.*\)", RegexOptions.Compiled);
-
         void FixAbbreviations()
         {
             DefinitiveName = DefinitiveName.Trim();
@@ -118,13 +116,13 @@ namespace FTAnalyzer.Mapping
 
             if (DefinitiveName.Contains('('))
             {
-                Match match = slash.Match(DefinitiveName);
+                Match match = RegexPatterns.GazateerSlash().Match(DefinitiveName);
                 if (match.Success)
                     DefinitiveName = match.Groups[1].ToString().Trim();
             }
             if (ParishName.Contains('('))
             {
-                Match match = slash.Match(ParishName);
+                Match match = RegexPatterns.GazateerSlash().Match(ParishName);
                 if (match.Success)
                     ParishName = match.Groups[1].ToString().Trim();
             }
