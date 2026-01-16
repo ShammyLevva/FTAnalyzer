@@ -24,7 +24,6 @@ namespace FTAnalyzer.Forms
         readonly Font italicFont;
         readonly ReportFormHelper reportFormHelper;
         readonly List<IDisplayGeocodedLocation> locations;
-        bool formClosing;
         string statusText;
         bool refreshingMenus;
         HashSet<string> noneOfTheAbove;
