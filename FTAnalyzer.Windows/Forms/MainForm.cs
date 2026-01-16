@@ -1022,7 +1022,10 @@ namespace FTAnalyzer
             try
             {
                 DataGridViewCell cell = grid.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                if (e.ColumnIndex == 0)
+                // Skip formatting for image cells
+                if (cell.Value is Bitmap)
+                    return;
+                if (e.ColumnIndex == 1)
                 {
                     string? country = (string?)cell.Value;
                     if (country is not null && Countries.IsKnownCountry(country))
@@ -1030,7 +1033,7 @@ namespace FTAnalyzer
                     else
                         e.CellStyle.Font = normalFont;
                 }
-                else if (e.ColumnIndex == 1)
+                else if (e.ColumnIndex == 2)
                 {
                     string? region = (string?)cell.Value;
                     if (region is not null && region.Length > 0 && Regions.IsKnownRegion(region))
