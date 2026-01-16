@@ -47,9 +47,6 @@ namespace FTAnalyzer.Forms.Controls
             FilterStringChanged += OnFilterStringChanged;
             SortStringChanged += OnSortStringChanged;
 
-            // Allow clicking column headers to trigger sorting
-            ColumnHeaderMouseClick += OnColumnHeaderMouseClick;
-
             SetDoubleBuffered();
         }
 
@@ -64,7 +61,7 @@ namespace FTAnalyzer.Forms.Controls
                 string direction = pos > 0 ? lastsort.Substring(pos + 2, 3) : "ASC";
                 ListSortDirection sortDirection = direction == "ASC" ? ListSortDirection.Ascending : ListSortDirection.Descending;
                 DataGridViewColumn sortColumn = Columns[column] ?? Columns[0];
-                Sort(sortColumn, sortDirection);
+                base.Sort(sortColumn, sortDirection);
             }
         }
 
@@ -202,23 +199,6 @@ namespace FTAnalyzer.Forms.Controls
 
         public T DataBoundItem(int rowIndex) => _dataSource[rowIndex];
 
-        void OnColumnHeaderMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.Button != MouseButtons.Left || e.ColumnIndex < 0)
-                return;
-
-            DataGridViewColumn column = Columns[e.ColumnIndex];
-            if (column.SortMode == DataGridViewColumnSortMode.NotSortable)
-                return;
-
-            // Toggle sort direction if already sorted on this column
-            ListSortDirection direction = ListSortDirection.Ascending;
-            if (SortedColumn == column && SortOrder == SortOrder.Ascending)
-                direction = ListSortDirection.Descending;
-
-            Sort(column, direction);
-        }
-
         void CreateGridColumns()
         {
             if (DesignMode)
@@ -270,17 +250,6 @@ namespace FTAnalyzer.Forms.Controls
             }
         }
 
-        public override void Sort(DataGridViewColumn dataGridViewColumn, ListSortDirection direction)
-        {
-            if (_dataSource is null || dataGridViewColumn is null || dataGridViewColumn.SortMode == DataGridViewColumnSortMode.NotSortable)
-                return;
-
-            PropertyComparer comparer = new(dataGridViewColumn.DataPropertyName, direction);
-            _dataSource.Sort(comparer);
-            DataView dataView = BuildDataTable(_dataSource).DefaultView;
-            base.DataSource = dataView;
-            Refresh();
-        }
 
         void OnResizeChanged(object? sender, EventArgs e) => ForceToParent();
 
