@@ -123,7 +123,7 @@ namespace FTAnalyzer.Mapping
             }
         }
 
-        public void AddParishLayers(Map map)
+        public static void AddParishLayers(Map map)
         {
             VectorRenderer.SizeOfString = SizeOfString;  //fixes label width bug by defining an alternate sizing function
 

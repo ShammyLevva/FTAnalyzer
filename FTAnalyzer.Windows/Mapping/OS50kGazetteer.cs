@@ -71,7 +71,7 @@ namespace FTAnalyzer.Mapping
         void FixCommas()
         {
             DefinitiveName = DefinitiveName.Replace(", The", ""); // strip out supurflous "the"
-            int pos = DefinitiveName.IndexOf(",");
+            int pos = DefinitiveName.IndexOf(',');
             if (pos > 0)
                 DefinitiveName = (string.Concat(DefinitiveName.AsSpan(pos + 1), " ", DefinitiveName.AsSpan(0, pos))).Trim();
         }

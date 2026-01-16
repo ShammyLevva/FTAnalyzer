@@ -58,7 +58,7 @@ namespace FTAnalyzer.Mapping
                     DataSource = factLocationGFP
                 };
 
-                Dictionary<string, IStyle> styles = new();
+                Dictionary<string, IStyle> styles = [];
 
                 VectorStyle feature = new()
                 {

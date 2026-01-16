@@ -3,23 +3,15 @@ using SharpMap.Data;
 
 namespace FTAnalyzer.Mapping
 {
-    class MapCluster
+    class MapCluster(int minSize, double gridSize)
     {
-        readonly List<FeatureDataRow> cluster;
-        readonly int _minSize;
-        readonly double _gridSize;
-        readonly List<NetTopologySuite.Geometries.Point> points;
+        readonly List<FeatureDataRow> cluster = [];
+        readonly int _minSize = minSize;
+        readonly double _gridSize = gridSize;
+        readonly List<NetTopologySuite.Geometries.Point> points = [];
         public static string CLUSTER = "Cluster", FEATURE = "Feature", UNKNOWN = "Unknown";
 
         public IList<FeatureDataRow> Features { get { return cluster; } }
-
-        public MapCluster(int minSize, double gridSize)
-        {
-            cluster = new List<FeatureDataRow>();
-            _minSize = minSize;
-            _gridSize = gridSize;
-            points = new List<NetTopologySuite.Geometries.Point>();
-        }
 
         public Geometry Geometry { get { return Centroid; } }
 

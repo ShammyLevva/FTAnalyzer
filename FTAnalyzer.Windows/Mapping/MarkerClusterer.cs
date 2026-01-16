@@ -15,7 +15,7 @@ namespace FTAnalyzer.Mapping
         {
             sourceDataTable = source;
             minClusterSize = 2;
-            clusters = new List<MapCluster>();
+            clusters = [];
             FeatureDataTable = new FeatureDataTable();
             FeatureDataTable.Columns.Add("Features", typeof(List<FeatureDataRow>));
             FeatureDataTable.Columns.Add("Count", typeof(int));

@@ -18,7 +18,7 @@ namespace FTAnalyzer.Mapping
         {
             this.ind = ind;
             int index = 1;
-            List<Coordinate> points = new();
+            List<Coordinate> points = [];
             Viewport = new Envelope();
             Coordinate? previousPoint = null;
             foreach (IDisplayFact f in ind.AllLifeLineFacts)
@@ -40,7 +40,7 @@ namespace FTAnalyzer.Mapping
                     Viewport.ExpandToInclude(env);
             }
             if (points.Count > 1)
-                Geometry = new LineString(points.ToArray());
+                Geometry = new LineString([.. points]);
             else
                 Geometry = StartPoint;
             Count = points.Count;

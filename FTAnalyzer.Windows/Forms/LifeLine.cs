@@ -150,7 +150,7 @@ namespace FTAnalyzer.Forms
                 selections = new TearDropLayer("Selections");
                 mapBox1.Map.VariableLayers.Add(selections);
 
-                mh.AddParishLayers(mapBox1.Map);
+                MapHelper.AddParishLayers(mapBox1.Map);
                 MapHelper.SetScaleBar(mapBox1);
                 mapBox1.Map.MinimumZoom = 500;
                 mapBox1.Map.MaximumZoom = 50000000;

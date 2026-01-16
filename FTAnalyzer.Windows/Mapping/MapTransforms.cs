@@ -8,8 +8,8 @@ namespace FTAnalyzer.Mapping
     {
         private static ProjectedCoordinateSystem GetEPSG900913(CoordinateSystemFactory csFact)
         {
-            List<ProjectionParameter> parameters = new()
-            {
+            List<ProjectionParameter> parameters =
+            [
                 new ProjectionParameter("semi_major", 6378137.0),
                 new ProjectionParameter("semi_minor", 6378137.0),
                 new ProjectionParameter("latitude_of_origin", 0.0),
@@ -17,7 +17,7 @@ namespace FTAnalyzer.Mapping
                 new ProjectionParameter("scale_factor", 1.0),
                 new ProjectionParameter("false_easting", 0.0),
                 new ProjectionParameter("false_northing", 0.0)
-            };
+            ];
             IProjection projection = csFact.CreateProjection("Google Mercator", "mercator_1sp", parameters);
             GeographicCoordinateSystem wgs84 = csFact.CreateGeographicCoordinateSystem(
                 "WGS 84", AngularUnit.Degrees, HorizontalDatum.WGS84, PrimeMeridian.Greenwich,
@@ -45,8 +45,8 @@ namespace FTAnalyzer.Mapping
                       "WGS 84", AngularUnit.Degrees, HorizontalDatum.WGS84, PrimeMeridian.Greenwich,
                       new AxisInfo("north", AxisOrientationEnum.North), new AxisInfo("east", AxisOrientationEnum.East));
 
-                    List<ProjectionParameter> parameters = new()
-                    {
+                    List<ProjectionParameter> parameters =
+                    [
                         new ProjectionParameter("semi_major", 6378137.0),
                         new ProjectionParameter("semi_minor", 6378137.0),
                         new ProjectionParameter("latitude_of_origin", 0.0),
@@ -54,14 +54,14 @@ namespace FTAnalyzer.Mapping
                         new ProjectionParameter("scale_factor", 1.0),
                         new ProjectionParameter("false_easting", 0.0),
                         new ProjectionParameter("false_northing", 0.0)
-                    };
+                    ];
                     IProjection projection = csFac.CreateProjection("Google Mercator", "mercator_1sp", parameters);
 
                     ProjectedCoordinateSystem epsg900913 = csFac.CreateProjectedCoordinateSystem(
                       "Google Mercator", wgs84, projection, LinearUnit.Metre, new AxisInfo("East", AxisOrientationEnum.East),
                       new AxisInfo("North", AxisOrientationEnum.North));
 
-                    ((CoordinateSystem)epsg900913).DefaultEnvelope = new[] { -20037508.342789, -20037508.342789, 20037508.342789, 20037508.342789 };
+                    epsg900913.DefaultEnvelope = [-20037508.342789, -20037508.342789, 20037508.342789, 20037508.342789];
 
                     wgs84toGoogle = ctFac.CreateFromCoordinateSystems(wgs84, epsg900913);
 
