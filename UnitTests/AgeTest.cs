@@ -1,6 +1,6 @@
 ﻿using FTAnalyzer;
 
-namespace Testing
+namespace UnitTests
 {
     /// <summary>
     /// Summary description for AgeTest1
