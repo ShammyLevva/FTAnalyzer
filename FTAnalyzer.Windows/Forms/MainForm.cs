@@ -3941,7 +3941,6 @@ namespace FTAnalyzer
             }
         }
 
-        void groupBox10_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
 
         static void DrawBlackBorderGroupBox(object sender, PaintEventArgs e)
         {
@@ -3949,5 +3948,24 @@ namespace FTAnalyzer
             if (box is not null)
                 GraphicsUtilities.DrawGroupBox(box, e.Graphics, Color.Black, Color.Black, 3);
         }
+
+        void groupBox10_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void groupBox2_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+
+        void groupBox4_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+
+        void groupBox5_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+
+        void groupBox6_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+
+        void groupBox11_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+
+        void Referrals_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+
+        void gbFilters_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+
+        void groupBox3_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+
+        void groupBox7_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FTAnalyzer.Filters;
+using FTAnalyzer.Graphics;
 using System.ComponentModel;
 
 namespace FTAnalyzer.Forms.Controls
@@ -109,5 +110,12 @@ namespace FTAnalyzer.Forms.Controls
         void RbCanada_CheckedChanged(object sender, EventArgs e) => OnCountryChanged(e);
 
         void RbUSA_CheckedChanged(object sender, EventArgs e) => OnCountryChanged(e);
+
+        void groupBox1_Paint(object sender, PaintEventArgs e)
+        {
+            GroupBox? box = sender as GroupBox;
+            if (box is not null)
+                GraphicsUtilities.DrawGroupBox(box, e.Graphics, Color.Black, Color.Black, 3);
+        }
     }
 }

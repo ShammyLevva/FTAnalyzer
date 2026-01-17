@@ -34,109 +34,119 @@ namespace FTAnalyzer.Forms.Controls
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rbUSA = new System.Windows.Forms.RadioButton();
-            this.rbCanada = new System.Windows.Forms.RadioButton();
-            this.rbUK = new System.Windows.Forms.RadioButton();
-            this.rbWales = new System.Windows.Forms.RadioButton();
-            this.rbEngland = new System.Windows.Forms.RadioButton();
-            this.rbScotland = new System.Windows.Forms.RadioButton();
-            this.groupBox1.SuspendLayout();
-            this.SuspendLayout();
+            groupBox1 = new GroupBox();
+            rbUSA = new RadioButton();
+            rbCanada = new RadioButton();
+            rbUK = new RadioButton();
+            rbWales = new RadioButton();
+            rbEngland = new RadioButton();
+            rbScotland = new RadioButton();
+            groupBox1.SuspendLayout();
+            SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.rbUSA);
-            this.groupBox1.Controls.Add(this.rbCanada);
-            this.groupBox1.Controls.Add(this.rbUK);
-            this.groupBox1.Controls.Add(this.rbWales);
-            this.groupBox1.Controls.Add(this.rbEngland);
-            this.groupBox1.Controls.Add(this.rbScotland);
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(254, 72);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Census Country";
+            groupBox1.Controls.Add(rbUSA);
+            groupBox1.Controls.Add(rbCanada);
+            groupBox1.Controls.Add(rbUK);
+            groupBox1.Controls.Add(rbWales);
+            groupBox1.Controls.Add(rbEngland);
+            groupBox1.Controls.Add(rbScotland);
+            groupBox1.Location = new Point(0, 0);
+            groupBox1.Margin = new Padding(4, 3, 4, 3);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new Padding(4, 3, 4, 3);
+            groupBox1.Size = new Size(296, 83);
+            groupBox1.TabIndex = 1;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Census Country";
+            groupBox1.Paint += groupBox1_Paint;
             // 
             // rbUSA
             // 
-            this.rbUSA.AutoSize = true;
-            this.rbUSA.Location = new System.Drawing.Point(79, 42);
-            this.rbUSA.Name = "rbUSA";
-            this.rbUSA.Size = new System.Drawing.Size(89, 17);
-            this.rbUSA.TabIndex = 5;
-            this.rbUSA.Text = "United States";
-            this.rbUSA.UseVisualStyleBackColor = true;
-            this.rbUSA.CheckedChanged += new System.EventHandler(this.RbUSA_CheckedChanged);
+            rbUSA.AutoSize = true;
+            rbUSA.Location = new Point(92, 48);
+            rbUSA.Margin = new Padding(4, 3, 4, 3);
+            rbUSA.Name = "rbUSA";
+            rbUSA.Size = new Size(94, 19);
+            rbUSA.TabIndex = 5;
+            rbUSA.Text = "United States";
+            rbUSA.UseVisualStyleBackColor = true;
+            rbUSA.CheckedChanged += RbUSA_CheckedChanged;
             // 
             // rbCanada
             // 
-            this.rbCanada.AutoSize = true;
-            this.rbCanada.Location = new System.Drawing.Point(6, 42);
-            this.rbCanada.Name = "rbCanada";
-            this.rbCanada.Size = new System.Drawing.Size(62, 17);
-            this.rbCanada.TabIndex = 4;
-            this.rbCanada.Text = "Canada";
-            this.rbCanada.UseVisualStyleBackColor = true;
-            this.rbCanada.CheckedChanged += new System.EventHandler(this.RbCanada_CheckedChanged);
+            rbCanada.AutoSize = true;
+            rbCanada.Location = new Point(7, 48);
+            rbCanada.Margin = new Padding(4, 3, 4, 3);
+            rbCanada.Name = "rbCanada";
+            rbCanada.Size = new Size(65, 19);
+            rbCanada.TabIndex = 4;
+            rbCanada.Text = "Canada";
+            rbCanada.UseVisualStyleBackColor = true;
+            rbCanada.CheckedChanged += RbCanada_CheckedChanged;
             // 
             // rbUK
             // 
-            this.rbUK.AutoSize = true;
-            this.rbUK.Enabled = false;
-            this.rbUK.Location = new System.Drawing.Point(210, 19);
-            this.rbUK.Name = "rbUK";
-            this.rbUK.Size = new System.Drawing.Size(40, 17);
-            this.rbUK.TabIndex = 3;
-            this.rbUK.Text = "UK";
-            this.rbUK.UseVisualStyleBackColor = true;
+            rbUK.AutoSize = true;
+            rbUK.Enabled = false;
+            rbUK.Location = new Point(245, 22);
+            rbUK.Margin = new Padding(4, 3, 4, 3);
+            rbUK.Name = "rbUK";
+            rbUK.Size = new Size(40, 19);
+            rbUK.TabIndex = 3;
+            rbUK.Text = "UK";
+            rbUK.UseVisualStyleBackColor = true;
             // 
             // rbWales
             // 
-            this.rbWales.AutoSize = true;
-            this.rbWales.Location = new System.Drawing.Point(149, 19);
-            this.rbWales.Name = "rbWales";
-            this.rbWales.Size = new System.Drawing.Size(55, 17);
-            this.rbWales.TabIndex = 2;
-            this.rbWales.Text = "Wales";
-            this.rbWales.UseVisualStyleBackColor = true;
-            this.rbWales.CheckedChanged += new System.EventHandler(this.RbWales_CheckedChanged);
+            rbWales.AutoSize = true;
+            rbWales.Location = new Point(174, 22);
+            rbWales.Margin = new Padding(4, 3, 4, 3);
+            rbWales.Name = "rbWales";
+            rbWales.Size = new Size(56, 19);
+            rbWales.TabIndex = 2;
+            rbWales.Text = "Wales";
+            rbWales.UseVisualStyleBackColor = true;
+            rbWales.CheckedChanged += RbWales_CheckedChanged;
             // 
             // rbEngland
             // 
-            this.rbEngland.AutoSize = true;
-            this.rbEngland.Location = new System.Drawing.Point(79, 19);
-            this.rbEngland.Name = "rbEngland";
-            this.rbEngland.Size = new System.Drawing.Size(64, 17);
-            this.rbEngland.TabIndex = 1;
-            this.rbEngland.Text = "England";
-            this.rbEngland.UseVisualStyleBackColor = true;
-            this.rbEngland.CheckedChanged += new System.EventHandler(this.RbEngland_CheckedChanged);
+            rbEngland.AutoSize = true;
+            rbEngland.Location = new Point(92, 22);
+            rbEngland.Margin = new Padding(4, 3, 4, 3);
+            rbEngland.Name = "rbEngland";
+            rbEngland.Size = new Size(68, 19);
+            rbEngland.TabIndex = 1;
+            rbEngland.Text = "England";
+            rbEngland.UseVisualStyleBackColor = true;
+            rbEngland.CheckedChanged += RbEngland_CheckedChanged;
             // 
             // rbScotland
             // 
-            this.rbScotland.AutoSize = true;
-            this.rbScotland.Checked = true;
-            this.rbScotland.Location = new System.Drawing.Point(6, 19);
-            this.rbScotland.Name = "rbScotland";
-            this.rbScotland.Size = new System.Drawing.Size(67, 17);
-            this.rbScotland.TabIndex = 0;
-            this.rbScotland.TabStop = true;
-            this.rbScotland.Text = "Scotland";
-            this.rbScotland.UseVisualStyleBackColor = true;
-            this.rbScotland.CheckedChanged += new System.EventHandler(this.RbScotland_CheckedChanged);
+            rbScotland.AutoSize = true;
+            rbScotland.Checked = true;
+            rbScotland.Location = new Point(7, 22);
+            rbScotland.Margin = new Padding(4, 3, 4, 3);
+            rbScotland.Name = "rbScotland";
+            rbScotland.Size = new Size(71, 19);
+            rbScotland.TabIndex = 0;
+            rbScotland.TabStop = true;
+            rbScotland.Text = "Scotland";
+            rbScotland.UseVisualStyleBackColor = true;
+            rbScotland.CheckedChanged += RbScotland_CheckedChanged;
             // 
             // CensusCountry
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox1);
-            this.Name = "CensusCountry";
-            this.Size = new System.Drawing.Size(259, 78);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(groupBox1);
+            Margin = new Padding(4, 3, 4, 3);
+            Name = "CensusCountry";
+            Size = new Size(302, 90);
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ResumeLayout(false);
 
         }
 
