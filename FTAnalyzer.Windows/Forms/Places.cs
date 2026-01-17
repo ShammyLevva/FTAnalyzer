@@ -17,6 +17,7 @@ namespace FTAnalyzer.Forms
         ClusterLayer clusters;
         bool isloading;
         readonly IProgress<string> outputText;
+        CancellationTokenSource? buildMapCts;
 
         public Places(IProgress<string> outputText)
         {
@@ -50,7 +51,7 @@ namespace FTAnalyzer.Forms
                 Invoke(new Action(() => DatabaseHelper_GeoLocationUpdated(location, e)));
                 return;
             }
-            BuildMap();
+            _ = BuildMapAsync();
         }
 
         void SetupMap()
@@ -65,9 +66,13 @@ namespace FTAnalyzer.Forms
             MapHelper.SetScaleBar(mapBox1);
         }
 
-        void BuildMap()
+        async Task BuildMapAsync()
         {
             if (isloading) return;
+            // cancel any previous in-flight build and create a new token
+            buildMapCts?.Cancel();
+            buildMapCts = new CancellationTokenSource();
+            CancellationToken token = buildMapCts.Token;
             Cursor = Cursors.WaitCursor;
             try
             {
@@ -92,40 +97,68 @@ namespace FTAnalyzer.Forms
                     RefreshClusters();
                     return;
                 }
-                int count = 0;
+
                 pbPlaces.Visible = true;
+                pbPlaces.Minimum = 0;
                 pbPlaces.Maximum = list.Count;
-                foreach (Individual ind in list)
+                IProgress<(int processed, int total)> progress = new Progress<(int processed, int total)>(p =>
                 {
-                    foreach (DisplayFact dispfact in ind.AllGeocodedFacts.Cast<DisplayFact>())
+                    int processed = p.processed;
+                    int total = p.total;
+                    if (processed < pbPlaces.Minimum)
+                        processed = pbPlaces.Minimum;
+                    if (processed > pbPlaces.Maximum)
+                        processed = pbPlaces.Maximum;
+                    pbPlaces.Value = processed;
+                    if (processed % 10 == 0 || processed == total)
+                        txtCount.Text = $"Processed {processed} Individuals from list of {total}";
+                });
+
+                // run the expensive per-individual work on a background thread
+                await Task.Run(() =>
+                {
+                    int count = 0;
+                    foreach (Individual ind in list)
                     {
-                        foreach (Tuple<FactLocation, int> location in locations)
+                        if (token.IsCancellationRequested)
+                            return; // stop early if a newer build was requested
+                        foreach (DisplayFact dispfact in ind.AllGeocodedFacts.Cast<DisplayFact>())
                         {
-                            if (dispfact.Location.CompareTo(location.Item1, location.Item2) == 0)
+                            foreach (Tuple<FactLocation, int> location in locations)
                             {
-                                displayFacts.Add(dispfact);
-                                MapLocation loc = new(ind, dispfact.Fact, dispfact.FactDate);
-                                loc.AddFeatureDataRow(clusters.FactLocations);
-                                break;
+                                if (dispfact.Location.CompareTo(location.Item1, location.Item2) == 0)
+                                {
+                                    displayFacts.Add(dispfact);
+                                    MapLocation loc = new(ind, dispfact.Fact, dispfact.FactDate);
+                                    loc.AddFeatureDataRow(clusters.FactLocations);
+                                    break;
+                                }
                             }
                         }
+                        count++;
+                        progress.Report((count, list.Count));
                     }
-                    pbPlaces.Value = ++count;
-                    txtCount.Text = $"Processed {count} Individuals from list of {list.Count}";
-                    Application.DoEvents();
-                }
-                pbPlaces.Visible = false;
-                txtCount.Text = $"Downloading map tiles and computing clusters for {displayFacts.Count} facts. Please wait";
-                Application.DoEvents();
-                dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
+                }, token);
 
-                Envelope expand = MapHelper.GetExtents(clusters.FactLocations);
-                mapBox1.Map.ZoomToBox(expand);
-                mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
-                RefreshClusters();
-                txtCount.Text = $"{dgFacts.RowCount} Geolocated fact(s) displayed";
+                pbPlaces.Visible = false;
+                if (!token.IsCancellationRequested)
+                {
+                    txtCount.Text = $"Downloading map tiles and computing clusters for {displayFacts.Count} facts. Please wait";
+                    dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
+
+                    Envelope expand = MapHelper.GetExtents(clusters.FactLocations);
+                    mapBox1.Map.ZoomToBox(expand);
+                    mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
+                    RefreshClusters();
+                    txtCount.Text = $"{dgFacts.RowCount} Geolocated fact(s) displayed";
+                }
             }
-            catch (Exception) { }
+            catch (OperationCanceledException)
+            {
+                // swallow cancellations – a newer BuildMapAsync will take over
+            }
+            catch (Exception)
+            { }
             Cursor = Cursors.Default;
         }
 
@@ -147,6 +180,9 @@ namespace FTAnalyzer.Forms
         {
             try
             {
+                // cancel any in-flight map building triggered by this form
+                buildMapCts?.Cancel();
+                buildMapCts = null;
                 DatabaseHelper.GeoLocationUpdated -= DatabaseHelper_GeoLocationUpdated;
                 tvPlaces.Nodes.Clear();
                 Dispose();
@@ -188,7 +224,7 @@ namespace FTAnalyzer.Forms
             catch (Exception) { }
         }
 
-        void TvPlaces_AfterSelect(object sender, TreeViewEventArgs e) => BuildMap();
+        async void TvPlaces_AfterSelect(object sender, TreeViewEventArgs e) => await BuildMapAsync();
 
         void TvPlaces_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {

@@ -7,6 +7,7 @@ Fixed sorting on grids when clicking column headers
 Fixed grid cell formatting to ignore icon columns  
 Fixed Export to Excel Individuals report not using export interface  
 Tidyup some async code to remove old behaviours  
+Fix Places form to allow async running and cancelation behaviour  
 
 ## Release Candidate Version 10.0.0.0-RC2 - 16th January 2026  
 **Updates**  
