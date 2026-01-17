@@ -14,9 +14,6 @@ namespace FTAnalyzer.Forms.Controls
         internal SortableBindingList<T> _fulllist;
         public string FilterCountText { get; private set; }
 
-        DataGridViewColumn? _lastSortedColumn;
-        ListSortDirection _lastSortDirection = ListSortDirection.Ascending;
-
         protected VirtualDataGridView()
         {
             _dataSource = [];
@@ -40,7 +37,7 @@ namespace FTAnalyzer.Forms.Controls
             ResizeRedraw = true;
             RowHeadersVisible = false;
             RowHeadersWidth = 50;
-            FilterAndSortEnabled = false; // we’ll handle sorting ourselves
+            FilterAndSortEnabled = true;
             SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             ScrollBars = ScrollBars.Both;
             CellValueNeeded += OnCellValueNeeded;
@@ -48,18 +45,8 @@ namespace FTAnalyzer.Forms.Controls
             Resize += OnResizeChanged;
 
             FilterStringChanged += OnFilterStringChanged;
-            SortStringChanged += OnSortStringChanged;
-
-            // handle header clicks directly
-            ColumnHeaderMouseClick += OnColumnHeaderMouseClick;
 
             SetDoubleBuffered();
-        }
-
-        void OnSortStringChanged(object? sender, SortEventArgs e)
-        {
-            // Intentionally do nothing here.
-            // Header clicks and dropdown sorts are handled explicitly in OnColumnHeaderMouseClick.
         }
 
         public void OnFilterStringChanged(object? sender, FilterEventArgs e)
@@ -279,38 +266,6 @@ namespace FTAnalyzer.Forms.Controls
 
                 return _direction * val1.CompareTo(val2);
             }
-        }
-
-        void OnColumnHeaderMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.Button != MouseButtons.Left || e.ColumnIndex < 0)
-                return;
-
-            DataGridViewColumn column = Columns[e.ColumnIndex];
-            if (column.SortMode == DataGridViewColumnSortMode.NotSortable)
-                return;
-
-            // Decide direction based on our own remembered state, not ADGV's
-            ListSortDirection direction;
-            if (_lastSortedColumn != column)
-            {
-                // New column: always start ascending
-                direction = ListSortDirection.Ascending;
-            }
-            else
-            {
-                // Same column: toggle
-                direction = _lastSortDirection == ListSortDirection.Ascending
-                    ? ListSortDirection.Descending
-                    : ListSortDirection.Ascending;
-            }
-
-            // Perform the sort
-            base.Sort(column, direction);
-
-            // Remember for next click
-            _lastSortedColumn = column;
-            _lastSortDirection = direction;
         }
     }
 }
