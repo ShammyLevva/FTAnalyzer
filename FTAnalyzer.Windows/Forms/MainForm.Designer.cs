@@ -1266,6 +1266,7 @@ namespace FTAnalyzer
             dgCountries.TabIndex = 1;
             toolTips.SetToolTip(dgCountries, "Double click on Country name to see list of individuals with that Country.");
             dgCountries.VirtualMode = true;
+            dgCountries.CellFormatting += DgCountries_CellFormatting;
             // 
             // dgRegions
             // 
@@ -1292,6 +1293,7 @@ namespace FTAnalyzer
             dgRegions.TabIndex = 2;
             toolTips.SetToolTip(dgRegions, "Double click on Region name to see list of individuals with that Region.");
             dgRegions.VirtualMode = true;
+            dgRegions.CellFormatting += DgRegions_CellFormatting;
             // 
             // btnRandomSurnameColour
             // 

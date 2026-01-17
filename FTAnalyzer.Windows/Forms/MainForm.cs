@@ -1051,31 +1051,31 @@ namespace FTAnalyzer
 
         void DgCountries_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 0 || e.ColumnIndex == dgCountries?.Columns[nameof(IDisplayLocation.Icon)].Index)
+            if (e.ColumnIndex == 1 || e.ColumnIndex == 2)
                 FormatCellLocations(dgCountries, e);
         }
 
         void DgRegions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns[nameof(IDisplayLocation.Icon)].Index)
+            if (e.ColumnIndex == 1 || e.ColumnIndex == 2)
                 FormatCellLocations(dgRegions, e);
         }
 
         void DgSubRegions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns[nameof(IDisplayLocation.Icon)].Index)
+            if (e.ColumnIndex == 1 || e.ColumnIndex == 2)
                 FormatCellLocations(dgSubRegions, e);
         }
 
         void DgAddresses_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns[nameof(IDisplayLocation.Icon)].Index)
+            if (e.ColumnIndex == 1 || e.ColumnIndex == 2)
                 FormatCellLocations(dgAddresses, e);
         }
 
         void DgPlaces_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex <= 1 || e.ColumnIndex == dgCountries?.Columns[nameof(IDisplayLocation.Icon)].Index)
+            if (e.ColumnIndex == 1 || e.ColumnIndex == 2)
                 FormatCellLocations(dgPlaces, e);
         }
         #endregion
