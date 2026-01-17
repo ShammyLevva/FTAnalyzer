@@ -25,7 +25,7 @@ namespace FTAnalyzer.Forms.Controls
             AllowUserToResizeColumns = true;
             AllowUserToResizeRows = true;
             AutoGenerateColumns = false;
-
+          
             AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
             ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
