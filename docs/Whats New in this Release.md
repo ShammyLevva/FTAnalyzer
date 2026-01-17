@@ -1,6 +1,7 @@
 ## Release Candidate Version 10.0.0.0-RC3 - 17th January 2026  
 **Updates**  
 Added 1926 Irish Census fields to exports and reports  
+Enhanced group box formatting to have cleaner black borders  
 
 **Bugfixes**  
 Fixed sorting on grids when clicking column headers  
@@ -10,6 +11,10 @@ Tidyup some async code to remove old behaviours
 Fix Places form to allow async running and cancelation behaviour  
 Display Locations no longer shows UNKNOWN_LOCATION  
 Location grids correctly display formatting  
+Fixed sorting in AdvancedDataGridView to work with clicking column headers  
+Fixed icon in AdvancedDataGridView too small  
+Fixed bug in CensusReferences from RC1 that was ignoring any reference with a number  
+Fix resizing issue on On This Day tab  
 
 ## Release Candidate Version 10.0.0.0-RC2 - 16th January 2026  
 **Updates**  
