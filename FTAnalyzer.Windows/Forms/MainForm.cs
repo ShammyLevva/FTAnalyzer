@@ -3106,15 +3106,16 @@ namespace FTAnalyzer
 
         void BtnAdvancedMissingData_Click(object sender, EventArgs e)
         {
-            HourGlass(this, true);
-            Predicate<Individual> relTypeFilter = relTypesResearchSuggest.BuildFilter<Individual>(x => x.RelationType);
-            ComboBoxFamily? cbFamily = cmbColourFamily.SelectedItem as ComboBoxFamily;
-            List<IDisplayMissingData> list = ft.MissingData(relTypeFilter, txtColouredSurname.Text, cbFamily);
-            MissingData rs = new(list);
-            DisposeDuplicateForms(rs);
-            rs.Show();
-            rs.Focus();
-            HourGlass(this, false);
+            // TODO Implement Advanced Missing Data Report - restore below code when done
+            //HourGlass(this, true);
+            //Predicate<Individual> relTypeFilter = relTypesResearchSuggest.BuildFilter<Individual>(x => x.RelationType);
+            //ComboBoxFamily? cbFamily = cmbColourFamily.SelectedItem as ComboBoxFamily;
+            //List<IDisplayMissingData> list = ft.MissingData(relTypeFilter, txtColouredSurname.Text, cbFamily);
+            //MissingData rs = new(list);
+            //DisposeDuplicateForms(rs);
+            //rs.Show();
+            //rs.Focus();
+            //HourGlass(this, false);
         }
 
         void CmbColourFamily_Click(object sender, EventArgs e) => UpdateColourFamilyComboBox(null);

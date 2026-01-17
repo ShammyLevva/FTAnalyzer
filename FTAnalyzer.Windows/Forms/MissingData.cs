@@ -5,7 +5,7 @@ namespace FTAnalyzer.Forms
     public partial class MissingData : Form
     {
 
-        public MissingData(List<IDisplayMissingData> list)
+        public MissingData() // should be List<IDisplayMissingData> list once implemented
         {
             InitializeComponent();
             Top += NativeMethods.TopTaskbarOffset;
