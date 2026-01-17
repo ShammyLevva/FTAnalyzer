@@ -458,7 +458,7 @@ namespace FTAnalyzer.Forms
 
         #region Google Geocode Threading
 
-        void GoogleGeocodingBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        async void GoogleGeocodingBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             var worker = (BackgroundWorker)sender;
             bool retryPartials = false;
@@ -472,9 +472,7 @@ namespace FTAnalyzer.Forms
             {
                 retryPartials = b;
             }
-
-            // Run async geocoding on worker thread; safe to block here.
-            GoogleGeoCodeAsync(worker, e, retryPartials, token).GetAwaiter().GetResult();
+            await GoogleGeoCodeAsync(worker, e, retryPartials, token);
         }
 
         void GoogleGeocodingBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e) => GeoCodingProgressChanged(e);
@@ -549,29 +547,25 @@ namespace FTAnalyzer.Forms
             txtGoogleWait.Text = args.Message;
         }
 
-        void ReverseGeocodeBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        async void ReverseGeocodeBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             // ensure we have a CTS for this reverse geocode run
             reverseGeocodeCts?.Cancel();
             reverseGeocodeCts = new CancellationTokenSource();
             var token = reverseGeocodeCts.Token;
-
-            // run async helper on worker thread; safe to block here
-            ReverseGeoCodeAsync(reverseGeocodeBackgroundWorker, e, token).GetAwaiter().GetResult();
+            await ReverseGeoCodeAsync(reverseGeocodeBackgroundWorker, e, token);
         }
 
         #endregion
 
         #region Google Geocoding
 
-        void EmptyViewPortsBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        async void EmptyViewPortsBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             emptyViewPortsCts?.Cancel();
             emptyViewPortsCts = new CancellationTokenSource();
             var token = emptyViewPortsCts.Token;
-
-            // run async helper on worker thread; safe to block here
-            CheckEmptyViewPortsAsync(EmptyViewPortsBackgroundWorker, e, token).GetAwaiter().GetResult();
+            await CheckEmptyViewPortsAsync(EmptyViewPortsBackgroundWorker, e, token);
         }
 
         public void StartGoogleGeoCoding(bool retryPartials)
