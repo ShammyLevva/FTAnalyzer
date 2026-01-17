@@ -3653,7 +3653,7 @@ namespace FTAnalyzer
                     rowCount++;
                 }
                 current++;
-                if (lineCount %10 == 0)
+                if (lineCount % 10 == 0)
                     progress.Report(current * 100 / lineCount);
             }
             UIHelpers.ShowMessage($"Loaded {rowCount} locations from TNG file {tngFilename}", APPNAME);
@@ -3687,7 +3687,7 @@ namespace FTAnalyzer
                         rowCount++;
                     }
                     current++;
-                    if (lineCount %10 == 0)
+                    if (lineCount % 10 == 0)
                         progress.Report(current * 100 / lineCount);
                 }
             }
@@ -3939,6 +3939,15 @@ namespace FTAnalyzer
             {
                 UIHelpers.ShowMessage(ex.Message, APPNAME);
             }
+        }
+
+        void groupBox10_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+
+        static void DrawBlackBorderGroupBox(object sender, PaintEventArgs e)
+        {
+            GroupBox? box = sender as GroupBox;
+            if (box is not null)
+                GraphicsUtilities.DrawGroupBox(box, e.Graphics, Color.Black, Color.Black, 3);
         }
     }
 }

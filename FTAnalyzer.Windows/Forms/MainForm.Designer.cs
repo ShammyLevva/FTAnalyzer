@@ -1221,8 +1221,6 @@ namespace FTAnalyzer
             dgDataErrors.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgDataErrors.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgDataErrors.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgDataErrors.FilterAndSortEnabled = true;
-            dgDataErrors.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgDataErrors.Location = new Point(9, 195);
             dgDataErrors.Margin = new Padding(7);
             dgDataErrors.MultiSelect = false;
@@ -1235,7 +1233,6 @@ namespace FTAnalyzer
             dgDataErrors.ShowCellToolTips = false;
             dgDataErrors.ShowEditingIcon = false;
             dgDataErrors.Size = new Size(1221, 243);
-            dgDataErrors.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgDataErrors.TabIndex = 7;
             toolTips.SetToolTip(dgDataErrors, "Double click to see list of facts for that individual");
             dgDataErrors.VirtualMode = true;
@@ -1250,8 +1247,6 @@ namespace FTAnalyzer
             dgCountries.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgCountries.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgCountries.Dock = DockStyle.Fill;
-            dgCountries.FilterAndSortEnabled = true;
-            dgCountries.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgCountries.Location = new Point(4, 4);
             dgCountries.Margin = new Padding(7);
             dgCountries.MultiSelect = false;
@@ -1262,7 +1257,6 @@ namespace FTAnalyzer
             dgCountries.RowHeadersWidth = 50;
             dgCountries.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgCountries.Size = new Size(1218, 426);
-            dgCountries.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgCountries.TabIndex = 1;
             toolTips.SetToolTip(dgCountries, "Double click on Country name to see list of individuals with that Country.");
             dgCountries.VirtualMode = true;
@@ -1277,8 +1271,6 @@ namespace FTAnalyzer
             dgRegions.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgRegions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgRegions.Dock = DockStyle.Fill;
-            dgRegions.FilterAndSortEnabled = true;
-            dgRegions.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgRegions.Location = new Point(4, 4);
             dgRegions.Margin = new Padding(7);
             dgRegions.MultiSelect = false;
@@ -1289,7 +1281,6 @@ namespace FTAnalyzer
             dgRegions.RowHeadersWidth = 50;
             dgRegions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgRegions.Size = new Size(1218, 426);
-            dgRegions.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgRegions.TabIndex = 2;
             toolTips.SetToolTip(dgRegions, "Double click on Region name to see list of individuals with that Region.");
             dgRegions.VirtualMode = true;
@@ -1495,8 +1486,6 @@ namespace FTAnalyzer
             dgWorldWars.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgWorldWars.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgWorldWars.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgWorldWars.FilterAndSortEnabled = true;
-            dgWorldWars.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgWorldWars.Location = new Point(0, 151);
             dgWorldWars.Margin = new Padding(7);
             dgWorldWars.MultiSelect = false;
@@ -1507,7 +1496,6 @@ namespace FTAnalyzer
             dgWorldWars.RowHeadersWidth = 50;
             dgWorldWars.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgWorldWars.Size = new Size(1238, 315);
-            dgWorldWars.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgWorldWars.TabIndex = 29;
             dgWorldWars.VirtualMode = true;
             dgWorldWars.CellDoubleClick += DgWorldWars_CellDoubleClick;
@@ -1631,8 +1619,6 @@ namespace FTAnalyzer
             dgTreeTops.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgTreeTops.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgTreeTops.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgTreeTops.FilterAndSortEnabled = true;
-            dgTreeTops.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgTreeTops.Location = new Point(0, 151);
             dgTreeTops.Margin = new Padding(7);
             dgTreeTops.MultiSelect = false;
@@ -1643,7 +1629,6 @@ namespace FTAnalyzer
             dgTreeTops.RowHeadersWidth = 50;
             dgTreeTops.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgTreeTops.Size = new Size(1238, 315);
-            dgTreeTops.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgTreeTops.TabIndex = 28;
             dgTreeTops.VirtualMode = true;
             dgTreeTops.CellDoubleClick += DgTreeTops_CellDoubleClick;
@@ -2493,6 +2478,7 @@ namespace FTAnalyzer
             // 
             // groupBox10
             // 
+            groupBox10.BackColor = Color.Transparent;
             groupBox10.Controls.Add(btnShowCensusMissing);
             groupBox10.Controls.Add(btnShowCensusEntered);
             groupBox10.Controls.Add(btnRandomSurnameEntered);
@@ -2505,6 +2491,7 @@ namespace FTAnalyzer
             groupBox10.TabIndex = 35;
             groupBox10.TabStop = false;
             groupBox10.Text = "Census Record Reports";
+            groupBox10.Paint += groupBox10_Paint;
             // 
             // btnShowCensusMissing
             // 
@@ -3006,8 +2993,6 @@ namespace FTAnalyzer
             dgSubRegions.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgSubRegions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgSubRegions.Dock = DockStyle.Fill;
-            dgSubRegions.FilterAndSortEnabled = true;
-            dgSubRegions.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgSubRegions.Location = new Point(4, 4);
             dgSubRegions.Margin = new Padding(7);
             dgSubRegions.MultiSelect = false;
@@ -3018,7 +3003,6 @@ namespace FTAnalyzer
             dgSubRegions.RowHeadersWidth = 50;
             dgSubRegions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgSubRegions.Size = new Size(1218, 426);
-            dgSubRegions.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgSubRegions.TabIndex = 1;
             dgSubRegions.VirtualMode = true;
             dgSubRegions.CellDoubleClick += DgSubRegions_CellDoubleClick;
@@ -3046,8 +3030,6 @@ namespace FTAnalyzer
             dgAddresses.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgAddresses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgAddresses.Dock = DockStyle.Fill;
-            dgAddresses.FilterAndSortEnabled = true;
-            dgAddresses.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgAddresses.Location = new Point(4, 4);
             dgAddresses.Margin = new Padding(7);
             dgAddresses.MultiSelect = false;
@@ -3058,7 +3040,6 @@ namespace FTAnalyzer
             dgAddresses.RowHeadersWidth = 50;
             dgAddresses.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgAddresses.Size = new Size(1218, 426);
-            dgAddresses.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgAddresses.TabIndex = 1;
             dgAddresses.VirtualMode = true;
             dgAddresses.CellDoubleClick += DgAddresses_CellDoubleClick;
@@ -3086,8 +3067,6 @@ namespace FTAnalyzer
             dgPlaces.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgPlaces.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgPlaces.Dock = DockStyle.Fill;
-            dgPlaces.FilterAndSortEnabled = true;
-            dgPlaces.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgPlaces.Location = new Point(4, 4);
             dgPlaces.Margin = new Padding(7);
             dgPlaces.MultiSelect = false;
@@ -3098,7 +3077,6 @@ namespace FTAnalyzer
             dgPlaces.RowHeadersWidth = 50;
             dgPlaces.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgPlaces.Size = new Size(1218, 426);
-            dgPlaces.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgPlaces.TabIndex = 2;
             dgPlaces.VirtualMode = true;
             dgPlaces.CellDoubleClick += DgPlaces_CellDoubleClick;
@@ -3337,8 +3315,6 @@ namespace FTAnalyzer
             dgIndividuals.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgIndividuals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgIndividuals.Dock = DockStyle.Fill;
-            dgIndividuals.FilterAndSortEnabled = true;
-            dgIndividuals.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgIndividuals.Location = new Point(4, 4);
             dgIndividuals.Margin = new Padding(7);
             dgIndividuals.MultiSelect = false;
@@ -3349,7 +3325,6 @@ namespace FTAnalyzer
             dgIndividuals.RowHeadersWidth = 50;
             dgIndividuals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgIndividuals.Size = new Size(1218, 426);
-            dgIndividuals.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgIndividuals.TabIndex = 1;
             dgIndividuals.VirtualMode = true;
             dgIndividuals.CellDoubleClick += DgIndividuals_CellDoubleClick;
@@ -3376,8 +3351,6 @@ namespace FTAnalyzer
             dgFamilies.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgFamilies.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgFamilies.Dock = DockStyle.Fill;
-            dgFamilies.FilterAndSortEnabled = true;
-            dgFamilies.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgFamilies.Location = new Point(4, 4);
             dgFamilies.Margin = new Padding(7);
             dgFamilies.MultiSelect = false;
@@ -3388,7 +3361,6 @@ namespace FTAnalyzer
             dgFamilies.RowHeadersWidth = 50;
             dgFamilies.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgFamilies.Size = new Size(1218, 426);
-            dgFamilies.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgFamilies.TabIndex = 2;
             dgFamilies.VirtualMode = true;
             dgFamilies.CellDoubleClick += DgFamilies_CellDoubleClick;
@@ -3413,8 +3385,6 @@ namespace FTAnalyzer
             dgSources.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgSources.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgSources.Dock = DockStyle.Fill;
-            dgSources.FilterAndSortEnabled = true;
-            dgSources.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgSources.Location = new Point(0, 0);
             dgSources.Margin = new Padding(7);
             dgSources.MultiSelect = false;
@@ -3425,7 +3395,6 @@ namespace FTAnalyzer
             dgSources.RowHeadersWidth = 50;
             dgSources.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgSources.Size = new Size(1222, 430);
-            dgSources.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgSources.TabIndex = 2;
             dgSources.VirtualMode = true;
             dgSources.CellDoubleClick += DgSources_CellDoubleClick;
@@ -3450,8 +3419,6 @@ namespace FTAnalyzer
             dgOccupations.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgOccupations.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgOccupations.Dock = DockStyle.Fill;
-            dgOccupations.FilterAndSortEnabled = true;
-            dgOccupations.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgOccupations.Location = new Point(0, 0);
             dgOccupations.Margin = new Padding(7);
             dgOccupations.MultiSelect = false;
@@ -3462,7 +3429,6 @@ namespace FTAnalyzer
             dgOccupations.RowHeadersWidth = 50;
             dgOccupations.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgOccupations.Size = new Size(1222, 430);
-            dgOccupations.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgOccupations.TabIndex = 3;
             dgOccupations.VirtualMode = true;
             dgOccupations.CellDoubleClick += DgOccupations_CellDoubleClick;
@@ -3487,8 +3453,6 @@ namespace FTAnalyzer
             dgCustomFacts.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgCustomFacts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgCustomFacts.Dock = DockStyle.Fill;
-            dgCustomFacts.FilterAndSortEnabled = true;
-            dgCustomFacts.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgCustomFacts.Location = new Point(0, 0);
             dgCustomFacts.Margin = new Padding(7);
             dgCustomFacts.MultiSelect = false;
@@ -3499,7 +3463,6 @@ namespace FTAnalyzer
             dgCustomFacts.RowHeadersWidth = 50;
             dgCustomFacts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgCustomFacts.Size = new Size(1222, 430);
-            dgCustomFacts.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgCustomFacts.TabIndex = 4;
             dgCustomFacts.VirtualMode = true;
             dgCustomFacts.CellDoubleClick += DgCustomFacts_CellDoubleClick;
@@ -3708,8 +3671,6 @@ namespace FTAnalyzer
             dgDuplicates.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgDuplicates.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgDuplicates.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgDuplicates.FilterAndSortEnabled = true;
-            dgDuplicates.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgDuplicates.Location = new Point(-1, 100);
             dgDuplicates.Margin = new Padding(7);
             dgDuplicates.MultiSelect = false;
@@ -3720,7 +3681,6 @@ namespace FTAnalyzer
             dgDuplicates.RowHeadersWidth = 50;
             dgDuplicates.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgDuplicates.Size = new Size(1231, 338);
-            dgDuplicates.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgDuplicates.TabIndex = 19;
             dgDuplicates.VirtualMode = true;
             dgDuplicates.CellContentClick += DgDuplicates_CellContentClick;
@@ -3746,8 +3706,6 @@ namespace FTAnalyzer
             dgLooseBirths.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgLooseBirths.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgLooseBirths.Dock = DockStyle.Fill;
-            dgLooseBirths.FilterAndSortEnabled = true;
-            dgLooseBirths.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgLooseBirths.Location = new Point(0, 0);
             dgLooseBirths.Margin = new Padding(7);
             dgLooseBirths.MultiSelect = false;
@@ -3758,7 +3716,6 @@ namespace FTAnalyzer
             dgLooseBirths.RowHeadersWidth = 50;
             dgLooseBirths.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgLooseBirths.Size = new Size(1230, 438);
-            dgLooseBirths.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgLooseBirths.TabIndex = 3;
             dgLooseBirths.VirtualMode = true;
             dgLooseBirths.CellDoubleClick += DgLooseBirths_CellDoubleClick;
@@ -3783,8 +3740,6 @@ namespace FTAnalyzer
             dgLooseDeaths.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgLooseDeaths.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgLooseDeaths.Dock = DockStyle.Fill;
-            dgLooseDeaths.FilterAndSortEnabled = true;
-            dgLooseDeaths.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgLooseDeaths.Location = new Point(0, 0);
             dgLooseDeaths.Margin = new Padding(7);
             dgLooseDeaths.MultiSelect = false;
@@ -3795,7 +3750,6 @@ namespace FTAnalyzer
             dgLooseDeaths.RowHeadersWidth = 50;
             dgLooseDeaths.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgLooseDeaths.Size = new Size(1230, 438);
-            dgLooseDeaths.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgLooseDeaths.TabIndex = 2;
             dgLooseDeaths.VirtualMode = true;
             dgLooseDeaths.CellDoubleClick += DgLooseDeaths_CellDoubleClick;
@@ -3820,8 +3774,6 @@ namespace FTAnalyzer
             dgLooseInfo.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgLooseInfo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgLooseInfo.Dock = DockStyle.Fill;
-            dgLooseInfo.FilterAndSortEnabled = true;
-            dgLooseInfo.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgLooseInfo.Location = new Point(0, 0);
             dgLooseInfo.Margin = new Padding(7);
             dgLooseInfo.MultiSelect = false;
@@ -3832,7 +3784,6 @@ namespace FTAnalyzer
             dgLooseInfo.RowHeadersWidth = 50;
             dgLooseInfo.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgLooseInfo.Size = new Size(1230, 438);
-            dgLooseInfo.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgLooseInfo.TabIndex = 4;
             dgLooseInfo.VirtualMode = true;
             dgLooseInfo.CellDoubleClick += DgLooseInfo_CellDoubleClick;
@@ -3886,8 +3837,6 @@ namespace FTAnalyzer
             dgSurnames.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgSurnames.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgSurnames.Columns.AddRange(new DataGridViewColumn[] { Surname, URI, Individuals, Families, Marriages });
-            dgSurnames.FilterAndSortEnabled = true;
-            dgSurnames.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             dgSurnames.Location = new Point(4, 119);
             dgSurnames.Margin = new Padding(7);
             dgSurnames.MultiSelect = false;
@@ -3898,7 +3847,6 @@ namespace FTAnalyzer
             dgSurnames.RowHeadersWidth = 50;
             dgSurnames.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgSurnames.Size = new Size(1234, 347);
-            dgSurnames.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             dgSurnames.TabIndex = 1;
             dgSurnames.VirtualMode = true;
             dgSurnames.CellContentClick += DgSurnames_CellContentClick;

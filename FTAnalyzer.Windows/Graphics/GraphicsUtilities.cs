@@ -54,5 +54,35 @@ namespace FTAnalyzer.Graphics
             return dx / 96;
         }
 
+        public static void DrawGroupBox(GroupBox box, System.Drawing.Graphics g, Color textColor, Color borderColor, float borderWidth)
+        {
+            if (box != null)
+            {
+                Brush textBrush = new SolidBrush(textColor);
+                Brush borderBrush = new SolidBrush(borderColor);
+                Pen borderPen = new(borderBrush, borderWidth);
+                SizeF strSize = g.MeasureString(box.Text, box.Font);
+                Rectangle rect = new(box.ClientRectangle.X,
+                                     box.ClientRectangle.Y + (int)(strSize.Height / 2),
+                                     box.ClientRectangle.Width - 1,
+                                     box.ClientRectangle.Height - (int)(strSize.Height / 2) - 1);
+
+                // Draw text
+                g.DrawString(box.Text, box.Font, textBrush, box.Padding.Left, 0);
+
+                // Drawing Border
+                //Left
+                g.DrawLine(borderPen, rect.Location, new Point(rect.X, rect.Y + rect.Height));
+                //Right
+                g.DrawLine(borderPen, new Point(rect.X + rect.Width, rect.Y), new Point(rect.X + rect.Width, rect.Y + rect.Height));
+                //Bottom
+                g.DrawLine(borderPen, new Point(rect.X, rect.Y + rect.Height), new Point(rect.X + rect.Width, rect.Y + rect.Height));
+                //Top1
+                g.DrawLine(borderPen, new Point(rect.X, rect.Y), new Point(rect.X + box.Padding.Left, rect.Y));
+                //Top2
+                g.DrawLine(borderPen, new Point(rect.X + box.Padding.Left + (int)(strSize.Width), rect.Y), new Point(rect.X + rect.Width, rect.Y));
+            }
+        }
+
     }
 }
