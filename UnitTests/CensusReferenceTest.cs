@@ -65,6 +65,7 @@ namespace UnitTests
             USCensusTest("Microfilm M19 Roll 1337 State Utah County Salt Lake ED 57 Page 272B Dwelling Number 186 Family 191", CensusDate.USCENSUS1830, "1337", "57", "272B");
             USCensusTest("Year 1900 Census Rochester Ward 9 Monroe New York Page 5 ED 0067 FHL microfilm", CensusDate.USCENSUS1900, "", "0067", "5");
             USCensusTest("Year 1930 Census Trenton Mercer New Jersey Page 1B ED 0054 FHL", CensusDate.USCENSUS1930, "", "0054", "1B");
+            //USCensusTest("Year: 1920; Census Place: Hartford, Trumbull, OH; Roll: T625_1443; Page: 6B; Enumeration District: 258; Image: 292", CensusDate.USCENSUS1920, "T265_1443", "258", "6B");
         }
 
         [TestMethod]
