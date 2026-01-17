@@ -1,18 +1,21 @@
 ﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.Marshalling;
+using System.Runtime.Versioning;
 
 
 namespace FTAnalyzer.Utilities
 {
+    [SupportedOSPlatform("windows")]
     class ScrollingRichTextBox : RichTextBox
     {
         private class NativeMethods
         {
             [DllImport("user32.dll", CharSet = CharSet.Auto)]
             public static extern IntPtr SendMessage(
-              IntPtr hWnd,
-              uint Msg,
-              IntPtr wParam,
-              IntPtr lParam);
+                IntPtr hWnd,
+                uint Msg,
+                IntPtr wParam,
+                IntPtr lParam);
         }
 
         private const int WM_VSCROLL = 277;

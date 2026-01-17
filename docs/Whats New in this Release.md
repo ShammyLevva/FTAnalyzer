@@ -5,6 +5,7 @@ Added 1926 Irish Census fields to exports and reports
 **Bugfixes**  
 Fixed sorting on grids when clicking column headers  
 Fixed grid cell formatting to ignore icon columns  
+Fixed Export to Excel Individuals report not using export interface  
 
 ## Release Candidate Version 10.0.0.0-RC2 - 16th January 2026  
 **Updates**  

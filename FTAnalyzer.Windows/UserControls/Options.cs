@@ -19,7 +19,7 @@ namespace FTAnalyzer.UserControls
         {
             InitializeComponent();
             GeneralSettings.Default.ReloadRequired = false;
-            _lookupTable = new Dictionary<string, UserControl>();
+            _lookupTable = [];
         }
 
         void Options_Load(object sender, EventArgs e)
@@ -121,7 +121,7 @@ namespace FTAnalyzer.UserControls
 
         void OK_Click(object sender, EventArgs e)
         {
-            List<string> controlErrors = new();
+            List<string> controlErrors = [];
             foreach (Control control in panel1.Controls)
             {
                 if (control is IOptions options)

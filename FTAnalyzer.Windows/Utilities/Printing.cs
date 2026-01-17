@@ -2,16 +2,10 @@
 
 namespace FTAnalyzer.Utilities
 {
-    class Printing : IDisposable
+    class Printing(ScrollingRichTextBox rtb) : IDisposable
     {
-        readonly ScrollingRichTextBox rtb;
-        readonly StringReader reader;
-
-        public Printing(ScrollingRichTextBox rtb)
-        {
-            this.rtb = rtb;
-            reader = new StringReader(rtb.Text);
-        }
+        readonly ScrollingRichTextBox rtb = rtb;
+        readonly StringReader reader = new(rtb.Text);
 
         public void PrintPage(object sender, PrintPageEventArgs e)
         {
