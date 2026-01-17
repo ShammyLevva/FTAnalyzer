@@ -2663,7 +2663,6 @@ namespace FTAnalyzer
         {
             try
             {
-                rtbToday.Top = dpToday.Top + 30;
                 splitGedcom.Height = 100;
                 SavePosition();
             }

@@ -111,7 +111,7 @@ namespace FTAnalyzer.Forms.Controls
 
         void RbUSA_CheckedChanged(object sender, EventArgs e) => OnCountryChanged(e);
 
-        void groupBox1_Paint(object sender, PaintEventArgs e)
+        void GroupBox1_Paint(object sender, PaintEventArgs e)
         {
             GroupBox? box = sender as GroupBox;
             if (box is not null)

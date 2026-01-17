@@ -60,7 +60,7 @@ namespace FTAnalyzer.Forms.Controls
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "Census Country";
-            groupBox1.Paint += groupBox1_Paint;
+            groupBox1.Paint += GroupBox1_Paint;
             // 
             // rbUSA
             // 

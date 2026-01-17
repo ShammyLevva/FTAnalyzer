@@ -365,6 +365,17 @@ namespace FTAnalyzer
             ckbFactSelect = new CheckedListBox();
             relTypesFacts = new FTAnalyzer.Forms.Controls.RelationTypes();
             tabToday = new TabPage();
+            panel3 = new Panel();
+            labTodayYearStep = new Label();
+            nudToday = new NumericUpDown();
+            btnUpdateTodaysEvents = new Button();
+            labTodayLoadWorldEvents = new Label();
+            pbToday = new ProgressBar();
+            rbTodayMonth = new RadioButton();
+            rbTodaySingle = new RadioButton();
+            labTodaySelectDate = new Label();
+            dpToday = new DateTimePicker();
+            rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             NonDuplicate = new DataGridViewCheckBoxColumn();
             Score = new DataGridViewTextBoxColumn();
             DuplicateIndividualID = new DataGridViewTextBoxColumn();
@@ -379,18 +390,6 @@ namespace FTAnalyzer
             MatchBirthLocation = new DataGridViewTextBoxColumn();
             saveDatabase = new SaveFileDialog();
             restoreDatabase = new OpenFileDialog();
-            panel3 = new Panel();
-            labTodayYearStep = new Label();
-            nudToday = new NumericUpDown();
-            btnUpdateTodaysEvents = new Button();
-            labTodayLoadWorldEvents = new Label();
-            pbToday = new ProgressBar();
-            rbTodayMonth = new RadioButton();
-            rbTodaySingle = new RadioButton();
-            labTodaySelectDate = new Label();
-            dpToday = new DateTimePicker();
-            panel4 = new Panel();
-            rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             menuStrip1.SuspendLayout();
             mnuSetRoot.SuspendLayout();
             statusStrip.SuspendLayout();
@@ -480,7 +479,6 @@ namespace FTAnalyzer
             tabToday.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudToday).BeginInit();
-            panel4.SuspendLayout();
             SuspendLayout();
             // 
             // openGedcom
@@ -4121,8 +4119,8 @@ namespace FTAnalyzer
             // 
             // tabToday
             // 
-            tabToday.Controls.Add(panel4);
             tabToday.Controls.Add(panel3);
+            tabToday.Controls.Add(rtbToday);
             tabToday.Location = new Point(4, 24);
             tabToday.Margin = new Padding(4);
             tabToday.Name = "tabToday";
@@ -4131,6 +4129,126 @@ namespace FTAnalyzer
             tabToday.TabIndex = 17;
             tabToday.Text = " On This Day ";
             tabToday.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            panel3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panel3.Controls.Add(labTodayYearStep);
+            panel3.Controls.Add(nudToday);
+            panel3.Controls.Add(btnUpdateTodaysEvents);
+            panel3.Controls.Add(labTodayLoadWorldEvents);
+            panel3.Controls.Add(pbToday);
+            panel3.Controls.Add(rbTodayMonth);
+            panel3.Controls.Add(rbTodaySingle);
+            panel3.Controls.Add(labTodaySelectDate);
+            panel3.Controls.Add(dpToday);
+            panel3.Location = new Point(4, 3);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(1227, 54);
+            panel3.TabIndex = 18;
+            // 
+            // labTodayYearStep
+            // 
+            labTodayYearStep.AutoSize = true;
+            labTodayYearStep.Location = new Point(707, 19);
+            labTodayYearStep.Margin = new Padding(4, 0, 4, 0);
+            labTodayYearStep.Name = "labTodayYearStep";
+            labTodayYearStep.Size = new Size(61, 15);
+            labTodayYearStep.TabIndex = 25;
+            labTodayYearStep.Text = "Year Step :";
+            // 
+            // nudToday
+            // 
+            nudToday.Location = new Point(776, 17);
+            nudToday.Margin = new Padding(4);
+            nudToday.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            nudToday.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            nudToday.Name = "nudToday";
+            nudToday.Size = new Size(49, 23);
+            nudToday.TabIndex = 24;
+            nudToday.Value = new decimal(new int[] { 5, 0, 0, 0 });
+            // 
+            // btnUpdateTodaysEvents
+            // 
+            btnUpdateTodaysEvents.Location = new Point(360, 14);
+            btnUpdateTodaysEvents.Margin = new Padding(4);
+            btnUpdateTodaysEvents.Name = "btnUpdateTodaysEvents";
+            btnUpdateTodaysEvents.Size = new Size(134, 26);
+            btnUpdateTodaysEvents.TabIndex = 23;
+            btnUpdateTodaysEvents.Text = "Update list of Events";
+            btnUpdateTodaysEvents.UseVisualStyleBackColor = true;
+            // 
+            // labTodayLoadWorldEvents
+            // 
+            labTodayLoadWorldEvents.AutoSize = true;
+            labTodayLoadWorldEvents.Location = new Point(833, 20);
+            labTodayLoadWorldEvents.Margin = new Padding(4, 0, 4, 0);
+            labTodayLoadWorldEvents.Name = "labTodayLoadWorldEvents";
+            labTodayLoadWorldEvents.Size = new Size(122, 15);
+            labTodayLoadWorldEvents.TabIndex = 22;
+            labTodayLoadWorldEvents.Text = "Loading World Events";
+            // 
+            // pbToday
+            // 
+            pbToday.Location = new Point(963, 17);
+            pbToday.Margin = new Padding(4);
+            pbToday.Name = "pbToday";
+            pbToday.Size = new Size(198, 23);
+            pbToday.TabIndex = 21;
+            // 
+            // rbTodayMonth
+            // 
+            rbTodayMonth.AutoSize = true;
+            rbTodayMonth.Location = new Point(596, 17);
+            rbTodayMonth.Margin = new Padding(4);
+            rbTodayMonth.Name = "rbTodayMonth";
+            rbTodayMonth.Size = new Size(98, 19);
+            rbTodayMonth.TabIndex = 20;
+            rbTodayMonth.Text = "Whole Month";
+            rbTodayMonth.UseVisualStyleBackColor = true;
+            // 
+            // rbTodaySingle
+            // 
+            rbTodaySingle.AutoSize = true;
+            rbTodaySingle.Checked = true;
+            rbTodaySingle.Location = new Point(501, 17);
+            rbTodaySingle.Margin = new Padding(4);
+            rbTodaySingle.Name = "rbTodaySingle";
+            rbTodaySingle.Size = new Size(80, 19);
+            rbTodaySingle.TabIndex = 19;
+            rbTodaySingle.TabStop = true;
+            rbTodaySingle.Text = "Single Day";
+            rbTodaySingle.UseVisualStyleBackColor = true;
+            // 
+            // labTodaySelectDate
+            // 
+            labTodaySelectDate.AutoSize = true;
+            labTodaySelectDate.Location = new Point(66, 19);
+            labTodaySelectDate.Margin = new Padding(4, 0, 4, 0);
+            labTodaySelectDate.Name = "labTodaySelectDate";
+            labTodaySelectDate.Size = new Size(71, 15);
+            labTodaySelectDate.TabIndex = 18;
+            labTodaySelectDate.Text = "Select Date :";
+            // 
+            // dpToday
+            // 
+            dpToday.Location = new Point(153, 17);
+            dpToday.Margin = new Padding(4);
+            dpToday.Name = "dpToday";
+            dpToday.Size = new Size(199, 23);
+            dpToday.TabIndex = 17;
+            // 
+            // rtbToday
+            // 
+            rtbToday.Dock = DockStyle.Fill;
+            rtbToday.Font = new Font("Microsoft Sans Serif", 9F);
+            rtbToday.Location = new Point(4, 4);
+            rtbToday.Margin = new Padding(4);
+            rtbToday.Name = "rtbToday";
+            rtbToday.ReadOnly = true;
+            rtbToday.Size = new Size(1230, 458);
+            rtbToday.TabIndex = 19;
+            rtbToday.Text = "";
             // 
             // NonDuplicate
             // 
@@ -4253,133 +4371,6 @@ namespace FTAnalyzer
             // 
             restoreDatabase.FileName = "*.zip";
             restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
-            // 
-            // panel3
-            // 
-            panel3.Controls.Add(labTodayYearStep);
-            panel3.Controls.Add(nudToday);
-            panel3.Controls.Add(btnUpdateTodaysEvents);
-            panel3.Controls.Add(labTodayLoadWorldEvents);
-            panel3.Controls.Add(pbToday);
-            panel3.Controls.Add(rbTodayMonth);
-            panel3.Controls.Add(rbTodaySingle);
-            panel3.Controls.Add(labTodaySelectDate);
-            panel3.Controls.Add(dpToday);
-            panel3.Location = new Point(4, 3);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(1227, 54);
-            panel3.TabIndex = 18;
-            // 
-            // labTodayYearStep
-            // 
-            labTodayYearStep.AutoSize = true;
-            labTodayYearStep.Location = new Point(707, 19);
-            labTodayYearStep.Margin = new Padding(4, 0, 4, 0);
-            labTodayYearStep.Name = "labTodayYearStep";
-            labTodayYearStep.Size = new Size(61, 15);
-            labTodayYearStep.TabIndex = 25;
-            labTodayYearStep.Text = "Year Step :";
-            // 
-            // nudToday
-            // 
-            nudToday.Location = new Point(776, 17);
-            nudToday.Margin = new Padding(4);
-            nudToday.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
-            nudToday.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            nudToday.Name = "nudToday";
-            nudToday.Size = new Size(49, 23);
-            nudToday.TabIndex = 24;
-            nudToday.Value = new decimal(new int[] { 5, 0, 0, 0 });
-            // 
-            // btnUpdateTodaysEvents
-            // 
-            btnUpdateTodaysEvents.Location = new Point(360, 14);
-            btnUpdateTodaysEvents.Margin = new Padding(4);
-            btnUpdateTodaysEvents.Name = "btnUpdateTodaysEvents";
-            btnUpdateTodaysEvents.Size = new Size(134, 26);
-            btnUpdateTodaysEvents.TabIndex = 23;
-            btnUpdateTodaysEvents.Text = "Update list of Events";
-            btnUpdateTodaysEvents.UseVisualStyleBackColor = true;
-            // 
-            // labTodayLoadWorldEvents
-            // 
-            labTodayLoadWorldEvents.AutoSize = true;
-            labTodayLoadWorldEvents.Location = new Point(833, 20);
-            labTodayLoadWorldEvents.Margin = new Padding(4, 0, 4, 0);
-            labTodayLoadWorldEvents.Name = "labTodayLoadWorldEvents";
-            labTodayLoadWorldEvents.Size = new Size(122, 15);
-            labTodayLoadWorldEvents.TabIndex = 22;
-            labTodayLoadWorldEvents.Text = "Loading World Events";
-            // 
-            // pbToday
-            // 
-            pbToday.Location = new Point(963, 17);
-            pbToday.Margin = new Padding(4);
-            pbToday.Name = "pbToday";
-            pbToday.Size = new Size(198, 23);
-            pbToday.TabIndex = 21;
-            // 
-            // rbTodayMonth
-            // 
-            rbTodayMonth.AutoSize = true;
-            rbTodayMonth.Location = new Point(596, 17);
-            rbTodayMonth.Margin = new Padding(4);
-            rbTodayMonth.Name = "rbTodayMonth";
-            rbTodayMonth.Size = new Size(98, 19);
-            rbTodayMonth.TabIndex = 20;
-            rbTodayMonth.Text = "Whole Month";
-            rbTodayMonth.UseVisualStyleBackColor = true;
-            // 
-            // rbTodaySingle
-            // 
-            rbTodaySingle.AutoSize = true;
-            rbTodaySingle.Checked = true;
-            rbTodaySingle.Location = new Point(501, 17);
-            rbTodaySingle.Margin = new Padding(4);
-            rbTodaySingle.Name = "rbTodaySingle";
-            rbTodaySingle.Size = new Size(80, 19);
-            rbTodaySingle.TabIndex = 19;
-            rbTodaySingle.TabStop = true;
-            rbTodaySingle.Text = "Single Day";
-            rbTodaySingle.UseVisualStyleBackColor = true;
-            // 
-            // labTodaySelectDate
-            // 
-            labTodaySelectDate.AutoSize = true;
-            labTodaySelectDate.Location = new Point(66, 19);
-            labTodaySelectDate.Margin = new Padding(4, 0, 4, 0);
-            labTodaySelectDate.Name = "labTodaySelectDate";
-            labTodaySelectDate.Size = new Size(71, 15);
-            labTodaySelectDate.TabIndex = 18;
-            labTodaySelectDate.Text = "Select Date :";
-            // 
-            // dpToday
-            // 
-            dpToday.Location = new Point(153, 17);
-            dpToday.Margin = new Padding(4);
-            dpToday.Name = "dpToday";
-            dpToday.Size = new Size(199, 23);
-            dpToday.TabIndex = 17;
-            // 
-            // panel4
-            // 
-            panel4.Controls.Add(rtbToday);
-            panel4.Location = new Point(3, 63);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(1232, 400);
-            panel4.TabIndex = 19;
-            // 
-            // rtbToday
-            // 
-            rtbToday.Dock = DockStyle.Fill;
-            rtbToday.Font = new Font("Microsoft Sans Serif", 9F);
-            rtbToday.Location = new Point(0, 0);
-            rtbToday.Margin = new Padding(4);
-            rtbToday.Name = "rtbToday";
-            rtbToday.ReadOnly = true;
-            rtbToday.Size = new Size(1232, 400);
-            rtbToday.TabIndex = 18;
-            rtbToday.Text = "";
             // 
             // MainForm
             // 
@@ -4514,7 +4505,6 @@ namespace FTAnalyzer
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nudToday).EndInit();
-            panel4.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -4873,8 +4863,6 @@ namespace FTAnalyzer
         private LinkLabel linkLabel2;
         private LinkLabel LabLostCousinsWeb;
         private ToolStripMenuItem mnuDuplicatesToExcel;
-        private Panel panel4;
-        private Utilities.ScrollingRichTextBox rtbToday;
         private Panel panel3;
         private Label labTodayYearStep;
         private NumericUpDown nudToday;
@@ -4885,6 +4873,7 @@ namespace FTAnalyzer
         private RadioButton rbTodaySingle;
         private Label labTodaySelectDate;
         private DateTimePicker dpToday;
+        private Utilities.ScrollingRichTextBox rtbToday;
     }
 }
 
