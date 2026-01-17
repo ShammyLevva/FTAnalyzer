@@ -994,7 +994,6 @@ namespace FTAnalyzer
             try
             {
                 HourGlass(this, true);
-                Application.DoEvents();
                 TabPage current = tabCtrlLocations.SelectedTab ?? tabCtrlLocations.TabPages[0];
                 Control control = current.Controls[0];
                 control.Focus();
@@ -1222,10 +1221,9 @@ namespace FTAnalyzer
                             break;
                         }
                     }
-                    geo ??= new GeocodeLocations(new Progress<string>(value => { rtbOutput.AppendText(value); }));
+                    geo ??= new GeocodeLocations(new Progress<string>(rtbOutput.AppendText));
                     geo.Show();
                     geo.Focus();
-                    Application.DoEvents();
                     switch (type)
                     {
                         case GecodingType.Google:
@@ -3596,7 +3594,7 @@ namespace FTAnalyzer
         #region Load CSV Location Data
 
 
-        public static void LoadLocationData(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
+        public static async Task LoadLocationDataAsync(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
         {
             string csvFilename = string.Empty;
             pb.Visible = true;
@@ -3615,10 +3613,20 @@ namespace FTAnalyzer
                     label.Text = "Loading " + csvFilename;
                     string path = Path.GetDirectoryName(csvFilename) ?? string.Empty;
                     RegistrySettings.SetRegistryValue("Excel Export Individual Path", path, RegistryValueKind.String);
+                    var progress = new Progress<int>(value =>
+                    {
+                        if (value < 0)
+                            value = 0;
+                        if (value > 100)
+                            value = 100;
+                        pb.Minimum = 0;
+                        pb.Maximum = 100;
+                        pb.Value = value;
+                    });
                     if (csvFilename.EndsWith("TNG", StringComparison.InvariantCultureIgnoreCase))
-                        ReadTNGdata(pb, csvFilename);
+                        await Task.Run(() => ReadTNGdata(progress, csvFilename));
                     else
-                        ReadCSVdata(pb, csvFilename);
+                        await Task.Run(() => ReadCSVdata(progress, csvFilename));
                 }
             }
             catch (Exception ex)
@@ -3629,13 +3637,12 @@ namespace FTAnalyzer
             label.Text = string.Empty;
         }
 
-        public static void ReadTNGdata(ToolStripProgressBar pb, string tngFilename)
+        public static void ReadTNGdata(IProgress<int> progress, string tngFilename)
         {
             int rowCount = 0;
             int lineCount = File.ReadLines(tngFilename).Count();
-            pb.Maximum = lineCount;
-            pb.Minimum = 0;
-            pb.Value = rowCount;
+            int current = 0;
+            progress.Report(0);
             using CsvFileReader reader = new(tngFilename, ';');
             CsvRow row = [];
             while (reader.ReadRow(row))
@@ -3645,20 +3652,19 @@ namespace FTAnalyzer
                     FactLocation.GetLocation(row[1], row[3], row[2], FactLocation.Geocode.NOT_SEARCHED, true, true);
                     rowCount++;
                 }
-                pb.Value++;
-                if (pb.Value % 10 == 0)
-                    Application.DoEvents();
+                current++;
+                if (lineCount %10 == 0)
+                    progress.Report(current * 100 / lineCount);
             }
             UIHelpers.ShowMessage($"Loaded {rowCount} locations from TNG file {tngFilename}", APPNAME);
         }
 
-        public static void ReadCSVdata(ToolStripProgressBar pb, string csvFilename)
+        public static void ReadCSVdata(IProgress<int> progress, string csvFilename)
         {
             int rowCount = 0;
             int lineCount = File.ReadLines(csvFilename).Count();
-            pb.Maximum = lineCount;
-            pb.Minimum = 0;
-            pb.Value = rowCount;
+            int current = 0;
+            progress.Report(0);
             using (CsvFileReader reader = new(csvFilename))
             {
                 CsvRow headerRow = [];
@@ -3680,9 +3686,9 @@ namespace FTAnalyzer
                         FactLocation loc = FactLocation.GetLocation(row[0], row[1], row[2], FactLocation.Geocode.NOT_SEARCHED, true, true);
                         rowCount++;
                     }
-                    pb.Value++;
-                    if (pb.Value % 10 == 0)
-                        Application.DoEvents();
+                    current++;
+                    if (lineCount %10 == 0)
+                        progress.Report(current * 100 / lineCount);
                 }
             }
             UIHelpers.ShowMessage($"Loaded {rowCount} locations from file {csvFilename}", APPNAME);
@@ -3690,14 +3696,14 @@ namespace FTAnalyzer
         #endregion
 
 
-        void LoadLocations(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
+        async void LoadLocations(ToolStripProgressBar pb, ToolStripStatusLabel label, int defaultIndex)
         {
             DialogResult result = UIHelpers.ShowMessage("It is recommended you backup your Geocoding database first.\nDo you want to backup now?", APPNAME,
                                                          MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
                 DatabaseHelper.Instance.BackupDatabase(saveDatabase, $"FTAnalyzer zip file created by v{VERSION}");
             if (result != DialogResult.Cancel)
-                LoadLocationData(pb, label, defaultIndex);
+                await LoadLocationDataAsync(pb, label, defaultIndex);
         }
 
         async void BtnShowSurnames_Click(object sender, EventArgs e)
