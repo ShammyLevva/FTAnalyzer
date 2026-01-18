@@ -1,4 +1,5 @@
 ﻿using FTAnalyzer;
+using FTAnalyzer.Forms;
 
 namespace UnitTests
 {
@@ -116,6 +117,14 @@ namespace UnitTests
         }
 
         [TestMethod]
+        public void CensusReference1921Tests()
+        {
+            Census1921Test("The National Archives of the UK(TNA); Kew, Surrey, England; 1921 Census Returns; Reference: RG 15/18159, ED 3, Sch 185; Book: 18159", "18159", "3", "185");
+            //Census1921Test("RG15 RD 476 RS 5 ED 4", "475", "4");
+        }
+        
+
+        [TestMethod]
         public void CensusReferenceUKTests()
         {
             UKCensusTest("Class: RG11; Piece: 890; Folio: 114; Page: 9; GSU roll: 1341211", CensusDate.UKCENSUS1881, "890", "114", "9");
@@ -206,6 +215,22 @@ namespace UnitTests
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1911));
             Assert.IsTrue(censusRef.Piece.Equals(piece));
             Assert.IsTrue(censusRef.Schedule.Equals(schedule));
+        }
+
+        static void Census1921Test(string reference, string book, string ed, string schedule)
+        {
+            CensusReference censusRef = new("I1", reference, false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1921));
+            Assert.IsTrue(censusRef.Book.Equals(book));
+            Assert.IsTrue(censusRef.ED.Equals(ed));
+            Assert.IsTrue(censusRef.Schedule.Equals(schedule));
+        }
+        static void Census1921Test(string reference, string rd, string sd)
+        {
+            CensusReference censusRef = new("I1", reference, false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1921));
+            Assert.IsTrue(censusRef.RD.Equals(rd));
+            Assert.IsTrue(censusRef.SD.Equals(sd));
         }
 
         static void UKCensusTest(string reference, FactDate year, string piece, string folio, string page)
