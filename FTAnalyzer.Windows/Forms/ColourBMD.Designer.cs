@@ -119,7 +119,7 @@ namespace FTAnalyzer.Forms
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgBMDReportSheet.DefaultCellStyle = dataGridViewCellStyle2;
             dgBMDReportSheet.Dock = DockStyle.Fill;
-            dgBMDReportSheet.Location = new Point(0, 0);
+            dgBMDReportSheet.Location = new Point(0, 35);
             dgBMDReportSheet.Name = "dgBMDReportSheet";
             dgBMDReportSheet.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -131,7 +131,7 @@ namespace FTAnalyzer.Forms
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
             dgBMDReportSheet.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgBMDReportSheet.RowHeadersWidth = 20;
-            dgBMDReportSheet.Size = new Size(1036, 497);
+            dgBMDReportSheet.Size = new Size(1036, 440);
             dgBMDReportSheet.TabIndex = 1;
             dgBMDReportSheet.CellContextMenuStripNeeded += DgBMDReportSheet_CellContextMenuStripNeeded;
             dgBMDReportSheet.CellDoubleClick += DgReportSheet_CellDoubleClick;
@@ -351,7 +351,6 @@ namespace FTAnalyzer.Forms
             statusStrip.Size = new Size(1036, 22);
             statusStrip.TabIndex = 2;
             statusStrip.Text = "statusStrip1";
-            statusStrip.Dock = DockStyle.Bottom;
             // 
             // tsRecords
             // 
@@ -370,7 +369,6 @@ namespace FTAnalyzer.Forms
             toolStrip1.Size = new Size(1036, 35);
             toolStrip1.TabIndex = 3;
             toolStrip1.Text = "toolStrip1";
-            toolStrip1.Dock = DockStyle.Top;
             // 
             // mnuSaveCensusColumnLayout
             // 
@@ -475,10 +473,10 @@ namespace FTAnalyzer.Forms
             // cbFilter
             // 
             cbFilter.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbFilter.DropDownWidth = 220;
+            cbFilter.DropDownWidth = 330;
             cbFilter.Items.AddRange(new object[] { "All Individuals", "Date Missing (Red)", "Date Found (Green)", "Open Ended Date Range (Orange Red)", "Very Wide Date Range (Light Red)", "Wide Date Range (Orange)", "Narrow Date Range (Yellow)", "Just Year Date (Yellow Green)", "Approx Date Range (Light Green)", "Of Marrying Age no partner (Pink)", "No Partner shared fact/children (Coral)", "Partner but no marriage (Red Brown)" });
             cbFilter.Name = "cbFilter";
-            cbFilter.Size = new Size(75, 35);
+            cbFilter.Size = new Size(150, 35);
             cbFilter.SelectedIndexChanged += CbFilter_SelectedIndexChanged;
             // 
             // tsApplyToLabel

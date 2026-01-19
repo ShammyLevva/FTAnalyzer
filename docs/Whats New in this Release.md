@@ -1,3 +1,13 @@
+## Release Candidate Version 10.0.0.0-RC4 - 20th January 2026  
+**Updates**  
+Add 1921 Census Location detection
+
+**Bugfixes**  
+Fixed identifying Lost Cousins fact  
+Fixes to 1911 & 1921 census registration recognition  
+Fix Relation Type selection box sizing issue  
+Fixed width of filter menu on research suggestion reports  
+
 ## Release Candidate Version 10.0.0.0-RC3 - 17th January 2026  
 **Updates**  
 Added 1926 Irish Census fields to exports and reports  
