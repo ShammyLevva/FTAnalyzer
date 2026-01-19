@@ -1861,6 +1861,7 @@ namespace FTAnalyzer
             relTypesResearchSuggest.AutoSize = true;
             relTypesResearchSuggest.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             relTypesResearchSuggest.Location = new Point(12, 7);
+            relTypesResearchSuggest.Margin = new Padding(4, 3, 4, 3);
             relTypesResearchSuggest.Name = "relTypesResearchSuggest";
             relTypesResearchSuggest.Size = new Size(377, 120);
             relTypesResearchSuggest.TabIndex = 26;
@@ -2088,7 +2089,7 @@ namespace FTAnalyzer
             btnLC1911Ireland.TabIndex = 44;
             btnLC1911Ireland.Text = "1911 Ireland Census";
             btnLC1911Ireland.UseVisualStyleBackColor = true;
-            btnLC1911Ireland.Click += BtnLC1911Ireland_Click1;
+            btnLC1911Ireland.Click += BtnLC1911Ireland_Click;
             // 
             // btnLC1881EW
             // 
@@ -4176,6 +4177,7 @@ namespace FTAnalyzer
             btnUpdateTodaysEvents.TabIndex = 23;
             btnUpdateTodaysEvents.Text = "Update list of Events";
             btnUpdateTodaysEvents.UseVisualStyleBackColor = true;
+            btnUpdateTodaysEvents.Click += BtnUpdateTodaysEvents_Click;
             // 
             // labTodayLoadWorldEvents
             // 
@@ -4506,21 +4508,6 @@ namespace FTAnalyzer
             ((System.ComponentModel.ISupportInitialize)nudToday).EndInit();
             ResumeLayout(false);
             PerformLayout();
-        }
-
-        private void LabLostCousinsWeb_Click1(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void BtnLC1911Ireland_Click1(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void LinkLabel2_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

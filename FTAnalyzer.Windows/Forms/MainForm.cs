@@ -3101,8 +3101,8 @@ namespace FTAnalyzer
 
         void BtnStandardMissingData_Click(object sender, EventArgs e) => UIHelpers.ShowMessage("Not Implemented Yet", APPNAME);
 
-        void BtnAdvancedMissingData_Click(object sender, EventArgs e)
-        {
+        void BtnAdvancedMissingData_Click(object sender, EventArgs e) => UIHelpers.ShowMessage("Not Implemented Yet", APPNAME);
+        //{
             // TODO Implement Advanced Missing Data Report - restore below code when done
             //HourGlass(this, true);
             //Predicate<Individual> relTypeFilter = relTypesResearchSuggest.BuildFilter<Individual>(x => x.RelationType);
@@ -3113,7 +3113,7 @@ namespace FTAnalyzer
             //rs.Show();
             //rs.Focus();
             //HourGlass(this, false);
-        }
+        //}
 
         void CmbColourFamily_Click(object sender, EventArgs e) => UpdateColourFamilyComboBox(null);
 
@@ -3548,7 +3548,6 @@ namespace FTAnalyzer
 
         async void BtnUpdateTodaysEvents_Click(object sender, EventArgs e) => await ShowTodaysEvents();
 
-
         void NudToday_ValueChanged(object sender, EventArgs e)
         {
             try
@@ -3561,7 +3560,6 @@ namespace FTAnalyzer
             }
         }
         #endregion
-
 
         public void SetFactTypeList(CheckedListBox ckbFactSelect, CheckedListBox ckbFactExclude, Predicate<ExportFact> filter)
         {
