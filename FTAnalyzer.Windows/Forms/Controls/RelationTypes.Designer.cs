@@ -57,19 +57,19 @@ namespace FTAnalyzer.Forms.Controls
             groupBox2.Controls.Add(ckbDirects);
             groupBox2.Location = new Point(4, 3);
             groupBox2.Margin = new Padding(4, 3, 4, 3);
+            groupBox2.MaximumSize = new Size(369, 114);
             groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(4, 3, 4, 3);
-            groupBox2.Size = new Size(369, 117);
+            groupBox2.Padding = new Padding(4, 3, 4, 0);
+            groupBox2.Size = new Size(369, 114);
             groupBox2.TabIndex = 5;
             groupBox2.TabStop = false;
             groupBox2.Text = "Relationship Types";
+            groupBox2.Paint += groupBox2_Paint;
             // 
             // ckbLinked
             // 
-            ckbLinked.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ckbLinked.AutoSize = true;
-            ckbLinked.ImageAlign = ContentAlignment.MiddleRight;
-            ckbLinked.Location = new Point(178, 76);
+            ckbLinked.Location = new Point(187, 76);
             ckbLinked.Margin = new Padding(4, 3, 4, 3);
             ckbLinked.Name = "ckbLinked";
             ckbLinked.Size = new Size(162, 19);
@@ -87,7 +87,7 @@ namespace FTAnalyzer.Forms.Controls
             ckbDescendants.Margin = new Padding(4, 3, 4, 3);
             ckbDescendants.Name = "ckbDescendants";
             ckbDescendants.Size = new Size(93, 19);
-            ckbDescendants.TabIndex = 5;
+            ckbDescendants.TabIndex = 4;
             ckbDescendants.Text = "Descendants";
             ckbDescendants.UseVisualStyleBackColor = true;
             ckbDescendants.CheckedChanged += Tickbox_CheckedChanged;
@@ -99,7 +99,7 @@ namespace FTAnalyzer.Forms.Controls
             ckbUnknown.Margin = new Padding(4, 3, 4, 3);
             ckbUnknown.Name = "ckbUnknown";
             ckbUnknown.Size = new Size(77, 19);
-            ckbUnknown.TabIndex = 4;
+            ckbUnknown.TabIndex = 2;
             ckbUnknown.Text = "Unknown";
             ckbUnknown.UseVisualStyleBackColor = true;
             ckbUnknown.CheckedChanged += Tickbox_CheckedChanged;
@@ -113,7 +113,7 @@ namespace FTAnalyzer.Forms.Controls
             ckbMarriageDB.Margin = new Padding(4, 3, 4, 3);
             ckbMarriageDB.Name = "ckbMarriageDB";
             ckbMarriageDB.Size = new Size(163, 19);
-            ckbMarriageDB.TabIndex = 3;
+            ckbMarriageDB.TabIndex = 5;
             ckbMarriageDB.Text = "Married to Blood or Direct";
             ckbMarriageDB.UseVisualStyleBackColor = true;
             ckbMarriageDB.CheckedChanged += Tickbox_CheckedChanged;
@@ -125,7 +125,7 @@ namespace FTAnalyzer.Forms.Controls
             ckbMarriage.Margin = new Padding(4, 3, 4, 3);
             ckbMarriage.Name = "ckbMarriage";
             ckbMarriage.Size = new Size(131, 19);
-            ckbMarriage.TabIndex = 2;
+            ckbMarriage.TabIndex = 1;
             ckbMarriage.Text = "Related by Marriage";
             ckbMarriage.UseVisualStyleBackColor = true;
             ckbMarriage.CheckedChanged += Tickbox_CheckedChanged;
@@ -139,7 +139,7 @@ namespace FTAnalyzer.Forms.Controls
             ckbBlood.Margin = new Padding(4, 3, 4, 3);
             ckbBlood.Name = "ckbBlood";
             ckbBlood.Size = new Size(108, 19);
-            ckbBlood.TabIndex = 1;
+            ckbBlood.TabIndex = 3;
             ckbBlood.Text = "Blood Relations";
             ckbBlood.UseVisualStyleBackColor = true;
             ckbBlood.CheckedChanged += Tickbox_CheckedChanged;
@@ -166,7 +166,7 @@ namespace FTAnalyzer.Forms.Controls
             Controls.Add(groupBox2);
             Margin = new Padding(4, 3, 4, 3);
             Name = "RelationTypes";
-            Size = new Size(377, 123);
+            Size = new Size(377, 120);
             Layout += RelationTypes_Layout;
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();

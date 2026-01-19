@@ -1430,7 +1430,7 @@ namespace FTAnalyzer
             ckbWDIgnoreLocations.AutoSize = true;
             ckbWDIgnoreLocations.Checked = true;
             ckbWDIgnoreLocations.CheckState = CheckState.Checked;
-            ckbWDIgnoreLocations.Location = new Point(9, 121);
+            ckbWDIgnoreLocations.Location = new Point(12, 121);
             ckbWDIgnoreLocations.Margin = new Padding(4);
             ckbWDIgnoreLocations.Name = "ckbWDIgnoreLocations";
             ckbWDIgnoreLocations.Size = new Size(279, 19);
@@ -1441,7 +1441,7 @@ namespace FTAnalyzer
             // 
             // btnWWII
             // 
-            btnWWII.Location = new Point(884, 67);
+            btnWWII.Location = new Point(898, 74);
             btnWWII.Margin = new Padding(4);
             btnWWII.Name = "btnWWII";
             btnWWII.Size = new Size(111, 29);
@@ -1452,7 +1452,7 @@ namespace FTAnalyzer
             // 
             // btnWWI
             // 
-            btnWWI.Location = new Point(758, 67);
+            btnWWI.Location = new Point(772, 74);
             btnWWI.Margin = new Padding(4);
             btnWWI.Name = "btnWWI";
             btnWWI.Size = new Size(111, 29);
@@ -1464,7 +1464,7 @@ namespace FTAnalyzer
             // labWorldWarsSurname
             // 
             labWorldWarsSurname.AutoSize = true;
-            labWorldWarsSurname.Location = new Point(694, 29);
+            labWorldWarsSurname.Location = new Point(708, 36);
             labWorldWarsSurname.Margin = new Padding(4, 0, 4, 0);
             labWorldWarsSurname.Name = "labWorldWarsSurname";
             labWorldWarsSurname.Size = new Size(54, 15);
@@ -1473,7 +1473,7 @@ namespace FTAnalyzer
             // 
             // txtWorldWarsSurname
             // 
-            txtWorldWarsSurname.Location = new Point(758, 25);
+            txtWorldWarsSurname.Location = new Point(772, 32);
             txtWorldWarsSurname.Margin = new Padding(4);
             txtWorldWarsSurname.Name = "txtWorldWarsSurname";
             txtWorldWarsSurname.Size = new Size(234, 23);
@@ -1507,15 +1507,15 @@ namespace FTAnalyzer
             // 
             wardeadRelation.AutoSize = true;
             wardeadRelation.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            wardeadRelation.Location = new Point(315, 4);
+            wardeadRelation.Location = new Point(325, 0);
             wardeadRelation.Margin = new Padding(7);
             wardeadRelation.Name = "wardeadRelation";
-            wardeadRelation.Size = new Size(377, 123);
+            wardeadRelation.Size = new Size(377, 120);
             wardeadRelation.TabIndex = 26;
             // 
             // wardeadCountry
             // 
-            wardeadCountry.Location = new Point(7, 11);
+            wardeadCountry.Location = new Point(12, 7);
             wardeadCountry.Margin = new Padding(7);
             wardeadCountry.Name = "wardeadCountry";
             wardeadCountry.Size = new Size(299, 85);
@@ -1574,7 +1574,7 @@ namespace FTAnalyzer
             ckbTTIgnoreLocations.AutoSize = true;
             ckbTTIgnoreLocations.Checked = true;
             ckbTTIgnoreLocations.CheckState = CheckState.Checked;
-            ckbTTIgnoreLocations.Location = new Point(9, 121);
+            ckbTTIgnoreLocations.Location = new Point(12, 121);
             ckbTTIgnoreLocations.Margin = new Padding(4);
             ckbTTIgnoreLocations.Name = "ckbTTIgnoreLocations";
             ckbTTIgnoreLocations.Size = new Size(263, 19);
@@ -1585,7 +1585,7 @@ namespace FTAnalyzer
             // 
             // btnTreeTops
             // 
-            btnTreeTops.Location = new Point(758, 67);
+            btnTreeTops.Location = new Point(771, 72);
             btnTreeTops.Margin = new Padding(4);
             btnTreeTops.Name = "btnTreeTops";
             btnTreeTops.Size = new Size(235, 29);
@@ -1597,7 +1597,7 @@ namespace FTAnalyzer
             // labTreeTopsSurname
             // 
             labTreeTopsSurname.AutoSize = true;
-            labTreeTopsSurname.Location = new Point(694, 29);
+            labTreeTopsSurname.Location = new Point(707, 34);
             labTreeTopsSurname.Margin = new Padding(4, 0, 4, 0);
             labTreeTopsSurname.Name = "labTreeTopsSurname";
             labTreeTopsSurname.Size = new Size(54, 15);
@@ -1606,7 +1606,7 @@ namespace FTAnalyzer
             // 
             // txtTreetopsSurname
             // 
-            txtTreetopsSurname.Location = new Point(758, 25);
+            txtTreetopsSurname.Location = new Point(771, 30);
             txtTreetopsSurname.Margin = new Padding(4);
             txtTreetopsSurname.Name = "txtTreetopsSurname";
             txtTreetopsSurname.Size = new Size(234, 23);
@@ -1640,15 +1640,15 @@ namespace FTAnalyzer
             // 
             treetopsRelation.AutoSize = true;
             treetopsRelation.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            treetopsRelation.Location = new Point(315, 4);
+            treetopsRelation.Location = new Point(319, 0);
             treetopsRelation.Margin = new Padding(7);
             treetopsRelation.Name = "treetopsRelation";
-            treetopsRelation.Size = new Size(377, 123);
+            treetopsRelation.Size = new Size(377, 120);
             treetopsRelation.TabIndex = 12;
             // 
             // treetopsCountry
             // 
-            treetopsCountry.Location = new Point(9, 29);
+            treetopsCountry.Location = new Point(12, 7);
             treetopsCountry.Margin = new Padding(7);
             treetopsCountry.Name = "treetopsCountry";
             treetopsCountry.Size = new Size(299, 85);
@@ -1679,9 +1679,9 @@ namespace FTAnalyzer
             gbFilters.Controls.Add(cmbColourFamily);
             gbFilters.Controls.Add(labResearchTabSurname);
             gbFilters.Controls.Add(txtColouredSurname);
-            gbFilters.Location = new Point(396, 14);
+            gbFilters.Location = new Point(396, 7);
             gbFilters.Name = "gbFilters";
-            gbFilters.Size = new Size(703, 118);
+            gbFilters.Size = new Size(703, 120);
             gbFilters.TabIndex = 64;
             gbFilters.TabStop = false;
             gbFilters.Text = "Filters";
@@ -1860,10 +1860,9 @@ namespace FTAnalyzer
             // 
             relTypesResearchSuggest.AutoSize = true;
             relTypesResearchSuggest.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            relTypesResearchSuggest.Location = new Point(9, 9);
-            relTypesResearchSuggest.Margin = new Padding(7);
+            relTypesResearchSuggest.Location = new Point(12, 7);
             relTypesResearchSuggest.Name = "relTypesResearchSuggest";
-            relTypesResearchSuggest.Size = new Size(377, 123);
+            relTypesResearchSuggest.Size = new Size(377, 120);
             relTypesResearchSuggest.TabIndex = 26;
             relTypesResearchSuggest.RelationTypesChanged += RelTypesColoured_RelationTypesChanged;
             // 
@@ -2131,10 +2130,10 @@ namespace FTAnalyzer
             // 
             relTypesLC.AutoSize = true;
             relTypesLC.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            relTypesLC.Location = new Point(3, 3);
+            relTypesLC.Location = new Point(4, 0);
             relTypesLC.Margin = new Padding(7);
             relTypesLC.Name = "relTypesLC";
-            relTypesLC.Size = new Size(377, 123);
+            relTypesLC.Size = new Size(377, 120);
             relTypesLC.TabIndex = 48;
             relTypesLC.RelationTypesChanged += RelTypesLC_RelationTypesChanged;
             // 
@@ -2683,10 +2682,10 @@ namespace FTAnalyzer
             // 
             relTypesCensus.AutoSize = true;
             relTypesCensus.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            relTypesCensus.Location = new Point(11, 22);
+            relTypesCensus.Location = new Point(9, 18);
             relTypesCensus.Margin = new Padding(7);
             relTypesCensus.Name = "relTypesCensus";
-            relTypesCensus.Size = new Size(377, 123);
+            relTypesCensus.Size = new Size(377, 120);
             relTypesCensus.TabIndex = 27;
             // 
             // groupBox9
@@ -3922,7 +3921,7 @@ namespace FTAnalyzer
             reltypesSurnames.Location = new Point(7, 4);
             reltypesSurnames.Margin = new Padding(7);
             reltypesSurnames.Name = "reltypesSurnames";
-            reltypesSurnames.Size = new Size(377, 123);
+            reltypesSurnames.Size = new Size(377, 120);
             reltypesSurnames.TabIndex = 22;
             // 
             // tabFacts
@@ -4113,7 +4112,7 @@ namespace FTAnalyzer
             relTypesFacts.Location = new Point(9, 4);
             relTypesFacts.Margin = new Padding(7);
             relTypesFacts.Name = "relTypesFacts";
-            relTypesFacts.Size = new Size(377, 123);
+            relTypesFacts.Size = new Size(377, 120);
             relTypesFacts.TabIndex = 21;
             relTypesFacts.RelationTypesChanged += RelTypesFacts_RelationTypesChanged;
             // 

@@ -1,4 +1,5 @@
 ﻿using FTAnalyzer.Filters;
+using FTAnalyzer.Graphics;
 using FTAnalyzer.Utilities;
 using System.ComponentModel;
 
@@ -87,16 +88,23 @@ namespace FTAnalyzer.Forms.Controls
 
         void RelationTypes_Layout(object sender, LayoutEventArgs e)
         {
-            UIHelpers.MoveControl(ckbMarriage, ckbDirects, UIHelpers.Direction.RIGHT);
-            UIHelpers.MoveControl(ckbUnknown, ckbMarriage, UIHelpers.Direction.RIGHT);
-            UIHelpers.MoveControl(ckbBlood, ckbDirects, UIHelpers.Direction.BELOW);
-            UIHelpers.MoveControl(ckbDescendants, ckbBlood, UIHelpers.Direction.RIGHT);
-            UIHelpers.MoveControl(ckbMarriageDB, ckbBlood, UIHelpers.Direction.BELOW);
-            UIHelpers.MoveControl(ckbLinked, ckbMarriageDB, UIHelpers.Direction.RIGHT);
-            if (ckbUnknown.Right + ckbUnknown.Margin.Right > Width)
-                Width = ckbUnknown.Right + ckbUnknown.Margin.Right;
-            if (ckbLinked.Bottom + ckbLinked.Margin.Bottom > Height)
-                Height = ckbLinked.Bottom + ckbLinked.Margin.Bottom;
+            //UIHelpers.MoveControl(ckbMarriage, ckbDirects, UIHelpers.Direction.RIGHT);
+            //UIHelpers.MoveControl(ckbUnknown, ckbMarriage, UIHelpers.Direction.RIGHT);
+            //UIHelpers.MoveControl(ckbBlood, ckbDirects, UIHelpers.Direction.BELOW);
+            //UIHelpers.MoveControl(ckbDescendants, ckbBlood, UIHelpers.Direction.RIGHT);
+            //UIHelpers.MoveControl(ckbMarriageDB, ckbBlood, UIHelpers.Direction.BELOW);
+            //UIHelpers.MoveControl(ckbLinked, ckbMarriageDB, UIHelpers.Direction.RIGHT);
+            ////if (ckbUnknown.Right + ckbUnknown.Margin.Right > Width)
+            ////    Width = ckbUnknown.Right + ckbUnknown.Margin.Right;
+            //if (ckbLinked.Bottom + ckbLinked.Margin.Bottom > Height)
+            //    Height = ckbLinked.Bottom + ckbLinked.Margin.Bottom;
+        }
+
+        void groupBox2_Paint(object sender, PaintEventArgs e)
+        {
+            GroupBox? box = sender as GroupBox;
+            if (box is not null)
+                GraphicsUtilities.DrawGroupBox(box, e.Graphics, Color.Black, Color.Black, 3);
         }
     }
 }
