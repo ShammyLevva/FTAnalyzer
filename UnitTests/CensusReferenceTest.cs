@@ -145,6 +145,7 @@ namespace UnitTests
             UKCensusTest("1901 census RG13/Piece3800/Folio112/Page16/SN#110", CensusDate.UKCENSUS1901, "3800", "112", "16");
             UKCensusTest("18910405 Census RG12 Piece: 3485, Folio: 134, Page: 30, Sch: 151 - Lancashire Barrow-In-Furness - John MARR", CensusDate.UKCENSUS1891, "3485", "134", "30");
             UKCensusTest("Census 1881 Thwaite, Suffolk RG11/1852/92/4", CensusDate.UKCENSUS1881, "1852", "92", "4");
+            UKCensusTest("RG11, Piece 1208, Folio 60 face, Page 13, Schedule 71", CensusDate.UKCENSUS1881, "1208", "60", "13");
         }
 
         [TestMethod]
