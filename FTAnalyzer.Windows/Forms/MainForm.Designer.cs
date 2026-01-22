@@ -1690,7 +1690,7 @@ namespace FTAnalyzer
             gbFilters.TabIndex = 64;
             gbFilters.TabStop = false;
             gbFilters.Text = "Filters";
-            gbFilters.Paint += gbFilters_Paint;
+            gbFilters.Paint += GbFilters_Paint;
             // 
             // labResearchTabFamilyFilter
             // 
@@ -1734,7 +1734,7 @@ namespace FTAnalyzer
             groupBox7.TabStop = false;
             groupBox7.Text = "Missing Data Reports";
             groupBox7.Visible = false;
-            groupBox7.Paint += groupBox7_Paint;
+            groupBox7.Paint += GroupBox7_Paint;
             // 
             // btnAdvancedMissingData
             // 
@@ -1775,7 +1775,7 @@ namespace FTAnalyzer
             groupBox3.TabIndex = 36;
             groupBox3.TabStop = false;
             groupBox3.Text = "Census Suggestions Reports";
-            groupBox3.Paint += groupBox3_Paint;
+            groupBox3.Paint += GroupBox3_Paint;
             // 
             // ckbIgnoreNoDeathDate
             // 
@@ -2440,7 +2440,7 @@ namespace FTAnalyzer
             groupBox2.TabIndex = 23;
             groupBox2.TabStop = false;
             groupBox2.Text = "Census Search Reports";
-            groupBox2.Paint += groupBox2_Paint;
+            groupBox2.Paint += GroupBox2_Paint;
             // 
             // btnAliveOnDate
             // 
@@ -2503,7 +2503,7 @@ namespace FTAnalyzer
             groupBox10.TabIndex = 35;
             groupBox10.TabStop = false;
             groupBox10.Text = "Census Record Reports";
-            groupBox10.Paint += groupBox10_Paint;
+            groupBox10.Paint += GroupBox10_Paint;
             // 
             // btnShowCensusMissing
             // 
@@ -2565,7 +2565,7 @@ namespace FTAnalyzer
             groupBox4.TabIndex = 34;
             groupBox4.TabStop = false;
             groupBox4.Text = "Census Reference Reports";
-            groupBox4.Paint += groupBox4_Paint;
+            groupBox4.Paint += GroupBox4_Paint;
             // 
             // btnInconsistentLocations
             // 
@@ -2708,7 +2708,7 @@ namespace FTAnalyzer
             groupBox9.TabIndex = 32;
             groupBox9.TabStop = false;
             groupBox9.Text = "Census Reports that don't use filters above";
-            groupBox9.Paint += groupBox9_Paint;
+            groupBox9.Paint += GroupBox9_Paint;
             // 
             // groupBox11
             // 
@@ -2722,7 +2722,7 @@ namespace FTAnalyzer
             groupBox11.TabIndex = 33;
             groupBox11.TabStop = false;
             groupBox11.Text = "Census Facts";
-            groupBox11.Paint += groupBox11_Paint;
+            groupBox11.Paint += GroupBox11_Paint;
             // 
             // BtnAutoCreatedCensusFacts
             // 
@@ -2758,7 +2758,7 @@ namespace FTAnalyzer
             groupBox1.TabIndex = 22;
             groupBox1.TabStop = false;
             groupBox1.Text = "Potential Census Fact Problems";
-            groupBox1.Paint += groupBox1_Paint;
+            groupBox1.Paint += GroupBox1_Paint;
             // 
             // btnDuplicateCensus
             // 
@@ -2794,7 +2794,7 @@ namespace FTAnalyzer
             groupBox5.TabIndex = 32;
             groupBox5.TabStop = false;
             groupBox5.Text = "1911 UK Census";
-            groupBox5.Paint += groupBox5_Paint;
+            groupBox5.Paint += GroupBox5_Paint;
             // 
             // btnMismatchedChildrenStatus
             // 
@@ -2829,7 +2829,7 @@ namespace FTAnalyzer
             groupBox6.TabIndex = 31;
             groupBox6.TabStop = false;
             groupBox6.Text = "Export Missing/Unrecognised data to File";
-            groupBox6.Paint += groupBox6_Paint;
+            groupBox6.Paint += GroupBox6_Paint;
             // 
             // btnReportUnrecognised
             // 

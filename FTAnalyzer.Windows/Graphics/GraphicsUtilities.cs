@@ -58,7 +58,7 @@ namespace FTAnalyzer.Graphics
         {
             if (box != null)
             {
-                Brush textBrush = new SolidBrush(textColor);
+               // Brush textBrush = new SolidBrush(textColor);
                 Brush borderBrush = new SolidBrush(borderColor);
                 Pen borderPen = new(borderBrush, borderWidth);
                 SizeF strSize = g.MeasureString(box.Text, box.Font);

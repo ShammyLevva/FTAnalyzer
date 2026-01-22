@@ -64,7 +64,7 @@ namespace FTAnalyzer.Forms.Controls
             groupBox2.TabIndex = 5;
             groupBox2.TabStop = false;
             groupBox2.Text = "Relationship Types";
-            groupBox2.Paint += groupBox2_Paint;
+            groupBox2.Paint += GroupBox2_Paint;
             // 
             // ckbLinked
             // 

@@ -1,6 +1,15 @@
+## Release Candidate Version 10.0.0.0-RC5 - 22nd January 2026  
+**Bugfixes**  
+Fixed async issues on getting On this day events  
+Fixed saving of position on reload  
+On this day now uses split container to fix layout issues
+Fix filter width on colour BMD
+Groupbox text double text fixed  
+1921 Census references with missing RD/SD was not being recognised
+
 ## Release Candidate Version 10.0.0.0-RC4 - 20th January 2026  
 **Updates**  
-Add 1921 Census Location detection
+Add 1921 Census Location detection  
 
 **Bugfixes**  
 Fixed identifying Lost Cousins fact  

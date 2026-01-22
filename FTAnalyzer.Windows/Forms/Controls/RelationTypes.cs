@@ -100,7 +100,7 @@ namespace FTAnalyzer.Forms.Controls
             //    Height = ckbLinked.Bottom + ckbLinked.Margin.Bottom;
         }
 
-        void groupBox2_Paint(object sender, PaintEventArgs e)
+        void GroupBox2_Paint(object sender, PaintEventArgs e)
         {
             GroupBox? box = sender as GroupBox;
             if (box is not null)

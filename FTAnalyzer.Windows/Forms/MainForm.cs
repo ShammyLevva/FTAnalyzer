@@ -3965,17 +3965,17 @@ namespace FTAnalyzer
                 GraphicsUtilities.DrawGroupBox(box, e.Graphics, Color.Black, Color.Black, 2);
         }
 
-        void groupBox2_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void groupBox7_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void groupBox3_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void groupBox5_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void groupBox6_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void groupBox4_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void groupBox10_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void groupBox11_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void GroupBox2_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void GroupBox7_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void GroupBox3_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void GroupBox5_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void GroupBox6_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void GroupBox4_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void GroupBox10_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void GroupBox11_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
         void Referrals_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void gbFilters_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void groupBox9_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void groupBox1_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void GbFilters_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void GroupBox9_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void GroupBox1_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
     }
 }
