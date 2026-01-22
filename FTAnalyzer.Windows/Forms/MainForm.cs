@@ -24,7 +24,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static readonly string VERSION = "10.0.0.0-RC5";
+        public static readonly string VERSION = "10.0.0.0-RC6";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(MainForm));
         const string APPNAME = "FTAnalyzer";
 
@@ -1819,14 +1819,7 @@ namespace FTAnalyzer
 
         void UpdateLCReports()
         {
-            HourGlass(this, true);
-            UpdateLostCousinsReport();
-            UpdateLCOutput();
-            HourGlass(this, false);
-        }
-
-        void UpdateLCOutput()
-        {
+            rtbLostCousins.Text = ft.UpdateLostCousinsReport(relTypesLC.BuildFilter<Individual>(x => x.RelationType));
             rtbLCUpdateData.ForeColor = Color.Black;
             Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType, true);
             LCUpdates = [];
@@ -1871,8 +1864,6 @@ namespace FTAnalyzer
             btnLCLogin.Enabled = true;
             btnUpdateLostCousinsWebsite.Visible = false;
         }
-
-        void UpdateLostCousinsReport() => rtbLostCousins.Text = ft.UpdateLostCousinsReport(relTypesLC.BuildFilter<Individual>(x => x.RelationType));
 
         void BtnLCDuplicates_Click(object sender, EventArgs e)
         {
@@ -3962,7 +3953,7 @@ namespace FTAnalyzer
         {
             GroupBox? box = sender as GroupBox;
             if (box is not null)
-                GraphicsUtilities.DrawGroupBox(box, e.Graphics, Color.Black, Color.Black, 2);
+                GraphicsUtilities.DrawGroupBox(box, e.Graphics, Color.Black, 2);
         }
 
         void GroupBox2_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);

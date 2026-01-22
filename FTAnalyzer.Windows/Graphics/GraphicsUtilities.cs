@@ -54,11 +54,10 @@ namespace FTAnalyzer.Graphics
             return dx / 96;
         }
 
-        public static void DrawGroupBox(GroupBox box, System.Drawing.Graphics g, Color textColor, Color borderColor, float borderWidth)
+        public static void DrawGroupBox(GroupBox box, System.Drawing.Graphics g, Color borderColor, float borderWidth)
         {
             if (box != null)
             {
-               // Brush textBrush = new SolidBrush(textColor);
                 Brush borderBrush = new SolidBrush(borderColor);
                 Pen borderPen = new(borderBrush, borderWidth);
                 SizeF strSize = g.MeasureString(box.Text, box.Font);
@@ -66,10 +65,6 @@ namespace FTAnalyzer.Graphics
                                      box.ClientRectangle.Y + (int)(strSize.Height / 2),
                                      box.ClientRectangle.Width - 1,
                                      box.ClientRectangle.Height - (int)(strSize.Height / 2) - 1);
-
-                // Draw text
-                //g.DrawString(box.Text, box.Font, textBrush, box.Padding.Left, 0);
-
                 // Drawing Border
                 //Left
                 g.DrawLine(borderPen, rect.Location, new Point(rect.X, rect.Y + rect.Height));
