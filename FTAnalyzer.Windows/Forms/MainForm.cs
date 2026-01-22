@@ -1337,7 +1337,7 @@ namespace FTAnalyzer
         }
 
         #region Tab Control
-        void TabControl_SelectedIndexChanged(object sender, EventArgs e)
+        async void TabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
@@ -1371,13 +1371,13 @@ namespace FTAnalyzer
                     {
                         if (dgIndividuals.DataSource is null)
                             SetupIndividualsTab(); // select individuals tab if first time opening main lists tab
-                        Analytics.TrackAction(Analytics.MainFormAction, Analytics.MainListsEvent);
+                        await Analytics.TrackAction(Analytics.MainFormAction, Analytics.MainListsEvent);
                     }
                     if (tabSelector.SelectedTab == tabErrorsFixes)
                     {
                         if (dgDataErrors.DataSource is null)
                             SetupDataErrors(); // select data errors tab if first time opening errors fixes tab
-                        Analytics.TrackAction(Analytics.MainFormAction, Analytics.ErrorsFixesEvent);
+                        await Analytics.TrackAction(Analytics.MainFormAction, Analytics.ErrorsFixesEvent);
                     }
                     else if (tabSelector.SelectedTab == tabFacts)
                     {
@@ -1385,21 +1385,21 @@ namespace FTAnalyzer
                         radioAllFacts.Checked = true;
                         radioOnlyAlternate.Enabled = GeneralSettings.Default.IncludeAlternateFacts;
                         panelFactsSurname.Left = relTypesFacts.Right + relTypesFacts.Margin.Right + panelFactsSurname.Margin.Left;
-                        Analytics.TrackAction(Analytics.MainFormAction, Analytics.FactsTabEvent);
+                        await Analytics.TrackAction(Analytics.MainFormAction, Analytics.FactsTabEvent);
                     }
                     else if (tabSelector.SelectedTab == tabSurnames)
                     {
                         // show empty form click button to load
                         btnShowSurnames.Left = reltypesSurnames.Width + btnShowSurnames.Margin.Left;
                         chkSurnamesIgnoreCase.Left = btnShowSurnames.Left + btnShowSurnames.Width + btnShowSurnames.Margin.Right;
-                        Analytics.TrackAction(Analytics.MainFormAction, Analytics.SurnamesTabEvent);
+                        await Analytics.TrackAction(Analytics.MainFormAction, Analytics.SurnamesTabEvent);
                     }
                     else if (tabSelector.SelectedTab == tabCensus)
                     {
                         cenDate.RevertToDefaultDate();
                         btnShowCensusMissing.Enabled = ft.IndividualCount > 0;
                         cenDate.AddAllCensusItems();
-                        Analytics.TrackAction(Analytics.MainFormAction, Analytics.CensusTabEvent);
+                        await Analytics.TrackAction(Analytics.MainFormAction, Analytics.CensusTabEvent);
                     }
                     else if (tabSelector.SelectedTab == tabResearchSuggestions)
                     {
@@ -1409,13 +1409,13 @@ namespace FTAnalyzer
                     {
                         dgTreeTops.DataSource = null;
                         treetopsCountry.Enabled = !ckbTTIgnoreLocations.Checked;
-                        Analytics.TrackAction(Analytics.MainFormAction, Analytics.TreetopsTabEvent);
+                        await Analytics.TrackAction(Analytics.MainFormAction, Analytics.TreetopsTabEvent);
                     }
                     else if (tabSelector.SelectedTab == tabWorldWars)
                     {
                         dgWorldWars.DataSource = null;
                         wardeadCountry.Enabled = !ckbWDIgnoreLocations.Checked;
-                        Analytics.TrackAction(Analytics.MainFormAction, Analytics.WorldWarsTabEvent);
+                        await Analytics.TrackAction(Analytics.MainFormAction, Analytics.WorldWarsTabEvent);
                     }
                     else if (tabSelector.SelectedTab == tabLostCousins)
                     {
@@ -1424,11 +1424,11 @@ namespace FTAnalyzer
                             btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled =
                             btnLC1911EW.Enabled = ft.IndividualCount > 0;
                         LCSubTabs.TabPages.Remove(LCVerifyTab); // hide verification tab as it does nothing
-                        UpdateLCReports();
+                        await UpdateLCReportsAsync();
                         txtLCEmail.Text = RegistrySettings.GetRegistryValue("LostCousinsEmail", string.Empty).ToString();
                         chkLCRootPersonConfirm.Text = $"Confirm {ft.RootPerson} as root Person";
                         tabLostCousins.Refresh();
-                        Analytics.TrackAction(Analytics.MainFormAction, Analytics.LostCousinsTabEvent);
+                        await Analytics.TrackAction(Analytics.MainFormAction, Analytics.LostCousinsTabEvent);
                         HourGlass(this, false);
                     }
                     else if (tabSelector.SelectedTab == tabToday)
@@ -1437,7 +1437,7 @@ namespace FTAnalyzer
                         int todaysStep = int.Parse(RegistrySettings.GetRegistryValue("Todays Events Step", "5").ToString() ?? "5");
                         rbTodayMonth.Checked = todaysMonth;
                         nudToday.Value = todaysStep;
-                        Analytics.TrackAction(Analytics.MainFormAction, Analytics.TodayTabEvent);
+                        await Analytics.TrackAction(Analytics.MainFormAction, Analytics.TodayTabEvent);
                     }
                     else if (tabSelector.SelectedTab == tabLocations)
                     {
@@ -1724,7 +1724,7 @@ namespace FTAnalyzer
         #endregion
 
         #region Lost Cousins
-        void CkbRestrictions_CheckedChanged(object sender, EventArgs e) => UpdateLCReports();
+        async void CkbRestrictions_CheckedChanged(object sender, EventArgs e) => await UpdateLCReportsAsync();
 
         void LostCousinsCensus(CensusDate censusDate, string reportTitle)
         {
@@ -1809,7 +1809,7 @@ namespace FTAnalyzer
                     string resultText = $"{DateTime.Now.ToUniversalTime():yyyy-MM-dd HH:mm}: uploaded {count} records";
                     await Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.UpdateLostCousins, resultText);
                     SpecialMethods.VisitWebsite("https://www.lostcousins.com/pages/members/ancestors/");
-                    UpdateLCReports();
+                    await UpdateLCReportsAsync();
                 }
             }
             else
@@ -1817,14 +1817,28 @@ namespace FTAnalyzer
             btnUpdateLostCousinsWebsite.Enabled = true;
         }
 
-        void UpdateLCReports()
-        {
-            rtbLostCousins.Text = ft.UpdateLostCousinsReport(relTypesLC.BuildFilter<Individual>(x => x.RelationType));
+        // Run potentially expensive Lost Cousins calculations off the UI thread.
+        async Task UpdateLCReportsAsync()
+        {   
+            
+            Predicate<Individual> individualFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
+            Predicate<CensusIndividual> censusFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType, true);
+
+            rtbLostCousins.Text = await ft.UpdateLostCousinsReport(individualFilter);
+            var updatesTask = Task.Run(() =>
+            {
+                List<CensusIndividual> updates = [];
+                List<CensusIndividual> invalid = [];
+                string text = ft.LCOutput(updates, invalid, censusFilter);
+                return (updates, invalid, text);
+            });
+            var updatesResult = await updatesTask.ConfigureAwait(true);
+
+            // Apply results to UI controls.
             rtbLCUpdateData.ForeColor = Color.Black;
-            Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType, true);
-            LCUpdates = [];
-            LCInvalidReferences = [];
-            rtbLCUpdateData.Text = ft.LCOutput(LCUpdates, LCInvalidReferences, relationFilter);
+            LCUpdates = updatesResult.updates;
+            LCInvalidReferences = updatesResult.invalid;
+            rtbLCUpdateData.Text = updatesResult.text;
         }
 
         void BtnCheckMyAncestors_Click(object sender, EventArgs e)
@@ -1850,7 +1864,7 @@ namespace FTAnalyzer
             HourGlass(this, false);
         }
 
-        void RelTypesLC_RelationTypesChanged(object sender, EventArgs e) => UpdateLCReports();
+        async void RelTypesLC_RelationTypesChanged(object sender, EventArgs e) => await UpdateLCReportsAsync();
 
         void TxtLCEmail_TextChanged(object sender, EventArgs e) => ClearLogin();
 
