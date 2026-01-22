@@ -677,7 +677,7 @@ namespace FTAnalyzer
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.WWIIReportEvent);
         }
 
-        void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite("https://forums.lc");
+        void LinkLabel2_Click(object sender, EventArgs e) => SpecialMethods.VisitWebsite("https://forums.lc");
 
         void DgOccupations_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

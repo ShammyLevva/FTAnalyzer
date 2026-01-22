@@ -200,6 +200,8 @@ namespace FTAnalyzer
             LCSubTabs = new TabControl();
             LCReportsTab = new TabPage();
             splitLostCousins = new SplitContainer();
+            linkLabel2 = new LinkLabel();
+            LabLostCousinsWeb = new LinkLabel();
             Referrals = new GroupBox();
             ckbReferralInCommon = new CheckBox();
             btnReferrals = new Button();
@@ -218,8 +220,6 @@ namespace FTAnalyzer
             btnLC1881Scot = new Button();
             relTypesLC = new FTAnalyzer.Forms.Controls.RelationTypes();
             rtbLostCousins = new RichTextBox();
-            linkLabel2 = new LinkLabel();
-            LabLostCousinsWeb = new LinkLabel();
             btnLCnoCensus = new Button();
             LCUpdatesTab = new TabPage();
             rtbLCoutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
@@ -1918,6 +1918,8 @@ namespace FTAnalyzer
             // 
             // splitLostCousins.Panel1
             // 
+            splitLostCousins.Panel1.Controls.Add(linkLabel2);
+            splitLostCousins.Panel1.Controls.Add(LabLostCousinsWeb);
             splitLostCousins.Panel1.Controls.Add(Referrals);
             splitLostCousins.Panel1.Controls.Add(btnLCDuplicates);
             splitLostCousins.Panel1.Controls.Add(btnLCMissingCountry);
@@ -1935,11 +1937,39 @@ namespace FTAnalyzer
             // splitLostCousins.Panel2
             // 
             splitLostCousins.Panel2.Controls.Add(rtbLostCousins);
-            splitLostCousins.Panel2.Controls.Add(linkLabel2);
-            splitLostCousins.Panel2.Controls.Add(LabLostCousinsWeb);
             splitLostCousins.Size = new Size(1214, 422);
             splitLostCousins.SplitterDistance = 583;
             splitLostCousins.TabIndex = 41;
+            // 
+            // linkLabel2
+            // 
+            linkLabel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            linkLabel2.AutoSize = true;
+            linkLabel2.Font = new Font("Microsoft Sans Serif", 9.75F);
+            linkLabel2.Location = new Point(392, 71);
+            linkLabel2.Margin = new Padding(4, 0, 4, 0);
+            linkLabel2.Name = "linkLabel2";
+            linkLabel2.Size = new Size(173, 16);
+            linkLabel2.TabIndex = 52;
+            linkLabel2.TabStop = true;
+            linkLabel2.Text = "Visit the Lost Cousins Forum";
+            linkLabel2.LinkClicked += LinkLabel2_Click;
+            linkLabel2.Click += LinkLabel2_Click;
+            // 
+            // LabLostCousinsWeb
+            // 
+            LabLostCousinsWeb.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            LabLostCousinsWeb.AutoSize = true;
+            LabLostCousinsWeb.Font = new Font("Microsoft Sans Serif", 9.75F);
+            LabLostCousinsWeb.Location = new Point(392, 26);
+            LabLostCousinsWeb.Margin = new Padding(4, 0, 4, 0);
+            LabLostCousinsWeb.Name = "LabLostCousinsWeb";
+            LabLostCousinsWeb.Size = new Size(185, 16);
+            LabLostCousinsWeb.TabIndex = 36;
+            LabLostCousinsWeb.TabStop = true;
+            LabLostCousinsWeb.Text = "Visit the Lost Cousins Website";
+            LabLostCousinsWeb.LinkClicked += LabLostCousinsWeb_Click;
+            LabLostCousinsWeb.Click += LabLostCousinsWeb_Click;
             // 
             // Referrals
             // 
@@ -2145,47 +2175,18 @@ namespace FTAnalyzer
             // 
             // rtbLostCousins
             // 
-            rtbLostCousins.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             rtbLostCousins.BackColor = Color.White;
             rtbLostCousins.BorderStyle = BorderStyle.None;
+            rtbLostCousins.Dock = DockStyle.Fill;
             rtbLostCousins.Font = new Font("Microsoft Sans Serif", 9F);
-            rtbLostCousins.Location = new Point(4, 3);
+            rtbLostCousins.Location = new Point(0, 0);
             rtbLostCousins.Margin = new Padding(4);
             rtbLostCousins.Name = "rtbLostCousins";
             rtbLostCousins.ReadOnly = true;
-            rtbLostCousins.Size = new Size(619, 396);
+            rtbLostCousins.Size = new Size(627, 422);
             rtbLostCousins.TabIndex = 37;
             rtbLostCousins.TabStop = false;
             rtbLostCousins.Text = "";
-            // 
-            // linkLabel2
-            // 
-            linkLabel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            linkLabel2.AutoSize = true;
-            linkLabel2.Font = new Font("Microsoft Sans Serif", 9.75F);
-            linkLabel2.Location = new Point(247, 406);
-            linkLabel2.Margin = new Padding(4, 0, 4, 0);
-            linkLabel2.Name = "linkLabel2";
-            linkLabel2.Size = new Size(173, 16);
-            linkLabel2.TabIndex = 36;
-            linkLabel2.TabStop = true;
-            linkLabel2.Text = "Visit the Lost Cousins Forum";
-            linkLabel2.LinkClicked += LinkLabel2_LinkClicked;
-            // 
-            // LabLostCousinsWeb
-            // 
-            LabLostCousinsWeb.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            LabLostCousinsWeb.AutoSize = true;
-            LabLostCousinsWeb.Font = new Font("Microsoft Sans Serif", 9.75F);
-            LabLostCousinsWeb.Location = new Point(23, 406);
-            LabLostCousinsWeb.Margin = new Padding(4, 0, 4, 0);
-            LabLostCousinsWeb.Name = "LabLostCousinsWeb";
-            LabLostCousinsWeb.Size = new Size(185, 16);
-            LabLostCousinsWeb.TabIndex = 35;
-            LabLostCousinsWeb.TabStop = true;
-            LabLostCousinsWeb.Text = "Visit the Lost Cousins Website";
-            LabLostCousinsWeb.LinkClicked += LabLostCousinsWeb_Click;
-            LabLostCousinsWeb.Click += LabLostCousinsWeb_Click;
             // 
             // btnLCnoCensus
             // 
@@ -4449,7 +4450,6 @@ namespace FTAnalyzer
             splitLostCousins.Panel1.ResumeLayout(false);
             splitLostCousins.Panel1.PerformLayout();
             splitLostCousins.Panel2.ResumeLayout(false);
-            splitLostCousins.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitLostCousins).EndInit();
             splitLostCousins.ResumeLayout(false);
             Referrals.ResumeLayout(false);
@@ -4874,8 +4874,6 @@ namespace FTAnalyzer
         private Button btnLC1881Scot;
         private Forms.Controls.RelationTypes relTypesLC;
         private RichTextBox rtbLostCousins;
-        private LinkLabel linkLabel2;
-        private LinkLabel LabLostCousinsWeb;
         private ToolStripMenuItem mnuDuplicatesToExcel;
         private SplitContainer scOnThisDay;
         private Panel panel3;
@@ -4889,6 +4887,8 @@ namespace FTAnalyzer
         private Label labTodaySelectDate;
         private DateTimePicker dpToday;
         private Utilities.ScrollingRichTextBox rtbToday;
+        private LinkLabel linkLabel2;
+        private LinkLabel LabLostCousinsWeb;
     }
 }
 
