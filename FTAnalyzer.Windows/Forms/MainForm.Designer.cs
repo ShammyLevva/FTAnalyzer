@@ -365,6 +365,18 @@ namespace FTAnalyzer
             ckbFactSelect = new CheckedListBox();
             relTypesFacts = new FTAnalyzer.Forms.Controls.RelationTypes();
             tabToday = new TabPage();
+            scOnThisDay = new SplitContainer();
+            panel3 = new Panel();
+            labTodayYearStep = new Label();
+            nudToday = new NumericUpDown();
+            btnUpdateTodaysEvents = new Button();
+            labTodayLoadWorldEvents = new Label();
+            pbToday = new ProgressBar();
+            rbTodayMonth = new RadioButton();
+            rbTodaySingle = new RadioButton();
+            labTodaySelectDate = new Label();
+            dpToday = new DateTimePicker();
+            rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             NonDuplicate = new DataGridViewCheckBoxColumn();
             Score = new DataGridViewTextBoxColumn();
             DuplicateIndividualID = new DataGridViewTextBoxColumn();
@@ -379,18 +391,6 @@ namespace FTAnalyzer
             MatchBirthLocation = new DataGridViewTextBoxColumn();
             saveDatabase = new SaveFileDialog();
             restoreDatabase = new OpenFileDialog();
-            scOnThisDay = new SplitContainer();
-            panel3 = new Panel();
-            labTodayYearStep = new Label();
-            nudToday = new NumericUpDown();
-            btnUpdateTodaysEvents = new Button();
-            labTodayLoadWorldEvents = new Label();
-            pbToday = new ProgressBar();
-            rbTodayMonth = new RadioButton();
-            rbTodaySingle = new RadioButton();
-            labTodaySelectDate = new Label();
-            dpToday = new DateTimePicker();
-            rtbToday = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             menuStrip1.SuspendLayout();
             mnuSetRoot.SuspendLayout();
             statusStrip.SuspendLayout();
@@ -2704,7 +2704,7 @@ namespace FTAnalyzer
             groupBox9.Margin = new Padding(4);
             groupBox9.Name = "groupBox9";
             groupBox9.Padding = new Padding(4);
-            groupBox9.Size = new Size(1124, 92);
+            groupBox9.Size = new Size(1124, 98);
             groupBox9.TabIndex = 32;
             groupBox9.TabStop = false;
             groupBox9.Text = "Census Reports that don't use filters above";
@@ -2758,6 +2758,7 @@ namespace FTAnalyzer
             groupBox1.TabIndex = 22;
             groupBox1.TabStop = false;
             groupBox1.Text = "Potential Census Fact Problems";
+            groupBox1.Paint += groupBox1_Paint;
             // 
             // btnDuplicateCensus
             // 
@@ -4135,128 +4136,6 @@ namespace FTAnalyzer
             tabToday.Text = " On This Day ";
             tabToday.UseVisualStyleBackColor = true;
             // 
-            // NonDuplicate
-            // 
-            NonDuplicate.DataPropertyName = "IgnoreNonDuplicate";
-            NonDuplicate.FalseValue = "False";
-            NonDuplicate.HeaderText = "Ignore";
-            NonDuplicate.MinimumWidth = 40;
-            NonDuplicate.Name = "NonDuplicate";
-            NonDuplicate.ReadOnly = true;
-            NonDuplicate.TrueValue = "True";
-            NonDuplicate.Width = 40;
-            // 
-            // Score
-            // 
-            Score.DataPropertyName = "Score";
-            Score.HeaderText = "Score";
-            Score.MinimumWidth = 10;
-            Score.Name = "Score";
-            Score.ReadOnly = true;
-            Score.Width = 200;
-            // 
-            // DuplicateIndividualID
-            // 
-            DuplicateIndividualID.DataPropertyName = "IndividualID";
-            DuplicateIndividualID.HeaderText = "ID";
-            DuplicateIndividualID.MinimumWidth = 10;
-            DuplicateIndividualID.Name = "DuplicateIndividualID";
-            DuplicateIndividualID.ReadOnly = true;
-            DuplicateIndividualID.Width = 200;
-            // 
-            // DuplicateName
-            // 
-            DuplicateName.DataPropertyName = "Name";
-            DuplicateName.HeaderText = "Name";
-            DuplicateName.MinimumWidth = 50;
-            DuplicateName.Name = "DuplicateName";
-            DuplicateName.ReadOnly = true;
-            DuplicateName.Width = 150;
-            // 
-            // DuplicateForenames
-            // 
-            DuplicateForenames.DataPropertyName = "Forenames";
-            DuplicateForenames.HeaderText = "Forenames";
-            DuplicateForenames.MinimumWidth = 10;
-            DuplicateForenames.Name = "DuplicateForenames";
-            DuplicateForenames.ReadOnly = true;
-            DuplicateForenames.Visible = false;
-            DuplicateForenames.Width = 200;
-            // 
-            // DuplicateSurname
-            // 
-            DuplicateSurname.DataPropertyName = "Surname";
-            DuplicateSurname.HeaderText = "Surname";
-            DuplicateSurname.MinimumWidth = 10;
-            DuplicateSurname.Name = "DuplicateSurname";
-            DuplicateSurname.ReadOnly = true;
-            DuplicateSurname.Visible = false;
-            DuplicateSurname.Width = 200;
-            // 
-            // DuplicateBirthDate
-            // 
-            DuplicateBirthDate.DataPropertyName = "BirthDate";
-            DuplicateBirthDate.HeaderText = "Birthdate";
-            DuplicateBirthDate.MinimumWidth = 50;
-            DuplicateBirthDate.Name = "DuplicateBirthDate";
-            DuplicateBirthDate.ReadOnly = true;
-            DuplicateBirthDate.Width = 150;
-            // 
-            // DuplicateBirthLocation
-            // 
-            DuplicateBirthLocation.DataPropertyName = "BirthLocation";
-            DuplicateBirthLocation.HeaderText = "Birth Location";
-            DuplicateBirthLocation.MinimumWidth = 100;
-            DuplicateBirthLocation.Name = "DuplicateBirthLocation";
-            DuplicateBirthLocation.ReadOnly = true;
-            DuplicateBirthLocation.Width = 175;
-            // 
-            // MatchIndividualID
-            // 
-            MatchIndividualID.DataPropertyName = "MatchIndividualID";
-            MatchIndividualID.HeaderText = "Match ID";
-            MatchIndividualID.MinimumWidth = 10;
-            MatchIndividualID.Name = "MatchIndividualID";
-            MatchIndividualID.ReadOnly = true;
-            MatchIndividualID.Width = 50;
-            // 
-            // MatchName
-            // 
-            MatchName.DataPropertyName = "MatchName";
-            MatchName.HeaderText = "Match Name";
-            MatchName.MinimumWidth = 50;
-            MatchName.Name = "MatchName";
-            MatchName.ReadOnly = true;
-            MatchName.Width = 150;
-            // 
-            // MatchBirthDate
-            // 
-            MatchBirthDate.DataPropertyName = "MatchBirthDate";
-            MatchBirthDate.HeaderText = "Match Birthdate";
-            MatchBirthDate.MinimumWidth = 50;
-            MatchBirthDate.Name = "MatchBirthDate";
-            MatchBirthDate.ReadOnly = true;
-            MatchBirthDate.Width = 150;
-            // 
-            // MatchBirthLocation
-            // 
-            MatchBirthLocation.DataPropertyName = "MatchBirthLocation";
-            MatchBirthLocation.HeaderText = "Match Birth Location";
-            MatchBirthLocation.MinimumWidth = 100;
-            MatchBirthLocation.Name = "MatchBirthLocation";
-            MatchBirthLocation.ReadOnly = true;
-            MatchBirthLocation.Width = 175;
-            // 
-            // saveDatabase
-            // 
-            saveDatabase.DefaultExt = "zip";
-            saveDatabase.Filter = "Zip Files | *.zip";
-            // 
-            // restoreDatabase
-            // 
-            restoreDatabase.FileName = "*.zip";
-            restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
-            // 
             // scOnThisDay
             // 
             scOnThisDay.Dock = DockStyle.Fill;
@@ -4395,6 +4274,128 @@ namespace FTAnalyzer
             rtbToday.Size = new Size(1230, 398);
             rtbToday.TabIndex = 20;
             rtbToday.Text = "";
+            // 
+            // NonDuplicate
+            // 
+            NonDuplicate.DataPropertyName = "IgnoreNonDuplicate";
+            NonDuplicate.FalseValue = "False";
+            NonDuplicate.HeaderText = "Ignore";
+            NonDuplicate.MinimumWidth = 40;
+            NonDuplicate.Name = "NonDuplicate";
+            NonDuplicate.ReadOnly = true;
+            NonDuplicate.TrueValue = "True";
+            NonDuplicate.Width = 40;
+            // 
+            // Score
+            // 
+            Score.DataPropertyName = "Score";
+            Score.HeaderText = "Score";
+            Score.MinimumWidth = 10;
+            Score.Name = "Score";
+            Score.ReadOnly = true;
+            Score.Width = 200;
+            // 
+            // DuplicateIndividualID
+            // 
+            DuplicateIndividualID.DataPropertyName = "IndividualID";
+            DuplicateIndividualID.HeaderText = "ID";
+            DuplicateIndividualID.MinimumWidth = 10;
+            DuplicateIndividualID.Name = "DuplicateIndividualID";
+            DuplicateIndividualID.ReadOnly = true;
+            DuplicateIndividualID.Width = 200;
+            // 
+            // DuplicateName
+            // 
+            DuplicateName.DataPropertyName = "Name";
+            DuplicateName.HeaderText = "Name";
+            DuplicateName.MinimumWidth = 50;
+            DuplicateName.Name = "DuplicateName";
+            DuplicateName.ReadOnly = true;
+            DuplicateName.Width = 150;
+            // 
+            // DuplicateForenames
+            // 
+            DuplicateForenames.DataPropertyName = "Forenames";
+            DuplicateForenames.HeaderText = "Forenames";
+            DuplicateForenames.MinimumWidth = 10;
+            DuplicateForenames.Name = "DuplicateForenames";
+            DuplicateForenames.ReadOnly = true;
+            DuplicateForenames.Visible = false;
+            DuplicateForenames.Width = 200;
+            // 
+            // DuplicateSurname
+            // 
+            DuplicateSurname.DataPropertyName = "Surname";
+            DuplicateSurname.HeaderText = "Surname";
+            DuplicateSurname.MinimumWidth = 10;
+            DuplicateSurname.Name = "DuplicateSurname";
+            DuplicateSurname.ReadOnly = true;
+            DuplicateSurname.Visible = false;
+            DuplicateSurname.Width = 200;
+            // 
+            // DuplicateBirthDate
+            // 
+            DuplicateBirthDate.DataPropertyName = "BirthDate";
+            DuplicateBirthDate.HeaderText = "Birthdate";
+            DuplicateBirthDate.MinimumWidth = 50;
+            DuplicateBirthDate.Name = "DuplicateBirthDate";
+            DuplicateBirthDate.ReadOnly = true;
+            DuplicateBirthDate.Width = 150;
+            // 
+            // DuplicateBirthLocation
+            // 
+            DuplicateBirthLocation.DataPropertyName = "BirthLocation";
+            DuplicateBirthLocation.HeaderText = "Birth Location";
+            DuplicateBirthLocation.MinimumWidth = 100;
+            DuplicateBirthLocation.Name = "DuplicateBirthLocation";
+            DuplicateBirthLocation.ReadOnly = true;
+            DuplicateBirthLocation.Width = 175;
+            // 
+            // MatchIndividualID
+            // 
+            MatchIndividualID.DataPropertyName = "MatchIndividualID";
+            MatchIndividualID.HeaderText = "Match ID";
+            MatchIndividualID.MinimumWidth = 10;
+            MatchIndividualID.Name = "MatchIndividualID";
+            MatchIndividualID.ReadOnly = true;
+            MatchIndividualID.Width = 50;
+            // 
+            // MatchName
+            // 
+            MatchName.DataPropertyName = "MatchName";
+            MatchName.HeaderText = "Match Name";
+            MatchName.MinimumWidth = 50;
+            MatchName.Name = "MatchName";
+            MatchName.ReadOnly = true;
+            MatchName.Width = 150;
+            // 
+            // MatchBirthDate
+            // 
+            MatchBirthDate.DataPropertyName = "MatchBirthDate";
+            MatchBirthDate.HeaderText = "Match Birthdate";
+            MatchBirthDate.MinimumWidth = 50;
+            MatchBirthDate.Name = "MatchBirthDate";
+            MatchBirthDate.ReadOnly = true;
+            MatchBirthDate.Width = 150;
+            // 
+            // MatchBirthLocation
+            // 
+            MatchBirthLocation.DataPropertyName = "MatchBirthLocation";
+            MatchBirthLocation.HeaderText = "Match Birth Location";
+            MatchBirthLocation.MinimumWidth = 100;
+            MatchBirthLocation.Name = "MatchBirthLocation";
+            MatchBirthLocation.ReadOnly = true;
+            MatchBirthLocation.Width = 175;
+            // 
+            // saveDatabase
+            // 
+            saveDatabase.DefaultExt = "zip";
+            saveDatabase.Filter = "Zip Files | *.zip";
+            // 
+            // restoreDatabase
+            // 
+            restoreDatabase.FileName = "*.zip";
+            restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
             // MainForm
             // 

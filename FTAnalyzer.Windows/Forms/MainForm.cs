@@ -42,6 +42,7 @@ namespace FTAnalyzer
 
         public MainForm()
         {
+            loading = true;
             InitializeComponent();
         }
 
@@ -49,7 +50,6 @@ namespace FTAnalyzer
         {
             try
             {
-                loading = true;
                 SetupFonts();
                 SetHeightWidth();
                 RegisterEventHandlers();
@@ -3957,5 +3957,6 @@ namespace FTAnalyzer
         void Referrals_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
         void gbFilters_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
         void groupBox9_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void groupBox1_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
     }
 }
