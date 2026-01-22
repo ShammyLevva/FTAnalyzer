@@ -2703,6 +2703,7 @@ namespace FTAnalyzer
             groupBox9.TabIndex = 32;
             groupBox9.TabStop = false;
             groupBox9.Text = "Census Reports that don't use filters above";
+            groupBox9.Paint += groupBox9_Paint;
             // 
             // groupBox11
             // 
@@ -3848,7 +3849,7 @@ namespace FTAnalyzer
             dgSurnames.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgSurnames.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgSurnames.Columns.AddRange(new DataGridViewColumn[] { Surname, URI, Individuals, Families, Marriages });
-            dgSurnames.Location = new Point(4, 119);
+            dgSurnames.Location = new Point(4, 138);
             dgSurnames.Margin = new Padding(7);
             dgSurnames.MultiSelect = false;
             dgSurnames.Name = "dgSurnames";
@@ -3857,7 +3858,7 @@ namespace FTAnalyzer
             dgSurnames.RowHeadersVisible = false;
             dgSurnames.RowHeadersWidth = 50;
             dgSurnames.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgSurnames.Size = new Size(1234, 347);
+            dgSurnames.Size = new Size(1234, 328);
             dgSurnames.TabIndex = 1;
             dgSurnames.VirtualMode = true;
             dgSurnames.CellContentClick += DgSurnames_CellContentClick;
