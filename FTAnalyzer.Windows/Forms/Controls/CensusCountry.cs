@@ -115,7 +115,7 @@ namespace FTAnalyzer.Forms.Controls
         {
             GroupBox? box = sender as GroupBox;
             if (box is not null)
-                GraphicsUtilities.DrawGroupBox(box, e.Graphics, Color.Black, Color.Black, 3);
+                GraphicsUtilities.DrawGroupBox(box, e.Graphics, Color.Black, Color.Black, 2);
         }
     }
 }

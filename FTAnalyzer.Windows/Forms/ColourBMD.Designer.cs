@@ -473,7 +473,7 @@ namespace FTAnalyzer.Forms
             // cbFilter
             // 
             cbFilter.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbFilter.DropDownWidth = 330;
+            cbFilter.DropDownWidth = 430;
             cbFilter.Items.AddRange(new object[] { "All Individuals", "Date Missing (Red)", "Date Found (Green)", "Open Ended Date Range (Orange Red)", "Very Wide Date Range (Light Red)", "Wide Date Range (Orange)", "Narrow Date Range (Yellow)", "Just Year Date (Yellow Green)", "Approx Date Range (Light Green)", "Of Marrying Age no partner (Pink)", "No Partner shared fact/children (Coral)", "Partner but no marriage (Red Brown)" });
             cbFilter.Name = "cbFilter";
             cbFilter.Size = new Size(150, 35);
