@@ -1819,26 +1819,36 @@ namespace FTAnalyzer
 
         // Run potentially expensive Lost Cousins calculations off the UI thread.
         async Task UpdateLCReportsAsync()
-        {   
-            
+        {
+            // Indicate work in progress on the status bar while reports are generated.
+            string previousStatus = tsStatusLabel.Text ?? string.Empty;
+            tsStatusLabel.Text = "Loading Lost Cousins Report";
+
             Predicate<Individual> individualFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
             Predicate<CensusIndividual> censusFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType, true);
 
-            rtbLostCousins.Text = await ft.UpdateLostCousinsReport(individualFilter);
-            var updatesTask = Task.Run(() =>
+            try
             {
-                List<CensusIndividual> updates = [];
-                List<CensusIndividual> invalid = [];
-                string text = ft.LCOutput(updates, invalid, censusFilter);
-                return (updates, invalid, text);
-            });
-            var updatesResult = await updatesTask.ConfigureAwait(true);
+                rtbLostCousins.Text = await ft.UpdateLostCousinsReport(individualFilter);
+                var updatesTask = Task.Run(() =>
+                {
+                    List<CensusIndividual> updates = [];
+                    List<CensusIndividual> invalid = [];
+                    string text = ft.LCOutput(updates, invalid, censusFilter);
+                    return (updates, invalid, text);
+                });
+                var updatesResult = await updatesTask.ConfigureAwait(true);
 
-            // Apply results to UI controls.
-            rtbLCUpdateData.ForeColor = Color.Black;
-            LCUpdates = updatesResult.updates;
-            LCInvalidReferences = updatesResult.invalid;
-            rtbLCUpdateData.Text = updatesResult.text;
+                // Apply results to UI controls.
+                rtbLCUpdateData.ForeColor = Color.Black;
+                LCUpdates = updatesResult.updates;
+                LCInvalidReferences = updatesResult.invalid;
+                rtbLCUpdateData.Text = updatesResult.text;
+            }
+            finally
+            {
+                tsStatusLabel.Text = previousStatus;
+            }
         }
 
         void BtnCheckMyAncestors_Click(object sender, EventArgs e)
