@@ -3510,9 +3510,30 @@ namespace FTAnalyzer
             pbToday.Visible = true;
             labTodayLoadWorldEvents.Visible = true;
             rtbToday.ResetText();
-            Progress<int> progress = new(value => { pbToday.Value = value; });
-            Progress<string> outputText = new(text => { rtbToday.Rtf = text; });
-            await Task.Run(() => ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, (int)nudToday.Value, progress, outputText));
+            Progress<int> progress = new(value =>
+            {
+                if (value < 0) value = 0;
+                if (value > 100) value = 100;
+                pbToday.Value = value;
+            });
+            // Buffer the final RTF from AddTodaysFacts and apply once after background work completes
+            string todaysRtf = string.Empty;
+            try
+            {
+                todaysRtf = await ft.AddTodaysFacts(dpToday.Value, rbTodayMonth.Checked, (int)nudToday.Value, progress);
+            }
+            catch (Exception ex)
+            {
+                // Fallback plain text if Today generation fails
+                rtbToday.Text = $"Error generating 'On This Day' events:\n{ex.Message}";
+                labTodayLoadWorldEvents.Visible = false;
+                pbToday.Visible = false;
+                return;
+            }
+            if (!string.IsNullOrEmpty(todaysRtf))
+                rtbToday.Rtf = todaysRtf;
+            else
+                rtbToday.Text = "No events found for the selected date.";
             labTodayLoadWorldEvents.Visible = false;
             pbToday.Visible = false;
             await Analytics.TrackAction(Analytics.MainFormAction, Analytics.TodayClickedEvent);
