@@ -3103,16 +3103,16 @@ namespace FTAnalyzer
 
         void BtnAdvancedMissingData_Click(object sender, EventArgs e) => UIHelpers.ShowMessage("Not Implemented Yet", APPNAME);
         //{
-            // TODO Implement Advanced Missing Data Report - restore below code when done
-            //HourGlass(this, true);
-            //Predicate<Individual> relTypeFilter = relTypesResearchSuggest.BuildFilter<Individual>(x => x.RelationType);
-            //ComboBoxFamily? cbFamily = cmbColourFamily.SelectedItem as ComboBoxFamily;
-            //List<IDisplayMissingData> list = ft.MissingData(relTypeFilter, txtColouredSurname.Text, cbFamily);
-            //MissingData rs = new(list);
-            //DisposeDuplicateForms(rs);
-            //rs.Show();
-            //rs.Focus();
-            //HourGlass(this, false);
+        // TODO Implement Advanced Missing Data Report - restore below code when done
+        //HourGlass(this, true);
+        //Predicate<Individual> relTypeFilter = relTypesResearchSuggest.BuildFilter<Individual>(x => x.RelationType);
+        //ComboBoxFamily? cbFamily = cmbColourFamily.SelectedItem as ComboBoxFamily;
+        //List<IDisplayMissingData> list = ft.MissingData(relTypeFilter, txtColouredSurname.Text, cbFamily);
+        //MissingData rs = new(list);
+        //DisposeDuplicateForms(rs);
+        //rs.Show();
+        //rs.Focus();
+        //HourGlass(this, false);
         //}
 
         void CmbColourFamily_Click(object sender, EventArgs e) => UpdateColourFamilyComboBox(null);
@@ -3946,23 +3946,16 @@ namespace FTAnalyzer
                 GraphicsUtilities.DrawGroupBox(box, e.Graphics, Color.Black, Color.Black, 2);
         }
 
-        void groupBox10_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
         void groupBox2_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-
-        void groupBox4_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-
-        void groupBox5_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-
-        void groupBox6_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-
-        void groupBox11_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-
-        void Referrals_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-
-        void gbFilters_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-
-        void groupBox3_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-
         void groupBox7_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void groupBox3_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void groupBox5_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void groupBox6_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void groupBox4_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void groupBox10_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void groupBox11_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void Referrals_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void gbFilters_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
+        void groupBox9_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
     }
 }
