@@ -68,7 +68,7 @@ namespace FTAnalyzer.Graphics
                                      box.ClientRectangle.Height - (int)(strSize.Height / 2) - 1);
 
                 // Draw text
-                g.DrawString(box.Text, box.Font, textBrush, box.Padding.Left, 0);
+                //g.DrawString(box.Text, box.Font, textBrush, box.Padding.Left, 0);
 
                 // Drawing Border
                 //Left

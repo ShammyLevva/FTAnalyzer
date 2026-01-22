@@ -24,7 +24,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static readonly string VERSION = "10.0.0.0-RC4";
+        public static readonly string VERSION = "10.0.0.0-RC5";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(MainForm));
         const string APPNAME = "FTAnalyzer";
 
@@ -3943,7 +3943,7 @@ namespace FTAnalyzer
         {
             GroupBox? box = sender as GroupBox;
             if (box is not null)
-                GraphicsUtilities.DrawGroupBox(box, e.Graphics, Color.Black, Color.Black, 3);
+                GraphicsUtilities.DrawGroupBox(box, e.Graphics, Color.Black, Color.Black, 2);
         }
 
         void groupBox10_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
