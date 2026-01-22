@@ -2997,7 +2997,6 @@ namespace FTAnalyzer
 
         async void BtnInconsistentLocations_Click(object sender, EventArgs e)
         {
-            HourGlass(this, true);
             List<DisplayFact> results = [];
             tspbTabProgress.Maximum = 100;
             tspbTabProgress.Visible = true;
@@ -3009,7 +3008,6 @@ namespace FTAnalyzer
             DisposeDuplicateForms(factForm);
             await factForm.ShowAsync();
             factForm.ShowHideFactRows();
-            HourGlass(this, false);
         }
 
         List<DisplayFact> ProcessInconsistentLocations(Predicate<Individual> filter, IProgress<int> progressBar)
