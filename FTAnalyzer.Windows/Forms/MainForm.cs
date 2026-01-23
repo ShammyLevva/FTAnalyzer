@@ -2764,10 +2764,8 @@ namespace FTAnalyzer
                 rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
                 tsCountLabel.Text = $"Possible Duplicate Count : {dgDuplicates.RowCount:N0}.  {Messages.Hints_Duplicates}";
                 dgDuplicates.VirtualGridFiltered += VirtualGridFiltered;
-                dgDuplicates.UseWaitCursor = false;
             }
             SetDuplicateControlsVisibility(false);
-            HourGlass(this, false);
         }
 
         void SetDuplicateControlsVisibility(bool visible)
