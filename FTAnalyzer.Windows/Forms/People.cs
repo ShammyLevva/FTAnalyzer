@@ -24,6 +24,12 @@ namespace FTAnalyzer.Forms
             try
             {
                 InitializeComponent();
+
+                // Ensure toolStrip sits at the top and splitContainer fills below it
+                toolStrip1.Dock = DockStyle.Top;
+                splitContainer.Dock = DockStyle.Fill;
+                splitContainer.BringToFront(); // ensure correct z-order relative to status strip
+
                 Top += NativeMethods.TopTaskbarOffset;
                 indReportFormHelper = new(this, Text, dgIndividuals, ResetTable, "People");
                 famReportFormHelper = new(this, Text, dgFamilies, ResetTable, "People");
