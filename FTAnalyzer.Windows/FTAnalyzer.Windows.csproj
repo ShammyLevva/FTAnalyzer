@@ -211,7 +211,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AdvancedDataGridView" Version="4.0.3" />
+    <PackageReference Include="AdvancedDataGridView" Version="4.0.4" />
     <PackageReference Include="GoogleAnalyticsTracker.Simple" Version="7.0.1" />
     <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
     <PackageReference Include="log4net" Version="3.2.0" />
