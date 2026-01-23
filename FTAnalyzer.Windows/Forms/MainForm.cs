@@ -1081,11 +1081,6 @@ namespace FTAnalyzer
         #endregion
 
         #region EventHandlers
-        void Options_BaptismChanged(object? sender, EventArgs e)
-        {
-            // do anything that needs doing when option changes
-        }
-
         async void Options_ReloadData(object? sender, EventArgs e) => await QueryReloadData();
 
         void Options_MinimumParentalAgeChanged(object? sender, EventArgs e)
