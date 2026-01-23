@@ -197,7 +197,7 @@ namespace FTAnalyzer
             btnColourBMD = new Button();
             relTypesResearchSuggest = new FTAnalyzer.Forms.Controls.RelationTypes();
             tabLostCousins = new TabPage();
-            LCSubTabs = new TabControl();
+            LCSubTabs = new FTAnalyzer.Forms.Controls.HighlightTabControl();
             LCReportsTab = new TabPage();
             splitLostCousins = new SplitContainer();
             linkLabel2 = new LinkLabel();
@@ -277,7 +277,7 @@ namespace FTAnalyzer
             btnOldOSMap = new Button();
             btnModernOSMap = new Button();
             btnShowMap = new Button();
-            tabCtrlLocations = new TabControl();
+            tabCtrlLocations = new FTAnalyzer.Forms.Controls.HighlightTabControl();
             tabTreeView = new TabPage();
             treeViewLocations = new TreeView();
             imageList = new ImageList(components);
@@ -303,9 +303,9 @@ namespace FTAnalyzer
             labSources = new Label();
             pbSources = new ProgressBar();
             rtbOutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
-            tabSelector = new TabControl();
+            tabSelector = new FTAnalyzer.Forms.Controls.HighlightTabControl();
             tabMainLists = new TabPage();
-            tabMainListsSelector = new TabControl();
+            tabMainListsSelector = new FTAnalyzer.Forms.Controls.HighlightTabControl();
             tabIndividuals = new TabPage();
             dgIndividuals = new FTAnalyzer.Forms.Controls.VirtualDgvIndividuals();
             tabFamilies = new TabPage();
@@ -317,7 +317,7 @@ namespace FTAnalyzer
             tabCustomFacts = new TabPage();
             dgCustomFacts = new FTAnalyzer.Forms.Controls.VirtualDgvCustomFacts();
             tabErrorsFixes = new TabPage();
-            tabErrorFixSelector = new TabControl();
+            tabErrorFixSelector = new FTAnalyzer.Forms.Controls.HighlightTabControl();
             tabDataErrors = new TabPage();
             gbDataErrorTypes = new GroupBox();
             ckbDataErrors = new CheckedListBox();
@@ -4599,7 +4599,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.TabPage tabLostCousins;
         private System.Windows.Forms.TabPage tabCensus;
         private System.Windows.Forms.TabPage tabLocations;
-        private System.Windows.Forms.TabControl tabCtrlLocations;
+        private FTAnalyzer.Forms.Controls.HighlightTabControl tabCtrlLocations;
         private System.Windows.Forms.TabPage tabTreeView;
         private System.Windows.Forms.TreeView treeViewLocations;
         private System.Windows.Forms.TabPage tabCountries;
@@ -4611,7 +4611,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.TabPage tabPlaces;
         private FTAnalyzer.Forms.Controls.VirtualDgvLocations dgPlaces;
         private System.Windows.Forms.TabPage tabDisplayProgress;
-        private System.Windows.Forms.TabControl tabSelector;
+        private FTAnalyzer.Forms.Controls.HighlightTabControl tabSelector;
         private System.Windows.Forms.ToolStripMenuItem mnuMaps;
         private System.Windows.Forms.Button btnOldOSMap;
         private System.Windows.Forms.ToolStripMenuItem mnuShowTimeline;
@@ -4680,7 +4680,7 @@ namespace FTAnalyzer
         private FTAnalyzer.Forms.Controls.RelationTypes reltypesSurnames;
         private System.Windows.Forms.ToolStripMenuItem mnuCousinsCountReport;
         private System.Windows.Forms.TabPage tabMainLists;
-        private System.Windows.Forms.TabControl tabMainListsSelector;
+        private FTAnalyzer.Forms.Controls.HighlightTabControl tabMainListsSelector;
         private System.Windows.Forms.TabPage tabIndividuals;
         private FTAnalyzer.Forms.Controls.VirtualDgvIndividuals dgIndividuals;
         private System.Windows.Forms.TabPage tabFamilies;
@@ -4690,7 +4690,7 @@ namespace FTAnalyzer
         private FTAnalyzer.Forms.Controls.VirtualDgvOccupations dgOccupations;
         private FTAnalyzer.Forms.Controls.VirtualDgvSources dgSources;
         private System.Windows.Forms.TabPage tabErrorsFixes;
-        private System.Windows.Forms.TabControl tabErrorFixSelector;
+        private FTAnalyzer.Forms.Controls.HighlightTabControl tabErrorFixSelector;
         private System.Windows.Forms.TabPage tabDataErrors;
         private System.Windows.Forms.GroupBox gbDataErrorTypes;
         private System.Windows.Forms.Button btnSelectAll;
@@ -4734,7 +4734,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem getGoogleAPIKeyToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
         private System.Windows.Forms.ToolStripMenuItem googleAPISetupGuideToolStripMenuItem;
-        private System.Windows.Forms.TabControl LCSubTabs;
+        private FTAnalyzer.Forms.Controls.HighlightTabControl LCSubTabs;
         private System.Windows.Forms.TabPage LCReportsTab;
         private System.Windows.Forms.Button btnLCnoCensus;
         private System.Windows.Forms.Button btnLC1940USA;

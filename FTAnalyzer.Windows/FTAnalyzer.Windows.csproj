@@ -12,7 +12,7 @@
     <AssemblyName>FTAnalyzer</AssemblyName>
     <RootNamespace>FTAnalyzer</RootNamespace>
     <NeutralLanguage>en-GB</NeutralLanguage>
-    <StartupObject>FTAnalyzer.Windows.Program</StartupObject>
+    <StartupObject>FTAnalyzer.Program</StartupObject>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
     <ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
