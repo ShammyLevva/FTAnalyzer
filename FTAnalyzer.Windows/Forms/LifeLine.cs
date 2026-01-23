@@ -56,10 +56,10 @@ namespace FTAnalyzer.Forms
                 dgIndividuals.Sort(sortedname, ListSortDirection.Ascending);
             }
             DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
-            int splitheight = (int)RegistrySettings.GetRegistryValue("Lifeline Facts Splitter Distance", -1);
+            int splitheight = RegistrySettings.GetIntRegistryValue("Lifeline Facts Splitter Distance", -1);
             if (splitheight != -1)
                 splitContainerFacts.SplitterDistance = Height - splitheight;
-            splitContainerMap.SplitterDistance = (int)RegistrySettings.GetRegistryValue("Lifeline Map Splitter Distance", splitContainerMap.SplitterDistance);
+            splitContainerMap.SplitterDistance = RegistrySettings.GetIntRegistryValue("Lifeline Map Splitter Distance", splitContainerMap.SplitterDistance);
         }
 
         void DatabaseHelper_GeoLocationUpdated(object? location, EventArgs e)
@@ -290,10 +290,10 @@ namespace FTAnalyzer.Forms
 
         void LifeLine_Load(object sender, EventArgs e)
         {
-            int Width = (int)RegistrySettings.GetRegistryValue("Lifeline size - width", this.Width);
-            int Height = (int)RegistrySettings.GetRegistryValue("Lifeline size - height", this.Height);
-            int Top = (int)RegistrySettings.GetRegistryValue("Lifeline position - top", this.Top);
-            int Left = (int)RegistrySettings.GetRegistryValue("Lifeline position - left", this.Left);
+            int Width = RegistrySettings.GetIntRegistryValue("Lifeline size - width", this.Width);
+            int Height = RegistrySettings.GetIntRegistryValue("Lifeline size - height", this.Height);
+            int Top = RegistrySettings.GetIntRegistryValue("Lifeline position - top", this.Top);
+            int Left = RegistrySettings.GetIntRegistryValue("Lifeline position - left", this.Left);
             this.Width = Width;
             this.Height = Height;
             this.Top = Top;

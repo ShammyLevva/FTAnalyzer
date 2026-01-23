@@ -36,7 +36,7 @@ namespace FTAnalyzer.Forms.Controls
 
         public void GetCurrentMapPreference()
         {
-            string mapPreference = RegistrySettings.GetRegistryValue("Default Map Background", defaultMap).ToString() ?? defaultMap;
+            string mapPreference = RegistrySettings.GetStringRegistryValue("Default Map Background", defaultMap);
             foreach (ToolStripMenuItem menu in DropDownItems)
             {
                 if (mapPreference.Equals(menu.Name))

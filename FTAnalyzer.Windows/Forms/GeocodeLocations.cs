@@ -98,7 +98,7 @@ namespace FTAnalyzer.Forms
                 ToolStripMenuItem menu = new(geocode)
                 {
                     Name = geocode,
-                    Checked = RegistrySettings.GetRegistryValue(geocode, "True").Equals("True"),
+                    Checked = RegistrySettings.GetBoolRegistryValue(geocode, true),
                     CheckOnClick = true
                 };
                 menu.CheckedChanged += new EventHandler(MenuGeocode_CheckedChanged);
@@ -117,7 +117,7 @@ namespace FTAnalyzer.Forms
                 ToolStripMenuItem menu = new(resultType)
                 {
                     Name = resultType,
-                    Checked = RegistrySettings.GetRegistryValue(resultType, "True").Equals("True"),
+                    Checked = RegistrySettings.GetBoolRegistryValue(resultType, true),
                     CheckOnClick = true
                 };
                 menu.CheckedChanged += new EventHandler(MenuResultType_CheckedChanged);

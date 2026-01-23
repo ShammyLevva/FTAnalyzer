@@ -83,12 +83,12 @@ namespace FTAnalyzer.Forms
                 dgBMDReportSheet.RowTemplate.Height = (int)(FontSettings.Default.SelectedFont.Height * GraphicsUtilities.GetCurrentScaling());
                 reportFormHelper.LoadColumnLayout("ColourBMDColumns.xml");
                 tsRecords.Text = $"{Messages.Count}{reportList.Count} records listed.";
-                string defaultProvider = RegistrySettings.GetRegistryValue("Default Search Provider", DEFAULT_PROVIDER).ToString() ?? DEFAULT_PROVIDER;
+                string defaultProvider = RegistrySettings.GetStringRegistryValue("Default Search Provider", DEFAULT_PROVIDER);
                 defaultProvider ??= DEFAULT_PROVIDER;
                 if (defaultProvider.Equals("FreeCen"))
                     defaultProvider = "FreeBMD";
                 cbBMDSearchProvider.Text = defaultProvider;
-                string defaultRegion = RegistrySettings.GetRegistryValue("Default Region", DEFAULT_REGION).ToString() ?? DEFAULT_REGION;
+                string defaultRegion = RegistrySettings.GetStringRegistryValue("Default Region", DEFAULT_REGION);
                 defaultRegion ??= DEFAULT_REGION;
                 cbRegion.Text = defaultRegion;
                 cbFilter.Text = "All Individuals";

@@ -26,81 +26,111 @@ namespace FTAnalyzer.Forms.Controls
         }
 
         #region Location Tree Building
-        public TreeNode[] GetAllLocationsTreeNodes(bool mainform, ToolStripProgressBar progressBar)
-        {
-            try
-            {
-                if (mainformTreeRootNode is not null)
-                    return BuildTreeNodeArray(mainform);
-                progressBar.Value = 0;
-                int locationCount = 0;
-                progressBar.Maximum = FamilyTree.Instance.AllDisplayPlaces.Count;
-                mainformTreeRootNode = new TreeNode();
-                placesTreeRootNode = new TreeNode();
-                foreach (FactLocation location in FamilyTree.Instance.AllDisplayPlaces.Cast<FactLocation>())
-                {
-                    string[] parts = location.GetParts();
-                    TreeNode? currentM = mainformTreeRootNode;
-                    TreeNode? currentP = placesTreeRootNode;
-                    foreach (string part in parts)
-                    {
-                        if (part.Length == 0 && !GeneralSettings.Default.AllowEmptyLocations) break;
-                        TreeNode? childM = currentM.Nodes.Find(part, false).FirstOrDefault();
-                        TreeNode? childP = currentP.Nodes.Find(part, false).FirstOrDefault();
-                        if (childM is null)
-                        {
-                            TreeNode child = new((part.Length == 0 ? "<blank>" : part))
-                            {
-                                Name = part,
-                                Tag = location,
-                                ToolTipText = "Geocoding Status : " + location.Geocoded
-                            };
-                            SetTreeNodeImage(location, child);
-                            // Set everything other than known countries and known regions to regular
-                            if ((currentM.Level == 0 && Countries.IsKnownCountry(part)) ||
-                                (currentM.Level == 1 && Regions.IsKnownRegion(part)))
-                                child.ForeColor = Color.Green;
-                            else
-                                child.ForeColor = Color.Black;
-                            childM = child;
-                            childP = (TreeNode)child.Clone();
-                            currentM.Nodes.Add(childM);
-                            currentP.Nodes.Add(childP);
-                        }
-                        currentM = childM;
-                        currentP = childP;
-                    }
-                    if (++locationCount % 10 == 0)
-                    {
-                        progressBar.Value = locationCount;
-                        Application.DoEvents();
-                    }
-                }
-                if (GeneralSettings.Default.AllowEmptyLocations)
-                { // trim empty end nodes
-                    bool recheck = true;
-                    while (recheck)
-                    {
-                        TreeNode[] emptyNodes = mainformTreeRootNode.Nodes.Find(string.Empty, true);
-                        recheck = false;
-                        foreach (TreeNode node in emptyNodes)
-                        {
-                            if (node.FirstNode is null)
-                            {
-                                node.Remove();
-                                recheck = true;
-                            }
-                        }
-                    }
-                }
-                foreach (TreeNode node in mainformTreeRootNode.Nodes)
-                    node.Text += "         "; // force text to be longer to fix bold bug
-                foreach (TreeNode node in placesTreeRootNode.Nodes)
-                    node.Text += "         "; // force text to be longer to fix bold bug
-            }
-            catch (Exception) { }
-            return BuildTreeNodeArray(mainform);
-        }
+		public async Task<TreeNode[]> BuildAllLocationsTreeNodesAsync(bool mainform, ToolStripProgressBar progressBar, CancellationToken cancellationToken = default)
+		{
+			if (mainformTreeRootNode is not null && placesTreeRootNode is not null)
+				return BuildTreeNodeArray(mainform);
+
+			progressBar.Value = 0;
+			int totalCount = FamilyTree.Instance.AllDisplayPlaces.Count;
+			progressBar.Maximum = totalCount;
+
+			// Capture the current sync context so progress updates can be marshalled back to UI thread.
+			SynchronizationContext? syncContext = SynchronizationContext.Current;
+			var progress = new Progress<int>(count =>
+			{
+				if (syncContext is not null && SynchronizationContext.Current != syncContext)
+				{
+					// Ensure updates happen on the original UI context.
+					syncContext.Post(_ => progressBar.Value = Math.Min(count, progressBar.Maximum), null);
+				}
+				else
+				{
+					progressBar.Value = Math.Min(count, progressBar.Maximum);
+				}
+			});
+
+			(TreeNode mainRoot, TreeNode placesRoot) = await Task.Run(() =>
+			{
+				return BuildLocationTreeNodesCore(((IProgress<int>)progress), cancellationToken);
+			}, cancellationToken).ConfigureAwait(true);
+
+			// Back on UI thread: assign cached roots.
+			mainformTreeRootNode = mainRoot;
+			placesTreeRootNode = placesRoot;
+
+			return BuildTreeNodeArray(mainform);
+		}
+
+        static (TreeNode mainRoot, TreeNode placesRoot) BuildLocationTreeNodesCore(IProgress<int> progress, CancellationToken cancellationToken)
+		{
+			TreeNode mainRoot = new();
+			TreeNode placesRoot = new();
+			int locationCount = 0;
+
+			foreach (FactLocation location in FamilyTree.Instance.AllDisplayPlaces.Cast<FactLocation>())
+			{
+				cancellationToken.ThrowIfCancellationRequested();
+
+				string[] parts = location.GetParts();
+				TreeNode? currentM = mainRoot;
+				TreeNode? currentP = placesRoot;
+				foreach (string part in parts)
+				{
+					if (part.Length == 0 && !GeneralSettings.Default.AllowEmptyLocations) break;
+					TreeNode? childM = currentM.Nodes.Find(part, false).FirstOrDefault();
+					TreeNode? childP = currentP.Nodes.Find(part, false).FirstOrDefault();
+					if (childM is null)
+					{
+						TreeNode child = new((part.Length == 0 ? "<blank>" : part))
+						{
+							Name = part,
+							Tag = location,
+							ToolTipText = "Geocoding Status : " + location.Geocoded
+						};
+						SetTreeNodeImage(location, child);
+						// Set everything other than known countries and known regions to regular
+						if ((currentM.Level == 0 && Countries.IsKnownCountry(part)) ||
+							(currentM.Level == 1 && Regions.IsKnownRegion(part)))
+							child.ForeColor = Color.Green;
+						else
+							child.ForeColor = Color.Black;
+						childM = child;
+						childP = (TreeNode)child.Clone();
+						currentM.Nodes.Add(childM);
+						currentP.Nodes.Add(childP);
+					}
+					currentM = childM;
+					currentP = childP;
+				}
+				if (++locationCount % 10 == 0)
+				{
+					progress.Report(locationCount);
+				}
+			}
+			if (GeneralSettings.Default.AllowEmptyLocations)
+			{ // trim empty end nodes
+				bool recheck = true;
+				while (recheck)
+				{
+					TreeNode[] emptyNodes = mainRoot.Nodes.Find(string.Empty, true);
+					recheck = false;
+					foreach (TreeNode node in emptyNodes)
+					{
+						if (node.FirstNode is null)
+						{
+							node.Remove();
+							recheck = true;
+						}
+					}
+				}
+			}
+			foreach (TreeNode node in mainRoot.Nodes)
+				node.Text += "         "; // force text to be longer to fix bold bug
+			foreach (TreeNode node in placesRoot.Nodes)
+				node.Text += "         "; // force text to be longer to fix bold bug
+			return (mainRoot, placesRoot);
+		}
 
         static void SetTreeNodeImage(FactLocation location, TreeNode child)
         {

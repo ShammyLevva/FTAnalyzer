@@ -203,13 +203,13 @@ namespace FTAnalyzer.Utilities
             {
                 parent.WindowState = FormWindowState.Normal;
                 parent.StartPosition = FormStartPosition.Manual;
-                int top = (int)RegistrySettings.GetRegistryValue(_registry + " position - top", defaultLocation.Item1);
-                int left = (int)RegistrySettings.GetRegistryValue(_registry + " position - left", defaultLocation.Item2);
+                int top = RegistrySettings.GetIntRegistryValue(_registry + " position - top", defaultLocation.Item1);
+                int left = RegistrySettings.GetIntRegistryValue(_registry + " position - left", defaultLocation.Item2);
                 Point topLeft = CheckIsOnScreen(top, left);
                 parent.Top = topLeft.Y;
                 parent.Left = topLeft.X;
-                parent.Height = (int)RegistrySettings.GetRegistryValue(_registry + " size - height", defaultSize.Item1);
-                parent.Width = (int)RegistrySettings.GetRegistryValue(_registry + " size - width", defaultSize.Item2);
+                parent.Height = RegistrySettings.GetIntRegistryValue(_registry + " size - height", defaultSize.Item1);
+                parent.Width = RegistrySettings.GetIntRegistryValue(_registry + " size - width", defaultSize.Item2);
             }
         }
 

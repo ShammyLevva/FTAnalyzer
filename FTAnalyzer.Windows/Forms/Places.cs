@@ -38,10 +38,10 @@ namespace FTAnalyzer.Forms
             SetupMap();
             dgFacts.AutoGenerateColumns = false;
             DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
-            int splitheight = (int)RegistrySettings.GetRegistryValue("Places Facts Splitter Distance", -1);
+            int splitheight = RegistrySettings.GetIntRegistryValue("Places Facts Splitter Distance",-1);
             if (splitheight != -1)
                 splitContainerFacts.SplitterDistance = Height - splitheight;
-            splitContainerMap.SplitterDistance = (int)RegistrySettings.GetRegistryValue("Places Map Splitter Distance", splitContainerMap.SplitterDistance);
+            splitContainerMap.SplitterDistance = RegistrySettings.GetIntRegistryValue("Places Map Splitter Distance", splitContainerMap.SplitterDistance);
         }
 
         void DatabaseHelper_GeoLocationUpdated(object? location, EventArgs e)
@@ -198,16 +198,16 @@ namespace FTAnalyzer.Forms
                 e.ToolTipText = "Double click to edit location.";
         }
 
-        void Places_Load(object sender, EventArgs e)
-        {
+		async void Places_Load(object sender, EventArgs e)
+		{
             try
             {
-                TreeNode[] nodes = TreeViewHandler.Instance.GetAllLocationsTreeNodes(false, pbPlaces);
+				TreeNode[] nodes = await TreeViewHandler.Instance.BuildAllLocationsTreeNodesAsync(false, pbPlaces);
                 tvPlaces.Nodes.AddRange(nodes);
-                int Width = (int)RegistrySettings.GetRegistryValue("Places size - width", this.Width);
-                int Height = (int)RegistrySettings.GetRegistryValue("Places size - height", this.Height);
-                int Top = (int)RegistrySettings.GetRegistryValue("Places position - top", this.Top);
-                int Left = (int)RegistrySettings.GetRegistryValue("Places position - left", this.Left);
+                int Width = RegistrySettings.GetIntRegistryValue("Places size - width", this.Width);
+                int Height = RegistrySettings.GetIntRegistryValue("Places size - height", this.Height);
+                int Top = RegistrySettings.GetIntRegistryValue("Places position - top", this.Top);
+                int Left = RegistrySettings.GetIntRegistryValue("Places position - left", this.Left);
                 this.Width = Width;
                 this.Height = Height;
                 this.Top = Top;

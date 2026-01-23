@@ -201,10 +201,10 @@ namespace FTAnalyzer.Forms
             SetupMap();
             DisplayLocationsForYear(labValue.Text);
             mh.CheckIfGeocodingNeeded(this, outputText);
-            int Width = (int)RegistrySettings.GetRegistryValue("Timeline size - width", this.Width);
-            int Height = (int)RegistrySettings.GetRegistryValue("Timeline size - height", this.Height);
-            int Top = (int)RegistrySettings.GetRegistryValue("Timeline position - top", this.Top);
-            int Left = (int)RegistrySettings.GetRegistryValue("Timeline position - left", this.Left);
+            int Width = RegistrySettings.GetIntRegistryValue("Timeline size - width", this.Width);
+            int Height = RegistrySettings.GetIntRegistryValue("Timeline size - height", this.Height);
+            int Top = RegistrySettings.GetIntRegistryValue("Timeline position - top", this.Top);
+            int Left = RegistrySettings.GetIntRegistryValue("Timeline position - left", this.Left);
             this.Width = Width;
             this.Height = Height;
             this.Top = Top + NativeMethods.TopTaskbarOffset;
