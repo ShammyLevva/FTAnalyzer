@@ -3,6 +3,7 @@ using FTAnalyzer.Filters;
 using FTAnalyzer.Forms;
 using FTAnalyzer.Forms.Controls;
 using FTAnalyzer.Graphics;
+using System.Collections.Concurrent;
 using FTAnalyzer.Properties;
 using FTAnalyzer.Shared.Utilities;
 using FTAnalyzer.UserControls;
@@ -259,6 +260,10 @@ namespace FTAnalyzer
                 HourGlass(this, true);
                 this.filename = filename;
                 CloseGEDCOM(false);
+
+                // allow UI to repaint (hourglass/status/cleared output) before starting heavy async work
+                await Task.Yield();
+
                 if (!stopProcessing)
                 {
                     if (await LoadTreeAsync(filename))
@@ -294,9 +299,19 @@ namespace FTAnalyzer
             }
         }
 
+        // buffer and batch output so long-running loads do not flood the UI thread
         async Task<bool> LoadTreeAsync(string filename)
         {
-            Progress<string> outputText = new(rtbOutput.AppendText);
+            System.Collections.Concurrent.ConcurrentQueue<string> buffer = new();
+            using CancellationTokenSource cts = new();
+
+            Task flushTask = FlushOutputAsync(buffer, cts.Token);
+
+            IProgress<string> outputText = new Progress<string>(s => buffer.Enqueue(s));
+
+            // give UI another chance to process paint/cursor messages before disk I/O starts
+            await Task.Yield();
+
             XmlDocument? doc;
             Stopwatch timer = new();
             timer.Start();
@@ -307,6 +322,8 @@ namespace FTAnalyzer
             if (doc is null)
             {
                 timer.Stop();
+                cts.Cancel();
+                await flushTask.ConfigureAwait(false);
                 return false;
             }
             timer.Stop();
@@ -316,18 +333,63 @@ namespace FTAnalyzer
             var sourceProgress = new Progress<int>(value => { pbSources.Value = value; });
             var individualProgress = new Progress<int>(value => { pbIndividuals.Value = value; });
             var familyProgress = new Progress<int>(value => { pbFamilies.Value = value; });
-            var RelationshipProgress = new Progress<int>(value => { pbRelationships.Value = value; });
+            var relationshipProgress = new Progress<int>(value => { pbRelationships.Value = value; });
             await Task.Run(() => ft.LoadTreeSources(doc, sourceProgress, outputText));
             await Task.Run(() => ft.LoadTreeIndividuals(doc, individualProgress, outputText));
             await Task.Run(() => ft.LoadTreeFamilies(doc, familyProgress, outputText));
-            await Task.Run(() => ft.LoadTreeRelationships(doc, RelationshipProgress, outputText));
+            await Task.Run(() => ft.LoadTreeRelationships(doc, relationshipProgress, outputText));
             await Task.Run(() => FamilyTree.CleanUpXML());
             doc = null;
             ft.DocumentLoaded = false;
             timer.Stop();
             WriteTime("\nFile Loaded and Analysed", outputText, timer);
             WriteMemory(outputText);
+
+            cts.Cancel();
+            await flushTask.ConfigureAwait(false);
             return true;
+        }
+
+        async Task FlushOutputAsync(System.Collections.Concurrent.ConcurrentQueue<string> buffer, CancellationToken token)
+        {
+            try
+            {
+                while (!token.IsCancellationRequested)
+                {
+                    await Task.Delay(100, token).ConfigureAwait(false);
+
+                    if (buffer.IsEmpty)
+                        continue;
+
+                    StringBuilder sb = new();
+                    while (buffer.TryDequeue(out string? line))
+                        sb.Append(line);
+
+                    string text = sb.ToString();
+                    if (text.Length == 0)
+                        continue;
+
+                    if (IsDisposed || Disposing)
+                        return;
+
+                    BeginInvoke(new Action(() => rtbOutput.AppendText(text)));
+                }
+            }
+            catch (TaskCanceledException)
+            {
+                // ignore cancellation
+            }
+
+            if (buffer.IsEmpty || IsDisposed || Disposing)
+                return;
+
+            // final drain after cancellation
+            StringBuilder finalSb = new();
+            while (buffer.TryDequeue(out string? line2))
+                finalSb.Append(line2);
+            string finalText = finalSb.ToString();
+            if (finalText.Length > 0)
+                BeginInvoke(new Action(() => rtbOutput.AppendText(finalText)));
         }
 
         static void WriteTime(string prefixText, IProgress<string> outputText, Stopwatch timer)
