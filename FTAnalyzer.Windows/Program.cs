@@ -1,9 +1,8 @@
 using FTAnalyzer.Exports;
 using FTAnalyzer.Mapping;
 using SharpMap;
-using System.Runtime.InteropServices;
 
-namespace FTAnalyzer.Windows
+namespace FTAnalyzer
 {
     internal static partial class Program
     {

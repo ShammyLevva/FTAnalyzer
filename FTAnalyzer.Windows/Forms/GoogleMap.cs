@@ -2,7 +2,6 @@
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Properties;
 using FTAnalyzer.Utilities;
-using FTAnalyzer.Windows;
 using ICSharpCode.SharpZipLib.Zip;
 using Newtonsoft.Json;
 using System.Diagnostics;

@@ -8,7 +8,6 @@ using FTAnalyzer.Properties;
 using FTAnalyzer.Shared.Utilities;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
-using FTAnalyzer.Windows;
 using HtmlAgilityPack;
 using ICSharpCode.SharpZipLib.Zip;
 using Microsoft.Win32;
@@ -302,7 +301,7 @@ namespace FTAnalyzer
         // buffer and batch output so long-running loads do not flood the UI thread
         async Task<bool> LoadTreeAsync(string filename)
         {
-            System.Collections.Concurrent.ConcurrentQueue<string> buffer = new();
+            ConcurrentQueue<string> buffer = new();
             using CancellationTokenSource cts = new();
 
             Task flushTask = FlushOutputAsync(buffer, cts.Token);

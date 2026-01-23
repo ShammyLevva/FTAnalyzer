@@ -1,5 +1,4 @@
 ﻿using FTAnalyzer.Filters;
-using FTAnalyzer.Windows;
 using System.Diagnostics;
 using System.Text;
 
