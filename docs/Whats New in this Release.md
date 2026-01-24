@@ -1,3 +1,15 @@
+## Release Candidate Version 10.0.0.0-RC6 - 24th January 2026  
+**Updates**  
+Added a custom TabSelector so that current tab is more obvious
+
+**Bugfixes**  
+AdvamcedDataGridView no longer scales icon incorrectly  
+People form individuals header was hidden behind toolbar
+.Net10 now fully supports HighDPI scaling so manual support now unnecessary
+TreeViewHandler reworked to by async to avoid blocking UI thread
+Locations tab countries and regions were missing click handlers
+Lost Cousins report now more responsive
+
 ## Release Candidate Version 10.0.0.0-RC5 - 22nd January 2026  
 **Bugfixes**  
 Fixed async issues on getting On this day events  
