@@ -1,3 +1,10 @@
+## Release Candidate Version 10.0.0.0-RC7 - ?th February 2026  
+**Updates**  
+Added 1939 Register reference detection where ED letters are missing
+
+**Bugfixes**  
+
+
 ## Release Candidate Version 10.0.0.0-RC6 - 24th January 2026  
 **Updates**  
 Added a custom TabSelector so that current tab is more obvious

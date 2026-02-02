@@ -1,5 +1,6 @@
 ﻿using FTAnalyzer;
 using FTAnalyzer.Forms;
+using Windows.Storage;
 
 namespace UnitTests
 {
@@ -146,6 +147,7 @@ namespace UnitTests
             UKCensusTest("18910405 Census RG12 Piece: 3485, Folio: 134, Page: 30, Sch: 151 - Lancashire Barrow-In-Furness - John MARR", CensusDate.UKCENSUS1891, "3485", "134", "30");
             UKCensusTest("Census 1881 Thwaite, Suffolk RG11/1852/92/4", CensusDate.UKCENSUS1881, "1852", "92", "4");
             UKCensusTest("RG11, Piece 1208, Folio 60 face, Page 13, Schedule 71", CensusDate.UKCENSUS1881, "1208", "60", "13");
+            UK1939CensusTest("RG101/1043I/014/24Website Access; 26 January 2026AccessTypeWebsite AccessAccessDate26 January 2026ItemOfInterest1939", "1043I", "014", "24", CensusReference.MISSING);
         }
 
         [TestMethod]
@@ -232,6 +234,16 @@ namespace UnitTests
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1921));
             Assert.IsTrue(censusRef.RD.Equals(rd));
             Assert.IsTrue(censusRef.SD.Equals(sd));
+        }
+
+        static void UK1939CensusTest(string reference, string piece, string page, string schedule, string ED)
+        {
+            CensusReference censusRef = new("I1", reference, false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1939));
+            Assert.IsTrue(censusRef.Piece.Equals(piece));
+            Assert.IsTrue(censusRef.Page.Equals(page));
+            Assert.IsTrue(censusRef.Schedule.Equals(schedule));
+            Assert.IsTrue(censusRef.ED.Equals(ED));
         }
 
         static void UKCensusTest(string reference, FactDate year, string piece, string folio, string page)

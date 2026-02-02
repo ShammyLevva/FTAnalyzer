@@ -7,5 +7,5 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 // [assembly: AssemblyCompany("Your Company")]
 // [assembly: AssemblyProduct("FTAnalyzer")]
 
-// MSTEST001 recommendation: configure test parallelization
-[assembly: Parallelize(Workers = 0, Scope = ExecutionScope.MethodLevel)]
+// MSTEST001 recommendation: configure test parallelization off because debugging is near impossible with parallel tests
+[assembly: DoNotParallelize]
