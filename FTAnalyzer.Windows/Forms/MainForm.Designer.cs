@@ -1892,6 +1892,7 @@ namespace FTAnalyzer
             LCSubTabs.Controls.Add(LCUpdatesTab);
             LCSubTabs.Controls.Add(LCVerifyTab);
             LCSubTabs.Dock = DockStyle.Fill;
+            LCSubTabs.DrawMode = TabDrawMode.OwnerDrawFixed;
             LCSubTabs.Location = new Point(4, 4);
             LCSubTabs.Margin = new Padding(4);
             LCSubTabs.Name = "LCSubTabs";
@@ -2910,9 +2911,11 @@ namespace FTAnalyzer
             tabCtrlLocations.Controls.Add(tabAddresses);
             tabCtrlLocations.Controls.Add(tabPlaces);
             tabCtrlLocations.Dock = DockStyle.Fill;
+            tabCtrlLocations.DrawMode = TabDrawMode.OwnerDrawFixed;
             tabCtrlLocations.Location = new Point(4, 4);
             tabCtrlLocations.Margin = new Padding(4);
             tabCtrlLocations.Name = "tabCtrlLocations";
+            tabCtrlLocations.Padding = new Point(8, 3);
             tabCtrlLocations.SelectedIndex = 0;
             tabCtrlLocations.Size = new Size(1230, 458);
             tabCtrlLocations.TabIndex = 0;
@@ -3278,6 +3281,7 @@ namespace FTAnalyzer
             tabSelector.Controls.Add(tabTreetops);
             tabSelector.Controls.Add(tabWorldWars);
             tabSelector.Controls.Add(tabToday);
+            tabSelector.DrawMode = TabDrawMode.OwnerDrawFixed;
             tabSelector.Location = new Point(0, 31);
             tabSelector.Margin = new Padding(4);
             tabSelector.Multiline = true;
@@ -3307,6 +3311,7 @@ namespace FTAnalyzer
             tabMainListsSelector.Controls.Add(tabOccupations);
             tabMainListsSelector.Controls.Add(tabCustomFacts);
             tabMainListsSelector.Dock = DockStyle.Fill;
+            tabMainListsSelector.DrawMode = TabDrawMode.OwnerDrawFixed;
             tabMainListsSelector.Location = new Point(4, 4);
             tabMainListsSelector.Margin = new Padding(4);
             tabMainListsSelector.Name = "tabMainListsSelector";
@@ -3508,6 +3513,7 @@ namespace FTAnalyzer
             tabErrorFixSelector.Controls.Add(tabLooseDeaths);
             tabErrorFixSelector.Controls.Add(tabLooseInfo);
             tabErrorFixSelector.Dock = DockStyle.Fill;
+            tabErrorFixSelector.DrawMode = TabDrawMode.OwnerDrawFixed;
             tabErrorFixSelector.Location = new Point(0, 0);
             tabErrorFixSelector.Margin = new Padding(4);
             tabErrorFixSelector.Name = "tabErrorFixSelector";
