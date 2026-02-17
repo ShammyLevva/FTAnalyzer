@@ -209,6 +209,7 @@ namespace FTAnalyzer
             labLCSelectInd = new Label();
             btnLCDuplicates = new Button();
             btnLCMissingCountry = new Button();
+            btnLCnoCensus = new Button();
             btnLC1911EW = new Button();
             ckbShowLCEntered = new CheckBox();
             btnLC1841EW = new Button();
@@ -220,7 +221,6 @@ namespace FTAnalyzer
             btnLC1881Scot = new Button();
             relTypesLC = new FTAnalyzer.Forms.Controls.RelationTypes();
             rtbLostCousins = new RichTextBox();
-            btnLCnoCensus = new Button();
             LCUpdatesTab = new TabPage();
             rtbLCoutput = new FTAnalyzer.Utilities.ScrollingRichTextBox();
             btnViewInvalidRefs = new Button();
@@ -1903,7 +1903,6 @@ namespace FTAnalyzer
             // LCReportsTab
             // 
             LCReportsTab.Controls.Add(splitLostCousins);
-            LCReportsTab.Controls.Add(btnLCnoCensus);
             LCReportsTab.Location = new Point(4, 24);
             LCReportsTab.Margin = new Padding(4);
             LCReportsTab.Name = "LCReportsTab";
@@ -1926,6 +1925,7 @@ namespace FTAnalyzer
             splitLostCousins.Panel1.Controls.Add(Referrals);
             splitLostCousins.Panel1.Controls.Add(btnLCDuplicates);
             splitLostCousins.Panel1.Controls.Add(btnLCMissingCountry);
+            splitLostCousins.Panel1.Controls.Add(btnLCnoCensus);
             splitLostCousins.Panel1.Controls.Add(btnLC1911EW);
             splitLostCousins.Panel1.Controls.Add(ckbShowLCEntered);
             splitLostCousins.Panel1.Controls.Add(btnLC1841EW);
@@ -2037,10 +2037,10 @@ namespace FTAnalyzer
             // btnLCDuplicates
             // 
             btnLCDuplicates.AutoSize = true;
-            btnLCDuplicates.Location = new Point(199, 280);
+            btnLCDuplicates.Location = new Point(195, 280);
             btnLCDuplicates.Margin = new Padding(4);
             btnLCDuplicates.Name = "btnLCDuplicates";
-            btnLCDuplicates.Size = new Size(189, 31);
+            btnLCDuplicates.Size = new Size(176, 31);
             btnLCDuplicates.TabIndex = 50;
             btnLCDuplicates.Text = "Lost Cousins Duplicate Facts";
             btnLCDuplicates.UseVisualStyleBackColor = true;
@@ -2049,22 +2049,34 @@ namespace FTAnalyzer
             // btnLCMissingCountry
             // 
             btnLCMissingCountry.AutoSize = true;
-            btnLCMissingCountry.Location = new Point(-192, 252);
+            btnLCMissingCountry.Location = new Point(11, 280);
             btnLCMissingCountry.Margin = new Padding(4);
             btnLCMissingCountry.Name = "btnLCMissingCountry";
-            btnLCMissingCountry.Size = new Size(189, 31);
+            btnLCMissingCountry.Size = new Size(176, 31);
             btnLCMissingCountry.TabIndex = 49;
             btnLCMissingCountry.Text = "Lost Cousins with no Country";
             btnLCMissingCountry.UseVisualStyleBackColor = true;
             btnLCMissingCountry.Click += BtnLCMissingCountry_Click;
             // 
+            // btnLCnoCensus
+            // 
+            btnLCnoCensus.AutoSize = true;
+            btnLCnoCensus.Location = new Point(379, 280);
+            btnLCnoCensus.Margin = new Padding(4);
+            btnLCnoCensus.Name = "btnLCnoCensus";
+            btnLCnoCensus.Size = new Size(172, 31);
+            btnLCnoCensus.TabIndex = 39;
+            btnLCnoCensus.Text = "Lost Cousins w/bad Census";
+            btnLCnoCensus.UseVisualStyleBackColor = true;
+            btnLCnoCensus.Click += BtnLCnoCensus_Click;
+            // 
             // btnLC1911EW
             // 
             btnLC1911EW.AutoSize = true;
-            btnLC1911EW.Location = new Point(4, 205);
+            btnLC1911EW.Location = new Point(11, 205);
             btnLC1911EW.Margin = new Padding(4);
             btnLC1911EW.Name = "btnLC1911EW";
-            btnLC1911EW.Size = new Size(183, 31);
+            btnLC1911EW.Size = new Size(176, 31);
             btnLC1911EW.TabIndex = 47;
             btnLC1911EW.Text = "1911 Eng. && Wales Census";
             btnLC1911EW.UseVisualStyleBackColor = true;
@@ -2132,10 +2144,10 @@ namespace FTAnalyzer
             // btnLC1881EW
             // 
             btnLC1881EW.AutoSize = true;
-            btnLC1881EW.Location = new Point(4, 166);
+            btnLC1881EW.Location = new Point(11, 166);
             btnLC1881EW.Margin = new Padding(4);
             btnLC1881EW.Name = "btnLC1881EW";
-            btnLC1881EW.Size = new Size(183, 31);
+            btnLC1881EW.Size = new Size(176, 31);
             btnLC1881EW.TabIndex = 43;
             btnLC1881EW.Text = "1881 Eng. && Wales Census";
             btnLC1881EW.UseVisualStyleBackColor = true;
@@ -2190,18 +2202,6 @@ namespace FTAnalyzer
             rtbLostCousins.TabIndex = 37;
             rtbLostCousins.TabStop = false;
             rtbLostCousins.Text = "";
-            // 
-            // btnLCnoCensus
-            // 
-            btnLCnoCensus.AutoSize = true;
-            btnLCnoCensus.Location = new Point(399, 284);
-            btnLCnoCensus.Margin = new Padding(4);
-            btnLCnoCensus.Name = "btnLCnoCensus";
-            btnLCnoCensus.Size = new Size(189, 31);
-            btnLCnoCensus.TabIndex = 39;
-            btnLCnoCensus.Text = "Lost Cousins w/bad Census";
-            btnLCnoCensus.UseVisualStyleBackColor = true;
-            btnLCnoCensus.Click += BtnLCnoCensus_Click;
             // 
             // LCUpdatesTab
             // 
@@ -4454,7 +4454,6 @@ namespace FTAnalyzer
             tabLostCousins.ResumeLayout(false);
             LCSubTabs.ResumeLayout(false);
             LCReportsTab.ResumeLayout(false);
-            LCReportsTab.PerformLayout();
             splitLostCousins.Panel1.ResumeLayout(false);
             splitLostCousins.Panel1.PerformLayout();
             splitLostCousins.Panel2.ResumeLayout(false);
