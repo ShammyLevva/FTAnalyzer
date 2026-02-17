@@ -3,11 +3,12 @@
 Added 1939 Register reference detection where ED letters are missing
 
 **Bugfixes**  
-Fixed Loose Deaths where dates overlap  
+Fixed Loose Births where dates overlap  
 Fixed Places form where locations were no longer showing on map
 Increased padding in tabs to fix issue of text overlaps
 Fixed buttons on Lost Cousins tab not working
 Fixed Form headers on Lost Cousins form being hidden behind toolbar
+Fixed Loose births where dates of form BEF 09 OCT 1803 was changed to BEF 08 OCT 1803
 
 ## Release Candidate Version 10.0.0.0-RC6 - 24th January 2026  
 **Updates**  
