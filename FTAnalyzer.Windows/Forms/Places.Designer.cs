@@ -38,498 +38,471 @@ namespace FTAnalyzer.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Places));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.splitContainerFacts = new System.Windows.Forms.SplitContainer();
-            this.splitContainerMap = new System.Windows.Forms.SplitContainer();
-            this.tvPlaces = new FTAnalyzer.Utilities.MultiSelectTreeview();
-            this.tbOpacity = new System.Windows.Forms.TrackBar();
-            this.mapBox1 = new SharpMap.Forms.MapBox();
-            this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
-            this.btnSelect = new System.Windows.Forms.ToolStripButton();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.dgFacts = new System.Windows.Forms.DataGridView();
-            this.FactIcon = new System.Windows.Forms.DataGridViewImageColumn();
-            this.FactsIndividualID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Forenames = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TypeOfFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FactDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AgeAtFact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FactLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LocationIcon = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Latitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Longitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GeocodeStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FoundLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FoundResultType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SourceList = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.txtCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.pbPlaces = new System.Windows.Forms.ToolStripProgressBar();
-            this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuHideScaleBar = new System.Windows.Forms.ToolStripMenuItem();
-            this.resetFormDefaultSizeAndPositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerFacts)).BeginInit();
-            this.splitContainerFacts.Panel1.SuspendLayout();
-            this.splitContainerFacts.Panel2.SuspendLayout();
-            this.splitContainerFacts.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerMap)).BeginInit();
-            this.splitContainerMap.Panel1.SuspendLayout();
-            this.splitContainerMap.Panel2.SuspendLayout();
-            this.splitContainerMap.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbOpacity)).BeginInit();
-            this.mapZoomToolStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgFacts)).BeginInit();
-            this.statusStrip.SuspendLayout();
-            this.menuStrip.SuspendLayout();
-            this.SuspendLayout();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            splitContainerFacts = new SplitContainer();
+            splitContainerMap = new SplitContainer();
+            tvPlaces = new MultiSelectTreeview();
+            tbOpacity = new TrackBar();
+            mapBox1 = new SharpMap.Forms.MapBox();
+            mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(components);
+            btnSelect = new ToolStripButton();
+            linkLabel1 = new LinkLabel();
+            dgFacts = new DataGridView();
+            FactIcon = new DataGridViewImageColumn();
+            FactsIndividualID = new DataGridViewTextBoxColumn();
+            Forenames = new DataGridViewTextBoxColumn();
+            Surname = new DataGridViewTextBoxColumn();
+            TypeOfFact = new DataGridViewTextBoxColumn();
+            FactDate = new DataGridViewTextBoxColumn();
+            AgeAtFact = new DataGridViewTextBoxColumn();
+            FactLocation = new DataGridViewTextBoxColumn();
+            LocationIcon = new DataGridViewImageColumn();
+            Latitude = new DataGridViewTextBoxColumn();
+            Longitude = new DataGridViewTextBoxColumn();
+            GeocodeStatus = new DataGridViewTextBoxColumn();
+            FoundLocation = new DataGridViewTextBoxColumn();
+            FoundResultType = new DataGridViewTextBoxColumn();
+            Comment = new DataGridViewTextBoxColumn();
+            SourceList = new DataGridViewTextBoxColumn();
+            statusStrip = new StatusStrip();
+            txtCount = new ToolStripStatusLabel();
+            pbPlaces = new ToolStripProgressBar();
+            menuStrip = new MenuStrip();
+            optionsToolStripMenuItem = new ToolStripMenuItem();
+            mnuHideScaleBar = new ToolStripMenuItem();
+            resetFormDefaultSizeAndPositionToolStripMenuItem = new ToolStripMenuItem();
+            ((System.ComponentModel.ISupportInitialize)splitContainerFacts).BeginInit();
+            splitContainerFacts.Panel1.SuspendLayout();
+            splitContainerFacts.Panel2.SuspendLayout();
+            splitContainerFacts.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainerMap).BeginInit();
+            splitContainerMap.Panel1.SuspendLayout();
+            splitContainerMap.Panel2.SuspendLayout();
+            splitContainerMap.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbOpacity).BeginInit();
+            mapZoomToolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgFacts).BeginInit();
+            statusStrip.SuspendLayout();
+            menuStrip.SuspendLayout();
+            SuspendLayout();
             // 
             // splitContainerFacts
             // 
-            this.splitContainerFacts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerFacts.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainerFacts.Location = new System.Drawing.Point(0, 42);
-            this.splitContainerFacts.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.splitContainerFacts.Name = "splitContainerFacts";
-            this.splitContainerFacts.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            splitContainerFacts.Dock = DockStyle.Fill;
+            splitContainerFacts.FixedPanel = FixedPanel.Panel2;
+            splitContainerFacts.Location = new Point(0, 24);
+            splitContainerFacts.Margin = new Padding(4, 4, 4, 4);
+            splitContainerFacts.Name = "splitContainerFacts";
+            splitContainerFacts.Orientation = Orientation.Horizontal;
             // 
             // splitContainerFacts.Panel1
             // 
-            this.splitContainerFacts.Panel1.Controls.Add(this.splitContainerMap);
+            splitContainerFacts.Panel1.Controls.Add(splitContainerMap);
             // 
             // splitContainerFacts.Panel2
             // 
-            this.splitContainerFacts.Panel2.Controls.Add(this.dgFacts);
-            this.splitContainerFacts.Panel2.Controls.Add(this.statusStrip);
-            this.splitContainerFacts.Size = new System.Drawing.Size(2041, 1047);
-            this.splitContainerFacts.SplitterDistance = 913;
-            this.splitContainerFacts.SplitterWidth = 7;
-            this.splitContainerFacts.TabIndex = 18;
-            this.splitContainerFacts.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.SplitContainerFacts_SplitterMoved);
+            splitContainerFacts.Panel2.Controls.Add(dgFacts);
+            splitContainerFacts.Panel2.Controls.Add(statusStrip);
+            splitContainerFacts.Size = new Size(1265, 637);
+            splitContainerFacts.SplitterDistance = 452;
+            splitContainerFacts.TabIndex = 18;
+            splitContainerFacts.SplitterMoved += SplitContainerFacts_SplitterMoved;
             // 
             // splitContainerMap
             // 
-            this.splitContainerMap.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerMap.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainerMap.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerMap.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.splitContainerMap.Name = "splitContainerMap";
+            splitContainerMap.Dock = DockStyle.Fill;
+            splitContainerMap.FixedPanel = FixedPanel.Panel1;
+            splitContainerMap.Location = new Point(0, 0);
+            splitContainerMap.Margin = new Padding(4, 4, 4, 4);
+            splitContainerMap.Name = "splitContainerMap";
             // 
             // splitContainerMap.Panel1
             // 
-            this.splitContainerMap.Panel1.Controls.Add(this.tvPlaces);
+            splitContainerMap.Panel1.Controls.Add(tvPlaces);
             // 
             // splitContainerMap.Panel2
             // 
-            this.splitContainerMap.Panel2.Controls.Add(this.tbOpacity);
-            this.splitContainerMap.Panel2.Controls.Add(this.mapBox1);
-            this.splitContainerMap.Panel2.Controls.Add(this.mapZoomToolStrip);
-            this.splitContainerMap.Panel2.Controls.Add(this.linkLabel1);
-            this.splitContainerMap.Size = new System.Drawing.Size(2041, 913);
-            this.splitContainerMap.SplitterDistance = 200;
-            this.splitContainerMap.SplitterWidth = 7;
-            this.splitContainerMap.TabIndex = 2;
-            this.splitContainerMap.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.SplitContainerMap_SplitterMoved);
+            splitContainerMap.Panel2.Controls.Add(tbOpacity);
+            splitContainerMap.Panel2.Controls.Add(mapBox1);
+            splitContainerMap.Panel2.Controls.Add(mapZoomToolStrip);
+            splitContainerMap.Panel2.Controls.Add(linkLabel1);
+            splitContainerMap.Size = new Size(1265, 452);
+            splitContainerMap.SplitterDistance = 127;
+            splitContainerMap.TabIndex = 2;
+            splitContainerMap.SplitterMoved += SplitContainerMap_SplitterMoved;
             // 
             // tvPlaces
             // 
-            this.tvPlaces.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvPlaces.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tvPlaces.HideSelection = false;
-            this.tvPlaces.Location = new System.Drawing.Point(0, 0);
-            this.tvPlaces.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.tvPlaces.Name = "tvPlaces";
-            this.tvPlaces.SelectedNodes = ((System.Collections.Generic.List<System.Windows.Forms.TreeNode>)(resources.GetObject("tvPlaces.SelectedNodes")));
-            this.tvPlaces.Size = new System.Drawing.Size(200, 913);
-            this.tvPlaces.TabIndex = 0;
-            this.tvPlaces.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvPlaces_AfterSelect);
-            this.tvPlaces.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TvPlaces_NodeMouseDoubleClick);
+            tvPlaces.Dock = DockStyle.Fill;
+            tvPlaces.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            tvPlaces.HideSelection = false;
+            tvPlaces.Location = new Point(0, 0);
+            tvPlaces.Margin = new Padding(4, 4, 4, 4);
+            tvPlaces.Name = "tvPlaces";
+            tvPlaces.SelectedNodes = (List<TreeNode>)resources.GetObject("tvPlaces.SelectedNodes");
+            tvPlaces.Size = new Size(127, 452);
+            tvPlaces.TabIndex = 0;
+            tvPlaces.AfterSelect += TvPlaces_AfterSelect;
+            tvPlaces.NodeMouseDoubleClick += TvPlaces_NodeMouseDoubleClick;
             // 
             // tbOpacity
             // 
-            this.tbOpacity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbOpacity.LargeChange = 20;
-            this.tbOpacity.Location = new System.Drawing.Point(0, 824);
-            this.tbOpacity.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.tbOpacity.Maximum = 100;
-            this.tbOpacity.Name = "tbOpacity";
-            this.tbOpacity.Size = new System.Drawing.Size(458, 80);
-            this.tbOpacity.SmallChange = 5;
-            this.tbOpacity.TabIndex = 17;
-            this.tbOpacity.TickFrequency = 10;
-            this.tbOpacity.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
-            this.tbOpacity.Value = 100;
-            this.tbOpacity.Scroll += new System.EventHandler(this.TbOpacity_Scroll);
+            tbOpacity.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            tbOpacity.LargeChange = 20;
+            tbOpacity.Location = new Point(0, 396);
+            tbOpacity.Margin = new Padding(4, 4, 4, 4);
+            tbOpacity.Maximum = 100;
+            tbOpacity.Name = "tbOpacity";
+            tbOpacity.Size = new Size(291, 45);
+            tbOpacity.SmallChange = 5;
+            tbOpacity.TabIndex = 17;
+            tbOpacity.TickFrequency = 10;
+            tbOpacity.TickStyle = TickStyle.TopLeft;
+            tbOpacity.Value = 100;
+            tbOpacity.Scroll += TbOpacity_Scroll;
             // 
             // mapBox1
             // 
-            this.mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.None;
-            this.mapBox1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.mapBox1.CustomTool = null;
-            this.mapBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mapBox1.FineZoomFactor = 10D;
-            this.mapBox1.Location = new System.Drawing.Point(0, 40);
-            this.mapBox1.MapQueryMode = SharpMap.Forms.MapBox.MapQueryType.LayerByIndex;
-            this.mapBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.mapBox1.Name = "mapBox1";
-            this.mapBox1.QueryGrowFactor = 5F;
-            this.mapBox1.QueryLayerIndex = 0;
-            this.mapBox1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.mapBox1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.mapBox1.ShowProgressUpdate = true;
-            this.mapBox1.Size = new System.Drawing.Size(1834, 873);
-            this.mapBox1.TabIndex = 2;
-            this.mapBox1.Text = "mapBox1";
-            this.mapBox1.WheelZoomMagnitude = -2D;
-            this.mapBox1.MapZoomChanged += new SharpMap.Forms.MapBox.MapZoomHandler(this.MapBox1_MapZoomChanged);
-            this.mapBox1.MapQueried += new SharpMap.Forms.MapBox.MapQueryHandler(this.MapBox1_MapQueried);
-            this.mapBox1.MapCenterChanged += new SharpMap.Forms.MapBox.MapCenterChangedHandler(this.MapBox1_MapCenterChanged);
-            this.mapBox1.ActiveToolChanged += new SharpMap.Forms.MapBox.ActiveToolChangedHandler(this.MapBox1_ActiveToolChanged);
-            this.mapBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MapBox1_MouseDoubleClick);
+            mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.None;
+            mapBox1.CustomTool = null;
+            mapBox1.Dock = DockStyle.Fill;
+            mapBox1.FineZoomFactor = 10D;
+            mapBox1.Location = new Point(0, 35);
+            mapBox1.MapQueryMode = SharpMap.Forms.MapBox.MapQueryType.LayerByIndex;
+            mapBox1.Margin = new Padding(4, 4, 4, 4);
+            mapBox1.Name = "mapBox1";
+            mapBox1.QueryGrowFactor = 5F;
+            mapBox1.QueryLayerIndex = 0;
+            mapBox1.SelectionBackColor = Color.FromArgb(210, 244, 244, 244);
+            mapBox1.SelectionForeColor = Color.FromArgb(244, 244, 244);
+            mapBox1.ShowProgressUpdate = true;
+            mapBox1.Size = new Size(1134, 417);
+            mapBox1.TabIndex = 2;
+            mapBox1.Text = "mapBox1";
+            mapBox1.WheelZoomMagnitude = -2D;
+            mapBox1.MapZoomChanged += MapBox1_MapZoomChanged;
+            mapBox1.MapQueried += MapBox1_MapQueried;
+            mapBox1.MapCenterChanged += MapBox1_MapCenterChanged;
+            mapBox1.ActiveToolChanged += MapBox1_ActiveToolChanged;
+            mapBox1.MouseDoubleClick += MapBox1_MouseDoubleClick;
             // 
             // mapZoomToolStrip
             // 
-            this.mapZoomToolStrip.Enabled = false;
-            this.mapZoomToolStrip.ImageScalingSize = new System.Drawing.Size(28, 28);
-            this.mapZoomToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSelect});
-            this.mapZoomToolStrip.Location = new System.Drawing.Point(0, 0);
-            this.mapZoomToolStrip.MapControl = this.mapBox1;
-            this.mapZoomToolStrip.Name = "mapZoomToolStrip";
-            this.mapZoomToolStrip.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
-            this.mapZoomToolStrip.Size = new System.Drawing.Size(1834, 40);
-            this.mapZoomToolStrip.TabIndex = 1;
-            this.mapZoomToolStrip.Text = "mapZoomToolStrip1";
+            mapZoomToolStrip.Enabled = false;
+            mapZoomToolStrip.ImageScalingSize = new Size(28, 28);
+            mapZoomToolStrip.Items.AddRange(new ToolStripItem[] { btnSelect });
+            mapZoomToolStrip.Location = new Point(0, 0);
+            mapZoomToolStrip.MapControl = mapBox1;
+            mapZoomToolStrip.Name = "mapZoomToolStrip";
+            mapZoomToolStrip.Padding = new Padding(0, 0, 3, 0);
+            mapZoomToolStrip.Size = new Size(1134, 35);
+            mapZoomToolStrip.TabIndex = 1;
+            mapZoomToolStrip.Text = "mapZoomToolStrip1";
             // 
             // btnSelect
             // 
-            this.btnSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSelect.Image = ((System.Drawing.Image)(resources.GetObject("btnSelect.Image")));
-            this.btnSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(40, 34);
-            this.btnSelect.Text = "Location Selection ";
-            this.btnSelect.Click += new System.EventHandler(this.BtnSelect_Click);
+            btnSelect.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnSelect.Image = (Image)resources.GetObject("btnSelect.Image");
+            btnSelect.ImageTransparentColor = Color.Magenta;
+            btnSelect.Name = "btnSelect";
+            btnSelect.Size = new Size(32, 32);
+            btnSelect.Text = "Location Selection ";
+            btnSelect.Click += BtnSelect_Click;
             // 
             // linkLabel1
             // 
-            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(1599, 46);
-            this.linkLabel1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(229, 25);
-            this.linkLabel1.TabIndex = 16;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "© Google - Terms of Use";
-            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
+            linkLabel1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            linkLabel1.AutoSize = true;
+            linkLabel1.Location = new Point(983, 29);
+            linkLabel1.Margin = new Padding(4, 0, 4, 0);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(138, 15);
+            linkLabel1.TabIndex = 16;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "© Google - Terms of Use";
+            linkLabel1.TextAlign = ContentAlignment.TopRight;
+            linkLabel1.LinkClicked += LinkLabel1_LinkClicked;
             // 
             // dgFacts
             // 
-            this.dgFacts.AllowUserToAddRows = false;
-            this.dgFacts.AllowUserToDeleteRows = false;
-            this.dgFacts.AllowUserToOrderColumns = true;
-            this.dgFacts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgFacts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.FactIcon,
-            this.FactsIndividualID,
-            this.Forenames,
-            this.Surname,
-            this.TypeOfFact,
-            this.FactDate,
-            this.AgeAtFact,
-            this.FactLocation,
-            this.LocationIcon,
-            this.Latitude,
-            this.Longitude,
-            this.GeocodeStatus,
-            this.FoundLocation,
-            this.FoundResultType,
-            this.Comment,
-            this.SourceList});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgFacts.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgFacts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgFacts.Location = new System.Drawing.Point(0, 0);
-            this.dgFacts.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.dgFacts.Name = "dgFacts";
-            this.dgFacts.ReadOnly = true;
-            this.dgFacts.RowHeadersWidth = 16;
-            this.dgFacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgFacts.ShowEditingIcon = false;
-            this.dgFacts.Size = new System.Drawing.Size(2041, 105);
-            this.dgFacts.TabIndex = 3;
-            this.dgFacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgFacts_CellDoubleClick);
-            this.dgFacts.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.DgFacts_CellToolTipTextNeeded);
+            dgFacts.AllowUserToAddRows = false;
+            dgFacts.AllowUserToDeleteRows = false;
+            dgFacts.AllowUserToOrderColumns = true;
+            dgFacts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgFacts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgFacts.Columns.AddRange(new DataGridViewColumn[] { FactIcon, FactsIndividualID, Forenames, Surname, TypeOfFact, FactDate, AgeAtFact, FactLocation, LocationIcon, Latitude, Longitude, GeocodeStatus, FoundLocation, FoundResultType, Comment, SourceList });
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgFacts.DefaultCellStyle = dataGridViewCellStyle1;
+            dgFacts.Dock = DockStyle.Fill;
+            dgFacts.Location = new Point(0, 0);
+            dgFacts.Margin = new Padding(4, 4, 4, 4);
+            dgFacts.Name = "dgFacts";
+            dgFacts.ReadOnly = true;
+            dgFacts.RowHeadersWidth = 16;
+            dgFacts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgFacts.ShowEditingIcon = false;
+            dgFacts.Size = new Size(1265, 159);
+            dgFacts.TabIndex = 3;
+            dgFacts.CellDoubleClick += DgFacts_CellDoubleClick;
+            dgFacts.CellToolTipTextNeeded += DgFacts_CellToolTipTextNeeded;
             // 
             // FactIcon
             // 
-            this.FactIcon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.FactIcon.DataPropertyName = "Icon";
-            this.FactIcon.HeaderText = "";
-            this.FactIcon.MinimumWidth = 20;
-            this.FactIcon.Name = "FactIcon";
-            this.FactIcon.ReadOnly = true;
-            this.FactIcon.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.FactIcon.Width = 20;
+            FactIcon.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            FactIcon.DataPropertyName = "Icon";
+            FactIcon.HeaderText = "";
+            FactIcon.MinimumWidth = 20;
+            FactIcon.Name = "FactIcon";
+            FactIcon.ReadOnly = true;
+            FactIcon.Resizable = DataGridViewTriState.False;
+            FactIcon.Width = 20;
             // 
             // FactsIndividualID
             // 
-            this.FactsIndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.FactsIndividualID.DataPropertyName = "IndividualID";
-            this.FactsIndividualID.HeaderText = "Ind. ID";
-            this.FactsIndividualID.MinimumWidth = 9;
-            this.FactsIndividualID.Name = "FactsIndividualID";
-            this.FactsIndividualID.ReadOnly = true;
-            this.FactsIndividualID.Width = 50;
+            FactsIndividualID.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            FactsIndividualID.DataPropertyName = "IndividualID";
+            FactsIndividualID.HeaderText = "Ind. ID";
+            FactsIndividualID.MinimumWidth = 9;
+            FactsIndividualID.Name = "FactsIndividualID";
+            FactsIndividualID.ReadOnly = true;
+            FactsIndividualID.Width = 50;
             // 
             // Forenames
             // 
-            this.Forenames.DataPropertyName = "Forenames";
-            this.Forenames.HeaderText = "Forenames";
-            this.Forenames.MinimumWidth = 100;
-            this.Forenames.Name = "Forenames";
-            this.Forenames.ReadOnly = true;
-            this.Forenames.Width = 152;
+            Forenames.DataPropertyName = "Forenames";
+            Forenames.HeaderText = "Forenames";
+            Forenames.MinimumWidth = 100;
+            Forenames.Name = "Forenames";
+            Forenames.ReadOnly = true;
             // 
             // Surname
             // 
-            this.Surname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Surname.DataPropertyName = "Surname";
-            this.Surname.HeaderText = "Surname";
-            this.Surname.MinimumWidth = 75;
-            this.Surname.Name = "Surname";
-            this.Surname.ReadOnly = true;
-            this.Surname.Width = 75;
+            Surname.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Surname.DataPropertyName = "Surname";
+            Surname.HeaderText = "Surname";
+            Surname.MinimumWidth = 75;
+            Surname.Name = "Surname";
+            Surname.ReadOnly = true;
+            Surname.Width = 75;
             // 
             // TypeOfFact
             // 
-            this.TypeOfFact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.TypeOfFact.DataPropertyName = "TypeOfFact";
-            this.TypeOfFact.HeaderText = "Fact Type";
-            this.TypeOfFact.MinimumWidth = 80;
-            this.TypeOfFact.Name = "TypeOfFact";
-            this.TypeOfFact.ReadOnly = true;
-            this.TypeOfFact.Width = 80;
+            TypeOfFact.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            TypeOfFact.DataPropertyName = "TypeOfFact";
+            TypeOfFact.HeaderText = "Fact Type";
+            TypeOfFact.MinimumWidth = 80;
+            TypeOfFact.Name = "TypeOfFact";
+            TypeOfFact.ReadOnly = true;
+            TypeOfFact.Width = 80;
             // 
             // FactDate
             // 
-            this.FactDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.FactDate.DataPropertyName = "FactDate";
-            this.FactDate.HeaderText = "Fact Date";
-            this.FactDate.MinimumWidth = 150;
-            this.FactDate.Name = "FactDate";
-            this.FactDate.ReadOnly = true;
-            this.FactDate.Width = 150;
+            FactDate.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            FactDate.DataPropertyName = "FactDate";
+            FactDate.HeaderText = "Fact Date";
+            FactDate.MinimumWidth = 150;
+            FactDate.Name = "FactDate";
+            FactDate.ReadOnly = true;
+            FactDate.Width = 150;
             // 
             // AgeAtFact
             // 
-            this.AgeAtFact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.AgeAtFact.DataPropertyName = "AgeAtFact";
-            this.AgeAtFact.HeaderText = "Age";
-            this.AgeAtFact.MinimumWidth = 50;
-            this.AgeAtFact.Name = "AgeAtFact";
-            this.AgeAtFact.ReadOnly = true;
-            this.AgeAtFact.Width = 50;
+            AgeAtFact.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            AgeAtFact.DataPropertyName = "AgeAtFact";
+            AgeAtFact.HeaderText = "Age";
+            AgeAtFact.MinimumWidth = 50;
+            AgeAtFact.Name = "AgeAtFact";
+            AgeAtFact.ReadOnly = true;
+            AgeAtFact.Width = 50;
             // 
             // FactLocation
             // 
-            this.FactLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.FactLocation.DataPropertyName = "Location";
-            this.FactLocation.HeaderText = "Location";
-            this.FactLocation.MinimumWidth = 150;
-            this.FactLocation.Name = "FactLocation";
-            this.FactLocation.ReadOnly = true;
-            this.FactLocation.Width = 150;
+            FactLocation.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            FactLocation.DataPropertyName = "Location";
+            FactLocation.HeaderText = "Location";
+            FactLocation.MinimumWidth = 150;
+            FactLocation.Name = "FactLocation";
+            FactLocation.ReadOnly = true;
+            FactLocation.Width = 150;
             // 
             // LocationIcon
             // 
-            this.LocationIcon.DataPropertyName = "LocationIcon";
-            this.LocationIcon.HeaderText = "";
-            this.LocationIcon.MinimumWidth = 20;
-            this.LocationIcon.Name = "LocationIcon";
-            this.LocationIcon.ReadOnly = true;
-            this.LocationIcon.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.LocationIcon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.LocationIcon.Width = 33;
+            LocationIcon.DataPropertyName = "LocationIcon";
+            LocationIcon.HeaderText = "";
+            LocationIcon.MinimumWidth = 20;
+            LocationIcon.Name = "LocationIcon";
+            LocationIcon.ReadOnly = true;
+            LocationIcon.Resizable = DataGridViewTriState.False;
+            LocationIcon.SortMode = DataGridViewColumnSortMode.Automatic;
+            LocationIcon.Width = 20;
             // 
             // Latitude
             // 
-            this.Latitude.DataPropertyName = "Latitude";
-            this.Latitude.HeaderText = "Latitude";
-            this.Latitude.MinimumWidth = 9;
-            this.Latitude.Name = "Latitude";
-            this.Latitude.ReadOnly = true;
-            this.Latitude.Width = 122;
+            Latitude.DataPropertyName = "Latitude";
+            Latitude.HeaderText = "Latitude";
+            Latitude.MinimumWidth = 9;
+            Latitude.Name = "Latitude";
+            Latitude.ReadOnly = true;
+            Latitude.Width = 75;
             // 
             // Longitude
             // 
-            this.Longitude.DataPropertyName = "Longitude";
-            this.Longitude.HeaderText = "Longitude";
-            this.Longitude.MinimumWidth = 9;
-            this.Longitude.Name = "Longitude";
-            this.Longitude.ReadOnly = true;
-            this.Longitude.Width = 139;
+            Longitude.DataPropertyName = "Longitude";
+            Longitude.HeaderText = "Longitude";
+            Longitude.MinimumWidth = 9;
+            Longitude.Name = "Longitude";
+            Longitude.ReadOnly = true;
+            Longitude.Width = 86;
             // 
             // GeocodeStatus
             // 
-            this.GeocodeStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.GeocodeStatus.DataPropertyName = "GeocodeStatus";
-            this.GeocodeStatus.HeaderText = "Geocode Status";
-            this.GeocodeStatus.MinimumWidth = 9;
-            this.GeocodeStatus.Name = "GeocodeStatus";
-            this.GeocodeStatus.ReadOnly = true;
-            this.GeocodeStatus.Width = 175;
+            GeocodeStatus.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            GeocodeStatus.DataPropertyName = "GeocodeStatus";
+            GeocodeStatus.HeaderText = "Geocode Status";
+            GeocodeStatus.MinimumWidth = 9;
+            GeocodeStatus.Name = "GeocodeStatus";
+            GeocodeStatus.ReadOnly = true;
+            GeocodeStatus.Width = 175;
             // 
             // FoundLocation
             // 
-            this.FoundLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.FoundLocation.DataPropertyName = "FoundLocation";
-            this.FoundLocation.HeaderText = "FoundLocation";
-            this.FoundLocation.MinimumWidth = 120;
-            this.FoundLocation.Name = "FoundLocation";
-            this.FoundLocation.ReadOnly = true;
-            this.FoundLocation.Width = 120;
+            FoundLocation.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            FoundLocation.DataPropertyName = "FoundLocation";
+            FoundLocation.HeaderText = "FoundLocation";
+            FoundLocation.MinimumWidth = 120;
+            FoundLocation.Name = "FoundLocation";
+            FoundLocation.ReadOnly = true;
+            FoundLocation.Width = 120;
             // 
             // FoundResultType
             // 
-            this.FoundResultType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.FoundResultType.DataPropertyName = "FoundResultType";
-            this.FoundResultType.HeaderText = "Found Result Type";
-            this.FoundResultType.MinimumWidth = 9;
-            this.FoundResultType.Name = "FoundResultType";
-            this.FoundResultType.ReadOnly = true;
-            this.FoundResultType.Width = 175;
+            FoundResultType.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            FoundResultType.DataPropertyName = "FoundResultType";
+            FoundResultType.HeaderText = "Found Result Type";
+            FoundResultType.MinimumWidth = 9;
+            FoundResultType.Name = "FoundResultType";
+            FoundResultType.ReadOnly = true;
+            FoundResultType.Width = 175;
             // 
             // Comment
             // 
-            this.Comment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Comment.DataPropertyName = "Comment";
-            this.Comment.HeaderText = "Comment";
-            this.Comment.MinimumWidth = 120;
-            this.Comment.Name = "Comment";
-            this.Comment.ReadOnly = true;
-            this.Comment.Width = 120;
+            Comment.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Comment.DataPropertyName = "Comment";
+            Comment.HeaderText = "Comment";
+            Comment.MinimumWidth = 120;
+            Comment.Name = "Comment";
+            Comment.ReadOnly = true;
+            Comment.Width = 120;
             // 
             // SourceList
             // 
-            this.SourceList.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.SourceList.DataPropertyName = "SourceList";
-            this.SourceList.HeaderText = "Sources";
-            this.SourceList.MinimumWidth = 120;
-            this.SourceList.Name = "SourceList";
-            this.SourceList.ReadOnly = true;
-            this.SourceList.Width = 250;
+            SourceList.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            SourceList.DataPropertyName = "SourceList";
+            SourceList.HeaderText = "Sources";
+            SourceList.MinimumWidth = 120;
+            SourceList.Name = "SourceList";
+            SourceList.ReadOnly = true;
+            SourceList.Width = 250;
             // 
             // statusStrip
             // 
-            this.statusStrip.ImageScalingSize = new System.Drawing.Size(28, 28);
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.txtCount,
-            this.pbPlaces});
-            this.statusStrip.Location = new System.Drawing.Point(0, 105);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 26, 0);
-            this.statusStrip.Size = new System.Drawing.Size(2041, 22);
-            this.statusStrip.TabIndex = 4;
-            this.statusStrip.Text = "statusStrip1";
+            statusStrip.ImageScalingSize = new Size(28, 28);
+            statusStrip.Items.AddRange(new ToolStripItem[] { txtCount, pbPlaces });
+            statusStrip.Location = new Point(0, 159);
+            statusStrip.Name = "statusStrip";
+            statusStrip.Padding = new Padding(1, 0, 17, 0);
+            statusStrip.Size = new Size(1265, 22);
+            statusStrip.TabIndex = 4;
+            statusStrip.Text = "statusStrip1";
             // 
             // txtCount
             // 
-            this.txtCount.Name = "txtCount";
-            this.txtCount.Size = new System.Drawing.Size(0, 13);
+            txtCount.Name = "txtCount";
+            txtCount.Size = new Size(0, 17);
             // 
             // pbPlaces
             // 
-            this.pbPlaces.Name = "pbPlaces";
-            this.pbPlaces.Size = new System.Drawing.Size(183, 30);
-            this.pbPlaces.Visible = false;
+            pbPlaces.Name = "pbPlaces";
+            pbPlaces.Size = new Size(116, 19);
+            pbPlaces.Visible = false;
             // 
             // menuStrip
             // 
-            this.menuStrip.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.menuStrip.ImageScalingSize = new System.Drawing.Size(28, 28);
-            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem});
-            this.menuStrip.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Padding = new System.Windows.Forms.Padding(11, 4, 0, 4);
-            this.menuStrip.Size = new System.Drawing.Size(2041, 42);
-            this.menuStrip.TabIndex = 19;
-            this.menuStrip.Text = "menuStrip1";
+            menuStrip.ImageScalingSize = new Size(28, 28);
+            menuStrip.Items.AddRange(new ToolStripItem[] { optionsToolStripMenuItem });
+            menuStrip.Location = new Point(0, 0);
+            menuStrip.Name = "menuStrip";
+            menuStrip.Padding = new Padding(7, 2, 0, 2);
+            menuStrip.Size = new Size(1265, 24);
+            menuStrip.TabIndex = 19;
+            menuStrip.Text = "menuStrip1";
             // 
             // optionsToolStripMenuItem
             // 
-            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuHideScaleBar,
-            this.resetFormDefaultSizeAndPositionToolStripMenuItem});
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(104, 34);
-            this.optionsToolStripMenuItem.Text = "Options";
+            optionsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { mnuHideScaleBar, resetFormDefaultSizeAndPositionToolStripMenuItem });
+            optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            optionsToolStripMenuItem.Size = new Size(61, 20);
+            optionsToolStripMenuItem.Text = "Options";
             // 
             // mnuHideScaleBar
             // 
-            this.mnuHideScaleBar.CheckOnClick = true;
-            this.mnuHideScaleBar.Name = "mnuHideScaleBar";
-            this.mnuHideScaleBar.Size = new System.Drawing.Size(464, 40);
-            this.mnuHideScaleBar.Text = "Hide Scale Bar";
-            this.mnuHideScaleBar.Click += new System.EventHandler(this.MnuHideScaleBar_Click);
+            mnuHideScaleBar.CheckOnClick = true;
+            mnuHideScaleBar.Name = "mnuHideScaleBar";
+            mnuHideScaleBar.Size = new Size(262, 22);
+            mnuHideScaleBar.Text = "Hide Scale Bar";
+            mnuHideScaleBar.Click += MnuHideScaleBar_Click;
             // 
             // resetFormDefaultSizeAndPositionToolStripMenuItem
             // 
-            this.resetFormDefaultSizeAndPositionToolStripMenuItem.Name = "resetFormDefaultSizeAndPositionToolStripMenuItem";
-            this.resetFormDefaultSizeAndPositionToolStripMenuItem.Size = new System.Drawing.Size(464, 40);
-            this.resetFormDefaultSizeAndPositionToolStripMenuItem.Text = "Reset form default size and position";
-            this.resetFormDefaultSizeAndPositionToolStripMenuItem.Click += new System.EventHandler(this.ResetFormDefaultSizeAndPositionToolStripMenuItem_Click);
+            resetFormDefaultSizeAndPositionToolStripMenuItem.Name = "resetFormDefaultSizeAndPositionToolStripMenuItem";
+            resetFormDefaultSizeAndPositionToolStripMenuItem.Size = new Size(262, 22);
+            resetFormDefaultSizeAndPositionToolStripMenuItem.Text = "Reset form default size and position";
+            resetFormDefaultSizeAndPositionToolStripMenuItem.Click += ResetFormDefaultSizeAndPositionToolStripMenuItem_Click;
             // 
             // Places
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2041, 1089);
-            this.Controls.Add(this.splitContainerFacts);
-            this.Controls.Add(this.menuStrip);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.Name = "Places";
-            this.Text = "Places";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Places_FormClosed);
-            this.Load += new System.EventHandler(this.Places_Load);
-            this.Move += new System.EventHandler(this.Places_Move);
-            this.Resize += new System.EventHandler(this.Places_Resize);
-            this.splitContainerFacts.Panel1.ResumeLayout(false);
-            this.splitContainerFacts.Panel2.ResumeLayout(false);
-            this.splitContainerFacts.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerFacts)).EndInit();
-            this.splitContainerFacts.ResumeLayout(false);
-            this.splitContainerMap.Panel1.ResumeLayout(false);
-            this.splitContainerMap.Panel2.ResumeLayout(false);
-            this.splitContainerMap.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerMap)).EndInit();
-            this.splitContainerMap.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tbOpacity)).EndInit();
-            this.mapZoomToolStrip.ResumeLayout(false);
-            this.mapZoomToolStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgFacts)).EndInit();
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
-            this.menuStrip.ResumeLayout(false);
-            this.menuStrip.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1265, 661);
+            Controls.Add(splitContainerFacts);
+            Controls.Add(menuStrip);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MainMenuStrip = menuStrip;
+            Margin = new Padding(4, 4, 4, 4);
+            Name = "Places";
+            Text = "Places";
+            FormClosed += Places_FormClosed;
+            Load += Places_Load;
+            Move += Places_Move;
+            Resize += Places_Resize;
+            splitContainerFacts.Panel1.ResumeLayout(false);
+            splitContainerFacts.Panel2.ResumeLayout(false);
+            splitContainerFacts.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainerFacts).EndInit();
+            splitContainerFacts.ResumeLayout(false);
+            splitContainerMap.Panel1.ResumeLayout(false);
+            splitContainerMap.Panel2.ResumeLayout(false);
+            splitContainerMap.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainerMap).EndInit();
+            splitContainerMap.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)tbOpacity).EndInit();
+            mapZoomToolStrip.ResumeLayout(false);
+            mapZoomToolStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgFacts).EndInit();
+            statusStrip.ResumeLayout(false);
+            statusStrip.PerformLayout();
+            menuStrip.ResumeLayout(false);
+            menuStrip.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 

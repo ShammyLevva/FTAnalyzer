@@ -7,6 +7,7 @@ using Microsoft.Win32;
 using NetTopologySuite.Geometries;
 using SharpMap.Data;
 using SharpMap.Layers;
+using System.Collections.Concurrent;
 
 namespace FTAnalyzer.Forms
 {
@@ -78,9 +79,10 @@ namespace FTAnalyzer.Forms
             {
                 clusters.Clear();
                 dgFacts.DataSource = null;
-                List<IDisplayFact> displayFacts = [];
+                ConcurrentBag<IDisplayFact> displayFacts = [];
                 List<Individual> list = [];
                 List<Tuple<FactLocation, int>> locations = [];
+
                 foreach (TreeNode node in tvPlaces.SelectedNodes)
                 {
                     FactLocation? loc = (FactLocation?)node.Tag;
@@ -91,8 +93,10 @@ namespace FTAnalyzer.Forms
                         locations.Add(location);
                     }
                 }
+
                 if (list.Count == 0)
                 {
+                    txtCount.Text = "No individuals found at selected location(s)";
                     Cursor = Cursors.Default;
                     RefreshClusters();
                     return;
@@ -122,7 +126,11 @@ namespace FTAnalyzer.Forms
                     {
                         if (token.IsCancellationRequested)
                             return; // stop early if a newer build was requested
-                        foreach (DisplayFact dispfact in ind.AllGeocodedFacts.Cast<DisplayFact>())
+
+                        // Get ALL facts (not just geocoded ones) and convert to DisplayFact
+                        IEnumerable<DisplayFact> allFacts = ind.Facts.Select(f => new DisplayFact(ind, f));
+
+                        foreach (DisplayFact dispfact in allFacts)
                         {
                             foreach (Tuple<FactLocation, int> location in locations)
                             {
@@ -144,7 +152,7 @@ namespace FTAnalyzer.Forms
                 if (!token.IsCancellationRequested)
                 {
                     txtCount.Text = $"Downloading map tiles and computing clusters for {displayFacts.Count} facts. Please wait";
-                    dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
+                    dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts.ToList());
 
                     Envelope expand = MapHelper.GetExtents(clusters.FactLocations);
                     mapBox1.Map.ZoomToBox(expand);
@@ -157,8 +165,11 @@ namespace FTAnalyzer.Forms
             {
                 // swallow cancellations – a newer BuildMapAsync will take over
             }
-            catch (Exception)
-            { }
+            catch (Exception ex)
+            {
+                outputText?.Report($"Error building Places map: {ex.Message}\n");
+                txtCount.Text = $"Error: {ex.Message}";
+            }
             Cursor = Cursors.Default;
         }
 
@@ -214,8 +225,10 @@ namespace FTAnalyzer.Forms
                 this.Left = Left;
                 isloading = false; // only turn off building map if completely done initializing
                 if (tvPlaces.Nodes.Count > 0)
-                {   // update map using first node as selected node
-                    tvPlaces.SelectedNode = tvPlaces.Nodes[0];
+                {   // update map using first node with a valid Tag as selected node
+                    TreeNode? firstValidNode = FindFirstNodeWithTag(tvPlaces.Nodes[0]);
+                    if (firstValidNode is not null)
+                        tvPlaces.SelectedNode = firstValidNode;
                 }
                 mh.CheckIfGeocodingNeeded(this, outputText);
                 Cursor = Cursors.Default;
@@ -374,6 +387,19 @@ namespace FTAnalyzer.Forms
                 TileAsyncLayer layer = (TileAsyncLayer)mapBox1.Map.BackgroundLayer[1];
                 layer.SetOpacity(opacity);
             }
+        }
+
+        static TreeNode? FindFirstNodeWithTag(TreeNode node)
+        {
+            if (node.Tag is FactLocation)
+                return node;
+            foreach (TreeNode child in node.Nodes)
+            {
+                TreeNode? result = FindFirstNodeWithTag(child);
+                if (result is not null)
+                    return result;
+            }
+            return null;
         }
     }
 }
