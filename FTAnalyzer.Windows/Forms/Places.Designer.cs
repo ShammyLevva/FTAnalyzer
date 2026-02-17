@@ -314,6 +314,7 @@ namespace FTAnalyzer.Forms
             FactIcon.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             FactIcon.DataPropertyName = "Icon";
             FactIcon.HeaderText = "";
+            FactIcon.ImageLayout = DataGridViewImageCellLayout.Zoom;
             FactIcon.MinimumWidth = 20;
             FactIcon.Name = "FactIcon";
             FactIcon.ReadOnly = true;
@@ -392,6 +393,7 @@ namespace FTAnalyzer.Forms
             // 
             LocationIcon.DataPropertyName = "LocationIcon";
             LocationIcon.HeaderText = "";
+            LocationIcon.ImageLayout = DataGridViewImageCellLayout.Zoom;
             LocationIcon.MinimumWidth = 20;
             LocationIcon.Name = "LocationIcon";
             LocationIcon.ReadOnly = true;

@@ -24,19 +24,19 @@ namespace FTAnalyzer.Forms
         public Places(IProgress<string> outputText)
         {
             InitializeComponent();
-            
+
             // Restore saved position/size before form is shown to prevent jumping
             int width = RegistrySettings.GetIntRegistryValue("Places size - width", Width);
             int height = RegistrySettings.GetIntRegistryValue("Places size - height", Height);
             int top = RegistrySettings.GetIntRegistryValue("Places position - top", Top);
             int left = RegistrySettings.GetIntRegistryValue("Places position - left", Left);
-            
+
             StartPosition = FormStartPosition.Manual;
             Width = width;
             Height = height;
             Top = top + NativeMethods.TopTaskbarOffset;
             Left = left;
-            
+
             isloading = true;
             this.outputText = outputText;
             mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
@@ -52,7 +52,7 @@ namespace FTAnalyzer.Forms
             SetupMap();
             dgFacts.AutoGenerateColumns = false;
             DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
-            int splitheight = RegistrySettings.GetIntRegistryValue("Places Facts Splitter Distance",-1);
+            int splitheight = RegistrySettings.GetIntRegistryValue("Places Facts Splitter Distance", -1);
             if (splitheight != -1)
                 splitContainerFacts.SplitterDistance = Height - splitheight;
             splitContainerMap.SplitterDistance = RegistrySettings.GetIntRegistryValue("Places Map Splitter Distance", splitContainerMap.SplitterDistance);
@@ -165,7 +165,7 @@ namespace FTAnalyzer.Forms
                 if (!token.IsCancellationRequested)
                 {
                     txtCount.Text = $"Downloading map tiles and computing clusters for {displayFacts.Count} facts. Please wait";
-                    dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts.ToList());
+                    dgFacts.DataSource = new SortableBindingList<IDisplayFact>([.. displayFacts]);
 
                     Envelope expand = MapHelper.GetExtents(clusters.FactLocations);
                     mapBox1.Map.ZoomToBox(expand);
@@ -222,20 +222,20 @@ namespace FTAnalyzer.Forms
                 e.ToolTipText = "Double click to edit location.";
         }
 
-		async void Places_Load(object sender, EventArgs e)
-		{
+        async void Places_Load(object sender, EventArgs e)
+        {
             try
             {
                 // Show wait cursor during tree building
                 Cursor = Cursors.WaitCursor;
                 txtCount.Text = "Loading locations...";
-                
+
                 TreeNode[] nodes = await TreeViewHandler.Instance.BuildAllLocationsTreeNodesAsync(false, pbPlaces);
                 tvPlaces.Nodes.AddRange(nodes);
-                
+
                 // Store original colors for all nodes
                 StoreOriginalNodeColors(tvPlaces.Nodes);
-                
+
                 isloading = false;
                 if (tvPlaces.Nodes.Count > 0)
                 {
