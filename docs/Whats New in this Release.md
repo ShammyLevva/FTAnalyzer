@@ -1,9 +1,13 @@
-## Release Candidate Version 10.0.0.0-RC7 - ?th February 2026  
+## Release Candidate Version 10.0.0.0-RC7 - 17th February 2026  
 **Updates**  
 Added 1939 Register reference detection where ED letters are missing
 
 **Bugfixes**  
-
+Fixed Loose Deaths where dates overlap  
+Fixed Places form where locations were no longer showing on map
+Increased padding in tabs to fix issue of text overlaps
+Fixed buttons on Lost Cousins tab not working
+Fixed Form headers on Lost Cousins form being hidden behind toolbar
 
 ## Release Candidate Version 10.0.0.0-RC6 - 24th January 2026  
 **Updates**  
