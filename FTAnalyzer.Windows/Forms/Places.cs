@@ -19,11 +19,24 @@ namespace FTAnalyzer.Forms
         bool isloading;
         readonly IProgress<string> outputText;
         CancellationTokenSource? buildMapCts;
+        readonly Dictionary<TreeNode, Color> originalNodeColors = [];
 
         public Places(IProgress<string> outputText)
         {
             InitializeComponent();
-            Top += NativeMethods.TopTaskbarOffset;
+            
+            // Restore saved position/size before form is shown to prevent jumping
+            int width = RegistrySettings.GetIntRegistryValue("Places size - width", Width);
+            int height = RegistrySettings.GetIntRegistryValue("Places size - height", Height);
+            int top = RegistrySettings.GetIntRegistryValue("Places position - top", Top);
+            int left = RegistrySettings.GetIntRegistryValue("Places position - left", Left);
+            
+            StartPosition = FormStartPosition.Manual;
+            Width = width;
+            Height = height;
+            Top = top + NativeMethods.TopTaskbarOffset;
+            Left = left;
+            
             isloading = true;
             this.outputText = outputText;
             mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
@@ -213,31 +226,36 @@ namespace FTAnalyzer.Forms
 		{
             try
             {
-				TreeNode[] nodes = await TreeViewHandler.Instance.BuildAllLocationsTreeNodesAsync(false, pbPlaces);
+                // Show wait cursor during tree building
+                Cursor = Cursors.WaitCursor;
+                txtCount.Text = "Loading locations...";
+                
+                TreeNode[] nodes = await TreeViewHandler.Instance.BuildAllLocationsTreeNodesAsync(false, pbPlaces);
                 tvPlaces.Nodes.AddRange(nodes);
-                int Width = RegistrySettings.GetIntRegistryValue("Places size - width", this.Width);
-                int Height = RegistrySettings.GetIntRegistryValue("Places size - height", this.Height);
-                int Top = RegistrySettings.GetIntRegistryValue("Places position - top", this.Top);
-                int Left = RegistrySettings.GetIntRegistryValue("Places position - left", this.Left);
-                this.Width = Width;
-                this.Height = Height;
-                this.Top = Top;
-                this.Left = Left;
-                isloading = false; // only turn off building map if completely done initializing
+                
+                // Store original colors for all nodes
+                StoreOriginalNodeColors(tvPlaces.Nodes);
+                
+                isloading = false;
                 if (tvPlaces.Nodes.Count > 0)
-                {   // update map using first node with a valid Tag as selected node
+                {
                     TreeNode? firstValidNode = FindFirstNodeWithTag(tvPlaces.Nodes[0]);
                     if (firstValidNode is not null)
                         tvPlaces.SelectedNode = firstValidNode;
                 }
                 mh.CheckIfGeocodingNeeded(this, outputText);
+                txtCount.Text = string.Empty;
                 Cursor = Cursors.Default;
                 SpecialMethods.SetFonts(this);
             }
             catch (Exception) { }
         }
 
-        async void TvPlaces_AfterSelect(object sender, TreeViewEventArgs e) => await BuildMapAsync();
+        async void TvPlaces_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            RestoreNodeColors();
+            await BuildMapAsync();
+        }
 
         void TvPlaces_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
@@ -400,6 +418,25 @@ namespace FTAnalyzer.Forms
                     return result;
             }
             return null;
+        }
+
+        void StoreOriginalNodeColors(TreeNodeCollection nodes)
+        {
+            foreach (TreeNode node in nodes)
+            {
+                originalNodeColors[node] = node.ForeColor;
+                if (node.Nodes.Count > 0)
+                    StoreOriginalNodeColors(node.Nodes);
+            }
+        }
+
+        void RestoreNodeColors()
+        {
+            foreach (KeyValuePair<TreeNode, Color> kvp in originalNodeColors)
+            {
+                if (!tvPlaces.SelectedNodes.Contains(kvp.Key))
+                    kvp.Key.ForeColor = kvp.Value;
+            }
         }
     }
 }

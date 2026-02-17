@@ -50,6 +50,13 @@ namespace FTAnalyzer.Forms
             btnSelect = new ToolStripButton();
             linkLabel1 = new LinkLabel();
             dgFacts = new DataGridView();
+            statusStrip = new StatusStrip();
+            txtCount = new ToolStripStatusLabel();
+            pbPlaces = new ToolStripProgressBar();
+            menuStrip = new MenuStrip();
+            optionsToolStripMenuItem = new ToolStripMenuItem();
+            mnuHideScaleBar = new ToolStripMenuItem();
+            resetFormDefaultSizeAndPositionToolStripMenuItem = new ToolStripMenuItem();
             FactIcon = new DataGridViewImageColumn();
             FactsIndividualID = new DataGridViewTextBoxColumn();
             Forenames = new DataGridViewTextBoxColumn();
@@ -66,13 +73,6 @@ namespace FTAnalyzer.Forms
             FoundResultType = new DataGridViewTextBoxColumn();
             Comment = new DataGridViewTextBoxColumn();
             SourceList = new DataGridViewTextBoxColumn();
-            statusStrip = new StatusStrip();
-            txtCount = new ToolStripStatusLabel();
-            pbPlaces = new ToolStripProgressBar();
-            menuStrip = new MenuStrip();
-            optionsToolStripMenuItem = new ToolStripMenuItem();
-            mnuHideScaleBar = new ToolStripMenuItem();
-            resetFormDefaultSizeAndPositionToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)splitContainerFacts).BeginInit();
             splitContainerFacts.Panel1.SuspendLayout();
             splitContainerFacts.Panel2.SuspendLayout();
@@ -93,7 +93,7 @@ namespace FTAnalyzer.Forms
             splitContainerFacts.Dock = DockStyle.Fill;
             splitContainerFacts.FixedPanel = FixedPanel.Panel2;
             splitContainerFacts.Location = new Point(0, 24);
-            splitContainerFacts.Margin = new Padding(4, 4, 4, 4);
+            splitContainerFacts.Margin = new Padding(4);
             splitContainerFacts.Name = "splitContainerFacts";
             splitContainerFacts.Orientation = Orientation.Horizontal;
             // 
@@ -115,7 +115,7 @@ namespace FTAnalyzer.Forms
             splitContainerMap.Dock = DockStyle.Fill;
             splitContainerMap.FixedPanel = FixedPanel.Panel1;
             splitContainerMap.Location = new Point(0, 0);
-            splitContainerMap.Margin = new Padding(4, 4, 4, 4);
+            splitContainerMap.Margin = new Padding(4);
             splitContainerMap.Name = "splitContainerMap";
             // 
             // splitContainerMap.Panel1
@@ -139,7 +139,7 @@ namespace FTAnalyzer.Forms
             tvPlaces.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tvPlaces.HideSelection = false;
             tvPlaces.Location = new Point(0, 0);
-            tvPlaces.Margin = new Padding(4, 4, 4, 4);
+            tvPlaces.Margin = new Padding(4);
             tvPlaces.Name = "tvPlaces";
             tvPlaces.SelectedNodes = (List<TreeNode>)resources.GetObject("tvPlaces.SelectedNodes");
             tvPlaces.Size = new Size(127, 452);
@@ -152,7 +152,7 @@ namespace FTAnalyzer.Forms
             tbOpacity.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             tbOpacity.LargeChange = 20;
             tbOpacity.Location = new Point(0, 396);
-            tbOpacity.Margin = new Padding(4, 4, 4, 4);
+            tbOpacity.Margin = new Padding(4);
             tbOpacity.Maximum = 100;
             tbOpacity.Name = "tbOpacity";
             tbOpacity.Size = new Size(291, 45);
@@ -171,7 +171,7 @@ namespace FTAnalyzer.Forms
             mapBox1.FineZoomFactor = 10D;
             mapBox1.Location = new Point(0, 35);
             mapBox1.MapQueryMode = SharpMap.Forms.MapBox.MapQueryType.LayerByIndex;
-            mapBox1.Margin = new Padding(4, 4, 4, 4);
+            mapBox1.Margin = new Padding(4);
             mapBox1.Name = "mapBox1";
             mapBox1.QueryGrowFactor = 5F;
             mapBox1.QueryLayerIndex = 0;
@@ -243,7 +243,7 @@ namespace FTAnalyzer.Forms
             dgFacts.DefaultCellStyle = dataGridViewCellStyle1;
             dgFacts.Dock = DockStyle.Fill;
             dgFacts.Location = new Point(0, 0);
-            dgFacts.Margin = new Padding(4, 4, 4, 4);
+            dgFacts.Margin = new Padding(4);
             dgFacts.Name = "dgFacts";
             dgFacts.ReadOnly = true;
             dgFacts.RowHeadersWidth = 16;
@@ -253,6 +253,61 @@ namespace FTAnalyzer.Forms
             dgFacts.TabIndex = 3;
             dgFacts.CellDoubleClick += DgFacts_CellDoubleClick;
             dgFacts.CellToolTipTextNeeded += DgFacts_CellToolTipTextNeeded;
+            // 
+            // statusStrip
+            // 
+            statusStrip.ImageScalingSize = new Size(28, 28);
+            statusStrip.Items.AddRange(new ToolStripItem[] { txtCount, pbPlaces });
+            statusStrip.Location = new Point(0, 159);
+            statusStrip.Name = "statusStrip";
+            statusStrip.Padding = new Padding(1, 0, 17, 0);
+            statusStrip.Size = new Size(1265, 22);
+            statusStrip.TabIndex = 4;
+            statusStrip.Text = "statusStrip1";
+            // 
+            // txtCount
+            // 
+            txtCount.Name = "txtCount";
+            txtCount.Size = new Size(0, 17);
+            // 
+            // pbPlaces
+            // 
+            pbPlaces.Name = "pbPlaces";
+            pbPlaces.Size = new Size(116, 19);
+            pbPlaces.Visible = false;
+            // 
+            // menuStrip
+            // 
+            menuStrip.ImageScalingSize = new Size(28, 28);
+            menuStrip.Items.AddRange(new ToolStripItem[] { optionsToolStripMenuItem });
+            menuStrip.Location = new Point(0, 0);
+            menuStrip.Name = "menuStrip";
+            menuStrip.Padding = new Padding(7, 2, 0, 2);
+            menuStrip.Size = new Size(1265, 24);
+            menuStrip.TabIndex = 19;
+            menuStrip.Text = "menuStrip1";
+            // 
+            // optionsToolStripMenuItem
+            // 
+            optionsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { mnuHideScaleBar, resetFormDefaultSizeAndPositionToolStripMenuItem });
+            optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            optionsToolStripMenuItem.Size = new Size(61, 20);
+            optionsToolStripMenuItem.Text = "Options";
+            // 
+            // mnuHideScaleBar
+            // 
+            mnuHideScaleBar.CheckOnClick = true;
+            mnuHideScaleBar.Name = "mnuHideScaleBar";
+            mnuHideScaleBar.Size = new Size(262, 22);
+            mnuHideScaleBar.Text = "Hide Scale Bar";
+            mnuHideScaleBar.Click += MnuHideScaleBar_Click;
+            // 
+            // resetFormDefaultSizeAndPositionToolStripMenuItem
+            // 
+            resetFormDefaultSizeAndPositionToolStripMenuItem.Name = "resetFormDefaultSizeAndPositionToolStripMenuItem";
+            resetFormDefaultSizeAndPositionToolStripMenuItem.Size = new Size(262, 22);
+            resetFormDefaultSizeAndPositionToolStripMenuItem.Text = "Reset form default size and position";
+            resetFormDefaultSizeAndPositionToolStripMenuItem.Click += ResetFormDefaultSizeAndPositionToolStripMenuItem_Click;
             // 
             // FactIcon
             // 
@@ -407,65 +462,10 @@ namespace FTAnalyzer.Forms
             SourceList.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             SourceList.DataPropertyName = "SourceList";
             SourceList.HeaderText = "Sources";
-            SourceList.MinimumWidth = 120;
+            SourceList.MinimumWidth = 200;
             SourceList.Name = "SourceList";
             SourceList.ReadOnly = true;
-            SourceList.Width = 250;
-            // 
-            // statusStrip
-            // 
-            statusStrip.ImageScalingSize = new Size(28, 28);
-            statusStrip.Items.AddRange(new ToolStripItem[] { txtCount, pbPlaces });
-            statusStrip.Location = new Point(0, 159);
-            statusStrip.Name = "statusStrip";
-            statusStrip.Padding = new Padding(1, 0, 17, 0);
-            statusStrip.Size = new Size(1265, 22);
-            statusStrip.TabIndex = 4;
-            statusStrip.Text = "statusStrip1";
-            // 
-            // txtCount
-            // 
-            txtCount.Name = "txtCount";
-            txtCount.Size = new Size(0, 17);
-            // 
-            // pbPlaces
-            // 
-            pbPlaces.Name = "pbPlaces";
-            pbPlaces.Size = new Size(116, 19);
-            pbPlaces.Visible = false;
-            // 
-            // menuStrip
-            // 
-            menuStrip.ImageScalingSize = new Size(28, 28);
-            menuStrip.Items.AddRange(new ToolStripItem[] { optionsToolStripMenuItem });
-            menuStrip.Location = new Point(0, 0);
-            menuStrip.Name = "menuStrip";
-            menuStrip.Padding = new Padding(7, 2, 0, 2);
-            menuStrip.Size = new Size(1265, 24);
-            menuStrip.TabIndex = 19;
-            menuStrip.Text = "menuStrip1";
-            // 
-            // optionsToolStripMenuItem
-            // 
-            optionsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { mnuHideScaleBar, resetFormDefaultSizeAndPositionToolStripMenuItem });
-            optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            optionsToolStripMenuItem.Size = new Size(61, 20);
-            optionsToolStripMenuItem.Text = "Options";
-            // 
-            // mnuHideScaleBar
-            // 
-            mnuHideScaleBar.CheckOnClick = true;
-            mnuHideScaleBar.Name = "mnuHideScaleBar";
-            mnuHideScaleBar.Size = new Size(262, 22);
-            mnuHideScaleBar.Text = "Hide Scale Bar";
-            mnuHideScaleBar.Click += MnuHideScaleBar_Click;
-            // 
-            // resetFormDefaultSizeAndPositionToolStripMenuItem
-            // 
-            resetFormDefaultSizeAndPositionToolStripMenuItem.Name = "resetFormDefaultSizeAndPositionToolStripMenuItem";
-            resetFormDefaultSizeAndPositionToolStripMenuItem.Size = new Size(262, 22);
-            resetFormDefaultSizeAndPositionToolStripMenuItem.Text = "Reset form default size and position";
-            resetFormDefaultSizeAndPositionToolStripMenuItem.Click += ResetFormDefaultSizeAndPositionToolStripMenuItem_Click;
+            SourceList.Width = 350;
             // 
             // Places
             // 
@@ -476,7 +476,7 @@ namespace FTAnalyzer.Forms
             Controls.Add(menuStrip);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip;
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "Places";
             Text = "Places";
             FormClosed += Places_FormClosed;
@@ -519,27 +519,27 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripStatusLabel txtCount;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewImageColumn FactIcon;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FactsIndividualID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Forenames;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Surname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TypeOfFact;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FactDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AgeAtFact;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FactLocation;
-        private System.Windows.Forms.DataGridViewImageColumn LocationIcon;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Latitude;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Longitude;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GeocodeStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FoundLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FoundResultType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SourceList;
         private System.Windows.Forms.ToolStripProgressBar pbPlaces;
         private System.Windows.Forms.ToolStripMenuItem mnuHideScaleBar;
         private System.Windows.Forms.ToolStripButton btnSelect;
         private MultiSelectTreeview tvPlaces;
         private System.Windows.Forms.ToolStripMenuItem resetFormDefaultSizeAndPositionToolStripMenuItem;
         private TrackBar tbOpacity;
+        private DataGridViewImageColumn FactIcon;
+        private DataGridViewTextBoxColumn FactsIndividualID;
+        private DataGridViewTextBoxColumn Forenames;
+        private DataGridViewTextBoxColumn Surname;
+        private DataGridViewTextBoxColumn TypeOfFact;
+        private DataGridViewTextBoxColumn FactDate;
+        private DataGridViewTextBoxColumn AgeAtFact;
+        private DataGridViewTextBoxColumn FactLocation;
+        private DataGridViewImageColumn LocationIcon;
+        private DataGridViewTextBoxColumn Latitude;
+        private DataGridViewTextBoxColumn Longitude;
+        private DataGridViewTextBoxColumn GeocodeStatus;
+        private DataGridViewTextBoxColumn FoundLocation;
+        private DataGridViewTextBoxColumn FoundResultType;
+        private DataGridViewTextBoxColumn Comment;
+        private DataGridViewTextBoxColumn SourceList;
     }
 }
