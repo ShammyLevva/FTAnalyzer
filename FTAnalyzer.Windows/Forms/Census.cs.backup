@@ -26,6 +26,8 @@ namespace FTAnalyzer.Forms
         public Census(CensusDate censusDate, bool censusDone)
         {
             InitializeComponent();
+            dgCensus.AutoGenerateColumns = false;
+            ExtensionMethods.DoubleBuffered(dgCensus, true);
             ft = FamilyTree.Instance;
             reportFormHelper = new ReportFormHelper(this, "Census Report", dgCensus, ResetTable, "Census");
 
@@ -113,17 +115,11 @@ namespace FTAnalyzer.Forms
 
         void SetupDataGridView(bool censusDone, List<CensusIndividual> individuals)
         {
-            SortableBindingList<IDisplayCensus> list = new(individuals);
-            dgCensus.DataSource = list;
+            dgCensus.DataSource = new SortableBindingList<IDisplayCensus>(individuals);
             dgCensus.RowTemplate.Height = (int)(FontSettings.Default.FontHeight * GraphicsUtilities.GetCurrentScaling());
-
-            if (!censusDone && dgCensus.Columns[nameof(IDisplayCensus.CensusRef)] is not null)
-                dgCensus.Columns[nameof(IDisplayCensus.CensusRef)].Visible = false;
-
-            DataGridViewColumn? posColumn = dgCensus.Columns[nameof(IDisplayCensus.Position)];
-            if (posColumn is not null)
-                posColumn.Visible = false;
-
+            dgCensus.AllowUserToResizeColumns = true;
+            if (!censusDone)
+                dgCensus.Columns["CensusReference"].Visible = false;
             reportFormHelper.LoadColumnLayout("CensusColumns.xml");
             int numIndividuals = (from x in individuals select x.IndividualID).Distinct().Count();
             int numFamilies = (from x in individuals select x.FamilyID).Distinct().Count();
@@ -132,8 +128,8 @@ namespace FTAnalyzer.Forms
 
         void ResetTable()
         {
-            DataGridViewColumn? pos = dgCensus.Columns[nameof(IDisplayCensus.Position)];
-            DataGridViewColumn? famID = dgCensus.Columns[nameof(IDisplayCensus.FamilyID)];
+            DataGridViewColumn? pos = dgCensus.Columns["Position"];
+            DataGridViewColumn? famID = dgCensus.Columns["FamilyID"];
             if (pos is not null && famID is not null)
             {
                 dgCensus.Sort(pos, ListSortDirection.Ascending);
@@ -147,33 +143,20 @@ namespace FTAnalyzer.Forms
         {
             try
             {
-                if (dgCensus.SortedColumn is null || dgCensus.RowCount == 0)
-                    return;
-
                 string currentRowText = "";
                 bool highlighted = true;
                 Font boldFont = new(dgCensus.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
                 Font regularFont = new(dgCensus.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Regular);
-
-                string sortedPropertyName = dgCensus.SortedColumn.DataPropertyName;
-                if (string.IsNullOrEmpty(sortedPropertyName))
-                    return;
-
-                for (int i = 0; i < dgCensus.RowCount; i++)
+                int sortColumn = dgCensus.SortedColumn.Index;
+                foreach (DataGridViewRow row in dgCensus.Rows)
                 {
-                    CensusIndividual? cr = dgCensus.DataBoundItem(i) as CensusIndividual;
-                    if (cr is null) continue;
-
-                    // Get the value directly from the property using reflection
-                    object? cellValue = typeof(IDisplayCensus).GetProperty(sortedPropertyName)?.GetValue(cr);
-                    string cellText = cellValue?.ToString() ?? string.Empty;
-
-                    if (cellText != currentRowText)
+                    CensusIndividual? cr = (CensusIndividual?)row.DataBoundItem;
+                    if (cr is null) return;
+                    if (row.Cells[sortColumn].Value.ToString() != currentRowText)
                     {
-                        currentRowText = cellText;
+                        currentRowText = row.Cells[sortColumn].Value.ToString() ?? string.Empty;
                         highlighted = !highlighted;
                     }
-
                     DataGridViewCellStyle style = new(dgCensus.DefaultCellStyle)
                     {
                         BackColor = highlighted ? Color.LightGray : Color.White,
@@ -206,11 +189,11 @@ namespace FTAnalyzer.Forms
 
         void DgCensus_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && e.RowIndex < dgCensus.RowCount)
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 DataGridViewCell cell = dgCensus.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                CensusIndividual? ind = dgCensus.DataBoundItem(e.RowIndex) as CensusIndividual;
-                if (ind is not null && ind.CellStyle is not null)
+                CensusIndividual? ind = (CensusIndividual?)dgCensus.Rows[e.RowIndex].DataBoundItem;
+                if (ind is not null || ind.CellStyle is not null)
                 {
                     e.CellStyle = ind.CellStyle;
                     cell.ToolTipText = GetTooltipText(ind.CellStyle);
@@ -227,12 +210,12 @@ namespace FTAnalyzer.Forms
         void TsBtnMapLocation_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
-            if (dgCensus.CurrentRow is not null)
-            {
-                CensusIndividual? ds = dgCensus.CurrentRowDataBoundItem as CensusIndividual;
-                FactLocation? loc = ds?.CensusLocation;
-                if (loc is not null)
-                    GoogleMap.ShowLocation(loc, loc.Level);
+            CensusIndividual? ds = dgCensus.CurrentRow is null || dgCensus.CurrentRow.DataBoundItem is null ? null
+                : (CensusIndividual)dgCensus.CurrentRow.DataBoundItem;
+            FactLocation? loc = ds?.CensusLocation;
+            if (loc is not null)
+            {   // Do geo coding stuff
+                GoogleMap.ShowLocation(loc, loc.Level);
             }
             Cursor = Cursors.Default;
         }
@@ -240,18 +223,15 @@ namespace FTAnalyzer.Forms
         async void TsBtnMapOSLocation_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
-            if (dgCensus.CurrentRow is not null)
-            {
-                CensusIndividual? ds = dgCensus.CurrentRowDataBoundItem as CensusIndividual;
-                FactLocation? loc = ds?.CensusLocation;
-                if (loc is not null)
+            CensusIndividual? ds = (CensusIndividual?)dgCensus.CurrentRow.DataBoundItem;
+            FactLocation? loc = ds?.CensusLocation;
+            if (loc is not null)
             {   // Do geo coding stuff
-                    BingOSMap frmBingMap = new();
-                    if (await frmBingMap.SetLocation(loc, loc.Level))
-                        frmBingMap.Show();
-                    else
-                        UIHelpers.ShowMessage($"Unable to find location : {loc}", "FTAnalyzer");
-                }
+                BingOSMap frmBingMap = new();
+                if (await frmBingMap.SetLocation(loc, loc.Level))
+                    frmBingMap.Show();
+                else
+                    UIHelpers.ShowMessage($"Unable to find location : {loc}", "FTAnalyzer");
             }
             Cursor = Cursors.Default;
         }
@@ -260,7 +240,7 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && dgCensus.CurrentRow is not null && !CensusDate.VALUATIONROLLS.Contains(CensusDate))
             {
-                CensusIndividual? ds = dgCensus.CurrentRowDataBoundItem as CensusIndividual;
+                CensusIndividual? ds = (CensusIndividual?)dgCensus.CurrentRow.DataBoundItem;
                 if (ds is null) return;
                 if (ModifierKeys.Equals(Keys.Shift))
                 {
@@ -312,20 +292,16 @@ namespace FTAnalyzer.Forms
 
         void MnuExportToExcel_Click(object sender, EventArgs e) => reportFormHelper.DoExportToExcel<IDisplayCensus>();
 
-        void DgCensus_Sorted(object sender, EventArgs e)
-        {
-            if (IsHandleCreated)
-                BeginInvoke(new Action(() => StyleRows()));
-            else
-                StyleRows();
-        }
+        void DgCensus_ColumnSortModeChanged(object sender, DataGridViewColumnEventArgs e) => StyleRows();
+
+        void DgCensus_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e) => StyleRows();
 
         void MnuViewFacts_Click(object sender, EventArgs e)
         {
             if (dgCensus.CurrentRow is not null)
             {
-                CensusIndividual? ds = dgCensus.CurrentRowDataBoundItem as CensusIndividual;
-                if (ds is not null)
+                CensusIndividual? ds = (CensusIndividual?)dgCensus.CurrentRow.DataBoundItem;
+                if (ds != null)
                 {
                     Facts factForm = new(ds);
                     MainForm.DisposeDuplicateForms(factForm);

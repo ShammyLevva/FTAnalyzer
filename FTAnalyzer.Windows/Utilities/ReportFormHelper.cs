@@ -158,6 +158,22 @@ namespace FTAnalyzer.Utilities
                             col.ColumnName = "FoundLocation";
                         if (col.ColumnName == "GoogleResultType")
                             col.ColumnName = "FoundResultType";
+
+                        // Handle old Census column names vs new VirtualDataGridView column names
+                        if (col.ColumnName == "CensusLoc")
+                            col.ColumnName = "CensusLocation";
+                        if (col.ColumnName == "CensusReference")
+                            col.ColumnName = "CensusRef";
+                        if (col.ColumnName == "CensusYear")
+                            col.ColumnName = "Census";
+
+                        // Skip columns that don't exist in current grid
+                        if (ReportGrid.Columns[col.ColumnName] is null)
+                        {
+                            i++;
+                            continue;
+                        }
+
                         ReportGrid.Columns[col.ColumnName].DisplayIndex = i;
                         if (col.ExtendedProperties.Contains("Width"))
                         {
