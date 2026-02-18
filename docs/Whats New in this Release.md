@@ -1,6 +1,7 @@
-## Release Candidate Version 10.0.0.0-RC7 - 17th February 2026  
+## Release Candidate Version 10.0.0.0-RC7 - 18th February 2026  
 **Updates**  
 Added 1939 Register reference detection where ED letters are missing
+Reworked Census report form to use virtual data grid which includes filering and sorting
 
 **Bugfixes**  
 Fixed Loose Births where dates overlap  
