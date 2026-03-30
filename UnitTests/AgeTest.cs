@@ -111,7 +111,7 @@ namespace UnitTests
             Age age30 = MakeAge("1 JAN 1960", "1 JAN 1990"); // MinAge=MaxAge=30
             Age age25 = MakeAge("1 JAN 1960", "1 JAN 1985"); // MinAge=MaxAge=25
 
-            Assert.IsTrue(age30.CompareTo(age25) > 0);
+            Assert.IsGreaterThan(0, age30.CompareTo(age25));
         }
 
         [TestMethod]
@@ -120,7 +120,7 @@ namespace UnitTests
             Age age25 = MakeAge("1 JAN 1960", "1 JAN 1985"); // MinAge=MaxAge=25
             Age age30 = MakeAge("1 JAN 1960", "1 JAN 1990"); // MinAge=MaxAge=30
 
-            Assert.IsTrue(age25.CompareTo(age30) < 0);
+            Assert.IsLessThan(0, age25.CompareTo(age30));
         }
 
         [TestMethod]
@@ -134,7 +134,7 @@ namespace UnitTests
             Assert.AreEqual(35, widerRange.MaxAge);
             Assert.AreEqual(25, narrowerRange.MinAge);
             Assert.AreEqual(30, narrowerRange.MaxAge);
-            Assert.IsTrue(widerRange.CompareTo(narrowerRange) > 0);
+            Assert.IsGreaterThan(0, widerRange.CompareTo(narrowerRange));
         }
 
         [TestMethod]
@@ -144,7 +144,7 @@ namespace UnitTests
             Age narrowerRange = MakeAge("BET 1 JAN 1965 AND 1 JAN 1970", "1 JAN 1995");
             Age widerRange    = MakeAge("BET 1 JAN 1960 AND 1 JAN 1970", "1 JAN 1995");
 
-            Assert.IsTrue(narrowerRange.CompareTo(widerRange) < 0);
+            Assert.IsLessThan(0, narrowerRange.CompareTo(widerRange));
         }
 
         [TestMethod]
@@ -168,7 +168,7 @@ namespace UnitTests
             Assert.AreEqual(30, exact30.MaxAge);
             Assert.AreEqual(25, range25to35.MinAge);
             Assert.AreEqual(35, range25to35.MaxAge);
-            Assert.IsTrue(exact30.CompareTo(range25to35) > 0);
+            Assert.IsGreaterThan(0, exact30.CompareTo(range25to35));
         }
 
         [TestMethod]
@@ -178,7 +178,7 @@ namespace UnitTests
             Age range25to35 = MakeAge("BET 1 JAN 1960 AND 1 JAN 1970", "1 JAN 1995");
             Age exact30     = MakeAge("1 JAN 1960",                    "1 JAN 1990");
 
-            Assert.IsTrue(range25to35.CompareTo(exact30) < 0);
+            Assert.IsLessThan(0, range25to35.CompareTo(exact30));
         }
 
         [TestMethod]
@@ -186,8 +186,8 @@ namespace UnitTests
         {
             Age age30 = MakeAge("1 JAN 1960", "1 JAN 1990");
 
-            Assert.IsTrue(Age.BIRTH.CompareTo(age30) < 0);
-            Assert.IsTrue(age30.CompareTo(Age.BIRTH) > 0);
+            Assert.IsLessThan(0, Age.BIRTH.CompareTo(age30));
+            Assert.IsGreaterThan(0, age30.CompareTo(Age.BIRTH));
         }
 
         [TestMethod]
@@ -199,8 +199,8 @@ namespace UnitTests
             int forward  = age25.CompareTo(age30);
             int backward = age30.CompareTo(age25);
 
-            Assert.IsTrue(forward < 0,  "age25 should be less than age30");
-            Assert.IsTrue(backward > 0, "age30 should be greater than age25");
+            Assert.IsLessThan(0, forward,  "age25 should be less than age30");
+            Assert.IsGreaterThan(0, backward, "age30 should be greater than age25");
         }
 
         [TestMethod]
@@ -210,9 +210,9 @@ namespace UnitTests
             Age age25 = MakeAge("1 JAN 1960", "1 JAN 1985");
             Age age30 = MakeAge("1 JAN 1960", "1 JAN 1990");
 
-            Assert.IsTrue(age20.CompareTo(age25) < 0, "age20 < age25");
-            Assert.IsTrue(age25.CompareTo(age30) < 0, "age25 < age30");
-            Assert.IsTrue(age20.CompareTo(age30) < 0, "age20 < age30 (transitivity)");
+            Assert.IsLessThan(0, age20.CompareTo(age25), "age20 < age25");
+            Assert.IsLessThan(0, age25.CompareTo(age30), "age25 < age30");
+            Assert.IsLessThan(0, age20.CompareTo(age30), "age20 < age30 (transitivity)");
         }
 
         [TestMethod]
@@ -259,7 +259,7 @@ namespace UnitTests
 
             int result = age30.CompareTo((Age?)null);
 
-            Assert.IsTrue(result > 0, "Any Age should be greater than null");
+            Assert.IsGreaterThan(0, result, "Any Age should be greater than null");
         }
 
         [TestMethod]
@@ -269,7 +269,7 @@ namespace UnitTests
 
             int result = ((IComparable)age30).CompareTo(null);
 
-            Assert.IsTrue(result > 0, "Any Age should be greater than null via IComparable");
+            Assert.IsGreaterThan(0, result, "Any Age should be greater than null via IComparable");
         }
 
         #endregion
