@@ -4,7 +4,7 @@ using System.Xml;
 namespace UnitTests
 {
     /// <summary>
-    /// Summary description for AgeTest1
+    /// Summary description for AgeTest
     /// </summary>
     [TestClass]
     public class AgeTest
@@ -257,7 +257,7 @@ namespace UnitTests
         {
             Age age30 = MakeAge("1 JAN 1960", "1 JAN 1990");
 
-            int result = age30.CompareTo((Age?)null);
+            int result = age30.CompareTo(null);
 
             Assert.IsGreaterThan(0, result, "Any Age should be greater than null");
         }

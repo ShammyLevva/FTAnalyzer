@@ -35,6 +35,14 @@
     <WarningsAsErrors>$(WarningsAsErrors);NU1605</WarningsAsErrors>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-windows10.0.17763.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants);CODE_ANALYSIS;TRACE;__DEBUG__;__PC__;FTAnalyzer</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-windows10.0.17763.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants);CODE_ANALYSIS;TRACE;__DEBUG__;__PC__;FTAnalyzer</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="Resources\FTAnalyzer.ico" />
     <None Remove="Resources\Icons\16.png" />
