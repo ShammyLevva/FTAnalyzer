@@ -113,7 +113,7 @@ namespace FTAnalyzer.Forms
 
         void SetupDataGridView(bool censusDone, List<CensusIndividual> individuals)
         {
-            SortableBindingList<IDisplayCensus> list = [with(individuals)];
+            SortableBindingList<IDisplayCensus> list = [.. individuals];
             dgCensus.DataSource = list;
             dgCensus.RowTemplate.Height = (int)(FontSettings.Default.FontHeight * GraphicsUtilities.GetCurrentScaling());
 

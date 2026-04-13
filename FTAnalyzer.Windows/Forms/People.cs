@@ -262,7 +262,7 @@ namespace FTAnalyzer.Forms
         public void SetIndividuals(List<Individual> individuals, string reportTitle)
         {
             Text = reportTitle;
-            dgIndividuals.DataSource = [with(individuals)];
+            dgIndividuals.DataSource = [.. individuals];
             dgIndividuals.Dock = DockStyle.Fill;
 
             splitContainer.Panel2Collapsed = true;

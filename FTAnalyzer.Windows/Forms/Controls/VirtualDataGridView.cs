@@ -59,7 +59,7 @@ namespace FTAnalyzer.Forms.Controls
                 foreach (string filteredColumn in VirtualDataGridView<T>.GetFilteredColumns(e.FilterString))
                 {
                     List<string> filteredValues = VirtualDataGridView<T>.GetFilteredValues(filteredColumn, e.FilterString);
-                    filter = [with(filter.Where(x => filteredValues.Contains(x.GetType().GetProperty(filteredColumn).GetValue(x, null))))];
+                    filter = [.. filter.Where(x => filteredValues.Contains(x.GetType().GetProperty(filteredColumn).GetValue(x, null)))];
                 }
                 _dataSource = filter;
                 DataView dataView = BuildDataTable(_dataSource).DefaultView;
