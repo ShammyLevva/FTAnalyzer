@@ -28,7 +28,7 @@ namespace FTAnalyzer.Forms
                 Top += NativeMethods.TopTaskbarOffset;
                 dgBMDReportSheet.AutoGenerateColumns = false;
 
-                _reportList = new(reportList);
+                _reportList = [with(reportList)];
                 reportFormHelper = new(this, "Colour BMD Report", dgBMDReportSheet, ResetTable, "Colour BMD");
                 ExtensionMethods.DoubleBuffered(dgBMDReportSheet, true);
                 settingSelections = false;

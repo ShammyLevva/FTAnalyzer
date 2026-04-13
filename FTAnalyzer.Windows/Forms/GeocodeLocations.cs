@@ -215,7 +215,7 @@ namespace FTAnalyzer.Forms
         SortableBindingList<IDisplayGeocodedLocation> ApplyFilters(FactLocation mustDisplay)
         {
             if (AllFiltersActive(false))
-                return new SortableBindingList<IDisplayGeocodedLocation>(locations);
+                return [with(locations)];
             List<IDisplayGeocodedLocation> results = [];
             ToolStripMenuItem? places = mnuFoundResultType.DropDownItems[PLACES] as ToolStripMenuItem;
             ToolStripMenuItem[] list = new ToolStripMenuItem[places.DropDownItems.Count + mnuFoundResultType.DropDownItems.Count + noneOfTheAboveMenus.Length];
@@ -242,7 +242,7 @@ namespace FTAnalyzer.Forms
                     }
                 }
             }
-            return new SortableBindingList<IDisplayGeocodedLocation>(results);
+            return [with(results)];
         }
 
         void CheckGoogleStatusCodes(List<IDisplayGeocodedLocation> input)

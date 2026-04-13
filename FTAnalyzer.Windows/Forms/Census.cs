@@ -113,7 +113,7 @@ namespace FTAnalyzer.Forms
 
         void SetupDataGridView(bool censusDone, List<CensusIndividual> individuals)
         {
-            SortableBindingList<IDisplayCensus> list = new(individuals);
+            SortableBindingList<IDisplayCensus> list = [with(individuals)];
             dgCensus.DataSource = list;
             dgCensus.RowTemplate.Height = (int)(FontSettings.Default.FontHeight * GraphicsUtilities.GetCurrentScaling());
 
@@ -121,8 +121,7 @@ namespace FTAnalyzer.Forms
                 dgCensus.Columns[nameof(IDisplayCensus.CensusRef)].Visible = false;
 
             DataGridViewColumn? posColumn = dgCensus.Columns[nameof(IDisplayCensus.Position)];
-            if (posColumn is not null)
-                posColumn.Visible = false;
+            posColumn?.Visible = false;
 
             reportFormHelper.LoadColumnLayout("CensusColumns.xml");
             int numIndividuals = (from x in individuals select x.IndividualID).Distinct().Count();
@@ -161,8 +160,7 @@ namespace FTAnalyzer.Forms
 
                 for (int i = 0; i < dgCensus.RowCount; i++)
                 {
-                    CensusIndividual? cr = dgCensus.DataBoundItem(i) as CensusIndividual;
-                    if (cr is null) continue;
+                    if (dgCensus.DataBoundItem(i) is not CensusIndividual cr) continue;
 
                     // Get the value directly from the property using reflection
                     object? cellValue = typeof(IDisplayCensus).GetProperty(sortedPropertyName)?.GetValue(cr);
@@ -260,8 +258,7 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && dgCensus.CurrentRow is not null && !CensusDate.VALUATIONROLLS.Contains(CensusDate))
             {
-                CensusIndividual? ds = dgCensus.CurrentRowDataBoundItem as CensusIndividual;
-                if (ds is null) return;
+                if (dgCensus.CurrentRowDataBoundItem is not CensusIndividual ds) return;
                 if (ModifierKeys.Equals(Keys.Shift))
                 {
                     Facts factForm = new(ds);
