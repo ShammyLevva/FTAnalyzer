@@ -1,3 +1,7 @@
+## Release Candidate Version 10.0.0.0-RC8 - 18th February 2026  
+**Updates**  
+Added ForenameMetaphone and SurnameMetaphone to Excel export  
+
 ## Release Candidate Version 10.0.0.0-RC7 - 18th February 2026  
 **Updates**  
 Added 1939 Register reference detection where ED letters are missing
