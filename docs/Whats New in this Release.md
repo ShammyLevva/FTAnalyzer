@@ -1,3 +1,51 @@
+## Version 10.0.0.0 - 27th May 2026  
+**Updates**
+App re-written from ground up to use .Net 10 which has long term support and to take advantage of the latest features and performance improvements.  
+One effect of this is that the minimum supported Windows version is now Windows 10.
+Also old user settings wont load in the new version, so it will revert to defaults on first run. 
+Added numerous extra census reference checks
+Double clicking displayed error opens facts for individual
+Added support for 1926 Irish Census released on 18th April 2026  
+Added 1939 Register reference detection where ED letters are missing
+Add 1921 Census Location detection  
+Added Forename & Surname Metaphones to Excel export
+Relationship calcs respect same sex marriages now  
+Add custom fact event analysis  
+Added option to show if person died during period census was taken  
+Cope with dates with double tags eg: TO BEF, TO AFT and similar  
+Cope with changed Ancestry GEDCOM format that moved fact description from fact to note  
+Now avoids showing date errors if Census Fact has text of State Census  
+Added suffix recognition from name fact
+Updated Alias handling to recognise more GEDCOM flavours  
+Use new precompiled methods for Census reference recognition speeding up processing  
+Lost Cousins report now more responsive
+
+**Bugfixes**
+Fix issues with scrollbars caused by different DPI settings.
+Fixed filtering & sorting on virtual data grids
+Fix 1911 census refs to work for 1921 identical formats
+Display Locations no longer shows UNKNOWN_LOCATION
+Fix check for Web Version check to show if there is a new version  
+Fix sibling too soon check  
+Checking birth too soon only check if child birthdate is known  
+Changed all messageboxes to load on top of parent form which solves issue of appearing on a different monitor  
+Fixed crash if child has no name at all  
+Fixed Google Geocoding not stopping immediately on closing form  
+1921 Census references were not being recognised correctly  
+Maximising colour reports now works correctly  
+Added checks for saving settings to ensure file access issues are handled  
+Loose births now ensure birth end is less than death end  
+Census reference checks for England and Wales census cater for extra words in middle of reference  
+Changed warning description for "Child born very soon after sibling" to be clearer  
+Warning now only shows after 270 days (9 months) not 300 days (10 months)  
+And hundreds of other minor bug fixes and improvements
+
+**Known Issues**
+Child Birth Profile chart disabled due old method being incompatible with new .Net version. Will be re-enabled in a future release.
+Previously ignored duplicates may return due to revised way of storing changes.  
+Old user settings wont load in the new version, so it will revert to defaults on first run.
+Updated packages to use new zip methods this may break loading old backups  
+
 ## Release Candidate Version 10.0.0.0-RC8 - 18th February 2026  
 **Updates**  
 Added ForenameMetaphone and SurnameMetaphone to Excel export  
