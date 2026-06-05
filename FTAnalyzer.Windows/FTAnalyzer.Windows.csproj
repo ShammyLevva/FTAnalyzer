@@ -17,9 +17,16 @@
     <ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
     <ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
     <TargetFrameworks>net10.0-windows10.0.17763.0</TargetFrameworks>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <!-- WAP publish redirects BaseIntermediateOutputPath to obj\wappublish\win-x64\, causing the SDK
+       to look for project.assets.json there. Fall back to the standard location if it doesn't exist. -->
+  <PropertyGroup Condition="!Exists('$(ProjectAssetsFile)')">
+    <ProjectAssetsFile>$(MSBuildProjectDirectory)\obj\project.assets.json</ProjectAssetsFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU' Or '$(Configuration)|$(Platform)'=='Debug|x64'">
     <DefineConstants>$(DefineConstants)TRACE;__PC__;CODE_ANALYSIS;__DEBUG__</DefineConstants>
     <NoWarn>CA1416;1701;1702;8601;8602;8605;8618;8625;SYSLIB1054</NoWarn>
     <WarningLevel>9999</WarningLevel>
@@ -27,7 +34,7 @@
     <WarningsAsErrors>$(WarningsAsErrors);NU1605</WarningsAsErrors>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU' Or '$(Configuration)|$(Platform)'=='Release|x64'">
     <DefineConstants>$(DefineConstants)TRACE;__PC__;CODE_ANALYSIS;__DEBUG__</DefineConstants>
     <NoWarn>CA1416;1701;1702;8601;8602;8605;8618;8625;SYSLIB1054</NoWarn>
     <WarningLevel>9999</WarningLevel>
@@ -35,11 +42,11 @@
     <WarningsAsErrors>$(WarningsAsErrors);NU1605</WarningsAsErrors>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-windows10.0.17763.0|AnyCPU'">
+  <PropertyGroup Condition="('$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-windows10.0.17763.0|AnyCPU') Or ('$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-windows10.0.17763.0|x64')">
     <DefineConstants>$(DefineConstants);CODE_ANALYSIS;TRACE;__DEBUG__;__PC__;FTAnalyzer</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-windows10.0.17763.0|AnyCPU'">
+  <PropertyGroup Condition="('$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-windows10.0.17763.0|AnyCPU') Or ('$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-windows10.0.17763.0|x64')">
     <DefineConstants>$(DefineConstants);CODE_ANALYSIS;TRACE;__DEBUG__;__PC__;FTAnalyzer</DefineConstants>
   </PropertyGroup>
 
