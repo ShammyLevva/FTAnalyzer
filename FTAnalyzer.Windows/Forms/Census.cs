@@ -258,7 +258,7 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && dgCensus.CurrentRow is not null && !CensusDate.VALUATIONROLLS.Contains(CensusDate))
             {
-                if (dgCensus.CurrentRowDataBoundItem is not CensusIndividual ds) return;
+                if (dgCensus.Rows[e.RowIndex].DataBoundItem is not CensusIndividual ds) return;
                 if (ModifierKeys.Equals(Keys.Shift))
                 {
                     Facts factForm = new(ds);

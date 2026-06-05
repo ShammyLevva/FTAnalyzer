@@ -193,7 +193,7 @@ namespace FTAnalyzer.Forms
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
                 Cursor = Cursors.WaitCursor;
-                IDisplayFact? fact = (IDisplayFact?)dgFacts.CurrentRow.DataBoundItem;
+                IDisplayFact? fact = (IDisplayFact?)dgFacts.Rows[e.RowIndex].DataBoundItem;
                 if (fact is not null)
                     MapHelper.OpenGeoLocations(fact.Location, outputText);
                 Cursor = Cursors.Default;
