@@ -1,4 +1,4 @@
-## Version 10.0.0.1 - 5th June 2026  
+## Version 10.0.1.0 - 5th June 2026  
 **Bugfixes**
 Double clicking various grids was returning wrong values  
 Loading large files often showed no progress bars until after initial file load  
