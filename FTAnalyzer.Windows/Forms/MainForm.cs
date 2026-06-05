@@ -258,10 +258,7 @@ namespace FTAnalyzer
             {
                 HourGlass(this, true);
                 this.filename = filename;
-                CloseGEDCOM(false);
-
-                // allow UI to repaint (hourglass/status/cleared output) before starting heavy async work
-                await Task.Yield();
+                await CloseGEDCOM(false);
 
                 if (!stopProcessing)
                 {
@@ -278,7 +275,7 @@ namespace FTAnalyzer
                         UIHelpers.ShowMessage($"Gedcom File {filename} Loaded", APPNAME);
                     }
                     else
-                        CleanUp(true);
+                        await CleanUp(true);
                 }
             }
             catch (IOException ex)
@@ -290,10 +287,12 @@ namespace FTAnalyzer
                 string message = ex2.Message + "\n" + (ex2.InnerException is not null ? ex2.InnerException.Message : string.Empty);
                 UIHelpers.ShowMessage($"Error: Problem processing your file. Please try again.\n" +
                     $"If this problem persists please report this at https://www.ftanalyzer.com/issues. Error was: {message}\n{ex2.InnerException}", APPNAME);
-                CleanUp(true);
+                await CleanUp(true);
             }
             finally
             {
+                tspbTabProgress.Visible = false;
+                tspbTabProgress.Style = ProgressBarStyle.Blocks;
                 HourGlass(this, false);
             }
         }
@@ -308,7 +307,13 @@ namespace FTAnalyzer
 
             IProgress<string> outputText = new Progress<string>(s => buffer.Enqueue(s));
 
-            // give UI another chance to process paint/cursor messages before disk I/O starts
+            // switch from marquee (shown during CloseGEDCOM) to a real progress bar
+            tspbTabProgress.Style = ProgressBarStyle.Blocks;
+            tspbTabProgress.Maximum = 100;
+            tspbTabProgress.Value = 0;
+            IProgress<int> parseProgress = new Progress<int>(value => tspbTabProgress.Value = value);
+
+            // give UI another chance to process paint/cursor messages (including the progress bar) before disk I/O starts
             await Task.Yield();
 
             XmlDocument? doc;
@@ -316,7 +321,7 @@ namespace FTAnalyzer
             timer.Start();
             using (FileStream stream = new(filename, FileMode.Open, FileAccess.Read))
             {
-                doc = await Task.Run(() => ft.LoadTreeHeader(filename, stream, outputText));
+                doc = await Task.Run(() => ft.LoadTreeHeader(filename, stream, outputText, parseProgress));
             }
             if (doc is null)
             {
@@ -416,30 +421,45 @@ namespace FTAnalyzer
             mnuLoadLocationsCSV.Enabled = false;
         }
 
-        void CloseGEDCOM(bool keepOutput)
+        async Task CloseGEDCOM(bool keepOutput)
         {
+            // Blocks + ProgressBar.Refresh() paints synchronously via UpdateWindow — no timer needed
+            tspbTabProgress.Style = ProgressBarStyle.Blocks;
+            tspbTabProgress.Maximum = 100;
+            tspbTabProgress.Value = 0;
+            tspbTabProgress.Visible = true;
+            tspbTabProgress.ProgressBar?.Refresh();
+
             DisposeIndividualForms();
             ShowMenus(false);
             tabSelector.SelectTab(tabDisplayProgress);
             if (!keepOutput)
-                rtbOutput.Text = string.Empty;
+                rtbOutput.Clear();
             tsCountLabel.Text = string.Empty;
             tsHintsLabel.Text = string.Empty;
             tsStatusLabel.Text = string.Empty;
             statusStrip.Refresh();
-            rtbLCoutput.Text = string.Empty;
-            rtbLCUpdateData.Text = string.Empty;
-            rtbCheckAncestors.Text = string.Empty;
-            rtbToday.Text = string.Empty;
+            rtbLCoutput.Clear();
+            rtbLCUpdateData.Clear();
+            rtbCheckAncestors.Clear();
+            rtbToday.Clear();
             pbSources.Value = 0;
             pbIndividuals.Value = 0;
             pbFamilies.Value = 0;
             pbRelationships.Value = 0;
-            SetupGridControls();
+            SetCloseProgress(5);
+
+            await SetupGridControls();
+
             cmbReferrals.Items.Clear();
             cmbReferrals.Text = string.Empty;
             ClearColourFamilyCombo();
+            SetCloseProgress(83);
+
+            await Task.Yield();
             Statistics.Instance.Clear();
+            SetCloseProgress(90);
+
             btnReferrals.Enabled = false;
             openToolStripMenuItem.Enabled = false;
             databaseToolStripMenuItem.Enabled = false;
@@ -447,51 +467,42 @@ namespace FTAnalyzer
             tabMainListsSelector.SelectedTab = tabIndividuals; // force back to first tab
             tabErrorFixSelector.SelectedTab = tabDataErrors; //force tab back to data errors tab
             tabCtrlLocations.SelectedTab = tabTreeView; // otherwise totals etc look wrong
+
+            await Task.Yield();
+            treeViewLocations.BeginUpdate();
             treeViewLocations.Nodes.Clear();
+            treeViewLocations.EndUpdate();
+            SetCloseProgress(100);
+
             Text = "Family Tree Analyzer v" + VERSION;
         }
 
-        void SetupGridControls()
+        void SetCloseProgress(int value)
+        {
+            tspbTabProgress.Value = value;
+            tspbTabProgress.ProgressBar?.Refresh();
+        }
+
+        async Task SetupGridControls()
         {
             // set datasources for locations in reverse order to avoid null pointer cell formatting race condition
-            dgPlaces.DataSource = null;
-            dgAddresses.DataSource = null;
-            dgSubRegions.DataSource = null;
-            dgRegions.DataSource = null;
-            dgCountries.DataSource = null;
-            dgIndividuals.DataSource = null;
-            dgFamilies.DataSource = null;
-            dgTreeTops.DataSource = null;
-            dgWorldWars.DataSource = null;
-            dgLooseBirths.DataSource = null;
-            dgLooseDeaths.DataSource = null;
-            dgLooseInfo.DataSource = null;
-            dgDataErrors.DataSource = null;
-            dgOccupations.DataSource = null;
-            dgSurnames.DataSource = null;
-            dgDuplicates.DataSource = null;
-            dgSources.DataSource = null;
-            dgCustomFacts.DataSource = null;
-            dgCheckAncestors.DataSource = null;
-            ExtensionMethods.DoubleBuffered(dgPlaces, true);
-            ExtensionMethods.DoubleBuffered(dgAddresses, true);
-            ExtensionMethods.DoubleBuffered(dgSubRegions, true);
-            ExtensionMethods.DoubleBuffered(dgRegions, true);
-            ExtensionMethods.DoubleBuffered(dgCountries, true);
-            ExtensionMethods.DoubleBuffered(dgIndividuals, true);
-            ExtensionMethods.DoubleBuffered(dgFamilies, true);
-            ExtensionMethods.DoubleBuffered(dgTreeTops, true);
-            ExtensionMethods.DoubleBuffered(dgWorldWars, true);
-            ExtensionMethods.DoubleBuffered(dgLooseBirths, true);
-            ExtensionMethods.DoubleBuffered(dgLooseDeaths, true);
-            ExtensionMethods.DoubleBuffered(dgLooseInfo, true);
-            ExtensionMethods.DoubleBuffered(dgDataErrors, true);
-            ExtensionMethods.DoubleBuffered(dgOccupations, true);
-            ExtensionMethods.DoubleBuffered(dgSurnames, true);
-            ExtensionMethods.DoubleBuffered(dgDuplicates, true);
-            ExtensionMethods.DoubleBuffered(dgSources, true);
-            ExtensionMethods.DoubleBuffered(dgCustomFacts, true);
-            ExtensionMethods.DoubleBuffered(dgCheckAncestors, true);
+            // each clear yields to keep UI responsive; progress advances 5→81% across the 19 grids
+            (DataGridView grid, int pct)[] grids =
+            [
+                (dgPlaces, 9), (dgAddresses, 13), (dgSubRegions, 17), (dgRegions, 21),
+                (dgCountries, 25), (dgIndividuals, 32), (dgFamilies, 39), (dgTreeTops, 43),
+                (dgWorldWars, 47), (dgLooseBirths, 51), (dgLooseDeaths, 55), (dgLooseInfo, 59),
+                (dgDataErrors, 63), (dgOccupations, 67), (dgSurnames, 74), (dgDuplicates, 77),
+                (dgSources, 79), (dgCustomFacts, 80), (dgCheckAncestors, 81),
+            ];
+            foreach ((DataGridView dg, int pct) in grids)
+            {
+                dg.DataSource = null;
+                SetCloseProgress(pct);
+                await Task.Yield();
+            }
+            foreach ((DataGridView dg, _) in grids)
+                ExtensionMethods.DoubleBuffered(dg, true);
         }
 
         static void SetSavePath()
@@ -529,15 +540,18 @@ namespace FTAnalyzer
             }
         }
 
-        void MnuCloseGEDCOM_Click(object sender, EventArgs e)
+        async void MnuCloseGEDCOM_Click(object sender, EventArgs e)
         {
             if (!loading)
-                CleanUp(false);
+            {
+                await CleanUp(false);
+                tspbTabProgress.Visible = false;
+            }
         }
 
-        void CleanUp(bool retainText)
+        async Task CleanUp(bool retainText)
         {
-            CloseGEDCOM(retainText);
+            await CloseGEDCOM(retainText);
             ft.ResetData();
             EnableLoadMenus();
             mnuRestore.Enabled = true;
