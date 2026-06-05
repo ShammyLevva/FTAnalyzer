@@ -593,8 +593,8 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(this, true);
-                var loc = (FactLocation)dgCountries.CurrentRowDataBoundItem;
-                var frmInd = new People();
+                if (dgCountries.Rows[e.RowIndex].DataBoundItem is not FactLocation loc) return;
+                People frmInd = new();
                 frmInd.SetLocation(loc, FactLocation.COUNTRY);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
@@ -607,8 +607,8 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(this, true);
-                var loc = dgRegions.CurrentRow is null ? FactLocation.BLANK_LOCATION : (FactLocation)dgRegions.CurrentRowDataBoundItem;
-                var frmInd = new People();
+                if (dgRegions.Rows[e.RowIndex].DataBoundItem is not FactLocation loc) return;
+                People frmInd = new();
                 frmInd.SetLocation(loc, FactLocation.REGION);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
@@ -621,8 +621,8 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(this, true);
-                var loc = (FactLocation)dgSubRegions.CurrentRowDataBoundItem;
-                var frmInd = new People();
+                if (dgSubRegions.Rows[e.RowIndex].DataBoundItem is not FactLocation loc) return;
+                People frmInd = new();
                 frmInd.SetLocation(loc, FactLocation.SUBREGION);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
@@ -635,8 +635,8 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(this, true);
-                var loc = (FactLocation)dgAddresses.CurrentRowDataBoundItem;
-                var frmInd = new People();
+                if (dgAddresses.Rows[e.RowIndex].DataBoundItem is not FactLocation loc) return;
+                People frmInd = new();
                 frmInd.SetLocation(loc, FactLocation.ADDRESS);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
@@ -649,8 +649,8 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(this, true);
-                var loc = (FactLocation)dgPlaces.CurrentRowDataBoundItem;
-                var frmInd = new People();
+                if (dgPlaces.Rows[e.RowIndex].DataBoundItem is not FactLocation loc) return;
+                People frmInd = new();
                 frmInd.SetLocation(loc, FactLocation.PLACE);
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
@@ -745,8 +745,8 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(this, true);
-                var occ = (DisplayOccupation)dgOccupations.CurrentRowDataBoundItem;
-                var frmInd = new People();
+                if (dgOccupations.Rows[e.RowIndex].DataBoundItem is not DisplayOccupation occ) return;
+                People frmInd = new();
                 frmInd.SetWorkers(occ.Occupation, ft.AllWorkers(occ.Occupation));
                 DisposeDuplicateForms(frmInd);
                 frmInd.Show();
@@ -759,9 +759,9 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(this, true);
-                var customFacts = (DisplayCustomFact)dgCustomFacts.CurrentRowDataBoundItem;
-                var frmCustomFacts = new People();
-                frmCustomFacts.SetCustomFacts(customFacts.CustomFactName, ft.AllCustomFactIndividuals(customFacts.CustomFactName), ft.AllCustomFactFamilies(customFacts.CustomFactName));
+                if(dgCustomFacts.Rows[e.RowIndex].DataBoundItem is not DisplayCustomFact customFact) return;
+                People frmCustomFacts = new();
+                frmCustomFacts.SetCustomFacts(customFact.CustomFactName, ft.AllCustomFactIndividuals(customFact.CustomFactName), ft.AllCustomFactFamilies(customFact.CustomFactName));
                 DisposeDuplicateForms(frmCustomFacts);
                 frmCustomFacts.Show();
                 HourGlass(this, false);
@@ -770,14 +770,14 @@ namespace FTAnalyzer
 
         void DgCustomFacts_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            var customFact = (DisplayCustomFact)dgCustomFacts.CurrentRowDataBoundItem;
+            if (dgCustomFacts.Rows[e.RowIndex].DataBoundItem is not DisplayCustomFact customFact) return;
             DatabaseHelper.IgnoreCustomFact(customFact.CustomFactName, customFact.Ignore);
         }
 
         void SetAsRootToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            var ind = (Individual)dgIndividuals.CurrentRowDataBoundItem;
+            Individual? ind = dgIndividuals.CurrentRowDataBoundItem as Individual;
             if (ind is not null)
             {
                 var outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
@@ -1352,7 +1352,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(this, true);
-                IDisplaySurnames stat = dgSurnames.CurrentRowDataBoundItem;
+                if(dgSurnames.Rows[e.RowIndex].DataBoundItem is not IDisplaySurnames stat) return;
                 People frmInd = new();
                 Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => x.RelationType);
                 Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
@@ -1506,14 +1506,14 @@ namespace FTAnalyzer
             catch (Exception) { }
         }
 
-		async void LoadLocationsTab()
-		{
+        async void LoadLocationsTab()
+        {
             tabCtrlLocations.SelectedIndex = 0;
             tsCountLabel.Text = string.Empty;
             tsHintsLabel.Text = Messages.Hints_Location;
             tspbTabProgress.Visible = true;
             treeViewLocations.Nodes.Clear();
-			TreeNode[] nodes = await TreeViewHandler.Instance.BuildAllLocationsTreeNodesAsync(true, tspbTabProgress);
+            TreeNode[] nodes = await TreeViewHandler.Instance.BuildAllLocationsTreeNodesAsync(true, tspbTabProgress);
             try
             {
                 treeViewLocations.Nodes.AddRange(nodes);
@@ -2450,7 +2450,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                FactSource source = (FactSource)dgSources.CurrentRowDataBoundItem;
+                if(dgSources.Rows[e.RowIndex].DataBoundItem is not FactSource source) return;
                 Facts factForm = new(source);
                 DisposeDuplicateForms(factForm);
                 factForm.Show();
