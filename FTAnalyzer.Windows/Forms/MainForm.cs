@@ -607,7 +607,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(this, true);
-                if (dgCountries.Rows[e.RowIndex].DataBoundItem is not FactLocation loc) return;
+                if (dgCountries.DataBoundItem(e.RowIndex) is not FactLocation loc) return;
                 People frmInd = new();
                 frmInd.SetLocation(loc, FactLocation.COUNTRY);
                 DisposeDuplicateForms(frmInd);
@@ -621,7 +621,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(this, true);
-                if (dgRegions.Rows[e.RowIndex].DataBoundItem is not FactLocation loc) return;
+                if (dgRegions.DataBoundItem(e.RowIndex) is not FactLocation loc) return;
                 People frmInd = new();
                 frmInd.SetLocation(loc, FactLocation.REGION);
                 DisposeDuplicateForms(frmInd);
@@ -635,7 +635,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(this, true);
-                if (dgSubRegions.Rows[e.RowIndex].DataBoundItem is not FactLocation loc) return;
+                if (dgSubRegions.DataBoundItem(e.RowIndex) is not FactLocation loc) return;
                 People frmInd = new();
                 frmInd.SetLocation(loc, FactLocation.SUBREGION);
                 DisposeDuplicateForms(frmInd);
@@ -649,7 +649,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(this, true);
-                if (dgAddresses.Rows[e.RowIndex].DataBoundItem is not FactLocation loc) return;
+                if (dgAddresses.DataBoundItem(e.RowIndex) is not FactLocation loc) return;
                 People frmInd = new();
                 frmInd.SetLocation(loc, FactLocation.ADDRESS);
                 DisposeDuplicateForms(frmInd);
@@ -663,7 +663,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(this, true);
-                if (dgPlaces.Rows[e.RowIndex].DataBoundItem is not FactLocation loc) return;
+                if (dgPlaces.DataBoundItem(e.RowIndex) is not FactLocation loc) return;
                 People frmInd = new();
                 frmInd.SetLocation(loc, FactLocation.PLACE);
                 DisposeDuplicateForms(frmInd);
@@ -759,7 +759,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(this, true);
-                if (dgOccupations.Rows[e.RowIndex].DataBoundItem is not DisplayOccupation occ) return;
+                if (dgOccupations.DataBoundItem(e.RowIndex) is not DisplayOccupation occ) return;
                 People frmInd = new();
                 frmInd.SetWorkers(occ.Occupation, ft.AllWorkers(occ.Occupation));
                 DisposeDuplicateForms(frmInd);
@@ -773,7 +773,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(this, true);
-                if(dgCustomFacts.Rows[e.RowIndex].DataBoundItem is not DisplayCustomFact customFact) return;
+                if(dgCustomFacts.DataBoundItem(e.RowIndex) is not DisplayCustomFact customFact) return;
                 People frmCustomFacts = new();
                 frmCustomFacts.SetCustomFacts(customFact.CustomFactName, ft.AllCustomFactIndividuals(customFact.CustomFactName), ft.AllCustomFactFamilies(customFact.CustomFactName));
                 DisposeDuplicateForms(frmCustomFacts);
@@ -784,7 +784,7 @@ namespace FTAnalyzer
 
         void DgCustomFacts_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgCustomFacts.Rows[e.RowIndex].DataBoundItem is not DisplayCustomFact customFact) return;
+            if (dgCustomFacts.DataBoundItem(e.RowIndex) is not DisplayCustomFact customFact) return;
             DatabaseHelper.IgnoreCustomFact(customFact.CustomFactName, customFact.Ignore);
         }
 
@@ -1366,7 +1366,7 @@ namespace FTAnalyzer
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 HourGlass(this, true);
-                if(dgSurnames.Rows[e.RowIndex].DataBoundItem is not IDisplaySurnames stat) return;
+                if(dgSurnames.DataBoundItem(e.RowIndex) is not IDisplaySurnames stat) return;
                 People frmInd = new();
                 Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => x.RelationType);
                 Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
@@ -2464,7 +2464,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                if(dgSources.Rows[e.RowIndex].DataBoundItem is not FactSource source) return;
+                if(dgSources.DataBoundItem(e.RowIndex) is not FactSource source) return;
                 Facts factForm = new(source);
                 DisposeDuplicateForms(factForm);
                 factForm.Show();
