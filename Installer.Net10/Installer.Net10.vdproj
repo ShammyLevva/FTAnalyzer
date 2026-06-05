@@ -811,6 +811,7 @@
                 "ExcludeFilters"
                 {
                 "ExcludeFilter" = "8:FTAnalyzer.exe"
+                "ExcludeFilter" = "8:ftanalyzer.exe"
                 }
             }
         }

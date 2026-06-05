@@ -1,3 +1,8 @@
+## Version 10.0.0.1 - 5th June 2026  
+**Bugfixes**
+Double clicking various grids was returning wrong values  
+Loading large files often showed no progress bars until after initial file load  
+
 ## Version 10.0.0.0 - 27th May 2026  
 **Updates**
 App re-written from ground up to use .Net 10 which has long term support and to take advantage of the latest features and performance improvements.  
