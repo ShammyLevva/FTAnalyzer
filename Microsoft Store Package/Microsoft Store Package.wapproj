@@ -158,9 +158,33 @@
     <Content Include="Images\Wide310x150Logo.scale-200.png" />
     <Content Include="Images\Wide310x150Logo.scale-400.png" />
     <None Include="Package.StoreAssociation.xml" />
+    <None Include="strip-debug-attrs.ps1" />
   </ItemGroup>
   <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.targets" />
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.7705" PrivateAssets="all" />
+    <!-- Mono.Cecil is restored via FTAnalyzer.Windows.csproj; no WAP-level restore needed. -->
   </ItemGroup>
+
+  <!--
+    Common.Logging 3.4.1 (a SharpMap dependency) ships DLLs compiled in debug mode, which
+    causes the Microsoft Store WACK "debug configuration" test to fail. This target runs after
+    the app layout is staged and uses Mono.Cecil to remove the DebuggableAttribute from those
+    two DLLs before MakeAppx packs them. .NET 5+ does not enforce strong-name verification, so
+    stripping the signature is safe.
+  -->
+  <Target Name="StripCommonLoggingDebugAttributes"
+          AfterTargets="_CreatePackageLayout">
+    <PropertyGroup>
+      <_MonoCecilDll>$(NuGetPackageRoot)mono.cecil\0.11.6\lib\netstandard2.0\Mono.Cecil.dll</_MonoCecilDll>
+      <_StripScript>$(MSBuildThisFileDirectory)strip-debug-attrs.ps1</_StripScript>
+    </PropertyGroup>
+    <Message Text="Stripping debug attributes from Common.Logging in layout: $(AppxLayoutDir)" Importance="high" />
+    <Exec Command="powershell.exe -ExecutionPolicy Bypass -File &quot;$(_StripScript)&quot; -LayoutDir &quot;$(AppxLayoutDir)&quot; -MonoCecilDll &quot;$(_MonoCecilDll)&quot;" />
+    <Message Text="Stripping debug attributes from Common.Logging in upload layout: $(AppxUploadLayoutDir)" Importance="normal"
+             Condition="'$(AppxUploadLayoutDir)' != '' And Exists('$(AppxUploadLayoutDir)')" />
+    <Exec Command="powershell.exe -ExecutionPolicy Bypass -File &quot;$(_StripScript)&quot; -LayoutDir &quot;$(AppxUploadLayoutDir)&quot; -MonoCecilDll &quot;$(_MonoCecilDll)&quot;"
+          Condition="'$(AppxUploadLayoutDir)' != '' And Exists('$(AppxUploadLayoutDir)')" />
+  </Target>
+
 </Project>

@@ -238,6 +238,8 @@
     <PackageReference Include="SharpMap.UI" Version="3.0.0" />
     <PackageReference Include="SharpZipLib" Version="1.4.2" />
     <PackageReference Include="System.Data.SqlClient" Version="4.9.1" />
+    <!-- Build-tool only: downloaded to NuGet cache so the WAP strip-debug-attrs.ps1 script can use it. -->
+    <PackageReference Include="Mono.Cecil" Version="0.11.6" IncludeAssets="none" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
