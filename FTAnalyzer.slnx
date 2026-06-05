@@ -8,6 +8,8 @@
     <BuildType Name="ReleaseDSProjection" />
     <BuildType Name="SingleImage" />
     <Platform Name="Any CPU" />
+    <Platform Name="ARM" />
+    <Platform Name="ARM64" />
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
@@ -21,21 +23,65 @@
   </Folder>
   <Project Path="../FTAnalyzer.Shared/FTAnalyzer.Shared/FTAnalyzer.Shared.shproj" />
   <Project Path="FTAnalyzer.Windows/FTAnalyzer.Windows.csproj">
-    <BuildType Solution="CD_ROM|*" Project="Debug" />
+    <BuildType Solution="CD_ROM|Any CPU" Project="Debug" />
+    <BuildType Solution="CD_ROM|ARM" Project="Release" />
+    <BuildType Solution="CD_ROM|ARM64" Project="Release" />
+    <BuildType Solution="CD_ROM|x64" Project="Debug" />
+    <BuildType Solution="CD_ROM|x86" Project="Debug" />
     <BuildType Solution="DebugDSProjection|*" Project="Debug" />
-    <BuildType Solution="DVD-5|*" Project="Debug" />
+    <BuildType Solution="DVD-5|Any CPU" Project="Debug" />
+    <BuildType Solution="DVD-5|ARM" Project="Release" />
+    <BuildType Solution="DVD-5|ARM64" Project="Release" />
+    <BuildType Solution="DVD-5|x64" Project="Debug" />
+    <BuildType Solution="DVD-5|x86" Project="Debug" />
     <BuildType Solution="ReleaseDSProjection|*" Project="Release" />
-    <BuildType Solution="SingleImage|*" Project="Debug" />
+    <BuildType Solution="SingleImage|Any CPU" Project="Debug" />
+    <BuildType Solution="SingleImage|ARM" Project="Release" />
+    <BuildType Solution="SingleImage|ARM64" Project="Release" />
+    <BuildType Solution="SingleImage|x64" Project="Debug" />
+    <BuildType Solution="SingleImage|x86" Project="Debug" />
   </Project>
   <Project Path="Installer.Net10/Installer.Net10.vdproj" Type="Installer">
+    <Platform Solution="CD_ROM|ARM" Project="Any CPU" />
+    <Platform Solution="CD_ROM|ARM64" Project="Any CPU" />
+    <Platform Solution="DebugDSProjection|ARM" Project="Any CPU" />
+    <Platform Solution="DebugDSProjection|ARM64" Project="Any CPU" />
+    <Platform Solution="DVD-5|ARM" Project="Any CPU" />
+    <Platform Solution="DVD-5|ARM64" Project="Any CPU" />
+    <Platform Solution="ReleaseDSProjection|ARM" Project="Any CPU" />
+    <Platform Solution="ReleaseDSProjection|ARM64" Project="Any CPU" />
+    <Platform Solution="SingleImage|ARM" Project="Any CPU" />
+    <Platform Solution="SingleImage|ARM64" Project="Any CPU" />
+    <Build Solution="*|ARM" />
+    <Build Solution="*|ARM64" />
     <Build Solution="Release|Any CPU" />
   </Project>
-  <Project Path="UnitTests/UnitTests.csproj">
-    <BuildType Solution="CD_ROM|*" Project="Debug" />
+  <Project Path="Microsoft Store Package/Microsoft Store Package.wapproj" Type="c7167f0d-bc9f-4e6e-afe1-012c56b48db5" Id="0d09f7b1-74d1-40a6-8a49-621242fc512e">
+    <BuildType Solution="CD_ROM|*" Project="Release" />
     <BuildType Solution="DebugDSProjection|*" Project="Debug" />
-    <BuildType Solution="DVD-5|*" Project="Debug" />
+    <BuildType Solution="DVD-5|*" Project="Release" />
     <BuildType Solution="ReleaseDSProjection|*" Project="Release" />
-    <BuildType Solution="SingleImage|*" Project="Debug" />
+    <BuildType Solution="SingleImage|*" Project="Release" />
+    <Deploy />
+  </Project>
+  <Project Path="UnitTests/UnitTests.csproj">
+    <BuildType Solution="CD_ROM|Any CPU" Project="Debug" />
+    <BuildType Solution="CD_ROM|ARM" Project="Release" />
+    <BuildType Solution="CD_ROM|ARM64" Project="Release" />
+    <BuildType Solution="CD_ROM|x64" Project="Debug" />
+    <BuildType Solution="CD_ROM|x86" Project="Debug" />
+    <BuildType Solution="DebugDSProjection|*" Project="Debug" />
+    <BuildType Solution="DVD-5|Any CPU" Project="Debug" />
+    <BuildType Solution="DVD-5|ARM" Project="Release" />
+    <BuildType Solution="DVD-5|ARM64" Project="Release" />
+    <BuildType Solution="DVD-5|x64" Project="Debug" />
+    <BuildType Solution="DVD-5|x86" Project="Debug" />
+    <BuildType Solution="ReleaseDSProjection|*" Project="Release" />
+    <BuildType Solution="SingleImage|Any CPU" Project="Debug" />
+    <BuildType Solution="SingleImage|ARM" Project="Release" />
+    <BuildType Solution="SingleImage|ARM64" Project="Release" />
+    <BuildType Solution="SingleImage|x64" Project="Debug" />
+    <BuildType Solution="SingleImage|x86" Project="Debug" />
     <Build Solution="Release|Any CPU" Project="false" />
   </Project>
   <Properties Name="TestCaseManagementSettings" Scope="PostLoad">
