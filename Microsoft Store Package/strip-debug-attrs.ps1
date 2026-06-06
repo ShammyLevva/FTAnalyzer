@@ -3,8 +3,8 @@ param(
     [string]$MonoCecilDll
 )
 
-if (-not (Test-Path $MonoCecilDll)) {
-    Write-Error "Mono.Cecil not found at: $MonoCecilDll"
+if ([string]::IsNullOrEmpty($MonoCecilDll) -or -not (Test-Path $MonoCecilDll)) {
+    Write-Error "Mono.Cecil not found at: '$MonoCecilDll'"
     exit 1
 }
 

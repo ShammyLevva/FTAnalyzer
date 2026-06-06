@@ -61,7 +61,7 @@
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
-    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <GenerateTestArtifacts>False</GenerateTestArtifacts>
     <AppxBundlePlatforms>x64</AppxBundlePlatforms>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
   </PropertyGroup>
@@ -165,7 +165,6 @@
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.7705" PrivateAssets="all" />
     <!-- Mono.Cecil is restored via FTAnalyzer.Windows.csproj; no WAP-level restore needed. -->
   </ItemGroup>
-
   <!--
     Common.Logging 3.4.1 (a SharpMap dependency) ships DLLs compiled in debug mode, which
     causes the Microsoft Store WACK "debug configuration" test to fail. This target runs after
@@ -173,18 +172,18 @@
     two DLLs before MakeAppx packs them. .NET 5+ does not enforce strong-name verification, so
     stripping the signature is safe.
   -->
-  <Target Name="StripCommonLoggingDebugAttributes"
-          AfterTargets="_CreatePackageLayout">
+  <Target Name="StripCommonLoggingDebugAttributes" AfterTargets="_CreatePackageLayout;_CreateUploadPackageLayout">
     <PropertyGroup>
       <_MonoCecilDll>$(NuGetPackageRoot)mono.cecil\0.11.6\lib\netstandard2.0\Mono.Cecil.dll</_MonoCecilDll>
       <_StripScript>$(MSBuildThisFileDirectory)strip-debug-attrs.ps1</_StripScript>
+      <!-- Trim trailing backslash — a path ending in \ inside "..." becomes \" which PowerShell
+           misparses as an escaped quote, breaking all subsequent parameters. -->
+      <_AppxLayoutDir>$(AppxLayoutDir.TrimEnd('\'))</_AppxLayoutDir>
+      <_AppxUploadLayoutDir>$(AppxUploadLayoutDir.TrimEnd('\'))</_AppxUploadLayoutDir>
     </PropertyGroup>
-    <Message Text="Stripping debug attributes from Common.Logging in layout: $(AppxLayoutDir)" Importance="high" />
-    <Exec Command="powershell.exe -ExecutionPolicy Bypass -File &quot;$(_StripScript)&quot; -LayoutDir &quot;$(AppxLayoutDir)&quot; -MonoCecilDll &quot;$(_MonoCecilDll)&quot;" />
-    <Message Text="Stripping debug attributes from Common.Logging in upload layout: $(AppxUploadLayoutDir)" Importance="normal"
-             Condition="'$(AppxUploadLayoutDir)' != '' And Exists('$(AppxUploadLayoutDir)')" />
-    <Exec Command="powershell.exe -ExecutionPolicy Bypass -File &quot;$(_StripScript)&quot; -LayoutDir &quot;$(AppxUploadLayoutDir)&quot; -MonoCecilDll &quot;$(_MonoCecilDll)&quot;"
-          Condition="'$(AppxUploadLayoutDir)' != '' And Exists('$(AppxUploadLayoutDir)')" />
+    <Message Text="Stripping debug attributes from Common.Logging in layout: $(_AppxLayoutDir)" Importance="high" />
+    <Exec Command="powershell.exe -ExecutionPolicy Bypass -File &quot;$(_StripScript)&quot; -LayoutDir &quot;$(_AppxLayoutDir)&quot; -MonoCecilDll &quot;$(_MonoCecilDll)&quot;" Condition="'$(_AppxLayoutDir)' != ''" />
+    <Message Text="Stripping debug attributes from Common.Logging in upload layout: $(_AppxUploadLayoutDir)" Importance="high" Condition="'$(_AppxUploadLayoutDir)' != ''" />
+    <Exec Command="powershell.exe -ExecutionPolicy Bypass -File &quot;$(_StripScript)&quot; -LayoutDir &quot;$(_AppxUploadLayoutDir)&quot; -MonoCecilDll &quot;$(_MonoCecilDll)&quot;" Condition="'$(_AppxUploadLayoutDir)' != ''" />
   </Target>
-
 </Project>
