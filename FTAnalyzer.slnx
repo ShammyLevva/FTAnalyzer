@@ -53,9 +53,8 @@
     <Platform Solution="ReleaseDSProjection|ARM64" Project="Any CPU" />
     <Platform Solution="SingleImage|ARM" Project="Any CPU" />
     <Platform Solution="SingleImage|ARM64" Project="Any CPU" />
-    <Build Solution="*|ARM" />
-    <Build Solution="*|ARM64" />
     <Build Solution="Release|Any CPU" />
+    <Build Solution="Release|x64" />
   </Project>
   <Project Path="Microsoft Store Package/Microsoft Store Package.wapproj" Type="c7167f0d-bc9f-4e6e-afe1-012c56b48db5" Id="0d09f7b1-74d1-40a6-8a49-621242fc512e">
     <BuildType Solution="CD_ROM|*" Project="Release" />
