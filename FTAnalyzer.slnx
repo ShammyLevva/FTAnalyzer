@@ -63,7 +63,10 @@
     <BuildType Solution="DVD-5|*" Project="Release" />
     <BuildType Solution="ReleaseDSProjection|*" Project="Release" />
     <BuildType Solution="SingleImage|*" Project="Release" />
-    <Platform Solution="Debug|Any CPU" Project="x64" />
+    <Platform Solution="*|Any CPU" Project="x64" />
+    <Platform Solution="*|ARM" Project="x64" />
+    <Platform Solution="*|ARM64" Project="x64" />
+    <Platform Solution="*|x86" Project="x64" />
     <Build Solution="Debug|Any CPU" Project="false" />
     <Deploy Solution="*|ARM" />
     <Deploy Solution="*|ARM64" />

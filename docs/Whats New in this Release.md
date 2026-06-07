@@ -1,7 +1,7 @@
 ## Version 10.0.2.0 - 7th June 2026  
 **Bugfixes**
 Census reference reports were using all the filters on the page and thus looking like they missed data  
-Where ancestry has screwed up the GEDCOM file with bad line breaks the dialog box was thowing an error after aync changes  
+Where ancestry has screwed up the GEDCOM file with bad line breaks the dialog box was thowing an error after async changes  
 1921 Census reference tweaks to cope with sometimes including the word piece and sometimes excluding Schedule  
 
 ## Version 10.0.1.0 - 5th June 2026  
