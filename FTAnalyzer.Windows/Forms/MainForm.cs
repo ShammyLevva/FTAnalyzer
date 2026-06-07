@@ -1723,6 +1723,11 @@ namespace FTAnalyzer
         Predicate<Individual> CreateIndividualCensusFilter(CensusDate cemsusDate, bool censusDone, string surname, bool anyCensus)
         {
             Predicate<Individual> filter;
+            if (ckbIgnoreAll.Checked)
+            {
+                filter = x => true;
+                return filter;
+            }
             var relationFilter = relTypesCensus.BuildFilter<Individual>(x => x.RelationType);
             if (anyCensus) // only filter on date if not selecting any date
             {
@@ -2464,7 +2469,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                if(dgSources.DataBoundItem(e.RowIndex) is not FactSource source) return;
+                if (dgSources.DataBoundItem(e.RowIndex) is not FactSource source) return;
                 Facts factForm = new(source);
                 DisposeDuplicateForms(factForm);
                 factForm.Show();

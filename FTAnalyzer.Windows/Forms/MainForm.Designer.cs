@@ -391,6 +391,7 @@ namespace FTAnalyzer
             MatchBirthLocation = new DataGridViewTextBoxColumn();
             saveDatabase = new SaveFileDialog();
             restoreDatabase = new OpenFileDialog();
+            ckbIgnoreAll = new CheckBox();
             menuStrip1.SuspendLayout();
             mnuSetRoot.SuspendLayout();
             statusStrip.SuspendLayout();
@@ -2423,6 +2424,7 @@ namespace FTAnalyzer
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(ckbIgnoreAll);
             groupBox2.Controls.Add(btnAliveOnDate);
             groupBox2.Controls.Add(txtAliveDates);
             groupBox2.Controls.Add(labCensusAliveDates);
@@ -2483,13 +2485,14 @@ namespace FTAnalyzer
             chkAnyCensusYear.AutoSize = true;
             chkAnyCensusYear.Checked = true;
             chkAnyCensusYear.CheckState = CheckState.Checked;
-            chkAnyCensusYear.Location = new Point(396, 149);
+            chkAnyCensusYear.Location = new Point(397, 119);
             chkAnyCensusYear.Margin = new Padding(4);
             chkAnyCensusYear.Name = "chkAnyCensusYear";
             chkAnyCensusYear.RightToLeft = RightToLeft.Yes;
             chkAnyCensusYear.Size = new Size(314, 19);
             chkAnyCensusYear.TabIndex = 36;
             chkAnyCensusYear.Text = "Include ALL census years for Census Reference reports ";
+            toolTips.SetToolTip(chkAnyCensusYear, "Normally only the census selected on the dropdown is reported, ticking this includes all census records");
             chkAnyCensusYear.UseVisualStyleBackColor = true;
             // 
             // groupBox10
@@ -2573,7 +2576,7 @@ namespace FTAnalyzer
             // 
             // btnInconsistentLocations
             // 
-            btnInconsistentLocations.Location = new Point(740, 22);
+            btnInconsistentLocations.Location = new Point(745, 22);
             btnInconsistentLocations.Margin = new Padding(4);
             btnInconsistentLocations.Name = "btnInconsistentLocations";
             btnInconsistentLocations.Size = new Size(351, 29);
@@ -2584,10 +2587,10 @@ namespace FTAnalyzer
             // 
             // btnUnrecognisedCensusRef
             // 
-            btnUnrecognisedCensusRef.Location = new Point(376, 22);
+            btnUnrecognisedCensusRef.Location = new Point(560, 22);
             btnUnrecognisedCensusRef.Margin = new Padding(4);
             btnUnrecognisedCensusRef.Name = "btnUnrecognisedCensusRef";
-            btnUnrecognisedCensusRef.Size = new Size(168, 29);
+            btnUnrecognisedCensusRef.Size = new Size(177, 29);
             btnUnrecognisedCensusRef.TabIndex = 8;
             btnUnrecognisedCensusRef.Text = "Unrecognised Census Refs";
             btnUnrecognisedCensusRef.UseVisualStyleBackColor = true;
@@ -2595,10 +2598,10 @@ namespace FTAnalyzer
             // 
             // btnIncompleteCensusRef
             // 
-            btnIncompleteCensusRef.Location = new Point(189, 22);
+            btnIncompleteCensusRef.Location = new Point(375, 22);
             btnIncompleteCensusRef.Margin = new Padding(4);
             btnIncompleteCensusRef.Name = "btnIncompleteCensusRef";
-            btnIncompleteCensusRef.Size = new Size(180, 29);
+            btnIncompleteCensusRef.Size = new Size(177, 29);
             btnIncompleteCensusRef.TabIndex = 7;
             btnIncompleteCensusRef.Text = "Incomplete Census Refs";
             btnIncompleteCensusRef.UseVisualStyleBackColor = true;
@@ -2606,7 +2609,7 @@ namespace FTAnalyzer
             // 
             // btnMissingCensusRefs
             // 
-            btnMissingCensusRefs.Location = new Point(551, 22);
+            btnMissingCensusRefs.Location = new Point(192, 22);
             btnMissingCensusRefs.Margin = new Padding(4);
             btnMissingCensusRefs.Name = "btnMissingCensusRefs";
             btnMissingCensusRefs.Size = new Size(175, 29);
@@ -2620,7 +2623,7 @@ namespace FTAnalyzer
             btnCensusRefs.Location = new Point(7, 22);
             btnCensusRefs.Margin = new Padding(4);
             btnCensusRefs.Name = "btnCensusRefs";
-            btnCensusRefs.Size = new Size(175, 29);
+            btnCensusRefs.Size = new Size(177, 29);
             btnCensusRefs.TabIndex = 5;
             btnCensusRefs.Text = "Good Census Refs";
             btnCensusRefs.UseVisualStyleBackColor = true;
@@ -2629,7 +2632,7 @@ namespace FTAnalyzer
             // chkExcludeUnknownBirths
             // 
             chkExcludeUnknownBirths.AutoSize = true;
-            chkExcludeUnknownBirths.Location = new Point(397, 73);
+            chkExcludeUnknownBirths.Location = new Point(397, 75);
             chkExcludeUnknownBirths.Margin = new Padding(4);
             chkExcludeUnknownBirths.Name = "chkExcludeUnknownBirths";
             chkExcludeUnknownBirths.RightToLeft = RightToLeft.Yes;
@@ -4406,6 +4409,21 @@ namespace FTAnalyzer
             restoreDatabase.FileName = "*.zip";
             restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
             // 
+            // ckbIgnoreAll
+            // 
+            ckbIgnoreAll.AutoSize = true;
+            ckbIgnoreAll.Checked = true;
+            ckbIgnoreAll.CheckState = CheckState.Checked;
+            ckbIgnoreAll.Location = new Point(397, 149);
+            ckbIgnoreAll.Margin = new Padding(4);
+            ckbIgnoreAll.Name = "ckbIgnoreAll";
+            ckbIgnoreAll.RightToLeft = RightToLeft.Yes;
+            ckbIgnoreAll.Size = new Size(303, 19);
+            ckbIgnoreAll.TabIndex = 42;
+            ckbIgnoreAll.Text = "Ignore ALL other filters for Census Reference reports ";
+            toolTips.SetToolTip(ckbIgnoreAll, "Normally the census reference reports filter on relationship type, surname, age filter etc - ticking this returns all census references");
+            ckbIgnoreAll.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             AllowDrop = true;
@@ -4896,6 +4914,7 @@ namespace FTAnalyzer
         private Utilities.ScrollingRichTextBox rtbToday;
         private LinkLabel linkLabel2;
         private LinkLabel LabLostCousinsWeb;
+        private CheckBox ckbIgnoreAll;
     }
 }
 
