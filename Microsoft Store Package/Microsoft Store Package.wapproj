@@ -19,7 +19,6 @@
     <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
     <NoWarn>$(NoWarn);NU1605;NU1701;NU1702</NoWarn>
     <EntryPointProjectUniqueName>..\FTAnalyzer.Windows\FTAnalyzer.Windows.csproj</EntryPointProjectUniqueName>
-    <GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
@@ -63,9 +62,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FTAnalyzer.Windows\FTAnalyzer.Windows.csproj">
-      <SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
-    </ProjectReference>
+    <ProjectReference Include="..\FTAnalyzer.Windows\FTAnalyzer.Windows.csproj" SkipGetTargetFrameworkProperties="true" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\LargeTile.scale-100.png" />
