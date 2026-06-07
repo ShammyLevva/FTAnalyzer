@@ -120,10 +120,10 @@ namespace UnitTests
         [TestMethod]
         public void CensusReference1921Tests()
         {
-            Census1921Test("The National Archives of the UK(TNA); Kew, Surrey, England; 1921 Census Returns; Reference: RG 15/18159, ED 3, Sch 185; Book: 18159", "18159", "3", "185");
-            Census1921Test("The National Archives of the UK(TNA); Kew, Surrey, England; 1921 Census Returns; Reference: RG 15/17491, ED 20, Sch 326; Book: 17491", "17491", "20", "326");
+            Census1921Test("The National Archives of the UK(TNA); Kew, Surrey, England; 1921 Census Returns; Reference: RG 15/18159, ED 3, Sch 185; Book: 18159", "18159", "3", "185", "18159");
+            Census1921Test("The National Archives of the UK(TNA); Kew, Surrey, England; 1921 Census Returns; Reference: RG 15/17491, ED 20, Sch 326; Book: 17491", "17491", "20", "326", "17491");
+            Census1921Test("Grove Fever Hospital, Tooting Grove <b>Series: RG15, Piece: 2396, Enumeration District: 26, Page: 17</b>", "2396", "26", "");
         }
-        
 
         [TestMethod]
         public void CensusReferenceUKTests()
@@ -220,13 +220,14 @@ namespace UnitTests
             Assert.IsTrue(censusRef.Schedule.Equals(schedule));
         }
 
-        static void Census1921Test(string reference, string book, string ed, string schedule)
+        static void Census1921Test(string reference, string piece, string ed, string schedule, string book = "")
         {
             CensusReference censusRef = new("I1", reference, false);
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1921));
-            Assert.IsTrue(censusRef.Book.Equals(book));
+            Assert.IsTrue(censusRef.Piece.Equals(piece));
             Assert.IsTrue(censusRef.ED.Equals(ed));
             Assert.IsTrue(censusRef.Schedule.Equals(schedule));
+            Assert.IsTrue(censusRef.Book.Equals(book));
         }
         static void Census1921Test(string reference, string rd, string sd)
         {
