@@ -1,3 +1,9 @@
+## Version 10.0.3.0 - 7th June 2026  
+**Bugfixes**
+Census reference reports were using all the filters on the page and thus looking like they missed data  
+Where ancestry has screwed up the GEDCOM file with bad line breaks the dialog box was thowing an error after aync changes  
+
+
 ## Version 10.0.1.0 - 5th June 2026  
 **Bugfixes**
 Double clicking various grids was returning wrong values  

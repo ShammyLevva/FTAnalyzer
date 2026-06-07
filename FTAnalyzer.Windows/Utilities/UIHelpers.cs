@@ -4,20 +4,40 @@ namespace FTAnalyzer.Utilities
 {
     public static class UIHelpers
     {
-        public static int ShowYesNo(string message, string title)
+        // Safe to call from any thread — marshals to the UI thread when InvokeRequired.
+        static Form? UIOwner => Application.OpenForms.Count > 0 ? Application.OpenForms[0] : null;
+
+        static T InvokeIfRequired<T>(Func<Form?, T> action)
         {
-            DialogResult result = MessageBox.Show(Form.ActiveForm, message, title, MessageBoxButtons.YesNo);
-            return (int)result;
+            Form? owner = UIOwner;
+            if (owner is not null && owner.InvokeRequired)
+                return owner.Invoke(() => action(owner));
+            return action(Form.ActiveForm);
         }
 
-        public static int ShowMessage(string message) => ShowMessage(message, "FTAnalyzer");
-        public static int ShowMessage(string message, string title) => (int)MessageBox.Show(Form.ActiveForm, message, title);
+        public static int ShowYesNo(string message, string title) =>
+            InvokeIfRequired(owner => (int)MessageBox.Show(owner, message, title, MessageBoxButtons.YesNo));
 
-        public static int ShowMessage(Form form, string message) => (int)MessageBox.Show(form, message, string.Empty);
-        public static int ShowMessage(Form form, string message, string title) => (int)MessageBox.Show(form, message, title);
+        public static int ShowMessage(string message) => ShowMessage(message, "FTAnalyzer");
+        public static int ShowMessage(string message, string title) =>
+            InvokeIfRequired(owner => (int)MessageBox.Show(owner, message, title));
+
+        public static int ShowMessage(Form form, string message)
+        {
+            if (form.InvokeRequired)
+                return (int)form.Invoke(() => (int)MessageBox.Show(form, message, string.Empty));
+            return (int)MessageBox.Show(form, message, string.Empty);
+        }
+
+        public static int ShowMessage(Form form, string message, string title)
+        {
+            if (form.InvokeRequired)
+                return (int)form.Invoke(() => (int)MessageBox.Show(form, message, title));
+            return (int)MessageBox.Show(form, message, title);
+        }
 
         public static DialogResult ShowMessage(string message, string title, MessageBoxButtons buttons, MessageBoxIcon icon) =>
-            MessageBox.Show(Form.ActiveForm, message, title, buttons, icon);
+            InvokeIfRequired(owner => MessageBox.Show(owner, message, title, buttons, icon));
 
         public static int Yes => (int)DialogResult.Yes;
         public static int No => (int)DialogResult.No;
