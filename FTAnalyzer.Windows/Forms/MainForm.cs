@@ -611,7 +611,7 @@ namespace FTAnalyzer
                 People frmInd = new();
                 frmInd.SetLocation(loc, FactLocation.COUNTRY);
                 DisposeDuplicateForms(frmInd);
-                frmInd.Show();
+                ShowOnCurrentScreen(frmInd);
                 HourGlass(this, false);
             }
         }
@@ -625,7 +625,7 @@ namespace FTAnalyzer
                 People frmInd = new();
                 frmInd.SetLocation(loc, FactLocation.REGION);
                 DisposeDuplicateForms(frmInd);
-                frmInd.Show();
+                ShowOnCurrentScreen(frmInd);
                 HourGlass(this, false);
             }
         }
@@ -639,7 +639,7 @@ namespace FTAnalyzer
                 People frmInd = new();
                 frmInd.SetLocation(loc, FactLocation.SUBREGION);
                 DisposeDuplicateForms(frmInd);
-                frmInd.Show();
+                ShowOnCurrentScreen(frmInd);
                 HourGlass(this, false);
             }
         }
@@ -653,7 +653,7 @@ namespace FTAnalyzer
                 People frmInd = new();
                 frmInd.SetLocation(loc, FactLocation.ADDRESS);
                 DisposeDuplicateForms(frmInd);
-                frmInd.Show();
+                ShowOnCurrentScreen(frmInd);
                 HourGlass(this, false);
             }
         }
@@ -667,7 +667,7 @@ namespace FTAnalyzer
                 People frmInd = new();
                 frmInd.SetLocation(loc, FactLocation.PLACE);
                 DisposeDuplicateForms(frmInd);
-                frmInd.Show();
+                ShowOnCurrentScreen(frmInd);
                 HourGlass(this, false);
             }
         }
@@ -763,7 +763,7 @@ namespace FTAnalyzer
                 People frmInd = new();
                 frmInd.SetWorkers(occ.Occupation, ft.AllWorkers(occ.Occupation));
                 DisposeDuplicateForms(frmInd);
-                frmInd.Show();
+                ShowOnCurrentScreen(frmInd);
                 HourGlass(this, false);
             }
         }
@@ -777,7 +777,7 @@ namespace FTAnalyzer
                 People frmCustomFacts = new();
                 frmCustomFacts.SetCustomFacts(customFact.CustomFactName, ft.AllCustomFactIndividuals(customFact.CustomFactName), ft.AllCustomFactFamilies(customFact.CustomFactName));
                 DisposeDuplicateForms(frmCustomFacts);
-                frmCustomFacts.Show();
+                ShowOnCurrentScreen(frmCustomFacts);
                 HourGlass(this, false);
             }
         }
@@ -816,7 +816,7 @@ namespace FTAnalyzer
             if (ind is not null)
             {
                 Notes notes = new(ind);
-                notes.Show();
+                ShowOnCurrentScreen(notes);
             }
             HourGlass(this, false);
         }
@@ -1037,7 +1037,7 @@ namespace FTAnalyzer
                 if (frmInd.OlderParents(age))
                 {
                     DisposeDuplicateForms(frmInd);
-                    frmInd.Show();
+                    ShowOnCurrentScreen(frmInd);
                     Analytics.TrackAction(Analytics.MainFormAction, Analytics.OlderParentsEvent);
                 }
             }
@@ -1215,7 +1215,7 @@ namespace FTAnalyzer
                     var frmInd = new People();
                     frmInd.SetLocation(location, e.Node.Level);
                     DisposeDuplicateForms(frmInd);
-                    frmInd.Show();
+                    ShowOnCurrentScreen(frmInd);
                 }
             }
             HourGlass(this, false);
@@ -1250,7 +1250,7 @@ namespace FTAnalyzer
             HourGlass(this, true);
             TimeLine tl = new(new Progress<string>(value => { rtbOutput.AppendText(value); }));
             DisposeDuplicateForms(tl);
-            tl.Show();
+            ShowOnCurrentScreen(tl);
             HourGlass(this, false);
             Analytics.TrackAction(Analytics.MapsAction, Analytics.ShowTimelinesEvent);
         }
@@ -1291,7 +1291,10 @@ namespace FTAnalyzer
                             break;
                         }
                     }
+                    bool geoIsNew = geo is null;
                     geo ??= new GeocodeLocations(new Progress<string>(rtbOutput.AppendText));
+                    if (geoIsNew)
+                        CentreFormOnScreen(geo, Screen.FromControl(this));
                     geo.Show();
                     geo.Focus();
                     switch (type)
@@ -1317,7 +1320,7 @@ namespace FTAnalyzer
             HourGlass(this, true);
             GeocodeLocations geo = new(new Progress<string>(value => { rtbOutput.AppendText(value); }));
             DisposeDuplicateForms(geo);
-            geo.Show();
+            ShowOnCurrentScreen(geo);
             HourGlass(this, false);
             Analytics.TrackAction(Analytics.MapsAction, Analytics.GeocodesEvent);
         }
@@ -1346,7 +1349,7 @@ namespace FTAnalyzer
             HourGlass(this, true);
             LifeLine l = new(new Progress<string>(value => { rtbOutput.AppendText(value); }));
             DisposeDuplicateForms(l);
-            l.Show();
+            ShowOnCurrentScreen(l);
             HourGlass(this, false);
             Analytics.TrackAction(Analytics.MapsAction, Analytics.LifelinesEvent);
         }
@@ -1356,7 +1359,7 @@ namespace FTAnalyzer
             HourGlass(this, true);
             Places p = new(new Progress<string>(value => { rtbOutput.AppendText(value); }));
             DisposeDuplicateForms(p);
-            p.Show();
+            ShowOnCurrentScreen(p);
             HourGlass(this, false);
             Analytics.TrackAction(Analytics.MapsAction, Analytics.ShowPlacesEvent);
         }
@@ -1372,7 +1375,7 @@ namespace FTAnalyzer
                 Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
                 frmInd.SetSurnameStats(stat, indFilter, famFilter, chkSurnamesIgnoreCase.Checked);
                 DisposeDuplicateForms(frmInd);
-                frmInd.Show();
+                ShowOnCurrentScreen(frmInd);
                 HourGlass(this, false);
                 Analytics.TrackAction(Analytics.MainFormAction, Analytics.ViewAllSurnameEvent);
             }
@@ -1401,7 +1404,7 @@ namespace FTAnalyzer
             var people = new People();
             people.SetIndividuals(censusNotes, "List of Possible Census records incorrectly recorded as notes");
             DisposeDuplicateForms(people);
-            people.Show();
+            ShowOnCurrentScreen(people);
             HourGlass(this, false);
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.PossibleCensusEvent);
         }
@@ -1813,7 +1816,7 @@ namespace FTAnalyzer
             else
                 census.Text = $"{reportTitle} to enter into Lost Cousins website";
             DisposeDuplicateForms(census);
-            census.Show();
+            ShowOnCurrentScreen(census);
             Task.Run(() => Analytics.TrackActionAsync(Analytics.LostCousinsAction, Analytics.LCReportYearEvent, censusDate.BestYear.ToString()));
             HourGlass(this, false);
         }
@@ -1853,7 +1856,7 @@ namespace FTAnalyzer
             census.Text = $"Potential Records to upload to Lost Cousins Website";
             DisposeDuplicateForms(census);
             Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.PreviewLostCousins);
-            census.Show();
+            ShowOnCurrentScreen(census);
             HourGlass(this, false);
         }
 
@@ -1865,7 +1868,7 @@ namespace FTAnalyzer
             census.Text = $"Incompatible Census References in Records to upload to Lost Cousins Website";
             DisposeDuplicateForms(census);
             Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.PreviewLostCousins);
-            census.Show();
+            ShowOnCurrentScreen(census);
             HourGlass(this, false);
         }
 
@@ -1944,7 +1947,7 @@ namespace FTAnalyzer
             People people = new();
             people.SetupLCNoCountry(relationFilter);
             DisposeDuplicateForms(people);
-            people.Show();
+            ShowOnCurrentScreen(people);
             Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.NoLCCountryEvent);
             HourGlass(this, false);
         }
@@ -1971,7 +1974,7 @@ namespace FTAnalyzer
             People people = new();
             people.SetupLCDuplicates(relationFilter);
             DisposeDuplicateForms(people);
-            people.Show();
+            ShowOnCurrentScreen(people);
             Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.LCDuplicatesEvent);
             HourGlass(this, false);
         }
@@ -1983,7 +1986,7 @@ namespace FTAnalyzer
             People people = new();
             people.SetupLCnoCensus(relationFilter);
             DisposeDuplicateForms(people);
-            people.Show();
+            ShowOnCurrentScreen(people);
             Analytics.TrackAction(Analytics.LostCousinsAction, Analytics.NoLCCensusEvent);
             HourGlass(this, false);
         }
@@ -2187,6 +2190,20 @@ namespace FTAnalyzer
                 }
             }
             catch (Exception) { }
+        }
+
+        static void CentreFormOnScreen(Form form, Screen screen)
+        {
+            form.StartPosition = FormStartPosition.Manual;
+            form.Location = new Point(
+                screen.WorkingArea.Left + (screen.WorkingArea.Width - form.Width) / 2,
+                screen.WorkingArea.Top + (screen.WorkingArea.Height - form.Height) / 2);
+        }
+
+        void ShowOnCurrentScreen(Form form)
+        {
+            CentreFormOnScreen(form, Screen.FromControl(this));
+            form.Show();
         }
         #endregion
 
@@ -2472,7 +2489,7 @@ namespace FTAnalyzer
                 if (dgSources.DataBoundItem(e.RowIndex) is not FactSource source) return;
                 Facts factForm = new(source);
                 DisposeDuplicateForms(factForm);
-                factForm.Show();
+                ShowOnCurrentScreen(factForm);
             }
         }
 
@@ -2501,7 +2518,7 @@ namespace FTAnalyzer
                     List<Individual> dupInd = [a, b];
                     Facts f = new(dupInd, null, null, Facts.AlternateFacts.AllFacts);
                     DisposeDuplicateForms(f);
-                    f.Show();
+                    ShowOnCurrentScreen(f);
                 }
             }
         }
@@ -2526,6 +2543,7 @@ namespace FTAnalyzer
             {
                 Facts factForm = new(ind);
                 DisposeDuplicateForms(factForm);
+                CentreFormOnScreen(factForm, Screen.FromPoint(Cursor.Position));
                 factForm.Show();
                 if (offset)
                 {
@@ -2542,6 +2560,7 @@ namespace FTAnalyzer
             {
                 Facts factForm = new(fam);
                 DisposeDuplicateForms(factForm);
+                CentreFormOnScreen(factForm, Screen.FromPoint(Cursor.Position));
                 factForm.Show();
                 if (offset)
                 {
@@ -2567,7 +2586,7 @@ namespace FTAnalyzer
                 facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, true), BuildFactTypeList(ckbFactExclude, true), Facts.AlternateFacts.AlternateOnly);
             else
                 facts = new Facts(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, true), BuildFactTypeList(ckbFactExclude, true), Facts.AlternateFacts.AllFacts);
-            facts.Show();
+            ShowOnCurrentScreen(facts);
             HourGlass(this, false);
         }
 
@@ -2693,7 +2712,7 @@ namespace FTAnalyzer
                 filter = FilterUtils.AndFilter<Individual>(filter, surnameFilter);
             }
             Facts facts = new(ft.AllIndividuals.Filter(filter), BuildFactTypeList(ckbFactSelect, false));
-            facts.Show();
+            ShowOnCurrentScreen(facts);
             HourGlass(this, false);
         }
         #endregion
@@ -2951,7 +2970,7 @@ namespace FTAnalyzer
                 census.SetupCensus(filter);
             }
             DisposeDuplicateForms(census);
-            census.Show();
+            ShowOnCurrentScreen(census);
         }
 
         void BtnRandomSurname_Click(object sender, EventArgs e)
@@ -2981,7 +3000,7 @@ namespace FTAnalyzer
             People people = new();
             people.SetupMissingCensusLocation();
             DisposeDuplicateForms(people);
-            people.Show();
+            ShowOnCurrentScreen(people);
             Analytics.TrackAction(Analytics.CensusTabAction, Analytics.MissingCensusLocationEvent);
             HourGlass(this, false);
         }
@@ -2992,7 +3011,7 @@ namespace FTAnalyzer
             People people = new();
             people.SetupDuplicateCensus();
             DisposeDuplicateForms(people);
-            people.Show();
+            ShowOnCurrentScreen(people);
             Analytics.TrackAction(Analytics.CensusTabAction, Analytics.DuplicateCensusEvent);
             HourGlass(this, false);
         }
@@ -3003,7 +3022,7 @@ namespace FTAnalyzer
             People people = new();
             people.SetupNoChildrenStatus();
             DisposeDuplicateForms(people);
-            people.Show();
+            ShowOnCurrentScreen(people);
             Analytics.TrackAction(Analytics.CensusTabAction, Analytics.NoChildrenStatusEvent);
             HourGlass(this, false);
         }
@@ -3014,7 +3033,7 @@ namespace FTAnalyzer
             People people = new();
             people.SetupChildrenStatusReport();
             DisposeDuplicateForms(people);
-            people.Show();
+            ShowOnCurrentScreen(people);
             Analytics.TrackAction(Analytics.CensusTabAction, Analytics.MisMatchedEvent);
             HourGlass(this, false);
         }
@@ -3024,7 +3043,7 @@ namespace FTAnalyzer
             HourGlass(this, true);
             CensusDate date = chkAnyCensusYear.Checked ? CensusDate.ANYCENSUS : cenDate.SelectedDate;
             Facts facts = new(status, filter, date);
-            facts.Show();
+            ShowOnCurrentScreen(facts);
             HourGlass(this, false);
         }
 
@@ -3133,7 +3152,7 @@ namespace FTAnalyzer
             HourGlass(this, true);
             Predicate<Individual> filter = new(x => x.ErrorFacts.Count > 0);
             Facts facts = new(filter, true);
-            facts.Show();
+            ShowOnCurrentScreen(facts);
             HourGlass(this, false);
         }
 
@@ -3142,7 +3161,7 @@ namespace FTAnalyzer
             HourGlass(this, true);
             Predicate<Individual> filter = new(x => x.FactCount(Fact.CENSUS_FTA) > 0);
             Facts facts = new(filter, false);
-            facts.Show();
+            ShowOnCurrentScreen(facts);
             HourGlass(this, false);
         }
         #endregion
@@ -3156,7 +3175,7 @@ namespace FTAnalyzer
             List<IDisplayColourBMD> list = ft.ColourBMD(relTypeFilter, txtColouredSurname.Text, cbFamily);
             ColourBMD rs = new(list);
             DisposeDuplicateForms(rs);
-            rs.Show();
+            ShowOnCurrentScreen(rs);
             rs.Focus();
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.ColourBMDEvent);
             HourGlass(this, false);
@@ -3171,6 +3190,7 @@ namespace FTAnalyzer
                     ft.ColourCensus(country, relTypeFilter, txtColouredSurname.Text, cbFamily, ckbIgnoreNoBirthDate.Checked, ckbIgnoreNoDeathDate.Checked);
             ColourCensus rs = new(country, list);
             DisposeDuplicateForms(rs);
+            CentreFormOnScreen(rs, Screen.FromControl(this));
             await rs.ShowAsync();
             rs.Focus();
             await Analytics.TrackActionAsync(Analytics.MainFormAction, Analytics.ColourCensusEvent, country);
@@ -3360,7 +3380,7 @@ namespace FTAnalyzer
             if (ind is not null)
             {
                 Notes notes = new(ind);
-                notes.Show();
+                ShowOnCurrentScreen(notes);
             }
             HourGlass(this, false);
         }
@@ -3415,7 +3435,7 @@ namespace FTAnalyzer
                 ft.SetRelations(selected.IndividualID, null);
                 LostCousinsReferral lcr = new(selected, ckbReferralInCommon.Checked);
                 DisposeDuplicateForms(lcr);
-                lcr.Show();
+                ShowOnCurrentScreen(lcr);
                 ft.SetRelations(root.IndividualID, null);
                 HourGlass(this, false);
             }
@@ -3839,7 +3859,7 @@ namespace FTAnalyzer
             HourGlass(this, true);
             StatisticsForm f = new(StatisticsForm.StatisticType.CousinCount);
             DisposeDuplicateForms(f);
-            f.Show();
+            ShowOnCurrentScreen(f);
             HourGlass(this, false);
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.CousinCountEvent);
         }
@@ -3849,7 +3869,7 @@ namespace FTAnalyzer
             HourGlass(this, true);
             StatisticsForm f = new(StatisticsForm.StatisticType.HowManyDirects);
             DisposeDuplicateForms(f);
-            f.Show();
+            ShowOnCurrentScreen(f);
             HourGlass(this, false);
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.DirectsReportEvent);
         }
@@ -3886,7 +3906,7 @@ namespace FTAnalyzer
             HourGlass(this, true);
             StatisticsForm f = new(StatisticsForm.StatisticType.BirthdayEffect);
             DisposeDuplicateForms(f);
-            f.Show();
+            ShowOnCurrentScreen(f);
             HourGlass(this, false);
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.BirthdayEffectEvent);
         }
@@ -3897,7 +3917,7 @@ namespace FTAnalyzer
             People people = new();
             people.SetupPossiblyMissingChildrenReport();
             DisposeDuplicateForms(people);
-            people.Show();
+            ShowOnCurrentScreen(people);
             Analytics.TrackAction(Analytics.ReportsAction, Analytics.PossiblyMissingChildren);
             HourGlass(this, false);
         }
@@ -3908,7 +3928,7 @@ namespace FTAnalyzer
             People people = new();
             people.SetupAgedOver99Report();
             DisposeDuplicateForms(people);
-            people.Show();
+            ShowOnCurrentScreen(people);
             Analytics.TrackAction(Analytics.ReportsAction, Analytics.AgedOver99Report);
             HourGlass(this, false);
         }
@@ -3919,7 +3939,7 @@ namespace FTAnalyzer
             People people = new();
             people.SingleParents();
             DisposeDuplicateForms(people);
-            people.Show();
+            ShowOnCurrentScreen(people);
             Analytics.TrackAction(Analytics.ReportsAction, Analytics.AgedOver99Report);
             HourGlass(this, false);
         }
@@ -4000,7 +4020,7 @@ namespace FTAnalyzer
                 Predicate<Individual> filter = CreateAliveatDateFilter(AliveDate, txtCensusSurname.Text);
                 people.SetupAliveAtDate(AliveDate, filter);
                 DisposeDuplicateForms(people);
-                people.Show();
+                ShowOnCurrentScreen(people);
                 Analytics.TrackAction(Analytics.CensusTabAction, Analytics.AliveAtDate);
                 HourGlass(this, false);
             }
