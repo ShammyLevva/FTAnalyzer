@@ -12,7 +12,7 @@ namespace FTAnalyzer.Utilities
             Form? owner = UIOwner;
             if (owner is not null && owner.InvokeRequired)
                 return owner.Invoke(() => action(owner));
-            return action(Form.ActiveForm);
+            return action(owner);
         }
 
         public static int ShowYesNo(string message, string title) =>

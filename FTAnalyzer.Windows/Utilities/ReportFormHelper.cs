@@ -93,7 +93,7 @@ namespace FTAnalyzer.Utilities
                 ExportToExcel.Export(dt);
             }
             parent.Cursor = Cursors.Default;
-            MessageBox.Show($"Excel Export of {gridDatasource.Count} rows completed");
+            MessageBox.Show(parent, $"Excel Export of {gridDatasource.Count} rows completed");
         }
 
         public void DoExportToExcel(List<IExportReferrals> list)
