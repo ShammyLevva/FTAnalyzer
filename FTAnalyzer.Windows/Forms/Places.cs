@@ -268,7 +268,7 @@ namespace FTAnalyzer.Forms
                     People frmInd = new();
                     frmInd.SetLocation(location, e.Node.Level);
                     MainForm.DisposeDuplicateForms(frmInd);
-                    frmInd.Show();
+                    UIHelpers.ShowOnOwnerScreen(frmInd, this);
                 }
                 Cursor = Cursors.Default;
             }
@@ -352,7 +352,7 @@ namespace FTAnalyzer.Forms
                     locations.Add((MapLocation)feature["MapLocation"]);
             }
             MapIndividuals ind = new(locations, null, this);
-            ind.Show();
+            UIHelpers.ShowOnOwnerScreen(ind, this);
             Cursor = Cursors.Default;
 
         }

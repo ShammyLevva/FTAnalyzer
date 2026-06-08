@@ -24,7 +24,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static readonly string VERSION = "10.0.2.0";
+        public static readonly string VERSION = "10.1.0.0";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(MainForm));
         const string APPNAME = "FTAnalyzer";
 
@@ -1021,7 +1021,7 @@ namespace FTAnalyzer
             {
                 try
                 {
-                    result = InputBox.Show("Enter age between 13 and 90", "Please select minimum age to report on", ref inputAge);
+                    result = InputBox.Show("Enter age between 13 and 90", "Please select minimum age to report on", ref inputAge, this);
                     age = int.Parse(inputAge);
                 }
                 catch (Exception)
@@ -2192,19 +2192,9 @@ namespace FTAnalyzer
             catch (Exception) { }
         }
 
-        static void CentreFormOnScreen(Form form, Screen screen)
-        {
-            form.StartPosition = FormStartPosition.Manual;
-            form.Location = new Point(
-                screen.WorkingArea.Left + (screen.WorkingArea.Width - form.Width) / 2,
-                screen.WorkingArea.Top + (screen.WorkingArea.Height - form.Height) / 2);
-        }
+        static void CentreFormOnScreen(Form form, Screen screen) => UIHelpers.CentreOnScreen(form, screen);
 
-        void ShowOnCurrentScreen(Form form)
-        {
-            CentreFormOnScreen(form, Screen.FromControl(this));
-            form.Show();
-        }
+        void ShowOnCurrentScreen(Form form) => UIHelpers.ShowOnOwnerScreen(form, this);
         #endregion
 
         #region Backup/Restore Database

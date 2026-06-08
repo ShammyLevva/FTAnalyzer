@@ -95,7 +95,7 @@ namespace FTAnalyzer.Mapping
                 if (geoLocations is null)
                 {
                     geoLocations = new(outputText);
-                    geoLocations.Show();
+                    UIHelpers.ShowOnOwnerScreen(geoLocations, null);
                 }
                 // we now have opened form
                 geoLocations.SelectLocation(location);
@@ -111,7 +111,7 @@ namespace FTAnalyzer.Mapping
                 {
                     GeocodeLocations geo = new(outputText);
                     MainForm.DisposeDuplicateForms(geo);
-                    geo.Show();
+                    UIHelpers.ShowOnOwnerScreen(geo, null);
                     geo.StartGoogleGeoCoding(false);
                     geo.BringToFront();
                     geo.Focus();

@@ -377,7 +377,7 @@ namespace FTAnalyzer.Forms
                         List<IDisplayColourCensus> list = [.. fam.Members];
                         ColourCensus rs = new(Countries.UNITED_KINGDOM, list);
                         MainForm.DisposeDuplicateForms(rs);
-                        rs.Show();
+                        UIHelpers.ShowOnOwnerScreen(rs, this);
                         rs.Focus();
                     }
                     else
@@ -453,7 +453,7 @@ namespace FTAnalyzer.Forms
             if (ind is not null)
             {
                 Notes notes = new(ind);
-                notes.Show();
+                UIHelpers.ShowOnOwnerScreen(notes, this);
             }
         }
 

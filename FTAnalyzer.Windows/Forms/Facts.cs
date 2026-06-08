@@ -449,13 +449,13 @@ namespace FTAnalyzer.Forms
                     else
                     {
                         Facts person = new(f.Ind);
-                        person.Show();
+                        UIHelpers.ShowOnOwnerScreen(person, this);
                     }
                 }
                 else
                 {
                     SourcesForm sourceForm = new(f);
-                    sourceForm.Show();
+                    UIHelpers.ShowOnOwnerScreen(sourceForm, this);
                 }
             }
         }

@@ -487,7 +487,7 @@ namespace FTAnalyzer.Utilities
             updateCmd.Parameters.Add(param);
             updateCmd.Prepare();
             Progress p = new(rowcount);
-            p.Show();
+            UIHelpers.ShowOnOwnerScreen(p, null);
             int row = 0;
             using (SQLiteCommand cmd = new("select location, latitude, longitude, viewport_x_ne, viewport_y_ne, viewport_x_sw, viewport_y_sw from geocode where latitude <> 0 and longitude <> 0", InstanceConnection))
             {

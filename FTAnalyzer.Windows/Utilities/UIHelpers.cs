@@ -39,6 +39,21 @@ namespace FTAnalyzer.Utilities
         public static DialogResult ShowMessage(string message, string title, MessageBoxButtons buttons, MessageBoxIcon icon) =>
             InvokeIfRequired(owner => MessageBox.Show(owner, message, title, buttons, icon));
 
+        public static void CentreOnScreen(Form form, Screen screen)
+        {
+            form.StartPosition = FormStartPosition.Manual;
+            form.Location = new Point(
+                screen.WorkingArea.Left + (screen.WorkingArea.Width - form.Width) / 2,
+                screen.WorkingArea.Top + (screen.WorkingArea.Height - form.Height) / 2);
+        }
+
+        public static void ShowOnOwnerScreen(Form form, Control? owner)
+        {
+            Screen screen = owner is not null ? Screen.FromControl(owner) : Screen.FromPoint(Cursor.Position);
+            CentreOnScreen(form, screen);
+            form.Show();
+        }
+
         public static int Yes => (int)DialogResult.Yes;
         public static int No => (int)DialogResult.No;
         public static int Cancel => (int)DialogResult.Cancel;

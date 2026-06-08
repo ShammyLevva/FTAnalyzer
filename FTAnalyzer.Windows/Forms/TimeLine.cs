@@ -227,7 +227,7 @@ namespace FTAnalyzer.Forms
                 }
             }
             MapIndividuals ind = new(locations, labValue.Text, this);
-            ind.Show();
+            UIHelpers.ShowOnOwnerScreen(ind, this);
             Cursor = Cursors.Default;
         }
 

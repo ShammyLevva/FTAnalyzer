@@ -132,7 +132,7 @@ namespace FTAnalyzer.Forms
                     {
                         People form = new();
                         form.ListRelationToRoot(row.RelationToRoot);
-                        form.Show();
+                        UIHelpers.ShowOnOwnerScreen(form, this);
                     }
                 }
                 else if (StatType == StatisticType.CousinCount)
@@ -141,7 +141,7 @@ namespace FTAnalyzer.Forms
                     {
                         People form = new();
                         form.ListRelationToRoot(row.Item1);
-                        form.Show();
+                        UIHelpers.ShowOnOwnerScreen(form, this);
                     }
                 }
                 else if (StatType == StatisticType.BirthdayEffect)
@@ -152,7 +152,7 @@ namespace FTAnalyzer.Forms
                         bool filter(Individual x) => x.BirthdayEffect && x.BirthMonth == row.Item1;
                         List<Individual> individuals = [.. FamilyTree.Instance.AllIndividuals.Filter(filter)];
                         form.SetIndividuals(individuals, $"Indiviudals who died within 15 days of their birthday in {row.Item1[5..]}");
-                        form.Show();
+                        UIHelpers.ShowOnOwnerScreen(form, this);
                     }
                 }
             }

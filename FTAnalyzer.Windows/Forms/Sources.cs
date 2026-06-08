@@ -63,7 +63,7 @@ namespace FTAnalyzer.Forms
                 if (source is null) return;
                 Facts factForm = new(source);
                 MainForm.DisposeDuplicateForms(factForm);
-                factForm.Show();
+                UIHelpers.ShowOnOwnerScreen(factForm, this);
             }
         }
 

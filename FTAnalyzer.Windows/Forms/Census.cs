@@ -246,7 +246,7 @@ namespace FTAnalyzer.Forms
             {   // Do geo coding stuff
                     BingOSMap frmBingMap = new();
                     if (await frmBingMap.SetLocation(loc, loc.Level))
-                        frmBingMap.Show();
+                        UIHelpers.ShowOnOwnerScreen(frmBingMap, this);
                     else
                         UIHelpers.ShowMessage($"Unable to find location : {loc}", "FTAnalyzer");
                 }
@@ -263,7 +263,7 @@ namespace FTAnalyzer.Forms
                 {
                     Facts factForm = new(ds);
                     MainForm.DisposeDuplicateForms(factForm);
-                    factForm.Show();
+                    UIHelpers.ShowOnOwnerScreen(factForm, this);
                 }
                 else
                 {
@@ -326,7 +326,7 @@ namespace FTAnalyzer.Forms
                 {
                     Facts factForm = new(ds);
                     MainForm.DisposeDuplicateForms(factForm);
-                    factForm.Show();
+                    UIHelpers.ShowOnOwnerScreen(factForm, this);
                 }
             }
         }

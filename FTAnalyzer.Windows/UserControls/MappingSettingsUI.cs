@@ -78,7 +78,7 @@ namespace FTAnalyzer.UserControls
 
         void BtnBrowseFolder_Click(object sender, EventArgs e)
         {
-            DialogResult result = folderBrowserDialog.ShowDialog();
+            DialogResult result = folderBrowserDialog.ShowDialog(this);
             if (result == DialogResult.OK)
                 txtMapPath.Text = folderBrowserDialog.SelectedPath;
         }

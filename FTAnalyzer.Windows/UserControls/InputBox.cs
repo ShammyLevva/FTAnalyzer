@@ -2,7 +2,7 @@
 {
     public static class InputBox
     {
-        public static DialogResult Show(string title, string promptText, ref string value)
+        public static DialogResult Show(string title, string promptText, ref string value, IWin32Window? owner = null)
         {
             Form form = new();
             Label label = new();
@@ -34,13 +34,13 @@
             form.Controls.AddRange(label, textBox, buttonOk, buttonCancel);
             form.ClientSize = new Size(Math.Max((int)(300f * scale), label.Right + (int)(30f * scale)), (int)(160f * scale));
             form.FormBorderStyle = FormBorderStyle.FixedDialog;
-            form.StartPosition = FormStartPosition.CenterScreen;
+            form.StartPosition = owner is not null ? FormStartPosition.CenterParent : FormStartPosition.CenterScreen;
             form.MinimizeBox = false;
             form.MaximizeBox = false;
             form.AcceptButton = buttonOk;
             form.CancelButton = buttonCancel;
 
-            DialogResult dialogResult = form.ShowDialog();
+            DialogResult dialogResult = owner is not null ? form.ShowDialog(owner) : form.ShowDialog();
             value = textBox.Text;
             return dialogResult;
         }
