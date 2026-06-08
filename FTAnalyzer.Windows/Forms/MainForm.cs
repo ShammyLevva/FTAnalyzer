@@ -1442,8 +1442,7 @@ namespace FTAnalyzer
                     }
                     if (tabSelector.SelectedTab == tabMainLists)
                     {
-                        if (dgIndividuals.DataSource is null)
-                            SetupIndividualsTab(); // select individuals tab if first time opening main lists tab
+                        TabMainListSelector_SelectedIndexChanged(tabMainListsSelector, EventArgs.Empty);
                         await Analytics.TrackAction(Analytics.MainFormAction, Analytics.MainListsEvent);
                     }
                     if (tabSelector.SelectedTab == tabErrorsFixes)
