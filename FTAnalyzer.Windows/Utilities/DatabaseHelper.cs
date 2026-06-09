@@ -847,7 +847,7 @@ namespace FTAnalyzer.Utilities
                         if (!ind.IsLostCousinsEntered(CensusDate.GetLostCousinsCensusYear(new FactDate(CensusYear), true)))
                         {
                             FactLocation location = FactLocation.GetLocation(CensusCountry);
-                            Fact f = new(CensusRef, Fact.LOSTCOUSINS, new FactDate(CensusYear), location, string.Empty, true, true);
+                            Fact f = new(Fact.LOSTCOUSINS, new FactDate(CensusYear), location, string.Empty, true, true);
                             ind?.AddFact(f);
                         }
                         count++;

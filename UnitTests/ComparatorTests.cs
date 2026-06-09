@@ -27,7 +27,7 @@ namespace UnitTests
 
         internal static CensusIndividual MakeCensusIndividual(
             string forename, string surname, string birthDate,
-            string familyId, string censusStatus, string individualId = "I001")
+            string familyId, string censusStatus = "", string individualId = "I001")
         {
             Individual ind = MakeIndividual(forename, surname, "M", birthDate, individualId);
             Family family = new(ind, familyId);
@@ -252,7 +252,7 @@ namespace UnitTests
         readonly BirthDateComparer _ascending = new(BirthDateComparer.ASCENDING);
         readonly BirthDateComparer _descending = new(BirthDateComparer.DESCENDING);
 
-        static IDisplayIndividual Ind(string forename, string surname, string birthDate, string id = "I001") =>
+        static Individual Ind(string forename, string surname, string birthDate, string id = "I001") =>
             ComparatorTestHelpers.MakeIndividual(forename, surname, "M", birthDate, id);
 
         [TestMethod]
@@ -420,7 +420,7 @@ namespace UnitTests
     {
         readonly LooseBirthComparer _comparer = new();
 
-        static IDisplayLooseBirth Ind(string forename, string surname, string birthDate, string id = "I001") =>
+        static Individual Ind(string forename, string surname, string birthDate, string id = "I001") =>
             ComparatorTestHelpers.MakeIndividual(forename, surname, "M", birthDate, id);
 
         [TestMethod]
@@ -480,7 +480,7 @@ namespace UnitTests
     {
         readonly LooseDeathComparer _comparer = new();
 
-        static IDisplayLooseDeath Ind(string forename, string surname, string birthDate, string id = "I001") =>
+        static Individual Ind(string forename, string surname, string birthDate, string id = "I001") =>
             ComparatorTestHelpers.MakeIndividual(forename, surname, "M", birthDate, id);
 
         [TestMethod]
@@ -543,7 +543,7 @@ namespace UnitTests
     {
         readonly ColourCensusComparer _comparer = new();
 
-        static IDisplayColourCensus Ind(string forename, string surname, string birthDate, string id = "I001") =>
+        static Individual Ind(string forename, string surname, string birthDate, string id = "I001") =>
             ComparatorTestHelpers.MakeIndividual(forename, surname, "M", birthDate, id);
 
         [TestMethod]
@@ -876,8 +876,7 @@ namespace UnitTests
     {
         readonly DefaultFamilyComparer _comparer = new();
 
-        static IDisplayFamily Family(string familyId) =>
-            new StubDisplayFamily { FamilyID = familyId };
+        static StubDisplayFamily Family(string familyId) => new() { FamilyID = familyId };
 
         [TestMethod]
         public void Compare_BothNull_ReturnsZero()
@@ -922,8 +921,8 @@ namespace UnitTests
         readonly FamilySizeComparer _low = new(countSortLow: true);
         readonly FamilySizeComparer _high = new(countSortLow: false);
 
-        static IDisplayFamily Family(string familyId, int size) =>
-            new StubDisplayFamily { FamilyID = familyId, FamilySize = size };
+        static StubDisplayFamily Family(string familyId, int size) =>
+            new() { FamilyID = familyId, FamilySize = size };
 
         [TestMethod]
         public void Compare_BothNull_ReturnsZero()
@@ -1028,7 +1027,7 @@ namespace UnitTests
         readonly FactComparer _comparer = new();
 
         static Fact MakeFact(string factType, string date, string place = "") =>
-            new(string.Empty, factType, new FactDate(date), FactLocation.GetLocation(place));
+            new(factType, new FactDate(date), FactLocation.GetLocation(place));
 
         [TestMethod]
         public void Equals_BothNull_ReturnsFalse()
@@ -1102,7 +1101,7 @@ namespace UnitTests
         readonly FactLocationComparer _placeComparer = new(FactLocation.PLACE);
         readonly FactLocationComparer _countryComparer = new(FactLocation.COUNTRY);
 
-        static IDisplayLocation Loc(string place) => FactLocation.GetLocation(place);
+        static FactLocation Loc(string place) => FactLocation.GetLocation(place);
 
         [TestMethod]
         public void Compare_BothNull_ReturnsZero()
@@ -1157,7 +1156,7 @@ namespace UnitTests
         {
             Individual ind = ComparatorTestHelpers.MakeIndividual(forename, surname, "M", birthDate, id);
             // Census fact with no matching census country → ShortCode will be ""
-            Fact censusRef = new(string.Empty, Fact.CENSUS, new FactDate("1 APR 1881"), FactLocation.BLANK_LOCATION);
+            Fact censusRef = new(Fact.CENSUS, new FactDate("1 APR 1881"), FactLocation.BLANK_LOCATION);
             return new ExportReferrals(ind, censusRef);
         }
 

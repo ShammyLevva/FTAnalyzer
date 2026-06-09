@@ -318,7 +318,7 @@ namespace FTAnalyzer.Forms
                 else if (alternateFacts == AlternateFacts.AlternateOnly)
                     list = list.Where(x => !x.Preferred);
                 if (factTypes.Count == 0 && excludedTypes is not null && !list.Any(x => excludedTypes.Contains(x.FactTypeDescription)))
-                    facts.Add(new DisplayFact(individual, new Fact(individual.IndividualID, Fact.REPORT, individual.BirthDate, individual.BirthLocation)));
+                    facts.Add(new DisplayFact(individual, new Fact(Fact.REPORT, individual.BirthDate, individual.BirthLocation)));
                 else
                 {
                     foreach (Fact f in list)
