@@ -8,6 +8,7 @@ Fix census year searching issue for 1930 US census (which spanned 1929-1930)
 Fix family exports to excel showing code fields instead of data for some fields
 Fix menu popup issues on colour reports
 Remove reference from Facts when loading as it was no longer used, frees up memory and allows faster loading of large trees
+Fix loading of extremely large files
 
 ## Version 10.0.2.0 - 7th June 2026  
 **Bugfixes**
