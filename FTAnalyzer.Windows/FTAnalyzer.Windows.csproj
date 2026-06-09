@@ -228,10 +228,9 @@
 
   <ItemGroup>
     <PackageReference Include="AdvancedDataGridView" Version="4.0.6" />
-    <PackageReference Include="GoogleAnalyticsTracker.Simple" Version="7.0.1" />
     <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
     <PackageReference Include="log4net" Version="3.3.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="10.0.9" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Printing.DataGridViewPrint" Version="3.0.0" />
     <PackageReference Include="ProjNET" Version="2.1.0" />

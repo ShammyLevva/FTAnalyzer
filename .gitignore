@@ -275,3 +275,4 @@ __pycache__/
 /Installer.Net10/Package Details.txt
 /.claude
 /CLAUDE.md
+/FTAnalyzer.Windows/Properties/AnalyticsSecrets.cs

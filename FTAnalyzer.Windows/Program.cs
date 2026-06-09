@@ -1,5 +1,8 @@
 using FTAnalyzer.Exports;
 using FTAnalyzer.Mapping;
+using FTAnalyzer.Properties;
+using FTAnalyzer.Utilities;
+using Microsoft.Extensions.Configuration;
 using SharpMap;
 
 namespace FTAnalyzer
@@ -10,14 +13,14 @@ namespace FTAnalyzer
         public static readonly LostCousinsClient LCClient = new();
         public static readonly GoogleClient GoogleClient = new();
 
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+            IConfiguration config = new ConfigurationBuilder()
+                .AddUserSecrets<MainForm>()
+                .Build();
+            Analytics.Initialize(config["Analytics:ApiSecret"] ?? AnalyticsSecrets.GA4ApiSecret);
+
             ApplicationConfiguration.Initialize();
             SharpMapUtility.Configure();
             Application.EnableVisualStyles();
