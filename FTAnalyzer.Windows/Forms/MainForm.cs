@@ -24,7 +24,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static readonly string VERSION = "10.1.0.0";
+        public static readonly string VERSION = "10.0.3.0";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(MainForm));
         const string APPNAME = "FTAnalyzer";
 
@@ -3445,7 +3445,7 @@ namespace FTAnalyzer
         void FamiliesToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            List<Family> families = [.. ft.AllFamilies];
+            List<IDisplayFamily> families = [.. ft.AllFamilies];
             using (DataTable dt = ListtoDataTableConvertor.ToDataTable(families))
                 ExportToExcel.Export(dt);
             Analytics.TrackAction(Analytics.ExportAction, Analytics.ExportFamEvent);

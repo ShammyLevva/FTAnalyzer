@@ -1,3 +1,9 @@
+## Version 10.0.3.0 - 7th June 2026  
+**Bugfixes**
+Double clicking various grids was returning wrong values additional fix  
+Windows should now open on the same screen as the main window if you are working with multiple monitors  
+Individuals tab was sometimes not loading when initially viewed  
+
 ## Version 10.0.2.0 - 7th June 2026  
 **Bugfixes**
 Census reference reports were using all the filters on the page and thus looking like they missed data  

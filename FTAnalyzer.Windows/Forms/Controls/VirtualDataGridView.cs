@@ -10,6 +10,7 @@ namespace FTAnalyzer.Forms.Controls
     [ComplexBindingProperties()]
     abstract class VirtualDataGridView<T> : AdvancedDataGridView
     {
+        const string SourceIndexColumn = "__SourceIndex__";
         internal SortableBindingList<T> _dataSource;
         internal SortableBindingList<T> _fulllist;
         public string FilterCountText { get; private set; }
@@ -143,18 +144,16 @@ namespace FTAnalyzer.Forms.Controls
 
         static DataTable BuildDataTable(IList<T> lst)
         {
-            //create DataTable Structure
             DataTable tbl = CreateTable();
+            tbl.Columns.Add(SourceIndexColumn, typeof(int));
             Type entType = typeof(T);
             PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(entType);
-            //get the list item and add into the list
-            foreach (T item in lst)
+            for (int i = 0; i < lst.Count; i++)
             {
                 DataRow row = tbl.NewRow();
                 foreach (PropertyDescriptor prop in properties)
-                {
-                    row[prop.Name] = prop.GetValue(item);
-                }
+                    row[prop.Name] = prop.GetValue(lst[i]);
+                row[SourceIndexColumn] = i;
                 tbl.Rows.Add(row);
             }
             return tbl;
@@ -179,9 +178,16 @@ namespace FTAnalyzer.Forms.Controls
         static bool IsNullableType(Type type) => type.IsGenericType && type.GetGenericTypeDefinition().Equals(typeof(Nullable<>));
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public T CurrentRowDataBoundItem => _dataSource[CurrentRow.Index];
+        public T CurrentRowDataBoundItem => DataBoundItem(CurrentRow.Index);
 
-        public T DataBoundItem(int rowIndex) => _dataSource[rowIndex];
+        public T DataBoundItem(int rowIndex)
+        {
+            if (rowIndex >= 0 && rowIndex < RowCount &&
+                Rows[rowIndex].DataBoundItem is DataRowView drv &&
+                drv.Row[SourceIndexColumn] is int sourceIndex)
+                return _dataSource[sourceIndex];
+            return _dataSource[rowIndex];
+        }
 
         void CreateGridColumns()
         {
@@ -241,7 +247,7 @@ namespace FTAnalyzer.Forms.Controls
         {
             if (_dataSource is null || _dataSource.Count == 0 || e.RowIndex > _dataSource.Count - 1)
                 return;
-            var data = _dataSource[e.RowIndex];
+            T data = DataBoundItem(e.RowIndex);
             e.Value = GetValueFor(data, Columns[e.ColumnIndex].DataPropertyName);
         }
 
