@@ -6,6 +6,7 @@ Individuals tab was sometimes not loading when initially viewed
 Fix right clicking individuals in colour reports not showing correct facts  
 Fix census year searching issue for 1930 US census (which spanned 1929-1930)  
 Fix family exports to excel showing code fields instead of data for some fields
+Fix menu popup issues on colour reports
 
 ## Version 10.0.2.0 - 7th June 2026  
 **Bugfixes**
