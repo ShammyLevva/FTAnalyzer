@@ -27,7 +27,7 @@ namespace UnitTests
 
         internal static CensusIndividual MakeCensusIndividual(
             string forename, string surname, string birthDate,
-            string familyId, string censusStatus = "", string individualId = "I001")
+            string familyId, string individualId = "I001")
         {
             Individual ind = MakeIndividual(forename, surname, "M", birthDate, individualId);
             Family family = new(ind, familyId);
@@ -603,7 +603,7 @@ namespace UnitTests
         readonly DefaultCensusComparer _comparer = new();
 
         static CensusIndividual CI(string familyId, string id = "I001") =>
-            ComparatorTestHelpers.MakeCensusIndividual("John", "Smith", "1 JAN 1900", familyId, CensusIndividual.HUSBAND, id);
+            ComparatorTestHelpers.MakeCensusIndividual("John", "Smith", "1 JAN 1900", familyId, id);
 
         [TestMethod]
         public void Compare_BothNull_ReturnsZero()
@@ -669,7 +669,7 @@ namespace UnitTests
         [TestMethod]
         public void Compare_HusbandAlwaysBefore_Wife()
         {
-            var husband = ComparatorTestHelpers.MakeCensusIndividual("John", "Smith", "1 JAN 1850", "F001", CensusIndividual.HUSBAND, "I001");
+            var husband = ComparatorTestHelpers.MakeCensusIndividual("John", "Smith", "1 JAN 1850", "F001", "I001");
             // Create a wife census individual by using a female individual
             Individual wifeInd = ComparatorTestHelpers.MakeIndividual("Jane", "Smith", "F", "1 JAN 1855", "I002");
             Family family = new(wifeInd, "F001");
@@ -684,8 +684,8 @@ namespace UnitTests
         public void Compare_SameStatus_SortsByBirthDate()
         {
             // Two husbands from different families – same CensusStatus, sorted by birth date
-            var older = ComparatorTestHelpers.MakeCensusIndividual("John", "Smith", "1 JAN 1840", "F001", CensusIndividual.HUSBAND, "I001");
-            var younger = ComparatorTestHelpers.MakeCensusIndividual("James", "Jones", "1 JAN 1860", "F002", CensusIndividual.HUSBAND, "I002");
+            var older = ComparatorTestHelpers.MakeCensusIndividual("John", "Smith", "1 JAN 1840", "F001", "I001");
+            var younger = ComparatorTestHelpers.MakeCensusIndividual("James", "Jones", "1 JAN 1860", "F002", "I002");
             // older birth → earlier date → sorts first (FactDate.CompareTo ascending)
             _comparer.Compare(older, younger).ShouldBeLessThan(0);
         }
@@ -697,7 +697,7 @@ namespace UnitTests
         readonly CensusFamilyGedComparer _comparer = new();
 
         static CensusIndividual CI(string familyId, string id = "I001") =>
-            ComparatorTestHelpers.MakeCensusIndividual("John", "Smith", "1 JAN 1900", familyId, CensusIndividual.HUSBAND, id);
+            ComparatorTestHelpers.MakeCensusIndividual("John", "Smith", "1 JAN 1900", familyId, id);
 
         [TestMethod]
         public void Compare_BothNull_ReturnsZero()
@@ -739,7 +739,7 @@ namespace UnitTests
         readonly CensusIndividualComparer _comparer = new();
 
         static CensusIndividual CI(string id) =>
-            ComparatorTestHelpers.MakeCensusIndividual("John", "Smith", "1 JAN 1900", "F001", CensusIndividual.HUSBAND, id);
+            ComparatorTestHelpers.MakeCensusIndividual("John", "Smith", "1 JAN 1900", "F001", id);
 
         [TestMethod]
         public void Equals_BothNull_ReturnsTrue()
