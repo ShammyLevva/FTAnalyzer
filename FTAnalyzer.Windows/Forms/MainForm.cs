@@ -423,12 +423,14 @@ namespace FTAnalyzer
 
         async Task CloseGEDCOM(bool keepOutput)
         {
-            // Blocks + ProgressBar.Refresh() paints synchronously via UpdateWindow — no timer needed
             tspbTabProgress.Style = ProgressBarStyle.Blocks;
             tspbTabProgress.Maximum = 100;
             tspbTabProgress.Value = 0;
             tspbTabProgress.Visible = true;
-            tspbTabProgress.ProgressBar?.Refresh();
+            // ToolStrip layout is deferred, so Refresh() on the inner control paints at stale bounds.
+            // Yield instead: the message pump runs a full cycle, layout completes, and the bar renders
+            // correctly before any blocking work (DisposeIndividualForms, rtbOutput.Clear, etc.) starts.
+            await Task.Yield();
 
             DisposeIndividualForms();
             ShowMenus(false);

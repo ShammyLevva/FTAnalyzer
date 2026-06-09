@@ -1,6 +1,6 @@
-## Version 10.0.3.0 - 7th June 2026  
+## Version 10.0.3.0 - 9th June 2026  
 **Bugfixes**
-Double clicking various grids was returning wrong values additional fix  
+Double clicking various grids was returning wrong values (additional fix) 
 Windows should now open on the same screen as the main window if you are working with multiple monitors  
 Individuals tab was sometimes not loading when initially viewed  
 Fix right clicking individuals in colour reports not showing correct facts  
