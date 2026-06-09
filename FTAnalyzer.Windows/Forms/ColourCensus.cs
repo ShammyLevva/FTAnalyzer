@@ -29,6 +29,7 @@ namespace FTAnalyzer.Forms
                 InitializeComponent();
                 Top += NativeMethods.TopTaskbarOffset;
                 dgReportSheet.AutoGenerateColumns = false;
+                dgReportSheet.ContextMenuStrip = null; // CellContextMenuStripNeeded supplies it only for data rows
                 ExtensionMethods.DoubleBuffered(dgReportSheet, true);
                 settingSelections = false;
                 _country = country;
@@ -433,6 +434,7 @@ namespace FTAnalyzer.Forms
             {
                 _rightClickedRowIndex = e.RowIndex;
                 dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
+                e.ContextMenuStrip = contextMenuStrip; // only show menu for data rows, not column headers
             }
         }
 

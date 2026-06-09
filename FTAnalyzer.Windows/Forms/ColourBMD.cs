@@ -28,6 +28,7 @@ namespace FTAnalyzer.Forms
                 InitializeComponent();
                 Top += NativeMethods.TopTaskbarOffset;
                 dgBMDReportSheet.AutoGenerateColumns = false;
+                dgBMDReportSheet.ContextMenuStrip = null; // CellContextMenuStripNeeded supplies it only for data rows
 
                 _reportList = [.. reportList];
                 reportFormHelper = new(this, "Colour BMD Report", dgBMDReportSheet, ResetTable, "Colour BMD");
@@ -426,6 +427,7 @@ namespace FTAnalyzer.Forms
             {
                 _rightClickedRowIndex = e.RowIndex;
                 dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
+                e.ContextMenuStrip = contextMenuStrip; // only show menu for data rows, not column headers
             }
         }
 
