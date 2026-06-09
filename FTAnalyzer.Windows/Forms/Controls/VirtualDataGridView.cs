@@ -142,7 +142,7 @@ namespace FTAnalyzer.Forms.Controls
             }
         }
 
-        static DataTable BuildDataTable(IList<T> lst)
+        static DataTable BuildDataTable(SortableBindingList<T> lst)
         {
             DataTable tbl = CreateTable();
             tbl.Columns.Add(SourceIndexColumn, typeof(int));
