@@ -9,7 +9,7 @@
   <Identity
     Name="26245AlexanderBisset.56195460DD6F1"
     Publisher="CN=A9B22507-AD23-4870-AFE9-FB8F05F6EB76"
-    Version="10.0.2.0" />
+    Version="10.0.3.0" />
 
   <Properties>
     <DisplayName>FTAnalyzer</DisplayName>
