@@ -18,6 +18,7 @@ namespace FTAnalyzer.Forms
         readonly Font boldFont;
         readonly string _country;
         bool settingSelections;
+        int _rightClickedRowIndex = -1;
         readonly string DEFAULT_PROVIDER = "FamilySearch";
         readonly string DEFAULT_REGION = ".co.uk";
 
@@ -417,9 +418,10 @@ namespace FTAnalyzer.Forms
 
         void MnuViewFacts_Click(object sender, EventArgs e)
         {
-            if (dgReportSheet.CurrentRow is not null)
+            DataGridViewRow? row = _rightClickedRowIndex >= 0 ? dgReportSheet.Rows[_rightClickedRowIndex] : dgReportSheet.CurrentRow;
+            if (row is not null)
             {
-                IDisplayColourCensus? ds = (IDisplayColourCensus?)dgReportSheet.CurrentRow.DataBoundItem;
+                IDisplayColourCensus? ds = (IDisplayColourCensus?)row.DataBoundItem;
                 if (ds is not null)
                     MainForm.ShowIndividualsFacts(ds.IndividualID);
             }
@@ -428,7 +430,10 @@ namespace FTAnalyzer.Forms
         void DgReportSheet_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                _rightClickedRowIndex = e.RowIndex;
                 dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
+            }
         }
 
         void ColourCensus_FormClosed(object sender, FormClosedEventArgs e) => Dispose();

@@ -17,6 +17,7 @@ namespace FTAnalyzer.Forms
         readonly SortableBindingList<IDisplayColourBMD> _reportList;
         readonly Font boldFont;
         bool settingSelections;
+        int _rightClickedRowIndex = -1;
         readonly string DEFAULT_PROVIDER = "FamilySearch";
         readonly string DEFAULT_REGION = ".co.uk";
 
@@ -410,9 +411,10 @@ namespace FTAnalyzer.Forms
 
         void MnuViewFacts_Click(object sender, EventArgs e)
         {
-            if (dgBMDReportSheet.CurrentRow is not null)
+            DataGridViewRow? row = _rightClickedRowIndex >= 0 ? dgBMDReportSheet.Rows[_rightClickedRowIndex] : dgBMDReportSheet.CurrentRow;
+            if (row is not null)
             {
-                IDisplayColourBMD? ds = (IDisplayColourBMD?)dgBMDReportSheet.CurrentRow.DataBoundItem;
+                IDisplayColourBMD? ds = (IDisplayColourBMD?)row.DataBoundItem;
                 if (ds is not null)
                     MainForm.ShowIndividualsFacts(ds.IndividualID);
             }
@@ -421,7 +423,10 @@ namespace FTAnalyzer.Forms
         void DgBMDReportSheet_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                _rightClickedRowIndex = e.RowIndex;
                 dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
+            }
         }
 
         void ColourBMD_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
