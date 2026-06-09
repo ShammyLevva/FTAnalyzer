@@ -9,6 +9,8 @@ Fix family exports to excel showing code fields instead of data for some fields
 Fix menu popup issues on colour reports
 Remove reference from Facts when loading as it was no longer used, frees up memory and allows faster loading of large trees
 Fix loading of extremely large files
+detect that 1911 & 1921 census references for institutions have a page number and no schedule
+Census references for 1921 census weren't showing in census reference columns
 
 ## Version 10.0.2.0 - 7th June 2026  
 **Bugfixes**
