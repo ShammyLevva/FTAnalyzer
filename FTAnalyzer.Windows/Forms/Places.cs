@@ -395,7 +395,11 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void TbOpacity_Scroll(object sender, EventArgs e) => RefreshMap();
+        void TbOpacity_Scroll(object sender, EventArgs e)
+        {
+            mnuMapStyle.UpdateOpacityLayer();
+            RefreshMap();
+        }
 
         void SetOpacity()
         {

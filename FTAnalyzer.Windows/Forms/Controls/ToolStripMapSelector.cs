@@ -114,6 +114,8 @@ namespace FTAnalyzer.Forms.Controls
             copyrightLabel.Links.Add(link);
         }
 
+        MapToolStripMenuItem? selectedMap;
+
         void Ctrl_Click(object? sender, EventArgs e)
         {
             foreach (ToolStripMenuItem menu in DropDownItems)
@@ -122,8 +124,9 @@ namespace FTAnalyzer.Forms.Controls
                 mapbox.Map.BackgroundLayer.RemoveAt(0);
             if (sender is MapToolStripMenuItem selectedOption)
             {
+                selectedMap = selectedOption;
                 bool isOpenStreetMap = selectedOption.Name.Equals(mnuOpenStreetMap.Name);
-                if (!isOpenStreetMap)
+                if (!isOpenStreetMap && opacitySlider.Value < opacitySlider.Maximum)
                     mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(mnuOpenStreetMap.TileSource, mnuOpenStreetMap.Name ?? string.Empty));
                 TileAsyncLayer mapLayer = new(selectedOption.TileSource, selectedOption.Name ?? string.Empty)
                 {
@@ -137,6 +140,21 @@ namespace FTAnalyzer.Forms.Controls
                 RegistrySettings.SetRegistryValue("Default Map Background", backgroundName, RegistryValueKind.String);
                 mapbox.Refresh();
             }
+        }
+
+        // Adds or removes the OpenStreetMap base layer depending on whether the opacity
+        // slider needs it to show through. At full opacity the base layer would be
+        // completely hidden, so we avoid loading it to halve the tile requests.
+        public void UpdateOpacityLayer()
+        {
+            if (selectedMap is null || selectedMap.Name.Equals(mnuOpenStreetMap.Name))
+                return;
+            bool needsOsmBase = opacitySlider.Value < opacitySlider.Maximum;
+            bool hasOsmBase = mapbox.Map.BackgroundLayer.Count > 1;
+            if (needsOsmBase && !hasOsmBase)
+                mapbox.Map.BackgroundLayer.Insert(0, new TileAsyncLayer(mnuOpenStreetMap.TileSource, mnuOpenStreetMap.Name ?? string.Empty));
+            else if (!needsOsmBase && hasOsmBase)
+                mapbox.Map.BackgroundLayer.RemoveAt(0);
         }
 
         protected override void Dispose(bool disposing)
