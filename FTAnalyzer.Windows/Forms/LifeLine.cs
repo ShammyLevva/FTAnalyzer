@@ -47,14 +47,9 @@ namespace FTAnalyzer.Forms
             SetupMap();
             dgFacts.AutoGenerateColumns = false;
             dgIndividuals.AutoGenerateColumns = false;
-            dgIndividuals.DataSource = new SortableBindingList<Individual>(ft.AllIndividuals.Where(i => i.GeoLocationCount > 0));
-            DataGridViewColumn? birthdate = dgIndividuals.Columns["BirthDate"];
-            DataGridViewColumn? sortedname = dgIndividuals.Columns["SortedName"];
-            if (birthdate is not null && sortedname is not null)
-            {
-                dgIndividuals.Sort(birthdate, ListSortDirection.Ascending);
-                dgIndividuals.Sort(sortedname, ListSortDirection.Ascending);
-            }
+            SortableBindingList<Individual> individuals = new(ft.AllIndividuals.Where(i => i.GeoLocationCount > 0));
+            individuals.Sort(new NameComparer<Individual>(true, false));
+            dgIndividuals.DataSource = individuals;
             DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
             int splitheight = RegistrySettings.GetIntRegistryValue("Lifeline Facts Splitter Distance", -1);
             if (splitheight != -1)
