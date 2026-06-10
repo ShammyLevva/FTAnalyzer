@@ -233,6 +233,10 @@ namespace FTAnalyzer.Forms
         {
             try
             {
+                // apply font scaling before the form is shown, otherwise the resulting
+                // AutoScale resize/reposition happens visibly after the await below
+                SpecialMethods.SetFonts(this);
+
                 // Show wait cursor during tree building
                 Cursor = Cursors.WaitCursor;
                 txtCount.Text = "Loading locations...";
@@ -253,7 +257,6 @@ namespace FTAnalyzer.Forms
                 mh.CheckIfGeocodingNeeded(this, outputText);
                 txtCount.Text = string.Empty;
                 Cursor = Cursors.Default;
-                SpecialMethods.SetFonts(this);
             }
             catch (Exception) { }
         }

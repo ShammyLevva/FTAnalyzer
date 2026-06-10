@@ -1,3 +1,11 @@
+## Version 10.1.0.0 - 10th June 2026
+**Updates**
+Refreshed the mapping options so the grids look right and behave properly. 
+Updated the NLS maps to use their new tile server
+Updated the underlying map library to match .Net10 of the rest of the project
+Fixed the broken Google Analytics
+
+
 ## Version 10.0.3.0 - 9th June 2026  
 **Bugfixes**
 Double clicking various grids was returning wrong values (additional fix) 
