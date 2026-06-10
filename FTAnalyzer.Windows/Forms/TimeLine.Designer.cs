@@ -58,6 +58,7 @@ namespace FTAnalyzer.Forms
             this.cbLimitFactDates = new System.Windows.Forms.ToolStripComboBox();
             this.resetFormToDefaultPostiionAndSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbYears = new System.Windows.Forms.TrackBar();
+            this.pnlTimeline = new System.Windows.Forms.Panel();
             this.labMin = new System.Windows.Forms.Label();
             this.labMax = new System.Windows.Forms.Label();
             this.labValue = new System.Windows.Forms.Label();
@@ -82,6 +83,7 @@ namespace FTAnalyzer.Forms
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).BeginInit();
+            this.pnlTimeline.SuspendLayout();
             this.mapZoomToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbOpacity)).BeginInit();
             this.SuspendLayout();
@@ -269,42 +271,57 @@ namespace FTAnalyzer.Forms
             // tbYears
             // 
             this.tbYears.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tbYears.Location = new System.Drawing.Point(0, 24);
+            this.tbYears.Location = new System.Drawing.Point(0, 0);
             this.tbYears.Name = "tbYears";
             this.tbYears.Size = new System.Drawing.Size(921, 45);
             this.tbYears.TabIndex = 3;
             this.tbYears.TickFrequency = 5;
             this.tbYears.Scroll += new System.EventHandler(this.TbYears_Scroll);
-            // 
+            //
+            // pnlTimeline
+            //
+            this.pnlTimeline.Controls.Add(this.btnForward10);
+            this.pnlTimeline.Controls.Add(this.btnBack10);
+            this.pnlTimeline.Controls.Add(this.btnForward1);
+            this.pnlTimeline.Controls.Add(this.btnBack1);
+            this.pnlTimeline.Controls.Add(this.labValue);
+            this.pnlTimeline.Controls.Add(this.labMax);
+            this.pnlTimeline.Controls.Add(this.labMin);
+            this.pnlTimeline.Controls.Add(this.tbYears);
+            this.pnlTimeline.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTimeline.Location = new System.Drawing.Point(0, 24);
+            this.pnlTimeline.Name = "pnlTimeline";
+            this.pnlTimeline.Size = new System.Drawing.Size(921, 45);
+            this.pnlTimeline.TabIndex = 2;
+            //
             // labMin
-            // 
+            //
             this.labMin.AutoSize = true;
-            this.labMin.Location = new System.Drawing.Point(3, 54);
+            this.labMin.Location = new System.Drawing.Point(3, 30);
             this.labMin.Name = "labMin";
             this.labMin.Size = new System.Drawing.Size(35, 13);
             this.labMin.TabIndex = 4;
             this.labMin.Text = "label1";
             this.labMin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+            //
             // labMax
-            // 
+            //
             this.labMax.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labMax.AutoSize = true;
-            this.labMax.Location = new System.Drawing.Point(883, 52);
+            this.labMax.Location = new System.Drawing.Point(883, 28);
             this.labMax.Name = "labMax";
             this.labMax.Size = new System.Drawing.Size(35, 13);
             this.labMax.TabIndex = 5;
             this.labMax.Text = "label1";
             this.labMax.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
+            //
             // labValue
-            // 
+            //
             this.labValue.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labValue.AutoSize = true;
-            this.labValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labValue.Location = new System.Drawing.Point(439, 50);
+            this.labValue.Location = new System.Drawing.Point(439, 25);
             this.labValue.Name = "labValue";
-            this.labValue.Size = new System.Drawing.Size(47, 15);
+            this.labValue.Size = new System.Drawing.Size(35, 15);
             this.labValue.TabIndex = 6;
             this.labValue.Text = "label1";
             this.labValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -441,7 +458,7 @@ namespace FTAnalyzer.Forms
             // 
             this.btnBack1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnBack1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBack1.Location = new System.Drawing.Point(410, 47);
+            this.btnBack1.Location = new System.Drawing.Point(410, 23);
             this.btnBack1.Name = "btnBack1";
             this.btnBack1.Size = new System.Drawing.Size(23, 22);
             this.btnBack1.TabIndex = 10;
@@ -453,7 +470,7 @@ namespace FTAnalyzer.Forms
             // 
             this.btnForward1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnForward1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnForward1.Location = new System.Drawing.Point(492, 47);
+            this.btnForward1.Location = new System.Drawing.Point(492, 23);
             this.btnForward1.Name = "btnForward1";
             this.btnForward1.Size = new System.Drawing.Size(23, 22);
             this.btnForward1.TabIndex = 11;
@@ -465,7 +482,7 @@ namespace FTAnalyzer.Forms
             // 
             this.btnBack10.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnBack10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBack10.Location = new System.Drawing.Point(375, 47);
+            this.btnBack10.Location = new System.Drawing.Point(375, 23);
             this.btnBack10.Name = "btnBack10";
             this.btnBack10.Size = new System.Drawing.Size(29, 22);
             this.btnBack10.TabIndex = 12;
@@ -477,7 +494,7 @@ namespace FTAnalyzer.Forms
             // 
             this.btnForward10.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnForward10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnForward10.Location = new System.Drawing.Point(521, 47);
+            this.btnForward10.Location = new System.Drawing.Point(521, 23);
             this.btnForward10.Name = "btnForward10";
             this.btnForward10.Size = new System.Drawing.Size(29, 22);
             this.btnForward10.TabIndex = 13;
@@ -513,16 +530,9 @@ namespace FTAnalyzer.Forms
             this.ClientSize = new System.Drawing.Size(921, 584);
             this.Controls.Add(this.tbOpacity);
             this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.btnForward10);
-            this.Controls.Add(this.btnBack10);
-            this.Controls.Add(this.btnForward1);
-            this.Controls.Add(this.btnBack1);
             this.Controls.Add(this.mapBox1);
             this.Controls.Add(this.mapZoomToolStrip);
-            this.Controls.Add(this.labValue);
-            this.Controls.Add(this.labMax);
-            this.Controls.Add(this.labMin);
-            this.Controls.Add(this.tbYears);
+            this.Controls.Add(this.pnlTimeline);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -538,6 +548,8 @@ namespace FTAnalyzer.Forms
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbYears)).EndInit();
+            this.pnlTimeline.ResumeLayout(false);
+            this.pnlTimeline.PerformLayout();
             this.mapZoomToolStrip.ResumeLayout(false);
             this.mapZoomToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbOpacity)).EndInit();
@@ -554,6 +566,7 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripMenuItem geocodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem geocodeLocationsToolStripMenuItem;
         private System.Windows.Forms.TrackBar tbYears;
+        private System.Windows.Forms.Panel pnlTimeline;
         private System.Windows.Forms.Label labMin;
         private System.Windows.Forms.Label labMax;
         private System.Windows.Forms.Label labValue;
