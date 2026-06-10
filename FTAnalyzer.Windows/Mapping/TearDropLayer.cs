@@ -78,17 +78,20 @@ namespace FTAnalyzer.Mapping
                 MapLocation ml = new(ind, f.Fact, f.FactDate);
                 AddFeatureDataRow(f, ml, GREY);
             }
-            if (ind.BirthFact is not null)
+            if (ind.BirthFact is not null && IsPlottable(ind.BirthFact.Location))
             {
                 MapLocation birth = new(ind, ind.BirthFact, ind.BirthDate);
                 AddFeatureDataRow(null, birth, RED);
             }
-            if (ind.DeathFact is not null)
+            if (ind.DeathFact is not null && IsPlottable(ind.DeathFact.Location))
             {
                 MapLocation death = new(ind, ind.DeathFact, ind.DeathDate);
                 AddFeatureDataRow(null, death, BLACK);
             }
         }
+
+        static bool IsPlottable(FactLocation location) =>
+            location.IsKnown && location.IsGeoCoded(false) && location.GeocodeStatus != FactLocation.Geocode.UNKNOWN;
 
         public void AddSelections(DataGridViewSelectedRowCollection rows)
         {
