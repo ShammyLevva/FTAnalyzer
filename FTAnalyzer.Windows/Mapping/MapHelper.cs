@@ -206,7 +206,7 @@ namespace FTAnalyzer.Mapping
                 var x = (Envelope)row["ViewPort"];
                 Debug.WriteLine(x.ToString());
                 if (ExtensionMethods.DoubleEquals(x.MaxX,0) && ExtensionMethods.DoubleEquals(x.MaxY,0))
-                    Debug.WriteLine("we have zeos");
+                    Debug.WriteLine("we have zeros");
                 else
                     bbox.ExpandToInclude(x);
             }

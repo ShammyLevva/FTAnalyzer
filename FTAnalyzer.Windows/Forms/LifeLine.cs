@@ -47,7 +47,7 @@ namespace FTAnalyzer.Forms
             SetupMap();
             dgFacts.AutoGenerateColumns = false;
             dgIndividuals.AutoGenerateColumns = false;
-            dgIndividuals.DataSource = new SortableBindingList<Individual>(ft.AllIndividuals);
+            dgIndividuals.DataSource = new SortableBindingList<Individual>(ft.AllIndividuals.Where(i => i.GeoLocationCount > 0));
             DataGridViewColumn? birthdate = dgIndividuals.Columns["BirthDate"];
             DataGridViewColumn? sortedname = dgIndividuals.Columns["SortedName"];
             if (birthdate is not null && sortedname is not null)
@@ -271,12 +271,7 @@ namespace FTAnalyzer.Forms
             {
                 Individual? ind = (Individual?)dgIndividuals.Rows[e.RowIndex].DataBoundItem;
                 if (ind is not null)
-                {
-                    if (ind.GeoLocationCount == 0)
-                        e.ToolTipText = $"{ind.Name} has no geolocated facts to show on map";
-                    else
-                        e.ToolTipText = $"Click to display {ind.Name}'s geolocated facts on the map. Right click to add their relatives";
-                }
+                    e.ToolTipText = $"Click to display {ind.Name}'s geolocated facts on the map. Right click to add their relatives";
             }
         }
 
@@ -290,6 +285,7 @@ namespace FTAnalyzer.Forms
 
         void LifeLine_Load(object sender, EventArgs e)
         {
+            outputText.Report($"DIAG: DPI={DeviceDpi} Font={Font.Name},{Font.Size} AutoScale={CurrentAutoScaleDimensions} SortedName.Width={dgIndividuals.Columns["SortedName"]?.Width} BirthDate.Width={dgIndividuals.Columns["BirthDate"]?.Width} GeoLocationCount.Width={dgIndividuals.Columns["GeoLocationCount"]?.Width} dgIndividuals.Size={dgIndividuals.Size}\n");
             int Width = RegistrySettings.GetIntRegistryValue("Lifeline size - width", this.Width);
             int Height = RegistrySettings.GetIntRegistryValue("Lifeline size - height", this.Height);
             int Top = RegistrySettings.GetIntRegistryValue("Lifeline position - top", this.Top);
