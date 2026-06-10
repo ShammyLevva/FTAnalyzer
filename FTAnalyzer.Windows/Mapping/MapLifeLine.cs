@@ -1,4 +1,5 @@
-﻿using NetTopologySuite.Geometries;
+﻿using FTAnalyzer.Utilities;
+using NetTopologySuite.Geometries;
 using SharpMap.Data;
 
 namespace FTAnalyzer.Mapping
@@ -35,9 +36,12 @@ namespace FTAnalyzer.Mapping
                     previousPoint = point;
                 }
                 GeoResponse.CResult.CGeometry.CViewPort vp = f.Location.ViewPort;
-                Envelope env = new(vp.NorthEast.Long, vp.SouthWest.Long, vp.NorthEast.Lat, vp.SouthWest.Lat);
-                if (!Viewport.Contains(env))
-                    Viewport.ExpandToInclude(env);
+                if (!SpecialMethods.LatLongIsZero(vp.NorthEast) || !SpecialMethods.LatLongIsZero(vp.SouthWest))
+                {
+                    Envelope env = new(vp.NorthEast.Long, vp.SouthWest.Long, vp.NorthEast.Lat, vp.SouthWest.Lat);
+                    if (!Viewport.Contains(env))
+                        Viewport.ExpandToInclude(env);
+                }
             }
             if (points.Count > 1)
                 Geometry = new LineString([.. points]);
