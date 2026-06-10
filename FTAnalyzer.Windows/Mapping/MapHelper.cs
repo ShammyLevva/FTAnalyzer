@@ -10,7 +10,6 @@ using SharpMap.Layers;
 using SharpMap.Rendering;
 using SharpMap.Rendering.Decoration.ScaleBar;
 using SharpMap.Styles;
-using System.Diagnostics;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 
@@ -65,7 +64,7 @@ namespace FTAnalyzer.Mapping
             int notsearched = (FactLocation.AllLocations.Count(x => x.GeocodeStatus.Equals(FactLocation.Geocode.NOT_SEARCHED)));
             if (notsearched > 0 && !ft.Geocoding)
             {
-                DialogResult res = UIHelpers.ShowMessage($"You have {notsearched} places with no map location do you want to search Google for the locations?",
+                DialogResult res = UIHelpers.ShowMessage(form, $"You have {notsearched} places with no map location do you want to search Google for the locations?",
                                                    "Geocode Locations", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
@@ -204,10 +203,7 @@ namespace FTAnalyzer.Mapping
                         bbox.ExpandToInclude(c);
                 }
                 var x = (Envelope)row["ViewPort"];
-                Debug.WriteLine(x.ToString());
-                if (ExtensionMethods.DoubleEquals(x.MaxX,0) && ExtensionMethods.DoubleEquals(x.MaxY,0))
-                    Debug.WriteLine("we have zeros");
-                else
+                if (!ExtensionMethods.DoubleEquals(x.MaxX, 0) || !ExtensionMethods.DoubleEquals(x.MaxY, 0))
                     bbox.ExpandToInclude(x);
             }
             Envelope expand;

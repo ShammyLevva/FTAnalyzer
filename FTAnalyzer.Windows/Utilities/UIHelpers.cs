@@ -39,6 +39,13 @@ namespace FTAnalyzer.Utilities
         public static DialogResult ShowMessage(string message, string title, MessageBoxButtons buttons, MessageBoxIcon icon) =>
             InvokeIfRequired(owner => MessageBox.Show(owner, message, title, buttons, icon));
 
+        public static DialogResult ShowMessage(Form form, string message, string title, MessageBoxButtons buttons, MessageBoxIcon icon)
+        {
+            if (form.InvokeRequired)
+                return (DialogResult)form.Invoke(() => MessageBox.Show(form, message, title, buttons, icon));
+            return MessageBox.Show(form, message, title, buttons, icon);
+        }
+
         public static void CentreOnScreen(Form form, Screen screen)
         {
             form.StartPosition = FormStartPosition.Manual;

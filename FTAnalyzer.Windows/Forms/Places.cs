@@ -150,8 +150,11 @@ namespace FTAnalyzer.Forms
                                 if (dispfact.Location.CompareTo(location.Item1, location.Item2) == 0)
                                 {
                                     displayFacts.Add(dispfact);
-                                    MapLocation loc = new(ind, dispfact.Fact, dispfact.FactDate);
-                                    loc.AddFeatureDataRow(clusters.FactLocations);
+                                    if (IsPlottable(dispfact.Location))
+                                    {
+                                        MapLocation loc = new(ind, dispfact.Fact, dispfact.FactDate);
+                                        loc.AddFeatureDataRow(clusters.FactLocations);
+                                    }
                                     break;
                                 }
                             }
@@ -171,7 +174,8 @@ namespace FTAnalyzer.Forms
                     mapBox1.Map.ZoomToBox(expand);
                     mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
                     RefreshClusters();
-                    txtCount.Text = $"{dgFacts.RowCount} Geolocated fact(s) displayed";
+                    int plottedCount = clusters.FactLocations.Rows.Count;
+                    txtCount.Text = $"{dgFacts.RowCount} fact(s) displayed, {plottedCount} geolocated and shown on map";
                 }
             }
             catch (OperationCanceledException)
@@ -185,6 +189,9 @@ namespace FTAnalyzer.Forms
             }
             Cursor = Cursors.Default;
         }
+
+        static bool IsPlottable(FactLocation location) =>
+            location.IsKnown && location.IsGeoCoded(false) && location.GeocodeStatus != FTAnalyzer.FactLocation.Geocode.UNKNOWN;
 
         void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => SpecialMethods.VisitWebsite(e.Link?.LinkData?.ToString() ?? string.Empty);
 
