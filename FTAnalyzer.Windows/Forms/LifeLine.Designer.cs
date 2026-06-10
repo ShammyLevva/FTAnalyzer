@@ -139,7 +139,7 @@ namespace FTAnalyzer.Forms
             this.splitContainerMap.Panel2.Controls.Add(this.mapZoomToolStrip);
             this.splitContainerMap.Panel2.Controls.Add(this.linkLabel1);
             this.splitContainerMap.Size = new System.Drawing.Size(1123, 450);
-            this.splitContainerMap.SplitterDistance = 330;
+            this.splitContainerMap.SplitterDistance = 374;
             this.splitContainerMap.TabIndex = 2;
             this.splitContainerMap.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.SplitContainerMap_SplitterMoved);
             // 
@@ -150,6 +150,7 @@ namespace FTAnalyzer.Forms
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dgIndividuals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgIndividuals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgIndividuals.ColumnHeadersDefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgIndividuals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IndividualID,
             this.SortedName,
@@ -169,39 +170,41 @@ namespace FTAnalyzer.Forms
             // 
             // IndividualID
             // 
-            this.IndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.IndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.IndividualID.DataPropertyName = "IndividualID";
             this.IndividualID.HeaderText = "Ind. ID";
             this.IndividualID.MinimumWidth = 40;
             this.IndividualID.Name = "IndividualID";
             this.IndividualID.ReadOnly = true;
-            this.IndividualID.Width = 40;
-            // 
+            //
             // SortedName
-            // 
-            this.SortedName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            //
+            this.SortedName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.SortedName.DataPropertyName = "SortedName";
+            this.SortedName.FillWeight = 140F;
             this.SortedName.HeaderText = "Name";
-            this.SortedName.MinimumWidth = 50;
+            this.SortedName.MinimumWidth = 80;
             this.SortedName.Name = "SortedName";
             this.SortedName.ReadOnly = true;
-            this.SortedName.Width = 130;
-            // 
+            //
             // BirthDate
-            // 
+            //
+            this.BirthDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.BirthDate.DataPropertyName = "BirthDate";
+            this.BirthDate.FillWeight = 140F;
             this.BirthDate.HeaderText = "Date of Birth";
+            this.BirthDate.MinimumWidth = 140;
             this.BirthDate.Name = "BirthDate";
             this.BirthDate.ReadOnly = true;
-            // 
+            //
             // GeoLocationCount
-            // 
+            //
+            this.GeoLocationCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.GeoLocationCount.DataPropertyName = "GeoLocationCount";
             this.GeoLocationCount.HeaderText = "Facts";
-            this.GeoLocationCount.MinimumWidth = 37;
+            this.GeoLocationCount.MinimumWidth = 45;
             this.GeoLocationCount.Name = "GeoLocationCount";
             this.GeoLocationCount.ReadOnly = true;
-            this.GeoLocationCount.Width = 37;
             // 
             // ctxmnuSelectOthers
             // 
@@ -320,6 +323,7 @@ namespace FTAnalyzer.Forms
             this.dgFacts.AllowUserToDeleteRows = false;
             this.dgFacts.AllowUserToOrderColumns = true;
             this.dgFacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgFacts.ColumnHeadersDefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgFacts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FactIcon,
             this.FactsIndividualID,
@@ -368,62 +372,59 @@ namespace FTAnalyzer.Forms
             // 
             // FactsIndividualID
             // 
-            this.FactsIndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.FactsIndividualID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.FactsIndividualID.DataPropertyName = "IndividualID";
             this.FactsIndividualID.HeaderText = "Ind. ID";
+            this.FactsIndividualID.MinimumWidth = 50;
             this.FactsIndividualID.Name = "FactsIndividualID";
             this.FactsIndividualID.ReadOnly = true;
-            this.FactsIndividualID.Width = 50;
-            // 
+            //
             // FactName
-            // 
-            this.FactName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            //
+            this.FactName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.FactName.DataPropertyName = "Name";
+            this.FactName.FillWeight = 150F;
             this.FactName.HeaderText = "Name";
-            this.FactName.MinimumWidth = 150;
+            this.FactName.MinimumWidth = 120;
             this.FactName.Name = "FactName";
             this.FactName.ReadOnly = true;
-            this.FactName.Width = 150;
-            // 
+            //
             // TypeOfFact
-            // 
-            this.TypeOfFact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            //
+            this.TypeOfFact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.TypeOfFact.DataPropertyName = "TypeOfFact";
             this.TypeOfFact.HeaderText = "Fact Type";
             this.TypeOfFact.MinimumWidth = 80;
             this.TypeOfFact.Name = "TypeOfFact";
             this.TypeOfFact.ReadOnly = true;
-            this.TypeOfFact.Width = 80;
-            // 
+            //
             // FactDate
-            // 
-            this.FactDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            //
+            this.FactDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.FactDate.DataPropertyName = "FactDate";
             this.FactDate.HeaderText = "Fact Date";
-            this.FactDate.MinimumWidth = 150;
+            this.FactDate.MinimumWidth = 130;
             this.FactDate.Name = "FactDate";
             this.FactDate.ReadOnly = true;
-            this.FactDate.Width = 150;
-            // 
+            //
             // AgeAtFact
-            // 
-            this.AgeAtFact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            //
+            this.AgeAtFact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.AgeAtFact.DataPropertyName = "AgeAtFact";
             this.AgeAtFact.HeaderText = "Age";
             this.AgeAtFact.MinimumWidth = 50;
             this.AgeAtFact.Name = "AgeAtFact";
             this.AgeAtFact.ReadOnly = true;
-            this.AgeAtFact.Width = 50;
-            // 
+            //
             // FactLocation
-            // 
-            this.FactLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            //
+            this.FactLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.FactLocation.DataPropertyName = "Location";
+            this.FactLocation.FillWeight = 250F;
             this.FactLocation.HeaderText = "Location";
-            this.FactLocation.MinimumWidth = 200;
+            this.FactLocation.MinimumWidth = 150;
             this.FactLocation.Name = "FactLocation";
             this.FactLocation.ReadOnly = true;
-            this.FactLocation.Width = 250;
             // 
             // LocationIcon
             // 
@@ -438,49 +439,50 @@ namespace FTAnalyzer.Forms
             // 
             // GeocodeStatus
             // 
-            this.GeocodeStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.GeocodeStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.GeocodeStatus.DataPropertyName = "GeocodeStatus";
             this.GeocodeStatus.HeaderText = "Geocode Status";
+            this.GeocodeStatus.MinimumWidth = 110;
             this.GeocodeStatus.Name = "GeocodeStatus";
             this.GeocodeStatus.ReadOnly = true;
-            // 
+            //
             // FoundLocation
-            // 
-            this.FoundLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            //
+            this.FoundLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.FoundLocation.DataPropertyName = "FoundLocation";
             this.FoundLocation.HeaderText = "FoundLocation";
             this.FoundLocation.MinimumWidth = 120;
             this.FoundLocation.Name = "FoundLocation";
             this.FoundLocation.ReadOnly = true;
-            this.FoundLocation.Width = 120;
-            // 
+            //
             // FoundResultType
-            // 
-            this.FoundResultType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            //
+            this.FoundResultType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.FoundResultType.DataPropertyName = "FoundResultType";
             this.FoundResultType.HeaderText = "Found Result Type";
+            this.FoundResultType.MinimumWidth = 110;
             this.FoundResultType.Name = "FoundResultType";
             this.FoundResultType.ReadOnly = true;
-            // 
+            //
             // Comment
-            // 
-            this.Comment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            //
+            this.Comment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Comment.DataPropertyName = "Comment";
+            this.Comment.FillWeight = 120F;
             this.Comment.HeaderText = "Comment";
-            this.Comment.MinimumWidth = 120;
+            this.Comment.MinimumWidth = 100;
             this.Comment.Name = "Comment";
             this.Comment.ReadOnly = true;
-            this.Comment.Width = 120;
-            // 
+            //
             // SourceList
-            // 
-            this.SourceList.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            //
+            this.SourceList.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.SourceList.DataPropertyName = "SourceList";
+            this.SourceList.FillWeight = 250F;
             this.SourceList.HeaderText = "Sources";
-            this.SourceList.MinimumWidth = 120;
+            this.SourceList.MinimumWidth = 150;
             this.SourceList.Name = "SourceList";
             this.SourceList.ReadOnly = true;
-            this.SourceList.Width = 250;
             // 
             // statusStrip
             // 

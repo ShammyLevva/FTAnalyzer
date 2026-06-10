@@ -17,9 +17,9 @@ namespace FTAnalyzer.Forms.Controls
         MapToolStripMenuItem mnuBingMapAerial;
         MapToolStripMenuItem mnuBingMapRoads;
         MapToolStripMenuItem mnuBingMapHybrid;
-        MapToolStripMenuItem mnuNLS1843_1882;
-        MapToolStripMenuItem mnuNLS1885_1900;
-        MapToolStripMenuItem mnuNLS1921_1930;
+        //MapToolStripMenuItem mnuNLS1843_1882;
+        //MapToolStripMenuItem mnuNLS1885_1900;
+        //MapToolStripMenuItem mnuNLS1921_1930;
 
         public ToolStripMapSelector()
             : base("Map style")
@@ -55,18 +55,18 @@ namespace FTAnalyzer.Forms.Controls
             mnuBingMapAerial = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.BingAerial), LinkLabelType.BING);
             mnuBingMapRoads = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.BingRoads), LinkLabelType.BING);
             mnuBingMapHybrid = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.BingHybrid), LinkLabelType.BING);
-            mnuNLS1843_1882 = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.NLS_1843_1882_OS_6in), LinkLabelType.NLS);
-            mnuNLS1885_1900 = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.NLS_1885_1900_OS_1in), LinkLabelType.NLS);
-            mnuNLS1921_1930 = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.NLS_1921_1930_OS_6in), LinkLabelType.NLS);
+            //mnuNLS1843_1882 = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.NLS_1843_1882_OS_6in), LinkLabelType.NLS);
+            //mnuNLS1885_1900 = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.NLS_1885_1900_OS_1in), LinkLabelType.NLS);
+            //mnuNLS1921_1930 = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.NLS_1921_1930_OS_6in), LinkLabelType.NLS);
 
             mnuOpenStreetMap.SetupMapToolStripMenuItem("mnuOpenStreetMap", "Open Street Map", new EventHandler(Ctrl_Click));
             mnuOpenHistoricMap.SetupMapToolStripMenuItem("mnuOpenHistoricMap", "Open Historical Map 1920-1940 UK", new EventHandler(Ctrl_Click));
             mnuBingMapAerial.SetupMapToolStripMenuItem("mnuBingMapAerial", "Aerial Bing Map", new EventHandler(Ctrl_Click));
             mnuBingMapRoads.SetupMapToolStripMenuItem("mnuBingMapRoads", "Roads Bing Map", new EventHandler(Ctrl_Click));
             mnuBingMapHybrid.SetupMapToolStripMenuItem("mnuBingMapHybrid", "Hybrid Bing Map", new EventHandler(Ctrl_Click));
-            mnuNLS1843_1882.SetupMapToolStripMenuItem("mnuNLS1843_1882", "NLS 1843-1882 OS 6in UK Map", new EventHandler(Ctrl_Click));
-            mnuNLS1885_1900.SetupMapToolStripMenuItem("mnuNLS1885_1900", "NLS 1885-1900 OS 1in UK Map", new EventHandler(Ctrl_Click));
-            mnuNLS1921_1930.SetupMapToolStripMenuItem("mnuNLS1921_1930", "NLS 1921-1930 OS 6in Scotland Map", new EventHandler(Ctrl_Click));
+            //mnuNLS1843_1882.SetupMapToolStripMenuItem("mnuNLS1843_1882", "NLS 1843-1882 OS 6in UK Map", new EventHandler(Ctrl_Click));
+            //mnuNLS1885_1900.SetupMapToolStripMenuItem("mnuNLS1885_1900", "NLS 1885-1900 OS 1in UK Map", new EventHandler(Ctrl_Click));
+            //mnuNLS1921_1930.SetupMapToolStripMenuItem("mnuNLS1921_1930", "NLS 1921-1930 OS 6in Scotland Map", new EventHandler(Ctrl_Click));
 
             // Setup map selector menu
             DisplayStyle = ToolStripItemDisplayStyle.Text;
@@ -75,10 +75,10 @@ namespace FTAnalyzer.Forms.Controls
                 mnuOpenHistoricMap,
                 mnuBingMapAerial,
                 mnuBingMapRoads,
-                mnuBingMapHybrid,
-                mnuNLS1843_1882,
-                mnuNLS1885_1900,
-                mnuNLS1921_1930
+                mnuBingMapHybrid
+                //mnuNLS1843_1882,
+                //mnuNLS1885_1900,
+                //mnuNLS1921_1930
             );
             ImageTransparentColor = Color.Magenta;
             Name = "mnuMapStyle";
@@ -122,16 +122,19 @@ namespace FTAnalyzer.Forms.Controls
                 mapbox.Map.BackgroundLayer.RemoveAt(0);
             if (sender is MapToolStripMenuItem selectedOption)
             {
-                mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(mnuOpenStreetMap.TileSource, mnuOpenStreetMap.Name ?? string.Empty));
+                bool isOpenStreetMap = selectedOption.Name.Equals(mnuOpenStreetMap.Name);
+                if (!isOpenStreetMap)
+                    mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(mnuOpenStreetMap.TileSource, mnuOpenStreetMap.Name ?? string.Empty));
                 TileAsyncLayer mapLayer = new(selectedOption.TileSource, selectedOption.Name ?? string.Empty)
                 {
                     OnlyRedrawWhenComplete = true,
                 };
                 mapbox.Map.BackgroundLayer.Add(mapLayer);
                 selectedOption.Checked = true;
-                opacitySlider.Visible = !selectedOption.Name.Equals(mnuOpenStreetMap.Name);
+                opacitySlider.Visible = !isOpenStreetMap;
                 UpdateLinkLabel(selectedOption.LinkLabelType);
-                RegistrySettings.SetRegistryValue("Default Map Background", selectedOption.Name, RegistryValueKind.String);
+                string backgroundName = selectedOption.Name ?? defaultMap;
+                RegistrySettings.SetRegistryValue("Default Map Background", backgroundName, RegistryValueKind.String);
                 mapbox.Refresh();
             }
         }
@@ -146,9 +149,9 @@ namespace FTAnalyzer.Forms.Controls
                 mnuBingMapAerial.Dispose();
                 mnuBingMapRoads.Dispose();
                 mnuBingMapHybrid.Dispose();
-                mnuNLS1843_1882.Dispose();
-                mnuNLS1885_1900.Dispose();
-                mnuNLS1921_1930.Dispose();
+                //mnuNLS1843_1882.Dispose();
+                //mnuNLS1885_1900.Dispose();
+                //mnuNLS1921_1930.Dispose();
             }
             catch (Exception) { }
         }

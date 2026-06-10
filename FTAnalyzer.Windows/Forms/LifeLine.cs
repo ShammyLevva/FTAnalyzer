@@ -59,7 +59,6 @@ namespace FTAnalyzer.Forms
             int splitheight = RegistrySettings.GetIntRegistryValue("Lifeline Facts Splitter Distance", -1);
             if (splitheight != -1)
                 splitContainerFacts.SplitterDistance = Height - splitheight;
-            splitContainerMap.SplitterDistance = RegistrySettings.GetIntRegistryValue("Lifeline Map Splitter Distance", splitContainerMap.SplitterDistance);
         }
 
         void DatabaseHelper_GeoLocationUpdated(object? location, EventArgs e)
@@ -285,7 +284,6 @@ namespace FTAnalyzer.Forms
 
         void LifeLine_Load(object sender, EventArgs e)
         {
-            outputText.Report($"DIAG: DPI={DeviceDpi} Font={Font.Name},{Font.Size} AutoScale={CurrentAutoScaleDimensions} SortedName.Width={dgIndividuals.Columns["SortedName"]?.Width} BirthDate.Width={dgIndividuals.Columns["BirthDate"]?.Width} GeoLocationCount.Width={dgIndividuals.Columns["GeoLocationCount"]?.Width} dgIndividuals.Size={dgIndividuals.Size}\n");
             int Width = RegistrySettings.GetIntRegistryValue("Lifeline size - width", this.Width);
             int Height = RegistrySettings.GetIntRegistryValue("Lifeline size - height", this.Height);
             int Top = RegistrySettings.GetIntRegistryValue("Lifeline position - top", this.Top);
@@ -294,6 +292,9 @@ namespace FTAnalyzer.Forms
             this.Height = Height;
             this.Top = Top;
             this.Left = Left;
+            int mapRatio = RegistrySettings.GetIntRegistryValue("Lifeline Map Splitter Ratio", 3333);
+            int mapSplitterDistance = splitContainerMap.Width * mapRatio / 10000;
+            splitContainerMap.SplitterDistance = Math.Clamp(mapSplitterDistance, splitContainerMap.Panel1MinSize, splitContainerMap.Width - splitContainerMap.Panel2MinSize - splitContainerMap.SplitterWidth);
             isLoading = false; // only turn off building map if completely done initializing
             if (dgIndividuals.RowCount > 0)
             {   // update map using first row as selected row
@@ -323,7 +324,8 @@ namespace FTAnalyzer.Forms
         void SplitContainerMap_SplitterMoved(object sender, SplitterEventArgs e)
         {
             SplitContainer splitter = (SplitContainer)sender;
-            RegistrySettings.SetRegistryValue("Lifeline Map Splitter Distance", splitter.SplitterDistance, RegistryValueKind.String);
+            int ratio = splitter.SplitterDistance * 10000 / splitter.Width;
+            RegistrySettings.SetRegistryValue("Lifeline Map Splitter Ratio", ratio, RegistryValueKind.DWord);
         }
 
         void DgFacts_SelectionChanged(object sender, EventArgs e)
