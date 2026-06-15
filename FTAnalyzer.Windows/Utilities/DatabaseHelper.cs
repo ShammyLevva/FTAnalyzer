@@ -27,11 +27,12 @@ namespace FTAnalyzer.Utilities
         {
             DatabasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer");
             CurrentFilename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Family Tree Analyzer\FTA-RestoreTemp.s3db");
-            if (CheckDatabaseConnection())
-            {
-                InstanceConnection = new SQLiteConnection($"Data Source={DatabaseFile};Version=3;");
-                restoring = false;
-            }
+            CheckDatabaseConnection();
+            // Always create the connection, even if CheckDatabaseConnection couldn't prepare the database file.
+            // Without this, InstanceConnection stays null and every other method's InstanceConnection.State/.Open()
+            // throws a bare NullReferenceException instead of a catchable SQLiteException.
+            InstanceConnection = new SQLiteConnection($"Data Source={DatabaseFile};Version=3;");
+            restoring = false;
         }
 
         public static DatabaseHelper Instance
