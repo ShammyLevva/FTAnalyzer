@@ -1,4 +1,4 @@
-The UK Ordnance Survey makes available free mapping resources for use in projects under their OS OpenData licence [http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf](http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf)
+The UK Ordnance Survey makes available free mapping resources for use in projects under their OS OpenData licence [https://www.ordnancesurvey.co.uk/licensing](https://www.ordnancesurvey.co.uk/licensing)
 
 One of these sets of data that may be useful to people with British Ancestry is the parish boundary maps. FTAnalyzer can use this data and it is provided here under this licence. Please note this data **Contains Ordnance Survey data © Crown copyright and database right 2013-2020**
 

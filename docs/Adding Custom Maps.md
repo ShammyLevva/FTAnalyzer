@@ -16,7 +16,7 @@ If you have a scanned map file you can add georeference info yourself although i
 # save the file including the georeferenced info
 
 **The Detailed Steps**
-# Download QGIS from [http://www.qgis.org/en/site/forusers/download.html](http://www.qgis.org/en/site/forusers/download.html)
+# Download QGIS from [https://www.qgis.org/en/site/forusers/download.html](https://www.qgis.org/en/site/forusers/download.html)
 # Install OpenLayers Plugin
 ## Click Plugins Menu and select Manage and Install Plugins
 ## Select Get More and scroll down to select Open Layers Plugin
@@ -25,10 +25,10 @@ If you have a scanned map file you can add georeference info yourself although i
 ## Select a background layer eg: select Add Google Physical Layer
 # Now prepare your scanned map
 ## take the scanned map and using a graphics program trim the margins to remove borders, grid numbers, legends etc. Suitable graphics programs are:
-### Paint.Net [http://download-paint.net/](http://download-paint.net/)
-### ImageMagick [http://www.imagemagick.org/script/index.php](http://www.imagemagick.org/script/index.php)
-### Irfanview [http://www.irfanview.com/](http://www.irfanview.com/)
-### GIMP [http://www.gimp.org/](http://www.gimp.org/)
+### Paint.Net [https://getpaint.net/](https://getpaint.net/)
+### ImageMagick [https://www.imagemagick.org/script/index.php](https://www.imagemagick.org/script/index.php)
+### Irfanview [https://www.irfanview.com/](https://www.irfanview.com/)
+### GIMP [https://www.gimp.org/](https://www.gimp.org/)
 ## Save the trimmed map as a TIFF file this is vital it cannot be a JPG file or other graphic format.
 # Now load the trimmed map into QGIS
 ## Click Raster Menu and Georeferencer in the Georeferencer popout - The Georeferencer window should open

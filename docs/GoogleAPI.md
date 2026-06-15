@@ -13,42 +13,42 @@ A Google API Key is entirely free to create and private to you. You will never p
 
 ### Creating your own Google API Key ###
 1) Visit the [Google API Key website](https://cloud.google.com/console/google/maps-apis/overview) and login with your existing Google account if you have one, or create a new one.  
-   ![Example Screen when logged in](http://www.ftanalyzer.com/GoogleAPI-1.png) 
+   ![Example Screen when logged in](https://www.ftanalyzer.com/GoogleAPI-1.png) 
 2) Click to create a new Project  
-   ![Creating a Project](http://www.ftanalyzer.com/GoogleAPI-2.png)  
+   ![Creating a Project](https://www.ftanalyzer.com/GoogleAPI-2.png)  
 3) Search for Geocoding API and click to view it
-   ![Searching for Geocoding API](http://www.ftanalyzer.com/GoogleAPI-3.png)   
+   ![Searching for Geocoding API](https://www.ftanalyzer.com/GoogleAPI-3.png)   
 4) Enable Geocoding API (sometimes it gets stuck at this stage if it hasn't refreshed after about 30 seconds click your browser refresh button)  
-   ![Enable Google API](http://www.ftanalyzer.com/GoogleAPI-4.png)  
+   ![Enable Google API](https://www.ftanalyzer.com/GoogleAPI-4.png)  
 5) Get your API Key for FTAnalyzer
    a) Click on APIs then click on details on the right  
-   ![APIs](http://www.ftanalyzer.com/GoogleAPI-5a.png)  
+   ![APIs](https://www.ftanalyzer.com/GoogleAPI-5a.png)  
    b) then click on credentials  
-   ![credentials](http://www.ftanalyzer.com/GoogleAPI-5b.png)  
+   ![credentials](https://www.ftanalyzer.com/GoogleAPI-5b.png)  
    c) then click create credentials   
-   ![create credentials](http://www.ftanalyzer.com/GoogleAPI-5c.png)  
+   ![create credentials](https://www.ftanalyzer.com/GoogleAPI-5c.png)  
    d) and select API Key  
-   ![select API key](http://www.ftanalyzer.com/GoogleAPI-5d.png)  
+   ![select API key](https://www.ftanalyzer.com/GoogleAPI-5d.png)  
    e) once your key is displayed click close or you can click to restrict your key to just geocoding   
-   ![created API](http://www.ftanalyzer.com/GoogleAPI-5e.png)  
+   ![created API](https://www.ftanalyzer.com/GoogleAPI-5e.png)  
 6) Now copy your API key from this page by clicking on button next to key  
-   ![Copy Key](http://www.ftanalyzer.com/GoogleAPI-6.png)  
+   ![Copy Key](https://www.ftanalyzer.com/GoogleAPI-6.png)  
 7) Open FTAnalyzer Tools Menu and select Options  
     a) Select the Mapping tab  
-   ![Mapping Tab](http://www.ftanalyzer.com/GoogleAPI-8.png)  
+   ![Mapping Tab](https://www.ftanalyzer.com/GoogleAPI-8.png)  
     b) Right click on the Google API box and paste in your key  
     c) Click OK to save your key.  
 8) Now back on the website we need to setup billing  
     - NB. billing will be zero if you stay under the 40,000 lookups a month but Google no longer allows you to use the lookups without setting up billing.  
-    ![Mapping Tab](http://www.ftanalyzer.com/GoogleAPI-11.png)  
+    ![Mapping Tab](https://www.ftanalyzer.com/GoogleAPI-11.png)  
     a) Click to link a billing account  
-    ![Mapping Tab](http://www.ftanalyzer.com/GoogleAPI-11a.png)  
+    ![Mapping Tab](https://www.ftanalyzer.com/GoogleAPI-11a.png)  
     b) If you don't have a billing account it will prompt you to create one  
-    ![Mapping Tab](http://www.ftanalyzer.com/GoogleAPI-11b.png)  
+    ![Mapping Tab](https://www.ftanalyzer.com/GoogleAPI-11b.png)  
 9) Select your country and agree to terms and conditions  
-    ![Mapping Tab](http://www.ftanalyzer.com/GoogleAPI-12a.png)  
+    ![Mapping Tab](https://www.ftanalyzer.com/GoogleAPI-12a.png)  
 10) Entry you billing information and save  
-    ![Mapping Tab](http://www.ftanalyzer.com/GoogleAPI-12b.png)  
+    ![Mapping Tab](https://www.ftanalyzer.com/GoogleAPI-12b.png)  
 
 Thats's it once you start your free trial you are all set to use your own personal Google API limits and 40,000 lookups a month should be plenty for you. 
 

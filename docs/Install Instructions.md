@@ -1,10 +1,10 @@
 ### New Step by Step Guide Available
 
-Parts I to III of the new Family Tree Analyzer guides are now available [to download](http://www.ftanalyzer.com/guides)
+Parts I to III of the new Family Tree Analyzer guides are now available [to download](https://www.ftanalyzer.com/guides)
 
 ### Installing the software
 
-Installation is simple - Visit the [Install site](http://ftanalyzer.com/install) this will download a very small file (if you are using a browser other than Internet Explorer you may need to tell the browser to run the file).
+Installation is simple - Visit the [Install site](https://ftanalyzer.com/install) this will download a very small file (if you are using a browser other than Internet Explorer you may need to tell the browser to run the file).
 
 It will then present you with a screen offering to install the application. Clicking Install will install the program and create a shortcut for you. New updates should be installed automatically every time you start the program, so you'll always be up to date and won't have to check for updates.
 

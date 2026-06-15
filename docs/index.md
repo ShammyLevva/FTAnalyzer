@@ -1,15 +1,15 @@
 Family Tree Analyzer
 ====================
 
-#### Install the latest Windows version FREE from the [Offical Microsoft Store](https://www.microsoft.com/store/apps/9PMJL9HVPL7X?cid=storebadge&ocid=badge). This version will automatically update as new versions become available.  
+#### Install the latest Windows version FREE from the [Offical Microsoft Store](https://apps.microsoft.com/detail/9PMJL9HVPL7X). This version will automatically update as new versions become available.  
 
-If you have [issues with the Windows Store](http://www.ftanalyzer.com/ResetWindowsStore) or have a older version of Windows you can [download a stand alone installer version here](http://ftanalyzer.com/releases). This version is identical to the Windows Store version but it will require you to manually update to get the latest changes. It does however allow you to run the program on pre-Windows 10 versions of Windows, however as time passes the ability to keep it working on really old versions of Windows may stop working.
+If you have [issues with the Windows Store](https://www.ftanalyzer.com/ResetWindowsStore) or have a older version of Windows you can [download a stand alone installer version here](https://ftanalyzer.com/releases). This version is identical to the Windows Store version but it will require you to manually update to get the latest changes. It does however allow you to run the program on pre-Windows 10 versions of Windows, however as time passes the ability to keep it working on really old versions of Windows may stop working.
 
-#### If you have a Mac I'm sorry but it is no longer supported. Apple charge me $100 a year just to allow me to publish on the store (Microsoft store is completely free to publish on for the Windows version) and after 6 years I cannot justify that for a free program. There is an old version available but I have no plans to update it unless someone who is a Mac developer comes along and is willing to maintain it. The old version is available on this page [here.](http://mac.ftanalyzer.com) note that the information on that page is out of date.
+#### If you have a Mac I'm sorry but it is no longer supported. Apple charge me $100 a year just to allow me to publish on the store (Microsoft store is completely free to publish on for the Windows version) and after 6 years I cannot justify that for a free program. There is an old version available but I have no plans to update it unless someone who is a Mac developer comes along and is willing to maintain it. The old version is available on this page [here.](https://mac.ftanalyzer.com) note that the information on that page is out of date.
 
 The simplest Windows 10 install method is to install from the Offical Microsoft App Store. This will then auto update the application when a new version comes out assuming you've not turned off this option in the Microsoft App Store app.  
 
-Installation is simple with Windows Store Click the link and click Get to get the application or Launch to run the application once installed. Note occassionally the Windows Store glitches and shows you own the product but it's not installed. If this happens follow [these instructions](http://www.ftanalyzer.com/ResetWindowsStore) to fix the problem.  
+Installation is simple with Windows Store Click the link and click Get to get the application or Launch to run the application once installed. Note occassionally the Windows Store glitches and shows you own the product but it's not installed. If this happens follow [these instructions](https://www.ftanalyzer.com/ResetWindowsStore) to fix the problem.  
 
 You can put a short cut on your desktop by dragging the icon from your start menu to the desktop. [This article](https://winaero.com/blog/desktop-shortcut-store-app-windows-10/) explains if you are having issues creating a shortcut icon.
   
@@ -23,7 +23,7 @@ The [documentation](./Documentation) is similarly in need of some updating. It's
 
 ### Facebook, Support Site & Twitter
 
-The [Support website](https://www.facebook.com/FTAnalyzer) is hosted as a page on Facebook. The [User Group](https://www.facebook.com/groups/ftanalyzer) is also on Facebook. The Twitter account is @FTAnalyzer note I don't check twitter very often so easiest is to raise an issue on the [issues site](http://www.ftanalyzer.com/issues)
+The [Support website](https://www.facebook.com/FTAnalyzer) is hosted as a page on Facebook. The [User Group](https://www.facebook.com/groups/ftanalyzer) is also on Facebook. Any issues should be raised on the [issues site](https://www.ftanalyzer.com/issues)
 
 ### Initial Features
 
@@ -41,10 +41,10 @@ Once you load your GEDCOM file you can start analysing your tree and displaying 
 *   Data Errors List - shows various types of data errors in your GEDCOM such as events happening before someone was born or after they died etc
 *   Census Lists - form that permits listing everyone in your file that should be alive on a census at a particular date and for whom you have not yet found a census entry
 *   Loose Death list - shows all details where you have death date info for an individual but you haven't updated the death record for that individual.
-*   Lost Cousins Report - shows you everyone you have already found on a census so you can check if you have entered them at [Lost Cousins](http://www.lostcousins.com/ "Lost Cousins") 
+*   Lost Cousins Report - shows you everyone you have already found on a census so you can check if you have entered them at [Lost Cousins](https://www.lostcousins.com/ "Lost Cousins") 
 *   Research Suggestions 
     *   The BMD report shows you BMD facts for everyone you select from filter colour coded by how accurate the date is from Green = exact date through to Red = unknown date. Marriage facts also show if person of marriage age but no partner; partner but no marriage fact; no partner but has children.
-    *   The census report shows colour coded census to see which census you have still to find people on and whether you have entered those people to [Lost Cousins](http://www.lostcousins.com "Lost Cousins") . Clicking on a missing census entry searches for that person online.
+    *   The census report shows colour coded census to see which census you have still to find people on and whether you have entered those people to [Lost Cousins](https://www.lostcousins.com "Lost Cousins") . Clicking on a missing census entry searches for that person online.
 *   Treetops Report - lists all people in your tree at the top of the tree ie: those people with no parents, these are the people who are the furthest back on that line.
 *   World Wars Report - lists possible males alive and of likely fighting age during both world wars. You can also shift click.to auto search for the man on the Lives of the First World War site. 
 
@@ -73,4 +73,4 @@ Similarly on the regular census reports clicking on the name of a person to find
 All feedback welcome. Please note this is very much a work in progress, it works for my own Gedcom file however there is no guarantee that other ways of recording data will be consistently handled. If you wish to post error logs and log issues please include a sample gedcom file that demonstrates the problem you are having. I'd like to ensure that it works consistently for every user. Please also note that there is a bias in the program for UK searching as that is where my Ancestors are from. So some defaults may need to be tweaked or turned into user configurable options in later versions. Again let me know what works and what causes you problems.
 
 
-[Privacy Policy](http://www.ftanalyzer.com/privacy)
+[Privacy Policy](https://www.ftanalyzer.com/privacy)
