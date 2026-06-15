@@ -124,6 +124,7 @@ namespace UnitTests
             Census1921Test("The National Archives of the UK(TNA); Kew, Surrey, England; 1921 Census Returns; Reference: RG 15/18159, ED 3, Sch 185; Book: 18159", "18159", "3", "185", "18159");
             Census1921Test("The National Archives of the UK(TNA); Kew, Surrey, England; 1921 Census Returns; Reference: RG 15/17491, ED 20, Sch 326; Book: 17491", "17491", "20", "326", "17491");
             Census1921Test("Grove Fever Hospital, Tooting Grove <b>Series: RG15, Piece: 2396, Enumeration District: 26, Page: 17</b>", "2396", "26", CensusReference.MISSING, CensusReference.MISSING);
+            Census1921Test("<b>Series: RG15, Piece: 239, Enumeration District: 35, Schedule: 391</b>", "239", "35", "391", CensusReference.MISSING);
         }
 
         [TestMethod]
