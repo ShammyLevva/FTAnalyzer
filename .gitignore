@@ -276,3 +276,4 @@ __pycache__/
 /.claude
 /CLAUDE.md
 /FTAnalyzer.Windows/Properties/AnalyticsSecrets.cs
+/Microsoft Store Package/Package.appxmanifest
