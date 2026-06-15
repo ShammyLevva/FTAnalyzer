@@ -8,6 +8,7 @@ Updated the underlying map library to match .Net10 of the rest of the project
 Fixed the broken Google Analytics
 Added extra null checks on loading
 Added extra registry checks on first use
+Fix 1921 sch issue not recognising sch as schedule
 
 ## Version 10.0.3.0 - 9th June 2026  
 **Bugfixes**
