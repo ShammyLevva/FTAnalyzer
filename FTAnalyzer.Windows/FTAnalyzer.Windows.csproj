@@ -252,6 +252,9 @@
     <Compile Update="Forms\Census.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\CrashDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\Chart.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -316,6 +319,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\Sources.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\StartupErrorForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\StatisticsForm.cs">

@@ -1,3 +1,7 @@
+## Version 10.1.1.0 - 16th June 2026
+**Updates**
+Add startup crash reporting form
+
 ## Version 10.1.0.0 - 15th June 2026
 **Updates**
 Refreshed the mapping options so the grids look right and behave properly. 
