@@ -2,7 +2,6 @@
 
 	<PropertyGroup>
 		<LangVersion>latest</LangVersion>
-		<EnablePreviewFeatures>true</EnablePreviewFeatures>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<IsTestProject>true</IsTestProject>
