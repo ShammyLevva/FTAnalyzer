@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 
 namespace FTAnalyzer.Forms.Controls
 {
@@ -100,22 +100,22 @@ namespace FTAnalyzer.Forms.Controls
         {
             if (DesignMode)
                 return;
-            if (location.Equals(Countries.UNITED_KINGDOM))
+            if (location.Equals(Countries.UNITED_KINGDOM, StringComparison.OrdinalIgnoreCase))
             {
                 foreach (CensusDate censusDate in CensusDate.UK_CENSUS)
                     cbCensusDate.Items.Add(censusDate);
             }
-            else if (location.Equals(Countries.IRELAND))
+            else if (location.Equals(Countries.IRELAND, StringComparison.OrdinalIgnoreCase))
             {
                 cbCensusDate.Items.Add(CensusDate.IRELANDCENSUS1901);
                 cbCensusDate.Items.Add(CensusDate.IRELANDCENSUS1911);
             }
-            else if (location.Equals(Countries.UNITED_STATES))
+            else if (location.Equals(Countries.UNITED_STATES, StringComparison.OrdinalIgnoreCase))
             {
                 foreach (CensusDate censusDate in CensusDate.US_FEDERAL_CENSUS)
                     cbCensusDate.Items.Add(censusDate);
             }
-            else if (location.Equals(Countries.CANADA))
+            else if (location.Equals(Countries.CANADA, StringComparison.OrdinalIgnoreCase))
             {
                 foreach (CensusDate censusDate in CensusDate.CANADIAN_CENSUS)
                     cbCensusDate.Items.Add(censusDate);

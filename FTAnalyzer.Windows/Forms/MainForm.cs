@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Exports;
+using FTAnalyzer.Exports;
 using FTAnalyzer.Filters;
 using FTAnalyzer.Forms;
 using FTAnalyzer.Forms.Controls;
@@ -66,11 +66,11 @@ namespace FTAnalyzer
                 ShowMenus(false);
                 string logMessage = $"Started FTAnalyzer version {VERSION}";
                 log.Info(logMessage);
-                int pos = VERSION.IndexOf('-');
-                string ver = pos > 0 ? VERSION[..VERSION.IndexOf('-')] : VERSION;
+                int pos = VERSION.IndexOf('-', StringComparison.Ordinal);
+                string ver = pos > 0 ? VERSION[..VERSION.IndexOf('-', StringComparison.Ordinal)] : VERSION;
                 DatabaseHelper.Instance.CheckDatabaseVersion(new Version(ver));
                 CheckSystemVersion();
-                if (!Application.ExecutablePath.Contains("WindowsApps"))
+                if (!Application.ExecutablePath.Contains("WindowsApps", StringComparison.OrdinalIgnoreCase))
                     await CheckWebVersion(); // check for web version if not windows store app
                 SetSavePath();
                 BuildRecentList();
@@ -106,10 +106,10 @@ namespace FTAnalyzer
                 HtmlNode? versionNode = doc.DocumentNode.SelectSingleNode("//div[@class='d-flex']/span");
                 if (versionNode is not null)
                 {
-                    string webVersion = versionNode.InnerText.ToUpper().Replace("VERSION", "").Trim();
+                    string webVersion = versionNode.InnerText.ToUpper().Replace("VERSION", "", StringComparison.Ordinal).Trim();
                     string thisVersion = VERSION;
-                    if (VERSION.Contains("-beta") || VERSION.Contains("-RC"))
-                        thisVersion = VERSION[..VERSION.IndexOf('-')];
+                    if (VERSION.Contains("-beta", StringComparison.OrdinalIgnoreCase) || VERSION.Contains("-RC", StringComparison.OrdinalIgnoreCase))
+                        thisVersion = VERSION[..VERSION.IndexOf('-', StringComparison.Ordinal)];
                     Version web = new(webVersion);
                     Version local = new(thisVersion);
                     if (web > local)
@@ -1404,7 +1404,7 @@ namespace FTAnalyzer
         void PossibleCensusFactsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            var predicate = new Predicate<Individual>(x => x.Notes.Contains("census", StringComparison.CurrentCultureIgnoreCase));
+            var predicate = new Predicate<Individual>(x => x.Notes.Contains("census", StringComparison.OrdinalIgnoreCase));
             var censusNotes = ft.AllIndividuals.Filter(predicate).ToList();
             var people = new People();
             people.SetIndividuals(censusNotes, "List of Possible Census records incorrectly recorded as notes");
@@ -3741,7 +3741,7 @@ namespace FTAnalyzer
                         pb.Maximum = 100;
                         pb.Value = value;
                     });
-                    if (csvFilename.EndsWith("TNG", StringComparison.InvariantCultureIgnoreCase))
+                    if (csvFilename.EndsWith("TNG", StringComparison.OrdinalIgnoreCase))
                         await Task.Run(() => ReadTNGdata(progress, csvFilename));
                     else
                         await Task.Run(() => ReadCSVdata(progress, csvFilename));
@@ -3791,11 +3791,11 @@ namespace FTAnalyzer
                 reader.ReadRow(headerRow);
                 if (headerRow.Count != 3)
                     throw new InvalidLocationCSVFileException("Location file should have 3 values per line.");
-                if (!headerRow[0].Trim().ToUpper().Equals("LOCATION"))
+                if (!headerRow[0].Trim().ToUpper().Equals("LOCATION", StringComparison.OrdinalIgnoreCase))
                     throw new InvalidLocationCSVFileException("No Location header record. Header should be Location, Latitude, Longitude");
-                if (!headerRow[1].Trim().ToUpper().Equals("LATITUDE"))
+                if (!headerRow[1].Trim().ToUpper().Equals("LATITUDE", StringComparison.OrdinalIgnoreCase))
                     throw new InvalidLocationCSVFileException("No Latitude header record. Header should be Location, Latitude, Longitude");
-                if (!headerRow[2].Trim().ToUpper().Equals("LONGITUDE"))
+                if (!headerRow[2].Trim().ToUpper().Equals("LONGITUDE", StringComparison.OrdinalIgnoreCase))
                     throw new InvalidLocationCSVFileException("No Longitude header record. Header should be Location, Latitude, Longitude");
                 while (reader.ReadRow(row))
                 {

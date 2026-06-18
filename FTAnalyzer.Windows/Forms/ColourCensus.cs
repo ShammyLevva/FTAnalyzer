@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Graphics;
+using FTAnalyzer.Graphics;
 using FTAnalyzer.Properties;
 using FTAnalyzer.Shared.Utilities;
 using FTAnalyzer.Utilities;
@@ -94,19 +94,19 @@ namespace FTAnalyzer.Forms
             for (int index = dgReportSheet.Columns["C1841"].Index; index <= dgReportSheet.Columns["Ire1926"].Index; index++)
                 dgReportSheet.Columns[index].Visible = false;
 
-            if (country.Equals(Countries.UNITED_STATES))
+            if (country.Equals(Countries.UNITED_STATES, StringComparison.OrdinalIgnoreCase))
             {
                 startColumnIndex = dgReportSheet.Columns["US1790"].Index;
                 endColumnIndex = dgReportSheet.Columns["US1950"].Index;
                 cbFilter.Items[5] = "Outside USA (Dark Grey)";
             }
-            else if (country.Equals(Countries.CANADA))
+            else if (country.Equals(Countries.CANADA, StringComparison.OrdinalIgnoreCase))
             {
                 startColumnIndex = dgReportSheet.Columns["Can1851"].Index;
                 endColumnIndex = dgReportSheet.Columns["Can1921"].Index;
                 cbFilter.Items[5] = "Outside Canada (Dark Grey)";
             }
-            else if (country.Equals(Countries.IRELAND))
+            else if (country.Equals(Countries.IRELAND, StringComparison.OrdinalIgnoreCase))
             {
                 startColumnIndex = dgReportSheet.Columns["Ire1901"].Index;
                 endColumnIndex = dgReportSheet.Columns["Ire1926"].Index;
@@ -236,14 +236,14 @@ namespace FTAnalyzer.Forms
                         IDisplayColourCensus? person = (IDisplayColourCensus?)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
                         if (person is null) return;
                         int censusYear;
-                        if (_country.Equals(Countries.UNITED_STATES))
+                        if (_country.Equals(Countries.UNITED_STATES, StringComparison.OrdinalIgnoreCase))
                             censusYear = 1790 + (e.ColumnIndex - startColumnIndex) * 10;
-                        else if (_country.Equals(Countries.CANADA))
+                        else if (_country.Equals(Countries.CANADA, StringComparison.OrdinalIgnoreCase))
                             if (e.ColumnIndex <= dgReportSheet.Columns["Can1901"].Index)
                                 censusYear = 1851 + (e.ColumnIndex - startColumnIndex) * 10;
                             else
                                 censusYear = 1901 + (e.ColumnIndex - dgReportSheet.Columns["Can1901"].Index) * 5;
-                        else if (_country.Equals(Countries.IRELAND))
+                        else if (_country.Equals(Countries.IRELAND, StringComparison.OrdinalIgnoreCase))
                             if(e.ColumnIndex <= dgReportSheet.Columns["Ire1911"].Index)
                                 censusYear = 1901 + (e.ColumnIndex - startColumnIndex) * 10;
                             else

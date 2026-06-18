@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Utilities;
+using FTAnalyzer.Utilities;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
@@ -78,10 +78,10 @@ namespace FTAnalyzer.Forms.Controls
             List<string> clauses = [.. filterString.Split(separator, StringSplitOptions.None)];
             foreach (string clause in clauses)
             {
-                int pos = clause.IndexOf('[');
+                int pos = clause.IndexOf('[', StringComparison.Ordinal);
                 if (pos > 0)
                 {
-                    int endpos = clause.IndexOf(']');
+                    int endpos = clause.IndexOf(']', StringComparison.Ordinal);
                     if (endpos > 0 && pos < endpos)
                         result.Add(clause.Substring(pos + 1, endpos - pos - 1));
                 }
@@ -106,7 +106,7 @@ namespace FTAnalyzer.Forms.Controls
                     int endpos = clause.IndexOf(')', pos);
                     string values = clause.Substring(pos + 4, endpos - pos - 4);
                     foreach (string value in values.Split(','))
-                        result.Add(value.Replace("\'", "").Trim());
+                        result.Add(value.Replace("\'", "", StringComparison.Ordinal).Trim());
                 }
             }
             return result;

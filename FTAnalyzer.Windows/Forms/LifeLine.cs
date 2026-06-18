@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Mapping;
+using FTAnalyzer.Mapping;
 using FTAnalyzer.Properties;
 using FTAnalyzer.Shared.Utilities;
 using FTAnalyzer.Utilities;
@@ -227,7 +227,7 @@ namespace FTAnalyzer.Forms
 
         void SelectIndividual(Individual i)
         {
-            DataGridViewRow? row = dgIndividuals.Rows.Cast<DataGridViewRow>().FirstOrDefault(r => r.Cells["IndividualID"].Value.ToString().Equals(i.IndividualID));
+            DataGridViewRow? row = dgIndividuals.Rows.Cast<DataGridViewRow>().FirstOrDefault(r => r.Cells["IndividualID"].Value.ToString().Equals(i.IndividualID, StringComparison.OrdinalIgnoreCase));
             if (row is not null)
                 dgIndividuals.Rows[row.Index].Selected = true;
         }
@@ -400,7 +400,7 @@ namespace FTAnalyzer.Forms
                     }
                 }
             }
-            if (!tooltip.Equals(mapTooltip.GetToolTip(mapBox1)))
+            if (!tooltip.Equals(mapTooltip.GetToolTip(mapBox1), StringComparison.OrdinalIgnoreCase))
                 mapTooltip.SetToolTip(mapBox1, tooltip);
         }
 

@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Utilities;
+using FTAnalyzer.Utilities;
 using NetTopologySuite.Geometries;
 using System.Text.RegularExpressions;
 
@@ -70,8 +70,8 @@ namespace FTAnalyzer.Mapping
 
         void FixCommas()
         {
-            DefinitiveName = DefinitiveName.Replace(", The", ""); // strip out supurflous "the"
-            int pos = DefinitiveName.IndexOf(',');
+            DefinitiveName = DefinitiveName.Replace(", The", "", StringComparison.Ordinal); // strip out supurflous "the"
+            int pos = DefinitiveName.IndexOf(',', StringComparison.Ordinal);
             if (pos > 0)
                 DefinitiveName = (string.Concat(DefinitiveName.AsSpan(pos + 1), " ", DefinitiveName.AsSpan(0, pos))).Trim();
         }
@@ -80,19 +80,19 @@ namespace FTAnalyzer.Mapping
         {
             DefinitiveName = DefinitiveName.Trim();
             if (DefinitiveName.EndsWith(" Fm")) // Fm is abbreviation for Farm
-                DefinitiveName = DefinitiveName.Replace(" Fm", " Farm");
+                DefinitiveName = DefinitiveName.Replace(" Fm", " Farm", StringComparison.Ordinal);
             if (DefinitiveName.EndsWith(" fm")) // Fm is abbreviation for Farm
-                DefinitiveName = DefinitiveName.Replace(" fm", " Farm");
+                DefinitiveName = DefinitiveName.Replace(" fm", " Farm", StringComparison.Ordinal);
             if (DefinitiveName.EndsWith(" Fms")) // Fm is abbreviation for Farm
-                DefinitiveName = DefinitiveName.Replace(" Fms", " Farm");
+                DefinitiveName = DefinitiveName.Replace(" Fms", " Farm", StringComparison.Ordinal);
             if (DefinitiveName.EndsWith(" Ct")) // Ct is abbreviation for Court
-                DefinitiveName = DefinitiveName.Replace(" Ct", " Court");
+                DefinitiveName = DefinitiveName.Replace(" Ct", " Court", StringComparison.Ordinal);
             if (DefinitiveName.EndsWith(" Pt")) // Pt is abbreviation for Point
-                DefinitiveName = DefinitiveName.Replace(" Pt", " Point");
+                DefinitiveName = DefinitiveName.Replace(" Pt", " Point", StringComparison.Ordinal);
             if (DefinitiveName.EndsWith(" Pk")) // Pt is abbreviation for Park
-                DefinitiveName = DefinitiveName.Replace(" Pk", " Park");
+                DefinitiveName = DefinitiveName.Replace(" Pk", " Park", StringComparison.Ordinal);
             if (DefinitiveName.EndsWith(" Rly")) // Pt is abbreviation for Park
-                DefinitiveName = DefinitiveName.Replace(" Rly", " Railway");
+                DefinitiveName = DefinitiveName.Replace(" Rly", " Railway", StringComparison.Ordinal);
             if (DefinitiveName.EndsWith(" Sq")) // Sq is abbreviation for Square
                 DefinitiveName += "uare";
             if (DefinitiveName.EndsWith(" Sch")) // Sch is abbreviation for School
@@ -114,13 +114,13 @@ namespace FTAnalyzer.Mapping
             if (DefinitiveName.EndsWith(" The")) // we can strip trailing the's
                 DefinitiveName = DefinitiveName[^4..];
 
-            if (DefinitiveName.Contains('('))
+            if (DefinitiveName.Contains('(', StringComparison.OrdinalIgnoreCase))
             {
                 Match match = RegexPatterns.GazateerSlash().Match(DefinitiveName);
                 if (match.Success)
                     DefinitiveName = match.Groups[1].ToString().Trim();
             }
-            if (ParishName.Contains('('))
+            if (ParishName.Contains('(', StringComparison.OrdinalIgnoreCase))
             {
                 Match match = RegexPatterns.GazateerSlash().Match(ParishName);
                 if (match.Success)

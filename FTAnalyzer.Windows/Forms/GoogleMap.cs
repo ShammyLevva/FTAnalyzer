@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Events;
+using FTAnalyzer.Events;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Properties;
 using FTAnalyzer.Utilities;
@@ -172,7 +172,7 @@ namespace FTAnalyzer.Forms
                         bounds = $"{area.Bounds}";
                 }
             }
-            string encodedAddress = HttpUtility.UrlEncode(text.Replace(" ", "+"));
+            string encodedAddress = HttpUtility.UrlEncode(text.Replace(" ", "+", StringComparison.Ordinal));
             string url = $"https://maps.googleapis.com/maps/api/geocode/json?address={encodedAddress}{bounds}{tld}&key={GoogleAPIKey.KeyValue}";
             if (ThreadCancelled || cancellationToken.IsCancellationRequested)
                 return Task.FromResult<GeoResponse?>(null);
@@ -408,7 +408,7 @@ namespace FTAnalyzer.Forms
             long length = new FileInfo(filename).Length;
             if (length > 5000000)
             {
-                string zipFilename = filename.Replace(".kml", ".kmz");
+                string zipFilename = filename.Replace(".kml", ".kmz", StringComparison.Ordinal);
                 ZipFile zip = new(zipFilename)
                 {
                     filename

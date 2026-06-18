@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Events;
+using FTAnalyzer.Events;
 using FTAnalyzer.Filters;
 using FTAnalyzer.Forms.Controls;
 using FTAnalyzer.Graphics;
@@ -233,7 +233,7 @@ namespace FTAnalyzer.Forms
                         foreach (ToolStripMenuItem menu in list)
                         {
                             // filter locations on menu items that are ticked
-                            if (menu.Checked && loc.FoundResultType.Contains(menu.Name ?? string.Empty))
+                            if (menu.Checked && loc.FoundResultType.Contains(menu.Name ?? string.Empty, StringComparison.OrdinalIgnoreCase))
                             {
                                 results.Add(loc);
                                 break;
@@ -321,7 +321,7 @@ namespace FTAnalyzer.Forms
         {
             refreshingMenus = true;
             ToolStripMenuItem? places = mnuFoundResultType.DropDownItems[PLACES] as ToolStripMenuItem;
-            if (mnuSelectClear.Text.Equals("Clear All"))
+            if (mnuSelectClear.Text.Equals("Clear All", StringComparison.OrdinalIgnoreCase))
             {
                 mnuSelectClear.Text = "Select All";
                 foreach (ToolStripMenuItem menu in mnuFoundResultType.DropDownItems)
@@ -347,7 +347,7 @@ namespace FTAnalyzer.Forms
         void MnuStatusSelectAll_Click(object sender, EventArgs e)
         {
             refreshingMenus = true;
-            if (mnuStatusSelectAll.Text.Equals("Clear All"))
+            if (mnuStatusSelectAll.Text.Equals("Clear All", StringComparison.OrdinalIgnoreCase))
             {
                 mnuStatusSelectAll.Text = "Select All";
                 foreach (ToolStripMenuItem menu in mnuGeocodeStatus.DropDownItems)
@@ -699,7 +699,7 @@ namespace FTAnalyzer.Forms
                     string status = $"Googled empty ViewPorts and have updated {updated}. Done {vpchecked} of {maxtoCheck}.  ";
                     worker.ReportProgress(percent, status);
                     if (worker.CancellationPending ||
-                        (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max")))
+                        (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max", StringComparison.OrdinalIgnoreCase)))
                     {
                         e.Cancel = true;
                         break;
@@ -735,7 +735,7 @@ namespace FTAnalyzer.Forms
 
                     if (loc == FactLocation.UNKNOWN_LOCATION || loc.IsGeoCoded(retryPartial))
                         geocoded++;
-                    else if (loc.GeocodeStatus == FactLocation.Geocode.INCORRECT || loc.Country.Equals(Countries.AT_SEA))
+                    else if (loc.GeocodeStatus == FactLocation.Geocode.INCORRECT || loc.Country.Equals(Countries.AT_SEA, StringComparison.OrdinalIgnoreCase))
                         skipped++; // don't re-geocode incorrect ones as that would reset incorrect flag back to what user already identified was wrong
                     else
                     {
@@ -844,14 +844,14 @@ namespace FTAnalyzer.Forms
                     worker.ReportProgress(percent, status);
 
                     if (worker.CancellationPending || token.IsCancellationRequested ||
-                        (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max")))
+                        (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max", StringComparison.OrdinalIgnoreCase)))
                     {
                         e.Cancel = true;
                         break;
                     }
                 }
                 ft.ClearLocations(); // Locations tab needs to be invalidated so it refreshes
-                if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max"))
+                if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max", StringComparison.OrdinalIgnoreCase))
                     UIHelpers.ShowMessage(new Form() { TopMost = true }, $"Finished Google Geocoding.\n{txtGoogleWait.Text}\nPlease wait 24hrs before trying again as Google\nwill not allow further geocoding before then.", "FTAnalyzer Geocoding");
                 else
                     UIHelpers.ShowMessage(new Form() { TopMost = true }, "Finished Google Geocoding.", "FTAnalyzer Geocoding");
@@ -1020,7 +1020,7 @@ namespace FTAnalyzer.Forms
                         if (loc is not null && loc.ToString().Length > 0 &&
                             !ExtensionMethods.DoubleEquals(loc.Latitude, 0) &&
                             !ExtensionMethods.DoubleEquals(loc.Longitude, 0) &&
-                            !loc.Country.Equals(Countries.AT_SEA))
+                            !loc.Country.Equals(Countries.AT_SEA, StringComparison.OrdinalIgnoreCase))
                         {
                             GeoResponse? res = null;
                             double latitude = loc.Latitude;
@@ -1065,14 +1065,14 @@ namespace FTAnalyzer.Forms
                     worker.ReportProgress(percent, status);
 
                     if (worker.CancellationPending ||
-                        (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max")))
+                        (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max", StringComparison.OrdinalIgnoreCase)))
                     {
                         e.Cancel = true;
                         break;
                     }
                 }
                 ft.ClearLocations(); // Locations tab needs to be invalidated so it refreshes
-                if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max"))
+                if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max", StringComparison.OrdinalIgnoreCase))
                     UIHelpers.ShowMessage(new Form() { TopMost = true }, $"Finished Reverse Geocoding.\n{txtGoogleWait.Text}\nPlease wait 24hrs before trying again as Google\nwill not allow further reverse geocoding before then.", "FTAnalyzer Geocoding");
                 else
                     UIHelpers.ShowMessage(new Form() { TopMost = true }, "Finished Reverse Geocoding.", "FTAnalyzer Geocoding");
@@ -1167,7 +1167,7 @@ namespace FTAnalyzer.Forms
 
         public void SelectLocation(FactLocation location)
         {
-            bool condition(DataGridViewRow r) => r.Cells["GeocodedLocation"].Value.ToString().Equals(location.SortableLocation);
+            bool condition(DataGridViewRow r) => r.Cells["GeocodedLocation"].Value.ToString().Equals(location.SortableLocation, StringComparison.OrdinalIgnoreCase);
             DataGridViewRow? row = dgLocations.Rows.Cast<DataGridViewRow>().Filter(condition).FirstOrDefault();
             if (row is null)
             {
@@ -1221,7 +1221,7 @@ namespace FTAnalyzer.Forms
             try
             {
                 string startPath;
-                if (Application.StartupPath.Contains("Common7\\IDE")) // running unit tests
+                if (Application.StartupPath.Contains("Common7\\IDE", StringComparison.OrdinalIgnoreCase)) // running unit tests
                     startPath = Path.Combine(Environment.CurrentDirectory, "..\\..\\..");
                 else
                     startPath = Application.StartupPath;
@@ -1247,7 +1247,7 @@ namespace FTAnalyzer.Forms
             while (!reader.EndOfStream)
             {
                 string line = reader.ReadLine() ?? string.Empty;
-                if (line.Contains(':'))
+                if (line.Contains(':', StringComparison.OrdinalIgnoreCase))
                 {
                     OS50kGazetteer gaz = new(line);
                     string key = gaz.DefinitiveName.ToLower();
@@ -1333,7 +1333,7 @@ namespace FTAnalyzer.Forms
                     break;
                 }
             }
-            if (MainForm.VERSION.Contains("beta"))
+            if (MainForm.VERSION.Contains("beta", StringComparison.OrdinalIgnoreCase))
             {
                 GenerateTestGedcom(failedToFind, "OS50k Gazetteer failed matches.ged", null);
                 GenerateTestGedcom(null, "OS50k Gazetteer no Counties.ged", noCounty);
@@ -1465,7 +1465,7 @@ namespace FTAnalyzer.Forms
                 // we have several places of same name in matching county loop through matching check for matching parish
                 foreach (OS50kGazetteer gaz in matches)
                 {
-                    if (gaz.ParishName.Equals(loc.SubRegion, StringComparison.InvariantCultureIgnoreCase))
+                    if (gaz.ParishName.Equals(loc.SubRegion, StringComparison.OrdinalIgnoreCase))
                     {   // we match on parish name so we found a match on name, parish & county
                         SetOSGeocoding(loc, gaz, level, false);
                         return true;

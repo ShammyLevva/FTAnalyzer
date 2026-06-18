@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Filters;
+using FTAnalyzer.Filters;
 using FTAnalyzer.Graphics;
 using FTAnalyzer.Properties;
 using FTAnalyzer.Utilities;
@@ -335,8 +335,8 @@ namespace FTAnalyzer.Forms
                 IEnumerable<Fact> list = individual.AllFacts.Union(individual.ErrorFacts.Where(f => f.FactErrorLevel != Fact.FactError.WARNINGALLOW));
                 foreach (string factType in factTypes)
                 {
-                    if (list.Count(x => x.FactTypeDescription.Equals(factType)) > 1)
-                        foreach (Fact f in list.Where(x => x.FactTypeDescription.Equals(factType)))
+                    if (list.Count(x => x.FactTypeDescription.Equals(factType, StringComparison.OrdinalIgnoreCase)) > 1)
+                        foreach (Fact f in list.Where(x => x.FactTypeDescription.Equals(factType, StringComparison.OrdinalIgnoreCase)))
                             facts.Add(new DisplayFact(individual, f));
                 }
             }

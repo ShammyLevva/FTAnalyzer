@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Mapping;
+using FTAnalyzer.Mapping;
 using FTAnalyzer.Shared.Utilities;
 using Microsoft.Win32;
 using SharpMap.Forms;
@@ -39,7 +39,7 @@ namespace FTAnalyzer.Forms.Controls
             string mapPreference = RegistrySettings.GetStringRegistryValue("Default Map Background", defaultMap);
             foreach (ToolStripMenuItem menu in DropDownItems)
             {
-                if (mapPreference.Equals(menu.Name))
+                if (mapPreference.Equals(menu.Name, StringComparison.OrdinalIgnoreCase))
                 {
                     Ctrl_Click(menu, null);
                     break;
@@ -125,7 +125,7 @@ namespace FTAnalyzer.Forms.Controls
             if (sender is MapToolStripMenuItem selectedOption)
             {
                 selectedMap = selectedOption;
-                bool isOpenStreetMap = selectedOption.Name.Equals(mnuOpenStreetMap.Name);
+                bool isOpenStreetMap = selectedOption.Name.Equals(mnuOpenStreetMap.Name, StringComparison.OrdinalIgnoreCase);
                 if (!isOpenStreetMap && opacitySlider.Value < opacitySlider.Maximum)
                     mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(mnuOpenStreetMap.TileSource, mnuOpenStreetMap.Name ?? string.Empty));
                 TileAsyncLayer mapLayer = new(selectedOption.TileSource, selectedOption.Name ?? string.Empty)
@@ -147,7 +147,7 @@ namespace FTAnalyzer.Forms.Controls
         // completely hidden, so we avoid loading it to halve the tile requests.
         public void UpdateOpacityLayer()
         {
-            if (selectedMap is null || selectedMap.Name.Equals(mnuOpenStreetMap.Name))
+            if (selectedMap is null || selectedMap.Name.Equals(mnuOpenStreetMap.Name, StringComparison.OrdinalIgnoreCase))
                 return;
             bool needsOsmBase = opacitySlider.Value < opacitySlider.Maximum;
             bool hasOsmBase = mapbox.Map.BackgroundLayer.Count > 1;

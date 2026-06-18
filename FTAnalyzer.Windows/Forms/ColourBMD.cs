@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Graphics;
+using FTAnalyzer.Graphics;
 using FTAnalyzer.Properties;
 using FTAnalyzer.Shared.Utilities;
 using FTAnalyzer.Utilities;
@@ -87,7 +87,7 @@ namespace FTAnalyzer.Forms
                 tsRecords.Text = $"{Messages.Count}{reportList.Count} records listed.";
                 string defaultProvider = RegistrySettings.GetStringRegistryValue("Default Search Provider", DEFAULT_PROVIDER);
                 defaultProvider ??= DEFAULT_PROVIDER;
-                if (defaultProvider.Equals("FreeCen"))
+                if (defaultProvider.Equals("FreeCen", StringComparison.OrdinalIgnoreCase))
                     defaultProvider = "FreeBMD";
                 cbBMDSearchProvider.Text = defaultProvider;
                 string defaultRegion = RegistrySettings.GetStringRegistryValue("Default Region", DEFAULT_REGION);
@@ -277,7 +277,7 @@ namespace FTAnalyzer.Forms
         void CbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
             string provider = cbBMDSearchProvider.SelectedItem.ToString() ?? string.Empty;
-            if (provider.Equals("FreeBMD"))
+            if (provider.Equals("FreeBMD", StringComparison.OrdinalIgnoreCase))
                 provider = "FreeCen";
             RegistrySettings.SetRegistryValue("Default Search Provider", provider, RegistryValueKind.String);
             dgBMDReportSheet.Refresh(); // forces refresh of tooltips

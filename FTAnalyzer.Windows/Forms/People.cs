@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Filters;
+using FTAnalyzer.Filters;
 using FTAnalyzer.Properties;
 using FTAnalyzer.Utilities;
 using System.ComponentModel;
@@ -131,7 +131,7 @@ namespace FTAnalyzer.Forms
         {
             Text = $"Individuals & Families whose surname is {stat.Surname}";
             SortableBindingList<IDisplayIndividual> dsInd = [];
-            bool indSurnames(Individual x) => x.Surname.Equals(stat.Surname);
+            bool indSurnames(Individual x) => x.Surname.Equals(stat.Surname, StringComparison.OrdinalIgnoreCase);
             Predicate<Individual> filter = FilterUtils.AndFilter(indFilter, indSurnames);
             foreach (Individual i in ft.AllIndividuals.Filter(filter))
                 dsInd.Add(i);
@@ -237,7 +237,7 @@ namespace FTAnalyzer.Forms
 
         public void ListRelationToRoot(string relationtoRoot)
         {
-            bool filter(Individual x) => x.RelationToRoot.Equals(relationtoRoot);
+            bool filter(Individual x) => x.RelationToRoot.Equals(relationtoRoot, StringComparison.OrdinalIgnoreCase);
             List<Individual> individuals = [.. ft.AllIndividuals.Filter(filter)];
             SetIndividuals(individuals, $"Individuals who are a {relationtoRoot} of root person");
         }
@@ -420,7 +420,7 @@ namespace FTAnalyzer.Forms
             IEnumerable<CensusFamily> toSearch = ft.GetAllCensusFamilies(CensusDate.UKCENSUS1911, true, true);
             foreach (CensusFamily fam in toSearch)
             {
-                if (fam.On1911Census && fam.HasGoodChildrenStatus && !fam.FamilyType.Equals(Family.SOLOINDIVIDUAL) && !fam.FamilyType.Equals(Family.PRE_MARRIAGE) &&
+                if (fam.On1911Census && fam.HasGoodChildrenStatus && !fam.FamilyType.Equals(Family.SOLOINDIVIDUAL, StringComparison.OrdinalIgnoreCase) && !fam.FamilyType.Equals(Family.PRE_MARRIAGE, StringComparison.OrdinalIgnoreCase) &&
                     (fam.ExpectedTotal != fam.ChildrenTotal || fam.ExpectedAlive != fam.ChildrenAlive || fam.ExpectedDead != fam.ChildrenDead))
                     results.Add(fam);
             }
@@ -541,7 +541,7 @@ namespace FTAnalyzer.Forms
             IEnumerable<CensusFamily> toSearch = ft.GetAllCensusFamilies(CensusDate.UKCENSUS1911, true, true);
             foreach (Family fam in toSearch)
             {
-                if (fam.On1911Census && !fam.HasAnyChildrenStatus && fam.BothParentsAlive(CensusDate.UKCENSUS1911) && !fam.FamilyType.Equals(Family.PRE_MARRIAGE))
+                if (fam.On1911Census && !fam.HasAnyChildrenStatus && fam.BothParentsAlive(CensusDate.UKCENSUS1911) && !fam.FamilyType.Equals(Family.PRE_MARRIAGE, StringComparison.OrdinalIgnoreCase))
                     results.Add(fam);
             }
             reportType = ReportType.MissingChildrenStatus;

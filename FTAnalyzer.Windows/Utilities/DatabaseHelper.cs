@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Forms;
+using FTAnalyzer.Forms;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Shared.Utilities;
 using ICSharpCode.SharpZipLib.Zip;
@@ -394,9 +394,9 @@ namespace FTAnalyzer.Utilities
                 while (reader.Read())
                 {
                     string column = reader[1].ToString() ?? string.Empty;
-                    if (column.Equals("Latm"))
+                    if (column.Equals("Latm", StringComparison.OrdinalIgnoreCase))
                         latm = true;
-                    if (column.Equals("Longm"))
+                    if (column.Equals("Longm", StringComparison.OrdinalIgnoreCase))
                         longm = true;
                 }
             }
