@@ -29,6 +29,10 @@
     <NoWarn>$(NoWarn);CA2007</NoWarn>
     <!-- Nullable reference types are enabled; CA1062 null-argument checks are redundant -->
     <NoWarn>$(NoWarn);CA1062</NoWarn>
+    <!-- Shared project types may be subclassed in FTAnalyzer.Web; sealing based on Windows-only analysis is unsafe -->
+    <NoWarn>$(NoWarn);CA1852</NoWarn>
+    <!-- Application exe has no external callers; public vs internal has no practical effect -->
+    <NoWarn>$(NoWarn);CA1515</NoWarn>
   </PropertyGroup>
 
   <!-- WAP publish redirects BaseIntermediateOutputPath to obj\wappublish\win-x64\, causing the SDK
