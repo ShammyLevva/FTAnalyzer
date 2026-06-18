@@ -267,6 +267,7 @@ namespace FTAnalyzer
                     if (await LoadTreeAsync(filename))
                     {
                         SetDataErrorsCheckedDefaults(ckbDataErrors);
+                        UpdateDataErrorsDisplay();
                         SetupFactsCheckboxes();
                         AddFileToRecentList(filename);
                         Text = $"Family Tree Analyzer v{VERSION}. Analysing: {filename}";
@@ -1657,19 +1658,19 @@ namespace FTAnalyzer
             }
             if (tabErrorFixSelector.SelectedTab == tabLooseBirths)
             {
-                if (dgLooseBirths.DataSource is null)
+                if (((DataGridView)dgLooseBirths).DataSource is null)
                     SetupLooseBirths();
                 await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseBirthsEvent);
             }
             else if (tabErrorFixSelector.SelectedTab == tabLooseDeaths)
             {
-                if (dgLooseDeaths.DataSource is null)
+                if (((DataGridView)dgLooseDeaths).DataSource is null)
                     SetupLooseDeaths();
                 await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseDeathsEvent);
             }
             else if (tabErrorFixSelector.SelectedTab == tabLooseInfo)
             {
-                if (dgLooseInfo.DataSource is null)
+                if (((DataGridView)dgLooseInfo).DataSource is null)
                     SetupLooseInfo();
                 await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseInfoEvent);
             }
