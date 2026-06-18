@@ -7,7 +7,7 @@ namespace FTAnalyzer.Utilities
     {
         public new VirtualDataGridView<T> ReportGrid { get; private set; } = report;
 
-        public override void DoExportToExcel<S>(DataGridViewColumnCollection shown = null)
+        public override void DoExportToExcel<S>(DataGridViewColumnCollection? shown = null)
         {
             if (ReportGrid.DataSource is null || ReportGrid.RowCount == 0)
                 return;

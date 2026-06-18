@@ -5,7 +5,7 @@ namespace FTAnalyzer.Utilities
 {
     public class ListtoDataTableConvertor
     {
-        public static DataTable ToDataTable<T>(List<T> items, DataGridViewColumnCollection cols = null)
+        public static DataTable ToDataTable<T>(List<T> items, DataGridViewColumnCollection? cols = null)
         {
             DataTable dataTable = new(typeof(T).Name);
             //Get all the properties

@@ -148,7 +148,9 @@ namespace FTAnalyzer.Mapping
                         {
                             DataSource = new ShapeFile(filename, true)
                         };
+#pragma warning disable CS8625 // SharpMap VectorStyle.Fill accepts null to mean "no fill" but lacks nullable annotations
                         parishLayer.Style.Fill = null;
+#pragma warning restore CS8625
                         parishLayer.Style.Outline = new Pen(Color.Black, 2.0f);
                         parishLayer.Style.EnableOutline = true;
                         parishLayer.MinVisible = 500;

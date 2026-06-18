@@ -78,7 +78,7 @@ namespace FTAnalyzer.Forms
             VETERINARY_CARE, AMUSEMENT_PARK
         ]);
 
-        public delegate void GoogleEventHandler(object sender, GoogleWaitingEventArgs e);
+        public delegate void GoogleEventHandler(object? sender, GoogleWaitingEventArgs e);
         public static event GoogleEventHandler WaitingForGoogle;
         public static bool ThreadCancelled { get; set; }
 
