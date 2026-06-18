@@ -551,6 +551,7 @@ namespace FTAnalyzer.Forms
         {
             // ensure we have a CTS for this reverse geocode run
             reverseGeocodeCts?.Cancel();
+            reverseGeocodeCts?.Dispose();
             reverseGeocodeCts = new CancellationTokenSource();
             var token = reverseGeocodeCts.Token;
             await ReverseGeoCodeAsync(reverseGeocodeBackgroundWorker, e, token);
@@ -563,6 +564,7 @@ namespace FTAnalyzer.Forms
         async void EmptyViewPortsBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             emptyViewPortsCts?.Cancel();
+            emptyViewPortsCts?.Dispose();
             emptyViewPortsCts = new CancellationTokenSource();
             var token = emptyViewPortsCts.Token;
             await CheckEmptyViewPortsAsync(EmptyViewPortsBackgroundWorker, e, token);
@@ -595,6 +597,7 @@ namespace FTAnalyzer.Forms
                         Debug.WriteLine("Race condition gets here sometimes");
                     }
                     googleGeocodeCts?.Cancel();
+                    googleGeocodeCts?.Dispose();
                     googleGeocodeCts = new CancellationTokenSource();
                     var args = new Tuple<bool, CancellationToken>(retryPartials, googleGeocodeCts.Token);
                     googleGeocodeBackgroundWorker.RunWorkerAsync(args);
@@ -634,6 +637,7 @@ namespace FTAnalyzer.Forms
                         Debug.WriteLine("Race condition gets here sometimes");
                     }
                     emptyViewPortsCts?.Cancel();
+                    emptyViewPortsCts?.Dispose();
                     emptyViewPortsCts = new CancellationTokenSource();
                     EmptyViewPortsBackgroundWorker.RunWorkerAsync(emptyViewPortsCts.Token);
                     Cursor = Cursors.Default;
@@ -1529,7 +1533,13 @@ namespace FTAnalyzer.Forms
         #endregion
         void MnuCheckForEmptyViewPortsToolStripMenuItem_Click(object sender, EventArgs e) => StartCheckEmptyViewPorts();
 
-        void GeocodeLocations_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
+        void GeocodeLocations_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            googleGeocodeCts?.Dispose();
+            reverseGeocodeCts?.Dispose();
+            emptyViewPortsCts?.Dispose();
+            Dispose();
+        }
 
         void GeocodeLocations_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
     }

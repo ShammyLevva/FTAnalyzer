@@ -86,6 +86,7 @@ namespace FTAnalyzer.Forms
             if (isloading) return;
             // cancel any previous in-flight build and create a new token
             buildMapCts?.Cancel();
+            buildMapCts?.Dispose();
             buildMapCts = new CancellationTokenSource();
             CancellationToken token = buildMapCts.Token;
             Cursor = Cursors.WaitCursor;
@@ -214,6 +215,7 @@ namespace FTAnalyzer.Forms
             {
                 // cancel any in-flight map building triggered by this form
                 buildMapCts?.Cancel();
+                buildMapCts?.Dispose();
                 buildMapCts = null;
                 DatabaseHelper.GeoLocationUpdated -= DatabaseHelper_GeoLocationUpdated;
                 tvPlaces.Nodes.Clear();

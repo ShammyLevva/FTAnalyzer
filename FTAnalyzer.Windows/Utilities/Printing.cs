@@ -4,7 +4,9 @@ namespace FTAnalyzer.Utilities
 {
     class Printing(ScrollingRichTextBox rtb) : IDisposable
     {
+#pragma warning disable CA2213 // rtb is a borrowed reference owned by the caller, not by Printing
         readonly ScrollingRichTextBox rtb = rtb;
+#pragma warning restore CA2213
         readonly StringReader reader = new(rtb.Text);
 
         public void PrintPage(object sender, PrintPageEventArgs e)

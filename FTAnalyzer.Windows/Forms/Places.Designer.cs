@@ -23,6 +23,7 @@ namespace FTAnalyzer.Forms
                 if (disposing && (components is not null))
                 {
                     components.Dispose();
+                    buildMapCts?.Dispose();
                 }
                 base.Dispose(disposing);
                 clusters.Dispose();

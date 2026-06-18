@@ -51,6 +51,7 @@ namespace FTAnalyzer.Forms
             {
                 // cancel any in-flight request before starting a new one
                 _cts?.Cancel();
+                _cts?.Dispose();
                 _cts = new CancellationTokenSource();
                 var token = _cts.Token;
 
@@ -99,6 +100,7 @@ namespace FTAnalyzer.Forms
         void BingOSMap_FormClosed(object sender, FormClosedEventArgs e)
         {
             _cts?.Cancel();
+            _cts?.Dispose();
             Dispose();
         }
 

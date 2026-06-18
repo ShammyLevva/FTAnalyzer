@@ -20,6 +20,7 @@ namespace FTAnalyzer.Forms
                 if (disposing && (components is not null))
                 {
                     components.Dispose();
+                    _cts?.Dispose();
                 }
                 base.Dispose(disposing);
             }
