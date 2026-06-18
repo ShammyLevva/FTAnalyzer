@@ -5,6 +5,7 @@ Improve efficiency of surname loading
 
 **Bugfixes**
 Fix data errors subtabs sometimes opening without data
+Fix layout of relationship types control
 
 ## Version 10.1.0.0 - 15th June 2026
 **Updates**
