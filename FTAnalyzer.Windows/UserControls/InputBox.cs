@@ -4,7 +4,7 @@
     {
         public static DialogResult Show(string title, string promptText, ref string value, IWin32Window? owner = null)
         {
-            Form form = new();
+            using Form form = new();
             Label label = new();
             TextBox textBox = new();
             Button buttonOk = new();

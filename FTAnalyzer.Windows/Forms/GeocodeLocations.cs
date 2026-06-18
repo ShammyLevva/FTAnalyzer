@@ -574,7 +574,8 @@ namespace FTAnalyzer.Forms
             {
                 if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy || EmptyViewPortsBackgroundWorker.IsBusy)
                 {
-                    UIHelpers.ShowMessage(new Form() { TopMost = true }, GEOCODINGERROR, "FTAnalyzer");
+                    using Form topMost = new() { TopMost = true };
+                    UIHelpers.ShowMessage(topMost, GEOCODINGERROR, "FTAnalyzer");
                 }
                 else
                 {
@@ -612,7 +613,8 @@ namespace FTAnalyzer.Forms
             {
                 if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy || EmptyViewPortsBackgroundWorker.IsBusy)
                 {
-                    UIHelpers.ShowMessage(new Form() { TopMost = true }, GEOCODINGERROR, "FTAnalyzer");
+                    using Form topMost = new() { TopMost = true };
+                    UIHelpers.ShowMessage(topMost, GEOCODINGERROR, "FTAnalyzer");
                 }
                 else
                 {
@@ -708,7 +710,8 @@ namespace FTAnalyzer.Forms
             }
             catch (Exception ex)
             {
-                UIHelpers.ShowMessage(new Form() { TopMost = true }, $"Error Google Geocoding: {ex.Message}", "FTAnalyzer Geocoding");
+                using Form topMost = new() { TopMost = true };
+                UIHelpers.ShowMessage(topMost, $"Error Google Geocoding: {ex.Message}", "FTAnalyzer Geocoding");
             }
         }
 
@@ -851,14 +854,16 @@ namespace FTAnalyzer.Forms
                     }
                 }
                 ft.ClearLocations(); // Locations tab needs to be invalidated so it refreshes
+                using Form topMost = new() { TopMost = true };
                 if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max", StringComparison.OrdinalIgnoreCase))
-                    UIHelpers.ShowMessage(new Form() { TopMost = true }, $"Finished Google Geocoding.\n{txtGoogleWait.Text}\nPlease wait 24hrs before trying again as Google\nwill not allow further geocoding before then.", "FTAnalyzer Geocoding");
+                    UIHelpers.ShowMessage(topMost, $"Finished Google Geocoding.\n{txtGoogleWait.Text}\nPlease wait 24hrs before trying again as Google\nwill not allow further geocoding before then.", "FTAnalyzer Geocoding");
                 else
-                    UIHelpers.ShowMessage(new Form() { TopMost = true }, "Finished Google Geocoding.", "FTAnalyzer Geocoding");
+                    UIHelpers.ShowMessage(topMost, "Finished Google Geocoding.", "FTAnalyzer Geocoding");
             }
             catch (Exception ex)
             {
-                UIHelpers.ShowMessage(new Form() { TopMost = true }, $"Error Google Geocoding: {ex.Message}", "FTAnalyzer Geocoding");
+                using Form topMost = new() { TopMost = true };
+                UIHelpers.ShowMessage(topMost, $"Error Google Geocoding: {ex.Message}", "FTAnalyzer Geocoding");
             }
         }
 
@@ -979,7 +984,8 @@ namespace FTAnalyzer.Forms
         {
             if (reverseGeocodeBackgroundWorker.IsBusy)
             {
-                UIHelpers.ShowMessage(new Form() { TopMost = true }, GEOCODINGERROR, "FTAnalyzer");
+                using Form topMost = new() { TopMost = true };
+                UIHelpers.ShowMessage(topMost, GEOCODINGERROR, "FTAnalyzer");
             }
             else
             {
@@ -1072,14 +1078,16 @@ namespace FTAnalyzer.Forms
                     }
                 }
                 ft.ClearLocations(); // Locations tab needs to be invalidated so it refreshes
+                using Form topMost = new() { TopMost = true };
                 if (txtGoogleWait.Text.Length > 3 && txtGoogleWait.Text[..3].Equals("Max", StringComparison.OrdinalIgnoreCase))
-                    UIHelpers.ShowMessage(new Form() { TopMost = true }, $"Finished Reverse Geocoding.\n{txtGoogleWait.Text}\nPlease wait 24hrs before trying again as Google\nwill not allow further reverse geocoding before then.", "FTAnalyzer Geocoding");
+                    UIHelpers.ShowMessage(topMost, $"Finished Reverse Geocoding.\n{txtGoogleWait.Text}\nPlease wait 24hrs before trying again as Google\nwill not allow further reverse geocoding before then.", "FTAnalyzer Geocoding");
                 else
-                    UIHelpers.ShowMessage(new Form() { TopMost = true }, "Finished Reverse Geocoding.", "FTAnalyzer Geocoding");
+                    UIHelpers.ShowMessage(topMost, "Finished Reverse Geocoding.", "FTAnalyzer Geocoding");
             }
             catch (Exception ex)
             {
-                UIHelpers.ShowMessage(new Form() { TopMost = true }, "Error Reverse Geocoding : " + ex.Message, "FTAnalyzer Geocoding");
+                using Form topMost = new() { TopMost = true };
+                UIHelpers.ShowMessage(topMost, "Error Reverse Geocoding : " + ex.Message, "FTAnalyzer Geocoding");
             }
         }
 
@@ -1187,7 +1195,8 @@ namespace FTAnalyzer.Forms
         {
             if (googleGeocodeBackgroundWorker.IsBusy || OSGeocodeBackgroundWorker.IsBusy)
             {
-                UIHelpers.ShowMessage(new Form() { TopMost = true }, GEOCODINGERROR, "FTAnalyzer");
+                using Form topMost = new() { TopMost = true };
+                UIHelpers.ShowMessage(topMost, GEOCODINGERROR, "FTAnalyzer");
             }
             else
             {
@@ -1208,7 +1217,8 @@ namespace FTAnalyzer.Forms
             if (LoadOS50kGazetteer())
             {
                 ProcessOS50kGazetteerData(worker, e);
-                UIHelpers.ShowMessage(new Form() { TopMost = true }, "Finished Ordnance Survey Geocoding", "FTAnalyzer Geocoding");
+                using Form topMost = new() { TopMost = true };
+                UIHelpers.ShowMessage(topMost, "Finished Ordnance Survey Geocoding", "FTAnalyzer Geocoding");
             }
         }
 
@@ -1233,7 +1243,8 @@ namespace FTAnalyzer.Forms
             catch (Exception e)
             {
                 //log.Warn("Failed to load OS50k Gazetteer error was : " + e.Message);
-                UIHelpers.ShowMessage(new Form() { TopMost = true }, $"Failed to load OS50k Gazetteer error was : {e.Message}");
+                using Form topMost = new() { TopMost = true };
+                UIHelpers.ShowMessage(topMost, $"Failed to load OS50k Gazetteer error was : {e.Message}");
             }
             OS50kDictionary = null; // only reach here on exception so discard partially loaded file
             OS50k = null;

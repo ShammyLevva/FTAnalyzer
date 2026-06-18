@@ -409,7 +409,7 @@ namespace FTAnalyzer.Forms
             if (length > 5000000)
             {
                 string zipFilename = filename.Replace(".kml", ".kmz", StringComparison.Ordinal);
-                ZipFile zip = new(zipFilename)
+                using ZipFile zip = new(zipFilename)
                 {
                     filename
                 };

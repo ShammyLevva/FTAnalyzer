@@ -1,4 +1,5 @@
-﻿using FTAnalyzer.Filters;
+#pragma warning disable CA2000 // Modeless WinForms forms are owned by the Windows message loop; lifetime is managed externally
+using FTAnalyzer.Filters;
 using FTAnalyzer.Graphics;
 using FTAnalyzer.Properties;
 using FTAnalyzer.Shared.Utilities;
@@ -151,8 +152,8 @@ namespace FTAnalyzer.Forms
 
                 string currentRowText = "";
                 bool highlighted = true;
-                Font boldFont = new(dgCensus.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
-                Font regularFont = new(dgCensus.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Regular);
+                using Font boldFont = new(dgCensus.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
+                using Font regularFont = new(dgCensus.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Regular);
 
                 string sortedPropertyName = dgCensus.SortedColumn.DataPropertyName;
                 if (string.IsNullOrEmpty(sortedPropertyName))

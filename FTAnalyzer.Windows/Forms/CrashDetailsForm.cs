@@ -1,3 +1,4 @@
+#pragma warning disable CA2000 // WinForms controls added to Controls collection are owned and disposed by the parent form
 namespace FTAnalyzer.Forms
 {
     public sealed class CrashDetailsForm : Form

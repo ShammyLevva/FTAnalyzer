@@ -58,8 +58,8 @@ namespace FTAnalyzer.Graphics
         {
             if (box != null)
             {
-                Brush borderBrush = new SolidBrush(borderColor);
-                Pen borderPen = new(borderBrush, borderWidth);
+                using SolidBrush borderBrush = new(borderColor);
+                using Pen borderPen = new(borderBrush, borderWidth);
                 SizeF strSize = g.MeasureString(box.Text, box.Font);
                 Rectangle rect = new(box.ClientRectangle.X,
                                      box.ClientRectangle.Y + (int)(strSize.Height / 2),

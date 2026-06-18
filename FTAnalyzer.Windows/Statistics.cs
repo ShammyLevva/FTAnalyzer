@@ -145,7 +145,7 @@ namespace FTAnalyzer
                         { "_wp_http_referer", "/Results" },
                         { "submit", "Search" }
                     };
-                HttpRequestMessage req = new(HttpMethod.Post, "https://one-name.org/Results")
+                using HttpRequestMessage req = new(HttpMethod.Post, "https://one-name.org/Results")
                 {
                     Content = new FormUrlEncodedContent(parameters)
                 };
@@ -156,7 +156,7 @@ namespace FTAnalyzer
                 string responsebody = await response.Content.ReadAsStringAsync();
                 string filename = Path.Combine(Path.GetTempPath(), "FTA-GOONS.html");
                 File.WriteAllText(filename, responsebody);
-                Process p = new()
+                using Process p = new()
                 {
                     StartInfo = new ProcessStartInfo(filename)
                     {

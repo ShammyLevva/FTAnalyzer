@@ -15,8 +15,8 @@ namespace FTAnalyzer.Utilities
                 float TopMargin = e.MarginBounds.Top;
                 string? Line = null;
                 Font PrintFont = rtb.Font;
-                if (PrintFont.SizeInPoints < 11)
-                    PrintFont = new(PrintFont.FontFamily, 11f);
+                using Font? ownedFont = PrintFont.SizeInPoints < 11 ? new(PrintFont.FontFamily, 11f) : null;
+                if (ownedFont is not null) PrintFont = ownedFont;
                 int maxWidth = e.MarginBounds.Right - e.MarginBounds.Left;
                 int maxHeight = e.MarginBounds.Bottom - e.MarginBounds.Top;
                 float fontHeight = e.Graphics is null ? 0 : PrintFont.GetHeight(e.Graphics);

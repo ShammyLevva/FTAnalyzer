@@ -1,4 +1,5 @@
-﻿using FTAnalyzer.Filters;
+#pragma warning disable CA2000 // Modeless WinForms forms are owned by the Windows message loop; lifetime is managed externally
+using FTAnalyzer.Filters;
 using FTAnalyzer.Utilities;
 using System.ComponentModel;
 
