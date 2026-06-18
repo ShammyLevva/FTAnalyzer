@@ -17,7 +17,7 @@ namespace FTAnalyzer.Forms
         int maxGeoCodedYear;
         int geocodedRange;
         int yearLimit;
-        ClusterLayer clusters;
+        ClusterLayer? clusters;
         bool loading;
         readonly IProgress<string> outputText;
 
@@ -113,6 +113,7 @@ namespace FTAnalyzer.Forms
                     txtLocations.Text = locations.Count + " Locations in total for year " + year;
                 }
                 txtLocations.Text += " (you may need to zoom out to see them all). Use arrow tool then select icon to view ancestors at location";
+                if (clusters is null) return;
                 clusters.Clear();
                 foreach (MapLocation loc in locations)
                 {
@@ -233,13 +234,13 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.Default;
         }
 
-        void MapBox1_MapViewOnChange() => clusters.Refresh();
+        void MapBox1_MapViewOnChange() => clusters?.Refresh();
 
         void MapBox1_MapZoomChanged(double zoom) => RefreshClusters();
 
         public void RefreshClusters()
         {
-            clusters.Refresh();
+            clusters?.Refresh();
             RefreshMap();
         }
 

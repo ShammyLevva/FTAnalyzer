@@ -13,11 +13,11 @@ namespace FTAnalyzer.Mapping
 
         public IList<FeatureDataRow> Features { get { return cluster; } }
 
-        public Geometry Geometry { get { return Centroid; } }
+        public Geometry? Geometry { get { return Centroid; } }
 
         public string ClusterType { get { return (cluster.Count < _minSize) ? FEATURE : CLUSTER; } }
 
-        public NetTopologySuite.Geometries.Point Centroid { get; private set; }
+        public NetTopologySuite.Geometries.Point? Centroid { get; private set; }
 
         public void AddFeature(FeatureDataRow row)
         {
@@ -29,7 +29,7 @@ namespace FTAnalyzer.Mapping
 
         public bool IsFeatureInClusterBounds(FeatureDataRow row)
         {
-            return Centroid.Distance(row.Geometry) <= _gridSize;
+            return Centroid is not null && Centroid.Distance(row.Geometry) <= _gridSize;
         }
 
         public void UpdateCentroid(NetTopologySuite.Geometries.Point point)
@@ -39,7 +39,7 @@ namespace FTAnalyzer.Mapping
             {
                 Centroid = point;
             }
-            else
+            else if (Centroid is not null)
             {
                 double newCount = oldCount + 1;
                 double X = (Centroid.X * oldCount + point.X) / newCount;

@@ -71,7 +71,7 @@ namespace FTAnalyzer.Mapping
             }
         }
 
-        static ICoordinateTransformation wgs84toGoogle;
+        static ICoordinateTransformation? wgs84toGoogle;
 
         static readonly CoordinateTransformationFactory ctFact = new();
         static readonly CoordinateSystemFactory csFact = new();

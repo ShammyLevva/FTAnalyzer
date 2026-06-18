@@ -79,7 +79,7 @@ namespace FTAnalyzer.Forms
         ]);
 
         public delegate void GoogleEventHandler(object? sender, GoogleWaitingEventArgs e);
-        public static event GoogleEventHandler WaitingForGoogle;
+        public static event GoogleEventHandler? WaitingForGoogle;
         public static bool ThreadCancelled { get; set; }
 
         public GoogleMap()

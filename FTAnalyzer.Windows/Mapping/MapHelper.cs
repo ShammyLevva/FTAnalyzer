@@ -18,7 +18,7 @@ namespace FTAnalyzer.Mapping
 {
     public class MapHelper
     {
-        static MapHelper instance;
+        static MapHelper? instance;
         readonly FamilyTree ft = FamilyTree.Instance;
 
         MapHelper()

@@ -4,7 +4,7 @@ namespace FTAnalyzer.UserControls
 {
     public partial class FontSettingsUI : UserControl, IOptions
     {
-        Font selectedFont;
+        Font? selectedFont;
         readonly int fontNumber;
         float fontWidth;
         float fontSize;
@@ -22,7 +22,7 @@ namespace FTAnalyzer.UserControls
 
         public void Save()
         {
-            FontSettings.Default.SelectedFont = selectedFont;
+            if (selectedFont is not null) FontSettings.Default.SelectedFont = selectedFont;
             FontSettings.Default.FontNumber = tbFontScale.Value;
             FontSettings.Default.FontWidth = fontWidth;
             FontSettings.Default.FontSize = fontSize;
@@ -70,7 +70,7 @@ namespace FTAnalyzer.UserControls
 
         #endregion
 
-        public static event EventHandler GlobalFontChanged;
+        public static event EventHandler? GlobalFontChanged;
         protected static void OnFontChanged()
         {
             //Update Fonts on all forms
@@ -108,7 +108,7 @@ namespace FTAnalyzer.UserControls
                         fontHeight = 27;
                         break;
                 }
-                lbSample.Font = selectedFont;
+                if (selectedFont is not null) lbSample.Font = selectedFont;
             }
             catch (Exception) { }
         }

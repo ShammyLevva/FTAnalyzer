@@ -3,6 +3,7 @@ using FTAnalyzer.Shared.Utilities;
 using Microsoft.Win32;
 using SharpMap.Forms;
 using SharpMap.Layers;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FTAnalyzer.Forms.Controls
 {
@@ -48,6 +49,7 @@ namespace FTAnalyzer.Forms.Controls
             }
         }
 
+        [MemberNotNull(nameof(mnuOpenStreetMap), nameof(mnuOpenHistoricMap), nameof(mnuBingMapAerial), nameof(mnuBingMapRoads), nameof(mnuBingMapHybrid))]
         void SetupDropdown()
         {
             TileSourceFactory factory = new();
