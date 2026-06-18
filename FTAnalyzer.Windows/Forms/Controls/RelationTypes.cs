@@ -86,19 +86,7 @@ namespace FTAnalyzer.Forms.Controls
 
         void Tickbox_CheckedChanged(object sender, EventArgs e) => OnRelationTypesChanged();
 
-        void RelationTypes_Layout(object sender, LayoutEventArgs e)
-        {
-            //UIHelpers.MoveControl(ckbMarriage, ckbDirects, UIHelpers.Direction.RIGHT);
-            //UIHelpers.MoveControl(ckbUnknown, ckbMarriage, UIHelpers.Direction.RIGHT);
-            //UIHelpers.MoveControl(ckbBlood, ckbDirects, UIHelpers.Direction.BELOW);
-            //UIHelpers.MoveControl(ckbDescendants, ckbBlood, UIHelpers.Direction.RIGHT);
-            //UIHelpers.MoveControl(ckbMarriageDB, ckbBlood, UIHelpers.Direction.BELOW);
-            //UIHelpers.MoveControl(ckbLinked, ckbMarriageDB, UIHelpers.Direction.RIGHT);
-            ////if (ckbUnknown.Right + ckbUnknown.Margin.Right > Width)
-            ////    Width = ckbUnknown.Right + ckbUnknown.Margin.Right;
-            //if (ckbLinked.Bottom + ckbLinked.Margin.Bottom > Height)
-            //    Height = ckbLinked.Bottom + ckbLinked.Margin.Bottom;
-        }
+        void RelationTypes_Layout(object sender, LayoutEventArgs e) { }
 
         void GroupBox2_Paint(object sender, PaintEventArgs e)
         {

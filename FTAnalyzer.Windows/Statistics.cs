@@ -81,20 +81,53 @@ namespace FTAnalyzer
 
         public List<IDisplaySurnames> Surnames(Predicate<Individual> indFilter, Predicate<Family> famFilter, IProgress<int> progress, bool ignoreCase)
         {
-            IEnumerable<Individual> list = ft.AllIndividuals.Where(x => x.Surname != Individual.UNKNOWN_NAME).Filter(indFilter).GroupBy(x => x.Surname).Select(group => group.First());
-            surnames = [.. list.Select(x => new SurnameStats(x.Surname))];
-            int maximum = list.Count();
-            int value = 0;
-            foreach (SurnameStats stat in surnames)
+            StringComparer comparer = ignoreCase ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal;
+
+            // Single pass over individuals: count per surname and capture canonical display name
+            Dictionary<string, int> individualCounts = new(comparer);
+            Dictionary<string, string> canonicalName = new(comparer);
+            foreach (Individual ind in ft.AllIndividuals)
             {
-                stat.Individuals = ignoreCase ?
-                        ft.AllIndividuals.Filter(indFilter).Count(x => x.Surname.Equals(stat.Surname, StringComparison.OrdinalIgnoreCase))
-                      : ft.AllIndividuals.Filter(indFilter).Count(x => x.Surname.Equals(stat.Surname));
-                stat.Families = ft.AllFamilies.Filter(famFilter).Count(x => x.ContainsSurname(stat.Surname, ignoreCase));
-                stat.Marriages = ft.AllFamilies.Filter(famFilter).Count(x => x.ContainsSurname(stat.Surname, ignoreCase) && x.MaritalStatus == Family.MARRIED);
-                value++;
-                if (value % 25 == 0)
-                    progress.Report((100 * value) / maximum);
+                if (ind.Surname == Individual.UNKNOWN_NAME || !indFilter(ind)) continue;
+                individualCounts[ind.Surname] = individualCounts.GetValueOrDefault(ind.Surname) + 1;
+                canonicalName.TryAdd(ind.Surname, ind.Surname);
+            }
+
+            // Single pass over families: count families and marriages per surname
+            Dictionary<string, int> familyCounts = new(comparer);
+            Dictionary<string, int> marriageCounts = new(comparer);
+            foreach (Family fam in ft.AllFamilies)
+            {
+                if (!famFilter(fam)) continue;
+                HashSet<string> seenInFamily = new(comparer);
+                foreach (Individual member in fam.Members)
+                {
+                    if (member.Surname != Individual.UNKNOWN_NAME)
+                        seenInFamily.Add(member.Surname);
+                }
+                foreach (string surname in seenInFamily)
+                {
+                    familyCounts[surname] = familyCounts.GetValueOrDefault(surname) + 1;
+                    if (fam.MaritalStatus == Family.MARRIED)
+                        marriageCounts[surname] = marriageCounts.GetValueOrDefault(surname) + 1;
+                }
+            }
+
+            // Build result list and report progress against the canonical surname count
+            int total = canonicalName.Count;
+            int processed = 0;
+            surnames = [];
+            foreach (KeyValuePair<string, string> kvp in canonicalName)
+            {
+                SurnameStats stat = new(kvp.Value)
+                {
+                    Individuals = individualCounts.GetValueOrDefault(kvp.Key),
+                    Families = familyCounts.GetValueOrDefault(kvp.Key),
+                    Marriages = marriageCounts.GetValueOrDefault(kvp.Key),
+                };
+                surnames.Add(stat);
+                if (++processed % 25 == 0)
+                    progress.Report((100 * processed) / total);
             }
             return [.. surnames.Distinct(new SurnameStatsComparer())];
         }
