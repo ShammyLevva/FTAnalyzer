@@ -4,9 +4,7 @@ namespace FTAnalyzer.Utilities
 {
     class Printing(ScrollingRichTextBox rtb) : IDisposable
     {
-#pragma warning disable CA2213 // rtb is a borrowed reference owned by the caller, not by Printing
         readonly ScrollingRichTextBox rtb = rtb;
-#pragma warning restore CA2213
         readonly StringReader reader = new(rtb.Text);
 
         public void PrintPage(object sender, PrintPageEventArgs e)
@@ -26,8 +24,8 @@ namespace FTAnalyzer.Utilities
                 float YPosition = TopMargin;
                 while (YPosition < maxHeight && ((Line = reader.ReadLine()) is not null))
                 {
-                    SizeF sf = e.Graphics.MeasureString(Line, PrintFont, maxWidth);
-                    e.Graphics.DrawString(Line, PrintFont, PrintBrush, new RectangleF(new PointF(LeftMargin, YPosition), sf), StringFormat.GenericTypographic);
+                    SizeF sf = e.Graphics is null ? SizeF.Empty : e.Graphics.MeasureString(Line, PrintFont, maxWidth);
+                    e.Graphics?.DrawString(Line, PrintFont, PrintBrush, new RectangleF(new PointF(LeftMargin, YPosition), sf), StringFormat.GenericTypographic);
                     YPosition += sf.Height;
                 }
                 e.HasMorePages = Line is not null;

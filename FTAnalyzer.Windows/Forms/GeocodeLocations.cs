@@ -380,7 +380,7 @@ namespace FTAnalyzer.Forms
 
         void Facts_TextChanged(object sender, EventArgs e)
         {
-            if (reportFormHelper is not null) reportFormHelper.PrintTitle = Text;
+            reportFormHelper?.PrintTitle = Text;
         }
 
         void MnuExportToExcel_Click(object sender, EventArgs e) => reportFormHelper?.DoExportToExcel<IDisplayGeocodedLocation>();

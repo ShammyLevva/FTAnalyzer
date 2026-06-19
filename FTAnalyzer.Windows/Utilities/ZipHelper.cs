@@ -29,7 +29,7 @@ namespace FTAnalyzer.Utilities
                     // Manipulate the output filename here as desired.
                     var fullZipToPath = Path.Combine(outFolder, entryFileName);
                     var directoryName = Path.GetDirectoryName(fullZipToPath);
-                    if (directoryName.Length > 0)
+                    if (!string.IsNullOrEmpty(directoryName))
                     {
                         Directory.CreateDirectory(directoryName);
                     }

@@ -175,7 +175,7 @@ namespace FTAnalyzer.UserControls
                 {
                     panel1.Controls[i].Visible = false;
                 }
-                string tableTag = treeView1.SelectedNode.Tag.ToString() ?? string.Empty;
+                string tableTag = treeView1.SelectedNode.Tag?.ToString() ?? string.Empty;
                 if (!string.IsNullOrEmpty(tableTag))
                     _lookupTable[tableTag].Visible = true;
                 ResumeLayout();

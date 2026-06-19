@@ -100,7 +100,7 @@ namespace FTAnalyzer.Mapping
             foreach (DataGridViewRow row in rows)
             {
                 DisplayFact? dispFact = (DisplayFact?)row.DataBoundItem;
-                if (dispFact.Ind is not null)
+                if (dispFact?.Ind is not null)
                 {
                     MapLocation ml = new(dispFact.Ind, dispFact.Fact, dispFact.FactDate);
                     AddFeatureDataRow(dispFact, ml, LIGHT_GREEN);
@@ -108,7 +108,7 @@ namespace FTAnalyzer.Mapping
             }
         }
 
-        void AddFeatureDataRow(DisplayFact dispfact, MapLocation loc, string colour)
+        void AddFeatureDataRow(DisplayFact? dispfact, MapLocation loc, string colour)
         {
             GeoResponse.CResult.CGeometry.CViewPort vp = loc.Location.ViewPort;
             FeatureDataRow r = TearDropLocations.NewRow();
