@@ -204,6 +204,9 @@ namespace FTAnalyzer
             rtbLostCousins.Font = normalFont;
             treeViewLocations.Font = normalFont;
             udAgeFilter.Left = labCensusExcludeOverAge.Right + 6;
+            cenDate.Top = relTypesCensus.Bottom;       // relTypesCensus auto-sizes with font — keep cenDate flush below it
+            groupBox10.Top = cenDate.Bottom + 7;       // preserve design gap (178−171 = 7px)
+            groupBox4.Top = groupBox10.Bottom + 10;    // preserve design gap (261−251 = 10px)
             SetStatusBar();
             CheckMaxWindowSizes(new Point(0, 0));
             Refresh();
