@@ -210,9 +210,6 @@ namespace FTAnalyzer
 
         private void SetStatusBar()
         {
-            tsCountLabel.Font = normalFont;
-            tsHintsLabel.Font = normalFont;
-            tsStatusLabel.Font = normalFont;
         }
 
 
