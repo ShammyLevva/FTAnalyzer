@@ -50,6 +50,7 @@ namespace FTAnalyzer.Forms.Controls
             // groupBox2
             //
             groupBox2.AutoSize = true;
+            groupBox2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             groupBox2.Controls.Add(tableLayoutPanel1);
             groupBox2.Location = new Point(4, 3);
             groupBox2.Margin = new Padding(4, 3, 4, 3);
@@ -72,8 +73,8 @@ namespace FTAnalyzer.Forms.Controls
             tableLayoutPanel1.Controls.Add(ckbMarriage, 1, 0);
             tableLayoutPanel1.Controls.Add(ckbUnknown, 2, 0);
             tableLayoutPanel1.Controls.Add(ckbBlood, 0, 1);
-            tableLayoutPanel1.Controls.Add(ckbDescendants, 1, 1);
-            tableLayoutPanel1.Controls.Add(ckbMarriageDB, 0, 2);
+            tableLayoutPanel1.Controls.Add(ckbMarriageDB, 1, 1);
+            tableLayoutPanel1.Controls.Add(ckbDescendants, 0, 2);
             tableLayoutPanel1.Controls.Add(ckbLinked, 1, 2);
             tableLayoutPanel1.Location = new Point(4, 19);
             tableLayoutPanel1.Margin = new Padding(0);
@@ -145,7 +146,7 @@ namespace FTAnalyzer.Forms.Controls
             ckbMarriageDB.AutoSize = true;
             ckbMarriageDB.Checked = true;
             ckbMarriageDB.CheckState = CheckState.Checked;
-            ckbMarriageDB.Margin = new Padding(4, 3, 12, 3);
+            ckbMarriageDB.Margin = new Padding(4, 3, 4, 3);
             ckbMarriageDB.Name = "ckbMarriageDB";
             ckbMarriageDB.TabIndex = 5;
             ckbMarriageDB.Text = "Married to Blood or Direct";
