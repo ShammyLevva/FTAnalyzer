@@ -203,13 +203,15 @@ namespace FTAnalyzer
             rtbToday.Font = normalFont;
             rtbLostCousins.Font = normalFont;
             treeViewLocations.Font = normalFont;
+            udAgeFilter.Left = labCensusExcludeOverAge.Right + 6;
             SetStatusBar();
             CheckMaxWindowSizes(new Point(0, 0));
             Refresh();
         }
 
-        private void SetStatusBar()
+        void SetStatusBar()
         {
+            statusStrip.Font = new Font(Font.FontFamily, 9F);
         }
 
 
@@ -2791,21 +2793,15 @@ namespace FTAnalyzer
 
         void CheckMaxWindowSizes(Point topleft)
         {
-            int boundaryWidth = rtbOutput.Margin.Left + tabSelector.Margin.Left + tabSelector.Margin.Right;
-            int boundaryHeight = panel2.Height - statusStrip.Height - menuStrip1.Height - tabSelector.Location.Y + tabSelector.Margin.Top + tabSelector.Margin.Bottom;
             Rectangle workarea = Screen.GetWorkingArea(topleft);
-            string message1 = $"CheckMaxWindowSizes: boundaryWidth:{boundaryWidth}, boundaryHeight: {boundaryHeight}";
-            string message2 = $"tabselector- X: {tabSelector.Location.X} Y: {tabSelector.Location.Y}";
-            log.Debug(message1);
-            log.Debug(message2);
             if (Width > workarea.Width)
                 Width = workarea.Width;
             if (Height > workarea.Height)
                 Height = workarea.Height;
-            if (tabSelector.Left + tabSelector.Width + boundaryWidth > Size.Width)
-                tabSelector.Width = Size.Width - tabSelector.Left - boundaryWidth;
-            if (tabSelector.Top + tabSelector.Height + boundaryHeight > Size.Height)
-                tabSelector.Height = Size.Height - tabSelector.Top - boundaryHeight;
+            int boundaryWidth = rtbOutput.Margin.Left + tabSelector.Margin.Left + tabSelector.Margin.Right;
+            if (tabSelector.Left + tabSelector.Width + boundaryWidth > ClientSize.Width)
+                tabSelector.Width = ClientSize.Width - tabSelector.Left - boundaryWidth;
+            tabSelector.Height = statusStrip.Top - tabSelector.Top - tabSelector.Margin.Bottom;
         }
         #endregion
 
