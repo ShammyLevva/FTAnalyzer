@@ -139,7 +139,7 @@ namespace FTAnalyzer.Forms.Controls
             // CensusCountry
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             Controls.Add(groupBox1);
             Margin = new Padding(4, 3, 4, 3);
             Name = "CensusCountry";
