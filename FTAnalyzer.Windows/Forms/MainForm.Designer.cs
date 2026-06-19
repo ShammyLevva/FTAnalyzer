@@ -1102,7 +1102,7 @@ namespace FTAnalyzer
             // 
             // statusStrip
             // 
-            statusStrip.ImageScalingSize = new Size(32, 32);
+            statusStrip.ImageScalingSize = new Size(16, 16);
             statusStrip.Items.AddRange(new ToolStripItem[] { tsCountLabel, tsHintsLabel, tspbTabProgress, tsStatusLabel });
             statusStrip.Location = new Point(0, 529);
             statusStrip.Name = "statusStrip";
@@ -1378,7 +1378,7 @@ namespace FTAnalyzer
             chkAnyCensusYear.AutoSize = true;
             chkAnyCensusYear.Checked = true;
             chkAnyCensusYear.CheckState = CheckState.Checked;
-            chkAnyCensusYear.Location = new Point(420, 121);
+            chkAnyCensusYear.Location = new Point(420, 118);
             chkAnyCensusYear.Margin = new Padding(4);
             chkAnyCensusYear.Name = "chkAnyCensusYear";
             chkAnyCensusYear.RightToLeft = RightToLeft.Yes;
@@ -1393,7 +1393,7 @@ namespace FTAnalyzer
             ckbIgnoreAll.AutoSize = true;
             ckbIgnoreAll.Checked = true;
             ckbIgnoreAll.CheckState = CheckState.Checked;
-            ckbIgnoreAll.Location = new Point(420, 151);
+            ckbIgnoreAll.Location = new Point(420, 148);
             ckbIgnoreAll.Margin = new Padding(4);
             ckbIgnoreAll.Name = "ckbIgnoreAll";
             ckbIgnoreAll.RightToLeft = RightToLeft.Yes;
@@ -2464,8 +2464,8 @@ namespace FTAnalyzer
             groupBox2.Controls.Add(chkExcludeUnknownBirths);
             groupBox2.Controls.Add(labCensusTabSurname);
             groupBox2.Controls.Add(txtCensusSurname);
-            groupBox2.Controls.Add(labCensusExcludeOverAge);
             groupBox2.Controls.Add(udAgeFilter);
+            groupBox2.Controls.Add(labCensusExcludeOverAge);
             groupBox2.Controls.Add(cenDate);
             groupBox2.Controls.Add(relTypesCensus);
             groupBox2.Location = new Point(9, 7);
@@ -2480,7 +2480,7 @@ namespace FTAnalyzer
             // 
             // btnAliveOnDate
             // 
-            btnAliveOnDate.Location = new Point(750, 143);
+            btnAliveOnDate.Location = new Point(750, 140);
             btnAliveOnDate.Margin = new Padding(4);
             btnAliveOnDate.Name = "btnAliveOnDate";
             btnAliveOnDate.Size = new Size(350, 29);
@@ -2491,7 +2491,7 @@ namespace FTAnalyzer
             // 
             // txtAliveDates
             // 
-            txtAliveDates.Location = new Point(830, 97);
+            txtAliveDates.Location = new Point(830, 72);
             txtAliveDates.Margin = new Padding(4);
             txtAliveDates.Name = "txtAliveDates";
             txtAliveDates.Size = new Size(270, 23);
@@ -2503,7 +2503,7 @@ namespace FTAnalyzer
             // labCensusAliveDates
             // 
             labCensusAliveDates.AutoSize = true;
-            labCensusAliveDates.Location = new Point(747, 100);
+            labCensusAliveDates.Location = new Point(747, 76);
             labCensusAliveDates.Margin = new Padding(4, 0, 4, 0);
             labCensusAliveDates.Name = "labCensusAliveDates";
             labCensusAliveDates.Size = new Size(71, 15);
@@ -2517,7 +2517,7 @@ namespace FTAnalyzer
             groupBox10.Controls.Add(btnShowCensusEntered);
             groupBox10.Controls.Add(btnRandomSurnameEntered);
             groupBox10.Controls.Add(btnRandomSurnameMissing);
-            groupBox10.Location = new Point(11, 181);
+            groupBox10.Location = new Point(11, 178);
             groupBox10.Margin = new Padding(4);
             groupBox10.Name = "groupBox10";
             groupBox10.Padding = new Padding(4);
@@ -2647,7 +2647,7 @@ namespace FTAnalyzer
             // chkExcludeUnknownBirths
             // 
             chkExcludeUnknownBirths.AutoSize = true;
-            chkExcludeUnknownBirths.Location = new Point(420, 77);
+            chkExcludeUnknownBirths.Location = new Point(420, 74);
             chkExcludeUnknownBirths.Margin = new Padding(4);
             chkExcludeUnknownBirths.Name = "chkExcludeUnknownBirths";
             chkExcludeUnknownBirths.RightToLeft = RightToLeft.Yes;
@@ -2659,7 +2659,7 @@ namespace FTAnalyzer
             // labCensusTabSurname
             // 
             labCensusTabSurname.AutoSize = true;
-            labCensusTabSurname.Location = new Point(747, 45);
+            labCensusTabSurname.Location = new Point(747, 42);
             labCensusTabSurname.Margin = new Padding(4, 0, 4, 0);
             labCensusTabSurname.Name = "labCensusTabSurname";
             labCensusTabSurname.Size = new Size(54, 15);
@@ -2668,7 +2668,7 @@ namespace FTAnalyzer
             // 
             // txtCensusSurname
             // 
-            txtCensusSurname.Location = new Point(830, 41);
+            txtCensusSurname.Location = new Point(830, 38);
             txtCensusSurname.Margin = new Padding(4);
             txtCensusSurname.Name = "txtCensusSurname";
             txtCensusSurname.Size = new Size(270, 23);
@@ -2677,7 +2677,7 @@ namespace FTAnalyzer
             // labCensusExcludeOverAge
             // 
             labCensusExcludeOverAge.AutoSize = true;
-            labCensusExcludeOverAge.Location = new Point(420, 47);
+            labCensusExcludeOverAge.Location = new Point(420, 44);
             labCensusExcludeOverAge.Margin = new Padding(4, 0, 4, 0);
             labCensusExcludeOverAge.Name = "labCensusExcludeOverAge";
             labCensusExcludeOverAge.Size = new Size(192, 15);
@@ -2686,7 +2686,7 @@ namespace FTAnalyzer
             // 
             // udAgeFilter
             // 
-            udAgeFilter.Location = new Point(620, 45);
+            udAgeFilter.Location = new Point(659, 42);
             udAgeFilter.Margin = new Padding(4);
             udAgeFilter.Maximum = new decimal(new int[] { 110, 0, 0, 0 });
             udAgeFilter.Minimum = new decimal(new int[] { 60, 0, 0, 0 });
