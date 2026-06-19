@@ -213,10 +213,6 @@ namespace FTAnalyzer
             tsCountLabel.Font = normalFont;
             tsHintsLabel.Font = normalFont;
             tsStatusLabel.Font = normalFont;
-            statusStrip.Height = FontSettings.Default.FontHeight;
-            tsCountLabel.Height = FontSettings.Default.FontHeight;
-            tsHintsLabel.Height = FontSettings.Default.FontHeight;
-            tsStatusLabel.Height = FontSettings.Default.FontHeight;
         }
 
 
