@@ -207,6 +207,8 @@ namespace FTAnalyzer
             cenDate.Top = relTypesCensus.Bottom;       // relTypesCensus auto-sizes with font — keep cenDate flush below it
             groupBox10.Top = cenDate.Bottom + 7;       // preserve design gap (178−171 = 7px)
             groupBox4.Top = groupBox10.Bottom + 10;    // preserve design gap (261−251 = 10px)
+            groupBox2.Height = groupBox4.Bottom + 10;  // shrink/grow groupBox2 to hold its content after font scaling
+            groupBox9.Top = groupBox2.Bottom + 5;      // reposition groupBox9 below groupBox2 after font scaling
             SetStatusBar();
             CheckMaxWindowSizes(new Point(0, 0));
             Refresh();
