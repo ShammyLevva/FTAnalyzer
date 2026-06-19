@@ -258,8 +258,8 @@ namespace FTAnalyzer
             chkExcludeUnknownBirths = new CheckBox();
             labCensusTabSurname = new Label();
             txtCensusSurname = new TextBox();
-            labCensusExcludeOverAge = new Label();
             udAgeFilter = new NumericUpDown();
+            labCensusExcludeOverAge = new Label();
             cenDate = new FTAnalyzer.Forms.Controls.CensusDateSelector();
             relTypesCensus = new FTAnalyzer.Forms.Controls.RelationTypes();
             groupBox9 = new GroupBox();
@@ -1102,7 +1102,6 @@ namespace FTAnalyzer
             // 
             // statusStrip
             // 
-            statusStrip.ImageScalingSize = new Size(16, 16);
             statusStrip.Items.AddRange(new ToolStripItem[] { tsCountLabel, tsHintsLabel, tspbTabProgress, tsStatusLabel });
             statusStrip.Location = new Point(0, 529);
             statusStrip.Name = "statusStrip";
@@ -1378,7 +1377,7 @@ namespace FTAnalyzer
             chkAnyCensusYear.AutoSize = true;
             chkAnyCensusYear.Checked = true;
             chkAnyCensusYear.CheckState = CheckState.Checked;
-            chkAnyCensusYear.Location = new Point(420, 118);
+            chkAnyCensusYear.Location = new Point(420, 101);
             chkAnyCensusYear.Margin = new Padding(4);
             chkAnyCensusYear.Name = "chkAnyCensusYear";
             chkAnyCensusYear.RightToLeft = RightToLeft.Yes;
@@ -1393,7 +1392,7 @@ namespace FTAnalyzer
             ckbIgnoreAll.AutoSize = true;
             ckbIgnoreAll.Checked = true;
             ckbIgnoreAll.CheckState = CheckState.Checked;
-            ckbIgnoreAll.Location = new Point(420, 148);
+            ckbIgnoreAll.Location = new Point(420, 128);
             ckbIgnoreAll.Margin = new Padding(4);
             ckbIgnoreAll.Name = "ckbIgnoreAll";
             ckbIgnoreAll.RightToLeft = RightToLeft.Yes;
@@ -1977,10 +1976,9 @@ namespace FTAnalyzer
             // 
             // linkLabel2
             // 
-            linkLabel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             linkLabel2.AutoSize = true;
             linkLabel2.Font = new Font("Microsoft Sans Serif", 9.75F);
-            linkLabel2.Location = new Point(415, 101);
+            linkLabel2.Location = new Point(445, 101);
             linkLabel2.Margin = new Padding(4, 0, 4, 0);
             linkLabel2.Name = "linkLabel2";
             linkLabel2.Size = new Size(124, 16);
@@ -1992,10 +1990,9 @@ namespace FTAnalyzer
             // 
             // LabLostCousinsWeb
             // 
-            LabLostCousinsWeb.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             LabLostCousinsWeb.AutoSize = true;
             LabLostCousinsWeb.Font = new Font("Microsoft Sans Serif", 9.75F);
-            LabLostCousinsWeb.Location = new Point(415, 56);
+            LabLostCousinsWeb.Location = new Point(445, 56);
             LabLostCousinsWeb.Margin = new Padding(4, 0, 4, 0);
             LabLostCousinsWeb.Name = "LabLostCousinsWeb";
             LabLostCousinsWeb.Size = new Size(136, 16);
@@ -2068,7 +2065,7 @@ namespace FTAnalyzer
             // btnLCDuplicates
             // 
             btnLCDuplicates.AutoSize = true;
-            btnLCDuplicates.Location = new Point(195, 280);
+            btnLCDuplicates.Location = new Point(203, 280);
             btnLCDuplicates.Margin = new Padding(4);
             btnLCDuplicates.Name = "btnLCDuplicates";
             btnLCDuplicates.Size = new Size(176, 31);
@@ -2092,7 +2089,7 @@ namespace FTAnalyzer
             // btnLCnoCensus
             // 
             btnLCnoCensus.AutoSize = true;
-            btnLCnoCensus.Location = new Point(379, 280);
+            btnLCnoCensus.Location = new Point(395, 280);
             btnLCnoCensus.Margin = new Padding(4);
             btnLCnoCensus.Name = "btnLCnoCensus";
             btnLCnoCensus.Size = new Size(172, 31);
@@ -2480,7 +2477,7 @@ namespace FTAnalyzer
             // 
             // btnAliveOnDate
             // 
-            btnAliveOnDate.Location = new Point(750, 140);
+            btnAliveOnDate.Location = new Point(747, 122);
             btnAliveOnDate.Margin = new Padding(4);
             btnAliveOnDate.Name = "btnAliveOnDate";
             btnAliveOnDate.Size = new Size(350, 29);
@@ -2674,16 +2671,6 @@ namespace FTAnalyzer
             txtCensusSurname.Size = new Size(270, 23);
             txtCensusSurname.TabIndex = 29;
             // 
-            // labCensusExcludeOverAge
-            // 
-            labCensusExcludeOverAge.AutoSize = true;
-            labCensusExcludeOverAge.Location = new Point(420, 44);
-            labCensusExcludeOverAge.Margin = new Padding(4, 0, 4, 0);
-            labCensusExcludeOverAge.Name = "labCensusExcludeOverAge";
-            labCensusExcludeOverAge.Size = new Size(192, 15);
-            labCensusExcludeOverAge.TabIndex = 26;
-            labCensusExcludeOverAge.Text = "Exclude individuals over the age of ";
-            // 
             // udAgeFilter
             // 
             udAgeFilter.Location = new Point(659, 42);
@@ -2694,6 +2681,16 @@ namespace FTAnalyzer
             udAgeFilter.Size = new Size(50, 23);
             udAgeFilter.TabIndex = 25;
             udAgeFilter.Value = new decimal(new int[] { 90, 0, 0, 0 });
+            // 
+            // labCensusExcludeOverAge
+            // 
+            labCensusExcludeOverAge.AutoSize = true;
+            labCensusExcludeOverAge.Location = new Point(420, 44);
+            labCensusExcludeOverAge.Margin = new Padding(4, 0, 4, 0);
+            labCensusExcludeOverAge.Name = "labCensusExcludeOverAge";
+            labCensusExcludeOverAge.Size = new Size(192, 15);
+            labCensusExcludeOverAge.TabIndex = 26;
+            labCensusExcludeOverAge.Text = "Exclude individuals over the age of ";
             // 
             // cenDate
             // 
@@ -3853,7 +3850,7 @@ namespace FTAnalyzer
             chkSurnamesIgnoreCase.AutoSize = true;
             chkSurnamesIgnoreCase.Checked = true;
             chkSurnamesIgnoreCase.CheckState = CheckState.Checked;
-            chkSurnamesIgnoreCase.Location = new Point(580, 90);
+            chkSurnamesIgnoreCase.Location = new Point(605, 62);
             chkSurnamesIgnoreCase.Margin = new Padding(4);
             chkSurnamesIgnoreCase.Name = "chkSurnamesIgnoreCase";
             chkSurnamesIgnoreCase.Size = new Size(88, 19);
@@ -3863,7 +3860,7 @@ namespace FTAnalyzer
             // 
             // btnShowSurnames
             // 
-            btnShowSurnames.Location = new Point(393, 85);
+            btnShowSurnames.Location = new Point(418, 57);
             btnShowSurnames.Margin = new Padding(4);
             btnShowSurnames.Name = "btnShowSurnames";
             btnShowSurnames.Size = new Size(180, 26);
