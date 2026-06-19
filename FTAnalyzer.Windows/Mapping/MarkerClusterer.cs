@@ -53,8 +53,8 @@ namespace FTAnalyzer.Mapping
             NetTopologySuite.Geometries.Point rowCentre = row.Geometry.Centroid;
             foreach (MapCluster cluster in clusters)
             {
-                NetTopologySuite.Geometries.Point centre = cluster.Centroid;
-                if (centre.X != 0 && centre.Y != 0)
+                NetTopologySuite.Geometries.Point? centre = cluster.Centroid;
+                if (centre is not null && centre.X != 0 && centre.Y != 0)
                 {
                     double d = centre.Distance(rowCentre);
                     if (d < distance)
@@ -82,7 +82,7 @@ namespace FTAnalyzer.Mapping
             foreach (MapCluster cluster in clusters)
             {
                 FeatureDataRow row = FeatureDataTable.NewRow();
-                row.Geometry = cluster.Geometry;
+                row.Geometry = cluster.Geometry ?? new NetTopologySuite.Geometries.Point(0, 0);
                 row["Features"] = cluster.Features;
                 row["Count"] = cluster.Features.Count;
                 row["Label"] = cluster.Features.Count >= minClusterSize ? cluster.Features.Count.ToString() : string.Empty;

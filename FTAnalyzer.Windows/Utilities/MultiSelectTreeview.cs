@@ -26,9 +26,9 @@ namespace FTAnalyzer.Utilities
         }
 
         // Note we use the new keyword to Hide the native treeview's SelectedNode property.
-        private TreeNode m_SelectedNode;
+        private TreeNode? m_SelectedNode;
         [DefaultValue(null)]
-        public new TreeNode SelectedNode
+        public new TreeNode? SelectedNode
         {
             get => m_SelectedNode;
             set
@@ -332,7 +332,7 @@ namespace FTAnalyzer.Utilities
                             // Select the last node visible node in the tree.
                             // Don't expand branches incase the tree is virtual
                             TreeNode? ndLast = Nodes[0].LastNode;
-                            while (ndLast.IsExpanded && (ndLast.LastNode is not null))
+                            while (ndLast is not null && ndLast.IsExpanded && (ndLast.LastNode is not null))
                             {
                                 ndLast = ndLast.LastNode;
                             }
@@ -487,23 +487,25 @@ namespace FTAnalyzer.Utilities
                         int startDepth = Math.Min(ndStartP.Level, ndEndP.Level);
 
                         // Bring lower node up to common depth
-                        while (ndStartP.Level > startDepth)
+                        while (ndStartP is not null && ndStartP.Level > startDepth)
                         {
                             ndStartP = ndStartP.Parent;
                         }
 
                         // Bring lower node up to common depth
-                        while (ndEndP.Level > startDepth)
+                        while (ndEndP is not null && ndEndP.Level > startDepth)
                         {
                             ndEndP = ndEndP.Parent;
                         }
 
                         // Walk up the tree until we find the common parent
-                        while (ndStartP.Parent != ndEndP.Parent)
+                        while (ndStartP is not null && ndEndP is not null && ndStartP.Parent != ndEndP.Parent)
                         {
                             ndStartP = ndStartP.Parent;
                             ndEndP = ndEndP.Parent;
                         }
+
+                        if (ndStartP is null || ndEndP is null) return;
 
                         // Select the node
                         if (ndStartP.Index < ndEndP.Index)
