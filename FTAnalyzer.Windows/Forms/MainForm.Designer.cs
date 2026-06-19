@@ -154,6 +154,8 @@ namespace FTAnalyzer
             radioOnlyPreferred = new RadioButton();
             radioOnlyAlternate = new RadioButton();
             btnShowExclusions = new Button();
+            chkAnyCensusYear = new CheckBox();
+            ckbIgnoreAll = new CheckBox();
             btnUpdateLostCousinsWebsite = new Button();
             printPreviewDialog = new PrintPreviewDialog();
             printDialog = new PrintDialog();
@@ -242,7 +244,6 @@ namespace FTAnalyzer
             btnAliveOnDate = new Button();
             txtAliveDates = new TextBox();
             labCensusAliveDates = new Label();
-            chkAnyCensusYear = new CheckBox();
             groupBox10 = new GroupBox();
             btnShowCensusMissing = new Button();
             btnShowCensusEntered = new Button();
@@ -391,7 +392,6 @@ namespace FTAnalyzer
             MatchBirthLocation = new DataGridViewTextBoxColumn();
             saveDatabase = new SaveFileDialog();
             restoreDatabase = new OpenFileDialog();
-            ckbIgnoreAll = new CheckBox();
             menuStrip1.SuspendLayout();
             mnuSetRoot.SuspendLayout();
             statusStrip.SuspendLayout();
@@ -1176,7 +1176,7 @@ namespace FTAnalyzer
             dgCheckAncestors.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgCheckAncestors.ShowCellToolTips = false;
             dgCheckAncestors.ShowEditingIcon = false;
-            dgCheckAncestors.Size = new Size(1217, 341);
+            dgCheckAncestors.Size = new Size(187, 0);
             dgCheckAncestors.TabIndex = 7;
             toolTips.SetToolTip(dgCheckAncestors, "Double click to see list of facts for that individual");
             // 
@@ -1298,7 +1298,7 @@ namespace FTAnalyzer
             // 
             // btnRandomSurnameColour
             // 
-            btnRandomSurnameColour.Location = new Point(352, 20);
+            btnRandomSurnameColour.Location = new Point(288, 20);
             btnRandomSurnameColour.Margin = new Padding(4);
             btnRandomSurnameColour.Name = "btnRandomSurnameColour";
             btnRandomSurnameColour.Size = new Size(342, 29);
@@ -1315,7 +1315,7 @@ namespace FTAnalyzer
             cmbColourFamily.Location = new Point(91, 62);
             cmbColourFamily.Margin = new Padding(4);
             cmbColourFamily.Name = "cmbColourFamily";
-            cmbColourFamily.Size = new Size(472, 23);
+            cmbColourFamily.Size = new Size(406, 23);
             cmbColourFamily.TabIndex = 65;
             toolTips.SetToolTip(cmbColourFamily, "Select a family to limit the reports to just that family");
             cmbColourFamily.Click += CmbColourFamily_Click;
@@ -1372,6 +1372,36 @@ namespace FTAnalyzer
             toolTips.SetToolTip(btnShowExclusions, "Show Exclusions");
             btnShowExclusions.UseVisualStyleBackColor = true;
             btnShowExclusions.Click += BtnShowExclusions_Click;
+            // 
+            // chkAnyCensusYear
+            // 
+            chkAnyCensusYear.AutoSize = true;
+            chkAnyCensusYear.Checked = true;
+            chkAnyCensusYear.CheckState = CheckState.Checked;
+            chkAnyCensusYear.Location = new Point(420, 121);
+            chkAnyCensusYear.Margin = new Padding(4);
+            chkAnyCensusYear.Name = "chkAnyCensusYear";
+            chkAnyCensusYear.RightToLeft = RightToLeft.Yes;
+            chkAnyCensusYear.Size = new Size(314, 19);
+            chkAnyCensusYear.TabIndex = 36;
+            chkAnyCensusYear.Text = "Include ALL census years for Census Reference reports ";
+            toolTips.SetToolTip(chkAnyCensusYear, "Normally only the census selected on the dropdown is reported, ticking this includes all census records");
+            chkAnyCensusYear.UseVisualStyleBackColor = true;
+            // 
+            // ckbIgnoreAll
+            // 
+            ckbIgnoreAll.AutoSize = true;
+            ckbIgnoreAll.Checked = true;
+            ckbIgnoreAll.CheckState = CheckState.Checked;
+            ckbIgnoreAll.Location = new Point(420, 151);
+            ckbIgnoreAll.Margin = new Padding(4);
+            ckbIgnoreAll.Name = "ckbIgnoreAll";
+            ckbIgnoreAll.RightToLeft = RightToLeft.Yes;
+            ckbIgnoreAll.Size = new Size(303, 19);
+            ckbIgnoreAll.TabIndex = 42;
+            ckbIgnoreAll.Text = "Ignore ALL other filters for Census Reference reports ";
+            toolTips.SetToolTip(ckbIgnoreAll, "Normally the census reference reports filter on relationship type, surname, age filter etc - ticking this returns all census references");
+            ckbIgnoreAll.UseVisualStyleBackColor = true;
             // 
             // btnUpdateLostCousinsWebsite
             // 
@@ -1449,7 +1479,7 @@ namespace FTAnalyzer
             // 
             // btnWWII
             // 
-            btnWWII.Location = new Point(898, 74);
+            btnWWII.Location = new Point(921, 64);
             btnWWII.Margin = new Padding(4);
             btnWWII.Name = "btnWWII";
             btnWWII.Size = new Size(111, 29);
@@ -1460,7 +1490,7 @@ namespace FTAnalyzer
             // 
             // btnWWI
             // 
-            btnWWI.Location = new Point(772, 74);
+            btnWWI.Location = new Point(795, 64);
             btnWWI.Margin = new Padding(4);
             btnWWI.Name = "btnWWI";
             btnWWI.Size = new Size(111, 29);
@@ -1472,7 +1502,7 @@ namespace FTAnalyzer
             // labWorldWarsSurname
             // 
             labWorldWarsSurname.AutoSize = true;
-            labWorldWarsSurname.Location = new Point(708, 36);
+            labWorldWarsSurname.Location = new Point(731, 26);
             labWorldWarsSurname.Margin = new Padding(4, 0, 4, 0);
             labWorldWarsSurname.Name = "labWorldWarsSurname";
             labWorldWarsSurname.Size = new Size(54, 15);
@@ -1481,7 +1511,7 @@ namespace FTAnalyzer
             // 
             // txtWorldWarsSurname
             // 
-            txtWorldWarsSurname.Location = new Point(772, 32);
+            txtWorldWarsSurname.Location = new Point(795, 22);
             txtWorldWarsSurname.Margin = new Padding(4);
             txtWorldWarsSurname.Name = "txtWorldWarsSurname";
             txtWorldWarsSurname.Size = new Size(234, 23);
@@ -1518,7 +1548,7 @@ namespace FTAnalyzer
             wardeadRelation.Location = new Point(325, 0);
             wardeadRelation.Margin = new Padding(7);
             wardeadRelation.Name = "wardeadRelation";
-            wardeadRelation.Size = new Size(377, 120);
+            wardeadRelation.Size = new Size(400, 122);
             wardeadRelation.TabIndex = 26;
             // 
             // wardeadCountry
@@ -1593,7 +1623,7 @@ namespace FTAnalyzer
             // 
             // btnTreeTops
             // 
-            btnTreeTops.Location = new Point(771, 72);
+            btnTreeTops.Location = new Point(793, 63);
             btnTreeTops.Margin = new Padding(4);
             btnTreeTops.Name = "btnTreeTops";
             btnTreeTops.Size = new Size(235, 29);
@@ -1605,7 +1635,7 @@ namespace FTAnalyzer
             // labTreeTopsSurname
             // 
             labTreeTopsSurname.AutoSize = true;
-            labTreeTopsSurname.Location = new Point(707, 34);
+            labTreeTopsSurname.Location = new Point(730, 26);
             labTreeTopsSurname.Margin = new Padding(4, 0, 4, 0);
             labTreeTopsSurname.Name = "labTreeTopsSurname";
             labTreeTopsSurname.Size = new Size(54, 15);
@@ -1614,7 +1644,7 @@ namespace FTAnalyzer
             // 
             // txtTreetopsSurname
             // 
-            txtTreetopsSurname.Location = new Point(771, 30);
+            txtTreetopsSurname.Location = new Point(794, 22);
             txtTreetopsSurname.Margin = new Padding(4);
             txtTreetopsSurname.Name = "txtTreetopsSurname";
             txtTreetopsSurname.Size = new Size(234, 23);
@@ -1651,7 +1681,7 @@ namespace FTAnalyzer
             treetopsRelation.Location = new Point(319, 0);
             treetopsRelation.Margin = new Padding(7);
             treetopsRelation.Name = "treetopsRelation";
-            treetopsRelation.Size = new Size(377, 120);
+            treetopsRelation.Size = new Size(400, 122);
             treetopsRelation.TabIndex = 12;
             // 
             // treetopsCountry
@@ -1687,9 +1717,9 @@ namespace FTAnalyzer
             gbFilters.Controls.Add(cmbColourFamily);
             gbFilters.Controls.Add(labResearchTabSurname);
             gbFilters.Controls.Add(txtColouredSurname);
-            gbFilters.Location = new Point(396, 7);
+            gbFilters.Location = new Point(419, 9);
             gbFilters.Name = "gbFilters";
-            gbFilters.Size = new Size(703, 120);
+            gbFilters.Size = new Size(637, 118);
             gbFilters.TabIndex = 64;
             gbFilters.TabStop = false;
             gbFilters.Text = "Filters";
@@ -1720,7 +1750,7 @@ namespace FTAnalyzer
             txtColouredSurname.Location = new Point(91, 24);
             txtColouredSurname.Margin = new Padding(4);
             txtColouredSurname.Name = "txtColouredSurname";
-            txtColouredSurname.Size = new Size(234, 23);
+            txtColouredSurname.Size = new Size(189, 23);
             txtColouredSurname.TabIndex = 63;
             // 
             // groupBox7
@@ -1732,7 +1762,7 @@ namespace FTAnalyzer
             groupBox7.Margin = new Padding(4);
             groupBox7.Name = "groupBox7";
             groupBox7.Padding = new Padding(4);
-            groupBox7.Size = new Size(478, 126);
+            groupBox7.Size = new Size(478, 132);
             groupBox7.TabIndex = 63;
             groupBox7.TabStop = false;
             groupBox7.Text = "Missing Data Reports";
@@ -1871,7 +1901,7 @@ namespace FTAnalyzer
             relTypesResearchSuggest.Location = new Point(12, 7);
             relTypesResearchSuggest.Margin = new Padding(4, 3, 4, 3);
             relTypesResearchSuggest.Name = "relTypesResearchSuggest";
-            relTypesResearchSuggest.Size = new Size(377, 120);
+            relTypesResearchSuggest.Size = new Size(400, 122);
             relTypesResearchSuggest.TabIndex = 26;
             relTypesResearchSuggest.RelationTypesChanged += RelTypesColoured_RelationTypesChanged;
             // 
@@ -1950,13 +1980,13 @@ namespace FTAnalyzer
             linkLabel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             linkLabel2.AutoSize = true;
             linkLabel2.Font = new Font("Microsoft Sans Serif", 9.75F);
-            linkLabel2.Location = new Point(392, 71);
+            linkLabel2.Location = new Point(415, 101);
             linkLabel2.Margin = new Padding(4, 0, 4, 0);
             linkLabel2.Name = "linkLabel2";
-            linkLabel2.Size = new Size(173, 16);
+            linkLabel2.Size = new Size(124, 16);
             linkLabel2.TabIndex = 52;
             linkLabel2.TabStop = true;
-            linkLabel2.Text = "Visit the Lost Cousins Forum";
+            linkLabel2.Text = "Lost Cousins Forum";
             linkLabel2.LinkClicked += LinkLabel2_Click;
             linkLabel2.Click += LinkLabel2_Click;
             // 
@@ -1965,13 +1995,13 @@ namespace FTAnalyzer
             LabLostCousinsWeb.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             LabLostCousinsWeb.AutoSize = true;
             LabLostCousinsWeb.Font = new Font("Microsoft Sans Serif", 9.75F);
-            LabLostCousinsWeb.Location = new Point(392, 26);
+            LabLostCousinsWeb.Location = new Point(415, 56);
             LabLostCousinsWeb.Margin = new Padding(4, 0, 4, 0);
             LabLostCousinsWeb.Name = "LabLostCousinsWeb";
-            LabLostCousinsWeb.Size = new Size(185, 16);
+            LabLostCousinsWeb.Size = new Size(136, 16);
             LabLostCousinsWeb.TabIndex = 36;
             LabLostCousinsWeb.TabStop = true;
-            LabLostCousinsWeb.Text = "Visit the Lost Cousins Website";
+            LabLostCousinsWeb.Text = "Lost Cousins Website";
             LabLostCousinsWeb.LinkClicked += LabLostCousinsWeb_Click;
             LabLostCousinsWeb.Click += LabLostCousinsWeb_Click;
             // 
@@ -2185,7 +2215,7 @@ namespace FTAnalyzer
             relTypesLC.Location = new Point(4, 0);
             relTypesLC.Margin = new Padding(7);
             relTypesLC.Name = "relTypesLC";
-            relTypesLC.Size = new Size(377, 120);
+            relTypesLC.Size = new Size(400, 122);
             relTypesLC.TabIndex = 48;
             relTypesLC.RelationTypesChanged += RelTypesLC_RelationTypesChanged;
             // 
@@ -2218,7 +2248,7 @@ namespace FTAnalyzer
             LCUpdatesTab.Margin = new Padding(4);
             LCUpdatesTab.Name = "LCUpdatesTab";
             LCUpdatesTab.Padding = new Padding(4);
-            LCUpdatesTab.Size = new Size(1222, 430);
+            LCUpdatesTab.Size = new Size(192, 72);
             LCUpdatesTab.TabIndex = 1;
             LCUpdatesTab.Text = "Updates";
             LCUpdatesTab.UseVisualStyleBackColor = true;
@@ -2365,7 +2395,7 @@ namespace FTAnalyzer
             LCVerifyTab.Location = new Point(4, 24);
             LCVerifyTab.Margin = new Padding(4);
             LCVerifyTab.Name = "LCVerifyTab";
-            LCVerifyTab.Size = new Size(1222, 430);
+            LCVerifyTab.Size = new Size(192, 72);
             LCVerifyTab.TabIndex = 2;
             LCVerifyTab.Text = "Verification";
             LCVerifyTab.UseVisualStyleBackColor = true;
@@ -2479,21 +2509,6 @@ namespace FTAnalyzer
             labCensusAliveDates.Size = new Size(71, 15);
             labCensusAliveDates.TabIndex = 39;
             labCensusAliveDates.Text = "Alive Dates: ";
-            // 
-            // chkAnyCensusYear
-            // 
-            chkAnyCensusYear.AutoSize = true;
-            chkAnyCensusYear.Checked = true;
-            chkAnyCensusYear.CheckState = CheckState.Checked;
-            chkAnyCensusYear.Location = new Point(397, 119);
-            chkAnyCensusYear.Margin = new Padding(4);
-            chkAnyCensusYear.Name = "chkAnyCensusYear";
-            chkAnyCensusYear.RightToLeft = RightToLeft.Yes;
-            chkAnyCensusYear.Size = new Size(314, 19);
-            chkAnyCensusYear.TabIndex = 36;
-            chkAnyCensusYear.Text = "Include ALL census years for Census Reference reports ";
-            toolTips.SetToolTip(chkAnyCensusYear, "Normally only the census selected on the dropdown is reported, ticking this includes all census records");
-            chkAnyCensusYear.UseVisualStyleBackColor = true;
             // 
             // groupBox10
             // 
@@ -2632,7 +2647,7 @@ namespace FTAnalyzer
             // chkExcludeUnknownBirths
             // 
             chkExcludeUnknownBirths.AutoSize = true;
-            chkExcludeUnknownBirths.Location = new Point(397, 75);
+            chkExcludeUnknownBirths.Location = new Point(420, 77);
             chkExcludeUnknownBirths.Margin = new Padding(4);
             chkExcludeUnknownBirths.Name = "chkExcludeUnknownBirths";
             chkExcludeUnknownBirths.RightToLeft = RightToLeft.Yes;
@@ -2662,7 +2677,7 @@ namespace FTAnalyzer
             // labCensusExcludeOverAge
             // 
             labCensusExcludeOverAge.AutoSize = true;
-            labCensusExcludeOverAge.Location = new Point(397, 45);
+            labCensusExcludeOverAge.Location = new Point(420, 47);
             labCensusExcludeOverAge.Margin = new Padding(4, 0, 4, 0);
             labCensusExcludeOverAge.Name = "labCensusExcludeOverAge";
             labCensusExcludeOverAge.Size = new Size(192, 15);
@@ -2671,7 +2686,7 @@ namespace FTAnalyzer
             // 
             // udAgeFilter
             // 
-            udAgeFilter.Location = new Point(631, 44);
+            udAgeFilter.Location = new Point(620, 45);
             udAgeFilter.Margin = new Padding(4);
             udAgeFilter.Maximum = new decimal(new int[] { 110, 0, 0, 0 });
             udAgeFilter.Minimum = new decimal(new int[] { 60, 0, 0, 0 });
@@ -2698,7 +2713,7 @@ namespace FTAnalyzer
             relTypesCensus.Location = new Point(9, 18);
             relTypesCensus.Margin = new Padding(7);
             relTypesCensus.Name = "relTypesCensus";
-            relTypesCensus.Size = new Size(377, 120);
+            relTypesCensus.Size = new Size(400, 122);
             relTypesCensus.TabIndex = 27;
             // 
             // groupBox9
@@ -3941,7 +3956,7 @@ namespace FTAnalyzer
             reltypesSurnames.Location = new Point(7, 4);
             reltypesSurnames.Margin = new Padding(7);
             reltypesSurnames.Name = "reltypesSurnames";
-            reltypesSurnames.Size = new Size(377, 120);
+            reltypesSurnames.Size = new Size(400, 122);
             reltypesSurnames.TabIndex = 22;
             // 
             // tabFacts
@@ -4132,7 +4147,7 @@ namespace FTAnalyzer
             relTypesFacts.Location = new Point(9, 4);
             relTypesFacts.Margin = new Padding(7);
             relTypesFacts.Name = "relTypesFacts";
-            relTypesFacts.Size = new Size(377, 120);
+            relTypesFacts.Size = new Size(400, 122);
             relTypesFacts.TabIndex = 21;
             relTypesFacts.RelationTypesChanged += RelTypesFacts_RelationTypesChanged;
             // 
@@ -4408,21 +4423,6 @@ namespace FTAnalyzer
             // 
             restoreDatabase.FileName = "*.zip";
             restoreDatabase.Filter = "Gecode Databases | *.s3db | Zip Files | *.zip";
-            // 
-            // ckbIgnoreAll
-            // 
-            ckbIgnoreAll.AutoSize = true;
-            ckbIgnoreAll.Checked = true;
-            ckbIgnoreAll.CheckState = CheckState.Checked;
-            ckbIgnoreAll.Location = new Point(397, 149);
-            ckbIgnoreAll.Margin = new Padding(4);
-            ckbIgnoreAll.Name = "ckbIgnoreAll";
-            ckbIgnoreAll.RightToLeft = RightToLeft.Yes;
-            ckbIgnoreAll.Size = new Size(303, 19);
-            ckbIgnoreAll.TabIndex = 42;
-            ckbIgnoreAll.Text = "Ignore ALL other filters for Census Reference reports ";
-            toolTips.SetToolTip(ckbIgnoreAll, "Normally the census reference reports filter on relationship type, surname, age filter etc - ticking this returns all census references");
-            ckbIgnoreAll.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
