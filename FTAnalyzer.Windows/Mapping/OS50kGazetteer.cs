@@ -130,7 +130,7 @@ namespace FTAnalyzer.Mapping
 
         public bool IsCountyMatch(FactLocation loc)
         {
-            return loc.KnownRegion is not null && loc.KnownRegion.CountyCodes.Any(c => c.CountyCode == CountyCode);
+            return loc.KnownRegion?.CountyCodes?.Any(c => c.CountyCode == CountyCode) == true;
         }
 
         public override string ToString()

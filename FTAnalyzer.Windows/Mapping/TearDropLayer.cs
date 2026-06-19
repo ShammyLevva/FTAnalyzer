@@ -11,7 +11,7 @@ namespace FTAnalyzer.Mapping
     public class TearDropLayer : VectorLayer
     {
         public FeatureDataTable TearDropLocations { get; private set; }
-        public Image Icon { get; }
+        public Image? Icon { get; }
 
         public static readonly string RED = "Teardrop_Red.png", BLACK = "Teardrop_Black.png",
                                       LIGHT_GREEN = "Teardrop_LightGreen.png", GREY = "Grey";
