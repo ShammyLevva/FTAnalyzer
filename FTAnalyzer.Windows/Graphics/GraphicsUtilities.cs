@@ -46,9 +46,11 @@ namespace FTAnalyzer.Graphics
 
         public static float GetCurrentScaling()
         {
-            float dx;
-            using (System.Drawing.Graphics g = Application.OpenForms[0].CreateGraphics())
+            float dx = 96f;
+            Form? form = Application.OpenForms.Count > 0 ? Application.OpenForms[0] : null;
+            if (form is not null)
             {
+                using System.Drawing.Graphics g = form.CreateGraphics();
                 dx = g.DpiX;
             }
             return dx / 96;

@@ -13,12 +13,12 @@ namespace FTAnalyzer.Utilities
 {
     public partial class DatabaseHelper : IDisposable
     {
-        public string DatabaseFile { get; private set; }
+        public string DatabaseFile { get; private set; } = string.Empty;
         public string CurrentFilename { get; private set; }
         public string DatabasePath { get; private set; }
-        static DatabaseHelper instance;
-        static SQLiteConnection InstanceConnection { get; set; }
-        Version ProgramVersion { get; set; }
+        static DatabaseHelper? instance;
+        static SQLiteConnection InstanceConnection { get; set; } = new SQLiteConnection();
+        Version? ProgramVersion { get; set; }
         bool restoring;
         const string APPNAME = "FTAnalyzer";
 
@@ -1067,7 +1067,7 @@ namespace FTAnalyzer.Utilities
             {
                 // finally check for updates
                 restoring = true;
-                CheckDatabaseVersion(ProgramVersion);
+                if (ProgramVersion is not null) CheckDatabaseVersion(ProgramVersion);
                 restoring = false;
                 FamilyTree ft = FamilyTree.Instance;
                 if (ft.DataLoaded)
@@ -1082,7 +1082,7 @@ namespace FTAnalyzer.Utilities
         #endregion
 
         #region EventHandler
-        public static event EventHandler GeoLocationUpdated;
+        public static event EventHandler? GeoLocationUpdated;
         protected static void OnGeoLocationUpdated()
         {
             GeoLocationUpdated?.Invoke(null, EventArgs.Empty);

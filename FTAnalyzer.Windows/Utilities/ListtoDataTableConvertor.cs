@@ -30,13 +30,13 @@ namespace FTAnalyzer.Utilities
             {
                 foreach (T item in items)
                 {
-                    var values = new object[dataTable.Columns.Count];
+                    object?[] values = new object?[dataTable.Columns.Count];
                     int dex = 0; // which column the value goes in may be disconnected from the property index
                     for (int i = 0; i < Props.Length; i++)
                     {
                         // if the property is not in the datagrid or not visible, don't add its value
                         if (cols is null ||
-                            (cols[Props[i].Name] is not null && cols[Props[i].Name].Visible))
+                            (cols[Props[i].Name] is DataGridViewColumn dgcol && dgcol.Visible))
                         {
                             //inserting property values to datatable rows
                             values[dex++] = Props[i].GetValue(item, null);
