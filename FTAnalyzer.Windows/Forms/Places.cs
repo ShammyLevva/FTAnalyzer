@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Forms.Controls;
+using FTAnalyzer.Forms.Controls;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Properties;
 using FTAnalyzer.Shared.Utilities;
@@ -15,7 +15,7 @@ namespace FTAnalyzer.Forms
     {
         readonly FamilyTree ft = FamilyTree.Instance;
         readonly MapHelper mh = MapHelper.Instance;
-        ClusterLayer clusters;
+        ClusterLayer? clusters;
         bool isloading;
         readonly IProgress<string> outputText;
         CancellationTokenSource? buildMapCts;
@@ -82,15 +82,17 @@ namespace FTAnalyzer.Forms
 
         async Task BuildMapAsync()
         {
-            if (isloading) return;
+            if (isloading || clusters is null) return;
+            ClusterLayer cl = clusters;
             // cancel any previous in-flight build and create a new token
             buildMapCts?.Cancel();
+            buildMapCts?.Dispose();
             buildMapCts = new CancellationTokenSource();
             CancellationToken token = buildMapCts.Token;
             Cursor = Cursors.WaitCursor;
             try
             {
-                clusters.Clear();
+                cl.Clear();
                 dgFacts.DataSource = null;
                 ConcurrentBag<IDisplayFact> displayFacts = [];
                 List<Individual> list = [];
@@ -153,7 +155,8 @@ namespace FTAnalyzer.Forms
                                     if (IsPlottable(dispfact.Location))
                                     {
                                         MapLocation loc = new(ind, dispfact.Fact, dispfact.FactDate);
-                                        loc.AddFeatureDataRow(clusters.FactLocations);
+                                        if (cl.FactLocations is not null)
+                                            loc.AddFeatureDataRow(cl.FactLocations);
                                     }
                                     break;
                                 }
@@ -165,16 +168,16 @@ namespace FTAnalyzer.Forms
                 }, token);
 
                 pbPlaces.Visible = false;
-                if (!token.IsCancellationRequested)
+                if (!token.IsCancellationRequested && cl.FactLocations is FeatureDataTable factLocs)
                 {
                     txtCount.Text = $"Downloading map tiles and computing clusters for {displayFacts.Count} facts. Please wait";
                     dgFacts.DataSource = new SortableBindingList<IDisplayFact>([.. displayFacts]);
 
-                    Envelope expand = MapHelper.GetExtents(clusters.FactLocations);
+                    Envelope expand = MapHelper.GetExtents(factLocs);
                     mapBox1.Map.ZoomToBox(expand);
                     mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
                     RefreshClusters();
-                    int plottedCount = clusters.FactLocations.Rows.Count;
+                    int plottedCount = factLocs.Rows.Count;
                     txtCount.Text = $"{dgFacts.RowCount} fact(s) displayed, {plottedCount} geolocated and shown on map";
                 }
             }
@@ -213,6 +216,7 @@ namespace FTAnalyzer.Forms
             {
                 // cancel any in-flight map building triggered by this form
                 buildMapCts?.Cancel();
+                buildMapCts?.Dispose();
                 buildMapCts = null;
                 DatabaseHelper.GeoLocationUpdated -= DatabaseHelper_GeoLocationUpdated;
                 tvPlaces.Nodes.Clear();
@@ -272,11 +276,11 @@ namespace FTAnalyzer.Forms
             try
             {
                 Cursor = Cursors.WaitCursor;
-                FactLocation? location = e.Node.Tag as FactLocation;
+                FactLocation? location = e.Node?.Tag as FactLocation;
                 if (location is not null)
                 {
                     People frmInd = new();
-                    frmInd.SetLocation(location, e.Node.Level);
+                    frmInd.SetLocation(location, e.Node?.Level ?? 0);
                     MainForm.DisposeDuplicateForms(frmInd);
                     UIHelpers.ShowOnOwnerScreen(frmInd, this);
                 }
@@ -285,7 +289,7 @@ namespace FTAnalyzer.Forms
             catch (Exception) { }
         }
 
-        void MapBox1_MapViewOnChange() => clusters.Refresh();
+        void MapBox1_MapViewOnChange() => clusters?.Refresh();
 
         void MapBox1_MapZoomChanged(double zoom) => RefreshClusters();
 
@@ -297,7 +301,7 @@ namespace FTAnalyzer.Forms
                 return;
             }
             Cursor = Cursors.WaitCursor;
-            clusters.Refresh();
+            clusters?.Refresh();
             RefreshMap();
             Cursor = Cursors.Default;
         }
@@ -361,7 +365,7 @@ namespace FTAnalyzer.Forms
                 foreach (FeatureDataRow feature in features)
                     locations.Add((MapLocation)feature["MapLocation"]);
             }
-            MapIndividuals ind = new(locations, null, this);
+            MapIndividuals ind = new(locations, string.Empty, this);
             UIHelpers.ShowOnOwnerScreen(ind, this);
             Cursor = Cursors.Default;
 

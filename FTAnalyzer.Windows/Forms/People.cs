@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Filters;
+using FTAnalyzer.Filters;
 using FTAnalyzer.Properties;
 using FTAnalyzer.Utilities;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ namespace FTAnalyzer.Forms
         bool selectRow;
         readonly Font boldFont;
         readonly Font normalFont;
-        Dictionary<IDisplayIndividual, IDisplayFamily> families;
+        Dictionary<IDisplayIndividual, IDisplayFamily> families = [];
         readonly FamilyTree ft = FamilyTree.Instance;
         readonly VirtualReportFormHelper<IDisplayIndividual> indReportFormHelper;
         readonly VirtualReportFormHelper<IDisplayFamily> famReportFormHelper;
@@ -21,25 +21,21 @@ namespace FTAnalyzer.Forms
 
         public People()
         {
-            try
-            {
-                InitializeComponent();
-
-                // Ensure toolStrip sits at the top and splitContainer fills below it
-                toolStrip1.Dock = DockStyle.Top;
-                splitContainer.Dock = DockStyle.Fill;
-                splitContainer.BringToFront(); // ensure correct z-order relative to status strip
-
-                Top += NativeMethods.TopTaskbarOffset;
-                indReportFormHelper = new(this, Text, dgIndividuals, ResetTable, "People");
-                famReportFormHelper = new(this, Text, dgFamilies, ResetTable, "People");
-                ExtensionMethods.DoubleBuffered(dgIndividuals, true);
-                ExtensionMethods.DoubleBuffered(dgFamilies, true);
-                boldFont = new(dgFamilies.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
-                normalFont = new(dgFamilies.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Regular);
-                SetSaveButtonsStatus(false);
-            }
+            try { InitializeComponent(); }
             catch (Exception) { }
+            // Ensure toolStrip sits at the top and splitContainer fills below it
+            toolStrip1.Dock = DockStyle.Top;
+            splitContainer.Dock = DockStyle.Fill;
+            splitContainer.BringToFront(); // ensure correct z-order relative to status strip
+            Top += NativeMethods.TopTaskbarOffset;
+            indReportFormHelper = new(this, Text, dgIndividuals, ResetTable, "People");
+            famReportFormHelper = new(this, Text, dgFamilies, ResetTable, "People");
+            ExtensionMethods.DoubleBuffered(dgIndividuals, true);
+            ExtensionMethods.DoubleBuffered(dgFamilies, true);
+            Font cellFont = dgFamilies.DefaultCellStyle.Font ?? SystemFonts.DefaultFont;
+            boldFont = new(cellFont.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
+            normalFont = new(cellFont.FontFamily, FontSettings.Default.FontSize, FontStyle.Regular);
+            SetSaveButtonsStatus(false);
         }
 
         void SetSaveButtonsStatus(bool value)
@@ -131,7 +127,7 @@ namespace FTAnalyzer.Forms
         {
             Text = $"Individuals & Families whose surname is {stat.Surname}";
             SortableBindingList<IDisplayIndividual> dsInd = [];
-            bool indSurnames(Individual x) => x.Surname.Equals(stat.Surname);
+            bool indSurnames(Individual x) => x.Surname.Equals(stat.Surname, StringComparison.OrdinalIgnoreCase);
             Predicate<Individual> filter = FilterUtils.AndFilter(indFilter, indSurnames);
             foreach (Individual i in ft.AllIndividuals.Filter(filter))
                 dsInd.Add(i);
@@ -237,7 +233,7 @@ namespace FTAnalyzer.Forms
 
         public void ListRelationToRoot(string relationtoRoot)
         {
-            bool filter(Individual x) => x.RelationToRoot.Equals(relationtoRoot);
+            bool filter(Individual x) => x.RelationToRoot.Equals(relationtoRoot, StringComparison.OrdinalIgnoreCase);
             List<Individual> individuals = [.. ft.AllIndividuals.Filter(filter)];
             SetIndividuals(individuals, $"Individuals who are a {relationtoRoot} of root person");
         }
@@ -341,7 +337,7 @@ namespace FTAnalyzer.Forms
                 {
                     foreach (DataGridViewRow r in dgFamilies.Rows)
                     {
-                        if (r.Cells[0].Value.ToString() == f.FamilyID)
+                        if (r.Cells[0].Value?.ToString() == f.FamilyID)
                         {
                             dgFamilies.CurrentCell = r.Cells[0];
                             break;
@@ -355,7 +351,7 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string? indID = (string?)dgIndividuals.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
+                string? indID = (string?)dgIndividuals.CurrentRow?.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
                 if (indID is not null)
                     MainForm.ShowIndividualsFacts(indID);
             }
@@ -366,8 +362,8 @@ namespace FTAnalyzer.Forms
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 string? famID = sender == dgFamilies ?
-                    (string?)dgFamilies.CurrentRow.Cells[nameof(IDisplayFamily.FamilyID)].Value :
-                    (string?)dgChildrenStatus.CurrentRow.Cells[nameof(IDisplayFamily.FamilyID)].Value;
+                    (string?)dgFamilies.CurrentRow?.Cells[nameof(IDisplayFamily.FamilyID)].Value :
+                    (string?)dgChildrenStatus.CurrentRow?.Cells[nameof(IDisplayFamily.FamilyID)].Value;
                 if (famID is null) return;
                 Family? fam = ft.GetFamily(famID);
                 if (fam is not null)
@@ -420,7 +416,7 @@ namespace FTAnalyzer.Forms
             IEnumerable<CensusFamily> toSearch = ft.GetAllCensusFamilies(CensusDate.UKCENSUS1911, true, true);
             foreach (CensusFamily fam in toSearch)
             {
-                if (fam.On1911Census && fam.HasGoodChildrenStatus && !fam.FamilyType.Equals(Family.SOLOINDIVIDUAL) && !fam.FamilyType.Equals(Family.PRE_MARRIAGE) &&
+                if (fam.On1911Census && fam.HasGoodChildrenStatus && !fam.FamilyType.Equals(Family.SOLOINDIVIDUAL, StringComparison.OrdinalIgnoreCase) && !fam.FamilyType.Equals(Family.PRE_MARRIAGE, StringComparison.OrdinalIgnoreCase) &&
                     (fam.ExpectedTotal != fam.ChildrenTotal || fam.ExpectedAlive != fam.ChildrenAlive || fam.ExpectedDead != fam.ChildrenDead))
                     results.Add(fam);
             }
@@ -438,7 +434,7 @@ namespace FTAnalyzer.Forms
 
         void ContextMenuStrip1_Opened(object sender, EventArgs e)
         {
-            string? indID = (string?)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+            string? indID = (string?)dgIndividuals.CurrentRow?.Cells["IndividualID"].Value;
             if (indID is null) return;
             Individual? ind = ft.GetIndividual(indID);
             if (ind is not null)
@@ -447,7 +443,7 @@ namespace FTAnalyzer.Forms
 
         void ViewNotesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string? indID = (string?)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+            string? indID = (string?)dgIndividuals.CurrentRow?.Cells["IndividualID"].Value;
             if (indID is null) return;
             Individual? ind = ft.GetIndividual(indID);
             if (ind is not null)
@@ -471,7 +467,7 @@ namespace FTAnalyzer.Forms
                         // Can leave these here - doesn't hurt
                         dg.Rows[hti.RowIndex].Selected = true;
                         dg.Focus();
-                        ctxViewNotes.Tag = dg.CurrentRow.DataBoundItem;
+                        ctxViewNotes.Tag = dg.CurrentRow?.DataBoundItem;
                         ctxViewNotes.Show(MousePosition);
                     }
                 }
@@ -541,7 +537,7 @@ namespace FTAnalyzer.Forms
             IEnumerable<CensusFamily> toSearch = ft.GetAllCensusFamilies(CensusDate.UKCENSUS1911, true, true);
             foreach (Family fam in toSearch)
             {
-                if (fam.On1911Census && !fam.HasAnyChildrenStatus && fam.BothParentsAlive(CensusDate.UKCENSUS1911) && !fam.FamilyType.Equals(Family.PRE_MARRIAGE))
+                if (fam.On1911Census && !fam.HasAnyChildrenStatus && fam.BothParentsAlive(CensusDate.UKCENSUS1911) && !fam.FamilyType.Equals(Family.PRE_MARRIAGE, StringComparison.OrdinalIgnoreCase))
                     results.Add(fam);
             }
             reportType = ReportType.MissingChildrenStatus;
@@ -568,7 +564,7 @@ namespace FTAnalyzer.Forms
             {
                 case 6: // Totals
                 case 9:
-                    if (!cells[nameof(IDisplayChildrenStatus.ChildrenTotal)].Value.Equals(cells[nameof(IDisplayChildrenStatus.ExpectedTotal)].Value))
+                    if (!Equals(cells[nameof(IDisplayChildrenStatus.ChildrenTotal)].Value, cells[nameof(IDisplayChildrenStatus.ExpectedTotal)].Value))
                     {
                         e.CellStyle.BackColor = Color.Peru;
                         e.CellStyle.Font = boldFont;
@@ -580,7 +576,7 @@ namespace FTAnalyzer.Forms
                     break;
                 case 7: // Alive
                 case 10:
-                    if (!cells[nameof(IDisplayChildrenStatus.ChildrenAlive)].Value.Equals(cells[nameof(IDisplayChildrenStatus.ExpectedAlive)].Value))
+                    if (!Equals(cells[nameof(IDisplayChildrenStatus.ChildrenAlive)].Value, cells[nameof(IDisplayChildrenStatus.ExpectedAlive)].Value))
                     {
                         e.CellStyle.BackColor = Color.SandyBrown;
                         e.CellStyle.Font = boldFont;
@@ -592,7 +588,7 @@ namespace FTAnalyzer.Forms
                     break;
                 case 8: // Dead
                 case 11:
-                    if (!cells[nameof(IDisplayChildrenStatus.ChildrenDead)].Value.Equals(cells[nameof(IDisplayChildrenStatus.ExpectedDead)].Value))
+                    if (!Equals(cells[nameof(IDisplayChildrenStatus.ChildrenDead)].Value, cells[nameof(IDisplayChildrenStatus.ExpectedDead)].Value))
                     {
                         e.CellStyle.BackColor = Color.Tan;
                         e.CellStyle.Font = boldFont;

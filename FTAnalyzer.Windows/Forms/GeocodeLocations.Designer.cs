@@ -18,9 +18,12 @@ namespace FTAnalyzer.Forms
             try
             {
                 if (disposing && (components is not null))
-                {   
+                {
                     components.Dispose();
-                }   
+                    googleGeocodeCts?.Dispose();
+                    reverseGeocodeCts?.Dispose();
+                    emptyViewPortsCts?.Dispose();
+                }
                 base.Dispose(disposing);
 
                 italicFont.Dispose();

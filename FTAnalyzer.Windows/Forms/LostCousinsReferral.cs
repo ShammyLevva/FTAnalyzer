@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Filters;
+using FTAnalyzer.Filters;
 using FTAnalyzer.Properties;
 using FTAnalyzer.UserControls;
 using FTAnalyzer.Utilities;
@@ -39,9 +39,9 @@ namespace FTAnalyzer.Forms
         string GetCountofRecords()
         {
             int total = referrals.Count;
-            int direct = referrals.Count(x => x.RelationType.Equals(Messages.Referral_Direct));
-            int blood = referrals.Count(x => x.RelationType.Equals(Messages.Referral_Blood));
-            int marriage = referrals.Count(x => x.RelationType.Equals(Messages.Referral_Marriage));
+            int direct = referrals.Count(x => x.RelationType.Equals(Messages.Referral_Direct, StringComparison.OrdinalIgnoreCase));
+            int blood = referrals.Count(x => x.RelationType.Equals(Messages.Referral_Blood, StringComparison.OrdinalIgnoreCase));
+            int marriage = referrals.Count(x => x.RelationType.Equals(Messages.Referral_Marriage, StringComparison.OrdinalIgnoreCase));
             int others = referrals.Count(x => string.IsNullOrEmpty(x.RelationType));
             return total + $" Lost Cousins Records listed made up of {direct} Direct Ancestors, {blood} Blood Relatives, {marriage} Marriage and {others} Others.";
         }

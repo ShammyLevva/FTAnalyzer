@@ -1,16 +1,17 @@
-﻿using FTAnalyzer.Mapping;
+using FTAnalyzer.Mapping;
 using FTAnalyzer.Shared.Utilities;
 using Microsoft.Win32;
 using SharpMap.Forms;
 using SharpMap.Layers;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FTAnalyzer.Forms.Controls
 {
     public class ToolStripMapSelector : ToolStripDropDownButton
     {
-        LinkLabel copyrightLabel;
-        MapBox mapbox;
-        TrackBar opacitySlider;
+        LinkLabel copyrightLabel = new();
+        MapBox mapbox = new();
+        TrackBar opacitySlider = new();
         readonly string defaultMap = "mnuOpenStreetMap";
         MapToolStripMenuItem mnuOpenStreetMap;
         MapToolStripMenuItem mnuOpenHistoricMap;
@@ -23,14 +24,15 @@ namespace FTAnalyzer.Forms.Controls
 
         public ToolStripMapSelector()
             : base("Map style")
-        { }
+        {
+            SetupDropdown();
+        }
 
         public void Setup(LinkLabel label, MapBox mapbox, TrackBar opacitySlider)
         {
             copyrightLabel = label;
             this.mapbox = mapbox;
             this.opacitySlider = opacitySlider;
-            SetupDropdown();
             GetCurrentMapPreference();
         }
 
@@ -39,14 +41,15 @@ namespace FTAnalyzer.Forms.Controls
             string mapPreference = RegistrySettings.GetStringRegistryValue("Default Map Background", defaultMap);
             foreach (ToolStripMenuItem menu in DropDownItems)
             {
-                if (mapPreference.Equals(menu.Name))
+                if (mapPreference.Equals(menu.Name, StringComparison.OrdinalIgnoreCase))
                 {
-                    Ctrl_Click(menu, null);
+                    Ctrl_Click(menu, EventArgs.Empty);
                     break;
                 }
             }
         }
 
+        [MemberNotNull(nameof(mnuOpenStreetMap), nameof(mnuOpenHistoricMap), nameof(mnuBingMapAerial), nameof(mnuBingMapRoads), nameof(mnuBingMapHybrid))]
         void SetupDropdown()
         {
             TileSourceFactory factory = new();
@@ -125,7 +128,7 @@ namespace FTAnalyzer.Forms.Controls
             if (sender is MapToolStripMenuItem selectedOption)
             {
                 selectedMap = selectedOption;
-                bool isOpenStreetMap = selectedOption.Name.Equals(mnuOpenStreetMap.Name);
+                bool isOpenStreetMap = string.Equals(selectedOption.Name, mnuOpenStreetMap.Name, StringComparison.OrdinalIgnoreCase);
                 if (!isOpenStreetMap && opacitySlider.Value < opacitySlider.Maximum)
                     mapbox.Map.BackgroundLayer.Add(new TileAsyncLayer(mnuOpenStreetMap.TileSource, mnuOpenStreetMap.Name ?? string.Empty));
                 TileAsyncLayer mapLayer = new(selectedOption.TileSource, selectedOption.Name ?? string.Empty)
@@ -147,7 +150,7 @@ namespace FTAnalyzer.Forms.Controls
         // completely hidden, so we avoid loading it to halve the tile requests.
         public void UpdateOpacityLayer()
         {
-            if (selectedMap is null || selectedMap.Name.Equals(mnuOpenStreetMap.Name))
+            if (selectedMap is null || string.Equals(selectedMap.Name, mnuOpenStreetMap.Name, StringComparison.OrdinalIgnoreCase))
                 return;
             bool needsOsmBase = opacitySlider.Value < opacitySlider.Maximum;
             bool hasOsmBase = mapbox.Map.BackgroundLayer.Count > 1;

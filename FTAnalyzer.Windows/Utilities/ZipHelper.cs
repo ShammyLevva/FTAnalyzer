@@ -5,7 +5,7 @@ namespace FTAnalyzer.Utilities
 {
     internal static class ZipHelper
     {
-        public static void ExtractZipFile(string archivePath, string password, string outFolder)
+        public static void ExtractZipFile(string archivePath, string? password, string outFolder)
         {
             using var fsInput = File.OpenRead(archivePath);
             using var zf = new ZipFile(fsInput);
@@ -29,7 +29,7 @@ namespace FTAnalyzer.Utilities
                     // Manipulate the output filename here as desired.
                     var fullZipToPath = Path.Combine(outFolder, entryFileName);
                     var directoryName = Path.GetDirectoryName(fullZipToPath);
-                    if (directoryName.Length > 0)
+                    if (!string.IsNullOrEmpty(directoryName))
                     {
                         Directory.CreateDirectory(directoryName);
                     }

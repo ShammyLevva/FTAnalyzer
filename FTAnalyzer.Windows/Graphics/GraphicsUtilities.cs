@@ -46,9 +46,11 @@ namespace FTAnalyzer.Graphics
 
         public static float GetCurrentScaling()
         {
-            float dx;
-            using (System.Drawing.Graphics g = Application.OpenForms[0].CreateGraphics())
+            float dx = 96f;
+            Form? form = Application.OpenForms.Count > 0 ? Application.OpenForms[0] : null;
+            if (form is not null)
             {
+                using System.Drawing.Graphics g = form.CreateGraphics();
                 dx = g.DpiX;
             }
             return dx / 96;
@@ -58,8 +60,8 @@ namespace FTAnalyzer.Graphics
         {
             if (box != null)
             {
-                Brush borderBrush = new SolidBrush(borderColor);
-                Pen borderPen = new(borderBrush, borderWidth);
+                using SolidBrush borderBrush = new(borderColor);
+                using Pen borderPen = new(borderBrush, borderWidth);
                 SizeF strSize = g.MeasureString(box.Text, box.Font);
                 Rectangle rect = new(box.ClientRectangle.X,
                                      box.ClientRectangle.Y + (int)(strSize.Height / 2),

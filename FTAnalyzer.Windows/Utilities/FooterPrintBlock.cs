@@ -11,18 +11,18 @@ namespace FTAnalyzer.Utilities
 
         public override void Draw(System.Drawing.Graphics g, Dictionary<CodeEnum, string> codes)
         {
-            StringFormat format = new()
+            using StringFormat format = new()
             {
                 Trimming = StringTrimming.Word,
                 FormatFlags = StringFormatFlags.NoWrap,
                 Alignment = StringAlignment.Far
             };
 
-            // as you can see below, we are using the codes param to know on which page we are for instance.
+            using SolidBrush blackBrush = new(Color.Black);
             g.DrawString(
                 string.Format("Page {0} Of {1}", codes[CodeEnum.SheetNumber], codes[CodeEnum.SheetsCount]),
                 font,
-                new SolidBrush(Color.Black),
+                blackBrush,
                 Rectangle,
                 format);
         }

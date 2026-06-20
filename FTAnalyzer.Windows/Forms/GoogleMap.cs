@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Events;
+using FTAnalyzer.Events;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Properties;
 using FTAnalyzer.Utilities;
@@ -78,8 +78,8 @@ namespace FTAnalyzer.Forms
             VETERINARY_CARE, AMUSEMENT_PARK
         ]);
 
-        public delegate void GoogleEventHandler(object sender, GoogleWaitingEventArgs e);
-        public static event GoogleEventHandler WaitingForGoogle;
+        public delegate void GoogleEventHandler(object? sender, GoogleWaitingEventArgs e);
+        public static event GoogleEventHandler? WaitingForGoogle;
         public static bool ThreadCancelled { get; set; }
 
         public GoogleMap()
@@ -147,12 +147,13 @@ namespace FTAnalyzer.Forms
 
         public static void OnWaitingForGoogle(string message) => WaitingForGoogle?.Invoke(null, new GoogleWaitingEventArgs(message));
 
-        public static Task<GeoResponse?> CallGoogleGeocodeAsync(FactLocation address, string text, CancellationToken cancellationToken)
+        public static Task<GeoResponse?> CallGoogleGeocodeAsync(FactLocation? address, string text, CancellationToken cancellationToken)
         {
             string bounds = string.Empty;
-            string tld = address.IsUnitedKingdom ? "&region=uk" : string.Empty;
+            string tld = string.Empty;
             if (address is not null)
             {
+                tld = address.IsUnitedKingdom ? "&region=uk" : string.Empty;
                 //if (address.Level > FactLocation.SUBREGION)
                 //{
                 //    FactLocation area = address.GetLocation(FactLocation.SUBREGION);
@@ -172,7 +173,7 @@ namespace FTAnalyzer.Forms
                         bounds = $"{area.Bounds}";
                 }
             }
-            string encodedAddress = HttpUtility.UrlEncode(text.Replace(" ", "+"));
+            string encodedAddress = HttpUtility.UrlEncode(text.Replace(" ", "+", StringComparison.Ordinal));
             string url = $"https://maps.googleapis.com/maps/api/geocode/json?address={encodedAddress}{bounds}{tld}&key={GoogleAPIKey.KeyValue}";
             if (ThreadCancelled || cancellationToken.IsCancellationRequested)
                 return Task.FromResult<GeoResponse?>(null);
@@ -248,7 +249,7 @@ namespace FTAnalyzer.Forms
         static int sleepinterval = 200;
 
         // Call geocoding routine but account for throttling by Google geocoding engine
-        public static async Task<GeoResponse?> GoogleGeocodeAsync(FactLocation address, string text, int badtries, CancellationToken cancellationToken)
+        public static async Task<GeoResponse?> GoogleGeocodeAsync(FactLocation? address, string text, int badtries, CancellationToken cancellationToken)
         {
             int maxInterval = 30000;
             double seconds = sleepinterval / 1000.0;
@@ -408,8 +409,8 @@ namespace FTAnalyzer.Forms
             long length = new FileInfo(filename).Length;
             if (length > 5000000)
             {
-                string zipFilename = filename.Replace(".kml", ".kmz");
-                ZipFile zip = new(zipFilename)
+                string zipFilename = filename.Replace(".kml", ".kmz", StringComparison.Ordinal);
+                using ZipFile zip = new(zipFilename)
                 {
                     filename
                 };

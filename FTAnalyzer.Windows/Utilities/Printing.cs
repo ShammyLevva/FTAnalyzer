@@ -15,8 +15,8 @@ namespace FTAnalyzer.Utilities
                 float TopMargin = e.MarginBounds.Top;
                 string? Line = null;
                 Font PrintFont = rtb.Font;
-                if (PrintFont.SizeInPoints < 11)
-                    PrintFont = new(PrintFont.FontFamily, 11f);
+                using Font? ownedFont = PrintFont.SizeInPoints < 11 ? new(PrintFont.FontFamily, 11f) : null;
+                if (ownedFont is not null) PrintFont = ownedFont;
                 int maxWidth = e.MarginBounds.Right - e.MarginBounds.Left;
                 int maxHeight = e.MarginBounds.Bottom - e.MarginBounds.Top;
                 float fontHeight = e.Graphics is null ? 0 : PrintFont.GetHeight(e.Graphics);
@@ -24,8 +24,8 @@ namespace FTAnalyzer.Utilities
                 float YPosition = TopMargin;
                 while (YPosition < maxHeight && ((Line = reader.ReadLine()) is not null))
                 {
-                    SizeF sf = e.Graphics.MeasureString(Line, PrintFont, maxWidth);
-                    e.Graphics.DrawString(Line, PrintFont, PrintBrush, new RectangleF(new PointF(LeftMargin, YPosition), sf), StringFormat.GenericTypographic);
+                    SizeF sf = e.Graphics is null ? SizeF.Empty : e.Graphics.MeasureString(Line, PrintFont, maxWidth);
+                    e.Graphics?.DrawString(Line, PrintFont, PrintBrush, new RectangleF(new PointF(LeftMargin, YPosition), sf), StringFormat.GenericTypographic);
                     YPosition += sf.Height;
                 }
                 e.HasMorePages = Line is not null;

@@ -73,7 +73,7 @@ namespace FTAnalyzer.UserControls
 
         #endregion
 
-        public static event EventHandler CompactCensusRefChanged;
+        public static event EventHandler? CompactCensusRefChanged;
         protected static void OnCompactCensusRefChanged()
         {
             CompactCensusRefChanged?.Invoke(null, EventArgs.Empty);

@@ -1,12 +1,12 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 
 namespace FTAnalyzer.Forms.Controls
 {
     public partial class CensusDateSelector : UserControl
     {
-        string country;
-        CensusDate defaultDate;
-        CensusDate previousDate;
+        string country = string.Empty;
+        CensusDate defaultDate = CensusDate.UKCENSUS1881;
+        CensusDate previousDate = CensusDate.UKCENSUS1881;
         bool _loading;
 
         public CensusDateSelector()
@@ -100,22 +100,22 @@ namespace FTAnalyzer.Forms.Controls
         {
             if (DesignMode)
                 return;
-            if (location.Equals(Countries.UNITED_KINGDOM))
+            if (location.Equals(Countries.UNITED_KINGDOM, StringComparison.OrdinalIgnoreCase))
             {
                 foreach (CensusDate censusDate in CensusDate.UK_CENSUS)
                     cbCensusDate.Items.Add(censusDate);
             }
-            else if (location.Equals(Countries.IRELAND))
+            else if (location.Equals(Countries.IRELAND, StringComparison.OrdinalIgnoreCase))
             {
                 cbCensusDate.Items.Add(CensusDate.IRELANDCENSUS1901);
                 cbCensusDate.Items.Add(CensusDate.IRELANDCENSUS1911);
             }
-            else if (location.Equals(Countries.UNITED_STATES))
+            else if (location.Equals(Countries.UNITED_STATES, StringComparison.OrdinalIgnoreCase))
             {
                 foreach (CensusDate censusDate in CensusDate.US_FEDERAL_CENSUS)
                     cbCensusDate.Items.Add(censusDate);
             }
-            else if (location.Equals(Countries.CANADA))
+            else if (location.Equals(Countries.CANADA, StringComparison.OrdinalIgnoreCase))
             {
                 foreach (CensusDate censusDate in CensusDate.CANADIAN_CENSUS)
                     cbCensusDate.Items.Add(censusDate);
@@ -163,14 +163,23 @@ namespace FTAnalyzer.Forms.Controls
             catch (Exception) { }
         }
 
-        public event EventHandler CensusChanged;
+        public void RepositionControls()
+        {
+            // With AutoScaleMode=None, children stay at design positions after form PerformAutoScale.
+            // After SetFonts grows label1 to 14pt, label1.Right can exceed cbCensusDate.Left,
+            // visually covering the left chars of the selected item (shows "nsus 1881" not "Census 1881").
+            cbCensusDate.Left = label1.Right + 6;
+            SetControlWidth();
+        }
+
+        public event EventHandler? CensusChanged;
 
         protected void OnCensusChanged(EventArgs e)
         {
             if (CensusChanged is not null)
             {
                 CensusChanged(this, e);
-                previousDate = (cbCensusDate.SelectedItem ?? cbCensusDate.Items[0]) as CensusDate;
+                previousDate = ((cbCensusDate.SelectedItem ?? cbCensusDate.Items[0]) as CensusDate) ?? previousDate;
             }
         }
 

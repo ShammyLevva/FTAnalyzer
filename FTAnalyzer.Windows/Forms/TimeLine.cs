@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Mapping;
+using FTAnalyzer.Mapping;
 using FTAnalyzer.Properties;
 using FTAnalyzer.Shared.Utilities;
 using FTAnalyzer.Utilities;
@@ -16,7 +16,7 @@ namespace FTAnalyzer.Forms
         int maxGeoCodedYear;
         int geocodedRange;
         int yearLimit;
-        ClusterLayer clusters;
+        ClusterLayer? clusters;
         bool loading;
         readonly IProgress<string> outputText;
 
@@ -112,14 +112,18 @@ namespace FTAnalyzer.Forms
                     txtLocations.Text = locations.Count + " Locations in total for year " + year;
                 }
                 txtLocations.Text += " (you may need to zoom out to see them all). Use arrow tool then select icon to view ancestors at location";
-                clusters.Clear();
+                if (clusters is null) return;
+                ClusterLayer cl = clusters;
+                cl.Clear();
+                FeatureDataTable? factLocs = cl.FactLocations;
+                if (factLocs is null) return;
                 foreach (MapLocation loc in locations)
                 {
-                    FeatureDataRow row = loc.AddFeatureDataRow(clusters.FactLocations);
+                    FeatureDataRow row = loc.AddFeatureDataRow(factLocs);
                 }
                 if (!mnuKeepZoom.Checked)
                 {
-                    Envelope expand = MapHelper.GetExtents(clusters.FactLocations);
+                    Envelope expand = MapHelper.GetExtents(factLocs);
                     mapBox1.Map.ZoomToBox(expand);
                 }
                 RefreshClusters();
@@ -232,13 +236,13 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.Default;
         }
 
-        void MapBox1_MapViewOnChange() => clusters.Refresh();
+        void MapBox1_MapViewOnChange() => clusters?.Refresh();
 
         void MapBox1_MapZoomChanged(double zoom) => RefreshClusters();
 
         public void RefreshClusters()
         {
-            clusters.Refresh();
+            clusters?.Refresh();
             RefreshMap();
         }
 

@@ -87,10 +87,10 @@ namespace FTAnalyzer.UserControls
 
         #endregion
 
-        public static event EventHandler MinParentalAgeChanged;
+        public static event EventHandler? MinParentalAgeChanged;
         protected static void OnMinParentalAgeChanged() => MinParentalAgeChanged?.Invoke(null, EventArgs.Empty);
 
-        public static event EventHandler AliasInNameChanged;
+        public static event EventHandler? AliasInNameChanged;
         protected static void OnAliasInNameChanged() => AliasInNameChanged?.Invoke(null, EventArgs.Empty);
 
         void ChkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;

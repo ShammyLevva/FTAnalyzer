@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Utilities;
+using FTAnalyzer.Utilities;
 using System.ComponentModel;
 
 namespace FTAnalyzer.Forms

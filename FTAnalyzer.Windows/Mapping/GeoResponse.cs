@@ -6,29 +6,29 @@ namespace FTAnalyzer.Mapping
     public class GeoResponse
     {
         [DataMember(Name = "status")]
-        public string Status { get; set; }
+        public string Status { get; set; } = string.Empty;
         [DataMember(Name = "results")]
-        public CResult[] Results { get; set; }
+        public CResult[] Results { get; set; } = [];
 
         [DataContract]
         public class CResult
         {
             [DataMember(Name = "types")]
-            public string[] Types { get; set; }
+            public string[] Types { get; set; } = [];
             [DataMember(Name = "formatted_address")]
-            public string ReturnAddress { get; set; }
+            public string ReturnAddress { get; set; } = string.Empty;
             [DataMember(Name = "address_components")]
-            public CAddress[] Addresses { get; set; }
+            public CAddress[] Addresses { get; set; } = [];
             [DataMember(Name = "geometry")]
-            public CGeometry Geometry { get; set; }
+            public CGeometry Geometry { get; set; } = new();
 
             [DataContract]
             public class CGeometry
             {
                 [DataMember(Name = "location")]
-                public CLocation Location { get; set; }
+                public CLocation Location { get; set; } = new();
                 [DataMember(Name = "viewport")]
-                public CViewPort ViewPort { get; set; }
+                public CViewPort ViewPort { get; set; } = new();
 
                 [DataContract]
                 public class CLocation
@@ -63,11 +63,11 @@ namespace FTAnalyzer.Mapping
         public class CAddress
         {
             [DataMember(Name = "types")]
-            public string[] Types { get; set; }
+            public string[] Types { get; set; } = [];
             [DataMember(Name = "long_name")]
-            public string LongName { get; set; }
+            public string LongName { get; set; } = string.Empty;
             [DataMember(Name = "short_name")]
-            public string ShortName { get; set; }
+            public string ShortName { get; set; } = string.Empty;
         }
     }
 }

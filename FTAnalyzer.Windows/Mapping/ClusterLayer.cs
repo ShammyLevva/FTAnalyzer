@@ -11,10 +11,10 @@ namespace FTAnalyzer.Mapping
 {
     public class ClusterLayer : IDisposable
     {
-        public FeatureDataTable FactLocations { get; private set; }
-        VectorLayer clusterLayer;
-        LabelLayer labelLayer;
-        MarkerClusterer clusterer;
+        public FeatureDataTable? FactLocations { get; private set; }
+        VectorLayer? clusterLayer;
+        LabelLayer? labelLayer;
+        MarkerClusterer? clusterer;
         readonly Map map;
 
         public ClusterLayer(Map map)
@@ -25,7 +25,7 @@ namespace FTAnalyzer.Mapping
 
         public void Clear()
         {
-            FactLocations.Clear();
+            FactLocations?.Clear();
         }
 
         public void Refresh()
@@ -33,13 +33,10 @@ namespace FTAnalyzer.Mapping
             Envelope bounds = map.Envelope;
             double gridSize = Math.Max(map.Envelope.Width, map.Envelope.Height) / 20.0;
             bounds.ExpandBy(gridSize);
-            clusterer.Recluster(gridSize, bounds);
+            clusterer?.Recluster(gridSize, bounds);
         }
 
-        public Envelope Bounds
-        {
-            get { return clusterLayer.Envelope; }
-        }
+        public Envelope Bounds => clusterLayer?.Envelope ?? new Envelope();
 
         void SetupMap()
         {
@@ -118,10 +115,10 @@ namespace FTAnalyzer.Mapping
             {
                 if (disposing)
                 {
-                    FactLocations.Dispose();
-                    clusterLayer.Dispose();
-                    labelLayer.Dispose();
-                    clusterer.Dispose();
+                    FactLocations?.Dispose();
+                    clusterLayer?.Dispose();
+                    labelLayer?.Dispose();
+                    clusterer?.Dispose();
                     map.Dispose();
                 }
             }

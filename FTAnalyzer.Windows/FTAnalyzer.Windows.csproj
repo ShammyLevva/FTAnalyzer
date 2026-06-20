@@ -20,6 +20,21 @@
     <UserSecretsId>c034c3f7-33dc-470d-8752-cd7891c8915f</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <!-- WinForms designer generates underscore-named event handlers (e.g. button1_Click) by convention -->
+    <NoWarn>$(NoWarn);CA1707</NoWarn>
+    <!-- App is English-only (en-GB); localisation/culture-specification rules do not apply -->
+    <NoWarn>$(NoWarn);CA1303;CA1304;CA1305;CA1310;CA1311</NoWarn>
+    <!-- WinForms continuations must return to the UI thread; ConfigureAwait(false) would be wrong here -->
+    <NoWarn>$(NoWarn);CA2007</NoWarn>
+    <!-- Nullable reference types are enabled; CA1062 null-argument checks are redundant -->
+    <NoWarn>$(NoWarn);CA1062</NoWarn>
+    <!-- Shared project types may be subclassed in FTAnalyzer.Web; sealing based on Windows-only analysis is unsafe -->
+    <NoWarn>$(NoWarn);CA1852</NoWarn>
+    <!-- Application exe has no external callers; public vs internal has no practical effect -->
+    <NoWarn>$(NoWarn);CA1515</NoWarn>
+  </PropertyGroup>
+
   <!-- WAP publish redirects BaseIntermediateOutputPath to obj\wappublish\win-x64\, causing the SDK
        to look for project.assets.json there. Fall back to the standard location if it doesn't exist. -->
   <PropertyGroup Condition="!Exists('$(ProjectAssetsFile)')">
@@ -28,7 +43,6 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU' Or '$(Configuration)|$(Platform)'=='Debug|x64'">
     <DefineConstants>$(DefineConstants)TRACE;__PC__;CODE_ANALYSIS;__DEBUG__</DefineConstants>
-    <NoWarn>CA1416;1701;1702;8601;8602;8605;8618;8625;SYSLIB1054</NoWarn>
     <WarningLevel>9999</WarningLevel>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
     <WarningsAsErrors>$(WarningsAsErrors);NU1605</WarningsAsErrors>
@@ -36,7 +50,6 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU' Or '$(Configuration)|$(Platform)'=='Release|x64'">
     <DefineConstants>$(DefineConstants)TRACE;__PC__;CODE_ANALYSIS;__DEBUG__</DefineConstants>
-    <NoWarn>CA1416;1701;1702;8601;8602;8605;8618;8625;SYSLIB1054</NoWarn>
     <WarningLevel>9999</WarningLevel>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
     <WarningsAsErrors>$(WarningsAsErrors);NU1605</WarningsAsErrors>
@@ -231,7 +244,7 @@
     <PackageReference Include="log4net" Version="3.3.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="10.0.9" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-    <PackageReference Include="Printing.DataGridViewPrint" Version="3.0.0" />
+    <PackageReference Include="Printing.DataGridViewPrint" Version="4.0.0" />
     <PackageReference Include="ProjNET" Version="2.1.0" />
     <PackageReference Include="SharpMap.Extensions" Version="5.0.0" />
     <PackageReference Include="SharpMap.Layers.BruTile" Version="5.0.1" />

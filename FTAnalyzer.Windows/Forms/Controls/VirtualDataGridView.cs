@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Utilities;
+using FTAnalyzer.Utilities;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
@@ -13,7 +13,7 @@ namespace FTAnalyzer.Forms.Controls
         const string SourceIndexColumn = "__SourceIndex__";
         internal SortableBindingList<T> _dataSource;
         internal SortableBindingList<T> _fulllist;
-        public string FilterCountText { get; private set; }
+        public string FilterCountText { get; private set; } = string.Empty;
 
         protected VirtualDataGridView()
         {
@@ -60,7 +60,7 @@ namespace FTAnalyzer.Forms.Controls
                 foreach (string filteredColumn in VirtualDataGridView<T>.GetFilteredColumns(e.FilterString))
                 {
                     List<string> filteredValues = VirtualDataGridView<T>.GetFilteredValues(filteredColumn, e.FilterString);
-                    filter = [.. filter.Where(x => filteredValues.Contains(x.GetType().GetProperty(filteredColumn).GetValue(x, null)))];
+                    filter = [.. filter.Where(x => x is not null && filteredValues.Contains(x.GetType().GetProperty(filteredColumn)?.GetValue(x, null)))];
                 }
                 _dataSource = filter;
                 DataView dataView = BuildDataTable(_dataSource).DefaultView;
@@ -78,10 +78,10 @@ namespace FTAnalyzer.Forms.Controls
             List<string> clauses = [.. filterString.Split(separator, StringSplitOptions.None)];
             foreach (string clause in clauses)
             {
-                int pos = clause.IndexOf('[');
+                int pos = clause.IndexOf('[', StringComparison.Ordinal);
                 if (pos > 0)
                 {
-                    int endpos = clause.IndexOf(']');
+                    int endpos = clause.IndexOf(']', StringComparison.Ordinal);
                     if (endpos > 0 && pos < endpos)
                         result.Add(clause.Substring(pos + 1, endpos - pos - 1));
                 }
@@ -106,13 +106,13 @@ namespace FTAnalyzer.Forms.Controls
                     int endpos = clause.IndexOf(')', pos);
                     string values = clause.Substring(pos + 4, endpos - pos - 4);
                     foreach (string value in values.Split(','))
-                        result.Add(value.Replace("\'", "").Trim());
+                        result.Add(value.Replace("\'", "", StringComparison.Ordinal).Trim());
                 }
             }
             return result;
         }
 
-        public event EventHandler<CountEventArgs> VirtualGridFiltered;
+        public event EventHandler<CountEventArgs>? VirtualGridFiltered;
 
         protected void OnVirtualGridFiltered()
         {
@@ -124,17 +124,17 @@ namespace FTAnalyzer.Forms.Controls
         }
 
         [DefaultValue(null), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public new SortableBindingList<T> DataSource
+        public new SortableBindingList<T>? DataSource
         {
             get => _dataSource;
             set
             {
                 CreateGridColumns();
-                _dataSource = value;
-                _fulllist = value;
-                if (_dataSource is not null)
+                _dataSource = value ?? [];
+                _fulllist = value ?? [];
+                if (value is not null)
                 {
-                    DataView dataView = BuildDataTable(_dataSource).DefaultView;
+                    DataView dataView = BuildDataTable(value).DefaultView;
                     base.DataSource = dataView;
                 }
                 else
@@ -178,7 +178,7 @@ namespace FTAnalyzer.Forms.Controls
         static bool IsNullableType(Type type) => type.IsGenericType && type.GetGenericTypeDefinition().Equals(typeof(Nullable<>));
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public T CurrentRowDataBoundItem => DataBoundItem(CurrentRow.Index);
+        public T? CurrentRowDataBoundItem => CurrentRow is not null ? DataBoundItem(CurrentRow.Index) : default;
 
         public T DataBoundItem(int rowIndex)
         {
@@ -260,7 +260,7 @@ namespace FTAnalyzer.Forms.Controls
 
         class PropertyComparer(string propertyName, ListSortDirection direction) : IComparer<T>
         {
-            readonly PropertyInfo _accessor = typeof(T).GetProperty(propertyName);
+            readonly PropertyInfo? _accessor = typeof(T).GetProperty(propertyName);
             readonly int _direction = direction == ListSortDirection.Ascending ? 1 : -1;
 
             public int Compare(T? x, T? y)

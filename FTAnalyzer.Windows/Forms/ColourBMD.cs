@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Graphics;
+using FTAnalyzer.Graphics;
 using FTAnalyzer.Properties;
 using FTAnalyzer.Shared.Utilities;
 using FTAnalyzer.Utilities;
@@ -23,19 +23,19 @@ namespace FTAnalyzer.Forms
 
         public ColourBMD(List<IDisplayColourBMD> reportList)
         {
+            InitializeComponent();
+            _reportList = [.. reportList];
+            reportFormHelper = new(this, "Colour BMD Report", dgBMDReportSheet, ResetTable, "Colour BMD");
+            boldFont = new(dgBMDReportSheet.DefaultCellStyle.Font?.FontFamily ?? SystemFonts.DefaultFont.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
+            styles = [];
+
             try
             {
-                InitializeComponent();
                 Top += NativeMethods.TopTaskbarOffset;
                 dgBMDReportSheet.AutoGenerateColumns = false;
                 dgBMDReportSheet.ContextMenuStrip = null; // CellContextMenuStripNeeded supplies it only for data rows
-
-                _reportList = [.. reportList];
-                reportFormHelper = new(this, "Colour BMD Report", dgBMDReportSheet, ResetTable, "Colour BMD");
                 ExtensionMethods.DoubleBuffered(dgBMDReportSheet, true);
                 settingSelections = false;
-                boldFont = new(dgBMDReportSheet.DefaultCellStyle.Font ?? SystemFonts.DefaultFont, FontStyle.Bold);
-                styles = [];
                 DataGridViewCellStyle notRequired = new();
                 notRequired.BackColor = notRequired.ForeColor = BMDColourValues[(int)BMDColours.EMPTY];
                 styles.Add(BMDColours.EMPTY, notRequired);
@@ -79,15 +79,16 @@ namespace FTAnalyzer.Forms
                 over90.BackColor = over90.ForeColor = BMDColourValues[(int)BMDColours.OVER90];
                 styles.Add(BMDColours.OVER90, over90);
 
-                birthColumnIndex = dgBMDReportSheet.Columns["Birth"].Index;
-                burialColumnIndex = dgBMDReportSheet.Columns["CremBuri"].Index;
+                birthColumnIndex = dgBMDReportSheet.Columns["Birth"]?.Index ?? 0;
+                burialColumnIndex = dgBMDReportSheet.Columns["CremBuri"]?.Index ?? 0;
                 dgBMDReportSheet.DataSource = _reportList;
-                dgBMDReportSheet.RowTemplate.Height = (int)(FontSettings.Default.SelectedFont.Height * GraphicsUtilities.GetCurrentScaling());
+                dgBMDReportSheet.RowTemplate.Height = (int)(FontSettings.Default.FontHeight * GraphicsUtilities.GetCurrentScaling());
+                SetColourColumnWidths();
                 reportFormHelper.LoadColumnLayout("ColourBMDColumns.xml");
                 tsRecords.Text = $"{Messages.Count}{reportList.Count} records listed.";
                 string defaultProvider = RegistrySettings.GetStringRegistryValue("Default Search Provider", DEFAULT_PROVIDER);
                 defaultProvider ??= DEFAULT_PROVIDER;
-                if (defaultProvider.Equals("FreeCen"))
+                if (defaultProvider.Equals("FreeCen", StringComparison.OrdinalIgnoreCase))
                     defaultProvider = "FreeBMD";
                 cbBMDSearchProvider.Text = defaultProvider;
                 string defaultRegion = RegistrySettings.GetStringRegistryValue("Default Region", DEFAULT_REGION);
@@ -111,6 +112,17 @@ namespace FTAnalyzer.Forms
                 dgBMDReportSheet.Sort(surname, ListSortDirection.Ascending);
                 foreach (DataGridViewColumn column in dgBMDReportSheet.Columns)
                     column.Width = column.MinimumWidth;
+                SetColourColumnWidths();
+            }
+        }
+
+        void SetColourColumnWidths()
+        {
+            int width = TextRenderer.MeasureText("Christening", FontSettings.Default.SelectedFont).Width + 8;
+            for (int i = birthColumnIndex; i <= burialColumnIndex; i++)
+            {
+                dgBMDReportSheet.Columns[i].MinimumWidth = width;
+                dgBMDReportSheet.Columns[i].Width = width;
             }
         }
 
@@ -145,7 +157,7 @@ namespace FTAnalyzer.Forms
             else
             {
                 DataGridViewCell cell = dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                BMDColours value = (BMDColours)cell.Value;
+                if (cell.Value is not BMDColours value) return;
                 styles.TryGetValue(value, out DataGridViewCellStyle? style);
                 if (style is not null)
                 {
@@ -227,10 +239,11 @@ namespace FTAnalyzer.Forms
                 if (e.ColumnIndex >= birthColumnIndex && e.ColumnIndex <= burialColumnIndex)
                 {
                     DataGridViewCell cell = dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                    BMDColours value = (BMDColours)cell.Value;
+                    if (cell.Value is not BMDColours value) return;
                     IDisplayColourBMD? person = (IDisplayColourBMD?)dgBMDReportSheet.Rows[e.RowIndex].DataBoundItem;
                     if (person is null) return;
                     Individual? ind = ft.GetIndividual(person.IndividualID);
+                    if (ind is null) return;
                     if (e.ColumnIndex == birthColumnIndex || e.ColumnIndex == birthColumnIndex + 1)
                     {
                         FamilyTree.SearchBMD(FamilyTree.SearchType.BIRTH, ind, ind.BirthDate, ind.BirthLocation, cbBMDSearchProvider.SelectedIndex, cbRegion.Text, null);
@@ -267,7 +280,7 @@ namespace FTAnalyzer.Forms
                 }
                 else if (e.ColumnIndex >= 0)
                 {
-                    string indID = dgBMDReportSheet.CurrentRow.Cells["IndividualID"].Value.ToString() ?? string.Empty;
+                    string indID = dgBMDReportSheet.CurrentRow?.Cells["IndividualID"].Value?.ToString() ?? string.Empty;
                     if (indID != string.Empty)
                         MainForm.ShowIndividualsFacts(indID);
                 }
@@ -276,8 +289,8 @@ namespace FTAnalyzer.Forms
 
         void CbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string provider = cbBMDSearchProvider.SelectedItem.ToString() ?? string.Empty;
-            if (provider.Equals("FreeBMD"))
+            string provider = cbBMDSearchProvider.SelectedItem?.ToString() ?? string.Empty;
+            if (provider.Equals("FreeBMD", StringComparison.OrdinalIgnoreCase))
                 provider = "FreeCen";
             RegistrySettings.SetRegistryValue("Default Search Provider", provider, RegistryValueKind.String);
             dgBMDReportSheet.Refresh(); // forces refresh of tooltips
@@ -286,8 +299,8 @@ namespace FTAnalyzer.Forms
 
         void CbRegion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            RegistrySettings.SetRegistryValue("Default Region", cbRegion.SelectedItem.ToString() ?? string.Empty, RegistryValueKind.String);
-            Settings.Default.defaultURLRegion = cbRegion.SelectedItem.ToString();
+            RegistrySettings.SetRegistryValue("Default Region", cbRegion.SelectedItem?.ToString() ?? string.Empty, RegistryValueKind.String);
+            Settings.Default.defaultURLRegion = cbRegion.SelectedItem?.ToString();
             Utilities.UIHelpers.SafeSaveSettings(Settings.Default);
             dgBMDReportSheet.Refresh(); // forces refresh of tooltips
             dgBMDReportSheet.Focus();

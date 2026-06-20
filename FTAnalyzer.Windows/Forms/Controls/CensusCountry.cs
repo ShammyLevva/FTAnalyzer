@@ -95,7 +95,7 @@ namespace FTAnalyzer.Forms.Controls
             }
         }
 
-        public event EventHandler CountryChanged;
+        public event EventHandler? CountryChanged;
 
         protected void OnCountryChanged(EventArgs e) => CountryChanged?.Invoke(this, e);
 

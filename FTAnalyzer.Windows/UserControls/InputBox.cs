@@ -4,7 +4,7 @@
     {
         public static DialogResult Show(string title, string promptText, ref string value, IWin32Window? owner = null)
         {
-            Form form = new();
+            using Form form = new();
             Label label = new();
             TextBox textBox = new();
             Button buttonOk = new();
@@ -49,6 +49,6 @@
     public class InputBoxResult
     {
         public DialogResult ReturnCode { get; set; }
-        public string Text { get; set; }
+        public string Text { get; set; } = string.Empty;
     }
 }

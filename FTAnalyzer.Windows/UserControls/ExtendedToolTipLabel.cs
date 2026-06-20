@@ -24,7 +24,7 @@ namespace FTAnalyzer.UserControls
         }
 
         [DefaultValue("")]
-        public string ToolTipText { get; set; }
+        public string ToolTipText { get; set; } = string.Empty;
 
         void ExtendedToolTipLabel_MouseLeave(object? sender, EventArgs e)
         {

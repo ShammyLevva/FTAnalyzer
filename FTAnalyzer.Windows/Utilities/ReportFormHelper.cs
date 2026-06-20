@@ -81,7 +81,7 @@ namespace FTAnalyzer.Utilities
             printPreviewDialog.ShowDialog(parent);
         }
 
-        public virtual void DoExportToExcel<T>(DataGridViewColumnCollection shown = null)
+        public virtual void DoExportToExcel<T>(DataGridViewColumnCollection? shown = null)
         {
             if (ReportGrid.DataSource is null || ReportGrid.RowCount == 0)
                 return;
@@ -168,26 +168,24 @@ namespace FTAnalyzer.Utilities
                             col.ColumnName = "Census";
 
                         // Skip columns that don't exist in current grid
-                        if (ReportGrid.Columns[col.ColumnName] is null)
+                        if (ReportGrid.Columns[col.ColumnName] is not DataGridViewColumn gridCol)
                         {
                             i++;
                             continue;
                         }
 
-                        ReportGrid.Columns[col.ColumnName].DisplayIndex = i;
+                        gridCol.DisplayIndex = i;
                         if (col.ExtendedProperties.Contains("Width"))
                         {
-                            if (int.TryParse(col.ExtendedProperties["Width"].ToString(), out int width))
-                                ReportGrid.Columns[col.ColumnName].Width = width;
+                            if (int.TryParse(col.ExtendedProperties["Width"]?.ToString(), out int width))
+                                gridCol.Width = width;
                         }
                         if (col.ExtendedProperties.Contains("Sort"))
                         {
                             ListSortDirection direction = "Ascending".Equals(col.ExtendedProperties["Sort"]) ?
                                     ListSortDirection.Ascending :
                                     ListSortDirection.Descending;
-                            DataGridViewColumn? sortCol = ReportGrid.Columns[col.ColumnName];
-                            if (sortCol is not null)
-                                ReportGrid.Sort(sortCol, direction);
+                            ReportGrid.Sort(gridCol, direction);
                         }
                         i++;
                     }

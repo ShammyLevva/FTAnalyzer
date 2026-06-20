@@ -7,9 +7,9 @@ namespace FTAnalyzer.Mapping
     public class MapLifeLine
     {
         readonly Individual ind;
-        Geometry Geometry { get; set; }
-        Geometry StartPoint { get; set; }
-        Geometry EndPoint { get; set; }
+        Geometry? Geometry { get; set; }
+        Geometry? StartPoint { get; set; }
+        Geometry? EndPoint { get; set; }
         int Count { get; set; }
         Envelope Viewport { get; set; }
 
@@ -57,7 +57,7 @@ namespace FTAnalyzer.Mapping
             r["LineCap"] = LINE;
             r["Label"] = ind.Name;
             r["ViewPort"] = Viewport;
-            r.Geometry = Geometry;
+            if (Geometry is not null) r.Geometry = Geometry;
             table.AddRow(r);
 
             r = table.NewRow();
@@ -66,7 +66,7 @@ namespace FTAnalyzer.Mapping
             r["ViewPort"] = Viewport;
             if (Count == 1)
                 r["Label"] = ind.Name;
-            r.Geometry = StartPoint;
+            if (StartPoint is not null) r.Geometry = StartPoint;
             table.AddRow(r);
 
             if (Count > 1)
@@ -75,7 +75,7 @@ namespace FTAnalyzer.Mapping
                 r["MapLifeLine"] = this;
                 r["LineCap"] = END;
                 r["ViewPort"] = Viewport;
-                r.Geometry = EndPoint;
+                if (EndPoint is not null) r.Geometry = EndPoint;
                 table.AddRow(r);
             }
             return r;

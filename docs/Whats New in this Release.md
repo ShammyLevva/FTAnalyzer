@@ -5,6 +5,8 @@ Improve efficiency of surname loading
 
 **Bugfixes**
 Fix data errors subtabs sometimes opening without data
+Fix layout of relationship types control
+Many tweaks of Mainform layouts for different font sizes
 
 ## Version 10.1.0.0 - 15th June 2026
 **Updates**

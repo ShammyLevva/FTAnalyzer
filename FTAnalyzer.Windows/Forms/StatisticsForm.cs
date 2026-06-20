@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Filters;
+using FTAnalyzer.Filters;
 using FTAnalyzer.Utilities;
 using System.ComponentModel;
 

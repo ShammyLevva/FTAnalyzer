@@ -4,6 +4,6 @@
     {
         public string FilterText { get; set; }
 
-        public CountEventArgs() => FilterText = null;
+        public CountEventArgs() => FilterText = string.Empty;
     }
 }

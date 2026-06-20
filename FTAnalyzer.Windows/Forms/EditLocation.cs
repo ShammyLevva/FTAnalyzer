@@ -12,12 +12,12 @@ namespace FTAnalyzer.Forms
 {
     public partial class EditLocation : Form
     {
-        FeatureDataTable pointTable;
-        VectorLayer pointLayer;
+        readonly FeatureDataTable pointTable = new();
+        readonly VectorLayer pointLayer = new("Point to Edit");
         List<GdalRasterLayer> customMapLayers;
         readonly FactLocation location;
         readonly FactLocation originalLocation;
-        FeatureDataRow pointFeature;
+        FeatureDataRow? pointFeature;
         bool iconSelected;
         bool pointUpdated;
         bool dataUpdated;
@@ -47,12 +47,10 @@ namespace FTAnalyzer.Forms
 
         void SetupMap()
         {
-            pointTable = new FeatureDataTable();
             pointTable.Columns.Add("Label", typeof(string));
 
             GeometryFeatureProvider pointGFP = new(pointTable);
 
-            pointLayer = new VectorLayer("Point to Edit");
             pointLayer.Style.Symbol = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\teardrop_blue.png"));
             pointLayer.Style.SymbolOffset = new PointF(0.0f, -17.0f);
             pointLayer.DataSource = pointGFP;
@@ -86,6 +84,7 @@ namespace FTAnalyzer.Forms
             if (iconSelected && e.Button == MouseButtons.Right)
             {
                 // we have finished and are saving icon
+                if (pointFeature is null) return;
                 mapBox1.Cursor = Cursors.Default;
                 Coordinate c = mapBox1.Map.ImageToWorld(new PointF(e.X, e.Y + 17.0f));
                 pointFeature.Geometry = new NetTopologySuite.Geometries.Point(c);
@@ -93,7 +92,7 @@ namespace FTAnalyzer.Forms
                 iconSelected = false;
                 pointUpdated = true;
             }
-            else if (env.Contains(pointFeature.Geometry.Coordinate))
+            else if (pointFeature is not null && env.Contains(pointFeature.Geometry.Coordinate))
             {
                 mapBox1.Cursor = new Cursor(Path.Combine(Application.StartupPath, @"Resources\Icons\teardrop_blue.cur"));
                 iconSelected = true;
@@ -132,6 +131,7 @@ namespace FTAnalyzer.Forms
 
         void UpdateDatabase()
         {
+            if (pointFeature is null) return;
             Envelope env = new(mapBox1.Map.Envelope.TopLeft(), mapBox1.Map.Envelope.BottomRight());
             Coordinate point = MapTransforms.ReverseTransformCoordinate(pointFeature.Geometry.Coordinate);
             location.Latitude = point.Y;

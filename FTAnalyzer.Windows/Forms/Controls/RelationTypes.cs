@@ -81,7 +81,7 @@ namespace FTAnalyzer.Forms.Controls
             return FilterUtils.OrFilter(relationFilters);
         }
 
-        public event EventHandler RelationTypesChanged;
+        public event EventHandler? RelationTypesChanged;
         protected void OnRelationTypesChanged() => RelationTypesChanged?.Invoke(this, EventArgs.Empty);
 
         void Tickbox_CheckedChanged(object sender, EventArgs e) => OnRelationTypesChanged();

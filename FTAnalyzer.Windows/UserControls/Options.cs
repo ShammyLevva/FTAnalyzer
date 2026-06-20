@@ -55,9 +55,9 @@ namespace FTAnalyzer.UserControls
             catch (ReflectionTypeLoadException ex)
             {
                 StringBuilder sb = new();
-                foreach (var exSub in ex.LoaderExceptions)
+                foreach (Exception? exSub in ex.LoaderExceptions)
                 {
-                    sb.AppendLine(exSub.Message);
+                    sb.AppendLine(exSub?.Message);
                     if (exSub is FileNotFoundException exFileNotFound)
                     {
                         if (!string.IsNullOrEmpty(exFileNotFound.FusionLog))
@@ -151,7 +151,7 @@ namespace FTAnalyzer.UserControls
             }
         }
 
-        public static event EventHandler ReloadRequired;
+        public static event EventHandler? ReloadRequired;
         protected static void OnReloadRequired() => ReloadRequired?.Invoke(null, EventArgs.Empty);
 
         void Cancel_Click(object sender, EventArgs e)
@@ -175,7 +175,7 @@ namespace FTAnalyzer.UserControls
                 {
                     panel1.Controls[i].Visible = false;
                 }
-                string tableTag = treeView1.SelectedNode.Tag.ToString() ?? string.Empty;
+                string tableTag = treeView1.SelectedNode.Tag?.ToString() ?? string.Empty;
                 if (!string.IsNullOrEmpty(tableTag))
                     _lookupTable[tableTag].Visible = true;
                 ResumeLayout();

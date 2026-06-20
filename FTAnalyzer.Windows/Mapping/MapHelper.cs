@@ -1,4 +1,4 @@
-﻿using FTAnalyzer.Forms;
+using FTAnalyzer.Forms;
 using FTAnalyzer.Properties;
 using FTAnalyzer.Utilities;
 using NetTopologySuite.Geometries;
@@ -17,7 +17,7 @@ namespace FTAnalyzer.Mapping
 {
     public class MapHelper
     {
-        static MapHelper instance;
+        static MapHelper? instance;
         readonly FamilyTree ft = FamilyTree.Instance;
 
         MapHelper()
@@ -147,7 +147,9 @@ namespace FTAnalyzer.Mapping
                         {
                             DataSource = new ShapeFile(filename, true)
                         };
+#pragma warning disable CS8625 // SharpMap VectorStyle.Fill accepts null to mean "no fill" but lacks nullable annotations
                         parishLayer.Style.Fill = null;
+#pragma warning restore CS8625
                         parishLayer.Style.Outline = new Pen(Color.Black, 2.0f);
                         parishLayer.Style.EnableOutline = true;
                         parishLayer.MinVisible = 500;
