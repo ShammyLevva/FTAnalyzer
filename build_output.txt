@@ -1,9 +1,0 @@
-  Determining projects to restore...
-  All projects are up-to-date for restore.
-  FTAnalyzer.Windows -> D:\Programming\GitRepo\FTAnalyzer\FTAnalyzer.Windows\bin\Debug\net10.0-windows10.0.17763.0\FTAnalyzer.dll
-
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:01.55
