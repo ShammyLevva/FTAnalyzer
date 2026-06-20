@@ -178,11 +178,12 @@ namespace FTAnalyzer.Forms.Controls
 
         TreeNode[] BuildTreeNodeArray(bool mainForm)
         {
-            TreeNodeCollection nodes;
+            TreeNodeCollection? nodes;
             if (mainForm)
-                nodes = mainformTreeRootNode.Nodes;
+                nodes = mainformTreeRootNode?.Nodes;
             else
-                nodes = placesTreeRootNode.Nodes;
+                nodes = placesTreeRootNode?.Nodes;
+            if (nodes is null) return [];
             TreeNode[] result = new TreeNode[nodes.Count];
             nodes.CopyTo(result, 0);
             return result;

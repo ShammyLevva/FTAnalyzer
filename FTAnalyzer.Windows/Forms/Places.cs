@@ -1,4 +1,3 @@
-#pragma warning disable CA2000 // Modeless WinForms forms are owned by the Windows message loop; lifetime is managed externally
 using FTAnalyzer.Forms.Controls;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Properties;
@@ -281,7 +280,7 @@ namespace FTAnalyzer.Forms
                 if (location is not null)
                 {
                     People frmInd = new();
-                    frmInd.SetLocation(location, e.Node.Level);
+                    frmInd.SetLocation(location, e.Node?.Level ?? 0);
                     MainForm.DisposeDuplicateForms(frmInd);
                     UIHelpers.ShowOnOwnerScreen(frmInd, this);
                 }
@@ -290,7 +289,7 @@ namespace FTAnalyzer.Forms
             catch (Exception) { }
         }
 
-        void MapBox1_MapViewOnChange() => clusters.Refresh();
+        void MapBox1_MapViewOnChange() => clusters?.Refresh();
 
         void MapBox1_MapZoomChanged(double zoom) => RefreshClusters();
 
@@ -302,7 +301,7 @@ namespace FTAnalyzer.Forms
                 return;
             }
             Cursor = Cursors.WaitCursor;
-            clusters.Refresh();
+            clusters?.Refresh();
             RefreshMap();
             Cursor = Cursors.Default;
         }

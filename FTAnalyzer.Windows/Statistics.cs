@@ -23,8 +23,9 @@ namespace FTAnalyzer
 
         public static int[,,] ChildrenBirthProfiles()
         {
+            FamilyTree tree = ft ?? FamilyTree.Instance;
             int[,,] stats = new int[2, 20, 3];
-            foreach (Family f in ft.AllFamilies)
+            foreach (Family f in tree.AllFamilies)
             {
                 foreach (Individual child in f.Children)
                 {
@@ -81,12 +82,13 @@ namespace FTAnalyzer
 
         public List<IDisplaySurnames> Surnames(Predicate<Individual> indFilter, Predicate<Family> famFilter, IProgress<int> progress, bool ignoreCase)
         {
+            FamilyTree tree = ft ?? FamilyTree.Instance;
             StringComparer comparer = ignoreCase ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal;
 
             // Single pass over individuals: count per surname and capture canonical display name
             Dictionary<string, int> individualCounts = new(comparer);
             Dictionary<string, string> canonicalName = new(comparer);
-            foreach (Individual ind in ft.AllIndividuals)
+            foreach (Individual ind in tree.AllIndividuals)
             {
                 if (ind.Surname == Individual.UNKNOWN_NAME || !indFilter(ind)) continue;
                 individualCounts[ind.Surname] = individualCounts.GetValueOrDefault(ind.Surname) + 1;
@@ -96,7 +98,7 @@ namespace FTAnalyzer
             // Single pass over families: count families and marriages per surname
             Dictionary<string, int> familyCounts = new(comparer);
             Dictionary<string, int> marriageCounts = new(comparer);
-            foreach (Family fam in ft.AllFamilies)
+            foreach (Family fam in tree.AllFamilies)
             {
                 if (!famFilter(fam)) continue;
                 HashSet<string> seenInFamily = new(comparer);

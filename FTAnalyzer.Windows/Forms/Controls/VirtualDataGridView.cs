@@ -1,4 +1,3 @@
-#pragma warning disable CA2000 // Modeless WinForms forms are owned by the Windows message loop; lifetime is managed externally
 using FTAnalyzer.Utilities;
 using System.ComponentModel;
 using System.Data;
@@ -61,7 +60,7 @@ namespace FTAnalyzer.Forms.Controls
                 foreach (string filteredColumn in VirtualDataGridView<T>.GetFilteredColumns(e.FilterString))
                 {
                     List<string> filteredValues = VirtualDataGridView<T>.GetFilteredValues(filteredColumn, e.FilterString);
-                    filter = [.. filter.Where(x => filteredValues.Contains(x.GetType().GetProperty(filteredColumn)?.GetValue(x, null)))];
+                    filter = [.. filter.Where(x => x is not null && filteredValues.Contains(x.GetType().GetProperty(filteredColumn)?.GetValue(x, null)))];
                 }
                 _dataSource = filter;
                 DataView dataView = BuildDataTable(_dataSource).DefaultView;

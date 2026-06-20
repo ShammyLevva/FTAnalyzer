@@ -828,7 +828,7 @@ namespace FTAnalyzer
 
         void MnuSetRoot_Opened(object sender, EventArgs e)
         {
-            var ind = (Individual)dgIndividuals.CurrentRowDataBoundItem;
+            Individual? ind = dgIndividuals.CurrentRowDataBoundItem as Individual;
             if (ind is not null)
                 viewNotesToolStripMenuItem.Enabled = ind.HasNotes;
         }
@@ -836,7 +836,7 @@ namespace FTAnalyzer
         void ViewNotesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            Individual ind = (Individual)dgIndividuals.CurrentRowDataBoundItem;
+            Individual? ind = dgIndividuals.CurrentRowDataBoundItem as Individual;
             if (ind is not null)
             {
                 Notes notes = new(ind);
@@ -895,19 +895,19 @@ namespace FTAnalyzer
                     }
                     break;
                 case "Countries":
-                    loc = dgCountries.CurrentRow is null ? null : (FactLocation)dgCountries.CurrentRowDataBoundItem;
+                    loc = dgCountries.CurrentRow is null ? null : dgCountries.CurrentRowDataBoundItem as FactLocation;
                     break;
                 case "Regions":
-                    loc = dgRegions.CurrentRow is null ? null : (FactLocation)dgRegions.CurrentRowDataBoundItem;
+                    loc = dgRegions.CurrentRow is null ? null : dgRegions.CurrentRowDataBoundItem as FactLocation;
                     break;
                 case "SubRegions":
-                    loc = dgSubRegions.CurrentRow is null ? null : (FactLocation)dgSubRegions.CurrentRowDataBoundItem;
+                    loc = dgSubRegions.CurrentRow is null ? null : dgSubRegions.CurrentRowDataBoundItem as FactLocation;
                     break;
                 case "Addresses":
-                    loc = dgAddresses.CurrentRow is null ? null : (FactLocation)dgAddresses.CurrentRowDataBoundItem;
+                    loc = dgAddresses.CurrentRow is null ? null : dgAddresses.CurrentRowDataBoundItem as FactLocation;
                     break;
                 case "Places":
-                    loc = dgPlaces.CurrentRow is null ? null : (FactLocation)dgPlaces.CurrentRowDataBoundItem;
+                    loc = dgPlaces.CurrentRow is null ? null : dgPlaces.CurrentRowDataBoundItem as FactLocation;
                     break;
             }
             if (loc is null)

@@ -10,8 +10,8 @@ namespace FTAnalyzer
     public partial class MapIndividuals : Form
     {
         readonly FamilyTree ft = FamilyTree.Instance;
-        Font? italicFont;
-        ReportFormHelper? reportFormHelper;
+        readonly Font? italicFont;
+        readonly ReportFormHelper? reportFormHelper;
         readonly List<MapLocation> locations;
         readonly Form mapForm;
 
@@ -50,19 +50,19 @@ namespace FTAnalyzer
             }
         }
 
-        void PrintToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintReport("Map Individuals");
+        void PrintToolStripButton_Click(object sender, EventArgs e) => reportFormHelper?.PrintReport("Map Individuals");
 
-        void PrintPreviewToolStripButton_Click(object sender, EventArgs e) => reportFormHelper.PrintPreviewReport();
+        void PrintPreviewToolStripButton_Click(object sender, EventArgs e) => reportFormHelper?.PrintPreviewReport();
 
-        void Facts_TextChanged(object sender, EventArgs e) => reportFormHelper.PrintTitle = Text;
+        void Facts_TextChanged(object sender, EventArgs e) { reportFormHelper?.PrintTitle = Text; }
 
-        void MnuExportToExcel_Click(object sender, EventArgs e) => reportFormHelper.DoExportToExcel<MapLocation>();
+        void MnuExportToExcel_Click(object sender, EventArgs e) => reportFormHelper?.DoExportToExcel<MapLocation>();
 
-        void MnuResetColumns_Click(object sender, EventArgs e) => reportFormHelper.ResetColumnLayout("MapIndividualColumns.xml");
+        void MnuResetColumns_Click(object sender, EventArgs e) => reportFormHelper?.ResetColumnLayout("MapIndividualColumns.xml");
 
         void MnuSaveColumnLayout_Click(object sender, EventArgs e)
         {
-            reportFormHelper.SaveColumnLayout("MapIndividualColumns.xml");
+            reportFormHelper?.SaveColumnLayout("MapIndividualColumns.xml");
             UIHelpers.ShowMessage("Form Settings Saved", "Map Individuals");
         }
 
