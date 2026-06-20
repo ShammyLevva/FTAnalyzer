@@ -227,6 +227,8 @@ namespace FTAnalyzer
             Referrals.Top = btnLCnoCensus.Bottom + 8;
             gbFilters.Top = relTypesResearchSuggest.Top;
             gbFilters.Height = relTypesResearchSuggest.Height;
+            nudToday.Left = labTodayYearStep.Right + 8;
+            pbToday.Left = labTodayLoadWorldEvents.Right + 8;
             Refresh();
         }
 
