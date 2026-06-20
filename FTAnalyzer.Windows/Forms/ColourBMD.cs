@@ -34,7 +34,7 @@ namespace FTAnalyzer.Forms
                 reportFormHelper = new(this, "Colour BMD Report", dgBMDReportSheet, ResetTable, "Colour BMD");
                 ExtensionMethods.DoubleBuffered(dgBMDReportSheet, true);
                 settingSelections = false;
-                boldFont = new(dgBMDReportSheet.DefaultCellStyle.Font ?? SystemFonts.DefaultFont, FontStyle.Bold);
+                boldFont = new(dgBMDReportSheet.DefaultCellStyle.Font?.FontFamily ?? SystemFonts.DefaultFont.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
                 styles = [];
                 DataGridViewCellStyle notRequired = new();
                 notRequired.BackColor = notRequired.ForeColor = BMDColourValues[(int)BMDColours.EMPTY];
@@ -82,7 +82,8 @@ namespace FTAnalyzer.Forms
                 birthColumnIndex = dgBMDReportSheet.Columns["Birth"].Index;
                 burialColumnIndex = dgBMDReportSheet.Columns["CremBuri"].Index;
                 dgBMDReportSheet.DataSource = _reportList;
-                dgBMDReportSheet.RowTemplate.Height = (int)(FontSettings.Default.SelectedFont.Height * GraphicsUtilities.GetCurrentScaling());
+                dgBMDReportSheet.RowTemplate.Height = (int)(FontSettings.Default.FontHeight * GraphicsUtilities.GetCurrentScaling());
+                SetColourColumnWidths();
                 reportFormHelper.LoadColumnLayout("ColourBMDColumns.xml");
                 tsRecords.Text = $"{Messages.Count}{reportList.Count} records listed.";
                 string defaultProvider = RegistrySettings.GetStringRegistryValue("Default Search Provider", DEFAULT_PROVIDER);
@@ -111,6 +112,17 @@ namespace FTAnalyzer.Forms
                 dgBMDReportSheet.Sort(surname, ListSortDirection.Ascending);
                 foreach (DataGridViewColumn column in dgBMDReportSheet.Columns)
                     column.Width = column.MinimumWidth;
+                SetColourColumnWidths();
+            }
+        }
+
+        void SetColourColumnWidths()
+        {
+            int width = TextRenderer.MeasureText("Christening", FontSettings.Default.SelectedFont).Width + 8;
+            for (int i = birthColumnIndex; i <= burialColumnIndex; i++)
+            {
+                dgBMDReportSheet.Columns[i].MinimumWidth = width;
+                dgBMDReportSheet.Columns[i].Width = width;
             }
         }
 

@@ -2003,7 +2003,6 @@ namespace FTAnalyzer
             // 
             // Referrals
             // 
-            Referrals.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             Referrals.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             Referrals.Controls.Add(ckbReferralInCommon);
             Referrals.Controls.Add(btnReferrals);
@@ -2032,7 +2031,6 @@ namespace FTAnalyzer
             // 
             // btnReferrals
             // 
-            btnReferrals.AutoSize = false;
             btnReferrals.Location = new Point(262, 52);
             btnReferrals.Margin = new Padding(4);
             btnReferrals.Name = "btnReferrals";
@@ -4198,7 +4196,7 @@ namespace FTAnalyzer
             // labTodayYearStep
             // 
             labTodayYearStep.AutoSize = true;
-            labTodayYearStep.Location = new Point(707, 19);
+            labTodayYearStep.Location = new Point(650, 20);
             labTodayYearStep.Margin = new Padding(4, 0, 4, 0);
             labTodayYearStep.Name = "labTodayYearStep";
             labTodayYearStep.Size = new Size(61, 15);
@@ -4207,7 +4205,7 @@ namespace FTAnalyzer
             // 
             // nudToday
             // 
-            nudToday.Location = new Point(776, 17);
+            nudToday.Location = new Point(719, 18);
             nudToday.Margin = new Padding(4);
             nudToday.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
             nudToday.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
@@ -4218,7 +4216,7 @@ namespace FTAnalyzer
             // 
             // btnUpdateTodaysEvents
             // 
-            btnUpdateTodaysEvents.Location = new Point(360, 14);
+            btnUpdateTodaysEvents.Location = new Point(303, 15);
             btnUpdateTodaysEvents.Margin = new Padding(4);
             btnUpdateTodaysEvents.Name = "btnUpdateTodaysEvents";
             btnUpdateTodaysEvents.Size = new Size(134, 26);
@@ -4230,7 +4228,7 @@ namespace FTAnalyzer
             // labTodayLoadWorldEvents
             // 
             labTodayLoadWorldEvents.AutoSize = true;
-            labTodayLoadWorldEvents.Location = new Point(833, 20);
+            labTodayLoadWorldEvents.Location = new Point(783, 21);
             labTodayLoadWorldEvents.Margin = new Padding(4, 0, 4, 0);
             labTodayLoadWorldEvents.Name = "labTodayLoadWorldEvents";
             labTodayLoadWorldEvents.Size = new Size(122, 15);
@@ -4239,7 +4237,7 @@ namespace FTAnalyzer
             // 
             // pbToday
             // 
-            pbToday.Location = new Point(963, 17);
+            pbToday.Location = new Point(913, 18);
             pbToday.Margin = new Padding(4);
             pbToday.Name = "pbToday";
             pbToday.Size = new Size(198, 23);
@@ -4248,7 +4246,7 @@ namespace FTAnalyzer
             // rbTodayMonth
             // 
             rbTodayMonth.AutoSize = true;
-            rbTodayMonth.Location = new Point(596, 17);
+            rbTodayMonth.Location = new Point(539, 18);
             rbTodayMonth.Margin = new Padding(4);
             rbTodayMonth.Name = "rbTodayMonth";
             rbTodayMonth.Size = new Size(98, 19);
@@ -4260,7 +4258,7 @@ namespace FTAnalyzer
             // 
             rbTodaySingle.AutoSize = true;
             rbTodaySingle.Checked = true;
-            rbTodaySingle.Location = new Point(501, 17);
+            rbTodaySingle.Location = new Point(444, 18);
             rbTodaySingle.Margin = new Padding(4);
             rbTodaySingle.Name = "rbTodaySingle";
             rbTodaySingle.Size = new Size(80, 19);
@@ -4272,7 +4270,7 @@ namespace FTAnalyzer
             // labTodaySelectDate
             // 
             labTodaySelectDate.AutoSize = true;
-            labTodaySelectDate.Location = new Point(66, 19);
+            labTodaySelectDate.Location = new Point(9, 20);
             labTodaySelectDate.Margin = new Padding(4, 0, 4, 0);
             labTodaySelectDate.Name = "labTodaySelectDate";
             labTodaySelectDate.Size = new Size(71, 15);
@@ -4281,7 +4279,7 @@ namespace FTAnalyzer
             // 
             // dpToday
             // 
-            dpToday.Location = new Point(153, 17);
+            dpToday.Location = new Point(96, 18);
             dpToday.Margin = new Padding(4);
             dpToday.Name = "dpToday";
             dpToday.Size = new Size(199, 23);

@@ -98,11 +98,9 @@ namespace FTAnalyzer.Forms
             dgBMDReportSheet.AllowUserToAddRows = false;
             dgBMDReportSheet.AllowUserToDeleteRows = false;
             dgBMDReportSheet.AllowUserToOrderColumns = true;
-            dgBMDReportSheet.AllowUserToResizeRows = false;
             dgBMDReportSheet.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.142858F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
@@ -112,7 +110,6 @@ namespace FTAnalyzer.Forms
             dgBMDReportSheet.Columns.AddRange(new DataGridViewColumn[] { IndividualID, Forenames, Surname, Relation, RelationToRoot, Birth, BaptChri, Marriage1, Marriage2, Marriage3, Death, CremBuri, BirthDate, DeathDate, FirstMarriage, SecondMarriage, ThirdMarriage, BirthLocation, DeathLocation, Ahnentafel });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 8.142858F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
@@ -124,7 +121,6 @@ namespace FTAnalyzer.Forms
             dgBMDReportSheet.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 8.142858F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
@@ -188,80 +184,73 @@ namespace FTAnalyzer.Forms
             // 
             // Birth
             // 
-            Birth.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            Birth.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             Birth.DataPropertyName = "Birth";
             Birth.HeaderText = "Birth";
             Birth.MinimumWidth = 60;
             Birth.Name = "Birth";
             Birth.ReadOnly = true;
-            Birth.Resizable = DataGridViewTriState.False;
             Birth.Width = 60;
             // 
             // BaptChri
             // 
-            BaptChri.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            BaptChri.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             BaptChri.DataPropertyName = "BaptChri";
             BaptChri.HeaderText = "Baptism Christening";
-            BaptChri.MinimumWidth = 62;
+            BaptChri.MinimumWidth = 60;
             BaptChri.Name = "BaptChri";
             BaptChri.ReadOnly = true;
-            BaptChri.Resizable = DataGridViewTriState.False;
-            BaptChri.Width = 114;
+            BaptChri.Width = 60;
             // 
             // Marriage1
             // 
-            Marriage1.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            Marriage1.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             Marriage1.DataPropertyName = "Marriage1";
             Marriage1.HeaderText = "Marriage No. 1";
             Marriage1.MinimumWidth = 60;
             Marriage1.Name = "Marriage1";
             Marriage1.ReadOnly = true;
-            Marriage1.Resizable = DataGridViewTriState.False;
-            Marriage1.Width = 86;
+            Marriage1.Width = 60;
             // 
             // Marriage2
             // 
-            Marriage2.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            Marriage2.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             Marriage2.DataPropertyName = "Marriage2";
             Marriage2.HeaderText = "Marriage No. 2";
             Marriage2.MinimumWidth = 60;
             Marriage2.Name = "Marriage2";
             Marriage2.ReadOnly = true;
-            Marriage2.Resizable = DataGridViewTriState.False;
-            Marriage2.Width = 86;
+            Marriage2.Width = 60;
             // 
             // Marriage3
             // 
-            Marriage3.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            Marriage3.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             Marriage3.DataPropertyName = "Marriage3";
             Marriage3.HeaderText = "Marriage No. 3";
             Marriage3.MinimumWidth = 60;
             Marriage3.Name = "Marriage3";
             Marriage3.ReadOnly = true;
-            Marriage3.Resizable = DataGridViewTriState.False;
-            Marriage3.Width = 86;
+            Marriage3.Width = 60;
             // 
             // Death
             // 
-            Death.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            Death.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             Death.DataPropertyName = "Death";
             Death.HeaderText = "Death";
             Death.MinimumWidth = 60;
             Death.Name = "Death";
             Death.ReadOnly = true;
-            Death.Resizable = DataGridViewTriState.False;
-            Death.Width = 61;
+            Death.Width = 60;
             // 
             // CremBuri
             // 
-            CremBuri.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            CremBuri.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             CremBuri.DataPropertyName = "CremBuri";
             CremBuri.HeaderText = "Burial Cremation";
             CremBuri.MinimumWidth = 60;
             CremBuri.Name = "CremBuri";
             CremBuri.ReadOnly = true;
-            CremBuri.Resizable = DataGridViewTriState.False;
-            CremBuri.Width = 99;
+            CremBuri.Width = 60;
             // 
             // BirthDate
             // 
