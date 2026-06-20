@@ -859,7 +859,7 @@ namespace FTAnalyzer
 
         void BtnOSMap_Click(object sender, EventArgs e)
         {
-            bool oldOSMap = (sender as Button)?.Name == "btnOldOSMap";
+            bool oldOSMap = sender is Button { Name: "btnOldOSMap" };
             float zoom = GetMapZoomLevel(out FactLocation? loc);
             if (loc is not null && loc.IsGeoCoded(false))
             {
@@ -2311,7 +2311,7 @@ namespace FTAnalyzer
         {
             if (Settings.Default.RecentFiles is null || Settings.Default.RecentFiles.Count != 5)
                 ClearRecentList();
-            System.Collections.Specialized.StringCollection recentFiles = Settings.Default.RecentFiles ?? new();
+            System.Collections.Specialized.StringCollection recentFiles = Settings.Default.RecentFiles ?? [];
             bool added = false;
             int count = 0;
             for (int i = 0; i < 5; i++)
