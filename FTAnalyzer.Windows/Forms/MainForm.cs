@@ -218,6 +218,13 @@ namespace FTAnalyzer
             groupBox9.Top = groupBox2.Bottom + 5;      // reposition groupBox9 below groupBox2 after font scaling
             SetStatusBar();
             CheckMaxWindowSizes(new Point(0, 0));
+            // Lost Cousins tab: fix after PerformAutoScale. Link labels (originally Top|Right) drift left when
+            // Panel1.Width is narrower than their scaled position expects, overlapping relTypesLC.
+            // Anchor was changed to Top|Left in designer so this explicit position sticks.
+            int lcLinksLeft = relTypesLC.Right + 23;
+            LabLostCousinsWeb.Left = lcLinksLeft;
+            linkLabel2.Left = lcLinksLeft;
+            Referrals.Top = btnLCnoCensus.Bottom + 8;
             Refresh();
         }
 

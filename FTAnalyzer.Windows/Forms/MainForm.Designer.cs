@@ -1710,7 +1710,6 @@ namespace FTAnalyzer
             // 
             // gbFilters
             // 
-            gbFilters.AutoSize = true;
             gbFilters.Controls.Add(btnRandomSurnameColour);
             gbFilters.Controls.Add(labResearchTabFamilyFilter);
             gbFilters.Controls.Add(cmbColourFamily);
@@ -1718,7 +1717,7 @@ namespace FTAnalyzer
             gbFilters.Controls.Add(txtColouredSurname);
             gbFilters.Location = new Point(419, 9);
             gbFilters.Name = "gbFilters";
-            gbFilters.Size = new Size(637, 118);
+            gbFilters.Size = new Size(637, 122);
             gbFilters.TabIndex = 64;
             gbFilters.TabStop = false;
             gbFilters.Text = "Filters";
@@ -1978,7 +1977,7 @@ namespace FTAnalyzer
             // 
             linkLabel2.AutoSize = true;
             linkLabel2.Font = new Font("Microsoft Sans Serif", 9.75F);
-            linkLabel2.Location = new Point(445, 101);
+            linkLabel2.Location = new Point(427, 80);
             linkLabel2.Margin = new Padding(4, 0, 4, 0);
             linkLabel2.Name = "linkLabel2";
             linkLabel2.Size = new Size(124, 16);
@@ -1992,7 +1991,7 @@ namespace FTAnalyzer
             // 
             LabLostCousinsWeb.AutoSize = true;
             LabLostCousinsWeb.Font = new Font("Microsoft Sans Serif", 9.75F);
-            LabLostCousinsWeb.Location = new Point(445, 56);
+            LabLostCousinsWeb.Location = new Point(427, 35);
             LabLostCousinsWeb.Margin = new Padding(4, 0, 4, 0);
             LabLostCousinsWeb.Name = "LabLostCousinsWeb";
             LabLostCousinsWeb.Size = new Size(136, 16);
@@ -2004,7 +2003,8 @@ namespace FTAnalyzer
             // 
             // Referrals
             // 
-            Referrals.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            Referrals.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            Referrals.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             Referrals.Controls.Add(ckbReferralInCommon);
             Referrals.Controls.Add(btnReferrals);
             Referrals.Controls.Add(cmbReferrals);
@@ -2013,7 +2013,7 @@ namespace FTAnalyzer
             Referrals.Margin = new Padding(4);
             Referrals.Name = "Referrals";
             Referrals.Padding = new Padding(4);
-            Referrals.Size = new Size(575, 96);
+            Referrals.Size = new Size(563, 96);
             Referrals.TabIndex = 51;
             Referrals.TabStop = false;
             Referrals.Text = "Referrals";
@@ -2032,11 +2032,11 @@ namespace FTAnalyzer
             // 
             // btnReferrals
             // 
-            btnReferrals.AutoSize = true;
-            btnReferrals.Location = new Point(300, 52);
+            btnReferrals.AutoSize = false;
+            btnReferrals.Location = new Point(262, 52);
             btnReferrals.Margin = new Padding(4);
             btnReferrals.Name = "btnReferrals";
-            btnReferrals.Size = new Size(257, 26);
+            btnReferrals.Size = new Size(293, 26);
             btnReferrals.TabIndex = 2;
             btnReferrals.Text = "Generate Referral Report for this Individual";
             btnReferrals.UseVisualStyleBackColor = true;
@@ -2045,10 +2045,10 @@ namespace FTAnalyzer
             // cmbReferrals
             // 
             cmbReferrals.FormattingEnabled = true;
-            cmbReferrals.Location = new Point(113, 21);
+            cmbReferrals.Location = new Point(120, 22);
             cmbReferrals.Margin = new Padding(4);
             cmbReferrals.Name = "cmbReferrals";
-            cmbReferrals.Size = new Size(444, 23);
+            cmbReferrals.Size = new Size(423, 23);
             cmbReferrals.TabIndex = 1;
             cmbReferrals.Click += CmbReferrals_Click;
             // 
@@ -2070,19 +2070,19 @@ namespace FTAnalyzer
             btnLCDuplicates.Name = "btnLCDuplicates";
             btnLCDuplicates.Size = new Size(176, 31);
             btnLCDuplicates.TabIndex = 50;
-            btnLCDuplicates.Text = "Lost Cousins Duplicate Facts";
+            btnLCDuplicates.Text = "Entries with Duplicate Facts";
             btnLCDuplicates.UseVisualStyleBackColor = true;
             btnLCDuplicates.Click += BtnLCDuplicates_Click;
             // 
             // btnLCMissingCountry
             // 
             btnLCMissingCountry.AutoSize = true;
-            btnLCMissingCountry.Location = new Point(11, 280);
+            btnLCMissingCountry.Location = new Point(17, 280);
             btnLCMissingCountry.Margin = new Padding(4);
             btnLCMissingCountry.Name = "btnLCMissingCountry";
             btnLCMissingCountry.Size = new Size(176, 31);
             btnLCMissingCountry.TabIndex = 49;
-            btnLCMissingCountry.Text = "Lost Cousins with no Country";
+            btnLCMissingCountry.Text = "Entries with no Country";
             btnLCMissingCountry.UseVisualStyleBackColor = true;
             btnLCMissingCountry.Click += BtnLCMissingCountry_Click;
             // 
@@ -2094,7 +2094,7 @@ namespace FTAnalyzer
             btnLCnoCensus.Name = "btnLCnoCensus";
             btnLCnoCensus.Size = new Size(172, 31);
             btnLCnoCensus.TabIndex = 39;
-            btnLCnoCensus.Text = "Lost Cousins w/bad Census";
+            btnLCnoCensus.Text = "Entries with bad Census";
             btnLCnoCensus.UseVisualStyleBackColor = true;
             btnLCnoCensus.Click += BtnLCnoCensus_Click;
             // 
