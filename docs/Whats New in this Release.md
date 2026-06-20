@@ -1,4 +1,4 @@
-## Version 10.1.1.0 - 16th June 2026
+## Version 10.2.0.0 - 21st June 2026
 **Updates**
 Add startup crash reporting form
 Improve efficiency of surname loading 
@@ -7,6 +7,8 @@ Improve efficiency of surname loading
 Fix data errors subtabs sometimes opening without data
 Fix layout of relationship types control
 Many tweaks of Mainform layouts for different font sizes
+Census warnings were getting ignored on the colour census report
+Full pass of code looking for nullable warnings and fixing them
 
 ## Version 10.1.0.0 - 15th June 2026
 **Updates**
