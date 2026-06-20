@@ -408,6 +408,8 @@ namespace FTAnalyzer.Forms
             }
         }
 
+        const int MaxCellDisplayLength = 200;
+
         void DgFacts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex > 0)
@@ -426,11 +428,30 @@ namespace FTAnalyzer.Forms
                     }
                 }
                 cell.Style.BackColor = f.BackColour;
-                if (e.ColumnIndex == dgFacts.Columns["CensusReference"]?.Index && f.CensusReference is not null && f.CensusReference.URL.Length > 0)
+                if (e.ColumnIndex == dgFacts.Columns["Comment"]?.Index && f.Comment.Length > MaxCellDisplayLength)
                 {
-                    cell.Style.ForeColor = Color.Blue;
-                    cell.Style.Font = linkFont;
-                    cell.ToolTipText = "Click link to view census records on Find My Past.";
+                    e.Value = f.Comment[..MaxCellDisplayLength] + "…";
+                    e.FormattingApplied = true;
+                    cell.ToolTipText = f.Comment;
+                }
+                else if (e.ColumnIndex == dgFacts.Columns["CensusReference"]?.Index && f.CensusReference is not null)
+                {
+                    string fullRef = f.CensusReference.ToString() ?? string.Empty;
+                    if (fullRef.Length > MaxCellDisplayLength)
+                    {
+                        e.Value = fullRef[..MaxCellDisplayLength] + "…";
+                        e.FormattingApplied = true;
+                    }
+                    if (f.CensusReference.URL.Length > 0)
+                    {
+                        cell.Style.ForeColor = Color.Blue;
+                        cell.Style.Font = linkFont;
+                        cell.ToolTipText = fullRef.Length > MaxCellDisplayLength
+                            ? $"Click link to view census records on Find My Past.\n{fullRef}"
+                            : "Click link to view census records on Find My Past.";
+                    }
+                    else if (fullRef.Length > MaxCellDisplayLength)
+                        cell.ToolTipText = fullRef;
                 }
             }
         }
