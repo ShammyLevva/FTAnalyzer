@@ -1175,7 +1175,7 @@ namespace FTAnalyzer
             dgCheckAncestors.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgCheckAncestors.ShowCellToolTips = false;
             dgCheckAncestors.ShowEditingIcon = false;
-            dgCheckAncestors.Size = new Size(187, 0);
+            dgCheckAncestors.Size = new Size(1217, 358);
             dgCheckAncestors.TabIndex = 7;
             toolTips.SetToolTip(dgCheckAncestors, "Double click to see list of facts for that individual");
             // 
@@ -1919,7 +1919,6 @@ namespace FTAnalyzer
             // 
             LCSubTabs.Controls.Add(LCReportsTab);
             LCSubTabs.Controls.Add(LCUpdatesTab);
-            LCSubTabs.Controls.Add(LCVerifyTab);
             LCSubTabs.Dock = DockStyle.Fill;
             LCSubTabs.DrawMode = TabDrawMode.OwnerDrawFixed;
             LCSubTabs.Location = new Point(4, 4);
@@ -1928,7 +1927,7 @@ namespace FTAnalyzer
             LCSubTabs.SelectedIndex = 0;
             LCSubTabs.Size = new Size(1230, 458);
             LCSubTabs.TabIndex = 0;
-            // 
+            //
             // LCReportsTab
             // 
             LCReportsTab.Controls.Add(splitLostCousins);
@@ -2243,7 +2242,7 @@ namespace FTAnalyzer
             LCUpdatesTab.Margin = new Padding(4);
             LCUpdatesTab.Name = "LCUpdatesTab";
             LCUpdatesTab.Padding = new Padding(4);
-            LCUpdatesTab.Size = new Size(192, 72);
+            LCUpdatesTab.Size = new Size(1222, 430);
             LCUpdatesTab.TabIndex = 1;
             LCUpdatesTab.Text = "Updates";
             LCUpdatesTab.UseVisualStyleBackColor = true;
@@ -2390,7 +2389,7 @@ namespace FTAnalyzer
             LCVerifyTab.Location = new Point(4, 24);
             LCVerifyTab.Margin = new Padding(4);
             LCVerifyTab.Name = "LCVerifyTab";
-            LCVerifyTab.Size = new Size(192, 72);
+            LCVerifyTab.Size = new Size(1222, 430);
             LCVerifyTab.TabIndex = 2;
             LCVerifyTab.Text = "Verification";
             LCVerifyTab.UseVisualStyleBackColor = true;

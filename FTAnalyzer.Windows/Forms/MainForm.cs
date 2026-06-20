@@ -235,7 +235,13 @@ namespace FTAnalyzer
 
         void SetStatusBar()
         {
-            statusStrip.Font = new Font(Font.FontFamily, 9F);
+            tsCountLabel.Font = normalFont;
+            tsHintsLabel.Font = normalFont;
+            tsStatusLabel.Font = normalFont;
+            statusStrip.Height = FontSettings.Default.FontHeight;
+            tsCountLabel.Height = FontSettings.Default.FontHeight;
+            tsHintsLabel.Height = FontSettings.Default.FontHeight;
+            tsStatusLabel.Height = FontSettings.Default.FontHeight;
         }
 
 
@@ -1521,7 +1527,6 @@ namespace FTAnalyzer
                         btnLC1881EW.Enabled = btnLC1881Scot.Enabled = btnLC1841EW.Enabled =
                             btnLC1881Canada.Enabled = btnLC1880USA.Enabled = btnLC1911Ireland.Enabled =
                             btnLC1911EW.Enabled = ft.IndividualCount > 0;
-                        LCSubTabs.TabPages.Remove(LCVerifyTab); // hide verification tab as it does nothing
                         await UpdateLCReportsAsync();
                         txtLCEmail.Text = RegistrySettings.GetStringRegistryValue("LostCousinsEmail", string.Empty);
                         chkLCRootPersonConfirm.Text = $"Confirm {ft.RootPerson} as root Person";
