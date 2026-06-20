@@ -225,6 +225,8 @@ namespace FTAnalyzer
             LabLostCousinsWeb.Left = lcLinksLeft;
             linkLabel2.Left = lcLinksLeft;
             Referrals.Top = btnLCnoCensus.Bottom + 8;
+            gbFilters.Top = relTypesResearchSuggest.Top;
+            gbFilters.Height = relTypesResearchSuggest.Height;
             Refresh();
         }
 
