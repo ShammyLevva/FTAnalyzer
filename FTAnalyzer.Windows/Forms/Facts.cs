@@ -10,8 +10,8 @@ namespace FTAnalyzer.Forms
 {
     public partial class Facts : Form
     {
-        public Individual Individual { get; private set; }
-        public Family Family { get; private set; }
+        public Individual? Individual { get; private set; }
+        public Family? Family { get; private set; }
 
         readonly FamilyTree ft = FamilyTree.Instance;
         readonly SortableBindingList<IDisplayFact> facts;
@@ -20,26 +20,25 @@ namespace FTAnalyzer.Forms
         readonly bool allFacts;
         readonly ReportFormHelper reportFormHelper;
         readonly bool CensusRefReport;
-        List<string> IgnoreList;
+        List<string> IgnoreList = [];
 
         Facts()
         {
+            InitializeComponent();
+            Top += NativeMethods.TopTaskbarOffset;
+            facts = [];
+            facts.SortFinished += new EventHandler(Grid_SortFinished);
+            dgFacts.AutoGenerateColumns = false;
+            ExtensionMethods.DoubleBuffered(dgFacts, true);
+            reportFormHelper = new ReportFormHelper(this, Text, dgFacts, ResetTable, "Facts");
+            italicFont = new(dgFacts.DefaultCellStyle.Font?.FontFamily ?? SystemFonts.DefaultFont.FontFamily, FontSettings.Default.FontSize, FontStyle.Italic);
+            linkFont = new(dgFacts.DefaultCellStyle.Font?.FontFamily ?? SystemFonts.DefaultFont.FontFamily, FontSettings.Default.FontSize, FontStyle.Underline);
+
             try
             {
-                InitializeComponent();
-                Top += NativeMethods.TopTaskbarOffset;
-                facts = [];
-                facts.SortFinished += new EventHandler(Grid_SortFinished);
-                allFacts = false;
-                CensusRefReport = false;
-                dgFacts.AutoGenerateColumns = false;
-                ExtensionMethods.DoubleBuffered(dgFacts, true);
-                reportFormHelper = new ReportFormHelper(this, Text, dgFacts, ResetTable, "Facts");
-                italicFont = new(dgFacts.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Italic);
-                linkFont = new(dgFacts.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Underline);
-                dgFacts.Columns["IndividualID"].Visible = true;
-                dgFacts.Columns["CensusReference"].Visible = true;
-                dgFacts.Columns["IgnoreFact"].Visible = false;
+                if (dgFacts.Columns["IndividualID"] is DataGridViewColumn indIdCol) indIdCol.Visible = true;
+                if (dgFacts.Columns["CensusReference"] is DataGridViewColumn censusRefCol) censusRefCol.Visible = true;
+                if (dgFacts.Columns["IgnoreFact"] is DataGridViewColumn ignoreFactCol) ignoreFactCol.Visible = false;
                 dgFacts.ReadOnly = true;
                 dgFacts.RowTemplate.Height = (int)(FontSettings.Default.FontHeight * GraphicsUtilities.GetCurrentScaling());
                 sep1.Visible = false;
@@ -57,7 +56,7 @@ namespace FTAnalyzer.Forms
             AddIndividualsFacts(individual);
             Text = $"Facts Report for {individual.IndividualID}: {individual.Name}";
             SetupFacts();
-            dgFacts.Columns["IndividualID"].Visible = false; // all same individual so hide ID
+            if (dgFacts.Columns["IndividualID"] is DataGridViewColumn hideIdCol) hideIdCol.Visible = false; // all same individual so hide ID
             Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsIndividualsEvent);
         }
 
@@ -187,7 +186,7 @@ namespace FTAnalyzer.Forms
             Text = "Families with the same census ref but different locations.";
             SetupFacts();
             //dgFacts.Columns["CensusReference"].Visible = true;
-            dgFacts.Columns["IgnoreFact"].Visible = true;
+            if (dgFacts.Columns["IgnoreFact"] is DataGridViewColumn ignoreCol) ignoreCol.Visible = true;
             DataGridViewColumn? dateofbirth = dgFacts.Columns["DateofBirth"];
             DataGridViewColumn? censusref = dgFacts.Columns["CensusReference"];
             if (dateofbirth is not null && censusref is not null)
@@ -228,7 +227,7 @@ namespace FTAnalyzer.Forms
                 //if (File.Exists(xmlfile))
                 //    ConvertIgnoreListXMLToJson(xmlfile);
                 if (File.Exists(jsonFile))
-                    IgnoreList = JsonSerializer.Deserialize<List<string>>(File.ReadAllText(jsonFile));
+                    IgnoreList = JsonSerializer.Deserialize<List<string>>(File.ReadAllText(jsonFile)) ?? [];
                 else
                     IgnoreList = [];
             }
@@ -257,7 +256,7 @@ namespace FTAnalyzer.Forms
             {
                 DisplayFact? ignoreFact = (DisplayFact?)dgFacts.Rows[e.RowIndex].DataBoundItem;
                 if (ignoreFact is null) return;
-                ignoreFact.IgnoreFact = !(bool)dgFacts.Rows[e.RowIndex].Cells["IgnoreFact"].Value; // value will be value before click so invert it 
+                ignoreFact.IgnoreFact = !(dgFacts.Rows[e.RowIndex].Cells["IgnoreFact"].Value is true); // value will be value before click so invert it
                 if (ignoreFact.IgnoreFact)
                 {  //ignoring this record so add it to the list if its not already present
                     if (!IgnoreList.Contains(ignoreFact.FactHash))
@@ -267,10 +266,10 @@ namespace FTAnalyzer.Forms
                     IgnoreList.Remove(ignoreFact.FactHash); // no longer ignoring so remove from list
                 SerializeIgnoreList();
             }
-            if (e.RowIndex >= 0 && e.ColumnIndex == dgFacts.Columns["CensusReference"].Index)
+            if (e.RowIndex >= 0 && e.ColumnIndex == dgFacts.Columns["CensusReference"]?.Index)
             {
                 DisplayFact? df = (DisplayFact?)dgFacts.Rows[e.RowIndex].DataBoundItem;
-                if (df is not null && df.CensusReference.URL.Length > 0)
+                if (df is not null && df.CensusReference?.URL.Length > 0)
                     SpecialMethods.VisitWebsite(df.CensusReference.URL);
             }
         }
@@ -279,7 +278,7 @@ namespace FTAnalyzer.Forms
 
         public void ShowHideFactRows()
         {
-            if (dgFacts.DataSource is null) return;
+            if (dgFacts.DataSource is null || BindingContext is null) return;
             CurrencyManager cm = (CurrencyManager)BindingContext[dgFacts.DataSource];
             cm.SuspendBinding();
             foreach (DataGridViewRow row in dgFacts.Rows)
@@ -427,7 +426,7 @@ namespace FTAnalyzer.Forms
                     }
                 }
                 cell.Style.BackColor = f.BackColour;
-                if (e.ColumnIndex == dgFacts.Columns["CensusReference"].Index && f.CensusReference is not null && f.CensusReference.URL.Length > 0)
+                if (e.ColumnIndex == dgFacts.Columns["CensusReference"]?.Index && f.CensusReference is not null && f.CensusReference.URL.Length > 0)
                 {
                     cell.Style.ForeColor = Color.Blue;
                     cell.Style.Font = linkFont;

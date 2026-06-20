@@ -24,20 +24,20 @@ namespace FTAnalyzer.Forms
 
         public ColourCensus(string country, List<IDisplayColourCensus> reportList)
         {
+            InitializeComponent();
+            settingSelections = false;
+            _country = country;
+            _reportList = [.. reportList];
+            reportFormHelper = new ReportFormHelper(this, "Colour Census Report", dgReportSheet, ResetTable, "Colour Census");
+            boldFont = new(dgReportSheet.DefaultCellStyle.Font?.FontFamily ?? SystemFonts.DefaultFont.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
+            styles = [];
+
             try
             {
-                InitializeComponent();
                 Top += NativeMethods.TopTaskbarOffset;
                 dgReportSheet.AutoGenerateColumns = false;
                 dgReportSheet.ContextMenuStrip = null; // CellContextMenuStripNeeded supplies it only for data rows
                 ExtensionMethods.DoubleBuffered(dgReportSheet, true);
-                settingSelections = false;
-                _country = country;
-                _reportList = [.. reportList];
-                reportFormHelper = new ReportFormHelper(this, "Colour Census Report", dgReportSheet, ResetTable, "Colour Census");
-
-                boldFont = new(dgReportSheet.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
-                styles = [];
                 DataGridViewCellStyle notAlive = new();
                 notAlive.BackColor = notAlive.ForeColor = CensusColourValues[(int)CensusColours.NOT_ALIVE];
                 styles.Add(0, notAlive);
@@ -93,31 +93,33 @@ namespace FTAnalyzer.Forms
         void SetColumns(string country)
         {
             // make all census columns hidden
-            for (int index = dgReportSheet.Columns["C1841"].Index; index <= dgReportSheet.Columns["Ire1926"].Index; index++)
+            int firstAll = dgReportSheet.Columns["C1841"]?.Index ?? 0;
+            int lastAll = dgReportSheet.Columns["Ire1926"]?.Index ?? 0;
+            for (int index = firstAll; index <= lastAll; index++)
                 dgReportSheet.Columns[index].Visible = false;
 
             if (country.Equals(Countries.UNITED_STATES, StringComparison.OrdinalIgnoreCase))
             {
-                startColumnIndex = dgReportSheet.Columns["US1790"].Index;
-                endColumnIndex = dgReportSheet.Columns["US1950"].Index;
+                startColumnIndex = dgReportSheet.Columns["US1790"]?.Index ?? 0;
+                endColumnIndex = dgReportSheet.Columns["US1950"]?.Index ?? 0;
                 cbFilter.Items[5] = "Outside USA (Dark Grey)";
             }
             else if (country.Equals(Countries.CANADA, StringComparison.OrdinalIgnoreCase))
             {
-                startColumnIndex = dgReportSheet.Columns["Can1851"].Index;
-                endColumnIndex = dgReportSheet.Columns["Can1921"].Index;
+                startColumnIndex = dgReportSheet.Columns["Can1851"]?.Index ?? 0;
+                endColumnIndex = dgReportSheet.Columns["Can1921"]?.Index ?? 0;
                 cbFilter.Items[5] = "Outside Canada (Dark Grey)";
             }
             else if (country.Equals(Countries.IRELAND, StringComparison.OrdinalIgnoreCase))
             {
-                startColumnIndex = dgReportSheet.Columns["Ire1901"].Index;
-                endColumnIndex = dgReportSheet.Columns["Ire1926"].Index;
+                startColumnIndex = dgReportSheet.Columns["Ire1901"]?.Index ?? 0;
+                endColumnIndex = dgReportSheet.Columns["Ire1926"]?.Index ?? 0;
                 cbFilter.Items[5] = "Outside Ireland (Dark Grey)";
             }
             else
             {
-                startColumnIndex = dgReportSheet.Columns["C1841"].Index;
-                endColumnIndex = dgReportSheet.Columns["C1939"].Index;
+                startColumnIndex = dgReportSheet.Columns["C1841"]?.Index ?? 0;
+                endColumnIndex = dgReportSheet.Columns["C1939"]?.Index ?? 0;
                 cbFilter.Items[5] = "Outside UK (Dark Grey)";
             }
             // show those columns that should be visible for the country in use
@@ -200,7 +202,7 @@ namespace FTAnalyzer.Forms
             else
             {
                 DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                int value = (int)cell.Value;
+                if (cell.Value is not int value) return;
                 styles.TryGetValue(value, out DataGridViewCellStyle? style);
                 if (style is not null)
                 {
@@ -219,7 +221,7 @@ namespace FTAnalyzer.Forms
                             break;
                         case 1:
                             if (e.ColumnIndex == C1939.Index)
-                                if (cbCensusSearchProvider.SelectedItem.Equals("Find My Past"))
+                                if (cbCensusSearchProvider.SelectedItem?.Equals("Find My Past") == true)
                                     cell.ToolTipText = $"No census information entered. Double click to search {cbCensusSearchProvider.SelectedItem}.";
                                 else
                                     cell.ToolTipText = $"No census information entered. No search on {cbCensusSearchProvider.SelectedItem} available.";
@@ -271,7 +273,7 @@ namespace FTAnalyzer.Forms
                 if (e.ColumnIndex >= startColumnIndex && e.ColumnIndex <= endColumnIndex)
                 {
                     DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                    int value = (int)cell.Value;
+                    if (cell.Value is not int value) return;
                     if (value >= 1 && value <= 7) // allows any type of record to search census
                     {
                         IDisplayColourCensus? person = (IDisplayColourCensus?)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
@@ -280,15 +282,21 @@ namespace FTAnalyzer.Forms
                         if (_country.Equals(Countries.UNITED_STATES, StringComparison.OrdinalIgnoreCase))
                             censusYear = 1790 + (e.ColumnIndex - startColumnIndex) * 10;
                         else if (_country.Equals(Countries.CANADA, StringComparison.OrdinalIgnoreCase))
-                            if (e.ColumnIndex <= dgReportSheet.Columns["Can1901"].Index)
+                        {
+                            int can1901 = dgReportSheet.Columns["Can1901"]?.Index ?? startColumnIndex;
+                            if (e.ColumnIndex <= can1901)
                                 censusYear = 1851 + (e.ColumnIndex - startColumnIndex) * 10;
                             else
-                                censusYear = 1901 + (e.ColumnIndex - dgReportSheet.Columns["Can1901"].Index) * 5;
+                                censusYear = 1901 + (e.ColumnIndex - can1901) * 5;
+                        }
                         else if (_country.Equals(Countries.IRELAND, StringComparison.OrdinalIgnoreCase))
-                            if(e.ColumnIndex <= dgReportSheet.Columns["Ire1911"].Index)
+                        {
+                            int ire1911 = dgReportSheet.Columns["Ire1911"]?.Index ?? startColumnIndex;
+                            if (e.ColumnIndex <= ire1911)
                                 censusYear = 1901 + (e.ColumnIndex - startColumnIndex) * 10;
                             else
                                 censusYear = 1926;
+                        }
                         else
                         {
                             if (e.ColumnIndex == C1939.Index)
@@ -296,18 +304,19 @@ namespace FTAnalyzer.Forms
                             else
                                 censusYear = 1841 + (e.ColumnIndex - startColumnIndex) * 10;
                         }
-                        string censusCountry = person.BestLocation(new FactDate(censusYear.ToString())).CensusCountry;
+                        string censusCountry = person.BestLocation(new FactDate(censusYear.ToString()))?.CensusCountry ?? string.Empty;
+                        string selectedProvider = cbCensusSearchProvider.SelectedItem?.ToString() ?? string.Empty;
                         if (censusYear == 1939 &&
-                            !cbCensusSearchProvider.SelectedItem.Equals("Find My Past") &&
-                            !cbCensusSearchProvider.SelectedItem.Equals("Ancestry"))
-                            UIHelpers.ShowMessage($"Unable to search the 1939 National Register on {cbCensusSearchProvider.SelectedItem}.", "FTAnalyzer");
+                            !selectedProvider.Equals("Find My Past", StringComparison.OrdinalIgnoreCase) &&
+                            !selectedProvider.Equals("Ancestry", StringComparison.OrdinalIgnoreCase))
+                            UIHelpers.ShowMessage($"Unable to search the 1939 National Register on {selectedProvider}.", "FTAnalyzer");
                         else
                         {
                             try
                             {
                                 Individual? ind = ft.GetIndividual(person.IndividualID);
                                 if (ind is not null)
-                                    FamilyTree.SearchCensus(censusCountry, censusYear, ind, cbCensusSearchProvider.SelectedIndex, cbRegion.Text);
+                                    FamilyTree.SearchCensus(censusCountry, censusYear, ind, cbCensusSearchProvider.SelectedIndex, cbRegion.Text ?? string.Empty);
                             }
                             catch (CensusSearchException ex)
                             {
@@ -318,7 +327,7 @@ namespace FTAnalyzer.Forms
                 }
                 else if (e.ColumnIndex >= 0)
                 {
-                    string indID = (dgReportSheet.CurrentRow.Cells["IndividualID"].Value?.ToString()) ?? string.Empty;
+                    string indID = dgReportSheet.CurrentRow?.Cells["IndividualID"].Value?.ToString() ?? string.Empty;
                     if (indID != string.Empty)
                         MainForm.ShowIndividualsFacts(indID);
                 }
@@ -327,7 +336,7 @@ namespace FTAnalyzer.Forms
 
         void CbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string provider = cbCensusSearchProvider.SelectedItem.ToString() ?? string.Empty;
+            string provider = cbCensusSearchProvider.SelectedItem?.ToString() ?? string.Empty;
             RegistrySettings.SetRegistryValue("Default Search Provider", provider, RegistryValueKind.String);
             dgReportSheet.Refresh(); // forces update of tooltips
             dgReportSheet.Focus();
@@ -335,9 +344,9 @@ namespace FTAnalyzer.Forms
 
         void CbRegion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string region = cbRegion.SelectedItem.ToString() ?? string.Empty;
+            string region = cbRegion.SelectedItem?.ToString() ?? string.Empty;
             RegistrySettings.SetRegistryValue("Default Region", region, RegistryValueKind.String);
-            Settings.Default.defaultURLRegion = cbRegion.SelectedItem.ToString();
+            Settings.Default.defaultURLRegion = cbRegion.SelectedItem?.ToString();
             Utilities.UIHelpers.SafeSaveSettings(Settings.Default);
             dgReportSheet.Refresh(); // forces update of tooltips
             dgReportSheet.Focus();
