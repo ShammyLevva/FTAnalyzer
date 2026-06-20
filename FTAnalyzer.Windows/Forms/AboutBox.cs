@@ -34,7 +34,7 @@ namespace FTAnalyzer.Core.Displays
             }
         }
 
-        public static string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        public static string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? string.Empty;
 
         public static string AssemblyDescription
         {

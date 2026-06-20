@@ -12,12 +12,12 @@ namespace FTAnalyzer.Forms
 {
     public partial class EditLocation : Form
     {
-        FeatureDataTable pointTable;
-        VectorLayer pointLayer;
+        FeatureDataTable? pointTable;
+        VectorLayer? pointLayer;
         List<GdalRasterLayer> customMapLayers;
         readonly FactLocation location;
         readonly FactLocation originalLocation;
-        FeatureDataRow pointFeature;
+        FeatureDataRow? pointFeature;
         bool iconSelected;
         bool pointUpdated;
         bool dataUpdated;

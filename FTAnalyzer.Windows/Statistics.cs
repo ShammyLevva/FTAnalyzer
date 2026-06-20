@@ -6,9 +6,9 @@ namespace FTAnalyzer
 {
     class Statistics
     {
-        static Statistics instance;
-        static FamilyTree ft;
-        List<SurnameStats> surnames;
+        static Statistics? instance;
+        static FamilyTree? ft;
+        List<SurnameStats>? surnames;
 
         Statistics() => ft = FamilyTree.Instance;
 

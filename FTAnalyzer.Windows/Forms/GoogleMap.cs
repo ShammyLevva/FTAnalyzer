@@ -147,12 +147,13 @@ namespace FTAnalyzer.Forms
 
         public static void OnWaitingForGoogle(string message) => WaitingForGoogle?.Invoke(null, new GoogleWaitingEventArgs(message));
 
-        public static Task<GeoResponse?> CallGoogleGeocodeAsync(FactLocation address, string text, CancellationToken cancellationToken)
+        public static Task<GeoResponse?> CallGoogleGeocodeAsync(FactLocation? address, string text, CancellationToken cancellationToken)
         {
             string bounds = string.Empty;
-            string tld = address.IsUnitedKingdom ? "&region=uk" : string.Empty;
+            string tld = string.Empty;
             if (address is not null)
             {
+                tld = address.IsUnitedKingdom ? "&region=uk" : string.Empty;
                 //if (address.Level > FactLocation.SUBREGION)
                 //{
                 //    FactLocation area = address.GetLocation(FactLocation.SUBREGION);
@@ -248,7 +249,7 @@ namespace FTAnalyzer.Forms
         static int sleepinterval = 200;
 
         // Call geocoding routine but account for throttling by Google geocoding engine
-        public static async Task<GeoResponse?> GoogleGeocodeAsync(FactLocation address, string text, int badtries, CancellationToken cancellationToken)
+        public static async Task<GeoResponse?> GoogleGeocodeAsync(FactLocation? address, string text, int badtries, CancellationToken cancellationToken)
         {
             int maxInterval = 30000;
             double seconds = sleepinterval / 1000.0;

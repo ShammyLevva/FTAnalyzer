@@ -84,7 +84,7 @@ namespace FTAnalyzer.Forms
                 }
             }
             object[] args = [viewport.NorthEast.Lat, viewport.NorthEast.Long, viewport.SouthWest.Lat, viewport.SouthWest.Long];
-            webBrowser.Document.InvokeScript("setBounds", args);
+            webBrowser.Document?.InvokeScript("setBounds", args);
             webBrowser.Show();
             return true;
         }

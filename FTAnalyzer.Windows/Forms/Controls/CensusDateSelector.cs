@@ -4,9 +4,9 @@ namespace FTAnalyzer.Forms.Controls
 {
     public partial class CensusDateSelector : UserControl
     {
-        string country;
-        CensusDate defaultDate;
-        CensusDate previousDate;
+        string country = string.Empty;
+        CensusDate defaultDate = CensusDate.UKCENSUS1881;
+        CensusDate previousDate = CensusDate.UKCENSUS1881;
         bool _loading;
 
         public CensusDateSelector()
@@ -172,14 +172,14 @@ namespace FTAnalyzer.Forms.Controls
             SetControlWidth();
         }
 
-        public event EventHandler CensusChanged;
+        public event EventHandler? CensusChanged;
 
         protected void OnCensusChanged(EventArgs e)
         {
             if (CensusChanged is not null)
             {
                 CensusChanged(this, e);
-                previousDate = (cbCensusDate.SelectedItem ?? cbCensusDate.Items[0]) as CensusDate;
+                previousDate = ((cbCensusDate.SelectedItem ?? cbCensusDate.Items[0]) as CensusDate) ?? previousDate;
             }
         }
 

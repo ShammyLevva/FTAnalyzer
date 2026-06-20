@@ -10,23 +10,24 @@ namespace FTAnalyzer
     public partial class MapIndividuals : Form
     {
         readonly FamilyTree ft = FamilyTree.Instance;
-        readonly Font italicFont;
-        readonly ReportFormHelper reportFormHelper;
+        Font? italicFont;
+        ReportFormHelper? reportFormHelper;
         readonly List<MapLocation> locations;
         readonly Form mapForm;
 
-        public MapIndividuals(List<MapLocation> locations, string year, Form mapForm)
+        public MapIndividuals(List<MapLocation> locations, string? year, Form mapForm)
         {
+            this.locations = locations;
+            this.mapForm = mapForm;
             try
             {
                 InitializeComponent();
                 Top += NativeMethods.TopTaskbarOffset;
-                this.mapForm = mapForm;
-                this.locations = locations;
                 dgIndividuals.AutoGenerateColumns = false;
                 dgIndividuals.DataSource = new SortableBindingList<MapLocation>(this.locations);
                 reportFormHelper = new ReportFormHelper(this, Text, dgIndividuals, ResetTable, "Map Individuals");
-                italicFont = new(dgIndividuals.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Italic);
+                FontFamily fontFamily = dgIndividuals.DefaultCellStyle.Font?.FontFamily ?? FontFamily.GenericSansSerif;
+                italicFont = new(fontFamily, FontSettings.Default.FontSize, FontStyle.Italic);
                 reportFormHelper.LoadColumnLayout("MapIndividualColumns.xml");
                 tsRecords.Text = this.locations.Count + " Records. " + Messages.Hints_Individual;
                 MapLocation mostCommon = this.locations.MostCommon();
@@ -79,7 +80,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string? indID = (string?)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+                string? indID = (string?)dgIndividuals.CurrentRow?.Cells["IndividualID"].Value;
                 if (indID is not null)
                     MainForm.ShowIndividualsFacts(indID);
             }
@@ -123,7 +124,7 @@ namespace FTAnalyzer
             if (!ft.Geocoding)
             {
                 Cursor = Cursors.WaitCursor;
-                MapLocation? loc = (MapLocation?)dgIndividuals.CurrentRow.DataBoundItem;
+                MapLocation? loc = dgIndividuals.CurrentRow?.DataBoundItem as MapLocation;
                 if (loc is not null)
                     EditLocation(loc.Location);
             }

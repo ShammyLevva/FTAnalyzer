@@ -16,7 +16,7 @@ namespace FTAnalyzer.Forms
     {
         readonly FamilyTree ft = FamilyTree.Instance;
         readonly MapHelper mh = MapHelper.Instance;
-        ClusterLayer clusters;
+        ClusterLayer? clusters;
         bool isloading;
         readonly IProgress<string> outputText;
         CancellationTokenSource? buildMapCts;
@@ -83,7 +83,8 @@ namespace FTAnalyzer.Forms
 
         async Task BuildMapAsync()
         {
-            if (isloading) return;
+            if (isloading || clusters is null) return;
+            ClusterLayer cl = clusters;
             // cancel any previous in-flight build and create a new token
             buildMapCts?.Cancel();
             buildMapCts?.Dispose();
@@ -92,7 +93,7 @@ namespace FTAnalyzer.Forms
             Cursor = Cursors.WaitCursor;
             try
             {
-                clusters.Clear();
+                cl.Clear();
                 dgFacts.DataSource = null;
                 ConcurrentBag<IDisplayFact> displayFacts = [];
                 List<Individual> list = [];
@@ -155,7 +156,8 @@ namespace FTAnalyzer.Forms
                                     if (IsPlottable(dispfact.Location))
                                     {
                                         MapLocation loc = new(ind, dispfact.Fact, dispfact.FactDate);
-                                        loc.AddFeatureDataRow(clusters.FactLocations);
+                                        if (cl.FactLocations is not null)
+                                            loc.AddFeatureDataRow(cl.FactLocations);
                                     }
                                     break;
                                 }
@@ -167,16 +169,16 @@ namespace FTAnalyzer.Forms
                 }, token);
 
                 pbPlaces.Visible = false;
-                if (!token.IsCancellationRequested)
+                if (!token.IsCancellationRequested && cl.FactLocations is FeatureDataTable factLocs)
                 {
                     txtCount.Text = $"Downloading map tiles and computing clusters for {displayFacts.Count} facts. Please wait";
                     dgFacts.DataSource = new SortableBindingList<IDisplayFact>([.. displayFacts]);
 
-                    Envelope expand = MapHelper.GetExtents(clusters.FactLocations);
+                    Envelope expand = MapHelper.GetExtents(factLocs);
                     mapBox1.Map.ZoomToBox(expand);
                     mapBox1.ActiveTool = SharpMap.Forms.MapBox.Tools.Pan;
                     RefreshClusters();
-                    int plottedCount = clusters.FactLocations.Rows.Count;
+                    int plottedCount = factLocs.Rows.Count;
                     txtCount.Text = $"{dgFacts.RowCount} fact(s) displayed, {plottedCount} geolocated and shown on map";
                 }
             }
@@ -275,7 +277,7 @@ namespace FTAnalyzer.Forms
             try
             {
                 Cursor = Cursors.WaitCursor;
-                FactLocation? location = e.Node.Tag as FactLocation;
+                FactLocation? location = e.Node?.Tag as FactLocation;
                 if (location is not null)
                 {
                     People frmInd = new();
@@ -364,7 +366,7 @@ namespace FTAnalyzer.Forms
                 foreach (FeatureDataRow feature in features)
                     locations.Add((MapLocation)feature["MapLocation"]);
             }
-            MapIndividuals ind = new(locations, null, this);
+            MapIndividuals ind = new(locations, string.Empty, this);
             UIHelpers.ShowOnOwnerScreen(ind, this);
             Cursor = Cursors.Default;
 

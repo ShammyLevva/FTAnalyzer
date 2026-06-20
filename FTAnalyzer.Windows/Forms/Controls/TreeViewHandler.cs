@@ -4,9 +4,9 @@ namespace FTAnalyzer.Forms.Controls
 {
     public class TreeViewHandler
     {
-        static TreeViewHandler instance;
-        TreeNode mainformTreeRootNode;
-        TreeNode placesTreeRootNode;
+        static TreeViewHandler? instance;
+        TreeNode? mainformTreeRootNode;
+        TreeNode? placesTreeRootNode;
 
         TreeViewHandler() => ResetData();
 
@@ -78,6 +78,7 @@ namespace FTAnalyzer.Forms.Controls
 				foreach (string part in parts)
 				{
 					if (part.Length == 0 && !GeneralSettings.Default.AllowEmptyLocations) break;
+					if (currentM is null || currentP is null) break;
 					TreeNode? childM = currentM.Nodes.Find(part, false).FirstOrDefault();
 					TreeNode? childP = currentP.Nodes.Find(part, false).FirstOrDefault();
 					if (childM is null)

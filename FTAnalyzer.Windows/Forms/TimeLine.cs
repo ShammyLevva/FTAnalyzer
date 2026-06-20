@@ -114,14 +114,17 @@ namespace FTAnalyzer.Forms
                 }
                 txtLocations.Text += " (you may need to zoom out to see them all). Use arrow tool then select icon to view ancestors at location";
                 if (clusters is null) return;
-                clusters.Clear();
+                ClusterLayer cl = clusters;
+                cl.Clear();
+                FeatureDataTable? factLocs = cl.FactLocations;
+                if (factLocs is null) return;
                 foreach (MapLocation loc in locations)
                 {
-                    FeatureDataRow row = loc.AddFeatureDataRow(clusters.FactLocations);
+                    FeatureDataRow row = loc.AddFeatureDataRow(factLocs);
                 }
                 if (!mnuKeepZoom.Checked)
                 {
-                    Envelope expand = MapHelper.GetExtents(clusters.FactLocations);
+                    Envelope expand = MapHelper.GetExtents(factLocs);
                     mapBox1.Map.ZoomToBox(expand);
                 }
                 RefreshClusters();
