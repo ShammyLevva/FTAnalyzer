@@ -76,6 +76,8 @@ namespace FTAnalyzer.Forms
                 dgReportSheet.RowTemplate.Height = (int)(FontSettings.Default.FontHeight * GraphicsUtilities.GetCurrentScaling());
                 dgReportSheet.AllowUserToResizeColumns = true;
                 reportFormHelper.LoadColumnLayout("ColourCensusLayout.xml");
+                SetColourColumnWidths();
+                EnsureTextColumnMinimumWidths();
                 tsRecords.Text = $"{Messages.Count}{reportList.Count} records listed.";
                 string defaultProvider = RegistrySettings.GetStringRegistryValue("Default Search Provider", DEFAULT_PROVIDER);
                 defaultProvider ??= DEFAULT_PROVIDER;
@@ -128,6 +130,45 @@ namespace FTAnalyzer.Forms
             ApplyDefaultSort();
             foreach (DataGridViewColumn column in dgReportSheet.Columns)
                 column.Width = column.MinimumWidth;
+            SetColourColumnWidths();
+            EnsureTextColumnMinimumWidths();
+        }
+
+        void SetColourColumnWidths()
+        {
+            string longestWord = string.Empty;
+            for (int i = startColumnIndex; i <= endColumnIndex; i++)
+                foreach (string word in dgReportSheet.Columns[i].HeaderText.Split(' '))
+                    if (word.Length > longestWord.Length)
+                        longestWord = word;
+            if (string.IsNullOrEmpty(longestWord)) return;
+            int width = TextRenderer.MeasureText(longestWord, FontSettings.Default.SelectedFont).Width + 8;
+            for (int i = startColumnIndex; i <= endColumnIndex; i++)
+            {
+                dgReportSheet.Columns[i].MinimumWidth = width;
+                dgReportSheet.Columns[i].Width = width;
+            }
+        }
+
+        void EnsureTextColumnMinimumWidths()
+        {
+            Font f = FontSettings.Default.SelectedFont;
+            foreach (DataGridViewColumn col in dgReportSheet.Columns)
+            {
+                if (!col.Visible || (col.Index >= startColumnIndex && col.Index <= endColumnIndex)) continue;
+                string longestWord = string.Empty;
+                foreach (string word in col.HeaderText.Split(' '))
+                    if (word.Length > longestWord.Length)
+                        longestWord = word;
+                if (string.IsNullOrEmpty(longestWord)) continue;
+                int minWidth = TextRenderer.MeasureText(longestWord, f).Width + 8;
+                if (col.Width < minWidth)
+                {
+                    if (col.MinimumWidth < minWidth)
+                        col.MinimumWidth = minWidth;
+                    col.Width = minWidth;
+                }
+            }
         }
 
         void ApplyDefaultSort()
@@ -440,7 +481,12 @@ namespace FTAnalyzer.Forms
 
         void ColourCensus_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        void ColourCensus_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
+        void ColourCensus_Load(object sender, EventArgs e)
+        {
+            SpecialMethods.SetFonts(this);
+            SetColourColumnWidths();
+            EnsureTextColumnMinimumWidths();
+        }
 
         void DgReportSheet_SelectionChanged(object sender, EventArgs e)
         {
