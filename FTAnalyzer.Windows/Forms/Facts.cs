@@ -72,7 +72,7 @@ namespace FTAnalyzer.Forms
             Analytics.TrackAction(Analytics.FactsFormAction, Analytics.FactsFamiliesEvent);
         }
 
-        public Facts(IEnumerable<Individual> individuals, List<string> factTypes, List<string> excludedTypes, AlternateFacts alternateFacts)
+        public Facts(IEnumerable<Individual> individuals, List<string>? factTypes, List<string>? excludedTypes, AlternateFacts alternateFacts)
             : this()
         {
             allFacts = true;
@@ -308,7 +308,7 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void AddIndividualsFacts(Individual individual, List<string> factTypes, List<string> excludedTypes, AlternateFacts alternateFacts)
+        void AddIndividualsFacts(Individual individual, List<string> factTypes, List<string>? excludedTypes, AlternateFacts alternateFacts)
         {
             if (individual is not null)
             {
@@ -322,7 +322,7 @@ namespace FTAnalyzer.Forms
                 else
                 {
                     foreach (Fact f in list)
-                        if (factTypes.Contains(f.FactTypeDescription) && !list.Any(x => excludedTypes.Contains(x.FactTypeDescription)))
+                        if (factTypes.Contains(f.FactTypeDescription) && (excludedTypes is null || !list.Any(x => excludedTypes.Contains(x.FactTypeDescription))))
                             facts.Add(new DisplayFact(individual, f));
                 }
             }

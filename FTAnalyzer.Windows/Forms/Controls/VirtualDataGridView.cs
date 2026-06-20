@@ -125,17 +125,17 @@ namespace FTAnalyzer.Forms.Controls
         }
 
         [DefaultValue(null), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public new SortableBindingList<T> DataSource
+        public new SortableBindingList<T>? DataSource
         {
             get => _dataSource;
             set
             {
                 CreateGridColumns();
-                _dataSource = value;
-                _fulllist = value;
-                if (_dataSource is not null)
+                _dataSource = value ?? [];
+                _fulllist = value ?? [];
+                if (value is not null)
                 {
-                    DataView dataView = BuildDataTable(_dataSource).DefaultView;
+                    DataView dataView = BuildDataTable(value).DefaultView;
                     base.DataSource = dataView;
                 }
                 else

@@ -24,21 +24,21 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static readonly string VERSION = "10.1.1.0";
+        public static readonly string VERSION = "10.2.0.0";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(MainForm));
         const string APPNAME = "FTAnalyzer";
 
         Cursor storedCursor = Cursors.Default;
         readonly FamilyTree ft = FamilyTree.Instance;
         bool stopProcessing;
-        string filename;
+        string filename = string.Empty;
         readonly PrivateFontCollection fonts = new();
-        Font handwritingFont;
-        Font boldFont;
-        Font normalFont;
+        Font handwritingFont = SystemFonts.DefaultFont;
+        Font boldFont = SystemFonts.DefaultFont;
+        Font normalFont = SystemFonts.DefaultFont;
         bool loading;
         bool WWI;
-        VirtualReportFormHelper<IDisplayDuplicateIndividual> rfhDuplicates;
+        VirtualReportFormHelper<IDisplayDuplicateIndividual>? rfhDuplicates;
 
         public MainForm()
         {
@@ -143,30 +143,31 @@ namespace FTAnalyzer
                 fonts.AddMemoryFont(fontPtr, Resources.KUNSTLER.Length);
                 NativeMethods.AddFontMemResourceEx(fontPtr, (uint)Resources.KUNSTLER.Length, IntPtr.Zero, ref dummy);
                 System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
+                FontFamily cellFontFamily = dgCountries.DefaultCellStyle.Font?.FontFamily ?? SystemFonts.DefaultFont.FontFamily;
                 switch (FontSettings.Default.FontNumber)
                 {
                     case 1:
                         handwritingFont = new(fonts.Families[0], 46.0F, FontStyle.Bold);
-                        boldFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 8.25F, FontStyle.Bold);
-                        normalFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 8.25F, FontStyle.Regular);
+                        boldFont = new(cellFontFamily, 8.25F, FontStyle.Bold);
+                        normalFont = new(cellFontFamily, 8.25F, FontStyle.Regular);
                         FontSettings.Default.FontHeight = 22;
                         break;
                     case 2:
                         handwritingFont = new(fonts.Families[0], 60.0F, FontStyle.Bold);
-                        boldFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 10F, FontStyle.Bold);
-                        normalFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 10F, FontStyle.Regular);
+                        boldFont = new(cellFontFamily, 10F, FontStyle.Bold);
+                        normalFont = new(cellFontFamily, 10F, FontStyle.Regular);
                         FontSettings.Default.FontHeight = 27;
                         break;
                     case 3:
                         handwritingFont = new(fonts.Families[0], 68.0F, FontStyle.Bold);
-                        boldFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 12F, FontStyle.Bold);
-                        normalFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 12F, FontStyle.Regular);
+                        boldFont = new(cellFontFamily, 12F, FontStyle.Bold);
+                        normalFont = new(cellFontFamily, 12F, FontStyle.Regular);
                         FontSettings.Default.FontHeight = 32;
                         break;
                     case 4:
                         handwritingFont = new(fonts.Families[0], 76.0F, FontStyle.Bold);
-                        boldFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 14F, FontStyle.Bold);
-                        normalFont = new(dgCountries.DefaultCellStyle.Font.FontFamily, 14F, FontStyle.Regular);
+                        boldFont = new(cellFontFamily, 14F, FontStyle.Bold);
+                        normalFont = new(cellFontFamily, 14F, FontStyle.Regular);
                         FontSettings.Default.FontHeight = 37;
                         break;
                 }
@@ -733,7 +734,7 @@ namespace FTAnalyzer
             Analytics.TrackAction(Analytics.MainFormAction, Analytics.TreetopsEvent);
         }
 
-        Predicate<Individual> warDeadFilter;
+        Predicate<Individual>? warDeadFilter;
 
         void BtnWWI_Click(object sender, EventArgs e)
         {
@@ -818,7 +819,7 @@ namespace FTAnalyzer
             if (ind is not null)
             {
                 var outputText = new Progress<string>(value => { rtbOutput.AppendText(value); });
-                ft.UpdateRootIndividual(ind.IndividualID, null, outputText);
+                ft.UpdateRootIndividual(ind.IndividualID, new Progress<int>(_ => { }), outputText);
                 dgIndividuals.Refresh();
                 UIHelpers.ShowMessage($"Root person set as {ind.Name}\n\n{ft.PrintRelationCount()}", APPNAME);
             }
@@ -846,7 +847,7 @@ namespace FTAnalyzer
 
         void BtnShowMap_Click(object sender, EventArgs e)
         {
-            float zoom = GetMapZoomLevel(out FactLocation loc);
+            float zoom = GetMapZoomLevel(out FactLocation? loc);
             if (loc is not null && loc.IsGeoCoded(false))
             {
                 string URL = $"https://www.google.com/maps/@{loc.Latitude},{loc.Longitude},{zoom}z";
@@ -858,8 +859,8 @@ namespace FTAnalyzer
 
         void BtnOSMap_Click(object sender, EventArgs e)
         {
-            bool oldOSMap = (sender as Button).Name == "btnOldOSMap";
-            float zoom = GetMapZoomLevel(out FactLocation loc);
+            bool oldOSMap = (sender as Button)?.Name == "btnOldOSMap";
+            float zoom = GetMapZoomLevel(out FactLocation? loc);
             if (loc is not null && loc.IsGeoCoded(false))
             {
                 if (loc.IsWithinUKBounds)
@@ -877,11 +878,12 @@ namespace FTAnalyzer
                 UIHelpers.ShowMessage($"{loc} is not yet geocoded so can't be displayed.");
         }
 
-        float GetMapZoomLevel(out FactLocation loc)
+        float GetMapZoomLevel(out FactLocation? loc)
         {
             // get the tab
             loc = null;
-            switch (tabCtrlLocations.SelectedTab.Text)
+            string selectedTabText = tabCtrlLocations.SelectedTab?.Text ?? string.Empty;
+            switch (selectedTabText)
             {
                 case "Tree View":
                     TreeNode? node = treeViewLocations.SelectedNode;
@@ -910,7 +912,7 @@ namespace FTAnalyzer
             }
             if (loc is null)
             {
-                if (tabCtrlLocations.SelectedTab.Text == "Tree View")
+                if (selectedTabText == "Tree View")
                     UIHelpers.ShowMessage("Location selected isn't valid to show on the map.", APPNAME);
                 else
                     UIHelpers.ShowMessage("Nothing selected. Please select a location to show on the map.", APPNAME);
@@ -1184,9 +1186,9 @@ namespace FTAnalyzer
         void Options_MinimumParentalAgeChanged(object? sender, EventArgs e)
         {
             ft.ResetLooseFacts();
-            if (tabSelector.SelectedTab == tabErrorsFixes && tabErrorFixSelector.SelectedTab.Equals(tabLooseBirths))
+            if (tabSelector.SelectedTab == tabErrorsFixes && tabErrorFixSelector.SelectedTab?.Equals(tabLooseBirths) == true)
                 SetupLooseBirths();
-            if (tabSelector.SelectedTab == tabErrorsFixes && tabErrorFixSelector.SelectedTab.Equals(tabLooseDeaths))
+            if (tabSelector.SelectedTab == tabErrorsFixes && tabErrorFixSelector.SelectedTab?.Equals(tabLooseDeaths) == true)
                 SetupLooseDeaths();
         }
 
@@ -1228,15 +1230,16 @@ namespace FTAnalyzer
         void TreeViewLocations_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             HourGlass(this, true);
-            var location = e.Node.Tag as FactLocation;
+            if (e.Node is not TreeNode node) return;
+            FactLocation? location = node.Tag as FactLocation;
             if (location is not null)
             {
-                if (ft.CountPeopleAtLocation(location, e.Node.Level) == 0)
+                if (ft.CountPeopleAtLocation(location, node.Level) == 0)
                     UIHelpers.ShowMessage($"You have no one in your file at {location}.");
                 else
                 {
                     var frmInd = new People();
-                    frmInd.SetLocation(location, e.Node.Level);
+                    frmInd.SetLocation(location, node.Level);
                     DisposeDuplicateForms(frmInd);
                     ShowOnCurrentScreen(frmInd);
                 }
@@ -1362,7 +1365,7 @@ namespace FTAnalyzer
         {
             try
             {
-                treeViewLocations.SelectedImageIndex = e.Node.ImageIndex;
+                treeViewLocations.SelectedImageIndex = e.Node?.ImageIndex ?? treeViewLocations.SelectedImageIndex;
             }
             catch (Exception) { }
         }
@@ -1409,10 +1412,10 @@ namespace FTAnalyzer
             if (e.ColumnIndex == 0 && e.RowIndex >= 0)
             {
                 DataGridViewCell cell = dgSurnames.Rows[e.RowIndex].Cells[nameof(IDisplaySurnames.Surname)];
-                if (cell.Value.ToString() is not null)
+                if (cell.Value?.ToString() is string surnameText)
                 {
                     HourGlass(this, true);
-                    Statistics.DisplayGOONSpage(cell.Value.ToString());
+                    Statistics.DisplayGOONSpage(surnameText);
                     Analytics.TrackAction(Analytics.MainFormAction, Analytics.GOONSEvent);
                     HourGlass(this, false);
                 }
@@ -1619,8 +1622,12 @@ namespace FTAnalyzer
                 if (customFactName is not null)
                     dgCustomFacts.Sort(customFactName, ListSortDirection.Ascending);
                 dgCustomFacts.Focus();
-                dgCustomFacts.Columns[nameof(IDisplayCustomFact.Ignore)].ReadOnly = false;
-                dgCustomFacts.Columns[nameof(IDisplayCustomFact.Ignore)].ToolTipText = "Tick box to ignore warnings for this custom fact type.";
+                DataGridViewColumn? ignoreColumn = dgCustomFacts.Columns[nameof(IDisplayCustomFact.Ignore)];
+                if (ignoreColumn is not null)
+                {
+                    ignoreColumn.ReadOnly = false;
+                    ignoreColumn.ToolTipText = "Tick box to ignore warnings for this custom fact type.";
+                }
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
                 tsHintsLabel.Text = Messages.Hints_CustomFacts;
@@ -1667,7 +1674,7 @@ namespace FTAnalyzer
                 SetupDataErrors();
             else if (tabErrorFixSelector.SelectedTab == tabDuplicates)
             {
-                rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
+                rfhDuplicates?.LoadColumnLayout("DuplicatesColumns.xml");
                 ckbHideIgnoredDuplicates.Checked = GeneralSettings.Default.HideIgnoredDuplicates;
                 await SetPossibleDuplicates();
                 dgDuplicates.Focus();
@@ -1867,8 +1874,8 @@ namespace FTAnalyzer
                 UIHelpers.ShowMessage("Unable to login to Lost Cousins website. Check email/password and try again.");
         }
 
-        List<CensusIndividual> LCUpdates;
-        List<CensusIndividual> LCInvalidReferences;
+        List<CensusIndividual> LCUpdates = [];
+        List<CensusIndividual> LCInvalidReferences = [];
 
         void BtnLCPotentialUploads_Click(object sender, EventArgs e)
         {
@@ -2304,11 +2311,12 @@ namespace FTAnalyzer
         {
             if (Settings.Default.RecentFiles is null || Settings.Default.RecentFiles.Count != 5)
                 ClearRecentList();
+            System.Collections.Specialized.StringCollection recentFiles = Settings.Default.RecentFiles ?? new();
             bool added = false;
             int count = 0;
             for (int i = 0; i < 5; i++)
             {
-                string? name = Settings.Default.RecentFiles[i];
+                string? name = recentFiles[i];
                 if (name is not null && name.Length > 0 && File.Exists(name))
                 {
                     added = true;
@@ -2333,9 +2341,10 @@ namespace FTAnalyzer
                 int j = 1;
                 for (int i = 0; i < Settings.Default.RecentFiles.Count; i++)
                 {
-                    if (Settings.Default.RecentFiles[i] != filename && File.Exists(Settings.Default.RecentFiles[i]))
+                    string? recentEntry = Settings.Default.RecentFiles[i];
+                    if (recentEntry is not null && recentEntry != filename && File.Exists(recentEntry))
                     {
-                        recent[j++] = Settings.Default.RecentFiles[i];
+                        recent[j++] = recentEntry;
                         if (j == 5) break;
                     }
                 }
@@ -2365,7 +2374,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string? famID = (string?)dgFamilies.CurrentRow.Cells[nameof(IDisplayFamily.FamilyID)].Value;
+                string? famID = (string?)dgFamilies.CurrentRow?.Cells[nameof(IDisplayFamily.FamilyID)].Value;
                 if (famID is not null)
                     ShowFamilyFacts(famID);
             }
@@ -2375,7 +2384,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string? indID = (string?)dgDataErrors.CurrentRow.Cells[nameof(IDisplayDataError.Reference)].Value;
+                string? indID = (string?)dgDataErrors.CurrentRow?.Cells[nameof(IDisplayDataError.Reference)].Value;
                 if (indID is not null)
                     ShowIndividualsFacts(indID);
             }
@@ -2385,7 +2394,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string? indID = (string?)dgLooseDeaths.CurrentRow.Cells[nameof(IDisplayLooseDeath.IndividualID)].Value;
+                string? indID = (string?)dgLooseDeaths.CurrentRow?.Cells[nameof(IDisplayLooseDeath.IndividualID)].Value;
                 if (indID is not null)
                     ShowIndividualsFacts(indID);
             }
@@ -2395,7 +2404,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string? indID = (string?)dgLooseBirths.CurrentRow.Cells[nameof(IDisplayLooseBirth.IndividualID)].Value;
+                string? indID = (string?)dgLooseBirths.CurrentRow?.Cells[nameof(IDisplayLooseBirth.IndividualID)].Value;
                 if (indID is not null)
                     ShowIndividualsFacts(indID);
             }
@@ -2405,7 +2414,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string? indID = (string?)dgLooseInfo.CurrentRow.Cells[nameof(IDisplayLooseInfo.IndividualID)].Value;
+                string? indID = (string?)dgLooseInfo.CurrentRow?.Cells[nameof(IDisplayLooseInfo.IndividualID)].Value;
                 if (indID is not null)
                     ShowIndividualsFacts(indID);
             }
@@ -2415,7 +2424,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string? indID = (string?)dgTreeTops.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
+                string? indID = (string?)dgTreeTops.CurrentRow?.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
                 if (indID is not null)
                     ShowIndividualsFacts(indID);
             }
@@ -2425,7 +2434,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string? indID = (string?)dgWorldWars.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
+                string? indID = (string?)dgWorldWars.CurrentRow?.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
                 if (indID is not null)
                 {
                     if (WWI && ModifierKeys.Equals(Keys.Shift))
@@ -2468,7 +2477,7 @@ namespace FTAnalyzer
             {
                 if (dgIndividuals.Rows[hti.RowIndex].Cells[hti.ColumnIndex].GetType() == typeof(DataGridViewLinkCell))
                 {
-                    string familySearchID = dgIndividuals.Rows[hti.RowIndex].Cells[hti.ColumnIndex].Value.ToString() ?? string.Empty;
+                    string familySearchID = dgIndividuals.Rows[hti.RowIndex].Cells[hti.ColumnIndex].Value?.ToString() ?? string.Empty;
                     if (!string.IsNullOrEmpty(familySearchID))
                     {
                         string url = $"https://www.familysearch.org/tree/person/details/{familySearchID}";
@@ -2477,7 +2486,7 @@ namespace FTAnalyzer
                 }
                 else if (e.Clicks == 2)
                 {
-                    string? indID = (string?)dgIndividuals.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
+                    string? indID = (string?)dgIndividuals.CurrentRow?.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
                     if (indID is not null)
                         ShowIndividualsFacts(indID);
                 }
@@ -2488,7 +2497,7 @@ namespace FTAnalyzer
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string? indID = (string?)dgIndividuals.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
+                string? indID = (string?)dgIndividuals.CurrentRow?.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
                 if (indID is not null)
                     ShowIndividualsFacts(indID);
             }
@@ -2509,8 +2518,8 @@ namespace FTAnalyzer
         {
             if (pbDuplicates.Visible || e.RowIndex < 0 || e.ColumnIndex < 0)
                 return; // do nothing if progress bar still visible
-            string? indA_ID = (string?)dgDuplicates.CurrentRow.Cells[nameof(IDisplayDuplicateIndividual.IndividualID)].Value;
-            string? indB_ID = (string?)dgDuplicates.CurrentRow.Cells[nameof(IDisplayDuplicateIndividual.MatchIndividualID)].Value;
+            string? indA_ID = (string?)dgDuplicates.CurrentRow?.Cells[nameof(IDisplayDuplicateIndividual.IndividualID)].Value;
+            string? indB_ID = (string?)dgDuplicates.CurrentRow?.Cells[nameof(IDisplayDuplicateIndividual.MatchIndividualID)].Value;
             if (indA_ID is null || indB_ID is null) return;
             if (GeneralSettings.Default.MultipleFactForms)
             {
@@ -2734,7 +2743,7 @@ namespace FTAnalyzer
         async void MainForm_DragDrop(object sender, DragEventArgs e)
         {
             bool fileLoaded = false;
-            string[]? files = e.Data.GetData(DataFormats.FileDrop) as string[];
+            string[]? files = e.Data?.GetData(DataFormats.FileDrop) as string[];
             if (files is not null)
             {
                 foreach (string draggedFilename in files)
@@ -2756,7 +2765,7 @@ namespace FTAnalyzer
 
         void MainForm_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            if (e.Data?.GetDataPresent(DataFormats.FileDrop) == true)
                 e.Effect = DragDropEffects.Copy;
         }
         #endregion
@@ -2829,13 +2838,13 @@ namespace FTAnalyzer
         #endregion
 
         #region Duplicates Tab
-        CancellationTokenSource cts;
-        SortableBindingList<IDisplayDuplicateIndividual> duplicateData;
+        CancellationTokenSource? cts;
+        SortableBindingList<IDisplayDuplicateIndividual>? duplicateData;
 
         async Task SetPossibleDuplicates()
         {
             SetDuplicateControlsVisibility(true);
-            rfhDuplicates.SaveColumnLayout("DuplicatesColumns.xml");
+            rfhDuplicates?.SaveColumnLayout("DuplicatesColumns.xml");
             var progress = new Progress<int>(value =>
             {
                 if (value < 0)
@@ -2861,7 +2870,7 @@ namespace FTAnalyzer
             if (duplicateData is not null)
             {
                 dgDuplicates.DataSource = duplicateData;
-                rfhDuplicates.LoadColumnLayout("DuplicatesColumns.xml");
+                rfhDuplicates?.LoadColumnLayout("DuplicatesColumns.xml");
                 tsCountLabel.Text = $"Possible Duplicate Count : {dgDuplicates.RowCount:N0}.  {Messages.Hints_Duplicates}";
                 dgDuplicates.VirtualGridFiltered += VirtualGridFiltered;
             }
@@ -2918,11 +2927,11 @@ namespace FTAnalyzer
                     dupInd.IgnoreNonDuplicate = !dupInd.IgnoreNonDuplicate; // flip state of checkbox
                     if (dupInd.IgnoreNonDuplicate)
                     {  //ignoring this record so add it to the list if its not already present
-                        if (!ft.NonDuplicates.ContainsDuplicate(nonDup))
+                        if (ft.NonDuplicates?.ContainsDuplicate(nonDup) == false)
                             ft.NonDuplicates.Add(nonDup);
                     }
                     else
-                        ft.NonDuplicates.Remove(nonDup); // no longer ignoring so remove from list
+                        ft.NonDuplicates?.Remove(nonDup); // no longer ignoring so remove from list
                     ft.SerializeNonDuplicates();
                 }
             }
@@ -3437,12 +3446,14 @@ namespace FTAnalyzer
             if (cmbReferrals.SelectedItem is Individual selected)
             {
                 HourGlass(this, true);
-                Individual root = ft.RootPerson;
-                ft.SetRelations(selected.IndividualID, null);
+                Individual? root = ft.RootPerson;
+                Progress<string> noOpProgress = new(_ => { });
+                ft.SetRelations(selected.IndividualID, noOpProgress);
                 LostCousinsReferral lcr = new(selected, ckbReferralInCommon.Checked);
                 DisposeDuplicateForms(lcr);
                 ShowOnCurrentScreen(lcr);
-                ft.SetRelations(root.IndividualID, null);
+                if (root is not null)
+                    ft.SetRelations(root.IndividualID, noOpProgress);
                 HourGlass(this, false);
             }
         }
@@ -3982,7 +3993,7 @@ namespace FTAnalyzer
             HourGlass(this, false);
         }
 
-        FactDate AliveDate { get; set; }
+        FactDate AliveDate { get; set; } = FactDate.UNKNOWN_DATE;
         void TxtAliveDates_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(txtAliveDates.Text))

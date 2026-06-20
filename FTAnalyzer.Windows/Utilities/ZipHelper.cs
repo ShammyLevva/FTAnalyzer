@@ -5,7 +5,7 @@ namespace FTAnalyzer.Utilities
 {
     internal static class ZipHelper
     {
-        public static void ExtractZipFile(string archivePath, string password, string outFolder)
+        public static void ExtractZipFile(string archivePath, string? password, string outFolder)
         {
             using var fsInput = File.OpenRead(archivePath);
             using var zf = new ZipFile(fsInput);
