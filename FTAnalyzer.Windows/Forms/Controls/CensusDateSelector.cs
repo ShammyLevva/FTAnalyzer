@@ -163,6 +163,15 @@ namespace FTAnalyzer.Forms.Controls
             catch (Exception) { }
         }
 
+        public void RepositionControls()
+        {
+            // With AutoScaleMode=None, children stay at design positions after form PerformAutoScale.
+            // After SetFonts grows label1 to 14pt, label1.Right can exceed cbCensusDate.Left,
+            // visually covering the left chars of the selected item (shows "nsus 1881" not "Census 1881").
+            cbCensusDate.Left = label1.Right + 6;
+            SetControlWidth();
+        }
+
         public event EventHandler CensusChanged;
 
         protected void OnCensusChanged(EventArgs e)

@@ -204,7 +204,14 @@ namespace FTAnalyzer
             rtbLostCousins.Font = normalFont;
             treeViewLocations.Font = normalFont;
             udAgeFilter.Left = labCensusExcludeOverAge.Right + 6;
-            cenDate.Top = relTypesCensus.Bottom;       // relTypesCensus auto-sizes with font — keep cenDate flush below it
+            udAgeFilter.Top = labCensusExcludeOverAge.Top;
+            labCensusTabSurname.Top = labCensusExcludeOverAge.Top;
+            txtCensusSurname.Top = labCensusExcludeOverAge.Top + (labCensusExcludeOverAge.Height - txtCensusSurname.Height) / 2;
+            labCensusAliveDates.Top = chkExcludeUnknownBirths.Top;
+            txtAliveDates.Top = labCensusAliveDates.Top + (labCensusAliveDates.Height - txtAliveDates.Height) / 2;
+            btnAliveOnDate.Top = chkAnyCensusYear.Top;
+            cenDate.Top = relTypesCensus.Bottom + 5;   // 5px gap below relTypesCensus
+            cenDate.RepositionControls();              // push cbCensusDate past grown label1 and resize for 14pt font
             groupBox10.Top = cenDate.Bottom + 7;       // preserve design gap (178−171 = 7px)
             groupBox4.Top = groupBox10.Bottom + 10;    // preserve design gap (261−251 = 10px)
             groupBox2.Height = groupBox4.Bottom + 10;  // shrink/grow groupBox2 to hold its content after font scaling
