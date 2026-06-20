@@ -256,7 +256,7 @@ namespace FTAnalyzer.Forms
             {
                 DisplayFact? ignoreFact = (DisplayFact?)dgFacts.Rows[e.RowIndex].DataBoundItem;
                 if (ignoreFact is null) return;
-                ignoreFact.IgnoreFact = !(dgFacts.Rows[e.RowIndex].Cells["IgnoreFact"].Value is true); // value will be value before click so invert it
+                ignoreFact.IgnoreFact = dgFacts.Rows[e.RowIndex].Cells["IgnoreFact"].Value is not true; // value will be value before click so invert it
                 if (ignoreFact.IgnoreFact)
                 {  //ignoring this record so add it to the list if its not already present
                     if (!IgnoreList.Contains(ignoreFact.FactHash))

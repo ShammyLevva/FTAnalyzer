@@ -117,8 +117,9 @@ namespace FTAnalyzer.Forms
             dgCensus.DataSource = list;
             dgCensus.RowTemplate.Height = (int)(FontSettings.Default.FontHeight * GraphicsUtilities.GetCurrentScaling());
 
-            if (!censusDone && dgCensus.Columns[nameof(IDisplayCensus.CensusRef)] is not null)
-                dgCensus.Columns[nameof(IDisplayCensus.CensusRef)].Visible = false;
+            DataGridViewColumn? censusRefCol = dgCensus.Columns[nameof(IDisplayCensus.CensusRef)];
+            if (!censusDone && censusRefCol is not null)
+                censusRefCol.Visible = false;
 
             DataGridViewColumn? posColumn = dgCensus.Columns[nameof(IDisplayCensus.Position)];
             posColumn?.Visible = false;
@@ -151,8 +152,9 @@ namespace FTAnalyzer.Forms
 
                 string currentRowText = "";
                 bool highlighted = true;
-                using Font boldFont = new(dgCensus.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
-                using Font regularFont = new(dgCensus.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Regular);
+                FontFamily fontFamily = dgCensus.DefaultCellStyle.Font?.FontFamily ?? FontFamily.GenericSansSerif;
+                using Font boldFont = new(fontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
+                using Font regularFont = new(fontFamily, FontSettings.Default.FontSize, FontStyle.Regular);
 
                 string sortedPropertyName = dgCensus.SortedColumn.DataPropertyName;
                 if (string.IsNullOrEmpty(sortedPropertyName))
@@ -187,9 +189,9 @@ namespace FTAnalyzer.Forms
         string GetTooltipText(DataGridViewCellStyle style)
         {
             string result;
-            if (style.Font.Bold && style.ForeColor == Color.Red)
+            if (style.Font?.Bold == true && style.ForeColor == Color.Red)
                 result = "Bold Red: This direct ancestor is known to be alive on this census.";
-            else if (style.Font.Bold)
+            else if (style.Font?.Bold == true)
                 result = "Bold: This individual is known to be alive on this census.\n";
             else if (style.ForeColor == Color.Red)
                 result = "Red: This is a direct ancestor that may be alive on this census.";
@@ -284,7 +286,7 @@ namespace FTAnalyzer.Forms
 
         void CbCensusSearchProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string defaultProvider = cbCensusSearchProvider.SelectedItem.ToString() ?? DEFAULT_PROVIDER;
+            string defaultProvider = cbCensusSearchProvider.SelectedItem?.ToString() ?? DEFAULT_PROVIDER;
             RegistrySettings.SetRegistryValue("Default Search Provider", defaultProvider, RegistryValueKind.String);
             dgCensus.Refresh(); // force update of tooltips
             dgCensus.Focus();
@@ -292,9 +294,9 @@ namespace FTAnalyzer.Forms
 
         void CbRegion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            RegistrySettings.SetRegistryValue("Default Region", cbRegion.SelectedItem.ToString() ?? DEFAULT_REGION, RegistryValueKind.String);
-            Settings.Default.defaultURLRegion = cbRegion.SelectedItem.ToString();
-            Utilities.UIHelpers.SafeSaveSettings(Settings.Default);
+            Settings.Default.defaultURLRegion = cbRegion.SelectedItem?.ToString() ?? DEFAULT_REGION;
+            RegistrySettings.SetRegistryValue("Default Region", Settings.Default.defaultURLRegion, RegistryValueKind.String);
+            UIHelpers.SafeSaveSettings(Settings.Default);
             dgCensus.Refresh(); // force update of tooltips
             dgCensus.Focus();
         }

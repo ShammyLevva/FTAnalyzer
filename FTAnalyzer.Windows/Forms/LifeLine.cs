@@ -19,11 +19,11 @@ namespace FTAnalyzer.Forms
         readonly FamilyTree ft = FamilyTree.Instance;
         readonly MapHelper mh = MapHelper.Instance;
         readonly IProgress<string> outputText;
-        FeatureDataTable lifelines;
-        VectorLayer linesLayer;
-        LabelLayer labelLayer;
-        TearDropLayer points;
-        TearDropLayer selections;
+        FeatureDataTable lifelines = new();
+        VectorLayer linesLayer = new("LifeLines");
+        LabelLayer labelLayer = new("Label");
+        TearDropLayer points = new("Points");
+        TearDropLayer selections = new("Selections");
         bool isLoading;
         bool isQuerying;
 
@@ -213,7 +213,7 @@ namespace FTAnalyzer.Forms
         void AddAllFamilyMembersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
-            Individual? ind = (Individual?)dgIndividuals.CurrentRow.DataBoundItem;
+            Individual? ind = dgIndividuals.CurrentRow?.DataBoundItem as Individual;
             if (ind is not null)
             {
                 isLoading = true;
@@ -227,7 +227,7 @@ namespace FTAnalyzer.Forms
 
         void SelectIndividual(Individual i)
         {
-            DataGridViewRow? row = dgIndividuals.Rows.Cast<DataGridViewRow>().FirstOrDefault(r => r.Cells["IndividualID"].Value.ToString().Equals(i.IndividualID, StringComparison.OrdinalIgnoreCase));
+            DataGridViewRow? row = dgIndividuals.Rows.Cast<DataGridViewRow>().FirstOrDefault(r => r.Cells["IndividualID"].Value?.ToString()?.Equals(i.IndividualID, StringComparison.OrdinalIgnoreCase) == true);
             if (row is not null)
                 dgIndividuals.Rows[row.Index].Selected = true;
         }
@@ -235,7 +235,7 @@ namespace FTAnalyzer.Forms
         void SelectIndividuals(Func<Individual, List<Individual>> method)
         {
             Cursor = Cursors.WaitCursor;
-            Individual? ind = (Individual?)dgIndividuals.CurrentRow.DataBoundItem;
+            Individual? ind = dgIndividuals.CurrentRow?.DataBoundItem as Individual;
             if (ind is not null)
             {
                 isLoading = true;
