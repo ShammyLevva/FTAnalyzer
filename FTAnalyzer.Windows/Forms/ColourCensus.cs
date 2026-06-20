@@ -202,7 +202,8 @@ namespace FTAnalyzer.Forms
             else
             {
                 DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                if (cell.Value is not int value) return;
+                if (cell.Value is not CensusColours colour) return;
+                int value = (int)colour;
                 styles.TryGetValue(value, out DataGridViewCellStyle? style);
                 if (style is not null)
                 {
@@ -273,7 +274,8 @@ namespace FTAnalyzer.Forms
                 if (e.ColumnIndex >= startColumnIndex && e.ColumnIndex <= endColumnIndex)
                 {
                     DataGridViewCell cell = dgReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                    if (cell.Value is not int value) return;
+                    if (cell.Value is not CensusColours colour) return;
+                    int value = (int)colour;
                     if (value >= 1 && value <= 7) // allows any type of record to search census
                     {
                         IDisplayColourCensus? person = (IDisplayColourCensus?)dgReportSheet.Rows[e.RowIndex].DataBoundItem;
