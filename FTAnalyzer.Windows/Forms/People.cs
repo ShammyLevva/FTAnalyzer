@@ -13,7 +13,7 @@ namespace FTAnalyzer.Forms
         bool selectRow;
         readonly Font boldFont;
         readonly Font normalFont;
-        Dictionary<IDisplayIndividual, IDisplayFamily> families;
+        Dictionary<IDisplayIndividual, IDisplayFamily> families = [];
         readonly FamilyTree ft = FamilyTree.Instance;
         readonly VirtualReportFormHelper<IDisplayIndividual> indReportFormHelper;
         readonly VirtualReportFormHelper<IDisplayFamily> famReportFormHelper;
@@ -22,25 +22,21 @@ namespace FTAnalyzer.Forms
 
         public People()
         {
-            try
-            {
-                InitializeComponent();
-
-                // Ensure toolStrip sits at the top and splitContainer fills below it
-                toolStrip1.Dock = DockStyle.Top;
-                splitContainer.Dock = DockStyle.Fill;
-                splitContainer.BringToFront(); // ensure correct z-order relative to status strip
-
-                Top += NativeMethods.TopTaskbarOffset;
-                indReportFormHelper = new(this, Text, dgIndividuals, ResetTable, "People");
-                famReportFormHelper = new(this, Text, dgFamilies, ResetTable, "People");
-                ExtensionMethods.DoubleBuffered(dgIndividuals, true);
-                ExtensionMethods.DoubleBuffered(dgFamilies, true);
-                boldFont = new(dgFamilies.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
-                normalFont = new(dgFamilies.DefaultCellStyle.Font.FontFamily, FontSettings.Default.FontSize, FontStyle.Regular);
-                SetSaveButtonsStatus(false);
-            }
+            try { InitializeComponent(); }
             catch (Exception) { }
+            // Ensure toolStrip sits at the top and splitContainer fills below it
+            toolStrip1.Dock = DockStyle.Top;
+            splitContainer.Dock = DockStyle.Fill;
+            splitContainer.BringToFront(); // ensure correct z-order relative to status strip
+            Top += NativeMethods.TopTaskbarOffset;
+            indReportFormHelper = new(this, Text, dgIndividuals, ResetTable, "People");
+            famReportFormHelper = new(this, Text, dgFamilies, ResetTable, "People");
+            ExtensionMethods.DoubleBuffered(dgIndividuals, true);
+            ExtensionMethods.DoubleBuffered(dgFamilies, true);
+            Font cellFont = dgFamilies.DefaultCellStyle.Font ?? SystemFonts.DefaultFont;
+            boldFont = new(cellFont.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);
+            normalFont = new(cellFont.FontFamily, FontSettings.Default.FontSize, FontStyle.Regular);
+            SetSaveButtonsStatus(false);
         }
 
         void SetSaveButtonsStatus(bool value)
@@ -342,7 +338,7 @@ namespace FTAnalyzer.Forms
                 {
                     foreach (DataGridViewRow r in dgFamilies.Rows)
                     {
-                        if (r.Cells[0].Value.ToString() == f.FamilyID)
+                        if (r.Cells[0].Value?.ToString() == f.FamilyID)
                         {
                             dgFamilies.CurrentCell = r.Cells[0];
                             break;
@@ -356,7 +352,7 @@ namespace FTAnalyzer.Forms
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                string? indID = (string?)dgIndividuals.CurrentRow.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
+                string? indID = (string?)dgIndividuals.CurrentRow?.Cells[nameof(IDisplayIndividual.IndividualID)].Value;
                 if (indID is not null)
                     MainForm.ShowIndividualsFacts(indID);
             }
@@ -367,8 +363,8 @@ namespace FTAnalyzer.Forms
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 string? famID = sender == dgFamilies ?
-                    (string?)dgFamilies.CurrentRow.Cells[nameof(IDisplayFamily.FamilyID)].Value :
-                    (string?)dgChildrenStatus.CurrentRow.Cells[nameof(IDisplayFamily.FamilyID)].Value;
+                    (string?)dgFamilies.CurrentRow?.Cells[nameof(IDisplayFamily.FamilyID)].Value :
+                    (string?)dgChildrenStatus.CurrentRow?.Cells[nameof(IDisplayFamily.FamilyID)].Value;
                 if (famID is null) return;
                 Family? fam = ft.GetFamily(famID);
                 if (fam is not null)
@@ -439,7 +435,7 @@ namespace FTAnalyzer.Forms
 
         void ContextMenuStrip1_Opened(object sender, EventArgs e)
         {
-            string? indID = (string?)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+            string? indID = (string?)dgIndividuals.CurrentRow?.Cells["IndividualID"].Value;
             if (indID is null) return;
             Individual? ind = ft.GetIndividual(indID);
             if (ind is not null)
@@ -448,7 +444,7 @@ namespace FTAnalyzer.Forms
 
         void ViewNotesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string? indID = (string?)dgIndividuals.CurrentRow.Cells["IndividualID"].Value;
+            string? indID = (string?)dgIndividuals.CurrentRow?.Cells["IndividualID"].Value;
             if (indID is null) return;
             Individual? ind = ft.GetIndividual(indID);
             if (ind is not null)
@@ -472,7 +468,7 @@ namespace FTAnalyzer.Forms
                         // Can leave these here - doesn't hurt
                         dg.Rows[hti.RowIndex].Selected = true;
                         dg.Focus();
-                        ctxViewNotes.Tag = dg.CurrentRow.DataBoundItem;
+                        ctxViewNotes.Tag = dg.CurrentRow?.DataBoundItem;
                         ctxViewNotes.Show(MousePosition);
                     }
                 }
@@ -569,7 +565,7 @@ namespace FTAnalyzer.Forms
             {
                 case 6: // Totals
                 case 9:
-                    if (!cells[nameof(IDisplayChildrenStatus.ChildrenTotal)].Value.Equals(cells[nameof(IDisplayChildrenStatus.ExpectedTotal)].Value))
+                    if (!Equals(cells[nameof(IDisplayChildrenStatus.ChildrenTotal)].Value, cells[nameof(IDisplayChildrenStatus.ExpectedTotal)].Value))
                     {
                         e.CellStyle.BackColor = Color.Peru;
                         e.CellStyle.Font = boldFont;
@@ -581,7 +577,7 @@ namespace FTAnalyzer.Forms
                     break;
                 case 7: // Alive
                 case 10:
-                    if (!cells[nameof(IDisplayChildrenStatus.ChildrenAlive)].Value.Equals(cells[nameof(IDisplayChildrenStatus.ExpectedAlive)].Value))
+                    if (!Equals(cells[nameof(IDisplayChildrenStatus.ChildrenAlive)].Value, cells[nameof(IDisplayChildrenStatus.ExpectedAlive)].Value))
                     {
                         e.CellStyle.BackColor = Color.SandyBrown;
                         e.CellStyle.Font = boldFont;
@@ -593,7 +589,7 @@ namespace FTAnalyzer.Forms
                     break;
                 case 8: // Dead
                 case 11:
-                    if (!cells[nameof(IDisplayChildrenStatus.ChildrenDead)].Value.Equals(cells[nameof(IDisplayChildrenStatus.ExpectedDead)].Value))
+                    if (!Equals(cells[nameof(IDisplayChildrenStatus.ChildrenDead)].Value, cells[nameof(IDisplayChildrenStatus.ExpectedDead)].Value))
                     {
                         e.CellStyle.BackColor = Color.Tan;
                         e.CellStyle.Font = boldFont;
