@@ -151,7 +151,13 @@ namespace UnitTests
             UKCensusTest("Census 1881 Thwaite, Suffolk RG11/1852/92/4", CensusDate.UKCENSUS1881, "1852", "92", "4");
             UKCensusTest("RG11, Piece 1208, Folio 60 face, Page 13, Schedule 71", CensusDate.UKCENSUS1881, "1208", "60", "13");
             UKCensusTest("RG9/788/115 SN 1801 \r\n", CensusDate.UKCENSUS1861, "788", "115", "", "1801");
-            UKCensusTest("RG10/1332/94 SN 1331", CensusDate.UKCENSUS1871, "1332", "94", "","1331");
+            UKCensusTest("RG10/1332/94 SN 1331", CensusDate.UKCENSUS1871, "1332", "94", "", "1331");
+            UKCensusTest("RG11/1370/14 Sch. 90", CensusDate.UKCENSUS1881, "1370", "14", "", "90");
+            UKCensusTest("Class: RG11; Piece: 3934; Folio: 60; Schedule: 59;", CensusDate.UKCENSUS1881, "3934", "60", "", "59");
+            UKCensusTest("1881 Census Piece 3934 Folio 60 Schedule 59", CensusDate.UKCENSUS1881, "3934", "60", "", "59");
+            UKCensusTest("Census 1881 Piece 3934 Folio 60 Schedule 59", CensusDate.UKCENSUS1881, "3934", "60", "", "59");
+            UKCensusTest("RG9/788/115 SN 1801 \r\n", CensusDate.UKCENSUS1861, "788", "115", "", "1801");
+            UKCensusTest("RG10/1332/94 SN 1331", CensusDate.UKCENSUS1871, "1332", "94", "", "1331");
             UKCensusTest("RG11/1370/14 Sch. 90", CensusDate.UKCENSUS1881, "1370", "14", "", "90");
             UK1939CensusTest("RG101/1043I/014/24Website Access; 26 January 2026AccessTypeWebsite AccessAccessDate26 January 2026ItemOfInterest1939", "1043I", "014", "24", CensusReference.MISSING);
         }
