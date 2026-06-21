@@ -24,7 +24,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static readonly string VERSION = "10.2.0.0";
+        public static readonly string VERSION = "10.2.1.0";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(MainForm));
         const string APPNAME = "FTAnalyzer";
 
@@ -1627,12 +1627,11 @@ namespace FTAnalyzer
                 if (customFactName is not null)
                     dgCustomFacts.Sort(customFactName, ListSortDirection.Ascending);
                 dgCustomFacts.Focus();
+                foreach (DataGridViewColumn col in dgCustomFacts.Columns)
+                    col.ReadOnly = col.Name != nameof(IDisplayCustomFact.Ignore);
                 DataGridViewColumn? ignoreColumn = dgCustomFacts.Columns[nameof(IDisplayCustomFact.Ignore)];
                 if (ignoreColumn is not null)
-                {
-                    ignoreColumn.ReadOnly = false;
                     ignoreColumn.ToolTipText = "Tick box to ignore warnings for this custom fact type.";
-                }
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
                 tsHintsLabel.Text = Messages.Hints_CustomFacts;

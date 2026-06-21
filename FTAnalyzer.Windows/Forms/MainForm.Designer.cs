@@ -3495,7 +3495,6 @@ namespace FTAnalyzer
             dgCustomFacts.Margin = new Padding(7);
             dgCustomFacts.MultiSelect = false;
             dgCustomFacts.Name = "dgCustomFacts";
-            dgCustomFacts.ReadOnly = true;
             dgCustomFacts.RightToLeft = RightToLeft.No;
             dgCustomFacts.RowHeadersVisible = false;
             dgCustomFacts.RowHeadersWidth = 50;
