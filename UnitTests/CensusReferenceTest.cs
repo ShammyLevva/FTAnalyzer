@@ -101,6 +101,7 @@ namespace UnitTests
             CensusHO107Test("Archive reference HO107 Piece number 142 Book number 10 Folio number 51 Page number 1 Record set 1841 England, Wales & Scotland Census", CensusDate.UKCENSUS1841, "142", "10", "51", "1");
             CensusHO107Test(@"Ulleskelf, Tadcaster, folio 9, Book 8, page 12, Joshua Hey and family; digital images, \i FindMyPast.co.uk\i0  (https://search.findmypast.co.uk/search-world-Records/1841-england-wales-and-scotland-census : accessed 12 Jun 2017); citing PRO HO/107/1282", CensusDate.UKCENSUS1841, "1282", "8", "9", "12");
             CensusHO107Test("Archive reference HO107 Piece number 1541 Folio 119 Page 15 Record set 1851 England, Wales & Scotland Census", CensusDate.UKCENSUS1851, "1541", "", "119", "15");
+            CensusHO107Test("HO107/1701/372 SN 431", CensusDate.UKCENSUS1851, "1701", "372", "", "431");
         }
 
         [TestMethod]
@@ -149,6 +150,9 @@ namespace UnitTests
             UKCensusTest("18910405 Census RG12 Piece: 3485, Folio: 134, Page: 30, Sch: 151 - Lancashire Barrow-In-Furness - John MARR", CensusDate.UKCENSUS1891, "3485", "134", "30");
             UKCensusTest("Census 1881 Thwaite, Suffolk RG11/1852/92/4", CensusDate.UKCENSUS1881, "1852", "92", "4");
             UKCensusTest("RG11, Piece 1208, Folio 60 face, Page 13, Schedule 71", CensusDate.UKCENSUS1881, "1208", "60", "13");
+            UKCensusTest("RG9/788/115 SN 1801 \r\n", CensusDate.UKCENSUS1861, "788", "115", "", "1801");
+            UKCensusTest("RG10/1332/94 SN 1331", CensusDate.UKCENSUS1871, "1332", "94", "","1331");
+            UKCensusTest("RG11/1370/14 Sch. 90", CensusDate.UKCENSUS1881, "1370", "14", "", "90");
             UK1939CensusTest("RG101/1043I/014/24Website Access; 26 January 2026AccessTypeWebsite AccessAccessDate26 January 2026ItemOfInterest1939", "1043I", "014", "24", CensusReference.MISSING);
         }
 
@@ -249,18 +253,19 @@ namespace UnitTests
             Assert.IsTrue(censusRef.ED.Equals(ED));
         }
 
-        static void UKCensusTest(string reference, FactDate year, string piece, string folio, string page)
+        static void UKCensusTest(string reference, FactDate year, string piece, string folio, string page, string schedule = "")
         {
-            CensusHO107Test(reference, year, piece, string.Empty, folio, page);
+            CensusHO107Test(reference, year, piece, string.Empty, folio, page, schedule);
         }
 
-        static void CensusHO107Test(string reference, FactDate year, string piece, string book, string folio, string page)
+        static void CensusHO107Test(string reference, FactDate year, string piece, string book, string folio, string page, string schedule = "")
         {
             CensusReference censusRef = new(reference, false);
             Assert.IsTrue(censusRef.CensusYear.Equals(year));
             Assert.IsTrue(censusRef.Piece.Equals(piece));
             Assert.IsTrue(censusRef.Folio.Equals(folio));
             Assert.IsTrue(censusRef.Page.Equals(page));
+            Assert.IsTrue(censusRef.Schedule.Equals(schedule));
             if (!string.IsNullOrEmpty(book))
                 Assert.IsTrue(censusRef.Book.Equals(book));
         }
