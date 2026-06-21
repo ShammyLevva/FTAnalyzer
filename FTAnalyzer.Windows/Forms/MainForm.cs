@@ -1630,8 +1630,7 @@ namespace FTAnalyzer
                 foreach (DataGridViewColumn col in dgCustomFacts.Columns)
                     col.ReadOnly = col.Name != nameof(IDisplayCustomFact.Ignore);
                 DataGridViewColumn? ignoreColumn = dgCustomFacts.Columns[nameof(IDisplayCustomFact.Ignore)];
-                if (ignoreColumn is not null)
-                    ignoreColumn.ToolTipText = "Tick box to ignore warnings for this custom fact type.";
+                ignoreColumn?.ToolTipText = "Tick box to ignore warnings for this custom fact type.";
                 mnuPrint.Enabled = true;
                 tsCountLabel.Text = Messages.Count + list.Count.ToString("N0");
                 tsHintsLabel.Text = Messages.Hints_CustomFacts;
