@@ -1,6 +1,11 @@
 ## Version 10.2.0.0 - 21st June 2026
+**Updates**
+Added support for recognising Series/Piece/Folio/Schedule format UK census references
+
 **Bugfixes**
 Fix sorting on Colour BMD copying red and bold formatting
+Custom Facts Ignored button wasn't working
+Ignored custom facts now treated as good
 
 ## Version 10.2.0.0 - 21st June 2026
 **Updates**
