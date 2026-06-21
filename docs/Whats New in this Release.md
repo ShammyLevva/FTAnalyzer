@@ -1,4 +1,8 @@
 ## Version 10.2.0.0 - 21st June 2026
+**Bugfixes**
+Fix sorting on Colour BMD copying red and bold formatting
+
+## Version 10.2.0.0 - 21st June 2026
 **Updates**
 Add startup crash reporting form
 Improve efficiency of surname loading 

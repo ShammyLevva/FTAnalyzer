@@ -135,23 +135,15 @@ namespace FTAnalyzer.Forms
             if (e.ColumnIndex < birthColumnIndex || e.ColumnIndex > burialColumnIndex)
             {
                 DataGridViewCell cell = dgBMDReportSheet.Rows[e.RowIndex].Cells["Relation"];
-
-                // DataGridViewPrint is driven by the <cell>.Style, setting that property allows
-                // colors/formatting to work in print/preview.
-                DataGridViewCell thisCell = dgBMDReportSheet.Rows[e.RowIndex].Cells[e.ColumnIndex];
-
                 string relation = (cell.Value?.ToString()) ?? string.Empty;
-                if (relation == "Direct Ancestor")
-                {
-                    e.CellStyle.Font = boldFont;
-                    thisCell.Style.Font = boldFont;
-                }
                 if (relation == "Root Person")
                 {
                     e.CellStyle.Font = boldFont;
                     e.CellStyle.ForeColor = Color.Red;
-                    thisCell.Style.Font = boldFont;
-                    thisCell.Style.ForeColor = Color.Red;
+                }
+                else if (relation == "Direct Ancestor")
+                {
+                    e.CellStyle.Font = boldFont;
                 }
             }
             else
@@ -446,7 +438,12 @@ namespace FTAnalyzer.Forms
 
         void ColourBMD_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        void ColourBMD_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
+        void ColourBMD_Load(object sender, EventArgs e)
+        {
+            SpecialMethods.SetFonts(this);
+            toolStrip1.PerformLayout();
+            SetColourColumnWidths();
+        }
 
         void DgBMDReportSheet_SelectionChanged(object sender, EventArgs e)
         {
