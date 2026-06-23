@@ -41,43 +41,43 @@ namespace FTAnalyzer.Forms.Controls
             }
         }
 
-        public Predicate<T> BuildFilter<T>(Func<T, int> relationType, bool excludeUnknown = false)
+        public Predicate<T> BuildFilter<T>(Func<T, RelationshipType> relationType, bool excludeUnknown = false)
         {
             List<Predicate<T>> relationFilters = [];
             if (Blood)
-                relationFilters.Add(FilterUtils.IntFilter(relationType, (int)RelationshipType.BLOOD));
+                relationFilters.Add(FilterUtils.RelationFilter(relationType, RelationshipType.BLOOD));
             if (Directs)
-                relationFilters.Add(FilterUtils.IntFilter(relationType, (int)RelationshipType.DIRECT));
+                relationFilters.Add(FilterUtils.RelationFilter(relationType, RelationshipType.DIRECT));
             if (Marriage)
-                relationFilters.Add(FilterUtils.IntFilter(relationType, (int)RelationshipType.MARRIAGE));
+                relationFilters.Add(FilterUtils.RelationFilter(relationType, RelationshipType.MARRIAGE));
             if (MarriedToDB)
-                relationFilters.Add(FilterUtils.IntFilter(relationType, (int)RelationshipType.MARRIEDTODB));
+                relationFilters.Add(FilterUtils.RelationFilter(relationType, RelationshipType.MARRIEDTODB));
             if (Descendant)
-                relationFilters.Add(FilterUtils.IntFilter(relationType, (int)RelationshipType.DESCENDANT));
+                relationFilters.Add(FilterUtils.RelationFilter(relationType, RelationshipType.DESCENDANT));
             if (Linked)
-                relationFilters.Add(FilterUtils.IntFilter(relationType, (int)RelationshipType.LINKED));
+                relationFilters.Add(FilterUtils.RelationFilter(relationType, RelationshipType.LINKED));
             if (Unknown && !excludeUnknown)
-                relationFilters.Add(FilterUtils.IntFilter(relationType, (int)RelationshipType.UNKNOWN));
+                relationFilters.Add(FilterUtils.RelationFilter(relationType, RelationshipType.UNKNOWN));
             return FilterUtils.OrFilter(relationFilters);
         }
 
-        public Predicate<Family> BuildFamilyFilter<Family>(Func<Family, IEnumerable<int>> relationTypes)
+        public Predicate<Family> BuildFamilyFilter<Family>(Func<Family, IEnumerable<RelationshipType>> relationTypes)
         {
             List<Predicate<Family>> relationFilters = [];
             if (Blood)
-                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, (int)RelationshipType.BLOOD));
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, RelationshipType.BLOOD));
             if (Directs)
-                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, (int)RelationshipType.DIRECT));
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, RelationshipType.DIRECT));
             if (Marriage)
-                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, (int)RelationshipType.MARRIAGE));
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, RelationshipType.MARRIAGE));
             if (MarriedToDB)
-                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, (int)RelationshipType.MARRIEDTODB));
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, RelationshipType.MARRIEDTODB));
             if (Descendant)
-                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, (int)RelationshipType.DESCENDANT));
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, RelationshipType.DESCENDANT));
             if (Linked)
-                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, (int)RelationshipType.LINKED));
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, RelationshipType.LINKED));
             if (Unknown)
-                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, (int)RelationshipType.UNKNOWN));
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, RelationshipType.UNKNOWN));
             return FilterUtils.OrFilter(relationFilters);
         }
 

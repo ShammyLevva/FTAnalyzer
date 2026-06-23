@@ -1403,8 +1403,8 @@ namespace FTAnalyzer
                 if (dgSurnames.DataBoundItem(e.RowIndex) is not IDisplaySurnames stat) return;
                 HourGlass(this, true);
                 People frmInd = new();
-                Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => (int)x.RelationType);
-                Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes.Select(rt => (int)rt));
+                Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => x.RelationType);
+                Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
                 frmInd.SetSurnameStats(stat, indFilter, famFilter, chkSurnamesIgnoreCase.Checked);
                 DisposeDuplicateForms(frmInd);
                 ShowOnCurrentScreen(frmInd);
@@ -1709,7 +1709,7 @@ namespace FTAnalyzer
         #region Filters
         Predicate<ExportFact> CreateFactsFilter()
         {
-            var filter = relTypesFacts.BuildFilter<ExportFact>(x => (int)x.RelationType);
+            var filter = relTypesFacts.BuildFilter<ExportFact>(x => x.RelationType);
             if (txtFactsSurname.Text.Length > 0)
             {
                 var surnameFilter = FilterUtils.StringFilter<ExportFact>(x => x.Surname, txtFactsSurname.Text.Trim());
@@ -1720,7 +1720,7 @@ namespace FTAnalyzer
 
         Predicate<Individual> CreateAliveatDateFilter(FactDate aliveDate, string surname)
         {
-            var relationFilter = relTypesCensus.BuildFilter<Individual>(x => (int)x.RelationType);
+            var relationFilter = relTypesCensus.BuildFilter<Individual>(x => x.RelationType);
             var dateFilter = new Predicate<Individual>(x => x.IsPossiblyAlive(aliveDate));
             Predicate<Individual> filter = FilterUtils.AndFilter(relationFilter, dateFilter);
             if (surname.Length > 0)
@@ -1735,7 +1735,7 @@ namespace FTAnalyzer
 
         Predicate<CensusIndividual> CreateCensusIndividualFilter(CensusDate censusDate, bool censusDone, string surname)
         {
-            Predicate<CensusIndividual> relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => (int)x.RelationType);
+            Predicate<CensusIndividual> relationFilter = relTypesCensus.BuildFilter<CensusIndividual>(x => x.RelationType);
             Predicate<CensusIndividual> dateFilter = censusDone ?
                 new(x => x.IsCensusDone(censusDate) && !x.OutOfCountry(censusDate)) :
                 new(x => !x.IsCensusDone(censusDate) && !x.OutOfCountry(censusDate));
@@ -1763,7 +1763,7 @@ namespace FTAnalyzer
                 filter = x => true;
                 return filter;
             }
-            var relationFilter = relTypesCensus.BuildFilter<Individual>(x => (int)x.RelationType);
+            var relationFilter = relTypesCensus.BuildFilter<Individual>(x => x.RelationType);
             if (anyCensus) // only filter on date if not selecting any date
             {
                 filter = relationFilter;
@@ -1796,7 +1796,7 @@ namespace FTAnalyzer
             Predicate<Individual> treetopFilter = ckbTTIncludeOnlyOneParent.Checked ?
                 new(ind => ind.HasOnlyOneParent || !ind.HasParents) : new(ind => !ind.HasParents);
             Predicate<Individual> locationFilter = treetopsCountry.BuildFilter<Individual>(FactDate.UNKNOWN_DATE, (d, x) => x.BestLocation(d));
-            Predicate<Individual> relationFilter = treetopsRelation.BuildFilter<Individual>(x => (int)x.RelationType);
+            Predicate<Individual> relationFilter = treetopsRelation.BuildFilter<Individual>(x => x.RelationType);
             Predicate<Individual> filter = ckbTTIgnoreLocations.Checked ? relationFilter : FilterUtils.AndFilter(locationFilter, relationFilter);
 
             if (txtTreetopsSurname.Text.Length > 0)
@@ -1812,7 +1812,7 @@ namespace FTAnalyzer
         {
             Predicate<Individual> filter;
             Predicate<Individual> locationFilter = wardeadCountry.BuildFilter<Individual>(FactDate.UNKNOWN_DATE, (d, x) => x.BestLocation(d));
-            Predicate<Individual> relationFilter = wardeadRelation.BuildFilter<Individual>(x => (int)x.RelationType);
+            Predicate<Individual> relationFilter = wardeadRelation.BuildFilter<Individual>(x => x.RelationType);
             Predicate<Individual> birthFilter = FilterUtils.DateFilter<Individual>(x => x.BirthDate, birthRange);
             Predicate<Individual> deathFilter = FilterUtils.DateFilter<Individual>(x => x.DeathDate, deathRange);
 
@@ -1840,8 +1840,8 @@ namespace FTAnalyzer
         {
             HourGlass(this, true);
             Census census = new(censusDate, true);
-            Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => (int)x.RelationType);
-            Predicate<Individual> individualRelationFilter = relTypesLC.BuildFilter<Individual>(x => (int)x.RelationType);
+            Predicate<CensusIndividual> relationFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType);
+            Predicate<Individual> individualRelationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
             census.SetupLCCensus(relationFilter, ckbShowLCEntered.Checked, individualRelationFilter);
             if (ckbShowLCEntered.Checked)
                 census.Text = $"{reportTitle} already entered into Lost Cousins website (includes entries with no country)";
@@ -1934,8 +1934,8 @@ namespace FTAnalyzer
             string previousStatus = tsStatusLabel.Text ?? string.Empty;
             tsStatusLabel.Text = "Loading Lost Cousins Report";
 
-            Predicate<Individual> individualFilter = relTypesLC.BuildFilter<Individual>(x => (int)x.RelationType);
-            Predicate<CensusIndividual> censusFilter = relTypesLC.BuildFilter<CensusIndividual>(x => (int)x.RelationType, true);
+            Predicate<Individual> individualFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
+            Predicate<CensusIndividual> censusFilter = relTypesLC.BuildFilter<CensusIndividual>(x => x.RelationType, true);
 
             try
             {
@@ -1975,7 +1975,7 @@ namespace FTAnalyzer
         void BtnLCMissingCountry_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => (int)x.RelationType);
+            Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
             People people = new();
             people.SetupLCNoCountry(relationFilter);
             DisposeDuplicateForms(people);
@@ -2002,7 +2002,7 @@ namespace FTAnalyzer
         void BtnLCDuplicates_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => (int)x.RelationType);
+            Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
             People people = new();
             people.SetupLCDuplicates(relationFilter);
             DisposeDuplicateForms(people);
@@ -2014,7 +2014,7 @@ namespace FTAnalyzer
         void BtnLCnoCensus_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => (int)x.RelationType);
+            Predicate<Individual> relationFilter = relTypesLC.BuildFilter<Individual>(x => x.RelationType);
             People people = new();
             people.SetupLCnoCensus(relationFilter);
             DisposeDuplicateForms(people);
@@ -2597,7 +2597,7 @@ namespace FTAnalyzer
         void BtnShowFacts_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            Predicate<Individual> filter = relTypesFacts.BuildFilter<Individual>(x => (int)x.RelationType);
+            Predicate<Individual> filter = relTypesFacts.BuildFilter<Individual>(x => x.RelationType);
             if (txtFactsSurname.Text.Length > 0)
             {
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtFactsSurname.Text);
@@ -2729,7 +2729,7 @@ namespace FTAnalyzer
         void BtnDuplicateFacts_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            Predicate<Individual> filter = relTypesFacts.BuildFilter<Individual>(x => (int)x.RelationType);
+            Predicate<Individual> filter = relTypesFacts.BuildFilter<Individual>(x => x.RelationType);
             if (txtFactsSurname.Text.Length > 0)
             {
                 Predicate<Individual> surnameFilter = FilterUtils.StringFilter<Individual>(x => x.Surname, txtFactsSurname.Text);
@@ -3188,7 +3188,7 @@ namespace FTAnalyzer
         void BtnColourBMD_Click(object sender, EventArgs e)
         {
             HourGlass(this, true);
-            Predicate<Individual> relTypeFilter = relTypesResearchSuggest.BuildFilter<Individual>(x => (int)x.RelationType);
+            Predicate<Individual> relTypeFilter = relTypesResearchSuggest.BuildFilter<Individual>(x => x.RelationType);
             ComboBoxFamily? cbFamily = cmbColourFamily.SelectedItem as ComboBoxFamily;
             List<IDisplayColourBMD> list = ft.ColourBMD(relTypeFilter, txtColouredSurname.Text, cbFamily);
             ColourBMD rs = new(list);
@@ -3202,7 +3202,7 @@ namespace FTAnalyzer
         async Task DisplayColourCensus(string country)
         {
             HourGlass(this, true);
-            Predicate<Individual> relTypeFilter = relTypesResearchSuggest.BuildFilter<Individual>(x => (int)x.RelationType);
+            Predicate<Individual> relTypeFilter = relTypesResearchSuggest.BuildFilter<Individual>(x => x.RelationType);
             ComboBoxFamily? cbFamily = cmbColourFamily.SelectedItem as ComboBoxFamily;
             List<IDisplayColourCensus> list =
                     ft.ColourCensus(country, relTypeFilter, txtColouredSurname.Text, cbFamily, ckbIgnoreNoBirthDate.Checked, ckbIgnoreNoDeathDate.Checked);
@@ -3269,7 +3269,7 @@ namespace FTAnalyzer
             {
                 HourGlass(this, true);
                 IEnumerable<Family> candidates = ft.AllFamilies;
-                Predicate<Family> relationFilter = relTypesResearchSuggest.BuildFamilyFilter<Family>(x => x.RelationTypes.Select(rt => (int)rt));
+                Predicate<Family> relationFilter = relTypesResearchSuggest.BuildFamilyFilter<Family>(x => x.RelationTypes);
                 if (txtColouredSurname.Text.Length > 0)
                     candidates = candidates.Filter(x => x.ContainsSurname(txtColouredSurname.Text, true));
                 List<Family> list = [.. candidates.Filter(relationFilter)];
@@ -3616,8 +3616,8 @@ namespace FTAnalyzer
             else
             {
                 tspbTabProgress.Visible = true;
-                Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => (int)x.RelationType);
-                Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes.Select(rt => (int)rt));
+                Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => x.RelationType);
+                Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
                 Progress<int> progress = new(value => { tspbTabProgress.Value = value; });
                 stats = await Task.Run(() =>
                     new SortableBindingList<IDisplaySurnames>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked)));
@@ -3856,8 +3856,8 @@ namespace FTAnalyzer
             tsCountLabel.Text = string.Empty;
             tsHintsLabel.Text = string.Empty;
             tspbTabProgress.Visible = true;
-            Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => (int)x.RelationType);
-            Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes.Select(rt => (int)rt));
+            Predicate<Individual> indFilter = reltypesSurnames.BuildFilter<Individual>(x => x.RelationType);
+            Predicate<Family> famFilter = reltypesSurnames.BuildFamilyFilter<Family>(x => x.RelationTypes);
             var progress = new Progress<int>(value => { tspbTabProgress.Value = value; });
             var list = await Task.Run(() =>
                 new SortableBindingList<IDisplaySurnames>(Statistics.Instance.Surnames(indFilter, famFilter, progress, chkSurnamesIgnoreCase.Checked)));
