@@ -52,7 +52,7 @@ namespace FTAnalyzer.Forms
 
         void HowManyDirectsReport()
         {
-            IEnumerable<DisplayGreatStats> relations = FamilyTree.Instance.AllIndividuals.Where(x => x.RelationToRoot.Length > 0 && (x.RelationType == Individual.DIRECT || x.RelationType == Individual.DESCENDANT))
+            IEnumerable<DisplayGreatStats> relations = FamilyTree.Instance.AllIndividuals.Where(x => x.RelationToRoot.Length > 0 && (x.RelationType == RelationshipType.DIRECT || x.RelationType == RelationshipType.DESCENDANT))
                 .GroupBy(i => (i.RelationToRoot, i.RelationSort))
                 .Select(r => new DisplayGreatStats(r.Key.RelationToRoot, r.Key.RelationSort, r.Count()));
             SortableBindingList<DisplayGreatStats> list = new([.. relations]);

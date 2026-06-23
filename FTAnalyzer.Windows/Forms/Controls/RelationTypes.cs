@@ -24,19 +24,19 @@ namespace FTAnalyzer.Forms.Controls
             {
                 int result = 0;
                 if (ckbUnknown.Checked)
-                    result += Individual.UNKNOWN;
+                    result += (int)RelationshipType.UNKNOWN;
                 if (ckbDirects.Checked)
-                    result += Individual.DIRECT;
+                    result += (int)RelationshipType.DIRECT;
                 if (ckbBlood.Checked)
-                    result += Individual.BLOOD;
+                    result += (int)RelationshipType.BLOOD;
                 if (ckbMarriage.Checked)
-                    result += Individual.MARRIAGE;
+                    result += (int)RelationshipType.MARRIAGE;
                 if (ckbMarriageDB.Checked)
-                    result += Individual.MARRIEDTODB;
+                    result += (int)RelationshipType.MARRIEDTODB;
                 if (ckbDescendants.Checked)
-                    result += Individual.DESCENDANT;
+                    result += (int)RelationshipType.DESCENDANT;
                 if (ckbLinked.Checked)
-                    result += Individual.LINKED;
+                    result += (int)RelationshipType.LINKED;
                 return result;
             }
         }
@@ -45,19 +45,19 @@ namespace FTAnalyzer.Forms.Controls
         {
             List<Predicate<T>> relationFilters = [];
             if (Blood)
-                relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.BLOOD));
+                relationFilters.Add(FilterUtils.IntFilter(relationType, (int)RelationshipType.BLOOD));
             if (Directs)
-                relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.DIRECT));
+                relationFilters.Add(FilterUtils.IntFilter(relationType, (int)RelationshipType.DIRECT));
             if (Marriage)
-                relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.MARRIAGE));
+                relationFilters.Add(FilterUtils.IntFilter(relationType, (int)RelationshipType.MARRIAGE));
             if (MarriedToDB)
-                relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.MARRIEDTODB));
+                relationFilters.Add(FilterUtils.IntFilter(relationType, (int)RelationshipType.MARRIEDTODB));
             if (Descendant)
-                relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.DESCENDANT));
+                relationFilters.Add(FilterUtils.IntFilter(relationType, (int)RelationshipType.DESCENDANT));
             if (Linked)
-                relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.LINKED));
+                relationFilters.Add(FilterUtils.IntFilter(relationType, (int)RelationshipType.LINKED));
             if (Unknown && !excludeUnknown)
-                relationFilters.Add(FilterUtils.IntFilter(relationType, Individual.UNKNOWN));
+                relationFilters.Add(FilterUtils.IntFilter(relationType, (int)RelationshipType.UNKNOWN));
             return FilterUtils.OrFilter(relationFilters);
         }
 
@@ -65,19 +65,19 @@ namespace FTAnalyzer.Forms.Controls
         {
             List<Predicate<Family>> relationFilters = [];
             if (Blood)
-                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, Individual.BLOOD));
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, (int)RelationshipType.BLOOD));
             if (Directs)
-                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, Individual.DIRECT));
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, (int)RelationshipType.DIRECT));
             if (Marriage)
-                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, Individual.MARRIAGE));
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, (int)RelationshipType.MARRIAGE));
             if (MarriedToDB)
-                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, Individual.MARRIEDTODB));
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, (int)RelationshipType.MARRIEDTODB));
             if (Descendant)
-                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, Individual.DESCENDANT));
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, (int)RelationshipType.DESCENDANT));
             if (Linked)
-                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, Individual.LINKED));
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, (int)RelationshipType.LINKED));
             if (Unknown)
-                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, Individual.UNKNOWN));
+                relationFilters.Add(FilterUtils.FamilyRelationFilter(relationTypes, (int)RelationshipType.UNKNOWN));
             return FilterUtils.OrFilter(relationFilters);
         }
 

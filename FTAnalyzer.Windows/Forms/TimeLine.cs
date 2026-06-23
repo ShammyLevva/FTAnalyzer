@@ -134,7 +134,7 @@ namespace FTAnalyzer.Forms
         {
             List<MapLocation> result = [];
             foreach (MapLocation ml in locations)
-                if (RelationIncluded(ml.Individual.RelationType))
+                if (RelationIncluded((int)ml.Individual.RelationType))
                     result.Add(ml);
             return result;
         }
@@ -143,12 +143,12 @@ namespace FTAnalyzer.Forms
         {
             return relationtype switch
             {
-                Individual.DIRECT => directAncestorsToolStripMenuItem.Checked,
-                Individual.BLOOD => bloodRelativesToolStripMenuItem.Checked,
-                Individual.MARRIAGE => relatedByMarriageToolStripMenuItem.Checked,
-                Individual.MARRIEDTODB => marriedToDirectOrBloodToolStripMenuItem.Checked,
-                Individual.DESCENDANT => descendantToolStripMenuItem.Checked,
-                Individual.LINKED => linkedByMarriageToolStripMenuItem.Checked,
+                ((int)RelationshipType.DIRECT) => directAncestorsToolStripMenuItem.Checked,
+                ((int)RelationshipType.BLOOD) => bloodRelativesToolStripMenuItem.Checked,
+                ((int)RelationshipType.MARRIAGE) => relatedByMarriageToolStripMenuItem.Checked,
+                ((int)RelationshipType.MARRIEDTODB) => marriedToDirectOrBloodToolStripMenuItem.Checked,
+                ((int)RelationshipType.DESCENDANT) => descendantToolStripMenuItem.Checked,
+                ((int)RelationshipType.LINKED) => linkedByMarriageToolStripMenuItem.Checked,
                 _ => unknownToolStripMenuItem.Checked,
             };
         }
