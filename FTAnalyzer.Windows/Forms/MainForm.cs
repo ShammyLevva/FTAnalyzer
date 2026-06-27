@@ -1684,22 +1684,43 @@ namespace FTAnalyzer
                 mnuPrint.Enabled = true;
                 await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.DuplicatesTabEvent);
             }
-            if (tabErrorFixSelector.SelectedTab == tabLooseBirths)
+            else if (tabErrorFixSelector.SelectedTab == tabLooseBirths)
             {
                 if (((DataGridView)dgLooseBirths).DataSource is null)
                     SetupLooseBirths();
+                else
+                {
+                    tsCountLabel.Text = Messages.Count + ((SortableBindingList<IDisplayLooseBirth>)((DataGridView)dgLooseBirths).DataSource).Count;
+                    tsHintsLabel.Text = Messages.Hints_Loose_Births + Messages.Hints_Individual;
+                }
+                mnuPrint.Enabled = true;
+                dgLooseBirths.Focus();
                 await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseBirthsEvent);
             }
             else if (tabErrorFixSelector.SelectedTab == tabLooseDeaths)
             {
                 if (((DataGridView)dgLooseDeaths).DataSource is null)
                     SetupLooseDeaths();
+                else
+                {
+                    tsCountLabel.Text = Messages.Count + ((SortableBindingList<IDisplayLooseDeath>)((DataGridView)dgLooseDeaths).DataSource).Count;
+                    tsHintsLabel.Text = Messages.Hints_Loose_Deaths + Messages.Hints_Individual;
+                }
+                mnuPrint.Enabled = true;
+                dgLooseDeaths.Focus();
                 await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseDeathsEvent);
             }
             else if (tabErrorFixSelector.SelectedTab == tabLooseInfo)
             {
                 if (((DataGridView)dgLooseInfo).DataSource is null)
                     SetupLooseInfo();
+                else
+                {
+                    tsCountLabel.Text = Messages.Count + ((SortableBindingList<IDisplayLooseInfo>)((DataGridView)dgLooseInfo).DataSource).Count;
+                    tsHintsLabel.Text = "Double click to view records. " + Messages.Hints_Individual;
+                }
+                mnuPrint.Enabled = true;
+                dgLooseInfo.Focus();
                 await Analytics.TrackAction(Analytics.ErrorsFixesAction, Analytics.LooseInfoEvent);
             }
         }
