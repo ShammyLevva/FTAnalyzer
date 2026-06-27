@@ -2,6 +2,7 @@ using FTAnalyzer;
 using FTAnalyzer.Utilities;
 using Shouldly;
 using System.ComponentModel;
+using System.Drawing;
 using System.Numerics;
 using System.Xml;
 
@@ -1021,6 +1022,38 @@ namespace UnitTests
     // Fact comparators
     // ──────────────────────────────────────────────────────────────────────────
 
+    internal sealed class StubDisplayFact : IDisplayFact
+    {
+        public string IndividualID { get; init; } = string.Empty;
+        public string Name { get; init; } = string.Empty;
+        public string Surname { get; init; } = string.Empty;
+        public string Forenames { get; init; } = string.Empty;
+        public FactDate DateofBirth { get; init; } = FactDate.UNKNOWN_DATE;
+        public string SurnameAtDate { get; init; } = string.Empty;
+        public string TypeOfFact { get; init; } = string.Empty;
+        public FactDate FactDate { get; init; } = FactDate.UNKNOWN_DATE;
+        public string Relation { get; init; } = string.Empty;
+        public string RelationToRoot { get; init; } = string.Empty;
+        public FactLocation Location { get; init; } = FactLocation.BLANK_LOCATION;
+        public Age AgeAtFact { get; init; } = Age.BIRTH;
+        public string GeocodeStatus { get; init; } = string.Empty;
+        public string FoundLocation { get; init; } = string.Empty;
+        public string FoundResultType { get; init; } = string.Empty;
+        public CensusReference CensusReference { get; init; } = CensusReference.UNKNOWN;
+        public string CensusRefYear { get; init; } = string.Empty;
+        public string Comment { get; init; } = string.Empty;
+        public int SourcesCount { get; init; }
+        public string SourceList { get; init; } = string.Empty;
+        public double Latitude { get; init; }
+        public double Longitude { get; init; }
+        public Image Icon { get; init; } = default!;
+        public Image LocationIcon { get; init; } = default!;
+        public bool Preferred { get; init; }
+        public bool IgnoredFact { get; init; }
+        public string ErrorComment { get; init; } = string.Empty;
+        public IComparer<IDisplayFact> GetComparer(string columnName, bool ascending) => throw new NotSupportedException();
+    }
+
     [TestClass]
     public class FactComparerTests
     {
@@ -1088,6 +1121,68 @@ namespace UnitTests
             var b = MakeFact(Fact.BIRTH, "1 JAN 1950");
             // Not guaranteed to differ but these dates definitely produce different hash values
             _comparer.GetHashCode(a).ShouldNotBe(_comparer.GetHashCode(b));
+        }
+    }
+
+    [TestClass]
+    public class FactComparerSortTests
+    {
+        readonly FactComparer _comparer = new();
+
+        static StubDisplayFact Stub(string factType, string date, string place = "") =>
+            new() { TypeOfFact = factType, FactDate = new FactDate(date), Location = FactLocation.GetLocation(place) };
+
+        [TestMethod]
+        public void Compare_BothNull_ReturnsZero()
+        {
+            _comparer.Compare(null, null).ShouldBe(0);
+        }
+
+        [TestMethod]
+        public void Compare_XNull_ReturnsNegative()
+        {
+            _comparer.Compare(null, Stub("Birth", "1 JAN 1900")).ShouldBeLessThan(0);
+        }
+
+        [TestMethod]
+        public void Compare_YNull_ReturnsPositive()
+        {
+            _comparer.Compare(Stub("Birth", "1 JAN 1900"), null).ShouldBeGreaterThan(0);
+        }
+
+        [TestMethod]
+        public void Compare_SameTypeAndDateAndLocation_ReturnsZero()
+        {
+            var a = Stub("Birth", "1 JAN 1900", "London");
+            var b = Stub("Birth", "1 JAN 1900", "London");
+            _comparer.Compare(a, b).ShouldBe(0);
+        }
+
+        [TestMethod]
+        public void Compare_DifferentType_SortsByType()
+        {
+            var birth = Stub("Birth", "1 JAN 1900");
+            var death = Stub("Death", "1 JAN 1900");
+            _comparer.Compare(birth, death).ShouldBeLessThan(0);
+            _comparer.Compare(death, birth).ShouldBeGreaterThan(0);
+        }
+
+        [TestMethod]
+        public void Compare_SameType_SortsByDate()
+        {
+            var earlier = Stub("Birth", "1 JAN 1890");
+            var later = Stub("Birth", "1 JAN 1910");
+            _comparer.Compare(earlier, later).ShouldBeLessThan(0);
+            _comparer.Compare(later, earlier).ShouldBeGreaterThan(0);
+        }
+
+        [TestMethod]
+        public void Compare_SameTypeAndDate_SortsByLocation()
+        {
+            var france = Stub("Birth", "1 JAN 1900", "France");
+            var germany = Stub("Birth", "1 JAN 1900", "Germany");
+            _comparer.Compare(france, germany).ShouldBeLessThan(0);
+            _comparer.Compare(germany, france).ShouldBeGreaterThan(0);
         }
     }
 
