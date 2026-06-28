@@ -698,7 +698,7 @@ namespace FTAnalyzer.Forms
                                 int foundLevel = GoogleMap.GetFactLocationType(result.Types, loc);
                                 GeoResponse.CResult.CGeometry.CViewPort viewport = result.Geometry.ViewPort;
                                 if (foundLevel == loc.Level && bbox.Covers(new Coordinate(result.Geometry.Location.Long, result.Geometry.Location.Lat)) &&
-                                    !result.PartialMatch)
+                                    !result.IsApproximateMatch)
                                 {
                                     loc.ViewPort = MapTransforms.TransformViewport(viewport);
                                     if (!loc.EmptyViewPort)
@@ -794,9 +794,9 @@ namespace FTAnalyzer.Forms
                                             {
                                                 latitude = result.Geometry.Location.Lat;
                                                 longitude = result.Geometry.Location.Long;
-                                                loc.GeocodeStatus = result.PartialMatch ? FactLocation.Geocode.PARTIAL_MATCH : FactLocation.Geocode.MATCHED;
+                                                loc.GeocodeStatus = result.IsApproximateMatch ? FactLocation.Geocode.PARTIAL_MATCH : FactLocation.Geocode.MATCHED;
                                                 loc.ViewPort = MapTransforms.TransformViewport(viewport);
-                                                if (!result.PartialMatch)
+                                                if (!result.IsApproximateMatch)
                                                 {
                                                     //if (checkresultsPass == 2)
                                                     //log.Info("Geocoding found a match with " + loc.GEDCOMLocation + " previously failed with " + loc.GoogleFixed);

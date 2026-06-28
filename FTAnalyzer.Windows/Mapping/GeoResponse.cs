@@ -1,50 +1,79 @@
-﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace FTAnalyzer.Mapping
 {
-    [DataContract]
     public class GeoResponse
     {
-        [DataMember(Name = "status")]
+        [JsonIgnore]
         public string Status { get; set; } = string.Empty;
-        [DataMember(Name = "results")]
+
+        [JsonProperty("results")]
         public CResult[] Results { get; set; } = [];
 
-        [DataContract]
         public class CResult
         {
-            [DataMember(Name = "types")]
+            [JsonProperty("types")]
             public string[] Types { get; set; } = [];
-            [DataMember(Name = "formatted_address")]
-            public string ReturnAddress { get; set; } = string.Empty;
-            [DataMember(Name = "address_components")]
-            public CAddress[] Addresses { get; set; } = [];
-            [DataMember(Name = "geometry")]
-            public CGeometry Geometry { get; set; } = new();
 
-            [DataContract]
+            [JsonProperty("formattedAddress")]
+            public string ReturnAddress { get; set; } = string.Empty;
+
+            [JsonProperty("addressComponents")]
+            public CAddress[] Addresses { get; set; } = [];
+
+            [JsonProperty("location")]
+            public CGeometry.CLocation Location { get; set; } = new();
+
+            [JsonProperty("viewport")]
+            public CGeometry.CViewPort ViewPort { get; set; } = new();
+
+            [JsonProperty("granularity")]
+            public string Granularity { get; set; } = string.Empty;
+
+            [JsonProperty("placeId")]
+            public string PlaceId { get; set; } = string.Empty;
+
+            [JsonIgnore]
+            public bool IsApproximateMatch => string.Equals(Granularity, "APPROXIMATE", StringComparison.OrdinalIgnoreCase);
+
+            [JsonIgnore]
+            public CGeometry Geometry => new(this);
+
             public class CGeometry
             {
-                [DataMember(Name = "location")]
-                public CLocation Location { get; set; } = new();
-                [DataMember(Name = "viewport")]
-                public CViewPort ViewPort { get; set; } = new();
+                readonly CResult _result;
 
-                [DataContract]
+                public CGeometry() => _result = new CResult();
+
+                internal CGeometry(CResult result) => _result = result;
+
+                public CLocation Location
+                {
+                    get => _result.Location;
+                    set => _result.Location = value;
+                }
+
+                public CViewPort ViewPort
+                {
+                    get => _result.ViewPort;
+                    set => _result.ViewPort = value;
+                }
+
                 public class CLocation
                 {
-                    [DataMember(Name = "lat")]
+                    [JsonProperty("latitude")]
                     public double Lat { get; set; }
-                    [DataMember(Name = "lng")]
+
+                    [JsonProperty("longitude")]
                     public double Long { get; set; }
                 }
 
-                [DataContract]
                 public class CViewPort
                 {
-                    [DataMember(Name = "southwest")]
+                    [JsonProperty("low")]
                     public CLocation SouthWest { get; set; }
-                    [DataMember(Name = "northeast")]
+
+                    [JsonProperty("high")]
                     public CLocation NorthEast { get; set; }
 
                     public CViewPort()
@@ -54,19 +83,17 @@ namespace FTAnalyzer.Mapping
                     }
                 }
             }
-
-            [DataMember(Name = "partial_match")]
-            public bool PartialMatch { get; set; }
         }
 
-        [DataContract]
         public class CAddress
         {
-            [DataMember(Name = "types")]
+            [JsonProperty("types")]
             public string[] Types { get; set; } = [];
-            [DataMember(Name = "long_name")]
+
+            [JsonProperty("longText")]
             public string LongName { get; set; } = string.Empty;
-            [DataMember(Name = "short_name")]
+
+            [JsonProperty("shortText")]
             public string ShortName { get; set; } = string.Empty;
         }
     }

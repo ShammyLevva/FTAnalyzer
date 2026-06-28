@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Net;
 using System.Text;
-using System.Web;
+
 
 namespace FTAnalyzer.Forms
 {
@@ -149,32 +149,26 @@ namespace FTAnalyzer.Forms
 
         public static Task<GeoResponse?> CallGoogleGeocodeAsync(FactLocation? address, string text, CancellationToken cancellationToken)
         {
-            string bounds = string.Empty;
-            string tld = string.Empty;
+            string locationBias = string.Empty;
+            string regionCode = string.Empty;
             if (address is not null)
             {
-                tld = address.IsUnitedKingdom ? "&region=uk" : string.Empty;
-                //if (address.Level > FactLocation.SUBREGION)
-                //{
-                //    FactLocation area = address.GetLocation(FactLocation.SUBREGION);
-                //    if (area is not null && area.IsGeoCoded(false) && !string.IsNullOrEmpty(area.Bounds))
-                //        bounds = $"{area.Bounds}";
-                //}
-                if (string.IsNullOrEmpty(bounds) && address.Level > FactLocation.REGION)
+                regionCode = address.IsUnitedKingdom ? "&regionCode=uk" : string.Empty;
+                if (string.IsNullOrEmpty(locationBias) && address.Level > FactLocation.REGION)
                 {
                     FactLocation area = address.GetLocation(FactLocation.REGION);
-                    if (area is not null && area.IsGeoCoded(false) && !string.IsNullOrEmpty(area.Bounds))
-                        bounds = $"{area.Bounds}";
+                    if (area is not null && area.IsGeoCoded(false) && !string.IsNullOrEmpty(area.LocationBias))
+                        locationBias = area.LocationBias;
                 }
-                if (string.IsNullOrEmpty(bounds) && address.Level > FactLocation.COUNTRY)
+                if (string.IsNullOrEmpty(locationBias) && address.Level > FactLocation.COUNTRY)
                 {
                     FactLocation area = address.GetLocation(FactLocation.COUNTRY);
-                    if (area is not null && area.IsGeoCoded(false) && !string.IsNullOrEmpty(area.Bounds))
-                        bounds = $"{area.Bounds}";
+                    if (area is not null && area.IsGeoCoded(false) && !string.IsNullOrEmpty(area.LocationBias))
+                        locationBias = area.LocationBias;
                 }
             }
-            string encodedAddress = HttpUtility.UrlEncode(text.Replace(" ", "+", StringComparison.Ordinal));
-            string url = $"https://maps.googleapis.com/maps/api/geocode/json?address={encodedAddress}{bounds}{tld}&key={GoogleAPIKey.KeyValue}";
+            string encodedAddress = Uri.EscapeDataString(text);
+            string url = $"https://geocode.googleapis.com/v4/geocode/address/{encodedAddress}?key={GoogleAPIKey.KeyValue}{regionCode}{locationBias}";
             if (ThreadCancelled || cancellationToken.IsCancellationRequested)
                 return Task.FromResult<GeoResponse?>(null);
 
@@ -183,15 +177,15 @@ namespace FTAnalyzer.Forms
 
         public static Task<GeoResponse?> CallGoogleReverseGeocodeAsync(double latitude, double longitude, CancellationToken cancellationToken)
         {
-            string lat = HttpUtility.UrlEncode(latitude.ToString());
-            string lng = HttpUtility.UrlEncode(longitude.ToString());
-            string region = longitude >= -7.974074 && longitude <= 1.879409 && latitude >= 49.814376 && latitude <= 60.970872 ?
-                "&region=uk" : string.Empty;
-            string url = $"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}{region}&key={GoogleAPIKey.KeyValue}";
+            string lat = latitude.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            string lng = longitude.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            string regionCode = longitude >= -7.974074 && longitude <= 1.879409 && latitude >= 49.814376 && latitude <= 60.970872 ?
+                "&regionCode=uk" : string.Empty;
+            string url = $"https://geocode.googleapis.com/v4/geocode/location/{lat},{lng}?key={GoogleAPIKey.KeyValue}{regionCode}";
             if (ThreadCancelled || cancellationToken.IsCancellationRequested)
                 return Task.FromResult<GeoResponse?>(null);
 
-            return GetGeoResponseAsync(url, $"latlng={lat},{lng}{region}", cancellationToken);
+            return GetGeoResponseAsync(url, $"location/{lat},{lng}{regionCode}", cancellationToken);
         }
 
         static async Task<GeoResponse?> GetGeoResponseAsync(string url, string text, CancellationToken cancellationToken)
@@ -209,18 +203,20 @@ namespace FTAnalyzer.Forms
                     .SendAsync(request, cancellationToken)
                     .ConfigureAwait(false);
 
-                //if (request.Proxy is WebProxy proxy)
-                //{
-                //    string proxyuri = proxy.GetProxy(request.RequestUri).ToString();
-                //    request.UseDefaultCredentials = true;
-                //    request.Proxy = new WebProxy(proxyuri, false)
-                //    {
-                //        Credentials = CredentialCache.DefaultCredentials
-                //    };
-                //}
-                response.EnsureSuccessStatusCode();
+                if (response.StatusCode == HttpStatusCode.TooManyRequests)
+                    return new GeoResponse { Status = "OVER_QUERY_LIMIT" };
+                if (response.StatusCode == HttpStatusCode.Forbidden)
+                    return new GeoResponse { Status = "REQUEST_DENIED" };
+                if (!response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine($"Google API returned HTTP {(int)response.StatusCode} for {url}");
+                    return null;
+                }
+
                 string jsonString = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
                 res = JsonConvert.DeserializeObject<GeoResponse>(jsonString);
+                if (res is not null)
+                    res.Status = res.Results.Length > 0 ? "OK" : "ZERO_RESULTS";
             }
             catch (OperationCanceledException)
             {
@@ -233,7 +229,7 @@ namespace FTAnalyzer.Forms
                 if (ex.Status == WebExceptionStatus.Timeout)
                     Debug.WriteLine($"Timeout with {url}\n");
                 else
-                    UIHelpers.ShowMessage($"Unable to contact https://maps.googleapis.com error was: {ex.Message}\nWhen trying to look for {text}", "FTAnalyzer");
+                    UIHelpers.ShowMessage($"Unable to contact https://geocode.googleapis.com error was: {ex.Message}\nWhen trying to look for {text}", "FTAnalyzer");
                 res = null;
             }
             catch (Exception ex)
@@ -242,7 +238,7 @@ namespace FTAnalyzer.Forms
                 res = null;
             }
             if (res is not null && res.Status == "REQUEST_DENIED")
-                UIHelpers.ShowMessage("Google returned REQUEST_DENIED - please check you have a valid key and enabled the Geocoding API & Places API");
+                UIHelpers.ShowMessage("Google returned REQUEST_DENIED - please check you have a valid key and enabled the Geocoding API (v4) & Places API");
             return res;
         }
 

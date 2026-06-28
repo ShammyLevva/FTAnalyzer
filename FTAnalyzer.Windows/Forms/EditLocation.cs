@@ -230,7 +230,7 @@ namespace FTAnalyzer.Forms
                         loc.LongitudeM = mpoint.X;
                         loc.LatitudeM = mpoint.Y;
                         loc.ViewPort = MapTransforms.TransformViewport(res.Results[0].Geometry.ViewPort);
-                        loc.GeocodeStatus = res.Results[0].PartialMatch ? FactLocation.Geocode.PARTIAL_MATCH : FactLocation.Geocode.MATCHED;
+                        loc.GeocodeStatus = res.Results[0].IsApproximateMatch ? FactLocation.Geocode.PARTIAL_MATCH : FactLocation.Geocode.MATCHED;
                         FactLocation.CopyLocationDetails(loc, location);
                         SetLocation();
                         pointUpdated = true;
