@@ -40,11 +40,12 @@ GEM
       logger
     eventmachine (1.2.7)
     execjs (2.10.1)
-    faraday (2.8.1)
-      base64
-      faraday-net_http (>= 2.0, < 3.1)
-      ruby2_keywords (>= 0.0.4)
-    faraday-net_http (3.0.2)
+    faraday (2.14.3)
+      faraday-net_http (>= 2.0, < 3.5)
+      json
+      logger
+    faraday-net_http (3.4.4)
+      net-http (~> 0.5)
     ffi (1.17.4)
     forwardable-extended (2.6.0)
     gemoji (4.1.0)
@@ -213,6 +214,7 @@ GEM
       gemoji (>= 3, < 5)
       html-pipeline (~> 2.2)
       jekyll (>= 3.0, < 5.0)
+    json (2.20.0)
     kramdown (2.4.0)
       rexml
     kramdown-parser-gfm (1.1.0)
@@ -230,6 +232,8 @@ GEM
       jekyll-seo-tag (~> 2.1)
     minitest (5.26.1)
     mutex_m (0.3.0)
+    net-http (0.9.1)
+      uri (>= 0.11.1)
     nokogiri (1.15.7-x86_64-linux)
       racc (~> 1.4)
     octokit (4.25.1)
@@ -244,7 +248,6 @@ GEM
       ffi (~> 1.0)
     rexml (3.4.4)
     rouge (3.30.0)
-    ruby2_keywords (0.0.5)
     rubyzip (2.4.1)
     safe_yaml (1.0.5)
     sass (3.7.4)
@@ -264,6 +267,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (1.8.0)
+    uri (1.1.1)
 
 PLATFORMS
   x86_64-linux-musl
