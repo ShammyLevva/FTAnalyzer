@@ -2,28 +2,9 @@
 
 Analyse, explore and improve your family tree — spot errors, research census records, and visualise where your ancestors lived and moved over time.
 
-<div class="cta-buttons">
+<div class="cta-buttons" markdown="1">
   <a href="https://apps.microsoft.com/detail/9PMJL9HVPL7X" class="btn btn-primary">&#11015; Get the Windows App &mdash; Free</a>
   <a href="https://app.ftanalyzer.com" class="btn btn-secondary">&#127760; Try it in Your Browser</a>
-</div>
-
----
-
-<div class="web-app-callout">
-
-### Also Available as a Web App
-
-No installation needed &mdash; upload your GEDCOM at **[app.ftanalyzer.com](https://app.ftanalyzer.com)** and analyse your tree instantly in any browser, on any device.
-
-**Highlights:**
-- **Tree Health score** (A&ndash;F grading across 10 categories) with a personalised Improvement Plan
-- **Colour Census &amp; BMD reports** with one-click searching on Ancestry, FindMyPast, FamilySearch, FreeCen and ScotlandsPeople
-- **Interactive maps** &mdash; timeline, lifelines, and historic Ordnance Survey maps
-- **Data Errors, Duplicates, Loose Births &amp; Deaths**, World Wars, and On This Day reports
-- **Privacy first** &mdash; your data stays in your browser by default; optional cloud sync with a free Google sign-in
-
-> **Note:** The web app has a 50&thinsp;MB GEDCOM file limit. For larger trees or Lost Cousins integration, use the Windows desktop app below.
-
 </div>
 
 ---
@@ -62,7 +43,26 @@ If you have [trouble with the Windows Store](https://www.ftanalyzer.com/ResetWin
 - **World Wars** &mdash; men of likely fighting age in WWI and WWII, with links to the Lives of the First World War
 - Research Suggestions, custom colour reports, and much more
 
-**Contains Ordnance Survey data &copy; Crown copyright and database right 2018**
+**Contains Ordnance Survey data &copy; Crown copyright and database right 2013-2026**
+
+---
+
+<div class="web-app-callout" markdown="1">
+
+### Also Available as a Web App
+
+No installation needed &mdash; upload your GEDCOM at **[app.ftanalyzer.com](https://app.ftanalyzer.com)** and analyse your tree instantly in any browser, on any device.
+
+**Highlights:**
+- **Tree Health score** (A&ndash;F grading across 10 categories) with a personalised Improvement Plan
+- **Colour Census &amp; BMD reports** with one-click searching on Ancestry, FindMyPast, FamilySearch, FreeCen and ScotlandsPeople
+- **Interactive maps** &mdash; timeline, lifelines, and historic Ordnance Survey maps
+- **Data Errors, Duplicates, Loose Births &amp; Deaths**, World Wars, and On This Day reports
+- **Privacy first** &mdash; your data stays in your browser by default; optional cloud sync with a free Google sign-in
+
+> **Note:** The web app has a 50&thinsp;MB GEDCOM file limit. For larger trees or Lost Cousins integration, use the Windows desktop app above.
+
+</div>
 
 ---
 
