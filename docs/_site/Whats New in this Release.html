@@ -1,0 +1,2483 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+    <!-- Google tag (gtag.js) - Google Analytics GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DX4ZNSG3R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-9DX4ZNSG3R');
+    </script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Version 10.2.0.0 - 21st June 2026 | Family Tree Analyzer</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Version 10.2.0.0 - 21st June 2026" />
+<meta name="author" content="Alexander Bisset" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Analyse, explore and improve your family tree. Find errors, research census records, visualise ancestors on maps — free Windows app and browser-based web app." />
+<meta property="og:description" content="Analyse, explore and improve your family tree. Find errors, research census records, visualise ancestors on maps — free Windows app and browser-based web app." />
+<link rel="canonical" href="http://0.0.0.0:4000/Whats%20New%20in%20this%20Release.html" />
+<meta property="og:url" content="http://0.0.0.0:4000/Whats%20New%20in%20this%20Release.html" />
+<meta property="og:site_name" content="Family Tree Analyzer" />
+<meta property="og:image" content="http://0.0.0.0:4000/FacebookLogo.png" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://0.0.0.0:4000/FacebookLogo.png" />
+<meta property="twitter:title" content="Version 10.2.0.0 - 21st June 2026" />
+<meta name="twitter:site" content="@ftanalyzer" />
+<meta name="twitter:creator" content="@Alexander Bisset" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Alexander Bisset"},"description":"Analyse, explore and improve your family tree. Find errors, research census records, visualise ancestors on maps — free Windows app and browser-based web app.","headline":"Version 10.2.0.0 - 21st June 2026","image":"http://0.0.0.0:4000/FacebookLogo.png","url":"http://0.0.0.0:4000/Whats%20New%20in%20this%20Release.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <meta name="description" content="Analyse, explore and improve your family tree. Find errors, research census records, visualise ancestors on maps — free Windows app and browser-based web app.">
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#364F29">
+    <meta name="msapplication-TileColor" content="#364F29">
+    <meta name="theme-color" content="#364F29">
+
+    <style>
+        body { background: url(/background-image.png) no-repeat center fixed; background-size: cover; }
+    </style>
+</head>
+<body>
+
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <a class="nav-brand" href="/">FTAnalyzer</a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/Documentation">Documentation</a></li>
+                <li><a href="/guides">PDF Guides</a></li>
+                <li><a href="/releases">Releases</a></li>
+                <li><a href="https://app.ftanalyzer.com" class="nav-webapp" target="_blank" rel="noopener">Web App ↗</a></li>
+                <li><a href="https://github.com/ShammyLevva/FTAnalyzer" target="_blank" rel="noopener">GitHub</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.getElementById('nav-links').classList.toggle('open')">&#9776;</button>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <header>
+            <h1 class="title">Family Tree Analyzer</h1>
+            <p class="tagline">Analyse, explore and improve your family tree. Find errors, research census records, visualise ancestors on maps — free Windows app and browser-based web app.</p>
+        </header>
+
+        <div id="container">
+            <div id="main" role="main">
+                <article class="markdown-body">
+                    <h2 id="version-10200---21st-june-2026">Version 10.2.0.0 - 21st June 2026</h2>
+<p><strong>Updates</strong>
+Added support for recognising Series/Piece/Folio/Schedule format UK census references</p>
+
+<p><strong>Bugfixes</strong>
+Fix sorting on Colour BMD copying red and bold formatting
+Custom Facts Ignored button wasn’t working
+Ignored custom facts now treated as good</p>
+
+<h2 id="version-10200---21st-june-2026-1">Version 10.2.0.0 - 21st June 2026</h2>
+<p><strong>Updates</strong>
+Add startup crash reporting form
+Improve efficiency of surname loading</p>
+
+<p><strong>Bugfixes</strong>
+Fix data errors subtabs sometimes opening without data
+Fix layout of relationship types control
+Many tweaks of Mainform layouts for different font sizes
+Census warnings were getting ignored on the colour census report
+Full pass of code looking for nullable warnings and fixing them</p>
+
+<h2 id="version-10100---15th-june-2026">Version 10.1.0.0 - 15th June 2026</h2>
+<p><strong>Updates</strong>
+Refreshed the mapping options so the grids look right and behave properly. 
+Updated the NLS maps to use their new tile server
+Updated the underlying map library to match .Net10 of the rest of the project</p>
+
+<p><strong>Bugfixes</strong><br />
+Fixed the broken Google Analytics
+Added extra null checks on loading
+Added extra registry checks on first use
+Fix 1921 sch issue not recognising sch as schedule</p>
+
+<h2 id="version-10030---9th-june-2026">Version 10.0.3.0 - 9th June 2026</h2>
+<p><strong>Bugfixes</strong>
+Double clicking various grids was returning wrong values (additional fix) 
+Windows should now open on the same screen as the main window if you are working with multiple monitors<br />
+Individuals tab was sometimes not loading when initially viewed<br />
+Fix right clicking individuals in colour reports not showing correct facts<br />
+Fix census year searching issue for 1930 US census (which spanned 1929-1930)<br />
+Fix family exports to excel showing code fields instead of data for some fields
+Fix menu popup issues on colour reports
+Remove reference from Facts when loading as it was no longer used, frees up memory and allows faster loading of large trees
+Fix loading of extremely large files
+detect that 1911 &amp; 1921 census references for institutions have a page number and no schedule
+Census references for 1921 census weren’t showing in census reference columns</p>
+
+<h2 id="version-10020---7th-june-2026">Version 10.0.2.0 - 7th June 2026</h2>
+<p><strong>Bugfixes</strong>
+Census reference reports were using all the filters on the page and thus looking like they missed data<br />
+Where ancestry has screwed up the GEDCOM file with bad line breaks the dialog box was thowing an error after async changes<br />
+1921 Census reference tweaks to cope with sometimes including the word piece and sometimes excluding Schedule</p>
+
+<h2 id="version-10010---5th-june-2026">Version 10.0.1.0 - 5th June 2026</h2>
+<p><strong>Bugfixes</strong>
+Double clicking various grids was returning wrong values<br />
+Loading large files often showed no progress bars until after initial file load</p>
+
+<h2 id="version-10000---27th-may-2026">Version 10.0.0.0 - 27th May 2026</h2>
+<p><strong>Updates</strong>
+App re-written from ground up to use .Net 10 which has long term support and to take advantage of the latest features and performance improvements.<br />
+One effect of this is that the minimum supported Windows version is now Windows 10.
+Also old user settings wont load in the new version, so it will revert to defaults on first run. 
+Added numerous extra census reference checks
+Double clicking displayed error opens facts for individual
+Added support for 1926 Irish Census released on 18th April 2026<br />
+Added 1939 Register reference detection where ED letters are missing
+Add 1921 Census Location detection<br />
+Added Forename &amp; Surname Metaphones to Excel export
+Relationship calcs respect same sex marriages now<br />
+Add custom fact event analysis<br />
+Added option to show if person died during period census was taken<br />
+Cope with dates with double tags eg: TO BEF, TO AFT and similar<br />
+Cope with changed Ancestry GEDCOM format that moved fact description from fact to note<br />
+Now avoids showing date errors if Census Fact has text of State Census<br />
+Added suffix recognition from name fact
+Updated Alias handling to recognise more GEDCOM flavours<br />
+Use new precompiled methods for Census reference recognition speeding up processing<br />
+Lost Cousins report now more responsive</p>
+
+<p><strong>Bugfixes</strong>
+Fix issues with scrollbars caused by different DPI settings.
+Fixed filtering &amp; sorting on virtual data grids
+Fix 1911 census refs to work for 1921 identical formats
+Display Locations no longer shows UNKNOWN_LOCATION
+Fix check for Web Version check to show if there is a new version<br />
+Fix sibling too soon check<br />
+Checking birth too soon only check if child birthdate is known<br />
+Changed all messageboxes to load on top of parent form which solves issue of appearing on a different monitor<br />
+Fixed crash if child has no name at all<br />
+Fixed Google Geocoding not stopping immediately on closing form<br />
+1921 Census references were not being recognised correctly<br />
+Maximising colour reports now works correctly<br />
+Added checks for saving settings to ensure file access issues are handled<br />
+Loose births now ensure birth end is less than death end<br />
+Census reference checks for England and Wales census cater for extra words in middle of reference<br />
+Changed warning description for “Child born very soon after sibling” to be clearer<br />
+Warning now only shows after 270 days (9 months) not 300 days (10 months)<br />
+And hundreds of other minor bug fixes and improvements</p>
+
+<p><strong>Known Issues</strong>
+Child Birth Profile chart disabled due old method being incompatible with new .Net version. Will be re-enabled in a future release.
+Previously ignored duplicates may return due to revised way of storing changes.<br />
+Old user settings wont load in the new version, so it will revert to defaults on first run.
+Updated packages to use new zip methods this may break loading old backups</p>
+
+<h2 id="release-candidate-version-10000-rc8---18th-february-2026">Release Candidate Version 10.0.0.0-RC8 - 18th February 2026</h2>
+<p><strong>Updates</strong><br />
+Added ForenameMetaphone and SurnameMetaphone to Excel export</p>
+
+<h2 id="release-candidate-version-10000-rc7---18th-february-2026">Release Candidate Version 10.0.0.0-RC7 - 18th February 2026</h2>
+<p><strong>Updates</strong><br />
+Added 1939 Register reference detection where ED letters are missing
+Reworked Census report form to use virtual data grid which includes filering and sorting</p>
+
+<p><strong>Bugfixes</strong><br />
+Fixed Loose Births where dates overlap<br />
+Fixed Places form where locations were no longer showing on map
+Increased padding in tabs to fix issue of text overlaps
+Fixed buttons on Lost Cousins tab not working
+Fixed Form headers on Lost Cousins form being hidden behind toolbar
+Fixed Loose births where dates of form BEF 09 OCT 1803 was changed to BEF 08 OCT 1803</p>
+
+<h2 id="release-candidate-version-10000-rc6---24th-january-2026">Release Candidate Version 10.0.0.0-RC6 - 24th January 2026</h2>
+<p><strong>Updates</strong><br />
+Added a custom TabSelector so that current tab is more obvious</p>
+
+<p><strong>Bugfixes</strong><br />
+AdvamcedDataGridView no longer scales icon incorrectly<br />
+People form individuals header was hidden behind toolbar
+.Net10 now fully supports HighDPI scaling so manual support now unnecessary
+TreeViewHandler reworked to by async to avoid blocking UI thread
+Locations tab countries and regions were missing click handlers
+Lost Cousins report now more responsive</p>
+
+<h2 id="release-candidate-version-10000-rc5---22nd-january-2026">Release Candidate Version 10.0.0.0-RC5 - 22nd January 2026</h2>
+<p><strong>Bugfixes</strong><br />
+Fixed async issues on getting On this day events<br />
+Fixed saving of position on reload<br />
+On this day now uses split container to fix layout issues
+Fix filter width on colour BMD
+Groupbox text double text fixed<br />
+1921 Census references with missing RD/SD was not being recognised</p>
+
+<h2 id="release-candidate-version-10000-rc4---20th-january-2026">Release Candidate Version 10.0.0.0-RC4 - 20th January 2026</h2>
+<p><strong>Updates</strong><br />
+Add 1921 Census Location detection</p>
+
+<p><strong>Bugfixes</strong><br />
+Fixed identifying Lost Cousins fact<br />
+Fixes to 1911 &amp; 1921 census registration recognition<br />
+Fix Relation Type selection box sizing issue<br />
+Fixed width of filter menu on research suggestion reports<br />
+Loose births now ensure birth end is less than death end<br />
+Census reference checks for England and Wales census cater for extra words in middle of reference<br />
+Changed warning description for “Child born very soon after sibling” to be clearer<br />
+Warning now only shows after 270 days (9 months) not 300 days (10 months)</p>
+
+<h2 id="release-candidate-version-10000-rc3---17th-january-2026">Release Candidate Version 10.0.0.0-RC3 - 17th January 2026</h2>
+<p><strong>Updates</strong><br />
+Added 1926 Irish Census fields to exports and reports<br />
+Enhanced group box formatting to have cleaner black borders</p>
+
+<p><strong>Bugfixes</strong><br />
+Fixed sorting on grids when clicking column headers<br />
+Fixed grid cell formatting to ignore icon columns<br />
+Fixed Export to Excel Individuals report not using export interface<br />
+Tidyup some async code to remove old behaviours<br />
+Fix Places form to allow async running and cancelation behaviour<br />
+Display Locations no longer shows UNKNOWN_LOCATION<br />
+Location grids correctly display formatting<br />
+Fixed sorting in AdvancedDataGridView to work with clicking column headers<br />
+Fixed icon in AdvancedDataGridView too small<br />
+Fixed bug in CensusReferences from RC1 that was ignoring any reference with a number<br />
+Fix resizing issue on On This Day tab</p>
+
+<h2 id="release-candidate-version-10000-rc2---16th-january-2026">Release Candidate Version 10.0.0.0-RC2 - 16th January 2026</h2>
+<p><strong>Updates</strong><br />
+Added support for 1926 Irish Census due to be released on 18th April 2026<br />
+Use new precompiled methods for Census reference recognition speeding up processing</p>
+
+<p><strong>Bugfixes</strong><br />
+1921 Census references were not being recognised correctly<br />
+Maximising colour reports now works correctly<br />
+Added checks for saving settings to ensure file access issues are handled<br />
+Fixed Google Geocoding not stopping immediately on closing form</p>
+
+<h2 id="release-candidate-version-10000-rc1---15th-january-2026">Release Candidate Version 10.0.0.0-RC1 - 15th January 2026</h2>
+<p><strong>Updates</strong><br />
+Updated to use .Net10 which is on Long Term Support to 14 November 2028<br />
+Added recognition for Windows 11 24H2 &amp; 25H2</p>
+
+<p><strong>Bugfixes</strong><br />
+Code tidyups using .Net10 fixes<br />
+Fixed installer for .Net10 compatibility<br />
+Isolate code not needed in ANEFHS Burial Sites Project <br />
+Changed settings handing for registry</p>
+
+<h2 id="beta-release-version-10000-beta-11---6th-july-2025">BETA RELEASE Version 10.0.0.0-beta 11 - 6th July 2025</h2>
+<p><strong>Bugfixes</strong><br />
+Fixed Exports to Excel not using virtual grid<br />
+Fixed size of input box</p>
+
+<h2 id="beta-release-version-10000-beta-10---31st-march-2025">BETA RELEASE Version 10.0.0.0-beta 10 - 31st March 2025</h2>
+<p><strong>Updates</strong><br />
+Added export duplicates to Excel option</p>
+
+<p><strong>Bugfixes</strong><br />
+Fixed crash if child has no name at all<br />
+Fixed Facts tabs buttons not working</p>
+
+<h2 id="beta-release-version-10000-beta-9---1st-march-2025">BETA RELEASE Version 10.0.0.0-beta 9 - 1st March 2025</h2>
+<p><strong>Bugfixes</strong><br />
+Fixed crash if individual has no name at all<br />
+Fixed bounding boxes of frames should hopefully finally fix scroll bar issue caused by hiDPI setting<br />
+Updated packages to use new zip methods this may break loading old backups<br />
+Correct misspelling of SEYCHELLES</p>
+
+<h2 id="beta-release-version-10000-beta-8---16th-december-2023">BETA RELEASE Version 10.0.0.0-beta 8 - 16th December 2023</h2>
+<p><strong>Bugfixes</strong><br />
+Lots of minor control tweaks to fix positioning with different font sizes<br />
+Facts reports weren’t working after update to .Net 8<br />
+Inconsistent location report crash fixed</p>
+
+<h2 id="beta-release-version-10000-beta-7---16th-december-2023">BETA RELEASE Version 10.0.0.0-beta 7 - 16th December 2023</h2>
+<p><strong>Updates</strong><br />
+Updated to .Net 8 &amp; refactor to fix a lot of layout issues with high DPI</p>
+
+<h2 id="beta-release-version-10000-beta-6---16th-december-2023">BETA RELEASE Version 10.0.0.0-beta 6 - 16th December 2023</h2>
+<p><strong>Updates</strong><br />
+Added suffix recognition from name fact
+Updated Alias handling to recognise more GEDCOM flavours</p>
+
+<p><strong>Bugfixes</strong><br />
+Fixed Title recognition from name fact<br />
+Various null reference fixes using new c# features
+Changed all messageboxes to load on top of parent form which solves issue of appearing on a different monitor<br />
+Don’t export to Excel if nothing to export.
+Apply to selector in Colour BMD hidden if filter has all individuals selected</p>
+
+<p><strong>Known Issues</strong><br />
+Previously ignored duplicates may return due to revised way of storing changes.<br />
+Child Birth Profile chart unavailable needs re-written to work with .Net Core 7</p>
+
+<h2 id="beta-release-version-10000-beta-6---not-yet-released">BETA RELEASE Version 10.0.0.0-beta 6 - Not yet released</h2>
+<p><strong>Bugfixes</strong><br />
+Rework Title, Alias &amp; Suffix to pickup extra ways of appearing in GEDCOM</p>
+
+<h2 id="beta-release-version-10000-beta-5---11th-december-2023">BETA RELEASE Version 10.0.0.0-beta 5 - 11th December 2023</h2>
+<p><strong>Updates</strong><br />
+Analytics recognises Windows 11 23H2</p>
+
+<p><strong>Bugfixes</strong><br />
+Fixed Sort &amp; Filter on data grids</p>
+
+<h2 id="beta-release-version-10000-beta-4---10th-december-2023">BETA RELEASE Version 10.0.0.0-beta 4 - 10th December 2023</h2>
+<p><strong>Updates</strong><br />
+Now runs on .Net Core 7.0<br />
+Added Born During Census flag on colour census report</p>
+
+<p><strong>Bugfixes</strong><br />
+Added in forcing size changes to attempt to finally fix the scroll bar issues on certain resolutions and scalings<br />
+Fix clicking on sort columns sorting ascending then descending<br />
+Fix default folder for opening files</p>
+
+<p><strong>Known Issues</strong><br />
+Filtering on grids still needs work<br />
+Previously ignored duplicates may return due to revised way of storing changes.</p>
+
+<h2 id="beta-release-version-10000-beta-3---24th-april-2023">BETA RELEASE Version 10.0.0.0-beta 3 - 24th April 2023</h2>
+<p><strong>Updates</strong>
+Changed Lost Cousins web interface to use modern HttpClient<br />
+Cope with dates with double tags eg: TO BEF, TO AFT and similar<br />
+Added extra census reference discovery<br />
+Cope with changed Ancestry GEDCOM format that moved fact description from fact to note<br />
+Now avoids showing date errors if Census Fact has text of State Census<br />
+Showing Individual or Family Facts all now use same routine</p>
+
+<p><strong>Bugfixes</strong>
+Set RowTemplates to use font height scaling<br />
+Fix font height in census view<br />
+Fix data error check boxes not showing<br />
+Double clicking displayed error once again opens facts for individual<br />
+Fixed missing installer icons<br />
+Fixed data errors checkboxes not updating list<br />
+Added a bunch of nullability check fixes<br />
+Changed over to using newer HttpClient software to load web data</p>
+
+<h3 id="beta-release-version-10000-beta-1---16th-october-2022">BETA RELEASE Version 10.0.0.0-beta 1 - 16th October 2022</h3>
+<p><strong>Updates</strong>
+Migrated project to .Net Core 6.0 from old .Net Framework</p>
+<ul>
+  <li>This allows greater support of modern features</li>
+  <li>It gives greater long term support moving off an old framework designed for Windows XP</li>
+  <li>It should run faster and more efficiently than the old framework</li>
+  <li>It will now <strong>require Windows 10 or above</strong> (Windows 7 and below haven’t been supported by Microsoft for nearly 3 years)</li>
+</ul>
+
+<p>Added extra US census reference checks<br />
+Relationship calcs respect same sex marriages now<br />
+Add custom fact event analysis<br />
+Added option to show if person died during period census was taken<br />
+Detect 21h2 and 22h2 versions of Windows 10<br />
+Detect 22h2 versions of Windows 11</p>
+
+<p><strong>Bugfixes</strong>
+Main form GEDCOM loading now auto scrolls the output window<br />
+Fix check for Web Version check to show if there is a new version<br />
+Fix sibling too soon check<br />
+Checking birth too soon only check if child birthdate is known</p>
+
+<p><strong>Temporarily Unavailable</strong>
+Child Birth Profile chart needs re-written to work with .Net Core 6 so for this beta is unavailable</p>
+
+<h3 id="updated-release-version-8520-13th-feb-2022">Updated Release Version 8.5.2.0 13th Feb 2022</h3>
+<p><strong>Updates</strong><br />
+Added Custom Fact to Excel export option<br />
+Recognises date of WWI or WWII</p>
+
+<p><strong>Bugfixes</strong><br />
+Outside country on census for UK census was erroneously showing US census if residence fact in UK in year before.<br />
+Extra tweaks for special date handling, should recognise more examples<br />
+Surnames tab double clck was not respecting selected filters<br />
+Relationship calcs respect same sex marriages now<br />
+Dates in brackets are now not reported as errors</p>
+
+<h3 id="updated-release-version-8510-5th-jan-2022">Updated Release Version 8.5.1.0 5th Jan 2022</h3>
+<p><strong>Bugfixes</strong><br />
+Resized all tab controls to fix parent hope to finally fix scrollbar issue</p>
+
+<h3 id="updated-release-version-8500-3rd-jan-2022">Updated Release Version 8.5.0.0 3rd Jan 2022</h3>
+<p><strong>Updates</strong><br />
+Changed default grid used in reports to one that supports filtering<br />
+Added extra DPI support for different monitor resolutions should help with auto scaling<br />
+Count updates to show number of records filtered<br />
+Added option to show if person died during period census was taken<br />
+Colour Census and Colour BMD now highlight whole row</p>
+
+<p><strong>Bugfixes</strong><br />
+Forced data grids to fill to their parent to hopefully fix scroll bar issue<br />
+Data errors tab checkboxes now scale to high dpi scaling<br />
+Status bar height now scales to font setting<br />
+Fact column heights auto scale<br />
+Font Height saved to avoid getHeight crash bug<br />
+Force font height defaults on load</p>
+
+<h3 id="updated-release-version-8410-28th-december-2021">Updated Release Version 8.4.1.0 28th December 2021</h3>
+<p><strong>Updates</strong><br />
+Allow auto searching on BMDs even if exact date</p>
+
+<p><strong>Bugfixes</strong><br />
+Altered grid resize to force to account for size of scrollbars on different resolutions<br />
+Fixed FamilySearch searches given website changes</p>
+
+<h4 id="updated-release-version-840-26th-december-2021">Updated Release Version 8.4.0 26th December 2021</h4>
+<p><strong>Updates</strong><br />
+Temp XML file is now unloaded after initial processing freeing up memory<br />
+Initial Load now says how much memory was used during loading and procesing<br />
+Updated packages to latest versions including BruTile &amp; NewtonsoftJSON<br />
+Changed all main form grids to use virtual grids this should make loading faster<br />
+Duplicate checking radically overhauled thanks to assistance from Tamura Jones and Enno Borgsteede<br />
+Added support for England and Wales 2021 census<br />
+Removed 1931 England and Wales as census as it was destroyed<br />
+Added feature to facts tab to filter on alternate/preferred facts<br />
+Custom Facts tab now shows families who have a custom fact<br />
+Added export of geocoded locations to Google MyMaps KML format</p>
+
+<p><strong>Bugfixes</strong><br />
+Remapped sizes of all controls on main form to hopefully eliminate the scroll bar bug<br />
+Duplicates exclude those with unknown names<br />
+Icon sizes now scale if using a high resolution monitor<br />
+Forced update of SQLite.Interop.dll files<br />
+Loose deaths for fathers now limit to 1st of month rather than 1st January of year of oldest child<br />
+Cope with missing characterset in GEDCOM header<br />
+1940 US census is allowed to be a reference for a 1935 residence<br />
+Dont overwrite a good census reference if more than one per fact<br />
+Added routine to force trim grids to maximum window size</p>
+
+<h4 id="updated-release-version-831-16th-march-2021">Updated Release Version 8.3.1 16th March 2021</h4>
+<p><strong>Updates</strong><br />
+Added display of 1950 US census support in preparation for release on 1st April 2022 <br />
+Updated to NetTopologySuite 2.2.0</p>
+
+<p><strong>Bugfixes</strong><br />
+Fixed duplicate display of facts in places and lifelines<br />
+Fixed missing FULLNAME field in beta testers database<br />
+Fixed issue where UK in location became England, England<br />
+Added message where no one in file is at location<br />
+Fixed issue of colour census reports not showing correctly when alternate facts off<br />
+Fixed issue of created facts creating for dates when individual wasn’t alive<br />
+Hopefully fixed the installer uninstall first issue</p>
+
+<h4 id="updated-release-version-830-11th-february-2021">Updated Release Version 8.3.0 11th February 2021</h4>
+<p><strong>Bugfixes</strong><br />
+Fixed bad bug causing skipping of preferred facts</p>
+
+<h4 id="updated-release-version-820-6th-february-2021">Updated Release Version 8.2.0 6th February 2021</h4>
+<p><strong>Updates</strong>  you
+Add option to include processing of alternate facts<br />
+Display AKA name facts as ALIAS facts<br />
+Allow loading of bad Ancestry GEDCOM bug with @@? tags on source references</p>
+
+<h4 id="updated-release-version-812-3rd-february-2021">Updated Release Version 8.1.2 3rd February 2021</h4>
+<p><strong>Updates</strong>  make 
+Added support for US census references 1790-1890 using Mxxx reference format</p>
+
+<p><strong>Bugfixes</strong><br />
+Reworded the check census reference option<br />
+Fix on this day not loading world events<br />
+1911 Child report shouldn’t show families married after 1911<br />
+Fix 1940 US census as default for Txxx references</p>
+
+<h4 id="updated-release-version-811-29th-january-2021">Updated Release Version 8.1.1 29th January 2021</h4>
+<p><strong>Bugfixes</strong><br />
+Fixed missing icon for desktop shortcuts</p>
+
+<h4 id="updated-release-version-810-28th-january-2021">Updated Release Version 8.1.0 28th January 2021</h4>
+<p><strong>Updates</strong><br />
+Added timer showing time to load file and time to analyse file<br />
+Check footnotes in Ancestry source records for census references<br />
+Add extra US Census reference checks from Ancestry<br />
+Change Ancestry US Census links to use new databases<br />
+Add support for 1921 UK Census to Research Suggestions in preparation for release soon<br />
+Recognise alternate name facts as alias if no alias fact<br />
+Recognise Windows 10 20H2</p>
+
+<p><strong>Bugfixes</strong><br />
+Catch Database save to invalid location error<br />
+Updated Lost Cousins tooltip to indicate not year or country<br />
+If still living then max age at death should be age today<br />
+Solo individual with no children fixed in colour BMD report<br />
+Strip   from line during XML parsing to check for spaces</p>
+
+<h4 id="updated-release-version-801-6th-september-2020">Updated Release Version 8.0.1 6th September 2020</h4>
+<p><strong>Updates</strong><br />
+GEDCOM processing errors now show last name seen in GEDCOM file to aid diagnosis</p>
+
+<p><strong>Bugfixes</strong>
+Census references as a entry on the CENS line weren’t getting recognised<br />
+1939 National Register census reference recognition fix<br />
+1881 Scotland Lost Cousins entries wrongly treated as both Scotland, and England and Wales<br />
+Alive date on census wasn’t allowing you to enter nothing and leave field<br />
+Census reports now don’t show female married names if not old enough to be married</p>
+
+<h4 id="updated-release-version-800-22nd-august-2020">Updated Release Version 8.0.0 22nd August 2020</h4>
+<p><strong>Updates</strong><br />
+Implemented Custom Fact display and ignoring of custom fact warnings<br />
+BCE &amp; CE dates (and their religious equivalents BC &amp; AD) now understood<br />
+BCE &amp; BC dates treated as unknown as I have no means of handling negative years<br />
+Update code analysis to v3.0.0<br />
+Load Title &amp; Suffix and nicknames from Name parts<br />
+Show any futuristic facts - dates after today eg: born in the future<br />
+Added Facts count to individuals report &amp; export<br />
+Added unique Sources count to individuals report &amp; export<br />
+Added Sources count to facts report &amp; export</p>
+
+<p><strong>Bugfixes</strong><br />
+Fixed display error with CAL dates showing as ABTL dates instead of ABT date<br />
+Blessing fact type was looking for BLESS instead of BLES and so missing blessing facts</p>
+
+<h4 id="updated-release-version-785-21st-july-2020">Updated Release Version 7.8.5 21st July 2020</h4>
+<p><strong>Updates</strong><br />
+Added _ATTR custom attribute flag support from Family Historian<br />
+Renamed Unknown fact types to Unknown/Custom fact types<br />
+Reworked loading to speed up loading times signficantly on larger files<br />
+Add progress bar to locations tree loading<br />
+Update to BruTile 3.0<br />
+Add in children born too close together checks</p>
+
+<p><strong>Bugfixes</strong><br />
+Add Font set to null to try to fix dispose error</p>
+
+<h4 id="updated-release-version-783-4th-june-2020">Updated Release Version 7.8.3 4th June 2020</h4>
+<p><strong>Bugfixes</strong><br />
+Single families shouldn’t show solo individuals  <br />
+Fixed issue with 29th Feb in double dates<br />
+Fixed issue with printing initial loading page</p>
+
+<h4 id="updated-release-version-782-12th-may-2020">Updated Release Version 7.8.2 12th May 2020</h4>
+<p><strong>Updates</strong><br />
+Website update offers release version if cancel clicked.<br />
+Added various additional Canadian Census reference checks<br />
+Added web link to Library and Archives Canada site if item number included in reference<br />
+Added web link to Scottish census references if identified<br />
+Added single parent report</p>
+
+<h4 id="updated-release-version-781-8th-may-2020">Updated Release Version 7.8.1 8th May 2020</h4>
+<p><strong>Updates</strong><br />
+Added Birth before baptism error check<br />
+(NB. This may cause error tick boxes to change as I added this one at start)<br />
+Only shows error for quarter day births if birth 4 months after baptism/christening <br />
+Added extra census reference checks for census references with /</p>
+
+<p><strong>Bugfixes</strong><br />
+Lost cousins upload error when forename is empty fixed</p>
+
+<h4 id="updated-release-version-780-1st-may-2020">Updated Release Version 7.8.0 1st May 2020</h4>
+<p><strong>Updates</strong><br />
+Refactored code to take on board code analysis recommendations<br />
+Added aged over 99 report<br />
+Re-enabled web version check for releases<br />
+Remove old clickonce dependancies</p>
+
+<p><strong>Bugfixes</strong><br />
+Fixed font error crash when resizing fonts<br />
+Fix issue of not showing census facts if selecting all dates</p>
+
+<h4 id="updated-release-version-772-26th-apr-2020">Updated Release Version 7.7.2 26th Apr 2020</h4>
+<p><strong>Updates</strong><br />
+Geocoding now using region/country viewports to try to get more accurate results<br />
+Geocoding now searches on country then region first to enable use of viewports<br />
+Update Analytics to show x64 vs x86 OS</p>
+
+<p><strong>Bugfixes</strong><br />
+Google API now works as intended</p>
+<ul>
+  <li>timeouts after two lookups no longer crashes or erroneously says used up limit for today<br />
+First fact type in facts tab wasn’t allowing you to select it<br />
+Added various using groups to catch similar possible issues <br />
+Reverse geocoding now updates viewports<br />
+Don’t geocode unknown location<br />
+Treat UNKNOWN location as already Geocoded</li>
+</ul>
+
+<p>#### Updated Release Version 7.7.1 22nd Apr 2020<br />
+<strong>Updates</strong><br />
+Added FamilySearchID recognition and clickable link in Individuals Report<br />
+Added extra Canadian census reference check<br />
+Added Windows Store check for analytics</p>
+
+<p><strong>Bugfixes</strong><br />
+1911 FindMyPast UK Census links were broken by v7.6.5</p>
+
+<h4 id="updated-release-version-7700-20th-apr-2020">Updated Release Version 7.7.0.0 20th Apr 2020</h4>
+<p><strong>Updates</strong><br />
+Added new Census problem facts report<br />
+Added new auto created census fact report<br />
+Updated links to Parish boundary files that were locked on old Codeplex site<br />
+Added error comment on Facts export to Excel<br />
+Fix Google API calls when request denied</p>
+
+<p><strong>Bugfixes</strong><br />
+Web special characters were preventing recognition of valid census references<br />
+Don’t export class name if icon in exports to Excel<br />
+Fix Birthday Effect report crash<br />
+Fix printing displaying blank page</p>
+
+<h4 id="updated-release-version-7660-16th-apr-2020">Updated Release Version 7.6.6.0 16th Apr 2020</h4>
+<p><strong>Bugfixes</strong><br />
+Fixed duplicate check name score crashing<br />
+Fixed unable to save user config crashing<br />
+Update icons to use extra sizes<br />
+Code tidy ups as per analyzer suggestions<br />
+Update font dispose methods to try to eliminate location tab crash</p>
+
+<h4 id="updated-release-version-7650-15th-apr-2020">Updated Release Version 7.6.5.0 15th Apr 2020</h4>
+<p><strong>Updates</strong><br />
+Changed FindMyPast UK Census search to use specialist form for that specific census</p>
+
+<p><strong>Bugfixes</strong><br />
+Missed adding the new census records to the list of approved censuses<br />
+Added force update of settings to avoid exception on locked user settings</p>
+
+<h4 id="updated-release-version-7640-11th-apr-2020">Updated Release Version 7.6.4.0 11th Apr 2020</h4>
+<p><strong>Updates</strong><br />
+Added in extra census dates so modern census records eg: US2020 don’t throw errors<br />
+Added score for duplicate parents names even if different individuals, 
+this should catch entirely duplicated families<br />
+Added potentially missing children report</p>
+
+<p><strong>Bugfixes</strong><br />
+Resetting column layouts no longer resets form layouts</p>
+
+<h4 id="updated-release-version-7630-6th-apr-2020">Updated Release Version 7.6.3.0 6th Apr 2020</h4>
+<p><strong>Updates</strong><br />
+Update to Analytics v6<br />
+Update included packages to latest versions<br />
+Add new Scottish Census Reference checks<br />
+Sources now parse note fields as well as text fields</p>
+
+<p><strong>Bugfixes</strong><br />
+Changing region on Census &amp; Research Suggestion remembers selection<br />
+Failed Census references found in source fact pages are added to list of unrecognised</p>
+
+<h4 id="updated-release-version-7620-27th-mar-2020">Updated Release Version 7.6.2.0 27th Mar 2020</h4>
+<p><strong>Updates</strong><br />
+Add Name fact<br />
+Add Sources to Name fact - Sources for an individual were getting ignored 
+as they weren’t tied to a fact adding a name fact addresses this<br />
+Added support for CHANge tag</p>
+
+<h4 id="updated-release-version-7611-29th-feb-2020">Updated Release Version 7.6.1.1 29th Feb 2020</h4>
+<p><strong>Bugfixes</strong><br />
+Fix bug with leap day 29th Jan in On this day reports.</p>
+
+<h4 id="updated-release-version-7610-29th-feb-2020">Updated Release Version 7.6.1.0 29th Feb 2020</h4>
+<p><strong>Updates</strong><br />
+Added support for some non standard Ancestry tags and method to tag others<br />
+This should then detect various facts that previously went undetected</p>
+
+<h4 id="updated-release-version-7600-16th-feb-2020">Updated Release Version 7.6.0.0 16th Feb 2020</h4>
+<p><strong>Updates</strong><br />
+Updated Mapping tools to use new version of BruTile/SharpMap<br />
+Added support for “1881 GROS 233/ 2/ 7” style Scottish census references</p>
+
+<h4 id="bugfix-release-version-7501-23rd-jan-2020">Bugfix Release Version 7.5.0.1 23rd Jan 2020</h4>
+<p><strong>Bugfixes</strong><br />
+Lost Cousins passwords shorter than 15 characters were causing a crash</p>
+
+<h4 id="updated-release-version-7500-21st-jan-2020">Updated Release Version 7.5.0.0 21st Jan 2020</h4>
+<p><strong>Updates</strong><br />
+Added feature to filter colour BMD report on births, deaths and marriages<br />
+Added warning about using potentially unstable out of date Windows 7<br />
+Using new code signing certificate<br />
+<strong>Bugfixes</strong><br />
+Trim Lost Cousins password to be max 15 characters<br />
+Fix icon sizing on high definition monitors<br />
+Update width of Lost Cousins report details tab<br />
+Attempt to fix font issues with Locations tab</p>
+
+<h4 id="updated-release-version-7420-20th-jun-2019">Updated Release Version 7.4.2.0 20th Jun 2019</h4>
+<p><strong>Updates</strong><br />
+Added Children Count &amp; Marriage Count to Individuals export<br />
+Add statistics form titles</p>
+
+<h4 id="updated-release-version-7410-15th-jun-2019">Updated Release Version 7.4.1.0 15th Jun 2019</h4>
+<p><strong>Updates</strong><br />
+Updated referenced packages to latest versions<br />
+Added new code analysers<br />
+Applied various code tidyups</p>
+
+<p><strong>Bugfixes</strong><br />
+Birthday Effect Menu wasn’t disabled when no file was loaded<br />
+Incomplete census refs in sources were getting ignored<br />
+Incomplete census refs in Lost Cousins were looking up wrong census year<br />
+Typo in Error/Fixes tab<br />
+The internal column IsFamily shouldn’t have been displayed on Data Errors report<br />
+Lifelines no longer includes LostCousins facts with just country location<br />
+Fix 1940 US Census not correctly searching on Ancestry</p>
+
+<h4 id="updated-release-version-7400-26th-may-2019">Updated Release Version 7.4.0.0 26th May 2019</h4>
+<p><strong>Updates</strong><br />
+Core code now built using VS 2019 and .Net 4.8<br />
+Added recognition of Windows 10 1903<br />
+Added Birthday Effect Report<br />
+Added support for automatic searching of Scotland’s People Census records<br />
+Added support for automatic searching of Scotland’s People BMD records<br />
+Added FamilyIDs as Parent &amp; Child to export Individuals to Excel</p>
+
+<p><strong>Bugfixes</strong><br />
+Fixed residence as census facts where the date was after census date<br />
+Descendants and Linked through marriage boxes now triggers updates on change</p>
+
+<h4 id="updated-release-version-7377-14th-february-2019">Updated Release Version 7.3.7.7 14th February 2019</h4>
+<p><strong>Updates</strong><br />
+Initial work on verification tab<br />
+Add Race as a fact type</p>
+
+<p><strong>Bugfixes</strong><br />
+Lost Cousins Duplicate checking was using surname instead of surname at date<br />
+1841 census pattern 3 book and folio wrong way round<br />
+Lost Cousins other names should allow spaces<br />
+Tweak Scottish Census Refs<br />
+Fix crash on loading v7.3.7.5
+Fix multiple dashes in name</p>
+
+<h4 id="updated-release-version-7376-14th-february-2019">Updated Release Version 7.3.7.6 14th February 2019</h4>
+<p><strong>Bugfix</strong><br />
+Remove Pupetteer nuget package</p>
+
+<h4 id="updated-release-version-7375-14th-february-2019">Updated Release Version 7.3.7.5 14th February 2019</h4>
+<p><strong>Updates</strong><br />
+Initial work on verification tab<br />
+Add Race as a fact type</p>
+
+<p><strong>Bugfixes</strong><br />
+Lost Cousins Duplicate checking was using surname instead of surname at date<br />
+1841 census pattern 3 book and folio wrong way round<br />
+Lost Cousins other names should allow spaces<br />
+Tweak Scottish Census Refs</p>
+
+<h4 id="updated-release-version-7374-7th-february-2019">Updated Release Version 7.3.7.4 7th February 2019</h4>
+<p><strong>Updates</strong><br />
+Forms forced to move down if taskbar at top</p>
+
+<p><strong>Bugfixes</strong><br />
+Add check to see if lost cousins database entry exists before adding it<br />
+Strip invalid characters from Lost Cousins upload strings<br />
+Only add shared facts if not already added</p>
+
+<h4 id="updated-release-version-7373-4th-february-2019">Updated Release Version 7.3.7.3 4th February 2019</h4>
+<p><strong>Bugfixes</strong><br />
+Maximise was failing cast operation</p>
+
+<h4 id="updated-release-version-7372-4th-february-2019">Updated Release Version 7.3.7.2 4th February 2019</h4>
+<p><strong>Updates</strong><br />
+Main Form now remembers its maximised state<br />
+Issues when storing Lost Cousins facts shows error in feedback window<br />
+Database checks for PC version number on startup different from Mac version number<br />
+Added text to confirm login required to Lost Cousins before button becomes active</p>
+
+<p><strong>Bugfixes</strong><br />
+Updating relationships on Lost Cousins tab updates LC reports
+Strip invalid characters from Lost Cousins upload strings<br />
+Only add shared facts if not already added<br />
+11Th, 12Th, 13Th weren’t fixed to lower case th<br />
+Fixed bug where all ? were being converted to -</p>
+
+<h4 id="updated-release-version-7371-2nd-february-2019">Updated Release Version 7.3.7.1 2nd February 2019</h4>
+<p><strong>Updates</strong><br />
+Cater for forename and surname in data exports<br />
+Recognise more census references with RGxx and /s and nothing else</p>
+
+<p><strong>Bugfixes</strong><br />
+Lost Cousins Age was being trimmed to 1.<br />
+Factdates with long em dashes were not getting recognised<br />
+Tweak Handwriting font size</p>
+
+<h4 id="updated-release-version-7370-1st-february-2019">Updated Release Version 7.3.7.0 1st February 2019</h4>
+<p><strong>Updates</strong><br />
+Reorganised Census Form to make it clearer what uses Filters and what doesn’t<br />
+Added Please verify the references text on upload to Lost Cousins</p>
+
+<p><strong>Bugfixes</strong><br />
+Fixed typo on Welsh &amp; IOM piece numbers in 1851 census refs<br />
+Lost Cousins ages tweaks and cater for 5 year rounding in 1841 census<br />
+Fix to Scottish reference pattern<br />
+Census referecences that are recognised but incomplete weren’t then checking rest of text</p>
+
+<h4 id="updated-release-version-7360-30th-january-2019">Updated Release Version 7.3.6.0 30th January 2019</h4>
+<p><strong>Updates</strong><br />
+Added LooseInfo tab to combine Loose Births and Death info in one tab<br />
+Added lots of new census reference checking thanks to a couple of people who pointed out missing references<br />
+Added support for Julian dates</p>
+
+<h4 id="updated-release-version-7351-28th-january-2019">Updated Release Version 7.3.5.1 28th January 2019</h4>
+<p><strong>Bugfixes</strong><br />
+Lost Cousins login cleared if user name or password changes</p>
+
+<h4 id="updated-release-version-7350-27th-january-2019">Updated Release Version 7.3.5.0 27th January 2019</h4>
+<p><strong>Updates</strong><br />
+Added support for dashes in UK census refs<br />
+Added extra 1841-51 UK census checks<br />
+Tweak to Lost Cousins Age Calc for Abt years</p>
+
+<h4 id="updated-release-version-7340-26th-january-2019">Updated Release Version 7.3.4.0 26th January 2019</h4>
+<p><strong>Updates</strong><br />
+Export of unrecognised &amp; Missing references changed to single report<br />
+Change get text to look at siblings for CONC lines - should pickup more extended text fields beyond usual one line descriptions<br />
+Added 1939 National Register recognitions for incomplete patterns (missing page references)<br />
+Added extra UK census reference checks<br />
+Extra support for unknown surnames</p>
+
+<p><strong>Bugfixes</strong><br />
+Lost Cousins metaphones weren’t being set for loaded data resulting in some duplicate checks being missed.<br />
+If a valid census reference was found in notes it wasn’t updating an invalid census ref on fact</p>
+
+<h4 id="updated-release-version-7332-25th-january-2019">Updated Release Version 7.3.3.2 25th January 2019</h4>
+<p><strong>Bugfixes</strong><br />
+Fixed SQL loading bug creating missing LostCousins table<br />
+Fixed analytics using local instead of UTC time</p>
+
+<h4 id="updated-release-version-7331-24th-january-2019">Updated Release Version 7.3.3.1 24th January 2019</h4>
+<p><strong>Bugfixes</strong><br />
+Relationship types calc was using wrong logs</p>
+
+<h4 id="updated-release-version-7330-24th-january-2019">Updated Release Version 7.3.3.0 24th January 2019</h4>
+<p><strong>Updates</strong><br />
+Added new 1939 census reference recognition<br />
+Added option to see all Lost Cousins records with invalid references<br />
+Added Lost Cousins Stats analytic</p>
+
+<p><strong>Bugfixes</strong><br />
+Added check to see if LostCousins table exists in database and add it if missing<br />
+Fixed issue with long notes not looking for secondary entries as other census references<br />
+Fix issue with BigIntegers &amp; relationtypes<br />
+fix analytics issue showing zero uploads<br />
+Fix census references to strip bold and italic markers<br />
+Tweak Lost Cousins duplicate check to be 5 year age tolerant</p>
+
+<h4 id="updated-release-version-7323-22nd-january-2019">Updated Release Version 7.3.2.3 22nd January 2019</h4>
+<p><strong>Bugfixes</strong><br />
+Lost Cousins duplicate check uses forename not forenames<br />
+Tweak to Analytics to include timestamp</p>
+
+<h4 id="updated-release-version-7322-21st-january-2019">Updated Release Version 7.3.2.2 21st January 2019</h4>
+<p><strong>Bugfixes</strong><br />
+Custom tag prefixes of CENSUS are treated as a census fact<br />
+Use BigIntegers for Ahnantefal numbers<br />
+Added clarification that custom types is a warning not an error<br />
+Fix bug with individual ID of 0<br />
+Fix Lost Cousins Action Analytic</p>
+
+<h4 id="updated-release-version-7320-21st-january-2019">Updated Release Version 7.3.2.0 21st January 2019</h4>
+<p><strong>Updates</strong><br />
+Added option preview records for upload to Lost Cousins<br />
+Added Analytics for Lost Cousins preview</p>
+
+<p><strong>Bugfixes</strong><br />
+Added check for ABT dates missing a space</p>
+
+<h4 id="updated-release-version-7310-19th-january-2019">Updated Release Version 7.3.1.0 19th January 2019</h4>
+<p><strong>Updates</strong><br />
+Added option to convert any residence facts with a valid census reference to a census fact<br />
+Added breakdown of husband and wifes forenames and surnames in family reports</p>
+
+<p><strong>Bugfixes</strong><br />
+Added further fix for US 1940 census on records with very long notes<br />
+Added Null pointer fix for loading Lost Cousins entries where no prior records exist<br />
+LostCousin Facts that are auto created treated as LC_FTA facts to allow reporting separately from GEDCOM Lost Cousin facts</p>
+
+<h4 id="major-release-version-7300-19th-january-2019">Major Release Version 7.3.0.0 19th January 2019</h4>
+<p><strong>Updates</strong><br />
+Major new feature ability to automatically post your Lost Cousins entries to the Lost Cousins website<br />
+Tracks uploaded individuals and creates an automated Lost Cousins Fact Type for you.</p>
+<ul>
+  <li>This relies on the individual name and ID for a more permenent flagging you should still add a flag to your GEDCOM file</li>
+</ul>
+
+<p>Added Line Errors report to show you where the error is in the original file<br />
+Added Linked relationship type - for people who are linked to root person but not related<br />
+Added an option on Surnames tab to ignore case<br />
+Added extra recognition of Scottish Parishes to fix missing cases<br />
+Added extra recognition of some more US 1940 census reference formats<br />
+Added piece number search to FMP census if Schedule missing - typically UK 1911 census</p>
+
+<p><strong>Bugfixes</strong><br />
+Fix issue with 3 digit years in a between statement<br />
+Census families were missing one parent families<br />
+Fixed issue with filestream being held open once file had loaded<br />
+Fixed issue with min/max dates arithmetic<br />
+Replace old custom HttpUtility class with system one<br />
+Fix issue on front page when maximising form<br />
+Report if Census reference check is disabled</p>
+
+<h4 id="updated-release-version-7244-3rd-january-2019">Updated Release Version 7.2.4.4 3rd January 2019</h4>
+<p><strong>Bugfixes</strong><br />
+Fixed issue with adding months to edge case dates<br />
+Fixed issue with line errors reporting twice</p>
+
+<h4 id="updated-release-version-7240-3-3rd-january-2019">Updated Release Version 7.2.4.0-3 3rd January 2019</h4>
+<p><strong>Updates</strong><br />
+Added User setting for Google API Key see <a href="/GoogleAPI">Google API Key Documentation</a><br />
+Changed file loading options to detect code sets - note incompatible code sets will now give errors.</p>
+
+<p><strong>Bugfixes</strong><br />
+Fixed missing icon file<br />
+Forgot to increase version number<br />
+Fixed issue with stripping line ends option closing file</p>
+
+<h4 id="updated-release-version-7230-2nd-january-2019">Updated Release Version 7.2.3.0 2nd January 2019</h4>
+<p><strong>Updates</strong><br />
+Added region selector to searching to allow for different regional websites to be used</p>
+
+<h4 id="updated-release-version-7221-30th-december-2018">Updated Release Version 7.2.2.1 30th December 2018</h4>
+<p><strong>Updates</strong><br />
+Added option to privatise or include details of living people on GEDCOM export</p>
+
+<p><strong>Bugfixes</strong><br />
+Fixed GEDCOM export missing out families of siblings<br />
+Fixed GEDCOM export not displaying middle names<br />
+Fixed date ranges for census searches where birth year is wide date range</p>
+
+<h4 id="updated-release-version-7220-25th-december-2018">Updated Release Version 7.2.2.0 25th December 2018</h4>
+<p><strong>Updates</strong><br />
+FreeCEN Searches url changed to use old site until new one ready<br />
+ADDR tags now recognised as additional to PLAC tags instead of just alternatives</p>
+
+<p><strong>Bugfixes</strong><br />
+Fix crash on Cousin Count double click<br />
+Fix crash on Opacity settings in map options where no background map selected<br />
+Dont warn errors on same sex marriages post 2000<br />
+Options on load reports all new options<br />
+Fix bug with double spaces in between dates</p>
+
+<h4 id="updated-release-version-7211-21st-december-2018">Updated Release Version 7.2.1.1 21st December 2018</h4>
+<p><strong>Updates</strong><br />
+Added option not to filter diacritics<br />
+Added support for German date names</p>
+
+<p><strong>Bugfixes</strong><br />
+Fixed issue with duplicates crashing on opening tab<br />
+Fixed bug with crash when local date name wasn’t recognised</p>
+
+<h4 id="updated-release-version-7210-20th-december-2018">Updated Release Version 7.2.1.0 20th December 2018</h4>
+<p><strong>Updates</strong><br />
+Added option to export descendants to the GEDCOM file stripped down for DNA purposes</p>
+
+<p><strong>Bugfixes</strong><br />
+Fix crash on double clicking on how many directs stats<br />
+Attempted to catch font disposal bug<br />
+Lat/Long reporting from GEDCOM fixed to exclude ones from database<br />
+Fixed Duplicates report occassional crash with rounding error<br />
+Fixed space bug in dates like BET 3 AND 4 JAN 2001<br />
+Fixed bug with huge Ahnantafel numbers crashing</p>
+
+<h4 id="updated-release-version-7200-18th-december-2018">Updated Release Version 7.2.0.0 18th December 2018</h4>
+<p><strong>Updates</strong><br />
+Added option to export a GEDCOM file stripped down for DNA purposes<br />
+Added option to export Locations<br />
+Added display of raw locations loaded from GEDCOM file<br />
+Added option to skip tidying up locations so you can see the raw mess<br />
+Repeated bad lines now gives option to stop processing and turn on bad line filter</p>
+
+<p><strong>Bugfixes</strong><br />
+Fix crash on closing file<br />
+Web version check skips now checking on beta versions</p>
+
+<h4 id="bugfix-release-version-7101-16th-december-2018">Bugfix Release Version 7.1.0.1 16th December 2018</h4>
+<p><strong>Bugfixes</strong><br />
+Issue with custom tags for facts fixed was causing crash on load</p>
+
+<h4 id="updated-release-version-7100-16th-december-2018">Updated Release Version 7.1.0.0 16th December 2018</h4>
+<p><strong>Updates</strong><br />
+Update Google Maps display on Locations tab to work with updated Google Maps<br />
+Updated OS Maps to display on historic OS Maps via interactive National Library of Scotland Maps<br />
+Added extra Family Historian Fact types<br />
+Added extra census custom fact type recognition</p>
+
+<p><strong>Bugfixes</strong><br />
+Fix max extents on map zooming out too much and including 0,0<br />
+Add marriage ID differentiator for possible duplicate facts<br />
+Fix progress bar for Family Historian locations</p>
+
+<h4 id="updated-release-version-7050-15th-december-2018">Updated Release Version 7.0.5.0 15th December 2018</h4>
+<p><strong>Updates</strong><br />
+Added a Data Errors export to Excel feature<br />
+Added support for Family Historian _PLAC codes</p>
+
+<p><strong>Bugfixes</strong><br />
+Add fix for hyphenated capitalised shires<br />
+Add recognition of UK/GB countries with ,UK and ,GB at end<br />
+Duplicate fact checks for unknown facts now look at original tag<br />
+Duplicate fact checks no longer treats shared facts and individual facts as duplicates<br />
+Shared surname errors now don’t error if wife’s natural father had that surname as that isn’t an error<br />
+No longer reports bad lines twice if stripping bad line breaks<br />
+Dots in dates now correctly stripped<br />
+Between dates with just day and month wasn’t working correctly<br />
+Dates that are formatted correctly but are wrong eg: 29 FEB 1735 now highlighted as error</p>
+
+<h4 id="updated-release-version-7040-9th-december-2018">Updated Release Version 7.0.4.0 9th December 2018</h4>
+<p><strong>Updates</strong><br />
+Add colour note to tooltip to make it clearer what the status is.<br />
+Add support for Census UK XXXX custom fact formats<br />
+Change way UTF8 files handled</p>
+
+<p><strong>Bugfixes</strong><br />
+Parental relationships were only using relationship from first child<br />
+Update Loading to cope with crash on bad lines</p>
+
+<h4 id="updated-release-version-7032-23th-november-2018">Updated Release Version 7.0.3.2, 23th November 2018</h4>
+<p><strong>Bugfixes</strong><br />
+Fix issue with facts form crashing due to leak of Mac code into windows code</p>
+
+<h4 id="updated-release-version-7031-21th-november-2018">Updated Release Version 7.0.3.1, 21th November 2018</h4>
+<p><strong>Bugfixes</strong><br />
+Fix issue with printing not wrapping lines</p>
+
+<h4 id="updated-release-version-7030-19th-november-2018">Updated Release Version 7.0.3.0, 19th November 2018</h4>
+<p><strong>Updates</strong><br />
+Better support for accented characters in different codesets<br />
+Added support for Legacy 9 Hashtags<br />
+Added option to skip checking notes and stories for census references</p>
+
+<p><strong>Bugfixes</strong><br />
+Fix non GEDCOM dates with a dot not being recognised<br />
+Fix default window size &amp; grid sizing bug</p>
+
+<h4 id="updated-release-version-7020-11th-november-2018">Updated Release Version 7.0.2.0, 11th November 2018</h4>
+<p><strong>Updates</strong><br />
+Trim quotes from dates and recognise dates with weekday names<br />
+Cater for 2 QTR date formats and months with no space before year<br />
+Support Surnames of LNU (Last Name Unknown) and 5 underscores meaning surname unknown<br />
+Support Quaker date formats</p>
+
+<p><strong>Bugfixes</strong><br />
+Add extra progress records for loading data errors during initial load</p>
+
+<h4 id="updated-release-version-7012-5th-november-2018">Updated Release Version 7.0.1.2, 5th November 2018</h4>
+<p><strong>Updates</strong><br />
+Added option to show/hide display altering you to ancestors who are multi directs</p>
+<ul>
+  <li>Show Multi direct ancestors can cause issues for files going back many centuries as program runs out of memory trying to list what  the relationships are</li>
+</ul>
+
+<p>Tweaked database settings to try to use less resources on loading GEDCOM file should make loading a little faster on large files</p>
+
+<p><strong>Bugfixes</strong><br />
+Fixed issue with years prior to 1000 being double dates</p>
+
+<h4 id="updated-release-version-7011-4th-november-2018">Updated Release Version 7.0.1.1, 4th November 2018</h4>
+<p><strong>Bugfixes</strong><br />
+Fixed issue with text dates in family facts</p>
+
+<h4 id="updated-release-version-7010-2nd-november-2018">Updated Release Version 7.0.1.0, 2nd November 2018</h4>
+<p><strong>Updates</strong><br />
+Added extra relation categeory for descendants<br />
+Added report to show how many direct ancestors/descendants you’ve got<br />
+Added link to Facebook support site in Help menu.
+Added link to Facebook User Group site in Help menu</p>
+
+<p><strong>Bugfixes</strong><br />
+Updated LAT/LONG coordinates in GEDCOM weren’t updating internal database if there was a change</p>
+
+<h4 id="updated-release-version-7003-31st-october-2018">Updated Release Version 7.0.0.3, 31st October 2018</h4>
+<p><strong>Bugfixes</strong><br />
+Minor tweak to version control</p>
+
+<h4 id="updated-release-version-7002-29th-october-2018">Updated Release Version 7.0.0.2, 29th October 2018</h4>
+<p><strong>Updates</strong><br />
+Added back in support for high dpi screens</p>
+
+<p><strong>Bugfixes</strong><br />
+Fix issue with birth, death dates not being given priority over baptism/burial facts</p>
+
+<h4 id="updated-release-version-7001-25th-october-2018">Updated Release Version 7.0.0.1, 25th October 2018</h4>
+<p><strong>Bugfixes</strong><br />
+Code tidyups and fixed minor analytics issue</p>
+
+<h4 id="major-new-release-version-7000-24th-october-2018">Major New Release Version 7.0.0.0, 24th October 2018</h4>
+<p><strong>Updates</strong><br />
+Updated the .Net Framework to the latest .Net 4.7.2 this means v6.7.3 is the last Vista version<br />
+Updating to .Net 4.7.2 means new features in Windows can be properly supported<br />
+Added a version check on startup so that zip installed versions will also warn if outdated<br />
+Added an OS version check to see how many users of soon to be discontinued Windows 7 there still are<br />
+Update database to v7.0.0.0 to fix issue with geocoded locations at 0,0<br />
+Add privacy policy page and link in main menu<br />
+Add support for Unmarried/Never married death date<br />
+Added various analytics logging actions<br />
+Add support for start and end dates for births and deaths in export routines<br />
+Added region fix for US habit of adding superfluous word “county” to end of English Shire counties<br />
+Children of families are now default sorted by age</p>
+
+<h4 id="updated-release-version-6730-18th-october-2018">Updated Release Version 6.7.3.0, 18th October 2018</h4>
+<p><strong>Updates</strong><br />
+Added support include treetop individuals with one parent<br />
+Temporarily reverted high res monitor manifest fix as it broke windows 7 install</p>
+
+<h4 id="updated-release-version-6720-18th-october-2018">Updated Release Version 6.7.2.0, 18th October 2018</h4>
+<p><strong>Updates</strong><br />
+Added support for high resolution monitors<br />
+Added support custom facts for occupation and naturalisation<br />
+Added child ids to family export to Excel</p>
+
+<h4 id="updated-release-version-6710-14th-october-2018">Updated Release Version 6.7.1.0, 14th October 2018</h4>
+<p><strong>Updates</strong><br />
+Added support for DEAD, DECEASED, STILLBORN, INFANT, CHILD, YOUNG in death date.<br />
+Added support for multiple default fact types from Family Tree Maker.</p>
+
+<h4 id="new-release-version-6700-11th-october-2018">New Release Version 6.7.0.0, 11th October 2018</h4>
+<p><strong>Updates</strong><br />
+Ancestry 1939 UK National Register searching added<br />
+Marriage comments now show names of both parties for easier reading in an individuals facts report</p>
+
+<h4 id="updated-release-version-6611-29th-september-2018">Updated Release Version 6.6.1.1, 29th September 2018</h4>
+<p><strong>BugFixes</strong><br />
+Fix to fact dates for loose births/deaths and some other reports</p>
+
+<h4 id="new-release-version-6610-28th-september-2018">New Release Version 6.6.1.0, 28th September 2018</h4>
+<p><strong>Updates</strong><br />
+Added options to filter unknown births and unknown deaths from colour census reports.</p>
+
+<h4 id="updated-release-version-6602-16th-september-2018">Updated Release Version 6.6.0.2, 16th September 2018</h4>
+<p><strong>BugFixes</strong><br />
+Small tweak to bad lines check to better cope with the invalid screwed up nonsense that isn’t valid GEDCOM that Ancestry produces with notes fields.</p>
+
+<h4 id="updated-release-version-6601-14th-september-2018">Updated Release Version 6.6.0.1, 14th September 2018</h4>
+<p><strong>BugFixes</strong><br />
+Locations with LAT/LONG in GEDCOM weren’t updating as previously Geocoded locations<br />
+Fix issue with unusual characters eg: © ® ¿ » « appearing in locations</p>
+
+<h4 id="new-release-version-6600-9th-september-2018">New Release Version 6.6.0.0, 9th September 2018</h4>
+<p><strong>Updates</strong><br />
+New Font setting feature - allows you to change default font used</p>
+
+<h4 id="updated-release-version-6512-5th-august-2018">Updated Release Version 6.5.1.2, 5th August 2018</h4>
+<p><strong>BugFixes</strong><br />
+Fix Bug with dashes causing failed test classes</p>
+
+<h4 id="updated-release-version-6511-5th-august-2018">Updated Release Version 6.5.1.1, 5th August 2018</h4>
+<p><strong>BugFixes</strong><br />
+Fix slow loading of individuals introduced in v6.5.0.0</p>
+
+<h4 id="updated-release-version-6510-3rd-august-2018">Updated Release Version 6.5.1.0, 3rd August 2018</h4>
+<p><strong>Updates</strong><br />
+Added relationship check when someone is a direct ancestor more than once</p>
+
+<p><strong>BugFixes</strong><br />
+Fix bug with French spelling of May
+Fix bug introduced in 6.5.0.0 with dates with dashes</p>
+
+<h4 id="new-release-version-6500-17th-july-2018">New Release Version 6.5.0.0, 17th July 2018</h4>
+<p><strong>Updates</strong><br />
+Significant addition to FactDate measurements now cater for non GEDCOM date formats such as dd/mm/yyyy<br />
+See Tools/Options panel for settings. By default this is off.<br />
+Note this should not be taken as an encouragement to use non GEDCOM dates.</p>
+
+<h4 id="updated-release-version-6431-15th-june-2018">Updated Release Version 6.4.3.1, 15th June 2018</h4>
+<p><strong>BugFixes</strong><br />
+Fix issue with Diacritics in locations causing loading to get stuck forever.</p>
+
+<h4 id="new-release-version-6430-13th-june-2018">New Release Version 6.4.3.0, 13th June 2018</h4>
+<p><strong>Updates</strong><br />
+Changed Google API Geocoding to use new Google pricing plan
+<strong>BugFixes</strong><br />
+Fixed null pointer exception on generated facts</p>
+
+<h3 id="updated-release-version-6421-8th-june-2018">Updated Release Version 6.4.2.1, 8th June 2018</h3>
+<p><strong>BugFixes</strong><br />
+Fixed issue with Children Status report not correctly filtering patterns where numbers followed words</p>
+
+<h4 id="new-release-version-6420-10th-may-2018">New Release Version 6.4.2.0, 10th May 2018</h4>
+<p><strong>Updates</strong><br />
+Tweaked grid printing options to adjust margins and stop icons making grid huge<br />
+Updated to latest NuGet Packages</p>
+
+<h4 id="new-release-version-6410-13th-april-2018">New Release Version 6.4.1.0, 13th April 2018</h4>
+<p><strong>Updates</strong><br />
+Added support for French month names and prefixes</p>
+
+<p><strong>BugFixes</strong><br />
+Fixed issue with application crash checking duplicates on large files</p>
+
+<h4 id="updated-release-version-6401-19th-march-2018">Updated Release Version 6.4.0.1, 19th March 2018</h4>
+<p><strong>BugFixes</strong><br />
+Fixed issue with links to FindMyPast
+Checks unknown gender individuals appearing as a husband or wife</p>
+
+<h4 id="new-release-version-6400-19th-march-2018">New Release Version 6.4.0.0, 19th March 2018</h4>
+<p><strong>Updates</strong><br />
+Added five new data error checks</p>
+<ul>
+  <li>Duplicate Fact check - checks if two identical facts for a person exists</li>
+  <li>Possible Duplicate Fact check - checks if two facts have same type and date but different data</li>
+  <li>National Register 1939 birth date check - checks to see if someone is recorded on the 1939 register then they should have an exact birth date</li>
+  <li>Couples have same surname check - a common error where wife is recorded with married name instead of the correct birth name</li>
+  <li>Female husbands and male wives - checks if the right gender is assigned to the individuals tagged as husband and wife</li>
+</ul>
+
+<p><strong>Bugfixes</strong>
+Minor tweaks and code improvements</p>
+
+<h4 id="new-release-version-6302-13th-march-2018">New Release Version 6.3.0.2, 13th March 2018</h4>
+<p><strong>Updates</strong><br />
+Updated to new high res application icon<br />
+Moved individuals, families, sources and occupations tabs into a Main Lists tab<br />
+Moved Data Errors, Duplications, Loose Births and Loose Deaths into a Errors &amp; Fixes tab</p>
+
+<p><strong>Bugfixes</strong><br />
+1939 entries were eroneously limited to only people born before 1911.<br />
+The moved tabs weren’t reacting to all mouse clicks</p>
+
+<h4 id="updated-release-version-6210-23rd-feb-2018">Updated Release Version 6.2.1.0, 23rd Feb 2018</h4>
+<p><strong>Updates</strong><br />
+Fixed issue with On this day not showing any data</p>
+
+<h4 id="new-release-version-6200-19th-feb-2018">New Release Version 6.2.0.0, 19th Feb 2018</h4>
+<p><strong>Updates</strong><br />
+Major refactoring to move shared code into a new project to allow for developement of a Mac version
+Duplicates processing should now be 8-10 times faster than before</p>
+
+<p><strong>Bugfixes</strong><br />
+Loose Births weren’t showing now fixed</p>
+
+<h4 id="updated-release-version-6130-9th-feb-2018">Updated Release Version 6.1.3.0, 9th Feb 2018</h4>
+<p><strong>Updates</strong><br />
+The files that standarise countries/regions wasn’t getting published so countries weren’t correctly recognised for census facts<br />
+Special character processing and spurious line end fixes re-enabled and tweaked to be considerably faster
+Several library updates and code splits to ready code for initial Mac development</p>
+
+<h4 id="updated-release-version-6120-4th-feb-2018">Updated Release Version 6.1.2.0, 4th Feb 2018</h4>
+
+<p><strong>Updates</strong><br />
+Added an open ended date range category for colour BMD reports
+Refactored Colour Census reports to use colour enumeration rather than integers</p>
+
+<p><strong>Bugfixes</strong><br />
+Fixed issue where transparency slider was still showing when using same OSM base map</p>
+
+<h4 id="updated-release-version-6110-2nd-feb-2018">Updated Release Version 6.1.1.0, 2nd Feb 2018</h4>
+
+<p><strong>Updates</strong><br />
+Added a background Open Street Map even when using other maps so that where there is no coverage you can still see a map.</p>
+
+<p><strong><em>Preparations</em></strong><br />
+Started splitting out code for future MAC version into a shared code project. 
+The aim is to have all the functionality in the shared code and just the user interface in the Windows/Mac specific versions.</p>
+
+<h4 id="new-release-version-6100-29th-jan-2018">New Release Version 6.1.0.0, 29th Jan 2018</h4>
+
+<p><strong>Updates</strong><br />
+Added a variety of old Maps (mostly UK/Scotland) so you can view places in your tree as they were at the time your ancestors lived there.<br />
+Added recognition of the 1939 National Register (UK) references<br />
+Added 1939 National Register references link to Find My Past</p>
+
+<p><strong>Bugfixes</strong><br />
+Fixed issue with solo familes using same ID thus preventing facts result working<br />
+Surname tab links to Guild of One Name Studies wasn’t working<br />
+Julian Calendar dates were incorrectly working out before and after if compared with a whole year</p>
+
+<h4 id="updated-release-version-6050-26th-jan-2018">Updated Release Version 6.0.5.0, 26th Jan 2018</h4>
+
+<p><strong>Bugfixes</strong><br />
+Added font to distribution so the app name shows correctly<br />
+Updated SharpMap &amp; BruTile to latest versions and fixed background maps<br />
+Fix for Timeline report year ranges being too broad</p>
+
+<h4 id="updated-release-version-6040-23th-jan-2018">Updated Release Version 6.0.4.0, 23th Jan 2018</h4>
+
+<p><strong>Updates</strong><br />
+Added new Logo and text on main page of app</p>
+
+<p><strong>Bugfixes</strong><br />
+Fixed issue of some options not sticking when changed<br />
+Various minor code optimisations for c#7</p>
+
+<h4 id="updated-release-version-6030-20th-jan-2018">Updated Release Version 6.0.3.0, 20th Jan 2018</h4>
+
+<p><strong>Updates</strong><br />
+Imported the suggested patches from fire-eggs these add:</p>
+<ul>
+  <li>Loading time improvements for processing of individuals</li>
+  <li>Colour reporting exports filter columns &amp; retain colours</li>
+</ul>
+
+<p>US census overhauled now uses date ranges to cope with times where enumerators ignored rule about the state of the house on census day</p>
+
+<h4 id="updated-release-version-6020-19th-jan-2018">Updated Release Version 6.0.2.0, 19th Jan 2018</h4>
+
+<p><strong>Updates</strong><br />
+Fixed most links to old codeplex documentation<br />
+Amended range of dates for US census as enumerators didn’t always adhere to guidelines that the census be recorded on a specific date.</p>
+
+<h4 id="release-version-6010-8th-jun-2017">Release Version 6.0.1.0, 8th Jun 2017</h4>
+
+<p><strong>Updates</strong><br />
+Rebuilt for deployment on GitHub<br />
+Upgraded to .Net 4.6 dropping XP support</p>
+
+<h4 id="updated-release-version-5207-of-ftanalyzer-31th-jan-2017">Updated Release Version 5.2.0.7 of FTAnalyzer, 31th Jan 2017</h4>
+
+<p><strong>New Features</strong><br />
+Added filter to loading GEDCOM so that badly formatted CONC or CONT text that wraps onto a line leaving invalid GEDCOM syntax is treated as a continuation of the previous line of text. If the Census checker finds a reference but its partial don’t crash</p>
+
+<h4 id="updated-release-version-5105-of-ftanalyzer-11th-aug-2015">Updated Release Version 5.1.0.5 of FTAnalyzer, 11th Aug 2015</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+Birth and death searches now use loose birth/death to narrow range if unknown date<br />
+Ancestry searches now filter on marriage date and death date<br />
+Census Ref and date pattern matching is now faster<br />
+<strong>Bug Fixes</strong><br />
+Now treats Unknown locations as geocoded<br />
+When loading form locations added a check to make sure it is on one of the user’s screens<br />
+UK addresses geocode one level below rest of world due to Scotland, England, Wales etc being the country not UK.<br />
+Status text on geocoding form wasn’t correctly refreshing</p>
+
+<h4 id="updated-release-version-5104-of-ftanalyzer-4th-aug-2015">Updated Release Version 5.1.0.4 of FTAnalyzer, 4th Aug 2015</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+<strong>Bug Fixes</strong><br />
+Geocoding of US locations have an extra level<br />
+Fix for 40 year death ranges on FMP if unknown dates</p>
+
+<h4 id="updated-release-version-5103-of-ftanalyzer-2nd-august-2015">Updated Release Version 5.1.0.3 of FTAnalyzer, 2nd August 2015</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+Birth and death searches now use loose birth/death to narrow range if unknown date<br />
+Ancestry searches now filter on marriage date and death date<br />
+Census Ref and date pattern matching is now faster<br />
+<strong>Bug Fixes</strong></p>
+<h4 id="updated-release-version-5102-of-ftanalyzer-1-august-2015">Updated Release Version 5.1.0.2 of FTAnalyzer, 1 August 2015</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+<strong>Bug Fixes</strong><br />
+Geocoding of US locations have an extra level</p>
+
+<h4 id="updated-release-version-5101-of-ftanalyzer-25-july-2015">Updated Release Version 5.1.0.1 of FTAnalyzer, 25 July 2015</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+<strong>Bug Fixes</strong><br />
+Residence and census facts that had invalid years note weren’t getting checked for census references in the notes<br />
+Use married surnames for death searches<br />
+Family Search only include birth location for birth searches<br />
+Always make birth year dates use range of at least 1 year</p>
+
+<h4 id="updated-release-version-5100-of-ftanalyzer-23-july-2015">Updated Release Version 5.1.0.0 of FTAnalyzer, 23 July 2015</h4>
+
+<p><strong>New Features</strong><br />
+Added Report to show a count of relatives of each type<br />
+Added BMD searching for Ancestry, FindMyPast and FamilySearch from BMD Colour Report - Double click a birth, marriage or death on the colour BMD form to auto search the web for that entry. Similar to how the census searching works.<br />
+<strong>Updates</strong><br />
+Added Option to display females with unknown surname in brackets as unknown<br />
+Set search dropdown on BMDs to FreeBMD rather than FreeCen<br />
+<strong>Bug Fixes</strong><br />
+Missing fields no longer passed to FindMyPast census searches causing searches to fail<br />
+Surnames box wasn’t filling grid<br />
+Valid Census records on Lost Cousins and colour census reports now use year comparisons rather than exact date.<br />
+Census ref search wasn’t picking up schedule for 1911<br />
+Unknown page census refs were getting lost by unknown census refs</p>
+
+<h4 id="updated-release-version-5042-of-ftanalyzer-11-may-2015">Updated Release Version 5.0.4.2 of FTAnalyzer, 11 May 2015</h4>
+
+<p><strong>Updates</strong><br />
+Added Relation filter for Surname report<br />
+<strong>Bug Fixes</strong><br />
+Loading with old database no longer fails if latm/longm columns already exist.</p>
+
+<h4 id="updated-release-version-5041-of-ftanalyzer-9-may-2015">Updated Release Version 5.0.4.1 of FTAnalyzer, 9 May 2015</h4>
+
+<p><strong>Updates</strong><br />
+Now recognises lat/long places from Legacy files<br />
+<strong>Bug Fixes</strong><br />
+Someone who is married twice no longer appears twice on the census reports if on their own in a previous family<br />
+Arrival and departure facts are location facts not comment facts<br />
+Change IsAlive to StartsBefore instead of IsBefore<br />
+Status bar text wasn’t clearing on a reload</p>
+
+<h4 id="new-release-version-5040-of-ftanalyzer-5-may-2015">New Release Version 5.0.4.0 of FTAnalyzer, 5 May 2015</h4>
+
+<p><strong>Updates</strong><br />
+If a census reference cut n paste from Lost Cousins is detected then a created Lost Cousins fact is added if one didn’t exist.<br />
+<strong>Bug Fixes</strong><br />
+ADDR &amp; PLAC records for fact are no longer concatenated<br />
+Census ref wasn’t picking up from fact notes if it found text it didn’t recognise in source</p>
+
+<h4 id="updated-release-version-5032-of-ftanalyzer-5-may-2015">Updated Release Version 5.0.3.2 of FTAnalyzer, 5 May 2015</h4>
+
+<p><strong>Updates</strong><br />
+Add support for 1881 census - District 146/B, Page 59, Family 273 - living at Rainham, Haldimand, Ontario, Canada. style Canadian census ref.<br />
+<strong>Bug Fixes</strong></p>
+
+<h4 id="updated-release-version-5031-of-ftanalyzer-5-may-2015">Updated Release Version 5.0.3.1 of FTAnalyzer, 5 May 2015</h4>
+
+<p><strong>Updates</strong><br />
+Add support for Canadian Ancestry census references<br />
+<strong>Bug Fixes</strong><br />
+Fix typo in census recognition for Lost Cousins census references</p>
+
+<h4 id="new-release-version-5030-of-ftanalyzer-3-may-2015">New Release Version 5.0.3.0 of FTAnalyzer, 3 May 2015</h4>
+
+<p><strong>Updates</strong><br />
+Step value for “on this day” remembered between sessions<br />
+Add function to export missing census references<br />
+Various updates to US census reference checks<br />
+Added Scottish Parish reference -&gt; name lookup<br />
+Census references for existing facts now tries to update Fact location details if fact had no location<br />
+Added code to load TNG format location files<br />
+Add support for 1881 Canadian LC Census pattern<br />
+Add check to see if census fact year matches census reference year fact shows as error if there is a mismatch<br />
+Added census ref year to facts display<br />
+<strong>Bug Fixes</strong><br />
+Lost Cousins Colour status now also checks if likely to be out of country<br />
+Fix for recognising Russia from Chapman Code</p>
+
+<h4 id="updated-release-version-5024-of-ftanalyzer">Updated Release Version 5.0.2.4 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+<strong>Bug Fixes</strong></p>
+
+<p>Only copy census references if reference is good or partial</p>
+
+<h4 id="updated-release-version-5023-of-ftanalyzer">Updated Release Version 5.0.2.3 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+<strong>Bug Fixes</strong><br />
+Notes continuation line was being read then ignored<br />
+Set Census ref comment if length &gt; 0<br />
+When a census fact exists and a note exists with a census ref copy the census ref across if the census fact doesnt have one</p>
+
+<h4 id="updated-release-version-5022-of-ftanalyzer">Updated Release Version 5.0.2.2 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+Add support for Scottish Census patterns with years<br />
+Add recognition of Lost Cousins 1940 US Census reference format<br />
+Added recognition of 1940 US census references as cut n paste from FamilySearch, FindMyPast &amp; Ancestry<br />
+<strong>Bug Fixes</strong><br />
+Fix text lookup was aggressively looking for text even on names etc</p>
+
+<h4 id="updated-release-version-5021-of-ftanalyzer">Updated Release Version 5.0.2.1 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+Added support for Legacy 8 default fact types recognition<br />
+Dates with ~ now supported<br />
+Added support for extra Scottish Valuation Rolls<br />
+Add created census facts if partial recognition<br />
+Report results window now shows Census Reference details found<br />
+<strong>Bug Fixes</strong><br />
+Lots of tweaks to handling of notes to find more census references<br />
+Gedcom parser now allows CONT &amp; CONC lines to start with a @<br />
+fix for WWI &amp; WWII abbreviations being converted.</p>
+
+<h4 id="new-release-version-5020-of-ftanalyzer">New Release Version 5.0.2.0 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+Parent and Children facts now include birth location if known<br />
+Revised handling of notes to better find census references<br />
+Recognises cut n paste formatted references from FindMyPast<br />
+Calculated Birth facts now show Age string used<br />
+“1911 Census” and “Census 1911” patterns now recognised<br />
+<strong>Bug Fixes</strong><br />
+Census Facts now check for notes on the fact as well as in general notes to find a census reference<br />
+Fixed issue with double counting LC facts with bad/missing census facts<br />
+“1841 Census:” reference types with Book: were getting skipped by mistake</p>
+
+<h4 id="updated-release-version-5015-of-ftanalyzer">Updated Release Version 5.0.1.5 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+<strong>Bug Fixes</strong><br />
+Facts before birth shouldn’t show errors for calculated birth facts<br />
+Only show missing children status where both parents are alive and at least parenting age<br />
+Fix Age calc being 1 day out<br />
+Fix loose births getting confused when partial dates used with no year</p>
+
+<h4 id="updated-release-version-5014-of-ftanalyzer">Updated Release Version 5.0.1.4 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+Added File Handling option menu to allow loading files with special character handling<br />
+Added support for dates of format<br />
+1914 to 1918<br />
+1914 until 1918<br />
+(also any day month variants)<br />
+Added support for C1xxx and C2xxx dates<br />
+<strong>Bug Fixes</strong><br />
+Children status of ignore wasn’t ignoring all records for missing Children status report.<br />
+Warnings of file errors don’t warn as frequently when loading very large files<br />
+Fact Dates cope better with 3 digit years<br />
+Loading families no longer fails if missing REF attribute<br />
+Tidied up some reload required options not forcing a reload<br />
+Added missing options current settings text to report window</p>
+
+<h4 id="updated-release-version-5013-of-ftanalyzer">Updated Release Version 5.0.1.3 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+Add extra Scottish Valuation Rolls dates<br />
+<strong>Bug Fixes</strong><br />
+Check Lost Cousins Fact Location before checking related census fact location<br />
+Lost Cousins facts with missing census facts now shown separately from Census facts with missing Lost Cousins facts<br />
+Fix issues with Date Calculations causing crash</p>
+
+<h4 id="updated-release-version-5012-of-ftanalyzer">Updated Release Version 5.0.1.2 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+<strong>Bug Fixes</strong><br />
+Census reference URL doesn’t append F, R or O<br />
+Fixed loading GEDCOMs with individuals with null IDs</p>
+
+<h4 id="updated-release-version-5011-of-ftanalyzer">Updated Release Version 5.0.1.1 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+Census References now give better locations as taken from the census piece number descriptions on FindMyPast &amp; Ancestry<br />
+Calculated Birth Facts now have their own FactType<br />
+Added option to exclude auto created locations from locations list<br />
+Census References now displays on all fact reports<br />
+Added tooltip to Census Ref column in Facts report if census reference URL available<br />
+<strong>Bug Fixes</strong><br />
+Facts reduced minimum width of sources column<br />
+Unicode diacritics no longer removed for displaying locations still removed for comparisons<br />
+CensusReference checking now checks across continuation lines and keeps checking if a census record already exists<br />
+Don’t include occupation facts in On this Day’s facts<br />
+Allow duplicated created census facts if there are multiple census references for a single year to highlight to user the potential issue<br />
+Duplicated created census facts now show in duplicated facts report<br />
+Make all census reference searches lazy<br />
+Tweaks to census references to fix folio numbers with alphabetic suffixes<br />
+Census year check now fixed for Census XXXX or XXXX Census references</p>
+
+<h4 id="updated-release-version-5010-of-ftanalyzer">Updated Release Version 5.0.1.0 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+Census References now give better locations as taken from the census piece number descriptions on FindMyPast &amp; Ancestry<br />
+Calculated Birth Facts now have their own FactType<br />
+Added option to exclude auto created locations from locations list<br />
+Census References now displays on all fact reports<br />
+Added tooltip to Census Ref column in Facts report if census reference URL available</p>
+
+<h4 id="updated-release-version-5002-of-ftanalyzer">Updated Release Version 5.0.0.2 of FTAnalyzer</h4>
+
+<p><strong>Bug Fixes</strong><br />
+Fixed issue with census references with no sources passing null dates around causing load GEDCOM to fail</p>
+
+<h4 id="new-release-version-5000-of-ftanalyzer">New Release Version 5.0.0.0 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+Added support for auto creating census records from identified census references in notes and source records. This will go a long way to helping users with older family tree applications that have no census facts.</p>
+
+<p>Today Tab now shows events that happened in your tree and world events from that date or that month in the past.<br />
+Both of these features come with options to turn them on or off.<br />
+Census Reference reports now have clickable links to see the census page results on Find My Past website.</p>
+
+<p><strong>Updates</strong><br />
+Renewed Code Signing Certificate<br />
+Census reference checks allow multiple spaces between parts<br />
+Census References now don’t need ; or , to match.<br />
+Update count in load screen to show created census facts<br />
+Allow &lt; and &gt; in dates ie: replace with BEF and AFT<br />
+Added Lost Cousins My Ancestors page census reference formats<br />
+Facts now display comments if available.<br />
+Added new and tweaked various census reference formats<br />
+Children status errors now have own error type<br />
+Family facts errors now shown separately from individual fact errors.<br />
+Add support for Legacy Shared Census Facts</p>
+
+<p><strong>Bug Fixes</strong><br />
+Set duplicates trackbar to only have 20 ticks<br />
+Fixed issue with AFT dates messing up duplicates calcs<br />
+Allow for Unicoded files<br />
+Duplicate Fact report no longer reports duplicates of created facts<br />
+Changed Double Date warning<br />
+Colour Census double clicks now work for all bar not alive and known missing<br />
+Children status patterns weren’t correctly setting the alive &amp; dead status<br />
+Children Status form save button now displays<br />
+Children Status grid colours changed to make it easier to see errors<br />
+Children Status tooltips added to highlight why cell is coloured<br />
+Loose Births and deaths grids can have columns ordered by user</p>
+
+<h4 id="updated-release-version-4114-of-ftanalyzer">Updated Release Version 4.1.1.4 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+Added Enumeration District detection to US census ref<br />
+Individuals export now exports relation to root column<br />
+<strong>Bug Fixes</strong><br />
+29th or higher great grandparents now show correctly in relation to root calculations</p>
+
+<h4 id="updated-release-version-4113-of-ftanalyzer">Updated Release Version 4.1.1.3 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+<strong>Bug Fixes</strong><br />
+US Census ref was being loaded but not displayed<br />
+Fix issue with Channel Islands not counting as part of England &amp; Wales for census</p>
+
+<h4 id="updated-release-version-4112-of-ftanalyzer">Updated Release Version 4.1.1.2 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+Added Enumeration District detection to US census ref<br />
+<strong>Bug Fixes</strong><br />
+Region shifts now only consider UK regions<br />
+Files with bad data now clear data they partially loaded</p>
+
+<h4 id="updated-release-version-4111-of-ftanalyzer">Updated Release Version 4.1.1.1 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+<strong>Bug Fixes</strong><br />
+Fix for loose birth ranged birth year and no other facts<br />
+Children status now accepts Living as alternate for Alive<br />
+Red for mismatched entries was on wrong columns<br />
+Report unrecognised census refs wasn’t linked to button<br />
+Multiple marriages was wrongly affecting loose births</p>
+
+<h4 id="new-release-version-4110-of-ftanalyzer">New Release Version 4.1.1.0 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+Added ignore option to mismatched census references. This allows you to hide results where the reason is two families on same census page but different addresses.<br />
+Filter button on census ref facts report allows you to show/hide census reference mismatches<br />
+Added At Sea as a special country that doesn’t get Google lookups so it can be used for manual setting of locations where people were born/married/died etc at sea in various parts of the world.<br />
+<strong>Bug Fixes</strong><br />
+Isle of Wight fact location fix</p>
+
+<h4 id="updated-release-version-4102-of-ftanalyzer">Updated Release Version 4.1.0.2 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+Loose births checks persons birth is before parents die<br />
+<strong>Bug fixes</strong><br />
+Editing locations no longer loses it’s place when reverse geocoding updates list</p>
+
+<h4 id="updated-release-version-4101-of-ftanalyzer">Updated Release Version 4.1.0.1 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+Add Children status family name column for easier sorting<br />
+Add check for children status total = alive + dead<br />
+Loose births makes sure the individual would be of marrying age<br />
+<strong>Bug fixes</strong><br />
+typo on census tab button<br />
+inconsistent facts report title wasn’t being displayed<br />
+Ignored facts weren’t being ignored on census inconsistent report<br />
+alive/dead totals were counting children born after census as not alive thus dead.<br />
+AFT dates strings don’t need to say 1 JAN if only a year</p>
+
+<h4 id="new-release-version-4100-of-ftanalyzer">New Release Version 4.1.0.0 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+Added an Inconsistent Census refs vs locations report<br />
+Added 1911 census families Missing a Children Status report<br />
+Added 1911 census families Mismatched Children Status report<br />
+Add recognition of Ignore for Children Status<br />
+Added support for Close GEDCOM file menu<br />
+Added Missing Facts Filter<br />
+Added Duplicate Facts Filter<br />
+<strong>Updates</strong><br />
+Added random surname select to Colour Census<br />
+OS fuzzy search now works on missing parish names<br />
+OS fuzzy search checks to see if within suitable distance of previously found Google partial/level mismatch<br />
+People form now allows shift double click to see family colour census report<br />
+Children Status picked up from NOTE tag as well as EVEN tag<br />
+Missing Facts report is now limited to a single report fact per person and double clicking an individual gives individuals facts<br />
+<strong>Bug fixes</strong><br />
+Beef up error message on null pointer on load to show inner exception text<br />
+Strings for spouse names were missing on mismatch report</p>
+
+<h4 id="updated-release-version-4001-of-ftanalyzer">Updated Release Version 4.0.0.1 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+Census refs visible on source facts report<br />
+OS Geocoding sets found location and type based on what was found<br />
+OS Geocoding also now uses Fuzzy search and identifies matches with OS Fuzzy search. This allows matches where the names are not exact.<br />
+<strong>Bug Fixes</strong></p>
+
+<h4 id="new-release-version-4000-of-ftanalyzer">New Release Version 4.0.0.0 of FTAnalyzer</h4>
+
+<p>This major release introduces a significant new feature the ability to search the UK Ordnance Survey 50k Gazetteer for small placenames that often don’t appear on a modern Google Map. This means significant numbers of locations that were previously not found by Google Geocoding will now be found by using OS Geocoding.<br />
+In addition I’ve added support for loading the Scottish 1930 Parish boundary maps, whilst slightly different from the parish boundaries in use in the 1800s that are familiar to family historians most rural areas have almost the same if not identical boundaries in the 1800s as is in the 1930s Parish boundary set. The major variances is in the cities where several smaller parishes are amalgamated into one large parish ie: Glasgow has one large city centre parish rather than several smaller ones.<br />
+Being able to see your Scottish Ancestor’s Locations plotted on a map complete with parish boundaries makes it easier to see how close they were to other neighbouring parishes.<br />
+NB. To use this feature you need the separate <a href="https://www.ftanalyzer.com/Displaying%20British%20Parish%20Boundaries">Scottish Parish Boundary file</a>. Simply download it and unzip it into the folder you selected from the Tools | Mapping Options form.<br />
+<strong>New Features</strong><br />
+Scottish 1930 Parish Boundary maps are now supported<br />
+OS Open Data 50k Gazetteer can now be used to lookup placenames<br />
+Added support for various countries regions to be recognised - initially this is UK, US, Canada, Australia<br />
+<strong>Updates</strong><br />
+Colour BMD report now has adjusted tooltips for over 90s<br />
+Locations sorting is now house number agnostic<br />
+Add version string to database export filename<br />
+Added Regions recognition and map historic to modern counties for UK counties<br />
+Added regions and alternate spellings recognitions for England, Scotland, Wales, Northern Ireland, UK Islands, USA, Canada, Australia<br />
+Locations tab Treeview and other locations sub tabs now display in bold recognised regions. This should help users tidy up regions<br />
+Recent Files menu now greyed out if no recent files<br />
+Added Canadian Province Postal code support<br />
+Added Support for Custom tag Military Service<br />
+World Wars results can now be limited to just those men with known military facts<br />
+Add Random Surname Census Search to Census Tab<br />
+<strong>Bug Fixes</strong><br />
+Updated Fact Report to correct count of distinct individuals<br />
+Add null protection to treeview image nodes<br />
+Prevented opening a new file during loading</p>
+
+<h4 id="updated-release-version-3734-of-ftanalyzer">Updated Release Version 3.7.3.4 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+<strong>Bug Fixes</strong><br />
+Fix Fact Sources trying to display marriage facts caused a crash<br />
+Updated source fact count to be 1 for each person in marriage instead of 1 for each shared fact<br />
+Source IDs are now zero padded same as individual and family IDs which makes sorting work as expected<br />
+Fix issue for brand new users not having an empty database setup correctly</p>
+
+<h4 id="updated-release-version-3733-of-ftanalyzer">Updated Release Version 3.7.3.3 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+Added several more countries to recognised countries list including extras like Gibraltar and Hong Kong<br />
+<strong>Bug Fixes</strong><br />
+Fix Fact Sources trying to display marriage facts caused a crash<br />
+Updated source fact count to be 1 for each person in marriage instead of 1 for each shared fact<br />
+Source IDs are now zero padded same as individual and family IDs which makes sorting work as expected</p>
+
+<h4 id="updated-release-version-3732-of-ftanalyzer">Updated Release Version 3.7.3.2 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+Added support for Family Historian Living flag<br />
+Added data error type flagged as Living but has death date<br />
+<strong>Updates</strong><br />
+Tweaks to colour BMD tooltips<br />
+Move option “Include Locations with Partial Match Status” to Mapping settings<br />
+<strong>Bug Fixes</strong><br />
+Fixes for Lost Cousins tab census report<br />
+Changed LC facts no census to LC Facts bad/missing census<br />
+Wrapped web calls in helper routine with try catch so failure to launch website will no longer crash program<br />
+Census report now checks to see if census done for bold highlighting<br />
+Recent File List now checks if file exists before adding to or displaying list</p>
+
+<h4 id="updated-release-version-3731-of-ftanalyzer">Updated Release Version 3.7.3.1 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+Added progress bar to Surnames tab display<br />
+<strong>Bug Fixes</strong><br />
+Removed now redundant no country no LC fact as covered by bad/missing<br />
+Footer text clear on tab switch now consistent across tabs<br />
+Don’t use date filter for family groups on colour census report</p>
+
+<h4 id="new-release-version-3730-of-ftanalyzer">New Release Version 3.7.3.0 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+Added family drop down filter to colour reports so now you can view just a single family at a time<br />
+Added support for Interpreted dates<br />
+Added Help menu Link to Online Guides<br />
+<strong>Updates</strong><br />
+Added support for Scottish Valuation Rolls as “census” reports<br />
+Facts report now has birth date - assists identifying multiple individuals of same name<br />
+<strong>Bug Fixes</strong><br />
+Added country check for LC census facts<br />
+Fixed report of LC facts with no country</p>
+
+<h4 id="updated-release-version-3722-of-ftanalyzer">Updated Release Version 3.7.2.2 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+<strong>Bug Fixes</strong><br />
+Strip spaces from census references to make matching space insensitive</p>
+
+<h4 id="updated-release-version-3721-of-ftanalyzer">Updated Release Version 3.7.2.1 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+<strong>Bug Fixes</strong><br />
+Family facts were getting hidden with v3.7.2.0</p>
+
+<h4 id="new-release-version-3720-of-ftanalyzer">New Release Version 3.7.2.0 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+Update URL for Lives of First World War to cope now the site has gone live<br />
+Change FindMyPast search to work with new search<br />
+Add extra tags to recognise custom events as normal facts<br />
+Lost Cousins stats now shows census records with no countries and no Lost Cousins facts<br />
+Added report to show Census facts missing country and Lost Cousins flag<br />
+<strong>Bug Fixes</strong><br />
+Restoring a v3.1.2.0 database was failing<br />
+Death Location width on census can now be resized<br />
+Source Facts include error facts<br />
+Add Datagridview double buffering to improve flicker on grid redraw<br />
+Facts now log individuals</p>
+
+<h4 id="updated-release-version-3711-of-ftanalyzer">Updated Release Version 3.7.1.1 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+Shift click on census form now shows facts<br />
+<strong>Bug Fixes</strong><br />
+Channel Islands now recognised as part of UK for census references</p>
+
+<h4 id="new-release-version-3710-of-ftanalyzer">New Release Version 3.7.1.0 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+Census Tab now has four new reports showing census records that have :</p>
+
+<ul>
+  <li>census references</li>
+  <li>are missing census references</li>
+  <li>partial census references</li>
+  <li>unrecognised census references</li>
+</ul>
+
+<p>Added button to export unrecognised census facts to a text file for reporting issues with patterns that aren’t being recognised<br />
+<strong>Updates</strong><br />
+Before 1600 don’t warn about marriages pre 13 years old<br />
+Census facts now count for facts before birth<br />
+Census facts now used for loose births<br />
+Export to Excel referrals now uses custom interface<br />
+Filter out Out of Country entries in census and colour census reports<br />
+Reorganised Census tab to make it tidier<br />
+Tidied up census tooltip text<br />
+Added help button to link to census documentation<br />
+Use upper case for fact types<br />
+Added option to hide missing tagged people from census reports<br />
+<strong>Bug Fixes</strong><br />
+Fixed out of UK but on UK census people not appearing on Lost Cousins reports<br />
+Export from People form was crashing<br />
+Counts for Lost Cousins facts was double counting people from UK eg: counting them as both Scotland &amp; England<br />
+Fix census refs only showing for LC years<br />
+Out of UK Census refs weren’t being displayed<br />
+Facts before birth &amp; after death no longer appear twice<br />
+Export Lost Cousins Referrals and Export Sources were crashing<br />
+Fix Column sizing of census refs</p>
+
+<h4 id="updated-release-version-3702-of-ftanalyzer">Updated Release Version 3.7.0.2 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+<strong>Bug Fixes</strong><br />
+Colour census filters now show only distinct records<br />
+Lost Cousins facts for overseas UK census entries now checks census fact country rather than LC country</p>
+
+<h4 id="updated-release-version-3701-of-ftanalyzer">Updated Release Version 3.7.0.1 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+<strong>Bug Fixes</strong><br />
+Lost Cousins facts won’t now show orange if any UK fact is present<br />
+If no preferred facts get first fact of that type - usually calculated fact</p>
+
+<h4 id="new-release-version-3700-of-ftanalyzer">New Release Version 3.7.0.0 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+Added US, Canadian and Irish Colour census reports<br />
+Age facts that give a calculated birth add a calculated birth fact<br />
+Add support for Alias fact type<br />
+Added option to display alias in name displays<br />
+<strong>Updates</strong><br />
+Add filter to remove someone from colour report who was never in country<br />
+Show preferred fact status on fact report<br />
+Armed Services and At Sea UK census now included on colour census report as part of relevant UK census - needs appropriate census ref to work<br />
+Colour Census now filters out records where person is too old to be on census but death date is unknown<br />
+<strong>Bug Fixes</strong><br />
+Fix to Age tag with BEF dates<br />
+Census refs now tolerate lack of spaces after :<br />
+Schedule numbers can now be 4 digits<br />
+Only add preferred facts to preferred fact list</p>
+
+<h4 id="updated-release-version-3615-of-ftanalyzer">Updated Release Version 3.6.1.5 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+Added support for Missing tag so users can mark people as unable to be found on a census<br />
+<strong>Bug Fixes</strong><br />
+Fix relation types if people married to blood/direct are also blood relations</p>
+
+<h4 id="updated-release-version-3614-of-ftanalyzer">Updated Release Version 3.6.1.4 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+Colour Census report now shows dark grey if person likely to be out of UK on census date<br />
+<strong>Bug Fixes</strong></p>
+
+<h4 id="updated-release-version-3613-of-ftanalyzer">Updated Release Version 3.6.1.3 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+Added features to exclude people with unknown births from census reports<br />
+<strong>Bug Fixes</strong></p>
+
+<h4 id="updated-release-version-3612-of-ftanalyzer">Updated Release Version 3.6.1.2 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+<strong>Bug Fixes</strong><br />
+Default FamilySearch UK census searches to England if unknown country<br />
+GoogleFixes.xml allows empty to strings</p>
+
+<h4 id="updated-release-version-3611-of-ftanalyzer">Updated Release Version 3.6.1.1 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+FamilySearch set as default search provider for Lost Cousins Searches<br />
+<strong>Bug Fixes</strong><br />
+Tweaks to Loose Births to ignore effects of long range dates<br />
+FamilySearch now understands UK Searches</p>
+
+<h4 id="new-release-version-3610-of-ftanalyzer">New Release Version 3.6.1.0 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+Added Export to Excel for Treetops and World Wars Reports<br />
+Added Option to show compact census references<br />
+<strong>Updates</strong><br />
+Add Witnesses as custom fact type so that it functions the same as Witness custom fact type<br />
+<strong>Bug Fixes</strong><br />
+Colour census “All green” now includes all with flag of green</p>
+
+<h4 id="updated-release-version-3602-of-ftanalyzer">Updated Release Version 3.6.0.2 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+<strong>Bug Fixes</strong><br />
+Colour BMD Filter two values were wrong way round<br />
+Fix for Western Australia being mistaken for Washington, USA<br />
+Census refs can optionally end in a ;<br />
+<strong>Library Updates</strong></p>
+
+<h4 id="updated-release-version-3601-of-ftanalyzer">Updated Release Version 3.6.0.1 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+<strong>Bug Fixes</strong><br />
+Allow census references to be less specific for matching<br />
+Facts that have ADDR and PLAC tags now use both<br />
+<strong>Library Updates</strong></p>
+
+<h4 id="new-release-version-3600-of-ftanalyzer">New Release Version 3.6.0.0 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+Added Loose Birth &amp; Death export to Excel menu items<br />
+Added Lost Cousins Referrals Report<br />
+Added Export Sources to Excel<br />
+<strong>Updates</strong><br />
+Added notice of XP support removal<br />
+Locations now understand ISO 3116-1 Alpha-3 country codes<br />
+Duplicate check now uses standardised name file to compare forenames thus understanding that eg:Jacobus and James are variants of the same name, even though they don’t sound alike.<br />
+Referrals sorts using Lost Cousins Short Codes.<br />
+Duplicate checks now give heavy penalty to known different parents<br />
+Add filter function to show only matching referrals<br />
+Referral report now has title and status bar count<br />
+<strong>Bug Fixes</strong><br />
+Printng, previewing and exporting to excel no longer fails if no records listed<br />
+Facts before birth and facts after death now flags as errors<br />
+Locations show maps buttons weren’t showing correct viewports<br />
+<strong>Library Updates</strong><br />
+Updated SharpMap to v1.1<br />
+Updated BruTile to v0.9.8<br />
+Replaced TreeViewMS with MultiSelectTreeView</p>
+
+<h4 id="new-release-version-3510-of-ftanalyzer">New Release Version 3.5.1.0 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+Include UNKNOWN &amp; Reference facts<br />
+Sources form columns now resizable<br />
+People form now has toolbar to allow printing and exporting to Excel<br />
+<strong>Bug Fixes</strong><br />
+More robustly deal with facts &amp; sources so that every fact is linked to its source and vice versa.<br />
+Treetops and World Wars no longer multi select<br />
+Hourglass change that broke hourglass now fixed again<br />
+Apply common default sorting to people form<br />
+<strong>Library Updates</strong><br />
+Updated Log4Net to v1.2.13<br />
+Update DotNetZip to 1.9.2<br />
+Update SQLLite to 1.0.92</p>
+
+<h4 id="new-release-version-3500-of-ftanalyzer">New Release Version 3.5.0.0 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+Added sources tab - double clicking lists all facts for that source<br />
+Double clicking on a fact in the facts report lists all sources for that fact<br />
+Individuals reports now lists notes in GEDCOM, right click on individuals reports to view notes where they exist in the GEDCOM<br />
+Extra column in Individuals reports lists whether notes exist or not.<br />
+Added Possible census facts report which lists all people who have a note with the word census in it. The idea is this should help people with census records as notes work out who has a census note.</p>
+
+<h4 id="new-release-version-3410-of-ftanalyzer">New Release Version 3.4.1.0 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+Added Child Born facts to facts reports so that it gives a better timeline of facts for an individual<br />
+<strong>Bug Fixes</strong><br />
+Fixed crash if user clicks on duplicates grid or slider etc whilst duplicates data is being calculated.<br />
+Updated Hourglass function<br />
+Fixed flickering on duplicates tab</p>
+
+<h4 id="new-release-version-3400-of-ftanalyzer">New Release Version 3.4.0.0 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+Added a duplicates report - allows you to check if you have any likely duplicates in your file<br />
+Added a filter to the facts report tab<br />
+Added a sources report available by double clicking on a fact in the facts report<br />
+<strong>Updated Features</strong><br />
+Added support for Family Historian Census references<br />
+Facts report now shows surname at date field<br />
+Multiple individual facts reports for different individuals can now be open at the same time<br />
+Shift clicking on WWI searches now searches beta version of Lives of First World War site to try to find Life story page for that individual<br />
+Added support for alternate name facts they appear as extra facts in the facts report<br />
+Added parent fact type to facts report<br />
+<strong>Bug Fixes</strong><br />
+Relation to root wasn’t showing on census reports<br />
+Lost cousins census report tooltips were inaccurate<br />
+Lost cousins census report now has an option of a shift click to search census<br />
+Fix for null locations causing duplicates crash<br />
+Fixed facts reports reached by double clicking on individuals in duplicates page<br />
+Fixed 1911 Family Historian census references<br />
+Reports multiple fact forms for duplicate option on load<br />
+Allowed 1841 Family historian census reference to be more tolerant of variants.<br />
+Added select all/deselect all to fact tab<br />
+Single click now works for selecting fact types to filter<br />
+Unknown fact types no longer have blank descriptions</p>
+
+<h4 id="new-release-version-3330-of-ftanalyzer">New Release Version 3.3.3.0 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+Added Relation to Root description column to various reports<br />
+Add support for 1901 &amp; 1911 Ancestry Irish Census searches<br />
+Double date errors now have reason message.<br />
+Added relationship progress bar<br />
+<strong>Bug Fixes</strong><br />
+Lost Cousins and Census Facts were erroring for non UK census dates<br />
+Printing forms was erroneously using same title for all reports<br />
+Colour reports right columns now sizable</p>
+
+<h4 id="updated-release-version-3328-of-ftanalyzer">Updated Release Version 3.3.2.8 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+Added support for 1921 Canadian Census</p>
+
+<p><strong>Updates</strong><br />
+<strong>Bug Fixes</strong></p>
+
+<h4 id="updated-release-version-3327-of-ftanalyzer">Updated Release Version 3.3.2.7 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+<strong>Bug Fixes</strong></p>
+
+<p>1911 Irish Lost Cousins census wasn’t showing people</p>
+
+<h4 id="updated-release-version-3326-of-ftanalyzer">Updated Release Version 3.3.2.6 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+<strong>Bug Fixes</strong><br />
+Colour BMD &amp; Census column widths now save/reload properly<br />
+1881 LostCousins years wasn’t showing correct colours</p>
+
+<h4 id="updated-release-version-3325-of-ftanalyzer">Updated Release Version 3.3.2.5 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong></p>
+
+<p>Double dates now uses the upper year not lower year as the upper bound on a date<br />
+Force database update to clean up bad viewport items<br />
+Add logging for re-trying with original location text<br />
+Title bar now shows which GEDCOM file you are working on</p>
+
+<p><strong>Bug Fixes</strong></p>
+
+<p>Updating location geocode status now correctly updates treeviews</p>
+
+<h4 id="updated-release-version-3324-of-ftanalyzer">Updated Release Version 3.3.2.4 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Updates</strong><br />
+Added restore tooltip<br />
+Added remember location feature to most forms<br />
+Added logging for Google fixes<br />
+Google fixes now load when GEDCOM loads and reports to the stats window<br />
+<strong>Bug Fixes</strong></p>
+
+<h4 id="updated-release-version-3323-of-ftanalyzer">Updated Release Version 3.3.2.3 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+Added option for users to use their own GoogleFixes.xml file<br />
+<strong>Bug Fixes</strong><br />
+Fix for edit location not restoring pre-search value if clicked no to save on exit<br />
+Fix for edit location search not moving to correct location on search<br />
+Google geocoding viewport was getting wrongly set</p>
+
+<h4 id="updated-release-version-3322-of-ftanalyzer">Updated Release Version 3.3.2.2 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Bug Fixes</strong><br />
+Places selection now actually shows a result<br />
+Fix for max living date within 9 months of MINDATE.</p>
+
+<h4 id="updated-release-version-3321-of-ftanalyzer">Updated Release Version 3.3.2.1 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+<strong>Bug Fixes</strong><br />
+Fix mitre limit to avoid mitred joins on line ends<br />
+Fix for saving size and position of mainform<br />
+Add end cap triangles to line.<br />
+Places selection now actually shows a resultFix for max living date within 9 months of MINDATE.</p>
+
+<h4 id="new-release-version-3320-of-ftanalyzer">New Release Version 3.3.2.0 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+Surname tab - reports counts of individuals, families &amp; marriages in a family.<br />
+Also links to Guild of One Name Studies site where surname is a GOONS study<br />
+<strong>Bug Fixes</strong><br />
+Fix dates with huge numbers of spaces<br />
+Count of not searched locations was wrong</p>
+
+<h4 id="new-release-version-3310-of-ftanalyzer">New Release Version 3.3.1.0 of FTAnalyzer</h4>
+
+<p><strong>Updates</strong><br />
+Lifelines Report now highlights birth facts (red teardrop), death facts (black teardrop) and currently selected fact (green teardrop).<br />
+Changing the selected fact highlights the point on the map.<br />
+Also works the other way using the query tool you can select a fact and see it highlighted on the map<br />
+Tooltip also now shows the facts beneath the mouse.<br />
+<strong>Bug Fixes</strong><br />
+All times birth facts and death facts are looked at the rule to use christening/burial facts is implemented</p>
+
+<h4 id="updated-release-version-3301-of-ftanalyzer">Updated Release Version 3.3.0.1 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+Added Places form - You can now select a place or places and see who lived there on a map. Discover different branches of your family living in the same area perhaps uncover new leads.<br />
+Clicking on a cluster or teardrop icon on new places map shows you who was at that location<br />
+Database Upgrade to use projected LatM/LongM instead of lat/long this will make map drawing quicker. <strong>It does mean that the first time the program loads it will need to update your database. PLEASE LET THIS FINISH.</strong><br />
+<strong>Updates</strong><br />
+Facts table now displays Relation<br />
+Facts table now shows grey/white bands per individual<br />
+Added TileCaches to maps<br />
+Added Birth Reg, Marriage Reg and Death Reg custom facts as alternates for Birth, Marriage, Death facts<br />
+Geocode locations filter menu now has icons<br />
+MainForm now remembers position as well as size<br />
+Hide Scale bar is now a global option on all maps<br />
+Added support for Google Country/Region/SubRegion &amp; MultiLevel text substitution in FactLocationFixes.xml file this will translate old 19th Century locations to modern ones that Google can find without needing to touch the GEDCOM file.<br />
+Added support for 10 APR-15 JUL 1918, 9-17 JUL 1824 and 10 APR 1914-15 APR 1918 style dates<br />
+Places &amp; Lifeline remembers splitter positions<br />
+ADDR tags in GEDCOM are now recognised as locations if the PLACe tag is empty<br />
+<strong>Bug Fixes</strong><br />
+Report Options reports all options now<br />
+Fact Source text that was on a continuation line in the GEDCOM was missing text on subsequent lines<br />
+Tweaks to Parent Age Profile report<br />
+Facts form row selector was too narrow<br />
+Lifeline expands to include the viewport as well as the coordinate eg: This should mean Scotland is no longer zoomed in to a point on Loch Tay<br />
+Database restore now forces update if restoring an old database<br />
+Added titles to all messageboxes<br />
+Map Individuals Icons refreshed on edit location<br />
+Clicking to open locations window always ensures that location isn’t filtered<br />
+If a file encounters too many errors and user says to quit it will now fail gracefully</p>
+
+<h4 id="new-release-version-3200-of-ftanalyzer">New Release Version 3.2.0.0 of FTAnalyzer</h4>
+
+<p><strong>Major Features</strong><br />
+Added Lifelines map - shows where ancestors lived with lines for how they moved over time. Allows selection of one or more individuals<br />
+Added ability to display custom maps - <a href="https://www.ftanalyzer.com/Adding%20Custom%20Maps">see documentation for details</a><br />
+Added ability to display English &amp; Welsh parish boundaries on a map - <a href="https://www.ftanalyzer.com/Displaying%20British%20Parish%20Boundaries">see documentation for details</a><br />
+Added Facts Report this shows all facts recorded in your database for all individuals<br />
+<strong>Lifelines Map</strong><br />
+Shows lists of people and where they move in time<br />
+Right click a person to select all family their members, ancestors, descendants or all relatives<br />
+Displays Google &amp; geocoding data in lifeline facts<br />
+Double click any lifeline fact to enable location editing for that fact location<br />
+Added a save &amp; exit button to edit locations<br />
+Added option to hide labels<br />
+<strong>Updates</strong><br />
+Relations check only now sets direct ancestor for natural parent ie: step/adopted etc parents<br />
+Added remaining recognised countries<br />
+When geocoding if no Google Match with country, county, region string try again with GEDCOM Location<br />
+Add option to reset partials<br />
+Add event to location editing to refresh lifeline facts<br />
+<strong>Bug Fixes</strong><br />
+Fix bug with valid double dates with double date year ending in 00<br />
+Fixed double dates isbefore, startsbefore, isafter, endsafter<br />
+Remove “fix” for Durham as it was causing towns in Durham to appear in Durham, Durham.<br />
+Retried partial Google Matches now works<br />
+Fixed locations tab bold text for known countries<br />
+Lost Cousins census check in coloured reports now checks census country before flagging yellow.<br />
+Exiting edit location checks for saved point if yes to save rather than search moving point.<br />
+Turn off auto size mode on source column in facts<br />
+Fix surname search for facts<br />
+If GEDCOM CHAR set is UTF-8 then use the UTF-8 encoding</p>
+
+<h4 id="new-release-version-3120-of-ftanalyzer">New Release Version 3.1.2.0 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+Added database restore option<br />
+Allow for natural/step/adopted etc relationships (uses _MREL &amp; _FREL tags)<br />
+Added support for 3 digit years (year only)<br />
+Added count of unknown facttypes on load<br />
+Data Errors now show unknown fact types<br />
+Save main form’s size on close<br />
+Reverse Geocoding now uses zoom level to pick place<br />
+Logger added creates a FTAnalyzer.log file for reverse geocoding info and future debugging support<br />
+<strong>Bug fixes</strong><br />
+Fact dates tolerate spaces between dashes<br />
+Force Treeview font to bold or regular to hopefully fix truncation issues</p>
+
+<h4 id="new-release-version-3110-of-ftanalyzer">New Release Version 3.1.1.0 of FTAnalyzer</h4>
+
+<h3 id="edit-location-enhancements">Edit Location Enhancements</h3>
+
+<p>Double clicking now zooms in (left) or out (right)<br />
+New Search box jumps to locations entered if Google can identify it<br />
+New Edit button allows you to pick up marker even if its not on current zoom level<br />
+Reset button will reset the location back to close to how it was on load<br />
+Added option to copy and paste locations - useful when you have several locations in same street/place and you don’t want to manually edit them all<br />
+Marking a location as verified or editing a location now updates the Google location by reverse geocoding<br />
+Added check for Ancestry 1911 census references<br />
+Tweaks to Google Georeferencing levels<br />
+Fixed map issue when behind a proxy<br />
+Understands GEDCOM DEATH Y tags used when death date/location unknown but it is known the individual is dead.<br />
+Added support for MON YYYY-MON YYYY format dates</p>
+
+<h4 id="new-release-version-3100-of-ftanalyzer">New Release Version 3.1.0.0 of FTAnalyzer</h4>
+
+<h4 id="new-features">New Features</h4>
+
+<p>The Mapping feature can now view your locations using <strong>Historic OS Maps</strong> and modern OS Maps.</p>
+
+<h4 id="updates">Updates</h4>
+
+<p>Map location list now shows Google location<br />
+Backup of Geocodes database remembers last backup location<br />
+Map selector remembers the last map used</p>
+
+<h4 id="bugfixes">Bugfixes</h4>
+
+<p>Don’t add pre-marriage individuals if already in a family</p>
+
+<h4 id="new-release-version-3030-of-ftanalyzer">New Release Version 3.0.3.0 of FTAnalyzer</h4>
+
+<p>Count Isle of Man as England &amp; Wales for Census<br />
+Lost Cousins text was preventing drag and drop of files<br />
+Lost Cousins no Countries form won’t open more than one copy<br />
+Changed sort order of Lost Cousins buttons to match report which matches Lost Cousins website<br />
+UK Census date verification is only applied to UK facts<br />
+Counts duplicate Lost Cousins facts<br />
+Added report for Lost Cousins facts but no census fact<br />
+Added Census Duplicate and Census Missing Location reports<br />
+Lost Cousins fact lists don’t show people with no country<br />
+Flag census families where checking treetops person before they married as “Pre-Marriage”<br />
+Census facts were getting confused when user had BEF or AFT dates<br />
+People who born or die on a census date are included in census families<br />
+Cell style changes applied to Inherited style as a performance gain<br />
+Census grid refreshes on change of provider thus updating tooltips<br />
+First fact of a fact type for an individual is recorded as the preferred fact<br />
+Individuals report now has a double click for facts<br />
+People form shows proper split grid and scrollbars and now has double click for facts</p>
+
+<h4 id="new-release-version-3024-of-ftanalyzer">New Release Version 3.0.2.4 of FTAnalyzer</h4>
+
+<p>Added Lost Cousins missing country report<br />
+Tweaked Loose Births to take account of childrens ages<br />
+Fixed bug with export to excel from census report</p>
+
+<h4 id="new-release-version-3023-of-ftanalyzer">New Release Version 3.0.2.3 of FTAnalyzer</h4>
+
+<p>Fixed bug with census dates always being 1881.<br />
+Lost Cousins tab now has a proper Relation Types filter<br />
+Lost Cousins tab buttons have lost weight<br />
+Add Individual ID to facts list<br />
+Initial work on reverse geocoding - doesn’t do anything with the results it finds yet</p>
+
+<h4 id="new-release-version-3022-of-ftanalyzer">New Release Version 3.0.2.2 of FTAnalyzer</h4>
+
+<p>Fixed Select All/Clear All<br />
+On finished Geocoding display results on stats tab<br />
+Added terms of use links to maps<br />
+Unknown fact types now display fact type description from GEDCOM<br />
+Custom facts were erroneously checking for Birth/Marriage/Death text<br />
+Reset any User entered/verified locations to set the Google location to empty</p>
+
+<h4 id="new-release-version-3021-of-ftanalyzer">New Release Version 3.0.2.1 of FTAnalyzer</h4>
+
+<p>Added right click menus to census, Lost Cousins, and both colour reports to view facts for individuals.<br />
+Fixed issue with 1851 &amp; 1901 census dates for colour report not working due to matching Canadian census dates<br />
+Tolerated census dates now set the adjusted year<br />
+Family facts weren’t getting checked for data errors when added to facts list</p>
+
+<h4 id="new-release-version-3020-of-ftanalyzer">New Release Version 3.0.2.0 of FTAnalyzer</h4>
+
+<p>Using Google Maps Geocoder v3 - <strong>NB. your old Google Matched results will be reset</strong><br />
+Added Use Burial/Cremation dates option if no death date<br />
+Fix US Census that were inaccurate dates<br />
+Add option to set minimum parental age for loose births<br />
+Added Select All/Clear All to Geocode status<br />
+Colour BMDs won’t now show red for people still likely to be alive<br />
+Added extra 4 year double date option eg: 11 Mar 1747/1748 is now recognised<br />
+Grey/white banding on census report now groups by sort column<br />
+Added recent files list feature<br />
+Added extra map background tiles to Timeline<br />
+Fixes to loose births to use death fact when calculating earliest living date<br />
+Loose Births &amp; Deaths sorted by surname, forename</p>
+
+<h4 id="new-release-version-3010-of-ftanalyzer">New Release Version 3.0.1.0 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+Added a Loose Births report<br />
+Added ability to backup Geocoding database<br />
+Added option to only apply family census facts to parents<br />
+People on a census outside UK now show as such in census report (includes “equivalent” US census year eg: 1880 for 1881 UK).<br />
+<strong>Bug Fixes</strong><br />
+Fix check for not_searched and partial_match not re-checking Google.</p>
+
+<h4 id="new-release-version-3010-of-ftanalyzer-1">New Release Version 3.0.1.0 of FTAnalyzer</h4>
+
+<p><strong>New Features</strong><br />
+Added a Loose Births report<br />
+Added ability to backup Geocoding database<br />
+Added option to only apply family census facts to parents<br />
+People on a census outside UK now show as such in census report (includes “equivalent” US census year eg: 1880 for 1881 UK).</p>
+
+<h4 id="new-release-version-3002-of-ftanalyzer">New Release Version 3.0.0.2 of FTAnalyzer</h4>
+
+<h1 id="new-mapping-feature">New Mapping Feature</h1>
+
+<p>Version 3 introduces a new mapping feature that allows you to see your ancestors plotted on a modern Google Map.</p>
+
+<p>This works by searching Google Maps for the locations in your GEDCOM and storing the results. This process is known as Geocoding. The program can then plot those results on various types of map.</p>
+
+<p>In v3.0.0.0 there is one initial Timeline map showing where everyone in your file was in a particular year.</p>
+
+<h2 id="new-features-since-v2211">New Features since v2.2.1.1</h2>
+
+<p>Added Geocoding of locations in file from Google Maps. This new form is also the report showing the list of locations and how they were geocoded.<br />
+Added display of individuals on Google Map as a Timeline view<br />
+What’s New menu links to What’s New page on website.<br />
+Map Locations can be edited by the user if the Google Geocoding wasn’t correct.</p>
+
+<h2 id="updates-1">Updates</h2>
+
+<p>Locations now shows Lat/Long/Geocoded status, Google results, and status icon<br />
+Locations treeview now has icons to show geocoding status<br />
+Ancestry.co* merge data for censuses now parsed on loading<br />
+Dataerror check box status remembered between sessions<br />
+Added option to search again for not found items<br />
+Added web proxy detection if behind a proxy serverMap refreshes on pan and year change<br />
+Map Individuals list now has double click to see facts for person<br />
+Added filters to Geolocations form<br />
+Added extra birth fact to individual if fact has age but no birth date recorded<br />
+Census form (for census and Lost cousins) is now fully sortable</p>
+
+<p><strong>Geocoding</strong><br />
+If too many Google Queries then stop processing<br />
+Now defaults to UK Google geocoding<br />
+If a location isn’t geocoded instead of ignoring it on timeline try at next level.<br />
+Geocoding respects bounding boxes of countries to avoid a similarly named place in a different country getting picked up.</p>
+
+<p><strong>Edit Locations</strong><br />
+Added Save and reset map buttons<br />
+Sort order preserved on refreshing edited locations<br />
+Add tooltip to tell user how to edit location on GeoLocations form<br />
+Change Edit Location to place pointer using right mouse click</p>
+
+<p><strong>Timeline</strong><br />
+Added playback option and associated play/stop buttons.<br />
+Button selected highlight added to pointer button<br />
+Added Option to lock zoom level<br />
+Solo person shown with Google teardrop<br />
+Clusterer added - this means as you zoom out data is clustered together as you zoom in you see the individual dots. The selection tool allows you to select an icon and view everyone where that is their best location in that year.<br />
+Timeline map ignores those born more than 110 years at timeline date.<br />
+Add option to display all locations<br />
+Timeline step change is 5 if range is 150 years or less<br />
+Implemented fact date limits in timeline<br />
+Added map scalebar to timeline map</p>
+
+<p><strong>Lost Cousins</strong><br />
+Added 1940 US Census button to form<br />
+Form now displays count by country and year as per Lost Cousins website<br />
+Count also now shows number of people you have a census for but no Lost Cousins fact<br />
+Lost Cousins buttons wasn’t respecting country chosen<br />
+Show Lost Cousins facts after death as a data error<br />
+Lost Cousins report displays the census reference info if it is found in a source</p>
+
+<p><strong>Bug Fixes</strong><br />
+Colour census death now uses ends before<br />
+IsMarried now uses starts before<br />
+Fix bug with locations not opening for places tab<br />
+Fix bug with locations for less detailed levels not showing if on more detailed tab<br />
+Fixed Google Maps button not showing map<br />
+Bing &amp; GoogleMaps now don’t bother geo-coding if it already has the location geocoded<br />
+Image in treeview doesn’t change when selected<br />
+Fix tooltip zoom icon tooltip text<br />
+Fixed bugs with Census &amp; Lost Cousins forms headings<br />
+Fixed Census &amp; Lost Cousins forms ignoring census records for people with no parents</p>
+
+<h4 id="new-release-version-2211-of-ftanalyzer">New Release Version 2.2.1.1 of FTAnalyzer</h4>
+
+<p>Fix for 1Q style quarter days</p>
+
+<h4 id="new-release-version-2210-of-ftanalyzer">New Release Version 2.2.1.0. of FTAnalyzer</h4>
+
+<p>Colour BMD, Colour Census, Facts Report &amp; Census all now :<br />
+use custom data grids<br />
+have export to excel<br />
+have printing options including colours and icons<br />
+have sortable columns<br />
+save/load/reload column order, sort order and column widths<br />
+Census facts on family are now included in all individuals in family alive at time of census<br />
+Changing Use Residence facts as census facts now requires a reload to force update of data errors<br />
+Status bar message on main form now shows what actions can happen on a double click<br />
+First tentative search Ancestry.co.uk code on double click BMD.</p>
+
+<h4 id="new-release-version-2201-of-ftanalyzer">New Release Version 2.2.0.1. of FTAnalyzer</h4>
+
+<p>Residence facts location checked for census date warning.<br />
+Do not prompt to reload file if no settings are changed.<br />
+Fix for unknown death dates not being checked for loose deaths<br />
+Added Reload option to main form<br />
+Added missing BMD report filters<br />
+Speedup loading of colour reports fix sort order<br />
+Various extra countries recognised<br />
+All standalone forms now implement custom column ordering<br />
+Printing now allows icon printing and colours printing</p>
+
+<h4 id="new-release-version-2200-of-ftanalyzer">New Release Version 2.2.0.0. of FTAnalyzer</h4>
+
+<h3 id="new-features-in-v2200">New Features in v2.2.0.0</h3>
+
+<p>Coloured Census form now moved to separate tab “Search Summaries”<br />
+Added BMD colour report to “Search Summaries” tab</p>
+
+<ul>
+  <li>this means you can now see BMD &amp; Census at a glance to see what data you are missing</li>
+  <li>Plus for marriage facts it shows colours for no partner but of marriage age, no partner + children or partner but no marriage</li>
+</ul>
+
+<p>Facts now checks for valid census dates<br />
+Added option to tolerate Census dates where the year is right but the exact date is wrong these are accepted if the census year is valid<br />
+Counts of errors and warnings for Census, Residence and Lost Cousins facts shown on load</p>
+
+<h3 id="small-changes-to-functionality">Small Changes to functionality</h3>
+
+<p>Facts List now displays sources<br />
+Added Age at Fact to Facts display<br />
+Added Select All/Clear All to data errors list<br />
+Data Errors are now sortable and have an error type column<br />
+Added Census date range too wide error type<br />
+Moved Treat Residence Facts as Census facts to a Global option<br />
+Add support for 1921 Canada Census<br />
+Added a report an issue link to help menu<br />
+Treeview now allows map views buttons to work<br />
+Fact Form now shows error facts for an individual too with error icons and tooltips for reason<br />
+Various minor Bug Fixes</p>
+
+                </article>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/Documentation">Documentation</a>
+                <a href="/guides">PDF Guides</a>
+                <a href="https://app.ftanalyzer.com" target="_blank" rel="noopener">Web App</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="https://www.facebook.com/FTAnalyzer" target="_blank" rel="noopener">Facebook Support</a>
+                <a href="https://www.facebook.com/groups/ftanalyzer" target="_blank" rel="noopener">User Group</a>
+                <a href="https://github.com/ShammyLevva/FTAnalyzer" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="footer-creds">
+                <small>&copy; Alexander Bisset &middot; Built with <a href="https://pages.github.com/">GitHub Pages</a></small>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>

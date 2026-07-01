@@ -1,0 +1,19 @@
+0 HEAD
+1 SOUR FTL
+2 VERS 5.15
+2 NAME Family Tree Legends
+2 CORP PearlStreetSoftware.com
+1 DEST Custom
+1 DATE 22 Nov 2013
+1 FILE EMPTY.FTL
+1 CHAR ANSI
+1 GEDC
+2 VERS 5.5
+2 FORM LINEAGE-LINKED
+0 @I1@ INDI
+1 NAME Lost Cousins Fact /Individual/
+1 SEX M
+1 EVEN 
+2 TYPE Lost Cousins
+2 DATE 1841
+0 TRLR

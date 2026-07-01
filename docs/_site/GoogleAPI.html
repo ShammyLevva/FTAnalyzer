@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+    <!-- Google tag (gtag.js) - Google Analytics GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DX4ZNSG3R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-9DX4ZNSG3R');
+    </script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Google API Keys ## | Family Tree Analyzer</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Google API Keys ##" />
+<meta name="author" content="Alexander Bisset" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Analyse, explore and improve your family tree. Find errors, research census records, visualise ancestors on maps — free Windows app and browser-based web app." />
+<meta property="og:description" content="Analyse, explore and improve your family tree. Find errors, research census records, visualise ancestors on maps — free Windows app and browser-based web app." />
+<link rel="canonical" href="http://0.0.0.0:4000/GoogleAPI.html" />
+<meta property="og:url" content="http://0.0.0.0:4000/GoogleAPI.html" />
+<meta property="og:site_name" content="Family Tree Analyzer" />
+<meta property="og:image" content="http://0.0.0.0:4000/FacebookLogo.png" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://0.0.0.0:4000/FacebookLogo.png" />
+<meta property="twitter:title" content="Google API Keys ##" />
+<meta name="twitter:site" content="@ftanalyzer" />
+<meta name="twitter:creator" content="@Alexander Bisset" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Alexander Bisset"},"description":"Analyse, explore and improve your family tree. Find errors, research census records, visualise ancestors on maps — free Windows app and browser-based web app.","headline":"Google API Keys ##","image":"http://0.0.0.0:4000/FacebookLogo.png","url":"http://0.0.0.0:4000/GoogleAPI.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <meta name="description" content="Analyse, explore and improve your family tree. Find errors, research census records, visualise ancestors on maps — free Windows app and browser-based web app.">
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#364F29">
+    <meta name="msapplication-TileColor" content="#364F29">
+    <meta name="theme-color" content="#364F29">
+
+    <style>
+        body { background: url(/background-image.png) no-repeat center fixed; background-size: cover; }
+    </style>
+</head>
+<body>
+
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <a class="nav-brand" href="/">FTAnalyzer</a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/Documentation">Documentation</a></li>
+                <li><a href="/guides">PDF Guides</a></li>
+                <li><a href="/releases">Releases</a></li>
+                <li><a href="https://app.ftanalyzer.com" class="nav-webapp" target="_blank" rel="noopener">Web App ↗</a></li>
+                <li><a href="https://github.com/ShammyLevva/FTAnalyzer" target="_blank" rel="noopener">GitHub</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.getElementById('nav-links').classList.toggle('open')">&#9776;</button>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <header>
+            <h1 class="title">Family Tree Analyzer</h1>
+            <p class="tagline">Analyse, explore and improve your family tree. Find errors, research census records, visualise ancestors on maps — free Windows app and browser-based web app.</p>
+        </header>
+
+        <div id="container">
+            <div id="main" role="main">
+                <article class="markdown-body">
+                    <h2 id="google-api-keys">Google API Keys</h2>
+<h3 id="background-information">Background Information</h3>
+<p>In order to geocode your locations and turn them into Latitude and Longitudes for display on a map FTAnalyzer needs to lookup the Google Maps website and use what is called an API to get the coordinates.</p>
+
+<p>In July 2018 Google changed their pricing mechanism from a largely free setup to one that costs $5/1000 lookups. With the first 40,000 lookups a month free. 
+For FTAnalyzer this means that if the sum total of every user in the world’s lookups exceeds 40,000 in a month then I am charged $5/1000 lookups over 40,000.</p>
+
+<p>In December 2018 the total usage reached 60,127 lookups and so I was charged for the 20,127 lookups over the 40,000 which cost me $100.64 naturally for a free product I cannot sustain this sort of cost or higher per month. So I have been forced to setup more restrictive daily caps to ensure I don’t exceed the monthly limit of 40,000 lookups and thus have to pay.</p>
+
+<p>This makes FTAnalyzer less usable as all the users are sharing that one lower limit per day. So I decided to add a feature that allows users to add their own Google API Key.</p>
+
+<p>A Google API Key is entirely free to create and private to you. You will never pay for it unless you were to do more than 10,000 lookups in any one month and their website tracks your usage so you can always see how close to the limit you are.</p>
+
+<h3 id="creating-your-own-google-api-key">Creating your own Google API Key</h3>
+<p>1) Visit the <a href="https://cloud.google.com/console/google/maps-apis/overview">Google API Key website</a> and login with your existing Google account if you have one, or create a new one.<br />
+   <img src="https://www.ftanalyzer.com/GoogleAPI-1.png" alt="Example Screen when logged in" /> 
+2) Click to create a new Project<br />
+   <img src="https://www.ftanalyzer.com/GoogleAPI-2.png" alt="Creating a Project" /><br />
+3) Search for Geocoding API and click to view it
+   <img src="https://www.ftanalyzer.com/GoogleAPI-3.png" alt="Searching for Geocoding API" /> <br />
+4) Enable Geocoding API (sometimes it gets stuck at this stage if it hasn’t refreshed after about 30 seconds click your browser refresh button)<br />
+   <img src="https://www.ftanalyzer.com/GoogleAPI-4.png" alt="Enable Google API" /><br />
+5) Get your API Key for FTAnalyzer
+   a) Click on APIs then click on details on the right<br />
+   <img src="https://www.ftanalyzer.com/GoogleAPI-5a.png" alt="APIs" /><br />
+   b) then click on credentials<br />
+   <img src="https://www.ftanalyzer.com/GoogleAPI-5b.png" alt="credentials" /><br />
+   c) then click create credentials <br />
+   <img src="https://www.ftanalyzer.com/GoogleAPI-5c.png" alt="create credentials" /><br />
+   d) and select API Key<br />
+   <img src="https://www.ftanalyzer.com/GoogleAPI-5d.png" alt="select API key" /><br />
+   e) once your key is displayed click close or you can click to restrict your key to just geocoding <br />
+   <img src="https://www.ftanalyzer.com/GoogleAPI-5e.png" alt="created API" /><br />
+6) Now copy your API key from this page by clicking on button next to key<br />
+   <img src="https://www.ftanalyzer.com/GoogleAPI-6.png" alt="Copy Key" /><br />
+7) Open FTAnalyzer Tools Menu and select Options<br />
+    a) Select the Mapping tab<br />
+   <img src="https://www.ftanalyzer.com/GoogleAPI-8.png" alt="Mapping Tab" /><br />
+    b) Right click on the Google API box and paste in your key<br />
+    c) Click OK to save your key.<br />
+8) Now back on the website we need to setup billing<br />
+    - NB. billing will be zero if you stay under the 10,000 lookups a month but Google no longer allows you to use the lookups without setting up billing.<br />
+    <img src="https://www.ftanalyzer.com/GoogleAPI-11.png" alt="Mapping Tab" /><br />
+    a) Click to link a billing account<br />
+    <img src="https://www.ftanalyzer.com/GoogleAPI-11a.png" alt="Mapping Tab" /><br />
+    b) If you don’t have a billing account it will prompt you to create one<br />
+    <img src="https://www.ftanalyzer.com/GoogleAPI-11b.png" alt="Mapping Tab" /><br />
+9) Select your country and agree to terms and conditions<br />
+    <img src="https://www.ftanalyzer.com/GoogleAPI-12a.png" alt="Mapping Tab" /><br />
+10) Entry you billing information and save<br />
+    <img src="https://www.ftanalyzer.com/GoogleAPI-12b.png" alt="Mapping Tab" /></p>
+
+<p>Thats’s it once you start your free trial you are all set to use your own personal Google API limits and 10,000 lookups a month should be plenty for you.</p>
+
+<p>Note you can always check your usage by going to the <a href="https://console.cloud.google.com/google/maps-apis/overview">Google API dashboard</a> to make sure you never exceed the limit and thus always have totally free lookups.</p>
+
+<p>NB. Remember to keep your key private and don’t disclose it to anyone to ensure that no one else can use it.</p>
+
+                </article>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/Documentation">Documentation</a>
+                <a href="/guides">PDF Guides</a>
+                <a href="https://app.ftanalyzer.com" target="_blank" rel="noopener">Web App</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="https://www.facebook.com/FTAnalyzer" target="_blank" rel="noopener">Facebook Support</a>
+                <a href="https://www.facebook.com/groups/ftanalyzer" target="_blank" rel="noopener">User Group</a>
+                <a href="https://github.com/ShammyLevva/FTAnalyzer" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="footer-creds">
+                <small>&copy; Alexander Bisset &middot; Built with <a href="https://pages.github.com/">GitHub Pages</a></small>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>

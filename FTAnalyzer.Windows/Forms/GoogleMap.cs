@@ -356,7 +356,7 @@ namespace FTAnalyzer.Forms
         static GeoResponse MaxedOut()
         {
             string message = string.IsNullOrEmpty(MappingSettings.Default.GoogleAPI) ?
-                                "Google Geocoding timing out. Possibly exceeded max GeoLocations for today.\nConsider getting your own FREE Google API Key for 40,000 lookups a day. See Help Menu.\n" :
+                                "Google Geocoding timing out. Possibly exceeded max GeoLocations for today.\nConsider getting your own FREE Google API Key for 10,000 lookups a month. See Help Menu.\n" :
                                 "Max Google Timeout - Limit Exceeded.\n";
             OnWaitingForGoogle(message);
             GeoResponse response = new()

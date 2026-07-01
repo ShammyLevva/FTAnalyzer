@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+    <!-- Google tag (gtag.js) - Google Analytics GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DX4ZNSG3R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-9DX4ZNSG3R');
+    </script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Using A Custom Map in FT Analyzer | Family Tree Analyzer</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Using A Custom Map in FT Analyzer" />
+<meta name="author" content="Alexander Bisset" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Analyse, explore and improve your family tree. Find errors, research census records, visualise ancestors on maps — free Windows app and browser-based web app." />
+<meta property="og:description" content="Analyse, explore and improve your family tree. Find errors, research census records, visualise ancestors on maps — free Windows app and browser-based web app." />
+<link rel="canonical" href="http://0.0.0.0:4000/Adding%20Custom%20Maps.html" />
+<meta property="og:url" content="http://0.0.0.0:4000/Adding%20Custom%20Maps.html" />
+<meta property="og:site_name" content="Family Tree Analyzer" />
+<meta property="og:image" content="http://0.0.0.0:4000/FacebookLogo.png" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://0.0.0.0:4000/FacebookLogo.png" />
+<meta property="twitter:title" content="Using A Custom Map in FT Analyzer" />
+<meta name="twitter:site" content="@ftanalyzer" />
+<meta name="twitter:creator" content="@Alexander Bisset" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Alexander Bisset"},"description":"Analyse, explore and improve your family tree. Find errors, research census records, visualise ancestors on maps — free Windows app and browser-based web app.","headline":"Using A Custom Map in FT Analyzer","image":"http://0.0.0.0:4000/FacebookLogo.png","url":"http://0.0.0.0:4000/Adding%20Custom%20Maps.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <meta name="description" content="Analyse, explore and improve your family tree. Find errors, research census records, visualise ancestors on maps — free Windows app and browser-based web app.">
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#364F29">
+    <meta name="msapplication-TileColor" content="#364F29">
+    <meta name="theme-color" content="#364F29">
+
+    <style>
+        body { background: url(/background-image.png) no-repeat center fixed; background-size: cover; }
+    </style>
+</head>
+<body>
+
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <a class="nav-brand" href="/">FTAnalyzer</a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/Documentation">Documentation</a></li>
+                <li><a href="/guides">PDF Guides</a></li>
+                <li><a href="/releases">Releases</a></li>
+                <li><a href="https://app.ftanalyzer.com" class="nav-webapp" target="_blank" rel="noopener">Web App ↗</a></li>
+                <li><a href="https://github.com/ShammyLevva/FTAnalyzer" target="_blank" rel="noopener">GitHub</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.getElementById('nav-links').classList.toggle('open')">&#9776;</button>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <header>
+            <h1 class="title">Family Tree Analyzer</h1>
+            <p class="tagline">Analyse, explore and improve your family tree. Find errors, research census records, visualise ancestors on maps — free Windows app and browser-based web app.</p>
+        </header>
+
+        <div id="container">
+            <div id="main" role="main">
+                <article class="markdown-body">
+                    <h2 id="using-a-custom-map-in-ft-analyzer">Using A Custom Map in FT Analyzer</h2>
+<p>In order to use a custom map on the Edit Locations map you need to have the maps saved as “Georefererenced” TIFF files. This means a few conditions need to be satisfied:</p>
+<h1 id="the-file-must-be-a-tiff-format-graphic-file">the file must be a TIFF format graphic file</h1>
+<h1 id="the-file-cannot-be-a-pdf-or-any-other-type-of-file">the file cannot be a pdf or any other type of file</h1>
+<h1 id="the-file-must-contain-information-that-tells-the-program-where-to-display-the-map-georeference-info">the file must contain information that tells the program where to display the map (georeference info)</h1>
+<h1 id="the-files-to-display-must-all-be-in-the-same-directory">the files to display must all be in the same directory</h1>
+<p>It is unlikely that any scanned map you have has the extra info that tells Family Tree Analyzer how to display it on screen. Basically the file needs to know how a point on the scanned map file relates to a point in the real world. If you do have georeferenced files all you need to do is to tell FT Analyzer where the files are in the Tools | options menu under Mapping Settings. The program will then load then when you click on the show custom map overlay button.</p>
+
+<p>If you have a scanned map file you can add georeference info yourself although it takes a bit of patience and needs a free program.</p>
+
+<p><strong>The basic steps are:</strong></p>
+<h1 id="load-your-map-into-a-gis-program">load your map into a GIS program</h1>
+<h1 id="load-a-reference-background-map---eg-google-maps">load a reference background map - eg: Google Maps</h1>
+<h1 id="mark-5-or-6-points-on-your-scanned-map-then-link-them-to-the-identical-point-on-the-reference-map">mark 5 or 6 points on your scanned map then link them to the identical point on the reference map</h1>
+<h1 id="run-the-georeferencer">run the georeferencer</h1>
+<h1 id="save-the-file-including-the-georeferenced-info">save the file including the georeferenced info</h1>
+
+<p><strong>The Detailed Steps</strong></p>
+<h1 id="download-qgis-from-httpswwwqgisorgensiteforusersdownloadhtml">Download QGIS from <a href="https://www.qgis.org/en/site/forusers/download.html">https://www.qgis.org/en/site/forusers/download.html</a></h1>
+<h1 id="install-openlayers-plugin">Install OpenLayers Plugin</h1>
+<h2 id="click-plugins-menu-and-select-manage-and-install-plugins">Click Plugins Menu and select Manage and Install Plugins</h2>
+<h2 id="select-get-more-and-scroll-down-to-select-open-layers-plugin">Select Get More and scroll down to select Open Layers Plugin</h2>
+<h1 id="once-open-layers-plugin-is-installed-then-load-the-background-layer-of-choice">Once Open Layers plugin is installed then load the background layer of choice</h1>
+<h2 id="click-plugins-menu-and-select-open-layers-plugin">Click Plugins Menu and select Open Layers plugin</h2>
+<h2 id="select-a-background-layer-eg-select-add-google-physical-layer">Select a background layer eg: select Add Google Physical Layer</h2>
+<h1 id="now-prepare-your-scanned-map">Now prepare your scanned map</h1>
+<h2 id="take-the-scanned-map-and-using-a-graphics-program-trim-the-margins-to-remove-borders-grid-numbers-legends-etc-suitable-graphics-programs-are">take the scanned map and using a graphics program trim the margins to remove borders, grid numbers, legends etc. Suitable graphics programs are:</h2>
+<h3 id="paintnet-httpsgetpaintnet">Paint.Net <a href="https://getpaint.net/">https://getpaint.net/</a></h3>
+<h3 id="imagemagick-httpswwwimagemagickorgscriptindexphp">ImageMagick <a href="https://www.imagemagick.org/script/index.php">https://www.imagemagick.org/script/index.php</a></h3>
+<h3 id="irfanview-httpswwwirfanviewcom">Irfanview <a href="https://www.irfanview.com/">https://www.irfanview.com/</a></h3>
+<h3 id="gimp-httpswwwgimporg">GIMP <a href="https://www.gimp.org/">https://www.gimp.org/</a></h3>
+<h2 id="save-the-trimmed-map-as-a-tiff-file-this-is-vital-it-cannot-be-a-jpg-file-or-other-graphic-format">Save the trimmed map as a TIFF file this is vital it cannot be a JPG file or other graphic format.</h2>
+<h1 id="now-load-the-trimmed-map-into-qgis">Now load the trimmed map into QGIS</h1>
+<h2 id="click-raster-menu-and-georeferencer-in-the-georeferencer-popout---the-georeferencer-window-should-open">Click Raster Menu and Georeferencer in the Georeferencer popout - The Georeferencer window should open</h2>
+<h2 id="click-file-and-open-raster-then-browse-to-find-your-prepared-scanned-map-and-click-to-open-it">Click File and Open Raster then browse to find your prepared scanned map and click to open it</h2>
+<h2 id="in-the-coordinate-reference-system-dialog-we-need-to-choose-the-right-map-system">In the Coordinate Reference System dialog we need to choose the right map system</h2>
+<h3 id="in-the-filter-box-of-the-dialog-type-3857-this-will-reduce-the-list-in-the-lower-pane-to-the-item-you-want">In the filter box of the dialog type 3857 this will reduce the list in the lower pane to the item you want</h3>
+<h3 id="in-the-lower-pane-select-wgs-84--pseudo-mercator-and-click-ok-to-load-the-scanned-map">In the lower pane select WGS 84 / Pseudo Mercator and click OK to load the scanned map</h3>
+<h1 id="you-should-now-have-two-windows-open-one-with-the-background-map-and-one-with-the-scanned-map">You should now have two windows open one with the background map and one with the scanned map</h1>
+<h1 id="now-we-begin-the-process-of-mapping-points-on-the-scanned-map-to-points-on-the-reference-map">Now we begin the process of mapping points on the scanned map to points on the reference map.</h1>
+<p><strong>What is the Georeferencing Process</strong>
+The idea is that with several points, at least 5 or 6, mapped showing the exact point on one map that is the same as on the other map then the program can work out how to rotate and stretch the scanned map to fit the real map. For best results spread the points selected across the map eg: near the four corners and the centre, but not too regular - ie: try to avoid points with similar horizontal or vertical co-ordinates. You are trying to get a spread across various points so two similar horizontal points in a row isn’t giving that variation.</p>
+
+<p>NB. Choose points on your historic scanned map that will not have moved and are very easy to work out where they are on a modern map.</p>
+
+<p>You are trying to be pixel perfect in placing the points and selecting points on a modern map. The more accurate you are the more accurately the scanned map will line up with a modern map when the process is finished. So it pays to spend time doing more points and precisely placing them.</p>
+
+<p>NB. This is a one off process once you have Georeferenced the map once and saved the result you need never touch it again. It will always then load and overlay on top of a modern map.</p>
+
+<p><strong>The Georeferencing Process</strong> (aka placing the points)
+For each point you place follow this procedure</p>
+<h1 id="zoom-in-on-your-map-to-as-much-detail-as-you-can-and-find-a-recognisable-point-that-wont-have-changed-in-the-years-between-the-maps">Zoom in on your map to as much detail as you can and find a recognisable point that won’t have changed in the years between the maps</h1>
+<h2 id="triangulation-points-at-the-top-of-hills-are-great-for-this">Triangulation points at the top of hills are great for this</h2>
+<h2 id="buildingsroads-arent-great-as-exactly-where-the-line-is-may-have-changed">buildings/roads aren’t great as exactly where the line is may have changed,</h2>
+<h2 id="rivers-etc-are-really-bad-as-the-course-of-the-river-will-have-changed">rivers etc are really bad as the course of the river will have changed.</h2>
+<h2 id="rocky-coastlines-that-havent-eroded-can-be-good-too-if-its-really-easy-to-pick-a-particular-point">Rocky coastlines that haven’t eroded can be good too if its really easy to pick a particular point.</h2>
+<h2 id="ideal-points-are-gridlines-on-a-map-if-and-only-if-the-lines-refer-to-exactly-the-same-thing-you-can-then-pick-a-crosshair-and-know-that-it-exactly-maps-to-the-crosshair-on-the-other-map">Ideal points are gridlines on a map IF and ONLY IF the lines refer to exactly the same thing. You can then pick a crosshair and know that it exactly maps to the crosshair on the other map</h2>
+<h1 id="click-the-add-point-button-on-georeferencer-window-the-one-with-your-scanned-map-its-the-7th-button-along-a-gray-line-with-white-crosshair-and-little-yellow-star-beneath-it-a-window-pops-up">Click the add point button on Georeferencer window (the one with your scanned map) its the 7th button along a gray line with white crosshair and little yellow star beneath it. A window pops up.</h1>
+<h1 id="now-click-on-the-from-map-canvass-button-to-go-back-to-your-modern-map-layer-in-the-other-window">Now click on the from map canvass button to go back to your modern map layer in the other window</h1>
+<h1 id="find-exactly-the-same-point-on-the-modern-map-note-you-may-have-to-retry-this-a-few-times-before-you-get-the-two-maps-showing-the-same-area">Find exactly the same point on the modern map (Note you may have to retry this a few times before you get the two maps showing the same area)</h1>
+<h1 id="once-you-click-the-exact-spot-on-the-modern-map-that-was-the-same-as-the-pixel-on-the-old-map-then-it-will-load-the-co-ordinates-into-the-window">Once you click the exact spot on the modern map that was the same as the pixel on the old map then it will load the co-ordinates into the window.</h1>
+<h1 id="click-ok-to-save-that-point-a-little-red-dot-will-appear-on-the-old-map-and-a-line-will-appear-in-the-grid-below-it">Click OK to save that point a little red dot will appear on the old map and a line will appear in the grid below it</h1>
+
+<p>Repeat the above for at least 5 or 6 points. The more points you enter and the more accurate you are the better the results of the Georeferencing process.</p>
+
+<p>Once you have entered enough points you are ready to create your file.</p>
+<h1 id="first-we-backup-the-points-click-file-and-save-gcp-points-this-is-so-that-the-work-you-did-isnt-lost-if-you-dont-like-the-result-you-can-try-more-points-or-delete-some-bad-ones-and-add-better-ones">First we backup the points. Click File and Save GCP Points this is so that the work you did isn’t lost if you don’t like the result you can try more points or delete some bad ones and add better ones</h1>
+<h1 id="now-we-start-the-georeferencer-by-clicking-file-menu-and-selecting-start-georeferencing-note-if-this-is-the-first-time-you-have-done-this-it-will-warn-about-a-transformation-type-and-bring-up-a-transformations-settings-dialog">Now we start the Georeferencer by clicking File Menu and selecting Start Georeferencing. Note if this is the first time you have done this it will warn about a “transformation type” and bring up a transformations settings dialog.</h1>
+<h1 id="all-you-need-to-enter-here-is-the-path-and-filename-of-the-file-to-save-click-the-button-to-the-right-of-the-output-raster-box-and-select-a-path-and-filename-by-default-it-will-be-called-the-same-as-your-input-file-with--modified-stuck-on-the-end">All you need to enter here is the path and filename of the file to save click the button to the right of the output raster box and select a path and filename by default it will be called the same as your input file with -modified stuck on the end.</h1>
+<h1 id="check-that-the-target-srs-setting-is-epsg3857">Check that the “target SRS” setting is “EPSG:3857”</h1>
+<h1 id="you-will-want-to-see-the-result-so-make-sure-the-load-in-qgis-when-done-box-is-ticked">You will want to see the result so make sure the “Load in QGIS when done” box is ticked</h1>
+<h1 id="click-ok-to-generate-the-georeferenced-map">Click ok to generate the georeferenced map</h1>
+
+<p>The program will create the map and show the result in the layers panel of the original form. To see how well its done you want to set the new map to be somewhat transparent.</p>
+
+<h1 id="right-click-on-the-new-layer-and-select-properties">Right Click on the new layer and select properties</h1>
+<h1 id="select-the-transparency-option-and-move-the-global-transparency-slider-to-say-50-this-will-let-you-see-a-lot-of-the-background-map-nb-the-new-layer-must-be-listed-higher-in-the-layers-list-than-the-background-if-not-it-will-be-hidden-behind-the-background">Select the transparency option and move the Global transparency slider to say 50% this will let you see a lot of the background map (NB. the new layer must be listed higher in the layers list than the background if not it will be hidden behind the background)</h1>
+
+<p>If all is well and you’ve been careful to pick the points correctly you should see your new map overlaid pretty much exactly over the top of the modern map.</p>
+
+<p>All you now need is to put the modified tiff files in a directory and in FT Analyzer from the Tools Options menu select Mapping Settings and select the custom maps directory to be the directory the new modified tiff files are saved into. NB. Keep the raw non-referenced files in a different directory otherwise FT Analyzer will try and fail to load these non-referenced files.</p>
+
+<p>Now you can see your map when in Edit Locations. If you click on the little map scroll icon in the toolbar it will load your map at the right location over the top of the modern map. NB. Transparency isn’t currently supported in FT Analyzer.</p>
+
+                </article>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/Documentation">Documentation</a>
+                <a href="/guides">PDF Guides</a>
+                <a href="https://app.ftanalyzer.com" target="_blank" rel="noopener">Web App</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="https://www.facebook.com/FTAnalyzer" target="_blank" rel="noopener">Facebook Support</a>
+                <a href="https://www.facebook.com/groups/ftanalyzer" target="_blank" rel="noopener">User Group</a>
+                <a href="https://github.com/ShammyLevva/FTAnalyzer" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="footer-creds">
+                <small>&copy; Alexander Bisset &middot; Built with <a href="https://pages.github.com/">GitHub Pages</a></small>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>

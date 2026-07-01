@@ -1,0 +1,262 @@
+/* ============================================
+   FTAnalyzer — custom CSS
+   Overrides jekyll-theme-time-machine
+   ============================================ */
+
+:root {
+  --green:       #364F29;
+  --green-light: #4a6e38;
+  --gold:        #C8A85A;
+  --gold-light:  #e8d4a0;
+  --bg-content:  rgba(255, 255, 255, 0.96);
+}
+
+/* ── Navigation ── */
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--green);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+}
+
+.nav-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.nav-brand {
+  color: var(--gold-light) !important;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none !important;
+  padding: 0.8rem 1rem 0.8rem 0;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+}
+
+.nav-links li a {
+  display: block;
+  color: rgba(255,255,255,0.88) !important;
+  text-decoration: none !important;
+  padding: 0.8rem 0.75rem;
+  font-size: 0.88rem;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.nav-links li a:hover {
+  background: var(--green-light);
+  color: #fff !important;
+}
+
+.nav-webapp {
+  background: var(--gold) !important;
+  color: #1a1a1a !important;
+  font-weight: 600;
+  border-radius: 4px;
+  margin: 0.45rem 0 0.45rem 0.5rem !important;
+  padding: 0.35rem 0.8rem !important;
+}
+
+.nav-webapp:hover {
+  background: var(--gold-light) !important;
+  color: #111 !important;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-left: auto;
+  padding: 0.5rem 0.75rem;
+  line-height: 1;
+}
+
+/* ── Wrapper / layout ── */
+
+.wrapper {
+  background: var(--bg-content);
+  max-width: 980px;
+  margin: 1.5rem auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.28);
+  overflow: hidden;
+}
+
+/* ── Header ── */
+
+header {
+  background: var(--green) !important;
+  padding: 2rem 2rem 1.5rem !important;
+  border-radius: 0 !important;
+  border-bottom: 3px solid var(--gold) !important;
+}
+
+header h1.title,
+header .title {
+  color: var(--gold-light) !important;
+  font-size: 2rem !important;
+  margin: 0 0 0.5rem !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+header p.tagline,
+header .tagline {
+  color: rgba(255,255,255,0.82) !important;
+  font-size: 0.92rem !important;
+  line-height: 1.55 !important;
+  margin: 0 !important;
+  max-width: 720px;
+}
+
+/* ── Main content ── */
+
+#container { padding: 0 !important; }
+
+#main {
+  padding: 1.75rem 2.25rem 2.5rem !important;
+}
+
+/* ── Markdown typography ── */
+
+.markdown-body h1 { color: var(--green); }
+.markdown-body h2 { color: var(--green); border-bottom: 2px solid var(--gold-light); padding-bottom: 0.3rem; margin-top: 1.8rem; }
+.markdown-body h3 { color: var(--green-light); }
+.markdown-body h4 { color: var(--green-light); }
+.markdown-body a  { color: var(--green-light); }
+.markdown-body a:hover { color: var(--green); text-decoration: underline; }
+.markdown-body hr { border-color: var(--gold-light); margin: 1.75rem 0; }
+
+/* ── CTA buttons (used in index.md via inline HTML) ── */
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1.5rem 0 1.75rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.72rem 1.5rem;
+  border-radius: 5px;
+  text-decoration: none !important;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.3;
+  transition: opacity 0.18s, box-shadow 0.18s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+}
+
+.btn:hover { opacity: 0.88; box-shadow: 0 4px 10px rgba(0,0,0,0.22); }
+
+.btn-primary {
+  background: var(--green);
+  color: #fff !important;
+}
+
+.btn-secondary {
+  background: var(--gold);
+  color: #1a1a1a !important;
+}
+
+/* ── Web app callout box ── */
+
+.web-app-callout {
+  background: linear-gradient(135deg, #eef6e8, #e2f0d9);
+  border-left: 4px solid var(--green);
+  border-radius: 0 6px 6px 0;
+  padding: 1.25rem 1.6rem;
+  margin: 1.75rem 0;
+}
+
+.web-app-callout h3 {
+  color: var(--green) !important;
+  margin-top: 0 !important;
+}
+
+.web-app-callout blockquote {
+  border-left: 3px solid var(--gold);
+  background: rgba(200,168,90,0.12);
+  margin: 1rem 0 0;
+  padding: 0.6rem 1rem;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.9rem;
+}
+
+/* ── Footer ── */
+
+footer {
+  background: var(--green) !important;
+  border-top: 3px solid var(--gold) !important;
+  padding: 1.25rem 2.25rem !important;
+  border-radius: 0 !important;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin-bottom: 0.7rem;
+}
+
+.footer-links a {
+  color: rgba(255,255,255,0.82) !important;
+  text-decoration: none !important;
+  font-size: 0.85rem;
+  transition: color 0.15s;
+}
+
+.footer-links a:hover {
+  color: var(--gold-light) !important;
+}
+
+.footer-creds {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.48);
+}
+
+.footer-creds a {
+  color: rgba(255,255,255,0.55) !important;
+}
+
+/* Hide old theme elements we've replaced */
+.download-bar { display: none !important; }
+.current-section { display: none !important; }
+.owner { display: none !important; }
+.creds { display: none !important; }
+
+/* ── Mobile responsive ── */
+
+@media (max-width: 660px) {
+  .nav-toggle { display: block; }
+  .nav-links { display: none; flex-direction: column; width: 100%; }
+  .nav-links.open { display: flex; }
+  .nav-links li a { padding: 0.65rem 1rem; border-top: 1px solid rgba(255,255,255,0.1); }
+  .nav-webapp { margin: 0.5rem 1rem !important; border-radius: 4px; }
+
+  .wrapper { margin: 0; border-radius: 0; }
+  header { padding: 1.25rem 1rem 1rem !important; }
+  header h1.title { font-size: 1.5rem !important; }
+  #main { padding: 1rem !important; }
+  footer { padding: 1rem !important; }
+
+  .cta-buttons { flex-direction: column; }
+  .btn { text-align: center; }
+}

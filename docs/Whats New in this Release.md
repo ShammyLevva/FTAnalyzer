@@ -1603,7 +1603,7 @@ OS Geocoding also now uses Fuzzy search and identifies matches with OS Fuzzy sea
 This major release introduces a significant new feature the ability to search the UK Ordnance Survey 50k Gazetteer for small placenames that often don't appear on a modern Google Map. This means significant numbers of locations that were previously not found by Google Geocoding will now be found by using OS Geocoding.  
 In addition I've added support for loading the Scottish 1930 Parish boundary maps, whilst slightly different from the parish boundaries in use in the 1800s that are familiar to family historians most rural areas have almost the same if not identical boundaries in the 1800s as is in the 1930s Parish boundary set. The major variances is in the cities where several smaller parishes are amalgamated into one large parish ie: Glasgow has one large city centre parish rather than several smaller ones.  
 Being able to see your Scottish Ancestor's Locations plotted on a map complete with parish boundaries makes it easier to see how close they were to other neighbouring parishes.  
-NB. To use this feature you need the separate [https://ftanalyzer.codeplex.com/releases/view/115135](https://ftanalyzer.codeplex.com/releases/view/115135)Scottish Parish Boundary file[/url](http://ftanalyzer.codeplex.com/wikipage?title=/url). Simply download it and unzip it into the folder you selected from the Tools | Mapping Options form.  
+NB. To use this feature you need the separate [Scottish Parish Boundary file](https://www.ftanalyzer.com/Displaying%20British%20Parish%20Boundaries). Simply download it and unzip it into the folder you selected from the Tools | Mapping Options form.  
 **New Features**  
 Scottish 1930 Parish Boundary maps are now supported  
 OS Open Data 50k Gazetteer can now be used to lookup placenames  
@@ -2074,8 +2074,8 @@ If a file encounters too many errors and user says to quit it will now fail grac
 
 **Major Features**  
 Added Lifelines map - shows where ancestors lived with lines for how they moved over time. Allows selection of one or more individuals  
-Added ability to display custom maps - [see documentation for details](https://ftanalyzer.codeplex.com/wikipage?title=Adding%20Custom%20Maps)  
-Added ability to display English & Welsh parish boundaries on a map - [see documentation for details](http://ftanalyzer.codeplex.com/wikipage?title=Displaying%20England%20and%20Wales%20Parish%20Boundaries)  
+Added ability to display custom maps - [see documentation for details](https://www.ftanalyzer.com/Adding%20Custom%20Maps)  
+Added ability to display English & Welsh parish boundaries on a map - [see documentation for details](https://www.ftanalyzer.com/Displaying%20British%20Parish%20Boundaries)  
 Added Facts Report this shows all facts recorded in your database for all individuals  
 **Lifelines Map**  
 Shows lists of people and where they move in time  

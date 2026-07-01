@@ -4,7 +4,7 @@ Unlike many Family Tree programs, FTL doesn't appear to have an easy way of addi
 
 However it does understand custom facts that are in GEDCOM files so there is a way we can create custom Lost Cousins Facts in your FTL tree.
 
-* First download the [FTL_LostCousins GEDCOM file](http://download-codeplex.sec.s-msft.com/Download?ProjectName=ftanalyzer&DownloadId=761395). 
+* First download the [FTL_LostCousins GEDCOM file](/guides/Family%20Tree%20Legends_FTL_LostCousins.GED). 
 * Now open your file in FTL
 * From the file menu in FTL select "Import from GEDCOM/FTW"
 * Ensure the option "I have already created a GEDCOM file" is selected and click next on the import wizard

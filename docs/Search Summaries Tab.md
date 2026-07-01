@@ -81,7 +81,7 @@
 <p>The report should make it easy at a glance to see who you have entered but not yet found on a census and who has been found but not yet tagged as entered onto Lost Cousins website.</p>
 <p>In the example below on the 2nd line, you can see that censuses for 1881 through to 1911 have been entered, but a Lost Cousins Fact has not been recorded for 1881 and therefore shows as yellow.&nbsp; The green box for 1911 however means that the census data
  and a Lost Cousins Fact has been entered.</p>
-<p><a href="http://download-codeplex.sec.s-msft.com/Download?ProjectName=ftanalyzer&DownloadId=712107"><img title="Lost Cousins" src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=ftanalyzer&DownloadId=712108" alt="Lost Cousins" width="726" height="197" border="0"></a></p>
+<p><img title="Lost Cousins" src="The Lost Cousins Tab_Lost Cousins_2.jpg" alt="Lost Cousins" style="max-width:100%"></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 </div><div class="ClearBoth"></div>
