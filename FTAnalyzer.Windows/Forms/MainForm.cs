@@ -192,6 +192,7 @@ namespace FTAnalyzer
             Width = Math.Min(pictureBox1.Right + 100, Screen.GetWorkingArea(new Point(0, 0)).Width);
             splitGedcom.SplitterDistance = Math.Max(pbRelationships.Bottom + 18, 110);
             splitGedcom.Refresh();
+            ResizeTabHeaders();
             menuStrip1.Font = normalFont;
             rtbOutput.Font = normalFont;
             rtbToday.Font = normalFont;
@@ -223,6 +224,20 @@ namespace FTAnalyzer
             nudToday.Left = labTodayYearStep.Right + 8;
             pbToday.Left = labTodayLoadWorldEvents.Right + 8;
             Refresh();
+        }
+
+        void ResizeTabHeaders()
+        {
+            // tabSelector uses TabDrawMode.OwnerDrawFixed, which gives every tab the same fixed
+            // ItemSize - unlike TabSizeMode.Normal, that size is never recalculated automatically
+            // when the control's Font changes later, so at larger font levels tab text was clipped
+            // inside a box still sized for the small default font.
+            using System.Drawing.Graphics g = tabSelector.CreateGraphics();
+            float maxTextWidth = 0;
+            foreach (TabPage page in tabSelector.TabPages)
+                maxTextWidth = Math.Max(maxTextWidth, g.MeasureString(page.Text, tabSelector.Font).Width);
+            int tabHeight = (int)Math.Ceiling(tabSelector.Font.GetHeight(g)) + 10;
+            tabSelector.ItemSize = new Size((int)Math.Ceiling(maxTextWidth) + 16, tabHeight);
         }
 
         void SetStatusBar()
