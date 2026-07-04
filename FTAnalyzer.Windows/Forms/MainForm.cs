@@ -2162,7 +2162,11 @@ namespace FTAnalyzer
         #endregion
 
         #region ToolStrip Clicks
-        void AboutToolStripMenuItem_Click(object sender, EventArgs e) => UIHelpers.ShowMessage($"This is Family Tree Analyzer version {VERSION}", APPNAME);
+        void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using FTAnalyzer.Core.Displays.AboutBox1 aboutBox = new();
+            aboutBox.ShowDialog(this);
+        }
 
         void OptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
