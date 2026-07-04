@@ -44,6 +44,20 @@ namespace FTAnalyzer
         {
             loading = true;
             InitializeComponent();
+            ApplyTheme();
+        }
+
+        void ApplyTheme()
+        {
+            BackColor = Theme.Colors.BgParchment;
+            panel2.BackColor = Theme.Colors.BgParchment;
+            LbProgramName.ForeColor = Theme.Colors.GoldDark;
+            menuStrip1.BackColor = Theme.Colors.BgParchment;
+            menuStrip1.ForeColor = Theme.Colors.SecondaryCharcoalBark;
+            menuStrip1.Renderer = new ChromeToolStripRenderer();
+            statusStrip.BackColor = Theme.Colors.BgParchment;
+            statusStrip.ForeColor = Theme.Colors.SecondaryCharcoalBark;
+            statusStrip.Renderer = new ChromeToolStripRenderer();
         }
 
         async void MainForm_Load(object sender, EventArgs e)
