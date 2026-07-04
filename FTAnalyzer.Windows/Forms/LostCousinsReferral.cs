@@ -70,6 +70,6 @@ namespace FTAnalyzer.Forms
 
         void LostCousinsReferral_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        void LostCousinsReferral_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
+        void LostCousinsReferral_Load(object sender, EventArgs e) => FontScaler.Apply(this);
     }
 }

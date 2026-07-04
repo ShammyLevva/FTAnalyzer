@@ -440,7 +440,7 @@ namespace FTAnalyzer.Forms
 
         void ColourBMD_Load(object sender, EventArgs e)
         {
-            SpecialMethods.SetFonts(this);
+            FontScaler.Apply(this);
             toolStrip1.PerformLayout();
             SetColourColumnWidths();
         }

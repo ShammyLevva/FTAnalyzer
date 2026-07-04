@@ -91,6 +91,6 @@ namespace FTAnalyzer.Core.Displays
 
         void AboutBox1_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        void AboutBox1_Load(object sender, System.EventArgs e) => SpecialMethods.SetFonts(this);
+        void AboutBox1_Load(object sender, System.EventArgs e) => FontScaler.Apply(this);
     }
 }

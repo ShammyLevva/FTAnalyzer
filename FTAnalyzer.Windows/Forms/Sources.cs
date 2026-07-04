@@ -67,6 +67,6 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void Sources_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
+        void Sources_Load(object sender, EventArgs e) => FontScaler.Apply(this);
     }
 }

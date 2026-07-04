@@ -213,7 +213,7 @@ namespace FTAnalyzer.Forms
             this.Height = Height;
             this.Top = Top + NativeMethods.TopTaskbarOffset;
             this.Left = Left;
-            SpecialMethods.SetFonts(this);
+            FontScaler.Apply(this);
             labValue.Font = new Font(labValue.Font, FontStyle.Bold);
             RefreshMap();
             loading = false;

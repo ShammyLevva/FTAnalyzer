@@ -135,7 +135,7 @@ namespace FTAnalyzer
         {
             try
             {
-                SpecialMethods.SetFonts(this);
+                FontScaler.Apply(this);
                 byte[] fontData = Resources.KUNSTLER;
                 IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
                 System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);

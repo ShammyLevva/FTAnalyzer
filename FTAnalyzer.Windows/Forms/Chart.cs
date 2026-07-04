@@ -37,6 +37,6 @@ namespace FTAnalyzer.Forms
 
         void Chart_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        void Chart_Load(object sender, System.EventArgs e) => SpecialMethods.SetFonts(this);
+        void Chart_Load(object sender, System.EventArgs e) => FontScaler.Apply(this);
     }
 }

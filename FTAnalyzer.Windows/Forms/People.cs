@@ -602,6 +602,6 @@ namespace FTAnalyzer.Forms
         }
         void People_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        void People_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
+        void People_Load(object sender, EventArgs e) => FontScaler.Apply(this);
     }
 }

@@ -339,6 +339,6 @@ namespace FTAnalyzer.Forms
 
         void EditLocation_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        void EditLocation_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
+        void EditLocation_Load(object sender, EventArgs e) => FontScaler.Apply(this);
     }
 }

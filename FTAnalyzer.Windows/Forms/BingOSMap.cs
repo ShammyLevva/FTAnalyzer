@@ -104,6 +104,6 @@ namespace FTAnalyzer.Forms
             Dispose();
         }
 
-        void BingOSMap_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
+        void BingOSMap_Load(object sender, EventArgs e) => FontScaler.Apply(this);
     }
 }

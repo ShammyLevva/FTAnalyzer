@@ -158,6 +158,6 @@ namespace FTAnalyzer.Forms
             }
         }
 
-        void StatisticsForm_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
+        void StatisticsForm_Load(object sender, EventArgs e) => FontScaler.Apply(this);
     }
 }
