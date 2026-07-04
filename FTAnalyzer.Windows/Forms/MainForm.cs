@@ -257,6 +257,9 @@ namespace FTAnalyzer
             // treetopsCountry ("Default Country") stayed at its own design width - the two boxes ended
             // up overlapping. Chain treetopsRelation off treetopsCountry's actual rendered Right edge.
             treetopsRelation.Left = treetopsCountry.Right + groupBoxGap;
+            // World Wars tab: same overlap as Treetops, same fix - wardeadRelation grows wider at
+            // larger font levels but its Left was a fixed coordinate assuming wardeadCountry's design width.
+            wardeadRelation.Left = wardeadCountry.Right + groupBoxGap;
             SetStatusBar();
             CheckMaxWindowSizes(new Point(0, 0));
             // Lost Cousins tab: fix after PerformAutoScale. Link labels (originally Top|Right) drift left when
@@ -268,7 +271,17 @@ namespace FTAnalyzer
             Referrals.Top = btnLCnoCensus.Bottom + 8;
             gbFilters.Top = relTypesResearchSuggest.Top;
             gbFilters.Height = relTypesResearchSuggest.Height;
+            // On This Day tab: every control here (date picker, button, radio buttons, labels) was
+            // laid out at a fixed absolute Left position with no chaining at all, so the AutoSize
+            // labels/radio buttons growing wider at larger font levels crammed the whole row together.
+            // Only the last two links (nudToday/pbToday) were previously chained - fill in the rest.
+            dpToday.Left = labTodaySelectDate.Right + 8;
+            btnUpdateTodaysEvents.Left = dpToday.Right + 8;
+            rbTodaySingle.Left = btnUpdateTodaysEvents.Right + 8;
+            rbTodayMonth.Left = rbTodaySingle.Right + 8;
+            labTodayYearStep.Left = rbTodayMonth.Right + 8;
             nudToday.Left = labTodayYearStep.Right + 8;
+            labTodayLoadWorldEvents.Left = nudToday.Right + 8;
             pbToday.Left = labTodayLoadWorldEvents.Right + 8;
         }
 
