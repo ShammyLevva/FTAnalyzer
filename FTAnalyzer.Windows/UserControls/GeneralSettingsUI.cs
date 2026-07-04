@@ -4,6 +4,13 @@ namespace FTAnalyzer.UserControls
 {
     public partial class GeneralSettingsUI : UserControl, IOptions
     {
+        // Options.cs constructs every settings tab's UserControl via reflection when the Options
+        // dialog opens, regardless of which tab is actually shown, so this constructor always runs.
+        // Without this guard, assigning a saved true/non-default value below fires the matching
+        // CheckedChanged/ValueChanged handler and spuriously sets ReloadRequired - even if the user
+        // never touched this tab or changed anything (e.g. just changing the font level elsewhere).
+        readonly bool _loading = true;
+
         public GeneralSettingsUI()
         {
             InitializeComponent();
@@ -24,6 +31,7 @@ namespace FTAnalyzer.UserControls
             chkHideIgnoredDuplicates.Checked = GeneralSettings.Default.HideIgnoredDuplicates;
             chkIncludeAlternateFacts.Checked = GeneralSettings.Default.IncludeAlternateFacts;
             chkIncludeGenderAsFact.Checked = GeneralSettings.Default.IncludeGenderAsFact;
+            _loading = false;
         }
 
         #region IOptions Members
@@ -95,20 +103,20 @@ namespace FTAnalyzer.UserControls
         public static event EventHandler? AliasInNameChanged;
         protected static void OnAliasInNameChanged() => AliasInNameChanged?.Invoke(null, EventArgs.Empty);
 
-        void ChkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
+        void ChkAllowEmptyLocations_CheckedChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
 
-        void ChkReverseLocations_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
+        void ChkReverseLocations_CheckedChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
 
-        void ChkAddCreatedLocations_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
+        void ChkAddCreatedLocations_CheckedChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
 
-        void ChkTreatFemaleAsUnknown_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
+        void ChkTreatFemaleAsUnknown_CheckedChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
 
-        void ChkSkipFixingLocations_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
+        void ChkSkipFixingLocations_CheckedChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
 
-        void UpDownAge_ValueChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
+        void UpDownAge_ValueChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
 
-        void ChkIncludeAlternateFacts_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
+        void ChkIncludeAlternateFacts_CheckedChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
 
-        void ChkIncludeGenderAsFact_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
+        void ChkIncludeGenderAsFact_CheckedChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
     }
 }

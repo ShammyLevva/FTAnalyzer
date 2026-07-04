@@ -4,6 +4,13 @@ namespace FTAnalyzer.UserControls
 {
     public partial class CensusSettingsUI : UserControl, IOptions
     {
+        // Options.cs constructs every settings tab's UserControl via reflection when the Options
+        // dialog opens, regardless of which tab is actually shown, so this constructor always runs.
+        // Without this guard, assigning a saved true/non-default value below fires the matching
+        // CheckedChanged handler and spuriously sets ReloadRequired - even if the user never
+        // touched this tab or changed anything (e.g. just changing the font level elsewhere).
+        readonly bool _loading = true;
+
         public CensusSettingsUI()
         {
             InitializeComponent();
@@ -18,6 +25,7 @@ namespace FTAnalyzer.UserControls
             chkAddCreatedLocations.Checked = GeneralSettings.Default.AddCreatedLocations;
             chkSkipCensusReferences.Checked = GeneralSettings.Default.SkipCensusReferences;
             chkConvertResidenceFacts.Checked = GeneralSettings.Default.ConvertResidenceFacts;
+            _loading = false;
         }
 
         #region IOptions Members
@@ -79,18 +87,18 @@ namespace FTAnalyzer.UserControls
             CompactCensusRefChanged?.Invoke(null, EventArgs.Empty);
         }
 
-        void ChkTolerateInaccurateCensus_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
+        void ChkTolerateInaccurateCensus_CheckedChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
 
-        void ChkCensusResidence_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
+        void ChkCensusResidence_CheckedChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
 
-        void ChkConvertResidenceFact_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
+        void ChkConvertResidenceFact_CheckedChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
 
-        void ChkFamilyCensus_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
+        void ChkFamilyCensus_CheckedChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
 
-        void ChkAutoCreateCensus_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
+        void ChkAutoCreateCensus_CheckedChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
 
-        void ChkAddCreatedLocations_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
+        void ChkAddCreatedLocations_CheckedChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
 
-        void ChkSkipCensusReferences_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
+        void ChkSkipCensusReferences_CheckedChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
     }
 }
