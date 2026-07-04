@@ -190,7 +190,6 @@ namespace FTAnalyzer
             txtAliveDates.Top = labCensusAliveDates.Top + (labCensusAliveDates.Height - txtAliveDates.Height) / 2;
             btnAliveOnDate.Top = chkAnyCensusYear.Top;
             cenDate.Top = relTypesCensus.Bottom + 5;   // 5px gap below relTypesCensus
-            cenDate.RepositionControls();              // push cbCensusDate past grown label1 and resize for 14pt font
             groupBox10.Top = cenDate.Bottom + 7;       // preserve design gap (178−171 = 7px)
             groupBox4.Top = groupBox10.Bottom + 10;    // preserve design gap (261−251 = 10px)
             groupBox2.Height = groupBox4.Bottom + 10;  // shrink/grow groupBox2 to hold its content after font scaling

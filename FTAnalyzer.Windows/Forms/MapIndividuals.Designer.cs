@@ -334,7 +334,7 @@ namespace FTAnalyzer
             // MapIndividuals
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(1158, 447);
             Controls.Add(statusStrip);
             Controls.Add(dgIndividuals);

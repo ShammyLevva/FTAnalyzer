@@ -81,7 +81,7 @@ namespace FTAnalyzer.Forms
             // BingOSMap
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(1034, 584);
             Controls.Add(labTOU);
             Controls.Add(labMapLevel);

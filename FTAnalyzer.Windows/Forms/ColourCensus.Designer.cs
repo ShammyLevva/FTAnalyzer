@@ -821,7 +821,7 @@ namespace FTAnalyzer.Forms
             // ColourCensus
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(1211, 663);
             Controls.Add(dgReportSheet);
             Controls.Add(toolStrip1);
