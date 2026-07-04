@@ -187,6 +187,14 @@ namespace FTAnalyzer
             LbProgramName.Left = pbRelationships.Right + 15;
             LbProgramName.Font = handwritingFont;
             LbProgramName.Refresh();
+            // pictureBox1's original 117x106 design size was only ever sized for the smallest
+            // handwriting font level (46pt); it never grew with LbProgramName's much larger sizes
+            // at higher levels (up to 76pt), leaving the tree logo looking disproportionately small
+            // next to the banner text. Scale it to the label's height, preserving its aspect ratio.
+            const float designAspectRatio = 117f / 106f;
+            pictureBox1.Height = LbProgramName.Height;
+            pictureBox1.Width = (int)(pictureBox1.Height * designAspectRatio);
+            pictureBox1.Top = LbProgramName.Top + (LbProgramName.Height - pictureBox1.Height) / 2;
             pictureBox1.Left = LbProgramName.Right;
             pictureBox1.Refresh();
             Width = Math.Min(pictureBox1.Right + 100, Screen.GetWorkingArea(new Point(0, 0)).Width);
