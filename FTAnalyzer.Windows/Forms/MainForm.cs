@@ -200,17 +200,15 @@ namespace FTAnalyzer
             pbRelationships.Left = progressBarLeft;
             LbProgramName.Left = pbRelationships.Right + 15;
             LbProgramName.Font = handwritingFont;
-            // pictureBox1's source image (Resources._256) is a true 256x256 square, but its
-            // original design box was 117x106 (non-square) - with SizeMode.Zoom preserving the
-            // image's real aspect ratio, that always letterboxed it slightly even historically.
-            // Use a square box (driven by height, matching the image's actual aspect ratio) so it
-            // renders with zero wasted margin, scaled relative to level 1's 46pt as the baseline
-            // where height=106 reproduces the icon's original familiar size.
-            const float baselineHandwritingFontSize = 46f; // level 1's size - the historical, unscaled baseline
-            const int baselineHeight = 106;
-            float iconScale = handwritingFont.Size / baselineHandwritingFontSize;
-            pictureBox1.Height = (int)(baselineHeight * iconScale);
-            pictureBox1.Width = pictureBox1.Height;
+            // Fixed rule (regardless of any prior sizing behaviour): the tree logo is always the
+            // same height as the hero banner text, centred on it. pictureBox1's source image
+            // (Resources._256) is a true 256x256 square, so a square box (driven by height) renders
+            // it with zero wasted margin under SizeMode.Zoom. Clamp so a very wide banner at the
+            // largest font level can't push the icon (and the window) off the screen.
+            int maxIconSize = Math.Max(0, Screen.GetWorkingArea(new Point(0, 0)).Width - LbProgramName.Right - 100);
+            int iconSize = Math.Min(LbProgramName.Height, maxIconSize);
+            pictureBox1.Height = iconSize;
+            pictureBox1.Width = iconSize;
             pictureBox1.Top = LbProgramName.Top + (LbProgramName.Height - pictureBox1.Height) / 2;
             pictureBox1.Left = LbProgramName.Right;
             // Width was previously driven solely by the banner (pictureBox1.Right + 100), with no
