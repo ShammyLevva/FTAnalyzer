@@ -228,16 +228,18 @@ namespace FTAnalyzer
 
         void ResizeTabHeaders()
         {
-            // tabSelector uses TabDrawMode.OwnerDrawFixed, which gives every tab the same fixed
-            // ItemSize - unlike TabSizeMode.Normal, that size is never recalculated automatically
-            // when the control's Font changes later, so at larger font levels tab text was clipped
-            // inside a box still sized for the small default font.
+            // tabSelector never set SizeMode explicitly, so it defaulted to TabSizeMode.Normal -
+            // under which ItemSize is silently ignored and tab widths fall back to the native
+            // control's own auto-measurement, which came up short at larger font levels and clipped
+            // the last character or two of several tab titles. Force Fixed so our own generously
+            // padded ItemSize (based on the widest tab's actual text extent) is what's actually used.
+            tabSelector.SizeMode = TabSizeMode.Fixed;
             using System.Drawing.Graphics g = tabSelector.CreateGraphics();
             float maxTextWidth = 0;
             foreach (TabPage page in tabSelector.TabPages)
                 maxTextWidth = Math.Max(maxTextWidth, g.MeasureString(page.Text, tabSelector.Font).Width);
-            int tabHeight = (int)Math.Ceiling(tabSelector.Font.GetHeight(g)) + 10;
-            tabSelector.ItemSize = new Size((int)Math.Ceiling(maxTextWidth) + 16, tabHeight);
+            int tabHeight = (int)Math.Ceiling(tabSelector.Font.GetHeight(g)) + 12;
+            tabSelector.ItemSize = new Size((int)Math.Ceiling(maxTextWidth) + 24, tabHeight);
         }
 
         void SetStatusBar()
