@@ -252,6 +252,11 @@ namespace FTAnalyzer
             const int groupBoxGap = 15;
             groupBox6.Left = groupBox5.Right + groupBoxGap;
             groupBox11.Left = groupBox6.Right + groupBoxGap;
+            // Treetops tab: treetopsRelation ("Relationship Types") is AutoSize/GrowAndShrink, so it
+            // grows wider at larger font levels, but its Left was a fixed Designer coordinate assuming
+            // treetopsCountry ("Default Country") stayed at its own design width - the two boxes ended
+            // up overlapping. Chain treetopsRelation off treetopsCountry's actual rendered Right edge.
+            treetopsRelation.Left = treetopsCountry.Right + groupBoxGap;
             SetStatusBar();
             CheckMaxWindowSizes(new Point(0, 0));
             // Lost Cousins tab: fix after PerformAutoScale. Link labels (originally Top|Right) drift left when

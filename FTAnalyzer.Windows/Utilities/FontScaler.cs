@@ -44,6 +44,23 @@ namespace FTAnalyzer.Utilities
                 grid.ColumnHeadersDefaultCellStyle.Font = new(grid.ColumnHeadersDefaultCellStyle.Font?.FontFamily ?? grid.Font.FontFamily, level.FontSize, FontStyle.Bold);
                 grid.DefaultCellStyle.Font = new(grid.DefaultCellStyle.Font?.FontFamily ?? grid.Font.FontFamily, level.FontSize, grid.DefaultCellStyle.Font?.Style ?? FontStyle.Regular);
                 grid.RowTemplate.Height = level.FontHeight;
+                // Bold headers render wider than regular ones at the same point size, so a column
+                // width that fit a regular-weight header can now clip it. Widen (never shrink) each
+                // column just enough to fit its own header text, without touching cell-content-based
+                // widths a user may have already resized.
+                try
+                {
+                    foreach (DataGridViewColumn column in grid.Columns.Cast<DataGridViewColumn>())
+                    {
+                        int headerWidth = TextRenderer.MeasureText(column.HeaderText, grid.ColumnHeadersDefaultCellStyle.Font).Width + 24; // padding for the sort glyph/margins
+                        if (headerWidth > column.Width)
+                            column.Width = headerWidth;
+                    }
+                }
+                catch (Exception e)
+                {
+                    log.Error($"Error widening columns for '{grid.Name}'", e);
+                }
             }
         }
 
