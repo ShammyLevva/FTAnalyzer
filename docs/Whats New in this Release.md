@@ -1,9 +1,21 @@
 ## Version 10.3.0.0 - 5th July 2026
 **Updates**
-
+Rework fonts from ground up to fix a lot of positional issues when scaled
+Add in recognition of UK census patterns of form series/piece/folio/schedule
+re-write geolocation code to use Google Geolocate v4
+Google changed free tier so now runs out after 10k lookups a month
+As a result of free tier change default key is removed as it runs out on day 1
+Include gender fact from GEDCOM and user option to include or exclude
+Children Mismatch reworked now highlights if the children you have match 1911 census
+Cache display lists so don't recompute each tab switch
 
 **Bugfixes**
-
+Fix colour BMD sort copying red and bold formatting
+Fix ignore column of custom facts being unclickable
+Fixed race condition on LC Tab
+Fix loose births/deaths etc not updating status bar
+Fix background worker async bug
+Fix sources on name facts
 
 ## Version 10.2.0.0 - 21st June 2026
 **Updates**
