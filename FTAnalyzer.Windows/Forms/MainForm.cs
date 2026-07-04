@@ -2164,7 +2164,7 @@ namespace FTAnalyzer
         #region ToolStrip Clicks
         void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using FTAnalyzer.Core.Displays.AboutBox1 aboutBox = new();
+            using FTAnalyzer.Core.Displays.AboutBox1 aboutBox = new(VERSION, handwritingFont);
             aboutBox.ShowDialog(this);
         }
 
