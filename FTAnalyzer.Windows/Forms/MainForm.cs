@@ -2853,9 +2853,12 @@ namespace FTAnalyzer
                 Top = Math.Max(workarea.Top, workarea.Bottom - Height);
             if (Left + Width > workarea.Right)
                 Left = Math.Max(workarea.Left, workarea.Right - Width);
+            // Recompute unconditionally rather than shrink-only: this runs again on every live font
+            // change (not just once at form load, since PerformAutoScale doesn't re-run for that), so a
+            // shrink-only check left tabSelector permanently narrow after a larger-font pass clamped it,
+            // even once the window correctly resized back down on a later smaller-font pass.
             int boundaryWidth = rtbOutput.Margin.Left + tabSelector.Margin.Left + tabSelector.Margin.Right;
-            if (tabSelector.Left + tabSelector.Width + boundaryWidth > ClientSize.Width)
-                tabSelector.Width = ClientSize.Width - tabSelector.Left - boundaryWidth;
+            tabSelector.Width = ClientSize.Width - tabSelector.Left - boundaryWidth;
             tabSelector.Height = statusStrip.Top - tabSelector.Top - tabSelector.Margin.Bottom;
         }
         #endregion
