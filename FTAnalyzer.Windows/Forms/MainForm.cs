@@ -213,7 +213,15 @@ namespace FTAnalyzer
             pictureBox1.Width = pictureBox1.Height;
             pictureBox1.Top = LbProgramName.Top + (LbProgramName.Height - pictureBox1.Height) / 2;
             pictureBox1.Left = LbProgramName.Right;
-            Width = Math.Min(pictureBox1.Right + 100, Screen.GetWorkingArea(new Point(0, 0)).Width);
+            // Width was previously driven solely by the banner (pictureBox1.Right + 100), with no
+            // regard for whether that's actually wide enough for tab content laid out at fixed
+            // positions rather than anchored/reflowing - e.g. the Census tab's group boxes/buttons
+            // (designed up to X=1133) are simply clipped by a narrower window rather than resizing.
+            // Floor at the original design ClientSize.Width (1246) so tab content already laid out
+            // for that width is never clipped, regardless of how narrow the banner computes at a
+            // given font level.
+            const int minDesignWidth = 1246;
+            Width = Math.Min(Math.Max(pictureBox1.Right + 100, minDesignWidth), Screen.GetWorkingArea(new Point(0, 0)).Width);
             splitGedcom.SplitterDistance = Math.Max(pbRelationships.Bottom + 18, 110);
             ResizeTabHeaders();
             menuStrip1.Font = normalFont;
@@ -233,6 +241,15 @@ namespace FTAnalyzer
             groupBox4.Top = groupBox10.Bottom + 10;    // preserve design gap (261−251 = 10px)
             groupBox2.Height = groupBox4.Bottom + 10;  // shrink/grow groupBox2 to hold its content after font scaling
             groupBox9.Top = groupBox2.Bottom + 5;      // reposition groupBox9 below groupBox2 after font scaling
+            // groupBox5/groupBox6/groupBox11 ("1911 UK Census" / "Export Missing/Unrecognised data to
+            // File" / "Census Facts") were laid out at fixed absolute Left positions, spaced ~35px apart
+            // by design. That's a pre-existing gap this branch didn't introduce but is worth applying
+            // the same standard fix used elsewhere in this pass: chain each box off the previous one's
+            // actual rendered Right edge instead of a static Designer coordinate, so spacing stays
+            // correct regardless of AutoScaleMode-driven size/position drift at any font level.
+            const int groupBoxGap = 15;
+            groupBox6.Left = groupBox5.Right + groupBoxGap;
+            groupBox11.Left = groupBox6.Right + groupBoxGap;
             SetStatusBar();
             CheckMaxWindowSizes(new Point(0, 0));
             // Lost Cousins tab: fix after PerformAutoScale. Link labels (originally Top|Right) drift left when
