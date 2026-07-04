@@ -50,7 +50,7 @@ namespace FTAnalyzer
         {
             try
             {
-                SetupFonts();
+                ApplyFontsAndRelayout();
                 SetHeightWidth();
                 RegisterEventHandlers();
                 Text = $"Family Tree Analyzer v{VERSION}";
@@ -131,7 +131,9 @@ namespace FTAnalyzer
             }
         }
 
-        void SetupFonts()
+        // Called at startup and on GlobalFontChanged - applies scaled fonts then re-runs the
+        // full layout pass, since font size changes ripple into control positions/sizes.
+        void ApplyFontsAndRelayout()
         {
             try
             {
@@ -1283,7 +1285,7 @@ namespace FTAnalyzer
         void Options_GlobalFontChanged(object? sender, EventArgs e)
         {
             HourGlass(this, true);
-            SetupFonts();
+            ApplyFontsAndRelayout();
             HourGlass(this, false);
         }
         #endregion
