@@ -1189,13 +1189,13 @@ namespace FTAnalyzer
         #region EventHandlers
         async void Options_ReloadData(object? sender, EventArgs e) => await QueryReloadData();
 
-        void Options_MinimumParentalAgeChanged(object? sender, EventArgs e)
+        async void Options_MinimumParentalAgeChanged(object? sender, EventArgs e)
         {
             ft.ResetLooseFacts();
             if (tabSelector.SelectedTab == tabErrorsFixes && tabErrorFixSelector.SelectedTab?.Equals(tabLooseBirths) == true)
-                SetupLooseBirths();
+                await SetupLooseBirthsAsync();
             if (tabSelector.SelectedTab == tabErrorsFixes && tabErrorFixSelector.SelectedTab?.Equals(tabLooseDeaths) == true)
-                SetupLooseDeaths();
+                await SetupLooseDeathsAsync();
         }
 
         void Options_AliasInNameChanged(object? sender, EventArgs e) => ft.SetFullNames();
@@ -1687,7 +1687,7 @@ namespace FTAnalyzer
             else if (tabErrorFixSelector.SelectedTab == tabLooseBirths)
             {
                 if (((DataGridView)dgLooseBirths).DataSource is null)
-                    SetupLooseBirths();
+                    await SetupLooseBirthsAsync();
                 else
                 {
                     tsCountLabel.Text = Messages.Count + ((SortableBindingList<IDisplayLooseBirth>)((DataGridView)dgLooseBirths).DataSource).Count;
@@ -1700,7 +1700,7 @@ namespace FTAnalyzer
             else if (tabErrorFixSelector.SelectedTab == tabLooseDeaths)
             {
                 if (((DataGridView)dgLooseDeaths).DataSource is null)
-                    SetupLooseDeaths();
+                    await SetupLooseDeathsAsync();
                 else
                 {
                     tsCountLabel.Text = Messages.Count + ((SortableBindingList<IDisplayLooseDeath>)((DataGridView)dgLooseDeaths).DataSource).Count;
@@ -1713,7 +1713,7 @@ namespace FTAnalyzer
             else if (tabErrorFixSelector.SelectedTab == tabLooseInfo)
             {
                 if (((DataGridView)dgLooseInfo).DataSource is null)
-                    SetupLooseInfo();
+                    await SetupLooseInfoAsync();
                 else
                 {
                     tsCountLabel.Text = Messages.Count + ((SortableBindingList<IDisplayLooseInfo>)((DataGridView)dgLooseInfo).DataSource).Count;
@@ -3312,11 +3312,14 @@ namespace FTAnalyzer
         #endregion
 
         #region Loose Birth/Death Tabs
-        void SetupLooseBirths()
+        async Task SetupLooseBirthsAsync()
         {
             try
             {
-                SortableBindingList<IDisplayLooseBirth> looseBirthList = ft.LooseBirths();
+                tsCountLabel.Text = "Calculating Loose Births, please wait...";
+                tsHintsLabel.Text = string.Empty;
+                HourGlass(this, true);
+                SortableBindingList<IDisplayLooseBirth> looseBirthList = await Task.Run(ft.LooseBirths);
                 dgLooseBirths.DataSource = looseBirthList;
                 DataGridViewColumn? forenames = dgLooseBirths.Columns[nameof(IDisplayLooseBirth.Forenames)];
                 DataGridViewColumn? surname = dgLooseBirths.Columns[nameof(IDisplayLooseBirth.Surname)];
@@ -3335,13 +3338,20 @@ namespace FTAnalyzer
             {
                 UIHelpers.ShowMessage(ex.Message, APPNAME);
             }
+            finally
+            {
+                HourGlass(this, false);
+            }
         }
 
-        void SetupLooseDeaths()
+        async Task SetupLooseDeathsAsync()
         {
             try
             {
-                SortableBindingList<IDisplayLooseDeath> looseDeathList = ft.LooseDeaths();
+                tsCountLabel.Text = "Calculating Loose Deaths, please wait...";
+                tsHintsLabel.Text = string.Empty;
+                HourGlass(this, true);
+                SortableBindingList<IDisplayLooseDeath> looseDeathList = await Task.Run(ft.LooseDeaths);
                 dgLooseDeaths.DataSource = looseDeathList;
                 DataGridViewColumn? forenames = dgLooseDeaths.Columns[nameof(IDisplayLooseDeath.Forenames)];
                 DataGridViewColumn? surname = dgLooseDeaths.Columns[nameof(IDisplayLooseDeath.Surname)];
@@ -3360,13 +3370,20 @@ namespace FTAnalyzer
             {
                 UIHelpers.ShowMessage(ex.Message, APPNAME);
             }
+            finally
+            {
+                HourGlass(this, false);
+            }
         }
 
-        void SetupLooseInfo()
+        async Task SetupLooseInfoAsync()
         {
             try
             {
-                SortableBindingList<IDisplayLooseInfo> looseInfoList = ft.LooseInfo();
+                tsCountLabel.Text = "Calculating Loose Info, please wait...";
+                tsHintsLabel.Text = string.Empty;
+                HourGlass(this, true);
+                SortableBindingList<IDisplayLooseInfo> looseInfoList = await Task.Run(ft.LooseInfo);
                 dgLooseInfo.DataSource = looseInfoList;
                 DataGridViewColumn? forenames = dgLooseInfo.Columns[nameof(IDisplayLooseInfo.Forenames)];
                 DataGridViewColumn? surname = dgLooseInfo.Columns[nameof(IDisplayLooseInfo.Surname)];
@@ -3384,6 +3401,10 @@ namespace FTAnalyzer
             catch (LooseDataException ex)
             {
                 UIHelpers.ShowMessage(ex.Message, APPNAME);
+            }
+            finally
+            {
+                HourGlass(this, false);
             }
         }
 
