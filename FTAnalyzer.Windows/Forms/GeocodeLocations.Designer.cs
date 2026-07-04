@@ -552,7 +552,7 @@ namespace FTAnalyzer.Forms
             // GeocodeLocations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1639, 685);
             this.Controls.Add(this.dgLocations);
             this.Controls.Add(this.toolStrip1);

@@ -4421,7 +4421,7 @@ namespace FTAnalyzer
             // 
             AllowDrop = true;
             AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.None;
+            AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1246, 551);
             Controls.Add(statusStrip);
             Controls.Add(menuStrip1);
