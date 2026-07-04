@@ -271,6 +271,11 @@ namespace FTAnalyzer
             Referrals.Top = btnLCnoCensus.Bottom + 8;
             gbFilters.Top = relTypesResearchSuggest.Top;
             gbFilters.Height = relTypesResearchSuggest.Height;
+            // Research Suggestions tab: this Left-chaining already existed, but only fired when the
+            // user switched to this tab (TabControl_SelectedIndexChanged), not on a font-level change -
+            // if the user changed font level without revisiting the tab, gbFilters stayed at its stale
+            // position and could overlap relTypesResearchSuggest once it grew wider. Apply it here too.
+            gbFilters.Left = relTypesResearchSuggest.Right + relTypesResearchSuggest.Margin.Right + gbFilters.Margin.Left;
             // On This Day tab: every control here (date picker, button, radio buttons, labels) was
             // laid out at a fixed absolute Left position with no chaining at all, so the AutoSize
             // labels/radio buttons growing wider at larger font levels crammed the whole row together.
@@ -283,6 +288,10 @@ namespace FTAnalyzer
             nudToday.Left = labTodayYearStep.Right + 8;
             labTodayLoadWorldEvents.Left = nudToday.Right + 8;
             pbToday.Left = labTodayLoadWorldEvents.Right + 8;
+            // Facts tab: radioAllFacts/radioOnlyPreferred/radioOnlyAlternate are all AutoSize, fixed
+            // absolute Left positions, unchained anywhere - same pattern as the rows above.
+            radioOnlyPreferred.Left = radioAllFacts.Right + 15;
+            radioOnlyAlternate.Left = radioOnlyPreferred.Right + 15;
         }
 
         void ResizeTabHeaders()
