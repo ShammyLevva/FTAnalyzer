@@ -238,7 +238,11 @@ namespace FTAnalyzer
             groupBox10.Top = cenDate.Bottom + 7;       // preserve design gap (178−171 = 7px)
             groupBox4.Top = groupBox10.Bottom + 10;    // preserve design gap (261−251 = 10px)
             groupBox2.Height = groupBox4.Bottom + 10;  // shrink/grow groupBox2 to hold its content after font scaling
-            groupBox9.Top = groupBox2.Bottom + 5;      // reposition groupBox9 below groupBox2 after font scaling
+            // Wider gap than groupBox2's internal section spacing, so it reads visually as a
+            // distinct group ("doesn't use filters above") rather than blending into the section
+            // above it - the previously tight 5px gap left the visual separation entirely at the
+            // bottom of the tab instead, below this group box, where it didn't help legibility.
+            groupBox9.Top = groupBox2.Bottom + 25;
             // groupBox5/groupBox6/groupBox11 ("1911 UK Census" / "Export Missing/Unrecognised data to
             // File" / "Census Facts") were laid out at fixed absolute Left positions, spaced ~35px apart
             // by design. That's a pre-existing gap this branch didn't introduce but is worth applying
