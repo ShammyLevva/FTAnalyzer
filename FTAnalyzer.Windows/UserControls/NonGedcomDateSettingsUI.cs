@@ -74,6 +74,16 @@ namespace FTAnalyzer.UserControls
 
         void NonGedcomDateSettingsUI_Leave(object sender, EventArgs e)
         {
+            // Options.cs constructs every settings tab's UserControl via reflection when the
+            // Options dialog opens (each starting Visible = false before being added to the
+            // panel), regardless of which tab the user actually views. Adding controls to a
+            // container in that loop can shuffle focus transiently and fire this Leave handler
+            // for tabs the user never visited. Only a tab that's actually been shown (Visible)
+            // can have had genuine user interaction worth recomputing settings and flagging a
+            // reload for.
+            if (!Visible)
+                return;
+
             string separator = string.Empty;
             string regexSeparator = string.Empty;
             string dateformat = string.Empty;
