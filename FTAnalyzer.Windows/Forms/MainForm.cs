@@ -144,33 +144,11 @@ namespace FTAnalyzer
                 NativeMethods.AddFontMemResourceEx(fontPtr, (uint)Resources.KUNSTLER.Length, IntPtr.Zero, ref dummy);
                 System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
                 FontFamily cellFontFamily = dgCountries.DefaultCellStyle.Font?.FontFamily ?? SystemFonts.DefaultFont.FontFamily;
-                switch (FontSettings.Default.FontNumber)
-                {
-                    case 1:
-                        handwritingFont = new(fonts.Families[0], 46.0F, FontStyle.Bold);
-                        boldFont = new(cellFontFamily, 8.25F, FontStyle.Bold);
-                        normalFont = new(cellFontFamily, 8.25F, FontStyle.Regular);
-                        FontSettings.Default.FontHeight = 22;
-                        break;
-                    case 2:
-                        handwritingFont = new(fonts.Families[0], 60.0F, FontStyle.Bold);
-                        boldFont = new(cellFontFamily, 10F, FontStyle.Bold);
-                        normalFont = new(cellFontFamily, 10F, FontStyle.Regular);
-                        FontSettings.Default.FontHeight = 27;
-                        break;
-                    case 3:
-                        handwritingFont = new(fonts.Families[0], 68.0F, FontStyle.Bold);
-                        boldFont = new(cellFontFamily, 12F, FontStyle.Bold);
-                        normalFont = new(cellFontFamily, 12F, FontStyle.Regular);
-                        FontSettings.Default.FontHeight = 32;
-                        break;
-                    case 4:
-                        handwritingFont = new(fonts.Families[0], 76.0F, FontStyle.Bold);
-                        boldFont = new(cellFontFamily, 14F, FontStyle.Bold);
-                        normalFont = new(cellFontFamily, 14F, FontStyle.Regular);
-                        FontSettings.Default.FontHeight = 37;
-                        break;
-                }
+                FontScaleLevel level = FontScale.ForLevel(FontSettings.Default.FontNumber);
+                handwritingFont = new(fonts.Families[0], level.HandwritingFontSize, FontStyle.Bold);
+                boldFont = new(cellFontFamily, level.FontSize, FontStyle.Bold);
+                normalFont = new(cellFontFamily, level.FontSize, FontStyle.Regular);
+                FontSettings.Default.FontHeight = level.FontHeight;
                 SetInitialScreenControls();
                 UpdateDataErrorsDisplay();
             }

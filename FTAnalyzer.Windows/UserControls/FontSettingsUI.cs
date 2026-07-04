@@ -1,4 +1,5 @@
 ﻿using FTAnalyzer.Properties;
+using FTAnalyzer.Utilities;
 
 namespace FTAnalyzer.UserControls
 {
@@ -81,34 +82,12 @@ namespace FTAnalyzer.UserControls
         {
             try
             {
-                switch (value)
-                {
-                    case 1:
-                        selectedFont = new(lbSample.Font.Name, 8.25f);
-                        fontWidth = 5.8f;
-                        fontSize = 8.25f;
-                        fontHeight = 22;
-                        break;
-                    case 3:
-                        selectedFont = new(lbSample.Font.Name, 12f);
-                        fontWidth = 8.0f;
-                        fontSize = 12f;
-                        fontHeight = 32;
-                        break;
-                    case 4:
-                        selectedFont = new(lbSample.Font.Name, 14f);
-                        fontWidth = 9.6f;
-                        fontSize = 14f;
-                        fontHeight = 37;
-                        break;
-                    default: // also case 2
-                        selectedFont = new(lbSample.Font.Name, 10f);
-                        fontWidth = 6.6f;
-                        fontSize = 10f;
-                        fontHeight = 27;
-                        break;
-                }
-                if (selectedFont is not null) lbSample.Font = selectedFont;
+                FontScaleLevel level = FontScale.ForLevel(value);
+                fontWidth = level.FontWidth;
+                fontSize = level.FontSize;
+                fontHeight = level.FontHeight;
+                selectedFont = new(lbSample.Font.Name, fontSize);
+                lbSample.Font = selectedFont;
             }
             catch (Exception) { }
         }
