@@ -23,6 +23,6 @@ namespace FTAnalyzer.Forms
             //dsBirth.Scores.ExactDate = 0;
         }
 
-        void MissingData_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
+        void MissingData_Load(object sender, EventArgs e) => FontScaler.Apply(this);
     }
 }

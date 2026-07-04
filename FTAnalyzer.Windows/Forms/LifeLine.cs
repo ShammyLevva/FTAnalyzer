@@ -296,7 +296,7 @@ namespace FTAnalyzer.Forms
                 BuildMap();
             }
             mh.CheckIfGeocodingNeeded(this, outputText);
-            SpecialMethods.SetFonts(this);
+            FontScaler.Apply(this);
         }
 
         void HideLabelsToolStripMenuItem_Click(object sender, EventArgs e)

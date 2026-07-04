@@ -482,6 +482,6 @@ namespace FTAnalyzer.Forms
 
         void Facts_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        void Facts_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
+        void Facts_Load(object sender, EventArgs e) => FontScaler.Apply(this);
     }
 }

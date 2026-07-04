@@ -1,3 +1,5 @@
+using FTAnalyzer.Utilities;
+
 namespace FTAnalyzer.Forms
 {
     public sealed class CrashDetailsForm : Form
@@ -56,6 +58,7 @@ namespace FTAnalyzer.Forms
             };
 
             Controls.AddRange([rtb, buttonPanel]);
+            FontScaler.Apply(this);
         }
     }
 }

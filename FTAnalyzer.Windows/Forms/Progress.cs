@@ -22,6 +22,6 @@ namespace FTAnalyzer.Forms
 
         void Progress_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        void Progress_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
+        void Progress_Load(object sender, EventArgs e) => FontScaler.Apply(this);
     }
 }

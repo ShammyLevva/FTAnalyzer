@@ -12,6 +12,10 @@ namespace FTAnalyzer.Forms.Controls
         public CensusDateSelector()
         {
             InitializeComponent();
+            // label1 is AutoSize; whenever a font-scale change grows/shrinks it, keep the
+            // combo positioned to its right automatically instead of relying on the parent
+            // form remembering to call a reposition method after every font change.
+            label1.SizeChanged += (_, _) => RepositionCensusCombo();
             if (!DesignMode)
             {
                 cbCensusDate.Items.Clear();
@@ -163,11 +167,8 @@ namespace FTAnalyzer.Forms.Controls
             catch (Exception) { }
         }
 
-        public void RepositionControls()
+        void RepositionCensusCombo()
         {
-            // With AutoScaleMode=None, children stay at design positions after form PerformAutoScale.
-            // After SetFonts grows label1 to 14pt, label1.Right can exceed cbCensusDate.Left,
-            // visually covering the left chars of the selected item (shows "nsus 1881" not "Census 1881").
             cbCensusDate.Left = label1.Right + 6;
             SetControlWidth();
         }

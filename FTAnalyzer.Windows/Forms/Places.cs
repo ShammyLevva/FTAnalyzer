@@ -239,7 +239,7 @@ namespace FTAnalyzer.Forms
             {
                 // apply font scaling before the form is shown, otherwise the resulting
                 // AutoScale resize/reposition happens visibly after the await below
-                SpecialMethods.SetFonts(this);
+                FontScaler.Apply(this);
 
                 // Show wait cursor during tree building
                 Cursor = Cursors.WaitCursor;

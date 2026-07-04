@@ -494,7 +494,7 @@ namespace FTAnalyzer.Forms
 
         void ColourCensus_Load(object sender, EventArgs e)
         {
-            SpecialMethods.SetFonts(this);
+            FontScaler.Apply(this);
             SetColourColumnWidths();
             EnsureTextColumnMinimumWidths();
         }

@@ -4,6 +4,13 @@ namespace FTAnalyzer.UserControls
 {
     public partial class FileHandlingUI : UserControl, IOptions
     {
+        // Options.cs constructs every settings tab's UserControl via reflection when the Options
+        // dialog opens, regardless of which tab is actually shown, so this constructor always runs.
+        // Without this guard, assigning a saved true/non-default value below fires the matching
+        // CheckedChanged handler and spuriously sets ReloadRequired - even if the user never
+        // touched this tab or changed anything (e.g. just changing the font level elsewhere).
+        readonly bool _loading = true;
+
         public FileHandlingUI()
         {
             InitializeComponent();
@@ -11,6 +18,7 @@ namespace FTAnalyzer.UserControls
             //if this happens, then the users settings will be cleared.
             chkRetryFailedLines.Checked = FileHandling.Default.RetryFailedLines;
             chkConvertDiacritics.Checked = FileHandling.Default.ConvertDiacritics;
+            _loading = false;
         }
 
         #region IOptions Members
@@ -60,11 +68,11 @@ namespace FTAnalyzer.UserControls
         public Image? MenuIcon => null;
 
         #endregion
-        void ChkLoadWithFilters_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
+        void ChkLoadWithFilters_CheckedChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
 
-        void ChkRetryFailedLines_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
+        void ChkRetryFailedLines_CheckedChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
 
-        void ChkConvertDiacritics_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
+        void ChkConvertDiacritics_CheckedChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
 
     }
 }

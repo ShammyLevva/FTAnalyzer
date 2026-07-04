@@ -50,7 +50,7 @@ namespace FTAnalyzer
         {
             try
             {
-                SetupFonts();
+                ApplyFontsAndRelayout();
                 SetHeightWidth();
                 RegisterEventHandlers();
                 Text = $"Family Tree Analyzer v{VERSION}";
@@ -131,11 +131,13 @@ namespace FTAnalyzer
             }
         }
 
-        void SetupFonts()
+        // Called at startup and on GlobalFontChanged - applies scaled fonts then re-runs the
+        // full layout pass, since font size changes ripple into control positions/sizes.
+        void ApplyFontsAndRelayout()
         {
             try
             {
-                SpecialMethods.SetFonts(this);
+                FontScaler.Apply(this);
                 byte[] fontData = Resources.KUNSTLER;
                 IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
                 System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
@@ -144,33 +146,11 @@ namespace FTAnalyzer
                 NativeMethods.AddFontMemResourceEx(fontPtr, (uint)Resources.KUNSTLER.Length, IntPtr.Zero, ref dummy);
                 System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
                 FontFamily cellFontFamily = dgCountries.DefaultCellStyle.Font?.FontFamily ?? SystemFonts.DefaultFont.FontFamily;
-                switch (FontSettings.Default.FontNumber)
-                {
-                    case 1:
-                        handwritingFont = new(fonts.Families[0], 46.0F, FontStyle.Bold);
-                        boldFont = new(cellFontFamily, 8.25F, FontStyle.Bold);
-                        normalFont = new(cellFontFamily, 8.25F, FontStyle.Regular);
-                        FontSettings.Default.FontHeight = 22;
-                        break;
-                    case 2:
-                        handwritingFont = new(fonts.Families[0], 60.0F, FontStyle.Bold);
-                        boldFont = new(cellFontFamily, 10F, FontStyle.Bold);
-                        normalFont = new(cellFontFamily, 10F, FontStyle.Regular);
-                        FontSettings.Default.FontHeight = 27;
-                        break;
-                    case 3:
-                        handwritingFont = new(fonts.Families[0], 68.0F, FontStyle.Bold);
-                        boldFont = new(cellFontFamily, 12F, FontStyle.Bold);
-                        normalFont = new(cellFontFamily, 12F, FontStyle.Regular);
-                        FontSettings.Default.FontHeight = 32;
-                        break;
-                    case 4:
-                        handwritingFont = new(fonts.Families[0], 76.0F, FontStyle.Bold);
-                        boldFont = new(cellFontFamily, 14F, FontStyle.Bold);
-                        normalFont = new(cellFontFamily, 14F, FontStyle.Regular);
-                        FontSettings.Default.FontHeight = 37;
-                        break;
-                }
+                FontScaleLevel level = FontScale.ForLevel(FontSettings.Default.FontNumber);
+                handwritingFont = new(fonts.Families[0], level.HandwritingFontSize, FontStyle.Bold);
+                boldFont = new(cellFontFamily, level.FontSize, FontStyle.Bold);
+                normalFont = new(cellFontFamily, level.FontSize, FontStyle.Regular);
+                FontSettings.Default.FontHeight = level.FontHeight;
                 SetInitialScreenControls();
                 UpdateDataErrorsDisplay();
             }
@@ -182,23 +162,68 @@ namespace FTAnalyzer
 
         void SetInitialScreenControls()
         {
+            // Suspend painting for the whole batch of repositioning/resizing below - the many
+            // individual Refresh() calls this used to make (one per repositioned control, plus
+            // ResizeTabHeaders' handle recreation) each triggered their own repaint, producing
+            // visible flicker as the form redrew piecemeal.
+            NativeMethods.SuspendDrawing(this);
+            try
+            {
+                SetInitialScreenControlsCore();
+            }
+            finally
+            {
+                NativeMethods.ResumeDrawing(this);
+                Invalidate(true);
+            }
+        }
+
+        void SetInitialScreenControlsCore()
+        {
+            // Rows were originally spaced with fixed Top offsets (11, 37, 62, 88) sized for the
+            // default 8.25pt font's ~15px label height. At larger font levels AutoSize grows each
+            // label past that fixed gap, crowding the rows together. Chain each row off the
+            // previous label's Bottom instead, so a gap of 11px (the original design's whitespace)
+            // is preserved at every font level.
+            const int rowGap = 11;
+            labSources.Top = 11;
+            labIndividuals.Top = labSources.Bottom + rowGap;
+            labFamilies.Top = labIndividuals.Bottom + rowGap;
+            labRelationships.Top = labFamilies.Bottom + rowGap;
+            pbSources.Top = labSources.Top;
+            pbIndividuals.Top = labIndividuals.Top;
+            pbFamilies.Top = labFamilies.Top;
+            pbRelationships.Top = labRelationships.Top;
+
             int progressBarLeft = labRelationships.Right + 15;
             pbSources.Left = progressBarLeft;
             pbIndividuals.Left = progressBarLeft;
             pbFamilies.Left = progressBarLeft;
             pbRelationships.Left = progressBarLeft;
-            pbSources.Refresh();
-            pbIndividuals.Refresh();
-            pbFamilies.Refresh();
-            pbRelationships.Refresh();
             LbProgramName.Left = pbRelationships.Right + 15;
             LbProgramName.Font = handwritingFont;
-            LbProgramName.Refresh();
+            // Fixed rule (regardless of any prior sizing behaviour): the tree logo is always the
+            // same height as the hero banner text, centred on it. pictureBox1's source image
+            // (Resources._256) is a true 256x256 square, so a square box (driven by height) renders
+            // it with zero wasted margin under SizeMode.Zoom. Clamp so a very wide banner at the
+            // largest font level can't push the icon (and the window) off the screen.
+            int maxIconSize = Math.Max(0, Screen.GetWorkingArea(new Point(0, 0)).Width - Left - LbProgramName.Right - 100);
+            int iconSize = Math.Min(LbProgramName.Height, maxIconSize);
+            pictureBox1.Height = iconSize;
+            pictureBox1.Width = iconSize;
+            pictureBox1.Top = LbProgramName.Top + (LbProgramName.Height - pictureBox1.Height) / 2;
             pictureBox1.Left = LbProgramName.Right;
-            pictureBox1.Refresh();
-            Width = Math.Min(pictureBox1.Right + 100, Screen.GetWorkingArea(new Point(0, 0)).Width);
+            // Width was previously driven solely by the banner (pictureBox1.Right + 100), with no
+            // regard for whether that's actually wide enough for tab content laid out at fixed
+            // positions rather than anchored/reflowing - e.g. the Census tab's group boxes/buttons
+            // (designed up to X=1133) are simply clipped by a narrower window rather than resizing.
+            // Floor at the original design ClientSize.Width (1246) so tab content already laid out
+            // for that width is never clipped, regardless of how narrow the banner computes at a
+            // given font level.
+            const int minDesignWidth = 1246;
+            Width = Math.Min(Math.Max(pictureBox1.Right + 100, minDesignWidth), Screen.GetWorkingArea(new Point(0, 0)).Width);
             splitGedcom.SplitterDistance = Math.Max(pbRelationships.Bottom + 18, 110);
-            splitGedcom.Refresh();
+            ResizeTabHeaders();
             menuStrip1.Font = normalFont;
             rtbOutput.Font = normalFont;
             rtbToday.Font = normalFont;
@@ -212,11 +237,31 @@ namespace FTAnalyzer
             txtAliveDates.Top = labCensusAliveDates.Top + (labCensusAliveDates.Height - txtAliveDates.Height) / 2;
             btnAliveOnDate.Top = chkAnyCensusYear.Top;
             cenDate.Top = relTypesCensus.Bottom + 5;   // 5px gap below relTypesCensus
-            cenDate.RepositionControls();              // push cbCensusDate past grown label1 and resize for 14pt font
             groupBox10.Top = cenDate.Bottom + 7;       // preserve design gap (178−171 = 7px)
             groupBox4.Top = groupBox10.Bottom + 10;    // preserve design gap (261−251 = 10px)
             groupBox2.Height = groupBox4.Bottom + 10;  // shrink/grow groupBox2 to hold its content after font scaling
-            groupBox9.Top = groupBox2.Bottom + 5;      // reposition groupBox9 below groupBox2 after font scaling
+            // Wider gap than groupBox2's internal section spacing, so it reads visually as a
+            // distinct group ("doesn't use filters above") rather than blending into the section
+            // above it - the previously tight 5px gap left the visual separation entirely at the
+            // bottom of the tab instead, below this group box, where it didn't help legibility.
+            groupBox9.Top = groupBox2.Bottom + 25;
+            // groupBox5/groupBox6/groupBox11 ("1911 UK Census" / "Export Missing/Unrecognised data to
+            // File" / "Census Facts") were laid out at fixed absolute Left positions, spaced ~35px apart
+            // by design. That's a pre-existing gap this branch didn't introduce but is worth applying
+            // the same standard fix used elsewhere in this pass: chain each box off the previous one's
+            // actual rendered Right edge instead of a static Designer coordinate, so spacing stays
+            // correct regardless of AutoScaleMode-driven size/position drift at any font level.
+            const int groupBoxGap = 15;
+            groupBox6.Left = groupBox5.Right + groupBoxGap;
+            groupBox11.Left = groupBox6.Right + groupBoxGap;
+            // Treetops tab: treetopsRelation ("Relationship Types") is AutoSize/GrowAndShrink, so it
+            // grows wider at larger font levels, but its Left was a fixed Designer coordinate assuming
+            // treetopsCountry ("Default Country") stayed at its own design width - the two boxes ended
+            // up overlapping. Chain treetopsRelation off treetopsCountry's actual rendered Right edge.
+            treetopsRelation.Left = treetopsCountry.Right + groupBoxGap;
+            // World Wars tab: same overlap as Treetops, same fix - wardeadRelation grows wider at
+            // larger font levels but its Left was a fixed coordinate assuming wardeadCountry's design width.
+            wardeadRelation.Left = wardeadCountry.Right + groupBoxGap;
             SetStatusBar();
             CheckMaxWindowSizes(new Point(0, 0));
             // Lost Cousins tab: fix after PerformAutoScale. Link labels (originally Top|Right) drift left when
@@ -228,9 +273,37 @@ namespace FTAnalyzer
             Referrals.Top = btnLCnoCensus.Bottom + 8;
             gbFilters.Top = relTypesResearchSuggest.Top;
             gbFilters.Height = relTypesResearchSuggest.Height;
+            // Research Suggestions tab: this Left-chaining already existed, but only fired when the
+            // user switched to this tab (TabControl_SelectedIndexChanged), not on a font-level change -
+            // if the user changed font level without revisiting the tab, gbFilters stayed at its stale
+            // position and could overlap relTypesResearchSuggest once it grew wider. Apply it here too.
+            gbFilters.Left = relTypesResearchSuggest.Right + relTypesResearchSuggest.Margin.Right + gbFilters.Margin.Left;
+            // On This Day tab: every control here (date picker, button, radio buttons, labels) was
+            // laid out at a fixed absolute Left position with no chaining at all, so the AutoSize
+            // labels/radio buttons growing wider at larger font levels crammed the whole row together.
+            // Only the last two links (nudToday/pbToday) were previously chained - fill in the rest.
+            dpToday.Left = labTodaySelectDate.Right + 8;
+            btnUpdateTodaysEvents.Left = dpToday.Right + 8;
+            rbTodaySingle.Left = btnUpdateTodaysEvents.Right + 8;
+            rbTodayMonth.Left = rbTodaySingle.Right + 8;
+            labTodayYearStep.Left = rbTodayMonth.Right + 8;
             nudToday.Left = labTodayYearStep.Right + 8;
+            labTodayLoadWorldEvents.Left = nudToday.Right + 8;
             pbToday.Left = labTodayLoadWorldEvents.Right + 8;
-            Refresh();
+            // Facts tab: radioAllFacts/radioOnlyPreferred/radioOnlyAlternate are all AutoSize, fixed
+            // absolute Left positions, unchained anywhere - same pattern as the rows above.
+            radioOnlyPreferred.Left = radioAllFacts.Right + 15;
+            radioOnlyAlternate.Left = radioOnlyPreferred.Right + 15;
+        }
+
+        void ResizeTabHeaders()
+        {
+            // tabSelector uses the default SizeMode.Normal (each tab auto-sized to its own text) -
+            // but the native control only remeasures against its current Font when its handle is
+            // recreated, which a runtime Font change alone doesn't trigger. That left several tab
+            // titles clipped by a character or two at larger font levels. Recreate the handle so
+            // tabs remeasure at the new size while keeping their original variable-width look.
+            tabSelector.RemeasureTabsForCurrentFont();
         }
 
         void SetStatusBar()
@@ -730,7 +803,10 @@ namespace FTAnalyzer
             dgTreeTops.DataSource = [.. treeTopsList];
             dgTreeTops.Focus();
             foreach (DataGridViewColumn c in dgTreeTops.Columns)
+            {
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+                FontScaler.FitColumnToHeader(c); // GetPreferredWidth can undersize a bold header
+            }
             tsCountLabel.Text = Messages.Count + treeTopsList.Count;
             tsHintsLabel.Text = Messages.Hints_Individual;
             mnuPrint.Enabled = true;
@@ -752,7 +828,10 @@ namespace FTAnalyzer
             dgWorldWars.DataSource = [.. warDeadList];
             dgWorldWars.Focus();
             foreach (DataGridViewColumn c in dgWorldWars.Columns)
+            {
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+                FontScaler.FitColumnToHeader(c); // GetPreferredWidth can undersize a bold header
+            }
             tsCountLabel.Text = Messages.Count + warDeadList.Count;
             tsHintsLabel.Text = $"{Messages.Hints_Individual}  {Messages.Hints_LivesOfFirstWorldWar}";
             dgWorldWars.VirtualGridFiltered += VirtualGridFiltered;
@@ -772,7 +851,10 @@ namespace FTAnalyzer
             dgWorldWars.DataSource = [.. warDeadList];
             dgWorldWars.Focus();
             foreach (DataGridViewColumn c in dgWorldWars.Columns)
+            {
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+                FontScaler.FitColumnToHeader(c); // GetPreferredWidth can undersize a bold header
+            }
             tsCountLabel.Text = Messages.Count + warDeadList.Count;
             tsHintsLabel.Text = Messages.Hints_Individual;
             dgWorldWars.VirtualGridFiltered += VirtualGridFiltered;
@@ -1203,7 +1285,7 @@ namespace FTAnalyzer
         void Options_GlobalFontChanged(object? sender, EventArgs e)
         {
             HourGlass(this, true);
-            SetupFonts();
+            ApplyFontsAndRelayout();
             HourGlass(this, false);
         }
         #endregion
@@ -2082,7 +2164,11 @@ namespace FTAnalyzer
         #endregion
 
         #region ToolStrip Clicks
-        void AboutToolStripMenuItem_Click(object sender, EventArgs e) => UIHelpers.ShowMessage($"This is Family Tree Analyzer version {VERSION}", APPNAME);
+        void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using FTAnalyzer.Core.Displays.AboutBox1 aboutBox = new(VERSION, handwritingFont);
+            aboutBox.ShowDialog(this);
+        }
 
         void OptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -2854,9 +2940,19 @@ namespace FTAnalyzer
                 Width = workarea.Width;
             if (Height > workarea.Height)
                 Height = workarea.Height;
+            // Clamping size alone isn't enough: if the window is already positioned partway down/across
+            // the screen, growing text (larger font level) can still push the bottom/right edge - and the
+            // resize grip - off-screen even though Width/Height individually fit the work area.
+            if (Top + Height > workarea.Bottom)
+                Top = Math.Max(workarea.Top, workarea.Bottom - Height);
+            if (Left + Width > workarea.Right)
+                Left = Math.Max(workarea.Left, workarea.Right - Width);
+            // Recompute unconditionally rather than shrink-only: this runs again on every live font
+            // change (not just once at form load, since PerformAutoScale doesn't re-run for that), so a
+            // shrink-only check left tabSelector permanently narrow after a larger-font pass clamped it,
+            // even once the window correctly resized back down on a later smaller-font pass.
             int boundaryWidth = rtbOutput.Margin.Left + tabSelector.Margin.Left + tabSelector.Margin.Right;
-            if (tabSelector.Left + tabSelector.Width + boundaryWidth > ClientSize.Width)
-                tabSelector.Width = ClientSize.Width - tabSelector.Left - boundaryWidth;
+            tabSelector.Width = ClientSize.Width - tabSelector.Left - boundaryWidth;
             tabSelector.Height = statusStrip.Top - tabSelector.Top - tabSelector.Margin.Bottom;
         }
         #endregion

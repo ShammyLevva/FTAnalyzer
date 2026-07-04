@@ -418,6 +418,6 @@ namespace FTAnalyzer.Forms
 
         void GoogleMap_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
-        void GoogleMap_Load(object sender, EventArgs e) => SpecialMethods.SetFonts(this);
+        void GoogleMap_Load(object sender, EventArgs e) => FontScaler.Apply(this);
     }
 }

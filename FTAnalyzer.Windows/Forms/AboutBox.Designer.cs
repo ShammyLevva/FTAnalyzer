@@ -39,7 +39,6 @@ namespace FTAnalyzer.Core.Displays
             labelProductName = new Label();
             labelVersion = new Label();
             labelCopyright = new Label();
-            labelCompanyName = new Label();
             textBoxDescription = new TextBox();
             okButton = new Button();
             tableLayoutPanel.SuspendLayout();
@@ -55,47 +54,45 @@ namespace FTAnalyzer.Core.Displays
             tableLayoutPanel.Controls.Add(labelProductName, 1, 0);
             tableLayoutPanel.Controls.Add(labelVersion, 1, 1);
             tableLayoutPanel.Controls.Add(labelCopyright, 1, 2);
-            tableLayoutPanel.Controls.Add(labelCompanyName, 1, 3);
-            tableLayoutPanel.Controls.Add(textBoxDescription, 1, 4);
-            tableLayoutPanel.Controls.Add(okButton, 1, 5);
+            tableLayoutPanel.Controls.Add(textBoxDescription, 1, 3);
+            tableLayoutPanel.Controls.Add(okButton, 1, 4);
             tableLayoutPanel.Dock = DockStyle.Fill;
             tableLayoutPanel.Location = new Point(10, 10);
             tableLayoutPanel.Margin = new Padding(4, 3, 4, 3);
             tableLayoutPanel.Name = "tableLayoutPanel";
-            tableLayoutPanel.RowCount = 6;
-            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
-            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
-            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
-            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
-            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
-            tableLayoutPanel.Size = new Size(487, 307);
+            tableLayoutPanel.RowCount = 5;
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 110F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
+            tableLayoutPanel.Size = new Size(487, 280);
             tableLayoutPanel.TabIndex = 0;
-            // 
+            //
             // logoPictureBox
-            // 
+            //
             logoPictureBox.Dock = DockStyle.Fill;
             logoPictureBox.Image = (Image)resources.GetObject("logoPictureBox.Image");
             logoPictureBox.Location = new Point(4, 3);
             logoPictureBox.Margin = new Padding(4, 3, 4, 3);
             logoPictureBox.Name = "logoPictureBox";
-            tableLayoutPanel.SetRowSpan(logoPictureBox, 6);
-            logoPictureBox.Size = new Size(152, 301);
-            logoPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            logoPictureBox.Size = new Size(152, 110);
+            logoPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             logoPictureBox.TabIndex = 12;
             logoPictureBox.TabStop = false;
-            // 
+            //
             // labelProductName
-            // 
+            //
+            labelProductName.AutoSize = true;
             labelProductName.Dock = DockStyle.Fill;
-            labelProductName.Location = new Point(167, 0);
-            labelProductName.Margin = new Padding(7, 0, 4, 0);
-            labelProductName.MaximumSize = new Size(0, 20);
+            labelProductName.Location = new Point(4, 0);
+            labelProductName.Margin = new Padding(4, 0, 4, 0);
             labelProductName.Name = "labelProductName";
-            labelProductName.Size = new Size(316, 20);
+            labelProductName.Size = new Size(479, 20);
             labelProductName.TabIndex = 19;
             labelProductName.Text = "Product Name";
-            labelProductName.TextAlign = ContentAlignment.MiddleLeft;
+            labelProductName.TextAlign = ContentAlignment.MiddleCenter;
+            tableLayoutPanel.SetColumnSpan(labelProductName, 2);
             // 
             // labelVersion
             // 
@@ -107,7 +104,7 @@ namespace FTAnalyzer.Core.Displays
             labelVersion.Size = new Size(316, 20);
             labelVersion.TabIndex = 0;
             labelVersion.Text = "Version";
-            labelVersion.TextAlign = ContentAlignment.MiddleLeft;
+            labelVersion.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // labelCopyright
             // 
@@ -120,23 +117,11 @@ namespace FTAnalyzer.Core.Displays
             labelCopyright.TabIndex = 21;
             labelCopyright.Text = "Copyright";
             labelCopyright.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // labelCompanyName
-            // 
-            labelCompanyName.Dock = DockStyle.Fill;
-            labelCompanyName.Location = new Point(167, 90);
-            labelCompanyName.Margin = new Padding(7, 0, 4, 0);
-            labelCompanyName.MaximumSize = new Size(0, 20);
-            labelCompanyName.Name = "labelCompanyName";
-            labelCompanyName.Size = new Size(316, 20);
-            labelCompanyName.TabIndex = 22;
-            labelCompanyName.Text = "Company Name";
-            labelCompanyName.TextAlign = ContentAlignment.MiddleLeft;
-            // 
+            //
             // textBoxDescription
-            // 
+            //
             textBoxDescription.Dock = DockStyle.Fill;
-            textBoxDescription.Location = new Point(167, 123);
+            textBoxDescription.Location = new Point(167, 93);
             textBoxDescription.Margin = new Padding(7, 3, 4, 3);
             textBoxDescription.Multiline = true;
             textBoxDescription.Name = "textBoxDescription";
@@ -163,7 +148,7 @@ namespace FTAnalyzer.Core.Displays
             AcceptButton = okButton;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(507, 327);
+            ClientSize = new Size(507, 300);
             Controls.Add(tableLayoutPanel);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -190,7 +175,6 @@ namespace FTAnalyzer.Core.Displays
         private System.Windows.Forms.Label labelProductName;
         private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.Label labelCopyright;
-        private System.Windows.Forms.Label labelCompanyName;
         private System.Windows.Forms.TextBox textBoxDescription;
         private System.Windows.Forms.Button okButton;
     }

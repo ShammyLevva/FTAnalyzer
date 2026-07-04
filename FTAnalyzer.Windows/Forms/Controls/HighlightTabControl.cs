@@ -11,6 +11,13 @@ namespace FTAnalyzer.Forms.Controls
             DrawMode = TabDrawMode.OwnerDrawFixed;
         }
 
+        // With SizeMode.Normal (variable-width tabs sized to each tab's own text), the native
+        // control only remeasures tab widths against its current Font when its handle is
+        // recreated - a runtime Font change alone doesn't retrigger that, leaving tabs sized for
+        // whatever font was in effect when the handle was first created. RecreateHandle is
+        // protected on Control, so expose it for MainForm to call after a font-scale change.
+        public void RemeasureTabsForCurrentFont() => RecreateHandle();
+
         // Ensures the designer calls our draw logic as well.
         protected override void OnDrawItem(DrawItemEventArgs e)
         {

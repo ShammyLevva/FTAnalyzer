@@ -72,6 +72,7 @@ namespace FTAnalyzer.Forms
             CancelButton = btnClose;
 
             Controls.AddRange([iconBox, lblHeader, lblHint, btnGitHub, btnDetails, btnClose]);
+            FontScaler.Apply(this);
         }
 
         void OpenGitHubIssue()
