@@ -160,6 +160,21 @@ namespace FTAnalyzer
 
         void SetInitialScreenControls()
         {
+            // Rows were originally spaced with fixed Top offsets (11, 37, 62, 88) sized for the
+            // default 8.25pt font's ~15px label height. At larger font levels AutoSize grows each
+            // label past that fixed gap, crowding the rows together. Chain each row off the
+            // previous label's Bottom instead, so a gap of 11px (the original design's whitespace)
+            // is preserved at every font level.
+            const int rowGap = 11;
+            labSources.Top = 11;
+            labIndividuals.Top = labSources.Bottom + rowGap;
+            labFamilies.Top = labIndividuals.Bottom + rowGap;
+            labRelationships.Top = labFamilies.Bottom + rowGap;
+            pbSources.Top = labSources.Top;
+            pbIndividuals.Top = labIndividuals.Top;
+            pbFamilies.Top = labFamilies.Top;
+            pbRelationships.Top = labRelationships.Top;
+
             int progressBarLeft = labRelationships.Right + 15;
             pbSources.Left = progressBarLeft;
             pbIndividuals.Left = progressBarLeft;
@@ -2831,6 +2846,13 @@ namespace FTAnalyzer
                 Width = workarea.Width;
             if (Height > workarea.Height)
                 Height = workarea.Height;
+            // Clamping size alone isn't enough: if the window is already positioned partway down/across
+            // the screen, growing text (larger font level) can still push the bottom/right edge - and the
+            // resize grip - off-screen even though Width/Height individually fit the work area.
+            if (Top + Height > workarea.Bottom)
+                Top = Math.Max(workarea.Top, workarea.Bottom - Height);
+            if (Left + Width > workarea.Right)
+                Left = Math.Max(workarea.Left, workarea.Right - Width);
             int boundaryWidth = rtbOutput.Margin.Left + tabSelector.Margin.Left + tabSelector.Margin.Right;
             if (tabSelector.Left + tabSelector.Width + boundaryWidth > ClientSize.Width)
                 tabSelector.Width = ClientSize.Width - tabSelector.Left - boundaryWidth;
