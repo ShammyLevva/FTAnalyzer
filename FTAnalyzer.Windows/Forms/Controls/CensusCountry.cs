@@ -14,10 +14,16 @@ namespace FTAnalyzer.Forms.Controls
             // out at fixed absolute positions - reposition off each other's actual rendered edges
             // (same pattern as CensusDateSelector) whenever the row-1 or row-2 anchor buttons resize,
             // instead of squishing together at their original fixed coordinates.
+            // Subscribe all six (not just the row-starting ones): rbUK/rbUSA don't need to push a
+            // sibling after them, but their own growth still needs to widen groupBox1 - missing that
+            // left the container too narrow to hold them, clipping their text at its right edge even
+            // though their gap from the previous sibling was itself correct.
             rbScotland.SizeChanged += (_, _) => RepositionRadioButtons();
             rbEngland.SizeChanged += (_, _) => RepositionRadioButtons();
             rbWales.SizeChanged += (_, _) => RepositionRadioButtons();
+            rbUK.SizeChanged += (_, _) => RepositionRadioButtons();
             rbCanada.SizeChanged += (_, _) => RepositionRadioButtons();
+            rbUSA.SizeChanged += (_, _) => RepositionRadioButtons();
         }
 
         void RepositionRadioButtons()

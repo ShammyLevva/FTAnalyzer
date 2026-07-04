@@ -1619,6 +1619,7 @@ namespace FTAnalyzer
             ckbTTIgnoreLocations.Text = "Include Unknown Countries in Treetops Filter";
             ckbTTIgnoreLocations.UseVisualStyleBackColor = true;
             ckbTTIgnoreLocations.CheckedChanged += CkbTTIgnoreLocations_CheckedChanged;
+            toolTips.SetToolTip(ckbTTIgnoreLocations, "When checked, the Default Country selection below is ignored and greyed out, since the filter includes people regardless of country.");
             // 
             // btnTreeTops
             // 
