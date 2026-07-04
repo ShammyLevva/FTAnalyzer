@@ -346,5 +346,17 @@ namespace FTAnalyzer.Properties {
                 this["IncludeAlternateFacts"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IncludeGenderAsFact {
+            get {
+                return ((bool)(this["IncludeGenderAsFact"]));
+            }
+            set {
+                this["IncludeGenderAsFact"] = value;
+            }
+        }
     }
 }
