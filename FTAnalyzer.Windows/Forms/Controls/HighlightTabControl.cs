@@ -33,9 +33,9 @@ namespace FTAnalyzer.Forms.Controls
             TabPage page = TabPages[e.Index];
             bool isSelected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
 
-            Color backColour = isSelected ? SystemColors.Highlight : SystemColors.Control;
-            Color textColour = isSelected ? SystemColors.HighlightText : SystemColors.ControlText;
-            Color borderColour = isSelected ? SystemColors.Highlight : SystemColors.ControlDark;
+            Color backColour = isSelected ? Theme.Colors.PrimaryForestGreen : Theme.Colors.BgParchment;
+            Color textColour = isSelected ? Theme.Colors.BgCard : Theme.Colors.SecondaryCharcoalBark;
+            Color borderColour = isSelected ? Theme.Colors.PrimaryForestGreen : Theme.Colors.AccentWarmBronze;
 
             using var backBrush = new SolidBrush(backColour);
             using var textBrush = new SolidBrush(textColour);

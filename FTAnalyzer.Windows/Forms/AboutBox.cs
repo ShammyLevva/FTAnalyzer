@@ -19,6 +19,22 @@ namespace FTAnalyzer.Core.Displays
             labelCopyright.Text = AssemblyCopyright;
             textBoxDescription.Text = AssemblyDescription;
             Top += NativeMethods.TopTaskbarOffset;
+            ApplyTheme();
+        }
+
+        void ApplyTheme()
+        {
+            BackColor = Theme.Colors.BgParchment;
+            tableLayoutPanel.BackColor = Theme.Colors.BgParchment;
+            labelProductName.ForeColor = Theme.Colors.GoldDark;
+            labelVersion.ForeColor = Theme.Colors.SecondaryCharcoalBark;
+            labelCopyright.ForeColor = Theme.Colors.SecondaryCharcoalBark;
+            textBoxDescription.BackColor = Theme.Colors.BgCard;
+            textBoxDescription.ForeColor = Theme.Colors.SecondaryCharcoalBark;
+            okButton.BackColor = Theme.Colors.PrimaryForestGreen;
+            okButton.ForeColor = Theme.Colors.BgCard;
+            okButton.FlatStyle = FlatStyle.Flat;
+            okButton.FlatAppearance.BorderColor = Theme.Colors.PrimaryForestGreen;
         }
 
         #region Assembly Attribute Accessors
