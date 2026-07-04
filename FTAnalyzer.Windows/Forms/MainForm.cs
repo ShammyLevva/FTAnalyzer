@@ -200,13 +200,17 @@ namespace FTAnalyzer
             pbRelationships.Left = progressBarLeft;
             LbProgramName.Left = pbRelationships.Right + 15;
             LbProgramName.Font = handwritingFont;
-            // pictureBox1's original 117x106 design size was only ever sized for the smallest
-            // handwriting font level (46pt); it never grew with LbProgramName's much larger sizes
-            // at higher levels (up to 76pt), leaving the tree logo looking disproportionately small
-            // next to the banner text. Scale it to the label's height, preserving its aspect ratio.
-            const float designAspectRatio = 117f / 106f;
-            pictureBox1.Height = LbProgramName.Height;
-            pictureBox1.Width = (int)(pictureBox1.Height * designAspectRatio);
+            // pictureBox1's original 117x106 design size was fixed regardless of font level, which
+            // is the size users are used to at the default level 1 (46pt handwriting font). Scale
+            // relative to that baseline instead of to the label's rendered height directly - tying
+            // it to Label.Height shrunk the icon below its familiar size even at level 1, since a
+            // cursive font's AutoSize height isn't a simple multiple of its point size.
+            const float baselineHandwritingFontSize = 46f; // level 1's size - the historical, unscaled baseline
+            const int baselineWidth = 117;
+            const int baselineHeight = 106;
+            float iconScale = handwritingFont.Size / baselineHandwritingFontSize;
+            pictureBox1.Width = (int)(baselineWidth * iconScale);
+            pictureBox1.Height = (int)(baselineHeight * iconScale);
             pictureBox1.Top = LbProgramName.Top + (LbProgramName.Height - pictureBox1.Height) / 2;
             pictureBox1.Left = LbProgramName.Right;
             Width = Math.Min(pictureBox1.Right + 100, Screen.GetWorkingArea(new Point(0, 0)).Width);
