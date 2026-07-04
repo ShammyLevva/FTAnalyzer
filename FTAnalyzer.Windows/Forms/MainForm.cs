@@ -200,17 +200,17 @@ namespace FTAnalyzer
             pbRelationships.Left = progressBarLeft;
             LbProgramName.Left = pbRelationships.Right + 15;
             LbProgramName.Font = handwritingFont;
-            // pictureBox1's original 117x106 design size was fixed regardless of font level, which
-            // is the size users are used to at the default level 1 (46pt handwriting font). Scale
-            // relative to that baseline instead of to the label's rendered height directly - tying
-            // it to Label.Height shrunk the icon below its familiar size even at level 1, since a
-            // cursive font's AutoSize height isn't a simple multiple of its point size.
+            // pictureBox1's source image (Resources._256) is a true 256x256 square, but its
+            // original design box was 117x106 (non-square) - with SizeMode.Zoom preserving the
+            // image's real aspect ratio, that always letterboxed it slightly even historically.
+            // Use a square box (driven by height, matching the image's actual aspect ratio) so it
+            // renders with zero wasted margin, scaled relative to level 1's 46pt as the baseline
+            // where height=106 reproduces the icon's original familiar size.
             const float baselineHandwritingFontSize = 46f; // level 1's size - the historical, unscaled baseline
-            const int baselineWidth = 117;
             const int baselineHeight = 106;
             float iconScale = handwritingFont.Size / baselineHandwritingFontSize;
-            pictureBox1.Width = (int)(baselineWidth * iconScale);
             pictureBox1.Height = (int)(baselineHeight * iconScale);
+            pictureBox1.Width = pictureBox1.Height;
             pictureBox1.Top = LbProgramName.Top + (LbProgramName.Height - pictureBox1.Height) / 2;
             pictureBox1.Left = LbProgramName.Right;
             Width = Math.Min(pictureBox1.Right + 100, Screen.GetWorkingArea(new Point(0, 0)).Width);
