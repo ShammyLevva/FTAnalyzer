@@ -205,7 +205,7 @@ namespace FTAnalyzer
             // (Resources._256) is a true 256x256 square, so a square box (driven by height) renders
             // it with zero wasted margin under SizeMode.Zoom. Clamp so a very wide banner at the
             // largest font level can't push the icon (and the window) off the screen.
-            int maxIconSize = Math.Max(0, Screen.GetWorkingArea(new Point(0, 0)).Width - LbProgramName.Right - 100);
+            int maxIconSize = Math.Max(0, Screen.GetWorkingArea(new Point(0, 0)).Width - Left - LbProgramName.Right - 100);
             int iconSize = Math.Min(LbProgramName.Height, maxIconSize);
             pictureBox1.Height = iconSize;
             pictureBox1.Width = iconSize;
