@@ -58,7 +58,7 @@ namespace FTAnalyzer.Forms
             // Progress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(295, 75);
             this.ControlBox = false;
             this.Controls.Add(this.label1);

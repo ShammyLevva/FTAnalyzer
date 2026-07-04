@@ -551,7 +551,7 @@ namespace FTAnalyzer.Forms
             // LifeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1123, 644);
             this.Controls.Add(this.splitContainerFacts);
             this.Controls.Add(this.menuStrip);

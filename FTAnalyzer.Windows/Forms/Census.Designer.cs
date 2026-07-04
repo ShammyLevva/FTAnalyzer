@@ -269,7 +269,7 @@ namespace FTAnalyzer.Forms
             // Census
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(1211, 663);
             Controls.Add(toolStrip1);
             Controls.Add(statusStrip);

@@ -468,7 +468,7 @@ namespace FTAnalyzer.Forms
             // Places
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(1265, 661);
             Controls.Add(splitContainerFacts);
             Controls.Add(menuStrip);

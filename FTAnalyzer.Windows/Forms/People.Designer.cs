@@ -277,7 +277,7 @@ namespace FTAnalyzer.Forms
             // People
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(2076, 1345);
             Controls.Add(toolStrip1);
             Controls.Add(splitContainer);
