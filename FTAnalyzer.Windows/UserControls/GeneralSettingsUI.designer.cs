@@ -53,6 +53,7 @@ namespace FTAnalyzer.UserControls
             this.chkSkipFixingLocations = new System.Windows.Forms.CheckBox();
             this.chkHideIgnoredDuplicates = new System.Windows.Forms.CheckBox();
             this.chkIncludeAlternateFacts = new System.Windows.Forms.CheckBox();
+            this.chkIncludeGenderAsFact = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownAge)).BeginInit();
             this.SuspendLayout();
@@ -184,11 +185,19 @@ namespace FTAnalyzer.UserControls
             this.chkIncludeAlternateFacts.Name = "chkIncludeAlternateFacts";
             this.chkIncludeAlternateFacts.UseVisualStyleBackColor = true;
             this.chkIncludeAlternateFacts.CheckedChanged += new System.EventHandler(this.ChkIncludeAlternateFacts_CheckedChanged);
-            // 
+            //
+            // chkIncludeGenderAsFact
+            //
+            resources.ApplyResources(this.chkIncludeGenderAsFact, "chkIncludeGenderAsFact");
+            this.chkIncludeGenderAsFact.Name = "chkIncludeGenderAsFact";
+            this.chkIncludeGenderAsFact.UseVisualStyleBackColor = true;
+            this.chkIncludeGenderAsFact.CheckedChanged += new System.EventHandler(this.ChkIncludeGenderAsFact_CheckedChanged);
+            //
             // GeneralSettingsUI
-            // 
+            //
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkIncludeGenderAsFact);
             this.Controls.Add(this.chkIncludeAlternateFacts);
             this.Controls.Add(this.chkHideIgnoredDuplicates);
             this.Controls.Add(this.chkSkipFixingLocations);
@@ -232,5 +241,6 @@ namespace FTAnalyzer.UserControls
         private System.Windows.Forms.CheckBox chkSkipFixingLocations;
         private System.Windows.Forms.CheckBox chkHideIgnoredDuplicates;
         private System.Windows.Forms.CheckBox chkIncludeAlternateFacts;
+        private System.Windows.Forms.CheckBox chkIncludeGenderAsFact;
     }
 }

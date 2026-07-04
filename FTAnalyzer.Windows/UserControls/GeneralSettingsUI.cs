@@ -23,6 +23,7 @@ namespace FTAnalyzer.UserControls
             chkSkipFixingLocations.Checked = GeneralSettings.Default.SkipFixingLocations;
             chkHideIgnoredDuplicates.Checked = GeneralSettings.Default.HideIgnoredDuplicates;
             chkIncludeAlternateFacts.Checked = GeneralSettings.Default.IncludeAlternateFacts;
+            chkIncludeGenderAsFact.Checked = GeneralSettings.Default.IncludeGenderAsFact;
         }
 
         #region IOptions Members
@@ -43,6 +44,7 @@ namespace FTAnalyzer.UserControls
             GeneralSettings.Default.SkipFixingLocations = chkSkipFixingLocations.Checked;
             GeneralSettings.Default.HideIgnoredDuplicates = chkHideIgnoredDuplicates.Checked;
             GeneralSettings.Default.IncludeAlternateFacts = chkIncludeAlternateFacts.Checked;
+            GeneralSettings.Default.IncludeGenderAsFact = chkIncludeGenderAsFact.Checked;
             Utilities.UIHelpers.SafeSaveSettings(GeneralSettings.Default);
             OnMinParentalAgeChanged();
             OnAliasInNameChanged();
@@ -106,5 +108,7 @@ namespace FTAnalyzer.UserControls
         void UpDownAge_ValueChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
 
         void ChkIncludeAlternateFacts_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
+
+        void ChkIncludeGenderAsFact_CheckedChanged(object sender, EventArgs e) => GeneralSettings.Default.ReloadRequired = true;
     }
 }

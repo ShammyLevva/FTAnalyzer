@@ -165,6 +165,36 @@
   <data name="&gt;&gt;chkIncludeAlternateFacts.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="chkIncludeGenderAsFact.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkIncludeGenderAsFact.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkIncludeGenderAsFact.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 328</value>
+  </data>
+  <data name="chkIncludeGenderAsFact.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 17</value>
+  </data>
+  <data name="chkIncludeGenderAsFact.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="chkIncludeGenderAsFact.Text" xml:space="preserve">
+    <value>Include Gender as a Fact (*)</value>
+  </data>
+  <data name="&gt;&gt;chkIncludeGenderAsFact.Name" xml:space="preserve">
+    <value>chkIncludeGenderAsFact</value>
+  </data>
+  <data name="&gt;&gt;chkIncludeGenderAsFact.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkIncludeGenderAsFact.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkIncludeGenderAsFact.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="chkHideIgnoredDuplicates.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
