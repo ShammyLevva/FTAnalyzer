@@ -5,18 +5,21 @@ namespace FTAnalyzer.Mapping
 {
     static class GoogleAPIKey
     {
-        static string APIkeyValue = string.Empty;
+        static string? APIkeyValue;
 
         public static string KeyValue
         {
             get
             {
-                if (string.IsNullOrEmpty(APIkeyValue))
+                if (APIkeyValue is null)
                 {
                     try
                     {
                         if (string.IsNullOrEmpty(MappingSettings.Default.GoogleAPI))
-                            APIkeyValue = "AIzaSyDJCForfeivoVF03Sr04rN9MMulO6KwA_M";
+                        {
+                            APIkeyValue = string.Empty;
+                            UIHelpers.ShowMessage("No Google API Key set.\nGeocoding needs your own FREE Google API Key for up to 10,000 lookups a month.\nSee Help menu, 'Google API Setup Guide' to get one, then enter it under Mapping Settings.");
+                        }
                         else
                         {
                             APIkeyValue = MappingSettings.Default.GoogleAPI;
@@ -25,7 +28,7 @@ namespace FTAnalyzer.Mapping
                     }
                     catch (Exception)
                     {
-                        APIkeyValue = "AIzaSyDJCForfeivoVF03Sr04rN9MMulO6KwA_M";
+                        APIkeyValue = string.Empty;
                     }
                 }
                 return APIkeyValue;

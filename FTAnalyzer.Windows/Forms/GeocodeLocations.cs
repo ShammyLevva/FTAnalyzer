@@ -467,7 +467,7 @@ namespace FTAnalyzer.Forms
 
         #region Google Geocode Threading
 
-        async void GoogleGeocodingBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        void GoogleGeocodingBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             var worker = (BackgroundWorker)sender;
             bool retryPartials = false;
@@ -481,7 +481,11 @@ namespace FTAnalyzer.Forms
             {
                 retryPartials = b;
             }
-            await GoogleGeoCodeAsync(worker, e, retryPartials, token);
+            // DoWork must run synchronously: BackgroundWorker treats an "async void" handler as
+            // finished as soon as it hits its first await, firing RunWorkerCompleted while the
+            // real work keeps running in the background, which then crashes on the next
+            // ReportProgress with "OperationCompleted...further calls are illegal".
+            GoogleGeoCodeAsync(worker, e, retryPartials, token).GetAwaiter().GetResult();
         }
 
         void GoogleGeocodingBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e) => GeoCodingProgressChanged(e);
@@ -556,27 +560,29 @@ namespace FTAnalyzer.Forms
             txtGoogleWait.Text = args.Message;
         }
 
-        async void ReverseGeocodeBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        void ReverseGeocodeBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             // ensure we have a CTS for this reverse geocode run
             reverseGeocodeCts?.Cancel();
             reverseGeocodeCts?.Dispose();
             reverseGeocodeCts = new CancellationTokenSource();
             var token = reverseGeocodeCts.Token;
-            await ReverseGeoCodeAsync(reverseGeocodeBackgroundWorker, e, token);
+            // must run synchronously - see comment in GoogleGeocodingBackgroundWorker_DoWork
+            ReverseGeoCodeAsync(reverseGeocodeBackgroundWorker, e, token).GetAwaiter().GetResult();
         }
 
         #endregion
 
         #region Google Geocoding
 
-        async void EmptyViewPortsBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        void EmptyViewPortsBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             emptyViewPortsCts?.Cancel();
             emptyViewPortsCts?.Dispose();
             emptyViewPortsCts = new CancellationTokenSource();
             var token = emptyViewPortsCts.Token;
-            await CheckEmptyViewPortsAsync(EmptyViewPortsBackgroundWorker, e, token);
+            // must run synchronously - see comment in GoogleGeocodingBackgroundWorker_DoWork
+            CheckEmptyViewPortsAsync(EmptyViewPortsBackgroundWorker, e, token).GetAwaiter().GetResult();
         }
 
         public void StartGoogleGeoCoding(bool retryPartials)
