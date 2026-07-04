@@ -779,7 +779,10 @@ namespace FTAnalyzer
             dgTreeTops.DataSource = [.. treeTopsList];
             dgTreeTops.Focus();
             foreach (DataGridViewColumn c in dgTreeTops.Columns)
+            {
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+                FontScaler.FitColumnToHeader(c); // GetPreferredWidth can undersize a bold header
+            }
             tsCountLabel.Text = Messages.Count + treeTopsList.Count;
             tsHintsLabel.Text = Messages.Hints_Individual;
             mnuPrint.Enabled = true;
@@ -801,7 +804,10 @@ namespace FTAnalyzer
             dgWorldWars.DataSource = [.. warDeadList];
             dgWorldWars.Focus();
             foreach (DataGridViewColumn c in dgWorldWars.Columns)
+            {
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+                FontScaler.FitColumnToHeader(c); // GetPreferredWidth can undersize a bold header
+            }
             tsCountLabel.Text = Messages.Count + warDeadList.Count;
             tsHintsLabel.Text = $"{Messages.Hints_Individual}  {Messages.Hints_LivesOfFirstWorldWar}";
             dgWorldWars.VirtualGridFiltered += VirtualGridFiltered;
@@ -821,7 +827,10 @@ namespace FTAnalyzer
             dgWorldWars.DataSource = [.. warDeadList];
             dgWorldWars.Focus();
             foreach (DataGridViewColumn c in dgWorldWars.Columns)
+            {
                 c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+                FontScaler.FitColumnToHeader(c); // GetPreferredWidth can undersize a bold header
+            }
             tsCountLabel.Text = Messages.Count + warDeadList.Count;
             tsHintsLabel.Text = Messages.Hints_Individual;
             dgWorldWars.VirtualGridFiltered += VirtualGridFiltered;

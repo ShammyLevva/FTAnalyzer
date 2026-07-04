@@ -51,17 +51,30 @@ namespace FTAnalyzer.Utilities
                 try
                 {
                     foreach (DataGridViewColumn column in grid.Columns.Cast<DataGridViewColumn>())
-                    {
-                        int headerWidth = TextRenderer.MeasureText(column.HeaderText, grid.ColumnHeadersDefaultCellStyle.Font).Width + 24; // padding for the sort glyph/margins
-                        if (headerWidth > column.Width)
-                            column.Width = headerWidth;
-                    }
+                        FitColumnToHeader(column);
                 }
                 catch (Exception e)
                 {
                     log.Error($"Error widening columns for '{grid.Name}'", e);
                 }
             }
+        }
+
+        /// <summary>
+        /// Widens (never shrinks) a single column just enough to fit its own header text at the
+        /// grid's current header font. Several forms re-fit column widths from cell content whenever
+        /// a grid is (re)populated (e.g. <c>GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true)</c>),
+        /// which can override the bold-header widening <see cref="Apply"/> already did - call this
+        /// again after any such repopulation to restore the header-fit floor.
+        /// </summary>
+        public static void FitColumnToHeader(DataGridViewColumn column)
+        {
+            Font? headerFont = column.DataGridView?.ColumnHeadersDefaultCellStyle.Font ?? column.HeaderCell.InheritedStyle.Font;
+            if (headerFont is null)
+                return;
+            int headerWidth = TextRenderer.MeasureText(column.HeaderText, headerFont).Width + 24; // padding for the sort glyph/margins
+            if (headerWidth > column.Width)
+                column.Width = headerWidth;
         }
 
         static IEnumerable<Control> GetAllControls(Control root)
