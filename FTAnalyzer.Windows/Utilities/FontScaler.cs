@@ -15,6 +15,10 @@ namespace FTAnalyzer.Utilities
 
         public static void Apply(Control root)
         {
+            // Suspend painting for the whole batch instead of letting each of the (potentially
+            // hundreds of) child controls below repaint itself individually - visiting a whole
+            // form's control tree one Refresh() call at a time produced visible flicker.
+            NativeMethods.SuspendDrawing(root);
             try
             {
                 FontScaleLevel level = FontScale.ForLevel(FontSettings.Default.FontNumber);
@@ -24,6 +28,11 @@ namespace FTAnalyzer.Utilities
             catch (Exception e)
             {
                 log.Error($"Error applying font scale to '{root.Name}'", e);
+            }
+            finally
+            {
+                NativeMethods.ResumeDrawing(root);
+                root.Invalidate(true);
             }
         }
 
@@ -36,7 +45,6 @@ namespace FTAnalyzer.Utilities
                 grid.DefaultCellStyle.Font = new(grid.DefaultCellStyle.Font?.FontFamily ?? grid.Font.FontFamily, level.FontSize, grid.DefaultCellStyle.Font?.Style ?? FontStyle.Regular);
                 grid.RowTemplate.Height = level.FontHeight;
             }
-            control.Refresh();
         }
 
         static IEnumerable<Control> GetAllControls(Control root)

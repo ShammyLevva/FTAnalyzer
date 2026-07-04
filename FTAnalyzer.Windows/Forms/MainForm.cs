@@ -160,6 +160,24 @@ namespace FTAnalyzer
 
         void SetInitialScreenControls()
         {
+            // Suspend painting for the whole batch of repositioning/resizing below - the many
+            // individual Refresh() calls this used to make (one per repositioned control, plus
+            // ResizeTabHeaders' handle recreation) each triggered their own repaint, producing
+            // visible flicker as the form redrew piecemeal.
+            NativeMethods.SuspendDrawing(this);
+            try
+            {
+                SetInitialScreenControlsCore();
+            }
+            finally
+            {
+                NativeMethods.ResumeDrawing(this);
+                Invalidate(true);
+            }
+        }
+
+        void SetInitialScreenControlsCore()
+        {
             // Rows were originally spaced with fixed Top offsets (11, 37, 62, 88) sized for the
             // default 8.25pt font's ~15px label height. At larger font levels AutoSize grows each
             // label past that fixed gap, crowding the rows together. Chain each row off the
@@ -180,13 +198,8 @@ namespace FTAnalyzer
             pbIndividuals.Left = progressBarLeft;
             pbFamilies.Left = progressBarLeft;
             pbRelationships.Left = progressBarLeft;
-            pbSources.Refresh();
-            pbIndividuals.Refresh();
-            pbFamilies.Refresh();
-            pbRelationships.Refresh();
             LbProgramName.Left = pbRelationships.Right + 15;
             LbProgramName.Font = handwritingFont;
-            LbProgramName.Refresh();
             // pictureBox1's original 117x106 design size was only ever sized for the smallest
             // handwriting font level (46pt); it never grew with LbProgramName's much larger sizes
             // at higher levels (up to 76pt), leaving the tree logo looking disproportionately small
@@ -196,10 +209,8 @@ namespace FTAnalyzer
             pictureBox1.Width = (int)(pictureBox1.Height * designAspectRatio);
             pictureBox1.Top = LbProgramName.Top + (LbProgramName.Height - pictureBox1.Height) / 2;
             pictureBox1.Left = LbProgramName.Right;
-            pictureBox1.Refresh();
             Width = Math.Min(pictureBox1.Right + 100, Screen.GetWorkingArea(new Point(0, 0)).Width);
             splitGedcom.SplitterDistance = Math.Max(pbRelationships.Bottom + 18, 110);
-            splitGedcom.Refresh();
             ResizeTabHeaders();
             menuStrip1.Font = normalFont;
             rtbOutput.Font = normalFont;
@@ -231,7 +242,6 @@ namespace FTAnalyzer
             gbFilters.Height = relTypesResearchSuggest.Height;
             nudToday.Left = labTodayYearStep.Right + 8;
             pbToday.Left = labTodayLoadWorldEvents.Right + 8;
-            Refresh();
         }
 
         void ResizeTabHeaders()

@@ -33,6 +33,20 @@ namespace FTAnalyzer.Utilities
         [DllImport("gdi32.dll")]
         internal static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, [In] ref uint pcFonts);
 
+        const int WM_SETREDRAW = 0x000B;
+
+        [DllImport("user32.dll")]
+        static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
+
+        /// <summary>
+        /// Suspends and resumes painting for a control via WM_SETREDRAW, to avoid visible flicker
+        /// when many child controls are updated in a batch (e.g. a font-scale change walking an
+        /// entire form's control tree). Callers must always resume drawing in a finally block.
+        /// </summary>
+        internal static void SuspendDrawing(Control control) => SendMessage(control.Handle, WM_SETREDRAW, IntPtr.Zero, IntPtr.Zero);
+
+        internal static void ResumeDrawing(Control control) => SendMessage(control.Handle, WM_SETREDRAW, (IntPtr)1, IntPtr.Zero);
+
         [DllImport("user32.dll", SetLastError = true, BestFitMapping = false, CharSet = CharSet.Unicode, ThrowOnUnmappableChar = true)]
         static extern IntPtr FindWindow(string lpClassName, string? lpWindowName);
 
