@@ -47,6 +47,21 @@ namespace FTAnalyzer.Forms.Controls
 
             FilterStringChanged += OnFilterStringChanged;
 
+            EnableHeadersVisualStyles = false; // required for ColumnHeadersDefaultCellStyle to take effect
+            ColumnHeadersDefaultCellStyle.BackColor = Theme.Colors.PrimaryForestGreen;
+            ColumnHeadersDefaultCellStyle.ForeColor = Theme.Colors.BgCard;
+            ColumnHeadersDefaultCellStyle.SelectionBackColor = Theme.Colors.PrimaryForestGreen;
+            ColumnHeadersDefaultCellStyle.SelectionForeColor = Theme.Colors.BgCard;
+            BackgroundColor = Theme.Colors.BgCard;
+            GridColor = Theme.Colors.Border;
+            // A paler green than both the header and the header's filter button, so a selected
+            // row (especially the first row, right under the header) reads as its own distinct
+            // state rather than merging into the header or bleeding into the button color.
+            DefaultCellStyle.SelectionBackColor = Theme.Colors.PrimaryForestGreenPale;
+            DefaultCellStyle.SelectionForeColor = Theme.Colors.SecondaryCharcoalBark;
+            RowsDefaultCellStyle.BackColor = Theme.Colors.BgCard;
+            AlternatingRowsDefaultCellStyle.BackColor = Theme.Colors.BgParchment;
+
             SetDoubleBuffered();
         }
 

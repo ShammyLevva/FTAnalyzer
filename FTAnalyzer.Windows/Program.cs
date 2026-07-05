@@ -37,9 +37,21 @@ namespace FTAnalyzer
         // than baking FTAnalyzer's branding into the package itself.
         static void ConfigureGridTheme()
         {
-            Zuby.ADGV.GridTheme.HeaderButtonBorder = Theme.Colors.AccentWarmBronze;
-            Zuby.ADGV.GridTheme.HeaderButtonHoverFill = Theme.Colors.BgParchment;
-            Zuby.ADGV.GridTheme.HeaderButtonNormalFill = Theme.Colors.BgCard;
+            // Normal state uses a lighter green than the header background so the button
+            // reads as part of the header row rather than a patch stuck on top of it; hover
+            // flips to the gold accent for a clear, contrasting "you're here" signal.
+            // (PrimaryForestGreenPale, one step lighter still, is reserved for row selection
+            // instead - using the same tone for both made the button and a selected row bleed
+            // into each other visually.)
+            Zuby.ADGV.GridTheme.HeaderButtonBorder = Theme.Colors.PrimaryForestGreenLight;
+            Zuby.ADGV.GridTheme.HeaderButtonNormalFill = Theme.Colors.PrimaryForestGreenLight;
+            Zuby.ADGV.GridTheme.HeaderButtonHoverFill = Theme.Colors.AccentActionAmber;
+            // The filter/sort glyph artwork is dark and reads poorly on a dark green header -
+            // recolor it solid gold instead (DarkGoldLight was designed for dark surfaces).
+            Zuby.ADGV.GridTheme.HeaderIconColor = Theme.Colors.DarkGoldLight;
+            // Gap between the icon and its button edge - tweak here if the icon ever looks
+            // too cramped/too dominant; no package change needed.
+            Zuby.ADGV.GridTheme.HeaderIconPadding = 6;
 
             Zuby.ADGV.GridTheme.DropDownBackground = Theme.Colors.BgCard;
 
