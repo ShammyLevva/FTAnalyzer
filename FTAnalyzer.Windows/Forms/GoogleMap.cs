@@ -216,8 +216,7 @@ namespace FTAnalyzer.Forms
 
                 string jsonString = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
                 res = JsonConvert.DeserializeObject<GeoResponse>(jsonString);
-                if (res is not null)
-                    res.Status = res.Results.Length > 0 ? "OK" : "ZERO_RESULTS";
+                res?.Status = res.Results.Length > 0 ? "OK" : "ZERO_RESULTS";
             }
             catch (OperationCanceledException)
             {
