@@ -78,9 +78,10 @@ namespace FTAnalyzer.Forms.Controls
             else
             {
                 SortableBindingList<T> filter = _fulllist;
-                foreach (string filteredColumn in VirtualDataGridView<T>.GetFilteredColumns(e.FilterString))
+                string filterString = e.FilterString ?? string.Empty;
+                foreach (string filteredColumn in VirtualDataGridView<T>.GetFilteredColumns(filterString))
                 {
-                    List<string> filteredValues = VirtualDataGridView<T>.GetFilteredValues(filteredColumn, e.FilterString);
+                    List<string> filteredValues = VirtualDataGridView<T>.GetFilteredValues(filteredColumn, filterString);
                     filter = [.. filter.Where(x => x is not null && filteredValues.Contains(x.GetType().GetProperty(filteredColumn)?.GetValue(x, null)))];
                 }
                 _dataSource = filter;
