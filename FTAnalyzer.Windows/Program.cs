@@ -54,6 +54,11 @@ namespace FTAnalyzer
             // is capped at HeaderButtonMaxSize, this only needs to be a small breathing-room
             // gap, not a large offset to compensate for an oversized button.
             Zuby.ADGV.GridTheme.HeaderIconPadding = 3;
+            // The package's own default (20) was clamping the button below what its own
+            // font-based sizing calculates (~1.3x the header font's line height, roughly
+            // 23-26px for our header font) - raise the ceiling so that calculation isn't
+            // artificially suppressed.
+            Zuby.ADGV.GridTheme.HeaderButtonMaxSize = 32;
 
             Zuby.ADGV.GridTheme.DropDownBackground = Theme.Colors.BgCard;
 

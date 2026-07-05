@@ -2914,17 +2914,36 @@ namespace FTAnalyzer
         }
 
 
+        bool interactiveMoveOrResize;
+
+        void MainForm_ResizeBegin(object sender, EventArgs e) => interactiveMoveOrResize = true;
+
+        void MainForm_ResizeEnd(object sender, EventArgs e)
+        {
+            interactiveMoveOrResize = false;
+            SavePosition();
+        }
+
         void MainForm_Resize(object sender, EventArgs e)
         {
             try
             {
                 splitGedcom.Height = 100;
-                SavePosition();
+                // Skip SavePosition (and the CheckMaxWindowSizes clamp inside it) while the user is
+                // actively dragging - mutating Top/Left/Width/Height mid-drag fights the OS's own
+                // move/resize tracking, which is what caused the drag-to-second-monitor bug. Deferred
+                // to MainForm_ResizeEnd, which fires once the drag/resize loop actually exits.
+                if (!interactiveMoveOrResize)
+                    SavePosition();
             }
             catch (Exception) { }
         }
 
-        void MainForm_Move(object sender, EventArgs e) => SavePosition();
+        void MainForm_Move(object sender, EventArgs e)
+        {
+            if (!interactiveMoveOrResize)
+                SavePosition();
+        }
 
 
         void SavePosition()

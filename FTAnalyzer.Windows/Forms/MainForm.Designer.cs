@@ -4439,6 +4439,8 @@ namespace FTAnalyzer
             DragEnter += MainForm_DragEnter;
             Move += MainForm_Move;
             Resize += MainForm_Resize;
+            ResizeBegin += MainForm_ResizeBegin;
+            ResizeEnd += MainForm_ResizeEnd;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             mnuSetRoot.ResumeLayout(false);
