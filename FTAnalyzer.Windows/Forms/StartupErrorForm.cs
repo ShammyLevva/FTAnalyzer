@@ -73,6 +73,7 @@ namespace FTAnalyzer.Forms
 
             Controls.AddRange([iconBox, lblHeader, lblHint, btnGitHub, btnDetails, btnClose]);
             FontScaler.Apply(this);
+            Theme.FormTheme.Apply(this);
         }
 
         void OpenGitHubIssue()

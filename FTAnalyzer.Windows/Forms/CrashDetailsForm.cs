@@ -59,6 +59,7 @@ namespace FTAnalyzer.Forms
 
             Controls.AddRange([rtb, buttonPanel]);
             FontScaler.Apply(this);
+            Theme.FormTheme.Apply(this);
         }
     }
 }

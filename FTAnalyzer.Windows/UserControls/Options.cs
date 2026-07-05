@@ -18,6 +18,7 @@ namespace FTAnalyzer.UserControls
         public Options()
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             GeneralSettings.Default.ReloadRequired = false;
             _lookupTable = [];
         }

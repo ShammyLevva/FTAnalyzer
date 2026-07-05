@@ -10,6 +10,7 @@ namespace FTAnalyzer.UserControls
         public NonGedcomDateSettingsUI()
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             chkUseNonGedcomDates.Checked = NonGedcomDate.Default.UseNonGedcomDates;
             rbSlash.Checked = NonGedcomDate.Default.Separator == "/";
             rbDot.Checked = NonGedcomDate.Default.Separator == ".";

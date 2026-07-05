@@ -24,6 +24,7 @@ namespace FTAnalyzer.Forms
         public Places(IProgress<string> outputText)
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
 
             // Restore saved position/size before form is shown to prevent jumping
             int width = RegistrySettings.GetIntRegistryValue("Places size - width", Width);

@@ -7,6 +7,7 @@ namespace FTAnalyzer.Forms
         public Notes(Individual ind)
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             Top += NativeMethods.TopTaskbarOffset;
             rtbNotes.Text = ind.Notes;
             Text = "Notes for " + ind.ToString();

@@ -12,6 +12,7 @@ namespace FTAnalyzer.Forms.Controls
         public CensusDateSelector()
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             // label1 is AutoSize; whenever a font-scale change grows/shrinks it, keep the
             // combo positioned to its right automatically instead of relying on the parent
             // form remembering to call a reposition method after every font change.

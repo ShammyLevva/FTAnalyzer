@@ -30,6 +30,7 @@ namespace FTAnalyzer.Forms
         public LifeLine(IProgress<string> _outputText)
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             Top += NativeMethods.TopTaskbarOffset;
             isLoading = true;
             isQuerying = false;

@@ -27,6 +27,7 @@ namespace FTAnalyzer.Forms
         public BingOSMap()
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             loaded = false;
             string filename = Path.Combine(Application.StartupPath + @"\Resources\BingOSMaps.htm");
             webBrowser.Navigate(new Uri(filename));

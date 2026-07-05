@@ -23,6 +23,7 @@ namespace FTAnalyzer.Forms
         {
             try { InitializeComponent(); }
             catch (Exception) { }
+            Theme.FormTheme.Apply(this);
             // Ensure toolStrip sits at the top and splitContainer fills below it
             toolStrip1.Dock = DockStyle.Top;
             splitContainer.Dock = DockStyle.Fill;

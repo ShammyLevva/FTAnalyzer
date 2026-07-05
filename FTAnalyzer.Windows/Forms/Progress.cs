@@ -7,6 +7,7 @@ namespace FTAnalyzer.Forms
         public Progress(int maximum)
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             Top += NativeMethods.TopTaskbarOffset;
             progressBar1.Minimum = 0;
             progressBar1.Maximum = maximum;

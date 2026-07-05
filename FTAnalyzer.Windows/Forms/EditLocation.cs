@@ -26,6 +26,7 @@ namespace FTAnalyzer.Forms
         public EditLocation(FactLocation location)
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             Top += NativeMethods.TopTaskbarOffset;
             customMapLayers = [];
             mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);

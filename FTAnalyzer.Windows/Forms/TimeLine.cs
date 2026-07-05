@@ -23,6 +23,7 @@ namespace FTAnalyzer.Forms
         public TimeLine(IProgress<string> outputText)
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             Top += NativeMethods.TopTaskbarOffset;
             loading = true;
             this.outputText = outputText;

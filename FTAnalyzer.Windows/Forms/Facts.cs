@@ -25,6 +25,7 @@ namespace FTAnalyzer.Forms
         Facts()
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             Top += NativeMethods.TopTaskbarOffset;
             facts = [];
             facts.SortFinished += new EventHandler(Grid_SortFinished);

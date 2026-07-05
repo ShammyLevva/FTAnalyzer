@@ -14,6 +14,7 @@ namespace FTAnalyzer.UserControls
         public CensusSettingsUI()
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             //cannot be in load, because its possible this tab won't show, and the values will not be initialized.
             //if this happens, then the users settings will be cleared.
             chkCensusResidence.Checked = GeneralSettings.Default.UseResidenceAsCensus;

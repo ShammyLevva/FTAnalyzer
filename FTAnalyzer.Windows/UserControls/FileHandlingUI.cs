@@ -14,6 +14,7 @@ namespace FTAnalyzer.UserControls
         public FileHandlingUI()
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             //cannot be in load, because its possible this tab won't show, and the values will not be initialized.
             //if this happens, then the users settings will be cleared.
             chkRetryFailedLines.Checked = FileHandling.Default.RetryFailedLines;

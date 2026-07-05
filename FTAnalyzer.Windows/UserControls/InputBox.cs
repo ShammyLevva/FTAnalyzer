@@ -39,6 +39,7 @@
             form.MaximizeBox = false;
             form.AcceptButton = buttonOk;
             form.CancelButton = buttonCancel;
+            Theme.FormTheme.Apply(form);
 
             DialogResult dialogResult = owner is not null ? form.ShowDialog(owner) : form.ShowDialog();
             value = textBox.Text;

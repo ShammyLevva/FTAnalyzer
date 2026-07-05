@@ -14,6 +14,7 @@ namespace FTAnalyzer.UserControls
         public FontSettingsUI()
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             fontNumber = FontSettings.Default.FontNumber;
             tbFontScale.Value = fontNumber;
             SetSelectedFont(fontNumber);

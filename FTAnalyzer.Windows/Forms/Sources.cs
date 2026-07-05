@@ -11,6 +11,7 @@ namespace FTAnalyzer.Forms
         public SourcesForm(DisplayFact fact)
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             Top += NativeMethods.TopTaskbarOffset;
             sources = [];
             dgSources.AutoGenerateColumns = false;

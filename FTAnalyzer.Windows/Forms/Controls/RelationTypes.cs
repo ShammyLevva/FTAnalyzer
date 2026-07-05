@@ -7,7 +7,11 @@ namespace FTAnalyzer.Forms.Controls
 {
     public partial class RelationTypes : UserControl
     {
-        public RelationTypes() => InitializeComponent();
+        public RelationTypes()
+        {
+            InitializeComponent();
+            Theme.FormTheme.Apply(this);
+        }
 
         public bool Directs => ckbDirects.Checked;
         public bool Blood => ckbBlood.Checked;

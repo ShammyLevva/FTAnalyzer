@@ -26,6 +26,7 @@ namespace FTAnalyzer.Forms
         public Census(CensusDate censusDate, bool censusDone)
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             ft = FamilyTree.Instance;
             reportFormHelper = new ReportFormHelper(this, "Census Report", dgCensus, ResetTable, "Census");
 

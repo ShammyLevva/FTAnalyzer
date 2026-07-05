@@ -18,6 +18,24 @@ namespace FTAnalyzer.Forms.Controls
         // protected on Control, so expose it for MainForm to call after a font-scale change.
         public void RemeasureTabsForCurrentFont() => RecreateHandle();
 
+        const int WM_ERASEBKGND = 0x0014;
+
+        // DrawItem only paints each tab's own rectangle, so the native tab-strip background
+        // beyond the last tab (and any margin around them) is left unpainted and shows the
+        // system default color. Fill the whole control background ourselves first.
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == WM_ERASEBKGND)
+            {
+                using System.Drawing.Graphics g = System.Drawing.Graphics.FromHdc(m.WParam);
+                using SolidBrush brush = new(Theme.Colors.BgParchment);
+                g.FillRectangle(brush, ClientRectangle);
+                m.Result = 1;
+                return;
+            }
+            base.WndProc(ref m);
+        }
+
         // Ensures the designer calls our draw logic as well.
         protected override void OnDrawItem(DrawItemEventArgs e)
         {

@@ -9,6 +9,7 @@ namespace FTAnalyzer.Forms.Controls
         public CensusCountry()
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             groupBox1.Text = "Census Country";
             // Each radio button is AutoSize and grows wider at larger font levels, but they were laid
             // out at fixed absolute positions - reposition off each other's actual rendered edges

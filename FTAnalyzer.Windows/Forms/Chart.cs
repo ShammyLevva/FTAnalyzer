@@ -7,6 +7,7 @@ namespace FTAnalyzer.Forms
         public Chart()
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             Top += NativeMethods.TopTaskbarOffset;
         }
 

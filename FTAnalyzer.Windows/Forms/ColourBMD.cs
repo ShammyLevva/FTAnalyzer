@@ -24,6 +24,7 @@ namespace FTAnalyzer.Forms
         public ColourBMD(List<IDisplayColourBMD> reportList)
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             _reportList = [.. reportList];
             reportFormHelper = new(this, "Colour BMD Report", dgBMDReportSheet, ResetTable, "Colour BMD");
             boldFont = new(dgBMDReportSheet.DefaultCellStyle.Font?.FontFamily ?? SystemFonts.DefaultFont.FontFamily, FontSettings.Default.FontSize, FontStyle.Bold);

@@ -87,6 +87,7 @@ namespace FTAnalyzer.Forms
             try
             {
                 InitializeComponent();
+                Theme.FormTheme.Apply(this);
                 Top += NativeMethods.TopTaskbarOffset;
             }
             catch (Exception) { }

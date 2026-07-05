@@ -49,6 +49,7 @@ namespace FTAnalyzer
 
         void ApplyTheme()
         {
+            Theme.FormTheme.Apply(this);
             BackColor = Theme.Colors.BgParchment;
             panel2.BackColor = Theme.Colors.BgParchment;
             LbProgramName.ForeColor = Theme.Colors.GoldDark;

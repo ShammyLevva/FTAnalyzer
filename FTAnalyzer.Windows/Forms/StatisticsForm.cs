@@ -13,6 +13,7 @@ namespace FTAnalyzer.Forms
         public StatisticsForm(StatisticType type)
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             Top += NativeMethods.TopTaskbarOffset;
             StatType = type;
             tsStatusLabel.Text = string.Empty;

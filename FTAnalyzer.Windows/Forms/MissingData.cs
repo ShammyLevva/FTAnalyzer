@@ -8,6 +8,7 @@ namespace FTAnalyzer.Forms
         public MissingData() // should be List<IDisplayMissingData> list once implemented
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             Top += NativeMethods.TopTaskbarOffset;
             SetDefaultValues();
         }

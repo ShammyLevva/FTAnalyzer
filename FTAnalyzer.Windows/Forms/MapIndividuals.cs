@@ -22,6 +22,7 @@ namespace FTAnalyzer
             try
             {
                 InitializeComponent();
+                Theme.FormTheme.Apply(this);
                 Top += NativeMethods.TopTaskbarOffset;
                 dgIndividuals.AutoGenerateColumns = false;
                 dgIndividuals.DataSource = new SortableBindingList<MapLocation>(this.locations);

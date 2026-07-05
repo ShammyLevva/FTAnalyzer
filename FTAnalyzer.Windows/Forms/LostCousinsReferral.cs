@@ -13,6 +13,7 @@ namespace FTAnalyzer.Forms
         public LostCousinsReferral(Individual referee, bool onlyInCommon)
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             Top += NativeMethods.TopTaskbarOffset;
             FamilyTree ft = FamilyTree.Instance;
             Text = $"Lost Cousins Referral for {referee}";

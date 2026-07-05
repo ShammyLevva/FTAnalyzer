@@ -25,6 +25,7 @@ namespace FTAnalyzer.Forms
         public ColourCensus(string country, List<IDisplayColourCensus> reportList)
         {
             InitializeComponent();
+            Theme.FormTheme.Apply(this);
             settingSelections = false;
             _country = country;
             _reportList = [.. reportList];
