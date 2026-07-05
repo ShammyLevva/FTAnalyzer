@@ -81,6 +81,27 @@
     <None Remove="Resources\Icons\flogo_rgb_hex-brc-site-250.png" />
     <None Remove="Resources\Icons\FTAnalyzer.ico" />
     <None Remove="Resources\Icons\GoogleMapsAPI.png" />
+    <None Remove="Resources\Icons\Menu\auto_stories.png" />
+    <None Remove="Resources\Icons\Menu\backup.png" />
+    <None Remove="Resources\Icons\Menu\bar_chart.png" />
+    <None Remove="Resources\Icons\Menu\bug_report.png" />
+    <None Remove="Resources\Icons\Menu\close.png" />
+    <None Remove="Resources\Icons\Menu\database.png" />
+    <None Remove="Resources\Icons\Menu\download.png" />
+    <None Remove="Resources\Icons\Menu\file_open.png" />
+    <None Remove="Resources\Icons\Menu\folder_open.png" />
+    <None Remove="Resources\Icons\Menu\help.png" />
+    <None Remove="Resources\Icons\Menu\history.png" />
+    <None Remove="Resources\Icons\Menu\info.png" />
+    <None Remove="Resources\Icons\Menu\logout.png" />
+    <None Remove="Resources\Icons\Menu\map.png" />
+    <None Remove="Resources\Icons\Menu\new_releases.png" />
+    <None Remove="Resources\Icons\Menu\print.png" />
+    <None Remove="Resources\Icons\Menu\refresh.png" />
+    <None Remove="Resources\Icons\Menu\settings.png" />
+    <None Remove="Resources\Icons\Menu\settings_backup_restore.png" />
+    <None Remove="Resources\Icons\Menu\shield.png" />
+    <None Remove="Resources\Icons\Menu\tune.png" />
     <None Remove="Resources\Icons\GoogleMatch.png" />
     <None Remove="Resources\Icons\GooglePartial.png" />
     <None Remove="Resources\Icons\OS50kFuzzy.png" />
@@ -156,6 +177,69 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\GoogleMapsAPI.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\auto_stories.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\backup.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\bar_chart.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\bug_report.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\close.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\database.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\download.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\file_open.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\folder_open.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\help.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\history.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\info.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\logout.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\map.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\new_releases.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\print.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\refresh.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\settings.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\settings_backup_restore.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\shield.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\tune.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\GoogleMatch.png">

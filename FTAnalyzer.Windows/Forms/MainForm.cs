@@ -45,6 +45,7 @@ namespace FTAnalyzer
             loading = true;
             InitializeComponent();
             ApplyTheme();
+            ApplyMenuIcons();
         }
 
         void ApplyTheme()
@@ -59,6 +60,40 @@ namespace FTAnalyzer
             statusStrip.BackColor = Theme.Colors.BgParchment;
             statusStrip.ForeColor = Theme.Colors.SecondaryCharcoalBark;
             statusStrip.Renderer = new ChromeToolStripRenderer();
+        }
+
+        // Menu icons ported from the web app's Material Symbols set (see UI modernisation
+        // plan, Phase 5). Only the top-level menus plus the highest-traffic leaf items are
+        // iconed here by design - the many near-duplicate "X to Excel"/report leaf items are
+        // left bare rather than forcing a bespoke icon onto every one of them.
+        void ApplyMenuIcons()
+        {
+            (ToolStripMenuItem item, string icon)[] iconMap =
+            [
+                (fileToolStripMenuItem, "folder_open"),
+                (mnuReports, "bar_chart"),
+                (mnuExport, "download"),
+                (toolsToolStripMenuItem, "tune"),
+                (mnuMaps, "map"),
+                (helpToolStripMenuItem, "help"),
+                (openToolStripMenuItem, "file_open"),
+                (mnuReload, "refresh"),
+                (mnuPrint, "print"),
+                (mnuRecent, "history"),
+                (databaseToolStripMenuItem, "database"),
+                (backupToolStripMenuItem, "backup"),
+                (mnuRestore, "settings_backup_restore"),
+                (mnuCloseGEDCOM, "close"),
+                (exitToolStripMenuItem, "logout"),
+                (optionsToolStripMenuItem, "settings"),
+                (viewOnlineManualToolStripMenuItem, "auto_stories"),
+                (reportAnIssueToolStripMenuItem, "bug_report"),
+                (privacyPolicyToolStripMenuItem, "shield"),
+                (whatsNewToolStripMenuItem, "new_releases"),
+                (aboutToolStripMenuItem, "info"),
+            ];
+            foreach ((ToolStripMenuItem item, string icon) in iconMap)
+                item.Image = Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Menu\", $"{icon}.png"));
         }
 
         async void MainForm_Load(object sender, EventArgs e)
