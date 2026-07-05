@@ -278,7 +278,7 @@ namespace FTAnalyzer
             // larger font levels but its Left was a fixed coordinate assuming wardeadCountry's design width.
             wardeadRelation.Left = wardeadCountry.Right + groupBoxGap;
             SetStatusBar();
-            CheckMaxWindowSizes(new Point(0, 0));
+            CheckMaxWindowSizes(new Point(Left, Top));
             // Lost Cousins tab: fix after PerformAutoScale. Link labels (originally Top|Right) drift left when
             // Panel1.Width is narrower than their scaled position expects, overlapping relTypesLC.
             // Anchor was changed to Top|Left in designer so this explicit position sticks.
@@ -2933,7 +2933,7 @@ namespace FTAnalyzer
             {  //only save window size if not minimised
                 try
                 {
-                    CheckMaxWindowSizes(new Point(0, 0));
+                    CheckMaxWindowSizes(new Point(Left, Top));
                     RegistrySettings.SetRegistryValue("Mainform size - width", Width, RegistryValueKind.DWord);
                     RegistrySettings.SetRegistryValue("Mainform size - height", Height, RegistryValueKind.DWord);
                     RegistrySettings.SetRegistryValue("Mainform position - top", Top, RegistryValueKind.DWord);

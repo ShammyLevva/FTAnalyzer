@@ -27,7 +27,13 @@ namespace FTAnalyzer.Forms.Controls
             AllowUserToResizeRows = true;
             AutoGenerateColumns = false;
           
-            AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            // Every column already gets an explicit width from [ColumnDetail], so autosizing
+            // isn't needed - and DisplayedCells continuously recalculates widths from cell
+            // content, which was fighting the header's own button-space-widening logic (causing
+            // header text truncation) and silently disabling manual column resize despite
+            // AllowUserToResizeColumns above (per MSDN, AutoSizeColumnsMode != None overrides
+            // a column's Resizable behavior).
+            AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
             ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             Dock = DockStyle.Fill;

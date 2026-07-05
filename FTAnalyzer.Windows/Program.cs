@@ -50,8 +50,10 @@ namespace FTAnalyzer
             // recolor it solid gold instead (DarkGoldLight was designed for dark surfaces).
             Zuby.ADGV.GridTheme.HeaderIconColor = Theme.Colors.DarkGoldLight;
             // Gap between the icon and its button edge - tweak here if the icon ever looks
-            // too cramped/too dominant; no package change needed.
-            Zuby.ADGV.GridTheme.HeaderIconPadding = 8;
+            // too cramped/too dominant; no package change needed. Now that the button itself
+            // is capped at HeaderButtonMaxSize, this only needs to be a small breathing-room
+            // gap, not a large offset to compensate for an oversized button.
+            Zuby.ADGV.GridTheme.HeaderIconPadding = 3;
 
             Zuby.ADGV.GridTheme.DropDownBackground = Theme.Colors.BgCard;
 
