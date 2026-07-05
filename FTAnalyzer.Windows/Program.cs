@@ -51,7 +51,7 @@ namespace FTAnalyzer
             Zuby.ADGV.GridTheme.HeaderIconColor = Theme.Colors.DarkGoldLight;
             // Gap between the icon and its button edge - tweak here if the icon ever looks
             // too cramped/too dominant; no package change needed.
-            Zuby.ADGV.GridTheme.HeaderIconPadding = 6;
+            Zuby.ADGV.GridTheme.HeaderIconPadding = 8;
 
             Zuby.ADGV.GridTheme.DropDownBackground = Theme.Colors.BgCard;
 
