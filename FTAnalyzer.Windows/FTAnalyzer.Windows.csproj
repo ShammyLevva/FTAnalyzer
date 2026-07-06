@@ -87,9 +87,13 @@
     <None Remove="Resources\Icons\Menu\bug_report.png" />
     <None Remove="Resources\Icons\Menu\close.png" />
     <None Remove="Resources\Icons\Menu\database.png" />
+    <None Remove="Resources\Icons\Menu\description.png" />
     <None Remove="Resources\Icons\Menu\download.png" />
+    <None Remove="Resources\Icons\Menu\event.png" />
     <None Remove="Resources\Icons\Menu\file_open.png" />
     <None Remove="Resources\Icons\Menu\folder_open.png" />
+    <None Remove="Resources\Icons\Menu\format_size.png" />
+    <None Remove="Resources\Icons\Menu\groups.png" />
     <None Remove="Resources\Icons\Menu\help.png" />
     <None Remove="Resources\Icons\Menu\history.png" />
     <None Remove="Resources\Icons\Menu\info.png" />
@@ -99,6 +103,7 @@
     <None Remove="Resources\Icons\Menu\print.png" />
     <None Remove="Resources\Icons\Menu\refresh.png" />
     <None Remove="Resources\Icons\Menu\settings.png" />
+    <None Remove="Resources\Icons\Menu\settings_applications.png" />
     <None Remove="Resources\Icons\Menu\settings_backup_restore.png" />
     <None Remove="Resources\Icons\Menu\shield.png" />
     <None Remove="Resources\Icons\Menu\tune.png" />
@@ -197,13 +202,25 @@
     <Content Include="Resources\Icons\Menu\database.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Icons\Menu\description.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Icons\Menu\download.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\event.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\Menu\file_open.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\Menu\folder_open.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\format_size.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\groups.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\Menu\help.png">
@@ -231,6 +248,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\Menu\settings.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Menu\settings_applications.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\Menu\settings_backup_restore.png">

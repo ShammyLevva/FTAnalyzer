@@ -72,7 +72,7 @@ namespace FTAnalyzer.UserControls
 
         public Image? MenuIcon
         {
-            get { return null; }
+            get { return Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Menu\map.png")); }
         }
 
         #endregion

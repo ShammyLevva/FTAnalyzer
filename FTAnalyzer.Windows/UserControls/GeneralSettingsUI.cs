@@ -94,7 +94,7 @@ namespace FTAnalyzer.UserControls
 
         public string TreePosition => DisplayName;
 
-        public Image? MenuIcon => null;
+        public Image? MenuIcon => Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Menu\settings_applications.png"));
 
         #endregion
 

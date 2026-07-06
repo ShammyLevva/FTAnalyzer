@@ -66,7 +66,7 @@ namespace FTAnalyzer.UserControls
 
         public string TreePosition => DisplayName;
 
-        public Image? MenuIcon => null;
+        public Image? MenuIcon => Image.FromFile(Path.Combine(Application.StartupPath, @"Resources\Icons\Menu\description.png"));
 
         #endregion
         void ChkLoadWithFilters_CheckedChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
