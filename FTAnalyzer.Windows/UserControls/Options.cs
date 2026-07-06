@@ -1,4 +1,5 @@
-﻿using FTAnalyzer.Properties;
+﻿using FTAnalyzer.Graphics;
+using FTAnalyzer.Properties;
 using FTAnalyzer.Utilities;
 using System.Diagnostics;
 using System.Reflection;
@@ -28,6 +29,15 @@ namespace FTAnalyzer.UserControls
             SuspendLayout();
             try
             {
+                // The 16px icons baked into the ImageList match the app's default (level 1) font
+                // size. At higher Font Settings levels the tree's row text grows a lot (8.25pt up
+                // to 14pt) while a fixed-size ImageList wouldn't, so icons end up looking tiny next
+                // to the text - scale them by the same ratio the chosen font level scales text by.
+                FontScaleLevel level = FontScale.ForLevel(FontSettings.Default.FontNumber);
+                float iconScale = level.FontSize / FontScale.ForLevel(FontScale.MinLevel).FontSize;
+                int iconSize = (int)Math.Round(16 * iconScale);
+                OptionsMenuImageList.ImageSize = new Size(iconSize, iconSize);
+
                 Type[] types = Assembly.GetExecutingAssembly().GetTypes();
                 for (int i = 0; i < types.Length; i++)
                 {
@@ -45,7 +55,7 @@ namespace FTAnalyzer.UserControls
                             panel1.Controls.Add(userControl);
                             if (optionCast.MenuIcon is not null)
                             {
-                                OptionsMenuImageList.Images.Add(optionCast.TreePosition, optionCast.MenuIcon);
+                                OptionsMenuImageList.Images.Add(optionCast.TreePosition, GraphicsUtilities.ResizeImage(optionCast.MenuIcon, iconSize, iconSize));
                             }
                             AddNodesToTree(optionCast.TreePosition);
                             _lookupTable.Add(optionCast.TreePosition, userControl);

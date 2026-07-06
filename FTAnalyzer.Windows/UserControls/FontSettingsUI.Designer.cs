@@ -44,7 +44,12 @@ namespace FTAnalyzer.UserControls
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lbSample = new System.Windows.Forms.Label();
+            this.grpTheme = new System.Windows.Forms.GroupBox();
+            this.rbThemeSystemDefault = new System.Windows.Forms.RadioButton();
+            this.rbThemeLight = new System.Windows.Forms.RadioButton();
+            this.rbThemeDark = new System.Windows.Forms.RadioButton();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.grpTheme.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbFontScale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -117,7 +122,51 @@ namespace FTAnalyzer.UserControls
             this.lbSample.Size = new System.Drawing.Size(141, 13);
             this.lbSample.TabIndex = 29;
             this.lbSample.Text = "This is a sample of Font Size";
-            // 
+            //
+            // grpTheme
+            //
+            this.grpTheme.Controls.Add(this.rbThemeSystemDefault);
+            this.grpTheme.Controls.Add(this.rbThemeLight);
+            this.grpTheme.Controls.Add(this.rbThemeDark);
+            this.grpTheme.Location = new System.Drawing.Point(4, 116);
+            this.grpTheme.Name = "grpTheme";
+            this.grpTheme.Size = new System.Drawing.Size(220, 110);
+            this.grpTheme.TabIndex = 30;
+            this.grpTheme.TabStop = false;
+            this.grpTheme.Text = "Theme";
+            //
+            // rbThemeSystemDefault
+            //
+            this.rbThemeSystemDefault.AutoSize = true;
+            this.rbThemeSystemDefault.Checked = true;
+            this.rbThemeSystemDefault.Location = new System.Drawing.Point(10, 22);
+            this.rbThemeSystemDefault.Name = "rbThemeSystemDefault";
+            this.rbThemeSystemDefault.Size = new System.Drawing.Size(107, 17);
+            this.rbThemeSystemDefault.TabIndex = 0;
+            this.rbThemeSystemDefault.TabStop = true;
+            this.rbThemeSystemDefault.Text = "System Default";
+            this.rbThemeSystemDefault.UseVisualStyleBackColor = true;
+            //
+            // rbThemeLight
+            //
+            this.rbThemeLight.AutoSize = true;
+            this.rbThemeLight.Location = new System.Drawing.Point(10, 48);
+            this.rbThemeLight.Name = "rbThemeLight";
+            this.rbThemeLight.Size = new System.Drawing.Size(79, 17);
+            this.rbThemeLight.TabIndex = 1;
+            this.rbThemeLight.Text = "Light Mode";
+            this.rbThemeLight.UseVisualStyleBackColor = true;
+            //
+            // rbThemeDark
+            //
+            this.rbThemeDark.AutoSize = true;
+            this.rbThemeDark.Location = new System.Drawing.Point(10, 74);
+            this.rbThemeDark.Name = "rbThemeDark";
+            this.rbThemeDark.Size = new System.Drawing.Size(80, 17);
+            this.rbThemeDark.TabIndex = 2;
+            this.rbThemeDark.Text = "Dark Mode";
+            this.rbThemeDark.UseVisualStyleBackColor = true;
+            //
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
@@ -128,6 +177,7 @@ namespace FTAnalyzer.UserControls
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
+            this.Controls.Add(this.grpTheme);
             this.Controls.Add(this.lbSample);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -138,6 +188,8 @@ namespace FTAnalyzer.UserControls
             this.Name = "FontSettingsUI";
             this.Size = new System.Drawing.Size(325, 421);
             ((System.ComponentModel.ISupportInitialize)(this.tbFontScale)).EndInit();
+            this.grpTheme.ResumeLayout(false);
+            this.grpTheme.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -153,6 +205,10 @@ namespace FTAnalyzer.UserControls
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lbSample;
+        private System.Windows.Forms.GroupBox grpTheme;
+        private System.Windows.Forms.RadioButton rbThemeSystemDefault;
+        private System.Windows.Forms.RadioButton rbThemeLight;
+        private System.Windows.Forms.RadioButton rbThemeDark;
         private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

@@ -18,6 +18,18 @@ namespace FTAnalyzer.UserControls
             fontNumber = FontSettings.Default.FontNumber;
             tbFontScale.Value = fontNumber;
             SetSelectedFont(fontNumber);
+            switch (Theme.ActiveColors.Mode)
+            {
+                case Theme.AppThemeMode.Light:
+                    rbThemeLight.Checked = true;
+                    break;
+                case Theme.AppThemeMode.Dark:
+                    rbThemeDark.Checked = true;
+                    break;
+                default:
+                    rbThemeSystemDefault.Checked = true;
+                    break;
+            }
         }
 
         #region IOptions Members
@@ -31,6 +43,10 @@ namespace FTAnalyzer.UserControls
             FontSettings.Default.FontHeight = fontHeight;
             Utilities.UIHelpers.SafeSaveSettings(FontSettings.Default);
             OnFontChanged();
+            Theme.AppThemeMode mode = rbThemeLight.Checked ? Theme.AppThemeMode.Light
+                : rbThemeDark.Checked ? Theme.AppThemeMode.Dark
+                : Theme.AppThemeMode.SystemDefault;
+            Theme.ActiveColors.SetMode(mode);
         }
 
         public void Cancel()
@@ -64,7 +80,7 @@ namespace FTAnalyzer.UserControls
             return invalid;
         }
 
-        public string DisplayName => "Font Settings";
+        public string DisplayName => "Graphics Mode/Font Settings";
 
         public string TreePosition => DisplayName;
 

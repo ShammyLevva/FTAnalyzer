@@ -7,8 +7,15 @@ using Zuby.ADGV;
 
 namespace FTAnalyzer.Forms.Controls
 {
+    // Non-generic marker so callers (e.g. MainForm's theme-toggle handler) can find every grid
+    // via a plain control-tree walk without needing VirtualDataGridView<T>'s type argument.
+    interface IReapplyTheme
+    {
+        void ReapplyTheme();
+    }
+
     [ComplexBindingProperties()]
-    abstract class VirtualDataGridView<T> : AdvancedDataGridView
+    abstract class VirtualDataGridView<T> : AdvancedDataGridView, IReapplyTheme
     {
         const string SourceIndexColumn = "__SourceIndex__";
         internal SortableBindingList<T> _dataSource;
@@ -54,21 +61,36 @@ namespace FTAnalyzer.Forms.Controls
             FilterStringChanged += OnFilterStringChanged;
 
             EnableHeadersVisualStyles = false; // required for ColumnHeadersDefaultCellStyle to take effect
-            ColumnHeadersDefaultCellStyle.BackColor = Theme.Colors.PrimaryForestGreen;
-            ColumnHeadersDefaultCellStyle.ForeColor = Theme.Colors.BgCard;
-            ColumnHeadersDefaultCellStyle.SelectionBackColor = Theme.Colors.PrimaryForestGreen;
-            ColumnHeadersDefaultCellStyle.SelectionForeColor = Theme.Colors.BgCard;
-            BackgroundColor = Theme.Colors.BgCard;
-            GridColor = Theme.Colors.Border;
+            ApplyColors();
+
+            SetDoubleBuffered();
+        }
+
+        void ApplyColors()
+        {
+            ColumnHeadersDefaultCellStyle.BackColor = Theme.ActiveColors.Primary;
+            ColumnHeadersDefaultCellStyle.ForeColor = Theme.ActiveColors.Card;
+            ColumnHeadersDefaultCellStyle.SelectionBackColor = Theme.ActiveColors.Primary;
+            ColumnHeadersDefaultCellStyle.SelectionForeColor = Theme.ActiveColors.Card;
+            BackgroundColor = Theme.ActiveColors.Card;
+            GridColor = Theme.ActiveColors.Border;
             // A paler green than both the header and the header's filter button, so a selected
             // row (especially the first row, right under the header) reads as its own distinct
             // state rather than merging into the header or bleeding into the button color.
-            DefaultCellStyle.SelectionBackColor = Theme.Colors.PrimaryForestGreenPale;
-            DefaultCellStyle.SelectionForeColor = Theme.Colors.SecondaryCharcoalBark;
-            RowsDefaultCellStyle.BackColor = Theme.Colors.BgCard;
-            AlternatingRowsDefaultCellStyle.BackColor = Theme.Colors.BgParchment;
+            DefaultCellStyle.ForeColor = Theme.ActiveColors.Text;
+            DefaultCellStyle.SelectionBackColor = Theme.ActiveColors.PrimaryPale;
+            DefaultCellStyle.SelectionForeColor = Theme.ActiveColors.Text;
+            RowsDefaultCellStyle.BackColor = Theme.ActiveColors.Card;
+            RowsDefaultCellStyle.ForeColor = Theme.ActiveColors.Text;
+            AlternatingRowsDefaultCellStyle.BackColor = Theme.ActiveColors.Background;
+            AlternatingRowsDefaultCellStyle.ForeColor = Theme.ActiveColors.Text;
+        }
 
-            SetDoubleBuffered();
+        // Called after a light/dark toggle - constructor-time colors don't update themselves.
+        public void ReapplyTheme()
+        {
+            ApplyColors();
+            Invalidate();
         }
 
         public void OnFilterStringChanged(object? sender, FilterEventArgs e)

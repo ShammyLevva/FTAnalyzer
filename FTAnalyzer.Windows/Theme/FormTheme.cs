@@ -1,17 +1,26 @@
+using FTAnalyzer.Utilities;
+
 namespace FTAnalyzer.Theme
 {
-    // Applies the ported web-app palette (Colors) to a form/control tree. Conservative by
-    // design: only recolors controls that are still at their default system color, so it
-    // doesn't clobber colors already set deliberately elsewhere (e.g. ColourBMD/ColourCensus
-    // per-cell data coloring, or a warning label set to red). DataGridView header/selection
-    // styling is intentionally left alone here - that goes through the AdvancedDataGridView
-    // source repo (see UI modernisation plan, Phase 4) so every grid picks it up consistently.
+    // Applies the ported web-app palette (ActiveColors, which resolves to the light or dark
+    // variant of Colors depending on the user's toggle) to a form/control tree. Conservative by
+    // design: only recolors controls that are still at a "default" color - either the untouched
+    // system color, or whichever theme variant we ourselves applied last time - so it doesn't
+    // clobber colors set deliberately elsewhere (e.g. ColourBMD/ColourCensus per-cell data
+    // coloring, or a warning label set to red), while still allowing re-applying this after a
+    // light/dark toggle to actually take effect on a form that was already themed once.
+    // DataGridView header/selection styling is intentionally left alone here - that goes through
+    // the AdvancedDataGridView source repo (see UI modernisation plan, Phase 4) so every grid
+    // picks it up consistently.
     static class FormTheme
     {
         public static void Apply(Control root)
         {
             if (root is Form form)
-                form.BackColor = Colors.BgParchment;
+            {
+                form.BackColor = ActiveColors.Background;
+                NativeMethods.SetImmersiveDarkMode(form, ActiveColors.IsDark);
+            }
             ApplyToChildren(root);
         }
 
@@ -24,37 +33,60 @@ namespace FTAnalyzer.Theme
                     case DataGridView:
                         continue; // themed at the source (AdvancedDataGridView), not per-instance
                     case GroupBox groupBox:
-                        if (groupBox.BackColor == SystemColors.Control)
-                            groupBox.BackColor = Colors.BgParchment;
-                        if (groupBox.ForeColor == SystemColors.ControlText)
-                            groupBox.ForeColor = Colors.SecondaryCharcoalBark;
+                        if (IsDefaultBackground(groupBox.BackColor))
+                            groupBox.BackColor = ActiveColors.Background;
+                        if (IsDefaultText(groupBox.ForeColor))
+                            groupBox.ForeColor = ActiveColors.Text;
                         break;
                     case TabPage tabPage:
                         // TabPage ignores BackColor while UseVisualStyleBackColor is on - it
                         // paints the OS visual-style (usually white) background instead.
                         tabPage.UseVisualStyleBackColor = false;
-                        if (tabPage.BackColor == SystemColors.Control)
-                            tabPage.BackColor = Colors.BgParchment;
+                        if (IsDefaultBackground(tabPage.BackColor))
+                            tabPage.BackColor = ActiveColors.Background;
                         break;
                     case Panel panel:
-                        if (panel.BackColor == SystemColors.Control)
-                            panel.BackColor = Colors.BgParchment;
+                        if (IsDefaultBackground(panel.BackColor))
+                            panel.BackColor = ActiveColors.Background;
                         break;
                     case Label label:
-                        if (label.ForeColor == SystemColors.ControlText)
-                            label.ForeColor = Colors.SecondaryCharcoalBark;
+                        if (IsDefaultText(label.ForeColor))
+                            label.ForeColor = ActiveColors.Text;
+                        break;
+                    case CheckBox checkBox:
+                        if (IsDefaultText(checkBox.ForeColor))
+                            checkBox.ForeColor = ActiveColors.Text;
+                        break;
+                    case RadioButton radioButton:
+                        if (IsDefaultText(radioButton.ForeColor))
+                            radioButton.ForeColor = ActiveColors.Text;
+                        break;
+                    case TreeView treeView:
+                        if (IsDefaultWindow(treeView.BackColor))
+                        {
+                            treeView.BackColor = ActiveColors.Card;
+                            treeView.ForeColor = ActiveColors.Text;
+                        }
+                        break;
+                    case ProgressBar progressBar:
+                        // Visual styles render the whole bar via the OS theme handler and ignore
+                        // BackColor/ForeColor entirely - opt this one control out so our colors
+                        // actually show (see NativeMethods.DisableVisualStyles).
+                        NativeMethods.DisableVisualStyles(progressBar);
+                        progressBar.BackColor = ActiveColors.Card;
+                        progressBar.ForeColor = ActiveColors.Primary;
                         break;
                     case Button button:
-                        if (button.BackColor == SystemColors.Control)
+                        if (IsDefaultBackground(button.BackColor) || IsPrimary(button.BackColor))
                         {
                             button.FlatStyle = FlatStyle.Flat;
-                            button.BackColor = Colors.PrimaryForestGreen;
-                            button.ForeColor = Colors.BgCard;
-                            button.FlatAppearance.BorderColor = Colors.PrimaryForestGreen;
+                            button.BackColor = ActiveColors.Primary;
+                            button.ForeColor = ActiveColors.Card;
+                            button.FlatAppearance.BorderColor = ActiveColors.Primary;
                         }
                         break;
                     case TextBoxBase textBox:
-                        if (textBox.BackColor == SystemColors.Window)
+                        if (IsDefaultWindow(textBox.BackColor))
                         {
                             // A ReadOnly RichTextBox/TextBox ignores BackColor changes made
                             // while ReadOnly is already true (long-standing RichEdit quirk) -
@@ -62,8 +94,8 @@ namespace FTAnalyzer.Theme
                             bool wasReadOnly = textBox.ReadOnly;
                             if (wasReadOnly)
                                 textBox.ReadOnly = false;
-                            textBox.BackColor = Colors.BgCard;
-                            textBox.ForeColor = Colors.SecondaryCharcoalBark;
+                            textBox.BackColor = ActiveColors.Card;
+                            textBox.ForeColor = ActiveColors.Text;
                             if (wasReadOnly)
                                 textBox.ReadOnly = true;
                         }
@@ -76,5 +108,20 @@ namespace FTAnalyzer.Theme
                     ApplyToChildren(control);
             }
         }
+
+        // "Default" means either an untouched system color, or whichever background/text/window
+        // shade WE applied under either theme last time - both are safe to overwrite; anything
+        // else is a deliberate override that must be left alone.
+        static bool IsDefaultBackground(Color color) =>
+            color == SystemColors.Control || color == Colors.BgParchment || color == Colors.DarkBgMain;
+
+        static bool IsDefaultText(Color color) =>
+            color == SystemColors.ControlText || color == Colors.SecondaryCharcoalBark || color == Colors.DarkSecondaryText;
+
+        static bool IsDefaultWindow(Color color) =>
+            color == SystemColors.Window || color == Colors.BgCard || color == Colors.DarkBgCard;
+
+        static bool IsPrimary(Color color) =>
+            color == Colors.PrimaryForestGreen || color == Colors.DarkPrimary;
     }
 }

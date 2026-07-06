@@ -47,6 +47,32 @@ namespace FTAnalyzer.Utilities
 
         internal static void ResumeDrawing(Control control) => SendMessage(control.Handle, WM_SETREDRAW, (IntPtr)1, IntPtr.Zero);
 
+        const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
+
+        [DllImport("dwmapi.dll", PreserveSig = true)]
+        static extern int DwmSetWindowAttribute(IntPtr hwnd, int attribute, ref int pvAttribute, int cbAttribute);
+
+        /// <summary>
+        /// Darkens a window's title bar via DWM (Windows 10 1809+). Best-effort: silently does
+        /// nothing on OS builds that don't support the attribute rather than throwing.
+        /// </summary>
+        internal static void SetImmersiveDarkMode(IWin32Window window, bool enabled)
+        {
+            int value = enabled ? 1 : 0;
+            _ = DwmSetWindowAttribute(window.Handle, DWMWA_USE_IMMERSIVE_DARK_MODE, ref value, sizeof(int));
+        }
+
+        [DllImport("uxtheme.dll", CharSet = CharSet.Unicode)]
+        static extern int SetWindowTheme(IntPtr hWnd, string pszSubAppName, string? pszSubIdList);
+
+        /// <summary>
+        /// ProgressBar (and a few other controls) render entirely via the OS visual-style
+        /// handler when <see cref="Application.EnableVisualStyles"/> is on, which ignores
+        /// BackColor/ForeColor completely - opting a specific control out of theming falls back
+        /// to classic GDI drawing, where those color properties actually take effect.
+        /// </summary>
+        internal static void DisableVisualStyles(Control control) => SetWindowTheme(control.Handle, string.Empty, null);
+
         [DllImport("user32.dll", SetLastError = true, BestFitMapping = false, CharSet = CharSet.Unicode, ThrowOnUnmappableChar = true)]
         static extern IntPtr FindWindow(string lpClassName, string? lpWindowName);
 

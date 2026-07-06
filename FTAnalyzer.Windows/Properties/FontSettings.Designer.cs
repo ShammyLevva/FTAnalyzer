@@ -82,5 +82,17 @@ namespace FTAnalyzer.Properties {
                 this["FontHeight"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("SystemDefault")]
+        public global::FTAnalyzer.Theme.AppThemeMode ThemeMode {
+            get {
+                return ((global::FTAnalyzer.Theme.AppThemeMode)(this["ThemeMode"]));
+            }
+            set {
+                this["ThemeMode"] = value;
+            }
+        }
     }
 }

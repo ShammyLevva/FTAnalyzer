@@ -17,5 +17,8 @@
     <Setting Name="FontHeight" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">22</Value>
     </Setting>
+    <Setting Name="ThemeMode" Type="FTAnalyzer.Theme.AppThemeMode" Scope="User">
+      <Value Profile="(Default)">SystemDefault</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

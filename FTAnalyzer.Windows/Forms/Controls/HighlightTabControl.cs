@@ -28,7 +28,7 @@ namespace FTAnalyzer.Forms.Controls
             if (m.Msg == WM_ERASEBKGND)
             {
                 using System.Drawing.Graphics g = System.Drawing.Graphics.FromHdc(m.WParam);
-                using SolidBrush brush = new(Theme.Colors.BgParchment);
+                using SolidBrush brush = new(Theme.ActiveColors.Background);
                 g.FillRectangle(brush, ClientRectangle);
                 m.Result = 1;
                 return;
@@ -51,9 +51,9 @@ namespace FTAnalyzer.Forms.Controls
             TabPage page = TabPages[e.Index];
             bool isSelected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
 
-            Color backColour = isSelected ? Theme.Colors.PrimaryForestGreen : Theme.Colors.BgParchment;
-            Color textColour = isSelected ? Theme.Colors.BgCard : Theme.Colors.SecondaryCharcoalBark;
-            Color borderColour = isSelected ? Theme.Colors.PrimaryForestGreen : Theme.Colors.AccentWarmBronze;
+            Color backColour = isSelected ? Theme.ActiveColors.Primary : Theme.ActiveColors.Background;
+            Color textColour = isSelected ? Theme.ActiveColors.Card : Theme.ActiveColors.Text;
+            Color borderColour = isSelected ? Theme.ActiveColors.Primary : Theme.ActiveColors.AccentWarm;
 
             using var backBrush = new SolidBrush(backColour);
             using var textBrush = new SolidBrush(textColour);

@@ -51,14 +51,14 @@ namespace FTAnalyzer
         void ApplyTheme()
         {
             Theme.FormTheme.Apply(this);
-            BackColor = Theme.Colors.BgParchment;
-            panel2.BackColor = Theme.Colors.BgParchment;
-            LbProgramName.ForeColor = Theme.Colors.GoldDark;
-            menuStrip1.BackColor = Theme.Colors.BgParchment;
-            menuStrip1.ForeColor = Theme.Colors.SecondaryCharcoalBark;
+            BackColor = Theme.ActiveColors.Background;
+            panel2.BackColor = Theme.ActiveColors.Background;
+            LbProgramName.ForeColor = Theme.ActiveColors.GoldTitle;
+            menuStrip1.BackColor = Theme.ActiveColors.Background;
+            menuStrip1.ForeColor = Theme.ActiveColors.Text;
             menuStrip1.Renderer = new ChromeToolStripRenderer();
-            statusStrip.BackColor = Theme.Colors.BgParchment;
-            statusStrip.ForeColor = Theme.Colors.SecondaryCharcoalBark;
+            statusStrip.BackColor = Theme.ActiveColors.Background;
+            statusStrip.ForeColor = Theme.ActiveColors.Text;
             statusStrip.Renderer = new ChromeToolStripRenderer();
         }
 
@@ -100,6 +100,11 @@ namespace FTAnalyzer
         {
             try
             {
+                // Re-applied here (not just in the constructor) because some child controls -
+                // notably rtbOutput, a ReadOnly RichTextBox - only pick up the ReadOnly-toggle
+                // BackColor workaround correctly once their window handle actually exists, which
+                // isn't guaranteed yet at constructor time.
+                Theme.FormTheme.Apply(this);
                 ApplyFontsAndRelayout();
                 SetHeightWidth();
                 RegisterEventHandlers();
@@ -374,6 +379,7 @@ namespace FTAnalyzer
             GeneralSettingsUI.MinParentalAgeChanged += new EventHandler(Options_MinimumParentalAgeChanged);
             GeneralSettingsUI.AliasInNameChanged += new EventHandler(Options_AliasInNameChanged);
             FontSettingsUI.GlobalFontChanged += new EventHandler(Options_GlobalFontChanged);
+            Theme.ActiveColors.Changed += new EventHandler(Options_GlobalThemeChanged);
         }
 
 
@@ -1336,6 +1342,37 @@ namespace FTAnalyzer
         {
             HourGlass(this, true);
             ApplyFontsAndRelayout();
+            HourGlass(this, false);
+        }
+
+        // Called on Theme.ActiveColors.Changed - re-themes MainForm live, matching the font-scale
+        // precedent above (only the main window updates immediately; other already-open dialogs
+        // pick up the new theme next time they're freshly opened, since they already theme
+        // themselves in their own constructors).
+        void Options_GlobalThemeChanged(object? sender, EventArgs e)
+        {
+            HourGlass(this, true);
+            NativeMethods.SuspendDrawing(this);
+            try
+            {
+                Theme.FormTheme.Apply(this);
+                ApplyTheme();
+                Program.ConfigureGridTheme();
+                foreach (Control control in FontScaler.GetAllControls(this))
+                {
+                    if (control is IReapplyTheme themedGrid)
+                        themedGrid.ReapplyTheme();
+                    else if (control is HighlightTabControl)
+                        control.Invalidate();
+                }
+                menuStrip1.Invalidate();
+                statusStrip.Invalidate();
+            }
+            finally
+            {
+                NativeMethods.ResumeDrawing(this);
+                Invalidate(true);
+            }
             HourGlass(this, false);
         }
         #endregion

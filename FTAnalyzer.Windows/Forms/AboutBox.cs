@@ -19,22 +19,23 @@ namespace FTAnalyzer.Core.Displays
             labelCopyright.Text = AssemblyCopyright;
             textBoxDescription.Text = AssemblyDescription;
             Top += NativeMethods.TopTaskbarOffset;
+            Theme.FormTheme.Apply(this);
             ApplyTheme();
         }
 
         void ApplyTheme()
         {
-            BackColor = Theme.Colors.BgParchment;
-            tableLayoutPanel.BackColor = Theme.Colors.BgParchment;
-            labelProductName.ForeColor = Theme.Colors.GoldDark;
-            labelVersion.ForeColor = Theme.Colors.SecondaryCharcoalBark;
-            labelCopyright.ForeColor = Theme.Colors.SecondaryCharcoalBark;
-            textBoxDescription.BackColor = Theme.Colors.BgCard;
-            textBoxDescription.ForeColor = Theme.Colors.SecondaryCharcoalBark;
-            okButton.BackColor = Theme.Colors.PrimaryForestGreen;
-            okButton.ForeColor = Theme.Colors.BgCard;
+            BackColor = Theme.ActiveColors.Background;
+            tableLayoutPanel.BackColor = Theme.ActiveColors.Background;
+            labelProductName.ForeColor = Theme.ActiveColors.GoldTitle;
+            labelVersion.ForeColor = Theme.ActiveColors.Text;
+            labelCopyright.ForeColor = Theme.ActiveColors.Text;
+            textBoxDescription.BackColor = Theme.ActiveColors.Card;
+            textBoxDescription.ForeColor = Theme.ActiveColors.Text;
+            okButton.BackColor = Theme.ActiveColors.Primary;
+            okButton.ForeColor = Theme.ActiveColors.Card;
             okButton.FlatStyle = FlatStyle.Flat;
-            okButton.FlatAppearance.BorderColor = Theme.Colors.PrimaryForestGreen;
+            okButton.FlatAppearance.BorderColor = Theme.ActiveColors.Primary;
         }
 
         #region Assembly Attribute Accessors

@@ -77,7 +77,7 @@ namespace FTAnalyzer.Utilities
                 column.Width = headerWidth;
         }
 
-        static IEnumerable<Control> GetAllControls(Control root)
+        internal static IEnumerable<Control> GetAllControls(Control root)
         {
             Stack<Control> stack = new();
             stack.Push(root);
