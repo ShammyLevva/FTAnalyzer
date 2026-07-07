@@ -10,7 +10,7 @@ namespace FTAnalyzer.Forms.Controls
         protected override void OnRenderItemText(ToolStripItemTextRenderEventArgs e)
         {
             bool highlighted = e.Item.Selected || e.Item.Pressed;
-            e.TextColor = highlighted ? Theme.ActiveColors.Card : Theme.ActiveColors.Text;
+            e.TextColor = highlighted ? Theme.ActiveColors.OnPrimary : Theme.ActiveColors.Text;
             base.OnRenderItemText(e);
         }
     }

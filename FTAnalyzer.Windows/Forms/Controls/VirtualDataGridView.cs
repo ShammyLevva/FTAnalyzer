@@ -68,11 +68,15 @@ namespace FTAnalyzer.Forms.Controls
 
         void ApplyColors()
         {
+            // The default Fixed3D border renders as a fixed light bevel that ignores our colors
+            // entirely and has no color property of its own to retint. Only a problem in dark
+            // mode (light mode's own bevel already looks fine against a light background) - the
+            // grid lines/header already delineate the grid's edges without it.
+            BorderStyle = Theme.ActiveColors.IsDark ? BorderStyle.None : BorderStyle.Fixed3D;
             ColumnHeadersDefaultCellStyle.BackColor = Theme.ActiveColors.Primary;
-            ColumnHeadersDefaultCellStyle.ForeColor = Theme.ActiveColors.Card;
+            ColumnHeadersDefaultCellStyle.ForeColor = Theme.ActiveColors.OnPrimary;
             ColumnHeadersDefaultCellStyle.SelectionBackColor = Theme.ActiveColors.Primary;
-            ColumnHeadersDefaultCellStyle.SelectionForeColor = Theme.ActiveColors.Card;
-            BackgroundColor = Theme.ActiveColors.Card;
+            ColumnHeadersDefaultCellStyle.SelectionForeColor = Theme.ActiveColors.OnPrimary;
             GridColor = Theme.ActiveColors.Border;
             // A paler green than both the header and the header's filter button, so a selected
             // row (especially the first row, right under the header) reads as its own distinct
@@ -80,9 +84,16 @@ namespace FTAnalyzer.Forms.Controls
             DefaultCellStyle.ForeColor = Theme.ActiveColors.Text;
             DefaultCellStyle.SelectionBackColor = Theme.ActiveColors.PrimaryPale;
             DefaultCellStyle.SelectionForeColor = Theme.ActiveColors.Text;
-            RowsDefaultCellStyle.BackColor = Theme.ActiveColors.Card;
+            // In dark mode, grids get the darkest background (matching the web app's own dark
+            // palette, which reserves its near-black shade for grids/tables and uses the lighter
+            // charcoal "card" tone for other elevated panels) - primary/alternating swapped versus
+            // light mode, which keeps its original white/parchment rows unchanged.
+            Color rowColor = Theme.ActiveColors.IsDark ? Theme.ActiveColors.Background : Theme.ActiveColors.Card;
+            Color alternateRowColor = Theme.ActiveColors.IsDark ? Theme.ActiveColors.Card : Theme.ActiveColors.Background;
+            BackgroundColor = rowColor;
+            RowsDefaultCellStyle.BackColor = rowColor;
             RowsDefaultCellStyle.ForeColor = Theme.ActiveColors.Text;
-            AlternatingRowsDefaultCellStyle.BackColor = Theme.ActiveColors.Background;
+            AlternatingRowsDefaultCellStyle.BackColor = alternateRowColor;
             AlternatingRowsDefaultCellStyle.ForeColor = Theme.ActiveColors.Text;
         }
 

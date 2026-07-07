@@ -54,6 +54,16 @@ namespace FTAnalyzer
             BackColor = Theme.ActiveColors.Background;
             panel2.BackColor = Theme.ActiveColors.Background;
             LbProgramName.ForeColor = Theme.ActiveColors.GoldTitle;
+            // Forced directly rather than relying on FormTheme's generic TextBoxBase pass - that
+            // pass wasn't reliably reaching this control (ReadOnly RichTextBox nested two levels
+            // deep inside a SplitContainer panel).
+            bool wasReadOnly = rtbOutput.ReadOnly;
+            if (wasReadOnly)
+                rtbOutput.ReadOnly = false;
+            rtbOutput.BackColor = Theme.ActiveColors.Card;
+            rtbOutput.ForeColor = Theme.ActiveColors.Text;
+            if (wasReadOnly)
+                rtbOutput.ReadOnly = true;
             menuStrip1.BackColor = Theme.ActiveColors.Background;
             menuStrip1.ForeColor = Theme.ActiveColors.Text;
             menuStrip1.Renderer = new ChromeToolStripRenderer();

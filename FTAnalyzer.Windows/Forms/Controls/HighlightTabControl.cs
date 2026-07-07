@@ -52,7 +52,7 @@ namespace FTAnalyzer.Forms.Controls
             bool isSelected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
 
             Color backColour = isSelected ? Theme.ActiveColors.Primary : Theme.ActiveColors.Background;
-            Color textColour = isSelected ? Theme.ActiveColors.Card : Theme.ActiveColors.Text;
+            Color textColour = isSelected ? Theme.ActiveColors.OnPrimary : Theme.ActiveColors.Text;
             Color borderColour = isSelected ? Theme.ActiveColors.Primary : Theme.ActiveColors.AccentWarm;
 
             using var backBrush = new SolidBrush(backColour);

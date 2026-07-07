@@ -71,7 +71,7 @@ namespace FTAnalyzer
             Zuby.ADGV.GridTheme.ButtonUseVisualStyleBackColor = false;
 
             Zuby.ADGV.GridTheme.PrimaryButtonBack = Theme.ActiveColors.Primary;
-            Zuby.ADGV.GridTheme.PrimaryButtonFore = Theme.ActiveColors.Card;
+            Zuby.ADGV.GridTheme.PrimaryButtonFore = Theme.ActiveColors.OnPrimary;
             Zuby.ADGV.GridTheme.PrimaryButtonBorder = Theme.ActiveColors.Primary;
 
             Zuby.ADGV.GridTheme.SecondaryButtonBack = Theme.ActiveColors.Card;

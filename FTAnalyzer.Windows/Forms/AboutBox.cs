@@ -33,7 +33,7 @@ namespace FTAnalyzer.Core.Displays
             textBoxDescription.BackColor = Theme.ActiveColors.Card;
             textBoxDescription.ForeColor = Theme.ActiveColors.Text;
             okButton.BackColor = Theme.ActiveColors.Primary;
-            okButton.ForeColor = Theme.ActiveColors.Card;
+            okButton.ForeColor = Theme.ActiveColors.OnPrimary;
             okButton.FlatStyle = FlatStyle.Flat;
             okButton.FlatAppearance.BorderColor = Theme.ActiveColors.Primary;
         }

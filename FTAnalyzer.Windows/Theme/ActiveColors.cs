@@ -52,6 +52,11 @@ namespace FTAnalyzer.Theme
 
         public static Color Primary => IsDark ? Colors.DarkPrimary : Colors.PrimaryForestGreen;
         public static Color PrimaryPale => IsDark ? Colors.DarkPrimaryPale : Colors.PrimaryForestGreenPale;
+        // Text/icon color for content sitting ON TOP of Primary (buttons, selected menu items,
+        // grid headers). NOT the same as Card: dark mode's primary is a lightened green chosen
+        // specifically so DARK text reads on it (matching the web app's --rz-on-primary), so this
+        // flips to near-black in dark mode rather than staying white like a card surface would.
+        public static Color OnPrimary => IsDark ? Colors.DarkBgMain : Colors.BgCard;
         public static Color Background => IsDark ? Colors.DarkBgMain : Colors.BgParchment;
         public static Color Card => IsDark ? Colors.DarkBgCard : Colors.BgCard;
         public static Color Text => IsDark ? Colors.DarkSecondaryText : Colors.SecondaryCharcoalBark;

@@ -38,6 +38,13 @@ namespace FTAnalyzer.Theme
                         if (IsDefaultText(groupBox.ForeColor))
                             groupBox.ForeColor = ActiveColors.Text;
                         break;
+                    case TabControl tabControl:
+                        // The tab strip itself (HighlightTabControl) paints its own tabs via a
+                        // paint-loop override, but the surrounding content-area border/chrome is
+                        // still drawn by the OS visual-style handler and ignores our colors -
+                        // opt out the same way as ProgressBar.
+                        NativeMethods.DisableVisualStyles(tabControl);
+                        break;
                     case TabPage tabPage:
                         // TabPage ignores BackColor while UseVisualStyleBackColor is on - it
                         // paints the OS visual-style (usually white) background instead.
@@ -81,7 +88,7 @@ namespace FTAnalyzer.Theme
                         {
                             button.FlatStyle = FlatStyle.Flat;
                             button.BackColor = ActiveColors.Primary;
-                            button.ForeColor = ActiveColors.Card;
+                            button.ForeColor = ActiveColors.OnPrimary;
                             button.FlatAppearance.BorderColor = ActiveColors.Primary;
                         }
                         break;
