@@ -301,6 +301,10 @@ namespace UnitTests
             Assert.AreEqual(MINDATE, target.StartDate);
             Assert.AreEqual(new(1933, 12, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
 
+            target = new("FROM 28 NOV 1915 TO CIR MAY 1916");
+            Assert.AreEqual(new(1915, 11, 28, 0, 0, 0, DateTimeKind.Utc), target.StartDate);
+            Assert.AreEqual(new(1916, 5, 31, 0, 0, 0, DateTimeKind.Utc), target.EndDate);
+
             return target;
         }
 
