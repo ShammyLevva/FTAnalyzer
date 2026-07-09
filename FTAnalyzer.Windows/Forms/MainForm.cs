@@ -2149,8 +2149,10 @@ namespace FTAnalyzer
                 });
                 var updatesResult = await updatesTask.ConfigureAwait(true);
 
-                // Apply results to UI controls.
-                rtbLCUpdateData.ForeColor = Color.Black;
+                // Apply results to UI controls. Hardcoded black (the designer's initial state
+                // uses red as a "please login" warning) - theme-aware instead so it stays legible
+                // once real data replaces the warning text.
+                rtbLCUpdateData.ForeColor = Theme.ActiveColors.Text;
                 LCUpdates = updatesResult.updates;
                 LCInvalidReferences = updatesResult.invalid;
                 rtbLCUpdateData.Text = updatesResult.text;
@@ -3916,6 +3918,11 @@ namespace FTAnalyzer
                 rtbToday.Rtf = todaysRtf;
             else
                 rtbToday.Text = "No events found for the selected date.";
+            // Assigning .Rtf re-streams the whole document and resets the RichEdit control's
+            // background/foreground to its own internal defaults (white/black) regardless of
+            // BackColor/ForeColor already set on the control - reassert them every time.
+            rtbToday.BackColor = Theme.ActiveColors.Card;
+            rtbToday.ForeColor = Theme.ActiveColors.Text;
             labTodayLoadWorldEvents.Visible = false;
             pbToday.Visible = false;
             await Analytics.TrackAction(Analytics.MainFormAction, Analytics.TodayClickedEvent);
@@ -4342,9 +4349,12 @@ namespace FTAnalyzer
 
         static void DrawBlackBorderGroupBox(object sender, PaintEventArgs e)
         {
+            // Hard-coded Color.Black regardless of theme was near-invisible in dark mode (a
+            // near-black border against a near-black background) - use the app's own subtle
+            // border token instead, same as grid lines/tab frames elsewhere.
             GroupBox? box = sender as GroupBox;
             if (box is not null)
-                GraphicsUtilities.DrawGroupBox(box, e.Graphics, Color.Black, 2);
+                GraphicsUtilities.DrawGroupBox(box, e.Graphics, Theme.ActiveColors.Border, 2);
         }
 
         void GroupBox2_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);

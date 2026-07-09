@@ -91,6 +91,17 @@ namespace FTAnalyzer.Theme
                             treeView.ForeColor = ActiveColors.Text;
                         }
                         break;
+                    // CheckedListBox (ckbDataErrors/ckbFactExclude/ckbFactSelect) is ListBox-based,
+                    // not CheckBox-based, so it wasn't covered by the CheckBox case above at all -
+                    // it's .NET-drawn like a normal ListBox, so plain BackColor/ForeColor is enough,
+                    // no FlatStyle/visual-style workaround needed here.
+                    case CheckedListBox checkedListBox:
+                        if (IsDefaultWindow(checkedListBox.BackColor))
+                        {
+                            checkedListBox.BackColor = ActiveColors.Card;
+                            checkedListBox.ForeColor = ActiveColors.Text;
+                        }
+                        break;
                     case FTAnalyzer.Forms.Controls.ThemedProgressBar progressBar:
                         progressBar.BackColor = ActiveColors.Card;
                         progressBar.ForeColor = ActiveColors.Primary;
@@ -107,6 +118,13 @@ namespace FTAnalyzer.Theme
                         if (IsDefaultBackground(button.BackColor) || IsPrimary(button.BackColor))
                         {
                             button.FlatStyle = FlatStyle.Flat;
+                            // UseVisualStyleBackColor (true by default on nearly every button in
+                            // this designer) can leave background painting to the OS visual-style
+                            // renderer even after switching FlatStyle away from System/Standard,
+                            // silently ignoring the BackColor set below on some buttons (seen on
+                            // the Census tab's "Record Reports" group) - explicitly turn it off so
+                            // our color always wins.
+                            button.UseVisualStyleBackColor = false;
                             button.BackColor = ActiveColors.Primary;
                             button.ForeColor = ActiveColors.OnPrimary;
                             button.FlatAppearance.BorderColor = ActiveColors.Primary;
@@ -145,8 +163,13 @@ namespace FTAnalyzer.Theme
         static bool IsDefaultText(Color color) =>
             color == SystemColors.ControlText || color == Colors.SecondaryCharcoalBark || color == Colors.DarkSecondaryText;
 
+        // Color.White is matched alongside SystemColors.Window because .NET's Color equality
+        // considers the named/system-color identity, not just the underlying ARGB value - a
+        // designer-set literal Color.White (e.g. rtbLostCousins) doesn't == SystemColors.Window
+        // even though they render identically, so it would otherwise slip past this check the
+        // same way ControlLightLight did for TrackBar.
         static bool IsDefaultWindow(Color color) =>
-            color == SystemColors.Window || color == Colors.BgCard || color == Colors.DarkBgCard;
+            color == SystemColors.Window || color == Color.White || color == Colors.BgCard || color == Colors.DarkBgCard;
 
         static bool IsPrimary(Color color) =>
             color == Colors.PrimaryForestGreen || color == Colors.DarkPrimary;

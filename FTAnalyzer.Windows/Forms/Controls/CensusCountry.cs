@@ -143,9 +143,10 @@ namespace FTAnalyzer.Forms.Controls
 
         void GroupBox1_Paint(object sender, PaintEventArgs e)
         {
+            // Hard-coded Color.Black regardless of theme was near-invisible in dark mode.
             GroupBox? box = sender as GroupBox;
             if (box is not null)
-                GraphicsUtilities.DrawGroupBox(box, e.Graphics, Color.Black, 2);
+                GraphicsUtilities.DrawGroupBox(box, e.Graphics, Theme.ActiveColors.Border, 2);
         }
     }
 }
