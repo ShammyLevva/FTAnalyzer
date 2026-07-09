@@ -19,6 +19,7 @@ namespace FTAnalyzer.Forms.Controls
         public void RemeasureTabsForCurrentFont() => RecreateHandle();
 
         const int WM_ERASEBKGND = 0x0014;
+        const int WM_PAINT = 0x000F;
 
         // DrawItem only paints each tab's own rectangle, so the native tab-strip background
         // beyond the last tab (and any margin around them) is left unpainted and shows the
@@ -34,6 +35,20 @@ namespace FTAnalyzer.Forms.Controls
                 return;
             }
             base.WndProc(ref m);
+            if (m.Msg == WM_PAINT)
+                PaintDisplayAreaBorder();
+        }
+
+        // The native tab control frames its page-display area with a hard-coded classic 3D
+        // bevel (bright white highlight / dark shadow) that ignores our colors entirely -
+        // redraw over it with a single subtle themed line once the native paint has finished.
+        void PaintDisplayAreaBorder()
+        {
+            Rectangle frame = DisplayRectangle;
+            frame.Inflate(2, 2);
+            using System.Drawing.Graphics g = System.Drawing.Graphics.FromHwnd(Handle);
+            using Pen pen = new(Theme.ActiveColors.Border);
+            g.DrawRectangle(pen, frame.X, frame.Y, frame.Width - 1, frame.Height - 1);
         }
 
         // Ensures the designer calls our draw logic as well.

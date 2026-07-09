@@ -75,11 +75,7 @@ namespace FTAnalyzer.Theme
                             treeView.ForeColor = ActiveColors.Text;
                         }
                         break;
-                    case ProgressBar progressBar:
-                        // Visual styles render the whole bar via the OS theme handler and ignore
-                        // BackColor/ForeColor entirely - opt this one control out so our colors
-                        // actually show (see NativeMethods.DisableVisualStyles).
-                        NativeMethods.DisableVisualStyles(progressBar);
+                    case FTAnalyzer.Forms.Controls.ThemedProgressBar progressBar:
                         progressBar.BackColor = ActiveColors.Card;
                         progressBar.ForeColor = ActiveColors.Primary;
                         break;

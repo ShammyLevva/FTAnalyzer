@@ -35,7 +35,7 @@ namespace FTAnalyzer.Forms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Progress));
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.progressBar1 = new FTAnalyzer.Forms.Controls.ThemedProgressBar();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -76,7 +76,7 @@ namespace FTAnalyzer.Forms
 
         #endregion
 
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private FTAnalyzer.Forms.Controls.ThemedProgressBar progressBar1;
         private System.Windows.Forms.Label label1;
     }
 }
