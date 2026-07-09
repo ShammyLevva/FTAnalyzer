@@ -19,7 +19,7 @@ namespace FTAnalyzer.Utilities
                 ExportToExcel.Export(dt);
             }
             parent.Cursor = Cursors.Default;
-            MessageBox.Show(parent, $"Excel Export of {source.Count} rows completed");
+            UIHelpers.ShowMessage(parent, $"Excel Export of {source.Count} rows completed");
         }
     }
 }

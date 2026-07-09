@@ -16,34 +16,34 @@ namespace FTAnalyzer.Utilities
         }
 
         public static int ShowYesNo(string message, string title) =>
-            InvokeIfRequired(owner => (int)MessageBox.Show(owner, message, title, MessageBoxButtons.YesNo));
+            InvokeIfRequired(owner => (int)Forms.ThemedMessageBox.Show(owner, message, title, MessageBoxButtons.YesNo));
 
         public static int ShowMessage(string message) => ShowMessage(message, "FTAnalyzer");
         public static int ShowMessage(string message, string title) =>
-            InvokeIfRequired(owner => (int)MessageBox.Show(owner, message, title));
+            InvokeIfRequired(owner => (int)Forms.ThemedMessageBox.Show(owner, message, title));
 
         public static int ShowMessage(Form form, string message)
         {
             if (form.InvokeRequired)
-                return (int)form.Invoke(() => (int)MessageBox.Show(form, message, string.Empty));
-            return (int)MessageBox.Show(form, message, string.Empty);
+                return (int)form.Invoke(() => (int)Forms.ThemedMessageBox.Show(form, message, string.Empty));
+            return (int)Forms.ThemedMessageBox.Show(form, message, string.Empty);
         }
 
         public static int ShowMessage(Form form, string message, string title)
         {
             if (form.InvokeRequired)
-                return (int)form.Invoke(() => (int)MessageBox.Show(form, message, title));
-            return (int)MessageBox.Show(form, message, title);
+                return (int)form.Invoke(() => (int)Forms.ThemedMessageBox.Show(form, message, title));
+            return (int)Forms.ThemedMessageBox.Show(form, message, title);
         }
 
         public static DialogResult ShowMessage(string message, string title, MessageBoxButtons buttons, MessageBoxIcon icon) =>
-            InvokeIfRequired(owner => MessageBox.Show(owner, message, title, buttons, icon));
+            InvokeIfRequired(owner => Forms.ThemedMessageBox.Show(owner, message, title, buttons, icon));
 
         public static DialogResult ShowMessage(Form form, string message, string title, MessageBoxButtons buttons, MessageBoxIcon icon)
         {
             if (form.InvokeRequired)
-                return (DialogResult)form.Invoke(() => MessageBox.Show(form, message, title, buttons, icon));
-            return MessageBox.Show(form, message, title, buttons, icon);
+                return (DialogResult)form.Invoke(() => Forms.ThemedMessageBox.Show(form, message, title, buttons, icon));
+            return Forms.ThemedMessageBox.Show(form, message, title, buttons, icon);
         }
 
         public static void CentreOnScreen(Form form, Screen screen)

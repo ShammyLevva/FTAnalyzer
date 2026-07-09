@@ -62,10 +62,27 @@ namespace FTAnalyzer.Theme
                     case CheckBox checkBox:
                         if (IsDefaultText(checkBox.ForeColor))
                             checkBox.ForeColor = ActiveColors.Text;
+                        // The default (System-rendered) glyph is drawn by the OS visual-style
+                        // handler as a light/white square regardless of app colors - same class
+                        // of bug as ProgressBar/TrackBar. FlatStyle.Flat switches to .NET's own
+                        // GDI+ drawing, which does respect BackColor for the box fill. Only
+                        // applied in dark mode - the default glyph already reads fine against
+                        // light mode's pale background. Both prior-applied states are matched
+                        // (not just the untouched default) so re-toggling flips it back too.
+                        if (checkBox.FlatStyle is FlatStyle.Standard or FlatStyle.Flat)
+                        {
+                            checkBox.FlatStyle = ActiveColors.IsDark ? FlatStyle.Flat : FlatStyle.Standard;
+                            checkBox.BackColor = ActiveColors.IsDark ? ActiveColors.Background : SystemColors.Control;
+                        }
                         break;
                     case RadioButton radioButton:
                         if (IsDefaultText(radioButton.ForeColor))
                             radioButton.ForeColor = ActiveColors.Text;
+                        if (radioButton.FlatStyle is FlatStyle.Standard or FlatStyle.Flat)
+                        {
+                            radioButton.FlatStyle = ActiveColors.IsDark ? FlatStyle.Flat : FlatStyle.Standard;
+                            radioButton.BackColor = ActiveColors.IsDark ? ActiveColors.Background : SystemColors.Control;
+                        }
                         break;
                     case TreeView treeView:
                         if (IsDefaultWindow(treeView.BackColor))
