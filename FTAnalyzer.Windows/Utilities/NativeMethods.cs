@@ -73,6 +73,17 @@ namespace FTAnalyzer.Utilities
         /// </summary>
         internal static void DisableVisualStyles(Control control) => SetWindowTheme(control.Handle, string.Empty, null);
 
+        /// <summary>
+        /// Native scrollbars (on grids, tree views, etc.) are drawn by the OS and ignore
+        /// BackColor/ForeColor entirely - unlike ProgressBar/TrackBar there's no owning-draw
+        /// escape hatch for them. Windows 10 1809+ ships a "DarkMode_Explorer" visual-style class
+        /// that renders them with dark-mode colors instead; switching a control's theme class to
+        /// it (or back to the default "Explorer" for light mode) is the standard way apps get
+        /// dark scrollbars without fully custom-drawing them.
+        /// </summary>
+        internal static void SetScrollBarTheme(Control control, bool dark) =>
+            SetWindowTheme(control.Handle, dark ? "DarkMode_Explorer" : "Explorer", null);
+
         [DllImport("user32.dll")]
         static extern bool ValidateRect(IntPtr hWnd, IntPtr lpRect);
 

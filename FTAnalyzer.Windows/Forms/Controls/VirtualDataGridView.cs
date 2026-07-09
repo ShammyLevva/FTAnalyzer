@@ -73,6 +73,9 @@ namespace FTAnalyzer.Forms.Controls
             // mode (light mode's own bevel already looks fine against a light background) - the
             // grid lines/header already delineate the grid's edges without it.
             BorderStyle = Theme.ActiveColors.IsDark ? BorderStyle.None : BorderStyle.Fixed3D;
+            // The grid's own scrollbars are drawn by the OS and have no color property at all -
+            // switch their visual-style class instead (see NativeMethods.SetScrollBarTheme).
+            NativeMethods.SetScrollBarTheme(this, Theme.ActiveColors.IsDark);
             ColumnHeadersDefaultCellStyle.BackColor = Theme.ActiveColors.Primary;
             ColumnHeadersDefaultCellStyle.ForeColor = Theme.ActiveColors.OnPrimary;
             ColumnHeadersDefaultCellStyle.SelectionBackColor = Theme.ActiveColors.Primary;
