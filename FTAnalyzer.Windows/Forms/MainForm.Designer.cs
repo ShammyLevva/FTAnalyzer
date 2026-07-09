@@ -211,7 +211,7 @@ namespace FTAnalyzer
             tspbTabProgress = new ToolStripProgressBar();
             tsStatusLabel = new ToolStripStatusLabel();
             toolTips = new ToolTip(components);
-            tbDuplicateScore = new TrackBar();
+            tbDuplicateScore = new FTAnalyzer.Forms.Controls.ThemedTrackBar();
             chkLCRootPersonConfirm = new CheckBox();
             dgCheckAncestors = new DataGridView();
             labErrorTabAggrMatch = new Label();
@@ -5278,7 +5278,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.Label labErrorTabCandidateDupTitle;
         private System.Windows.Forms.Label labErrorTabAggrMatch;
         private System.Windows.Forms.Label labErrorTabLooseMatch;
-        private System.Windows.Forms.TrackBar tbDuplicateScore;
+        private FTAnalyzer.Forms.Controls.ThemedTrackBar tbDuplicateScore;
         private System.Windows.Forms.Label labCalcDuplicates;
         private FTAnalyzer.Forms.Controls.ThemedProgressBar pbDuplicates;
         private FTAnalyzer.Forms.Controls.VirtualDgvDuplicates dgDuplicates;

@@ -37,7 +37,7 @@ namespace FTAnalyzer.UserControls
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.tbFontScale = new System.Windows.Forms.TrackBar();
+            this.tbFontScale = new FTAnalyzer.Forms.Controls.ThemedTrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -198,7 +198,7 @@ namespace FTAnalyzer.UserControls
 
         #endregion
 
-        private System.Windows.Forms.TrackBar tbFontScale;
+        private FTAnalyzer.Forms.Controls.ThemedTrackBar tbFontScale;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

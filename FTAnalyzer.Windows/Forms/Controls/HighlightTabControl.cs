@@ -19,7 +19,6 @@ namespace FTAnalyzer.Forms.Controls
         public void RemeasureTabsForCurrentFont() => RecreateHandle();
 
         const int WM_ERASEBKGND = 0x0014;
-        const int WM_PAINT = 0x000F;
 
         // DrawItem only paints each tab's own rectangle, so the native tab-strip background
         // beyond the last tab (and any margin around them) is left unpainted and shows the
@@ -35,20 +34,6 @@ namespace FTAnalyzer.Forms.Controls
                 return;
             }
             base.WndProc(ref m);
-            if (m.Msg == WM_PAINT)
-                PaintDisplayAreaBorder();
-        }
-
-        // The native tab control frames its page-display area with a hard-coded classic 3D
-        // bevel (bright white highlight / dark shadow) that ignores our colors entirely -
-        // redraw over it with a single subtle themed line once the native paint has finished.
-        void PaintDisplayAreaBorder()
-        {
-            Rectangle frame = DisplayRectangle;
-            frame.Inflate(2, 2);
-            using System.Drawing.Graphics g = System.Drawing.Graphics.FromHwnd(Handle);
-            using Pen pen = new(Theme.ActiveColors.Border);
-            g.DrawRectangle(pen, frame.X, frame.Y, frame.Width - 1, frame.Height - 1);
         }
 
         // Ensures the designer calls our draw logic as well.
@@ -68,7 +53,11 @@ namespace FTAnalyzer.Forms.Controls
 
             Color backColour = isSelected ? Theme.ActiveColors.Primary : Theme.ActiveColors.Background;
             Color textColour = isSelected ? Theme.ActiveColors.OnPrimary : Theme.ActiveColors.Text;
-            Color borderColour = isSelected ? Theme.ActiveColors.Primary : Theme.ActiveColors.AccentWarm;
+            // AccentWarm is a mid-tone in both palettes, so it under-contrasts against light
+            // mode's pale background (the intended subtle look) but over-contrasts against dark
+            // mode's near-black background (reads as a bright/white outline). Border is designed
+            // to be subtle against either theme's own background, so use that instead.
+            Color borderColour = isSelected ? Theme.ActiveColors.Primary : Theme.ActiveColors.Border;
 
             using var backBrush = new SolidBrush(backColour);
             using var textBrush = new SolidBrush(textColour);

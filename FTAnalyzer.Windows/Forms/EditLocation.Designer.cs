@@ -52,7 +52,7 @@ namespace FTAnalyzer.Forms
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tbOpacity = new System.Windows.Forms.TrackBar();
+            this.tbOpacity = new FTAnalyzer.Forms.Controls.ThemedTrackBar();
             this.mapZoomToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbOpacity)).BeginInit();
             this.SuspendLayout();
@@ -265,6 +265,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnCustomMap;
         private System.Windows.Forms.ToolStripButton btnSaveExit;
-        private System.Windows.Forms.TrackBar tbOpacity;
+        private FTAnalyzer.Forms.Controls.ThemedTrackBar tbOpacity;
     }
 }

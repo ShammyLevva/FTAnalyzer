@@ -57,7 +57,7 @@ namespace FTAnalyzer.Forms
             this.mnuLimitFactDates = new System.Windows.Forms.ToolStripMenuItem();
             this.cbLimitFactDates = new System.Windows.Forms.ToolStripComboBox();
             this.resetFormToDefaultPostiionAndSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tbYears = new System.Windows.Forms.TrackBar();
+            this.tbYears = new FTAnalyzer.Forms.Controls.ThemedTrackBar();
             this.pnlTimeline = new System.Windows.Forms.Panel();
             this.labMin = new System.Windows.Forms.Label();
             this.labMax = new System.Windows.Forms.Label();
@@ -78,7 +78,7 @@ namespace FTAnalyzer.Forms
             this.btnForward1 = new System.Windows.Forms.Button();
             this.btnBack10 = new System.Windows.Forms.Button();
             this.btnForward10 = new System.Windows.Forms.Button();
-            this.tbOpacity = new System.Windows.Forms.TrackBar();
+            this.tbOpacity = new FTAnalyzer.Forms.Controls.ThemedTrackBar();
             this.linkedByMarriageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -565,7 +565,7 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem geocodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem geocodeLocationsToolStripMenuItem;
-        private System.Windows.Forms.TrackBar tbYears;
+        private FTAnalyzer.Forms.Controls.ThemedTrackBar tbYears;
         private System.Windows.Forms.Panel pnlTimeline;
         private System.Windows.Forms.Label labMin;
         private System.Windows.Forms.Label labMax;
@@ -600,7 +600,7 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.LinkLabel linkLabel1;
         private ToolStripMapSelector mnuMapStyle = new ToolStripMapSelector();
         private System.Windows.Forms.ToolStripMenuItem resetFormToDefaultPostiionAndSizeToolStripMenuItem;
-        private System.Windows.Forms.TrackBar tbOpacity;
+        private FTAnalyzer.Forms.Controls.ThemedTrackBar tbOpacity;
         private System.Windows.Forms.ToolStripMenuItem descendantToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem linkedByMarriageToolStripMenuItem;
     }

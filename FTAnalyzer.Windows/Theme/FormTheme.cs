@@ -79,6 +79,10 @@ namespace FTAnalyzer.Theme
                         progressBar.BackColor = ActiveColors.Card;
                         progressBar.ForeColor = ActiveColors.Primary;
                         break;
+                    case TrackBar trackBar:
+                        if (IsDefaultBackground(trackBar.BackColor))
+                            trackBar.BackColor = ActiveColors.Background;
+                        break;
                     case Button button:
                         if (IsDefaultBackground(button.BackColor) || IsPrimary(button.BackColor))
                         {
