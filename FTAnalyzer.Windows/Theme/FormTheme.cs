@@ -96,7 +96,11 @@ namespace FTAnalyzer.Theme
                         progressBar.ForeColor = ActiveColors.Primary;
                         break;
                     case TrackBar trackBar:
-                        if (IsDefaultBackground(trackBar.BackColor))
+                        // tbDuplicateScore's designer explicitly sets BackColor to
+                        // ControlLightLight (pure white) rather than leaving it at the plain
+                        // Control default IsDefaultBackground checks for - match that too so this
+                        // slider isn't silently skipped.
+                        if (IsDefaultBackground(trackBar.BackColor) || trackBar.BackColor == SystemColors.ControlLightLight)
                             trackBar.BackColor = ActiveColors.Background;
                         break;
                     case Button button:

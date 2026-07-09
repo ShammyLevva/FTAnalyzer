@@ -90,12 +90,15 @@ namespace FTAnalyzer.Forms.Controls
 							ToolTipText = "Geocoding Status : " + location.Geocoded
 						};
 						SetTreeNodeImage(location, child);
-						// Set everything other than known countries and known regions to regular
-						if ((currentM.Level == 0 && Countries.IsKnownCountry(part)) ||
-							(currentM.Level == 1 && Regions.IsKnownRegion(part)))
-							child.ForeColor = Color.Green;
-						else
-							child.ForeColor = Color.Black;
+						// Set everything other than known countries and known regions to regular.
+						// Color.Black for the "regular" case was hard-coded regardless of theme -
+						// invisible against a dark background - and Color.Green for known
+						// countries/regions was a plain, low-contrast green unrelated to the
+						// app's own palette. Use theme-aware colors instead (Primary is already
+						// tuned to read well against each theme's own background).
+						bool isKnownPlace = (currentM.Level == 0 && Countries.IsKnownCountry(part)) ||
+							(currentM.Level == 1 && Regions.IsKnownRegion(part));
+						child.ForeColor = isKnownPlace ? Theme.ActiveColors.Primary : Theme.ActiveColors.Text;
 						childM = child;
 						childP = (TreeNode)child.Clone();
 						currentM.Nodes.Add(childM);
