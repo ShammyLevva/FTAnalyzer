@@ -73,6 +73,18 @@ namespace FTAnalyzer.Utilities
         /// </summary>
         internal static void DisableVisualStyles(Control control) => SetWindowTheme(control.Handle, string.Empty, null);
 
+        [DllImport("user32.dll")]
+        static extern bool ValidateRect(IntPtr hWnd, IntPtr lpRect);
+
+        /// <summary>
+        /// Marks a native control's entire client area as up to date without going through
+        /// BeginPaint/EndPaint. Needed when a WM_PAINT handler draws everything itself and
+        /// swallows the message instead of forwarding it to the native control (see
+        /// HighlightTabControl) - without this, Windows sees the update region as still invalid
+        /// and immediately re-posts WM_PAINT in a tight loop.
+        /// </summary>
+        internal static void ValidateRect(Control control) => ValidateRect(control.Handle, IntPtr.Zero);
+
         [DllImport("user32.dll", SetLastError = true, BestFitMapping = false, CharSet = CharSet.Unicode, ThrowOnUnmappableChar = true)]
         static extern IntPtr FindWindow(string lpClassName, string? lpWindowName);
 

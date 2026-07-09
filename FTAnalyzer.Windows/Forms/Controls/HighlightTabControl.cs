@@ -1,15 +1,25 @@
+using FTAnalyzer.Utilities;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace FTAnalyzer.Forms.Controls
 {
+    // TabControl always paints some native chrome around each tab - a solid border box under
+    // TabAppearance.Normal, separator lines under FlatButtons - regardless of DrawMode/Appearance,
+    // and that chrome ignores our colors entirely (confirmed: even with the owner-draw border
+    // pen set to a near-black color, the border stayed bright white). Owner-draw only lets us
+    // paint each tab's interior; the surrounding decoration is applied by the native control
+    // afterwards and can't be recolored or suppressed via any property.
+    //
+    // So this class stops asking the native control to paint at all: WM_PAINT is intercepted and
+    // swallowed completely, and the whole tab strip (plus the page-frame area, which had its own
+    // native border for the same reason) is drawn from scratch here. TabControl still owns page
+    // layout/switching via SelectedIndex/TabPages - only its rendering is bypassed.
     public class HighlightTabControl : TabControl
     {
-        public HighlightTabControl()
-        {
-            DrawMode = TabDrawMode.OwnerDrawFixed;
-        }
+        const int WM_ERASEBKGND = 0x0014;
+        const int WM_PAINT = 0x000F;
 
         // With SizeMode.Normal (variable-width tabs sized to each tab's own text), the native
         // control only remeasures tab widths against its current Font when its handle is
@@ -18,38 +28,50 @@ namespace FTAnalyzer.Forms.Controls
         // protected on Control, so expose it for MainForm to call after a font-scale change.
         public void RemeasureTabsForCurrentFont() => RecreateHandle();
 
-        const int WM_ERASEBKGND = 0x0014;
-
-        // DrawItem only paints each tab's own rectangle, so the native tab-strip background
-        // beyond the last tab (and any margin around them) is left unpainted and shows the
-        // system default color. Fill the whole control background ourselves first.
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == WM_ERASEBKGND)
             {
-                using System.Drawing.Graphics g = System.Drawing.Graphics.FromHdc(m.WParam);
-                using SolidBrush brush = new(Theme.ActiveColors.Background);
-                g.FillRectangle(brush, ClientRectangle);
+                // Painting happens entirely in WM_PAINT below; treat the background as already
+                // handled so Windows doesn't separately flash the native background color first.
                 m.Result = 1;
+                return;
+            }
+            if (m.Msg == WM_PAINT)
+            {
+                PaintControl();
+                m.Result = IntPtr.Zero;
                 return;
             }
             base.WndProc(ref m);
         }
 
-        // Ensures the designer calls our draw logic as well.
-        protected override void OnDrawItem(DrawItemEventArgs e)
+        protected override void OnSelectedIndexChanged(EventArgs e)
         {
-            base.OnDrawItem(e);
-            DrawHighlightTab(e);
+            base.OnSelectedIndexChanged(e);
+            Invalidate();
         }
 
-        void DrawHighlightTab(DrawItemEventArgs e)
+        void PaintControl()
         {
-            if (e.Index < 0 || e.Index >= TabPages.Count)
-                return;
+            using System.Drawing.Graphics g = System.Drawing.Graphics.FromHwnd(Handle);
+            using SolidBrush backBrush = new(Theme.ActiveColors.Background);
+            g.FillRectangle(backBrush, ClientRectangle);
 
-            TabPage page = TabPages[e.Index];
-            bool isSelected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
+            for (int index = 0; index < TabCount; index++)
+                DrawTab(g, index);
+
+            // No BeginPaint/EndPaint cycle happened (we painted via a plain window DC), so the
+            // update region is still marked invalid unless we clear it ourselves - otherwise
+            // Windows immediately re-posts WM_PAINT in a tight loop.
+            NativeMethods.ValidateRect(this);
+        }
+
+        void DrawTab(System.Drawing.Graphics g, int index)
+        {
+            TabPage page = TabPages[index];
+            bool isSelected = index == SelectedIndex;
+            Rectangle bounds = GetTabRect(index);
 
             Color backColour = isSelected ? Theme.ActiveColors.Primary : Theme.ActiveColors.Background;
             Color textColour = isSelected ? Theme.ActiveColors.OnPrimary : Theme.ActiveColors.Text;
@@ -59,22 +81,22 @@ namespace FTAnalyzer.Forms.Controls
             // to be subtle against either theme's own background, so use that instead.
             Color borderColour = isSelected ? Theme.ActiveColors.Primary : Theme.ActiveColors.Border;
 
-            using var backBrush = new SolidBrush(backColour);
-            using var textBrush = new SolidBrush(textColour);
-            using var borderPen = new Pen(borderColour);
+            using SolidBrush backBrush = new(backColour);
+            using SolidBrush textBrush = new(textColour);
+            using Pen borderPen = new(borderColour);
 
-            e.Graphics.FillRectangle(backBrush, e.Bounds);
+            g.FillRectangle(backBrush, bounds);
 
-            var borderRect = e.Bounds;
+            Rectangle borderRect = bounds;
             borderRect.Inflate(-1, -1);
-            e.Graphics.DrawRectangle(borderPen, borderRect);
+            g.DrawRectangle(borderPen, borderRect);
 
-            using var sf = new StringFormat
+            using StringFormat sf = new()
             {
                 Alignment = StringAlignment.Center,
                 LineAlignment = StringAlignment.Center
             };
-            e.Graphics.DrawString(page.Text, e.Font ?? DefaultFont, textBrush, e.Bounds, sf);
+            g.DrawString(page.Text, Font, textBrush, bounds, sf);
         }
     }
 }

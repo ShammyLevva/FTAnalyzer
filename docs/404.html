@@ -1,0 +1,32 @@
+---
+layout: default
+title: Page Not Found
+permalink: /404.html
+sitemap: false
+---
+
+<script>
+(function () {
+    var pageMap = {
+{% for p in site.html_pages %}{% unless p.url == "/404.html" %}{% assign clean = p.url | remove: ".html" %}        {{ clean | downcase | jsonify }}: {{ clean | jsonify }},
+{% endunless %}{% endfor %}
+    };
+
+    var path = window.location.pathname.replace(/\/+$/, "").replace(/\.html$/i, "") || "/";
+    var key = path.toLowerCase();
+    var match = pageMap[key] || pageMap[key + "/"];
+
+    if (match && match !== path) {
+        window.location.replace(match + window.location.search + window.location.hash);
+    }
+})();
+</script>
+
+<div style="text-align:center; padding: 2em 0;">
+    <h2>Page Not Found</h2>
+    <p>Sorry, we couldn't find that page. It may have moved, or the link may be out of date.</p>
+    <p>
+        <a href="/" class="btn btn-primary">&#8962; Back to Home</a>
+        <a href="/Documentation" class="btn btn-secondary">Documentation</a>
+    </p>
+</div>
