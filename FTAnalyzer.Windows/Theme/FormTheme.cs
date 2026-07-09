@@ -102,6 +102,15 @@ namespace FTAnalyzer.Theme
                             checkedListBox.ForeColor = ActiveColors.Text;
                         }
                         break;
+                    // ComboBox (e.g. the Census Date dropdown) had no case here at all - every
+                    // instance in the app stayed at its native white background/black text.
+                    case ComboBox comboBox:
+                        if (IsDefaultWindow(comboBox.BackColor))
+                        {
+                            comboBox.BackColor = ActiveColors.Card;
+                            comboBox.ForeColor = ActiveColors.Text;
+                        }
+                        break;
                     case FTAnalyzer.Forms.Controls.ThemedProgressBar progressBar:
                         progressBar.BackColor = ActiveColors.Card;
                         progressBar.ForeColor = ActiveColors.Primary;

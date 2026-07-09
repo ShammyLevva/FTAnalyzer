@@ -70,6 +70,19 @@ namespace FTAnalyzer
             statusStrip.BackColor = Theme.ActiveColors.Background;
             statusStrip.ForeColor = Theme.ActiveColors.Text;
             statusStrip.Renderer = new ChromeToolStripRenderer();
+
+            // Forced directly rather than relying on FormTheme's generic Button pass - these four
+            // (Census tab, "Census Record Reports" group) kept their native white look even after
+            // FormTheme's walk reached and matched them there, for reasons that didn't reproduce
+            // for any other button in the app.
+            foreach (Button censusReportButton in new[] { btnShowCensusMissing, btnShowCensusEntered, btnRandomSurnameEntered, btnRandomSurnameMissing })
+            {
+                censusReportButton.FlatStyle = FlatStyle.Flat;
+                censusReportButton.UseVisualStyleBackColor = false;
+                censusReportButton.BackColor = Theme.ActiveColors.Primary;
+                censusReportButton.ForeColor = Theme.ActiveColors.OnPrimary;
+                censusReportButton.FlatAppearance.BorderColor = Theme.ActiveColors.Primary;
+            }
         }
 
         // Menu icons ported from the web app's Material Symbols set (see UI modernisation

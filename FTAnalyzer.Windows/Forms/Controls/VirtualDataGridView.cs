@@ -259,7 +259,18 @@ namespace FTAnalyzer.Forms.Controls
                 switch (cd?.TypeofColumn)
                 {
                     case ColumnDetail.ColumnType.LinkCell:
-                        dgvc = new DataGridViewLinkColumn();
+                        DataGridViewLinkColumn linkColumn = new();
+                        // The default link colors (system blue/purple) are tuned for a white
+                        // background and read as near-invisible dark-blue-on-black in dark mode -
+                        // light mode's own default already looks fine against its pale rows, so
+                        // only override here.
+                        if (Theme.ActiveColors.IsDark)
+                        {
+                            linkColumn.LinkColor = Theme.ActiveColors.Info;
+                            linkColumn.VisitedLinkColor = Theme.ActiveColors.AccentWarm;
+                            linkColumn.ActiveLinkColor = Theme.ActiveColors.AccentAction;
+                        }
+                        dgvc = linkColumn;
                         break;
                     case ColumnDetail.ColumnType.CheckBox:
                         dgvc = new DataGridViewCheckBoxColumn();
