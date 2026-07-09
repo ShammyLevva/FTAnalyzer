@@ -1,6 +1,7 @@
+using FTAnalyzer.Properties;
 using FTAnalyzer.Utilities;
 
-namespace FTAnalyzer.Forms
+namespace FTAnalyzer.Theme
 {
     // MessageBox.Show is a fully native Windows dialog - not a WinForms Form, so FormTheme has no
     // hook into it, and it always renders in the OS's light chrome regardless of the app's theme.
@@ -41,14 +42,30 @@ namespace FTAnalyzer.Forms
                 });
             }
 
+            // Base pixel sizes below are tuned for FontScale level 1 (8.25pt, roughly what a
+            // native MessageBox uses). This app's Font Settings option can scale the UI font up
+            // to 14pt (level 4) - fixed pixel widths sized for the smallest font wrapped that much
+            // larger text onto far more lines than a native dialog would, looking cramped even
+            // though the box itself wasn't actually narrower in raw pixels. Scale every dimension
+            // by how much bigger the active level's font is than that baseline.
+            float scale = FontScale.ForLevel(FontSettings.Default.FontNumber).FontSize / FontScale.ForLevel(1).FontSize;
+
             Label lblMessage = new()
             {
                 Text = message,
                 AutoSize = true,
-                MaximumSize = new Size(360, 0),
+                MaximumSize = new Size((int)(640 * scale), 0),
                 Location = new Point(textLeft, 20)
             };
             Controls.Add(lblMessage);
+
+            // Scale fonts before measuring/positioning anything below - FontScaler resizes
+            // lblMessage's Font (AutoSize labels recompute their size synchronously on a Font
+            // change), so measuring its Width/Bottom beforehand would use stale pre-scale
+            // metrics and leave every button positioned for a size that no longer matches what's
+            // rendered. Buttons added afterwards don't need their own FontScaler pass - they
+            // inherit this Form's own (now-scaled) Font automatically since they never set one.
+            FontScaler.Apply(this);
 
             int contentBottom = Math.Max(lblMessage.Bottom, 20 + 32) + 24;
 
@@ -62,10 +79,30 @@ namespace FTAnalyzer.Forms
                 _ => [("OK", DialogResult.OK)],
             };
 
-            const int buttonWidth = 90;
-            const int buttonHeight = 30;
-            const int buttonSpacing = 10;
-            int formWidth = Math.Max(textLeft + lblMessage.Width + 20, buttonSpecs.Length * (buttonWidth + buttonSpacing) + 10);
+            // Sized from the actual (already font-scaled) button text rather than a fixed 90x30 -
+            // a fixed height clipped button text once FontScaler enlarged the font past what 30px
+            // of height could fit.
+            const int buttonSpacing = 12;
+            int buttonWidth = 110;
+            int buttonHeight = 34;
+            foreach ((string text, _) in buttonSpecs)
+            {
+                Size measured = TextRenderer.MeasureText(text, Font);
+                buttonWidth = Math.Max(buttonWidth, measured.Width + 40);
+                buttonHeight = Math.Max(buttonHeight, measured.Height + 20);
+            }
+            // A native MessageBox never shrinks below roughly this width/height even for a short
+            // one-line message - match that floor (scaled the same way as the wrap width above)
+            // rather than letting a short message produce a cramped-looking little box.
+            int minimumFormWidth = (int)(560 * scale);
+            int minimumFormHeight = (int)(200 * scale);
+            int formWidth = Math.Max(minimumFormWidth,
+                Math.Max(textLeft + lblMessage.Width + 20, buttonSpecs.Length * (buttonWidth + buttonSpacing) + 10));
+            int formHeight = Math.Max(minimumFormHeight, contentBottom + buttonHeight + 20);
+            // Bottom-anchor the buttons against the final height (not contentBottom directly) -
+            // when the minimum-height floor kicks in, contentBottom no longer reflects where the
+            // bottom of the dialog actually ends up.
+            int buttonTop = formHeight - buttonHeight - 20;
 
             Button[] createdButtons = new Button[buttonSpecs.Length];
             int buttonRight = formWidth - 20;
@@ -76,7 +113,7 @@ namespace FTAnalyzer.Forms
                     Text = buttonSpecs[i].Text,
                     DialogResult = buttonSpecs[i].Result,
                     Size = new Size(buttonWidth, buttonHeight),
-                    Location = new Point(buttonRight - buttonWidth, contentBottom)
+                    Location = new Point(buttonRight - buttonWidth, buttonTop)
                 };
                 Controls.Add(button);
                 createdButtons[i] = button;
@@ -87,10 +124,9 @@ namespace FTAnalyzer.Forms
             CancelButton = Array.Find(createdButtons, b => b.DialogResult == DialogResult.Cancel)
                 ?? Array.Find(createdButtons, b => b.DialogResult == DialogResult.No);
 
-            ClientSize = new Size(formWidth, contentBottom + buttonHeight + 20);
+            ClientSize = new Size(formWidth, formHeight);
 
-            FontScaler.Apply(this);
-            Theme.FormTheme.Apply(this);
+            FormTheme.Apply(this);
         }
 
         public static DialogResult Show(IWin32Window? owner, string message, string title,
