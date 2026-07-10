@@ -567,13 +567,18 @@ namespace FTAnalyzer
             if (buffer.IsEmpty || IsDisposed || Disposing)
                 return;
 
-            // final drain after cancellation
+            // final drain after cancellation - Invoke (not BeginInvoke) so this method, and
+            // therefore flushTask, doesn't complete until the text has actually been appended.
+            // LoadTreeAsync awaits flushTask and then returns straight into code that shows a
+            // modal "Gedcom File Loaded" message box - with BeginInvoke, that queued append could
+            // still be sitting unprocessed when the dialog takes over, making the final "File
+            // Loaded and Analysed .../File used ..." lines appear to go missing.
             StringBuilder finalSb = new();
             while (buffer.TryDequeue(out string? line2))
                 finalSb.Append(line2);
             string finalText = finalSb.ToString();
             if (finalText.Length > 0)
-                BeginInvoke(new Action(() => rtbOutput.AppendText(finalText)));
+                Invoke(new Action(() => rtbOutput.AppendText(finalText)));
         }
 
         static void WriteTime(string prefixText, IProgress<string> outputText, Stopwatch timer)
