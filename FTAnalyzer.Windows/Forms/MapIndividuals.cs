@@ -47,10 +47,18 @@ namespace FTAnalyzer
             if (ind is not null)
             {
                 dgIndividuals.Sort(ind, ListSortDirection.Ascending);
-                // See Census.ResetTable's identical guard - AutoResizeColumns() on an empty grid
-                // can throw ArgumentNullException while resolving a row's font to measure against.
+                // See Census.ResetTable's identical try/catch - AutoResizeColumns() on a
+                // VirtualMode grid is a longstanding, unresolved .NET WinForms defect that can
+                // throw ArgumentNullException resolving a font to measure against, and no
+                // combination of guards (RowCount, IsHandleCreated) reliably prevented it.
                 if (dgIndividuals.RowCount > 0)
-                    dgIndividuals.AutoResizeColumns();
+                {
+                    try
+                    {
+                        dgIndividuals.AutoResizeColumns();
+                    }
+                    catch (ArgumentNullException) { }
+                }
             }
         }
 

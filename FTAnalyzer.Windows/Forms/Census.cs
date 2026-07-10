@@ -139,11 +139,23 @@ namespace FTAnalyzer.Forms
             {
                 dgCensus.Sort(pos, ListSortDirection.Ascending);
                 dgCensus.Sort(famID, ListSortDirection.Ascending);
-                // AutoResizeColumns() on a VirtualMode grid with zero rows (e.g. no Lost Cousins
-                // potential uploads found) can't resolve a row's inherited Font to measure
-                // against and throws ArgumentNullException - nothing to size to anyway, so skip.
+                // AutoResizeColumns() on a VirtualMode grid is a longstanding, unresolved .NET
+                // WinForms defect that can throw ArgumentNullException resolving a font to
+                // measure against. Neither a RowCount>0 guard nor an additional IsHandleCreated
+                // guard reliably prevented it in practice here (reading Handle inside
+                // FormTheme.Apply's DWM P/Invoke call likely forces the native window handle to
+                // exist well before the form's own Load/FontScaler pipeline has actually run, so
+                // IsHandleCreated being true doesn't mean font resolution is ready). The auto-fit
+                // is cosmetic - columns already have sensible preset widths from [ColumnDetail] -
+                // so treat a failure here as non-fatal instead of crashing the app.
                 if (dgCensus.RowCount > 0)
-                    dgCensus.AutoResizeColumns();
+                {
+                    try
+                    {
+                        dgCensus.AutoResizeColumns();
+                    }
+                    catch (ArgumentNullException) { }
+                }
                 StyleRows();
             }
         }
