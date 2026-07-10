@@ -115,6 +115,20 @@ namespace FTAnalyzer.Theme
                             comboBox.BackColor = ActiveColors.Card;
                             comboBox.ForeColor = ActiveColors.Text;
                         }
+                        // BackColor/ForeColor above only reliably reaches the closed display box.
+                        // A non-owner-drawn ComboBox's open dropdown LIST renders its item text
+                        // via the OS-wide "app mode" (Settings > Personalization > Colors), not
+                        // this app's own light/dark toggle - on a system set to dark mode, that
+                        // left list text white regardless of our ForeColor, sitting on our
+                        // correctly-light Card background. Owner-draw the list instead so every
+                        // pixel comes from ActiveColors and neither OS app mode nor visual styles
+                        // can override it. Guarded on DrawMode so repeated Apply() passes
+                        // (constructor, Load, theme toggle) don't re-subscribe DrawItem.
+                        if (comboBox.DrawMode == DrawMode.Normal)
+                        {
+                            comboBox.DrawMode = DrawMode.OwnerDrawFixed;
+                            comboBox.DrawItem += ComboBox_DrawItem;
+                        }
                         break;
                     case FTAnalyzer.Forms.Controls.ThemedProgressBar progressBar:
                         progressBar.BackColor = ActiveColors.Card;
@@ -166,6 +180,30 @@ namespace FTAnalyzer.Theme
                 if (control.HasChildren)
                     ApplyToChildren(control);
             }
+        }
+
+        // Paints both the closed display box and each row of the open dropdown list entirely
+        // from ActiveColors - see the ComboBox case above for why this is needed instead of just
+        // BackColor/ForeColor. ComboBoxEdit identifies the closed box (drawn via the same
+        // callback for DropDownList-style combos); only rows inside the open list get the
+        // Primary/OnPrimary highlight when hovered/selected.
+        static void ComboBox_DrawItem(object? sender, DrawItemEventArgs e)
+        {
+            if (sender is not ComboBox comboBox)
+                return;
+            bool highlighted = (e.State & DrawItemState.Selected) == DrawItemState.Selected
+                && (e.State & DrawItemState.ComboBoxEdit) == 0;
+            Color backColor = highlighted ? ActiveColors.Primary : ActiveColors.Card;
+            Color foreColor = highlighted ? ActiveColors.OnPrimary : ActiveColors.Text;
+            using (SolidBrush backBrush = new(backColor))
+                e.Graphics.FillRectangle(backBrush, e.Bounds);
+            if (e.Index >= 0)
+            {
+                string text = comboBox.GetItemText(comboBox.Items[e.Index]) ?? string.Empty;
+                using SolidBrush foreBrush = new(foreColor);
+                e.Graphics.DrawString(text, comboBox.Font, foreBrush, e.Bounds);
+            }
+            e.DrawFocusRectangle();
         }
 
         // "Default" means either an untouched system color, or whichever background/text/window
