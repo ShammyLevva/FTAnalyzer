@@ -254,14 +254,14 @@ namespace FTAnalyzer
             treetopsRelation = new FTAnalyzer.Forms.Controls.RelationTypes();
             treetopsCountry = new FTAnalyzer.Forms.Controls.CensusCountry();
             tabResearchSuggestions = new TabPage();
-            gbFilters = new GroupBox();
+            gbFilters = new FTAnalyzer.Theme.ThemedGroupBox();
             labResearchTabFamilyFilter = new Label();
             labResearchTabSurname = new Label();
             txtColouredSurname = new TextBox();
-            groupBox7 = new GroupBox();
+            groupBox7 = new FTAnalyzer.Theme.ThemedGroupBox();
             btnAdvancedMissingData = new Button();
             btnStandardMissingData = new Button();
-            groupBox3 = new GroupBox();
+            groupBox3 = new FTAnalyzer.Theme.ThemedGroupBox();
             ckbIgnoreNoDeathDate = new FTAnalyzer.Theme.ThemedCheckBox();
             ckbIgnoreNoBirthDate = new FTAnalyzer.Theme.ThemedCheckBox();
             btnIrishColourCensus = new Button();
@@ -276,7 +276,7 @@ namespace FTAnalyzer
             splitLostCousins = new SplitContainer();
             linkLabel2 = new LinkLabel();
             LabLostCousinsWeb = new LinkLabel();
-            Referrals = new GroupBox();
+            Referrals = new FTAnalyzer.Theme.ThemedGroupBox();
             ckbReferralInCommon = new FTAnalyzer.Theme.ThemedCheckBox();
             btnReferrals = new Button();
             cmbReferrals = new ComboBox();
@@ -301,7 +301,7 @@ namespace FTAnalyzer
             btnLCPotentialUploads = new Button();
             labLCUpdatesCensusRec = new Label();
             rtbLCUpdateData = new RichTextBox();
-            groupBox8 = new GroupBox();
+            groupBox8 = new FTAnalyzer.Theme.ThemedGroupBox();
             btnLCLogin = new Button();
             labLCUpdatesPassword = new Label();
             labLCUpdatesEmail = new Label();
@@ -312,16 +312,16 @@ namespace FTAnalyzer
             btnCheckMyAncestors = new Button();
             lblCheckAncestors = new Label();
             tabCensus = new TabPage();
-            groupBox2 = new GroupBox();
+            groupBox2 = new FTAnalyzer.Theme.ThemedGroupBox();
             btnAliveOnDate = new Button();
             txtAliveDates = new TextBox();
             labCensusAliveDates = new Label();
-            groupBox10 = new GroupBox();
+            groupBox10 = new FTAnalyzer.Theme.ThemedGroupBox();
             btnShowCensusMissing = new Button();
             btnShowCensusEntered = new Button();
             btnRandomSurnameEntered = new Button();
             btnRandomSurnameMissing = new Button();
-            groupBox4 = new GroupBox();
+            groupBox4 = new FTAnalyzer.Theme.ThemedGroupBox();
             btnInconsistentLocations = new Button();
             btnUnrecognisedCensusRef = new Button();
             btnIncompleteCensusRef = new Button();
@@ -334,17 +334,17 @@ namespace FTAnalyzer
             udAgeFilter = new NumericUpDown();
             cenDate = new FTAnalyzer.Forms.Controls.CensusDateSelector();
             relTypesCensus = new FTAnalyzer.Forms.Controls.RelationTypes();
-            groupBox9 = new GroupBox();
-            groupBox11 = new GroupBox();
+            groupBox9 = new FTAnalyzer.Theme.ThemedGroupBox();
+            groupBox11 = new FTAnalyzer.Theme.ThemedGroupBox();
             BtnAutoCreatedCensusFacts = new Button();
             BtnProblemCensusFacts = new Button();
-            groupBox1 = new GroupBox();
+            groupBox1 = new FTAnalyzer.Theme.ThemedGroupBox();
             btnDuplicateCensus = new Button();
             btnMissingCensusLocation = new Button();
-            groupBox5 = new GroupBox();
+            groupBox5 = new FTAnalyzer.Theme.ThemedGroupBox();
             btnMismatchedChildrenStatus = new Button();
             btnNoChildrenStatus = new Button();
-            groupBox6 = new GroupBox();
+            groupBox6 = new FTAnalyzer.Theme.ThemedGroupBox();
             btnReportUnrecognised = new Button();
             tabLocations = new TabPage();
             btnOldOSMap = new Button();
@@ -392,7 +392,7 @@ namespace FTAnalyzer
             tabErrorsFixes = new TabPage();
             tabErrorFixSelector = new FTAnalyzer.Theme.HighlightTabControl();
             tabDataErrors = new TabPage();
-            gbDataErrorTypes = new GroupBox();
+            gbDataErrorTypes = new FTAnalyzer.Theme.ThemedGroupBox();
             ckbDataErrors = new CheckedListBox();
             btnSelectAll = new Button();
             btnClearAll = new Button();
@@ -1924,7 +1924,6 @@ namespace FTAnalyzer
             gbFilters.TabIndex = 64;
             gbFilters.TabStop = false;
             gbFilters.Text = "Filters";
-            gbFilters.Paint += GbFilters_Paint;
             // 
             // labResearchTabFamilyFilter
             // 
@@ -1968,7 +1967,6 @@ namespace FTAnalyzer
             groupBox7.TabStop = false;
             groupBox7.Text = "Missing Data Reports";
             groupBox7.Visible = false;
-            groupBox7.Paint += GroupBox7_Paint;
             // 
             // btnAdvancedMissingData
             // 
@@ -2009,7 +2007,6 @@ namespace FTAnalyzer
             groupBox3.TabIndex = 36;
             groupBox3.TabStop = false;
             groupBox3.Text = "Census Suggestions Reports";
-            groupBox3.Paint += GroupBox3_Paint;
             // 
             // ckbIgnoreNoDeathDate
             // 
@@ -2219,7 +2216,6 @@ namespace FTAnalyzer
             Referrals.TabIndex = 51;
             Referrals.TabStop = false;
             Referrals.Text = "Referrals";
-            Referrals.Paint += Referrals_Paint;
             // 
             // ckbReferralInCommon
             // 
@@ -2674,7 +2670,6 @@ namespace FTAnalyzer
             groupBox2.TabIndex = 23;
             groupBox2.TabStop = false;
             groupBox2.Text = "Census Search Reports";
-            groupBox2.Paint += GroupBox2_Paint;
             // 
             // btnAliveOnDate
             // 
@@ -2723,7 +2718,6 @@ namespace FTAnalyzer
             groupBox10.TabIndex = 35;
             groupBox10.TabStop = false;
             groupBox10.Text = "Census Record Reports";
-            groupBox10.Paint += GroupBox10_Paint;
             // 
             // btnShowCensusMissing
             // 
@@ -2785,7 +2779,6 @@ namespace FTAnalyzer
             groupBox4.TabIndex = 34;
             groupBox4.TabStop = false;
             groupBox4.Text = "Census Reference Reports";
-            groupBox4.Paint += GroupBox4_Paint;
             // 
             // btnInconsistentLocations
             // 
@@ -2928,7 +2921,6 @@ namespace FTAnalyzer
             groupBox9.TabIndex = 32;
             groupBox9.TabStop = false;
             groupBox9.Text = "Census Reports that don't use filters above";
-            groupBox9.Paint += GroupBox9_Paint;
             // 
             // groupBox11
             // 
@@ -2942,7 +2934,6 @@ namespace FTAnalyzer
             groupBox11.TabIndex = 33;
             groupBox11.TabStop = false;
             groupBox11.Text = "Census Facts";
-            groupBox11.Paint += GroupBox11_Paint;
             // 
             // BtnAutoCreatedCensusFacts
             // 
@@ -2978,7 +2969,6 @@ namespace FTAnalyzer
             groupBox1.TabIndex = 22;
             groupBox1.TabStop = false;
             groupBox1.Text = "Potential Census Fact Problems";
-            groupBox1.Paint += GroupBox1_Paint;
             // 
             // btnDuplicateCensus
             // 
@@ -3014,7 +3004,6 @@ namespace FTAnalyzer
             groupBox5.TabIndex = 32;
             groupBox5.TabStop = false;
             groupBox5.Text = "1911 UK Census";
-            groupBox5.Paint += GroupBox5_Paint;
             // 
             // btnMismatchedChildrenStatus
             // 
@@ -3049,7 +3038,6 @@ namespace FTAnalyzer
             groupBox6.TabIndex = 31;
             groupBox6.TabStop = false;
             groupBox6.Text = "Export Missing/Unrecognised data to File";
-            groupBox6.Paint += GroupBox6_Paint;
             // 
             // btnReportUnrecognised
             // 
@@ -5213,7 +5201,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem mnuRecent3;
         private System.Windows.Forms.ToolStripMenuItem mnuRecent4;
         private System.Windows.Forms.ToolStripMenuItem mnuRecent5;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private FTAnalyzer.Theme.ThemedGroupBox groupBox2;
         private System.Windows.Forms.ToolStripMenuItem mnuLifelines;
         private System.Windows.Forms.ToolStripMenuItem resetToDefaultFormSizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuPlaces;
@@ -5270,7 +5258,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.TabPage tabErrorsFixes;
         private FTAnalyzer.Theme.HighlightTabControl tabErrorFixSelector;
         private System.Windows.Forms.TabPage tabDataErrors;
-        private System.Windows.Forms.GroupBox gbDataErrorTypes;
+        private FTAnalyzer.Theme.ThemedGroupBox gbDataErrorTypes;
         private System.Windows.Forms.Button btnSelectAll;
         private System.Windows.Forms.Button btnClearAll;
         private System.Windows.Forms.TabPage tabDuplicates;
@@ -5287,10 +5275,10 @@ namespace FTAnalyzer
         private FTAnalyzer.Forms.Controls.VirtualDgvLooseBirths dgLooseBirths;
         private System.Windows.Forms.TabPage tabLooseDeaths;
         private FTAnalyzer.Forms.Controls.VirtualDgvLooseDeaths dgLooseDeaths;
-        private System.Windows.Forms.GroupBox groupBox7;
+        private FTAnalyzer.Theme.ThemedGroupBox groupBox7;
         private System.Windows.Forms.Button btnAdvancedMissingData;
         private System.Windows.Forms.Button btnStandardMissingData;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private FTAnalyzer.Theme.ThemedGroupBox groupBox3;
         private System.Windows.Forms.Button btnIrishColourCensus;
         private System.Windows.Forms.Button btnCanadianColourCensus;
         private System.Windows.Forms.Button btnUKColourCensus;
@@ -5319,7 +5307,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.Button btnLC1880USA;
         private System.Windows.Forms.TabPage LCUpdatesTab;
         private System.Windows.Forms.Button btnUpdateLostCousinsWebsite;
-        private System.Windows.Forms.GroupBox groupBox8;
+        private FTAnalyzer.Theme.ThemedGroupBox groupBox8;
         private System.Windows.Forms.Button btnLCLogin;
         private System.Windows.Forms.Label labLCUpdatesPassword;
         private System.Windows.Forms.Label labLCUpdatesEmail;
@@ -5333,22 +5321,22 @@ namespace FTAnalyzer
         private System.Windows.Forms.Button btnViewInvalidRefs;
         private System.Windows.Forms.TabPage tabLooseInfo;
         private FTAnalyzer.Forms.Controls.VirtualDgvLooseInfo dgLooseInfo;
-        private System.Windows.Forms.GroupBox groupBox9;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private FTAnalyzer.Theme.ThemedGroupBox groupBox9;
+        private FTAnalyzer.Theme.ThemedGroupBox groupBox1;
         private System.Windows.Forms.Button btnDuplicateCensus;
         private System.Windows.Forms.Button btnMissingCensusLocation;
-        private System.Windows.Forms.GroupBox groupBox5;
+        private FTAnalyzer.Theme.ThemedGroupBox groupBox5;
         private System.Windows.Forms.Button btnMismatchedChildrenStatus;
         private System.Windows.Forms.Button btnNoChildrenStatus;
-        private System.Windows.Forms.GroupBox groupBox6;
+        private FTAnalyzer.Theme.ThemedGroupBox groupBox6;
         private System.Windows.Forms.Button btnReportUnrecognised;
-        private System.Windows.Forms.GroupBox groupBox4;
+        private FTAnalyzer.Theme.ThemedGroupBox groupBox4;
         private System.Windows.Forms.Button btnInconsistentLocations;
         private System.Windows.Forms.Button btnUnrecognisedCensusRef;
         private System.Windows.Forms.Button btnIncompleteCensusRef;
         private System.Windows.Forms.Button btnMissingCensusRefs;
         private System.Windows.Forms.Button btnCensusRefs;
-        private System.Windows.Forms.GroupBox groupBox10;
+        private FTAnalyzer.Theme.ThemedGroupBox groupBox10;
         private System.Windows.Forms.Button btnRandomSurnameEntered;
         private System.Windows.Forms.Button btnRandomSurnameMissing;
         private FTAnalyzer.Theme.ThemedCheckBox chkAnyCensusYear;
@@ -5363,7 +5351,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
         private System.Windows.Forms.ToolStripMenuItem mnuJSON;
         private System.Windows.Forms.ToolStripMenuItem mnuPossiblyMissingChildReport;
-        private System.Windows.Forms.GroupBox groupBox11;
+        private FTAnalyzer.Theme.ThemedGroupBox groupBox11;
         private System.Windows.Forms.Button BtnProblemCensusFacts;
         private System.Windows.Forms.Button BtnAutoCreatedCensusFacts;
         private System.Windows.Forms.ToolStripMenuItem MnuAgedOver99Report;
@@ -5411,7 +5399,7 @@ namespace FTAnalyzer
         private System.Windows.Forms.ToolStripMenuItem MnuCustomFactsToExcel;
         private global::System.Windows.Forms.CheckedListBox ckbDataErrors;
         private global::FTAnalyzer.Utilities.ScrollingRichTextBox rtbLCoutput;
-        private GroupBox gbFilters;
+        private FTAnalyzer.Theme.ThemedGroupBox gbFilters;
         private Button btnRandomSurnameColour;
         private Label labResearchTabFamilyFilter;
         private ComboBox cmbColourFamily;
@@ -5438,7 +5426,7 @@ namespace FTAnalyzer
         private Forms.Controls.RelationTypes relTypesFacts;
         private Label label1;
         private SplitContainer splitLostCousins;
-        private GroupBox Referrals;
+        private FTAnalyzer.Theme.ThemedGroupBox Referrals;
         private FTAnalyzer.Theme.ThemedCheckBox ckbReferralInCommon;
         private Button btnReferrals;
         private ComboBox cmbReferrals;

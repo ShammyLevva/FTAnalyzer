@@ -36,12 +36,12 @@ namespace FTAnalyzer.UserControls
         {
             this.components = new System.ComponentModel.Container();
             this.chkUseNonGedcomDates = new FTAnalyzer.Theme.ThemedCheckBox();
-            this.gbDateFormat = new System.Windows.Forms.GroupBox();
+            this.gbDateFormat = new FTAnalyzer.Theme.ThemedGroupBox();
             this.rbyyyymmdd = new FTAnalyzer.Theme.ThemedRadioButton();
             this.rbyyyyddmm = new FTAnalyzer.Theme.ThemedRadioButton();
             this.rbmmddyyyy = new FTAnalyzer.Theme.ThemedRadioButton();
             this.rbddmmyyyy = new FTAnalyzer.Theme.ThemedRadioButton();
-            this.gbSeparator = new System.Windows.Forms.GroupBox();
+            this.gbSeparator = new FTAnalyzer.Theme.ThemedGroupBox();
             this.rbSpace = new FTAnalyzer.Theme.ThemedRadioButton();
             this.rbDot = new FTAnalyzer.Theme.ThemedRadioButton();
             this.rbDash = new FTAnalyzer.Theme.ThemedRadioButton();
@@ -78,7 +78,6 @@ namespace FTAnalyzer.UserControls
             this.gbDateFormat.TabIndex = 6;
             this.gbDateFormat.TabStop = false;
             this.gbDateFormat.Text = "Allowed Date Format";
-            this.gbDateFormat.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox_Paint);
             // 
             // rbyyyymmdd
             // 
@@ -135,7 +134,6 @@ namespace FTAnalyzer.UserControls
             this.gbSeparator.TabIndex = 7;
             this.gbSeparator.TabStop = false;
             this.gbSeparator.Text = "Date Separator";
-            this.gbSeparator.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox_Paint);
             // 
             // rbSpace
             // 
@@ -222,12 +220,12 @@ namespace FTAnalyzer.UserControls
         #endregion
 
         private FTAnalyzer.Theme.ThemedCheckBox chkUseNonGedcomDates;
-        private System.Windows.Forms.GroupBox gbDateFormat;
+        private FTAnalyzer.Theme.ThemedGroupBox gbDateFormat;
         private FTAnalyzer.Theme.ThemedRadioButton rbyyyymmdd;
         private FTAnalyzer.Theme.ThemedRadioButton rbyyyyddmm;
         private FTAnalyzer.Theme.ThemedRadioButton rbmmddyyyy;
         private FTAnalyzer.Theme.ThemedRadioButton rbddmmyyyy;
-        private System.Windows.Forms.GroupBox gbSeparator;
+        private FTAnalyzer.Theme.ThemedGroupBox gbSeparator;
         private FTAnalyzer.Theme.ThemedRadioButton rbDash;
         private FTAnalyzer.Theme.ThemedRadioButton rbSlash;
         private FTAnalyzer.Theme.ThemedRadioButton rbSpace;

@@ -34,7 +34,7 @@ namespace FTAnalyzer.Forms.Controls
         /// </summary>
         private void InitializeComponent()
         {
-            groupBox1 = new GroupBox();
+            groupBox1 = new FTAnalyzer.Theme.ThemedGroupBox();
             rbUSA = new FTAnalyzer.Theme.ThemedRadioButton();
             rbCanada = new FTAnalyzer.Theme.ThemedRadioButton();
             rbUK = new FTAnalyzer.Theme.ThemedRadioButton();
@@ -60,7 +60,6 @@ namespace FTAnalyzer.Forms.Controls
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "Census Country";
-            groupBox1.Paint += GroupBox1_Paint;
             // 
             // rbUSA
             // 
@@ -152,7 +151,7 @@ namespace FTAnalyzer.Forms.Controls
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private FTAnalyzer.Theme.ThemedGroupBox groupBox1;
         private FTAnalyzer.Theme.ThemedRadioButton rbUSA;
         private FTAnalyzer.Theme.ThemedRadioButton rbCanada;
         private FTAnalyzer.Theme.ThemedRadioButton rbUK;

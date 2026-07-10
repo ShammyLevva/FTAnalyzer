@@ -67,6 +67,10 @@ namespace FTAnalyzer.Graphics
                                      box.ClientRectangle.Y + (int)(strSize.Height / 2),
                                      box.ClientRectangle.Width - 1,
                                      box.ClientRectangle.Height - (int)(strSize.Height / 2) - 1);
+                // Gap before the caption text, floored at 4px - GroupBox.Padding.Left defaults to
+                // 0 when the Designer never sets it explicitly, which would otherwise draw the
+                // border's top-left corner right through the caption text with no breathing room.
+                int textGap = Math.Max(box.Padding.Left, 4);
                 // Drawing Border
                 //Left
                 g.DrawLine(borderPen, rect.Location, new Point(rect.X, rect.Y + rect.Height));
@@ -75,9 +79,9 @@ namespace FTAnalyzer.Graphics
                 //Bottom
                 g.DrawLine(borderPen, new Point(rect.X, rect.Y + rect.Height), new Point(rect.X + rect.Width, rect.Y + rect.Height));
                 //Top1
-                g.DrawLine(borderPen, new Point(rect.X, rect.Y), new Point(rect.X + box.Padding.Left, rect.Y));
+                g.DrawLine(borderPen, new Point(rect.X, rect.Y), new Point(rect.X + textGap, rect.Y));
                 //Top2
-                g.DrawLine(borderPen, new Point(rect.X + box.Padding.Left + (int)(strSize.Width), rect.Y), new Point(rect.X + rect.Width, rect.Y));
+                g.DrawLine(borderPen, new Point(rect.X + textGap + (int)(strSize.Width), rect.Y), new Point(rect.X + rect.Width, rect.Y));
             }
         }
 

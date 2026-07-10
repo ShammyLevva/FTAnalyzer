@@ -1,5 +1,4 @@
-﻿using FTAnalyzer.Graphics;
-using FTAnalyzer.Properties;
+﻿using FTAnalyzer.Properties;
 using System.Text.RegularExpressions;
 using static FTAnalyzer.FactDate;
 
@@ -72,15 +71,6 @@ namespace FTAnalyzer.UserControls
             NonGedcomDate.Default.UseNonGedcomDates = chkUseNonGedcomDates.Checked;
             gbDateFormat.Enabled = chkUseNonGedcomDates.Checked;
             gbSeparator.Enabled = chkUseNonGedcomDates.Checked;
-        }
-
-        // The default (OS-drawn) GroupBox border is a thin etched line that ignores app colors
-        // entirely - near-invisible in dark mode. Same fix as MainForm/CensusCountry/RelationTypes.
-        // Shared by both group boxes on this page.
-        void GroupBox_Paint(object sender, PaintEventArgs e)
-        {
-            if (sender is GroupBox box)
-                GraphicsUtilities.DrawGroupBox(box, e.Graphics, Theme.ActiveColors.Border, 2);
         }
 
         void NonGedcomDateSettingsUI_Leave(object sender, EventArgs e)

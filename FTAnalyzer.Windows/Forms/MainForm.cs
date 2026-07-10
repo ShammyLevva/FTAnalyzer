@@ -4443,29 +4443,5 @@ namespace FTAnalyzer
                 UIHelpers.ShowMessage(ex.Message, APPNAME);
             }
         }
-
-
-        static void DrawBlackBorderGroupBox(object sender, PaintEventArgs e)
-        {
-            // Hard-coded Color.Black regardless of theme was near-invisible in dark mode (a
-            // near-black border against a near-black background) - use the app's own subtle
-            // border token instead, same as grid lines/tab frames elsewhere.
-            GroupBox? box = sender as GroupBox;
-            if (box is not null)
-                GraphicsUtilities.DrawGroupBox(box, e.Graphics, Theme.ActiveColors.Border, 2);
-        }
-
-        void GroupBox2_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void GroupBox7_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void GroupBox3_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void GroupBox5_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void GroupBox6_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void GroupBox4_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void GroupBox10_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void GroupBox11_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void Referrals_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void GbFilters_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void GroupBox9_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
-        void GroupBox1_Paint(object sender, PaintEventArgs e) => DrawBlackBorderGroupBox(sender, e);
     }
 }

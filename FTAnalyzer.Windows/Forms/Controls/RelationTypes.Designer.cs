@@ -34,7 +34,7 @@ namespace FTAnalyzer.Forms.Controls
         /// </summary>
         private void InitializeComponent()
         {
-            groupBox2 = new GroupBox();
+            groupBox2 = new FTAnalyzer.Theme.ThemedGroupBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             ckbDirects = new FTAnalyzer.Theme.ThemedCheckBox();
             ckbMarriage = new FTAnalyzer.Theme.ThemedCheckBox();
@@ -59,7 +59,6 @@ namespace FTAnalyzer.Forms.Controls
             groupBox2.TabIndex = 5;
             groupBox2.TabStop = false;
             groupBox2.Text = "Relationship Types";
-            groupBox2.Paint += GroupBox2_Paint;
             //
             // tableLayoutPanel1
             //
@@ -182,7 +181,7 @@ namespace FTAnalyzer.Forms.Controls
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox2;
+        private FTAnalyzer.Theme.ThemedGroupBox groupBox2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private FTAnalyzer.Theme.ThemedCheckBox ckbUnknown;
         private FTAnalyzer.Theme.ThemedCheckBox ckbMarriageDB;

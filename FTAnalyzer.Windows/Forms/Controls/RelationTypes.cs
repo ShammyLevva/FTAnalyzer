@@ -1,5 +1,4 @@
 ﻿using FTAnalyzer.Filters;
-using FTAnalyzer.Graphics;
 using FTAnalyzer.Utilities;
 using System.ComponentModel;
 
@@ -91,13 +90,5 @@ namespace FTAnalyzer.Forms.Controls
         void Tickbox_CheckedChanged(object sender, EventArgs e) => OnRelationTypesChanged();
 
         void RelationTypes_Layout(object sender, LayoutEventArgs e) { }
-
-        void GroupBox2_Paint(object sender, PaintEventArgs e)
-        {
-            // Hard-coded Color.Black regardless of theme was near-invisible in dark mode.
-            GroupBox? box = sender as GroupBox;
-            if (box is not null)
-                GraphicsUtilities.DrawGroupBox(box, e.Graphics, Theme.ActiveColors.Border, 2);
-        }
     }
 }
