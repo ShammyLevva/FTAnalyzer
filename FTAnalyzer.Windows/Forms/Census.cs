@@ -139,7 +139,11 @@ namespace FTAnalyzer.Forms
             {
                 dgCensus.Sort(pos, ListSortDirection.Ascending);
                 dgCensus.Sort(famID, ListSortDirection.Ascending);
-                dgCensus.AutoResizeColumns();
+                // AutoResizeColumns() on a VirtualMode grid with zero rows (e.g. no Lost Cousins
+                // potential uploads found) can't resolve a row's inherited Font to measure
+                // against and throws ArgumentNullException - nothing to size to anyway, so skip.
+                if (dgCensus.RowCount > 0)
+                    dgCensus.AutoResizeColumns();
                 StyleRows();
             }
         }

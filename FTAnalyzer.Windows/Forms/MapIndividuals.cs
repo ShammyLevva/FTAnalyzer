@@ -47,7 +47,10 @@ namespace FTAnalyzer
             if (ind is not null)
             {
                 dgIndividuals.Sort(ind, ListSortDirection.Ascending);
-                dgIndividuals.AutoResizeColumns();
+                // See Census.ResetTable's identical guard - AutoResizeColumns() on an empty grid
+                // can throw ArgumentNullException while resolving a row's font to measure against.
+                if (dgIndividuals.RowCount > 0)
+                    dgIndividuals.AutoResizeColumns();
             }
         }
 

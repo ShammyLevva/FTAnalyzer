@@ -188,6 +188,15 @@ namespace FTAnalyzer.Forms.Controls
             set
             {
                 CreateGridColumns();
+                // Many of this class's ~23 concrete grids have their generated Designer.cs
+                // override AutoSizeColumnsMode back to DisplayedCells after the constructor
+                // above already set it to None (see that comment for why continuous auto-sizing
+                // is undesirable here) - DisplayedCells recalculating widths on a VirtualMode
+                // grid with zero rows is exactly what threw the ArgumentNullException from
+                // DataGridViewCell.MeasureTextSize seen on the Census grid. Reassert None on
+                // every (re)population so that crash can't happen regardless of what the
+                // designer set at construction time.
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
                 _dataSource = value ?? [];
                 _fulllist = value ?? [];
                 if (value is not null)
