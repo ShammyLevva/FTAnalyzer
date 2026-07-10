@@ -63,47 +63,30 @@ namespace FTAnalyzer.Theme
                         if (IsDefaultText(checkBox.ForeColor))
                             checkBox.ForeColor = ActiveColors.Text;
                         // The default (System-rendered) glyph is drawn by the OS visual-style
-                        // handler as a light/white square regardless of app colors - same class
-                        // of bug as ProgressBar/TrackBar. FlatStyle.Flat switches to .NET's own
-                        // GDI+ drawing, which does respect BackColor for the box fill. Only needed
-                        // in dark mode - light mode's default glyph already reads fine against its
-                        // pale background, and must be left alone entirely: merely assigning
-                        // BackColor (even to a value that looks plausible) silently flips
-                        // UseVisualStyleBackColor to false as a side effect, which makes the
-                        // control start painting a solid background rectangle instead of blending
-                        // transparently with its parent - that's what caused a visible white box
-                        // behind every checkbox in light mode when this branch ran unconditionally.
-                        if (ActiveColors.IsDark)
+                        // handler and ignores app colors - same class of bug as ProgressBar/
+                        // TrackBar. Toggling FlatStyle/UseVisualStyleBackColor conditionally on
+                        // theme (an earlier version of this fix) proved unreliable in practice - a
+                        // stale BackColor from a prior theme pass could survive a "revert to
+                        // Standard" and still get painted. Force FlatStyle.Flat unconditionally
+                        // instead, with BackColor explicitly matched to the surrounding
+                        // panel/groupbox's own background (also ActiveColors.Background) - this
+                        // blends seamlessly in either theme and is fully under our control rather
+                        // than depending on the OS's transparent-background behavior.
+                        if (checkBox.FlatStyle is FlatStyle.Standard or FlatStyle.Flat)
                         {
-                            if (checkBox.FlatStyle == FlatStyle.Standard)
-                            {
-                                checkBox.FlatStyle = FlatStyle.Flat;
-                                checkBox.BackColor = ActiveColors.Background;
-                            }
-                        }
-                        else if (checkBox.FlatStyle == FlatStyle.Flat)
-                        {
-                            // Reverting from a previous dark-mode pass - restore the transparent-
-                            // blend rendering rather than guessing a BackColor to match.
-                            checkBox.FlatStyle = FlatStyle.Standard;
-                            checkBox.UseVisualStyleBackColor = true;
+                            checkBox.FlatStyle = FlatStyle.Flat;
+                            checkBox.UseVisualStyleBackColor = false;
+                            checkBox.BackColor = ActiveColors.Background;
                         }
                         break;
                     case RadioButton radioButton:
                         if (IsDefaultText(radioButton.ForeColor))
                             radioButton.ForeColor = ActiveColors.Text;
-                        if (ActiveColors.IsDark)
+                        if (radioButton.FlatStyle is FlatStyle.Standard or FlatStyle.Flat)
                         {
-                            if (radioButton.FlatStyle == FlatStyle.Standard)
-                            {
-                                radioButton.FlatStyle = FlatStyle.Flat;
-                                radioButton.BackColor = ActiveColors.Background;
-                            }
-                        }
-                        else if (radioButton.FlatStyle == FlatStyle.Flat)
-                        {
-                            radioButton.FlatStyle = FlatStyle.Standard;
-                            radioButton.UseVisualStyleBackColor = true;
+                            radioButton.FlatStyle = FlatStyle.Flat;
+                            radioButton.UseVisualStyleBackColor = false;
+                            radioButton.BackColor = ActiveColors.Background;
                         }
                         break;
                     case TreeView treeView:
