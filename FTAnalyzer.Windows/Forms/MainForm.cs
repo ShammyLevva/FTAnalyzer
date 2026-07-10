@@ -46,6 +46,14 @@ namespace FTAnalyzer
             InitializeComponent();
             ApplyTheme();
             ApplyMenuIcons();
+            // Resolved and applied here, before the window is ever shown, rather than in
+            // MainForm_Load: the Designer never sets StartPosition, so it defaults to
+            // WindowsDefaultLocation - if the saved size/position were only applied in Load
+            // (after Application.Run shows the form), the window would flash at its OS-default
+            // cascade position/size first and visibly jump to the saved one a moment later.
+            StartPosition = FormStartPosition.Manual;
+            _ = NativeMethods.GetTaskBarPos(); // Sets taskbar offset, needed by SetHeightWidth's on-screen check
+            SetHeightWidth();
         }
 
         void ApplyTheme()
@@ -71,11 +79,11 @@ namespace FTAnalyzer
             statusStrip.ForeColor = Theme.ActiveColors.Text;
             statusStrip.Renderer = new ChromeToolStripRenderer();
 
-            // Forced directly rather than relying on FormTheme's generic Button pass - these four
-            // (Census tab, "Census Record Reports" group) kept their native white look even after
-            // FormTheme's walk reached and matched them there, for reasons that didn't reproduce
-            // for any other button in the app.
-            foreach (Button censusReportButton in new[] { btnShowCensusMissing, btnShowCensusEntered, btnRandomSurnameEntered, btnRandomSurnameMissing })
+            // Forced directly rather than relying on FormTheme's generic Button pass - these
+            // (Census tab's "Census Record Reports" group, plus btnReferrals on the Lost Cousins
+            // tab) kept their native look even after FormTheme's walk reached and matched them
+            // there, for reasons that didn't reproduce for any other button in the app.
+            foreach (Button censusReportButton in new[] { btnShowCensusMissing, btnShowCensusEntered, btnRandomSurnameEntered, btnRandomSurnameMissing, btnReferrals })
             {
                 censusReportButton.FlatStyle = FlatStyle.Flat;
                 censusReportButton.UseVisualStyleBackColor = false;
@@ -129,7 +137,6 @@ namespace FTAnalyzer
                 // isn't guaranteed yet at constructor time.
                 Theme.FormTheme.Apply(this);
                 ApplyFontsAndRelayout();
-                SetHeightWidth();
                 RegisterEventHandlers();
                 Text = $"Family Tree Analyzer v{VERSION}";
                 rfhDuplicates = new(this, "Duplicates", dgDuplicates, ResetDuplicatesTable, "Duplicates", false);
@@ -138,7 +145,6 @@ namespace FTAnalyzer
                 tsHintsLabel.Text = "Welcome to Family Tree Analyzer, if you have any questions please raise them on the User group - see help menu for details";
                 loading = false;
                 FamilyTree.Instance.Version = $"v{VERSION}";
-                _ = NativeMethods.GetTaskBarPos(); // Sets taskbar offset
                 displayOptionsOnLoadToolStripMenuItem.Checked = GeneralSettings.Default.ReportOptions;
                 treetopsRelation.MarriedToDB = false;
                 ShowMenus(false);

@@ -2169,8 +2169,9 @@ namespace FTAnalyzer
             splitLostCousins.Panel1.Controls.Add(relTypesLC);
             // 
             // splitLostCousins.Panel2
-            // 
+            //
             splitLostCousins.Panel2.Controls.Add(rtbLostCousins);
+            splitLostCousins.Panel2.Padding = new Padding(12);
             splitLostCousins.Size = new Size(1214, 422);
             splitLostCousins.SplitterDistance = 583;
             splitLostCousins.TabIndex = 41;

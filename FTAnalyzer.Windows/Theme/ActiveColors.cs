@@ -16,25 +16,36 @@ namespace FTAnalyzer.Theme
 
         public static AppThemeMode Mode { get; private set; } = FontSettings.Default.ThemeMode;
 
-        // Evaluated fresh each time rather than cached, so SystemDefault picks up the current
-        // Windows setting whenever the theme is (re-)applied, without needing to hook
-        // SystemEvents.UserPreferenceChanged for a fully live system-theme-change response.
-        public static bool IsDark => Mode switch
-        {
-            AppThemeMode.Dark => true,
-            AppThemeMode.Light => false,
-            _ => !SystemUsesLightTheme(),
-        };
+        // Cached rather than re-read on every access (as SystemDefault's registry lookup
+        // previously was): controls constructed moments apart during startup - grids color
+        // themselves inside their own constructors, which run during MainForm's
+        // InitializeComponent(), earlier than FormTheme.Apply() colors the rest of the chrome -
+        // could observe different resolved values if that early registry read was ever
+        // inconsistent, leaving grids dark-themed while the rest of the UI came out light in the
+        // same, never-toggled session. Resolved once and kept stable until SetMode() explicitly
+        // changes it (which already fires Changed for live re-theming). Mid-session OS theme
+        // changes while running in SystemDefault mode still aren't picked up live - a documented,
+        // accepted trade-off - but that was already true in practice since nothing hooks
+        // SystemEvents.UserPreferenceChanged.
+        public static bool IsDark { get; private set; } = ComputeIsDark(FontSettings.Default.ThemeMode);
 
         public static void SetMode(AppThemeMode mode)
         {
             if (Mode == mode)
                 return;
             Mode = mode;
+            IsDark = ComputeIsDark(mode);
             FontSettings.Default.ThemeMode = mode;
             UIHelpers.SafeSaveSettings(FontSettings.Default);
             Changed?.Invoke(null, EventArgs.Empty);
         }
+
+        static bool ComputeIsDark(AppThemeMode mode) => mode switch
+        {
+            AppThemeMode.Dark => true,
+            AppThemeMode.Light => false,
+            _ => !SystemUsesLightTheme(),
+        };
 
         static bool SystemUsesLightTheme()
         {
