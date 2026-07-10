@@ -80,5 +80,16 @@ namespace FTAnalyzer.Theme
         public static Color Warning => IsDark ? Colors.DarkWarning : Colors.Warning;
         public static Color Info => IsDark ? Colors.DarkInfo : Colors.Info;
         public static Color Danger => IsDark ? Colors.DarkDanger : Colors.Danger;
+
+        // For owner-drawn disabled-state text (ThemedCheckBox/ThemedRadioButton) where WinForms'
+        // own hardcoded SystemColors.GrayText - tuned for a light background and unreadable
+        // against dark mode's near-black one - isn't an option. Blended from this theme's own
+        // Text/Background rather than a fixed value, so it stays legible-but-muted in both themes.
+        public static Color DisabledText => Blend(Text, Background, 0.5);
+
+        static Color Blend(Color from, Color to, double amount) => Color.FromArgb(
+            (int)(from.R + (to.R - from.R) * amount),
+            (int)(from.G + (to.G - from.G) * amount),
+            (int)(from.B + (to.B - from.B) * amount));
     }
 }

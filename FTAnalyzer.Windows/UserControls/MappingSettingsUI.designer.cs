@@ -41,9 +41,9 @@ namespace FTAnalyzer.UserControls
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.txtMapPath = new System.Windows.Forms.TextBox();
             this.btnBrowseFolder = new System.Windows.Forms.Button();
-            this.ckbUseParishBoundaries = new System.Windows.Forms.CheckBox();
-            this.ckbHideScaleBar = new System.Windows.Forms.CheckBox();
-            this.chkIncludePartialGeocoded = new System.Windows.Forms.CheckBox();
+            this.ckbUseParishBoundaries = new FTAnalyzer.Theme.ThemedCheckBox();
+            this.ckbHideScaleBar = new FTAnalyzer.Theme.ThemedCheckBox();
+            this.chkIncludePartialGeocoded = new FTAnalyzer.Theme.ThemedCheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtGoogleAPI = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -130,9 +130,9 @@ namespace FTAnalyzer.UserControls
         private System.Windows.Forms.TextBox txtMapPath;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
-        private System.Windows.Forms.CheckBox ckbUseParishBoundaries;
-        private System.Windows.Forms.CheckBox ckbHideScaleBar;
-        private System.Windows.Forms.CheckBox chkIncludePartialGeocoded;
+        private FTAnalyzer.Theme.ThemedCheckBox ckbUseParishBoundaries;
+        private FTAnalyzer.Theme.ThemedCheckBox ckbHideScaleBar;
+        private FTAnalyzer.Theme.ThemedCheckBox chkIncludePartialGeocoded;
         private System.Windows.Forms.TextBox txtGoogleAPI;
         private System.Windows.Forms.Label label2;
     }

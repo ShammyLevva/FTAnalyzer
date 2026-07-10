@@ -39,8 +39,8 @@ namespace FTAnalyzer.UserControls
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.label1 = new System.Windows.Forms.Label();
-            this.chkRetryFailedLines = new System.Windows.Forms.CheckBox();
-            this.chkConvertDiacritics = new System.Windows.Forms.CheckBox();
+            this.chkRetryFailedLines = new FTAnalyzer.Theme.ThemedCheckBox();
+            this.chkConvertDiacritics = new FTAnalyzer.Theme.ThemedCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,7 +88,7 @@ namespace FTAnalyzer.UserControls
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox chkRetryFailedLines;
-        private System.Windows.Forms.CheckBox chkConvertDiacritics;
+        private FTAnalyzer.Theme.ThemedCheckBox chkRetryFailedLines;
+        private FTAnalyzer.Theme.ThemedCheckBox chkConvertDiacritics;
     }
 }
