@@ -1,6 +1,6 @@
 using FTAnalyzer.Utilities;
 
-namespace FTAnalyzer.Forms.Controls
+namespace FTAnalyzer.Theme
 {
     // TrackBar's channel is drawn by the OS visual-style handler and shows a hard-coded white
     // background regardless of BackColor - the same class of bug as ProgressBar and the

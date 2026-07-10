@@ -1,4 +1,4 @@
-namespace FTAnalyzer.Forms.Controls
+namespace FTAnalyzer.Theme
 {
     // A standard WinForms ProgressBar is drawn entirely by the OS visual-style handler, which
     // ignores BackColor/ForeColor even after SetWindowTheme opts the control's HWND out of
@@ -68,7 +68,7 @@ namespace FTAnalyzer.Forms.Controls
                 e.Graphics.FillRectangle(foreBrush, new Rectangle(0, 0, fillWidth, ClientRectangle.Height));
             }
 
-            using Pen borderPen = new(Theme.ActiveColors.Border);
+            using Pen borderPen = new(ActiveColors.Border);
             e.Graphics.DrawRectangle(borderPen, 0, 0, ClientRectangle.Width - 1, ClientRectangle.Height - 1);
         }
     }

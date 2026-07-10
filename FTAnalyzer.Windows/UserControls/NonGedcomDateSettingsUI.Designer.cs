@@ -35,17 +35,17 @@ namespace FTAnalyzer.UserControls
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.chkUseNonGedcomDates = new System.Windows.Forms.CheckBox();
+            this.chkUseNonGedcomDates = new FTAnalyzer.Theme.ThemedCheckBox();
             this.gbDateFormat = new System.Windows.Forms.GroupBox();
-            this.rbyyyymmdd = new System.Windows.Forms.RadioButton();
-            this.rbyyyyddmm = new System.Windows.Forms.RadioButton();
-            this.rbmmddyyyy = new System.Windows.Forms.RadioButton();
-            this.rbddmmyyyy = new System.Windows.Forms.RadioButton();
+            this.rbyyyymmdd = new FTAnalyzer.Theme.ThemedRadioButton();
+            this.rbyyyyddmm = new FTAnalyzer.Theme.ThemedRadioButton();
+            this.rbmmddyyyy = new FTAnalyzer.Theme.ThemedRadioButton();
+            this.rbddmmyyyy = new FTAnalyzer.Theme.ThemedRadioButton();
             this.gbSeparator = new System.Windows.Forms.GroupBox();
-            this.rbSpace = new System.Windows.Forms.RadioButton();
-            this.rbDot = new System.Windows.Forms.RadioButton();
-            this.rbDash = new System.Windows.Forms.RadioButton();
-            this.rbSlash = new System.Windows.Forms.RadioButton();
+            this.rbSpace = new FTAnalyzer.Theme.ThemedRadioButton();
+            this.rbDot = new FTAnalyzer.Theme.ThemedRadioButton();
+            this.rbDash = new FTAnalyzer.Theme.ThemedRadioButton();
+            this.rbSlash = new FTAnalyzer.Theme.ThemedRadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.gbDateFormat.SuspendLayout();
@@ -78,6 +78,7 @@ namespace FTAnalyzer.UserControls
             this.gbDateFormat.TabIndex = 6;
             this.gbDateFormat.TabStop = false;
             this.gbDateFormat.Text = "Allowed Date Format";
+            this.gbDateFormat.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox_Paint);
             // 
             // rbyyyymmdd
             // 
@@ -134,6 +135,7 @@ namespace FTAnalyzer.UserControls
             this.gbSeparator.TabIndex = 7;
             this.gbSeparator.TabStop = false;
             this.gbSeparator.Text = "Date Separator";
+            this.gbSeparator.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox_Paint);
             // 
             // rbSpace
             // 
@@ -219,17 +221,17 @@ namespace FTAnalyzer.UserControls
 
         #endregion
 
-        private System.Windows.Forms.CheckBox chkUseNonGedcomDates;
+        private FTAnalyzer.Theme.ThemedCheckBox chkUseNonGedcomDates;
         private System.Windows.Forms.GroupBox gbDateFormat;
-        private System.Windows.Forms.RadioButton rbyyyymmdd;
-        private System.Windows.Forms.RadioButton rbyyyyddmm;
-        private System.Windows.Forms.RadioButton rbmmddyyyy;
-        private System.Windows.Forms.RadioButton rbddmmyyyy;
+        private FTAnalyzer.Theme.ThemedRadioButton rbyyyymmdd;
+        private FTAnalyzer.Theme.ThemedRadioButton rbyyyyddmm;
+        private FTAnalyzer.Theme.ThemedRadioButton rbmmddyyyy;
+        private FTAnalyzer.Theme.ThemedRadioButton rbddmmyyyy;
         private System.Windows.Forms.GroupBox gbSeparator;
-        private System.Windows.Forms.RadioButton rbDash;
-        private System.Windows.Forms.RadioButton rbSlash;
-        private System.Windows.Forms.RadioButton rbSpace;
-        private System.Windows.Forms.RadioButton rbDot;
+        private FTAnalyzer.Theme.ThemedRadioButton rbDash;
+        private FTAnalyzer.Theme.ThemedRadioButton rbSlash;
+        private FTAnalyzer.Theme.ThemedRadioButton rbSpace;
+        private FTAnalyzer.Theme.ThemedRadioButton rbDot;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
     }

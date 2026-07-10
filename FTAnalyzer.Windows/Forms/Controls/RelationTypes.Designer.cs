@@ -36,13 +36,13 @@ namespace FTAnalyzer.Forms.Controls
         {
             groupBox2 = new GroupBox();
             tableLayoutPanel1 = new TableLayoutPanel();
-            ckbDirects = new CheckBox();
-            ckbMarriage = new CheckBox();
-            ckbUnknown = new CheckBox();
-            ckbBlood = new CheckBox();
-            ckbDescendants = new CheckBox();
-            ckbMarriageDB = new CheckBox();
-            ckbLinked = new CheckBox();
+            ckbDirects = new FTAnalyzer.Theme.ThemedCheckBox();
+            ckbMarriage = new FTAnalyzer.Theme.ThemedCheckBox();
+            ckbUnknown = new FTAnalyzer.Theme.ThemedCheckBox();
+            ckbBlood = new FTAnalyzer.Theme.ThemedCheckBox();
+            ckbDescendants = new FTAnalyzer.Theme.ThemedCheckBox();
+            ckbMarriageDB = new FTAnalyzer.Theme.ThemedCheckBox();
+            ckbLinked = new FTAnalyzer.Theme.ThemedCheckBox();
             groupBox2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -184,12 +184,12 @@ namespace FTAnalyzer.Forms.Controls
 
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.CheckBox ckbUnknown;
-        private System.Windows.Forms.CheckBox ckbMarriageDB;
-        private System.Windows.Forms.CheckBox ckbMarriage;
-        private System.Windows.Forms.CheckBox ckbBlood;
-        private System.Windows.Forms.CheckBox ckbDirects;
-        private System.Windows.Forms.CheckBox ckbDescendants;
-        private System.Windows.Forms.CheckBox ckbLinked;
+        private FTAnalyzer.Theme.ThemedCheckBox ckbUnknown;
+        private FTAnalyzer.Theme.ThemedCheckBox ckbMarriageDB;
+        private FTAnalyzer.Theme.ThemedCheckBox ckbMarriage;
+        private FTAnalyzer.Theme.ThemedCheckBox ckbBlood;
+        private FTAnalyzer.Theme.ThemedCheckBox ckbDirects;
+        private FTAnalyzer.Theme.ThemedCheckBox ckbDescendants;
+        private FTAnalyzer.Theme.ThemedCheckBox ckbLinked;
     }
 }

@@ -35,17 +35,17 @@ namespace FTAnalyzer.UserControls
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.chkAddCreatedLocations = new System.Windows.Forms.CheckBox();
-            this.chkAutoCreateCensus = new System.Windows.Forms.CheckBox();
-            this.chkCompactCensusRef = new System.Windows.Forms.CheckBox();
-            this.chkFamilyCensus = new System.Windows.Forms.CheckBox();
-            this.chkTolerateInaccurateCensus = new System.Windows.Forms.CheckBox();
-            this.chkCensusResidence = new System.Windows.Forms.CheckBox();
+            this.chkAddCreatedLocations = new FTAnalyzer.Theme.ThemedCheckBox();
+            this.chkAutoCreateCensus = new FTAnalyzer.Theme.ThemedCheckBox();
+            this.chkCompactCensusRef = new FTAnalyzer.Theme.ThemedCheckBox();
+            this.chkFamilyCensus = new FTAnalyzer.Theme.ThemedCheckBox();
+            this.chkTolerateInaccurateCensus = new FTAnalyzer.Theme.ThemedCheckBox();
+            this.chkCensusResidence = new FTAnalyzer.Theme.ThemedCheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.chkHideMissingTagged = new System.Windows.Forms.CheckBox();
+            this.chkHideMissingTagged = new FTAnalyzer.Theme.ThemedCheckBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.chkSkipCensusReferences = new System.Windows.Forms.CheckBox();
-            this.chkConvertResidenceFacts = new System.Windows.Forms.CheckBox();
+            this.chkSkipCensusReferences = new FTAnalyzer.Theme.ThemedCheckBox();
+            this.chkConvertResidenceFacts = new FTAnalyzer.Theme.ThemedCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -220,16 +220,16 @@ namespace FTAnalyzer.UserControls
 
         #endregion
 
-        private System.Windows.Forms.CheckBox chkAddCreatedLocations;
-        private System.Windows.Forms.CheckBox chkAutoCreateCensus;
-        private System.Windows.Forms.CheckBox chkCompactCensusRef;
-        private System.Windows.Forms.CheckBox chkFamilyCensus;
-        private System.Windows.Forms.CheckBox chkTolerateInaccurateCensus;
-        private System.Windows.Forms.CheckBox chkCensusResidence;
+        private FTAnalyzer.Theme.ThemedCheckBox chkAddCreatedLocations;
+        private FTAnalyzer.Theme.ThemedCheckBox chkAutoCreateCensus;
+        private FTAnalyzer.Theme.ThemedCheckBox chkCompactCensusRef;
+        private FTAnalyzer.Theme.ThemedCheckBox chkFamilyCensus;
+        private FTAnalyzer.Theme.ThemedCheckBox chkTolerateInaccurateCensus;
+        private FTAnalyzer.Theme.ThemedCheckBox chkCensusResidence;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox chkHideMissingTagged;
+        private FTAnalyzer.Theme.ThemedCheckBox chkHideMissingTagged;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.CheckBox chkSkipCensusReferences;
-        private System.Windows.Forms.CheckBox chkConvertResidenceFacts;
+        private FTAnalyzer.Theme.ThemedCheckBox chkSkipCensusReferences;
+        private FTAnalyzer.Theme.ThemedCheckBox chkConvertResidenceFacts;
     }
 }

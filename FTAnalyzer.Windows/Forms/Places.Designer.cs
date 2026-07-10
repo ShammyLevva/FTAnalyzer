@@ -45,7 +45,7 @@ namespace FTAnalyzer.Forms
             splitContainerFacts = new SplitContainer();
             splitContainerMap = new SplitContainer();
             tvPlaces = new MultiSelectTreeview();
-            tbOpacity = new FTAnalyzer.Forms.Controls.ThemedTrackBar();
+            tbOpacity = new FTAnalyzer.Theme.ThemedTrackBar();
             mapBox1 = new SharpMap.Forms.MapBox();
             mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(components);
             btnSelect = new ToolStripButton();
@@ -522,7 +522,7 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripButton btnSelect;
         private MultiSelectTreeview tvPlaces;
         private System.Windows.Forms.ToolStripMenuItem resetFormDefaultSizeAndPositionToolStripMenuItem;
-        private FTAnalyzer.Forms.Controls.ThemedTrackBar tbOpacity;
+        private FTAnalyzer.Theme.ThemedTrackBar tbOpacity;
         private DataGridViewImageColumn FactIcon;
         private DataGridViewTextBoxColumn FactsIndividualID;
         private DataGridViewTextBoxColumn Forenames;

@@ -56,7 +56,7 @@ namespace FTAnalyzer.Forms
             this.selectAllAncestorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectAllDescendantsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectAllRelationsfamilyAncestorsDescendantsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tbOpacity = new FTAnalyzer.Forms.Controls.ThemedTrackBar();
+            this.tbOpacity = new FTAnalyzer.Theme.ThemedTrackBar();
             this.mapBox1 = new SharpMap.Forms.MapBox();
             this.mapZoomToolStrip = new SharpMap.Forms.ToolBar.MapZoomToolStrip(this.components);
             this.btnSelect = new System.Windows.Forms.ToolStripButton();
@@ -629,6 +629,6 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceList;
         private System.Windows.Forms.ToolStripMenuItem resetFormToDefaultSizeAndPositionToolStripMenuItem;
-        private FTAnalyzer.Forms.Controls.ThemedTrackBar tbOpacity;
+        private FTAnalyzer.Theme.ThemedTrackBar tbOpacity;
     }
 }

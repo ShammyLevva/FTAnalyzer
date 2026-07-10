@@ -3,6 +3,7 @@ using FTAnalyzer.Filters;
 using FTAnalyzer.Forms;
 using FTAnalyzer.Forms.Controls;
 using FTAnalyzer.Graphics;
+using FTAnalyzer.Theme;
 using System.Collections.Concurrent;
 using FTAnalyzer.Properties;
 using FTAnalyzer.Shared.Utilities;

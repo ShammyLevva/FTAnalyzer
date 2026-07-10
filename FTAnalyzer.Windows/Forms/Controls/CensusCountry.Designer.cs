@@ -35,12 +35,12 @@ namespace FTAnalyzer.Forms.Controls
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
-            rbUSA = new RadioButton();
-            rbCanada = new RadioButton();
-            rbUK = new RadioButton();
-            rbWales = new RadioButton();
-            rbEngland = new RadioButton();
-            rbScotland = new RadioButton();
+            rbUSA = new FTAnalyzer.Theme.ThemedRadioButton();
+            rbCanada = new FTAnalyzer.Theme.ThemedRadioButton();
+            rbUK = new FTAnalyzer.Theme.ThemedRadioButton();
+            rbWales = new FTAnalyzer.Theme.ThemedRadioButton();
+            rbEngland = new FTAnalyzer.Theme.ThemedRadioButton();
+            rbScotland = new FTAnalyzer.Theme.ThemedRadioButton();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -153,11 +153,11 @@ namespace FTAnalyzer.Forms.Controls
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rbUSA;
-        private System.Windows.Forms.RadioButton rbCanada;
-        private System.Windows.Forms.RadioButton rbUK;
-        private System.Windows.Forms.RadioButton rbWales;
-        private System.Windows.Forms.RadioButton rbEngland;
-        private System.Windows.Forms.RadioButton rbScotland;
+        private FTAnalyzer.Theme.ThemedRadioButton rbUSA;
+        private FTAnalyzer.Theme.ThemedRadioButton rbCanada;
+        private FTAnalyzer.Theme.ThemedRadioButton rbUK;
+        private FTAnalyzer.Theme.ThemedRadioButton rbWales;
+        private FTAnalyzer.Theme.ThemedRadioButton rbEngland;
+        private FTAnalyzer.Theme.ThemedRadioButton rbScotland;
     }
 }

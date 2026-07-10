@@ -1,4 +1,5 @@
-﻿using FTAnalyzer.Properties;
+﻿using FTAnalyzer.Graphics;
+using FTAnalyzer.Properties;
 using FTAnalyzer.Utilities;
 
 namespace FTAnalyzer.UserControls
@@ -52,6 +53,14 @@ namespace FTAnalyzer.UserControls
         public void Cancel()
         {
             //NOOP;
+        }
+
+        // The default (OS-drawn) GroupBox border is a thin etched line that ignores app colors
+        // entirely - near-invisible in dark mode. Same fix as MainForm/CensusCountry/RelationTypes.
+        void GrpTheme_Paint(object sender, PaintEventArgs e)
+        {
+            if (sender is GroupBox box)
+                GraphicsUtilities.DrawGroupBox(box, e.Graphics, Theme.ActiveColors.Border, 2);
         }
 
         public bool HasValidationErrors => CheckChildrenValidation(this);

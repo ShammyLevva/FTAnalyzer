@@ -37,7 +37,7 @@ namespace FTAnalyzer.UserControls
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.tbFontScale = new FTAnalyzer.Forms.Controls.ThemedTrackBar();
+            this.tbFontScale = new FTAnalyzer.Theme.ThemedTrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -45,9 +45,9 @@ namespace FTAnalyzer.UserControls
             this.label5 = new System.Windows.Forms.Label();
             this.lbSample = new System.Windows.Forms.Label();
             this.grpTheme = new System.Windows.Forms.GroupBox();
-            this.rbThemeSystemDefault = new System.Windows.Forms.RadioButton();
-            this.rbThemeLight = new System.Windows.Forms.RadioButton();
-            this.rbThemeDark = new System.Windows.Forms.RadioButton();
+            this.rbThemeSystemDefault = new FTAnalyzer.Theme.ThemedRadioButton();
+            this.rbThemeLight = new FTAnalyzer.Theme.ThemedRadioButton();
+            this.rbThemeDark = new FTAnalyzer.Theme.ThemedRadioButton();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.grpTheme.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbFontScale)).BeginInit();
@@ -134,6 +134,7 @@ namespace FTAnalyzer.UserControls
             this.grpTheme.TabIndex = 30;
             this.grpTheme.TabStop = false;
             this.grpTheme.Text = "Theme";
+            this.grpTheme.Paint += new System.Windows.Forms.PaintEventHandler(this.GrpTheme_Paint);
             //
             // rbThemeSystemDefault
             //
@@ -198,7 +199,7 @@ namespace FTAnalyzer.UserControls
 
         #endregion
 
-        private FTAnalyzer.Forms.Controls.ThemedTrackBar tbFontScale;
+        private FTAnalyzer.Theme.ThemedTrackBar tbFontScale;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -206,9 +207,9 @@ namespace FTAnalyzer.UserControls
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lbSample;
         private System.Windows.Forms.GroupBox grpTheme;
-        private System.Windows.Forms.RadioButton rbThemeSystemDefault;
-        private System.Windows.Forms.RadioButton rbThemeLight;
-        private System.Windows.Forms.RadioButton rbThemeDark;
+        private FTAnalyzer.Theme.ThemedRadioButton rbThemeSystemDefault;
+        private FTAnalyzer.Theme.ThemedRadioButton rbThemeLight;
+        private FTAnalyzer.Theme.ThemedRadioButton rbThemeDark;
         private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

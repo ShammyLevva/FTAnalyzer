@@ -3,7 +3,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace FTAnalyzer.Forms.Controls
+namespace FTAnalyzer.Theme
 {
     // TabControl always paints some native chrome around each tab - a solid border box under
     // TabAppearance.Normal, separator lines under FlatButtons - regardless of DrawMode/Appearance,
@@ -55,7 +55,7 @@ namespace FTAnalyzer.Forms.Controls
         void PaintControl()
         {
             using System.Drawing.Graphics g = System.Drawing.Graphics.FromHwnd(Handle);
-            using SolidBrush backBrush = new(Theme.ActiveColors.Background);
+            using SolidBrush backBrush = new(ActiveColors.Background);
             g.FillRectangle(backBrush, ClientRectangle);
 
             for (int index = 0; index < TabCount; index++)
@@ -73,13 +73,13 @@ namespace FTAnalyzer.Forms.Controls
             bool isSelected = index == SelectedIndex;
             Rectangle bounds = GetTabRect(index);
 
-            Color backColour = isSelected ? Theme.ActiveColors.Primary : Theme.ActiveColors.Background;
-            Color textColour = isSelected ? Theme.ActiveColors.OnPrimary : Theme.ActiveColors.Text;
+            Color backColour = isSelected ? ActiveColors.Primary : ActiveColors.Background;
+            Color textColour = isSelected ? ActiveColors.OnPrimary : ActiveColors.Text;
             // AccentWarm is a mid-tone in both palettes, so it under-contrasts against light
             // mode's pale background (the intended subtle look) but over-contrasts against dark
             // mode's near-black background (reads as a bright/white outline). Border is designed
             // to be subtle against either theme's own background, so use that instead.
-            Color borderColour = isSelected ? Theme.ActiveColors.Primary : Theme.ActiveColors.Border;
+            Color borderColour = isSelected ? ActiveColors.Primary : ActiveColors.Border;
 
             using SolidBrush backBrush = new(backColour);
             using SolidBrush textBrush = new(textColour);

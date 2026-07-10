@@ -130,7 +130,7 @@ namespace FTAnalyzer.Theme
                             comboBox.DrawItem += ComboBox_DrawItem;
                         }
                         break;
-                    case FTAnalyzer.Forms.Controls.ThemedProgressBar progressBar:
+                    case FTAnalyzer.Theme.ThemedProgressBar progressBar:
                         progressBar.BackColor = ActiveColors.Card;
                         progressBar.ForeColor = ActiveColors.Primary;
                         break;

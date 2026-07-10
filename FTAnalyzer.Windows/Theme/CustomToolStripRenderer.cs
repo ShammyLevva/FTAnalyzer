@@ -1,4 +1,4 @@
-﻿namespace FTAnalyzer.Forms.Controls
+﻿namespace FTAnalyzer.Theme
 {
     class CustomToolStripRenderer : ToolStripProfessionalRenderer
     {
@@ -17,10 +17,10 @@
                 Rectangle imageRectangle = new(borderThickness, borderThickness,
                     gsb.Width - 2 * borderThickness, gsb.Height - 2 * borderThickness);
 
-                using SolidBrush lightBrush = new(Theme.ActiveColors.Background);
+                using SolidBrush lightBrush = new(ActiveColors.Background);
                 g.FillRectangle(lightBrush, 0, 0, gsb.Width, gsb.Height);
 
-                using SolidBrush steelBrush = new(Theme.ActiveColors.Primary);
+                using SolidBrush steelBrush = new(ActiveColors.Primary);
                 g.FillRectangle(steelBrush, 0, 0, gsb.Width, imageRectangle.Top);
                 g.FillRectangle(steelBrush, imageRectangle.Right, 0, gsb.Bounds.Right - imageRectangle.Right, imageRectangle.Bottom);
                 g.FillRectangle(steelBrush, 0, 0, imageRectangle.Left, gsb.Height);
