@@ -38,6 +38,11 @@ namespace FTAnalyzer
         Font normalFont = SystemFonts.DefaultFont;
         bool loading;
         bool WWI;
+        // Tracks Lost Cousins login state for BtnCheckMyAncestors_Click - previously that check
+        // compared btnCheckMyAncestors.BackColor == Color.LightGreen, which broke once the
+        // hardcoded status colors below were swapped for theme-aware ones (BackColor no longer
+        // has a single fixed "logged in" value to compare against).
+        bool lcLoggedIn;
         VirtualReportFormHelper<IDisplayDuplicateIndividual>? rfhDuplicates;
 
         public MainForm()
@@ -46,14 +51,19 @@ namespace FTAnalyzer
             InitializeComponent();
             ApplyTheme();
             ApplyMenuIcons();
-            // Resolved and applied here, before the window is ever shown, rather than in
-            // MainForm_Load: the Designer never sets StartPosition, so it defaults to
-            // WindowsDefaultLocation - if the saved size/position were only applied in Load
-            // (after Application.Run shows the form), the window would flash at its OS-default
-            // cascade position/size first and visibly jump to the saved one a moment later.
+            // Location only (not Size/WindowState - see SetHeightWidth's comment) is resolved
+            // here, before the window is ever shown, rather than in MainForm_Load: the Designer
+            // never sets StartPosition, so it defaults to WindowsDefaultLocation - if the saved
+            // position were only applied in Load (after Application.Run shows the form), the
+            // window would flash at its OS-default cascade position first and visibly jump to
+            // the saved one a moment later.
             StartPosition = FormStartPosition.Manual;
-            _ = NativeMethods.GetTaskBarPos(); // Sets taskbar offset, needed by SetHeightWidth's on-screen check
-            SetHeightWidth();
+            _ = NativeMethods.GetTaskBarPos(); // Sets taskbar offset, needed by the on-screen check below
+            Point leftTop = ReportFormHelper.CheckIsOnScreen(
+                RegistrySettings.GetIntRegistryValue("Mainform position - top", Top),
+                RegistrySettings.GetIntRegistryValue("Mainform position - left", Left));
+            Top = Math.Max(0, leftTop.Y);
+            Left = Math.Max(0, leftTop.X);
         }
 
         void ApplyTheme()
@@ -79,11 +89,11 @@ namespace FTAnalyzer
             statusStrip.ForeColor = Theme.ActiveColors.Text;
             statusStrip.Renderer = new ChromeToolStripRenderer();
 
-            // Forced directly rather than relying on FormTheme's generic Button pass - these
-            // (Census tab's "Census Record Reports" group, plus btnReferrals on the Lost Cousins
-            // tab) kept their native look even after FormTheme's walk reached and matched them
-            // there, for reasons that didn't reproduce for any other button in the app.
-            foreach (Button censusReportButton in new[] { btnShowCensusMissing, btnShowCensusEntered, btnRandomSurnameEntered, btnRandomSurnameMissing, btnReferrals })
+            // Forced directly rather than relying on FormTheme's generic Button pass - these four
+            // (Census tab, "Census Record Reports" group) kept their native white look even after
+            // FormTheme's walk reached and matched them there, for reasons that didn't reproduce
+            // for any other button in the app.
+            foreach (Button censusReportButton in new[] { btnShowCensusMissing, btnShowCensusEntered, btnRandomSurnameEntered, btnRandomSurnameMissing })
             {
                 censusReportButton.FlatStyle = FlatStyle.Flat;
                 censusReportButton.UseVisualStyleBackColor = false;
@@ -91,6 +101,47 @@ namespace FTAnalyzer
                 censusReportButton.ForeColor = Theme.ActiveColors.OnPrimary;
                 censusReportButton.FlatAppearance.BorderColor = Theme.ActiveColors.Primary;
             }
+            ApplyReferralsButtonColors();
+        }
+
+        // btnReferrals starts disabled and only flips to Enabled=true lazily (first click into
+        // either the "Select Individual" combo or, oddly, the unrelated Research Suggestions
+        // colour-family combo). WinForms hardcodes disabled FlatStyle button text to a system
+        // gray regardless of ForeColor - no amount of re-applying ForeColor after the fact
+        // changes that - so forcing the same dark Primary background used while enabled left
+        // that gray text almost unreadable. Driven off EnabledChanged (subscribed once in
+        // RegisterEventHandlers) rather than patched at each call site that flips Enabled, so it
+        // self-heals regardless of which path (or a future one) does the flipping.
+        void ApplyReferralsButtonColors()
+        {
+            btnReferrals.FlatStyle = FlatStyle.Flat;
+            btnReferrals.UseVisualStyleBackColor = false;
+            if (btnReferrals.Enabled)
+            {
+                btnReferrals.BackColor = Theme.ActiveColors.Primary;
+                btnReferrals.ForeColor = Theme.ActiveColors.OnPrimary;
+                btnReferrals.FlatAppearance.BorderColor = Theme.ActiveColors.Primary;
+            }
+            else
+            {
+                btnReferrals.BackColor = Theme.ActiveColors.PrimaryPale;
+                btnReferrals.FlatAppearance.BorderColor = Theme.ActiveColors.PrimaryPale;
+            }
+        }
+
+        // btnLCLogin/btnCheckMyAncestors used hardcoded Color.Red/Color.LightGreen as a
+        // login-status indicator - invisible against a dark theme, and (once "ready" is enabled
+        // and the button greyed out) the same disabled-text-on-solid-color contrast problem as
+        // ApplyReferralsButtonColors. "ready" maps to Primary rather than a separate "success"
+        // color because the web app's palette treats them as the same green (app.css
+        // --rz-success matches --color-primary in both themes).
+        static void ApplyLostCousinsStatusColors(Button button, bool ready)
+        {
+            button.FlatStyle = FlatStyle.Flat;
+            button.UseVisualStyleBackColor = false;
+            button.BackColor = ready ? Theme.ActiveColors.Primary : Theme.ActiveColors.Danger;
+            button.ForeColor = Theme.ActiveColors.OnPrimary;
+            button.FlatAppearance.BorderColor = button.BackColor;
         }
 
         // Menu icons ported from the web app's Material Symbols set (see UI modernisation
@@ -137,6 +188,16 @@ namespace FTAnalyzer
                 // isn't guaranteed yet at constructor time.
                 Theme.FormTheme.Apply(this);
                 ApplyFontsAndRelayout();
+                // Deliberately NOT moved to the constructor alongside the Location-only pre-set
+                // above: setting Width/Height/WindowState before the form's window handle exists
+                // (and before its first layout pass has ever run) left hidden tab pages - Lost
+                // Cousins wasn't the initially-selected tab - with their Dock=Fill children still
+                // laid out against the InitializeComponent()-time size. Once the tab was actually
+                // selected it showed stale bounds (the output box floating mid-tab with a gap
+                // below it) and the outer form itself came out taller than the saved size.
+                // Running this after Show() has created the handle and completed one full live
+                // layout pass avoids that.
+                SetHeightWidth();
                 RegisterEventHandlers();
                 Text = $"Family Tree Analyzer v{VERSION}";
                 rfhDuplicates = new(this, "Duplicates", dgDuplicates, ResetDuplicatesTable, "Duplicates", false);
@@ -409,6 +470,7 @@ namespace FTAnalyzer
             GeneralSettingsUI.AliasInNameChanged += new EventHandler(Options_AliasInNameChanged);
             FontSettingsUI.GlobalFontChanged += new EventHandler(Options_GlobalFontChanged);
             Theme.ActiveColors.Changed += new EventHandler(Options_GlobalThemeChanged);
+            btnReferrals.EnabledChanged += (_, _) => ApplyReferralsButtonColors();
         }
 
 
@@ -2089,10 +2151,11 @@ namespace FTAnalyzer
                 UIHelpers.ShowMessage("Error unable to save Lost Cousins email address preference. Please check App has rights to save user preferences to registry.");
             }
             bool websiteAvailable = await Program.LCClient.LostCousinsLoginAsync(txtLCEmail.Text, txtLCPassword.Text);
-            btnLCLogin.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
+            lcLoggedIn = websiteAvailable;
+            ApplyLostCousinsStatusColors(btnLCLogin, websiteAvailable);
             btnLCLogin.Enabled = !websiteAvailable;
             btnUpdateLostCousinsWebsite.Visible = websiteAvailable;
-            btnCheckMyAncestors.BackColor = websiteAvailable ? Color.LightGreen : Color.Red;
+            ApplyLostCousinsStatusColors(btnCheckMyAncestors, websiteAvailable);
             lblCheckAncestors.Text = websiteAvailable ? "Logged into Lost Cousins" : "Not Currently Logged in Use Updates Page to Login";
             HourGlass(this, false);
             if (websiteAvailable)
@@ -2189,7 +2252,7 @@ namespace FTAnalyzer
 
         void BtnCheckMyAncestors_Click(object sender, EventArgs e)
         {
-            if (btnCheckMyAncestors.BackColor == Color.LightGreen)
+            if (lcLoggedIn)
             {
                 Progress<string> outputText = new(rtbCheckAncestors.AppendText);
                 dgCheckAncestors.DataSource = ExportToLostCousins.VerifyAncestorsAsync(outputText);
@@ -2220,7 +2283,8 @@ namespace FTAnalyzer
         {
             if (btnUpdateLostCousinsWebsite.Visible) // if we can login clear cookies to reset session
                 Program.LCClient.EmptyCookieJar();
-            btnLCLogin.BackColor = Color.Red;
+            lcLoggedIn = false;
+            ApplyLostCousinsStatusColors(btnLCLogin, false);
             btnLCLogin.Enabled = true;
             btnUpdateLostCousinsWebsite.Visible = false;
         }
@@ -2251,8 +2315,17 @@ namespace FTAnalyzer
 
         void ChkLCRootPersonConfirm_CheckedChanged(object sender, EventArgs e)
         {
-            btnUpdateLostCousinsWebsite.Enabled = chkLCRootPersonConfirm.Checked;
-            btnUpdateLostCousinsWebsite.BackColor = chkLCRootPersonConfirm.Checked ? Color.LightGreen : Color.LightGray;
+            bool confirmed = chkLCRootPersonConfirm.Checked;
+            btnUpdateLostCousinsWebsite.Enabled = confirmed;
+            btnUpdateLostCousinsWebsite.FlatStyle = FlatStyle.Flat;
+            btnUpdateLostCousinsWebsite.UseVisualStyleBackColor = false;
+            // Unconfirmed uses the same paler PrimaryPale ApplyReferralsButtonColors uses for its
+            // disabled state - not Danger - since "not yet confirmed" isn't a warning/error, just
+            // not-ready-yet, and PrimaryPale gives WinForms' hardcoded disabled-text gray enough
+            // contrast to stay readable.
+            btnUpdateLostCousinsWebsite.BackColor = confirmed ? Theme.ActiveColors.Primary : Theme.ActiveColors.PrimaryPale;
+            btnUpdateLostCousinsWebsite.ForeColor = Theme.ActiveColors.OnPrimary;
+            btnUpdateLostCousinsWebsite.FlatAppearance.BorderColor = btnUpdateLostCousinsWebsite.BackColor;
         }
 
         void BtnLC1881EW_Click(object sender, EventArgs e) => LostCousinsCensus(CensusDate.EWCENSUS1881, "1881 England & Wales Census Records on file");
