@@ -76,6 +76,13 @@ namespace UnitTests
 
             factLocation = FactLocation.GetLocation("4 Old Grey Street, Sunderland, Co Durham");
             Assert.IsTrue(factLocation.ToString().Equals("4 Old Grey Street, Sunderland, County Durham, England"));
+
+            // region/country abbreviation lookups must be case insensitive
+            factLocation = FactLocation.GetLocation("Boston, Ma");
+            Assert.IsTrue(factLocation.ToString().Equals("Boston, Massachusetts, United States"));
+
+            factLocation = FactLocation.GetLocation("Boston, ma");
+            Assert.IsTrue(factLocation.ToString().Equals("Boston, Massachusetts, United States"));
         }
     }
 }
