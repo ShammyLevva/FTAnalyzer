@@ -1248,6 +1248,8 @@ namespace FTAnalyzer
         void ChildAgeProfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UIHelpers.ShowMessage("Sorry this report is currently Unavailable.");
+            // See Chart.cs (BuildChildBirthProfile, commented out below) for notes on re-enabling this —
+            // the reusable data calculation now lives in FamilyTree.ParentAgeProfile in FTAnalyzer.Shared.
             //Statistics s = Statistics.Instance;
             //Chart chart = new Chart();
             //int[,,] stats = s.ChildrenBirthProfiles();

@@ -11,6 +11,13 @@ namespace FTAnalyzer.Forms
             Top += NativeMethods.TopTaskbarOffset;
         }
 
+        // TODO Parent Age Report re-work (see MainForm.ChildAgeProfilesToolStripMenuItem_Click and GitHub issue #18
+        // on FTAnalyzer.Web): this used System.Windows.Forms.DataVisualization.Charting, which doesn't ship with
+        // .NET Core/.NET 5+ (it was .NET Framework-only), hence disabled since the 4.8 -> Core migration.
+        // The underlying data calculation has since been ported to FamilyTree.ParentAgeProfile(Predicate<Individual>)
+        // in FTAnalyzer.Shared (added for FTAnalyzer.Web's /parent-age page, which renders it with RadzenChart) —
+        // reuse that instead of int[,,] chartData below. For the chart control itself, a maintained WinForms-
+        // compatible replacement is needed, e.g. LiveChartsCore.SkiaSharpView.WinForms or ScottPlot.WinForms.
         //public void BuildChildBirthProfile(int[,,] chartData)
         //{
         //    Series serFatherSon = new Series() { Color = Color.Blue, LegendText = @"Father's Male Children" };
