@@ -15,6 +15,9 @@ namespace FTAnalyzer.Utilities
                 zf.Password = password;
             }
 
+            string outFolderFull = Path.GetFullPath(outFolder);
+            string outFolderPrefix = outFolderFull.EndsWith(Path.DirectorySeparatorChar) ? outFolderFull : outFolderFull + Path.DirectorySeparatorChar;
+
             foreach (ZipEntry zipEntry in zf)
             {
                 if (zipEntry.IsFile)
@@ -27,7 +30,9 @@ namespace FTAnalyzer.Utilities
                     // The unpacked length is available in the zipEntry.Size property.
 
                     // Manipulate the output filename here as desired.
-                    var fullZipToPath = Path.Combine(outFolder, entryFileName);
+                    var fullZipToPath = Path.GetFullPath(Path.Combine(outFolder, entryFileName));
+                    if (!fullZipToPath.StartsWith(outFolderPrefix, StringComparison.OrdinalIgnoreCase))
+                        throw new IOException($"Zip entry is outside of the target extraction directory: {zipEntry.Name}");
                     var directoryName = Path.GetDirectoryName(fullZipToPath);
                     if (!string.IsNullOrEmpty(directoryName))
                     {
