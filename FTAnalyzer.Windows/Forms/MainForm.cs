@@ -25,7 +25,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static readonly string VERSION = "11.0.0.0-beta3";
+        public static readonly string VERSION = "11.0.0.0-beta4";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(MainForm));
         const string APPNAME = "FTAnalyzer";
 
@@ -1171,6 +1171,27 @@ namespace FTAnalyzer
             HourGlass(this, true);
             SortableBindingList<IDisplayDataError> errors = DataErrors(ckbDataErrors);
             dgDataErrors.DataSource = errors;
+            // Unlike BtnTreeTops_Click/BtnWWI_Click/BtnWWII_Click, this never re-fit column
+            // widths after a repopulation - every checkbox toggle here calls DataSource's setter,
+            // which rebuilds all columns from their designer-preset [ColumnDetail] widths (see
+            // VirtualDataGridView<T>.CreateGridColumns), discarding whatever fit MainForm_Load's
+            // one-time FontScaler.Apply() pass had given them. Same fix as those three: re-fit to
+            // content, then to the (possibly bold) header, which GetPreferredWidth alone can
+            // undersize. Guarded on RowCount, matching this grid's other AutoResizeColumns-style
+            // calls elsewhere in the app - GetPreferredWidth hits the same font-resolution
+            // ArgumentNullException on an empty VirtualMode grid.
+            if (dgDataErrors.RowCount > 0)
+            {
+                try
+                {
+                    foreach (DataGridViewColumn c in dgDataErrors.Columns)
+                    {
+                        c.Width = c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+                        FontScaler.FitColumnToHeader(c);
+                    }
+                }
+                catch (ArgumentNullException) { }
+            }
             tsCountLabel.Text = Messages.Count + errors.Count;
             tsHintsLabel.Text = Messages.Hints_Individual;
             dgDataErrors.VirtualGridFiltered += VirtualGridFiltered;
