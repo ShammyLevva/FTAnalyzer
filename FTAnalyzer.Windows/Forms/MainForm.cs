@@ -1226,7 +1226,6 @@ namespace FTAnalyzer
 
         void SetupDataErrors()
         {
-            dgDataErrors.DataSource = DataErrors(ckbDataErrors);
             dgDataErrors.Focus();
             mnuPrint.Enabled = true;
             UpdateDataErrorsDisplay();
