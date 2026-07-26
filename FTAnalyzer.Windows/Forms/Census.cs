@@ -17,7 +17,7 @@ namespace FTAnalyzer.Forms
 
         readonly string censusCountry;
         readonly bool CensusDone;
-        readonly ReportFormHelper reportFormHelper;
+        readonly VirtualReportFormHelper<IDisplayCensus> reportFormHelper;
         readonly FamilyTree ft;
 
         readonly string DEFAULT_PROVIDER = "FamilySearch";
@@ -28,7 +28,7 @@ namespace FTAnalyzer.Forms
             InitializeComponent();
             Theme.FormTheme.Apply(this);
             ft = FamilyTree.Instance;
-            reportFormHelper = new ReportFormHelper(this, "Census Report", dgCensus, ResetTable, "Census");
+            reportFormHelper = new(this, "Census Report", dgCensus, ResetTable, "Census");
 
             LostCousins = false;
             CensusDate = censusDate;
