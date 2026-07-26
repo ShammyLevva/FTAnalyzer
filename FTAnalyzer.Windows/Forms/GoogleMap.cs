@@ -368,42 +368,10 @@ namespace FTAnalyzer.Forms
 
         public static void GenerateKML(string filename, List<ExportFactsAtLocation> locations)
         {
-            using (StreamWriter output = new(new FileStream(filename, FileMode.Create, FileAccess.Write), Encoding.UTF8))
-            {
-                output.WriteLine(@"<?xml version=""1.0"" encoding=""UTF-8""?>");
-                output.WriteLine(@"<kml xmlns=""http://www.opengis.net/kml/2.2"">");
-                output.WriteLine("<Document>");
-                foreach (ExportFactsAtLocation loc in locations)
-                {
-                    if (loc.FactsAtLocation?.Count > 0)
-                    {
-                        output.WriteLine("<Placemark>");
-                        output.WriteLine($"    <name>{loc.LocationName}</name>");
-                        output.WriteLine($"    <description>The following individuals/families were here:");
-                        int placecount = 0;
-                        foreach (string factAtLocation in loc.FactsAtLocation)
-                        {
-                            if (placecount++ <= 100)
-                                output.WriteLine($"{factAtLocation}"); // eg: John Smith born here XX XXX XXXX
-                            else
-                            {
-                                int remaining = loc.FactsAtLocation.Count - 100;
-                                output.WriteLine($"and {remaining} more. (Google limit max 100 lines).");
-                                break;
-                            }
-                        }
-                        output.WriteLine("    </description>");
-                        output.WriteLine("    <Point>");
-                        output.WriteLine($"        <coordinates>{loc.Longitude},{loc.Latitude},0</coordinates>");
-                        output.WriteLine("    </Point>");
-                        output.WriteLine("</Placemark>");
-                    }
-                }
-                output.WriteLine("</Document>");
-                output.WriteLine("</kml>");
-            }
+            string kml = KmlExporter.GenerateKml(locations);
+            File.WriteAllText(filename, kml, Encoding.UTF8);
             long length = new FileInfo(filename).Length;
-            if (length > 5000000)
+            if (length > KmlExporter.KmzThresholdBytes)
             {
                 string zipFilename = filename.Replace(".kml", ".kmz", StringComparison.Ordinal);
                 using ZipFile zip = new(zipFilename)
