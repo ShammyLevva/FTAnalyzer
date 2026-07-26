@@ -54,6 +54,9 @@ namespace FTAnalyzer.Forms
                 reportFormHelper = new ReportFormHelper(this, Text, dgLocations, ResetTable, "Geocode Locations");
                 italicFont = new(dgLocations.DefaultCellStyle.Font?.FontFamily ?? SystemFonts.DefaultFont.FontFamily, FontSettings.Default.FontSize, FontStyle.Italic);
                 reportFormHelper.LoadColumnLayout("GeocodeLocationsColumns.xml");
+                if (ft.Geocoding && !googleGeocodeBackgroundWorker.IsBusy && !reverseGeocodeBackgroundWorker.IsBusy &&
+                    !OSGeocodeBackgroundWorker.IsBusy && !EmptyViewPortsBackgroundWorker.IsBusy)
+                    ft.Geocoding = false; // a previous session's background worker finished after its window was disposed and never cleared this flag - self-heal rather than leave Edit Location locked out until restart
                 mnuGoogleGeocodeLocations.Enabled = !ft.Geocoding; // disable menu if already geocoding
                 mnuEditLocation.Enabled = !ft.Geocoding;
                 mnuReverseGeocode.Enabled = !ft.Geocoding;
@@ -503,6 +506,10 @@ namespace FTAnalyzer.Forms
 
         void WorkFinished(object sender)
         {
+            // must clear this regardless of form disposal, otherwise a worker that completes after its
+            // window was disposed (e.g. app closed mid-geocode) leaves ft.Geocoding stuck true, locking
+            // Edit Location out of every GeocodeLocations window for the rest of the session
+            ft.Geocoding = false;
             if (IsDisposed)
                 return;
             pbGeocoding.Value = 100;
@@ -515,7 +522,6 @@ namespace FTAnalyzer.Forms
             mnuCheckEmptyViewPorts.Enabled = true;
             string title = sender == OSGeocodeBackgroundWorker ? "OS Geocoding Results:" : "Google Geocoding Results:";
             FamilyTree.WriteGeocodeStatstoRTB(title, outputText);
-            ft.Geocoding = false;
             UpdateGridWithFilters();
         }
 
