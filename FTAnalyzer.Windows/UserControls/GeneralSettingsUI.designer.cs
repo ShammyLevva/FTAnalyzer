@@ -37,6 +37,7 @@ namespace FTAnalyzer.UserControls
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeneralSettingsUI));
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.chkUseBaptisms = new System.Windows.Forms.CheckBox();
             this.chkAllowEmptyLocations = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -54,6 +55,8 @@ namespace FTAnalyzer.UserControls
             this.chkHideIgnoredDuplicates = new System.Windows.Forms.CheckBox();
             this.chkIncludeAlternateFacts = new System.Windows.Forms.CheckBox();
             this.chkIncludeGenderAsFact = new System.Windows.Forms.CheckBox();
+            this.chkEnableDebugLogging = new System.Windows.Forms.CheckBox();
+            this.llnkOpenLogFolder = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownAge)).BeginInit();
             this.SuspendLayout();
@@ -193,10 +196,25 @@ namespace FTAnalyzer.UserControls
             this.chkIncludeGenderAsFact.UseVisualStyleBackColor = true;
             this.chkIncludeGenderAsFact.CheckedChanged += new System.EventHandler(this.ChkIncludeGenderAsFact_CheckedChanged);
             //
+            // chkEnableDebugLogging
+            //
+            resources.ApplyResources(this.chkEnableDebugLogging, "chkEnableDebugLogging");
+            this.chkEnableDebugLogging.Name = "chkEnableDebugLogging";
+            this.chkEnableDebugLogging.UseVisualStyleBackColor = true;
+            //
+            // llnkOpenLogFolder
+            //
+            resources.ApplyResources(this.llnkOpenLogFolder, "llnkOpenLogFolder");
+            this.llnkOpenLogFolder.Name = "llnkOpenLogFolder";
+            this.llnkOpenLogFolder.TabStop = true;
+            this.llnkOpenLogFolder.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LlnkOpenLogFolder_LinkClicked);
+            //
             // GeneralSettingsUI
             //
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.llnkOpenLogFolder);
+            this.Controls.Add(this.chkEnableDebugLogging);
             this.Controls.Add(this.chkIncludeGenderAsFact);
             this.Controls.Add(this.chkIncludeAlternateFacts);
             this.Controls.Add(this.chkHideIgnoredDuplicates);
@@ -225,6 +243,7 @@ namespace FTAnalyzer.UserControls
 		#endregion
 
 		private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.CheckBox chkUseBaptisms;
         private System.Windows.Forms.CheckBox chkAllowEmptyLocations;
         private System.Windows.Forms.Label label1;
@@ -242,5 +261,7 @@ namespace FTAnalyzer.UserControls
         private System.Windows.Forms.CheckBox chkHideIgnoredDuplicates;
         private System.Windows.Forms.CheckBox chkIncludeAlternateFacts;
         private System.Windows.Forms.CheckBox chkIncludeGenderAsFact;
+        private System.Windows.Forms.CheckBox chkEnableDebugLogging;
+        private System.Windows.Forms.LinkLabel llnkOpenLogFolder;
     }
 }

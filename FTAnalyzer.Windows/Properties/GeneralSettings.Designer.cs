@@ -358,5 +358,17 @@ namespace FTAnalyzer.Properties {
                 this["IncludeGenderAsFact"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EnableDebugLogging {
+            get {
+                return ((bool)(this["EnableDebugLogging"]));
+            }
+            set {
+                this["EnableDebugLogging"] = value;
+            }
+        }
     }
 }
