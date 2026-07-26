@@ -6,6 +6,7 @@ using ICSharpCode.SharpZipLib.Zip;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Net;
+using System.Security;
 using System.Text;
 
 
@@ -378,13 +379,13 @@ namespace FTAnalyzer.Forms
                     if (loc.FactsAtLocation?.Count > 0)
                     {
                         output.WriteLine("<Placemark>");
-                        output.WriteLine($"    <name>{loc.LocationName}</name>");
+                        output.WriteLine($"    <name>{SecurityElement.Escape(loc.LocationName)}</name>");
                         output.WriteLine($"    <description>The following individuals/families were here:");
                         int placecount = 0;
                         foreach (string factAtLocation in loc.FactsAtLocation)
                         {
                             if (placecount++ <= 100)
-                                output.WriteLine($"{factAtLocation}"); // eg: John Smith born here XX XXX XXXX
+                                output.WriteLine(SecurityElement.Escape(factAtLocation)); // eg: John Smith born here XX XXX XXXX
                             else
                             {
                                 int remaining = loc.FactsAtLocation.Count - 100;
