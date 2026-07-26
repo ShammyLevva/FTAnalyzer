@@ -204,12 +204,19 @@ namespace FTAnalyzer.Forms
                     .ConfigureAwait(false);
 
                 if (response.StatusCode == HttpStatusCode.TooManyRequests)
+                {
+                    DebugLogger.Log($"Geocode '{text}' -> OVER_QUERY_LIMIT (HTTP 429)");
                     return new GeoResponse { Status = "OVER_QUERY_LIMIT" };
+                }
                 if (response.StatusCode == HttpStatusCode.Forbidden)
+                {
+                    DebugLogger.Log($"Geocode '{text}' -> REQUEST_DENIED (HTTP 403) url={url}");
                     return new GeoResponse { Status = "REQUEST_DENIED" };
+                }
                 if (!response.IsSuccessStatusCode)
                 {
                     Debug.WriteLine($"Google API returned HTTP {(int)response.StatusCode} for {url}");
+                    DebugLogger.Log($"Geocode '{text}' -> HTTP {(int)response.StatusCode} url={url}");
                     return null;
                 }
 
@@ -217,24 +224,35 @@ namespace FTAnalyzer.Forms
                 res = JsonConvert.DeserializeObject<GeoResponse>(jsonString);
                 if (res is not null)
                     res.Status = res.Results.Length > 0 ? "OK" : "ZERO_RESULTS";
+                DebugLogger.Log($"Geocode '{text}' -> {res?.Status} ({res?.Results.Length ?? 0} results)");
             }
             catch (OperationCanceledException)
             {
                 if (!ThreadCancelled && !cancellationToken.IsCancellationRequested)
+                {
                     Debug.WriteLine($"Request cancelled or timed out for {url}");
+                    DebugLogger.Log($"Geocode '{text}' -> cancelled/timed out url={url}");
+                }
                 res = null;
             }
             catch (WebException ex)
             {
                 if (ex.Status == WebExceptionStatus.Timeout)
+                {
                     Debug.WriteLine($"Timeout with {url}\n");
+                    DebugLogger.Log($"Geocode '{text}' -> timeout url={url}");
+                }
                 else
+                {
                     UIHelpers.ShowMessage($"Unable to contact https://geocode.googleapis.com error was: {ex.Message}\nWhen trying to look for {text}", "FTAnalyzer");
+                    DebugLogger.Log($"Geocode '{text}' -> WebException {ex.Status}: {ex.Message} url={url}");
+                }
                 res = null;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error calling Google: {ex.Message}");
+                DebugLogger.Log($"Geocode '{text}' -> Exception: {ex.Message} url={url}");
                 res = null;
             }
             if (res is not null && res.Status == "REQUEST_DENIED")
