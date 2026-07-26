@@ -75,7 +75,16 @@ namespace FTAnalyzer.Forms.Controls
             BorderStyle = Theme.ActiveColors.IsDark ? BorderStyle.None : BorderStyle.Fixed3D;
             // The grid's own scrollbars are drawn by the OS and have no color property at all -
             // switch their visual-style class instead (see NativeMethods.SetScrollBarTheme).
+            // Theming `this` alone has no effect: DataGridView's vertical/horizontal scrollbars
+            // are separate child VScrollBar/HScrollBar controls with their own window handles
+            // (created unconditionally in its constructor, just hidden until needed), not part of
+            // the grid's own HWND - each child scrollbar's handle has to be themed individually.
             NativeMethods.SetScrollBarTheme(this, Theme.ActiveColors.IsDark);
+            foreach (Control child in Controls)
+            {
+                if (child is ScrollBar)
+                    NativeMethods.SetScrollBarTheme(child, Theme.ActiveColors.IsDark);
+            }
             ColumnHeadersDefaultCellStyle.BackColor = Theme.ActiveColors.Primary;
             ColumnHeadersDefaultCellStyle.ForeColor = Theme.ActiveColors.OnPrimary;
             ColumnHeadersDefaultCellStyle.SelectionBackColor = Theme.ActiveColors.Primary;
@@ -187,7 +196,14 @@ namespace FTAnalyzer.Forms.Controls
             get => _dataSource;
             set
             {
-                CreateGridColumns();
+                // Column structure (name/type/header/default width) is fully determined by T's
+                // fixed [ColumnDetail] attributes and never changes at runtime, so only build it
+                // once per grid instance - rebuilding on every rebind (e.g. MainForm re-assigns
+                // DataSource each time a tab is reselected, to pick up edits made elsewhere) was
+                // discarding any width/order the user had customized, reverting it back to the
+                // attribute defaults the moment they switched tabs and came back.
+                if (Columns.Count == 0)
+                    CreateGridColumns();
                 // Many of this class's ~23 concrete grids have their generated Designer.cs
                 // override AutoSizeColumnsMode back to DisplayedCells after the constructor
                 // above already set it to None (see that comment for why continuous auto-sizing

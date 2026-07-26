@@ -352,6 +352,15 @@ namespace FTAnalyzer.Forms
 
         void SetBackColour()
         {
+            // DgFacts_CellFormatting applies this directly to cell.Style.BackColor, bypassing the
+            // grid's theme-driven alternating row colors, so it must supply theme-correct colors
+            // itself. Unlike the grid's own plain odd/even zebra (VirtualDataGridView<T>.
+            // ApplyColors, Background/Card - a ~16-point gap), this shades entire multi-row
+            // individual/reference blocks with no odd/even parity to lean on, so it needs a much
+            // more visible gap to actually read as "next group" - Border is ~2x further from
+            // Background.
+            Color rowColor = Theme.ActiveColors.IsDark ? Theme.ActiveColors.Background : Theme.ActiveColors.Card;
+            Color alternateRowColor = Theme.ActiveColors.IsDark ? Theme.ActiveColors.Border : Theme.ActiveColors.Background;
             bool backColourGrey = false;
             DisplayFact? previous = null;
             foreach (DisplayFact fact in facts.Cast<DisplayFact>())
@@ -360,7 +369,7 @@ namespace FTAnalyzer.Forms
                     if ((CensusRefReport && previous.CensusReference != fact.CensusReference) || (!CensusRefReport && previous.IndividualID != fact.IndividualID))
                         backColourGrey = !backColourGrey;
 #if !__MACOS__
-                fact.BackColour = backColourGrey ? Color.LightGray : Color.White;
+                fact.BackColour = backColourGrey ? alternateRowColor : rowColor;
 #endif
                 previous = fact;
             }

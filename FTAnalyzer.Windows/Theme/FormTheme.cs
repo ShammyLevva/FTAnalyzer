@@ -32,6 +32,15 @@ namespace FTAnalyzer.Theme
                 {
                     case DataGridView:
                         continue; // themed at the source (AdvancedDataGridView), not per-instance
+                    // Matches MainForm's own menuStrip1/statusStrip.Renderer assignment (MainForm.cs)
+                    // but covers every ToolStrip (including plain report-window toolbars, which had
+                    // no case here at all and stayed stuck at the OS-default light gradient regardless
+                    // of theme). ToolStrip's own buttons live in .Items, not .Controls, so there's
+                    // nothing further to recurse into here.
+                    case ToolStrip toolStrip:
+                        if (toolStrip.Renderer is not ChromeToolStripRenderer)
+                            toolStrip.Renderer = new ChromeToolStripRenderer();
+                        continue;
                     case GroupBox groupBox:
                         if (IsDefaultBackground(groupBox.BackColor))
                             groupBox.BackColor = ActiveColors.Background;

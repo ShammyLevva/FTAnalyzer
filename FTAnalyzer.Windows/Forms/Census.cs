@@ -177,6 +177,15 @@ namespace FTAnalyzer.Forms
                 if (string.IsNullOrEmpty(sortedPropertyName))
                     return;
 
+                // StyleRows replaces the whole effective cell style (see DgCensus_CellFormatting),
+                // so it must supply theme-correct colors itself rather than relying on inheritance
+                // from the grid. Unlike the grid's own plain odd/even zebra (VirtualDataGridView<T>.
+                // ApplyColors, Background/Card - a ~16-point gap), this shades entire multi-row
+                // family blocks with no odd/even parity to lean on, so it needs a much more visible
+                // gap to actually read as "next family" - Border is ~2x further from Background.
+                Color rowColor = Theme.ActiveColors.IsDark ? Theme.ActiveColors.Background : Theme.ActiveColors.Card;
+                Color alternateRowColor = Theme.ActiveColors.IsDark ? Theme.ActiveColors.Border : Theme.ActiveColors.Background;
+
                 for (int i = 0; i < dgCensus.RowCount; i++)
                 {
                     if (dgCensus.DataBoundItem(i) is not CensusIndividual cr) continue;
@@ -193,8 +202,8 @@ namespace FTAnalyzer.Forms
 
                     DataGridViewCellStyle style = new(dgCensus.DefaultCellStyle)
                     {
-                        BackColor = highlighted ? Color.LightGray : Color.White,
-                        ForeColor = (cr.RelationType == RelationshipType.DIRECT || cr.RelationType == RelationshipType.DESCENDANT) ? Color.Red : Color.Black,
+                        BackColor = highlighted ? alternateRowColor : rowColor,
+                        ForeColor = (cr.RelationType == RelationshipType.DIRECT || cr.RelationType == RelationshipType.DESCENDANT) ? Color.Red : Theme.ActiveColors.Text,
                         Font = (cr.IsCensusDone(CensusDate) || (cr.IsAlive(CensusDate) && !cr.DeathDate.StartsBefore(CensusDate))) ? boldFont : regularFont
                     };
                     cr.CellStyle = style;

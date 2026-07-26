@@ -13,6 +13,17 @@ namespace FTAnalyzer.Theme
             e.TextColor = highlighted ? ActiveColors.OnPrimary : ActiveColors.Text;
             base.OnRenderItemText(e);
         }
+
+        // The submenu ► glyph (e.g. "Recent Files", "Geocode Database") has its own render hook
+        // separate from OnRenderItemText - ProfessionalColorTable has no color property for it at
+        // all, so left unhandled it falls back to ToolStripRenderer's hardcoded black, invisible
+        // against a dark menu background.
+        protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
+        {
+            bool highlighted = e.Item is not null && (e.Item.Selected || e.Item.Pressed);
+            e.ArrowColor = highlighted ? ActiveColors.OnPrimary : ActiveColors.Text;
+            base.OnRenderArrow(e);
+        }
     }
 
     class ChromeColorTable : ProfessionalColorTable
@@ -35,5 +46,11 @@ namespace FTAnalyzer.Theme
         public override Color StatusStripGradientBegin => ActiveColors.Background;
         public override Color StatusStripGradientEnd => ActiveColors.Background;
         public override Color ToolStripBorder => ActiveColors.Border;
+        // Plain ToolStrip (e.g. report windows' Print/Export toolbars) paints its background from
+        // these, not the MenuStrip/StatusStrip gradients above - without them a themed report
+        // window's toolbar stayed stuck at the professional renderer's default light gradient.
+        public override Color ToolStripGradientBegin => ActiveColors.Background;
+        public override Color ToolStripGradientMiddle => ActiveColors.Background;
+        public override Color ToolStripGradientEnd => ActiveColors.Background;
     }
 }
