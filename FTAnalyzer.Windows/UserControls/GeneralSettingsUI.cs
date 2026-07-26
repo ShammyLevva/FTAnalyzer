@@ -1,4 +1,6 @@
 ﻿using FTAnalyzer.Properties;
+using FTAnalyzer.Utilities;
+using System.Diagnostics;
 
 namespace FTAnalyzer.UserControls
 {
@@ -32,6 +34,8 @@ namespace FTAnalyzer.UserControls
             chkHideIgnoredDuplicates.Checked = GeneralSettings.Default.HideIgnoredDuplicates;
             chkIncludeAlternateFacts.Checked = GeneralSettings.Default.IncludeAlternateFacts;
             chkIncludeGenderAsFact.Checked = GeneralSettings.Default.IncludeGenderAsFact;
+            chkEnableDebugLogging.Checked = GeneralSettings.Default.EnableDebugLogging;
+            toolTip1.SetToolTip(llnkOpenLogFolder, DebugLogger.LogFilePath);
             _loading = false;
         }
 
@@ -54,6 +58,7 @@ namespace FTAnalyzer.UserControls
             GeneralSettings.Default.HideIgnoredDuplicates = chkHideIgnoredDuplicates.Checked;
             GeneralSettings.Default.IncludeAlternateFacts = chkIncludeAlternateFacts.Checked;
             GeneralSettings.Default.IncludeGenderAsFact = chkIncludeGenderAsFact.Checked;
+            GeneralSettings.Default.EnableDebugLogging = chkEnableDebugLogging.Checked;
             Utilities.UIHelpers.SafeSaveSettings(GeneralSettings.Default);
             OnMinParentalAgeChanged();
             OnAliasInNameChanged();
@@ -119,5 +124,20 @@ namespace FTAnalyzer.UserControls
         void ChkIncludeAlternateFacts_CheckedChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
 
         void ChkIncludeGenderAsFact_CheckedChanged(object sender, EventArgs e) { if (!_loading) GeneralSettings.Default.ReloadRequired = true; }
+
+        void LlnkOpenLogFolder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                Directory.CreateDirectory(DebugLogger.LogFolder);
+                ProcessStartInfo startInfo = new("explorer.exe") { CreateNoWindow = true };
+                startInfo.ArgumentList.Add(DebugLogger.LogFolder);
+                Process.Start(startInfo);
+            }
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or System.ComponentModel.Win32Exception)
+            {
+                Utilities.UIHelpers.ShowMessage($"Unable to open log folder: {ex.Message}");
+            }
+        }
     }
 }
