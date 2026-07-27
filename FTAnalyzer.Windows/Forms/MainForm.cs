@@ -25,7 +25,7 @@ namespace FTAnalyzer
 {
     public partial class MainForm : Form
     {
-        public static readonly string VERSION = "11.0.0.0-beta4";
+        public static readonly string VERSION = "11.0.0.0-beta5";
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(MainForm));
         const string APPNAME = "FTAnalyzer";
 
@@ -51,6 +51,16 @@ namespace FTAnalyzer
             loading = true;
             InitializeComponent();
             ApplyTheme();
+            // InitializeComponent() (Designer.cs) sets each grid's colors to a plain snapshot of
+            // whatever DataGridViewCellStyle values were live on the designer's own instances when
+            // this form was last saved in the Visual Studio designer - if that happened while dark
+            // mode was active, every grid's Designer.cs literals are permanently dark regardless of
+            // the actual runtime theme, silently overwriting the theme-correct colors each grid's
+            // own constructor already computed. Previously only corrected on a live theme toggle
+            // (see Options_GlobalThemeChanged) - a session that never touches the toggle, including
+            // one that happens to start in the "wrong" (here: light) theme, kept every grid on
+            // Designer.cs's stale snapshot instead. Run the same correction once up front too.
+            ReapplyGridThemes();
             ApplyMenuIcons();
             // Location only (not Size/WindowState - see SetHeightWidth's comment) is resolved
             // here, before the window is ever shown, rather than in MainForm_Load: the Designer
@@ -1477,13 +1487,7 @@ namespace FTAnalyzer
                 Theme.FormTheme.Apply(this);
                 ApplyTheme();
                 Program.ConfigureGridTheme();
-                foreach (Control control in FontScaler.GetAllControls(this))
-                {
-                    if (control is IReapplyTheme themedGrid)
-                        themedGrid.ReapplyTheme();
-                    else if (control is HighlightTabControl)
-                        control.Invalidate();
-                }
+                ReapplyGridThemes();
                 menuStrip1.Invalidate();
                 statusStrip.Invalidate();
             }
@@ -1493,6 +1497,18 @@ namespace FTAnalyzer
                 Invalidate(true);
             }
             HourGlass(this, false);
+        }
+
+        // Shared by the constructor (see its comment) and the live theme-toggle handler above.
+        void ReapplyGridThemes()
+        {
+            foreach (Control control in FontScaler.GetAllControls(this))
+            {
+                if (control is IReapplyTheme themedGrid)
+                    themedGrid.ReapplyTheme();
+                else if (control is HighlightTabControl)
+                    control.Invalidate();
+            }
         }
         #endregion
 

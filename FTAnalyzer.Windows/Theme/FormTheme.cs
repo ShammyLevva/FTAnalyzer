@@ -63,6 +63,16 @@ namespace FTAnalyzer.Theme
                     case Panel panel:
                         if (IsDefaultBackground(panel.BackColor))
                             panel.BackColor = ActiveColors.Background;
+                        // Same native NC-area scrollbar as TreeView/CheckedListBox/TextBoxBase
+                        // above, relevant whenever AutoScroll is on (e.g. Options' panel1) - a
+                        // no-op otherwise since no scrollbar is ever shown.
+                        NativeMethods.SetScrollBarTheme(panel, ActiveColors.IsDark);
+                        break;
+                    // UserControl-based settings tabs (CensusSettingsUI, FontSettingsUI, etc.) can
+                    // have AutoScroll enabled too - same fix, since nothing else in this switch
+                    // matches plain UserControl.
+                    case UserControl userControl:
+                        NativeMethods.SetScrollBarTheme(userControl, ActiveColors.IsDark);
                         break;
                     case Label label:
                         if (IsDefaultText(label.ForeColor))
@@ -104,6 +114,12 @@ namespace FTAnalyzer.Theme
                             treeView.BackColor = ActiveColors.Card;
                             treeView.ForeColor = ActiveColors.Text;
                         }
+                        // Unlike DataGridView, TreeView's scrollbar is native NC-area chrome on
+                        // its own HWND (not a separate child control), so theming this control's
+                        // own handle is enough - see the CheckedListBox case below for the same
+                        // fix, and VirtualDataGridView.ApplyColors for why DataGridView needs the
+                        // opposite (child-handle) treatment instead.
+                        NativeMethods.SetScrollBarTheme(treeView, ActiveColors.IsDark);
                         break;
                     // CheckedListBox (ckbDataErrors/ckbFactExclude/ckbFactSelect) is ListBox-based,
                     // not CheckBox-based, so it wasn't covered by the CheckBox case above at all -
@@ -115,6 +131,9 @@ namespace FTAnalyzer.Theme
                             checkedListBox.BackColor = ActiveColors.Card;
                             checkedListBox.ForeColor = ActiveColors.Text;
                         }
+                        // Same native NC-area scrollbar as TreeView above - stayed OS-default light
+                        // regardless of theme since nothing here ever touched it.
+                        NativeMethods.SetScrollBarTheme(checkedListBox, ActiveColors.IsDark);
                         break;
                     // ComboBox (e.g. the Census Date dropdown) had no case here at all - every
                     // instance in the app stayed at its native white background/black text.
@@ -138,6 +157,10 @@ namespace FTAnalyzer.Theme
                             comboBox.DrawMode = DrawMode.OwnerDrawFixed;
                             comboBox.DrawItem += ComboBox_DrawItem;
                         }
+                        // The dropdown list's own scrollbar (e.g. Census Date, which has enough
+                        // entries to need one) is native chrome on a separate window the owner-draw
+                        // above never reaches - see SetComboBoxListTheme.
+                        NativeMethods.SetComboBoxListTheme(comboBox, ActiveColors.IsDark);
                         break;
                     case FTAnalyzer.Theme.ThemedProgressBar progressBar:
                         progressBar.BackColor = ActiveColors.Card;
@@ -183,6 +206,11 @@ namespace FTAnalyzer.Theme
                         }
                         if (textBox.BorderStyle == BorderStyle.Fixed3D)
                             textBox.BorderStyle = BorderStyle.FixedSingle;
+                        // Same native NC-area scrollbar as TreeView/CheckedListBox above - a
+                        // multiline TextBox/RichTextBox with ScrollBars enabled (e.g. rtbOutput,
+                        // rtbLostCousins, notes fields) stayed OS-default light regardless of
+                        // theme since nothing here ever touched it.
+                        NativeMethods.SetScrollBarTheme(textBox, ActiveColors.IsDark);
                         break;
                 }
 

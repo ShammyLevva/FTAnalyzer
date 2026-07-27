@@ -84,6 +84,37 @@ namespace FTAnalyzer.Utilities
         internal static void SetScrollBarTheme(Control control, bool dark) =>
             SetWindowTheme(control.Handle, dark ? "DarkMode_Explorer" : "Explorer", null);
 
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern bool GetComboBoxInfo(IntPtr hWndCombo, ref COMBOBOXINFO pcbi);
+
+        [StructLayout(LayoutKind.Sequential)]
+        struct COMBOBOXINFO
+        {
+            public int cbSize;
+            public RECT rcItem;
+            public RECT rcButton;
+            public int buttonState;
+            public IntPtr hwndCombo;
+            public IntPtr hwndItem;
+            public IntPtr hwndList;
+        }
+
+        /// <summary>
+        /// A ComboBox's open dropdown list is a separate native "ComboLBox" window, not a
+        /// WinForms child <see cref="Control"/> - same underlying problem as DataGridView's child
+        /// ScrollBar controls (see <see cref="SetScrollBarTheme"/>), except here there isn't even
+        /// a .NET Control to loop over, so the list window's handle has to be looked up via
+        /// GetComboBoxInfo instead. Left untouched, any dropdown with enough items to need a
+        /// scrollbar (e.g. the Census Date selector) showed a light-mode scrollbar regardless of
+        /// theme, even though the list rows themselves are already owner-drawn correctly.
+        /// </summary>
+        internal static void SetComboBoxListTheme(ComboBox comboBox, bool dark)
+        {
+            COMBOBOXINFO info = new() { cbSize = Marshal.SizeOf<COMBOBOXINFO>() };
+            if (GetComboBoxInfo(comboBox.Handle, ref info) && info.hwndList != IntPtr.Zero)
+                SetWindowTheme(info.hwndList, dark ? "DarkMode_Explorer" : "Explorer", null);
+        }
+
         [DllImport("user32.dll")]
         static extern bool ValidateRect(IntPtr hWnd, IntPtr lpRect);
 
