@@ -29,7 +29,7 @@ namespace FTAnalyzer.Forms
                 List<Fact> indLCFacts = [.. ind.GetFacts(Fact.LOSTCOUSINS), .. ind.GetFacts(Fact.LC_FTA)];
                 foreach (Fact f in indLCFacts)
                 {
-                    if ((onlyInCommon && ind.IsBloodDirect) || !onlyInCommon)
+                    if ((onlyInCommon && ind.IsBloodDirectMarried) || !onlyInCommon)
                         referrals.Add(new ExportReferrals(ind, f));
                 }
             }
