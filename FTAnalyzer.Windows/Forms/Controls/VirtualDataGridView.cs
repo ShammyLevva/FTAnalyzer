@@ -129,9 +129,16 @@ namespace FTAnalyzer.Forms.Controls
                     List<string> filteredValues = VirtualDataGridView<T>.GetFilteredValues(filteredColumn, filterString);
                     filter = [.. filter.Where(x => x is not null && filteredValues.Contains(x.GetType().GetProperty(filteredColumn)?.GetValue(x, null)))];
                 }
-                _dataSource = filter;
-                DataView dataView = BuildDataTable(_dataSource).DefaultView;
+                // base.DataSource's setter can synchronously commit the pending edit on the
+                // still-old current cell before swapping rows, which fires CellFormatting ->
+                // DataBoundItem(rowIndex) against the OLD (still bound) rows. If _dataSource had
+                // already been reassigned to the new (typically smaller, filtered) list by then,
+                // that stale rowIndex's SourceIndexColumn value - which indexes the OLD list -
+                // could exceed the new list's bounds and throw ArgumentOutOfRangeException (bug
+                // #375). Keep _dataSource pointing at the old list until the rebind completes.
+                DataView dataView = BuildDataTable(filter).DefaultView;
                 base.DataSource = dataView;
+                _dataSource = filter;
                 FilterCountText = $"Showing {filter.Count} of {_fulllist.Count}";
                 OnVirtualGridFiltered();
             }
@@ -213,8 +220,10 @@ namespace FTAnalyzer.Forms.Controls
                 // every (re)population so that crash can't happen regardless of what the
                 // designer set at construction time.
                 AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-                _dataSource = value ?? [];
                 _fulllist = value ?? [];
+                // Same stale-rowIndex race as OnFilterStringChanged above (bug #375) - keep
+                // _dataSource at its old value until base.DataSource's synchronous CommitEdit
+                // pass (against the still-old rows) has finished.
                 if (value is not null)
                 {
                     DataView dataView = BuildDataTable(value).DefaultView;
@@ -222,6 +231,7 @@ namespace FTAnalyzer.Forms.Controls
                 }
                 else
                     base.DataSource = null;
+                _dataSource = value ?? [];
             }
         }
 
