@@ -30,7 +30,7 @@ namespace FTAnalyzer.Forms.Controls
         void OnCellValuePushed(object? sender, DataGridViewCellValueEventArgs e)
         {
             if (e.RowIndex < 0 || e.RowIndex >= _dataSource.Count) return;
-            IDisplayCustomFact fact = DataBoundItem(e.RowIndex);
+            if (DataBoundItem(e.RowIndex) is not IDisplayCustomFact fact) return;
             string propertyName = Columns[e.ColumnIndex].DataPropertyName;
             if (propertyName == nameof(IDisplayCustomFact.Ignore) && e.Value is bool ignore)
                 fact.Ignore = ignore;

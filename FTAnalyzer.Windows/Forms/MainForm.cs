@@ -1277,17 +1277,14 @@ namespace FTAnalyzer
 
         void ChildAgeProfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UIHelpers.ShowMessage("Sorry this report is currently Unavailable.");
-            // See Chart.cs (BuildChildBirthProfile, commented out below) for notes on re-enabling this —
-            // the reusable data calculation now lives in FamilyTree.ParentAgeProfile in FTAnalyzer.Shared.
-            //Statistics s = Statistics.Instance;
-            //Chart chart = new Chart();
-            //int[,,] stats = s.ChildrenBirthProfiles();
-            //chart.BuildChildBirthProfile(stats);
-            //DisposeDuplicateForms(chart);
-            //chart.Show();
-            //Analytics.TrackAction(Analytics.MainFormAction, Analytics.BirthProfileEvent);
-            //UIHelpers.ShowMessage(s.BuildOutput(stats), "Birth Profile Information");
+            HourGlass(this, true);
+            Predicate<Individual> relTypeFilter = relTypesResearchSuggest.BuildFilter<Individual>(x => x.RelationType);
+            List<ParentAgeBucket> buckets = FamilyTree.Instance.ParentAgeProfile(relTypeFilter);
+            Chart chart = new(buckets);
+            DisposeDuplicateForms(chart);
+            ShowOnCurrentScreen(chart);
+            HourGlass(this, false);
+            Analytics.TrackAction(Analytics.MainFormAction, Analytics.BirthProfileEvent);
         }
 
         void ViewOnlineManualToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1413,11 +1410,8 @@ namespace FTAnalyzer
                     else
                         e.CellStyle.Font = normalFont;
                 }
-                else
-                {
-                    FactLocation loc = (FactLocation)grid.DataBoundItem(e.RowIndex);
+                else if (grid.DataBoundItem(e.RowIndex) is FactLocation loc)
                     cell.ToolTipText = $"Geocoding Status : {loc.Geocoded}";
-                }
             }
             catch (Exception) { }
         }

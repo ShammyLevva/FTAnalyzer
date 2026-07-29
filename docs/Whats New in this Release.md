@@ -1,3 +1,23 @@
+## Version 11.0.0.0 - 28th July 2026
+**Updates**
+Added new look and feel to the main form and all reports
+Added support for new light mode or dark mode 
+Added a lot more FactLocationFixes to recognise more locations
+Added recognition of continents (some users adding superfluous continents to locations eg: Ghana, Africa)
+Add recognition of state manes where USA is added without a comma eg: California USA
+Add recognition ofvarious Australia, Canadian, NZ & US Cities where no country specified
+Treat a missing Baptism/Burial record as searchable, not a dead end
+Added Parents age graph 
+
+**Bugfixes**
+Fix Duplicate checking of standarised names as well as Lost Cousins matching
+Fix Circa bug if used in a date with a range
+Add em and en dashes to the list of recognised characters in dates
+Fix fact location fixes being case sensitive and thus not recognising some locations
+Fix 1930 US census search URL using wrong year lookup
+Fix BestLocationFact picking the wrong location on a same-year tie
+Fix KML export including unusable characters in locations eg: & 
+
 ## Version 10.3.0.0 - 5th July 2026
 **Updates**
 Rework fonts from ground up to fix a lot of positional issues when scaled

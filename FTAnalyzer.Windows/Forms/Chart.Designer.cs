@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace FTAnalyzer.Forms
 {
@@ -34,41 +34,69 @@ namespace FTAnalyzer.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            //System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            //System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Chart));
-            //this.chartDisplay = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            //((System.ComponentModel.ISupportInitialize)(this.chartDisplay)).BeginInit();
-            //this.SuspendLayout();
-            //// 
-            //// chartDisplay
-            //// 
-            //this.chartDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
-            //legend1.Name = "Legend1";
-            //this.chartDisplay.Legends.Add(legend1);
-            //this.chartDisplay.Location = new System.Drawing.Point(0, 0);
-            //this.chartDisplay.Name = "chartDisplay";
-            //this.chartDisplay.Size = new System.Drawing.Size(795, 421);
-            //this.chartDisplay.TabIndex = 0;
-            //this.chartDisplay.Text = "chart";
-            //// 
-            //// Chart
-            //// 
-            //this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            //this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            //this.ClientSize = new System.Drawing.Size(795, 421);
-            //this.Controls.Add(this.chartDisplay);
-            //this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            //this.Name = "Chart";
-            //this.Text = "Chart";
-            //this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Chart_FormClosed);
-            //this.Load += new System.EventHandler(this.Chart_Load);
-            //((System.ComponentModel.ISupportInitialize)(this.chartDisplay)).EndInit();
-            //this.ResumeLayout(false);
+            this.chartDisplay = new ScottPlot.WinForms.FormsPlot();
+            this.pnlStats = new System.Windows.Forms.Panel();
+            this.dgParentAgeStats = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgParentAgeStats)).BeginInit();
+            this.pnlStats.SuspendLayout();
+            this.SuspendLayout();
+            //
+            // chartDisplay
+            //
+            this.chartDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chartDisplay.Location = new System.Drawing.Point(0, 0);
+            this.chartDisplay.Name = "chartDisplay";
+            this.chartDisplay.Size = new System.Drawing.Size(895, 421);
+            this.chartDisplay.TabIndex = 0;
+            //
+            // pnlStats
+            //
+            this.pnlStats.Controls.Add(this.dgParentAgeStats);
+            this.pnlStats.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlStats.Location = new System.Drawing.Point(0, 421);
+            this.pnlStats.Name = "pnlStats";
+            this.pnlStats.Padding = new System.Windows.Forms.Padding(6, 0, 6, 6);
+            this.pnlStats.Size = new System.Drawing.Size(895, 200);
+            this.pnlStats.TabIndex = 1;
+            //
+            // dgParentAgeStats
+            //
+            this.dgParentAgeStats.AllowUserToAddRows = false;
+            this.dgParentAgeStats.AllowUserToDeleteRows = false;
+            this.dgParentAgeStats.AllowUserToResizeRows = false;
+            this.dgParentAgeStats.AutoGenerateColumns = false;
+            this.dgParentAgeStats.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgParentAgeStats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgParentAgeStats.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgParentAgeStats.Location = new System.Drawing.Point(6, 0);
+            this.dgParentAgeStats.Name = "dgParentAgeStats";
+            this.dgParentAgeStats.ReadOnly = true;
+            this.dgParentAgeStats.RowHeadersVisible = false;
+            this.dgParentAgeStats.Size = new System.Drawing.Size(883, 194);
+            this.dgParentAgeStats.TabIndex = 0;
+            //
+            // Chart
+            //
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(895, 621);
+            this.Controls.Add(this.chartDisplay);
+            this.Controls.Add(this.pnlStats);
+            this.MinimumSize = new System.Drawing.Size(700, 500);
+            this.Name = "Chart";
+            this.Text = "Chart";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Chart_FormClosed);
+            this.Load += new System.EventHandler(this.Chart_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgParentAgeStats)).EndInit();
+            this.pnlStats.ResumeLayout(false);
+            this.ResumeLayout(false);
 
         }
 
         #endregion
 
-       // private System.Windows.Forms.DataVisualization.Charting.Chart chartDisplay;
+        private ScottPlot.WinForms.FormsPlot chartDisplay;
+        private System.Windows.Forms.Panel pnlStats;
+        private System.Windows.Forms.DataGridView dgParentAgeStats;
     }
 }

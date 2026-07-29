@@ -350,6 +350,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Printing.DataGridViewPrint" Version="4.0.0" />
     <PackageReference Include="ProjNET" Version="2.1.0" />
+    <PackageReference Include="ScottPlot.WinForms" Version="5.1.59" />
     <PackageReference Include="SharpMap.Extensions" Version="5.0.0" />
     <PackageReference Include="SharpMap.Layers.BruTile" Version="5.0.1" />
     <PackageReference Include="SharpMap.UI" Version="5.0.0" />

@@ -273,13 +273,21 @@ namespace FTAnalyzer.Forms.Controls
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public T? CurrentRowDataBoundItem => CurrentRow is not null ? DataBoundItem(CurrentRow.Index) : default;
 
-        public T DataBoundItem(int rowIndex)
+        // Both branches are bounds-checked against _dataSource directly rather than trusting
+        // rowIndex/sourceIndex on their own (bug #375): mid-rebind, WinForms can synchronously
+        // invoke CellFormatting/CommitEdit against a row whose DataBoundItem hasn't been (re)set
+        // yet - e.g. DataGridView.OnClearingRows nulling out the current cell while replacing
+        // DataSource - at which point Rows[rowIndex].DataBoundItem is briefly null and falls
+        // through to the raw-rowIndex branch, whose rowIndex is a grid row index, not guaranteed
+        // to be a valid index into whatever _dataSource happens to hold at that exact moment.
+        public T? DataBoundItem(int rowIndex)
         {
             if (rowIndex >= 0 && rowIndex < RowCount &&
                 Rows[rowIndex].DataBoundItem is DataRowView drv &&
-                drv.Row[SourceIndexColumn] is int sourceIndex)
+                drv.Row[SourceIndexColumn] is int sourceIndex &&
+                sourceIndex >= 0 && sourceIndex < _dataSource.Count)
                 return _dataSource[sourceIndex];
-            return _dataSource[rowIndex];
+            return rowIndex >= 0 && rowIndex < _dataSource.Count ? _dataSource[rowIndex] : default;
         }
 
         void CreateGridColumns()
@@ -351,8 +359,8 @@ namespace FTAnalyzer.Forms.Controls
         {
             if (_dataSource is null || _dataSource.Count == 0 || e.RowIndex > _dataSource.Count - 1)
                 return;
-            T data = DataBoundItem(e.RowIndex);
-            e.Value = GetValueFor(data, Columns[e.ColumnIndex].DataPropertyName);
+            if (DataBoundItem(e.RowIndex) is T data)
+                e.Value = GetValueFor(data, Columns[e.ColumnIndex].DataPropertyName);
         }
 
         static void OnColumnWidthChanged(object? sender, DataGridViewColumnEventArgs e)
