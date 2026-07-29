@@ -55,6 +55,12 @@ namespace FTAnalyzer.Forms
             ScottPlot.Color motherSonColor = ScottPlot.Color.InterpolateRgb(fatherSonColor, ScottPlot.Colors.White, 0.4);
             ScottPlot.Color motherDaughterColor = ScottPlot.Color.InterpolateRgb(fatherDaughterColor, ScottPlot.Colors.White, 0.4);
 
+            // Bands with no data at either extreme (typically the youngest/oldest 15-19 ... 95-99
+            // bands) otherwise leave most of the plot's width empty - trim them so the x-axis
+            // only spans the range that actually has bars. The stats grid below still shows every
+            // band, unfiltered, since a wasted-space problem is chart-specific.
+            List<ParentAgeBucket> chartBuckets = TrimEmptyBands(buckets);
+
             const double groupWidth = 0.8;
             const int seriesCount = 4;
             const double barWidth = groupWidth / seriesCount;
@@ -63,9 +69,9 @@ namespace FTAnalyzer.Forms
             List<ScottPlot.Bar> fatherDaughters = [];
             List<ScottPlot.Bar> motherSons = [];
             List<ScottPlot.Bar> motherDaughters = [];
-            for (int i = 0; i < buckets.Count; i++)
+            for (int i = 0; i < chartBuckets.Count; i++)
             {
-                ParentAgeBucket bucket = buckets[i];
+                ParentAgeBucket bucket = chartBuckets[i];
                 fatherSons.Add(new ScottPlot.Bar { Position = i - 1.5 * barWidth, Value = bucket.FatherSons, Size = barWidth, FillColor = fatherSonColor });
                 fatherDaughters.Add(new ScottPlot.Bar { Position = i - 0.5 * barWidth, Value = bucket.FatherDaughters, Size = barWidth, FillColor = fatherDaughterColor });
                 motherSons.Add(new ScottPlot.Bar { Position = i + 0.5 * barWidth, Value = bucket.MotherSons, Size = barWidth, FillColor = motherSonColor });
@@ -80,13 +86,14 @@ namespace FTAnalyzer.Forms
             plot.Add.Bars(motherDaughters).LegendText = "Mother — Daughters";
 
             plot.Axes.Bottom.TickGenerator = new ScottPlot.TickGenerators.NumericManual(
-                [.. Enumerable.Range(0, buckets.Count).Select(i => (double)i)],
-                [.. buckets.Select(b => b.AgeLabel)]);
+                [.. Enumerable.Range(0, chartBuckets.Count).Select(i => (double)i)],
+                [.. chartBuckets.Select(b => b.AgeLabel)]);
             plot.Axes.Bottom.Label.Text = "Parent's Age at Child's Birth";
             plot.Axes.Left.Label.Text = "Number of Children";
             plot.Title("Parent's Age at Child's Birth");
             plot.ShowLegend(ScottPlot.Alignment.UpperRight);
             plot.Axes.AutoScale();
+            plot.Axes.SetLimitsX(-0.5, chartBuckets.Count - 0.5);
 
             ApplyChartTheme(plot);
             chartDisplay.Refresh();
@@ -98,9 +105,18 @@ namespace FTAnalyzer.Forms
             Text = $"Parent Age Report - {fatherTotal} father ages, {motherTotal} mother ages recorded";
         }
 
+        static List<ParentAgeBucket> TrimEmptyBands(List<ParentAgeBucket> buckets)
+        {
+            int first = buckets.FindIndex(b => b.FatherTotal > 0 || b.MotherTotal > 0);
+            int last = buckets.FindLastIndex(b => b.FatherTotal > 0 || b.MotherTotal > 0);
+            return first < 0 ? buckets : buckets.GetRange(first, last - first + 1);
+        }
+
         // ScottPlot draws to its own SkiaSharp surface rather than through WinForms controls, so
         // FormTheme.Apply (which only knows how to recolor built-in Control types) can't reach
-        // it - theme the plot directly from the same ActiveColors palette instead.
+        // it - theme the plot directly from the same ActiveColors palette instead. Also bumps the
+        // default font sizes, tuned for a small preview-sized plot, up to something readable at
+        // the size this report's FormsPlot actually renders at.
         static void ApplyChartTheme(ScottPlot.Plot plot)
         {
             ScottPlot.Color background = ScottPlot.Color.FromSDColor(Theme.ActiveColors.Background);
@@ -114,9 +130,19 @@ namespace FTAnalyzer.Forms
             plot.Legend.BackgroundColor = card;
             plot.Legend.FontColor = text;
             plot.Legend.OutlineColor = border;
+            plot.Legend.FontSize = 22;
+
             plot.Axes.Title.Label.ForeColor = text;
+            plot.Axes.Title.Label.FontSize = 28;
+            plot.Axes.Title.Label.Bold = true;
             plot.Axes.Bottom.Label.ForeColor = text;
+            plot.Axes.Bottom.Label.FontSize = 24;
+            plot.Axes.Bottom.Label.Bold = true;
+            plot.Axes.Bottom.TickLabelStyle.FontSize = 20;
             plot.Axes.Left.Label.ForeColor = text;
+            plot.Axes.Left.Label.FontSize = 24;
+            plot.Axes.Left.Label.Bold = true;
+            plot.Axes.Left.TickLabelStyle.FontSize = 17;
         }
 
         // Curated subset/order matching the web app's /parent-age data grid (ParentAge.razor) -
