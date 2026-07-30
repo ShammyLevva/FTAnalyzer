@@ -85,6 +85,23 @@ namespace UnitTests
             Assert.IsTrue(factLocation.ToString().Equals("Boston, Massachusetts, United States"));
         }
 
+        // GEDCOM locations occasionally have a continent tacked on as a spurious extra "country"
+        // segment - Continents.IsContinent/FactLocation.StripContinent (shared code, merged in
+        // from FTAnalyzer.Shared's "initial" branch) strip it before country-aware fixes run.
+        [TestMethod]
+        public void ContinentStrippingTest()
+        {
+            FactLocation.LoadConversions(Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\..\\FTAnalyzer.Shared\\FTAnalyzer.Shared"));
+            GeneralSettings.Default.AllowEmptyLocations = false;
+
+            FactLocation factLocation = FactLocation.GetLocation("Rushton Spencer, Staffordshire, England, Europe");
+            Assert.AreEqual("Rushton Spencer, Staffordshire, England", factLocation.ToString());
+            Assert.AreEqual("England", factLocation.Country);
+
+            factLocation = FactLocation.GetLocation("Boston, Massachusetts, North America");
+            Assert.AreEqual(Countries.UNITED_STATES, factLocation.Country);
+        }
+
         // Georgia the country and Georgia the US state share a name. KNOWN_COUNTRIES deliberately
         // omits Georgia (see Countries.IsGeorgiaCountry) rather than trying to guess which one a
         // bare "Georgia" means. FactLocationFixes.xml even has a
