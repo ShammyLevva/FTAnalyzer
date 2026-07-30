@@ -7,7 +7,9 @@ Added recognition of continents (some users adding superfluous continents to loc
 Add recognition of state manes where USA is added without a comma eg: California USA
 Add recognition ofvarious Australia, Canadian, NZ & US Cities where no country specified
 Treat a missing Baptism/Burial record as searchable, not a dead end
-Added Parents age graph 
+Reinstated Parents age graph 
+Add optional debug logging for Google Geocoding to a file
+Colour BMD can now filter on burials and baptisms 
 
 **Bugfixes**
 Fix Duplicate checking of standarised names as well as Lost Cousins matching
@@ -16,7 +18,11 @@ Add em and en dashes to the list of recognised characters in dates
 Fix fact location fixes being case sensitive and thus not recognising some locations
 Fix 1930 US census search URL using wrong year lookup
 Fix BestLocationFact picking the wrong location on a same-year tie
-Fix KML export including unusable characters in locations eg: & 
+Fix KML export including unusable characters in locations eg: &, <, >
+Fix Edit Location greyed out after an interrupted geocode
+Fix Census "Export to Excel" always exporting 0 rows
+Fix 2nd monitor drag issue
+Fix intermittent ArgumentOutOfRangeException when filtering/sorting report grids
 
 ## Version 10.3.0.0 - 5th July 2026
 **Updates**
