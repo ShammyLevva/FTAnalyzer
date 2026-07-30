@@ -80,7 +80,12 @@ namespace FTAnalyzer.Forms
             toolStripLabel2 = new ToolStripLabel();
             cbFilter = new ToolStripComboBox();
             tsApplyToLabel = new ToolStripLabel();
-            cbApplyTo = new ToolStripComboBox();
+            tsddApplyTo = new ToolStripDropDownButton();
+            mnuApplyBirth = new ToolStripMenuItem();
+            mnuApplyBaptism = new ToolStripMenuItem();
+            mnuApplyMarriage = new ToolStripMenuItem();
+            mnuApplyDeath = new ToolStripMenuItem();
+            mnuApplyBurial = new ToolStripMenuItem();
             printDocument = new System.Drawing.Printing.PrintDocument();
             printDialog = new PrintDialog();
             printPreviewDialog = new PrintPreviewDialog();
@@ -351,7 +356,7 @@ namespace FTAnalyzer.Forms
             // 
             toolStrip1.GripStyle = ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new Size(28, 28);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { mnuSaveCensusColumnLayout, mnuResetCensusColumns, toolStripSeparator3, printToolStripButton, printPreviewToolStripButton, toolStripSeparator1, mnuExportToExcel, toolStripSeparator2, toolStripLabel1, cbBMDSearchProvider, toolStripLabel3, cbRegion, toolStripLabel2, cbFilter, tsApplyToLabel, cbApplyTo });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { mnuSaveCensusColumnLayout, mnuResetCensusColumns, toolStripSeparator3, printToolStripButton, printPreviewToolStripButton, toolStripSeparator1, mnuExportToExcel, toolStripSeparator2, toolStripLabel1, cbBMDSearchProvider, toolStripLabel3, cbRegion, toolStripLabel2, cbFilter, tsApplyToLabel, tsddApplyTo });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new Padding(0, 0, 2, 0);
@@ -474,15 +479,70 @@ namespace FTAnalyzer.Forms
             tsApplyToLabel.Name = "tsApplyToLabel";
             tsApplyToLabel.Size = new Size(57, 32);
             tsApplyToLabel.Text = "Apply To:";
-            // 
-            // cbApplyTo
-            // 
-            cbApplyTo.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbApplyTo.DropDownWidth = 121;
-            cbApplyTo.Items.AddRange(new object[] { "All BMD Records", "Births Only", "Marriages Only", "Deaths Only", "Births & Deaths", "Births & Marriages", "Marriages & Deaths" });
-            cbApplyTo.Name = "cbApplyTo";
-            cbApplyTo.Size = new Size(75, 35);
-            cbApplyTo.SelectedIndexChanged += CbApplyTo_SelectedIndexChanged;
+            //
+            // tsddApplyTo
+            //
+            // Birth/Baptism and Death/Burial are independently selectable (github.com FTAnalyzer.Web
+            // issue #4 / commit 82edb8b) rather than a single-select "Births & Deaths" style dropdown -
+            // a checked-item ToolStripDropDownButton is the WinForms equivalent of the web app's
+            // multi-select RadzenDropDown. AutoClose = false keeps the dropdown open across multiple
+            // checkbox clicks, same as a CheckedListBox popup elsewhere in the app.
+            tsddApplyTo.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            tsddApplyTo.DropDown.AutoClose = false;
+            tsddApplyTo.DropDownItems.AddRange(new ToolStripItem[] { mnuApplyBirth, mnuApplyBaptism, mnuApplyMarriage, mnuApplyDeath, mnuApplyBurial });
+            tsddApplyTo.Name = "tsddApplyTo";
+            tsddApplyTo.Size = new Size(75, 32);
+            tsddApplyTo.Text = "Apply To";
+            //
+            // mnuApplyBirth
+            //
+            mnuApplyBirth.Checked = true;
+            mnuApplyBirth.CheckOnClick = true;
+            mnuApplyBirth.CheckState = CheckState.Checked;
+            mnuApplyBirth.Name = "mnuApplyBirth";
+            mnuApplyBirth.Size = new Size(150, 22);
+            mnuApplyBirth.Text = "Birth";
+            mnuApplyBirth.Click += ApplyToItem_Click;
+            //
+            // mnuApplyBaptism
+            //
+            mnuApplyBaptism.Checked = true;
+            mnuApplyBaptism.CheckOnClick = true;
+            mnuApplyBaptism.CheckState = CheckState.Checked;
+            mnuApplyBaptism.Name = "mnuApplyBaptism";
+            mnuApplyBaptism.Size = new Size(150, 22);
+            mnuApplyBaptism.Text = "Baptism";
+            mnuApplyBaptism.Click += ApplyToItem_Click;
+            //
+            // mnuApplyMarriage
+            //
+            mnuApplyMarriage.Checked = true;
+            mnuApplyMarriage.CheckOnClick = true;
+            mnuApplyMarriage.CheckState = CheckState.Checked;
+            mnuApplyMarriage.Name = "mnuApplyMarriage";
+            mnuApplyMarriage.Size = new Size(150, 22);
+            mnuApplyMarriage.Text = "Marriage";
+            mnuApplyMarriage.Click += ApplyToItem_Click;
+            //
+            // mnuApplyDeath
+            //
+            mnuApplyDeath.Checked = true;
+            mnuApplyDeath.CheckOnClick = true;
+            mnuApplyDeath.CheckState = CheckState.Checked;
+            mnuApplyDeath.Name = "mnuApplyDeath";
+            mnuApplyDeath.Size = new Size(150, 22);
+            mnuApplyDeath.Text = "Death";
+            mnuApplyDeath.Click += ApplyToItem_Click;
+            //
+            // mnuApplyBurial
+            //
+            mnuApplyBurial.Checked = true;
+            mnuApplyBurial.CheckOnClick = true;
+            mnuApplyBurial.CheckState = CheckState.Checked;
+            mnuApplyBurial.Name = "mnuApplyBurial";
+            mnuApplyBurial.Size = new Size(150, 22);
+            mnuApplyBurial.Text = "Burial";
+            mnuApplyBurial.Click += ApplyToItem_Click;
             // 
             // printDialog
             // 
@@ -565,7 +625,12 @@ namespace FTAnalyzer.Forms
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
         private System.Windows.Forms.ToolStripComboBox cbRegion;
         private System.Windows.Forms.ToolStripLabel tsApplyToLabel;
-        private System.Windows.Forms.ToolStripComboBox cbApplyTo;
+        private System.Windows.Forms.ToolStripDropDownButton tsddApplyTo;
+        private System.Windows.Forms.ToolStripMenuItem mnuApplyBirth;
+        private System.Windows.Forms.ToolStripMenuItem mnuApplyBaptism;
+        private System.Windows.Forms.ToolStripMenuItem mnuApplyMarriage;
+        private System.Windows.Forms.ToolStripMenuItem mnuApplyDeath;
+        private System.Windows.Forms.ToolStripMenuItem mnuApplyBurial;
         private System.Windows.Forms.DataGridViewTextBoxColumn IndividualID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Forenames;
         private System.Windows.Forms.DataGridViewTextBoxColumn Surname;

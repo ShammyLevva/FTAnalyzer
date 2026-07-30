@@ -36,6 +36,7 @@ namespace FTAnalyzer.Forms
                 dgBMDReportSheet.AutoGenerateColumns = false;
                 dgBMDReportSheet.ContextMenuStrip = null; // CellContextMenuStripNeeded supplies it only for data rows
                 ExtensionMethods.DoubleBuffered(dgBMDReportSheet, true);
+                ThemeReportGrid();
                 settingSelections = false;
                 DataGridViewCellStyle notRequired = new();
                 notRequired.BackColor = notRequired.ForeColor = BMDColourValues[(int)BMDColours.EMPTY];
@@ -96,9 +97,37 @@ namespace FTAnalyzer.Forms
                 defaultRegion ??= DEFAULT_REGION;
                 cbRegion.Text = defaultRegion;
                 cbFilter.Text = "All Individuals";
-                cbApplyTo.Text = "All BMD Records";
             }
             catch (Exception) { }
+        }
+
+        // FormTheme.Apply skips DataGridView entirely (each grid themes itself at its own
+        // source - see FormTheme.cs) - dgBMDReportSheet isn't a VirtualDataGridView, so it never
+        // picked up dark mode at all, staying on its Designer-baked light colors. The BMD status
+        // columns (Birth..CremBuri) aren't touched here - CellFormatting already fully overrides
+        // their style every time with the semantic traffic-light colours from `styles`, which
+        // stay the same regardless of theme.
+        void ThemeReportGrid()
+        {
+            dgBMDReportSheet.BorderStyle = Theme.ActiveColors.IsDark ? BorderStyle.None : BorderStyle.Fixed3D;
+            NativeMethods.SetScrollBarTheme(dgBMDReportSheet, Theme.ActiveColors.IsDark);
+            foreach (Control child in dgBMDReportSheet.Controls)
+            {
+                if (child is ScrollBar)
+                    NativeMethods.SetScrollBarTheme(child, Theme.ActiveColors.IsDark);
+            }
+            dgBMDReportSheet.ColumnHeadersDefaultCellStyle.BackColor = Theme.ActiveColors.Primary;
+            dgBMDReportSheet.ColumnHeadersDefaultCellStyle.ForeColor = Theme.ActiveColors.OnPrimary;
+            dgBMDReportSheet.GridColor = Theme.ActiveColors.Border;
+            Color rowColor = Theme.ActiveColors.IsDark ? Theme.ActiveColors.Background : Theme.ActiveColors.Card;
+            Color alternateRowColor = Theme.ActiveColors.IsDark ? Theme.ActiveColors.Card : Theme.ActiveColors.Background;
+            dgBMDReportSheet.BackgroundColor = rowColor;
+            dgBMDReportSheet.RowsDefaultCellStyle.BackColor = rowColor;
+            dgBMDReportSheet.RowsDefaultCellStyle.ForeColor = Theme.ActiveColors.Text;
+            dgBMDReportSheet.AlternatingRowsDefaultCellStyle.BackColor = alternateRowColor;
+            dgBMDReportSheet.AlternatingRowsDefaultCellStyle.ForeColor = Theme.ActiveColors.Text;
+            dgBMDReportSheet.DefaultCellStyle.SelectionBackColor = Theme.ActiveColors.PrimaryPale;
+            dgBMDReportSheet.DefaultCellStyle.SelectionForeColor = Theme.ActiveColors.Text;
         }
 
         void ResetTable()
@@ -299,16 +328,24 @@ namespace FTAnalyzer.Forms
             dgBMDReportSheet.Focus();
         }
 
-        List<IDisplayColourBMD> BuildFilter(List<FamilyTree.SearchType> types, BMDColours toFind)
+        // Birth/Baptism and Death/Burial are checked independently (matches FTAnalyzer.Web's
+        // ColourBMD - commit 82edb8b, "Colour BMD filter now allows burials & baptisms" - which
+        // split the same combined checks apart for the same reason: a baptism-only or
+        // burial-only record shouldn't be forced to match under its paired Birth/Death filter).
+        List<IDisplayColourBMD> BuildFilter(bool checkBirth, bool checkBaptism, bool checkMarriage, bool checkDeath, bool checkBurial, BMDColours toFind)
         {
-            var result = new List<IDisplayColourBMD>();
+            List<IDisplayColourBMD> result = [];
             foreach (IDisplayColourBMD row in _reportList)
             {
-                if (types.Contains(FamilyTree.SearchType.BIRTH) && (row.Birth == toFind || row.BaptChri == toFind))
+                if (checkBirth && row.Birth == toFind)
                     result.Add(row);
-                else if (types.Contains(FamilyTree.SearchType.MARRIAGE) && (row.Marriage1 == toFind || row.Marriage2 == toFind || row.Marriage3 == toFind))
+                else if (checkBaptism && row.BaptChri == toFind)
                     result.Add(row);
-                else if (types.Contains(FamilyTree.SearchType.DEATH) && (row.Death == toFind || row.CremBuri == toFind))
+                else if (checkMarriage && (row.Marriage1 == toFind || row.Marriage2 == toFind || row.Marriage3 == toFind))
+                    result.Add(row);
+                else if (checkDeath && row.Death == toFind)
+                    result.Add(row);
+                else if (checkBurial && row.CremBuri == toFind)
                     result.Add(row);
             }
             return result;
@@ -317,48 +354,21 @@ namespace FTAnalyzer.Forms
         void CbFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateBMDFilter();
-            cbApplyTo.Visible = cbFilter.SelectedIndex != 0;
+            tsddApplyTo.Visible = cbFilter.SelectedIndex != 0;
             tsApplyToLabel.Visible = cbFilter.SelectedIndex != 0;
         }
 
-        void CbApplyTo_SelectedIndexChanged(object sender, EventArgs e) => UpdateBMDFilter();
+        void ApplyToItem_Click(object? sender, EventArgs e) => UpdateBMDFilter();
 
         void UpdateBMDFilter()
         {
             Cursor = Cursors.WaitCursor;
-            var types = new List<FamilyTree.SearchType>();
+            bool checkBirth = mnuApplyBirth.Checked;
+            bool checkBaptism = mnuApplyBaptism.Checked;
+            bool checkMarriage = mnuApplyMarriage.Checked;
+            bool checkDeath = mnuApplyDeath.Checked;
+            bool checkBurial = mnuApplyBurial.Checked;
             BMDColours colour = BMDColours.ALL_RECORDS;
-            switch (cbApplyTo.SelectedIndex)
-            {
-                case -1: // nothing selected
-                    break;
-                case 0: // All BMD Records
-                    types.Add(FamilyTree.SearchType.BIRTH);
-                    types.Add(FamilyTree.SearchType.MARRIAGE);
-                    types.Add(FamilyTree.SearchType.DEATH);
-                    break;
-                case 1: // Births Only
-                    types.Add(FamilyTree.SearchType.BIRTH);
-                    break;
-                case 2: // Marriages Only
-                    types.Add(FamilyTree.SearchType.MARRIAGE);
-                    break;
-                case 3: // Deaths Only
-                    types.Add(FamilyTree.SearchType.DEATH);
-                    break;
-                case 4: // Births & Deaths
-                    types.Add(FamilyTree.SearchType.BIRTH);
-                    types.Add(FamilyTree.SearchType.DEATH);
-                    break;
-                case 5: // Births & Marriages
-                    types.Add(FamilyTree.SearchType.BIRTH);
-                    types.Add(FamilyTree.SearchType.MARRIAGE);
-                    break;
-                case 6: // Marriages & Deaths
-                    types.Add(FamilyTree.SearchType.MARRIAGE);
-                    types.Add(FamilyTree.SearchType.DEATH);
-                    break;
-            }
             switch (cbFilter.SelectedIndex)
             {
                 case -1: // nothing selected
@@ -400,7 +410,14 @@ namespace FTAnalyzer.Forms
                     break;
             }
             if (cbFilter.SelectedIndex > 0)
-                dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(types, colour));
+                dgBMDReportSheet.DataSource = new SortableBindingList<IDisplayColourBMD>(BuildFilter(checkBirth, checkBaptism, checkMarriage, checkDeath, checkBurial, colour));
+            // Reassigning DataSource rebuilds every row from RowTemplate, but the row height set
+            // in the constructor only ever applied to that first binding - each filter change
+            // since then quietly reverted rows to the grid's compile-time default height, which
+            // read as the grid suddenly looking "squished" the moment a filter was picked.
+            dgBMDReportSheet.RowTemplate.Height = (int)(FontSettings.Default.FontHeight * GraphicsUtilities.GetCurrentScaling());
+            foreach (DataGridViewRow row in dgBMDReportSheet.Rows)
+                row.Height = dgBMDReportSheet.RowTemplate.Height;
             dgBMDReportSheet.Focus();
             tsRecords.Text = $"{Messages.Count}{dgBMDReportSheet.RowCount} records listed.";
             Cursor = Cursors.Default;

@@ -39,6 +39,7 @@ namespace FTAnalyzer.Forms
                 dgReportSheet.AutoGenerateColumns = false;
                 dgReportSheet.ContextMenuStrip = null; // CellContextMenuStripNeeded supplies it only for data rows
                 ExtensionMethods.DoubleBuffered(dgReportSheet, true);
+                ThemeReportGrid();
                 DataGridViewCellStyle notAlive = new();
                 notAlive.BackColor = notAlive.ForeColor = CensusColourValues[(int)CensusColours.NOT_ALIVE];
                 styles.Add(0, notAlive);
@@ -89,6 +90,35 @@ namespace FTAnalyzer.Forms
                 cbFilter.Text = "All Individuals";
             }
             catch (Exception) { }
+        }
+
+        // FormTheme.Apply skips DataGridView entirely (each grid themes itself at its own
+        // source - see FormTheme.cs) - dgReportSheet isn't a VirtualDataGridView, so it never
+        // picked up dark mode at all, staying on its Designer-baked light colors (same gap as
+        // ColourBMD's dgBMDReportSheet). The census status columns (C1841..Ire1926) aren't
+        // touched here - CellFormatting already fully overrides their style every time with the
+        // semantic traffic-light colours from `styles`, which stay the same regardless of theme.
+        void ThemeReportGrid()
+        {
+            dgReportSheet.BorderStyle = Theme.ActiveColors.IsDark ? BorderStyle.None : BorderStyle.Fixed3D;
+            NativeMethods.SetScrollBarTheme(dgReportSheet, Theme.ActiveColors.IsDark);
+            foreach (Control child in dgReportSheet.Controls)
+            {
+                if (child is ScrollBar)
+                    NativeMethods.SetScrollBarTheme(child, Theme.ActiveColors.IsDark);
+            }
+            dgReportSheet.ColumnHeadersDefaultCellStyle.BackColor = Theme.ActiveColors.Primary;
+            dgReportSheet.ColumnHeadersDefaultCellStyle.ForeColor = Theme.ActiveColors.OnPrimary;
+            dgReportSheet.GridColor = Theme.ActiveColors.Border;
+            Color rowColor = Theme.ActiveColors.IsDark ? Theme.ActiveColors.Background : Theme.ActiveColors.Card;
+            Color alternateRowColor = Theme.ActiveColors.IsDark ? Theme.ActiveColors.Card : Theme.ActiveColors.Background;
+            dgReportSheet.BackgroundColor = rowColor;
+            dgReportSheet.RowsDefaultCellStyle.BackColor = rowColor;
+            dgReportSheet.RowsDefaultCellStyle.ForeColor = Theme.ActiveColors.Text;
+            dgReportSheet.AlternatingRowsDefaultCellStyle.BackColor = alternateRowColor;
+            dgReportSheet.AlternatingRowsDefaultCellStyle.ForeColor = Theme.ActiveColors.Text;
+            dgReportSheet.DefaultCellStyle.SelectionBackColor = Theme.ActiveColors.PrimaryPale;
+            dgReportSheet.DefaultCellStyle.SelectionForeColor = Theme.ActiveColors.Text;
         }
 
         void SetColumns(string country)
@@ -454,6 +484,13 @@ namespace FTAnalyzer.Forms
                     dgReportSheet.DataSource = new SortableBindingList<IDisplayColourCensus>(BuildFilter(CensusColours.KNOWN_MISSING, false));
                     break;
             }
+            // Reassigning DataSource rebuilds every row from RowTemplate, but the row height set
+            // in the constructor only ever applied to that first binding - each filter change
+            // since then quietly reverted rows to the grid's compile-time default height (same
+            // squish bug as ColourBMD.UpdateBMDFilter).
+            dgReportSheet.RowTemplate.Height = (int)(FontSettings.Default.FontHeight * GraphicsUtilities.GetCurrentScaling());
+            foreach (DataGridViewRow row in dgReportSheet.Rows)
+                row.Height = dgReportSheet.RowTemplate.Height;
             dgReportSheet.Focus();
             ApplyDefaultSort();
             tsRecords.Text = $"{Messages.Count} {dgReportSheet.RowCount} records listed.";
