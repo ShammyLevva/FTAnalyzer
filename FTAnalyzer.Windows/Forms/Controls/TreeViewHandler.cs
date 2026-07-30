@@ -96,7 +96,7 @@ namespace FTAnalyzer.Forms.Controls
 						// countries/regions was a plain, low-contrast green unrelated to the
 						// app's own palette. Use theme-aware colors instead (Primary is already
 						// tuned to read well against each theme's own background).
-						bool isKnownPlace = (currentM.Level == 0 && Countries.IsKnownCountry(part)) ||
+						bool isKnownPlace = (currentM.Level == 0 && (Countries.IsKnownCountry(part) || Countries.IsGeorgiaCountry(part))) ||
 							(currentM.Level == 1 && Regions.IsKnownRegion(part));
 						child.ForeColor = isKnownPlace ? Theme.ActiveColors.Primary : Theme.ActiveColors.Text;
 						childM = child;

@@ -1397,7 +1397,7 @@ namespace FTAnalyzer
                 if (e.ColumnIndex == 1)
                 {
                     string? country = (string?)cell.Value;
-                    if (country is not null && Countries.IsKnownCountry(country))
+                    if (country is not null && (Countries.IsKnownCountry(country) || Countries.IsGeorgiaCountry(country)))
                         e.CellStyle.Font = boldFont;
                     else
                         e.CellStyle.Font = normalFont;
