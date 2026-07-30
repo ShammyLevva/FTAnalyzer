@@ -428,7 +428,7 @@ namespace FTAnalyzer
             btnShowFacts = new Button();
             labFactsSurname = new Label();
             txtFactsSurname = new TextBox();
-            panel1 = new Panel();
+            panel1 = new FlowLayoutPanel();
             radioAllFacts = new FTAnalyzer.Theme.ThemedRadioButton();
             btnDeselectExcludeAllFactTypes = new Button();
             lblExclude = new Label();
@@ -4582,17 +4582,28 @@ namespace FTAnalyzer
             txtFactsSurname.TabIndex = 47;
             // 
             // panel1
-            // 
-            panel1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panel1.Controls.Add(radioOnlyAlternate);
-            panel1.Controls.Add(radioOnlyPreferred);
+            //
+            // A plain Panel positions children at fixed absolute Locations baked at design time
+            // for the default font size - at a larger font scale (FontScaler.Apply grows each
+            // ThemedRadioButton's Font, but nothing ever moved its fixed-position neighbors to
+            // compensate), the wider "Show only Preferred"/"Show only Alternative" text ran into
+            // the next control's static position and got clipped/overlapped. FlowLayoutPanel
+            // recalculates each child's position from its neighbors' actual current size on every
+            // layout pass, so it stays correct at any font scale.
+            panel1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            panel1.AutoSize = true;
+            panel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel1.FlowDirection = FlowDirection.LeftToRight;
+            panel1.WrapContents = false;
             panel1.Controls.Add(radioAllFacts);
+            panel1.Controls.Add(radioOnlyPreferred);
+            panel1.Controls.Add(radioOnlyAlternate);
             panel1.Location = new Point(199, 409);
             panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
             panel1.Size = new Size(412, 25);
             panel1.TabIndex = 38;
-            // 
+            //
             // radioAllFacts
             // 
             radioAllFacts.AutoSize = true;
@@ -5412,7 +5423,7 @@ namespace FTAnalyzer
         private Label labFactsSurname;
         private TextBox txtFactsSurname;
         private Button btnShowExclusions;
-        private Panel panel1;
+        private FlowLayoutPanel panel1;
         private FTAnalyzer.Theme.ThemedRadioButton radioOnlyAlternate;
         private FTAnalyzer.Theme.ThemedRadioButton radioOnlyPreferred;
         private FTAnalyzer.Theme.ThemedRadioButton radioAllFacts;
