@@ -785,7 +785,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_BBDED1BADB084889B3388EEB59CB4169"
             {
-            "SourcePath" = "8:..\\FTAnalyzer.Windows\\obj\\Debug\\net10.0-windows10.0.17763.0\\apphost.exe"
+            "SourcePath" = "8:..\\FTAnalyzer.Windows\\obj\\Debug\\net10.0-windows10.0.19041.0\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_12249BAB9E7A4E32BADCCECC439D1E75"
