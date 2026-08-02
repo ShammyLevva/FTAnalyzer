@@ -102,6 +102,85 @@ namespace UnitTests
             Assert.AreEqual(Countries.UNITED_STATES, factLocation.Country);
         }
 
+        // GEDCOM data occasionally omits the comma before a trailing country name -
+        // FactLocation.FixMissingCommaBeforeCountry recovers a proper Region/Country split from a
+        // single run-on Country value rather than leaving it as one unrecognisable string. Tries
+        // the longest trailing run of words first, so multi-word country names are recognised too.
+        [TestMethod]
+        public void MissingCommaBeforeCountryTest()
+        {
+            FactLocation.LoadConversions(Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\..\\FTAnalyzer.Shared\\FTAnalyzer.Shared"));
+            GeneralSettings.Default.AllowEmptyLocations = false;
+
+            // Needs typo normalisation ("USA" -> "United States").
+            FactLocation factLocation = FactLocation.GetLocation("California USA");
+            Assert.AreEqual("California, United States", factLocation.ToString());
+            Assert.AreEqual(Countries.UNITED_STATES, factLocation.Country);
+
+            // Already a canonical (single-word) country name.
+            factLocation = FactLocation.GetLocation("London England");
+            Assert.AreEqual("London, England", factLocation.ToString());
+            Assert.AreEqual("England", factLocation.Country);
+
+            // Two-word country name, must match "United States" rather than stopping at "States".
+            factLocation = FactLocation.GetLocation("Boston United States");
+            Assert.AreEqual("Boston, United States", factLocation.ToString());
+            Assert.AreEqual(Countries.UNITED_STATES, factLocation.Country);
+
+            // Multi-word Region/leftover ("New York") ahead of a multi-word country name.
+            factLocation = FactLocation.GetLocation("New York United States");
+            Assert.AreEqual("New York, United States", factLocation.ToString());
+            Assert.AreEqual(Countries.UNITED_STATES, factLocation.Country);
+
+            // Multi-word leftover ahead of a typo'd single-word country name.
+            factLocation = FactLocation.GetLocation("New York USA");
+            Assert.AreEqual("New York, United States", factLocation.ToString());
+            Assert.AreEqual(Countries.UNITED_STATES, factLocation.Country);
+
+            // A properly-comma'd location must be completely unaffected.
+            factLocation = FactLocation.GetLocation("Boston, Massachusetts, United States");
+            Assert.AreEqual("Boston, Massachusetts, United States", factLocation.ToString());
+
+            // Ties into the Georgia city disambiguation (see GeorgiaKnownCityPromotedTest) -
+            // "Atlanta Georgia" with the comma missing still ends up fully promoted, since
+            // FixMissingCommaBeforeCountry recognises "Georgia" too and ShiftGeorgiaCityToRegion
+            // (which runs immediately after) recognises "Atlanta" as a known Georgia city.
+            factLocation = FactLocation.GetLocation("Atlanta Georgia");
+            Assert.AreEqual("Atlanta, Georgia, United States", factLocation.ToString());
+            Assert.AreEqual(Countries.UNITED_STATES, factLocation.Country);
+
+            // A word that isn't a known country at all must be left alone entirely.
+            factLocation = FactLocation.GetLocation("New Amsterdam");
+            Assert.AreEqual("New Amsterdam", factLocation.ToString());
+        }
+
+        // Guards against false positives where an innocent phrase happens to end in a country
+        // name with no missing comma intended at all. The tell is the word immediately before the
+        // country-like word: a genuine place name essentially never ends its own portion in a
+        // short connector word ("of", "in", "at"...) right before the country, so leftovers ending
+        // in a word under 3 characters are rejected rather than split into a nonsense Region.
+        [TestMethod]
+        public void MissingCommaFalsePositiveGuardTest()
+        {
+            FactLocation.LoadConversions(Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\..\\FTAnalyzer.Shared\\FTAnalyzer.Shared"));
+            GeneralSettings.Default.AllowEmptyLocations = false;
+
+            // "of" (2 chars) immediately precedes the country-like word - rejected.
+            FactLocation factLocation = FactLocation.GetLocation("Bank of China");
+            Assert.AreEqual("Bank of China", factLocation.ToString());
+
+            factLocation = FactLocation.GetLocation("Church of Scotland");
+            Assert.AreEqual("Church of Scotland", factLocation.ToString());
+
+            // Boundary check: a 2-character leftover-ending word is rejected...
+            factLocation = FactLocation.GetLocation("Port Of England");
+            Assert.AreEqual("Port of England", factLocation.ToString()); // "Of" -> "of": EnhancedTextInfo.ToTitleCase lowercases prepositions
+
+            // ...but a 3-character one is accepted (not "less than 3").
+            factLocation = FactLocation.GetLocation("Man USA");
+            Assert.AreEqual("Man, United States", factLocation.ToString());
+        }
+
         // Georgia the country and Georgia the US state share a name. KNOWN_COUNTRIES deliberately
         // omits Georgia (see Countries.IsGeorgiaCountry) rather than trying to guess which one a
         // bare "Georgia" means. FactLocationFixes.xml even has a
@@ -223,6 +302,158 @@ namespace UnitTests
             {
                 GeneralSettings.Default.SkipFixingLocations = originalSkipFixingLocations;
             }
+        }
+
+        // "UK"/"GB" written as the Country alongside one of the constituent countries as the
+        // COUNTRY_TYPOS blindly maps bare "UK"/"GB" to "England" (a deliberate simplification -
+        // most UK GEDCOM data that gives no more detail than that does mean England) - which would
+        // be wrong whenever the Region already correctly says Scotland/Wales. FixUKGBTypos runs
+        // first and promotes the constituent country up to Country in that case specifically,
+        // pre-empting the blanket "UK"/"GB" -> "England" typo fix from clobbering it.
+        [TestMethod]
+        public void FixUKGBTyposTest()
+        {
+            FactLocation.LoadConversions(Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\..\\FTAnalyzer.Shared\\FTAnalyzer.Shared"));
+            GeneralSettings.Default.AllowEmptyLocations = false;
+
+            FactLocation factLocation = FactLocation.GetLocation("England, UK");
+            Assert.AreEqual("England", factLocation.ToString());
+            Assert.AreEqual("England", factLocation.Country);
+            Assert.AreEqual(string.Empty, factLocation.Region);
+
+            factLocation = FactLocation.GetLocation("Wales, GB");
+            Assert.AreEqual("Wales", factLocation.ToString());
+            Assert.AreEqual("Wales", factLocation.Country);
+
+            // Any other Region doesn't trigger this specific pre-emption, so the blanket
+            // "UK" -> "England" typo fix runs unopposed - "Normandy" ends up (incorrectly, but
+            // that's the existing, unrelated typo-fix behaviour, not this fix's job to solve)
+            // filed under England rather than left as the unrecognised pair it was typed as.
+            factLocation = FactLocation.GetLocation("Normandy, UK");
+            Assert.AreEqual("Normandy, England", factLocation.ToString());
+        }
+
+        // Some earlier fixup occasionally leaves the same value duplicated across two adjacent
+        // levels (e.g. Country and Region both "England") - FixDoubleLocations collapses the
+        // redundant level away rather than displaying it twice.
+        [TestMethod]
+        public void FixDoubleLocationsTest()
+        {
+            FactLocation.LoadConversions(Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\..\\FTAnalyzer.Shared\\FTAnalyzer.Shared"));
+            GeneralSettings.Default.AllowEmptyLocations = false;
+
+            // Country == Region.
+            FactLocation factLocation = FactLocation.GetLocation("England, England");
+            Assert.AreEqual("England", factLocation.ToString());
+            Assert.AreEqual(string.Empty, factLocation.Region);
+
+            // Region == SubRegion (a level further down, Country stays untouched). "Puddleton" is
+            // a deliberately made-up place name here so this test isn't accidentally exercising
+            // some other fixup keyed on a real one (e.g. "Boston" is itself a RegionToParish entry).
+            factLocation = FactLocation.GetLocation("Puddleton, Puddleton, England");
+            Assert.AreEqual("Puddleton, England", factLocation.ToString());
+            Assert.AreEqual("England", factLocation.Country);
+            Assert.AreEqual("Puddleton", factLocation.Region);
+            Assert.AreEqual(string.Empty, factLocation.SubRegion);
+        }
+
+        // FixRegionFullStops/FixCountryFullStops strip stray full stops (and asterisks) out of
+        // the Region/Country fields before any typo/shift lookup runs against them, so
+        // "Some.Where" and "Some.Where" (dictionary keys never contain punctuation) still match.
+        [TestMethod]
+        public void FixFullStopsTest()
+        {
+            FactLocation.LoadConversions(Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\..\\FTAnalyzer.Shared\\FTAnalyzer.Shared"));
+            GeneralSettings.Default.AllowEmptyLocations = false;
+
+            FactLocation factLocation = FactLocation.GetLocation("Puddleby, Some.Where, England");
+            Assert.AreEqual("Some Where", factLocation.Region);
+
+            factLocation = FactLocation.GetLocation("Testonia.");
+            Assert.AreEqual("Testonia", factLocation.Country);
+        }
+
+        // FixMultipleSpacesAmpersandsCommas collapses runs of spaces down to one and expands "&"
+        // to "and", so differently-formatted versions of the same name end up identical.
+        [TestMethod]
+        public void FixAmpersandAndSpacesTest()
+        {
+            FactLocation.LoadConversions(Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\..\\FTAnalyzer.Shared\\FTAnalyzer.Shared"));
+            GeneralSettings.Default.AllowEmptyLocations = false;
+
+            FactLocation factLocation = FactLocation.GetLocation("Puddleby, Fish  &  Chip   Town, England");
+            Assert.AreEqual("Fish and Chip Town", factLocation.Region);
+        }
+
+        // UK regions get demoted a level under their proper county/shire when the GEDCOM data has
+        // a city directly under the country with no county given at all (e.g. "Aberdeen, Scotland"
+        // instead of "Aberdeen, Aberdeenshire, Scotland") - ShiftRegionToParish inserts the missing
+        // county level, sliding the city down to SubRegion. UK-only: see IsUnitedKingdomGateTest for
+        // why the same city name elsewhere isn't affected.
+        [TestMethod]
+        public void ShiftRegionToParishTest()
+        {
+            FactLocation.LoadConversions(Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\..\\FTAnalyzer.Shared\\FTAnalyzer.Shared"));
+            GeneralSettings.Default.AllowEmptyLocations = false;
+
+            FactLocation factLocation = FactLocation.GetLocation("Old Machar, Aberdeen, Scotland");
+            Assert.AreEqual("Old Machar, Aberdeen, Aberdeenshire, Scotland", factLocation.ToString());
+            Assert.AreEqual("Scotland", factLocation.Country);
+            Assert.AreEqual("Aberdeenshire", factLocation.Region);
+            Assert.AreEqual("Aberdeen", factLocation.SubRegion);
+        }
+
+        // CensusCountryMatches decides whether a location's own Country "counts as" a target
+        // census country s - used to match a person's residence against which country's census
+        // records to search. Several special cases: exact match, England/Wales treated as
+        // equivalent (they shared a census), "United Kingdom" matching any of its constituent
+        // countries, Scotland is deliberately never treated as equivalent to anything else (it ran
+        // its own separate census), and - when explicitly asked to - an unrecognised Country
+        // counts as matching anything (too little information to say it doesn't).
+        [TestMethod]
+        public void CensusCountryMatchesTest()
+        {
+            FactLocation.LoadConversions(Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\..\\FTAnalyzer.Shared\\FTAnalyzer.Shared"));
+
+            FactLocation england = FactLocation.GetLocation("England");
+            Assert.IsTrue(england.CensusCountryMatches("England", false));
+            Assert.IsTrue(england.CensusCountryMatches("Wales", false));
+            Assert.IsFalse(england.CensusCountryMatches("Scotland", false));
+
+            FactLocation scotland = FactLocation.GetLocation("Scotland");
+            Assert.IsTrue(scotland.CensusCountryMatches("Scotland", false));
+            Assert.IsFalse(scotland.CensusCountryMatches("England", false));
+            // The explicit Scotland exclusion only rules out equivalence with other constituent
+            // countries (England/Wales) - the UK-equivalence check above it in CensusCountryMatches
+            // still applies, so a search specifically for "United Kingdom" does include Scotland.
+            Assert.IsTrue(scotland.CensusCountryMatches("United Kingdom", false));
+
+            FactLocation uk = FactLocation.GetLocation("United Kingdom");
+            Assert.IsTrue(uk.CensusCountryMatches("Scotland", false));
+            Assert.IsTrue(uk.CensusCountryMatches("England", false));
+
+            FactLocation garbled = FactLocation.GetLocation("Ruritania");
+            Assert.IsFalse(garbled.CensusCountryMatches("England", false)); // includeUnknownCountries off
+            Assert.IsTrue(garbled.CensusCountryMatches("England", true)); // includeUnknownCountries on
+        }
+
+        // Basic sanity checks on the ordering/caching behaviour every other test above implicitly
+        // relies on: identical location strings resolve to the exact same cached instance, and
+        // CompareTo orders by Country first (Ordinal, so plain alphabetical for these examples).
+        [TestMethod]
+        public void CachingAndCompareToTest()
+        {
+            FactLocation.LoadConversions(Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\..\\FTAnalyzer.Shared\\FTAnalyzer.Shared"));
+
+            FactLocation first = FactLocation.GetLocation("Boston, Massachusetts, United States");
+            FactLocation second = FactLocation.GetLocation("Boston, Massachusetts, United States");
+            Assert.IsTrue(ReferenceEquals(first, second));
+            Assert.IsTrue(first == second);
+
+            FactLocation scotlandLoc = FactLocation.GetLocation("Aberdeen, Scotland");
+            FactLocation usaLoc = FactLocation.GetLocation("Boston, United States");
+            Assert.IsTrue(scotlandLoc.CompareTo(usaLoc) < 0); // "Scotland" < "United States" ordinally
+            Assert.IsTrue(usaLoc.CompareTo(scotlandLoc) > 0);
         }
     }
 }
