@@ -4114,7 +4114,7 @@ namespace FTAnalyzer
                 if (!ckbFactExclude.Items.Contains(factType))
                 {
                     int index = ckbFactExclude.Items.Add(factType);
-                    bool itemChecked = RegistrySettings.GetBoolRegistryValue($"Exlude Fact: {factType}", false);
+                    bool itemChecked = RegistrySettings.GetBoolRegistryValue($"Exclude Fact: {factType}", false);
                     ckbFactExclude.SetItemChecked(index, itemChecked);
                 }
             }
