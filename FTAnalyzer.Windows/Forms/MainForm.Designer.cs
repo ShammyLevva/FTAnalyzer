@@ -2776,17 +2776,25 @@ namespace FTAnalyzer
             groupBox4.TabIndex = 34;
             groupBox4.TabStop = false;
             groupBox4.Text = "Census Reference Reports";
-            // 
+            //
             // btnInconsistentLocations
-            // 
+            //
             btnInconsistentLocations.Location = new Point(745, 22);
             btnInconsistentLocations.Margin = new Padding(4);
             btnInconsistentLocations.Name = "btnInconsistentLocations";
             btnInconsistentLocations.Size = new Size(351, 29);
             btnInconsistentLocations.TabIndex = 29;
-            btnInconsistentLocations.Text = "Inconsistent census locations for families with same census ref";
+            // Was "Inconsistent census locations for families with same census ref" (67 chars) -
+            // measured up to 523px wide on one line at the largest font-scale level, more than
+            // this tab has room for next to its sibling buttons, and WinForms doesn't wrap a
+            // FlatStyle.Flat button's text (FormTheme forces Flat on every themed button), so it
+            // just overflowed/clipped instead. Every sibling button in this row uses a short
+            // 2-4 word label; matching that convention (with the full description moved to a
+            // tooltip) fits at every font scale instead of fighting wrap/height math.
+            btnInconsistentLocations.Text = "Inconsistent Family Census Locations";
             btnInconsistentLocations.UseVisualStyleBackColor = true;
             btnInconsistentLocations.Click += BtnInconsistentLocations_Click;
+            toolTips.SetToolTip(btnInconsistentLocations, "Inconsistent census locations for families with same census ref");
             // 
             // btnUnrecognisedCensusRef
             // 
@@ -3977,7 +3985,6 @@ namespace FTAnalyzer
             ckbDataErrors.Dock = DockStyle.Top;
             ckbDataErrors.Location = new Point(4, 20);
             ckbDataErrors.Margin = new Padding(4);
-            ckbDataErrors.WrapContents = true;
             ckbDataErrors.Name = "ckbDataErrors";
             ckbDataErrors.Size = new Size(1214, 130);
             ckbDataErrors.TabIndex = 8;

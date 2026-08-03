@@ -116,6 +116,23 @@ namespace FTAnalyzer.Forms.Controls
             Invalidate();
         }
 
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            // When both scrollbars are visible, the small square where they'd otherwise meet is
+            // background DataGridView paints itself, outside of both child ScrollBar controls'
+            // own bounds - BackgroundColor/GridColor never reach it, so it stays a stark white
+            // square regardless of theme. Cover it ourselves.
+            VScrollBar? vScrollBar = Controls.OfType<VScrollBar>().FirstOrDefault(s => s.Visible);
+            HScrollBar? hScrollBar = Controls.OfType<HScrollBar>().FirstOrDefault(s => s.Visible);
+            if (vScrollBar is not null && hScrollBar is not null)
+            {
+                Rectangle corner = new(vScrollBar.Left, hScrollBar.Top, vScrollBar.Width, hScrollBar.Height);
+                using SolidBrush brush = new(BackgroundColor);
+                e.Graphics.FillRectangle(brush, corner);
+            }
+        }
+
         public void OnFilterStringChanged(object? sender, FilterEventArgs e)
         {
             if (e.Cancel)
