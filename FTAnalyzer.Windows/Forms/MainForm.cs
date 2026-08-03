@@ -1984,11 +1984,14 @@ namespace FTAnalyzer
             }
             else if (tabErrorFixSelector.SelectedTab == tabLooseBirths)
             {
-                if (dgLooseBirths.DataSource is null)
+                // Check the base DataGridView.DataSource (a DataView, null until first populated) rather
+                // than the shadowed VirtualDataGridView<T>.DataSource - its backing field defaults to an
+                // empty (non-null) list, so an `is null` check against it would never trip on first visit.
+                if (((DataGridView)dgLooseBirths).DataSource is null)
                     await SetupLooseBirthsAsync();
                 else
                 {
-                    tsCountLabel.Text = Messages.Count + dgLooseBirths.DataSource.Count;
+                    tsCountLabel.Text = Messages.Count + (dgLooseBirths.DataSource?.Count ?? 0);
                     tsHintsLabel.Text = Messages.Hints_Loose_Births + Messages.Hints_Individual;
                 }
                 mnuPrint.Enabled = true;
@@ -1997,11 +2000,11 @@ namespace FTAnalyzer
             }
             else if (tabErrorFixSelector.SelectedTab == tabLooseDeaths)
             {
-                if (dgLooseDeaths.DataSource is null)
+                if (((DataGridView)dgLooseDeaths).DataSource is null)
                     await SetupLooseDeathsAsync();
                 else
                 {
-                    tsCountLabel.Text = Messages.Count + dgLooseDeaths.DataSource.Count;
+                    tsCountLabel.Text = Messages.Count + (dgLooseDeaths.DataSource?.Count ?? 0);
                     tsHintsLabel.Text = Messages.Hints_Loose_Deaths + Messages.Hints_Individual;
                 }
                 mnuPrint.Enabled = true;
@@ -2010,11 +2013,11 @@ namespace FTAnalyzer
             }
             else if (tabErrorFixSelector.SelectedTab == tabLooseInfo)
             {
-                if (dgLooseInfo.DataSource is null)
+                if (((DataGridView)dgLooseInfo).DataSource is null)
                     await SetupLooseInfoAsync();
                 else
                 {
-                    tsCountLabel.Text = Messages.Count + dgLooseInfo.DataSource.Count;
+                    tsCountLabel.Text = Messages.Count + (dgLooseInfo.DataSource?.Count ?? 0);
                     tsHintsLabel.Text = "Double click to view records. " + Messages.Hints_Individual;
                 }
                 mnuPrint.Enabled = true;

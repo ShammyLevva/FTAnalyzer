@@ -17,6 +17,11 @@ namespace FTAnalyzer
         [STAThread]
         static void Main()
         {
+            // Must run before anything reads a Settings.Default/GeneralSettings.Default/etc.
+            // property - even indirectly, e.g. ConfigureGridTheme() below touches Theme.ActiveColors,
+            // whose static field initializers read FontSettings.Default.ThemeMode.
+            SettingsBootstrap.Initialize();
+
             IConfiguration config = new ConfigurationBuilder()
                 .AddUserSecrets<MainForm>()
                 .Build();
