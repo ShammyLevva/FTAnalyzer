@@ -22,7 +22,14 @@ namespace FTAnalyzer.Theme
             using (SolidBrush backBrush = new(BackColor))
                 g.FillRectangle(backBrush, ClientRectangle);
 
-            Size glyphSize = new(13, 13);
+            // Fixed at 13px regardless of the user's font-scale setting used to read fine at the
+            // default (~8pt) level, but FontScaler.Apply can grow Font up to 14pt - the glyph
+            // stayed pinned at its smallest size while the label text next to it kept growing, so
+            // the checkbox looked disproportionately small at higher scale levels. Size it off the
+            // current Font instead, floored at the original 13px for the default scale (same fix as
+            // ThemedRadioButton).
+            int diameter = Math.Max(13, Font.Height - 2);
+            Size glyphSize = new(diameter, diameter);
             Rectangle glyphRect = new(0, (Height - glyphSize.Height) / 2, glyphSize.Width - 1, glyphSize.Height - 1);
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -41,11 +48,17 @@ namespace FTAnalyzer.Theme
                     {
                         checkPen.StartCap = LineCap.Round;
                         checkPen.EndCap = LineCap.Round;
+                        // These insets were hand-tuned pixel offsets for the original fixed 12px
+                        // box; scale them with glyphRect now that it grows with Font, or the
+                        // checkmark stays pinned at its smallest size and reads as a thin sliver
+                        // inside a larger square.
+                        int narrowInset = Math.Max(2, glyphRect.Width / 6);
+                        int wideInset = Math.Max(3, glyphRect.Width / 4);
                         g.DrawLines(checkPen,
                         [
-                            new Point(glyphRect.Left + 3, glyphRect.Top + glyphRect.Height / 2),
-                            new Point(glyphRect.Left + glyphRect.Width / 2 - 1, glyphRect.Bottom - 3),
-                            new Point(glyphRect.Right - 2, glyphRect.Top + 3)
+                            new Point(glyphRect.Left + wideInset, glyphRect.Top + glyphRect.Height / 2),
+                            new Point(glyphRect.Left + glyphRect.Width / 2 - 1, glyphRect.Bottom - wideInset),
+                            new Point(glyphRect.Right - narrowInset, glyphRect.Top + wideInset)
                         ]);
                     }
                     break;

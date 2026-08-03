@@ -18,7 +18,14 @@ namespace FTAnalyzer.Theme
             using (SolidBrush backBrush = new(BackColor))
                 g.FillRectangle(backBrush, ClientRectangle);
 
-            Size glyphSize = new(13, 13);
+            // Fixed at 13px regardless of the user's font-scale setting used to read fine at the
+            // default (~8pt) level, but FontScaler.Apply can grow Font up to 14pt - the glyph (and
+            // the selected dot inside it, at a fixed fraction of the glyph) stayed pinned at its
+            // smallest size while the label text next to it kept growing, so the dot became
+            // proportionally tiny and hard to spot at higher scale levels. Size it off the current
+            // Font instead, floored at the original 13px for the default scale.
+            int diameter = Math.Max(13, Font.Height - 2);
+            Size glyphSize = new(diameter, diameter);
             Rectangle glyphRect = new(0, (Height - glyphSize.Height) / 2, glyphSize.Width - 1, glyphSize.Height - 1);
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -31,7 +38,8 @@ namespace FTAnalyzer.Theme
 
             if (Checked)
             {
-                Rectangle dotRect = Rectangle.Inflate(glyphRect, -3, -3);
+                int dotInset = Math.Max(3, diameter / 4);
+                Rectangle dotRect = Rectangle.Inflate(glyphRect, -dotInset, -dotInset);
                 using SolidBrush dotBrush = new(Enabled ? ActiveColors.Primary : ActiveColors.PrimaryPale);
                 g.FillEllipse(dotBrush, dotRect);
             }

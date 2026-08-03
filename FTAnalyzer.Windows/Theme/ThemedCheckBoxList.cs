@@ -101,6 +101,17 @@ namespace FTAnalyzer.Theme
                     Width = owner._columnWidth,
                     Margin = new Padding(3),
                 };
+                // AutoSize covers width+height for the single-column lists (ColumnWidth == 0), but a
+                // fixed ColumnWidth forces AutoSize off, so nothing recalculates Height when
+                // FontScaler.Apply later changes this checkbox's Font directly (it walks every
+                // control in the tree, not just the container) - rows would keep their
+                // construction-time Height and start overlapping at larger font scales. Height still
+                // isn't part of AutoSize here, so it needs the same manual refresh on every font change.
+                if (!checkBox.AutoSize)
+                {
+                    checkBox.Height = checkBox.PreferredSize.Height;
+                    checkBox.FontChanged += (_, _) => checkBox.Height = checkBox.PreferredSize.Height;
+                }
                 checkBox.Click += (sender, _) => owner.ItemCheckedChanged?.Invoke(sender, EventArgs.Empty);
                 owner._checkBoxes.Add(checkBox);
                 owner.Controls.Add(checkBox);
