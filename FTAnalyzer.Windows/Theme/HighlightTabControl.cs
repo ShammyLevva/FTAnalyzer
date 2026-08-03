@@ -83,7 +83,11 @@ namespace FTAnalyzer.Theme
 
             using SolidBrush backBrush = new(backColour);
             using SolidBrush textBrush = new(textColour);
-            using Pen borderPen = new(borderColour);
+            // Unselected tabs share their fill color with the page background (only the border
+            // separates one tab from the next), so a 1px line was too subtle to read as a
+            // boundary - widen it there. Selected tabs already stand out via their fill color, so
+            // leave that border at its original weight.
+            using Pen borderPen = new(borderColour, isSelected ? 1f : 2f);
 
             g.FillRectangle(backBrush, bounds);
 

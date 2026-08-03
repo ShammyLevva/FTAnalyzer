@@ -222,7 +222,7 @@ namespace FTAnalyzer
             dgRegions = new FTAnalyzer.Forms.Controls.VirtualDgvLocations();
             btnRandomSurnameColour = new Button();
             cmbColourFamily = new ComboBox();
-            ckbFactExclude = new CheckedListBox();
+            ckbFactExclude = new FTAnalyzer.Theme.ThemedCheckBoxList();
             radioOnlyPreferred = new FTAnalyzer.Theme.ThemedRadioButton();
             radioOnlyAlternate = new FTAnalyzer.Theme.ThemedRadioButton();
             btnShowExclusions = new Button();
@@ -393,7 +393,7 @@ namespace FTAnalyzer
             tabErrorFixSelector = new FTAnalyzer.Theme.HighlightTabControl();
             tabDataErrors = new TabPage();
             gbDataErrorTypes = new FTAnalyzer.Theme.ThemedGroupBox();
-            ckbDataErrors = new CheckedListBox();
+            ckbDataErrors = new FTAnalyzer.Theme.ThemedCheckBoxList();
             btnSelectAll = new Button();
             btnClearAll = new Button();
             tabDuplicates = new TabPage();
@@ -435,7 +435,7 @@ namespace FTAnalyzer
             btnExcludeAllFactTypes = new Button();
             btnDeselectAllFactTypes = new Button();
             btnSelectAllFactTypes = new Button();
-            ckbFactSelect = new CheckedListBox();
+            ckbFactSelect = new FTAnalyzer.Theme.ThemedCheckBoxList();
             relTypesFacts = new FTAnalyzer.Forms.Controls.RelationTypes();
             tabToday = new TabPage();
             scOnThisDay = new SplitContainer();
@@ -1472,17 +1472,14 @@ namespace FTAnalyzer
             // ckbFactExclude
             // 
             ckbFactExclude.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            ckbFactExclude.FormattingEnabled = true;
             ckbFactExclude.Location = new Point(424, 172);
             ckbFactExclude.Margin = new Padding(4);
             ckbFactExclude.Name = "ckbFactExclude";
-            ckbFactExclude.ScrollAlwaysVisible = true;
-            ckbFactExclude.SelectionMode = SelectionMode.None;
             ckbFactExclude.Size = new Size(365, 202);
             ckbFactExclude.TabIndex = 38;
             toolTips.SetToolTip(ckbFactExclude, "Any fact types selected in this box excludes people who have this fact type from report");
             ckbFactExclude.Visible = false;
-            ckbFactExclude.MouseClick += CkbFactExclude_MouseClick;
+            ckbFactExclude.ItemCheckedChanged += CkbFactExclude_ItemCheckedChanged;
             // 
             // radioOnlyPreferred
             // 
@@ -3976,18 +3973,15 @@ namespace FTAnalyzer
             // 
             // ckbDataErrors
             // 
-            ckbDataErrors.CheckOnClick = true;
             ckbDataErrors.ColumnWidth = 300;
             ckbDataErrors.Dock = DockStyle.Top;
-            ckbDataErrors.FormattingEnabled = true;
             ckbDataErrors.Location = new Point(4, 20);
             ckbDataErrors.Margin = new Padding(4);
-            ckbDataErrors.MultiColumn = true;
+            ckbDataErrors.WrapContents = true;
             ckbDataErrors.Name = "ckbDataErrors";
-            ckbDataErrors.ScrollAlwaysVisible = true;
             ckbDataErrors.Size = new Size(1214, 130);
             ckbDataErrors.TabIndex = 8;
-            ckbDataErrors.SelectedIndexChanged += CkbDataErrors_SelectedIndexChanged;
+            ckbDataErrors.ItemCheckedChanged += CkbDataErrors_ItemCheckedChanged;
             // 
             // btnSelectAll
             // 
@@ -4679,15 +4673,12 @@ namespace FTAnalyzer
             // ckbFactSelect
             // 
             ckbFactSelect.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            ckbFactSelect.FormattingEnabled = true;
             ckbFactSelect.Location = new Point(9, 172);
             ckbFactSelect.Margin = new Padding(4);
             ckbFactSelect.Name = "ckbFactSelect";
-            ckbFactSelect.ScrollAlwaysVisible = true;
-            ckbFactSelect.SelectionMode = SelectionMode.None;
             ckbFactSelect.Size = new Size(366, 202);
             ckbFactSelect.TabIndex = 25;
-            ckbFactSelect.MouseClick += CkbFactSelect_MouseClick;
+            ckbFactSelect.ItemCheckedChanged += CkbFactSelect_ItemCheckedChanged;
             // 
             // relTypesFacts
             // 
@@ -5408,7 +5399,7 @@ namespace FTAnalyzer
         private Utilities.ScrollingRichTextBox rtbOutput;
         private System.Windows.Forms.Button btnShowMap;
         private System.Windows.Forms.ToolStripMenuItem MnuCustomFactsToExcel;
-        private global::System.Windows.Forms.CheckedListBox ckbDataErrors;
+        private FTAnalyzer.Theme.ThemedCheckBoxList ckbDataErrors;
         private global::FTAnalyzer.Utilities.ScrollingRichTextBox rtbLCoutput;
         private FTAnalyzer.Theme.ThemedGroupBox gbFilters;
         private Button btnRandomSurnameColour;
@@ -5431,9 +5422,9 @@ namespace FTAnalyzer
         private Label lblExclude;
         private Button btnExcludeAllFactTypes;
         private Button btnDeselectAllFactTypes;
-        private CheckedListBox ckbFactExclude;
+        private FTAnalyzer.Theme.ThemedCheckBoxList ckbFactExclude;
         private Button btnSelectAllFactTypes;
-        private CheckedListBox ckbFactSelect;
+        private FTAnalyzer.Theme.ThemedCheckBoxList ckbFactSelect;
         private Forms.Controls.RelationTypes relTypesFacts;
         private Label label1;
         private SplitContainer splitLostCousins;

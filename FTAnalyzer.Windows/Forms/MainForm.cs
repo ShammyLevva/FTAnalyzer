@@ -1173,7 +1173,7 @@ namespace FTAnalyzer
         }
 
         #region DataErrors
-        void CkbDataErrors_SelectedIndexChanged(object sender, EventArgs e) => UpdateDataErrorsDisplay();
+        void CkbDataErrors_ItemCheckedChanged(object sender, EventArgs e) => UpdateDataErrorsDisplay();
 
 
         void UpdateDataErrorsDisplay()
@@ -1226,7 +1226,7 @@ namespace FTAnalyzer
             HourGlass(this, false);
         }
 
-        public void SetDataErrorsCheckedDefaults(CheckedListBox list)
+        public void SetDataErrorsCheckedDefaults(FTAnalyzer.Theme.ThemedCheckBoxList list)
         {
             list.Items.Clear();
             foreach (DataErrorGroup dataError in ft.DataErrorTypes)
@@ -1263,7 +1263,7 @@ namespace FTAnalyzer
             dgDataErrors.BringToFront();
         }
 
-        public static SortableBindingList<IDisplayDataError> DataErrors(CheckedListBox list)
+        public static SortableBindingList<IDisplayDataError> DataErrors(FTAnalyzer.Theme.ThemedCheckBoxList list)
         {
             List<IDisplayDataError> errors = [];
             foreach (int indexChecked in list.CheckedIndices)
@@ -2953,7 +2953,7 @@ namespace FTAnalyzer
             HourGlass(this, false);
         }
 
-        List<string> BuildFactTypeList(CheckedListBox list, bool includeCreated)
+        List<string> BuildFactTypeList(FTAnalyzer.Theme.ThemedCheckBoxList list, bool includeCreated)
         {
             List<string> result = [];
             if (list == ckbFactExclude && !ckbFactExclude.Visible)
@@ -2980,7 +2980,7 @@ namespace FTAnalyzer
         void BtnDeselectAllFactTypes_Click(object sender, EventArgs e) => SetFactTypes(ckbFactSelect, false, "Fact: ");
 
 
-        void SetFactTypes(CheckedListBox list, bool selected, string registryPrefix)
+        void SetFactTypes(FTAnalyzer.Theme.ThemedCheckBoxList list, bool selected, string registryPrefix)
         {
             for (int index = 0; index < list.Items.Count; index++)
             {
@@ -2999,24 +2999,20 @@ namespace FTAnalyzer
         }
 
 
-        void CkbFactSelect_MouseClick(object sender, MouseEventArgs e)
+        void CkbFactSelect_ItemCheckedChanged(object sender, EventArgs e)
         {
-            int index = ckbFactSelect.IndexFromPoint(e.Location);
-            if (index >= 0)
+            if (sender is not CheckBox checkBox)
+                return;
+            string factType = checkBox.Text;
+            try
             {
-                string factType = ckbFactSelect.Items[index].ToString() ?? string.Empty;
-                bool selected = ckbFactSelect.GetItemChecked(index);
-                ckbFactSelect.SetItemChecked(index, !selected);
-                try
-                {
-                    RegistrySettings.SetRegistryValue($"Fact: {factType}", !selected, RegistryValueKind.String);
-                }
-                catch (IOException)
-                {
-                    UIHelpers.ShowMessage("Unable to save fact selection preferences. Please check App has permission to save user preferences to registry.");
-                }
-                SetShowFactsButton();
+                RegistrySettings.SetRegistryValue($"Fact: {factType}", checkBox.Checked, RegistryValueKind.String);
             }
+            catch (IOException)
+            {
+                UIHelpers.ShowMessage("Unable to save fact selection preferences. Please check App has permission to save user preferences to registry.");
+            }
+            SetShowFactsButton();
         }
 
         void SetShowFactsButton()
@@ -3048,15 +3044,14 @@ namespace FTAnalyzer
         }
 
 
-        void CkbFactExclude_MouseClick(object sender, MouseEventArgs e)
+        void CkbFactExclude_ItemCheckedChanged(object sender, EventArgs e)
         {
-            int index = ckbFactExclude.IndexFromPoint(e.Location);
-            string factType = ckbFactExclude.Items[index].ToString() ?? string.Empty;
-            bool selected = ckbFactExclude.GetItemChecked(index);
-            ckbFactExclude.SetItemChecked(index, !selected);
+            if (sender is not CheckBox checkBox)
+                return;
+            string factType = checkBox.Text;
             try
             {
-                RegistrySettings.SetRegistryValue($"Exclude Fact: {factType}", !selected, RegistryValueKind.String);
+                RegistrySettings.SetRegistryValue($"Exclude Fact: {factType}", checkBox.Checked, RegistryValueKind.String);
             }
             catch (IOException)
             {
@@ -4102,7 +4097,7 @@ namespace FTAnalyzer
         }
         #endregion
 
-        public void SetFactTypeList(CheckedListBox ckbFactSelect, CheckedListBox ckbFactExclude, Predicate<ExportFact> filter)
+        public void SetFactTypeList(FTAnalyzer.Theme.ThemedCheckBoxList ckbFactSelect, FTAnalyzer.Theme.ThemedCheckBoxList ckbFactExclude, Predicate<ExportFact> filter)
         {
             List<string> factTypes = [.. ft.AllExportFacts.Filter(filter).Select(x => x.FactType).Distinct()];
             factTypes.Sort();

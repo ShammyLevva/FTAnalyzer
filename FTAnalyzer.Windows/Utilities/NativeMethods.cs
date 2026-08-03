@@ -73,6 +73,13 @@ namespace FTAnalyzer.Utilities
         /// </summary>
         internal static void DisableVisualStyles(Control control) => SetWindowTheme(control.Handle, string.Empty, null);
 
+        [DllImport("user32.dll")]
+        static extern bool RedrawWindow(IntPtr hWnd, IntPtr lprcUpdate, IntPtr hrgnUpdate, uint flags);
+
+        const uint RDW_INVALIDATE = 0x0001;
+        const uint RDW_FRAME = 0x0400;
+        const uint RDW_UPDATENOW = 0x0100;
+
         /// <summary>
         /// Native scrollbars (on grids, tree views, etc.) are drawn by the OS and ignore
         /// BackColor/ForeColor entirely - unlike ProgressBar/TrackBar there's no owning-draw
@@ -81,8 +88,17 @@ namespace FTAnalyzer.Utilities
         /// it (or back to the default "Explorer" for light mode) is the standard way apps get
         /// dark scrollbars without fully custom-drawing them.
         /// </summary>
-        internal static void SetScrollBarTheme(Control control, bool dark) =>
+        internal static void SetScrollBarTheme(Control control, bool dark)
+        {
             SetWindowTheme(control.Handle, dark ? "DarkMode_Explorer" : "Explorer", null);
+            // SetWindowTheme only changes which theme class is ASSOCIATED with the window - it
+            // doesn't itself repaint anything. Non-client scrollbar chrome already painted under
+            // the old theme stays stale until something else forces a redraw (a resize, a scroll,
+            // window activation, ...), which a control shown once at startup and never touched
+            // again (e.g. a static multi-column CheckedListBox) may never naturally get. Force an
+            // immediate NC repaint so the new theme actually shows up right away.
+            RedrawWindow(control.Handle, IntPtr.Zero, IntPtr.Zero, RDW_INVALIDATE | RDW_FRAME | RDW_UPDATENOW);
+        }
 
         [DllImport("user32.dll", SetLastError = true)]
         static extern bool GetComboBoxInfo(IntPtr hWndCombo, ref COMBOBOXINFO pcbi);
