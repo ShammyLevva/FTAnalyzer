@@ -343,7 +343,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AdvancedDataGridView" Version="5.1.0" />
+    <PackageReference Include="AdvancedDataGridView" Version="5.3.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
     <PackageReference Include="log4net" Version="3.3.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="10.0.9" />

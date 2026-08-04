@@ -71,6 +71,11 @@ namespace FTAnalyzer
             // The filter dialog/dropdown chrome, on the other hand, is regular UI surface and
             // should follow the app's light/dark toggle like everything else.
             Zuby.ADGV.GridTheme.DropDownBackground = Theme.ActiveColors.Card;
+            Zuby.ADGV.GridTheme.DropDownForeground = Theme.ActiveColors.Text;
+            // Drives the filter checklist's own native scrollbar theme (SetWindowTheme) - a
+            // separate flag rather than deriving it from DropDownBackground because that's an
+            // exact color check, not a light/dark classification.
+            Zuby.ADGV.GridTheme.DarkMode = Theme.ActiveColors.IsDark;
 
             Zuby.ADGV.GridTheme.ButtonFlatStyle = FlatStyle.Flat;
             Zuby.ADGV.GridTheme.ButtonUseVisualStyleBackColor = false;
