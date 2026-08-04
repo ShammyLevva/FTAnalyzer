@@ -1,5 +1,6 @@
 ﻿using BruTile.Predefined;
 using BruTile.Web;
+using FTAnalyzer.Shared.Utilities;
 
 namespace FTAnalyzer.Mapping
 {
@@ -11,10 +12,16 @@ namespace FTAnalyzer.Mapping
             OpenHistoricMap,
             BingAerial,
             BingRoads,
-            BingHybrid
+            BingHybrid,
+            UsgsHistorical
         }
 
-        public virtual HttpTileSource CreateTileSource(TileType type)
+        public virtual HttpTileSource CreateTileSource(TileType type) => CreateTileSource(type, null);
+
+        // usgsRequest is supplied by the caller (rather than constructed internally) when type is
+        // UsgsHistorical, so the caller can keep a reference to mutate ArcGisImageServerRequest's
+        // HistoricalYear later without needing to unwrap it back out of the returned HttpTileSource.
+        public virtual HttpTileSource CreateTileSource(TileType type, ArcGisImageServerRequest? usgsRequest)
         {
             return type switch
             {
@@ -24,9 +31,13 @@ namespace FTAnalyzer.Mapping
                 TileType.BingAerial => KnownTileSources.Create(KnownTileSource.BingAerial),
                 TileType.BingRoads => KnownTileSources.Create(KnownTileSource.BingRoads),
                 TileType.BingHybrid => KnownTileSources.Create(KnownTileSource.BingHybrid),
+                TileType.UsgsHistorical => new HttpTileSource(new GlobalSphericalMercator(1, 16),
+                                                usgsRequest ?? CreateUsgsHistoricalRequest(), "USGS"),
 
                 _ => KnownTileSources.Create(KnownTileSource.OpenStreetMap),
             };
         }
+
+        public static ArcGisImageServerRequest CreateUsgsHistoricalRequest() => new(UsgsHistoricalMap.ImageServerUrl);
     }
 }

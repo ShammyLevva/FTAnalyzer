@@ -37,6 +37,7 @@ namespace FTAnalyzer.Forms
             outputText = _outputText;
             mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
+            mapZoomToolStrip.Items.Add(mnuMapStyle.YearSelector);
             foreach (ToolStripItem item in mapZoomToolStrip.Items)
                 item.Enabled = true;
             //mapZoomToolStrip.Renderer = new CustomToolStripRenderer();
@@ -64,6 +65,7 @@ namespace FTAnalyzer.Forms
                 Invoke(new Action(() => DatabaseHelper_GeoLocationUpdated(location, e)));
                 return;
             }
+            mnuMapStyle.RefreshUsgsAvailability();
             BuildMap();
         }
 

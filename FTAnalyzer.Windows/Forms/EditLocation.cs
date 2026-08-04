@@ -31,6 +31,7 @@ namespace FTAnalyzer.Forms
             customMapLayers = [];
             mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
+            mapZoomToolStrip.Items.Add(mnuMapStyle.YearSelector);
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
             mapZoomToolStrip.Items[10].Visible = false;
             this.location = location;

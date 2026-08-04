@@ -42,6 +42,7 @@ namespace FTAnalyzer.Forms
             this.outputText = outputText;
             mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
+            mapZoomToolStrip.Items.Add(mnuMapStyle.YearSelector);
             foreach (ToolStripItem item in mapZoomToolStrip.Items)
                 item.Enabled = true;
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
@@ -66,6 +67,7 @@ namespace FTAnalyzer.Forms
                 Invoke(new Action(() => DatabaseHelper_GeoLocationUpdated(location, e)));
                 return;
             }
+            mnuMapStyle.RefreshUsgsAvailability();
             _ = BuildMapAsync();
         }
 

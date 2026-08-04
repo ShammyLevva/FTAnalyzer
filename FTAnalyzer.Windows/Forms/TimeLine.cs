@@ -29,6 +29,7 @@ namespace FTAnalyzer.Forms
             this.outputText = outputText;
             mnuMapStyle.Setup(linkLabel1, mapBox1, tbOpacity);
             mapZoomToolStrip.Items.Add(mnuMapStyle);
+            mapZoomToolStrip.Items.Add(mnuMapStyle.YearSelector);
             tbYears.MouseWheel += new MouseEventHandler(TbYears_MouseWheel);
             mnuHideScaleBar.Checked = MappingSettings.Default.HideScaleBar;
             mapZoomToolStrip.Items[2].ToolTipText = "Zoom out of Map"; // fix bug in SharpMapUI component
