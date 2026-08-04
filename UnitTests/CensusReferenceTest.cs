@@ -165,8 +165,14 @@ namespace UnitTests
         [TestMethod]
         public void CensusReferenceCanadaTests()
         {
-            CanadianCensus("        123/A/55/35/1	Canada 1881", CensusDate.CANADACENSUS1881, "123", "A", "35", "1");
-            CanadianCensus("        123/A/35/1	Canada 1881", CensusDate.CANADACENSUS1881, "123", "A", "35", "1");
+            // The two lines below used to assert a 4/5-segment "ED/SD/.../Page/Family" reading of
+            // LC_CENSUS_PATTERN_1881CANADA. Live testing against a real Lost Cousins account (see
+            // Instructions#lc-reference-formats) showed the website's own Canada 1881 reference is
+            // actually just the 3-segment "District/Page/Family" - there is no separate SD segment -
+            // so that assumption was wrong and has been corrected; these strings no longer match any
+            // Canada pattern (nothing else recognises a bare, keyword-free slash format either).
+            NoCanadianCensusMatch("        123/A/55/35/1	Canada 1881");
+            NoCanadianCensusMatch("        123/A/35/1	Canada 1881");
             CanadianCensus("Year: 1881; Census Place: Richibucto, Kent, New Brunswick; Roll: C_13184; Page: 32; Family No: 144", CensusDate.CANADACENSUS1881, "C_13184", "32", "144");
             CanadianCensus("19210601 RG31 Canada Census Item 4360292 013/52/15/01 - British Columbia North Vancouver - Abraham COLEY", CensusDate.CANADACENSUS1921, "013", "52", "01", "15");
             CanadianCensus("1851 RG31 Item 1301944 38/558/396", CensusDate.CANADACENSUS1851, "38", "558", "396", "");
@@ -177,6 +183,55 @@ namespace UnitTests
             CanadianCensus("Year 1911 Census 65 - Little Current Algoma East Ontario Page 18 Family 159 ", CensusDate.CANADACENSUS1911, "", "18", "159");
             //Canadian1881Census("C_13266; Page 67; Family 301", "132", "C", "67", "301");
             //CanadianCensus("Event Place: Dumfries South, Brant North, Ontario, Canada\nDistrict Number: 160\nSub-District: C\nDivision: 2\nPage Number: 1\nFamily Number: 3\nAffiliate Film Number: C-13264", , CensusDate.CANADACENSUS1881, "C_13184", "1", "3");
+        }
+
+        [TestMethod]
+        public void LcCensusPattern1940USRegressionTests()
+        {
+            // Regression test for a copy-paste bug in LC_CENSUS_PATTERN_1940US: the regex required
+            // an impossible "T627-" roll prefix (never used on the Lost Cousins website, which shows
+            // a bare roll number) and looked for the trailing text "US 1880" instead of "US 1940" -
+            // so a citation already written in Lost Cousins' own reference format for the 1940
+            // census could never be recognised. Uses the same USCensusTest helper as the general US
+            // census tests above since the LC pattern populates the identical Roll/ED/Page fields.
+            USCensusTest("1141/8-14/9A US 1940", CensusDate.USCENSUS1940, "1141", "8-14", "9A");
+            USCensusTest("2227/1-7/19A US 1940", CensusDate.USCENSUS1940, "2227", "1-7", "19A");
+            USCensusTest("544/1-2/10B US 1940", CensusDate.USCENSUS1940, "544", "1-2", "10B");
+
+            // confirms the old buggy wording ("US 1880" suffix) is no longer what this pattern (or
+            // any other) recognises as a 1940 reference - guards against the bug being reintroduced.
+            CensusReference notMatched = new("1141/8-14/9A US 1880", false);
+            Assert.IsTrue(notMatched.CensusYear.Equals(FactDate.UNKNOWN_DATE));
+        }
+
+        [TestMethod]
+        public void LcCensusPattern1881CanadaRegressionTests()
+        {
+            // Regression test for two copy-paste bugs in LC_CENSUS_PATTERN_1881CANADA: it flagged
+            // the country as Countries.UNITED_STATES instead of Countries.CANADA, and the regex
+            // itself required an impossible 4-5 segment reference instead of Lost Cousins' own
+            // 3-segment "District/Page/Family" format - so no Canadian 1881 reference written in
+            // that format could ever be recognised or matched.
+            LcCanadianCensusTest("186/9/30 Canada 1881", "186", "9", "30");
+            LcCanadianCensusTest("146/59/273 Canada 1881", "146", "59", "273");
+
+            // Regression test for an edge case found while fixing the above: the original 3-segment
+            // regex wasn't anchored, so a longer 4/5-segment reference (the disproven "ED/SD/.../
+            // Page/Family" format - see CensusReferenceCanadaTests) could still accidentally match by
+            // picking up an unrelated 3-number run from the middle of the string (e.g. reading
+            // "123/A/55/35/1" as if "55/35/1" were the whole reference). The pattern now requires a
+            // non-digit/non-slash boundary on both sides of the match to prevent that.
+            NoCanadianCensusMatch("123/A/55/35/1 Canada 1881");
+        }
+
+        static void LcCanadianCensusTest(string reference, string ED, string page, string family)
+        {
+            CensusReference censusRef = new(reference, false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.CANADACENSUS1881));
+            Assert.IsTrue(censusRef.Country.Equals(Countries.CANADA), $"Expected Country to be Canada but was '{censusRef.Country}'");
+            Assert.IsTrue(censusRef.ED.Equals(ED));
+            Assert.IsTrue(censusRef.Page.Equals(page));
+            Assert.IsTrue(censusRef.Family.Equals(family));
         }
 
         [TestMethod]
@@ -213,6 +268,12 @@ namespace UnitTests
             Assert.IsTrue(censusRef.Roll.Equals(Roll));
             Assert.IsTrue(censusRef.Page.Equals(page));
             Assert.IsTrue(censusRef.Family.Equals(family));
+        }
+
+        static void NoCanadianCensusMatch(string reference)
+        {
+            CensusReference censusRef = new(reference, false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(FactDate.UNKNOWN_DATE), $"Expected no census match but got {censusRef.CensusYear} with ED={censusRef.ED} Page={censusRef.Page} Family={censusRef.Family}");
         }
 
         static void USCensusTest(string reference, FactDate year, string roll, string ED, string page)
