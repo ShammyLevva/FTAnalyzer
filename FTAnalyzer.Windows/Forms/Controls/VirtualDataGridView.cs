@@ -55,7 +55,6 @@ namespace FTAnalyzer.Forms.Controls
             SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             ScrollBars = ScrollBars.Both;
             CellValueNeeded += OnCellValueNeeded;
-            ColumnWidthChanged += OnColumnWidthChanged; // for debugging purposes
             Resize += OnResizeChanged;
 
             FilterStringChanged += OnFilterStringChanged;
@@ -378,11 +377,6 @@ namespace FTAnalyzer.Forms.Controls
                 return;
             if (DataBoundItem(e.RowIndex) is T data)
                 e.Value = GetValueFor(data, Columns[e.ColumnIndex].DataPropertyName);
-        }
-
-        static void OnColumnWidthChanged(object? sender, DataGridViewColumnEventArgs e)
-        {
-            Debug.WriteLine($"Column {e.Column.Name} changed width to {e.Column.Width}");
         }
 
         protected abstract object GetValueFor(T data, string propertyName);
