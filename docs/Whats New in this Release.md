@@ -10,6 +10,7 @@ Treat a missing Baptism/Burial record as searchable, not a dead end
 Reinstated Parents age graph 
 Add optional debug logging for Google Geocoding to a file
 Colour BMD can now filter on burials and baptisms 
+Maps now support selecting USGS historical maps as a background layer
 
 **Bugfixes**
 Fix Duplicate checking of standarised names as well as Lost Cousins matching
@@ -23,6 +24,7 @@ Fix Edit Location greyed out after an interrupted geocode
 Fix Census "Export to Excel" always exporting 0 rows
 Fix 2nd monitor drag issue
 Fix intermittent ArgumentOutOfRangeException when filtering/sorting report grids
+Various fixes for Census reference checking including Canadian references that were misrecognised
 
 ## Version 10.3.0.0 - 5th July 2026
 **Updates**
