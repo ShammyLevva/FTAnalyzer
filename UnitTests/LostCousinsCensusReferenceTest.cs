@@ -95,13 +95,51 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void Canada1881BuildTests_RollOnlyFallsBackUnchanged()
+        public void Canada1881BuildTests_RollOnlyResolvesViaPlaceNameLookup()
         {
             // The common Ancestry citation for this census only ever captures the microfilm Roll
-            // number, a completely different identifier the District can't be derived from - Build()
-            // must fall through to the general CompactReference rather than fabricating a
-            // "/Page/Family" reference from an empty District.
+            // number (a completely different identifier the District can't be derived from) but does
+            // capture the "Census Place" text - Build() resolves the District from the sub-district
+            // name via CanadianCensusDistrict, using LAC's own 1881 district finding aid, rather than
+            // falling back to CompactReference. "Richibucto" resolves unambiguously to District 34
+            // (Kent, New Brunswick).
             CensusReference censusRef = new("Year: 1881; Census Place: Richibucto, Kent, New Brunswick; Roll: C_13184; Page: 32; Family No: 144", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.CANADACENSUS1881));
+            Assert.AreEqual(0, censusRef.ED.Length);
+            Assert.AreEqual("34/32/144", LostCousinsCensusReference.Build(censusRef));
+        }
+
+        [TestMethod]
+        public void Canada1881BuildTests_WoodlandsMarquetteManitoba()
+        {
+            // The exact real-world citation that prompted building CanadianCensusDistrict: Ancestry's
+            // Roll (C_13283) can't be turned into a District, but "Woodlands" resolves unambiguously
+            // to District 186 (Marquette, Manitoba) - matching what Lost Cousins itself needs.
+            CensusReference censusRef = new("Year: 1881; Census Place: Woodlands, Marquette, Manitoba; Roll: C_13283; Page: 9; Family No: 30", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.CANADACENSUS1881));
+            Assert.AreEqual(0, censusRef.ED.Length);
+            Assert.AreEqual("186/9/30", LostCousinsCensusReference.Build(censusRef));
+        }
+
+        [TestMethod]
+        public void Canada1881BuildTests_UnresolvablePlaceFallsBackUnchanged()
+        {
+            // A place name that doesn't appear anywhere in LAC's 1881 finding aid must fall through
+            // to the general CompactReference rather than fabricating a "/Page/Family" reference from
+            // an empty District.
+            CensusReference censusRef = new("Year: 1881; Census Place: Notarealplace, Nowhere, Manitoba; Roll: C_13283; Page: 9; Family No: 30", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.CANADACENSUS1881));
+            Assert.AreEqual(0, censusRef.ED.Length);
+            Assert.AreEqual(censusRef.CompactReference, LostCousinsCensusReference.Build(censusRef));
+        }
+
+        [TestMethod]
+        public void Canada1881BuildTests_AmbiguousPlaceWithoutMatchingProvinceFallsBackUnchanged()
+        {
+            // "St. Paul" is a genuine sub-district name collision in the source data (Quebec's
+            // Joliette district AND Manitoba's Lisgar district both have one) - if the citation's own
+            // province doesn't disambiguate it, Build() must not guess between them.
+            CensusReference censusRef = new("Year: 1881; Census Place: St. Paul, Somewhere, Nova Scotia; Roll: C_00000; Page: 1; Family No: 1", false);
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.CANADACENSUS1881));
             Assert.AreEqual(0, censusRef.ED.Length);
             Assert.AreEqual(censusRef.CompactReference, LostCousinsCensusReference.Build(censusRef));
