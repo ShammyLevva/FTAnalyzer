@@ -166,6 +166,16 @@ namespace FTAnalyzer.Theme
                         progressBar.BackColor = ActiveColors.Card;
                         progressBar.ForeColor = ActiveColors.Primary;
                         break;
+                    // NumericUpDown (e.g. udAgeFilter on the Census tab) had no case here at all -
+                    // every instance in the app stayed at its native white background/black text
+                    // regardless of theme, same gap as ComboBox before that case was added.
+                    case NumericUpDown numericUpDown:
+                        if (IsDefaultWindow(numericUpDown.BackColor))
+                        {
+                            numericUpDown.BackColor = ActiveColors.Card;
+                            numericUpDown.ForeColor = ActiveColors.Text;
+                        }
+                        break;
                     case TrackBar trackBar:
                         // tbDuplicateScore's designer explicitly sets BackColor to
                         // ControlLightLight (pure white) rather than leaving it at the plain

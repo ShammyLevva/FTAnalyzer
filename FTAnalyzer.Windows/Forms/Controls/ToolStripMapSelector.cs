@@ -42,6 +42,15 @@ namespace FTAnalyzer.Forms.Controls
             YearSelector = new ToolStripControlHost(yearControl) { Visible = false };
             yearControl.ValueChanged += YearControl_ValueChanged;
             SetupDropdown();
+            // yearControl lives inside a ToolStripControlHost, added to a form's toolstrip
+            // Items collection rather than its Controls collection - FormTheme.Apply only
+            // recurses into Controls (ToolStrip buttons live in .Items, deliberately not
+            // followed - see FormTheme.cs), so this control would otherwise never get themed
+            // and would stay on its default white background regardless of dark mode. Themed
+            // once here, matching every other secondary window's controls (e.g. dgReportSheet in
+            // ColourCensus) - dark mode is picked up on next open, not live.
+            yearControl.BackColor = Theme.ActiveColors.Card;
+            yearControl.ForeColor = Theme.ActiveColors.Text;
         }
 
         public void Setup(LinkLabel label, MapBox mapbox, TrackBar opacitySlider)
@@ -84,7 +93,13 @@ namespace FTAnalyzer.Forms.Controls
             mnuBingMapRoads = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.BingRoads), LinkLabelType.BING);
             mnuBingMapHybrid = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.BingHybrid), LinkLabelType.BING);
             usgsRequest = TileSourceFactory.CreateUsgsHistoricalRequest();
-            usgsRequest.HistoricalYear = (int)yearControl.Value;
+            // Deliberately NOT setting usgsRequest.HistoricalYear from yearControl.Value here -
+            // leaving it null gives the service's own best-available mosaic, which is what should
+            // render the first time USGS is selected. Setting it eagerly meant every fresh
+            // selection immediately applied whatever year was last persisted (1950 by default),
+            // and most quads have no imagery for an arbitrary specific year - see the blank-map
+            // bug this caused, and the HistoricalYear doc comment below. It only gets set once the
+            // user actually moves the year control themselves (YearControl_ValueChanged).
             mnuUsgsHistorical = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.UsgsHistorical, usgsRequest), LinkLabelType.USGS);
             //mnuNLS1843_1882 = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.NLS_1843_1882_OS_6in), LinkLabelType.NLS);
             //mnuNLS1885_1900 = new MapToolStripMenuItem(factory.CreateTileSource(TileSourceFactory.TileType.NLS_1885_1900_OS_1in), LinkLabelType.NLS);
@@ -161,6 +176,9 @@ namespace FTAnalyzer.Forms.Controls
             {
                 selectedMap = selectedOption;
                 selectedOption.Checked = true;
+                // Previously this button always just read "Map style" - the only way to tell what
+                // was actually selected was to reopen the dropdown and look for the checkmark.
+                Text = selectedOption.Text;
                 bool isOpenStreetMap = string.Equals(selectedOption.Name, mnuOpenStreetMap.Name, StringComparison.OrdinalIgnoreCase);
                 opacitySlider.Visible = !isOpenStreetMap;
                 YearSelector.Visible = string.Equals(selectedOption.Name, mnuUsgsHistorical.Name, StringComparison.OrdinalIgnoreCase);

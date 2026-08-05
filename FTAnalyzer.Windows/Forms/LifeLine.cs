@@ -1,3 +1,4 @@
+using FTAnalyzer.Graphics;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Properties;
 using FTAnalyzer.Shared.Utilities;
@@ -49,13 +50,47 @@ namespace FTAnalyzer.Forms
             SetupMap();
             dgFacts.AutoGenerateColumns = false;
             dgIndividuals.AutoGenerateColumns = false;
+            ThemeGrids();
             SortableBindingList<Individual> individuals = new(ft.AllIndividuals.Where(i => i.GeoLocationCount > 0));
             individuals.Sort(new NameComparer<Individual>(true, false));
             dgIndividuals.DataSource = individuals;
+            dgIndividuals.RowTemplate.Height = (int)(FontSettings.Default.FontHeight * GraphicsUtilities.GetCurrentScaling());
+            foreach (DataGridViewRow row in dgIndividuals.Rows)
+                row.Height = dgIndividuals.RowTemplate.Height;
             DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
             int splitheight = RegistrySettings.GetIntRegistryValue("Lifeline Facts Splitter Distance", -1);
             if (splitheight != -1)
                 splitContainerFacts.SplitterDistance = Height - splitheight;
+        }
+
+        // FormTheme.Apply skips DataGridView entirely (each grid themes itself at its own source
+        // - see FormTheme.cs) - dgIndividuals/dgFacts aren't VirtualDataGridViews, so they never
+        // picked up dark mode at all, staying on their Designer-baked light colors (same gap
+        // fixed for Places.dgFacts and previously for ColourCensus/ColourBMD).
+        void ThemeGrids()
+        {
+            foreach (DataGridView grid in new[] { dgIndividuals, dgFacts })
+            {
+                grid.BorderStyle = Theme.ActiveColors.IsDark ? BorderStyle.None : BorderStyle.Fixed3D;
+                NativeMethods.SetScrollBarTheme(grid, Theme.ActiveColors.IsDark);
+                foreach (Control child in grid.Controls)
+                {
+                    if (child is ScrollBar)
+                        NativeMethods.SetScrollBarTheme(child, Theme.ActiveColors.IsDark);
+                }
+                grid.ColumnHeadersDefaultCellStyle.BackColor = Theme.ActiveColors.Primary;
+                grid.ColumnHeadersDefaultCellStyle.ForeColor = Theme.ActiveColors.OnPrimary;
+                grid.GridColor = Theme.ActiveColors.Border;
+                Color rowColor = Theme.ActiveColors.IsDark ? Theme.ActiveColors.Background : Theme.ActiveColors.Card;
+                Color alternateRowColor = Theme.ActiveColors.IsDark ? Theme.ActiveColors.Card : Theme.ActiveColors.Background;
+                grid.BackgroundColor = rowColor;
+                grid.RowsDefaultCellStyle.BackColor = rowColor;
+                grid.RowsDefaultCellStyle.ForeColor = Theme.ActiveColors.Text;
+                grid.AlternatingRowsDefaultCellStyle.BackColor = alternateRowColor;
+                grid.AlternatingRowsDefaultCellStyle.ForeColor = Theme.ActiveColors.Text;
+                grid.DefaultCellStyle.SelectionBackColor = Theme.ActiveColors.PrimaryPale;
+                grid.DefaultCellStyle.SelectionForeColor = Theme.ActiveColors.Text;
+            }
         }
 
         void DatabaseHelper_GeoLocationUpdated(object? location, EventArgs e)
@@ -185,6 +220,12 @@ namespace FTAnalyzer.Forms
                 }
             }
             dgFacts.DataSource = new SortableBindingList<IDisplayFact>(displayFacts);
+            // Reassigning DataSource rebuilds every row from RowTemplate, quietly reverting them
+            // to the grid's compile-time default height regardless of the user's font-scale
+            // setting (same squish bug fixed previously in ColourCensus/ColourBMD/Places).
+            dgFacts.RowTemplate.Height = (int)(FontSettings.Default.FontHeight * GraphicsUtilities.GetCurrentScaling());
+            foreach (DataGridViewRow row in dgFacts.Rows)
+                row.Height = dgFacts.RowTemplate.Height;
             txtCount.Text = $"{dgIndividuals.SelectedRows.Count} Individual(s) selected, {dgFacts.RowCount} Geolocated fact(s) displayed";
 
             Envelope expand = MapHelper.GetExtents(lifelines);

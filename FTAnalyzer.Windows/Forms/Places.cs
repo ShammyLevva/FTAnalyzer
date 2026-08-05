@@ -1,4 +1,5 @@
 using FTAnalyzer.Forms.Controls;
+using FTAnalyzer.Graphics;
 using FTAnalyzer.Mapping;
 using FTAnalyzer.Properties;
 using FTAnalyzer.Shared.Utilities;
@@ -53,11 +54,39 @@ namespace FTAnalyzer.Forms
             mnuHideScaleBar.Checked = MappingSettings.Default.HideScaleBar;
             SetupMap();
             dgFacts.AutoGenerateColumns = false;
+            ThemeFactsGrid();
             DatabaseHelper.GeoLocationUpdated += new EventHandler(DatabaseHelper_GeoLocationUpdated);
             int splitheight = RegistrySettings.GetIntRegistryValue("Places Facts Splitter Distance", -1);
             if (splitheight != -1)
                 splitContainerFacts.SplitterDistance = Height - splitheight;
             splitContainerMap.SplitterDistance = RegistrySettings.GetIntRegistryValue("Places Map Splitter Distance", splitContainerMap.SplitterDistance);
+        }
+
+        // FormTheme.Apply skips DataGridView entirely (each grid themes itself at its own source
+        // - see FormTheme.cs) - dgFacts isn't a VirtualDataGridView, so it never picked up dark
+        // mode at all, staying on its Designer-baked light colors (same gap fixed previously for
+        // ColourCensus.dgReportSheet and ColourBMD.dgBMDReportSheet).
+        void ThemeFactsGrid()
+        {
+            dgFacts.BorderStyle = Theme.ActiveColors.IsDark ? BorderStyle.None : BorderStyle.Fixed3D;
+            NativeMethods.SetScrollBarTheme(dgFacts, Theme.ActiveColors.IsDark);
+            foreach (Control child in dgFacts.Controls)
+            {
+                if (child is ScrollBar)
+                    NativeMethods.SetScrollBarTheme(child, Theme.ActiveColors.IsDark);
+            }
+            dgFacts.ColumnHeadersDefaultCellStyle.BackColor = Theme.ActiveColors.Primary;
+            dgFacts.ColumnHeadersDefaultCellStyle.ForeColor = Theme.ActiveColors.OnPrimary;
+            dgFacts.GridColor = Theme.ActiveColors.Border;
+            Color rowColor = Theme.ActiveColors.IsDark ? Theme.ActiveColors.Background : Theme.ActiveColors.Card;
+            Color alternateRowColor = Theme.ActiveColors.IsDark ? Theme.ActiveColors.Card : Theme.ActiveColors.Background;
+            dgFacts.BackgroundColor = rowColor;
+            dgFacts.RowsDefaultCellStyle.BackColor = rowColor;
+            dgFacts.RowsDefaultCellStyle.ForeColor = Theme.ActiveColors.Text;
+            dgFacts.AlternatingRowsDefaultCellStyle.BackColor = alternateRowColor;
+            dgFacts.AlternatingRowsDefaultCellStyle.ForeColor = Theme.ActiveColors.Text;
+            dgFacts.DefaultCellStyle.SelectionBackColor = Theme.ActiveColors.PrimaryPale;
+            dgFacts.DefaultCellStyle.SelectionForeColor = Theme.ActiveColors.Text;
         }
 
         void DatabaseHelper_GeoLocationUpdated(object? location, EventArgs e)
@@ -175,6 +204,12 @@ namespace FTAnalyzer.Forms
                 {
                     txtCount.Text = $"Downloading map tiles and computing clusters for {displayFacts.Count} facts. Please wait";
                     dgFacts.DataSource = new SortableBindingList<IDisplayFact>([.. displayFacts]);
+                    // Reassigning DataSource rebuilds every row from RowTemplate, quietly reverting
+                    // them to the grid's compile-time default height regardless of the user's font-
+                    // scale setting (same squish bug fixed previously in ColourCensus/ColourBMD).
+                    dgFacts.RowTemplate.Height = (int)(FontSettings.Default.FontHeight * GraphicsUtilities.GetCurrentScaling());
+                    foreach (DataGridViewRow row in dgFacts.Rows)
+                        row.Height = dgFacts.RowTemplate.Height;
 
                     Envelope expand = MapHelper.GetExtents(factLocs);
                     mapBox1.Map.ZoomToBox(expand);
