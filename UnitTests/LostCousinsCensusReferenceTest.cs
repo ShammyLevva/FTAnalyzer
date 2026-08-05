@@ -60,11 +60,11 @@ namespace UnitTests
         [TestMethod]
         public void EW1841BuildTests_NoBookNumberDoesNotFabricateSeeImageText()
         {
-            // Regression test: most 1841 citations don't capture a book number at all (it's stamped
-            // on the census image itself, not usually recorded in a source citation), and
-            // BuildReference's compact display form substitutes "see image" text for the user in that
-            // case - a hint, not a stored value - which must never leak into the string compared
-            // against Lost Cousins' own blank field.
+            // Regression test: Lost Cousins' own "Add an Ancestor" form marks Book as required for
+            // 1841, so a citation missing one can never match regardless of how this string is built
+            // - but BuildReference's compact display form substitutes literal "see image" text for
+            // the user in that case (a hint, not a stored value), and that text must never leak into
+            // the comparison string even though the match was already doomed either way.
             CensusReference censusRef = new("HO107, Piece 704, Folio 11, Page  14", false);
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1841));
             Assert.AreEqual(string.Empty, censusRef.Book);
