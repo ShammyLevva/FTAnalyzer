@@ -11,6 +11,8 @@ Reinstated Parents age graph
 Add optional debug logging for Google Geocoding to a file
 Colour BMD can now filter on burials and baptisms 
 Maps now support selecting USGS historical maps as a background layer
+Tidied up and removed old code for Mac & iOS now that web version exists
+Added support for recognising more Canadian census references
 
 **Bugfixes**
 Fix Duplicate checking of standarised names as well as Lost Cousins matching
