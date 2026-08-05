@@ -49,6 +49,39 @@ namespace UnitTests
         }
 
         [TestMethod]
+        public void EW1841BuildTests_BookPresent()
+        {
+            // Lost Cousins' 1841 schema (census_code=1841) is Piece/Book/Folio/Page.
+            CensusReference censusRef = new("Database online. Class: HO107; Piece 709; Book: 6; Civil Parish: StLeonard Shoreditch; County: Middlesex; Enumeration District: 19;Folio: 53; Page: 15; Line: 16; GSU roll: 438819.", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1841));
+            Assert.AreEqual("709/6/53/15", LostCousinsCensusReference.Build(censusRef));
+        }
+
+        [TestMethod]
+        public void EW1841BuildTests_NoBookNumberDoesNotFabricateSeeImageText()
+        {
+            // Regression test: most 1841 citations don't capture a book number at all (it's stamped
+            // on the census image itself, not usually recorded in a source citation), and
+            // BuildReference's compact display form substitutes "see image" text for the user in that
+            // case - a hint, not a stored value - which must never leak into the string compared
+            // against Lost Cousins' own blank field.
+            CensusReference censusRef = new("HO107, Piece 704, Folio 11, Page  14", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1841));
+            Assert.AreEqual(string.Empty, censusRef.Book);
+            Assert.AreEqual("704/11/14", LostCousinsCensusReference.Build(censusRef));
+        }
+
+        [TestMethod]
+        public void EW1881BuildTests()
+        {
+            // Lost Cousins' 1881 schema (census_code=RG11) is Piece/Folio/Page - no Schedule field
+            // exists on the website at all.
+            CensusReference censusRef = new("Class: RG11; Piece: 890; Folio: 114; Page: 9; GSU roll: 1341211", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.UKCENSUS1881));
+            Assert.AreEqual("890/114/9", LostCousinsCensusReference.Build(censusRef));
+        }
+
+        [TestMethod]
         public void EW1911BuildTests_SchedulePresent()
         {
             // Lost Cousins' 0ENG field set for 1911 is Piece/Schedule - no Page field exists on the
@@ -87,7 +120,11 @@ namespace UnitTests
         {
             // Lost Cousins' own reference for this census is "District/Page/Family" - this is only
             // matchable when a citation explicitly captured the District (CensusReference's own
-            // "District NNN" pattern), which this reference does.
+            // "District NNN" pattern), which this reference does. This citation's "District 146/B"
+            // also captures a lettered Sub-District, but live testing against a real Lost Cousins
+            // account (see CensusReferenceCanadaTests in CensusReferenceTest.cs) confirmed the
+            // website's own reference never has a separate Sub-District segment, so it's correctly
+            // excluded here despite GetCensusSpecificFields sending one as a separate field on upload.
             CensusReference censusRef = new("1881 census - District 146/B, Page 59, Family 273 - living at Rainham, Haldimand, Ontario, Canada.", false);
             Assert.IsTrue(censusRef.CensusYear.Equals(CensusDate.CANADACENSUS1881));
             Assert.IsTrue(censusRef.ED.Length > 0);
