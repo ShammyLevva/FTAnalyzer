@@ -16,9 +16,13 @@ namespace UnitTests
     {
         public TestContext? TestContext { get; set; }
 
-        static CensusReference? ParseNote(string note, string censusYear, CensusDate censusDate)
+        // birthDate must predate censusYear - IsValidCensus requires FactErrorLevel.GOOD, and a
+        // census fact for someone not yet born is exactly the kind of implausible-date error that
+        // fails that check, which would silently turn a genuine parsing bug into a null
+        // CensusReference indistinguishable from "the note simply didn't parse".
+        static CensusReference? ParseNote(string note, string censusYear, CensusDate censusDate, string birthDate = "1 JAN 1850")
         {
-            Individual person = ComparatorTestHelpers.MakeIndividualWithCensus("John", "Smith", "M", "1 JAN 1850", censusYear, note);
+            Individual person = ComparatorTestHelpers.MakeIndividualWithCensus("John", "Smith", "M", birthDate, censusYear, note);
             Family family = new(person, "F001");
             CensusFamily censusFamily = new(family, censusDate);
             return censusFamily.Husband!.CensusReference;
@@ -102,24 +106,48 @@ namespace UnitTests
             Assert.AreEqual("41", parsed.Family);
         }
 
-        // Census years where no single note can capture every field the matching pattern needs
-        // (missing Book field, needs a Parish name instead of a district number, or no format
-        // exists at all) must say so plainly rather than hand back a note that looks plausible but
-        // would parse wrong or not at all.
+        // Uses EW_CENSUS_1841_51_PATTERN8's bare "HO107/Piece/Book/Folio/Page" form rather than the
+        // LC-specific pattern used for 1881/1911 (which only has room for 3 numbers, no Book field).
         [TestMethod]
-        public void EnglandWales1841_HasNoQuickFix()
+        public void EnglandWales1841_RoundTrips()
         {
-            string? note = LostCousinsCensusReference.SuggestedCitationNote("6874/12/215/9", CensusDate.EWCENSUS1841);
-            Assert.AreEqual("No quick-fix note for this census - see the reference format guide", note);
+            string? note = LostCousinsCensusReference.SuggestedCitationNote("709/6/53/15", CensusDate.EWCENSUS1841);
+            Assert.AreEqual("HO107/709/6/53/15", note);
+
+            CensusReference? parsed = ParseNote(note!, "1841", CensusDate.EWCENSUS1841, "1 JAN 1800");
+
+            Assert.IsNotNull(parsed);
+            Assert.AreEqual(CensusReference.ReferenceStatus.GOOD, parsed.Status);
+            Assert.AreEqual("709", parsed.Piece);
+            Assert.AreEqual("6", parsed.Book);
+            Assert.AreEqual("53", parsed.Folio);
+            Assert.AreEqual("15", parsed.Page);
         }
 
+        // "21" is a real Registration District from ScottishParishes.xml (Kirkwall and St.Ola,
+        // Orkney) - proves this isn't just regex-matching to GOOD, but that
+        // ScottishParish.FindParishFromID genuinely resolves the RD Lost Cousins shows back to a
+        // real parish rather than silently falling back to UNKNOWN_PARISH ("UNK"), which would
+        // still produce Status GOOD but the wrong Build() output on the way back out.
         [TestMethod]
-        public void Scotland1881_HasNoQuickFix()
+        public void Scotland1881_RoundTrips()
         {
-            string? note = LostCousinsCensusReference.SuggestedCitationNote("644/2/9", CensusDate.SCOTCENSUS1881);
-            Assert.AreEqual("No quick-fix note for this census - see the reference format guide", note);
+            string? note = LostCousinsCensusReference.SuggestedCitationNote("21/5/12", CensusDate.SCOTCENSUS1881);
+            Assert.AreEqual("21/5/12 Scotland 1881", note);
+
+            CensusReference? parsed = ParseNote(note!, "1881", CensusDate.SCOTCENSUS1881);
+
+            Assert.IsNotNull(parsed);
+            Assert.AreEqual(CensusReference.ReferenceStatus.GOOD, parsed.Status);
+            Assert.AreEqual("21", parsed.Parish);
+            Assert.AreEqual("5", parsed.ED);
+            Assert.AreEqual("12", parsed.Page);
+            Assert.AreEqual("21/5/12", LostCousinsCensusReference.Build(parsed));
         }
 
+        // US 1880 genuinely has no quick-fix format: every existing US census pattern requires an
+        // Enumeration District field, which Lost Cousins' own 1880 reference never has (Roll/Page
+        // only) - there's no pattern to reuse the way there was for England & Wales 1841.
         [TestMethod]
         public void US1880_HasNoQuickFix()
         {
