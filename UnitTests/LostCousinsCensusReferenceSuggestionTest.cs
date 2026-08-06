@@ -145,14 +145,51 @@ namespace UnitTests
             Assert.AreEqual("21/5/12", LostCousinsCensusReference.Build(parsed));
         }
 
-        // US 1880 genuinely has no quick-fix format: every existing US census pattern requires an
-        // Enumeration District field, which Lost Cousins' own 1880 reference never has (Roll/Page
-        // only) - there's no pattern to reuse the way there was for England & Wales 1841.
+        // Uses the new LC_CENSUS_PATTERN_1880US, added specifically for this - every general-purpose
+        // US census pattern requires an Enumeration District field, which Lost Cousins' own 1880
+        // reference never has (Roll/Page only), so none of them could be reused the way
+        // EW_CENSUS_1841_51_PATTERN8 was for 1841.
         [TestMethod]
-        public void US1880_HasNoQuickFix()
+        public void US1880_RoundTrips()
         {
-            string? note = LostCousinsCensusReference.SuggestedCitationNote("1234/45", CensusDate.USCENSUS1880);
-            Assert.AreEqual("No quick-fix note for this census - see the reference format guide", note);
+            string? note = LostCousinsCensusReference.SuggestedCitationNote("195/71D", CensusDate.USCENSUS1880);
+            Assert.AreEqual("195/71D US 1880", note);
+
+            CensusReference? parsed = ParseNote(note!, "1880", CensusDate.USCENSUS1880);
+
+            Assert.IsNotNull(parsed);
+            Assert.AreEqual(CensusReference.ReferenceStatus.GOOD, parsed.Status);
+            Assert.AreEqual("195", parsed.Roll);
+            Assert.AreEqual("71D", parsed.Page);
+        }
+
+        // The lookaround guard must reject a bare Roll/Page pair that's actually the middle of a
+        // longer number run (e.g. part of a Piece/Folio/Page reference for a different census sharing
+        // the same note) rather than a genuine standalone 1880 reference - the same protection
+        // LC_CENSUS_PATTERN_1881CANADA already has (see CensusReferenceTest's
+        // LcCensusPattern1881CanadaRegressionTests), and for the same reason: with only 2 numbers to
+        // anchor on instead of 3, this pattern is the most exposed of the seven to a false positive.
+        // Goes through the public CensusReference constructor directly (RegexPatterns is internal),
+        // matching how CensusReferenceTest's own NoCanadianCensusMatch checks the sibling pattern.
+        [TestMethod]
+        public void US1880_DoesNotMatchInsideLongerNumberRun()
+        {
+            CensusReference censusRef = new("1/195/71D/9 US 1880", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(FactDate.UNKNOWN_DATE), $"Expected no census match but got {censusRef.CensusYear} with Roll={censusRef.Roll} Page={censusRef.Page}");
+        }
+
+        // Real defect found while building this pattern: the first version of the lookaround guard
+        // only excluded a digit or slash (matching LC_CENSUS_PATTERN_1881CANADA's), which let it
+        // match "1141/8" out of the middle of a 1940-style hyphenated ED ("8-14") - a hyphen doesn't
+        // trip a [\d\/]-only guard. This exact text is CensusReferenceTest's
+        // LcCensusPattern1940USRegressionTests deliberately-wrong-suffix case (a genuine 1940
+        // Roll/ED/Page reference with "US 1880" on the end instead of "US 1940", used there to guard
+        // against a different old bug) - it must still match nothing at all.
+        [TestMethod]
+        public void US1880_DoesNotMatchAcrossHyphenatedEnumerationDistrict()
+        {
+            CensusReference censusRef = new("1141/8-14/9A US 1880", false);
+            Assert.IsTrue(censusRef.CensusYear.Equals(FactDate.UNKNOWN_DATE), $"Expected no census match but got {censusRef.CensusYear} with Roll={censusRef.Roll} Page={censusRef.Page}");
         }
 
         // Real-world defect this test caught before the ReferenceEquals fix: England & Wales 1911
