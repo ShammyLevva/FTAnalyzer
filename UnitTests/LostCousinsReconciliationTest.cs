@@ -65,5 +65,53 @@ namespace UnitTests
 
             Assert.AreEqual(0, matches.Count);
         }
+
+        [TestMethod]
+        public void Reconcile_DoesNotStealMatchForUnrelatedCandidateSharingSamePageReference()
+        {
+            // Regression test for a real bug: EW1841's Piece/Book/Folio/Page reference identifies a
+            // whole census PAGE, which can genuinely hold more than one household. Here "Chadwick,
+            // James" and "Chadwick, Mary Ellen" are two members of one real family on Lost Cousins,
+            // both sharing reference 511/8/6/6 - but an unrelated "Mary Ireland" elsewhere in the tree
+            // happens to have a citation that resolves to the exact same page reference too (a genuine
+            // data coincidence, not a code bug), and shares Mary Ellen's forename and a close-enough
+            // birth year. Before the surname-aware dedup, whichever of the two candidates happened to
+            // be processed first could silently steal the "Chadwick, Mary Ellen" website entry - and,
+            // via CreateConfirmationFact, would have had a Lost Cousins fact fabricated onto the wrong
+            // person. Mary Ireland's own surname doesn't match, so she must lose the tie-break.
+            LostCousin jamesWebsite = new("Chadwick, James", "1816", "511/8/6/6", "England 1841", null!, false);
+            LostCousin maryEllenWebsite = new("Chadwick, Mary Ellen", "1840", "511/8/6/6", "England 1841", null!, false);
+
+            Individual james = ComparatorTestHelpers.MakeIndividualWithCensus(
+                "James", "Chadwick", "M", "1 JAN 1816", "1841",
+                "Database online. Class: HO107; Piece 511; Book: 8; Folio: 6; Page: 6.", "I001");
+            Family family = new(james, "F010");
+            Individual maryEllen = ComparatorTestHelpers.MakeIndividualWithCensus(
+                "Mary Ellen", "Chadwick", "F", "1 JAN 1840", "1841",
+                "Database online. Class: HO107; Piece 511; Book: 8; Folio: 6; Page: 6.", "I002");
+            family.Children.Add(maryEllen);
+            CensusFamily censusFamily = new(family, CensusDate.UKCENSUS1841);
+
+            // Mary Ireland: unrelated, own solo family, same page reference by coincidence.
+            Individual maryIreland = ComparatorTestHelpers.MakeIndividualWithCensus(
+                "Mary", "Ireland", "F", "1 JAN 1838", "1841",
+                "Database online. Class: HO107; Piece 511; Book: 8; Folio: 6; Page: 6.", "I003");
+            Family irelandFamily = new(maryIreland, "F011");
+            CensusFamily irelandCensusFamily = new(irelandFamily, CensusDate.UKCENSUS1841);
+
+            List<CensusIndividual> candidates = [.. censusFamily.Members, .. irelandCensusFamily.Members];
+
+            var (stillMissing, confirmed) = LostCousinsReconciliation.Reconcile([jamesWebsite, maryEllenWebsite], candidates);
+
+            CensusIndividual maryEllenCandidate = censusFamily.Children.Single(c => c.IndividualID == "I002");
+            CensusIndividual maryIrelandCandidate = irelandCensusFamily.Wife!;
+
+            Assert.IsTrue(confirmed.Any(m => m.WebsiteEntry == maryEllenWebsite && m.Individual == maryEllenCandidate),
+                "the real Mary Ellen Chadwick must win the match");
+            Assert.IsFalse(confirmed.Any(m => m.Individual == maryIrelandCandidate),
+                "Mary Ireland must not be confirmed against anyone's entry");
+            Assert.IsTrue(stillMissing.Contains(maryIrelandCandidate),
+                "Mary Ireland goes back to still-missing rather than being silently dropped");
+        }
     }
 }

@@ -35,6 +35,43 @@ namespace UnitTests
             CensusFamily censusFamily = new(family, CensusDate.UKCENSUS1881);
             return censusFamily.Husband!;
         }
+
+        // Builds an individual with a real CENS fact - citation text is added as a plain note on the
+        // fact (no SOUR/source registration needed), the same path CensusReference itself already
+        // recognises for a citation with no formal source record - see CensusReference(Fact, XmlNode,
+        // CensusReference) checking Fact.Comment when no SOUR-based reference resolved anything.
+        internal static Individual MakeIndividualWithCensus(string forename, string surname, string sex, string birthDate, string censusYear, string citation, string id = "I001")
+        {
+            string name = $"{forename} /{surname}/";
+            string xml = $"<INDI><NAME>{name}</NAME><SEX>{sex}</SEX><BIRT><DATE>{birthDate.ToUpper()}</DATE></BIRT>" +
+                          $"<CENS><DATE>{censusYear}</DATE><NOTE>{System.Security.SecurityElement.Escape(citation)}</NOTE></CENS></INDI>";
+            XmlDocument doc = new() { XmlResolver = null };
+            doc.LoadXml(xml);
+            XmlAttribute attr = doc.CreateAttribute("ID");
+            attr.Value = id;
+            doc.DocumentElement?.SetAttributeNode(attr);
+            return new Individual(doc.FirstChild ?? doc, new Progress<string>());
+        }
+
+        // No CENS fact at all - a genuinely absent citation, as opposed to one that failed to parse.
+        internal static Individual MakeIndividualNoCensus(string forename, string surname, string sex, string birthDate, string id = "I001")
+        {
+            string name = $"{forename} /{surname}/";
+            string xml = $"<INDI><NAME>{name}</NAME><SEX>{sex}</SEX><BIRT><DATE>{birthDate.ToUpper()}</DATE></BIRT></INDI>";
+            XmlDocument doc = new() { XmlResolver = null };
+            doc.LoadXml(xml);
+            XmlAttribute attr = doc.CreateAttribute("ID");
+            attr.Value = id;
+            doc.DocumentElement?.SetAttributeNode(attr);
+            return new Individual(doc.FirstChild ?? doc, new Progress<string>());
+        }
+
+        // "1881 census - District {district}/B, Page {page}, Family {family} - living at Rainham,
+        // Haldimand, Ontario, Canada." - same real-world Canada 1881 citation shape already proven to
+        // parse correctly in LostCousinsCensusReferenceTest.Canada1881BuildTests_DistrictPresent (the
+        // "/B" lettered sub-district suffix is part of what the regex recognises as this pattern).
+        internal static string CanadaCitation(int district, int page, int family) =>
+            $"1881 census - District {district}/B, Page {page}, Family {family} - living at Rainham, Haldimand, Ontario, Canada.";
     }
 
     // Minimal IDisplayIndividual stub for properties not settable on Individual (Ahnentafel, BudgieCode)
