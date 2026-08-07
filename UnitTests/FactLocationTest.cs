@@ -455,5 +455,76 @@ namespace UnitTests
             Assert.IsTrue(scotlandLoc.CompareTo(usaLoc) < 0); // "Scotland" < "United States" ordinally
             Assert.IsTrue(usaLoc.CompareTo(scotlandLoc) > 0);
         }
+
+        // A UK postcode tacked onto the end of a segment - either its own comma-separated "level"
+        // or glued onto a place name with no comma of its own - used to get misread as if it WERE
+        // the country (see StripTrailingPostcode in FactLocation.cs). These are the exact examples
+        // that surfaced the bug, plus a couple of "must NOT strip" cases guarding the false-positive
+        // tradeoffs that fix deliberately accepts.
+        [TestMethod]
+        public void StripTrailingPostcodeTest()
+        {
+            FactLocation.LoadConversions(Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\..\\FTAnalyzer.Shared\\FTAnalyzer.Shared"));
+            GeneralSettings.Default.AllowEmptyLocations = false;
+
+            // Whole segment is nothing but a postcode - collapses away via the existing empty-field cascade.
+            FactLocation fullPostcodeSegment = FactLocation.GetLocation("6 Sussex Road, Sk3 0Jl");
+            Assert.AreEqual("6 Sussex Road", fullPostcodeSegment.ToString());
+
+            // Bare outward/district code glued onto the end of a place name with no comma of its own.
+            // Once the "Se2"/"E8" noise is stripped, the existing Country/Region pipeline further
+            // downstream (unrelated to this fix) correctly recognises "London" isn't a country and
+            // shifts it to Region, deriving "England" as the real country.
+            FactLocation outwardOnlyMixedCase = FactLocation.GetLocation("Abbey Wood, London Se2");
+            Assert.AreEqual("Abbey Wood, London, England", outwardOnlyMixedCase.ToString());
+
+            FactLocation outwardOnlySingleLetter = FactLocation.GetLocation("Hackney, London E8");
+            Assert.AreEqual("Hackney, London, England", outwardOnlySingleLetter.ToString());
+
+            // A full Canadian postal code's unit group doesn't fit the UK unit-code shape (digit +
+            // 2 letters), so the whole thing is left alone rather than partially mangled.
+            FactLocation canadianPostcode = FactLocation.GetLocation("Ottawa, Ontario K1A 0B1");
+            string canadianResult = canadianPostcode.ToString().ToUpperInvariant();
+            StringAssert.Contains(canadianResult, "K1A");
+            StringAssert.Contains(canadianResult, "0B1");
+
+            // Trailing plain digits with no letter prefix never match - safe against dates/numbers.
+            FactLocation trailingNumber = FactLocation.GetLocation("Somewhere Village, World War 1");
+            StringAssert.Contains(trailingNumber.ToString(), "World War 1");
+        }
+
+        // "15 Some Road, Hackney, E8" is a common real-world way to write a London address - the
+        // postcode area letters stand in for "London" entirely, with nothing else in that segment.
+        // Stripping the code alone would lose the only clue this was a London address at all, so
+        // StripTrailingPostcode puts "London" back when that happens and nothing else already says so.
+        [TestMethod]
+        public void StripTrailingPostcode_InjectsLondonTest()
+        {
+            FactLocation.LoadConversions(Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\..\\FTAnalyzer.Shared\\FTAnalyzer.Shared"));
+            GeneralSettings.Default.AllowEmptyLocations = false;
+
+            // Bare London-area code as its own trailing segment - "London" isn't mentioned anywhere else.
+            FactLocation bareEastLondon = FactLocation.GetLocation("15 Some Road, Hackney, E8");
+            Assert.AreEqual("15 Some Road, Hackney, London, England", bareEastLondon.ToString());
+
+            FactLocation bareSouthWestLondon = FactLocation.GetLocation("Chelsea, SW1");
+            Assert.AreEqual("Chelsea, London, England", bareSouthWestLondon.ToString());
+
+            // Two-letter London area code (EC/WC/NW/SE/SW), not just the single-letter ones.
+            FactLocation bareNorthWestLondon = FactLocation.GetLocation("Kilburn, NW6");
+            Assert.AreEqual("Kilburn, London, England", bareNorthWestLondon.ToString());
+
+            // "London" is already spelled out elsewhere - must NOT get a second, redundant injection.
+            FactLocation alreadyMentionsLondon = FactLocation.GetLocation("Hackney, London, E8");
+            Assert.AreEqual("Hackney, London, England", alreadyMentionsLondon.ToString());
+
+            // A non-London outward code standing alone must NOT trigger the London injection - only
+            // the eight London-exclusive area letters (E/EC/N/NW/SE/SW/W/WC) qualify. "Sunderland"
+            // getting "County Durham, England" appended is pre-existing known-place enrichment
+            // unrelated to this fix (see FactLocationConstructorTest) - the point here is just that
+            // "London" is nowhere in the result.
+            FactLocation nonLondonBareCode = FactLocation.GetLocation("Sunderland, SR1");
+            Assert.AreEqual("Sunderland, County Durham, England", nonLondonBareCode.ToString());
+        }
     }
 }

@@ -13,6 +13,7 @@ Colour BMD can now filter on burials and baptisms
 Maps now support selecting USGS historical maps as a background layer
 Tidied up and removed old code for Mac & iOS now that web version exists
 Added support for recognising more Canadian census references
+Added support for recognising locations where a postcode is included in the location eg: "London SW1A 1AA"
 
 **Bugfixes**
 Fix Duplicate checking of standarised names as well as Lost Cousins matching
