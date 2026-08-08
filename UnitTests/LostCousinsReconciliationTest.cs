@@ -113,5 +113,36 @@ namespace UnitTests
             Assert.IsTrue(stillMissing.Contains(maryIrelandCandidate),
                 "Mary Ireland goes back to still-missing rather than being silently dropped");
         }
+
+        [TestMethod]
+        public void Reconcile_FallsBackToOwnReferenceWhenHeadOfHouseholdWasElsewhereThatCensus()
+        {
+            // Regression test for a real bug report: a father remarried after his first wife died,
+            // and by the 1911 census was living with his second wife at a different address under a
+            // different reference - but he's still alive at the census date, so CensusFamily.
+            // HeadOfHousehold (Husband ?? Wife ?? eldest child) picks him regardless, with no check
+            // that he was actually enumerated WITH this family that year. His son's HouseholdCensusReference
+            // then silently resolved to the father's unrelated reference instead of the son's own -
+            // correct - one, so a real My Ancestors entry ("Burness, John George", ref 30498/158) never
+            // matched despite the son's own citation being exactly right.
+            Individual father = ComparatorTestHelpers.MakeIndividualWithCensus(
+                "John", "Burness", "M", "1 JAN 1854", "1911",
+                "RG14PN30546 RG78PN1751 RD558 SD1 ED8 SN55", "IFATHER");
+            Family family = new(father, "F900");
+            Individual son = ComparatorTestHelpers.MakeIndividualWithCensus(
+                "John George", "Burness", "M", "9 SEP 1878", "1911",
+                "RG14PN30498 RG78PN1749 RD557 SD3 ED3 SN158", "ISON");
+            family.Children.Add(son);
+            CensusFamily censusFamily = new(family, CensusDate.EWCENSUS1911);
+
+            LostCousin website = new("Burness, John George", "1878", "30498/158", "England 1911", null!, false);
+
+            var (stillMissing, confirmed) = LostCousinsReconciliation.Reconcile([website], [.. censusFamily.Members]);
+
+            CensusIndividual sonCandidate = censusFamily.Children.Single(c => c.IndividualID == "ISON");
+            Assert.IsTrue(confirmed.Any(m => m.WebsiteEntry == website && m.Individual == sonCandidate),
+                "the son's own correct reference must be tried once the head of household's (unrelated) reference fails to match");
+            Assert.IsFalse(stillMissing.Contains(sonCandidate));
+        }
     }
 }
