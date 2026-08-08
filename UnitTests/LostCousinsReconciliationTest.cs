@@ -1,3 +1,4 @@
+using System.Xml;
 using FTAnalyzer;
 using FTAnalyzer.Exports;
 
@@ -143,6 +144,90 @@ namespace UnitTests
             Assert.IsTrue(confirmed.Any(m => m.WebsiteEntry == website && m.Individual == sonCandidate),
                 "the son's own correct reference must be tried once the head of household's (unrelated) reference fails to match");
             Assert.IsFalse(stillMissing.Contains(sonCandidate));
+        }
+
+        [TestMethod]
+        public void Reconcile_MatchesWifeEnteredUnderMaidenNameOnWebsite()
+        {
+            // Regression test for a real bug report: a wife recorded on the 1911 census under her
+            // married name ("Jane Bassett") but corrected on Lost Cousins to her maiden name ("Jane
+            // Smith", per the user's own tree). Her HouseholdCensusReference (via her husband, head
+            // of household) matched the website's single entry under that reference perfectly - but
+            // that entry is the ONLY one sharing the reference, so FindMatch's single-candidate
+            // shortcut returned it with no name check at all, and BOTH husband and wife independently
+            // "matched" it via their shared reference. Reconcile's tie-break between them then fell
+            // to SurnamesMatch, which only compared against the wife's married name at the census
+            // date ("Bassett") - never her maiden name ("Smith") - so it disagreed for both husband
+            // and wife equally, and the husband won the tie purely by iteration order, leaving the
+            // wife - the person actually on the website - in stillMissing.
+            const string ged = """
+                0 HEAD
+                1 CHAR UTF-8
+                0 @I1@ INDI
+                1 NAME John /Bassett/
+                1 SEX M
+                1 BIRT
+                2 DATE 1 JAN 1875
+                1 CENS
+                2 DATE 1911
+                2 PLAC 1 Test Street, England
+                2 SOUR @S1@
+                3 PAGE RG14PN30722 RG78PN1749 RD557 SD3 ED3 SN475
+                1 FAMS @F1@
+                0 @I2@ INDI
+                1 NAME Jane /Smith/
+                1 SEX F
+                1 BIRT
+                2 DATE 1 JAN 1861
+                1 FAMS @F1@
+                0 @F1@ FAM
+                1 HUSB @I1@
+                1 WIFE @I2@
+                1 MARR
+                2 DATE 1 JAN 1895
+                0 @S1@ SOUR
+                1 TITL 1911 Census of Great Britain
+                0 TRLR
+
+                """;
+            string path = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.ged");
+            try
+            {
+                File.WriteAllText(path, ged);
+
+                FamilyTree ft = FamilyTree.CreateInstance();
+                FamilyTree.SetInstance(ft);
+                ft.LoadStandardisedNames(AppContext.BaseDirectory);
+
+                var textProgress = new Progress<string>(_ => { });
+                var pctProgress = new Progress<int>(_ => { });
+                XmlDocument? doc;
+                using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+                    doc = ft.LoadTreeHeader(Path.GetFileName(path), fs, textProgress, pctProgress);
+                ft.LoadTreeSources(doc!, pctProgress, textProgress);
+                ft.LoadTreeIndividuals(doc!, pctProgress, textProgress);
+                ft.LoadTreeFamilies(doc!, pctProgress, textProgress);
+                ft.LoadTreeRelationships(doc!, pctProgress, textProgress);
+
+                List<CensusIndividual> members = [.. ft.GetAllCensusFamilies(CensusDate.EWCENSUS1911, true, false)
+                    .SelectMany(f => f.Members)];
+                CensusIndividual husband = members.Single(m => m.CensusStatus == CensusIndividual.HUSBAND);
+                CensusIndividual wife = members.Single(m => m.CensusStatus == CensusIndividual.WIFE);
+
+                // Only Jane appears on the website under this reference - her husband isn't on Lost Cousins.
+                LostCousin website = new("Smith, Jane", "1861", "30722/475", "England 1911", null!, false);
+
+                var (stillMissing, confirmed) = LostCousinsReconciliation.Reconcile([website], members);
+
+                Assert.IsTrue(confirmed.Any(m => m.WebsiteEntry == website && m.Individual == wife),
+                    "the wife must win the match via her maiden name, not lose it to her husband by tie-break order");
+                Assert.IsTrue(stillMissing.Contains(husband),
+                    "the husband was never actually on the website and must not be confirmed against his wife's entry");
+            }
+            finally
+            {
+                File.Delete(path);
+            }
         }
     }
 }
