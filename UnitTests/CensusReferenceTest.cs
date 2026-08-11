@@ -345,5 +345,29 @@ namespace UnitTests
             Assert.IsTrue(censusRef.ED.Equals(ED));
             Assert.IsTrue(censusRef.Page.Equals(page));
         }
+
+        // The National Archives of Ireland re-platformed its 1911 census viewer between these two
+        // real citation URLs (the old census.nationalarchives.ie site, then the current
+        // nai.prod.derilinx.com one) - both still carry the same "nai" + 9-digit reel number, which
+        // is the only part IRELAND_CENSUS_1911_PATTERN and Lost Cousins itself care about.
+        [TestMethod]
+        public void IrelandCensus1911_OldNationalArchivesUrl()
+        {
+            CensusReference censusRef = new("http://www.census.nationalarchives.ie/reels/nai002247382/", false);
+            Assert.AreEqual(CensusReference.ReferenceStatus.GOOD, censusRef.Status);
+            Assert.AreEqual(CensusDate.IRELANDCENSUS1911, censusRef.CensusYear);
+            Assert.AreEqual(Countries.IRELAND, censusRef.Country);
+            Assert.AreEqual("002247382", censusRef.Piece);
+        }
+
+        [TestMethod]
+        public void IrelandCensus1911_CurrentDerilinxUrl()
+        {
+            CensusReference censusRef = new("https://nai.prod.derilinx.com/census/image/nai002247382.pdf", false);
+            Assert.AreEqual(CensusReference.ReferenceStatus.GOOD, censusRef.Status);
+            Assert.AreEqual(CensusDate.IRELANDCENSUS1911, censusRef.CensusYear);
+            Assert.AreEqual(Countries.IRELAND, censusRef.Country);
+            Assert.AreEqual("002247382", censusRef.Piece);
+        }
     }
 }

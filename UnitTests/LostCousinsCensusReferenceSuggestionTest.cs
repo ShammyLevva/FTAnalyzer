@@ -195,13 +195,23 @@ namespace UnitTests
         // Real-world defect this test caught before the ReferenceEquals fix: England & Wales 1911
         // and Ireland 1911 were both taken on "02 APR 1911", so CensusDate.Equals (date-only) treated
         // them as the same census - an Ireland 1911 entry would have silently gotten an England &
-        // Wales 1911-formatted note. Family Tree Analyzer doesn't match Ireland 1911 at all yet (see
-        // Instructions#lc-reference-formats), so "no quick fix" is the correct answer regardless.
+        // Wales 1911-formatted note (a Piece/Schedule pair) instead of the "nai"-prefixed reel number
+        // IRELAND_CENSUS_1911_PATTERN actually looks for.
         [TestMethod]
-        public void Ireland1911_HasNoQuickFix()
+        public void Ireland1911_RoundTrips()
         {
-            string? note = LostCousinsCensusReference.SuggestedCitationNote("123/45", CensusDate.IRELANDCENSUS1911);
-            Assert.AreEqual("No quick-fix note for this census - see the reference format guide", note);
+            string? note = LostCousinsCensusReference.SuggestedCitationNote("002247382", CensusDate.IRELANDCENSUS1911);
+            Assert.AreEqual("nai002247382", note);
+
+            CensusReference? parsed = ParseNote(note!, "1911", CensusDate.IRELANDCENSUS1911);
+
+            Assert.IsNotNull(parsed);
+            Assert.AreEqual(CensusReference.ReferenceStatus.GOOD, parsed.Status);
+            // Leading zeros are significant - Lost Cousins' own reel number is a fixed-width 9-digit
+            // field - so, unlike every other census's Piece/Roll/ED above, this must come back
+            // unchanged rather than trimmed.
+            Assert.AreEqual("002247382", parsed.Piece);
+            Assert.AreEqual("002247382", LostCousinsCensusReference.Build(parsed));
         }
 
         // Newfoundland 1921 has no CensusDate constant at all - LostCousin's "scraped from website"
