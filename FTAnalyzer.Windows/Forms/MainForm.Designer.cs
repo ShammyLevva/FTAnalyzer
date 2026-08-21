@@ -176,6 +176,8 @@ namespace FTAnalyzer
             toolStripSeparator2 = new ToolStripSeparator();
             displayOptionsOnLoadToolStripMenuItem = new ToolStripMenuItem();
             resetToDefaultFormSizeToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator17 = new ToolStripSeparator();
+            mnuIrishCensusHelper = new ToolStripMenuItem();
             mnuMaps = new ToolStripMenuItem();
             mnuShowTimeline = new ToolStripMenuItem();
             mnuLifelines = new ToolStripMenuItem();
@@ -943,7 +945,7 @@ namespace FTAnalyzer
             // 
             // toolsToolStripMenuItem
             // 
-            toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { optionsToolStripMenuItem, toolStripSeparator2, displayOptionsOnLoadToolStripMenuItem, resetToDefaultFormSizeToolStripMenuItem });
+            toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { optionsToolStripMenuItem, toolStripSeparator2, displayOptionsOnLoadToolStripMenuItem, resetToDefaultFormSizeToolStripMenuItem, toolStripSeparator17, mnuIrishCensusHelper });
             toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             toolsToolStripMenuItem.Size = new Size(47, 22);
             toolsToolStripMenuItem.Text = "Tools";
@@ -974,9 +976,21 @@ namespace FTAnalyzer
             resetToDefaultFormSizeToolStripMenuItem.Size = new Size(208, 22);
             resetToDefaultFormSizeToolStripMenuItem.Text = "Reset to Default form size";
             resetToDefaultFormSizeToolStripMenuItem.Click += ResetToDefaultFormSizeToolStripMenuItem_Click;
-            // 
+            //
+            // toolStripSeparator17
+            //
+            toolStripSeparator17.Name = "toolStripSeparator17";
+            toolStripSeparator17.Size = new Size(205, 6);
+            //
+            // mnuIrishCensusHelper
+            //
+            mnuIrishCensusHelper.Name = "mnuIrishCensusHelper";
+            mnuIrishCensusHelper.Size = new Size(208, 22);
+            mnuIrishCensusHelper.Text = "1911 Irish Census Helper...";
+            mnuIrishCensusHelper.Click += MnuIrishCensusHelper_Click;
+            //
             // mnuMaps
-            // 
+            //
             mnuMaps.DropDownItems.AddRange(new ToolStripItem[] { mnuShowTimeline, mnuLifelines, mnuPlaces, toolStripSeparator4, mnuLocationsGeocodeReport, toolStripSeparator10, mnuGeocodeLocations, mnuOSGeocoder, mnuLookupBlankFoundLocations, toolStripSeparator16, mnuGoogleMyMaps });
             mnuMaps.Name = "mnuMaps";
             mnuMaps.Size = new Size(48, 22);
@@ -5213,6 +5227,8 @@ namespace FTAnalyzer
         private FTAnalyzer.Theme.ThemedGroupBox groupBox2;
         private System.Windows.Forms.ToolStripMenuItem mnuLifelines;
         private System.Windows.Forms.ToolStripMenuItem resetToDefaultFormSizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
+        private System.Windows.Forms.ToolStripMenuItem mnuIrishCensusHelper;
         private System.Windows.Forms.ToolStripMenuItem mnuPlaces;
         private System.Windows.Forms.TabPage tabSurnames;
         private FTAnalyzer.Forms.Controls.VirtualDgvSurnames dgSurnames;

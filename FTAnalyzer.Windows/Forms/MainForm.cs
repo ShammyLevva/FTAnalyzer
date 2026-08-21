@@ -864,6 +864,7 @@ namespace FTAnalyzer
             mnuJSON.Enabled = enabled;
             mnuGoogleMyMaps.Enabled = enabled;
             MnuCustomFactsToExcel.Enabled = enabled;
+            mnuIrishCensusHelper.Enabled = enabled && IrishCensusHelperScanner.FindOldStyleReferences(ft.AllIndividuals).Count > 0;
         }
 
         static void HourGlass(Form form, bool on) => form.UseWaitCursor = on;
@@ -1603,6 +1604,12 @@ namespace FTAnalyzer
         {
             StartGeocoding(GecodingType.Reverse);
             Analytics.TrackAction(Analytics.GeocodingAction, Analytics.ReverseGeocodingEvent);
+        }
+
+        void MnuIrishCensusHelper_Click(object sender, EventArgs e)
+        {
+            using IrishCensusHelperForm form = new();
+            form.ShowDialog(this);
         }
 
         void StartGeocoding(GecodingType type)

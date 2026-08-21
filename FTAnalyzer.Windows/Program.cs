@@ -13,6 +13,7 @@ namespace FTAnalyzer
         public static readonly HttpClient Client = new();
         public static readonly LostCousinsClient LCClient = new();
         public static readonly GoogleClient GoogleClient = new();
+        public static readonly IrishCensusHelperClient IrishCensusClient = new();
 
         [STAThread]
         static void Main()
