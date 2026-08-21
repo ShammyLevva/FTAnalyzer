@@ -229,5 +229,102 @@ namespace UnitTests
                 File.Delete(path);
             }
         }
+
+        // Real-world report: a household's shared 1841 reference (built from the head of household's
+        // own citation) matched to "Southern, Peter" - but the confirmed match was his father John,
+        // not Peter. FindMatchByReference's sameCensus.Count==1 shortcut hands the sole website entry
+        // to whichever household member asks first, with no name check at all, so both father and son
+        // independently "matched" it via HouseholdCensusReference; Reconcile's tie-break used to
+        // disambiguate on surname alone, which ties every time between two people who share one (as a
+        // father and son always do) - so the head of household won purely by being processed first,
+        // even though the website entry's forename was "Peter", not "John".
+        [TestMethod]
+        public void Reconcile_PicksHouseholdMemberWhoseNameActuallyMatches()
+        {
+            const string ged = """
+                0 HEAD
+                1 CHAR UTF-8
+                0 @I1@ INDI
+                1 NAME John /Southern/
+                1 SEX M
+                1 BIRT
+                2 DATE 1 JAN 1795
+                1 CENS
+                2 DATE 6 JUN 1841
+                2 PLAC England
+                2 SOUR @S1@
+                3 PAGE HO107/511/8/5/5
+                1 FAMS @F1@
+                0 @I2@ INDI
+                1 NAME Mary /Southern/
+                1 SEX F
+                1 BIRT
+                2 DATE 1 JAN 1800
+                1 FAMS @F1@
+                0 @I3@ INDI
+                1 NAME Peter /Southern/
+                1 SEX M
+                1 BIRT
+                2 DATE 1 JAN 1826
+                1 CENS
+                2 DATE 6 JUN 1841
+                2 PLAC England
+                2 SOUR @S1@
+                3 PAGE HO107/511/8/6/4
+                1 FAMC @F1@
+                0 @F1@ FAM
+                1 HUSB @I1@
+                1 WIFE @I2@
+                1 CHIL @I3@
+                2 _FREL Natural
+                2 _MREL Natural
+                1 MARR
+                2 DATE 1 JAN 1820
+                0 @S1@ SOUR
+                1 TITL 1841 Census of England
+                0 TRLR
+
+                """;
+            string path = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.ged");
+            try
+            {
+                File.WriteAllText(path, ged);
+
+                FamilyTree ft = FamilyTree.CreateInstance();
+                FamilyTree.SetInstance(ft);
+                ft.LoadStandardisedNames(AppContext.BaseDirectory);
+
+                var textProgress = new Progress<string>(_ => { });
+                var pctProgress = new Progress<int>(_ => { });
+                XmlDocument? doc;
+                using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+                    doc = ft.LoadTreeHeader(Path.GetFileName(path), fs, textProgress, pctProgress);
+                ft.LoadTreeSources(doc!, pctProgress, textProgress);
+                ft.LoadTreeIndividuals(doc!, pctProgress, textProgress);
+                ft.LoadTreeFamilies(doc!, pctProgress, textProgress);
+                ft.LoadTreeRelationships(doc!, pctProgress, textProgress);
+
+                List<CensusIndividual> members = [.. ft.GetAllCensusFamilies(CensusDate.EWCENSUS1841, true, false)
+                    .SelectMany(f => f.Members)];
+                CensusIndividual father = members.Single(m => m.CensusStatus == CensusIndividual.HUSBAND);
+                CensusIndividual son = members.Single(m => m.CensusStatus == CensusIndividual.CHILD);
+
+                // Peter's own citation (511/8/6/4, the next page the household overflowed onto) never
+                // comes into it here - Lost Cousins only ever stores the household's own reference
+                // (511/8/5/5), which is why the website entry's reference must be his father's.
+                LostCousin website = new("Southern, Peter", "1826", "511/8/5/5", "England & Wales 1841", null!, false);
+
+                var (stillMissing, confirmed) = LostCousinsReconciliation.Reconcile([website], members);
+
+                Assert.IsTrue(confirmed.Any(m => m.WebsiteEntry == website && m.Individual == son),
+                    "Peter must win the match via his own forename, not lose it to his father by tie-break order");
+                Assert.IsTrue(stillMissing.Contains(father),
+                    "the father was never named on the website and must not be confirmed against his son's entry");
+            }
+            finally
+            {
+                File.Delete(path);
+            }
+        }
     }
 }
