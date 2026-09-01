@@ -526,5 +526,36 @@ namespace UnitTests
             FactLocation nonLondonBareCode = FactLocation.GetLocation("Sunderland, SR1");
             Assert.AreEqual("Sunderland, County Durham, England", nonLondonBareCode.ToString());
         }
+
+        // Some GEDCOM data uses a lone dash as a placeholder for "nothing here" in a field - blank
+        // it so it collapses away via the existing empty-field cascade, same as a genuinely empty
+        // segment does. Only whole fields that are dashes/whitespace and nothing else qualify - a
+        // real place name that happens to contain a dash (e.g. "Fontenay-le-Comte") must survive
+        // untouched, dash and all.
+        [TestMethod]
+        public void StripDashOnlyFieldsTest()
+        {
+            FactLocation.LoadConversions(Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\..\\FTAnalyzer.Shared\\FTAnalyzer.Shared"));
+            GeneralSettings.Default.AllowEmptyLocations = false;
+
+            FactLocation bareDash = FactLocation.GetLocation("Fontenay-le-Comte, -, France");
+            Assert.AreEqual("Fontenay-le-Comte, France", bareDash.ToString());
+
+            FactLocation dashWithSpaces = FactLocation.GetLocation("London,   -   , England, UK");
+            Assert.AreEqual("London, England", dashWithSpaces.ToString());
+
+            FactLocation doubledDash = FactLocation.GetLocation("Some Place, - -, England");
+            Assert.AreEqual("Some Place, England", doubledDash.ToString());
+
+            FactLocation emDash = FactLocation.GetLocation("London, —, England, UK");
+            Assert.AreEqual("London, England", emDash.ToString());
+
+            FactLocation enDash = FactLocation.GetLocation("Somewhere, –, England, UK");
+            Assert.AreEqual("Somewhere, England", enDash.ToString());
+
+            // A dash embedded in real text (not the whole field) must never be touched.
+            FactLocation realHyphenatedPlace = FactLocation.GetLocation("Fontenay-le-Comte, Vendee, France");
+            Assert.AreEqual("Fontenay-le-Comte, Vendee, France", realHyphenatedPlace.ToString());
+        }
     }
 }
