@@ -23,7 +23,13 @@
     <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
     <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
-    <NoWarn>$(NoWarn);NU1605;NU1701;NU1702</NoWarn>
+    <!-- NU1901-NU1904: the WAP SDK (Microsoft.DesktopBridge.props) forces this project to
+         self-restore as net451, which combined with TargetPlatformVersion above triggers NuGet's
+         legacy implicit reference to Microsoft.NETCore.UniversalWindowsPlatform and its old
+         WCF/JIT/WebSocket compat packages. This project compiles no code and only stages
+         FTAnalyzer.Windows's own output into the MSIX, so none of that vulnerable surface ships -
+         these are false positives specific to the .wapproj packaging shim, not the app. -->
+    <NoWarn>$(NoWarn);NU1605;NU1701;NU1702;NU1901;NU1902;NU1903;NU1904</NoWarn>
     <EntryPointProjectUniqueName>..\FTAnalyzer.Windows\FTAnalyzer.Windows.csproj</EntryPointProjectUniqueName>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>

@@ -1,4 +1,4 @@
-## Version 11.0.0.0 - 28th July 2026
+## Version 11.0.0.0-beta8 - 29th September 2026
 **Updates**
 Added new look and feel to the main form and all reports
 Added support for new light mode or dark mode 
@@ -15,6 +15,9 @@ Tidied up and removed old code for Mac & iOS now that web version exists
 Added support for recognising more Canadian census references
 Added support for recognising locations where a postcode is included in the location eg: "London SW1A 1AA"
 Fixed loading of name standarisation files so it correctly applies for duplication checking and Lost Cousins matching
+Added helper to convert Irish census references to the new format used in the Irish census website
+Added recognition of Windows 11 25H2, 26H1 and 26H2 versions
+Large number of extra location fixes to recognise more locations from real user data
 
 **Bugfixes**
 Fix Duplicate checking of standarised names as well as Lost Cousins matching
