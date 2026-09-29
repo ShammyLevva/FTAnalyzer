@@ -557,5 +557,34 @@ namespace UnitTests
             FactLocation realHyphenatedPlace = FactLocation.GetLocation("Fontenay-le-Comte, Vendee, France");
             Assert.AreEqual("Fontenay-le-Comte, Vendee, France", realHyphenatedPlace.ToString());
         }
+
+        // Unlike a dash, "!" never carries meaning in a real place name, so it's stripped wherever
+        // it occurs in a field - not just when it's the field's entire content.
+        [TestMethod]
+        public void RemoveExclamationMarksTest()
+        {
+            FactLocation.LoadConversions(Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\..\\..\\FTAnalyzer.Shared\\FTAnalyzer.Shared"));
+            GeneralSettings.Default.AllowEmptyLocations = false;
+
+            // Bare "!" placeholder segment collapses away, same as a bare dash does.
+            FactLocation bareExclamation = FactLocation.GetLocation("Fontenay-le-Comte, !, France");
+            Assert.AreEqual("Fontenay-le-Comte, France", bareExclamation.ToString());
+
+            FactLocation doubledExclamation = FactLocation.GetLocation("Some Place, !!, England");
+            Assert.AreEqual("Some Place, England", doubledExclamation.ToString());
+
+            // Embedded in real text - unlike a dash, this gets stripped rather than left alone.
+            // "Newport, Monmouth, Wales" (not just "Newport, Wales") is pre-existing known-place
+            // enrichment unrelated to this fix (see StripTrailingPostcode_InjectsLondonTest's
+            // "Sunderland" comment) - the point here is just that "!" doesn't survive anywhere in it.
+            FactLocation trailingExclamation = FactLocation.GetLocation("Newport!, Wales");
+            Assert.AreEqual("Newport, Monmouth, Wales", trailingExclamation.ToString());
+
+            FactLocation leadingExclamation = FactLocation.GetLocation("!Newport, Wales");
+            Assert.AreEqual("Newport, Monmouth, Wales", leadingExclamation.ToString());
+
+            FactLocation midWordExclamation = FactLocation.GetLocation("New!port, Wales");
+            Assert.AreEqual("Newport, Monmouth, Wales", midWordExclamation.ToString());
+        }
     }
 }
